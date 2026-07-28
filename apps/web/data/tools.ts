@@ -25,6 +25,22 @@ export const tools: Tool[] = [
     keywords: ["bmi", "body mass index", "health"],
   },
   {
+    slug: "mortgage-calculator",
+    title: "Mortgage Calculator",
+    category: "calculators",
+    description:
+      "Calculate monthly mortgage payments, total interest, and total repayment.",
+    featured: true,
+    keywords: [
+      "mortgage",
+      "home loan",
+      "loan",
+      "interest",
+      "payment",
+      "finance",
+    ],
+  },
+  {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
     category: "calculators",

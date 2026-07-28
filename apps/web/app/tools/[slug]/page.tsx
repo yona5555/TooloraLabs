@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import AgeCalculator from "@/components/tools/age-calculator/AgeCalculator";
 import BMICalculator from "@/components/tools/bmi-calculator/BMICalculator";
+import MortgageCalculator from "@/components/tools/mortgage-calculator/MortgageCalculator";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import { tools } from "@/data/tools";
 
@@ -40,9 +41,7 @@ export async function generateMetadata({
 function ComingSoon({ title }: { title: string }) {
   return (
     <div className="rounded-3xl border border-zinc-200 bg-white p-10 shadow-sm">
-      <h2 className="text-2xl font-bold text-zinc-900">
-        {title}
-      </h2>
+      <h2 className="text-2xl font-bold text-zinc-900">{title}</h2>
 
       <p className="mt-4 text-zinc-600">
         This tool is currently under development.
@@ -75,6 +74,10 @@ export default async function ToolPage({
 
     case "bmi-calculator":
       component = <BMICalculator />;
+      break;
+
+    case "mortgage-calculator":
+      component = <MortgageCalculator />;
       break;
   }
 

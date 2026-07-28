@@ -1,33 +1,55 @@
-import { BMIResult as BMIResultType } from "./types";
+"use client";
 
-type Props = {
-  result: BMIResultType;
-};
+import { getCalculator } from "@/lib/calculators/registry";
+import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
 
-export default function BMIResult({ result }: Props) {
+interface BMIResultData {
+  bmi: number;
+  category: string;
+}
+
+interface BMIResultProps {
+  result: BMIResultData;
+}
+
+const calculator = getCalculator("bmi");
+
+export default function BMIResult({ result }: BMIResultProps) {
+  const analysis = calculator.getLevel(
+    mapBMIToResultLevel(result.category)
+  );
+
+  if (!analysis) {
+    return null;
+  }
+
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6">
-      <h3 className="text-xl font-bold text-zinc-900">
-        Your BMI Result
-      </h3>
+    <div className="mt-8 rounded-xl border bg-white p-6 shadow-sm">
+      <h2 className="text-2xl font-bold">
+        {calculator.getDefinition().name}
+      </h2>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl bg-white p-4 shadow-sm">
-          <p className="text-sm text-zinc-500">BMI</p>
-          <p className="mt-1 text-3xl font-bold">{result.bmi}</p>
-        </div>
+      <div className="mt-4">
+        <p className="text-4xl font-bold">{result.bmi.toFixed(1)}</p>
+        <p className="mt-1 text-lg font-medium">{analysis.title}</p>
+        <p className="mt-3 text-gray-600">
+          {analysis.detailedDescription}
+        </p>
+      </div>
 
-        <div className="rounded-xl bg-white p-4 shadow-sm">
-          <p className="text-sm text-zinc-500">Category</p>
-          <p className="mt-1 text-2xl font-semibold">{result.category}</p>
-        </div>
+      <div className="mt-6">
+        <h3 className="font-semibold">{analysis.actionTitle}</h3>
 
-        <div className="rounded-xl bg-white p-4 shadow-sm">
-          <p className="text-sm text-zinc-500">Healthy Weight Range</p>
-          <p className="mt-1 text-lg font-semibold">
-            {result.healthyMinWeight} kg – {result.healthyMaxWeight} kg
-          </p>
-        </div>
+        <ul className="mt-3 space-y-3">
+          {analysis.recommendations.map((item) => (
+            <li key={item.title}>
+              <p className="font-medium">{item.title}</p>
+              <p className="text-sm text-gray-600">
+                {item.description}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
