@@ -7,6 +7,7 @@ export * from "./contracts/ToolMetadata";
 export * from "./validators/Validator";
 export * from "./validators/BaseValidator";
 
+export * from "./builders";
 export * from "./builders/ToolBuilder";
 
 export * from "./errors/SDKError";
