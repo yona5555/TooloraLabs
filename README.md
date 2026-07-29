@@ -4,6 +4,12 @@ A monorepo platform for calculators, converters, generators, and AI-powered
 tools — built for quality and long-term scale rather than raw quantity.
 
 ## Structure
+
+- `apps/web` — Next.js 16 app (App Router), the public site
+- `packages/core` — Tool execution engine, registry, pipeline, contracts
+- `packages/sdk` — Tool-building SDK: builders, validators, plugins
+- `packages/tools` — Actual tool implementations (calculators, converters, generators)
+
 ## Tech Stack
 
 - Next.js 16 (Turbopack) + React 19 + TypeScript 7
