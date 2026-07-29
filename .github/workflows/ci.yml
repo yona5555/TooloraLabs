@@ -32,5 +32,8 @@ jobs:
       - name: Typecheck (tools)
         run: npx tsc --noEmit --project packages/tools/tsconfig.json
 
+      - name: Test (core)
+        run: npm run test --workspace=packages/core
+
       - name: Build web app
         run: npm run build --workspace=apps/web
