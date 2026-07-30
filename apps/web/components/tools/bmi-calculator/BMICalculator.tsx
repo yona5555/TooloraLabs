@@ -34,13 +34,16 @@ export default function BMICalculator() {
       setError(t("errors.required"));
       return;
     }
-    if (
-      Number.isNaN(heightCm) ||
-      Number.isNaN(weightKg) ||
-      heightCm <= 0 ||
-      weightKg <= 0
-    ) {
+    if (Number.isNaN(heightCm) || Number.isNaN(weightKg)) {
       setError(t("errors.invalid"));
+      return;
+    }
+    if (heightCm < 50 || heightCm > 250) {
+      setError(t("errors.heightRange"));
+      return;
+    }
+    if (weightKg < 1 || weightKg > 500) {
+      setError(t("errors.weightRange"));
       return;
     }
 
