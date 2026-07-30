@@ -15,19 +15,38 @@ const tool = new TipCalculatorTool();
 
 export default function TipCalculator() {
   const t = useTranslations("tools.tip-calculator.form");
+  const tErrors = useTranslations("tools.tip-calculator.errors");
   const [bill, setBill] = useState("");
   const [tipPercent, setTipPercent] = useState("");
   const [people, setPeople] = useState("1");
+  const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   function handleCalculate() {
+    setError("");
+    setResult(null);
+
     const billAmount = parseLocalizedNumber(bill);
     const tip = parseLocalizedNumber(tipPercent);
     const peopleCount = parseLocalizedNumber(people);
     if (Number.isNaN(billAmount) || Number.isNaN(tip) || Number.isNaN(peopleCount)) {
+      setError(tErrors("required"));
       return;
     }
+    if (billAmount <= 0 || billAmount > 1_000_000) {
+      setError(tErrors("billRange"));
+      return;
+    }
+    if (tip < 0 || tip > 100) {
+      setError(tErrors("tipRange"));
+      return;
+    }
+    if (peopleCount < 1 || peopleCount > 1000) {
+      setError(tErrors("peopleRange"));
+      return;
+    }
+
     const output = tool.execute(
       { billAmount, tipPercent: tip, people: peopleCount },
       { locale: "en-US" }
@@ -56,6 +75,11 @@ export default function TipCalculator() {
         value={people}
         onChange={(e) => setPeople(e.target.value)}
       />
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
+          {error}
+        </div>
+      )}
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
       {result && <TipResult result={result} digitStyle={digitStyle} />}
     </div>
