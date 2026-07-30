@@ -15,6 +15,7 @@ import type {
 } from "./types";
 
 const tool = new PercentageCalculatorTool();
+const MAX_MAGNITUDE = 1_000_000_000;
 
 type Computed = {
   mode: PercentageMode;
@@ -25,18 +26,29 @@ type Computed = {
 
 export default function PercentageCalculator() {
   const t = useTranslations("tools.percentage-calculator.form");
+  const tErrors = useTranslations("tools.percentage-calculator.errors");
   const [mode, setMode] = useState<PercentageMode>("percent-of-number");
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
+  const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [computed, setComputed] = useState<Computed | null>(null);
 
   function handleCalculate() {
+    setError("");
+    setResult(null);
+
     const a = parseLocalizedNumber(first);
     const b = parseLocalizedNumber(second);
     if (Number.isNaN(a) || Number.isNaN(b)) {
+      setError(tErrors("required"));
       return;
     }
+    if (Math.abs(a) > MAX_MAGNITUDE || Math.abs(b) > MAX_MAGNITUDE) {
+      setError(tErrors("outOfRange"));
+      return;
+    }
+
     const output = tool.execute({ mode, first: a, second: b }, { locale: "en-US" });
     setResult(output.data);
     setComputed({ mode, first: a, second: b, digitStyle: resolveDigitStyle(first, second) });
@@ -65,6 +77,11 @@ export default function PercentageCalculator() {
         value={second}
         onChange={(e) => setSecond(e.target.value)}
       />
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
+          {error}
+        </div>
+      )}
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
       <PercentageResult result={result} computed={computed} />
     </div>
