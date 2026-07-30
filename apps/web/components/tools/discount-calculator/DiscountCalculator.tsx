@@ -15,17 +15,32 @@ const tool = new DiscountCalculatorTool();
 
 export default function DiscountCalculator() {
   const t = useTranslations("tools.discount-calculator.form");
+  const tErrors = useTranslations("tools.discount-calculator.errors");
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
+  const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   function handleCalculate() {
+    setError("");
+    setResult(null);
+
     const originalPrice = parseLocalizedNumber(price);
     const discountPercent = parseLocalizedNumber(discount);
     if (Number.isNaN(originalPrice) || Number.isNaN(discountPercent)) {
+      setError(tErrors("required"));
       return;
     }
+    if (originalPrice <= 0 || originalPrice > 1_000_000) {
+      setError(tErrors("priceRange"));
+      return;
+    }
+    if (discountPercent < 0 || discountPercent > 100) {
+      setError(tErrors("discountRange"));
+      return;
+    }
+
     const output = tool.execute({ originalPrice, discountPercent }, { locale: "en-US" });
     setResult(output.data);
     setDigitStyle(resolveDigitStyle(price, discount));
@@ -45,6 +60,11 @@ export default function DiscountCalculator() {
         value={discount}
         onChange={(e) => setDiscount(e.target.value)}
       />
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
+          {error}
+        </div>
+      )}
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
       {result && <DiscountResult result={result} digitStyle={digitStyle} />}
     </div>
