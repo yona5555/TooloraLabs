@@ -15,6 +15,11 @@ export default function LanguageSwitcher() {
 
   function switchLocale() {
     router.replace(pathname, { locale: nextLocale });
+    // The <html lang/dir> attributes and the Arabic font live in the true
+    // root layout (app/layout.tsx), which sits above the [locale] segment
+    // and therefore doesn't automatically re-render on a client-side
+    // locale change. Force a server re-render so they stay in sync.
+    router.refresh();
   }
 
   return (

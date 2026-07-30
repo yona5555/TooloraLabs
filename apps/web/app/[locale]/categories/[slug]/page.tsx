@@ -54,19 +54,19 @@ export default async function CategoryPage({
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-24">
-      <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600">
+      <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {t("badge")}
       </span>
 
-      <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-zinc-900">
+      <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
         {tc(`${slug}.title`)}
       </h1>
 
-      <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
         {tc(`${slug}.description`)}
       </p>
 
-      <p className="mt-4 font-medium text-zinc-500">
+      <p className="mt-4 font-medium text-zinc-500 dark:text-zinc-400">
         {tSection("toolCount", { count: categoryTools.length })}
       </p>
 
@@ -76,20 +76,20 @@ export default async function CategoryPage({
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}`}
-              className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+              className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500/40"
             >
-              <h3 className="text-lg font-bold text-zinc-900">
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
                 {tTools(`${tool.slug}.title`)}
               </h3>
 
-              <p className="mt-2 text-sm text-zinc-500">
+              <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
                 {tTools(`${tool.slug}.description`)}
               </p>
             </Link>
           ))}
         </div>
       ) : (
-        <p className="mt-10 text-zinc-500">{t("empty")}</p>
+        <p className="mt-10 text-zinc-500 dark:text-zinc-400">{t("empty")}</p>
       )}
     </main>
   );
