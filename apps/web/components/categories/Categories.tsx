@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   Bot,
   Calculator,
@@ -7,7 +7,7 @@ import {
   Folder,
   RefreshCw,
 } from "lucide-react";
-
+import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import CategoryCard from "./CategoryCard";
@@ -22,41 +22,33 @@ const icons = {
 };
 
 export default function Categories() {
+  const t = useTranslations("categoriesSection");
+  const tc = useTranslations("categories");
+
   return (
-    <section
-      id="categories"
-      className="mx-auto max-w-7xl px-6 py-24"
-    >
+    <section id="categories" className="mx-auto max-w-7xl px-6 py-24">
       <div className="mx-auto mb-14 max-w-3xl text-center">
         <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600">
-          Explore Categories
+          {t("badge")}
         </span>
-
         <h2 className="mt-6 text-5xl font-extrabold tracking-tight text-zinc-900">
-          Find the Right Tool
+          {t("heading")}
         </h2>
-
         <p className="mt-5 text-lg leading-8 text-zinc-600">
-          Browse professional online tools organized into categories for
-          developers, students, businesses and everyday users.
+          {t("subtitle")}
         </p>
       </div>
-
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
         {categories.map((category) => {
           const count = tools.filter(
             (tool) => tool.category === category.slug
           ).length;
-
           return (
-            <Link
-              key={category.slug}
-              href={`/categories/${category.slug}`}
-            >
+            <Link key={category.slug} href={`/categories/${category.slug}`}>
               <CategoryCard
-                title={category.title}
-                description={category.description}
-                tools={`${count} Tool${count !== 1 ? "s" : ""}`}
+                title={tc(`${category.slug}.title`)}
+                description={tc(`${category.slug}.description`)}
+                tools={t("toolCount", { count })}
                 icon={icons[category.icon as keyof typeof icons]}
               />
             </Link>
