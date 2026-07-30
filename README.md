@@ -45,3 +45,12 @@ See [SECURITY-NOTES.md](./SECURITY-NOTES.md) for accepted npm audit risks
 Currently building the shared tool framework (`packages/core`, `packages/sdk`)
 before scaling out to dozens of tools. First tool (Mortgage Calculator) is
 complete and merged.
+
+## Roadmap
+
+Framework-connected tools (calculators category): Age, BMI, Mortgage,
+Percentage, Tip, Discount — all live and tested.
+
+Not yet implemented (currently "Coming Soon" placeholders):
+Image Converter, JSON Formatter, Password Generator, Unit Converter,
+QR Code Generator.
