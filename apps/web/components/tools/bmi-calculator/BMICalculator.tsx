@@ -1,10 +1,11 @@
 "use client";
-import { parseLocalizedNumber } from "@tooloralabs/core";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BMICalculator as BMICalculatorTool } from "@tooloralabs/tools";
 
+import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -19,6 +20,7 @@ export default function BMICalculator() {
   const [weight, setWeight] = useState("");
   const [error, setError] = useState("");
   const [result, setResult] = useState<BMIResultType | null>(null);
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,6 +46,7 @@ export default function BMICalculator() {
 
     const output = tool.execute({ heightCm, weightKg }, { locale: "en-US" });
     setResult(output.data);
+    setDigitStyle(resolveDigitStyle(height, weight));
   }
 
   function handleReset() {
@@ -83,7 +86,7 @@ export default function BMICalculator() {
             {t("form.reset")}
           </button>
         </div>
-        {result && <BMIResult result={result} />}
+        {result && <BMIResult result={result} digitStyle={digitStyle} />}
       </form>
     </ToolCard>
   );

@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
 
 interface BMIResultData {
@@ -8,6 +9,7 @@ interface BMIResultData {
 
 interface BMIResultProps {
   result: BMIResultData;
+  digitStyle: DigitStyle;
 }
 
 type Recommendation = {
@@ -15,7 +17,7 @@ type Recommendation = {
   description: string;
 };
 
-export default function BMIResult({ result }: BMIResultProps) {
+export default function BMIResult({ result, digitStyle }: BMIResultProps) {
   const t = useTranslations("tools.bmi-calculator");
   const level = mapBMIToResultLevel(result.category);
   const recommendations = t.raw(
@@ -27,7 +29,12 @@ export default function BMIResult({ result }: BMIResultProps) {
       <h2 className="text-2xl font-bold">{t("title")}</h2>
 
       <div className="mt-4">
-        <p className="text-4xl font-bold">{result.bmi.toFixed(1)}</p>
+        <p className="text-4xl font-bold">
+          {formatLocalizedNumber(result.bmi, digitStyle, {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+          })}
+        </p>
         <p className="mt-1 text-lg font-medium">{t(`levels.${level}.title`)}</p>
         <p className="mt-3 text-gray-600">
           {t(`levels.${level}.description`)}
