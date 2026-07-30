@@ -32,8 +32,15 @@ export default function AgeCalculator() {
       setError(t("errors.invalidDate"));
       return;
     }
-    if (date > new Date()) {
+    const now = new Date();
+    if (date > now) {
       setError(t("errors.futureDate"));
+      return;
+    }
+    const oldestValidDate = new Date(now);
+    oldestValidDate.setFullYear(now.getFullYear() - 120);
+    if (date < oldestValidDate) {
+      setError(t("errors.tooOld"));
       return;
     }
 
