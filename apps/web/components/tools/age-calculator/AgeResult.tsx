@@ -24,12 +24,12 @@ function Card({
   label: string;
 }) {
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-center shadow-sm">
-      <p className="text-4xl font-bold text-blue-600">
+    <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+      <p className="text-4xl font-bold text-blue-600 dark:text-blue-400">
         {formatLocalizedNumber(value, "western")}
       </p>
 
-      <p className="mt-2 text-sm font-medium text-zinc-500">
+      <p className="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
         {label}
       </p>
     </div>
@@ -42,7 +42,7 @@ export default function AgeResult({ result }: Props) {
   return (
     <div className="space-y-10">
       <div>
-        <h3 className="mb-5 text-xl font-bold text-zinc-900">
+        <h3 className="mb-5 text-xl font-bold text-zinc-900 dark:text-zinc-50">
           {t("calendarAge")}
         </h3>
 
@@ -54,7 +54,7 @@ export default function AgeResult({ result }: Props) {
       </div>
 
       <div>
-        <h3 className="mb-5 text-xl font-bold text-zinc-900">
+        <h3 className="mb-5 text-xl font-bold text-zinc-900 dark:text-zinc-50">
           {t("totalTime")}
         </h3>
 

@@ -47,16 +47,16 @@ export default function PercentageResult({ result, computed }: Props) {
   }
 
   return (
-    <div className="mt-8 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
-      <h3 className="text-lg font-semibold text-zinc-900">
+    <div className="mt-8 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+      <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
         {t("heading")}
       </h3>
 
-      <div className="mt-4 text-4xl font-bold text-blue-600">
+      <div className="mt-4 text-4xl font-bold text-blue-600 dark:text-blue-400">
         {formattedValue}
       </div>
 
-      <p className="mt-3 text-zinc-600">
+      <p className="mt-3 text-zinc-600 dark:text-zinc-300">
         {text}
       </p>
     </div>

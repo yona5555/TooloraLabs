@@ -25,30 +25,30 @@ export default function BMIResult({ result, digitStyle }: BMIResultProps) {
   ) as Recommendation[];
 
   return (
-    <div className="mt-8 rounded-xl border bg-white p-6 shadow-sm">
-      <h2 className="text-2xl font-bold">{t("title")}</h2>
+    <div className="mt-8 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+      <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">{t("title")}</h2>
 
       <div className="mt-4">
-        <p className="text-4xl font-bold">
+        <p className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">
           {formatLocalizedNumber(result.bmi, digitStyle, {
             minimumFractionDigits: 1,
             maximumFractionDigits: 1,
           })}
         </p>
-        <p className="mt-1 text-lg font-medium">{t(`levels.${level}.title`)}</p>
-        <p className="mt-3 text-gray-600">
+        <p className="mt-1 text-lg font-medium text-zinc-900 dark:text-zinc-50">{t(`levels.${level}.title`)}</p>
+        <p className="mt-3 text-gray-600 dark:text-gray-400">
           {t(`levels.${level}.description`)}
         </p>
       </div>
 
       <div className="mt-6">
-        <h3 className="font-semibold">{t("actionTitle")}</h3>
+        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{t("actionTitle")}</h3>
 
         <ul className="mt-3 space-y-3">
           {recommendations.map((item) => (
             <li key={item.title}>
-              <p className="font-medium">{item.title}</p>
-              <p className="text-sm text-gray-600">
+              <p className="font-medium text-zinc-900 dark:text-zinc-100">{item.title}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 {item.description}
               </p>
             </li>

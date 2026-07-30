@@ -28,9 +28,9 @@ function Item({
   digitStyle: DigitStyle;
 }) {
   return (
-    <div className="flex items-center justify-between rounded-xl border border-zinc-200 p-4">
-      <span className="text-sm font-medium text-zinc-600">{label}</span>
-      <span className="font-semibold">{formatCurrency(value, digitStyle)}</span>
+    <div className="flex items-center justify-between rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
+      <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{label}</span>
+      <span className="font-semibold text-zinc-900 dark:text-zinc-100">{formatCurrency(value, digitStyle)}</span>
     </div>
   );
 }

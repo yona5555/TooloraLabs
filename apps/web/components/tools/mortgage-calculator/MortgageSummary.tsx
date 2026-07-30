@@ -26,16 +26,16 @@ function Card({
   description: string;
 }) {
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-      <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+    <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+      <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         {title}
       </p>
 
-      <p className="mt-2 text-3xl font-bold">
+      <p className="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
         {value}
       </p>
 
-      <p className="mt-2 text-sm text-zinc-500">
+      <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
         {description}
       </p>
     </div>

@@ -19,23 +19,23 @@ export default function SalesTaxResult({ result, digitStyle }: Props) {
     });
 
   return (
-    <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6">
-      <div className="flex justify-between py-2">
+    <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
         <span>{t("price")}</span>
-        <strong>{money(result.price)}</strong>
+        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.price)}</strong>
       </div>
 
-      <div className="flex justify-between py-2">
+      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
         <span>{t("taxRate")}</span>
-        <strong>{money(result.taxRate)}%</strong>
+        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.taxRate)}%</strong>
       </div>
 
-      <div className="flex justify-between py-2">
+      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
         <span>{t("taxAmount")}</span>
-        <strong>{money(result.taxAmount)}</strong>
+        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.taxAmount)}</strong>
       </div>
 
-      <div className="mt-3 flex justify-between border-t pt-3 text-lg font-bold">
+      <div className="mt-3 flex justify-between border-t border-zinc-200 pt-3 text-lg font-bold text-zinc-900 dark:border-zinc-700 dark:text-zinc-50">
         <span>{t("totalPrice")}</span>
         <span>{money(result.totalPrice)}</span>
       </div>
