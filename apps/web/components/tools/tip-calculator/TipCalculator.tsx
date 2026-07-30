@@ -1,10 +1,11 @@
 "use client";
-import { parseLocalizedNumber } from "@tooloralabs/core";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { TipCalculator as TipCalculatorTool } from "@tooloralabs/tools";
 
+import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import TipResult from "./TipResult";
@@ -18,6 +19,7 @@ export default function TipCalculator() {
   const [tipPercent, setTipPercent] = useState("");
   const [people, setPeople] = useState("1");
   const [result, setResult] = useState<Result | null>(null);
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   function handleCalculate() {
     const billAmount = parseLocalizedNumber(bill);
@@ -31,6 +33,7 @@ export default function TipCalculator() {
       { locale: "en-US" }
     );
     setResult(output.data);
+    setDigitStyle(resolveDigitStyle(bill, tipPercent, people));
   }
 
   return (
@@ -54,7 +57,7 @@ export default function TipCalculator() {
         onChange={(e) => setPeople(e.target.value)}
       />
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      {result && <TipResult result={result} />}
+      {result && <TipResult result={result} digitStyle={digitStyle} />}
     </div>
   );
 }
