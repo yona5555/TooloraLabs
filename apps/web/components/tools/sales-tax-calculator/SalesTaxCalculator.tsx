@@ -24,14 +24,14 @@ export default function SalesTaxCalculator() {
   return (
     <div className="mx-auto max-w-xl space-y-4">
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
 
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Sales Tax (%)"
         value={taxRate}
         onChange={(e) => setTaxRate(e.target.value)}

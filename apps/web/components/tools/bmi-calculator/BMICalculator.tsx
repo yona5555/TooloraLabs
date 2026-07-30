@@ -57,13 +57,13 @@ export default function BMICalculator() {
     >
       <form onSubmit={handleSubmit} className="space-y-6">
         <ToolInput
-          type="number"
+          type="text" inputMode="decimal"
           placeholder="Height (cm)"
           value={height}
           onChange={(e) => setHeight(e.target.value)}
         />
         <ToolInput
-          type="number"
+          type="text" inputMode="decimal"
           placeholder="Weight (kg)"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}

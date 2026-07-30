@@ -33,19 +33,19 @@ export default function TipCalculator() {
   return (
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Bill amount"
         value={bill}
         onChange={(e) => setBill(e.target.value)}
       />
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Tip %"
         value={tipPercent}
         onChange={(e) => setTipPercent(e.target.value)}
       />
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Number of people"
         value={people}
         onChange={(e) => setPeople(e.target.value)}

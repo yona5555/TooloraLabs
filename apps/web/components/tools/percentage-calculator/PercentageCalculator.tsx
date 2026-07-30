@@ -41,13 +41,13 @@ export default function PercentageCalculator() {
         <option value="percentage-change">Percentage Change</option>
       </select>
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="First value"
         value={first}
         onChange={(e) => setFirst(e.target.value)}
       />
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Second value"
         value={second}
         onChange={(e) => setSecond(e.target.value)}

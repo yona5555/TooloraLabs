@@ -28,13 +28,13 @@ export default function DiscountCalculator() {
   return (
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Original price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
       <ToolInput
-        type="number"
+        type="text" inputMode="decimal"
         placeholder="Discount %"
         value={discount}
         onChange={(e) => setDiscount(e.target.value)}

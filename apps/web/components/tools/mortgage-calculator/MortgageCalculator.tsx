@@ -44,49 +44,49 @@ export default function MortgageCalculator() {
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
         label="Home Price"
-        type="number"
+        type="text" inputMode="decimal"
         value={homePrice}
         onChange={(e) => setHomePrice(e.target.value)}
       />
       <ToolInput
         label="Down Payment"
-        type="number"
+        type="text" inputMode="decimal"
         value={downPayment}
         onChange={(e) => setDownPayment(e.target.value)}
       />
       <ToolInput
         label="Interest Rate (%)"
-        type="number"
+        type="text" inputMode="decimal"
         value={interestRate}
         onChange={(e) => setInterestRate(e.target.value)}
       />
       <ToolInput
         label="Loan Term (Years)"
-        type="number"
+        type="text" inputMode="decimal"
         value={loanYears}
         onChange={(e) => setLoanYears(e.target.value)}
       />
       <ToolInput
         label="Annual Property Tax"
-        type="number"
+        type="text" inputMode="decimal"
         value={propertyTax}
         onChange={(e) => setPropertyTax(e.target.value)}
       />
       <ToolInput
         label="Annual Home Insurance"
-        type="number"
+        type="text" inputMode="decimal"
         value={insurance}
         onChange={(e) => setInsurance(e.target.value)}
       />
       <ToolInput
         label="Monthly HOA"
-        type="number"
+        type="text" inputMode="decimal"
         value={hoa}
         onChange={(e) => setHoa(e.target.value)}
       />
       <ToolInput
         label="Monthly PMI"
-        type="number"
+        type="text" inputMode="decimal"
         value={pmi}
         onChange={(e) => setPmi(e.target.value)}
       />
