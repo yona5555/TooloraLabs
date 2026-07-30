@@ -2,6 +2,7 @@
 import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { DiscountCalculator as DiscountCalculatorTool } from "@tooloralabs/tools";
 
 import ToolButton from "@/components/tool-ui/ToolButton";
@@ -12,6 +13,7 @@ import type { DiscountResult as Result } from "./types";
 const tool = new DiscountCalculatorTool();
 
 export default function DiscountCalculator() {
+  const t = useTranslations("tools.discount-calculator.form");
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
   const [result, setResult] = useState<Result | null>(null);
@@ -30,17 +32,17 @@ export default function DiscountCalculator() {
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
         type="text" inputMode="decimal"
-        placeholder="Original price"
+        placeholder={t("pricePlaceholder")}
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
       <ToolInput
         type="text" inputMode="decimal"
-        placeholder="Discount %"
+        placeholder={t("discountPlaceholder")}
         value={discount}
         onChange={(e) => setDiscount(e.target.value)}
       />
-      <ToolButton onClick={handleCalculate}>Calculate Discount</ToolButton>
+      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
       {result && <DiscountResult result={result} />}
     </div>
   );
