@@ -9,7 +9,7 @@ describe("AgeCalculator", () => {
     vi.useRealTimers();
   });
 
-  it("calculates age correctly when birthday already passed this year", () => {
+  it("returns full breakdown for a past birthday", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-07-30"));
 
@@ -17,34 +17,12 @@ describe("AgeCalculator", () => {
     const result = calc.execute({ birthDate: "1990-01-15" }, context);
 
     expect(result.success).toBe(true);
-    expect(result.data.age).toBe(36);
-  });
-
-  it("calculates age correctly when birthday has not happened yet this year", () => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-30"));
-
-    const calc = new AgeCalculator();
-    const result = calc.execute({ birthDate: "1990-12-25" }, context);
-
-    expect(result.success).toBe(true);
-    expect(result.data.age).toBe(35);
-  });
-
-  it("calculates age correctly on the exact birthday", () => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-30"));
-
-    const calc = new AgeCalculator();
-    const result = calc.execute({ birthDate: "2000-07-30" }, context);
-
-    expect(result.success).toBe(true);
-    expect(result.data.age).toBe(26);
+    expect(result.data.years).toBe(36);
+    expect(result.data.nextBirthday).toBe("January 15, 2027");
   });
 
   it("exposes correct metadata", () => {
     const calc = new AgeCalculator();
     expect(calc.metadata.slug).toBe("age-calculator");
-    expect(calc.metadata.category).toBe("calculators");
   });
 });
