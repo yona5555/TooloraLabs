@@ -14,8 +14,11 @@ import type { MortgageResult as MortgageResultType } from "./types";
 
 const tool = new MortgageCalculatorTool();
 
+const MAX_HOME_PRICE = 50_000_000;
+
 export default function MortgageCalculator() {
   const t = useTranslations("tools.mortgage-calculator.form");
+  const tErrors = useTranslations("tools.mortgage-calculator.errors");
   const [homePrice, setHomePrice] = useState("");
   const [downPayment, setDownPayment] = useState("");
   const [interestRate, setInterestRate] = useState("");
@@ -25,16 +28,43 @@ export default function MortgageCalculator() {
   const [hoa, setHoa] = useState("0");
   const [pmi, setPmi] = useState("0");
 
+  const [error, setError] = useState("");
   const [result, setResult] = useState<MortgageResultType | null>(null);
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   const handleCalculate = () => {
+    setError("");
+    setResult(null);
+
+    const parsedHomePrice = parseLocalizedNumber(homePrice);
+    const parsedDownPayment = parseLocalizedNumber(downPayment);
+    const parsedInterestRate = parseLocalizedNumber(interestRate);
+    const parsedLoanYears = parseLocalizedNumber(loanYears);
+
+    if (
+      Number.isNaN(parsedHomePrice) ||
+      Number.isNaN(parsedDownPayment) ||
+      Number.isNaN(parsedInterestRate) ||
+      Number.isNaN(parsedLoanYears)
+    ) {
+      setError(tErrors("required"));
+      return;
+    }
+    if (parsedHomePrice <= 0 || parsedHomePrice > MAX_HOME_PRICE) {
+      setError(tErrors("homePriceRange"));
+      return;
+    }
+    if (parsedLoanYears < 1 || parsedLoanYears > 50) {
+      setError(tErrors("loanTermRange"));
+      return;
+    }
+
     const output = tool.execute(
       {
-        homePrice: parseLocalizedNumber(homePrice),
-        downPayment: parseLocalizedNumber(downPayment),
-        annualInterestRate: parseLocalizedNumber(interestRate),
-        loanTermYears: parseLocalizedNumber(loanYears),
+        homePrice: parsedHomePrice,
+        downPayment: parsedDownPayment,
+        annualInterestRate: parsedInterestRate,
+        loanTermYears: parsedLoanYears,
         annualPropertyTax: parseLocalizedNumber(propertyTax),
         annualHomeInsurance: parseLocalizedNumber(insurance),
         monthlyHOA: parseLocalizedNumber(hoa),
@@ -107,6 +137,12 @@ export default function MortgageCalculator() {
         value={pmi}
         onChange={(e) => setPmi(e.target.value)}
       />
+
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
+          {error}
+        </div>
+      )}
 
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
 
