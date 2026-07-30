@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { AgeCalculator as AgeCalculatorTool } from "@tooloralabs/tools";
 
 import ToolButton from "@/components/tool-ui/ToolButton";
@@ -12,6 +13,7 @@ import type { AgeResult as AgeResultType } from "./types";
 const tool = new AgeCalculatorTool();
 
 export default function AgeCalculator() {
+  const t = useTranslations("tools.age-calculator");
   const [birthDate, setBirthDate] = useState("");
   const [error, setError] = useState("");
   const [result, setResult] = useState<AgeResultType | null>(null);
@@ -22,16 +24,16 @@ export default function AgeCalculator() {
     setResult(null);
 
     if (!birthDate) {
-      setError("Please select your birth date.");
+      setError(t("errors.required"));
       return;
     }
     const date = new Date(birthDate);
     if (Number.isNaN(date.getTime())) {
-      setError("Invalid date.");
+      setError(t("errors.invalidDate"));
       return;
     }
     if (date > new Date()) {
-      setError("Birth date cannot be in the future.");
+      setError(t("errors.futureDate"));
       return;
     }
 
@@ -46,10 +48,7 @@ export default function AgeCalculator() {
   }
 
   return (
-    <ToolCard
-      title="Age Calculator"
-      description="Calculate your exact age in years, months and days."
-    >
+    <ToolCard title={t("title")} description={t("description")}>
       <form onSubmit={handleSubmit} className="space-y-6">
         <ToolInput
           type="date"
@@ -62,13 +61,13 @@ export default function AgeCalculator() {
           </div>
         )}
         <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">Calculate Age</ToolButton>
+          <ToolButton type="submit">{t("form.calculate")}</ToolButton>
           <button
             type="button"
             onClick={handleReset}
             className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold transition hover:bg-zinc-100"
           >
-            Reset
+            {t("form.reset")}
           </button>
         </div>
         {result && <AgeResult result={result} />}

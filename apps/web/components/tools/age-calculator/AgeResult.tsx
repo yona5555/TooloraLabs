@@ -1,21 +1,18 @@
+import { useTranslations } from "next-intl";
 import { AgeResult as AgeResultType } from "./types";
 
 type Props = {
   result: AgeResultType;
 };
 
-const calendarAge = [
-  { key: "years", label: "Years" },
-  { key: "months", label: "Months" },
-  { key: "days", label: "Days" },
-] as const;
+const calendarAge = ["years", "months", "days"] as const;
 
 const totalAge = [
-  { key: "totalDays", label: "Total Days" },
-  { key: "totalWeeks", label: "Total Weeks" },
-  { key: "totalHours", label: "Total Hours" },
-  { key: "totalMinutes", label: "Total Minutes" },
-  { key: "totalSeconds", label: "Total Seconds" },
+  "totalDays",
+  "totalWeeks",
+  "totalHours",
+  "totalMinutes",
+  "totalSeconds",
 ] as const;
 
 function Card({
@@ -39,36 +36,30 @@ function Card({
 }
 
 export default function AgeResult({ result }: Props) {
+  const t = useTranslations("tools.age-calculator.result");
+
   return (
     <div className="space-y-10">
       <div>
         <h3 className="mb-5 text-xl font-bold text-zinc-900">
-          Calendar Age
+          {t("calendarAge")}
         </h3>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {calendarAge.map((item) => (
-            <Card
-              key={item.key}
-              value={result[item.key]}
-              label={item.label}
-            />
+          {calendarAge.map((key) => (
+            <Card key={key} value={result[key]} label={t(key)} />
           ))}
         </div>
       </div>
 
       <div>
         <h3 className="mb-5 text-xl font-bold text-zinc-900">
-          Total Time
+          {t("totalTime")}
         </h3>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {totalAge.map((item) => (
-            <Card
-              key={item.key}
-              value={result[item.key]}
-              label={item.label}
-            />
+          {totalAge.map((key) => (
+            <Card key={key} value={result[key]} label={t(key)} />
           ))}
         </div>
       </div>
