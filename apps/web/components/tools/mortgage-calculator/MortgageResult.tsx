@@ -1,18 +1,21 @@
+import type { DigitStyle } from "@tooloralabs/core";
 import type { MortgageResult as MortgageResultType } from "./types";
 import MortgageSummary from "./MortgageSummary";
 import PaymentBreakdown from "./PaymentBreakdown";
 
 type Props = {
   result: MortgageResultType;
+  digitStyle: DigitStyle;
 };
 
-export default function MortgageResult({ result }: Props) {
+export default function MortgageResult({ result, digitStyle }: Props) {
   return (
     <div className="space-y-8">
       <MortgageSummary
         monthlyPayment={result.monthlyPayment}
         totalPayment={result.totalPayment}
         totalInterest={result.totalInterest}
+        digitStyle={digitStyle}
       />
 
       <PaymentBreakdown
@@ -21,6 +24,7 @@ export default function MortgageResult({ result }: Props) {
         insurance={result.monthlyInsurance}
         hoa={result.monthlyHOAFee}
         pmi={result.monthlyPMIFee}
+        digitStyle={digitStyle}
       />
 
     </div>

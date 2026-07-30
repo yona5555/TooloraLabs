@@ -1,17 +1,19 @@
 import { useTranslations } from "next-intl";
+import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 type Props = {
   monthlyPayment: number;
   totalPayment: number;
   totalInterest: number;
+  digitStyle: DigitStyle;
 };
 
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("en-US", {
+function formatCurrency(value: number, digitStyle: DigitStyle) {
+  return formatLocalizedNumber(value, digitStyle, {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 2,
-  }).format(value);
+  });
 }
 
 function Card({
@@ -44,6 +46,7 @@ export default function MortgageSummary({
   monthlyPayment,
   totalPayment,
   totalInterest,
+  digitStyle,
 }: Props) {
   const t = useTranslations("tools.mortgage-calculator.summary");
 
@@ -51,19 +54,19 @@ export default function MortgageSummary({
     <div className="grid gap-5 md:grid-cols-3">
       <Card
         title={t("monthlyPayment")}
-        value={formatCurrency(monthlyPayment)}
+        value={formatCurrency(monthlyPayment, digitStyle)}
         description={t("monthlyPaymentDesc")}
       />
 
       <Card
         title={t("totalPayment")}
-        value={formatCurrency(totalPayment)}
+        value={formatCurrency(totalPayment, digitStyle)}
         description={t("totalPaymentDesc")}
       />
 
       <Card
         title={t("totalInterest")}
-        value={formatCurrency(totalInterest)}
+        value={formatCurrency(totalInterest, digitStyle)}
         description={t("totalInterestDesc")}
       />
     </div>

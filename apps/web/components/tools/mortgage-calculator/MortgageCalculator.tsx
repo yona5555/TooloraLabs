@@ -1,10 +1,11 @@
 "use client";
-import { parseLocalizedNumber } from "@tooloralabs/core";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { MortgageCalculator as MortgageCalculatorTool } from "@tooloralabs/tools";
 
+import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
 
@@ -25,6 +26,7 @@ export default function MortgageCalculator() {
   const [pmi, setPmi] = useState("0");
 
   const [result, setResult] = useState<MortgageResultType | null>(null);
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   const handleCalculate = () => {
     const output = tool.execute(
@@ -41,6 +43,18 @@ export default function MortgageCalculator() {
       { locale: "en-US" }
     );
     setResult(output.data);
+    setDigitStyle(
+      resolveDigitStyle(
+        homePrice,
+        downPayment,
+        interestRate,
+        loanYears,
+        propertyTax,
+        insurance,
+        hoa,
+        pmi
+      )
+    );
   };
 
   return (
@@ -96,7 +110,7 @@ export default function MortgageCalculator() {
 
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
 
-      {result && <MortgageResult result={result} />}
+      {result && <MortgageResult result={result} digitStyle={digitStyle} />}
     </div>
   );
 }
