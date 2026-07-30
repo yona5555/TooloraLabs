@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 type Props = {
   principalAndInterest: number;
   taxes: number;
@@ -36,33 +38,35 @@ export default function PaymentBreakdown({
   hoa,
   pmi,
 }: Props) {
+  const t = useTranslations("tools.mortgage-calculator.breakdown");
+
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Payment Breakdown</h2>
+      <h2 className="text-xl font-semibold">{t("heading")}</h2>
 
       <div className="grid gap-3">
         <Item
-          label="Principal & Interest"
+          label={t("principalAndInterest")}
           value={principalAndInterest}
         />
 
         <Item
-          label="Property Tax"
+          label={t("propertyTax")}
           value={taxes}
         />
 
         <Item
-          label="Home Insurance"
+          label={t("homeInsurance")}
           value={insurance}
         />
 
         <Item
-          label="HOA"
+          label={t("hoa")}
           value={hoa}
         />
 
         <Item
-          label="PMI"
+          label={t("pmi")}
           value={pmi}
         />
       </div>

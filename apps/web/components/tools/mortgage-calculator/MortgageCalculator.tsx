@@ -2,6 +2,7 @@
 import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { MortgageCalculator as MortgageCalculatorTool } from "@tooloralabs/tools";
 
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -13,6 +14,7 @@ import type { MortgageResult as MortgageResultType } from "./types";
 const tool = new MortgageCalculatorTool();
 
 export default function MortgageCalculator() {
+  const t = useTranslations("tools.mortgage-calculator.form");
   const [homePrice, setHomePrice] = useState("");
   const [downPayment, setDownPayment] = useState("");
   const [interestRate, setInterestRate] = useState("");
@@ -44,55 +46,55 @@ export default function MortgageCalculator() {
   return (
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
-        label="Home Price"
+        label={t("homePrice")}
         type="text" inputMode="decimal"
         value={homePrice}
         onChange={(e) => setHomePrice(e.target.value)}
       />
       <ToolInput
-        label="Down Payment"
+        label={t("downPayment")}
         type="text" inputMode="decimal"
         value={downPayment}
         onChange={(e) => setDownPayment(e.target.value)}
       />
       <ToolInput
-        label="Interest Rate (%)"
+        label={t("interestRate")}
         type="text" inputMode="decimal"
         value={interestRate}
         onChange={(e) => setInterestRate(e.target.value)}
       />
       <ToolInput
-        label="Loan Term (Years)"
+        label={t("loanTerm")}
         type="text" inputMode="decimal"
         value={loanYears}
         onChange={(e) => setLoanYears(e.target.value)}
       />
       <ToolInput
-        label="Annual Property Tax"
+        label={t("propertyTax")}
         type="text" inputMode="decimal"
         value={propertyTax}
         onChange={(e) => setPropertyTax(e.target.value)}
       />
       <ToolInput
-        label="Annual Home Insurance"
+        label={t("insurance")}
         type="text" inputMode="decimal"
         value={insurance}
         onChange={(e) => setInsurance(e.target.value)}
       />
       <ToolInput
-        label="Monthly HOA"
+        label={t("hoa")}
         type="text" inputMode="decimal"
         value={hoa}
         onChange={(e) => setHoa(e.target.value)}
       />
       <ToolInput
-        label="Monthly PMI"
+        label={t("pmi")}
         type="text" inputMode="decimal"
         value={pmi}
         onChange={(e) => setPmi(e.target.value)}
       />
 
-      <ToolButton onClick={handleCalculate}>Calculate Mortgage</ToolButton>
+      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
 
       {result && <MortgageResult result={result} />}
     </div>

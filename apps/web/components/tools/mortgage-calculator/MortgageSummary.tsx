@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 type Props = {
   monthlyPayment: number;
   totalPayment: number;
@@ -43,24 +45,26 @@ export default function MortgageSummary({
   totalPayment,
   totalInterest,
 }: Props) {
+  const t = useTranslations("tools.mortgage-calculator.summary");
+
   return (
     <div className="grid gap-5 md:grid-cols-3">
       <Card
-        title="Monthly Payment"
+        title={t("monthlyPayment")}
         value={formatCurrency(monthlyPayment)}
-        description="Including taxes, insurance, HOA and PMI."
+        description={t("monthlyPaymentDesc")}
       />
 
       <Card
-        title="Total Payment"
+        title={t("totalPayment")}
         value={formatCurrency(totalPayment)}
-        description="Principal and interest paid over the loan term."
+        description={t("totalPaymentDesc")}
       />
 
       <Card
-        title="Total Interest"
+        title={t("totalInterest")}
         value={formatCurrency(totalInterest)}
-        description="Total borrowing cost."
+        description={t("totalInterestDesc")}
       />
     </div>
   );
