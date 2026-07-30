@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
 import { AgeResult as AgeResultType } from "./types";
 
 type Props = {
@@ -25,7 +26,7 @@ function Card({
   return (
     <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-center shadow-sm">
       <p className="text-4xl font-bold text-blue-600">
-        {value.toLocaleString()}
+        {formatLocalizedNumber(value, "western")}
       </p>
 
       <p className="mt-2 text-sm font-medium text-zinc-500">
