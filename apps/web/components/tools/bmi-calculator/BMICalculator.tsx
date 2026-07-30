@@ -1,25 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { BMICalculator as BMICalculatorTool } from "@tooloralabs/tools";
 
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-
-import { calculateBMI } from "./bmi";
 import BMIResult from "./BMIResult";
+import type { BMIResult as BMIResultType } from "./types";
+
+const tool = new BMICalculatorTool();
 
 export default function BMICalculator() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [error, setError] = useState("");
-  const [result, setResult] = useState<ReturnType<typeof calculateBMI> | null>(
-    null
-  );
+  const [result, setResult] = useState<BMIResultType | null>(null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     setError("");
     setResult(null);
 
@@ -30,7 +29,6 @@ export default function BMICalculator() {
       setError("Please enter your height and weight.");
       return;
     }
-
     if (
       Number.isNaN(heightCm) ||
       Number.isNaN(weightKg) ||
@@ -41,7 +39,8 @@ export default function BMICalculator() {
       return;
     }
 
-    setResult(calculateBMI(heightCm, weightKg));
+    const output = tool.execute({ heightCm, weightKg }, { locale: "en-US" });
+    setResult(output.data);
   }
 
   function handleReset() {
@@ -63,25 +62,19 @@ export default function BMICalculator() {
           value={height}
           onChange={(e) => setHeight(e.target.value)}
         />
-
         <ToolInput
           type="number"
           placeholder="Weight (kg)"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
-
         {error && (
           <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
             {error}
           </div>
         )}
-
         <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">
-            Calculate BMI
-          </ToolButton>
-
+          <ToolButton type="submit">Calculate BMI</ToolButton>
           <button
             type="button"
             onClick={handleReset}
@@ -90,7 +83,6 @@ export default function BMICalculator() {
             Reset
           </button>
         </div>
-
         {result && <BMIResult result={result} />}
       </form>
     </ToolCard>
