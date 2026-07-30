@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import AgeCalculator from "@/components/tools/age-calculator/AgeCalculator";
 import BMICalculator from "@/components/tools/bmi-calculator/BMICalculator";
 import MortgageCalculator from "@/components/tools/mortgage-calculator/MortgageCalculator";
@@ -12,6 +13,7 @@ import { tools } from "@/data/tools";
 
 type ToolPageProps = {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 };
@@ -25,29 +27,35 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: ToolPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const tool = tools.find((item) => item.slug === slug);
   if (!tool) {
+    const t = await getTranslations({ locale, namespace: "toolPage" });
     return {
-      title: "Tool Not Found | TooloraLabs",
+      title: `${t("notFoundTitle")} | TooloraLabs`,
     };
   }
+  const t = await getTranslations({ locale, namespace: "tools" });
   return {
-    title: `${tool.title} | TooloraLabs`,
-    description: tool.description,
+    title: `${t(`${slug}.title`)} | TooloraLabs`,
+    description: t(`${slug}.description`),
   };
 }
 
-function ComingSoon({ title }: { title: string }) {
+function ComingSoon({
+  title,
+  line1,
+  line2,
+}: {
+  title: string;
+  line1: string;
+  line2: string;
+}) {
   return (
     <div className="rounded-3xl border border-zinc-200 bg-white p-10 shadow-sm">
       <h2 className="text-2xl font-bold text-zinc-900">{title}</h2>
-      <p className="mt-4 text-zinc-600">
-        This tool is currently under development.
-      </p>
-      <p className="mt-2 text-zinc-500">
-        It will be available in a future update of TooloraLabs.
-      </p>
+      <p className="mt-4 text-zinc-600">{line1}</p>
+      <p className="mt-2 text-zinc-500">{line2}</p>
     </div>
   );
 }
@@ -55,13 +63,26 @@ function ComingSoon({ title }: { title: string }) {
 export default async function ToolPage({
   params,
 }: ToolPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const tool = tools.find((item) => item.slug === slug);
   if (!tool) {
     notFound();
   }
 
-  let component = <ComingSoon title={tool.title} />;
+  const t = await getTranslations({ locale, namespace: "tools" });
+  const tp = await getTranslations({ locale, namespace: "toolPage" });
+  const tc = await getTranslations({ locale, namespace: "categories" });
+
+  const title = t(`${slug}.title`);
+  const description = t(`${slug}.description`);
+
+  let component = (
+    <ComingSoon
+      title={title}
+      line1={tp("comingSoonLine1")}
+      line2={tp("comingSoonLine2")}
+    />
+  );
   switch (slug) {
     case "age-calculator":
       component = <AgeCalculator />;
@@ -88,9 +109,9 @@ export default async function ToolPage({
 
   return (
     <ToolPageLayout
-      category={tool.category}
-      title={tool.title}
-      description={tool.description}
+      category={tc(`${tool.category}.title`)}
+      title={title}
+      description={description}
     >
       {component}
     </ToolPageLayout>
