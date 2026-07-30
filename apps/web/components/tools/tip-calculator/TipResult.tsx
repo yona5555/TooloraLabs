@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { TipResult as Result } from "./types";
 
 type Props = {
@@ -5,42 +6,44 @@ type Props = {
 };
 
 export default function TipResult({ result }: Props) {
+  const t = useTranslations("tools.tip-calculator.result");
+
   if (!result) return null;
 
   return (
     <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6">
       <div className="flex justify-between py-2">
-        <span>Bill Amount</span>
+        <span>{t("billAmount")}</span>
         <strong>{result.billAmount.toFixed(2)}</strong>
       </div>
 
       <div className="flex justify-between py-2">
-        <span>Tip</span>
+        <span>{t("tip")}</span>
         <strong>{result.tipPercent.toFixed(2)}%</strong>
       </div>
 
       <div className="flex justify-between py-2">
-        <span>People</span>
+        <span>{t("people")}</span>
         <strong>{result.people}</strong>
       </div>
 
       <div className="flex justify-between py-2">
-        <span>Tip Amount</span>
+        <span>{t("tipAmount")}</span>
         <strong>{result.tipAmount.toFixed(2)}</strong>
       </div>
 
       <div className="flex justify-between py-2">
-        <span>Total Amount</span>
+        <span>{t("totalAmount")}</span>
         <strong>{result.totalAmount.toFixed(2)}</strong>
       </div>
 
       <div className="flex justify-between py-2">
-        <span>Tip / Person</span>
+        <span>{t("tipPerPerson")}</span>
         <strong>{result.tipPerPerson.toFixed(2)}</strong>
       </div>
 
       <div className="mt-3 flex justify-between border-t pt-3 text-lg font-bold">
-        <span>Total / Person</span>
+        <span>{t("totalPerPerson")}</span>
         <span>{result.totalPerPerson.toFixed(2)}</span>
       </div>
     </div>

@@ -2,6 +2,7 @@
 import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { TipCalculator as TipCalculatorTool } from "@tooloralabs/tools";
 
 import ToolButton from "@/components/tool-ui/ToolButton";
@@ -12,6 +13,7 @@ import type { TipResult as Result } from "./types";
 const tool = new TipCalculatorTool();
 
 export default function TipCalculator() {
+  const t = useTranslations("tools.tip-calculator.form");
   const [bill, setBill] = useState("");
   const [tipPercent, setTipPercent] = useState("");
   const [people, setPeople] = useState("1");
@@ -35,23 +37,23 @@ export default function TipCalculator() {
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
         type="text" inputMode="decimal"
-        placeholder="Bill amount"
+        placeholder={t("billPlaceholder")}
         value={bill}
         onChange={(e) => setBill(e.target.value)}
       />
       <ToolInput
         type="text" inputMode="decimal"
-        placeholder="Tip %"
+        placeholder={t("tipPlaceholder")}
         value={tipPercent}
         onChange={(e) => setTipPercent(e.target.value)}
       />
       <ToolInput
         type="text" inputMode="decimal"
-        placeholder="Number of people"
+        placeholder={t("peoplePlaceholder")}
         value={people}
         onChange={(e) => setPeople(e.target.value)}
       />
-      <ToolButton onClick={handleCalculate}>Calculate Tip</ToolButton>
+      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
       {result && <TipResult result={result} />}
     </div>
   );
