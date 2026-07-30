@@ -1,4 +1,5 @@
 "use client";
+import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { MortgageCalculator as MortgageCalculatorTool } from "@tooloralabs/tools";
@@ -26,14 +27,14 @@ export default function MortgageCalculator() {
   const handleCalculate = () => {
     const output = tool.execute(
       {
-        homePrice: Number(homePrice),
-        downPayment: Number(downPayment),
-        annualInterestRate: Number(interestRate),
-        loanTermYears: Number(loanYears),
-        annualPropertyTax: Number(propertyTax),
-        annualHomeInsurance: Number(insurance),
-        monthlyHOA: Number(hoa),
-        monthlyPMI: Number(pmi),
+        homePrice: parseLocalizedNumber(homePrice),
+        downPayment: parseLocalizedNumber(downPayment),
+        annualInterestRate: parseLocalizedNumber(interestRate),
+        loanTermYears: parseLocalizedNumber(loanYears),
+        annualPropertyTax: parseLocalizedNumber(propertyTax),
+        annualHomeInsurance: parseLocalizedNumber(insurance),
+        monthlyHOA: parseLocalizedNumber(hoa),
+        monthlyPMI: parseLocalizedNumber(pmi),
       },
       { locale: "en-US" }
     );

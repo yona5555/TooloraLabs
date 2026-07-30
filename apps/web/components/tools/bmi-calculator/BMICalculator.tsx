@@ -1,4 +1,5 @@
 "use client";
+import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { BMICalculator as BMICalculatorTool } from "@tooloralabs/tools";
@@ -22,8 +23,8 @@ export default function BMICalculator() {
     setError("");
     setResult(null);
 
-    const heightCm = Number(height);
-    const weightKg = Number(weight);
+    const heightCm = parseLocalizedNumber(height);
+    const weightKg = parseLocalizedNumber(weight);
 
     if (!height || !weight) {
       setError("Please enter your height and weight.");

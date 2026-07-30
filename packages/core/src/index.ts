@@ -16,3 +16,4 @@ export * from "./utils/isObject";
 export * from "./utils/isString";
 export * from "./utils/isNumber";
 export * from "./utils/isBoolean";
+export * from "./utils/parseLocalizedNumber";

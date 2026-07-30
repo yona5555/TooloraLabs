@@ -1,4 +1,5 @@
 "use client";
+import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { DiscountCalculator as DiscountCalculatorTool } from "@tooloralabs/tools";
@@ -16,8 +17,8 @@ export default function DiscountCalculator() {
   const [result, setResult] = useState<Result | null>(null);
 
   function handleCalculate() {
-    const originalPrice = Number(price);
-    const discountPercent = Number(discount);
+    const originalPrice = parseLocalizedNumber(price);
+    const discountPercent = parseLocalizedNumber(discount);
     if (Number.isNaN(originalPrice) || Number.isNaN(discountPercent)) {
       return;
     }

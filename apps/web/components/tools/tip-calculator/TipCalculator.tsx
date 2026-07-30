@@ -1,4 +1,5 @@
 "use client";
+import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { TipCalculator as TipCalculatorTool } from "@tooloralabs/tools";
@@ -17,9 +18,9 @@ export default function TipCalculator() {
   const [result, setResult] = useState<Result | null>(null);
 
   function handleCalculate() {
-    const billAmount = Number(bill);
-    const tip = Number(tipPercent);
-    const peopleCount = Number(people);
+    const billAmount = parseLocalizedNumber(bill);
+    const tip = parseLocalizedNumber(tipPercent);
+    const peopleCount = parseLocalizedNumber(people);
     if (Number.isNaN(billAmount) || Number.isNaN(tip) || Number.isNaN(peopleCount)) {
       return;
     }

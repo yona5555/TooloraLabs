@@ -1,4 +1,5 @@
 "use client";
+import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { PercentageCalculator as PercentageCalculatorTool } from "@tooloralabs/tools";
@@ -20,8 +21,8 @@ export default function PercentageCalculator() {
   const [result, setResult] = useState<Result | null>(null);
 
   function handleCalculate() {
-    const a = Number(first);
-    const b = Number(second);
+    const a = parseLocalizedNumber(first);
+    const b = parseLocalizedNumber(second);
     if (Number.isNaN(a) || Number.isNaN(b)) {
       return;
     }
