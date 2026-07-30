@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const t = useTranslations("navbar");
@@ -43,6 +44,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <button className="hidden rounded-xl border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-blue-200 hover:text-blue-600 md:block">
             {t("signIn")}
           </button>
