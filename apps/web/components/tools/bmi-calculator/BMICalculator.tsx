@@ -2,6 +2,7 @@
 import { parseLocalizedNumber } from "@tooloralabs/core";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { BMICalculator as BMICalculatorTool } from "@tooloralabs/tools";
 
 import ToolButton from "@/components/tool-ui/ToolButton";
@@ -13,6 +14,7 @@ import type { BMIResult as BMIResultType } from "./types";
 const tool = new BMICalculatorTool();
 
 export default function BMICalculator() {
+  const t = useTranslations("tools.bmi-calculator");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [error, setError] = useState("");
@@ -27,7 +29,7 @@ export default function BMICalculator() {
     const weightKg = parseLocalizedNumber(weight);
 
     if (!height || !weight) {
-      setError("Please enter your height and weight.");
+      setError(t("errors.required"));
       return;
     }
     if (
@@ -36,7 +38,7 @@ export default function BMICalculator() {
       heightCm <= 0 ||
       weightKg <= 0
     ) {
-      setError("Height and weight must be greater than zero.");
+      setError(t("errors.invalid"));
       return;
     }
 
@@ -52,20 +54,17 @@ export default function BMICalculator() {
   }
 
   return (
-    <ToolCard
-      title="BMI Calculator"
-      description="Calculate your Body Mass Index (BMI) and healthy weight range."
-    >
+    <ToolCard title={t("title")} description={t("description")}>
       <form onSubmit={handleSubmit} className="space-y-6">
         <ToolInput
           type="text" inputMode="decimal"
-          placeholder="Height (cm)"
+          placeholder={t("form.heightPlaceholder")}
           value={height}
           onChange={(e) => setHeight(e.target.value)}
         />
         <ToolInput
           type="text" inputMode="decimal"
-          placeholder="Weight (kg)"
+          placeholder={t("form.weightPlaceholder")}
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
@@ -75,13 +74,13 @@ export default function BMICalculator() {
           </div>
         )}
         <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">Calculate BMI</ToolButton>
+          <ToolButton type="submit">{t("form.calculate")}</ToolButton>
           <button
             type="button"
             onClick={handleReset}
             className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold transition hover:bg-zinc-100"
           >
-            Reset
+            {t("form.reset")}
           </button>
         </div>
         {result && <BMIResult result={result} />}

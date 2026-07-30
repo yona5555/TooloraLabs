@@ -1,6 +1,6 @@
-import type { ResultLevel } from "../types";
+export type BMIResultLevel = "warning" | "normal" | "high" | "critical";
 
-export function mapBMIToResultLevel(category: string): ResultLevel {
+export function mapBMIToResultLevel(category: string): BMIResultLevel {
   switch (category) {
     case "Underweight":
       return "warning";

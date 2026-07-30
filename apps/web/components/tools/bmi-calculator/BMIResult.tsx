@@ -1,6 +1,4 @@
-"use client";
-
-import { getCalculator } from "@/lib/calculators/registry";
+import { useTranslations } from "next-intl";
 import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
 
 interface BMIResultData {
@@ -12,36 +10,35 @@ interface BMIResultProps {
   result: BMIResultData;
 }
 
-const calculator = getCalculator("bmi");
+type Recommendation = {
+  title: string;
+  description: string;
+};
 
 export default function BMIResult({ result }: BMIResultProps) {
-  const analysis = calculator.getLevel(
-    mapBMIToResultLevel(result.category)
-  );
-
-  if (!analysis) {
-    return null;
-  }
+  const t = useTranslations("tools.bmi-calculator");
+  const level = mapBMIToResultLevel(result.category);
+  const recommendations = t.raw(
+    `levels.${level}.recommendations`
+  ) as Recommendation[];
 
   return (
     <div className="mt-8 rounded-xl border bg-white p-6 shadow-sm">
-      <h2 className="text-2xl font-bold">
-        {calculator.getDefinition().name}
-      </h2>
+      <h2 className="text-2xl font-bold">{t("title")}</h2>
 
       <div className="mt-4">
         <p className="text-4xl font-bold">{result.bmi.toFixed(1)}</p>
-        <p className="mt-1 text-lg font-medium">{analysis.title}</p>
+        <p className="mt-1 text-lg font-medium">{t(`levels.${level}.title`)}</p>
         <p className="mt-3 text-gray-600">
-          {analysis.detailedDescription}
+          {t(`levels.${level}.description`)}
         </p>
       </div>
 
       <div className="mt-6">
-        <h3 className="font-semibold">{analysis.actionTitle}</h3>
+        <h3 className="font-semibold">{t("actionTitle")}</h3>
 
         <ul className="mt-3 space-y-3">
-          {analysis.recommendations.map((item) => (
+          {recommendations.map((item) => (
             <li key={item.title}>
               <p className="font-medium">{item.title}</p>
               <p className="text-sm text-gray-600">
