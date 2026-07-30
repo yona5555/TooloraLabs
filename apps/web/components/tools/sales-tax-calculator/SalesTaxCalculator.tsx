@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber } from "@tooloralabs/core";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { SalesTaxCalculator as SalesTaxCalculatorTool } from "@tooloralabs/tools";
 
+import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import SalesTaxResult from "./SalesTaxResult";
@@ -17,13 +18,15 @@ export default function SalesTaxCalculator() {
   const [price, setPrice] = useState("");
   const [taxRate, setTaxRate] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   function handleCalculate() {
     const p = parseLocalizedNumber(price);
-    const t = parseLocalizedNumber(taxRate);
-    if (Number.isNaN(p) || Number.isNaN(t)) return;
-    const output = tool.execute({ price: p, taxRate: t }, { locale: "en-US" });
+    const rate = parseLocalizedNumber(taxRate);
+    if (Number.isNaN(p) || Number.isNaN(rate)) return;
+    const output = tool.execute({ price: p, taxRate: rate }, { locale: "en-US" });
     setResult(output.data);
+    setDigitStyle(resolveDigitStyle(price, taxRate));
   }
 
   return (
@@ -43,7 +46,7 @@ export default function SalesTaxCalculator() {
         onChange={(e) => setTaxRate(e.target.value)}
       />
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      <SalesTaxResult result={result} />
+      <SalesTaxResult result={result} digitStyle={digitStyle} />
     </div>
   );
 }
