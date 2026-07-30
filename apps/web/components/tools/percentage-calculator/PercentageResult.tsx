@@ -1,10 +1,12 @@
 import { useTranslations } from "next-intl";
+import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { PercentageMode, PercentageResult as Result } from "./types";
 
 type Computed = {
   mode: PercentageMode;
   first: number;
   second: number;
+  digitStyle: DigitStyle;
 };
 
 type Props = {
@@ -17,7 +19,11 @@ export default function PercentageResult({ result, computed }: Props) {
 
   if (!result || !computed) return null;
 
-  const { mode, first, second } = computed;
+  const { mode, first, second, digitStyle } = computed;
+
+  const formattedValue = formatLocalizedNumber(result.value, digitStyle);
+  const formattedFirst = formatLocalizedNumber(first, digitStyle);
+  const formattedSecond = formatLocalizedNumber(second, digitStyle);
 
   let text: string;
   if (mode === "what-percent" && second === 0) {
@@ -25,11 +31,19 @@ export default function PercentageResult({ result, computed }: Props) {
   } else if (mode === "percentage-change" && first === 0) {
     text = t("originalZero");
   } else if (mode === "percent-of-number") {
-    text = t("percentOf", { first, second, value: result.value });
+    text = t("percentOf", {
+      first: formattedFirst,
+      second: formattedSecond,
+      value: formattedValue,
+    });
   } else if (mode === "what-percent") {
-    text = t("whatPercent", { first, second, value: result.value });
+    text = t("whatPercent", {
+      first: formattedFirst,
+      second: formattedSecond,
+      value: formattedValue,
+    });
   } else {
-    text = t("percentageChange", { value: result.value });
+    text = t("percentageChange", { value: formattedValue });
   }
 
   return (
@@ -39,7 +53,7 @@ export default function PercentageResult({ result, computed }: Props) {
       </h3>
 
       <div className="mt-4 text-4xl font-bold text-blue-600">
-        {result.value}
+        {formattedValue}
       </div>
 
       <p className="mt-3 text-zinc-600">

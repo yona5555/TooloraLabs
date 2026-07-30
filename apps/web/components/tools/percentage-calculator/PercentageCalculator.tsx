@@ -1,10 +1,11 @@
 "use client";
-import { parseLocalizedNumber } from "@tooloralabs/core";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { PercentageCalculator as PercentageCalculatorTool } from "@tooloralabs/tools";
 
+import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import PercentageResult from "./PercentageResult";
@@ -19,6 +20,7 @@ type Computed = {
   mode: PercentageMode;
   first: number;
   second: number;
+  digitStyle: DigitStyle;
 };
 
 export default function PercentageCalculator() {
@@ -37,7 +39,7 @@ export default function PercentageCalculator() {
     }
     const output = tool.execute({ mode, first: a, second: b }, { locale: "en-US" });
     setResult(output.data);
-    setComputed({ mode, first: a, second: b });
+    setComputed({ mode, first: a, second: b, digitStyle: resolveDigitStyle(first, second) });
   }
 
   return (
