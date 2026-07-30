@@ -58,7 +58,7 @@ export default function MortgageCalculator() {
   };
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
+    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
       <ToolInput
         label={t("homePrice")}
         type="text" inputMode="decimal"

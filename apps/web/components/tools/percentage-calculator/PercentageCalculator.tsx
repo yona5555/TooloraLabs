@@ -43,11 +43,11 @@ export default function PercentageCalculator() {
   }
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
+    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
       <select
         value={mode}
         onChange={(e) => setMode(e.target.value as PercentageMode)}
-        className="w-full rounded-xl border border-zinc-300 px-4 py-3"
+        className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
       >
         <option value="percent-of-number">{t("modePercentOf")}</option>
         <option value="what-percent">{t("modeWhatPercent")}</option>

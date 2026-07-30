@@ -72,7 +72,7 @@ export default function BMICalculator() {
           onChange={(e) => setWeight(e.target.value)}
         />
         {error && (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
             {error}
           </div>
         )}
@@ -81,7 +81,7 @@ export default function BMICalculator() {
           <button
             type="button"
             onClick={handleReset}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold transition hover:bg-zinc-100"
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
             {t("form.reset")}
           </button>
