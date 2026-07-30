@@ -6,6 +6,7 @@ import MortgageCalculator from "@/components/tools/mortgage-calculator/MortgageC
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
+import SalesTaxCalculator from "@/components/tools/sales-tax-calculator/SalesTaxCalculator";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import { tools } from "@/data/tools";
 
@@ -79,6 +80,9 @@ export default async function ToolPage({
       break;
     case "discount-calculator":
       component = <DiscountCalculator />;
+      break;
+    case "sales-tax-calculator":
+      component = <SalesTaxCalculator />;
       break;
   }
 

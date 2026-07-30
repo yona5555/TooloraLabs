@@ -65,6 +65,14 @@ export const tools: Tool[] = [
     keywords: ["discount", "sale", "price", "savings"],
   },
   {
+    slug: "sales-tax-calculator",
+    title: "Sales Tax Calculator",
+    category: "calculators",
+    description: "Calculate sales tax and total price.",
+    featured: true,
+    keywords: ["sales tax", "tax", "price", "total"],
+  },
+  {
     slug: "image-converter",
     title: "Image Converter",
     category: "converters",
