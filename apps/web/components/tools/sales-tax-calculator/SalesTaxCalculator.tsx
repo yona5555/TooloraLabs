@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { parseLocalizedNumber } from "@tooloralabs/core";
 import { SalesTaxCalculator as SalesTaxCalculatorTool } from "@tooloralabs/tools";
 
@@ -12,6 +13,7 @@ import type { SalesTaxResult as Result } from "./types";
 const tool = new SalesTaxCalculatorTool();
 
 export default function SalesTaxCalculator() {
+  const t = useTranslations("tools.sales-tax-calculator.form");
   const [price, setPrice] = useState("");
   const [taxRate, setTaxRate] = useState("");
   const [result, setResult] = useState<Result | null>(null);
@@ -29,18 +31,18 @@ export default function SalesTaxCalculator() {
       <ToolInput
         type="text"
         inputMode="decimal"
-        placeholder="Price"
+        placeholder={t("pricePlaceholder")}
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
       <ToolInput
         type="text"
         inputMode="decimal"
-        placeholder="Sales Tax (%)"
+        placeholder={t("taxRatePlaceholder")}
         value={taxRate}
         onChange={(e) => setTaxRate(e.target.value)}
       />
-      <ToolButton onClick={handleCalculate}>Calculate</ToolButton>
+      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
       <SalesTaxResult result={result} />
     </div>
   );
