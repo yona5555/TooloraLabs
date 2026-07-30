@@ -1,66 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import ToolInput from "@/components/tool-ui/ToolInput";
+import { TipCalculator as TipCalculatorTool } from "@tooloralabs/tools";
+
 import ToolButton from "@/components/tool-ui/ToolButton";
-import { calculateTip } from "./tip";
+import ToolInput from "@/components/tool-ui/ToolInput";
 import TipResult from "./TipResult";
 import type { TipResult as Result } from "./types";
 
+const tool = new TipCalculatorTool();
+
 export default function TipCalculator() {
   const [bill, setBill] = useState("");
-  const [tip, setTip] = useState("15");
+  const [tipPercent, setTipPercent] = useState("");
   const [people, setPeople] = useState("1");
   const [result, setResult] = useState<Result | null>(null);
 
   function handleCalculate() {
-    const billValue = Number(bill);
-    const tipValue = Number(tip);
-    const peopleValue = Number(people);
-
-    if (
-      Number.isNaN(billValue) ||
-      Number.isNaN(tipValue) ||
-      Number.isNaN(peopleValue) ||
-      billValue < 0 ||
-      tipValue < 0 ||
-      peopleValue <= 0
-    ) {
-      setResult(null);
+    const billAmount = Number(bill);
+    const tip = Number(tipPercent);
+    const peopleCount = Number(people);
+    if (Number.isNaN(billAmount) || Number.isNaN(tip) || Number.isNaN(peopleCount)) {
       return;
     }
-
-    setResult(calculateTip(billValue, tipValue, peopleValue));
+    const output = tool.execute(
+      { billAmount, tipPercent: tip, people: peopleCount },
+      { locale: "en-US" }
+    );
+    setResult(output.data);
   }
 
   return (
-    <div className="mx-auto max-w-xl space-y-4">
+    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
       <ToolInput
         type="number"
-        placeholder="Bill Amount"
+        placeholder="Bill amount"
         value={bill}
         onChange={(e) => setBill(e.target.value)}
       />
-
       <ToolInput
         type="number"
-        placeholder="Tip Percentage"
-        value={tip}
-        onChange={(e) => setTip(e.target.value)}
+        placeholder="Tip %"
+        value={tipPercent}
+        onChange={(e) => setTipPercent(e.target.value)}
       />
-
       <ToolInput
         type="number"
-        placeholder="Number of People"
+        placeholder="Number of people"
         value={people}
         onChange={(e) => setPeople(e.target.value)}
       />
-
-      <ToolButton onClick={handleCalculate}>
-        Calculate Tip
-      </ToolButton>
-
-      <TipResult result={result} />
+      <ToolButton onClick={handleCalculate}>Calculate Tip</ToolButton>
+      {result && <TipResult result={result} />}
     </div>
   );
 }

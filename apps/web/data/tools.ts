@@ -49,6 +49,22 @@ export const tools: Tool[] = [
     keywords: ["percentage", "math"],
   },
   {
+    slug: "tip-calculator",
+    title: "Tip Calculator",
+    category: "calculators",
+    description: "Calculate tip amount and split the bill between people.",
+    featured: true,
+    keywords: ["tip", "bill", "split", "restaurant"],
+  },
+  {
+    slug: "discount-calculator",
+    title: "Discount Calculator",
+    category: "calculators",
+    description: "Calculate discounted price and how much you save.",
+    featured: true,
+    keywords: ["discount", "sale", "price", "savings"],
+  },
+  {
     slug: "image-converter",
     title: "Image Converter",
     category: "converters",
