@@ -35,5 +35,11 @@ jobs:
       - name: Test (core)
         run: npm run test --workspace=packages/core
 
+      - name: Test (sdk)
+        run: npm run test --workspace=packages/sdk
+
+      - name: Test (tools)
+        run: npm run test --workspace=packages/tools
+
       - name: Build web app
         run: npm run build --workspace=apps/web
