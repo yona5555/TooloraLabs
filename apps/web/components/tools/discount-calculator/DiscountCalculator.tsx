@@ -1,10 +1,11 @@
 "use client";
-import { parseLocalizedNumber } from "@tooloralabs/core";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { DiscountCalculator as DiscountCalculatorTool } from "@tooloralabs/tools";
 
+import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import DiscountResult from "./DiscountResult";
@@ -17,6 +18,7 @@ export default function DiscountCalculator() {
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
   function handleCalculate() {
     const originalPrice = parseLocalizedNumber(price);
@@ -26,6 +28,7 @@ export default function DiscountCalculator() {
     }
     const output = tool.execute({ originalPrice, discountPercent }, { locale: "en-US" });
     setResult(output.data);
+    setDigitStyle(resolveDigitStyle(price, discount));
   }
 
   return (
@@ -43,7 +46,7 @@ export default function DiscountCalculator() {
         onChange={(e) => setDiscount(e.target.value)}
       />
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      {result && <DiscountResult result={result} />}
+      {result && <DiscountResult result={result} digitStyle={digitStyle} />}
     </div>
   );
 }
