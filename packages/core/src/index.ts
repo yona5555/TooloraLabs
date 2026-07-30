@@ -17,3 +17,5 @@ export * from "./utils/isString";
 export * from "./utils/isNumber";
 export * from "./utils/isBoolean";
 export * from "./utils/parseLocalizedNumber";
+export * from "./utils/detectDigitStyle";
+export * from "./utils/formatLocalizedNumber";
