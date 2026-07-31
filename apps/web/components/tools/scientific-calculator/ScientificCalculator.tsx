@@ -4,6 +4,7 @@ import { useReducer } from "react";
 import { useTranslations } from "next-intl";
 import { Delete } from "lucide-react";
 import type { ScientificOperation } from "@tooloralabs/tools";
+import CopyButton from "@/components/tool-ui/CopyButton";
 import { calculatorReducer, initialState, type BinaryOperator } from "./reducer";
 
 type ButtonConfig = {
@@ -131,6 +132,12 @@ export default function ScientificCalculator() {
         >
           {state.errorCode ? t(`errors.${state.errorCode}`) : state.display}
         </div>
+
+        {!state.errorCode && (
+          <div className="mt-3 flex justify-end">
+            <CopyButton text={state.display} />
+          </div>
+        )}
       </div>
 
       <div className="mt-4 grid grid-cols-6 gap-2" dir="ltr">
