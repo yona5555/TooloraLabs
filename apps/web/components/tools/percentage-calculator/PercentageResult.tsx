@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import CopyButton from "@/components/tool-ui/CopyButton";
 import type { PercentageMode, PercentageResult as Result } from "./types";
 
 type Computed = {
@@ -48,9 +49,12 @@ export default function PercentageResult({ result, computed }: Props) {
 
   return (
     <div className="mt-8 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-        {t("heading")}
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+          {t("heading")}
+        </h3>
+        <CopyButton text={text} />
+      </div>
 
       <div className="mt-4 text-4xl font-bold text-blue-600 dark:text-blue-400">
         {formattedValue}
