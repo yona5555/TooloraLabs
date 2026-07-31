@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
+import { getToolIcon } from "@/lib/tool-icons";
 
 type CategoryPageProps = {
   params: Promise<{
@@ -72,21 +73,28 @@ export default async function CategoryPage({
 
       {categoryTools.length > 0 ? (
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {categoryTools.map((tool) => (
-            <Link
-              key={tool.slug}
-              href={`/tools/${tool.slug}`}
-              className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500/40"
-            >
-              <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-                {tTools(`${tool.slug}.title`)}
-              </h3>
+          {categoryTools.map((tool) => {
+            const Icon = getToolIcon(tool.slug);
+            return (
+              <Link
+                key={tool.slug}
+                href={`/tools/${tool.slug}`}
+                className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500/40"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+                  <Icon size={22} strokeWidth={2} />
+                </div>
 
-              <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-                {tTools(`${tool.slug}.description`)}
-              </p>
-            </Link>
-          ))}
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                  {tTools(`${tool.slug}.title`)}
+                </h3>
+
+                <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+                  {tTools(`${tool.slug}.description`)}
+                </p>
+              </Link>
+            );
+          })}
         </div>
       ) : (
         <p className="mt-10 text-zinc-500 dark:text-zinc-400">{t("empty")}</p>
