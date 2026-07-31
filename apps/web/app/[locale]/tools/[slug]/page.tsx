@@ -10,6 +10,7 @@ import DiscountCalculator from "@/components/tools/discount-calculator/DiscountC
 import SalesTaxCalculator from "@/components/tools/sales-tax-calculator/SalesTaxCalculator";
 import JSONFormatterTool from "@/components/tools/json-formatter/JSONFormatterTool";
 import PasswordGeneratorTool from "@/components/tools/password-generator/PasswordGeneratorTool";
+import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -113,6 +114,9 @@ export default async function ToolPage({
       break;
     case "password-generator":
       component = <PasswordGeneratorTool />;
+      break;
+    case "unit-converter":
+      component = <UnitConverterTool />;
       break;
   }
 
