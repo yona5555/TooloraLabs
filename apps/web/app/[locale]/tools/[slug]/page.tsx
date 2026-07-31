@@ -9,6 +9,7 @@ import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
 import SalesTaxCalculator from "@/components/tools/sales-tax-calculator/SalesTaxCalculator";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
+import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
 
 type ToolPageProps = {
@@ -108,14 +109,17 @@ export default async function ToolPage({
   }
 
   return (
-    <ToolPageLayout
-      category={tc(`${tool.category}.title`)}
-      categorySlug={tool.category}
-      backLabel={tp("back", { category: tc(`${tool.category}.title`) })}
-      title={title}
-      description={description}
-    >
-      {component}
-    </ToolPageLayout>
+    <>
+      <ToolPageLayout
+        category={tc(`${tool.category}.title`)}
+        categorySlug={tool.category}
+        backLabel={tp("back", { category: tc(`${tool.category}.title`) })}
+        title={title}
+        description={description}
+      >
+        {component}
+      </ToolPageLayout>
+      <RelatedTools locale={locale} category={tool.category} currentSlug={slug} />
+    </>
   );
 }
