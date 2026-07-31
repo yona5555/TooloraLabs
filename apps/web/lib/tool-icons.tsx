@@ -2,10 +2,14 @@ import {
   Binary,
   Braces,
   Calendar,
+  FilePen,
+  FileSpreadsheet,
   HandCoins,
+  HardDrive,
   Home,
   Image,
   KeyRound,
+  ListX,
   Percent,
   QrCode,
   Receipt,
@@ -34,6 +38,10 @@ export const toolIcons: Record<string, LucideIcon> = {
   "qr-code-generator": QrCode,
   "word-counter": Type,
   "base64-tool": Binary,
+  "csv-json-converter": FileSpreadsheet,
+  "file-size-converter": HardDrive,
+  "file-name-sanitizer": FilePen,
+  "duplicate-line-remover": ListX,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

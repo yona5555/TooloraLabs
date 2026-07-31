@@ -16,6 +16,10 @@ import ImageConverterTool from "@/components/tools/image-converter/ImageConverte
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
 import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
 import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
+import CsvJsonConverterUI from "@/components/tools/csv-json-converter/CsvJsonConverterUI";
+import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSizeConverterTool";
+import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
+import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -137,6 +141,18 @@ export default async function ToolPage({
       break;
     case "scientific-calculator":
       component = <ScientificCalculator />;
+      break;
+    case "csv-json-converter":
+      component = <CsvJsonConverterUI />;
+      break;
+    case "file-size-converter":
+      component = <FileSizeConverterTool />;
+      break;
+    case "file-name-sanitizer":
+      component = <FileNameSanitizerTool />;
+      break;
+    case "duplicate-line-remover":
+      component = <DuplicateLineRemoverTool />;
       break;
   }
 

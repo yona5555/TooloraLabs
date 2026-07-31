@@ -522,6 +522,83 @@
         "required": "يرجى إدخال نص.",
         "invalidBase64": "هذا ليس نص Base64 صحيحًا."
       }
+    },
+    "csv-json-converter": {
+      "title": "محوّل CSV إلى JSON",
+      "description": "حوّل بيانات CSV إلى JSON أو حوّل JSON مرة أخرى إلى CSV.",
+      "form": {
+        "inputLabel": "الإدخال",
+        "inputPlaceholder": "الصق بيانات CSV أو JSON هنا...",
+        "csvToJson": "CSV ← JSON",
+        "jsonToCsv": "JSON ← CSV",
+        "outputLabel": "النتيجة",
+        "copy": "نسخ",
+        "copied": "تم النسخ!"
+      },
+      "errors": {
+        "required": "يرجى إدخال بيانات.",
+        "invalidJson": "هذا ليس JSON صحيحًا.",
+        "expectedArray": "يجب أن يكون JSON مصفوفة من الكائنات."
+      }
+    },
+    "file-size-converter": {
+      "title": "محوّل حجم الملفات",
+      "description": "حوّل أحجام الملفات بين بايت، KB، MB، GB، TB، وPB.",
+      "form": {
+        "from": "من",
+        "to": "إلى",
+        "swap": "تبديل الوحدات",
+        "valuePlaceholder": "أدخل القيمة",
+        "convert": "تحويل"
+      },
+      "units": {
+        "B": "بايت (B)",
+        "KB": "كيلوبايت (KB)",
+        "MB": "ميغابايت (MB)",
+        "GB": "غيغابايت (GB)",
+        "TB": "تيرابايت (TB)",
+        "PB": "بيتابايت (PB)"
+      },
+      "errors": {
+        "required": "يرجى إدخال رقم صحيح.",
+        "negativeValue": "يجب ألا تكون القيمة سالبة."
+      }
+    },
+    "file-name-sanitizer": {
+      "title": "تنظيف أسماء الملفات",
+      "description": "نظّف أسماء الملفات لتكون آمنة عبر أنظمة التشغيل وأنظمة الرفع المختلفة.",
+      "form": {
+        "inputLabel": "اسم الملف",
+        "inputPlaceholder": "سيرتي الذاتية النهائية.PDF",
+        "separator": "الفاصل",
+        "separatorDash": "شرطة (-)",
+        "separatorUnderscore": "شرطة سفلية (_)",
+        "lowercase": "أحرف صغيرة",
+        "sanitize": "تنظيف",
+        "copy": "نسخ",
+        "copied": "تم النسخ!"
+      },
+      "errors": {
+        "required": "يرجى إدخال اسم ملف.",
+        "invalidResult": "لم يتبقَّ شيء صالح بعد تنظيف اسم الملف هذا."
+      }
+    },
+    "duplicate-line-remover": {
+      "title": "حذف الأسطر المكرّرة",
+      "description": "احذف الأسطر المكرّرة من قائمة أو محتوى نصي لملف.",
+      "form": {
+        "inputLabel": "الإدخال",
+        "inputPlaceholder": "الصق قائمتك هنا، عنصر واحد في كل سطر...",
+        "caseSensitive": "حساس لحالة الأحرف",
+        "sortLines": "ترتيب الأسطر",
+        "removeDuplicates": "حذف المكرّرات",
+        "outputLabel": "{count, plural, zero {لم تُحذف أي أسطر مكرّرة} one {تم حذف سطر مكرّر واحد} two {تم حذف سطرين مكرّرين} few {تم حذف # أسطر مكرّرة} many {تم حذف # سطرًا مكرّرًا} other {تم حذف # سطر مكرّر}}",
+        "copy": "نسخ",
+        "copied": "تم النسخ!"
+      },
+      "errors": {
+        "required": "يرجى إدخال نص."
+      }
     }
   },
   "trustBar": {

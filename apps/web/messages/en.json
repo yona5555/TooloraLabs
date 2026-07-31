@@ -522,6 +522,83 @@
         "required": "Please enter some text.",
         "invalidBase64": "This is not valid Base64 text."
       }
+    },
+    "csv-json-converter": {
+      "title": "CSV to JSON Converter",
+      "description": "Convert CSV data to JSON or JSON back to CSV.",
+      "form": {
+        "inputLabel": "Input",
+        "inputPlaceholder": "Paste CSV or JSON data here...",
+        "csvToJson": "CSV → JSON",
+        "jsonToCsv": "JSON → CSV",
+        "outputLabel": "Result",
+        "copy": "Copy",
+        "copied": "Copied!"
+      },
+      "errors": {
+        "required": "Please enter some data.",
+        "invalidJson": "This is not valid JSON.",
+        "expectedArray": "The JSON must be an array of objects."
+      }
+    },
+    "file-size-converter": {
+      "title": "File Size Converter",
+      "description": "Convert file sizes between bytes, KB, MB, GB, TB, and PB.",
+      "form": {
+        "from": "From",
+        "to": "To",
+        "swap": "Swap units",
+        "valuePlaceholder": "Enter value",
+        "convert": "Convert"
+      },
+      "units": {
+        "B": "Bytes (B)",
+        "KB": "Kilobytes (KB)",
+        "MB": "Megabytes (MB)",
+        "GB": "Gigabytes (GB)",
+        "TB": "Terabytes (TB)",
+        "PB": "Petabytes (PB)"
+      },
+      "errors": {
+        "required": "Please enter a valid number.",
+        "negativeValue": "Value must not be negative."
+      }
+    },
+    "file-name-sanitizer": {
+      "title": "File Name Sanitizer",
+      "description": "Clean up file names for safe use across operating systems and upload systems.",
+      "form": {
+        "inputLabel": "File name",
+        "inputPlaceholder": "My Resume Final.PDF",
+        "separator": "Separator",
+        "separatorDash": "Dash (-)",
+        "separatorUnderscore": "Underscore (_)",
+        "lowercase": "Lowercase",
+        "sanitize": "Sanitize",
+        "copy": "Copy",
+        "copied": "Copied!"
+      },
+      "errors": {
+        "required": "Please enter a file name.",
+        "invalidResult": "Nothing valid remains after cleaning this file name."
+      }
+    },
+    "duplicate-line-remover": {
+      "title": "Duplicate Line Remover",
+      "description": "Remove duplicate lines from a list or file's text content.",
+      "form": {
+        "inputLabel": "Input",
+        "inputPlaceholder": "Paste your list here, one item per line...",
+        "caseSensitive": "Case-sensitive",
+        "sortLines": "Sort lines",
+        "removeDuplicates": "Remove Duplicates",
+        "outputLabel": "{count, plural, =0 {No duplicates removed} one {# duplicate removed} other {# duplicates removed}}",
+        "copy": "Copy",
+        "copied": "Copied!"
+      },
+      "errors": {
+        "required": "Please enter some text."
+      }
     }
   },
   "trustBar": {
