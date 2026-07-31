@@ -23,12 +23,15 @@ export default function Hero() {
           {t("subtitle")}
         </p>
 
-        <div className="mt-12 grid w-full max-w-6xl items-start gap-8 lg:grid-cols-2">
-          <ScientificCalculator />
-          <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
+        <div className="mt-20 grid w-full max-w-6xl items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+          <div className="min-w-0">
+            <ScientificCalculator />
+          </div>
+          <div className="flex min-w-0 flex-col gap-8">
+            <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
+            <Stats />
+          </div>
         </div>
-
-        <Stats />
       </div>
     </section>
   );
