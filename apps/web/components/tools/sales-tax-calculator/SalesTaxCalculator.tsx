@@ -8,6 +8,8 @@ import { SalesTaxCalculator as SalesTaxCalculatorTool } from "@tooloralabs/tools
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import PrintButton from "@/components/tool-ui/PrintButton";
+import { usePrintExport } from "@/hooks/usePrintExport";
 import SalesTaxResult from "./SalesTaxResult";
 import type { SalesTaxResult as Result } from "./types";
 
@@ -21,6 +23,7 @@ export default function SalesTaxCalculator() {
   const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+  const { printRef, handlePrint } = usePrintExport<HTMLDivElement>();
 
   function handleCalculate() {
     setError("");
@@ -68,7 +71,14 @@ export default function SalesTaxCalculator() {
         </div>
       )}
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      <SalesTaxResult result={result} digitStyle={digitStyle} />
+      {result && (
+        <div ref={printRef} data-print-area className="space-y-4">
+          <div className="flex justify-end print:hidden">
+            <PrintButton onPrint={handlePrint} />
+          </div>
+          <SalesTaxResult result={result} digitStyle={digitStyle} />
+        </div>
+      )}
     </div>
   );
 }
