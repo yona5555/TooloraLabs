@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
+import CopyButton from "@/components/tool-ui/CopyButton";
 import { AgeResult as AgeResultType } from "./types";
 
 type Props = {
@@ -39,8 +40,16 @@ function Card({
 export default function AgeResult({ result }: Props) {
   const t = useTranslations("tools.age-calculator.result");
 
+  const summaryText = [...calendarAge, ...totalAge]
+    .map((key) => `${t(key)}: ${formatLocalizedNumber(result[key], "western")}`)
+    .join("\n");
+
   return (
     <div className="space-y-10">
+      <div className="flex justify-end">
+        <CopyButton text={summaryText} />
+      </div>
+
       <div>
         <h3 className="mb-5 text-xl font-bold text-zinc-900 dark:text-zinc-50">
           {t("calendarAge")}
