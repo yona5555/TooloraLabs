@@ -52,10 +52,10 @@ function ComingSoon({
   line2: string;
 }) {
   return (
-    <div className="rounded-3xl border border-zinc-200 bg-white p-10 shadow-sm">
-      <h2 className="text-2xl font-bold text-zinc-900">{title}</h2>
-      <p className="mt-4 text-zinc-600">{line1}</p>
-      <p className="mt-2 text-zinc-500">{line2}</p>
+    <div className="rounded-3xl border border-zinc-200 bg-white p-10 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+      <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">{title}</h2>
+      <p className="mt-4 text-zinc-600 dark:text-zinc-300">{line1}</p>
+      <p className="mt-2 text-zinc-500 dark:text-zinc-400">{line2}</p>
     </div>
   );
 }
