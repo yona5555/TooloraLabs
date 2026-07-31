@@ -11,6 +11,7 @@ import SalesTaxCalculator from "@/components/tools/sales-tax-calculator/SalesTax
 import JSONFormatterTool from "@/components/tools/json-formatter/JSONFormatterTool";
 import PasswordGeneratorTool from "@/components/tools/password-generator/PasswordGeneratorTool";
 import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTool";
+import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGeneratorTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -117,6 +118,9 @@ export default async function ToolPage({
       break;
     case "unit-converter":
       component = <UnitConverterTool />;
+      break;
+    case "qr-code-generator":
+      component = <QRCodeGeneratorTool />;
       break;
   }
 
