@@ -8,6 +8,7 @@ import { FileSizeConverter, type FileSizeUnit } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CopyButton from "@/components/tool-ui/CopyButton";
 
 const tool = new FileSizeConverter();
 
@@ -123,6 +124,11 @@ export default function FileSizeConverterTool() {
             {formatLocalizedNumber(result, digitStyle, { maximumFractionDigits: 6 })}
           </p>
           <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t(`units.${to}`)}</p>
+          <div className="mt-4 flex justify-center">
+            <CopyButton
+              text={`${formatLocalizedNumber(result, digitStyle, { maximumFractionDigits: 6 })} ${t(`units.${to}`)}`}
+            />
+          </div>
         </div>
       )}
     </div>
