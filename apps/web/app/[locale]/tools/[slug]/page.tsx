@@ -15,6 +15,7 @@ import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGene
 import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
 import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
+import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -133,6 +134,9 @@ export default async function ToolPage({
       break;
     case "base64-tool":
       component = <Base64ToolUI />;
+      break;
+    case "scientific-calculator":
+      component = <ScientificCalculator />;
       break;
   }
 

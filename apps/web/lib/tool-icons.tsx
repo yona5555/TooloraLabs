@@ -11,6 +11,7 @@ import {
   Receipt,
   Ruler,
   Scale,
+  Sigma,
   Tag,
   Type,
   Wrench,
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 
 export const toolIcons: Record<string, LucideIcon> = {
+  "scientific-calculator": Sigma,
   "age-calculator": Calendar,
   "bmi-calculator": Scale,
   "mortgage-calculator": Home,

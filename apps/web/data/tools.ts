@@ -9,6 +9,15 @@ export type Tool = {
 
 export const tools: Tool[] = [
   {
+    slug: "scientific-calculator",
+    title: "Scientific Calculator",
+    category: "calculators",
+    description:
+      "A full scientific calculator with trigonometric, logarithmic, and power functions.",
+    featured: true,
+    keywords: ["scientific calculator", "trigonometry", "logarithm", "math"],
+  },
+  {
     slug: "age-calculator",
     title: "Age Calculator",
     category: "calculators",
