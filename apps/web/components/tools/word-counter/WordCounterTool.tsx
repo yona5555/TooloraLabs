@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { TextCounter } from "@tooloralabs/tools";
+import CopyButton from "@/components/tool-ui/CopyButton";
 
 const tool = new TextCounter();
 
@@ -25,6 +26,10 @@ export default function WordCounterTool() {
     [text]
   );
 
+  const summaryText = STAT_KEYS.map(
+    (key) => `${t(`stats.${key}`)}: ${formatLocalizedNumber(stats[key], "western")}`
+  ).join("\n");
+
   return (
     <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
       <label className="block space-y-2">
@@ -39,6 +44,12 @@ export default function WordCounterTool() {
           className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
         />
       </label>
+
+      {text.trim() && (
+        <div className="flex justify-end">
+          <CopyButton text={summaryText} />
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
         {STAT_KEYS.map((key) => (
