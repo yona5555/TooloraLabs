@@ -11,19 +11,11 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       <HeroBackground />
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 pt-24 pb-20 text-center">
-        <span className="rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-600 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-400">
-          {t("badge")}
-        </span>
-        <h1 className="mt-8 max-w-5xl text-6xl font-extrabold leading-tight tracking-tight text-zinc-900 dark:text-zinc-50">
-          {t("titleLine1")}
-          <br />
-          <span className="text-blue-600 dark:text-blue-400">{t("titleLine2")}</span>
+        <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl dark:text-zinc-50">
+          {t("titleLine1")} <span className="text-blue-600 dark:text-blue-400">{t("titleLine2")}</span>
         </h1>
-        <p className="mt-8 max-w-3xl text-xl leading-8 text-zinc-600 dark:text-zinc-300">
-          {t("subtitle")}
-        </p>
 
-        <div className="mt-20 grid w-full max-w-6xl items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+        <div className="mt-16 grid w-full max-w-6xl items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <div className="min-w-0">
             <ScientificCalculator />
           </div>
