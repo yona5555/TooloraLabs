@@ -12,6 +12,7 @@ import JSONFormatterTool from "@/components/tools/json-formatter/JSONFormatterTo
 import PasswordGeneratorTool from "@/components/tools/password-generator/PasswordGeneratorTool";
 import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTool";
 import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGeneratorTool";
+import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -121,6 +122,9 @@ export default async function ToolPage({
       break;
     case "qr-code-generator":
       component = <QRCodeGeneratorTool />;
+      break;
+    case "image-converter":
+      component = <ImageConverterTool />;
       break;
   }
 
