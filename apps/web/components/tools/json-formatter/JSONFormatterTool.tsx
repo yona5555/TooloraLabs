@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { JSONFormatter } from "@tooloralabs/tools";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import DownloadButton from "@/components/tool-ui/DownloadButton";
 import type { JSONFormatterMode } from "./types";
 
 const tool = new JSONFormatter();
@@ -84,13 +85,20 @@ export default function JSONFormatterTool() {
             <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
               {t("form.outputLabel")}
             </span>
-            <button
-              type="button"
-              onClick={copyOutput}
-              className="text-sm font-medium text-blue-600 transition hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            >
-              {copied ? t("form.copied") : t("form.copy")}
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={copyOutput}
+                className="text-sm font-medium text-blue-600 transition hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+              >
+                {copied ? t("form.copied") : t("form.copy")}
+              </button>
+              <DownloadButton
+                content={output}
+                filename="formatted.json"
+                mimeType="application/json;charset=utf-8"
+              />
+            </div>
           </div>
           <textarea
             readOnly
