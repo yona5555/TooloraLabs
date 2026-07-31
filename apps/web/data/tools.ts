@@ -112,4 +112,21 @@ export const tools: Tool[] = [
     featured: true,
     keywords: ["qr", "barcode"],
   },
+  {
+    slug: "word-counter",
+    title: "Word & Character Counter",
+    category: "text-tools",
+    description:
+      "Count words, characters, sentences, and estimate reading time.",
+    featured: false,
+    keywords: ["word count", "character count", "text", "reading time"],
+  },
+  {
+    slug: "base64-tool",
+    title: "Base64 Encoder/Decoder",
+    category: "developer-tools",
+    description: "Encode text to Base64 or decode Base64 back to text.",
+    featured: false,
+    keywords: ["base64", "encode", "decode", "developer"],
+  },
 ];

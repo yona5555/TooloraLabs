@@ -13,6 +13,8 @@ import PasswordGeneratorTool from "@/components/tools/password-generator/Passwor
 import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTool";
 import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGeneratorTool";
 import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
+import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
+import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -125,6 +127,12 @@ export default async function ToolPage({
       break;
     case "image-converter":
       component = <ImageConverterTool />;
+      break;
+    case "word-counter":
+      component = <WordCounterTool />;
+      break;
+    case "base64-tool":
+      component = <Base64ToolUI />;
       break;
   }
 

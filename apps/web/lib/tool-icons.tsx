@@ -1,4 +1,5 @@
 import {
+  Binary,
   Braces,
   Calendar,
   HandCoins,
@@ -11,6 +12,7 @@ import {
   Ruler,
   Scale,
   Tag,
+  Type,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -28,6 +30,8 @@ export const toolIcons: Record<string, LucideIcon> = {
   "password-generator": KeyRound,
   "unit-converter": Ruler,
   "qr-code-generator": QrCode,
+  "word-counter": Type,
+  "base64-tool": Binary,
 };
 
 export function getToolIcon(slug: string): LucideIcon {
