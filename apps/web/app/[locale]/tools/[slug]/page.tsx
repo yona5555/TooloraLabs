@@ -21,6 +21,7 @@ import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSi
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
 import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
+import InventoryValuationTool from "@/components/tools/inventory-valuation-calculator/InventoryValuationTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -157,6 +158,9 @@ export default async function ToolPage({
       break;
     case "invoice-generator":
       component = <InvoiceGeneratorTool />;
+      break;
+    case "inventory-valuation-calculator":
+      component = <InventoryValuationTool />;
       break;
   }
 

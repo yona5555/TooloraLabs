@@ -178,4 +178,12 @@ export const tools: Tool[] = [
     featured: false,
     keywords: ["invoice", "billing", "receipt", "tax", "business"],
   },
+  {
+    slug: "inventory-valuation-calculator",
+    title: "Inventory Valuation Calculator",
+    category: "calculators",
+    description: "Value your stock and flag items below their reorder threshold.",
+    featured: false,
+    keywords: ["inventory", "stock", "valuation", "warehouse", "reorder", "business"],
+  },
 ];

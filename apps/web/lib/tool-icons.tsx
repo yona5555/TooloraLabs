@@ -1,5 +1,6 @@
 import {
   Binary,
+  Boxes,
   Braces,
   Calendar,
   FilePen,
@@ -44,6 +45,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "file-name-sanitizer": FilePen,
   "duplicate-line-remover": ListX,
   "invoice-generator": ReceiptText,
+  "inventory-valuation-calculator": Boxes,
 };
 
 export function getToolIcon(slug: string): LucideIcon {
