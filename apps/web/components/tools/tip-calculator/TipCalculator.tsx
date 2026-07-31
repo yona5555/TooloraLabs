@@ -8,6 +8,8 @@ import { TipCalculator as TipCalculatorTool } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import PrintButton from "@/components/tool-ui/PrintButton";
+import { usePrintExport } from "@/hooks/usePrintExport";
 import TipResult from "./TipResult";
 import type { TipResult as Result } from "./types";
 
@@ -22,6 +24,7 @@ export default function TipCalculator() {
   const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+  const { printRef, handlePrint } = usePrintExport<HTMLDivElement>();
 
   function handleCalculate() {
     setError("");
@@ -81,7 +84,14 @@ export default function TipCalculator() {
         </div>
       )}
       <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      {result && <TipResult result={result} digitStyle={digitStyle} />}
+      {result && (
+        <div ref={printRef} data-print-area className="space-y-6">
+          <div className="flex justify-end print:hidden">
+            <PrintButton onPrint={handlePrint} />
+          </div>
+          <TipResult result={result} digitStyle={digitStyle} />
+        </div>
+      )}
     </div>
   );
 }
