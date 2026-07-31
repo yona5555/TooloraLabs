@@ -10,6 +10,7 @@ import {
 import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
+import { getCategoryIconColor } from "@/lib/category-colors";
 import CategoryCard from "./CategoryCard";
 
 const icons = {
@@ -19,15 +20,6 @@ const icons = {
   code: <Code2 size={32} strokeWidth={2} />,
   text: <FileText size={32} strokeWidth={2} />,
   folder: <Folder size={32} strokeWidth={2} />,
-};
-
-const iconColors: Record<string, string> = {
-  calculator: "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
-  refresh: "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400",
-  bot: "bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400",
-  code: "bg-orange-50 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400",
-  text: "bg-pink-50 text-pink-600 dark:bg-pink-500/10 dark:text-pink-400",
-  folder: "bg-cyan-50 text-cyan-600 dark:bg-cyan-500/10 dark:text-cyan-400",
 };
 
 export default function Categories() {
@@ -59,7 +51,7 @@ export default function Categories() {
                 description={tc(`${category.slug}.description`)}
                 tools={t("toolCount", { count })}
                 icon={icons[category.icon as keyof typeof icons]}
-                iconClassName={iconColors[category.icon]}
+                iconClassName={getCategoryIconColor(category.slug)}
               />
             </Link>
           );

@@ -6,6 +6,7 @@ import { Search as SearchIcon } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { tools } from "@/data/tools";
 import { getToolIcon } from "@/lib/tool-icons";
+import { getCategoryIconColor } from "@/lib/category-colors";
 
 type SearchBarProps = {
   placeholder: string;
@@ -117,7 +118,9 @@ export default function SearchBar({ placeholder, searchLabel }: SearchBarProps) 
                       onClick={() => setIsOpen(false)}
                       className="flex items-center gap-4 px-6 py-4 transition hover:bg-zinc-50 dark:hover:bg-zinc-800"
                     >
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+                      <span
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${getCategoryIconColor(tool.category)}`}
+                      >
                         <Icon size={18} />
                       </span>
                       <span>

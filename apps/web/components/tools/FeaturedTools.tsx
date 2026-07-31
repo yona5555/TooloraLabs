@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { tools } from "@/data/tools";
 import { getToolIcon } from "@/lib/tool-icons";
+import { getCategoryIconColor } from "@/lib/category-colors";
 
 export default function FeaturedTools() {
   const t = useTranslations("featuredTools");
@@ -36,7 +37,9 @@ export default function FeaturedTools() {
               href={`/tools/${tool.slug}`}
               className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500/40"
             >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+              <div
+                className={`mb-5 flex h-14 w-14 items-center justify-center rounded-xl ${getCategoryIconColor(tool.category)}`}
+              >
                 <Icon size={26} strokeWidth={2} />
               </div>
 
