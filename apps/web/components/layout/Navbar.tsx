@@ -16,16 +16,9 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/80">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-bold text-white">
-            T
-          </div>
-          <div className="leading-tight">
-            <div className="text-lg font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-              TooloraLabs
-            </div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400">{t("tagline")}</div>
-          </div>
+        <Link href="/" className="text-xl font-extrabold tracking-tight">
+          <span className="text-zinc-900 dark:text-zinc-50">Toolora</span>
+          <span className="text-blue-600 dark:text-blue-400">Labs</span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
