@@ -8,6 +8,7 @@ import { UnitConverter, type UnitCategory } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CopyButton from "@/components/tool-ui/CopyButton";
 import { UNIT_CATEGORIES, UNITS_BY_CATEGORY, DEFAULT_UNIT } from "./units";
 
 const tool = new UnitConverter();
@@ -146,6 +147,11 @@ export default function UnitConverterTool() {
           <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
             {t(`units.${to}`)}
           </p>
+          <div className="mt-4 flex justify-center">
+            <CopyButton
+              text={`${formatLocalizedNumber(result, digitStyle, { maximumFractionDigits: 6 })} ${t(`units.${to}`)}`}
+            />
+          </div>
         </div>
       )}
     </div>
