@@ -1,5 +1,4 @@
 import { setRequestLocale } from "next-intl/server";
-import TrustBar from "@/components/layout/TrustBar";
 import Hero from "@/components/hero/Hero";
 import Categories from "@/components/categories/Categories";
 import FeaturedTools from "@/components/tools/FeaturedTools";
@@ -19,8 +18,6 @@ export default async function Home({ params }: HomeProps) {
       <FeaturedTools />
 
       <Categories />
-
-      <TrustBar />
     </main>
   );
 }

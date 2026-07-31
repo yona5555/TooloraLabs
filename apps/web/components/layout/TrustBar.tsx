@@ -28,17 +28,15 @@ export default function TrustBar() {
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-24">
-      <div className="grid grid-cols-2 gap-6 rounded-3xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-900 md:grid-cols-4">
-        {items.map((item) => (
-          <div key={item.label} className="flex items-center gap-3">
-            <item.icon size={22} className={item.color} />
-            <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-              {item.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </section>
+    <div className="grid grid-cols-2 gap-4 rounded-2xl border border-zinc-200 bg-white p-5 text-start dark:border-zinc-800 dark:bg-zinc-900">
+      {items.map((item) => (
+        <div key={item.label} className="flex items-center gap-2">
+          <item.icon size={18} className={item.color} />
+          <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
+            {item.label}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
