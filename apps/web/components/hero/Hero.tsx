@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import SearchBar from "./SearchBar";
 import Stats from "./Stats";
 import HeroBackground from "./HeroBackground";
+import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
 
 export default function Hero() {
   const t = useTranslations("hero");
@@ -21,7 +22,12 @@ export default function Hero() {
         <p className="mt-8 max-w-3xl text-xl leading-8 text-zinc-600 dark:text-zinc-300">
           {t("subtitle")}
         </p>
-        <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
+
+        <div className="mt-12 grid w-full max-w-6xl items-start gap-8 lg:grid-cols-2">
+          <ScientificCalculator />
+          <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
+        </div>
+
         <Stats />
       </div>
     </section>
