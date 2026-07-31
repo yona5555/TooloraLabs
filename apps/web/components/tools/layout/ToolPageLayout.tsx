@@ -1,7 +1,11 @@
 import { ReactNode } from "react";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 type ToolPageLayoutProps = {
   category: string;
+  categorySlug: string;
+  backLabel: string;
   title: string;
   description: string;
   children?: ReactNode;
@@ -9,13 +13,23 @@ type ToolPageLayoutProps = {
 
 export default function ToolPageLayout({
   category,
+  categorySlug,
+  backLabel,
   title,
   description,
   children,
 }: ToolPageLayoutProps) {
   return (
     <main className="mx-auto max-w-5xl px-6 py-20">
-      <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+      <Link
+        href={`/categories/${categorySlug}`}
+        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
+      >
+        <ArrowLeft size={16} />
+        {backLabel}
+      </Link>
+
+      <span className="mt-6 block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {category}
       </span>
 

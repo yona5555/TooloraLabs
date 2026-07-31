@@ -110,6 +110,8 @@ export default async function ToolPage({
   return (
     <ToolPageLayout
       category={tc(`${tool.category}.title`)}
+      categorySlug={tool.category}
+      backLabel={tp("back", { category: tc(`${tool.category}.title`) })}
       title={title}
       description={description}
     >
