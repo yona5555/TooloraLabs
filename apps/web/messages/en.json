@@ -607,6 +607,39 @@
       "errors": {
         "required": "Please enter some text."
       }
+    },
+    "invoice-generator": {
+      "title": "Invoice Generator",
+      "description": "Build an itemized invoice with subtotal, discount, and tax.",
+      "form": {
+        "itemDescription": "Description",
+        "itemDescriptionPlaceholder": "Item or service",
+        "itemQuantity": "Quantity",
+        "itemUnitPrice": "Unit Price",
+        "addItem": "Add Item",
+        "removeItem": "Remove item",
+        "taxRate": "Tax Rate (%)",
+        "discountPercent": "Discount (%)",
+        "generate": "Generate Invoice"
+      },
+      "result": {
+        "title": "Invoice",
+        "item": "Item",
+        "quantity": "Qty",
+        "unitPrice": "Unit Price",
+        "lineTotal": "Total",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "tax": "Tax",
+        "grandTotal": "Grand Total"
+      },
+      "errors": {
+        "required": "Please enter valid tax and discount values.",
+        "emptyItems": "Add at least one item.",
+        "invalidItem": "Each item needs a description, a quantity greater than 0, and a non-negative unit price.",
+        "invalidTaxRate": "Tax rate must not be negative.",
+        "invalidDiscount": "Discount must be between 0 and 100%."
+      }
     }
   },
   "trustBar": {

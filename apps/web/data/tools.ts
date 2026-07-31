@@ -170,4 +170,12 @@ export const tools: Tool[] = [
     featured: false,
     keywords: ["duplicate", "lines", "remove", "unique", "list", "file"],
   },
+  {
+    slug: "invoice-generator",
+    title: "Invoice Generator",
+    category: "calculators",
+    description: "Build an itemized invoice with subtotal, discount, and tax.",
+    featured: false,
+    keywords: ["invoice", "billing", "receipt", "tax", "business"],
+  },
 ];

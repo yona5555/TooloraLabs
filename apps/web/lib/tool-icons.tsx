@@ -13,6 +13,7 @@ import {
   Percent,
   QrCode,
   Receipt,
+  ReceiptText,
   Ruler,
   Scale,
   Sigma,
@@ -42,6 +43,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "file-size-converter": HardDrive,
   "file-name-sanitizer": FilePen,
   "duplicate-line-remover": ListX,
+  "invoice-generator": ReceiptText,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

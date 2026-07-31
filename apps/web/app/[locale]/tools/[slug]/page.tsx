@@ -20,6 +20,7 @@ import CsvJsonConverterUI from "@/components/tools/csv-json-converter/CsvJsonCon
 import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSizeConverterTool";
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
+import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -153,6 +154,9 @@ export default async function ToolPage({
       break;
     case "duplicate-line-remover":
       component = <DuplicateLineRemoverTool />;
+      break;
+    case "invoice-generator":
+      component = <InvoiceGeneratorTool />;
       break;
   }
 

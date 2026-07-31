@@ -7,3 +7,4 @@ export * from "./TipCalculator";
 export * from "./DiscountCalculator";
 export * from "./SalesTaxCalculator";
 export * from "./ScientificCalculator";
+export * from "./InvoiceGenerator";

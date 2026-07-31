@@ -607,6 +607,39 @@
       "errors": {
         "required": "يرجى إدخال نص."
       }
+    },
+    "invoice-generator": {
+      "title": "مولّد الفواتير",
+      "description": "أنشئ فاتورة مفصّلة بالبنود مع المجموع الفرعي والخصم والضريبة.",
+      "form": {
+        "itemDescription": "الوصف",
+        "itemDescriptionPlaceholder": "منتج أو خدمة",
+        "itemQuantity": "الكمية",
+        "itemUnitPrice": "سعر الوحدة",
+        "addItem": "إضافة بند",
+        "removeItem": "حذف البند",
+        "taxRate": "نسبة الضريبة (%)",
+        "discountPercent": "نسبة الخصم (%)",
+        "generate": "إنشاء الفاتورة"
+      },
+      "result": {
+        "title": "الفاتورة",
+        "item": "البند",
+        "quantity": "الكمية",
+        "unitPrice": "سعر الوحدة",
+        "lineTotal": "الإجمالي",
+        "subtotal": "المجموع الفرعي",
+        "discount": "الخصم",
+        "tax": "الضريبة",
+        "grandTotal": "الإجمالي الكلي"
+      },
+      "errors": {
+        "required": "يرجى إدخال قيم صحيحة للضريبة والخصم.",
+        "emptyItems": "أضف بندًا واحدًا على الأقل.",
+        "invalidItem": "كل بند يحتاج وصفًا وكمية أكبر من صفر وسعر وحدة غير سالب.",
+        "invalidTaxRate": "يجب ألا تكون نسبة الضريبة سالبة.",
+        "invalidDiscount": "يجب أن تكون نسبة الخصم بين 0 و100%."
+      }
     }
   },
   "trustBar": {
