@@ -8,6 +8,7 @@ import PercentageCalculator from "@/components/tools/percentage-calculator/Perce
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
 import SalesTaxCalculator from "@/components/tools/sales-tax-calculator/SalesTaxCalculator";
+import JSONFormatterTool from "@/components/tools/json-formatter/JSONFormatterTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -105,6 +106,9 @@ export default async function ToolPage({
       break;
     case "sales-tax-calculator":
       component = <SalesTaxCalculator />;
+      break;
+    case "json-formatter":
+      component = <JSONFormatterTool />;
       break;
   }
 
