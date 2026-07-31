@@ -9,3 +9,4 @@ export * from "./SalesTaxCalculator";
 export * from "./ScientificCalculator";
 export * from "./InvoiceGenerator";
 export * from "./InventoryValuationCalculator";
+export * from "./BreakEvenCalculator";

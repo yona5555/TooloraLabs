@@ -19,6 +19,7 @@ import {
   Scale,
   Sigma,
   Tag,
+  Target,
   Type,
   Wrench,
   type LucideIcon,
@@ -46,6 +47,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "duplicate-line-remover": ListX,
   "invoice-generator": ReceiptText,
   "inventory-valuation-calculator": Boxes,
+  "break-even-calculator": Target,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

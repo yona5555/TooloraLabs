@@ -22,6 +22,7 @@ import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNa
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
 import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
 import InventoryValuationTool from "@/components/tools/inventory-valuation-calculator/InventoryValuationTool";
+import BreakEvenCalculatorTool from "@/components/tools/break-even-calculator/BreakEvenCalculatorTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -161,6 +162,9 @@ export default async function ToolPage({
       break;
     case "inventory-valuation-calculator":
       component = <InventoryValuationTool />;
+      break;
+    case "break-even-calculator":
+      component = <BreakEvenCalculatorTool />;
       break;
   }
 

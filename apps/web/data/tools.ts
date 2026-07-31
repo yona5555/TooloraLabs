@@ -186,4 +186,12 @@ export const tools: Tool[] = [
     featured: false,
     keywords: ["inventory", "stock", "valuation", "warehouse", "reorder", "business"],
   },
+  {
+    slug: "break-even-calculator",
+    title: "Break-Even Point Calculator",
+    category: "calculators",
+    description: "Find how many units you need to sell to cover your fixed costs.",
+    featured: false,
+    keywords: ["break-even", "business", "profit", "fixed costs", "unit economics"],
+  },
 ];
