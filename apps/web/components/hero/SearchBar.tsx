@@ -76,9 +76,9 @@ export default function SearchBar({ placeholder, searchLabel }: SearchBarProps) 
     <div ref={containerRef} className="relative w-full">
       <form
         onSubmit={handleSubmit}
-        className="group flex h-18 items-center gap-4 rounded-full border border-zinc-200 bg-white p-2 shadow-xl transition-all duration-300 hover:border-blue-300 hover:shadow-2xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500 dark:focus-within:ring-blue-500/20"
+        className="group flex h-18 w-full items-center gap-4 rounded-full border border-zinc-200 bg-white p-2 shadow-xl transition-all duration-300 hover:border-blue-300 hover:shadow-2xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500 dark:focus-within:ring-blue-500/20"
       >
-        <div className="flex shrink-0 items-center pl-5 text-zinc-400 dark:text-zinc-500">
+        <div className="flex shrink-0 items-center ps-5 text-zinc-400 dark:text-zinc-500">
           <SearchIcon size={22} />
         </div>
         <input
