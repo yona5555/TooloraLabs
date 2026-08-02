@@ -168,6 +168,8 @@ export default async function ToolPage({
       break;
   }
 
+  const isAboveFoldLayout = slug === "bmi-calculator";
+
   return (
     <>
       <ToolPageLayout
@@ -176,10 +178,14 @@ export default async function ToolPage({
         backLabel={tp("back", { category: tc(`${tool.category}.title`) })}
         title={title}
         description={description}
+        contentWidth={isAboveFoldLayout ? "wide" : "default"}
+        compact={isAboveFoldLayout}
       >
         {component}
       </ToolPageLayout>
-      <RelatedTools locale={locale} category={tool.category} currentSlug={slug} />
+      {!isAboveFoldLayout && (
+        <RelatedTools locale={locale} category={tool.category} currentSlug={slug} />
+      )}
     </>
   );
 }

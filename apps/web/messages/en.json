@@ -5,7 +5,8 @@
       "copied": "Copied!",
       "download": "Download",
       "print": "Print"
-    }
+    },
+    "adSpace": "Ad Space"
   },
   "site": {
     "title": "TooloraLabs",
@@ -269,7 +270,7 @@
           "disclaimer": "BMI is a general screening indicator, not a medical diagnosis. It doesn't account for muscle mass, bone density, or body composition — always discuss your results with a qualified healthcare professional."
         },
         "categoryTable": {
-          "title": "Adult BMI Categories",
+          "title": "Adult BMI Categories (WHO Classification)",
           "intro": "The World Health Organization classifies adult BMI into the following ranges. These apply to adults aged 20 and over and are the same for men and women.",
           "rows": [
             {
@@ -305,17 +306,6 @@
               "range": "40.0 and above"
             }
           ]
-        },
-        "chart": {
-          "title": "Where You Stand on the BMI Scale",
-          "description": "This visual scale groups the categories above into four broad zones. Once you calculate your BMI, your position is marked on the scale below.",
-          "zones": {
-            "underweight": "Underweight",
-            "normal": "Normal",
-            "overweight": "Overweight",
-            "obese": "Obese"
-          },
-          "yourBmi": "Your BMI"
         },
         "risksOverweight": {
           "title": "Health Risks Linked to Excess Weight",
@@ -361,7 +351,7 @@
           "note": "Both formulas produce the same BMI value — the constant 703 simply converts pounds and inches into the metric equivalent."
         },
         "example": {
-          "title": "Worked Example",
+          "title": "Worked Example: How to Calculate BMI Step by Step",
           "intro": "Let's calculate the BMI for a person who is 180 cm tall and weighs 75 kg.",
           "steps": [
             {
@@ -380,7 +370,7 @@
           "result": "This person's BMI is 23.1, which falls within the Normal Weight range (18.5–24.9)."
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Frequently Asked Questions About BMI",
           "items": [
             {
               "question": "Is BMI accurate for athletes and very muscular people?",
@@ -407,7 +397,126 @@
               "answer": "Not necessarily. BMI is only one indicator. Factors such as diet quality, physical activity, waist circumference, blood pressure, and cholesterol levels all play an important role in overall health."
             }
           ]
+        },
+        "primeIndex": {
+          "title": "BMI Prime and the Ponderal Index",
+          "intro": "Two related measures refine what a plain BMI number tells you: BMI Prime expresses BMI as a ratio to the upper limit of normal weight, while the Ponderal Index adjusts for height using volume instead of area — making it more reliable for very tall or short individuals.",
+          "prime": {
+            "label": "BMI Prime",
+            "formula": "BMI Prime = BMI ÷ 25",
+            "note": "A BMI Prime below 1.0 falls within the normal-weight upper limit; above 1.0 indicates overweight or obesity in direct proportion to the excess."
+          },
+          "ponderal": {
+            "label": "Ponderal Index",
+            "formula": "Ponderal Index = weight (kg) ÷ height (m)³",
+            "note": "Because it divides by height cubed instead of squared, the Ponderal Index scales more accurately with body volume and is often preferred in pediatric and neonatal growth assessments."
+          },
+          "example": {
+            "title": "Worked Example: BMI Prime and Ponderal Index",
+            "intro": "Using the same person from before — 180 cm tall, 75 kg — here's how both measures are calculated.",
+            "primeSteps": [
+              {
+                "label": "Divide BMI by 25",
+                "value": "23.1 ÷ 25 = 0.92"
+              }
+            ],
+            "primeResult": "A BMI Prime of 0.92 confirms this person is within the normal-weight range (below 1.0).",
+            "ponderalSteps": [
+              {
+                "label": "Cube the height in meters",
+                "value": "1.80 × 1.80 × 1.80 = 5.83 m³"
+              },
+              {
+                "label": "Divide weight by height cubed",
+                "value": "75 ÷ 5.83 = 12.9 kg/m³"
+              }
+            ],
+            "ponderalResult": "This person's Ponderal Index is approximately 12.9 kg/m³."
+          }
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool: The Story and Science of BMI",
+          "history": {
+            "title": "Where BMI Came From",
+            "paragraph": "BMI traces back to the Belgian mathematician and statistician Adolphe Quetelet, who developed the weight-to-height-squared ratio in the 1830s while studying the statistical properties of the ‘average man’ across large populations. His goal wasn't individual diagnosis — it was a population-level tool to describe how body weight related to height across a society. The formula stayed largely a statistical curiosity for over a century until physiologist Ancel Keys popularized it as ‘Body Mass Index’ in a 1972 study comparing methods for estimating body fat across large groups, after finding it correlated better with body fat than competing indices of the time."
+          },
+          "equipment": {
+            "title": "The Equipment Behind an Accurate Measurement",
+            "paragraph": "A reliable BMI calculation depends on two simple but precise instruments: a calibrated medical scale and a stadiometer (a vertical ruler with a sliding headpiece) for standing height. Clinical-grade scales are calibrated regularly and read in fine increments, while typical home bathroom scales can drift several hundred grams to a kilogram out of calibration over time — enough to shift a borderline BMI result into a different category. For the same reason, height is more accurately measured standing barefoot against a wall-mounted stadiometer than estimated or self-reported."
+          },
+          "modernDevelopments": {
+            "title": "Beyond BMI: Modern Alternatives",
+            "paragraph": "Because BMI can't separate fat from muscle, clinical and research settings increasingly turn to more direct methods: DEXA (Dual-Energy X-ray Absorptiometry) scans estimate body-fat percentage and bone density with high precision, bioelectrical impedance scales estimate body composition through a small electrical current, and waist-to-hip ratio adds a measure of fat distribution that BMI ignores entirely. These methods are more accurate but require specialized equipment, which is why BMI remains the standard first-pass screening tool."
+          },
+          "academicPath": {
+            "title": "Studying This Field: Nutrition Science and Public Health",
+            "intro": "BMI sits at the intersection of nutrition science and public health — the academic field concerned with measuring, understanding, and improving population-level health outcomes related to body weight and nutrition. Here are five globally top-ranked institutions for Public Health (ShanghaiRanking's Global Ranking of Academic Subjects, 2025), plus one leading regional option:",
+            "universities": [
+              {
+                "name": "Harvard University — T.H. Chan School of Public Health",
+                "note": "Ranked #1 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.hsph.harvard.edu/",
+                "online": "Offers a fully online MPH-Generalist track plus several online certificate programs."
+              },
+              {
+                "name": "Johns Hopkins University — Bloomberg School of Public Health",
+                "note": "Ranked #2 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://publichealth.jhu.edu/",
+                "online": "Its MPH can be completed largely online after a short in-person orientation."
+              },
+              {
+                "name": "London School of Hygiene & Tropical Medicine (LSHTM)",
+                "note": "Ranked #3 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.lshtm.ac.uk/",
+                "online": "Offers a full MSc in Public Health entirely by distance learning."
+              },
+              {
+                "name": "University College London (UCL)",
+                "note": "Ranked #4 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ucl.ac.uk/population-health-sciences/",
+                "online": "Offers a fully online Master of Public Health (MPH)."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ndph.ox.ac.uk/",
+                "online": "No full online degree in this field; offers short online lifelong-learning courses in nutrition instead."
+              },
+              {
+                "name": "American University of Beirut (AUB) — Nutrition and Food Sciences",
+                "note": "One of the Arab world's most established nutrition and dietetics programs, at a university ranked among the region's top institutions.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/Nutrition.aspx",
+                "online": "Not currently offered as an online program, per the department's official page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Global BMI Mortality Collaboration. Body-mass index and all-cause mortality: individual-participant-data meta-analysis of 239 prospective studies in four continents. The Lancet, vol. 388, 2016, pp. 776–786.",
+          "note": "This meta-analysis pooled data from 10.6 million adults across 239 studies to examine how BMI relates to mortality risk — one of the largest bodies of evidence behind the WHO's adult BMI categories.",
+          "doiLabel": "DOI",
+          "doi": "10.1016/S0140-6736(16)30175-1",
+          "readOriginal": "Read the Original Study",
+          "url": "https://www.thelancet.com/article/S0140-6736(16)30175-1/fulltext"
+        },
+        "bodyLevels": {
+          "title": "What Different BMI Levels Look Like",
+          "intro": "These simplified outlines show how body width scales schematically across BMI levels. They're an illustration of the number, not a depiction of any real body — actual body shape varies widely between people who share the same BMI."
+        },
+        "composition": {
+          "title": "Same BMI, Different Bodies",
+          "intro": "Because BMI can't distinguish muscle from fat, two people can share an identical BMI while looking — and being — very different physically. This is one of the index's clearest limitations.",
+          "bmiLabel": "BMI 27",
+          "muscularLabel": "High muscle mass",
+          "fatLabel": "Higher body fat"
         }
+      },
+      "aboveFold": {
+        "resultTitle": "Your Result",
+        "healthyRangeLabel": "Healthy weight range",
+        "bmiPrimeLabel": "BMI Prime",
+        "kgUnit": "kg"
       }
     },
     "mortgage-calculator": {
