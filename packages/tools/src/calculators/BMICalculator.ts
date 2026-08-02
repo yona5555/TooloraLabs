@@ -10,6 +10,27 @@ export type BMIResult = {
 
 export type BMIInput = { heightCm: number; weightKg: number };
 
+export type Gender = "male" | "female";
+
+/**
+ * Deurenberg et al. (1991), British Journal of Nutrition 65:105-114 — the
+ * adult and youth (<=15) prediction formulas for body-fat percentage from
+ * BMI, age and sex. An estimate, not a direct measurement.
+ */
+export function estimateBodyFatPercentage(
+  bmi: number,
+  age: number,
+  gender: Gender
+): number {
+  const sex = gender === "male" ? 1 : 0;
+  const raw =
+    age <= 15
+      ? 1.51 * bmi - 0.7 * age - 3.6 * sex + 1.4
+      : 1.2 * bmi + 0.23 * age - 10.8 * sex - 5.4;
+
+  return Number(Math.max(raw, 0).toFixed(1));
+}
+
 export class BMICalculator extends BaseCalculator<BMIInput, BMIResult> {
   metadata = {
     id: "bmi-calculator",

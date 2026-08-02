@@ -5,11 +5,12 @@ type ToolInputProps = InputHTMLAttributes<HTMLInputElement> & {
   hint?: string;
 };
 
-const NUMERIC_CHAR = /[0-9٠-٩۰-۹.٫-]/;
+const DECIMAL_CHAR = /[0-9٠-٩۰-۹.٫-]/;
+const DIGIT_ONLY_CHAR = /[0-9٠-٩۰-۹]/;
 
-function sanitizeNumericValue(value: string): string {
+function sanitizeNumericValue(value: string, pattern: RegExp): string {
   return Array.from(value)
-    .filter((char) => NUMERIC_CHAR.test(char))
+    .filter((char) => pattern.test(char))
     .join("");
 }
 
@@ -21,11 +22,12 @@ export default function ToolInput({
   onChange,
   ...props
 }: ToolInputProps) {
-  const isNumeric = inputMode === "decimal";
+  const pattern =
+    inputMode === "decimal" ? DECIMAL_CHAR : inputMode === "numeric" ? DIGIT_ONLY_CHAR : null;
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    if (isNumeric) {
-      const sanitized = sanitizeNumericValue(e.target.value);
+    if (pattern) {
+      const sanitized = sanitizeNumericValue(e.target.value, pattern);
       if (sanitized !== e.target.value) {
         e.target.value = sanitized;
       }

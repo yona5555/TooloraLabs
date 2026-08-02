@@ -4,3 +4,12 @@ export type BMIResult = {
   healthyMinWeight: number;
   healthyMaxWeight: number;
 };
+
+export type UnitSystem = "metric" | "us";
+
+export type BMIExtendedResult = BMIResult & {
+  weightKg: number;
+  heightCm: number;
+  ponderalIndex: number;
+  bodyFatEstimate: number;
+};
