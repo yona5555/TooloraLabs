@@ -10,6 +10,7 @@ import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import BMIResult from "./BMIResult";
+import BMIEducation from "./BMIEducation";
 import type { BMIResult as BMIResultType } from "./types";
 
 const tool = new BMICalculatorTool();
@@ -60,37 +61,40 @@ export default function BMICalculator() {
   }
 
   return (
-    <ToolCard title={t("title")} description={t("description")}>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <ToolInput
-          type="text" inputMode="decimal"
-          placeholder={t("form.heightPlaceholder")}
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
-        <ToolInput
-          type="text" inputMode="decimal"
-          placeholder={t("form.weightPlaceholder")}
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-        />
-        {error && (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-            {error}
+    <>
+      <ToolCard title={t("title")} description={t("description")}>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <ToolInput
+            type="text" inputMode="decimal"
+            placeholder={t("form.heightPlaceholder")}
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+          />
+          <ToolInput
+            type="text" inputMode="decimal"
+            placeholder={t("form.weightPlaceholder")}
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+          />
+          {error && (
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
+              {error}
+            </div>
+          )}
+          <div className="flex flex-wrap gap-4">
+            <ToolButton type="submit">{t("form.calculate")}</ToolButton>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            >
+              {t("form.reset")}
+            </button>
           </div>
-        )}
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t("form.calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t("form.reset")}
-          </button>
-        </div>
-        {result && <BMIResult result={result} digitStyle={digitStyle} />}
-      </form>
-    </ToolCard>
+          {result && <BMIResult result={result} digitStyle={digitStyle} />}
+        </form>
+      </ToolCard>
+      <BMIEducation bmi={result?.bmi} />
+    </>
   );
 }
