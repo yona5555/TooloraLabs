@@ -37,13 +37,12 @@ export default function BMIScaleChart({ bmi, labels }: BMIScaleChartProps) {
   return (
     // Kept LTR regardless of page direction so the ascending numeric scale reads intuitively in RTL locales too.
     <div dir="ltr" className="w-full">
-      <svg viewBox={`-16 0 ${WIDTH + 32} 62`} role="img" className="w-full">
-        {bmi !== undefined && (
-          <title>
-            {labels.yourBmi}: {bmi}
-          </title>
-        )}
-
+      <svg
+        viewBox={`-16 0 ${WIDTH + 32} 62`}
+        role="img"
+        aria-label={bmi !== undefined ? `${labels.yourBmi}: ${bmi}` : undefined}
+        className="w-full"
+      >
         {ZONES.map((zone) => {
           const x = scaleX(zone.from);
           const w = scaleX(zone.to) - x;
