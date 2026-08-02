@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem("theme");var d=s?s==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;if(d)document.documentElement.classList.add("dark");}catch(e){}})();`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "TooloraLabs",
   description: "All the Tools You Need in One Place",
 };

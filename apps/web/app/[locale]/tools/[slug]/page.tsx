@@ -26,6 +26,7 @@ import BreakEvenCalculatorTool from "@/components/tools/break-even-calculator/Br
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
+import { SITE_URL } from "@/lib/site";
 
 type ToolPageProps = {
   params: Promise<{
@@ -52,9 +53,29 @@ export async function generateMetadata({
     };
   }
   const t = await getTranslations({ locale, namespace: "tools" });
+  const pageTitle = `${t(`${slug}.title`)} | TooloraLabs`;
+  const description = t(`${slug}.description`);
+  const path = `/tools/${slug}`;
+
   return {
-    title: `${t(`${slug}.title`)} | TooloraLabs`,
-    description: t(`${slug}.description`),
+    title: pageTitle,
+    description,
+    alternates: {
+      canonical: `/${locale}${path}`,
+      languages: {
+        en: `/en${path}`,
+        ar: `/ar${path}`,
+      },
+    },
+    openGraph: {
+      title: pageTitle,
+      description,
+      url: `/${locale}${path}`,
+      siteName: "TooloraLabs",
+      locale: locale === "ar" ? "ar_AR" : "en_US",
+      alternateLocale: locale === "ar" ? "en_US" : "ar_AR",
+      type: "website",
+    },
   };
 }
 
@@ -170,8 +191,29 @@ export default async function ToolPage({
 
   const isAboveFoldLayout = slug === "bmi-calculator";
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: title,
+    description,
+    url: `${SITE_URL}/${locale}/tools/${slug}`,
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Any",
+    inLanguage: locale,
+    isAccessibleForFree: true,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ToolPageLayout
         category={tc(`${tool.category}.title`)}
         categorySlug={tool.category}
