@@ -6,157 +6,270 @@ import { useTranslations } from "next-intl";
 import { MortgageCalculator as MortgageCalculatorTool } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
-import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
-import PrintButton from "@/components/tool-ui/PrintButton";
-import { usePrintExport } from "@/hooks/usePrintExport";
-
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import MortgageInputPanel from "./MortgageInputPanel";
 import MortgageResult from "./MortgageResult";
-import type { MortgageResult as MortgageResultType } from "./types";
+import MortgageAffordabilityMini from "./MortgageAffordabilityMini";
+import MortgageRelatedSidebar from "./MortgageRelatedSidebar";
+import MortgagePayoffChart from "./MortgagePayoffChart";
+import MortgageEducation from "./MortgageEducation";
+import type { DownPaymentMode, MortgageExtendedResult } from "./types";
 
 const tool = new MortgageCalculatorTool();
 
 const MAX_HOME_PRICE = 50_000_000;
+const MAX_INTEREST_RATE = 25;
+const MIN_LOAN_TERM_YEARS = 1;
+const MAX_LOAN_TERM_YEARS = 50;
+
+const DEFAULT_HOME_PRICE = 400_000;
+const DEFAULT_DOWN_PAYMENT_PERCENT = 20;
+const DEFAULT_INTEREST_RATE = 6.5;
+const DEFAULT_LOAN_TERM_YEARS = 30;
+const DEFAULT_PROPERTY_TAX = 4_800;
+const DEFAULT_INSURANCE = 1_500;
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
+}
+
+function buildResult(
+  homePrice: number,
+  downPayment: number,
+  annualInterestRate: number,
+  loanTermYears: number,
+  annualPropertyTax: number,
+  annualHomeInsurance: number,
+  monthlyHOA: number,
+  monthlyPMI: number,
+  extraMonthlyPayment: number
+): MortgageExtendedResult {
+  const output = tool.execute(
+    {
+      homePrice,
+      downPayment,
+      annualInterestRate,
+      loanTermYears,
+      annualPropertyTax,
+      annualHomeInsurance,
+      monthlyHOA,
+      monthlyPMI,
+      extraMonthlyPayment,
+    },
+    { locale: "en-US" }
+  );
+  return output.data;
+}
+
+const DEFAULT_DOWN_PAYMENT_AMOUNT = Math.round(DEFAULT_HOME_PRICE * (DEFAULT_DOWN_PAYMENT_PERCENT / 100));
 
 export default function MortgageCalculator() {
-  const t = useTranslations("tools.mortgage-calculator.form");
-  const tErrors = useTranslations("tools.mortgage-calculator.errors");
-  const [homePrice, setHomePrice] = useState("");
-  const [downPayment, setDownPayment] = useState("");
-  const [interestRate, setInterestRate] = useState("");
-  const [loanYears, setLoanYears] = useState("");
-  const [propertyTax, setPropertyTax] = useState("0");
-  const [insurance, setInsurance] = useState("0");
+  const t = useTranslations("tools.mortgage-calculator");
+
+  const [homePrice, setHomePrice] = useState(String(DEFAULT_HOME_PRICE));
+  const [downPaymentMode, setDownPaymentMode] = useState<DownPaymentMode>("percent");
+  const [downPaymentAmount, setDownPaymentAmount] = useState(String(DEFAULT_DOWN_PAYMENT_AMOUNT));
+  const [downPaymentPercent, setDownPaymentPercent] = useState(String(DEFAULT_DOWN_PAYMENT_PERCENT));
+  const [interestRate, setInterestRate] = useState(String(DEFAULT_INTEREST_RATE));
+  const [loanTermYears, setLoanTermYears] = useState(String(DEFAULT_LOAN_TERM_YEARS));
+  const [propertyTax, setPropertyTax] = useState(String(DEFAULT_PROPERTY_TAX));
+  const [insurance, setInsurance] = useState(String(DEFAULT_INSURANCE));
   const [hoa, setHoa] = useState("0");
   const [pmi, setPmi] = useState("0");
+  const [extraMonthlyPayment, setExtraMonthlyPayment] = useState("0");
 
   const [error, setError] = useState("");
-  const [result, setResult] = useState<MortgageResultType | null>(null);
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const { printRef, handlePrint } = usePrintExport<HTMLDivElement>();
+  const [result, setResult] = useState<MortgageExtendedResult>(() =>
+    buildResult(
+      DEFAULT_HOME_PRICE,
+      DEFAULT_DOWN_PAYMENT_AMOUNT,
+      DEFAULT_INTEREST_RATE,
+      DEFAULT_LOAN_TERM_YEARS,
+      DEFAULT_PROPERTY_TAX,
+      DEFAULT_INSURANCE,
+      0,
+      0,
+      0
+    )
+  );
 
-  const handleCalculate = () => {
+  function handleDownPaymentModeChange(next: DownPaymentMode) {
+    if (next === downPaymentMode) return;
+
+    const homePriceValue = parseLocalizedNumber(homePrice);
+
+    if (next === "amount") {
+      const percentValue = parseLocalizedNumber(downPaymentPercent);
+      if (!Number.isNaN(homePriceValue) && !Number.isNaN(percentValue)) {
+        setDownPaymentAmount(String(Math.round(homePriceValue * (percentValue / 100))));
+      }
+    } else {
+      const amountValue = parseLocalizedNumber(downPaymentAmount);
+      if (!Number.isNaN(homePriceValue) && homePriceValue > 0 && !Number.isNaN(amountValue)) {
+        setDownPaymentPercent(String(round1((amountValue / homePriceValue) * 100)));
+      }
+    }
+
+    setDownPaymentMode(next);
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setError("");
-    setResult(null);
 
-    const parsedHomePrice = parseLocalizedNumber(homePrice);
-    const parsedDownPayment = parseLocalizedNumber(downPayment);
-    const parsedInterestRate = parseLocalizedNumber(interestRate);
-    const parsedLoanYears = parseLocalizedNumber(loanYears);
+    const homePriceValue = parseLocalizedNumber(homePrice);
+    if (!homePrice || Number.isNaN(homePriceValue)) {
+      setError(t("errors.required"));
+      return;
+    }
+    if (homePriceValue <= 0 || homePriceValue > MAX_HOME_PRICE) {
+      setError(t("errors.homePriceRange"));
+      return;
+    }
 
+    const downPaymentValue =
+      downPaymentMode === "percent"
+        ? homePriceValue * (parseLocalizedNumber(downPaymentPercent) / 100)
+        : parseLocalizedNumber(downPaymentAmount);
+    if (Number.isNaN(downPaymentValue)) {
+      setError(t("errors.required"));
+      return;
+    }
+    if (downPaymentValue < 0 || downPaymentValue >= homePriceValue) {
+      setError(t("errors.downPaymentRange"));
+      return;
+    }
+
+    const interestRateValue = parseLocalizedNumber(interestRate);
+    if (Number.isNaN(interestRateValue) || interestRateValue < 0 || interestRateValue > MAX_INTEREST_RATE) {
+      setError(t("errors.interestRateRange"));
+      return;
+    }
+
+    const loanTermValue = parseLocalizedNumber(loanTermYears);
+    if (Number.isNaN(loanTermValue) || loanTermValue < MIN_LOAN_TERM_YEARS || loanTermValue > MAX_LOAN_TERM_YEARS) {
+      setError(t("errors.loanTermRange"));
+      return;
+    }
+
+    const propertyTaxValue = parseLocalizedNumber(propertyTax);
+    const insuranceValue = parseLocalizedNumber(insurance);
+    const hoaValue = parseLocalizedNumber(hoa);
+    const pmiValue = parseLocalizedNumber(pmi);
+    const extraValue = parseLocalizedNumber(extraMonthlyPayment);
     if (
-      Number.isNaN(parsedHomePrice) ||
-      Number.isNaN(parsedDownPayment) ||
-      Number.isNaN(parsedInterestRate) ||
-      Number.isNaN(parsedLoanYears)
+      [propertyTaxValue, insuranceValue, hoaValue, pmiValue, extraValue].some(
+        (value) => Number.isNaN(value) || value < 0
+      )
     ) {
-      setError(tErrors("required"));
-      return;
-    }
-    if (parsedHomePrice <= 0 || parsedHomePrice > MAX_HOME_PRICE) {
-      setError(tErrors("homePriceRange"));
-      return;
-    }
-    if (parsedLoanYears < 1 || parsedLoanYears > 50) {
-      setError(tErrors("loanTermRange"));
+      setError(t("errors.negativeValue"));
       return;
     }
 
-    const output = tool.execute(
-      {
-        homePrice: parsedHomePrice,
-        downPayment: parsedDownPayment,
-        annualInterestRate: parsedInterestRate,
-        loanTermYears: parsedLoanYears,
-        annualPropertyTax: parseLocalizedNumber(propertyTax),
-        annualHomeInsurance: parseLocalizedNumber(insurance),
-        monthlyHOA: parseLocalizedNumber(hoa),
-        monthlyPMI: parseLocalizedNumber(pmi),
-      },
-      { locale: "en-US" }
+    setResult(
+      buildResult(
+        homePriceValue,
+        downPaymentValue,
+        interestRateValue,
+        loanTermValue,
+        propertyTaxValue,
+        insuranceValue,
+        hoaValue,
+        pmiValue,
+        extraValue
+      )
     );
-    setResult(output.data);
     setDigitStyle(
       resolveDigitStyle(
         homePrice,
-        downPayment,
+        downPaymentMode === "percent" ? downPaymentPercent : downPaymentAmount,
         interestRate,
-        loanYears,
+        loanTermYears,
         propertyTax,
         insurance,
         hoa,
-        pmi
+        pmi,
+        extraMonthlyPayment
       )
     );
-  };
+  }
+
+  function handleReset() {
+    setHomePrice(String(DEFAULT_HOME_PRICE));
+    setDownPaymentMode("percent");
+    setDownPaymentAmount(String(DEFAULT_DOWN_PAYMENT_AMOUNT));
+    setDownPaymentPercent(String(DEFAULT_DOWN_PAYMENT_PERCENT));
+    setInterestRate(String(DEFAULT_INTEREST_RATE));
+    setLoanTermYears(String(DEFAULT_LOAN_TERM_YEARS));
+    setPropertyTax(String(DEFAULT_PROPERTY_TAX));
+    setInsurance(String(DEFAULT_INSURANCE));
+    setHoa("0");
+    setPmi("0");
+    setExtraMonthlyPayment("0");
+    setError("");
+    setDigitStyle("western");
+    setResult(
+      buildResult(
+        DEFAULT_HOME_PRICE,
+        DEFAULT_DOWN_PAYMENT_AMOUNT,
+        DEFAULT_INTEREST_RATE,
+        DEFAULT_LOAN_TERM_YEARS,
+        DEFAULT_PROPERTY_TAX,
+        DEFAULT_INSURANCE,
+        0,
+        0,
+        0
+      )
+    );
+  }
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <ToolInput
-        label={t("homePrice")}
-        type="text" inputMode="decimal"
-        value={homePrice}
-        onChange={(e) => setHomePrice(e.target.value)}
-      />
-      <ToolInput
-        label={t("downPayment")}
-        type="text" inputMode="decimal"
-        value={downPayment}
-        onChange={(e) => setDownPayment(e.target.value)}
-      />
-      <ToolInput
-        label={t("interestRate")}
-        type="text" inputMode="decimal"
-        value={interestRate}
-        onChange={(e) => setInterestRate(e.target.value)}
-      />
-      <ToolInput
-        label={t("loanTerm")}
-        type="text" inputMode="decimal"
-        value={loanYears}
-        onChange={(e) => setLoanYears(e.target.value)}
-      />
-      <ToolInput
-        label={t("propertyTax")}
-        type="text" inputMode="decimal"
-        value={propertyTax}
-        onChange={(e) => setPropertyTax(e.target.value)}
-      />
-      <ToolInput
-        label={t("insurance")}
-        type="text" inputMode="decimal"
-        value={insurance}
-        onChange={(e) => setInsurance(e.target.value)}
-      />
-      <ToolInput
-        label={t("hoa")}
-        type="text" inputMode="decimal"
-        value={hoa}
-        onChange={(e) => setHoa(e.target.value)}
-      />
-      <ToolInput
-        label={t("pmi")}
-        type="text" inputMode="decimal"
-        value={pmi}
-        onChange={(e) => setPmi(e.target.value)}
-      />
-
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-          {error}
-        </div>
-      )}
-
-      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-
-      {result && (
-        <div ref={printRef} data-print-area className="space-y-6">
-          <div className="flex justify-end print:hidden">
-            <PrintButton onPrint={handlePrint} />
+    <>
+      <ToolAboveFold
+        input={
+          <MortgageInputPanel
+            homePrice={homePrice}
+            onHomePriceChange={setHomePrice}
+            downPaymentMode={downPaymentMode}
+            onDownPaymentModeChange={handleDownPaymentModeChange}
+            downPaymentAmount={downPaymentAmount}
+            onDownPaymentAmountChange={setDownPaymentAmount}
+            downPaymentPercent={downPaymentPercent}
+            onDownPaymentPercentChange={setDownPaymentPercent}
+            interestRate={interestRate}
+            onInterestRateChange={setInterestRate}
+            loanTermYears={loanTermYears}
+            onLoanTermYearsChange={setLoanTermYears}
+            propertyTax={propertyTax}
+            onPropertyTaxChange={setPropertyTax}
+            insurance={insurance}
+            onInsuranceChange={setInsurance}
+            hoa={hoa}
+            onHoaChange={setHoa}
+            pmi={pmi}
+            onPmiChange={setPmi}
+            extraMonthlyPayment={extraMonthlyPayment}
+            onExtraMonthlyPaymentChange={setExtraMonthlyPayment}
+            error={error}
+            onSubmit={handleSubmit}
+            onReset={handleReset}
+          />
+        }
+        result={
+          <div className="flex h-full flex-col gap-4">
+            <MortgageResult result={result} digitStyle={digitStyle} />
+            <MortgageAffordabilityMini />
           </div>
-          <MortgageResult result={result} digitStyle={digitStyle} />
-        </div>
-      )}
-    </div>
+        }
+        sidebar={<MortgageRelatedSidebar />}
+      />
+
+      <div className="mt-6">
+        <MortgagePayoffChart result={result} digitStyle={digitStyle} />
+      </div>
+
+      <MortgageEducation />
+    </>
   );
 }

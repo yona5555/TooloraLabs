@@ -850,38 +850,310 @@
     },
     "mortgage-calculator": {
       "title": "Mortgage Calculator",
-      "description": "Calculate monthly mortgage payments, total interest, and total repayment.",
+      "description": "Calculate your monthly mortgage payment, see a full amortization schedule, and find out exactly when PMI drops off.",
       "form": {
         "homePrice": "Home Price",
         "downPayment": "Down Payment",
+        "downPaymentPercentUnit": "%",
+        "downPaymentAmountUnit": "$",
         "interestRate": "Interest Rate (%)",
-        "loanTerm": "Loan Term (Years)",
+        "loanTerm": "Loan Term",
+        "loanTermPreset": "{years} yr",
+        "loanTermCustomHint": "Enter a custom term in years (1–50).",
+        "advancedTitle": "Taxes, Insurance & Extra Payments",
         "propertyTax": "Annual Property Tax",
         "insurance": "Annual Home Insurance",
-        "hoa": "Monthly HOA",
+        "hoa": "Monthly HOA Fee",
         "pmi": "Monthly PMI",
-        "calculate": "Calculate Mortgage"
+        "pmiHint": "Typically required by the lender when your down payment is below 20%.",
+        "extraMonthlyPayment": "Extra Monthly Payment",
+        "extraMonthlyPaymentHint": "Optional — paid on top of your required payment and applied directly to principal.",
+        "calculate": "Calculate Mortgage",
+        "reset": "Reset"
       },
       "errors": {
-        "required": "Please enter valid numbers for home price, down payment, interest rate, and loan term.",
+        "required": "Please enter a valid home price.",
         "homePriceRange": "Home price must be greater than 0 and no more than 50,000,000.",
-        "loanTermRange": "Loan term must be between 1 and 50 years."
+        "downPaymentRange": "Down payment must be zero or more, and less than the home price.",
+        "interestRateRange": "Interest rate must be between 0% and 25%.",
+        "loanTermRange": "Loan term must be between 1 and 50 years.",
+        "negativeValue": "Property tax, insurance, HOA, PMI, and extra payment must be zero or greater."
       },
-      "summary": {
-        "monthlyPayment": "Monthly Payment",
-        "monthlyPaymentDesc": "Including taxes, insurance, HOA and PMI.",
-        "totalPayment": "Total Payment",
-        "totalPaymentDesc": "Principal and interest paid over the loan term.",
-        "totalInterest": "Total Interest",
-        "totalInterestDesc": "Total borrowing cost."
+      "aboveFold": {
+        "resultTitle": "Your Monthly Payment",
+        "perMonth": "per month",
+        "perMonthShort": "mo",
+        "segmentPI": "Principal & Interest",
+        "segmentTax": "Property Tax",
+        "segmentInsurance": "Home Insurance",
+        "segmentHOA": "HOA",
+        "segmentPMI": "PMI",
+        "loanAmountLabel": "Loan Amount",
+        "loanToValueLabel": "Loan-to-Value",
+        "loanToValueNote": "The loan amount as a percentage of the home price — lenders use this ratio to decide whether PMI is required.",
+        "totalInterestLabel": "Total Interest",
+        "totalCostLabel": "Total Cost",
+        "payoffTimeLabel": "Payoff Time",
+        "payoffTimeValue": "{years}y {months}m",
+        "payoffTimeAcceleratedNote": "Shortened by your extra monthly payment.",
+        "pmiRemovalLabel": "PMI Removal (est.)",
+        "pmiRemovalValue": "Year {years}, month {months}",
+        "pmiRemovalNone": "Not applicable",
+        "pmiRemovalNote": "The estimated point your balance reaches 80% of the home's original value, when you can request PMI cancellation under federal law.",
+        "interestSavedLabel": "Interest Saved",
+        "interestSavedNote": "Interest you avoid paying thanks to your extra monthly payment, compared to the standard schedule.",
+        "monthsSavedLabel": "Time Saved",
+        "affordabilityMiniTitle": "How much home can I afford?",
+        "affordabilityMiniIntro": "A quick, independent estimate using the standard 28%/36% debt-to-income guideline lenders commonly reference.",
+        "affordabilityMiniIncome": "Monthly gross income",
+        "affordabilityMiniDebts": "Other monthly debts",
+        "affordabilityMiniRate": "Interest rate (%)",
+        "affordabilityMiniYears": "Loan term (years)",
+        "affordabilityMiniDownPercent": "Down payment (%)",
+        "affordabilityMiniResult": "Affordable payment: {payment}/mo — estimated home price: {homePrice}",
+        "affordabilityMiniPlaceholder": "Enter your income to see an estimate.",
+        "relatedAllTitle": "Other Calculators",
+        "searchNoResults": "No tools found."
       },
-      "breakdown": {
-        "heading": "Payment Breakdown",
-        "principalAndInterest": "Principal & Interest",
-        "propertyTax": "Property Tax",
-        "homeInsurance": "Home Insurance",
-        "hoa": "HOA",
-        "pmi": "PMI"
+      "education": {
+        "intro": {
+          "title": "What This Calculator Measures",
+          "paragraph1": "A mortgage is a loan secured by the property you're buying, structured so that a fixed monthly payment gradually eliminates a large balance over a period typically running 15 to 30 years. Almost every fixed-rate mortgage today is fully amortizing: each payment splits between interest owed on the remaining balance and principal that permanently reduces it, and that split shifts every month — early payments are mostly interest, and the very last payment is nearly all principal.",
+          "paragraph2": "This calculator computes your standard monthly principal-and-interest payment from your loan amount, rate, and term, then folds in the real recurring costs lenders typically collect alongside it — property tax, home insurance, HOA dues, and private mortgage insurance (PMI) — to show the payment you'll actually see leave your account. It also runs a full month-by-month amortization simulation behind the scenes, which is what lets it tell you exactly when PMI can come off and how much an extra payment would actually save, rather than relying on rough rules of thumb.",
+          "disclaimer": "This tool is for planning and educational purposes only. It does not constitute a loan offer, pre-approval, or financial advice, and actual loan terms, taxes, insurance premiums, and PMI rates set by a specific lender or insurer may differ from the estimates shown here."
+        },
+        "amortization": {
+          "title": "How Mortgage Amortization Works",
+          "intro": "Every fixed-rate, fully amortizing loan uses the same payment formula, regardless of the lender. Given the loan principal, the periodic interest rate, and the number of payments, the formula solves for the one constant payment that brings the balance to exactly zero on the final payment.",
+          "formula": {
+            "label": "Standard Monthly Payment Formula",
+            "formula": "M = P × [ r(1+r)ⁿ ] / [ (1+r)ⁿ − 1 ]",
+            "note": "M is the monthly principal-and-interest payment, P is the loan principal, r is the monthly interest rate (the annual rate divided by 12), and n is the total number of monthly payments (the loan term in years times 12). When r = 0, the formula reduces to simple division: M = P / n."
+          },
+          "example": {
+            "title": "Worked Example",
+            "intro": "Take this calculator's own defaults: a $400,000 home with a 20% down payment, a 6.5% annual rate, and a 30-year term.",
+            "steps": [
+              {
+                "label": "Loan principal (P)",
+                "value": "$400,000 − $80,000 = $320,000"
+              },
+              {
+                "label": "Monthly interest rate (r)",
+                "value": "6.5% / 12 = 0.005417"
+              },
+              {
+                "label": "Number of payments (n)",
+                "value": "30 × 12 = 360"
+              },
+              {
+                "label": "Monthly principal & interest (M)",
+                "value": "$2,022.62"
+              }
+            ],
+            "result": "Over 360 payments, that totals $728,142.36 paid — $320,000 of principal and $408,142.36 of interest, roughly 1.28× the loan amount, before taxes, insurance, HOA, or PMI are even added."
+          }
+        },
+        "paymentComponents": {
+          "title": "What Makes Up Your Monthly Payment",
+          "intro": "The number a lender actually asks you to pay each month — sometimes called PITI — is rarely just principal and interest. This calculator breaks it into every component that commonly makes up a US mortgage payment:",
+          "items": [
+            {
+              "label": "Principal & Interest (P&I)",
+              "description": "The fixed payment computed by the amortization formula above — the only component that actually retires the loan."
+            },
+            {
+              "label": "Property Tax",
+              "description": "Billed annually by the local government based on the assessed value of the home; most lenders collect a twelfth of the annual bill each month and pay the tax authority directly from an escrow account."
+            },
+            {
+              "label": "Home Insurance",
+              "description": "Hazard insurance protecting the physical structure, required by virtually every lender as a condition of the loan and typically collected monthly through the same escrow account as property tax."
+            },
+            {
+              "label": "HOA Fees",
+              "description": "A due paid directly to a homeowners' association when the property belongs to one — not collected by the lender, but included here because it's a real recurring cost of owning the home."
+            },
+            {
+              "label": "Private Mortgage Insurance (PMI)",
+              "description": "Required on most conventional loans when the down payment is below 20%; it protects the lender, not the borrower, against default — see below for exactly when it can be removed."
+            }
+          ]
+        },
+        "pmi": {
+          "title": "Private Mortgage Insurance: What It Is and How to Remove It",
+          "intro": "PMI isn't an optional add-on the borrower chooses — on a conventional loan, a lender is required to charge it whenever the down payment is below 20% (equivalently, the loan-to-value ratio is above 80%), because it protects the lender's exposure if the borrower defaults early, when equity is thin. Two exact thresholds are set by name in US federal law, the Homeowners Protection Act of 1998 (12 U.S.C. § 4902):",
+          "thresholds": {
+            "rows": [
+              {
+                "label": "Borrower-Requested Cancellation",
+                "threshold": "80% of original value",
+                "note": "Once your scheduled balance is projected to reach 80% of the home's original value, you can submit a written request to your servicer to cancel PMI, provided your payment history is current (12 U.S.C. § 4902(a))."
+              },
+              {
+                "label": "Automatic Termination",
+                "threshold": "78% of original value",
+                "note": "Even if you never ask, the servicer is legally required to automatically terminate PMI once your balance is first scheduled to reach 78% of the original value, as long as payments are current (12 U.S.C. § 4902(b))."
+              }
+            ]
+          },
+          "note": "Both thresholds are based on the home's original value and the loan's original amortization schedule — not on extra payments or market appreciation, unless you separately request a new appraisal-based cancellation. This calculator's “PMI Removal” estimate reflects the scheduled 80% threshold, adjusted for any extra monthly payment you've entered."
+        },
+        "extraPayments": {
+          "title": "The Real Impact of Paying a Little Extra Each Month",
+          "intro": "Because interest is charged only on the remaining balance, every extra dollar applied to principal today stops accruing interest for every remaining month of the loan — which is why even a modest recurring overpayment compounds into a disproportionately large reduction in total interest and loan term.",
+          "example": {
+            "title": "Worked Example",
+            "intro": "Using the same $320,000 loan at 6.5% over 30 years, adding just $200 to every monthly payment changes the outcome substantially:",
+            "steps": [
+              {
+                "label": "Standard payoff time",
+                "value": "360 months (30 years)"
+              },
+              {
+                "label": "Payoff time with +$200/month",
+                "value": "281 months (23 years, 5 months)"
+              },
+              {
+                "label": "Time saved",
+                "value": "79 months (6 years, 7 months)"
+              },
+              {
+                "label": "Standard total interest",
+                "value": "$408,142.36"
+              },
+              {
+                "label": "Total interest with +$200/month",
+                "value": "$302,713.69"
+              }
+            ],
+            "result": "That single, consistent $200/month habit saves $105,428.67 in interest — over 500 times the $200 itself, repeated across the shortened loan term."
+          }
+        },
+        "rateTypes": {
+          "title": "Fixed-Rate vs. Adjustable-Rate Mortgages",
+          "intro": "This calculator models a fixed-rate mortgage, the dominant structure for US home loans, but it's worth understanding the alternative you'll encounter when comparing loan offers:",
+          "fixed": {
+            "title": "Fixed-Rate Mortgage (FRM)",
+            "paragraph": "The interest rate is locked for the entire loan term, so the principal-and-interest portion of the payment never changes — only the escrowed taxes, insurance, and PMI can shift the total bill over time. This predictability is why fixed-rate loans, especially the 30-year term, have been the default choice for most US homebuyers since the government-backed reforms of the 1930s standardized amortizing mortgages."
+          },
+          "adjustable": {
+            "title": "Adjustable-Rate Mortgage (ARM)",
+            "paragraph": "The rate is fixed for an initial period (commonly 5, 7, or 10 years, as in a “7/1 ARM”), then adjusts periodically based on a reference index plus a lender margin, subject to caps that limit how much it can move at each adjustment and over the life of the loan. ARMs often start below prevailing fixed rates, trading long-term predictability for a lower initial payment."
+          }
+        },
+        "limitations": {
+          "title": "Limitations of This Calculator",
+          "paragraph1": "This tool assumes a fixed interest rate for the full term, a home value that doesn't change, and property tax, insurance, and HOA amounts that stay constant in nominal terms — none of which is guaranteed in practice. Property taxes are typically reassessed periodically, insurance premiums are repriced at renewal, and PMI can sometimes be removed earlier via a new appraisal showing sufficient value gain, none of which this calculator can predict.",
+          "paragraph2": "It also excludes one-time costs that are very real parts of buying a home but aren't part of the recurring monthly payment: closing costs, loan origination fees, title insurance, and any upfront mortgage insurance premium some loan programs charge. Treat every figure here as a planning estimate, not a lender's official Loan Estimate or Closing Disclosure."
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does my total interest look larger than my loan amount?",
+              "answer": "On long terms at typical rates, this is normal, not an error: a 30-year loan at 6.5% pays roughly 1.28× the principal in interest by the time the amortization example above finishes. Interest is charged on whatever balance remains, and early in the loan almost the entire balance remains, so a large share of your early payments is interest rather than principal."
+            },
+            {
+              "question": "Does this calculator include closing costs?",
+              "answer": "No. It computes only the recurring monthly payment components — principal, interest, taxes, insurance, HOA, and PMI. One-time costs like closing costs, appraisal fees, and title insurance are outside this tool's scope; see Limitations above."
+            },
+            {
+              "question": "Is PMI the same as homeowners insurance?",
+              "answer": "No — they protect different parties. Homeowners insurance protects you against physical damage to the home. PMI protects only the lender against your default, and it doesn't pay out to you or repair anything if you file a claim."
+            },
+            {
+              "question": "Can I remove PMI before the scheduled 80% threshold?",
+              "answer": "Often, yes. If your home's value has risen since purchase — through appreciation or improvements — you can typically request a new appraisal and ask your servicer to cancel PMI once the current, appraised loan-to-value ratio reaches 80%, without waiting for the scheduled balance to get there on its own. This calculator only models the scheduled path, since it can't predict future appraisals."
+            },
+            {
+              "question": "Why do extra payments save so much more interest than their dollar amount?",
+              "answer": "Because interest compounds on the balance every month for the remaining life of the loan. A dollar of extra principal paid in year 2 stops accruing interest for the other 28 years it would otherwise have remained outstanding — see the worked example above."
+            },
+            {
+              "question": "What's the difference between loan-to-value (LTV) and down payment percent?",
+              "answer": "They're complementary: LTV is the loan amount divided by the home price, and down payment percent is the down payment divided by the home price. A 20% down payment corresponds exactly to an 80% LTV — the same line lenders use to decide whether PMI applies."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool: The History and Standards Behind the Modern Mortgage",
+          "history": {
+            "title": "From Balloon Payments to the Amortized Mortgage: The Reforms of 1933–1934",
+            "paragraph": "Before the 1930s, the typical US home loan looked nothing like today's mortgage: it ran just 5 to 10 years, charged interest-only payments, and ended in a single “balloon” payment of the full principal — a structure that triggered a wave of foreclosures once the Great Depression made refinancing that balloon impossible for millions of homeowners. Congress responded on June 13, 1933 by creating the Home Owners' Loan Corporation (HOLC), which refinanced roughly one million troubled mortgages between 1933 and 1936 using a new structure: a longer, self-amortizing loan in which every payment stayed level and gradually retired the entire principal, eliminating the balloon altogether. The National Housing Act of 1934 then created the Federal Housing Administration (FHA), which insured lenders against default and extended the amortizing structure to 25- and 30-year terms — the direct ancestor of the fixed-rate mortgage this calculator models."
+          },
+          "equipment": {
+            "title": "The Standard Behind PMI Removal: The Homeowners Protection Act of 1998",
+            "paragraph": "The exact thresholds this calculator uses to estimate when PMI can come off aren't a rule of thumb — they're set in US federal law. The Homeowners Protection Act of 1998 (12 U.S.C. § 4902), signed July 29, 1998 and effective July 29, 1999, requires a servicer to automatically terminate PMI on a conventional loan once the principal balance is first scheduled to reach 78% of the property's original value (§ 4902(b)), and separately gives borrowers in good standing the right to request cancellation once the balance is scheduled to reach 80% (§ 4902(a)) — the same two figures behind this tool's “PMI Removal” estimate."
+          },
+          "modernDevelopments": {
+            "title": "Modern Mortgage Technology: Automated Valuation and Digital Closings",
+            "paragraph": "Two shifts have reshaped mortgage underwriting and closing in recent years. Automated valuation models (AVMs) now estimate a property's value from county records, comparable sales, and increasingly satellite imagery and computer vision, letting many lenders waive an in-person appraisal for well-documented properties under roughly $250,000–$400,000. And remote online notarization (RON) — now legally recognized in more than 40 US states — lets a borrower sign closing documents in front of a notary over live video instead of at an in-person closing table. Industry surveys report a majority of borrowers now upload documents and e-sign through digital portals rather than in person, a shift that has measurably shortened the closing timeline this calculator's numbers ultimately feed into."
+          },
+          "academicPath": {
+            "title": "Studying This Field: Finance and Real Estate Economics",
+            "intro": "Pricing a mortgage — the interest formula, amortization mechanics, and PMI rules this calculator applies — is core material within finance, specifically real estate finance and financial economics. QS World University Rankings by Subject does not publish a standalone “Real Estate” category, so the closest standalone match is Accounting & Finance — here are the top 5 globally in QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time “MSc in Applied Financial Economics” (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+              },
+              {
+                "name": "King Saud University (KSU), Riyadh — College of Business Administration",
+                "note": "A leading Saudi university offering a Master of Science in Finance (MSF) through its College of Business Administration.",
+                "url": "https://cba.ksu.edu.sa/en/overveiw/MSF",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Bäckman, C., Moran, P., & van Santen, P. (2024). Mortgage Design, Repayment Schedules, and Household Borrowing. FEDS Working Paper No. 2024-077, Board of Governors of the Federal Reserve System.",
+          "note": "Using a Swedish policy change that restricted interest-only mortgages, this study finds that low-initial-payment mortgage designs substantially increase both household borrowing and lifetime interest costs — empirical evidence for why this calculator treats the full amortization schedule, not just the headline rate, as central to what a mortgage actually costs.",
+          "doiLabel": "DOI",
+          "doi": "10.17016/FEDS.2024.077",
+          "readOriginal": "Read the Original Paper",
+          "url": "https://doi.org/10.17016/FEDS.2024.077"
+        }
+      },
+      "payoffChart": {
+        "title": "Amortization: Principal vs. Interest Over Time",
+        "intro": "Each bar is one year of payments, split into principal (the part that reduces your balance) and interest (the cost of borrowing). Early years lean heavily toward interest; later years flip toward principal. The solid line traces your remaining balance.",
+        "principalLabel": "Principal",
+        "interestLabel": "Interest",
+        "balanceLabel": "Remaining Balance",
+        "standardBalanceLabel": "Standard Schedule (no extra payments)",
+        "totalPrincipalLabel": "Total Principal",
+        "totalInterestLabel": "Total Interest Paid",
+        "pmiNote": "Based on your inputs, PMI could be requested for removal around year {dropYear} (80% loan-to-value) and must be automatically terminated by year {autoYear} (78% loan-to-value) at the latest.",
+        "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs."
       }
     },
     "percentage-calculator": {

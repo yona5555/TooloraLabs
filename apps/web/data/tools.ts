@@ -49,7 +49,7 @@ export const tools: Tool[] = [
     title: "Mortgage Calculator",
     category: "calculators",
     description:
-      "Calculate monthly mortgage payments, total interest, and total repayment.",
+      "Calculate your monthly mortgage payment, full amortization schedule, PMI removal date, and extra-payment savings.",
     featured: true,
     keywords: [
       "mortgage",
@@ -58,6 +58,11 @@ export const tools: Tool[] = [
       "interest",
       "payment",
       "finance",
+      "amortization",
+      "amortization schedule",
+      "pmi",
+      "extra payment",
+      "loan to value",
     ],
   },
   {
