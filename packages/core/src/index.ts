@@ -19,3 +19,4 @@ export * from "./utils/isBoolean";
 export * from "./utils/parseLocalizedNumber";
 export * from "./utils/detectDigitStyle";
 export * from "./utils/formatLocalizedNumber";
+export * from "./utils/hijriCalendar";
