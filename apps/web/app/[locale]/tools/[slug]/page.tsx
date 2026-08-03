@@ -189,7 +189,8 @@ export default async function ToolPage({
       break;
   }
 
-  const isAboveFoldLayout = slug === "bmi-calculator" || slug === "age-calculator";
+  const isAboveFoldLayout =
+    slug === "bmi-calculator" || slug === "age-calculator" || slug === "mortgage-calculator";
 
   const jsonLd = {
     "@context": "https://schema.org",

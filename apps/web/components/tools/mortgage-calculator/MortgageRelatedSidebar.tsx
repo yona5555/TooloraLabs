@@ -16,7 +16,7 @@ export default function MortgageRelatedSidebar() {
   const related = tools.filter((tool) => tool.category === CATEGORY && tool.slug !== CURRENT_SLUG);
 
   return (
-    <div className="flex h-full flex-col gap-4 rounded-2xl bg-zinc-50 p-6 dark:bg-zinc-900/50">
+    <div className="flex flex-col gap-4 rounded-2xl bg-zinc-50 p-6 dark:bg-zinc-900/50">
       <MortgageSidebarSearch />
 
       <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">

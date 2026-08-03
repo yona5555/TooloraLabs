@@ -249,17 +249,14 @@ export default function AgeCalculator() {
           />
         }
         result={
-          <div className="flex h-full flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <AgeResult result={result} digitStyle={digitStyle} />
             <AgeMiniDateDiff />
           </div>
         }
         sidebar={<AgeRelatedSidebar />}
+        secondary={<AgeMilestones result={result} digitStyle={digitStyle} />}
       />
-
-      <div className="mt-6">
-        <AgeMilestones result={result} digitStyle={digitStyle} />
-      </div>
 
       <AgeEducation />
     </>

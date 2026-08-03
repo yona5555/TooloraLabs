@@ -191,17 +191,14 @@ export default function BMICalculator() {
           />
         }
         result={
-          <div className="flex h-full flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <BMIResult result={result} digitStyle={digitStyle} />
             <BMIMiniConverter />
           </div>
         }
         sidebar={<BMIRelatedSidebar />}
+        secondary={<BMIRecommendations category={result.category} />}
       />
-
-      <div className="mt-6">
-        <BMIRecommendations category={result.category} />
-      </div>
 
       <BMIEducation />
     </>

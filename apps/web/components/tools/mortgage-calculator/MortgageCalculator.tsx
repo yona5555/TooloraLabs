@@ -257,17 +257,14 @@ export default function MortgageCalculator() {
           />
         }
         result={
-          <div className="flex h-full flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <MortgageResult result={result} digitStyle={digitStyle} />
             <MortgageAffordabilityMini />
           </div>
         }
         sidebar={<MortgageRelatedSidebar />}
+        secondary={<MortgagePayoffChart result={result} digitStyle={digitStyle} />}
       />
-
-      <div className="mt-6">
-        <MortgagePayoffChart result={result} digitStyle={digitStyle} />
-      </div>
 
       <MortgageEducation />
     </>

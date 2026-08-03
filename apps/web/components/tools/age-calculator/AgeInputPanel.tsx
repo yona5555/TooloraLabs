@@ -50,7 +50,7 @@ export default function AgeInputPanel({
   const hijriMonths = t.raw("form.hijriMonths") as string[];
 
   return (
-    <div className="h-full rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         <button
           type="button"

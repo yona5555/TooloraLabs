@@ -12,8 +12,8 @@ export default function AdSpace({ className = "" }: { className?: string }) {
 
   return (
     <div
-      style={{ width: 300, height: 600, minWidth: 300, minHeight: 600 }}
-      className={`flex shrink-0 items-center justify-center rounded-xl border border-dashed border-zinc-300 text-sm font-medium text-zinc-400 dark:border-zinc-700 dark:text-zinc-600 ${className}`}
+      style={{ width: 300, height: 600, minWidth: 300, minHeight: 600, maxWidth: 300, maxHeight: 600 }}
+      className={`flex shrink-0 grow-0 items-center justify-center rounded-xl border border-dashed border-zinc-300 text-sm font-medium text-zinc-400 dark:border-zinc-700 dark:text-zinc-600 ${className}`}
     >
       {t("adSpace")}
     </div>
