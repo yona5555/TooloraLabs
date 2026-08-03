@@ -1,14 +1,5 @@
-export type AgeResult = {
-  years: number;
-  months: number;
-  days: number;
+import type { AgeResult } from "@tooloralabs/tools";
 
-  totalDays: number;
-  totalWeeks: number;
-  totalHours: number;
-  totalMinutes: number;
-  totalSeconds: number;
+export type CalendarSystem = "gregorian" | "hijri";
 
-  nextBirthday: string;
-  daysUntilBirthday: number;
-};
+export type AgeExtendedResult = AgeResult;

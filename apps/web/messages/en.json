@@ -164,28 +164,332 @@
     },
     "age-calculator": {
       "title": "Age Calculator",
-      "description": "Calculate your exact age in years, months and days.",
+      "description": "Calculate your exact age in years, months and days — plus your Hijri age, zodiac, generation, and next birthday countdown.",
       "form": {
+        "calendarGregorian": "Gregorian",
+        "calendarHijri": "Hijri",
+        "birthDateLabel": "Date of birth",
+        "hijriDayPlaceholder": "Day",
+        "hijriYearPlaceholder": "Year (AH)",
+        "hijriNote": "The Hijri calendar here uses the fixed tabular (civil) scheme, not real moon sightings — it can differ from the observational calendar by a day or two.",
+        "hijriMonths": [
+          "Muharram",
+          "Safar",
+          "Rabi' al-awwal",
+          "Rabi' al-thani",
+          "Jumada al-awwal",
+          "Jumada al-thani",
+          "Rajab",
+          "Sha'ban",
+          "Ramadan",
+          "Shawwal",
+          "Dhu al-Qi'dah",
+          "Dhu al-Hijjah"
+        ],
+        "customReferenceLabel": "Calculate age as of a specific date (instead of today)",
+        "customReferenceHint": "Useful for legal, immigration, or exam eligibility purposes — the reference date must be on or after the birth date.",
         "calculate": "Calculate Age",
         "reset": "Reset"
       },
       "errors": {
-        "required": "Please select your birth date.",
-        "invalidDate": "Invalid date.",
-        "futureDate": "Birth date cannot be in the future.",
-        "tooOld": "Birth date cannot be more than 120 years ago."
+        "required": "Please enter your date of birth.",
+        "invalidDate": "Please enter a valid date.",
+        "futureDate": "Date of birth cannot be in the future.",
+        "tooOld": "Date of birth cannot be more than 120 years ago.",
+        "hijriInvalid": "Please enter a valid Hijri day (1-30) and year.",
+        "referenceRequired": "Please enter the reference date.",
+        "referenceInvalid": "Please enter a valid reference date.",
+        "referenceBeforeBirth": "The reference date cannot be before the date of birth.",
+        "referenceTooFarFuture": "The reference date is too far in the future."
       },
-      "result": {
-        "calendarAge": "Calendar Age",
-        "totalTime": "Total Time",
-        "years": "Years",
-        "months": "Months",
-        "days": "Days",
-        "totalDays": "Total Days",
-        "totalWeeks": "Total Weeks",
-        "totalHours": "Total Hours",
-        "totalMinutes": "Total Minutes",
-        "totalSeconds": "Total Seconds"
+      "milestones": {
+        "intro": "A quick look at what else your birth date tells you — starting with the next big milestones ahead, for someone in the {generation}.",
+        "title": "Upcoming Age Milestones",
+        "items": {
+          "age18": "Age 18 — the age of majority in most countries (voting, contracts, full legal responsibility), though the exact age varies by jurisdiction.",
+          "age21": "Age 21 — in some countries this unlocks specific rights, like alcohol purchase in the United States; elsewhere 18 already covers this.",
+          "age30": "Age 30 — a widely recognized personal milestone, with no specific legal meaning.",
+          "age40": "Age 40 — in the US, the threshold at which the Age Discrimination in Employment Act (ADEA) adds specific workplace protections.",
+          "age50": "Age 50 — the minimum age for AARP membership in the US, and a common benchmark for starting preventive health screenings.",
+          "age65": "Age 65 — long the most common statutory retirement age in pension systems worldwide, though many countries have raised it in recent years.",
+          "age100": "Age 100 — the traditional centenarian milestone."
+        },
+        "daysAway": "{days} days away",
+        "allPast": "All the common milestones on this list are already behind you."
+      },
+      "aboveFold": {
+        "resultTitle": "Your Result",
+        "yearProgressLabel": "Progress through your current year of life",
+        "yearsUnit": "years old",
+        "calendarAgeText": "{years} years, {months} months, {days} days old",
+        "birthdayIsToday": "Happy birthday — it's today!",
+        "daysUntilBirthday": "{count} days until your next birthday",
+        "bornOn": "Born on a {weekday}",
+        "totalDaysLabel": "Total days lived",
+        "totalWeeksLabel": "Total weeks lived",
+        "totalHoursLabel": "Total hours lived",
+        "totalMinutesLabel": "Total minutes lived",
+        "totalSecondsLabel": "Total seconds lived",
+        "liveTickingNote": "Updates live, once per second.",
+        "decimalAgeLabel": "Decimal age",
+        "decimalAgeNote": "Age expressed as a single decimal number of years — the convention used in pediatric growth-chart research.",
+        "hijriAgeLabel": "Hijri (Islamic) age",
+        "hijriAgeValue": "{years}y {months}m {days}d",
+        "hijriAgeNote": "Based on the tabular Hijri calendar — Hijri years are about 3% shorter than Gregorian years, so this number is naturally a little higher.",
+        "zodiacLabel": "Western zodiac sign",
+        "zodiacNames": {
+          "aries": "Aries",
+          "taurus": "Taurus",
+          "gemini": "Gemini",
+          "cancer": "Cancer",
+          "leo": "Leo",
+          "virgo": "Virgo",
+          "libra": "Libra",
+          "scorpio": "Scorpio",
+          "sagittarius": "Sagittarius",
+          "capricorn": "Capricorn",
+          "aquarius": "Aquarius",
+          "pisces": "Pisces"
+        },
+        "chineseZodiacLabel": "Chinese zodiac animal",
+        "chineseZodiacNames": {
+          "rat": "Rat",
+          "ox": "Ox",
+          "tiger": "Tiger",
+          "rabbit": "Rabbit",
+          "dragon": "Dragon",
+          "snake": "Snake",
+          "horse": "Horse",
+          "goat": "Goat",
+          "monkey": "Monkey",
+          "rooster": "Rooster",
+          "dog": "Dog",
+          "pig": "Pig"
+        },
+        "chineseZodiacNote": "Based on birth year alone — since Chinese New Year falls on a different Gregorian date each year, people born in January or early February can technically belong to the previous animal year.",
+        "generationLabel": "Generation",
+        "generationNames": {
+          "greatestGeneration": "Greatest Generation",
+          "silentGeneration": "Silent Generation",
+          "babyBoomer": "Baby Boomer",
+          "generationX": "Generation X",
+          "millennial": "Millennial",
+          "generationZ": "Generation Z",
+          "generationAlpha": "Generation Alpha",
+          "generationBeta": "Generation Beta"
+        },
+        "weekdayNames": [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "relatedAllTitle": "All Calculators",
+        "searchNoResults": "No tools found",
+        "miniDateDiffTitle": "Date Difference Calculator",
+        "miniDateDiffFrom": "From",
+        "miniDateDiffTo": "To",
+        "miniDateDiffResult": "{years} years, {months} months, {days} days ({totalDays} total days)",
+        "miniDateDiffPlaceholder": "Enter two dates to see the difference between them."
+      },
+      "education": {
+        "intro": {
+          "title": "How an Age Calculator Actually Works",
+          "paragraph1": "An age calculator turns two calendar dates — a birth date and a reference date — into a precise breakdown of elapsed time. That sounds trivial until you remember that a \"year\" is not a fixed number of days: months run 28 to 31 days long, and February gains an extra day every leap year. Getting years, months, and days exactly right means walking the calendar day by day in software, not just subtracting two numbers.",
+          "paragraph2": "This tool computes that breakdown down to the second, then layers on context most simple age calculators skip entirely: a Hijri (Islamic) calendar age, a generation label, zodiac signs, and a live countdown to your next birthday.",
+          "disclaimer": "This tool calculates chronological (calendar) age only. It is not a substitute for biological, developmental, or medical age assessments, which a qualified professional determines using different methods entirely."
+        },
+        "calculationMethod": {
+          "title": "How to Calculate Age From a Date of Birth, Step by Step",
+          "intro": "The years-months-days breakdown is computed with calendar subtraction: start from the reference date and count backward, borrowing from the next-larger unit whenever a smaller one would go negative — the same logic you'd use counting on your fingers, just automated.",
+          "borrowingExplanation": "If the reference date's day-of-month is earlier than the birth date's day-of-month, you borrow a month (adding however many days that borrowed month actually has); if the reference date's month is earlier than the birth month, you borrow a year. This is why the calculation can't be a simple average — the number of days in the borrowed month changes the result.",
+          "example": {
+            "title": "Worked Example",
+            "intro": "Take someone born on May 20, 1995, checked on August 3, 2026.",
+            "steps": [
+              {
+                "label": "Subtract the days",
+                "value": "3 − 20 = −17, so borrow a month"
+              },
+              {
+                "label": "Borrow from July (31 days)",
+                "value": "31 − 20 + 3 = 14 days"
+              },
+              {
+                "label": "Subtract the months (after borrowing)",
+                "value": "7 − 5 = 2 months"
+              },
+              {
+                "label": "Subtract the years",
+                "value": "2026 − 1995 = 31 years"
+              }
+            ],
+            "result": "This person is 31 years, 2 months, and 14 days old on the reference date."
+          }
+        },
+        "culturalReckoning": {
+          "title": "Not Every Culture Counts Age the Same Way",
+          "intro": "The \"years since birth, incrementing on your birthday\" method used above — sometimes called international age — is the global default today, but it is a relatively recent standard even in places that now use it exclusively.",
+          "hijri": {
+            "title": "The Hijri (Islamic) Calendar",
+            "paragraph": "The Hijri calendar is purely lunar, with 12 months of 29 or 30 days totaling about 354–355 days a year — roughly 11 days shorter than the Gregorian solar year. Because of that gap, a person's age in Hijri years is consistently a few percent higher than their age in Gregorian years, and Hijri dates drift earlier through the Gregorian seasons over a person's lifetime. This calculator's Hijri age uses the tabular (civil) Islamic calendar, a fixed mathematical approximation used by most software calendars — it can differ by a day or two from the real, moon-sighting-based calendar used for religious observances."
+          },
+          "korea": {
+            "title": "South Korea's Recent Switch to International Age",
+            "paragraph": "Until June 28, 2023, South Korea officially used a traditional counting-age system: a newborn was considered 1 year old at birth, and everyone gained a year on New Year's Day rather than on their individual birthday — so someone born on December 31 turned 2 the very next day under that system. A law passed by South Korea's National Assembly in December 2022 standardized the country on the international age system used in this calculator, effective from mid-2023, ending decades of most Koreans routinely being one or two \"years\" older by local counting than by international counting."
+          }
+        },
+        "generationTable": {
+          "title": "Which Generation Were You Born In?",
+          "intro": "Generational labels are a social-research convention, not a law of nature — the ranges below follow the widely cited Pew Research Center definitions through Generation Z; the labels after that (Alpha, Beta) come from other researchers, since Pew has not published an official cutoff for them.",
+          "rows": [
+            {
+              "generation": "Greatest Generation",
+              "range": "Before 1928"
+            },
+            {
+              "generation": "Silent Generation",
+              "range": "1928–1945"
+            },
+            {
+              "generation": "Baby Boomers",
+              "range": "1946–1964"
+            },
+            {
+              "generation": "Generation X",
+              "range": "1965–1980"
+            },
+            {
+              "generation": "Millennials",
+              "range": "1981–1996"
+            },
+            {
+              "generation": "Generation Z",
+              "range": "1997–2012"
+            },
+            {
+              "generation": "Generation Alpha",
+              "range": "2013–2024"
+            },
+            {
+              "generation": "Generation Beta",
+              "range": "2025–present"
+            }
+          ]
+        },
+        "lifeChart": {
+          "title": "Your Life, One Grid Square at a Time",
+          "intro": "This illustrative grid represents a 90-year lifespan as 1,080 small squares — one per month. Each filled square below is a month already lived by a 30-year-old; the outlined squares are months still ahead. Seeing a life measured out in small, equal units — rather than as one abstract number — is a well-known way to make elapsed and remaining time feel concrete.",
+          "livedLabel": "Months lived",
+          "remainingLabel": "Months remaining"
+        },
+        "milestonesContext": {
+          "title": "Why Legal Age Milestones Vary So Much by Country",
+          "paragraph": "Ages like 18, 21, or 65 feel like universal constants, but almost none of them are. The age of majority is 18 in most of the world but 19 in a handful of countries and as low as 15 or as high as 21 in others; the minimum drinking age is 18 in most countries yet 21 in the United States; state pension ages range from the late 50s to the late 60s and are actively being raised in many countries as life expectancy increases. The milestone ages this tool highlights reflect common international patterns, not a single universal legal standard — always confirm the applicable age in your own jurisdiction before relying on it for a legal or administrative decision."
+        },
+        "limitations": {
+          "title": "Limitations and Edge Cases",
+          "paragraph1": "Anyone born on February 29 has a real, once-every-four-years birthday. In the three out of four years that aren't leap years, this calculator (like virtually all calendar software) treats their next birthday as March 1, since no February 29 exists on the calendar in that year.",
+          "paragraph2": "Total hours, minutes, and seconds lived are calculated using your device's local clock and time zone at the moment you calculate — they are not adjusted for time-zone changes, travel, or daylight saving transitions across your lifetime, which would shift the true elapsed time by at most a few hours in nearly all real cases."
+        },
+        "faq": {
+          "title": "Frequently Asked Questions About Age Calculation",
+          "items": [
+            {
+              "question": "Why does my Hijri age look higher than my Gregorian age?",
+              "answer": "Because a Hijri year (about 354–355 days) is shorter than a Gregorian year (about 365.25 days), more Hijri years fit into the same span of real time — roughly 3% more per year of life. This is a real calendar effect, not a calculation error."
+            },
+            {
+              "question": "Is the Hijri date this tool shows exactly what my local mosque or country uses?",
+              "answer": "Not necessarily. This tool uses the tabular (civil) Islamic calendar — a fixed mathematical scheme — while many countries and religious authorities set the start of each Hijri month by an actual moon sighting or a specific local authority's announcement (such as the Umm al-Qura calendar in Saudi Arabia). These can differ from the tabular calcular by a day or two."
+            },
+            {
+              "question": "How is my zodiac sign determined?",
+              "answer": "From your birth month and day alone, using the standard tropical zodiac date ranges (for example, Aries runs March 21 to April 19). This is a cultural convention, not an astronomical or scientific measurement."
+            },
+            {
+              "question": "Can this tool calculate my age on a future date, not just today?",
+              "answer": "Yes — enable \"Calculate age as of a specific date\" and enter any date on or after your date of birth, past or future. This is useful for figuring out your exact age for a visa application, an exam eligibility cutoff, or any date-specific requirement."
+            },
+            {
+              "question": "Why did the seconds-lived number jump by more than one when I wasn't looking?",
+              "answer": "The live counter recalculates from your exact birth timestamp once per second; if the browser tab was in the background or your device was asleep, it simply catches up to the correct value the moment it updates again — no time is actually lost or miscounted."
+            },
+            {
+              "question": "Does this tool store or send my birth date anywhere?",
+              "answer": "No. Every calculation, including the Hijri conversion, runs entirely in your browser. Your date of birth is never transmitted to a server."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool: The Calendars and Standards Age Calculation Depends On",
+          "history": {
+            "title": "Why We Use the Calendar We Do: the Gregorian Reform of 1582",
+            "paragraph": "Every calendar-based age calculation on this page ultimately rests on the Gregorian calendar, introduced by Pope Gregory XIII through the papal bull Inter gravissimas on February 24, 1582. The problem it solved was real drift: the Julian calendar's year was about 11 minutes longer than the true solar year, and over the roughly 1,257 years since the Council of Nicaea in 325 CE, that error had pushed the calendar 10 days out of sync with the seasons. The fix took effect that October: Thursday, October 4, 1582 (Julian) was followed directly by Friday, October 15, 1582 (Gregorian) — ten calendar days were simply skipped — alongside a new, more accurate leap-year rule (century years are leap years only if divisible by 400) that keeps the modern calendar aligned with the seasons to within about 26 seconds a year."
+          },
+          "equipment": {
+            "title": "The Standard Behind Every Date Field: ISO 8601",
+            "paragraph": "The date fields in this calculator, and in virtually every computer system that stores or exchanges dates, follow ISO 8601-1:2019, the International Organization for Standardization's formal standard for representing dates and times unambiguously (for example, 2026-08-03 instead of a locale-dependent format that could mean either August 3 or March 8). Precision at the finer end — the \"live seconds\" this tool ticks up every second — depends on Coordinated Universal Time (UTC), maintained with reference to a global network of atomic clocks."
+          },
+          "modernDevelopments": {
+            "title": "Modern Timekeeping: NTP, UTC, and the End of Leap Seconds",
+            "paragraph": "Your device's clock stays accurate to within a fraction of a second largely thanks to the Network Time Protocol (NTP), which continuously synchronizes it against reference time servers. Those servers ultimately trace back to UTC, whose leap-second adjustments (needed because Earth's rotation is slightly irregular) are decided by the International Earth Rotation and Reference Systems Service (IERS). In November 2022, the 27th General Conference on Weights and Measures (CGPM) adopted Resolution 4, agreeing to increase the currently permitted UT1-UTC deviation at or before 2035 — effectively phasing out leap seconds while keeping UTC continuous for at least a century, so that timekeeping software (including tools like this one) never has to handle an actual 61-second minute."
+          },
+          "academicPath": {
+            "title": "Studying This Field: Statistics and Demography",
+            "intro": "Precisely defining and measuring \"age\" as a quantity is a core concern of demography and formal statistics. Neither Demography nor Actuarial Science has its own standalone subject ranking from QS or ShanghaiRanking, but Statistics does — here are the top 5 globally in QS World University Rankings by Subject 2025 (Statistics and Operational Research), plus two regional options:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Statistics and Operational Research (QS World University Rankings by Subject 2025).",
+                "url": "https://stat.mit.edu/",
+                "online": "No full online degree; MIT separately offers a standalone \"MicroMasters in Statistics and Data Science\" credential (not a full degree program)."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Statistics and Operational Research (QS World University Rankings by Subject 2025).",
+                "url": "https://statistics.stanford.edu/",
+                "online": "Not online — the department's own FAQ states its Statistics MS is not an online program."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #3 worldwide for Statistics and Operational Research (QS World University Rankings by Subject 2025).",
+                "url": "https://statistics.fas.harvard.edu/am-statistics",
+                "online": "Not online — the Department of Statistics's AM is restricted to current GSAS PhD and AB-AM students, not open online applicants."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Statistics and Operational Research (QS World University Rankings by Subject 2025).",
+                "url": "https://www.statslab.cam.ac.uk/",
+                "online": "No — its mathematical statistics master's track (\"Part III\") is a full-time, in-person course."
+              },
+              {
+                "name": "University of California, Berkeley",
+                "note": "Ranked #5 worldwide for Statistics and Operational Research (QS World University Rankings by Subject 2025).",
+                "url": "https://statistics.berkeley.edu/academics/masters/faqs",
+                "online": "No — the department's own FAQ describes its MA program as full-time and in-person, with no distance option."
+              },
+              {
+                "name": "King Abdulaziz University (KAU), Jeddah — Department of Statistics",
+                "note": "A regionally ranked Saudi university offering undergraduate through doctoral degrees in Statistics.",
+                "url": "https://kau.edu.sa/faculty/en/science/page/statistics-department",
+                "online": "Delivery mode not stated on the official department page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Willekens, F. (2013). Chronological objects in demographic research. Demographic Research, 28(23), 649–680.",
+          "note": "This peer-reviewed paper formally treats calendar time, age, and duration as structured \"chronological objects\" in demographic measurement — directly relevant to how tools like this one should represent birth dates, ages, and time spans precisely.",
+          "doiLabel": "DOI",
+          "doi": "10.4054/DemRes.2013.28.23",
+          "readOriginal": "Read the Original Paper",
+          "url": "https://www.demographic-research.org/articles/volume/28/23"
+        }
       }
     },
     "bmi-calculator": {

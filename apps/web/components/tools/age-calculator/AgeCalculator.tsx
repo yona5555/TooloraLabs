@@ -1,84 +1,267 @@
 "use client";
+import { parseLocalizedNumber, gregorianToHijri, hijriToGregorian, type DigitStyle } from "@tooloralabs/core";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { AgeCalculator as AgeCalculatorTool } from "@tooloralabs/tools";
 
-import ToolButton from "@/components/tool-ui/ToolButton";
-import ToolCard from "@/components/tool-ui/ToolCard";
-import ToolInput from "@/components/tool-ui/ToolInput";
+import { resolveDigitStyle } from "@/lib/digit-style";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import AgeInputPanel from "./AgeInputPanel";
 import AgeResult from "./AgeResult";
-import type { AgeResult as AgeResultType } from "./types";
+import AgeMiniDateDiff from "./AgeMiniDateDiff";
+import AgeMilestones from "./AgeMilestones";
+import AgeRelatedSidebar from "./AgeRelatedSidebar";
+import AgeEducation from "./AgeEducation";
+import type { AgeExtendedResult, CalendarSystem } from "./types";
 
 const tool = new AgeCalculatorTool();
+const DEFAULT_BIRTH_DATE = "1994-06-15";
+const FROZEN_FALLBACK_REFERENCE = "2026-01-01";
+const MAX_AGE_YEARS = 120;
+const MAX_REFERENCE_SPAN_YEARS = 130;
+
+function parseISODateLocal(value: string): Date | null {
+  const parts = value.split("-").map(Number);
+  if (parts.length !== 3 || parts.some((n) => Number.isNaN(n))) return null;
+  const [year, month, day] = parts;
+  const date = new Date(year, month - 1, day);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function toISODate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function buildResult(birthDateISO: string, referenceDateISO?: string): AgeExtendedResult {
+  const output = tool.execute(
+    { birthDate: birthDateISO, referenceDate: referenceDateISO },
+    { locale: "en-US" }
+  );
+  return output.data;
+}
+
+function defaultHijriFields(birthDateISO: string) {
+  const parsed = parseISODateLocal(birthDateISO);
+  const hijri = gregorianToHijri(parsed ?? new Date());
+  return { day: String(hijri.day), month: String(hijri.month), year: String(hijri.year) };
+}
+
+/**
+ * Age depends on "now", but this page is statically prerendered — the
+ * server-rendered HTML and the first client paint before hydration must
+ * show byte-identical content, or React logs a hydration mismatch (the
+ * same class of bug fixed once already in BMIScaleChart). getServerSnapshot
+ * returns a sentinel (0) used for both the SSR pass and the first client
+ * render; only once useSyncExternalStore's subscribe callback fires (right
+ * after hydration commits, then every second) does the real clock kick in.
+ */
+function getLiveTimestamp(): number {
+  return Date.now();
+}
+
+function getFrozenTimestamp(): number {
+  return 0;
+}
+
+function subscribeToLiveTick(callback: () => void): () => void {
+  callback();
+  const id = setInterval(callback, 1000);
+  return () => clearInterval(id);
+}
 
 export default function AgeCalculator() {
   const t = useTranslations("tools.age-calculator");
-  const [birthDate, setBirthDate] = useState("");
+
+  const [calendarSystem, setCalendarSystem] = useState<CalendarSystem>("gregorian");
+  const [birthDate, setBirthDate] = useState(DEFAULT_BIRTH_DATE);
+  const initialHijri = defaultHijriFields(DEFAULT_BIRTH_DATE);
+  const [hijriDay, setHijriDay] = useState(initialHijri.day);
+  const [hijriMonth, setHijriMonth] = useState(initialHijri.month);
+  const [hijriYear, setHijriYear] = useState(initialHijri.year);
+
+  const [useCustomReference, setUseCustomReference] = useState(false);
+  const [referenceDate, setReferenceDate] = useState("");
+
   const [error, setError] = useState("");
-  const [result, setResult] = useState<AgeResultType | null>(null);
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+
+  const [calcBirthISO, setCalcBirthISO] = useState(DEFAULT_BIRTH_DATE);
+  const [calcReferenceISO, setCalcReferenceISO] = useState<string | null>(null);
+
+  const liveTimestamp = useSyncExternalStore(subscribeToLiveTick, getLiveTimestamp, getFrozenTimestamp);
+
+  const result: AgeExtendedResult =
+    calcReferenceISO !== null
+      ? buildResult(calcBirthISO, calcReferenceISO)
+      : liveTimestamp === 0
+        ? buildResult(calcBirthISO, FROZEN_FALLBACK_REFERENCE)
+        : buildResult(calcBirthISO, undefined);
+
+  function handleCalendarSystemChange(next: CalendarSystem) {
+    if (next === calendarSystem) return;
+
+    if (next === "hijri") {
+      const parsed = parseISODateLocal(birthDate);
+      if (parsed) {
+        const hijri = gregorianToHijri(parsed);
+        setHijriDay(String(hijri.day));
+        setHijriMonth(String(hijri.month));
+        setHijriYear(String(hijri.year));
+      }
+    } else {
+      const day = parseLocalizedNumber(hijriDay);
+      const month = parseLocalizedNumber(hijriMonth);
+      const year = parseLocalizedNumber(hijriYear);
+      if (![day, month, year].some(Number.isNaN)) {
+        setBirthDate(toISODate(hijriToGregorian({ year, month, day })));
+      }
+    }
+
+    setCalendarSystem(next);
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
-    setResult(null);
 
-    if (!birthDate) {
-      setError(t("errors.required"));
-      return;
+    let birthISO: string;
+
+    if (calendarSystem === "gregorian") {
+      if (!birthDate) {
+        setError(t("errors.required"));
+        return;
+      }
+      const parsed = parseISODateLocal(birthDate);
+      if (!parsed) {
+        setError(t("errors.invalidDate"));
+        return;
+      }
+      birthISO = birthDate;
+    } else {
+      if (!hijriDay || !hijriYear) {
+        setError(t("errors.required"));
+        return;
+      }
+      const day = parseLocalizedNumber(hijriDay);
+      const month = parseLocalizedNumber(hijriMonth);
+      const year = parseLocalizedNumber(hijriYear);
+      if ([day, month, year].some(Number.isNaN) || day < 1 || day > 30 || month < 1 || month > 12 || year < 1) {
+        setError(t("errors.hijriInvalid"));
+        return;
+      }
+      birthISO = toISODate(hijriToGregorian({ year, month, day }));
     }
-    const date = new Date(birthDate);
-    if (Number.isNaN(date.getTime())) {
+
+    const parsedBirth = parseISODateLocal(birthISO);
+    if (!parsedBirth) {
       setError(t("errors.invalidDate"));
       return;
     }
-    const now = new Date();
-    if (date > now) {
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (parsedBirth > today) {
       setError(t("errors.futureDate"));
       return;
     }
-    const oldestValidDate = new Date(now);
-    oldestValidDate.setFullYear(now.getFullYear() - 120);
-    if (date < oldestValidDate) {
+    const oldestValid = new Date(today);
+    oldestValid.setFullYear(today.getFullYear() - MAX_AGE_YEARS);
+    if (parsedBirth < oldestValid) {
       setError(t("errors.tooOld"));
       return;
     }
 
-    const output = tool.execute({ birthDate }, { locale: "en-US" });
-    setResult(output.data);
+    let referenceISO: string | null = null;
+    if (useCustomReference) {
+      if (!referenceDate) {
+        setError(t("errors.referenceRequired"));
+        return;
+      }
+      const parsedReference = parseISODateLocal(referenceDate);
+      if (!parsedReference) {
+        setError(t("errors.referenceInvalid"));
+        return;
+      }
+      if (parsedReference < parsedBirth) {
+        setError(t("errors.referenceBeforeBirth"));
+        return;
+      }
+      const maxReference = new Date(parsedBirth);
+      maxReference.setFullYear(maxReference.getFullYear() + MAX_REFERENCE_SPAN_YEARS);
+      if (parsedReference > maxReference) {
+        setError(t("errors.referenceTooFarFuture"));
+        return;
+      }
+      referenceISO = referenceDate;
+    }
+
+    setCalcBirthISO(birthISO);
+    setCalcReferenceISO(referenceISO);
+    setDigitStyle(
+      resolveDigitStyle(
+        calendarSystem === "gregorian" ? birthDate : hijriYear,
+        useCustomReference ? referenceDate : ""
+      )
+    );
   }
 
   function handleReset() {
-    setBirthDate("");
-    setResult(null);
+    setCalendarSystem("gregorian");
+    setBirthDate(DEFAULT_BIRTH_DATE);
+    const hijri = defaultHijriFields(DEFAULT_BIRTH_DATE);
+    setHijriDay(hijri.day);
+    setHijriMonth(hijri.month);
+    setHijriYear(hijri.year);
+    setUseCustomReference(false);
+    setReferenceDate("");
     setError("");
+    setDigitStyle("western");
+    setCalcBirthISO(DEFAULT_BIRTH_DATE);
+    setCalcReferenceISO(null);
   }
 
   return (
-    <ToolCard title={t("title")} description={t("description")}>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <ToolInput
-          type="date"
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
-        />
-        {error && (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-            {error}
+    <>
+      <ToolAboveFold
+        input={
+          <AgeInputPanel
+            calendarSystem={calendarSystem}
+            onCalendarSystemChange={handleCalendarSystemChange}
+            birthDate={birthDate}
+            onBirthDateChange={setBirthDate}
+            hijriDay={hijriDay}
+            onHijriDayChange={setHijriDay}
+            hijriMonth={hijriMonth}
+            onHijriMonthChange={setHijriMonth}
+            hijriYear={hijriYear}
+            onHijriYearChange={setHijriYear}
+            useCustomReference={useCustomReference}
+            onUseCustomReferenceChange={setUseCustomReference}
+            referenceDate={referenceDate}
+            onReferenceDateChange={setReferenceDate}
+            error={error}
+            onSubmit={handleSubmit}
+            onReset={handleReset}
+          />
+        }
+        result={
+          <div className="flex h-full flex-col gap-4">
+            <AgeResult result={result} digitStyle={digitStyle} />
+            <AgeMiniDateDiff />
           </div>
-        )}
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t("form.calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t("form.reset")}
-          </button>
-        </div>
-        {result && <AgeResult result={result} />}
-      </form>
-    </ToolCard>
+        }
+        sidebar={<AgeRelatedSidebar />}
+      />
+
+      <div className="mt-6">
+        <AgeMilestones result={result} digitStyle={digitStyle} />
+      </div>
+
+      <AgeEducation />
+    </>
   );
 }
