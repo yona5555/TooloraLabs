@@ -46,7 +46,7 @@ export default function BMIRelatedSidebar() {
         </div>
       </div>
 
-      <AdSpace className="h-40 shrink-0" />
+      <AdSpace />
     </div>
   );
 }
