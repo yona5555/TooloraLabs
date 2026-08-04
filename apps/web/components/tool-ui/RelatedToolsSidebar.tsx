@@ -9,7 +9,7 @@ import { getCategoryIconColor } from "@/lib/category-colors";
 import AdSpace from "./AdSpace";
 import SectionCard from "./SectionCard";
 
-const MAX_RELATED = 4;
+const MAX_RELATED = 3;
 
 type RelatedToolsSidebarProps = {
   currentSlug: string;
