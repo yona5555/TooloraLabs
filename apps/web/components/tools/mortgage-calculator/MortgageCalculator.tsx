@@ -1,7 +1,7 @@
 "use client";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { MortgageCalculator as MortgageCalculatorTool } from "@tooloralabs/tools";
 
@@ -12,7 +12,6 @@ import MortgageResult from "./MortgageResult";
 import MortgageAffordabilityMini from "./MortgageAffordabilityMini";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import MortgagePayoffChart from "./MortgagePayoffChart";
-import MortgageEducation from "./MortgageEducation";
 import type { DownPaymentMode, MortgageExtendedResult } from "./types";
 
 const tool = new MortgageCalculatorTool();
@@ -63,7 +62,7 @@ function buildResult(
 
 const DEFAULT_DOWN_PAYMENT_AMOUNT = Math.round(DEFAULT_HOME_PRICE * (DEFAULT_DOWN_PAYMENT_PERCENT / 100));
 
-export default function MortgageCalculator() {
+export default function MortgageCalculator({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.mortgage-calculator");
 
   const [homePrice, setHomePrice] = useState(String(DEFAULT_HOME_PRICE));
@@ -266,7 +265,7 @@ export default function MortgageCalculator() {
         secondary={<MortgagePayoffChart result={result} digitStyle={digitStyle} />}
       />
 
-      <MortgageEducation />
+      {education}
     </>
   );
 }

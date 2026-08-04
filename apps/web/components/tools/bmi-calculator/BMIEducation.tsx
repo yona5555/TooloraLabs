@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
@@ -11,8 +11,8 @@ type CategoryRow = { category: string; range: string };
 type ExampleStep = { label: string; value: string };
 type University = { name: string; note: string; url: string; online: string };
 
-export default function BMIEducation() {
-  const t = useTranslations("tools.bmi-calculator.education");
+export default async function BMIEducation() {
+  const t = await getTranslations("tools.bmi-calculator.education");
 
   const categoryRows = t.raw("categoryTable.rows") as CategoryRow[];
   const overweightRisks = t.raw("risksOverweight.items") as string[];

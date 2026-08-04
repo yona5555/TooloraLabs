@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import AgeCalculator from "@/components/tools/age-calculator/AgeCalculator";
+import AgeEducation from "@/components/tools/age-calculator/AgeEducation";
 import BMICalculator from "@/components/tools/bmi-calculator/BMICalculator";
+import BMIEducation from "@/components/tools/bmi-calculator/BMIEducation";
 import MortgageCalculator from "@/components/tools/mortgage-calculator/MortgageCalculator";
+import MortgageEducation from "@/components/tools/mortgage-calculator/MortgageEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -122,13 +125,13 @@ export default async function ToolPage({
   );
   switch (slug) {
     case "age-calculator":
-      component = <AgeCalculator />;
+      component = <AgeCalculator education={<AgeEducation />} />;
       break;
     case "bmi-calculator":
-      component = <BMICalculator />;
+      component = <BMICalculator education={<BMIEducation />} />;
       break;
     case "mortgage-calculator":
-      component = <MortgageCalculator />;
+      component = <MortgageCalculator education={<MortgageEducation />} />;
       break;
     case "percentage-calculator":
       component = <PercentageCalculator />;

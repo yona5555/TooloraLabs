@@ -1,7 +1,7 @@
 "use client";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import {
   BMICalculator as BMICalculatorTool,
@@ -21,7 +21,6 @@ import BMIResult from "./BMIResult";
 import BMIMiniConverter from "./BMIMiniConverter";
 import BMIRecommendations from "./BMIRecommendations";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
-import BMIEducation from "./BMIEducation";
 import type { BMIExtendedResult, UnitSystem } from "./types";
 
 const tool = new BMICalculatorTool();
@@ -46,7 +45,7 @@ function buildExtendedResult(heightCm: number, weightKg: number, age: number, ge
   };
 }
 
-export default function BMICalculator() {
+export default function BMICalculator({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.bmi-calculator");
 
   const [unitSystem, setUnitSystem] = useState<UnitSystem>("metric");
@@ -204,7 +203,7 @@ export default function BMICalculator() {
         secondary={<BMIRecommendations category={result.category} />}
       />
 
-      <BMIEducation />
+      {education}
     </>
   );
 }

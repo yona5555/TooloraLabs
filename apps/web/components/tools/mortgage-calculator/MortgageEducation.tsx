@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
@@ -9,8 +9,8 @@ type PaymentComponent = { label: string; description: string };
 type ThresholdRow = { label: string; threshold: string; note: string };
 type University = { name: string; note: string; url: string; online: string };
 
-export default function MortgageEducation() {
-  const t = useTranslations("tools.mortgage-calculator.education");
+export default async function MortgageEducation() {
+  const t = await getTranslations("tools.mortgage-calculator.education");
 
   const amortizationSteps = t.raw("amortization.example.steps") as ExampleStep[];
   const paymentComponents = t.raw("paymentComponents.items") as PaymentComponent[];

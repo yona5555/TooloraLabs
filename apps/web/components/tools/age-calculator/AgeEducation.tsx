@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
@@ -9,8 +9,8 @@ type GenerationRow = { generation: string; range: string };
 type ExampleStep = { label: string; value: string };
 type University = { name: string; note: string; url: string; online: string };
 
-export default function AgeEducation() {
-  const t = useTranslations("tools.age-calculator.education");
+export default async function AgeEducation() {
+  const t = await getTranslations("tools.age-calculator.education");
 
   const generationRows = t.raw("generationTable.rows") as GenerationRow[];
   const exampleSteps = t.raw("calculationMethod.example.steps") as ExampleStep[];

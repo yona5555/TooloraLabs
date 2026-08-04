@@ -1,7 +1,7 @@
 "use client";
 import { parseLocalizedNumber, gregorianToHijri, hijriToGregorian, type DigitStyle } from "@tooloralabs/core";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { AgeCalculator as AgeCalculatorTool } from "@tooloralabs/tools";
 
@@ -12,7 +12,6 @@ import AgeResult from "./AgeResult";
 import AgeMiniDateDiff from "./AgeMiniDateDiff";
 import AgeMilestones from "./AgeMilestones";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
-import AgeEducation from "./AgeEducation";
 import type { AgeExtendedResult, CalendarSystem } from "./types";
 
 const tool = new AgeCalculatorTool();
@@ -87,7 +86,7 @@ function subscribeToLiveTick(callback: () => void): () => void {
   return () => clearInterval(id);
 }
 
-export default function AgeCalculator() {
+export default function AgeCalculator({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.age-calculator");
 
   const [calendarSystem, setCalendarSystem] = useState<CalendarSystem>("gregorian");
@@ -272,7 +271,7 @@ export default function AgeCalculator() {
         secondary={<AgeMilestones result={result} digitStyle={digitStyle} />}
       />
 
-      <AgeEducation />
+      {education}
     </>
   );
 }
