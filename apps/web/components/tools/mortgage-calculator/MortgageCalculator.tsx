@@ -10,7 +10,7 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import MortgageInputPanel from "./MortgageInputPanel";
 import MortgageResult from "./MortgageResult";
 import MortgageAffordabilityMini from "./MortgageAffordabilityMini";
-import MortgageRelatedSidebar from "./MortgageRelatedSidebar";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import MortgagePayoffChart from "./MortgagePayoffChart";
 import MortgageEducation from "./MortgageEducation";
 import type { DownPaymentMode, MortgageExtendedResult } from "./types";
@@ -262,7 +262,7 @@ export default function MortgageCalculator() {
             <MortgageAffordabilityMini />
           </div>
         }
-        sidebar={<MortgageRelatedSidebar />}
+        sidebar={<RelatedToolsSidebar currentSlug="mortgage-calculator" category="calculators" />}
         secondary={<MortgagePayoffChart result={result} digitStyle={digitStyle} />}
       />
 

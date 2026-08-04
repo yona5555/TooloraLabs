@@ -11,7 +11,7 @@ import AgeInputPanel from "./AgeInputPanel";
 import AgeResult from "./AgeResult";
 import AgeMiniDateDiff from "./AgeMiniDateDiff";
 import AgeMilestones from "./AgeMilestones";
-import AgeRelatedSidebar from "./AgeRelatedSidebar";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import AgeEducation from "./AgeEducation";
 import type { AgeExtendedResult, CalendarSystem } from "./types";
 
@@ -268,7 +268,7 @@ export default function AgeCalculator() {
             <AgeMiniDateDiff />
           </div>
         }
-        sidebar={<AgeRelatedSidebar />}
+        sidebar={<RelatedToolsSidebar currentSlug="age-calculator" category="calculators" />}
         secondary={<AgeMilestones result={result} digitStyle={digitStyle} />}
       />
 

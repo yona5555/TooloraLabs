@@ -20,7 +20,7 @@ import BMIQuickInsight from "./BMIQuickInsight";
 import BMIResult from "./BMIResult";
 import BMIMiniConverter from "./BMIMiniConverter";
 import BMIRecommendations from "./BMIRecommendations";
-import BMIRelatedSidebar from "./BMIRelatedSidebar";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import BMIEducation from "./BMIEducation";
 import type { BMIExtendedResult, UnitSystem } from "./types";
 
@@ -200,7 +200,7 @@ export default function BMICalculator() {
             <BMIMiniConverter />
           </div>
         }
-        sidebar={<BMIRelatedSidebar />}
+        sidebar={<RelatedToolsSidebar currentSlug="bmi-calculator" category="calculators" />}
         secondary={<BMIRecommendations category={result.category} />}
       />
 
