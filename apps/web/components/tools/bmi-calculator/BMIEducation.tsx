@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
+import AdSpace from "@/components/tool-ui/AdSpace";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import BMICategoryTable from "./BMICategoryTable";
 import BMIBodyLevelsChart from "./BMIBodyLevelsChart";
@@ -67,6 +68,8 @@ export default function BMIEducation() {
           ))}
         </ul>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("composition.title")}>
         <p>{t("composition.intro")}</p>
@@ -154,6 +157,8 @@ export default function BMIEducation() {
         <p>{t("primeIndex.example.primeResult")}</p>
         <p>{t("primeIndex.example.ponderalResult")}</p>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("limitations.title")}>
         <p>{t("limitations.paragraph1")}</p>
