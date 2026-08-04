@@ -10,14 +10,14 @@ type SectionCardProps = {
 };
 
 const headerClassName =
-  "flex w-full items-center justify-between gap-3 bg-blue-600 px-4 py-2.5 text-start sm:px-6 sm:py-3";
+  "flex w-full items-center justify-between gap-3 bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
 
 export default function SectionCard({
   title,
   action,
   onToggle,
   children,
-  bodyClassName = "p-4 sm:p-6",
+  bodyClassName = "p-4 lg:p-6",
   className = "",
 }: SectionCardProps) {
   const heading = <h2 className="font-bold text-white">{title}</h2>;

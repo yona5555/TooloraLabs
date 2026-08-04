@@ -45,7 +45,7 @@ export default function BMIMiniConverter() {
           className={`text-white transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       }
-      bodyClassName={isOpen ? "space-y-3 p-4 sm:p-6" : "hidden"}
+      bodyClassName={isOpen ? "space-y-3 p-4 lg:p-6" : "hidden"}
     >
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         {(["weight", "length"] as const).map((c) => (

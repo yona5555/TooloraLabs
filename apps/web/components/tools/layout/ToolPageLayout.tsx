@@ -29,7 +29,7 @@ export default function ToolPageLayout({
 
   if (compact) {
     return (
-      <main className={`mx-auto ${maxWidthClass} px-4 py-6 sm:px-6`}>
+      <main className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
           <Link
             href={`/categories/${categorySlug}`}
@@ -40,7 +40,7 @@ export default function ToolPageLayout({
             <ArrowLeft size={20} />
           </Link>
 
-          <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50">
+          <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50">
             {title}
           </h1>
         </div>
