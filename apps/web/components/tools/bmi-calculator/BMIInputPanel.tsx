@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { Gender } from "@tooloralabs/tools";
 import type { UnitSystem } from "./types";
 
@@ -50,7 +51,7 @@ export default function BMIInputPanel({
   const t = useTranslations("tools.bmi-calculator");
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    <SectionCard title={t("aboveFold.inputTitle")}>
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         <button
           type="button"
@@ -175,6 +176,6 @@ export default function BMIInputPanel({
           </button>
         </div>
       </form>
-    </div>
+    </SectionCard>
   );
 }
