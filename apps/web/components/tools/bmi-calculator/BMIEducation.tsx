@@ -46,6 +46,8 @@ export default function BMIEducation() {
         <BMICategoryTable rows={categoryRows} />
       </InfoSection>
 
+      <AdSpace variant="leaderboard" />
+
       <InfoSection title={t("bodyLevels.title")}>
         <p>{t("bodyLevels.intro")}</p>
         <BMIBodyLevelsChart levels={bodyLevels} />
@@ -68,8 +70,6 @@ export default function BMIEducation() {
           ))}
         </ul>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("composition.title")}>
         <p>{t("composition.intro")}</p>
