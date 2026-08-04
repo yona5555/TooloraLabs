@@ -1,5 +1,6 @@
 "use client";
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import AdSpace from "@/components/tool-ui/AdSpace";
 
 type ToolAboveFoldProps = {
   input: ReactNode;
@@ -71,7 +72,10 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
       style={{ minHeight: sidebarHeight || undefined }}
     >
       <div className="min-w-0 lg:col-start-1 lg:row-start-1">{input}</div>
-      <div className="min-w-0 lg:col-start-2 lg:row-start-1">{result}</div>
+      <div className="flex min-w-0 flex-col gap-4 lg:col-start-2 lg:row-start-1">
+        {result}
+        <AdSpace variant="content" className="mx-auto" />
+      </div>
       {secondary && (
         <div className="min-w-0 lg:col-start-1 lg:col-span-2 lg:row-start-2">{secondary}</div>
       )}

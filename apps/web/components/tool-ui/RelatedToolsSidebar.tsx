@@ -134,8 +134,8 @@ export default function RelatedToolsSidebar({ currentSlug, category }: RelatedTo
         </Link>
       </div>
 
-      <div className="border-t border-zinc-200 pt-6 dark:border-zinc-800">
-        <AdSpace />
+      <div className="-mx-4 border-t border-zinc-200 pt-6 dark:border-zinc-800 lg:-mx-6">
+        <AdSpace className="mx-auto" />
       </div>
     </SectionCard>
   );
