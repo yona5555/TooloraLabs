@@ -1,7 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronDown } from "lucide-react";
 import { UnitConverter, type UnitCategory } from "@tooloralabs/tools";
 import { parseLocalizedNumber } from "@tooloralabs/core";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -9,15 +8,28 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 
 const converter = new UnitConverter();
 
-const UNITS: Record<Extract<UnitCategory, "length" | "weight">, string[]> = {
-  length: ["cm", "m", "in", "ft"],
+type MiniCategory = Extract<UnitCategory, "length" | "weight" | "temperature">;
+
+const UNITS: Record<MiniCategory, string[]> = {
   weight: ["kg", "g", "lb", "oz"],
+  length: ["cm", "m", "in", "ft"],
+  temperature: ["celsius", "fahrenheit"],
+};
+
+const CATEGORY_LABELS: Record<MiniCategory, string> = {
+  weight: "kg / lb",
+  length: "cm / in",
+  temperature: "°C / °F",
+};
+
+const UNIT_SYMBOLS: Record<string, string> = {
+  celsius: "°C",
+  fahrenheit: "°F",
 };
 
 export default function BMIMiniConverter() {
   const t = useTranslations("tools.bmi-calculator.aboveFold");
-  const [isOpen, setIsOpen] = useState(false);
-  const [category, setCategory] = useState<"length" | "weight">("weight");
+  const [category, setCategory] = useState<MiniCategory>("weight");
   const [from, setFrom] = useState("kg");
   const [to, setTo] = useState("lb");
   const [value, setValue] = useState("1");
@@ -29,26 +41,16 @@ export default function BMIMiniConverter() {
     return output.success ? output.data.result : null;
   }, [category, from, to, value]);
 
-  function handleCategoryChange(next: "length" | "weight") {
+  function handleCategoryChange(next: MiniCategory) {
     setCategory(next);
     setFrom(UNITS[next][0]);
     setTo(UNITS[next][1]);
   }
 
   return (
-    <SectionCard
-      title={t("miniConverterTitle")}
-      onToggle={() => setIsOpen((prev) => !prev)}
-      action={
-        <ChevronDown
-          size={16}
-          className={`text-white transition-transform ${isOpen ? "rotate-180" : ""}`}
-        />
-      }
-      bodyClassName={isOpen ? "space-y-3 p-4 lg:p-6" : "hidden"}
-    >
+    <SectionCard title={t("miniConverterTitle")}>
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
-        {(["weight", "length"] as const).map((c) => (
+        {(["weight", "length", "temperature"] as const).map((c) => (
           <button
             key={c}
             type="button"
@@ -57,12 +59,12 @@ export default function BMIMiniConverter() {
               category === c ? "bg-blue-600 text-white" : "text-zinc-500 dark:text-zinc-400"
             }`}
           >
-            {c === "weight" ? "kg / lb" : "cm / in"}
+            {CATEGORY_LABELS[c]}
           </button>
         ))}
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-2">
         <ToolInput
           type="text"
           inputMode="decimal"
@@ -77,13 +79,13 @@ export default function BMIMiniConverter() {
         >
           {UNITS[category].map((unit) => (
             <option key={unit} value={unit}>
-              {unit}
+              {UNIT_SYMBOLS[unit] ?? unit}
             </option>
           ))}
         </select>
       </div>
 
-      <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300">
+      <div className="mt-3 flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300">
         <span>{t("miniConverterResultPrefix")}</span>
         <span dir="ltr" className="font-mono font-semibold text-zinc-900 dark:text-zinc-100">
           {result ?? "—"}
@@ -95,7 +97,7 @@ export default function BMIMiniConverter() {
         >
           {UNITS[category].map((unit) => (
             <option key={unit} value={unit}>
-              {unit}
+              {UNIT_SYMBOLS[unit] ?? unit}
             </option>
           ))}
         </select>
