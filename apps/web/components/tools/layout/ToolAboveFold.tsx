@@ -42,6 +42,13 @@ type ToolAboveFoldProps = {
  * at the narrower default page width the 320px + minmax(360px,…) + 320px
  * template doesn't fit and column 2 gets forced to its 360px floor, pushing
  * it under the sidebar exactly like min-w-0 alone can't fix.
+ *
+ * `items-start` on the container overrides Grid's default `align-items:
+ * normal` (which resolves to stretch), which was independently forcing
+ * `input` and `result` — the two real row-1 grid items — to match each
+ * other's height even after the sidebar was removed from flow. Without it,
+ * whichever of the two is shorter gets stretched with dead space to match
+ * the taller one.
  */
 export default function ToolAboveFold({ input, result, sidebar, secondary }: ToolAboveFoldProps) {
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -60,7 +67,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
 
   return (
     <div
-      className="relative grid grid-cols-1 content-start gap-6 lg:grid-cols-[320px_minmax(360px,1fr)_320px]"
+      className="relative grid grid-cols-1 content-start items-start gap-6 lg:grid-cols-[320px_minmax(360px,1fr)_320px]"
       style={{ minHeight: sidebarHeight || undefined }}
     >
       <div className="min-w-0 lg:col-start-1 lg:row-start-1">{input}</div>

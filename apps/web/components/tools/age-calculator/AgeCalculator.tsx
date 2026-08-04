@@ -59,17 +59,31 @@ function defaultHijriFields(birthDateISO: string) {
  * render; only once useSyncExternalStore's subscribe callback fires (right
  * after hydration commits, then every second) does the real clock kick in.
  */
+let cachedLiveTimestamp = 0;
+
 function getLiveTimestamp(): number {
-  return Date.now();
+  return cachedLiveTimestamp;
 }
 
 function getFrozenTimestamp(): number {
   return 0;
 }
 
+/**
+ * useSyncExternalStore requires getSnapshot to return the same value between
+ * calls until something actually changes — returning Date.now() directly
+ * from getSnapshot means every call produces a new value, which React reads
+ * as a permanent tear and re-renders forever ("Maximum update depth
+ * exceeded"). Caching the timestamp here and only updating it from the tick
+ * itself keeps the snapshot stable except on the once-per-second tick.
+ */
 function subscribeToLiveTick(callback: () => void): () => void {
-  callback();
-  const id = setInterval(callback, 1000);
+  const tick = () => {
+    cachedLiveTimestamp = Date.now();
+    callback();
+  };
+  tick();
+  const id = setInterval(tick, 1000);
   return () => clearInterval(id);
 }
 
