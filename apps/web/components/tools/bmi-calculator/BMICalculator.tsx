@@ -16,6 +16,7 @@ import {
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import BMIInputPanel from "./BMIInputPanel";
+import BMIQuickInsight from "./BMIQuickInsight";
 import BMIResult from "./BMIResult";
 import BMIMiniConverter from "./BMIMiniConverter";
 import BMIRecommendations from "./BMIRecommendations";
@@ -168,27 +169,30 @@ export default function BMICalculator() {
     <>
       <ToolAboveFold
         input={
-          <BMIInputPanel
-            unitSystem={unitSystem}
-            onUnitSystemChange={handleUnitSystemChange}
-            heightCm={heightCm}
-            onHeightCmChange={setHeightCm}
-            weightKg={weightKg}
-            onWeightKgChange={setWeightKg}
-            heightFt={heightFt}
-            onHeightFtChange={setHeightFt}
-            heightIn={heightIn}
-            onHeightInChange={setHeightIn}
-            weightLb={weightLb}
-            onWeightLbChange={setWeightLb}
-            age={age}
-            onAgeChange={setAge}
-            gender={gender}
-            onGenderChange={setGender}
-            error={error}
-            onSubmit={handleSubmit}
-            onReset={handleReset}
-          />
+          <div className="flex flex-col gap-4">
+            <BMIInputPanel
+              unitSystem={unitSystem}
+              onUnitSystemChange={handleUnitSystemChange}
+              heightCm={heightCm}
+              onHeightCmChange={setHeightCm}
+              weightKg={weightKg}
+              onWeightKgChange={setWeightKg}
+              heightFt={heightFt}
+              onHeightFtChange={setHeightFt}
+              heightIn={heightIn}
+              onHeightInChange={setHeightIn}
+              weightLb={weightLb}
+              onWeightLbChange={setWeightLb}
+              age={age}
+              onAgeChange={setAge}
+              gender={gender}
+              onGenderChange={setGender}
+              error={error}
+              onSubmit={handleSubmit}
+              onReset={handleReset}
+            />
+            <BMIQuickInsight result={result} />
+          </div>
         }
         result={
           <div className="flex flex-col gap-4">
