@@ -195,7 +195,18 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
         }
         result={
           <div className="flex flex-col gap-4">
-            <BMIResult result={result} digitStyle={digitStyle} />
+            <BMIResult
+              result={result}
+              digitStyle={digitStyle}
+              unitSystem={unitSystem}
+              heightCm={heightCm}
+              weightKg={weightKg}
+              heightFt={heightFt}
+              heightIn={heightIn}
+              weightLb={weightLb}
+              age={age}
+              gender={gender}
+            />
             <BMIMiniConverter />
           </div>
         }

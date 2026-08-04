@@ -1,19 +1,46 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { Gender } from "@tooloralabs/tools";
 import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
-import CopyButton from "@/components/tool-ui/CopyButton";
+import PdfDownloadButton from "@/components/tool-ui/PdfDownloadButton";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import BMIScaleChart from "./BMIScaleChart";
-import type { BMIExtendedResult } from "./types";
+import type { BMIExtendedResult, UnitSystem } from "./types";
 
 interface BMIResultProps {
   result: BMIExtendedResult;
   digitStyle: DigitStyle;
+  unitSystem: UnitSystem;
+  heightCm: string;
+  weightKg: string;
+  heightFt: string;
+  heightIn: string;
+  weightLb: string;
+  age: string;
+  gender: Gender;
 }
 
 const NUM = { minimumFractionDigits: 1, maximumFractionDigits: 1 };
 
-export default function BMIResult({ result, digitStyle }: BMIResultProps) {
+const GAUGE_ZONES = [
+  { from: 15, to: 18.5, color: "#3b82f6" },
+  { from: 18.5, to: 25, color: "#22c55e" },
+  { from: 25, to: 30, color: "#f59e0b" },
+  { from: 30, to: 40, color: "#ef4444" },
+];
+
+export default function BMIResult({
+  result,
+  digitStyle,
+  unitSystem,
+  heightCm,
+  weightKg,
+  heightFt,
+  heightIn,
+  weightLb,
+  age,
+  gender,
+}: BMIResultProps) {
   const t = useTranslations("tools.bmi-calculator");
 
   const level = mapBMIToResultLevel(result.category);
@@ -25,7 +52,6 @@ export default function BMIResult({ result, digitStyle }: BMIResultProps) {
   const bmiPrimeText = fmt(result.bmi / 25, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const ponderalText = fmt(result.ponderalIndex);
   const bodyFatText = fmt(result.bodyFatEstimate);
-  const summaryText = `${t("title")}: ${bmiText} — ${t(`levels.${level}.title`)}`;
 
   let target: { labelKey: "toTargetLoseLabel" | "toTargetGainLabel"; amount: string } | null = null;
   if (result.bmi < 18.5) {
@@ -34,8 +60,44 @@ export default function BMIResult({ result, digitStyle }: BMIResultProps) {
     target = { labelKey: "toTargetLoseLabel", amount: fmt(result.weightKg - result.healthyMaxWeight) };
   }
 
+  const pdfInputs =
+    unitSystem === "metric"
+      ? [
+          { label: t("form.heightPlaceholder"), value: `${heightCm} cm` },
+          { label: t("form.weightPlaceholder"), value: `${weightKg} kg` },
+          { label: t("form.agePlaceholder"), value: age },
+          { label: t("form.genderLabel"), value: gender === "male" ? t("form.genderMale") : t("form.genderFemale") },
+        ]
+      : [
+          { label: t("form.heightFeetPlaceholder"), value: `${heightFt} ft` },
+          { label: t("form.heightInchesPlaceholder"), value: `${heightIn} in` },
+          { label: t("form.weightLbPlaceholder"), value: `${weightLb} lb` },
+          { label: t("form.agePlaceholder"), value: age },
+          { label: t("form.genderLabel"), value: gender === "male" ? t("form.genderMale") : t("form.genderFemale") },
+        ];
+
+  const pdfResults = [
+    { label: "BMI", value: bmiText },
+    { label: t("aboveFold.categoryLabel"), value: t(`levels.${level}.title`) },
+    { label: t("aboveFold.healthyRangeLabel"), value: `${minWeightText}–${maxWeightText} ${t("aboveFold.kgUnit")}` },
+    { label: t("aboveFold.bmiPrimeLabel"), value: bmiPrimeText },
+    { label: t("aboveFold.ponderalLabel"), value: ponderalText },
+    { label: t("aboveFold.bodyFatLabel"), value: `${bodyFatText}%` },
+  ];
+
   return (
-    <SectionCard title={t("aboveFold.resultTitle")} action={<CopyButton text={summaryText} />}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        <PdfDownloadButton
+          toolName={t("title")}
+          inputs={pdfInputs}
+          results={pdfResults}
+          gauge={{ zones: GAUGE_ZONES, domainMin: 15, domainMax: 40, value: result.bmi, ticks: [15, 18.5, 25, 30, 40] }}
+          filename="bmi-calculator-result.pdf"
+        />
+      }
+    >
       <p className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">{bmiText}</p>
       <p className="mt-1 font-medium text-blue-600 dark:text-blue-400">
         {t(`levels.${level}.title`)}
