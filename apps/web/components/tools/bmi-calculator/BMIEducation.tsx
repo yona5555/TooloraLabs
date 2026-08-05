@@ -4,13 +4,13 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/EquipmentSection";
+import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import BMICategoryTable from "./BMICategoryTable";
 import BMIBodyLevelsChart from "./BMIBodyLevelsChart";
 import BMICompositionChart from "./BMICompositionChart";
 
 type CategoryRow = { category: string; range: string };
 type ExampleStep = { label: string; value: string };
-type University = { name: string; note: string; url: string; online: string };
 
 export default async function BMIEducation() {
   const t = await getTranslations("tools.bmi-calculator.education");
@@ -185,28 +185,11 @@ export default async function BMIEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.academicPath.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.academicPath.intro")}</p>
-          <ul className="mt-4 space-y-4">
-            {universities.map((uni) => (
-              <li key={uni.name} className="rounded-sm border border-current/20 p-4">
-                <p className="font-semibold">{uni.name}</p>
-                <p className="mt-1 text-sm opacity-80">{uni.note}</p>
-                <p className="mt-1 text-sm opacity-80">{uni.online}</p>
-                <a
-                  href={uni.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  dir="ltr"
-                  className="mt-2 inline-block text-sm font-medium underline decoration-dotted underline-offset-4"
-                >
-                  {uni.url.replace(/^https?:\/\//, "")}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <AcademicPathSection
+          title={t("behindTheTool.academicPath.title")}
+          intro={t("behindTheTool.academicPath.intro")}
+          universities={universities}
+        />
       </InfoSection>
 
       <InfoSection title={t("references.title")}>

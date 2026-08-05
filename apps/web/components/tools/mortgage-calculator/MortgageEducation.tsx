@@ -2,12 +2,12 @@ import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
+import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import MortgagePMIThresholdTable from "./MortgagePMIThresholdTable";
 
 type ExampleStep = { label: string; value: string };
 type PaymentComponent = { label: string; description: string };
 type ThresholdRow = { label: string; threshold: string; note: string };
-type University = { name: string; note: string; url: string; online: string };
 
 export default async function MortgageEducation() {
   const t = await getTranslations("tools.mortgage-calculator.education");
@@ -133,28 +133,11 @@ export default async function MortgageEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.academicPath.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.academicPath.intro")}</p>
-          <ul className="mt-4 space-y-4">
-            {universities.map((uni) => (
-              <li key={uni.name} className="rounded-sm border border-current/20 p-4">
-                <p className="font-semibold">{uni.name}</p>
-                <p className="mt-1 text-sm opacity-80">{uni.note}</p>
-                <p className="mt-1 text-sm opacity-80">{uni.online}</p>
-                <a
-                  href={uni.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  dir="ltr"
-                  className="mt-2 inline-block text-sm font-medium underline decoration-dotted underline-offset-4"
-                >
-                  {uni.url.replace(/^https?:\/\//, "")}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <AcademicPathSection
+          title={t("behindTheTool.academicPath.title")}
+          intro={t("behindTheTool.academicPath.intro")}
+          universities={universities}
+        />
       </InfoSection>
 
       <InfoSection title={t("references.title")}>
