@@ -35,7 +35,7 @@ export default function ToolPageLayout({
             href={`/categories/${categorySlug}`}
             aria-label={backLabel}
             title={backLabel}
-            className="flex shrink-0 items-center justify-center rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-blue-400"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-zinc-500 transition hover:bg-zinc-100 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-blue-400"
           >
             <ArrowLeft size={20} />
           </Link>
@@ -51,29 +51,29 @@ export default function ToolPageLayout({
   }
 
   return (
-    <main className={`mx-auto ${maxWidthClass} px-6 py-20`}>
+    <main className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
       <Link
         href={`/categories/${categorySlug}`}
         aria-label={backLabel}
-        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
+        className="-my-3 inline-flex items-center gap-2 py-3 text-sm font-medium text-zinc-500 transition hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
       >
         <ArrowLeft size={16} />
         {backLabel}
       </Link>
 
-      <span className="mt-6 block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+      <span className="mt-4 block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 lg:mt-6">
         {category}
       </span>
 
-      <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+      <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-zinc-900 lg:mt-6 lg:text-5xl dark:text-zinc-50">
         {title}
       </h1>
 
-      <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
+      <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 lg:mt-6 lg:text-lg lg:leading-8 dark:text-zinc-300">
         {description}
       </p>
 
-      <div className="mt-12">
+      <div className="mt-8 lg:mt-12">
         {children}
       </div>
     </main>

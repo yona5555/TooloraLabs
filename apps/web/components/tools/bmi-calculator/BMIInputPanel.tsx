@@ -56,7 +56,7 @@ export default function BMIInputPanel({
         <button
           type="button"
           onClick={() => onUnitSystemChange("metric")}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
+          className={`rounded-md px-3 py-3 text-sm font-medium transition ${
             unitSystem === "metric"
               ? "bg-blue-600 text-white"
               : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -67,7 +67,7 @@ export default function BMIInputPanel({
         <button
           type="button"
           onClick={() => onUnitSystemChange("us")}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
+          className={`rounded-md px-3 py-3 text-sm font-medium transition ${
             unitSystem === "us"
               ? "bg-blue-600 text-white"
               : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -139,7 +139,7 @@ export default function BMIInputPanel({
             {(["male", "female"] as const).map((value) => (
               <label
                 key={value}
-                className={`flex flex-1 cursor-pointer items-center justify-center rounded-xl border px-4 py-2.5 text-sm font-medium transition ${
+                className={`flex flex-1 cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition ${
                   gender === value
                     ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
                     : "border-zinc-300 text-zinc-600 hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-300"

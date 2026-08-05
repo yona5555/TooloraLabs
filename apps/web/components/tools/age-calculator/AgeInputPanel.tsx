@@ -55,7 +55,7 @@ export default function AgeInputPanel({
         <button
           type="button"
           onClick={() => onCalendarSystemChange("gregorian")}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
+          className={`rounded-md px-3 py-3 text-sm font-medium transition ${
             calendarSystem === "gregorian"
               ? "bg-blue-600 text-white"
               : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -66,7 +66,7 @@ export default function AgeInputPanel({
         <button
           type="button"
           onClick={() => onCalendarSystemChange("hijri")}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
+          className={`rounded-md px-3 py-3 text-sm font-medium transition ${
             calendarSystem === "hijri"
               ? "bg-blue-600 text-white"
               : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"

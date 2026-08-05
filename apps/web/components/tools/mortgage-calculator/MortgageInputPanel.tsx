@@ -90,7 +90,7 @@ export default function MortgageInputPanel({
               <button
                 type="button"
                 onClick={() => onDownPaymentModeChange("percent")}
-                className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
+                className={`rounded-md px-2.5 py-3.5 text-xs font-medium transition ${
                   downPaymentMode === "percent"
                     ? "bg-blue-600 text-white"
                     : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -101,7 +101,7 @@ export default function MortgageInputPanel({
               <button
                 type="button"
                 onClick={() => onDownPaymentModeChange("amount")}
-                className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
+                className={`rounded-md px-2.5 py-3.5 text-xs font-medium transition ${
                   downPaymentMode === "amount"
                     ? "bg-blue-600 text-white"
                     : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -146,7 +146,7 @@ export default function MortgageInputPanel({
                 key={years}
                 type="button"
                 onClick={() => onLoanTermYearsChange(String(years))}
-                className={`flex-1 rounded-lg border px-2 py-2 text-sm font-medium transition ${
+                className={`flex-1 rounded-lg border px-2 py-3 text-sm font-medium transition ${
                   loanTermYears === String(years)
                     ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
                     : "border-zinc-300 text-zinc-600 hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-300"

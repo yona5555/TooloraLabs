@@ -43,7 +43,7 @@ export default function PdfDownloadButton({
       type="button"
       onClick={handleClick}
       disabled={state === "generating"}
-      className={`flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 disabled:opacity-60 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700 ${className}`}
+      className={`flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 disabled:opacity-60 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700 ${className}`}
     >
       {state === "done" ? <Check size={16} /> : <FileDown size={16} />}
       {state === "generating" ? t("generatingPdf") : state === "done" ? t("downloaded") : t("downloadPdf")}

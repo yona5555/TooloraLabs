@@ -147,7 +147,7 @@ export default function ScientificCalculator() {
             type="button"
             onClick={button.onClick}
             aria-label={button.ariaLabel}
-            className={`flex h-10 items-center justify-center rounded-xl text-base font-semibold transition ${variantClass[button.variant ?? "number"]}`}
+            className={`flex h-11 items-center justify-center rounded-xl text-base font-semibold transition ${variantClass[button.variant ?? "number"]}`}
           >
             {button.label}
           </button>

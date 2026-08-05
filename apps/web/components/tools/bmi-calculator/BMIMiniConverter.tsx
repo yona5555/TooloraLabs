@@ -55,7 +55,7 @@ export default function BMIMiniConverter() {
             key={c}
             type="button"
             onClick={() => handleCategoryChange(c)}
-            className={`rounded-md px-3 py-1 text-xs font-medium transition ${
+            className={`rounded-md px-3 py-3.5 text-xs font-medium transition ${
               category === c ? "bg-blue-600 text-white" : "text-zinc-500 dark:text-zinc-400"
             }`}
           >

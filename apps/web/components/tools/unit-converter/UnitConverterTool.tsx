@@ -71,7 +71,7 @@ export default function UnitConverterTool() {
             key={item}
             type="button"
             onClick={() => handleCategoryChange(item)}
-            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+            className={`rounded-full px-4 py-3 text-sm font-semibold transition ${
               category === item
                 ? "bg-blue-600 text-white"
                 : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
@@ -101,7 +101,7 @@ export default function UnitConverterTool() {
             type="button"
             onClick={swap}
             aria-label={t("form.swap")}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
             <ArrowLeftRight size={16} />
           </button>

@@ -76,7 +76,7 @@ export default function FileSizeConverterTool() {
             type="button"
             onClick={swap}
             aria-label={t("form.swap")}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
             <ArrowLeftRight size={16} />
           </button>
