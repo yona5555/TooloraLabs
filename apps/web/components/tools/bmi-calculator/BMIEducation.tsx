@@ -3,6 +3,7 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
+import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/EquipmentSection";
 import BMICategoryTable from "./BMICategoryTable";
 import BMIBodyLevelsChart from "./BMIBodyLevelsChart";
 import BMICompositionChart from "./BMICompositionChart";
@@ -21,6 +22,7 @@ export default async function BMIEducation() {
   const primeSteps = t.raw("primeIndex.example.primeSteps") as ExampleStep[];
   const ponderalSteps = t.raw("primeIndex.example.ponderalSteps") as ExampleStep[];
   const faqItems = t.raw("faq.items") as FAQItem[];
+  const equipmentItems = t.raw("behindTheTool.equipment.items") as EquipmentItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
   const bodyLevels = [
@@ -174,10 +176,11 @@ export default async function BMIEducation() {
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.equipment.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.equipment.paragraph")}</p>
-        </div>
+        <EquipmentSection
+          title={t("behindTheTool.equipment.title")}
+          intro={t("behindTheTool.equipment.intro")}
+          items={equipmentItems}
+        />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>

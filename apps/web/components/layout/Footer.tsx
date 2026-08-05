@@ -7,6 +7,7 @@ export default function Footer() {
   const links = [
     { href: "/privacy", label: t("privacy") },
     { href: "/terms", label: t("terms") },
+    { href: "/affiliate-disclosure", label: t("affiliateDisclosure") },
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
   ];

@@ -13,7 +13,7 @@ function alternatesFor(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "/about", "/contact", "/privacy", "/terms"];
+  const staticPaths = ["", "/about", "/contact", "/privacy", "/terms", "/affiliate-disclosure"];
   const categoryPaths = categories.map((category) => `/categories/${category.slug}`);
   const toolPaths = tools.map((tool) => `/tools/${tool.slug}`);
 
