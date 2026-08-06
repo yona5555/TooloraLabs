@@ -84,4 +84,54 @@ describe("MortgageCalculator", () => {
     expect(result.data.monthsSavedByExtraPayment).toBe(0);
     expect(result.data.interestSavedByExtraPayment).toBe(0);
   });
+
+  describe("monthlySchedule", () => {
+    it("has one row per payment, correctly numbered and grouped by year", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      expect(result.data.monthlySchedule).toHaveLength(360);
+      expect(result.data.monthlySchedule[0].month).toBe(1);
+      expect(result.data.monthlySchedule[0].year).toBe(1);
+      expect(result.data.monthlySchedule[11].year).toBe(1);
+      expect(result.data.monthlySchedule[12].year).toBe(2);
+      expect(result.data.monthlySchedule.at(-1)?.month).toBe(360);
+      expect(result.data.monthlySchedule.at(-1)?.year).toBe(30);
+    });
+
+    it("ends with a zero balance and each month's payment splitting into principal + interest", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      expect(result.data.monthlySchedule.at(-1)?.endingBalance).toBe(0);
+
+      const first = result.data.monthlySchedule[0];
+      expect(first.principalPaid + first.interestPaid).toBeCloseTo(first.payment, 2);
+      expect(first.interestPaid).toBeGreaterThan(first.principalPaid);
+    });
+
+    it("aggregates back into the yearly amortizationSchedule", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      const year1Months = result.data.monthlySchedule.filter((m) => m.year === 1);
+      const year1PrincipalSum = year1Months.reduce((sum, m) => sum + m.principalPaid, 0);
+      const year1InterestSum = year1Months.reduce((sum, m) => sum + m.interestPaid, 0);
+
+      expect(year1Months).toHaveLength(12);
+      expect(year1PrincipalSum).toBeCloseTo(result.data.amortizationSchedule[0].principalPaid, 1);
+      expect(year1InterestSum).toBeCloseTo(result.data.amortizationSchedule[0].interestPaid, 1);
+    });
+
+    it("shortens the monthly schedule when an extra payment is applied", () => {
+      const withExtra = new MortgageCalculator().execute(
+        { ...baseInput, extraMonthlyPayment: 300 },
+        context
+      );
+      expect(withExtra.data.monthlySchedule.length).toBeLessThan(360);
+      expect(withExtra.data.monthlySchedule.at(-1)?.endingBalance).toBe(0);
+    });
+
+    it("returns an empty monthly schedule when there is no loan balance", () => {
+      const result = new MortgageCalculator().execute(
+        { ...baseInput, homePrice: 100000, downPayment: 100000 },
+        context
+      );
+      expect(result.data.monthlySchedule).toHaveLength(0);
+    });
+  });
 });

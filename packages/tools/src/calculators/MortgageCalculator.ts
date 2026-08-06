@@ -20,6 +20,17 @@ export type AmortizationYear = {
   endingBalance: number;
 };
 
+export type AmortizationMonth = {
+  /** 1-based payment number across the whole loan (1..totalPayments). */
+  month: number;
+  /** 1-based year this payment falls in (ceil(month / 12)). */
+  year: number;
+  payment: number;
+  principalPaid: number;
+  interestPaid: number;
+  endingBalance: number;
+};
+
 export type MortgageResult = MortgageInput & {
   loanAmount: number;
   downPaymentPercent: number;
@@ -44,12 +55,15 @@ export type MortgageResult = MortgageInput & {
   amortizationSchedule: AmortizationYear[];
   /** The standard (no extra payment) yearly schedule, exposed alongside `amortizationSchedule` so the two can be charted side by side. Identical to `amortizationSchedule` when extraMonthlyPayment is 0. */
   standardAmortizationSchedule: AmortizationYear[];
+  /** Every individual payment, month 1 through payoff — the full schedule `amortizationSchedule` aggregates into years. */
+  monthlySchedule: AmortizationMonth[];
 };
 
 type AmortizationSimulation = {
   months: number;
   totalInterest: number;
   schedule: AmortizationYear[];
+  monthlySchedule: AmortizationMonth[];
   pmiDropoffMonth: number | null;
   pmiAutoTerminationMonth: number | null;
 };
@@ -64,7 +78,14 @@ function simulateAmortization(
   capMonths: number
 ): AmortizationSimulation {
   if (loanAmount <= 0 || capMonths <= 0) {
-    return { months: 0, totalInterest: 0, schedule: [], pmiDropoffMonth: null, pmiAutoTerminationMonth: null };
+    return {
+      months: 0,
+      totalInterest: 0,
+      schedule: [],
+      monthlySchedule: [],
+      pmiDropoffMonth: null,
+      pmiAutoTerminationMonth: null,
+    };
   }
 
   const ltv80Balance = homePrice * 0.8;
@@ -79,6 +100,7 @@ function simulateAmortization(
   let pmiDropoffMonth: number | null = null;
   let pmiAutoTerminationMonth: number | null = null;
   const schedule: AmortizationYear[] = [];
+  const monthlySchedule: AmortizationMonth[] = [];
 
   while (balance > 0.005 && month < capMonths) {
     month += 1;
@@ -97,6 +119,15 @@ function simulateAmortization(
       pmiAutoTerminationMonth = month;
     }
 
+    monthlySchedule.push({
+      month,
+      year: Math.ceil(month / 12),
+      payment: Number((interestPortion + principalPortion).toFixed(2)),
+      principalPaid: Number(principalPortion.toFixed(2)),
+      interestPaid: Number(interestPortion.toFixed(2)),
+      endingBalance: Number(Math.max(balance, 0).toFixed(2)),
+    });
+
     if (month % 12 === 0 || balance <= 0.005) {
       schedule.push({
         year: Math.ceil(month / 12),
@@ -109,7 +140,7 @@ function simulateAmortization(
     }
   }
 
-  return { months: month, totalInterest, schedule, pmiDropoffMonth, pmiAutoTerminationMonth };
+  return { months: month, totalInterest, schedule, monthlySchedule, pmiDropoffMonth, pmiAutoTerminationMonth };
 }
 
 export class MortgageCalculator extends BaseCalculator<MortgageInput, MortgageResult> {
@@ -204,6 +235,7 @@ export class MortgageCalculator extends BaseCalculator<MortgageInput, MortgageRe
         pmiAutoTerminationMonth: scheduleSim.pmiAutoTerminationMonth,
         amortizationSchedule: scheduleSim.schedule,
         standardAmortizationSchedule: baseline.schedule,
+        monthlySchedule: scheduleSim.monthlySchedule,
       },
       metadata: {},
     };
