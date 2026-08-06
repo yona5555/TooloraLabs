@@ -57,32 +57,7 @@ export default function AgeInputPanel({
 
   return (
     <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
-        <button
-          type="button"
-          onClick={() => onCalendarSystemChange("gregorian")}
-          className={`rounded-md px-3 py-3 text-sm font-medium transition ${
-            calendarSystem === "gregorian"
-              ? "bg-blue-600 text-white"
-              : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-          }`}
-        >
-          {t("form.calendarGregorian")}
-        </button>
-        <button
-          type="button"
-          onClick={() => onCalendarSystemChange("hijri")}
-          className={`rounded-md px-3 py-3 text-sm font-medium transition ${
-            calendarSystem === "hijri"
-              ? "bg-blue-600 text-white"
-              : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-          }`}
-        >
-          {t("form.calendarHijri")}
-        </button>
-      </div>
-
-      <form onSubmit={onSubmit} className="mt-5 space-y-5">
+      <form onSubmit={onSubmit} className="space-y-5">
         {calendarSystem === "gregorian" ? (
           <ToolInput
             label={t("form.birthDateLabel")}
@@ -128,31 +103,24 @@ export default function AgeInputPanel({
 
         <div>
           <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-            {t("form.genderLabel")}
+            {t("form.calendarSystemLabel")}
           </span>
           <div className="flex gap-3">
-            {(["male", "female"] as const).map((value) => (
-              <label
+            {(["gregorian", "hijri"] as const).map((value) => (
+              <button
                 key={value}
-                className={`flex flex-1 cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition ${
-                  gender === value
+                type="button"
+                onClick={() => onCalendarSystemChange(value)}
+                className={`flex-1 rounded-xl border px-4 py-3 text-sm font-medium transition ${
+                  calendarSystem === value
                     ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
                     : "border-zinc-300 text-zinc-600 hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-300"
                 }`}
               >
-                <input
-                  type="radio"
-                  name="age-gender"
-                  value={value}
-                  checked={gender === value}
-                  onChange={() => onGenderChange(value)}
-                  className="sr-only"
-                />
-                {value === "male" ? t("form.genderMale") : t("form.genderFemale")}
-              </label>
+                {value === "gregorian" ? t("form.calendarGregorian") : t("form.calendarHijri")}
+              </button>
             ))}
           </div>
-          <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("form.genderNote")}</p>
         </div>
 
         <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
@@ -178,6 +146,35 @@ export default function AgeInputPanel({
               <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("form.customReferenceHint")}</p>
             </div>
           )}
+        </div>
+
+        <div>
+          <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+            {t("form.genderLabel")}
+          </span>
+          <div className="flex gap-3">
+            {(["male", "female"] as const).map((value) => (
+              <label
+                key={value}
+                className={`flex flex-1 cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition ${
+                  gender === value
+                    ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
+                    : "border-zinc-300 text-zinc-600 hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-300"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="age-gender"
+                  value={value}
+                  checked={gender === value}
+                  onChange={() => onGenderChange(value)}
+                  className="sr-only"
+                />
+                {value === "male" ? t("form.genderMale") : t("form.genderFemale")}
+              </label>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("form.genderNote")}</p>
         </div>
 
         {error && (
