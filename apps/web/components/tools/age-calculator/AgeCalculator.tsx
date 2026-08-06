@@ -3,7 +3,7 @@ import { parseLocalizedNumber, gregorianToHijri, hijriToGregorian, type DigitSty
 
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { AgeCalculator as AgeCalculatorTool } from "@tooloralabs/tools";
+import { AgeCalculator as AgeCalculatorTool, type Gender } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
@@ -11,6 +11,7 @@ import AgeInputPanel from "./AgeInputPanel";
 import AgeResult from "./AgeResult";
 import AgeMiniDateDiff from "./AgeMiniDateDiff";
 import AgeMilestones from "./AgeMilestones";
+import AgeLifeExpectancyCard from "./AgeLifeExpectancyCard";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import type { AgeExtendedResult, CalendarSystem } from "./types";
 
@@ -91,6 +92,7 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
 
   const [calendarSystem, setCalendarSystem] = useState<CalendarSystem>("gregorian");
   const [birthDate, setBirthDate] = useState(DEFAULT_BIRTH_DATE);
+  const [gender, setGender] = useState<Gender>("male");
   const initialHijri = defaultHijriFields(DEFAULT_BIRTH_DATE);
   const [hijriDay, setHijriDay] = useState(initialHijri.day);
   const [hijriMonth, setHijriMonth] = useState(initialHijri.month);
@@ -225,6 +227,7 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
   function handleReset() {
     setCalendarSystem("gregorian");
     setBirthDate(DEFAULT_BIRTH_DATE);
+    setGender("male");
     const hijri = defaultHijriFields(DEFAULT_BIRTH_DATE);
     setHijriDay(hijri.day);
     setHijriMonth(hijri.month);
@@ -246,6 +249,8 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
             onCalendarSystemChange={handleCalendarSystemChange}
             birthDate={birthDate}
             onBirthDateChange={setBirthDate}
+            gender={gender}
+            onGenderChange={setGender}
             hijriDay={hijriDay}
             onHijriDayChange={setHijriDay}
             hijriMonth={hijriMonth}
@@ -264,6 +269,7 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
         result={
           <div className="flex flex-col gap-4">
             <AgeResult result={result} digitStyle={digitStyle} />
+            <AgeLifeExpectancyCard decimalAge={result.decimalAge} gender={gender} digitStyle={digitStyle} />
             <AgeMiniDateDiff />
           </div>
         }

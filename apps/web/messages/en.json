@@ -223,6 +223,10 @@
           "Dhu al-Qi'dah",
           "Dhu al-Hijjah"
         ],
+        "genderLabel": "Sex (used for the life-expectancy calculation)",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "genderNote": "Only used for the life-expectancy indicator below — it doesn't affect your actual age in years, months and days.",
         "customReferenceLabel": "Calculate age as of a specific date (instead of today)",
         "customReferenceHint": "Useful for legal, immigration, or exam eligibility purposes — the reference date must be on or after the birth date.",
         "calculate": "Calculate Age",
@@ -328,7 +332,22 @@
         "miniDateDiffFrom": "From",
         "miniDateDiffTo": "To",
         "miniDateDiffResult": "{years} years, {months} months, {days} days ({totalDays} total days)",
-        "miniDateDiffPlaceholder": "Enter two dates to see the difference between them."
+        "miniDateDiffPlaceholder": "Enter two dates to see the difference between them.",
+        "lifeExpectancyTitle": "Life Expectancy",
+        "lifeExpectancyIntro": "Based on the latest global population data, the average life expectancy for your selected sex is about {years} years.",
+        "lifeStages": {
+          "childhood": "Childhood",
+          "adolescence": "Adolescence",
+          "youth": "Youth",
+          "middleAge": "Middle age",
+          "oldAge": "Old age"
+        },
+        "currentStagePrefix": "Your current life stage:",
+        "yearsRemainingLabel": "Years left (approx.)",
+        "weeksRemainingLabel": "Weeks left (approx.)",
+        "daysRemainingLabel": "Days left (approx.)",
+        "lifeExpectancyPastNote": "You've passed this statistical average — that says nothing about your actual remaining lifespan. Life expectancy is a general population figure, not a personal estimate.",
+        "lifeExpectancyDisclaimer": "A general statistical estimate based on global population averages, not a medical prediction or diagnosis for any individual."
       },
       "education": {
         "intro": {
@@ -415,11 +434,10 @@
             }
           ]
         },
-        "lifeChart": {
-          "title": "Your Life, One Grid Square at a Time",
-          "intro": "This illustrative grid represents a 90-year lifespan as 1,080 small squares — one per month. Each filled square below is a month already lived by a 30-year-old; the outlined squares are months still ahead. Seeing a life measured out in small, equal units — rather than as one abstract number — is a well-known way to make elapsed and remaining time feel concrete.",
-          "livedLabel": "Months lived",
-          "remainingLabel": "Months remaining"
+        "lifeStages": {
+          "title": "Life Stages and Life Expectancy",
+          "paragraph1": "The \"Life Expectancy\" indicator above splits a lifespan into five consecutive, non-overlapping stages: childhood (0-9 years), adolescence (10-19, the World Health Organization's official definition), youth (20-39) and middle age (40-59) — following Erik Erikson's stages of psychosocial development — and old age (60+, WHO's definition of an \"older person\" for developing-country statistics).",
+          "paragraph2": "The indicator updates with every calculation to reflect your actual age and your position on the life-expectancy scale for the selected sex, along with the approximate percentage of that average elapsed and the estimated time remaining in years, weeks and days. This is a general statistical estimate based on global population averages, not a medical prediction or diagnosis for any individual."
         },
         "milestonesContext": {
           "title": "Why Legal Age Milestones Vary So Much by Country",
@@ -523,7 +541,12 @@
           "doiLabel": "DOI",
           "doi": "10.4054/DemRes.2013.28.23",
           "readOriginal": "Read the Original Paper",
-          "url": "https://www.demographic-research.org/articles/volume/28/23"
+          "url": "https://www.demographic-research.org/articles/volume/28/23",
+          "lifeExpectancyTitle": "Life Expectancy Data Source",
+          "lifeExpectancyCitation": "World Bank Open Data — Life expectancy at birth, male / female (World aggregate).",
+          "lifeExpectancyNote": "The sex-specific figures behind the \"Life Expectancy\" indicator above come from the World Bank's life-expectancy-at-birth indicators for males and females, World aggregate, 2023 data (the most recent year available at the time of writing), themselves sourced from the UN Population Division's World Population Prospects.",
+          "viewSource": "View the Data",
+          "lifeExpectancyUrl": "https://data.worldbank.org/indicator/SP.DYN.LE00.MA.IN"
         }
       }
     },

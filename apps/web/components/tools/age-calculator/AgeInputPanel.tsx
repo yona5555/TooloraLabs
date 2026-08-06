@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import type { Gender } from "@tooloralabs/tools";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { CalendarSystem } from "./types";
@@ -9,6 +10,9 @@ type AgeInputPanelProps = {
 
   birthDate: string;
   onBirthDateChange: (value: string) => void;
+
+  gender: Gender;
+  onGenderChange: (value: Gender) => void;
 
   hijriDay: string;
   onHijriDayChange: (value: string) => void;
@@ -32,6 +36,8 @@ export default function AgeInputPanel({
   onCalendarSystemChange,
   birthDate,
   onBirthDateChange,
+  gender,
+  onGenderChange,
   hijriDay,
   onHijriDayChange,
   hijriMonth,
@@ -119,6 +125,35 @@ export default function AgeInputPanel({
             <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("form.hijriNote")}</p>
           </div>
         )}
+
+        <div>
+          <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+            {t("form.genderLabel")}
+          </span>
+          <div className="flex gap-3">
+            {(["male", "female"] as const).map((value) => (
+              <label
+                key={value}
+                className={`flex flex-1 cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition ${
+                  gender === value
+                    ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
+                    : "border-zinc-300 text-zinc-600 hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-300"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="age-gender"
+                  value={value}
+                  checked={gender === value}
+                  onChange={() => onGenderChange(value)}
+                  className="sr-only"
+                />
+                {value === "male" ? t("form.genderMale") : t("form.genderFemale")}
+              </label>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("form.genderNote")}</p>
+        </div>
 
         <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
           <label className="flex items-center gap-3">

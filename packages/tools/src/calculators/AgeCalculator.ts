@@ -10,6 +10,7 @@ import {
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { gregorianToHijri, hijriDateDifference, type HijriDate } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import type { Gender } from "./BMICalculator";
 
 export type Zodiac =
   | "aries"
@@ -185,6 +186,96 @@ export function getChineseZodiac(year: number): ChineseZodiac {
 export function getGeneration(year: number): Generation {
   const match = GENERATION_RANGES.find((range) => year >= range.startYear && year <= range.endYear);
   return match?.generation ?? "generationBeta";
+}
+
+export type LifeStage = "childhood" | "adolescence" | "youth" | "middleAge" | "oldAge";
+
+export type LifeExpectancyProgress = {
+  gender: Gender;
+  lifeExpectancyYears: number;
+  lifeStage: LifeStage;
+  percentElapsed: number;
+  yearsRemaining: number;
+  daysRemaining: number;
+  weeksRemaining: number;
+  monthsRemaining: number;
+  isPastLifeExpectancy: boolean;
+};
+
+/**
+ * Non-overlapping, gapless boundaries drawn from two established sources
+ * (not guessed): WHO's official adolescent definition covers "childhood"
+ * and "adolescence"; Erikson's stages of psychosocial development cover
+ * "youth" (young adulthood, ~intimacy vs. isolation) and "middleAge"
+ * (middle adulthood, ~generativity vs. stagnation, 40-65) — capped here at
+ * 59 so "oldAge" can start cleanly at WHO's own 60-year "older person"
+ * threshold (the definition WHO uses for developing-country statistics;
+ * high-income countries commonly use 65).
+ *
+ * Sources:
+ * - WHO, "Adolescent health": ages 10-19 (https://www.who.int/health-topics/adolescent-health)
+ * - Erikson's stages of psychosocial development: young adulthood ~19/20-40,
+ *   middle adulthood ~40-65
+ * - WHO, "Ageing and health" fact sheet: "older person" = 60+ years
+ *   (https://www.who.int/news-room/fact-sheets/detail/ageing-and-health)
+ */
+const LIFE_STAGE_RANGES: { stage: LifeStage; startYear: number; endYear: number }[] = [
+  { stage: "childhood", startYear: 0, endYear: 9 },
+  { stage: "adolescence", startYear: 10, endYear: 19 },
+  { stage: "youth", startYear: 20, endYear: 39 },
+  { stage: "middleAge", startYear: 40, endYear: 59 },
+  { stage: "oldAge", startYear: 60, endYear: Infinity },
+];
+
+export function getLifeStage(ageYears: number): LifeStage {
+  const clamped = Math.max(0, ageYears);
+  const match = LIFE_STAGE_RANGES.find((range) => clamped >= range.startYear && clamped <= range.endYear);
+  return match?.stage ?? "oldAge";
+}
+
+/**
+ * World Bank "Life expectancy at birth" indicators (SP.DYN.LE00.MA.IN and
+ * SP.DYN.LE00.FE.IN), World aggregate, 2023 — the most recent year
+ * published at the time this was written. Underlying source: UN World
+ * Population Prospects (2024 revision), UN Population Division.
+ * https://data.worldbank.org/indicator/SP.DYN.LE00.MA.IN
+ * https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN
+ */
+const LIFE_EXPECTANCY_YEARS: Record<Gender, number> = {
+  male: 70.9,
+  female: 75.8,
+};
+
+export function getLifeExpectancyYears(gender: Gender): number {
+  return LIFE_EXPECTANCY_YEARS[gender];
+}
+
+const DAYS_PER_YEAR = 365.25;
+
+export function computeLifeExpectancyProgress(decimalAge: number, gender: Gender): LifeExpectancyProgress {
+  const lifeExpectancyYears = getLifeExpectancyYears(gender);
+  const clampedAge = Math.max(0, decimalAge);
+  const isPastLifeExpectancy = clampedAge >= lifeExpectancyYears;
+
+  const percentElapsed =
+    Math.round(Math.min(1, clampedAge / lifeExpectancyYears) * 1000) / 10;
+
+  const yearsRemaining = Math.max(0, lifeExpectancyYears - clampedAge);
+  const daysRemaining = Math.round(yearsRemaining * DAYS_PER_YEAR);
+  const weeksRemaining = Math.round(daysRemaining / 7);
+  const monthsRemaining = Math.round(yearsRemaining * 12);
+
+  return {
+    gender,
+    lifeExpectancyYears,
+    lifeStage: getLifeStage(clampedAge),
+    percentElapsed,
+    yearsRemaining,
+    daysRemaining,
+    weeksRemaining,
+    monthsRemaining,
+    isPastLifeExpectancy,
+  };
 }
 
 function computeMilestones(birthDate: Date, referenceDate: Date): AgeMilestone[] {

@@ -4,7 +4,6 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AgeGenerationTable from "./AgeGenerationTable";
-import AgeLifeChart from "./AgeLifeChart";
 
 type GenerationRow = { generation: string; range: string };
 type ExampleStep = { label: string; value: string };
@@ -66,13 +65,9 @@ export default async function AgeEducation() {
         <AgeGenerationTable rows={generationRows} />
       </InfoSection>
 
-      <InfoSection title={t("lifeChart.title")}>
-        <p>{t("lifeChart.intro")}</p>
-        <AgeLifeChart
-          label={t("lifeChart.title")}
-          livedLabel={t("lifeChart.livedLabel")}
-          remainingLabel={t("lifeChart.remainingLabel")}
-        />
+      <InfoSection title={t("lifeStages.title")}>
+        <p>{t("lifeStages.paragraph1")}</p>
+        <p>{t("lifeStages.paragraph2")}</p>
       </InfoSection>
 
       <InfoSection title={t("milestonesContext.title")}>
@@ -122,6 +117,20 @@ export default async function AgeEducation() {
         >
           {t("references.readOriginal")}
         </a>
+
+        <div className="mt-6 border-t border-current/10 pt-6">
+          <h3 className="font-semibold">{t("references.lifeExpectancyTitle")}</h3>
+          <p className="mt-2">{t("references.lifeExpectancyCitation")}</p>
+          <p className="text-sm opacity-70">{t("references.lifeExpectancyNote")}</p>
+          <a
+            href={t("references.lifeExpectancyUrl")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex rounded-sm border border-current/40 px-5 py-2.5 text-sm font-semibold no-underline transition hover:bg-current/5"
+          >
+            {t("references.viewSource")}
+          </a>
+        </div>
       </InfoSection>
     </EncyclopediaPaper>
   );
