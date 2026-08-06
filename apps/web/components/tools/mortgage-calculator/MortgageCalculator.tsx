@@ -13,6 +13,7 @@ import MortgageAffordabilityMini from "./MortgageAffordabilityMini";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import MortgagePayoffChart from "./MortgagePayoffChart";
 import MortgageAmortizationTable from "./MortgageAmortizationTable";
+import MortgageScenarioComparison from "./MortgageScenarioComparison";
 import type { DownPaymentMode, MortgageExtendedResult } from "./types";
 
 const tool = new MortgageCalculatorTool();
@@ -266,6 +267,7 @@ export default function MortgageCalculator({ education }: { education: ReactNode
         secondary={
           <div className="flex flex-col gap-6">
             <MortgagePayoffChart result={result} digitStyle={digitStyle} />
+            <MortgageScenarioComparison result={result} digitStyle={digitStyle} />
             <MortgageAmortizationTable result={result} digitStyle={digitStyle} />
           </div>
         }
