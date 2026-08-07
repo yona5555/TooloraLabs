@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import type { Gender } from "@tooloralabs/tools";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { CalendarSystem } from "./types";
 
 type AgeInputPanelProps = {
@@ -56,7 +57,7 @@ export default function AgeInputPanel({
   const hijriMonths = t.raw("form.hijriMonths") as string[];
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onSubmit} className="space-y-5">
         {calendarSystem === "gregorian" ? (
           <ToolInput
@@ -194,6 +195,6 @@ export default function AgeInputPanel({
           </button>
         </div>
       </form>
-    </div>
+    </SectionCard>
   );
 }

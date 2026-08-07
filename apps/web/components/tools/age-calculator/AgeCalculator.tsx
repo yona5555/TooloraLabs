@@ -12,6 +12,7 @@ import AgeResult from "./AgeResult";
 import AgeMiniDateDiff from "./AgeMiniDateDiff";
 import AgeMilestones from "./AgeMilestones";
 import AgeLifeExpectancyCard from "./AgeLifeExpectancyCard";
+import AgePlanetaryAge from "./AgePlanetaryAge";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import type { AgeExtendedResult, CalendarSystem } from "./types";
 
@@ -244,27 +245,30 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
     <>
       <ToolAboveFold
         input={
-          <AgeInputPanel
-            calendarSystem={calendarSystem}
-            onCalendarSystemChange={handleCalendarSystemChange}
-            birthDate={birthDate}
-            onBirthDateChange={setBirthDate}
-            gender={gender}
-            onGenderChange={setGender}
-            hijriDay={hijriDay}
-            onHijriDayChange={setHijriDay}
-            hijriMonth={hijriMonth}
-            onHijriMonthChange={setHijriMonth}
-            hijriYear={hijriYear}
-            onHijriYearChange={setHijriYear}
-            useCustomReference={useCustomReference}
-            onUseCustomReferenceChange={setUseCustomReference}
-            referenceDate={referenceDate}
-            onReferenceDateChange={setReferenceDate}
-            error={error}
-            onSubmit={handleSubmit}
-            onReset={handleReset}
-          />
+          <div className="flex flex-col gap-4">
+            <AgeInputPanel
+              calendarSystem={calendarSystem}
+              onCalendarSystemChange={handleCalendarSystemChange}
+              birthDate={birthDate}
+              onBirthDateChange={setBirthDate}
+              gender={gender}
+              onGenderChange={setGender}
+              hijriDay={hijriDay}
+              onHijriDayChange={setHijriDay}
+              hijriMonth={hijriMonth}
+              onHijriMonthChange={setHijriMonth}
+              hijriYear={hijriYear}
+              onHijriYearChange={setHijriYear}
+              useCustomReference={useCustomReference}
+              onUseCustomReferenceChange={setUseCustomReference}
+              referenceDate={referenceDate}
+              onReferenceDateChange={setReferenceDate}
+              error={error}
+              onSubmit={handleSubmit}
+              onReset={handleReset}
+            />
+            <AgePlanetaryAge totalDays={result.totalDays} digitStyle={digitStyle} />
+          </div>
         }
         result={
           <div className="flex flex-col gap-4">
