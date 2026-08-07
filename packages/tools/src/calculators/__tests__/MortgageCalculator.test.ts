@@ -134,4 +134,83 @@ describe("MortgageCalculator", () => {
       expect(result.data.monthlySchedule).toHaveLength(0);
     });
   });
+
+  describe("biweekly", () => {
+    it("sets the bi-weekly payment to half the monthly principal and interest", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      expect(result.data.biweekly.biweeklyPaymentAmount).toBeCloseTo(
+        result.data.monthlyPrincipalAndInterest / 2,
+        6
+      );
+    });
+
+    it("pays off faster and cheaper than the standard monthly schedule", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      expect(result.data.biweekly.payoffMonthsEquivalent).toBeLessThan(result.data.scheduledPayoffMonths);
+      expect(result.data.biweekly.monthsSavedVsStandard).toBeGreaterThan(0);
+      expect(result.data.biweekly.totalInterest).toBeLessThan(result.data.totalInterest);
+      expect(result.data.biweekly.interestSavedVsStandard).toBeGreaterThan(0);
+    });
+
+    it("builds a full bi-weekly schedule that ends with a zero balance", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      const { schedule, payoffPeriods } = result.data.biweekly;
+      expect(schedule).toHaveLength(payoffPeriods);
+      expect(schedule.at(-1)?.endingBalance).toBe(0);
+      expect(schedule[0].period).toBe(1);
+
+      const first = schedule[0];
+      expect(first.principalPaid + first.interestPaid).toBeCloseTo(first.payment, 2);
+    });
+
+    it("groups the bi-weekly schedule into 26-payment years that sum back to the totals", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      const { schedule, yearlySchedule } = result.data.biweekly;
+
+      const year1Periods = schedule.filter((p) => p.year === 1);
+      const year1PrincipalSum = year1Periods.reduce((sum, p) => sum + p.principalPaid, 0);
+      const year1InterestSum = year1Periods.reduce((sum, p) => sum + p.interestPaid, 0);
+
+      expect(year1Periods).toHaveLength(26);
+      expect(year1PrincipalSum).toBeCloseTo(yearlySchedule[0].principalPaid, 1);
+      expect(year1InterestSum).toBeCloseTo(yearlySchedule[0].interestPaid, 1);
+    });
+
+    it("finds no PMI removal periods when the loan carries no PMI", () => {
+      const result = new MortgageCalculator().execute(baseInput, context);
+      expect(result.data.biweekly.pmiDropoffPeriod).toBeNull();
+      expect(result.data.biweekly.pmiAutoTerminationPeriod).toBeNull();
+    });
+
+    it("finds the PMI dropoff and auto-termination periods when PMI applies, in order", () => {
+      const result = new MortgageCalculator().execute(
+        { ...baseInput, downPayment: 30000, monthlyPMI: 120 },
+        context
+      );
+      const { pmiDropoffPeriod, pmiAutoTerminationPeriod } = result.data.biweekly;
+      expect(pmiDropoffPeriod).not.toBeNull();
+      expect(pmiAutoTerminationPeriod).not.toBeNull();
+      expect(pmiAutoTerminationPeriod! > pmiDropoffPeriod!).toBe(true);
+    });
+
+    it("stays unaffected by extraMonthlyPayment, since it is an alternative payoff strategy", () => {
+      const withoutExtra = new MortgageCalculator().execute(baseInput, context);
+      const withExtra = new MortgageCalculator().execute(
+        { ...baseInput, extraMonthlyPayment: 300 },
+        context
+      );
+      expect(withExtra.data.biweekly.payoffPeriods).toBe(withoutExtra.data.biweekly.payoffPeriods);
+      expect(withExtra.data.biweekly.totalInterest).toBeCloseTo(withoutExtra.data.biweekly.totalInterest, 2);
+    });
+
+    it("returns an empty schedule and zero payment when there is no loan balance", () => {
+      const result = new MortgageCalculator().execute(
+        { ...baseInput, homePrice: 100000, downPayment: 100000 },
+        context
+      );
+      expect(result.data.biweekly.biweeklyPaymentAmount).toBe(0);
+      expect(result.data.biweekly.schedule).toHaveLength(0);
+      expect(result.data.biweekly.payoffPeriods).toBe(0);
+    });
+  });
 });
