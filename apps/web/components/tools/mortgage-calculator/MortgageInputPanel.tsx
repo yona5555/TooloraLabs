@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { DownPaymentMode } from "./types";
 
 const LOAN_TERM_PRESETS = [15, 20, 30] as const;
@@ -71,7 +72,7 @@ export default function MortgageInputPanel({
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onSubmit} className="space-y-5">
         <ToolInput
           label={t("form.homePrice")}
@@ -237,6 +238,6 @@ export default function MortgageInputPanel({
           </button>
         </div>
       </form>
-    </div>
+    </SectionCard>
   );
 }

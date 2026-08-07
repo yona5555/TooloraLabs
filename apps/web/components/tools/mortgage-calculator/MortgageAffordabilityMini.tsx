@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { parseLocalizedNumber, formatLocalizedNumber } from "@tooloralabs/core";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import SectionCard from "@/components/tool-ui/SectionCard";
 
 const FRONT_END_RATIO = 0.28;
 const BACK_END_RATIO = 0.36;
@@ -56,19 +57,14 @@ export default function MortgageAffordabilityMini() {
     formatLocalizedNumber(value, "western", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
   return (
-    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800">
-      <button
-        type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between px-5 py-3.5 text-sm font-semibold text-zinc-900 dark:text-zinc-100"
-        aria-expanded={isOpen}
-      >
-        {t("affordabilityMiniTitle")}
-        <ChevronDown size={16} className={`transition-transform ${isOpen ? "rotate-180" : ""}`} />
-      </button>
-
+    <SectionCard
+      title={t("affordabilityMiniTitle")}
+      onToggle={() => setIsOpen((prev) => !prev)}
+      action={<ChevronDown size={16} className={`text-white transition-transform ${isOpen ? "rotate-180" : ""}`} />}
+      bodyClassName={isOpen ? "space-y-3 p-4 lg:p-6" : "p-0"}
+    >
       {isOpen && (
-        <div className="space-y-3 border-t border-zinc-200 p-5 dark:border-zinc-800">
+        <>
           <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("affordabilityMiniIntro")}</p>
           <div className="grid grid-cols-2 gap-3">
             <ToolInput
@@ -125,8 +121,8 @@ export default function MortgageAffordabilityMini() {
               <p className="text-zinc-500 dark:text-zinc-400">{t("affordabilityMiniPlaceholder")}</p>
             )}
           </div>
-        </div>
+        </>
       )}
-    </div>
+    </SectionCard>
   );
 }

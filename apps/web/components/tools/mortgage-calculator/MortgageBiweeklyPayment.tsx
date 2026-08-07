@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import DownloadButton from "@/components/tool-ui/DownloadButton";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { MortgageExtendedResult } from "./types";
 
 type MortgageBiweeklyPaymentProps = {
@@ -88,14 +89,11 @@ export default function MortgageBiweeklyPayment({ result, digitStyle }: Mortgage
   ];
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{t("title")}</h3>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-        </div>
-        <DownloadButton content={csvContent} filename="mortgage-biweekly-schedule.csv" mimeType="text/csv;charset=utf-8" />
-      </div>
+    <SectionCard
+      title={t("title")}
+      action={<DownloadButton content={csvContent} filename="mortgage-biweekly-schedule.csv" mimeType="text/csv;charset=utf-8" />}
+    >
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
@@ -152,6 +150,6 @@ export default function MortgageBiweeklyPayment({ result, digitStyle }: Mortgage
       )}
 
       <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">{t("note")}</p>
-    </div>
+    </SectionCard>
   );
 }

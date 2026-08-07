@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { MortgageExtendedResult } from "./types";
 
 type MortgagePayoffChartProps = {
@@ -37,9 +38,8 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
     formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{t("payoffChart.title")}</h3>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("payoffChart.intro")}</p>
+    <SectionCard title={t("payoffChart.title")}>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("payoffChart.intro")}</p>
 
       <div dir="ltr" className="mt-4 overflow-x-auto">
         <svg
@@ -139,6 +139,6 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
             : t("payoffChart.pmiNoDropoff")}
         </p>
       )}
-    </div>
+    </SectionCard>
   );
 }

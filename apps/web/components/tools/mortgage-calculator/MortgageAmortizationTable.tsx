@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import DownloadButton from "@/components/tool-ui/DownloadButton";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { MortgageExtendedResult } from "./types";
 
 type MortgageAmortizationTableProps = {
@@ -60,7 +61,8 @@ function buildCsv(
 
 export default function MortgageAmortizationTable({ result, digitStyle }: MortgageAmortizationTableProps) {
   const t = useTranslations("tools.mortgage-calculator");
-  const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
+  const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set([1]));
+  const [showFullTable, setShowFullTable] = useState(false);
 
   const yearGroups = useMemo(() => groupByYear(result.monthlySchedule), [result.monthlySchedule]);
 
@@ -92,18 +94,18 @@ export default function MortgageAmortizationTable({ result, digitStyle }: Mortga
     balance: t("payoffChart.balanceLabel"),
   });
 
+  const visibleGroups = showFullTable ? yearGroups : yearGroups.slice(0, 1);
+  const remainingYears = yearGroups.length - 1;
+
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{t("amortizationTable.title")}</h3>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("amortizationTable.intro")}</p>
-        </div>
-        <DownloadButton content={csvContent} filename="mortgage-amortization-schedule.csv" mimeType="text/csv;charset=utf-8" />
-      </div>
+    <SectionCard
+      title={t("amortizationTable.title")}
+      action={<DownloadButton content={csvContent} filename="mortgage-amortization-schedule.csv" mimeType="text/csv;charset=utf-8" />}
+    >
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("amortizationTable.intro")}</p>
 
       <div className="mt-4 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
-        {yearGroups.map((group, index) => {
+        {visibleGroups.map((group, index) => {
           const isExpanded = expandedYears.has(group.year);
           return (
             <div key={group.year} className={index !== 0 ? "border-t border-zinc-200 dark:border-zinc-800" : ""}>
@@ -171,6 +173,18 @@ export default function MortgageAmortizationTable({ result, digitStyle }: Mortga
           );
         })}
       </div>
-    </div>
+
+      {remainingYears > 0 && (
+        <button
+          type="button"
+          onClick={() => setShowFullTable((prev) => !prev)}
+          aria-expanded={showFullTable}
+          className="mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl border border-zinc-200 py-2.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 dark:border-zinc-800 dark:text-blue-400 dark:hover:bg-blue-500/10"
+        >
+          {showFullTable ? t("amortizationTable.showLess") : t("amortizationTable.viewFullTable")}
+          <ChevronDown size={16} className={`transition-transform ${showFullTable ? "rotate-180" : ""}`} />
+        </button>
+      )}
+    </SectionCard>
   );
 }

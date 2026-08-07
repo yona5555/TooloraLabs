@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { MortgageCalculator as MortgageCalculatorTool } from "@tooloralabs/tools";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import type { MortgageExtendedResult } from "./types";
 
 type MortgageScenarioComparisonProps = {
@@ -120,9 +121,8 @@ export default function MortgageScenarioComparison({ result, digitStyle }: Mortg
   ];
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{t("title")}</h3>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
+    <SectionCard title={t("title")}>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
         <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
@@ -268,6 +268,6 @@ export default function MortgageScenarioComparison({ result, digitStyle }: Mortg
       </div>
 
       <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">{t("note")}</p>
-    </div>
+    </SectionCard>
   );
 }

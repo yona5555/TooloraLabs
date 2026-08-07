@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import MortgagePaymentDonut from "./MortgagePaymentDonut";
 import type { MortgageExtendedResult } from "./types";
 
@@ -46,65 +47,58 @@ export default function MortgageResult({ result, digitStyle }: MortgageResultPro
   const summaryText = `${t("title")}: ${currency(result.monthlyPayment)}/${t("aboveFold.perMonthShort")}`;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex items-center justify-between bg-blue-600 px-6 py-3">
-        <h2 className="font-bold text-white">{t("aboveFold.resultTitle")}</h2>
-        <CopyButton text={summaryText} />
+    <SectionCard title={t("aboveFold.resultTitle")} action={<CopyButton text={summaryText} />}>
+      <div className="flex flex-wrap items-center justify-center gap-6">
+        <MortgagePaymentDonut
+          segments={segments}
+          centerValue={currency(result.monthlyPayment)}
+          centerLabel={t("aboveFold.perMonth")}
+        />
       </div>
 
-      <div className="p-6">
-        <div className="flex flex-wrap items-center justify-center gap-6">
-          <MortgagePaymentDonut
-            segments={segments}
-            centerValue={currency(result.monthlyPayment)}
-            centerLabel={t("aboveFold.perMonth")}
-          />
-        </div>
-
-        <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
-          <StatTile label={t("aboveFold.loanAmountLabel")} value={currency(result.loanAmount)} />
-          <StatTile
-            label={t("aboveFold.loanToValueLabel")}
-            value={`${fmt(result.loanToValuePercent, { maximumFractionDigits: 1 })}%`}
-            title={t("aboveFold.loanToValueNote")}
-          />
-          <StatTile label={t("aboveFold.totalInterestLabel")} value={currency(result.totalInterest)} />
-          <StatTile label={t("aboveFold.totalCostLabel")} value={currency(result.loanAmount + result.totalInterest)} />
-          <StatTile
-            label={t("aboveFold.payoffTimeLabel")}
-            value={t("aboveFold.payoffTimeValue", { years: fmt(payoff.years), months: fmt(payoff.months) })}
-            title={result.monthsSavedByExtraPayment > 0 ? t("aboveFold.payoffTimeAcceleratedNote") : undefined}
-          />
-          <StatTile
-            label={t("aboveFold.pmiRemovalLabel")}
-            value={
-              result.pmiDropoffMonth
-                ? t("aboveFold.pmiRemovalValue", {
-                    years: fmt(monthsToYearsMonths(result.pmiDropoffMonth).years),
-                    months: fmt(monthsToYearsMonths(result.pmiDropoffMonth).months),
-                  })
-                : t("aboveFold.pmiRemovalNone")
-            }
-            title={t("aboveFold.pmiRemovalNote")}
-          />
-          {result.extraMonthlyPayment > 0 && (
-            <>
-              <StatTile
-                label={t("aboveFold.interestSavedLabel")}
-                value={currency(result.interestSavedByExtraPayment)}
-                title={t("aboveFold.interestSavedNote")}
-              />
-              <StatTile
-                label={t("aboveFold.monthsSavedLabel")}
-                value={t("aboveFold.payoffTimeValue", {
-                  years: fmt(monthsToYearsMonths(result.monthsSavedByExtraPayment).years),
-                  months: fmt(monthsToYearsMonths(result.monthsSavedByExtraPayment).months),
-                })}
-              />
-            </>
-          )}
-        </dl>
-      </div>
-    </div>
+      <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
+        <StatTile label={t("aboveFold.loanAmountLabel")} value={currency(result.loanAmount)} />
+        <StatTile
+          label={t("aboveFold.loanToValueLabel")}
+          value={`${fmt(result.loanToValuePercent, { maximumFractionDigits: 1 })}%`}
+          title={t("aboveFold.loanToValueNote")}
+        />
+        <StatTile label={t("aboveFold.totalInterestLabel")} value={currency(result.totalInterest)} />
+        <StatTile label={t("aboveFold.totalCostLabel")} value={currency(result.loanAmount + result.totalInterest)} />
+        <StatTile
+          label={t("aboveFold.payoffTimeLabel")}
+          value={t("aboveFold.payoffTimeValue", { years: fmt(payoff.years), months: fmt(payoff.months) })}
+          title={result.monthsSavedByExtraPayment > 0 ? t("aboveFold.payoffTimeAcceleratedNote") : undefined}
+        />
+        <StatTile
+          label={t("aboveFold.pmiRemovalLabel")}
+          value={
+            result.pmiDropoffMonth
+              ? t("aboveFold.pmiRemovalValue", {
+                  years: fmt(monthsToYearsMonths(result.pmiDropoffMonth).years),
+                  months: fmt(monthsToYearsMonths(result.pmiDropoffMonth).months),
+                })
+              : t("aboveFold.pmiRemovalNone")
+          }
+          title={t("aboveFold.pmiRemovalNote")}
+        />
+        {result.extraMonthlyPayment > 0 && (
+          <>
+            <StatTile
+              label={t("aboveFold.interestSavedLabel")}
+              value={currency(result.interestSavedByExtraPayment)}
+              title={t("aboveFold.interestSavedNote")}
+            />
+            <StatTile
+              label={t("aboveFold.monthsSavedLabel")}
+              value={t("aboveFold.payoffTimeValue", {
+                years: fmt(monthsToYearsMonths(result.monthsSavedByExtraPayment).years),
+                months: fmt(monthsToYearsMonths(result.monthsSavedByExtraPayment).months),
+              })}
+            />
+          </>
+        )}
+      </dl>
+    </SectionCard>
   );
 }
