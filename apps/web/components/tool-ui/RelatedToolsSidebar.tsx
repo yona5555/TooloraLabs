@@ -5,11 +5,8 @@ import { ArrowRight, Search as SearchIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { tools } from "@/data/tools";
 import { getToolIcon } from "@/lib/tool-icons";
-import { getCategoryIconColor } from "@/lib/category-colors";
 import AdSpace from "./AdSpace";
 import SectionCard from "./SectionCard";
-
-const MAX_RELATED = 3;
 
 type RelatedToolsSidebarProps = {
   currentSlug: string;
@@ -26,22 +23,19 @@ export default function RelatedToolsSidebar({ currentSlug, category }: RelatedTo
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const related = tools
-    .filter((tool) => tool.category === category && tool.slug !== currentSlug)
-    .slice(0, MAX_RELATED);
-
   const searchResults = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return [];
 
     return tools
       .filter((tool) => {
+        if (tool.slug === currentSlug) return false;
         const title = tTools(`${tool.slug}.title`).toLowerCase();
         const keywords = tool.keywords.join(" ").toLowerCase();
         return title.includes(normalized) || keywords.includes(normalized);
       })
       .slice(0, 5);
-  }, [query, tTools]);
+  }, [query, tTools, currentSlug]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -101,28 +95,6 @@ export default function RelatedToolsSidebar({ currentSlug, category }: RelatedTo
               )}
             </div>
           )}
-        </div>
-
-        <div className="space-y-2">
-          {related.map((tool) => {
-            const Icon = getToolIcon(tool.slug);
-            return (
-              <Link
-                key={tool.slug}
-                href={`/tools/${tool.slug}`}
-                className="flex items-center gap-3 rounded-xl border border-transparent p-2.5 transition hover:border-blue-200 hover:bg-blue-50/50 dark:hover:border-blue-500/40 dark:hover:bg-blue-500/10"
-              >
-                <div
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${getCategoryIconColor(category)}`}
-                >
-                  <Icon size={14} strokeWidth={2} />
-                </div>
-                <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                  {tTools(`${tool.slug}.title`)}
-                </span>
-              </Link>
-            );
-          })}
         </div>
 
         <Link
