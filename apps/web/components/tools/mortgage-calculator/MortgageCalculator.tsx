@@ -267,7 +267,6 @@ export default function MortgageCalculator({ education }: { education: ReactNode
           </div>
         }
         sidebar={<RelatedToolsSidebar currentSlug="mortgage-calculator" category="calculators" />}
-        stickySidebar
         secondary={
           <div className="flex flex-col gap-6">
             <MortgagePayoffChart result={result} digitStyle={digitStyle} />
