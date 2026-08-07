@@ -9,6 +9,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import MortgageInputPanel from "./MortgageInputPanel";
 import MortgageResult from "./MortgageResult";
+import MortgageQuickInsight from "./MortgageQuickInsight";
 import MortgageAffordabilityMini from "./MortgageAffordabilityMini";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import MortgagePayoffChart from "./MortgagePayoffChart";
@@ -261,6 +262,7 @@ export default function MortgageCalculator({ education }: { education: ReactNode
         result={
           <div className="flex flex-col gap-4">
             <MortgageResult result={result} digitStyle={digitStyle} />
+            <MortgageQuickInsight result={result} digitStyle={digitStyle} />
             <MortgageAffordabilityMini />
           </div>
         }
