@@ -10,6 +10,19 @@ type ToolAboveFoldProps = {
    * payoff chart) placed under input+result.
    */
   secondary?: ReactNode;
+  /**
+   * Opt-in, off by default. When a tool's secondary column stacks several
+   * cards and runs far longer than the sidebar's own natural content
+   * (e.g. mortgage-calculator's payoff chart + comparison + amortization +
+   * bi-weekly cards), the sidebar would otherwise scroll out of view after
+   * roughly one screen, leaving a long empty column beside the rest of the
+   * page. When true, the sidebar's absolutely-positioned box is stretched
+   * to the full input+secondary content height (measured, not guessed) so
+   * its own content can use `position: sticky` and stay in view across
+   * that whole height instead. Existing callers that don't pass this prop
+   * render byte-for-byte the same as before.
+   */
+  stickySidebar?: boolean;
 };
 
 /**
@@ -50,9 +63,11 @@ type ToolAboveFoldProps = {
  * whichever of the two is shorter gets stretched with dead space to match
  * the taller one.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, stickySidebar = false }: ToolAboveFoldProps) {
+  const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const [sidebarHeight, setSidebarHeight] = useState(0);
+  const [contentHeight, setContentHeight] = useState(0);
 
   useLayoutEffect(() => {
     const el = sidebarRef.current;
@@ -65,8 +80,26 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
     return () => observer.disconnect();
   }, []);
 
+  // Only measured in stickySidebar mode — the grid's own intrinsic height
+  // already equals input+secondary's combined height, since the sidebar is
+  // taken out of flow (absolute) and never contributes to it.
+  useLayoutEffect(() => {
+    if (!stickySidebar) return;
+    const el = gridRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      setContentHeight(entries[0].contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [stickySidebar]);
+
+  const sidebarBoxHeight = stickySidebar && contentHeight > sidebarHeight ? contentHeight : undefined;
+
   return (
     <div
+      ref={gridRef}
       className="relative grid grid-cols-1 content-start items-start gap-6 lg:grid-cols-[320px_minmax(360px,1fr)_320px]"
       style={{ minHeight: sidebarHeight || undefined }}
     >
@@ -75,8 +108,13 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
       {secondary && (
         <div className="min-w-0 lg:col-start-1 lg:col-span-2 lg:row-start-2">{secondary}</div>
       )}
-      <div ref={sidebarRef} className="hidden lg:absolute lg:top-0 lg:end-0 lg:block lg:w-[320px]">
-        {sidebar}
+      <div
+        className="hidden lg:absolute lg:top-0 lg:end-0 lg:block lg:w-[320px]"
+        style={sidebarBoxHeight ? { height: sidebarBoxHeight } : undefined}
+      >
+        <div ref={sidebarRef} className={stickySidebar ? "lg:sticky lg:top-20" : undefined}>
+          {sidebar}
+        </div>
       </div>
     </div>
   );
