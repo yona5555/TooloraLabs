@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
+import AdSpace from "@/components/tool-ui/AdSpace";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import MortgagePMIThresholdTable from "./MortgagePMIThresholdTable";
@@ -57,6 +58,8 @@ export default async function MortgageEducation() {
         <p className="font-medium">{t("amortization.example.result")}</p>
       </InfoSection>
 
+      <AdSpace variant="leaderboard" />
+
       <InfoSection title={t("paymentComponents.title")}>
         <p>{t("paymentComponents.intro")}</p>
         <ul className="space-y-3">
@@ -96,6 +99,8 @@ export default async function MortgageEducation() {
         </ol>
         <p className="font-medium">{t("extraPayments.example.result")}</p>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("rateTypes.title")}>
         <p>{t("rateTypes.intro")}</p>
