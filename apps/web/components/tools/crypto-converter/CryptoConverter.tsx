@@ -1,11 +1,13 @@
 "use client";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { convertCryptoAmount, findCoinById, type CryptoCoin, type CryptoGlobalStats } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
 import CryptoInputPanel from "./CryptoInputPanel";
 import CryptoResult from "./CryptoResult";
 import CryptoDisclaimer from "./CryptoDisclaimer";
@@ -27,6 +29,7 @@ type CryptoConverterProps = {
 };
 
 export default function CryptoConverter({ initialCoins, globalStats, usdToSarRate, fetchedAt, education }: CryptoConverterProps) {
+  const tNav = useTranslations("tools.crypto-converter.nav");
   const [coins, setCoins] = useState<CryptoCoin[]>(initialCoins);
   const [fromCoinId, setFromCoinId] = useState("bitcoin");
   const [toCoinId, setToCoinId] = useState("ethereum");
@@ -53,47 +56,58 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
     return convertCryptoAmount(amountValue, fromCoin.currentPrice, toCoin.currentPrice);
   }, [amount, fromCoin, toCoin]);
 
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "indicators", label: tNav("indicators") },
+    { id: "news", label: tNav("news") },
+    { id: "learning-resources", label: tNav("education") },
+    { id: "faq", label: tNav("faq") },
+  ];
+
   return (
     <>
-      <ToolAboveFold
-        input={
-          <CryptoInputPanel
-            coins={coins}
-            amount={amount}
-            onAmountChange={setAmount}
-            fromCoinId={fromCoinId}
-            onFromCoinChange={setFromCoinId}
-            toCoinId={toCoinId}
-            onToCoinChange={setToCoinId}
-            onCoinDiscovered={handleCoinDiscovered}
-            onSwap={handleSwap}
-          />
-        }
-        result={
-          <CryptoResult
-            fromCoin={fromCoin}
-            toCoin={toCoin}
-            convertedAmount={convertedAmount}
-            fiatCurrency={fiatCurrency}
-            onFiatCurrencyChange={setFiatCurrency}
-            usdToSarRate={usdToSarRate}
-            lastUpdated={fetchedAt}
-            digitStyle={digitStyle}
-          />
-        }
-        sidebar={<RelatedToolsSidebar currentSlug="crypto-converter" category="financial-markets" />}
-        secondary={
-          <div className="flex flex-col gap-6">
-            <CryptoDisclaimer />
-            <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
-            <CryptoHistoricalChart coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
-            <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
-            {globalStats && <CryptoGlobalIndicators stats={globalStats} digitStyle={digitStyle} />}
-            <CryptoNews />
-            <CryptoLearningResources />
-          </div>
-        }
-      />
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={
+            <CryptoInputPanel
+              coins={coins}
+              amount={amount}
+              onAmountChange={setAmount}
+              fromCoinId={fromCoinId}
+              onFromCoinChange={setFromCoinId}
+              toCoinId={toCoinId}
+              onToCoinChange={setToCoinId}
+              onCoinDiscovered={handleCoinDiscovered}
+              onSwap={handleSwap}
+            />
+          }
+          result={
+            <CryptoResult
+              fromCoin={fromCoin}
+              toCoin={toCoin}
+              convertedAmount={convertedAmount}
+              fiatCurrency={fiatCurrency}
+              onFiatCurrencyChange={setFiatCurrency}
+              usdToSarRate={usdToSarRate}
+              lastUpdated={fetchedAt}
+              digitStyle={digitStyle}
+            />
+          }
+          sidebar={<RelatedToolsSidebar currentSlug="crypto-converter" category="financial-markets" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <CryptoDisclaimer />
+              <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
+              <CryptoHistoricalChart coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
+              <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
+              {globalStats && <CryptoGlobalIndicators stats={globalStats} digitStyle={digitStyle} />}
+              <CryptoNews />
+              <CryptoLearningResources />
+            </div>
+          }
+        />
+      </div>
 
       {education}
     </>

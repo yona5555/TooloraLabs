@@ -7,6 +7,8 @@ type SectionCardProps = {
   children: ReactNode;
   bodyClassName?: string;
   className?: string;
+  /** Anchor id for in-page navigation (e.g. SectionNav) — adds scroll-margin so sticky headers don't cover the target. */
+  id?: string;
 };
 
 const headerClassName =
@@ -19,12 +21,14 @@ export default function SectionCard({
   children,
   bodyClassName = "p-4 lg:p-6",
   className = "",
+  id,
 }: SectionCardProps) {
   const heading = <h2 className="font-bold text-white">{title}</h2>;
 
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none ${className}`}
+      id={id}
+      className={`overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none ${id ? "scroll-mt-32" : ""} ${className}`}
     >
       {onToggle ? (
         <button type="button" onClick={onToggle} className={headerClassName}>

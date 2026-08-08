@@ -10,7 +10,7 @@ export default function CryptoLearningResources() {
   const items = t.raw("items") as CourseItem[];
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard id="learning-resources" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <ul className="mt-4 space-y-4">
         {items.map((item) => (

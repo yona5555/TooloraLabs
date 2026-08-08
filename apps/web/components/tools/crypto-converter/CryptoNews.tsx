@@ -9,7 +9,7 @@ export default function CryptoNews() {
   const items = t.raw("items") as NewsItem[];
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard id="news" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <ul className="mt-4 space-y-3">
         {items.map((item) => (

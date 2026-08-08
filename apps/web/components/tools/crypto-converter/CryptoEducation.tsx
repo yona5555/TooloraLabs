@@ -69,7 +69,7 @@ export default async function CryptoEducation() {
 
       <AdSpace variant="leaderboard" />
 
-      <InfoSection title={t("faq.title")}>
+      <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
 

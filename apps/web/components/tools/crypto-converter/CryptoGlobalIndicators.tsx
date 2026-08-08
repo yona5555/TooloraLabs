@@ -21,7 +21,7 @@ export default function CryptoGlobalIndicators({ stats, digitStyle }: CryptoGlob
     });
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard id="indicators" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div className="rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/60">
