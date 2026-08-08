@@ -47,7 +47,10 @@ export default function MortgageResult({ result, digitStyle }: MortgageResultPro
   const summaryText = `${t("title")}: ${currency(result.monthlyPayment)}/${t("aboveFold.perMonthShort")}`;
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")} action={<CopyButton text={summaryText} />}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={<CopyButton text={summaryText} className="!text-white dark:!text-zinc-200" />}
+    >
       <div className="flex flex-wrap items-center justify-center gap-6">
         <MortgagePaymentDonut
           segments={segments}

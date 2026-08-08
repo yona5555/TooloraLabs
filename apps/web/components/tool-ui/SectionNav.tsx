@@ -1,15 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, ArrowDown } from "lucide-react";
 
 export type SectionNavItem = { id: string; label: string };
 
 type SectionNavProps = {
   items: SectionNavItem[];
+  /** Opt-in: adds a "Jump to Bottom" action next to "Back to Top". Off by default so existing callers are unaffected. */
+  showJumpToBottom?: boolean;
 };
 
-export default function SectionNav({ items }: SectionNavProps) {
+export default function SectionNav({ items, showJumpToBottom = false }: SectionNavProps) {
   const t = useTranslations("common");
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
   const itemsRef = useRef(items);
@@ -46,6 +48,10 @@ export default function SectionNav({ items }: SectionNavProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function scrollToBottom() {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+  }
+
   if (items.length === 0) return null;
 
   return (
@@ -77,6 +83,17 @@ export default function SectionNav({ items }: SectionNavProps) {
           <ArrowUp size={14} />
           <span className="hidden sm:inline">{t("backToTop")}</span>
         </button>
+        {showJumpToBottom && (
+          <button
+            type="button"
+            onClick={scrollToBottom}
+            aria-label={t("jumpToBottom")}
+            className="flex shrink-0 items-center gap-1 rounded-lg border border-zinc-300 px-2.5 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+          >
+            <ArrowDown size={14} />
+            <span className="hidden sm:inline">{t("jumpToBottom")}</span>
+          </button>
+        )}
       </div>
     </nav>
   );
