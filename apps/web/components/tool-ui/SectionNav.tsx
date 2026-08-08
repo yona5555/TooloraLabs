@@ -21,6 +21,7 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
   const [isStuck, setIsStuck] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
+  const [stuckRect, setStuckRect] = useState<{ left: number; width: number } | null>(null);
   const itemsRef = useRef(items);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -83,6 +84,34 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
     return () => observer.disconnect();
   }, []);
 
+  /**
+   * When stuck, the bar can't just inherit its parent's width the way a
+   * normal-flow element does, since `position: fixed` takes it out of flow
+   * entirely. It needs to match the "secondary" column's width explicitly
+   * (not the full viewport) so it doesn't overlap the sidebar column, which
+   * sits to the side at the same vertical position on every above-the-fold
+   * tool layout. The sentinel stays in normal flow even while the nav is
+   * fixed, so its own rect always reflects that column's real bounds.
+   */
+  useLayoutEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+
+    function measure() {
+      const rect = el!.getBoundingClientRect();
+      setStuckRect({ left: rect.left, width: rect.width });
+    }
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
   function scrollToSection(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -104,11 +133,8 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
       <nav
         ref={navRef}
         aria-label={t("sectionNavLabel")}
-        className={
-          isStuck
-            ? `fixed inset-x-0 top-18 ${navSurfaceClassName}`
-            : `relative mb-6 ${navSurfaceClassName}`
-        }
+        className={isStuck ? `fixed top-18 ${navSurfaceClassName}` : `relative mb-6 ${navSurfaceClassName}`}
+        style={isStuck && stuckRect ? { left: stuckRect.left, width: stuckRect.width } : undefined}
       >
         <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto">
           {items.map((item) => (
