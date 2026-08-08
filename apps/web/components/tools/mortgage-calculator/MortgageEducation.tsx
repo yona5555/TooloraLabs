@@ -121,11 +121,11 @@ export default async function MortgageEducation() {
         <p>{t("limitations.paragraph2")}</p>
       </InfoSection>
 
-      <InfoSection title={t("faq.title")}>
+      <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
-      <InfoSection title={t("behindTheTool.title")}>
+      <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>

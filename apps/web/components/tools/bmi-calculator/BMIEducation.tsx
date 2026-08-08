@@ -43,7 +43,7 @@ export default async function BMIEducation() {
         </p>
       </InfoSection>
 
-      <InfoSection title={t("categoryTable.title")}>
+      <InfoSection id="category-table" title={t("categoryTable.title")}>
         <p>{t("categoryTable.intro")}</p>
         <BMICategoryTable rows={categoryRows} />
       </InfoSection>
@@ -55,7 +55,7 @@ export default async function BMIEducation() {
         <BMIBodyLevelsChart levels={bodyLevels} />
       </InfoSection>
 
-      <InfoSection title={t("risksOverweight.title")}>
+      <InfoSection id="health-risks" title={t("risksOverweight.title")}>
         <p>{t("risksOverweight.intro")}</p>
         <ul className="list-disc space-y-2 ps-5">
           {overweightRisks.map((item) => (
@@ -167,11 +167,11 @@ export default async function BMIEducation() {
         <p>{t("limitations.paragraph2")}</p>
       </InfoSection>
 
-      <InfoSection title={t("faq.title")}>
+      <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
-      <InfoSection title={t("behindTheTool.title")}>
+      <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>

@@ -21,6 +21,7 @@ import BMIResult from "./BMIResult";
 import BMIMiniConverter from "./BMIMiniConverter";
 import BMIRecommendations from "./BMIRecommendations";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
 import type { BMIExtendedResult, UnitSystem } from "./types";
 
 const tool = new BMICalculatorTool();
@@ -164,8 +165,17 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
     setResult(buildExtendedResult(DEFAULT_HEIGHT_CM, DEFAULT_WEIGHT_KG, DEFAULT_AGE, "male"));
   }
 
+  const navItems = [
+    { id: "tool", label: t("nav.tool") },
+    { id: "category-table", label: t("nav.categoryTable") },
+    { id: "health-risks", label: t("nav.healthRisks") },
+    { id: "faq", label: t("nav.faq") },
+    { id: "behind-the-tool", label: t("nav.behindTheTool") },
+  ];
+
   return (
     <>
+      <div id="tool" className="scroll-mt-32">
       <ToolAboveFold
         input={
           <div className="flex flex-col gap-4">
@@ -211,8 +221,14 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
           </div>
         }
         sidebar={<RelatedToolsSidebar currentSlug="bmi-calculator" category="calculators" />}
-        secondary={<BMIRecommendations category={result.category} />}
+        secondary={
+          <div className="flex flex-col gap-6">
+            <SectionNav items={navItems} />
+            <BMIRecommendations category={result.category} />
+          </div>
+        }
       />
+      </div>
 
       {education}
     </>

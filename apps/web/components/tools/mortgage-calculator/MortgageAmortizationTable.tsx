@@ -99,6 +99,7 @@ export default function MortgageAmortizationTable({ result, digitStyle }: Mortga
 
   return (
     <SectionCard
+      id="amortization"
       title={t("amortizationTable.title")}
       action={<DownloadButton content={csvContent} filename="mortgage-amortization-schedule.csv" mimeType="text/csv;charset=utf-8" />}
     >

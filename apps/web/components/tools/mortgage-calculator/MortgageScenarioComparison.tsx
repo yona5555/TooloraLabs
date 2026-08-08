@@ -121,7 +121,7 @@ export default function MortgageScenarioComparison({ result, digitStyle }: Mortg
   ];
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard id="scenario-comparison" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">

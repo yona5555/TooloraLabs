@@ -16,6 +16,7 @@ import MortgagePayoffChart from "./MortgagePayoffChart";
 import MortgageAmortizationTable from "./MortgageAmortizationTable";
 import MortgageScenarioComparison from "./MortgageScenarioComparison";
 import MortgageBiweeklyPayment from "./MortgageBiweeklyPayment";
+import SectionNav from "@/components/tool-ui/SectionNav";
 import type { DownPaymentMode, MortgageExtendedResult } from "./types";
 
 const tool = new MortgageCalculatorTool();
@@ -227,8 +228,17 @@ export default function MortgageCalculator({ education }: { education: ReactNode
     );
   }
 
+  const navItems = [
+    { id: "tool", label: t("nav.tool") },
+    { id: "amortization", label: t("nav.amortization") },
+    { id: "scenario-comparison", label: t("nav.scenarioComparison") },
+    { id: "faq", label: t("nav.faq") },
+    { id: "behind-the-tool", label: t("nav.behindTheTool") },
+  ];
+
   return (
     <>
+      <div id="tool" className="scroll-mt-32">
       <ToolAboveFold
         input={
           <MortgageInputPanel
@@ -269,6 +279,7 @@ export default function MortgageCalculator({ education }: { education: ReactNode
         sidebar={<RelatedToolsSidebar currentSlug="mortgage-calculator" category="calculators" />}
         secondary={
           <div className="flex flex-col gap-6">
+            <SectionNav items={navItems} />
             <MortgagePayoffChart result={result} digitStyle={digitStyle} />
             <MortgageScenarioComparison result={result} digitStyle={digitStyle} />
             <MortgageAmortizationTable result={result} digitStyle={digitStyle} />
@@ -276,6 +287,7 @@ export default function MortgageCalculator({ education }: { education: ReactNode
           </div>
         }
       />
+      </div>
 
       {education}
     </>
