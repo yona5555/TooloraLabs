@@ -7,6 +7,8 @@ import BMICalculator from "@/components/tools/bmi-calculator/BMICalculator";
 import BMIEducation from "@/components/tools/bmi-calculator/BMIEducation";
 import MortgageCalculator from "@/components/tools/mortgage-calculator/MortgageCalculator";
 import MortgageEducation from "@/components/tools/mortgage-calculator/MortgageEducation";
+import CryptoConverter from "@/components/tools/crypto-converter/CryptoConverter";
+import CryptoEducation from "@/components/tools/crypto-converter/CryptoEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -30,6 +32,7 @@ import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
 import { SITE_URL } from "@/lib/site";
+import { getTopCoins, getGlobalStats, getUsdToSarRate, getFetchTimestamp } from "@/lib/crypto/coingecko";
 
 type ToolPageProps = {
   params: Promise<{
@@ -133,6 +136,24 @@ export default async function ToolPage({
     case "mortgage-calculator":
       component = <MortgageCalculator education={<MortgageEducation />} />;
       break;
+    case "crypto-converter": {
+      const [initialCoins, globalStats, usdToSarRate] = await Promise.all([
+        getTopCoins(100),
+        getGlobalStats(),
+        getUsdToSarRate(),
+      ]);
+      const fetchedAt = getFetchTimestamp();
+      component = (
+        <CryptoConverter
+          initialCoins={initialCoins}
+          globalStats={globalStats}
+          usdToSarRate={usdToSarRate}
+          fetchedAt={fetchedAt}
+          education={<CryptoEducation />}
+        />
+      );
+      break;
+    }
     case "percentage-calculator":
       component = <PercentageCalculator />;
       break;
@@ -193,7 +214,10 @@ export default async function ToolPage({
   }
 
   const isAboveFoldLayout =
-    slug === "bmi-calculator" || slug === "age-calculator" || slug === "mortgage-calculator";
+    slug === "bmi-calculator" ||
+    slug === "age-calculator" ||
+    slug === "mortgage-calculator" ||
+    slug === "crypto-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",

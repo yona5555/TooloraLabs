@@ -6,6 +6,7 @@ import {
   FileText,
   Folder,
   RefreshCw,
+  TrendingUp,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
@@ -20,6 +21,7 @@ const icons = {
   code: <Code2 size={32} strokeWidth={2} />,
   text: <FileText size={32} strokeWidth={2} />,
   folder: <Folder size={32} strokeWidth={2} />,
+  "trending-up": <TrendingUp size={32} strokeWidth={2} />,
 };
 
 export default function Categories() {

@@ -42,4 +42,10 @@ export const categories: Category[] = [
     description: "Compress and convert files.",
     icon: "folder",
   },
+  {
+    slug: "financial-markets",
+    title: "Financial Markets",
+    description: "Live data and neutral, educational tools for crypto, forex, and commodities.",
+    icon: "trending-up",
+  },
 ];

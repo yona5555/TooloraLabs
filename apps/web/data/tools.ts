@@ -9,6 +9,24 @@ export type Tool = {
 
 export const tools: Tool[] = [
   {
+    slug: "crypto-converter",
+    title: "Crypto Converter",
+    category: "financial-markets",
+    description:
+      "Live prices for the top 100 cryptocurrencies, a converter between any two coins, historical charts, and an educational investment-growth calculator.",
+    featured: true,
+    keywords: [
+      "cryptocurrency",
+      "crypto converter",
+      "bitcoin price",
+      "ethereum price",
+      "crypto prices",
+      "blockchain",
+      "market cap",
+      "bitcoin dominance",
+    ],
+  },
+  {
     slug: "scientific-calculator",
     title: "Scientific Calculator",
     category: "calculators",

@@ -155,6 +155,14 @@ describe("isWithinSupportedHistory", () => {
     const future = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     expect(isWithinSupportedHistory(future, now)).toBe(false);
   });
+
+  it("accepts the boundary date even when 'now' is later in the day than midnight (regression: date-input min value)", () => {
+    // A date built from a bare YYYY-MM-DD string (as the API route does) is midnight UTC,
+    // while "now" is whatever time of day the request actually happens — always later.
+    const laterNow = new Date("2026-08-08T14:56:00Z");
+    const boundaryMidnight = new Date("2025-08-08T00:00:00Z");
+    expect(isWithinSupportedHistory(boundaryMidnight, laterNow)).toBe(true);
+  });
 });
 
 describe("findCoinById", () => {

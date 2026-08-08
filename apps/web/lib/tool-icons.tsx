@@ -1,5 +1,6 @@
 import {
   Binary,
+  Bitcoin,
   Boxes,
   Braces,
   Calendar,
@@ -48,6 +49,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "invoice-generator": ReceiptText,
   "inventory-valuation-calculator": Boxes,
   "break-even-calculator": Target,
+  "crypto-converter": Bitcoin,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

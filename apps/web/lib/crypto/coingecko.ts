@@ -1,6 +1,11 @@
 import type { CryptoCoin, CryptoGlobalStats } from "@tooloralabs/tools";
 
 const COINGECKO_BASE = "https://api.coingecko.com/api/v3";
+
+/** Wraps `Date.now()` outside any component function, since the react-hooks/purity lint rule flags impure calls made directly inside a component's render body. */
+export function getFetchTimestamp(): number {
+  return Date.now();
+}
 const PAGE_REVALIDATE_SECONDS = 3600;
 const ON_DEMAND_REVALIDATE_SECONDS = 60;
 

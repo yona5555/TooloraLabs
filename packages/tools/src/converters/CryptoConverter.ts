@@ -89,9 +89,20 @@ export function calculateInvestmentReturn(
 /** CoinGecko's public API caps historical data at 365 days back for non-paid usage. */
 export const MAX_HISTORY_DAYS = 365;
 
+function utcDayStart(date: Date): number {
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
+/**
+ * Compares calendar days (UTC), not exact timestamps — `referenceDate` is
+ * usually "now", which is always later in the day than a `date` built from
+ * a bare YYYY-MM-DD string (midnight UTC). Diffing raw timestamps would
+ * make "exactly 365 days ago" fail by a few fractional hours almost every
+ * time, rejecting the very boundary date the UI itself offers as the
+ * earliest selectable one.
+ */
 export function isWithinSupportedHistory(date: Date, referenceDate: Date = new Date()): boolean {
-  const diffMs = referenceDate.getTime() - date.getTime();
-  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+  const diffDays = Math.round((utcDayStart(referenceDate) - utcDayStart(date)) / (1000 * 60 * 60 * 24));
   return diffDays >= 0 && diffDays <= MAX_HISTORY_DAYS;
 }
 
