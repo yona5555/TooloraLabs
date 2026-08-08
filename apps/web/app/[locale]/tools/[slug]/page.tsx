@@ -41,10 +41,21 @@ type ToolPageProps = {
   }>;
 };
 
+/**
+ * Excludes crypto-converter: it's the only tool whose render fetches live
+ * data (CoinGecko), so including it here would make `next build` itself
+ * perform that fetch to prerender the page — burning the free API quota on
+ * every build regardless of what changed, and failing the whole build on a
+ * 429. Leaving it out of the static param list means `dynamicParams`
+ * (default true) renders it on the first real request instead, after which
+ * the `revalidate: 3600` on its CoinGecko calls takes over as normal ISR.
+ */
 export function generateStaticParams() {
-  return tools.map((tool) => ({
-    slug: tool.slug,
-  }));
+  return tools
+    .filter((tool) => tool.slug !== "crypto-converter")
+    .map((tool) => ({
+      slug: tool.slug,
+    }));
 }
 
 export async function generateMetadata({
