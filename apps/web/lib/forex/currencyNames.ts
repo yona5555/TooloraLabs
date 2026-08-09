@@ -68,8 +68,14 @@ export const CURRENCY_NAMES: Record<string, { en: string; ar: string }> = {
   KMF: { en: "Comorian Franc", ar: "الفرنك القمري" },
 };
 
-/** The prominent quick-access set: top globally traded currencies first, then the most-visited Arab currencies — per the tool's above-the-fold spec. */
-export const FEATURED_CURRENCY_CODES = ["USD", "EUR", "GBP", "JPY", "CNY", "SAR", "AED", "EGP", "KWD"] as const;
+/**
+ * The prominent quick-access set: highest-AdSense-value currencies for the
+ * site's primary international audience first (USD, EUR, GBP, JPY, CAD,
+ * AUD — see §14 in the project instructions file), then the most-visited
+ * Arab currencies after. Arab currencies stay fully searchable in the full
+ * picker regardless of this ordering; this only controls what's shown first.
+ */
+export const FEATURED_CURRENCY_CODES = ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "SAR", "AED", "EGP", "KWD"] as const;
 
 /** `fallbackName` is the genuine English name ExchangeRate-API returns for every one of its ~161 codes — used for the (mostly English-locale) currencies outside this curated set, so only a bare ISO code is ever shown as a last resort. */
 export function getCurrencyDisplayName(code: string, locale: string, fallbackName?: string): string {

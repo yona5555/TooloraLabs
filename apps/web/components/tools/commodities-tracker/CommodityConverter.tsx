@@ -39,7 +39,7 @@ export default function CommodityConverter({
   const [commodity, setCommodity] = useState<CommodityId>("gold");
   const [amount, setAmount] = useState("1");
   const [weightUnit, setWeightUnit] = useState<MetalWeightUnit>("gram");
-  const [currency, setCurrency] = useState<DisplayCurrency>("sar");
+  const [currency, setCurrency] = useState<DisplayCurrency>("usd");
 
   const digitStyle: DigitStyle = resolveDigitStyle(amount);
   const fxRate = currency === "sar" ? usdToSarRate : 1;

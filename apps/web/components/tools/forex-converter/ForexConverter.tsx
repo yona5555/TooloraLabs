@@ -26,7 +26,7 @@ type ForexConverterProps = {
 export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, education }: ForexConverterProps) {
   const tNav = useTranslations("tools.forex-converter.nav");
   const [fromCode, setFromCode] = useState("USD");
-  const [toCode, setToCode] = useState("SAR");
+  const [toCode, setToCode] = useState("EUR");
   const [amount, setAmount] = useState("1");
 
   const digitStyle: DigitStyle = resolveDigitStyle(amount);
