@@ -5,6 +5,7 @@ import {
   Boxes,
   Braces,
   Calendar,
+  CloudSun,
   FilePen,
   FileSpreadsheet,
   Gem,
@@ -54,6 +55,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "crypto-converter": Bitcoin,
   "forex-converter": Banknote,
   "commodities-tracker": Gem,
+  "weather-forecast": CloudSun,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

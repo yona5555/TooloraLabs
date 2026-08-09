@@ -27,6 +27,23 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "weather-forecast",
+    title: "Weather Forecast",
+    category: "calculators",
+    description:
+      "Current conditions and a 7-day forecast for major world cities or any city you search, with temperature, humidity, wind, and precipitation chance.",
+    featured: true,
+    keywords: [
+      "weather",
+      "forecast",
+      "temperature",
+      "7-day forecast",
+      "humidity",
+      "wind speed",
+      "weather forecast",
+    ],
+  },
+  {
     slug: "commodities-tracker",
     title: "Commodities Tracker",
     category: "financial-markets",

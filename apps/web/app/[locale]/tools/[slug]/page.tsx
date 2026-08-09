@@ -13,6 +13,8 @@ import ForexConverter from "@/components/tools/forex-converter/ForexConverter";
 import ForexEducation from "@/components/tools/forex-converter/ForexEducation";
 import CommodityConverter from "@/components/tools/commodities-tracker/CommodityConverter";
 import CommodityEducation from "@/components/tools/commodities-tracker/CommodityEducation";
+import WeatherTracker from "@/components/tools/weather-forecast/WeatherTracker";
+import WeatherEducation from "@/components/tools/weather-forecast/WeatherEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -41,6 +43,7 @@ import { getForexSnapshot } from "@/lib/forex/exchangerate";
 import { getMetalSnapshot } from "@/lib/commodities/metalprice";
 import { getOilSnapshot } from "@/lib/commodities/oilprice";
 import { findCurrencyByCode } from "@tooloralabs/tools";
+import { getWeatherSnapshot, PRIORITY_CITIES } from "@/lib/weather/open-meteo";
 
 type ToolPageProps = {
   params: Promise<{
@@ -50,19 +53,20 @@ type ToolPageProps = {
 };
 
 /**
- * Excludes crypto-converter, forex-converter, and commodities-tracker: all
- * three fetch live external data at render time (CoinGecko; ExchangeRate-API
- * + Frankfurter; MetalpriceAPI + OilPriceAPI), so including them here would
- * make `next build` itself perform those fetches to prerender the page —
- * burning limited free-tier API quota on every build regardless of what
- * changed, and failing the whole build on a rate limit (429), as happened
- * with CoinGecko on 2026-08-08. Leaving them out of the static param list
- * means `dynamicParams` (default true) renders each on its first real
- * request instead, after which the `revalidate` window on their respective
- * fetches takes over as normal ISR.
+ * Excludes crypto-converter, forex-converter, commodities-tracker, and
+ * weather-forecast: all four fetch live external data at render time
+ * (CoinGecko; ExchangeRate-API + Frankfurter; MetalpriceAPI + OilPriceAPI;
+ * Open-Meteo), so including them here would make `next build` itself
+ * perform those fetches to prerender the page — burning limited free-tier
+ * API quota on every build regardless of what changed, and failing the
+ * whole build on a rate limit (429), as happened with CoinGecko on
+ * 2026-08-08. Leaving them out of the static param list means
+ * `dynamicParams` (default true) renders each on its first real request
+ * instead, after which the `revalidate` window on their respective fetches
+ * takes over as normal ISR.
  */
 export function generateStaticParams() {
-  const liveDataSlugs = new Set(["crypto-converter", "forex-converter", "commodities-tracker"]);
+  const liveDataSlugs = new Set(["crypto-converter", "forex-converter", "commodities-tracker", "weather-forecast"]);
   return tools
     .filter((tool) => !liveDataSlugs.has(tool.slug))
     .map((tool) => ({
@@ -203,6 +207,23 @@ export default async function ToolPage({
       );
       break;
     }
+    case "weather-forecast": {
+      const defaultCity = PRIORITY_CITIES[0];
+      const tWeather = await getTranslations({ locale, namespace: "tools.weather-forecast.aboveFold" });
+      const snapshot = await getWeatherSnapshot(defaultCity.latitude, defaultCity.longitude);
+      component = (
+        <WeatherTracker
+          initialCity={{
+            label: tWeather(`priorityCity.${defaultCity.nameKey}`),
+            latitude: defaultCity.latitude,
+            longitude: defaultCity.longitude,
+          }}
+          initialSnapshot={snapshot}
+          education={<WeatherEducation />}
+        />
+      );
+      break;
+    }
     case "percentage-calculator":
       component = <PercentageCalculator />;
       break;
@@ -268,7 +289,8 @@ export default async function ToolPage({
     slug === "mortgage-calculator" ||
     slug === "crypto-converter" ||
     slug === "forex-converter" ||
-    slug === "commodities-tracker";
+    slug === "commodities-tracker" ||
+    slug === "weather-forecast";
 
   const jsonLd = {
     "@context": "https://schema.org",
