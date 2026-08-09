@@ -21,7 +21,8 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
   const [isStuck, setIsStuck] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
-  const [stuckRect, setStuckRect] = useState<{ left: number; width: number } | null>(null);
+  const [narrowRect, setNarrowRect] = useState<{ left: number; width: number } | null>(null);
+  const [wideRect, setWideRect] = useState<{ left: number; width: number } | null>(null);
   const itemsRef = useRef(items);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -87,11 +88,13 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
   /**
    * When stuck, the bar can't just inherit its parent's width the way a
    * normal-flow element does, since `position: fixed` takes it out of flow
-   * entirely. It needs to match the "secondary" column's width explicitly
-   * (not the full viewport) so it doesn't overlap the sidebar column, which
-   * sits to the side at the same vertical position on every above-the-fold
-   * tool layout. The sentinel stays in normal flow even while the nav is
-   * fixed, so its own rect always reflects that column's real bounds.
+   * entirely. Two different widths are correct depending on scroll depth:
+   * narrow (this "secondary" column, via the sentinel, which stays in
+   * normal flow even while the nav is fixed) while the sidebar still sits
+   * to the side at the same vertical position, and wide (the page's actual
+   * content column, via `<main>`) once scrolled past the above-the-fold
+   * grid into the encyclopedic section, which has no sidebar and is wider.
+   * Which one applies is decided at render time from `activeId`.
    */
   useLayoutEffect(() => {
     const el = sentinelRef.current;
@@ -99,12 +102,33 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
 
     function measure() {
       const rect = el!.getBoundingClientRect();
-      setStuckRect({ left: rect.left, width: rect.width });
+      setNarrowRect({ left: rect.left, width: rect.width });
     }
 
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(el);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    function measure() {
+      const main = document.querySelector("main");
+      if (!main) return;
+      const rect = main.getBoundingClientRect();
+      const style = getComputedStyle(main);
+      const paddingLeft = parseFloat(style.paddingLeft) || 0;
+      const paddingRight = parseFloat(style.paddingRight) || 0;
+      setWideRect({ left: rect.left + paddingLeft, width: rect.width - paddingLeft - paddingRight });
+    }
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(document.querySelector("main") ?? document.body);
     window.addEventListener("resize", measure);
     return () => {
       observer.disconnect();
@@ -125,6 +149,9 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
   }
 
   if (items.length === 0) return null;
+
+  const pastAboveFold = activeId !== items[0]?.id;
+  const stuckRect = (pastAboveFold ? wideRect : narrowRect) ?? narrowRect;
 
   return (
     <>
