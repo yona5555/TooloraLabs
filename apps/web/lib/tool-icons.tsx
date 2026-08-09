@@ -6,6 +6,7 @@ import {
   Braces,
   Calendar,
   CloudSun,
+  Flame,
   FilePen,
   FileSpreadsheet,
   Gem,
@@ -14,6 +15,7 @@ import {
   Home,
   Image,
   KeyRound,
+  Landmark,
   ListX,
   Percent,
   QrCode,
@@ -24,6 +26,7 @@ import {
   Sigma,
   Tag,
   Target,
+  TrendingUp,
   Type,
   Wrench,
   type LucideIcon,
@@ -56,6 +59,9 @@ export const toolIcons: Record<string, LucideIcon> = {
   "forex-converter": Banknote,
   "commodities-tracker": Gem,
   "weather-forecast": CloudSun,
+  "tdee-calculator": Flame,
+  "compound-interest-calculator": TrendingUp,
+  "loan-calculator": Landmark,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

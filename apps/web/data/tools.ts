@@ -27,6 +27,53 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "tdee-calculator",
+    title: "TDEE & BMR Calculator",
+    category: "calculators",
+    description:
+      "Calculate your Basal Metabolic Rate and Total Daily Energy Expenditure using the Mifflin-St Jeor equation, plus a calorie target for weight loss, maintenance, or gain.",
+    featured: true,
+    keywords: [
+      "tdee",
+      "bmr",
+      "calorie calculator",
+      "maintenance calories",
+      "mifflin st jeor",
+      "weight loss calories",
+      "daily calorie needs",
+    ],
+  },
+  {
+    slug: "compound-interest-calculator",
+    title: "Compound Interest Calculator",
+    category: "calculators",
+    description:
+      "See how your savings or investment grows over time with compound interest and optional monthly contributions, with a year-by-year growth chart.",
+    featured: true,
+    keywords: [
+      "compound interest",
+      "investment calculator",
+      "savings calculator",
+      "interest calculator",
+      "future value",
+    ],
+  },
+  {
+    slug: "loan-calculator",
+    title: "Personal & Auto Loan Calculator",
+    category: "calculators",
+    description:
+      "Calculate the monthly payment, total interest, and full amortization schedule for a personal or auto loan.",
+    featured: true,
+    keywords: [
+      "loan calculator",
+      "auto loan calculator",
+      "personal loan calculator",
+      "monthly payment",
+      "amortization schedule",
+    ],
+  },
+  {
     slug: "weather-forecast",
     title: "Weather Forecast",
     category: "calculators",

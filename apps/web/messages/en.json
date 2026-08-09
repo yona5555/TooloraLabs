@@ -2283,6 +2283,185 @@
         }
       }
     },
+    "tdee-calculator": {
+      "title": "TDEE & BMR Calculator",
+      "description": "Calculate your Basal Metabolic Rate and Total Daily Energy Expenditure using the Mifflin-St Jeor equation, plus a calorie target for weight loss, maintenance, or gain.",
+      "aboveFold": {
+        "inputTitle": "Your Details",
+        "resultTitle": "Your Energy Needs",
+        "bmrLabel": "BMR",
+        "tdeeLabel": "TDEE (Maintenance)",
+        "kcalUnit": "kcal/day",
+        "goalLabel": "Goal",
+        "goalDirection": {
+          "lose": "Lose weight",
+          "maintain": "Maintain",
+          "gain": "Gain weight"
+        },
+        "weeklyRateLabel": "Target rate (kg/week)",
+        "dailyTargetLabel": "Daily calorie target",
+        "aggressiveWarning": "This rate implies a daily adjustment beyond about 35% of your maintenance calories, which is generally considered aggressive and hard to sustain — consider a more moderate rate.",
+        "adjustmentNote": "This is a daily adjustment of about {amount} from maintenance.",
+        "disclaimer": "This tool provides general educational estimates only, not medical or nutritional advice. Actual energy needs vary by individual. Consult a physician or registered dietitian before making significant changes to your diet."
+      },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "unitMetric": "Metric",
+        "unitUS": "US",
+        "heightLabel": "Height",
+        "heightPlaceholder": "Height (cm)",
+        "heightFeetPlaceholder": "Feet",
+        "heightInchesPlaceholder": "Inches",
+        "weightLabel": "Weight",
+        "weightPlaceholder": "Weight (kg)",
+        "weightLbPlaceholder": "Weight (lb)",
+        "ageLabel": "Age",
+        "agePlaceholder": "Age (years)",
+        "genderLabel": "Sex",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "activityLabel": "Activity Level",
+        "activity": {
+          "sedentary": "Sedentary (little or no exercise)",
+          "light": "Lightly active (1–3 days/week)",
+          "moderate": "Moderately active (3–5 days/week)",
+          "active": "Active (6–7 days/week)",
+          "veryActive": "Very active (physical job or 2x/day training)"
+        },
+        "useBodyFatLabel": "I know my body fat percentage",
+        "bodyFatLabel": "Body fat percentage",
+        "bodyFatPlaceholder": "e.g. 15"
+      },
+      "gauge": {
+        "aggressiveDeficit": "Aggressive deficit",
+        "moderateDeficit": "Moderate deficit",
+        "maintenance": "Maintenance",
+        "moderateSurplus": "Moderate surplus",
+        "aggressiveSurplus": "Aggressive surplus"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding BMR and TDEE",
+          "paragraph1": "Basal Metabolic Rate (BMR) is the number of calories your body burns at complete rest just to keep its basic functions running — breathing, circulation, cell repair, and maintaining body temperature. Total Daily Energy Expenditure (TDEE) builds on that by adding the calories burned through daily movement and exercise, giving a fuller picture of how many calories your body actually uses in a typical day.",
+          "paragraph2": "Body weight changes according to a simple energy-balance principle: consuming more calories than TDEE over time leads to weight gain, consuming fewer leads to weight loss, and matching TDEE roughly maintains weight. This tool uses the Mifflin-St Jeor equation by default — the equation most commonly recommended in clinical practice — with an option to switch to the Katch-McArdle equation if you know your body fat percentage, which tends to be more accurate for people with an above-average muscle mass.",
+          "diagram": {
+            "caloriesIn": "Calories In",
+            "caloriesOut": "Calories Out",
+            "fulcrum": "Energy Balance",
+            "caption": "When calories in and calories out are balanced, body weight tends to stay roughly stable; tipping either side shifts it up or down over time."
+          },
+          "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for personalized medical or nutritional advice."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Two sample profiles, calculated with the Mifflin-St Jeor equation, show how BMR and TDEE change with different inputs and activity levels.",
+          "columnProfile": "Profile",
+          "columnBmr": "BMR",
+          "columnTdee": "TDEE",
+          "rows": [
+            {
+              "profile": "Man, 30, 80 kg, 180 cm, moderately active",
+              "bmr": "1,780 kcal/day",
+              "tdee": "≈ 2,759 kcal/day"
+            },
+            {
+              "profile": "Woman, 25, 60 kg, 165 cm, lightly active",
+              "bmr": "1,345 kcal/day",
+              "tdee": "≈ 1,850 kcal/day"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does my BMR differ between the Mifflin-St Jeor and Katch-McArdle results?",
+              "answer": "Mifflin-St Jeor estimates BMR from your total weight, height, age, and sex. Katch-McArdle instead uses your lean body mass directly, so it tends to give a higher, more accurate result for people who are visibly more muscular than average, and a lower one for people with a higher body fat percentage than average — since muscle burns more calories at rest than fat tissue does."
+            },
+            {
+              "question": "How accurate are these calorie estimates?",
+              "answer": "Predictive equations like Mifflin-St Jeor are estimates validated against population averages, typically accurate to within about 10% for most people — not an exact measurement of your individual metabolism, which can only be measured directly through indirect calorimetry."
+            },
+            {
+              "question": "Why does the tool warn me about an \"aggressive\" deficit or surplus?",
+              "answer": "A very large calorie deficit increases the risk of losing muscle mass along with fat and can be hard to sustain, while a very large surplus typically leads to a higher proportion of fat gain relative to muscle. Keeping the daily adjustment within a moderate range relative to your TDEE is a widely recommended approach for a more sustainable pace of change."
+            },
+            {
+              "question": "Should I recalculate my TDEE as my weight changes?",
+              "answer": "Yes — BMR and TDEE both scale with body weight, so it's reasonable to recalculate every several weeks or after a meaningful weight change, rather than relying on a single calculation indefinitely."
+            },
+            {
+              "question": "Does this account for factors like medical conditions or medications?",
+              "answer": "No. This tool applies general population-based equations and does not account for medical conditions, certain medications, or other individual factors that can meaningfully affect metabolism — a healthcare professional can account for those."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "History and Origins",
+            "paragraph": "The scientific effort to estimate resting energy expenditure from body measurements dates back to the Harris-Benedict equation, published in 1918-1919 from data on around 250 subjects — for decades the standard formula used in clinical and research settings. In 1990, a team led by Mark Mifflin and Sachiko St Jeor re-derived the equation from a larger, more contemporary sample of 498 subjects measured by indirect calorimetry, finding it predicted resting energy expenditure more accurately than the original Harris-Benedict formula for the modern population — it has since become the equation most commonly recommended by dietetic professional bodies."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Indirect calorimetry — measuring the oxygen a person consumes and the carbon dioxide they produce to directly calculate energy expenditure — remains the clinical gold standard where a predictive equation isn't precise enough, such as in hospital nutrition support. Outside clinical settings, consumer wearable devices now estimate daily energy expenditure continuously using heart rate and movement data, though their accuracy varies significantly by device and activity type compared to laboratory measurement."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Energy expenditure and metabolism are studied within exercise science, nutrition science, and the broader field of sports-related subjects. The following universities are consistently ranked among the world's best for the subject.",
+            "universities": [
+              {
+                "name": "Loughborough University, United Kingdom",
+                "note": "Ranked #1 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026, for the tenth consecutive year.",
+                "online": "The Sport, Exercise and Health Sciences degree programs are on-campus only.",
+                "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/"
+              },
+              {
+                "name": "The University of Queensland, Australia",
+                "note": "Ranked #2 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "The Human Movement and Nutrition Sciences degree programs are on-campus only.",
+                "url": "https://hmns.uq.edu.au/"
+              },
+              {
+                "name": "The University of Sydney, Australia",
+                "note": "Ranked #3 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "The Exercise and Sport Science degree programs are on-campus only.",
+                "url": "https://www.sydney.edu.au/medicine-health/study-medicine-and-health/study-areas/health-sciences/exercise-and-sport-science.html"
+              },
+              {
+                "name": "University of British Columbia, Canada",
+                "note": "Ranked #4 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "The Kinesiology degree programs are on-campus only.",
+                "url": "https://kin.educ.ubc.ca/"
+              },
+              {
+                "name": "Norwegian School of Sport Sciences, Norway",
+                "note": "Ranked #5 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "Most degree programs are on-campus only; the school separately offers some one-year and short programs taught in English.",
+                "url": "https://www.nih.no/english/"
+              },
+              {
+                "name": "King Saud University, Saudi Arabia",
+                "note": "Home to a dedicated Clinical Nutrition program within the College of Applied Medical Sciences, one of the university's oldest applied-health departments.",
+                "online": "The Clinical Nutrition degree programs are offered on-campus only.",
+                "url": "https://cams.ksu.edu.sa/en/departments/community-health-sciences"
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Mifflin, M. D., St Jeor, S. T., Hill, L. A., Scott, B. J., Daugherty, S. A., & Koh, Y. O. (1990). A New Predictive Equation for Resting Energy Expenditure in Healthy Individuals. The American Journal of Clinical Nutrition, 51(2), 241–247.",
+          "note": "The original study that derived the resting-energy-expenditure equation this tool uses by default, based on indirect-calorimetry measurements of 498 healthy subjects.",
+          "url": "https://doi.org/10.1093/ajcn/51.2.241",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Perform fast percentage calculations.",

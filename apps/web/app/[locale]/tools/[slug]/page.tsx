@@ -15,6 +15,8 @@ import CommodityConverter from "@/components/tools/commodities-tracker/Commodity
 import CommodityEducation from "@/components/tools/commodities-tracker/CommodityEducation";
 import WeatherTracker from "@/components/tools/weather-forecast/WeatherTracker";
 import WeatherEducation from "@/components/tools/weather-forecast/WeatherEducation";
+import TDEECalculator from "@/components/tools/tdee-calculator/TDEECalculator";
+import TDEEEducation from "@/components/tools/tdee-calculator/TDEEEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -224,6 +226,9 @@ export default async function ToolPage({
       );
       break;
     }
+    case "tdee-calculator":
+      component = <TDEECalculator education={<TDEEEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator />;
       break;
@@ -290,7 +295,10 @@ export default async function ToolPage({
     slug === "crypto-converter" ||
     slug === "forex-converter" ||
     slug === "commodities-tracker" ||
-    slug === "weather-forecast";
+    slug === "weather-forecast" ||
+    slug === "tdee-calculator" ||
+    slug === "compound-interest-calculator" ||
+    slug === "loan-calculator";
 
   const jsonLd = {
     "@context": "https://schema.org",
