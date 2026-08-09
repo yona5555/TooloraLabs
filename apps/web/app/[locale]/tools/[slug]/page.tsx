@@ -17,6 +17,8 @@ import WeatherTracker from "@/components/tools/weather-forecast/WeatherTracker";
 import WeatherEducation from "@/components/tools/weather-forecast/WeatherEducation";
 import TDEECalculator from "@/components/tools/tdee-calculator/TDEECalculator";
 import TDEEEducation from "@/components/tools/tdee-calculator/TDEEEducation";
+import CompoundInterestCalculator from "@/components/tools/compound-interest-calculator/CompoundInterestCalculator";
+import CompoundInterestEducation from "@/components/tools/compound-interest-calculator/CompoundInterestEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -228,6 +230,9 @@ export default async function ToolPage({
     }
     case "tdee-calculator":
       component = <TDEECalculator education={<TDEEEducation />} />;
+      break;
+    case "compound-interest-calculator":
+      component = <CompoundInterestCalculator education={<CompoundInterestEducation />} />;
       break;
     case "percentage-calculator":
       component = <PercentageCalculator />;
