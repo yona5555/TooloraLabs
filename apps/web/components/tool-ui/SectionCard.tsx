@@ -12,7 +12,7 @@ type SectionCardProps = {
 };
 
 const headerClassName =
-  "flex w-full items-center justify-between gap-3 bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
+  "flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
 
 export default function SectionCard({
   title,
@@ -28,7 +28,7 @@ export default function SectionCard({
   return (
     <div
       id={id}
-      className={`overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none ${id ? "scroll-mt-32" : ""} ${className}`}
+      className={`rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none ${id ? "scroll-mt-32" : ""} ${className}`}
     >
       {onToggle ? (
         <button type="button" onClick={onToggle} className={headerClassName}>
