@@ -27,6 +27,24 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "commodities-tracker",
+    title: "Commodities Tracker",
+    category: "financial-markets",
+    description:
+      "Track gold, silver, and oil prices in USD and SAR, convert any weight of metal or number of barrels into cash value, and see a 7-day gold price trend.",
+    featured: true,
+    keywords: [
+      "gold price",
+      "silver price",
+      "oil price",
+      "commodities",
+      "precious metals",
+      "gold per gram",
+      "wti crude",
+      "brent crude",
+    ],
+  },
+  {
     slug: "forex-converter",
     title: "Forex Converter",
     category: "financial-markets",

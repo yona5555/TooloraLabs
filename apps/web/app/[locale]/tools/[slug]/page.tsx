@@ -11,6 +11,8 @@ import CryptoConverter from "@/components/tools/crypto-converter/CryptoConverter
 import CryptoEducation from "@/components/tools/crypto-converter/CryptoEducation";
 import ForexConverter from "@/components/tools/forex-converter/ForexConverter";
 import ForexEducation from "@/components/tools/forex-converter/ForexEducation";
+import CommodityConverter from "@/components/tools/commodities-tracker/CommodityConverter";
+import CommodityEducation from "@/components/tools/commodities-tracker/CommodityEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -36,6 +38,9 @@ import { tools } from "@/data/tools";
 import { SITE_URL } from "@/lib/site";
 import { getTopCoins, getGlobalStats, getUsdToSarRate, getFetchTimestamp } from "@/lib/crypto/coingecko";
 import { getForexSnapshot } from "@/lib/forex/exchangerate";
+import { getMetalSnapshot } from "@/lib/commodities/metalprice";
+import { getOilSnapshot } from "@/lib/commodities/oilprice";
+import { findCurrencyByCode } from "@tooloralabs/tools";
 
 type ToolPageProps = {
   params: Promise<{
@@ -45,19 +50,21 @@ type ToolPageProps = {
 };
 
 /**
- * Excludes crypto-converter and forex-converter: both fetch live external
- * data at render time (CoinGecko; ExchangeRate-API + Frankfurter), so
- * including them here would make `next build` itself perform those fetches
- * to prerender the page — burning limited free-tier API quota on every
- * build regardless of what changed, and failing the whole build on a rate
- * limit (429), as happened with CoinGecko on 2026-08-08. Leaving them out of
- * the static param list means `dynamicParams` (default true) renders each
- * on its first real request instead, after which the `revalidate` window on
- * their respective fetches takes over as normal ISR.
+ * Excludes crypto-converter, forex-converter, and commodities-tracker: all
+ * three fetch live external data at render time (CoinGecko; ExchangeRate-API
+ * + Frankfurter; MetalpriceAPI + OilPriceAPI), so including them here would
+ * make `next build` itself perform those fetches to prerender the page —
+ * burning limited free-tier API quota on every build regardless of what
+ * changed, and failing the whole build on a rate limit (429), as happened
+ * with CoinGecko on 2026-08-08. Leaving them out of the static param list
+ * means `dynamicParams` (default true) renders each on its first real
+ * request instead, after which the `revalidate` window on their respective
+ * fetches takes over as normal ISR.
  */
 export function generateStaticParams() {
+  const liveDataSlugs = new Set(["crypto-converter", "forex-converter", "commodities-tracker"]);
   return tools
-    .filter((tool) => tool.slug !== "crypto-converter" && tool.slug !== "forex-converter")
+    .filter((tool) => !liveDataSlugs.has(tool.slug))
     .map((tool) => ({
       slug: tool.slug,
     }));
@@ -181,6 +188,21 @@ export default async function ToolPage({
       );
       break;
     }
+    case "commodities-tracker": {
+      const [metals, oil, forex] = await Promise.all([getMetalSnapshot(), getOilSnapshot(), getForexSnapshot()]);
+      const usdToSarRate = findCurrencyByCode(forex.currencies, "SAR")?.ratePerUsd ?? 3.75;
+      component = (
+        <CommodityConverter
+          goldUsdPerOunce={metals.goldUsdPerOunce}
+          silverUsdPerOunce={metals.silverUsdPerOunce}
+          wtiUsdPerBarrel={oil.wtiUsdPerBarrel}
+          usdToSarRate={usdToSarRate}
+          lastUpdatedUnix={Math.min(metals.timestamp, oil.timestamp)}
+          education={<CommodityEducation />}
+        />
+      );
+      break;
+    }
     case "percentage-calculator":
       component = <PercentageCalculator />;
       break;
@@ -245,7 +267,8 @@ export default async function ToolPage({
     slug === "age-calculator" ||
     slug === "mortgage-calculator" ||
     slug === "crypto-converter" ||
-    slug === "forex-converter";
+    slug === "forex-converter" ||
+    slug === "commodities-tracker";
 
   const jsonLd = {
     "@context": "https://schema.org",

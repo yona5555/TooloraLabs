@@ -7,6 +7,7 @@ import {
   Calendar,
   FilePen,
   FileSpreadsheet,
+  Gem,
   HandCoins,
   HardDrive,
   Home,
@@ -52,6 +53,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "break-even-calculator": Target,
   "crypto-converter": Bitcoin,
   "forex-converter": Banknote,
+  "commodities-tracker": Gem,
 };
 
 export function getToolIcon(slug: string): LucideIcon {
