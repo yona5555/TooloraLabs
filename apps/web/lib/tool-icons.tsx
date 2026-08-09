@@ -1,4 +1,5 @@
 import {
+  Banknote,
   Binary,
   Bitcoin,
   Boxes,
@@ -50,6 +51,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "inventory-valuation-calculator": Boxes,
   "break-even-calculator": Target,
   "crypto-converter": Bitcoin,
+  "forex-converter": Banknote,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

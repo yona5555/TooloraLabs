@@ -9,6 +9,8 @@ import MortgageCalculator from "@/components/tools/mortgage-calculator/MortgageC
 import MortgageEducation from "@/components/tools/mortgage-calculator/MortgageEducation";
 import CryptoConverter from "@/components/tools/crypto-converter/CryptoConverter";
 import CryptoEducation from "@/components/tools/crypto-converter/CryptoEducation";
+import ForexConverter from "@/components/tools/forex-converter/ForexConverter";
+import ForexEducation from "@/components/tools/forex-converter/ForexEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -33,6 +35,7 @@ import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
 import { SITE_URL } from "@/lib/site";
 import { getTopCoins, getGlobalStats, getUsdToSarRate, getFetchTimestamp } from "@/lib/crypto/coingecko";
+import { getForexSnapshot } from "@/lib/forex/exchangerate";
 
 type ToolPageProps = {
   params: Promise<{
@@ -42,17 +45,19 @@ type ToolPageProps = {
 };
 
 /**
- * Excludes crypto-converter: it's the only tool whose render fetches live
- * data (CoinGecko), so including it here would make `next build` itself
- * perform that fetch to prerender the page — burning the free API quota on
- * every build regardless of what changed, and failing the whole build on a
- * 429. Leaving it out of the static param list means `dynamicParams`
- * (default true) renders it on the first real request instead, after which
- * the `revalidate: 3600` on its CoinGecko calls takes over as normal ISR.
+ * Excludes crypto-converter and forex-converter: both fetch live external
+ * data at render time (CoinGecko; ExchangeRate-API + Frankfurter), so
+ * including them here would make `next build` itself perform those fetches
+ * to prerender the page — burning limited free-tier API quota on every
+ * build regardless of what changed, and failing the whole build on a rate
+ * limit (429), as happened with CoinGecko on 2026-08-08. Leaving them out of
+ * the static param list means `dynamicParams` (default true) renders each
+ * on its first real request instead, after which the `revalidate` window on
+ * their respective fetches takes over as normal ISR.
  */
 export function generateStaticParams() {
   return tools
-    .filter((tool) => tool.slug !== "crypto-converter")
+    .filter((tool) => tool.slug !== "crypto-converter" && tool.slug !== "forex-converter")
     .map((tool) => ({
       slug: tool.slug,
     }));
@@ -165,6 +170,17 @@ export default async function ToolPage({
       );
       break;
     }
+    case "forex-converter": {
+      const snapshot = await getForexSnapshot();
+      component = (
+        <ForexConverter
+          initialCurrencies={snapshot.currencies}
+          lastUpdatedUnix={snapshot.lastUpdatedUnix}
+          education={<ForexEducation />}
+        />
+      );
+      break;
+    }
     case "percentage-calculator":
       component = <PercentageCalculator />;
       break;
@@ -228,7 +244,8 @@ export default async function ToolPage({
     slug === "bmi-calculator" ||
     slug === "age-calculator" ||
     slug === "mortgage-calculator" ||
-    slug === "crypto-converter";
+    slug === "crypto-converter" ||
+    slug === "forex-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -27,6 +27,24 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "forex-converter",
+    title: "Forex Converter",
+    category: "financial-markets",
+    description:
+      "Convert between world currencies with daily-updated rates, a historical USD/EUR chart, and neutral educational content on how the foreign exchange market works.",
+    featured: true,
+    keywords: [
+      "forex",
+      "currency converter",
+      "exchange rate",
+      "usd to sar",
+      "usd to eur",
+      "foreign exchange",
+      "currency exchange",
+      "arab currencies",
+    ],
+  },
+  {
     slug: "scientific-calculator",
     title: "Scientific Calculator",
     category: "calculators",
