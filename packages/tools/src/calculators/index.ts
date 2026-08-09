@@ -10,3 +10,6 @@ export * from "./ScientificCalculator";
 export * from "./InvoiceGenerator";
 export * from "./InventoryValuationCalculator";
 export * from "./BreakEvenCalculator";
+export * from "./TDEECalculator";
+export * from "./CompoundInterestCalculator";
+export * from "./LoanCalculator";
