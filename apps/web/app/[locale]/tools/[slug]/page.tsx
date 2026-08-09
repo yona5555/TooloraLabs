@@ -19,6 +19,8 @@ import TDEECalculator from "@/components/tools/tdee-calculator/TDEECalculator";
 import TDEEEducation from "@/components/tools/tdee-calculator/TDEEEducation";
 import CompoundInterestCalculator from "@/components/tools/compound-interest-calculator/CompoundInterestCalculator";
 import CompoundInterestEducation from "@/components/tools/compound-interest-calculator/CompoundInterestEducation";
+import LoanCalculator from "@/components/tools/loan-calculator/LoanCalculator";
+import LoanEducation from "@/components/tools/loan-calculator/LoanEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -233,6 +235,9 @@ export default async function ToolPage({
       break;
     case "compound-interest-calculator":
       component = <CompoundInterestCalculator education={<CompoundInterestEducation />} />;
+      break;
+    case "loan-calculator":
+      component = <LoanCalculator education={<LoanEducation />} />;
       break;
     case "percentage-calculator":
       component = <PercentageCalculator />;

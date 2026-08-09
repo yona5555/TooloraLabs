@@ -2625,6 +2625,171 @@
         }
       }
     },
+    "loan-calculator": {
+      "title": "Personal & Auto Loan Calculator",
+      "description": "Calculate the monthly payment, total interest, and full amortization schedule for a personal or auto loan.",
+      "aboveFold": {
+        "inputTitle": "Your Loan",
+        "resultTitle": "Your Payment",
+        "monthlyPaymentLabel": "Monthly Payment",
+        "totalPaymentLabel": "Total Payment",
+        "loanAmountLabel": "Loan Amount",
+        "totalInterestLabel": "Total Interest",
+        "disclaimer": "This tool provides a general educational estimate of loan payments only, not a loan offer or financial advice. Actual rates, fees, and terms offered by a lender depend on your creditworthiness and other factors and may differ from this estimate. Consult a licensed lender or financial advisor before taking out a loan."
+      },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool",
+        "amortization": "Amortization"
+      },
+      "form": {
+        "typeAuto": "Auto Loan",
+        "typePersonal": "Personal Loan",
+        "loanAmountLabel": "Loan Amount",
+        "loanAmountPlaceholder": "e.g. 30,000",
+        "interestRateLabel": "Annual Interest Rate (%)",
+        "interestRatePlaceholder": "e.g. 6.5",
+        "loanTermLabel": "Loan Term (years)",
+        "loanTermPlaceholder": "e.g. 5"
+      },
+      "payoffChart": {
+        "title": "Payoff Over Time",
+        "intro": "This chart shows each year's payments split between principal and interest, along with how the remaining balance declines over the life of the loan.",
+        "principalLabel": "Principal",
+        "interestLabel": "Interest",
+        "balanceLabel": "Balance",
+        "totalPrincipalLabel": "Total Principal",
+        "totalInterestLabel": "Total Interest"
+      },
+      "amortizationTable": {
+        "title": "Amortization Schedule",
+        "intro": "A year-by-year summary of how much of your payments goes to principal versus interest, and your remaining balance at the end of each year.",
+        "columnYear": "Year",
+        "yearLabel": "Year {year}",
+        "viewFullTable": "View Full Schedule",
+        "showLess": "Show Less"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Loan Amortization",
+          "paragraph1": "A personal or auto loan is typically repaid through fixed, equal monthly payments over a set term — a structure called an amortizing loan. Even though every payment is the same size, the mix inside it changes constantly: early payments are weighted heavily toward interest, since interest is charged on the full outstanding balance, while later payments are weighted toward principal, since the balance — and the interest charged on it — has shrunk.",
+          "paragraph2": "The monthly payment itself is calculated so that the loan reaches a zero balance exactly at the end of the term, given the loan amount and interest rate. Unlike a mortgage, a personal or auto loan calculated here has no mortgage insurance, property tax, or homeowners association fee built in — its cost is just the interest charged on the declining balance over the term you choose.",
+          "diagram": {
+            "principalLabel": "Principal",
+            "interestLabel": "Interest",
+            "startLabel": "Start of Loan",
+            "endLabel": "End of Loan",
+            "caption": "Each fixed monthly payment splits between interest (charged on the remaining balance) and principal (which reduces it) — a split that shifts toward principal as the loan matures."
+          },
+          "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for personalized financial advice."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Two sample loans show how the loan amount, interest rate, and term shape the monthly payment and total interest paid.",
+          "columnScenario": "Scenario",
+          "columnMonthlyPayment": "Monthly Payment",
+          "columnTotalInterest": "Total Interest",
+          "rows": [
+            {
+              "scenario": "$30,000 auto loan, 6.5% annual rate, 5-year term",
+              "monthlyPayment": "$586.98",
+              "totalInterest": "$5,219.07"
+            },
+            {
+              "scenario": "$10,000 personal loan, 11% annual rate, 3-year term",
+              "monthlyPayment": "$327.39",
+              "totalInterest": "$1,785.94"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does more of my payment go toward interest at the beginning of the loan?",
+              "answer": "Interest is calculated each month on whatever balance remains, and early on that balance is at its highest — so the interest portion of a fixed payment starts large and shrinks every month as the balance falls, while the principal portion does the opposite."
+            },
+            {
+              "question": "What's the difference between a personal loan and an auto loan calculation-wise?",
+              "answer": "Mathematically nothing — both are standard fixed-rate installment loans amortized the same way this calculator models. The practical differences are that an auto loan is secured by the vehicle (usually giving it a lower rate) while an unsecured personal loan typically carries a higher rate to compensate the lender for the added risk."
+            },
+            {
+              "question": "Does this calculator include fees like an origination fee or dealer add-ons?",
+              "answer": "No — it calculates payments from the loan amount, rate, and term alone. Real loans often carry additional costs (an origination fee on many personal loans, or dealer-added products on an auto loan) that increase what you actually pay beyond this estimate; ask a lender for the loan's full APR, which is required by law to include most such fees."
+            },
+            {
+              "question": "Why does paying off a loan early save interest?",
+              "answer": "Because interest accrues only on the outstanding balance for as long as it's outstanding — an extra payment applied directly to principal shrinks that balance immediately, so every future month accrues interest on a smaller amount, cutting the total interest paid over the life of the loan."
+            },
+            {
+              "question": "How does the loan term affect my total cost?",
+              "answer": "A longer term lowers the monthly payment by spreading the same principal over more payments, but it also means the balance stays higher for longer and accrues interest for more months — so a longer term usually means a lower payment but a higher total amount paid over the life of the loan."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "How Installment Credit Put Cars — and Everything Else — Within Reach",
+            "paragraph": "Before the 20th century, borrowing to buy an everyday consumer good was rare and often frowned upon; big purchases were typically saved for and paid in cash. That changed with the automobile. In 1919, General Motors founded the General Motors Acceptance Corporation (GMAC) specifically to let dealers finance their inventory and let customers buy a car on an installment plan rather than paying the full price upfront. The approach caught on fast: by 1930, most durable goods in the United States — including more than two-thirds of all automobiles sold — were bought on some form of installment credit, and GMAC's model became the template for the captive auto-finance companies still owned by automakers today."
+          },
+          "modernDevelopments": {
+            "title": "From the Dealership Finance Office to Instant Online Approval",
+            "paragraph": "For most of the 20th century, arranging a personal or auto loan meant a trip to a bank, credit union, or dealership finance office and a paper application. Online peer-to-peer and marketplace lenders that emerged in the mid-2000s were among the first to let a borrower apply for and receive a personal-loan decision entirely online, and that model has since become mainstream: many banks, credit unions, and auto dealers now offer instant or same-day automated approval by pulling a credit report and running the underwriting decision the moment an application is submitted, compressing a process that once took days into a matter of minutes."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Loan pricing and amortization — the interest math and repayment mechanics this calculator applies — are foundational material within finance, the same field covered by this site's mortgage and compound interest calculators. Here are the top 5 globally for Accounting & Finance in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time \"MSc in Applied Financial Economics\" (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+              },
+              {
+                "name": "King Saud University (KSU), Riyadh — College of Business Administration",
+                "note": "A leading Saudi university offering a Master of Science in Finance (MSF) through its College of Business Administration.",
+                "url": "https://cba.ksu.edu.sa/en/overveiw/MSF",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Shay, R. P. (1964). The Price of New Automobile Financing. The Journal of Finance, 19(2), 205–210.",
+          "note": "An early academic study of how auto-loan finance rates were actually priced, published not long after the installment-credit model pioneered by companies like GMAC had become the dominant way Americans financed a car purchase.",
+          "url": "https://doi.org/10.1111/j.1540-6261.1964.tb00764.x",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Perform fast percentage calculations.",
