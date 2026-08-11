@@ -35,6 +35,7 @@ import ImageConverterTool from "@/components/tools/image-converter/ImageConverte
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
 import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
 import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
+import ScientificEducation from "@/components/tools/scientific-calculator/ScientificEducation";
 import CsvJsonConverterUI from "@/components/tools/csv-json-converter/CsvJsonConverterUI";
 import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSizeConverterTool";
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
@@ -278,7 +279,7 @@ export default async function ToolPage({
       component = <Base64ToolUI />;
       break;
     case "scientific-calculator":
-      component = <ScientificCalculator />;
+      component = <ScientificCalculator education={<ScientificEducation />} />;
       break;
     case "csv-json-converter":
       component = <CsvJsonConverterUI />;
@@ -314,7 +315,8 @@ export default async function ToolPage({
     slug === "tdee-calculator" ||
     slug === "compound-interest-calculator" ||
     slug === "loan-calculator" ||
-    slug === "world-time-converter";
+    slug === "world-time-converter" ||
+    slug === "scientific-calculator";
 
   const jsonLd = {
     "@context": "https://schema.org",

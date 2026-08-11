@@ -9,28 +9,42 @@ const tool = new ScientificCalculator();
 
 export type BinaryOperator = "add" | "subtract" | "multiply" | "divide" | "power" | "root";
 
+export type HistoryEntry = {
+  id: number;
+  expression: string;
+  result: number;
+};
+
+const HISTORY_LIMIT = 20;
+
 export type CalculatorState = {
   display: string;
   previousValue: number | null;
   pendingOperator: BinaryOperator | null;
+  pendingSymbol: string | null;
   overwrite: boolean;
   memory: number;
   ans: number | null;
   lastOperationText: string;
   angleMode: AngleMode;
   errorCode: string | null;
+  history: HistoryEntry[];
+  historySeq: number;
 };
 
 export const initialState: CalculatorState = {
   display: "0",
   previousValue: null,
   pendingOperator: null,
+  pendingSymbol: null,
   overwrite: true,
   memory: 0,
   ans: null,
   lastOperationText: "",
   angleMode: "deg",
   errorCode: null,
+  history: [],
+  historySeq: 0,
 };
 
 export type CalculatorAction =
@@ -48,14 +62,27 @@ export type CalculatorAction =
   | { type: "memoryAdd" }
   | { type: "memorySubtract" }
   | { type: "memoryRecall" }
-  | { type: "ans" };
+  | { type: "ans" }
+  | { type: "loadHistory"; value: number };
+
+function pushHistory(state: CalculatorState, expression: string, result: number): Pick<CalculatorState, "history" | "historySeq"> {
+  const entry: HistoryEntry = { id: state.historySeq, expression, result };
+  return { history: [entry, ...state.history].slice(0, HISTORY_LIMIT), historySeq: state.historySeq + 1 };
+}
 
 function currentValue(state: CalculatorState): number {
   return parseFloat(state.display) || 0;
 }
 
 function freshInput(state: CalculatorState): CalculatorState {
-  return { ...initialState, memory: state.memory, angleMode: state.angleMode };
+  return {
+    ...initialState,
+    memory: state.memory,
+    angleMode: state.angleMode,
+    ans: state.ans,
+    history: state.history,
+    historySeq: state.historySeq,
+  };
 }
 
 export function calculatorReducer(
@@ -118,6 +145,7 @@ export function calculatorReducer(
           display: formatResult(result.data.result),
           previousValue: result.data.result,
           pendingOperator: action.operator,
+          pendingSymbol: action.symbol,
           overwrite: true,
           lastOperationText: `${formatResult(result.data.result)} ${action.symbol}`,
         };
@@ -127,6 +155,7 @@ export function calculatorReducer(
         ...state,
         previousValue: value,
         pendingOperator: action.operator,
+        pendingSymbol: action.symbol,
         overwrite: true,
         lastOperationText: `${formatResult(value)} ${action.symbol}`,
       };
@@ -148,14 +177,17 @@ export function calculatorReducer(
           errorCode: String(result.metadata.error),
         };
       }
+      const expression = `${formatResult(state.previousValue)} ${state.pendingSymbol ?? ""} ${formatResult(b)} =`;
       return {
         ...state,
         display: formatResult(result.data.result),
         ans: result.data.result,
         previousValue: null,
         pendingOperator: null,
+        pendingSymbol: null,
         overwrite: true,
-        lastOperationText: `${formatResult(state.previousValue)} ${formatResult(b)} =`,
+        lastOperationText: expression,
+        ...pushHistory(state, expression, result.data.result),
       };
     }
 
@@ -173,12 +205,14 @@ export function calculatorReducer(
           errorCode: String(result.metadata.error),
         };
       }
+      const expression = `${action.label}(${formatResult(value)})`;
       return {
         ...state,
         display: formatResult(result.data.result),
         ans: result.data.result,
         overwrite: true,
-        lastOperationText: `${action.label}(${formatResult(value)})`,
+        lastOperationText: expression,
+        ...pushHistory(state, expression, result.data.result),
       };
     }
 
@@ -210,6 +244,9 @@ export function calculatorReducer(
     case "ans":
       if (state.ans === null) return state;
       return { ...state, display: formatResult(state.ans), overwrite: true, errorCode: null };
+
+    case "loadHistory":
+      return { ...state, display: formatResult(action.value), ans: action.value, overwrite: true, errorCode: null };
 
     default:
       return state;
