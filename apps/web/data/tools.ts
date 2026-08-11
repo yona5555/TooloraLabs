@@ -328,4 +328,20 @@ export const tools: Tool[] = [
     featured: false,
     keywords: ["break-even", "business", "profit", "fixed costs", "unit economics"],
   },
+  {
+    slug: "world-time-converter",
+    title: "World Time Converter",
+    category: "calculators",
+    description:
+      "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",
+    featured: true,
+    keywords: [
+      "time zone converter",
+      "world clock",
+      "time difference",
+      "meeting planner",
+      "utc converter",
+      "daylight saving time",
+    ],
+  },
 ];

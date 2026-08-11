@@ -5,6 +5,7 @@ import {
   Boxes,
   Braces,
   Calendar,
+  Clock,
   CloudSun,
   Flame,
   FilePen,
@@ -62,6 +63,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "tdee-calculator": Flame,
   "compound-interest-calculator": TrendingUp,
   "loan-calculator": Landmark,
+  "world-time-converter": Clock,
 };
 
 export function getToolIcon(slug: string): LucideIcon {

@@ -21,6 +21,8 @@ import CompoundInterestCalculator from "@/components/tools/compound-interest-cal
 import CompoundInterestEducation from "@/components/tools/compound-interest-calculator/CompoundInterestEducation";
 import LoanCalculator from "@/components/tools/loan-calculator/LoanCalculator";
 import LoanEducation from "@/components/tools/loan-calculator/LoanEducation";
+import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
+import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
@@ -239,6 +241,9 @@ export default async function ToolPage({
     case "loan-calculator":
       component = <LoanCalculator education={<LoanEducation />} />;
       break;
+    case "world-time-converter":
+      component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator />;
       break;
@@ -308,7 +313,8 @@ export default async function ToolPage({
     slug === "weather-forecast" ||
     slug === "tdee-calculator" ||
     slug === "compound-interest-calculator" ||
-    slug === "loan-calculator";
+    slug === "loan-calculator" ||
+    slug === "world-time-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",
