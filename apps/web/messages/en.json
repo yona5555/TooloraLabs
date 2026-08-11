@@ -3282,27 +3282,165 @@
     },
     "tip-calculator": {
       "title": "Tip Calculator",
-      "description": "Calculate tip amount and split the bill between people.",
-      "form": {
-        "billPlaceholder": "Bill amount",
-        "tipPlaceholder": "Tip %",
-        "peoplePlaceholder": "Number of people",
-        "calculate": "Calculate Tip"
+      "description": "Calculate the tip and split the bill instantly, with quick percentage buttons, a round-up option, and tipping norms for different countries.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
       },
-      "errors": {
-        "required": "Please enter valid numbers for bill, tip, and people.",
-        "billRange": "Bill amount must be greater than 0 and no more than 1,000,000.",
-        "tipRange": "Tip must be between 0% and 100%.",
-        "peopleRange": "Number of people must be between 1 and 1000."
+      "aboveFold": {
+        "resultTitle": "Your Total",
+        "roundedUpNote": "Rounded up so nobody needs exact change.",
+        "internationalNorms": {
+          "title": "Tipping Around the World",
+          "intro": "Tipping customs vary sharply by country — what's expected in one place can be unusual, or even declined, in another.",
+          "rows": [
+            { "region": "United States & Canada", "norm": "15–20% is the standard expectation at sit-down restaurants; tipped workers often earn a lower base wage that assumes it." },
+            { "region": "United Kingdom", "norm": "10–15% is common when a service charge isn't already added to the bill — check the receipt first." },
+            { "region": "Western Europe (France, Germany, Italy, Spain)", "norm": "Service is usually already included in the price (service compris); rounding up or leaving small change is appreciated, not expected." },
+            { "region": "Japan", "norm": "Not customary and can be seen as awkward or even impolite — excellent service is already considered part of the price." },
+            { "region": "Australia & New Zealand", "norm": "Not expected; hospitality staff are paid a full minimum wage, so tipping is a discretionary bonus for exceptional service." },
+            { "region": "Gulf countries (UAE, Saudi Arabia, Qatar)", "norm": "A service charge is frequently included on the bill; a small additional cash tip for good service is appreciated but optional." }
+          ],
+          "disclaimer": "General guidance only — local customs vary by venue and change over time; when in doubt, check the bill for a service charge that may already be included."
+        }
+      },
+      "form": {
+        "inputTitle": "Your Bill",
+        "billLabel": "Bill Amount",
+        "billPlaceholder": "e.g. 64",
+        "tipLabel": "Tip Percentage (%)",
+        "tipPlaceholder": "e.g. 18",
+        "peopleLabel": "Number of People",
+        "peoplePlaceholder": "e.g. 2",
+        "roundUpLabel": "Round up per person",
+        "roundUpHint": "Rounds each person's total up to a whole number so nobody needs to carry change — the extra is added to the tip."
       },
       "result": {
         "billAmount": "Bill Amount",
-        "tip": "Tip",
         "people": "People",
         "tipAmount": "Tip Amount",
         "totalAmount": "Total Amount",
         "tipPerPerson": "Tip / Person",
         "totalPerPerson": "Total / Person"
+      },
+      "education": {
+        "intro": {
+          "title": "How Tipping Math Works",
+          "paragraph1": "A tip is calculated as a percentage of the bill, then optionally split evenly across everyone at the table. Because it scales with the bill rather than with the amount of work a server actually did, a percentage tip on an expensive bottle of wine adds far more than the same percentage on a modest plate of food — one reason some diners tip a flat amount on certain high-priced items regardless of the percentage they use for the rest of the check.",
+          "paragraph2": "Splitting a tip evenly rarely divides into a clean number, which is where rounding comes in. This tool's \"round up\" option takes each diner's raw share, rounds it up to the next whole currency unit, and folds the small difference into the tip rather than making anyone dig for exact change — a common real-world convenience that changes how the total is distributed, not the tip rate you actually asked for.",
+          "diagram": {
+            "bars": [
+              { "label": "15%", "value": 9 },
+              { "label": "18%", "value": 10.8 },
+              { "label": "20%", "value": 12 },
+              { "label": "25%", "value": 15 }
+            ],
+            "caption": "The tip amount on a $60 bill at four common percentages — small differences in the rate compound quickly as the bill grows."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Four worked examples, including two using the round-up option, showing the exact inputs and results.",
+          "columnScenario": "Scenario",
+          "columnTip": "Tip",
+          "columnTotalPerPerson": "Total / Person",
+          "rows": [
+            { "scenario": "$64 bill, 18% tip, split 2 ways", "tipAmount": "$11.52", "totalPerPerson": "$37.76" },
+            { "scenario": "$150 bill, 20% tip, split 4 ways", "tipAmount": "$30.00", "totalPerPerson": "$45.00" },
+            { "scenario": "$42 bill, 15% tip, 1 person, rounded up", "tipAmount": "$7.00", "totalPerPerson": "$49.00" },
+            { "scenario": "$100 bill, 22% tip, split 3 ways, rounded up", "tipAmount": "$23.00", "totalPerPerson": "$41.00" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Should I tip on the pre-tax or post-tax bill amount?",
+              "answer": "Most etiquette guides recommend tipping on the pre-tax subtotal, but tipping on the post-tax total is common practice and not considered rude — the difference between the two is usually small."
+            },
+            {
+              "question": "What's the difference between a tip and a service charge?",
+              "answer": "A tip is voluntary and discretionary. A service charge — often added automatically for large groups — is typically mandatory and added to the bill by the establishment itself, and it doesn't always go entirely to the staff who served you. Check the receipt to see whether one is already included before adding an additional tip."
+            },
+            {
+              "question": "Is tipping mandatory?",
+              "answer": "In most countries, no — it's a voluntary, discretionary sum. In the United States it's such a deeply embedded norm that skipping it for merely below-average (rather than genuinely bad) service is generally considered a breach of etiquette, unlike in many other countries where it isn't expected at all."
+            },
+            {
+              "question": "Why do restaurants add an automatic gratuity for large groups?",
+              "answer": "It guarantees fair compensation for serving a large, often multi-course table, and prevents a tip from being silently split too thin across many diners who each assume someone else covered it adequately."
+            },
+            {
+              "question": "How does the round-up option change what I actually pay?",
+              "answer": "It doesn't change the tip percentage you asked for — it rounds each diner's share up to the next whole currency unit so nobody needs exact change, with the small difference folded into the tip rather than kept as change."
+            },
+            {
+              "question": "How much should I tip for services besides restaurants, like haircuts or delivery?",
+              "answer": "Common general norms in tipping-culture countries: 15–20% for hairdressers and barbers, 10–20% or a flat amount for food delivery depending on distance and conditions, and a few dollars per night for hotel housekeeping — though these vary by country. This tool is built around splitting a restaurant-style bill."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From European Aristocracy to the American Restaurant",
+            "paragraph": "The word \"tip\" is not an acronym for \"To Insure Promptness\" — that's a persistent modern myth. Tipping's actual roots trace to master-servant customs in aristocratic Europe, where a servant could be rewarded with extra money for exceptional service beyond their wages. Wealthy Americans encountered the custom on European travels in the 1850s and 1860s and brought it home to appear sophisticated, but most Americans at the time viewed tipping as condescending and fundamentally undemocratic. It became widespread only after the Civil War, when it spread rapidly through service industries — including railroad companies that hired newly freed Black workers as porters at little or no base wage, expecting tips to make up their income. Several U.S. states, citing exactly this exploitative dynamic, banned tipping outright between roughly 1909 and 1926, though every one of those bans was eventually repealed."
+          },
+          "modernDevelopments": {
+            "title": "From Cash on the Table to the Tip Screen",
+            "paragraph": "Card-payment tip prompts and point-of-sale tip screens have extended tipping into venues that never took cash tips before, like coffee counters and self-checkout kiosks — a trend widely discussed under labels like \"tip creep\" and \"tipping fatigue.\" At the same time, a smaller counter-movement of restaurants has experimented with no-tipping, service-included pricing instead, partly inspired by the model common across Western Europe. Regardless of how a tip is prompted, the underlying arithmetic — a percentage of the bill, split however many ways — is the same calculation this tool automates."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The service economics behind tipping — how it affects worker pay, pricing, and customer satisfaction — is studied within Hospitality Management programs. Here are the top 5 globally for Hospitality & Leisure Management in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "EHL Hospitality Business School",
+                "note": "Ranked #1 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ehl.edu/en/study",
+                "online": "No — EHL's Bachelor in International Hospitality Management is an in-person, campus-based program in Switzerland that includes operational coursework and two work-integrated internships."
+              },
+              {
+                "name": "Les Roches Global Hospitality Management Education",
+                "note": "Ranked #2 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "url": "https://lesroches.edu/programs/bachelor-science-hospitality-management/",
+                "online": "No — the BSc in Global Hospitality Management is a campus-based, experiential program across multiple countries; Les Roches' online options apply to separate graduate and professional programs, not this degree."
+              },
+              {
+                "name": "Swiss Hotel Management School (SHMS)",
+                "note": "Ranked #3 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "url": "https://www.shms.com/en/event-management-courses/bachelor-of-arts/",
+                "online": "No — the Bachelor of Arts in International Hospitality Management is delivered in person in Switzerland, with two professional internships built into the program."
+              },
+              {
+                "name": "University of Nevada, Las Vegas (UNLV)",
+                "note": "Ranked #4 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "url": "https://www.unlv.edu/hospitality/online",
+                "online": "Yes — UNLV's William F. Harrah College of Hospitality offers its Bachelor of Science in Hospitality Management as a fully online, asynchronous track alongside the on-campus option."
+              },
+              {
+                "name": "César Ritz Colleges",
+                "note": "Ranked #5 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cesarritzcolleges.edu/en/program/bachelor-of-science-in-hospitality-business-management/",
+                "online": "No — the Bachelor of Science in Hospitality Business Management is delivered in person across Swiss campuses, with two paid international internships built into the program."
+              },
+              {
+                "name": "King Abdulaziz University (KAU), Jeddah",
+                "note": "Offers a Bachelor of Travel and Tourism Management preparing graduates for hospitality and guest-relations careers.",
+                "url": "https://kau.edu.sa/en/programs/bachelor-of-travel-and-tourism-management",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Lynn, M. (2018). The Effects of Tipping on Consumers' Satisfaction with Restaurants. Journal of Consumer Affairs, 52(3), 746–755.",
+          "note": "A field study comparing online customer-satisfaction ratings for the same restaurant chain under a standard tipping system versus a no-tipping, service-included pricing model.",
+          "url": "https://doi.org/10.1111/joca.12171",
+          "readOriginal": "Read the Original Article"
+        }
       }
     },
     "discount-calculator": {

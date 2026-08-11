@@ -1,59 +1,56 @@
+"use client";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import TipBreakdownDonut from "./TipBreakdownDonut";
 import type { TipResult as Result } from "./types";
 
 type Props = {
-  result: Result | null;
+  result: Result;
   digitStyle: DigitStyle;
 };
 
 export default function TipResult({ result, digitStyle }: Props) {
-  const t = useTranslations("tools.tip-calculator.result");
-
-  if (!result) return null;
+  const t = useTranslations("tools.tip-calculator");
 
   const money = (value: number) =>
-    formatLocalizedNumber(value, digitStyle, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+    formatLocalizedNumber(value, digitStyle, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
-    <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
-        <span>{t("billAmount")}</span>
-        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.billAmount)}</strong>
+    <SectionCard title={t("aboveFold.resultTitle")}>
+      <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("result.totalPerPerson")}</p>
+      <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
+        {money(result.totalPerPerson)}
+      </p>
+      {result.roundedUp && (
+        <p className="mt-1 text-center text-xs text-blue-600 dark:text-blue-400">{t("aboveFold.roundedUpNote")}</p>
+      )}
+
+      <div className="mt-5">
+        <TipBreakdownDonut
+          centerValue={money(result.totalAmount)}
+          centerLabel={t("result.totalAmount")}
+          segments={[
+            { key: "bill", value: result.billAmount, label: t("result.billAmount"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+            { key: "tip", value: result.tipAmount, label: t("result.tipAmount"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
+          ]}
+        />
       </div>
 
-      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
-        <span>{t("tip")}</span>
-        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.tipPercent)}%</strong>
+      <div className="mt-5 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">
+        <div>
+          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("result.tipPerPerson")}</dt>
+          <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+            {money(result.tipPerPerson)}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("result.people")}</dt>
+          <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+            {formatLocalizedNumber(result.people, digitStyle)}
+          </dd>
+        </div>
       </div>
-
-      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
-        <span>{t("people")}</span>
-        <strong className="text-zinc-900 dark:text-zinc-50">{formatLocalizedNumber(result.people, digitStyle)}</strong>
-      </div>
-
-      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
-        <span>{t("tipAmount")}</span>
-        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.tipAmount)}</strong>
-      </div>
-
-      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
-        <span>{t("totalAmount")}</span>
-        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.totalAmount)}</strong>
-      </div>
-
-      <div className="flex justify-between py-2 text-zinc-600 dark:text-zinc-300">
-        <span>{t("tipPerPerson")}</span>
-        <strong className="text-zinc-900 dark:text-zinc-50">{money(result.tipPerPerson)}</strong>
-      </div>
-
-      <div className="mt-3 flex justify-between border-t border-zinc-200 pt-3 text-lg font-bold text-zinc-900 dark:border-zinc-700 dark:text-zinc-50">
-        <span>{t("totalPerPerson")}</span>
-        <span>{money(result.totalPerPerson)}</span>
-      </div>
-    </div>
+    </SectionCard>
   );
 }

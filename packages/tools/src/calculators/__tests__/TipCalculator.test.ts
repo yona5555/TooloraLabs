@@ -21,4 +21,18 @@ describe("TipCalculator", () => {
     const r = calc.execute({ billAmount: 100, tipPercent: 20, people: 0 }, context);
     expect(r.data.people).toBe(1);
   });
+
+  it("rounds each person's total up to a whole unit when requested, absorbing the extra into the tip", () => {
+    const r = calc.execute({ billAmount: 50, tipPercent: 18, people: 3, roundUpPerPerson: true }, context);
+    expect(r.data.totalPerPerson).toBe(20);
+    expect(r.data.totalAmount).toBe(60);
+    expect(r.data.tipAmount).toBe(10);
+    expect(r.data.roundedUp).toBe(true);
+  });
+
+  it("does not round up by default", () => {
+    const r = calc.execute({ billAmount: 50, tipPercent: 18, people: 3 }, context);
+    expect(r.data.roundedUp).toBe(false);
+    expect(r.data.totalPerPerson).toBe(19.67);
+  });
 });

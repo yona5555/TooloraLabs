@@ -1,97 +1,71 @@
 "use client";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-
-import { useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { TipCalculator as TipCalculatorTool } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
-import ToolButton from "@/components/tool-ui/ToolButton";
-import ToolInput from "@/components/tool-ui/ToolInput";
-import PrintButton from "@/components/tool-ui/PrintButton";
-import { usePrintExport } from "@/hooks/usePrintExport";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
+import TipInputPanel from "./TipInputPanel";
 import TipResult from "./TipResult";
-import type { TipResult as Result } from "./types";
+import TipInternationalNorms from "./TipInternationalNorms";
 
 const tool = new TipCalculatorTool();
 
-export default function TipCalculator() {
-  const t = useTranslations("tools.tip-calculator.form");
-  const tErrors = useTranslations("tools.tip-calculator.errors");
-  const [bill, setBill] = useState("");
-  const [tipPercent, setTipPercent] = useState("");
-  const [people, setPeople] = useState("1");
-  const [error, setError] = useState("");
-  const [result, setResult] = useState<Result | null>(null);
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const { printRef, handlePrint } = usePrintExport<HTMLDivElement>();
+export default function TipCalculator({ education }: { education: ReactNode }) {
+  const tNav = useTranslations("tools.tip-calculator.nav");
 
-  function handleCalculate() {
-    setError("");
-    setResult(null);
+  const [billAmount, setBillAmount] = useState("64");
+  const [tipPercent, setTipPercent] = useState("18");
+  const [people, setPeople] = useState("2");
+  const [roundUpPerPerson, setRoundUpPerPerson] = useState(false);
 
-    const billAmount = parseLocalizedNumber(bill);
-    const tip = parseLocalizedNumber(tipPercent);
-    const peopleCount = parseLocalizedNumber(people);
-    if (Number.isNaN(billAmount) || Number.isNaN(tip) || Number.isNaN(peopleCount)) {
-      setError(tErrors("required"));
-      return;
-    }
-    if (billAmount <= 0 || billAmount > 1_000_000) {
-      setError(tErrors("billRange"));
-      return;
-    }
-    if (tip < 0 || tip > 100) {
-      setError(tErrors("tipRange"));
-      return;
-    }
-    if (peopleCount < 1 || peopleCount > 1000) {
-      setError(tErrors("peopleRange"));
-      return;
-    }
+  const digitStyle: DigitStyle = resolveDigitStyle(billAmount, tipPercent, people);
 
-    const output = tool.execute(
-      { billAmount, tipPercent: tip, people: peopleCount },
-      { locale: "en-US" }
-    );
-    setResult(output.data);
-    setDigitStyle(resolveDigitStyle(bill, tipPercent, people));
-  }
+  const result = useMemo(() => {
+    const bill = parseLocalizedNumber(billAmount) || 0;
+    const tip = parseLocalizedNumber(tipPercent) || 0;
+    const peopleCount = parseLocalizedNumber(people) || 1;
+    const output = tool.execute({ billAmount: bill, tipPercent: tip, people: peopleCount, roundUpPerPerson }, { locale: "en-US" });
+    return output.data;
+  }, [billAmount, tipPercent, people, roundUpPerPerson]);
+
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "faq", label: tNav("faq") },
+    { id: "behind-the-tool", label: tNav("behindTheTool") },
+  ];
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <ToolInput
-        type="text" inputMode="decimal"
-        placeholder={t("billPlaceholder")}
-        value={bill}
-        onChange={(e) => setBill(e.target.value)}
-      />
-      <ToolInput
-        type="text" inputMode="decimal"
-        placeholder={t("tipPlaceholder")}
-        value={tipPercent}
-        onChange={(e) => setTipPercent(e.target.value)}
-      />
-      <ToolInput
-        type="text" inputMode="decimal"
-        placeholder={t("peoplePlaceholder")}
-        value={people}
-        onChange={(e) => setPeople(e.target.value)}
-      />
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-          {error}
-        </div>
-      )}
-      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      {result && (
-        <div ref={printRef} data-print-area className="space-y-6">
-          <div className="flex justify-end print:hidden">
-            <PrintButton onPrint={handlePrint} />
-          </div>
-          <TipResult result={result} digitStyle={digitStyle} />
-        </div>
-      )}
-    </div>
+    <>
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={
+            <TipInputPanel
+              billAmount={billAmount}
+              onBillAmountChange={setBillAmount}
+              tipPercent={tipPercent}
+              onTipPercentChange={setTipPercent}
+              people={people}
+              onPeopleChange={setPeople}
+              roundUpPerPerson={roundUpPerPerson}
+              onRoundUpPerPersonChange={setRoundUpPerPerson}
+            />
+          }
+          result={<TipResult result={result} digitStyle={digitStyle} />}
+          sidebar={<RelatedToolsSidebar currentSlug="tip-calculator" category="calculators" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <TipInternationalNorms />
+            </div>
+          }
+        />
+      </div>
+
+      {education}
+    </>
   );
 }

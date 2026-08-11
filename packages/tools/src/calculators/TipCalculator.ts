@@ -5,6 +5,8 @@ export type TipInput = {
   billAmount: number;
   tipPercent: number;
   people: number;
+  /** Rounds each person's total up to the next whole currency unit, absorbing the extra into the tip — avoids owing change. */
+  roundUpPerPerson?: boolean;
 };
 
 export type TipOutput = {
@@ -15,6 +17,7 @@ export type TipOutput = {
   totalAmount: number;
   tipPerPerson: number;
   totalPerPerson: number;
+  roundedUp: boolean;
 };
 
 function round(value: number): number {
@@ -33,8 +36,14 @@ export class TipCalculator extends BaseCalculator<TipInput, TipOutput> {
 
   execute(input: TipInput, _context: ToolContext): ToolResult<TipOutput> {
     const safePeople = Math.max(1, input.people);
-    const tipAmount = round(input.billAmount * (input.tipPercent / 100));
-    const totalAmount = round(input.billAmount + tipAmount);
+    const rawTipAmount = input.billAmount * (input.tipPercent / 100);
+    const rawTotalAmount = input.billAmount + rawTipAmount;
+    const rawTotalPerPerson = rawTotalAmount / safePeople;
+
+    const roundedUp = Boolean(input.roundUpPerPerson);
+    const totalPerPerson = roundedUp ? Math.ceil(rawTotalPerPerson) : round(rawTotalPerPerson);
+    const totalAmount = roundedUp ? round(totalPerPerson * safePeople) : round(rawTotalAmount);
+    const tipAmount = roundedUp ? round(totalAmount - input.billAmount) : round(rawTipAmount);
 
     return {
       success: true,
@@ -45,7 +54,8 @@ export class TipCalculator extends BaseCalculator<TipInput, TipOutput> {
         tipAmount,
         totalAmount,
         tipPerPerson: round(tipAmount / safePeople),
-        totalPerPerson: round(totalAmount / safePeople),
+        totalPerPerson,
+        roundedUp,
       },
       metadata: {},
     };
