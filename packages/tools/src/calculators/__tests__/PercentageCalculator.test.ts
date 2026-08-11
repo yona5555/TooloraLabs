@@ -29,4 +29,24 @@ describe("PercentageCalculator", () => {
     const r = calc.execute({ mode: "percentage-change", first: 0, second: 75 }, context);
     expect(r.data.text).toBe("Original value cannot be zero.");
   });
+
+  it("computes the base value from a reverse percentage", () => {
+    const r = calc.execute({ mode: "reverse-percentage", first: 20, second: 10 }, context);
+    expect(r.data.value).toBe(50);
+  });
+
+  it("handles a zero percentage in reverse-percentage", () => {
+    const r = calc.execute({ mode: "reverse-percentage", first: 0, second: 10 }, context);
+    expect(r.data.text).toBe("Percentage cannot be zero.");
+  });
+
+  it("computes the symmetric percentage difference between two values", () => {
+    const r = calc.execute({ mode: "percentage-difference", first: 50, second: 75 }, context);
+    expect(r.data.value).toBe(40);
+  });
+
+  it("handles two zero values in percentage-difference", () => {
+    const r = calc.execute({ mode: "percentage-difference", first: 0, second: 0 }, context);
+    expect(r.data.text).toBe("Both values cannot be zero.");
+  });
 });

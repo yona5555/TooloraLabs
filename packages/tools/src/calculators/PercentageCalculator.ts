@@ -4,7 +4,9 @@ import { BaseCalculator } from "./BaseCalculator";
 export type PercentageMode =
   | "percent-of-number"
   | "what-percent"
-  | "percentage-change";
+  | "percentage-change"
+  | "reverse-percentage"
+  | "percentage-difference";
 
 export type PercentageInput = {
   mode: PercentageMode;
@@ -59,6 +61,24 @@ export class PercentageCalculator extends BaseCalculator<PercentageInput, Percen
         } else {
           const value = ((second - first) / first) * 100;
           data = { value: round(value), text: `Percentage change = ${round(value)}%` };
+        }
+        break;
+      }
+      case "reverse-percentage": {
+        if (first === 0) {
+          data = { value: 0, text: "Percentage cannot be zero." };
+        } else {
+          const value = second / (first / 100);
+          data = { value: round(value), text: `${second} is ${first}% of ${round(value)}` };
+        }
+        break;
+      }
+      case "percentage-difference": {
+        if (first + second === 0) {
+          data = { value: 0, text: "Both values cannot be zero." };
+        } else {
+          const value = (Math.abs(first - second) / ((first + second) / 2)) * 100;
+          data = { value: round(value), text: `Percentage difference between ${first} and ${second} = ${round(value)}%` };
         }
         break;
       }
