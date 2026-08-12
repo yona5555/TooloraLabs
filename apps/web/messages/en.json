@@ -3813,16 +3813,43 @@
     },
     "unit-converter": {
       "title": "Unit Converter",
-      "description": "Convert length, weight, temperature and more.",
+      "description": "Convert length, weight, temperature, area, volume, and speed — see the value converted to every unit in the category at once.",
+      "nav": {
+        "tool": "Converter",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Result",
+        "allUnitsTitle": "Every Unit At Once",
+        "commonReference": {
+          "title": "Common Conversions",
+          "intro": "A few conversions worth memorizing — they come up constantly when reading foreign menus, weather reports, or road signs.",
+          "rows": [
+            { "from": "1 mile", "to": "1.60934 km" },
+            { "from": "1 kg", "to": "2.20462 lb" },
+            { "from": "0°C", "to": "32°F (freezing)" },
+            { "from": "100°C", "to": "212°F (boiling)" },
+            { "from": "1 inch", "to": "2.54 cm" },
+            { "from": "100 km/h", "to": "62.1371 mph" }
+          ]
+        }
+      },
       "categories": {
         "length": "Length",
         "weight": "Weight",
-        "temperature": "Temperature"
+        "temperature": "Temperature",
+        "area": "Area",
+        "volume": "Volume",
+        "speed": "Speed"
       },
       "form": {
+        "inputTitle": "Your Value",
         "from": "From",
         "to": "To",
+        "toHint": "Converting to {unit}",
         "swap": "Swap units",
+        "valueLabel": "Value",
         "valuePlaceholder": "Enter value",
         "convert": "Convert"
       },
@@ -3843,12 +3870,145 @@
         "lb": "Pounds (lb)",
         "celsius": "Celsius (°C)",
         "fahrenheit": "Fahrenheit (°F)",
-        "kelvin": "Kelvin (K)"
+        "kelvin": "Kelvin (K)",
+        "mm2": "Square Millimeters (mm²)",
+        "cm2": "Square Centimeters (cm²)",
+        "m2": "Square Meters (m²)",
+        "hectare": "Hectares (ha)",
+        "km2": "Square Kilometers (km²)",
+        "acre": "Acres",
+        "sqft": "Square Feet (ft²)",
+        "sqmi": "Square Miles (mi²)",
+        "ml": "Milliliters (ml)",
+        "l": "Liters (l)",
+        "m3": "Cubic Meters (m³)",
+        "gal": "US Gallons (gal)",
+        "qt": "US Quarts (qt)",
+        "cup": "US Cups",
+        "floz": "US Fluid Ounces (fl oz)",
+        "tbsp": "Tablespoons (tbsp)",
+        "mps": "Meters/Second (m/s)",
+        "kmh": "Kilometers/Hour (km/h)",
+        "mph": "Miles/Hour (mph)",
+        "knot": "Knots (kn)",
+        "fts": "Feet/Second (ft/s)"
       },
       "errors": {
         "required": "Please enter a valid number.",
         "outOfRange": "Value must be a reasonable number (within ±1,000,000,000).",
         "invalidUnit": "This unit is not supported."
+      },
+      "education": {
+        "intro": {
+          "title": "How Unit Conversion Actually Works",
+          "paragraph1": "The metric system converts easily between units for one deliberate reason: every unit in a category is a power of ten away from its neighbors. A kilometer is exactly 1,000 meters, a centimeter is exactly 1/100 of a meter — converting between them is just shifting a decimal point. Imperial and US customary units carry no such pattern, because they weren't designed as a system at all: they accumulated from separate historical trades and crafts, which is why a foot is 12 inches, a yard is 3 feet, and a mile is 5,280 feet — each ratio is a specific number this tool has to store, not a rule you can derive.",
+          "paragraph2": "Temperature is the one category where even multiplying by a fixed factor doesn't work, because Celsius and Fahrenheit don't share a common zero point — 0°C is the freezing point of water, not \"no temperature,\" so converting requires shifting the scale before rescaling it, not just multiplying. Kelvin is the exception: it's an absolute scale that starts at true zero (no negative temperatures are physically possible), which is exactly why scientific work is done in Kelvin rather than Celsius or Fahrenheit. Rather than making you pick one target unit at a time, this tool shows the value converted into every unit in the category at once, since \"which unit do I actually want\" is often the real question.",
+          "diagram": {
+            "caption": "Metric prefixes are exact powers of ten apart — converting from kilo to milli is a shift of six decimal places, not a lookup table."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Five worked examples across different categories, showing the exact inputs and results.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "10 meters to feet", "result": "32.8084 ft" },
+            { "scenario": "5 kilograms to pounds", "result": "11.0231 lb" },
+            { "scenario": "100°C (boiling point of water) to Fahrenheit", "result": "212°F" },
+            { "scenario": "1 hectare to acres", "result": "2.47105 acres" },
+            { "scenario": "100 km/h to mph", "result": "62.1371 mph" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why is converting between metric units so much easier than imperial units?",
+              "answer": "Because every metric unit in a category is a power of ten away from its neighbors — a kilometer is always 1,000 meters, no matter the category. Imperial units carry no such pattern: a foot is 12 inches, a yard is 3 feet, a mile is 5,280 feet — each ratio is a separate historical accident with no shared rule, so it has to be looked up rather than derived."
+            },
+            {
+              "question": "Why isn't temperature conversion as simple as multiplying by a factor?",
+              "answer": "Because Celsius and Fahrenheit don't share a common zero point — 0°C is the freezing point of water, an arbitrary reference, not an absence of temperature. Converting between them requires shifting the scale by an offset before rescaling, not just multiplying. Kelvin is the one true absolute scale: it starts at absolute zero, the physical limit below which temperature cannot go, which is why it needs no negative numbers and no offset to convert to or from."
+            },
+            {
+              "question": "Which countries still don't officially use the metric system?",
+              "answer": "Just three: the United States, Liberia, and Myanmar. All three have legally recognized the metric system for trade and science, but continue using customary units in daily life — the US, notably, made metric the \"preferred system\" for trade and commerce back in 1988 without ever mandating it domestically."
+            },
+            {
+              "question": "What's the difference between a \"short ton,\" a \"long ton,\" and a \"metric ton\"?",
+              "answer": "A US short ton is 2,000 lb, a British long ton is 2,240 lb, and a metric tonne is 1,000 kg — about 2,204.6 lb. All three get shortened to just \"ton\" in casual speech, which is exactly how shipping and freight contracts end up in expensive disputes over which one was meant."
+            },
+            {
+              "question": "Why is a US gallon smaller than a UK (imperial) gallon?",
+              "answer": "The US kept the older 231-cubic-inch \"Queen Anne\" wine gallon it inherited before independence, while Britain standardized a new, larger gallon in 1824 defined as the volume of exactly 10 pounds of water. The US never adopted that later British standard, so a US gallon (≈3.785 L) stayed about 20% smaller than a UK gallon (≈4.546 L) — which is why a US car's fuel economy in miles per gallon isn't directly comparable to a UK one's."
+            },
+            {
+              "question": "Is a nautical mile the same as a regular mile?",
+              "answer": "No — a nautical mile (used for sea and air travel, and the basis for \"knots\") is about 1.852 km, versus 1.609 km for a statute (land) mile. A nautical mile isn't an arbitrary number either: it's defined as one minute of latitude along the Earth's meridian, which makes it directly useful for reading a ship or aircraft's position off a map's latitude scale."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Decimal System Born From Revolution",
+            "paragraph": "The metric system wasn't a gradual accumulation of trade customs like the units it replaced — it was deliberately designed in a few years. After the French Revolution swept away thousands of inconsistent regional units in 1789, the French Academy of Sciences was tasked in 1791 with defining a rational system based on multiples of ten. It settled on the meter as one ten-millionth of the distance from the North Pole to the Equator along the meridian through Paris, and sent astronomers Jean-Baptiste Delambre and Pierre Méchain on a multi-year survey expedition to measure that exact distance. France formally adopted the resulting metric system in 1795, and it has been the basis of the world's dominant measurement system ever since."
+          },
+          "modernDevelopments": {
+            "title": "From a Platinum Cylinder to a Universal Constant",
+            "paragraph": "For over a century, the kilogram was defined by a single physical object — a platinum-iridium cylinder locked in a vault outside Paris, nicknamed \"Le Grand K\" — meaning the entire world's mass measurements ultimately traced back to one artifact that could theoretically be damaged, contaminated, or lost. On May 20, 2019, that changed: the kilogram (along with the ampere, kelvin, and mole) was redefined in terms of a fixed fundamental constant of nature — the Planck constant — rather than any physical object. Every unit in the modern SI system can now, in principle, be reproduced anywhere in the universe with the right equipment, with no trip to a vault in France required."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The software behind reliable unit conversion, data representation, and numerical precision is studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
+                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "ISO 80000-1:2022 — Quantities and units — Part 1: General. International Organization for Standardization.",
+          "note": "The official international standard defining the International System of Quantities (ISQ) that underlies the modern SI — it standardizes how quantities, units, and their symbols are named and printed, working alongside the BIPM's SI Brochure, which defines the physical realization of each unit.",
+          "url": "https://www.iso.org/standard/76921.html",
+          "readOriginal": "View the Official Standard"
+        }
       }
     },
     "qr-code-generator": {

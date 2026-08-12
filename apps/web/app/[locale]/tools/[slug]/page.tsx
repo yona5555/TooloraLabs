@@ -34,6 +34,7 @@ import SalesTaxEducation from "@/components/tools/sales-tax-calculator/SalesTaxE
 import JSONFormatterTool from "@/components/tools/json-formatter/JSONFormatterTool";
 import PasswordGeneratorTool from "@/components/tools/password-generator/PasswordGeneratorTool";
 import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTool";
+import UnitEducation from "@/components/tools/unit-converter/UnitEducation";
 import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGeneratorTool";
 import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
@@ -268,7 +269,7 @@ export default async function ToolPage({
       component = <PasswordGeneratorTool />;
       break;
     case "unit-converter":
-      component = <UnitConverterTool />;
+      component = <UnitConverterTool education={<UnitEducation />} />;
       break;
     case "qr-code-generator":
       component = <QRCodeGeneratorTool />;
@@ -324,7 +325,8 @@ export default async function ToolPage({
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||
-    slug === "sales-tax-calculator";
+    slug === "sales-tax-calculator" ||
+    slug === "unit-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",
