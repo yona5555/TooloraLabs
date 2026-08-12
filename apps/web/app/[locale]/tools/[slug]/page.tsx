@@ -30,6 +30,7 @@ import TipEducation from "@/components/tools/tip-calculator/TipEducation";
 import DiscountCalculator from "@/components/tools/discount-calculator/DiscountCalculator";
 import DiscountEducation from "@/components/tools/discount-calculator/DiscountEducation";
 import SalesTaxCalculator from "@/components/tools/sales-tax-calculator/SalesTaxCalculator";
+import SalesTaxEducation from "@/components/tools/sales-tax-calculator/SalesTaxEducation";
 import JSONFormatterTool from "@/components/tools/json-formatter/JSONFormatterTool";
 import PasswordGeneratorTool from "@/components/tools/password-generator/PasswordGeneratorTool";
 import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTool";
@@ -258,7 +259,7 @@ export default async function ToolPage({
       component = <DiscountCalculator education={<DiscountEducation />} />;
       break;
     case "sales-tax-calculator":
-      component = <SalesTaxCalculator />;
+      component = <SalesTaxCalculator education={<SalesTaxEducation />} />;
       break;
     case "json-formatter":
       component = <JSONFormatterTool />;
@@ -322,7 +323,8 @@ export default async function ToolPage({
     slug === "scientific-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
-    slug === "discount-calculator";
+    slug === "discount-calculator" ||
+    slug === "sales-tax-calculator";
 
   const jsonLd = {
     "@context": "https://schema.org",

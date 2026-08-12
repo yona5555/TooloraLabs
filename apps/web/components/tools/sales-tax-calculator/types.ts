@@ -1,6 +1,1 @@
-export type SalesTaxResult = {
-  price: number;
-  taxRate: number;
-  taxAmount: number;
-  totalPrice: number;
-};
+export type { SalesTaxMode, SalesTaxOutput as SalesTaxResult } from "@tooloralabs/tools";
