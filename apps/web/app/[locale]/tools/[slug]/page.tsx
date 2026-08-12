@@ -40,6 +40,7 @@ import UnitEducation from "@/components/tools/unit-converter/UnitEducation";
 import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGeneratorTool";
 import QREducation from "@/components/tools/qr-code-generator/QREducation";
 import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
+import ImageEducation from "@/components/tools/image-converter/ImageEducation";
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
 import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
 import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
@@ -278,7 +279,7 @@ export default async function ToolPage({
       component = <QRCodeGeneratorTool education={<QREducation />} />;
       break;
     case "image-converter":
-      component = <ImageConverterTool />;
+      component = <ImageConverterTool education={<ImageEducation />} />;
       break;
     case "word-counter":
       component = <WordCounterTool />;
@@ -332,7 +333,8 @@ export default async function ToolPage({
     slug === "unit-converter" ||
     slug === "qr-code-generator" ||
     slug === "json-formatter" ||
-    slug === "password-generator";
+    slug === "password-generator" ||
+    slug === "image-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",
