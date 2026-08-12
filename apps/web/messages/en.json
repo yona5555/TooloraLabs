@@ -3939,19 +3939,198 @@
     },
     "password-generator": {
       "title": "Password Generator",
-      "description": "Generate strong and secure passwords.",
+      "description": "Generate strong random passwords or memorable passphrases — with a real entropy-based strength estimate and crack-time ranges, not a fake meter.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Your Password",
+        "strengthLabel": "Strength",
+        "bitsOfEntropy": "bits of entropy",
+        "crackTimeTitle": "Estimated Time to Crack",
+        "crackTimeNote": "Illustrative order-of-magnitude estimates, not guarantees — real security depends entirely on how slowly the service storing this password hashes it, which this tool has no way to know.",
+        "instantly": "Instantly",
+        "tier": {
+          "veryWeak": "Very Weak",
+          "weak": "Weak",
+          "reasonable": "Reasonable",
+          "strong": "Strong",
+          "veryStrong": "Very Strong"
+        },
+        "rate": {
+          "online": "Online, rate-limited (100/sec)",
+          "offlineSlow": "Offline, well-hashed (10K/sec)",
+          "offlineFast": "Offline, poorly hashed (100B/sec)"
+        },
+        "unit": {
+          "seconds": "seconds",
+          "minutes": "minutes",
+          "hours": "hours",
+          "days": "days",
+          "years": "years",
+          "thousandYears": "thousand years",
+          "millionYears": "million years",
+          "billionYears": "billion years"
+        },
+        "guidance": {
+          "title": "NIST Password Guidance",
+          "intro": "What current official US guidance (NIST SP 800-63B) actually recommends — much of it the opposite of older advice.",
+          "rows": [
+            { "text": "Prioritize length over complexity — a long passphrase beats a short, symbol-stuffed password.", "recommended": true },
+            { "text": "Allow at least 64 characters; don't cap length short.", "recommended": true },
+            { "text": "Screen new passwords against known-breached password lists.", "recommended": true },
+            { "text": "Force periodic password expiration/rotation on a schedule.", "recommended": false },
+            { "text": "Require a mix of uppercase, symbols, and digits by policy.", "recommended": false },
+            { "text": "Use security questions (mother's maiden name, etc.) as a fallback.", "recommended": false }
+          ]
+        }
+      },
       "form": {
+        "inputTitle": "Options",
+        "modeCharacters": "Characters",
+        "modePassphrase": "Passphrase",
         "lengthLabel": "Password Length",
         "uppercase": "Uppercase (A-Z)",
         "lowercase": "Lowercase (a-z)",
         "numbers": "Numbers (0-9)",
         "symbols": "Symbols (!@#$...)",
+        "excludeAmbiguous": "Exclude ambiguous characters (0/O, 1/l/I)",
+        "wordCountLabel": "Number of Words",
+        "separatorLabel": "Separator",
+        "separatorHyphen": "Hyphen (-)",
+        "separatorUnderscore": "Underscore (_)",
+        "separatorSpace": "Space",
+        "separatorNone": "None",
+        "capitalizeWords": "Capitalize each word",
+        "appendNumber": "Append a random number",
         "generate": "Generate Password",
+        "regenerate": "Generate a new one",
         "copy": "Copy",
         "copied": "Copied!"
       },
       "errors": {
         "noCharset": "Select at least one character type."
+      },
+      "education": {
+        "intro": {
+          "title": "How Password Strength Actually Works",
+          "paragraph1": "A password's real strength is its entropy — how many possible passwords an attacker would have to search through before finding yours, expressed in bits (each added bit doubles the search space). It's a function of two things multiplied together: how large the pool of possible characters (or words) is, and how many of them you use. A 12-character password using only lowercase letters has less entropy than an 8-character one mixing upper, lower, numbers, and symbols — length matters, but so does what you draw from.",
+          "paragraph2": "That's exactly why this tool's passphrase mode exists alongside character-based passwords: four random words from a pool of about 1,650 gives roughly 43 bits of entropy — more than a typical 8-character mixed password — while staying genuinely easier to type and remember. A password's raw entropy tells you how long a brute-force search takes on average, but nothing about entropy is theoretical here: this tool computes the real bit count for exactly what it just generated, shown alongside crack-time estimates for a few realistic attack scenarios below.",
+          "diagram": {
+            "caption": "Estimated crack time by composition, at a fixed 100-billion-guesses/second offline attack rate — length and unpredictability both matter, but not equally."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Five compositions and the exact entropy and crack-time math behind each — the same formula this tool applies live to whatever it just generated for you.",
+          "columnScenario": "Composition",
+          "columnResult": "Entropy → Crack Time (100B guesses/sec)",
+          "rows": [
+            { "scenario": "7 lowercase letters (26 choices each)", "result": "~33 bits → instantly" },
+            { "scenario": "4-word passphrase (~1,650-word list)", "result": "~43 bits → ~38 seconds" },
+            { "scenario": "8 mixed-case letters + digits (62 choices each)", "result": "~48 bits → ~18 minutes" },
+            { "scenario": "6-word passphrase (~1,650-word list)", "result": "~64 bits → ~5 years" },
+            { "scenario": "12 chars, upper+lower+digits+symbols (94 choices each)", "result": "~79 bits → ~100,000 years" }
+          ],
+          "diagramLabels": {
+            "sevenLower": "7 lowercase letters",
+            "fourWords": "4-word passphrase",
+            "eightMixed": "8 mixed-case + digits",
+            "sixWords": "6-word passphrase",
+            "twelveMixed": "12 chars, all sets + symbols"
+          }
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is a random string of characters always stronger than a passphrase?",
+              "answer": "Not necessarily — it depends purely on total entropy, not which category it came from. A short 8-character random password and a 4-word passphrase can land at similar bit counts; the passphrase is usually easier to type correctly and remember without writing down, which matters for real-world security since a written-down password defeats its own purpose."
+            },
+            {
+              "question": "Why does this tool show a range of crack times instead of one number?",
+              "answer": "Because the true answer depends entirely on something this tool can't see: how the receiving service stores your password. A properly slow hash like bcrypt or Argon2 might allow only thousands of guesses per second even on capable hardware, while a poorly implemented system using fast, unsalted hashing could allow a single GPU to attempt hundreds of billions per second — the same password's real-world safety differs by many orders of magnitude between those two cases."
+            },
+            {
+              "question": "Is this tool's random number generator actually secure?",
+              "answer": "Yes — it uses the Web Crypto API's crypto.getRandomValues(), a cryptographically secure random source built into every modern browser, with rejection sampling to avoid the subtle bias a naive modulo operation would introduce. It deliberately does not use Math.random(), which is not designed to be unpredictable enough for security purposes."
+            },
+            {
+              "question": "Why does NIST no longer recommend forcing regular password changes?",
+              "answer": "Because research on real password databases found that forced periodic rotation mostly makes people choose weaker passwords or make small, predictable tweaks to their existing one (Password1 → Password2) — which is easier for an attacker with the old password to predict than it is for a legitimate user to remember a genuinely new one. Current guidance instead recommends rotating only when a specific compromise is suspected."
+            },
+            {
+              "question": "Does this tool check my password against known data breaches?",
+              "answer": "No, deliberately — doing that accurately requires querying an external breach database, which would mean sending at least a hash of your password over the network. Everything in this tool, including password generation and the strength estimate, runs entirely inside your browser with nothing transmitted anywhere."
+            },
+            {
+              "question": "What does \"excluding ambiguous characters\" actually remove?",
+              "answer": "Characters that are easy to misread depending on the font: the digit 0 versus the letter O, the digit 1 versus lowercase l versus uppercase I, and the vertical bar |. It slightly reduces the character pool (and therefore entropy for the same length), which is a fair trade for a password you might need to type from a handwritten note or read off a screen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The Rules That Turned Out to Be Wrong",
+            "paragraph": "Nearly every \"must contain a number, a symbol, and a capital letter, changed every 90 days\" password policy on Earth traces back to a single 2003 NIST document written by manager Bill Burr — guidance he later admitted was based on a 1980s whitepaper about password habits inside one specific organization, not real large-scale data, since almost none existed at the time. In 2017, by then retired, Burr told the Wall Street Journal \"Much of what I did I now regret,\" after researchers analyzing real breached-password databases found his rules pushed people toward predictable patterns like \"Password1!\" rather than genuinely unpredictable ones."
+          },
+          "modernDevelopments": {
+            "title": "From Complexity Rules to \"Correct Horse Battery Staple\"",
+            "paragraph": "In August 2011, xkcd comic #936 made the entropy math behind this reframing famous: cartoonist Randall Munroe calculated that the \"hard to remember, easy to crack\" password Tr0ub4dor&3 carries only about 28 bits of entropy, while the plain, memorable phrase \"correct horse battery staple\" carries roughly 44 — because entropy comes from unpredictability across a large-enough pool, not from forcing specific character types. NIST's own guidance caught up years later: the current SP 800-63B explicitly recommends prioritizing length over composition complexity, allowing at least 64 characters, and dropping forced periodic rotation — a near-complete reversal of Burr's original 2003 rules."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Password security, entropy, and cryptographic randomness are studied within Cybersecurity and Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025); home to CyLab, one of the largest university security and privacy research institutes in the US.",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
+                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "NIST Special Publication 800-63B — Digital Identity Guidelines: Authentication and Lifecycle Management. National Institute of Standards and Technology.",
+          "note": "The current official US government guidance on password policy, replacing the 2003-era complexity-and-rotation rules with recommendations prioritizing length, screening against known-breached passwords, and dropping forced periodic changes.",
+          "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
+          "readOriginal": "Read the Official Guidelines"
+        }
       }
     },
     "unit-converter": {
