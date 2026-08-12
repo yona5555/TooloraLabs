@@ -1,104 +1,99 @@
 "use client";
-
-import { useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { CsvJsonConverter, type CsvJsonMode } from "@tooloralabs/tools";
-import ToolButton from "@/components/tool-ui/ToolButton";
+import { CsvJsonConverter, type CsvJsonMode, type CsvDelimiter } from "@tooloralabs/tools";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
+import CsvJsonInputPanel from "./CsvJsonInputPanel";
+import CsvJsonResult from "./CsvJsonResult";
+import CsvVsJsonReference from "./CsvVsJsonReference";
 
 const tool = new CsvJsonConverter();
 
-export default function CsvJsonConverterUI() {
-  const t = useTranslations("tools.csv-json-converter");
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState("");
-  const [copied, setCopied] = useState(false);
+const SAMPLE_CSV = `name,age,city
+Alice,30,Cairo
+Bob,25,Giza`;
 
-  function run(mode: CsvJsonMode) {
-    setError("");
-    setOutput("");
-    setCopied(false);
+const SAMPLE_JSON = JSON.stringify(
+  [
+    { name: "Alice", age: 30, city: "Cairo" },
+    { name: "Bob", age: 25, city: "Giza" },
+  ],
+  null,
+  2
+);
 
-    if (!input.trim()) {
-      setError(t("errors.required"));
-      return;
-    }
+const ERROR_MESSAGE_KEYS: Record<string, string> = {
+  INVALID_JSON: "invalidJson",
+  EXPECTED_ARRAY: "expectedArray",
+  EMPTY_INPUT: "required",
+};
 
-    const result = tool.execute({ text: input, mode }, { locale: "en-US" });
-    if (!result.success) {
-      const errorKey = result.metadata.error === "INVALID_JSON"
-        ? "invalidJson"
-        : result.metadata.error === "EXPECTED_ARRAY"
-          ? "expectedArray"
-          : "required";
-      setError(t(`errors.${errorKey}`));
-      return;
-    }
-    setOutput(result.data.result);
+export default function CsvJsonConverterUI({ education }: { education: ReactNode }) {
+  const t = useTranslations("tools.csv-json-converter.errors");
+  const tNav = useTranslations("tools.csv-json-converter.nav");
+
+  const [input, setInput] = useState(SAMPLE_CSV);
+  const [mode, setMode] = useState<CsvJsonMode>("csvToJson");
+  const [delimiter, setDelimiter] = useState<CsvDelimiter>(",");
+  const [hasHeader, setHasHeader] = useState(true);
+
+  function handleModeChange(next: CsvJsonMode) {
+    if (next === mode) return;
+    setMode(next);
+    setInput(next === "csvToJson" ? SAMPLE_CSV : SAMPLE_JSON);
   }
 
-  async function copyOutput() {
-    await navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
+  const output = useMemo(() => {
+    if (!input.trim()) return null;
+    return tool.execute({ text: input, mode, delimiter, hasHeader }, { locale: "en-US" });
+  }, [input, mode, delimiter, hasHeader]);
+
+  const errorMessage = output?.success === false ? t(ERROR_MESSAGE_KEYS[String(output.metadata.error)] ?? "required") : "";
+
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "faq", label: tNav("faq") },
+    { id: "behind-the-tool", label: tNav("behindTheTool") },
+  ];
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-          {t("form.inputLabel")}
-        </span>
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={t("form.inputPlaceholder")}
-          rows={8}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 font-mono text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
+    <>
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={
+            <CsvJsonInputPanel
+              input={input}
+              onInputChange={setInput}
+              mode={mode}
+              onModeChange={handleModeChange}
+              delimiter={delimiter}
+              onDelimiterChange={setDelimiter}
+              hasHeader={hasHeader}
+              onHasHeaderChange={setHasHeader}
+            />
+          }
+          result={
+            <CsvJsonResult
+              isEmpty={!output}
+              result={output?.data.result ?? ""}
+              errorMessage={errorMessage}
+              filename={mode === "csvToJson" ? "converted.json" : "converted.csv"}
+              mimeType={mode === "csvToJson" ? "application/json;charset=utf-8" : "text/csv;charset=utf-8"}
+            />
+          }
+          sidebar={<RelatedToolsSidebar currentSlug="csv-json-converter" category="file-tools" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <CsvVsJsonReference />
+            </div>
+          }
         />
-      </label>
-
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-          {error}
-        </div>
-      )}
-
-      <div className="flex flex-wrap gap-4">
-        <ToolButton type="button" onClick={() => run("csvToJson")}>
-          {t("form.csvToJson")}
-        </ToolButton>
-        <button
-          type="button"
-          onClick={() => run("jsonToCsv")}
-          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-        >
-          {t("form.jsonToCsv")}
-        </button>
       </div>
 
-      {output && (
-        <label className="block space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-              {t("form.outputLabel")}
-            </span>
-            <button
-              type="button"
-              onClick={copyOutput}
-              className="text-sm font-medium text-blue-600 transition hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            >
-              {copied ? t("form.copied") : t("form.copy")}
-            </button>
-          </div>
-          <textarea
-            readOnly
-            value={output}
-            rows={8}
-            className="w-full rounded-xl border border-zinc-300 bg-zinc-50 px-4 py-3 font-mono text-sm text-zinc-900 outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
-          />
-        </label>
-      )}
-    </div>
+      {education}
+    </>
   );
 }

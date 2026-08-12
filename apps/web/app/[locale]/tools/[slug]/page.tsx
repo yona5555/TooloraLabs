@@ -46,6 +46,7 @@ import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
 import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
 import ScientificEducation from "@/components/tools/scientific-calculator/ScientificEducation";
 import CsvJsonConverterUI from "@/components/tools/csv-json-converter/CsvJsonConverterUI";
+import CsvJsonEducation from "@/components/tools/csv-json-converter/CsvJsonEducation";
 import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSizeConverterTool";
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
@@ -291,7 +292,7 @@ export default async function ToolPage({
       component = <ScientificCalculator education={<ScientificEducation />} />;
       break;
     case "csv-json-converter":
-      component = <CsvJsonConverterUI />;
+      component = <CsvJsonConverterUI education={<CsvJsonEducation />} />;
       break;
     case "file-size-converter":
       component = <FileSizeConverterTool />;
@@ -334,7 +335,8 @@ export default async function ToolPage({
     slug === "qr-code-generator" ||
     slug === "json-formatter" ||
     slug === "password-generator" ||
-    slug === "image-converter";
+    slug === "image-converter" ||
+    slug === "csv-json-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",

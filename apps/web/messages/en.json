@@ -4691,13 +4691,42 @@
       }
     },
     "csv-json-converter": {
-      "title": "CSV to JSON Converter",
-      "description": "Convert CSV data to JSON or JSON back to CSV.",
+      "title": "CSV ↔ JSON Converter",
+      "description": "Convert CSV to JSON or JSON back to CSV, with delimiter auto-detection, an optional header row, and automatic flattening of nested objects.",
+      "nav": {
+        "tool": "Converter",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Result",
+        "placeholder": "Enter CSV or JSON on the left to see the converted result here.",
+        "comparison": {
+          "title": "CSV vs. JSON",
+          "intro": "Neither format is objectively better — they're built for different shapes of data.",
+          "rows": [
+            { "aspect": "Best for", "csv": "Flat, tabular data — spreadsheets, database exports.", "json": "Nested or hierarchical data — API responses, config files." },
+            { "aspect": "File size", "csv": "Smaller for the same tabular data — no repeated key names.", "json": "Larger — every object repeats its own keys." },
+            { "aspect": "Nested data", "csv": "No native support — must be flattened or stringified.", "json": "Native support — objects and arrays nest freely." },
+            { "aspect": "Human editing", "csv": "Easy in a spreadsheet program.", "json": "Easy in a text/code editor; error-prone by hand at scale." }
+          ]
+        }
+      },
       "form": {
+        "inputTitle": "Input",
         "inputLabel": "Input",
         "inputPlaceholder": "Paste CSV or JSON data here...",
+        "csvPlaceholder": "Paste CSV data here...",
+        "jsonPlaceholder": "Paste a JSON array of objects here...",
         "csvToJson": "CSV → JSON",
         "jsonToCsv": "JSON → CSV",
+        "delimiterLabel": "Delimiter",
+        "delimiterComma": "Comma (,)",
+        "delimiterSemicolon": "Semicolon (;)",
+        "delimiterTab": "Tab",
+        "delimiterPipe": "Pipe (|)",
+        "delimiterAuto": "Auto-detect",
+        "hasHeaderLabel": "First row is a header",
         "outputLabel": "Result",
         "copy": "Copy",
         "copied": "Copied!"
@@ -4706,6 +4735,117 @@
         "required": "Please enter some data.",
         "invalidJson": "This is not valid JSON.",
         "expectedArray": "The JSON must be an array of objects."
+      },
+      "education": {
+        "intro": {
+          "title": "How CSV and JSON Actually Relate",
+          "paragraph1": "CSV and JSON solve the same basic problem — representing a list of records — with opposite structural assumptions. CSV assumes every record has exactly the same flat set of fields, so it only needs to write the field names once, in a header row, then just the values afterward. JSON makes no such assumption: every object carries its own keys, which is what lets it represent records with different shapes, or fields that are themselves nested objects and arrays, at the cost of repeating those key names in every single record.",
+          "paragraph2": "That structural gap is exactly why CSV → JSON is mechanical (each row becomes an object, each header becomes a key) while JSON → CSV requires real decisions this tool makes automatically: nested objects get flattened into dot-notation columns (address.city, address.zip), and arrays get serialized as a single JSON-text cell, since CSV has no native way to represent a list inside a list.",
+          "diagram": {
+            "caption": "A CSV header row becomes JSON object keys; each subsequent CSV row becomes one JSON object in an array."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Four examples showing exactly how this tool handles delimiters, headers, and nested data.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "CSV \"name,age / Alice,30\" converted to JSON", "result": "[{\"name\":\"Alice\",\"age\":\"30\"}]" },
+            { "scenario": "CSV \"name;age / Alice;30\" with auto-detect delimiter", "result": "Detects \";\" and parses correctly" },
+            { "scenario": "JSON with a nested address object converted to CSV", "result": "Columns: name, address.city" },
+            { "scenario": "JSON with a tags array converted to CSV", "result": "The tags column holds a JSON-text cell, e.g. [\"a\",\"b\"]" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why would I choose CSV over JSON, or the other way around?",
+              "answer": "CSV wins for flat, tabular data — a spreadsheet export, a list of contacts — because it's smaller and every spreadsheet program opens it natively. JSON wins the moment your data has real structure — nested objects, fields that are themselves lists — because CSV simply has no native way to represent that without flattening or stringifying it, which this tool does automatically but always loses a little structural clarity in the process."
+            },
+            {
+              "question": "What happens to nested objects when converting JSON to CSV?",
+              "answer": "They get flattened into dot-notation column names — a nested { \"address\": { \"city\": \"Cairo\" } } becomes a column literally named address.city. This keeps every value in its own cell, at the cost of a less human-friendly header row for deeply nested data."
+            },
+            {
+              "question": "What happens to arrays when converting JSON to CSV?",
+              "answer": "Unlike nested objects, arrays get serialized as JSON text inside a single cell — CSV has no native concept of \"a list inside a list,\" so there's no clean tabular alternative. The result round-trips correctly (converting back to JSON restores the original array), but isn't especially readable in a spreadsheet."
+            },
+            {
+              "question": "Why does auto-detecting the delimiter matter?",
+              "answer": "Comma-separated is the default, but it's genuinely not universal: many European locales use a comma as the decimal separator, so spreadsheet software there exports CSV with semicolons instead to avoid ambiguity, and tab- or pipe-delimited exports are common from certain databases and legacy systems. Auto-detect looks at the first line and picks whichever candidate delimiter appears most often."
+            },
+            {
+              "question": "Why does this tool need a \"first row is a header\" option?",
+              "answer": "Not every CSV file includes one — some raw database or sensor-log exports start directly with data. Without a real header to draw keys from, this tool falls back to generic column1, column2, ... keys so the conversion still produces valid, usable JSON."
+            },
+            {
+              "question": "Is my data uploaded anywhere when I use this tool?",
+              "answer": "No — parsing and converting both directions happens entirely in your browser. Nothing you paste here is transmitted anywhere, which matters since CSV and JSON files often carry real exported data."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Format With No Single Inventor",
+            "paragraph": "Unlike JSON, CSV has no known creator and no founding date — it emerged organically because separating values with commas was simply the most obvious way to represent tabular data in early computing, with IBM's Fortran compiler already supporting a comma-delimited format as far back as 1972. The term \"comma-separated values\" itself only entered common use around 1983. For over three decades, every piece of software that read or wrote CSV files quietly invented its own conventions for the genuinely tricky edge cases — what happens when a value itself contains a comma, or a line break, or a quote mark — which is exactly why real-world CSV files remain inconsistent to this day."
+          },
+          "modernDevelopments": {
+            "title": "A Standard, Decades Late",
+            "paragraph": "The first attempt to formally document CSV's de facto conventions didn't arrive until October 2005, when Yakov Shafranovich published RFC 4180, codifying rules for quoting, escaping, and header rows that most implementations had already converged on independently. It's explicitly an \"Informational\" RFC, not a binding standard, and it arrived roughly three decades after CSV files were already common — which is why this tool's own CSV parser has to handle real-world files that don't strictly follow it, rather than assuming every file will."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Data interchange formats, parsing, and formal grammars are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
+                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "RFC 4180 — Common Format and MIME Type for Comma-Separated Values (CSV) Files. Y. Shafranovich. Internet Engineering Task Force (IETF), October 2005.",
+          "note": "The closest thing CSV has to an official specification — an Informational RFC that codified quoting, escaping, and header-row conventions roughly three decades after CSV files were already widespread, which is why this tool's parser handles real-world files that don't strictly follow it.",
+          "url": "https://www.rfc-editor.org/rfc/rfc4180",
+          "readOriginal": "Read the Original RFC"
+        }
       }
     },
     "file-size-converter": {
