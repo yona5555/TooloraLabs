@@ -1,82 +1,83 @@
 "use client";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-
-import { useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { DiscountCalculator as DiscountCalculatorTool } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
-import ToolButton from "@/components/tool-ui/ToolButton";
-import ToolInput from "@/components/tool-ui/ToolInput";
-import PrintButton from "@/components/tool-ui/PrintButton";
-import { usePrintExport } from "@/hooks/usePrintExport";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
+import DiscountInputPanel from "./DiscountInputPanel";
 import DiscountResult from "./DiscountResult";
-import type { DiscountResult as Result } from "./types";
+import DiscountStackingReference from "./DiscountStackingReference";
+import type { DiscountMode } from "./types";
 
 const tool = new DiscountCalculatorTool();
 
-export default function DiscountCalculator() {
-  const t = useTranslations("tools.discount-calculator.form");
-  const tErrors = useTranslations("tools.discount-calculator.errors");
-  const [price, setPrice] = useState("");
-  const [discount, setDiscount] = useState("");
-  const [error, setError] = useState("");
-  const [result, setResult] = useState<Result | null>(null);
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const { printRef, handlePrint } = usePrintExport<HTMLDivElement>();
+export default function DiscountCalculator({ education }: { education: ReactNode }) {
+  const tNav = useTranslations("tools.discount-calculator.nav");
 
-  function handleCalculate() {
-    setError("");
-    setResult(null);
+  const [mode, setMode] = useState<DiscountMode>("apply");
+  const [price, setPrice] = useState("120");
+  const [discounts, setDiscounts] = useState<string[]>(["30", "10"]);
 
-    const originalPrice = parseLocalizedNumber(price);
-    const discountPercent = parseLocalizedNumber(discount);
-    if (Number.isNaN(originalPrice) || Number.isNaN(discountPercent)) {
-      setError(tErrors("required"));
-      return;
-    }
-    if (originalPrice <= 0 || originalPrice > 1_000_000) {
-      setError(tErrors("priceRange"));
-      return;
-    }
-    if (discountPercent < 0 || discountPercent > 100) {
-      setError(tErrors("discountRange"));
-      return;
-    }
-
-    const output = tool.execute({ originalPrice, discountPercent }, { locale: "en-US" });
-    setResult(output.data);
-    setDigitStyle(resolveDigitStyle(price, discount));
+  function handleModeChange(next: DiscountMode) {
+    if (next === mode) return;
+    setMode(next);
+    setDiscounts(next === "reverse" ? [discounts[0] ?? "30"] : ["30", "10"]);
+    setPrice(next === "reverse" ? "84" : "120");
   }
 
+  const digitStyle: DigitStyle = resolveDigitStyle(price, ...discounts);
+
+  const result = useMemo(() => {
+    const priceValue = parseLocalizedNumber(price) || 0;
+    const discountValues = discounts.map((d) => parseLocalizedNumber(d) || 0);
+    const output = tool.execute(
+      {
+        mode,
+        originalPrice: mode === "apply" ? priceValue : 0,
+        finalPrice: mode === "reverse" ? priceValue : 0,
+        discounts: discountValues,
+      },
+      { locale: "en-US" }
+    );
+    return output.data;
+  }, [mode, price, discounts]);
+
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "faq", label: tNav("faq") },
+    { id: "behind-the-tool", label: tNav("behindTheTool") },
+  ];
+
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <ToolInput
-        type="text" inputMode="decimal"
-        placeholder={t("pricePlaceholder")}
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
-      <ToolInput
-        type="text" inputMode="decimal"
-        placeholder={t("discountPlaceholder")}
-        value={discount}
-        onChange={(e) => setDiscount(e.target.value)}
-      />
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-          {error}
-        </div>
-      )}
-      <ToolButton onClick={handleCalculate}>{t("calculate")}</ToolButton>
-      {result && (
-        <div ref={printRef} data-print-area className="space-y-6">
-          <div className="flex justify-end print:hidden">
-            <PrintButton onPrint={handlePrint} />
-          </div>
-          <DiscountResult result={result} digitStyle={digitStyle} />
-        </div>
-      )}
-    </div>
+    <>
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={
+            <DiscountInputPanel
+              mode={mode}
+              onModeChange={handleModeChange}
+              price={price}
+              onPriceChange={setPrice}
+              discounts={discounts}
+              onDiscountsChange={setDiscounts}
+            />
+          }
+          result={<DiscountResult result={result} digitStyle={digitStyle} />}
+          sidebar={<RelatedToolsSidebar currentSlug="discount-calculator" category="calculators" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <DiscountStackingReference />
+            </div>
+          }
+        />
+      </div>
+
+      {education}
+    </>
   );
 }
