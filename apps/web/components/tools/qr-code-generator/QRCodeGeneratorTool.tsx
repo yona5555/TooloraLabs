@@ -1,96 +1,103 @@
 "use client";
-
-import { useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Download } from "lucide-react";
-import { QRCodeGenerator } from "@tooloralabs/tools";
-import ToolButton from "@/components/tool-ui/ToolButton";
+import { QRCodeGenerator, type QRErrorCorrectionLevel } from "@tooloralabs/tools";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
+import QRInputPanel, { type QRFormState } from "./QRInputPanel";
+import QRResult from "./QRResult";
+import QRCustomizePanel from "./QRCustomizePanel";
 
 const tool = new QRCodeGenerator();
-const MAX_LENGTH = 2000;
 
-export default function QRCodeGeneratorTool() {
+const INITIAL_FORM: QRFormState = {
+  contentType: "url",
+  text: "https://tooloralabs.com",
+  wifiSsid: "",
+  wifiPassword: "",
+  wifiEncryption: "WPA",
+  wifiHidden: false,
+  contactName: "",
+  contactPhone: "",
+  contactEmail: "",
+  contactOrg: "",
+  emailAddress: "",
+  emailSubject: "",
+  emailBody: "",
+  smsPhone: "",
+  smsMessage: "",
+};
+
+export default function QRCodeGeneratorTool({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.qr-code-generator");
-  const [text, setText] = useState("");
+  const tNav = useTranslations("tools.qr-code-generator.nav");
+
+  const [form, setForm] = useState<QRFormState>(INITIAL_FORM);
+  const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<QRErrorCorrectionLevel>("M");
+  const [darkColor, setDarkColor] = useState("#000000");
+  const [lightColor, setLightColor] = useState("#ffffff");
+
   const [svg, setSvg] = useState("");
-  const [error, setError] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [payload, setPayload] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const requestId = useRef(0);
 
-  async function generate() {
-    setError("");
-    setSvg("");
-
-    if (!text.trim()) {
-      setError(t("errors.required"));
-      return;
-    }
-    if (text.length > MAX_LENGTH) {
-      setError(t("errors.tooLong"));
-      return;
-    }
-
-    setIsGenerating(true);
-    const output = await tool.execute({ text }, { locale: "en-US" });
-    setIsGenerating(false);
-
-    if (!output.success) {
-      setError(t("errors.generationFailed"));
-      return;
-    }
-    setSvg(output.data.svg);
+  function patchForm(patch: Partial<QRFormState>) {
+    setForm((prev) => ({ ...prev, ...patch }));
   }
 
-  function download() {
-    const blob = new Blob([svg], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "qr-code.svg";
-    link.click();
-    URL.revokeObjectURL(url);
-  }
+  useEffect(() => {
+    const id = ++requestId.current;
+
+    tool
+      .execute({ ...form, errorCorrectionLevel, darkColor, lightColor }, { locale: "en-US" })
+      .then((output) => {
+        if (id !== requestId.current) return;
+        if (!output.success) {
+          setSvg("");
+          setPayload("");
+          setHasError(true);
+          return;
+        }
+        setSvg(output.data.svg);
+        setPayload(output.data.payload);
+        setHasError(false);
+      });
+  }, [form, errorCorrectionLevel, darkColor, lightColor]);
+
+  const error = hasError ? t("errors.required") : "";
+
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "faq", label: tNav("faq") },
+    { id: "behind-the-tool", label: tNav("behindTheTool") },
+  ];
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-          {t("form.inputLabel")}
-        </span>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder={t("form.inputPlaceholder")}
-          rows={3}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
+    <>
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={<QRInputPanel form={form} onChange={patchForm} />}
+          result={<QRResult svg={svg} payload={payload} error={error} />}
+          sidebar={<RelatedToolsSidebar currentSlug="qr-code-generator" category="ai-tools" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <QRCustomizePanel
+                errorCorrectionLevel={errorCorrectionLevel}
+                onErrorCorrectionLevelChange={setErrorCorrectionLevel}
+                darkColor={darkColor}
+                onDarkColorChange={setDarkColor}
+                lightColor={lightColor}
+                onLightColorChange={setLightColor}
+              />
+            </div>
+          }
         />
-      </label>
+      </div>
 
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-          {error}
-        </div>
-      )}
-
-      <ToolButton type="button" onClick={generate} disabled={isGenerating}>
-        {isGenerating ? t("form.generating") : t("form.generate")}
-      </ToolButton>
-
-      {svg && (
-        <div className="flex flex-col items-center gap-4 rounded-xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-700 dark:bg-zinc-800">
-          <div
-            className="h-56 w-56 rounded-lg bg-white p-3 [&_svg]:h-full [&_svg]:w-full"
-            dangerouslySetInnerHTML={{ __html: svg }}
-          />
-          <button
-            type="button"
-            onClick={download}
-            className="flex items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
-          >
-            <Download size={16} />
-            {t("form.download")}
-          </button>
-        </div>
-      )}
-    </div>
+      {education}
+    </>
   );
 }
