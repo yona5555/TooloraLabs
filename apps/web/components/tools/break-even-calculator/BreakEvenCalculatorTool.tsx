@@ -1,61 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { BreakEvenCalculator, type BreakEvenOutput } from "@tooloralabs/tools";
+import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import { BreakEvenCalculator } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
-import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
-import PrintButton from "@/components/tool-ui/PrintButton";
-import { usePrintExport } from "@/hooks/usePrintExport";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
+import BreakEvenInputPanel from "./BreakEvenInputPanel";
+import BreakEvenResult from "./BreakEvenResult";
+import BreakEvenReference from "./BreakEvenReference";
 
 const tool = new BreakEvenCalculator();
 
-function Card({ title, value }: { title: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-      <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-        {title}
-      </p>
-      <p className="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-50">{value}</p>
-    </div>
-  );
-}
+export default function BreakEvenCalculatorTool({ education }: { education: ReactNode }) {
+  const t = useTranslations("tools.break-even-calculator.errors");
+  const tNav = useTranslations("tools.break-even-calculator.nav");
 
-export default function BreakEvenCalculatorTool() {
-  const t = useTranslations("tools.break-even-calculator");
   const [fixedCosts, setFixedCosts] = useState("");
   const [variableCostPerUnit, setVariableCostPerUnit] = useState("");
   const [pricePerUnit, setPricePerUnit] = useState("");
-  const [error, setError] = useState("");
-  const [result, setResult] = useState<BreakEvenOutput | null>(null);
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const { printRef, handlePrint } = usePrintExport<HTMLDivElement>();
+  const [targetProfit, setTargetProfit] = useState("");
 
-  function formatCurrency(value: number) {
-    return formatLocalizedNumber(value, digitStyle, {
-      style: "currency",
-      currency: "USD",
-      maximumFractionDigits: 2,
-    });
-  }
+  const digitStyle: DigitStyle = resolveDigitStyle(fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit);
 
-  function calculate() {
-    setError("");
-    setResult(null);
+  const { result, errorKey } = useMemo(() => {
+    if (!fixedCosts.trim() && !variableCostPerUnit.trim() && !pricePerUnit.trim()) {
+      return { result: null, errorKey: "" };
+    }
 
     const parsedFixedCosts = parseLocalizedNumber(fixedCosts);
     const parsedVariableCost = parseLocalizedNumber(variableCostPerUnit);
     const parsedPrice = parseLocalizedNumber(pricePerUnit);
+    const parsedTargetProfit = parseLocalizedNumber(targetProfit);
 
-    if (
-      Number.isNaN(parsedFixedCosts) ||
-      Number.isNaN(parsedVariableCost) ||
-      Number.isNaN(parsedPrice)
-    ) {
-      setError(t("errors.required"));
-      return;
+    if (Number.isNaN(parsedFixedCosts) || Number.isNaN(parsedVariableCost) || Number.isNaN(parsedPrice)) {
+      return { result: null, errorKey: "required" };
     }
 
     const output = tool.execute(
@@ -63,90 +44,64 @@ export default function BreakEvenCalculatorTool() {
         fixedCosts: parsedFixedCosts,
         variableCostPerUnit: parsedVariableCost,
         pricePerUnit: parsedPrice,
+        targetProfit: Number.isNaN(parsedTargetProfit) ? undefined : parsedTargetProfit,
       },
       { locale: "en-US" }
     );
+
     if (!output.success) {
-      const errorKey =
-        output.metadata.error === "NO_BREAK_EVEN" ? "noBreakEven" : "invalidValues";
-      setError(t(`errors.${errorKey}`));
-      return;
+      const key = output.metadata.error === "NO_BREAK_EVEN" ? "noBreakEven" : "invalidValues";
+      return { result: null, errorKey: key };
     }
 
-    setResult(output.data);
-    setDigitStyle(resolveDigitStyle(fixedCosts, variableCostPerUnit, pricePerUnit));
-  }
+    return { result: output.data, errorKey: "" };
+  }, [fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit]);
+
+  const errorMessage = errorKey ? t(errorKey) : "";
+
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "faq", label: tNav("faq") },
+    { id: "behind-the-tool", label: tNav("behindTheTool") },
+  ];
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-        <ToolInput
-          label={t("form.fixedCosts")}
-          type="text"
-          inputMode="decimal"
-          value={fixedCosts}
-          onChange={(e) => setFixedCosts(e.target.value)}
+    <>
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={
+            <BreakEvenInputPanel
+              fixedCosts={fixedCosts}
+              onFixedCostsChange={setFixedCosts}
+              variableCostPerUnit={variableCostPerUnit}
+              onVariableCostPerUnitChange={setVariableCostPerUnit}
+              pricePerUnit={pricePerUnit}
+              onPricePerUnitChange={setPricePerUnit}
+              targetProfit={targetProfit}
+              onTargetProfitChange={setTargetProfit}
+            />
+          }
+          result={
+            <BreakEvenResult
+              result={result}
+              errorMessage={errorMessage}
+              digitStyle={digitStyle}
+              fixedCosts={parseLocalizedNumber(fixedCosts) || 0}
+              variableCostPerUnit={parseLocalizedNumber(variableCostPerUnit) || 0}
+              pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
+            />
+          }
+          sidebar={<RelatedToolsSidebar currentSlug="break-even-calculator" category="calculators" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <BreakEvenReference />
+            </div>
+          }
         />
-        <ToolInput
-          label={t("form.variableCostPerUnit")}
-          type="text"
-          inputMode="decimal"
-          value={variableCostPerUnit}
-          onChange={(e) => setVariableCostPerUnit(e.target.value)}
-        />
-        <ToolInput
-          label={t("form.pricePerUnit")}
-          type="text"
-          inputMode="decimal"
-          value={pricePerUnit}
-          onChange={(e) => setPricePerUnit(e.target.value)}
-        />
-
-        {error && (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
-            {error}
-          </div>
-        )}
-
-        <ToolButton type="button" onClick={calculate}>
-          {t("form.calculate")}
-        </ToolButton>
       </div>
 
-      {result && (
-        <div
-          ref={printRef}
-          data-print-area
-          className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none"
-        >
-          <div className="flex items-center justify-between print:hidden">
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">{t("result.title")}</h3>
-            <PrintButton onPrint={handlePrint} />
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Card
-              title={t("result.breakEvenUnits")}
-              value={formatLocalizedNumber(result.breakEvenUnits, digitStyle)}
-            />
-            <Card
-              title={t("result.breakEvenRevenue")}
-              value={formatCurrency(result.breakEvenRevenue)}
-            />
-            <Card
-              title={t("result.contributionMarginPerUnit")}
-              value={formatCurrency(result.contributionMarginPerUnit)}
-            />
-            <Card
-              title={t("result.contributionMarginRatio")}
-              value={formatLocalizedNumber(result.contributionMarginRatio / 100, digitStyle, {
-                style: "percent",
-                maximumFractionDigits: 1,
-              })}
-            />
-          </div>
-        </div>
-      )}
-    </div>
+      {education}
+    </>
   );
 }

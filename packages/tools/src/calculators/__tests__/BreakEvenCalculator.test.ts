@@ -60,4 +60,22 @@ describe("BreakEvenCalculator", () => {
     expect(r.success).toBe(false);
     expect(r.metadata.error).toBe("NO_BREAK_EVEN");
   });
+
+  it("computes units needed to reach a target profit", () => {
+    const r = tool.execute(
+      { fixedCosts: 10000, variableCostPerUnit: 20, pricePerUnit: 50, targetProfit: 5000 },
+      context
+    );
+    expect(r.data.targetProfitUnits).toBe(Math.ceil(15000 / 30));
+    expect(r.data.targetProfitRevenue).toBe(r.data.targetProfitUnits * 50);
+  });
+
+  it("leaves target profit fields at zero when no target profit is given", () => {
+    const r = tool.execute(
+      { fixedCosts: 10000, variableCostPerUnit: 20, pricePerUnit: 50 },
+      context
+    );
+    expect(r.data.targetProfitUnits).toBe(0);
+    expect(r.data.targetProfitRevenue).toBe(0);
+  });
 });

@@ -56,6 +56,7 @@ import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGe
 import InvoiceEducation from "@/components/tools/invoice-generator/InvoiceEducation";
 import InventoryValuationTool from "@/components/tools/inventory-valuation-calculator/InventoryValuationTool";
 import BreakEvenCalculatorTool from "@/components/tools/break-even-calculator/BreakEvenCalculatorTool";
+import BreakEvenEducation from "@/components/tools/break-even-calculator/BreakEvenEducation";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
@@ -316,7 +317,7 @@ export default async function ToolPage({
       component = <InventoryValuationTool />;
       break;
     case "break-even-calculator":
-      component = <BreakEvenCalculatorTool />;
+      component = <BreakEvenCalculatorTool education={<BreakEvenEducation />} />;
       break;
   }
 
@@ -344,7 +345,8 @@ export default async function ToolPage({
     slug === "image-converter" ||
     slug === "csv-json-converter" ||
     slug === "barcode-generator" ||
-    slug === "invoice-generator";
+    slug === "invoice-generator" ||
+    slug === "break-even-calculator";
 
   const jsonLd = {
     "@context": "https://schema.org",

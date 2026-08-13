@@ -5,6 +5,8 @@ export type BreakEvenInput = {
   fixedCosts: number;
   variableCostPerUnit: number;
   pricePerUnit: number;
+  /** Optional: a target monthly/period profit beyond simply breaking even. */
+  targetProfit?: number;
 };
 
 export type BreakEvenOutput = {
@@ -12,6 +14,9 @@ export type BreakEvenOutput = {
   breakEvenRevenue: number;
   contributionMarginPerUnit: number;
   contributionMarginRatio: number;
+  /** Units needed to reach targetProfit, if one was given — otherwise 0. */
+  targetProfitUnits: number;
+  targetProfitRevenue: number;
 };
 
 function round(value: number): number {
@@ -24,8 +29,8 @@ export class BreakEvenCalculator extends BaseCalculator<BreakEvenInput, BreakEve
     slug: "break-even-calculator",
     name: "Break-Even Point Calculator",
     category: "calculators",
-    description: "Find how many units you need to sell to cover your fixed costs.",
-    version: "1.0.0",
+    description: "Find how many units you need to sell to cover your fixed costs, or hit a target profit.",
+    version: "1.1.0",
   };
 
   execute(input: BreakEvenInput, _context: ToolContext): ToolResult<BreakEvenOutput> {
@@ -34,6 +39,8 @@ export class BreakEvenCalculator extends BaseCalculator<BreakEvenInput, BreakEve
       breakEvenRevenue: 0,
       contributionMarginPerUnit: 0,
       contributionMarginRatio: 0,
+      targetProfitUnits: 0,
+      targetProfitRevenue: 0,
     };
 
     if (!(input.fixedCosts >= 0)) {
@@ -53,6 +60,11 @@ export class BreakEvenCalculator extends BaseCalculator<BreakEvenInput, BreakEve
       (contributionMarginPerUnit / input.pricePerUnit) * 100
     );
 
+    const targetProfit = input.targetProfit ?? 0;
+    const targetProfitUnits =
+      targetProfit > 0 ? Math.ceil((input.fixedCosts + targetProfit) / contributionMarginPerUnit) : 0;
+    const targetProfitRevenue = targetProfitUnits > 0 ? round(targetProfitUnits * input.pricePerUnit) : 0;
+
     return {
       success: true,
       data: {
@@ -60,6 +72,8 @@ export class BreakEvenCalculator extends BaseCalculator<BreakEvenInput, BreakEve
         breakEvenRevenue,
         contributionMarginPerUnit: round(contributionMarginPerUnit),
         contributionMarginRatio,
+        targetProfitUnits,
+        targetProfitRevenue,
       },
       metadata: {},
     };
