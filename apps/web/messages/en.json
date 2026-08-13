@@ -4657,6 +4657,176 @@
         }
       }
     },
+    "barcode-generator": {
+      "title": "Barcode Generator",
+      "description": "Generate UPC-A, EAN-13, and Code 128 barcodes with a downloadable image and an optional logo placed beside the code — for educational and design use.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Your Barcode",
+        "placeholder": "Enter a value on the left to generate a barcode.",
+        "disclaimer": "This barcode is generated for educational and general design purposes only — it is not an official commercial registration. To sell a product in real retail stores, you must register your number with the appropriate authority (such as GS1) to guarantee it's uniquely yours worldwide.",
+        "typesGuide": {
+          "title": "UPC-A vs. EAN-13 vs. Code 128",
+          "intro": "Three genuinely different symbologies, each solving a different problem.",
+          "rows": [
+            { "type": "UPC-A", "usedFor": "12 digits. The standard for retail products in the US and Canada." },
+            { "type": "EAN-13", "usedFor": "13 digits. The international retail standard used almost everywhere outside North America." },
+            { "type": "Code 128", "usedFor": "Letters, digits, and symbols of any length. Used for shipping labels, inventory tracking, and internal IDs — not retail point-of-sale." }
+          ]
+        }
+      },
+      "form": {
+        "inputTitle": "Value",
+        "valueLabel": "Value",
+        "symbology": {
+          "upc-a": "UPC-A",
+          "ean-13": "EAN-13",
+          "code128": "Code 128"
+        },
+        "hint": {
+          "upc-a": "Enter 11 digits — the 12th check digit is calculated and added automatically.",
+          "ean-13": "Enter 12 digits — the 13th check digit is calculated and added automatically.",
+          "code128": "Enter any letters, digits, or symbols (printable ASCII, up to 48 characters)."
+        },
+        "placeholder": {
+          "upc-a": "e.g. 03600029145",
+          "ean-13": "e.g. 590123412345",
+          "code128": "e.g. TOOLORA-2026"
+        },
+        "logoLabel": "Logo (optional)",
+        "logoHint": "Placed beside the barcode, never on top of it — a barcode's bars carry no error-correction redundancy, so any mark over them can make it unreadable to a scanner.",
+        "logoUpload": "Upload a logo",
+        "logoPreviewAlt": "Uploaded logo preview",
+        "logoRemove": "Remove",
+        "logoShowBeside": "Show logo beside the barcode",
+        "download": "Download SVG"
+      },
+      "errors": {
+        "required": "Enter a value to generate a barcode.",
+        "invalidLengthUpc": "UPC-A needs exactly 11 digits (the check digit is added automatically).",
+        "invalidLengthEan": "EAN-13 needs exactly 12 digits (the check digit is added automatically).",
+        "nonDigit": "This symbology only accepts digits 0-9.",
+        "unsupportedCharacter": "Code 128 only supports printable ASCII characters (letters, digits, common symbols).",
+        "tooLong": "Value is too long (max 48 characters for Code 128)."
+      },
+      "education": {
+        "intro": {
+          "title": "How Barcodes Actually Work",
+          "paragraph1": "A 1D barcode encodes data purely as the widths of alternating bars and spaces — there's no color, no dots, nothing two-dimensional about it. A scanner's laser or camera sensor sweeps across the code and measures how long the light stays bright or dark at each point; a narrow bar might be one \"module\" wide, a wide one three or four modules wide, and the exact sequence of those widths is what encodes each digit or character. This is also exactly why 1D barcodes carry no error correction the way a QR code does: there's no spare redundant data woven in to reconstruct a damaged section, which is why this tool places an optional logo beside the barcode rather than on top of it.",
+          "paragraph2": "UPC-A and EAN-13 add one more safeguard: a check digit, mathematically derived from every other digit in the code, that a scanner recalculates after reading and compares against — if a smudge or printing defect corrupted even one digit, the check digit almost certainly won't match, and the scanner rejects the read instead of accepting corrupted data. Code 128 goes further with a full checksum symbol computed from every character's value. This tool calculates every check digit and checksum for you automatically from whatever value you enter.",
+          "diagram": {
+            "quietZoneLabel": "Quiet zone — a mandatory blank margin a scanner needs to lock on before reading",
+            "guardLabel": "Guard pattern — a fixed marker that tells the scanner where the code starts, centers, or ends",
+            "dataLabel": "Data bars — the actual encoded digits or characters",
+            "caption": "A schematic barcode structure (illustrative widths, not decoded from real data) — quiet zone, guard patterns, and data bars are present in some form across every 1D symbology."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Three examples showing exactly how this tool derives the check digit or checksum for each symbology.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "UPC-A, 11 digits \"03600029145\" (a real published product code)", "result": "Check digit 2 → full code 036000291452" },
+            { "scenario": "EAN-13, 12 digits \"400638133393\"", "result": "Check digit 1 → full code 4006381333931" },
+            { "scenario": "Code 128, text \"A\"", "result": "Checksum value 34, from (104 + 33×1) mod 103" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Can I actually use this barcode to sell a product in stores?",
+              "answer": "Not on its own. Any UPC-A or EAN-13 number you make up yourself may already belong to a different product somewhere in the world — retailers and marketplaces require a number properly issued through GS1 (or your country's equivalent numbering authority), which guarantees it's uniquely yours. This tool is for education, design mockups, internal tracking, and anywhere a globally unique registered number isn't required."
+            },
+            {
+              "question": "Why can't I put a logo directly on top of the barcode lines?",
+              "answer": "Unlike a QR code, a 1D barcode has no error-correction redundancy at all — every bar and space is load-bearing. Covering even a small part of the code can make specific digits unreadable, and a scanner has no spare data to reconstruct what's missing. That's exactly why this tool only offers to place a logo beside the code, never over it."
+            },
+            {
+              "question": "What's the actual difference between UPC-A and EAN-13?",
+              "answer": "EAN-13 is really UPC-A's superset: encode a UPC-A number as EAN-13 by adding a leading 0, and it decodes identically. UPC-A (12 digits) is the historical US/Canada retail standard; EAN-13 (13 digits) is the international standard used almost everywhere else, including by products sold in the US, since American scanners read EAN-13 too."
+            },
+            {
+              "question": "Why does Code 128 look so different from UPC-A or EAN-13?",
+              "answer": "Because it solves a different problem. UPC-A and EAN-13 exist purely to encode a specific numeric product identifier for retail checkout. Code 128 can encode letters, punctuation, and digits in one code, at any length, which is why it's the default choice for shipping labels, warehouse pallet IDs, and internal tracking codes rather than retail products."
+            },
+            {
+              "question": "Why does the barcode need a check digit or checksum at all?",
+              "answer": "Because printing and scanning aren't perfect — a smudge, a fold, or a low-quality printer can corrupt part of a code. The check digit is calculated from every other digit using a fixed formula; if a scanner reads a corrupted code, the digit it reads almost certainly won't match what the formula predicts, so it rejects the scan instead of ringing up the wrong product."
+            },
+            {
+              "question": "Is my data uploaded anywhere when I use this tool, including the logo?",
+              "answer": "No — encoding the barcode and placing an uploaded logo image both happen entirely inside your browser. Nothing you enter or upload here is transmitted anywhere."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A 1949 Patent for Concentric Circles",
+            "paragraph": "The barcode's origin story starts with an overheard conversation: in 1948, graduate student Bernard Silver overheard a supermarket executive asking a Drexel Institute dean for a way to automatically read product information at checkout. Silver teamed up with fellow student Norman Joseph Woodland, who — drawing on Morse code he'd learned as a Boy Scout — sketched an early design using dots and dashes, then reworked it into a pattern of concentric circles so it could be scanned from any direction. They filed a patent in 1949, granted in 1952, and sold it to Philco for just $15,000 — genuinely the only money either inventor made directly from an idea that would go on to reshape global retail."
+          },
+          "modernDevelopments": {
+            "title": "From a Bullseye to a Pack of Gum",
+            "paragraph": "Woodland and Silver's original concentric-circle design was never mass-produced — the linear barcode actually used today was designed separately, starting in 1969, by IBM engineer George Laurer, who (with Woodland, by then also at IBM, and mathematician David Savir) proposed the striped Universal Product Code adopted by the US grocery industry's Symbol Selection Committee in 1973. The first UPC-scanned retail sale happened on June 26, 1974, when a pack of Wrigley's Juicy Fruit gum was rung up at a Marsh supermarket in Troy, Ohio. Europe adopted a compatible 13-digit extension, EAN, in 1976, and the two standards are now governed globally by GS1 — formed in 2005 from the merger of the original US and European numbering authorities."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Barcode systems sit at the intersection of data encoding and physical logistics, which is why this path draws on Supply Chain Management rather than Computer Science alone. Here are the top 5 globally in the QS Business Master's Rankings — Supply Chain Management 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "University of Michigan (Ross)",
+                "note": "Ranked #1 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "url": "https://michiganross.umich.edu/recruit-at-ross/one-year-masters/master-of-supply-chain-management",
+                "online": "No — Ross's one-year Master of Supply Chain Management is an in-person program on its Ann Arbor campus."
+              },
+              {
+                "name": "WU Vienna (Vienna University of Economics and Business)",
+                "note": "Ranked #2 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "url": "https://www.wu.ac.at/en/programs/masters-programs/supply-chain-management/overview",
+                "online": "No — WU's MSc in Supply Chain Management is an in-person program on its Vienna campus."
+              },
+              {
+                "name": "Erasmus University Rotterdam (RSM)",
+                "note": "Ranked #3 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "url": "https://www.eur.nl/en/master/supply-chain-management",
+                "online": "No — RSM's Master Supply Chain Management is a full-time, in-person program on its Woudestein campus."
+              },
+              {
+                "name": "emlyon business school",
+                "note": "Ranked #4 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "url": "https://em-lyon.com/en/student/master/msc-supply-chain-operation-management",
+                "online": "No — emlyon's MSc in Supply Chain & Operations Management is full-time and in-person, based in Lyon with an international seminar component."
+              },
+              {
+                "name": "University of Southern California (Marshall)",
+                "note": "Ranked #5 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "url": "https://www.marshall.usc.edu/programs/specialized-masters-programs/master-science-global-supply-chain-management",
+                "online": "Yes — USC Marshall's MS in Global Supply Chain Management is offered both on-campus in Los Angeles and as a fully online program for working professionals, same degree either way."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Business Administration with a Major in Supply Chain Management through its School of Business Administration.",
+                "url": "https://www.aus.edu/sba/department-of-marketing-and-information-systems/bachelor-of-science-in-business-administration-major-in-supply-chain-management",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "ISO/IEC 15420:2025 — Information technology — Automatic identification and data capture techniques — EAN/UPC bar code symbology specification. International Organization for Standardization.",
+          "note": "The official international standard defining the EAN/UPC barcode symbology this tool generates. Code 128 is separately standardized as ISO/IEC 15417. Actual number registration and ownership is governed by GS1's General Specifications, not by these symbology standards themselves.",
+          "url": "https://www.iso.org/standard/84892.html",
+          "readOriginal": "View the Official Standard"
+        }
+      }
+    },
     "word-counter": {
       "title": "Word & Character Counter",
       "description": "Count words, characters, sentences, and estimate reading time.",

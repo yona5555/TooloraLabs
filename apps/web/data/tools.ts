@@ -232,6 +232,14 @@ export const tools: Tool[] = [
     keywords: ["json", "formatter", "developer"],
   },
   {
+    slug: "barcode-generator",
+    title: "Barcode Generator",
+    category: "developer-tools",
+    description: "Generate UPC-A, EAN-13, and Code 128 barcodes with a downloadable image and an optional logo alongside.",
+    featured: true,
+    keywords: ["barcode", "upc", "ean", "code128", "gs1", "generator"],
+  },
+  {
     slug: "password-generator",
     title: "Password Generator",
     category: "developer-tools",

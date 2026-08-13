@@ -39,6 +39,8 @@ import UnitConverterTool from "@/components/tools/unit-converter/UnitConverterTo
 import UnitEducation from "@/components/tools/unit-converter/UnitEducation";
 import QRCodeGeneratorTool from "@/components/tools/qr-code-generator/QRCodeGeneratorTool";
 import QREducation from "@/components/tools/qr-code-generator/QREducation";
+import BarcodeGeneratorTool from "@/components/tools/barcode-generator/BarcodeGeneratorTool";
+import BarcodeEducation from "@/components/tools/barcode-generator/BarcodeEducation";
 import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
 import ImageEducation from "@/components/tools/image-converter/ImageEducation";
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
@@ -279,6 +281,9 @@ export default async function ToolPage({
     case "qr-code-generator":
       component = <QRCodeGeneratorTool education={<QREducation />} />;
       break;
+    case "barcode-generator":
+      component = <BarcodeGeneratorTool education={<BarcodeEducation />} />;
+      break;
     case "image-converter":
       component = <ImageConverterTool education={<ImageEducation />} />;
       break;
@@ -336,7 +341,8 @@ export default async function ToolPage({
     slug === "json-formatter" ||
     slug === "password-generator" ||
     slug === "image-converter" ||
-    slug === "csv-json-converter";
+    slug === "csv-json-converter" ||
+    slug === "barcode-generator";
 
   const jsonLd = {
     "@context": "https://schema.org",
