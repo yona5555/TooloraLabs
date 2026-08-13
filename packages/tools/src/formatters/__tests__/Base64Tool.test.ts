@@ -44,4 +44,39 @@ describe("Base64Tool", () => {
     expect(output.success).toBe(false);
     expect(output.data.result).toBe("");
   });
+
+  it("reports input/output byte counts on encode", () => {
+    const output = tool.execute({ text: "Hello, World!", mode: "encode" }, ctx);
+    expect(output.data.inputBytes).toBe(13);
+    expect(output.data.outputBytes).toBe(20);
+  });
+
+  it("encodes using the URL-safe alphabet without padding", () => {
+    const output = tool.execute(
+      { text: "subjects?_d=1", mode: "encode", variant: "urlSafe" },
+      ctx
+    );
+    expect(output.data.result).not.toMatch(/[+/=]/);
+  });
+
+  it("round-trips through the URL-safe variant", () => {
+    const original = "hello 🎉 world?";
+    const encoded = tool.execute(
+      { text: original, mode: "encode", variant: "urlSafe" },
+      ctx
+    );
+    const decoded = tool.execute(
+      { text: encoded.data.result, mode: "decode", variant: "urlSafe" },
+      ctx
+    );
+    expect(decoded.data.result).toBe(original);
+  });
+
+  it("rejects standard-alphabet characters ('+') when decoding as URL-safe", () => {
+    const output = tool.execute(
+      { text: "a+b", mode: "decode", variant: "urlSafe" },
+      ctx
+    );
+    expect(output.success).toBe(false);
+  });
 });

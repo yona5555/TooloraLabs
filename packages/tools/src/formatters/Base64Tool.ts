@@ -2,20 +2,30 @@ import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseTool } from "@tooloralabs/sdk";
 
 export type Base64Mode = "encode" | "decode";
+export type Base64Variant = "standard" | "urlSafe";
 
 export type Base64ToolInput = {
   text: string;
   mode: Base64Mode;
+  variant?: Base64Variant;
 };
 
 export type Base64ToolOutput = {
   result: string;
+  inputBytes: number;
+  outputBytes: number;
 };
 
-const BASE64_CHARS =
+const STANDARD_CHARS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+const URL_SAFE_CHARS =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
-function utf8Encode(input: string): number[] {
+function charsFor(variant: Base64Variant): string {
+  return variant === "urlSafe" ? URL_SAFE_CHARS : STANDARD_CHARS;
+}
+
+export function utf8Encode(input: string): number[] {
   const bytes: number[] = [];
   for (const char of input) {
     const code = char.codePointAt(0) ?? 0;
@@ -41,7 +51,7 @@ function utf8Encode(input: string): number[] {
   return bytes;
 }
 
-function utf8Decode(bytes: number[]): string {
+export function utf8Decode(bytes: number[]): string {
   let result = "";
   let i = 0;
   while (i < bytes.length) {
@@ -76,33 +86,40 @@ function utf8Decode(bytes: number[]): string {
   return result;
 }
 
-function bytesToBase64(bytes: number[]): string {
+export function bytesToBase64(bytes: number[], variant: Base64Variant = "standard"): string {
+  const chars = charsFor(variant);
+  const usePadding = variant === "standard";
   let result = "";
   for (let i = 0; i < bytes.length; i += 3) {
     const b1 = bytes[i];
     const b2 = bytes[i + 1];
     const b3 = bytes[i + 2];
     const triplet = (b1 << 16) | ((b2 ?? 0) << 8) | (b3 ?? 0);
-    result += BASE64_CHARS[(triplet >> 18) & 0x3f];
-    result += BASE64_CHARS[(triplet >> 12) & 0x3f];
-    result += b2 !== undefined ? BASE64_CHARS[(triplet >> 6) & 0x3f] : "=";
-    result += b3 !== undefined ? BASE64_CHARS[triplet & 0x3f] : "=";
+    result += chars[(triplet >> 18) & 0x3f];
+    result += chars[(triplet >> 12) & 0x3f];
+    result += b2 !== undefined ? chars[(triplet >> 6) & 0x3f] : usePadding ? "=" : "";
+    result += b3 !== undefined ? chars[triplet & 0x3f] : usePadding ? "=" : "";
   }
   return result;
 }
 
-function base64ToBytes(base64: string): number[] | null {
-  if (base64.length === 0 || base64.length % 4 !== 0) {
+export function base64ToBytes(base64: string, variant: Base64Variant = "standard"): number[] | null {
+  const chars = charsFor(variant);
+  const clean = base64.replace(/=+$/, "");
+
+  if (variant === "standard" && base64.length % 4 !== 0) {
+    return null;
+  }
+  if (clean.length === 0) {
     return null;
   }
 
-  const clean = base64.replace(/=+$/, "");
   const bytes: number[] = [];
   let buffer = 0;
   let bits = 0;
 
   for (const char of clean) {
-    const value = BASE64_CHARS.indexOf(char);
+    const value = chars.indexOf(char);
     if (value === -1) {
       return null;
     }
@@ -123,38 +140,47 @@ export class Base64Tool extends BaseTool<Base64ToolInput, Base64ToolOutput> {
     slug: "base64-tool",
     name: "Base64 Encoder/Decoder",
     category: "developer-tools",
-    description: "Encode text to Base64 or decode Base64 back to text.",
-    version: "1.0.0",
+    description:
+      "Encode text or files to Base64 (standard or URL-safe) or decode Base64 back to text or a downloadable file.",
+    version: "1.1.0",
   };
 
   execute(
     input: Base64ToolInput,
     _context: ToolContext
   ): ToolResult<Base64ToolOutput> {
+    const variant = input.variant ?? "standard";
+
     if (input.mode === "encode") {
       const bytes = utf8Encode(input.text);
-      return { success: true, data: { result: bytesToBase64(bytes) }, metadata: {} };
+      const result = bytesToBase64(bytes, variant);
+      return {
+        success: true,
+        data: { result, inputBytes: bytes.length, outputBytes: result.length },
+        metadata: {},
+      };
     }
 
-    const bytes = base64ToBytes(input.text.trim());
+    const bytes = base64ToBytes(input.text.trim(), variant);
     if (bytes === null) {
       return {
         success: false,
-        data: { result: "" },
+        data: { result: "", inputBytes: 0, outputBytes: 0 },
         metadata: { error: "Invalid Base64 input" },
       };
     }
 
     try {
+      const result = utf8Decode(bytes);
       return {
         success: true,
-        data: { result: utf8Decode(bytes) },
+        data: { result, inputBytes: input.text.trim().length, outputBytes: bytes.length },
         metadata: {},
       };
     } catch (error) {
       return {
         success: false,
-        data: { result: "" },
+        data: { result: "", inputBytes: 0, outputBytes: 0 },
         metadata: {
           error: error instanceof Error ? error.message : "Invalid Base64 input",
         },
