@@ -23,6 +23,15 @@ describe("InvoiceGenerator", () => {
     expect(r.data.discountAmount).toBe(0);
     expect(r.data.taxAmount).toBe(78);
     expect(r.data.total).toBe(598);
+    expect(r.data.currency).toBe("USD");
+  });
+
+  it("echoes a custom currency code", () => {
+    const r = tool.execute(
+      { items: [{ description: "X", quantity: 1, unitPrice: 10 }], taxRate: 0, currency: "EUR" },
+      context
+    );
+    expect(r.data.currency).toBe("EUR");
   });
 
   it("applies a discount before computing tax", () => {

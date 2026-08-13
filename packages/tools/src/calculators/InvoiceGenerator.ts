@@ -11,6 +11,7 @@ export type InvoiceGeneratorInput = {
   items: InvoiceLineItem[];
   taxRate: number;
   discountPercent?: number;
+  currency?: string;
 };
 
 export type InvoiceLineTotal = InvoiceLineItem & { total: number };
@@ -22,6 +23,7 @@ export type InvoiceGeneratorOutput = {
   taxableAmount: number;
   taxAmount: number;
   total: number;
+  currency: string;
 };
 
 function round(value: number): number {
@@ -38,13 +40,14 @@ export class InvoiceGenerator extends BaseCalculator<
     name: "Invoice Generator",
     category: "calculators",
     description: "Build an itemized invoice with subtotal, discount, and tax.",
-    version: "1.0.0",
+    version: "1.1.0",
   };
 
   execute(
     input: InvoiceGeneratorInput,
     _context: ToolContext
   ): ToolResult<InvoiceGeneratorOutput> {
+    const currency = input.currency || "USD";
     const empty: InvoiceGeneratorOutput = {
       lines: [],
       subtotal: 0,
@@ -52,6 +55,7 @@ export class InvoiceGenerator extends BaseCalculator<
       taxableAmount: 0,
       taxAmount: 0,
       total: 0,
+      currency,
     };
 
     if (!input.items || input.items.length === 0) {
@@ -90,7 +94,7 @@ export class InvoiceGenerator extends BaseCalculator<
 
     return {
       success: true,
-      data: { lines, subtotal, discountAmount, taxableAmount, taxAmount, total },
+      data: { lines, subtotal, discountAmount, taxableAmount, taxAmount, total, currency },
       metadata: {},
     };
   }

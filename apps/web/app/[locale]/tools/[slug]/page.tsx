@@ -53,6 +53,7 @@ import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSi
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
 import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
+import InvoiceEducation from "@/components/tools/invoice-generator/InvoiceEducation";
 import InventoryValuationTool from "@/components/tools/inventory-valuation-calculator/InventoryValuationTool";
 import BreakEvenCalculatorTool from "@/components/tools/break-even-calculator/BreakEvenCalculatorTool";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
@@ -309,7 +310,7 @@ export default async function ToolPage({
       component = <DuplicateLineRemoverTool />;
       break;
     case "invoice-generator":
-      component = <InvoiceGeneratorTool />;
+      component = <InvoiceGeneratorTool education={<InvoiceEducation />} />;
       break;
     case "inventory-valuation-calculator":
       component = <InventoryValuationTool />;
@@ -342,7 +343,8 @@ export default async function ToolPage({
     slug === "password-generator" ||
     slug === "image-converter" ||
     slug === "csv-json-converter" ||
-    slug === "barcode-generator";
+    slug === "barcode-generator" ||
+    slug === "invoice-generator";
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -5090,8 +5090,40 @@
     },
     "invoice-generator": {
       "title": "Invoice Generator",
-      "description": "Build an itemized invoice with subtotal, discount, and tax.",
+      "description": "Build an itemized invoice with a live preview, multi-currency support, and one-click print/PDF export.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Live Preview",
+        "placeholder": "Add a description and price to at least one item to see the invoice here.",
+        "noNumber": "Invoice",
+        "checklist": {
+          "title": "What Makes an Invoice Valid",
+          "intro": "Requirements vary by country, but most jurisdictions expect an invoice to include:",
+          "items": [
+            "A unique, sequential invoice number — never reused, even for a cancelled invoice.",
+            "The full legal name and address of both the seller and the buyer.",
+            "A clear issue date and, separately, a payment due date.",
+            "An itemized description of each good or service, not just a lump sum.",
+            "The tax rate applied and the tax amount shown separately from the subtotal.",
+            "The currency the amounts are stated in, especially for cross-border invoices."
+          ]
+        }
+      },
       "form": {
+        "inputTitle": "Invoice Details",
+        "fromLabel": "From",
+        "fromPlaceholder": "Your business name",
+        "toLabel": "Bill To",
+        "toPlaceholder": "Client name",
+        "invoiceNumberLabel": "Invoice Number",
+        "currencyLabel": "Currency",
+        "issueDateLabel": "Issue Date",
+        "dueDateLabel": "Due Date",
+        "itemsLabel": "Items",
         "itemDescription": "Description",
         "itemDescriptionPlaceholder": "Item or service",
         "itemQuantity": "Quantity",
@@ -5119,6 +5151,119 @@
         "invalidItem": "Each item needs a description, a quantity greater than 0, and a non-negative unit price.",
         "invalidTaxRate": "Tax rate must not be negative.",
         "invalidDiscount": "Discount must be between 0 and 100%."
+      },
+      "education": {
+        "intro": {
+          "title": "How Invoice Totals Actually Add Up",
+          "paragraph1": "An invoice's math follows a fixed order that matters: every line item's quantity times its unit price is summed into a subtotal, a discount (if any) is subtracted from that subtotal first, and only then is tax calculated — on the discounted amount, not the original subtotal. Applying tax before the discount, or applying it to the pre-discount subtotal, produces a different, incorrect total, which is exactly the kind of ordering mistake this tool's calculation logic is built to never make.",
+          "paragraph2": "The distinction between an invoice's issue date and its due date is also more than a formality: the gap between them (this tool defaults to 14 days, but 30 is common under the term \"Net 30\") is the actual interest-free credit period a seller is extending to a buyer, which is why standard payment terms like \"Net 30\" or \"Net 60\" are really shorthand for a specific amount of short-term financing built into the transaction.",
+          "diagram": {
+            "subtotalLabel": "Subtotal",
+            "discountLabel": "Discount",
+            "taxLabel": "Tax",
+            "totalLabel": "Total",
+            "caption": "The fixed order of invoice math: discount is subtracted from the subtotal first, and tax is calculated on what's left — never on the original subtotal."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Two worked examples showing the exact order discount and tax are applied in.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "2 items: 10×$50 design work, 1×$20 hosting, 15% tax, no discount", "result": "Subtotal $520.00, tax $78.00, total $598.00" },
+            { "scenario": "1 item: $1,000 consulting, 20% discount, 10% tax", "result": "Discount $200.00 → taxable $800.00 → tax $80.00 → total $880.00" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is a discount applied before or after tax?",
+              "answer": "Before — a discount reduces the subtotal first, and tax is then calculated on that already-discounted amount. Applying tax to the original subtotal and then subtracting the discount produces a different (and incorrect) total whenever both a discount and a tax rate are in play, which is why the order genuinely matters."
+            },
+            {
+              "question": "What's the difference between an invoice and a receipt?",
+              "answer": "An invoice is a request for payment, issued before money changes hands, and it establishes a debt the buyer owes. A receipt is proof that payment has already been received. The same document can't correctly serve as both at once — a paid invoice is typically followed by a separate receipt, not relabeled as one."
+            },
+            {
+              "question": "What does \"Net 30\" actually mean?",
+              "answer": "It means full payment is due within 30 days of the invoice's issue date — not 30 days after the goods or services were delivered, and not 30 calendar days from an arbitrary date. \"Net 15\" and \"Net 60\" follow the same logic with a different day count; the \"Net\" simply signals no early-payment discount applies to the stated amount."
+            },
+            {
+              "question": "Why does every invoice need a unique invoice number?",
+              "answer": "It's the specific reference both the buyer's and seller's accounting systems use to match a payment to the exact invoice it settles, and in most tax jurisdictions, sequential invoice numbering is also a compliance requirement that makes it harder to conceal deleted or backdated invoices during an audit."
+            },
+            {
+              "question": "Is this tool's invoice legally compliant for my country?",
+              "answer": "This tool covers the fields most jurisdictions commonly require, but exact legal requirements vary by country — some require a tax registration number, a specific VAT breakdown, or a particular language. Treat this as a strong starting template, not a substitute for checking your local tax authority's specific invoicing rules."
+            },
+            {
+              "question": "Why show the currency explicitly instead of assuming everyone uses the same one?",
+              "answer": "Because an invoice with an ambiguous currency is a real, common source of payment disputes in cross-border business — \"$500\" alone doesn't specify US, Canadian, Australian, or several other dollars, and stating the currency code (USD, EUR, AED) removes that ambiguity entirely."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "5,000 Years Before the First Spreadsheet",
+            "paragraph": "The invoice is one of the oldest surviving forms of business documentation: archaeologists have recovered clay tablets from the Sumerian city of Uruk, dating to roughly 3400–3300 BCE, recording deliveries of grain, wool, and beer to temple estates — administrative proof that a transaction had actually taken place. These tablets predate even the earliest fully developed writing systems, meaning record-keeping needs are part of what drove writing itself to be invented, not the other way around. The core function hasn't changed in five millennia: a durable, portable record establishing what was owed, by whom, for what."
+          },
+          "modernDevelopments": {
+            "title": "From Paper Ledgers to Structured Data",
+            "paragraph": "For most of that history, an invoice was whatever the seller wrote down — free-form, unstructured, and readable only by a human. That changed with electronic invoicing standards like UBL (Universal Business Language), standardized internationally as ISO/IEC 19845, which defines a strict, machine-readable XML structure for an invoice's fields — issuer, buyer, line items, tax breakdown — so accounting software on both ends of a transaction can process it automatically without a human re-typing anything. Government-mandated e-invoicing built on standards like this is now routine across the EU, and in Turkey, Peru, Colombia, and Panama, among others."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Invoicing, billing cycles, and revenue recognition are studied within Accounting & Finance programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
+                "online": "No — HBS's MBA, which houses the Accounting & Management unit's teaching, is in-person on Harvard's Boston campus; separate Executive Education offerings include some online courses, not this program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT Sloan)",
+                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
+                "online": "No — MIT Sloan's Master of Finance is an in-person, 12- or 18-month program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University (Stanford GSB)",
+                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
+                "online": "No — Stanford GSB's Accounting area teaches through its in-person MBA, MSx, and PhD programs; the school's online offerings are limited to non-degree executive courses."
+              },
+              {
+                "name": "University of Oxford (Saïd Business School)",
+                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
+                "online": "No — the Oxford MBA, whose core curriculum includes accounting and finance, is a full-time in-person program; Saïd's online offerings are separate short courses, not this degree."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
+                "online": "No — Booth's MBA programs (Full-Time, Evening, Weekend, Executive) are in-person or hybrid on-campus formats; there is no fully online Booth MBA."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Business Administration with a Major in Accounting through its School of Business Administration.",
+                "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "ISO/IEC 19845:2015 — Information technology — Universal business language version 2.1 (UBL v2.1). International Organization for Standardization.",
+          "note": "The international standard defining a structured, machine-readable XML format for invoices and related business documents — the basis for most mandatory e-invoicing regimes now in force across the EU and several other countries.",
+          "url": "https://www.iso.org/standard/66370.html",
+          "readOriginal": "View the Official Standard"
+        }
       }
     },
     "inventory-valuation-calculator": {
