@@ -5470,14 +5470,45 @@
     },
     "file-name-sanitizer": {
       "title": "File Name Sanitizer",
-      "description": "Clean up file names for safe use across operating systems and upload systems.",
+      "description": "Clean up file names for safe use across Windows, macOS, and Linux — with a live report of exactly what was changed and why.",
+      "nav": {
+        "tool": "Sanitizer",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Safe File Name",
+        "placeholder": "Enter a file name to see the cleaned-up, cross-platform-safe version here.",
+        "changesTitle": "What Was Changed",
+        "noChanges": "Nothing needed changing — this file name was already safe.",
+        "changeLabels": {
+          "DIACRITICS": "Accented characters were transliterated to plain ASCII.",
+          "ILLEGAL_CHARS": "Characters not allowed on Windows/macOS/Linux were removed.",
+          "WHITESPACE": "Spaces were replaced with your chosen separator.",
+          "TRAILING_DOTS_SPACES": "Trailing dots or spaces were removed (Windows forbids these).",
+          "RESERVED_NAME": "This matched a Windows-reserved device name, so a suffix was added.",
+          "TRUNCATED": "The name was too long and was shortened to fit the limit."
+        },
+        "platformRules": {
+          "title": "Cross-Platform Naming Rules",
+          "intro": "The specific restrictions this tool guards against, by platform.",
+          "rows": [
+            { "platform": "Windows", "rule": "Forbids < > : \" / \\ | ? * and control characters; forbids trailing dots/spaces; reserves CON, PRN, AUX, NUL, COM1–9, and LPT1–9." },
+            { "platform": "macOS", "rule": "Forbids the colon (:) and a leading dot creates a hidden file; the forward slash (/) is reserved as a path separator." },
+            { "platform": "Linux / Unix", "rule": "Permits almost any byte except NUL and the forward slash (/); a leading dot creates a hidden file by convention." },
+            { "platform": "Most filesystems", "rule": "Cap individual file names at 255 bytes/characters, regardless of operating system." }
+          ]
+        }
+      },
       "form": {
+        "inputTitle": "Your File Name",
         "inputLabel": "File name",
         "inputPlaceholder": "My Resume Final.PDF",
         "separator": "Separator",
         "separatorDash": "Dash (-)",
         "separatorUnderscore": "Underscore (_)",
         "lowercase": "Lowercase",
+        "transliterate": "Transliterate accents to ASCII (café → cafe)",
         "sanitize": "Sanitize",
         "copy": "Copy",
         "copied": "Copied!"
@@ -5485,6 +5516,120 @@
       "errors": {
         "required": "Please enter a file name.",
         "invalidResult": "Nothing valid remains after cleaning this file name."
+      },
+      "education": {
+        "intro": {
+          "title": "Why File Names Need Sanitizing at All",
+          "paragraph1": "A file name isn't just a label — on most operating systems, it's also data the file system's own command interpreter can parse, which is exactly why certain characters are forbidden. A forward slash or backslash means a path separator, a colon can mean a drive letter or an alternate data stream, and a question mark or asterisk means a wildcard pattern — so a file literally named \"invoice?.pdf\" would be ambiguous or outright rejected by the very systems meant to store it. Sanitizing a file name means stripping or replacing exactly these structurally meaningful characters, while leaving everything else about the name intact.",
+          "paragraph2": "Beyond individual characters, whole file names can be reserved outright: Windows blocks CON, PRN, AUX, NUL, and the numbered COM and LPT ports as file names, in any case and with or without an extension, because these strings are historically bound to physical devices at the operating-system level, not to the file system. A file name ending in a dot or space is silently stripped by Windows' own APIs, which can create confusing mismatches between what a user types and what actually gets saved. This tool's \"what changed\" report exists specifically to make each of these otherwise invisible corrections visible.",
+          "diagram": {
+            "rawLabel": "Raw Name",
+            "normalizeLabel": "Strip Illegal\nChars + Spaces",
+            "checkLabel": "Check Reserved\nNames + Length",
+            "safeLabel": "Safe Name",
+            "caption": "The sanitization pipeline: a raw file name is normalized (illegal characters and whitespace handled), checked against reserved names and length limits, and only then considered safe to use everywhere."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "How different problem file names get resolved.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "\"café résumé.pdf\" with transliteration enabled", "result": "cafe-resume.pdf" },
+            { "scenario": "\"CON.txt\" — a Windows-reserved device name", "result": "con-file.txt" },
+            { "scenario": "\"notes..\" — trailing dots", "result": "notes" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why replace spaces with dashes instead of just removing them?",
+              "answer": "Removing spaces entirely would merge words together and make the name harder to read (\"myfile\" instead of \"my-file\"), while a separator preserves the word boundaries. Dashes and underscores are also both universally safe across every major operating system and are the convention most web upload systems and URLs expect."
+            },
+            {
+              "question": "What characters are actually illegal in file names, and why these specific ones?",
+              "answer": "On Windows: < > : \" / \\ | ? * and any control character (ASCII 0–31). Each one is reserved for a structural reason — / and \\ are path separators, : can denote a drive letter, ? and * are wildcard characters in command shells, and < > | are shell redirection and piping operators. macOS and Linux are far more permissive, but this tool sanitizes to the strictest common set so the result is guaranteed safe everywhere."
+            },
+            {
+              "question": "Why does \"CON.txt\" get renamed instead of just cleaned up?",
+              "answer": "Because CON isn't an illegal-character problem — every character in it is perfectly valid. The entire base name is reserved by Windows as an alias for the system console device, regardless of extension or case, so \"con.txt\", \"CON.txt\", and even plain \"con\" are all blocked outright. The only fix is renaming the base name itself, which is why this tool appends a suffix rather than trying to strip anything."
+            },
+            {
+              "question": "What's the 255-character limit about, and does it apply to me?",
+              "answer": "255 is the maximum file name length on most modern file systems (NTFS, ext4, APFS), measured per path component, not the full path. Most everyday file names never come close to this limit, but names auto-generated by exporting long titles, timestamps, or metadata into a file name can occasionally exceed it — this tool truncates while always preserving the extension."
+            },
+            {
+              "question": "Why would I want to transliterate accented characters?",
+              "answer": "Accented and non-Latin characters (é, ñ, ü, etc.) are technically valid in modern file names on every major OS, but they can still cause real problems: older tools, certain command-line environments, and some upload or CDN systems handle non-ASCII file names inconsistently or reject them outright. Transliterating to plain ASCII trades a small amount of readability for guaranteed compatibility with the widest possible range of systems."
+            },
+            {
+              "question": "Does this tool rename my actual file, or just suggest a new name?",
+              "answer": "This tool only computes and displays what a safe version of the name would look like — it never touches any real file, since everything runs on text you type or paste directly in your browser. You still need to rename the actual file yourself using the suggested result."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "Why \"CON\" and \"PRN\" Are Still Forbidden Today",
+            "paragraph": "The reserved device names this tool checks for — CON, PRN, AUX, NUL, and the numbered COM and LPT ports — trace back to early MS-DOS, where the operating system needed a way to let a single command work on either a real file or a physical device: typing \"copy report.txt PRN\" would send a file straight to the printer, using PRN as a stand-in name for whatever printer device was attached, in exactly the same command syntax used for copying between files. For that redirection trick to work reliably, these device names had to be permanently blocked as file names at the operating-system level, everywhere, so a file could never be confused for a device."
+          },
+          "modernDevelopments": {
+            "title": "From 8.3 Names to Long, Unicode-Aware File Systems",
+            "paragraph": "Early DOS file systems (FAT) restricted every file name to the rigid \"8.3\" format — 8 characters, a dot, and a 3-character extension, uppercase only — which Windows 95's VFAT extension finally lifted in 1995, introducing the long file names and lowercase support taken for granted today. Modern file systems like NTFS and APFS support names up to 255 characters with full Unicode, but the legacy restrictions — the reserved device names, the illegal-character set, the ban on trailing dots — were kept for backward compatibility rather than removed, which is exactly why a modern sanitizer like this one still needs to check for rules that trace back over four decades."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "File systems, operating system design, and cross-platform compatibility — the exact concepts this tool navigates — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
+                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "Microsoft Corporation. \"Naming Files, Paths, and Namespaces.\" Windows Win32 API documentation.",
+          "note": "The official Microsoft reference defining the illegal characters and reserved device names (CON, PRN, AUX, NUL, COM1–9, LPT1–9) this tool checks against — the strictest, and therefore most broadly compatible, of the major platforms' naming rules.",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
+          "readOriginal": "Read the Official Documentation"
+        }
       }
     },
     "duplicate-line-remover": {
