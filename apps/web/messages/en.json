@@ -5634,19 +5634,158 @@
     },
     "duplicate-line-remover": {
       "title": "Duplicate Line Remover",
-      "description": "Remove duplicate lines from a list or file's text content.",
+      "description": "Remove duplicate lines from a list, with a live report of exactly which lines repeated and how often — live as you type.",
+      "nav": {
+        "tool": "Remover",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "Cleaned List",
+        "placeholder": "Paste a list to see it deduplicated, with a breakdown of every repeat, here.",
+        "totalLines": "Total Lines",
+        "uniqueLines": "Unique Lines",
+        "removedCount": "Removed",
+        "duplicatesTitle": "Duplicates Found",
+        "glossary": {
+          "title": "Options Explained",
+          "intro": "What each setting actually changes.",
+          "rows": [
+            { "term": "Case-sensitive", "meaning": "When on, \"Apple\" and \"apple\" count as different lines. When off, they're treated as the same duplicate." },
+            { "term": "Sort lines", "meaning": "Alphabetizes the cleaned output. Leave off to preserve your original line order." },
+            { "term": "Trim whitespace", "meaning": "Removes leading/trailing spaces before comparing lines, so \" apple\" and \"apple\" are treated as duplicates. Turn off to compare lines byte-for-byte." },
+            { "term": "Keep first / last", "meaning": "Which copy of a repeated line survives in the output, and at which position — the first time it appeared, or the last." }
+          ]
+        }
+      },
       "form": {
+        "inputTitle": "Your List",
         "inputLabel": "Input",
         "inputPlaceholder": "Paste your list here, one item per line...",
         "caseSensitive": "Case-sensitive",
         "sortLines": "Sort lines",
+        "trimWhitespace": "Trim whitespace",
+        "keepOccurrence": "Keep occurrence",
+        "keepFirst": "First",
+        "keepLast": "Last",
         "removeDuplicates": "Remove Duplicates",
-        "outputLabel": "{count, plural, =0 {No duplicates removed} one {# duplicate removed} other {# duplicates removed}}",
         "copy": "Copy",
         "copied": "Copied!"
       },
       "errors": {
         "required": "Please enter some text."
+      },
+      "education": {
+        "intro": {
+          "title": "How Deduplication Actually Works",
+          "paragraph1": "The naive way to find duplicates — compare every line against every other line — takes time that grows quadratically with the list's size: doubling a list's length roughly quadruples the comparison work, which becomes impractical past a few thousand lines. A hash-based approach sidesteps this entirely by keeping a running set of every line already seen: for each new line, checking whether it's already in that set takes roughly constant time regardless of how large the set has grown, since a hash function converts the line's content directly into a lookup position rather than requiring a scan. This is exactly why deduplication tools, including this one, can process lists with tens of thousands of lines instantly rather than freezing.",
+          "paragraph2": "This also explains why the settings on this tool matter more than they might first appear. \"Case-sensitive\" and \"trim whitespace\" both control what actually goes into the hash function — turning case-sensitivity off means \"Apple\" and \"apple\" hash to the same bucket and collapse into one; trimming whitespace means \" apple\" and \"apple\" do the same. \"Keep first\" versus \"keep last\" doesn't change which lines are considered duplicates at all — only which single copy of each duplicate group is the one that survives into the output, and where it ends up positioned.",
+          "diagram": {
+            "inputLabel": "Input Lines",
+            "hashSetLabel": "Seen Set",
+            "outputLabel": "Output",
+            "caption": "How hash-based deduplication works: each input line is checked against a running set of lines already seen. A new line is added to both the set and the output; a repeat (struck through) is skipped entirely."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "How the same list resolves differently depending on the settings used.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "\"Apple, apple, Banana\" — case-sensitive on", "result": "All 3 lines kept — \"Apple\" and \"apple\" differ" },
+            { "scenario": "Same list — case-sensitive off", "result": "2 lines kept, 1 removed — treated as the same" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does this tool drop blank lines entirely?",
+              "answer": "Blank lines don't carry any meaningful content to deduplicate — a list of five blank lines isn't five different pieces of data, it's just formatting. Dropping them keeps the output focused purely on actual list items, rather than cluttering it with meaningless empty entries."
+            },
+            {
+              "question": "What's actually the difference between \"case-sensitive\" and \"trim whitespace\"?",
+              "answer": "Case-sensitivity controls letter casing specifically — whether \"Apple\" and \"apple\" are treated as the same line. Trimming whitespace is a separate, independent setting that controls leading and trailing spaces — whether \" apple\" and \"apple\" are treated as the same line. You can toggle either one independently of the other."
+            },
+            {
+              "question": "Why would I ever want to keep the last occurrence instead of the first?",
+              "answer": "Order often carries meaning: in a chronologically appended log or a list where later entries represent updates or corrections to earlier ones, the most recent occurrence of a repeated key is usually the one you actually want to keep, not the oldest. \"Keep last\" preserves that intent instead of defaulting to whichever came first."
+            },
+            {
+              "question": "Does sorting change which lines are considered duplicates?",
+              "answer": "No — sorting only reorders the already-deduplicated output alphabetically; it happens as a separate step after duplicate detection is complete, and has no effect at all on which lines were identified as repeats or which occurrence was kept."
+            },
+            {
+              "question": "Is this tool's line-ending handling reliable across Windows, macOS, and Linux files?",
+              "answer": "Yes — the three common line-ending conventions (\\r\\n on Windows, \\n on macOS/Linux, and the older \\r alone) are all recognized and normalized automatically, so pasting a list exported from any of these systems works correctly without manual cleanup."
+            },
+            {
+              "question": "Why does the duplicates list show a count next to each repeated line?",
+              "answer": "The count is the total number of times that exact line appeared in your original input, including the one copy that was kept — so a count of 3 means two copies were removed, not three. This makes it possible to spot which values were duplicated most heavily at a glance, not just that duplicates existed somewhere."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Punch-Card Sorting to the Hash Table",
+            "paragraph": "Before hash tables existed, finding duplicates in a large dataset meant sorting it first — an approach with roots in mechanical punch-card sorting machines used for census and business data processing in the early-to-mid 20th century, where physically ordering cards made matching records against each other practical at scale. The conceptual breakthrough that made lookup-based deduplication possible arrived with Hans Peter Luhn's internal IBM research in the 1950s on hashing, formally published by his colleague W. W. Peterson in 1957 — introducing the idea of computing a numeric address directly from a piece of data's content, rather than needing to search or sort for it."
+          },
+          "modernDevelopments": {
+            "title": "From Punch Cards to Instant Browser-Based Deduplication",
+            "paragraph": "Hashing became a foundational tool across computing well beyond deduplication — it underpins database indexing, caching systems, and cryptographic fingerprinting alike. What's changed most for a tool like this one specifically is where the computation happens: modern JavaScript engines run hash-based Set and Map operations fast enough to deduplicate substantial lists instantly inside a web browser, on data that never leaves the user's device — a capability that would have required a dedicated server-side batch process not many years ago."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Hashing, set data structures, and algorithmic complexity — the exact concepts this tool relies on — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
+                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific Reference",
+          "citation": "Peterson, W. W. (1957). Addressing for Random-Access Storage. IBM Journal of Research and Development, 1(2), 130–146.",
+          "note": "The first published paper describing hashing — computing a lookup address directly from data content — the exact technique this tool's near-instant duplicate detection relies on.",
+          "url": "https://doi.org/10.1147/rd.12.0130",
+          "readOriginal": "Read the Original Paper"
+        }
       }
     },
     "invoice-generator": {

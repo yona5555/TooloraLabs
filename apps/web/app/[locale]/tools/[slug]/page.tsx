@@ -56,6 +56,7 @@ import FileSizeEducation from "@/components/tools/file-size-converter/FileSizeEd
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
 import FileNameEducation from "@/components/tools/file-name-sanitizer/FileNameEducation";
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
+import DuplicateLineEducation from "@/components/tools/duplicate-line-remover/DuplicateLineEducation";
 import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
 import InvoiceEducation from "@/components/tools/invoice-generator/InvoiceEducation";
 import InventoryValuationTool from "@/components/tools/inventory-valuation-calculator/InventoryValuationTool";
@@ -313,7 +314,7 @@ export default async function ToolPage({
       component = <FileNameSanitizerTool education={<FileNameEducation />} />;
       break;
     case "duplicate-line-remover":
-      component = <DuplicateLineRemoverTool />;
+      component = <DuplicateLineRemoverTool education={<DuplicateLineEducation />} />;
       break;
     case "invoice-generator":
       component = <InvoiceGeneratorTool education={<InvoiceEducation />} />;
@@ -356,7 +357,8 @@ export default async function ToolPage({
     slug === "word-counter" ||
     slug === "base64-tool" ||
     slug === "file-size-converter" ||
-    slug === "file-name-sanitizer";
+    slug === "file-name-sanitizer" ||
+    slug === "duplicate-line-remover";
 
   const jsonLd = {
     "@context": "https://schema.org",

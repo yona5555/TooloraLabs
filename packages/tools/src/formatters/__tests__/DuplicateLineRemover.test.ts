@@ -39,4 +39,32 @@ describe("DuplicateLineRemover", () => {
     expect(output.data.removedCount).toBe(0);
     expect(output.data.result).toBe("a\nb\nc");
   });
+
+  it("reports total lines, unique lines, and a duplicates breakdown", () => {
+    const output = tool.execute({ text: "apple\nbanana\napple\napple\ncherry" }, ctx);
+    expect(output.data.totalLines).toBe(5);
+    expect(output.data.uniqueLines).toBe(3);
+    expect(output.data.duplicates).toEqual([{ line: "apple", count: 3 }]);
+  });
+
+  it("omits lines that only appear once from the duplicates breakdown", () => {
+    const output = tool.execute({ text: "a\nb\nc" }, ctx);
+    expect(output.data.duplicates).toEqual([]);
+  });
+
+  it("keeps the first occurrence's position by default", () => {
+    const output = tool.execute({ text: "a\nb\na" }, ctx);
+    expect(output.data.result).toBe("a\nb");
+  });
+
+  it("can keep the last occurrence instead, reordered to that position", () => {
+    const output = tool.execute({ text: "a\nb\na\nc", keepOccurrence: "last" }, ctx);
+    expect(output.data.result).toBe("b\na\nc");
+  });
+
+  it("can preserve internal whitespace instead of trimming when trimWhitespace is false", () => {
+    const output = tool.execute({ text: "apple \napple", trimWhitespace: false }, ctx);
+    expect(output.data.result).toBe("apple \napple");
+    expect(output.data.removedCount).toBe(0);
+  });
 });
