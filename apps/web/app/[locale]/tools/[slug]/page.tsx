@@ -55,6 +55,7 @@ import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/
 import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
 import InvoiceEducation from "@/components/tools/invoice-generator/InvoiceEducation";
 import InventoryValuationTool from "@/components/tools/inventory-valuation-calculator/InventoryValuationTool";
+import InventoryEducation from "@/components/tools/inventory-valuation-calculator/InventoryEducation";
 import BreakEvenCalculatorTool from "@/components/tools/break-even-calculator/BreakEvenCalculatorTool";
 import BreakEvenEducation from "@/components/tools/break-even-calculator/BreakEvenEducation";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
@@ -314,7 +315,7 @@ export default async function ToolPage({
       component = <InvoiceGeneratorTool education={<InvoiceEducation />} />;
       break;
     case "inventory-valuation-calculator":
-      component = <InventoryValuationTool />;
+      component = <InventoryValuationTool education={<InventoryEducation />} />;
       break;
     case "break-even-calculator":
       component = <BreakEvenCalculatorTool education={<BreakEvenEducation />} />;
@@ -346,7 +347,8 @@ export default async function ToolPage({
     slug === "csv-json-converter" ||
     slug === "barcode-generator" ||
     slug === "invoice-generator" ||
-    slug === "break-even-calculator";
+    slug === "break-even-calculator" ||
+    slug === "inventory-valuation-calculator";
 
   const jsonLd = {
     "@context": "https://schema.org",
