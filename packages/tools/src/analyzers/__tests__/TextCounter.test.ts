@@ -38,6 +38,10 @@ describe("TextCounter", () => {
       sentences: 0,
       paragraphs: 0,
       readingTimeMinutes: 0,
+      uniqueWords: 0,
+      averageWordLength: 0,
+      longestWord: "",
+      topKeywords: [],
     });
   });
 
@@ -46,5 +50,30 @@ describe("TextCounter", () => {
     const output = tool.execute({ text }, ctx);
     expect(output.data.words).toBe(201);
     expect(output.data.readingTimeMinutes).toBe(2);
+  });
+
+  it("counts unique words case-insensitively and ignoring punctuation", () => {
+    const output = tool.execute({ text: "Cat cat CAT, dog." }, ctx);
+    expect(output.data.uniqueWords).toBe(2);
+  });
+
+  it("computes average word length and the longest word", () => {
+    const output = tool.execute({ text: "a bb ccc" }, ctx);
+    expect(output.data.averageWordLength).toBe(2);
+    expect(output.data.longestWord).toBe("ccc");
+  });
+
+  it("ranks top keywords by frequency, excluding stopwords", () => {
+    const output = tool.execute(
+      { text: "the quick fox jumps over the lazy fox and the quick fox runs" },
+      ctx
+    );
+    expect(output.data.topKeywords[0]).toEqual({ word: "fox", count: 3 });
+    expect(output.data.topKeywords.map((k) => k.word)).not.toContain("the");
+  });
+
+  it("returns an empty keyword list when every word is a stopword", () => {
+    const output = tool.execute({ text: "the a an of to" }, ctx);
+    expect(output.data.topKeywords).toEqual([]);
   });
 });

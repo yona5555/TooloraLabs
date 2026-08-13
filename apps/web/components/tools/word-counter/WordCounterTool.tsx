@@ -1,71 +1,49 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber } from "@tooloralabs/core";
 import { TextCounter } from "@tooloralabs/tools";
-import CopyButton from "@/components/tool-ui/CopyButton";
+import { resolveDigitStyle } from "@/lib/digit-style";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionNav from "@/components/tool-ui/SectionNav";
+import WordCounterInputPanel from "./WordCounterInputPanel";
+import WordCounterResult from "./WordCounterResult";
+import PlatformLimitsReference from "./PlatformLimitsReference";
 
 const tool = new TextCounter();
 
-const STAT_KEYS = [
-  "words",
-  "characters",
-  "charactersNoSpaces",
-  "sentences",
-  "paragraphs",
-  "readingTimeMinutes",
-] as const;
+export default function WordCounterTool({ education }: { education: ReactNode }) {
+  const tNav = useTranslations("tools.word-counter.nav");
 
-export default function WordCounterTool() {
-  const t = useTranslations("tools.word-counter");
   const [text, setText] = useState("");
 
-  const stats = useMemo(
-    () => tool.execute({ text }, { locale: "en-US" }).data,
-    [text]
-  );
+  const stats = useMemo(() => tool.execute({ text }, { locale: "en-US" }).data, [text]);
+  const digitStyle = resolveDigitStyle(text);
 
-  const summaryText = STAT_KEYS.map(
-    (key) => `${t(`stats.${key}`)}: ${formatLocalizedNumber(stats[key], "western")}`
-  ).join("\n");
+  const navItems = [
+    { id: "tool", label: tNav("tool") },
+    { id: "faq", label: tNav("faq") },
+    { id: "behind-the-tool", label: tNav("behindTheTool") },
+  ];
 
   return (
-    <div className="space-y-6 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-          {t("form.inputLabel")}
-        </span>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder={t("form.inputPlaceholder")}
-          rows={10}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
+    <>
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={<WordCounterInputPanel text={text} onTextChange={setText} />}
+          result={<WordCounterResult stats={stats} hasText={text.trim().length > 0} digitStyle={digitStyle} />}
+          sidebar={<RelatedToolsSidebar currentSlug="word-counter" category="text-tools" />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <PlatformLimitsReference characters={stats.characters} />
+            </div>
+          }
         />
-      </label>
-
-      {text.trim() && (
-        <div className="flex justify-end">
-          <CopyButton text={summaryText} />
-        </div>
-      )}
-
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {STAT_KEYS.map((key) => (
-          <div
-            key={key}
-            className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-center dark:border-zinc-700 dark:bg-zinc-800"
-          >
-            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-              {formatLocalizedNumber(stats[key], "western")}
-            </p>
-            <p className="mt-1 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-              {t(`stats.${key}`)}
-            </p>
-          </div>
-        ))}
       </div>
-    </div>
+
+      {education}
+    </>
   );
 }

@@ -44,6 +44,7 @@ import BarcodeEducation from "@/components/tools/barcode-generator/BarcodeEducat
 import ImageConverterTool from "@/components/tools/image-converter/ImageConverterTool";
 import ImageEducation from "@/components/tools/image-converter/ImageEducation";
 import WordCounterTool from "@/components/tools/word-counter/WordCounterTool";
+import WordCounterEducation from "@/components/tools/word-counter/WordCounterEducation";
 import Base64ToolUI from "@/components/tools/base64-tool/Base64ToolUI";
 import ScientificCalculator from "@/components/tools/scientific-calculator/ScientificCalculator";
 import ScientificEducation from "@/components/tools/scientific-calculator/ScientificEducation";
@@ -291,7 +292,7 @@ export default async function ToolPage({
       component = <ImageConverterTool education={<ImageEducation />} />;
       break;
     case "word-counter":
-      component = <WordCounterTool />;
+      component = <WordCounterTool education={<WordCounterEducation />} />;
       break;
     case "base64-tool":
       component = <Base64ToolUI />;
@@ -348,7 +349,8 @@ export default async function ToolPage({
     slug === "barcode-generator" ||
     slug === "invoice-generator" ||
     slug === "break-even-calculator" ||
-    slug === "inventory-valuation-calculator";
+    slug === "inventory-valuation-calculator" ||
+    slug === "word-counter";
 
   const jsonLd = {
     "@context": "https://schema.org",
