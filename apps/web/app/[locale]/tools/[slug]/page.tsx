@@ -52,6 +52,7 @@ import ScientificEducation from "@/components/tools/scientific-calculator/Scient
 import CsvJsonConverterUI from "@/components/tools/csv-json-converter/CsvJsonConverterUI";
 import CsvJsonEducation from "@/components/tools/csv-json-converter/CsvJsonEducation";
 import FileSizeConverterTool from "@/components/tools/file-size-converter/FileSizeConverterTool";
+import FileSizeEducation from "@/components/tools/file-size-converter/FileSizeEducation";
 import FileNameSanitizerTool from "@/components/tools/file-name-sanitizer/FileNameSanitizerTool";
 import DuplicateLineRemoverTool from "@/components/tools/duplicate-line-remover/DuplicateLineRemoverTool";
 import InvoiceGeneratorTool from "@/components/tools/invoice-generator/InvoiceGeneratorTool";
@@ -305,7 +306,7 @@ export default async function ToolPage({
       component = <CsvJsonConverterUI education={<CsvJsonEducation />} />;
       break;
     case "file-size-converter":
-      component = <FileSizeConverterTool />;
+      component = <FileSizeConverterTool education={<FileSizeEducation />} />;
       break;
     case "file-name-sanitizer":
       component = <FileNameSanitizerTool />;
@@ -352,7 +353,8 @@ export default async function ToolPage({
     slug === "break-even-calculator" ||
     slug === "inventory-valuation-calculator" ||
     slug === "word-counter" ||
-    slug === "base64-tool";
+    slug === "base64-tool" ||
+    slug === "file-size-converter";
 
   const jsonLd = {
     "@context": "https://schema.org",

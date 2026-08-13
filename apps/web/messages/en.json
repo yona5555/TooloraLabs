@@ -5303,12 +5303,46 @@
     },
     "file-size-converter": {
       "title": "File Size Converter",
-      "description": "Convert file sizes between bytes, KB, MB, GB, TB, and PB.",
+      "description": "Convert file sizes across every unit at once, compare decimal (SI) vs binary (IEC) standards, and estimate download time — live as you type.",
+      "nav": {
+        "tool": "Converter",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "resultTitle": "All Units",
+        "placeholder": "Enter a value to see it converted across every unit and standard here.",
+        "exactBytes": "Exact Bytes",
+        "decimalTitle": "Decimal (SI) — ×1000",
+        "binaryTitle": "Binary (IEC) — ×1024",
+        "transferTime": {
+          "title": "Estimated Download Time",
+          "intro": "How long this file would take to download at common connection speeds.",
+          "seconds": "sec",
+          "minutes": "min",
+          "hours": "hr",
+          "days": "days",
+          "presets": {
+            "dialUp": "Dial-Up (56 Kbps)",
+            "mobile4g": "4G Mobile (25 Mbps)",
+            "broadbandWifi": "Home Wi-Fi (100 Mbps)",
+            "gigabitFiber": "Gigabit Fiber (1000 Mbps)"
+          }
+        }
+      },
       "form": {
+        "inputTitle": "Your File Size",
         "from": "From",
         "to": "To",
         "swap": "Swap units",
+        "valueLabel": "Value",
         "valuePlaceholder": "Enter value",
+        "unitLabel": "Unit",
+        "standardLabel": "Standard",
+        "standardDecimal": "Decimal (SI)",
+        "standardDecimalHint": "1 KB = 1000 bytes — used by storage manufacturers and network speeds.",
+        "standardBinary": "Binary (IEC)",
+        "standardBinaryHint": "1 KB = 1024 bytes — used by RAM and most operating system displays.",
         "convert": "Convert"
       },
       "units": {
@@ -5322,6 +5356,116 @@
       "errors": {
         "required": "Please enter a valid number.",
         "negativeValue": "Value must not be negative."
+      },
+      "education": {
+        "intro": {
+          "title": "Why File Size Conversion Isn't as Simple as It Looks",
+          "paragraph1": "There are actually two different, equally legitimate definitions of \"kilobyte\" in everyday use, and they disagree by more than 2%. The decimal (SI) definition treats \"kilo\" the same way it's used everywhere else in science — exactly 1,000 — so 1 KB = 1,000 bytes, 1 MB = 1,000,000 bytes, and so on. The binary definition instead uses powers of 2, since computer memory is addressed in binary: 1 KB = 2¹⁰ = 1,024 bytes, 1 MB = 2²⁰ = 1,048,576 bytes. Both are real, both are still in active use today, and neither is simply 'wrong' — they're answering different questions about how the underlying hardware works.",
+          "paragraph2": "The practical problem is that the gap between these two standards compounds at every step up the scale. It starts small — 1,024 is only 2.4% larger than 1,000 — but that difference multiplies at each higher unit: by the terabyte level it has grown to roughly 10%, which is exactly why a drive advertised and sold as \"1 TB\" (the decimal definition, matching its true manufactured capacity) shows up in an operating system reporting free space in binary units as only about 931 GB — no storage has vanished; the OS is measuring in a different-sized \"gigabyte\" than the one printed on the box.",
+          "diagram": {
+            "chartLabel": "Percentage gap between binary and decimal units by scale",
+            "caption": "The gap between binary (1024-based) and decimal (1000-based) units at each order of magnitude — starting at 2.4% for kilo and compounding to nearly 12.6% by peta."
+          }
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "How the same raw byte count reads differently depending on the standard and unit chosen.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "scenario": "A drive manufactured and sold as \"1 TB\" (decimal), read by an OS using binary units", "result": "Shows as ≈931.32 GiB — not 1000 GB" },
+            { "scenario": "A 500 MB (decimal) file downloaded at 100 Mbps", "result": "≈40 seconds" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does my \"1 TB\" hard drive show up as only about 931 GB in Windows?",
+              "answer": "Because the drive's advertised capacity is measured in the decimal standard (1 TB = 1,000,000,000,000 bytes, matching its true physical capacity), while Windows' File Explorer reports free space using binary-based math but decimal-looking unit labels. The same byte count, read in true binary GiB units, is a smaller number — no capacity is actually missing."
+            },
+            {
+              "question": "What's the actual difference between KB and KiB?",
+              "answer": "KB (kilobyte) is the decimal unit, always meaning exactly 1,000 bytes under the modern IEC/NIST-recommended naming. KiB (kibibyte) is the binary unit, always meaning exactly 1,024 bytes. The two-letter \"i\" in KiB, MiB, GiB, and so on exists specifically to make this distinction unambiguous — a convention this tool follows in its binary-standard column."
+            },
+            {
+              "question": "Which standard should I actually use — decimal or binary?",
+              "answer": "It depends what you're measuring. Storage capacity (hard drives, SSDs, flash drives) and network bandwidth are conventionally quoted in decimal units by manufacturers and ISPs. RAM capacity is inherently binary, since memory is physically addressed in powers of 2, which is why RAM sizes (8 GB, 16 GB, 32 GB) are quietly binary values even though they're labeled with decimal-looking unit names."
+            },
+            {
+              "question": "Why do storage manufacturers use decimal while operating systems often show binary?",
+              "answer": "Decimal units make a drive's true capacity look larger and align with the SI system used for every other physical quantity, which is a genuine commercial incentive as well as a technically defensible choice. Operating systems, on the other hand, evolved from a computing culture where memory addressing was always binary, so many (Windows especially) still compute in binary internally — they just haven't updated their on-screen unit labels to match, which is the direct source of the mismatch."
+            },
+            {
+              "question": "Does this decimal-vs-binary confusion affect network speeds too?",
+              "answer": "Network and internet connection speeds are always quoted in decimal bits per second (Mbps, Gbps) — never binary — and bits are not the same unit as the bytes file sizes are measured in. That's a second, separate source of confusion: an 8 megabit-per-second connection transfers only about 1 megabyte per second, not 8, because there are 8 bits in a byte."
+            },
+            {
+              "question": "Why might this tool's download-time estimate differ from what I see in an actual browser or app?",
+              "answer": "This estimate assumes a constant, uninterrupted connection running at exactly the stated link speed, converting the file's byte size to bits and dividing by that speed. Real transfers are affected by network overhead, other traffic sharing the connection, server-side throttling, and the gap between a connection's theoretical maximum speed and what it actually sustains — so treat this as a best-case estimate, not a guarantee."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Convenient Shorthand That Outgrew Its Convenience",
+            "paragraph": "Computer memory has always been addressed in powers of two, so early computer scientists in the 1960s and 1970s noticed that 2¹⁰ (1,024) happened to land conveniently close to 1,000 and started informally borrowing the SI prefix \"kilo\" to describe it — a shorthand of convenience, not a formal standard. That informal reuse spread through the industry for decades with no single body regulating it, so \"kilobyte\" quietly came to mean two different numbers depending on context, a discrepancy small enough at the kilobyte scale to go largely unnoticed but destined to compound as storage capacities grew into the megabyte, gigabyte, and eventually terabyte range."
+          },
+          "modernDevelopments": {
+            "title": "A Formal Standard That the Industry Still Hasn't Fully Adopted",
+            "paragraph": "The International Electrotechnical Commission (IEC) formally resolved the ambiguity by introducing distinct binary prefixes — kibi, mebi, gibi, and beyond — first in IEC 60027-2 in 1998 and consolidated in IEC 80000-13:2008, the standard this tool's binary-unit column follows. NIST and most standards bodies now officially recommend this distinction. Adoption remains uneven in practice, however: Linux distributions and Apple's macOS/iOS have largely switched storage displays to true decimal units to match manufacturer specifications, while Windows still displays binary-computed values under decimal-looking labels — which is precisely the mismatch this tool's side-by-side comparison is built to make visible."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Data representation, number systems, and measurement standards — the exact concepts this tool converts between — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
+                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+              },
+              {
+                "name": "American University of Sharjah (AUS)",
+                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
+                "online": "Delivery mode not stated on the official program page."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical Standard",
+          "citation": "IEC 80000-13:2008 — Quantities and units — Part 13: Information science and technology. International Electrotechnical Commission.",
+          "note": "The official standard defining the binary prefixes (kibi, mebi, gibi, tebi, pebi) this tool's binary-standard column follows, formally resolving the decimal/binary kilobyte ambiguity.",
+          "url": "https://webstore.iec.ch/en/publication/7479",
+          "readOriginal": "View the Official Standard"
+        }
       }
     },
     "file-name-sanitizer": {
