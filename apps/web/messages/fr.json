@@ -5866,187 +5866,187 @@
       }
     },
     "file-name-sanitizer": {
-      "title": "File Name Sanitizer",
-      "description": "Clean up file names for safe use across Windows, macOS, and Linux — with a live report of exactly what was changed and why.",
+      "title": "Nettoyeur de nom de fichier",
+      "description": "Nettoyez les noms de fichiers pour un usage sûr sous Windows, macOS et Linux — avec un rapport en direct de ce qui a été modifié, et pourquoi.",
       "nav": {
-        "tool": "Sanitizer",
+        "tool": "Nettoyeur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Les coulisses de l'outil"
       },
       "aboveFold": {
-        "resultTitle": "Safe File Name",
-        "placeholder": "Enter a file name to see the cleaned-up, cross-platform-safe version here.",
-        "changesTitle": "What Was Changed",
-        "noChanges": "Nothing needed changing — this file name was already safe.",
+        "resultTitle": "Nom de fichier sécurisé",
+        "placeholder": "Saisissez un nom de fichier pour voir ici sa version nettoyée et compatible multiplateforme.",
+        "changesTitle": "Ce qui a été modifié",
+        "noChanges": "Rien à modifier — ce nom de fichier était déjà sûr.",
         "changeLabels": {
-          "DIACRITICS": "Accented characters were transliterated to plain ASCII.",
-          "ILLEGAL_CHARS": "Characters not allowed on Windows/macOS/Linux were removed.",
-          "WHITESPACE": "Spaces were replaced with your chosen separator.",
-          "TRAILING_DOTS_SPACES": "Trailing dots or spaces were removed (Windows forbids these).",
-          "RESERVED_NAME": "This matched a Windows-reserved device name, so a suffix was added.",
-          "TRUNCATED": "The name was too long and was shortened to fit the limit."
+          "DIACRITICS": "Les caractères accentués ont été translittérés en ASCII simple.",
+          "ILLEGAL_CHARS": "Les caractères interdits sous Windows/macOS/Linux ont été supprimés.",
+          "WHITESPACE": "Les espaces ont été remplacés par le séparateur choisi.",
+          "TRAILING_DOTS_SPACES": "Les points ou espaces en fin de nom ont été supprimés (Windows les interdit).",
+          "RESERVED_NAME": "Ce nom correspondait à un nom de périphérique réservé par Windows, un suffixe a donc été ajouté.",
+          "TRUNCATED": "Le nom était trop long et a été raccourci pour respecter la limite."
         },
         "platformRules": {
-          "title": "Cross-Platform Naming Rules",
-          "intro": "The specific restrictions this tool guards against, by platform.",
+          "title": "Règles de nommage multiplateformes",
+          "intro": "Les restrictions précises que cet outil prend en compte, par plateforme.",
           "rows": [
             {
               "platform": "Windows",
-              "rule": "Forbids < > : \" / \\ | ? * and control characters; forbids trailing dots/spaces; reserves CON, PRN, AUX, NUL, COM1–9, and LPT1–9."
+              "rule": "Interdit < > : \" / \\ | ? * ainsi que les caractères de contrôle ; interdit les points/espaces en fin de nom ; réserve CON, PRN, AUX, NUL, COM1–9 et LPT1–9."
             },
             {
               "platform": "macOS",
-              "rule": "Forbids the colon (:) and a leading dot creates a hidden file; the forward slash (/) is reserved as a path separator."
+              "rule": "Interdit les deux-points (:) et un point en début de nom crée un fichier caché ; la barre oblique (/) est réservée comme séparateur de chemin."
             },
             {
               "platform": "Linux / Unix",
-              "rule": "Permits almost any byte except NUL and the forward slash (/); a leading dot creates a hidden file by convention."
+              "rule": "Autorise presque n'importe quel octet à l'exception de NUL et de la barre oblique (/) ; un point en début de nom crée un fichier caché par convention."
             },
             {
-              "platform": "Most filesystems",
-              "rule": "Cap individual file names at 255 bytes/characters, regardless of operating system."
+              "platform": "La plupart des systèmes de fichiers",
+              "rule": "Limitent chaque nom de fichier à 255 octets/caractères, quel que soit le système d'exploitation."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your File Name",
-        "inputLabel": "File name",
-        "inputPlaceholder": "My Resume Final.PDF",
-        "separator": "Separator",
-        "separatorDash": "Dash (-)",
-        "separatorUnderscore": "Underscore (_)",
-        "lowercase": "Lowercase",
-        "transliterate": "Transliterate accents to ASCII (café → cafe)",
-        "sanitize": "Sanitize",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "inputTitle": "Votre nom de fichier",
+        "inputLabel": "Nom de fichier",
+        "inputPlaceholder": "Mon CV Final.PDF",
+        "separator": "Séparateur",
+        "separatorDash": "Tiret (-)",
+        "separatorUnderscore": "Tiret bas (_)",
+        "lowercase": "Minuscules",
+        "transliterate": "Translittérer les accents en ASCII (café → cafe)",
+        "sanitize": "Nettoyer",
+        "copy": "Copier",
+        "copied": "Copié !"
       },
       "errors": {
-        "required": "Please enter a file name.",
-        "invalidResult": "Nothing valid remains after cleaning this file name."
+        "required": "Veuillez saisir un nom de fichier.",
+        "invalidResult": "Il ne reste plus rien de valide après le nettoyage de ce nom de fichier."
       },
       "education": {
         "intro": {
-          "title": "Why File Names Need Sanitizing at All",
-          "paragraph1": "A file name isn't just a label — on most operating systems, it's also data the file system's own command interpreter can parse, which is exactly why certain characters are forbidden. A forward slash or backslash means a path separator, a colon can mean a drive letter or an alternate data stream, and a question mark or asterisk means a wildcard pattern — so a file literally named \"invoice?.pdf\" would be ambiguous or outright rejected by the very systems meant to store it. Sanitizing a file name means stripping or replacing exactly these structurally meaningful characters, while leaving everything else about the name intact.",
-          "paragraph2": "Beyond individual characters, whole file names can be reserved outright: Windows blocks CON, PRN, AUX, NUL, and the numbered COM and LPT ports as file names, in any case and with or without an extension, because these strings are historically bound to physical devices at the operating-system level, not to the file system. A file name ending in a dot or space is silently stripped by Windows' own APIs, which can create confusing mismatches between what a user types and what actually gets saved. This tool's \"what changed\" report exists specifically to make each of these otherwise invisible corrections visible.",
+          "title": "Pourquoi les noms de fichiers doivent-ils être nettoyés ?",
+          "paragraph1": "Un nom de fichier n'est pas qu'une simple étiquette : sur la plupart des systèmes d'exploitation, c'est aussi une donnée que l'interpréteur de commandes du système de fichiers peut lui-même analyser — c'est exactement pour cette raison que certains caractères sont interdits. Une barre oblique ou une barre oblique inversée désigne un séparateur de chemin, les deux-points peuvent désigner une lettre de lecteur ou un flux de données alternatif, et un point d'interrogation ou un astérisque désignent un motif générique (wildcard) — un fichier littéralement nommé « facture?.pdf » serait donc ambigu, voire carrément rejeté par les systèmes mêmes censés le stocker. Nettoyer un nom de fichier consiste à retirer ou remplacer précisément ces caractères porteurs de sens structurel, tout en laissant intact le reste du nom.",
+          "paragraph2": "Au-delà des caractères pris individuellement, des noms de fichiers entiers peuvent être totalement réservés : Windows bloque CON, PRN, AUX, NUL, ainsi que les ports COM et LPT numérotés, quelle que soit la casse et avec ou sans extension, car ces chaînes de caractères sont historiquement liées à des périphériques physiques au niveau du système d'exploitation, et non du système de fichiers. Un nom de fichier se terminant par un point ou une espace est discrètement tronqué par les API mêmes de Windows, ce qui peut créer des décalages déroutants entre ce que l'utilisateur saisit et ce qui est réellement enregistré. Le rapport « ce qui a changé » de cet outil existe précisément pour rendre visibles ces corrections qui, autrement, resteraient invisibles.",
           "diagram": {
-            "rawLabel": "Raw Name",
-            "normalizeLabel": "Strip Illegal\nChars + Spaces",
-            "checkLabel": "Check Reserved\nNames + Length",
-            "safeLabel": "Safe Name",
-            "caption": "The sanitization pipeline: a raw file name is normalized (illegal characters and whitespace handled), checked against reserved names and length limits, and only then considered safe to use everywhere."
+            "rawLabel": "Nom brut",
+            "normalizeLabel": "Retrait des caractères\nillégaux + espaces",
+            "checkLabel": "Vérification des noms\nréservés + longueur",
+            "safeLabel": "Nom sécurisé",
+            "caption": "Le pipeline de nettoyage : un nom de fichier brut est d'abord normalisé (caractères illégaux et espaces traités), puis vérifié par rapport aux noms réservés et aux limites de longueur, avant d'être considéré comme sûr à utiliser partout."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How different problem file names get resolved.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Exemples résolus",
+          "intro": "Comment différents noms de fichiers problématiques sont corrigés.",
+          "columnScenario": "Scénario",
+          "columnResult": "Résultat",
           "rows": [
             {
-              "scenario": "\"café résumé.pdf\" with transliteration enabled",
+              "scenario": "« café résumé.pdf » avec translittération activée",
               "result": "cafe-resume.pdf"
             },
             {
-              "scenario": "\"CON.txt\" — a Windows-reserved device name",
+              "scenario": "« CON.txt » — un nom de périphérique réservé par Windows",
               "result": "con-file.txt"
             },
             {
-              "scenario": "\"notes..\" — trailing dots",
+              "scenario": "« notes.. » — points en fin de nom",
               "result": "notes"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Why replace spaces with dashes instead of just removing them?",
-              "answer": "Removing spaces entirely would merge words together and make the name harder to read (\"myfile\" instead of \"my-file\"), while a separator preserves the word boundaries. Dashes and underscores are also both universally safe across every major operating system and are the convention most web upload systems and URLs expect."
+              "question": "Pourquoi remplacer les espaces par des tirets plutôt que simplement les supprimer ?",
+              "answer": "Supprimer complètement les espaces fusionnerait les mots entre eux et rendrait le nom plus difficile à lire (« monfichier » au lieu de « mon-fichier »), alors qu'un séparateur préserve les limites entre les mots. Les tirets et les tirets bas sont par ailleurs universellement sûrs sur tous les principaux systèmes d'exploitation, et constituent la convention attendue par la plupart des systèmes de téléversement web et des URL."
             },
             {
-              "question": "What characters are actually illegal in file names, and why these specific ones?",
-              "answer": "On Windows: < > : \" / \\ | ? * and any control character (ASCII 0–31). Each one is reserved for a structural reason — / and \\ are path separators, : can denote a drive letter, ? and * are wildcard characters in command shells, and < > | are shell redirection and piping operators. macOS and Linux are far more permissive, but this tool sanitizes to the strictest common set so the result is guaranteed safe everywhere."
+              "question": "Quels caractères sont réellement interdits dans un nom de fichier, et pourquoi ceux-là précisément ?",
+              "answer": "Sous Windows : < > : \" / \\ | ? * ainsi que tout caractère de contrôle (ASCII 0–31). Chacun est réservé pour une raison structurelle précise : / et \\ sont des séparateurs de chemin, : peut désigner une lettre de lecteur, ? et * sont des caractères génériques dans les interpréteurs de commandes, et < > | sont des opérateurs de redirection et de tube (pipe) du shell. macOS et Linux sont bien plus permissifs, mais cet outil applique le jeu commun le plus strict afin de garantir un résultat sûr partout."
             },
             {
-              "question": "Why does \"CON.txt\" get renamed instead of just cleaned up?",
-              "answer": "Because CON isn't an illegal-character problem — every character in it is perfectly valid. The entire base name is reserved by Windows as an alias for the system console device, regardless of extension or case, so \"con.txt\", \"CON.txt\", and even plain \"con\" are all blocked outright. The only fix is renaming the base name itself, which is why this tool appends a suffix rather than trying to strip anything."
+              "question": "Pourquoi « CON.txt » est-il renommé plutôt que simplement nettoyé ?",
+              "answer": "Parce que CON n'est pas un problème de caractère illégal — chaque caractère qui le compose est parfaitement valide. C'est le nom de base entier qui est réservé par Windows comme alias du périphérique de console système, quels que soient la casse ou l'extension, si bien que « con.txt », « CON.txt » et même le simple « con » sont tous bloqués purement et simplement. La seule solution est de renommer le nom de base lui-même, ce qui explique pourquoi cet outil ajoute un suffixe plutôt que de tenter de supprimer quoi que ce soit."
             },
             {
-              "question": "What's the 255-character limit about, and does it apply to me?",
-              "answer": "255 is the maximum file name length on most modern file systems (NTFS, ext4, APFS), measured per path component, not the full path. Most everyday file names never come close to this limit, but names auto-generated by exporting long titles, timestamps, or metadata into a file name can occasionally exceed it — this tool truncates while always preserving the extension."
+              "question": "En quoi consiste la limite de 255 caractères, et me concerne-t-elle ?",
+              "answer": "255 est la longueur maximale d'un nom de fichier sur la plupart des systèmes de fichiers modernes (NTFS, ext4, APFS), mesurée par composant de chemin, et non sur le chemin complet. La plupart des noms de fichiers du quotidien n'en approchent jamais la limite, mais les noms générés automatiquement à partir de longs titres, d'horodatages ou de métadonnées peuvent parfois la dépasser — cet outil tronque le nom tout en préservant toujours l'extension."
             },
             {
-              "question": "Why would I want to transliterate accented characters?",
-              "answer": "Accented and non-Latin characters (é, ñ, ü, etc.) are technically valid in modern file names on every major OS, but they can still cause real problems: older tools, certain command-line environments, and some upload or CDN systems handle non-ASCII file names inconsistently or reject them outright. Transliterating to plain ASCII trades a small amount of readability for guaranteed compatibility with the widest possible range of systems."
+              "question": "Pourquoi voudrais-je translittérer les caractères accentués ?",
+              "answer": "Les caractères accentués et non latins (é, ñ, ü, etc.) sont techniquement valides dans les noms de fichiers modernes sur tous les principaux systèmes d'exploitation, mais ils peuvent tout de même poser de vrais problèmes : certains outils anciens, certains environnements en ligne de commande et certains systèmes de téléversement ou de CDN gèrent les noms de fichiers non-ASCII de façon incohérente, voire les rejettent purement et simplement. Translittérer en ASCII simple sacrifie un peu de lisibilité contre une compatibilité garantie avec le plus large éventail possible de systèmes."
             },
             {
-              "question": "Does this tool rename my actual file, or just suggest a new name?",
-              "answer": "This tool only computes and displays what a safe version of the name would look like — it never touches any real file, since everything runs on text you type or paste directly in your browser. You still need to rename the actual file yourself using the suggested result."
+              "question": "Cet outil renomme-t-il réellement mon fichier, ou se contente-t-il de suggérer un nouveau nom ?",
+              "answer": "Cet outil se contente de calculer et d'afficher à quoi ressemblerait une version sûre du nom — il ne touche jamais à aucun fichier réel, puisque tout s'exécute sur le texte que vous saisissez ou collez directement dans votre navigateur. Vous devez ensuite renommer vous-même le fichier réel en utilisant le résultat suggéré."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Les coulisses de cet outil",
           "history": {
-            "title": "Why \"CON\" and \"PRN\" Are Still Forbidden Today",
-            "paragraph": "The reserved device names this tool checks for — CON, PRN, AUX, NUL, and the numbered COM and LPT ports — trace back to early MS-DOS, where the operating system needed a way to let a single command work on either a real file or a physical device: typing \"copy report.txt PRN\" would send a file straight to the printer, using PRN as a stand-in name for whatever printer device was attached, in exactly the same command syntax used for copying between files. For that redirection trick to work reliably, these device names had to be permanently blocked as file names at the operating-system level, everywhere, so a file could never be confused for a device."
+            "title": "Pourquoi « CON » et « PRN » sont-ils encore interdits aujourd'hui ?",
+            "paragraph": "Les noms de périphériques réservés que cet outil vérifie — CON, PRN, AUX, NUL, ainsi que les ports COM et LPT numérotés — remontent aux débuts de MS-DOS, où le système d'exploitation avait besoin d'un moyen de faire fonctionner une même commande aussi bien sur un fichier réel que sur un périphérique physique : taper « copy rapport.txt PRN » envoyait un fichier directement à l'imprimante, PRN servant de nom générique pour le périphérique d'impression connecté, avec exactement la même syntaxe de commande que pour copier entre fichiers. Pour que cette astuce de redirection fonctionne de façon fiable, ces noms de périphériques devaient être bloqués de façon permanente comme noms de fichiers au niveau du système d'exploitation, partout, afin qu'un fichier ne puisse jamais être confondu avec un périphérique."
           },
           "modernDevelopments": {
-            "title": "From 8.3 Names to Long, Unicode-Aware File Systems",
-            "paragraph": "Early DOS file systems (FAT) restricted every file name to the rigid \"8.3\" format — 8 characters, a dot, and a 3-character extension, uppercase only — which Windows 95's VFAT extension finally lifted in 1995, introducing the long file names and lowercase support taken for granted today. Modern file systems like NTFS and APFS support names up to 255 characters with full Unicode, but the legacy restrictions — the reserved device names, the illegal-character set, the ban on trailing dots — were kept for backward compatibility rather than removed, which is exactly why a modern sanitizer like this one still needs to check for rules that trace back over four decades."
+            "title": "Des noms 8.3 aux systèmes de fichiers longs et compatibles Unicode",
+            "paragraph": "Les premiers systèmes de fichiers DOS (FAT) limitaient chaque nom de fichier au format rigide « 8.3 » — 8 caractères, un point, puis une extension de 3 caractères, en majuscules uniquement — une contrainte finalement levée par l'extension VFAT de Windows 95 en 1995, qui a introduit les noms de fichiers longs et la prise en charge des minuscules, aujourd'hui considérées comme allant de soi. Les systèmes de fichiers modernes comme NTFS et APFS prennent en charge des noms allant jusqu'à 255 caractères, en Unicode complet, mais les restrictions héritées — les noms de périphériques réservés, le jeu de caractères illégaux, l'interdiction des points en fin de nom — ont été conservées par souci de rétrocompatibilité plutôt que supprimées, ce qui explique précisément pourquoi un nettoyeur moderne comme celui-ci doit encore vérifier des règles vieilles de plus de quarante ans."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "File systems, operating system design, and cross-platform compatibility — the exact concepts this tool navigates — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Parcours académique",
+            "intro": "Les systèmes de fichiers, la conception des systèmes d'exploitation et la compatibilité multiplateforme — les concepts mêmes que cet outil met en jeu — sont étudiés dans les cursus d'informatique. Voici les 5 meilleures universités mondiales selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé no 1 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "Non — le cursus 6-3 du MIT (informatique et ingénierie) est un programme de premier cycle en présentiel sur le campus de Cambridge du MIT."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée no 2 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "Non — le programme de licence en informatique de Stanford est un diplôme en présentiel sur le campus de Stanford."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée no 3 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "Non — le programme de licence de la School of Computer Science de CMU se déroule en présentiel sur son campus de Pittsburgh."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée no 4 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "Non — le Bachelor of Computing en informatique de la NUS est un programme en présentiel comprenant un stage obligatoire sur le campus ou à l'étranger."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée no 5 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "Non — le diplôme d'informatique d'Oxford est enseigné en présentiel via son système de tutorat, avec un ou deux étudiants rencontrant directement un tuteur."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Propose une licence (Bachelor of Science) en informatique, accréditée ABET, au sein de son College of Engineering.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Le mode de délivrance n'est pas précisé sur la page officielle du programme."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
-          "citation": "Microsoft Corporation. \"Naming Files, Paths, and Namespaces.\" Windows Win32 API documentation.",
-          "note": "The official Microsoft reference defining the illegal characters and reserved device names (CON, PRN, AUX, NUL, COM1–9, LPT1–9) this tool checks against — the strictest, and therefore most broadly compatible, of the major platforms' naming rules.",
+          "title": "Norme technique",
+          "citation": "Microsoft Corporation. « Naming Files, Paths, and Namespaces. » Windows Win32 API documentation.",
+          "note": "La référence officielle de Microsoft définissant les caractères illégaux et les noms de périphériques réservés (CON, PRN, AUX, NUL, COM1–9, LPT1–9) que cet outil vérifie — la plus stricte, et donc la plus largement compatible, des règles de nommage des principales plateformes.",
           "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
-          "readOriginal": "Read the Official Documentation"
+          "readOriginal": "Lire la documentation officielle"
         }
       }
     },
