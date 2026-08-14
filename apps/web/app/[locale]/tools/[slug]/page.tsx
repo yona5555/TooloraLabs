@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+import { getOgLocale } from "@/lib/locale-meta";
 import AgeCalculator from "@/components/tools/age-calculator/AgeCalculator";
 import AgeEducation from "@/components/tools/age-calculator/AgeEducation";
 import BMICalculator from "@/components/tools/bmi-calculator/BMICalculator";
@@ -124,18 +126,19 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `/${locale}${path}`,
-      languages: {
-        en: `/en${path}`,
-        ar: `/ar${path}`,
-      },
+      languages: Object.fromEntries(
+        routing.locales.map((loc) => [loc, `/${loc}${path}`])
+      ),
     },
     openGraph: {
       title: pageTitle,
       description,
       url: `/${locale}${path}`,
       siteName: "TooloraLabs",
-      locale: locale === "ar" ? "ar_AR" : "en_US",
-      alternateLocale: locale === "ar" ? "en_US" : "ar_AR",
+      locale: getOgLocale(locale),
+      alternateLocale: routing.locales
+        .filter((loc) => loc !== locale)
+        .map(getOgLocale),
       type: "website",
     },
   };

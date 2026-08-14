@@ -2,16 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
+import { getLocaleDir } from "@/lib/locale-meta";
+import { getLocaleFontClassName } from "@/lib/locale-fonts";
 import BMICalculatorEmbed from "@/components/tools/bmi-calculator/BMICalculatorEmbed";
-
-const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["arabic"],
-  display: "swap",
-});
 
 // Tools available for third-party embedding. Add a slug here + a case below
 // once a tool has a compact <...Embed /> component built for it.
@@ -59,7 +54,7 @@ export default async function EmbedPage({ params, searchParams }: PageProps) {
   const messages = (await import(`@/messages/${locale}.json`)).default;
   const t = await getTranslations({ locale, namespace: "tools" });
   const tEmbed = await getTranslations({ locale, namespace: "embedTools" });
-  const dir = locale === "ar" ? "rtl" : "ltr";
+  const dir = getLocaleDir(locale);
 
   const toolUrl = `${SITE_URL}/${locale}/tools/${slug}`;
 
@@ -68,7 +63,7 @@ export default async function EmbedPage({ params, searchParams }: PageProps) {
       <div
         lang={locale}
         dir={dir}
-        className={`bg-white p-3 dark:bg-zinc-950 ${locale === "ar" ? ibmPlexSansArabic.className : ""}`}
+        className={`bg-white p-3 dark:bg-zinc-950 ${getLocaleFontClassName(locale) ?? ""}`}
       >
         <p className="mb-3 text-center text-sm font-bold text-zinc-900 dark:text-zinc-50">
           {t(`${slug}.title`)}
