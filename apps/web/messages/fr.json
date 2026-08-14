@@ -4800,204 +4800,204 @@
       }
     },
     "qr-code-generator": {
-      "title": "QR Code Generator",
-      "description": "Generate QR codes for URLs, plain text, Wi-Fi networks, contact cards, email, and SMS — with custom colors and error-correction level.",
+      "title": "Générateur de QR Code",
+      "description": "Générez des QR codes pour des URL, du texte brut, des réseaux Wi-Fi, des cartes de contact, des e-mails et des SMS — avec des couleurs personnalisées et un niveau de correction d'erreur réglable.",
       "nav": {
-        "tool": "Generator",
+        "tool": "Générateur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses"
       },
       "aboveFold": {
-        "resultTitle": "Your QR Code",
-        "placeholder": "Fill in the form to generate a QR code.",
-        "payloadTitle": "What Gets Encoded"
+        "resultTitle": "Votre QR Code",
+        "placeholder": "Remplissez le formulaire pour générer un QR code.",
+        "payloadTitle": "Ce qui est encodé"
       },
       "customize": {
-        "title": "Customize",
-        "errorCorrectionLabel": "Error Correction",
-        "errorCorrectionHint": "Higher levels survive more damage (a scratch, a logo overlay) but produce a denser code.",
-        "errorCorrectionLockedHint": "Locked to H while a logo sits on top of the code — anything lower risks the covered center becoming unreadable.",
-        "darkColorLabel": "Foreground",
-        "lightColorLabel": "Background"
+        "title": "Personnaliser",
+        "errorCorrectionLabel": "Correction d'erreur",
+        "errorCorrectionHint": "Les niveaux élevés supportent davantage de dégâts (une rayure, un logo superposé) mais produisent un code plus dense.",
+        "errorCorrectionLockedHint": "Verrouillé sur H tant qu'un logo est placé sur le code — un niveau inférieur risquerait de rendre illisible le centre recouvert.",
+        "darkColorLabel": "Premier plan",
+        "lightColorLabel": "Arrière-plan"
       },
       "logo": {
-        "title": "Logo (optional)",
-        "upload": "Upload a logo",
-        "remove": "Remove",
-        "previewAlt": "Uploaded logo preview",
-        "modeCenter": "Center it on the code",
-        "modeCenterHint": "Automatically switches error correction to H so the code stays scannable despite the covered center.",
-        "modeBeside": "Show it beside the code",
-        "modeBesideHint": "A separate companion design — the code itself is untouched."
+        "title": "Logo (facultatif)",
+        "upload": "Importer un logo",
+        "remove": "Supprimer",
+        "previewAlt": "Aperçu du logo importé",
+        "modeCenter": "Le centrer sur le code",
+        "modeCenterHint": "Bascule automatiquement la correction d'erreur sur H afin que le code reste lisible malgré le centre recouvert.",
+        "modeBeside": "L'afficher à côté du code",
+        "modeBesideHint": "Un visuel compagnon distinct — le code lui-même reste intact."
       },
       "form": {
-        "inputTitle": "Content",
-        "inputLabel": "Text or URL",
-        "inputPlaceholder": "Enter a URL or any text...",
-        "generate": "Generate QR Code",
-        "generating": "Generating...",
-        "download": "Download SVG",
+        "inputTitle": "Contenu",
+        "inputLabel": "Texte ou URL",
+        "inputPlaceholder": "Saisissez une URL ou n'importe quel texte…",
+        "generate": "Générer le QR Code",
+        "generating": "Génération…",
+        "download": "Télécharger en SVG",
         "contentTypes": {
           "url": "URL",
-          "text": "Text",
+          "text": "Texte",
           "wifi": "Wi-Fi",
           "contact": "Contact",
-          "email": "Email",
+          "email": "E-mail",
           "sms": "SMS"
         },
         "urlLabel": "URL",
-        "urlPlaceholder": "https://example.com",
-        "textLabel": "Text",
-        "textPlaceholder": "Enter any text...",
-        "wifiSsidLabel": "Network Name (SSID)",
-        "wifiEncryptionLabel": "Security",
+        "urlPlaceholder": "https://exemple.com",
+        "textLabel": "Texte",
+        "textPlaceholder": "Saisissez n'importe quel texte…",
+        "wifiSsidLabel": "Nom du réseau (SSID)",
+        "wifiEncryptionLabel": "Sécurité",
         "wifiEncryptions": {
           "WPA": "WPA/WPA2",
           "WEP": "WEP",
-          "nopass": "None (open network)"
+          "nopass": "Aucune (réseau ouvert)"
         },
-        "wifiPasswordLabel": "Password",
-        "wifiHiddenLabel": "Hidden network",
-        "contactNameLabel": "Full Name",
-        "contactPhoneLabel": "Phone",
-        "contactEmailLabel": "Email",
-        "contactOrgLabel": "Organization",
-        "emailAddressLabel": "To",
-        "emailSubjectLabel": "Subject",
+        "wifiPasswordLabel": "Mot de passe",
+        "wifiHiddenLabel": "Réseau masqué",
+        "contactNameLabel": "Nom complet",
+        "contactPhoneLabel": "Téléphone",
+        "contactEmailLabel": "E-mail",
+        "contactOrgLabel": "Organisation",
+        "emailAddressLabel": "À",
+        "emailSubjectLabel": "Objet",
         "emailBodyLabel": "Message",
-        "smsPhoneLabel": "Phone",
+        "smsPhoneLabel": "Téléphone",
         "smsMessageLabel": "Message"
       },
       "errors": {
-        "required": "Fill in the required fields for this content type to generate a code.",
-        "tooLong": "Text is too long (max 2,000 characters).",
-        "generationFailed": "Could not generate a QR code for this input."
+        "required": "Remplissez les champs requis pour ce type de contenu afin de générer un code.",
+        "tooLong": "Le texte est trop long (2 000 caractères maximum).",
+        "generationFailed": "Impossible de générer un QR code pour cette saisie."
       },
       "education": {
         "intro": {
-          "title": "How QR Codes Actually Work",
-          "paragraph1": "A QR code encodes data as a grid of black and white squares called modules, but what makes it scannable from any angle — sideways, upside down, at a distance — is three identical bullseye squares in three of its four corners. A scanner locates those three finder patterns first, which is enough to work out the code's rotation and perspective before it even starts reading the data in between.",
-          "paragraph2": "The data itself is protected by Reed-Solomon error correction, the same family of algorithm used to protect CDs, DVDs, and deep-space transmissions from NASA probes. The encoder stores extra, redundant codewords alongside the real data, spread across the grid — which is exactly what lets a QR code stay scannable even with a logo covering its center or a corner torn off. This tool's four error-correction levels (L through H) trade code density for exactly how much damage the result can survive.",
+          "title": "Comment fonctionnent réellement les QR codes",
+          "paragraph1": "Un QR code encode des données sous la forme d'une grille de carrés noirs et blancs appelés modules, mais ce qui le rend lisible sous n'importe quel angle — de travers, à l'envers, à distance — ce sont trois carrés en forme de cible identiques, placés dans trois de ses quatre coins. Un scanner repère d'abord ces trois motifs de repérage, ce qui suffit à déterminer la rotation et la perspective du code avant même de commencer à lire les données situées entre eux.",
+          "paragraph2": "Les données elles-mêmes sont protégées par la correction d'erreur de Reed-Solomon, la même famille d'algorithmes qui protège les CD, les DVD et les transmissions des sondes spatiales de la NASA. L'encodeur stocke des symboles redondants supplémentaires aux côtés des données réelles, répartis sur toute la grille — c'est exactement ce qui permet à un QR code de rester lisible même avec un logo recouvrant son centre ou un coin déchiré. Les quatre niveaux de correction d'erreur de cet outil (de L à H) font un compromis entre densité du code et quantité de dégâts que le résultat peut supporter.",
           "diagram": {
-            "finderLabel": "Finder pattern (3 corners) — establishes orientation",
-            "timingLabel": "Timing pattern — establishes module spacing",
-            "quietZoneLabel": "Quiet zone (blank margin, required for scanners to lock on)",
-            "dataLabel": "Data + error correction (Reed-Solomon)",
-            "caption": "A simplified Version-1 QR code (21×21 modules) — real codes scale up to 177×177 modules to hold more data."
+            "finderLabel": "Motif de repérage (3 coins) — établit l'orientation",
+            "timingLabel": "Motif de synchronisation — établit l'espacement des modules",
+            "quietZoneLabel": "Zone de silence (marge vide, nécessaire pour que les scanners puissent se caler)",
+            "dataLabel": "Données + correction d'erreur (Reed-Solomon)",
+            "caption": "Un QR code simplifié de version 1 (21 × 21 modules) — les codes réels vont jusqu'à 177 × 177 modules pour contenir davantage de données."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four examples across different content types, showing exactly what string gets encoded into the QR symbol.",
-          "columnScenario": "Scenario",
-          "columnResult": "What's Encoded",
+          "title": "Exemples résolus",
+          "intro": "Quatre exemples couvrant différents types de contenu, montrant exactement quelle chaîne de caractères est encodée dans le symbole QR.",
+          "columnScenario": "Scénario",
+          "columnResult": "Ce qui est encodé",
           "rows": [
             {
-              "scenario": "A website link",
+              "scenario": "Un lien vers un site web",
               "result": "https://example.com"
             },
             {
-              "scenario": "A Wi-Fi network \"Cafe Guest\", WPA, password \"coffee123\"",
+              "scenario": "Un réseau Wi-Fi «Cafe Guest», WPA, mot de passe «coffee123»",
               "result": "WIFI:T:WPA;S:Cafe Guest;P:coffee123;H:false;;"
             },
             {
-              "scenario": "A contact card for Jane Doe",
+              "scenario": "Une carte de contact pour Jane Doe",
               "result": "BEGIN:VCARD\nVERSION:3.0\nFN:Jane Doe\nTEL:+1234567890\nEND:VCARD"
             },
             {
-              "scenario": "An SMS to +1234567890 saying \"Hi there\"",
+              "scenario": "Un SMS à +1234567890 disant «Hi there»",
               "result": "SMSTO:+1234567890:Hi there"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Why can a QR code be scanned from any angle, even upside down?",
-              "answer": "Because of the three identical bullseye \"finder patterns\" in three of its four corners. A scanner locates those first, and their fixed, asymmetric arrangement is enough to calculate the code's rotation and perspective before it reads any of the actual data in between."
+              "question": "Pourquoi un QR code peut-il être scanné sous n'importe quel angle, même à l'envers ?",
+              "answer": "Grâce aux trois motifs de repérage identiques en forme de cible, présents dans trois de ses quatre coins. Un scanner les repère en premier, et leur disposition fixe et asymétrique suffit à calculer la rotation et la perspective du code avant même de lire la moindre donnée réelle entre eux."
             },
             {
-              "question": "Why doesn't putting a logo in the middle of a QR code break it?",
-              "answer": "Because of Reed-Solomon error correction — the same family of algorithm that protects CDs, DVDs, and deep-space spacecraft transmissions from damage. The encoder weaves redundant recovery data throughout the grid, so a scanner can reconstruct the missing or covered part as long as the damage stays within the chosen error-correction level's threshold (7% to 30%, depending on the level picked)."
+              "question": "Pourquoi placer un logo au centre d'un QR code ne l'endommage-t-il pas ?",
+              "answer": "Grâce à la correction d'erreur de Reed-Solomon — la même famille d'algorithmes qui protège les CD, les DVD et les transmissions des engins spatiaux face aux dommages. L'encodeur tisse des données de récupération redondantes dans toute la grille, si bien qu'un scanner peut reconstituer la partie manquante ou recouverte tant que le dommage reste dans le seuil du niveau de correction d'erreur choisi (de 7 % à 30 % selon le niveau)."
             },
             {
-              "question": "What's the difference between a static and a dynamic QR code?",
-              "answer": "A static QR code — what this tool generates — encodes your actual content directly, so it can never be edited or tracked, but it also never expires or depends on a third-party service staying online. A dynamic QR code instead encodes a short redirect URL you control, letting you change the destination or see scan counts later, at the cost of relying on that redirect service indefinitely."
+              "question": "Quelle est la différence entre un QR code statique et un QR code dynamique ?",
+              "answer": "Un QR code statique — celui que génère cet outil — encode directement votre contenu réel : il ne peut donc jamais être modifié ni suivi, mais il n'expire jamais et ne dépend pas d'un service tiers qui doit rester en ligne. Un QR code dynamique encode à la place une courte URL de redirection que vous contrôlez, ce qui permet de changer la destination ou de consulter le nombre de scans par la suite, au prix d'une dépendance indéfinie envers ce service de redirection."
             },
             {
-              "question": "Is it safe to scan any QR code?",
-              "answer": "Not automatically — a technique known as \"quishing\" (QR phishing) relies on people scanning unsolicited codes (stuck over a legitimate one on a parking meter, for instance) straight into a fake login page. Most phone cameras show a URL preview before opening a link from a QR code; it's worth actually reading it, the same way you'd check a link before clicking it in an email."
+              "question": "Est-il sûr de scanner n'importe quel QR code ?",
+              "answer": "Pas automatiquement — une technique appelée «quishing» (hameçonnage par QR code) repose sur le fait de scanner des codes non sollicités (collés par-dessus un code légitime sur un horodateur, par exemple) qui mènent directement vers une fausse page de connexion. La plupart des appareils photo de smartphone affichent un aperçu de l'URL avant d'ouvrir un lien issu d'un QR code : mieux vaut le lire réellement, comme on vérifierait un lien avant de cliquer dessus dans un e-mail."
             },
             {
-              "question": "How much data can a QR code actually hold?",
-              "answer": "The largest QR code version (Version 40, a 177×177 grid) can hold up to 7,089 numeric digits or 4,296 alphanumeric characters at the lowest error-correction level — though most real-world QR codes use a small fraction of that, since a URL or a Wi-Fi password rarely needs thousands of characters, and a denser code is slower and less reliable to scan."
+              "question": "Quelle quantité de données un QR code peut-il réellement contenir ?",
+              "answer": "La plus grande version de QR code (version 40, une grille de 177 × 177) peut contenir jusqu'à 7 089 chiffres numériques ou 4 296 caractères alphanumériques au niveau de correction d'erreur le plus bas — bien que la plupart des QR codes réels n'utilisent qu'une infime fraction de cette capacité, une URL ou un mot de passe Wi-Fi nécessitant rarement des milliers de caractères, et un code plus dense étant plus lent et moins fiable à scanner."
             },
             {
-              "question": "Why are QR code payments so much more common in China and India than in the US or Europe?",
-              "answer": "Largely because those markets went mobile-first: platforms like Alipay, WeChat Pay, and India's UPI rolled out QR-based payments at a moment when card-payment infrastructure (point-of-sale terminals) was still far less widespread than in markets that had already built out card networks for decades — a QR code printed on a piece of paper is dramatically cheaper to deploy than a card terminal, so it became the default rather than a card-network alternative."
+              "question": "Pourquoi les paiements par QR code sont-ils tellement plus courants en Chine et en Inde qu'aux États-Unis ou en Europe ?",
+              "answer": "Principalement parce que ces marchés sont passés directement au tout-mobile : des plateformes comme Alipay, WeChat Pay et l'UPI indien ont déployé les paiements par QR code à un moment où l'infrastructure de paiement par carte (terminaux de point de vente) était encore bien moins répandue que dans les marchés ayant déjà développé leurs réseaux de cartes depuis des décennies — un QR code imprimé sur une feuille de papier coûte nettement moins cher à déployer qu'un terminal de carte, ce qui en a fait la norme par défaut plutôt qu'une simple alternative aux réseaux de cartes."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "From Toyota's Assembly Line to Your Pocket",
-            "paragraph": "QR codes were invented in 1994 by a small team led by engineer Masahiro Hara at Denso Wave, a Toyota Group subsidiary, to solve a specific factory problem: standard barcodes could only hold about 20 characters, nowhere near enough to track the growing complexity of automotive parts on the assembly line. Hara's team designed a two-dimensional code that could store over 4,000 characters, be read from any angle, and stay scannable even partially damaged — then Denso Wave made the decision that turned it into a global standard rather than a proprietary factory tool: it patented the invention but chose never to enforce the patent, making the format free for anyone to use."
+            "title": "De la chaîne de montage Toyota à votre poche",
+            "paragraph": "Les QR codes ont été inventés en 1994 par une petite équipe dirigée par l'ingénieur Masahiro Hara chez Denso Wave, une filiale du groupe Toyota, pour résoudre un problème d'usine bien précis : les codes-barres classiques ne pouvaient contenir qu'environ 20 caractères, bien loin de suffire pour suivre la complexité croissante des pièces automobiles sur la chaîne de montage. L'équipe de Hara a conçu un code à deux dimensions capable de stocker plus de 4 000 caractères, lisible sous n'importe quel angle, et restant scannable même partiellement endommagé — puis Denso Wave a pris la décision qui allait en faire une norme mondiale plutôt qu'un simple outil d'usine propriétaire : l'entreprise a breveté l'invention, mais a choisi de ne jamais faire valoir ce brevet, rendant le format librement utilisable par tous."
           },
           "modernDevelopments": {
-            "title": "From Factory Floors to Restaurant Tables",
-            "paragraph": "For most of QR codes' first 25 years, they stayed a mostly Asian phenomenon, driven by mobile-payment platforms like Alipay and WeChat Pay. That changed almost overnight in 2020, when contactless restaurant menus and check-in forms made QR codes a daily habit worldwide during the COVID-19 pandemic — global scan volume roughly tripled within a year. The other major modern shift is dynamic QR codes: instead of encoding a destination directly, they encode a short redirect link a business can repoint later without reprinting a single code, and can track how many times it was scanned."
+            "title": "Des ateliers d'usine aux tables de restaurant",
+            "paragraph": "Pendant la majeure partie de leurs 25 premières années d'existence, les QR codes sont restés un phénomène surtout asiatique, porté par des plateformes de paiement mobile comme Alipay et WeChat Pay. Cela a changé presque du jour au lendemain en 2020, lorsque les menus de restaurant sans contact et les formulaires d'enregistrement ont fait des QR codes une habitude quotidienne dans le monde entier pendant la pandémie de COVID-19 — le volume de scans mondial a à peu près triplé en un an. L'autre grand changement moderne est celui des QR codes dynamiques : au lieu d'encoder directement une destination, ils encodent un court lien de redirection qu'une entreprise peut rediriger plus tard sans avoir à réimprimer le moindre code, tout en pouvant suivre le nombre de scans."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The coding theory, error correction, and data encoding behind QR codes are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Parcours académique",
+            "intro": "La théorie du codage, la correction d'erreur et l'encodage des données derrière les QR codes sont étudiés dans les cursus d'informatique. Voici les 5 meilleurs établissements au monde selon le QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°1 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "Non — le programme Course 6-3 du MIT (informatique et ingénierie) est un cursus de premier cycle en présentiel sur le campus de Cambridge du MIT."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°2 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "Non — le programme de licence en informatique de Stanford est un diplôme en présentiel sur le campus de Stanford."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°3 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "Non — le programme de licence de la School of Computer Science de CMU se déroule en présentiel sur son campus de Pittsburgh."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°4 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "Non — le Bachelor of Computing en informatique de la NUS est un programme en présentiel comprenant un stage obligatoire sur le campus ou à l'étranger."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°5 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "Non — le diplôme d'informatique d'Oxford est enseigné en présentiel via son système de tutorat, où un ou deux étudiants rencontrent directement un tuteur."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Propose une licence en sciences (Bachelor of Science) en informatique, accréditée ABET, au sein de son College of Engineering.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Le mode de délivrance n'est pas précisé sur la page officielle du programme."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Norme technique",
           "citation": "ISO/IEC 18004:2024 — Information technology — Automatic identification and data capture techniques — QR code bar code symbology specification. International Organization for Standardization.",
-          "note": "The official international standard defining the QR code symbology this tool generates — the exact structure of finder patterns, timing patterns, data encoding modes, and the four Reed-Solomon error-correction levels (L, M, Q, H).",
+          "note": "La norme internationale officielle qui définit la symbologie du QR code généré par cet outil — la structure exacte des motifs de repérage, des motifs de synchronisation, des modes d'encodage des données et des quatre niveaux de correction d'erreur Reed-Solomon (L, M, Q, H).",
           "url": "https://www.iso.org/standard/83389.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "Consulter la norme officielle"
         }
       }
     },
