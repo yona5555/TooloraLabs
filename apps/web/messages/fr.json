@@ -5693,175 +5693,175 @@
       }
     },
     "file-size-converter": {
-      "title": "File Size Converter",
-      "description": "Convert file sizes across every unit at once, compare decimal (SI) vs binary (IEC) standards, and estimate download time — live as you type.",
+      "title": "Convertisseur de taille de fichier",
+      "description": "Convertissez une taille de fichier dans toutes les unités à la fois, comparez les normes décimale (SI) et binaire (CEI), et estimez le temps de téléchargement — en direct pendant la saisie.",
       "nav": {
-        "tool": "Converter",
+        "tool": "Convertisseur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses de l'outil"
       },
       "aboveFold": {
-        "resultTitle": "All Units",
-        "placeholder": "Enter a value to see it converted across every unit and standard here.",
-        "exactBytes": "Exact Bytes",
-        "decimalTitle": "Decimal (SI) — ×1000",
-        "binaryTitle": "Binary (IEC) — ×1024",
+        "resultTitle": "Toutes les unités",
+        "placeholder": "Saisissez une valeur pour la voir convertie dans toutes les unités et normes ici.",
+        "exactBytes": "Octets exacts",
+        "decimalTitle": "Décimale (SI) — ×1000",
+        "binaryTitle": "Binaire (CEI) — ×1024",
         "transferTime": {
-          "title": "Estimated Download Time",
-          "intro": "How long this file would take to download at common connection speeds.",
-          "seconds": "sec",
+          "title": "Temps de téléchargement estimé",
+          "intro": "Le temps que prendrait ce fichier à télécharger aux vitesses de connexion courantes.",
+          "seconds": "s",
           "minutes": "min",
-          "hours": "hr",
-          "days": "days",
+          "hours": "h",
+          "days": "j",
           "presets": {
-            "dialUp": "Dial-Up (56 Kbps)",
-            "mobile4g": "4G Mobile (25 Mbps)",
-            "broadbandWifi": "Home Wi-Fi (100 Mbps)",
-            "gigabitFiber": "Gigabit Fiber (1000 Mbps)"
+            "dialUp": "Accès commuté (56 Kbit/s)",
+            "mobile4g": "4G mobile (25 Mbit/s)",
+            "broadbandWifi": "Wi-Fi domestique (100 Mbit/s)",
+            "gigabitFiber": "Fibre gigabit (1000 Mbit/s)"
           }
         }
       },
       "form": {
-        "inputTitle": "Your File Size",
-        "from": "From",
-        "to": "To",
-        "swap": "Swap units",
-        "valueLabel": "Value",
-        "valuePlaceholder": "Enter value",
-        "unitLabel": "Unit",
-        "standardLabel": "Standard",
-        "standardDecimal": "Decimal (SI)",
-        "standardDecimalHint": "1 KB = 1000 bytes — used by storage manufacturers and network speeds.",
-        "standardBinary": "Binary (IEC)",
-        "standardBinaryHint": "1 KB = 1024 bytes — used by RAM and most operating system displays.",
-        "convert": "Convert"
+        "inputTitle": "Votre taille de fichier",
+        "from": "De",
+        "to": "Vers",
+        "swap": "Inverser les unités",
+        "valueLabel": "Valeur",
+        "valuePlaceholder": "Saisissez une valeur",
+        "unitLabel": "Unité",
+        "standardLabel": "Norme",
+        "standardDecimal": "Décimale (SI)",
+        "standardDecimalHint": "1 Ko = 1000 octets — utilisée par les fabricants de stockage et pour les débits réseau.",
+        "standardBinary": "Binaire (CEI)",
+        "standardBinaryHint": "1 Ko = 1024 octets — utilisée par la RAM et la plupart des affichages des systèmes d'exploitation.",
+        "convert": "Convertir"
       },
       "units": {
-        "B": "Bytes (B)",
-        "KB": "Kilobytes (KB)",
-        "MB": "Megabytes (MB)",
-        "GB": "Gigabytes (GB)",
-        "TB": "Terabytes (TB)",
-        "PB": "Petabytes (PB)"
+        "B": "Octets (o)",
+        "KB": "Kilooctets (Ko)",
+        "MB": "Mégaoctets (Mo)",
+        "GB": "Gigaoctets (Go)",
+        "TB": "Téraoctets (To)",
+        "PB": "Pétaoctets (Po)"
       },
       "errors": {
-        "required": "Please enter a valid number.",
-        "negativeValue": "Value must not be negative."
+        "required": "Veuillez saisir un nombre valide.",
+        "negativeValue": "La valeur ne doit pas être négative."
       },
       "education": {
         "intro": {
-          "title": "Why File Size Conversion Isn't as Simple as It Looks",
-          "paragraph1": "There are actually two different, equally legitimate definitions of \"kilobyte\" in everyday use, and they disagree by more than 2%. The decimal (SI) definition treats \"kilo\" the same way it's used everywhere else in science — exactly 1,000 — so 1 KB = 1,000 bytes, 1 MB = 1,000,000 bytes, and so on. The binary definition instead uses powers of 2, since computer memory is addressed in binary: 1 KB = 2¹⁰ = 1,024 bytes, 1 MB = 2²⁰ = 1,048,576 bytes. Both are real, both are still in active use today, and neither is simply 'wrong' — they're answering different questions about how the underlying hardware works.",
-          "paragraph2": "The practical problem is that the gap between these two standards compounds at every step up the scale. It starts small — 1,024 is only 2.4% larger than 1,000 — but that difference multiplies at each higher unit: by the terabyte level it has grown to roughly 10%, which is exactly why a drive advertised and sold as \"1 TB\" (the decimal definition, matching its true manufactured capacity) shows up in an operating system reporting free space in binary units as only about 931 GB — no storage has vanished; the OS is measuring in a different-sized \"gigabyte\" than the one printed on the box.",
+          "title": "Pourquoi la conversion de taille de fichier n'est pas aussi simple qu'il y paraît",
+          "paragraph1": "Il existe en réalité deux définitions différentes, et toutes deux légitimes, du « kilooctet » dans l'usage courant, et elles divergent de plus de 2 %. La définition décimale (SI) traite « kilo » exactement comme partout ailleurs en science — précisément 1 000 — donc 1 Ko = 1 000 octets, 1 Mo = 1 000 000 octets, et ainsi de suite. La définition binaire utilise au contraire des puissances de 2, puisque la mémoire des ordinateurs est adressée en binaire : 1 Ko = 2¹⁰ = 1 024 octets, 1 Mo = 2²⁰ = 1 048 576 octets. Les deux sont réelles, toutes deux restent activement utilisées aujourd'hui, et aucune n'est simplement « fausse » — elles répondent à des questions différentes sur le fonctionnement du matériel sous-jacent.",
+          "paragraph2": "Le problème pratique est que l'écart entre ces deux normes s'amplifie à chaque échelon. Il commence petit — 1 024 n'est que 2,4 % plus grand que 1 000 — mais cette différence se multiplie à chaque unité supérieure : au niveau du téraoctet, elle atteint environ 10 %, ce qui explique précisément pourquoi un disque annoncé et vendu comme faisant « 1 To » (la définition décimale, correspondant à sa capacité réellement fabriquée) apparaît, dans un système d'exploitation qui mesure l'espace libre en unités binaires, comme n'ayant qu'environ 931 Go — aucun espace n'a disparu ; le système mesure simplement dans un « gigaoctet » de taille différente de celui imprimé sur la boîte.",
           "diagram": {
-            "chartLabel": "Percentage gap between binary and decimal units by scale",
-            "caption": "The gap between binary (1024-based) and decimal (1000-based) units at each order of magnitude — starting at 2.4% for kilo and compounding to nearly 12.6% by peta."
+            "chartLabel": "Écart en pourcentage entre unités binaires et décimales selon l'échelle",
+            "caption": "L'écart entre les unités binaires (base 1024) et décimales (base 1000) à chaque ordre de grandeur — partant de 2,4 % pour kilo et s'amplifiant jusqu'à près de 12,6 % pour péta."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How the same raw byte count reads differently depending on the standard and unit chosen.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Exemples résolus",
+          "intro": "Comment le même nombre d'octets se lit différemment selon la norme et l'unité choisies.",
+          "columnScenario": "Scénario",
+          "columnResult": "Résultat",
           "rows": [
             {
-              "scenario": "A drive manufactured and sold as \"1 TB\" (decimal), read by an OS using binary units",
-              "result": "Shows as ≈931.32 GiB — not 1000 GB"
+              "scenario": "Un disque fabriqué et vendu comme faisant « 1 To » (décimal), lu par un système d'exploitation utilisant des unités binaires",
+              "result": "Affiche ≈931,32 Gio — et non 1000 Go"
             },
             {
-              "scenario": "A 500 MB (decimal) file downloaded at 100 Mbps",
-              "result": "≈40 seconds"
+              "scenario": "Un fichier de 500 Mo (décimal) téléchargé à 100 Mbit/s",
+              "result": "≈40 secondes"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Why does my \"1 TB\" hard drive show up as only about 931 GB in Windows?",
-              "answer": "Because the drive's advertised capacity is measured in the decimal standard (1 TB = 1,000,000,000,000 bytes, matching its true physical capacity), while Windows' File Explorer reports free space using binary-based math but decimal-looking unit labels. The same byte count, read in true binary GiB units, is a smaller number — no capacity is actually missing."
+              "question": "Pourquoi mon disque dur « 1 To » n'affiche-t-il qu'environ 931 Go dans Windows ?",
+              "answer": "Parce que la capacité annoncée du disque est mesurée selon la norme décimale (1 To = 1 000 000 000 000 octets, correspondant à sa capacité physique réelle), tandis que l'Explorateur de fichiers de Windows indique l'espace libre avec un calcul en base binaire mais des libellés d'unité d'apparence décimale. Le même nombre d'octets, lu en véritables unités binaires Gio, donne un nombre plus petit — aucune capacité n'a réellement disparu."
             },
             {
-              "question": "What's the actual difference between KB and KiB?",
-              "answer": "KB (kilobyte) is the decimal unit, always meaning exactly 1,000 bytes under the modern IEC/NIST-recommended naming. KiB (kibibyte) is the binary unit, always meaning exactly 1,024 bytes. The two-letter \"i\" in KiB, MiB, GiB, and so on exists specifically to make this distinction unambiguous — a convention this tool follows in its binary-standard column."
+              "question": "Quelle est la vraie différence entre Ko et Kio ?",
+              "answer": "Ko (kilooctet) est l'unité décimale, désignant toujours exactement 1 000 octets selon la nomenclature moderne recommandée par la CEI/NIST. Kio (kibioctet) est l'unité binaire, désignant toujours exactement 1 024 octets. Le « i » dans Kio, Mio, Gio, etc. existe précisément pour lever toute ambiguïté — une convention que cet outil suit dans sa colonne de norme binaire."
             },
             {
-              "question": "Which standard should I actually use — decimal or binary?",
-              "answer": "It depends what you're measuring. Storage capacity (hard drives, SSDs, flash drives) and network bandwidth are conventionally quoted in decimal units by manufacturers and ISPs. RAM capacity is inherently binary, since memory is physically addressed in powers of 2, which is why RAM sizes (8 GB, 16 GB, 32 GB) are quietly binary values even though they're labeled with decimal-looking unit names."
+              "question": "Quelle norme dois-je réellement utiliser — décimale ou binaire ?",
+              "answer": "Cela dépend de ce que vous mesurez. La capacité de stockage (disques durs, SSD, clés USB) et la bande passante réseau sont conventionnellement annoncées en unités décimales par les fabricants et les fournisseurs d'accès. La capacité de la RAM est intrinsèquement binaire, puisque la mémoire est physiquement adressée en puissances de 2 — c'est pourquoi les tailles de RAM (8 Go, 16 Go, 32 Go) sont en réalité des valeurs binaires, bien qu'étiquetées avec des noms d'unité d'apparence décimale."
             },
             {
-              "question": "Why do storage manufacturers use decimal while operating systems often show binary?",
-              "answer": "Decimal units make a drive's true capacity look larger and align with the SI system used for every other physical quantity, which is a genuine commercial incentive as well as a technically defensible choice. Operating systems, on the other hand, evolved from a computing culture where memory addressing was always binary, so many (Windows especially) still compute in binary internally — they just haven't updated their on-screen unit labels to match, which is the direct source of the mismatch."
+              "question": "Pourquoi les fabricants de stockage utilisent-ils le décimal alors que les systèmes d'exploitation affichent souvent du binaire ?",
+              "answer": "Les unités décimales font paraître plus grande la capacité réelle d'un disque et s'alignent sur le système SI utilisé pour toutes les autres grandeurs physiques — une incitation commerciale réelle autant qu'un choix techniquement défendable. Les systèmes d'exploitation, eux, sont issus d'une culture informatique où l'adressage mémoire a toujours été binaire, si bien que beaucoup d'entre eux (Windows en particulier) calculent encore en interne en binaire — ils n'ont simplement pas mis à jour leurs libellés d'unité à l'écran en conséquence, ce qui est la source directe de cet écart."
             },
             {
-              "question": "Does this decimal-vs-binary confusion affect network speeds too?",
-              "answer": "Network and internet connection speeds are always quoted in decimal bits per second (Mbps, Gbps) — never binary — and bits are not the same unit as the bytes file sizes are measured in. That's a second, separate source of confusion: an 8 megabit-per-second connection transfers only about 1 megabyte per second, not 8, because there are 8 bits in a byte."
+              "question": "Cette confusion décimal/binaire touche-t-elle aussi les débits réseau ?",
+              "answer": "Les débits réseau et de connexion internet sont toujours annoncés en bits par seconde décimaux (Mbit/s, Gbit/s) — jamais en binaire — et les bits ne sont pas la même unité que les octets utilisés pour mesurer la taille des fichiers. C'est une seconde source de confusion, distincte : une connexion à 8 mégabits par seconde ne transfère qu'environ 1 mégaoctet par seconde, et non 8, car un octet contient 8 bits."
             },
             {
-              "question": "Why might this tool's download-time estimate differ from what I see in an actual browser or app?",
-              "answer": "This estimate assumes a constant, uninterrupted connection running at exactly the stated link speed, converting the file's byte size to bits and dividing by that speed. Real transfers are affected by network overhead, other traffic sharing the connection, server-side throttling, and the gap between a connection's theoretical maximum speed and what it actually sustains — so treat this as a best-case estimate, not a guarantee."
+              "question": "Pourquoi l'estimation du temps de téléchargement de cet outil pourrait-elle différer de ce que je vois dans un navigateur ou une application réels ?",
+              "answer": "Cette estimation suppose une connexion constante et ininterrompue fonctionnant exactement à la vitesse annoncée, en convertissant la taille en octets du fichier en bits puis en divisant par cette vitesse. Les transferts réels sont affectés par la surcharge réseau, le trafic partagé avec d'autres connexions, une éventuelle limitation côté serveur, et l'écart entre la vitesse maximale théorique d'une connexion et ce qu'elle soutient réellement — considérez donc ceci comme une estimation optimiste, non comme une garantie."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "A Convenient Shorthand That Outgrew Its Convenience",
-            "paragraph": "Computer memory has always been addressed in powers of two, so early computer scientists in the 1960s and 1970s noticed that 2¹⁰ (1,024) happened to land conveniently close to 1,000 and started informally borrowing the SI prefix \"kilo\" to describe it — a shorthand of convenience, not a formal standard. That informal reuse spread through the industry for decades with no single body regulating it, so \"kilobyte\" quietly came to mean two different numbers depending on context, a discrepancy small enough at the kilobyte scale to go largely unnoticed but destined to compound as storage capacities grew into the megabyte, gigabyte, and eventually terabyte range."
+            "title": "Un raccourci pratique qui a fini par poser problème",
+            "paragraph": "La mémoire des ordinateurs a toujours été adressée en puissances de deux, si bien que les premiers informaticiens des années 1960 et 1970 ont remarqué que 2¹⁰ (1 024) tombait commodément près de 1 000 et ont commencé à emprunter de manière informelle le préfixe SI « kilo » pour le désigner — un raccourci de commodité, non une norme officielle. Cet emprunt informel s'est répandu dans l'industrie pendant des décennies sans qu'aucun organisme ne le régule, si bien que « kilooctet » en est venu à désigner discrètement deux nombres différents selon le contexte — un écart assez faible à l'échelle du kilooctet pour passer largement inaperçu, mais destiné à s'amplifier à mesure que les capacités de stockage grandissaient jusqu'au mégaoctet, au gigaoctet, puis au téraoctet."
           },
           "modernDevelopments": {
-            "title": "A Formal Standard That the Industry Still Hasn't Fully Adopted",
-            "paragraph": "The International Electrotechnical Commission (IEC) formally resolved the ambiguity by introducing distinct binary prefixes — kibi, mebi, gibi, and beyond — first in IEC 60027-2 in 1998 and consolidated in IEC 80000-13:2008, the standard this tool's binary-unit column follows. NIST and most standards bodies now officially recommend this distinction. Adoption remains uneven in practice, however: Linux distributions and Apple's macOS/iOS have largely switched storage displays to true decimal units to match manufacturer specifications, while Windows still displays binary-computed values under decimal-looking labels — which is precisely the mismatch this tool's side-by-side comparison is built to make visible."
+            "title": "Une norme officielle que l'industrie n'a toujours pas pleinement adoptée",
+            "paragraph": "La Commission électrotechnique internationale (CEI) a formellement résolu cette ambiguïté en introduisant des préfixes binaires distincts — kibi, mébi, gibi, et au-delà — d'abord dans la norme CEI 60027-2 en 1998, puis consolidés dans la CEI 80000-13:2008, la norme que suit la colonne binaire de cet outil. Le NIST et la plupart des organismes de normalisation recommandent désormais officiellement cette distinction. Son adoption reste toutefois inégale en pratique : les distributions Linux et macOS/iOS d'Apple sont largement passées à de véritables unités décimales pour l'affichage du stockage, conformément aux spécifications des fabricants, tandis que Windows continue d'afficher des valeurs calculées en binaire sous des libellés d'apparence décimale — c'est précisément cet écart que la comparaison côte à côte de cet outil est conçue pour rendre visible."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Data representation, number systems, and measurement standards — the exact concepts this tool converts between — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Parcours académique",
+            "intro": "La représentation des données, les systèmes de numération et les normes de mesure — les concepts mêmes que cet outil met en conversion — sont étudiés dans les cursus d'informatique. Voici les 5 premières institutions mondiales selon le classement QS World University Rankings by Subject 2025, plus une option régionale :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 1 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "Non — le programme 6-3 du MIT (informatique et génie informatique) est un cursus en présentiel sur le campus de Cambridge."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 2 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "Non — le programme de licence en informatique de Stanford est un cursus en présentiel sur le campus."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 3 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "Non — le programme de licence de la School of Computer Science de CMU se déroule en présentiel sur le campus de Pittsburgh."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 4 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "Non — le Bachelor of Computing en informatique de la NUS est un programme en présentiel incluant un stage obligatoire sur campus ou à l'étranger."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 5 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "Non — le cursus d'informatique d'Oxford est enseigné en présentiel via son système de tutorat, avec un ou deux étudiants rencontrant directement un tuteur."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Propose un Bachelor of Science en informatique, accrédité ABET, au sein de son College of Engineering.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Mode de dispensation non précisé sur la page officielle du programme."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Norme technique",
           "citation": "IEC 80000-13:2008 — Quantities and units — Part 13: Information science and technology. International Electrotechnical Commission.",
-          "note": "The official standard defining the binary prefixes (kibi, mebi, gibi, tebi, pebi) this tool's binary-standard column follows, formally resolving the decimal/binary kilobyte ambiguity.",
+          "note": "La norme officielle définissant les préfixes binaires (kibi, mébi, gibi, tébi, pébi) que suit la colonne binaire de cet outil, résolvant formellement l'ambiguïté du kilooctet décimal/binaire.",
           "url": "https://webstore.iec.ch/en/publication/7479",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "Consulter la norme officielle"
         }
       }
     },
