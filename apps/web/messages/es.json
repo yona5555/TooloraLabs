@@ -5350,159 +5350,159 @@
       }
     },
     "base64-tool": {
-      "title": "Base64 Encoder/Decoder",
-      "description": "Encode text or files to Base64 — standard or URL-safe — or decode Base64 back to text or a downloadable file, live as you type.",
+      "title": "Codificador/decodificador Base64",
+      "description": "Codifica texto o archivos a Base64 —estándar o URL-safe— o decodifica Base64 de vuelta a texto o a un archivo descargable, en tiempo real mientras escribes.",
       "nav": {
-        "tool": "Encoder/Decoder",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Codificador/decodificador",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
       },
       "aboveFold": {
-        "resultTitle": "Result",
-        "placeholder": "Enter text to encode, or Base64 to decode, to see the result here.",
-        "sizeInput": "Input Size",
-        "sizeOutput": "Output Size",
+        "resultTitle": "Resultado",
+        "placeholder": "Escribe un texto para codificarlo, o un Base64 para decodificarlo, y verás aquí el resultado.",
+        "sizeInput": "Tamaño de entrada",
+        "sizeOutput": "Tamaño de salida",
         "bytes": "bytes",
-        "sizeChange": "size change",
+        "sizeChange": "variación de tamaño",
         "filePanel": {
-          "title": "File ⇄ Base64",
-          "intro": "Convert any file to a Base64 data URI, or paste one back in to download it.",
-          "chooseFile": "Choose a File",
-          "download": "Download",
-          "invalidDataUri": "This is not a valid Base64 data URI."
+          "title": "Archivo ⇄ Base64",
+          "intro": "Convierte cualquier archivo en un URI de datos Base64, o pega uno para descargarlo de nuevo como archivo.",
+          "chooseFile": "Elegir un archivo",
+          "download": "Descargar",
+          "invalidDataUri": "Esto no es un URI de datos Base64 válido."
         }
       },
       "form": {
-        "inputTitle": "Input",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Enter text to encode or Base64 to decode...",
-        "encode": "Encode",
-        "decode": "Decode",
-        "variantStandard": "Standard",
-        "variantUrlSafe": "URL-Safe",
-        "outputLabel": "Result",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "inputTitle": "Entrada",
+        "inputLabel": "Entrada",
+        "inputPlaceholder": "Escribe un texto para codificar o un Base64 para decodificar...",
+        "encode": "Codificar",
+        "decode": "Decodificar",
+        "variantStandard": "Estándar",
+        "variantUrlSafe": "Compatible con URL",
+        "outputLabel": "Resultado",
+        "copy": "Copiar",
+        "copied": "¡Copiado!"
       },
       "errors": {
-        "required": "Please enter some text.",
-        "invalidBase64": "This is not valid Base64 text."
+        "required": "Introduce algún texto.",
+        "invalidBase64": "Este texto no es Base64 válido."
       },
       "education": {
         "intro": {
-          "title": "How Base64 Encoding Actually Works",
-          "paragraph1": "Base64 solves one narrow problem: representing arbitrary binary data — the raw bytes of an image, a file, or any content that isn't plain text — using only characters that are guaranteed to survive being passed through text-only channels like email bodies, URLs, or JSON strings. It does this by regrouping data. Binary data is naturally organized into 8-bit bytes, but Base64 reads it in chunks of three bytes (24 bits) at a time and regroups those same 24 bits into four 6-bit groups instead. Since 6 bits can represent exactly 64 distinct values (2⁶ = 64), each 6-bit group maps directly onto one of 64 printable characters — hence the name.",
-          "paragraph2": "This regrouping is also exactly why Base64 output is always about a third larger than the original input: three input bytes (24 bits) become four output characters, and since each output character is stored as one full byte of text even though it only carries 6 bits of actual information, the encoded result inflates by a factor of 4/3, or roughly 33%. When the input length isn't a clean multiple of three bytes, standard Base64 pads the output with one or two '=' characters so the decoder can tell exactly how many of the final group's bits are real data versus filler — the URL-safe variant this tool also supports typically omits that padding entirely, since it's most often used in contexts (like URLs) where a trailing '=' would need its own escaping anyway.",
+          "title": "Cómo funciona realmente la codificación Base64",
+          "paragraph1": "Base64 resuelve un problema muy concreto: representar datos binarios arbitrarios —los bytes en bruto de una imagen, un archivo o cualquier contenido que no sea texto plano— usando solo caracteres que tienen garantizado sobrevivir al pasar por canales pensados únicamente para texto, como el cuerpo de un correo electrónico, una URL o una cadena JSON. Lo consigue reagrupando los datos. Los datos binarios se organizan de forma natural en bytes de 8 bits, pero Base64 los lee en bloques de tres bytes (24 bits) y reagrupa esos mismos 24 bits en cuatro grupos de 6 bits. Como 6 bits pueden representar exactamente 64 valores distintos (2⁶ = 64), cada grupo de 6 bits se traduce directamente en uno de 64 caracteres imprimibles — de ahí el nombre.",
+          "paragraph2": "Este reagrupamiento es también la razón exacta por la que la salida de Base64 es siempre alrededor de un tercio más grande que la entrada original: tres bytes de entrada (24 bits) se convierten en cuatro caracteres de salida, y como cada carácter de salida se almacena como un byte completo de texto aunque solo transporte 6 bits de información real, el resultado codificado se infla por un factor de 4/3, es decir, aproximadamente un 33 %. Cuando la longitud de la entrada no es un múltiplo exacto de tres bytes, el Base64 estándar rellena la salida con uno o dos caracteres «=» para que el decodificador sepa exactamente cuántos bits del último grupo son datos reales y cuántos son relleno — la variante compatible con URL que esta herramienta también admite normalmente omite ese relleno por completo, ya que suele usarse en contextos (como las URL) donde un «=» final necesitaría su propio escapado de todos modos.",
           "diagram": {
             "byteLabel": "Byte",
-            "sextetLabel": "Group",
-            "caption": "Base64's core regrouping: three 8-bit bytes (24 bits total) are read as one continuous bit stream and split into four 6-bit groups instead, each of which maps to one printable Base64 character."
+            "sextetLabel": "Grupo",
+            "caption": "El reagrupamiento central de Base64: tres bytes de 8 bits (24 bits en total) se leen como un único flujo continuo de bits y se dividen en cuatro grupos de 6 bits, cada uno de los cuales se traduce en un carácter Base64 imprimible."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "The same input, encoded two different ways, and what the size overhead looks like in practice.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Ejemplos resueltos",
+          "intro": "La misma entrada, codificada de dos formas distintas, y cómo se ve en la práctica el sobrecoste de tamaño.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado",
           "rows": [
             {
-              "scenario": "Encode \"subjects?_d=1\" — standard vs. URL-safe",
-              "result": "Standard: c3ViamVjdHM/X2Q9MQ== · URL-safe: c3ViamVjdHM_X2Q9MQ"
+              "scenario": "Codificar «subjects?_d=1» — estándar frente a compatible con URL",
+              "result": "Estándar: c3ViamVjdHM/X2Q9MQ== · Compatible con URL: c3ViamVjdHM_X2Q9MQ"
             },
             {
-              "scenario": "A 300 KB image file encoded to a Base64 data URI",
-              "result": "≈400 KB of text — about a 33% size increase"
+              "scenario": "Un archivo de imagen de 300 KB codificado como URI de datos Base64",
+              "result": "≈400 KB de texto — un aumento de tamaño de aproximadamente un 33 %"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "Why does encoding make my data about 33% larger?",
-              "answer": "Because Base64 spends one full output character to carry only 6 bits of real information, while a plain byte carries 8. Three input bytes (24 bits) always become four output characters — a 4-for-3 expansion, which works out to roughly 33% overhead regardless of what the original data was."
+              "question": "¿Por qué la codificación hace que mis datos ocupen alrededor de un 33 % más?",
+              "answer": "Porque Base64 usa un carácter de salida completo para transportar solo 6 bits de información real, mientras que un byte normal transporta 8. Tres bytes de entrada (24 bits) siempre se convierten en cuatro caracteres de salida — una expansión de 4 por 3 que equivale, aproximadamente, a un 33 % de sobrecoste, sin importar cuáles fueran los datos originales."
             },
             {
-              "question": "What's actually different between standard and URL-safe Base64?",
-              "answer": "Only two characters change: standard Base64 uses '+' and '/' in its alphabet, while URL-safe Base64 (defined in RFC 4648 §5) replaces them with '-' and '_' — both characters that don't need escaping inside a URL or filename. URL-safe output also typically omits the trailing '=' padding for the same reason. Everything else about the encoding is identical."
+              "question": "¿Qué diferencia realmente al Base64 estándar del compatible con URL?",
+              "answer": "Solo cambian dos caracteres: el Base64 estándar usa «+» y «/» en su alfabeto, mientras que el Base64 compatible con URL (definido en el RFC 4648 §5) los sustituye por «-» y «_» —ambos caracteres que no necesitan escaparse dentro de una URL o un nombre de archivo—. La salida compatible con URL también suele omitir el relleno final con «=» por el mismo motivo. Todo lo demás en la codificación es idéntico."
             },
             {
-              "question": "Is Base64 a form of encryption or a security measure?",
-              "answer": "No — Base64 provides zero confidentiality. It's a reversible, publicly documented encoding with no key involved, so anyone can decode it in one step with any Base64 tool, including this one. It's meant purely to make binary data transportable through text-only channels, never to hide or protect it."
+              "question": "¿Es Base64 una forma de cifrado o una medida de seguridad?",
+              "answer": "No — Base64 no ofrece ninguna confidencialidad. Es una codificación reversible y de especificación pública, sin ninguna clave involucrada, así que cualquiera puede decodificarla en un solo paso con cualquier herramienta Base64, incluida esta. Su único propósito es hacer que los datos binarios puedan transportarse por canales de solo texto, nunca ocultarlos ni protegerlos."
             },
             {
-              "question": "Why do I sometimes see trailing '=' characters and sometimes not?",
-              "answer": "The '=' characters are padding, added only when the input length isn't an exact multiple of 3 bytes, so the decoder knows precisely how many bits in the final group are real data. One '=' means the last group encoded 2 real bytes; two '=' means it encoded 1. Input lengths that are already a multiple of 3 need no padding at all — and the URL-safe variant omits it by convention regardless."
+              "question": "¿Por qué a veces veo caracteres «=» al final y otras veces no?",
+              "answer": "Los caracteres «=» son relleno, y solo se añaden cuando la longitud de la entrada no es un múltiplo exacto de 3 bytes, para que el decodificador sepa con precisión cuántos bits del último grupo son datos reales. Un «=» significa que el último grupo codificaba 2 bytes reales; dos «=» significan que codificaba 1. Las entradas cuya longitud ya es múltiplo de 3 no necesitan ningún relleno — y la variante compatible con URL lo omite por convención en cualquier caso."
             },
             {
-              "question": "Does the file panel upload my file anywhere?",
-              "answer": "No — the file is read directly in your browser using the File API, and the resulting Base64 data URI is generated and displayed locally. Nothing is ever uploaded to a server."
+              "question": "¿El panel de archivos sube mi archivo a algún sitio?",
+              "answer": "No — el archivo se lee directamente en tu navegador mediante la File API, y el URI de datos Base64 resultante se genera y se muestra de forma local. Nada se sube nunca a ningún servidor."
             },
             {
-              "question": "Why does decoding sometimes fail with an \"invalid Base64\" error even though the text looks fine?",
-              "answer": "Standard Base64 requires the input length to be an exact multiple of 4 characters and every character to come from its specific 64-character alphabet; a single stray character, wrong padding, or mixing the standard and URL-safe alphabets (for example, decoding a '+' as URL-safe) will all correctly fail rather than silently produce garbage."
+              "question": "¿Por qué a veces falla la decodificación con un error de «Base64 no válido» aunque el texto parezca correcto?",
+              "answer": "El Base64 estándar exige que la longitud de la entrada sea un múltiplo exacto de 4 caracteres y que cada carácter pertenezca a su alfabeto específico de 64 caracteres; un solo carácter fuera de lugar, un relleno incorrecto o mezclar los alfabetos estándar y compatible con URL (por ejemplo, decodificar un «+» como si fuera compatible con URL) harán que falle correctamente en lugar de producir basura en silencio."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Detrás de esta herramienta",
           "history": {
-            "title": "Getting Binary Data Through Text-Only Pipes",
-            "paragraph": "The core problem Base64 solves predates it by decades: early Unix systems used uuencode, introduced around 1980, to pack binary files into the plain-ASCII format that Unix-to-Unix Copy (UUCP) mail transfers required. The specific Base64 scheme in use today emerged with MIME (Multipurpose Internet Mail Extensions), formalized by Nathaniel Borenstein and Ned Freed in RFC 1521 in 1993, which needed a reliable way to attach binary files — images, documents, executables — to email messages built on a protocol (SMTP) originally designed to carry only 7-bit ASCII text."
+            "title": "Cómo hacer pasar datos binarios por canales de solo texto",
+            "paragraph": "El problema central que resuelve Base64 es anterior a él por décadas: los primeros sistemas Unix usaban uuencode, introducido hacia 1980, para empaquetar archivos binarios en el formato ASCII plano que requerían las transferencias de correo Unix-to-Unix Copy (UUCP). El esquema Base64 concreto que usamos hoy surgió con MIME (Multipurpose Internet Mail Extensions), formalizado por Nathaniel Borenstein y Ned Freed en el RFC 1521 de 1993, que necesitaba una forma fiable de adjuntar archivos binarios —imágenes, documentos, ejecutables— a mensajes de correo construidos sobre un protocolo (SMTP) diseñado originalmente para transportar solo texto ASCII de 7 bits."
           },
           "modernDevelopments": {
-            "title": "From Email Attachments to Web-Native Tokens",
-            "paragraph": "RFC 4648, published in 2006, generalized and formally standardized Base64 (alongside Base16 and Base32) independent of its original email context, explicitly defining the URL-safe and filename-safe variant this tool supports. Base64 is now everywhere on the modern web well beyond email: data URIs let small images and fonts be embedded directly inside HTML or CSS to save an extra HTTP request; HTTP Basic Authentication headers carry credentials Base64-encoded (not encrypted); and JSON Web Tokens (JWTs) — the standard for modern web authentication — encode their header, payload, and signature segments using exactly the URL-safe, unpadded Base64 variant this tool's toggle produces."
+            "title": "De los archivos adjuntos de correo a los tokens nativos de la web",
+            "paragraph": "El RFC 4648, publicado en 2006, generalizó y estandarizó formalmente Base64 (junto con Base16 y Base32) al margen de su contexto original de correo electrónico, definiendo explícitamente la variante compatible con URL y con nombres de archivo que esta herramienta admite. Hoy Base64 está por todas partes en la web moderna, mucho más allá del correo: los URI de datos permiten incrustar imágenes pequeñas y fuentes directamente dentro de HTML o CSS para ahorrar una solicitud HTTP adicional; las cabeceras de autenticación HTTP Basic transportan credenciales codificadas en Base64 (no cifradas); y los JSON Web Tokens (JWT) —el estándar de autenticación de la web moderna— codifican sus segmentos de cabecera, carga útil y firma usando exactamente la variante Base64 compatible con URL y sin relleno que produce el selector de esta herramienta."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Data encoding schemes, bit-level representation, and formal data-format specifications — the exact concepts this tool implements — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Ruta académica",
+            "intro": "Los esquemas de codificación de datos, la representación a nivel de bits y las especificaciones formales de formatos de datos —los conceptos exactos que implementa esta herramienta— se estudian dentro de los programas de Ciencias de la Computación. Estas son las cinco mejores instituciones del mundo según el QS World University Rankings by Subject 2025, más una opción regional:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #1 del mundo en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "No — el programa Course 6-3 (Ciencias de la Computación e Ingeniería) del MIT es un grado presencial en el campus de Cambridge."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #2 del mundo en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "No — el grado en Ciencias de la Computación de Stanford es un título presencial en el campus de Stanford."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #3 del mundo en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "No — el grado de la School of Computer Science de la CMU es presencial en su campus de Pittsburgh."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #4 del mundo en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "No — el Bachelor of Computing en Ciencias de la Computación de la NUS es un programa presencial que incluye unas prácticas obligatorias en el campus o en el extranjero."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #5 del mundo en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "No — el grado en Ciencias de la Computación de Oxford se imparte de forma presencial mediante su sistema de tutorías, con uno o dos estudiantes reunidos directamente con un tutor."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Ofrece un Bachelor of Science en Ciencias de la Computación, acreditado por ABET, a través de su College of Engineering.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "La modalidad de impartición no se indica en la página oficial del programa."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
-          "citation": "RFC 4648 — The Base16, Base32, and Base64 Data Encodings. S. Josefsson. Internet Engineering Task Force (IETF), October 2006.",
-          "note": "The official specification this tool implements exactly, including the standard alphabet, the padding rules, and the URL-safe and filename-safe alphabet this tool's variant toggle produces.",
+          "title": "Estándar técnico",
+          "citation": "RFC 4648 — The Base16, Base32, and Base64 Data Encodings. S. Josefsson. Internet Engineering Task Force (IETF), octubre de 2006.",
+          "note": "La especificación oficial que esta herramienta implementa con exactitud, incluidos el alfabeto estándar, las reglas de relleno y el alfabeto compatible con URL y con nombres de archivo que produce el selector de variante de esta herramienta.",
           "url": "https://www.rfc-editor.org/rfc/rfc4648",
-          "readOriginal": "Read the Original RFC"
+          "readOriginal": "Leer el RFC original"
         }
       }
     },
