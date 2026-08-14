@@ -5190,162 +5190,162 @@
       }
     },
     "word-counter": {
-      "title": "Word & Character Counter",
-      "description": "Count words, characters, and sentences; estimate reading time; and see your top keywords and platform character limits — live as you type.",
+      "title": "Contador de palabras y caracteres",
+      "description": "Cuenta palabras, caracteres y frases; estima el tiempo de lectura; y consulta tus palabras clave más frecuentes y los límites de caracteres de cada plataforma — en directo, mientras escribes.",
       "nav": {
-        "tool": "Counter",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Contador",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
       },
       "aboveFold": {
-        "resultTitle": "Live Stats",
-        "placeholder": "Start typing or paste text to see word, character, and keyword stats here.",
-        "keywordsTitle": "Top Keywords by Frequency",
+        "resultTitle": "Estadísticas en vivo",
+        "placeholder": "Empieza a escribir o pega un texto para ver aquí las estadísticas de palabras, caracteres y palabras clave.",
+        "keywordsTitle": "Palabras clave más frecuentes",
         "platformLimits": {
-          "title": "Platform Character Limits",
-          "intro": "See how your current character count compares to common platform limits.",
+          "title": "Límites de caracteres por plataforma",
+          "intro": "Compara tu recuento actual de caracteres con los límites habituales de cada plataforma.",
           "items": {
-            "smsMessage": "SMS Message",
-            "metaDescription": "Meta Description",
-            "xPost": "X (Twitter) Post",
-            "googleTitleTag": "Google Title Tag",
-            "youtubeTitle": "YouTube Title",
-            "instagramCaption": "Instagram Caption"
+            "smsMessage": "Mensaje SMS",
+            "metaDescription": "Meta description",
+            "xPost": "Publicación en X (Twitter)",
+            "googleTitleTag": "Etiqueta de título en Google",
+            "youtubeTitle": "Título de YouTube",
+            "instagramCaption": "Descripción de Instagram"
           }
         }
       },
       "form": {
-        "inputTitle": "Your Text",
-        "inputLabel": "Your Text",
-        "inputPlaceholder": "Start typing or paste your text here..."
+        "inputTitle": "Tu texto",
+        "inputLabel": "Tu texto",
+        "inputPlaceholder": "Empieza a escribir o pega aquí tu texto..."
       },
       "stats": {
-        "words": "Words",
-        "characters": "Characters",
-        "charactersNoSpaces": "Characters (no spaces)",
-        "sentences": "Sentences",
-        "paragraphs": "Paragraphs",
-        "readingTimeMinutes": "Reading Time (min)",
-        "uniqueWords": "Unique Words",
-        "averageWordLength": "Avg. Word Length",
-        "longestWord": "Longest Word"
+        "words": "Palabras",
+        "characters": "Caracteres",
+        "charactersNoSpaces": "Caracteres (sin espacios)",
+        "sentences": "Frases",
+        "paragraphs": "Párrafos",
+        "readingTimeMinutes": "Tiempo de lectura (min)",
+        "uniqueWords": "Palabras únicas",
+        "averageWordLength": "Longitud media de palabra",
+        "longestWord": "Palabra más larga"
       },
       "education": {
         "intro": {
-          "title": "How Word Counting Actually Works",
-          "paragraph1": "Behind a single 'word count' number are several separate, deliberate decisions about what counts as a word, a sentence, and a paragraph. A word counter first tokenizes raw text — splitting it into individual units on whitespace and punctuation boundaries — then classifies those tokens: runs of characters ending in '.', '!', or '?' close out a sentence; blank lines mark paragraph breaks; and every token is measured for length and compared against every other token to find unique words and the longest one. None of this is guesswork once the rules are fixed, but the rules themselves are a choice, which is exactly why two different tools can report two different counts for the same text.",
-          "paragraph2": "Reading-time estimates add one more layer: a words-per-minute (WPM) constant, multiplied against the word count. This tool uses 200 WPM, a commonly cited middle-of-the-road figure for adult silent reading of English prose; a large 2019 meta-analysis of reading-speed research (see the reference below) puts the actual average closer to 238 WPM for non-fiction, with wide variation by reader, language, and text difficulty — which is why any reading-time estimate should be read as a reasonable approximation, not a precise measurement. Keyword density, this tool's third layer, works by counting how often each word recurs after filtering out short, high-frequency function words ('the', 'and', 'of') so that what's left reflects the text's actual subject matter rather than its grammar.",
+          "title": "Cómo funciona realmente el conteo de palabras",
+          "paragraph1": "Detrás de un simple «número de palabras» hay varias decisiones deliberadas sobre qué cuenta como palabra, como frase y como párrafo. Un contador de palabras primero tokeniza el texto —lo divide en unidades individuales según los espacios en blanco y los signos de puntuación— y después clasifica esos tokens: las secuencias de caracteres que terminan en «.», «!» o «?» cierran una frase; las líneas en blanco marcan un cambio de párrafo; y cada token se mide en longitud y se compara con el resto para encontrar las palabras únicas y la más larga. Nada de esto es adivinación una vez fijadas las reglas, pero esas reglas son, en sí mismas, una elección — precisamente por eso dos herramientas distintas pueden dar dos recuentos distintos para el mismo texto.",
+          "paragraph2": "La estimación del tiempo de lectura añade una capa más: una constante de palabras por minuto (PPM), multiplicada por el número de palabras. Esta herramienta usa 200 PPM, una cifra intermedia habitualmente citada para la lectura silenciosa de prosa en inglés por parte de un adulto; un amplio metaanálisis de 2019 sobre velocidad de lectura (ver la referencia más abajo) sitúa la media real más cerca de 238 PPM para textos no narrativos, con una variación amplia según el lector, el idioma y la dificultad del texto — por lo que cualquier estimación de tiempo de lectura debe leerse como una aproximación razonable, no como una medición precisa. La densidad de palabras clave, la tercera capa de esta herramienta, funciona contando cuántas veces se repite cada palabra tras filtrar las palabras funcionales cortas y muy frecuentes («el», «y», «de»), de modo que lo que queda refleje el tema real del texto y no su gramática.",
           "diagram": {
-            "rawTextLabel": "Raw Text",
-            "tokenizeLabel": "Tokenize\n(words, sentences,\nparagraphs)",
-            "countsLabel": "Counts +\nreading time +\nkeywords",
-            "caption": "The word-counting pipeline: raw text is split into tokens, those tokens are classified into words, sentences, and paragraphs, and the resulting counts feed reading-time and keyword-density calculations."
+            "rawTextLabel": "Texto sin procesar",
+            "tokenizeLabel": "Tokenizar\n(palabras, frases,\npárrafos)",
+            "countsLabel": "Recuentos +\ntiempo de lectura +\npalabras clave",
+            "caption": "El proceso de conteo de palabras: el texto sin procesar se divide en tokens, esos tokens se clasifican en palabras, frases y párrafos, y los recuentos resultantes alimentan los cálculos de tiempo de lectura y densidad de palabras clave."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How the same text produces several different statistics at once.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Ejemplos resueltos",
+          "intro": "Cómo un mismo texto genera varias estadísticas distintas a la vez.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado",
           "rows": [
             {
-              "scenario": "A 600-word blog draft with varied vocabulary",
-              "result": "Reading time ≈ 3 minutes (at 200 words/minute)"
+              "scenario": "Un borrador de blog de 600 palabras con vocabulario variado",
+              "result": "Tiempo de lectura ≈ 3 minutos (a 200 palabras/minuto)"
             },
             {
-              "scenario": "\"Premium quality. Quality you can trust. Built with quality materials.\"",
-              "result": "Top keyword: \"quality\" (3 uses)"
+              "scenario": "«Calidad premium. Calidad en la que puedes confiar. Fabricado con materiales de calidad.»",
+              "result": "Palabra clave principal: «calidad» (3 usos)"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "Why does my word count here differ from what my word processor shows?",
-              "answer": "Different tools use different tokenization rules — some count a hyphenated compound as one word, others as two; some count numbers or standalone punctuation as words, others don't. There is no single universal standard, so small discrepancies between tools counting the exact same text are normal and expected."
+              "question": "¿Por qué el recuento de palabras aquí es distinto al de mi procesador de texto?",
+              "answer": "Cada herramienta usa reglas de tokenización distintas — algunas cuentan una palabra compuesta con guion como una sola palabra, otras como dos; algunas cuentan números o signos de puntuación sueltos como palabras, otras no. No existe un estándar universal único, así que las pequeñas discrepancias entre herramientas que analizan el mismo texto son normales y esperables."
             },
             {
-              "question": "What exactly counts as a sentence or a paragraph here?",
-              "answer": "A sentence is any run of text ending in a period, exclamation mark, or question mark (or the final unterminated fragment, if your text doesn't end with one). A paragraph is any block of text separated from the next by one or more blank lines. Neither rule understands abbreviations like 'Mr.' or 'e.g.', so text dense with those may show a slightly inflated sentence count."
+              "question": "¿Qué se considera exactamente una frase o un párrafo aquí?",
+              "answer": "Una frase es cualquier fragmento de texto que termina en punto, signo de exclamación o de interrogación (o el fragmento final sin cerrar, si tu texto no termina con ninguno de esos signos). Un párrafo es cualquier bloque de texto separado del siguiente por una o más líneas en blanco. Ninguna de las dos reglas reconoce abreviaturas como «Sr.» o «p. ej.», así que un texto con muchas de estas puede mostrar un recuento de frases ligeramente inflado."
             },
             {
-              "question": "Is the reading-time estimate the same as speaking or presentation time?",
-              "answer": "No. This estimate is calibrated to silent reading speed (roughly 200 words per minute), which is meaningfully faster than speaking pace — spoken presentations typically run closer to 130–150 words per minute, so a script that reads as a 3-minute read here would take noticeably longer to actually deliver out loud."
+              "question": "¿La estimación del tiempo de lectura es la misma que el tiempo de hablar o presentar?",
+              "answer": "No. Esta estimación está calibrada para la velocidad de lectura silenciosa (unas 200 palabras por minuto), que es notablemente más rápida que el ritmo al hablar — las presentaciones orales suelen rondar las 130-150 palabras por minuto, así que un guion que aquí se lee en 3 minutos tardará sensiblemente más en pronunciarse en voz alta."
             },
             {
-              "question": "Why are common words like \"the\" and \"and\" left out of the top keywords list?",
-              "answer": "Because those short, high-frequency function words appear constantly in any text regardless of topic, so including them would make every keyword list look identical. Filtering them out — a standard technique called stopword removal — leaves behind the words that actually distinguish what your text is about."
+              "question": "¿Por qué palabras comunes como «el» y «y» quedan fuera de la lista de palabras clave?",
+              "answer": "Porque esas palabras funcionales cortas y muy frecuentes aparecen constantemente en cualquier texto, sea cual sea el tema, así que incluirlas haría que todas las listas de palabras clave se parecieran. Filtrarlas —una técnica estándar llamada eliminación de palabras vacías (stopwords)— deja las palabras que realmente distinguen de qué trata tu texto."
             },
             {
-              "question": "Does this tool store, upload, or share the text I type?",
-              "answer": "No — every statistic here, including the keyword ranking, is computed directly in your browser as you type. Your text is never sent to a server or stored anywhere."
+              "question": "¿Esta herramienta almacena, sube o comparte el texto que escribo?",
+              "answer": "No — todas las estadísticas de aquí, incluida la clasificación de palabras clave, se calculan directamente en tu navegador mientras escribes. Tu texto nunca se envía a ningún servidor ni se almacena en ningún sitio."
             },
             {
-              "question": "Why do character limits matter for things like X posts or meta descriptions?",
-              "answer": "Platforms and search engines enforce hard or soft character caps for structural reasons: an SMS segment tops out at 160 characters for network protocol reasons, a Google search snippet truncates meta descriptions around 155–160 characters, and X caps posts at 280 characters by product design. Writing past these limits means your text gets cut off, truncated with an ellipsis, or rejected outright — so checking your count against the actual target platform before publishing avoids that."
+              "question": "¿Por qué importan los límites de caracteres en cosas como publicaciones en X o meta descriptions?",
+              "answer": "Las plataformas y los buscadores imponen límites de caracteres estrictos o flexibles por razones estructurales: un segmento SMS tiene un máximo de 160 caracteres por motivos del protocolo de red, un fragmento de resultados de Google trunca las meta descriptions alrededor de los 155-160 caracteres, y X limita las publicaciones a 280 caracteres por diseño del producto. Escribir por encima de estos límites hace que tu texto se corte, se trunque con puntos suspensivos o se rechace directamente — por eso conviene comprobar tu recuento frente a la plataforma de destino real antes de publicar."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Detrás de esta herramienta",
           "history": {
-            "title": "Counting Words Before Computers Did It",
-            "paragraph": "Word counts mattered commercially long before software existed to compute them: 19th- and early-20th-century magazine and newspaper publishers commonly paid writers by the word, which made an accurate manual word count a direct financial matter for both author and editor, and pulp fiction and serialized novelists — including some of the era's most famous writers — were acutely aware of their per-installment word totals for exactly that reason. Formal readability research followed in the mid-20th century, most notably Rudolf Flesch's 1948 reading-ease formula, which combined average sentence length and syllable counts into a single score — establishing sentence and word length as measurable, comparable properties of a text rather than just a stylistic impression."
+            "title": "Contar palabras antes de que lo hicieran los ordenadores",
+            "paragraph": "El recuento de palabras importaba comercialmente mucho antes de que existiera software para calcularlo: los editores de revistas y periódicos del siglo XIX y principios del XX solían pagar a los escritores por palabra, lo que convertía un recuento manual preciso en un asunto económico directo tanto para el autor como para el editor, y los novelistas de folletín y de literatura pulp —incluidos algunos de los escritores más famosos de la época— eran muy conscientes de su total de palabras por entrega, exactamente por ese motivo. La investigación formal sobre legibilidad llegó a mediados del siglo XX, sobre todo con la fórmula de facilidad de lectura de Rudolf Flesch de 1948, que combinaba la longitud media de las frases y el número de sílabas en una sola puntuación — estableciendo la longitud de frases y palabras como propiedades medibles y comparables de un texto, y no como una simple impresión de estilo."
           },
           "modernDevelopments": {
-            "title": "From Manual Tallies to Real-Time Computational Text Analysis",
-            "paragraph": "Modern text analysis has extended far beyond simple counts into corpus linguistics — the large-scale computational study of word frequency and usage patterns across huge collections of real text — which now underpins everything from dictionary compilation to search-engine ranking to the keyword-density tools writers use for search-engine optimization. Real-time, in-browser word counting, the kind this tool performs as you type, became broadly practical only once client-side JavaScript execution became fast enough to re-tokenize and re-analyze full documents on every keystroke without noticeable lag — a routine capability today, but a nontrivial one as recently as the early web."
+            "title": "De los recuentos manuales al análisis computacional de texto en tiempo real",
+            "paragraph": "El análisis de texto moderno ha ido mucho más allá de los simples recuentos hacia la lingüística de corpus —el estudio computacional a gran escala de la frecuencia y los patrones de uso de las palabras en enormes colecciones de texto real—, que hoy sustenta desde la elaboración de diccionarios hasta el posicionamiento en buscadores, pasando por las herramientas de densidad de palabras clave que usan los redactores para el SEO. El conteo de palabras en tiempo real, directamente en el navegador —el tipo que realiza esta herramienta mientras escribes—, solo se volvió ampliamente viable cuando la ejecución de JavaScript en el cliente se hizo lo bastante rápida como para retokenizar y reanalizar documentos completos con cada pulsación de tecla sin retraso perceptible: una capacidad rutinaria hoy en día, pero nada trivial hasta hace relativamente poco en la historia de la web."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The statistical study of word frequency and text structure is a core topic within linguistics, taught within linguistics and language science degree programs. Below are the top 5 globally ranked universities by the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Trayectoria académica",
+            "intro": "El estudio estadístico de la frecuencia de palabras y la estructura del texto es un tema central dentro de la lingüística, impartido en los programas de grado en lingüística y ciencias del lenguaje. A continuación, las 5 mejores universidades del mundo según el QS World University Rankings by Subject 2025, más una opción regional:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #1 del mundo en Lingüística (QS World University Rankings by Subject 2025).",
                 "url": "https://linguistics.mit.edu/graduate/admissions/",
-                "online": "No — the PhD program in MIT's Department of Linguistics and Philosophy is a full-time, in-person doctoral program on MIT's Cambridge campus; the department does not admit students to a standalone master's degree."
+                "online": "No — el programa de doctorado del Departamento de Lingüística y Filosofía del MIT es un programa presencial a tiempo completo en el campus de Cambridge; el departamento no admite estudiantes en un máster independiente."
               },
               {
                 "name": "Peking University",
-                "note": "Ranked #2 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #2 del mundo en Lingüística (QS World University Rankings by Subject 2025).",
                 "url": "http://yys.sfl.pku.edu.cn/yysgk/index.htm",
-                "online": "No — the Institute of Foreign Linguistics and Applied Linguistics's master's and doctoral programs are delivered in person on Peking University's Beijing campus."
+                "online": "No — los programas de máster y doctorado del Instituto de Lingüística Extranjera y Aplicada se imparten presencialmente en el campus de Pekín de la universidad."
               },
               {
                 "name": "Lancaster University",
-                "note": "Ranked #3 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #3 del mundo en Lingüística (QS World University Rankings by Subject 2025).",
                 "url": "https://www.lancaster.ac.uk/study/postgraduate/postgraduate-courses/corpus-linguistics-online-ma/2026/",
-                "online": "Yes — the MA in Corpus Linguistics is delivered fully online, taught by the university credited with pioneering corpus linguistics, the field of computational word-frequency analysis this tool's keyword ranking is a small example of."
+                "online": "Sí — el Máster en Lingüística de Corpus se imparte totalmente en línea, en la universidad reconocida por ser pionera en la lingüística de corpus, el campo del análisis computacional de frecuencia de palabras del que la clasificación de palabras clave de esta herramienta es un pequeño ejemplo."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Tied for #4 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Empatada en el puesto #4 del mundo en Lingüística (QS World University Rankings by Subject 2025).",
                 "url": "https://www.mmll.cam.ac.uk/dtal/postgraduates/study/mphils-linguistics-language-sciences/mphil-linguistics-language-sciences",
-                "online": "No — the MPhil in Linguistics and Language Sciences is a full-time, in-person taught program on Cambridge's campus."
+                "online": "No — el MPhil en Lingüística y Ciencias del Lenguaje es un programa presencial a tiempo completo en el campus de Cambridge."
               },
               {
                 "name": "University of Oxford",
-                "note": "Tied for #4 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Empatada en el puesto #4 del mundo en Lingüística (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/mphil-linguistics-philology-phonetics",
-                "online": "No — the MPhil in Linguistics, Philology and Phonetics is a full-time, in-person taught program spanning 21 months at Oxford."
+                "online": "No — el MPhil en Lingüística, Filología y Fonética es un programa presencial de 21 meses en Oxford."
               },
               {
                 "name": "American University of Beirut (AUB)",
-                "note": "Offers an MA in English Language, with coursework in applied linguistics, through its Department of English.",
+                "note": "Ofrece un máster (MA) en Lengua Inglesa, con asignaturas de lingüística aplicada, a través de su Departamento de Inglés.",
                 "url": "https://www.aub.edu.lb/fas/Pages/Masters.aspx",
-                "online": "Delivery mode not specified on the program's official page."
+                "online": "La página oficial del programa no especifica la modalidad de impartición."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific Reference",
+          "title": "Referencia científica",
           "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
-          "note": "A meta-analysis of 190 studies establishing average silent reading rates for English — the empirical basis behind the words-per-minute constant this tool's reading-time estimate is built on.",
+          "note": "Un metaanálisis de 190 estudios que establece las velocidades medias de lectura silenciosa en inglés — la base empírica de la constante de palabras por minuto sobre la que se construye la estimación de tiempo de lectura de esta herramienta.",
           "url": "https://doi.org/10.1016/j.jml.2019.104047",
-          "readOriginal": "Read the Original Study"
+          "readOriginal": "Leer el estudio original"
         }
       }
     },
