@@ -3962,187 +3962,187 @@
       }
     },
     "image-converter": {
-      "title": "Image Converter",
-      "description": "Convert images between PNG, JPEG, and WebP with a live quality/size preview, plus optional resizing — all processed locally in your browser.",
+      "title": "Conversor de imágenes",
+      "description": "Convierte imágenes entre PNG, JPEG y WebP con una vista previa en vivo de calidad y tamaño, además de redimensionado opcional — todo procesado localmente en tu navegador.",
       "nav": {
-        "tool": "Converter",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Conversor",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
       },
       "aboveFold": {
-        "resultTitle": "Result",
-        "placeholder": "Upload an image on the left to see the converted result here.",
-        "originalSize": "Original Size",
-        "newSize": "New Size",
-        "smallerBy": "{percent}% smaller than the original",
-        "largerBy": "{percent}% larger than the original",
-        "sameSize": "Same size as the original",
+        "resultTitle": "Resultado",
+        "placeholder": "Sube una imagen a la izquierda para ver aquí el resultado convertido.",
+        "originalSize": "Tamaño original",
+        "newSize": "Tamaño nuevo",
+        "smallerBy": "{percent}% más pequeño que el original",
+        "largerBy": "{percent}% más grande que el original",
+        "sameSize": "Mismo tamaño que el original",
         "formatGuide": {
-          "title": "Choosing the Right Format",
-          "intro": "What each format is actually good at — the honest tradeoffs, not marketing.",
+          "title": "Elegir el formato adecuado",
+          "intro": "Para qué sirve realmente cada formato — las ventajas y desventajas honestas, sin marketing.",
           "rows": [
             {
               "format": "PNG",
-              "bestFor": "Screenshots, logos, and graphics with sharp edges or transparency — lossless, but larger for photos."
+              "bestFor": "Capturas de pantalla, logotipos y gráficos con bordes nítidos o transparencia — sin pérdida, pero más pesado en fotografías."
             },
             {
               "format": "JPEG",
-              "bestFor": "Photographs, where its lossy compression shines and near-universal support matters most."
+              "bestFor": "Fotografías, donde su compresión con pérdida brilla y donde más importa una compatibilidad prácticamente universal."
             },
             {
               "format": "WebP",
-              "bestFor": "Web use generally — usually smaller than JPEG or PNG at similar quality, with near-universal browser support today."
+              "bestFor": "Uso web en general — suele pesar menos que JPEG o PNG con una calidad similar, y hoy cuenta con soporte prácticamente universal en los navegadores."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your Image",
-        "chooseFile": "Click or drop an image here",
-        "previewAlt": "Selected image preview",
-        "resultAlt": "Converted image preview",
-        "formatLabel": "Output Format",
-        "qualityLabel": "Quality",
-        "resizeLabel": "Resize (max width)",
-        "maxWidthPlaceholder": "Max width in pixels",
-        "convert": "Convert Image",
-        "converting": "Converting...",
-        "download": "Download",
-        "resultSize": "New file size: {size}"
+        "inputTitle": "Tu imagen",
+        "chooseFile": "Haz clic o arrastra una imagen aquí",
+        "previewAlt": "Vista previa de la imagen seleccionada",
+        "resultAlt": "Vista previa de la imagen convertida",
+        "formatLabel": "Formato de salida",
+        "qualityLabel": "Calidad",
+        "resizeLabel": "Redimensionar (ancho máximo)",
+        "maxWidthPlaceholder": "Ancho máximo en píxeles",
+        "convert": "Convertir imagen",
+        "converting": "Convirtiendo...",
+        "download": "Descargar",
+        "resultSize": "Nuevo tamaño de archivo: {size}"
       },
       "errors": {
-        "invalidFile": "Please choose a valid image file.",
-        "tooLarge": "Image is too large (max 10 MB).",
-        "conversionFailed": "Could not convert this image. Try a different file or format."
+        "invalidFile": "Elige un archivo de imagen válido.",
+        "tooLarge": "La imagen es demasiado grande (máximo 10 MB).",
+        "conversionFailed": "No se pudo convertir esta imagen. Prueba con otro archivo o formato."
       },
       "education": {
         "intro": {
-          "title": "How Image Compression Actually Works",
-          "paragraph1": "Every image format makes the same fundamental choice: lossless, which shrinks a file while preserving every original pixel exactly (PNG), or lossy, which discards some visual detail permanently in exchange for dramatically smaller files (JPEG, and WebP in its default mode). Lossless compression works like a more efficient way of writing down the same information — nothing is thrown away, so decompressing always reconstructs the exact original bytes. Lossy compression instead identifies the detail human eyes are least likely to notice — subtle color gradients, fine texture — and discards it outright, which is why the same JPEG saved and reopened repeatedly slowly degrades: each pass discards a little more.",
-          "paragraph2": "JPEG's specific technique is the discrete cosine transform (DCT): it splits an image into small blocks and represents each one as a sum of smooth wave patterns, then keeps only the low-frequency waves that matter most to human perception — a typical JPEG at default quality discards roughly 90% of the raw pixel data this way, and still looks essentially unchanged to most viewers. This tool converts entirely inside your browser via the Canvas API, so no image ever leaves your device.",
+          "title": "Cómo funciona realmente la compresión de imágenes",
+          "paragraph1": "Todo formato de imagen se enfrenta a la misma disyuntiva de fondo: sin pérdida, que reduce el archivo conservando exactamente cada píxel original (PNG), o con pérdida, que descarta parte del detalle visual de forma permanente a cambio de archivos muchísimo más pequeños (JPEG, y WebP en su modo predeterminado). La compresión sin pérdida funciona como una forma más eficiente de anotar la misma información — no se descarta nada, así que al descomprimir siempre se reconstruyen exactamente los bytes originales. La compresión con pérdida, en cambio, identifica el detalle que el ojo humano es menos capaz de notar —degradados de color sutiles, texturas finas— y lo elimina directamente, razón por la cual un mismo JPEG guardado y reabierto repetidamente se va degradando poco a poco: cada pasada descarta un poco más.",
+          "paragraph2": "La técnica concreta de JPEG es la transformada discreta del coseno (DCT): divide la imagen en pequeños bloques y representa cada uno como una suma de patrones de onda suaves, conservando solo las ondas de baja frecuencia más relevantes para la percepción humana — un JPEG típico con calidad predeterminada descarta así en torno al 90% de los datos de píxeles originales, y aun así se ve prácticamente igual para la mayoría de personas. Esta herramienta convierte por completo dentro de tu navegador mediante la API Canvas, así que ninguna imagen sale nunca de tu dispositivo.",
           "diagram": {
-            "losslessLabel": "Lossless (PNG)",
-            "lossyLabel": "Lossy (JPEG, WebP)",
+            "losslessLabel": "Sin pérdida (PNG)",
+            "lossyLabel": "Con pérdida (JPEG, WebP)",
             "originalLabel": "Original",
-            "compressedLabel": "Compressed",
-            "resultLabel": "Reopened",
-            "identicalLabel": "bit-for-bit identical",
-            "approximateLabel": "a close approximation",
-            "caption": "Lossless compression can always reconstruct the exact original; lossy compression permanently discards detail to shrink the file further."
+            "compressedLabel": "Comprimido",
+            "resultLabel": "Reabierto",
+            "identicalLabel": "idéntico bit a bit",
+            "approximateLabel": "una aproximación cercana",
+            "caption": "La compresión sin pérdida siempre puede reconstruir el original exacto; la compresión con pérdida descarta detalle de forma permanente para reducir aún más el archivo."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Illustrative size differences for the same photo, converted at common settings.",
-          "columnScenario": "Scenario",
-          "columnResult": "Typical Outcome",
+          "title": "Ejemplos resueltos",
+          "intro": "Diferencias de tamaño orientativas para la misma foto, convertida con ajustes habituales.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado típico",
           "rows": [
             {
-              "scenario": "A 4000×3000 photo saved as PNG",
-              "result": "Often 15-25 MB — lossless, but large for a photo"
+              "scenario": "Una foto de 4000×3000 guardada como PNG",
+              "result": "Con frecuencia, entre 15 y 25 MB — sin pérdida, pero pesado para una foto"
             },
             {
-              "scenario": "The same photo saved as JPEG at 85% quality",
-              "result": "Often 1-3 MB — a large reduction, minimal visible loss"
+              "scenario": "La misma foto guardada como JPEG al 85% de calidad",
+              "result": "Con frecuencia, entre 1 y 3 MB — una gran reducción, con pérdida visual mínima"
             },
             {
-              "scenario": "The same photo saved as WebP at 85% quality",
-              "result": "Often 20-30% smaller than the equivalent JPEG"
+              "scenario": "La misma foto guardada como WebP al 85% de calidad",
+              "result": "Con frecuencia, entre un 20% y un 30% más pequeña que el JPEG equivalente"
             },
             {
-              "scenario": "A 4000px-wide photo resized to a 1920px max width",
-              "result": "Roughly a 4x reduction in pixel count before compression even applies"
+              "scenario": "Una foto de 4000 px de ancho redimensionada a un máximo de 1920 px",
+              "result": "Aproximadamente una reducción de 4 veces en el número de píxeles, incluso antes de aplicar la compresión"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "Which format should I actually use?",
-              "answer": "PNG for screenshots, logos, or anything needing transparency or perfectly sharp edges. JPEG for photos where you want maximum compatibility. WebP for photos on the web generally — it usually beats JPEG at the same visual quality and virtually all current browsers support it."
+              "question": "¿Qué formato debería usar en realidad?",
+              "answer": "PNG para capturas de pantalla, logotipos o cualquier cosa que necesite transparencia o bordes perfectamente nítidos. JPEG para fotos donde quieras la máxima compatibilidad. WebP para fotos en la web en general — suele superar a JPEG con la misma calidad visual y prácticamente todos los navegadores actuales lo admiten."
             },
             {
-              "question": "Does converting PNG to JPEG and back to PNG lose quality twice?",
-              "answer": "Yes, and this is a genuinely common mistake. Once an image passes through a lossy format like JPEG, the detail that format discarded is gone permanently — converting the result back to PNG just locks in that already-degraded version losslessly. Repeatedly re-saving as JPEG compounds the loss further each time. Always keep (or start from) the highest-quality original you have."
+              "question": "¿Convertir de PNG a JPEG y de vuelta a PNG pierde calidad dos veces?",
+              "answer": "Sí, y este es un error genuinamente común. En cuanto una imagen pasa por un formato con pérdida como JPEG, el detalle que ese formato descartó desaparece para siempre — convertir el resultado de nuevo a PNG solo fija sin pérdida esa versión ya degradada. Guardar repetidamente como JPEG agrava la pérdida cada vez más. Conserva siempre (o parte de) el original de mayor calidad que tengas."
             },
             {
-              "question": "What does the \"quality\" slider actually control?",
-              "answer": "For JPEG and WebP, it controls how aggressively the encoder discards fine visual detail — lower quality means smaller files but more visible artifacts, especially blockiness around sharp edges and color banding in smooth gradients. It has no effect for PNG, since PNG is lossless and doesn't have a quality/detail tradeoff to make."
+              "question": "¿Qué controla en realidad el control deslizante de \"calidad\"?",
+              "answer": "En JPEG y WebP, controla cuán agresivamente el codificador descarta el detalle visual fino — una calidad más baja significa archivos más pequeños, pero con más artefactos visibles, especialmente bloques en los bordes nítidos y bandas de color en los degradados suaves. No tiene ningún efecto en PNG, ya que este formato no tiene pérdida y no existe ahí ese compromiso entre calidad y detalle."
             },
             {
-              "question": "Why does resizing an image before converting help so much?",
-              "answer": "File size for a lossy format scales roughly with pixel count, so halving both width and height cuts the pixel count — and therefore roughly the file size — to about a quarter. Resizing to the dimensions you'll actually display an image at is usually a bigger size win than tightening the quality slider on an oversized image."
+              "question": "¿Por qué redimensionar una imagen antes de convertirla ayuda tanto?",
+              "answer": "En un formato con pérdida, el tamaño del archivo escala aproximadamente con el número de píxeles, así que reducir a la mitad el ancho y el alto recorta el número de píxeles —y, por tanto, aproximadamente el tamaño del archivo— a una cuarta parte. Redimensionar a las dimensiones en las que realmente se mostrará la imagen suele ahorrar más espacio que apretar el control de calidad en una imagen sobredimensionada."
             },
             {
-              "question": "Is WebP support universal now?",
-              "answer": "Essentially yes for viewing — every major browser (Chrome, Firefox, Safari, Edge) has supported displaying WebP images since 2020 or earlier. The one place it can still cause friction is older software (some older design tools, some email clients) that can't open a .webp file directly, which is worth checking before using it somewhere JPEG or PNG would be safer."
+              "question": "¿El soporte de WebP es ya universal?",
+              "answer": "Prácticamente sí en cuanto a visualización — todos los navegadores principales (Chrome, Firefox, Safari, Edge) admiten mostrar imágenes WebP desde 2020 o antes. El lugar donde todavía puede dar problemas es en software más antiguo (algunas herramientas de diseño antiguas, algunos clientes de correo) que no pueden abrir un archivo .webp directamente, algo que conviene comprobar antes de usarlo donde JPEG o PNG serían más seguros."
             },
             {
-              "question": "Is my image uploaded anywhere when I use this tool?",
-              "answer": "No — every step, including reading the file, resizing, and re-encoding it into a new format, happens locally in your browser using the Canvas API. The image is never transmitted anywhere."
+              "question": "¿Se sube mi imagen a algún sitio al usar esta herramienta?",
+              "answer": "No — todos los pasos, incluida la lectura del archivo, el redimensionado y su recodificación a un nuevo formato, ocurren localmente en tu navegador mediante la API Canvas. La imagen nunca se transmite a ningún sitio."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Detrás de esta herramienta",
           "history": {
-            "title": "A Six-Year Committee Question: How Much Can an Eye Forgive?",
-            "paragraph": "The Joint Photographic Experts Group formed in 1986 as a joint effort between two international standards bodies, tasked with a question that had no clean engineering answer: how much of a photograph's raw data could be discarded before a human eye would notice? After six years evaluating candidate compression methods, the committee published what the world now calls JPEG in September 1992, built around the discrete cosine transform — a technique first proposed for image compression back in 1972. The result, still in near-universal use today, routinely throws away roughly 90% of a photo's raw pixel data while looking, to most eyes, essentially unchanged."
+            "title": "Seis años de comité para una sola pregunta: ¿cuánto perdona un ojo?",
+            "paragraph": "El Joint Photographic Experts Group se formó en 1986 como un esfuerzo conjunto entre dos organismos internacionales de normalización, con una tarea sin una respuesta técnica clara: ¿cuántos datos en bruto de una fotografía se podían descartar antes de que un ojo humano lo notara? Tras seis años evaluando distintos métodos de compresión candidatos, el comité publicó en septiembre de 1992 lo que hoy el mundo conoce como JPEG, construido en torno a la transformada discreta del coseno — una técnica propuesta por primera vez para la compresión de imágenes ya en 1972. El resultado, todavía en uso prácticamente universal hoy, descarta habitualmente en torno al 90% de los datos de píxeles en bruto de una foto y, aun así, se ve prácticamente igual para la mayoría de los ojos."
           },
           "modernDevelopments": {
-            "title": "From a Patent Dispute to a Video Codec's Side Project",
-            "paragraph": "PNG's origin traces to a legal fight, not a technical one: when Unisys announced in December 1994 that it would start charging licensing fees for the LZW compression method used inside the hugely popular GIF format, engineers - some of whom had worked on JPEG - moved quickly to design a free, open replacement, releasing the first PNG specification in 1996 with real transparency and no patent encumbrance. WebP arrived by a completely different route in 2010: after acquiring video codec company On2 Technologies, Google adapted the intra-frame compression technology built for its VP8 video codec — the part that compresses a single video frame on its own — into a standalone still-image format, reporting roughly 39% smaller files than equivalent-quality JPEGs in real-world testing."
+            "title": "De una disputa de patentes al proyecto paralelo de un códec de vídeo",
+            "paragraph": "El origen de PNG se remonta a una disputa legal, no técnica: cuando Unisys anunció en diciembre de 1994 que empezaría a cobrar licencias por el método de compresión LZW usado dentro del popularísimo formato GIF, un grupo de ingenieros —algunos de los cuales habían trabajado en JPEG— se puso rápidamente manos a la obra para diseñar un sustituto libre y abierto, publicando la primera especificación de PNG en 1996, con transparencia real y sin ataduras de patentes. WebP llegó por un camino completamente distinto en 2010: tras adquirir la empresa de códecs de vídeo On2 Technologies, Google adaptó la tecnología de compresión intra-fotograma desarrollada para su códec de vídeo VP8 —la parte que comprime un único fotograma de vídeo por sí solo— convirtiéndola en un formato independiente para imágenes fijas, con archivos en torno a un 39% más pequeños que JPEG con una calidad equivalente en pruebas reales."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Image compression, signal processing, and computer vision are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Recorrido académico",
+            "intro": "La compresión de imágenes, el procesamiento de señales y la visión por computador se estudian dentro de los programas de Ciencias de la Computación. Estas son las cinco mejores instituciones del mundo según el QS World University Rankings by Subject 2025, junto con una opción regional:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #1 del mundo en Informática y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "No — el programa Course 6-3 (Ciencias de la Computación e Ingeniería) del MIT es un grado presencial en el campus de Cambridge."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #2 del mundo en Informática y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "No — el grado en Ciencias de la Computación de Stanford es un título presencial en su campus."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #3 del mundo en Informática y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "No — el grado de la School of Computer Science de CMU es presencial en su campus de Pittsburgh."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #4 del mundo en Informática y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "No — el Bachelor of Computing en Ciencias de la Computación de NUS es un programa presencial que incluye unas prácticas obligatorias, en el campus o en el extranjero."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #5 del mundo en Informática y Sistemas de Información (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "No — el grado en Ciencias de la Computación de Oxford se imparte de forma presencial mediante su sistema de tutorías, con uno o dos estudiantes reunidos directamente con un tutor."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Ofrece un Bachelor of Science en Ciencias de la Computación, acreditado por ABET, a través de su Facultad de Ingeniería.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "La modalidad de impartición no se especifica en la página oficial del programa."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Estándar técnico",
           "citation": "ISO/IEC 10918-1:1994 — Information technology — Digital compression and coding of continuous-tone still images: Requirements and guidelines. International Organization for Standardization.",
-          "note": "The official international standard defining JPEG's compression algorithm, including the discrete cosine transform pipeline this tool's JPEG output relies on via the browser's built-in Canvas encoder.",
+          "note": "El estándar internacional oficial que define el algoritmo de compresión de JPEG, incluido el proceso de transformada discreta del coseno del que depende la salida JPEG de esta herramienta a través del codificador Canvas integrado en el navegador.",
           "url": "https://www.iso.org/standard/18902.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "Ver el estándar oficial"
         }
       }
     },
