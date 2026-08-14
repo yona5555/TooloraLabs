@@ -4147,193 +4147,193 @@
       }
     },
     "json-formatter": {
-      "title": "JSON Formatter",
-      "description": "Format, minify, and validate JSON with the exact line and column of any syntax error — plus key sorting and instant size/depth stats.",
+      "title": "Formateur JSON",
+      "description": "Formatez, minifiez et validez du JSON avec la ligne et la colonne exactes de toute erreur de syntaxe — plus le tri des clés et des statistiques de taille et de profondeur instantanées.",
       "nav": {
-        "tool": "Formatter",
+        "tool": "Formateur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Derrière l'outil"
       },
       "aboveFold": {
-        "resultTitle": "Result",
-        "placeholder": "Paste or type JSON on the left to see it formatted here.",
-        "errorAt": "Syntax error at line {line}, column {column}",
-        "statKeys": "Keys",
-        "statDepth": "Max Depth",
-        "statSize": "Size",
+        "resultTitle": "Résultat",
+        "placeholder": "Collez ou saisissez du JSON à gauche pour le voir formaté ici.",
+        "errorAt": "Erreur de syntaxe à la ligne {line}, colonne {column}",
+        "statKeys": "Clés",
+        "statDepth": "Profondeur max.",
+        "statSize": "Taille",
         "commonErrors": {
-          "title": "Common JSON Mistakes",
-          "intro": "The syntax errors that trip people up most often — all of them invalid JSON, even though some look reasonable.",
+          "title": "Erreurs JSON courantes",
+          "intro": "Les erreurs de syntaxe qui piègent le plus souvent — toutes invalides en JSON, même si certaines semblent raisonnables.",
           "rows": [
             {
               "mistake": "{ \"a\": 1, }",
-              "fix": "Trailing commas aren't allowed — remove the comma before } or ]."
+              "fix": "Les virgules finales ne sont pas autorisées — supprimez la virgule avant } ou ]."
             },
             {
               "mistake": "{ a: 1 }",
-              "fix": "Object keys must be double-quoted strings, not bare identifiers."
+              "fix": "Les clés d'un objet doivent être des chaînes entre guillemets doubles, pas des identifiants nus."
             },
             {
               "mistake": "{ 'a': 1 }",
-              "fix": "JSON requires double quotes (\") — single quotes are not valid."
+              "fix": "JSON exige des guillemets doubles (\") — les guillemets simples ne sont pas valides."
             },
             {
               "mistake": "{ \"a\": undefined }",
-              "fix": "JSON has no \"undefined\" — use null instead."
+              "fix": "JSON n'a pas de valeur « undefined » — utilisez null à la place."
             },
             {
               "mistake": "{ \"a\": 01 }",
-              "fix": "Leading zeros aren't allowed in numbers — use 1, not 01."
+              "fix": "Les zéros initiaux ne sont pas autorisés dans les nombres — utilisez 1, pas 01."
             },
             {
               "mistake": "// a comment",
-              "fix": "JSON has no comment syntax at all — not // or /* */."
+              "fix": "JSON n'a aucune syntaxe de commentaire — ni // ni /* */."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your JSON",
-        "inputLabel": "JSON Input",
-        "inputPlaceholder": "Paste your JSON here...",
-        "modeFormat": "Format",
-        "modeMinify": "Minify",
-        "indentLabel": "Indent",
-        "indentTab": "Tab",
-        "sortKeysLabel": "Sort keys alphabetically",
-        "format": "Format",
-        "minify": "Minify",
-        "outputLabel": "Result",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "inputTitle": "Votre JSON",
+        "inputLabel": "Entrée JSON",
+        "inputPlaceholder": "Collez votre JSON ici...",
+        "modeFormat": "Formater",
+        "modeMinify": "Minifier",
+        "indentLabel": "Indentation",
+        "indentTab": "Tabulation",
+        "sortKeysLabel": "Trier les clés par ordre alphabétique",
+        "format": "Formater",
+        "minify": "Minifier",
+        "outputLabel": "Résultat",
+        "copy": "Copier",
+        "copied": "Copié !"
       },
       "errors": {
-        "required": "Please enter some JSON to format.",
-        "tooLong": "Input is too long (max 100,000 characters).",
-        "invalidJson": "This is not valid JSON. Check for missing quotes, commas, or brackets."
+        "required": "Veuillez saisir du JSON à formater.",
+        "tooLong": "L'entrée est trop longue (100 000 caractères maximum).",
+        "invalidJson": "Ce n'est pas du JSON valide. Vérifiez les guillemets, virgules ou crochets manquants."
       },
       "education": {
         "intro": {
-          "title": "How JSON Actually Works",
-          "paragraph1": "JSON only has two structural types — objects (key-value pairs in '{ }') and arrays (ordered lists in [ ]) — and four primitive types inside them: strings, numbers, booleans, and null. That's the entire grammar. There's no date type, no comments, no trailing commas, and no unquoted keys, and every one of those \"missing\" features is a deliberate simplicity choice, not an oversight — it's exactly what makes JSON trivial to parse correctly in any language, unlike formats with more flexible, ambiguous grammars.",
-          "paragraph2": "That same strict grammar is also why a single missing comma or quote makes an entire JSON document fail to parse, with no partial recovery — which is exactly the problem this tool's error reporting solves. Rather than surfacing whatever cryptic message your browser's JavaScript engine happens to produce (these vary by engine and aren't always reliable), this tool runs its own dedicated JSON grammar check to point at the exact line and column of the first syntax deviation.",
+          "title": "Comment fonctionne réellement JSON",
+          "paragraph1": "JSON ne comporte que deux types structurels — les objets (des paires clé/valeur entre { }) et les tableaux (des listes ordonnées entre [ ]) — et quatre types primitifs qu'ils peuvent contenir : chaînes de caractères, nombres, booléens et null. C'est toute la grammaire. Il n'existe ni type date, ni commentaires, ni virgule finale, ni clé sans guillemets, et chacune de ces fonctionnalités « manquantes » relève d'un choix délibéré de simplicité, pas d'un oubli : c'est précisément ce qui rend JSON aussi simple à analyser correctement dans n'importe quel langage, contrairement à des formats à la grammaire plus souple et plus ambiguë.",
+          "paragraph2": "Cette même grammaire stricte explique aussi pourquoi une simple virgule ou un simple guillemet manquant suffit à faire échouer l'analyse de tout un document JSON, sans récupération partielle possible — c'est exactement le problème que résout le rapport d'erreurs de cet outil. Plutôt que d'afficher le message parfois cryptique que produit le moteur JavaScript de votre navigateur (ces messages varient selon le moteur et ne sont pas toujours fiables), cet outil exécute son propre contrôle de grammaire JSON dédié pour indiquer la ligne et la colonne exactes de la première déviation de syntaxe.",
           "diagram": {
-            "valueLabel": "value",
-            "caption": "Every JSON value is exactly one of six types — two structural (object, array) and four primitive (string, number, boolean, null). There is nothing else in the grammar."
+            "valueLabel": "valeur",
+            "caption": "Chaque valeur JSON appartient exactement à l'un de ces six types — deux structurels (objet, tableau) et quatre primitifs (chaîne, nombre, booléen, null). La grammaire ne contient rien d'autre."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four examples showing exactly how formatting settings change the output for the same input.",
-          "columnScenario": "Scenario",
-          "columnResult": "Output",
+          "title": "Exemples commentés",
+          "intro": "Quatre exemples montrant précisément comment les réglages de formatage modifient le résultat pour une même entrée.",
+          "columnScenario": "Scénario",
+          "columnResult": "Résultat",
           "rows": [
             {
-              "scenario": "{\"b\":2,\"a\":1} — Format, 2-space indent",
+              "scenario": "{\"b\":2,\"a\":1} — Formater, indentation de 2 espaces",
               "result": "{\n  \"b\": 2,\n  \"a\": 1\n}"
             },
             {
-              "scenario": "{\"b\":2,\"a\":1} — Format, sort keys",
+              "scenario": "{\"b\":2,\"a\":1} — Formater, trier les clés",
               "result": "{\n  \"a\": 1,\n  \"b\": 2\n}"
             },
             {
-              "scenario": "{ \"a\": 1,\n  \"b\": 2 } — Minify",
+              "scenario": "{ \"a\": 1,\n  \"b\": 2 } — Minifier",
               "result": "{\"a\":1,\"b\":2}"
             },
             {
-              "scenario": "{\"a\": 1, \"b\": }  — invalid",
-              "result": "Syntax error at line 1, column 15"
+              "scenario": "{\"a\": 1, \"b\": }  — invalide",
+              "result": "Erreur de syntaxe à la ligne 1, colonne 15"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Why does my JSON fail to parse even though it looks correct?",
-              "answer": "Almost always one of a handful of invisible-looking mistakes: a trailing comma before a closing } or ], an unquoted or single-quoted key, a stray comment (JSON has no comment syntax at all), or a number with a leading zero. This tool's error message points at the exact line and column of the first one it finds."
+              "question": "Pourquoi mon JSON échoue-t-il à l'analyse alors qu'il semble correct ?",
+              "answer": "C'est presque toujours l'une de ces quelques erreurs difficiles à repérer : une virgule finale avant une } ou ] fermante, une clé sans guillemets ou entre guillemets simples, un commentaire égaré (JSON n'a aucune syntaxe de commentaire), ou un nombre avec un zéro initial. Le message d'erreur de cet outil indique la ligne et la colonne exactes de la première erreur trouvée."
             },
             {
-              "question": "What's the difference between JSON and a JavaScript object literal?",
-              "answer": "JSON is a strict subset of JavaScript object-literal syntax: JSON requires double-quoted keys and strings, allows no trailing commas, no comments, no functions, and no undefined — a JavaScript object literal allows all of those. Every valid JSON document is a valid JS object literal, but not the other way around."
+              "question": "Quelle est la différence entre JSON et un objet littéral JavaScript ?",
+              "answer": "JSON est un sous-ensemble strict de la syntaxe des objets littéraux JavaScript : JSON exige des clés et des chaînes entre guillemets doubles, n'autorise ni virgule finale, ni commentaires, ni fonctions, ni undefined — un objet littéral JavaScript autorise tout cela. Tout document JSON valide est un objet littéral JS valide, mais l'inverse n'est pas vrai."
             },
             {
-              "question": "Why sort object keys — doesn't order not matter in JSON?",
-              "answer": "Order genuinely doesn't affect meaning to a JSON parser, but it matters enormously for humans and for tools: sorting keys makes two versions of similar data diff cleanly in version control or a code review, instead of showing every line as changed just because key order shifted."
+              "question": "Pourquoi trier les clés d'un objet — l'ordre n'est-il pas sans importance en JSON ?",
+              "answer": "L'ordre n'affecte effectivement pas le sens pour un analyseur JSON, mais il compte énormément pour les humains et pour les outils : trier les clés permet à deux versions de données similaires de se comparer proprement dans un contrôle de version ou une revue de code, au lieu d'afficher chaque ligne comme modifiée simplement parce que l'ordre des clés a changé."
             },
             {
-              "question": "Is my JSON data sent to a server when I use this tool?",
-              "answer": "No — formatting, validation, and minifying all run entirely in your browser. Nothing you paste here is transmitted anywhere, which matters if the JSON contains real data like API responses or configuration with sensitive values."
+              "question": "Mes données JSON sont-elles envoyées à un serveur lorsque j'utilise cet outil ?",
+              "answer": "Non — le formatage, la validation et la minification s'exécutent entièrement dans votre navigateur. Rien de ce que vous collez ici n'est transmis où que ce soit, ce qui compte si le JSON contient des données réelles comme des réponses d'API ou une configuration avec des valeurs sensibles."
             },
             {
-              "question": "What's the difference between minifying and formatting?",
-              "answer": "Formatting adds indentation and line breaks to make JSON readable for humans; minifying strips every unnecessary whitespace character to make the file as small as possible for network transfer. Both represent identical data — a JSON parser treats them exactly the same."
+              "question": "Quelle est la différence entre minifier et formater ?",
+              "answer": "Le formatage ajoute de l'indentation et des sauts de ligne pour rendre le JSON lisible par les humains ; la minification supprime tout espace superflu pour rendre le fichier aussi léger que possible pour le transfert réseau. Les deux représentent des données identiques — un analyseur JSON les traite exactement de la même façon."
             },
             {
-              "question": "Why do some JSON files use 2-space indentation and others 4?",
-              "answer": "There's no technical difference — indentation is purely cosmetic and ignored by every parser. 2 spaces is the more common convention in JavaScript/web ecosystems (keeping deeply nested structures narrower), while 4 spaces is more common in Python-influenced style guides; some codebases use tabs specifically so each developer's editor can render the width they prefer."
+              "question": "Pourquoi certains fichiers JSON utilisent-ils une indentation de 2 espaces et d'autres de 4 ?",
+              "answer": "Il n'y a aucune différence technique — l'indentation est purement esthétique et ignorée par tous les analyseurs. 2 espaces est la convention la plus courante dans les écosystèmes JavaScript/web (ce qui garde les structures profondément imbriquées plus étroites), tandis que 4 espaces est plus courant dans les guides de style influencés par Python ; certains projets utilisent des tabulations justement pour que chaque développeur puisse afficher la largeur qu'il préfère dans son éditeur."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Derrière cet outil",
           "history": {
-            "title": "How a Trading Card Game Simplified the Web",
-            "paragraph": "JSON wasn't designed in a standards committee — it was discovered, in Douglas Crockford's own words, not invented. While building a browser-based virtual trading card game called Cartoon Orbit at State Software in 2001, Crockford grew frustrated with how heavy XML was for constantly syncing small pieces of state between a low-powered client and the server. He noticed that JavaScript's own object-literal syntax — the '{key: value}' notation already built into the language — was already a lightweight, human-readable way to represent structured data, so he named it, wrote a formal grammar for it, and registered json.org in 2002. He deliberately designed the specification to be usable from any programming language, not just JavaScript, which is exactly why it spread so far beyond its browser origins."
+            "title": "Comment un jeu de cartes à collectionner a simplifié le web",
+            "paragraph": "JSON n'a pas été conçu par un comité de normalisation — il a été découvert, selon les mots mêmes de Douglas Crockford, et non inventé. En développant Cartoon Orbit, un jeu de cartes à collectionner virtuel dans un navigateur, chez State Software en 2001, Crockford s'est heurté à la lourdeur de XML pour synchroniser en permanence de petits fragments d'état entre un client peu puissant et le serveur. Il a remarqué que la syntaxe des objets littéraux de JavaScript elle-même — la notation « {clé: valeur} » déjà intégrée au langage — offrait déjà un moyen léger et lisible de représenter des données structurées ; il l'a donc nommée, en a rédigé une grammaire formelle, et a déposé json.org en 2002. Il a délibérément conçu la spécification pour qu'elle soit utilisable depuis n'importe quel langage de programmation, pas seulement JavaScript, ce qui explique précisément pourquoi elle s'est répandue bien au-delà de ses origines dans le navigateur."
           },
           "modernDevelopments": {
-            "title": "From API Responses to a Native Database Type",
-            "paragraph": "JSON's first standardization arrived as RFC 4627 in 2006, later replaced by RFC 7159 and finally today's RFC 8259 in 2017, each revision tightening ambiguities the earlier specs had left open. Its adoption accelerated as REST APIs displaced the far heavier XML-based SOAP standard through the 2000s and 2010s. The more recent shift is JSON moving beyond being just a network format: PostgreSQL added a dedicated binary JSON column type (JSONB) in version 9.4 in 2014, and most major databases now support querying and indexing JSON data natively, treating it as a first-class storage format rather than just text passing through."
+            "title": "Des réponses d'API à un type natif de base de données",
+            "paragraph": "La première normalisation de JSON est arrivée avec la RFC 4627 en 2006, remplacée ensuite par la RFC 7159, puis par l'actuelle RFC 8259 en 2017, chaque révision resserrant les ambiguïtés laissées ouvertes par les précédentes. Son adoption s'est accélérée à mesure que les API REST supplantaient le standard SOAP, bien plus lourd et basé sur XML, au cours des années 2000 et 2010. L'évolution la plus récente est que JSON dépasse désormais son rôle de simple format réseau : PostgreSQL a ajouté un type de colonne JSON binaire dédié (JSONB) dans sa version 9.4 en 2014, et la plupart des grandes bases de données prennent désormais en charge nativement l'interrogation et l'indexation de données JSON, le traitant comme un format de stockage à part entière plutôt qu'un simple texte de passage."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Data formats, parsing theory, and formal grammars — exactly what this tool's error checker implements — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Parcours académique",
+            "intro": "Les formats de données, la théorie de l'analyse syntaxique et les grammaires formelles — exactement ce qu'implémente le vérificateur d'erreurs de cet outil — sont étudiés dans les cursus d'informatique. Voici les 5 meilleures universités mondiales selon le classement QS World University Rankings by Subject 2025, plus une option régionale :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°1 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "Non — le programme Course 6-3 (Computer Science and Engineering) du MIT est un cursus de premier cycle en présentiel sur le campus de Cambridge."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°2 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "Non — le programme de licence en informatique de Stanford est un diplôme en présentiel sur le campus de Stanford."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°3 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "Non — le programme de licence de la School of Computer Science de CMU se déroule en présentiel sur son campus de Pittsburgh."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°4 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "Non — le Bachelor of Computing en informatique de la NUS est un programme en présentiel comprenant un stage obligatoire sur le campus ou à l'étranger."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°5 mondiale en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "Non — le diplôme d'informatique d'Oxford est enseigné en présentiel selon son système de tutorat, avec un ou deux étudiants rencontrant directement un tuteur."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Propose un Bachelor of Science en informatique, accrédité ABET, au sein de son College of Engineering.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Le mode de diffusion n'est pas précisé sur la page officielle du programme."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Norme technique",
           "citation": "RFC 8259 — The JavaScript Object Notation (JSON) Data Interchange Format. T. Bray, Ed. Internet Engineering Task Force (IETF), December 2017.",
-          "note": "The current official specification of JSON, based on Douglas Crockford's original work, obsoleting RFC 7159. This tool's own grammar checker follows this exact specification when locating syntax errors.",
+          "note": "La spécification officielle actuelle de JSON, fondée sur les travaux originaux de Douglas Crockford, remplaçant la RFC 7159. Le vérificateur de grammaire de cet outil suit exactement cette spécification pour localiser les erreurs de syntaxe.",
           "url": "https://www.rfc-editor.org/rfc/rfc8259",
-          "readOriginal": "Read the Original RFC"
+          "readOriginal": "Lire la RFC originale"
         }
       }
     },
