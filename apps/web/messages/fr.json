@@ -1143,367 +1143,367 @@
       }
     },
     "mortgage-calculator": {
-      "title": "Mortgage Calculator",
-      "description": "Calculate your monthly mortgage payment, see a full amortization schedule, and find out exactly when PMI drops off.",
+      "title": "Calculateur de prêt hypothécaire",
+      "description": "Calculez votre mensualité hypothécaire, consultez un tableau d'amortissement complet et découvrez exactement quand l'assurance PMI disparaît.",
       "nav": {
-        "tool": "Tool",
-        "amortization": "Amortization",
-        "scenarioComparison": "Compare Scenarios",
+        "tool": "Outil",
+        "amortization": "Amortissement",
+        "scenarioComparison": "Comparer des scénarios",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses"
       },
       "form": {
-        "homePrice": "Home Price",
-        "downPayment": "Down Payment",
+        "homePrice": "Prix du bien",
+        "downPayment": "Apport personnel",
         "downPaymentPercentUnit": "%",
         "downPaymentAmountUnit": "$",
-        "interestRate": "Interest Rate (%)",
-        "loanTerm": "Loan Term",
-        "loanTermPreset": "{years} yr",
-        "loanTermCustomHint": "Enter a custom term in years (1–50).",
-        "advancedTitle": "Taxes, Insurance & Extra Payments",
-        "propertyTax": "Annual Property Tax",
-        "insurance": "Annual Home Insurance",
-        "hoa": "Monthly HOA Fee",
-        "pmi": "Monthly PMI",
-        "pmiHint": "Typically required by the lender when your down payment is below 20%.",
-        "extraMonthlyPayment": "Extra Monthly Payment",
-        "extraMonthlyPaymentHint": "Optional — paid on top of your required payment and applied directly to principal.",
-        "calculate": "Calculate Mortgage",
-        "reset": "Reset"
+        "interestRate": "Taux d'intérêt (%)",
+        "loanTerm": "Durée du prêt",
+        "loanTermPreset": "{years} ans",
+        "loanTermCustomHint": "Saisissez une durée personnalisée en années (1 à 50).",
+        "advancedTitle": "Taxes, assurances et paiements supplémentaires",
+        "propertyTax": "Taxe foncière annuelle",
+        "insurance": "Assurance habitation annuelle",
+        "hoa": "Charges de copropriété mensuelles",
+        "pmi": "PMI mensuelle",
+        "pmiHint": "Généralement exigée par le prêteur lorsque l'apport personnel est inférieur à 20 %.",
+        "extraMonthlyPayment": "Paiement mensuel supplémentaire",
+        "extraMonthlyPaymentHint": "Facultatif — versé en plus de votre mensualité requise et appliqué directement au capital.",
+        "calculate": "Calculer le prêt",
+        "reset": "Réinitialiser"
       },
       "errors": {
-        "required": "Please enter a valid home price.",
-        "homePriceRange": "Home price must be greater than 0 and no more than 50,000,000.",
-        "downPaymentRange": "Down payment must be zero or more, and less than the home price.",
-        "interestRateRange": "Interest rate must be between 0% and 25%.",
-        "loanTermRange": "Loan term must be between 1 and 50 years.",
-        "negativeValue": "Property tax, insurance, HOA, PMI, and extra payment must be zero or greater."
+        "required": "Veuillez saisir un prix de bien valide.",
+        "homePriceRange": "Le prix du bien doit être supérieur à 0 et ne pas dépasser 50 000 000.",
+        "downPaymentRange": "L'apport personnel doit être égal ou supérieur à zéro, et inférieur au prix du bien.",
+        "interestRateRange": "Le taux d'intérêt doit être compris entre 0 % et 25 %.",
+        "loanTermRange": "La durée du prêt doit être comprise entre 1 et 50 ans.",
+        "negativeValue": "La taxe foncière, l'assurance, les charges de copropriété, la PMI et le paiement supplémentaire doivent être égaux ou supérieurs à zéro."
       },
       "aboveFold": {
-        "inputTitle": "Loan Details",
-        "resultTitle": "Your Monthly Payment",
-        "perMonth": "per month",
-        "perMonthShort": "mo",
-        "segmentPI": "Principal & Interest",
-        "segmentTax": "Property Tax",
-        "segmentInsurance": "Home Insurance",
-        "segmentHOA": "HOA",
+        "inputTitle": "Détails du prêt",
+        "resultTitle": "Votre mensualité",
+        "perMonth": "par mois",
+        "perMonthShort": "mois",
+        "segmentPI": "Capital et intérêts",
+        "segmentTax": "Taxe foncière",
+        "segmentInsurance": "Assurance habitation",
+        "segmentHOA": "Charges de copropriété",
         "segmentPMI": "PMI",
-        "loanAmountLabel": "Loan Amount",
-        "loanToValueLabel": "Loan-to-Value",
-        "loanToValueNote": "The loan amount as a percentage of the home price — lenders use this ratio to decide whether PMI is required.",
-        "totalInterestLabel": "Total Interest",
-        "totalCostLabel": "Total Cost",
-        "payoffTimeLabel": "Payoff Time",
-        "payoffTimeValue": "{years}y {months}m",
-        "payoffTimeAcceleratedNote": "Shortened by your extra monthly payment.",
-        "pmiRemovalLabel": "PMI Removal (est.)",
-        "pmiRemovalValue": "Year {years}, month {months}",
-        "pmiRemovalNone": "Not applicable",
-        "pmiRemovalNote": "The estimated point your balance reaches 80% of the home's original value, when you can request PMI cancellation under federal law.",
-        "interestSavedLabel": "Interest Saved",
-        "interestSavedNote": "Interest you avoid paying thanks to your extra monthly payment, compared to the standard schedule.",
-        "monthsSavedLabel": "Time Saved",
-        "quickInsightTitle": "PMI Insight",
-        "quickInsightWithPmi": "This loan carries about {pmi}/mo in PMI because the down payment is under 20% — putting down {extra} more would cross that threshold and drop the charge immediately, instead of waiting for the balance to pay it down over time.",
-        "quickInsightWithPmiAtTwentyPercent": "This loan carries about {pmi}/mo in PMI even though the down payment is already 20% or more — that's usually only charged below 20%, so it's worth confirming this premium with your lender.",
-        "quickInsightNoPmi": "With 20% or more down, this loan carries no PMI at all — every dollar of the payment goes toward interest and your own equity, none of it toward insuring the lender against your default.",
-        "affordabilityMiniTitle": "How much home can I afford?",
-        "affordabilityMiniIntro": "A quick, independent estimate using the standard 28%/36% debt-to-income guideline lenders commonly reference.",
-        "affordabilityMiniIncome": "Monthly gross income",
-        "affordabilityMiniDebts": "Other monthly debts",
-        "affordabilityMiniRate": "Interest rate (%)",
-        "affordabilityMiniYears": "Loan term (years)",
-        "affordabilityMiniDownPercent": "Down payment (%)",
-        "affordabilityMiniResult": "Affordable payment: {payment}/mo — estimated home price: {homePrice}",
-        "affordabilityMiniPlaceholder": "Enter your income to see an estimate."
+        "loanAmountLabel": "Montant du prêt",
+        "loanToValueLabel": "Ratio prêt/valeur",
+        "loanToValueNote": "Le montant du prêt exprimé en pourcentage du prix du bien — les prêteurs utilisent ce ratio pour décider si la PMI est exigée.",
+        "totalInterestLabel": "Intérêts totaux",
+        "totalCostLabel": "Coût total",
+        "payoffTimeLabel": "Durée de remboursement",
+        "payoffTimeValue": "{years} a {months} m",
+        "payoffTimeAcceleratedNote": "Raccourcie grâce à votre paiement mensuel supplémentaire.",
+        "pmiRemovalLabel": "Suppression de la PMI (est.)",
+        "pmiRemovalValue": "Année {years}, mois {months}",
+        "pmiRemovalNone": "Non applicable",
+        "pmiRemovalNote": "Le point estimé où votre solde atteint 80 % de la valeur d'origine du bien, à partir duquel vous pouvez demander l'annulation de la PMI en vertu de la loi fédérale.",
+        "interestSavedLabel": "Intérêts économisés",
+        "interestSavedNote": "Intérêts que vous évitez de payer grâce à votre paiement mensuel supplémentaire, par rapport à l'échéancier standard.",
+        "monthsSavedLabel": "Temps gagné",
+        "quickInsightTitle": "Aperçu de la PMI",
+        "quickInsightWithPmi": "Ce prêt comporte environ {pmi}/mois de PMI, car l'apport personnel est inférieur à 20 % — verser {extra} de plus franchirait ce seuil et supprimerait immédiatement cette charge, au lieu d'attendre que le solde se réduise progressivement.",
+        "quickInsightWithPmiAtTwentyPercent": "Ce prêt comporte environ {pmi}/mois de PMI alors même que l'apport personnel est déjà de 20 % ou plus — cette charge n'est généralement appliquée qu'en dessous de 20 %, il est donc utile de vérifier cette prime auprès de votre prêteur.",
+        "quickInsightNoPmi": "Avec un apport de 20 % ou plus, ce prêt ne comporte aucune PMI — chaque dollar de la mensualité va aux intérêts et à votre propre capital, aucun ne sert à assurer le prêteur contre votre défaut.",
+        "affordabilityMiniTitle": "Quel bien puis-je me permettre ?",
+        "affordabilityMiniIntro": "Une estimation rapide et indépendante basée sur la règle usuelle d'endettement 28 %/36 % couramment utilisée par les prêteurs.",
+        "affordabilityMiniIncome": "Revenu mensuel brut",
+        "affordabilityMiniDebts": "Autres dettes mensuelles",
+        "affordabilityMiniRate": "Taux d'intérêt (%)",
+        "affordabilityMiniYears": "Durée du prêt (années)",
+        "affordabilityMiniDownPercent": "Apport personnel (%)",
+        "affordabilityMiniResult": "Paiement abordable : {payment}/mois — prix de bien estimé : {homePrice}",
+        "affordabilityMiniPlaceholder": "Saisissez votre revenu pour voir une estimation."
       },
       "education": {
         "intro": {
-          "title": "What This Calculator Measures",
-          "paragraph1": "A mortgage is a loan secured by the property you're buying, structured so that a fixed monthly payment gradually eliminates a large balance over a period typically running 15 to 30 years. Almost every fixed-rate mortgage today is fully amortizing: each payment splits between interest owed on the remaining balance and principal that permanently reduces it, and that split shifts every month — early payments are mostly interest, and the very last payment is nearly all principal.",
-          "paragraph2": "This calculator computes your standard monthly principal-and-interest payment from your loan amount, rate, and term, then folds in the real recurring costs lenders typically collect alongside it — property tax, home insurance, HOA dues, and private mortgage insurance (PMI) — to show the payment you'll actually see leave your account. It also runs a full month-by-month amortization simulation behind the scenes, which is what lets it tell you exactly when PMI can come off and how much an extra payment would actually save, rather than relying on rough rules of thumb.",
-          "disclaimer": "This tool is for planning and educational purposes only. It does not constitute a loan offer, pre-approval, or financial advice, and actual loan terms, taxes, insurance premiums, and PMI rates set by a specific lender or insurer may differ from the estimates shown here."
+          "title": "Ce que mesure ce calculateur",
+          "paragraph1": "Un prêt hypothécaire est un prêt garanti par le bien que vous achetez, structuré de sorte qu'une mensualité fixe élimine progressivement un solde important sur une période allant généralement de 15 à 30 ans. Presque tous les prêts à taux fixe actuels sont entièrement amortissables : chaque paiement se répartit entre les intérêts dus sur le solde restant et le capital qui le réduit définitivement, et cette répartition évolue chaque mois — les premiers paiements sont majoritairement constitués d'intérêts, tandis que le tout dernier est presque entièrement du capital.",
+          "paragraph2": "Ce calculateur détermine votre mensualité standard de capital et intérêts à partir du montant du prêt, du taux et de la durée, puis y intègre les frais récurrents réels que les prêteurs collectent généralement en parallèle — taxe foncière, assurance habitation, charges de copropriété et assurance hypothécaire privée (PMI) — pour afficher le montant qui quittera réellement votre compte. Il exécute également, en arrière-plan, une simulation complète d'amortissement mois par mois, ce qui lui permet d'indiquer précisément quand la PMI peut être supprimée et combien un paiement supplémentaire ferait réellement économiser, plutôt que de s'appuyer sur des règles empiriques approximatives.",
+          "disclaimer": "Cet outil est destiné uniquement à la planification et à des fins pédagogiques. Il ne constitue ni une offre de prêt, ni une préapprobation, ni un conseil financier, et les conditions réelles du prêt, les taxes, les primes d'assurance et les taux de PMI fixés par un prêteur ou un assureur donné peuvent différer des estimations présentées ici."
         },
         "amortization": {
-          "title": "How Mortgage Amortization Works",
-          "intro": "Every fixed-rate, fully amortizing loan uses the same payment formula, regardless of the lender. Given the loan principal, the periodic interest rate, and the number of payments, the formula solves for the one constant payment that brings the balance to exactly zero on the final payment.",
+          "title": "Comment fonctionne l'amortissement hypothécaire",
+          "intro": "Tout prêt à taux fixe entièrement amortissable utilise la même formule de paiement, quel que soit le prêteur. À partir du capital emprunté, du taux d'intérêt périodique et du nombre de paiements, la formule détermine le paiement constant unique qui ramène le solde exactement à zéro au dernier versement.",
           "formula": {
-            "label": "Standard Monthly Payment Formula",
+            "label": "Formule standard de la mensualité",
             "formula": "M = P × [ r(1+r)ⁿ ] / [ (1+r)ⁿ − 1 ]",
-            "note": "M is the monthly principal-and-interest payment, P is the loan principal, r is the monthly interest rate (the annual rate divided by 12), and n is the total number of monthly payments (the loan term in years times 12). When r = 0, the formula reduces to simple division: M = P / n."
+            "note": "M est la mensualité de capital et intérêts, P est le capital emprunté, r est le taux d'intérêt mensuel (le taux annuel divisé par 12), et n est le nombre total de mensualités (la durée du prêt en années multipliée par 12). Quand r = 0, la formule se réduit à une simple division : M = P / n."
           },
           "example": {
-            "title": "Worked Example",
-            "intro": "Take this calculator's own defaults: a $400,000 home with a 20% down payment, a 6.5% annual rate, and a 30-year term.",
+            "title": "Exemple chiffré",
+            "intro": "Prenons les valeurs par défaut de ce calculateur : un bien à 400 000 $ avec un apport de 20 %, un taux annuel de 6,5 % et une durée de 30 ans.",
             "steps": [
               {
-                "label": "Loan principal (P)",
-                "value": "$400,000 − $80,000 = $320,000"
+                "label": "Capital emprunté (P)",
+                "value": "400 000 $ − 80 000 $ = 320 000 $"
               },
               {
-                "label": "Monthly interest rate (r)",
-                "value": "6.5% / 12 = 0.005417"
+                "label": "Taux d'intérêt mensuel (r)",
+                "value": "6,5 % / 12 = 0,005417"
               },
               {
-                "label": "Number of payments (n)",
+                "label": "Nombre de paiements (n)",
                 "value": "30 × 12 = 360"
               },
               {
-                "label": "Monthly principal & interest (M)",
-                "value": "$2,022.62"
+                "label": "Mensualité de capital et intérêts (M)",
+                "value": "2 022,62 $"
               }
             ],
-            "result": "Over 360 payments, that totals $728,142.36 paid — $320,000 of principal and $408,142.36 of interest, roughly 1.28× the loan amount, before taxes, insurance, HOA, or PMI are even added."
+            "result": "Sur 360 paiements, cela représente un total de 728 142,36 $ versés — 320 000 $ de capital et 408 142,36 $ d'intérêts, soit environ 1,28 fois le montant du prêt, avant même d'ajouter taxes, assurances, charges de copropriété ou PMI."
           }
         },
         "paymentComponents": {
-          "title": "What Makes Up Your Monthly Payment",
-          "intro": "The number a lender actually asks you to pay each month — sometimes called PITI — is rarely just principal and interest. This calculator breaks it into every component that commonly makes up a US mortgage payment:",
+          "title": "Ce qui compose votre mensualité",
+          "intro": "Le montant qu'un prêteur vous demande réellement de payer chaque mois — parfois appelé PITI — se limite rarement au capital et aux intérêts. Ce calculateur le décompose en chaque élément qui compose habituellement une mensualité hypothécaire aux États-Unis :",
           "items": [
             {
-              "label": "Principal & Interest (P&I)",
-              "description": "The fixed payment computed by the amortization formula above — the only component that actually retires the loan."
+              "label": "Capital et intérêts (P&I)",
+              "description": "Le paiement fixe calculé par la formule d'amortissement ci-dessus — le seul élément qui rembourse réellement le prêt."
             },
             {
-              "label": "Property Tax",
-              "description": "Billed annually by the local government based on the assessed value of the home; most lenders collect a twelfth of the annual bill each month and pay the tax authority directly from an escrow account."
+              "label": "Taxe foncière",
+              "description": "Facturée annuellement par la collectivité locale sur la base de la valeur cadastrale du bien ; la plupart des prêteurs en collectent un douzième chaque mois et paient directement l'administration fiscale via un compte séquestre."
             },
             {
-              "label": "Home Insurance",
-              "description": "Hazard insurance protecting the physical structure, required by virtually every lender as a condition of the loan and typically collected monthly through the same escrow account as property tax."
+              "label": "Assurance habitation",
+              "description": "Assurance dommages protégeant la structure physique, exigée par pratiquement tous les prêteurs comme condition du prêt et généralement collectée mensuellement via le même compte séquestre que la taxe foncière."
             },
             {
-              "label": "HOA Fees",
-              "description": "A due paid directly to a homeowners' association when the property belongs to one — not collected by the lender, but included here because it's a real recurring cost of owning the home."
+              "label": "Charges de copropriété",
+              "description": "Une cotisation versée directement à une association de propriétaires lorsque le bien en dépend — non collectée par le prêteur, mais incluse ici car il s'agit d'un coût récurrent réel lié à la possession du bien."
             },
             {
-              "label": "Private Mortgage Insurance (PMI)",
-              "description": "Required on most conventional loans when the down payment is below 20%; it protects the lender, not the borrower, against default — see below for exactly when it can be removed."
+              "label": "Assurance hypothécaire privée (PMI)",
+              "description": "Exigée sur la plupart des prêts conventionnels lorsque l'apport personnel est inférieur à 20 % ; elle protège le prêteur, non l'emprunteur, contre le défaut de paiement — voir ci-dessous pour savoir exactement quand elle peut être supprimée."
             }
           ]
         },
         "pmi": {
-          "title": "Private Mortgage Insurance: What It Is and How to Remove It",
-          "intro": "PMI isn't an optional add-on the borrower chooses — on a conventional loan, a lender is required to charge it whenever the down payment is below 20% (equivalently, the loan-to-value ratio is above 80%), because it protects the lender's exposure if the borrower defaults early, when equity is thin. Two exact thresholds are set by name in US federal law, the Homeowners Protection Act of 1998 (12 U.S.C. § 4902):",
+          "title": "Assurance hypothécaire privée : ce que c'est et comment la supprimer",
+          "intro": "La PMI n'est pas une option que l'emprunteur choisit — sur un prêt conventionnel, un prêteur est tenu de la facturer dès que l'apport personnel est inférieur à 20 % (autrement dit, lorsque le ratio prêt/valeur dépasse 80 %), car elle protège l'exposition du prêteur si l'emprunteur fait défaut tôt, quand la mise de fonds est encore faible. Deux seuils précis sont fixés nommément par la loi fédérale américaine, le Homeowners Protection Act de 1998 (12 U.S.C. § 4902) :",
           "thresholds": {
             "rows": [
               {
-                "label": "Borrower-Requested Cancellation",
-                "threshold": "80% of original value",
-                "note": "Once your scheduled balance is projected to reach 80% of the home's original value, you can submit a written request to your servicer to cancel PMI, provided your payment history is current (12 U.S.C. § 4902(a))."
+                "label": "Annulation demandée par l'emprunteur",
+                "threshold": "80 % de la valeur d'origine",
+                "note": "Dès que votre solde prévu doit atteindre 80 % de la valeur d'origine du bien, vous pouvez adresser une demande écrite à votre gestionnaire de prêt pour annuler la PMI, à condition que votre historique de paiement soit à jour (12 U.S.C. § 4902(a))."
               },
               {
-                "label": "Automatic Termination",
-                "threshold": "78% of original value",
-                "note": "Even if you never ask, the servicer is legally required to automatically terminate PMI once your balance is first scheduled to reach 78% of the original value, as long as payments are current (12 U.S.C. § 4902(b))."
+                "label": "Résiliation automatique",
+                "threshold": "78 % de la valeur d'origine",
+                "note": "Même si vous ne faites jamais la demande, le gestionnaire de prêt est légalement tenu de résilier automatiquement la PMI dès que votre solde doit atteindre pour la première fois 78 % de la valeur d'origine, tant que les paiements sont à jour (12 U.S.C. § 4902(b))."
               }
             ]
           },
-          "note": "Both thresholds are based on the home's original value and the loan's original amortization schedule — not on extra payments or market appreciation, unless you separately request a new appraisal-based cancellation. This calculator's “PMI Removal” estimate reflects the scheduled 80% threshold, adjusted for any extra monthly payment you've entered."
+          "note": "Les deux seuils reposent sur la valeur d'origine du bien et l'échéancier d'amortissement initial du prêt — pas sur des paiements supplémentaires ni sur une appréciation du marché, sauf si vous demandez séparément une annulation basée sur une nouvelle expertise. L'estimation « Suppression de la PMI » de ce calculateur reflète le seuil prévu de 80 %, ajusté selon tout paiement mensuel supplémentaire que vous avez saisi."
         },
         "extraPayments": {
-          "title": "The Real Impact of Paying a Little Extra Each Month",
-          "intro": "Because interest is charged only on the remaining balance, every extra dollar applied to principal today stops accruing interest for every remaining month of the loan — which is why even a modest recurring overpayment compounds into a disproportionately large reduction in total interest and loan term.",
+          "title": "L'impact réel d'un petit supplément payé chaque mois",
+          "intro": "Puisque les intérêts ne sont facturés que sur le solde restant, chaque dollar supplémentaire appliqué au capital aujourd'hui cesse de générer des intérêts pour tous les mois restants du prêt — c'est pourquoi même un modeste supplément récurrent se traduit par une réduction disproportionnée des intérêts totaux et de la durée du prêt.",
           "example": {
-            "title": "Worked Example",
-            "intro": "Using the same $320,000 loan at 6.5% over 30 years, adding just $200 to every monthly payment changes the outcome substantially:",
+            "title": "Exemple chiffré",
+            "intro": "Avec ce même prêt de 320 000 $ à 6,5 % sur 30 ans, ajouter simplement 200 $ à chaque mensualité change sensiblement le résultat :",
             "steps": [
               {
-                "label": "Standard payoff time",
-                "value": "360 months (30 years)"
+                "label": "Durée de remboursement standard",
+                "value": "360 mois (30 ans)"
               },
               {
-                "label": "Payoff time with +$200/month",
-                "value": "281 months (23 years, 5 months)"
+                "label": "Durée de remboursement avec +200 $/mois",
+                "value": "281 mois (23 ans et 5 mois)"
               },
               {
-                "label": "Time saved",
-                "value": "79 months (6 years, 7 months)"
+                "label": "Temps gagné",
+                "value": "79 mois (6 ans et 7 mois)"
               },
               {
-                "label": "Standard total interest",
-                "value": "$408,142.36"
+                "label": "Intérêts totaux standard",
+                "value": "408 142,36 $"
               },
               {
-                "label": "Total interest with +$200/month",
-                "value": "$302,713.69"
+                "label": "Intérêts totaux avec +200 $/mois",
+                "value": "302 713,69 $"
               }
             ],
-            "result": "That single, consistent $200/month habit saves $105,428.67 in interest — over 500 times the $200 itself, repeated across the shortened loan term."
+            "result": "Cette seule habitude constante de 200 $/mois permet d'économiser 105 428,67 $ d'intérêts — plus de 500 fois les 200 $ eux-mêmes, répétés sur la durée raccourcie du prêt."
           }
         },
         "rateTypes": {
-          "title": "Fixed-Rate vs. Adjustable-Rate Mortgages",
-          "intro": "This calculator models a fixed-rate mortgage, the dominant structure for US home loans, but it's worth understanding the alternative you'll encounter when comparing loan offers:",
+          "title": "Prêt à taux fixe ou à taux variable",
+          "intro": "Ce calculateur modélise un prêt à taux fixe, la structure dominante des prêts immobiliers aux États-Unis, mais il vaut la peine de comprendre l'alternative que vous rencontrerez en comparant des offres de prêt :",
           "fixed": {
-            "title": "Fixed-Rate Mortgage (FRM)",
-            "paragraph": "The interest rate is locked for the entire loan term, so the principal-and-interest portion of the payment never changes — only the escrowed taxes, insurance, and PMI can shift the total bill over time. This predictability is why fixed-rate loans, especially the 30-year term, have been the default choice for most US homebuyers since the government-backed reforms of the 1930s standardized amortizing mortgages."
+            "title": "Prêt à taux fixe (FRM)",
+            "paragraph": "Le taux d'intérêt est bloqué pour toute la durée du prêt, si bien que la part capital et intérêts de la mensualité ne change jamais — seuls les taxes, assurances et PMI mis en séquestre peuvent faire varier la facture totale au fil du temps. Cette prévisibilité explique pourquoi les prêts à taux fixe, en particulier sur 30 ans, sont le choix par défaut de la plupart des acheteurs américains depuis que les réformes soutenues par l'État des années 1930 ont standardisé les prêts amortissables."
           },
           "adjustable": {
-            "title": "Adjustable-Rate Mortgage (ARM)",
-            "paragraph": "The rate is fixed for an initial period (commonly 5, 7, or 10 years, as in a “7/1 ARM”), then adjusts periodically based on a reference index plus a lender margin, subject to caps that limit how much it can move at each adjustment and over the life of the loan. ARMs often start below prevailing fixed rates, trading long-term predictability for a lower initial payment."
+            "title": "Prêt à taux variable (ARM)",
+            "paragraph": "Le taux est fixe pour une période initiale (généralement 5, 7 ou 10 ans, comme dans un « ARM 7/1 »), puis s'ajuste périodiquement en fonction d'un indice de référence majoré d'une marge du prêteur, sous réserve de plafonds limitant l'ampleur des variations à chaque ajustement et sur la durée totale du prêt. Les ARM démarrent souvent en dessous des taux fixes en vigueur, échangeant la prévisibilité à long terme contre une mensualité initiale plus faible."
           }
         },
         "limitations": {
-          "title": "Limitations of This Calculator",
-          "paragraph1": "This tool assumes a fixed interest rate for the full term, a home value that doesn't change, and property tax, insurance, and HOA amounts that stay constant in nominal terms — none of which is guaranteed in practice. Property taxes are typically reassessed periodically, insurance premiums are repriced at renewal, and PMI can sometimes be removed earlier via a new appraisal showing sufficient value gain, none of which this calculator can predict.",
-          "paragraph2": "It also excludes one-time costs that are very real parts of buying a home but aren't part of the recurring monthly payment: closing costs, loan origination fees, title insurance, and any upfront mortgage insurance premium some loan programs charge. Treat every figure here as a planning estimate, not a lender's official Loan Estimate or Closing Disclosure."
+          "title": "Limites de ce calculateur",
+          "paragraph1": "Cet outil suppose un taux d'intérêt fixe sur toute la durée, une valeur du bien qui ne change pas, ainsi que des montants de taxe foncière, d'assurance et de charges de copropriété constants en valeur nominale — rien de tout cela n'est garanti en pratique. Les taxes foncières sont généralement réévaluées périodiquement, les primes d'assurance sont retarifées au renouvellement, et la PMI peut parfois être supprimée plus tôt via une nouvelle expertise démontrant une plus-value suffisante — autant d'éléments que ce calculateur ne peut pas prévoir.",
+          "paragraph2": "Il exclut également les frais ponctuels qui font bel et bien partie de l'achat d'un bien mais ne relèvent pas de la mensualité récurrente : frais de clôture, frais de dossier du prêt, assurance de titre, et toute prime d'assurance hypothécaire initiale exigée par certains programmes de prêt. Considérez chaque chiffre ici comme une estimation de planification, et non comme l'estimation de prêt officielle ou le document de clôture d'un prêteur."
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Why does my total interest look larger than my loan amount?",
-              "answer": "On long terms at typical rates, this is normal, not an error: a 30-year loan at 6.5% pays roughly 1.28× the principal in interest by the time the amortization example above finishes. Interest is charged on whatever balance remains, and early in the loan almost the entire balance remains, so a large share of your early payments is interest rather than principal."
+              "question": "Pourquoi mes intérêts totaux semblent-ils plus élevés que le montant de mon prêt ?",
+              "answer": "Sur de longues durées à des taux courants, c'est normal, pas une erreur : un prêt sur 30 ans à 6,5 % verse environ 1,28 fois le capital en intérêts d'ici la fin de l'exemple d'amortissement ci-dessus. Les intérêts sont calculés sur le solde restant, et en début de prêt, la quasi-totalité du solde reste due, donc une grande partie de vos premiers paiements correspond à des intérêts plutôt qu'à du capital."
             },
             {
-              "question": "Does this calculator include closing costs?",
-              "answer": "No. It computes only the recurring monthly payment components — principal, interest, taxes, insurance, HOA, and PMI. One-time costs like closing costs, appraisal fees, and title insurance are outside this tool's scope; see Limitations above."
+              "question": "Ce calculateur inclut-il les frais de clôture ?",
+              "answer": "Non. Il calcule uniquement les composantes récurrentes de la mensualité — capital, intérêts, taxes, assurances, charges de copropriété et PMI. Les frais ponctuels comme les frais de clôture, les frais d'expertise et l'assurance de titre sortent du cadre de cet outil ; voir les limites ci-dessus."
             },
             {
-              "question": "Is PMI the same as homeowners insurance?",
-              "answer": "No — they protect different parties. Homeowners insurance protects you against physical damage to the home. PMI protects only the lender against your default, and it doesn't pay out to you or repair anything if you file a claim."
+              "question": "La PMI est-elle la même chose que l'assurance habitation ?",
+              "answer": "Non — elles protègent des parties différentes. L'assurance habitation vous protège contre les dommages physiques au bien. La PMI protège uniquement le prêteur contre votre défaut de paiement, et elle ne vous verse rien ni ne répare quoi que ce soit si vous déposez une réclamation."
             },
             {
-              "question": "Can I remove PMI before the scheduled 80% threshold?",
-              "answer": "Often, yes. If your home's value has risen since purchase — through appreciation or improvements — you can typically request a new appraisal and ask your servicer to cancel PMI once the current, appraised loan-to-value ratio reaches 80%, without waiting for the scheduled balance to get there on its own. This calculator only models the scheduled path, since it can't predict future appraisals."
+              "question": "Puis-je supprimer la PMI avant le seuil prévu de 80 % ?",
+              "answer": "Souvent, oui. Si la valeur de votre bien a augmenté depuis l'achat — par appréciation ou par des travaux — vous pouvez généralement demander une nouvelle expertise et demander à votre gestionnaire de prêt d'annuler la PMI dès que le ratio prêt/valeur actuel, basé sur l'expertise, atteint 80 %, sans attendre que le solde prévu y parvienne de lui-même. Ce calculateur ne modélise que la trajectoire prévue, car il ne peut pas prédire de futures expertises."
             },
             {
-              "question": "Why do extra payments save so much more interest than their dollar amount?",
-              "answer": "Because interest compounds on the balance every month for the remaining life of the loan. A dollar of extra principal paid in year 2 stops accruing interest for the other 28 years it would otherwise have remained outstanding — see the worked example above."
+              "question": "Pourquoi les paiements supplémentaires font-ils économiser tellement plus d'intérêts que leur montant en dollars ?",
+              "answer": "Parce que les intérêts se composent sur le solde chaque mois pour toute la durée restante du prêt. Un dollar de capital supplémentaire versé en année 2 cesse de générer des intérêts pour les 28 autres années où il serait sinon resté dû — voir l'exemple chiffré ci-dessus."
             },
             {
-              "question": "What's the difference between loan-to-value (LTV) and down payment percent?",
-              "answer": "They're complementary: LTV is the loan amount divided by the home price, and down payment percent is the down payment divided by the home price. A 20% down payment corresponds exactly to an 80% LTV — the same line lenders use to decide whether PMI applies."
+              "question": "Quelle est la différence entre le ratio prêt/valeur (LTV) et le pourcentage d'apport personnel ?",
+              "answer": "Ils sont complémentaires : le LTV est le montant du prêt divisé par le prix du bien, et le pourcentage d'apport personnel est l'apport divisé par le prix du bien. Un apport de 20 % correspond exactement à un LTV de 80 % — le même seuil que les prêteurs utilisent pour décider si la PMI s'applique."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind the Tool: The History and Standards Behind the Modern Mortgage",
+          "title": "Dans les coulisses : l'histoire et les normes derrière le prêt hypothécaire moderne",
           "history": {
-            "title": "From Balloon Payments to the Amortized Mortgage: The Reforms of 1933–1934",
-            "paragraph": "Before the 1930s, the typical US home loan looked nothing like today's mortgage: it ran just 5 to 10 years, charged interest-only payments, and ended in a single “balloon” payment of the full principal — a structure that triggered a wave of foreclosures once the Great Depression made refinancing that balloon impossible for millions of homeowners. Congress responded on June 13, 1933 by creating the Home Owners' Loan Corporation (HOLC), which refinanced roughly one million troubled mortgages between 1933 and 1936 using a new structure: a longer, self-amortizing loan in which every payment stayed level and gradually retired the entire principal, eliminating the balloon altogether. The National Housing Act of 1934 then created the Federal Housing Administration (FHA), which insured lenders against default and extended the amortizing structure to 25- and 30-year terms — the direct ancestor of the fixed-rate mortgage this calculator models."
+            "title": "Des paiements ballon au prêt amorti : les réformes de 1933-1934",
+            "paragraph": "Avant les années 1930, le prêt immobilier américain typique ne ressemblait en rien au prêt hypothécaire actuel : il durait seulement 5 à 10 ans, ne facturait que des intérêts, et se terminait par un unique paiement « ballon » du capital intégral — une structure qui a déclenché une vague de saisies lorsque la Grande Dépression a rendu impossible, pour des millions de propriétaires, le refinancement de ce paiement ballon. Le Congrès a réagi le 13 juin 1933 en créant la Home Owners' Loan Corporation (HOLC), qui a refinancé environ un million de prêts en difficulté entre 1933 et 1936 selon une nouvelle structure : un prêt plus long, auto-amortissable, où chaque paiement restait constant et remboursait progressivement l'intégralité du capital, éliminant totalement le paiement ballon. Le National Housing Act de 1934 a ensuite créé la Federal Housing Administration (FHA), qui assurait les prêteurs contre le défaut de paiement et a étendu la structure amortissable à des durées de 25 et 30 ans — l'ancêtre direct du prêt à taux fixe que modélise ce calculateur."
           },
           "equipment": {
-            "title": "The Standard Behind PMI Removal: The Homeowners Protection Act of 1998",
-            "paragraph": "The exact thresholds this calculator uses to estimate when PMI can come off aren't a rule of thumb — they're set in US federal law. The Homeowners Protection Act of 1998 (12 U.S.C. § 4902), signed July 29, 1998 and effective July 29, 1999, requires a servicer to automatically terminate PMI on a conventional loan once the principal balance is first scheduled to reach 78% of the property's original value (§ 4902(b)), and separately gives borrowers in good standing the right to request cancellation once the balance is scheduled to reach 80% (§ 4902(a)) — the same two figures behind this tool's “PMI Removal” estimate."
+            "title": "La norme derrière la suppression de la PMI : le Homeowners Protection Act de 1998",
+            "paragraph": "Les seuils exacts que ce calculateur utilise pour estimer quand la PMI peut être supprimée ne sont pas une règle empirique — ils sont fixés par la loi fédérale américaine. Le Homeowners Protection Act de 1998 (12 U.S.C. § 4902), signé le 29 juillet 1998 et entré en vigueur le 29 juillet 1999, exige qu'un gestionnaire de prêt résilie automatiquement la PMI sur un prêt conventionnel dès que le solde du capital doit atteindre pour la première fois 78 % de la valeur d'origine du bien (§ 4902(b)), et accorde par ailleurs aux emprunteurs en règle le droit de demander l'annulation dès que le solde doit atteindre 80 % (§ 4902(a)) — les deux mêmes chiffres derrière l'estimation « Suppression de la PMI » de cet outil."
           },
           "modernDevelopments": {
-            "title": "Modern Mortgage Technology: Automated Valuation and Digital Closings",
-            "paragraph": "Two shifts have reshaped mortgage underwriting and closing in recent years. Automated valuation models (AVMs) now estimate a property's value from county records, comparable sales, and increasingly satellite imagery and computer vision, letting many lenders waive an in-person appraisal for well-documented properties under roughly $250,000–$400,000. And remote online notarization (RON) — now legally recognized in more than 40 US states — lets a borrower sign closing documents in front of a notary over live video instead of at an in-person closing table. Industry surveys report a majority of borrowers now upload documents and e-sign through digital portals rather than in person, a shift that has measurably shortened the closing timeline this calculator's numbers ultimately feed into."
+            "title": "Technologies hypothécaires modernes : évaluation automatisée et clôtures numériques",
+            "paragraph": "Deux évolutions ont transformé la souscription et la clôture des prêts hypothécaires ces dernières années. Les modèles d'évaluation automatisée (AVM) estiment désormais la valeur d'un bien à partir des registres du comté, des ventes comparables et, de plus en plus, de l'imagerie satellite et de la vision par ordinateur, ce qui permet à de nombreux prêteurs de renoncer à une expertise en personne pour des biens bien documentés d'environ 250 000 $ à 400 000 $. Et la notarisation en ligne à distance (RON) — désormais reconnue légalement dans plus de 40 États américains — permet à un emprunteur de signer les documents de clôture devant un notaire par vidéo en direct plutôt qu'à une table de clôture en personne. Des enquêtes sectorielles indiquent qu'une majorité d'emprunteurs téléversent désormais leurs documents et signent électroniquement via des portails numériques plutôt qu'en personne, une évolution qui a mesurablement raccourci le délai de clôture dont se nourrissent finalement les chiffres de ce calculateur."
           },
           "academicPath": {
-            "title": "Studying This Field: Finance and Real Estate Economics",
-            "intro": "Pricing a mortgage — the interest formula, amortization mechanics, and PMI rules this calculator applies — is core material within finance, specifically real estate finance and financial economics. QS World University Rankings by Subject does not publish a standalone “Real Estate” category, so the closest standalone match is Accounting & Finance — here are the top 5 globally in QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Étudier ce domaine : finance et économie de l'immobilier",
+            "intro": "Évaluer un prêt hypothécaire — la formule d'intérêt, la mécanique d'amortissement et les règles de PMI que ce calculateur applique — relève du cœur de la finance, en particulier de la finance immobilière et de l'économie financière. Le classement QS World University Rankings by Subject ne publie pas de catégorie autonome « Immobilier », la correspondance autonome la plus proche est donc Comptabilité et Finance — voici les 5 meilleures universités mondiales selon le QS World University Rankings by Subject 2025, plus une option régionale :",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 1 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
-                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+                "online": "Largement en ligne — la Harvard Extension School indique que 11 des 12 cours requis pour son diplôme supérieur de finance peuvent être suivis en ligne, avec au moins un cours nécessitant une présence sur le campus."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 2 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/mfin",
-                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+                "online": "Non — le Master of Finance de MIT Sloan est un programme à temps plein et en présentiel (parcours de 12 ou 18 mois), sans option d'enseignement à distance mentionnée sur ses pages officielles."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 3 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/programs/online-programs",
-                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+                "online": "Non — la formation en finance de la Stanford GSB est dispensée via son MBA en présentiel ; la page des programmes en ligne de l'école ne liste que des cours exécutifs non diplômants, pas un diplôme complet de finance."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 4 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
-                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time “MSc in Applied Financial Economics” (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+                "online": "Pas entièrement en ligne — le MSc in Financial Economics d'Oxford est un programme à temps plein et en présentiel de 9 mois ; un nouveau « MSc in Applied Financial Economics » à temps partiel (à partir de septembre 2026) associe apprentissage en ligne et résidences obligatoires en présentiel à Oxford, ce n'est donc pas non plus une option entièrement à distance."
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 5 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.chicagobooth.edu/master-in-finance",
-                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+                "online": "Non — le Master in Finance de Chicago Booth est un programme en cohorte de 15 mois en présentiel, dont la première promotion a débuté à l'automne 2024."
               },
               {
                 "name": "King Saud University (KSU), Riyadh — College of Business Administration",
-                "note": "A leading Saudi university offering a Master of Science in Finance (MSF) through its College of Business Administration.",
+                "note": "Une université saoudienne de premier plan proposant un Master of Science in Finance (MSF) via son College of Business Administration.",
                 "url": "https://cba.ksu.edu.sa/en/overveiw/MSF",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Le mode de diffusion n'est pas précisé sur la page officielle du programme."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "Références scientifiques",
           "citation": "Bäckman, C., Moran, P., & van Santen, P. (2024). Mortgage Design, Repayment Schedules, and Household Borrowing. FEDS Working Paper No. 2024-077, Board of Governors of the Federal Reserve System.",
-          "note": "Using a Swedish policy change that restricted interest-only mortgages, this study finds that low-initial-payment mortgage designs substantially increase both household borrowing and lifetime interest costs — empirical evidence for why this calculator treats the full amortization schedule, not just the headline rate, as central to what a mortgage actually costs.",
+          "note": "En s'appuyant sur un changement de politique suédois qui a restreint les prêts hypothécaires à intérêts seuls, cette étude montre que les structures de prêt à faible paiement initial augmentent sensiblement à la fois l'endettement des ménages et le coût total des intérêts sur la durée de vie du prêt — une preuve empirique de la raison pour laquelle ce calculateur considère l'échéancier d'amortissement complet, et non le seul taux affiché, comme central dans le coût réel d'un prêt hypothécaire.",
           "doiLabel": "DOI",
           "doi": "10.17016/FEDS.2024.077",
-          "readOriginal": "Read the Original Paper",
+          "readOriginal": "Lire l'étude originale",
           "url": "https://doi.org/10.17016/FEDS.2024.077"
         }
       },
       "payoffChart": {
-        "title": "Amortization: Principal vs. Interest Over Time",
-        "intro": "Each bar is one year of payments, split into principal (the part that reduces your balance) and interest (the cost of borrowing). Early years lean heavily toward interest; later years flip toward principal. The solid line traces your remaining balance.",
-        "principalLabel": "Principal",
-        "interestLabel": "Interest",
-        "balanceLabel": "Remaining Balance",
-        "standardBalanceLabel": "Standard Schedule (no extra payments)",
-        "totalPrincipalLabel": "Total Principal",
-        "totalInterestLabel": "Total Interest Paid",
-        "pmiNote": "Based on your inputs, PMI could be requested for removal around year {dropYear} (80% loan-to-value) and must be automatically terminated by year {autoYear} (78% loan-to-value) at the latest.",
-        "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs."
+        "title": "Amortissement : capital et intérêts dans le temps",
+        "intro": "Chaque barre représente une année de paiements, répartie entre le capital (la part qui réduit votre solde) et les intérêts (le coût de l'emprunt). Les premières années penchent fortement vers les intérêts ; les dernières basculent vers le capital. La ligne pleine trace votre solde restant.",
+        "principalLabel": "Capital",
+        "interestLabel": "Intérêts",
+        "balanceLabel": "Solde restant",
+        "standardBalanceLabel": "Échéancier standard (sans paiement supplémentaire)",
+        "totalPrincipalLabel": "Capital total",
+        "totalInterestLabel": "Intérêts totaux versés",
+        "pmiNote": "D'après vos données, la suppression de la PMI pourrait être demandée vers l'année {dropYear} (ratio prêt/valeur de 80 %) et doit être résiliée automatiquement au plus tard l'année {autoYear} (ratio prêt/valeur de 78 %).",
+        "pmiNoDropoff": "Votre prêt comporte actuellement une PMI, mais aucun point de suppression n'a pu être estimé avec ces données."
       },
       "amortizationTable": {
-        "title": "Full Monthly Amortization Schedule",
-        "intro": "Every single payment from month 1 to payoff, grouped by year — expand a year to see the principal, interest, and remaining balance for each of its payments, or download the whole schedule as a CSV file.",
-        "yearLabel": "Year {year}",
-        "columnPaymentNumber": "Payment #",
-        "columnYear": "Year",
-        "columnPayment": "Payment",
-        "viewFullTable": "View Full Schedule",
-        "showLess": "Show Less"
+        "title": "Échéancier d'amortissement mensuel complet",
+        "intro": "Chaque paiement, du mois 1 jusqu'au remboursement total, regroupé par année — développez une année pour voir le capital, les intérêts et le solde restant de chacun de ses paiements, ou téléchargez l'échéancier complet sous forme de fichier CSV.",
+        "yearLabel": "Année {year}",
+        "columnPaymentNumber": "Paiement n°",
+        "columnYear": "Année",
+        "columnPayment": "Paiement",
+        "viewFullTable": "Voir l'échéancier complet",
+        "showLess": "Afficher moins"
       },
       "scenarioComparison": {
-        "title": "Compare Rates and Loan Terms Side by Side",
-        "intro": "Your current numbers stay fixed as the baseline — try a different rate or term in the two scenarios below to see exactly how much it moves your payment, total interest, and payoff time.",
-        "baseLabel": "Your Current Scenario",
-        "baseHint": "From the form above — home price, down payment, taxes, insurance, HOA, PMI, and extra payment stay the same across all three scenarios.",
-        "scenarioLabel": "Scenario {letter}",
-        "rateLabel": "Rate (%)",
-        "termLabel": "Term (yrs)",
-        "rowMonthlyPI": "Monthly Principal & Interest",
-        "rowMonthlyTotal": "Total Monthly Payment",
-        "rowTotalInterest": "Total Interest",
-        "rowTotalCost": "Total Cost",
-        "rowPayoffTime": "Payoff Time",
-        "deltaNone": "No change",
-        "invalidScenario": "Enter a rate between 0–25% and a term between 1–50 years.",
-        "note": "Scenarios B and C use your current home price, down payment, and other costs — only the rate and term change, so you can isolate exactly what each one costs you."
+        "title": "Comparer taux et durées de prêt côte à côte",
+        "intro": "Vos données actuelles restent fixées comme référence — essayez un taux ou une durée différents dans les deux scénarios ci-dessous pour voir exactement de combien cela modifie votre mensualité, vos intérêts totaux et votre durée de remboursement.",
+        "baseLabel": "Votre scénario actuel",
+        "baseHint": "À partir du formulaire ci-dessus — le prix du bien, l'apport personnel, les taxes, l'assurance, les charges de copropriété, la PMI et le paiement supplémentaire restent identiques dans les trois scénarios.",
+        "scenarioLabel": "Scénario {letter}",
+        "rateLabel": "Taux (%)",
+        "termLabel": "Durée (ans)",
+        "rowMonthlyPI": "Mensualité de capital et intérêts",
+        "rowMonthlyTotal": "Mensualité totale",
+        "rowTotalInterest": "Intérêts totaux",
+        "rowTotalCost": "Coût total",
+        "rowPayoffTime": "Durée de remboursement",
+        "deltaNone": "Aucun changement",
+        "invalidScenario": "Saisissez un taux entre 0 et 25 % et une durée entre 1 et 50 ans.",
+        "note": "Les scénarios B et C utilisent votre prix de bien, votre apport personnel et vos autres coûts actuels — seuls le taux et la durée changent, ce qui permet d'isoler précisément le coût de chacun."
       },
       "biweekly": {
-        "title": "Bi-Weekly Payment Plan",
-        "intro": "Pay half your monthly principal-and-interest payment every two weeks instead of one full payment monthly. A year has 52 weeks, so that's 26 half-payments — the equivalent of 13 monthly payments instead of 12 — which retires the loan faster and cuts total interest without changing your rate.",
-        "biweeklyPaymentLabel": "Bi-Weekly Payment",
-        "interestSavedLabel": "Interest Saved",
-        "interestSavedNote": "Interest avoided compared to the standard monthly schedule, from the extra principal reduction of the 13th annual payment.",
-        "timeSavedLabel": "Time Saved",
-        "rowPaymentAmount": "Payment Amount",
-        "rowPaymentsPerYear": "Payments per Year",
-        "rowPayoffTime": "Payoff Time",
-        "rowTotalInterest": "Total Interest",
-        "rowTotalCost": "Total Cost",
-        "standardLabel": "Standard Monthly",
-        "biweeklyLabel": "Accelerated Bi-Weekly",
-        "columnPaymentNumber": "Payment #",
-        "columnPayment": "Payment",
-        "pmiNote": "Under this plan, PMI could be requested for removal around payment #{period} and must be automatically terminated by payment #{autoPeriod} at the latest.",
-        "note": "This assumes the servicer applies each bi-weekly payment straight to principal and interest as it arrives. Some servicers instead hold payments in a suspense account until a full monthly amount accrues, which erases this benefit — checking the servicer's policy clarifies whether it applies here, or the same effect can be reproduced independently of it by simply adding one-twelfth of the monthly payment to every regular monthly payment."
+        "title": "Plan de paiement bihebdomadaire",
+        "intro": "Payez la moitié de votre mensualité de capital et intérêts toutes les deux semaines au lieu d'un paiement mensuel complet. Une année compte 52 semaines, soit 26 demi-paiements — l'équivalent de 13 mensualités au lieu de 12 — ce qui rembourse le prêt plus vite et réduit les intérêts totaux sans changer votre taux.",
+        "biweeklyPaymentLabel": "Paiement bihebdomadaire",
+        "interestSavedLabel": "Intérêts économisés",
+        "interestSavedNote": "Intérêts évités par rapport à l'échéancier mensuel standard, grâce à la réduction de capital supplémentaire du 13ᵉ paiement annuel.",
+        "timeSavedLabel": "Temps gagné",
+        "rowPaymentAmount": "Montant du paiement",
+        "rowPaymentsPerYear": "Paiements par an",
+        "rowPayoffTime": "Durée de remboursement",
+        "rowTotalInterest": "Intérêts totaux",
+        "rowTotalCost": "Coût total",
+        "standardLabel": "Mensuel standard",
+        "biweeklyLabel": "Bihebdomadaire accéléré",
+        "columnPaymentNumber": "Paiement n°",
+        "columnPayment": "Paiement",
+        "pmiNote": "Dans le cadre de ce plan, la suppression de la PMI pourrait être demandée vers le paiement n° {period} et doit être résiliée automatiquement au plus tard au paiement n° {autoPeriod}.",
+        "note": "Ceci suppose que le gestionnaire de prêt applique chaque paiement bihebdomadaire directement au capital et aux intérêts dès sa réception. Certains gestionnaires placent au contraire les paiements sur un compte d'attente jusqu'à ce qu'un montant mensuel complet soit atteint, ce qui annule cet avantage — vérifier la politique du gestionnaire permet de savoir si cela s'applique ici, ou l'on peut reproduire le même effet indépendamment en ajoutant simplement un douzième de la mensualité à chaque paiement mensuel régulier."
       }
     },
     "crypto-converter": {
