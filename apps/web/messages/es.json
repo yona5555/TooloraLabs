@@ -6225,186 +6225,186 @@
       }
     },
     "invoice-generator": {
-      "title": "Invoice Generator",
-      "description": "Build an itemized invoice with a live preview, multi-currency support, and one-click print/PDF export.",
+      "title": "Generador de Facturas",
+      "description": "Crea una factura detallada con vista previa en tiempo real, soporte multidivisa y exportación a PDF/impresión con un clic.",
       "nav": {
-        "tool": "Generator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Generador",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
       },
       "aboveFold": {
-        "resultTitle": "Live Preview",
-        "placeholder": "Add a description and price to at least one item to see the invoice here.",
-        "noNumber": "Invoice",
+        "resultTitle": "Vista previa en vivo",
+        "placeholder": "Añade una descripción y un precio a al menos un artículo para ver aquí la factura.",
+        "noNumber": "Factura",
         "checklist": {
-          "title": "What Makes an Invoice Valid",
-          "intro": "Requirements vary by country, but most jurisdictions expect an invoice to include:",
+          "title": "Qué hace válida a una factura",
+          "intro": "Los requisitos varían según el país, pero la mayoría de las jurisdicciones esperan que una factura incluya:",
           "items": [
-            "A unique, sequential invoice number — never reused, even for a cancelled invoice.",
-            "The full legal name and address of both the seller and the buyer.",
-            "A clear issue date and, separately, a payment due date.",
-            "An itemized description of each good or service, not just a lump sum.",
-            "The tax rate applied and the tax amount shown separately from the subtotal.",
-            "The currency the amounts are stated in, especially for cross-border invoices."
+            "Un número de factura único y secuencial — que nunca se reutilice, ni siquiera en una factura anulada.",
+            "El nombre legal completo y la dirección tanto del vendedor como del comprador.",
+            "Una fecha de emisión clara y, por separado, una fecha límite de pago.",
+            "Una descripción detallada de cada bien o servicio, no solo un importe global.",
+            "El tipo impositivo aplicado y el importe del impuesto mostrado por separado del subtotal.",
+            "La divisa en la que se expresan los importes, especialmente en facturas transfronterizas."
           ]
         }
       },
       "form": {
-        "inputTitle": "Invoice Details",
-        "fromLabel": "From",
-        "fromPlaceholder": "Your business name",
-        "toLabel": "Bill To",
-        "toPlaceholder": "Client name",
-        "invoiceNumberLabel": "Invoice Number",
-        "currencyLabel": "Currency",
-        "issueDateLabel": "Issue Date",
-        "dueDateLabel": "Due Date",
-        "itemsLabel": "Items",
-        "itemDescription": "Description",
-        "itemDescriptionPlaceholder": "Item or service",
-        "itemQuantity": "Quantity",
-        "itemUnitPrice": "Unit Price",
-        "addItem": "Add Item",
-        "removeItem": "Remove item",
-        "taxRate": "Tax Rate (%)",
-        "discountPercent": "Discount (%)",
-        "generate": "Generate Invoice"
+        "inputTitle": "Datos de la factura",
+        "fromLabel": "De",
+        "fromPlaceholder": "Nombre de tu empresa",
+        "toLabel": "Facturar a",
+        "toPlaceholder": "Nombre del cliente",
+        "invoiceNumberLabel": "Número de factura",
+        "currencyLabel": "Divisa",
+        "issueDateLabel": "Fecha de emisión",
+        "dueDateLabel": "Fecha de vencimiento",
+        "itemsLabel": "Artículos",
+        "itemDescription": "Descripción",
+        "itemDescriptionPlaceholder": "Artículo o servicio",
+        "itemQuantity": "Cantidad",
+        "itemUnitPrice": "Precio unitario",
+        "addItem": "Añadir artículo",
+        "removeItem": "Eliminar artículo",
+        "taxRate": "Tipo impositivo (%)",
+        "discountPercent": "Descuento (%)",
+        "generate": "Generar factura"
       },
       "result": {
-        "title": "Invoice",
-        "item": "Item",
-        "quantity": "Qty",
-        "unitPrice": "Unit Price",
+        "title": "Factura",
+        "item": "Artículo",
+        "quantity": "Cant.",
+        "unitPrice": "Precio unitario",
         "lineTotal": "Total",
         "subtotal": "Subtotal",
-        "discount": "Discount",
-        "tax": "Tax",
-        "grandTotal": "Grand Total"
+        "discount": "Descuento",
+        "tax": "Impuesto",
+        "grandTotal": "Total general"
       },
       "errors": {
-        "required": "Please enter valid tax and discount values.",
-        "emptyItems": "Add at least one item.",
-        "invalidItem": "Each item needs a description, a quantity greater than 0, and a non-negative unit price.",
-        "invalidTaxRate": "Tax rate must not be negative.",
-        "invalidDiscount": "Discount must be between 0 and 100%."
+        "required": "Introduce valores válidos de impuesto y descuento.",
+        "emptyItems": "Añade al menos un artículo.",
+        "invalidItem": "Cada artículo necesita una descripción, una cantidad mayor que 0 y un precio unitario no negativo.",
+        "invalidTaxRate": "El tipo impositivo no puede ser negativo.",
+        "invalidDiscount": "El descuento debe estar entre 0 y 100 %."
       },
       "education": {
         "intro": {
-          "title": "How Invoice Totals Actually Add Up",
-          "paragraph1": "An invoice's math follows a fixed order that matters: every line item's quantity times its unit price is summed into a subtotal, a discount (if any) is subtracted from that subtotal first, and only then is tax calculated — on the discounted amount, not the original subtotal. Applying tax before the discount, or applying it to the pre-discount subtotal, produces a different, incorrect total, which is exactly the kind of ordering mistake this tool's calculation logic is built to never make.",
-          "paragraph2": "The distinction between an invoice's issue date and its due date is also more than a formality: the gap between them (this tool defaults to 14 days, but 30 is common under the term \"Net 30\") is the actual interest-free credit period a seller is extending to a buyer, which is why standard payment terms like \"Net 30\" or \"Net 60\" are really shorthand for a specific amount of short-term financing built into the transaction.",
+          "title": "Cómo se calculan realmente los totales de una factura",
+          "paragraph1": "La aritmética de una factura sigue un orden fijo que importa: la cantidad de cada línea multiplicada por su precio unitario se suma en un subtotal, primero se resta de ese subtotal el descuento (si lo hay) y solo entonces se calcula el impuesto — sobre el importe ya descontado, no sobre el subtotal original. Aplicar el impuesto antes del descuento, o aplicarlo sobre el subtotal previo al descuento, produce un total distinto e incorrecto, que es exactamente el tipo de error de orden que la lógica de cálculo de esta herramienta está diseñada para no cometer nunca.",
+          "paragraph2": "La distinción entre la fecha de emisión de una factura y su fecha de vencimiento tampoco es una simple formalidad: el intervalo entre ambas (esta herramienta usa 14 días por defecto, aunque 30 es habitual bajo el término «Net 30») es, en la práctica, el período de crédito sin intereses que el vendedor concede al comprador, razón por la cual condiciones de pago estándar como «Net 30» o «Net 60» son en realidad una forma abreviada de referirse a una financiación a corto plazo concreta, incorporada a la propia transacción.",
           "diagram": {
             "subtotalLabel": "Subtotal",
-            "discountLabel": "Discount",
-            "taxLabel": "Tax",
+            "discountLabel": "Descuento",
+            "taxLabel": "Impuesto",
             "totalLabel": "Total",
-            "caption": "The fixed order of invoice math: discount is subtracted from the subtotal first, and tax is calculated on what's left — never on the original subtotal."
+            "caption": "El orden fijo de la aritmética de una factura: el descuento se resta primero del subtotal, y el impuesto se calcula sobre lo que queda — nunca sobre el subtotal original."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Two worked examples showing the exact order discount and tax are applied in.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Ejemplos resueltos",
+          "intro": "Dos ejemplos resueltos que muestran el orden exacto en que se aplican el descuento y el impuesto.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado",
           "rows": [
             {
-              "scenario": "2 items: 10×$50 design work, 1×$20 hosting, 15% tax, no discount",
-              "result": "Subtotal $520.00, tax $78.00, total $598.00"
+              "scenario": "2 artículos: 10×50 $ de diseño, 1×20 $ de alojamiento web, 15 % de impuesto, sin descuento",
+              "result": "Subtotal 520,00 $, impuesto 78,00 $, total 598,00 $"
             },
             {
-              "scenario": "1 item: $1,000 consulting, 20% discount, 10% tax",
-              "result": "Discount $200.00 → taxable $800.00 → tax $80.00 → total $880.00"
+              "scenario": "1 artículo: 1000 $ de consultoría, 20 % de descuento, 10 % de impuesto",
+              "result": "Descuento 200,00 $ → base imponible 800,00 $ → impuesto 80,00 $ → total 880,00 $"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "Is a discount applied before or after tax?",
-              "answer": "Before — a discount reduces the subtotal first, and tax is then calculated on that already-discounted amount. Applying tax to the original subtotal and then subtracting the discount produces a different (and incorrect) total whenever both a discount and a tax rate are in play, which is why the order genuinely matters."
+              "question": "¿El descuento se aplica antes o después del impuesto?",
+              "answer": "Antes: el descuento reduce primero el subtotal, y el impuesto se calcula después sobre ese importe ya descontado. Aplicar el impuesto sobre el subtotal original y restar después el descuento produce un total distinto (e incorrecto) siempre que intervengan a la vez un descuento y un tipo impositivo, por eso el orden importa de verdad."
             },
             {
-              "question": "What's the difference between an invoice and a receipt?",
-              "answer": "An invoice is a request for payment, issued before money changes hands, and it establishes a debt the buyer owes. A receipt is proof that payment has already been received. The same document can't correctly serve as both at once — a paid invoice is typically followed by a separate receipt, not relabeled as one."
+              "question": "¿Cuál es la diferencia entre una factura y un recibo?",
+              "answer": "Una factura es una solicitud de pago, emitida antes de que el dinero cambie de manos, y deja constancia de una deuda que el comprador debe. Un recibo es la prueba de que el pago ya se ha recibido. Un mismo documento no puede cumplir correctamente ambas funciones a la vez — a una factura pagada normalmente le sigue un recibo aparte, no una simple reetiquetación."
             },
             {
-              "question": "What does \"Net 30\" actually mean?",
-              "answer": "It means full payment is due within 30 days of the invoice's issue date — not 30 days after the goods or services were delivered, and not 30 calendar days from an arbitrary date. \"Net 15\" and \"Net 60\" follow the same logic with a different day count; the \"Net\" simply signals no early-payment discount applies to the stated amount."
+              "question": "¿Qué significa realmente «Net 30»?",
+              "answer": "Significa que el pago completo vence dentro de los 30 días siguientes a la fecha de emisión de la factura — no 30 días después de la entrega de los bienes o servicios, ni 30 días naturales desde una fecha arbitraria. «Net 15» y «Net 60» siguen la misma lógica con un número de días distinto; «Net» simplemente indica que no se aplica ningún descuento por pronto pago sobre el importe indicado."
             },
             {
-              "question": "Why does every invoice need a unique invoice number?",
-              "answer": "It's the specific reference both the buyer's and seller's accounting systems use to match a payment to the exact invoice it settles, and in most tax jurisdictions, sequential invoice numbering is also a compliance requirement that makes it harder to conceal deleted or backdated invoices during an audit."
+              "question": "¿Por qué toda factura necesita un número único?",
+              "answer": "Es la referencia concreta que usan los sistemas contables tanto del comprador como del vendedor para vincular un pago con la factura exacta que salda, y en la mayoría de las jurisdicciones fiscales, la numeración secuencial de facturas es además un requisito legal que dificulta ocultar facturas eliminadas o con fecha alterada durante una auditoría."
             },
             {
-              "question": "Is this tool's invoice legally compliant for my country?",
-              "answer": "This tool covers the fields most jurisdictions commonly require, but exact legal requirements vary by country — some require a tax registration number, a specific VAT breakdown, or a particular language. Treat this as a strong starting template, not a substitute for checking your local tax authority's specific invoicing rules."
+              "question": "¿La factura de esta herramienta cumple la normativa legal de mi país?",
+              "answer": "Esta herramienta incluye los campos que la mayoría de las jurisdicciones suelen exigir, pero los requisitos legales exactos varían según el país — algunos exigen un número de registro fiscal, un desglose específico del IVA o un idioma determinado. Trátala como una plantilla de partida sólida, no como un sustituto de comprobar la normativa de facturación concreta de tu autoridad fiscal local."
             },
             {
-              "question": "Why show the currency explicitly instead of assuming everyone uses the same one?",
-              "answer": "Because an invoice with an ambiguous currency is a real, common source of payment disputes in cross-border business — \"$500\" alone doesn't specify US, Canadian, Australian, or several other dollars, and stating the currency code (USD, EUR, AED) removes that ambiguity entirely."
+              "question": "¿Por qué mostrar la divisa explícitamente en lugar de asumir que todos usan la misma?",
+              "answer": "Porque una factura con una divisa ambigua es una fuente real y frecuente de disputas de pago en el comercio transfronterizo — «500 $» por sí solo no especifica si son dólares estadounidenses, canadienses, australianos o de otro país, y mostrar el código de divisa (USD, EUR, AED) elimina esa ambigüedad por completo."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Detrás de esta herramienta",
           "history": {
-            "title": "5,000 Years Before the First Spreadsheet",
-            "paragraph": "The invoice is one of the oldest surviving forms of business documentation: archaeologists have recovered clay tablets from the Sumerian city of Uruk, dating to roughly 3400–3300 BCE, recording deliveries of grain, wool, and beer to temple estates — administrative proof that a transaction had actually taken place. These tablets predate even the earliest fully developed writing systems, meaning record-keeping needs are part of what drove writing itself to be invented, not the other way around. The core function hasn't changed in five millennia: a durable, portable record establishing what was owed, by whom, for what."
+            "title": "5000 años antes de la primera hoja de cálculo",
+            "paragraph": "La factura es una de las formas más antiguas de documentación comercial que se conservan: los arqueólogos han recuperado tablillas de arcilla de la ciudad sumeria de Uruk, fechadas hacia el 3400–3300 a. C., que registran entregas de grano, lana y cerveza a las propiedades del templo — prueba administrativa de que una transacción había tenido lugar realmente. Estas tablillas son incluso anteriores a los primeros sistemas de escritura plenamente desarrollados, lo que significa que la necesidad de llevar registros contribuyó a que se inventara la propia escritura, y no al revés. La función esencial no ha cambiado en cinco milenios: un registro duradero y portátil que establece qué se debía, quién lo debía y por qué concepto."
           },
           "modernDevelopments": {
-            "title": "From Paper Ledgers to Structured Data",
-            "paragraph": "For most of that history, an invoice was whatever the seller wrote down — free-form, unstructured, and readable only by a human. That changed with electronic invoicing standards like UBL (Universal Business Language), standardized internationally as ISO/IEC 19845, which defines a strict, machine-readable XML structure for an invoice's fields — issuer, buyer, line items, tax breakdown — so accounting software on both ends of a transaction can process it automatically without a human re-typing anything. Government-mandated e-invoicing built on standards like this is now routine across the EU, and in Turkey, Peru, Colombia, and Panama, among others."
+            "title": "De los libros de contabilidad en papel a los datos estructurados",
+            "paragraph": "Durante casi toda esa historia, una factura era simplemente lo que el vendedor anotaba — de formato libre, sin estructura, y legible solo por una persona. Eso cambió con estándares de facturación electrónica como UBL (Universal Business Language), normalizado internacionalmente como ISO/IEC 19845, que define una estructura XML estricta y legible por máquina para los campos de una factura —emisor, comprador, líneas de artículos, desglose de impuestos—, de modo que el software contable de ambas partes de una transacción puede procesarla automáticamente sin que nadie tenga que volver a teclear nada. La facturación electrónica obligatoria basada en estándares como este es ya habitual en toda la UE, y también en Turquía, Perú, Colombia y Panamá, entre otros países."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Invoicing, billing cycles, and revenue recognition are studied within Accounting & Finance programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Itinerario académico",
+            "intro": "La facturación, los ciclos de cobro y el reconocimiento de ingresos se estudian dentro de los programas de Contabilidad y Finanzas. Estas son las cinco mejores instituciones del mundo según el QS World University Rankings by Subject 2025, junto con una opción regional:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #1 del mundo en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
-                "online": "No — HBS's MBA, which houses the Accounting & Management unit's teaching, is in-person on Harvard's Boston campus; separate Executive Education offerings include some online courses, not this program."
+                "online": "No — el MBA de HBS, que alberga la docencia de la unidad de Contabilidad y Gestión, es presencial en el campus de Harvard en Boston; la Executive Education, por separado, sí incluye algunos cursos en línea, pero no este programa."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #2 del mundo en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
-                "online": "No — MIT Sloan's Master of Finance is an in-person, 12- or 18-month program on MIT's Cambridge campus."
+                "online": "No — el Master of Finance de MIT Sloan es un programa presencial de 12 o 18 meses en el campus de Cambridge del MIT."
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #3 del mundo en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
-                "online": "No — Stanford GSB's Accounting area teaches through its in-person MBA, MSx, and PhD programs; the school's online offerings are limited to non-degree executive courses."
+                "online": "No — el área de Contabilidad de Stanford GSB imparte docencia a través de sus programas presenciales de MBA, MSx y doctorado; su oferta en línea se limita a cursos ejecutivos sin titulación."
               },
               {
                 "name": "University of Oxford (Saïd Business School)",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #4 del mundo en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
-                "online": "No — the Oxford MBA, whose core curriculum includes accounting and finance, is a full-time in-person program; Saïd's online offerings are separate short courses, not this degree."
+                "online": "No — el MBA de Oxford, cuyo plan de estudios básico incluye contabilidad y finanzas, es un programa presencial a tiempo completo; la oferta en línea de Saïd son cursos cortos independientes, no esta titulación."
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #5 del mundo en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
-                "online": "No — Booth's MBA programs (Full-Time, Evening, Weekend, Executive) are in-person or hybrid on-campus formats; there is no fully online Booth MBA."
+                "online": "No — los programas de MBA de Booth (tiempo completo, nocturno, fin de semana, ejecutivo) son presenciales o híbridos en el campus; no existe un MBA de Booth totalmente en línea."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Accounting through its School of Business Administration.",
+                "note": "Ofrece un Bachelor of Science in Business Administration con especialidad en Contabilidad a través de su School of Business Administration.",
                 "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "La modalidad de impartición no se indica en la página oficial del programa."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Estándar técnico",
           "citation": "ISO/IEC 19845:2015 — Information technology — Universal business language version 2.1 (UBL v2.1). International Organization for Standardization.",
-          "note": "The international standard defining a structured, machine-readable XML format for invoices and related business documents — the basis for most mandatory e-invoicing regimes now in force across the EU and several other countries.",
+          "note": "El estándar internacional que define un formato XML estructurado y legible por máquina para facturas y documentos comerciales relacionados — la base de la mayoría de los regímenes de facturación electrónica obligatoria vigentes hoy en la UE y en varios otros países.",
           "url": "https://www.iso.org/standard/66370.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "Ver el estándar oficial"
         }
       }
     },
