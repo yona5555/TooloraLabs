@@ -31,7 +31,9 @@
     "terms": "Terms of Use",
     "affiliateDisclosure": "Affiliate Disclosure",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "embedTools": "Embed Our Tools",
+    "compareCalculators": "Compare Calculators"
   },
   "legal": {
     "privacy": {
@@ -6322,5 +6324,103 @@
     "badge": "Category",
     "notFoundTitle": "Category Not Found",
     "empty": "No tools available in this category yet."
+  },
+  "embedTools": {
+    "poweredBy": "Powered by TooloraLabs",
+    "docsPage": {
+      "title": "Embed Our Tools",
+      "description": "Add a free, live TooloraLabs calculator to your own website in one line of HTML — no signup, no API key.",
+      "intro": "Any TooloraLabs calculator marked as embeddable can be dropped into your own site as a self-contained iframe. It runs entirely in the visitor's browser, updates live, and carries a small \"Powered by TooloraLabs\" credit link back to the full tool.",
+      "howItWorksTitle": "How It Works",
+      "steps": [
+        "Pick a tool and set the width and height you want below.",
+        "Copy the generated <iframe> code.",
+        "Paste it directly into your page's HTML, wherever you want the calculator to appear.",
+        "That's it — no script tags, no API keys, and no account required."
+      ],
+      "generator": {
+        "title": "Generate Your Embed Code",
+        "toolLabel": "Tool",
+        "widthLabel": "Width (px)",
+        "heightLabel": "Height (px)",
+        "codeLabel": "Embed Code",
+        "previewLabel": "Live Preview"
+      },
+      "faqTitle": "Frequently Asked Questions",
+      "faq": [
+        {
+          "question": "Is embedding free?",
+          "answer": "Yes — embedding any TooloraLabs tool is completely free, with no signup, API key, or usage limit."
+        },
+        {
+          "question": "Does the embedded calculator update automatically?",
+          "answer": "Yes. The iframe loads the live tool directly from TooloraLabs, so any future improvements to the calculator appear automatically on your site without you needing to change anything."
+        },
+        {
+          "question": "Can I remove the \"Powered by TooloraLabs\" link?",
+          "answer": "No — the credit link is a condition of free embedding. It's small, unobtrusive, and opens in a new tab so it doesn't take visitors away from your page."
+        },
+        {
+          "question": "Will the embedded tool match my site's design?",
+          "answer": "The embed uses TooloraLabs' own light-background styling inside its iframe boundary, which keeps it visually self-contained and consistent regardless of your site's own theme."
+        },
+        {
+          "question": "Which tools can I embed?",
+          "answer": "We're rolling out embeddable versions tool by tool, starting with the BMI Calculator. More tools will be added to the list above over time."
+        }
+      ]
+    }
+  },
+  "compareFinancialCalculators": {
+    "title": "Compare Financial Calculators",
+    "description": "Mortgage, personal/auto loan, or compound interest — a quick side-by-side comparison to help you pick the right calculator.",
+    "intro": "These three calculators all deal with money over time, which makes it easy to open the wrong one. This table lines them up side by side so you can jump straight to the one that actually answers your question.",
+    "columnTool": "Calculator",
+    "columnBestFor": "Best For",
+    "columnQuestion": "Answers The Question",
+    "columnInputs": "Key Inputs",
+    "columnOutput": "Typical Output",
+    "openTool": "Open Tool",
+    "guidanceTitle": "Which One Do I Actually Need?",
+    "rows": [
+      {
+        "slug": "mortgage-calculator",
+        "name": "Mortgage Calculator",
+        "bestFor": "Buying a home with a long-term, secured loan",
+        "question": "What will my monthly house payment be, and when does PMI drop off?",
+        "keyInputs": "Home price, down payment, interest rate, loan term, property tax/insurance",
+        "output": "Monthly payment, full amortization schedule, PMI cutoff date"
+      },
+      {
+        "slug": "loan-calculator",
+        "name": "Personal & Auto Loan Calculator",
+        "bestFor": "Financing a car or a shorter-term personal loan",
+        "question": "What will my monthly payment be, and how much interest will I pay in total?",
+        "keyInputs": "Loan amount, interest rate, loan term",
+        "output": "Monthly payment, total interest, amortization schedule"
+      },
+      {
+        "slug": "compound-interest-calculator",
+        "name": "Compound Interest Calculator",
+        "bestFor": "Growing savings or an investment over time",
+        "question": "How much will my money grow to if I save or invest it, with or without regular contributions?",
+        "keyInputs": "Starting amount, interest/return rate, time horizon, optional monthly contribution",
+        "output": "Ending balance, year-by-year growth chart"
+      }
+    ],
+    "guidance": [
+      {
+        "title": "Buying a house?",
+        "body": "Use the Mortgage Calculator. It's the only one of the three built around property-specific details like a down payment, property tax, homeowners insurance, and private mortgage insurance (PMI) — none of which apply to a personal or auto loan."
+      },
+      {
+        "title": "Financing a car or a personal expense?",
+        "body": "Use the Personal & Auto Loan Calculator. It's a simpler, general-purpose amortization calculator without the property-specific fields a mortgage needs."
+      },
+      {
+        "title": "Saving or investing money instead of borrowing it?",
+        "body": "Use the Compound Interest Calculator. It's the only one of the three that models money growing over time rather than money being paid off — the mortgage and loan calculators both assume you're the one making payments, not the one receiving interest."
+      }
+    ]
   }
 }

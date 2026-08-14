@@ -5,6 +5,8 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   const links = [
+    { href: "/embed-tools", label: t("embedTools") },
+    { href: "/compare/financial-calculators", label: t("compareCalculators") },
     { href: "/privacy", label: t("privacy") },
     { href: "/terms", label: t("terms") },
     { href: "/affiliate-disclosure", label: t("affiliateDisclosure") },
