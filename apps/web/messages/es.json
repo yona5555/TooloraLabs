@@ -196,104 +196,104 @@
   },
   "tools": {
     "scientific-calculator": {
-      "title": "Scientific Calculator",
-      "description": "A full scientific calculator with trigonometric, logarithmic, and power functions.",
+      "title": "Calculadora científica",
+      "description": "Una calculadora científica completa con funciones trigonométricas, logarítmicas y de potencia.",
       "buttons": {
-        "angleMode": "Toggle degrees/radians",
-        "backspace": "Delete last digit"
+        "angleMode": "Cambiar entre grados/radianes",
+        "backspace": "Borrar el último dígito"
       },
       "errors": {
-        "DIVISION_BY_ZERO": "Cannot divide by zero",
-        "DOMAIN_ERROR": "Undefined for this input",
-        "OUT_OF_RANGE": "Result is out of range",
-        "MISSING_OPERAND": "Enter a second number first"
+        "DIVISION_BY_ZERO": "No se puede dividir entre cero",
+        "DOMAIN_ERROR": "No está definido para esta entrada",
+        "OUT_OF_RANGE": "El resultado está fuera de rango",
+        "MISSING_OPERAND": "Introduce primero un segundo número"
       },
       "aboveFold": {
-        "calculatorTitle": "Calculator",
+        "calculatorTitle": "Calculadora",
         "functionReference": {
-          "title": "Function Quick Reference",
+          "title": "Referencia rápida de funciones",
           "items": [
             {
               "symbol": "sin, cos, tan",
-              "description": "Trigonometric ratios of an angle, evaluated in the current Deg/Rad mode."
+              "description": "Razones trigonométricas de un ángulo, evaluadas según el modo Grados/Radianes activo."
             },
             {
               "symbol": "sin⁻¹, cos⁻¹, tan⁻¹",
-              "description": "Inverse trig — recovers the angle from a ratio."
+              "description": "Funciones trigonométricas inversas: recuperan el ángulo a partir de una razón."
             },
             {
               "symbol": "x², x³",
-              "description": "Square and cube the displayed value."
+              "description": "Eleva el valor mostrado al cuadrado o al cubo."
             },
             {
               "symbol": "√x, ³√x",
-              "description": "Square root and cube root."
+              "description": "Raíz cuadrada y raíz cúbica."
             },
             {
               "symbol": "xʸ, ʸ√x",
-              "description": "Raises a number to a power, or finds its general root."
+              "description": "Eleva un número a una potencia o calcula su raíz general."
             },
             {
               "symbol": "ln, log",
-              "description": "Natural logarithm (base e) and common logarithm (base 10)."
+              "description": "Logaritmo natural (base e) y logaritmo decimal (base 10)."
             },
             {
               "symbol": "eˣ, 10ˣ",
-              "description": "Exponential functions using base e and base 10."
+              "description": "Funciones exponenciales en base e y en base 10."
             },
             {
               "symbol": "π, e",
-              "description": "Inserts the constants π (3.14159…) and e (2.71828…)."
+              "description": "Inserta las constantes π (3,14159…) y e (2,71828…)."
             },
             {
               "symbol": "M+ / M− / MR",
-              "description": "Adds, subtracts, or recalls the value stored in memory."
+              "description": "Suma, resta o recupera el valor guardado en memoria."
             },
             {
               "symbol": "Ans",
-              "description": "Reuses the result of your last calculation."
+              "description": "Reutiliza el resultado de tu último cálculo."
             }
           ]
         }
       },
       "history": {
-        "title": "History",
-        "empty": "Your calculations will appear here as you complete them."
+        "title": "Historial",
+        "empty": "Tus cálculos aparecerán aquí a medida que los completes."
       },
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
       },
       "education": {
         "intro": {
-          "title": "How This Calculator Evaluates an Expression",
-          "paragraph1": "This calculator evaluates operations the way a physical scientific calculator does: sequentially, as you enter them, rather than parsing a fully typed-out expression with parentheses. Pressing an operator immediately resolves whatever calculation is pending, then queues the new one; pressing a function key (sin, √x, ln, and the rest) applies instantly to the number currently on screen. This covers four families of operations — basic arithmetic, powers and roots, logarithms and exponentials, and trigonometry — each accessible from the keypad without switching modes.",
-          "paragraph2": "Two details matter for getting a correct result. First, the Deg/Rad toggle changes how every trigonometric and inverse-trigonometric function interprets its input and output — the same button sequence gives a different numeric answer in each mode, so it's worth checking before reading a trig result. Second, some inputs have no real answer at all: dividing by zero, taking the square root or logarithm of a negative number, or asking for the arcsine of a value outside −1 to 1. Rather than returning an invalid number silently, this calculator flags these as explicit errors so a wrong input is never mistaken for a real result.",
+          "title": "Cómo evalúa esta calculadora una expresión",
+          "paragraph1": "Esta calculadora evalúa las operaciones igual que lo hace una calculadora científica física: de forma secuencial, a medida que las introduces, en lugar de analizar una expresión completa escrita con paréntesis. Al pulsar un operador se resuelve de inmediato el cálculo pendiente y se encola el nuevo; al pulsar una tecla de función (sin, √x, ln, y el resto) se aplica al instante sobre el número que hay en pantalla. Esto cubre cuatro familias de operaciones —aritmética básica, potencias y raíces, logaritmos y exponenciales, y trigonometría— accesibles todas desde el teclado sin cambiar de modo.",
+          "paragraph2": "Dos detalles son importantes para obtener un resultado correcto. Primero, el interruptor Grados/Radianes cambia cómo interpreta cada función trigonométrica e inversa su entrada y su salida: la misma secuencia de teclas da un resultado numérico distinto en cada modo, así que conviene comprobarlo antes de leer un resultado trigonométrico. Segundo, algunas entradas no tienen una respuesta real en absoluto: dividir entre cero, calcular la raíz cuadrada o el logaritmo de un número negativo, o pedir el arcoseno de un valor fuera del rango −1 a 1. En lugar de devolver silenciosamente un número inválido, esta calculadora señala estos casos como errores explícitos, de modo que una entrada incorrecta nunca se confunda con un resultado real.",
           "diagram": {
-            "sinLabel": "sin θ",
+            "sinLabel": "sen θ",
             "cosLabel": "cos θ",
             "angleLabel": "θ",
-            "caption": "On a circle of radius 1, the sine and cosine of an angle θ are simply the vertical and horizontal position of the point that angle traces out — the geometric definition behind every trigonometric key on this calculator."
+            "caption": "En una circunferencia de radio 1, el seno y el coseno de un ángulo θ son simplemente la posición vertical y horizontal del punto que traza ese ángulo: la definición geométrica que hay detrás de cada tecla trigonométrica de esta calculadora."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A handful of solved expressions across the different function families, each verified by hand.",
-          "columnExpression": "Expression",
-          "columnResult": "Result",
+          "title": "Ejemplos resueltos",
+          "intro": "Un puñado de expresiones resueltas de las distintas familias de funciones, verificadas a mano una por una.",
+          "columnExpression": "Expresión",
+          "columnResult": "Resultado",
           "rows": [
             {
               "expression": "sin(30°)",
-              "result": "0.5"
+              "result": "0,5"
             },
             {
-              "expression": "sin⁻¹(0.5), in Deg mode",
+              "expression": "sin⁻¹(0,5), en modo Grados",
               "result": "30"
             },
             {
               "expression": "2 xʸ 10  (2¹⁰)",
-              "result": "1,024"
+              "result": "1.024"
             },
             {
               "expression": "√144",
@@ -306,93 +306,93 @@
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "Why do I get a different answer for the same trig calculation sometimes?",
-              "answer": "Almost always it's the Deg/Rad toggle — the same key sequence evaluates to a different number depending on whether the calculator is currently interpreting angles in degrees or radians. This calculator defaults to degrees; check the mode indicator in the top-left of the keypad before reading a trigonometric result."
+              "question": "¿Por qué a veces obtengo un resultado distinto para el mismo cálculo trigonométrico?",
+              "answer": "Casi siempre es el interruptor Grados/Radianes: la misma secuencia de teclas se evalúa como un número distinto según si la calculadora está interpretando los ángulos en grados o en radianes en ese momento. Esta calculadora usa grados de forma predeterminada; comprueba el indicador de modo en la esquina superior izquierda del teclado antes de leer un resultado trigonométrico."
             },
             {
-              "question": "Why does dividing by zero show an error instead of a number?",
-              "answer": "Division by zero, the square root or logarithm of a negative number, and the arcsine or arccosine of a value outside −1 to 1 have no real numeric answer. Rather than silently returning something like Infinity or NaN, this calculator surfaces these as explicit errors so an invalid input is never mistaken for a real result."
+              "question": "¿Por qué dividir entre cero muestra un error en lugar de un número?",
+              "answer": "La división entre cero, la raíz cuadrada o el logaritmo de un número negativo, y el arcoseno o arcocoseno de un valor fuera del rango −1 a 1 no tienen una respuesta numérica real. En lugar de devolver silenciosamente algo como Infinity o NaN, esta calculadora muestra estos casos como errores explícitos, para que una entrada inválida nunca se confunda con un resultado real."
             },
             {
-              "question": "What does the \"Ans\" key do?",
-              "answer": "It recalls the result of your last completed calculation, letting you feed it straight into a new expression without retyping the number."
+              "question": "¿Qué hace la tecla «Ans»?",
+              "answer": "Recupera el resultado de tu último cálculo completado, permitiéndote usarlo directamente en una nueva expresión sin volver a escribir el número."
             },
             {
-              "question": "What's the difference between memory (M+/M−/MR) and Ans?",
-              "answer": "Ans always holds only your very last result and updates every time you calculate something new. Memory is a separate, persistent slot you control explicitly — useful for accumulating a running subtotal across several unrelated calculations without it being overwritten by whatever you compute next."
+              "question": "¿Cuál es la diferencia entre la memoria (M+/M−/MR) y Ans?",
+              "answer": "Ans siempre guarda solo tu último resultado y se actualiza cada vez que calculas algo nuevo. La memoria es una casilla independiente y persistente que controlas de forma explícita, útil para acumular un subtotal a lo largo de varios cálculos sin relación entre sí, sin que se sobrescriba con lo siguiente que calcules."
             },
             {
-              "question": "Why doesn't this calculator support typing a full expression with parentheses?",
-              "answer": "It follows the same immediate, sequential evaluation model as most physical scientific calculators: each operator resolves the pending calculation right away rather than waiting to parse a complete expression. This matches the keypad layout and behavior calculator users already know, at the cost of not supporting parenthesized grouping."
+              "question": "¿Por qué esta calculadora no permite escribir una expresión completa con paréntesis?",
+              "answer": "Sigue el mismo modelo de evaluación inmediata y secuencial que la mayoría de las calculadoras científicas físicas: cada operador resuelve de inmediato el cálculo pendiente en lugar de esperar a analizar una expresión completa. Esto coincide con la disposición del teclado y el comportamiento que ya conocen los usuarios de calculadoras, a cambio de no admitir la agrupación entre paréntesis."
             },
             {
-              "question": "Is my calculation history saved anywhere?",
-              "answer": "No. History is kept only in this browser tab's memory for as long as the page stays open — it clears on reload and is never sent anywhere, since every calculation on this page runs entirely on your own device."
+              "question": "¿Se guarda mi historial de cálculos en algún sitio?",
+              "answer": "No. El historial se mantiene únicamente en la memoria de esta pestaña del navegador mientras la página permanece abierta: se borra al recargarla y nunca se envía a ningún sitio, ya que cada cálculo de esta página se ejecuta por completo en tu propio dispositivo."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Detrás de esta herramienta",
           "history": {
-            "title": "From the Slide Rule to the Shirt Pocket",
-            "paragraph": "For centuries, the slide rule was the only practical portable tool for trigonometric, logarithmic, and exponential calculations — the pocket calculators that existed by the late 1960s could only add, subtract, multiply, and divide. That changed in 1972, when Hewlett-Packard released the HP-35, conceived after company co-founder Bill Hewlett asked whether the scientific functions of HP's desktop calculators could be squeezed into something that fit in a shirt pocket. It was the first handheld calculator to compute trigonometric, logarithmic, and exponential functions directly, and it caught on immediately: HP sold more than 300,000 units in its first three years, and the HP-35's descendants went on to sell over 20 million units — making the slide rule obsolete for the engineers and scientists who had relied on it for generations."
+            "title": "De la regla de cálculo al bolsillo de la camisa",
+            "paragraph": "Durante siglos, la regla de cálculo fue la única herramienta portátil práctica para cálculos trigonométricos, logarítmicos y exponenciales — las calculadoras de bolsillo que existían a finales de la década de 1960 solo podían sumar, restar, multiplicar y dividir. Eso cambió en 1972, cuando Hewlett-Packard lanzó la HP-35, concebida después de que el cofundador de la empresa, Bill Hewlett, preguntara si las funciones científicas de las calculadoras de sobremesa de HP podían reducirse a algo que cupiera en el bolsillo de una camisa. Fue la primera calculadora de mano capaz de calcular funciones trigonométricas, logarítmicas y exponenciales directamente, y tuvo una acogida inmediata: HP vendió más de 300.000 unidades en sus primeros tres años, y los descendientes de la HP-35 llegaron a vender más de 20 millones de unidades, dejando obsoleta la regla de cálculo para los ingenieros y científicos que habían dependido de ella durante generaciones."
           },
           "modernDevelopments": {
-            "title": "From Dedicated Hardware to the Browser",
-            "paragraph": "Scientific calculators kept evolving after the HP-35 — graphing and computer-algebra models from makers like Texas Instruments and Casio added visual function plotting and symbolic manipulation, and calculator apps became a default feature of every computer and phone operating system. The more recent shift is calculators that need no dedicated hardware or installed app at all: modern browsers can run the same trigonometric, logarithmic, and exponential computations entirely in JavaScript on the page itself, the way this tool does — every calculation happens on your own device, with nothing sent to a server."
+            "title": "Del hardware dedicado al navegador",
+            "paragraph": "Las calculadoras científicas siguieron evolucionando después de la HP-35: los modelos gráficos y de álgebra computacional de fabricantes como Texas Instruments y Casio añadieron la representación visual de funciones y la manipulación simbólica, y las aplicaciones de calculadora pasaron a ser un elemento predeterminado en todo sistema operativo de ordenador o teléfono. El cambio más reciente son las calculadoras que ya no necesitan ningún hardware dedicado ni aplicación instalada: los navegadores modernos pueden ejecutar los mismos cálculos trigonométricos, logarítmicos y exponenciales enteramente en JavaScript dentro de la propia página, tal como hace esta herramienta — cada cálculo se realiza en tu propio dispositivo, sin enviar nada a ningún servidor."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The trigonometric, logarithmic, and exponential functions this calculator evaluates are foundational material within Mathematics degree programs. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Trayectoria académica",
+            "intro": "Las funciones trigonométricas, logarítmicas y exponenciales que evalúa esta calculadora son material fundamental dentro de los programas de grado en Matemáticas. Estas son las cinco mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, junto con una opción regional:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #1 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/undergrad",
-                "online": "No — MIT's Mathematics degree programs are taught in person on its Cambridge, Massachusetts campus, with no online option for the undergraduate major."
+                "online": "No: los programas de grado en Matemáticas del MIT se imparten de forma presencial en su campus de Cambridge, Massachusetts, sin opción en línea para la licenciatura."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #2 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://extension.harvard.edu/academics/programs/mathematics-for-teaching-graduate-program/",
-                "online": "Largely online — Harvard Extension School states 11 of the 12 courses for its Mathematics for Teaching graduate degree can be completed online, with one weekend or summer course requiring campus attendance."
+                "online": "Mayormente en línea: la Harvard Extension School indica que 11 de los 12 cursos de su posgrado Mathematics for Teaching pueden completarse en línea, con un curso de fin de semana o de verano que requiere asistencia presencial."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #3 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/undergraduate/courses/course-listing/mathematics",
-                "online": "No — Oxford's Mathematics degree is a full-time, in-person programme built around its tutorial system; the university's distance-learning offerings sit in a separate lifelong-learning division and do not include this degree."
+                "online": "No: el grado en Matemáticas de Oxford es un programa presencial a tiempo completo, construido en torno a su sistema de tutorías; la oferta de educación a distancia de la universidad pertenece a una división de formación continua independiente y no incluye este grado."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #4 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/undergrad/course",
-                "online": "No — Cambridge's Mathematical Tripos is delivered in person through lectures, supervisions, and written examinations on campus."
+                "online": "No: el Mathematical Tripos de Cambridge se imparte de forma presencial mediante clases magistrales, tutorías (supervisions) y exámenes escritos en el campus."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Clasificada #5 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://bulletin.stanford.edu/programs/MATH-BS",
-                "online": "No — Stanford's undergraduate Mathematics major (BS) is an in-person campus program; Stanford's online mathematics offerings are limited to pre-college and high-school-level courses, not the university degree."
+                "online": "No: la licenciatura en Matemáticas (BS) de Stanford es un programa presencial en el campus; la oferta de matemáticas en línea de Stanford se limita a cursos preuniversitarios y de nivel de bachillerato, no al título universitario."
               },
               {
-                "name": "King Saud University (KSU), Riyadh — College of Science",
-                "note": "Home to the oldest Mathematics department in Saudi Arabia, established in 1958.",
+                "name": "King Saud University (KSU), Riad — Facultad de Ciencias",
+                "note": "Sede del departamento de Matemáticas más antiguo de Arabia Saudita, fundado en 1958.",
                 "url": "https://sciences.ksu.edu.sa/en/math",
-                "online": "Delivery mode not stated on the official department page."
+                "online": "La página oficial del departamento no indica la modalidad de impartición."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "Referencias científicas",
           "citation": "Engineering and Technology History Wiki (IEEE). (n.d.). Milestones: Development of the HP-35, the First Handheld Scientific Calculator, 1972.",
-          "note": "A documented technical history of the HP-35, the 1972 Hewlett-Packard calculator that replaced the slide rule and established the layout of trigonometric, logarithmic, and exponential functions this tool still follows.",
+          "note": "Una historia técnica documentada de la HP-35, la calculadora de Hewlett-Packard de 1972 que sustituyó a la regla de cálculo y estableció la disposición de funciones trigonométricas, logarítmicas y exponenciales que esta herramienta sigue reproduciendo.",
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
-          "readOriginal": "Read the Original Article"
+          "readOriginal": "Leer el artículo original"
         }
       }
     },
