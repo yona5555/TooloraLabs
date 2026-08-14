@@ -6409,192 +6409,192 @@
       }
     },
     "inventory-valuation-calculator": {
-      "title": "Inventory Valuation Calculator",
-      "description": "Value your stock under FIFO, LIFO, and weighted-average costing — and flag items below their reorder threshold.",
+      "title": "Calculateur de valorisation des stocks",
+      "description": "Valorisez votre stock selon les méthodes FIFO, LIFO et coût moyen pondéré — et repérez les articles sous leur seuil de réapprovisionnement.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Calculateur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Derrière l'outil"
       },
       "aboveFold": {
-        "resultTitle": "Costing Method Comparison",
-        "placeholder": "Add an item with at least one purchase batch to see how FIFO, LIFO, and weighted-average value your stock differently.",
-        "chartTitle": "Ending inventory value by costing method",
+        "resultTitle": "Comparaison des méthodes de valorisation",
+        "placeholder": "Ajoutez un article avec au moins un lot d'achat pour voir comment le FIFO, le LIFO et le coût moyen pondéré valorisent votre stock différemment.",
+        "chartTitle": "Valeur du stock final selon la méthode de valorisation",
         "chartFifo": "FIFO",
         "chartLifo": "LIFO",
-        "chartWeightedAverage": "Weighted Avg.",
+        "chartWeightedAverage": "Coût moy. pondéré",
         "glossary": {
-          "title": "Costing Terms Explained",
-          "intro": "The vocabulary of inventory costing, in plain language.",
+          "title": "Glossaire des termes de valorisation",
+          "intro": "Le vocabulaire de la valorisation des stocks, en langage clair.",
           "rows": [
             {
               "term": "FIFO (First-In, First-Out)",
-              "meaning": "Assumes the oldest purchased units are sold first, so what remains in stock is valued at the most recent purchase prices."
+              "meaning": "Suppose que les unités achetées les plus anciennes sont vendues en premier, si bien que le stock restant est valorisé aux prix d'achat les plus récents."
             },
             {
               "term": "LIFO (Last-In, First-Out)",
-              "meaning": "Assumes the most recently purchased units are sold first, so what remains in stock is valued at the oldest purchase prices."
+              "meaning": "Suppose que les unités achetées le plus récemment sont vendues en premier, si bien que le stock restant est valorisé aux prix d'achat les plus anciens."
             },
             {
-              "term": "Weighted-Average Cost",
-              "meaning": "Blends every purchase into a single average cost per unit, applied evenly to both what was sold and what remains."
+              "term": "Coût moyen pondéré",
+              "meaning": "Fusionne tous les achats en un coût moyen unique par unité, appliqué uniformément aux unités vendues comme à celles restant en stock."
             },
             {
-              "term": "COGS (Cost of Goods Sold)",
-              "meaning": "The cost assigned to the units actually sold this period — it directly reduces reported profit, and its size depends on which costing method is used."
+              "term": "CMV (Coût des marchandises vendues)",
+              "meaning": "Le coût attribué aux unités effectivement vendues pendant la période — il réduit directement le bénéfice déclaré, et son montant dépend de la méthode de valorisation utilisée."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your Stock",
-        "itemName": "Item",
-        "itemNamePlaceholder": "Product name",
-        "unitsSold": "Units Sold",
-        "unitsSoldHint": "Units sold this period, drawn down against the batches below.",
-        "reorderThreshold": "Reorder At",
-        "optional": "Optional",
-        "batchesTitle": "Purchase Batches (oldest first)",
-        "batchQuantity": "Quantity",
-        "batchUnitCost": "Unit Cost",
-        "addBatch": "Add Batch",
-        "removeBatch": "Remove batch",
-        "addItem": "Add Item",
-        "removeItem": "Remove item",
-        "calculate": "Calculate Value"
+        "inputTitle": "Votre stock",
+        "itemName": "Article",
+        "itemNamePlaceholder": "Nom du produit",
+        "unitsSold": "Unités vendues",
+        "unitsSoldHint": "Unités vendues pendant cette période, décomptées à partir des lots ci-dessous.",
+        "reorderThreshold": "Seuil de réapprovisionnement",
+        "optional": "Facultatif",
+        "batchesTitle": "Lots d'achat (du plus ancien au plus récent)",
+        "batchQuantity": "Quantité",
+        "batchUnitCost": "Coût unitaire",
+        "addBatch": "Ajouter un lot",
+        "removeBatch": "Supprimer le lot",
+        "addItem": "Ajouter un article",
+        "removeItem": "Supprimer l'article",
+        "calculate": "Calculer la valeur"
       },
       "result": {
-        "title": "Inventory Report",
-        "totalEndingUnits": "Ending Units",
-        "lowStockCount": "Low Stock Items",
-        "item": "Item",
-        "endingUnits": "Ending Units",
+        "title": "Rapport de stock",
+        "totalEndingUnits": "Unités en stock final",
+        "lowStockCount": "Articles en stock faible",
+        "item": "Article",
+        "endingUnits": "Unités en stock final",
         "methodFifo": "FIFO",
         "methodLifo": "LIFO",
-        "methodWeightedAverage": "Weighted Avg."
+        "methodWeightedAverage": "Coût moy. pondéré"
       },
       "errors": {
-        "emptyItems": "Add at least one item.",
-        "invalidItem": "Each item needs a name and at least one batch with a non-negative quantity and unit cost."
+        "emptyItems": "Ajoutez au moins un article.",
+        "invalidItem": "Chaque article doit avoir un nom et au moins un lot avec une quantité et un coût unitaire non négatifs."
       },
       "education": {
         "intro": {
-          "title": "How Inventory Costing Actually Works",
-          "paragraph1": "When a business buys the same product at different prices over time — a common reality as suppliers raise prices or run promotions — it has to decide, on paper, which purchase price to assign to the units it sold and which price to assign to the units still sitting on the shelf. This is not a physical question about which literal box left the warehouse; it is an accounting convention. FIFO assumes the oldest purchase layer is sold first, leaving the newest, usually more expensive, cost basis in ending inventory. LIFO assumes the opposite: the newest layer is sold first, leaving the oldest, usually cheaper, cost basis behind. Weighted-average sidesteps the ordering question entirely by blending every purchase into one cost per unit and applying it uniformly.",
-          "paragraph2": "The choice is not cosmetic — it changes reported numbers. In a period of rising prices, FIFO assigns the cheaper, older cost to Cost of Goods Sold, which inflates reported profit and the tax bill that follows it, while leaving a higher-value ending inventory on the balance sheet. LIFO does the reverse: it assigns the pricier, newer cost to COGS, shrinking reported profit and tax exposure, while leaving a lower, often stale-looking inventory value on the balance sheet. Weighted-average lands in between, smoothing out the swings of individual purchase lots. None of the three methods is 'more correct' in isolation — they simply answer 'what did this sale cost us?' with three different, equally defensible conventions.",
+          "title": "Comment fonctionne réellement la valorisation des stocks",
+          "paragraph1": "Lorsqu'une entreprise achète le même produit à des prix différents au fil du temps — une situation courante quand les fournisseurs augmentent leurs prix ou proposent des promotions —, elle doit décider, sur le plan comptable, quel prix d'achat attribuer aux unités vendues et lequel attribuer aux unités encore en rayon. Ce n'est pas une question physique portant sur la boîte précise qui a quitté l'entrepôt ; c'est une convention comptable. Le FIFO suppose que le lot d'achat le plus ancien est vendu en premier, laissant dans le stock final la base de coût la plus récente, généralement plus élevée. Le LIFO suppose l'inverse : le lot le plus récent est vendu en premier, laissant derrière lui la base de coût la plus ancienne, généralement moins chère. Le coût moyen pondéré évite entièrement la question de l'ordre en fusionnant chaque achat en un coût unique par unité, appliqué uniformément.",
+          "paragraph2": "Ce choix n'est pas cosmétique — il modifie les chiffres déclarés. En période de hausse des prix, le FIFO attribue le coût le plus ancien, donc le moins cher, au coût des marchandises vendues, ce qui gonfle le bénéfice déclaré et l'impôt qui en découle, tout en laissant une valeur de stock final plus élevée au bilan. Le LIFO fait l'inverse : il attribue le coût le plus récent, donc le plus cher, au CMV, ce qui réduit le bénéfice déclaré et la charge fiscale, tout en laissant une valeur de stock plus faible — et souvent d'apparence datée — au bilan. Le coût moyen pondéré se situe entre les deux, en lissant les variations propres à chaque lot d'achat. Aucune des trois méthodes n'est « plus correcte » en soi — elles répondent simplement à la question « combien cette vente nous a-t-elle coûté ? » selon trois conventions différentes, mais tout aussi défendables.",
           "diagram": {
             "fifoTitle": "FIFO",
             "lifoTitle": "LIFO",
-            "oldestLabel": "Oldest",
-            "newestLabel": "Newest",
-            "outLabel": "Sold first",
-            "caption": "The same three purchase layers, drawn down in opposite order: FIFO consumes the oldest (bottom) layer first; LIFO consumes the newest (top) layer first."
+            "oldestLabel": "Plus ancien",
+            "newestLabel": "Plus récent",
+            "outLabel": "Vendu en premier",
+            "caption": "Les trois mêmes lots d'achat, décomptés dans un ordre opposé : le FIFO consomme d'abord le lot le plus ancien (en bas) ; le LIFO consomme d'abord le lot le plus récent (en haut)."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "The same purchase history, valued three different ways.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Exemples résolus",
+          "intro": "Le même historique d'achats, valorisé de trois façons différentes.",
+          "columnScenario": "Scénario",
+          "columnResult": "Résultat",
           "rows": [
             {
-              "scenario": "Buy 10 units @ $5, then 10 units @ $8; sell 12 units",
-              "result": "FIFO ending value $64 · LIFO $40 · Weighted-avg $52"
+              "scenario": "Achat de 10 unités à 5 $, puis 10 unités à 8 $ ; vente de 12 unités",
+              "result": "Valeur finale FIFO 64 $ · LIFO 40 $ · Coût moy. pondéré 52 $"
             },
             {
-              "scenario": "Buy 10 units @ $5, sell none this period",
-              "result": "All three methods agree: ending value $50"
+              "scenario": "Achat de 10 unités à 5 $, aucune vente cette période",
+              "result": "Les trois méthodes s'accordent : valeur finale 50 $"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Which costing method should my business actually use?",
-              "answer": "It depends on your reporting goals and, in many jurisdictions, on tax rules — under IFRS, LIFO is not permitted at all, while US GAAP permits it. FIFO tends to mirror the physical flow of perishable or fast-moving goods and produces a balance sheet inventory value closer to current replacement cost. LIFO can reduce taxable income during inflationary periods. Weighted-average is often chosen for its simplicity when individual purchase lots are hard to track separately, such as with bulk commodities."
+              "question": "Quelle méthode de valorisation mon entreprise devrait-elle réellement utiliser ?",
+              "answer": "Cela dépend de vos objectifs de reporting et, dans de nombreuses juridictions, des règles fiscales — les normes IFRS interdisent totalement le LIFO, tandis que les US GAAP l'autorisent. Le FIFO a tendance à refléter le flux physique des biens périssables ou à rotation rapide, et produit une valeur de stock au bilan plus proche du coût de remplacement actuel. Le LIFO peut réduire le revenu imposable en période d'inflation. Le coût moyen pondéré est souvent choisi pour sa simplicité lorsque les lots d'achat individuels sont difficiles à suivre séparément, comme pour les matières premières en vrac."
             },
             {
-              "question": "Why do FIFO, LIFO, and weighted-average give different ending inventory values from the exact same purchases?",
-              "answer": "Because each method makes a different assumption about which purchase price gets assigned to the units that were sold versus the units left in stock. The total units and the total dollars spent purchasing them are identical across all three methods — only how that total is split between Cost of Goods Sold and ending inventory value changes."
+              "question": "Pourquoi le FIFO, le LIFO et le coût moyen pondéré donnent-ils des valeurs de stock final différentes à partir des mêmes achats exactement ?",
+              "answer": "Parce que chaque méthode fait une hypothèse différente sur le prix d'achat à attribuer aux unités vendues par rapport à celles restant en stock. Le nombre total d'unités et le montant total dépensé pour les acheter sont identiques dans les trois méthodes — seule la répartition de ce total entre le coût des marchandises vendues et la valeur du stock final change."
             },
             {
-              "question": "Does the costing method have to match the actual physical order units leave the warehouse?",
-              "answer": "No. FIFO and LIFO are accounting cost-flow assumptions, not requirements about physical handling. A warehouse can physically ship its oldest stock first (a real FIFO picking policy) while its books are kept on LIFO, or vice versa — the accounting convention and the physical logistics are independent decisions."
+              "question": "La méthode de valorisation doit-elle correspondre à l'ordre physique réel dans lequel les unités quittent l'entrepôt ?",
+              "answer": "Non. Le FIFO et le LIFO sont des hypothèses comptables sur le flux des coûts, et non des exigences sur la manutention physique. Un entrepôt peut expédier physiquement son stock le plus ancien en premier (une véritable politique de prélèvement FIFO) tout en tenant sa comptabilité en LIFO, ou inversement — la convention comptable et la logistique physique sont des décisions indépendantes."
             },
             {
-              "question": "Why does weighted-average recompute a single unit cost instead of tracking layers?",
-              "answer": "Because it treats every unit in stock as interchangeable rather than tied to a specific purchase lot. The average cost is simply total cost of all purchases divided by total units purchased — every unit sold or remaining is valued at that same blended rate, which is why weighted-average is the simplest method to compute by hand."
+              "question": "Pourquoi le coût moyen pondéré recalcule-t-il un coût unitaire unique plutôt que de suivre des lots ?",
+              "answer": "Parce qu'il traite chaque unité en stock comme interchangeable plutôt que liée à un lot d'achat précis. Le coût moyen est simplement le coût total de tous les achats divisé par le nombre total d'unités achetées — chaque unité vendue ou restante est valorisée à ce même taux moyen, ce qui explique pourquoi le coût moyen pondéré est la méthode la plus simple à calculer à la main."
             },
             {
-              "question": "How does this tool decide which units are 'sold' when I enter a units-sold number?",
-              "answer": "It draws down your purchase batches in the order you entered them (oldest first) for FIFO, in reverse order for LIFO, and applies the single blended average cost for weighted-average — this calculator does not change your batch order for you, so enter batches from oldest purchase to newest for the layer logic to be correct."
+              "question": "Comment cet outil détermine-t-il quelles unités sont « vendues » lorsque j'indique un nombre d'unités vendues ?",
+              "answer": "Il décompte vos lots d'achat dans l'ordre où vous les avez saisis (du plus ancien au plus récent) pour le FIFO, dans l'ordre inverse pour le LIFO, et applique le coût moyen pondéré unique pour cette méthode — cet outil ne modifie pas l'ordre de vos lots à votre place, saisissez donc les lots du plus ancien achat au plus récent pour que la logique de superposition soit correcte."
             },
             {
-              "question": "What does the low-stock flag mean, and does it change with the costing method?",
-              "answer": "It compares your ending unit count — the number of units left after the units-sold figure is subtracted — against the reorder threshold you set. The unit count itself is identical across FIFO, LIFO, and weighted-average, since costing method only changes the dollar value assigned to those units, not how many there are."
+              "question": "Que signifie l'indicateur de stock faible, et change-t-il selon la méthode de valorisation ?",
+              "answer": "Il compare votre nombre d'unités en stock final — le nombre d'unités restant après soustraction du nombre d'unités vendues — au seuil de réapprovisionnement que vous avez défini. Le nombre d'unités lui-même est identique en FIFO, en LIFO et en coût moyen pondéré, puisque la méthode de valorisation ne change que la valeur monétaire attribuée à ces unités, pas leur nombre."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Derrière cet outil",
           "history": {
-            "title": "A Debate as Old as Modern Accounting",
-            "paragraph": "First-in-first-out and last-in-first-out costing both emerged as formal accounting practices in the United States in the early 20th century, but LIFO's use accelerated sharply after the US Congress formally permitted it for tax purposes in the Revenue Act of 1938 — a period of rising raw material costs where LIFO's lower reported profit meant a lower tax bill. The choice between FIFO and LIFO became one of the most studied topics in accounting research through the mid-20th century, since it directly affects reported earnings, tax liability, and how comparable one company's financial statements are to another's."
+            "title": "Un débat aussi ancien que la comptabilité moderne",
+            "paragraph": "Les méthodes de valorisation premier entré, premier sorti et dernier entré, premier sorti sont toutes deux apparues comme pratiques comptables formelles aux États-Unis au début du XXe siècle, mais l'usage du LIFO s'est fortement accéléré après que le Congrès américain l'a formellement autorisé à des fins fiscales dans le Revenue Act de 1938 — une période de hausse du coût des matières premières où le bénéfice déclaré plus faible du LIFO se traduisait par une facture fiscale plus légère. Le choix entre FIFO et LIFO est devenu l'un des sujets les plus étudiés de la recherche comptable jusqu'au milieu du XXe siècle, car il affecte directement les bénéfices déclarés, la charge fiscale, et la comparabilité des états financiers d'une entreprise à l'autre."
           },
           "modernDevelopments": {
-            "title": "One Global Standard Diverges from the Other",
-            "paragraph": "The clearest modern development is a split rather than a convergence: International Financial Reporting Standards (IFRS), under IAS 2, prohibit LIFO entirely, while United States Generally Accepted Accounting Principles (US GAAP) continue to permit it. This means a multinational company can be required to report different inventory values for the same physical stock depending on which accounting standard applies, and it is a standing obstacle to full convergence between the two global accounting frameworks. Weighted-average costing, permitted under both standards, has correspondingly grown in popularity as a method that avoids this jurisdictional divide."
+            "title": "Une norme mondiale s'écarte de l'autre",
+            "paragraph": "L'évolution moderne la plus nette est une divergence plutôt qu'une convergence : les normes internationales d'information financière (IFRS), sous IAS 2, interdisent totalement le LIFO, tandis que les principes comptables généralement reconnus aux États-Unis (US GAAP) continuent de l'autoriser. Cela signifie qu'une entreprise multinationale peut être tenue de déclarer des valeurs de stock différentes pour le même stock physique selon la norme comptable applicable, ce qui constitue un obstacle persistant à la pleine convergence entre les deux référentiels comptables mondiaux. Le coût moyen pondéré, autorisé par les deux normes, a ainsi gagné en popularité en tant que méthode évitant cette fracture juridictionnelle."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Inventory costing is a core topic within financial and managerial accounting, taught within accounting and finance degree programs. Below are the top 5 globally ranked universities by the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Parcours académique",
+            "intro": "La valorisation des stocks est un sujet central de la comptabilité financière et de gestion, enseigné dans les cursus de comptabilité et de finance. Voici les 5 meilleures universités mondiales selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°1 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
-                "online": "No — Harvard Business School's MBA program, which includes accounting and management coursework, is delivered on Harvard's Boston campus; separate executive education offerings include some online courses, but not this degree."
+                "online": "Non — le programme MBA de la Harvard Business School, qui comprend des cours de comptabilité et de gestion, est dispensé sur le campus de Harvard à Boston ; certaines offres de formation continue pour cadres incluent des cours en ligne, mais pas ce diplôme."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #2 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°2 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
-                "online": "No — MIT Sloan's Master of Finance is an in-person program delivered over 12 or 18 months on MIT's Cambridge campus."
+                "online": "Non — le Master of Finance de MIT Sloan est un programme en présentiel dispensé sur 12 ou 18 mois sur le campus de Cambridge du MIT."
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #3 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°3 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
-                "online": "No — Stanford GSB's accounting academic area is taught through its in-person MBA, MSx, and PhD programs; its online offerings are limited to non-degree executive courses."
+                "online": "Non — le pôle comptabilité de la Stanford GSB est enseigné via ses programmes MBA, MSx et doctorat en présentiel ; ses offres en ligne se limitent à des cours de formation continue non diplômants."
               },
               {
                 "name": "University of Oxford (Saïd Business School)",
-                "note": "Ranked #4 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°4 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
-                "online": "No — Oxford's MBA, whose core curriculum includes accounting and finance, is a full-time, in-person program; Saïd's online offerings are separate short courses, not this degree."
+                "online": "Non — le MBA d'Oxford, dont le tronc commun comprend la comptabilité et la finance, est un programme à temps plein en présentiel ; les offres en ligne de Saïd sont des cours courts distincts, pas ce diplôme."
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°5 mondial en Comptabilité et Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
-                "online": "No — Booth's MBA programs (full-time, evening, weekend, executive) are delivered in-person or hybrid on campus; there is no fully online Booth master's degree."
+                "online": "Non — les programmes MBA de Booth (temps plein, soir, week-end, executive) sont dispensés en présentiel ou en format hybride sur le campus ; il n'existe pas de master Booth entièrement en ligne."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a major in Accounting through its School of Business Administration.",
+                "note": "Propose une licence en administration des affaires (Bachelor of Science in Business Administration) avec spécialisation en comptabilité, au sein de son École d'administration des affaires.",
                 "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
-                "online": "Delivery mode not specified on the program's official page."
+                "online": "Le mode de diffusion n'est pas précisé sur la page officielle du programme."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific Reference",
+          "title": "Référence scientifique",
           "citation": "Biddle, G. C. (1980). Accounting Methods and Management Decisions: The Case of Inventory Costing and Inventory Policy. Journal of Accounting Research, 18, 235–280.",
-          "note": "A foundational study of how the choice between inventory costing methods affects reported earnings, tax liability, and inventory-related management decisions — the same FIFO/LIFO/weighted-average trade-off this tool computes.",
+          "note": "Une étude fondatrice sur la manière dont le choix entre les méthodes de valorisation des stocks affecte les bénéfices déclarés, la charge fiscale et les décisions de gestion liées aux stocks — le même arbitrage FIFO/LIFO/coût moyen pondéré que calcule cet outil.",
           "url": "https://doi.org/10.2307/2490341",
-          "readOriginal": "Read the Original Study"
+          "readOriginal": "Lire l'étude originale"
         }
       }
     },
