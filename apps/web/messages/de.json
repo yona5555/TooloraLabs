@@ -1143,367 +1143,367 @@
       }
     },
     "mortgage-calculator": {
-      "title": "Mortgage Calculator",
-      "description": "Calculate your monthly mortgage payment, see a full amortization schedule, and find out exactly when PMI drops off.",
+      "title": "Hypothekenrechner",
+      "description": "Berechnen Sie Ihre monatliche Hypothekenrate, sehen Sie sich einen vollständigen Tilgungsplan an und erfahren Sie genau, wann die PMI entfällt.",
       "nav": {
-        "tool": "Tool",
-        "amortization": "Amortization",
-        "scenarioComparison": "Compare Scenarios",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Rechner",
+        "amortization": "Tilgung",
+        "scenarioComparison": "Szenarien vergleichen",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund"
       },
       "form": {
-        "homePrice": "Home Price",
-        "downPayment": "Down Payment",
+        "homePrice": "Kaufpreis der Immobilie",
+        "downPayment": "Anzahlung",
         "downPaymentPercentUnit": "%",
         "downPaymentAmountUnit": "$",
-        "interestRate": "Interest Rate (%)",
-        "loanTerm": "Loan Term",
-        "loanTermPreset": "{years} yr",
-        "loanTermCustomHint": "Enter a custom term in years (1–50).",
-        "advancedTitle": "Taxes, Insurance & Extra Payments",
-        "propertyTax": "Annual Property Tax",
-        "insurance": "Annual Home Insurance",
-        "hoa": "Monthly HOA Fee",
-        "pmi": "Monthly PMI",
-        "pmiHint": "Typically required by the lender when your down payment is below 20%.",
-        "extraMonthlyPayment": "Extra Monthly Payment",
-        "extraMonthlyPaymentHint": "Optional — paid on top of your required payment and applied directly to principal.",
-        "calculate": "Calculate Mortgage",
-        "reset": "Reset"
+        "interestRate": "Zinssatz (%)",
+        "loanTerm": "Laufzeit",
+        "loanTermPreset": "{years} J.",
+        "loanTermCustomHint": "Geben Sie eine individuelle Laufzeit in Jahren ein (1–50).",
+        "advancedTitle": "Steuern, Versicherung & Zusatzzahlungen",
+        "propertyTax": "Jährliche Grundsteuer",
+        "insurance": "Jährliche Wohngebäudeversicherung",
+        "hoa": "Monatliche HOA-Gebühr",
+        "pmi": "Monatliche PMI",
+        "pmiHint": "In der Regel vom Kreditgeber verlangt, wenn Ihre Anzahlung unter 20 % liegt.",
+        "extraMonthlyPayment": "Zusätzliche monatliche Zahlung",
+        "extraMonthlyPaymentHint": "Optional — wird zusätzlich zur erforderlichen Rate gezahlt und direkt auf die Tilgung angerechnet.",
+        "calculate": "Hypothek berechnen",
+        "reset": "Zurücksetzen"
       },
       "errors": {
-        "required": "Please enter a valid home price.",
-        "homePriceRange": "Home price must be greater than 0 and no more than 50,000,000.",
-        "downPaymentRange": "Down payment must be zero or more, and less than the home price.",
-        "interestRateRange": "Interest rate must be between 0% and 25%.",
-        "loanTermRange": "Loan term must be between 1 and 50 years.",
-        "negativeValue": "Property tax, insurance, HOA, PMI, and extra payment must be zero or greater."
+        "required": "Bitte geben Sie einen gültigen Kaufpreis ein.",
+        "homePriceRange": "Der Kaufpreis muss größer als 0 und darf nicht mehr als 50.000.000 sein.",
+        "downPaymentRange": "Die Anzahlung muss null oder größer sein und unter dem Kaufpreis liegen.",
+        "interestRateRange": "Der Zinssatz muss zwischen 0 % und 25 % liegen.",
+        "loanTermRange": "Die Laufzeit muss zwischen 1 und 50 Jahren liegen.",
+        "negativeValue": "Grundsteuer, Versicherung, HOA-Gebühr, PMI und Zusatzzahlung müssen null oder größer sein."
       },
       "aboveFold": {
-        "inputTitle": "Loan Details",
-        "resultTitle": "Your Monthly Payment",
-        "perMonth": "per month",
-        "perMonthShort": "mo",
-        "segmentPI": "Principal & Interest",
-        "segmentTax": "Property Tax",
-        "segmentInsurance": "Home Insurance",
-        "segmentHOA": "HOA",
+        "inputTitle": "Kreditdetails",
+        "resultTitle": "Ihre monatliche Rate",
+        "perMonth": "pro Monat",
+        "perMonthShort": "Mon.",
+        "segmentPI": "Zins & Tilgung",
+        "segmentTax": "Grundsteuer",
+        "segmentInsurance": "Wohngebäudeversicherung",
+        "segmentHOA": "HOA-Gebühr",
         "segmentPMI": "PMI",
-        "loanAmountLabel": "Loan Amount",
-        "loanToValueLabel": "Loan-to-Value",
-        "loanToValueNote": "The loan amount as a percentage of the home price — lenders use this ratio to decide whether PMI is required.",
-        "totalInterestLabel": "Total Interest",
-        "totalCostLabel": "Total Cost",
-        "payoffTimeLabel": "Payoff Time",
-        "payoffTimeValue": "{years}y {months}m",
-        "payoffTimeAcceleratedNote": "Shortened by your extra monthly payment.",
-        "pmiRemovalLabel": "PMI Removal (est.)",
-        "pmiRemovalValue": "Year {years}, month {months}",
-        "pmiRemovalNone": "Not applicable",
-        "pmiRemovalNote": "The estimated point your balance reaches 80% of the home's original value, when you can request PMI cancellation under federal law.",
-        "interestSavedLabel": "Interest Saved",
-        "interestSavedNote": "Interest you avoid paying thanks to your extra monthly payment, compared to the standard schedule.",
-        "monthsSavedLabel": "Time Saved",
-        "quickInsightTitle": "PMI Insight",
-        "quickInsightWithPmi": "This loan carries about {pmi}/mo in PMI because the down payment is under 20% — putting down {extra} more would cross that threshold and drop the charge immediately, instead of waiting for the balance to pay it down over time.",
-        "quickInsightWithPmiAtTwentyPercent": "This loan carries about {pmi}/mo in PMI even though the down payment is already 20% or more — that's usually only charged below 20%, so it's worth confirming this premium with your lender.",
-        "quickInsightNoPmi": "With 20% or more down, this loan carries no PMI at all — every dollar of the payment goes toward interest and your own equity, none of it toward insuring the lender against your default.",
-        "affordabilityMiniTitle": "How much home can I afford?",
-        "affordabilityMiniIntro": "A quick, independent estimate using the standard 28%/36% debt-to-income guideline lenders commonly reference.",
-        "affordabilityMiniIncome": "Monthly gross income",
-        "affordabilityMiniDebts": "Other monthly debts",
-        "affordabilityMiniRate": "Interest rate (%)",
-        "affordabilityMiniYears": "Loan term (years)",
-        "affordabilityMiniDownPercent": "Down payment (%)",
-        "affordabilityMiniResult": "Affordable payment: {payment}/mo — estimated home price: {homePrice}",
-        "affordabilityMiniPlaceholder": "Enter your income to see an estimate."
+        "loanAmountLabel": "Darlehensbetrag",
+        "loanToValueLabel": "Beleihungsauslauf",
+        "loanToValueNote": "Der Darlehensbetrag als Prozentsatz des Kaufpreises — anhand dieses Verhältnisses entscheiden Kreditgeber, ob eine PMI erforderlich ist.",
+        "totalInterestLabel": "Gesamtzinsen",
+        "totalCostLabel": "Gesamtkosten",
+        "payoffTimeLabel": "Tilgungsdauer",
+        "payoffTimeValue": "{years} J. {months} Mon.",
+        "payoffTimeAcceleratedNote": "Verkürzt durch Ihre zusätzliche monatliche Zahlung.",
+        "pmiRemovalLabel": "PMI-Wegfall (geschätzt)",
+        "pmiRemovalValue": "Jahr {years}, Monat {months}",
+        "pmiRemovalNone": "Nicht zutreffend",
+        "pmiRemovalNote": "Der geschätzte Zeitpunkt, an dem Ihr Restsaldo voraussichtlich 80 % des ursprünglichen Immobilienwerts erreicht — ab dann können Sie die Kündigung der PMI nach US-Bundesrecht beantragen.",
+        "interestSavedLabel": "Ersparte Zinsen",
+        "interestSavedNote": "Zinsen, die Sie dank Ihrer zusätzlichen monatlichen Zahlung im Vergleich zum Standardplan nicht zahlen müssen.",
+        "monthsSavedLabel": "Ersparte Zeit",
+        "quickInsightTitle": "PMI-Hinweis",
+        "quickInsightWithPmi": "Dieses Darlehen umfasst etwa {pmi}/Mon. an PMI, da die Anzahlung unter 20 % liegt — {extra} mehr Anzahlung würde diese Schwelle überschreiten und die Gebühr sofort entfallen lassen, statt darauf zu warten, dass der Saldo sie im Laufe der Zeit abbaut.",
+        "quickInsightWithPmiAtTwentyPercent": "Dieses Darlehen umfasst etwa {pmi}/Mon. an PMI, obwohl die Anzahlung bereits 20 % oder mehr beträgt — dies wird üblicherweise nur unter 20 % berechnet, daher lohnt es sich, diese Prämie mit Ihrem Kreditgeber zu klären.",
+        "quickInsightNoPmi": "Bei einer Anzahlung von 20 % oder mehr fällt für dieses Darlehen überhaupt keine PMI an — jeder Dollar Ihrer Rate fließt in Zinsen und Ihr eigenes Eigenkapital, keiner davon in die Absicherung des Kreditgebers gegen Ihren Zahlungsausfall.",
+        "affordabilityMiniTitle": "Wie viel Haus kann ich mir leisten?",
+        "affordabilityMiniIntro": "Eine schnelle, unabhängige Schätzung anhand der gängigen 28-%/36-%-Schulden-Einkommens-Faustregel, auf die Kreditgeber häufig zurückgreifen.",
+        "affordabilityMiniIncome": "Monatliches Bruttoeinkommen",
+        "affordabilityMiniDebts": "Sonstige monatliche Schulden",
+        "affordabilityMiniRate": "Zinssatz (%)",
+        "affordabilityMiniYears": "Laufzeit (Jahre)",
+        "affordabilityMiniDownPercent": "Anzahlung (%)",
+        "affordabilityMiniResult": "Erschwingliche Rate: {payment}/Mon. — geschätzter Kaufpreis: {homePrice}",
+        "affordabilityMiniPlaceholder": "Geben Sie Ihr Einkommen ein, um eine Schätzung zu sehen."
       },
       "education": {
         "intro": {
-          "title": "What This Calculator Measures",
-          "paragraph1": "A mortgage is a loan secured by the property you're buying, structured so that a fixed monthly payment gradually eliminates a large balance over a period typically running 15 to 30 years. Almost every fixed-rate mortgage today is fully amortizing: each payment splits between interest owed on the remaining balance and principal that permanently reduces it, and that split shifts every month — early payments are mostly interest, and the very last payment is nearly all principal.",
-          "paragraph2": "This calculator computes your standard monthly principal-and-interest payment from your loan amount, rate, and term, then folds in the real recurring costs lenders typically collect alongside it — property tax, home insurance, HOA dues, and private mortgage insurance (PMI) — to show the payment you'll actually see leave your account. It also runs a full month-by-month amortization simulation behind the scenes, which is what lets it tell you exactly when PMI can come off and how much an extra payment would actually save, rather than relying on rough rules of thumb.",
-          "disclaimer": "This tool is for planning and educational purposes only. It does not constitute a loan offer, pre-approval, or financial advice, and actual loan terms, taxes, insurance premiums, and PMI rates set by a specific lender or insurer may differ from the estimates shown here."
+          "title": "Was dieser Rechner ermittelt",
+          "paragraph1": "Eine Hypothek ist ein durch die zu erwerbende Immobilie besichertes Darlehen, das so strukturiert ist, dass eine feste monatliche Rate einen großen Restbetrag schrittweise über einen Zeitraum von in der Regel 15 bis 30 Jahren tilgt. Praktisch jede Festzinshypothek ist heute vollständig tilgend: Jede Rate teilt sich in die auf den Restsaldo geschuldeten Zinsen und die Tilgung, die ihn dauerhaft reduziert, und dieses Verhältnis verschiebt sich jeden Monat — frühe Raten bestehen größtenteils aus Zinsen, die allerletzte Rate fast vollständig aus Tilgung.",
+          "paragraph2": "Dieser Rechner ermittelt zunächst Ihre reguläre monatliche Zins- und Tilgungsrate aus Darlehensbetrag, Zinssatz und Laufzeit und berücksichtigt dann die tatsächlichen wiederkehrenden Nebenkosten, die Kreditgeber üblicherweise mit erheben — Grundsteuer, Wohngebäudeversicherung, HOA-Gebühren und private Hypothekenversicherung (PMI) —, um die Summe zu zeigen, die tatsächlich von Ihrem Konto abgebucht wird. Im Hintergrund läuft außerdem eine vollständige monatsgenaue Tilgungssimulation, die es erst ermöglicht, exakt anzugeben, wann die PMI entfällt und wie viel eine Zusatzzahlung tatsächlich einspart, statt sich auf grobe Faustregeln zu verlassen.",
+          "disclaimer": "Dieses Tool dient ausschließlich Planungs- und Informationszwecken. Es stellt kein Kreditangebot, keine Vorabgenehmigung und keine Finanzberatung dar; die tatsächlichen Kreditkonditionen, Steuern, Versicherungsprämien und PMI-Sätze eines bestimmten Kreditgebers oder Versicherers können von den hier gezeigten Schätzungen abweichen."
         },
         "amortization": {
-          "title": "How Mortgage Amortization Works",
-          "intro": "Every fixed-rate, fully amortizing loan uses the same payment formula, regardless of the lender. Given the loan principal, the periodic interest rate, and the number of payments, the formula solves for the one constant payment that brings the balance to exactly zero on the final payment.",
+          "title": "Wie die Tilgung einer Hypothek funktioniert",
+          "intro": "Jedes festverzinsliche, vollständig tilgende Darlehen verwendet unabhängig vom Kreditgeber dieselbe Zahlungsformel. Aus Darlehensbetrag, periodischem Zinssatz und Anzahl der Raten berechnet die Formel die eine konstante Rate, mit der der Restsaldo bei der letzten Zahlung exakt null erreicht.",
           "formula": {
-            "label": "Standard Monthly Payment Formula",
+            "label": "Standardformel für die monatliche Rate",
             "formula": "M = P × [ r(1+r)ⁿ ] / [ (1+r)ⁿ − 1 ]",
-            "note": "M is the monthly principal-and-interest payment, P is the loan principal, r is the monthly interest rate (the annual rate divided by 12), and n is the total number of monthly payments (the loan term in years times 12). When r = 0, the formula reduces to simple division: M = P / n."
+            "note": "M ist die monatliche Zins- und Tilgungsrate, P der Darlehensbetrag, r der monatliche Zinssatz (der Jahreszins geteilt durch 12) und n die Gesamtzahl der monatlichen Raten (die Laufzeit in Jahren mal 12). Bei r = 0 vereinfacht sich die Formel zu einer einfachen Division: M = P / n."
           },
           "example": {
-            "title": "Worked Example",
-            "intro": "Take this calculator's own defaults: a $400,000 home with a 20% down payment, a 6.5% annual rate, and a 30-year term.",
+            "title": "Durchgerechnetes Beispiel",
+            "intro": "Nehmen wir die Standardwerte dieses Rechners: eine Immobilie im Wert von 400.000 $ mit 20 % Anzahlung, einem Jahreszins von 6,5 % und einer Laufzeit von 30 Jahren.",
             "steps": [
               {
-                "label": "Loan principal (P)",
-                "value": "$400,000 − $80,000 = $320,000"
+                "label": "Darlehensbetrag (P)",
+                "value": "400.000 $ − 80.000 $ = 320.000 $"
               },
               {
-                "label": "Monthly interest rate (r)",
-                "value": "6.5% / 12 = 0.005417"
+                "label": "Monatlicher Zinssatz (r)",
+                "value": "6,5 % / 12 = 0,005417"
               },
               {
-                "label": "Number of payments (n)",
+                "label": "Anzahl der Raten (n)",
                 "value": "30 × 12 = 360"
               },
               {
-                "label": "Monthly principal & interest (M)",
-                "value": "$2,022.62"
+                "label": "Monatliche Zins- und Tilgungsrate (M)",
+                "value": "2.022,62 $"
               }
             ],
-            "result": "Over 360 payments, that totals $728,142.36 paid — $320,000 of principal and $408,142.36 of interest, roughly 1.28× the loan amount, before taxes, insurance, HOA, or PMI are even added."
+            "result": "Über 360 Raten summiert sich das auf 728.142,36 $ — davon 320.000 $ Tilgung und 408.142,36 $ Zinsen, etwa das 1,28-Fache des Darlehensbetrags, noch bevor Steuern, Versicherung, HOA-Gebühr oder PMI hinzukommen."
           }
         },
         "paymentComponents": {
-          "title": "What Makes Up Your Monthly Payment",
-          "intro": "The number a lender actually asks you to pay each month — sometimes called PITI — is rarely just principal and interest. This calculator breaks it into every component that commonly makes up a US mortgage payment:",
+          "title": "Woraus sich Ihre monatliche Rate zusammensetzt",
+          "intro": "Der Betrag, den ein Kreditgeber tatsächlich monatlich verlangt — manchmal PITI genannt — besteht selten nur aus Zins und Tilgung. Dieser Rechner schlüsselt ihn in jede Komponente auf, die üblicherweise Teil einer US-Hypothekenrate ist:",
           "items": [
             {
-              "label": "Principal & Interest (P&I)",
-              "description": "The fixed payment computed by the amortization formula above — the only component that actually retires the loan."
+              "label": "Zins & Tilgung (P&I)",
+              "description": "Die feste, mit der obigen Tilgungsformel berechnete Rate — die einzige Komponente, die das Darlehen tatsächlich abbaut."
             },
             {
-              "label": "Property Tax",
-              "description": "Billed annually by the local government based on the assessed value of the home; most lenders collect a twelfth of the annual bill each month and pay the tax authority directly from an escrow account."
+              "label": "Grundsteuer",
+              "description": "Wird von der lokalen Behörde jährlich auf Basis des festgestellten Immobilienwerts erhoben; die meisten Kreditgeber ziehen monatlich ein Zwölftel des Jahresbetrags ein und zahlen die Steuer direkt aus einem Treuhandkonto an die Steuerbehörde."
             },
             {
-              "label": "Home Insurance",
-              "description": "Hazard insurance protecting the physical structure, required by virtually every lender as a condition of the loan and typically collected monthly through the same escrow account as property tax."
+              "label": "Wohngebäudeversicherung",
+              "description": "Elementarschutz für die bauliche Substanz, von praktisch jedem Kreditgeber als Kreditbedingung verlangt und in der Regel monatlich über dasselbe Treuhandkonto wie die Grundsteuer eingezogen."
             },
             {
-              "label": "HOA Fees",
-              "description": "A due paid directly to a homeowners' association when the property belongs to one — not collected by the lender, but included here because it's a real recurring cost of owning the home."
+              "label": "HOA-Gebühr",
+              "description": "Eine Abgabe, die direkt an eine Eigentümergemeinschaft gezahlt wird, sofern die Immobilie einer solchen angehört — wird nicht vom Kreditgeber erhoben, ist hier aber aufgeführt, da es sich um echte laufende Kosten des Wohneigentums handelt."
             },
             {
-              "label": "Private Mortgage Insurance (PMI)",
-              "description": "Required on most conventional loans when the down payment is below 20%; it protects the lender, not the borrower, against default — see below for exactly when it can be removed."
+              "label": "Private Hypothekenversicherung (PMI)",
+              "description": "Bei den meisten konventionellen Darlehen erforderlich, wenn die Anzahlung unter 20 % liegt; sie schützt den Kreditgeber, nicht den Kreditnehmer, vor einem Zahlungsausfall — weiter unten erfahren Sie genau, wann sie entfallen kann."
             }
           ]
         },
         "pmi": {
-          "title": "Private Mortgage Insurance: What It Is and How to Remove It",
-          "intro": "PMI isn't an optional add-on the borrower chooses — on a conventional loan, a lender is required to charge it whenever the down payment is below 20% (equivalently, the loan-to-value ratio is above 80%), because it protects the lender's exposure if the borrower defaults early, when equity is thin. Two exact thresholds are set by name in US federal law, the Homeowners Protection Act of 1998 (12 U.S.C. § 4902):",
+          "title": "Private Hypothekenversicherung: Was sie ist und wie man sie loswird",
+          "intro": "Die PMI ist keine optionale Zusatzleistung, die der Kreditnehmer wählt — bei einem konventionellen Darlehen ist ein Kreditgeber verpflichtet, sie zu berechnen, sobald die Anzahlung unter 20 % liegt (gleichbedeutend mit einem Beleihungsauslauf über 80 %), da sie das Risiko des Kreditgebers absichert, falls der Kreditnehmer früh ausfällt, wenn das Eigenkapital noch gering ist. Zwei genaue Schwellenwerte sind namentlich im US-Bundesgesetz festgelegt, dem Homeowners Protection Act von 1998 (12 U.S.C. § 4902):",
           "thresholds": {
             "rows": [
               {
-                "label": "Borrower-Requested Cancellation",
-                "threshold": "80% of original value",
-                "note": "Once your scheduled balance is projected to reach 80% of the home's original value, you can submit a written request to your servicer to cancel PMI, provided your payment history is current (12 U.S.C. § 4902(a))."
+                "label": "Kündigung auf Antrag des Kreditnehmers",
+                "threshold": "80 % des ursprünglichen Werts",
+                "note": "Sobald Ihr planmäßiger Restsaldo voraussichtlich 80 % des ursprünglichen Immobilienwerts erreicht, können Sie bei Ihrem Kreditverwalter schriftlich die Kündigung der PMI beantragen, sofern Ihre Zahlungshistorie aktuell ist (12 U.S.C. § 4902(a))."
               },
               {
-                "label": "Automatic Termination",
-                "threshold": "78% of original value",
-                "note": "Even if you never ask, the servicer is legally required to automatically terminate PMI once your balance is first scheduled to reach 78% of the original value, as long as payments are current (12 U.S.C. § 4902(b))."
+                "label": "Automatische Beendigung",
+                "threshold": "78 % des ursprünglichen Werts",
+                "note": "Auch wenn Sie es nie beantragen, ist der Kreditverwalter gesetzlich verpflichtet, die PMI automatisch zu beenden, sobald Ihr Saldo planmäßig erstmals 78 % des ursprünglichen Werts erreicht, solange die Zahlungen aktuell sind (12 U.S.C. § 4902(b))."
               }
             ]
           },
-          "note": "Both thresholds are based on the home's original value and the loan's original amortization schedule — not on extra payments or market appreciation, unless you separately request a new appraisal-based cancellation. This calculator's “PMI Removal” estimate reflects the scheduled 80% threshold, adjusted for any extra monthly payment you've entered."
+          "note": "Beide Schwellenwerte basieren auf dem ursprünglichen Immobilienwert und dem ursprünglichen Tilgungsplan des Darlehens — nicht auf Zusatzzahlungen oder Wertsteigerungen am Markt, sofern Sie nicht gesondert eine neue, gutachtenbasierte Kündigung beantragen. Die Schätzung „PMI-Wegfall\" dieses Rechners bezieht sich auf die planmäßige 80-%-Schwelle, angepasst um jede von Ihnen eingegebene zusätzliche monatliche Zahlung."
         },
         "extraPayments": {
-          "title": "The Real Impact of Paying a Little Extra Each Month",
-          "intro": "Because interest is charged only on the remaining balance, every extra dollar applied to principal today stops accruing interest for every remaining month of the loan — which is why even a modest recurring overpayment compounds into a disproportionately large reduction in total interest and loan term.",
+          "title": "Die tatsächliche Wirkung kleiner monatlicher Zusatzzahlungen",
+          "intro": "Da Zinsen nur auf den verbleibenden Restsaldo berechnet werden, stoppt jeder zusätzliche, heute zur Tilgung eingesetzte Dollar die Zinsberechnung für jeden verbleibenden Monat der Laufzeit — weshalb sich selbst eine bescheidene, wiederkehrende Mehrzahlung zu einer unverhältnismäßig großen Reduzierung der Gesamtzinsen und der Laufzeit aufsummiert.",
           "example": {
-            "title": "Worked Example",
-            "intro": "Using the same $320,000 loan at 6.5% over 30 years, adding just $200 to every monthly payment changes the outcome substantially:",
+            "title": "Durchgerechnetes Beispiel",
+            "intro": "Bei demselben Darlehen über 320.000 $ zu 6,5 % über 30 Jahre verändert eine Zusatzzahlung von nur 200 $ pro Monat das Ergebnis erheblich:",
             "steps": [
               {
-                "label": "Standard payoff time",
-                "value": "360 months (30 years)"
+                "label": "Standard-Tilgungsdauer",
+                "value": "360 Monate (30 Jahre)"
               },
               {
-                "label": "Payoff time with +$200/month",
-                "value": "281 months (23 years, 5 months)"
+                "label": "Tilgungsdauer mit +200 $/Monat",
+                "value": "281 Monate (23 Jahre, 5 Monate)"
               },
               {
-                "label": "Time saved",
-                "value": "79 months (6 years, 7 months)"
+                "label": "Ersparte Zeit",
+                "value": "79 Monate (6 Jahre, 7 Monate)"
               },
               {
-                "label": "Standard total interest",
-                "value": "$408,142.36"
+                "label": "Standard-Gesamtzinsen",
+                "value": "408.142,36 $"
               },
               {
-                "label": "Total interest with +$200/month",
-                "value": "$302,713.69"
+                "label": "Gesamtzinsen mit +200 $/Monat",
+                "value": "302.713,69 $"
               }
             ],
-            "result": "That single, consistent $200/month habit saves $105,428.67 in interest — over 500 times the $200 itself, repeated across the shortened loan term."
+            "result": "Diese einzige, konsequent eingehaltene Gewohnheit von 200 $/Monat spart 105.428,67 $ an Zinsen — über das 500-Fache der 200 $ selbst, verteilt über die verkürzte Laufzeit."
           }
         },
         "rateTypes": {
-          "title": "Fixed-Rate vs. Adjustable-Rate Mortgages",
-          "intro": "This calculator models a fixed-rate mortgage, the dominant structure for US home loans, but it's worth understanding the alternative you'll encounter when comparing loan offers:",
+          "title": "Festzins- vs. variabel verzinsliche Hypotheken",
+          "intro": "Dieser Rechner bildet eine Festzinshypothek ab, die vorherrschende Struktur für US-Wohnbaudarlehen, doch lohnt es sich, die Alternative zu kennen, auf die Sie beim Vergleich von Darlehensangeboten stoßen werden:",
           "fixed": {
-            "title": "Fixed-Rate Mortgage (FRM)",
-            "paragraph": "The interest rate is locked for the entire loan term, so the principal-and-interest portion of the payment never changes — only the escrowed taxes, insurance, and PMI can shift the total bill over time. This predictability is why fixed-rate loans, especially the 30-year term, have been the default choice for most US homebuyers since the government-backed reforms of the 1930s standardized amortizing mortgages."
+            "title": "Festzinshypothek (FRM)",
+            "paragraph": "Der Zinssatz ist für die gesamte Laufzeit festgeschrieben, sodass sich der Zins-und-Tilgungs-Anteil der Rate nie ändert — nur die treuhänderisch verwalteten Steuern, Versicherungen und PMI können die Gesamtrate im Laufe der Zeit verschieben. Diese Vorhersehbarkeit ist der Grund, warum Festzinsdarlehen, insbesondere mit 30-jähriger Laufzeit, seit den staatlich geförderten Reformen der 1930er-Jahre, die tilgende Hypotheken standardisierten, die Standardwahl der meisten US-Hauskäufer sind."
           },
           "adjustable": {
-            "title": "Adjustable-Rate Mortgage (ARM)",
-            "paragraph": "The rate is fixed for an initial period (commonly 5, 7, or 10 years, as in a “7/1 ARM”), then adjusts periodically based on a reference index plus a lender margin, subject to caps that limit how much it can move at each adjustment and over the life of the loan. ARMs often start below prevailing fixed rates, trading long-term predictability for a lower initial payment."
+            "title": "Variabel verzinsliche Hypothek (ARM)",
+            "paragraph": "Der Zinssatz ist für eine Anfangsperiode festgeschrieben (üblicherweise 5, 7 oder 10 Jahre, wie bei einer „7/1-ARM\"), passt sich danach periodisch anhand eines Referenzindex zuzüglich einer Kreditgebermarge an, begrenzt durch Obergrenzen, die festlegen, wie stark er sich bei jeder Anpassung und über die gesamte Laufzeit bewegen darf. ARMs beginnen häufig unter den vorherrschenden Festzinssätzen und tauschen so langfristige Vorhersehbarkeit gegen eine niedrigere Anfangsrate."
           }
         },
         "limitations": {
-          "title": "Limitations of This Calculator",
-          "paragraph1": "This tool assumes a fixed interest rate for the full term, a home value that doesn't change, and property tax, insurance, and HOA amounts that stay constant in nominal terms — none of which is guaranteed in practice. Property taxes are typically reassessed periodically, insurance premiums are repriced at renewal, and PMI can sometimes be removed earlier via a new appraisal showing sufficient value gain, none of which this calculator can predict.",
-          "paragraph2": "It also excludes one-time costs that are very real parts of buying a home but aren't part of the recurring monthly payment: closing costs, loan origination fees, title insurance, and any upfront mortgage insurance premium some loan programs charge. Treat every figure here as a planning estimate, not a lender's official Loan Estimate or Closing Disclosure."
+          "title": "Grenzen dieses Rechners",
+          "paragraph1": "Dieses Tool geht von einem für die gesamte Laufzeit festen Zinssatz, einem unveränderlichen Immobilienwert sowie nominal konstanten Beträgen für Grundsteuer, Versicherung und HOA-Gebühr aus — nichts davon ist in der Praxis garantiert. Grundsteuern werden in der Regel periodisch neu veranlagt, Versicherungsprämien bei Vertragsverlängerung neu kalkuliert, und die PMI kann mitunter früher entfallen, wenn ein neues Gutachten einen ausreichenden Wertzuwachs nachweist — nichts davon kann dieser Rechner vorhersagen.",
+          "paragraph2": "Zudem sind einmalige Kosten ausgeschlossen, die zwar ein sehr realer Teil des Immobilienkaufs sind, aber nicht Teil der laufenden monatlichen Rate: Abschlusskosten, Kreditbearbeitungsgebühren, Eigentumsversicherung sowie eine etwaige, bei manchen Kreditprogrammen anfallende Vorab-Hypothekenversicherungsprämie. Betrachten Sie jede hier gezeigte Zahl als Planungsschätzung, nicht als offizielle Kreditkonditionen oder Abschlussdokumente eines Kreditgebers."
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Why does my total interest look larger than my loan amount?",
-              "answer": "On long terms at typical rates, this is normal, not an error: a 30-year loan at 6.5% pays roughly 1.28× the principal in interest by the time the amortization example above finishes. Interest is charged on whatever balance remains, and early in the loan almost the entire balance remains, so a large share of your early payments is interest rather than principal."
+              "question": "Warum erscheinen meine Gesamtzinsen höher als mein Darlehensbetrag?",
+              "answer": "Bei langen Laufzeiten und üblichen Zinssätzen ist das normal, kein Fehler: Ein 30-jähriges Darlehen zu 6,5 % zahlt bis zum Ende des obigen Tilgungsbeispiels etwa das 1,28-Fache der Darlehenssumme an Zinsen. Zinsen werden auf den jeweils verbleibenden Saldo berechnet, und zu Beginn der Laufzeit ist fast der gesamte Saldo noch offen — daher besteht ein großer Teil Ihrer frühen Raten aus Zinsen statt aus Tilgung."
             },
             {
-              "question": "Does this calculator include closing costs?",
-              "answer": "No. It computes only the recurring monthly payment components — principal, interest, taxes, insurance, HOA, and PMI. One-time costs like closing costs, appraisal fees, and title insurance are outside this tool's scope; see Limitations above."
+              "question": "Berücksichtigt dieser Rechner die Abschlusskosten?",
+              "answer": "Nein. Er berechnet ausschließlich die wiederkehrenden monatlichen Ratenbestandteile — Tilgung, Zinsen, Steuern, Versicherung, HOA-Gebühr und PMI. Einmalige Kosten wie Abschlusskosten, Gutachtergebühren und Eigentumsversicherung liegen außerhalb des Umfangs dieses Tools; siehe „Grenzen\" oben."
             },
             {
-              "question": "Is PMI the same as homeowners insurance?",
-              "answer": "No — they protect different parties. Homeowners insurance protects you against physical damage to the home. PMI protects only the lender against your default, and it doesn't pay out to you or repair anything if you file a claim."
+              "question": "Ist die PMI dasselbe wie eine Wohngebäudeversicherung?",
+              "answer": "Nein — sie schützen unterschiedliche Parteien. Die Wohngebäudeversicherung schützt Sie vor physischen Schäden am Haus. Die PMI schützt ausschließlich den Kreditgeber vor Ihrem Zahlungsausfall und zahlt Ihnen im Schadensfall nichts aus und repariert nichts."
             },
             {
-              "question": "Can I remove PMI before the scheduled 80% threshold?",
-              "answer": "Often, yes. If your home's value has risen since purchase — through appreciation or improvements — you can typically request a new appraisal and ask your servicer to cancel PMI once the current, appraised loan-to-value ratio reaches 80%, without waiting for the scheduled balance to get there on its own. This calculator only models the scheduled path, since it can't predict future appraisals."
+              "question": "Kann ich die PMI vor Erreichen der planmäßigen 80-%-Schwelle entfernen lassen?",
+              "answer": "Oft ja. Ist der Wert Ihrer Immobilie seit dem Kauf gestiegen — durch Wertsteigerung oder Modernisierungen —, können Sie in der Regel ein neues Gutachten beantragen und Ihren Kreditverwalter bitten, die PMI zu kündigen, sobald der aktuelle, begutachtete Beleihungsauslauf 80 % erreicht, ohne darauf zu warten, dass der planmäßige Saldo diesen Wert von selbst erreicht. Dieser Rechner bildet nur den planmäßigen Verlauf ab, da er künftige Gutachten nicht vorhersagen kann."
             },
             {
-              "question": "Why do extra payments save so much more interest than their dollar amount?",
-              "answer": "Because interest compounds on the balance every month for the remaining life of the loan. A dollar of extra principal paid in year 2 stops accruing interest for the other 28 years it would otherwise have remained outstanding — see the worked example above."
+              "question": "Warum sparen Zusatzzahlungen so viel mehr Zinsen, als ihr eigener Betrag beträgt?",
+              "answer": "Weil sich die Zinsen jeden Monat für die verbleibende Laufzeit auf den Saldo aufsummieren. Ein Dollar Zusatztilgung im zweiten Jahr fällt für die übrigen 28 Jahre, in denen er sonst offen geblieben wäre, aus der Zinsberechnung heraus — siehe das durchgerechnete Beispiel oben."
             },
             {
-              "question": "What's the difference between loan-to-value (LTV) and down payment percent?",
-              "answer": "They're complementary: LTV is the loan amount divided by the home price, and down payment percent is the down payment divided by the home price. A 20% down payment corresponds exactly to an 80% LTV — the same line lenders use to decide whether PMI applies."
+              "question": "Was ist der Unterschied zwischen Beleihungsauslauf (LTV) und Anzahlungsquote?",
+              "answer": "Sie ergänzen sich: Der Beleihungsauslauf ist der Darlehensbetrag geteilt durch den Kaufpreis, die Anzahlungsquote ist die Anzahlung geteilt durch den Kaufpreis. Eine Anzahlung von 20 % entspricht genau einem Beleihungsauslauf von 80 % — derselbe Wert, anhand dessen Kreditgeber entscheiden, ob PMI anfällt."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind the Tool: The History and Standards Behind the Modern Mortgage",
+          "title": "Hintergrund: Geschichte und Standards der modernen Hypothek",
           "history": {
-            "title": "From Balloon Payments to the Amortized Mortgage: The Reforms of 1933–1934",
-            "paragraph": "Before the 1930s, the typical US home loan looked nothing like today's mortgage: it ran just 5 to 10 years, charged interest-only payments, and ended in a single “balloon” payment of the full principal — a structure that triggered a wave of foreclosures once the Great Depression made refinancing that balloon impossible for millions of homeowners. Congress responded on June 13, 1933 by creating the Home Owners' Loan Corporation (HOLC), which refinanced roughly one million troubled mortgages between 1933 and 1936 using a new structure: a longer, self-amortizing loan in which every payment stayed level and gradually retired the entire principal, eliminating the balloon altogether. The National Housing Act of 1934 then created the Federal Housing Administration (FHA), which insured lenders against default and extended the amortizing structure to 25- and 30-year terms — the direct ancestor of the fixed-rate mortgage this calculator models."
+            "title": "Von der Ballonzahlung zur tilgenden Hypothek: Die Reformen von 1933–1934",
+            "paragraph": "Vor den 1930er-Jahren sah das typische US-Wohndarlehen ganz anders aus als eine heutige Hypothek: Es lief nur 5 bis 10 Jahre, verlangte reine Zinszahlungen und endete mit einer einzigen „Ballonzahlung\" der vollständigen Darlehenssumme — eine Struktur, die eine Welle von Zwangsvollstreckungen auslöste, sobald die Weltwirtschaftskrise die Refinanzierung dieser Ballonzahlung für Millionen Hauseigentümer unmöglich machte. Der Kongress reagierte am 13. Juni 1933 mit der Gründung der Home Owners' Loan Corporation (HOLC), die zwischen 1933 und 1936 rund eine Million notleidende Hypotheken mit einer neuen Struktur refinanzierte: einem längeren, selbsttilgenden Darlehen, bei dem jede Rate gleich blieb und die gesamte Darlehenssumme schrittweise abbaute, wodurch die Ballonzahlung vollständig entfiel. Der National Housing Act von 1934 schuf anschließend die Federal Housing Administration (FHA), die Kreditgeber gegen Zahlungsausfälle versicherte und die tilgende Struktur auf Laufzeiten von 25 und 30 Jahren ausweitete — der direkte Vorläufer der Festzinshypothek, die dieser Rechner abbildet."
           },
           "equipment": {
-            "title": "The Standard Behind PMI Removal: The Homeowners Protection Act of 1998",
-            "paragraph": "The exact thresholds this calculator uses to estimate when PMI can come off aren't a rule of thumb — they're set in US federal law. The Homeowners Protection Act of 1998 (12 U.S.C. § 4902), signed July 29, 1998 and effective July 29, 1999, requires a servicer to automatically terminate PMI on a conventional loan once the principal balance is first scheduled to reach 78% of the property's original value (§ 4902(b)), and separately gives borrowers in good standing the right to request cancellation once the balance is scheduled to reach 80% (§ 4902(a)) — the same two figures behind this tool's “PMI Removal” estimate."
+            "title": "Der Standard hinter dem PMI-Wegfall: Der Homeowners Protection Act von 1998",
+            "paragraph": "Die genauen Schwellenwerte, die dieser Rechner zur Schätzung des PMI-Wegfalls verwendet, sind keine Faustregel — sie sind im US-Bundesrecht festgelegt. Der Homeowners Protection Act von 1998 (12 U.S.C. § 4902), unterzeichnet am 29. Juli 1998 und in Kraft seit dem 29. Juli 1999, verpflichtet einen Kreditverwalter, die PMI bei einem konventionellen Darlehen automatisch zu beenden, sobald der Restsaldo planmäßig erstmals 78 % des ursprünglichen Immobilienwerts erreicht (§ 4902(b)), und räumt Kreditnehmern mit vertragsgemäßer Zahlungshistorie zusätzlich das Recht ein, eine Kündigung zu beantragen, sobald der Saldo planmäßig 80 % erreicht (§ 4902(a)) — dieselben beiden Werte, auf denen die Schätzung „PMI-Wegfall\" dieses Tools beruht."
           },
           "modernDevelopments": {
-            "title": "Modern Mortgage Technology: Automated Valuation and Digital Closings",
-            "paragraph": "Two shifts have reshaped mortgage underwriting and closing in recent years. Automated valuation models (AVMs) now estimate a property's value from county records, comparable sales, and increasingly satellite imagery and computer vision, letting many lenders waive an in-person appraisal for well-documented properties under roughly $250,000–$400,000. And remote online notarization (RON) — now legally recognized in more than 40 US states — lets a borrower sign closing documents in front of a notary over live video instead of at an in-person closing table. Industry surveys report a majority of borrowers now upload documents and e-sign through digital portals rather than in person, a shift that has measurably shortened the closing timeline this calculator's numbers ultimately feed into."
+            "title": "Moderne Hypothekentechnologie: Automatisierte Wertermittlung und digitale Abschlüsse",
+            "paragraph": "Zwei Entwicklungen haben die Kreditvergabe und den Abschluss von Hypotheken in den letzten Jahren verändert. Automatisierte Bewertungsmodelle (AVMs) schätzen den Wert einer Immobilie heute anhand von Katasterdaten, Vergleichsverkäufen und zunehmend Satellitenbildern sowie maschinellem Sehen und ermöglichen es vielen Kreditgebern, bei gut dokumentierten Immobilien unter etwa 250.000–400.000 $ auf ein persönliches Gutachten zu verzichten. Und die Fernbeurkundung per Video (Remote Online Notarization, RON) — inzwischen in mehr als 40 US-Bundesstaaten gesetzlich anerkannt — erlaubt es Kreditnehmern, Abschlussdokumente per Live-Video vor einem Notar zu unterzeichnen, statt persönlich am Abschlusstermin zu erscheinen. Branchenumfragen zufolge lädt inzwischen die Mehrheit der Kreditnehmer Dokumente hoch und unterschreibt digital über Online-Portale statt persönlich — eine Entwicklung, die die Abschlussdauer, in die die Zahlen dieses Rechners letztlich einfließen, messbar verkürzt hat."
           },
           "academicPath": {
-            "title": "Studying This Field: Finance and Real Estate Economics",
-            "intro": "Pricing a mortgage — the interest formula, amortization mechanics, and PMI rules this calculator applies — is core material within finance, specifically real estate finance and financial economics. QS World University Rankings by Subject does not publish a standalone “Real Estate” category, so the closest standalone match is Accounting & Finance — here are the top 5 globally in QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Dieses Fachgebiet studieren: Finanzwissenschaft und Immobilienökonomie",
+            "intro": "Die Bepreisung einer Hypothek — die Zinsformel, die Tilgungsmechanik und die PMI-Regeln, die dieser Rechner anwendet — ist zentraler Stoff der Finanzwissenschaft, insbesondere der Immobilienfinanzierung und der Finanzökonomie. Das QS World University Rankings by Subject führt keine eigenständige Kategorie „Real Estate\", weshalb Accounting & Finance die nächstliegende eigenständige Entsprechung ist — hier die weltweiten Top 5 im QS World University Rankings by Subject 2025, ergänzt um eine regionale Option:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Accounting & Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
-                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+                "online": "Größtenteils online — laut Harvard Extension School können 11 der 12 Pflichtkurse des Finance-Graduiertenprogramms online absolviert werden, mindestens ein Kurs erfordert Anwesenheit auf dem Campus."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Accounting & Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/mfin",
-                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+                "online": "Nein — der MIT Sloan Master of Finance ist ein Vollzeit-Präsenzprogramm (12- oder 18-monatige Tracks), auf den offiziellen Seiten wird keine Fernstudienoption genannt."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Accounting & Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/programs/online-programs",
-                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+                "online": "Nein — die Finanzausbildung der Stanford GSB erfolgt im Rahmen des Präsenz-MBA; die schuleigene Seite zu Online-Programmen listet nur berufsbegleitende Nicht-Abschlusskurse, keinen vollständigen Finance-Abschluss."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Accounting & Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
-                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time “MSc in Applied Financial Economics” (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+                "online": "Nicht vollständig online — Oxfords MSc in Financial Economics ist ein neunmonatiges Vollzeit-Präsenzprogramm; ein neuer Teilzeit-„MSc in Applied Financial Economics\" (ab September 2026) kombiniert Online-Lernen mit verpflichtenden Präsenzphasen in Oxford und ist damit ebenfalls keine reine Fernstudienoption."
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Accounting & Finance (QS World University Rankings by Subject 2025).",
                 "url": "https://www.chicagobooth.edu/master-in-finance",
-                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+                "online": "Nein — der Master in Finance der Chicago Booth ist ein 15-monatiges Präsenzprogramm, dessen erster Jahrgang im Herbst 2024 begann."
               },
               {
                 "name": "King Saud University (KSU), Riyadh — College of Business Administration",
-                "note": "A leading Saudi university offering a Master of Science in Finance (MSF) through its College of Business Administration.",
+                "note": "Eine führende saudische Universität, die über ihre College of Business Administration einen Master of Science in Finance (MSF) anbietet.",
                 "url": "https://cba.ksu.edu.sa/en/overveiw/MSF",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Studienform wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "Wissenschaftliche Quellen",
           "citation": "Bäckman, C., Moran, P., & van Santen, P. (2024). Mortgage Design, Repayment Schedules, and Household Borrowing. FEDS Working Paper No. 2024-077, Board of Governors of the Federal Reserve System.",
-          "note": "Using a Swedish policy change that restricted interest-only mortgages, this study finds that low-initial-payment mortgage designs substantially increase both household borrowing and lifetime interest costs — empirical evidence for why this calculator treats the full amortization schedule, not just the headline rate, as central to what a mortgage actually costs.",
+          "note": "Anhand einer schwedischen Gesetzesänderung, die tilgungsfreie Hypotheken einschränkte, zeigt diese Studie, dass Hypothekenmodelle mit niedriger Anfangsrate sowohl die Verschuldung der Haushalte als auch die Zinskosten über die gesamte Laufzeit erheblich erhöhen — ein empirischer Beleg dafür, warum dieser Rechner den vollständigen Tilgungsplan und nicht nur den nominalen Zinssatz als zentral dafür betrachtet, was eine Hypothek tatsächlich kostet.",
           "doiLabel": "DOI",
           "doi": "10.17016/FEDS.2024.077",
-          "readOriginal": "Read the Original Paper",
+          "readOriginal": "Originalstudie lesen",
           "url": "https://doi.org/10.17016/FEDS.2024.077"
         }
       },
       "payoffChart": {
-        "title": "Amortization: Principal vs. Interest Over Time",
-        "intro": "Each bar is one year of payments, split into principal (the part that reduces your balance) and interest (the cost of borrowing). Early years lean heavily toward interest; later years flip toward principal. The solid line traces your remaining balance.",
-        "principalLabel": "Principal",
-        "interestLabel": "Interest",
-        "balanceLabel": "Remaining Balance",
-        "standardBalanceLabel": "Standard Schedule (no extra payments)",
-        "totalPrincipalLabel": "Total Principal",
-        "totalInterestLabel": "Total Interest Paid",
-        "pmiNote": "Based on your inputs, PMI could be requested for removal around year {dropYear} (80% loan-to-value) and must be automatically terminated by year {autoYear} (78% loan-to-value) at the latest.",
-        "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs."
+        "title": "Tilgung: Zins- und Tilgungsanteil im Zeitverlauf",
+        "intro": "Jeder Balken steht für ein Jahr an Zahlungen, aufgeteilt in Tilgung (den Anteil, der Ihren Saldo reduziert) und Zinsen (die Kosten der Kreditaufnahme). In frühen Jahren überwiegen die Zinsen deutlich; in späteren Jahren kehrt sich das Verhältnis zugunsten der Tilgung um. Die durchgezogene Linie zeigt Ihren verbleibenden Restsaldo.",
+        "principalLabel": "Tilgung",
+        "interestLabel": "Zinsen",
+        "balanceLabel": "Restsaldo",
+        "standardBalanceLabel": "Standardplan (ohne Zusatzzahlungen)",
+        "totalPrincipalLabel": "Gesamttilgung",
+        "totalInterestLabel": "Gezahlte Gesamtzinsen",
+        "pmiNote": "Nach Ihren Angaben könnte die PMI-Kündigung um Jahr {dropYear} beantragt werden (80 % Beleihungsauslauf) und muss spätestens bis Jahr {autoYear} automatisch beendet werden (78 % Beleihungsauslauf).",
+        "pmiNoDropoff": "Ihr Darlehen umfasst derzeit eine PMI, ein Wegfallzeitpunkt konnte mit diesen Angaben jedoch nicht geschätzt werden."
       },
       "amortizationTable": {
-        "title": "Full Monthly Amortization Schedule",
-        "intro": "Every single payment from month 1 to payoff, grouped by year — expand a year to see the principal, interest, and remaining balance for each of its payments, or download the whole schedule as a CSV file.",
-        "yearLabel": "Year {year}",
-        "columnPaymentNumber": "Payment #",
-        "columnYear": "Year",
-        "columnPayment": "Payment",
-        "viewFullTable": "View Full Schedule",
-        "showLess": "Show Less"
+        "title": "Vollständiger monatlicher Tilgungsplan",
+        "intro": "Jede einzelne Rate vom ersten Monat bis zur vollständigen Tilgung, gruppiert nach Jahren — klappen Sie ein Jahr auf, um Tilgung, Zinsen und Restsaldo jeder Rate zu sehen, oder laden Sie den gesamten Plan als CSV-Datei herunter.",
+        "yearLabel": "Jahr {year}",
+        "columnPaymentNumber": "Zahlung Nr.",
+        "columnYear": "Jahr",
+        "columnPayment": "Rate",
+        "viewFullTable": "Vollständigen Plan anzeigen",
+        "showLess": "Weniger anzeigen"
       },
       "scenarioComparison": {
-        "title": "Compare Rates and Loan Terms Side by Side",
-        "intro": "Your current numbers stay fixed as the baseline — try a different rate or term in the two scenarios below to see exactly how much it moves your payment, total interest, and payoff time.",
-        "baseLabel": "Your Current Scenario",
-        "baseHint": "From the form above — home price, down payment, taxes, insurance, HOA, PMI, and extra payment stay the same across all three scenarios.",
-        "scenarioLabel": "Scenario {letter}",
-        "rateLabel": "Rate (%)",
-        "termLabel": "Term (yrs)",
-        "rowMonthlyPI": "Monthly Principal & Interest",
-        "rowMonthlyTotal": "Total Monthly Payment",
-        "rowTotalInterest": "Total Interest",
-        "rowTotalCost": "Total Cost",
-        "rowPayoffTime": "Payoff Time",
-        "deltaNone": "No change",
-        "invalidScenario": "Enter a rate between 0–25% and a term between 1–50 years.",
-        "note": "Scenarios B and C use your current home price, down payment, and other costs — only the rate and term change, so you can isolate exactly what each one costs you."
+        "title": "Zinssätze und Laufzeiten im direkten Vergleich",
+        "intro": "Ihre aktuellen Werte bleiben als Basis fest — probieren Sie in den beiden Szenarien unten einen anderen Zinssatz oder eine andere Laufzeit aus, um genau zu sehen, wie stark sich Rate, Gesamtzinsen und Tilgungsdauer verändern.",
+        "baseLabel": "Ihr aktuelles Szenario",
+        "baseHint": "Aus dem obigen Formular — Kaufpreis, Anzahlung, Steuern, Versicherung, HOA-Gebühr, PMI und Zusatzzahlung bleiben in allen drei Szenarien gleich.",
+        "scenarioLabel": "Szenario {letter}",
+        "rateLabel": "Zinssatz (%)",
+        "termLabel": "Laufzeit (Jahre)",
+        "rowMonthlyPI": "Monatlicher Zins- und Tilgungsanteil",
+        "rowMonthlyTotal": "Monatliche Gesamtrate",
+        "rowTotalInterest": "Gesamtzinsen",
+        "rowTotalCost": "Gesamtkosten",
+        "rowPayoffTime": "Tilgungsdauer",
+        "deltaNone": "Keine Änderung",
+        "invalidScenario": "Geben Sie einen Zinssatz zwischen 0–25 % und eine Laufzeit zwischen 1–50 Jahren ein.",
+        "note": "Die Szenarien B und C übernehmen Ihren aktuellen Kaufpreis, Ihre Anzahlung und die übrigen Kosten — nur Zinssatz und Laufzeit ändern sich, sodass Sie genau isolieren können, was jeweils kostet."
       },
       "biweekly": {
-        "title": "Bi-Weekly Payment Plan",
-        "intro": "Pay half your monthly principal-and-interest payment every two weeks instead of one full payment monthly. A year has 52 weeks, so that's 26 half-payments — the equivalent of 13 monthly payments instead of 12 — which retires the loan faster and cuts total interest without changing your rate.",
-        "biweeklyPaymentLabel": "Bi-Weekly Payment",
-        "interestSavedLabel": "Interest Saved",
-        "interestSavedNote": "Interest avoided compared to the standard monthly schedule, from the extra principal reduction of the 13th annual payment.",
-        "timeSavedLabel": "Time Saved",
-        "rowPaymentAmount": "Payment Amount",
-        "rowPaymentsPerYear": "Payments per Year",
-        "rowPayoffTime": "Payoff Time",
-        "rowTotalInterest": "Total Interest",
-        "rowTotalCost": "Total Cost",
-        "standardLabel": "Standard Monthly",
-        "biweeklyLabel": "Accelerated Bi-Weekly",
-        "columnPaymentNumber": "Payment #",
-        "columnPayment": "Payment",
-        "pmiNote": "Under this plan, PMI could be requested for removal around payment #{period} and must be automatically terminated by payment #{autoPeriod} at the latest.",
-        "note": "This assumes the servicer applies each bi-weekly payment straight to principal and interest as it arrives. Some servicers instead hold payments in a suspense account until a full monthly amount accrues, which erases this benefit — checking the servicer's policy clarifies whether it applies here, or the same effect can be reproduced independently of it by simply adding one-twelfth of the monthly payment to every regular monthly payment."
+        "title": "Zweiwöchentlicher Zahlungsplan",
+        "intro": "Zahlen Sie alle zwei Wochen die Hälfte Ihrer monatlichen Zins- und Tilgungsrate statt einmal im Monat die volle Rate. Ein Jahr hat 52 Wochen, also 26 halbe Raten — das Äquivalent von 13 statt 12 Monatsraten —, was das Darlehen schneller tilgt und die Gesamtzinsen senkt, ohne den Zinssatz zu ändern.",
+        "biweeklyPaymentLabel": "Zweiwöchentliche Rate",
+        "interestSavedLabel": "Ersparte Zinsen",
+        "interestSavedNote": "Im Vergleich zum monatlichen Standardplan vermiedene Zinsen durch die zusätzliche Tilgung aus der 13. Jahresrate.",
+        "timeSavedLabel": "Ersparte Zeit",
+        "rowPaymentAmount": "Ratenhöhe",
+        "rowPaymentsPerYear": "Raten pro Jahr",
+        "rowPayoffTime": "Tilgungsdauer",
+        "rowTotalInterest": "Gesamtzinsen",
+        "rowTotalCost": "Gesamtkosten",
+        "standardLabel": "Standard monatlich",
+        "biweeklyLabel": "Beschleunigt zweiwöchentlich",
+        "columnPaymentNumber": "Zahlung Nr.",
+        "columnPayment": "Rate",
+        "pmiNote": "Nach diesem Plan könnte die PMI-Kündigung um Zahlung Nr. {period} beantragt werden und muss spätestens bis Zahlung Nr. {autoPeriod} automatisch beendet werden.",
+        "note": "Dies setzt voraus, dass der Kreditverwalter jede zweiwöchentliche Zahlung sofort bei Eingang auf Zins und Tilgung anrechnet. Manche Kreditverwalter halten Zahlungen stattdessen auf einem Verrechnungskonto zurück, bis ein voller Monatsbetrag zusammenkommt, wodurch dieser Vorteil entfällt — die Rücksprache mit dem Kreditverwalter klärt, ob dies hier zutrifft; derselbe Effekt lässt sich unabhängig davon auch erzielen, indem man jeder regulären Monatsrate einfach ein Zwölftel der Monatsrate hinzufügt."
       }
     },
     "crypto-converter": {
