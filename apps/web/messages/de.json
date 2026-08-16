@@ -2980,209 +2980,209 @@
       }
     },
     "world-time-converter": {
-      "title": "World Time Converter",
-      "description": "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",
+      "title": "Weltzeit-Umrechner",
+      "description": "Rechnen Sie die Uhrzeit zwischen zwei beliebigen Städten weltweit um, sehen Sie eine Live-Weltuhr für wichtige Zeitzonen und finden Sie die besten überschneidenden Besprechungszeiten.",
       "nav": {
         "tool": "Tool",
-        "worldClock": "World Clock",
-        "meetingPlanner": "Meeting Planner",
+        "worldClock": "Weltuhr",
+        "meetingPlanner": "Terminplaner",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Tool"
       },
       "aboveFold": {
-        "converterTitle": "Convert Time Between Cities",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "swapLabel": "Swap cities",
-        "pickerPlaceholder": "Select a city",
-        "pickerSearchPlaceholder": "Search any city…",
-        "pickerNoResults": "No cities found.",
-        "customTimeLabel": "Use a specific date and time instead of now",
-        "customTimeHint": "Enter the date and time as it would read on a clock in the \"From\" city.",
-        "resultTitle": "Converted Time",
-        "differenceLabel": "Time Difference",
-        "differenceHoursOnly": "{hours}h",
-        "differenceHoursMinutes": "{hours}h {minutes}m",
-        "sameTime": "Same time",
-        "dayNoteLabel": "Calendar Day",
-        "sameDay": "Same day",
-        "nextDay": "Next day",
-        "previousDay": "Previous day",
-        "utcOffsetLabel": "{city} UTC Offset",
+        "converterTitle": "Uhrzeit zwischen Städten umrechnen",
+        "fromLabel": "Von",
+        "toLabel": "In",
+        "swapLabel": "Städte tauschen",
+        "pickerPlaceholder": "Stadt auswählen",
+        "pickerSearchPlaceholder": "Beliebige Stadt suchen …",
+        "pickerNoResults": "Keine Städte gefunden.",
+        "customTimeLabel": "Bestimmtes Datum und Uhrzeit statt jetzt verwenden",
+        "customTimeHint": "Geben Sie Datum und Uhrzeit so ein, wie sie auf einer Uhr in der „Von\"-Stadt angezeigt würden.",
+        "resultTitle": "Umgerechnete Uhrzeit",
+        "differenceLabel": "Zeitunterschied",
+        "differenceHoursOnly": "{hours} Std.",
+        "differenceHoursMinutes": "{hours} Std. {minutes} Min.",
+        "sameTime": "Gleiche Uhrzeit",
+        "dayNoteLabel": "Kalendertag",
+        "sameDay": "Gleicher Tag",
+        "nextDay": "Nächster Tag",
+        "previousDay": "Vorheriger Tag",
+        "utcOffsetLabel": "UTC-Versatz {city}",
         "utcPrefix": "UTC",
-        "dayLabel": "Day",
-        "nightLabel": "Night",
-        "disclaimer": "Time zone rules and daylight saving dates are set by individual governments and can change with little notice. This tool relies on your browser's own time zone data (the IANA database), which is updated periodically — for time-critical appointments, double-check against an official source."
+        "dayLabel": "Tag",
+        "nightLabel": "Nacht",
+        "disclaimer": "Zeitzonenregeln und Sommerzeit-Termine werden von den jeweiligen Regierungen festgelegt und können sich kurzfristig ändern. Dieses Tool nutzt die Zeitzonendaten Ihres Browsers (die IANA-Datenbank), die regelmäßig aktualisiert wird – bei zeitkritischen Terminen prüfen Sie zur Sicherheit eine offizielle Quelle."
       },
       "worldClock": {
-        "title": "World Clock",
-        "intro": "The current time right now in major cities across every time zone, updating automatically.",
+        "title": "Weltuhr",
+        "intro": "Die aktuelle Uhrzeit in wichtigen Städten aller Zeitzonen, automatisch aktualisiert.",
         "utcPrefix": "UTC"
       },
       "meetingPlanner": {
-        "title": "Best Time to Meet",
-        "intro": "The hours, in {from} time, that fall within standard business hours (9 AM–5 PM) in both {from} and {to}.",
-        "overlapFoundLabel": "Overlapping business hours:",
-        "overlapNote": "Times shown in {from} local time, based on a {start} AM–{end}:00 business day in both cities.",
-        "noOverlap": "There's no hour where standard business hours ({start}:00–{end}:00) overlap between these two cities — one city's working day ends before the other's begins."
+        "title": "Beste Besprechungszeit",
+        "intro": "Die Stunden, in {from}-Zeit, die in {from} und {to} beide innerhalb der üblichen Geschäftszeiten (9–17 Uhr) liegen.",
+        "overlapFoundLabel": "Überschneidende Geschäftszeiten:",
+        "overlapNote": "Uhrzeiten in {from}-Ortszeit angegeben, basierend auf einem Geschäftstag von {start}–{end} Uhr in beiden Städten.",
+        "noOverlap": "Es gibt keine Stunde, in der sich die üblichen Geschäftszeiten ({start}:00–{end}:00) dieser beiden Städte überschneiden – der Arbeitstag der einen Stadt endet, bevor der der anderen beginnt."
       },
       "education": {
         "intro": {
-          "title": "How Time Zones Work",
-          "paragraph1": "The Earth rotates once every 24 hours, so different longitudes face the sun at different moments — noon in one place is midnight on the opposite side of the planet. Rather than every location keeping its own precise solar time, the world is divided into time zones: bands that share a single, standardized offset from Coordinated Universal Time (UTC), the modern reference successor to Greenwich Mean Time (GMT).",
-          "paragraph2": "This tool computes every conversion locally, using the Intl.DateTimeFormat API built into every modern browser — the same IANA time zone database that powers phones, servers, and operating systems worldwide, with no external service, no network request, and no usage limit.",
+          "title": "Wie Zeitzonen funktionieren",
+          "paragraph1": "Die Erde dreht sich einmal alle 24 Stunden, sodass unterschiedliche Längengrade zu unterschiedlichen Zeitpunkten der Sonne zugewandt sind – Mittag an einem Ort ist Mitternacht auf der gegenüberliegenden Seite des Planeten. Statt dass jeder Ort seine eigene präzise Sonnenzeit führt, ist die Welt in Zeitzonen unterteilt: Bänder, die sich einen einzigen, standardisierten Versatz zur koordinierten Weltzeit (UTC) teilen, dem modernen Referenznachfolger der Greenwich Mean Time (GMT).",
+          "paragraph2": "Dieses Tool berechnet jede Umrechnung lokal, mithilfe der in jeden modernen Browser integrierten Intl.DateTimeFormat-API – derselben IANA-Zeitzonendatenbank, die Telefone, Server und Betriebssysteme weltweit antreibt, ohne externen Dienst, ohne Netzwerkanfrage und ohne Nutzungslimit.",
           "diagram": {
-            "sameInstant": "The same instant, everywhere",
-            "caption": "Four clocks showing the same absolute moment as it reads on a local clock in four different time zones."
+            "sameInstant": "Derselbe Moment, überall",
+            "caption": "Vier Uhren, die denselben absoluten Moment zeigen, wie er auf einer Ortsuhr in vier verschiedenen Zeitzonen abzulesen ist."
           }
         },
         "comparison": {
-          "title": "Common Time Zones at a Glance",
-          "intro": "Standard UTC offsets for widely referenced time zones. Zones that observe daylight saving time shift by one hour for part of the year.",
+          "title": "Gängige Zeitzonen auf einen Blick",
+          "intro": "Standard-UTC-Versätze für häufig referenzierte Zeitzonen. Zonen mit Sommerzeit verschieben sich für einen Teil des Jahres um eine Stunde.",
           "columnName": "Zone / Region",
-          "columnOffset": "Standard UTC Offset",
-          "columnDst": "Observes DST?",
+          "columnOffset": "Standard-UTC-Versatz",
+          "columnDst": "Sommerzeit?",
           "rows": [
             {
               "name": "UTC / GMT",
               "offset": "+00:00",
-              "dst": "No"
+              "dst": "Nein"
             },
             {
-              "name": "US Eastern (New York)",
+              "name": "US-Ostküste (New York)",
               "offset": "−05:00 (EST) / −04:00 (EDT)",
-              "dst": "Yes"
+              "dst": "Ja"
             },
             {
-              "name": "US Pacific (Los Angeles)",
+              "name": "US-Westküste (Los Angeles)",
               "offset": "−08:00 (PST) / −07:00 (PDT)",
-              "dst": "Yes"
+              "dst": "Ja"
             },
             {
-              "name": "Central Europe (Paris, Berlin)",
-              "offset": "+01:00 (CET) / +02:00 (CEST)",
-              "dst": "Yes"
+              "name": "Mitteleuropa (Paris, Berlin)",
+              "offset": "+01:00 (MEZ) / +02:00 (MESZ)",
+              "dst": "Ja"
             },
             {
-              "name": "Arabia Standard Time (Riyadh, Kuwait)",
+              "name": "Arabische Standardzeit (Riad, Kuwait)",
               "offset": "+03:00",
-              "dst": "No"
+              "dst": "Nein"
             },
             {
-              "name": "India Standard Time",
+              "name": "Indische Standardzeit",
               "offset": "+05:30",
-              "dst": "No"
+              "dst": "Nein"
             },
             {
-              "name": "China Standard Time",
+              "name": "Chinesische Standardzeit",
               "offset": "+08:00",
-              "dst": "No"
+              "dst": "Nein"
             },
             {
-              "name": "Japan Standard Time",
+              "name": "Japanische Standardzeit",
               "offset": "+09:00",
-              "dst": "No"
+              "dst": "Nein"
             },
             {
-              "name": "Australian Eastern (Sydney)",
+              "name": "Australische Ostküste (Sydney)",
               "offset": "+10:00 (AEST) / +11:00 (AEDT)",
-              "dst": "Yes"
+              "dst": "Ja"
             }
           ]
         },
         "dst": {
-          "title": "Daylight Saving Time: Why Clocks Change",
-          "paragraph1": "Daylight saving time (DST) shifts clocks forward by one hour in spring and back in autumn, aligning waking hours more closely with daylight during the months when days are longer. It was first proposed seriously by New Zealand entomologist George Vernon Hudson in 1895 and by British builder William Willett in 1907, and was first adopted at a national scale by Germany and Austria-Hungary in 1916, during World War I, as a fuel-saving measure.",
-          "paragraph2": "Its use today is far from universal: most of Asia, Africa, and an increasing number of countries no longer observe it, while the European Union and several US states have active proposals to abolish the twice-yearly clock change and adopt a single, permanent offset instead. Because it's a political decision, not an astronomical one, this tool always reflects whatever rule is currently in effect for a given zone via the browser's own, regularly updated time zone data — never a hardcoded assumption."
+          "title": "Sommerzeit: Warum sich die Uhren ändern",
+          "paragraph1": "Die Sommerzeit stellt die Uhren im Frühjahr eine Stunde vor und im Herbst wieder zurück, um die Wachstunden während der Monate mit längeren Tagen enger an das Tageslicht anzugleichen. Sie wurde erstmals ernsthaft 1895 vom neuseeländischen Entomologen George Vernon Hudson und 1907 vom britischen Bauunternehmer William Willett vorgeschlagen und erstmals 1916, während des Ersten Weltkriegs, von Deutschland und Österreich-Ungarn im nationalen Maßstab als Brennstoffsparmaßnahme eingeführt.",
+          "paragraph2": "Ihre Anwendung ist heute alles andere als universell: Der Großteil Asiens, Afrikas und eine wachsende Zahl von Ländern wendet sie nicht mehr an, während die Europäische Union und mehrere US-Bundesstaaten aktive Vorschläge haben, die zweimal jährliche Uhrumstellung abzuschaffen und stattdessen einen einzigen, dauerhaften Versatz einzuführen. Da es sich um eine politische, nicht um eine astronomische Entscheidung handelt, bildet dieses Tool immer die gerade gültige Regel für eine bestimmte Zone über die eigenen, regelmäßig aktualisierten Zeitzonendaten des Browsers ab – nie eine fest einprogrammierte Annahme."
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Is a time zone the same as a UTC offset?",
-              "answer": "Not exactly. A UTC offset is just a number (e.g., +03:00); a time zone is a named region (e.g., Asia/Riyadh) that maps to a specific offset, or a sequence of offsets over the year if it observes daylight saving time. Two time zones can share the same offset today and diverge on a DST transition date."
+              "question": "Ist eine Zeitzone dasselbe wie ein UTC-Versatz?",
+              "answer": "Nicht ganz. Ein UTC-Versatz ist nur eine Zahl (z. B. +03:00); eine Zeitzone ist eine benannte Region (z. B. Asia/Riyadh), die auf einen bestimmten Versatz abgebildet wird, oder auf eine Abfolge von Versätzen über das Jahr, wenn Sommerzeit gilt. Zwei Zeitzonen können heute denselben Versatz teilen und an einem Sommerzeit-Umstellungstermin auseinanderdriften."
             },
             {
-              "question": "Why do some time zones use a 30- or 45-minute offset?",
-              "answer": "A handful of countries chose an offset that isn't a whole hour from UTC when they set their standard time — India (UTC+5:30) and Nepal (UTC+5:45) are the best-known examples — usually to better match the country's actual longitude or to align with a historical local mean time."
+              "question": "Warum verwenden manche Zeitzonen einen 30- oder 45-Minuten-Versatz?",
+              "answer": "Eine Handvoll Länder haben bei der Festlegung ihrer Standardzeit einen Versatz gewählt, der keine volle Stunde von UTC entfernt ist – Indien (UTC+5:30) und Nepal (UTC+5:45) sind die bekanntesten Beispiele –, meist um den tatsächlichen Längengrad des Landes besser abzubilden oder sich an eine historische lokale Sonnenzeit anzugleichen."
             },
             {
-              "question": "What is UTC, and how is it different from GMT?",
-              "answer": "UTC (Coordinated Universal Time) is the modern time standard, kept by atomic clocks and coordinated internationally. GMT (Greenwich Mean Time) is the older, astronomically defined standard it replaced. In practice, the two are within a fraction of a second of each other and are used interchangeably for most everyday purposes, including this tool."
+              "question": "Was ist UTC, und wie unterscheidet es sich von GMT?",
+              "answer": "UTC (koordinierte Weltzeit) ist der moderne Zeitstandard, gehalten von Atomuhren und international koordiniert. GMT (Greenwich Mean Time) ist der ältere, astronomisch definierte Standard, den es ersetzt hat. In der Praxis liegen beide innerhalb eines Sekundenbruchteils voneinander entfernt und werden für die meisten Alltagszwecke, einschließlich dieses Tools, synonym verwendet."
             },
             {
-              "question": "Why does this tool only let me search from a fixed list of cities?",
-              "answer": "Every listed city maps to a specific IANA time zone identifier — the actual unit your browser understands. Many cities within the same country share one zone (all of mainland China, for example, uses a single Beijing-based zone), so the list represents zones through their most recognizable city rather than listing every city individually."
+              "question": "Warum lässt mich dieses Tool nur aus einer festen Liste von Städten suchen?",
+              "answer": "Jede aufgeführte Stadt wird auf eine bestimmte IANA-Zeitzonenkennung abgebildet – die eigentliche Einheit, die Ihr Browser versteht. Viele Städte innerhalb desselben Landes teilen sich eine Zone (ganz Festlandchina zum Beispiel nutzt eine einzige, auf Peking basierende Zone), daher repräsentiert die Liste Zonen durch ihre bekannteste Stadt statt jede Stadt einzeln aufzulisten."
             },
             {
-              "question": "Can the time difference between two cities change during the year?",
-              "answer": "Yes, whenever the two cities don't observe daylight saving time on the same schedule — or one observes it and the other doesn't. The gap between London and New York, for instance, is 5 hours most of the year, but briefly narrows to 4 hours for a few weeks each spring and autumn while only one of them has shifted its clocks."
+              "question": "Kann sich der Zeitunterschied zwischen zwei Städten im Laufe des Jahres ändern?",
+              "answer": "Ja, immer wenn die beiden Städte die Sommerzeit nicht nach demselben Zeitplan anwenden – oder eine sie anwendet und die andere nicht. Der Abstand zwischen London und New York beträgt beispielsweise die meiste Zeit des Jahres 5 Stunden, verengt sich aber für einige Wochen im Frühjahr und Herbst kurzzeitig auf 4 Stunden, während nur eine der beiden Städte ihre Uhren bereits umgestellt hat."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind the Concept",
+          "title": "Hinter dem Konzept",
           "history": {
-            "title": "The Origin of Standardized Time Zones",
-            "paragraph": "Before railways, every town kept its own local solar time, which was harmless when travel was slow but caused real scheduling chaos once trains could cross multiple time meridians in a single day. Scottish-Canadian engineer Sandford Fleming proposed a worldwide system of standard time zones in 1878-79, built around a single global reference meridian. That proposal was formalized at the International Meridian Conference held in Washington, D.C. in October 1884, which selected the Greenwich meridian in London as the universal reference point (0°) from which all other zones would be measured."
+            "title": "Der Ursprung standardisierter Zeitzonen",
+            "paragraph": "Vor den Eisenbahnen führte jede Stadt ihre eigene lokale Sonnenzeit, was unproblematisch war, solange das Reisen langsam war, aber echtes Terminchaos verursachte, sobald Züge mehrere Zeitmeridiane an einem einzigen Tag überqueren konnten. Der schottisch-kanadische Ingenieur Sandford Fleming schlug 1878-79 ein weltweites System standardisierter Zeitzonen vor, aufgebaut um einen einzigen globalen Referenzmeridian. Dieser Vorschlag wurde bei der im Oktober 1884 in Washington, D.C. abgehaltenen International Meridian Conference formalisiert, die den Greenwich-Meridian in London als universellen Bezugspunkt (0°) auswählte, von dem aus alle anderen Zonen gemessen werden."
           },
           "equipment": {
-            "title": "The Technical Standards Behind It",
-            "paragraph": "Modern civil time is kept in practice by atomic clocks, which measure time via the extremely stable vibration frequency of cesium atoms, accurate to within about one second every 100 million years. The globally coordinated result, UTC, is maintained by the International Bureau of Weights and Measures (BIPM) in Paris. Software applies UTC to a specific location using the IANA Time Zone Database (tz database) — the record of every zone's historical and current offset and DST rules that browsers, operating systems, and servers download and use, and which this tool reads directly through Intl.DateTimeFormat."
+            "title": "Die technischen Standards dahinter",
+            "paragraph": "Die moderne bürgerliche Zeit wird in der Praxis von Atomuhren gehalten, die die Zeit über die extrem stabile Schwingungsfrequenz von Cäsiumatomen messen, genau auf etwa eine Sekunde alle 100 Millionen Jahre. Das global koordinierte Ergebnis, UTC, wird vom Internationalen Büro für Maß und Gewicht (BIPM) in Paris gepflegt. Software wendet UTC über die IANA-Zeitzonendatenbank (tz-Datenbank) auf einen bestimmten Ort an – das Verzeichnis der historischen und aktuellen Versätze und Sommerzeitregeln jeder Zone, das Browser, Betriebssysteme und Server herunterladen und nutzen, und das dieses Tool direkt über Intl.DateTimeFormat ausliest."
           },
           "modernDevelopments": {
-            "title": "Where Things Stand Today",
-            "paragraph": "Political debate over daylight saving time has intensified in recent years: the European Parliament voted in 2019 to end the mandatory clock change across EU member states, though implementation has repeatedly stalled over disagreement on which permanent offset each country should keep; several individual US states have passed conditional legislation to adopt permanent daylight time pending federal approval. Meanwhile, the IANA tz database itself is updated several times a year as governments change zone boundaries or DST rules — exactly why software that reads it live, rather than relying on a fixed table, stays accurate without needing an update of its own."
+            "title": "Wo die Dinge heute stehen",
+            "paragraph": "Die politische Debatte über die Sommerzeit hat sich in den letzten Jahren verschärft: Das Europäische Parlament stimmte 2019 dafür, die verpflichtende Uhrumstellung in den EU-Mitgliedstaaten zu beenden, wobei die Umsetzung wiederholt an Uneinigkeit darüber gescheitert ist, welchen dauerhaften Versatz jedes Land beibehalten soll; mehrere einzelne US-Bundesstaaten haben bedingte Gesetze verabschiedet, um vorbehaltlich einer Bundesgenehmigung dauerhaft die Sommerzeit einzuführen. Unterdessen wird die IANA-tz-Datenbank selbst mehrmals im Jahr aktualisiert, wenn Regierungen Zonengrenzen oder Sommerzeitregeln ändern – genau deshalb bleibt Software, die sie live ausliest, statt sich auf eine feste Tabelle zu verlassen, korrekt, ohne ein eigenes Update zu benötigen."
           },
           "academicPath": {
-            "title": "Related Academic Path",
-            "intro": "Time zones sit within physical geography — the study of how the Earth's rotation, longitude, and human political boundaries interact. The following geography programs are ranked among the world's best by the QS World University Rankings by Subject 2026.",
+            "title": "Verwandter akademischer Werdegang",
+            "intro": "Zeitzonen gehören zur physischen Geografie – dem Studium, wie die Erdrotation, der Längengrad und menschliche politische Grenzen zusammenwirken. Die folgenden Geografie-Studiengänge zählen laut QS World University Rankings by Subject 2026 zu den weltweit besten.",
             "universities": [
               {
-                "name": "University of Oxford, United Kingdom",
-                "note": "Ranked #1 worldwide for Geography in the QS World University Rankings by Subject 2026, for the 16th consecutive year.",
-                "online": "The on-campus Geography degree is not offered fully online; Oxford's Department for Continuing Education offers separate short online courses.",
+                "name": "University of Oxford, Vereinigtes Königreich",
+                "note": "Zum 16. Jahr in Folge weltweit auf Platz 1 für Geography im QS World University Rankings by Subject 2026.",
+                "online": "Der campusbasierte Geography-Abschluss wird nicht vollständig online angeboten; Oxfords Department for Continuing Education bietet separate kurze Online-Kurse an.",
                 "url": "https://www.geog.ox.ac.uk/"
               },
               {
-                "name": "London School of Economics and Political Science (LSE), United Kingdom",
-                "note": "Ranked #2 worldwide for Geography in the QS World University Rankings by Subject 2026.",
-                "online": "The on-campus Geography and Environment degree is not offered fully online.",
+                "name": "London School of Economics and Political Science (LSE), Vereinigtes Königreich",
+                "note": "Weltweit auf Platz 2 für Geography im QS World University Rankings by Subject 2026.",
+                "online": "Der campusbasierte Abschluss Geography and Environment wird nicht vollständig online angeboten.",
                 "url": "https://www.lse.ac.uk/geography-and-environment"
               },
               {
-                "name": "University of Cambridge, United Kingdom",
-                "note": "Ranked #3 worldwide for Geography in the QS World University Rankings by Subject 2026.",
-                "online": "The on-campus Geography degree is not offered fully online.",
+                "name": "University of Cambridge, Vereinigtes Königreich",
+                "note": "Weltweit auf Platz 3 für Geography im QS World University Rankings by Subject 2026.",
+                "online": "Der campusbasierte Geography-Abschluss wird nicht vollständig online angeboten.",
                 "url": "https://www.geog.cam.ac.uk/"
               },
               {
-                "name": "National University of Singapore (NUS), Singapore",
-                "note": "Ranked among the world's top 5 for Geography in the QS World University Rankings by Subject 2026, and first in Asia for the subject.",
-                "online": "The on-campus Geography degree is not offered fully online; NUS offers separate online continuing-education courses through NUS SCALE.",
+                "name": "National University of Singapore (NUS), Singapur",
+                "note": "Zählt im QS World University Rankings by Subject 2026 zu den weltweiten Top 5 für Geography und ist die Nummer 1 in Asien für dieses Fach.",
+                "online": "Der campusbasierte Geography-Abschluss wird nicht vollständig online angeboten; die NUS bietet separate Weiterbildungskurse über NUS SCALE an.",
                 "url": "https://fass.nus.edu.sg/geog/"
               },
               {
-                "name": "University College London (UCL), United Kingdom",
-                "note": "Ranked among the world's top 5 for Geography in the QS World University Rankings by Subject 2026.",
-                "online": "The on-campus Geography degree is not offered fully online.",
+                "name": "University College London (UCL), Vereinigtes Königreich",
+                "note": "Zählt im QS World University Rankings by Subject 2026 zu den weltweiten Top 5 für Geography.",
+                "online": "Der campusbasierte Geography-Abschluss wird nicht vollständig online angeboten.",
                 "url": "https://www.geog.ucl.ac.uk/"
               },
               {
-                "name": "King Saud University (KSU), Saudi Arabia",
-                "note": "No Arab university currently appears in the QS World University Rankings by Subject 2026 for Geography specifically. King Saud University is included instead on the strength of its real, active Department of Geography (College of Humanities and Social Sciences) and its overall standing — 143rd globally and 4th in the Arab region in QS's 2026 overall rankings.",
-                "online": "The on-campus Geography degree is offered on-campus; the program's online-availability details are not published on the department's official page.",
+                "name": "King Saud University (KSU), Saudi-Arabien",
+                "note": "Derzeit erscheint keine arabische Universität im QS World University Rankings by Subject 2026 speziell für Geography. King Saud University wird stattdessen aufgrund ihrer realen, aktiven Fakultät für Geographie (College of Humanities and Social Sciences) und ihrer Gesamtplatzierung aufgeführt – weltweit Platz 143 und Platz 4 in der arabischen Region im QS-Gesamtranking 2026.",
+                "online": "Der Geography-Abschluss wird auf dem Campus angeboten; Details zur Online-Verfügbarkeit des Programms werden auf der offiziellen Seite der Fakultät nicht veröffentlicht.",
                 "url": "https://ksu.edu.sa/en"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "Wissenschaftliche Quellen",
           "citation": "IANA Time Zone Database (tz database).",
-          "note": "The official, continuously maintained record of every time zone's historical and current UTC offset and daylight-saving rules, backed organizationally by ICANN. This is the exact data source Intl.DateTimeFormat — and this tool — reads from.",
+          "note": "Das offizielle, kontinuierlich gepflegte Verzeichnis des historischen und aktuellen UTC-Versatzes sowie der Sommerzeitregeln jeder Zeitzone, organisatorisch von der ICANN getragen. Dies ist genau die Datenquelle, aus der Intl.DateTimeFormat – und dieses Tool – liest.",
           "url": "https://www.iana.org/time-zones",
-          "readOriginal": "Visit the Official Database"
+          "readOriginal": "Offizielle Datenbank besuchen"
         }
       }
     },
