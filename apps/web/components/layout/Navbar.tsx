@@ -10,7 +10,6 @@ export default function Navbar() {
     { href: "/", label: t("home"), external: false },
     { href: "#popular-tools", label: t("tools"), external: true },
     { href: "#categories", label: t("categories"), external: true },
-    { href: "/categories/ai-tools", label: t("aiTools"), external: false },
   ];
 
   return (

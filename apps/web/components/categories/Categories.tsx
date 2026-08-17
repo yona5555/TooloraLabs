@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import {
-  Bot,
   Calculator,
   Code2,
   FileText,
@@ -17,7 +16,6 @@ import CategoryCard from "./CategoryCard";
 const icons = {
   calculator: <Calculator size={32} strokeWidth={2} />,
   refresh: <RefreshCw size={32} strokeWidth={2} />,
-  bot: <Bot size={32} strokeWidth={2} />,
   code: <Code2 size={32} strokeWidth={2} />,
   text: <FileText size={32} strokeWidth={2} />,
   folder: <Folder size={32} strokeWidth={2} />,

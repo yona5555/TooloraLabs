@@ -19,12 +19,6 @@ export const categories: Category[] = [
     icon: "refresh",
   },
   {
-    slug: "ai-tools",
-    title: "AI Tools",
-    description: "AI-powered productivity tools.",
-    icon: "bot",
-  },
-  {
     slug: "developer-tools",
     title: "Developer Tools",
     description: "Utilities for developers.",
