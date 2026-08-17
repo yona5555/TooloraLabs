@@ -5396,160 +5396,188 @@
       }
     },
     "csv-json-converter": {
-      "title": "CSV ↔ JSON Converter",
-      "description": "Convert CSV to JSON or JSON back to CSV, with delimiter auto-detection, an optional header row, and automatic flattening of nested objects.",
+      "title": "CSV ↔ JSON कन्वर्टर",
+      "description": "CSV को JSON में या JSON को वापस CSV में कन्वर्ट करें, डिलिमिटर के ऑटो-डिटेक्शन, वैकल्पिक हेडर रो, और नेस्टेड ऑब्जेक्ट के अपने-आप फ़्लैटनिंग के साथ।",
       "nav": {
-        "tool": "Converter",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कन्वर्टर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Result",
-        "placeholder": "Enter CSV or JSON on the left to see the converted result here.",
+        "resultTitle": "परिणाम",
+        "placeholder": "यहाँ कन्वर्ट किया गया परिणाम देखने के लिए बाईं ओर CSV या JSON दर्ज करें।",
         "comparison": {
-          "title": "CSV vs. JSON",
-          "intro": "Neither format is objectively better — they're built for different shapes of data.",
+          "title": "CSV बनाम JSON",
+          "intro": "कोई भी फ़ॉर्मेट वस्तुनिष्ठ रूप से बेहतर नहीं है — दोनों अलग-अलग तरह के डेटा के लिए बने हैं।",
           "rows": [
-            { "aspect": "Best for", "csv": "Flat, tabular data — spreadsheets, database exports.", "json": "Nested or hierarchical data — API responses, config files." },
-            { "aspect": "File size", "csv": "Smaller for the same tabular data — no repeated key names.", "json": "Larger — every object repeats its own keys." },
-            { "aspect": "Nested data", "csv": "No native support — must be flattened or stringified.", "json": "Native support — objects and arrays nest freely." },
-            { "aspect": "Human editing", "csv": "Easy in a spreadsheet program.", "json": "Easy in a text/code editor; error-prone by hand at scale." }
+            {
+              "aspect": "किसके लिए सबसे अच्छा",
+              "csv": "सपाट, टेबुलर डेटा — स्प्रेडशीट, डेटाबेस एक्सपोर्ट।",
+              "json": "नेस्टेड या पदानुक्रमित डेटा — API रिस्पॉन्स, कॉन्फ़िग फ़ाइलें।"
+            },
+            {
+              "aspect": "फ़ाइल साइज़",
+              "csv": "समान टेबुलर डेटा के लिए छोटा — दोहराए गए की नाम नहीं।",
+              "json": "बड़ा — हर ऑब्जेक्ट अपनी की दोहराता है।"
+            },
+            {
+              "aspect": "नेस्टेड डेटा",
+              "csv": "कोई नेटिव सपोर्ट नहीं — फ़्लैट या स्ट्रिंगिफ़ाई करना ज़रूरी।",
+              "json": "नेटिव सपोर्ट — ऑब्जेक्ट और ऐरे स्वतंत्र रूप से नेस्ट हो सकते हैं।"
+            },
+            {
+              "aspect": "मानवीय एडिटिंग",
+              "csv": "स्प्रेडशीट प्रोग्राम में आसान।",
+              "json": "टेक्स्ट/कोड एडिटर में आसान; बड़े पैमाने पर हाथ से ग़लती-प्रवण।"
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Input",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Paste CSV or JSON data here...",
-        "csvPlaceholder": "Paste CSV data here...",
-        "jsonPlaceholder": "Paste a JSON array of objects here...",
+        "inputTitle": "इनपुट",
+        "inputLabel": "इनपुट",
+        "inputPlaceholder": "यहाँ CSV या JSON डेटा पेस्ट करें...",
+        "csvPlaceholder": "यहाँ CSV डेटा पेस्ट करें...",
+        "jsonPlaceholder": "यहाँ ऑब्जेक्ट का एक JSON ऐरे पेस्ट करें...",
         "csvToJson": "CSV → JSON",
         "jsonToCsv": "JSON → CSV",
-        "delimiterLabel": "Delimiter",
-        "delimiterComma": "Comma (,)",
-        "delimiterSemicolon": "Semicolon (;)",
-        "delimiterTab": "Tab",
-        "delimiterPipe": "Pipe (|)",
-        "delimiterAuto": "Auto-detect",
-        "hasHeaderLabel": "First row is a header",
-        "outputLabel": "Result",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "delimiterLabel": "डिलिमिटर",
+        "delimiterComma": "कॉमा (,)",
+        "delimiterSemicolon": "सेमीकोलन (;)",
+        "delimiterTab": "टैब",
+        "delimiterPipe": "पाइप (|)",
+        "delimiterAuto": "ऑटो-डिटेक्ट",
+        "hasHeaderLabel": "पहली रो एक हेडर है",
+        "outputLabel": "परिणाम",
+        "copy": "कॉपी करें",
+        "copied": "कॉपी हो गया!"
       },
       "errors": {
-        "required": "Please enter some data.",
-        "invalidJson": "This is not valid JSON.",
-        "expectedArray": "The JSON must be an array of objects."
+        "required": "कृपया कुछ डेटा दर्ज करें।",
+        "invalidJson": "यह मान्य JSON नहीं है।",
+        "expectedArray": "JSON को ऑब्जेक्ट का एक ऐरे होना चाहिए।"
       },
       "education": {
         "intro": {
-          "title": "How CSV and JSON Actually Relate",
-          "paragraph1": "CSV and JSON solve the same basic problem — representing a list of records — with opposite structural assumptions. CSV assumes every record has exactly the same flat set of fields, so it only needs to write the field names once, in a header row, then just the values afterward. JSON makes no such assumption: every object carries its own keys, which is what lets it represent records with different shapes, or fields that are themselves nested objects and arrays, at the cost of repeating those key names in every single record.",
-          "paragraph2": "That structural gap is exactly why CSV → JSON is mechanical (each row becomes an object, each header becomes a key) while JSON → CSV requires real decisions this tool makes automatically: nested objects get flattened into dot-notation columns (address.city, address.zip), and arrays get serialized as a single JSON-text cell, since CSV has no native way to represent a list inside a list.",
+          "title": "CSV और JSON असल में कैसे जुड़े हैं",
+          "paragraph1": "CSV और JSON एक ही बुनियादी समस्या हल करते हैं — रिकॉर्ड की एक सूची दर्शाना — लेकिन विपरीत संरचनात्मक धारणाओं के साथ। CSV मानता है कि हर रिकॉर्ड में बिल्कुल एक जैसा सपाट फ़ील्ड सेट होता है, इसलिए इसे फ़ील्ड नाम केवल एक बार, एक हेडर रो में लिखने होते हैं, और बाद में केवल मान। JSON ऐसी कोई धारणा नहीं बनाता: हर ऑब्जेक्ट अपनी ख़ुद की की रखता है, जो इसे अलग-अलग आकार वाले रिकॉर्ड, या ख़ुद नेस्टेड ऑब्जेक्ट और ऐरे वाले फ़ील्ड दर्शाने देता है, बदले में हर एक रिकॉर्ड में उन की नामों को दोहराने की क़ीमत पर।",
+          "paragraph2": "यही संरचनात्मक अंतर ठीक वह वजह है कि CSV → JSON यांत्रिक है (हर रो एक ऑब्जेक्ट बन जाती है, हर हेडर एक की बन जाता है) जबकि JSON → CSV को असली फ़ैसलों की ज़रूरत होती है जो यह टूल अपने-आप ले लेता है: नेस्टेड ऑब्जेक्ट को डॉट-नोटेशन कॉलम में फ़्लैट कर दिया जाता है (address.city, address.zip), और ऐरे को एक ही JSON-टेक्स्ट सेल के रूप में सीरियलाइज़ किया जाता है, क्योंकि CSV के पास किसी सूची के भीतर सूची दर्शाने का कोई नेटिव तरीक़ा नहीं है।",
           "diagram": {
-            "caption": "A CSV header row becomes JSON object keys; each subsequent CSV row becomes one JSON object in an array."
+            "caption": "एक CSV हेडर रो JSON ऑब्जेक्ट की बन जाती है; उसके बाद हर CSV रो ऐरे में एक JSON ऑब्जेक्ट बन जाती है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four examples showing exactly how this tool handles delimiters, headers, and nested data.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "चार उदाहरण दिखाते हैं कि यह टूल डिलिमिटर, हेडर, और नेस्टेड डेटा को ठीक कैसे संभालता है।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "CSV \"name,age / Alice,30\" converted to JSON", "result": "[{\"name\":\"Alice\",\"age\":\"30\"}]" },
-            { "scenario": "CSV \"name;age / Alice;30\" with auto-detect delimiter", "result": "Detects \";\" and parses correctly" },
-            { "scenario": "JSON with a nested address object converted to CSV", "result": "Columns: name, address.city" },
-            { "scenario": "JSON with a tags array converted to CSV", "result": "The tags column holds a JSON-text cell, e.g. [\"a\",\"b\"]" }
+            {
+              "scenario": "CSV \"name,age / Alice,30\" को JSON में कन्वर्ट किया गया",
+              "result": "[{\"name\":\"Alice\",\"age\":\"30\"}]"
+            },
+            {
+              "scenario": "CSV \"name;age / Alice;30\" ऑटो-डिटेक्ट डिलिमिटर के साथ",
+              "result": "\";\" डिटेक्ट करता है और सही तरीक़े से पार्स करता है"
+            },
+            {
+              "scenario": "एक नेस्टेड address ऑब्जेक्ट वाला JSON CSV में कन्वर्ट किया गया",
+              "result": "कॉलम: name, address.city"
+            },
+            {
+              "scenario": "एक tags ऐरे वाला JSON CSV में कन्वर्ट किया गया",
+              "result": "tags कॉलम में एक JSON-टेक्स्ट सेल होता है, जैसे [\"a\",\"b\"]"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why would I choose CSV over JSON, or the other way around?",
-              "answer": "CSV wins for flat, tabular data — a spreadsheet export, a list of contacts — because it's smaller and every spreadsheet program opens it natively. JSON wins the moment your data has real structure — nested objects, fields that are themselves lists — because CSV simply has no native way to represent that without flattening or stringifying it, which this tool does automatically but always loses a little structural clarity in the process."
+              "question": "मुझे CSV को JSON पर, या इसका उल्टा, क्यों चुनना चाहिए?",
+              "answer": "सपाट, टेबुलर डेटा — स्प्रेडशीट एक्सपोर्ट, संपर्कों की सूची — के लिए CSV जीतता है, क्योंकि यह छोटा है और हर स्प्रेडशीट प्रोग्राम इसे नेटिव रूप से खोलता है। जिस पल आपके डेटा में असली संरचना होती है — नेस्टेड ऑब्जेक्ट, ख़ुद सूची वाले फ़ील्ड — तो JSON जीतता है, क्योंकि CSV के पास बिना फ़्लैट या स्ट्रिंगिफ़ाई किए उसे दर्शाने का कोई नेटिव तरीक़ा नहीं है, जो यह टूल अपने-आप करता है लेकिन इस प्रक्रिया में हमेशा थोड़ी संरचनात्मक स्पष्टता खो देता है।"
             },
             {
-              "question": "What happens to nested objects when converting JSON to CSV?",
-              "answer": "They get flattened into dot-notation column names — a nested { \"address\": { \"city\": \"Cairo\" } } becomes a column literally named address.city. This keeps every value in its own cell, at the cost of a less human-friendly header row for deeply nested data."
+              "question": "JSON को CSV में कन्वर्ट करते समय नेस्टेड ऑब्जेक्ट का क्या होता है?",
+              "answer": "वे डॉट-नोटेशन कॉलम नामों में फ़्लैट हो जाते हैं — एक नेस्टेड { \"address\": { \"city\": \"Cairo\" } } एक कॉलम बन जाता है जिसका नाम शाब्दिक रूप से address.city होता है। इससे हर मान अपने ख़ुद के सेल में रहता है, बदले में गहराई से नेस्टेड डेटा के लिए कम इंसान-अनुकूल हेडर रो की क़ीमत पर।"
             },
             {
-              "question": "What happens to arrays when converting JSON to CSV?",
-              "answer": "Unlike nested objects, arrays get serialized as JSON text inside a single cell — CSV has no native concept of \"a list inside a list,\" so there's no clean tabular alternative. The result round-trips correctly (converting back to JSON restores the original array), but isn't especially readable in a spreadsheet."
+              "question": "JSON को CSV में कन्वर्ट करते समय ऐरे का क्या होता है?",
+              "answer": "नेस्टेड ऑब्जेक्ट के विपरीत, ऐरे को एक ही सेल के भीतर JSON टेक्स्ट के रूप में सीरियलाइज़ किया जाता है — CSV में \"सूची के भीतर सूची\" जैसी कोई नेटिव अवधारणा नहीं है, इसलिए इसका कोई साफ़-सुथरा टेबुलर विकल्प नहीं है। परिणाम सही तरीक़े से राउंड-ट्रिप करता है (वापस JSON में कन्वर्ट करने पर मूल ऐरे बहाल हो जाता है), लेकिन स्प्रेडशीट में विशेष रूप से पढ़ने योग्य नहीं होता।"
             },
             {
-              "question": "Why does auto-detecting the delimiter matter?",
-              "answer": "Comma-separated is the default, but it's genuinely not universal: many European locales use a comma as the decimal separator, so spreadsheet software there exports CSV with semicolons instead to avoid ambiguity, and tab- or pipe-delimited exports are common from certain databases and legacy systems. Auto-detect looks at the first line and picks whichever candidate delimiter appears most often."
+              "question": "डिलिमिटर का ऑटो-डिटेक्शन क्यों मायने रखता है?",
+              "answer": "कॉमा-सेपरेटेड डिफ़ॉल्ट है, लेकिन यह वाक़ई सार्वभौमिक नहीं है: कई यूरोपीय लोकेल में दशमलव सेपरेटर के रूप में कॉमा इस्तेमाल होता है, इसलिए वहाँ का स्प्रेडशीट सॉफ़्टवेयर अस्पष्टता से बचने के लिए इसके बजाय सेमीकोलन के साथ CSV एक्सपोर्ट करता है, और टैब- या पाइप-डिलिमिटेड एक्सपोर्ट कुछ डेटाबेस और लीगेसी सिस्टम से आम हैं। ऑटो-डिटेक्ट पहली लाइन को देखता है और जो भी संभावित डिलिमिटर सबसे ज़्यादा बार दिखता है, उसे चुन लेता है।"
             },
             {
-              "question": "Why does this tool need a \"first row is a header\" option?",
-              "answer": "Not every CSV file includes one — some raw database or sensor-log exports start directly with data. Without a real header to draw keys from, this tool falls back to generic column1, column2, ... keys so the conversion still produces valid, usable JSON."
+              "question": "इस टूल को \"पहली रो एक हेडर है\" विकल्प की ज़रूरत क्यों है?",
+              "answer": "हर CSV फ़ाइल में यह शामिल नहीं होता — कुछ कच्चे डेटाबेस या सेंसर-लॉग एक्सपोर्ट सीधे डेटा से शुरू होते हैं। की निकालने के लिए कोई असली हेडर न होने पर, यह टूल सामान्य column1, column2, ... की पर वापस चला जाता है ताकि कन्वर्शन फिर भी मान्य, उपयोगी JSON दे।"
             },
             {
-              "question": "Is my data uploaded anywhere when I use this tool?",
-              "answer": "No — parsing and converting both directions happens entirely in your browser. Nothing you paste here is transmitted anywhere, which matters since CSV and JSON files often carry real exported data."
+              "question": "क्या इस टूल का उपयोग करते समय मेरा डेटा कहीं अपलोड होता है?",
+              "answer": "नहीं — दोनों दिशाओं में पार्सिंग और कन्वर्टिंग पूरी तरह आपके ब्राउज़र में होती है। यहाँ आप जो कुछ भी पेस्ट करते हैं वह कहीं नहीं भेजा जाता, जो तब मायने रखता है जब CSV और JSON फ़ाइलों में अक्सर असली एक्सपोर्ट किया गया डेटा होता है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "A Format With No Single Inventor",
-            "paragraph": "Unlike JSON, CSV has no known creator and no founding date — it emerged organically because separating values with commas was simply the most obvious way to represent tabular data in early computing, with IBM's Fortran compiler already supporting a comma-delimited format as far back as 1972. The term \"comma-separated values\" itself only entered common use around 1983. For over three decades, every piece of software that read or wrote CSV files quietly invented its own conventions for the genuinely tricky edge cases — what happens when a value itself contains a comma, or a line break, or a quote mark — which is exactly why real-world CSV files remain inconsistent to this day."
+            "title": "बिना किसी एक आविष्कारक वाला फ़ॉर्मेट",
+            "paragraph": "JSON के विपरीत, CSV का कोई ज्ञात निर्माता या स्थापना तारीख़ नहीं है — यह स्वाभाविक रूप से उभरा क्योंकि मानों को कॉमा से अलग करना शुरुआती कंप्यूटिंग में टेबुलर डेटा दर्शाने का सबसे स्पष्ट तरीक़ा था, और IBM का Fortran कंपाइलर 1972 से ही कॉमा-डिलिमिटेड फ़ॉर्मेट सपोर्ट कर रहा था। \"comma-separated values\" शब्द ख़ुद 1983 के आसपास आम इस्तेमाल में आया। तीन दशकों से ज़्यादा समय तक, CSV फ़ाइलें पढ़ने या लिखने वाला हर सॉफ़्टवेयर चुपचाप वाक़ई मुश्क़िल एज केस के लिए अपनी ख़ुद की परंपराएँ बना लेता था — जैसे जब किसी मान में ख़ुद कॉमा हो, या लाइन ब्रेक, या कोट चिह्न — यही ठीक वजह है कि असली दुनिया की CSV फ़ाइलें आज भी असंगत बनी हुई हैं।"
           },
           "modernDevelopments": {
-            "title": "A Standard, Decades Late",
-            "paragraph": "The first attempt to formally document CSV's de facto conventions didn't arrive until October 2005, when Yakov Shafranovich published RFC 4180, codifying rules for quoting, escaping, and header rows that most implementations had already converged on independently. It's explicitly an \"Informational\" RFC, not a binding standard, and it arrived roughly three decades after CSV files were already common — which is why this tool's own CSV parser has to handle real-world files that don't strictly follow it, rather than assuming every file will."
+            "title": "दशकों बाद आया एक मानक",
+            "paragraph": "CSV की वास्तविक परंपराओं को औपचारिक रूप से दस्तावेज़ीकृत करने का पहला प्रयास अक्टूबर 2005 तक नहीं आया, जब Yakov Shafranovich ने RFC 4180 प्रकाशित किया, जिसने कोटिंग, एस्केपिंग, और हेडर-रो परंपराओं को संहिताबद्ध किया जिन पर ज़्यादातर इम्प्लीमेंटेशन पहले ही स्वतंत्र रूप से पहुँच चुके थे। यह स्पष्ट रूप से एक \"Informational\" RFC है, कोई बाध्यकारी मानक नहीं, और यह CSV फ़ाइलों के पहले से आम होने के लगभग तीन दशक बाद आया — यही वजह है कि इस टूल का अपना CSV पार्सर उन असली दुनिया की फ़ाइलों को संभालता है जो इसका सख़्ती से पालन नहीं करतीं, बजाय यह मान लेने के कि हर फ़ाइल करेगी।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Data interchange formats, parsing, and formal grammars are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "डेटा इंटरचेंज फ़ॉर्मेट, पार्सिंग, और औपचारिक व्याकरण कंप्यूटर साइंस प्रोग्रामों में पढ़ाई जाती हैं। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "नहीं — MIT का Course 6-3 (कंप्यूटर साइंस एंड इंजीनियरिंग) MIT के कैंब्रिज कैंपस पर एक इन-पर्सन अंडरग्रेजुएट प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "नहीं — Stanford का कंप्यूटर साइंस बैचलर प्रोग्राम Stanford के कैंपस पर एक इन-पर्सन डिग्री है।"
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "नहीं — CMU का School of Computer Science बैचलर प्रोग्राम उसके पिट्सबर्ग कैंपस पर इन-पर्सन है।"
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "नहीं — NUS का Bachelor of Computing in Computer Science एक इन-पर्सन प्रोग्राम है, जिसमें कैंपस पर या विदेश में अनिवार्य इंटर्नशिप शामिल है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "नहीं — Oxford की कंप्यूटर साइंस डिग्री उसके ट्यूटोरियल सिस्टम के ज़रिए इन-पर्सन पढ़ाई जाती है, जिसमें एक या दो छात्र सीधे किसी ट्यूटर से मिलते हैं।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "अपने College of Engineering के ज़रिए ABET-मान्यता प्राप्त Bachelor of Science in Computer Science प्रदान करता है।",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "तकनीकी मानक",
           "citation": "RFC 4180 — Common Format and MIME Type for Comma-Separated Values (CSV) Files. Y. Shafranovich. Internet Engineering Task Force (IETF), October 2005.",
-          "note": "The closest thing CSV has to an official specification — an Informational RFC that codified quoting, escaping, and header-row conventions roughly three decades after CSV files were already widespread, which is why this tool's parser handles real-world files that don't strictly follow it.",
+          "note": "CSV के पास आधिकारिक स्पेसिफ़िकेशन के सबसे क़रीब जो चीज़ है — एक Informational RFC जिसने कोटिंग, एस्केपिंग, और हेडर-रो परंपराओं को CSV फ़ाइलों के पहले से व्यापक होने के लगभग तीन दशक बाद संहिताबद्ध किया, यही वजह है कि इस टूल का पार्सर उन असली दुनिया की फ़ाइलों को संभालता है जो इसका सख़्ती से पालन नहीं करतीं।",
           "url": "https://www.rfc-editor.org/rfc/rfc4180",
-          "readOriginal": "Read the Original RFC"
+          "readOriginal": "मूल RFC पढ़ें"
         }
       }
     },
