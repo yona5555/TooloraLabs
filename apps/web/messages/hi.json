@@ -6156,174 +6156,192 @@
       }
     },
     "inventory-valuation-calculator": {
-      "title": "Inventory Valuation Calculator",
-      "description": "Value your stock under FIFO, LIFO, and weighted-average costing — and flag items below their reorder threshold.",
+      "title": "इन्वेंट्री वैल्यूएशन कैलकुलेटर",
+      "description": "अपने स्टॉक का मूल्य FIFO, LIFO, और भारित-औसत लागत के तहत निकालें — और उन आइटम को चिह्नित करें जो अपनी रीऑर्डर सीमा से नीचे हैं।",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कैलकुलेटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Costing Method Comparison",
-        "placeholder": "Add an item with at least one purchase batch to see how FIFO, LIFO, and weighted-average value your stock differently.",
-        "chartTitle": "Ending inventory value by costing method",
+        "resultTitle": "कॉस्टिंग विधि तुलना",
+        "placeholder": "यह देखने के लिए कि FIFO, LIFO, और भारित-औसत आपके स्टॉक का मूल्य किस तरह अलग-अलग निकालते हैं, कम से कम एक ख़रीद बैच वाला आइटम जोड़ें।",
+        "chartTitle": "कॉस्टिंग विधि के अनुसार अंतिम इन्वेंट्री मूल्य",
         "chartFifo": "FIFO",
         "chartLifo": "LIFO",
-        "chartWeightedAverage": "Weighted Avg.",
+        "chartWeightedAverage": "भारित औसत",
         "glossary": {
-          "title": "Costing Terms Explained",
-          "intro": "The vocabulary of inventory costing, in plain language.",
+          "title": "कॉस्टिंग शब्दावली की व्याख्या",
+          "intro": "इन्वेंट्री कॉस्टिंग की शब्दावली, सरल भाषा में।",
           "rows": [
-            { "term": "FIFO (First-In, First-Out)", "meaning": "Assumes the oldest purchased units are sold first, so what remains in stock is valued at the most recent purchase prices." },
-            { "term": "LIFO (Last-In, First-Out)", "meaning": "Assumes the most recently purchased units are sold first, so what remains in stock is valued at the oldest purchase prices." },
-            { "term": "Weighted-Average Cost", "meaning": "Blends every purchase into a single average cost per unit, applied evenly to both what was sold and what remains." },
-            { "term": "COGS (Cost of Goods Sold)", "meaning": "The cost assigned to the units actually sold this period — it directly reduces reported profit, and its size depends on which costing method is used." }
+            {
+              "term": "FIFO (First-In, First-Out)",
+              "meaning": "यह मानता है कि सबसे पुरानी ख़रीदी गई यूनिटें पहले बिकती हैं, इसलिए जो स्टॉक में बचता है उसका मूल्य सबसे हालिया ख़रीद कीमतों पर निकाला जाता है।"
+            },
+            {
+              "term": "LIFO (Last-In, First-Out)",
+              "meaning": "यह मानता है कि सबसे हाल में ख़रीदी गई यूनिटें पहले बिकती हैं, इसलिए जो स्टॉक में बचता है उसका मूल्य सबसे पुरानी ख़रीद कीमतों पर निकाला जाता है।"
+            },
+            {
+              "term": "भारित-औसत लागत",
+              "meaning": "हर ख़रीद को एक ही औसत प्रति-यूनिट लागत में मिला देता है, जो बिकी और बची दोनों तरह की यूनिटों पर समान रूप से लागू होती है।"
+            },
+            {
+              "term": "COGS (बिकी हुई वस्तुओं की लागत)",
+              "meaning": "इस अवधि में वास्तव में बिकी यूनिटों को दी गई लागत — यह सीधे रिपोर्ट किए गए मुनाफ़े को घटाती है, और इसका आकार इस बात पर निर्भर करता है कि कौन-सी कॉस्टिंग विधि इस्तेमाल की गई है।"
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your Stock",
-        "itemName": "Item",
-        "itemNamePlaceholder": "Product name",
-        "unitsSold": "Units Sold",
-        "unitsSoldHint": "Units sold this period, drawn down against the batches below.",
-        "reorderThreshold": "Reorder At",
-        "optional": "Optional",
-        "batchesTitle": "Purchase Batches (oldest first)",
-        "batchQuantity": "Quantity",
-        "batchUnitCost": "Unit Cost",
-        "addBatch": "Add Batch",
-        "removeBatch": "Remove batch",
-        "addItem": "Add Item",
-        "removeItem": "Remove item",
-        "calculate": "Calculate Value"
+        "inputTitle": "आपका स्टॉक",
+        "itemName": "आइटम",
+        "itemNamePlaceholder": "प्रोडक्ट का नाम",
+        "unitsSold": "बिकी हुई यूनिटें",
+        "unitsSoldHint": "इस अवधि में बिकी यूनिटें, जो नीचे दिए गए बैचों में से घटाई जाती हैं।",
+        "reorderThreshold": "यहाँ रीऑर्डर करें",
+        "optional": "वैकल्पिक",
+        "batchesTitle": "ख़रीद बैच (सबसे पुराना पहले)",
+        "batchQuantity": "मात्रा",
+        "batchUnitCost": "प्रति यूनिट लागत",
+        "addBatch": "बैच जोड़ें",
+        "removeBatch": "बैच हटाएँ",
+        "addItem": "आइटम जोड़ें",
+        "removeItem": "आइटम हटाएँ",
+        "calculate": "मूल्य की गणना करें"
       },
       "result": {
-        "title": "Inventory Report",
-        "totalEndingUnits": "Ending Units",
-        "lowStockCount": "Low Stock Items",
-        "item": "Item",
-        "endingUnits": "Ending Units",
+        "title": "इन्वेंट्री रिपोर्ट",
+        "totalEndingUnits": "अंतिम यूनिटें",
+        "lowStockCount": "कम स्टॉक वाले आइटम",
+        "item": "आइटम",
+        "endingUnits": "अंतिम यूनिटें",
         "methodFifo": "FIFO",
         "methodLifo": "LIFO",
-        "methodWeightedAverage": "Weighted Avg."
+        "methodWeightedAverage": "भारित औसत"
       },
       "errors": {
-        "emptyItems": "Add at least one item.",
-        "invalidItem": "Each item needs a name and at least one batch with a non-negative quantity and unit cost."
+        "emptyItems": "कम से कम एक आइटम जोड़ें।",
+        "invalidItem": "हर आइटम के लिए एक नाम और कम से कम एक बैच ज़रूरी है, जिसकी मात्रा और प्रति यूनिट लागत शून्य या उससे अधिक हो।"
       },
       "education": {
         "intro": {
-          "title": "How Inventory Costing Actually Works",
-          "paragraph1": "When a business buys the same product at different prices over time — a common reality as suppliers raise prices or run promotions — it has to decide, on paper, which purchase price to assign to the units it sold and which price to assign to the units still sitting on the shelf. This is not a physical question about which literal box left the warehouse; it is an accounting convention. FIFO assumes the oldest purchase layer is sold first, leaving the newest, usually more expensive, cost basis in ending inventory. LIFO assumes the opposite: the newest layer is sold first, leaving the oldest, usually cheaper, cost basis behind. Weighted-average sidesteps the ordering question entirely by blending every purchase into one cost per unit and applying it uniformly.",
-          "paragraph2": "The choice is not cosmetic — it changes reported numbers. In a period of rising prices, FIFO assigns the cheaper, older cost to Cost of Goods Sold, which inflates reported profit and the tax bill that follows it, while leaving a higher-value ending inventory on the balance sheet. LIFO does the reverse: it assigns the pricier, newer cost to COGS, shrinking reported profit and tax exposure, while leaving a lower, often stale-looking inventory value on the balance sheet. Weighted-average lands in between, smoothing out the swings of individual purchase lots. None of the three methods is 'more correct' in isolation — they simply answer 'what did this sale cost us?' with three different, equally defensible conventions.",
+          "title": "इन्वेंट्री कॉस्टिंग असल में कैसे काम करती है",
+          "paragraph1": "जब कोई व्यवसाय समय के साथ एक ही उत्पाद को अलग-अलग कीमतों पर ख़रीदता है — जो आपूर्तिकर्ताओं के कीमत बढ़ाने या प्रमोशन चलाने पर एक आम सच्चाई है — तो उसे काग़ज़ पर यह तय करना होता है कि बिकी हुई यूनिटों को कौन-सी ख़रीद कीमत दी जाए और अभी शेल्फ़ पर बची यूनिटों को कौन-सी। यह इस बारे में कोई भौतिक सवाल नहीं है कि गोदाम से असल में कौन-सा बॉक्स निकला — यह एक अकाउंटिंग परंपरा है। FIFO मानता है कि सबसे पुरानी ख़रीद परत पहले बिकती है, जिससे सबसे नई, आमतौर पर महँगी, लागत आधार अंतिम इन्वेंट्री में बच जाती है। LIFO इसका उल्टा मानता है: सबसे नई परत पहले बिकती है, जिससे सबसे पुरानी, आमतौर पर सस्ती, लागत आधार पीछे बच जाती है। भारित-औसत इस क्रम वाले सवाल को पूरी तरह टाल देता है, हर ख़रीद को एक प्रति-यूनिट लागत में मिलाकर उसे समान रूप से लागू करके।",
+          "paragraph2": "यह चुनाव केवल दिखावटी नहीं है — यह रिपोर्ट की गई संख्याओं को बदल देता है। बढ़ती कीमतों की अवधि में, FIFO सस्ती, पुरानी लागत को बिकी हुई वस्तुओं की लागत (COGS) में देता है, जिससे रिपोर्ट किया गया मुनाफ़ा और उसके बाद लगने वाला टैक्स बढ़ जाता है, जबकि बैलेंस शीट पर एक ऊँचे मूल्य की अंतिम इन्वेंट्री रह जाती है। LIFO इसका उल्टा करता है: यह महँगी, नई लागत को COGS में देता है, जिससे रिपोर्ट किया गया मुनाफ़ा और टैक्स एक्सपोज़र घट जाते हैं, जबकि बैलेंस शीट पर एक कम, अक्सर पुराना दिखने वाला इन्वेंट्री मूल्य रह जाता है। भारित-औसत इन दोनों के बीच में आता है, और अलग-अलग ख़रीद लॉट के उतार-चढ़ाव को संतुलित कर देता है। तीनों में से कोई भी विधि अकेले \"ज़्यादा सही\" नहीं है — वे केवल \"इस बिक्री की हमें क्या लागत पड़ी?\" के सवाल का जवाब तीन अलग-अलग, समान रूप से उचित परंपराओं से देती हैं।",
           "diagram": {
             "fifoTitle": "FIFO",
             "lifoTitle": "LIFO",
-            "oldestLabel": "Oldest",
-            "newestLabel": "Newest",
-            "outLabel": "Sold first",
-            "caption": "The same three purchase layers, drawn down in opposite order: FIFO consumes the oldest (bottom) layer first; LIFO consumes the newest (top) layer first."
+            "oldestLabel": "सबसे पुराना",
+            "newestLabel": "सबसे नया",
+            "outLabel": "पहले बिका",
+            "caption": "वही तीन ख़रीद परतें, विपरीत क्रम में घटाई गईं: FIFO सबसे पुरानी (सबसे नीचे वाली) परत पहले इस्तेमाल करता है; LIFO सबसे नई (सबसे ऊपर वाली) परत पहले इस्तेमाल करता है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "The same purchase history, valued three different ways.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "वही ख़रीद इतिहास, तीन अलग-अलग तरीक़ों से मूल्यांकित।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "Buy 10 units @ $5, then 10 units @ $8; sell 12 units", "result": "FIFO ending value $64 · LIFO $40 · Weighted-avg $52" },
-            { "scenario": "Buy 10 units @ $5, sell none this period", "result": "All three methods agree: ending value $50" }
+            {
+              "scenario": "$5 पर 10 यूनिट ख़रीदें, फिर $8 पर 10 यूनिट; 12 यूनिट बेचें",
+              "result": "FIFO अंतिम मूल्य $64 · LIFO $40 · भारित-औसत $52"
+            },
+            {
+              "scenario": "$5 पर 10 यूनिट ख़रीदें, इस अवधि में कुछ न बेचें",
+              "result": "तीनों विधियाँ सहमत हैं: अंतिम मूल्य $50"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Which costing method should my business actually use?",
-              "answer": "It depends on your reporting goals and, in many jurisdictions, on tax rules — under IFRS, LIFO is not permitted at all, while US GAAP permits it. FIFO tends to mirror the physical flow of perishable or fast-moving goods and produces a balance sheet inventory value closer to current replacement cost. LIFO can reduce taxable income during inflationary periods. Weighted-average is often chosen for its simplicity when individual purchase lots are hard to track separately, such as with bulk commodities."
+              "question": "मेरे व्यवसाय को असल में कौन-सी कॉस्टिंग विधि इस्तेमाल करनी चाहिए?",
+              "answer": "यह आपके रिपोर्टिंग लक्ष्यों पर निर्भर करता है, और कई क्षेत्राधिकारों में टैक्स नियमों पर भी — IFRS के तहत LIFO की बिल्कुल अनुमति नहीं है, जबकि US GAAP इसकी अनुमति देता है। FIFO जल्दी ख़राब होने वाले या तेज़ी से बिकने वाले सामान के भौतिक प्रवाह को प्रतिबिंबित करता है और बैलेंस शीट पर मौजूदा प्रतिस्थापन लागत के क़रीब का इन्वेंट्री मूल्य देता है। LIFO महँगाई के दौर में कर योग्य आय घटा सकता है। भारित-औसत को अक्सर उसकी सरलता के लिए चुना जाता है, ख़ासकर जब अलग-अलग ख़रीद लॉट को अलग-अलग ट्रैक करना मुश्क़िल हो, जैसे थोक कमोडिटी के मामले में।"
             },
             {
-              "question": "Why do FIFO, LIFO, and weighted-average give different ending inventory values from the exact same purchases?",
-              "answer": "Because each method makes a different assumption about which purchase price gets assigned to the units that were sold versus the units left in stock. The total units and the total dollars spent purchasing them are identical across all three methods — only how that total is split between Cost of Goods Sold and ending inventory value changes."
+              "question": "बिल्कुल एक जैसी ख़रीद से FIFO, LIFO, और भारित-औसत अलग-अलग अंतिम इन्वेंट्री मूल्य क्यों देते हैं?",
+              "answer": "क्योंकि हर विधि इस बारे में अलग धारणा बनाती है कि बिकी हुई यूनिटों को कौन-सी ख़रीद कीमत दी जाए और स्टॉक में बची यूनिटों को कौन-सी। तीनों विधियों में कुल यूनिटें और उन्हें ख़रीदने में ख़र्च हुए कुल डॉलर एक जैसे ही रहते हैं — बस यह बदलता है कि उस कुल राशि को बिकी हुई वस्तुओं की लागत और अंतिम इन्वेंट्री मूल्य के बीच कैसे बाँटा जाता है।"
             },
             {
-              "question": "Does the costing method have to match the actual physical order units leave the warehouse?",
-              "answer": "No. FIFO and LIFO are accounting cost-flow assumptions, not requirements about physical handling. A warehouse can physically ship its oldest stock first (a real FIFO picking policy) while its books are kept on LIFO, or vice versa — the accounting convention and the physical logistics are independent decisions."
+              "question": "क्या कॉस्टिंग विधि को उस असल भौतिक क्रम से मेल खाना चाहिए जिसमें यूनिटें गोदाम से निकलती हैं?",
+              "answer": "नहीं। FIFO और LIFO अकाउंटिंग की कॉस्ट-फ़्लो धारणाएँ हैं, भौतिक संचालन के बारे में कोई आवश्यकता नहीं। कोई गोदाम भौतिक रूप से अपना सबसे पुराना स्टॉक पहले भेज सकता है (एक असली FIFO पिकिंग नीति) जबकि उसकी किताबें LIFO पर रखी जाती हैं, या इसका उल्टा भी — अकाउंटिंग परंपरा और भौतिक लॉजिस्टिक्स स्वतंत्र फ़ैसले हैं।"
             },
             {
-              "question": "Why does weighted-average recompute a single unit cost instead of tracking layers?",
-              "answer": "Because it treats every unit in stock as interchangeable rather than tied to a specific purchase lot. The average cost is simply total cost of all purchases divided by total units purchased — every unit sold or remaining is valued at that same blended rate, which is why weighted-average is the simplest method to compute by hand."
+              "question": "भारित-औसत परतों को ट्रैक करने के बजाय एक ही यूनिट लागत की दोबारा गणना क्यों करता है?",
+              "answer": "क्योंकि यह स्टॉक की हर यूनिट को किसी ख़ास ख़रीद लॉट से बँधे होने के बजाय आपस में बदली जा सकने वाली मानता है। औसत लागत बस सभी ख़रीद की कुल लागत को कुल ख़रीदी गई यूनिटों से भाग देकर निकाली जाती है — बिकी या बची हर यूनिट का मूल्य उसी एक मिली-जुली दर पर निकाला जाता है, यही वजह है कि भारित-औसत हाथ से गणना करने की सबसे आसान विधि है।"
             },
             {
-              "question": "How does this tool decide which units are 'sold' when I enter a units-sold number?",
-              "answer": "It draws down your purchase batches in the order you entered them (oldest first) for FIFO, in reverse order for LIFO, and applies the single blended average cost for weighted-average — this calculator does not change your batch order for you, so enter batches from oldest purchase to newest for the layer logic to be correct."
+              "question": "जब मैं बिकी हुई यूनिटों की संख्या दर्ज करता हूँ, तो यह टूल कैसे तय करता है कि कौन-सी यूनिटें \"बिकी\" हैं?",
+              "answer": "यह FIFO के लिए आपके द्वारा दर्ज किए गए क्रम में (सबसे पुराना पहले) आपके ख़रीद बैचों को घटाता है, LIFO के लिए उल्टे क्रम में, और भारित-औसत के लिए एक ही मिली-जुली औसत लागत लागू करता है — यह कैलकुलेटर आपके लिए आपके बैच क्रम को नहीं बदलता, इसलिए परत तर्क सही रहने के लिए बैचों को सबसे पुरानी ख़रीद से सबसे नई तक दर्ज करें।"
             },
             {
-              "question": "What does the low-stock flag mean, and does it change with the costing method?",
-              "answer": "It compares your ending unit count — the number of units left after the units-sold figure is subtracted — against the reorder threshold you set. The unit count itself is identical across FIFO, LIFO, and weighted-average, since costing method only changes the dollar value assigned to those units, not how many there are."
+              "question": "कम-स्टॉक फ़्लैग का क्या मतलब है, और क्या यह कॉस्टिंग विधि के साथ बदलता है?",
+              "answer": "यह आपकी अंतिम यूनिट संख्या — बिकी हुई यूनिटों की संख्या घटाने के बाद बची यूनिटों की संख्या — की तुलना आपके तय किए गए रीऑर्डर थ्रेशोल्ड से करता है। यूनिट संख्या ख़ुद FIFO, LIFO, और भारित-औसत में एक जैसी रहती है, क्योंकि कॉस्टिंग विधि केवल उन यूनिटों को दिए गए डॉलर मूल्य को बदलती है, यह नहीं कि उनकी संख्या कितनी है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "A Debate as Old as Modern Accounting",
-            "paragraph": "First-in-first-out and last-in-first-out costing both emerged as formal accounting practices in the United States in the early 20th century, but LIFO's use accelerated sharply after the US Congress formally permitted it for tax purposes in the Revenue Act of 1938 — a period of rising raw material costs where LIFO's lower reported profit meant a lower tax bill. The choice between FIFO and LIFO became one of the most studied topics in accounting research through the mid-20th century, since it directly affects reported earnings, tax liability, and how comparable one company's financial statements are to another's."
+            "title": "आधुनिक अकाउंटिंग जितनी पुरानी एक बहस",
+            "paragraph": "First-in-first-out और last-in-first-out कॉस्टिंग दोनों 20वीं सदी की शुरुआत में संयुक्त राज्य अमेरिका में औपचारिक अकाउंटिंग प्रथाओं के रूप में सामने आईं, लेकिन LIFO का इस्तेमाल तब तेज़ी से बढ़ा जब US कांग्रेस ने 1938 के Revenue Act में इसे टैक्स उद्देश्यों के लिए औपचारिक रूप से अनुमति दी — यह बढ़ती कच्चे माल की क़ीमतों का दौर था, जहाँ LIFO के कम रिपोर्ट किए गए मुनाफ़े का मतलब था कम टैक्स। FIFO और LIFO के बीच का चुनाव 20वीं सदी के मध्य तक अकाउंटिंग शोध में सबसे ज़्यादा अध्ययन किए गए विषयों में से एक बन गया, क्योंकि यह सीधे रिपोर्ट की गई कमाई, टैक्स देनदारी, और एक कंपनी के वित्तीय विवरणों की दूसरी कंपनी से तुलनीयता को प्रभावित करता है।"
           },
           "modernDevelopments": {
-            "title": "One Global Standard Diverges from the Other",
-            "paragraph": "The clearest modern development is a split rather than a convergence: International Financial Reporting Standards (IFRS), under IAS 2, prohibit LIFO entirely, while United States Generally Accepted Accounting Principles (US GAAP) continue to permit it. This means a multinational company can be required to report different inventory values for the same physical stock depending on which accounting standard applies, and it is a standing obstacle to full convergence between the two global accounting frameworks. Weighted-average costing, permitted under both standards, has correspondingly grown in popularity as a method that avoids this jurisdictional divide."
+            "title": "एक वैश्विक मानक दूसरे से अलग हो जाता है",
+            "paragraph": "सबसे स्पष्ट आधुनिक बदलाव मेल-मिलाप नहीं, बल्कि विभाजन है: अंतरराष्ट्रीय वित्तीय रिपोर्टिंग मानक (IFRS), IAS 2 के तहत, LIFO को पूरी तरह प्रतिबंधित करते हैं, जबकि संयुक्त राज्य अमेरिका के सामान्य रूप से स्वीकृत अकाउंटिंग सिद्धांत (US GAAP) इसकी अनुमति देना जारी रखते हैं। इसका मतलब है कि एक बहुराष्ट्रीय कंपनी को एक ही भौतिक स्टॉक के लिए अलग-अलग इन्वेंट्री मूल्य रिपोर्ट करने पड़ सकते हैं, इस पर निर्भर करते हुए कि कौन-सा अकाउंटिंग मानक लागू होता है, और यह दोनों वैश्विक अकाउंटिंग ढाँचों के बीच पूर्ण एकीकरण में एक स्थायी बाधा है। दोनों मानकों के तहत अनुमत भारित-औसत कॉस्टिंग, इस क्षेत्राधिकार विभाजन से बचने वाली विधि के रूप में तदनुसार लोकप्रिय होती गई है।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Inventory costing is a core topic within financial and managerial accounting, taught within accounting and finance degree programs. Below are the top 5 globally ranked universities by the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "इन्वेंट्री कॉस्टिंग वित्तीय और प्रबंधकीय अकाउंटिंग का एक मुख्य विषय है, जो अकाउंटिंग और फ़ाइनेंस डिग्री प्रोग्रामों में पढ़ाया जाता है। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प नीचे दिया गया है:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
-                "online": "No — Harvard Business School's MBA program, which includes accounting and management coursework, is delivered on Harvard's Boston campus; separate executive education offerings include some online courses, but not this degree."
+                "online": "नहीं — Harvard Business School का MBA प्रोग्राम, जिसमें अकाउंटिंग और मैनेजमेंट कोर्सवर्क शामिल है, Harvard के बॉस्टन कैंपस पर दिया जाता है; अलग एग्ज़ीक्यूटिव एजुकेशन प्रस्तावों में कुछ ऑनलाइन कोर्स शामिल हैं, यह डिग्री नहीं।"
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #2 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
-                "online": "No — MIT Sloan's Master of Finance is an in-person program delivered over 12 or 18 months on MIT's Cambridge campus."
+                "online": "नहीं — MIT Sloan का Master of Finance MIT के कैंब्रिज कैंपस पर 12 या 18 महीनों में दिया जाने वाला एक इन-पर्सन प्रोग्राम है।"
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #3 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
-                "online": "No — Stanford GSB's accounting academic area is taught through its in-person MBA, MSx, and PhD programs; its online offerings are limited to non-degree executive courses."
+                "online": "नहीं — Stanford GSB का अकाउंटिंग क्षेत्र अपने इन-पर्सन MBA, MSx, और PhD प्रोग्रामों के ज़रिए पढ़ाया जाता है; इसके ऑनलाइन प्रस्ताव सिर्फ़ नॉन-डिग्री एग्ज़ीक्यूटिव कोर्स तक सीमित हैं।"
               },
               {
                 "name": "University of Oxford (Saïd Business School)",
-                "note": "Ranked #4 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
-                "online": "No — Oxford's MBA, whose core curriculum includes accounting and finance, is a full-time, in-person program; Saïd's online offerings are separate short courses, not this degree."
+                "online": "नहीं — Oxford का MBA, जिसके मुख्य पाठ्यक्रम में अकाउंटिंग और फ़ाइनेंस शामिल है, एक पूर्णकालिक, इन-पर्सन प्रोग्राम है; Saïd के ऑनलाइन प्रस्ताव अलग शॉर्ट कोर्स हैं, यह डिग्री नहीं।"
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 globally for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
-                "online": "No — Booth's MBA programs (full-time, evening, weekend, executive) are delivered in-person or hybrid on campus; there is no fully online Booth master's degree."
+                "online": "नहीं — Booth के MBA प्रोग्राम (फ़ुल-टाइम, इवनिंग, वीकेंड, एग्ज़ीक्यूटिव) इन-पर्सन या हाइब्रिड ऑन-कैंपस फ़ॉर्मेट में दिए जाते हैं; कोई पूरी तरह ऑनलाइन Booth मास्टर डिग्री नहीं है।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a major in Accounting through its School of Business Administration.",
+                "note": "अपने School of Business Administration के ज़रिए Accounting में मेजर के साथ Bachelor of Science in Business Administration प्रदान करता है।",
                 "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
-                "online": "Delivery mode not specified on the program's official page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific Reference",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Biddle, G. C. (1980). Accounting Methods and Management Decisions: The Case of Inventory Costing and Inventory Policy. Journal of Accounting Research, 18, 235–280.",
-          "note": "A foundational study of how the choice between inventory costing methods affects reported earnings, tax liability, and inventory-related management decisions — the same FIFO/LIFO/weighted-average trade-off this tool computes.",
+          "note": "इस बारे में एक बुनियादी अध्ययन कि इन्वेंट्री कॉस्टिंग विधियों के बीच का चुनाव रिपोर्ट की गई कमाई, टैक्स देनदारी, और इन्वेंट्री से जुड़े प्रबंधकीय फ़ैसलों को कैसे प्रभावित करता है — यह वही FIFO/LIFO/भारित-औसत ट्रेड-ऑफ़ है जिसकी गणना यह टूल करता है।",
           "url": "https://doi.org/10.2307/2490341",
-          "readOriginal": "Read the Original Study"
+          "readOriginal": "मूल अध्ययन पढ़ें"
         }
       }
     },
