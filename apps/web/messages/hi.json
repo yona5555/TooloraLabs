@@ -5190,156 +5190,162 @@
       }
     },
     "word-counter": {
-      "title": "Word & Character Counter",
-      "description": "Count words, characters, and sentences; estimate reading time; and see your top keywords and platform character limits — live as you type.",
+      "title": "शब्द और अक्षर काउंटर",
+      "description": "शब्द, अक्षर, और वाक्य गिनें; पढ़ने के समय का अनुमान लगाएँ; और अपने टॉप कीवर्ड व प्लेटफ़ॉर्म कैरेक्टर सीमाएँ देखें — टाइप करते ही लाइव।",
       "nav": {
-        "tool": "Counter",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "काउंटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Live Stats",
-        "placeholder": "Start typing or paste text to see word, character, and keyword stats here.",
-        "keywordsTitle": "Top Keywords by Frequency",
+        "resultTitle": "लाइव आँकड़े",
+        "placeholder": "यहाँ शब्द, अक्षर, और कीवर्ड आँकड़े देखने के लिए टाइप करना शुरू करें या टेक्स्ट पेस्ट करें।",
+        "keywordsTitle": "आवृत्ति के अनुसार टॉप कीवर्ड",
         "platformLimits": {
-          "title": "Platform Character Limits",
-          "intro": "See how your current character count compares to common platform limits.",
+          "title": "प्लेटफ़ॉर्म कैरेक्टर सीमाएँ",
+          "intro": "देखें कि आपकी मौजूदा कैरेक्टर गिनती आम प्लेटफ़ॉर्म सीमाओं से कैसे तुलना करती है।",
           "items": {
-            "smsMessage": "SMS Message",
-            "metaDescription": "Meta Description",
-            "xPost": "X (Twitter) Post",
-            "googleTitleTag": "Google Title Tag",
-            "youtubeTitle": "YouTube Title",
-            "instagramCaption": "Instagram Caption"
+            "smsMessage": "SMS संदेश",
+            "metaDescription": "मेटा विवरण",
+            "xPost": "X (Twitter) पोस्ट",
+            "googleTitleTag": "Google टाइटल टैग",
+            "youtubeTitle": "YouTube टाइटल",
+            "instagramCaption": "Instagram कैप्शन"
           }
         }
       },
       "form": {
-        "inputTitle": "Your Text",
-        "inputLabel": "Your Text",
-        "inputPlaceholder": "Start typing or paste your text here..."
+        "inputTitle": "आपका टेक्स्ट",
+        "inputLabel": "आपका टेक्स्ट",
+        "inputPlaceholder": "टाइप करना शुरू करें या अपना टेक्स्ट यहाँ पेस्ट करें..."
       },
       "stats": {
-        "words": "Words",
-        "characters": "Characters",
-        "charactersNoSpaces": "Characters (no spaces)",
-        "sentences": "Sentences",
-        "paragraphs": "Paragraphs",
-        "readingTimeMinutes": "Reading Time (min)",
-        "uniqueWords": "Unique Words",
-        "averageWordLength": "Avg. Word Length",
-        "longestWord": "Longest Word"
+        "words": "शब्द",
+        "characters": "अक्षर",
+        "charactersNoSpaces": "अक्षर (बिना स्पेस)",
+        "sentences": "वाक्य",
+        "paragraphs": "पैराग्राफ़",
+        "readingTimeMinutes": "पढ़ने का समय (मिनट)",
+        "uniqueWords": "अद्वितीय शब्द",
+        "averageWordLength": "औसत शब्द लंबाई",
+        "longestWord": "सबसे लंबा शब्द"
       },
       "education": {
         "intro": {
-          "title": "How Word Counting Actually Works",
-          "paragraph1": "Behind a single 'word count' number are several separate, deliberate decisions about what counts as a word, a sentence, and a paragraph. A word counter first tokenizes raw text — splitting it into individual units on whitespace and punctuation boundaries — then classifies those tokens: runs of characters ending in '.', '!', or '?' close out a sentence; blank lines mark paragraph breaks; and every token is measured for length and compared against every other token to find unique words and the longest one. None of this is guesswork once the rules are fixed, but the rules themselves are a choice, which is exactly why two different tools can report two different counts for the same text.",
-          "paragraph2": "Reading-time estimates add one more layer: a words-per-minute (WPM) constant, multiplied against the word count. This tool uses 200 WPM, a commonly cited middle-of-the-road figure for adult silent reading of English prose; a large 2019 meta-analysis of reading-speed research (see the reference below) puts the actual average closer to 238 WPM for non-fiction, with wide variation by reader, language, and text difficulty — which is why any reading-time estimate should be read as a reasonable approximation, not a precise measurement. Keyword density, this tool's third layer, works by counting how often each word recurs after filtering out short, high-frequency function words ('the', 'and', 'of') so that what's left reflects the text's actual subject matter rather than its grammar.",
+          "title": "शब्द गिनती असल में कैसे काम करती है",
+          "paragraph1": "एक अकेली 'शब्द गिनती' संख्या के पीछे कई अलग, जानबूझकर लिए गए फ़ैसले होते हैं कि क्या एक शब्द, एक वाक्य, और एक पैराग्राफ़ माना जाए। एक वर्ड काउंटर पहले कच्चे टेक्स्ट को टोकनाइज़ करता है — इसे व्हाइटस्पेस और विराम चिह्न की सीमाओं पर अलग-अलग यूनिट में बाँटकर — फिर उन टोकन को वर्गीकृत करता है: '.', '!', या '?' पर ख़त्म होने वाले कैरेक्टर के क्रम एक वाक्य को बंद करते हैं; ख़ाली लाइनें पैराग्राफ़ ब्रेक दर्शाती हैं; और हर टोकन की लंबाई मापी जाती है और अद्वितीय शब्द व सबसे लंबे शब्द को ढूँढ़ने के लिए हर दूसरे टोकन से तुलना की जाती है। एक बार नियम तय हो जाएँ तो इसमें कोई अंदाज़ा नहीं लगाना पड़ता, लेकिन नियम ख़ुद एक चुनाव हैं, यही ठीक वजह है कि दो अलग-अलग टूल एक ही टेक्स्ट के लिए दो अलग-अलग गिनती बता सकते हैं।",
+          "paragraph2": "पढ़ने-के-समय के अनुमान एक और परत जोड़ते हैं: एक शब्द-प्रति-मिनट (WPM) स्थिरांक, जिसे शब्द गिनती से गुणा किया जाता है। यह टूल 200 WPM इस्तेमाल करता है, जो अंग्रेज़ी गद्य को चुपचाप पढ़ने वाले वयस्कों के लिए आमतौर पर उद्धृत किया जाने वाला मध्यम आँकड़ा है; पढ़ने-की-गति शोध पर 2019 के एक बड़े मेटा-विश्लेषण (नीचे संदर्भ देखें) के अनुसार गैर-कथा साहित्य के लिए असली औसत 238 WPM के क़रीब है, जिसमें पाठक, भाषा, और टेक्स्ट की कठिनाई के अनुसार व्यापक अंतर होता है — यही वजह है कि किसी भी पढ़ने-के-समय के अनुमान को एक उचित सन्निकटन माना जाना चाहिए, कोई सटीक माप नहीं। कीवर्ड घनत्व, इस टूल की तीसरी परत, यह गिनकर काम करती है कि छोटे, उच्च-आवृत्ति वाले फ़ंक्शन शब्दों ('the', 'and', 'of') को छानने के बाद हर शब्द कितनी बार दोहराता है, ताकि जो बचे वह टेक्स्ट के व्याकरण के बजाय उसके असली विषय को दर्शाए।",
           "diagram": {
-            "rawTextLabel": "Raw Text",
-            "tokenizeLabel": "Tokenize\n(words, sentences,\nparagraphs)",
-            "countsLabel": "Counts +\nreading time +\nkeywords",
-            "caption": "The word-counting pipeline: raw text is split into tokens, those tokens are classified into words, sentences, and paragraphs, and the resulting counts feed reading-time and keyword-density calculations."
+            "rawTextLabel": "कच्चा टेक्स्ट",
+            "tokenizeLabel": "टोकनाइज़\n(शब्द, वाक्य,\nपैराग्राफ़)",
+            "countsLabel": "गिनती +\nपढ़ने का समय +\nकीवर्ड",
+            "caption": "शब्द-गिनती पाइपलाइन: कच्चे टेक्स्ट को टोकन में बाँटा जाता है, उन टोकन को शब्द, वाक्य, और पैराग्राफ़ में वर्गीकृत किया जाता है, और परिणामी गिनती पढ़ने-के-समय और कीवर्ड-घनत्व गणनाओं में फ़ीड होती है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How the same text produces several different statistics at once.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "एक ही टेक्स्ट एक साथ कई अलग-अलग आँकड़े कैसे देता है।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "A 600-word blog draft with varied vocabulary", "result": "Reading time ≈ 3 minutes (at 200 words/minute)" },
-            { "scenario": "\"Premium quality. Quality you can trust. Built with quality materials.\"", "result": "Top keyword: \"quality\" (3 uses)" }
+            {
+              "scenario": "अलग-अलग शब्दावली वाला 600-शब्दों का ब्लॉग ड्राफ़्ट",
+              "result": "पढ़ने का समय ≈ 3 मिनट (200 शब्द/मिनट पर)"
+            },
+            {
+              "scenario": "\"Premium quality. Quality you can trust. Built with quality materials.\"",
+              "result": "टॉप कीवर्ड: \"quality\" (3 बार)"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why does my word count here differ from what my word processor shows?",
-              "answer": "Different tools use different tokenization rules — some count a hyphenated compound as one word, others as two; some count numbers or standalone punctuation as words, others don't. There is no single universal standard, so small discrepancies between tools counting the exact same text are normal and expected."
+              "question": "यहाँ मेरी शब्द गिनती मेरे वर्ड प्रोसेसर से अलग क्यों दिखती है?",
+              "answer": "अलग-अलग टूल अलग-अलग टोकनाइज़ेशन नियम इस्तेमाल करते हैं — कुछ हाइफ़न वाले यौगिक शब्द को एक शब्द गिनते हैं, कुछ दो; कुछ संख्याओं या अकेले विराम चिह्न को शब्द गिनते हैं, कुछ नहीं। कोई एक सार्वभौमिक मानक नहीं है, इसलिए बिल्कुल एक ही टेक्स्ट गिनने वाले टूलों के बीच छोटे-मोटे फ़र्क़ सामान्य और अपेक्षित हैं।"
             },
             {
-              "question": "What exactly counts as a sentence or a paragraph here?",
-              "answer": "A sentence is any run of text ending in a period, exclamation mark, or question mark (or the final unterminated fragment, if your text doesn't end with one). A paragraph is any block of text separated from the next by one or more blank lines. Neither rule understands abbreviations like 'Mr.' or 'e.g.', so text dense with those may show a slightly inflated sentence count."
+              "question": "यहाँ ठीक-ठीक क्या एक वाक्य या पैराग्राफ़ माना जाता है?",
+              "answer": "एक वाक्य टेक्स्ट का कोई भी क्रम है जो पूर्ण विराम, विस्मयादिबोधक चिह्न, या प्रश्न चिह्न पर ख़त्म होता है (या अंतिम अधूरा टुकड़ा, अगर आपका टेक्स्ट इनमें से किसी पर ख़त्म नहीं होता)। एक पैराग्राफ़ टेक्स्ट का कोई भी हिस्सा है जो अगले से एक या ज़्यादा ख़ाली लाइनों से अलग हो। कोई भी नियम 'Mr.' या 'e.g.' जैसे संक्षिप्त रूपों को नहीं समझता, इसलिए इनसे भरा टेक्स्ट थोड़ी बढ़ी हुई वाक्य गिनती दिखा सकता है।"
             },
             {
-              "question": "Is the reading-time estimate the same as speaking or presentation time?",
-              "answer": "No. This estimate is calibrated to silent reading speed (roughly 200 words per minute), which is meaningfully faster than speaking pace — spoken presentations typically run closer to 130–150 words per minute, so a script that reads as a 3-minute read here would take noticeably longer to actually deliver out loud."
+              "question": "क्या पढ़ने-के-समय का अनुमान बोलने या प्रस्तुति के समय के बराबर है?",
+              "answer": "नहीं। यह अनुमान चुपचाप पढ़ने की गति (लगभग 200 शब्द प्रति मिनट) के हिसाब से कैलिब्रेट किया गया है, जो बोलने की गति से काफ़ी तेज़ है — बोली गई प्रस्तुतियाँ आमतौर पर 130–150 शब्द प्रति मिनट के क़रीब चलती हैं, इसलिए यहाँ 3-मिनट का पढ़ने वाला स्क्रिप्ट असल में ज़ोर से पढ़ने में इससे काफ़ी ज़्यादा समय लेगी।"
             },
             {
-              "question": "Why are common words like \"the\" and \"and\" left out of the top keywords list?",
-              "answer": "Because those short, high-frequency function words appear constantly in any text regardless of topic, so including them would make every keyword list look identical. Filtering them out — a standard technique called stopword removal — leaves behind the words that actually distinguish what your text is about."
+              "question": "\"the\" और \"and\" जैसे आम शब्दों को टॉप कीवर्ड सूची से क्यों बाहर रखा जाता है?",
+              "answer": "क्योंकि वे छोटे, उच्च-आवृत्ति वाले फ़ंक्शन शब्द किसी भी टेक्स्ट में विषय चाहे जो भी हो, लगातार दिखते हैं, इसलिए उन्हें शामिल करने से हर कीवर्ड सूची एक जैसी दिखने लगेगी। उन्हें छानना — जिसे स्टॉपवर्ड रिमूवल नामक एक मानक तकनीक कहा जाता है — वे शब्द छोड़ता है जो असल में आपके टेक्स्ट के विषय को दर्शाते हैं।"
             },
             {
-              "question": "Does this tool store, upload, or share the text I type?",
-              "answer": "No — every statistic here, including the keyword ranking, is computed directly in your browser as you type. Your text is never sent to a server or stored anywhere."
+              "question": "क्या यह टूल मेरे टाइप किए गए टेक्स्ट को सेव, अपलोड, या साझा करता है?",
+              "answer": "नहीं — यहाँ हर आँकड़ा, जिसमें कीवर्ड रैंकिंग भी शामिल है, आपके टाइप करते ही सीधे आपके ब्राउज़र में गणना किया जाता है। आपका टेक्स्ट कभी किसी सर्वर पर नहीं भेजा जाता और कहीं सेव नहीं होता।"
             },
             {
-              "question": "Why do character limits matter for things like X posts or meta descriptions?",
-              "answer": "Platforms and search engines enforce hard or soft character caps for structural reasons: an SMS segment tops out at 160 characters for network protocol reasons, a Google search snippet truncates meta descriptions around 155–160 characters, and X caps posts at 280 characters by product design. Writing past these limits means your text gets cut off, truncated with an ellipsis, or rejected outright — so checking your count against the actual target platform before publishing avoids that."
+              "question": "X पोस्ट या मेटा विवरण जैसी चीज़ों के लिए कैरेक्टर सीमाएँ क्यों मायने रखती हैं?",
+              "answer": "प्लेटफ़ॉर्म और सर्च इंजन संरचनात्मक वजहों से सख़्त या नरम कैरेक्टर सीमाएँ लागू करते हैं: एक SMS सेगमेंट नेटवर्क प्रोटोकॉल की वजहों से 160 कैरेक्टर पर रुक जाता है, एक Google सर्च स्निपेट मेटा विवरण को लगभग 155–160 कैरेक्टर पर काट देता है, और X प्रोडक्ट डिज़ाइन के अनुसार पोस्ट को 280 कैरेक्टर पर सीमित करता है। इन सीमाओं से आगे लिखने का मतलब है कि आपका टेक्स्ट कट जाता है, एलिप्सिस के साथ छोटा कर दिया जाता है, या सीधे अस्वीकार कर दिया जाता है — इसलिए प्रकाशित करने से पहले असली लक्षित प्लेटफ़ॉर्म के ख़िलाफ़ अपनी गिनती जाँचना इससे बचाता है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "Counting Words Before Computers Did It",
-            "paragraph": "Word counts mattered commercially long before software existed to compute them: 19th- and early-20th-century magazine and newspaper publishers commonly paid writers by the word, which made an accurate manual word count a direct financial matter for both author and editor, and pulp fiction and serialized novelists — including some of the era's most famous writers — were acutely aware of their per-installment word totals for exactly that reason. Formal readability research followed in the mid-20th century, most notably Rudolf Flesch's 1948 reading-ease formula, which combined average sentence length and syllable counts into a single score — establishing sentence and word length as measurable, comparable properties of a text rather than just a stylistic impression."
+            "title": "कंप्यूटर से पहले शब्द गिनना",
+            "paragraph": "शब्द गिनती की गणना करने वाला सॉफ़्टवेयर मौजूद होने से बहुत पहले शब्द गिनती व्यावसायिक रूप से मायने रखती थी: 19वीं और 20वीं सदी की शुरुआत की पत्रिकाओं और अख़बारों के प्रकाशक आमतौर पर लेखकों को प्रति शब्द भुगतान करते थे, जिससे एक सटीक मैनुअल शब्द गिनती लेखक और संपादक दोनों के लिए सीधा वित्तीय मामला बन जाती थी, और पल्प फ़िक्शन व धारावाहिक उपन्यासकार — जिनमें उस युग के कुछ सबसे मशहूर लेखक भी शामिल थे — ठीक इसी वजह से अपने प्रति-किश्त शब्द योग के प्रति बेहद सजग रहते थे। 20वीं सदी के मध्य में औपचारिक पठनीयता शोध ने इसका अनुसरण किया, ख़ासकर Rudolf Flesch का 1948 का पठन-सहजता फ़ॉर्मूला, जिसने औसत वाक्य लंबाई और सिलेबल गिनती को एक ही स्कोर में मिला दिया — जिससे वाक्य और शब्द की लंबाई किसी टेक्स्ट के मापने योग्य, तुलना करने योग्य गुण बन गए, न कि केवल एक शैलीगत धारणा।"
           },
           "modernDevelopments": {
-            "title": "From Manual Tallies to Real-Time Computational Text Analysis",
-            "paragraph": "Modern text analysis has extended far beyond simple counts into corpus linguistics — the large-scale computational study of word frequency and usage patterns across huge collections of real text — which now underpins everything from dictionary compilation to search-engine ranking to the keyword-density tools writers use for search-engine optimization. Real-time, in-browser word counting, the kind this tool performs as you type, became broadly practical only once client-side JavaScript execution became fast enough to re-tokenize and re-analyze full documents on every keystroke without noticeable lag — a routine capability today, but a nontrivial one as recently as the early web."
+            "title": "मैनुअल गिनती से रीयल-टाइम कम्प्यूटेशनल टेक्स्ट विश्लेषण तक",
+            "paragraph": "आधुनिक टेक्स्ट विश्लेषण सादी गिनती से कहीं आगे कॉर्पस भाषाविज्ञान तक फैल गया है — असली टेक्स्ट के विशाल संग्रहों में शब्द आवृत्ति और उपयोग पैटर्न का बड़े पैमाने पर कम्प्यूटेशनल अध्ययन — जो अब डिक्शनरी संकलन से लेकर सर्च-इंजन रैंकिंग तक, और लेखकों द्वारा सर्च-इंजन ऑप्टिमाइज़ेशन के लिए इस्तेमाल किए जाने वाले कीवर्ड-घनत्व टूल तक, सब कुछ का आधार है। रीयल-टाइम, ब्राउज़र-के-भीतर शब्द गिनती, जिस तरह की यह टूल आपके टाइप करते ही करता है, तभी व्यापक रूप से व्यावहारिक बनी जब क्लाइंट-साइड JavaScript एक्ज़िक्यूशन हर की-स्ट्रोक पर पूरे दस्तावेज़ों को बिना ध्यान देने योग्य देरी के दोबारा टोकनाइज़ और विश्लेषित करने के लिए काफ़ी तेज़ हो गया — आज यह एक सामान्य क्षमता है, लेकिन शुरुआती वेब के दिनों में यह मामूली बात नहीं थी।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The statistical study of word frequency and text structure is a core topic within linguistics, taught within linguistics and language science degree programs. Below are the top 5 globally ranked universities by the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "शब्द आवृत्ति और टेक्स्ट संरचना का सांख्यिकीय अध्ययन भाषाविज्ञान का एक मुख्य विषय है, जो भाषाविज्ञान और भाषा विज्ञान डिग्री प्रोग्रामों में पढ़ाया जाता है। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प नीचे दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Linguistics में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://linguistics.mit.edu/graduate/admissions/",
-                "online": "No — the PhD program in MIT's Department of Linguistics and Philosophy is a full-time, in-person doctoral program on MIT's Cambridge campus; the department does not admit students to a standalone master's degree."
+                "online": "नहीं — MIT के Department of Linguistics and Philosophy का PhD प्रोग्राम MIT के कैंब्रिज कैंपस पर एक पूर्णकालिक, इन-पर्सन डॉक्टरल प्रोग्राम है; यह विभाग किसी स्टैंडअलोन मास्टर डिग्री में छात्र नहीं लेता।"
               },
               {
                 "name": "Peking University",
-                "note": "Ranked #2 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Linguistics में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "http://yys.sfl.pku.edu.cn/yysgk/index.htm",
-                "online": "No — the Institute of Foreign Linguistics and Applied Linguistics's master's and doctoral programs are delivered in person on Peking University's Beijing campus."
+                "online": "नहीं — Institute of Foreign Linguistics and Applied Linguistics के मास्टर और डॉक्टरल प्रोग्राम Peking University के Beijing कैंपस पर इन-पर्सन दिए जाते हैं।"
               },
               {
                 "name": "Lancaster University",
-                "note": "Ranked #3 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Linguistics में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.lancaster.ac.uk/study/postgraduate/postgraduate-courses/corpus-linguistics-online-ma/2026/",
-                "online": "Yes — the MA in Corpus Linguistics is delivered fully online, taught by the university credited with pioneering corpus linguistics, the field of computational word-frequency analysis this tool's keyword ranking is a small example of."
+                "online": "हाँ — MA in Corpus Linguistics पूरी तरह ऑनलाइन दिया जाता है, जिसे उस विश्वविद्यालय द्वारा पढ़ाया जाता है जिसे कॉर्पस भाषाविज्ञान — शब्द-आवृत्ति के कम्प्यूटेशनल विश्लेषण का वह क्षेत्र जिसका एक छोटा उदाहरण इस टूल की कीवर्ड रैंकिंग है — की शुरुआत का श्रेय दिया जाता है।"
               },
               {
                 "name": "University of Cambridge",
-                "note": "Tied for #4 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Linguistics में दुनिया भर में संयुक्त #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.mmll.cam.ac.uk/dtal/postgraduates/study/mphils-linguistics-language-sciences/mphil-linguistics-language-sciences",
-                "online": "No — the MPhil in Linguistics and Language Sciences is a full-time, in-person taught program on Cambridge's campus."
+                "online": "नहीं — MPhil in Linguistics and Language Sciences Cambridge के कैंपस पर एक पूर्णकालिक, इन-पर्सन टॉट प्रोग्राम है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Tied for #4 globally for Linguistics (QS World University Rankings by Subject 2025).",
+                "note": "Linguistics में दुनिया भर में संयुक्त #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/mphil-linguistics-philology-phonetics",
-                "online": "No — the MPhil in Linguistics, Philology and Phonetics is a full-time, in-person taught program spanning 21 months at Oxford."
+                "online": "नहीं — MPhil in Linguistics, Philology and Phonetics Oxford में 21 महीनों तक चलने वाला एक पूर्णकालिक, इन-पर्सन टॉट प्रोग्राम है।"
               },
               {
                 "name": "American University of Beirut (AUB)",
-                "note": "Offers an MA in English Language, with coursework in applied linguistics, through its Department of English.",
+                "note": "अपने Department of English के ज़रिए एक MA in English Language प्रदान करता है, जिसमें एप्लाइड भाषाविज्ञान का कोर्सवर्क शामिल है।",
                 "url": "https://www.aub.edu.lb/fas/Pages/Masters.aspx",
-                "online": "Delivery mode not specified on the program's official page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific Reference",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
-          "note": "A meta-analysis of 190 studies establishing average silent reading rates for English — the empirical basis behind the words-per-minute constant this tool's reading-time estimate is built on.",
+          "note": "अंग्रेज़ी के लिए औसत मौन पठन दर स्थापित करने वाला 190 अध्ययनों का एक मेटा-विश्लेषण — वह अनुभवजन्य आधार जिस पर इस टूल का पढ़ने-के-समय का अनुमान बनाने वाला शब्द-प्रति-मिनट स्थिरांक टिका है।",
           "url": "https://doi.org/10.1016/j.jml.2019.104047",
-          "readOriginal": "Read the Original Study"
+          "readOriginal": "मूल अध्ययन पढ़ें"
         }
       }
     },
