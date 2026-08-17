@@ -6045,158 +6045,176 @@
       }
     },
     "duplicate-line-remover": {
-      "title": "Duplicate Line Remover",
-      "description": "Remove duplicate lines from a list, with a live report of exactly which lines repeated and how often — live as you type.",
+      "title": "डुप्लिकेट लाइन रिमूवर",
+      "description": "किसी सूची से डुप्लिकेट लाइन हटाएँ, बिल्कुल कौन-सी लाइनें कितनी बार दोहराई गईं इसकी एक लाइव रिपोर्ट के साथ — टाइप करते ही लाइव।",
       "nav": {
-        "tool": "Remover",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "रिमूवर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Cleaned List",
-        "placeholder": "Paste a list to see it deduplicated, with a breakdown of every repeat, here.",
-        "totalLines": "Total Lines",
-        "uniqueLines": "Unique Lines",
-        "removedCount": "Removed",
-        "duplicatesTitle": "Duplicates Found",
+        "resultTitle": "साफ़ की गई सूची",
+        "placeholder": "यहाँ डीड्यूप्लिकेट होते हुए और हर दोहराव के ब्रेकडाउन के साथ अपनी सूची देखने के लिए उसे पेस्ट करें।",
+        "totalLines": "कुल लाइनें",
+        "uniqueLines": "अद्वितीय लाइनें",
+        "removedCount": "हटाई गईं",
+        "duplicatesTitle": "मिले डुप्लिकेट",
         "glossary": {
-          "title": "Options Explained",
-          "intro": "What each setting actually changes.",
+          "title": "विकल्पों की व्याख्या",
+          "intro": "हर सेटिंग असल में क्या बदलती है।",
           "rows": [
-            { "term": "Case-sensitive", "meaning": "When on, \"Apple\" and \"apple\" count as different lines. When off, they're treated as the same duplicate." },
-            { "term": "Sort lines", "meaning": "Alphabetizes the cleaned output. Leave off to preserve your original line order." },
-            { "term": "Trim whitespace", "meaning": "Removes leading/trailing spaces before comparing lines, so \" apple\" and \"apple\" are treated as duplicates. Turn off to compare lines byte-for-byte." },
-            { "term": "Keep first / last", "meaning": "Which copy of a repeated line survives in the output, and at which position — the first time it appeared, or the last." }
+            {
+              "term": "केस-सेंसिटिव",
+              "meaning": "चालू होने पर, \"Apple\" और \"apple\" अलग-अलग लाइनें मानी जाती हैं। बंद होने पर, दोनों को एक जैसा डुप्लिकेट माना जाता है।"
+            },
+            {
+              "term": "लाइनें सॉर्ट करें",
+              "meaning": "साफ़ किए गए आउटपुट को वर्णानुक्रम में लगाता है। अपने मूल लाइन क्रम को बनाए रखने के लिए इसे बंद रखें।"
+            },
+            {
+              "term": "व्हाइटस्पेस ट्रिम करें",
+              "meaning": "लाइनों की तुलना करने से पहले शुरुआती/आख़िरी स्पेस हटा देता है, ताकि \" apple\" और \"apple\" को डुप्लिकेट माना जाए। लाइनों की बाइट-दर-बाइट तुलना करने के लिए इसे बंद करें।"
+            },
+            {
+              "term": "पहला / आख़िरी रखें",
+              "meaning": "किसी दोहराई गई लाइन की कौन-सी प्रति आउटपुट में बचती है, और किस स्थिति पर — जब यह पहली बार आई थी, या आख़िरी बार।"
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your List",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Paste your list here, one item per line...",
-        "caseSensitive": "Case-sensitive",
-        "sortLines": "Sort lines",
-        "trimWhitespace": "Trim whitespace",
-        "keepOccurrence": "Keep occurrence",
-        "keepFirst": "First",
-        "keepLast": "Last",
-        "removeDuplicates": "Remove Duplicates",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "inputTitle": "आपकी सूची",
+        "inputLabel": "इनपुट",
+        "inputPlaceholder": "अपनी सूची यहाँ पेस्ट करें, प्रति लाइन एक आइटम...",
+        "caseSensitive": "केस-सेंसिटिव",
+        "sortLines": "लाइनें सॉर्ट करें",
+        "trimWhitespace": "व्हाइटस्पेस ट्रिम करें",
+        "keepOccurrence": "कौन-सी घटना रखें",
+        "keepFirst": "पहली",
+        "keepLast": "आख़िरी",
+        "removeDuplicates": "डुप्लिकेट हटाएँ",
+        "copy": "कॉपी करें",
+        "copied": "कॉपी हो गया!"
       },
       "errors": {
-        "required": "Please enter some text."
+        "required": "कृपया कुछ टेक्स्ट दर्ज करें।"
       },
       "education": {
         "intro": {
-          "title": "How Deduplication Actually Works",
-          "paragraph1": "The naive way to find duplicates — compare every line against every other line — takes time that grows quadratically with the list's size: doubling a list's length roughly quadruples the comparison work, which becomes impractical past a few thousand lines. A hash-based approach sidesteps this entirely by keeping a running set of every line already seen: for each new line, checking whether it's already in that set takes roughly constant time regardless of how large the set has grown, since a hash function converts the line's content directly into a lookup position rather than requiring a scan. This is exactly why deduplication tools, including this one, can process lists with tens of thousands of lines instantly rather than freezing.",
-          "paragraph2": "This also explains why the settings on this tool matter more than they might first appear. \"Case-sensitive\" and \"trim whitespace\" both control what actually goes into the hash function — turning case-sensitivity off means \"Apple\" and \"apple\" hash to the same bucket and collapse into one; trimming whitespace means \" apple\" and \"apple\" do the same. \"Keep first\" versus \"keep last\" doesn't change which lines are considered duplicates at all — only which single copy of each duplicate group is the one that survives into the output, and where it ends up positioned.",
+          "title": "डीड्यूप्लिकेशन असल में कैसे काम करता है",
+          "paragraph1": "डुप्लिकेट ढूँढ़ने का भोला तरीक़ा — हर लाइन की हर दूसरी लाइन से तुलना करना — इतना समय लेता है जो सूची के आकार के साथ वर्गाकार रूप से बढ़ता है: किसी सूची की लंबाई दोगुनी करने से तुलना का काम लगभग चौगुना हो जाता है, जो कुछ हज़ार लाइनों के बाद अव्यावहारिक हो जाता है। एक हैश-आधारित तरीक़ा पहले से देखी गई हर लाइन का एक चलता सेट रखकर इसे पूरी तरह टाल देता है: हर नई लाइन के लिए, यह जाँचना कि क्या वह पहले से उस सेट में है, सेट कितना भी बड़ा क्यों न हो गया हो, लगभग स्थिर समय लेता है, क्योंकि एक हैश फ़ंक्शन लाइन की सामग्री को सीधे एक लुकअप स्थिति में बदल देता है, स्कैन की ज़रूरत के बिना। यही ठीक वजह है कि डीड्यूप्लिकेशन टूल, इस टूल सहित, हज़ारों लाइनों वाली सूचियों को रुकने के बजाय तुरंत प्रोसेस कर सकते हैं।",
+          "paragraph2": "यह यह भी बताता है कि इस टूल की सेटिंग्स पहली नज़र में दिखने से कहीं ज़्यादा मायने क्यों रखती हैं। \"केस-सेंसिटिव\" और \"व्हाइटस्पेस ट्रिम करें\" दोनों यह नियंत्रित करती हैं कि हैश फ़ंक्शन में असल में क्या जाता है — केस-सेंसिटिविटी बंद करने का मतलब है कि \"Apple\" और \"apple\" एक ही बकेट में हैश होकर एक बन जाते हैं; व्हाइटस्पेस ट्रिम करने का मतलब है कि \" apple\" और \"apple\" भी वैसा ही करते हैं। \"पहला रखें\" बनाम \"आख़िरी रखें\" बिल्कुल भी यह नहीं बदलता कि कौन-सी लाइनें डुप्लिकेट मानी जाती हैं — यह केवल यह बदलता है कि हर डुप्लिकेट समूह की कौन-सी एक प्रति आउटपुट में बचती है, और वह कहाँ स्थित होती है।",
           "diagram": {
-            "inputLabel": "Input Lines",
-            "hashSetLabel": "Seen Set",
-            "outputLabel": "Output",
-            "caption": "How hash-based deduplication works: each input line is checked against a running set of lines already seen. A new line is added to both the set and the output; a repeat (struck through) is skipped entirely."
+            "inputLabel": "इनपुट लाइनें",
+            "hashSetLabel": "देखा गया सेट",
+            "outputLabel": "आउटपुट",
+            "caption": "हैश-आधारित डीड्यूप्लिकेशन कैसे काम करता है: हर इनपुट लाइन को पहले से देखी गई लाइनों के एक चलते सेट के ख़िलाफ़ जाँचा जाता है। एक नई लाइन सेट और आउटपुट दोनों में जोड़ी जाती है; एक दोहराव (काटा हुआ दिखाया गया) पूरी तरह छोड़ दिया जाता है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How the same list resolves differently depending on the settings used.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "इस्तेमाल की गई सेटिंग्स के अनुसार एक ही सूची अलग-अलग तरीक़े से कैसे हल होती है।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "\"Apple, apple, Banana\" — case-sensitive on", "result": "All 3 lines kept — \"Apple\" and \"apple\" differ" },
-            { "scenario": "Same list — case-sensitive off", "result": "2 lines kept, 1 removed — treated as the same" }
+            {
+              "scenario": "\"Apple, apple, Banana\" — केस-सेंसिटिव चालू",
+              "result": "सभी 3 लाइनें रखी गईं — \"Apple\" और \"apple\" अलग हैं"
+            },
+            {
+              "scenario": "वही सूची — केस-सेंसिटिव बंद",
+              "result": "2 लाइनें रखी गईं, 1 हटाई गई — एक जैसा माना गया"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why does this tool drop blank lines entirely?",
-              "answer": "Blank lines don't carry any meaningful content to deduplicate — a list of five blank lines isn't five different pieces of data, it's just formatting. Dropping them keeps the output focused purely on actual list items, rather than cluttering it with meaningless empty entries."
+              "question": "यह टूल ख़ाली लाइनों को पूरी तरह क्यों हटा देता है?",
+              "answer": "ख़ाली लाइनें डीड्यूप्लिकेट करने लायक़ कोई सार्थक सामग्री नहीं रखतीं — पाँच ख़ाली लाइनों की सूची पाँच अलग-अलग डेटा टुकड़े नहीं है, यह बस फ़ॉर्मेटिंग है। इन्हें हटाने से आउटपुट पूरी तरह असली सूची आइटम पर केंद्रित रहता है, बजाय इसे अर्थहीन ख़ाली एंट्री से भरने के।"
             },
             {
-              "question": "What's actually the difference between \"case-sensitive\" and \"trim whitespace\"?",
-              "answer": "Case-sensitivity controls letter casing specifically — whether \"Apple\" and \"apple\" are treated as the same line. Trimming whitespace is a separate, independent setting that controls leading and trailing spaces — whether \" apple\" and \"apple\" are treated as the same line. You can toggle either one independently of the other."
+              "question": "\"केस-सेंसिटिव\" और \"व्हाइटस्पेस ट्रिम करें\" में असल फ़र्क़ क्या है?",
+              "answer": "केस-सेंसिटिविटी ख़ासतौर पर अक्षर के केस को नियंत्रित करती है — क्या \"Apple\" और \"apple\" को एक ही लाइन माना जाए। व्हाइटस्पेस ट्रिम करना एक अलग, स्वतंत्र सेटिंग है जो शुरुआती और आख़िरी स्पेस को नियंत्रित करती है — क्या \" apple\" और \"apple\" को एक ही लाइन माना जाए। आप इन्हें एक-दूसरे से स्वतंत्र रूप से टॉगल कर सकते हैं।"
             },
             {
-              "question": "Why would I ever want to keep the last occurrence instead of the first?",
-              "answer": "Order often carries meaning: in a chronologically appended log or a list where later entries represent updates or corrections to earlier ones, the most recent occurrence of a repeated key is usually the one you actually want to keep, not the oldest. \"Keep last\" preserves that intent instead of defaulting to whichever came first."
+              "question": "मुझे पहली घटना के बजाय आख़िरी घटना कब रखनी चाहिए?",
+              "answer": "क्रम अक्सर मायने रखता है: कालानुक्रमिक रूप से जोड़े गए लॉग में या ऐसी सूची में जहाँ बाद की एंट्री पहले वाली को अपडेट या सुधार दर्शाती हैं, किसी दोहराई गई की की सबसे हालिया घटना आमतौर पर वही होती है जो आप असल में रखना चाहते हैं, सबसे पुरानी नहीं। \"आख़िरी रखें\" उस मंशा को बनाए रखता है, बजाय डिफ़ॉल्ट रूप से जो भी पहले आया उसे चुनने के।"
             },
             {
-              "question": "Does sorting change which lines are considered duplicates?",
-              "answer": "No — sorting only reorders the already-deduplicated output alphabetically; it happens as a separate step after duplicate detection is complete, and has no effect at all on which lines were identified as repeats or which occurrence was kept."
+              "question": "क्या सॉर्टिंग यह बदल देती है कि कौन-सी लाइनें डुप्लिकेट मानी जाती हैं?",
+              "answer": "नहीं — सॉर्टिंग केवल पहले से डीड्यूप्लिकेट किए गए आउटपुट को वर्णानुक्रम में दोबारा क्रमबद्ध करती है; यह डुप्लिकेट पहचान पूरी होने के बाद एक अलग चरण के रूप में होती है, और इसका इस पर बिल्कुल कोई असर नहीं पड़ता कि कौन-सी लाइनें दोहराव के रूप में पहचानी गईं या कौन-सी घटना रखी गई।"
             },
             {
-              "question": "Is this tool's line-ending handling reliable across Windows, macOS, and Linux files?",
-              "answer": "Yes — the three common line-ending conventions (\\r\\n on Windows, \\n on macOS/Linux, and the older \\r alone) are all recognized and normalized automatically, so pasting a list exported from any of these systems works correctly without manual cleanup."
+              "question": "क्या इस टूल की लाइन-एंडिंग हैंडलिंग Windows, macOS, और Linux फ़ाइलों में भरोसेमंद है?",
+              "answer": "हाँ — तीनों आम लाइन-एंडिंग परंपराएँ (Windows पर \\r\\n, macOS/Linux पर \\n, और पुरानी अकेली \\r) सभी को अपने-आप पहचाना और सामान्य किया जाता है, इसलिए इनमें से किसी भी सिस्टम से एक्सपोर्ट की गई सूची को पेस्ट करना बिना मैनुअल सफ़ाई के सही तरीक़े से काम करता है।"
             },
             {
-              "question": "Why does the duplicates list show a count next to each repeated line?",
-              "answer": "The count is the total number of times that exact line appeared in your original input, including the one copy that was kept — so a count of 3 means two copies were removed, not three. This makes it possible to spot which values were duplicated most heavily at a glance, not just that duplicates existed somewhere."
+              "question": "डुप्लिकेट सूची हर दोहराई गई लाइन के बगल में एक संख्या क्यों दिखाती है?",
+              "answer": "यह संख्या वह कुल बार है जितनी बार वह ठीक लाइन आपके मूल इनपुट में दिखाई दी, जिसमें वह एक प्रति भी शामिल है जो रखी गई — इसलिए 3 की संख्या का मतलब है कि दो प्रतियाँ हटाई गईं, तीन नहीं। इससे एक नज़र में यह देखना संभव हो जाता है कि कौन-से मान सबसे ज़्यादा दोहराए गए, न कि सिर्फ़ यह कि कहीं डुप्लिकेट मौजूद थे।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "From Punch-Card Sorting to the Hash Table",
-            "paragraph": "Before hash tables existed, finding duplicates in a large dataset meant sorting it first — an approach with roots in mechanical punch-card sorting machines used for census and business data processing in the early-to-mid 20th century, where physically ordering cards made matching records against each other practical at scale. The conceptual breakthrough that made lookup-based deduplication possible arrived with Hans Peter Luhn's internal IBM research in the 1950s on hashing, formally published by his colleague W. W. Peterson in 1957 — introducing the idea of computing a numeric address directly from a piece of data's content, rather than needing to search or sort for it."
+            "title": "पंच-कार्ड सॉर्टिंग से हैश टेबल तक",
+            "paragraph": "हैश टेबल के अस्तित्व में आने से पहले, किसी बड़े डेटासेट में डुप्लिकेट ढूँढ़ने का मतलब था उसे पहले सॉर्ट करना — एक ऐसा तरीक़ा जिसकी जड़ें 20वीं सदी के शुरुआती-से-मध्य में जनगणना और व्यावसायिक डेटा प्रोसेसिंग के लिए इस्तेमाल होने वाली यांत्रिक पंच-कार्ड सॉर्टिंग मशीनों में हैं, जहाँ कार्डों को भौतिक रूप से क्रमबद्ध करने से रिकॉर्ड को एक-दूसरे से बड़े पैमाने पर मिलाना व्यावहारिक हो जाता था। जिस वैचारिक सफलता ने लुकअप-आधारित डीड्यूप्लिकेशन को संभव बनाया वह 1950 के दशक में Hans Peter Luhn के हैशिंग पर आंतरिक IBM शोध के साथ आई, जिसे उनके सहयोगी W. W. Peterson ने 1957 में औपचारिक रूप से प्रकाशित किया — यह विचार पेश करते हुए कि किसी डेटा टुकड़े की सामग्री से सीधे एक संख्यात्मक पता गणना किया जा सकता है, उसे खोजने या सॉर्ट करने की ज़रूरत के बिना।"
           },
           "modernDevelopments": {
-            "title": "From Punch Cards to Instant Browser-Based Deduplication",
-            "paragraph": "Hashing became a foundational tool across computing well beyond deduplication — it underpins database indexing, caching systems, and cryptographic fingerprinting alike. What's changed most for a tool like this one specifically is where the computation happens: modern JavaScript engines run hash-based Set and Map operations fast enough to deduplicate substantial lists instantly inside a web browser, on data that never leaves the user's device — a capability that would have required a dedicated server-side batch process not many years ago."
+            "title": "पंच कार्ड से तुरंत ब्राउज़र-आधारित डीड्यूप्लिकेशन तक",
+            "paragraph": "हैशिंग डीड्यूप्लिकेशन से कहीं आगे कंप्यूटिंग में एक बुनियादी औज़ार बन गया — यह डेटाबेस इंडेक्सिंग, कैशिंग सिस्टम, और क्रिप्टोग्राफ़िक फ़िंगरप्रिंटिंग, सबका आधार है। इस जैसे टूल के लिए ख़ासतौर पर जो सबसे ज़्यादा बदला है वह है गणना कहाँ होती है: आधुनिक JavaScript इंजन हैश-आधारित Set और Map ऑपरेशन इतनी तेज़ी से चला सकते हैं कि वेब ब्राउज़र के भीतर काफ़ी बड़ी सूचियों को तुरंत डीड्यूप्लिकेट कर सकें, ऐसे डेटा पर जो उपयोगकर्ता के डिवाइस से कभी बाहर नहीं जाता — एक क्षमता जिसके लिए कुछ साल पहले तक एक समर्पित सर्वर-साइड बैच प्रोसेस चाहिए होती।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Hashing, set data structures, and algorithmic complexity — the exact concepts this tool relies on — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "हैशिंग, सेट डेटा संरचनाएँ, और एल्गोरिदमिक जटिलता — ठीक वही अवधारणाएँ जिन पर यह टूल निर्भर करता है — कंप्यूटर साइंस प्रोग्रामों में पढ़ाई जाती हैं। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "नहीं — MIT का Course 6-3 (कंप्यूटर साइंस एंड इंजीनियरिंग) MIT के कैंब्रिज कैंपस पर एक इन-पर्सन अंडरग्रेजुएट प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "नहीं — Stanford का कंप्यूटर साइंस बैचलर प्रोग्राम Stanford के कैंपस पर एक इन-पर्सन डिग्री है।"
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "नहीं — CMU का School of Computer Science बैचलर प्रोग्राम उसके पिट्सबर्ग कैंपस पर इन-पर्सन है।"
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "नहीं — NUS का Bachelor of Computing in Computer Science एक इन-पर्सन प्रोग्राम है, जिसमें कैंपस पर या विदेश में अनिवार्य इंटर्नशिप शामिल है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "नहीं — Oxford की कंप्यूटर साइंस डिग्री उसके ट्यूटोरियल सिस्टम के ज़रिए इन-पर्सन पढ़ाई जाती है, जिसमें एक या दो छात्र सीधे किसी ट्यूटर से मिलते हैं।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "अपने College of Engineering के ज़रिए ABET-मान्यता प्राप्त Bachelor of Science in Computer Science प्रदान करता है।",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific Reference",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Peterson, W. W. (1957). Addressing for Random-Access Storage. IBM Journal of Research and Development, 1(2), 130–146.",
-          "note": "The first published paper describing hashing — computing a lookup address directly from data content — the exact technique this tool's near-instant duplicate detection relies on.",
+          "note": "हैशिंग का वर्णन करने वाला पहला प्रकाशित पेपर — डेटा सामग्री से सीधे एक लुकअप पता गणना करना — ठीक वही तकनीक जिस पर इस टूल की लगभग-तुरंत डुप्लिकेट पहचान निर्भर करती है।",
           "url": "https://doi.org/10.1147/rd.12.0130",
-          "readOriginal": "Read the Original Paper"
+          "readOriginal": "मूल शोधपत्र पढ़ें"
         }
       }
     },
