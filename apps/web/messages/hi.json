@@ -5794,166 +5794,187 @@
       }
     },
     "file-name-sanitizer": {
-      "title": "File Name Sanitizer",
-      "description": "Clean up file names for safe use across Windows, macOS, and Linux — with a live report of exactly what was changed and why.",
+      "title": "फ़ाइल नेम सैनिटाइज़र",
+      "description": "Windows, macOS, और Linux में सुरक्षित उपयोग के लिए फ़ाइल नाम साफ़ करें — यह बिल्कुल क्या बदला गया और क्यों, इसकी एक लाइव रिपोर्ट के साथ।",
       "nav": {
-        "tool": "Sanitizer",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "सैनिटाइज़र",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Safe File Name",
-        "placeholder": "Enter a file name to see the cleaned-up, cross-platform-safe version here.",
-        "changesTitle": "What Was Changed",
-        "noChanges": "Nothing needed changing — this file name was already safe.",
+        "resultTitle": "सुरक्षित फ़ाइल नाम",
+        "placeholder": "यहाँ साफ़ किया गया, क्रॉस-प्लेटफ़ॉर्म-सुरक्षित संस्करण देखने के लिए एक फ़ाइल नाम दर्ज करें।",
+        "changesTitle": "क्या बदला गया",
+        "noChanges": "कुछ बदलने की ज़रूरत नहीं थी — यह फ़ाइल नाम पहले से ही सुरक्षित था।",
         "changeLabels": {
-          "DIACRITICS": "Accented characters were transliterated to plain ASCII.",
-          "ILLEGAL_CHARS": "Characters not allowed on Windows/macOS/Linux were removed.",
-          "WHITESPACE": "Spaces were replaced with your chosen separator.",
-          "TRAILING_DOTS_SPACES": "Trailing dots or spaces were removed (Windows forbids these).",
-          "RESERVED_NAME": "This matched a Windows-reserved device name, so a suffix was added.",
-          "TRUNCATED": "The name was too long and was shortened to fit the limit."
+          "DIACRITICS": "एक्सेंट वाले कैरेक्टर सादे ASCII में ट्रांसलिटरेट किए गए।",
+          "ILLEGAL_CHARS": "Windows/macOS/Linux पर अनुमति न पाने वाले कैरेक्टर हटा दिए गए।",
+          "WHITESPACE": "स्पेस को आपके चुने गए सेपरेटर से बदल दिया गया।",
+          "TRAILING_DOTS_SPACES": "आख़िरी डॉट या स्पेस हटा दिए गए (Windows इनकी अनुमति नहीं देता)।",
+          "RESERVED_NAME": "यह किसी Windows-रिज़र्व्ड डिवाइस नाम से मेल खाता था, इसलिए एक सफ़िक्स जोड़ा गया।",
+          "TRUNCATED": "नाम बहुत लंबा था और सीमा में फ़िट होने के लिए छोटा किया गया।"
         },
         "platformRules": {
-          "title": "Cross-Platform Naming Rules",
-          "intro": "The specific restrictions this tool guards against, by platform.",
+          "title": "क्रॉस-प्लेटफ़ॉर्म नामकरण नियम",
+          "intro": "यह टूल जिन विशिष्ट पाबंदियों से बचाता है, प्लेटफ़ॉर्म के अनुसार।",
           "rows": [
-            { "platform": "Windows", "rule": "Forbids < > : \" / \\ | ? * and control characters; forbids trailing dots/spaces; reserves CON, PRN, AUX, NUL, COM1–9, and LPT1–9." },
-            { "platform": "macOS", "rule": "Forbids the colon (:) and a leading dot creates a hidden file; the forward slash (/) is reserved as a path separator." },
-            { "platform": "Linux / Unix", "rule": "Permits almost any byte except NUL and the forward slash (/); a leading dot creates a hidden file by convention." },
-            { "platform": "Most filesystems", "rule": "Cap individual file names at 255 bytes/characters, regardless of operating system." }
+            {
+              "platform": "Windows",
+              "rule": "< > : \" / \\ | ? * और कंट्रोल कैरेक्टर की मनाही; आख़िरी डॉट/स्पेस की मनाही; CON, PRN, AUX, NUL, COM1–9, और LPT1–9 रिज़र्व्ड हैं।"
+            },
+            {
+              "platform": "macOS",
+              "rule": "कोलन (:) की मनाही और शुरुआती डॉट एक हिडन फ़ाइल बनाता है; फ़ॉरवर्ड स्लैश (/) पाथ सेपरेटर के लिए रिज़र्व्ड है।"
+            },
+            {
+              "platform": "Linux / Unix",
+              "rule": "NUL और फ़ॉरवर्ड स्लैश (/) को छोड़कर लगभग किसी भी बाइट की अनुमति है; परंपरा के अनुसार शुरुआती डॉट एक हिडन फ़ाइल बनाता है।"
+            },
+            {
+              "platform": "ज़्यादातर फ़ाइल सिस्टम",
+              "rule": "ऑपरेटिंग सिस्टम चाहे जो भी हो, हर फ़ाइल नाम की सीमा 255 बाइट्स/कैरेक्टर होती है।"
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your File Name",
-        "inputLabel": "File name",
+        "inputTitle": "आपका फ़ाइल नाम",
+        "inputLabel": "फ़ाइल नाम",
         "inputPlaceholder": "My Resume Final.PDF",
-        "separator": "Separator",
-        "separatorDash": "Dash (-)",
-        "separatorUnderscore": "Underscore (_)",
-        "lowercase": "Lowercase",
-        "transliterate": "Transliterate accents to ASCII (café → cafe)",
-        "sanitize": "Sanitize",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "separator": "सेपरेटर",
+        "separatorDash": "डैश (-)",
+        "separatorUnderscore": "अंडरस्कोर (_)",
+        "lowercase": "लोअरकेस",
+        "transliterate": "एक्सेंट को ASCII में ट्रांसलिटरेट करें (café → cafe)",
+        "sanitize": "सैनिटाइज़ करें",
+        "copy": "कॉपी करें",
+        "copied": "कॉपी हो गया!"
       },
       "errors": {
-        "required": "Please enter a file name.",
-        "invalidResult": "Nothing valid remains after cleaning this file name."
+        "required": "कृपया एक फ़ाइल नाम दर्ज करें।",
+        "invalidResult": "इस फ़ाइल नाम को साफ़ करने के बाद कुछ भी मान्य नहीं बचता।"
       },
       "education": {
         "intro": {
-          "title": "Why File Names Need Sanitizing at All",
-          "paragraph1": "A file name isn't just a label — on most operating systems, it's also data the file system's own command interpreter can parse, which is exactly why certain characters are forbidden. A forward slash or backslash means a path separator, a colon can mean a drive letter or an alternate data stream, and a question mark or asterisk means a wildcard pattern — so a file literally named \"invoice?.pdf\" would be ambiguous or outright rejected by the very systems meant to store it. Sanitizing a file name means stripping or replacing exactly these structurally meaningful characters, while leaving everything else about the name intact.",
-          "paragraph2": "Beyond individual characters, whole file names can be reserved outright: Windows blocks CON, PRN, AUX, NUL, and the numbered COM and LPT ports as file names, in any case and with or without an extension, because these strings are historically bound to physical devices at the operating-system level, not to the file system. A file name ending in a dot or space is silently stripped by Windows' own APIs, which can create confusing mismatches between what a user types and what actually gets saved. This tool's \"what changed\" report exists specifically to make each of these otherwise invisible corrections visible.",
+          "title": "फ़ाइल नामों को सैनिटाइज़ करने की ज़रूरत ही क्यों है",
+          "paragraph1": "फ़ाइल नाम सिर्फ़ एक लेबल नहीं है — ज़्यादातर ऑपरेटिंग सिस्टम पर, यह ऐसा डेटा भी है जिसे फ़ाइल सिस्टम का अपना कमांड इंटरप्रेटर पार्स कर सकता है, यही ठीक वजह है कि कुछ कैरेक्टरों की मनाही होती है। एक फ़ॉरवर्ड स्लैश या बैकस्लैश का मतलब है एक पाथ सेपरेटर, एक कोलन का मतलब हो सकता है ड्राइव लेटर या एक ऑल्टरनेट डेटा स्ट्रीम, और एक प्रश्न चिह्न या तारांकन का मतलब है एक वाइल्डकार्ड पैटर्न — इसलिए \"invoice?.pdf\" नाम की एक फ़ाइल उन्हीं सिस्टम के लिए अस्पष्ट होगी या सीधे अस्वीकार कर दी जाएगी जो उसे सहेजने वाले हैं। किसी फ़ाइल नाम को सैनिटाइज़ करने का मतलब है ठीक इन्हीं संरचनात्मक रूप से महत्वपूर्ण कैरेक्टरों को हटाना या बदलना, जबकि नाम की बाक़ी हर चीज़ को वैसे ही रहने देना।",
+          "paragraph2": "अलग-अलग कैरेक्टर से आगे, पूरे फ़ाइल नाम भी सीधे रिज़र्व्ड हो सकते हैं: Windows CON, PRN, AUX, NUL, और नंबर वाले COM और LPT पोर्ट को फ़ाइल नाम के रूप में ब्लॉक करता है, किसी भी केस में और एक्सटेंशन के साथ या बिना, क्योंकि ये स्ट्रिंग ऐतिहासिक रूप से ऑपरेटिंग-सिस्टम स्तर पर भौतिक डिवाइसों से जुड़ी हैं, फ़ाइल सिस्टम से नहीं। एक डॉट या स्पेस पर ख़त्म होने वाला फ़ाइल नाम Windows के अपने API द्वारा चुपचाप हटा दिया जाता है, जो उपयोगकर्ता के टाइप किए गए और असल में सेव हुए के बीच उलझन भरे बेमेल पैदा कर सकता है। इस टूल की \"क्या बदला\" रिपोर्ट ख़ासतौर पर इन आमतौर पर अदृश्य सुधारों को दिखाई देने के लिए बनाई गई है।",
           "diagram": {
-            "rawLabel": "Raw Name",
-            "normalizeLabel": "Strip Illegal\nChars + Spaces",
-            "checkLabel": "Check Reserved\nNames + Length",
-            "safeLabel": "Safe Name",
-            "caption": "The sanitization pipeline: a raw file name is normalized (illegal characters and whitespace handled), checked against reserved names and length limits, and only then considered safe to use everywhere."
+            "rawLabel": "कच्चा नाम",
+            "normalizeLabel": "अवैध कैरेक्टर\n+ स्पेस हटाएँ",
+            "checkLabel": "रिज़र्व्ड नाम\n+ लंबाई जाँचें",
+            "safeLabel": "सुरक्षित नाम",
+            "caption": "सैनिटाइज़ेशन पाइपलाइन: एक कच्चे फ़ाइल नाम को सामान्य किया जाता है (अवैध कैरेक्टर और व्हाइटस्पेस संभाले जाते हैं), रिज़र्व्ड नामों और लंबाई सीमाओं के ख़िलाफ़ जाँचा जाता है, और तभी इसे हर जगह इस्तेमाल के लिए सुरक्षित माना जाता है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How different problem file names get resolved.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "अलग-अलग समस्या वाले फ़ाइल नाम कैसे हल किए जाते हैं।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "\"café résumé.pdf\" with transliteration enabled", "result": "cafe-resume.pdf" },
-            { "scenario": "\"CON.txt\" — a Windows-reserved device name", "result": "con-file.txt" },
-            { "scenario": "\"notes..\" — trailing dots", "result": "notes" }
+            {
+              "scenario": "ट्रांसलिटरेशन चालू होने पर \"café résumé.pdf\"",
+              "result": "cafe-resume.pdf"
+            },
+            {
+              "scenario": "\"CON.txt\" — एक Windows-रिज़र्व्ड डिवाइस नाम",
+              "result": "con-file.txt"
+            },
+            {
+              "scenario": "\"notes..\" — आख़िरी डॉट",
+              "result": "notes"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why replace spaces with dashes instead of just removing them?",
-              "answer": "Removing spaces entirely would merge words together and make the name harder to read (\"myfile\" instead of \"my-file\"), while a separator preserves the word boundaries. Dashes and underscores are also both universally safe across every major operating system and are the convention most web upload systems and URLs expect."
+              "question": "स्पेस को बस हटाने के बजाय डैश से क्यों बदला जाता है?",
+              "answer": "स्पेस को पूरी तरह हटाने से शब्द आपस में मिल जाते और नाम पढ़ना मुश्क़िल हो जाता (\"myfile\" के बजाय \"my-file\"), जबकि एक सेपरेटर शब्दों के बीच की सीमा बनाए रखता है। डैश और अंडरस्कोर दोनों भी हर बड़े ऑपरेटिंग सिस्टम पर सार्वभौमिक रूप से सुरक्षित हैं और ज़्यादातर वेब अपलोड सिस्टम और URL जिसकी अपेक्षा करते हैं, वही परंपरा है।"
             },
             {
-              "question": "What characters are actually illegal in file names, and why these specific ones?",
-              "answer": "On Windows: < > : \" / \\ | ? * and any control character (ASCII 0–31). Each one is reserved for a structural reason — / and \\ are path separators, : can denote a drive letter, ? and * are wildcard characters in command shells, and < > | are shell redirection and piping operators. macOS and Linux are far more permissive, but this tool sanitizes to the strictest common set so the result is guaranteed safe everywhere."
+              "question": "फ़ाइल नामों में असल में कौन-से कैरेक्टर अवैध हैं, और यही ख़ास वाले क्यों?",
+              "answer": "Windows पर: < > : \" / \\ | ? * और कोई भी कंट्रोल कैरेक्टर (ASCII 0–31)। हर एक को एक संरचनात्मक वजह से रिज़र्व किया गया है — / और \\ पाथ सेपरेटर हैं, : ड्राइव लेटर दर्शा सकता है, ? और * कमांड शेल में वाइल्डकार्ड कैरेक्टर हैं, और < > | शेल रीडायरेक्शन और पाइपिंग ऑपरेटर हैं। macOS और Linux कहीं ज़्यादा उदार हैं, लेकिन यह टूल सबसे सख़्त सामान्य सेट के अनुसार सैनिटाइज़ करता है ताकि परिणाम हर जगह सुरक्षित होने की गारंटी हो।"
             },
             {
-              "question": "Why does \"CON.txt\" get renamed instead of just cleaned up?",
-              "answer": "Because CON isn't an illegal-character problem — every character in it is perfectly valid. The entire base name is reserved by Windows as an alias for the system console device, regardless of extension or case, so \"con.txt\", \"CON.txt\", and even plain \"con\" are all blocked outright. The only fix is renaming the base name itself, which is why this tool appends a suffix rather than trying to strip anything."
+              "question": "\"CON.txt\" को सिर्फ़ साफ़ करने के बजाय नाम क्यों बदल दिया जाता है?",
+              "answer": "क्योंकि CON कोई अवैध-कैरेक्टर समस्या नहीं है — इसमें हर कैरेक्टर बिल्कुल मान्य है। पूरा बेस नाम Windows द्वारा सिस्टम कंसोल डिवाइस के उपनाम के रूप में रिज़र्व्ड है, एक्सटेंशन या केस चाहे जो भी हो, इसलिए \"con.txt\", \"CON.txt\", और यहाँ तक कि सादा \"con\" भी पूरी तरह ब्लॉक हैं। एकमात्र समाधान ख़ुद बेस नाम बदलना है, यही वजह है कि यह टूल कुछ हटाने की कोशिश करने के बजाय एक सफ़िक्स जोड़ता है।"
             },
             {
-              "question": "What's the 255-character limit about, and does it apply to me?",
-              "answer": "255 is the maximum file name length on most modern file systems (NTFS, ext4, APFS), measured per path component, not the full path. Most everyday file names never come close to this limit, but names auto-generated by exporting long titles, timestamps, or metadata into a file name can occasionally exceed it — this tool truncates while always preserving the extension."
+              "question": "255-कैरेक्टर सीमा क्या है, और क्या यह मुझ पर लागू होती है?",
+              "answer": "255 ज़्यादातर आधुनिक फ़ाइल सिस्टम (NTFS, ext4, APFS) पर अधिकतम फ़ाइल नाम की लंबाई है, जो हर पाथ कंपोनेंट के लिए मापी जाती है, न कि पूरे पाथ के लिए। ज़्यादातर रोज़मर्रा के फ़ाइल नाम इस सीमा के क़रीब भी नहीं पहुँचते, लेकिन लंबे टाइटल, टाइमस्टैंप, या मेटाडेटा को फ़ाइल नाम में एक्सपोर्ट करके अपने-आप बने नाम कभी-कभी इसे पार कर सकते हैं — यह टूल हमेशा एक्सटेंशन को सुरक्षित रखते हुए ट्रंकेट करता है।"
             },
             {
-              "question": "Why would I want to transliterate accented characters?",
-              "answer": "Accented and non-Latin characters (é, ñ, ü, etc.) are technically valid in modern file names on every major OS, but they can still cause real problems: older tools, certain command-line environments, and some upload or CDN systems handle non-ASCII file names inconsistently or reject them outright. Transliterating to plain ASCII trades a small amount of readability for guaranteed compatibility with the widest possible range of systems."
+              "question": "मुझे एक्सेंट वाले कैरेक्टर ट्रांसलिटरेट क्यों करने चाहिए?",
+              "answer": "एक्सेंट और नॉन-लैटिन कैरेक्टर (é, ñ, ü, आदि) तकनीकी रूप से हर बड़े OS पर आधुनिक फ़ाइल नामों में मान्य हैं, लेकिन ये फिर भी असली समस्याएँ पैदा कर सकते हैं: पुराने टूल, कुछ कमांड-लाइन एनवायरनमेंट, और कुछ अपलोड या CDN सिस्टम नॉन-ASCII फ़ाइल नामों को असंगत तरीक़े से संभालते हैं या सीधे अस्वीकार कर देते हैं। सादे ASCII में ट्रांसलिटरेट करना पठनीयता की एक छोटी-सी क़ीमत पर सिस्टम की सबसे व्यापक संभव रेंज के साथ गारंटीशुदा संगतता देता है।"
             },
             {
-              "question": "Does this tool rename my actual file, or just suggest a new name?",
-              "answer": "This tool only computes and displays what a safe version of the name would look like — it never touches any real file, since everything runs on text you type or paste directly in your browser. You still need to rename the actual file yourself using the suggested result."
+              "question": "क्या यह टूल मेरी असली फ़ाइल का नाम बदलता है, या बस एक नया नाम सुझाता है?",
+              "answer": "यह टूल केवल यह गणना और प्रदर्शित करता है कि नाम का सुरक्षित संस्करण कैसा दिखेगा — यह कभी किसी असली फ़ाइल को नहीं छूता, क्योंकि सब कुछ आपके द्वारा सीधे ब्राउज़र में टाइप या पेस्ट किए गए टेक्स्ट पर चलता है। असली फ़ाइल का नाम बदलने के लिए आपको ख़ुद सुझाए गए परिणाम का उपयोग करना होगा।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "Why \"CON\" and \"PRN\" Are Still Forbidden Today",
-            "paragraph": "The reserved device names this tool checks for — CON, PRN, AUX, NUL, and the numbered COM and LPT ports — trace back to early MS-DOS, where the operating system needed a way to let a single command work on either a real file or a physical device: typing \"copy report.txt PRN\" would send a file straight to the printer, using PRN as a stand-in name for whatever printer device was attached, in exactly the same command syntax used for copying between files. For that redirection trick to work reliably, these device names had to be permanently blocked as file names at the operating-system level, everywhere, so a file could never be confused for a device."
+            "title": "\"CON\" और \"PRN\" आज भी क्यों वर्जित हैं",
+            "paragraph": "यह टूल जिन रिज़र्व्ड डिवाइस नामों की जाँच करता है — CON, PRN, AUX, NUL, और नंबर वाले COM और LPT पोर्ट — उनकी जड़ें शुरुआती MS-DOS तक जाती हैं, जहाँ ऑपरेटिंग सिस्टम को एक ऐसा तरीक़ा चाहिए था जिससे एक ही कमांड किसी असली फ़ाइल या किसी भौतिक डिवाइस दोनों पर काम कर सके: \"copy report.txt PRN\" टाइप करने से एक फ़ाइल सीधे प्रिंटर पर भेज दी जाती थी, जिसमें PRN जुड़े हुए किसी भी प्रिंटर डिवाइस के लिए एक स्टैंड-इन नाम था, ठीक उसी कमांड सिंटैक्स में जो फ़ाइलों के बीच कॉपी करने के लिए इस्तेमाल होता था। इस रीडायरेक्शन तरक़ीब के भरोसेमंद ढंग से काम करने के लिए, इन डिवाइस नामों को ऑपरेटिंग-सिस्टम स्तर पर, हर जगह, फ़ाइल नाम के रूप में हमेशा के लिए ब्लॉक करना ज़रूरी था, ताकि किसी फ़ाइल को कभी किसी डिवाइस से भ्रमित न किया जा सके।"
           },
           "modernDevelopments": {
-            "title": "From 8.3 Names to Long, Unicode-Aware File Systems",
-            "paragraph": "Early DOS file systems (FAT) restricted every file name to the rigid \"8.3\" format — 8 characters, a dot, and a 3-character extension, uppercase only — which Windows 95's VFAT extension finally lifted in 1995, introducing the long file names and lowercase support taken for granted today. Modern file systems like NTFS and APFS support names up to 255 characters with full Unicode, but the legacy restrictions — the reserved device names, the illegal-character set, the ban on trailing dots — were kept for backward compatibility rather than removed, which is exactly why a modern sanitizer like this one still needs to check for rules that trace back over four decades."
+            "title": "8.3 नामों से लेकर लंबे, Unicode-अनुकूल फ़ाइल सिस्टम तक",
+            "paragraph": "शुरुआती DOS फ़ाइल सिस्टम (FAT) हर फ़ाइल नाम को सख़्त \"8.3\" फ़ॉर्मेट तक सीमित रखते थे — 8 कैरेक्टर, एक डॉट, और एक 3-कैरेक्टर एक्सटेंशन, केवल अपरकेस — जिसे Windows 95 के VFAT एक्सटेंशन ने आख़िरकार 1995 में हटाया, आज मानी जाने वाली लंबे फ़ाइल नामों और लोअरकेस सपोर्ट की शुरुआत करते हुए। NTFS और APFS जैसे आधुनिक फ़ाइल सिस्टम पूरे Unicode के साथ 255 कैरेक्टर तक के नाम सपोर्ट करते हैं, लेकिन विरासती पाबंदियाँ — रिज़र्व्ड डिवाइस नाम, अवैध-कैरेक्टर सेट, आख़िरी डॉट पर प्रतिबंध — हटाई नहीं गईं, बल्कि बैकवर्ड कम्पैटिबिलिटी के लिए बनाए रखी गईं, यही ठीक वजह है कि इस जैसे एक आधुनिक सैनिटाइज़र को आज भी उन नियमों की जाँच करनी पड़ती है जिनकी जड़ें चार दशक से भी पुरानी हैं।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "File systems, operating system design, and cross-platform compatibility — the exact concepts this tool navigates — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "फ़ाइल सिस्टम, ऑपरेटिंग सिस्टम डिज़ाइन, और क्रॉस-प्लेटफ़ॉर्म संगतता — ठीक वही अवधारणाएँ जिनसे यह टूल निपटता है — कंप्यूटर साइंस प्रोग्रामों में पढ़ाई जाती हैं। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "नहीं — MIT का Course 6-3 (कंप्यूटर साइंस एंड इंजीनियरिंग) MIT के कैंब्रिज कैंपस पर एक इन-पर्सन अंडरग्रेजुएट प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "नहीं — Stanford का कंप्यूटर साइंस बैचलर प्रोग्राम Stanford के कैंपस पर एक इन-पर्सन डिग्री है।"
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "नहीं — CMU का School of Computer Science बैचलर प्रोग्राम उसके पिट्सबर्ग कैंपस पर इन-पर्सन है।"
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "नहीं — NUS का Bachelor of Computing in Computer Science एक इन-पर्सन प्रोग्राम है, जिसमें कैंपस पर या विदेश में अनिवार्य इंटर्नशिप शामिल है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "नहीं — Oxford की कंप्यूटर साइंस डिग्री उसके ट्यूटोरियल सिस्टम के ज़रिए इन-पर्सन पढ़ाई जाती है, जिसमें एक या दो छात्र सीधे किसी ट्यूटर से मिलते हैं।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "अपने College of Engineering के ज़रिए ABET-मान्यता प्राप्त Bachelor of Science in Computer Science प्रदान करता है।",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "तकनीकी मानक",
           "citation": "Microsoft Corporation. \"Naming Files, Paths, and Namespaces.\" Windows Win32 API documentation.",
-          "note": "The official Microsoft reference defining the illegal characters and reserved device names (CON, PRN, AUX, NUL, COM1–9, LPT1–9) this tool checks against — the strictest, and therefore most broadly compatible, of the major platforms' naming rules.",
+          "note": "आधिकारिक Microsoft संदर्भ जो अवैध कैरेक्टर और रिज़र्व्ड डिवाइस नाम (CON, PRN, AUX, NUL, COM1–9, LPT1–9) परिभाषित करता है जिनकी यह टूल जाँच करता है — प्रमुख प्लेटफ़ॉर्मों के नामकरण नियमों में से सबसे सख़्त, और इसलिए सबसे व्यापक रूप से संगत।",
           "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
-          "readOriginal": "Read the Official Documentation"
+          "readOriginal": "आधिकारिक दस्तावेज़ पढ़ें"
         }
       }
     },
