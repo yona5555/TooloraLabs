@@ -3319,165 +3319,211 @@
       }
     },
     "tip-calculator": {
-      "title": "Tip Calculator",
-      "description": "Calculate the tip and split the bill instantly, with quick percentage buttons, a round-up option, and tipping norms for different countries.",
+      "title": "टिप कैलकुलेटर",
+      "description": "टिप की गणना करें और तुरंत बिल बाँटें, त्वरित प्रतिशत बटन, राउंड-अप विकल्प, और अलग-अलग देशों के टिपिंग रिवाज़ों के साथ।",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कैलकुलेटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Your Total",
-        "roundedUpNote": "Rounded up so nobody needs exact change.",
+        "resultTitle": "आपका कुल",
+        "roundedUpNote": "राउंड अप किया गया ताकि किसी को खुले पैसों की ज़रूरत न पड़े।",
         "internationalNorms": {
-          "title": "Tipping Around the World",
-          "intro": "Tipping customs vary sharply by country — what's expected in one place can be unusual, or even declined, in another.",
+          "title": "दुनिया भर में टिपिंग",
+          "intro": "टिपिंग के रिवाज़ हर देश में काफ़ी अलग होते हैं — जो एक जगह अपेक्षित है, वह कहीं और असामान्य या यहाँ तक कि अस्वीकार्य भी हो सकता है।",
           "rows": [
-            { "region": "United States & Canada", "norm": "15–20% is the standard expectation at sit-down restaurants; tipped workers often earn a lower base wage that assumes it." },
-            { "region": "United Kingdom", "norm": "10–15% is common when a service charge isn't already added to the bill — check the receipt first." },
-            { "region": "Western Europe (France, Germany, Italy, Spain)", "norm": "Service is usually already included in the price (service compris); rounding up or leaving small change is appreciated, not expected." },
-            { "region": "Japan", "norm": "Not customary and can be seen as awkward or even impolite — excellent service is already considered part of the price." },
-            { "region": "Australia & New Zealand", "norm": "Not expected; hospitality staff are paid a full minimum wage, so tipping is a discretionary bonus for exceptional service." },
-            { "region": "Gulf countries (UAE, Saudi Arabia, Qatar)", "norm": "A service charge is frequently included on the bill; a small additional cash tip for good service is appreciated but optional." }
+            {
+              "region": "संयुक्त राज्य अमेरिका और कनाडा",
+              "norm": "सिट-डाउन रेस्टोरेंट में 15–20% मानक अपेक्षा है; टिप पाने वाले कर्मचारियों को अक्सर कम आधार वेतन मिलता है, जिसमें यह मान लिया जाता है।"
+            },
+            {
+              "region": "यूनाइटेड किंगडम",
+              "norm": "जब बिल में पहले से सर्विस चार्ज न जुड़ा हो, तो 10–15% आम बात है — पहले रसीद ज़रूर जाँच लें।"
+            },
+            {
+              "region": "पश्चिमी यूरोप (फ़्रांस, जर्मनी, इटली, स्पेन)",
+              "norm": "सर्विस आमतौर पर कीमत में पहले से शामिल होती है (service compris); ऊपर राउंड करना या छुट्टे पैसे छोड़ना सराहा जाता है, अपेक्षित नहीं।"
+            },
+            {
+              "region": "जापान",
+              "norm": "यह रिवाज़ में नहीं है और इसे अजीब या असभ्य भी माना जा सकता है — बेहतरीन सेवा को पहले से ही कीमत का हिस्सा माना जाता है।"
+            },
+            {
+              "region": "ऑस्ट्रेलिया और न्यूज़ीलैंड",
+              "norm": "अपेक्षित नहीं; आतिथ्य कर्मचारियों को पूरा न्यूनतम वेतन मिलता है, इसलिए टिपिंग असाधारण सेवा के लिए एक ऐच्छिक इनाम है।"
+            },
+            {
+              "region": "खाड़ी देश (UAE, सऊदी अरब, क़तर)",
+              "norm": "बिल में अक्सर सर्विस चार्ज पहले से शामिल होता है; अच्छी सेवा के लिए थोड़ी अतिरिक्त नक़द टिप सराही जाती है लेकिन ज़रूरी नहीं।"
+            }
           ],
-          "disclaimer": "General guidance only — local customs vary by venue and change over time; when in doubt, check the bill for a service charge that may already be included."
+          "disclaimer": "यह केवल सामान्य मार्गदर्शन है — स्थानीय रिवाज़ जगह के अनुसार अलग होते हैं और समय के साथ बदलते रहते हैं; अगर संदेह हो, तो बिल में पहले से शामिल हो सकने वाले सर्विस चार्ज के लिए जाँच लें।"
         }
       },
       "form": {
-        "inputTitle": "Your Bill",
-        "billLabel": "Bill Amount",
-        "billPlaceholder": "e.g. 64",
-        "tipLabel": "Tip Percentage (%)",
-        "tipPlaceholder": "e.g. 18",
-        "peopleLabel": "Number of People",
-        "peoplePlaceholder": "e.g. 2",
-        "roundUpLabel": "Round up per person",
-        "roundUpHint": "Rounds each person's total up to a whole number so nobody needs to carry change — the extra is added to the tip."
+        "inputTitle": "आपका बिल",
+        "billLabel": "बिल राशि",
+        "billPlaceholder": "जैसे 64",
+        "tipLabel": "टिप प्रतिशत (%)",
+        "tipPlaceholder": "जैसे 18",
+        "peopleLabel": "लोगों की संख्या",
+        "peoplePlaceholder": "जैसे 2",
+        "roundUpLabel": "प्रति व्यक्ति राउंड अप करें",
+        "roundUpHint": "हर व्यक्ति के कुल को अगली पूर्ण संख्या तक राउंड कर देता है ताकि किसी को खुले पैसे न रखने पड़ें — अतिरिक्त राशि टिप में जोड़ दी जाती है।"
       },
       "result": {
-        "billAmount": "Bill Amount",
-        "people": "People",
-        "tipAmount": "Tip Amount",
-        "totalAmount": "Total Amount",
-        "tipPerPerson": "Tip / Person",
-        "totalPerPerson": "Total / Person"
+        "billAmount": "बिल राशि",
+        "people": "लोग",
+        "tipAmount": "टिप राशि",
+        "totalAmount": "कुल राशि",
+        "tipPerPerson": "टिप / व्यक्ति",
+        "totalPerPerson": "कुल / व्यक्ति"
       },
       "education": {
         "intro": {
-          "title": "How Tipping Math Works",
-          "paragraph1": "A tip is calculated as a percentage of the bill, then optionally split evenly across everyone at the table. Because it scales with the bill rather than with the amount of work a server actually did, a percentage tip on an expensive bottle of wine adds far more than the same percentage on a modest plate of food — one reason some diners tip a flat amount on certain high-priced items regardless of the percentage they use for the rest of the check.",
-          "paragraph2": "Splitting a tip evenly rarely divides into a clean number, which is where rounding comes in. This tool's \"round up\" option takes each diner's raw share, rounds it up to the next whole currency unit, and folds the small difference into the tip rather than making anyone dig for exact change — a common real-world convenience that changes how the total is distributed, not the tip rate you actually asked for.",
+          "title": "टिपिंग का गणित कैसे काम करता है",
+          "paragraph1": "टिप की गणना बिल के प्रतिशत के रूप में की जाती है, फिर वैकल्पिक रूप से मेज़ पर मौजूद सभी लोगों में बराबर-बराबर बाँट दी जाती है। चूँकि यह सर्वर ने वास्तव में जितना काम किया उससे नहीं, बल्कि बिल के हिसाब से बढ़ती-घटती है, इसलिए महँगी वाइन की बोतल पर वही प्रतिशत टिप, साधारण खाने की प्लेट पर उसी प्रतिशत से कहीं ज़्यादा जुड़ जाती है — यही एक वजह है कि कुछ लोग बाक़ी बिल के लिए जो भी प्रतिशत इस्तेमाल करें, कुछ महँगी चीज़ों पर एक तय राशि टिप देते हैं।",
+          "paragraph2": "टिप को बराबर-बराबर बाँटना शायद ही कभी एक साफ़ संख्या में बँटता है, और यहीं राउंडिंग काम आती है। इस टूल का \"राउंड अप\" विकल्प हर व्यक्ति के हिस्से को लेकर उसे अगली पूर्ण मुद्रा इकाई तक राउंड कर देता है, और छोटा-सा अंतर टिप में जोड़ देता है, ताकि किसी को खुले पैसे न ढूँढ़ने पड़ें — यह एक आम व्यावहारिक सुविधा है जो कुल राशि के बँटवारे को बदलती है, न कि आपके द्वारा माँगी गई असली टिप दर को।",
           "diagram": {
             "bars": [
-              { "label": "15%", "value": 9 },
-              { "label": "18%", "value": 10.8 },
-              { "label": "20%", "value": 12 },
-              { "label": "25%", "value": 15 }
+              {
+                "label": "15%",
+                "value": 9
+              },
+              {
+                "label": "18%",
+                "value": 10.8
+              },
+              {
+                "label": "20%",
+                "value": 12
+              },
+              {
+                "label": "25%",
+                "value": 15
+              }
             ],
-            "caption": "The tip amount on a $60 bill at four common percentages — small differences in the rate compound quickly as the bill grows."
+            "caption": "$60 के बिल पर चार आम प्रतिशतों पर टिप राशि — दर में छोटे अंतर बिल बढ़ने के साथ तेज़ी से बड़ा फ़र्क़ बना देते हैं।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four worked examples, including two using the round-up option, showing the exact inputs and results.",
-          "columnScenario": "Scenario",
-          "columnTip": "Tip",
-          "columnTotalPerPerson": "Total / Person",
+          "title": "हल किए गए उदाहरण",
+          "intro": "चार हल किए गए उदाहरण, जिनमें राउंड-अप विकल्प वाले दो उदाहरण शामिल हैं, सटीक इनपुट और परिणामों के साथ।",
+          "columnScenario": "परिदृश्य",
+          "columnTip": "टिप",
+          "columnTotalPerPerson": "कुल / व्यक्ति",
           "rows": [
-            { "scenario": "$64 bill, 18% tip, split 2 ways", "tipAmount": "$11.52", "totalPerPerson": "$37.76" },
-            { "scenario": "$150 bill, 20% tip, split 4 ways", "tipAmount": "$30.00", "totalPerPerson": "$45.00" },
-            { "scenario": "$42 bill, 15% tip, 1 person, rounded up", "tipAmount": "$7.00", "totalPerPerson": "$49.00" },
-            { "scenario": "$100 bill, 22% tip, split 3 ways, rounded up", "tipAmount": "$23.00", "totalPerPerson": "$41.00" }
+            {
+              "scenario": "$64 का बिल, 18% टिप, 2 लोगों में बाँटा गया",
+              "tipAmount": "$11.52",
+              "totalPerPerson": "$37.76"
+            },
+            {
+              "scenario": "$150 का बिल, 20% टिप, 4 लोगों में बाँटा गया",
+              "tipAmount": "$30.00",
+              "totalPerPerson": "$45.00"
+            },
+            {
+              "scenario": "$42 का बिल, 15% टिप, 1 व्यक्ति, राउंड अप किया गया",
+              "tipAmount": "$7.00",
+              "totalPerPerson": "$49.00"
+            },
+            {
+              "scenario": "$100 का बिल, 22% टिप, 3 लोगों में बाँटा गया, राउंड अप किया गया",
+              "tipAmount": "$23.00",
+              "totalPerPerson": "$41.00"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Should I tip on the pre-tax or post-tax bill amount?",
-              "answer": "Most etiquette guides recommend tipping on the pre-tax subtotal, but tipping on the post-tax total is common practice and not considered rude — the difference between the two is usually small."
+              "question": "मुझे टैक्स से पहले या टैक्स के बाद वाले बिल पर टिप देनी चाहिए?",
+              "answer": "ज़्यादातर शिष्टाचार गाइड टैक्स-पूर्व उप-योग पर टिप देने की सलाह देते हैं, लेकिन टैक्स-पश्चात कुल राशि पर टिप देना भी आम प्रथा है और इसे असभ्य नहीं माना जाता — दोनों के बीच का अंतर आमतौर पर छोटा ही होता है।"
             },
             {
-              "question": "What's the difference between a tip and a service charge?",
-              "answer": "A tip is voluntary and discretionary. A service charge — often added automatically for large groups — is typically mandatory and added to the bill by the establishment itself, and it doesn't always go entirely to the staff who served you. Check the receipt to see whether one is already included before adding an additional tip."
+              "question": "टिप और सर्विस चार्ज में क्या फ़र्क़ है?",
+              "answer": "टिप ऐच्छिक और विवेकाधीन होती है। सर्विस चार्ज — जो अक्सर बड़े समूहों के लिए अपने-आप जोड़ दिया जाता है — आमतौर पर अनिवार्य होता है और स्वयं प्रतिष्ठान द्वारा बिल में जोड़ा जाता है, और यह हमेशा पूरी तरह उस स्टाफ़ तक नहीं पहुँचता जिसने आपकी सेवा की। अतिरिक्त टिप जोड़ने से पहले यह देखने के लिए रसीद ज़रूर जाँचें कि कहीं यह पहले से शामिल तो नहीं है।"
             },
             {
-              "question": "Is tipping mandatory?",
-              "answer": "In most countries, no — it's a voluntary, discretionary sum. In the United States it's such a deeply embedded norm that skipping it for merely below-average (rather than genuinely bad) service is generally considered a breach of etiquette, unlike in many other countries where it isn't expected at all."
+              "question": "क्या टिप देना अनिवार्य है?",
+              "answer": "ज़्यादातर देशों में, नहीं — यह एक ऐच्छिक, विवेकाधीन राशि है। संयुक्त राज्य अमेरिका में यह इतना गहराई से जमा हुआ रिवाज़ है कि केवल औसत-से-कम (न कि वाकई ख़राब) सेवा के लिए भी इसे छोड़ देना आमतौर पर शिष्टाचार का उल्लंघन माना जाता है, जबकि कई अन्य देशों में इसकी बिल्कुल अपेक्षा ही नहीं होती।"
             },
             {
-              "question": "Why do restaurants add an automatic gratuity for large groups?",
-              "answer": "It guarantees fair compensation for serving a large, often multi-course table, and prevents a tip from being silently split too thin across many diners who each assume someone else covered it adequately."
+              "question": "रेस्टोरेंट बड़े समूहों के लिए अपने-आप ग्रैच्युटी क्यों जोड़ देते हैं?",
+              "answer": "यह एक बड़ी, अक्सर कई कोर्स वाली मेज़ की सेवा के लिए उचित मुआवज़ा सुनिश्चित करता है, और टिप को कई डाइनरों के बीच इतना पतला बँटने से रोकता है कि हर कोई यह मान ले कि किसी और ने पर्याप्त हिस्सा दे दिया होगा।"
             },
             {
-              "question": "How does the round-up option change what I actually pay?",
-              "answer": "It doesn't change the tip percentage you asked for — it rounds each diner's share up to the next whole currency unit so nobody needs exact change, with the small difference folded into the tip rather than kept as change."
+              "question": "राउंड-अप विकल्प मुझे असल में जो चुकाना है, उसे कैसे बदलता है?",
+              "answer": "यह आपके द्वारा माँगी गई टिप प्रतिशत को नहीं बदलता — यह हर डाइनर के हिस्से को अगली पूर्ण मुद्रा इकाई तक राउंड कर देता है ताकि किसी को खुले पैसे न चाहिए हों, और छोटा-सा अंतर छुट्टे के बजाय टिप में जोड़ दिया जाता है।"
             },
             {
-              "question": "How much should I tip for services besides restaurants, like haircuts or delivery?",
-              "answer": "Common general norms in tipping-culture countries: 15–20% for hairdressers and barbers, 10–20% or a flat amount for food delivery depending on distance and conditions, and a few dollars per night for hotel housekeeping — though these vary by country. This tool is built around splitting a restaurant-style bill."
+              "question": "रेस्टोरेंट के अलावा दूसरी सेवाओं, जैसे बाल कटवाने या डिलीवरी के लिए मुझे कितनी टिप देनी चाहिए?",
+              "answer": "टिपिंग-संस्कृति वाले देशों में आम सामान्य मानदंड: हेयरड्रेसर और नाई के लिए 15–20%, दूरी और परिस्थितियों के आधार पर फ़ूड डिलीवरी के लिए 10–20% या एक तय राशि, और होटल हाउसकीपिंग के लिए हर रात कुछ डॉलर — हालाँकि ये देश के अनुसार अलग होते हैं। यह टूल रेस्टोरेंट-शैली के बिल को बाँटने के इर्द-गिर्द बनाया गया है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "From European Aristocracy to the American Restaurant",
-            "paragraph": "The word \"tip\" is not an acronym for \"To Insure Promptness\" — that's a persistent modern myth. Tipping's actual roots trace to master-servant customs in aristocratic Europe, where a servant could be rewarded with extra money for exceptional service beyond their wages. Wealthy Americans encountered the custom on European travels in the 1850s and 1860s and brought it home to appear sophisticated, but most Americans at the time viewed tipping as condescending and fundamentally undemocratic. It became widespread only after the Civil War, when it spread rapidly through service industries — including railroad companies that hired newly freed Black workers as porters at little or no base wage, expecting tips to make up their income. Several U.S. states, citing exactly this exploitative dynamic, banned tipping outright between roughly 1909 and 1926, though every one of those bans was eventually repealed."
+            "title": "यूरोपीय अभिजात वर्ग से अमेरिकी रेस्टोरेंट तक",
+            "paragraph": "\"Tip\" शब्द \"To Insure Promptness\" का संक्षिप्त रूप नहीं है — यह एक लगातार चलती आ रही आधुनिक भ्रांति है। टिपिंग की असली जड़ें अभिजात यूरोप की स्वामी-सेवक परंपराओं में मिलती हैं, जहाँ किसी सेवक को उसकी तनख़्वाह से अलग, असाधारण सेवा के लिए अतिरिक्त पैसों से पुरस्कृत किया जा सकता था। धनी अमेरिकियों ने 1850 और 1860 के दशकों में यूरोप यात्राओं के दौरान यह रिवाज़ देखा और परिष्कृत दिखने के लिए इसे अपने देश ले आए, लेकिन उस समय ज़्यादातर अमेरिकी टिपिंग को कृपादृष्टि जैसा और मूलतः अलोकतांत्रिक मानते थे। यह गृहयुद्ध के बाद ही व्यापक हुआ, जब यह सेवा उद्योगों में तेज़ी से फैला — जिसमें वे रेलवे कंपनियाँ भी शामिल थीं जो नए आज़ाद हुए अश्वेत कर्मचारियों को बहुत कम या बिना किसी आधार वेतन के पोर्टर के रूप में रखती थीं, और उम्मीद करती थीं कि टिप से उनकी आय पूरी हो जाएगी। ठीक इसी शोषणकारी प्रवृत्ति का हवाला देते हुए, अमेरिका के कई राज्यों ने लगभग 1909 से 1926 के बीच टिपिंग पर पूरी तरह प्रतिबंध लगा दिया था, हालाँकि आख़िरकार वे सभी प्रतिबंध हटा लिए गए।"
           },
           "modernDevelopments": {
-            "title": "From Cash on the Table to the Tip Screen",
-            "paragraph": "Card-payment tip prompts and point-of-sale tip screens have extended tipping into venues that never took cash tips before, like coffee counters and self-checkout kiosks — a trend widely discussed under labels like \"tip creep\" and \"tipping fatigue.\" At the same time, a smaller counter-movement of restaurants has experimented with no-tipping, service-included pricing instead, partly inspired by the model common across Western Europe. Regardless of how a tip is prompted, the underlying arithmetic — a percentage of the bill, split however many ways — is the same calculation this tool automates."
+            "title": "मेज़ पर नक़द से लेकर टिप स्क्रीन तक",
+            "paragraph": "कार्ड-पेमेंट टिप प्रॉम्प्ट और पॉइंट-ऑफ़-सेल टिप स्क्रीन ने टिपिंग को उन जगहों तक पहुँचा दिया है जहाँ पहले कभी नक़द टिप नहीं ली जाती थी, जैसे कॉफ़ी काउंटर और सेल्फ़-चेकआउट कियोस्क — यह प्रवृत्ति \"टिप क्रीप\" और \"टिपिंग फ़टीग\" जैसे नामों से व्यापक रूप से चर्चा में है। साथ ही, रेस्टोरेंट्स के एक छोटे प्रति-आंदोलन ने बिना-टिपिंग, सर्विस-शामिल क़ीमत तय करने का प्रयोग किया है, जो आंशिक रूप से पश्चिमी यूरोप में आम मॉडल से प्रेरित है। टिप चाहे जैसे भी माँगी जाए, उसका मूल गणित — बिल का एक प्रतिशत, जितने भी तरीक़ों से बाँटा जाए — वही गणना है जिसे यह टूल स्वचालित करता है।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The service economics behind tipping — how it affects worker pay, pricing, and customer satisfaction — is studied within Hospitality Management programs. Here are the top 5 globally for Hospitality & Leisure Management in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "टिपिंग के पीछे की सेवा अर्थशास्त्र — यह कर्मचारी वेतन, मूल्य निर्धारण और ग्राहक संतुष्टि को कैसे प्रभावित करती है — Hospitality Management प्रोग्रामों में पढ़ाई जाती है। QS World University Rankings by Subject 2025 के अनुसार Hospitality & Leisure Management में दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "EHL Hospitality Business School",
-                "note": "Ranked #1 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "note": "Hospitality & Leisure Management में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.ehl.edu/en/study",
-                "online": "No — EHL's Bachelor in International Hospitality Management is an in-person, campus-based program in Switzerland that includes operational coursework and two work-integrated internships."
+                "online": "नहीं — EHL का Bachelor in International Hospitality Management स्विट्ज़रलैंड में एक इन-पर्सन, कैंपस-आधारित प्रोग्राम है, जिसमें ऑपरेशनल कोर्सवर्क और दो वर्क-इंटीग्रेटेड इंटर्नशिप शामिल हैं।"
               },
               {
                 "name": "Les Roches Global Hospitality Management Education",
-                "note": "Ranked #2 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "note": "Hospitality & Leisure Management में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://lesroches.edu/programs/bachelor-science-hospitality-management/",
-                "online": "No — the BSc in Global Hospitality Management is a campus-based, experiential program across multiple countries; Les Roches' online options apply to separate graduate and professional programs, not this degree."
+                "online": "नहीं — BSc in Global Hospitality Management कई देशों में फैला एक कैंपस-आधारित, अनुभव-केंद्रित प्रोग्राम है; Les Roches के ऑनलाइन विकल्प अलग ग्रेजुएट और प्रोफ़ेशनल प्रोग्रामों पर लागू होते हैं, इस डिग्री पर नहीं।"
               },
               {
                 "name": "Swiss Hotel Management School (SHMS)",
-                "note": "Ranked #3 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "note": "Hospitality & Leisure Management में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.shms.com/en/event-management-courses/bachelor-of-arts/",
-                "online": "No — the Bachelor of Arts in International Hospitality Management is delivered in person in Switzerland, with two professional internships built into the program."
+                "online": "नहीं — Bachelor of Arts in International Hospitality Management स्विट्ज़रलैंड में इन-पर्सन पढ़ाया जाता है, जिसमें प्रोग्राम में दो प्रोफ़ेशनल इंटर्नशिप शामिल हैं।"
               },
               {
                 "name": "University of Nevada, Las Vegas (UNLV)",
-                "note": "Ranked #4 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "note": "Hospitality & Leisure Management में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.unlv.edu/hospitality/online",
-                "online": "Yes — UNLV's William F. Harrah College of Hospitality offers its Bachelor of Science in Hospitality Management as a fully online, asynchronous track alongside the on-campus option."
+                "online": "हाँ — UNLV का William F. Harrah College of Hospitality कैंपस विकल्प के साथ-साथ अपना Bachelor of Science in Hospitality Management एक पूरी तरह ऑनलाइन, असिंक्रोनस ट्रैक के रूप में भी देता है।"
               },
               {
                 "name": "César Ritz Colleges",
-                "note": "Ranked #5 worldwide for Hospitality & Leisure Management (QS World University Rankings by Subject 2025).",
+                "note": "Hospitality & Leisure Management में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cesarritzcolleges.edu/en/program/bachelor-of-science-in-hospitality-business-management/",
-                "online": "No — the Bachelor of Science in Hospitality Business Management is delivered in person across Swiss campuses, with two paid international internships built into the program."
+                "online": "नहीं — Bachelor of Science in Hospitality Business Management स्विस कैंपसों में इन-पर्सन पढ़ाया जाता है, जिसमें प्रोग्राम में दो सशुल्क अंतरराष्ट्रीय इंटर्नशिप शामिल हैं।"
               },
               {
                 "name": "King Abdulaziz University (KAU), Jeddah",
-                "note": "Offers a Bachelor of Travel and Tourism Management preparing graduates for hospitality and guest-relations careers.",
+                "note": "एक Bachelor of Travel and Tourism Management प्रदान करता है, जो स्नातकों को आतिथ्य और अतिथि-संबंध करियर के लिए तैयार करता है।",
                 "url": "https://kau.edu.sa/en/programs/bachelor-of-travel-and-tourism-management",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Lynn, M. (2018). The Effects of Tipping on Consumers' Satisfaction with Restaurants. Journal of Consumer Affairs, 52(3), 746–755.",
-          "note": "A field study comparing online customer-satisfaction ratings for the same restaurant chain under a standard tipping system versus a no-tipping, service-included pricing model.",
+          "note": "एक फ़ील्ड अध्ययन, जो एक ही रेस्टोरेंट चेन के लिए मानक टिपिंग प्रणाली और बिना-टिपिंग, सर्विस-शामिल मूल्य-निर्धारण मॉडल के तहत ऑनलाइन ग्राहक-संतुष्टि रेटिंग की तुलना करता है।",
           "url": "https://doi.org/10.1111/joca.12171",
-          "readOriginal": "Read the Original Article"
+          "readOriginal": "मूल लेख पढ़ें"
         }
       }
     },
