@@ -6051,176 +6051,176 @@
       }
     },
     "duplicate-line-remover": {
-      "title": "Duplicate Line Remover",
-      "description": "Remove duplicate lines from a list, with a live report of exactly which lines repeated and how often — live as you type.",
+      "title": "Duplikat-Zeilen-Entferner",
+      "description": "Entfernen Sie doppelte Zeilen aus einer Liste, mit einem Live-Bericht, welche Zeilen sich genau wiederholt haben und wie oft — live während der Eingabe.",
       "nav": {
-        "tool": "Remover",
+        "tool": "Entferner",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Werkzeug"
       },
       "aboveFold": {
-        "resultTitle": "Cleaned List",
-        "placeholder": "Paste a list to see it deduplicated, with a breakdown of every repeat, here.",
-        "totalLines": "Total Lines",
-        "uniqueLines": "Unique Lines",
-        "removedCount": "Removed",
-        "duplicatesTitle": "Duplicates Found",
+        "resultTitle": "Bereinigte Liste",
+        "placeholder": "Fügen Sie eine Liste ein, um sie hier dedupliziert zu sehen, mit einer Aufschlüsselung jeder Wiederholung.",
+        "totalLines": "Zeilen insgesamt",
+        "uniqueLines": "Eindeutige Zeilen",
+        "removedCount": "Entfernt",
+        "duplicatesTitle": "Gefundene Duplikate",
         "glossary": {
-          "title": "Options Explained",
-          "intro": "What each setting actually changes.",
+          "title": "Optionen erklärt",
+          "intro": "Was jede Einstellung tatsächlich bewirkt.",
           "rows": [
             {
-              "term": "Case-sensitive",
-              "meaning": "When on, \"Apple\" and \"apple\" count as different lines. When off, they're treated as the same duplicate."
+              "term": "Groß-/Kleinschreibung beachten",
+              "meaning": "Wenn aktiviert, zählen „Apple“ und „apple“ als unterschiedliche Zeilen. Wenn deaktiviert, gelten sie als dasselbe Duplikat."
             },
             {
-              "term": "Sort lines",
-              "meaning": "Alphabetizes the cleaned output. Leave off to preserve your original line order."
+              "term": "Zeilen sortieren",
+              "meaning": "Ordnet die bereinigte Ausgabe alphabetisch. Lassen Sie es deaktiviert, um die ursprüngliche Zeilenreihenfolge zu erhalten."
             },
             {
-              "term": "Trim whitespace",
-              "meaning": "Removes leading/trailing spaces before comparing lines, so \" apple\" and \"apple\" are treated as duplicates. Turn off to compare lines byte-for-byte."
+              "term": "Leerraum trimmen",
+              "meaning": "Entfernt führende/nachgestellte Leerzeichen vor dem Vergleich der Zeilen, sodass „ apple“ und „apple“ als Duplikate gelten. Deaktivieren Sie dies, um Zeilen byteweise zu vergleichen."
             },
             {
-              "term": "Keep first / last",
-              "meaning": "Which copy of a repeated line survives in the output, and at which position — the first time it appeared, or the last."
+              "term": "Erstes/letztes behalten",
+              "meaning": "Welche Kopie einer wiederholten Zeile in der Ausgabe erhalten bleibt, und an welcher Position — die beim ersten Auftreten oder die beim letzten."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your List",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Paste your list here, one item per line...",
-        "caseSensitive": "Case-sensitive",
-        "sortLines": "Sort lines",
-        "trimWhitespace": "Trim whitespace",
-        "keepOccurrence": "Keep occurrence",
-        "keepFirst": "First",
-        "keepLast": "Last",
-        "removeDuplicates": "Remove Duplicates",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "inputTitle": "Ihre Liste",
+        "inputLabel": "Eingabe",
+        "inputPlaceholder": "Fügen Sie hier Ihre Liste ein, ein Eintrag pro Zeile …",
+        "caseSensitive": "Groß-/Kleinschreibung beachten",
+        "sortLines": "Zeilen sortieren",
+        "trimWhitespace": "Leerraum trimmen",
+        "keepOccurrence": "Vorkommen behalten",
+        "keepFirst": "Erstes",
+        "keepLast": "Letztes",
+        "removeDuplicates": "Duplikate entfernen",
+        "copy": "Kopieren",
+        "copied": "Kopiert!"
       },
       "errors": {
-        "required": "Please enter some text."
+        "required": "Bitte geben Sie Text ein."
       },
       "education": {
         "intro": {
-          "title": "How Deduplication Actually Works",
-          "paragraph1": "The naive way to find duplicates — compare every line against every other line — takes time that grows quadratically with the list's size: doubling a list's length roughly quadruples the comparison work, which becomes impractical past a few thousand lines. A hash-based approach sidesteps this entirely by keeping a running set of every line already seen: for each new line, checking whether it's already in that set takes roughly constant time regardless of how large the set has grown, since a hash function converts the line's content directly into a lookup position rather than requiring a scan. This is exactly why deduplication tools, including this one, can process lists with tens of thousands of lines instantly rather than freezing.",
-          "paragraph2": "This also explains why the settings on this tool matter more than they might first appear. \"Case-sensitive\" and \"trim whitespace\" both control what actually goes into the hash function — turning case-sensitivity off means \"Apple\" and \"apple\" hash to the same bucket and collapse into one; trimming whitespace means \" apple\" and \"apple\" do the same. \"Keep first\" versus \"keep last\" doesn't change which lines are considered duplicates at all — only which single copy of each duplicate group is the one that survives into the output, and where it ends up positioned.",
+          "title": "Wie Deduplizierung tatsächlich funktioniert",
+          "paragraph1": "Der naive Weg, Duplikate zu finden — jede Zeile mit jeder anderen zu vergleichen — benötigt eine Zeit, die quadratisch mit der Listengröße wächst: Eine Verdopplung der Listenlänge vervierfacht ungefähr den Vergleichsaufwand, was jenseits weniger tausend Zeilen unpraktikabel wird. Ein hashbasierter Ansatz umgeht das vollständig, indem eine laufende Menge aller bereits gesehenen Zeilen geführt wird: Für jede neue Zeile dauert die Prüfung, ob sie bereits in dieser Menge ist, ungefähr konstante Zeit, unabhängig davon, wie groß die Menge bereits gewachsen ist, da eine Hash-Funktion den Inhalt der Zeile direkt in eine Nachschlageposition umwandelt, statt einen Scan zu erfordern. Genau deshalb können Deduplizierungswerkzeuge, auch dieses, Listen mit Zehntausenden Zeilen sofort verarbeiten, statt einzufrieren.",
+          "paragraph2": "Das erklärt auch, warum die Einstellungen dieses Werkzeugs wichtiger sind, als es zunächst scheinen mag. „Groß-/Kleinschreibung beachten“ und „Leerraum trimmen“ steuern beide, was tatsächlich in die Hash-Funktion einfließt — die Groß-/Kleinschreibung zu deaktivieren bedeutet, dass „Apple“ und „apple“ auf denselben Bucket hashen und zu einem verschmelzen; das Trimmen von Leerraum bedeutet dasselbe für „ apple“ und „apple“. „Erstes behalten“ gegenüber „letztes behalten“ ändert überhaupt nicht, welche Zeilen als Duplikate gelten — nur, welche einzelne Kopie jeder Duplikatgruppe es in die Ausgabe schafft und an welcher Position sie landet.",
           "diagram": {
-            "inputLabel": "Input Lines",
-            "hashSetLabel": "Seen Set",
-            "outputLabel": "Output",
-            "caption": "How hash-based deduplication works: each input line is checked against a running set of lines already seen. A new line is added to both the set and the output; a repeat (struck through) is skipped entirely."
+            "inputLabel": "Eingabezeilen",
+            "hashSetLabel": "Gesehen-Menge",
+            "outputLabel": "Ausgabe",
+            "caption": "Wie hashbasierte Deduplizierung funktioniert: Jede Eingabezeile wird gegen eine laufende Menge bereits gesehener Zeilen geprüft. Eine neue Zeile wird sowohl der Menge als auch der Ausgabe hinzugefügt; eine Wiederholung (durchgestrichen) wird vollständig übersprungen."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How the same list resolves differently depending on the settings used.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Wie dieselbe Liste je nach verwendeten Einstellungen unterschiedlich aufgelöst wird.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "\"Apple, apple, Banana\" — case-sensitive on",
-              "result": "All 3 lines kept — \"Apple\" and \"apple\" differ"
+              "scenario": "„Apple, apple, Banana“ — Groß-/Kleinschreibung beachten aktiviert",
+              "result": "Alle 3 Zeilen behalten — „Apple“ und „apple“ unterscheiden sich"
             },
             {
-              "scenario": "Same list — case-sensitive off",
-              "result": "2 lines kept, 1 removed — treated as the same"
+              "scenario": "Gleiche Liste — Groß-/Kleinschreibung beachten deaktiviert",
+              "result": "2 Zeilen behalten, 1 entfernt — als gleich behandelt"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Why does this tool drop blank lines entirely?",
-              "answer": "Blank lines don't carry any meaningful content to deduplicate — a list of five blank lines isn't five different pieces of data, it's just formatting. Dropping them keeps the output focused purely on actual list items, rather than cluttering it with meaningless empty entries."
+              "question": "Warum entfernt dieses Werkzeug leere Zeilen vollständig?",
+              "answer": "Leere Zeilen tragen keinen bedeutsamen Inhalt, der dedupliziert werden könnte — eine Liste mit fünf leeren Zeilen sind nicht fünf unterschiedliche Dateneinträge, sondern nur Formatierung. Sie zu entfernen hält die Ausgabe auf tatsächliche Listeneinträge fokussiert, statt sie mit bedeutungslosen leeren Einträgen zu überladen."
             },
             {
-              "question": "What's actually the difference between \"case-sensitive\" and \"trim whitespace\"?",
-              "answer": "Case-sensitivity controls letter casing specifically — whether \"Apple\" and \"apple\" are treated as the same line. Trimming whitespace is a separate, independent setting that controls leading and trailing spaces — whether \" apple\" and \"apple\" are treated as the same line. You can toggle either one independently of the other."
+              "question": "Was ist der tatsächliche Unterschied zwischen „Groß-/Kleinschreibung beachten“ und „Leerraum trimmen“?",
+              "answer": "Groß-/Kleinschreibung steuert speziell die Buchstabengröße — ob „Apple“ und „apple“ als dieselbe Zeile gelten. Leerraum trimmen ist eine separate, unabhängige Einstellung, die führende und nachgestellte Leerzeichen steuert — ob „ apple“ und „apple“ als dieselbe Zeile gelten. Sie können jede Option unabhängig von der anderen umschalten."
             },
             {
-              "question": "Why would I ever want to keep the last occurrence instead of the first?",
-              "answer": "Order often carries meaning: in a chronologically appended log or a list where later entries represent updates or corrections to earlier ones, the most recent occurrence of a repeated key is usually the one you actually want to keep, not the oldest. \"Keep last\" preserves that intent instead of defaulting to whichever came first."
+              "question": "Warum sollte ich jemals das letzte statt des ersten Vorkommens behalten wollen?",
+              "answer": "Die Reihenfolge trägt oft Bedeutung: In einem chronologisch angehängten Protokoll oder einer Liste, in der spätere Einträge Aktualisierungen oder Korrekturen früherer darstellen, ist das jüngste Vorkommen eines wiederholten Schlüssels meist das, das Sie tatsächlich behalten möchten, nicht das älteste. „Letztes behalten“ bewahrt diese Absicht, statt standardmäßig das zuerst aufgetretene zu wählen."
             },
             {
-              "question": "Does sorting change which lines are considered duplicates?",
-              "answer": "No — sorting only reorders the already-deduplicated output alphabetically; it happens as a separate step after duplicate detection is complete, and has no effect at all on which lines were identified as repeats or which occurrence was kept."
+              "question": "Ändert das Sortieren, welche Zeilen als Duplikate gelten?",
+              "answer": "Nein — das Sortieren ordnet nur die bereits deduplizierte Ausgabe alphabetisch neu an; es geschieht als separater Schritt, nachdem die Duplikaterkennung abgeschlossen ist, und hat keinerlei Einfluss darauf, welche Zeilen als Wiederholungen erkannt wurden oder welches Vorkommen behalten wurde."
             },
             {
-              "question": "Is this tool's line-ending handling reliable across Windows, macOS, and Linux files?",
-              "answer": "Yes — the three common line-ending conventions (\\r\\n on Windows, \\n on macOS/Linux, and the older \\r alone) are all recognized and normalized automatically, so pasting a list exported from any of these systems works correctly without manual cleanup."
+              "question": "Ist die Behandlung von Zeilenenden dieses Werkzeugs bei Windows-, macOS- und Linux-Dateien zuverlässig?",
+              "answer": "Ja — die drei gängigen Zeilenende-Konventionen (\\r\\n unter Windows, \\n unter macOS/Linux und das ältere alleinige \\r) werden alle automatisch erkannt und normalisiert, sodass das Einfügen einer aus einem dieser Systeme exportierten Liste ohne manuelle Bereinigung korrekt funktioniert."
             },
             {
-              "question": "Why does the duplicates list show a count next to each repeated line?",
-              "answer": "The count is the total number of times that exact line appeared in your original input, including the one copy that was kept — so a count of 3 means two copies were removed, not three. This makes it possible to spot which values were duplicated most heavily at a glance, not just that duplicates existed somewhere."
+              "question": "Warum zeigt die Duplikatliste eine Anzahl neben jeder wiederholten Zeile an?",
+              "answer": "Die Anzahl ist die Gesamtzahl, wie oft diese exakte Zeile in Ihrer ursprünglichen Eingabe vorkam, einschließlich der einen behaltenen Kopie — eine Anzahl von 3 bedeutet also, dass zwei Kopien entfernt wurden, nicht drei. So lässt sich auf einen Blick erkennen, welche Werte am häufigsten dupliziert waren, nicht nur, dass irgendwo Duplikate existierten."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hinter diesem Werkzeug",
           "history": {
-            "title": "From Punch-Card Sorting to the Hash Table",
-            "paragraph": "Before hash tables existed, finding duplicates in a large dataset meant sorting it first — an approach with roots in mechanical punch-card sorting machines used for census and business data processing in the early-to-mid 20th century, where physically ordering cards made matching records against each other practical at scale. The conceptual breakthrough that made lookup-based deduplication possible arrived with Hans Peter Luhn's internal IBM research in the 1950s on hashing, formally published by his colleague W. W. Peterson in 1957 — introducing the idea of computing a numeric address directly from a piece of data's content, rather than needing to search or sort for it."
+            "title": "Von der Lochkartensortierung zur Hash-Tabelle",
+            "paragraph": "Bevor es Hash-Tabellen gab, bedeutete das Finden von Duplikaten in einem großen Datensatz, ihn zuerst zu sortieren — ein Ansatz mit Wurzeln in mechanischen Lochkartensortiermaschinen, die Anfang bis Mitte des 20. Jahrhunderts für die Verarbeitung von Volkszählungs- und Geschäftsdaten eingesetzt wurden, wo das physische Ordnen von Karten den Abgleich von Datensätzen im großen Maßstab praktikabel machte. Der konzeptionelle Durchbruch, der nachschlagebasierte Deduplizierung ermöglichte, kam mit Hans Peter Luhns interner IBM-Forschung in den 1950er-Jahren zum Hashing, formal veröffentlicht von seinem Kollegen W. W. Peterson 1957 — die Idee, eine numerische Adresse direkt aus dem Inhalt eines Datenelements zu berechnen, statt danach suchen oder sortieren zu müssen."
           },
           "modernDevelopments": {
-            "title": "From Punch Cards to Instant Browser-Based Deduplication",
-            "paragraph": "Hashing became a foundational tool across computing well beyond deduplication — it underpins database indexing, caching systems, and cryptographic fingerprinting alike. What's changed most for a tool like this one specifically is where the computation happens: modern JavaScript engines run hash-based Set and Map operations fast enough to deduplicate substantial lists instantly inside a web browser, on data that never leaves the user's device — a capability that would have required a dedicated server-side batch process not many years ago."
+            "title": "Von Lochkarten zur sofortigen browserbasierten Deduplizierung",
+            "paragraph": "Hashing wurde zu einem grundlegenden Werkzeug in der gesamten Informatik, weit über die Deduplizierung hinaus — es trägt Datenbankindizierung, Caching-Systeme und kryptografische Fingerabdrücke gleichermaßen. Was sich für ein Werkzeug wie dieses am meisten geändert hat, ist, wo die Berechnung stattfindet: Moderne JavaScript-Engines führen hashbasierte Set- und Map-Operationen schnell genug aus, um umfangreiche Listen sofort innerhalb eines Webbrowsers zu deduplizieren, auf Daten, die das Gerät des Nutzers nie verlassen — eine Fähigkeit, die vor nicht allzu vielen Jahren noch einen eigenen serverseitigen Batch-Prozess erfordert hätte."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Hashing, set data structures, and algorithmic complexity — the exact concepts this tool relies on — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Akademischer Werdegang",
+            "intro": "Hashing, Mengen-Datenstrukturen und algorithmische Komplexität — genau die Konzepte, auf die sich dieses Werkzeug stützt — werden im Rahmen von Informatik-Studiengängen untersucht. Hier sind die weltweit fünf besten im QS World University Rankings by Subject 2025, plus eine regionale Option:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "Nein — MITs Studiengang 6-3 (Computer Science and Engineering) ist ein Präsenz-Bachelorprogramm auf dem Cambridge-Campus des MIT."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "Nein — Stanfords Bachelorprogramm in Informatik ist ein Präsenzstudiengang auf dem Campus von Stanford."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "Nein — das Bachelorprogramm der School of Computer Science der CMU findet in Präsenz auf ihrem Pittsburgh-Campus statt."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "Nein — der Bachelor of Computing in Computer Science der NUS ist ein Präsenzprogramm mit verpflichtendem Praktikum auf dem Campus oder im Ausland."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "Nein — Oxfords Informatikstudiengang wird in Präsenz über das Tutorensystem gelehrt, bei dem ein oder zwei Studierende einen Tutor direkt treffen."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Bietet über ihr College of Engineering einen ABET-akkreditierten Bachelor of Science in Informatik an.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Durchführungsart wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific Reference",
+          "title": "Wissenschaftliche Quelle",
           "citation": "Peterson, W. W. (1957). Addressing for Random-Access Storage. IBM Journal of Research and Development, 1(2), 130–146.",
-          "note": "The first published paper describing hashing — computing a lookup address directly from data content — the exact technique this tool's near-instant duplicate detection relies on.",
+          "note": "Die erste veröffentlichte Arbeit, die Hashing beschreibt — das direkte Berechnen einer Nachschlageadresse aus dem Dateninhalt —, genau die Technik, auf der die nahezu sofortige Duplikaterkennung dieses Werkzeugs beruht.",
           "url": "https://doi.org/10.1147/rd.12.0130",
-          "readOriginal": "Read the Original Paper"
+          "readOriginal": "Originalarbeit lesen"
         }
       }
     },
