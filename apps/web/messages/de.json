@@ -3773,191 +3773,191 @@
       }
     },
     "sales-tax-calculator": {
-      "title": "Sales Tax Calculator",
-      "description": "Calculate sales tax and the total price you'll pay at checkout — or back out the pre-tax price and tax amount from a receipt's tax-inclusive total.",
+      "title": "Umsatzsteuerrechner (US)",
+      "description": "Berechnen Sie die US-Umsatzsteuer (Sales Tax) und den Gesamtpreis an der Kasse — oder ermitteln Sie den Nettopreis und den Steuerbetrag aus einem steuerinklusiven Rechnungsbetrag zurück.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Werkzeug"
       },
       "aboveFold": {
-        "resultTitle": "Your Total",
+        "resultTitle": "Ihre Summe",
         "ratesReference": {
-          "title": "US Sales Tax Snapshot",
-          "intro": "Unlike VAT elsewhere, US sales tax isn't one national rate — states set a base rate, and counties, cities, and districts stack more on top. A few reference points:",
+          "title": "Momentaufnahme der US-Umsatzsteuer",
+          "intro": "Anders als die Mehrwertsteuer andernorts ist die US-Umsatzsteuer (Sales Tax) kein einheitlicher landesweiter Satz — Bundesstaaten legen einen Basissatz fest, und Countys, Städte und Bezirke schlagen weitere Sätze obendrauf. Ein paar Referenzwerte:",
           "rows": [
             {
-              "place": "Louisiana (highest)",
-              "rate": "10.13%"
+              "place": "Louisiana (höchster)",
+              "rate": "10,13 %"
             },
             {
               "place": "Tennessee",
-              "rate": "9.61%"
+              "rate": "9,61 %"
             },
             {
-              "place": "California",
-              "rate": "9.03%"
+              "place": "Kalifornien",
+              "rate": "9,03 %"
             },
             {
               "place": "New York",
-              "rate": "8.54%"
+              "rate": "8,54 %"
             },
             {
               "place": "Texas",
-              "rate": "8.20%"
+              "rate": "8,20 %"
             },
             {
-              "place": "National average",
-              "rate": "7.53%"
+              "place": "Landesdurchschnitt",
+              "rate": "7,53 %"
             },
             {
               "place": "DE, MT, NH, OR",
-              "rate": "0%"
+              "rate": "0 %"
             }
           ],
-          "source": "Source: Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (as of July 1, 2026). Figures are population-weighted average combined state + local rates; your actual local rate may differ."
+          "source": "Quelle: Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (Stand 1. Juli 2026). Die Zahlen sind bevölkerungsgewichtete Durchschnitte aus kombinierten Bundesstaats- und Kommunalsätzen; Ihr tatsächlicher Ortssatz kann abweichen."
         }
       },
       "form": {
-        "inputTitle": "Your Purchase",
-        "modeAdd": "Add Sales Tax",
-        "modeReverse": "Extract From Total",
-        "priceLabel": "Price (before tax)",
-        "totalPriceLabel": "Total Price (tax included)",
-        "pricePlaceholder": "e.g. 100",
-        "taxRateLabel": "Sales Tax Rate (%)",
-        "taxRatePlaceholder": "e.g. 8"
+        "inputTitle": "Ihr Einkauf",
+        "modeAdd": "Umsatzsteuer hinzufügen",
+        "modeReverse": "Aus Gesamtbetrag herausrechnen",
+        "priceLabel": "Preis (vor Steuer)",
+        "totalPriceLabel": "Gesamtpreis (inkl. Steuer)",
+        "pricePlaceholder": "z. B. 100",
+        "taxRateLabel": "Umsatzsteuersatz (%)",
+        "taxRatePlaceholder": "z. B. 8"
       },
       "result": {
-        "price": "Price (before tax)",
-        "totalPrice": "Total Price",
-        "taxAmount": "Sales Tax",
-        "reverseNote": "Reverse-calculated from a {rate}% tax-inclusive total."
+        "price": "Preis (vor Steuer)",
+        "totalPrice": "Gesamtpreis",
+        "taxAmount": "Umsatzsteuer",
+        "reverseNote": "Rückgerechnet aus einem steuerinklusiven Gesamtbetrag mit {rate} % Satz."
       },
       "education": {
         "intro": {
-          "title": "How Sales Tax Actually Works",
-          "paragraph1": "Sales tax is a percentage of a purchase's price added at the register and collected by the seller, who remits it to state and local governments. Unlike a value-added tax (VAT), which many countries outside the US charge in smaller increments at every stage of production and only on the value newly added at each step, US-style sales tax is collected exactly once, at the final retail sale to the end consumer — a $100 item taxed at 8% simply costs $108 at checkout.",
-          "paragraph2": "The catch is that \"8%\" in the US is almost never set in one place. A state government sets a base rate, and counties, cities, and special taxing districts can each layer their own smaller rate on top, all added together into one combined rate charged at the register — which is why identical purchases a few miles apart can carry different tax amounts. The relationship also runs in reverse: if a receipt shows only the tax-inclusive total, dividing it by one plus the combined rate as a decimal recovers the pre-tax price — a $108 total at a known 8% rate implies a $108 ÷ 1.08 = $100 pre-tax price, useful for expense reports or accounting where the pre-tax amount is what matters.",
+          "title": "Wie die US-Umsatzsteuer tatsächlich funktioniert",
+          "paragraph1": "Die US-Umsatzsteuer (Sales Tax) ist ein Prozentsatz des Kaufpreises, der an der Kasse hinzugefügt und vom Verkäufer eingezogen wird, der ihn an bundesstaatliche und kommunale Behörden abführt. Anders als die Mehrwertsteuer (VAT), die viele Länder außerhalb der USA in kleineren Schritten auf jeder Produktionsstufe und nur auf den jeweils neu geschaffenen Wert erheben, wird die US-amerikanische Sales Tax genau einmal erhoben, beim endgültigen Einzelhandelsverkauf an den Endverbraucher — ein mit 8 % besteuerter Artikel für 100 $ kostet an der Kasse einfach 108 $.",
+          "paragraph2": "Der Haken ist, dass diese „8 %“ in den USA fast nie an einer einzigen Stelle festgelegt werden. Ein Bundesstaat legt einen Basissatz fest, und Countys, Städte und spezielle Steuerbezirke können jeweils ihren eigenen kleineren Satz obendrauf schichten, alle zusammen addiert zu einem kombinierten Satz, der an der Kasse berechnet wird — weshalb identische Einkäufe wenige Kilometer voneinander entfernt unterschiedliche Steuerbeträge tragen können. Die Beziehung funktioniert auch umgekehrt: Zeigt ein Kassenbon nur den steuerinklusiven Gesamtbetrag, ergibt die Division durch eins plus den kombinierten Satz als Dezimalzahl den Nettopreis vor Steuern — ein Gesamtbetrag von 108 $ bei bekanntem 8-%-Satz impliziert einen Nettopreis von 108 $ ÷ 1,08 = 100 $, nützlich für Spesenabrechnungen oder Buchhaltung, wo der Nettobetrag zählt.",
           "diagram": {
-            "subtotalLabel": "$100 (subtotal)",
-            "taxLabel": "+$8 tax",
-            "totalLabel": "$108 (total)",
-            "caption": "Sales tax grows a subtotal into a total — the reverse of a discount, which shrinks a price. $100 subtotal + 8% tax ($8) = $108 total."
+            "subtotalLabel": "100 $ (Zwischensumme)",
+            "taxLabel": "+8 $ Steuer",
+            "totalLabel": "108 $ (Gesamt)",
+            "caption": "Die Umsatzsteuer lässt eine Zwischensumme zu einer Gesamtsumme anwachsen — das Gegenteil eines Rabatts, der einen Preis verringert. 100 $ Zwischensumme + 8 % Steuer (8 $) = 108 $ Gesamt."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four worked examples, including a stacked local rate and a reverse calculation, showing the exact inputs and results.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Vier durchgerechnete Beispiele, darunter ein gestaffelter Ortssatz und eine Rückrechnung, mit den genauen Eingaben und Ergebnissen.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "$50 item, 6% sales tax",
-              "result": "$53.00 total ($3.00 tax)"
+              "scenario": "50-$-Artikel, 6 % Umsatzsteuer",
+              "result": "53,00 $ Gesamt (3,00 $ Steuer)"
             },
             {
-              "scenario": "$250 item, 8.875% combined rate (e.g. New York City)",
-              "result": "$272.19 total ($22.19 tax)"
+              "scenario": "250-$-Artikel, 8,875 % kombinierter Satz (z. B. New York City)",
+              "result": "272,19 $ Gesamt (22,19 $ Steuer)"
             },
             {
-              "scenario": "$80 item, 6.5% state + 1% county + 1.5% city = 9% combined",
-              "result": "$87.20 total ($7.20 tax)"
+              "scenario": "80-$-Artikel, 6,5 % Bundesstaat + 1 % County + 1,5 % Stadt = 9 % kombiniert",
+              "result": "87,20 $ Gesamt (7,20 $ Steuer)"
             },
             {
-              "scenario": "Receipt shows $108 total, 8% tax rate — find the pre-tax price",
-              "result": "Pre-tax price was $100.00"
+              "scenario": "Kassenbon zeigt 108 $ Gesamt, 8 % Steuersatz — Nettopreis ermitteln",
+              "result": "Der Nettopreis vor Steuern betrug 100,00 $"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Is sales tax the same rate everywhere?",
-              "answer": "No. Unlike a national VAT, US sales tax is set state by state, and most states let counties, cities, and special districts add their own rate on top — so the combined rate charged at the register can vary block by block, not just state by state."
+              "question": "Ist die Umsatzsteuer überall derselbe Satz?",
+              "answer": "Nein. Anders als eine landesweite Mehrwertsteuer wird die US-Sales-Tax bundesstaatlich festgelegt, und die meisten Bundesstaaten erlauben Countys, Städten und speziellen Bezirken, ihren eigenen Satz obendrauf zu addieren — der an der Kasse berechnete kombinierte Satz kann sich daher von Block zu Block unterscheiden, nicht nur von Bundesstaat zu Bundesstaat."
             },
             {
-              "question": "How is sales tax different from VAT?",
-              "answer": "Sales tax is collected once, at the final retail sale to the end consumer. VAT, used by most countries outside the US, is collected in smaller amounts at every stage of production, with businesses claiming credit for VAT they already paid on their own inputs — the two can produce a similar final price but get there through very different mechanics."
+              "question": "Wie unterscheidet sich die Sales Tax von der Mehrwertsteuer (VAT)?",
+              "answer": "Die Sales Tax wird nur einmal erhoben, beim endgültigen Einzelhandelsverkauf an den Endverbraucher. Die von den meisten Ländern außerhalb der USA verwendete Mehrwertsteuer wird in kleineren Beträgen auf jeder Produktionsstufe erhoben, wobei Unternehmen die bereits auf ihre eigenen Vorleistungen gezahlte Mehrwertsteuer als Vorsteuer geltend machen — beide können zu einem ähnlichen Endpreis führen, erreichen ihn aber über sehr unterschiedliche Mechanismen."
             },
             {
-              "question": "Why did two receipts for the same $100 purchase show different tax amounts?",
-              "answer": "Almost certainly a different combined local rate — the state base rate plus whatever county, city, and district rates apply at each specific location, which can differ even between two stores a short drive apart."
+              "question": "Warum zeigten zwei Kassenbons für denselben 100-$-Einkauf unterschiedliche Steuerbeträge?",
+              "answer": "Fast sicher ein unterschiedlicher kombinierter Ortssatz — der bundesstaatliche Basissatz plus die jeweils an diesem konkreten Ort geltenden County-, Stadt- und Bezirkssätze, die sich sogar zwischen zwei Geschäften in kurzer Fahrentfernung unterscheiden können."
             },
             {
-              "question": "How do I find the pre-tax price from a receipt that only shows the total?",
-              "answer": "Divide the tax-inclusive total by one plus the tax rate expressed as a decimal. A $108 total at 8% tax implies a pre-tax price of $108 ÷ 1.08 = $100. This tool's \"Extract From Total\" mode performs exactly this calculation."
+              "question": "Wie finde ich den Nettopreis aus einem Kassenbon, der nur den Gesamtbetrag zeigt?",
+              "answer": "Teilen Sie den steuerinklusiven Gesamtbetrag durch eins plus den als Dezimalzahl ausgedrückten Steuersatz. Ein Gesamtbetrag von 108 $ bei 8 % Steuer impliziert einen Nettopreis von 108 $ ÷ 1,08 = 100 $. Der Modus „Aus Gesamtbetrag herausrechnen“ dieses Werkzeugs führt genau diese Berechnung durch."
             },
             {
-              "question": "Do all US states charge sales tax?",
-              "answer": "No — Delaware, Montana, New Hampshire, and Oregon charge no statewide sales tax at all. Alaska charges no state-level tax either, but unlike the other three, it allows individual municipalities to levy their own local sales tax."
+              "question": "Erheben alle US-Bundesstaaten eine Umsatzsteuer?",
+              "answer": "Nein — Delaware, Montana, New Hampshire und Oregon erheben überhaupt keine landesweite Umsatzsteuer. Alaska erhebt ebenfalls keine bundesstaatliche Steuer, erlaubt aber anders als die anderen drei einzelnen Gemeinden, ihre eigene lokale Umsatzsteuer zu erheben."
             },
             {
-              "question": "Do online purchases charge sales tax?",
-              "answer": "Almost always now, even from out-of-state sellers. Following the Supreme Court's 2018 Wayfair decision, states can require a retailer to collect sales tax once it crosses a sales or transaction threshold in that state, regardless of whether it has any physical presence there — which is why most online checkouts now calculate a locally correct tax automatically."
+              "question": "Wird bei Online-Käufen Umsatzsteuer berechnet?",
+              "answer": "Heute fast immer, auch bei Verkäufern aus anderen Bundesstaaten. Nach der Wayfair-Entscheidung des Obersten Gerichtshofs von 2018 können Bundesstaaten einen Händler verpflichten, Umsatzsteuer zu erheben, sobald er dort eine Umsatz- oder Transaktionsschwelle überschreitet, unabhängig davon, ob er dort physisch präsent ist — weshalb die meisten Online-Kassen heute automatisch den örtlich korrekten Steuerbetrag berechnen."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hinter diesem Werkzeug",
           "history": {
-            "title": "Mississippi's Depression-Era Invention",
-            "paragraph": "The first broad-based state sales tax in the US is less than a century old. Facing collapsed property tax revenue as the Great Depression gutted its overwhelmingly agricultural economy, Mississippi enacted a 2% general sales tax in 1930 — the first state to tax retail sales broadly as a general revenue source, rather than as a narrow excise on a handful of specific goods. The idea spread fast: within the following decade, roughly two dozen more states adopted their own version of the same mechanism, and today 45 states plus Washington, D.C. levy one."
+            "title": "Mississippis Erfindung aus der Zeit der Weltwirtschaftskrise",
+            "paragraph": "Die erste breit angelegte bundesstaatliche Umsatzsteuer in den USA ist noch keine hundert Jahre alt. Angesichts eingebrochener Grundsteuereinnahmen, als die Weltwirtschaftskrise seine überwiegend landwirtschaftlich geprägte Wirtschaft aushöhlte, führte Mississippi 1930 eine allgemeine Umsatzsteuer von 2 % ein — der erste Bundesstaat, der Einzelhandelsverkäufe breit als allgemeine Einnahmequelle besteuerte, statt als schmale Verbrauchsteuer auf eine Handvoll bestimmter Waren. Die Idee verbreitete sich schnell: Innerhalb des folgenden Jahrzehnts übernahmen rund zwei Dutzend weitere Bundesstaaten ihre eigene Version desselben Mechanismus, und heute erheben 45 Bundesstaaten plus Washington, D.C. eine solche Steuer."
           },
           "modernDevelopments": {
-            "title": "From Storefronts to Server Farms",
-            "paragraph": "For decades, a state could only require a business to collect its sales tax if that business had a physical presence there — a rule the Supreme Court set in 1967 and reaffirmed in 1992's Quill Corp. v. North Dakota, which let early catalog and online retailers ship into a state tax-free as long as they had no local store or warehouse. That changed in 2018, when South Dakota v. Wayfair, Inc. overturned the physical-presence rule and replaced it with \"economic nexus\" — a seller can now owe sales tax in a state purely by crossing a threshold of sales or transactions there, regardless of whether it has ever set foot in it. Within a few years, nearly every state with a sales tax adopted its own economic-nexus threshold, which is the reason almost every online checkout today calculates a locally correct tax amount automatically."
+            "title": "Von Ladengeschäften zu Serverfarmen",
+            "paragraph": "Jahrzehntelang durfte ein Bundesstaat ein Unternehmen nur dann zur Erhebung seiner Umsatzsteuer verpflichten, wenn dieses dort physisch präsent war — eine Regel, die der Oberste Gerichtshof 1967 festlegte und 1992 in Quill Corp. v. North Dakota bekräftigte, wodurch frühe Katalog- und Online-Händler steuerfrei in einen Bundesstaat liefern konnten, solange sie dort kein Geschäft oder Lager hatten. Das änderte sich 2018, als South Dakota v. Wayfair, Inc. die Regel der physischen Präsenz aufhob und durch den „wirtschaftlichen Nexus“ ersetzte — ein Verkäufer kann nun allein durch das Überschreiten einer Umsatz- oder Transaktionsschwelle in einem Bundesstaat dort steuerpflichtig werden, unabhängig davon, ob er dort jemals physisch präsent war. Innerhalb weniger Jahre übernahm fast jeder Bundesstaat mit Umsatzsteuer seine eigene Schwelle für den wirtschaftlichen Nexus, weshalb heute fast jede Online-Kasse automatisch den örtlich korrekten Steuerbetrag berechnet."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Tax policy and its effect on prices and consumer behavior is studied within Accounting & Finance programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Akademischer Werdegang",
+            "intro": "Steuerpolitik und ihre Auswirkung auf Preise und Verbraucherverhalten wird im Rahmen von Studiengängen für Rechnungswesen und Finanzen untersucht. Hier sind die weltweit fünf besten im QS World University Rankings by Subject 2025, plus eine regionale Option:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
-                "online": "No — HBS's MBA, which houses the Accounting & Management unit's teaching, is in-person on Harvard's Boston campus; separate Executive Education offerings include some online courses, not this program."
+                "online": "Nein — der MBA der HBS, der die Lehre der Accounting & Management-Einheit umfasst, findet in Präsenz auf dem Boston-Campus von Harvard statt; separate Executive-Education-Angebote enthalten einige Online-Kurse, nicht dieses Programm."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
-                "online": "No — MIT Sloan's Master of Finance is an in-person, 12- or 18-month program on MIT's Cambridge campus."
+                "online": "Nein — der Master of Finance von MIT Sloan ist ein 12- oder 18-monatiges Präsenzprogramm auf dem Cambridge-Campus des MIT."
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
-                "online": "No — Stanford GSB's Accounting area teaches through its in-person MBA, MSx, and PhD programs; the school's online offerings are limited to non-degree executive courses."
+                "online": "Nein — der Accounting-Bereich der Stanford GSB lehrt über ihre Präsenzprogramme MBA, MSx und PhD; die Online-Angebote der Hochschule beschränken sich auf nicht-graduierende Weiterbildungskurse."
               },
               {
                 "name": "University of Oxford (Saïd Business School)",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
-                "online": "No — the Oxford MBA, whose core curriculum includes accounting and finance, is a full-time in-person program; Saïd's online offerings are separate short courses, not this degree."
+                "online": "Nein — der Oxford-MBA, dessen Kerncurriculum Rechnungswesen und Finanzen umfasst, ist ein Vollzeit-Präsenzprogramm; die Online-Angebote von Saïd sind separate Kurzkurse, nicht dieser Abschluss."
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
-                "online": "No — Booth's MBA programs (Full-Time, Evening, Weekend, Executive) are in-person or hybrid on-campus formats; there is no fully online Booth MBA."
+                "online": "Nein — die MBA-Programme von Booth (Vollzeit, Abend, Wochenende, Executive) sind Präsenz- oder Hybridformate vor Ort; es gibt keinen vollständig online absolvierbaren Booth-MBA."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Accounting through its School of Business Administration.",
+                "note": "Bietet über ihre School of Business Administration einen Bachelor of Science in Business Administration mit Hauptfach Rechnungswesen an.",
                 "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Durchführungsart wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "Wissenschaftliche Quellen",
           "citation": "Chetty, R., Looney, A., & Kroft, K. (2009). Salience and taxation: Theory and evidence. American Economic Review, 99(4), 1145–1177.",
-          "note": "A landmark study finding that posting tax-inclusive prices reduces demand more than adding the same tax at the register — consumers systematically underreact to taxes that aren't already folded into the sticker price they see.",
+          "note": "Eine wegweisende Studie, die zeigt, dass die Anzeige steuerinklusiver Preise die Nachfrage stärker senkt als das Hinzufügen derselben Steuer an der Kasse — Verbraucher reagieren systematisch zu schwach auf Steuern, die nicht bereits im gesehenen Preisschild enthalten sind.",
           "url": "https://doi.org/10.1257/aer.99.4.1145",
-          "readOriginal": "Read the Original Article"
+          "readOriginal": "Originalartikel lesen"
         }
       }
     },
