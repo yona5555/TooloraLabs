@@ -3857,166 +3857,187 @@
       }
     },
     "image-converter": {
-      "title": "Image Converter",
-      "description": "Convert images between PNG, JPEG, and WebP with a live quality/size preview, plus optional resizing — all processed locally in your browser.",
+      "title": "इमेज कन्वर्टर",
+      "description": "लाइव क्वालिटी/साइज़ प्रीव्यू के साथ PNG, JPEG, और WebP के बीच इमेज कन्वर्ट करें, साथ ही वैकल्पिक रीसाइज़िंग — सब कुछ आपके ब्राउज़र में स्थानीय रूप से प्रोसेस होता है।",
       "nav": {
-        "tool": "Converter",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कन्वर्टर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Result",
-        "placeholder": "Upload an image on the left to see the converted result here.",
-        "originalSize": "Original Size",
-        "newSize": "New Size",
-        "smallerBy": "{percent}% smaller than the original",
-        "largerBy": "{percent}% larger than the original",
-        "sameSize": "Same size as the original",
+        "resultTitle": "परिणाम",
+        "placeholder": "यहाँ कन्वर्ट किया गया परिणाम देखने के लिए बाईं ओर एक इमेज अपलोड करें।",
+        "originalSize": "मूल साइज़",
+        "newSize": "नया साइज़",
+        "smallerBy": "मूल से {percent}% छोटा",
+        "largerBy": "मूल से {percent}% बड़ा",
+        "sameSize": "मूल जितना ही साइज़",
         "formatGuide": {
-          "title": "Choosing the Right Format",
-          "intro": "What each format is actually good at — the honest tradeoffs, not marketing.",
+          "title": "सही फ़ॉर्मेट चुनना",
+          "intro": "हर फ़ॉर्मेट असल में किसमें अच्छा है — ईमानदार ट्रेड-ऑफ़, मार्केटिंग नहीं।",
           "rows": [
-            { "format": "PNG", "bestFor": "Screenshots, logos, and graphics with sharp edges or transparency — lossless, but larger for photos." },
-            { "format": "JPEG", "bestFor": "Photographs, where its lossy compression shines and near-universal support matters most." },
-            { "format": "WebP", "bestFor": "Web use generally — usually smaller than JPEG or PNG at similar quality, with near-universal browser support today." }
+            {
+              "format": "PNG",
+              "bestFor": "स्क्रीनशॉट, लोगो, और तेज़ किनारों या ट्रांसपेरेंसी वाले ग्राफ़िक्स के लिए — लॉसलेस, लेकिन फ़ोटो के लिए बड़ा।"
+            },
+            {
+              "format": "JPEG",
+              "bestFor": "फ़ोटोग्राफ़ के लिए, जहाँ इसका लॉसी कंप्रेशन सबसे अच्छा काम करता है और लगभग सार्वभौमिक सपोर्ट सबसे ज़्यादा मायने रखता है।"
+            },
+            {
+              "format": "WebP",
+              "bestFor": "आमतौर पर वेब इस्तेमाल के लिए — समान क्वालिटी पर आमतौर पर JPEG या PNG से छोटा, और आज लगभग सार्वभौमिक ब्राउज़र सपोर्ट के साथ।"
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your Image",
-        "chooseFile": "Click or drop an image here",
-        "previewAlt": "Selected image preview",
-        "resultAlt": "Converted image preview",
-        "formatLabel": "Output Format",
-        "qualityLabel": "Quality",
-        "resizeLabel": "Resize (max width)",
-        "maxWidthPlaceholder": "Max width in pixels",
-        "convert": "Convert Image",
-        "converting": "Converting...",
-        "download": "Download",
-        "resultSize": "New file size: {size}"
+        "inputTitle": "आपकी इमेज",
+        "chooseFile": "यहाँ क्लिक करें या इमेज ड्रॉप करें",
+        "previewAlt": "चुनी गई इमेज का प्रीव्यू",
+        "resultAlt": "कन्वर्ट की गई इमेज का प्रीव्यू",
+        "formatLabel": "आउटपुट फ़ॉर्मेट",
+        "qualityLabel": "क्वालिटी",
+        "resizeLabel": "रीसाइज़ करें (अधिकतम चौड़ाई)",
+        "maxWidthPlaceholder": "अधिकतम चौड़ाई पिक्सल में",
+        "convert": "इमेज कन्वर्ट करें",
+        "converting": "कन्वर्ट हो रहा है...",
+        "download": "डाउनलोड करें",
+        "resultSize": "नई फ़ाइल साइज़: {size}"
       },
       "errors": {
-        "invalidFile": "Please choose a valid image file.",
-        "tooLarge": "Image is too large (max 10 MB).",
-        "conversionFailed": "Could not convert this image. Try a different file or format."
+        "invalidFile": "कृपया एक मान्य इमेज फ़ाइल चुनें।",
+        "tooLarge": "इमेज बहुत बड़ी है (अधिकतम 10 MB)।",
+        "conversionFailed": "यह इमेज कन्वर्ट नहीं हो सकी। कोई दूसरी फ़ाइल या फ़ॉर्मेट आज़माएँ।"
       },
       "education": {
         "intro": {
-          "title": "How Image Compression Actually Works",
-          "paragraph1": "Every image format makes the same fundamental choice: lossless, which shrinks a file while preserving every original pixel exactly (PNG), or lossy, which discards some visual detail permanently in exchange for dramatically smaller files (JPEG, and WebP in its default mode). Lossless compression works like a more efficient way of writing down the same information — nothing is thrown away, so decompressing always reconstructs the exact original bytes. Lossy compression instead identifies the detail human eyes are least likely to notice — subtle color gradients, fine texture — and discards it outright, which is why the same JPEG saved and reopened repeatedly slowly degrades: each pass discards a little more.",
-          "paragraph2": "JPEG's specific technique is the discrete cosine transform (DCT): it splits an image into small blocks and represents each one as a sum of smooth wave patterns, then keeps only the low-frequency waves that matter most to human perception — a typical JPEG at default quality discards roughly 90% of the raw pixel data this way, and still looks essentially unchanged to most viewers. This tool converts entirely inside your browser via the Canvas API, so no image ever leaves your device.",
+          "title": "इमेज कंप्रेशन असल में कैसे काम करता है",
+          "paragraph1": "हर इमेज फ़ॉर्मेट एक जैसा बुनियादी चुनाव करता है: लॉसलेस, जो हर मूल पिक्सल को बिल्कुल सुरक्षित रखते हुए फ़ाइल को छोटा करता है (PNG), या लॉसी, जो काफ़ी छोटी फ़ाइलों के बदले कुछ विज़ुअल डिटेल को हमेशा के लिए हटा देता है (JPEG, और अपने डिफ़ॉल्ट मोड में WebP)। लॉसलेस कंप्रेशन उसी जानकारी को लिखने का एक ज़्यादा कारगर तरीक़ा है — कुछ भी फेंका नहीं जाता, इसलिए डीकंप्रेस करने पर हमेशा बिल्कुल मूल बाइट्स ही वापस मिलते हैं। लॉसी कंप्रेशन इसके बजाय उस डिटेल को पहचानता है जिसे इंसानी आँखों के नोटिस करने की सबसे कम संभावना होती है — सूक्ष्म रंग ग्रेडिएंट, बारीक बनावट — और उसे सीधे हटा देता है, यही वजह है कि एक ही JPEG को बार-बार सेव और दोबारा खोलने पर वह धीरे-धीरे बिगड़ती जाती है: हर बार थोड़ा और हिस्सा हटता है।",
+          "paragraph2": "JPEG की विशिष्ट तकनीक डिस्क्रीट कोसाइन ट्रांसफ़ॉर्म (DCT) है: यह किसी इमेज को छोटे-छोटे ब्लॉक में बाँटती है और हर ब्लॉक को सहज तरंग पैटर्न के योग के रूप में दर्शाती है, फिर केवल उन कम-आवृत्ति तरंगों को रखती है जो इंसानी नज़र के लिए सबसे ज़्यादा मायने रखती हैं — डिफ़ॉल्ट क्वालिटी पर एक सामान्य JPEG इस तरह कच्चे पिक्सल डेटा का लगभग 90% हटा देता है, और फिर भी ज़्यादातर देखने वालों को लगभग अपरिवर्तित दिखता है। यह टूल पूरी तरह आपके ब्राउज़र के भीतर Canvas API के ज़रिए कन्वर्ट करता है, इसलिए कोई इमेज कभी आपके डिवाइस से बाहर नहीं जाती।",
           "diagram": {
-            "losslessLabel": "Lossless (PNG)",
-            "lossyLabel": "Lossy (JPEG, WebP)",
-            "originalLabel": "Original",
-            "compressedLabel": "Compressed",
-            "resultLabel": "Reopened",
-            "identicalLabel": "bit-for-bit identical",
-            "approximateLabel": "a close approximation",
-            "caption": "Lossless compression can always reconstruct the exact original; lossy compression permanently discards detail to shrink the file further."
+            "losslessLabel": "लॉसलेस (PNG)",
+            "lossyLabel": "लॉसी (JPEG, WebP)",
+            "originalLabel": "मूल",
+            "compressedLabel": "कंप्रेस्ड",
+            "resultLabel": "दोबारा खोला गया",
+            "identicalLabel": "बिट-दर-बिट समान",
+            "approximateLabel": "एक क़रीबी अनुमान",
+            "caption": "लॉसलेस कंप्रेशन हमेशा बिल्कुल मूल को दोबारा बना सकता है; लॉसी कंप्रेशन फ़ाइल को और छोटा करने के लिए स्थायी रूप से डिटेल हटा देता है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Illustrative size differences for the same photo, converted at common settings.",
-          "columnScenario": "Scenario",
-          "columnResult": "Typical Outcome",
+          "title": "हल किए गए उदाहरण",
+          "intro": "एक ही फ़ोटो के लिए आम सेटिंग्स पर कन्वर्ट करने पर साइज़ में उदाहरणात्मक अंतर।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "सामान्य परिणाम",
           "rows": [
-            { "scenario": "A 4000×3000 photo saved as PNG", "result": "Often 15-25 MB — lossless, but large for a photo" },
-            { "scenario": "The same photo saved as JPEG at 85% quality", "result": "Often 1-3 MB — a large reduction, minimal visible loss" },
-            { "scenario": "The same photo saved as WebP at 85% quality", "result": "Often 20-30% smaller than the equivalent JPEG" },
-            { "scenario": "A 4000px-wide photo resized to a 1920px max width", "result": "Roughly a 4x reduction in pixel count before compression even applies" }
+            {
+              "scenario": "4000×3000 की एक फ़ोटो PNG के रूप में सेव की गई",
+              "result": "अक्सर 15-25 MB — लॉसलेस, लेकिन फ़ोटो के लिए बड़ा"
+            },
+            {
+              "scenario": "वही फ़ोटो 85% क्वालिटी पर JPEG के रूप में सेव की गई",
+              "result": "अक्सर 1-3 MB — बड़ी कमी, न्यूनतम दिखने वाला नुक़सान"
+            },
+            {
+              "scenario": "वही फ़ोटो 85% क्वालिटी पर WebP के रूप में सेव की गई",
+              "result": "अक्सर समकक्ष JPEG से 20-30% छोटी"
+            },
+            {
+              "scenario": "4000px चौड़ी फ़ोटो को 1920px अधिकतम चौड़ाई तक रीसाइज़ किया गया",
+              "result": "कंप्रेशन लागू होने से पहले ही पिक्सल संख्या में लगभग 4 गुना कमी"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Which format should I actually use?",
-              "answer": "PNG for screenshots, logos, or anything needing transparency or perfectly sharp edges. JPEG for photos where you want maximum compatibility. WebP for photos on the web generally — it usually beats JPEG at the same visual quality and virtually all current browsers support it."
+              "question": "मुझे असल में कौन-सा फ़ॉर्मेट इस्तेमाल करना चाहिए?",
+              "answer": "स्क्रीनशॉट, लोगो, या ट्रांसपेरेंसी या बिल्कुल तेज़ किनारों की ज़रूरत वाली किसी भी चीज़ के लिए PNG। ज़्यादा से ज़्यादा कम्पैटिबिलिटी चाहने वाली फ़ोटो के लिए JPEG। आमतौर पर वेब पर फ़ोटो के लिए WebP — यह आमतौर पर समान विज़ुअल क्वालिटी पर JPEG से बेहतर होता है और लगभग सभी मौजूदा ब्राउज़र इसे सपोर्ट करते हैं।"
             },
             {
-              "question": "Does converting PNG to JPEG and back to PNG lose quality twice?",
-              "answer": "Yes, and this is a genuinely common mistake. Once an image passes through a lossy format like JPEG, the detail that format discarded is gone permanently — converting the result back to PNG just locks in that already-degraded version losslessly. Repeatedly re-saving as JPEG compounds the loss further each time. Always keep (or start from) the highest-quality original you have."
+              "question": "क्या PNG को JPEG में और फिर वापस PNG में कन्वर्ट करने से क्वालिटी दो बार घटती है?",
+              "answer": "हाँ, और यह वाक़ई एक आम ग़लती है। एक बार जब कोई इमेज JPEG जैसे लॉसी फ़ॉर्मेट से गुज़र जाती है, तो उस फ़ॉर्मेट द्वारा हटाई गई डिटेल हमेशा के लिए ख़त्म हो जाती है — परिणाम को वापस PNG में कन्वर्ट करना बस उस पहले से बिगड़ी हुई वर्ज़न को लॉसलेस तरीक़े से लॉक कर देता है। बार-बार JPEG के रूप में दोबारा सेव करना हर बार नुक़सान को और बढ़ा देता है। हमेशा अपने पास मौजूद सबसे उच्च-क्वालिटी वाला मूल संस्करण रखें (या उसी से शुरू करें)।"
             },
             {
-              "question": "What does the \"quality\" slider actually control?",
-              "answer": "For JPEG and WebP, it controls how aggressively the encoder discards fine visual detail — lower quality means smaller files but more visible artifacts, especially blockiness around sharp edges and color banding in smooth gradients. It has no effect for PNG, since PNG is lossless and doesn't have a quality/detail tradeoff to make."
+              "question": "\"क्वालिटी\" स्लाइडर असल में क्या नियंत्रित करता है?",
+              "answer": "JPEG और WebP के लिए, यह नियंत्रित करता है कि एनकोडर कितनी आक्रामकता से बारीक विज़ुअल डिटेल हटाता है — कम क्वालिटी का मतलब है छोटी फ़ाइलें लेकिन ज़्यादा दिखने वाले आर्टिफ़ैक्ट, ख़ासकर तेज़ किनारों के आसपास ब्लॉकीपन और सहज ग्रेडिएंट में कलर बैंडिंग। PNG पर इसका कोई असर नहीं होता, क्योंकि PNG लॉसलेस है और इसमें कोई क्वालिटी/डिटेल ट्रेड-ऑफ़ नहीं करना होता।"
             },
             {
-              "question": "Why does resizing an image before converting help so much?",
-              "answer": "File size for a lossy format scales roughly with pixel count, so halving both width and height cuts the pixel count — and therefore roughly the file size — to about a quarter. Resizing to the dimensions you'll actually display an image at is usually a bigger size win than tightening the quality slider on an oversized image."
+              "question": "कन्वर्ट करने से पहले इमेज को रीसाइज़ करने से इतना फ़ायदा क्यों होता है?",
+              "answer": "लॉसी फ़ॉर्मेट के लिए फ़ाइल साइज़ लगभग पिक्सल संख्या के अनुपात में बदलता है, इसलिए चौड़ाई और ऊँचाई दोनों को आधा करने से पिक्सल संख्या — और इसलिए लगभग फ़ाइल साइज़ भी — लगभग एक-चौथाई रह जाती है। किसी इमेज को उसी आकार में रीसाइज़ करना जिसमें आप उसे असल में दिखाएँगे, आमतौर पर किसी बड़ी इमेज पर क्वालिटी स्लाइडर कसने से बड़ी साइज़-बचत देता है।"
             },
             {
-              "question": "Is WebP support universal now?",
-              "answer": "Essentially yes for viewing — every major browser (Chrome, Firefox, Safari, Edge) has supported displaying WebP images since 2020 or earlier. The one place it can still cause friction is older software (some older design tools, some email clients) that can't open a .webp file directly, which is worth checking before using it somewhere JPEG or PNG would be safer."
+              "question": "क्या WebP सपोर्ट अब सार्वभौमिक है?",
+              "answer": "देखने के लिहाज़ से लगभग हाँ — हर बड़ा ब्राउज़र (Chrome, Firefox, Safari, Edge) 2020 या उससे पहले से WebP इमेज दिखाना सपोर्ट करता है। जहाँ अभी भी दिक़्क़त हो सकती है वह है पुराना सॉफ़्टवेयर (कुछ पुराने डिज़ाइन टूल, कुछ ईमेल क्लाइंट) जो .webp फ़ाइल सीधे नहीं खोल सकते — जहाँ JPEG या PNG ज़्यादा सुरक्षित हो, वहाँ इस्तेमाल करने से पहले यह जाँच लेना उचित है।"
             },
             {
-              "question": "Is my image uploaded anywhere when I use this tool?",
-              "answer": "No — every step, including reading the file, resizing, and re-encoding it into a new format, happens locally in your browser using the Canvas API. The image is never transmitted anywhere."
+              "question": "क्या इस टूल का उपयोग करते समय मेरी इमेज कहीं अपलोड होती है?",
+              "answer": "नहीं — फ़ाइल पढ़ने, रीसाइज़ करने, और उसे नए फ़ॉर्मेट में दोबारा एनकोड करने सहित हर चरण Canvas API का उपयोग करके आपके ब्राउज़र में स्थानीय रूप से होता है। इमेज कभी कहीं भेजी नहीं जाती।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "A Six-Year Committee Question: How Much Can an Eye Forgive?",
-            "paragraph": "The Joint Photographic Experts Group formed in 1986 as a joint effort between two international standards bodies, tasked with a question that had no clean engineering answer: how much of a photograph's raw data could be discarded before a human eye would notice? After six years evaluating candidate compression methods, the committee published what the world now calls JPEG in September 1992, built around the discrete cosine transform — a technique first proposed for image compression back in 1972. The result, still in near-universal use today, routinely throws away roughly 90% of a photo's raw pixel data while looking, to most eyes, essentially unchanged."
+            "title": "छह साल की समिति वाला सवाल: एक आँख कितना माफ़ कर सकती है?",
+            "paragraph": "Joint Photographic Experts Group 1986 में दो अंतरराष्ट्रीय मानक निकायों के संयुक्त प्रयास के रूप में बनी, जिसे एक ऐसे सवाल का जवाब देना था जिसका कोई साफ़-सुथरा इंजीनियरिंग जवाब नहीं था: किसी फ़ोटो के कच्चे डेटा का कितना हिस्सा हटाया जा सकता है इससे पहले कि इंसानी आँख उसे नोटिस कर ले? उम्मीदवार कंप्रेशन तरीक़ों का छह साल तक मूल्यांकन करने के बाद, समिति ने सितंबर 1992 में वह प्रकाशित किया जिसे दुनिया अब JPEG कहती है, जो डिस्क्रीट कोसाइन ट्रांसफ़ॉर्म के इर्द-गिर्द बनाया गया था — एक ऐसी तकनीक जिसे इमेज कंप्रेशन के लिए पहली बार 1972 में प्रस्तावित किया गया था। नतीजा, जो आज भी लगभग सार्वभौमिक इस्तेमाल में है, किसी फ़ोटो के कच्चे पिक्सल डेटा का लगभग 90% नियमित रूप से हटा देता है, फिर भी ज़्यादातर आँखों को लगभग अपरिवर्तित दिखता है।"
           },
           "modernDevelopments": {
-            "title": "From a Patent Dispute to a Video Codec's Side Project",
-            "paragraph": "PNG's origin traces to a legal fight, not a technical one: when Unisys announced in December 1994 that it would start charging licensing fees for the LZW compression method used inside the hugely popular GIF format, engineers - some of whom had worked on JPEG - moved quickly to design a free, open replacement, releasing the first PNG specification in 1996 with real transparency and no patent encumbrance. WebP arrived by a completely different route in 2010: after acquiring video codec company On2 Technologies, Google adapted the intra-frame compression technology built for its VP8 video codec — the part that compresses a single video frame on its own — into a standalone still-image format, reporting roughly 39% smaller files than equivalent-quality JPEGs in real-world testing."
+            "title": "पेटेंट विवाद से एक वीडियो कोडेक की साइड प्रोजेक्ट तक",
+            "paragraph": "PNG की उत्पत्ति एक क़ानूनी लड़ाई से हुई, तकनीकी नहीं: जब Unisys ने दिसंबर 1994 में घोषणा की कि वह बेहद लोकप्रिय GIF फ़ॉर्मेट के भीतर इस्तेमाल होने वाली LZW कंप्रेशन विधि के लिए लाइसेंसिंग शुल्क लेना शुरू करेगी, तो इंजीनियरों — जिनमें से कुछ ने JPEG पर काम किया था — ने तेज़ी से एक मुफ़्त, ओपन विकल्प डिज़ाइन करना शुरू किया, और 1996 में पहला PNG स्पेसिफ़िकेशन जारी किया, जिसमें असली ट्रांसपेरेंसी थी और कोई पेटेंट बाधा नहीं थी। WebP 2010 में बिल्कुल अलग रास्ते से आया: वीडियो कोडेक कंपनी On2 Technologies को ख़रीदने के बाद, Google ने अपने VP8 वीडियो कोडेक के लिए बनाई गई इंट्रा-फ़्रेम कंप्रेशन तकनीक — वह हिस्सा जो किसी एक वीडियो फ़्रेम को अकेले कंप्रेस करता है — को एक स्टैंडअलोन स्टिल-इमेज फ़ॉर्मेट में बदल दिया, और वास्तविक दुनिया के परीक्षण में समकक्ष-क्वालिटी वाले JPEG की तुलना में लगभग 39% छोटी फ़ाइलों की रिपोर्ट दी।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Image compression, signal processing, and computer vision are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "इमेज कंप्रेशन, सिग्नल प्रोसेसिंग, और कंप्यूटर विज़न कंप्यूटर साइंस प्रोग्रामों में पढ़ाई जाती हैं। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "नहीं — MIT का Course 6-3 (कंप्यूटर साइंस एंड इंजीनियरिंग) MIT के कैंब्रिज कैंपस पर एक इन-पर्सन अंडरग्रेजुएट प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "नहीं — Stanford का कंप्यूटर साइंस बैचलर प्रोग्राम Stanford के कैंपस पर एक इन-पर्सन डिग्री है।"
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "नहीं — CMU का School of Computer Science बैचलर प्रोग्राम उसके पिट्सबर्ग कैंपस पर इन-पर्सन है।"
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "नहीं — NUS का Bachelor of Computing in Computer Science एक इन-पर्सन प्रोग्राम है, जिसमें कैंपस पर या विदेश में अनिवार्य इंटर्नशिप शामिल है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "नहीं — Oxford की कंप्यूटर साइंस डिग्री उसके ट्यूटोरियल सिस्टम के ज़रिए इन-पर्सन पढ़ाई जाती है, जिसमें एक या दो छात्र सीधे किसी ट्यूटर से मिलते हैं।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "अपने College of Engineering के ज़रिए ABET-मान्यता प्राप्त Bachelor of Science in Computer Science प्रदान करता है।",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "तकनीकी मानक",
           "citation": "ISO/IEC 10918-1:1994 — Information technology — Digital compression and coding of continuous-tone still images: Requirements and guidelines. International Organization for Standardization.",
-          "note": "The official international standard defining JPEG's compression algorithm, including the discrete cosine transform pipeline this tool's JPEG output relies on via the browser's built-in Canvas encoder.",
+          "note": "JPEG के कंप्रेशन एल्गोरिद्म को परिभाषित करने वाला आधिकारिक अंतरराष्ट्रीय मानक, जिसमें वह डिस्क्रीट कोसाइन ट्रांसफ़ॉर्म पाइपलाइन शामिल है जिस पर इस टूल का JPEG आउटपुट ब्राउज़र के अंतर्निहित Canvas एनकोडर के ज़रिए निर्भर करता है।",
           "url": "https://www.iso.org/standard/18902.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "आधिकारिक मानक देखें"
         }
       }
     },
