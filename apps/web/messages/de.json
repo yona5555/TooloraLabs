@@ -6225,186 +6225,186 @@
       }
     },
     "invoice-generator": {
-      "title": "Invoice Generator",
-      "description": "Build an itemized invoice with a live preview, multi-currency support, and one-click print/PDF export.",
+      "title": "Rechnungsgenerator",
+      "description": "Erstellen Sie eine detaillierte Rechnung mit Live-Vorschau, Unterstützung für mehrere Währungen und Export per Klick als Druck/PDF.",
       "nav": {
         "tool": "Generator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Werkzeug"
       },
       "aboveFold": {
-        "resultTitle": "Live Preview",
-        "placeholder": "Add a description and price to at least one item to see the invoice here.",
-        "noNumber": "Invoice",
+        "resultTitle": "Live-Vorschau",
+        "placeholder": "Fügen Sie mindestens einem Posten eine Beschreibung und einen Preis hinzu, um hier die Rechnung zu sehen.",
+        "noNumber": "Rechnung",
         "checklist": {
-          "title": "What Makes an Invoice Valid",
-          "intro": "Requirements vary by country, but most jurisdictions expect an invoice to include:",
+          "title": "Was eine Rechnung gültig macht",
+          "intro": "Die Anforderungen unterscheiden sich je nach Land, aber die meisten Rechtsordnungen erwarten, dass eine Rechnung Folgendes enthält:",
           "items": [
-            "A unique, sequential invoice number — never reused, even for a cancelled invoice.",
-            "The full legal name and address of both the seller and the buyer.",
-            "A clear issue date and, separately, a payment due date.",
-            "An itemized description of each good or service, not just a lump sum.",
-            "The tax rate applied and the tax amount shown separately from the subtotal.",
-            "The currency the amounts are stated in, especially for cross-border invoices."
+            "Eine eindeutige, fortlaufende Rechnungsnummer — nie wiederverwendet, auch nicht für eine stornierte Rechnung.",
+            "Den vollständigen rechtlichen Namen und die Adresse sowohl des Verkäufers als auch des Käufers.",
+            "Ein klares Ausstellungsdatum und, davon getrennt, ein Zahlungsziel.",
+            "Eine detaillierte Beschreibung jeder Ware oder Dienstleistung, nicht nur einen Pauschalbetrag.",
+            "Den angewendeten Steuersatz und den Steuerbetrag, getrennt vom Zwischensumme ausgewiesen.",
+            "Die Währung, in der die Beträge angegeben sind, besonders bei grenzüberschreitenden Rechnungen."
           ]
         }
       },
       "form": {
-        "inputTitle": "Invoice Details",
-        "fromLabel": "From",
-        "fromPlaceholder": "Your business name",
-        "toLabel": "Bill To",
-        "toPlaceholder": "Client name",
-        "invoiceNumberLabel": "Invoice Number",
-        "currencyLabel": "Currency",
-        "issueDateLabel": "Issue Date",
-        "dueDateLabel": "Due Date",
-        "itemsLabel": "Items",
-        "itemDescription": "Description",
-        "itemDescriptionPlaceholder": "Item or service",
-        "itemQuantity": "Quantity",
-        "itemUnitPrice": "Unit Price",
-        "addItem": "Add Item",
-        "removeItem": "Remove item",
-        "taxRate": "Tax Rate (%)",
-        "discountPercent": "Discount (%)",
-        "generate": "Generate Invoice"
+        "inputTitle": "Rechnungsdetails",
+        "fromLabel": "Von",
+        "fromPlaceholder": "Name Ihres Unternehmens",
+        "toLabel": "Rechnung an",
+        "toPlaceholder": "Name des Kunden",
+        "invoiceNumberLabel": "Rechnungsnummer",
+        "currencyLabel": "Währung",
+        "issueDateLabel": "Ausstellungsdatum",
+        "dueDateLabel": "Fälligkeitsdatum",
+        "itemsLabel": "Posten",
+        "itemDescription": "Beschreibung",
+        "itemDescriptionPlaceholder": "Artikel oder Dienstleistung",
+        "itemQuantity": "Menge",
+        "itemUnitPrice": "Stückpreis",
+        "addItem": "Posten hinzufügen",
+        "removeItem": "Posten entfernen",
+        "taxRate": "Steuersatz (%)",
+        "discountPercent": "Rabatt (%)",
+        "generate": "Rechnung erstellen"
       },
       "result": {
-        "title": "Invoice",
-        "item": "Item",
-        "quantity": "Qty",
-        "unitPrice": "Unit Price",
-        "lineTotal": "Total",
-        "subtotal": "Subtotal",
-        "discount": "Discount",
-        "tax": "Tax",
-        "grandTotal": "Grand Total"
+        "title": "Rechnung",
+        "item": "Artikel",
+        "quantity": "Menge",
+        "unitPrice": "Stückpreis",
+        "lineTotal": "Summe",
+        "subtotal": "Zwischensumme",
+        "discount": "Rabatt",
+        "tax": "Steuer",
+        "grandTotal": "Gesamtsumme"
       },
       "errors": {
-        "required": "Please enter valid tax and discount values.",
-        "emptyItems": "Add at least one item.",
-        "invalidItem": "Each item needs a description, a quantity greater than 0, and a non-negative unit price.",
-        "invalidTaxRate": "Tax rate must not be negative.",
-        "invalidDiscount": "Discount must be between 0 and 100%."
+        "required": "Bitte geben Sie gültige Steuer- und Rabattwerte ein.",
+        "emptyItems": "Fügen Sie mindestens einen Posten hinzu.",
+        "invalidItem": "Jeder Posten benötigt eine Beschreibung, eine Menge größer als 0 und einen nicht negativen Stückpreis.",
+        "invalidTaxRate": "Der Steuersatz darf nicht negativ sein.",
+        "invalidDiscount": "Der Rabatt muss zwischen 0 und 100 % liegen."
       },
       "education": {
         "intro": {
-          "title": "How Invoice Totals Actually Add Up",
-          "paragraph1": "An invoice's math follows a fixed order that matters: every line item's quantity times its unit price is summed into a subtotal, a discount (if any) is subtracted from that subtotal first, and only then is tax calculated — on the discounted amount, not the original subtotal. Applying tax before the discount, or applying it to the pre-discount subtotal, produces a different, incorrect total, which is exactly the kind of ordering mistake this tool's calculation logic is built to never make.",
-          "paragraph2": "The distinction between an invoice's issue date and its due date is also more than a formality: the gap between them (this tool defaults to 14 days, but 30 is common under the term \"Net 30\") is the actual interest-free credit period a seller is extending to a buyer, which is why standard payment terms like \"Net 30\" or \"Net 60\" are really shorthand for a specific amount of short-term financing built into the transaction.",
+          "title": "Wie sich Rechnungssummen tatsächlich zusammensetzen",
+          "paragraph1": "Die Rechnung folgt einer festen, wichtigen Reihenfolge: Menge mal Stückpreis jedes Postens wird zu einer Zwischensumme addiert, ein etwaiger Rabatt wird zuerst von dieser Zwischensumme abgezogen, und erst danach wird die Steuer berechnet — auf den bereits rabattierten Betrag, nicht auf die ursprüngliche Zwischensumme. Die Steuer vor dem Rabatt anzuwenden oder sie auf die Zwischensumme vor Rabatt zu berechnen, ergibt eine andere, falsche Gesamtsumme — genau die Art von Reihenfolgefehler, den die Berechnungslogik dieses Werkzeugs niemals macht.",
+          "paragraph2": "Der Unterschied zwischen Ausstellungsdatum und Fälligkeitsdatum einer Rechnung ist ebenfalls mehr als eine Formalität: Die Zeitspanne dazwischen (dieses Werkzeug setzt standardmäßig 14 Tage an, aber 30 sind unter dem Begriff „netto 30 Tage“ üblich) ist die tatsächliche zinsfreie Kreditfrist, die ein Verkäufer einem Käufer einräumt, weshalb standardmäßige Zahlungsbedingungen wie „netto 30 Tage“ oder „netto 60 Tage“ eigentlich eine Kurzform für einen bestimmten Betrag kurzfristiger, in die Transaktion eingebauter Finanzierung sind.",
           "diagram": {
-            "subtotalLabel": "Subtotal",
-            "discountLabel": "Discount",
-            "taxLabel": "Tax",
-            "totalLabel": "Total",
-            "caption": "The fixed order of invoice math: discount is subtracted from the subtotal first, and tax is calculated on what's left — never on the original subtotal."
+            "subtotalLabel": "Zwischensumme",
+            "discountLabel": "Rabatt",
+            "taxLabel": "Steuer",
+            "totalLabel": "Summe",
+            "caption": "Die feste Reihenfolge der Rechnungsrechnung: Der Rabatt wird zuerst von der Zwischensumme abgezogen, und die Steuer wird auf das Übrige berechnet — nie auf die ursprüngliche Zwischensumme."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Two worked examples showing the exact order discount and tax are applied in.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Zwei durchgerechnete Beispiele, die die genaue Reihenfolge zeigen, in der Rabatt und Steuer angewendet werden.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "2 items: 10×$50 design work, 1×$20 hosting, 15% tax, no discount",
-              "result": "Subtotal $520.00, tax $78.00, total $598.00"
+              "scenario": "2 Posten: 10×50 $ Designarbeit, 1×20 $ Hosting, 15 % Steuer, kein Rabatt",
+              "result": "Zwischensumme 520,00 $, Steuer 78,00 $, Gesamt 598,00 $"
             },
             {
-              "scenario": "1 item: $1,000 consulting, 20% discount, 10% tax",
-              "result": "Discount $200.00 → taxable $800.00 → tax $80.00 → total $880.00"
+              "scenario": "1 Posten: 1.000 $ Beratung, 20 % Rabatt, 10 % Steuer",
+              "result": "Rabatt 200,00 $ → steuerpflichtig 800,00 $ → Steuer 80,00 $ → Gesamt 880,00 $"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Is a discount applied before or after tax?",
-              "answer": "Before — a discount reduces the subtotal first, and tax is then calculated on that already-discounted amount. Applying tax to the original subtotal and then subtracting the discount produces a different (and incorrect) total whenever both a discount and a tax rate are in play, which is why the order genuinely matters."
+              "question": "Wird ein Rabatt vor oder nach der Steuer angewendet?",
+              "answer": "Davor — ein Rabatt verringert zuerst die Zwischensumme, und die Steuer wird dann auf diesen bereits rabattierten Betrag berechnet. Die Steuer auf die ursprüngliche Zwischensumme anzuwenden und dann den Rabatt abzuziehen, ergibt eine andere (und falsche) Gesamtsumme, sobald sowohl ein Rabatt als auch ein Steuersatz im Spiel sind, weshalb die Reihenfolge wirklich wichtig ist."
             },
             {
-              "question": "What's the difference between an invoice and a receipt?",
-              "answer": "An invoice is a request for payment, issued before money changes hands, and it establishes a debt the buyer owes. A receipt is proof that payment has already been received. The same document can't correctly serve as both at once — a paid invoice is typically followed by a separate receipt, not relabeled as one."
+              "question": "Was ist der Unterschied zwischen einer Rechnung und einer Quittung?",
+              "answer": "Eine Rechnung ist eine Zahlungsaufforderung, ausgestellt bevor Geld den Besitzer wechselt, und sie begründet eine Schuld des Käufers. Eine Quittung ist der Nachweis, dass die Zahlung bereits erhalten wurde. Dasselbe Dokument kann nicht korrekt beides gleichzeitig sein — auf eine bezahlte Rechnung folgt typischerweise eine separate Quittung, sie wird nicht einfach als eine solche umbenannt."
             },
             {
-              "question": "What does \"Net 30\" actually mean?",
-              "answer": "It means full payment is due within 30 days of the invoice's issue date — not 30 days after the goods or services were delivered, and not 30 calendar days from an arbitrary date. \"Net 15\" and \"Net 60\" follow the same logic with a different day count; the \"Net\" simply signals no early-payment discount applies to the stated amount."
+              "question": "Was bedeutet „netto 30 Tage“ tatsächlich?",
+              "answer": "Es bedeutet, dass die vollständige Zahlung innerhalb von 30 Tagen ab dem Ausstellungsdatum der Rechnung fällig ist — nicht 30 Tage nach Lieferung der Waren oder Dienstleistungen und nicht 30 Kalendertage ab einem beliebigen Datum. „Netto 15“ und „netto 60“ folgen derselben Logik mit einer anderen Tageszahl; das „netto“ signalisiert lediglich, dass für den angegebenen Betrag kein Skonto für vorzeitige Zahlung gilt."
             },
             {
-              "question": "Why does every invoice need a unique invoice number?",
-              "answer": "It's the specific reference both the buyer's and seller's accounting systems use to match a payment to the exact invoice it settles, and in most tax jurisdictions, sequential invoice numbering is also a compliance requirement that makes it harder to conceal deleted or backdated invoices during an audit."
+              "question": "Warum benötigt jede Rechnung eine eindeutige Rechnungsnummer?",
+              "answer": "Sie ist die spezifische Referenz, die sowohl die Buchhaltungssysteme des Käufers als auch des Verkäufers verwenden, um eine Zahlung der genauen Rechnung zuzuordnen, die sie begleicht, und in den meisten Steuerrechtsordnungen ist die fortlaufende Rechnungsnummerierung auch eine Compliance-Anforderung, die es bei einer Prüfung erschwert, gelöschte oder rückdatierte Rechnungen zu verschleiern."
             },
             {
-              "question": "Is this tool's invoice legally compliant for my country?",
-              "answer": "This tool covers the fields most jurisdictions commonly require, but exact legal requirements vary by country — some require a tax registration number, a specific VAT breakdown, or a particular language. Treat this as a strong starting template, not a substitute for checking your local tax authority's specific invoicing rules."
+              "question": "Ist die Rechnung dieses Werkzeugs für mein Land rechtlich konform?",
+              "answer": "Dieses Werkzeug deckt die Felder ab, die die meisten Rechtsordnungen üblicherweise verlangen, aber die genauen gesetzlichen Anforderungen unterscheiden sich je nach Land — manche verlangen eine Steuer-Identifikationsnummer, eine bestimmte Umsatzsteuer-Aufschlüsselung oder eine bestimmte Sprache. Betrachten Sie dies als starke Ausgangsvorlage, nicht als Ersatz für die Prüfung der spezifischen Rechnungsvorschriften Ihrer örtlichen Steuerbehörde."
             },
             {
-              "question": "Why show the currency explicitly instead of assuming everyone uses the same one?",
-              "answer": "Because an invoice with an ambiguous currency is a real, common source of payment disputes in cross-border business — \"$500\" alone doesn't specify US, Canadian, Australian, or several other dollars, and stating the currency code (USD, EUR, AED) removes that ambiguity entirely."
+              "question": "Warum die Währung ausdrücklich angeben, statt anzunehmen, dass alle dieselbe verwenden?",
+              "answer": "Weil eine Rechnung mit mehrdeutiger Währung eine echte, häufige Quelle von Zahlungsstreitigkeiten im grenzüberschreitenden Geschäft ist — „500 $“ allein gibt nicht an, ob US-, kanadische, australische oder eine von mehreren anderen Dollar-Währungen gemeint sind, und die Angabe des Währungscodes (USD, EUR, AED) beseitigt diese Mehrdeutigkeit vollständig."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hinter diesem Werkzeug",
           "history": {
-            "title": "5,000 Years Before the First Spreadsheet",
-            "paragraph": "The invoice is one of the oldest surviving forms of business documentation: archaeologists have recovered clay tablets from the Sumerian city of Uruk, dating to roughly 3400–3300 BCE, recording deliveries of grain, wool, and beer to temple estates — administrative proof that a transaction had actually taken place. These tablets predate even the earliest fully developed writing systems, meaning record-keeping needs are part of what drove writing itself to be invented, not the other way around. The core function hasn't changed in five millennia: a durable, portable record establishing what was owed, by whom, for what."
+            "title": "5.000 Jahre vor der ersten Tabellenkalkulation",
+            "paragraph": "Die Rechnung ist eine der ältesten erhaltenen Formen geschäftlicher Dokumentation: Archäologen haben Tontafeln aus der sumerischen Stadt Uruk geborgen, die auf etwa 3400–3300 v. Chr. datiert sind und Lieferungen von Getreide, Wolle und Bier an Tempelgüter verzeichnen — verwaltungstechnischer Nachweis, dass eine Transaktion tatsächlich stattgefunden hatte. Diese Tafeln sind sogar älter als die frühesten vollständig entwickelten Schriftsysteme, was bedeutet, dass der Bedarf an Aufzeichnungen mit zur Erfindung der Schrift selbst beitrug, nicht umgekehrt. Die Kernfunktion hat sich in fünf Jahrtausenden nicht geändert: ein dauerhafter, tragbarer Nachweis darüber, was geschuldet wurde, von wem, für was."
           },
           "modernDevelopments": {
-            "title": "From Paper Ledgers to Structured Data",
-            "paragraph": "For most of that history, an invoice was whatever the seller wrote down — free-form, unstructured, and readable only by a human. That changed with electronic invoicing standards like UBL (Universal Business Language), standardized internationally as ISO/IEC 19845, which defines a strict, machine-readable XML structure for an invoice's fields — issuer, buyer, line items, tax breakdown — so accounting software on both ends of a transaction can process it automatically without a human re-typing anything. Government-mandated e-invoicing built on standards like this is now routine across the EU, and in Turkey, Peru, Colombia, and Panama, among others."
+            "title": "Von Papierjournalen zu strukturierten Daten",
+            "paragraph": "Über den größten Teil dieser Geschichte war eine Rechnung das, was der Verkäufer eben aufschrieb — formfrei, unstrukturiert und nur für einen Menschen lesbar. Das änderte sich mit elektronischen Rechnungsstandards wie UBL (Universal Business Language), international standardisiert als ISO/IEC 19845, die eine strikte, maschinenlesbare XML-Struktur für die Felder einer Rechnung definiert — Aussteller, Käufer, Posten, Steueraufschlüsselung —, sodass Buchhaltungssoftware auf beiden Seiten einer Transaktion sie automatisch verarbeiten kann, ohne dass ein Mensch etwas neu eintippen muss. Von der Regierung vorgeschriebene E-Rechnungsstellung auf Basis solcher Standards ist inzwischen in der gesamten EU sowie unter anderem in der Türkei, Peru, Kolumbien und Panama üblich."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Invoicing, billing cycles, and revenue recognition are studied within Accounting & Finance programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Akademischer Werdegang",
+            "intro": "Rechnungsstellung, Abrechnungszyklen und Umsatzrealisierung werden im Rahmen von Studiengängen für Rechnungswesen und Finanzen untersucht. Hier sind die weltweit fünf besten im QS World University Rankings by Subject 2025, plus eine regionale Option:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
-                "online": "No — HBS's MBA, which houses the Accounting & Management unit's teaching, is in-person on Harvard's Boston campus; separate Executive Education offerings include some online courses, not this program."
+                "online": "Nein — der MBA der HBS, der die Lehre der Accounting & Management-Einheit umfasst, findet in Präsenz auf dem Boston-Campus von Harvard statt; separate Executive-Education-Angebote enthalten einige Online-Kurse, nicht dieses Programm."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
-                "online": "No — MIT Sloan's Master of Finance is an in-person, 12- or 18-month program on MIT's Cambridge campus."
+                "online": "Nein — der Master of Finance von MIT Sloan ist ein 12- oder 18-monatiges Präsenzprogramm auf dem Cambridge-Campus des MIT."
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
-                "online": "No — Stanford GSB's Accounting area teaches through its in-person MBA, MSx, and PhD programs; the school's online offerings are limited to non-degree executive courses."
+                "online": "Nein — der Accounting-Bereich der Stanford GSB lehrt über ihre Präsenzprogramme MBA, MSx und PhD; die Online-Angebote der Hochschule beschränken sich auf nicht-graduierende Weiterbildungskurse."
               },
               {
                 "name": "University of Oxford (Saïd Business School)",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
-                "online": "No — the Oxford MBA, whose core curriculum includes accounting and finance, is a full-time in-person program; Saïd's online offerings are separate short courses, not this degree."
+                "online": "Nein — der Oxford-MBA, dessen Kerncurriculum Rechnungswesen und Finanzen umfasst, ist ein Vollzeit-Präsenzprogramm; die Online-Angebote von Saïd sind separate Kurzkurse, nicht dieser Abschluss."
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Rechnungswesen und Finanzen (QS World University Rankings by Subject 2025).",
                 "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
-                "online": "No — Booth's MBA programs (Full-Time, Evening, Weekend, Executive) are in-person or hybrid on-campus formats; there is no fully online Booth MBA."
+                "online": "Nein — die MBA-Programme von Booth (Vollzeit, Abend, Wochenende, Executive) sind Präsenz- oder Hybridformate vor Ort; es gibt keinen vollständig online absolvierbaren Booth-MBA."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Accounting through its School of Business Administration.",
+                "note": "Bietet über ihre School of Business Administration einen Bachelor of Science in Business Administration mit Hauptfach Rechnungswesen an.",
                 "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Durchführungsart wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Technischer Standard",
           "citation": "ISO/IEC 19845:2015 — Information technology — Universal business language version 2.1 (UBL v2.1). International Organization for Standardization.",
-          "note": "The international standard defining a structured, machine-readable XML format for invoices and related business documents — the basis for most mandatory e-invoicing regimes now in force across the EU and several other countries.",
+          "note": "Der internationale Standard, der ein strukturiertes, maschinenlesbares XML-Format für Rechnungen und verwandte Geschäftsdokumente definiert — die Grundlage für die meisten verpflichtenden E-Rechnungsregelungen, die derzeit in der EU und mehreren anderen Ländern gelten.",
           "url": "https://www.iso.org/standard/66370.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "Offiziellen Standard ansehen"
         }
       }
     },
