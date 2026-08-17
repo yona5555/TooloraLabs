@@ -4897,172 +4897,190 @@
       }
     },
     "barcode-generator": {
-      "title": "Barcode Generator",
-      "description": "Generate UPC-A, EAN-13, and Code 128 barcodes with a downloadable image and an optional logo placed beside the code — for educational and design use.",
+      "title": "बारकोड जनरेटर",
+      "description": "UPC-A, EAN-13, और Code 128 बारकोड जनरेट करें, डाउनलोड करने योग्य इमेज और कोड के बगल में रखे जा सकने वाले वैकल्पिक लोगो के साथ — शैक्षिक और डिज़ाइन उपयोग के लिए।",
       "nav": {
-        "tool": "Generator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "जनरेटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Your Barcode",
-        "placeholder": "Enter a value on the left to generate a barcode.",
-        "disclaimer": "This barcode is generated for educational and general design purposes only — it is not an official commercial registration. To sell a product in real retail stores, you must register your number with the appropriate authority (such as GS1) to guarantee it's uniquely yours worldwide.",
+        "resultTitle": "आपका बारकोड",
+        "placeholder": "बारकोड जनरेट करने के लिए बाईं ओर एक मान दर्ज करें।",
+        "disclaimer": "यह बारकोड केवल शैक्षिक और सामान्य डिज़ाइन उद्देश्यों के लिए जनरेट किया गया है — यह कोई आधिकारिक व्यावसायिक रजिस्ट्रेशन नहीं है। असली रिटेल स्टोर में कोई प्रोडक्ट बेचने के लिए, आपको अपना नंबर उपयुक्त प्राधिकरण (जैसे GS1) के साथ रजिस्टर करना होगा ताकि यह दुनिया भर में विशिष्ट रूप से आपका हो, इसकी गारंटी मिले।",
         "typesGuide": {
-          "title": "UPC-A vs. EAN-13 vs. Code 128",
-          "intro": "Three genuinely different symbologies, each solving a different problem.",
+          "title": "UPC-A बनाम EAN-13 बनाम Code 128",
+          "intro": "तीन वाक़ई अलग सिम्बोलॉजी, हर एक अलग समस्या हल करती है।",
           "rows": [
-            { "type": "UPC-A", "usedFor": "12 digits. The standard for retail products in the US and Canada." },
-            { "type": "EAN-13", "usedFor": "13 digits. The international retail standard used almost everywhere outside North America." },
-            { "type": "Code 128", "usedFor": "Letters, digits, and symbols of any length. Used for shipping labels, inventory tracking, and internal IDs — not retail point-of-sale." }
+            {
+              "type": "UPC-A",
+              "usedFor": "12 अंक। US और कनाडा में रिटेल प्रोडक्ट के लिए मानक।"
+            },
+            {
+              "type": "EAN-13",
+              "usedFor": "13 अंक। उत्तर अमेरिका के बाहर लगभग हर जगह इस्तेमाल होने वाला अंतरराष्ट्रीय रिटेल मानक।"
+            },
+            {
+              "type": "Code 128",
+              "usedFor": "किसी भी लंबाई के अक्षर, अंक, और चिह्न। शिपिंग लेबल, इन्वेंट्री ट्रैकिंग, और आंतरिक ID के लिए इस्तेमाल होता है — रिटेल पॉइंट-ऑफ़-सेल के लिए नहीं।"
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Value",
-        "valueLabel": "Value",
+        "inputTitle": "मान",
+        "valueLabel": "मान",
         "symbology": {
           "upc-a": "UPC-A",
           "ean-13": "EAN-13",
           "code128": "Code 128"
         },
         "hint": {
-          "upc-a": "Enter 11 digits — the 12th check digit is calculated and added automatically.",
-          "ean-13": "Enter 12 digits — the 13th check digit is calculated and added automatically.",
-          "code128": "Enter any letters, digits, or symbols (printable ASCII, up to 48 characters)."
+          "upc-a": "11 अंक दर्ज करें — 12वाँ चेक अंक अपने-आप गणना होकर जुड़ जाता है।",
+          "ean-13": "12 अंक दर्ज करें — 13वाँ चेक अंक अपने-आप गणना होकर जुड़ जाता है।",
+          "code128": "कोई भी अक्षर, अंक, या चिह्न दर्ज करें (प्रिंट करने योग्य ASCII, अधिकतम 48 अक्षर तक)।"
         },
         "placeholder": {
-          "upc-a": "e.g. 03600029145",
-          "ean-13": "e.g. 590123412345",
-          "code128": "e.g. TOOLORA-2026"
+          "upc-a": "जैसे 03600029145",
+          "ean-13": "जैसे 590123412345",
+          "code128": "जैसे TOOLORA-2026"
         },
-        "logoLabel": "Logo (optional)",
-        "logoHint": "Placed beside the barcode, never on top of it — a barcode's bars carry no error-correction redundancy, so any mark over them can make it unreadable to a scanner.",
-        "logoUpload": "Upload a logo",
-        "logoPreviewAlt": "Uploaded logo preview",
-        "logoRemove": "Remove",
-        "logoShowBeside": "Show logo beside the barcode",
-        "download": "Download SVG"
+        "logoLabel": "लोगो (वैकल्पिक)",
+        "logoHint": "बारकोड के बगल में रखा जाता है, कभी उसके ऊपर नहीं — बारकोड की पट्टियों में कोई एरर-करेक्शन रिडंडेंसी नहीं होती, इसलिए उनके ऊपर कोई भी निशान इसे स्कैनर के लिए अपठनीय बना सकता है।",
+        "logoUpload": "लोगो अपलोड करें",
+        "logoPreviewAlt": "अपलोड किए गए लोगो का प्रीव्यू",
+        "logoRemove": "हटाएँ",
+        "logoShowBeside": "लोगो को बारकोड के बगल में दिखाएँ",
+        "download": "SVG डाउनलोड करें"
       },
       "errors": {
-        "required": "Enter a value to generate a barcode.",
-        "invalidLengthUpc": "UPC-A needs exactly 11 digits (the check digit is added automatically).",
-        "invalidLengthEan": "EAN-13 needs exactly 12 digits (the check digit is added automatically).",
-        "nonDigit": "This symbology only accepts digits 0-9.",
-        "unsupportedCharacter": "Code 128 only supports printable ASCII characters (letters, digits, common symbols).",
-        "tooLong": "Value is too long (max 48 characters for Code 128)."
+        "required": "बारकोड जनरेट करने के लिए एक मान दर्ज करें।",
+        "invalidLengthUpc": "UPC-A को ठीक 11 अंक चाहिए (चेक अंक अपने-आप जुड़ जाता है)।",
+        "invalidLengthEan": "EAN-13 को ठीक 12 अंक चाहिए (चेक अंक अपने-आप जुड़ जाता है)।",
+        "nonDigit": "यह सिम्बोलॉजी केवल 0-9 अंक स्वीकार करती है।",
+        "unsupportedCharacter": "Code 128 केवल प्रिंट करने योग्य ASCII कैरेक्टर (अक्षर, अंक, आम चिह्न) सपोर्ट करता है।",
+        "tooLong": "मान बहुत लंबा है (Code 128 के लिए अधिकतम 48 अक्षर)।"
       },
       "education": {
         "intro": {
-          "title": "How Barcodes Actually Work",
-          "paragraph1": "A 1D barcode encodes data purely as the widths of alternating bars and spaces — there's no color, no dots, nothing two-dimensional about it. A scanner's laser or camera sensor sweeps across the code and measures how long the light stays bright or dark at each point; a narrow bar might be one \"module\" wide, a wide one three or four modules wide, and the exact sequence of those widths is what encodes each digit or character. This is also exactly why 1D barcodes carry no error correction the way a QR code does: there's no spare redundant data woven in to reconstruct a damaged section, which is why this tool places an optional logo beside the barcode rather than on top of it.",
-          "paragraph2": "UPC-A and EAN-13 add one more safeguard: a check digit, mathematically derived from every other digit in the code, that a scanner recalculates after reading and compares against — if a smudge or printing defect corrupted even one digit, the check digit almost certainly won't match, and the scanner rejects the read instead of accepting corrupted data. Code 128 goes further with a full checksum symbol computed from every character's value. This tool calculates every check digit and checksum for you automatically from whatever value you enter.",
+          "title": "बारकोड असल में कैसे काम करते हैं",
+          "paragraph1": "एक 1D बारकोड डेटा को पूरी तरह बारी-बारी आने वाली पट्टियों और खाली जगहों की चौड़ाई के रूप में एनकोड करता है — इसमें कोई रंग नहीं, कोई बिंदु नहीं, इसमें कुछ भी द्वि-आयामी नहीं है। किसी स्कैनर का लेज़र या कैमरा सेंसर कोड पर स्वीप करता है और मापता है कि हर बिंदु पर रोशनी कितनी देर तेज़ या मद्धम रहती है; एक संकरी पट्टी एक \"मॉड्यूल\" चौड़ी हो सकती है, एक चौड़ी पट्टी तीन या चार मॉड्यूल चौड़ी, और उन चौड़ाइयों का सटीक क्रम ही हर अंक या कैरेक्टर को एनकोड करता है। यही ठीक वजह भी है कि 1D बारकोड में QR कोड जैसा कोई एरर करेक्शन नहीं होता: किसी क्षतिग्रस्त हिस्से को दोबारा बनाने के लिए कोई अतिरिक्त रिडंडेंट डेटा बुना हुआ नहीं होता, यही वजह है कि यह टूल एक वैकल्पिक लोगो बारकोड के ऊपर नहीं, बल्कि उसके बगल में रखने का विकल्प देता है।",
+          "paragraph2": "UPC-A और EAN-13 एक और सुरक्षा उपाय जोड़ते हैं: एक चेक अंक, जो कोड के हर दूसरे अंक से गणितीय रूप से निकाला जाता है, और जिसे स्कैनर पढ़ने के बाद दोबारा गणना करके तुलना करता है — अगर कोई धब्बा या प्रिंटिंग ख़राबी एक भी अंक बिगाड़ दे, तो चेक अंक लगभग निश्चित रूप से मेल नहीं खाएगा, और स्कैनर ख़राब डेटा स्वीकार करने के बजाय रीडिंग को अस्वीकार कर देता है। Code 128 इससे भी आगे जाकर हर कैरेक्टर के मान से गणना किया गया एक पूरा चेकसम सिम्बोल इस्तेमाल करता है। यह टूल आपके द्वारा दर्ज किए गए किसी भी मान से हर चेक अंक और चेकसम अपने-आप गणना कर देता है।",
           "diagram": {
-            "quietZoneLabel": "Quiet zone — a mandatory blank margin a scanner needs to lock on before reading",
-            "guardLabel": "Guard pattern — a fixed marker that tells the scanner where the code starts, centers, or ends",
-            "dataLabel": "Data bars — the actual encoded digits or characters",
-            "caption": "A schematic barcode structure (illustrative widths, not decoded from real data) — quiet zone, guard patterns, and data bars are present in some form across every 1D symbology."
+            "quietZoneLabel": "क्वाइट ज़ोन — एक अनिवार्य ख़ाली हाशिया जिसे पढ़ने से पहले स्कैनर को लॉक होना ज़रूरी है",
+            "guardLabel": "गार्ड पैटर्न — एक तय मार्कर जो स्कैनर को बताता है कि कोड कहाँ शुरू, केंद्रित, या समाप्त होता है",
+            "dataLabel": "डेटा पट्टियाँ — वास्तविक एनकोड किए गए अंक या कैरेक्टर",
+            "caption": "एक योजनाबद्ध बारकोड संरचना (उदाहरणात्मक चौड़ाइयाँ, असली डेटा से डिकोड नहीं की गईं) — क्वाइट ज़ोन, गार्ड पैटर्न, और डेटा पट्टियाँ किसी न किसी रूप में हर 1D सिम्बोलॉजी में मौजूद होती हैं।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Three examples showing exactly how this tool derives the check digit or checksum for each symbology.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "तीन उदाहरण दिखाते हैं कि यह टूल हर सिम्बोलॉजी के लिए चेक अंक या चेकसम ठीक कैसे निकालता है।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "UPC-A, 11 digits \"03600029145\" (a real published product code)", "result": "Check digit 2 → full code 036000291452" },
-            { "scenario": "EAN-13, 12 digits \"400638133393\"", "result": "Check digit 1 → full code 4006381333931" },
-            { "scenario": "Code 128, text \"A\"", "result": "Checksum value 34, from (104 + 33×1) mod 103" }
+            {
+              "scenario": "UPC-A, 11 अंक \"03600029145\" (एक असली प्रकाशित प्रोडक्ट कोड)",
+              "result": "चेक अंक 2 → पूरा कोड 036000291452"
+            },
+            {
+              "scenario": "EAN-13, 12 अंक \"400638133393\"",
+              "result": "चेक अंक 1 → पूरा कोड 4006381333931"
+            },
+            {
+              "scenario": "Code 128, टेक्स्ट \"A\"",
+              "result": "चेकसम मान 34, (104 + 33×1) mod 103 से"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Can I actually use this barcode to sell a product in stores?",
-              "answer": "Not on its own. Any UPC-A or EAN-13 number you make up yourself may already belong to a different product somewhere in the world — retailers and marketplaces require a number properly issued through GS1 (or your country's equivalent numbering authority), which guarantees it's uniquely yours. This tool is for education, design mockups, internal tracking, and anywhere a globally unique registered number isn't required."
+              "question": "क्या मैं वाक़ई इस बारकोड का उपयोग स्टोर में कोई प्रोडक्ट बेचने के लिए कर सकता हूँ?",
+              "answer": "अकेले नहीं। आप ख़ुद जो भी UPC-A या EAN-13 नंबर बनाएँ, हो सकता है वह दुनिया में कहीं पहले से किसी और प्रोडक्ट का हो — रिटेलर और मार्केटप्लेस को GS1 (या आपके देश के समकक्ष नंबरिंग प्राधिकरण) के ज़रिए सही तरीक़े से जारी किया गया नंबर चाहिए होता है, जो यह गारंटी देता है कि यह विशिष्ट रूप से आपका है। यह टूल शिक्षा, डिज़ाइन मॉकअप, आंतरिक ट्रैकिंग, और उन जगहों के लिए है जहाँ वैश्विक रूप से विशिष्ट पंजीकृत नंबर की ज़रूरत नहीं होती।"
             },
             {
-              "question": "Why can't I put a logo directly on top of the barcode lines?",
-              "answer": "Unlike a QR code, a 1D barcode has no error-correction redundancy at all — every bar and space is load-bearing. Covering even a small part of the code can make specific digits unreadable, and a scanner has no spare data to reconstruct what's missing. That's exactly why this tool only offers to place a logo beside the code, never over it."
+              "question": "मैं लोगो को सीधे बारकोड की लाइनों के ऊपर क्यों नहीं रख सकता?",
+              "answer": "QR कोड के विपरीत, एक 1D बारकोड में बिल्कुल भी एरर-करेक्शन रिडंडेंसी नहीं होती — हर पट्टी और खाली जगह ज़रूरी होती है। कोड के छोटे-से हिस्से को भी ढकने से विशिष्ट अंक अपठनीय हो सकते हैं, और स्कैनर के पास जो गुम है उसे दोबारा बनाने के लिए कोई अतिरिक्त डेटा नहीं होता। यही ठीक वजह है कि यह टूल लोगो को कोड के बगल में रखने का ही विकल्प देता है, कभी उसके ऊपर नहीं।"
             },
             {
-              "question": "What's the actual difference between UPC-A and EAN-13?",
-              "answer": "EAN-13 is really UPC-A's superset: encode a UPC-A number as EAN-13 by adding a leading 0, and it decodes identically. UPC-A (12 digits) is the historical US/Canada retail standard; EAN-13 (13 digits) is the international standard used almost everywhere else, including by products sold in the US, since American scanners read EAN-13 too."
+              "question": "UPC-A और EAN-13 में असल फ़र्क़ क्या है?",
+              "answer": "EAN-13 असल में UPC-A का सुपरसेट है: किसी UPC-A नंबर के आगे एक 0 जोड़कर उसे EAN-13 के रूप में एनकोड किया जा सकता है, और यह बिल्कुल वैसे ही डिकोड होता है। UPC-A (12 अंक) पारंपरिक US/कनाडा रिटेल मानक है; EAN-13 (13 अंक) लगभग बाक़ी हर जगह इस्तेमाल होने वाला अंतरराष्ट्रीय मानक है, जिसमें US में बिकने वाले प्रोडक्ट भी शामिल हैं, क्योंकि अमेरिकी स्कैनर EAN-13 भी पढ़ते हैं।"
             },
             {
-              "question": "Why does Code 128 look so different from UPC-A or EAN-13?",
-              "answer": "Because it solves a different problem. UPC-A and EAN-13 exist purely to encode a specific numeric product identifier for retail checkout. Code 128 can encode letters, punctuation, and digits in one code, at any length, which is why it's the default choice for shipping labels, warehouse pallet IDs, and internal tracking codes rather than retail products."
+              "question": "Code 128, UPC-A या EAN-13 से इतना अलग क्यों दिखता है?",
+              "answer": "क्योंकि यह एक अलग समस्या हल करता है। UPC-A और EAN-13 पूरी तरह रिटेल चेकआउट के लिए एक ख़ास संख्यात्मक प्रोडक्ट पहचानकर्ता एनकोड करने के लिए बने हैं। Code 128 एक ही कोड में अक्षर, विराम चिह्न, और अंक किसी भी लंबाई में एनकोड कर सकता है, यही वजह है कि यह शिपिंग लेबल, वेयरहाउस पैलेट ID, और आंतरिक ट्रैकिंग कोड के लिए डिफ़ॉल्ट चुनाव है, न कि रिटेल प्रोडक्ट के लिए।"
             },
             {
-              "question": "Why does the barcode need a check digit or checksum at all?",
-              "answer": "Because printing and scanning aren't perfect — a smudge, a fold, or a low-quality printer can corrupt part of a code. The check digit is calculated from every other digit using a fixed formula; if a scanner reads a corrupted code, the digit it reads almost certainly won't match what the formula predicts, so it rejects the scan instead of ringing up the wrong product."
+              "question": "बारकोड को चेक अंक या चेकसम की ज़रूरत ही क्यों होती है?",
+              "answer": "क्योंकि प्रिंटिंग और स्कैनिंग परफ़ेक्ट नहीं होतीं — एक धब्बा, एक मोड़, या एक कम-क्वालिटी प्रिंटर कोड के किसी हिस्से को बिगाड़ सकता है। चेक अंक एक तय फ़ॉर्मूले का उपयोग करके हर दूसरे अंक से गणना किया जाता है; अगर कोई स्कैनर एक बिगड़ा हुआ कोड पढ़ता है, तो जो अंक वह पढ़ता है वह लगभग निश्चित रूप से फ़ॉर्मूले के अनुमान से मेल नहीं खाएगा, इसलिए यह ग़लत प्रोडक्ट बिल करने के बजाय स्कैन को अस्वीकार कर देता है।"
             },
             {
-              "question": "Is my data uploaded anywhere when I use this tool, including the logo?",
-              "answer": "No — encoding the barcode and placing an uploaded logo image both happen entirely inside your browser. Nothing you enter or upload here is transmitted anywhere."
+              "question": "क्या इस टूल का उपयोग करते समय मेरा डेटा, लोगो सहित, कहीं अपलोड होता है?",
+              "answer": "नहीं — बारकोड एनकोड करना और अपलोड किए गए लोगो इमेज को रखना, दोनों पूरी तरह आपके ब्राउज़र के भीतर होते हैं। यहाँ आप जो कुछ भी दर्ज या अपलोड करते हैं, वह कहीं नहीं भेजा जाता।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "A 1949 Patent for Concentric Circles",
-            "paragraph": "The barcode's origin story starts with an overheard conversation: in 1948, graduate student Bernard Silver overheard a supermarket executive asking a Drexel Institute dean for a way to automatically read product information at checkout. Silver teamed up with fellow student Norman Joseph Woodland, who — drawing on Morse code he'd learned as a Boy Scout — sketched an early design using dots and dashes, then reworked it into a pattern of concentric circles so it could be scanned from any direction. They filed a patent in 1949, granted in 1952, and sold it to Philco for just $15,000 — genuinely the only money either inventor made directly from an idea that would go on to reshape global retail."
+            "title": "संकेंद्रित वृत्तों के लिए 1949 का एक पेटेंट",
+            "paragraph": "बारकोड की उत्पत्ति की कहानी एक सुनी हुई बातचीत से शुरू होती है: 1948 में, ग्रेजुएट छात्र Bernard Silver ने एक सुपरमार्केट एग्ज़ीक्यूटिव को Drexel Institute के एक डीन से चेकआउट पर प्रोडक्ट जानकारी अपने-आप पढ़ने का कोई तरीक़ा माँगते हुए सुना। Silver ने साथी छात्र Norman Joseph Woodland के साथ मिलकर काम किया, जिन्होंने — बॉय स्काउट के रूप में सीखी मोर्स कोड का सहारा लेते हुए — डॉट्स और डैश का उपयोग करके एक शुरुआती डिज़ाइन बनाया, फिर इसे संकेंद्रित वृत्तों के पैटर्न में बदल दिया ताकि इसे किसी भी दिशा से स्कैन किया जा सके। उन्होंने 1949 में पेटेंट दाख़िल किया, जो 1952 में मंज़ूर हुआ, और इसे Philco को केवल $15,000 में बेच दिया — यह वाक़ई एकमात्र पैसा था जो दोनों में से किसी भी आविष्कारक को उस विचार से सीधे मिला जो आगे चलकर वैश्विक रिटेल को नया रूप देने वाला था।"
           },
           "modernDevelopments": {
-            "title": "From a Bullseye to a Pack of Gum",
-            "paragraph": "Woodland and Silver's original concentric-circle design was never mass-produced — the linear barcode actually used today was designed separately, starting in 1969, by IBM engineer George Laurer, who (with Woodland, by then also at IBM, and mathematician David Savir) proposed the striped Universal Product Code adopted by the US grocery industry's Symbol Selection Committee in 1973. The first UPC-scanned retail sale happened on June 26, 1974, when a pack of Wrigley's Juicy Fruit gum was rung up at a Marsh supermarket in Troy, Ohio. Europe adopted a compatible 13-digit extension, EAN, in 1976, and the two standards are now governed globally by GS1 — formed in 2005 from the merger of the original US and European numbering authorities."
+            "title": "एक बुलआई से च्युइंगम के एक पैकेट तक",
+            "paragraph": "Woodland और Silver का मूल संकेंद्रित-वृत्त डिज़ाइन कभी बड़े पैमाने पर उत्पादित नहीं हुआ — आज असल में इस्तेमाल होने वाला रैखिक बारकोड अलग से डिज़ाइन किया गया था, 1969 से शुरू होकर, IBM इंजीनियर George Laurer द्वारा, जिन्होंने (Woodland के साथ, जो तब तक IBM में भी थे, और गणितज्ञ David Savir के साथ) धारीदार Universal Product Code प्रस्तावित किया, जिसे 1973 में US ग्रोसरी उद्योग की Symbol Selection Committee ने अपनाया। पहली UPC-स्कैन की गई रिटेल बिक्री 26 जून, 1974 को हुई, जब Ohio के Troy में एक Marsh सुपरमार्केट में Wrigley's Juicy Fruit च्युइंगम का एक पैकेट बिल किया गया। यूरोप ने 1976 में एक संगत 13-अंकीय विस्तार, EAN, अपनाया, और अब दोनों मानक वैश्विक रूप से GS1 द्वारा नियंत्रित होते हैं — जो 2005 में मूल US और यूरोपीय नंबरिंग प्राधिकरणों के विलय से बनी।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Barcode systems sit at the intersection of data encoding and physical logistics, which is why this path draws on Supply Chain Management rather than Computer Science alone. Here are the top 5 globally in the QS Business Master's Rankings — Supply Chain Management 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "बारकोड सिस्टम डेटा एनकोडिंग और भौतिक लॉजिस्टिक्स के मिलन बिंदु पर हैं, यही वजह है कि यह मार्ग अकेले कंप्यूटर साइंस के बजाय Supply Chain Management पर आधारित है। QS Business Master's Rankings — Supply Chain Management 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "University of Michigan (Ross)",
-                "note": "Ranked #1 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Supply Chain Management में दुनिया भर में #1 स्थान (QS Business Master's Rankings 2025)।",
                 "url": "https://michiganross.umich.edu/recruit-at-ross/one-year-masters/master-of-supply-chain-management",
-                "online": "No — Ross's one-year Master of Supply Chain Management is an in-person program on its Ann Arbor campus."
+                "online": "नहीं — Ross का एक-वर्षीय Master of Supply Chain Management उसके Ann Arbor कैंपस पर एक इन-पर्सन प्रोग्राम है।"
               },
               {
                 "name": "WU Vienna (Vienna University of Economics and Business)",
-                "note": "Ranked #2 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Supply Chain Management में दुनिया भर में #2 स्थान (QS Business Master's Rankings 2025)।",
                 "url": "https://www.wu.ac.at/en/programs/masters-programs/supply-chain-management/overview",
-                "online": "No — WU's MSc in Supply Chain Management is an in-person program on its Vienna campus."
+                "online": "नहीं — WU का MSc in Supply Chain Management उसके Vienna कैंपस पर एक इन-पर्सन प्रोग्राम है।"
               },
               {
                 "name": "Erasmus University Rotterdam (RSM)",
-                "note": "Ranked #3 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Supply Chain Management में दुनिया भर में #3 स्थान (QS Business Master's Rankings 2025)।",
                 "url": "https://www.eur.nl/en/master/supply-chain-management",
-                "online": "No — RSM's Master Supply Chain Management is a full-time, in-person program on its Woudestein campus."
+                "online": "नहीं — RSM का Master Supply Chain Management उसके Woudestein कैंपस पर एक पूर्णकालिक, इन-पर्सन प्रोग्राम है।"
               },
               {
                 "name": "emlyon business school",
-                "note": "Ranked #4 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Supply Chain Management में दुनिया भर में #4 स्थान (QS Business Master's Rankings 2025)।",
                 "url": "https://em-lyon.com/en/student/master/msc-supply-chain-operation-management",
-                "online": "No — emlyon's MSc in Supply Chain & Operations Management is full-time and in-person, based in Lyon with an international seminar component."
+                "online": "नहीं — emlyon का MSc in Supply Chain & Operations Management पूर्णकालिक और इन-पर्सन है, Lyon में आधारित, साथ में एक अंतरराष्ट्रीय सेमिनार घटक भी है।"
               },
               {
                 "name": "University of Southern California (Marshall)",
-                "note": "Ranked #5 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Supply Chain Management में दुनिया भर में #5 स्थान (QS Business Master's Rankings 2025)।",
                 "url": "https://www.marshall.usc.edu/programs/specialized-masters-programs/master-science-global-supply-chain-management",
-                "online": "Yes — USC Marshall's MS in Global Supply Chain Management is offered both on-campus in Los Angeles and as a fully online program for working professionals, same degree either way."
+                "online": "हाँ — USC Marshall का MS in Global Supply Chain Management Los Angeles में कैंपस पर और कामकाजी पेशेवरों के लिए पूरी तरह ऑनलाइन प्रोग्राम दोनों रूपों में उपलब्ध है, दोनों में वही डिग्री मिलती है।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Supply Chain Management through its School of Business Administration.",
+                "note": "अपने School of Business Administration के ज़रिए Supply Chain Management में मेजर के साथ Bachelor of Science in Business Administration प्रदान करता है।",
                 "url": "https://www.aus.edu/sba/department-of-marketing-and-information-systems/bachelor-of-science-in-business-administration-major-in-supply-chain-management",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "तकनीकी मानक",
           "citation": "ISO/IEC 15420:2025 — Information technology — Automatic identification and data capture techniques — EAN/UPC bar code symbology specification. International Organization for Standardization.",
-          "note": "The official international standard defining the EAN/UPC barcode symbology this tool generates. Code 128 is separately standardized as ISO/IEC 15417. Actual number registration and ownership is governed by GS1's General Specifications, not by these symbology standards themselves.",
+          "note": "आधिकारिक अंतरराष्ट्रीय मानक जो यह टूल जनरेट करता है उस EAN/UPC बारकोड सिम्बोलॉजी को परिभाषित करता है। Code 128 को अलग से ISO/IEC 15417 के रूप में मानकीकृत किया गया है। असली नंबर रजिस्ट्रेशन और स्वामित्व GS1 के General Specifications द्वारा नियंत्रित होता है, न कि इन सिम्बोलॉजी मानकों द्वारा ख़ुद।",
           "url": "https://www.iso.org/standard/84892.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "आधिकारिक मानक देखें"
         }
       }
     },
