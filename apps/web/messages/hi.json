@@ -4085,198 +4085,231 @@
       }
     },
     "password-generator": {
-      "title": "Password Generator",
-      "description": "Generate strong random passwords or memorable passphrases — with a real entropy-based strength estimate and crack-time ranges, not a fake meter.",
+      "title": "पासवर्ड जनरेटर",
+      "description": "मज़बूत रैंडम पासवर्ड या याद रखने में आसान पासफ़्रेज़ जनरेट करें — एक असली एन्ट्रॉपी-आधारित मज़बूती अनुमान और क्रैक-टाइम रेंज के साथ, किसी नक़ली मीटर के साथ नहीं।",
       "nav": {
-        "tool": "Generator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "जनरेटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Your Password",
-        "strengthLabel": "Strength",
-        "bitsOfEntropy": "bits of entropy",
-        "crackTimeTitle": "Estimated Time to Crack",
-        "crackTimeNote": "Illustrative order-of-magnitude estimates, not guarantees — real security depends entirely on how slowly the service storing this password hashes it, which this tool has no way to know.",
-        "instantly": "Instantly",
+        "resultTitle": "आपका पासवर्ड",
+        "strengthLabel": "मज़बूती",
+        "bitsOfEntropy": "बिट एन्ट्रॉपी",
+        "crackTimeTitle": "क्रैक होने में अनुमानित समय",
+        "crackTimeNote": "ये दृष्टांत के तौर पर आँकड़े का क्रम (order of magnitude) हैं, कोई गारंटी नहीं — असली सुरक्षा पूरी तरह इस बात पर निर्भर करती है कि यह पासवर्ड सहेजने वाली सेवा इसे कितनी धीमी गति से हैश करती है, और यह टूल इसे जानने का कोई तरीक़ा नहीं रखता।",
+        "instantly": "तुरंत",
         "tier": {
-          "veryWeak": "Very Weak",
-          "weak": "Weak",
-          "reasonable": "Reasonable",
-          "strong": "Strong",
-          "veryStrong": "Very Strong"
+          "veryWeak": "बहुत कमज़ोर",
+          "weak": "कमज़ोर",
+          "reasonable": "ठीक-ठाक",
+          "strong": "मज़बूत",
+          "veryStrong": "बहुत मज़बूत"
         },
         "rate": {
-          "online": "Online, rate-limited (100/sec)",
-          "offlineSlow": "Offline, well-hashed (10K/sec)",
-          "offlineFast": "Offline, poorly hashed (100B/sec)"
+          "online": "ऑनलाइन, दर-सीमित (100/सेकंड)",
+          "offlineSlow": "ऑफ़लाइन, अच्छी तरह हैश किया गया (10K/सेकंड)",
+          "offlineFast": "ऑफ़लाइन, ख़राब तरीक़े से हैश किया गया (100 अरब/सेकंड)"
         },
         "unit": {
-          "seconds": "seconds",
-          "minutes": "minutes",
-          "hours": "hours",
-          "days": "days",
-          "years": "years",
-          "thousandYears": "thousand years",
-          "millionYears": "million years",
-          "billionYears": "billion years"
+          "seconds": "सेकंड",
+          "minutes": "मिनट",
+          "hours": "घंटे",
+          "days": "दिन",
+          "years": "वर्ष",
+          "thousandYears": "हज़ार वर्ष",
+          "millionYears": "मिलियन वर्ष",
+          "billionYears": "अरब वर्ष"
         },
         "guidance": {
-          "title": "NIST Password Guidance",
-          "intro": "What current official US guidance (NIST SP 800-63B) actually recommends — much of it the opposite of older advice.",
+          "title": "NIST पासवर्ड मार्गदर्शन",
+          "intro": "मौजूदा आधिकारिक अमेरिकी दिशानिर्देश (NIST SP 800-63B) वास्तव में क्या सुझाते हैं — जिनमें से ज़्यादातर पुरानी सलाह के उलट हैं।",
           "rows": [
-            { "text": "Prioritize length over complexity — a long passphrase beats a short, symbol-stuffed password.", "recommended": true },
-            { "text": "Allow at least 64 characters; don't cap length short.", "recommended": true },
-            { "text": "Screen new passwords against known-breached password lists.", "recommended": true },
-            { "text": "Force periodic password expiration/rotation on a schedule.", "recommended": false },
-            { "text": "Require a mix of uppercase, symbols, and digits by policy.", "recommended": false },
-            { "text": "Use security questions (mother's maiden name, etc.) as a fallback.", "recommended": false }
+            {
+              "text": "जटिलता से ज़्यादा लंबाई को प्राथमिकता दें — एक लंबा पासफ़्रेज़ एक छोटे, सिंबल-भरे पासवर्ड से बेहतर होता है।",
+              "recommended": true
+            },
+            {
+              "text": "कम से कम 64 कैरेक्टर की अनुमति दें; लंबाई को छोटा सीमित न करें।",
+              "recommended": true
+            },
+            {
+              "text": "नए पासवर्ड को ज्ञात-लीक हुई पासवर्ड सूचियों के ख़िलाफ़ जाँचें।",
+              "recommended": true
+            },
+            {
+              "text": "तय समय-सारणी पर आवधिक पासवर्ड समाप्ति/बदलाव को अनिवार्य बनाएँ।",
+              "recommended": false
+            },
+            {
+              "text": "नीति के तहत अपरकेस, सिंबल और अंकों का मिश्रण अनिवार्य करें।",
+              "recommended": false
+            },
+            {
+              "text": "सुरक्षा प्रश्नों (माँ के मायके का नाम, आदि) को बैकअप के रूप में उपयोग करें।",
+              "recommended": false
+            }
           ]
         }
       },
       "form": {
-        "inputTitle": "Options",
-        "modeCharacters": "Characters",
-        "modePassphrase": "Passphrase",
-        "lengthLabel": "Password Length",
-        "uppercase": "Uppercase (A-Z)",
-        "lowercase": "Lowercase (a-z)",
-        "numbers": "Numbers (0-9)",
-        "symbols": "Symbols (!@#$...)",
-        "excludeAmbiguous": "Exclude ambiguous characters (0/O, 1/l/I)",
-        "wordCountLabel": "Number of Words",
-        "separatorLabel": "Separator",
-        "separatorHyphen": "Hyphen (-)",
-        "separatorUnderscore": "Underscore (_)",
-        "separatorSpace": "Space",
-        "separatorNone": "None",
-        "capitalizeWords": "Capitalize each word",
-        "appendNumber": "Append a random number",
-        "generate": "Generate Password",
-        "regenerate": "Generate a new one",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "inputTitle": "विकल्प",
+        "modeCharacters": "कैरेक्टर",
+        "modePassphrase": "पासफ़्रेज़",
+        "lengthLabel": "पासवर्ड की लंबाई",
+        "uppercase": "अपरकेस (A-Z)",
+        "lowercase": "लोअरकेस (a-z)",
+        "numbers": "संख्याएँ (0-9)",
+        "symbols": "सिंबल (!@#$...)",
+        "excludeAmbiguous": "अस्पष्ट कैरेक्टर हटाएँ (0/O, 1/l/I)",
+        "wordCountLabel": "शब्दों की संख्या",
+        "separatorLabel": "सेपरेटर",
+        "separatorHyphen": "हाइफ़न (-)",
+        "separatorUnderscore": "अंडरस्कोर (_)",
+        "separatorSpace": "स्पेस",
+        "separatorNone": "कोई नहीं",
+        "capitalizeWords": "हर शब्द को कैपिटलाइज़ करें",
+        "appendNumber": "एक रैंडम संख्या जोड़ें",
+        "generate": "पासवर्ड जनरेट करें",
+        "regenerate": "एक नया जनरेट करें",
+        "copy": "कॉपी करें",
+        "copied": "कॉपी हो गया!"
       },
       "errors": {
-        "noCharset": "Select at least one character type."
+        "noCharset": "कम से कम एक कैरेक्टर टाइप चुनें।"
       },
       "education": {
         "intro": {
-          "title": "How Password Strength Actually Works",
-          "paragraph1": "A password's real strength is its entropy — how many possible passwords an attacker would have to search through before finding yours, expressed in bits (each added bit doubles the search space). It's a function of two things multiplied together: how large the pool of possible characters (or words) is, and how many of them you use. A 12-character password using only lowercase letters has less entropy than an 8-character one mixing upper, lower, numbers, and symbols — length matters, but so does what you draw from.",
-          "paragraph2": "That's exactly why this tool's passphrase mode exists alongside character-based passwords: four random words from a pool of about 1,650 gives roughly 43 bits of entropy — more than a typical 8-character mixed password — while staying genuinely easier to type and remember. A password's raw entropy tells you how long a brute-force search takes on average, but nothing about entropy is theoretical here: this tool computes the real bit count for exactly what it just generated, shown alongside crack-time estimates for a few realistic attack scenarios below.",
+          "title": "पासवर्ड की मज़बूती वास्तव में कैसे काम करती है",
+          "paragraph1": "किसी पासवर्ड की असली मज़बूती उसकी एन्ट्रॉपी है — यानी आपका पासवर्ड ढूँढने से पहले किसी हमलावर को कितने संभावित पासवर्ड खोजने पड़ेंगे, इसे बिट में दर्शाया जाता है (हर जोड़ा गया बिट खोज-क्षेत्र को दोगुना कर देता है)। यह दो चीज़ों को गुणा करके मिलती है: संभावित कैरेक्टर (या शब्दों) के समूह का आकार कितना बड़ा है, और आप उनमें से कितने उपयोग करते हैं। केवल लोअरकेस अक्षरों वाले 12-कैरेक्टर पासवर्ड में अपर, लोअर, संख्या और सिंबल मिलाने वाले 8-कैरेक्टर पासवर्ड से कम एन्ट्रॉपी होती है — लंबाई मायने रखती है, लेकिन आप किन कैरेक्टरों से चुनते हैं, यह भी मायने रखता है।",
+          "paragraph2": "यही ठीक वह वजह है कि इस टूल का पासफ़्रेज़ मोड कैरेक्टर-आधारित पासवर्ड के साथ-साथ मौजूद है: लगभग 1,650 शब्दों के समूह में से चार रैंडम शब्द लगभग 43 बिट एन्ट्रॉपी देते हैं — एक सामान्य 8-कैरेक्टर मिश्रित पासवर्ड से भी ज़्यादा — जबकि टाइप करना और याद रखना वाकई आसान बना रहता है। किसी पासवर्ड की कच्ची एन्ट्रॉपी आपको बताती है कि औसतन एक ब्रूट-फ़ोर्स खोज में कितना समय लगता है, लेकिन यहाँ एन्ट्रॉपी के बारे में कुछ भी सैद्धांतिक नहीं है: यह टूल अभी-अभी जो जनरेट किया, उसके लिए असली बिट संख्या कैलकुलेट करता है, जो नीचे कुछ यथार्थवादी हमले परिदृश्यों के क्रैक-टाइम अनुमानों के साथ दिखाई गई है।",
           "diagram": {
-            "caption": "Estimated crack time by composition, at a fixed 100-billion-guesses/second offline attack rate — length and unpredictability both matter, but not equally."
+            "caption": "रचना के अनुसार अनुमानित क्रैक-टाइम, 100-अरब-अनुमान/सेकंड की तय ऑफ़लाइन हमला दर पर — लंबाई और अप्रत्याशितता दोनों मायने रखते हैं, पर समान रूप से नहीं।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Five compositions and the exact entropy and crack-time math behind each — the same formula this tool applies live to whatever it just generated for you.",
-          "columnScenario": "Composition",
-          "columnResult": "Entropy → Crack Time (100B guesses/sec)",
+          "title": "हल किए गए उदाहरण",
+          "intro": "पाँच रचनाएँ और हर एक के पीछे की सटीक एन्ट्रॉपी व क्रैक-टाइम गणना — वही फ़ॉर्मूला जिसे यह टूल अभी-अभी आपके लिए जनरेट किए गए पासवर्ड पर लाइव लागू करता है।",
+          "columnScenario": "रचना",
+          "columnResult": "एन्ट्रॉपी → क्रैक-टाइम (100 अरब अनुमान/सेकंड)",
           "rows": [
-            { "scenario": "7 lowercase letters (26 choices each)", "result": "~33 bits → instantly" },
-            { "scenario": "4-word passphrase (~1,650-word list)", "result": "~43 bits → ~38 seconds" },
-            { "scenario": "8 mixed-case letters + digits (62 choices each)", "result": "~48 bits → ~18 minutes" },
-            { "scenario": "6-word passphrase (~1,650-word list)", "result": "~64 bits → ~5 years" },
-            { "scenario": "12 chars, upper+lower+digits+symbols (94 choices each)", "result": "~79 bits → ~100,000 years" }
+            {
+              "scenario": "7 लोअरकेस अक्षर (हर एक के लिए 26 विकल्प)",
+              "result": "~33 बिट → तुरंत"
+            },
+            {
+              "scenario": "4-शब्द पासफ़्रेज़ (~1,650-शब्द सूची)",
+              "result": "~43 बिट → ~38 सेकंड"
+            },
+            {
+              "scenario": "8 मिश्रित-केस अक्षर + अंक (हर एक के लिए 62 विकल्प)",
+              "result": "~48 बिट → ~18 मिनट"
+            },
+            {
+              "scenario": "6-शब्द पासफ़्रेज़ (~1,650-शब्द सूची)",
+              "result": "~64 बिट → ~5 वर्ष"
+            },
+            {
+              "scenario": "12 कैरेक्टर, अपर+लोअर+अंक+सिंबल (हर एक के लिए 94 विकल्प)",
+              "result": "~79 बिट → ~100,000 वर्ष"
+            }
           ],
           "diagramLabels": {
-            "sevenLower": "7 lowercase letters",
-            "fourWords": "4-word passphrase",
-            "eightMixed": "8 mixed-case + digits",
-            "sixWords": "6-word passphrase",
-            "twelveMixed": "12 chars, all sets + symbols"
+            "sevenLower": "7 लोअरकेस अक्षर",
+            "fourWords": "4-शब्द पासफ़्रेज़",
+            "eightMixed": "8 मिश्रित-केस + अंक",
+            "sixWords": "6-शब्द पासफ़्रेज़",
+            "twelveMixed": "12 कैरेक्टर, सभी सेट + सिंबल"
           }
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Is a random string of characters always stronger than a passphrase?",
-              "answer": "Not necessarily — it depends purely on total entropy, not which category it came from. A short 8-character random password and a 4-word passphrase can land at similar bit counts; the passphrase is usually easier to type correctly and remember without writing down, which matters for real-world security since a written-down password defeats its own purpose."
+              "question": "क्या कैरेक्टरों की एक रैंडम स्ट्रिंग हमेशा किसी पासफ़्रेज़ से ज़्यादा मज़बूत होती है?",
+              "answer": "ज़रूरी नहीं — यह पूरी तरह कुल एन्ट्रॉपी पर निर्भर करता है, न कि यह किस श्रेणी से आया। एक छोटा 8-कैरेक्टर रैंडम पासवर्ड और एक 4-शब्द पासफ़्रेज़ लगभग समान बिट संख्या पर पहुँच सकते हैं; पासफ़्रेज़ आमतौर पर सही ढंग से टाइप करना और बिना लिखे याद रखना आसान होता है, जो असली दुनिया की सुरक्षा के लिए मायने रखता है, क्योंकि लिखा हुआ पासवर्ड अपना ही मक़सद हरा देता है।"
             },
             {
-              "question": "Why does this tool show a range of crack times instead of one number?",
-              "answer": "Because the true answer depends entirely on something this tool can't see: how the receiving service stores your password. A properly slow hash like bcrypt or Argon2 might allow only thousands of guesses per second even on capable hardware, while a poorly implemented system using fast, unsalted hashing could allow a single GPU to attempt hundreds of billions per second — the same password's real-world safety differs by many orders of magnitude between those two cases."
+              "question": "यह टूल एक संख्या के बजाय क्रैक-टाइम की एक रेंज क्यों दिखाता है?",
+              "answer": "क्योंकि असली जवाब पूरी तरह उस चीज़ पर निर्भर करता है जिसे यह टूल देख नहीं सकता: प्राप्त करने वाली सेवा आपके पासवर्ड को कैसे सहेजती है। bcrypt या Argon2 जैसा उचित रूप से धीमा हैश सक्षम हार्डवेयर पर भी शायद प्रति सेकंड केवल हज़ारों अनुमानों की अनुमति दे, जबकि तेज़, बिना-सॉल्ट हैशिंग का उपयोग करने वाला ख़राब तरीक़े से लागू किया गया सिस्टम एक अकेले GPU को प्रति सेकंड सैकड़ों अरब अनुमानों की अनुमति दे सकता है — इन दोनों स्थितियों में एक ही पासवर्ड की असली दुनिया की सुरक्षा में कई गुना अंतर होता है।"
             },
             {
-              "question": "Is this tool's random number generator actually secure?",
-              "answer": "Yes — it uses the Web Crypto API's crypto.getRandomValues(), a cryptographically secure random source built into every modern browser, with rejection sampling to avoid the subtle bias a naive modulo operation would introduce. It deliberately does not use Math.random(), which is not designed to be unpredictable enough for security purposes."
+              "question": "क्या इस टूल का रैंडम नंबर जनरेटर वाक़ई सुरक्षित है?",
+              "answer": "हाँ — यह Web Crypto API के crypto.getRandomValues() का उपयोग करता है, जो हर आधुनिक ब्राउज़र में बना-बनाया एक क्रिप्टोग्राफ़िक रूप से सुरक्षित रैंडम स्रोत है, साथ ही रिजेक्शन सैंपलिंग का उपयोग करता है ताकि एक सामान्य मॉड्यूलो ऑपरेशन से आने वाला सूक्ष्म पूर्वाग्रह टाला जा सके। यह जानबूझकर Math.random() का उपयोग नहीं करता, जो सुरक्षा उद्देश्यों के लिए पर्याप्त रूप से अप्रत्याशित होने के लिए डिज़ाइन नहीं किया गया है।"
             },
             {
-              "question": "Why does NIST no longer recommend forcing regular password changes?",
-              "answer": "Because research on real password databases found that forced periodic rotation mostly makes people choose weaker passwords or make small, predictable tweaks to their existing one (Password1 → Password2) — which is easier for an attacker with the old password to predict than it is for a legitimate user to remember a genuinely new one. Current guidance instead recommends rotating only when a specific compromise is suspected."
+              "question": "NIST अब नियमित पासवर्ड बदलाव को अनिवार्य करने की सलाह क्यों नहीं देता?",
+              "answer": "क्योंकि असली पासवर्ड डेटाबेस पर किए गए शोध में पाया गया कि जबरन आवधिक बदलाव ज़्यादातर लोगों को कमज़ोर पासवर्ड चुनने या अपने मौजूदा पासवर्ड में छोटे, अनुमानित बदलाव करने (Password1 → Password2) पर मजबूर करता है — जिसे किसी हमलावर के लिए पुराने पासवर्ड से अनुमान लगाना, किसी असली उपयोगकर्ता के लिए वाक़ई नया पासवर्ड याद रखने से कहीं आसान होता है। मौजूदा दिशानिर्देश इसके बजाय केवल तभी बदलाव की सलाह देते हैं जब किसी विशेष सुरक्षा-भंग का शक हो।"
             },
             {
-              "question": "Does this tool check my password against known data breaches?",
-              "answer": "No, deliberately — doing that accurately requires querying an external breach database, which would mean sending at least a hash of your password over the network. Everything in this tool, including password generation and the strength estimate, runs entirely inside your browser with nothing transmitted anywhere."
+              "question": "क्या यह टूल मेरा पासवर्ड ज्ञात डेटा उल्लंघनों (breaches) के ख़िलाफ़ जाँचता है?",
+              "answer": "नहीं, जानबूझकर — इसे सटीक रूप से करने के लिए किसी बाहरी ब्रीच डेटाबेस से क्वेरी करनी होगी, जिसका मतलब है नेटवर्क पर कम से कम आपके पासवर्ड का एक हैश भेजना। इस टूल में सब कुछ, पासवर्ड जनरेशन और मज़बूती अनुमान सहित, पूरी तरह आपके ब्राउज़र के भीतर चलता है, कहीं कुछ भी भेजे बिना।"
             },
             {
-              "question": "What does \"excluding ambiguous characters\" actually remove?",
-              "answer": "Characters that are easy to misread depending on the font: the digit 0 versus the letter O, the digit 1 versus lowercase l versus uppercase I, and the vertical bar |. It slightly reduces the character pool (and therefore entropy for the same length), which is a fair trade for a password you might need to type from a handwritten note or read off a screen."
+              "question": "\"अस्पष्ट कैरेक्टर हटाना\" वास्तव में क्या हटाता है?",
+              "answer": "वे कैरेक्टर जिन्हें फ़ॉन्ट के अनुसार ग़लत पढ़ना आसान होता है: अंक 0 बनाम अक्षर O, अंक 1 बनाम लोअरकेस l बनाम अपरकेस I, और वर्टिकल बार |। यह कैरेक्टर पूल को थोड़ा घटा देता है (और इसलिए समान लंबाई के लिए एन्ट्रॉपी भी), जो एक ऐसे पासवर्ड के लिए उचित समझौता है जिसे आपको किसी हाथ से लिखे नोट से टाइप करना या स्क्रीन से पढ़ना पड़ सकता है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "The Rules That Turned Out to Be Wrong",
-            "paragraph": "Nearly every \"must contain a number, a symbol, and a capital letter, changed every 90 days\" password policy on Earth traces back to a single 2003 NIST document written by manager Bill Burr — guidance he later admitted was based on a 1980s whitepaper about password habits inside one specific organization, not real large-scale data, since almost none existed at the time. In 2017, by then retired, Burr told the Wall Street Journal \"Much of what I did I now regret,\" after researchers analyzing real breached-password databases found his rules pushed people toward predictable patterns like \"Password1!\" rather than genuinely unpredictable ones."
+            "title": "वे नियम जो ग़लत साबित हुए",
+            "paragraph": "धरती पर लगभग हर \"एक संख्या, एक सिंबल और एक कैपिटल अक्षर ज़रूर हो, और हर 90 दिन में बदलें\" वाली पासवर्ड नीति की जड़ें 2003 के एक ही NIST दस्तावेज़ तक जाती हैं, जिसे मैनेजर Bill Burr ने लिखा था — यह मार्गदर्शन, जैसा कि उन्होंने बाद में स्वीकार किया, 1980 के दशक के एक व्हाइटपेपर पर आधारित था जो एक विशिष्ट संगठन के भीतर पासवर्ड की आदतों के बारे में था, न कि किसी वास्तविक बड़े पैमाने के डेटा पर, क्योंकि उस समय ऐसा डेटा लगभग मौजूद ही नहीं था। 2017 में, तब तक रिटायर हो चुके Burr ने Wall Street Journal से कहा, \"मैंने जो किया उसमें से बहुत कुछ पर मुझे अब पछतावा है,\" यह उन शोधकर्ताओं के विश्लेषण के बाद आया जिन्होंने असली लीक हुए पासवर्ड डेटाबेस का विश्लेषण करके पाया कि उनके नियमों ने लोगों को \"Password1!\" जैसे अनुमान लगाने योग्य पैटर्न की ओर धकेला, न कि वाक़ई अप्रत्याशित पासवर्ड की ओर।"
           },
           "modernDevelopments": {
-            "title": "From Complexity Rules to \"Correct Horse Battery Staple\"",
-            "paragraph": "In August 2011, xkcd comic #936 made the entropy math behind this reframing famous: cartoonist Randall Munroe calculated that the \"hard to remember, easy to crack\" password Tr0ub4dor&3 carries only about 28 bits of entropy, while the plain, memorable phrase \"correct horse battery staple\" carries roughly 44 — because entropy comes from unpredictability across a large-enough pool, not from forcing specific character types. NIST's own guidance caught up years later: the current SP 800-63B explicitly recommends prioritizing length over composition complexity, allowing at least 64 characters, and dropping forced periodic rotation — a near-complete reversal of Burr's original 2003 rules."
+            "title": "जटिलता के नियमों से लेकर \"Correct Horse Battery Staple\" तक",
+            "paragraph": "अगस्त 2011 में, xkcd कॉमिक #936 ने इस नए दृष्टिकोण के पीछे की एन्ट्रॉपी गणित को प्रसिद्ध बना दिया: कार्टूनिस्ट Randall Munroe ने कैलकुलेट किया कि \"याद रखना मुश्किल, क्रैक करना आसान\" वाला पासवर्ड Tr0ub4dor&3 केवल लगभग 28 बिट एन्ट्रॉपी रखता है, जबकि सादा, याद रखने में आसान वाक्यांश \"correct horse battery staple\" लगभग 44 बिट रखता है — क्योंकि एन्ट्रॉपी विशेष कैरेक्टर टाइप को अनिवार्य बनाने से नहीं, बल्कि एक पर्याप्त बड़े समूह में अप्रत्याशितता से आती है। NIST का अपना मार्गदर्शन कई साल बाद इससे मेल खा गया: मौजूदा SP 800-63B स्पष्ट रूप से रचना की जटिलता से ज़्यादा लंबाई को प्राथमिकता देने, कम से कम 64 कैरेक्टर की अनुमति देने, और जबरन आवधिक बदलाव को हटाने की सलाह देता है — जो Burr के मूल 2003 नियमों का लगभग पूरा उलटफेर है।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Password security, entropy, and cryptographic randomness are studied within Cybersecurity and Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "पासवर्ड सुरक्षा, एन्ट्रॉपी, और क्रिप्टोग्राफ़िक रैंडमनेस को साइबर सुरक्षा और कंप्यूटर साइंस प्रोग्रामों में पढ़ाया जाता है। यहाँ QS World University Rankings by Subject 2025 के अनुसार दुनिया भर की शीर्ष 5 यूनिवर्सिटी दी गई हैं, साथ ही एक क्षेत्रीय विकल्प भी:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "नहीं — MIT का Course 6-3 (कंप्यूटर साइंस एंड इंजीनियरिंग) MIT के कैंब्रिज कैंपस पर एक इन-पर्सन अंडरग्रेजुएट प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "नहीं — Stanford का कंप्यूटर साइंस बैचलर प्रोग्राम Stanford के कैंपस पर एक इन-पर्सन डिग्री है।"
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025); home to CyLab, one of the largest university security and privacy research institutes in the US.",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025); यहाँ CyLab स्थित है, जो अमेरिका के सबसे बड़े यूनिवर्सिटी सुरक्षा व गोपनीयता शोध संस्थानों में से एक है।",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "नहीं — CMU का School of Computer Science बैचलर प्रोग्राम उसके पिट्सबर्ग कैंपस पर इन-पर्सन है।"
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "नहीं — NUS का Bachelor of Computing in Computer Science एक इन-पर्सन प्रोग्राम है, जिसमें कैंपस पर या विदेश में अनिवार्य इंटर्नशिप शामिल है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "नहीं — Oxford की कंप्यूटर साइंस डिग्री उसके ट्यूटोरियल सिस्टम के ज़रिए इन-पर्सन पढ़ाई जाती है, जिसमें एक या दो छात्र सीधे किसी ट्यूटर से मिलते हैं।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "अपने College of Engineering के ज़रिए ABET-मान्यता प्राप्त Bachelor of Science in Computer Science प्रदान करता है।",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "तकनीकी मानक",
           "citation": "NIST Special Publication 800-63B — Digital Identity Guidelines: Authentication and Lifecycle Management. National Institute of Standards and Technology.",
-          "note": "The current official US government guidance on password policy, replacing the 2003-era complexity-and-rotation rules with recommendations prioritizing length, screening against known-breached passwords, and dropping forced periodic changes.",
+          "note": "पासवर्ड नीति पर मौजूदा आधिकारिक अमेरिकी सरकार का मार्गदर्शन, जो 2003-युग के जटिलता-और-रोटेशन नियमों की जगह लंबाई को प्राथमिकता देने, ज्ञात-लीक पासवर्ड के ख़िलाफ़ जाँचने, और जबरन आवधिक बदलाव हटाने की सिफ़ारिशें लाता है।",
           "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
-          "readOriginal": "Read the Official Guidelines"
+          "readOriginal": "आधिकारिक दिशानिर्देश पढ़ें"
         }
       }
     },
