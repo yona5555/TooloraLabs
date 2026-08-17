@@ -5002,190 +5002,190 @@
       }
     },
     "barcode-generator": {
-      "title": "Barcode Generator",
-      "description": "Generate UPC-A, EAN-13, and Code 128 barcodes with a downloadable image and an optional logo placed beside the code — for educational and design use.",
+      "title": "Barcode-Generator",
+      "description": "Erstellen Sie UPC-A-, EAN-13- und Code-128-Barcodes mit herunterladbarem Bild und optionalem Logo neben dem Code — für Bildungs- und Designzwecke.",
       "nav": {
         "tool": "Generator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Werkzeug"
       },
       "aboveFold": {
-        "resultTitle": "Your Barcode",
-        "placeholder": "Enter a value on the left to generate a barcode.",
-        "disclaimer": "This barcode is generated for educational and general design purposes only — it is not an official commercial registration. To sell a product in real retail stores, you must register your number with the appropriate authority (such as GS1) to guarantee it's uniquely yours worldwide.",
+        "resultTitle": "Ihr Barcode",
+        "placeholder": "Geben Sie links einen Wert ein, um einen Barcode zu erstellen.",
+        "disclaimer": "Dieser Barcode wird nur für Bildungs- und allgemeine Designzwecke erstellt — er ist keine offizielle kommerzielle Registrierung. Um ein Produkt in echten Einzelhandelsgeschäften zu verkaufen, müssen Sie Ihre Nummer bei der zuständigen Stelle (etwa GS1) registrieren, um sicherzustellen, dass sie weltweit eindeutig Ihnen gehört.",
         "typesGuide": {
           "title": "UPC-A vs. EAN-13 vs. Code 128",
-          "intro": "Three genuinely different symbologies, each solving a different problem.",
+          "intro": "Drei tatsächlich unterschiedliche Symbologien, die jeweils ein anderes Problem lösen.",
           "rows": [
             {
               "type": "UPC-A",
-              "usedFor": "12 digits. The standard for retail products in the US and Canada."
+              "usedFor": "12 Ziffern. Der Standard für Einzelhandelsprodukte in den USA und Kanada."
             },
             {
               "type": "EAN-13",
-              "usedFor": "13 digits. The international retail standard used almost everywhere outside North America."
+              "usedFor": "13 Ziffern. Der internationale Einzelhandelsstandard, der fast überall außerhalb Nordamerikas verwendet wird."
             },
             {
               "type": "Code 128",
-              "usedFor": "Letters, digits, and symbols of any length. Used for shipping labels, inventory tracking, and internal IDs — not retail point-of-sale."
+              "usedFor": "Buchstaben, Ziffern und Symbole beliebiger Länge. Verwendet für Versandetiketten, Lagerverfolgung und interne Kennungen — nicht für den Einzelhandelskassenbereich."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Value",
-        "valueLabel": "Value",
+        "inputTitle": "Wert",
+        "valueLabel": "Wert",
         "symbology": {
           "upc-a": "UPC-A",
           "ean-13": "EAN-13",
           "code128": "Code 128"
         },
         "hint": {
-          "upc-a": "Enter 11 digits — the 12th check digit is calculated and added automatically.",
-          "ean-13": "Enter 12 digits — the 13th check digit is calculated and added automatically.",
-          "code128": "Enter any letters, digits, or symbols (printable ASCII, up to 48 characters)."
+          "upc-a": "Geben Sie 11 Ziffern ein — die 12. Prüfziffer wird automatisch berechnet und hinzugefügt.",
+          "ean-13": "Geben Sie 12 Ziffern ein — die 13. Prüfziffer wird automatisch berechnet und hinzugefügt.",
+          "code128": "Geben Sie beliebige Buchstaben, Ziffern oder Symbole ein (druckbares ASCII, bis zu 48 Zeichen)."
         },
         "placeholder": {
-          "upc-a": "e.g. 03600029145",
-          "ean-13": "e.g. 590123412345",
-          "code128": "e.g. TOOLORA-2026"
+          "upc-a": "z. B. 03600029145",
+          "ean-13": "z. B. 590123412345",
+          "code128": "z. B. TOOLORA-2026"
         },
         "logoLabel": "Logo (optional)",
-        "logoHint": "Placed beside the barcode, never on top of it — a barcode's bars carry no error-correction redundancy, so any mark over them can make it unreadable to a scanner.",
-        "logoUpload": "Upload a logo",
-        "logoPreviewAlt": "Uploaded logo preview",
-        "logoRemove": "Remove",
-        "logoShowBeside": "Show logo beside the barcode",
-        "download": "Download SVG"
+        "logoHint": "Wird neben dem Barcode platziert, niemals darüber — die Balken eines Barcodes tragen keine Fehlerkorrektur-Redundanz, daher kann jede Markierung darüber ihn für einen Scanner unlesbar machen.",
+        "logoUpload": "Logo hochladen",
+        "logoPreviewAlt": "Vorschau des hochgeladenen Logos",
+        "logoRemove": "Entfernen",
+        "logoShowBeside": "Logo neben dem Barcode anzeigen",
+        "download": "SVG herunterladen"
       },
       "errors": {
-        "required": "Enter a value to generate a barcode.",
-        "invalidLengthUpc": "UPC-A needs exactly 11 digits (the check digit is added automatically).",
-        "invalidLengthEan": "EAN-13 needs exactly 12 digits (the check digit is added automatically).",
-        "nonDigit": "This symbology only accepts digits 0-9.",
-        "unsupportedCharacter": "Code 128 only supports printable ASCII characters (letters, digits, common symbols).",
-        "tooLong": "Value is too long (max 48 characters for Code 128)."
+        "required": "Geben Sie einen Wert ein, um einen Barcode zu erstellen.",
+        "invalidLengthUpc": "UPC-A benötigt genau 11 Ziffern (die Prüfziffer wird automatisch hinzugefügt).",
+        "invalidLengthEan": "EAN-13 benötigt genau 12 Ziffern (die Prüfziffer wird automatisch hinzugefügt).",
+        "nonDigit": "Diese Symbologie akzeptiert nur die Ziffern 0–9.",
+        "unsupportedCharacter": "Code 128 unterstützt nur druckbare ASCII-Zeichen (Buchstaben, Ziffern, gängige Symbole).",
+        "tooLong": "Wert ist zu lang (max. 48 Zeichen für Code 128)."
       },
       "education": {
         "intro": {
-          "title": "How Barcodes Actually Work",
-          "paragraph1": "A 1D barcode encodes data purely as the widths of alternating bars and spaces — there's no color, no dots, nothing two-dimensional about it. A scanner's laser or camera sensor sweeps across the code and measures how long the light stays bright or dark at each point; a narrow bar might be one \"module\" wide, a wide one three or four modules wide, and the exact sequence of those widths is what encodes each digit or character. This is also exactly why 1D barcodes carry no error correction the way a QR code does: there's no spare redundant data woven in to reconstruct a damaged section, which is why this tool places an optional logo beside the barcode rather than on top of it.",
-          "paragraph2": "UPC-A and EAN-13 add one more safeguard: a check digit, mathematically derived from every other digit in the code, that a scanner recalculates after reading and compares against — if a smudge or printing defect corrupted even one digit, the check digit almost certainly won't match, and the scanner rejects the read instead of accepting corrupted data. Code 128 goes further with a full checksum symbol computed from every character's value. This tool calculates every check digit and checksum for you automatically from whatever value you enter.",
+          "title": "Wie Barcodes tatsächlich funktionieren",
+          "paragraph1": "Ein 1D-Barcode codiert Daten rein über die Breiten abwechselnder Balken und Lücken — keine Farbe, keine Punkte, nichts Zweidimensionales daran. Ein Laser- oder Kamerasensor eines Scanners fährt über den Code und misst, wie lange das Licht an jeder Stelle hell oder dunkel bleibt; ein schmaler Balken könnte ein „Modul“ breit sein, ein breiter drei oder vier Module, und genau die Abfolge dieser Breiten codiert jede Ziffer oder jedes Zeichen. Genau deshalb tragen 1D-Barcodes auch keine Fehlerkorrektur wie ein QR-Code: Es gibt keine eingewobenen redundanten Reservedaten, um einen beschädigten Abschnitt zu rekonstruieren, weshalb dieses Werkzeug ein optionales Logo neben dem Barcode platziert, statt darüber.",
+          "paragraph2": "UPC-A und EAN-13 fügen eine weitere Absicherung hinzu: eine Prüfziffer, mathematisch aus jeder anderen Ziffer im Code abgeleitet, die ein Scanner nach dem Lesen neu berechnet und vergleicht — wenn ein Fleck oder Druckfehler auch nur eine Ziffer verfälscht hat, stimmt die Prüfziffer mit an Sicherheit grenzender Wahrscheinlichkeit nicht überein, und der Scanner lehnt das Ergebnis ab, statt verfälschte Daten zu übernehmen. Code 128 geht mit einem vollständigen, aus dem Wert jedes Zeichens berechneten Prüfsymbol noch weiter. Dieses Werkzeug berechnet jede Prüfziffer und jede Prüfsumme automatisch für Sie aus dem eingegebenen Wert.",
           "diagram": {
-            "quietZoneLabel": "Quiet zone — a mandatory blank margin a scanner needs to lock on before reading",
-            "guardLabel": "Guard pattern — a fixed marker that tells the scanner where the code starts, centers, or ends",
-            "dataLabel": "Data bars — the actual encoded digits or characters",
-            "caption": "A schematic barcode structure (illustrative widths, not decoded from real data) — quiet zone, guard patterns, and data bars are present in some form across every 1D symbology."
+            "quietZoneLabel": "Ruhezone — ein verpflichtender leerer Rand, den ein Scanner vor dem Lesen zum Erfassen benötigt",
+            "guardLabel": "Wächtermuster — eine feste Markierung, die dem Scanner mitteilt, wo der Code beginnt, sich zentriert oder endet",
+            "dataLabel": "Datenbalken — die tatsächlich codierten Ziffern oder Zeichen",
+            "caption": "Eine schematische Barcode-Struktur (veranschaulichende Breiten, nicht aus echten Daten decodiert) — Ruhezone, Wächtermuster und Datenbalken kommen in irgendeiner Form in jeder 1D-Symbologie vor."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Three examples showing exactly how this tool derives the check digit or checksum for each symbology.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Drei Beispiele, die genau zeigen, wie dieses Werkzeug die Prüfziffer oder Prüfsumme für jede Symbologie herleitet.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "UPC-A, 11 digits \"03600029145\" (a real published product code)",
-              "result": "Check digit 2 → full code 036000291452"
+              "scenario": "UPC-A, 11 Ziffern „03600029145“ (ein echter veröffentlichter Produktcode)",
+              "result": "Prüfziffer 2 → vollständiger Code 036000291452"
             },
             {
-              "scenario": "EAN-13, 12 digits \"400638133393\"",
-              "result": "Check digit 1 → full code 4006381333931"
+              "scenario": "EAN-13, 12 Ziffern „400638133393“",
+              "result": "Prüfziffer 1 → vollständiger Code 4006381333931"
             },
             {
-              "scenario": "Code 128, text \"A\"",
-              "result": "Checksum value 34, from (104 + 33×1) mod 103"
+              "scenario": "Code 128, Text „A“",
+              "result": "Prüfsummenwert 34, aus (104 + 33×1) mod 103"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Can I actually use this barcode to sell a product in stores?",
-              "answer": "Not on its own. Any UPC-A or EAN-13 number you make up yourself may already belong to a different product somewhere in the world — retailers and marketplaces require a number properly issued through GS1 (or your country's equivalent numbering authority), which guarantees it's uniquely yours. This tool is for education, design mockups, internal tracking, and anywhere a globally unique registered number isn't required."
+              "question": "Kann ich diesen Barcode tatsächlich verwenden, um ein Produkt in Geschäften zu verkaufen?",
+              "answer": "Nicht allein für sich genommen. Jede selbst erfundene UPC-A- oder EAN-13-Nummer könnte bereits irgendwo auf der Welt zu einem anderen Produkt gehören — Einzelhändler und Marktplätze verlangen eine ordnungsgemäß über GS1 (oder die entsprechende nationale Vergabestelle) ausgestellte Nummer, die garantiert, dass sie eindeutig Ihnen gehört. Dieses Werkzeug dient Bildungszwecken, Design-Mockups, interner Nachverfolgung und überall dort, wo keine global eindeutig registrierte Nummer erforderlich ist."
             },
             {
-              "question": "Why can't I put a logo directly on top of the barcode lines?",
-              "answer": "Unlike a QR code, a 1D barcode has no error-correction redundancy at all — every bar and space is load-bearing. Covering even a small part of the code can make specific digits unreadable, and a scanner has no spare data to reconstruct what's missing. That's exactly why this tool only offers to place a logo beside the code, never over it."
+              "question": "Warum kann ich kein Logo direkt auf die Barcode-Linien legen?",
+              "answer": "Anders als ein QR-Code hat ein 1D-Barcode überhaupt keine Fehlerkorrektur-Redundanz — jeder Balken und jede Lücke ist tragend. Selbst das Überdecken eines kleinen Teils des Codes kann bestimmte Ziffern unlesbar machen, und ein Scanner hat keine Reservedaten, um das Fehlende zu rekonstruieren. Genau deshalb bietet dieses Werkzeug nur an, ein Logo neben den Code zu setzen, niemals darüber."
             },
             {
-              "question": "What's the actual difference between UPC-A and EAN-13?",
-              "answer": "EAN-13 is really UPC-A's superset: encode a UPC-A number as EAN-13 by adding a leading 0, and it decodes identically. UPC-A (12 digits) is the historical US/Canada retail standard; EAN-13 (13 digits) is the international standard used almost everywhere else, including by products sold in the US, since American scanners read EAN-13 too."
+              "question": "Was ist der tatsächliche Unterschied zwischen UPC-A und EAN-13?",
+              "answer": "EAN-13 ist praktisch eine Obermenge von UPC-A: Codieren Sie eine UPC-A-Nummer als EAN-13, indem Sie eine führende 0 hinzufügen, und sie wird identisch decodiert. UPC-A (12 Ziffern) ist der historische US-/kanadische Einzelhandelsstandard; EAN-13 (13 Ziffern) ist der internationale Standard, der fast überall sonst verwendet wird, auch bei in den USA verkauften Produkten, da amerikanische Scanner auch EAN-13 lesen."
             },
             {
-              "question": "Why does Code 128 look so different from UPC-A or EAN-13?",
-              "answer": "Because it solves a different problem. UPC-A and EAN-13 exist purely to encode a specific numeric product identifier for retail checkout. Code 128 can encode letters, punctuation, and digits in one code, at any length, which is why it's the default choice for shipping labels, warehouse pallet IDs, and internal tracking codes rather than retail products."
+              "question": "Warum sieht Code 128 so anders aus als UPC-A oder EAN-13?",
+              "answer": "Weil er ein anderes Problem löst. UPC-A und EAN-13 dienen ausschließlich der Codierung einer bestimmten numerischen Produktkennung für die Einzelhandelskasse. Code 128 kann Buchstaben, Satzzeichen und Ziffern in einem Code beliebiger Länge codieren, weshalb er die Standardwahl für Versandetiketten, Lagerpaletten-IDs und interne Verfolgungscodes ist, nicht für Einzelhandelsprodukte."
             },
             {
-              "question": "Why does the barcode need a check digit or checksum at all?",
-              "answer": "Because printing and scanning aren't perfect — a smudge, a fold, or a low-quality printer can corrupt part of a code. The check digit is calculated from every other digit using a fixed formula; if a scanner reads a corrupted code, the digit it reads almost certainly won't match what the formula predicts, so it rejects the scan instead of ringing up the wrong product."
+              "question": "Warum braucht der Barcode überhaupt eine Prüfziffer oder Prüfsumme?",
+              "answer": "Weil Drucken und Scannen nicht perfekt sind — ein Fleck, eine Faltung oder ein minderwertiger Drucker kann Teile eines Codes verfälschen. Die Prüfziffer wird aus jeder anderen Ziffer nach einer festen Formel berechnet; liest ein Scanner einen verfälschten Code, stimmt die gelesene Ziffer mit an Sicherheit grenzender Wahrscheinlichkeit nicht mit dem von der Formel vorhergesagten Wert überein, sodass der Scan abgelehnt wird, statt das falsche Produkt abzurechnen."
             },
             {
-              "question": "Is my data uploaded anywhere when I use this tool, including the logo?",
-              "answer": "No — encoding the barcode and placing an uploaded logo image both happen entirely inside your browser. Nothing you enter or upload here is transmitted anywhere."
+              "question": "Werden meine Daten irgendwohin hochgeladen, wenn ich dieses Werkzeug nutze, auch das Logo?",
+              "answer": "Nein — sowohl die Codierung des Barcodes als auch die Platzierung eines hochgeladenen Logobilds geschehen vollständig in Ihrem Browser. Nichts, was Sie hier eingeben oder hochladen, wird irgendwohin übertragen."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hinter diesem Werkzeug",
           "history": {
-            "title": "A 1949 Patent for Concentric Circles",
-            "paragraph": "The barcode's origin story starts with an overheard conversation: in 1948, graduate student Bernard Silver overheard a supermarket executive asking a Drexel Institute dean for a way to automatically read product information at checkout. Silver teamed up with fellow student Norman Joseph Woodland, who — drawing on Morse code he'd learned as a Boy Scout — sketched an early design using dots and dashes, then reworked it into a pattern of concentric circles so it could be scanned from any direction. They filed a patent in 1949, granted in 1952, and sold it to Philco for just $15,000 — genuinely the only money either inventor made directly from an idea that would go on to reshape global retail."
+            "title": "Ein Patent von 1949 für konzentrische Kreise",
+            "paragraph": "Die Entstehungsgeschichte des Barcodes beginnt mit einem belauschten Gespräch: 1948 hörte der Doktorand Bernard Silver zufällig, wie ein Supermarkt-Manager einen Dekan des Drexel Institute nach einer Möglichkeit fragte, Produktinformationen an der Kasse automatisch zu erfassen. Silver tat sich mit Kommilitone Norman Joseph Woodland zusammen, der — aufbauend auf dem Morsecode, den er als Pfadfinder gelernt hatte — einen frühen Entwurf mit Punkten und Strichen skizzierte und ihn dann zu einem Muster konzentrischer Kreise umarbeitete, damit er aus jeder Richtung gescannt werden konnte. Sie meldeten 1949 ein Patent an, das 1952 erteilt wurde, und verkauften es für lediglich 15.000 Dollar an Philco — tatsächlich das einzige Geld, das einer der beiden Erfinder je direkt aus einer Idee zog, die den weltweiten Einzelhandel neu gestalten sollte."
           },
           "modernDevelopments": {
-            "title": "From a Bullseye to a Pack of Gum",
-            "paragraph": "Woodland and Silver's original concentric-circle design was never mass-produced — the linear barcode actually used today was designed separately, starting in 1969, by IBM engineer George Laurer, who (with Woodland, by then also at IBM, and mathematician David Savir) proposed the striped Universal Product Code adopted by the US grocery industry's Symbol Selection Committee in 1973. The first UPC-scanned retail sale happened on June 26, 1974, when a pack of Wrigley's Juicy Fruit gum was rung up at a Marsh supermarket in Troy, Ohio. Europe adopted a compatible 13-digit extension, EAN, in 1976, and the two standards are now governed globally by GS1 — formed in 2005 from the merger of the original US and European numbering authorities."
+            "title": "Von einer Zielscheibe zu einer Packung Kaugummi",
+            "paragraph": "Woodlands und Silvers ursprünglicher Entwurf mit konzentrischen Kreisen ging nie in Serie — der heute tatsächlich verwendete lineare Barcode wurde separat entwickelt, ab 1969, vom IBM-Ingenieur George Laurer, der (zusammen mit Woodland, inzwischen ebenfalls bei IBM, und dem Mathematiker David Savir) den gestreiften Universal Product Code vorschlug, den das Symbol Selection Committee der US-Lebensmittelbranche 1973 übernahm. Der erste per UPC gescannte Einzelhandelsverkauf fand am 26. Juni 1974 statt, als eine Packung Wrigley's Juicy-Fruit-Kaugummi in einem Marsh-Supermarkt in Troy, Ohio, an der Kasse erfasst wurde. Europa übernahm 1976 eine kompatible 13-stellige Erweiterung namens EAN, und beide Standards werden heute weltweit von GS1 verwaltet — entstanden 2005 aus der Fusion der ursprünglichen US-amerikanischen und europäischen Vergabestellen."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Barcode systems sit at the intersection of data encoding and physical logistics, which is why this path draws on Supply Chain Management rather than Computer Science alone. Here are the top 5 globally in the QS Business Master's Rankings — Supply Chain Management 2025, plus one regional option:",
+            "title": "Akademischer Werdegang",
+            "intro": "Barcode-Systeme liegen an der Schnittstelle von Datencodierung und physischer Logistik, weshalb dieser Werdegang eher auf Supply-Chain-Management als allein auf Informatik zurückgreift. Hier sind die weltweit fünf besten im QS Business Master's Rankings — Supply Chain Management 2025, plus eine regionale Option:",
             "universities": [
               {
                 "name": "University of Michigan (Ross)",
-                "note": "Ranked #1 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Weltweit auf Platz 1 für Supply Chain Management (QS Business Master's Rankings 2025).",
                 "url": "https://michiganross.umich.edu/recruit-at-ross/one-year-masters/master-of-supply-chain-management",
-                "online": "No — Ross's one-year Master of Supply Chain Management is an in-person program on its Ann Arbor campus."
+                "online": "Nein — Ross' einjähriger Master of Supply Chain Management ist ein Präsenzprogramm auf ihrem Ann-Arbor-Campus."
               },
               {
-                "name": "WU Vienna (Vienna University of Economics and Business)",
-                "note": "Ranked #2 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "name": "WU Wien (Wirtschaftsuniversität Wien)",
+                "note": "Weltweit auf Platz 2 für Supply Chain Management (QS Business Master's Rankings 2025).",
                 "url": "https://www.wu.ac.at/en/programs/masters-programs/supply-chain-management/overview",
-                "online": "No — WU's MSc in Supply Chain Management is an in-person program on its Vienna campus."
+                "online": "Nein — der Masterstudiengang Supply Chain Management der WU ist ein Präsenzprogramm auf ihrem Wiener Campus."
               },
               {
                 "name": "Erasmus University Rotterdam (RSM)",
-                "note": "Ranked #3 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Weltweit auf Platz 3 für Supply Chain Management (QS Business Master's Rankings 2025).",
                 "url": "https://www.eur.nl/en/master/supply-chain-management",
-                "online": "No — RSM's Master Supply Chain Management is a full-time, in-person program on its Woudestein campus."
+                "online": "Nein — der Master Supply Chain Management der RSM ist ein Vollzeit-Präsenzprogramm auf ihrem Woudestein-Campus."
               },
               {
                 "name": "emlyon business school",
-                "note": "Ranked #4 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Weltweit auf Platz 4 für Supply Chain Management (QS Business Master's Rankings 2025).",
                 "url": "https://em-lyon.com/en/student/master/msc-supply-chain-operation-management",
-                "online": "No — emlyon's MSc in Supply Chain & Operations Management is full-time and in-person, based in Lyon with an international seminar component."
+                "online": "Nein — der MSc in Supply Chain & Operations Management von emlyon findet in Vollzeit und Präsenz in Lyon statt, mit einem internationalen Seminarbestandteil."
               },
               {
                 "name": "University of Southern California (Marshall)",
-                "note": "Ranked #5 worldwide for Supply Chain Management (QS Business Master's Rankings 2025).",
+                "note": "Weltweit auf Platz 5 für Supply Chain Management (QS Business Master's Rankings 2025).",
                 "url": "https://www.marshall.usc.edu/programs/specialized-masters-programs/master-science-global-supply-chain-management",
-                "online": "Yes — USC Marshall's MS in Global Supply Chain Management is offered both on-campus in Los Angeles and as a fully online program for working professionals, same degree either way."
+                "online": "Ja — der MS in Global Supply Chain Management der USC Marshall wird sowohl vor Ort in Los Angeles als auch als vollständig online absolvierbares Programm für Berufstätige angeboten, in beiden Fällen derselbe Abschluss."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Supply Chain Management through its School of Business Administration.",
+                "note": "Bietet über ihre School of Business Administration einen Bachelor of Science in Business Administration mit Hauptfach Supply Chain Management an.",
                 "url": "https://www.aus.edu/sba/department-of-marketing-and-information-systems/bachelor-of-science-in-business-administration-major-in-supply-chain-management",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Durchführungsart wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Technischer Standard",
           "citation": "ISO/IEC 15420:2025 — Information technology — Automatic identification and data capture techniques — EAN/UPC bar code symbology specification. International Organization for Standardization.",
-          "note": "The official international standard defining the EAN/UPC barcode symbology this tool generates. Code 128 is separately standardized as ISO/IEC 15417. Actual number registration and ownership is governed by GS1's General Specifications, not by these symbology standards themselves.",
+          "note": "Der offizielle internationale Standard, der die von diesem Werkzeug erzeugte EAN/UPC-Barcode-Symbologie definiert. Code 128 ist separat als ISO/IEC 15417 standardisiert. Die tatsächliche Nummernvergabe und Inhaberschaft wird durch die General Specifications von GS1 geregelt, nicht durch diese Symbologie-Standards selbst.",
           "url": "https://www.iso.org/standard/84892.html",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "Offiziellen Standard ansehen"
         }
       }
     },
