@@ -1098,367 +1098,367 @@
       }
     },
     "mortgage-calculator": {
-      "title": "Mortgage Calculator",
-      "description": "Calculate your monthly mortgage payment, see a full amortization schedule, and find out exactly when PMI drops off.",
+      "title": "होम लोन कैलकुलेटर",
+      "description": "अपना मासिक होम लोन भुगतान कैलकुलेट करें, पूरी चुकौती अनुसूची देखें, और जानें कि PMI ठीक कब हटेगा।",
       "nav": {
-        "tool": "Tool",
-        "amortization": "Amortization",
-        "scenarioComparison": "Compare Scenarios",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "टूल",
+        "amortization": "चुकौती अनुसूची",
+        "scenarioComparison": "परिदृश्यों की तुलना",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "form": {
-        "homePrice": "Home Price",
-        "downPayment": "Down Payment",
+        "homePrice": "घर की कीमत",
+        "downPayment": "डाउन पेमेंट",
         "downPaymentPercentUnit": "%",
         "downPaymentAmountUnit": "$",
-        "interestRate": "Interest Rate (%)",
-        "loanTerm": "Loan Term",
-        "loanTermPreset": "{years} yr",
-        "loanTermCustomHint": "Enter a custom term in years (1–50).",
-        "advancedTitle": "Taxes, Insurance & Extra Payments",
-        "propertyTax": "Annual Property Tax",
-        "insurance": "Annual Home Insurance",
-        "hoa": "Monthly HOA Fee",
-        "pmi": "Monthly PMI",
-        "pmiHint": "Typically required by the lender when your down payment is below 20%.",
-        "extraMonthlyPayment": "Extra Monthly Payment",
-        "extraMonthlyPaymentHint": "Optional — paid on top of your required payment and applied directly to principal.",
-        "calculate": "Calculate Mortgage",
-        "reset": "Reset"
+        "interestRate": "ब्याज दर (%)",
+        "loanTerm": "लोन अवधि",
+        "loanTermPreset": "{years} वर्ष",
+        "loanTermCustomHint": "वर्षों में कस्टम अवधि दर्ज करें (1–50)।",
+        "advancedTitle": "टैक्स, बीमा और अतिरिक्त भुगतान",
+        "propertyTax": "वार्षिक संपत्ति कर",
+        "insurance": "वार्षिक होम इंश्योरेंस",
+        "hoa": "मासिक HOA शुल्क",
+        "pmi": "मासिक PMI",
+        "pmiHint": "आमतौर पर तब ज़रूरी होता है जब आपका डाउन पेमेंट 20% से कम हो।",
+        "extraMonthlyPayment": "अतिरिक्त मासिक भुगतान",
+        "extraMonthlyPaymentHint": "वैकल्पिक — आपके ज़रूरी भुगतान के ऊपर चुकाया जाता है और सीधे मूलधन पर लागू होता है।",
+        "calculate": "होम लोन कैलकुलेट करें",
+        "reset": "रीसेट करें"
       },
       "errors": {
-        "required": "Please enter a valid home price.",
-        "homePriceRange": "Home price must be greater than 0 and no more than 50,000,000.",
-        "downPaymentRange": "Down payment must be zero or more, and less than the home price.",
-        "interestRateRange": "Interest rate must be between 0% and 25%.",
-        "loanTermRange": "Loan term must be between 1 and 50 years.",
-        "negativeValue": "Property tax, insurance, HOA, PMI, and extra payment must be zero or greater."
+        "required": "कृपया घर की मान्य कीमत दर्ज करें।",
+        "homePriceRange": "घर की कीमत 0 से अधिक और 50,000,000 से अधिक नहीं होनी चाहिए।",
+        "downPaymentRange": "डाउन पेमेंट शून्य या उससे अधिक होना चाहिए, और घर की कीमत से कम होना चाहिए।",
+        "interestRateRange": "ब्याज दर 0% और 25% के बीच होनी चाहिए।",
+        "loanTermRange": "लोन अवधि 1 से 50 वर्ष के बीच होनी चाहिए।",
+        "negativeValue": "संपत्ति कर, बीमा, HOA, PMI और अतिरिक्त भुगतान शून्य या उससे अधिक होने चाहिए।"
       },
       "aboveFold": {
-        "inputTitle": "Loan Details",
-        "resultTitle": "Your Monthly Payment",
-        "perMonth": "per month",
-        "perMonthShort": "mo",
-        "segmentPI": "Principal & Interest",
-        "segmentTax": "Property Tax",
-        "segmentInsurance": "Home Insurance",
+        "inputTitle": "लोन विवरण",
+        "resultTitle": "आपका मासिक भुगतान",
+        "perMonth": "प्रति माह",
+        "perMonthShort": "माह",
+        "segmentPI": "मूलधन और ब्याज",
+        "segmentTax": "संपत्ति कर",
+        "segmentInsurance": "होम इंश्योरेंस",
         "segmentHOA": "HOA",
         "segmentPMI": "PMI",
-        "loanAmountLabel": "Loan Amount",
-        "loanToValueLabel": "Loan-to-Value",
-        "loanToValueNote": "The loan amount as a percentage of the home price — lenders use this ratio to decide whether PMI is required.",
-        "totalInterestLabel": "Total Interest",
-        "totalCostLabel": "Total Cost",
-        "payoffTimeLabel": "Payoff Time",
-        "payoffTimeValue": "{years}y {months}m",
-        "payoffTimeAcceleratedNote": "Shortened by your extra monthly payment.",
-        "pmiRemovalLabel": "PMI Removal (est.)",
-        "pmiRemovalValue": "Year {years}, month {months}",
-        "pmiRemovalNone": "Not applicable",
-        "pmiRemovalNote": "The estimated point your balance reaches 80% of the home's original value, when you can request PMI cancellation under federal law.",
-        "interestSavedLabel": "Interest Saved",
-        "interestSavedNote": "Interest you avoid paying thanks to your extra monthly payment, compared to the standard schedule.",
-        "monthsSavedLabel": "Time Saved",
-        "quickInsightTitle": "PMI Insight",
-        "quickInsightWithPmi": "This loan carries about {pmi}/mo in PMI because the down payment is under 20% — putting down {extra} more would cross that threshold and drop the charge immediately, instead of waiting for the balance to pay it down over time.",
-        "quickInsightWithPmiAtTwentyPercent": "This loan carries about {pmi}/mo in PMI even though the down payment is already 20% or more — that's usually only charged below 20%, so it's worth confirming this premium with your lender.",
-        "quickInsightNoPmi": "With 20% or more down, this loan carries no PMI at all — every dollar of the payment goes toward interest and your own equity, none of it toward insuring the lender against your default.",
-        "affordabilityMiniTitle": "How much home can I afford?",
-        "affordabilityMiniIntro": "A quick, independent estimate using the standard 28%/36% debt-to-income guideline lenders commonly reference.",
-        "affordabilityMiniIncome": "Monthly gross income",
-        "affordabilityMiniDebts": "Other monthly debts",
-        "affordabilityMiniRate": "Interest rate (%)",
-        "affordabilityMiniYears": "Loan term (years)",
-        "affordabilityMiniDownPercent": "Down payment (%)",
-        "affordabilityMiniResult": "Affordable payment: {payment}/mo — estimated home price: {homePrice}",
-        "affordabilityMiniPlaceholder": "Enter your income to see an estimate."
+        "loanAmountLabel": "लोन राशि",
+        "loanToValueLabel": "लोन-टू-वैल्यू",
+        "loanToValueNote": "घर की कीमत के प्रतिशत के रूप में लोन राशि — लेंडर इसी अनुपात के आधार पर तय करते हैं कि PMI ज़रूरी है या नहीं।",
+        "totalInterestLabel": "कुल ब्याज",
+        "totalCostLabel": "कुल लागत",
+        "payoffTimeLabel": "चुकौती अवधि",
+        "payoffTimeValue": "{years} वर्ष {months} माह",
+        "payoffTimeAcceleratedNote": "आपके अतिरिक्त मासिक भुगतान से यह अवधि छोटी हुई है।",
+        "pmiRemovalLabel": "PMI हटना (अनुमानित)",
+        "pmiRemovalValue": "वर्ष {years}, महीना {months}",
+        "pmiRemovalNone": "लागू नहीं",
+        "pmiRemovalNote": "अनुमानित बिंदु जहाँ आपका बकाया घर के मूल मूल्य के 80% तक पहुँच जाता है, जब आप संघीय क़ानून के तहत PMI रद्द करने का अनुरोध कर सकते हैं।",
+        "interestSavedLabel": "बची हुई ब्याज",
+        "interestSavedNote": "मानक अनुसूची की तुलना में आपके अतिरिक्त मासिक भुगतान की वजह से बचाई गई ब्याज।",
+        "monthsSavedLabel": "बचा हुआ समय",
+        "quickInsightTitle": "PMI जानकारी",
+        "quickInsightWithPmi": "इस लोन पर लगभग {pmi}/माह PMI लग रहा है क्योंकि डाउन पेमेंट 20% से कम है — {extra} अधिक जमा करने से यह सीमा पार हो जाएगी और यह शुल्क तुरंत हट जाएगा, बजाय इसके कि बकाया समय के साथ धीरे-धीरे घटे।",
+        "quickInsightWithPmiAtTwentyPercent": "इस लोन पर लगभग {pmi}/माह PMI लग रहा है, भले ही डाउन पेमेंट पहले से ही 20% या उससे अधिक है — यह आमतौर पर केवल 20% से कम पर लगाया जाता है, इसलिए इस प्रीमियम की पुष्टि अपने लेंडर से करना बेहतर होगा।",
+        "quickInsightNoPmi": "20% या उससे अधिक डाउन पेमेंट के साथ, इस लोन पर बिल्कुल भी PMI नहीं लगता — भुगतान का हर डॉलर ब्याज और आपकी अपनी इक्विटी में जाता है, इसका कोई हिस्सा लेंडर को आपके डिफ़ॉल्ट से बचाने के बीमा में नहीं जाता।",
+        "affordabilityMiniTitle": "मैं कितनी क़ीमत का घर ख़रीद सकता हूँ?",
+        "affordabilityMiniIntro": "लेंडर आमतौर पर जिस मानक 28%/36% डेट-टू-इनकम दिशानिर्देश का हवाला देते हैं, उसका उपयोग करके एक त्वरित, स्वतंत्र अनुमान।",
+        "affordabilityMiniIncome": "मासिक सकल आय",
+        "affordabilityMiniDebts": "अन्य मासिक क़र्ज़",
+        "affordabilityMiniRate": "ब्याज दर (%)",
+        "affordabilityMiniYears": "लोन अवधि (वर्ष)",
+        "affordabilityMiniDownPercent": "डाउन पेमेंट (%)",
+        "affordabilityMiniResult": "वहनीय भुगतान: {payment}/माह — अनुमानित घर की कीमत: {homePrice}",
+        "affordabilityMiniPlaceholder": "अनुमान देखने के लिए अपनी आय दर्ज करें।"
       },
       "education": {
         "intro": {
-          "title": "What This Calculator Measures",
-          "paragraph1": "A mortgage is a loan secured by the property you're buying, structured so that a fixed monthly payment gradually eliminates a large balance over a period typically running 15 to 30 years. Almost every fixed-rate mortgage today is fully amortizing: each payment splits between interest owed on the remaining balance and principal that permanently reduces it, and that split shifts every month — early payments are mostly interest, and the very last payment is nearly all principal.",
-          "paragraph2": "This calculator computes your standard monthly principal-and-interest payment from your loan amount, rate, and term, then folds in the real recurring costs lenders typically collect alongside it — property tax, home insurance, HOA dues, and private mortgage insurance (PMI) — to show the payment you'll actually see leave your account. It also runs a full month-by-month amortization simulation behind the scenes, which is what lets it tell you exactly when PMI can come off and how much an extra payment would actually save, rather than relying on rough rules of thumb.",
-          "disclaimer": "This tool is for planning and educational purposes only. It does not constitute a loan offer, pre-approval, or financial advice, and actual loan terms, taxes, insurance premiums, and PMI rates set by a specific lender or insurer may differ from the estimates shown here."
+          "title": "यह कैलकुलेटर क्या मापता है",
+          "paragraph1": "होम लोन (मॉर्गेज) उस संपत्ति द्वारा सुरक्षित एक लोन होता है जिसे आप ख़रीद रहे होते हैं, जिसे इस तरह बनाया जाता है कि एक तय मासिक भुगतान आमतौर पर 15 से 30 वर्षों की अवधि में धीरे-धीरे एक बड़े बकाये को ख़त्म कर देता है। आज लगभग हर फ़िक्स्ड-रेट होम लोन पूरी तरह से चुकौती-योग्य (amortizing) होता है: हर भुगतान बचे हुए बकाये पर देय ब्याज और मूलधन के बीच बँटता है, और हर महीने यह अनुपात बदलता रहता है — शुरुआती भुगतान ज़्यादातर ब्याज होते हैं, और आख़िरी भुगतान लगभग पूरी तरह मूलधन होता है।",
+          "paragraph2": "यह कैलकुलेटर आपके लोन राशि, दर और अवधि से आपका मानक मासिक मूलधन-और-ब्याज भुगतान निकालता है, फिर उसमें वे वास्तविक आवर्ती लागतें भी जोड़ता है जो लेंडर आमतौर पर इसके साथ वसूलते हैं — संपत्ति कर, होम इंश्योरेंस, HOA शुल्क, और प्राइवेट मॉर्गेज इंश्योरेंस (PMI) — ताकि आपको वह भुगतान दिखे जो वास्तव में आपके खाते से जाएगा। यह पर्दे के पीछे एक पूरा महीना-दर-महीना चुकौती सिमुलेशन भी चलाता है, जिसकी वजह से यह आपको ठीक-ठीक बता सकता है कि PMI कब हट सकता है और कोई अतिरिक्त भुगतान वास्तव में कितनी बचत करेगा, न कि केवल मोटे अंदाज़े पर निर्भर रहकर।",
+          "disclaimer": "यह टूल केवल योजना बनाने और शैक्षिक उद्देश्यों के लिए है। यह किसी लोन की पेशकश, पूर्व-स्वीकृति, या वित्तीय सलाह नहीं है, और किसी विशेष लेंडर या बीमाकर्ता द्वारा तय की गई वास्तविक लोन शर्तें, टैक्स, बीमा प्रीमियम और PMI दरें यहाँ दिखाए गए अनुमानों से अलग हो सकती हैं।"
         },
         "amortization": {
-          "title": "How Mortgage Amortization Works",
-          "intro": "Every fixed-rate, fully amortizing loan uses the same payment formula, regardless of the lender. Given the loan principal, the periodic interest rate, and the number of payments, the formula solves for the one constant payment that brings the balance to exactly zero on the final payment.",
+          "title": "होम लोन की चुकौती (एमॉर्टाइज़ेशन) कैसे काम करती है",
+          "intro": "हर फ़िक्स्ड-रेट, पूरी तरह चुकौती-योग्य लोन एक ही भुगतान फ़ॉर्मूला उपयोग करता है, चाहे लेंडर कोई भी हो। लोन मूलधन, आवधिक ब्याज दर, और भुगतानों की संख्या को देखते हुए, यह फ़ॉर्मूला उस एक स्थिर भुगतान को हल करता है जो आख़िरी भुगतान पर बकाये को बिल्कुल शून्य कर देता है।",
           "formula": {
-            "label": "Standard Monthly Payment Formula",
+            "label": "मानक मासिक भुगतान फ़ॉर्मूला",
             "formula": "M = P × [ r(1+r)ⁿ ] / [ (1+r)ⁿ − 1 ]",
-            "note": "M is the monthly principal-and-interest payment, P is the loan principal, r is the monthly interest rate (the annual rate divided by 12), and n is the total number of monthly payments (the loan term in years times 12). When r = 0, the formula reduces to simple division: M = P / n."
+            "note": "M मासिक मूलधन-और-ब्याज भुगतान है, P लोन मूलधन है, r मासिक ब्याज दर है (वार्षिक दर को 12 से भाग देकर), और n मासिक भुगतानों की कुल संख्या है (लोन अवधि वर्षों में × 12)। जब r = 0 हो, तो यह फ़ॉर्मूला सामान्य भाग में बदल जाता है: M = P / n।"
           },
           "example": {
-            "title": "Worked Example",
-            "intro": "Take this calculator's own defaults: a $400,000 home with a 20% down payment, a 6.5% annual rate, and a 30-year term.",
+            "title": "हल किया गया उदाहरण",
+            "intro": "इसी कैलकुलेटर के डिफ़ॉल्ट मान लें: $400,000 का घर, 20% डाउन पेमेंट, 6.5% वार्षिक दर, और 30 वर्ष की अवधि।",
             "steps": [
               {
-                "label": "Loan principal (P)",
+                "label": "लोन मूलधन (P)",
                 "value": "$400,000 − $80,000 = $320,000"
               },
               {
-                "label": "Monthly interest rate (r)",
+                "label": "मासिक ब्याज दर (r)",
                 "value": "6.5% / 12 = 0.005417"
               },
               {
-                "label": "Number of payments (n)",
+                "label": "भुगतानों की संख्या (n)",
                 "value": "30 × 12 = 360"
               },
               {
-                "label": "Monthly principal & interest (M)",
+                "label": "मासिक मूलधन और ब्याज (M)",
                 "value": "$2,022.62"
               }
             ],
-            "result": "Over 360 payments, that totals $728,142.36 paid — $320,000 of principal and $408,142.36 of interest, roughly 1.28× the loan amount, before taxes, insurance, HOA, or PMI are even added."
+            "result": "360 भुगतानों में, कुल $728,142.36 चुकाया जाता है — $320,000 मूलधन और $408,142.36 ब्याज, यानी लोन राशि का लगभग 1.28 गुना, वह भी टैक्स, बीमा, HOA या PMI जुड़ने से पहले।"
           }
         },
         "paymentComponents": {
-          "title": "What Makes Up Your Monthly Payment",
-          "intro": "The number a lender actually asks you to pay each month — sometimes called PITI — is rarely just principal and interest. This calculator breaks it into every component that commonly makes up a US mortgage payment:",
+          "title": "आपका मासिक भुगतान किससे बनता है",
+          "intro": "लेंडर हर महीने वास्तव में जो राशि माँगता है — जिसे कभी-कभी PITI कहा जाता है — शायद ही कभी सिर्फ़ मूलधन और ब्याज होती है। यह कैलकुलेटर इसे उन सभी हिस्सों में बाँटता है जो आमतौर पर अमेरिकी होम लोन भुगतान का हिस्सा बनते हैं:",
           "items": [
             {
-              "label": "Principal & Interest (P&I)",
-              "description": "The fixed payment computed by the amortization formula above — the only component that actually retires the loan."
+              "label": "मूलधन और ब्याज (P&I)",
+              "description": "ऊपर दिए गए चुकौती फ़ॉर्मूले से निकाला गया तय भुगतान — यही एकमात्र हिस्सा है जो वास्तव में लोन को ख़त्म करता है।"
             },
             {
-              "label": "Property Tax",
-              "description": "Billed annually by the local government based on the assessed value of the home; most lenders collect a twelfth of the annual bill each month and pay the tax authority directly from an escrow account."
+              "label": "संपत्ति कर",
+              "description": "घर के आकलित मूल्य के आधार पर स्थानीय सरकार द्वारा सालाना बिल किया जाता है; ज़्यादातर लेंडर हर महीने वार्षिक बिल का बारहवाँ हिस्सा वसूलते हैं और एस्क्रो खाते से सीधे टैक्स प्राधिकरण को भुगतान करते हैं।"
             },
             {
-              "label": "Home Insurance",
-              "description": "Hazard insurance protecting the physical structure, required by virtually every lender as a condition of the loan and typically collected monthly through the same escrow account as property tax."
+              "label": "होम इंश्योरेंस",
+              "description": "भौतिक संरचना की सुरक्षा करने वाला हैज़र्ड इंश्योरेंस, जिसे लगभग हर लेंडर लोन की शर्त के रूप में ज़रूरी बताता है और आमतौर पर संपत्ति कर वाले उसी एस्क्रो खाते से हर महीने वसूला जाता है।"
             },
             {
-              "label": "HOA Fees",
-              "description": "A due paid directly to a homeowners' association when the property belongs to one — not collected by the lender, but included here because it's a real recurring cost of owning the home."
+              "label": "HOA शुल्क",
+              "description": "जब संपत्ति किसी होमओनर्स एसोसिएशन से जुड़ी हो, तो सीधे उसे चुकाया जाने वाला शुल्क — यह लेंडर द्वारा नहीं वसूला जाता, लेकिन यहाँ शामिल है क्योंकि यह घर के मालिक होने की एक वास्तविक आवर्ती लागत है।"
             },
             {
-              "label": "Private Mortgage Insurance (PMI)",
-              "description": "Required on most conventional loans when the down payment is below 20%; it protects the lender, not the borrower, against default — see below for exactly when it can be removed."
+              "label": "प्राइवेट मॉर्गेज इंश्योरेंस (PMI)",
+              "description": "ज़्यादातर पारंपरिक लोन पर तब ज़रूरी होता है जब डाउन पेमेंट 20% से कम हो; यह उधारकर्ता को नहीं, बल्कि लेंडर को डिफ़ॉल्ट से बचाता है — यह ठीक कब हटाया जा सकता है, इसके लिए नीचे देखें।"
             }
           ]
         },
         "pmi": {
-          "title": "Private Mortgage Insurance: What It Is and How to Remove It",
-          "intro": "PMI isn't an optional add-on the borrower chooses — on a conventional loan, a lender is required to charge it whenever the down payment is below 20% (equivalently, the loan-to-value ratio is above 80%), because it protects the lender's exposure if the borrower defaults early, when equity is thin. Two exact thresholds are set by name in US federal law, the Homeowners Protection Act of 1998 (12 U.S.C. § 4902):",
+          "title": "प्राइवेट मॉर्गेज इंश्योरेंस: यह क्या है और इसे कैसे हटाएँ",
+          "intro": "PMI कोई वैकल्पिक ऐड-ऑन नहीं है जिसे उधारकर्ता चुनता है — पारंपरिक लोन पर, लेंडर के लिए यह वसूलना ज़रूरी होता है जब भी डाउन पेमेंट 20% से कम हो (यानी लोन-टू-वैल्यू अनुपात 80% से अधिक हो), क्योंकि यह लेंडर के जोखिम को सुरक्षित रखता है अगर उधारकर्ता जल्दी डिफ़ॉल्ट करता है, जब इक्विटी कम होती है। दो सटीक सीमाएँ अमेरिकी संघीय क़ानून, Homeowners Protection Act of 1998 (12 U.S.C. § 4902), में नाम से तय हैं:",
           "thresholds": {
             "rows": [
               {
-                "label": "Borrower-Requested Cancellation",
-                "threshold": "80% of original value",
-                "note": "Once your scheduled balance is projected to reach 80% of the home's original value, you can submit a written request to your servicer to cancel PMI, provided your payment history is current (12 U.S.C. § 4902(a))."
+                "label": "उधारकर्ता-अनुरोधित रद्दीकरण",
+                "threshold": "मूल मूल्य का 80%",
+                "note": "एक बार जब आपका निर्धारित बकाया घर के मूल मूल्य के 80% तक पहुँचने का अनुमान हो, तो आप PMI रद्द करने के लिए अपने सर्विसर को लिखित अनुरोध भेज सकते हैं, बशर्ते आपका भुगतान इतिहास नियमित हो (12 U.S.C. § 4902(a))।"
               },
               {
-                "label": "Automatic Termination",
-                "threshold": "78% of original value",
-                "note": "Even if you never ask, the servicer is legally required to automatically terminate PMI once your balance is first scheduled to reach 78% of the original value, as long as payments are current (12 U.S.C. § 4902(b))."
+                "label": "स्वचालित समाप्ति",
+                "threshold": "मूल मूल्य का 78%",
+                "note": "अगर आप कभी अनुरोध नहीं भी करते, तो भी सर्विसर क़ानूनी रूप से बाध्य है कि जैसे ही आपका बकाया पहली बार मूल मूल्य के 78% तक पहुँचने का निर्धारित हो, वह PMI को स्वचालित रूप से समाप्त कर दे, बशर्ते भुगतान नियमित हों (12 U.S.C. § 4902(b))।"
               }
             ]
           },
-          "note": "Both thresholds are based on the home's original value and the loan's original amortization schedule — not on extra payments or market appreciation, unless you separately request a new appraisal-based cancellation. This calculator's “PMI Removal” estimate reflects the scheduled 80% threshold, adjusted for any extra monthly payment you've entered."
+          "note": "दोनों सीमाएँ घर के मूल मूल्य और लोन की मूल चुकौती अनुसूची पर आधारित हैं — न कि अतिरिक्त भुगतानों या बाज़ार में मूल्यवृद्धि पर, जब तक कि आप अलग से नई मूल्यांकन-आधारित रद्दीकरण का अनुरोध न करें। इस कैलकुलेटर का \"PMI हटना\" अनुमान निर्धारित 80% सीमा को दर्शाता है, जिसे आपके दर्ज किए गए किसी भी अतिरिक्त मासिक भुगतान के अनुसार समायोजित किया गया है।"
         },
         "extraPayments": {
-          "title": "The Real Impact of Paying a Little Extra Each Month",
-          "intro": "Because interest is charged only on the remaining balance, every extra dollar applied to principal today stops accruing interest for every remaining month of the loan — which is why even a modest recurring overpayment compounds into a disproportionately large reduction in total interest and loan term.",
+          "title": "हर महीने थोड़ा अतिरिक्त चुकाने का वास्तविक असर",
+          "intro": "चूँकि ब्याज केवल बचे हुए बकाये पर लगता है, इसलिए आज मूलधन में लगाया गया हर अतिरिक्त डॉलर लोन के बचे हुए हर महीने के लिए ब्याज लगना बंद कर देता है — यही वजह है कि एक मामूली नियमित अतिरिक्त भुगतान भी कुल ब्याज और लोन अवधि में असंगत रूप से बड़ी कमी में बदल जाता है।",
           "example": {
-            "title": "Worked Example",
-            "intro": "Using the same $320,000 loan at 6.5% over 30 years, adding just $200 to every monthly payment changes the outcome substantially:",
+            "title": "हल किया गया उदाहरण",
+            "intro": "उसी $320,000 के लोन को 6.5% पर 30 वर्षों के लिए लेते हुए, हर मासिक भुगतान में सिर्फ़ $200 जोड़ने से परिणाम काफ़ी बदल जाता है:",
             "steps": [
               {
-                "label": "Standard payoff time",
-                "value": "360 months (30 years)"
+                "label": "मानक चुकौती अवधि",
+                "value": "360 महीने (30 वर्ष)"
               },
               {
-                "label": "Payoff time with +$200/month",
-                "value": "281 months (23 years, 5 months)"
+                "label": "+$200/माह के साथ चुकौती अवधि",
+                "value": "281 महीने (23 वर्ष, 5 महीने)"
               },
               {
-                "label": "Time saved",
-                "value": "79 months (6 years, 7 months)"
+                "label": "बचा हुआ समय",
+                "value": "79 महीने (6 वर्ष, 7 महीने)"
               },
               {
-                "label": "Standard total interest",
+                "label": "मानक कुल ब्याज",
                 "value": "$408,142.36"
               },
               {
-                "label": "Total interest with +$200/month",
+                "label": "+$200/माह के साथ कुल ब्याज",
                 "value": "$302,713.69"
               }
             ],
-            "result": "That single, consistent $200/month habit saves $105,428.67 in interest — over 500 times the $200 itself, repeated across the shortened loan term."
+            "result": "यह एक अकेली, लगातार $200/माह की आदत ब्याज में $105,428.67 की बचत करती है — यानी छोटी हुई लोन अवधि में दोहराए जाने पर, ख़ुद $200 से 500 गुना से भी ज़्यादा।"
           }
         },
         "rateTypes": {
-          "title": "Fixed-Rate vs. Adjustable-Rate Mortgages",
-          "intro": "This calculator models a fixed-rate mortgage, the dominant structure for US home loans, but it's worth understanding the alternative you'll encounter when comparing loan offers:",
+          "title": "फ़िक्स्ड-रेट बनाम एडजस्टेबल-रेट होम लोन",
+          "intro": "यह कैलकुलेटर एक फ़िक्स्ड-रेट होम लोन का मॉडल बनाता है, जो अमेरिकी होम लोन का प्रमुख ढाँचा है, लेकिन लोन ऑफ़र की तुलना करते समय जिस विकल्प का सामना आप करेंगे, उसे समझना भी ज़रूरी है:",
           "fixed": {
-            "title": "Fixed-Rate Mortgage (FRM)",
-            "paragraph": "The interest rate is locked for the entire loan term, so the principal-and-interest portion of the payment never changes — only the escrowed taxes, insurance, and PMI can shift the total bill over time. This predictability is why fixed-rate loans, especially the 30-year term, have been the default choice for most US homebuyers since the government-backed reforms of the 1930s standardized amortizing mortgages."
+            "title": "फ़िक्स्ड-रेट मॉर्गेज (FRM)",
+            "paragraph": "पूरी लोन अवधि के लिए ब्याज दर तय रहती है, इसलिए भुगतान का मूलधन-और-ब्याज हिस्सा कभी नहीं बदलता — केवल एस्क्रो में जाने वाले टैक्स, बीमा और PMI ही कुल बिल को समय के साथ बदल सकते हैं। यही अनुमेयता इस बात की वजह है कि फ़िक्स्ड-रेट लोन, ख़ासकर 30-वर्षीय अवधि, 1930 के दशक के सरकार-समर्थित सुधारों के बाद से जिन्होंने चुकौती-योग्य होम लोन को मानकीकृत किया, ज़्यादातर अमेरिकी घर ख़रीदारों की पहली पसंद रहे हैं।"
           },
           "adjustable": {
-            "title": "Adjustable-Rate Mortgage (ARM)",
-            "paragraph": "The rate is fixed for an initial period (commonly 5, 7, or 10 years, as in a “7/1 ARM”), then adjusts periodically based on a reference index plus a lender margin, subject to caps that limit how much it can move at each adjustment and over the life of the loan. ARMs often start below prevailing fixed rates, trading long-term predictability for a lower initial payment."
+            "title": "एडजस्टेबल-रेट मॉर्गेज (ARM)",
+            "paragraph": "दर एक शुरुआती अवधि के लिए तय रहती है (आमतौर पर 5, 7 या 10 वर्ष, जैसे \"7/1 ARM\" में), फिर एक संदर्भ सूचकांक और लेंडर के मार्जिन के आधार पर समय-समय पर बदलती है, जो हर बदलाव पर और पूरी लोन अवधि में कितनी बदल सकती है, इस पर सीमाएँ लागू होती हैं। ARM अक्सर मौजूदा फ़िक्स्ड दरों से कम पर शुरू होते हैं, यानी लंबी अवधि की अनुमेयता के बदले शुरुआती भुगतान कम रहता है।"
           }
         },
         "limitations": {
-          "title": "Limitations of This Calculator",
-          "paragraph1": "This tool assumes a fixed interest rate for the full term, a home value that doesn't change, and property tax, insurance, and HOA amounts that stay constant in nominal terms — none of which is guaranteed in practice. Property taxes are typically reassessed periodically, insurance premiums are repriced at renewal, and PMI can sometimes be removed earlier via a new appraisal showing sufficient value gain, none of which this calculator can predict.",
-          "paragraph2": "It also excludes one-time costs that are very real parts of buying a home but aren't part of the recurring monthly payment: closing costs, loan origination fees, title insurance, and any upfront mortgage insurance premium some loan programs charge. Treat every figure here as a planning estimate, not a lender's official Loan Estimate or Closing Disclosure."
+          "title": "इस कैलकुलेटर की सीमाएँ",
+          "paragraph1": "यह टूल पूरी अवधि के लिए एक स्थिर ब्याज दर, न बदलने वाला घर का मूल्य, और नाममात्र रूप से स्थिर रहने वाली संपत्ति कर, बीमा और HOA राशियाँ मानकर चलता है — व्यवहार में इनमें से कुछ भी सुनिश्चित नहीं है। संपत्ति कर आमतौर पर समय-समय पर फिर से आकलित होता है, बीमा प्रीमियम नवीनीकरण पर फिर से तय होते हैं, और PMI कभी-कभी नए मूल्यांकन से पर्याप्त मूल्यवृद्धि दिखने पर जल्दी भी हट सकता है — इनमें से कुछ भी यह कैलकुलेटर पहले से नहीं बता सकता।",
+          "paragraph2": "यह उन एकबारगी लागतों को भी शामिल नहीं करता जो घर ख़रीदने का एक बहुत वास्तविक हिस्सा हैं लेकिन आवर्ती मासिक भुगतान का हिस्सा नहीं हैं: क्लोज़िंग कॉस्ट, लोन ओरिजिनेशन फ़ीस, टाइटल इंश्योरेंस, और कुछ लोन प्रोग्राम जो अग्रिम मॉर्गेज इंश्योरेंस प्रीमियम वसूलते हैं। यहाँ दिए गए हर आँकड़े को एक योजना अनुमान मानें, न कि लेंडर का आधिकारिक Loan Estimate या Closing Disclosure।"
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why does my total interest look larger than my loan amount?",
-              "answer": "On long terms at typical rates, this is normal, not an error: a 30-year loan at 6.5% pays roughly 1.28× the principal in interest by the time the amortization example above finishes. Interest is charged on whatever balance remains, and early in the loan almost the entire balance remains, so a large share of your early payments is interest rather than principal."
+              "question": "मेरा कुल ब्याज मेरी लोन राशि से ज़्यादा क्यों दिख रहा है?",
+              "answer": "लंबी अवधि और सामान्य दरों पर, यह सामान्य बात है, कोई ग़लती नहीं: 6.5% पर एक 30-वर्षीय लोन ऊपर दिए गए चुकौती उदाहरण के पूरा होने तक मूलधन का लगभग 1.28 गुना ब्याज के रूप में चुकाता है। ब्याज बचे हुए बकाये पर लगता है, और लोन की शुरुआत में लगभग पूरा बकाया बचा होता है, इसलिए आपके शुरुआती भुगतानों का बड़ा हिस्सा मूलधन के बजाय ब्याज होता है।"
             },
             {
-              "question": "Does this calculator include closing costs?",
-              "answer": "No. It computes only the recurring monthly payment components — principal, interest, taxes, insurance, HOA, and PMI. One-time costs like closing costs, appraisal fees, and title insurance are outside this tool's scope; see Limitations above."
+              "question": "क्या यह कैलकुलेटर क्लोज़िंग कॉस्ट शामिल करता है?",
+              "answer": "नहीं। यह केवल आवर्ती मासिक भुगतान के हिस्सों की गणना करता है — मूलधन, ब्याज, टैक्स, बीमा, HOA और PMI। क्लोज़िंग कॉस्ट, मूल्यांकन शुल्क और टाइटल इंश्योरेंस जैसी एकबारगी लागतें इस टूल के दायरे से बाहर हैं; ऊपर दी गई सीमाएँ देखें।"
             },
             {
-              "question": "Is PMI the same as homeowners insurance?",
-              "answer": "No — they protect different parties. Homeowners insurance protects you against physical damage to the home. PMI protects only the lender against your default, and it doesn't pay out to you or repair anything if you file a claim."
+              "question": "क्या PMI होमओनर्स इंश्योरेंस जैसा ही है?",
+              "answer": "नहीं — ये अलग-अलग पक्षों की सुरक्षा करते हैं। होमओनर्स इंश्योरेंस घर को हुए भौतिक नुक़सान से आपकी सुरक्षा करता है। PMI केवल आपके डिफ़ॉल्ट से लेंडर की सुरक्षा करता है, और अगर आप दावा करते हैं तो यह न तो आपको भुगतान करता है और न ही कुछ ठीक करता है।"
             },
             {
-              "question": "Can I remove PMI before the scheduled 80% threshold?",
-              "answer": "Often, yes. If your home's value has risen since purchase — through appreciation or improvements — you can typically request a new appraisal and ask your servicer to cancel PMI once the current, appraised loan-to-value ratio reaches 80%, without waiting for the scheduled balance to get there on its own. This calculator only models the scheduled path, since it can't predict future appraisals."
+              "question": "क्या मैं निर्धारित 80% सीमा से पहले PMI हटा सकता हूँ?",
+              "answer": "अक्सर, हाँ। अगर ख़रीद के बाद से आपके घर की क़ीमत बढ़ी है — चाहे मूल्यवृद्धि से या सुधारों से — तो आप आमतौर पर एक नए मूल्यांकन का अनुरोध कर सकते हैं और मौजूदा, मूल्यांकित लोन-टू-वैल्यू अनुपात 80% तक पहुँचते ही अपने सर्विसर से PMI रद्द करने को कह सकते हैं, बिना यह इंतज़ार किए कि निर्धारित बकाया अपने-आप वहाँ तक पहुँचे। यह कैलकुलेटर केवल निर्धारित रास्ते का मॉडल बनाता है, क्योंकि यह भविष्य के मूल्यांकनों का अनुमान नहीं लगा सकता।"
             },
             {
-              "question": "Why do extra payments save so much more interest than their dollar amount?",
-              "answer": "Because interest compounds on the balance every month for the remaining life of the loan. A dollar of extra principal paid in year 2 stops accruing interest for the other 28 years it would otherwise have remained outstanding — see the worked example above."
+              "question": "अतिरिक्त भुगतान अपनी डॉलर राशि से इतनी ज़्यादा ब्याज बचत क्यों करते हैं?",
+              "answer": "क्योंकि ब्याज लोन की बची हुई पूरी अवधि में हर महीने बकाये पर चक्रवृद्धि होता है। दूसरे वर्ष में चुकाया गया अतिरिक्त मूलधन का एक डॉलर बाक़ी बचे 28 वर्षों के लिए ब्याज लगना बंद कर देता है, जितने समय तक वह अन्यथा बकाया रहता — ऊपर दिया गया हल किया हुआ उदाहरण देखें।"
             },
             {
-              "question": "What's the difference between loan-to-value (LTV) and down payment percent?",
-              "answer": "They're complementary: LTV is the loan amount divided by the home price, and down payment percent is the down payment divided by the home price. A 20% down payment corresponds exactly to an 80% LTV — the same line lenders use to decide whether PMI applies."
+              "question": "लोन-टू-वैल्यू (LTV) और डाउन पेमेंट प्रतिशत में क्या अंतर है?",
+              "answer": "ये एक-दूसरे के पूरक हैं: LTV लोन राशि को घर की कीमत से भाग देकर मिलता है, और डाउन पेमेंट प्रतिशत डाउन पेमेंट को घर की कीमत से भाग देकर मिलता है। 20% डाउन पेमेंट ठीक 80% LTV के बराबर होता है — यही वह सीमा है जिसे लेंडर PMI लागू होने या न होने का फ़ैसला करने के लिए उपयोग करते हैं।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind the Tool: The History and Standards Behind the Modern Mortgage",
+          "title": "टूल के पीछे: आधुनिक होम लोन के पीछे का इतिहास और मानक",
           "history": {
-            "title": "From Balloon Payments to the Amortized Mortgage: The Reforms of 1933–1934",
-            "paragraph": "Before the 1930s, the typical US home loan looked nothing like today's mortgage: it ran just 5 to 10 years, charged interest-only payments, and ended in a single “balloon” payment of the full principal — a structure that triggered a wave of foreclosures once the Great Depression made refinancing that balloon impossible for millions of homeowners. Congress responded on June 13, 1933 by creating the Home Owners' Loan Corporation (HOLC), which refinanced roughly one million troubled mortgages between 1933 and 1936 using a new structure: a longer, self-amortizing loan in which every payment stayed level and gradually retired the entire principal, eliminating the balloon altogether. The National Housing Act of 1934 then created the Federal Housing Administration (FHA), which insured lenders against default and extended the amortizing structure to 25- and 30-year terms — the direct ancestor of the fixed-rate mortgage this calculator models."
+            "title": "बैलून भुगतान से चुकौती-योग्य होम लोन तक: 1933–1934 के सुधार",
+            "paragraph": "1930 के दशक से पहले, सामान्य अमेरिकी होम लोन आज के होम लोन जैसा बिल्कुल नहीं दिखता था: यह केवल 5 से 10 साल तक चलता था, केवल-ब्याज भुगतान वसूलता था, और पूरे मूलधन के एक अकेले \"बैलून\" भुगतान पर ख़त्म होता था — यह ढाँचा फ़ोरक्लोज़र की एक लहर लेकर आया जब ग्रेट डिप्रेशन ने लाखों घर मालिकों के लिए उस बैलून को रीफ़ाइनेंस करना असंभव बना दिया। कांग्रेस ने 13 जून 1933 को Home Owners' Loan Corporation (HOLC) बनाकर जवाब दिया, जिसने 1933 से 1936 के बीच एक नए ढाँचे का उपयोग करके लगभग दस लाख परेशानी में फँसे होम लोन को रीफ़ाइनेंस किया: एक लंबा, स्व-चुकौती-योग्य लोन जिसमें हर भुगतान समान रहता था और धीरे-धीरे पूरा मूलधन ख़त्म कर देता था, जिससे बैलून पूरी तरह ख़त्म हो गया। इसके बाद National Housing Act of 1934 ने Federal Housing Administration (FHA) बनाया, जिसने लेंडरों को डिफ़ॉल्ट से बीमित किया और चुकौती-योग्य ढाँचे को 25 और 30 वर्षों की अवधि तक बढ़ाया — यही इस कैलकुलेटर द्वारा मॉडल किए गए फ़िक्स्ड-रेट होम लोन का सीधा पूर्वज है।"
           },
           "equipment": {
-            "title": "The Standard Behind PMI Removal: The Homeowners Protection Act of 1998",
-            "paragraph": "The exact thresholds this calculator uses to estimate when PMI can come off aren't a rule of thumb — they're set in US federal law. The Homeowners Protection Act of 1998 (12 U.S.C. § 4902), signed July 29, 1998 and effective July 29, 1999, requires a servicer to automatically terminate PMI on a conventional loan once the principal balance is first scheduled to reach 78% of the property's original value (§ 4902(b)), and separately gives borrowers in good standing the right to request cancellation once the balance is scheduled to reach 80% (§ 4902(a)) — the same two figures behind this tool's “PMI Removal” estimate."
+            "title": "PMI हटाने के पीछे का मानक: Homeowners Protection Act of 1998",
+            "paragraph": "यह कैलकुलेटर PMI कब हट सकता है इसका अनुमान लगाने के लिए जिन सटीक सीमाओं का उपयोग करता है, वे कोई अंदाज़ा नहीं हैं — वे अमेरिकी संघीय क़ानून में तय हैं। Homeowners Protection Act of 1998 (12 U.S.C. § 4902), जिस पर 29 जुलाई 1998 को हस्ताक्षर हुए और जो 29 जुलाई 1999 से लागू हुआ, सर्विसर को यह ज़रूरी बनाता है कि जैसे ही किसी पारंपरिक लोन का मूलधन बकाया पहली बार संपत्ति के मूल मूल्य के 78% तक पहुँचने का निर्धारित हो, वह PMI को स्वचालित रूप से समाप्त कर दे (§ 4902(b)), और अलग से अच्छी स्थिति वाले उधारकर्ताओं को यह अधिकार देता है कि बकाया 80% तक पहुँचने का निर्धारित होते ही वे रद्दीकरण का अनुरोध कर सकें (§ 4902(a)) — यही दो आँकड़े इस टूल के \"PMI हटना\" अनुमान के पीछे हैं।"
           },
           "modernDevelopments": {
-            "title": "Modern Mortgage Technology: Automated Valuation and Digital Closings",
-            "paragraph": "Two shifts have reshaped mortgage underwriting and closing in recent years. Automated valuation models (AVMs) now estimate a property's value from county records, comparable sales, and increasingly satellite imagery and computer vision, letting many lenders waive an in-person appraisal for well-documented properties under roughly $250,000–$400,000. And remote online notarization (RON) — now legally recognized in more than 40 US states — lets a borrower sign closing documents in front of a notary over live video instead of at an in-person closing table. Industry surveys report a majority of borrowers now upload documents and e-sign through digital portals rather than in person, a shift that has measurably shortened the closing timeline this calculator's numbers ultimately feed into."
+            "title": "आधुनिक होम लोन तकनीक: स्वचालित मूल्यांकन और डिजिटल क्लोज़िंग",
+            "paragraph": "हाल के वर्षों में दो बदलावों ने होम लोन अंडरराइटिंग और क्लोज़िंग को नया रूप दिया है। स्वचालित मूल्यांकन मॉडल (AVM) अब काउंटी रिकॉर्ड, तुलनीय बिक्री, और तेज़ी से सैटेलाइट इमेजरी व कंप्यूटर विज़न से किसी संपत्ति का मूल्य अनुमानित करते हैं, जिससे कई लेंडर लगभग $250,000–$400,000 से कम की अच्छी तरह दस्तावेज़ीकृत संपत्तियों के लिए व्यक्तिगत मूल्यांकन को छोड़ सकते हैं। और रिमोट ऑनलाइन नोटराइज़ेशन (RON) — जो अब 40 से अधिक अमेरिकी राज्यों में क़ानूनी रूप से मान्य है — किसी उधारकर्ता को व्यक्तिगत रूप से क्लोज़िंग टेबल पर जाने के बजाय लाइव वीडियो पर किसी नोटरी के सामने क्लोज़िंग दस्तावेज़ों पर हस्ताक्षर करने देता है। उद्योग सर्वेक्षण बताते हैं कि अब अधिकतर उधारकर्ता व्यक्तिगत रूप से जाने के बजाय डिजिटल पोर्टल के ज़रिए दस्तावेज़ अपलोड करते हैं और ई-हस्ताक्षर करते हैं — यह बदलाव इस कैलकुलेटर के आँकड़ों में जाने वाली क्लोज़िंग समयसीमा को मापने योग्य रूप से छोटा कर चुका है।"
           },
           "academicPath": {
-            "title": "Studying This Field: Finance and Real Estate Economics",
-            "intro": "Pricing a mortgage — the interest formula, amortization mechanics, and PMI rules this calculator applies — is core material within finance, specifically real estate finance and financial economics. QS World University Rankings by Subject does not publish a standalone “Real Estate” category, so the closest standalone match is Accounting & Finance — here are the top 5 globally in QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "यह क्षेत्र पढ़ना: फ़ाइनेंस और रियल एस्टेट अर्थशास्त्र",
+            "intro": "होम लोन की क़ीमत तय करना — यानी ब्याज फ़ॉर्मूला, चुकौती की यांत्रिकी, और PMI के नियम जो यह कैलकुलेटर लागू करता है — फ़ाइनेंस, विशेष रूप से रियल एस्टेट फ़ाइनेंस और वित्तीय अर्थशास्त्र का मुख्य विषय है। QS World University Rankings by Subject अलग से कोई \"Real Estate\" श्रेणी प्रकाशित नहीं करता, इसलिए सबसे नज़दीकी अलग श्रेणी Accounting & Finance है — QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 यहाँ दिए गए हैं, साथ ही एक क्षेत्रीय विकल्प भी:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
-                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+                "online": "ज़्यादातर ऑनलाइन — Harvard Extension School के अनुसार उसकी Finance ग्रेजुएट डिग्री के 12 में से 11 ज़रूरी कोर्स ऑनलाइन पूरे किए जा सकते हैं, कम से कम एक कोर्स के लिए कैंपस उपस्थिति ज़रूरी है।"
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://mitsloan.mit.edu/mfin",
-                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+                "online": "नहीं — MIT Sloan का Master of Finance एक पूर्णकालिक, इन-पर्सन प्रोग्राम है (12- या 18-महीने के ट्रैक), इसके आधिकारिक पेजों पर कोई दूरस्थ शिक्षा विकल्प सूचीबद्ध नहीं है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.gsb.stanford.edu/programs/online-programs",
-                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+                "online": "नहीं — Stanford GSB की फ़ाइनेंस ट्रेनिंग इसके इन-पर्सन MBA के ज़रिए दी जाती है; स्कूल के अपने ऑनलाइन-प्रोग्राम पेज पर केवल गैर-डिग्री एग्ज़ीक्यूटिव कोर्स सूचीबद्ध हैं, कोई पूर्ण फ़ाइनेंस डिग्री नहीं।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
-                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time “MSc in Applied Financial Economics” (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+                "online": "पूरी तरह ऑनलाइन नहीं — Oxford का MSc in Financial Economics एक पूर्णकालिक, इन-पर्सन 9-महीने का प्रोग्राम है; सितंबर 2026 से शुरू होने वाला एक नया अंशकालिक \"MSc in Applied Financial Economics\" ऑनलाइन लर्निंग को Oxford में ज़रूरी इन-पर्सन रेज़िडेंसी के साथ मिलाता है, इसलिए यह भी पूरी तरह दूरस्थ विकल्प नहीं है।"
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.chicagobooth.edu/master-in-finance",
-                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+                "online": "नहीं — Chicago Booth का Master in Finance एक 15-महीने का, इन-पर्सन कोहॉर्ट प्रोग्राम है, जिसकी पहली क्लास 2024 की पतझड़ में शुरू हुई।"
               },
               {
                 "name": "King Saud University (KSU), Riyadh — College of Business Administration",
-                "note": "A leading Saudi university offering a Master of Science in Finance (MSF) through its College of Business Administration.",
+                "note": "एक प्रमुख सऊदी यूनिवर्सिटी जो अपने College of Business Administration के ज़रिए Master of Science in Finance (MSF) प्रदान करती है।",
                 "url": "https://cba.ksu.edu.sa/en/overveiw/MSF",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Bäckman, C., Moran, P., & van Santen, P. (2024). Mortgage Design, Repayment Schedules, and Household Borrowing. FEDS Working Paper No. 2024-077, Board of Governors of the Federal Reserve System.",
-          "note": "Using a Swedish policy change that restricted interest-only mortgages, this study finds that low-initial-payment mortgage designs substantially increase both household borrowing and lifetime interest costs — empirical evidence for why this calculator treats the full amortization schedule, not just the headline rate, as central to what a mortgage actually costs.",
+          "note": "एक स्वीडिश नीति परिवर्तन का उपयोग करते हुए जिसने केवल-ब्याज होम लोन को सीमित कर दिया, यह अध्ययन पाता है कि कम-शुरुआती-भुगतान वाले होम लोन ढाँचे घरेलू उधारी और जीवनभर की ब्याज लागत दोनों को काफ़ी बढ़ा देते हैं — यह इस बात का अनुभवजन्य प्रमाण है कि यह कैलकुलेटर केवल हेडलाइन दर को नहीं, बल्कि पूरी चुकौती अनुसूची को होम लोन की वास्तविक लागत के केंद्र में क्यों मानता है।",
           "doiLabel": "DOI",
           "doi": "10.17016/FEDS.2024.077",
-          "readOriginal": "Read the Original Paper",
+          "readOriginal": "मूल शोधपत्र पढ़ें",
           "url": "https://doi.org/10.17016/FEDS.2024.077"
         }
       },
       "payoffChart": {
-        "title": "Amortization: Principal vs. Interest Over Time",
-        "intro": "Each bar is one year of payments, split into principal (the part that reduces your balance) and interest (the cost of borrowing). Early years lean heavily toward interest; later years flip toward principal. The solid line traces your remaining balance.",
-        "principalLabel": "Principal",
-        "interestLabel": "Interest",
-        "balanceLabel": "Remaining Balance",
-        "standardBalanceLabel": "Standard Schedule (no extra payments)",
-        "totalPrincipalLabel": "Total Principal",
-        "totalInterestLabel": "Total Interest Paid",
-        "pmiNote": "Based on your inputs, PMI could be requested for removal around year {dropYear} (80% loan-to-value) and must be automatically terminated by year {autoYear} (78% loan-to-value) at the latest.",
-        "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs."
+        "title": "चुकौती: समय के साथ मूलधन बनाम ब्याज",
+        "intro": "हर बार एक साल के भुगतान को दर्शाता है, जो मूलधन (जो हिस्सा आपका बकाया घटाता है) और ब्याज (उधार लेने की लागत) में बँटा होता है। शुरुआती वर्षों में ज़्यादातर हिस्सा ब्याज की ओर झुका होता है; बाद के वर्षों में यह मूलधन की ओर पलट जाता है। ठोस रेखा आपके बचे हुए बकाये को दर्शाती है।",
+        "principalLabel": "मूलधन",
+        "interestLabel": "ब्याज",
+        "balanceLabel": "बचा हुआ बकाया",
+        "standardBalanceLabel": "मानक अनुसूची (बिना अतिरिक्त भुगतान)",
+        "totalPrincipalLabel": "कुल मूलधन",
+        "totalInterestLabel": "कुल चुकाया गया ब्याज",
+        "pmiNote": "आपके इनपुट के आधार पर, PMI को लगभग वर्ष {dropYear} (80% लोन-टू-वैल्यू) में हटाने का अनुरोध किया जा सकता है और अधिक से अधिक वर्ष {autoYear} (78% लोन-टू-वैल्यू) तक इसे स्वचालित रूप से समाप्त करना ही होगा।",
+        "pmiNoDropoff": "आपके लोन पर फ़िलहाल PMI लगा है, लेकिन इन इनपुट के साथ हटने का कोई बिंदु अनुमानित नहीं किया जा सका।"
       },
       "amortizationTable": {
-        "title": "Full Monthly Amortization Schedule",
-        "intro": "Every single payment from month 1 to payoff, grouped by year — expand a year to see the principal, interest, and remaining balance for each of its payments, or download the whole schedule as a CSV file.",
-        "yearLabel": "Year {year}",
-        "columnPaymentNumber": "Payment #",
-        "columnYear": "Year",
-        "columnPayment": "Payment",
-        "viewFullTable": "View Full Schedule",
-        "showLess": "Show Less"
+        "title": "पूरी मासिक चुकौती अनुसूची",
+        "intro": "महीना 1 से चुकौती तक का हर एक भुगतान, साल के अनुसार समूहित — किसी साल के हर भुगतान का मूलधन, ब्याज और बचा हुआ बकाया देखने के लिए उसे विस्तृत करें, या पूरी अनुसूची को CSV फ़ाइल के रूप में डाउनलोड करें।",
+        "yearLabel": "वर्ष {year}",
+        "columnPaymentNumber": "भुगतान #",
+        "columnYear": "वर्ष",
+        "columnPayment": "भुगतान",
+        "viewFullTable": "पूरी अनुसूची देखें",
+        "showLess": "कम दिखाएँ"
       },
       "scenarioComparison": {
-        "title": "Compare Rates and Loan Terms Side by Side",
-        "intro": "Your current numbers stay fixed as the baseline — try a different rate or term in the two scenarios below to see exactly how much it moves your payment, total interest, and payoff time.",
-        "baseLabel": "Your Current Scenario",
-        "baseHint": "From the form above — home price, down payment, taxes, insurance, HOA, PMI, and extra payment stay the same across all three scenarios.",
-        "scenarioLabel": "Scenario {letter}",
-        "rateLabel": "Rate (%)",
-        "termLabel": "Term (yrs)",
-        "rowMonthlyPI": "Monthly Principal & Interest",
-        "rowMonthlyTotal": "Total Monthly Payment",
-        "rowTotalInterest": "Total Interest",
-        "rowTotalCost": "Total Cost",
-        "rowPayoffTime": "Payoff Time",
-        "deltaNone": "No change",
-        "invalidScenario": "Enter a rate between 0–25% and a term between 1–50 years.",
-        "note": "Scenarios B and C use your current home price, down payment, and other costs — only the rate and term change, so you can isolate exactly what each one costs you."
+        "title": "दरों और लोन अवधियों की साथ-साथ तुलना करें",
+        "intro": "आपके मौजूदा आँकड़े बेसलाइन के रूप में स्थिर रहते हैं — नीचे दिए गए दो परिदृश्यों में अलग दर या अवधि आज़माएँ यह देखने के लिए कि इससे आपका भुगतान, कुल ब्याज और चुकौती अवधि ठीक कितनी बदलती है।",
+        "baseLabel": "आपका मौजूदा परिदृश्य",
+        "baseHint": "ऊपर दिए गए फ़ॉर्म से — घर की कीमत, डाउन पेमेंट, टैक्स, बीमा, HOA और अतिरिक्त भुगतान तीनों परिदृश्यों में समान रहते हैं।",
+        "scenarioLabel": "परिदृश्य {letter}",
+        "rateLabel": "दर (%)",
+        "termLabel": "अवधि (वर्ष)",
+        "rowMonthlyPI": "मासिक मूलधन और ब्याज",
+        "rowMonthlyTotal": "कुल मासिक भुगतान",
+        "rowTotalInterest": "कुल ब्याज",
+        "rowTotalCost": "कुल लागत",
+        "rowPayoffTime": "चुकौती अवधि",
+        "deltaNone": "कोई बदलाव नहीं",
+        "invalidScenario": "0–25% के बीच दर और 1–50 वर्ष के बीच अवधि दर्ज करें।",
+        "note": "परिदृश्य B और C आपकी मौजूदा घर की कीमत, डाउन पेमेंट और अन्य लागतों का उपयोग करते हैं — केवल दर और अवधि बदलती है, ताकि आप ठीक-ठीक देख सकें कि हर एक की लागत आपको कितनी पड़ती है।"
       },
       "biweekly": {
-        "title": "Bi-Weekly Payment Plan",
-        "intro": "Pay half your monthly principal-and-interest payment every two weeks instead of one full payment monthly. A year has 52 weeks, so that's 26 half-payments — the equivalent of 13 monthly payments instead of 12 — which retires the loan faster and cuts total interest without changing your rate.",
-        "biweeklyPaymentLabel": "Bi-Weekly Payment",
-        "interestSavedLabel": "Interest Saved",
-        "interestSavedNote": "Interest avoided compared to the standard monthly schedule, from the extra principal reduction of the 13th annual payment.",
-        "timeSavedLabel": "Time Saved",
-        "rowPaymentAmount": "Payment Amount",
-        "rowPaymentsPerYear": "Payments per Year",
-        "rowPayoffTime": "Payoff Time",
-        "rowTotalInterest": "Total Interest",
-        "rowTotalCost": "Total Cost",
-        "standardLabel": "Standard Monthly",
-        "biweeklyLabel": "Accelerated Bi-Weekly",
-        "columnPaymentNumber": "Payment #",
-        "columnPayment": "Payment",
-        "pmiNote": "Under this plan, PMI could be requested for removal around payment #{period} and must be automatically terminated by payment #{autoPeriod} at the latest.",
-        "note": "This assumes the servicer applies each bi-weekly payment straight to principal and interest as it arrives. Some servicers instead hold payments in a suspense account until a full monthly amount accrues, which erases this benefit — checking the servicer's policy clarifies whether it applies here, or the same effect can be reproduced independently of it by simply adding one-twelfth of the monthly payment to every regular monthly payment."
+        "title": "पाक्षिक (द्वि-साप्ताहिक) भुगतान योजना",
+        "intro": "हर दो हफ़्ते में अपने मासिक मूलधन-और-ब्याज भुगतान का आधा चुकाएँ, बजाय महीने में एक पूरा भुगतान करने के। एक साल में 52 हफ़्ते होते हैं, तो यह 26 आधे-भुगतान बनते हैं — यानी 12 के बजाय 13 मासिक भुगतानों के बराबर — जो दर बदले बिना लोन को तेज़ी से ख़त्म करता है और कुल ब्याज घटाता है।",
+        "biweeklyPaymentLabel": "पाक्षिक भुगतान",
+        "interestSavedLabel": "बची हुई ब्याज",
+        "interestSavedNote": "13वें वार्षिक भुगतान से मिलने वाली अतिरिक्त मूलधन कमी की वजह से, मानक मासिक अनुसूची की तुलना में बची हुई ब्याज।",
+        "timeSavedLabel": "बचा हुआ समय",
+        "rowPaymentAmount": "भुगतान राशि",
+        "rowPaymentsPerYear": "प्रति वर्ष भुगतान",
+        "rowPayoffTime": "चुकौती अवधि",
+        "rowTotalInterest": "कुल ब्याज",
+        "rowTotalCost": "कुल लागत",
+        "standardLabel": "मानक मासिक",
+        "biweeklyLabel": "त्वरित पाक्षिक",
+        "columnPaymentNumber": "भुगतान #",
+        "columnPayment": "भुगतान",
+        "pmiNote": "इस योजना के तहत, PMI को लगभग भुगतान #{period} पर हटाने का अनुरोध किया जा सकता है और अधिक से अधिक भुगतान #{autoPeriod} तक इसे स्वचालित रूप से समाप्त करना ही होगा।",
+        "note": "यह मानकर चला गया है कि सर्विसर हर पाक्षिक भुगतान को आते ही सीधे मूलधन और ब्याज पर लागू करता है। कुछ सर्विसर इसके बजाय भुगतानों को एक सस्पेंस खाते में तब तक रोकते हैं जब तक पूरी मासिक राशि जमा न हो जाए, जिससे यह फ़ायदा ख़त्म हो जाता है — सर्विसर की नीति जाँचने से यह स्पष्ट होता है कि यह यहाँ लागू होता है या नहीं, या इसी असर को स्वतंत्र रूप से हर नियमित मासिक भुगतान में मासिक भुगतान का बारहवाँ हिस्सा जोड़कर भी हासिल किया जा सकता है।"
       }
     },
     "crypto-converter": {
