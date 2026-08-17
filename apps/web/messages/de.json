@@ -5507,188 +5507,188 @@
       }
     },
     "csv-json-converter": {
-      "title": "CSV ↔ JSON Converter",
-      "description": "Convert CSV to JSON or JSON back to CSV, with delimiter auto-detection, an optional header row, and automatic flattening of nested objects.",
+      "title": "CSV-↔-JSON-Konverter",
+      "description": "Konvertieren Sie CSV zu JSON oder JSON zurück zu CSV, mit automatischer Trennzeichenerkennung, optionaler Kopfzeile und automatischer Abflachung verschachtelter Objekte.",
       "nav": {
-        "tool": "Converter",
+        "tool": "Konverter",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Werkzeug"
       },
       "aboveFold": {
-        "resultTitle": "Result",
-        "placeholder": "Enter CSV or JSON on the left to see the converted result here.",
+        "resultTitle": "Ergebnis",
+        "placeholder": "Geben Sie links CSV oder JSON ein, um hier das konvertierte Ergebnis zu sehen.",
         "comparison": {
           "title": "CSV vs. JSON",
-          "intro": "Neither format is objectively better — they're built for different shapes of data.",
+          "intro": "Kein Format ist objektiv besser — sie sind für unterschiedliche Datenformen gemacht.",
           "rows": [
             {
-              "aspect": "Best for",
-              "csv": "Flat, tabular data — spreadsheets, database exports.",
-              "json": "Nested or hierarchical data — API responses, config files."
+              "aspect": "Am besten für",
+              "csv": "Flache, tabellarische Daten — Tabellenkalkulationen, Datenbankexporte.",
+              "json": "Verschachtelte oder hierarchische Daten — API-Antworten, Konfigurationsdateien."
             },
             {
-              "aspect": "File size",
-              "csv": "Smaller for the same tabular data — no repeated key names.",
-              "json": "Larger — every object repeats its own keys."
+              "aspect": "Dateigröße",
+              "csv": "Kleiner bei denselben tabellarischen Daten — keine wiederholten Schlüsselnamen.",
+              "json": "Größer — jedes Objekt wiederholt seine eigenen Schlüssel."
             },
             {
-              "aspect": "Nested data",
-              "csv": "No native support — must be flattened or stringified.",
-              "json": "Native support — objects and arrays nest freely."
+              "aspect": "Verschachtelte Daten",
+              "csv": "Keine native Unterstützung — muss abgeflacht oder als Text serialisiert werden.",
+              "json": "Native Unterstützung — Objekte und Arrays verschachteln sich frei."
             },
             {
-              "aspect": "Human editing",
-              "csv": "Easy in a spreadsheet program.",
-              "json": "Easy in a text/code editor; error-prone by hand at scale."
+              "aspect": "Manuelle Bearbeitung",
+              "csv": "Einfach in einem Tabellenkalkulationsprogramm.",
+              "json": "Einfach in einem Text-/Code-Editor; bei größerem Umfang von Hand fehleranfällig."
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Input",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Paste CSV or JSON data here...",
-        "csvPlaceholder": "Paste CSV data here...",
-        "jsonPlaceholder": "Paste a JSON array of objects here...",
+        "inputTitle": "Eingabe",
+        "inputLabel": "Eingabe",
+        "inputPlaceholder": "Fügen Sie hier CSV- oder JSON-Daten ein …",
+        "csvPlaceholder": "Fügen Sie hier CSV-Daten ein …",
+        "jsonPlaceholder": "Fügen Sie hier ein JSON-Array von Objekten ein …",
         "csvToJson": "CSV → JSON",
         "jsonToCsv": "JSON → CSV",
-        "delimiterLabel": "Delimiter",
-        "delimiterComma": "Comma (,)",
-        "delimiterSemicolon": "Semicolon (;)",
+        "delimiterLabel": "Trennzeichen",
+        "delimiterComma": "Komma (,)",
+        "delimiterSemicolon": "Semikolon (;)",
         "delimiterTab": "Tab",
         "delimiterPipe": "Pipe (|)",
-        "delimiterAuto": "Auto-detect",
-        "hasHeaderLabel": "First row is a header",
-        "outputLabel": "Result",
-        "copy": "Copy",
-        "copied": "Copied!"
+        "delimiterAuto": "Automatisch erkennen",
+        "hasHeaderLabel": "Erste Zeile ist eine Kopfzeile",
+        "outputLabel": "Ergebnis",
+        "copy": "Kopieren",
+        "copied": "Kopiert!"
       },
       "errors": {
-        "required": "Please enter some data.",
-        "invalidJson": "This is not valid JSON.",
-        "expectedArray": "The JSON must be an array of objects."
+        "required": "Bitte geben Sie Daten ein.",
+        "invalidJson": "Das ist kein gültiges JSON.",
+        "expectedArray": "Das JSON muss ein Array von Objekten sein."
       },
       "education": {
         "intro": {
-          "title": "How CSV and JSON Actually Relate",
-          "paragraph1": "CSV and JSON solve the same basic problem — representing a list of records — with opposite structural assumptions. CSV assumes every record has exactly the same flat set of fields, so it only needs to write the field names once, in a header row, then just the values afterward. JSON makes no such assumption: every object carries its own keys, which is what lets it represent records with different shapes, or fields that are themselves nested objects and arrays, at the cost of repeating those key names in every single record.",
-          "paragraph2": "That structural gap is exactly why CSV → JSON is mechanical (each row becomes an object, each header becomes a key) while JSON → CSV requires real decisions this tool makes automatically: nested objects get flattened into dot-notation columns (address.city, address.zip), and arrays get serialized as a single JSON-text cell, since CSV has no native way to represent a list inside a list.",
+          "title": "Wie CSV und JSON tatsächlich zusammenhängen",
+          "paragraph1": "CSV und JSON lösen dasselbe grundlegende Problem — die Darstellung einer Liste von Datensätzen — mit entgegengesetzten strukturellen Annahmen. CSV setzt voraus, dass jeder Datensatz exakt dieselbe flache Menge an Feldern hat, sodass die Feldnamen nur einmal in einer Kopfzeile geschrieben werden müssen, danach nur noch die Werte. JSON macht keine solche Annahme: Jedes Objekt trägt seine eigenen Schlüssel, was es erlaubt, Datensätze unterschiedlicher Form darzustellen oder Felder, die selbst verschachtelte Objekte und Arrays sind — auf Kosten der Wiederholung dieser Schlüsselnamen in jedem einzelnen Datensatz.",
+          "paragraph2": "Genau diese strukturelle Lücke ist der Grund, warum CSV → JSON mechanisch ist (jede Zeile wird zu einem Objekt, jede Spaltenüberschrift zu einem Schlüssel), während JSON → CSV echte Entscheidungen erfordert, die dieses Werkzeug automatisch trifft: Verschachtelte Objekte werden zu Spalten in Punktnotation abgeflacht (address.city, address.zip), und Arrays werden als einzelne JSON-Text-Zelle serialisiert, da CSV keine native Möglichkeit hat, eine Liste innerhalb einer Liste darzustellen.",
           "diagram": {
-            "caption": "A CSV header row becomes JSON object keys; each subsequent CSV row becomes one JSON object in an array."
+            "caption": "Eine CSV-Kopfzeile wird zu JSON-Objektschlüsseln; jede folgende CSV-Zeile wird zu einem JSON-Objekt in einem Array."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four examples showing exactly how this tool handles delimiters, headers, and nested data.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Vier Beispiele, die genau zeigen, wie dieses Werkzeug mit Trennzeichen, Kopfzeilen und verschachtelten Daten umgeht.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "CSV \"name,age / Alice,30\" converted to JSON",
+              "scenario": "CSV „name,age / Alice,30“ zu JSON konvertiert",
               "result": "[{\"name\":\"Alice\",\"age\":\"30\"}]"
             },
             {
-              "scenario": "CSV \"name;age / Alice;30\" with auto-detect delimiter",
-              "result": "Detects \";\" and parses correctly"
+              "scenario": "CSV „name;age / Alice;30“ mit automatischer Trennzeichenerkennung",
+              "result": "Erkennt „;“ und parst korrekt"
             },
             {
-              "scenario": "JSON with a nested address object converted to CSV",
-              "result": "Columns: name, address.city"
+              "scenario": "JSON mit einem verschachtelten address-Objekt zu CSV konvertiert",
+              "result": "Spalten: name, address.city"
             },
             {
-              "scenario": "JSON with a tags array converted to CSV",
-              "result": "The tags column holds a JSON-text cell, e.g. [\"a\",\"b\"]"
+              "scenario": "JSON mit einem tags-Array zu CSV konvertiert",
+              "result": "Die tags-Spalte enthält eine JSON-Text-Zelle, z. B. [\"a\",\"b\"]"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Why would I choose CSV over JSON, or the other way around?",
-              "answer": "CSV wins for flat, tabular data — a spreadsheet export, a list of contacts — because it's smaller and every spreadsheet program opens it natively. JSON wins the moment your data has real structure — nested objects, fields that are themselves lists — because CSV simply has no native way to represent that without flattening or stringifying it, which this tool does automatically but always loses a little structural clarity in the process."
+              "question": "Warum sollte ich CSV statt JSON wählen, oder umgekehrt?",
+              "answer": "CSV gewinnt bei flachen, tabellarischen Daten — einem Tabellenkalkulationsexport, einer Kontaktliste —, weil es kleiner ist und jedes Tabellenkalkulationsprogramm es nativ öffnet. JSON gewinnt in dem Moment, in dem Ihre Daten echte Struktur haben — verschachtelte Objekte, Felder, die selbst Listen sind —, weil CSV schlicht keine native Möglichkeit hat, das ohne Abflachen oder Serialisieren als Text darzustellen, was dieses Werkzeug automatisch erledigt, dabei aber immer etwas strukturelle Klarheit verliert."
             },
             {
-              "question": "What happens to nested objects when converting JSON to CSV?",
-              "answer": "They get flattened into dot-notation column names — a nested { \"address\": { \"city\": \"Cairo\" } } becomes a column literally named address.city. This keeps every value in its own cell, at the cost of a less human-friendly header row for deeply nested data."
+              "question": "Was passiert mit verschachtelten Objekten bei der Konvertierung von JSON zu CSV?",
+              "answer": "Sie werden zu Spaltennamen in Punktnotation abgeflacht — ein verschachteltes { \"address\": { \"city\": \"Kairo\" } } wird zu einer Spalte namens address.city. Das hält jeden Wert in seiner eigenen Zelle, auf Kosten einer weniger menschenfreundlichen Kopfzeile bei tief verschachtelten Daten."
             },
             {
-              "question": "What happens to arrays when converting JSON to CSV?",
-              "answer": "Unlike nested objects, arrays get serialized as JSON text inside a single cell — CSV has no native concept of \"a list inside a list,\" so there's no clean tabular alternative. The result round-trips correctly (converting back to JSON restores the original array), but isn't especially readable in a spreadsheet."
+              "question": "Was passiert mit Arrays bei der Konvertierung von JSON zu CSV?",
+              "answer": "Anders als verschachtelte Objekte werden Arrays als JSON-Text innerhalb einer einzelnen Zelle serialisiert — CSV kennt kein natives Konzept von „einer Liste innerhalb einer Liste“, daher gibt es keine saubere tabellarische Alternative. Das Ergebnis lässt sich korrekt zurückkonvertieren (die Rückkonvertierung zu JSON stellt das ursprüngliche Array wieder her), ist aber in einer Tabellenkalkulation nicht besonders lesbar."
             },
             {
-              "question": "Why does auto-detecting the delimiter matter?",
-              "answer": "Comma-separated is the default, but it's genuinely not universal: many European locales use a comma as the decimal separator, so spreadsheet software there exports CSV with semicolons instead to avoid ambiguity, and tab- or pipe-delimited exports are common from certain databases and legacy systems. Auto-detect looks at the first line and picks whichever candidate delimiter appears most often."
+              "question": "Warum ist die automatische Trennzeichenerkennung wichtig?",
+              "answer": "Komma-getrennt ist die Standardeinstellung, aber wirklich nicht universell: Viele europäische Gebietsschemata verwenden das Komma als Dezimaltrennzeichen, daher exportieren dortige Tabellenkalkulationsprogramme CSV stattdessen mit Semikolons, um Mehrdeutigkeit zu vermeiden, und Tab- oder Pipe-getrennte Exporte sind bei bestimmten Datenbanken und Altsystemen üblich. Die automatische Erkennung betrachtet die erste Zeile und wählt das am häufigsten vorkommende Kandidat-Trennzeichen."
             },
             {
-              "question": "Why does this tool need a \"first row is a header\" option?",
-              "answer": "Not every CSV file includes one — some raw database or sensor-log exports start directly with data. Without a real header to draw keys from, this tool falls back to generic column1, column2, ... keys so the conversion still produces valid, usable JSON."
+              "question": "Warum braucht dieses Werkzeug eine Option „Erste Zeile ist eine Kopfzeile“?",
+              "answer": "Nicht jede CSV-Datei enthält eine — manche rohen Datenbank- oder Sensorprotokoll-Exporte beginnen direkt mit Daten. Ohne eine echte Kopfzeile, aus der Schlüssel abgeleitet werden können, greift dieses Werkzeug auf generische Schlüssel wie column1, column2, … zurück, damit die Konvertierung dennoch gültiges, nutzbares JSON erzeugt."
             },
             {
-              "question": "Is my data uploaded anywhere when I use this tool?",
-              "answer": "No — parsing and converting both directions happens entirely in your browser. Nothing you paste here is transmitted anywhere, which matters since CSV and JSON files often carry real exported data."
+              "question": "Werden meine Daten irgendwohin hochgeladen, wenn ich dieses Werkzeug nutze?",
+              "answer": "Nein — sowohl das Parsen als auch die Konvertierung in beide Richtungen geschehen vollständig in Ihrem Browser. Nichts, was Sie hier einfügen, wird irgendwohin übertragen, was wichtig ist, da CSV- und JSON-Dateien oft echte exportierte Daten enthalten."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hinter diesem Werkzeug",
           "history": {
-            "title": "A Format With No Single Inventor",
-            "paragraph": "Unlike JSON, CSV has no known creator and no founding date — it emerged organically because separating values with commas was simply the most obvious way to represent tabular data in early computing, with IBM's Fortran compiler already supporting a comma-delimited format as far back as 1972. The term \"comma-separated values\" itself only entered common use around 1983. For over three decades, every piece of software that read or wrote CSV files quietly invented its own conventions for the genuinely tricky edge cases — what happens when a value itself contains a comma, or a line break, or a quote mark — which is exactly why real-world CSV files remain inconsistent to this day."
+            "title": "Ein Format ohne einzelnen Erfinder",
+            "paragraph": "Anders als JSON hat CSV keinen bekannten Schöpfer und kein Gründungsdatum — es entstand organisch, weil das Trennen von Werten durch Kommas in der frühen Datenverarbeitung schlicht die naheliegendste Art war, tabellarische Daten darzustellen; IBMs Fortran-Compiler unterstützte bereits 1972 ein kommagetrenntes Format. Der Begriff „Comma-Separated Values“ selbst kam erst um 1983 in gebräuchliche Verwendung. Über drei Jahrzehnte lang erfand jede Software, die CSV-Dateien las oder schrieb, still und leise ihre eigenen Konventionen für die wirklich kniffligen Randfälle — was passiert, wenn ein Wert selbst ein Komma, einen Zeilenumbruch oder ein Anführungszeichen enthält —, weshalb reale CSV-Dateien bis heute uneinheitlich bleiben."
           },
           "modernDevelopments": {
-            "title": "A Standard, Decades Late",
-            "paragraph": "The first attempt to formally document CSV's de facto conventions didn't arrive until October 2005, when Yakov Shafranovich published RFC 4180, codifying rules for quoting, escaping, and header rows that most implementations had already converged on independently. It's explicitly an \"Informational\" RFC, not a binding standard, and it arrived roughly three decades after CSV files were already common — which is why this tool's own CSV parser has to handle real-world files that don't strictly follow it, rather than assuming every file will."
+            "title": "Ein Standard, Jahrzehnte zu spät",
+            "paragraph": "Der erste Versuch, CSVs faktische Konventionen formal zu dokumentieren, kam erst im Oktober 2005, als Yakov Shafranovich RFC 4180 veröffentlichte und Regeln für Anführungszeichen, Maskierung und Kopfzeilen kodifizierte, auf die sich die meisten Implementierungen bereits unabhängig voneinander geeinigt hatten. Es ist ausdrücklich ein „informativer“ RFC, kein bindender Standard, und er kam etwa drei Jahrzehnte, nachdem CSV-Dateien bereits weit verbreitet waren — weshalb der eigene CSV-Parser dieses Werkzeugs reale Dateien verarbeiten muss, die ihn nicht strikt befolgen, statt anzunehmen, dass jede Datei es tut."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Data interchange formats, parsing, and formal grammars are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Akademischer Werdegang",
+            "intro": "Datenaustauschformate, Parsing und formale Grammatiken werden im Rahmen von Informatik-Studiengängen untersucht. Hier sind die weltweit fünf besten im QS World University Rankings by Subject 2025, plus eine regionale Option:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "Nein — MITs Studiengang 6-3 (Computer Science and Engineering) ist ein Präsenz-Bachelorprogramm auf dem Cambridge-Campus des MIT."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "Nein — Stanfords Bachelorprogramm in Informatik ist ein Präsenzstudiengang auf dem Campus von Stanford."
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "Nein — das Bachelorprogramm der School of Computer Science der CMU findet in Präsenz auf ihrem Pittsburgh-Campus statt."
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "Nein — der Bachelor of Computing in Computer Science der NUS ist ein Präsenzprogramm mit verpflichtendem Praktikum auf dem Campus oder im Ausland."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Informatik und Informationssysteme (QS World University Rankings by Subject 2025).",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "Nein — Oxfords Informatikstudiengang wird in Präsenz über das Tutorensystem gelehrt, bei dem ein oder zwei Studierende einen Tutor direkt treffen."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "Bietet über ihr College of Engineering einen ABET-akkreditierten Bachelor of Science in Informatik an.",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Durchführungsart wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "Technischer Standard",
           "citation": "RFC 4180 — Common Format and MIME Type for Comma-Separated Values (CSV) Files. Y. Shafranovich. Internet Engineering Task Force (IETF), October 2005.",
-          "note": "The closest thing CSV has to an official specification — an Informational RFC that codified quoting, escaping, and header-row conventions roughly three decades after CSV files were already widespread, which is why this tool's parser handles real-world files that don't strictly follow it.",
+          "note": "Das Nächste, was CSV an einer offiziellen Spezifikation hat — ein informativer RFC, der Konventionen für Anführungszeichen, Maskierung und Kopfzeilen etwa drei Jahrzehnte kodifizierte, nachdem CSV-Dateien bereits weit verbreitet waren, weshalb der Parser dieses Werkzeugs reale Dateien verarbeiten muss, die ihn nicht strikt befolgen.",
           "url": "https://www.rfc-editor.org/rfc/rfc4180",
-          "readOriginal": "Read the Original RFC"
+          "readOriginal": "Original-RFC lesen"
         }
       }
     },
