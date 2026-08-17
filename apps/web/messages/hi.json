@@ -196,158 +196,203 @@
   },
   "tools": {
     "scientific-calculator": {
-      "title": "Scientific Calculator",
-      "description": "A full scientific calculator with trigonometric, logarithmic, and power functions.",
+      "title": "साइंटिफ़िक कैलकुलेटर",
+      "description": "त्रिकोणमितीय, लघुगणकीय, और घातांक फ़ंक्शन वाला एक पूर्ण साइंटिफ़िक कैलकुलेटर।",
       "buttons": {
-        "angleMode": "Toggle degrees/radians",
-        "backspace": "Delete last digit"
+        "angleMode": "डिग्री/रेडियन टॉगल करें",
+        "backspace": "आख़िरी अंक हटाएँ"
       },
       "errors": {
-        "DIVISION_BY_ZERO": "Cannot divide by zero",
-        "DOMAIN_ERROR": "Undefined for this input",
-        "OUT_OF_RANGE": "Result is out of range",
-        "MISSING_OPERAND": "Enter a second number first"
+        "DIVISION_BY_ZERO": "शून्य से भाग नहीं दिया जा सकता",
+        "DOMAIN_ERROR": "इस इनपुट के लिए अपरिभाषित",
+        "OUT_OF_RANGE": "परिणाम सीमा से बाहर है",
+        "MISSING_OPERAND": "पहले दूसरी संख्या दर्ज करें"
       },
       "aboveFold": {
-        "calculatorTitle": "Calculator",
+        "calculatorTitle": "कैलकुलेटर",
         "functionReference": {
-          "title": "Function Quick Reference",
+          "title": "फ़ंक्शन त्वरित संदर्भ",
           "items": [
-            { "symbol": "sin, cos, tan", "description": "Trigonometric ratios of an angle, evaluated in the current Deg/Rad mode." },
-            { "symbol": "sin⁻¹, cos⁻¹, tan⁻¹", "description": "Inverse trig — recovers the angle from a ratio." },
-            { "symbol": "x², x³", "description": "Square and cube the displayed value." },
-            { "symbol": "√x, ³√x", "description": "Square root and cube root." },
-            { "symbol": "xʸ, ʸ√x", "description": "Raises a number to a power, or finds its general root." },
-            { "symbol": "ln, log", "description": "Natural logarithm (base e) and common logarithm (base 10)." },
-            { "symbol": "eˣ, 10ˣ", "description": "Exponential functions using base e and base 10." },
-            { "symbol": "π, e", "description": "Inserts the constants π (3.14159…) and e (2.71828…)." },
-            { "symbol": "M+ / M− / MR", "description": "Adds, subtracts, or recalls the value stored in memory." },
-            { "symbol": "Ans", "description": "Reuses the result of your last calculation." }
+            {
+              "symbol": "sin, cos, tan",
+              "description": "किसी कोण के त्रिकोणमितीय अनुपात, वर्तमान डिग्री/रेडियन मोड में गणना किए गए।"
+            },
+            {
+              "symbol": "sin⁻¹, cos⁻¹, tan⁻¹",
+              "description": "इनवर्स त्रिकोणमिति — किसी अनुपात से कोण वापस निकालती है।"
+            },
+            {
+              "symbol": "x², x³",
+              "description": "प्रदर्शित मान का वर्ग और घन।"
+            },
+            {
+              "symbol": "√x, ³√x",
+              "description": "वर्गमूल और घनमूल।"
+            },
+            {
+              "symbol": "xʸ, ʸ√x",
+              "description": "किसी संख्या को घात तक उठाता है, या उसका सामान्य मूल निकालता है।"
+            },
+            {
+              "symbol": "ln, log",
+              "description": "प्राकृतिक लघुगणक (आधार e) और सामान्य लघुगणक (आधार 10)।"
+            },
+            {
+              "symbol": "eˣ, 10ˣ",
+              "description": "आधार e और आधार 10 का उपयोग करने वाले घातांकी फ़ंक्शन।"
+            },
+            {
+              "symbol": "π, e",
+              "description": "स्थिरांक π (3.14159…) और e (2.71828…) डालता है।"
+            },
+            {
+              "symbol": "M+ / M− / MR",
+              "description": "मेमोरी में सहेजे गए मान को जोड़ता, घटाता, या पुनः प्राप्त करता है।"
+            },
+            {
+              "symbol": "Ans",
+              "description": "आपकी आख़िरी गणना के परिणाम का दोबारा उपयोग करता है।"
+            }
           ]
         }
       },
       "history": {
-        "title": "History",
-        "empty": "Your calculations will appear here as you complete them."
+        "title": "इतिहास",
+        "empty": "जैसे-जैसे आप गणनाएँ पूरी करेंगे, वे यहाँ दिखाई देंगी।"
       },
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कैलकुलेटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "education": {
         "intro": {
-          "title": "How This Calculator Evaluates an Expression",
-          "paragraph1": "This calculator evaluates operations the way a physical scientific calculator does: sequentially, as you enter them, rather than parsing a fully typed-out expression with parentheses. Pressing an operator immediately resolves whatever calculation is pending, then queues the new one; pressing a function key (sin, √x, ln, and the rest) applies instantly to the number currently on screen. This covers four families of operations — basic arithmetic, powers and roots, logarithms and exponentials, and trigonometry — each accessible from the keypad without switching modes.",
-          "paragraph2": "Two details matter for getting a correct result. First, the Deg/Rad toggle changes how every trigonometric and inverse-trigonometric function interprets its input and output — the same button sequence gives a different numeric answer in each mode, so it's worth checking before reading a trig result. Second, some inputs have no real answer at all: dividing by zero, taking the square root or logarithm of a negative number, or asking for the arcsine of a value outside −1 to 1. Rather than returning an invalid number silently, this calculator flags these as explicit errors so a wrong input is never mistaken for a real result.",
+          "title": "यह कैलकुलेटर किसी एक्सप्रेशन की गणना कैसे करता है",
+          "paragraph1": "यह कैलकुलेटर संचालनों की गणना उसी तरह करता है जैसे एक भौतिक साइंटिफ़िक कैलकुलेटर करता है: क्रमिक रूप से, जैसे-जैसे आप उन्हें दर्ज करते हैं, न कि कोष्ठकों के साथ पूरी तरह टाइप किए गए एक्सप्रेशन को पार्स करके। किसी ऑपरेटर को दबाने से जो भी गणना लंबित है वह तुरंत हल हो जाती है, फिर नई गणना क़तार में लग जाती है; किसी फ़ंक्शन की (sin, √x, ln, और बाक़ी) को दबाने से यह स्क्रीन पर मौजूद संख्या पर तुरंत लागू हो जाती है। इसमें संचालनों के चार परिवार शामिल हैं — बुनियादी अंकगणित, घात और मूल, लघुगणक और घातांक, और त्रिकोणमिति — जिनमें से हर एक मोड बदले बिना कीपैड से एक्सेस किया जा सकता है।",
+          "paragraph2": "सही परिणाम पाने के लिए दो बातें मायने रखती हैं। पहली, डिग्री/रेडियन टॉगल हर त्रिकोणमितीय और इनवर्स-त्रिकोणमितीय फ़ंक्शन के अपने इनपुट और आउटपुट को समझने के तरीक़े को बदल देता है — वही बटन क्रम हर मोड में एक अलग संख्यात्मक जवाब देता है, इसलिए त्रिकोणमितीय परिणाम पढ़ने से पहले इसे जाँचना ज़रूरी है। दूसरी, कुछ इनपुट का कोई वास्तविक जवाब होता ही नहीं: शून्य से भाग देना, किसी ऋणात्मक संख्या का वर्गमूल या लघुगणक निकालना, या −1 से 1 के बाहर के किसी मान का आर्कसाइन माँगना। किसी अमान्य संख्या को चुपचाप लौटाने के बजाय, यह कैलकुलेटर इन्हें स्पष्ट एरर के रूप में चिह्नित करता है ताकि ग़लत इनपुट को कभी असली परिणाम न समझा जाए।",
           "diagram": {
             "sinLabel": "sin θ",
             "cosLabel": "cos θ",
             "angleLabel": "θ",
-            "caption": "On a circle of radius 1, the sine and cosine of an angle θ are simply the vertical and horizontal position of the point that angle traces out — the geometric definition behind every trigonometric key on this calculator."
+            "caption": "त्रिज्या 1 वाले एक वृत्त पर, किसी कोण θ का साइन और कोसाइन बस उस बिंदु की खड़ी और आड़ी स्थिति है जिसे वह कोण खींचता है — यही ज्यामितीय परिभाषा इस कैलकुलेटर की हर त्रिकोणमितीय की के पीछे है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A handful of solved expressions across the different function families, each verified by hand.",
-          "columnExpression": "Expression",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "अलग-अलग फ़ंक्शन परिवारों से मुट्ठी भर हल किए गए एक्सप्रेशन, हर एक हाथ से जाँचा गया।",
+          "columnExpression": "एक्सप्रेशन",
+          "columnResult": "परिणाम",
           "rows": [
-            { "expression": "sin(30°)", "result": "0.5" },
-            { "expression": "sin⁻¹(0.5), in Deg mode", "result": "30" },
-            { "expression": "2 xʸ 10  (2¹⁰)", "result": "1,024" },
-            { "expression": "√144", "result": "12" },
-            { "expression": "log(1000)  (base 10)", "result": "3" }
+            {
+              "expression": "sin(30°)",
+              "result": "0.5"
+            },
+            {
+              "expression": "sin⁻¹(0.5), डिग्री मोड में",
+              "result": "30"
+            },
+            {
+              "expression": "2 xʸ 10  (2¹⁰)",
+              "result": "1,024"
+            },
+            {
+              "expression": "√144",
+              "result": "12"
+            },
+            {
+              "expression": "log(1000)  (आधार 10)",
+              "result": "3"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why do I get a different answer for the same trig calculation sometimes?",
-              "answer": "Almost always it's the Deg/Rad toggle — the same key sequence evaluates to a different number depending on whether the calculator is currently interpreting angles in degrees or radians. This calculator defaults to degrees; check the mode indicator in the top-left of the keypad before reading a trigonometric result."
+              "question": "मुझे कभी-कभी एक ही त्रिकोणमितीय गणना के लिए अलग जवाब क्यों मिलता है?",
+              "answer": "लगभग हमेशा यह डिग्री/रेडियन टॉगल की वजह से होता है — यह इस पर निर्भर करता है कि कैलकुलेटर फ़िलहाल कोणों को डिग्री में समझ रहा है या रेडियन में, वही की क्रम एक अलग संख्या देता है। यह कैलकुलेटर डिफ़ॉल्ट रूप से डिग्री इस्तेमाल करता है; कोई त्रिकोणमितीय परिणाम पढ़ने से पहले कीपैड के ऊपरी-बाएँ हिस्से में मोड इंडिकेटर जाँच लें।"
             },
             {
-              "question": "Why does dividing by zero show an error instead of a number?",
-              "answer": "Division by zero, the square root or logarithm of a negative number, and the arcsine or arccosine of a value outside −1 to 1 have no real numeric answer. Rather than silently returning something like Infinity or NaN, this calculator surfaces these as explicit errors so an invalid input is never mistaken for a real result."
+              "question": "शून्य से भाग देने पर संख्या के बजाय एरर क्यों दिखता है?",
+              "answer": "शून्य से भाग, किसी ऋणात्मक संख्या का वर्गमूल या लघुगणक, और −1 से 1 के बाहर किसी मान का आर्कसाइन या आर्ककोसाइन — इनका कोई वास्तविक संख्यात्मक जवाब नहीं होता। चुपचाप Infinity या NaN जैसा कुछ लौटाने के बजाय, यह कैलकुलेटर इन्हें स्पष्ट एरर के रूप में दिखाता है ताकि किसी अमान्य इनपुट को कभी असली परिणाम न समझा जाए।"
             },
             {
-              "question": "What does the \"Ans\" key do?",
-              "answer": "It recalls the result of your last completed calculation, letting you feed it straight into a new expression without retyping the number."
+              "question": "\"Ans\" की क्या करती है?",
+              "answer": "यह आपकी आख़िरी पूरी हुई गणना का परिणाम याद रखती है, जिससे आप उस संख्या को दोबारा टाइप किए बिना सीधे एक नए एक्सप्रेशन में इस्तेमाल कर सकते हैं।"
             },
             {
-              "question": "What's the difference between memory (M+/M−/MR) and Ans?",
-              "answer": "Ans always holds only your very last result and updates every time you calculate something new. Memory is a separate, persistent slot you control explicitly — useful for accumulating a running subtotal across several unrelated calculations without it being overwritten by whatever you compute next."
+              "question": "मेमोरी (M+/M−/MR) और Ans में क्या फ़र्क़ है?",
+              "answer": "Ans हमेशा केवल आपका सबसे हालिया परिणाम रखती है और जब भी आप कुछ नया गणना करते हैं, अपडेट हो जाती है। मेमोरी एक अलग, स्थायी स्लॉट है जिसे आप स्पष्ट रूप से नियंत्रित करते हैं — यह कई असंबंधित गणनाओं में एक चलता उप-योग जमा करने के लिए उपयोगी है, बिना इसके अगली गणना से ओवरराइट हुए।"
             },
             {
-              "question": "Why doesn't this calculator support typing a full expression with parentheses?",
-              "answer": "It follows the same immediate, sequential evaluation model as most physical scientific calculators: each operator resolves the pending calculation right away rather than waiting to parse a complete expression. This matches the keypad layout and behavior calculator users already know, at the cost of not supporting parenthesized grouping."
+              "question": "यह कैलकुलेटर कोष्ठकों के साथ पूरा एक्सप्रेशन टाइप करने को सपोर्ट क्यों नहीं करता?",
+              "answer": "यह ज़्यादातर भौतिक साइंटिफ़िक कैलकुलेटरों जैसे ही तुरंत, क्रमिक गणना मॉडल का पालन करता है: हर ऑपरेटर लंबित गणना को तुरंत हल कर देता है, बजाय एक पूरे एक्सप्रेशन को पार्स करने का इंतज़ार करने के। यह कैलकुलेटर उपयोगकर्ताओं के पहले से परिचित कीपैड लेआउट और व्यवहार से मेल खाता है, बदले में कोष्ठक-आधारित समूहीकरण सपोर्ट न करने की क़ीमत पर।"
             },
             {
-              "question": "Is my calculation history saved anywhere?",
-              "answer": "No. History is kept only in this browser tab's memory for as long as the page stays open — it clears on reload and is never sent anywhere, since every calculation on this page runs entirely on your own device."
+              "question": "क्या मेरा गणना इतिहास कहीं सेव होता है?",
+              "answer": "नहीं। इतिहास केवल इस ब्राउज़र टैब की मेमोरी में तब तक रहता है जब तक पेज खुला है — यह रीलोड करने पर साफ़ हो जाता है और कभी कहीं नहीं भेजा जाता, क्योंकि इस पेज की हर गणना पूरी तरह आपके अपने डिवाइस पर चलती है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "From the Slide Rule to the Shirt Pocket",
-            "paragraph": "For centuries, the slide rule was the only practical portable tool for trigonometric, logarithmic, and exponential calculations — the pocket calculators that existed by the late 1960s could only add, subtract, multiply, and divide. That changed in 1972, when Hewlett-Packard released the HP-35, conceived after company co-founder Bill Hewlett asked whether the scientific functions of HP's desktop calculators could be squeezed into something that fit in a shirt pocket. It was the first handheld calculator to compute trigonometric, logarithmic, and exponential functions directly, and it caught on immediately: HP sold more than 300,000 units in its first three years, and the HP-35's descendants went on to sell over 20 million units — making the slide rule obsolete for the engineers and scientists who had relied on it for generations."
+            "title": "स्लाइड रूल से लेकर शर्ट की जेब तक",
+            "paragraph": "सदियों तक, स्लाइड रूल त्रिकोणमितीय, लघुगणकीय, और घातांकी गणनाओं के लिए एकमात्र व्यावहारिक पोर्टेबल उपकरण था — 1960 के दशक के अंत तक मौजूद पॉकेट कैलकुलेटर केवल जोड़, घटाव, गुणा, और भाग कर सकते थे। यह 1972 में बदल गया, जब Hewlett-Packard ने HP-35 जारी किया, जिसकी कल्पना कंपनी के सह-संस्थापक Bill Hewlett के इस सवाल के बाद हुई कि क्या HP के डेस्कटॉप कैलकुलेटरों के साइंटिफ़िक फ़ंक्शन को किसी शर्ट की जेब में फ़िट होने वाली चीज़ में समेटा जा सकता है। यह त्रिकोणमितीय, लघुगणकीय, और घातांकी फ़ंक्शन सीधे गणना करने वाला पहला हैंडहेल्ड कैलकुलेटर था, और यह तुरंत लोकप्रिय हो गया: HP ने अपने पहले तीन सालों में 300,000 से ज़्यादा यूनिट बेचीं, और HP-35 के उत्तराधिकारियों ने आगे चलकर 2 करोड़ से ज़्यादा यूनिट बेचीं — जिससे उन इंजीनियरों और वैज्ञानिकों के लिए स्लाइड रूल पुराना पड़ गया जो पीढ़ियों से इस पर निर्भर थे।"
           },
           "modernDevelopments": {
-            "title": "From Dedicated Hardware to the Browser",
-            "paragraph": "Scientific calculators kept evolving after the HP-35 — graphing and computer-algebra models from makers like Texas Instruments and Casio added visual function plotting and symbolic manipulation, and calculator apps became a default feature of every computer and phone operating system. The more recent shift is calculators that need no dedicated hardware or installed app at all: modern browsers can run the same trigonometric, logarithmic, and exponential computations entirely in JavaScript on the page itself, the way this tool does — every calculation happens on your own device, with nothing sent to a server."
+            "title": "समर्पित हार्डवेयर से लेकर ब्राउज़र तक",
+            "paragraph": "HP-35 के बाद साइंटिफ़िक कैलकुलेटर विकसित होते रहे — Texas Instruments और Casio जैसे निर्माताओं के ग्राफ़िंग और कंप्यूटर-अल्जेब्रा मॉडल ने विज़ुअल फ़ंक्शन प्लॉटिंग और सिंबॉलिक मैनिपुलेशन जोड़ी, और कैलकुलेटर ऐप हर कंप्यूटर और फ़ोन ऑपरेटिंग सिस्टम की एक डिफ़ॉल्ट सुविधा बन गए। हाल का बदलाव यह है कि अब कैलकुलेटरों को कोई समर्पित हार्डवेयर या इंस्टॉल किया गया ऐप बिल्कुल भी नहीं चाहिए: आधुनिक ब्राउज़र वही त्रिकोणमितीय, लघुगणकीय, और घातांकी गणनाएँ पूरी तरह पेज पर JavaScript में चला सकते हैं, जैसे यह टूल करता है — हर गणना आपके अपने डिवाइस पर होती है, कुछ भी सर्वर पर नहीं भेजा जाता।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The trigonometric, logarithmic, and exponential functions this calculator evaluates are foundational material within Mathematics degree programs. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "जिन त्रिकोणमितीय, लघुगणकीय, और घातांकी फ़ंक्शन की गणना यह कैलकुलेटर करता है, वे Mathematics डिग्री प्रोग्रामों में बुनियादी सामग्री हैं। QS World University Rankings by Subject 2025 के अनुसार Mathematics में दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Mathematics में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://math.mit.edu/academics/undergrad",
-                "online": "No — MIT's Mathematics degree programs are taught in person on its Cambridge, Massachusetts campus, with no online option for the undergraduate major."
+                "online": "नहीं — MIT के Mathematics डिग्री प्रोग्राम उसके Cambridge, Massachusetts कैंपस पर इन-पर्सन पढ़ाए जाते हैं, अंडरग्रेजुएट मेजर के लिए कोई ऑनलाइन विकल्प नहीं है।"
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Mathematics में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://extension.harvard.edu/academics/programs/mathematics-for-teaching-graduate-program/",
-                "online": "Largely online — Harvard Extension School states 11 of the 12 courses for its Mathematics for Teaching graduate degree can be completed online, with one weekend or summer course requiring campus attendance."
+                "online": "काफ़ी हद तक ऑनलाइन — Harvard Extension School बताता है कि उसकी Mathematics for Teaching ग्रेजुएट डिग्री के 12 में से 11 कोर्स ऑनलाइन पूरे किए जा सकते हैं, एक वीकेंड या समर कोर्स के लिए कैंपस पर उपस्थिति ज़रूरी है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Mathematics में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.ox.ac.uk/admissions/undergraduate/courses/course-listing/mathematics",
-                "online": "No — Oxford's Mathematics degree is a full-time, in-person programme built around its tutorial system; the university's distance-learning offerings sit in a separate lifelong-learning division and do not include this degree."
+                "online": "नहीं — Oxford की Mathematics डिग्री एक पूर्णकालिक, इन-पर्सन प्रोग्राम है जो उसके ट्यूटोरियल सिस्टम के इर्द-गिर्द बना है; विश्वविद्यालय के दूरस्थ-शिक्षा प्रस्ताव एक अलग लाइफ़लॉन्ग-लर्निंग डिवीज़न में हैं और इस डिग्री में शामिल नहीं हैं।"
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Mathematics में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.maths.cam.ac.uk/undergrad/course",
-                "online": "No — Cambridge's Mathematical Tripos is delivered in person through lectures, supervisions, and written examinations on campus."
+                "online": "नहीं — Cambridge का Mathematical Tripos लेक्चर, सुपरविज़न, और लिखित परीक्षाओं के ज़रिए कैंपस पर इन-पर्सन दिया जाता है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Mathematics में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://bulletin.stanford.edu/programs/MATH-BS",
-                "online": "No — Stanford's undergraduate Mathematics major (BS) is an in-person campus program; Stanford's online mathematics offerings are limited to pre-college and high-school-level courses, not the university degree."
+                "online": "नहीं — Stanford का अंडरग्रेजुएट Mathematics मेजर (BS) एक इन-पर्सन कैंपस प्रोग्राम है; Stanford के ऑनलाइन गणित प्रस्ताव प्री-कॉलेज और हाई-स्कूल-स्तर के कोर्स तक सीमित हैं, यूनिवर्सिटी डिग्री नहीं।"
               },
               {
                 "name": "King Saud University (KSU), Riyadh — College of Science",
-                "note": "Home to the oldest Mathematics department in Saudi Arabia, established in 1958.",
+                "note": "सऊदी अरब का सबसे पुराना Mathematics विभाग, जो 1958 में स्थापित हुआ, इसका घर है।",
                 "url": "https://sciences.ksu.edu.sa/en/math",
-                "online": "Delivery mode not stated on the official department page."
+                "online": "आधिकारिक विभाग पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Engineering and Technology History Wiki (IEEE). (n.d.). Milestones: Development of the HP-35, the First Handheld Scientific Calculator, 1972.",
-          "note": "A documented technical history of the HP-35, the 1972 Hewlett-Packard calculator that replaced the slide rule and established the layout of trigonometric, logarithmic, and exponential functions this tool still follows.",
+          "note": "HP-35 का एक दस्तावेज़ीकृत तकनीकी इतिहास, वह 1972 का Hewlett-Packard कैलकुलेटर जिसने स्लाइड रूल की जगह ली और त्रिकोणमितीय, लघुगणकीय, और घातांकी फ़ंक्शन का वह लेआउट स्थापित किया जिसका यह टूल आज भी पालन करता है।",
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
-          "readOriginal": "Read the Original Article"
+          "readOriginal": "मूल लेख पढ़ें"
         }
       }
     },
