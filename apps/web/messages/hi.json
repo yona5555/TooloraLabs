@@ -3773,158 +3773,191 @@
       }
     },
     "sales-tax-calculator": {
-      "title": "Sales Tax Calculator",
-      "description": "Calculate sales tax and the total price you'll pay at checkout — or back out the pre-tax price and tax amount from a receipt's tax-inclusive total.",
+      "title": "सेल्स टैक्स कैलकुलेटर",
+      "description": "सेल्स टैक्स और चेकआउट पर आप जो कुल कीमत चुकाएँगे उसकी गणना करें — या रसीद की टैक्स-सहित कुल राशि से टैक्स-पूर्व कीमत और टैक्स राशि निकालें।",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कैलकुलेटर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "Your Total",
+        "resultTitle": "आपका कुल",
         "ratesReference": {
-          "title": "US Sales Tax Snapshot",
-          "intro": "Unlike VAT elsewhere, US sales tax isn't one national rate — states set a base rate, and counties, cities, and districts stack more on top. A few reference points:",
+          "title": "US सेल्स टैक्स स्नैपशॉट",
+          "intro": "बाक़ी दुनिया के VAT के उलट, US सेल्स टैक्स एक राष्ट्रीय दर नहीं है — राज्य एक आधार दर तय करते हैं, और काउंटी, शहर, और ज़िले इसके ऊपर और जोड़ते हैं। कुछ संदर्भ बिंदु:",
           "rows": [
-            { "place": "Louisiana (highest)", "rate": "10.13%" },
-            { "place": "Tennessee", "rate": "9.61%" },
-            { "place": "California", "rate": "9.03%" },
-            { "place": "New York", "rate": "8.54%" },
-            { "place": "Texas", "rate": "8.20%" },
-            { "place": "National average", "rate": "7.53%" },
-            { "place": "DE, MT, NH, OR", "rate": "0%" }
+            {
+              "place": "Louisiana (सबसे ज़्यादा)",
+              "rate": "10.13%"
+            },
+            {
+              "place": "Tennessee",
+              "rate": "9.61%"
+            },
+            {
+              "place": "California",
+              "rate": "9.03%"
+            },
+            {
+              "place": "New York",
+              "rate": "8.54%"
+            },
+            {
+              "place": "Texas",
+              "rate": "8.20%"
+            },
+            {
+              "place": "राष्ट्रीय औसत",
+              "rate": "7.53%"
+            },
+            {
+              "place": "DE, MT, NH, OR",
+              "rate": "0%"
+            }
           ],
-          "source": "Source: Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (as of July 1, 2026). Figures are population-weighted average combined state + local rates; your actual local rate may differ."
+          "source": "स्रोत: Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (1 जुलाई, 2026 तक)। आँकड़े जनसंख्या-भारित औसत संयुक्त राज्य + स्थानीय दरें हैं; आपकी असली स्थानीय दर अलग हो सकती है।"
         }
       },
       "form": {
-        "inputTitle": "Your Purchase",
-        "modeAdd": "Add Sales Tax",
-        "modeReverse": "Extract From Total",
-        "priceLabel": "Price (before tax)",
-        "totalPriceLabel": "Total Price (tax included)",
-        "pricePlaceholder": "e.g. 100",
-        "taxRateLabel": "Sales Tax Rate (%)",
-        "taxRatePlaceholder": "e.g. 8"
+        "inputTitle": "आपकी ख़रीद",
+        "modeAdd": "सेल्स टैक्स जोड़ें",
+        "modeReverse": "कुल से निकालें",
+        "priceLabel": "कीमत (टैक्स से पहले)",
+        "totalPriceLabel": "कुल कीमत (टैक्स सहित)",
+        "pricePlaceholder": "जैसे 100",
+        "taxRateLabel": "सेल्स टैक्स दर (%)",
+        "taxRatePlaceholder": "जैसे 8"
       },
       "result": {
-        "price": "Price (before tax)",
-        "totalPrice": "Total Price",
-        "taxAmount": "Sales Tax",
-        "reverseNote": "Reverse-calculated from a {rate}% tax-inclusive total."
+        "price": "कीमत (टैक्स से पहले)",
+        "totalPrice": "कुल कीमत",
+        "taxAmount": "सेल्स टैक्स",
+        "reverseNote": "{rate}% टैक्स-सहित कुल से उल्टा गणना किया गया।"
       },
       "education": {
         "intro": {
-          "title": "How Sales Tax Actually Works",
-          "paragraph1": "Sales tax is a percentage of a purchase's price added at the register and collected by the seller, who remits it to state and local governments. Unlike a value-added tax (VAT), which many countries outside the US charge in smaller increments at every stage of production and only on the value newly added at each step, US-style sales tax is collected exactly once, at the final retail sale to the end consumer — a $100 item taxed at 8% simply costs $108 at checkout.",
-          "paragraph2": "The catch is that \"8%\" in the US is almost never set in one place. A state government sets a base rate, and counties, cities, and special taxing districts can each layer their own smaller rate on top, all added together into one combined rate charged at the register — which is why identical purchases a few miles apart can carry different tax amounts. The relationship also runs in reverse: if a receipt shows only the tax-inclusive total, dividing it by one plus the combined rate as a decimal recovers the pre-tax price — a $108 total at a known 8% rate implies a $108 ÷ 1.08 = $100 pre-tax price, useful for expense reports or accounting where the pre-tax amount is what matters.",
+          "title": "सेल्स टैक्स असल में कैसे काम करता है",
+          "paragraph1": "सेल्स टैक्स किसी ख़रीद की कीमत का एक प्रतिशत है जो काउंटर पर जोड़ा जाता है और विक्रेता द्वारा वसूला जाता है, जो इसे राज्य और स्थानीय सरकारों को भेज देता है। वैल्यू-एडेड टैक्स (VAT) के उलट, जिसे US के बाहर ज़्यादातर देश उत्पादन के हर चरण पर छोटे-छोटे हिस्सों में और केवल हर चरण में नए जोड़े गए मूल्य पर वसूलते हैं, US-शैली का सेल्स टैक्स ठीक एक बार, अंतिम उपभोक्ता को होने वाली अंतिम रिटेल बिक्री पर वसूला जाता है — 8% पर टैक्स लगने वाला $100 का आइटम चेकआउट पर बस $108 का पड़ता है।",
+          "paragraph2": "पेच यह है कि US में \"8%\" लगभग कभी एक ही जगह से तय नहीं होता। एक राज्य सरकार एक आधार दर तय करती है, और काउंटी, शहर, और विशेष टैक्सिंग ज़िले हर एक अपनी छोटी दर उसके ऊपर जोड़ सकते हैं, जो सब मिलकर काउंटर पर वसूली जाने वाली एक संयुक्त दर बन जाती है — यही वजह है कि कुछ मील की दूरी पर एक जैसी ख़रीद पर अलग-अलग टैक्स राशि लग सकती है। यह संबंध उल्टी दिशा में भी चलता है: अगर रसीद केवल टैक्स-सहित कुल दिखाती है, तो उसे (1 प्लस संयुक्त दर, दशमलव के रूप में) से भाग देने पर टैक्स-पूर्व कीमत मिल जाती है — ज्ञात 8% दर पर $108 की कुल राशि का मतलब है $108 ÷ 1.08 = $100 की टैक्स-पूर्व कीमत, जो ख़र्च रिपोर्ट या अकाउंटिंग के लिए उपयोगी है जहाँ टैक्स-पूर्व राशि ही मायने रखती है।",
           "diagram": {
-            "subtotalLabel": "$100 (subtotal)",
-            "taxLabel": "+$8 tax",
-            "totalLabel": "$108 (total)",
-            "caption": "Sales tax grows a subtotal into a total — the reverse of a discount, which shrinks a price. $100 subtotal + 8% tax ($8) = $108 total."
+            "subtotalLabel": "$100 (सबटोटल)",
+            "taxLabel": "+$8 टैक्स",
+            "totalLabel": "$108 (कुल)",
+            "caption": "सेल्स टैक्स एक सबटोटल को बढ़ाकर कुल बनाता है — डिस्काउंट के उल्टा, जो कीमत घटाता है। $100 सबटोटल + 8% टैक्स ($8) = $108 कुल।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four worked examples, including a stacked local rate and a reverse calculation, showing the exact inputs and results.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "चार हल किए गए उदाहरण, जिनमें एक स्टैक्ड स्थानीय दर और एक उल्टी गणना भी शामिल है, सटीक इनपुट और परिणामों के साथ।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "$50 item, 6% sales tax", "result": "$53.00 total ($3.00 tax)" },
-            { "scenario": "$250 item, 8.875% combined rate (e.g. New York City)", "result": "$272.19 total ($22.19 tax)" },
-            { "scenario": "$80 item, 6.5% state + 1% county + 1.5% city = 9% combined", "result": "$87.20 total ($7.20 tax)" },
-            { "scenario": "Receipt shows $108 total, 8% tax rate — find the pre-tax price", "result": "Pre-tax price was $100.00" }
+            {
+              "scenario": "$50 का आइटम, 6% सेल्स टैक्स",
+              "result": "$53.00 कुल ($3.00 टैक्स)"
+            },
+            {
+              "scenario": "$250 का आइटम, 8.875% संयुक्त दर (जैसे New York City)",
+              "result": "$272.19 कुल ($22.19 टैक्स)"
+            },
+            {
+              "scenario": "$80 का आइटम, 6.5% राज्य + 1% काउंटी + 1.5% शहर = 9% संयुक्त",
+              "result": "$87.20 कुल ($7.20 टैक्स)"
+            },
+            {
+              "scenario": "रसीद $108 कुल दिखाती है, 8% टैक्स दर — टैक्स-पूर्व कीमत पता करें",
+              "result": "टैक्स-पूर्व कीमत $100.00 थी"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Is sales tax the same rate everywhere?",
-              "answer": "No. Unlike a national VAT, US sales tax is set state by state, and most states let counties, cities, and special districts add their own rate on top — so the combined rate charged at the register can vary block by block, not just state by state."
+              "question": "क्या सेल्स टैक्स हर जगह एक ही दर पर लगता है?",
+              "answer": "नहीं। किसी राष्ट्रीय VAT के उलट, US सेल्स टैक्स हर राज्य अलग-अलग तय करता है, और ज़्यादातर राज्य काउंटी, शहर, और विशेष ज़िलों को इसके ऊपर अपनी दर जोड़ने देते हैं — इसलिए काउंटर पर वसूली जाने वाली संयुक्त दर हर ब्लॉक पर अलग हो सकती है, सिर्फ़ राज्य के अनुसार नहीं।"
             },
             {
-              "question": "How is sales tax different from VAT?",
-              "answer": "Sales tax is collected once, at the final retail sale to the end consumer. VAT, used by most countries outside the US, is collected in smaller amounts at every stage of production, with businesses claiming credit for VAT they already paid on their own inputs — the two can produce a similar final price but get there through very different mechanics."
+              "question": "सेल्स टैक्स, VAT से कैसे अलग है?",
+              "answer": "सेल्स टैक्स ठीक एक बार, अंतिम उपभोक्ता को होने वाली अंतिम रिटेल बिक्री पर वसूला जाता है। VAT, जिसे US के बाहर ज़्यादातर देश इस्तेमाल करते हैं, उत्पादन के हर चरण पर छोटी राशियों में वसूला जाता है, जिसमें व्यवसाय अपने ही इनपुट पर पहले चुकाए गए VAT का क्रेडिट माँगते हैं — दोनों एक जैसी अंतिम कीमत दे सकते हैं लेकिन बहुत अलग तरीक़ों से वहाँ पहुँचते हैं।"
             },
             {
-              "question": "Why did two receipts for the same $100 purchase show different tax amounts?",
-              "answer": "Almost certainly a different combined local rate — the state base rate plus whatever county, city, and district rates apply at each specific location, which can differ even between two stores a short drive apart."
+              "question": "एक ही $100 की ख़रीद के लिए दो रसीदों में अलग-अलग टैक्स राशि क्यों दिखी?",
+              "answer": "लगभग निश्चित रूप से एक अलग संयुक्त स्थानीय दर की वजह से — राज्य की आधार दर, साथ में हर ख़ास जगह पर लागू काउंटी, शहर, और ज़िले की जो भी दरें हों, जो थोड़ी दूरी पर मौजूद दो दुकानों के बीच भी अलग हो सकती हैं।"
             },
             {
-              "question": "How do I find the pre-tax price from a receipt that only shows the total?",
-              "answer": "Divide the tax-inclusive total by one plus the tax rate expressed as a decimal. A $108 total at 8% tax implies a pre-tax price of $108 ÷ 1.08 = $100. This tool's \"Extract From Total\" mode performs exactly this calculation."
+              "question": "मैं ऐसी रसीद से टैक्स-पूर्व कीमत कैसे निकालूँ जो केवल कुल दिखाती है?",
+              "answer": "टैक्स-सहित कुल को (1 प्लस टैक्स दर, दशमलव के रूप में) से भाग दें। 8% टैक्स पर $108 की कुल राशि का मतलब है $108 ÷ 1.08 = $100 की टैक्स-पूर्व कीमत। इस टूल का \"कुल से निकालें\" मोड ठीक यही गणना करता है।"
             },
             {
-              "question": "Do all US states charge sales tax?",
-              "answer": "No — Delaware, Montana, New Hampshire, and Oregon charge no statewide sales tax at all. Alaska charges no state-level tax either, but unlike the other three, it allows individual municipalities to levy their own local sales tax."
+              "question": "क्या सभी US राज्य सेल्स टैक्स वसूलते हैं?",
+              "answer": "नहीं — Delaware, Montana, New Hampshire, और Oregon में राज्य-स्तर पर बिल्कुल कोई सेल्स टैक्स नहीं लगता। Alaska भी राज्य-स्तर पर कोई टैक्स नहीं वसूलता, लेकिन बाक़ी तीनों के उलट, यह अलग-अलग नगर पालिकाओं को अपना ख़ुद का स्थानीय सेल्स टैक्स लगाने की अनुमति देता है।"
             },
             {
-              "question": "Do online purchases charge sales tax?",
-              "answer": "Almost always now, even from out-of-state sellers. Following the Supreme Court's 2018 Wayfair decision, states can require a retailer to collect sales tax once it crosses a sales or transaction threshold in that state, regardless of whether it has any physical presence there — which is why most online checkouts now calculate a locally correct tax automatically."
+              "question": "क्या ऑनलाइन ख़रीद पर सेल्स टैक्स लगता है?",
+              "answer": "अब लगभग हमेशा, यहाँ तक कि राज्य के बाहर के विक्रेताओं से भी। Supreme Court के 2018 के Wayfair फ़ैसले के बाद, राज्य किसी रिटेलर को सेल्स टैक्स वसूलने के लिए बाध्य कर सकते हैं जैसे ही वह उस राज्य में बिक्री या लेन-देन की एक सीमा पार कर लेता है, चाहे उसकी वहाँ कोई भौतिक मौजूदगी हो या न हो — यही वजह है कि ज़्यादातर ऑनलाइन चेकआउट अब अपने-आप स्थानीय रूप से सही टैक्स की गणना करते हैं।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "Mississippi's Depression-Era Invention",
-            "paragraph": "The first broad-based state sales tax in the US is less than a century old. Facing collapsed property tax revenue as the Great Depression gutted its overwhelmingly agricultural economy, Mississippi enacted a 2% general sales tax in 1930 — the first state to tax retail sales broadly as a general revenue source, rather than as a narrow excise on a handful of specific goods. The idea spread fast: within the following decade, roughly two dozen more states adopted their own version of the same mechanism, and today 45 states plus Washington, D.C. levy one."
+            "title": "Mississippi का डिप्रेशन-युग का आविष्कार",
+            "paragraph": "US में पहला व्यापक राज्य सेल्स टैक्स एक सदी से भी कम पुराना है। Great Depression के दौरान अपनी भारी कृषि-आधारित अर्थव्यवस्था तबाह होने से प्रॉपर्टी टैक्स राजस्व ढह जाने का सामना करते हुए, Mississippi ने 1930 में 2% का सामान्य सेल्स टैक्स लागू किया — यह रिटेल बिक्री पर एक सामान्य राजस्व स्रोत के रूप में व्यापक रूप से टैक्स लगाने वाला पहला राज्य था, न कि मुट्ठी भर विशिष्ट सामान पर एक संकीर्ण उत्पाद शुल्क के रूप में। यह विचार तेज़ी से फैला: अगले एक दशक के भीतर, लगभग दो दर्जन और राज्यों ने इसी तंत्र का अपना संस्करण अपनाया, और आज 45 राज्य और Washington, D.C. इसे वसूलते हैं।"
           },
           "modernDevelopments": {
-            "title": "From Storefronts to Server Farms",
-            "paragraph": "For decades, a state could only require a business to collect its sales tax if that business had a physical presence there — a rule the Supreme Court set in 1967 and reaffirmed in 1992's Quill Corp. v. North Dakota, which let early catalog and online retailers ship into a state tax-free as long as they had no local store or warehouse. That changed in 2018, when South Dakota v. Wayfair, Inc. overturned the physical-presence rule and replaced it with \"economic nexus\" — a seller can now owe sales tax in a state purely by crossing a threshold of sales or transactions there, regardless of whether it has ever set foot in it. Within a few years, nearly every state with a sales tax adopted its own economic-nexus threshold, which is the reason almost every online checkout today calculates a locally correct tax amount automatically."
+            "title": "स्टोरफ़्रंट से सर्वर फ़ार्म तक",
+            "paragraph": "दशकों तक, कोई राज्य किसी व्यवसाय को अपना सेल्स टैक्स वसूलने के लिए तभी बाध्य कर सकता था जब उस व्यवसाय की वहाँ भौतिक मौजूदगी हो — यह नियम Supreme Court ने 1967 में तय किया और 1992 के Quill Corp. v. North Dakota में दोहराया, जिसने शुरुआती कैटलॉग और ऑनलाइन रिटेलरों को किसी राज्य में बिना टैक्स के भेजने दिया जब तक उनका वहाँ कोई स्थानीय स्टोर या वेयरहाउस न हो। यह 2018 में बदल गया, जब South Dakota v. Wayfair, Inc. ने भौतिक-मौजूदगी नियम को पलट दिया और इसकी जगह \"आर्थिक नेक्सस\" ले आया — अब कोई विक्रेता किसी राज्य में केवल वहाँ बिक्री या लेन-देन की एक सीमा पार करके सेल्स टैक्स का बकाया हो सकता है, चाहे उसने वहाँ कभी क़दम रखा हो या नहीं। कुछ ही सालों में, सेल्स टैक्स वाले लगभग हर राज्य ने अपनी ख़ुद की आर्थिक-नेक्सस सीमा अपना ली, यही वजह है कि आज लगभग हर ऑनलाइन चेकआउट अपने-आप स्थानीय रूप से सही टैक्स राशि की गणना करता है।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Tax policy and its effect on prices and consumer behavior is studied within Accounting & Finance programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "टैक्स नीति और कीमतों व उपभोक्ता व्यवहार पर इसका असर Accounting & Finance प्रोग्रामों में पढ़ाया जाता है। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Harvard University",
-                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.hbs.edu/faculty/units/am/Pages/default.aspx",
-                "online": "No — HBS's MBA, which houses the Accounting & Management unit's teaching, is in-person on Harvard's Boston campus; separate Executive Education offerings include some online courses, not this program."
+                "online": "नहीं — HBS का MBA, जिसमें Accounting & Management यूनिट की पढ़ाई होती है, Harvard के बॉस्टन कैंपस पर इन-पर्सन है; अलग Executive Education प्रस्तावों में कुछ ऑनलाइन कोर्स शामिल हैं, यह प्रोग्राम नहीं।"
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/finance/master-finance",
-                "online": "No — MIT Sloan's Master of Finance is an in-person, 12- or 18-month program on MIT's Cambridge campus."
+                "online": "नहीं — MIT Sloan का Master of Finance MIT के कैंब्रिज कैंपस पर एक इन-पर्सन, 12- या 18-महीने का प्रोग्राम है।"
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/accounting",
-                "online": "No — Stanford GSB's Accounting area teaches through its in-person MBA, MSx, and PhD programs; the school's online offerings are limited to non-degree executive courses."
+                "online": "नहीं — Stanford GSB का Accounting क्षेत्र अपने इन-पर्सन MBA, MSx, और PhD प्रोग्रामों के ज़रिए पढ़ाया जाता है; स्कूल के ऑनलाइन प्रस्ताव सिर्फ़ नॉन-डिग्री एग्ज़ीक्यूटिव कोर्स तक सीमित हैं।"
               },
               {
                 "name": "University of Oxford (Saïd Business School)",
-                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.sbs.ox.ac.uk/programmes/mbas/mba/academic-curriculum/core-courses-and-electives",
-                "online": "No — the Oxford MBA, whose core curriculum includes accounting and finance, is a full-time in-person program; Saïd's online offerings are separate short courses, not this degree."
+                "online": "नहीं — Oxford MBA, जिसके मुख्य पाठ्यक्रम में अकाउंटिंग और फ़ाइनेंस शामिल है, एक पूर्णकालिक इन-पर्सन प्रोग्राम है; Saïd के ऑनलाइन प्रस्ताव अलग शॉर्ट कोर्स हैं, यह डिग्री नहीं।"
               },
               {
                 "name": "University of Chicago (Booth)",
-                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "note": "Accounting & Finance में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.chicagobooth.edu/faculty/academic-areas/accounting",
-                "online": "No — Booth's MBA programs (Full-Time, Evening, Weekend, Executive) are in-person or hybrid on-campus formats; there is no fully online Booth MBA."
+                "online": "नहीं — Booth के MBA प्रोग्राम (फ़ुल-टाइम, इवनिंग, वीकेंड, एग्ज़ीक्यूटिव) इन-पर्सन या हाइब्रिड ऑन-कैंपस फ़ॉर्मेट में हैं; कोई पूरी तरह ऑनलाइन Booth MBA नहीं है।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Accounting through its School of Business Administration.",
+                "note": "अपने School of Business Administration के ज़रिए Accounting में मेजर के साथ Bachelor of Science in Business Administration प्रदान करता है।",
                 "url": "https://www.aus.edu/sba/department-of-accounting-and-information-systems/bachelor-of-science-in-business-administration-major-in-accounting",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "वैज्ञानिक संदर्भ",
           "citation": "Chetty, R., Looney, A., & Kroft, K. (2009). Salience and taxation: Theory and evidence. American Economic Review, 99(4), 1145–1177.",
-          "note": "A landmark study finding that posting tax-inclusive prices reduces demand more than adding the same tax at the register — consumers systematically underreact to taxes that aren't already folded into the sticker price they see.",
+          "note": "एक ऐतिहासिक अध्ययन जिसमें पाया गया कि टैक्स-सहित कीमतें दिखाने से काउंटर पर वही टैक्स जोड़ने की तुलना में माँग ज़्यादा घटती है — उपभोक्ता उन टैक्सों पर व्यवस्थित रूप से कम प्रतिक्रिया देते हैं जो उनके देखे गए स्टिकर मूल्य में पहले से शामिल नहीं होते।",
           "url": "https://doi.org/10.1257/aer.99.4.1145",
-          "readOriginal": "Read the Original Article"
+          "readOriginal": "मूल लेख पढ़ें"
         }
       }
     },
