@@ -3588,187 +3588,187 @@
       }
     },
     "discount-calculator": {
-      "title": "Discount Calculator",
-      "description": "Calculate the final price for stacked discounts, or reverse-engineer the original price from a sale price — with a live comparison bar for every result.",
+      "title": "Rabattrechner",
+      "description": "Berechnen Sie den Endpreis bei gestaffelten Rabatten oder ermitteln Sie den Originalpreis aus einem Verkaufspreis zurück — mit einem Live-Vergleichsbalken für jedes Ergebnis.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hinter dem Werkzeug"
       },
       "aboveFold": {
-        "resultTitle": "Your Savings",
+        "resultTitle": "Ihre Ersparnis",
         "stackingReference": {
-          "title": "Stacked Discount Reference",
-          "intro": "Two discounts applied one after another never simply add up — here's the actual combined effect for common pairs.",
+          "title": "Referenz für gestaffelte Rabatte",
+          "intro": "Zwei nacheinander angewendete Rabatte addieren sich nie einfach — hier ist der tatsächliche kombinierte Effekt für gängige Kombinationen.",
           "rows": [
             {
-              "stages": "10% + 10%",
-              "effective": "19% off"
+              "stages": "10 % + 10 %",
+              "effective": "19 % Rabatt"
             },
             {
-              "stages": "20% + 10%",
-              "effective": "28% off"
+              "stages": "20 % + 10 %",
+              "effective": "28 % Rabatt"
             },
             {
-              "stages": "30% + 10%",
-              "effective": "37% off"
+              "stages": "30 % + 10 %",
+              "effective": "37 % Rabatt"
             },
             {
-              "stages": "50% + 25%",
-              "effective": "62.5% off"
+              "stages": "50 % + 25 %",
+              "effective": "62,5 % Rabatt"
             },
             {
-              "stages": "20% + 20% + 10%",
-              "effective": "42.4% off"
+              "stages": "20 % + 20 % + 10 %",
+              "effective": "42,4 % Rabatt"
             }
           ]
         }
       },
       "form": {
-        "inputTitle": "Your Price",
-        "modeApply": "Apply Discount(s)",
-        "modeReverse": "Find Original Price",
-        "priceLabel": "Original Price",
-        "finalPriceLabel": "Sale Price You Paid",
-        "pricePlaceholder": "e.g. 120",
-        "discountsLabel": "Discount(s)",
-        "discountLabel": "Discount Percentage (%)",
-        "discountPlaceholder": "Stage {stage} %",
-        "addStage": "Add Another Discount",
-        "removeStage": "Remove this discount"
+        "inputTitle": "Ihr Preis",
+        "modeApply": "Rabatt(e) anwenden",
+        "modeReverse": "Originalpreis ermitteln",
+        "priceLabel": "Originalpreis",
+        "finalPriceLabel": "Bezahlter Verkaufspreis",
+        "pricePlaceholder": "z. B. 120",
+        "discountsLabel": "Rabatt(e)",
+        "discountLabel": "Rabattprozentsatz (%)",
+        "discountPlaceholder": "Stufe {stage} %",
+        "addStage": "Weiteren Rabatt hinzufügen",
+        "removeStage": "Diesen Rabatt entfernen"
       },
       "result": {
-        "originalPrice": "Original Price",
-        "finalPrice": "Final Price",
-        "saved": "You Save",
-        "discountLabel": "Discount",
-        "effectiveDiscountLabel": "Effective Discount",
-        "stackedNote": "{stages} stacked sequentially — not simply added together."
+        "originalPrice": "Originalpreis",
+        "finalPrice": "Endpreis",
+        "saved": "Sie sparen",
+        "discountLabel": "Rabatt",
+        "effectiveDiscountLabel": "Effektiver Rabatt",
+        "stackedNote": "{stages} nacheinander gestaffelt — nicht einfach addiert."
       },
       "education": {
         "intro": {
-          "title": "How Stacked Discounts Actually Work",
-          "paragraph1": "A discount is a percentage taken off a price, but when two or more discounts apply to the same item, they don't simply add together. Each successive discount applies to the already-reduced price, not the original one — so a $100 item that gets 30% off first drops to $70, and a further 10% off applies to that $70, not the original $100, bringing it to $63. The combined effect is 37% off, not the 40% you'd get by just adding the two rates.",
-          "paragraph2": "The same relationship runs in reverse. If you know a sale price and the discount rate printed on the tag, you can recover the original price by dividing the sale price by one minus the discount rate as a decimal — a $70 sale price at 30% off implies an original price of $70 ÷ 0.70 = $100. This is useful for verifying a retailer's claimed \"original price,\" or simply for figuring out what something cost before a markdown you know the rate of.",
+          "title": "Wie gestaffelte Rabatte tatsächlich funktionieren",
+          "paragraph1": "Ein Rabatt ist ein Prozentsatz, der von einem Preis abgezogen wird, aber wenn zwei oder mehr Rabatte auf denselben Artikel angewendet werden, addieren sie sich nicht einfach. Jeder weitere Rabatt gilt für den bereits reduzierten Preis, nicht für den Originalpreis — ein Artikel für 100 $ mit zunächst 30 % Rabatt sinkt auf 70 $, und weitere 10 % Rabatt gelten für diese 70 $, nicht für die ursprünglichen 100 $, sodass sich 63 $ ergeben. Der kombinierte Effekt beträgt 37 % Rabatt, nicht die 40 %, die man durch einfaches Addieren der beiden Sätze erhalten würde.",
+          "paragraph2": "Dieselbe Beziehung funktioniert auch umgekehrt. Wenn Sie einen Verkaufspreis und den auf dem Etikett angegebenen Rabattsatz kennen, können Sie den Originalpreis ermitteln, indem Sie den Verkaufspreis durch eins minus den Rabattsatz als Dezimalzahl teilen — ein Verkaufspreis von 70 $ bei 30 % Rabatt impliziert einen Originalpreis von 70 $ ÷ 0,70 = 100 $. Das ist nützlich, um den vom Händler angegebenen „Originalpreis“ zu überprüfen, oder einfach, um herauszufinden, was etwas vor einer Preissenkung kostete, deren Satz Sie kennen.",
           "diagram": {
-            "startLabel": "$100 (start)",
-            "afterFirstLabel": "$70 (after 30% off)",
-            "afterSecondLabel": "$63 (after another 10% off)",
-            "caption": "Each discount applies to the already-discounted price, not the original — so two discounts stack to less than their sum: 30% + 10% is 37% off in total, not 40%."
+            "startLabel": "100 $ (Start)",
+            "afterFirstLabel": "70 $ (nach 30 % Rabatt)",
+            "afterSecondLabel": "63 $ (nach weiteren 10 % Rabatt)",
+            "caption": "Jeder Rabatt gilt für den bereits reduzierten Preis, nicht für den Originalpreis — zwei Rabatte stapeln sich daher auf weniger als ihre Summe: 30 % + 10 % ergeben insgesamt 37 % Rabatt, nicht 40 %."
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "Four worked examples, including a reverse calculation, showing the exact inputs and results.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Vier durchgerechnete Beispiele, darunter eine Rückrechnung, mit den genauen Eingaben und Ergebnissen.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "$200 item, single 25% discount",
-              "result": "$150.00 (save $50.00)"
+              "scenario": "200-$-Artikel, einzelner 25-%-Rabatt",
+              "result": "150,00 $ (Ersparnis 50,00 $)"
             },
             {
-              "scenario": "$100 item, stacked 30% then 10% off",
-              "result": "$63.00 (save $37.00 — 37% effective)"
+              "scenario": "100-$-Artikel, gestaffelt 30 % dann 10 % Rabatt",
+              "result": "63,00 $ (Ersparnis 37,00 $ — effektiv 37 %)"
             },
             {
-              "scenario": "$80 item, stacked 20% + 20% + 10% off",
-              "result": "$46.08 (save $33.92 — 42.4% effective)"
+              "scenario": "80-$-Artikel, gestaffelt 20 % + 20 % + 10 % Rabatt",
+              "result": "46,08 $ (Ersparnis 33,92 $ — effektiv 42,4 %)"
             },
             {
-              "scenario": "Paid $70 after a 30% discount — find the original price",
-              "result": "Original price was $100.00"
+              "scenario": "70 $ nach einem 30-%-Rabatt bezahlt — Originalpreis ermitteln",
+              "result": "Der Originalpreis betrug 100,00 $"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Why isn't 30% off plus 10% off the same as 40% off?",
-              "answer": "Because the second discount applies to the price after the first one, not to the original price. $100 at 30% off is $70; a further 10% off applies to that $70, removing $7, not $10 — for a combined $63 final price, which is 37% off the original, not 40%."
+              "question": "Warum entsprechen 30 % Rabatt plus 10 % Rabatt nicht 40 % Rabatt?",
+              "answer": "Weil der zweite Rabatt auf den Preis nach dem ersten angewendet wird, nicht auf den Originalpreis. 100 $ mit 30 % Rabatt ergeben 70 $; weitere 10 % Rabatt gelten für diese 70 $ und entfernen 7 $, nicht 10 $ — für einen kombinierten Endpreis von 63 $, was 37 % Rabatt auf den Originalpreis entspricht, nicht 40 %."
             },
             {
-              "question": "Does the order of stacked discounts change the final price?",
-              "answer": "No — multiplying percentages together is commutative, so 30% off then 10% off produces exactly the same final price as 10% off then 30% off. A retailer might still restrict the order for business reasons, like excluding an already-clearance item from an additional coupon, but the arithmetic itself doesn't care about order."
+              "question": "Verändert die Reihenfolge gestaffelter Rabatte den Endpreis?",
+              "answer": "Nein — die Multiplikation von Prozentsätzen ist kommutativ, daher ergibt 30 % Rabatt gefolgt von 10 % Rabatt genau denselben Endpreis wie 10 % Rabatt gefolgt von 30 % Rabatt. Ein Händler kann die Reihenfolge dennoch aus geschäftlichen Gründen einschränken, etwa um einen bereits reduzierten Artikel von einem zusätzlichen Gutschein auszuschließen, aber die Rechnung selbst kümmert sich nicht um die Reihenfolge."
             },
             {
-              "question": "How do I find the original price if I only know the sale price and the discount rate?",
-              "answer": "Divide the sale price by one minus the discount rate expressed as a decimal. A $70 item marked 30% off had an original price of $70 ÷ 0.70 = $100. This tool's \"Find Original Price\" mode performs exactly this calculation."
+              "question": "Wie finde ich den Originalpreis, wenn ich nur den Verkaufspreis und den Rabattsatz kenne?",
+              "answer": "Teilen Sie den Verkaufspreis durch eins minus den als Dezimalzahl ausgedrückten Rabattsatz. Ein mit 30 % Rabatt ausgezeichneter Artikel für 70 $ hatte einen Originalpreis von 70 $ ÷ 0,70 = 100 $. Der Modus „Originalpreis ermitteln“ dieses Werkzeugs führt genau diese Berechnung durch."
             },
             {
-              "question": "What's the difference between a discount and a markdown?",
-              "answer": "The terms are often used interchangeably, but retailers typically distinguish them: a discount is usually a temporary, promotion- or coupon-driven price cut, while a markdown is usually a longer-term reduction to the standing shelf price meant to clear inventory."
+              "question": "Was ist der Unterschied zwischen einem Rabatt und einer Preissenkung (Markdown)?",
+              "answer": "Die Begriffe werden oft synonym verwendet, aber Händler unterscheiden sie in der Regel: Ein Rabatt ist meist eine vorübergehende, aktions- oder gutscheingebundene Preissenkung, während eine Preissenkung (Markdown) meist eine langfristigere Reduzierung des regulären Listenpreises ist, um Lagerbestände abzubauen."
             },
             {
-              "question": "Why do some stores advertise a discount in dollars and others in percent?",
-              "answer": "Research on discount framing has found that a percentage-off discount tends to look more generous on a lower-priced item, while a dollar-off discount tends to look more generous on a higher-priced item — so retailers often choose whichever framing makes an identical price cut appear larger for that item's price tier."
+              "question": "Warum werben manche Geschäfte mit einem Rabatt in Euro und andere in Prozent?",
+              "answer": "Forschung zur Rabatt-Darstellung hat gezeigt, dass ein prozentualer Rabatt bei einem günstigeren Artikel großzügiger wirkt, während ein Rabatt in Euro-Beträgen bei einem teureren Artikel großzügiger wirkt — Händler wählen daher oft die Darstellung, bei der dieselbe Preissenkung für die jeweilige Preisklasse größer erscheint."
             },
             {
-              "question": "Does a bigger percentage discount always mean bigger savings in dollar terms?",
-              "answer": "No. A 50% discount on a $20 item saves $10, while a 10% discount on a $300 item saves $30 — the percentage rate alone doesn't tell you the actual amount saved, which is exactly why this tool always shows both figures side by side."
+              "question": "Bedeutet ein höherer prozentualer Rabatt immer eine größere Ersparnis in Euro?",
+              "answer": "Nein. Ein 50-%-Rabatt auf einen 20-$-Artikel spart 10 $, während ein 10-%-Rabatt auf einen 300-$-Artikel 30 $ spart — der Prozentsatz allein sagt nichts über den tatsächlich gesparten Betrag aus, weshalb dieses Werkzeug stets beide Zahlen nebeneinander anzeigt."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hinter diesem Werkzeug",
           "history": {
-            "title": "How the Fixed Price Tag Made \"Percent Off\" Possible",
-            "paragraph": "Before the mid-19th century, most retail prices in the United States were individually negotiated through haggling, so there was no single stable reference point for a discount to apply against — a \"good deal\" was whatever price a particular haggling session produced. That changed with Philadelphia merchant John Wanamaker, who introduced marked, fixed price tags at his Oak Hall clothing store in 1861 and formalized a strict \"one price\" policy across his stores by 1871, paired with one of the first money-back guarantees in American retail. A fixed, marked price is exactly what makes a later \"25% off\" sale tag a specific, verifiable claim rather than just another opening bid to haggle down from — the arithmetic this tool automates only means something once there's a stable original price to calculate it against."
+            "title": "Wie das feste Preisschild „Prozent Rabatt“ überhaupt möglich machte",
+            "paragraph": "Vor der Mitte des 19. Jahrhunderts wurden die meisten Einzelhandelspreise in den Vereinigten Staaten individuell durch Feilschen ausgehandelt, sodass es keinen einzigen stabilen Bezugspunkt gab, gegen den ein Rabatt gelten konnte — ein „gutes Geschäft“ war schlicht das, was bei einer bestimmten Feilscherei herauskam. Das änderte sich mit dem Philadelphia-Kaufmann John Wanamaker, der 1861 in seinem Bekleidungsgeschäft Oak Hall ausgezeichnete, feste Preisschilder einführte und bis 1871 in all seinen Geschäften eine strikte „Ein-Preis“-Politik durchsetzte, gepaart mit einer der ersten Geld-zurück-Garantien im amerikanischen Einzelhandel. Ein fester, ausgezeichneter Preis ist genau das, was ein späteres „25 % Rabatt“-Etikett zu einer konkreten, überprüfbaren Aussage macht statt nur zu einem weiteren Eröffnungsangebot zum Herunterhandeln — die Rechnung, die dieses Werkzeug automatisiert, hat erst dann Bedeutung, wenn es einen stabilen Originalpreis gibt, gegen den sie berechnet werden kann."
           },
           "modernDevelopments": {
-            "title": "From the Clearance Rack to Black Friday",
-            "paragraph": "The term \"Black Friday\" didn't start as a retail slogan — Philadelphia police coined it in the 1950s and 60s as a complaint about the traffic jams and unruly crowds that swamped the city the day after Thanksgiving, and local merchants unsuccessfully tried to rebrand it as the friendlier \"Big Friday.\" It wasn't until the term spread nationally in the 1980s that retailers reframed it around the idea of stores finally turning a profit — going \"into the black\" — for the year. Today's version of the same clearance-sale logic runs largely on software: personalized coupon codes, algorithmically timed flash sales, and abandoned-cart discount emails all apply the identical stacked-percentage math this tool calculates, just triggered automatically instead of printed on a tag."
+            "title": "Vom Ausverkaufsregal zum Black Friday",
+            "paragraph": "Der Begriff „Black Friday“ begann nicht als Einzelhandels-Slogan — die Polizei von Philadelphia prägte ihn in den 1950er- und 60er-Jahren als Beschwerde über die Verkehrsstaus und aufgebrachten Menschenmengen, die die Stadt am Tag nach Thanksgiving überschwemmten, und örtliche Händler versuchten erfolglos, ihn als freundlicheres „Big Friday“ umzudeuten. Erst als sich der Begriff in den 1980er-Jahren landesweit verbreitete, deuteten Händler ihn im Sinne der Idee um, dass Geschäfte für das Jahr endlich Gewinn machten — „in die schwarzen Zahlen“ kamen. Die heutige Version derselben Ausverkaufs-Logik läuft größtenteils über Software: personalisierte Gutscheincodes, algorithmisch getimte Blitzverkäufe und E-Mails zu abgebrochenen Warenkörben wenden alle dieselbe gestaffelte Prozentrechnung an, die dieses Werkzeug berechnet — nur automatisch ausgelöst statt auf ein Etikett gedruckt."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "The psychology and strategy behind pricing and discounting is studied within Marketing programs. Here are the top 5 globally for Marketing in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "Akademischer Werdegang",
+            "intro": "Die Psychologie und Strategie hinter Preisgestaltung und Rabatten wird im Rahmen von Marketing-Studiengängen untersucht. Hier sind die weltweit fünf besten für Marketing im QS World University Rankings by Subject 2025, plus eine regionale Option:",
             "universities": [
               {
                 "name": "University of Cambridge",
-                "note": "Ranked joint #1 worldwide for Marketing (QS World University Rankings by Subject 2025).",
+                "note": "Gemeinsam auf Platz 1 weltweit für Marketing (QS World University Rankings by Subject 2025).",
                 "url": "https://www.jbs.cam.ac.uk/masters-degrees/mba/",
-                "online": "No — the full-time Cambridge MBA, which houses its marketing coursework, is in-person; a separate 20-month Executive MBA blends online learning with periodic residencies, but that's a different program."
+                "online": "Nein — der Vollzeit-MBA von Cambridge, der die Marketing-Lehrveranstaltungen enthält, findet in Präsenz statt; ein separater 20-monatiger Executive MBA verbindet Online-Lernen mit periodischen Präsenzphasen, ist aber ein anderes Programm."
               },
               {
                 "name": "University of Pennsylvania (Wharton)",
-                "note": "Ranked joint #1 worldwide for Marketing (QS World University Rankings by Subject 2025).",
+                "note": "Gemeinsam auf Platz 1 weltweit für Marketing (QS World University Rankings by Subject 2025).",
                 "url": "https://marketing.wharton.upenn.edu/programs/undergraduate/",
-                "online": "No — Wharton's undergraduate Marketing concentration (BS) is an in-person program on Penn's Philadelphia campus; Wharton Online offers separate individual courses and certificates, not this degree."
+                "online": "Nein — Whartons Bachelor-Schwerpunkt Marketing (BS) ist ein Präsenzprogramm auf dem Philadelphia-Campus von Penn; Wharton Online bietet separate Einzelkurse und Zertifikate an, nicht diesen Abschluss."
               },
               {
                 "name": "Massachusetts Institute of Technology (MIT Sloan)",
-                "note": "Ranked #3 worldwide for Marketing (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Marketing (QS World University Rankings by Subject 2025).",
                 "url": "https://mitsloan.mit.edu/faculty/academic-groups/marketing/courses-and-programs",
-                "online": "No — MIT Sloan's full-time MBA, including its Marketing academic group coursework, is in-person on MIT's Cambridge campus."
+                "online": "Nein — der Vollzeit-MBA von MIT Sloan, einschließlich der Lehrveranstaltungen der Marketing-Fachgruppe, findet in Präsenz auf dem Cambridge-Campus des MIT statt."
               },
               {
                 "name": "Stanford University (Stanford GSB)",
-                "note": "Ranked #4 worldwide for Marketing (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Marketing (QS World University Rankings by Subject 2025).",
                 "url": "https://www.gsb.stanford.edu/faculty-research/faculty/academic-areas/marketing",
-                "online": "No — Stanford GSB's Marketing academic area is taught through its in-person, full-time MBA; the school's online offerings are limited to non-degree executive courses."
+                "online": "Nein — der Marketing-Fachbereich der Stanford GSB wird über ihren Präsenz-Vollzeit-MBA gelehrt; die Online-Angebote der Hochschule beschränken sich auf nicht-graduierende Weiterbildungskurse."
               },
               {
                 "name": "Northwestern University (Kellogg)",
-                "note": "Ranked #5 worldwide for Marketing (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Marketing (QS World University Rankings by Subject 2025).",
                 "url": "https://www.kellogg.northwestern.edu/programs/full-time-mba/academics/majors-pathways/marketing-major.aspx",
-                "online": "No — Kellogg's Full-Time MBA Marketing major is in-person; separate Executive Education programs offer standalone online marketing courses, not this major itself."
+                "online": "Nein — der Marketing-Schwerpunkt des Vollzeit-MBA von Kellogg findet in Präsenz statt; separate Executive-Education-Programme bieten eigenständige Online-Marketingkurse an, nicht diesen Schwerpunkt selbst."
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Business Administration with a Major in Marketing through its School of Business.",
+                "note": "Bietet über ihre School of Business einen Bachelor of Science in Business Administration mit Hauptfach Marketing an.",
                 "url": "https://www.aus.edu/sba/department-of-marketing-and-information-systems/bachelor-of-science-in-business-administration-major-in-marketing",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "Die Durchführungsart wird auf der offiziellen Programmseite nicht angegeben."
               }
             ]
           }
         },
         "references": {
-          "title": "Scientific References",
+          "title": "Wissenschaftliche Quellen",
           "citation": "González, E. M., Esteva, E., Roggeveen, A. L., & Grewal, D. (2016). Amount off versus percentage off—when does it matter? Journal of Business Research, 69(3), 1022–1027.",
-          "note": "A study finding that consumers perceive a discount as more valuable when it's framed as a percentage off for lower-priced items, but as a dollar amount off for higher-priced items — even when the two framings represent an identical price cut.",
+          "note": "Eine Studie, die zeigt, dass Verbraucher einen Rabatt als wertvoller empfinden, wenn er bei günstigeren Artikeln als Prozentsatz und bei teureren Artikeln als Euro-Betrag dargestellt wird — selbst wenn beide Darstellungen dieselbe Preissenkung bedeuten.",
           "url": "https://doi.org/10.1016/j.jbusres.2015.08.014",
-          "readOriginal": "Read the Original Article"
+          "readOriginal": "Originalartikel lesen"
         }
       }
     },
