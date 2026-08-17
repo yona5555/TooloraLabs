@@ -5687,169 +5687,175 @@
       }
     },
     "file-size-converter": {
-      "title": "File Size Converter",
-      "description": "Convert file sizes across every unit at once, compare decimal (SI) vs binary (IEC) standards, and estimate download time — live as you type.",
+      "title": "फ़ाइल साइज़ कन्वर्टर",
+      "description": "एक साथ हर यूनिट में फ़ाइल साइज़ कन्वर्ट करें, दशमलव (SI) बनाम बाइनरी (IEC) मानकों की तुलना करें, और डाउनलोड समय का अनुमान लगाएँ — टाइप करते ही लाइव।",
       "nav": {
-        "tool": "Converter",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कन्वर्टर",
+        "faq": "सामान्य सवाल",
+        "behindTheTool": "टूल के पीछे"
       },
       "aboveFold": {
-        "resultTitle": "All Units",
-        "placeholder": "Enter a value to see it converted across every unit and standard here.",
-        "exactBytes": "Exact Bytes",
-        "decimalTitle": "Decimal (SI) — ×1000",
-        "binaryTitle": "Binary (IEC) — ×1024",
+        "resultTitle": "सभी यूनिट",
+        "placeholder": "यहाँ हर यूनिट और मानक में कन्वर्ट किया गया देखने के लिए एक मान दर्ज करें।",
+        "exactBytes": "सटीक बाइट्स",
+        "decimalTitle": "दशमलव (SI) — ×1000",
+        "binaryTitle": "बाइनरी (IEC) — ×1024",
         "transferTime": {
-          "title": "Estimated Download Time",
-          "intro": "How long this file would take to download at common connection speeds.",
-          "seconds": "sec",
-          "minutes": "min",
-          "hours": "hr",
-          "days": "days",
+          "title": "अनुमानित डाउनलोड समय",
+          "intro": "आम कनेक्शन स्पीड पर इस फ़ाइल को डाउनलोड होने में कितना समय लगेगा।",
+          "seconds": "सेकंड",
+          "minutes": "मिनट",
+          "hours": "घंटे",
+          "days": "दिन",
           "presets": {
-            "dialUp": "Dial-Up (56 Kbps)",
-            "mobile4g": "4G Mobile (25 Mbps)",
-            "broadbandWifi": "Home Wi-Fi (100 Mbps)",
-            "gigabitFiber": "Gigabit Fiber (1000 Mbps)"
+            "dialUp": "डायल-अप (56 Kbps)",
+            "mobile4g": "4G मोबाइल (25 Mbps)",
+            "broadbandWifi": "होम Wi-Fi (100 Mbps)",
+            "gigabitFiber": "गीगाबिट फ़ाइबर (1000 Mbps)"
           }
         }
       },
       "form": {
-        "inputTitle": "Your File Size",
-        "from": "From",
-        "to": "To",
-        "swap": "Swap units",
-        "valueLabel": "Value",
-        "valuePlaceholder": "Enter value",
-        "unitLabel": "Unit",
-        "standardLabel": "Standard",
-        "standardDecimal": "Decimal (SI)",
-        "standardDecimalHint": "1 KB = 1000 bytes — used by storage manufacturers and network speeds.",
-        "standardBinary": "Binary (IEC)",
-        "standardBinaryHint": "1 KB = 1024 bytes — used by RAM and most operating system displays.",
-        "convert": "Convert"
+        "inputTitle": "आपका फ़ाइल साइज़",
+        "from": "से",
+        "to": "तक",
+        "swap": "यूनिट बदलें",
+        "valueLabel": "मान",
+        "valuePlaceholder": "मान दर्ज करें",
+        "unitLabel": "यूनिट",
+        "standardLabel": "मानक",
+        "standardDecimal": "दशमलव (SI)",
+        "standardDecimalHint": "1 KB = 1000 बाइट्स — स्टोरेज निर्माताओं और नेटवर्क स्पीड द्वारा इस्तेमाल होता है।",
+        "standardBinary": "बाइनरी (IEC)",
+        "standardBinaryHint": "1 KB = 1024 बाइट्स — RAM और ज़्यादातर ऑपरेटिंग सिस्टम डिस्प्ले द्वारा इस्तेमाल होता है।",
+        "convert": "कन्वर्ट करें"
       },
       "units": {
-        "B": "Bytes (B)",
-        "KB": "Kilobytes (KB)",
-        "MB": "Megabytes (MB)",
-        "GB": "Gigabytes (GB)",
-        "TB": "Terabytes (TB)",
-        "PB": "Petabytes (PB)"
+        "B": "बाइट्स (B)",
+        "KB": "किलोबाइट्स (KB)",
+        "MB": "मेगाबाइट्स (MB)",
+        "GB": "गीगाबाइट्स (GB)",
+        "TB": "टेराबाइट्स (TB)",
+        "PB": "पेटाबाइट्स (PB)"
       },
       "errors": {
-        "required": "Please enter a valid number.",
-        "negativeValue": "Value must not be negative."
+        "required": "कृपया एक मान्य संख्या दर्ज करें।",
+        "negativeValue": "मान ऋणात्मक नहीं होना चाहिए।"
       },
       "education": {
         "intro": {
-          "title": "Why File Size Conversion Isn't as Simple as It Looks",
-          "paragraph1": "There are actually two different, equally legitimate definitions of \"kilobyte\" in everyday use, and they disagree by more than 2%. The decimal (SI) definition treats \"kilo\" the same way it's used everywhere else in science — exactly 1,000 — so 1 KB = 1,000 bytes, 1 MB = 1,000,000 bytes, and so on. The binary definition instead uses powers of 2, since computer memory is addressed in binary: 1 KB = 2¹⁰ = 1,024 bytes, 1 MB = 2²⁰ = 1,048,576 bytes. Both are real, both are still in active use today, and neither is simply 'wrong' — they're answering different questions about how the underlying hardware works.",
-          "paragraph2": "The practical problem is that the gap between these two standards compounds at every step up the scale. It starts small — 1,024 is only 2.4% larger than 1,000 — but that difference multiplies at each higher unit: by the terabyte level it has grown to roughly 10%, which is exactly why a drive advertised and sold as \"1 TB\" (the decimal definition, matching its true manufactured capacity) shows up in an operating system reporting free space in binary units as only about 931 GB — no storage has vanished; the OS is measuring in a different-sized \"gigabyte\" than the one printed on the box.",
+          "title": "फ़ाइल साइज़ कन्वर्शन जितना दिखता है उतना सरल क्यों नहीं है",
+          "paragraph1": "\"किलोबाइट\" की असल में दो अलग, समान रूप से वैध परिभाषाएँ रोज़मर्रा के इस्तेमाल में हैं, और वे 2% से ज़्यादा असहमत हैं। दशमलव (SI) परिभाषा \"किलो\" को वैसे ही मानती है जैसे विज्ञान में हर जगह इस्तेमाल होता है — ठीक 1,000 — इसलिए 1 KB = 1,000 बाइट्स, 1 MB = 1,000,000 बाइट्स, और आगे भी ऐसे ही। बाइनरी परिभाषा इसके बजाय 2 की घातों का उपयोग करती है, क्योंकि कंप्यूटर मेमोरी बाइनरी में एड्रेस की जाती है: 1 KB = 2¹⁰ = 1,024 बाइट्स, 1 MB = 2²⁰ = 1,048,576 बाइट्स। दोनों असली हैं, दोनों आज भी सक्रिय रूप से इस्तेमाल हो रही हैं, और कोई भी बस \"ग़लत\" नहीं है — वे इस बारे में अलग सवालों का जवाब दे रही हैं कि अंतर्निहित हार्डवेयर कैसे काम करता है।",
+          "paragraph2": "व्यावहारिक समस्या यह है कि इन दोनों मानकों के बीच का अंतर हर स्तर पर बढ़ने के साथ जमा होता जाता है। यह छोटा शुरू होता है — 1,024, 1,000 से केवल 2.4% बड़ा है — लेकिन यह अंतर हर ऊँची यूनिट पर गुणा होता जाता है: टेराबाइट स्तर तक यह लगभग 10% तक बढ़ जाता है, यही ठीक वजह है कि \"1 TB\" (दशमलव परिभाषा, जो उसकी असली निर्मित क्षमता से मेल खाती है) के रूप में विज्ञापित और बेची गई ड्राइव, बाइनरी यूनिट में फ़्री स्पेस रिपोर्ट करने वाले ऑपरेटिंग सिस्टम में केवल लगभग 931 GB दिखती है — कोई स्टोरेज ग़ायब नहीं हुआ; OS बॉक्स पर छपे \"गीगाबाइट\" से अलग आकार वाले \"गीगाबाइट\" में माप रहा है।",
           "diagram": {
-            "chartLabel": "Percentage gap between binary and decimal units by scale",
-            "caption": "The gap between binary (1024-based) and decimal (1000-based) units at each order of magnitude — starting at 2.4% for kilo and compounding to nearly 12.6% by peta."
+            "chartLabel": "स्केल के अनुसार बाइनरी और दशमलव यूनिट के बीच प्रतिशत अंतर",
+            "caption": "हर परिमाण क्रम पर बाइनरी (1024-आधारित) और दशमलव (1000-आधारित) यूनिट के बीच का अंतर — किलो के लिए 2.4% से शुरू होकर पेटा तक लगभग 12.6% तक बढ़ता है।"
           }
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "How the same raw byte count reads differently depending on the standard and unit chosen.",
-          "columnScenario": "Scenario",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "चुने गए मानक और यूनिट के अनुसार एक ही कच्ची बाइट संख्या अलग-अलग कैसे पढ़ी जाती है।",
+          "columnScenario": "परिदृश्य",
+          "columnResult": "परिणाम",
           "rows": [
-            { "scenario": "A drive manufactured and sold as \"1 TB\" (decimal), read by an OS using binary units", "result": "Shows as ≈931.32 GiB — not 1000 GB" },
-            { "scenario": "A 500 MB (decimal) file downloaded at 100 Mbps", "result": "≈40 seconds" }
+            {
+              "scenario": "\"1 TB\" (दशमलव) के रूप में निर्मित और बेची गई एक ड्राइव, बाइनरी यूनिट इस्तेमाल करने वाले OS द्वारा पढ़ी गई",
+              "result": "≈931.32 GiB के रूप में दिखती है — 1000 GB नहीं"
+            },
+            {
+              "scenario": "100 Mbps पर डाउनलोड की गई 500 MB (दशमलव) फ़ाइल",
+              "result": "≈40 सेकंड"
+            }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले सवाल",
           "items": [
             {
-              "question": "Why does my \"1 TB\" hard drive show up as only about 931 GB in Windows?",
-              "answer": "Because the drive's advertised capacity is measured in the decimal standard (1 TB = 1,000,000,000,000 bytes, matching its true physical capacity), while Windows' File Explorer reports free space using binary-based math but decimal-looking unit labels. The same byte count, read in true binary GiB units, is a smaller number — no capacity is actually missing."
+              "question": "मेरी \"1 TB\" हार्ड ड्राइव Windows में केवल लगभग 931 GB क्यों दिखती है?",
+              "answer": "क्योंकि ड्राइव की विज्ञापित क्षमता दशमलव मानक में मापी जाती है (1 TB = 1,000,000,000,000 बाइट्स, जो उसकी असली भौतिक क्षमता से मेल खाती है), जबकि Windows का File Explorer बाइनरी-आधारित गणित का उपयोग करके लेकिन दशमलव जैसे दिखने वाले यूनिट लेबल के साथ फ़्री स्पेस रिपोर्ट करता है। वही बाइट संख्या, असली बाइनरी GiB यूनिट में पढ़ी गई, एक छोटी संख्या है — असल में कोई क्षमता ग़ायब नहीं है।"
             },
             {
-              "question": "What's the actual difference between KB and KiB?",
-              "answer": "KB (kilobyte) is the decimal unit, always meaning exactly 1,000 bytes under the modern IEC/NIST-recommended naming. KiB (kibibyte) is the binary unit, always meaning exactly 1,024 bytes. The two-letter \"i\" in KiB, MiB, GiB, and so on exists specifically to make this distinction unambiguous — a convention this tool follows in its binary-standard column."
+              "question": "KB और KiB में असल फ़र्क़ क्या है?",
+              "answer": "KB (किलोबाइट) दशमलव यूनिट है, आधुनिक IEC/NIST-अनुशंसित नामकरण के तहत हमेशा ठीक 1,000 बाइट्स का मतलब है। KiB (किबिबाइट) बाइनरी यूनिट है, हमेशा ठीक 1,024 बाइट्स का मतलब है। KiB, MiB, GiB, और आगे में मौजूद दो-अक्षर वाला \"i\" ख़ासतौर पर इस फ़र्क़ को स्पष्ट करने के लिए है — एक परंपरा जिसका यह टूल अपने बाइनरी-मानक कॉलम में पालन करता है।"
             },
             {
-              "question": "Which standard should I actually use — decimal or binary?",
-              "answer": "It depends what you're measuring. Storage capacity (hard drives, SSDs, flash drives) and network bandwidth are conventionally quoted in decimal units by manufacturers and ISPs. RAM capacity is inherently binary, since memory is physically addressed in powers of 2, which is why RAM sizes (8 GB, 16 GB, 32 GB) are quietly binary values even though they're labeled with decimal-looking unit names."
+              "question": "मुझे असल में कौन-सा मानक इस्तेमाल करना चाहिए — दशमलव या बाइनरी?",
+              "answer": "यह इस पर निर्भर करता है कि आप क्या माप रहे हैं। स्टोरेज क्षमता (हार्ड ड्राइव, SSD, फ़्लैश ड्राइव) और नेटवर्क बैंडविड्थ पारंपरिक रूप से निर्माताओं और ISP द्वारा दशमलव यूनिट में बताई जाती है। RAM क्षमता स्वाभाविक रूप से बाइनरी है, क्योंकि मेमोरी भौतिक रूप से 2 की घातों में एड्रेस की जाती है, यही वजह है कि RAM साइज़ (8 GB, 16 GB, 32 GB) चुपचाप बाइनरी मान हैं भले ही उन्हें दशमलव जैसे दिखने वाले यूनिट नामों से लेबल किया गया हो।"
             },
             {
-              "question": "Why do storage manufacturers use decimal while operating systems often show binary?",
-              "answer": "Decimal units make a drive's true capacity look larger and align with the SI system used for every other physical quantity, which is a genuine commercial incentive as well as a technically defensible choice. Operating systems, on the other hand, evolved from a computing culture where memory addressing was always binary, so many (Windows especially) still compute in binary internally — they just haven't updated their on-screen unit labels to match, which is the direct source of the mismatch."
+              "question": "स्टोरेज निर्माता दशमलव क्यों इस्तेमाल करते हैं जबकि ऑपरेटिंग सिस्टम अक्सर बाइनरी दिखाते हैं?",
+              "answer": "दशमलव यूनिट किसी ड्राइव की असली क्षमता को बड़ा दिखाते हैं और हर दूसरी भौतिक मात्रा के लिए इस्तेमाल होने वाले SI सिस्टम से मेल खाते हैं, जो एक असली व्यावसायिक प्रोत्साहन भी है और तकनीकी रूप से जायज़ चुनाव भी। दूसरी ओर, ऑपरेटिंग सिस्टम एक ऐसी कंप्यूटिंग संस्कृति से विकसित हुए जहाँ मेमोरी एड्रेसिंग हमेशा बाइनरी थी, इसलिए कई (ख़ासकर Windows) आंतरिक रूप से आज भी बाइनरी में गणना करते हैं — उन्होंने बस अपने स्क्रीन पर दिखने वाले यूनिट लेबल को इससे मेल खाने के लिए अपडेट नहीं किया, जो इस बेमेल का सीधा स्रोत है।"
             },
             {
-              "question": "Does this decimal-vs-binary confusion affect network speeds too?",
-              "answer": "Network and internet connection speeds are always quoted in decimal bits per second (Mbps, Gbps) — never binary — and bits are not the same unit as the bytes file sizes are measured in. That's a second, separate source of confusion: an 8 megabit-per-second connection transfers only about 1 megabyte per second, not 8, because there are 8 bits in a byte."
+              "question": "क्या यह दशमलव-बनाम-बाइनरी वाली उलझन नेटवर्क स्पीड को भी प्रभावित करती है?",
+              "answer": "नेटवर्क और इंटरनेट कनेक्शन स्पीड हमेशा दशमलव बिट प्रति सेकंड (Mbps, Gbps) में बताई जाती है — कभी बाइनरी में नहीं — और बिट, फ़ाइल साइज़ मापने वाली बाइट के समान यूनिट नहीं है। यह उलझन का एक दूसरा, अलग स्रोत है: एक 8 मेगाबिट-प्रति-सेकंड कनेक्शन केवल लगभग 1 मेगाबाइट प्रति सेकंड ट्रांसफ़र करता है, 8 नहीं, क्योंकि एक बाइट में 8 बिट होते हैं।"
             },
             {
-              "question": "Why might this tool's download-time estimate differ from what I see in an actual browser or app?",
-              "answer": "This estimate assumes a constant, uninterrupted connection running at exactly the stated link speed, converting the file's byte size to bits and dividing by that speed. Real transfers are affected by network overhead, other traffic sharing the connection, server-side throttling, and the gap between a connection's theoretical maximum speed and what it actually sustains — so treat this as a best-case estimate, not a guarantee."
+              "question": "इस टूल का डाउनलोड-समय अनुमान असली ब्राउज़र या ऐप में दिखने वाले से अलग क्यों हो सकता है?",
+              "answer": "यह अनुमान एक स्थिर, बिना रुकावट वाले कनेक्शन को मानता है जो ठीक बताई गई लिंक स्पीड पर चल रहा हो, फ़ाइल के बाइट साइज़ को बिट में बदलकर उस स्पीड से भाग देते हुए। असली ट्रांसफ़र नेटवर्क ओवरहेड, कनेक्शन साझा करने वाले अन्य ट्रैफ़िक, सर्वर-साइड थ्रॉटलिंग, और किसी कनेक्शन की सैद्धांतिक अधिकतम स्पीड व वह असल में जो बनाए रख पाता है उसके बीच के अंतर से प्रभावित होते हैं — इसलिए इसे एक सबसे-अच्छी-स्थिति वाला अनुमान मानें, कोई गारंटी नहीं।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "A Convenient Shorthand That Outgrew Its Convenience",
-            "paragraph": "Computer memory has always been addressed in powers of two, so early computer scientists in the 1960s and 1970s noticed that 2¹⁰ (1,024) happened to land conveniently close to 1,000 and started informally borrowing the SI prefix \"kilo\" to describe it — a shorthand of convenience, not a formal standard. That informal reuse spread through the industry for decades with no single body regulating it, so \"kilobyte\" quietly came to mean two different numbers depending on context, a discrepancy small enough at the kilobyte scale to go largely unnoticed but destined to compound as storage capacities grew into the megabyte, gigabyte, and eventually terabyte range."
+            "title": "एक सुविधाजनक संक्षिप्त रूप जो अपनी सुविधा से आगे निकल गया",
+            "paragraph": "कंप्यूटर मेमोरी हमेशा 2 की घातों में एड्रेस की जाती रही है, इसलिए 1960 और 1970 के दशक के शुरुआती कंप्यूटर वैज्ञानिकों ने देखा कि 2¹⁰ (1,024) संयोगवश 1,000 के काफ़ी क़रीब बैठता है और उन्होंने इसे बताने के लिए अनौपचारिक रूप से SI उपसर्ग \"किलो\" उधार लेना शुरू कर दिया — यह सुविधा का एक संक्षिप्त रूप था, कोई औपचारिक मानक नहीं। यह अनौपचारिक पुनःउपयोग दशकों तक उद्योग में फैलता रहा बिना किसी एक निकाय के इसे नियंत्रित किए, इसलिए \"किलोबाइट\" चुपचाप संदर्भ के अनुसार दो अलग-अलग संख्याओं का मतलब रखने लगा — किलोबाइट स्केल पर इतना छोटा फ़र्क़ कि ज़्यादातर किसी का ध्यान नहीं गया, लेकिन जैसे-जैसे स्टोरेज क्षमता मेगाबाइट, गीगाबाइट, और आख़िरकार टेराबाइट रेंज में बढ़ी, यह जमा होना तय था।"
           },
           "modernDevelopments": {
-            "title": "A Formal Standard That the Industry Still Hasn't Fully Adopted",
-            "paragraph": "The International Electrotechnical Commission (IEC) formally resolved the ambiguity by introducing distinct binary prefixes — kibi, mebi, gibi, and beyond — first in IEC 60027-2 in 1998 and consolidated in IEC 80000-13:2008, the standard this tool's binary-unit column follows. NIST and most standards bodies now officially recommend this distinction. Adoption remains uneven in practice, however: Linux distributions and Apple's macOS/iOS have largely switched storage displays to true decimal units to match manufacturer specifications, while Windows still displays binary-computed values under decimal-looking labels — which is precisely the mismatch this tool's side-by-side comparison is built to make visible."
+            "title": "एक औपचारिक मानक जिसे उद्योग ने अभी तक पूरी तरह नहीं अपनाया",
+            "paragraph": "International Electrotechnical Commission (IEC) ने अलग बाइनरी उपसर्ग — kibi, mebi, gibi, और आगे — पेश करके इस अस्पष्टता को औपचारिक रूप से सुलझाया, पहले 1998 में IEC 60027-2 में और फिर IEC 80000-13:2008 में समेकित किया, यही वह मानक है जिसका यह टूल का बाइनरी-यूनिट कॉलम पालन करता है। NIST और ज़्यादातर मानक निकाय अब आधिकारिक रूप से इस फ़र्क़ की सिफ़ारिश करते हैं। व्यवहार में इसे अपनाना फिर भी असमान बना हुआ है: Linux डिस्ट्रिब्यूशन और Apple के macOS/iOS ने निर्माता स्पेसिफ़िकेशन से मेल खाने के लिए स्टोरेज डिस्प्ले को काफ़ी हद तक असली दशमलव यूनिट में बदल दिया है, जबकि Windows आज भी दशमलव जैसे दिखने वाले लेबल के तहत बाइनरी-गणना किए गए मान दिखाता है — यह ठीक वही बेमेल है जिसे दिखाई देने के लिए इस टूल की साथ-साथ तुलना बनाई गई है।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Data representation, number systems, and measurement standards — the exact concepts this tool converts between — are studied within Computer Science programs. Here are the top 5 globally in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "डेटा निरूपण, संख्या प्रणाली, और मापन मानक — ठीक वही अवधारणाएँ जिनके बीच यह टूल कन्वर्ट करता है — कंप्यूटर साइंस प्रोग्रामों में पढ़ाई जाती हैं। QS World University Rankings by Subject 2025 के अनुसार दुनिया भर में शीर्ष 5 और साथ में एक क्षेत्रीय विकल्प यहाँ दिया गया है:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
-                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+                "online": "नहीं — MIT का Course 6-3 (कंप्यूटर साइंस एंड इंजीनियरिंग) MIT के कैंब्रिज कैंपस पर एक इन-पर्सन अंडरग्रेजुएट प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
-                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+                "online": "नहीं — Stanford का कंप्यूटर साइंस बैचलर प्रोग्राम Stanford के कैंपस पर एक इन-पर्सन डिग्री है।"
               },
               {
                 "name": "Carnegie Mellon University",
-                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
-                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+                "online": "नहीं — CMU का School of Computer Science बैचलर प्रोग्राम उसके पिट्सबर्ग कैंपस पर इन-पर्सन है।"
               },
               {
                 "name": "National University of Singapore (NUS)",
-                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.comp.nus.edu.sg/admissions/comp-sci/",
-                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program including a required on-campus or overseas internship."
+                "online": "नहीं — NUS का Bachelor of Computing in Computer Science एक इन-पर्सन प्रोग्राम है, जिसमें कैंपस पर या विदेश में अनिवार्य इंटर्नशिप शामिल है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "note": "कंप्यूटर साइंस और सूचना प्रणाली में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.cs.ox.ac.uk/admissions/undergraduate/courses/home.html",
-                "online": "No — Oxford's Computer Science degree is taught in-person through its tutorial system, with one or two students meeting a tutor directly."
+                "online": "नहीं — Oxford की कंप्यूटर साइंस डिग्री उसके ट्यूटोरियल सिस्टम के ज़रिए इन-पर्सन पढ़ाई जाती है, जिसमें एक या दो छात्र सीधे किसी ट्यूटर से मिलते हैं।"
               },
               {
                 "name": "American University of Sharjah (AUS)",
-                "note": "Offers a Bachelor of Science in Computer Science, ABET-accredited, through its College of Engineering.",
+                "note": "अपने College of Engineering के ज़रिए ABET-मान्यता प्राप्त Bachelor of Science in Computer Science प्रदान करता है।",
                 "url": "https://www.aus.edu/cen/department-of-computer-science-and-engineering/bachelor-of-science-in-computer-science",
-                "online": "Delivery mode not stated on the official program page."
+                "online": "आधिकारिक प्रोग्राम पेज पर डिलीवरी मोड नहीं बताया गया है।"
               }
             ]
           }
         },
         "references": {
-          "title": "Technical Standard",
+          "title": "तकनीकी मानक",
           "citation": "IEC 80000-13:2008 — Quantities and units — Part 13: Information science and technology. International Electrotechnical Commission.",
-          "note": "The official standard defining the binary prefixes (kibi, mebi, gibi, tebi, pebi) this tool's binary-standard column follows, formally resolving the decimal/binary kilobyte ambiguity.",
+          "note": "आधिकारिक मानक जो वे बाइनरी उपसर्ग (kibi, mebi, gibi, tebi, pebi) परिभाषित करता है जिनका इस टूल का बाइनरी-मानक कॉलम पालन करता है, जो दशमलव/बाइनरी किलोबाइट अस्पष्टता को औपचारिक रूप से सुलझाता है।",
           "url": "https://webstore.iec.ch/en/publication/7479",
-          "readOriginal": "View the Official Standard"
+          "readOriginal": "आधिकारिक मानक देखें"
         }
       }
     },
