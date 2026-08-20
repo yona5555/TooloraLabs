@@ -15,9 +15,13 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/80">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="text-xl font-extrabold tracking-tight">
-          <span className="text-zinc-900 dark:text-zinc-50">Toolora</span>
-          <span className="text-blue-600 dark:text-blue-400">Labs</span>
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.svg"
+            alt="TooloraLabs"
+            className="h-9 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
