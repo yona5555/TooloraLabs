@@ -20,7 +20,13 @@ export default function Navbar() {
           <img
             src="/logo.svg"
             alt="TooloraLabs"
-            className="h-9 w-auto"
+            className="h-9 w-auto dark:hidden"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/logo-full-dark.svg"
+            alt="TooloraLabs"
+            className="hidden h-9 w-auto dark:block"
           />
         </Link>
 
