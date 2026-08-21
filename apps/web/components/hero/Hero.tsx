@@ -25,9 +25,10 @@ export default function Hero() {
             <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
             <Stats />
             <TrustBar />
-            <HeroCategories />
           </div>
         </div>
+
+        <HeroCategories />
       </div>
     </section>
   );

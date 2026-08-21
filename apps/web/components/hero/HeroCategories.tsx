@@ -7,19 +7,19 @@ export default function HeroCategories() {
   const tc = useTranslations("categories");
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 lg:flex-nowrap">
+    <div className="mt-10 grid w-full max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
       {categories.map((category) => {
         const Icon = getCategoryIcon(category.icon);
         return (
           <Link
             key={category.slug}
             href={`/categories/${category.slug}`}
-            className="flex min-w-[92px] flex-1 flex-col items-center gap-2 rounded-2xl border border-zinc-200 bg-white px-2 py-3 text-center transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-blue-500/40"
+            className="flex flex-col items-center gap-3 rounded-2xl border border-zinc-200 bg-white p-6 text-center transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-blue-500/40"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
-              <Icon size={18} strokeWidth={2} />
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+              <Icon size={28} strokeWidth={2} />
             </span>
-            <span className="text-xs font-semibold leading-tight text-zinc-700 dark:text-zinc-200">
+            <span className="text-sm font-semibold leading-tight text-zinc-700 dark:text-zinc-200">
               {tc(`${category.slug}.title`)}
             </span>
           </Link>
