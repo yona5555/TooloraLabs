@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import SearchBar from "./SearchBar";
 import Stats from "./Stats";
 import HeroBackground from "./HeroBackground";
+import HeroCategories from "./HeroCategories";
 import ScientificCalculatorWidget from "@/components/tools/scientific-calculator/ScientificCalculatorWidget";
 import TrustBar from "@/components/layout/TrustBar";
 
@@ -24,6 +25,7 @@ export default function Hero() {
             <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
             <Stats />
             <TrustBar />
+            <HeroCategories />
           </div>
         </div>
       </div>
