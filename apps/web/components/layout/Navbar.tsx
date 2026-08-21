@@ -2,15 +2,10 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ToolsDropdown from "./ToolsDropdown";
 
 export default function Navbar() {
   const t = useTranslations("navbar");
-
-  const links = [
-    { href: "/", label: t("home") },
-    { href: "/tools", label: t("tools") },
-    { href: "/categories", label: t("categories") },
-  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/80">
@@ -31,15 +26,19 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link
+            href="/"
+            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+          >
+            {t("home")}
+          </Link>
+          <ToolsDropdown />
+          <Link
+            href="/categories"
+            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+          >
+            {t("categories")}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
