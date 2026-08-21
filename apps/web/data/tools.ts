@@ -258,7 +258,7 @@ export const tools: Tool[] = [
   {
     slug: "qr-code-generator",
     title: "QR Code Generator",
-    category: "ai-tools",
+    category: "developer-tools",
     description: "Generate QR codes instantly.",
     featured: true,
     keywords: ["qr", "barcode"],

@@ -119,7 +119,7 @@ export default function QRCodeGeneratorTool({ education }: { education: ReactNod
         <ToolAboveFold
           input={<QRInputPanel form={form} onChange={patchForm} />}
           result={<QRResult svg={svg} payload={payload} error={error} logoDataUrl={logoDataUrl} logoMode={logoMode} />}
-          sidebar={<RelatedToolsSidebar currentSlug="qr-code-generator" category="ai-tools" />}
+          sidebar={<RelatedToolsSidebar currentSlug="qr-code-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
