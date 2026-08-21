@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { Check, ChevronDown } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import { localeMeta } from "@/lib/locale-meta";
+import Tooltip from "./Tooltip";
 
 export default function LanguageSwitcher() {
   const t = useTranslations("navbar");
@@ -34,17 +35,19 @@ export default function LanguageSwitcher() {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
     >
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        aria-label={t("switchLanguage")}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        className="flex h-11 items-center gap-1.5 rounded-xl border border-zinc-200 px-3 text-sm font-semibold text-zinc-600 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
-      >
-        {locale.toUpperCase()}
-        <ChevronDown size={14} className={open ? "rotate-180 transition" : "transition"} />
-      </button>
+      <Tooltip label={t("switchLanguage")} hidden={open}>
+        <button
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          aria-label={t("switchLanguage")}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          className="flex h-11 items-center gap-1.5 rounded-xl border border-zinc-200 px-3 text-sm font-semibold text-zinc-600 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+        >
+          {locale.toUpperCase()}
+          <ChevronDown size={14} className={open ? "rotate-180 transition" : "transition"} />
+        </button>
+      </Tooltip>
 
       {open && (
         <div
