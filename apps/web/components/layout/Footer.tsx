@@ -15,7 +15,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+    <footer className="border-t border-blue-200/70 bg-white/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-zinc-950/80">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row">
         <div className="flex flex-col items-center gap-3 sm:items-start">
           {/* eslint-disable-next-line @next/next/no-img-element */}
