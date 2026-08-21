@@ -94,9 +94,6 @@ export default function SearchBar({ placeholder, searchLabel }: SearchBarProps) 
           onFocus={() => setIsOpen(true)}
           className="h-14 min-w-0 flex-1 bg-transparent text-lg text-zinc-900 outline-none placeholder:text-zinc-400 dark:text-zinc-100 dark:placeholder:text-zinc-500"
         />
-        <kbd className="hidden shrink-0 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-sm text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400 xl:block">
-          Ctrl K
-        </kbd>
         <button
           type="submit"
           className="shrink-0 rounded-full bg-blue-600 px-7 py-3 font-semibold text-white transition hover:bg-blue-700 active:scale-95"
