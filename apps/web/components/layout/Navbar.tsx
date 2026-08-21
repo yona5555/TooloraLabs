@@ -32,13 +32,19 @@ export default function Navbar() {
           >
             {t("home")}
           </Link>
-          <ToolsDropdown />
+          <Link
+            href="/tools"
+            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+          >
+            {t("tools")}
+          </Link>
           <Link
             href="/categories"
             className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
           >
             {t("categories")}
           </Link>
+          <ToolsDropdown />
         </nav>
 
         <div className="flex items-center gap-3">

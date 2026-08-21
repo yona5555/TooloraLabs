@@ -33,7 +33,7 @@ export default function ToolsDropdown() {
         aria-expanded={open}
         className="flex items-center gap-1.5 text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
       >
-        {t("tools")}
+        {t("browse")}
         <ChevronDown size={14} className={open ? "rotate-180 transition" : "transition"} />
       </button>
 
