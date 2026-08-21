@@ -7,9 +7,9 @@ export default function Navbar() {
   const t = useTranslations("navbar");
 
   const links = [
-    { href: "/", label: t("home"), external: false },
-    { href: "#popular-tools", label: t("tools"), external: true },
-    { href: "#categories", label: t("categories"), external: true },
+    { href: "/", label: t("home") },
+    { href: "/tools", label: t("tools") },
+    { href: "/categories", label: t("categories") },
   ];
 
   return (
@@ -31,25 +31,15 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {links.map((link) =>
-            link.external ? (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+          {links.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-3">
