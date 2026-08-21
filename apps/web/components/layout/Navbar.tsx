@@ -55,9 +55,6 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <ThemeToggle />
-          <button className="hidden rounded-xl border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-blue-400 dark:hover:text-blue-400 md:block">
-            {t("signIn")}
-          </button>
         </div>
       </div>
     </header>
