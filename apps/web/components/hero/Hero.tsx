@@ -4,7 +4,6 @@ import Stats from "./Stats";
 import HeroBackground from "./HeroBackground";
 import HeroCategories from "./HeroCategories";
 import ScientificCalculatorWidget from "@/components/tools/scientific-calculator/ScientificCalculatorWidget";
-import TrustBar from "@/components/layout/TrustBar";
 
 export default function Hero() {
   const t = useTranslations("hero");
@@ -17,13 +16,12 @@ export default function Hero() {
           {t("titleLine1")} <span className="text-blue-600 dark:text-blue-400">{t("titleLine2")}</span>
         </h1>
 
-        <div className="mt-10 grid w-full max-w-6xl items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+        <div className="mt-10 grid w-full max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <div className="min-w-0">
             <ScientificCalculatorWidget />
           </div>
           <div className="flex min-w-0 flex-col gap-8">
             <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
-            <TrustBar />
           </div>
         </div>
 
