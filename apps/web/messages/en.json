@@ -2950,6 +2950,144 @@
         }
       }
     },
+    "affordable-loan-calculator": {
+      "title": "Affordable Loan Calculator",
+      "description": "Find the maximum loan amount a monthly payment you can afford will support, at a given interest rate and term.",
+      "aboveFold": {
+        "inputTitle": "Your Budget",
+        "resultTitle": "How Much You Can Borrow",
+        "maxLoanAmountLabel": "Maximum Loan Amount",
+        "totalPaymentLabel": "Total Payment",
+        "totalInterestLabel": "Total Interest",
+        "placeholder": "Enter a monthly payment, rate, and term to see the maximum loan amount it supports.",
+        "disclaimer": "This tool provides a general educational estimate of borrowing capacity only, not a loan offer, pre-qualification, or financial advice. A lender's actual maximum loan amount depends on your full credit profile, existing debts, and other factors. Consult a licensed lender or financial advisor before taking out a loan."
+      },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "monthlyPaymentLabel": "Monthly Payment You Can Afford",
+        "monthlyPaymentHint": "The most you're comfortable paying each month toward this loan.",
+        "monthlyPaymentPlaceholder": "e.g. 300",
+        "interestRateLabel": "Annual Interest Rate (%)",
+        "interestRatePlaceholder": "e.g. 6",
+        "loanTermLabel": "Loan Term (years)",
+        "loanTermPlaceholder": "e.g. 5"
+      },
+      "education": {
+        "intro": {
+          "title": "How This Calculator Works",
+          "paragraph1": "This tool runs the standard loan-payment calculation in reverse. Instead of starting with a loan amount and solving for the monthly payment, it starts with a monthly payment you choose and solves for the largest loan amount that payment can fully pay off — principal and interest — by the end of the term you set. The underlying math is the same present-value-of-an-annuity formula behind every fixed-rate installment loan; it's simply solved for a different unknown.",
+          "paragraph2": "This makes it a budgeting tool rather than a shopping tool: instead of finding a loan first and then discovering what it costs, you start from what you can actually afford each month and work out how much loan that supports, before you start shopping for a car, a lender, or anything else that would be financed."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Two sample budgets show how a monthly payment, an interest rate, and a term translate into a maximum loan amount.",
+          "columnScenario": "Scenario",
+          "columnMaxLoanAmount": "Max Loan Amount",
+          "columnTotalInterest": "Total Interest",
+          "rows": [
+            {
+              "scenario": "$300/month budget, 6% annual rate, 5-year term",
+              "maxLoanAmount": "$15,517.67",
+              "totalInterest": "$2,482.33"
+            },
+            {
+              "scenario": "$500/month budget, 7% annual rate, 4-year term",
+              "maxLoanAmount": "$20,880.10",
+              "totalInterest": "$3,119.90"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "How is this different from the regular Loan Calculator?",
+              "answer": "They solve the same equation from opposite ends. The Loan Calculator starts with a loan amount and tells you the monthly payment; this tool starts with a monthly payment you can afford and tells you the maximum loan amount it supports. Use whichever matches the question you're actually asking."
+            },
+            {
+              "question": "Should I actually borrow the maximum amount this calculator shows?",
+              "answer": "Not necessarily. This is a mathematical ceiling based on the payment you entered, not a recommendation. Most financial guidance suggests leaving room in your budget for other expenses, savings, and unexpected costs rather than borrowing right up to the maximum a payment can technically support."
+            },
+            {
+              "question": "Does a longer loan term let me borrow more?",
+              "answer": "Yes — spreading the same monthly payment over more months lets it cover a larger loan amount, since the total number of payments increases. The trade-off is that a longer term also means paying interest for longer, so the total interest paid over the life of the loan rises even though the monthly payment stays the same."
+            },
+            {
+              "question": "What happens if I enter a 0% interest rate?",
+              "answer": "With no interest, the maximum loan amount is simply the monthly payment multiplied by the number of months in the term — every dollar you pay goes straight to principal, with nothing added in interest."
+            },
+            {
+              "question": "Does this include taxes, insurance, fees, or other costs of borrowing?",
+              "answer": "No — it calculates pure borrowing capacity from a payment, rate, and term alone. Real financed purchases often carry additional costs like taxes, insurance, or lender fees that aren't part of this loan-payment math; build room for those into the monthly payment figure you enter here."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Actuarial Tables to Everyday Loan Math",
+            "paragraph": "The mathematics behind this calculator — finding a present value from a stream of future payments — has roots in life-insurance actuarial science centuries before it was applied to consumer loans. Dutch statesman Johan de Witt published one of the earliest rigorous treatments of annuity valuation in 1671, and by the late 17th century, astronomer Edmond Halley had produced mortality-based tables refining how a stream of future payments could be reduced to a single present value. That same present-value-of-an-annuity logic was later adapted from insurance and pensions into consumer lending as installment credit spread in the early 20th century, becoming the standard formula lenders still use to size a loan around a borrower's payment capacity."
+          },
+          "modernDevelopments": {
+            "title": "From the Loan Officer's Worksheet to Self-Service Budgeting",
+            "paragraph": "For most of the 20th century, figuring out how large a loan a given payment could support required a loan officer, an amortization table, or a specialized financial calculator. The spread of personal computers and, later, web-based calculators moved that same present-value math onto a borrower's own screen, letting anyone check their approximate borrowing capacity before ever contacting a lender — a self-service step that has become a standard part of shopping for a car, a personal loan, or financing of almost any kind."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The present-value-of-an-annuity math this calculator solves in reverse is foundational time-value-of-money theory within finance, the same field covered by this site's other loan and investment calculators. Here are the top 5 globally for Accounting & Finance in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time \"MSc in Applied Financial Economics\" (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+              },
+              {
+                "name": "American University of Beirut (AUB) — Suliman S. Olayan School of Business",
+                "note": "A leading regional business school in the Arab world, AACSB-accredited, offering a Specialized Master's in Finance alongside undergraduate finance concentrations.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "Delivery mode not stated as fully online on the official program page; the school's graduate finance program is primarily campus-based in Beirut."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Ogawa, K., Shimatani, K., Iwayama, R., & Suzuki, N. (2025). Association between higher mortgage payment-to-income ratio and greater psychological distress among high-income homeowners in Japan: A cross-sectional study. Preventive Medicine Reports, 55, 102987.",
+          "note": "A recent study finding that homeowners carrying a higher payment-to-income ratio reported greater psychological distress, even among high earners — real-world evidence for why working out an affordable payment before borrowing, which is exactly what this calculator does in reverse, is worth doing rather than skipping.",
+          "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "World Time Converter",
       "description": "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",

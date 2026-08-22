@@ -23,6 +23,8 @@ import CompoundInterestCalculator from "@/components/tools/compound-interest-cal
 import CompoundInterestEducation from "@/components/tools/compound-interest-calculator/CompoundInterestEducation";
 import LoanCalculator from "@/components/tools/loan-calculator/LoanCalculator";
 import LoanEducation from "@/components/tools/loan-calculator/LoanEducation";
+import AffordableLoanCalculator from "@/components/tools/affordable-loan-calculator/AffordableLoanCalculator";
+import AffordableLoanEducation from "@/components/tools/affordable-loan-calculator/AffordableLoanEducation";
 import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
@@ -265,6 +267,9 @@ export default async function ToolPage({
     case "loan-calculator":
       component = <LoanCalculator education={<LoanEducation />} />;
       break;
+    case "affordable-loan-calculator":
+      component = <AffordableLoanCalculator education={<AffordableLoanEducation />} />;
+      break;
     case "world-time-converter":
       component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
       break;
@@ -341,6 +346,7 @@ export default async function ToolPage({
     slug === "tdee-calculator" ||
     slug === "compound-interest-calculator" ||
     slug === "loan-calculator" ||
+    slug === "affordable-loan-calculator" ||
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
     slug === "percentage-calculator" ||

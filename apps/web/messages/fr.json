@@ -2999,6 +2999,144 @@
         }
       }
     },
+    "affordable-loan-calculator": {
+      "title": "Calculateur de capacité d'emprunt",
+      "description": "Déterminez le montant maximal empruntable qu'une mensualité que vous pouvez vous permettre peut financer, à un taux et une durée donnés.",
+      "aboveFold": {
+        "inputTitle": "Votre budget",
+        "resultTitle": "Combien vous pouvez emprunter",
+        "maxLoanAmountLabel": "Montant maximal empruntable",
+        "totalPaymentLabel": "Paiement total",
+        "totalInterestLabel": "Intérêts totaux",
+        "placeholder": "Saisissez une mensualité, un taux et une durée pour voir le montant maximal empruntable correspondant.",
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale de la capacité d'emprunt, et non une offre de prêt, une préqualification ni un conseil financier. Le montant maximal réellement accordé par un prêteur dépend de votre profil de crédit complet, de vos dettes existantes et d'autres facteurs. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt."
+      },
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "monthlyPaymentLabel": "Mensualité que vous pouvez vous permettre",
+        "monthlyPaymentHint": "Le montant maximal que vous êtes à l'aise de payer chaque mois pour ce prêt.",
+        "monthlyPaymentPlaceholder": "ex. 300",
+        "interestRateLabel": "Taux d'intérêt annuel (%)",
+        "interestRatePlaceholder": "ex. 6",
+        "loanTermLabel": "Durée du prêt (années)",
+        "loanTermPlaceholder": "ex. 5"
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne ce calculateur",
+          "paragraph1": "Cet outil applique le calcul standard de mensualité de prêt à l'envers. Plutôt que de partir d'un montant emprunté pour en déduire la mensualité, il part d'une mensualité que vous choisissez pour en déduire le montant maximal qu'elle peut entièrement rembourser — capital et intérêts — d'ici la fin de la durée choisie. Le calcul sous-jacent est la même formule de valeur actuelle d'une annuité que celle qui régit tout prêt amortissable à taux fixe ; elle est simplement résolue pour une inconnue différente.",
+          "paragraph2": "Cela en fait un outil de budgétisation plutôt qu'un outil de recherche de prêt : au lieu de trouver d'abord un prêt puis de découvrir son coût, vous partez de ce que vous pouvez réellement vous permettre chaque mois pour déterminer le montant qu'il permet d'emprunter, avant même de commencer à chercher une voiture, un prêteur ou tout autre achat à financer."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Deux budgets types montrent comment une mensualité, un taux d'intérêt et une durée se traduisent en montant maximal empruntable.",
+          "columnScenario": "Scénario",
+          "columnMaxLoanAmount": "Montant max. empruntable",
+          "columnTotalInterest": "Intérêts totaux",
+          "rows": [
+            {
+              "scenario": "Budget de 300 $/mois, taux annuel de 6 %, durée de 5 ans",
+              "maxLoanAmount": "15 517,67 $",
+              "totalInterest": "2 482,33 $"
+            },
+            {
+              "scenario": "Budget de 500 $/mois, taux annuel de 7 %, durée de 4 ans",
+              "maxLoanAmount": "20 880,10 $",
+              "totalInterest": "3 119,90 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la différence avec le Calculateur de prêt classique ?",
+              "answer": "Les deux résolvent la même équation à partir de bouts opposés. Le Calculateur de prêt part d'un montant emprunté et indique la mensualité ; cet outil part d'une mensualité que vous pouvez vous permettre et indique le montant maximal empruntable correspondant. Utilisez celui qui correspond à la question que vous vous posez réellement."
+            },
+            {
+              "question": "Dois-je vraiment emprunter le montant maximal indiqué par ce calculateur ?",
+              "answer": "Pas nécessairement. Il s'agit d'un plafond mathématique basé sur la mensualité saisie, pas d'une recommandation. La plupart des conseils financiers suggèrent de garder une marge dans votre budget pour d'autres dépenses, l'épargne et les imprévus, plutôt que d'emprunter jusqu'au maximum techniquement permis par une mensualité."
+            },
+            {
+              "question": "Une durée plus longue permet-elle d'emprunter davantage ?",
+              "answer": "Oui — répartir la même mensualité sur davantage de mois lui permet de couvrir un montant emprunté plus élevé, puisque le nombre total de paiements augmente. En contrepartie, une durée plus longue signifie aussi payer des intérêts plus longtemps, donc le total des intérêts payés sur la durée du prêt augmente même si la mensualité reste identique."
+            },
+            {
+              "question": "Que se passe-t-il si je saisis un taux d'intérêt de 0 % ?",
+              "answer": "Sans intérêt, le montant maximal empruntable correspond simplement à la mensualité multipliée par le nombre de mois de la durée — chaque euro payé va directement au capital, sans rien ajouter en intérêts."
+            },
+            {
+              "question": "Cela inclut-il les taxes, l'assurance, les frais ou d'autres coûts d'emprunt ?",
+              "answer": "Non — il calcule uniquement la capacité d'emprunt pure à partir d'une mensualité, d'un taux et d'une durée. Les achats financés réels comportent souvent des coûts supplémentaires, comme des taxes, une assurance ou des frais de prêteur, qui ne font pas partie de ce calcul ; prévoyez une marge pour ces coûts dans la mensualité que vous saisissez ici."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Des tables actuarielles aux calculs de prêt du quotidien",
+            "paragraph": "Les mathématiques derrière ce calculateur — déterminer une valeur actuelle à partir d'une série de paiements futurs — trouvent leurs racines dans l'actuariat de l'assurance-vie, des siècles avant leur application aux prêts à la consommation. L'homme d'État néerlandais Johan de Witt a publié en 1671 l'un des premiers traitements rigoureux de l'évaluation des annuités, et à la fin du XVIIe siècle, l'astronome Edmond Halley avait produit des tables fondées sur la mortalité affinant la manière de réduire une série de paiements futurs à une seule valeur actuelle. Cette même logique de valeur actuelle d'une annuité a ensuite été transposée de l'assurance et des pensions vers le crédit à la consommation à mesure que le crédit à tempérament se répandait au début du XXe siècle, devenant la formule standard que les prêteurs utilisent encore pour calibrer un prêt selon la capacité de paiement d'un emprunteur."
+          },
+          "modernDevelopments": {
+            "title": "Du bureau du conseiller prêteur à la budgétisation en libre-service",
+            "paragraph": "Pendant la majeure partie du XXe siècle, déterminer le montant qu'une mensualité donnée pouvait financer nécessitait un conseiller prêteur, un tableau d'amortissement ou une calculatrice financière spécialisée. La diffusion des ordinateurs personnels, puis des calculateurs en ligne, a transposé ce même calcul de valeur actuelle sur l'écran de l'emprunteur lui-même, permettant à chacun de vérifier sa capacité d'emprunt approximative avant même de contacter un prêteur — une étape en libre-service devenue courante lors de la recherche d'une voiture, d'un prêt personnel ou de tout autre financement."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Le calcul de valeur actuelle d'une annuité que ce calculateur résout à l'envers est une notion fondamentale de la théorie de la valeur temporelle de l'argent en finance, le même domaine que couvrent les autres calculateurs de prêt et d'investissement de ce site. Voici les 5 meilleures institutions mondiales en comptabilité et finance selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 1 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Majoritairement en ligne — la Harvard Extension School indique que 11 des 12 cours requis pour son diplôme supérieur de finance peuvent être suivis en ligne, un cours au moins nécessitant une présence sur le campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 2 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Non — le Master of Finance de la MIT Sloan est un programme à temps plein et en présentiel (parcours de 12 ou 18 mois), sans option d'enseignement à distance mentionnée sur ses pages officielles."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 3 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Non — la formation en finance de la Stanford GSB est dispensée dans le cadre de son MBA en présentiel ; la page officielle des programmes en ligne de l'école ne recense que des cours exécutifs non diplômants, pas un diplôme complet de finance."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 4 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Pas entièrement en ligne — le MSc in Financial Economics d'Oxford est un programme à temps plein en présentiel de 9 mois ; un nouveau « MSc in Applied Financial Economics » à temps partiel (à partir de septembre 2026) combine apprentissage en ligne et séjours obligatoires en présentiel à Oxford, ce qui n'en fait pas non plus une option uniquement à distance."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Classée n° 5 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Non — le Master in Finance de Chicago Booth est un programme en présentiel de 15 mois, dont la première promotion a débuté à l'automne 2024."
+              },
+              {
+                "name": "American University of Beirut (AUB) — Suliman S. Olayan School of Business",
+                "note": "Une école de commerce régionale de premier plan dans le monde arabe, accréditée AACSB, proposant un Master spécialisé en Finance ainsi que des filières de finance en premier cycle.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "Aucune mention de formation entièrement en ligne sur la page officielle du programme ; le programme de master en finance de l'école se déroule principalement sur le campus de Beyrouth."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Ogawa, K., Shimatani, K., Iwayama, R., & Suzuki, N. (2025). Association between higher mortgage payment-to-income ratio and greater psychological distress among high-income homeowners in Japan: A cross-sectional study. Preventive Medicine Reports, 55, 102987.",
+          "note": "Une étude récente montrant que les propriétaires supportant un ratio mensualité/revenu plus élevé rapportaient une détresse psychologique accrue, même parmi les hauts revenus — une preuve concrète que déterminer une mensualité abordable avant d'emprunter, exactement ce que ce calculateur fait à l'envers, vaut la peine d'être fait plutôt qu'ignoré.",
+          "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Convertisseur d'heure mondial",
       "description": "Convertissez l'heure entre deux villes n'importe où dans le monde, consultez une horloge mondiale en direct pour les principaux fuseaux horaires et trouvez les meilleurs créneaux de réunion communs.",

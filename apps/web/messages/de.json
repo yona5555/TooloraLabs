@@ -2999,6 +2999,144 @@
         }
       }
     },
+    "affordable-loan-calculator": {
+      "title": "Kreditfähigkeitsrechner",
+      "description": "Ermitteln Sie den maximalen Kreditbetrag, den eine für Sie tragbare monatliche Rate bei gegebenem Zinssatz und gegebener Laufzeit finanzieren kann.",
+      "aboveFold": {
+        "inputTitle": "Ihr Budget",
+        "resultTitle": "Wie viel Sie leihen können",
+        "maxLoanAmountLabel": "Maximaler Kreditbetrag",
+        "totalPaymentLabel": "Gesamtzahlung",
+        "totalInterestLabel": "Gesamtzinsen",
+        "placeholder": "Geben Sie eine monatliche Rate, einen Zinssatz und eine Laufzeit ein, um den maximal finanzierbaren Kreditbetrag zu sehen.",
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung der Kreditfähigkeit, kein Kreditangebot, keine Vorabgenehmigung und keine Finanzberatung. Der tatsächliche Höchstbetrag eines Kreditgebers hängt von Ihrem vollständigen Bonitätsprofil, bestehenden Schulden und weiteren Faktoren ab. Wenden Sie sich vor der Aufnahme eines Kredits an einen zugelassenen Kreditgeber oder Finanzberater."
+      },
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "form": {
+        "monthlyPaymentLabel": "Für Sie tragbare monatliche Rate",
+        "monthlyPaymentHint": "Der Höchstbetrag, den Sie sich monatlich für diesen Kredit gut vorstellen können.",
+        "monthlyPaymentPlaceholder": "z. B. 300",
+        "interestRateLabel": "Jährlicher Zinssatz (%)",
+        "interestRatePlaceholder": "z. B. 6",
+        "loanTermLabel": "Laufzeit (Jahre)",
+        "loanTermPlaceholder": "z. B. 5"
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieser Rechner",
+          "paragraph1": "Dieses Tool wendet die übliche Berechnung der Kreditrate umgekehrt an. Statt von einem Kreditbetrag auszugehen und die monatliche Rate zu berechnen, geht es von einer von Ihnen gewählten monatlichen Rate aus und berechnet den größten Kreditbetrag, den diese Rate bis zum Ende der von Ihnen gewählten Laufzeit vollständig zurückzahlen kann – Tilgung und Zinsen. Die zugrunde liegende Mathematik ist dieselbe Barwert-einer-Rentenformel, die jedem Tilgungsdarlehen mit festem Zinssatz zugrunde liegt; sie wird nur nach einer anderen Unbekannten aufgelöst.",
+          "paragraph2": "Das macht es zu einem Budgetierungs- statt einem Kreditsuch-Werkzeug: Statt zuerst einen Kredit zu finden und dann herauszufinden, was er kostet, gehen Sie von dem aus, was Sie sich monatlich tatsächlich leisten können, und ermitteln, welchen Kreditbetrag das trägt – bevor Sie überhaupt anfangen, nach einem Auto, einem Kreditgeber oder etwas anderem zu suchen, das finanziert werden soll."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Zwei Beispielbudgets zeigen, wie sich eine monatliche Rate, ein Zinssatz und eine Laufzeit in einen maximalen Kreditbetrag übersetzen.",
+          "columnScenario": "Szenario",
+          "columnMaxLoanAmount": "Max. Kreditbetrag",
+          "columnTotalInterest": "Gesamtzinsen",
+          "rows": [
+            {
+              "scenario": "Budget 300 $/Monat, 6% Jahreszins, 5 Jahre Laufzeit",
+              "maxLoanAmount": "15.517,67 $",
+              "totalInterest": "2.482,33 $"
+            },
+            {
+              "scenario": "Budget 500 $/Monat, 7% Jahreszins, 4 Jahre Laufzeit",
+              "maxLoanAmount": "20.880,10 $",
+              "totalInterest": "3.119,90 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wie unterscheidet sich das vom normalen Kreditrechner?",
+              "answer": "Beide lösen dieselbe Gleichung von entgegengesetzten Enden aus. Der Kreditrechner geht von einem Kreditbetrag aus und nennt die monatliche Rate; dieses Tool geht von einer für Sie tragbaren Rate aus und nennt den maximal finanzierbaren Kreditbetrag. Nutzen Sie, was zu Ihrer eigentlichen Frage passt."
+            },
+            {
+              "question": "Sollte ich tatsächlich den von diesem Rechner angezeigten Höchstbetrag aufnehmen?",
+              "answer": "Nicht unbedingt. Es handelt sich um eine rechnerische Obergrenze auf Basis der eingegebenen Rate, nicht um eine Empfehlung. Die meisten Finanzratgeber empfehlen, in Ihrem Budget Spielraum für andere Ausgaben, Ersparnisse und Unvorhergesehenes zu lassen, statt bis zum technisch möglichen Maximum einer Rate zu leihen."
+            },
+            {
+              "question": "Kann ich mit einer längeren Laufzeit mehr leihen?",
+              "answer": "Ja – wird dieselbe monatliche Rate auf mehr Monate verteilt, kann sie einen größeren Kreditbetrag decken, da sich die Gesamtzahl der Zahlungen erhöht. Der Nachteil ist, dass eine längere Laufzeit auch bedeutet, länger Zinsen zu zahlen, sodass die über die Laufzeit gezahlten Gesamtzinsen steigen, auch wenn die monatliche Rate gleich bleibt."
+            },
+            {
+              "question": "Was passiert, wenn ich einen Zinssatz von 0% eingebe?",
+              "answer": "Ohne Zinsen entspricht der maximale Kreditbetrag einfach der monatlichen Rate multipliziert mit der Anzahl der Monate der Laufzeit – jeder gezahlte Euro fließt direkt in die Tilgung, ohne dass Zinsen hinzukommen."
+            },
+            {
+              "question": "Sind Steuern, Versicherungen, Gebühren oder andere Kreditkosten enthalten?",
+              "answer": "Nein – es berechnet die reine Kreditfähigkeit allein aus Rate, Zinssatz und Laufzeit. Reale finanzierte Anschaffungen tragen oft zusätzliche Kosten wie Steuern, Versicherungen oder Kreditgebergebühren, die nicht Teil dieser Rechnung sind; planen Sie dafür Spielraum in die hier eingegebene monatliche Rate ein."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Von versicherungsmathematischen Tabellen zur alltäglichen Kreditmathematik",
+            "paragraph": "Die Mathematik hinter diesem Rechner – das Ermitteln eines Barwerts aus einer Reihe künftiger Zahlungen – wurzelt in der Versicherungsmathematik der Lebensversicherung, Jahrhunderte bevor sie auf Verbraucherkredite angewendet wurde. Der niederländische Staatsmann Johan de Witt veröffentlichte 1671 eine der ersten rigorosen Abhandlungen zur Rentenbewertung, und Ende des 17. Jahrhunderts hatte der Astronom Edmond Halley sterblichkeitsbasierte Tabellen erstellt, die verfeinerten, wie eine Reihe künftiger Zahlungen auf einen einzigen Barwert reduziert werden kann. Dieselbe Barwert-einer-Rente-Logik wurde später von Versicherungen und Renten auf den Verbraucherkredit übertragen, als sich der Ratenkredit im frühen 20. Jahrhundert verbreitete, und wurde zur Standardformel, mit der Kreditgeber bis heute einen Kredit an die Zahlungsfähigkeit eines Kreditnehmers anpassen."
+          },
+          "modernDevelopments": {
+            "title": "Vom Arbeitsblatt des Kreditsachbearbeiters zur Budgetierung im Selbstbedienungsmodus",
+            "paragraph": "Den größten Teil des 20. Jahrhunderts erforderte die Ermittlung, wie groß ein Kredit bei einer bestimmten Rate sein könnte, einen Kreditsachbearbeiter, eine Tilgungstabelle oder einen speziellen Finanzrechner. Die Verbreitung von Personal Computern und später webbasierten Rechnern brachte dieselbe Barwert-Mathematik auf den eigenen Bildschirm des Kreditnehmers und ermöglichte es jedem, seine ungefähre Kreditfähigkeit zu prüfen, bevor überhaupt ein Kreditgeber kontaktiert wird – ein Selbstbedienungsschritt, der zu einem festen Bestandteil der Suche nach einem Auto, einem Privatkredit oder fast jeder anderen Finanzierung geworden ist."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Barwert-einer-Rente-Mathematik, die dieser Rechner umgekehrt löst, ist Grundlagenstoff der Zeitwert-des-Geldes-Theorie innerhalb der Finanzwissenschaft, desselben Feldes, das die anderen Kredit- und Anlagerechner dieser Website abdecken. Hier sind die weltweiten Top 5 für Accounting & Finance im QS World University Rankings by Subject 2025, plus eine regionale Option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 für Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Größtenteils online – die Harvard Extension School gibt an, dass 11 der 12 Pflichtkurse für den Finance-Graduate-Abschluss online absolviert werden können, wobei mindestens ein Kurs Präsenz auf dem Campus erfordert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 für Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Nein – der MIT Sloan Master of Finance ist ein Vollzeit-Präsenzprogramm (12- oder 18-monatige Tracks), ohne auf den offiziellen Seiten genanntes Fernstudienangebot."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 3 für Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Nein – die Finance-Ausbildung der Stanford GSB erfolgt über ihren Präsenz-MBA; die offizielle Online-Programmseite der Schule listet nur nicht-abschlussbezogene Executive-Kurse, keinen vollständigen Finance-Abschluss."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 4 für Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Nicht vollständig online – Oxfords MSc in Financial Economics ist ein neunmonatiges Vollzeit-Präsenzprogramm; ein neuer Teilzeit-„MSc in Applied Financial Economics“ (ab September 2026) kombiniert Online-Lernen mit verpflichtenden Präsenzaufenthalten in Oxford, ist also ebenfalls keine reine Fernstudienoption."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Weltweit auf Platz 5 für Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Nein – der Master in Finance der Chicago Booth ist ein 15-monatiges Präsenzprogramm, dessen erster Jahrgang im Herbst 2024 begann."
+              },
+              {
+                "name": "American University of Beirut (AUB) — Suliman S. Olayan School of Business",
+                "note": "Eine führende regionale Business School in der arabischen Welt, AACSB-akkreditiert, mit einem spezialisierten Master in Finance sowie Finance-Schwerpunkten im Bachelorstudium.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "Auf der offiziellen Programmseite ist keine vollständig online verfügbare Studienform angegeben; das Finance-Masterprogramm der Schule findet überwiegend auf dem Campus in Beirut statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Ogawa, K., Shimatani, K., Iwayama, R., & Suzuki, N. (2025). Association between higher mortgage payment-to-income ratio and greater psychological distress among high-income homeowners in Japan: A cross-sectional study. Preventive Medicine Reports, 55, 102987.",
+          "note": "Eine aktuelle Studie, die zeigt, dass Hausbesitzer mit einem höheren Verhältnis von Rate zu Einkommen von stärkerer psychischer Belastung berichteten, selbst unter Gutverdienern – ein realer Beleg dafür, dass es sich lohnt, vor der Kreditaufnahme eine tragbare Rate zu ermitteln, genau das, was dieser Rechner umgekehrt tut, statt es zu überspringen.",
+          "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Weltzeit-Umrechner",
       "description": "Rechnen Sie die Uhrzeit zwischen zwei beliebigen Städten weltweit um, sehen Sie eine Live-Weltuhr für wichtige Zeitzonen und finden Sie die besten überschneidenden Besprechungszeiten.",

@@ -74,6 +74,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "affordable-loan-calculator",
+    title: "Affordable Loan Calculator",
+    category: "calculators",
+    description:
+      "Find the maximum loan amount a monthly payment you can afford will support, at a given interest rate and term.",
+    featured: false,
+    keywords: [
+      "affordable loan calculator",
+      "how much can I borrow",
+      "loan affordability",
+      "borrowing capacity",
+      "maximum loan amount",
+    ],
+  },
+  {
     slug: "weather-forecast",
     title: "Weather Forecast",
     category: "calculators",

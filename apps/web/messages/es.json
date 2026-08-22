@@ -2999,6 +2999,144 @@
         }
       }
     },
+    "affordable-loan-calculator": {
+      "title": "Calculadora de Capacidad de Préstamo",
+      "description": "Calcula el monto máximo de préstamo que puede financiar una cuota mensual que puedas pagar, a una tasa y plazo dados.",
+      "aboveFold": {
+        "inputTitle": "Tu presupuesto",
+        "resultTitle": "Cuánto puedes pedir prestado",
+        "maxLoanAmountLabel": "Monto máximo del préstamo",
+        "totalPaymentLabel": "Pago total",
+        "totalInterestLabel": "Interés total",
+        "placeholder": "Introduce una cuota mensual, una tasa y un plazo para ver el monto máximo de préstamo que soporta.",
+        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general de la capacidad de endeudamiento, no una oferta de préstamo, una precalificación ni asesoramiento financiero. El monto máximo real que ofrezca un prestamista depende de tu perfil crediticio completo, tus deudas existentes y otros factores. Consulta a un prestamista autorizado o a un asesor financiero antes de solicitar un préstamo."
+      },
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "monthlyPaymentLabel": "Cuota mensual que puedes pagar",
+        "monthlyPaymentHint": "El máximo que te sientes cómodo pagando cada mes por este préstamo.",
+        "monthlyPaymentPlaceholder": "p. ej. 300",
+        "interestRateLabel": "Tasa de interés anual (%)",
+        "interestRatePlaceholder": "p. ej. 6",
+        "loanTermLabel": "Plazo del préstamo (años)",
+        "loanTermPlaceholder": "p. ej. 5"
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta calculadora",
+          "paragraph1": "Esta herramienta aplica el cálculo estándar de la cuota de un préstamo a la inversa. En lugar de partir de un importe prestado para obtener la cuota, parte de una cuota mensual que tú eliges para obtener el importe máximo que esa cuota puede pagar por completo —capital e interés— antes de que termine el plazo que fijes. El cálculo subyacente es la misma fórmula de valor presente de una anualidad que rige cualquier préstamo amortizable a tasa fija; simplemente se resuelve para una incógnita distinta.",
+          "paragraph2": "Esto la convierte en una herramienta de presupuesto, no de búsqueda de préstamo: en lugar de encontrar primero un préstamo y descubrir después su coste, partes de lo que realmente puedes pagar cada mes para calcular cuánto préstamo soporta eso, antes de empezar a buscar un auto, un prestamista o cualquier otra cosa que vayas a financiar."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Dos presupuestos de muestra muestran cómo una cuota mensual, una tasa de interés y un plazo se traducen en un monto máximo de préstamo.",
+          "columnScenario": "Escenario",
+          "columnMaxLoanAmount": "Monto máx. de préstamo",
+          "columnTotalInterest": "Interés total",
+          "rows": [
+            {
+              "scenario": "Presupuesto de 300 $/mes, tasa anual del 6 %, plazo de 5 años",
+              "maxLoanAmount": "15.517,67 $",
+              "totalInterest": "2.482,33 $"
+            },
+            {
+              "scenario": "Presupuesto de 500 $/mes, tasa anual del 7 %, plazo de 4 años",
+              "maxLoanAmount": "20.880,10 $",
+              "totalInterest": "3.119,90 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿En qué se diferencia de la Calculadora de préstamos normal?",
+              "answer": "Ambas resuelven la misma ecuación desde extremos opuestos. La Calculadora de préstamos parte de un importe prestado e indica la cuota mensual; esta herramienta parte de una cuota que puedes pagar e indica el importe máximo de préstamo que soporta. Usa la que corresponda a la pregunta que realmente te estás haciendo."
+            },
+            {
+              "question": "¿Debería pedir prestado realmente el importe máximo que muestra esta calculadora?",
+              "answer": "No necesariamente. Es un límite matemático basado en la cuota que introdujiste, no una recomendación. La mayoría de las orientaciones financieras sugieren dejar margen en tu presupuesto para otros gastos, ahorro e imprevistos, en lugar de endeudarte hasta el máximo que una cuota puede soportar técnicamente."
+            },
+            {
+              "question": "¿Un plazo más largo me permite pedir prestado más?",
+              "answer": "Sí — repartir la misma cuota mensual entre más meses le permite cubrir un importe de préstamo mayor, ya que el número total de pagos aumenta. La contrapartida es que un plazo más largo también implica pagar interés durante más tiempo, así que el interés total pagado durante la vida del préstamo aumenta aunque la cuota mensual se mantenga igual."
+            },
+            {
+              "question": "¿Qué ocurre si introduzco una tasa de interés del 0 %?",
+              "answer": "Sin interés, el importe máximo del préstamo es simplemente la cuota mensual multiplicada por el número de meses del plazo — cada dólar que pagas va directo al capital, sin nada añadido en concepto de interés."
+            },
+            {
+              "question": "¿Esto incluye impuestos, seguros, comisiones u otros costes del préstamo?",
+              "answer": "No — calcula únicamente la capacidad de endeudamiento pura a partir de una cuota, una tasa y un plazo. Las compras financiadas reales suelen conllevar costes adicionales, como impuestos, seguros o comisiones del prestamista, que no forman parte de este cálculo; deja margen para ellos en la cifra de cuota mensual que introduces aquí."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De las tablas actuariales al cálculo de préstamos cotidiano",
+            "paragraph": "Las matemáticas detrás de esta calculadora —hallar un valor presente a partir de una serie de pagos futuros— tienen sus raíces en la ciencia actuarial de los seguros de vida, siglos antes de aplicarse a los préstamos al consumo. El estadista neerlandés Johan de Witt publicó en 1671 uno de los primeros tratamientos rigurosos de la valoración de anualidades, y a finales del siglo XVII el astrónomo Edmond Halley había elaborado tablas basadas en la mortalidad que perfeccionaban cómo reducir una serie de pagos futuros a un único valor presente. Esa misma lógica de valor presente de una anualidad se adaptó después de los seguros y las pensiones al crédito al consumo a medida que se extendía el crédito a plazos a principios del siglo XX, convirtiéndose en la fórmula estándar que los prestamistas siguen usando para dimensionar un préstamo según la capacidad de pago del prestatario."
+          },
+          "modernDevelopments": {
+            "title": "De la hoja de cálculo del prestamista a la planificación de presupuesto en autoservicio",
+            "paragraph": "Durante la mayor parte del siglo XX, averiguar cuánto préstamo podía soportar una cuota determinada requería un oficial de préstamos, una tabla de amortización o una calculadora financiera especializada. La difusión de los ordenadores personales y, más tarde, de las calculadoras en línea, trasladó ese mismo cálculo de valor presente a la propia pantalla del prestatario, permitiendo a cualquiera comprobar su capacidad de endeudamiento aproximada antes incluso de contactar con un prestamista — un paso de autoservicio que se ha convertido en algo habitual al buscar un auto, un préstamo personal o casi cualquier tipo de financiación."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La matemática de valor presente de una anualidad que esta calculadora resuelve a la inversa es material fundamental de la teoría del valor temporal del dinero dentro de las finanzas, el mismo campo que cubren las demás calculadoras de préstamos e inversión de este sitio. Estas son las 5 mejores instituciones del mundo en Contabilidad y Finanzas según el QS World University Rankings by Subject 2025, junto con una opción regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "N.º 1 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Mayormente en línea — Harvard Extension School indica que 11 de los 12 cursos requeridos para su título de posgrado en Finanzas pueden completarse en línea, con al menos un curso que requiere asistencia al campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "N.º 2 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No — el Master of Finance de MIT Sloan es un programa presencial a tiempo completo (con opciones de 12 o 18 meses), sin opción de aprendizaje a distancia indicada en sus páginas oficiales."
+              },
+              {
+                "name": "Stanford University",
+                "note": "N.º 3 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No — la formación en finanzas de Stanford GSB se imparte a través de su MBA presencial; la página oficial de programas en línea de la escuela solo recoge cursos ejecutivos no conducentes a título, no un título completo en finanzas."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "N.º 4 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "No totalmente en línea — el MSc in Financial Economics de Oxford es un programa presencial a tiempo completo de 9 meses; un nuevo «MSc in Applied Financial Economics» a tiempo parcial (desde septiembre de 2026) combina aprendizaje en línea con estancias presenciales obligatorias en Oxford, por lo que tampoco es una opción exclusivamente a distancia."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "N.º 5 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No — el Master in Finance de Chicago Booth es un programa presencial de 15 meses cuya primera promoción comenzó en el otoño de 2024."
+              },
+              {
+                "name": "American University of Beirut (AUB) — Suliman S. Olayan School of Business",
+                "note": "Una destacada escuela de negocios regional en el mundo árabe, acreditada por AACSB, que ofrece un Máster Especializado en Finanzas junto con especializaciones de grado en finanzas.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "La página oficial del programa no indica una modalidad totalmente en línea; el programa de máster en finanzas de la escuela se imparte principalmente en el campus de Beirut."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Ogawa, K., Shimatani, K., Iwayama, R., & Suzuki, N. (2025). Association between higher mortgage payment-to-income ratio and greater psychological distress among high-income homeowners in Japan: A cross-sectional study. Preventive Medicine Reports, 55, 102987.",
+          "note": "Un estudio reciente que encontró que los propietarios de vivienda con una relación cuota-ingreso más alta declaraban mayor angustia psicológica, incluso entre quienes tenían ingresos altos — evidencia real de por qué calcular una cuota asequible antes de pedir prestado, que es exactamente lo que esta calculadora hace a la inversa, merece la pena en lugar de omitirse.",
+          "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Conversor de husos horarios",
       "description": "Convierte la hora entre dos ciudades cualesquiera del mundo, consulta un reloj mundial en directo para las principales zonas horarias y encuentra las mejores horas de reunión que coincidan.",

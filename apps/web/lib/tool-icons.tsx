@@ -30,6 +30,7 @@ import {
   Target,
   TrendingUp,
   Type,
+  Wallet,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -65,6 +66,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "tdee-calculator": Flame,
   "compound-interest-calculator": TrendingUp,
   "loan-calculator": Landmark,
+  "affordable-loan-calculator": Wallet,
   "world-time-converter": Clock,
 };
 
