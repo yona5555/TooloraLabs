@@ -16,16 +16,15 @@ export default function Hero() {
           {t("titleLine1")} <span className="text-blue-600 dark:text-blue-400">{t("titleLine2")}</span>
         </h1>
 
-        <div className="mt-10 grid w-full max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+        <div className="mt-10 grid w-full max-w-6xl items-stretch gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <div className="min-w-0">
             <ScientificCalculatorWidget />
           </div>
-          <div className="flex min-w-0 flex-col gap-8">
+          <div className="flex min-w-0 flex-col gap-4">
             <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
+            <HeroCategories />
           </div>
         </div>
-
-        <HeroCategories />
 
         <div className="mt-10 w-full max-w-6xl">
           <Stats />
