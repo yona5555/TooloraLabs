@@ -7,7 +7,7 @@ export default function HeroCategories() {
   const tc = useTranslations("categories");
 
   return (
-    <div className="mt-10 grid w-full max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+    <div className="mt-10 grid w-full max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3">
       {categories.map((category) => {
         const Icon = getCategoryIcon(category.icon);
         return (
