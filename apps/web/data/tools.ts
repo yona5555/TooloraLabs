@@ -89,6 +89,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "retirement-calculator",
+    title: "Retirement Calculator",
+    category: "calculators",
+    description:
+      "Project your retirement savings balance from a starting amount plus regular monthly contributions, compounding at an expected annual return.",
+    featured: false,
+    keywords: [
+      "retirement calculator",
+      "retirement savings",
+      "401k calculator",
+      "nest egg calculator",
+      "how much do I need to retire",
+    ],
+  },
+  {
     slug: "weather-forecast",
     title: "Weather Forecast",
     category: "calculators",

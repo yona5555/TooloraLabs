@@ -3137,6 +3137,150 @@
         }
       }
     },
+    "retirement-calculator": {
+      "title": "Altersvorsorgerechner",
+      "description": "Projizieren Sie Ihren Altersvorsorge-Kontostand ausgehend von einem Startbetrag zuzüglich regelmäßiger monatlicher Beiträge bei einer erwarteten jährlichen Rendite.",
+      "aboveFold": {
+        "inputTitle": "Ihr Vorsorgeplan",
+        "resultTitle": "Projizierter Altersvorsorge-Kontostand",
+        "projectedBalanceLabel": "Projizierter Kontostand",
+        "totalContributionsLabel": "Gesamtbeiträge",
+        "totalGrowthLabel": "Gesamtwachstum",
+        "yearsToRetirementLabel": "Jahre bis zum Ruhestand",
+        "yearsToRetirementValue": "Projiziert über {years} Jahre",
+        "placeholder": "Geben Sie Ihr Alter, Ihre Ersparnisse und Ihre Beiträge ein, um Ihren projizierten Altersvorsorge-Kontostand zu sehen.",
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Projektion, keine Finanz- oder Anlageberatung. Es geht von einer konstanten jährlichen Rendite ohne Steuern, Gebühren, Inflationsanpassung oder Beitragsgrenzen aus, was in realen Märkten oder echten Altersvorsorgekonten so nie zutrifft. Wenden Sie sich vor Entscheidungen zur Altersvorsorge an einen zugelassenen Finanzberater."
+      },
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrundwissen"
+      },
+      "form": {
+        "currentAgeLabel": "Aktuelles Alter",
+        "currentAgePlaceholder": "z. B. 30",
+        "retirementAgeLabel": "Renteneintrittsalter",
+        "retirementAgePlaceholder": "z. B. 65",
+        "currentSavingsLabel": "Aktuelle Altersvorsorge-Ersparnisse",
+        "currentSavingsPlaceholder": "z. B. 10.000",
+        "monthlyContributionLabel": "Monatlicher Beitrag",
+        "monthlyContributionPlaceholder": "z. B. 500",
+        "annualReturnRateLabel": "Erwartete jährliche Rendite (%)",
+        "annualReturnRateHint": "Eine übliche langfristige Annahme für ein diversifiziertes Aktien-/Anleihenportfolio liegt oft zwischen 5 % und 8 %; dies ist keine Garantie für eine tatsächliche Rendite.",
+        "annualReturnRatePlaceholder": "z. B. 7"
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieser Rechner",
+          "paragraph1": "Dieses Tool projiziert einen Altersvorsorge-Kontostand mit derselben Endwertberechnung, die jedem langfristigen Sparplan zugrunde liegt: Ein Startguthaben wächst durch Zinseszins von selbst, während eine Reihe regelmäßiger monatlicher Beiträge parallel dazu als verzinste Rentenzahlung wächst. Beide Teile werden monatlich mit dem eingegebenen jährlichen Renditesatz verzinst und anschließend addiert, um den projizierten Kontostand zum gewählten Renteneintrittsalter zu ergeben.",
+          "paragraph2": "Die Projektion ist bewusst vereinfacht. Sie bildet weder Steuern auf steuerbegünstigten Konten noch Anlagegebühren, Inflation, Arbeitgeberzuschüsse oder die jährlichen Beitragsgrenzen ab, die für reale Altersvorsorgekonten gelten – keiner dieser Faktoren ist über Länder, Kontotypen oder Arbeitgeber hinweg einheitlich genug, um in einen einzigen, allgemeinen Rechner integriert zu werden. Nutzen Sie ihn, um die Dynamik des Zinseszinses über die Zeit zu verstehen, nicht als Ersatz für einen vollständigen, mit einem Finanzberater erstellten Altersvorsorgeplan."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Zwei Beispielszenarien zeigen, wie Startguthaben, Beiträge und Zeit zusammenwirken, um einen Altersvorsorge-Kontostand wachsen zu lassen.",
+          "columnScenario": "Szenario",
+          "columnProjectedBalance": "Projizierter Kontostand",
+          "columnTotalGrowth": "Gesamtwachstum",
+          "rows": [
+            {
+              "scenario": "Von 30 auf 65 Jahre, Startguthaben 10.000 $, 500 $/Monat, 7% Jahresrendite",
+              "projectedBalance": "1.015.588,82 $",
+              "totalGrowth": "795.588,82 $"
+            },
+            {
+              "scenario": "Von 25 auf 65 Jahre, Startguthaben 0 $, 300 $/Monat, 6% Jahresrendite",
+              "projectedBalance": "597.447,22 $",
+              "totalGrowth": "453.447,22 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum macht ein früherer Start einen so großen Unterschied?",
+              "answer": "Der Zinseszinseffekt belohnt Zeit stärker als die Höhe eines einzelnen Beitrags. Ein mit 25 Jahren investierter Dollar hat Jahrzehnte Zeit, um bis zur Rente zu wachsen, während derselbe Dollar mit 45 Jahren investiert deutlich weniger Zeit dafür hat. In den obigen Beispielrechnungen führt ein fünf Jahre früherer Start mit einem kleineren monatlichen Beitrag und ohne Startguthaben trotzdem zu einem beträchtlichen projizierten Kontostand – allein wegen der zusätzlichen Jahre des Zinseszinses."
+            },
+            {
+              "question": "Welchen jährlichen Renditesatz sollte ich verwenden?",
+              "answer": "Es gibt keine einzig richtige Antwort, da dies von Ihrer tatsächlichen Anlagemischung und den konkreten Jahren abhängt, in denen Sie investieren. Viele langfristige Projektionen für ein diversifiziertes Aktien-Anleihen-Portfolio verwenden einen Satz zwischen 5 % und 8 %, doch die tatsächliche Rendite schwankt von Jahr zu Jahr und ist nie garantiert. Probieren Sie mehrere verschiedene Sätze aus, um eine Bandbreite möglicher Ergebnisse zu sehen, statt sich auf eine einzelne Zahl zu verlassen."
+            },
+            {
+              "question": "Berücksichtigt das die Inflation?",
+              "answer": "Nein. Der projizierte Kontostand ist in nominalen, nicht inflationsbereinigten Dollar angegeben, was bedeutet, dass seine reale Kaufkraft zum Renteneintritt niedriger sein wird als die angezeigte Zahl. Für eine grobe inflationsbereinigte Schätzung besteht ein üblicher Ansatz darin, den eingegebenen jährlichen Renditesatz vor der Projektion um die angenommene Inflationsrate zu senken."
+            },
+            {
+              "question": "Sind Arbeitgeberzuschüsse oder Steuervorteile enthalten?",
+              "answer": "Nein. Arbeitgeber-Matching-Beiträge, steuerlich aufgeschobenes oder steuerfreies Wachstum sowie jährliche Beitragsgrenzen variieren je nach Land, Arbeitgeber und Kontotyp und sind daher in dieser allgemeinen Projektion nicht enthalten. Wenn Ihr Arbeitgeber Beiträge bezuschusst, addieren Sie diesen Zuschussbetrag zum eingegebenen monatlichen Beitrag, um die Wirkung anzunähern."
+            },
+            {
+              "question": "Was passiert, wenn ich eine Rendite von 0 % eingebe?",
+              "answer": "Ohne Rendite entspricht der projizierte Kontostand einfach Ihrem Startguthaben zuzüglich der Summe aller monatlichen Beiträge, ohne zusätzliches Wachstum – eine nützliche Grundlage, um genau zu sehen, welcher Anteil Ihres projizierten Kontostands allein aus Beiträgen stammt und welcher aus Anlagewachstum."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrundwissen zu diesem Tool",
+          "history": {
+            "title": "Von Rententafeln zu Altersvorsorgeprojektionen",
+            "paragraph": "Die Mathematik hinter diesem Rechner – die Projektion, wie ein Startkapital und eine Reihe regelmäßiger Zahlungen unter Zinseszins gemeinsam wachsen – geht auf dieselbe Rententheorie zurück, die seit Jahrhunderten in Versicherungen und Pensionskassen verwendet wird. Der niederländische Staatsmann Johan de Witt veröffentlichte 1671 eine frühe, fundierte Bewertung von Leibrenten, und der Astronom Edmond Halley erstellte später sterblichkeitsbasierte Tafeln, die es Versicherern und Pensionsfonds ermöglichten, lange Reihen künftiger Zahlungen präzise zu bewerten. Dieselbe verzinste Rentenlogik wurde im Laufe des 20. Jahrhunderts in die moderne Altersvorsorgeplanung übertragen, als Arbeitgeberpensionen individuellen Altersvorsorgekonten wichen, und verwandelte damit einstige spezialisierte versicherungsmathematische Arbeit in eine Berechnung, die jeder Sparer selbst durchführen kann."
+          },
+          "modernDevelopments": {
+            "title": "Von Pensionsversicherungsmathematikern zur eigenständigen Planung",
+            "paragraph": "Den größten Teil des 20. Jahrhunderts über war die Projektion eines Altersvorsorge-Kontostands die Aufgabe eines Pensionsversicherungsmathematikers oder eines Finanzberaters mit Zugang zu spezialisierten Tabellen und Rechnern. Mit der Verbreitung von beitragsorientierten Konten wie individuellen Altersvorsorgeplänen und der Verbreitung der Personalcomputer wanderte dieselbe Zinseszinsrechnung auf den Bildschirm gewöhnlicher Sparer und ermöglichte es jedem, aus aktuellem Alter, Ersparnissen und Beitragssatz einen groben Altersvorsorge-Kontostand zu projizieren, ohne zuvor eine Fachperson zu konsultieren – auch wenn eine Fachperson für einen vollständigen, individuellen Altersvorsorgeplan weiterhin die richtige Anlaufstelle bleibt."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Zinseszins- und Zeitwertprinzipien hinter dieser Projektion sind grundlegende Themen der Finanzwissenschaft, desselben Fachgebiets, das auch die anderen Spar- und Kreditrechner dieser Website abdecken. Hier sind die 5 weltweit führenden Institutionen für Rechnungswesen & Finanzen im QS World University Rankings by Subject 2025 sowie eine regionale Option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Größtenteils online — die Harvard Extension School gibt an, dass 11 der 12 erforderlichen Kurse für ihren Finance-Abschluss online absolviert werden können, wobei mindestens ein Kurs eine Anwesenheit auf dem Campus erfordert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Nein — der Master of Finance der MIT Sloan ist ein Vollzeit-Präsenzprogramm (12- oder 18-monatige Tracks) ohne Fernstudienoption auf den offiziellen Seiten."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 3 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Nein — die Finanzausbildung der Stanford GSB erfolgt über ihren Präsenz-MBA; die eigene Online-Programmseite der Schule listet nur nicht-abschlussbezogene Executive-Kurse, keinen vollständigen Finanzabschluss."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 4 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Nicht vollständig online — Oxfords MSc in Financial Economics ist ein neunmonatiges Vollzeit-Präsenzprogramm; ein neuer Teilzeit-„MSc in Applied Financial Economics“ (ab September 2026) kombiniert Online-Lernen mit verpflichtenden Präsenzaufenthalten in Oxford und ist somit ebenfalls keine reine Fernstudienoption."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Weltweit auf Platz 5 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Nein — der Master in Finance der Chicago Booth ist ein 15-monatiges Präsenzprogramm, dessen erster Jahrgang im Herbst 2024 begann."
+              },
+              {
+                "name": "American University in Cairo (AUC) — Department of Management",
+                "note": "Eine führende regionale Universität in der arabischen Welt, AACSB-akkreditiert, mit einem grundständigen Finance-Schwerpunkt sowie Finanzkursen auf Graduiertenebene innerhalb ihrer Wirtschaftsprogramme.",
+                "url": "https://www.aucegypt.edu/academics/undergraduate-programs/finance",
+                "online": "Auf der offiziellen Programmseite wird keine vollständig online verfügbare Studienform angegeben; die Finance-Programme der AUC finden hauptsächlich auf dem Campus in New Cairo, Ägypten, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Van Appel, V., & Maré, E. (2022). Determining safe retirement withdrawal rates using forward-looking distributions. South African Journal of Science, 118(3/4).",
+          "note": "Eine Studie, die untersucht, wie zukunftsgerichtete Renditeverteilungen anstelle bloßer historischer Durchschnittswerte genutzt werden können, um sichere Entnahmeraten im Ruhestand zu schätzen — eine Erinnerung daran, dass ein projizierter Kontostand wie der von diesem Rechner nur die „Ansparhälfte“ der Altersvorsorgeplanung ist; wie dieser Kontostand anschließend sicher entnommen wird, ist eine gesonderte, ebenso wichtige Frage.",
+          "url": "https://doi.org/10.17159/sajs.2022/11933",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Weltzeit-Umrechner",
       "description": "Rechnen Sie die Uhrzeit zwischen zwei beliebigen Städten weltweit um, sehen Sie eine Live-Weltuhr für wichtige Zeitzonen und finden Sie die besten überschneidenden Besprechungszeiten.",

@@ -19,6 +19,7 @@ import {
   Landmark,
   ListX,
   Percent,
+  PiggyBank,
   QrCode,
   ScanBarcode,
   Receipt,
@@ -67,6 +68,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "compound-interest-calculator": TrendingUp,
   "loan-calculator": Landmark,
   "affordable-loan-calculator": Wallet,
+  "retirement-calculator": PiggyBank,
   "world-time-converter": Clock,
 };
 

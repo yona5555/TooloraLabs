@@ -3137,6 +3137,150 @@
         }
       }
     },
+    "retirement-calculator": {
+      "title": "Calculateur de retraite",
+      "description": "Projetez le solde de votre épargne retraite à partir d'un montant de départ et de cotisations mensuelles régulières, avec un rendement annuel attendu.",
+      "aboveFold": {
+        "inputTitle": "Votre plan de retraite",
+        "resultTitle": "Solde de retraite projeté",
+        "projectedBalanceLabel": "Solde projeté",
+        "totalContributionsLabel": "Cotisations totales",
+        "totalGrowthLabel": "Croissance totale",
+        "yearsToRetirementLabel": "Années avant la retraite",
+        "yearsToRetirementValue": "Projection sur {years} ans",
+        "placeholder": "Saisissez votre âge, votre épargne et vos cotisations pour voir votre solde de retraite projeté.",
+        "disclaimer": "Cet outil fournit uniquement une projection éducative générale, et non un conseil financier ou d'investissement. Il suppose un rendement annuel constant, sans impôts, frais, ajustement à l'inflation ni plafonds de cotisation, autant d'éléments qui ne se vérifient jamais tels quels sur les marchés réels ou dans de vrais comptes de retraite. Consultez un conseiller financier agréé avant de prendre des décisions relatives à la retraite."
+      },
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "currentAgeLabel": "Âge actuel",
+        "currentAgePlaceholder": "ex. 30",
+        "retirementAgeLabel": "Âge de départ à la retraite",
+        "retirementAgePlaceholder": "ex. 65",
+        "currentSavingsLabel": "Épargne retraite actuelle",
+        "currentSavingsPlaceholder": "ex. 10 000",
+        "monthlyContributionLabel": "Cotisation mensuelle",
+        "monthlyContributionPlaceholder": "ex. 500",
+        "annualReturnRateLabel": "Rendement annuel attendu (%)",
+        "annualReturnRateHint": "Une hypothèse courante à long terme pour un portefeuille diversifié actions/obligations se situe souvent entre 5 % et 8 % ; ce n'est en aucun cas une garantie de rendement réel.",
+        "annualReturnRatePlaceholder": "ex. 7"
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne ce calculateur",
+          "paragraph1": "Cet outil projette un solde de retraite en appliquant le même calcul de valeur future que celui qui sous-tend tout plan d'épargne à long terme : un solde de départ croît de lui-même par capitalisation, tandis qu'une série de cotisations mensuelles régulières croît en parallèle comme une annuité capitalisée. Les deux éléments sont capitalisés mensuellement au taux de rendement annuel saisi, puis additionnés pour produire le solde projeté à l'âge de retraite choisi.",
+          "paragraph2": "Cette projection est volontairement simplifiée. Elle ne modélise ni les impôts sur les comptes à avantages fiscaux, ni les frais de gestion, ni l'inflation, ni les cotisations de l'employeur, ni les plafonds de cotisation annuels applicables aux comptes de retraite réels, aucun de ces éléments n'étant suffisamment homogène d'un pays, d'un type de compte ou d'un employeur à l'autre pour être intégré dans un calculateur généraliste unique. Utilisez-le pour comprendre la dynamique de la capitalisation dans le temps, et non comme un substitut à un plan de retraite complet établi avec un conseiller financier."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Deux scénarios types montrent comment un solde de départ, des cotisations et le temps se combinent pour faire croître un solde de retraite.",
+          "columnScenario": "Scénario",
+          "columnProjectedBalance": "Solde projeté",
+          "columnTotalGrowth": "Croissance totale",
+          "rows": [
+            {
+              "scenario": "De 30 à 65 ans, solde de départ de 10 000 $, 500 $/mois, rendement annuel de 7 %",
+              "projectedBalance": "1 015 588,82 $",
+              "totalGrowth": "795 588,82 $"
+            },
+            {
+              "scenario": "De 25 à 65 ans, solde de départ de 0 $, 300 $/mois, rendement annuel de 6 %",
+              "projectedBalance": "597 447,22 $",
+              "totalGrowth": "453 447,22 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi commencer plus tôt fait-il une différence aussi importante ?",
+              "answer": "La capitalisation récompense davantage le temps que la taille d'une cotisation isolée. Un dollar investi à 25 ans dispose de décennies pour croître avant la retraite, tandis que ce même dollar investi à 45 ans dispose de bien moins de temps. Dans les exemples ci-dessus, commencer cinq ans plus tôt avec une cotisation mensuelle plus faible et aucun solde de départ produit malgré tout un solde projeté substantiel, uniquement grâce aux années de capitalisation supplémentaires."
+            },
+            {
+              "question": "Quel taux de rendement annuel dois-je utiliser ?",
+              "answer": "Il n'existe pas de réponse unique, car cela dépend de votre allocation d'investissement réelle et des années précises durant lesquelles vous investissez. De nombreuses projections à long terme pour un portefeuille diversifié actions-obligations utilisent un taux compris entre 5 % et 8 %, mais les rendements réels varient d'une année à l'autre et ne sont jamais garantis. Essayez plusieurs taux différents pour obtenir un éventail de résultats possibles plutôt que de vous fier à un seul chiffre."
+            },
+            {
+              "question": "Cela tient-il compte de l'inflation ?",
+              "answer": "Non. Le solde projeté est exprimé en dollars nominaux, non ajustés à l'inflation, ce qui signifie que son pouvoir d'achat réel à la retraite sera inférieur au chiffre affiché. Pour obtenir une estimation approximative ajustée à l'inflation, une approche courante consiste à réduire le taux de rendement annuel saisi du taux d'inflation supposé avant de lancer la projection."
+            },
+            {
+              "question": "Cela inclut-il la contribution de l'employeur ou les avantages fiscaux ?",
+              "answer": "Non. Les cotisations de contrepartie de l'employeur, la croissance à imposition différée ou exonérée, et les plafonds de cotisation annuels varient tous selon le pays, l'employeur et le type de compte ; ils sont donc exclus de cette projection généraliste. Si votre employeur abonde vos cotisations, ajoutez ce montant abondé à la cotisation mensuelle saisie pour en approximer l'effet."
+            },
+            {
+              "question": "Que se passe-t-il si je saisis un rendement de 0 % ?",
+              "answer": "Sans rendement, le solde projeté correspond simplement à votre épargne de départ additionnée de la somme de toutes les cotisations mensuelles, sans aucune croissance ajoutée — une base utile pour distinguer précisément la part de votre solde projeté provenant des cotisations seules de celle provenant de la croissance des placements."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Des tables d'annuités aux projections de retraite",
+            "paragraph": "Les mathématiques derrière ce calculateur — projeter la croissance conjointe d'un capital de départ et d'une série de versements réguliers sous l'effet des intérêts composés — remontent à la même théorie des annuités utilisée depuis des siècles en assurance et dans les régimes de pension. L'homme d'État néerlandais Johan de Witt a publié en 1671 une évaluation rigoureuse et précoce des rentes viagères, et l'astronome Edmond Halley a ensuite produit des tables fondées sur la mortalité permettant aux assureurs et aux fonds de pension de raisonner précisément sur de longues séries de paiements futurs. Cette même logique d'annuité capitalisée a été transposée dans la planification moderne de la retraite à mesure que les pensions d'employeur cédaient la place aux comptes de retraite individuels au cours du XXe siècle, transformant ce qui était autrefois un travail actuariel spécialisé en un calcul que tout épargnant peut effectuer lui-même."
+          },
+          "modernDevelopments": {
+            "title": "Des actuaires de pension à la planification en libre-service",
+            "paragraph": "Pendant la majeure partie du XXe siècle, projeter un solde de retraite était le travail d'un actuaire de pension ou d'un conseiller financier disposant de tables et de calculatrices spécialisées. Avec la généralisation des comptes à cotisations définies comme les plans d'épargne retraite individuels et la diffusion de l'informatique personnelle, ce même calcul de capitalisation s'est transposé sur l'écran de l'épargnant ordinaire, permettant à chacun de projeter un solde de retraite approximatif à partir de son âge, de son épargne et de son taux de cotisation actuels sans consulter au préalable un professionnel — même si un professionnel reste la ressource appropriée pour un plan de retraite complet et personnalisé."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les principes de capitalisation et de valeur temporelle de l'argent qui sous-tendent cette projection sont des notions fondamentales de la finance, le même domaine que couvrent les autres calculateurs d'épargne et de prêt de ce site. Voici les 5 meilleures institutions mondiales en comptabilité et finance selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 1 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Majoritairement en ligne — la Harvard Extension School indique que 11 des 12 cours requis pour son diplôme supérieur de finance peuvent être suivis en ligne, un cours au moins nécessitant une présence sur le campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 2 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Non — le Master of Finance de la MIT Sloan est un programme à temps plein et en présentiel (parcours de 12 ou 18 mois), sans option d'enseignement à distance mentionnée sur ses pages officielles."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 3 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Non — la formation en finance de la Stanford GSB est dispensée dans le cadre de son MBA en présentiel ; la page officielle des programmes en ligne de l'école ne recense que des cours exécutifs non diplômants, pas un diplôme complet de finance."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 4 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Pas entièrement en ligne — le MSc in Financial Economics d'Oxford est un programme à temps plein en présentiel de 9 mois ; un nouveau « MSc in Applied Financial Economics » à temps partiel (à partir de septembre 2026) combine apprentissage en ligne et séjours obligatoires en présentiel à Oxford, ce qui n'en fait pas non plus une option uniquement à distance."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Classée n° 5 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Non — le Master in Finance de Chicago Booth est un programme en présentiel de 15 mois, dont la première promotion a débuté à l'automne 2024."
+              },
+              {
+                "name": "American University in Cairo (AUC) — Department of Management",
+                "note": "Une université régionale de premier plan dans le monde arabe, accréditée AACSB, proposant une filière de finance en premier cycle ainsi que des enseignements de finance de cycle supérieur au sein de ses programmes de commerce.",
+                "url": "https://www.aucegypt.edu/academics/undergraduate-programs/finance",
+                "online": "Aucune mention de formation entièrement en ligne sur la page officielle du programme ; les programmes de finance de l'AUC se déroulent principalement sur le campus du Nouveau Caire, en Égypte."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Van Appel, V., & Maré, E. (2022). Determining safe retirement withdrawal rates using forward-looking distributions. South African Journal of Science, 118(3/4).",
+          "note": "Une étude examinant comment des distributions de rendement prospectives, plutôt que de simples moyennes historiques, peuvent être utilisées pour estimer des taux de retrait sûrs à la retraite — un rappel qu'un solde projeté comme celui produit par ce calculateur ne représente que la moitié « accumulation » de la planification de la retraite ; la manière dont ce solde est ensuite retiré en toute sécurité est une question distincte, tout aussi importante.",
+          "url": "https://doi.org/10.17159/sajs.2022/11933",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Convertisseur d'heure mondial",
       "description": "Convertissez l'heure entre deux villes n'importe où dans le monde, consultez une horloge mondiale en direct pour les principaux fuseaux horaires et trouvez les meilleurs créneaux de réunion communs.",

@@ -3137,6 +3137,150 @@
         }
       }
     },
+    "retirement-calculator": {
+      "title": "Calculadora de Jubilación",
+      "description": "Proyecta el saldo de tu ahorro para la jubilación a partir de un monto inicial más aportes mensuales regulares, con una rentabilidad anual esperada.",
+      "aboveFold": {
+        "inputTitle": "Tu plan de jubilación",
+        "resultTitle": "Saldo de jubilación proyectado",
+        "projectedBalanceLabel": "Saldo proyectado",
+        "totalContributionsLabel": "Aportes totales",
+        "totalGrowthLabel": "Crecimiento total",
+        "yearsToRetirementLabel": "Años hasta la jubilación",
+        "yearsToRetirementValue": "Proyectado en {years} años",
+        "placeholder": "Introduce tu edad, ahorros y aportes para ver tu saldo de jubilación proyectado.",
+        "disclaimer": "Esta herramienta ofrece solo una proyección educativa general, no asesoramiento financiero ni de inversión. Supone una rentabilidad anual constante, sin impuestos, comisiones, ajuste por inflación ni límites de aportación, ninguno de los cuales se cumple en mercados reales ni en cuentas de jubilación reales. Consulta a un asesor financiero autorizado antes de tomar decisiones sobre tu jubilación."
+      },
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "currentAgeLabel": "Edad actual",
+        "currentAgePlaceholder": "p. ej. 30",
+        "retirementAgeLabel": "Edad de jubilación",
+        "retirementAgePlaceholder": "p. ej. 65",
+        "currentSavingsLabel": "Ahorro actual para la jubilación",
+        "currentSavingsPlaceholder": "p. ej. 10.000",
+        "monthlyContributionLabel": "Aporte mensual",
+        "monthlyContributionPlaceholder": "p. ej. 500",
+        "annualReturnRateLabel": "Rentabilidad anual esperada (%)",
+        "annualReturnRateHint": "Un supuesto habitual a largo plazo para una cartera diversificada de acciones y bonos suele situarse entre el 5 % y el 8 %; esto no garantiza ninguna rentabilidad real.",
+        "annualReturnRatePlaceholder": "p. ej. 7"
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta calculadora",
+          "paragraph1": "Esta herramienta proyecta un saldo de jubilación usando el mismo cálculo de valor futuro que sustenta cualquier plan de ahorro a largo plazo: un saldo inicial crece por sí solo mediante interés compuesto, mientras que una serie de aportes mensuales regulares crece junto a él como una anualidad capitalizada. Ambas partes se capitalizan mensualmente a la tasa de rentabilidad anual introducida y luego se suman para producir el saldo proyectado a la edad de jubilación elegida.",
+          "paragraph2": "La proyección se simplifica deliberadamente. No modela impuestos sobre cuentas con ventajas fiscales, comisiones de inversión, inflación, aportes del empleador ni los límites anuales de aportación que se aplican a las cuentas de jubilación reales, ya que ninguno de estos elementos es lo bastante uniforme entre países, tipos de cuenta o empleadores como para incorporarlo a una calculadora de uso general única. Úsala para entender la dinámica del interés compuesto a lo largo del tiempo, no como sustituto de un plan de jubilación completo elaborado con un asesor financiero."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Dos escenarios de muestra muestran cómo un saldo inicial, los aportes y el tiempo se combinan para hacer crecer un saldo de jubilación.",
+          "columnScenario": "Escenario",
+          "columnProjectedBalance": "Saldo proyectado",
+          "columnTotalGrowth": "Crecimiento total",
+          "rows": [
+            {
+              "scenario": "De 30 a 65 años, saldo inicial de 10.000 $, 500 $/mes, rentabilidad anual del 7 %",
+              "projectedBalance": "1.015.588,82 $",
+              "totalGrowth": "795.588,82 $"
+            },
+            {
+              "scenario": "De 25 a 65 años, saldo inicial de 0 $, 300 $/mes, rentabilidad anual del 6 %",
+              "projectedBalance": "597.447,22 $",
+              "totalGrowth": "453.447,22 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué empezar antes marca una diferencia tan grande?",
+              "answer": "El interés compuesto recompensa más el tiempo que el tamaño de un aporte individual. Un dólar invertido a los 25 años tiene décadas para crecer antes de la jubilación, mientras que ese mismo dólar invertido a los 45 años tiene mucho menos tiempo para hacerlo. En los ejemplos anteriores, empezar cinco años antes con un aporte mensual menor y sin saldo inicial igualmente produce un saldo proyectado considerable, solo por los años adicionales de capitalización."
+            },
+            {
+              "question": "¿Qué tasa de rentabilidad anual debería usar?",
+              "answer": "No hay una única respuesta correcta, ya que depende de tu combinación de inversiones real y de los años concretos en los que inviertas. Muchas proyecciones a largo plazo para una cartera diversificada de acciones y bonos usan una tasa entre el 5 % y el 8 %, pero la rentabilidad real varía de un año a otro y nunca está garantizada. Prueba con varias tasas distintas para ver un rango de resultados posibles en lugar de basarte en una sola cifra."
+            },
+            {
+              "question": "¿Esto tiene en cuenta la inflación?",
+              "answer": "No. El saldo proyectado está expresado en dólares nominales, sin ajustar por inflación, lo que significa que su poder adquisitivo real en la jubilación será menor que la cifra mostrada. Si quieres una estimación aproximada ajustada por inflación, un enfoque habitual es reducir la tasa de rentabilidad anual introducida en la cantidad de tu tasa de inflación supuesta antes de ejecutar la proyección."
+            },
+            {
+              "question": "¿Esto incluye la aportación del empleador o las ventajas fiscales?",
+              "answer": "No. Las aportaciones de contrapartida del empleador, el crecimiento con impuestos diferidos o exentos, y los límites anuales de aportación varían según el país, el empleador y el tipo de cuenta, por lo que quedan fuera de esta proyección de uso general. Si tu empleador iguala tus aportes, suma ese monto igualado al aporte mensual que introduces para aproximar su efecto."
+            },
+            {
+              "question": "¿Qué ocurre si introduzco una rentabilidad del 0 %?",
+              "answer": "Sin rentabilidad, el saldo proyectado es simplemente tu ahorro inicial más la suma de todos los aportes mensuales, sin ningún crecimiento añadido, una base útil para ver exactamente qué parte de tu saldo proyectado proviene solo de los aportes frente al crecimiento de la inversión."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De las tablas de anualidades a las proyecciones de jubilación",
+            "paragraph": "Las matemáticas detrás de esta calculadora —proyectar cómo crecen juntos un capital inicial y una serie de pagos regulares bajo el interés compuesto— se remontan a la misma teoría de anualidades usada durante siglos en seguros y pensiones. El estadista neerlandés Johan de Witt publicó en 1671 una de las primeras valoraciones rigurosas de las rentas vitalicias, y el astrónomo Edmond Halley produjo después tablas basadas en la mortalidad que permitieron a aseguradoras y fondos de pensiones razonar con precisión sobre largas series de pagos futuros. Esa misma lógica de anualidad capitalizada se trasladó a la planificación de la jubilación moderna a medida que las pensiones de empleador dieron paso a las cuentas individuales de jubilación a lo largo del siglo XX, convirtiendo lo que antes era trabajo actuarial especializado en un cálculo que cualquier ahorrador puede hacer por sí mismo."
+          },
+          "modernDevelopments": {
+            "title": "De los actuarios de pensiones a la planificación autónoma",
+            "paragraph": "Durante la mayor parte del siglo XX, proyectar un saldo de jubilación era trabajo de un actuario de pensiones o de un asesor financiero con acceso a tablas y calculadoras especializadas. A medida que las cuentas de aportación definida, como los planes de jubilación individuales, se generalizaron y se difundió la informática personal, ese mismo cálculo de interés compuesto pasó a la pantalla del propio ahorrador, permitiendo a cualquiera proyectar un saldo de jubilación aproximado a partir de su edad, ahorros y tasa de aportación actuales sin consultar antes a un profesional, aunque un profesional sigue siendo el recurso adecuado para un plan de jubilación completo y personalizado."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Los principios de interés compuesto y valor del dinero en el tiempo detrás de esta proyección son temas fundamentales dentro de las finanzas, el mismo campo que cubren las demás calculadoras de ahorro y préstamos de este sitio. Estas son las 5 mejores instituciones del mundo en Contabilidad y Finanzas según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Clasificada n.º 1 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Mayormente en línea: la Harvard Extension School indica que 11 de los 12 cursos requeridos para su título de posgrado en Finanzas pueden completarse en línea, con al menos un curso que requiere asistencia al campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificado n.º 2 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No: el Master of Finance de MIT Sloan es un programa presencial a tiempo completo (de 12 o 18 meses), sin opción de educación a distancia indicada en sus páginas oficiales."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada n.º 3 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No: la formación en finanzas de Stanford GSB se imparte a través de su MBA presencial; la propia página de programas en línea de la escuela solo enumera cursos ejecutivos sin título, no un título completo de finanzas."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada n.º 4 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "No totalmente en línea: el MSc in Financial Economics de Oxford es un programa presencial a tiempo completo de 9 meses; un nuevo «MSc in Applied Financial Economics» a tiempo parcial (desde septiembre de 2026) combina aprendizaje en línea con estancias presenciales obligatorias en Oxford, por lo que tampoco es una opción solo a distancia."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Clasificada n.º 5 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No: el Master in Finance de Chicago Booth es un programa presencial de 15 meses cuya primera promoción comenzó en otoño de 2024."
+              },
+              {
+                "name": "American University in Cairo (AUC) — Department of Management",
+                "note": "Una universidad regional destacada del mundo árabe, acreditada por la AACSB, que ofrece una especialización de grado en Finanzas junto con asignaturas de finanzas de posgrado dentro de sus programas de negocios.",
+                "url": "https://www.aucegypt.edu/academics/undergraduate-programs/finance",
+                "online": "La página oficial del programa no indica una modalidad totalmente en línea; los programas de finanzas de la AUC se imparten principalmente en el campus de Nuevo Cairo, Egipto."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Van Appel, V., & Maré, E. (2022). Determining safe retirement withdrawal rates using forward-looking distributions. South African Journal of Science, 118(3/4).",
+          "note": "Un estudio que examina cómo las distribuciones de rentabilidad prospectivas, en lugar de solo los promedios históricos, pueden usarse para estimar tasas de retiro seguras en la jubilación, un recordatorio de que un saldo proyectado como el que produce esta calculadora es solo la mitad de «acumulación» de la planificación de la jubilación; cómo se retira después ese saldo de forma segura es una cuestión aparte e igual de importante.",
+          "url": "https://doi.org/10.17159/sajs.2022/11933",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Conversor de husos horarios",
       "description": "Convierte la hora entre dos ciudades cualesquiera del mundo, consulta un reloj mundial en directo para las principales zonas horarias y encuentra las mejores horas de reunión que coincidan.",
