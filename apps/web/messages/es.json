@@ -3438,6 +3438,168 @@
         }
       }
     },
+    "debt-to-income-calculator": {
+      "title": "Calculadora de Ratio Deuda-Ingreso",
+      "description": "Calcula tus ratios deuda-ingreso (DTI) de primer nivel y global a partir de tus ingresos y tus pagos de deuda mensuales, con una categoría de calificación que suelen usar los prestamistas.",
+      "aboveFold": {
+        "inputTitle": "Tus ingresos y deudas",
+        "resultTitle": "Tu ratio deuda-ingreso",
+        "backEndRatioLabel": "Ratio global (DTI total)",
+        "frontEndRatioLabel": "Ratio de primer nivel (solo vivienda)",
+        "totalMonthlyDebtLabel": "Deuda mensual total",
+        "categoryLabel": "Calificación",
+        "category": {
+          "healthy": "Saludable",
+          "manageable": "Manejable",
+          "high": "Alto",
+          "veryHigh": "Muy alto"
+        },
+        "placeholder": "Introduce tus ingresos y tus pagos de deuda mensuales para ver tu ratio deuda-ingreso.",
+        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no una decisión de préstamo ni asesoramiento financiero. Los prestamistas calculan el DTI con sus propias reglas, que pueden diferir de la fórmula usada aquí, y la aprobación depende de muchos factores más allá de este ratio. Consulta a un prestamista autorizado o a un asesor financiero para obtener orientación específica para tu situación."
+      },
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "monthlyGrossIncomeLabel": "Ingreso mensual bruto",
+        "monthlyGrossIncomePlaceholder": "p. ej. 6.000",
+        "housingPaymentLabel": "Pago de vivienda (alquiler o hipoteca)",
+        "housingPaymentHint": "Tu alquiler actual, o tu cuota hipotecaria incluyendo impuesto predial y seguro si corresponde.",
+        "housingPaymentPlaceholder": "p. ej. 1.500",
+        "carPaymentsLabel": "Pagos de préstamo de auto",
+        "carPaymentsPlaceholder": "p. ej. 300",
+        "studentLoanPaymentsLabel": "Pagos de préstamo estudiantil",
+        "studentLoanPaymentsPlaceholder": "p. ej. 200",
+        "creditCardPaymentsLabel": "Mínimos de tarjeta de crédito",
+        "creditCardPaymentsPlaceholder": "p. ej. 100",
+        "otherPaymentsLabel": "Otra deuda mensual",
+        "otherPaymentsHint": "Préstamos personales o cualquier otro pago de deuda recurrente no incluido arriba.",
+        "otherPaymentsPlaceholder": "p. ej. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta calculadora",
+          "paragraph1": "Esta herramienta calcula dos porcentajes relacionados. El ratio de primer nivel divide solo tu pago de vivienda entre tu ingreso mensual bruto. El ratio global —normalmente llamado simplemente ratio deuda-ingreso, o DTI— divide todos tus pagos de deuda mensuales, vivienda incluida, entre ese mismo ingreso. Los prestamistas suelen fijarse en el ratio global como una instantánea única de cuánto de tu ingreso ya está comprometido antes de añadir cualquier deuda nueva.",
+          "paragraph2": "La calculadora también asigna una categoría a tu ratio global usando umbrales comúnmente citados en la suscripción hipotecaria: por debajo del 36 % generalmente se considera una carga de deuda saludable, entre el 36 % y el 43 % es un rango con el que muchos prestamistas convencionales aún trabajan, entre el 43 % y el 50 % supera el límite global usado por muchas hipotecas calificadas, y el 50 % o más se considera ampliamente una carga de deuda de alto riesgo. Estos umbrales son puntos de referencia comunes, no reglas universales: diferentes prestamistas y programas de préstamo trazan estos límites de forma distinta."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Cuatro escenarios de hogares muestran cómo las mismas deudas, en distintos niveles de ingreso, caen en categorías de DTI diferentes.",
+          "columnScenario": "Escenario",
+          "columnBackEndRatio": "Ratio global",
+          "columnCategory": "Categoría",
+          "rows": [
+            {
+              "scenario": "Ingreso de 6.000 $, vivienda 1.500 $, auto 300 $, préstamo estudiantil 200 $, tarjeta de crédito 100 $",
+              "backEndRatio": "35 %",
+              "category": "Saludable"
+            },
+            {
+              "scenario": "Ingreso de 5.000 $, vivienda 1.200 $, auto 300 $, préstamo estudiantil 200 $, tarjeta de crédito 150 $",
+              "backEndRatio": "37 %",
+              "category": "Manejable"
+            },
+            {
+              "scenario": "Ingreso de 4.000 $, vivienda 900 $, auto 300 $, préstamo estudiantil 200 $, tarjeta de crédito 250 $, otra 150 $",
+              "backEndRatio": "45 %",
+              "category": "Alto"
+            },
+            {
+              "scenario": "Ingreso de 5.000 $, vivienda 1.800 $, auto 400 $, préstamo estudiantil 300 $, tarjeta de crédito 200 $, otra 100 $",
+              "backEndRatio": "56 %",
+              "category": "Muy alto"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Cuál es la diferencia entre el ratio de primer nivel y el ratio global?",
+              "answer": "El ratio de primer nivel solo cuenta tu pago de vivienda frente a tu ingreso. El ratio global cuenta cada pago de deuda mensual —vivienda, préstamos de auto, préstamos estudiantiles, tarjetas de crédito y cualquier otra deuda recurrente— frente a ese mismo ingreso. Los prestamistas generalmente confían en el ratio global como la imagen más completa, ya que capta toda tu carga de deuda, no solo la vivienda."
+            },
+            {
+              "question": "¿Por qué importan los umbrales de categoría?",
+              "answer": "Los umbrales del 36 % y el 43 % usados aquí reflejan límites comúnmente citados en la suscripción hipotecaria; el 43 % en particular es el límite global asociado a muchos programas de préstamos hipotecarios calificados. Superar estos umbrales no te descalifica automáticamente de todo tipo de préstamo, pero sí significa que muchos prestamistas convencionales examinarán tu solicitud con más detalle u ofrecerán condiciones menos favorables."
+            },
+            {
+              "question": "¿Pagar una deuda pequeña realmente mejora mucho mi DTI?",
+              "answer": "Depende del tamaño de ese pago mensual en relación con tu ingreso, no del tamaño del saldo de la deuda. Pagar una tarjeta con un saldo pequeño restante pero un pago mínimo alto puede mejorar notablemente tu DTI, mientras que pagar un préstamo grande con un pago mensual diminuto apenas mueve el ratio, por eso el DTI se calcula a partir de los pagos, no de los saldos."
+            },
+            {
+              "question": "¿Debo incluir la comida, los servicios públicos o las suscripciones como deuda?",
+              "answer": "No. El DTI trata específicamente sobre obligaciones de deuda —pagos que estás contractualmente obligado a hacer, como préstamos y tarjetas de crédito— no sobre gastos generales de vida. Los costos cotidianos importan para tu presupuesto más amplio, pero no forman parte de cómo los prestamistas calculan este ratio en particular."
+            },
+            {
+              "question": "Mi ingreso varía de un mes a otro. ¿Qué debo introducir?",
+              "answer": "Usa un promedio realista de tu ingreso mensual bruto de los últimos meses, o la cifra que un prestamista típicamente usaría para tu situación (como un promedio de recibos de sueldo recientes o declaraciones de impuestos para ingresos variables o de trabajo independiente). Introducir un solo mes inusualmente alto o bajo distorsionará el ratio."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De una lista de verificación de suscripción a una métrica del hogar",
+            "paragraph": "Los ratios deuda-ingreso surgieron del mismo giro de mediados del siglo XX hacia una suscripción hipotecaria estandarizada que produjo reglas como la pauta de accesibilidad 28/36: a medida que el crédito pasó de decisiones individuales a decisiones repetibles y basadas en reglas, un simple ratio de pagos de deuda sobre ingresos se convirtió en una forma estándar de resumir en un solo número la carga de deuda general de un prestatario, distinta de los costos de vivienda por sí solos. Con el tiempo, ese mismo ratio se extendió más allá del crédito hipotecario hacia una orientación financiera personal más amplia, como una forma general de describir cuán ajustado está el ingreso de un hogar."
+          },
+          "modernDevelopments": {
+            "title": "De la hoja de cálculo del prestamista a un chequeo del hogar",
+            "paragraph": "El DTI originalmente lo calculaba un oficial de préstamos como uno más entre muchos elementos de una decisión formal de suscripción. Con la difusión de las calculadoras en línea, esa misma división simple se trasladó a la pantalla del propio hogar, permitiendo a cualquiera comprobar aproximadamente dónde se sitúa su carga de deuda respecto a los umbrales de préstamo habituales, útil no solo antes de solicitar un préstamo, sino como un chequeo periódico de la carga de deuda general, independientemente de cualquier solicitud específica."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Las matemáticas de ratio de ingresos detrás del DTI se ubican dentro de las finanzas del hogar y el riesgo crediticio, especializaciones dentro del campo más amplio de las finanzas que cubren las demás calculadoras de préstamos y vivienda de este sitio. Estas son las 5 mejores instituciones del mundo en Contabilidad y Finanzas según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Clasificada n.º 1 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Mayormente en línea: la Harvard Extension School indica que 11 de los 12 cursos requeridos para su título de posgrado en Finanzas pueden completarse en línea, con al menos un curso que requiere asistencia al campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificado n.º 2 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No: el Master of Finance de MIT Sloan es un programa presencial a tiempo completo (de 12 o 18 meses), sin opción de educación a distancia indicada en sus páginas oficiales."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada n.º 3 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No: la formación en finanzas de Stanford GSB se imparte a través de su MBA presencial; la propia página de programas en línea de la escuela solo enumera cursos ejecutivos sin título, no un título completo de finanzas."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada n.º 4 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "No totalmente en línea: el MSc in Financial Economics de Oxford es un programa presencial a tiempo completo de 9 meses; un nuevo «MSc in Applied Financial Economics» a tiempo parcial (desde septiembre de 2026) combina aprendizaje en línea con estancias presenciales obligatorias en Oxford, por lo que tampoco es una opción solo a distancia."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Clasificada n.º 5 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No: el Master in Finance de Chicago Booth es un programa presencial de 15 meses cuya primera promoción comenzó en otoño de 2024."
+              },
+              {
+                "name": "Qatar University — College of Business and Economics",
+                "note": "Una escuela de negocios regional destacada del mundo árabe, acreditada por la AACSB y reconocida por ser el primer programa de negocios en idioma árabe del mundo en obtener dicha acreditación, que ofrece un M.Sc. en Finanzas avalado por el CFA Institute.",
+                "url": "https://www.qu.edu.qa/sites/en_US/business/programs/graduates/Master-of-Science-in-Finance",
+                "online": "La página oficial del programa no indica una modalidad totalmente en línea; el programa de finanzas de la Universidad de Qatar se imparte principalmente en el campus de Doha, Catar."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Melzer, B. T. (2017). Mortgage Debt Overhang: Reduced Investment by Homeowners at Risk of Default. The Journal of Finance, 72(2), 575–612.",
+          "note": "Un estudio publicado en una revista de finanzas de primer nivel que muestra que los propietarios con una carga de deuda pesada en relación con el valor de su vivienda reducen su inversión y su gasto mucho antes de incurrir realmente en incumplimiento, evidencia real de por qué vigilar la carga de deuda general —exactamente lo que resume un ratio DTI— importa incluso para hogares que actualmente no están en dificultades financieras.",
+          "url": "https://doi.org/10.1111/jofi.12482",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Conversor de husos horarios",
       "description": "Convierte la hora entre dos ciudades cualesquiera del mundo, consulta un reloj mundial en directo para las principales zonas horarias y encuentra las mejores horas de reunión que coincidan.",

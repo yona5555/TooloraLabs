@@ -22,6 +22,7 @@ import {
   Percent,
   PiggyBank,
   QrCode,
+  Ratio,
   ScanBarcode,
   Receipt,
   ReceiptText,
@@ -71,6 +72,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "affordable-loan-calculator": Wallet,
   "retirement-calculator": PiggyBank,
   "house-affordability-calculator": House,
+  "debt-to-income-calculator": Ratio,
   "world-time-converter": Clock,
 };
 

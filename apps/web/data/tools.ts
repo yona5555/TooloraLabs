@@ -119,6 +119,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "debt-to-income-calculator",
+    title: "Debt-to-Income Ratio Calculator",
+    category: "calculators",
+    description:
+      "Calculate your front-end and back-end debt-to-income (DTI) ratios from your income and monthly debt payments, with a category rating lenders commonly use.",
+    featured: false,
+    keywords: [
+      "debt-to-income calculator",
+      "DTI calculator",
+      "debt to income ratio",
+      "back-end ratio",
+      "front-end ratio",
+    ],
+  },
+  {
     slug: "weather-forecast",
     title: "Weather Forecast",
     category: "calculators",

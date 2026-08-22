@@ -3438,6 +3438,168 @@
         }
       }
     },
+    "debt-to-income-calculator": {
+      "title": "Schulden-Einkommen-Verhältnis-Rechner",
+      "description": "Berechnen Sie Ihre Front-End- und Back-End-Schulden-Einkommen-Verhältnisse (DTI) aus Ihrem Einkommen und Ihren monatlichen Schuldenzahlungen, mit einer von Kreditgebern häufig verwendeten Kategorieeinstufung.",
+      "aboveFold": {
+        "inputTitle": "Ihr Einkommen & Ihre Schulden",
+        "resultTitle": "Ihr Schulden-Einkommen-Verhältnis",
+        "backEndRatioLabel": "Back-End-Verhältnis (Gesamt-DTI)",
+        "frontEndRatioLabel": "Front-End-Verhältnis (nur Wohnkosten)",
+        "totalMonthlyDebtLabel": "Monatliche Gesamtschuld",
+        "categoryLabel": "Einstufung",
+        "category": {
+          "healthy": "Gesund",
+          "manageable": "Handhabbar",
+          "high": "Hoch",
+          "veryHigh": "Sehr hoch"
+        },
+        "placeholder": "Geben Sie Ihr Einkommen und Ihre monatlichen Schuldenzahlungen ein, um Ihr Schulden-Einkommen-Verhältnis zu sehen.",
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine Kreditentscheidung und keine Finanzberatung. Kreditgeber berechnen das DTI nach eigenen Regeln, die von der hier verwendeten Formel abweichen können, und die Genehmigung hängt von vielen Faktoren jenseits dieses Verhältnisses ab. Wenden Sie sich für eine auf Ihre Situation zugeschnittene Beratung an einen zugelassenen Kreditgeber oder Finanzberater."
+      },
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrundwissen"
+      },
+      "form": {
+        "monthlyGrossIncomeLabel": "Monatliches Bruttoeinkommen",
+        "monthlyGrossIncomePlaceholder": "z. B. 6.000",
+        "housingPaymentLabel": "Wohnkosten (Miete oder Hypothek)",
+        "housingPaymentHint": "Ihre aktuelle Miete oder Ihre Hypothekenrate einschließlich Grundsteuer und Versicherung, falls zutreffend.",
+        "housingPaymentPlaceholder": "z. B. 1.500",
+        "carPaymentsLabel": "Autokreditraten",
+        "carPaymentsPlaceholder": "z. B. 300",
+        "studentLoanPaymentsLabel": "Studienkreditraten",
+        "studentLoanPaymentsPlaceholder": "z. B. 200",
+        "creditCardPaymentsLabel": "Kreditkarten-Mindestzahlungen",
+        "creditCardPaymentsPlaceholder": "z. B. 100",
+        "otherPaymentsLabel": "Sonstige monatliche Schulden",
+        "otherPaymentsHint": "Privatkredite oder andere wiederkehrende Schuldenzahlungen, die oben nicht aufgeführt sind.",
+        "otherPaymentsPlaceholder": "z. B. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieser Rechner",
+          "paragraph1": "Dieses Tool berechnet zwei verwandte Prozentsätze. Das Front-End-Verhältnis teilt allein Ihre Wohnkosten durch Ihr monatliches Bruttoeinkommen. Das Back-End-Verhältnis — meist einfach als Schulden-Einkommen-Verhältnis oder DTI bezeichnet — teilt alle Ihre monatlichen Schuldenzahlungen, Wohnkosten eingeschlossen, durch dasselbe Einkommen. Kreditgeber betrachten üblicherweise das Back-End-Verhältnis als einzelnen Momentaufnahme-Wert dafür, wie viel Ihres Einkommens bereits gebunden ist, bevor überhaupt neue Schulden hinzukommen.",
+          "paragraph2": "Der Rechner weist Ihrem Back-End-Verhältnis außerdem eine Kategorie zu, basierend auf Schwellenwerten, die in der Hypothekenvergabe häufig herangezogen werden: unter 36 % gilt eine Schuldenlast im Allgemeinen als gesund, 36-43 % ist eine Spanne, mit der viele konventionelle Kreditgeber noch arbeiten, 43-50 % überschreitet die Back-End-Grenze, die für viele qualifizierte Hypotheken gilt, und 50 % oder mehr wird weithin als risikoreiche Schuldenlast betrachtet. Diese Schwellenwerte sind gängige Orientierungspunkte, keine universellen Regeln — verschiedene Kreditgeber und Kreditprogramme ziehen diese Grenzen unterschiedlich."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Vier Haushaltsszenarien zeigen, wie dieselben Schulden bei unterschiedlichem Einkommen in unterschiedliche DTI-Kategorien fallen.",
+          "columnScenario": "Szenario",
+          "columnBackEndRatio": "Back-End-Verhältnis",
+          "columnCategory": "Kategorie",
+          "rows": [
+            {
+              "scenario": "6.000 $ Einkommen, 1.500 $ Wohnen, 300 $ Auto, 200 $ Studienkredit, 100 $ Kreditkarte",
+              "backEndRatio": "35%",
+              "category": "Gesund"
+            },
+            {
+              "scenario": "5.000 $ Einkommen, 1.200 $ Wohnen, 300 $ Auto, 200 $ Studienkredit, 150 $ Kreditkarte",
+              "backEndRatio": "37%",
+              "category": "Handhabbar"
+            },
+            {
+              "scenario": "4.000 $ Einkommen, 900 $ Wohnen, 300 $ Auto, 200 $ Studienkredit, 250 $ Kreditkarte, 150 $ sonstige",
+              "backEndRatio": "45%",
+              "category": "Hoch"
+            },
+            {
+              "scenario": "5.000 $ Einkommen, 1.800 $ Wohnen, 400 $ Auto, 300 $ Studienkredit, 200 $ Kreditkarte, 100 $ sonstige",
+              "backEndRatio": "56%",
+              "category": "Sehr hoch"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Was ist der Unterschied zwischen dem Front-End- und dem Back-End-Verhältnis?",
+              "answer": "Das Front-End-Verhältnis berücksichtigt nur Ihre Wohnkosten im Verhältnis zu Ihrem Einkommen. Das Back-End-Verhältnis berücksichtigt jede monatliche Schuldenzahlung — Wohnkosten, Autokredite, Studienkredite, Kreditkarten und alles andere Wiederkehrende — im Verhältnis zu demselben Einkommen. Kreditgeber verlassen sich in der Regel auf das Back-End-Verhältnis als vollständigeres Bild, da es Ihre gesamte Schuldenlast erfasst, nicht nur die Wohnkosten."
+            },
+            {
+              "question": "Warum sind die Kategorie-Schwellenwerte wichtig?",
+              "answer": "Die hier verwendeten Schwellenwerte von 36 % und 43 % spiegeln Grenzen wider, die in der Hypothekenvergabe häufig herangezogen werden — insbesondere 43 % ist die Back-End-Grenze, die mit vielen qualifizierten Hypothekenprogrammen verbunden ist. Ein Überschreiten dieser Schwellenwerte schließt Sie nicht automatisch von jeder Kreditart aus, bedeutet aber, dass viele konventionelle Kreditgeber Ihren Antrag genauer prüfen oder weniger günstige Konditionen anbieten."
+            },
+            {
+              "question": "Verbessert die Tilgung einer kleinen Schuld mein DTI tatsächlich spürbar?",
+              "answer": "Das hängt von der Höhe dieser monatlichen Zahlung im Verhältnis zu Ihrem Einkommen ab, nicht von der Höhe des Schuldensaldos. Die Tilgung einer Karte mit kleinem Restsaldo, aber hoher Mindestzahlung kann Ihr DTI spürbar verbessern, während die Tilgung eines großen Kredits mit winziger monatlicher Rate das Verhältnis kaum verändert — deshalb wird das DTI aus Zahlungen, nicht aus Salden berechnet."
+            },
+            {
+              "question": "Sollte ich Lebensmittel, Nebenkosten oder Abonnements als Schulden zählen?",
+              "answer": "Nein. Beim DTI geht es speziell um Schuldverpflichtungen — Zahlungen, zu denen Sie vertraglich verpflichtet sind, wie Kredite und Kreditkarten —, nicht um allgemeine Lebenshaltungskosten. Alltägliche Kosten sind für Ihr umfassenderes Budget wichtig, gehören aber nicht zur Berechnung dieses speziellen Verhältnisses durch Kreditgeber."
+            },
+            {
+              "question": "Mein Einkommen schwankt von Monat zu Monat. Was sollte ich eingeben?",
+              "answer": "Verwenden Sie einen realistischen Durchschnitt Ihres monatlichen Bruttoeinkommens der letzten Monate, oder den Wert, den ein Kreditgeber für Ihre Situation typischerweise heranziehen würde (etwa einen Durchschnitt aktueller Gehaltsabrechnungen oder Steuererklärungen bei schwankendem oder selbstständigem Einkommen). Die Eingabe eines ungewöhnlich hohen oder niedrigen Einzelmonats verzerrt das Verhältnis."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrundwissen zu diesem Tool",
+          "history": {
+            "title": "Von einer Checkliste der Kreditvergabe zu einer Haushaltskennzahl",
+            "paragraph": "Schulden-Einkommen-Verhältnisse entstanden aus demselben Wandel Mitte des 20. Jahrhunderts hin zu standardisierter Hypothekenvergabe, der auch Regeln wie die 28/36-Erschwinglichkeitsrichtlinie hervorbrachte: Als sich die Kreditvergabe von individuellen Ermessensentscheidungen zu wiederholbaren, regelbasierten Entscheidungen wandelte, wurde ein einfaches Verhältnis von Schuldenzahlungen zu Einkommen zu einer Standardmethode, um die gesamte Schuldenlast eines Kreditnehmers in einer einzigen Zahl zusammenzufassen, getrennt von den reinen Wohnkosten. Im Laufe der Zeit verbreitete sich dasselbe Verhältnis über die Hypothekenvergabe hinaus in die allgemeinere Finanzberatung als universelle Methode, um zu beschreiben, wie stark das Einkommen eines Haushalts belastet ist."
+          },
+          "modernDevelopments": {
+            "title": "Vom Arbeitsblatt des Kreditgebers zum Haushalts-Check",
+            "paragraph": "Das DTI wurde ursprünglich von einem Kreditsachbearbeiter als einer von vielen Faktoren einer förmlichen Vergabeentscheidung berechnet. Mit der Verbreitung von Online-Rechnern wanderte dieselbe einfache Division auf den Bildschirm des Haushalts selbst und ermöglichte es jedem, ungefähr zu prüfen, wo die eigene Schuldenlast im Verhältnis zu gängigen Kreditvergabe-Schwellenwerten liegt — nützlich nicht nur vor einer Kreditbeantragung, sondern auch als regelmäßiger Check der gesamten Schuldenlast, unabhängig von einem konkreten Antrag."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Einkommensverhältnis-Rechnung hinter dem DTI gehört zur Haushaltsfinanzierung und zum Kreditrisiko, Spezialisierungen innerhalb des breiteren Fachgebiets Finanzwissenschaft, das auch die anderen Kredit- und Wohnrechner dieser Website abdecken. Hier sind die 5 weltweit führenden Institutionen für Rechnungswesen & Finanzen im QS World University Rankings by Subject 2025 sowie eine regionale Option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Größtenteils online — die Harvard Extension School gibt an, dass 11 der 12 erforderlichen Kurse für ihren Finance-Abschluss online absolviert werden können, wobei mindestens ein Kurs eine Anwesenheit auf dem Campus erfordert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Nein — der Master of Finance der MIT Sloan ist ein Vollzeit-Präsenzprogramm (12- oder 18-monatige Tracks) ohne Fernstudienoption auf den offiziellen Seiten."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 3 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Nein — die Finanzausbildung der Stanford GSB erfolgt über ihren Präsenz-MBA; die eigene Online-Programmseite der Schule listet nur nicht-abschlussbezogene Executive-Kurse, keinen vollständigen Finanzabschluss."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 4 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Nicht vollständig online — Oxfords MSc in Financial Economics ist ein neunmonatiges Vollzeit-Präsenzprogramm; ein neuer Teilzeit-„MSc in Applied Financial Economics“ (ab September 2026) kombiniert Online-Lernen mit verpflichtenden Präsenzaufenthalten in Oxford und ist somit ebenfalls keine reine Fernstudienoption."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Weltweit auf Platz 5 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Nein — der Master in Finance der Chicago Booth ist ein 15-monatiges Präsenzprogramm, dessen erster Jahrgang im Herbst 2024 begann."
+              },
+              {
+                "name": "Qatar University — College of Business and Economics",
+                "note": "Eine führende regionale Business School in der arabischen Welt, AACSB-akkreditiert und bekannt als das weltweit erste arabischsprachige Wirtschaftsprogramm mit dieser Akkreditierung, mit einem vom CFA Institute anerkannten M.Sc. in Finance.",
+                "url": "https://www.qu.edu.qa/sites/en_US/business/programs/graduates/Master-of-Science-in-Finance",
+                "online": "Auf der offiziellen Programmseite wird keine vollständig online verfügbare Studienform angegeben; das Finance-Programm der Qatar University findet hauptsächlich auf dem Campus in Doha, Katar, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Melzer, B. T. (2017). Mortgage Debt Overhang: Reduced Investment by Homeowners at Risk of Default. The Journal of Finance, 72(2), 575–612.",
+          "note": "Eine in einer erstklassigen Finanzfachzeitschrift veröffentlichte Studie, die zeigt, dass Eigenheimbesitzer mit einer im Verhältnis zum Immobilienwert hohen Schuldenlast ihre Investitionen und Ausgaben schon deutlich vor einem tatsächlichen Zahlungsausfall zurückfahren — ein realer Beleg dafür, dass die Beobachtung der gesamten Schuldenlast, genau das, was ein DTI-Verhältnis zusammenfasst, auch für Haushalte wichtig ist, die sich aktuell nicht in finanziellen Schwierigkeiten befinden.",
+          "url": "https://doi.org/10.1111/jofi.12482",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Weltzeit-Umrechner",
       "description": "Rechnen Sie die Uhrzeit zwischen zwei beliebigen Städten weltweit um, sehen Sie eine Live-Weltuhr für wichtige Zeitzonen und finden Sie die besten überschneidenden Besprechungszeiten.",

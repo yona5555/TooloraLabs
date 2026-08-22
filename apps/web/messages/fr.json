@@ -3438,6 +3438,168 @@
         }
       }
     },
+    "debt-to-income-calculator": {
+      "title": "Calculateur de ratio dette/revenu",
+      "description": "Calculez vos ratios dette/revenu (DTI) de premier rang et global à partir de votre revenu et de vos paiements de dettes mensuels, avec une catégorie couramment utilisée par les prêteurs.",
+      "aboveFold": {
+        "inputTitle": "Vos revenus et dettes",
+        "resultTitle": "Votre ratio dette/revenu",
+        "backEndRatioLabel": "Ratio global (DTI total)",
+        "frontEndRatioLabel": "Ratio de premier rang (logement seul)",
+        "totalMonthlyDebtLabel": "Dette mensuelle totale",
+        "categoryLabel": "Évaluation",
+        "category": {
+          "healthy": "Sain",
+          "manageable": "Gérable",
+          "high": "Élevé",
+          "veryHigh": "Très élevé"
+        },
+        "placeholder": "Saisissez votre revenu et vos paiements de dettes mensuels pour voir votre ratio dette/revenu.",
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une décision de prêt ni un conseil financier. Les prêteurs calculent le DTI selon leurs propres règles, qui peuvent différer de la formule utilisée ici, et l'approbation dépend de nombreux facteurs au-delà de ce seul ratio. Consultez un prêteur agréé ou un conseiller financier pour des conseils adaptés à votre situation."
+      },
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "monthlyGrossIncomeLabel": "Revenu mensuel brut",
+        "monthlyGrossIncomePlaceholder": "ex. 6 000",
+        "housingPaymentLabel": "Paiement du logement (loyer ou hypothèque)",
+        "housingPaymentHint": "Votre loyer actuel, ou votre mensualité hypothécaire incluant la taxe foncière et l'assurance le cas échéant.",
+        "housingPaymentPlaceholder": "ex. 1 500",
+        "carPaymentsLabel": "Paiements de prêt auto",
+        "carPaymentsPlaceholder": "ex. 300",
+        "studentLoanPaymentsLabel": "Paiements de prêt étudiant",
+        "studentLoanPaymentsPlaceholder": "ex. 200",
+        "creditCardPaymentsLabel": "Minimums de carte de crédit",
+        "creditCardPaymentsPlaceholder": "ex. 100",
+        "otherPaymentsLabel": "Autres dettes mensuelles",
+        "otherPaymentsHint": "Prêts personnels ou tout autre paiement de dette récurrent non listé ci-dessus.",
+        "otherPaymentsPlaceholder": "ex. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne ce calculateur",
+          "paragraph1": "Cet outil calcule deux pourcentages liés. Le ratio de premier rang divise uniquement votre paiement de logement par votre revenu mensuel brut. Le ratio global — généralement simplement appelé ratio dette/revenu, ou DTI — divise l'ensemble de vos paiements de dettes mensuels, logement inclus, par ce même revenu. Les prêteurs se fient couramment au ratio global comme instantané unique de la part de votre revenu déjà engagée avant l'ajout de toute nouvelle dette.",
+          "paragraph2": "Le calculateur attribue aussi une catégorie à votre ratio global selon des seuils couramment cités en souscription hypothécaire : en dessous de 36 %, la charge de dette est généralement considérée comme saine ; entre 36 % et 43 %, de nombreux prêteurs conventionnels travaillent encore avec cette fourchette ; entre 43 % et 50 %, la limite dépasse celle utilisée pour de nombreux prêts hypothécaires qualifiés ; à 50 % ou plus, la charge de dette est largement considérée comme à haut risque. Ces seuils sont des repères courants, pas des règles universelles — différents prêteurs et programmes de prêt tracent ces limites différemment."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Quatre scénarios de ménages montrent comment les mêmes dettes, à différents niveaux de revenu, aboutissent à des catégories de DTI différentes.",
+          "columnScenario": "Scénario",
+          "columnBackEndRatio": "Ratio global",
+          "columnCategory": "Catégorie",
+          "rows": [
+            {
+              "scenario": "Revenu de 6 000 $, logement 1 500 $, auto 300 $, prêt étudiant 200 $, carte de crédit 100 $",
+              "backEndRatio": "35 %",
+              "category": "Sain"
+            },
+            {
+              "scenario": "Revenu de 5 000 $, logement 1 200 $, auto 300 $, prêt étudiant 200 $, carte de crédit 150 $",
+              "backEndRatio": "37 %",
+              "category": "Gérable"
+            },
+            {
+              "scenario": "Revenu de 4 000 $, logement 900 $, auto 300 $, prêt étudiant 200 $, carte de crédit 250 $, autre 150 $",
+              "backEndRatio": "45 %",
+              "category": "Élevé"
+            },
+            {
+              "scenario": "Revenu de 5 000 $, logement 1 800 $, auto 400 $, prêt étudiant 300 $, carte de crédit 200 $, autre 100 $",
+              "backEndRatio": "56 %",
+              "category": "Très élevé"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la différence entre le ratio de premier rang et le ratio global ?",
+              "answer": "Le ratio de premier rang ne compte que votre paiement de logement par rapport à votre revenu. Le ratio global compte chaque paiement de dette mensuel — logement, prêts auto, prêts étudiants, cartes de crédit et toute autre dette récurrente — par rapport à ce même revenu. Les prêteurs s'appuient généralement sur le ratio global comme image plus complète, car il capture toute votre charge de dette, pas seulement le logement."
+            },
+            {
+              "question": "Pourquoi les seuils de catégorie sont-ils importants ?",
+              "answer": "Les seuils de 36 % et 43 % utilisés ici font écho à des limites couramment citées en souscription hypothécaire — 43 % en particulier étant la limite globale associée à de nombreux programmes de prêts hypothécaires qualifiés. Dépasser ces seuils ne vous disqualifie pas automatiquement de tout type de prêt, mais cela signifie que de nombreux prêteurs conventionnels examineront votre dossier de plus près ou proposeront des conditions moins favorables."
+            },
+            {
+              "question": "Rembourser une petite dette améliore-t-il vraiment beaucoup mon DTI ?",
+              "answer": "Cela dépend de la taille de ce paiement mensuel par rapport à votre revenu, pas de la taille du solde de la dette. Rembourser une carte avec un petit solde restant mais un paiement minimum élevé peut nettement améliorer votre DTI, tandis que rembourser un gros prêt avec un tout petit paiement mensuel ne fait presque pas bouger le ratio — c'est pourquoi le DTI se calcule à partir des paiements, pas des soldes."
+            },
+            {
+              "question": "Dois-je inclure l'épicerie, les services publics ou les abonnements comme dette ?",
+              "answer": "Non. Le DTI concerne spécifiquement les obligations de dette — des paiements que vous êtes contractuellement tenu d'effectuer, comme des prêts et des cartes de crédit — pas les dépenses courantes de la vie. Les coûts quotidiens comptent pour votre budget global, mais ils ne font pas partie du calcul de ce ratio par les prêteurs."
+            },
+            {
+              "question": "Mon revenu varie d'un mois à l'autre. Que dois-je saisir ?",
+              "answer": "Utilisez une moyenne réaliste de votre revenu mensuel brut sur les derniers mois, ou le chiffre qu'un prêteur utiliserait généralement pour votre situation (comme une moyenne de fiches de paie récentes ou de déclarations fiscales pour un revenu variable ou indépendant). Saisir un seul mois inhabituellement élevé ou bas fausserait le ratio."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "D'une liste de vérification de souscription à un indicateur de ménage",
+            "paragraph": "Les ratios dette/revenu sont nés du même virage vers une souscription hypothécaire standardisée au milieu du XXe siècle qui a produit des règles comme la directive d'accessibilité 28/36 : à mesure que le crédit passait de jugements individuels à des décisions reproductibles et fondées sur des règles, un simple ratio des paiements de dette au revenu est devenu une façon standard de résumer en un seul chiffre la charge de dette globale d'un emprunteur, distincte des seuls coûts de logement. Avec le temps, ce même ratio s'est répandu au-delà du crédit hypothécaire dans les conseils financiers personnels plus larges, comme moyen général de décrire à quel point le revenu d'un ménage est sollicité."
+          },
+          "modernDevelopments": {
+            "title": "De la feuille de calcul du prêteur au bilan de santé du ménage",
+            "paragraph": "Le DTI était à l'origine calculé par un conseiller prêteur comme l'un des nombreux éléments d'une décision de souscription formelle. Avec la diffusion des calculateurs en ligne, cette même division simple s'est transposée sur l'écran du ménage lui-même, permettant à chacun de vérifier approximativement où se situe sa charge de dette par rapport aux seuils de prêt courants — utile non seulement avant de demander un prêt, mais aussi comme bilan périodique de la charge de dette globale, indépendamment de toute demande spécifique."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Le calcul de ratio de revenu derrière le DTI relève de la finance des ménages et du risque de crédit, des spécialisations au sein du domaine plus large de la finance couvert par les autres calculateurs de prêt et de logement de ce site. Voici les 5 meilleures institutions mondiales en comptabilité et finance selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 1 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Majoritairement en ligne — la Harvard Extension School indique que 11 des 12 cours requis pour son diplôme supérieur de finance peuvent être suivis en ligne, un cours au moins nécessitant une présence sur le campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 2 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Non — le Master of Finance de la MIT Sloan est un programme à temps plein et en présentiel (parcours de 12 ou 18 mois), sans option d'enseignement à distance mentionnée sur ses pages officielles."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 3 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Non — la formation en finance de la Stanford GSB est dispensée dans le cadre de son MBA en présentiel ; la page officielle des programmes en ligne de l'école ne recense que des cours exécutifs non diplômants, pas un diplôme complet de finance."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 4 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Pas entièrement en ligne — le MSc in Financial Economics d'Oxford est un programme à temps plein en présentiel de 9 mois ; un nouveau « MSc in Applied Financial Economics » à temps partiel (à partir de septembre 2026) combine apprentissage en ligne et séjours obligatoires en présentiel à Oxford, ce qui n'en fait pas non plus une option uniquement à distance."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Classée n° 5 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Non — le Master in Finance de Chicago Booth est un programme en présentiel de 15 mois, dont la première promotion a débuté à l'automne 2024."
+              },
+              {
+                "name": "Qatar University — College of Business and Economics",
+                "note": "Une école de commerce régionale de premier plan dans le monde arabe, accréditée AACSB et connue pour être le premier programme de commerce en langue arabe au monde à obtenir cette accréditation, proposant un M.Sc. en finance approuvé par le CFA Institute.",
+                "url": "https://www.qu.edu.qa/sites/en_US/business/programs/graduates/Master-of-Science-in-Finance",
+                "online": "Aucune mention de formation entièrement en ligne sur la page officielle du programme ; le programme de finance de l'Université du Qatar se déroule principalement sur le campus de Doha, au Qatar."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Melzer, B. T. (2017). Mortgage Debt Overhang: Reduced Investment by Homeowners at Risk of Default. The Journal of Finance, 72(2), 575–612.",
+          "note": "Une étude publiée dans une revue de finance de premier plan montrant que les propriétaires portant une lourde charge de dette par rapport à la valeur de leur logement réduisent leurs investissements et leurs dépenses bien avant tout défaut de paiement réel — une preuve concrète que surveiller la charge de dette globale, exactement ce que résume un ratio DTI, importe même pour les ménages qui ne sont pas actuellement en difficulté financière.",
+          "url": "https://doi.org/10.1111/jofi.12482",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Convertisseur d'heure mondial",
       "description": "Convertissez l'heure entre deux villes n'importe où dans le monde, consultez une horloge mondiale en direct pour les principaux fuseaux horaires et trouvez les meilleurs créneaux de réunion communs.",

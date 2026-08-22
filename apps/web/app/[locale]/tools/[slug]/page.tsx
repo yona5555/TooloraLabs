@@ -29,6 +29,8 @@ import RetirementCalculator from "@/components/tools/retirement-calculator/Retir
 import RetirementEducation from "@/components/tools/retirement-calculator/RetirementEducation";
 import HouseAffordabilityCalculator from "@/components/tools/house-affordability-calculator/HouseAffordabilityCalculator";
 import HouseAffordabilityEducation from "@/components/tools/house-affordability-calculator/HouseAffordabilityEducation";
+import DebtToIncomeCalculator from "@/components/tools/debt-to-income-calculator/DebtToIncomeCalculator";
+import DebtToIncomeEducation from "@/components/tools/debt-to-income-calculator/DebtToIncomeEducation";
 import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
@@ -280,6 +282,9 @@ export default async function ToolPage({
     case "house-affordability-calculator":
       component = <HouseAffordabilityCalculator education={<HouseAffordabilityEducation />} />;
       break;
+    case "debt-to-income-calculator":
+      component = <DebtToIncomeCalculator education={<DebtToIncomeEducation />} />;
+      break;
     case "world-time-converter":
       component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
       break;
@@ -359,6 +364,7 @@ export default async function ToolPage({
     slug === "affordable-loan-calculator" ||
     slug === "retirement-calculator" ||
     slug === "house-affordability-calculator" ||
+    slug === "debt-to-income-calculator" ||
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
     slug === "percentage-calculator" ||

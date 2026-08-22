@@ -3434,6 +3434,168 @@
         }
       }
     },
+    "debt-to-income-calculator": {
+      "title": "Debt-to-Income Ratio Calculator",
+      "description": "Calculate your front-end and back-end debt-to-income (DTI) ratios from your income and monthly debt payments, with a category rating lenders commonly use.",
+      "aboveFold": {
+        "inputTitle": "Your Income & Debts",
+        "resultTitle": "Your Debt-to-Income Ratio",
+        "backEndRatioLabel": "Back-End Ratio (Total DTI)",
+        "frontEndRatioLabel": "Front-End Ratio (Housing Only)",
+        "totalMonthlyDebtLabel": "Total Monthly Debt",
+        "categoryLabel": "Rating",
+        "category": {
+          "healthy": "Healthy",
+          "manageable": "Manageable",
+          "high": "High",
+          "veryHigh": "Very High"
+        },
+        "placeholder": "Enter your income and monthly debt payments to see your debt-to-income ratio.",
+        "disclaimer": "This tool provides a general educational estimate only, not a lending decision or financial advice. Lenders calculate DTI using their own rules, which can differ from the formula used here, and approval depends on many factors beyond this ratio. Consult a licensed lender or financial advisor for guidance specific to your situation."
+      },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "monthlyGrossIncomeLabel": "Gross Monthly Income",
+        "monthlyGrossIncomePlaceholder": "e.g. 6,000",
+        "housingPaymentLabel": "Housing Payment (Rent or Mortgage)",
+        "housingPaymentHint": "Your current rent, or your mortgage payment including property tax and insurance if applicable.",
+        "housingPaymentPlaceholder": "e.g. 1,500",
+        "carPaymentsLabel": "Car Loan Payments",
+        "carPaymentsPlaceholder": "e.g. 300",
+        "studentLoanPaymentsLabel": "Student Loan Payments",
+        "studentLoanPaymentsPlaceholder": "e.g. 200",
+        "creditCardPaymentsLabel": "Credit Card Minimums",
+        "creditCardPaymentsPlaceholder": "e.g. 100",
+        "otherPaymentsLabel": "Other Monthly Debt",
+        "otherPaymentsHint": "Personal loans or any other recurring debt payment not listed above.",
+        "otherPaymentsPlaceholder": "e.g. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "How This Calculator Works",
+          "paragraph1": "This tool computes two related percentages. The front-end ratio divides your housing payment alone by your gross monthly income. The back-end ratio — usually just called the debt-to-income ratio, or DTI — divides your total monthly debt payments, housing included, by that same income. Lenders commonly look at the back-end ratio as a single snapshot of how much of your income is already committed before any new debt is added.",
+          "paragraph2": "The calculator also assigns a category to your back-end ratio using thresholds commonly referenced in mortgage underwriting: below 36% is generally considered a healthy debt load, 36-43% is a range many conventional lenders still work with, 43-50% exceeds the back-end limit used for many qualified mortgages, and 50% or higher is widely treated as a high-risk debt load. These thresholds are common reference points, not universal rules — different lenders and loan programs draw the lines differently."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Four household scenarios show how the same debts, at different income levels, land in different DTI categories.",
+          "columnScenario": "Scenario",
+          "columnBackEndRatio": "Back-End Ratio",
+          "columnCategory": "Category",
+          "rows": [
+            {
+              "scenario": "$6,000 income, $1,500 housing, $300 car, $200 student loan, $100 credit card",
+              "backEndRatio": "35%",
+              "category": "Healthy"
+            },
+            {
+              "scenario": "$5,000 income, $1,200 housing, $300 car, $200 student loan, $150 credit card",
+              "backEndRatio": "37%",
+              "category": "Manageable"
+            },
+            {
+              "scenario": "$4,000 income, $900 housing, $300 car, $200 student loan, $250 credit card, $150 other",
+              "backEndRatio": "45%",
+              "category": "High"
+            },
+            {
+              "scenario": "$5,000 income, $1,800 housing, $400 car, $300 student loan, $200 credit card, $100 other",
+              "backEndRatio": "56%",
+              "category": "Very High"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What's the difference between the front-end and back-end ratio?",
+              "answer": "The front-end ratio only counts your housing payment against your income. The back-end ratio counts every monthly debt payment — housing, car loans, student loans, credit cards, and anything else recurring — against that same income. Lenders generally rely on the back-end ratio as the more complete picture, since it captures your full debt load, not just housing."
+            },
+            {
+              "question": "Why do the category thresholds matter?",
+              "answer": "The 36% and 43% thresholds used here echo limits commonly referenced in mortgage underwriting — 43% in particular is the back-end limit associated with many qualified-mortgage loan programs. Falling above these thresholds doesn't automatically disqualify you from every type of loan, but it does mean many conventional lenders will scrutinize your application more closely or offer less favorable terms."
+            },
+            {
+              "question": "Does paying off a small debt actually improve my DTI much?",
+              "answer": "It depends on the size of that monthly payment relative to your income, not the size of the debt's balance. Paying off a card with a small remaining balance but a large minimum payment can noticeably improve your DTI, while paying off a large loan with a tiny monthly payment barely moves the ratio at all — which is why DTI is calculated from payments, not balances."
+            },
+            {
+              "question": "Should I include groceries, utilities, or subscriptions as debt?",
+              "answer": "No. DTI is specifically about debt obligations — payments you're contractually required to make, like loans and credit cards — not general living expenses. Everyday costs matter for your broader budget, but they aren't part of how lenders calculate this particular ratio."
+            },
+            {
+              "question": "My income varies month to month. What should I enter?",
+              "answer": "Use a realistic average of your gross monthly income over the past several months, or the figure a lender would typically use for your situation (such as an average of recent pay stubs or tax returns for variable or self-employed income). Entering an unusually high or low single month will distort the ratio."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From an Underwriting Checklist to a Household Metric",
+            "paragraph": "Debt-to-income ratios grew out of the same mid-20th-century shift toward standardized mortgage underwriting that produced rules like the 28/36 affordability guideline: as lending moved from individual judgment calls toward repeatable, rules-based decisions, a simple ratio of debt payments to income became a standard way to summarize a borrower's overall debt burden in a single number, distinct from housing costs alone. Over time, the same ratio spread beyond mortgage lending into broader personal-finance guidance as a general-purpose way to describe how stretched a household's income is."
+          },
+          "modernDevelopments": {
+            "title": "From a Lender's Worksheet to a Household Checkup",
+            "paragraph": "DTI was originally calculated by a loan officer as one input among many in a formal underwriting decision. As online calculators spread, the same simple division moved onto a household's own screen, letting anyone check roughly where their debt load stands relative to common lending thresholds — useful not only before applying for a loan, but as a periodic checkup on overall debt burden, independent of any specific application."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The income-ratio math behind DTI sits within household finance and credit risk, specializations within the broader field of finance covered by this site's other loan and housing calculators. Here are the top 5 globally for Accounting & Finance in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time \"MSc in Applied Financial Economics\" (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+              },
+              {
+                "name": "Qatar University — College of Business and Economics",
+                "note": "A leading regional business school in the Arab world, AACSB-accredited and notable as the world's first Arabic-language business program to earn that accreditation, offering an M.Sc. in Finance endorsed by the CFA Institute.",
+                "url": "https://www.qu.edu.qa/sites/en_US/business/programs/graduates/Master-of-Science-in-Finance",
+                "online": "Delivery mode not stated as fully online on the official program page; Qatar University's finance program is primarily campus-based in Doha, Qatar."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Melzer, B. T. (2017). Mortgage Debt Overhang: Reduced Investment by Homeowners at Risk of Default. The Journal of Finance, 72(2), 575–612.",
+          "note": "A study published in a top finance journal showing that homeowners carrying a heavy debt burden relative to their home's value cut back on investment and spending well before actually defaulting — real-world evidence for why keeping an eye on overall debt burden, which is exactly what a DTI ratio summarizes, matters even for households not currently in financial distress.",
+          "url": "https://doi.org/10.1111/jofi.12482",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "World Time Converter",
       "description": "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",
