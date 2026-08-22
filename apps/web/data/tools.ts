@@ -29,7 +29,7 @@ export const tools: Tool[] = [
   {
     slug: "tdee-calculator",
     title: "TDEE & BMR Calculator",
-    category: "calculators",
+    category: "health-fitness",
     description:
       "Calculate your Basal Metabolic Rate and Total Daily Energy Expenditure using the Mifflin-St Jeor equation, plus a calorie target for weight loss, maintenance, or gain.",
     featured: true,
@@ -129,7 +129,7 @@ export const tools: Tool[] = [
   {
     slug: "scientific-calculator",
     title: "Scientific Calculator",
-    category: "calculators",
+    category: "math-science",
     description:
       "A full scientific calculator with trigonometric, logarithmic, and power functions.",
     featured: true,
@@ -157,7 +157,7 @@ export const tools: Tool[] = [
   {
     slug: "bmi-calculator",
     title: "BMI Calculator",
-    category: "calculators",
+    category: "health-fitness",
     description: "Calculate your Body Mass Index instantly.",
     featured: true,
     keywords: ["bmi", "body mass index", "health"],
@@ -186,7 +186,7 @@ export const tools: Tool[] = [
   {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
-    category: "calculators",
+    category: "math-science",
     description: "Perform fast percentage calculations.",
     featured: true,
     keywords: ["percentage", "math"],
