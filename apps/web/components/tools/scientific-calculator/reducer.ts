@@ -28,6 +28,8 @@ export type CalculatorState = {
   lastOperationText: string;
   angleMode: AngleMode;
   errorCode: string | null;
+  /** Expression that produced the current errorCode, kept only for consumers (e.g. the homepage widget's calculation log) that need to record failed attempts; freshInput() clears it back to null like everything else. */
+  lastErrorExpression: string | null;
   history: HistoryEntry[];
   historySeq: number;
 };
@@ -43,6 +45,7 @@ export const initialState: CalculatorState = {
   lastOperationText: "",
   angleMode: "deg",
   errorCode: null,
+  lastErrorExpression: null,
   history: [],
   historySeq: 0,
 };
@@ -138,6 +141,7 @@ export function calculatorReducer(
             ...freshInput(state),
             display: "Error",
             errorCode: String(result.metadata.error),
+            lastErrorExpression: `${formatResult(state.previousValue ?? 0)} ${state.pendingSymbol ?? ""} ${formatResult(value)} =`,
           };
         }
         return {
@@ -175,6 +179,7 @@ export function calculatorReducer(
           ...freshInput(state),
           display: "Error",
           errorCode: String(result.metadata.error),
+          lastErrorExpression: `${formatResult(state.previousValue)} ${state.pendingSymbol ?? ""} ${formatResult(b)} =`,
         };
       }
       const expression = `${formatResult(state.previousValue)} ${state.pendingSymbol ?? ""} ${formatResult(b)} =`;
@@ -203,6 +208,7 @@ export function calculatorReducer(
           ...freshInput(state),
           display: "Error",
           errorCode: String(result.metadata.error),
+          lastErrorExpression: `${action.label}(${formatResult(value)})`,
         };
       }
       const expression = `${action.label}(${formatResult(value)})`;

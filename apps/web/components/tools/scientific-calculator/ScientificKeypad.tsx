@@ -17,9 +17,11 @@ type ButtonConfig = {
 type ScientificKeypadProps = {
   state: CalculatorState;
   dispatch: (action: CalculatorAction) => void;
+  /** Smaller display/buttons and no inline copy button — used by the homepage hero preview, which has its own calculation log with its own copy action. */
+  compact?: boolean;
 };
 
-export default function ScientificKeypad({ state, dispatch }: ScientificKeypadProps) {
+export default function ScientificKeypad({ state, dispatch, compact = false }: ScientificKeypadProps) {
   const t = useTranslations("tools.scientific-calculator");
 
   function digit(d: string) {
@@ -124,34 +126,34 @@ export default function ScientificKeypad({ state, dispatch }: ScientificKeypadPr
   };
 
   return (
-    <SectionCard title={t("aboveFold.calculatorTitle")} bodyClassName="p-4 lg:p-5">
-      <div className="rounded-2xl bg-zinc-50 px-5 py-4 text-end dark:bg-zinc-800">
+    <SectionCard title={t("aboveFold.calculatorTitle")} bodyClassName={compact ? "p-3" : "p-4 lg:p-5"}>
+      <div className={`rounded-2xl bg-zinc-50 text-end dark:bg-zinc-800 ${compact ? "px-4 py-2.5" : "px-5 py-4"}`}>
         <div className="flex items-center justify-between text-xs font-medium text-zinc-400 dark:text-zinc-500">
           <span>{state.memory !== 0 ? "M" : ""}</span>
           <span className="min-h-[1.25rem] truncate">{state.lastOperationText}</span>
         </div>
         <div
-          className="mt-1 overflow-x-auto whitespace-nowrap text-3xl font-bold text-zinc-900 dark:text-zinc-50"
+          className={`overflow-x-auto whitespace-nowrap font-bold text-zinc-900 dark:text-zinc-50 ${compact ? "mt-0.5 text-xl" : "mt-1 text-3xl"}`}
           dir="ltr"
         >
           {state.errorCode ? t(`errors.${state.errorCode}`) : state.display}
         </div>
 
-        {!state.errorCode && (
+        {!compact && !state.errorCode && (
           <div className="mt-3 flex justify-end">
             <CopyButton text={state.display} />
           </div>
         )}
       </div>
 
-      <div className="mt-4 grid grid-cols-6 gap-2" dir="ltr">
+      <div className={`grid grid-cols-6 ${compact ? "mt-3 gap-1.5" : "mt-4 gap-2"}`} dir="ltr">
         {rows.flat().map((button, index) => (
           <button
             key={index}
             type="button"
             onClick={button.onClick}
             aria-label={button.ariaLabel}
-            className={`flex h-11 items-center justify-center rounded-xl text-base font-semibold transition ${variantClass[button.variant ?? "number"]}`}
+            className={`flex items-center justify-center rounded-xl font-semibold transition ${compact ? "h-8 text-sm" : "h-11 text-base"} ${variantClass[button.variant ?? "number"]}`}
           >
             {button.label}
           </button>
