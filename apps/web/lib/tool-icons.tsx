@@ -34,6 +34,7 @@ import {
   TrendingUp,
   Type,
   Wallet,
+  Weight,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -42,6 +43,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "scientific-calculator": Sigma,
   "age-calculator": Calendar,
   "bmi-calculator": Scale,
+  "ideal-weight-calculator": Weight,
   "mortgage-calculator": Home,
   "percentage-calculator": Percent,
   "tip-calculator": HandCoins,

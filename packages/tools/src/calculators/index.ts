@@ -17,3 +17,4 @@ export * from "./AffordableLoanCalculator";
 export * from "./RetirementCalculator";
 export * from "./HouseAffordabilityCalculator";
 export * from "./DebtToIncomeCalculator";
+export * from "./IdealWeightCalculator";

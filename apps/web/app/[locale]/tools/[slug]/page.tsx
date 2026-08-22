@@ -31,6 +31,8 @@ import HouseAffordabilityCalculator from "@/components/tools/house-affordability
 import HouseAffordabilityEducation from "@/components/tools/house-affordability-calculator/HouseAffordabilityEducation";
 import DebtToIncomeCalculator from "@/components/tools/debt-to-income-calculator/DebtToIncomeCalculator";
 import DebtToIncomeEducation from "@/components/tools/debt-to-income-calculator/DebtToIncomeEducation";
+import IdealWeightCalculator from "@/components/tools/ideal-weight-calculator/IdealWeightCalculator";
+import IdealWeightEducation from "@/components/tools/ideal-weight-calculator/IdealWeightEducation";
 import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
@@ -285,6 +287,9 @@ export default async function ToolPage({
     case "debt-to-income-calculator":
       component = <DebtToIncomeCalculator education={<DebtToIncomeEducation />} />;
       break;
+    case "ideal-weight-calculator":
+      component = <IdealWeightCalculator education={<IdealWeightEducation />} />;
+      break;
     case "world-time-converter":
       component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
       break;
@@ -365,6 +370,7 @@ export default async function ToolPage({
     slug === "retirement-calculator" ||
     slug === "house-affordability-calculator" ||
     slug === "debt-to-income-calculator" ||
+    slug === "ideal-weight-calculator" ||
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
     slug === "percentage-calculator" ||

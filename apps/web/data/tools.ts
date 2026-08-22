@@ -223,6 +223,21 @@ export const tools: Tool[] = [
     keywords: ["bmi", "body mass index", "health"],
   },
   {
+    slug: "ideal-weight-calculator",
+    title: "Ideal Weight Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate ideal body weight from height and gender using four classic clinical formulas: Devine, Robinson, Miller, and Hamwi.",
+    featured: false,
+    keywords: [
+      "ideal weight calculator",
+      "ideal body weight",
+      "Devine formula",
+      "Robinson formula",
+      "Hamwi formula",
+    ],
+  },
+  {
     slug: "mortgage-calculator",
     title: "Mortgage Calculator",
     category: "calculators",

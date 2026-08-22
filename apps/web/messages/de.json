@@ -1164,6 +1164,149 @@
         "miniConverterResultPrefix": "="
       }
     },
+    "ideal-weight-calculator": {
+      "title": "Idealgewicht-Rechner",
+      "description": "Schätzen Sie das ideale Körpergewicht anhand von Körpergröße und Geschlecht mit vier klassischen klinischen Formeln: Devine, Robinson, Miller und Hamwi.",
+      "aboveFold": {
+        "inputTitle": "Ihre Angaben",
+        "resultTitle": "Geschätztes Idealgewicht",
+        "averageLabel": "Durchschnitt aller Formeln",
+        "devineLabel": "Devine (1974)",
+        "robinsonLabel": "Robinson (1983)",
+        "millerLabel": "Miller (1983)",
+        "hamwiLabel": "Hamwi (1964)",
+        "placeholder": "Geben Sie Ihr Geschlecht und Ihre Körpergröße ein, um Ihr geschätztes Idealgewicht zu sehen.",
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine medizinische Beratung. Diese Formeln wurden ursprünglich für klinische Zwecke wie die Medikamentendosierung entwickelt, nicht als persönliche Abnehm- oder Zunahmeziele. Wenden Sie sich für eine auf Ihren Körper und Ihre Gesundheitsziele zugeschnittene Beratung an einen Arzt, Ernährungsberater oder eine andere qualifizierte Fachperson."
+      },
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrundwissen"
+      },
+      "form": {
+        "genderLabel": "Geschlecht",
+        "genderMale": "Männlich",
+        "genderFemale": "Weiblich",
+        "heightLabel": "Körpergröße (cm)",
+        "heightPlaceholder": "z. B. 175"
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieser Rechner",
+          "paragraph1": "Dieses Tool wendet vier klassische Formeln für das ideale Körpergewicht an — Devine, Robinson, Miller und Hamwi —, jede eine einfache lineare Gleichung basierend auf der Körpergröße in Zoll über fünf Fuß, mit unterschiedlichen Basisgewichten und Zuwächsen für Männer und Frauen. Alle vier wurden ursprünglich im klinischen Umfeld entwickelt, vor allem um eine Gewichtszahl für die Berechnung von Medikamentendosen zu schätzen, nicht als allgemeine Wellness-Ziele.",
+          "paragraph2": "Da die vier Formeln unabhängig voneinander, aus unterschiedlichen Referenzpopulationen und Jahrzehnten, abgeleitet wurden, liefern sie für dieselbe Körpergröße keine identischen Zahlen — dieses Tool zeigt alle vier einzeln sowie deren Durchschnitt an, anstatt eine als definitiv richtig auszuwählen. Dies unterscheidet sich von einem BMI-basierten gesunden Gewichtsbereich, der stattdessen eine Gewichtsspanne angibt, die einem BMI von 18,5-24,9 für eine bestimmte Körpergröße entspricht."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Drei Beispiele zeigen, wie sich die vier Formeln bei unterschiedlichen Körpergrößen und Geschlechtern vergleichen lassen.",
+          "columnScenario": "Szenario",
+          "columnAverage": "Durchschnitt",
+          "columnRange": "Spanne zwischen den Formeln",
+          "rows": [
+            {
+              "scenario": "Männlich, 175 cm",
+              "average": "70,0 kg",
+              "range": "68,7-72,0 kg"
+            },
+            {
+              "scenario": "Weiblich, 165 cm",
+              "average": "57,7 kg",
+              "range": "56,4-59,8 kg"
+            },
+            {
+              "scenario": "Männlich, 190 cm",
+              "average": "82,3 kg",
+              "range": "77,1-88,0 kg"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum liefern die vier Formeln unterschiedliche Ergebnisse?",
+              "answer": "Jede Formel wurde unabhängig, Jahrzehnte auseinander, aus unterschiedlichen Referenzdatensätzen und mit einem etwas anderen klinischen Zweck im Sinn entwickelt. Sie stimmen bei durchschnittlichen Körpergrößen eng überein, können aber an den Extremen stärker voneinander abweichen — genau deshalb zeigt dieses Tool alle vier an, statt eine einzelne Zahl als endgültige Antwort zu präsentieren."
+            },
+            {
+              "question": "Wie unterscheidet sich das vom gesunden Gewichtsbereich des BMI-Rechners?",
+              "answer": "Der gesunde Gewichtsbereich des BMI ist eine Gewichtsspanne, die eine bestimmte Körpergröße innerhalb eines BMI von 18,5 bis 24,9 hält — ein Screening-Bereich auf Bevölkerungsebene. Die Formeln hier liefern stattdessen einzelne Punktschätzungen, die ursprünglich für klinische Dosierungsberechnungen entwickelt wurden, mittels einer völlig anderen, auf Körpergröße und Geschlecht basierenden linearen Gleichung. Kein Ansatz ist richtiger als der andere — sie beantworten unterschiedliche Fragen."
+            },
+            {
+              "question": "Sollte ich versuchen, genau das Gewicht zu erreichen, das dieser Rechner anzeigt?",
+              "answer": "Nein. Dies sind Referenzformeln aus der klinischen Medizin, keine persönlichen Ziele. Ein gesundes Gewicht hängt von Muskelmasse, Knochenbau, Alter und vielen weiteren individuellen Faktoren ab, die keine dieser Formeln berücksichtigt. Nutzen Sie das Ergebnis als allgemeinen Kontext, nicht als präzise zu erreichendes Ziel."
+            },
+            {
+              "question": "Funktionieren diese Formeln für sehr kleine oder sehr große Menschen?",
+              "answer": "Sie wurden ursprünglich hauptsächlich für durchschnittliche Erwachsenengrößen validiert. Bei Körpergrößen deutlich außerhalb dieses Bereichs, in beide Richtungen, werden die Schätzungen weniger zuverlässig, da jede Formel eine von ihren ursprünglichen Referenzdaten ausgehende Gerade ist, statt einer an extreme Körpergrößen angepassten Kurve."
+            },
+            {
+              "question": "Warum unterscheiden sich die Formeln für Männer und Frauen?",
+              "answer": "Die Formeln wurden ursprünglich aus geschlechtsspezifischen Referenzgewichtsdaten abgeleitet, die durchschnittliche Unterschiede in der Körperzusammensetzung zwischen Männern und Frauen bei gegebener Körpergröße widerspiegeln. Deshalb fragt der Rechner vor der Berechnung eines Ergebnisses nach dem Geschlecht."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrundwissen zu diesem Tool",
+          "history": {
+            "title": "Von der Medikamentendosierung zu einer allgemeinen Schätzung",
+            "paragraph": "Die 1964 veröffentlichte Hamwi-Formel war eine der ersten weit verbreiteten Formeln für das ideale Körpergewicht, entwickelt als schnelle Schätzung am Krankenbett. Die Devine-Formel folgte 1974 und wurde speziell entwickelt, um eine Gewichtszahl für die Berechnung von Aminoglykosid-Antibiotikadosen zu schätzen — ein klinischer Bedarf, bei dem das tatsächliche Körpergewicht bei manchen Patienten die richtige Dosis erheblich überschätzen kann. Die Formeln von Robinson (1983) und Miller (1983) waren spätere Verfeinerungen, die aktualisierte Größen-Gewichts-Referenzdaten genauer abbilden sollten. Alle vier werden auch heute noch klinisch verwendet, insbesondere in Pharmazie und Anästhesiologie, gerade weil sie für Dosierungsberechnungen und nicht als allgemeine Gesundheitsempfehlung entwickelt wurden."
+          },
+          "modernDevelopments": {
+            "title": "Von klinischen Nachschlagewerken zu einem öffentlichen Rechner",
+            "paragraph": "Jahrzehntelang waren diese Formeln in klinischen Nachschlagewerken, Pharmazie-Handbüchern und Dosierungsprotokollen von Krankenhäusern zu finden, angewendet von Apothekern und Ärzten statt von Patienten selbst nachgeschlagen. Mit der Verbreitung allgemeiner Gesundheitsrechner im Internet wurden dieselben Formeln außerhalb des klinischen Umfelds zugänglich, sodass jeder sehen kann, wie sich die klassischen Gleichungen für die eigene Körpergröße vergleichen — nützlich als allgemeiner Kontext, auch wenn die klinische Dosierungsanwendung, für die sie entwickelt wurden, weiterhin eine Entscheidung einer qualifizierten Fachperson bleibt, nicht eines Selbstbedienungsrechners."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Formeln für das ideale Körpergewicht gehören zur Ernährungswissenschaft und öffentlichen Gesundheit, dem akademischen Feld, das sich mit der Messung und dem Verständnis von Körpergewicht und seinem Verhältnis zur Gesundheit befasst. Hier sind fünf weltweit führende Institutionen für Public Health (ShanghaiRanking's Global Ranking of Academic Subjects, 2025) sowie eine regionale Option:",
+            "universities": [
+              {
+                "name": "Harvard University — T.H. Chan School of Public Health",
+                "note": "Weltweit auf Platz 1 in Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.hsph.harvard.edu/",
+                "online": "Bietet einen vollständig online absolvierbaren MPH-Generalist-Track sowie mehrere Online-Zertifikatsprogramme."
+              },
+              {
+                "name": "Johns Hopkins University — Bloomberg School of Public Health",
+                "note": "Weltweit auf Platz 2 in Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://publichealth.jhu.edu/",
+                "online": "Der MPH kann nach einer kurzen Präsenz-Orientierung größtenteils online absolviert werden."
+              },
+              {
+                "name": "London School of Hygiene & Tropical Medicine (LSHTM)",
+                "note": "Weltweit auf Platz 3 in Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.lshtm.ac.uk/",
+                "online": "Bietet einen vollständigen MSc in Public Health komplett im Fernstudium an."
+              },
+              {
+                "name": "University College London (UCL)",
+                "note": "Weltweit auf Platz 4 in Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ucl.ac.uk/population-health-sciences/",
+                "online": "Bietet einen vollständig online absolvierbaren Master of Public Health (MPH) an."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 5 in Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ndph.ox.ac.uk/",
+                "online": "Kein vollständiger Online-Abschluss in diesem Bereich; bietet stattdessen kurze Online-Weiterbildungskurse in Ernährung an."
+              },
+              {
+                "name": "King Abdulaziz University — Faculty of Medicine",
+                "note": "Eine der ältesten und größten medizinischen Fakultäten Saudi-Arabiens, gegründet 1975, mit starkem regionalem Ansehen in medizinischer Ausbildung und klinischer Praxis.",
+                "url": "https://www.kau.edu.sa/faculty/en/medicine",
+                "online": "Laut offizieller Seite der Fakultät nicht als Online-Programm angeboten; die medizinische Ausbildung erfolgt auf dem Campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Shah, B., Sucher, K., & Hollenbeck, C. B. (2006). Comparison of Ideal Body Weight Equations and Published Height-Weight Tables With Body Mass Index Tables for Healthy Adults in the United States. Nutrition in Clinical Practice, 21(3), 312-319.",
+          "note": "Eine Studie, die diese klassischen Idealgewicht-Formeln direkt mit BMI-basierten gesunden Gewichtstabellen vergleicht und feststellt, dass zwar die meisten Formeln und Tabellen Gewichte innerhalb eines BMI-Bereichs von 20-25 vorhersagten, aber keine einzelne Formel für beide Geschlechter durchgängig am genauesten war — was den Ansatz dieses Rechners stützt, alle vier Ergebnisse statt einer einzigen definitiven Zahl anzuzeigen.",
+          "url": "https://doi.org/10.1177/0115426506021003312",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "mortgage-calculator": {
       "title": "Hypothekenrechner",
       "description": "Berechnen Sie Ihre monatliche Hypothekenrate, sehen Sie sich einen vollständigen Tilgungsplan an und erfahren Sie genau, wann die PMI entfällt.",

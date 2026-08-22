@@ -1164,6 +1164,149 @@
         "miniConverterResultPrefix": "="
       }
     },
+    "ideal-weight-calculator": {
+      "title": "Calculateur de poids idéal",
+      "description": "Estimez le poids corporel idéal à partir de la taille et du sexe à l'aide de quatre formules cliniques classiques : Devine, Robinson, Miller et Hamwi.",
+      "aboveFold": {
+        "inputTitle": "Vos informations",
+        "resultTitle": "Poids idéal estimé",
+        "averageLabel": "Moyenne de toutes les formules",
+        "devineLabel": "Devine (1974)",
+        "robinsonLabel": "Robinson (1983)",
+        "millerLabel": "Miller (1983)",
+        "hamwiLabel": "Hamwi (1964)",
+        "placeholder": "Saisissez votre sexe et votre taille pour voir votre poids corporel idéal estimé.",
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non un avis médical. Ces formules ont été initialement conçues pour des usages cliniques comme le dosage de médicaments, et non comme des objectifs personnels de perte ou de prise de poids. Consultez un médecin, un diététicien ou un autre professionnel de santé qualifié pour des conseils adaptés à votre corps et à vos objectifs de santé."
+      },
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "genderLabel": "Sexe",
+        "genderMale": "Homme",
+        "genderFemale": "Femme",
+        "heightLabel": "Taille (cm)",
+        "heightPlaceholder": "ex. 175"
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne ce calculateur",
+          "paragraph1": "Cet outil applique quatre formules classiques de poids corporel idéal — Devine, Robinson, Miller et Hamwi — chacune une simple équation linéaire basée sur la taille en pouces au-delà de cinq pieds, avec des poids de base et des incréments différents pour les hommes et les femmes. Les quatre ont été développées à l'origine en contexte clinique, notamment pour estimer un poids servant au calcul de doses médicamenteuses, plutôt que comme des objectifs de bien-être général.",
+          "paragraph2": "Comme les quatre formules ont été établies indépendamment, à partir de populations de référence et de décennies différentes, elles ne produisent pas des chiffres identiques pour une même taille — cet outil affiche les quatre individuellement ainsi que leur moyenne, plutôt que d'en choisir une seule comme définitivement correcte. C'est une approche différente d'une fourchette de poids santé basée sur l'IMC, qui exprime plutôt une plage de poids correspondant à un IMC de 18,5 à 24,9 pour une taille donnée."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Trois exemples montrent comment les quatre formules se comparent selon différentes tailles et sexes.",
+          "columnScenario": "Scénario",
+          "columnAverage": "Moyenne",
+          "columnRange": "Plage entre les formules",
+          "rows": [
+            {
+              "scenario": "Homme, 175 cm",
+              "average": "70,0 kg",
+              "range": "68,7-72,0 kg"
+            },
+            {
+              "scenario": "Femme, 165 cm",
+              "average": "57,7 kg",
+              "range": "56,4-59,8 kg"
+            },
+            {
+              "scenario": "Homme, 190 cm",
+              "average": "82,3 kg",
+              "range": "77,1-88,0 kg"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi les quatre formules donnent-elles des résultats différents ?",
+              "answer": "Chaque formule a été développée indépendamment, à des décennies d'intervalle, à partir de jeux de données de référence différents et dans un but clinique légèrement différent. Elles concordent étroitement pour des tailles moyennes mais peuvent diverger davantage aux extrêmes, ce qui explique précisément pourquoi cet outil affiche les quatre plutôt que de présenter un seul chiffre comme réponse définitive."
+            },
+            {
+              "question": "En quoi est-ce différent de la fourchette de poids santé du Calculateur d'IMC ?",
+              "answer": "La fourchette de poids santé de l'IMC est une plage de poids qui maintient une taille donnée dans un IMC de 18,5 à 24,9 — une plage de dépistage au niveau de la population. Les formules ici produisent plutôt des estimations ponctuelles conçues à l'origine pour des calculs de dosage clinique, à l'aide d'une équation linéaire totalement différente, basée sur la taille et le sexe. Aucune des deux approches n'est plus correcte que l'autre ; elles répondent à des questions différentes."
+            },
+            {
+              "question": "Dois-je essayer de peser exactement ce que ce calculateur indique ?",
+              "answer": "Non. Ce sont des formules de référence issues de la médecine clinique, pas des objectifs personnels. Un poids sain dépend de la masse musculaire, de la structure osseuse, de l'âge et de nombreux autres facteurs individuels qu'aucune de ces formules ne prend en compte. Utilisez le résultat comme contexte général, pas comme un objectif à atteindre précisément."
+            },
+            {
+              "question": "Ces formules fonctionnent-elles pour les personnes très petites ou très grandes ?",
+              "answer": "Elles ont été validées à l'origine principalement autour des tailles adultes moyennes. Pour des tailles bien en dehors de cette plage, dans un sens ou dans l'autre, les estimations deviennent moins fiables, car chaque formule est une droite prolongée à partir de ses données de référence d'origine plutôt qu'une courbe ajustée aux tailles extrêmes."
+            },
+            {
+              "question": "Pourquoi les formules pour hommes et femmes diffèrent-elles ?",
+              "answer": "Les formules ont été établies à l'origine à partir de données de poids de référence propres à chaque sexe, reflétant les différences moyennes de composition corporelle entre hommes et femmes pour une taille donnée. C'est pourquoi le calculateur demande le sexe avant de calculer un résultat."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Du dosage médicamenteux à une estimation d'usage général",
+            "paragraph": "La formule de Hamwi, publiée en 1964, fut l'une des premières équations de poids corporel idéal largement utilisées, conçue comme une estimation rapide au chevet du patient. La formule de Devine suivit en 1974, créée spécifiquement pour estimer un poids servant à calculer les doses d'antibiotiques aminoglycosides — un besoin clinique où le poids corporel réel peut significativement surestimer la bonne dose chez certains patients. Les formules de Robinson (1983) et de Miller (1983) furent des raffinements ultérieurs visant à mieux correspondre à des données de référence taille-poids actualisées. Les quatre restent utilisées en clinique aujourd'hui, notamment en pharmacie et en anesthésiologie, précisément parce qu'elles ont été conçues pour des calculs de dosage plutôt que pour des conseils de santé généraux."
+          },
+          "modernDevelopments": {
+            "title": "Des tables de référence clinique à un calculateur public",
+            "paragraph": "Pendant des décennies, ces formules sont restées confinées aux références cliniques, aux manuels de pharmacie et aux protocoles de dosage hospitaliers, appliquées par des pharmaciens et des médecins plutôt que consultées par les patients eux-mêmes. Avec la diffusion des calculateurs de santé en ligne, ces mêmes formules sont devenues accessibles en dehors du cadre clinique, permettant à chacun de voir comment les équations classiques se comparent pour sa propre taille — utile comme contexte général, bien que l'usage clinique de dosage pour lequel elles ont été conçues reste une décision prise par un professionnel de santé qualifié, et non par un calculateur en libre-service."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les formules de poids corporel idéal relèvent de la science de la nutrition et de la santé publique, le domaine académique concerné par la mesure et la compréhension du poids corporel et de sa relation avec la santé. Voici cinq institutions parmi les mieux classées au monde en santé publique (ShanghaiRanking's Global Ranking of Academic Subjects, 2025), ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Harvard University — T.H. Chan School of Public Health",
+                "note": "Classée n° 1 mondial en santé publique (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.hsph.harvard.edu/",
+                "online": "Propose un parcours MPH généraliste entièrement en ligne ainsi que plusieurs programmes de certificat en ligne."
+              },
+              {
+                "name": "Johns Hopkins University — Bloomberg School of Public Health",
+                "note": "Classée n° 2 mondial en santé publique (ShanghaiRanking GRAS 2025).",
+                "url": "https://publichealth.jhu.edu/",
+                "online": "Son MPH peut être complété en grande partie en ligne après une courte orientation en présentiel."
+              },
+              {
+                "name": "London School of Hygiene & Tropical Medicine (LSHTM)",
+                "note": "Classée n° 3 mondial en santé publique (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.lshtm.ac.uk/",
+                "online": "Propose un MSc complet en santé publique entièrement à distance."
+              },
+              {
+                "name": "University College London (UCL)",
+                "note": "Classée n° 4 mondial en santé publique (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ucl.ac.uk/population-health-sciences/",
+                "online": "Propose un Master of Public Health (MPH) entièrement en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 5 mondial en santé publique (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ndph.ox.ac.uk/",
+                "online": "Pas de diplôme complet en ligne dans ce domaine ; propose plutôt de courts cours en ligne de formation continue en nutrition."
+              },
+              {
+                "name": "King Abdulaziz University — Faculté de médecine",
+                "note": "L'une des facultés de médecine les plus anciennes et les plus importantes d'Arabie saoudite, fondée en 1975, avec une solide réputation régionale en formation médicale et clinique.",
+                "url": "https://www.kau.edu.sa/faculty/en/medicine",
+                "online": "Non proposée en ligne, selon la page officielle de la faculté ; la formation médicale est dispensée sur le campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Shah, B., Sucher, K., & Hollenbeck, C. B. (2006). Comparison of Ideal Body Weight Equations and Published Height-Weight Tables With Body Mass Index Tables for Healthy Adults in the United States. Nutrition in Clinical Practice, 21(3), 312-319.",
+          "note": "Une étude comparant directement ces formules classiques de poids corporel idéal aux tables de poids santé basées sur l'IMC, constatant que si la plupart des formules et tables prédisaient des poids dans une fourchette d'IMC de 20 à 25, aucune formule unique n'était systématiquement la plus précise pour les deux sexes — ce qui conforte l'approche de ce calculateur consistant à afficher les quatre résultats plutôt qu'un seul chiffre définitif.",
+          "url": "https://doi.org/10.1177/0115426506021003312",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "mortgage-calculator": {
       "title": "Calculateur de prêt hypothécaire",
       "description": "Calculez votre mensualité hypothécaire, consultez un tableau d'amortissement complet et découvrez exactement quand l'assurance PMI disparaît.",

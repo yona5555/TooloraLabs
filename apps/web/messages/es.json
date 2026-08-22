@@ -1164,6 +1164,149 @@
         "miniConverterResultPrefix": "="
       }
     },
+    "ideal-weight-calculator": {
+      "title": "Calculadora de Peso Ideal",
+      "description": "Estima el peso corporal ideal a partir de la estatura y el sexo usando cuatro fórmulas clínicas clásicas: Devine, Robinson, Miller y Hamwi.",
+      "aboveFold": {
+        "inputTitle": "Tus datos",
+        "resultTitle": "Peso ideal estimado",
+        "averageLabel": "Promedio de todas las fórmulas",
+        "devineLabel": "Devine (1974)",
+        "robinsonLabel": "Robinson (1983)",
+        "millerLabel": "Miller (1983)",
+        "hamwiLabel": "Hamwi (1964)",
+        "placeholder": "Introduce tu sexo y estatura para ver tu peso corporal ideal estimado.",
+        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no asesoramiento médico. Estas fórmulas se desarrollaron originalmente para usos clínicos como la dosificación de medicamentos, no como objetivos personales de pérdida o aumento de peso. Consulta a un médico, nutricionista u otro profesional de salud calificado para obtener orientación específica para tu cuerpo y tus objetivos de salud."
+      },
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "genderLabel": "Sexo",
+        "genderMale": "Hombre",
+        "genderFemale": "Mujer",
+        "heightLabel": "Estatura (cm)",
+        "heightPlaceholder": "p. ej. 175"
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta calculadora",
+          "paragraph1": "Esta herramienta aplica cuatro fórmulas clásicas de peso corporal ideal —Devine, Robinson, Miller y Hamwi—, cada una una simple ecuación lineal basada en la estatura en pulgadas por encima de cinco pies, con pesos base e incrementos distintos para hombres y mujeres. Las cuatro se desarrollaron originalmente en entornos clínicos, sobre todo para estimar una cifra de peso con la que calcular dosis de medicamentos, y no como objetivos generales de bienestar.",
+          "paragraph2": "Como las cuatro fórmulas se derivaron de forma independiente, a partir de poblaciones de referencia y décadas distintas, no producen cifras idénticas para una misma estatura; esta herramienta muestra las cuatro individualmente además de su promedio, en lugar de elegir una como definitivamente correcta. Este enfoque difiere de un rango de peso saludable basado en el IMC, que en cambio expresa una banda de pesos correspondiente a un IMC de 18,5 a 24,9 para una estatura dada."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Tres ejemplos muestran cómo se comparan las cuatro fórmulas según distintas estaturas y sexos.",
+          "columnScenario": "Escenario",
+          "columnAverage": "Promedio",
+          "columnRange": "Rango entre fórmulas",
+          "rows": [
+            {
+              "scenario": "Hombre, 175 cm",
+              "average": "70,0 kg",
+              "range": "68,7-72,0 kg"
+            },
+            {
+              "scenario": "Mujer, 165 cm",
+              "average": "57,7 kg",
+              "range": "56,4-59,8 kg"
+            },
+            {
+              "scenario": "Hombre, 190 cm",
+              "average": "82,3 kg",
+              "range": "77,1-88,0 kg"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué las cuatro fórmulas dan resultados distintos?",
+              "answer": "Cada fórmula se desarrolló de forma independiente, con décadas de diferencia, a partir de conjuntos de datos de referencia distintos y con un propósito clínico ligeramente diferente en mente. Coinciden bastante para estaturas promedio, pero pueden divergir más en los extremos, que es exactamente por qué esta herramienta muestra las cuatro en lugar de presentar una sola cifra como respuesta definitiva."
+            },
+            {
+              "question": "¿En qué se diferencia esto del rango de peso saludable de la Calculadora de IMC?",
+              "answer": "El rango de peso saludable del IMC es una banda de pesos que mantiene una estatura dada dentro de un IMC de 18,5 a 24,9, un rango de detección a nivel poblacional. Las fórmulas de aquí, en cambio, producen estimaciones puntuales creadas originalmente para cálculos de dosificación clínica, mediante una ecuación lineal completamente distinta basada en la estatura y el sexo. Ningún enfoque es más correcto que el otro; responden preguntas diferentes."
+            },
+            {
+              "question": "¿Debería intentar pesar exactamente lo que muestra esta calculadora?",
+              "answer": "No. Son fórmulas de referencia de la medicina clínica, no objetivos personales. Un peso saludable depende de la masa muscular, la estructura ósea, la edad y muchos otros factores individuales que ninguna de estas fórmulas tiene en cuenta. Usa el resultado como contexto general, no como una meta que alcanzar con precisión."
+            },
+            {
+              "question": "¿Funcionan estas fórmulas para personas muy bajas o muy altas?",
+              "answer": "Se validaron originalmente sobre todo en torno a rangos de estatura adulta promedio. Para estaturas muy fuera de ese rango, en cualquier dirección, las estimaciones se vuelven menos fiables, ya que cada fórmula es una línea recta extendida desde sus datos de referencia originales, en lugar de una curva ajustada a estaturas extremas."
+            },
+            {
+              "question": "¿Por qué difieren las fórmulas para hombres y mujeres?",
+              "answer": "Las fórmulas se derivaron originalmente de datos de peso de referencia específicos por sexo, reflejando diferencias promedio en la composición corporal entre hombres y mujeres para una estatura dada. Por eso la calculadora pregunta el sexo antes de calcular un resultado."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De la dosificación de medicamentos a una estimación de uso general",
+            "paragraph": "La fórmula de Hamwi, publicada en 1964, fue una de las primeras ecuaciones de peso corporal ideal ampliamente usadas, concebida como una estimación rápida a pie de cama. La fórmula de Devine llegó después, en 1974, creada específicamente para estimar una cifra de peso con la que calcular dosis de antibióticos aminoglucósidos, una necesidad clínica en la que el peso corporal real puede sobreestimar significativamente la dosis correcta en algunos pacientes. Las fórmulas de Robinson (1983) y Miller (1983) fueron refinamientos posteriores que buscaban ajustarse mejor a datos de referencia de estatura-peso actualizados. Las cuatro siguen usándose clínicamente hoy, sobre todo en farmacia y anestesiología, precisamente porque se crearon para cálculos de dosificación y no como orientación general de salud."
+          },
+          "modernDevelopments": {
+            "title": "De tablas de referencia clínica a una calculadora pública",
+            "paragraph": "Durante décadas, estas fórmulas vivieron en referencias clínicas, manuales de farmacia y protocolos de dosificación hospitalarios, aplicadas por farmacéuticos y médicos en lugar de consultadas por los propios pacientes. Con la difusión de las calculadoras de salud en línea, esas mismas fórmulas se volvieron accesibles fuera del entorno clínico, permitiendo a cualquiera ver cómo se comparan las ecuaciones clásicas para su propia estatura, útil como contexto general, aunque el uso clínico de dosificación para el que se crearon sigue siendo una decisión que toma un profesional de salud calificado, no una calculadora de autoservicio."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Las fórmulas de peso corporal ideal se ubican dentro de la ciencia de la nutrición y la salud pública, el campo académico dedicado a medir y comprender el peso corporal y su relación con la salud. Estas son cinco instituciones entre las mejor clasificadas del mundo en salud pública (ShanghaiRanking's Global Ranking of Academic Subjects, 2025), además de una opción regional:",
+            "universities": [
+              {
+                "name": "Harvard University — T.H. Chan School of Public Health",
+                "note": "Clasificada n.º 1 mundial en salud pública (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.hsph.harvard.edu/",
+                "online": "Ofrece un itinerario de MPH generalista totalmente en línea, además de varios programas de certificado en línea."
+              },
+              {
+                "name": "Johns Hopkins University — Bloomberg School of Public Health",
+                "note": "Clasificada n.º 2 mundial en salud pública (ShanghaiRanking GRAS 2025).",
+                "url": "https://publichealth.jhu.edu/",
+                "online": "Su MPH puede completarse en gran parte en línea tras una breve orientación presencial."
+              },
+              {
+                "name": "London School of Hygiene & Tropical Medicine (LSHTM)",
+                "note": "Clasificada n.º 3 mundial en salud pública (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.lshtm.ac.uk/",
+                "online": "Ofrece un MSc completo en Salud Pública totalmente a distancia."
+              },
+              {
+                "name": "University College London (UCL)",
+                "note": "Clasificada n.º 4 mundial en salud pública (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ucl.ac.uk/population-health-sciences/",
+                "online": "Ofrece un Master of Public Health (MPH) totalmente en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada n.º 5 mundial en salud pública (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ndph.ox.ac.uk/",
+                "online": "Sin título completo en línea en este campo; ofrece en cambio cursos breves de formación continua en línea sobre nutrición."
+              },
+              {
+                "name": "King Abdulaziz University — Facultad de Medicina",
+                "note": "Una de las facultades de medicina más antiguas y grandes de Arabia Saudita, fundada en 1975, con una sólida reputación regional en educación médica y formación clínica.",
+                "url": "https://www.kau.edu.sa/faculty/en/medicine",
+                "online": "No se ofrece como programa en línea, según la página oficial de la facultad; la formación médica se imparte en el campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Shah, B., Sucher, K., & Hollenbeck, C. B. (2006). Comparison of Ideal Body Weight Equations and Published Height-Weight Tables With Body Mass Index Tables for Healthy Adults in the United States. Nutrition in Clinical Practice, 21(3), 312-319.",
+          "note": "Un estudio que compara directamente estas fórmulas clásicas de peso corporal ideal con tablas de peso saludable basadas en el IMC, y que encontró que, si bien la mayoría de las fórmulas y tablas predecían pesos dentro de un rango de IMC de 20 a 25, ninguna fórmula individual fue consistentemente la más precisa para ambos sexos, lo que respalda el enfoque de esta calculadora de mostrar los cuatro resultados en lugar de una única cifra definitiva.",
+          "url": "https://doi.org/10.1177/0115426506021003312",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "mortgage-calculator": {
       "title": "Calculadora de hipoteca",
       "description": "Calcula tu pago hipotecario mensual, consulta la tabla de amortización completa y descubre exactamente cuándo desaparece el PMI.",

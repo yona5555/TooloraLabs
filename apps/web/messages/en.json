@@ -1160,6 +1160,149 @@
         "miniConverterResultPrefix": "="
       }
     },
+    "ideal-weight-calculator": {
+      "title": "Ideal Weight Calculator",
+      "description": "Estimate ideal body weight from height and gender using four classic clinical formulas: Devine, Robinson, Miller, and Hamwi.",
+      "aboveFold": {
+        "inputTitle": "Your Details",
+        "resultTitle": "Estimated Ideal Weight",
+        "averageLabel": "Average of All Formulas",
+        "devineLabel": "Devine (1974)",
+        "robinsonLabel": "Robinson (1983)",
+        "millerLabel": "Miller (1983)",
+        "hamwiLabel": "Hamwi (1964)",
+        "placeholder": "Enter your gender and height to see your estimated ideal body weight.",
+        "disclaimer": "This tool provides a general educational estimate only, not medical advice. These formulas were originally developed for clinical uses such as medication dosing, not as personal weight-loss or weight-gain targets. Consult a doctor, dietitian, or other qualified health professional for guidance specific to your body and health goals."
+      },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "genderLabel": "Gender",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "heightLabel": "Height (cm)",
+        "heightPlaceholder": "e.g. 175"
+      },
+      "education": {
+        "intro": {
+          "title": "How This Calculator Works",
+          "paragraph1": "This tool applies four classic ideal-body-weight formulas — Devine, Robinson, Miller, and Hamwi — each a simple linear equation based on height in inches over five feet, with different base weights and increments for men and women. All four were originally developed in clinical settings, most notably to estimate a weight figure for calculating medication doses, rather than as general wellness targets.",
+          "paragraph2": "Because the four formulas were derived independently, from different reference populations and decades, they don't produce identical numbers for the same height — this tool shows all four individually plus their average, rather than picking one as definitively correct. This is a different approach from a BMI-based healthy-weight range, which instead expresses a band of weights corresponding to a BMI of 18.5-24.9 for a given height."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Three examples show how the four formulas compare across different heights and genders.",
+          "columnScenario": "Scenario",
+          "columnAverage": "Average",
+          "columnRange": "Range Across Formulas",
+          "rows": [
+            {
+              "scenario": "Male, 175 cm",
+              "average": "70.0 kg",
+              "range": "68.7-72.0 kg"
+            },
+            {
+              "scenario": "Female, 165 cm",
+              "average": "57.7 kg",
+              "range": "56.4-59.8 kg"
+            },
+            {
+              "scenario": "Male, 190 cm",
+              "average": "82.3 kg",
+              "range": "77.1-88.0 kg"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why do the four formulas give different results?",
+              "answer": "Each formula was developed independently, decades apart, from different reference datasets and with a slightly different clinical purpose in mind. They agree closely for average heights but can diverge more at the extremes, which is exactly why this tool shows all four rather than presenting a single number as the definitive answer."
+            },
+            {
+              "question": "How is this different from the BMI Calculator's healthy weight range?",
+              "answer": "BMI's healthy-weight range is a band of weights that keeps a given height within a BMI of 18.5 to 24.9 — a population-level screening range. The formulas here instead produce single point estimates originally built for clinical dosing calculations, using a completely different, height-and-sex-based linear equation. Neither approach is more correct than the other; they answer different questions."
+            },
+            {
+              "question": "Should I try to weigh exactly what this calculator shows?",
+              "answer": "No. These are reference formulas from clinical medicine, not personal targets. Healthy weight depends on muscle mass, bone structure, age, and many other individual factors that none of these formulas account for. Use the result as general context, not a goal to hit precisely."
+            },
+            {
+              "question": "Do these formulas work for very short or very tall people?",
+              "answer": "They were originally validated mainly around average adult height ranges. For heights well outside that range, in either direction, the estimates become less reliable, since each formula is a straight line extended from its original reference data rather than a curve fitted to extreme heights."
+            },
+            {
+              "question": "Why do the male and female formulas differ?",
+              "answer": "The formulas were originally derived from sex-specific reference weight data, reflecting average differences in body composition between men and women at a given height. This is why the calculator asks for gender before computing a result."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Medication Dosing to a General-Purpose Estimate",
+            "paragraph": "The Hamwi formula, published in 1964, was one of the earliest widely used ideal-body-weight equations, developed as a quick bedside estimate. The Devine formula followed in 1974, created specifically to estimate a weight figure for calculating aminoglycoside antibiotic doses — a clinical need where actual body weight can significantly overestimate the right dose in some patients. The Robinson (1983) and Miller (1983) formulas were later refinements aiming to fit updated height-weight reference data more closely. All four remain in clinical use today, particularly in pharmacy and anesthesiology, precisely because they were built for dosing calculations rather than general health guidance."
+          },
+          "modernDevelopments": {
+            "title": "From Clinical Reference Tables to a Public Calculator",
+            "paragraph": "For decades, these formulas lived in clinical references, pharmacy handbooks, and hospital dosing protocols, applied by pharmacists and physicians rather than looked up by patients themselves. As general health calculators spread online, the same formulas became accessible outside clinical settings, letting anyone see how the classic equations compare for their own height — useful for general context, though the clinical dosing use case they were built for remains a decision made by a qualified healthcare provider, not a self-service calculator."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Ideal body weight formulas sit within nutrition science and public health, the academic field concerned with measuring and understanding body weight and its relationship to health. Here are five globally top-ranked institutions for Public Health (ShanghaiRanking's Global Ranking of Academic Subjects, 2025), plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University — T.H. Chan School of Public Health",
+                "note": "Ranked #1 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.hsph.harvard.edu/",
+                "online": "Offers a fully online MPH-Generalist track plus several online certificate programs."
+              },
+              {
+                "name": "Johns Hopkins University — Bloomberg School of Public Health",
+                "note": "Ranked #2 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://publichealth.jhu.edu/",
+                "online": "Its MPH can be completed largely online after a short in-person orientation."
+              },
+              {
+                "name": "London School of Hygiene & Tropical Medicine (LSHTM)",
+                "note": "Ranked #3 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.lshtm.ac.uk/",
+                "online": "Offers a full MSc in Public Health entirely by distance learning."
+              },
+              {
+                "name": "University College London (UCL)",
+                "note": "Ranked #4 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ucl.ac.uk/population-health-sciences/",
+                "online": "Offers a fully online Master of Public Health (MPH)."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Public Health (ShanghaiRanking GRAS 2025).",
+                "url": "https://www.ndph.ox.ac.uk/",
+                "online": "No full online degree in this field; offers short online lifelong-learning courses in nutrition instead."
+              },
+              {
+                "name": "King Abdulaziz University — Faculty of Medicine",
+                "note": "One of Saudi Arabia's oldest and largest medical faculties, established in 1975, with a strong regional reputation in medical education and clinical training.",
+                "url": "https://www.kau.edu.sa/faculty/en/medicine",
+                "online": "Not offered as an online program, per the faculty's official page; medical education is delivered on-campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Shah, B., Sucher, K., & Hollenbeck, C. B. (2006). Comparison of Ideal Body Weight Equations and Published Height-Weight Tables With Body Mass Index Tables for Healthy Adults in the United States. Nutrition in Clinical Practice, 21(3), 312-319.",
+          "note": "A study directly comparing these classic ideal-body-weight formulas against BMI-based healthy-weight tables, finding that while most formulas and tables predicted weights within a BMI range of 20-25, no single formula was consistently the most accurate across both sexes — supporting this calculator's approach of showing all four results rather than a single definitive number.",
+          "url": "https://doi.org/10.1177/0115426506021003312",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "mortgage-calculator": {
       "title": "Mortgage Calculator",
       "description": "Calculate your monthly mortgage payment, see a full amortization schedule, and find out exactly when PMI drops off.",
