@@ -13,28 +13,15 @@ import LoanResult from "./LoanResult";
 import LoanPayoffChart from "./LoanPayoffChart";
 import LoanAmortizationTable from "./LoanAmortizationTable";
 import LoanDisclaimer from "./LoanDisclaimer";
-import type { LoanType } from "./types";
 
-const DEFAULTS: Record<LoanType, { loanAmount: string; interestRate: string; loanTermYears: string }> = {
-  auto: { loanAmount: "30000", interestRate: "6.5", loanTermYears: "5" },
-  personal: { loanAmount: "10000", interestRate: "11", loanTermYears: "3" },
-};
+const DEFAULTS = { loanAmount: "10000", interestRate: "8", loanTermYears: "5" };
 
 export default function LoanCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.loan-calculator.nav");
 
-  const [loanType, setLoanType] = useState<LoanType>("auto");
-  const [loanAmount, setLoanAmount] = useState(DEFAULTS.auto.loanAmount);
-  const [interestRate, setInterestRate] = useState(DEFAULTS.auto.interestRate);
-  const [loanTermYears, setLoanTermYears] = useState(DEFAULTS.auto.loanTermYears);
-
-  function handleLoanTypeChange(next: LoanType) {
-    if (next === loanType) return;
-    setLoanType(next);
-    setLoanAmount(DEFAULTS[next].loanAmount);
-    setInterestRate(DEFAULTS[next].interestRate);
-    setLoanTermYears(DEFAULTS[next].loanTermYears);
-  }
+  const [loanAmount, setLoanAmount] = useState(DEFAULTS.loanAmount);
+  const [interestRate, setInterestRate] = useState(DEFAULTS.interestRate);
+  const [loanTermYears, setLoanTermYears] = useState(DEFAULTS.loanTermYears);
 
   const digitStyle: DigitStyle = resolveDigitStyle(loanAmount, interestRate, loanTermYears);
 
@@ -59,8 +46,6 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
         <ToolAboveFold
           input={
             <LoanInputPanel
-              loanType={loanType}
-              onLoanTypeChange={handleLoanTypeChange}
               loanAmount={loanAmount}
               onLoanAmountChange={setLoanAmount}
               interestRate={interestRate}

@@ -2788,8 +2788,8 @@
       }
     },
     "loan-calculator": {
-      "title": "Personal & Auto Loan Calculator",
-      "description": "Calculate the monthly payment, total interest, and full amortization schedule for a personal or auto loan.",
+      "title": "Loan Calculator",
+      "description": "Calculate the monthly payment, total interest, and full amortization schedule for any fixed-rate installment loan.",
       "aboveFold": {
         "inputTitle": "Your Loan",
         "resultTitle": "Your Payment",
@@ -2806,10 +2806,8 @@
         "amortization": "Amortization"
       },
       "form": {
-        "typeAuto": "Auto Loan",
-        "typePersonal": "Personal Loan",
         "loanAmountLabel": "Loan Amount",
-        "loanAmountPlaceholder": "e.g. 30,000",
+        "loanAmountPlaceholder": "e.g. 10,000",
         "interestRateLabel": "Annual Interest Rate (%)",
         "interestRatePlaceholder": "e.g. 6.5",
         "loanTermLabel": "Loan Term (years)",
@@ -2835,8 +2833,8 @@
       "education": {
         "intro": {
           "title": "Understanding Loan Amortization",
-          "paragraph1": "A personal or auto loan is typically repaid through fixed, equal monthly payments over a set term — a structure called an amortizing loan. Even though every payment is the same size, the mix inside it changes constantly: early payments are weighted heavily toward interest, since interest is charged on the full outstanding balance, while later payments are weighted toward principal, since the balance — and the interest charged on it — has shrunk.",
-          "paragraph2": "The monthly payment itself is calculated so that the loan reaches a zero balance exactly at the end of the term, given the loan amount and interest rate. Unlike a mortgage, a personal or auto loan calculated here has no mortgage insurance, property tax, or homeowners association fee built in — its cost is just the interest charged on the declining balance over the term you choose.",
+          "paragraph1": "A fixed-rate installment loan — whether it funds a car, a home renovation, a business purchase, or anything else — is typically repaid through fixed, equal monthly payments over a set term, a structure called an amortizing loan. Even though every payment is the same size, the mix inside it changes constantly: early payments are weighted heavily toward interest, since interest is charged on the full outstanding balance, while later payments are weighted toward principal, since the balance — and the interest charged on it — has shrunk.",
+          "paragraph2": "The monthly payment itself is calculated so that the loan reaches a zero balance exactly at the end of the term, given the loan amount and interest rate. Unlike a mortgage, the loan calculated here has no mortgage insurance, property tax, or homeowners association fee built in — its cost is just the interest charged on the declining balance over the term you choose, whatever the loan is actually for.",
           "diagram": {
             "principalLabel": "Principal",
             "interestLabel": "Interest",
@@ -2854,14 +2852,14 @@
           "columnTotalInterest": "Total Interest",
           "rows": [
             {
-              "scenario": "$30,000 auto loan, 6.5% annual rate, 5-year term",
-              "monthlyPayment": "$586.98",
-              "totalInterest": "$5,219.07"
+              "scenario": "$10,000 loan, 8% annual rate, 5-year term",
+              "monthlyPayment": "$202.76",
+              "totalInterest": "$2,165.84"
             },
             {
-              "scenario": "$10,000 personal loan, 11% annual rate, 3-year term",
-              "monthlyPayment": "$327.39",
-              "totalInterest": "$1,785.94"
+              "scenario": "$5,000 loan, 12% annual rate, 2-year term",
+              "monthlyPayment": "$235.37",
+              "totalInterest": "$648.82"
             }
           ]
         },
@@ -2873,12 +2871,12 @@
               "answer": "Interest is calculated each month on whatever balance remains, and early on that balance is at its highest — so the interest portion of a fixed payment starts large and shrinks every month as the balance falls, while the principal portion does the opposite."
             },
             {
-              "question": "What's the difference between a personal loan and an auto loan calculation-wise?",
-              "answer": "Mathematically nothing — both are standard fixed-rate installment loans amortized the same way this calculator models. The practical differences are that an auto loan is secured by the vehicle (usually giving it a lower rate) while an unsecured personal loan typically carries a higher rate to compensate the lender for the added risk."
+              "question": "What's the difference between a secured and an unsecured loan?",
+              "answer": "A secured loan is backed by collateral — a vehicle, savings account, or other asset the lender can claim if you stop paying — which usually earns it a lower interest rate. An unsecured loan, common for many personal loans, relies only on your creditworthiness, so lenders typically charge a higher rate to offset the added risk. This calculator models the payment math identically either way; only the rate you enter reflects that difference."
             },
             {
-              "question": "Does this calculator include fees like an origination fee or dealer add-ons?",
-              "answer": "No — it calculates payments from the loan amount, rate, and term alone. Real loans often carry additional costs (an origination fee on many personal loans, or dealer-added products on an auto loan) that increase what you actually pay beyond this estimate; ask a lender for the loan's full APR, which is required by law to include most such fees."
+              "question": "Does this calculator include fees like an origination fee?",
+              "answer": "No — it calculates payments from the loan amount, rate, and term alone. Real loans often carry additional costs, such as an origination fee, an application fee, or optional add-on products, that increase what you actually pay beyond this estimate; ask a lender for the loan's full APR, which is required by law to include most such fees."
             },
             {
               "question": "Why does paying off a loan early save interest?",
@@ -2893,12 +2891,12 @@
         "behindTheTool": {
           "title": "Behind This Tool",
           "history": {
-            "title": "How Installment Credit Put Cars — and Everything Else — Within Reach",
-            "paragraph": "Before the 20th century, borrowing to buy an everyday consumer good was rare and often frowned upon; big purchases were typically saved for and paid in cash. That changed with the automobile. In 1919, General Motors founded the General Motors Acceptance Corporation (GMAC) specifically to let dealers finance their inventory and let customers buy a car on an installment plan rather than paying the full price upfront. The approach caught on fast: by 1930, most durable goods in the United States — including more than two-thirds of all automobiles sold — were bought on some form of installment credit, and GMAC's model became the template for the captive auto-finance companies still owned by automakers today."
+            "title": "How Installment Credit Made Big Purchases Ordinary",
+            "paragraph": "Before the 20th century, borrowing to buy an everyday consumer good was rare and often frowned upon; big purchases were typically saved for and paid in cash. Furniture and sewing-machine retailers pioneered small-scale installment plans in the 1800s, but the model went mainstream with the automobile: in 1919, General Motors founded the General Motors Acceptance Corporation (GMAC) specifically to let dealers finance their inventory and let customers buy a car on an installment plan rather than paying the full price upfront. The approach caught on fast — by 1930, most durable goods in the United States, including more than two-thirds of all automobiles sold, were bought on some form of installment credit — and lenders soon extended the same fixed-payment, amortizing structure to furniture, appliances, education, and general-purpose personal loans."
           },
           "modernDevelopments": {
-            "title": "From the Dealership Finance Office to Instant Online Approval",
-            "paragraph": "For most of the 20th century, arranging a personal or auto loan meant a trip to a bank, credit union, or dealership finance office and a paper application. Online peer-to-peer and marketplace lenders that emerged in the mid-2000s were among the first to let a borrower apply for and receive a personal-loan decision entirely online, and that model has since become mainstream: many banks, credit unions, and auto dealers now offer instant or same-day automated approval by pulling a credit report and running the underwriting decision the moment an application is submitted, compressing a process that once took days into a matter of minutes."
+            "title": "From the Loan Officer's Desk to Instant Online Approval",
+            "paragraph": "For most of the 20th century, arranging an installment loan meant a trip to a bank, credit union, or retailer's finance office and a paper application. Online peer-to-peer and marketplace lenders that emerged in the mid-2000s were among the first to let a borrower apply for and receive a loan decision entirely online, and that model has since become mainstream: many banks, credit unions, and retailers now offer instant or same-day automated approval by pulling a credit report and running the underwriting decision the moment an application is submitted, compressing a process that once took days into a matter of minutes."
           },
           "academicPath": {
             "title": "Academic Path",
@@ -2946,7 +2944,7 @@
         "references": {
           "title": "Scientific References",
           "citation": "Shay, R. P. (1964). The Price of New Automobile Financing. The Journal of Finance, 19(2), 205–210.",
-          "note": "An early academic study of how auto-loan finance rates were actually priced, published not long after the installment-credit model pioneered by companies like GMAC had become the dominant way Americans financed a car purchase.",
+          "note": "An early academic study of how installment-loan finance rates were actually priced in practice, using auto loans — by then the leading example of the model pioneered by companies like GMAC — as its empirical case; the amortizing-payment mechanics it examines are the same math this calculator applies to any installment loan.",
           "url": "https://doi.org/10.1111/j.1540-6261.1964.tb00764.x",
           "readOriginal": "Read the Original Article"
         }
@@ -6405,8 +6403,8 @@
       },
       {
         "slug": "loan-calculator",
-        "name": "Personal & Auto Loan Calculator",
-        "bestFor": "Financing a car or a shorter-term personal loan",
+        "name": "Loan Calculator",
+        "bestFor": "Any general-purpose, fixed-rate installment loan",
         "question": "What will my monthly payment be, and how much interest will I pay in total?",
         "keyInputs": "Loan amount, interest rate, loan term",
         "output": "Monthly payment, total interest, amortization schedule"
@@ -6423,11 +6421,11 @@
     "guidance": [
       {
         "title": "Buying a house?",
-        "body": "Use the Mortgage Calculator. It's the only one of the three built around property-specific details like a down payment, property tax, homeowners insurance, and private mortgage insurance (PMI) — none of which apply to a personal or auto loan."
+        "body": "Use the Mortgage Calculator. It's the only one of the three built around property-specific details like a down payment, property tax, homeowners insurance, and private mortgage insurance (PMI) — none of which apply to a general installment loan."
       },
       {
-        "title": "Financing a car or a personal expense?",
-        "body": "Use the Personal & Auto Loan Calculator. It's a simpler, general-purpose amortization calculator without the property-specific fields a mortgage needs."
+        "title": "Financing a car, education, or anything else?",
+        "body": "Use the Loan Calculator. It's a simpler, general-purpose amortization calculator for any fixed-rate installment loan, without the property-specific fields a mortgage needs."
       },
       {
         "title": "Saving or investing money instead of borrowing it?",

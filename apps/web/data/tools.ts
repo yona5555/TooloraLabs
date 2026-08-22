@@ -60,17 +60,17 @@ export const tools: Tool[] = [
   },
   {
     slug: "loan-calculator",
-    title: "Personal & Auto Loan Calculator",
+    title: "Loan Calculator",
     category: "calculators",
     description:
-      "Calculate the monthly payment, total interest, and full amortization schedule for a personal or auto loan.",
+      "Calculate the monthly payment, total interest, and full amortization schedule for any fixed-rate installment loan.",
     featured: true,
     keywords: [
       "loan calculator",
-      "auto loan calculator",
-      "personal loan calculator",
+      "installment loan calculator",
       "monthly payment",
       "amortization schedule",
+      "interest calculator",
     ],
   },
   {

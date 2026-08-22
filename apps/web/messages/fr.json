@@ -2837,8 +2837,8 @@
       }
     },
     "loan-calculator": {
-      "title": "Calculateur de prêt personnel et automobile",
-      "description": "Calculez la mensualité, le coût total des intérêts et le tableau d'amortissement complet d'un prêt personnel ou automobile.",
+      "title": "Calculateur de prêt",
+      "description": "Calculez la mensualité, le coût total des intérêts et le tableau d'amortissement complet de tout prêt à taux fixe.",
       "aboveFold": {
         "inputTitle": "Votre prêt",
         "resultTitle": "Votre mensualité",
@@ -2855,10 +2855,8 @@
         "amortization": "Amortissement"
       },
       "form": {
-        "typeAuto": "Prêt automobile",
-        "typePersonal": "Prêt personnel",
         "loanAmountLabel": "Montant du prêt",
-        "loanAmountPlaceholder": "ex. 30 000",
+        "loanAmountPlaceholder": "ex. 10 000",
         "interestRateLabel": "Taux d'intérêt annuel (%)",
         "interestRatePlaceholder": "ex. 6,5",
         "loanTermLabel": "Durée du prêt (années)",
@@ -2884,8 +2882,8 @@
       "education": {
         "intro": {
           "title": "Comprendre l'amortissement d'un prêt",
-          "paragraph1": "Un prêt personnel ou automobile se rembourse généralement par des mensualités fixes et égales sur une durée déterminée — une structure appelée prêt amortissable. Même si chaque paiement est d'un montant identique, sa composition change constamment : les premiers paiements sont largement consacrés aux intérêts, puisque ceux-ci sont calculés sur la totalité du solde restant dû, tandis que les derniers paiements sont davantage consacrés au capital, le solde — et les intérêts qu'il génère — ayant diminué.",
-          "paragraph2": "La mensualité elle-même est calculée de manière à ce que le prêt atteigne un solde nul exactement à la fin de sa durée, compte tenu du montant emprunté et du taux d'intérêt. Contrairement à un prêt immobilier, un prêt personnel ou automobile calculé ici n'inclut ni assurance emprunteur, ni taxe foncière, ni frais de copropriété — son coût se limite aux intérêts facturés sur le solde décroissant pendant la durée choisie.",
+          "paragraph1": "Un prêt à taux fixe — qu'il finance une voiture, des travaux, un achat professionnel ou tout autre projet — se rembourse généralement par des mensualités fixes et égales sur une durée déterminée : une structure appelée prêt amortissable. Même si chaque paiement est d'un montant identique, sa composition change constamment : les premiers paiements sont largement consacrés aux intérêts, puisque ceux-ci sont calculés sur la totalité du solde restant dû, tandis que les derniers paiements sont davantage consacrés au capital, le solde — et les intérêts qu'il génère — ayant diminué.",
+          "paragraph2": "La mensualité elle-même est calculée de manière à ce que le prêt atteigne un solde nul exactement à la fin de sa durée, compte tenu du montant emprunté et du taux d'intérêt. Contrairement à un prêt immobilier, le prêt calculé ici n'inclut ni assurance emprunteur, ni taxe foncière, ni frais de copropriété — son coût se limite aux intérêts facturés sur le solde décroissant pendant la durée choisie, quel que soit l'usage du prêt.",
           "diagram": {
             "principalLabel": "Capital",
             "interestLabel": "Intérêts",
@@ -2903,14 +2901,14 @@
           "columnTotalInterest": "Intérêts totaux",
           "rows": [
             {
-              "scenario": "Prêt automobile de 30 000 $, taux annuel de 6,5 %, durée de 5 ans",
-              "monthlyPayment": "586,98 $",
-              "totalInterest": "5 219,07 $"
+              "scenario": "Prêt de 10 000 $, taux annuel de 8 %, durée de 5 ans",
+              "monthlyPayment": "202,76 $",
+              "totalInterest": "2 165,84 $"
             },
             {
-              "scenario": "Prêt personnel de 10 000 $, taux annuel de 11 %, durée de 3 ans",
-              "monthlyPayment": "327,39 $",
-              "totalInterest": "1 785,94 $"
+              "scenario": "Prêt de 5 000 $, taux annuel de 12 %, durée de 2 ans",
+              "monthlyPayment": "235,37 $",
+              "totalInterest": "648,82 $"
             }
           ]
         },
@@ -2922,12 +2920,12 @@
               "answer": "Les intérêts sont calculés chaque mois sur le solde restant, qui est à son maximum au début — la part d'intérêts d'une mensualité fixe démarre donc élevée et diminue chaque mois à mesure que le solde baisse, tandis que la part de capital évolue en sens inverse."
             },
             {
-              "question": "Quelle est la différence de calcul entre un prêt personnel et un prêt automobile ?",
-              "answer": "Mathématiquement, aucune — les deux sont des prêts à échéances fixes amortis exactement de la même manière que dans ce calculateur. Les différences pratiques tiennent au fait qu'un prêt automobile est garanti par le véhicule (ce qui lui vaut généralement un taux plus bas), tandis qu'un prêt personnel non garanti affiche en général un taux plus élevé pour compenser le risque supplémentaire pris par le prêteur."
+              "question": "Quelle est la différence entre un prêt garanti et un prêt non garanti ?",
+              "answer": "Un prêt garanti est adossé à une garantie — un véhicule, un compte d'épargne ou un autre bien que le prêteur peut saisir en cas de défaut de paiement — ce qui lui vaut généralement un taux plus bas. Un prêt non garanti, courant pour de nombreux prêts personnels, repose uniquement sur votre solvabilité, si bien que les prêteurs facturent en général un taux plus élevé pour compenser le risque supplémentaire. Ce calculateur modélise la mécanique de paiement de la même façon dans les deux cas ; seul le taux que vous saisissez reflète cette différence."
             },
             {
-              "question": "Ce calculateur inclut-il des frais comme des frais de dossier ou des options ajoutées par le concessionnaire ?",
-              "answer": "Non — il calcule les paiements uniquement à partir du montant, du taux et de la durée du prêt. Les prêts réels comportent souvent des coûts supplémentaires (frais de dossier sur de nombreux prêts personnels, ou produits ajoutés par le concessionnaire pour un prêt automobile) qui augmentent ce que vous payez réellement au-delà de cette estimation ; demandez à votre prêteur le TAEG complet du prêt, qui doit légalement inclure la plupart de ces frais."
+              "question": "Ce calculateur inclut-il des frais comme des frais de dossier ?",
+              "answer": "Non — il calcule les paiements uniquement à partir du montant, du taux et de la durée du prêt. Les prêts réels comportent souvent des coûts supplémentaires, comme des frais de dossier, des frais de demande ou des produits optionnels ajoutés, qui augmentent ce que vous payez réellement au-delà de cette estimation ; demandez à votre prêteur le TAEG complet du prêt, qui doit légalement inclure la plupart de ces frais."
             },
             {
               "question": "Pourquoi rembourser un prêt par anticipation permet-il d'économiser des intérêts ?",
@@ -2942,12 +2940,12 @@
         "behindTheTool": {
           "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "Comment le crédit à tempérament a mis la voiture — et bien d'autres choses — à portée de tous",
-            "paragraph": "Avant le XXe siècle, emprunter pour acheter un bien de consommation courant était rare et souvent mal vu ; les achats importants étaient généralement financés par une épargne préalable et payés comptant. L'automobile a changé la donne. En 1919, General Motors fonde la General Motors Acceptance Corporation (GMAC), spécifiquement destinée à permettre aux concessionnaires de financer leurs stocks et aux clients d'acheter une voiture à tempérament plutôt que de régler le prix total d'avance. Le modèle s'est imposé rapidement : dès 1930, la plupart des biens durables aux États-Unis — dont plus des deux tiers des automobiles vendues — étaient achetés sous une forme ou une autre de crédit à tempérament, et le modèle de GMAC est devenu la référence pour les sociétés de financement captif encore détenues aujourd'hui par les constructeurs automobiles."
+            "title": "Comment le crédit à tempérament a démocratisé les achats importants",
+            "paragraph": "Avant le XXe siècle, emprunter pour acheter un bien de consommation courant était rare et souvent mal vu ; les achats importants étaient généralement financés par une épargne préalable et payés comptant. Les marchands de meubles et de machines à coudre ont été les pionniers de petits plans à tempérament dès le XIXe siècle, mais le modèle s'est généralisé avec l'automobile : en 1919, General Motors fonde la General Motors Acceptance Corporation (GMAC), spécifiquement destinée à permettre aux concessionnaires de financer leurs stocks et aux clients d'acheter une voiture à tempérament plutôt que de régler le prix total d'avance. Le modèle s'est imposé rapidement — dès 1930, la plupart des biens durables aux États-Unis, dont plus des deux tiers des automobiles vendues, étaient achetés sous une forme ou une autre de crédit à tempérament — et les prêteurs ont rapidement étendu cette même structure à mensualités fixes et amortissables aux meubles, à l'électroménager, aux études et aux prêts personnels à usage général."
           },
           "modernDevelopments": {
-            "title": "Du bureau de financement du concessionnaire à l'approbation instantanée en ligne",
-            "paragraph": "Pendant la majeure partie du XXe siècle, obtenir un prêt personnel ou automobile impliquait de se rendre dans une banque, une coopérative de crédit ou le bureau de financement d'un concessionnaire, et de remplir un dossier papier. Les plateformes de prêt entre particuliers et de courtage apparues au milieu des années 2000 ont été parmi les premières à permettre à un emprunteur de faire une demande de prêt personnel et d'obtenir une décision entièrement en ligne, et ce modèle est depuis devenu courant : de nombreuses banques, coopératives de crédit et concessionnaires automobiles proposent désormais une approbation automatisée instantanée ou le jour même, en récupérant un rapport de crédit et en exécutant la décision de souscription dès la soumission de la demande, réduisant à quelques minutes un processus qui prenait autrefois plusieurs jours."
+            "title": "Du bureau du conseiller prêteur à l'approbation instantanée en ligne",
+            "paragraph": "Pendant la majeure partie du XXe siècle, obtenir un prêt à tempérament impliquait de se rendre dans une banque, une coopérative de crédit ou le bureau de financement d'un commerçant, et de remplir un dossier papier. Les plateformes de prêt entre particuliers et de courtage apparues au milieu des années 2000 ont été parmi les premières à permettre à un emprunteur de faire une demande de prêt et d'obtenir une décision entièrement en ligne, et ce modèle est depuis devenu courant : de nombreuses banques, coopératives de crédit et enseignes proposent désormais une approbation automatisée instantanée ou le jour même, en récupérant un rapport de crédit et en exécutant la décision de souscription dès la soumission de la demande, réduisant à quelques minutes un processus qui prenait autrefois plusieurs jours."
           },
           "academicPath": {
             "title": "Parcours académique",
@@ -2995,7 +2993,7 @@
         "references": {
           "title": "Références scientifiques",
           "citation": "Shay, R. P. (1964). The Price of New Automobile Financing. The Journal of Finance, 19(2), 205–210.",
-          "note": "Une étude académique précoce sur la tarification réelle des taux de financement des prêts automobiles, publiée peu après que le modèle de crédit à tempérament initié par des entreprises comme GMAC soit devenu le principal mode de financement des achats de voitures aux États-Unis.",
+          "note": "Une étude académique précoce sur la tarification réelle des taux de financement des prêts à tempérament, utilisant les prêts automobiles — alors l'exemple le plus répandu du modèle initié par des entreprises comme GMAC — comme cas d'étude empirique ; la mécanique d'amortissement qu'elle examine est la même que celle appliquée ici à tout prêt à tempérament.",
           "url": "https://doi.org/10.1111/j.1540-6261.1964.tb00764.x",
           "readOriginal": "Lire l'article original"
         }
@@ -6885,8 +6883,8 @@
       },
       {
         "slug": "loan-calculator",
-        "name": "Calculateur de prêt personnel et auto",
-        "bestFor": "Financer une voiture ou un prêt personnel à plus court terme",
+        "name": "Calculateur de prêt",
+        "bestFor": "Tout prêt à tempérament à taux fixe, à usage général",
         "question": "Quelle sera ma mensualité, et combien d'intérêts vais-je payer au total ?",
         "keyInputs": "Montant du prêt, taux d'intérêt, durée du prêt",
         "output": "Mensualité, intérêts totaux, tableau d'amortissement"
@@ -6903,11 +6901,11 @@
     "guidance": [
       {
         "title": "Vous achetez une maison ?",
-        "body": "Utilisez le Calculateur de prêt immobilier. C'est le seul des trois conçu autour de détails propres à l'immobilier comme l'apport, la taxe foncière, l'assurance habitation et l'assurance prêt (PMI) — qui ne s'appliquent à aucun prêt personnel ou auto."
+        "body": "Utilisez le Calculateur de prêt immobilier. C'est le seul des trois conçu autour de détails propres à l'immobilier comme l'apport, la taxe foncière, l'assurance habitation et l'assurance prêt (PMI) — qui ne s'appliquent à aucun prêt à tempérament général."
       },
       {
-        "title": "Vous financez une voiture ou une dépense personnelle ?",
-        "body": "Utilisez le Calculateur de prêt personnel et auto. C'est un calculateur d'amortissement plus simple et polyvalent, sans les champs propres à l'immobilier qu'exige un prêt hypothécaire."
+        "title": "Vous financez une voiture, des études ou autre chose ?",
+        "body": "Utilisez le Calculateur de prêt. C'est un calculateur d'amortissement plus simple et polyvalent pour tout prêt à tempérament à taux fixe, sans les champs propres à l'immobilier qu'exige un prêt hypothécaire."
       },
       {
         "title": "Vous épargnez ou investissez de l'argent plutôt que d'en emprunter ?",

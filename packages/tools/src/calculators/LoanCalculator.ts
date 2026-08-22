@@ -24,9 +24,9 @@ export type LoanResult = {
 };
 
 /**
- * A standard fixed-rate installment loan (personal or auto) — the same
- * amortizing-payment math as a mortgage, deliberately without PMI, property
- * tax, or HOA, none of which apply to a non-real-estate loan.
+ * Any standard fixed-rate installment loan — the same amortizing-payment
+ * math as a mortgage, deliberately without PMI, property tax, or HOA, none
+ * of which apply to a non-real-estate loan.
  */
 export function calculateLoan(loanAmount: number, annualInterestRate: number, loanTermYears: number): LoanResult {
   if (!Number.isFinite(loanAmount) || loanAmount <= 0 || !Number.isFinite(annualInterestRate) || !Number.isFinite(loanTermYears) || loanTermYears <= 0) {

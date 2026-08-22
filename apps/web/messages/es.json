@@ -2837,8 +2837,8 @@
       }
     },
     "loan-calculator": {
-      "title": "Calculadora de préstamos personales y de auto",
-      "description": "Calcula la cuota mensual, el interés total y el cuadro de amortización completo de un préstamo personal o de auto.",
+      "title": "Calculadora de préstamos",
+      "description": "Calcula la cuota mensual, el interés total y el cuadro de amortización completo de cualquier préstamo a tasa fija.",
       "aboveFold": {
         "inputTitle": "Tu préstamo",
         "resultTitle": "Tu cuota",
@@ -2855,10 +2855,8 @@
         "amortization": "Amortización"
       },
       "form": {
-        "typeAuto": "Préstamo de auto",
-        "typePersonal": "Préstamo personal",
         "loanAmountLabel": "Importe del préstamo",
-        "loanAmountPlaceholder": "p. ej. 30.000",
+        "loanAmountPlaceholder": "p. ej. 10.000",
         "interestRateLabel": "Tasa de interés anual (%)",
         "interestRatePlaceholder": "p. ej. 6,5",
         "loanTermLabel": "Plazo del préstamo (años)",
@@ -2884,8 +2882,8 @@
       "education": {
         "intro": {
           "title": "Cómo funciona la amortización de un préstamo",
-          "paragraph1": "Un préstamo personal o de auto suele devolverse mediante cuotas mensuales fijas e iguales durante un plazo determinado — una estructura llamada préstamo amortizable. Aunque cada cuota tiene el mismo importe, su composición interna cambia constantemente: las primeras cuotas están cargadas de interés, ya que este se calcula sobre todo el saldo pendiente, mientras que las últimas se cargan de capital, porque el saldo —y el interés que genera— ya se ha reducido.",
-          "paragraph2": "La cuota mensual se calcula de forma que el préstamo llegue a saldo cero justo al final del plazo, dados el importe y la tasa de interés. A diferencia de una hipoteca, un préstamo personal o de auto calculado aquí no incluye seguro hipotecario, impuesto sobre la propiedad ni cuota de comunidad de propietarios — su coste es solo el interés que genera el saldo decreciente a lo largo del plazo que elijas.",
+          "paragraph1": "Un préstamo a tasa fija — ya financie un auto, una reforma, una compra profesional o cualquier otra cosa — suele devolverse mediante cuotas mensuales fijas e iguales durante un plazo determinado: una estructura llamada préstamo amortizable. Aunque cada cuota tiene el mismo importe, su composición interna cambia constantemente: las primeras cuotas están cargadas de interés, ya que este se calcula sobre todo el saldo pendiente, mientras que las últimas se cargan de capital, porque el saldo —y el interés que genera— ya se ha reducido.",
+          "paragraph2": "La cuota mensual se calcula de forma que el préstamo llegue a saldo cero justo al final del plazo, dados el importe y la tasa de interés. A diferencia de una hipoteca, el préstamo calculado aquí no incluye seguro hipotecario, impuesto sobre la propiedad ni cuota de comunidad de propietarios — su coste es solo el interés que genera el saldo decreciente a lo largo del plazo que elijas, sea cual sea el destino del préstamo.",
           "diagram": {
             "principalLabel": "Capital",
             "interestLabel": "Interés",
@@ -2903,14 +2901,14 @@
           "columnTotalInterest": "Interés total",
           "rows": [
             {
-              "scenario": "Préstamo de auto de 30.000 $, tasa anual del 6,5 %, plazo de 5 años",
-              "monthlyPayment": "586,98 $",
-              "totalInterest": "5.219,07 $"
+              "scenario": "Préstamo de 10.000 $, tasa anual del 8 %, plazo de 5 años",
+              "monthlyPayment": "202,76 $",
+              "totalInterest": "2.165,84 $"
             },
             {
-              "scenario": "Préstamo personal de 10.000 $, tasa anual del 11 %, plazo de 3 años",
-              "monthlyPayment": "327,39 $",
-              "totalInterest": "1.785,94 $"
+              "scenario": "Préstamo de 5.000 $, tasa anual del 12 %, plazo de 2 años",
+              "monthlyPayment": "235,37 $",
+              "totalInterest": "648,82 $"
             }
           ]
         },
@@ -2922,12 +2920,12 @@
               "answer": "El interés se calcula cada mes sobre el saldo que queda pendiente, y al principio ese saldo es el más alto — así que la parte de interés de una cuota fija empieza siendo grande y se reduce cada mes a medida que baja el saldo, mientras que la parte de capital hace justo lo contrario."
             },
             {
-              "question": "¿En qué se diferencian, en el cálculo, un préstamo personal y uno de auto?",
-              "answer": "Matemáticamente en nada — ambos son préstamos a plazos con tasa fija que se amortizan igual que modela esta calculadora. Las diferencias prácticas están en que el préstamo de auto está garantizado por el vehículo (lo que suele darle una tasa más baja), mientras que un préstamo personal sin garantía suele tener una tasa más alta para compensar al prestamista por el riesgo adicional."
+              "question": "¿Qué diferencia hay entre un préstamo garantizado y uno sin garantía?",
+              "answer": "Un préstamo garantizado está respaldado por una garantía —un vehículo, una cuenta de ahorro u otro bien que el prestamista puede reclamar si dejas de pagar—, lo que suele darle una tasa más baja. Un préstamo sin garantía, habitual en muchos préstamos personales, depende solo de tu solvencia, por lo que los prestamistas suelen cobrar una tasa más alta para compensar el riesgo adicional. Esta calculadora modela la mecánica de pago igual en ambos casos; solo la tasa que introduzcas refleja esa diferencia."
             },
             {
-              "question": "¿Esta calculadora incluye comisiones como una comisión de apertura o extras del concesionario?",
-              "answer": "No — calcula las cuotas solo a partir del importe, la tasa y el plazo. Los préstamos reales suelen tener costes adicionales (una comisión de apertura en muchos préstamos personales, o productos añadidos por el concesionario en un préstamo de auto) que aumentan lo que realmente pagas más allá de esta estimación; pide al prestamista la TAE completa del préstamo, que por ley debe incluir la mayoría de esas comisiones."
+              "question": "¿Esta calculadora incluye comisiones como una comisión de apertura?",
+              "answer": "No — calcula las cuotas solo a partir del importe, la tasa y el plazo. Los préstamos reales suelen tener costes adicionales, como una comisión de apertura, una comisión de solicitud o productos opcionales añadidos, que aumentan lo que realmente pagas más allá de esta estimación; pide al prestamista la TAE completa del préstamo, que por ley debe incluir la mayoría de esas comisiones."
             },
             {
               "question": "¿Por qué pagar un préstamo antes de tiempo ahorra intereses?",
@@ -2942,12 +2940,12 @@
         "behindTheTool": {
           "title": "Detrás de esta herramienta",
           "history": {
-            "title": "Cómo el crédito a plazos puso los coches —y casi todo lo demás— al alcance de la mano",
-            "paragraph": "Antes del siglo XX, pedir dinero prestado para comprar un bien de consumo cotidiano era poco frecuente y a menudo mal visto; las compras importantes solían ahorrarse y pagarse en efectivo. Eso cambió con el automóvil. En 1919, General Motors fundó la General Motors Acceptance Corporation (GMAC) específicamente para que los concesionarios financiaran su inventario y los clientes pudieran comprar un coche a plazos en lugar de pagar el precio completo por adelantado. El modelo se popularizó rápido: hacia 1930, la mayoría de los bienes duraderos en Estados Unidos —incluidos más de dos tercios de todos los automóviles vendidos— se compraban mediante alguna forma de crédito a plazos, y el modelo de GMAC se convirtió en la plantilla de las financieras cautivas que los fabricantes de automóviles siguen teniendo hoy."
+            "title": "Cómo el crédito a plazos puso al alcance de la mano las compras importantes",
+            "paragraph": "Antes del siglo XX, pedir dinero prestado para comprar un bien de consumo cotidiano era poco frecuente y a menudo mal visto; las compras importantes solían ahorrarse y pagarse en efectivo. Los comercios de muebles y máquinas de coser fueron pioneros de pequeños planes a plazos ya en el siglo XIX, pero el modelo se popularizó con el automóvil: en 1919, General Motors fundó la General Motors Acceptance Corporation (GMAC) específicamente para que los concesionarios financiaran su inventario y los clientes pudieran comprar un coche a plazos en lugar de pagar el precio completo por adelantado. El modelo se popularizó rápido —hacia 1930, la mayoría de los bienes duraderos en Estados Unidos, incluidos más de dos tercios de todos los automóviles vendidos, se compraban mediante alguna forma de crédito a plazos— y los prestamistas pronto extendieron esa misma estructura de cuota fija y amortizable a muebles, electrodomésticos, estudios y préstamos personales de uso general."
           },
           "modernDevelopments": {
-            "title": "De la oficina de financiación del concesionario a la aprobación instantánea en línea",
-            "paragraph": "Durante la mayor parte del siglo XX, contratar un préstamo personal o de auto implicaba ir a un banco, una cooperativa de crédito o la oficina de financiación de un concesionario, y rellenar una solicitud en papel. Los prestamistas entre particulares y de mercado en línea que surgieron a mediados de la década de 2000 fueron de los primeros en permitir solicitar y recibir una decisión sobre un préstamo personal completamente en línea, y ese modelo se ha vuelto habitual desde entonces: muchos bancos, cooperativas de crédito y concesionarios ofrecen ahora aprobación automatizada instantánea o en el mismo día, consultando el historial crediticio y ejecutando la decisión de suscripción en el momento en que se envía la solicitud, comprimiendo en cuestión de minutos un proceso que antes tardaba días."
+            "title": "De la oficina del prestamista a la aprobación instantánea en línea",
+            "paragraph": "Durante la mayor parte del siglo XX, contratar un préstamo a plazos implicaba ir a un banco, una cooperativa de crédito o la oficina de financiación de un comercio, y rellenar una solicitud en papel. Los prestamistas entre particulares y de mercado en línea que surgieron a mediados de la década de 2000 fueron de los primeros en permitir solicitar y recibir una decisión sobre un préstamo completamente en línea, y ese modelo se ha vuelto habitual desde entonces: muchos bancos, cooperativas de crédito y comercios ofrecen ahora aprobación automatizada instantánea o en el mismo día, consultando el historial crediticio y ejecutando la decisión de suscripción en el momento en que se envía la solicitud, comprimiendo en cuestión de minutos un proceso que antes tardaba días."
           },
           "academicPath": {
             "title": "Trayectoria académica",
@@ -2995,7 +2993,7 @@
         "references": {
           "title": "Referencias científicas",
           "citation": "Shay, R. P. (1964). The Price of New Automobile Financing. The Journal of Finance, 19(2), 205–210.",
-          "note": "Un estudio académico temprano sobre cómo se fijaban realmente las tasas de financiación de automóviles, publicado poco después de que el modelo de crédito a plazos impulsado por empresas como GMAC se convirtiera en la forma dominante de financiar la compra de un coche en Estados Unidos.",
+          "note": "Un estudio académico temprano sobre cómo se fijaban realmente las tasas de financiación de préstamos a plazos, usando los préstamos de auto —por entonces el ejemplo más extendido del modelo impulsado por empresas como GMAC— como caso empírico; la mecánica de amortización que examina es la misma que esta calculadora aplica a cualquier préstamo a plazos.",
           "url": "https://doi.org/10.1111/j.1540-6261.1964.tb00764.x",
           "readOriginal": "Leer el artículo original"
         }
@@ -6885,8 +6883,8 @@
       },
       {
         "slug": "loan-calculator",
-        "name": "Calculadora de Préstamo Personal y de Auto",
-        "bestFor": "Financiar un auto o un préstamo personal a más corto plazo",
+        "name": "Calculadora de Préstamos",
+        "bestFor": "Cualquier préstamo a tasa fija de uso general",
         "question": "¿Cuál será mi pago mensual y cuánto interés pagaré en total?",
         "keyInputs": "Monto del préstamo, tasa de interés, plazo del préstamo",
         "output": "Pago mensual, interés total, tabla de amortización"
@@ -6903,11 +6901,11 @@
     "guidance": [
       {
         "title": "¿Está comprando una casa?",
-        "body": "Use la Calculadora de Hipoteca. Es la única de las tres construida en torno a detalles específicos de la propiedad, como el pago inicial, el impuesto predial, el seguro de vivienda y el seguro hipotecario privado (PMI), ninguno de los cuales aplica a un préstamo personal o de auto."
+        "body": "Use la Calculadora de Hipoteca. Es la única de las tres construida en torno a detalles específicos de la propiedad, como el pago inicial, el impuesto predial, el seguro de vivienda y el seguro hipotecario privado (PMI), ninguno de los cuales aplica a un préstamo a plazos general."
       },
       {
-        "title": "¿Está financiando un auto o un gasto personal?",
-        "body": "Use la Calculadora de Préstamo Personal y de Auto. Es una calculadora de amortización más simple y de propósito general, sin los campos específicos de propiedad que requiere una hipoteca."
+        "title": "¿Está financiando un auto, estudios u otra cosa?",
+        "body": "Use la Calculadora de Préstamos. Es una calculadora de amortización más simple y de propósito general para cualquier préstamo a tasa fija, sin los campos específicos de propiedad que requiere una hipoteca."
       },
       {
         "title": "¿Está ahorrando o invirtiendo dinero en lugar de pedirlo prestado?",

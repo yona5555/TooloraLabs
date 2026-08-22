@@ -2837,8 +2837,8 @@
       }
     },
     "loan-calculator": {
-      "title": "Privat- & Autokreditrechner",
-      "description": "Berechnen Sie die monatliche Rate, die Gesamtzinsen und den vollständigen Tilgungsplan für einen Privat- oder Autokredit.",
+      "title": "Kreditrechner",
+      "description": "Berechnen Sie die monatliche Rate, die Gesamtzinsen und den vollständigen Tilgungsplan für jeden Ratenkredit mit festem Zinssatz.",
       "aboveFold": {
         "inputTitle": "Ihr Kredit",
         "resultTitle": "Ihre Rate",
@@ -2855,10 +2855,8 @@
         "amortization": "Tilgungsplan"
       },
       "form": {
-        "typeAuto": "Autokredit",
-        "typePersonal": "Privatkredit",
         "loanAmountLabel": "Kreditbetrag",
-        "loanAmountPlaceholder": "z. B. 30.000",
+        "loanAmountPlaceholder": "z. B. 10.000",
         "interestRateLabel": "Jährlicher Zinssatz (%)",
         "interestRatePlaceholder": "z. B. 6,5",
         "loanTermLabel": "Laufzeit (Jahre)",
@@ -2884,8 +2882,8 @@
       "education": {
         "intro": {
           "title": "Kredittilgung verstehen",
-          "paragraph1": "Ein Privat- oder Autokredit wird üblicherweise durch feste, gleich hohe monatliche Raten über eine festgelegte Laufzeit zurückgezahlt – eine Struktur, die als Tilgungsdarlehen bezeichnet wird. Auch wenn jede Rate gleich hoch ist, ändert sich die Zusammensetzung ständig: Frühe Raten bestehen zu einem großen Teil aus Zinsen, da Zinsen auf die gesamte ausstehende Restschuld berechnet werden, während spätere Raten stärker auf die Tilgung entfallen, da die Restschuld – und die darauf berechneten Zinsen – geschrumpft ist.",
-          "paragraph2": "Die monatliche Rate selbst wird so berechnet, dass der Kredit bei gegebenem Kreditbetrag und Zinssatz genau am Ende der Laufzeit auf null sinkt. Anders als eine Hypothek enthält ein hier berechneter Privat- oder Autokredit keine Kreditausfallversicherung, Grundsteuer oder Eigentümergemeinschaftsgebühr – seine Kosten bestehen nur aus den Zinsen, die auf die sinkende Restschuld über die von Ihnen gewählte Laufzeit berechnet werden.",
+          "paragraph1": "Ein Ratenkredit mit festem Zinssatz – ob er ein Auto, eine Renovierung, eine geschäftliche Anschaffung oder etwas ganz anderes finanziert – wird üblicherweise durch feste, gleich hohe monatliche Raten über eine festgelegte Laufzeit zurückgezahlt: eine Struktur, die als Tilgungsdarlehen bezeichnet wird. Auch wenn jede Rate gleich hoch ist, ändert sich die Zusammensetzung ständig: Frühe Raten bestehen zu einem großen Teil aus Zinsen, da Zinsen auf die gesamte ausstehende Restschuld berechnet werden, während spätere Raten stärker auf die Tilgung entfallen, da die Restschuld – und die darauf berechneten Zinsen – geschrumpft ist.",
+          "paragraph2": "Die monatliche Rate selbst wird so berechnet, dass der Kredit bei gegebenem Kreditbetrag und Zinssatz genau am Ende der Laufzeit auf null sinkt. Anders als eine Hypothek enthält der hier berechnete Kredit keine Kreditausfallversicherung, Grundsteuer oder Eigentümergemeinschaftsgebühr – seine Kosten bestehen nur aus den Zinsen, die auf die sinkende Restschuld über die von Ihnen gewählte Laufzeit berechnet werden, unabhängig vom Verwendungszweck.",
           "diagram": {
             "principalLabel": "Tilgung",
             "interestLabel": "Zinsen",
@@ -2903,14 +2901,14 @@
           "columnTotalInterest": "Gesamtzinsen",
           "rows": [
             {
-              "scenario": "Autokredit 30.000 $, 6,5% Jahreszins, 5 Jahre Laufzeit",
-              "monthlyPayment": "586,98 $",
-              "totalInterest": "5.219,07 $"
+              "scenario": "Kredit 10.000 $, 8% Jahreszins, 5 Jahre Laufzeit",
+              "monthlyPayment": "202,76 $",
+              "totalInterest": "2.165,84 $"
             },
             {
-              "scenario": "Privatkredit 10.000 $, 11% Jahreszins, 3 Jahre Laufzeit",
-              "monthlyPayment": "327,39 $",
-              "totalInterest": "1.785,94 $"
+              "scenario": "Kredit 5.000 $, 12% Jahreszins, 2 Jahre Laufzeit",
+              "monthlyPayment": "235,37 $",
+              "totalInterest": "648,82 $"
             }
           ]
         },
@@ -2922,12 +2920,12 @@
               "answer": "Zinsen werden jeden Monat auf die verbleibende Restschuld berechnet, und am Anfang ist diese Restschuld am höchsten – der Zinsanteil einer festen Rate startet also hoch und schrumpft jeden Monat, während die Restschuld sinkt, während sich der Tilgungsanteil genau entgegengesetzt verhält."
             },
             {
-              "question": "Was ist der rechnerische Unterschied zwischen einem Privat- und einem Autokredit?",
-              "answer": "Rechnerisch keiner – beide sind Standard-Ratenkredite mit festem Zinssatz, die auf dieselbe Weise getilgt werden, die dieser Rechner modelliert. Der praktische Unterschied besteht darin, dass ein Autokredit durch das Fahrzeug besichert ist (was ihm meist einen niedrigeren Zinssatz verschafft), während ein unbesicherter Privatkredit in der Regel einen höheren Zinssatz trägt, um den Kreditgeber für das zusätzliche Risiko zu entschädigen."
+              "question": "Was ist der Unterschied zwischen einem besicherten und einem unbesicherten Kredit?",
+              "answer": "Ein besicherter Kredit ist durch eine Sicherheit gedeckt – ein Fahrzeug, ein Sparkonto oder einen anderen Vermögenswert, den der Kreditgeber bei Zahlungsausfall einfordern kann –, was ihm meist einen niedrigeren Zinssatz verschafft. Ein unbesicherter Kredit, wie bei vielen Privatkrediten üblich, stützt sich allein auf Ihre Kreditwürdigkeit, weshalb Kreditgeber in der Regel einen höheren Zinssatz verlangen, um das zusätzliche Risiko auszugleichen. Dieser Rechner modelliert die Zahlungsmathematik in beiden Fällen identisch – nur der eingegebene Zinssatz spiegelt diesen Unterschied wider."
             },
             {
-              "question": "Berücksichtigt dieser Rechner Gebühren wie eine Bearbeitungsgebühr oder Händlerzusätze?",
-              "answer": "Nein – er berechnet die Raten allein aus Kreditbetrag, Zinssatz und Laufzeit. Reale Kredite tragen oft zusätzliche Kosten (eine Bearbeitungsgebühr bei vielen Privatkrediten oder vom Händler hinzugefügte Produkte bei einem Autokredit), die über diese Schätzung hinausgehen; fragen Sie einen Kreditgeber nach dem effektiven Jahreszins des Kredits, der laut Gesetz die meisten solcher Gebühren einschließen muss."
+              "question": "Berücksichtigt dieser Rechner Gebühren wie eine Bearbeitungsgebühr?",
+              "answer": "Nein – er berechnet die Raten allein aus Kreditbetrag, Zinssatz und Laufzeit. Reale Kredite tragen oft zusätzliche Kosten wie eine Bearbeitungsgebühr, eine Antragsgebühr oder optionale Zusatzprodukte, die über diese Schätzung hinausgehen; fragen Sie einen Kreditgeber nach dem effektiven Jahreszins des Kredits, der laut Gesetz die meisten solcher Gebühren einschließen muss."
             },
             {
               "question": "Warum spart die vorzeitige Rückzahlung eines Kredits Zinsen?",
@@ -2942,12 +2940,12 @@
         "behindTheTool": {
           "title": "Hinter diesem Tool",
           "history": {
-            "title": "Wie Ratenkredite Autos – und alles andere – erschwinglich machten",
-            "paragraph": "Vor dem 20. Jahrhundert war die Kreditaufnahme für ein alltägliches Konsumgut selten und oft verpönt; große Anschaffungen wurden typischerweise angespart und bar bezahlt. Das änderte sich mit dem Automobil. 1919 gründete General Motors die General Motors Acceptance Corporation (GMAC) speziell, um Händlern die Finanzierung ihres Lagerbestands und Kunden den Autokauf per Ratenzahlung statt vollständiger Vorauszahlung zu ermöglichen. Der Ansatz setzte sich schnell durch: Bis 1930 wurden die meisten langlebigen Güter in den USA – darunter mehr als zwei Drittel aller verkauften Automobile – auf irgendeine Form von Ratenkredit gekauft, und GMACs Modell wurde zur Vorlage für die herstellereigenen Autofinanzierungsgesellschaften, die es bis heute gibt."
+            "title": "Wie Ratenkredite große Anschaffungen alltäglich machten",
+            "paragraph": "Vor dem 20. Jahrhundert war die Kreditaufnahme für ein alltägliches Konsumgut selten und oft verpönt; große Anschaffungen wurden typischerweise angespart und bar bezahlt. Möbel- und Nähmaschinenhändler waren bereits im 19. Jahrhundert Pioniere kleiner Ratenpläne, doch massentauglich wurde das Modell mit dem Automobil: 1919 gründete General Motors die General Motors Acceptance Corporation (GMAC) speziell, um Händlern die Finanzierung ihres Lagerbestands und Kunden den Autokauf per Ratenzahlung statt vollständiger Vorauszahlung zu ermöglichen. Der Ansatz setzte sich schnell durch – bis 1930 wurden die meisten langlebigen Güter in den USA, darunter mehr als zwei Drittel aller verkauften Automobile, auf irgendeine Form von Ratenkredit gekauft –, und Kreditgeber weiteten dieselbe Struktur aus fester Rate und Tilgung bald auf Möbel, Haushaltsgeräte, Ausbildung und allgemeine Privatkredite aus."
           },
           "modernDevelopments": {
-            "title": "Vom Finanzierungsbüro beim Händler zur sofortigen Online-Zusage",
-            "paragraph": "Den größten Teil des 20. Jahrhunderts bedeutete die Aufnahme eines Privat- oder Autokredits einen Besuch bei einer Bank, Genossenschaftsbank oder Händlerfinanzierung und einen Papierantrag. Online-Peer-to-Peer- und Marktplatz-Kreditgeber, die Mitte der 2000er-Jahre entstanden, gehörten zu den Ersten, die es Kreditnehmern erlaubten, vollständig online einen Privatkredit zu beantragen und eine Entscheidung zu erhalten, und dieses Modell ist inzwischen Mainstream geworden: Viele Banken, Genossenschaftsbanken und Autohändler bieten heute eine sofortige oder taggleiche automatisierte Zusage, indem sie im Moment der Antragstellung eine Bonitätsauskunft einholen und die Kreditprüfung durchführen – ein Prozess, der früher Tage dauerte, komprimiert auf wenige Minuten."
+            "title": "Vom Kreditsachbearbeiter zur sofortigen Online-Zusage",
+            "paragraph": "Den größten Teil des 20. Jahrhunderts bedeutete die Aufnahme eines Ratenkredits einen Besuch bei einer Bank, Genossenschaftsbank oder Händlerfinanzierung und einen Papierantrag. Online-Peer-to-Peer- und Marktplatz-Kreditgeber, die Mitte der 2000er-Jahre entstanden, gehörten zu den Ersten, die es Kreditnehmern erlaubten, vollständig online einen Kredit zu beantragen und eine Entscheidung zu erhalten, und dieses Modell ist inzwischen Mainstream geworden: Viele Banken, Genossenschaftsbanken und Händler bieten heute eine sofortige oder taggleiche automatisierte Zusage, indem sie im Moment der Antragstellung eine Bonitätsauskunft einholen und die Kreditprüfung durchführen – ein Prozess, der früher Tage dauerte, komprimiert auf wenige Minuten."
           },
           "academicPath": {
             "title": "Akademischer Werdegang",
@@ -2995,7 +2993,7 @@
         "references": {
           "title": "Wissenschaftliche Quellen",
           "citation": "Shay, R. P. (1964). The Price of New Automobile Financing. The Journal of Finance, 19(2), 205–210.",
-          "note": "Eine frühe wissenschaftliche Studie darüber, wie Zinssätze für Autofinanzierungen tatsächlich bepreist wurden, veröffentlicht nicht lange nachdem das von Unternehmen wie GMAC eingeführte Ratenkreditmodell zur vorherrschenden Art geworden war, wie Amerikaner einen Autokauf finanzierten.",
+          "note": "Eine frühe wissenschaftliche Studie darüber, wie Zinssätze für Ratenkredite in der Praxis tatsächlich bepreist wurden, mit Autokrediten – damals das verbreitetste Beispiel des von Unternehmen wie GMAC eingeführten Modells – als empirischem Fallbeispiel; die untersuchte Tilgungsmathematik ist dieselbe, die dieser Rechner auf jeden Ratenkredit anwendet.",
           "url": "https://doi.org/10.1111/j.1540-6261.1964.tb00764.x",
           "readOriginal": "Originalartikel lesen"
         }
@@ -6885,8 +6883,8 @@
       },
       {
         "slug": "loan-calculator",
-        "name": "Privat- & Autokreditrechner",
-        "bestFor": "Finanzierung eines Autos oder eines kurzfristigeren Privatkredits",
+        "name": "Kreditrechner",
+        "bestFor": "Jeden allgemeinen Ratenkredit mit festem Zinssatz",
         "question": "Wie hoch wird meine monatliche Rate sein, und wie viel Zinsen zahle ich insgesamt?",
         "keyInputs": "Darlehensbetrag, Zinssatz, Laufzeit",
         "output": "Monatsrate, Gesamtzinsen, Tilgungsplan"
@@ -6903,11 +6901,11 @@
     "guidance": [
       {
         "title": "Sie kaufen ein Haus?",
-        "body": "Nutzen Sie den Hypothekenrechner. Er ist der Einzige der drei, der um immobilienspezifische Details wie Anzahlung, Grundsteuer, Wohngebäudeversicherung und private Kreditausfallversicherung (PMI) herum aufgebaut ist – keiner davon gilt für einen Privat- oder Autokredit."
+        "body": "Nutzen Sie den Hypothekenrechner. Er ist der Einzige der drei, der um immobilienspezifische Details wie Anzahlung, Grundsteuer, Wohngebäudeversicherung und private Kreditausfallversicherung (PMI) herum aufgebaut ist – keiner davon gilt für einen allgemeinen Ratenkredit."
       },
       {
-        "title": "Sie finanzieren ein Auto oder eine private Ausgabe?",
-        "body": "Nutzen Sie den Privat- & Autokreditrechner. Er ist ein einfacherer, allgemeiner Tilgungsrechner ohne die immobilienspezifischen Felder, die eine Hypothek benötigt."
+        "title": "Sie finanzieren ein Auto, eine Ausbildung oder etwas anderes?",
+        "body": "Nutzen Sie den Kreditrechner. Er ist ein einfacherer, allgemeiner Tilgungsrechner für jeden Ratenkredit mit festem Zinssatz, ohne die immobilienspezifischen Felder, die eine Hypothek benötigt."
       },
       {
         "title": "Sie sparen oder investieren Geld, statt es zu leihen?",
