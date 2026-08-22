@@ -32,7 +32,7 @@ export default function Stats() {
   ];
 
   return (
-    <div className="grid w-full grid-cols-2 gap-4">
+    <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-4">
       {stats.map((item) => (
         <div
           key={item.label}

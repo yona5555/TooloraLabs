@@ -23,12 +23,15 @@ export default function Hero() {
           </div>
           <div className="flex min-w-0 flex-col gap-8">
             <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
-            <Stats />
             <TrustBar />
           </div>
         </div>
 
         <HeroCategories />
+
+        <div className="mt-10 w-full max-w-6xl">
+          <Stats />
+        </div>
       </div>
     </section>
   );
