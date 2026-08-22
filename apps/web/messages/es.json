@@ -3281,6 +3281,163 @@
         }
       }
     },
+    "house-affordability-calculator": {
+      "title": "Calculadora de Accesibilidad de Vivienda",
+      "description": "Estima el precio máximo de vivienda que puedes permitirte según tus ingresos, deudas existentes, pago inicial y condiciones del préstamo, usando la regla estándar de accesibilidad 28/36.",
+      "aboveFold": {
+        "inputTitle": "Tus finanzas",
+        "resultTitle": "Cuánta vivienda puedes permitirte",
+        "maxHomePriceLabel": "Precio máximo de vivienda",
+        "loanAmountLabel": "Monto del préstamo",
+        "monthlyPaymentLabel": "Pago mensual",
+        "monthlyPrincipalAndInterestLabel": "Capital e intereses",
+        "monthlyPropertyTaxLabel": "Impuesto predial",
+        "placeholder": "Introduce tus ingresos, deudas, pago inicial y condiciones del préstamo para ver el precio máximo de vivienda que puedes permitirte.",
+        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no una preaprobación hipotecaria, una oferta de préstamo ni asesoramiento financiero. Los prestamistas aplican sus propias reglas de suscripción, que pueden diferir de la regla 28/36 usada aquí, y el monto realmente aprobado depende de tu perfil de crédito completo y los requisitos del prestamista. Consulta a un prestamista hipotecario autorizado o a un asesor financiero antes de buscar vivienda o solicitar un préstamo."
+      },
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "annualIncomeLabel": "Ingreso anual bruto",
+        "annualIncomePlaceholder": "p. ej. 90.000",
+        "monthlyDebtsLabel": "Otras deudas mensuales",
+        "monthlyDebtsHint": "Préstamos de auto, préstamos estudiantiles, tarjetas de crédito y cualquier otra deuda recurrente, sin incluir el nuevo préstamo de vivienda.",
+        "monthlyDebtsPlaceholder": "p. ej. 400",
+        "downPaymentLabel": "Pago inicial",
+        "downPaymentPlaceholder": "p. ej. 40.000",
+        "interestRateLabel": "Tasa de interés anual (%)",
+        "interestRatePlaceholder": "p. ej. 6,5",
+        "loanTermLabel": "Plazo del préstamo (años)",
+        "loanTermPlaceholder": "p. ej. 30",
+        "propertyTaxRateLabel": "Tasa de impuesto predial (%)",
+        "propertyTaxRateHint": "Impuesto predial anual como porcentaje del precio de la vivienda; varía mucho según la ubicación, así que consulta tu tasa local.",
+        "propertyTaxRatePlaceholder": "p. ej. 1,2",
+        "annualHomeInsuranceLabel": "Seguro de vivienda anual",
+        "annualHomeInsurancePlaceholder": "p. ej. 1.500",
+        "monthlyHOALabel": "Cuota mensual de comunidad",
+        "monthlyHOAHint": "Cuotas de la asociación de propietarios, si las hay. Introduce 0 si no aplica.",
+        "monthlyHOAPlaceholder": "p. ej. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta calculadora",
+          "paragraph1": "Esta herramienta aplica la regla 28/36, una pauta de préstamo muy utilizada: tu costo mensual total de vivienda —capital, intereses, impuesto predial, seguro de vivienda y cuotas de comunidad, conocidos en conjunto como PITI— generalmente no debería superar el 28 % de tu ingreso mensual bruto, y tu deuda mensual total, incluido ese costo de vivienda, generalmente no debería superar el 36 %. La calculadora toma el más bajo de estos dos límites como tu presupuesto de vivienda y luego trabaja hacia atrás a través del cálculo del préstamo y del impuesto predial —teniendo en cuenta que una vivienda más cara también implica un impuesto más alto— para encontrar el precio de vivienda más alto que ese presupuesto puede sostener.",
+          "paragraph2": "La regla 28/36 es un punto de partida ampliamente usado, no un límite universal. Los prestamistas reales fijan sus propios límites, que pueden ser más altos para prestatarios muy calificados o para ciertos programas de préstamo, y más bajos para otros. Usa esta estimación para entender aproximadamente dónde se sitúa tu presupuesto antes de empezar a buscar vivienda o hablar con un prestamista, no como una garantía de aprobación del préstamo."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Tres escenarios de hogares muestran cómo se combinan ingresos, deudas y condiciones del préstamo para determinar un precio máximo de vivienda.",
+          "columnScenario": "Escenario",
+          "columnMaxHomePrice": "Precio máx. de vivienda",
+          "columnMonthlyPayment": "Pago mensual",
+          "rows": [
+            {
+              "scenario": "Ingreso de 90.000 $, deudas de 400 $/mes, pago inicial de 40.000 $, tasa del 6,5 %, plazo de 30 años",
+              "maxHomePrice": "304.320 $",
+              "monthlyPayment": "2.100 $"
+            },
+            {
+              "scenario": "Ingreso de 120.000 $, deudas de 600 $/mes, pago inicial de 60.000 $, tasa del 7 %, plazo de 30 años, cuota de comunidad de 50 $/mes",
+              "maxHomePrice": "379.498 $",
+              "monthlyPayment": "2.800 $"
+            },
+            {
+              "scenario": "Ingreso de 60.000 $, deudas de 1.200 $/mes, pago inicial de 20.000 $, tasa del 6 %, plazo de 30 años",
+              "maxHomePrice": "90.778 $",
+              "monthlyPayment": "600 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Qué es la regla 28/36?",
+              "answer": "Es una pauta de préstamo común según la cual tus costos mensuales de vivienda (capital, intereses, impuesto predial, seguro y cuotas de comunidad) generalmente no deberían superar el 28 % de tu ingreso mensual bruto, y tus pagos de deuda mensuales totales —vivienda incluida— generalmente no deberían superar el 36 %. Esta calculadora usa el más bajo de los dos límites como tu presupuesto de vivienda efectivo."
+            },
+            {
+              "question": "¿Por qué mis deudas mensuales existentes redujeron el precio de vivienda que puedo permitirme?",
+              "answer": "El límite del 36 % cubre toda tu deuda, no solo la vivienda. Si ya tienes 1.200 $ al mes en pagos de auto, préstamos estudiantiles o mínimos de tarjeta de crédito, queda menos margen en tu presupuesto del 36 % para una cuota hipotecaria, lo que reduce el precio máximo de vivienda que la calculadora puede sostener, incluso si tu límite del 28 % solo para vivienda permitiría más."
+            },
+            {
+              "question": "¿Por qué el impuesto predial afecta el precio máximo de vivienda y no solo el pago mensual?",
+              "answer": "Porque el impuesto predial se calcula como un porcentaje del precio de la vivienda, una vivienda más cara también cuesta más en impuestos, además de en pagos del préstamo. Esta calculadora resuelve ambos a la vez, de modo que el precio máximo de vivienda que devuelve es exactamente aquel en el que capital, intereses, impuesto, seguro y cuotas de comunidad juntos agotan todo tu presupuesto de vivienda, no una estimación que ignore ese ciclo de retroalimentación fiscal."
+            },
+            {
+              "question": "¿Debería gastar realmente hasta el máximo que muestra esta calculadora?",
+              "answer": "No necesariamente. Se trata de un límite basado en una pauta de préstamo, no de una recomendación personal. Muchos compradores eligen gastar menos que su monto máximo aprobado para dejar margen en su presupuesto mensual para mantenimiento, amueblado, ahorro y costos imprevistos que no forman parte de una cuota hipotecaria."
+            },
+            {
+              "question": "¿Esto incluye los costos de cierre o una prima de seguro hipotecario?",
+              "answer": "No. Los costos de cierre (generalmente pagados por adelantado, aparte del pago inicial) y el seguro hipotecario privado (a menudo exigido cuando el pago inicial es inferior al 20 % del precio de la vivienda) quedan fuera de este cálculo, ya que varían según el prestamista, la ubicación y el programa de préstamo. Presupuesta ambos por separado antes de determinar qué vivienda puedes permitirte realmente."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De reglas empíricas de suscripción a una pauta estándar",
+            "paragraph": "Los prestamistas llevan mucho tiempo usando reglas empíricas basadas en el ingreso para juzgar cuán grande puede ser una hipoteca que un prestatario puede sostener con seguridad, pero los umbrales específicos del 28 % y el 36 % usados aquí se remontan a las pautas de suscripción popularizadas por entidades hipotecarias respaldadas por el gobierno de EE. UU. a mediados del siglo XX, a medida que el mercado hipotecario crecía y se estandarizaba. A medida que el crédito hipotecario pasó de decisiones locales y puntuales a una suscripción a gran escala basada en reglas, ratios como estos se convirtieron en un atajo común, no porque tengan un valor matemático especial, sino porque ofrecían a los prestamistas, y con el tiempo a los propios compradores, una forma sencilla y repetible de estimar un rango de endeudamiento seguro antes de presentar siquiera una solicitud completa."
+          },
+          "modernDevelopments": {
+            "title": "De las pautas del oficial de préstamos a la pantalla del comprador",
+            "paragraph": "Durante décadas, la regla 28/36 fue una guía interna de suscripción, aplicada por un oficial de préstamos durante una solicitud formal, en lugar de algo que un comprador potencial pudiera comprobar por sí mismo de antemano. La difusión de las calculadoras hipotecarias y de accesibilidad en línea trasladó ese mismo cálculo a la pantalla del comprador, permitiendo a cualquiera estimar aproximadamente qué podría aprobar un prestamista antes de presentar una solicitud, un paso de autoservicio que se ha convertido en una parte temprana habitual de la búsqueda de vivienda, aunque es la propia suscripción del prestamista, y no esta ni ninguna otra calculadora, la que toma la decisión final."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Las matemáticas de ratio de ingresos y valor del dinero en el tiempo detrás de esta calculadora se ubican dentro de las finanzas inmobiliarias, una especialización dentro del campo más amplio de las finanzas que cubren las demás calculadoras de vivienda y préstamos de este sitio. Estas son las 5 mejores instituciones del mundo en Contabilidad y Finanzas según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Clasificada n.º 1 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Mayormente en línea: la Harvard Extension School indica que 11 de los 12 cursos requeridos para su título de posgrado en Finanzas pueden completarse en línea, con al menos un curso que requiere asistencia al campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificado n.º 2 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No: el Master of Finance de MIT Sloan es un programa presencial a tiempo completo (de 12 o 18 meses), sin opción de educación a distancia indicada en sus páginas oficiales."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada n.º 3 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No: la formación en finanzas de Stanford GSB se imparte a través de su MBA presencial; la propia página de programas en línea de la escuela solo enumera cursos ejecutivos sin título, no un título completo de finanzas."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada n.º 4 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "No totalmente en línea: el MSc in Financial Economics de Oxford es un programa presencial a tiempo completo de 9 meses; un nuevo «MSc in Applied Financial Economics» a tiempo parcial (desde septiembre de 2026) combina aprendizaje en línea con estancias presenciales obligatorias en Oxford, por lo que tampoco es una opción solo a distancia."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Clasificada n.º 5 mundial en Contabilidad y Finanzas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No: el Master in Finance de Chicago Booth es un programa presencial de 15 meses cuya primera promoción comenzó en otoño de 2024."
+              },
+              {
+                "name": "American University of Sharjah (AUS) — Department of Finance",
+                "note": "Una escuela de negocios regional destacada del mundo árabe, acreditada por la AACSB desde 2011, cuyo programa de finanzas es el primer programa asociado del CFA Institute en la región.",
+                "url": "https://www.aus.edu/sba/department-of-finance",
+                "online": "La página oficial del programa no indica una modalidad totalmente en línea; el programa de finanzas de la AUS se imparte principalmente en el campus de Sharjah, Emiratos Árabes Unidos."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Hulchanski, J. D. (1995). The concept of housing affordability: Six contemporary uses of the housing expenditure-to-income ratio. Housing Studies, 10(4), 471–491.",
+          "note": "Un artículo fundacional y ampliamente citado que examina cómo las medidas basadas en ratios de ingreso, como la que usa esta calculadora, y sus limitaciones, llegaron a usarse como atajo para medir la accesibilidad de la vivienda; un contexto útil para tratar una estimación basada en ratios como esta como un punto de partida, no como una medida precisa de lo que un hogar puede sostener realmente.",
+          "url": "https://doi.org/10.1080/02673039508720833",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Conversor de husos horarios",
       "description": "Convierte la hora entre dos ciudades cualesquiera del mundo, consulta un reloj mundial en directo para las principales zonas horarias y encuentra las mejores horas de reunión que coincidan.",

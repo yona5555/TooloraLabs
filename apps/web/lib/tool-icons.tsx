@@ -14,6 +14,7 @@ import {
   HandCoins,
   HardDrive,
   Home,
+  House,
   Image,
   KeyRound,
   Landmark,
@@ -69,6 +70,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "loan-calculator": Landmark,
   "affordable-loan-calculator": Wallet,
   "retirement-calculator": PiggyBank,
+  "house-affordability-calculator": House,
   "world-time-converter": Clock,
 };
 

@@ -104,6 +104,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "house-affordability-calculator",
+    title: "House Affordability Calculator",
+    category: "calculators",
+    description:
+      "Estimate the maximum home price you can afford based on your income, existing debts, down payment, and loan terms, using the standard 28/36 affordability rule.",
+    featured: false,
+    keywords: [
+      "house affordability calculator",
+      "home affordability calculator",
+      "how much house can I afford",
+      "28/36 rule",
+      "mortgage affordability",
+    ],
+  },
+  {
     slug: "weather-forecast",
     title: "Weather Forecast",
     category: "calculators",

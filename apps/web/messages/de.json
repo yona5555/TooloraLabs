@@ -3281,6 +3281,163 @@
         }
       }
     },
+    "house-affordability-calculator": {
+      "title": "Immobilien-Erschwinglichkeitsrechner",
+      "description": "Schätzen Sie den maximalen Immobilienpreis, den Sie sich anhand Ihres Einkommens, bestehender Schulden, der Anzahlung und der Kreditbedingungen leisten können, mit der gängigen 28/36-Erschwinglichkeitsregel.",
+      "aboveFold": {
+        "inputTitle": "Ihre Finanzen",
+        "resultTitle": "Wie viel Haus Sie sich leisten können",
+        "maxHomePriceLabel": "Maximaler Immobilienpreis",
+        "loanAmountLabel": "Kreditbetrag",
+        "monthlyPaymentLabel": "Monatliche Rate",
+        "monthlyPrincipalAndInterestLabel": "Tilgung & Zinsen",
+        "monthlyPropertyTaxLabel": "Grundsteuer",
+        "placeholder": "Geben Sie Ihr Einkommen, Ihre Schulden, Ihre Anzahlung und die Kreditbedingungen ein, um den maximalen Immobilienpreis zu sehen, den Sie sich leisten können.",
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine Hypotheken-Vorabgenehmigung, kein Kreditangebot und keine Finanzberatung. Kreditgeber wenden eigene Vergaberichtlinien an, die von der hier verwendeten 28/36-Regel abweichen können, und Ihr tatsächlich genehmigter Betrag hängt von Ihrem vollständigen Bonitätsprofil und den Anforderungen des Kreditgebers ab. Wenden Sie sich vor der Haussuche oder einer Kreditbeantragung an einen zugelassenen Hypothekenkreditgeber oder Finanzberater."
+      },
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrundwissen"
+      },
+      "form": {
+        "annualIncomeLabel": "Bruttojahreseinkommen",
+        "annualIncomePlaceholder": "z. B. 90.000",
+        "monthlyDebtsLabel": "Sonstige monatliche Schuldenzahlungen",
+        "monthlyDebtsHint": "Autokredite, Studienkredite, Kreditkarten und alle anderen wiederkehrenden Schulden – ohne den neuen Immobilienkredit.",
+        "monthlyDebtsPlaceholder": "z. B. 400",
+        "downPaymentLabel": "Anzahlung",
+        "downPaymentPlaceholder": "z. B. 40.000",
+        "interestRateLabel": "Jährlicher Zinssatz (%)",
+        "interestRatePlaceholder": "z. B. 6,5",
+        "loanTermLabel": "Laufzeit (Jahre)",
+        "loanTermPlaceholder": "z. B. 30",
+        "propertyTaxRateLabel": "Grundsteuersatz (%)",
+        "propertyTaxRateHint": "Jährliche Grundsteuer als Prozentsatz des Immobilienpreises; dieser Wert variiert stark je nach Standort, prüfen Sie daher Ihren lokalen Satz.",
+        "propertyTaxRatePlaceholder": "z. B. 1,2",
+        "annualHomeInsuranceLabel": "Jährliche Wohngebäudeversicherung",
+        "annualHomeInsurancePlaceholder": "z. B. 1.500",
+        "monthlyHOALabel": "Monatliches Hausgeld",
+        "monthlyHOAHint": "Gebühren einer Eigentümergemeinschaft, falls vorhanden. Geben Sie 0 ein, falls nicht zutreffend.",
+        "monthlyHOAPlaceholder": "z. B. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieser Rechner",
+          "paragraph1": "Dieses Tool wendet die 28/36-Regel an, eine weit verbreitete Kreditvergaberichtlinie: Ihre monatlichen Gesamtwohnkosten – Tilgung, Zinsen, Grundsteuer, Wohngebäudeversicherung und Hausgeld, zusammen als PITI bezeichnet – sollten in der Regel 28 % Ihres monatlichen Bruttoeinkommens nicht überschreiten, und Ihre gesamten monatlichen Schuldenzahlungen einschließlich dieser Wohnkosten sollten in der Regel 36 % nicht überschreiten. Der Rechner verwendet die niedrigere dieser beiden Grenzen als Ihr Wohnbudget und rechnet dann rückwärts durch die Kredittilgungs- und Grundsteuerrechnung – unter Berücksichtigung der Tatsache, dass ein höherer Immobilienpreis auch eine höhere Steuer bedeutet –, um den höchsten Immobilienpreis zu ermitteln, den dieses Budget tragen kann.",
+          "paragraph2": "Die 28/36-Regel ist ein weit verbreiteter Ausgangspunkt, keine universelle Obergrenze. Tatsächliche Kreditgeber legen ihre eigenen Grenzen fest, die für gut qualifizierte Kreditnehmer oder bestimmte Kreditprogramme höher und für andere niedriger ausfallen können. Nutzen Sie diese Schätzung, um ungefähr einzuschätzen, wo Ihr Budget liegt, bevor Sie mit der Haussuche beginnen oder mit einem Kreditgeber sprechen, nicht als Garantie für eine Kreditgenehmigung."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Drei Haushaltsszenarien zeigen, wie sich Einkommen, Schulden und Kreditbedingungen zu einem maximalen Immobilienpreis zusammenfügen.",
+          "columnScenario": "Szenario",
+          "columnMaxHomePrice": "Max. Immobilienpreis",
+          "columnMonthlyPayment": "Monatliche Rate",
+          "rows": [
+            {
+              "scenario": "90.000 $ Einkommen, 400 $/Monat Schulden, 40.000 $ Anzahlung, 6,5% Zinssatz, 30 Jahre Laufzeit",
+              "maxHomePrice": "304.320 $",
+              "monthlyPayment": "2.100 $"
+            },
+            {
+              "scenario": "120.000 $ Einkommen, 600 $/Monat Schulden, 60.000 $ Anzahlung, 7% Zinssatz, 30 Jahre Laufzeit, 50 $/Monat Hausgeld",
+              "maxHomePrice": "379.498 $",
+              "monthlyPayment": "2.800 $"
+            },
+            {
+              "scenario": "60.000 $ Einkommen, 1.200 $/Monat Schulden, 20.000 $ Anzahlung, 6% Zinssatz, 30 Jahre Laufzeit",
+              "maxHomePrice": "90.778 $",
+              "monthlyPayment": "600 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Was ist die 28/36-Regel?",
+              "answer": "Es handelt sich um eine gängige Kreditvergaberichtlinie, wonach Ihre monatlichen Wohnkosten (Tilgung, Zinsen, Grundsteuer, Versicherung und Hausgeld) in der Regel 28 % Ihres monatlichen Bruttoeinkommens nicht überschreiten sollten und Ihre gesamten monatlichen Schuldenzahlungen – Wohnkosten plus alles Übrige – in der Regel 36 % nicht überschreiten sollten. Dieser Rechner verwendet die niedrigere der beiden Grenzen als Ihr effektives Wohnbudget."
+            },
+            {
+              "question": "Warum haben meine bestehenden monatlichen Schulden den für mich erschwinglichen Immobilienpreis gesenkt?",
+              "answer": "Die 36%-Obergrenze umfasst alle Ihre Schulden, nicht nur die Wohnkosten. Wenn Sie bereits 1.200 $ pro Monat für Autoraten, Studienkredite oder Kreditkarten-Mindestzahlungen aufwenden, bleibt weniger von Ihrem 36%-Budget für eine Hypothekenrate übrig, was den maximal berechenbaren Immobilienpreis senkt – selbst wenn Ihre reine 28%-Wohnkostengrenze mehr zulassen würde."
+            },
+            {
+              "question": "Warum beeinflusst die Grundsteuer den maximalen Immobilienpreis und nicht nur die monatliche Rate?",
+              "answer": "Da die Grundsteuer als Prozentsatz des Immobilienpreises berechnet wird, kostet eine teurere Immobilie auch mehr an Steuer, zusätzlich zu den Kreditraten. Dieser Rechner löst beides gleichzeitig, sodass der zurückgegebene maximale Immobilienpreis genau der Preis ist, bei dem Tilgung, Zinsen, Steuer, Versicherung und Hausgeld gemeinsam Ihr gesamtes Wohnbudget ausschöpfen – keine Schätzung, die diese steuerliche Rückkopplung ignoriert."
+            },
+            {
+              "question": "Sollte ich tatsächlich bis zum von diesem Rechner angezeigten Maximum ausgeben?",
+              "answer": "Nicht unbedingt. Dies ist eine Obergrenze aus einer Kreditvergaberichtlinie, keine persönliche Empfehlung. Viele Käufer entscheiden sich dafür, weniger als ihren maximal genehmigten Betrag auszugeben, um in ihrem monatlichen Budget Spielraum für Instandhaltung, Einrichtung, Ersparnisse und unerwartete Kosten zu lassen, die nicht Teil einer Hypothekenrate sind."
+            },
+            {
+              "question": "Sind Abschlusskosten oder eine Hypothekenversicherungsprämie enthalten?",
+              "answer": "Nein. Abschlusskosten (in der Regel im Voraus und getrennt von der Anzahlung zu zahlen) und private Hypothekenversicherung (oft erforderlich, wenn die Anzahlung unter 20 % des Immobilienpreises liegt) sind beide nicht in dieser Berechnung enthalten, da sie je nach Kreditgeber, Standort und Kreditprogramm variieren. Planen Sie für beide separat ein Budget ein, bevor Sie endgültig festlegen, welche Immobilie Sie sich tatsächlich leisten können."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrundwissen zu diesem Tool",
+          "history": {
+            "title": "Von Faustregeln der Kreditvergabe zu einer Standardrichtlinie",
+            "paragraph": "Kreditgeber verwenden seit Langem einkommensbasierte Faustregeln, um zu beurteilen, wie groß eine Hypothek sein darf, die ein Kreditnehmer sicher tragen kann. Die hier verwendeten konkreten Schwellenwerte von 28 % und 36 % gehen jedoch auf Vergaberichtlinien zurück, die von staatlich geförderten US-Hypothekeninstituten Mitte des 20. Jahrhunderts populär gemacht wurden, als der Hypothekenmarkt größer und stärker standardisiert wurde. Als sich die Hypothekenvergabe von kleinen, lokalen Entscheidungen zu einer regelbasierten Vergabe im großen Maßstab wandelte, wurden Kennzahlen wie diese zu einer gängigen Abkürzung – nicht weil sie einen besonderen mathematischen Wert hätten, sondern weil sie Kreditgebern und schließlich den Käufern selbst eine einfache, wiederholbare Möglichkeit boten, einen sicheren Kreditrahmen abzuschätzen, noch bevor ein vollständiger Antrag gestellt wurde."
+          },
+          "modernDevelopments": {
+            "title": "Von den Richtlinien des Kreditsachbearbeiters zum eigenen Bildschirm des Käufers",
+            "paragraph": "Jahrzehntelang war die 28/36-Regel eine interne Vergaberichtlinie, die von einem Kreditsachbearbeiter während eines förmlichen Antrags angewendet wurde, statt etwas, das ein potenzieller Käufer im Voraus selbst prüfen konnte. Die Verbreitung von Online-Hypotheken- und Erschwinglichkeitsrechnern brachte dieselbe Berechnung vor den Käufer und ermöglichte es jedem, grob abzuschätzen, was ein Kreditgeber genehmigen könnte, bevor überhaupt ein Antrag eingereicht wird – ein Selbstbedienungsschritt, der zu einem üblichen frühen Teil der Haussuche geworden ist, auch wenn die endgültige Entscheidung von der eigenen Kreditvergabe des Kreditgebers getroffen wird, nicht von diesem oder einem anderen Rechner."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Einkommensverhältnis- und Zeitwertrechnung hinter diesem Rechner gehört zur Immobilienfinanzierung, einer Spezialisierung innerhalb des breiteren Fachgebiets Finanzwissenschaft, das auch die anderen Wohn- und Kreditrechner dieser Website abdecken. Hier sind die 5 weltweit führenden Institutionen für Rechnungswesen & Finanzen im QS World University Rankings by Subject 2025 sowie eine regionale Option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Größtenteils online — die Harvard Extension School gibt an, dass 11 der 12 erforderlichen Kurse für ihren Finance-Abschluss online absolviert werden können, wobei mindestens ein Kurs eine Anwesenheit auf dem Campus erfordert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Nein — der Master of Finance der MIT Sloan ist ein Vollzeit-Präsenzprogramm (12- oder 18-monatige Tracks) ohne Fernstudienoption auf den offiziellen Seiten."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 3 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Nein — die Finanzausbildung der Stanford GSB erfolgt über ihren Präsenz-MBA; die eigene Online-Programmseite der Schule listet nur nicht-abschlussbezogene Executive-Kurse, keinen vollständigen Finanzabschluss."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 4 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Nicht vollständig online — Oxfords MSc in Financial Economics ist ein neunmonatiges Vollzeit-Präsenzprogramm; ein neuer Teilzeit-„MSc in Applied Financial Economics“ (ab September 2026) kombiniert Online-Lernen mit verpflichtenden Präsenzaufenthalten in Oxford und ist somit ebenfalls keine reine Fernstudienoption."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Weltweit auf Platz 5 in Rechnungswesen & Finanzen (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Nein — der Master in Finance der Chicago Booth ist ein 15-monatiges Präsenzprogramm, dessen erster Jahrgang im Herbst 2024 begann."
+              },
+              {
+                "name": "American University of Sharjah (AUS) — Department of Finance",
+                "note": "Eine führende regionale Business School in der arabischen Welt, seit 2011 AACSB-akkreditiert, deren Finance-Programm das erste CFA-Institute-Partnerprogramm der Region ist.",
+                "url": "https://www.aus.edu/sba/department-of-finance",
+                "online": "Auf der offiziellen Programmseite wird keine vollständig online verfügbare Studienform angegeben; das Finance-Programm der AUS findet hauptsächlich auf dem Campus in Sharjah, Vereinigte Arabische Emirate, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Hulchanski, J. D. (1995). The concept of housing affordability: Six contemporary uses of the housing expenditure-to-income ratio. Housing Studies, 10(4), 471–491.",
+          "note": "Ein grundlegender, häufig zitierter Aufsatz, der untersucht, wie einkommensbasierte Kennzahlen wie die von diesem Rechner verwendete — und ihre Grenzen — zu einer gängigen Abkürzung für die Erschwinglichkeit von Wohnraum wurden; ein hilfreicher Kontext, um eine kennzahlenbasierte Schätzung wie diese als Ausgangspunkt zu behandeln und nicht als exaktes Maß dafür, was ein Haushalt tatsächlich tragen kann.",
+          "url": "https://doi.org/10.1080/02673039508720833",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Weltzeit-Umrechner",
       "description": "Rechnen Sie die Uhrzeit zwischen zwei beliebigen Städten weltweit um, sehen Sie eine Live-Weltuhr für wichtige Zeitzonen und finden Sie die besten überschneidenden Besprechungszeiten.",

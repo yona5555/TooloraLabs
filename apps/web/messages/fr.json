@@ -3281,6 +3281,163 @@
         }
       }
     },
+    "house-affordability-calculator": {
+      "title": "Calculateur d'accessibilité immobilière",
+      "description": "Estimez le prix maximal du logement que vous pouvez vous permettre selon vos revenus, vos dettes existantes, votre acompte et les conditions du prêt, à l'aide de la règle standard d'accessibilité 28/36.",
+      "aboveFold": {
+        "inputTitle": "Vos finances",
+        "resultTitle": "Quel logement vous pouvez vous permettre",
+        "maxHomePriceLabel": "Prix maximal du logement",
+        "loanAmountLabel": "Montant du prêt",
+        "monthlyPaymentLabel": "Mensualité",
+        "monthlyPrincipalAndInterestLabel": "Capital et intérêts",
+        "monthlyPropertyTaxLabel": "Taxe foncière",
+        "placeholder": "Saisissez vos revenus, vos dettes, votre acompte et les conditions du prêt pour voir le prix maximal du logement que vous pouvez vous permettre.",
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une préapprobation hypothécaire, une offre de prêt ni un conseil financier. Les prêteurs appliquent leurs propres règles de souscription, qui peuvent différer de la règle 28/36 utilisée ici, et le montant réellement approuvé dépend de votre profil de crédit complet et des exigences du prêteur. Consultez un prêteur hypothécaire agréé ou un conseiller financier avant de chercher un logement ou de solliciter un prêt."
+      },
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "annualIncomeLabel": "Revenu annuel brut",
+        "annualIncomePlaceholder": "ex. 90 000",
+        "monthlyDebtsLabel": "Autres dettes mensuelles",
+        "monthlyDebtsHint": "Prêts auto, prêts étudiants, cartes de crédit et toute autre dette récurrente — hors nouveau prêt immobilier.",
+        "monthlyDebtsPlaceholder": "ex. 400",
+        "downPaymentLabel": "Acompte",
+        "downPaymentPlaceholder": "ex. 40 000",
+        "interestRateLabel": "Taux d'intérêt annuel (%)",
+        "interestRatePlaceholder": "ex. 6,5",
+        "loanTermLabel": "Durée du prêt (années)",
+        "loanTermPlaceholder": "ex. 30",
+        "propertyTaxRateLabel": "Taux de taxe foncière (%)",
+        "propertyTaxRateHint": "Taxe foncière annuelle exprimée en pourcentage du prix du logement ; ce taux varie fortement selon la localisation, vérifiez le taux local.",
+        "propertyTaxRatePlaceholder": "ex. 1,2",
+        "annualHomeInsuranceLabel": "Assurance habitation annuelle",
+        "annualHomeInsurancePlaceholder": "ex. 1 500",
+        "monthlyHOALabel": "Charges de copropriété mensuelles",
+        "monthlyHOAHint": "Frais d'association de propriétaires, le cas échéant. Saisissez 0 si non applicable.",
+        "monthlyHOAPlaceholder": "ex. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne ce calculateur",
+          "paragraph1": "Cet outil applique la règle 28/36, une directive de prêt largement utilisée : votre coût de logement mensuel total — capital, intérêts, taxe foncière, assurance habitation et charges de copropriété, regroupés sous le sigle PITI — ne devrait généralement pas dépasser 28 % de votre revenu mensuel brut, et votre endettement mensuel total, ce coût de logement inclus, ne devrait généralement pas dépasser 36 %. Le calculateur retient la plus basse de ces deux limites comme budget logement, puis remonte le calcul du prêt et de la taxe foncière — en tenant compte du fait qu'un logement plus cher entraîne aussi une taxe plus élevée — pour déterminer le prix de logement le plus élevé que ce budget peut soutenir.",
+          "paragraph2": "La règle 28/36 est un point de départ largement utilisé, pas un seuil universel. Les prêteurs réels fixent leurs propres limites, parfois plus élevées pour les emprunteurs très solvables ou certains programmes de prêt, et parfois plus basses pour d'autres. Utilisez cette estimation pour situer approximativement votre budget avant de chercher un logement ou de contacter un prêteur, non comme une garantie d'approbation du prêt."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Trois scénarios de ménages montrent comment revenus, dettes et conditions de prêt se combinent pour déterminer un prix de logement maximal.",
+          "columnScenario": "Scénario",
+          "columnMaxHomePrice": "Prix max. du logement",
+          "columnMonthlyPayment": "Mensualité",
+          "rows": [
+            {
+              "scenario": "Revenu de 90 000 $, dettes de 400 $/mois, acompte de 40 000 $, taux de 6,5 %, durée de 30 ans",
+              "maxHomePrice": "304 320 $",
+              "monthlyPayment": "2 100 $"
+            },
+            {
+              "scenario": "Revenu de 120 000 $, dettes de 600 $/mois, acompte de 60 000 $, taux de 7 %, durée de 30 ans, charges de copropriété de 50 $/mois",
+              "maxHomePrice": "379 498 $",
+              "monthlyPayment": "2 800 $"
+            },
+            {
+              "scenario": "Revenu de 60 000 $, dettes de 1 200 $/mois, acompte de 20 000 $, taux de 6 %, durée de 30 ans",
+              "maxHomePrice": "90 778 $",
+              "monthlyPayment": "600 $"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Qu'est-ce que la règle 28/36 ?",
+              "answer": "C'est une directive de prêt courante selon laquelle vos coûts de logement mensuels (capital, intérêts, taxe foncière, assurance et charges de copropriété) ne devraient généralement pas dépasser 28 % de votre revenu mensuel brut, et vos paiements de dettes mensuels totaux — logement compris — ne devraient généralement pas dépasser 36 %. Ce calculateur retient la plus basse des deux limites comme budget logement effectif."
+            },
+            {
+              "question": "Pourquoi mes dettes mensuelles existantes réduisent-elles le prix de logement que je peux me permettre ?",
+              "answer": "La limite de 36 % couvre l'ensemble de vos dettes, pas seulement le logement. Si vous avez déjà 1 200 $ par mois en paiements de voiture, prêts étudiants ou minimums de carte de crédit, il reste moins de marge dans votre budget de 36 % pour une mensualité hypothécaire, ce qui abaisse le prix de logement maximal calculé — même si votre limite de 28 % consacrée au seul logement permettrait davantage."
+            },
+            {
+              "question": "Pourquoi la taxe foncière influence-t-elle le prix maximal du logement, et pas seulement la mensualité ?",
+              "answer": "Parce que la taxe foncière est calculée en pourcentage du prix du logement, un logement plus cher coûte aussi plus cher en taxe, en plus des paiements de prêt. Ce calculateur résout les deux simultanément, de sorte que le prix maximal retourné est exactement celui auquel capital, intérêts, taxe, assurance et charges de copropriété épuisent ensemble tout votre budget logement — pas une estimation qui ignorerait cette boucle de rétroaction fiscale."
+            },
+            {
+              "question": "Dois-je vraiment dépenser jusqu'au maximum indiqué par ce calculateur ?",
+              "answer": "Pas nécessairement. Il s'agit d'un plafond issu d'une directive de prêt, pas d'une recommandation personnelle. De nombreux acheteurs choisissent de dépenser moins que leur montant maximal approuvé afin de garder une marge dans leur budget mensuel pour l'entretien, l'ameublement, l'épargne et les imprévus qui ne font pas partie d'une mensualité hypothécaire."
+            },
+            {
+              "question": "Cela inclut-il les frais de clôture ou une prime d'assurance hypothécaire ?",
+              "answer": "Non. Les frais de clôture (généralement payés d'avance, séparément de l'acompte) et l'assurance hypothécaire privée (souvent exigée lorsque l'acompte est inférieur à 20 % du prix du logement) sont tous deux exclus de ce calcul, car ils varient selon le prêteur, la localisation et le programme de prêt. Prévoyez un budget distinct pour ces deux éléments avant de déterminer le logement que vous pouvez réellement vous permettre."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Des règles empiriques de souscription à une directive standard",
+            "paragraph": "Les prêteurs utilisent depuis longtemps des règles empiriques fondées sur le revenu pour juger de l'ampleur du prêt hypothécaire qu'un emprunteur peut porter sans risque, mais les seuils précis de 28 % et 36 % utilisés ici remontent aux directives de souscription popularisées par les organismes hypothécaires parapublics américains au milieu du XXe siècle, à mesure que le marché hypothécaire gagnait en ampleur et en standardisation. Alors que le crédit hypothécaire passait de décisions locales et ponctuelles à une souscription à grande échelle fondée sur des règles, des ratios comme ceux-ci sont devenus un raccourci courant — non pas parce qu'ils ont une valeur mathématique particulière, mais parce qu'ils offraient aux prêteurs, puis aux acheteurs eux-mêmes, un moyen simple et reproductible d'estimer une fourchette d'emprunt raisonnable avant même le dépôt d'une demande complète."
+          },
+          "modernDevelopments": {
+            "title": "Des directives du conseiller prêteur à l'écran de l'acheteur",
+            "paragraph": "Pendant des décennies, la règle 28/36 est restée une consigne interne de souscription, appliquée par un conseiller prêteur lors d'une demande formelle plutôt que quelque chose qu'un acheteur potentiel pouvait vérifier lui-même à l'avance. La diffusion des calculateurs hypothécaires et d'accessibilité en ligne a transposé ce même calcul devant l'acheteur, permettant à chacun d'estimer approximativement ce qu'un prêteur pourrait approuver avant même de déposer une demande — une étape en libre-service devenue une phase précoce habituelle de la recherche d'un logement, même si c'est la souscription propre au prêteur, et non ce calculateur ni aucun autre, qui rend la décision finale."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les calculs de ratio de revenu et de valeur temporelle de l'argent derrière ce calculateur relèvent de la finance immobilière, une spécialisation au sein du domaine plus large de la finance couvert par les autres calculateurs de logement et de prêt de ce site. Voici les 5 meilleures institutions mondiales en comptabilité et finance selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 1 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Majoritairement en ligne — la Harvard Extension School indique que 11 des 12 cours requis pour son diplôme supérieur de finance peuvent être suivis en ligne, un cours au moins nécessitant une présence sur le campus."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 2 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "Non — le Master of Finance de la MIT Sloan est un programme à temps plein et en présentiel (parcours de 12 ou 18 mois), sans option d'enseignement à distance mentionnée sur ses pages officielles."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 3 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "Non — la formation en finance de la Stanford GSB est dispensée dans le cadre de son MBA en présentiel ; la page officielle des programmes en ligne de l'école ne recense que des cours exécutifs non diplômants, pas un diplôme complet de finance."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 4 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Pas entièrement en ligne — le MSc in Financial Economics d'Oxford est un programme à temps plein en présentiel de 9 mois ; un nouveau « MSc in Applied Financial Economics » à temps partiel (à partir de septembre 2026) combine apprentissage en ligne et séjours obligatoires en présentiel à Oxford, ce qui n'en fait pas non plus une option uniquement à distance."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Classée n° 5 mondial en comptabilité et finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "Non — le Master in Finance de Chicago Booth est un programme en présentiel de 15 mois, dont la première promotion a débuté à l'automne 2024."
+              },
+              {
+                "name": "American University of Sharjah (AUS) — Department of Finance",
+                "note": "Une école de commerce régionale de premier plan dans le monde arabe, accréditée AACSB depuis 2011, dont le programme de finance est le premier programme partenaire du CFA Institute de la région.",
+                "url": "https://www.aus.edu/sba/department-of-finance",
+                "online": "Aucune mention de formation entièrement en ligne sur la page officielle du programme ; le programme de finance de l'AUS se déroule principalement sur le campus de Charjah, aux Émirats arabes unis."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Hulchanski, J. D. (1995). The concept of housing affordability: Six contemporary uses of the housing expenditure-to-income ratio. Housing Studies, 10(4), 471–491.",
+          "note": "Un article fondateur et largement cité examinant comment des mesures fondées sur des ratios de revenu, comme celle utilisée par ce calculateur — ainsi que leurs limites — en sont venues à servir de raccourci pour mesurer l'accessibilité au logement, un contexte utile pour considérer une estimation fondée sur un ratio comme celle-ci comme un point de départ plutôt qu'une mesure précise de ce qu'un ménage peut réellement soutenir.",
+          "url": "https://doi.org/10.1080/02673039508720833",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "Convertisseur d'heure mondial",
       "description": "Convertissez l'heure entre deux villes n'importe où dans le monde, consultez une horloge mondiale en direct pour les principaux fuseaux horaires et trouvez les meilleurs créneaux de réunion communs.",

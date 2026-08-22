@@ -3277,6 +3277,163 @@
         }
       }
     },
+    "house-affordability-calculator": {
+      "title": "House Affordability Calculator",
+      "description": "Estimate the maximum home price you can afford based on your income, existing debts, down payment, and loan terms, using the standard 28/36 affordability rule.",
+      "aboveFold": {
+        "inputTitle": "Your Finances",
+        "resultTitle": "How Much House You Can Afford",
+        "maxHomePriceLabel": "Maximum Home Price",
+        "loanAmountLabel": "Loan Amount",
+        "monthlyPaymentLabel": "Monthly Payment",
+        "monthlyPrincipalAndInterestLabel": "Principal & Interest",
+        "monthlyPropertyTaxLabel": "Property Tax",
+        "placeholder": "Enter your income, debts, down payment, and loan terms to see the maximum home price you can afford.",
+        "disclaimer": "This tool provides a general educational estimate only, not a mortgage pre-approval, loan offer, or financial advice. Lenders use their own underwriting rules, which can differ from the 28/36 rule used here, and your actual approved amount depends on your full credit profile and the lender's requirements. Consult a licensed mortgage lender or financial advisor before house hunting or applying for a loan."
+      },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "annualIncomeLabel": "Gross Annual Income",
+        "annualIncomePlaceholder": "e.g. 90,000",
+        "monthlyDebtsLabel": "Other Monthly Debt Payments",
+        "monthlyDebtsHint": "Car loans, student loans, credit cards, and any other recurring debt — not including the new home loan.",
+        "monthlyDebtsPlaceholder": "e.g. 400",
+        "downPaymentLabel": "Down Payment",
+        "downPaymentPlaceholder": "e.g. 40,000",
+        "interestRateLabel": "Annual Interest Rate (%)",
+        "interestRatePlaceholder": "e.g. 6.5",
+        "loanTermLabel": "Loan Term (years)",
+        "loanTermPlaceholder": "e.g. 30",
+        "propertyTaxRateLabel": "Property Tax Rate (%)",
+        "propertyTaxRateHint": "Annual property tax as a percentage of the home's price; this varies widely by location, so check your local rate.",
+        "propertyTaxRatePlaceholder": "e.g. 1.2",
+        "annualHomeInsuranceLabel": "Annual Home Insurance",
+        "annualHomeInsurancePlaceholder": "e.g. 1,500",
+        "monthlyHOALabel": "Monthly HOA Dues",
+        "monthlyHOAHint": "Homeowners association fees, if any. Enter 0 if not applicable.",
+        "monthlyHOAPlaceholder": "e.g. 0"
+      },
+      "education": {
+        "intro": {
+          "title": "How This Calculator Works",
+          "paragraph1": "This tool applies the 28/36 rule, a widely used lending guideline: your total monthly housing cost — principal, interest, property tax, home insurance, and HOA dues, together known as PITI — generally shouldn't exceed 28% of your gross monthly income, and your total monthly debt including that housing cost generally shouldn't exceed 36%. The calculator takes the lower of these two limits as your housing budget, then works backward through the loan-payment and property-tax math — accounting for the fact that a larger home price also means a larger tax bill — to find the highest home price that budget can support.",
+          "paragraph2": "The 28/36 rule is a widely used starting point, not a universal cutoff. Actual lenders set their own limits, which can run higher for well-qualified borrowers or for certain loan programs, and lower for others. Use this estimate to understand roughly where your budget sits before you start house hunting or speak with a lender, not as a guarantee of loan approval."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Three household scenarios show how income, debt, and loan terms combine to set a maximum home price.",
+          "columnScenario": "Scenario",
+          "columnMaxHomePrice": "Max Home Price",
+          "columnMonthlyPayment": "Monthly Payment",
+          "rows": [
+            {
+              "scenario": "$90,000 income, $400/month debts, $40,000 down, 6.5% rate, 30-year term",
+              "maxHomePrice": "$304,320",
+              "monthlyPayment": "$2,100"
+            },
+            {
+              "scenario": "$120,000 income, $600/month debts, $60,000 down, 7% rate, 30-year term, $50/month HOA",
+              "maxHomePrice": "$379,498",
+              "monthlyPayment": "$2,800"
+            },
+            {
+              "scenario": "$60,000 income, $1,200/month debts, $20,000 down, 6% rate, 30-year term",
+              "maxHomePrice": "$90,778",
+              "monthlyPayment": "$600"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What is the 28/36 rule?",
+              "answer": "It's a common lending guideline stating that your monthly housing costs (principal, interest, property tax, insurance, and HOA dues) generally shouldn't exceed 28% of your gross monthly income, and your total monthly debt payments — housing plus everything else — generally shouldn't exceed 36%. This calculator uses whichever of the two limits is lower as your effective housing budget."
+            },
+            {
+              "question": "Why did my existing monthly debts reduce the home price I can afford?",
+              "answer": "The 36% back-end limit covers all your debt, not just housing. If you already have $1,200 a month in car payments, student loans, or credit card minimums, less of your 36% budget is left over for a mortgage payment, which lowers the maximum home price the calculator can support — even if your 28% housing-only limit would allow for more."
+            },
+            {
+              "question": "Why does property tax affect the maximum home price, not just the monthly payment?",
+              "answer": "Because property tax is calculated as a percentage of the home's price, a bigger home costs more in tax as well as in loan payments. This calculator solves for both at once, so the maximum home price it returns is the exact price at which principal, interest, tax, insurance, and HOA dues together use up your full housing budget — not an estimate that ignores the tax feedback loop."
+            },
+            {
+              "question": "Should I actually spend up to the maximum this calculator shows?",
+              "answer": "Not necessarily. This is a lending-guideline ceiling, not a personal recommendation. Many buyers choose to spend less than their maximum approved amount to leave room in their monthly budget for maintenance, furnishing, savings, and unexpected costs that aren't part of a mortgage payment."
+            },
+            {
+              "question": "Does this account for closing costs or a mortgage insurance premium?",
+              "answer": "No. Closing costs (typically paid upfront, separately from the down payment) and private mortgage insurance (often required when the down payment is below 20% of the home price) are both left out of this calculation, since they vary by lender, location, and loan program. Budget separately for both before finalizing how much home you can actually afford."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Underwriting Rules of Thumb to a Standard Guideline",
+            "paragraph": "Lenders have long used income-based rules of thumb to judge how large a mortgage a borrower can safely carry, but the specific 28% and 36% thresholds used here trace back to underwriting guidelines popularized by U.S. government-sponsored mortgage entities in the mid-20th century as the mortgage market grew larger and more standardized. As mortgage lending shifted from small, local decisions to large-scale, rules-based underwriting, ratios like these became a common shorthand — not because they are mathematically special, but because they gave lenders, and eventually buyers themselves, a simple, repeatable way to estimate a safe borrowing range before a full application was ever filed."
+          },
+          "modernDevelopments": {
+            "title": "From Loan Officer Guidelines to a Buyer's Own Screen",
+            "paragraph": "For decades, the 28/36 rule was a piece of internal underwriting guidance, applied by a loan officer during a formal application rather than something a prospective buyer could check for themselves in advance. The spread of online mortgage and affordability calculators moved that same arithmetic in front of the buyer, letting anyone estimate roughly what a lender might approve before ever submitting an application — a self-service step that has become a standard early part of house hunting, even though the lender's own underwriting, not this or any calculator, makes the final call."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The income-ratio and time-value-of-money math behind this calculator sits within real estate finance, a specialization within the broader field of finance covered by this site's other housing and loan calculators. Here are the top 5 globally for Accounting & Finance in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://extension.harvard.edu/academics/programs/finance-graduate-program/",
+                "online": "Largely online — Harvard Extension School states 11 of the 12 required courses for its Finance graduate degree can be completed online, with at least one course requiring campus attendance."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://mitsloan.mit.edu/mfin",
+                "online": "No — the MIT Sloan Master of Finance is a full-time, in-person program (12- or 18-month tracks), with no distance-learning option listed on its official pages."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #3 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gsb.stanford.edu/programs/online-programs",
+                "online": "No — Stanford GSB's finance training is delivered through its in-person MBA; the school's own online-programs page lists only non-degree executive courses, not a full finance degree."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #4 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.economics.ox.ac.uk/m.sc.-in-financial-economics",
+                "online": "Not fully online — Oxford's MSc in Financial Economics is a full-time, in-person 9-month programme; a new part-time \"MSc in Applied Financial Economics\" (from September 2026) blends online learning with mandatory in-person residencies in Oxford, so it isn't a distance-only option either."
+              },
+              {
+                "name": "University of Chicago (Booth)",
+                "note": "Ranked #5 worldwide for Accounting & Finance (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chicagobooth.edu/master-in-finance",
+                "online": "No — Chicago Booth's Master in Finance is a 15-month, in-person cohort program whose inaugural class began in fall 2024."
+              },
+              {
+                "name": "American University of Sharjah (AUS) — Department of Finance",
+                "note": "A leading regional business school in the Arab world, AACSB-accredited since 2011, whose finance program is the region's first CFA Institute partner program.",
+                "url": "https://www.aus.edu/sba/department-of-finance",
+                "online": "Delivery mode not stated as fully online on the official program page; AUS's finance program is primarily campus-based in Sharjah, United Arab Emirates."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Hulchanski, J. D. (1995). The concept of housing affordability: Six contemporary uses of the housing expenditure-to-income ratio. Housing Studies, 10(4), 471–491.",
+          "note": "A foundational, widely cited paper examining how income-ratio measures like the one this calculator uses — and their limitations — came to be used as a shorthand for housing affordability, useful context for treating a ratio-based estimate like this one as a starting point rather than a precise measure of what a household can truly sustain.",
+          "url": "https://doi.org/10.1080/02673039508720833",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "world-time-converter": {
       "title": "World Time Converter",
       "description": "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",

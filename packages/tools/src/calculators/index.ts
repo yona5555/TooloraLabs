@@ -15,3 +15,4 @@ export * from "./CompoundInterestCalculator";
 export * from "./LoanCalculator";
 export * from "./AffordableLoanCalculator";
 export * from "./RetirementCalculator";
+export * from "./HouseAffordabilityCalculator";
