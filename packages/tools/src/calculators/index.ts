@@ -20,3 +20,4 @@ export * from "./DebtToIncomeCalculator";
 export * from "./IdealWeightCalculator";
 export * from "./ColorPaletteGenerator";
 export * from "./PdfMergeSplit";
+export * from "./ZipCompressor";

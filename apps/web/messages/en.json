@@ -6754,6 +6754,151 @@
         }
       }
     },
+    "zip-compressor": {
+      "title": "ZIP Compressor & Extractor",
+      "description": "Compress multiple files into a single ZIP archive, or extract the contents of a ZIP file, entirely in your browser.",
+      "aboveFold": {
+        "resultTitle": "Result",
+        "processing": "Processing...",
+        "compressReady": "Your ZIP archive is ready ({size}).",
+        "downloadZip": "Download ZIP",
+        "downloadFile": "Download",
+        "placeholderCompress": "Add one or more files to compress them into a ZIP archive.",
+        "placeholderExtract": "Choose a ZIP file to see and download its contents."
+      },
+      "nav": {
+        "tool": "Tool",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Files",
+        "modeCompress": "Compress",
+        "modeExtract": "Extract",
+        "chooseFiles": "Click or drop files here",
+        "chooseZip": "Click or drop a ZIP file here",
+        "remove": "Remove",
+        "totalSize": "Total: {size}"
+      },
+      "errors": {
+        "tooLarge": "These files are too large for your browser to process safely. Please keep the total under 50 MB.",
+        "processingFailed": "Something went wrong while processing your files. Please check them and try again.",
+        "invalidZip": "That file couldn't be read as a ZIP archive. It may be corrupted or in a different format.",
+        "emptyZip": "This ZIP archive doesn't contain any files to extract."
+      },
+      "education": {
+        "intro": {
+          "title": "How This Tool Works",
+          "paragraph1": "This tool compresses and extracts ZIP archives entirely inside your browser using the DEFLATE algorithm, the same lossless compression method built into the ZIP format since its creation. Compressing packs each file's bytes, shrunk using DEFLATE, into a single archive alongside a directory listing every file's name and location; extracting reads that directory and reverses the compression to recover each file's original bytes exactly. No file you add here is ever sent to a server — everything happens locally on your device.",
+          "paragraph2": "Because all of this runs in your browser's memory, very large files or a very large number of files can slow down or strain the page. This tool caps the total size processed in a single operation at 50 MB, a limit chosen to keep compression and extraction fast and reliable across a wide range of devices rather than an arbitrary restriction."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few scenarios show how compressing and extracting behave in practice.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "scenario": "Compress three files: a 2 MB image, a 500 KB document, and a 100 KB spreadsheet",
+              "result": "One ZIP archive containing all three files, typically smaller than their combined original size"
+            },
+            {
+              "scenario": "Extract a ZIP archive containing 12 files across several folders",
+              "result": "A list of all 12 files with their sizes, each downloadable individually"
+            },
+            {
+              "scenario": "Compress a folder of already-compressed JPEG images",
+              "result": "A ZIP archive close in size to the original files, since DEFLATE can't meaningfully shrink data that's already compressed"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Are my files uploaded anywhere?",
+              "answer": "No. All compression and extraction happens locally in your browser using JavaScript; your files never leave your device or get sent to any server. This also means processing speed depends on your own device's performance, not an internet connection."
+            },
+            {
+              "question": "Why didn't compressing my files make them much smaller?",
+              "answer": "It depends on what's already inside them. Text, uncompressed images, and many document formats compress well because they contain repeated patterns DEFLATE can exploit. Files that are already compressed — JPEG and PNG images, MP3 and MP4 media, and other ZIP or RAR archives — often shrink very little or not at all, since their data is already close to its most compact form."
+            },
+            {
+              "question": "Does this preserve folder structure?",
+              "answer": "When compressing, files are added using the names you gave them; if your browser lets you select an entire folder, that folder structure is preserved in the resulting archive's internal paths. When extracting, this tool lists every file entry in the archive, including files that were originally organized into subfolders."
+            },
+            {
+              "question": "Why is there a file size limit?",
+              "answer": "Because this tool processes everything in your browser's memory rather than on a server, extremely large files or a very large number of files can slow down or even crash the page on lower-powered devices. A 50 MB total limit keeps the tool fast and reliable for the vast majority of everyday files while protecting your browsing experience."
+            },
+            {
+              "question": "Can this tool open a password-protected ZIP file?",
+              "answer": "No. This tool works with standard, unencrypted ZIP archives. A password-protected archive will fail to extract; you would need to remove the password protection with dedicated software first."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From an Information Theory Paper to a File Format",
+            "paragraph": "The compression technique underlying ZIP traces back to a 1977 paper by Abraham Lempel and Jacob Ziv describing a general-purpose method for compressing sequential data by replacing repeated patterns with shorter references to where they appeared before — an approach now called LZ77. Roughly a decade later, developer Phil Katz combined a refinement of this idea with Huffman coding, another compression technique, into the DEFLATE algorithm and released it as the core of the ZIP file format in 1989, specifically designing it to be implementable without infringing on then-existing patents covering a competing compression method."
+          },
+          "modernDevelopments": {
+            "title": "From a DOS Utility to a Universal Standard",
+            "paragraph": "ZIP began as PKZIP, a DOS command-line utility, but its specification was published openly rather than kept proprietary, which let it become the de facto standard archive format across essentially every operating system and platform. Modern web browsers now include JavaScript engines fast enough to implement DEFLATE compression and decompression directly, which is what libraries like the one behind this tool rely on, making an operation that once required installed software into something that runs in an ordinary browser tab, with no upload and no installation."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Data compression algorithms and information theory are studied within Computer Science programs. Here are the top 5 globally for Computer Science & Information Systems in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/ug/cs/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program on its Singapore campus."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/teaching/ug/",
+                "online": "No — Oxford's Computer Science undergraduate degree is delivered in person through its college and tutorial system."
+              },
+              {
+                "name": "Khalifa University — Department of Computer Science",
+                "note": "A leading regional research university in the Arab world, based in Abu Dhabi, with programs accredited by the UAE Commission for Academic Accreditation and largely ABET-eligible.",
+                "url": "https://www.ku.ac.ae/department/department-of-computer-science",
+                "online": "Not offered as an online program, per the department's official pages; Khalifa University's Computer Science programs are delivered on its Abu Dhabi campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Ziv, J., & Lempel, A. (1977). A universal algorithm for sequential data compression. IEEE Transactions on Information Theory, 23(3), 337-343.",
+          "note": "The foundational paper describing the LZ77 compression technique, whose descendants — refined and combined with Huffman coding into the DEFLATE algorithm — remain the compression method built into the ZIP format this tool reads and writes today, nearly five decades later.",
+          "url": "https://doi.org/10.1109/tit.1977.1055714",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "file-size-converter": {
       "title": "File Size Converter",
       "description": "Convert file sizes across every unit at once, compare decimal (SI) vs binary (IEC) standards, and estimate download time — live as you type.",

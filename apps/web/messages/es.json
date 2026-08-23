@@ -6758,6 +6758,151 @@
         }
       }
     },
+    "zip-compressor": {
+      "title": "Compresor y Extractor ZIP",
+      "description": "Comprime varios archivos en un único archivo ZIP, o extrae el contenido de un archivo ZIP, todo directamente en tu navegador.",
+      "aboveFold": {
+        "resultTitle": "Resultado",
+        "processing": "Procesando...",
+        "compressReady": "Tu archivo ZIP está listo ({size}).",
+        "downloadZip": "Descargar ZIP",
+        "downloadFile": "Descargar",
+        "placeholderCompress": "Añade uno o más archivos para comprimirlos en un archivo ZIP.",
+        "placeholderExtract": "Elige un archivo ZIP para ver y descargar su contenido."
+      },
+      "nav": {
+        "tool": "Herramienta",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Archivos",
+        "modeCompress": "Comprimir",
+        "modeExtract": "Extraer",
+        "chooseFiles": "Haz clic o suelta archivos aquí",
+        "chooseZip": "Haz clic o suelta un archivo ZIP aquí",
+        "remove": "Quitar",
+        "totalSize": "Total: {size}"
+      },
+      "errors": {
+        "tooLarge": "Estos archivos son demasiado grandes para que tu navegador los procese de forma segura. Mantén el total por debajo de 50 MB.",
+        "processingFailed": "Algo salió mal al procesar tus archivos. Compruébalos e inténtalo de nuevo.",
+        "invalidZip": "No se pudo leer ese archivo como un archivo ZIP. Puede estar dañado o en un formato distinto.",
+        "emptyZip": "Este archivo ZIP no contiene ningún archivo para extraer."
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta herramienta",
+          "paragraph1": "Esta herramienta comprime y extrae archivos ZIP completamente dentro de tu navegador usando el algoritmo DEFLATE, el mismo método de compresión sin pérdida integrado en el formato ZIP desde su creación. Comprimir empaqueta los bytes de cada archivo, reducidos mediante DEFLATE, en un único archivo junto con un directorio que enumera el nombre y la ubicación de cada archivo; extraer lee ese directorio e invierte la compresión para recuperar exactamente los bytes originales de cada archivo. Ningún archivo que añadas aquí se envía jamás a un servidor: todo ocurre localmente en tu dispositivo.",
+          "paragraph2": "Como todo se ejecuta en la memoria de tu navegador, archivos muy grandes o un número muy elevado de archivos pueden ralentizar o sobrecargar la página. Esta herramienta limita el tamaño total procesado en una sola operación a 50 MB, un límite elegido para mantener la compresión y extracción rápidas y fiables en una amplia gama de dispositivos, no una restricción arbitraria."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos escenarios muestran cómo se comportan la compresión y la extracción en la práctica.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "scenario": "Comprimir tres archivos: una imagen de 2 MB, un documento de 500 KB y una hoja de cálculo de 100 KB",
+              "result": "Un archivo ZIP que contiene los tres archivos, normalmente más pequeño que su tamaño combinado original"
+            },
+            {
+              "scenario": "Extraer un archivo ZIP que contiene 12 archivos repartidos en varias carpetas",
+              "result": "Una lista de los 12 archivos con sus tamaños, cada uno descargable individualmente"
+            },
+            {
+              "scenario": "Comprimir una carpeta de imágenes JPEG ya comprimidas",
+              "result": "Un archivo ZIP de tamaño similar a los archivos originales, ya que DEFLATE no puede reducir significativamente datos que ya están comprimidos"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Se suben mis archivos a algún sitio?",
+              "answer": "No. Toda la compresión y extracción ocurre localmente en tu navegador mediante JavaScript; tus archivos nunca salen de tu dispositivo ni se envían a ningún servidor. Esto también significa que la velocidad de procesamiento depende del rendimiento de tu propio dispositivo, no de una conexión a internet."
+            },
+            {
+              "question": "¿Por qué comprimir mis archivos no redujo mucho su tamaño?",
+              "answer": "Depende de lo que ya contengan. El texto, las imágenes sin comprimir y muchos formatos de documentos se comprimen bien porque contienen patrones repetidos que DEFLATE puede aprovechar. Los archivos que ya están comprimidos —imágenes JPEG y PNG, medios MP3 y MP4, y otros archivos ZIP o RAR— a menudo se reducen muy poco o nada, ya que sus datos ya están cerca de su forma más compacta."
+            },
+            {
+              "question": "¿Esto conserva la estructura de carpetas?",
+              "answer": "Al comprimir, los archivos se añaden con los nombres que les diste; si tu navegador te permite seleccionar una carpeta completa, esa estructura se conserva en las rutas internas del archivo resultante. Al extraer, esta herramienta enumera cada entrada de archivo del archivo comprimido, incluidos los archivos que originalmente estaban organizados en subcarpetas."
+            },
+            {
+              "question": "¿Por qué hay un límite de tamaño de archivo?",
+              "answer": "Porque esta herramienta procesa todo en la memoria de tu navegador en lugar de en un servidor, archivos extremadamente grandes o un número muy alto de archivos pueden ralentizar o incluso bloquear la página en dispositivos menos potentes. Un límite total de 50 MB mantiene la herramienta rápida y fiable para la gran mayoría de archivos cotidianos, protegiendo a la vez tu experiencia de navegación."
+            },
+            {
+              "question": "¿Puede esta herramienta abrir un archivo ZIP protegido con contraseña?",
+              "answer": "No. Esta herramienta funciona con archivos ZIP estándar, sin cifrar. Un archivo protegido con contraseña fallará al extraerse; necesitarías quitar la protección con contraseña con software dedicado primero."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De un artículo de teoría de la información a un formato de archivo",
+            "paragraph": "La técnica de compresión detrás del ZIP se remonta a un artículo de 1977 de Abraham Lempel y Jacob Ziv que describía un método general para comprimir datos secuenciales reemplazando patrones repetidos por referencias más cortas al lugar donde aparecieron antes, un enfoque hoy llamado LZ77. Aproximadamente una década después, el desarrollador Phil Katz combinó un refinamiento de esta idea con la codificación de Huffman, otra técnica de compresión, en el algoritmo DEFLATE, y lo publicó como el núcleo del formato de archivo ZIP en 1989, diseñándolo específicamente para poder implementarse sin infringir las patentes entonces existentes que cubrían un método de compresión competidor."
+          },
+          "modernDevelopments": {
+            "title": "De una utilidad de DOS a un estándar universal",
+            "paragraph": "El ZIP comenzó como PKZIP, una utilidad de línea de comandos de DOS, pero su especificación se publicó abiertamente en lugar de mantenerse como propietaria, lo que le permitió convertirse en el formato de archivo de facto en prácticamente todos los sistemas operativos y plataformas. Los navegadores web modernos ahora incluyen motores de JavaScript lo bastante rápidos para implementar directamente la compresión y descompresión DEFLATE, en lo que se basan bibliotecas como la que hay detrás de esta herramienta, convirtiendo una operación que antes requería software instalado en algo que se ejecuta en una pestaña de navegador común, sin subida de archivos ni instalación."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Los algoritmos de compresión de datos y la teoría de la información se estudian dentro de los programas de Ciencias de la Computación. Estas son las 5 mejores instituciones del mundo en Ciencias de la Computación y Sistemas de Información según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificado n.º 1 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No: el Curso 6-3 del MIT (Ciencias de la Computación e Ingeniería) es un programa de grado presencial en el campus de Cambridge del MIT."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada n.º 2 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No: el programa de licenciatura en Ciencias de la Computación de Stanford es un título presencial en el campus de Stanford."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Clasificada n.º 3 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No: el programa de licenciatura de la School of Computer Science de CMU es presencial en su campus de Pittsburgh."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Clasificada n.º 4 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/ug/cs/",
+                "online": "No: el Bachelor of Computing en Ciencias de la Computación de la NUS es un programa presencial en su campus de Singapur."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada n.º 5 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/teaching/ug/",
+                "online": "No: el título de grado en Ciencias de la Computación de Oxford se imparte de forma presencial a través de su sistema de colegios y tutorías."
+              },
+              {
+                "name": "Khalifa University — Department of Computer Science",
+                "note": "Una universidad de investigación regional destacada del mundo árabe, con sede en Abu Dabi, con programas acreditados por la Commission for Academic Accreditation de los Emiratos Árabes Unidos y en gran parte elegibles para la acreditación ABET.",
+                "url": "https://www.ku.ac.ae/department/department-of-computer-science",
+                "online": "No se ofrece como programa en línea, según las páginas oficiales del departamento; los programas de Ciencias de la Computación de Khalifa University se imparten en su campus de Abu Dabi."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Ziv, J., & Lempel, A. (1977). A universal algorithm for sequential data compression. IEEE Transactions on Information Theory, 23(3), 337-343.",
+          "note": "El artículo fundacional que describe la técnica de compresión LZ77, cuyos descendientes —refinados y combinados con la codificación de Huffman en el algoritmo DEFLATE— siguen siendo, casi cinco décadas después, el método de compresión integrado en el formato ZIP que esta herramienta lee y escribe hoy.",
+          "url": "https://doi.org/10.1109/tit.1977.1055714",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "file-size-converter": {
       "title": "Conversor de tamaño de archivo",
       "description": "Convierte tamaños de archivo a todas las unidades a la vez, compara los estándares decimal (SI) y binario (IEC), y calcula el tiempo de descarga estimado — en vivo mientras escribes.",

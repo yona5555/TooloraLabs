@@ -379,6 +379,14 @@ export const tools: Tool[] = [
     keywords: ["pdf merge", "pdf split", "combine pdf", "pdf pages", "pdf tool"],
   },
   {
+    slug: "zip-compressor",
+    title: "ZIP Compressor & Extractor",
+    category: "file-tools",
+    description: "Compress multiple files into a single ZIP archive, or extract the contents of a ZIP file, entirely in your browser.",
+    featured: false,
+    keywords: ["zip compressor", "zip extractor", "compress files", "unzip", "archive"],
+  },
+  {
     slug: "csv-json-converter",
     title: "CSV to JSON Converter",
     category: "file-tools",

@@ -37,6 +37,8 @@ import ColorPaletteGeneratorTool from "@/components/tools/color-palette-generato
 import ColorPaletteEducation from "@/components/tools/color-palette-generator/ColorPaletteEducation";
 import PdfMergeSplitTool from "@/components/tools/pdf-merge-split/PdfMergeSplitTool";
 import PdfMergeSplitEducation from "@/components/tools/pdf-merge-split/PdfMergeSplitEducation";
+import ZipCompressorTool from "@/components/tools/zip-compressor/ZipCompressorTool";
+import ZipCompressorEducation from "@/components/tools/zip-compressor/ZipCompressorEducation";
 import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
@@ -300,6 +302,9 @@ export default async function ToolPage({
     case "pdf-merge-split":
       component = <PdfMergeSplitTool education={<PdfMergeSplitEducation />} />;
       break;
+    case "zip-compressor":
+      component = <ZipCompressorTool education={<ZipCompressorEducation />} />;
+      break;
     case "world-time-converter":
       component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
       break;
@@ -383,6 +388,7 @@ export default async function ToolPage({
     slug === "ideal-weight-calculator" ||
     slug === "color-palette-generator" ||
     slug === "pdf-merge-split" ||
+    slug === "zip-compressor" ||
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
     slug === "percentage-calculator" ||
