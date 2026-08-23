@@ -6605,6 +6605,159 @@
         }
       }
     },
+    "pdf-merge-split": {
+      "title": "PDF zusammenführen & aufteilen",
+      "description": "Kombinieren Sie mehrere PDF-Dateien zu einer, oder teilen Sie eine einzelne PDF-Datei nach Seitenbereich in separate Dateien auf — vollständig in Ihrem Browser.",
+      "aboveFold": {
+        "resultTitle": "Ergebnis",
+        "processing": "Wird verarbeitet...",
+        "mergeReady": "Ihre zusammengeführte PDF-Datei ist fertig.",
+        "splitReady": "Ihre PDF-Datei wurde in {count} Dateien aufgeteilt.",
+        "downloadMerged": "Zusammengeführte PDF herunterladen",
+        "downloadZip": "ZIP herunterladen",
+        "placeholderMerge": "Fügen Sie zwei oder mehr PDF-Dateien hinzu, um sie zu einer zusammenzuführen.",
+        "placeholderSplit": "Wählen Sie eine PDF-Datei, um sie nach Seiten aufzuteilen."
+      },
+      "nav": {
+        "tool": "Werkzeug",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrundwissen"
+      },
+      "form": {
+        "inputTitle": "PDF-Dateien",
+        "modeMerge": "Zusammenführen",
+        "modeSplit": "Aufteilen",
+        "chooseFiles": "PDF-Dateien hier klicken oder ablegen",
+        "chooseFile": "PDF-Datei hier klicken oder ablegen",
+        "moveUp": "Nach oben",
+        "moveDown": "Nach unten",
+        "remove": "Entfernen",
+        "pageCount": "{count, plural, one {# Seite} other {# Seiten}}",
+        "rangesLabel": "Seitenbereiche (optional)",
+        "rangesHint": "z. B. 1-3,5,8-9. Leer lassen, um jede Seite in eine eigene Datei aufzuteilen.",
+        "rangesPlaceholder": "1-3,5,8-9"
+      },
+      "errors": {
+        "tooLarge": "Diese Dateien sind zu groß, um von Ihrem Browser sicher verarbeitet zu werden. Bitte halten Sie die Gesamtgröße unter 25 MB.",
+        "needTwoFiles": "Fügen Sie mindestens zwei PDF-Dateien zum Zusammenführen hinzu.",
+        "needFile": "Wählen Sie eine PDF-Datei zum Aufteilen aus.",
+        "invalidPdf": "Diese Datei konnte nicht als PDF gelesen werden. Sie ist möglicherweise beschädigt oder passwortgeschützt.",
+        "noPages": "In den eingegebenen Seitenbereichen wurden keine gültigen Seiten gefunden.",
+        "processingFailed": "Bei der Verarbeitung Ihrer PDF-Datei ist ein Fehler aufgetreten. Bitte prüfen Sie die Datei und versuchen Sie es erneut."
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieses Tool",
+          "paragraph1": "Dieses Tool liest und schreibt PDF-Dateien vollständig innerhalb Ihres Browsers, unter Verwendung derselben zugrunde liegenden Dokumentstruktur, die PDF-Reader intern nutzen: Eine PDF-Datei ist eine Sammlung von Seiten, jede ein eigenständiges Objekt, zusammen mit einer Reihe von Schriftarten, Bildern und anderen Ressourcen, auf die sie verweisen. Zusammenführen kopiert einfach jedes Seitenobjekt jeder Quelldatei der Reihe nach in ein neues Dokument; Aufteilen kopiert eine ausgewählte Teilmenge von Seitenobjekten in ein oder mehrere neue Dokumente. Keine hier hochgeladene Datei wird jemals an einen Server gesendet — alles geschieht lokal auf Ihrem Gerät.",
+          "paragraph2": "Da alles im Speicher Ihres Browsers läuft, können sehr große Dateien oder eine sehr große Anzahl von Dateien die Seite verlangsamen oder belasten. Dieses Tool begrenzt die Gesamtgröße der in einem einzigen Vorgang verarbeiteten Dateien auf 25 MB — eine Grenze, die gewählt wurde, um die Verarbeitung auf einer Vielzahl von Geräten schnell und zuverlässig zu halten, nicht eine willkürliche Einschränkung."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Einige Szenarien zeigen, wie sich Zusammenführen und Aufteilen in der Praxis verhalten.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
+          "rows": [
+            {
+              "scenario": "Drei PDFs mit 2, 4 und 1 Seiten in dieser Reihenfolge zusammenführen",
+              "result": "Eine 7-seitige PDF-Datei, mit Seiten in derselben Reihenfolge, in der die Dateien hinzugefügt wurden"
+            },
+            {
+              "scenario": "Eine 6-seitige PDF-Datei ohne eingegebene Seitenbereiche aufteilen",
+              "result": "Sechs separate 1-seitige PDF-Dateien, gemeinsam als ZIP-Datei heruntergeladen"
+            },
+            {
+              "scenario": "Eine 10-seitige PDF-Datei mit den Bereichen 1-3,4-7,8-10 aufteilen",
+              "result": "Drei PDF-Dateien mit den Seiten 1-3, 4-7 bzw. 8-10"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Werden meine PDF-Dateien irgendwohin hochgeladen?",
+              "answer": "Nein. Das gesamte Zusammenführen und Aufteilen erfolgt lokal in Ihrem Browser mittels JavaScript; Ihre Dateien verlassen niemals Ihr Gerät und werden an keinen Server gesendet. Das bedeutet auch, dass die Verarbeitungsgeschwindigkeit von der Leistung Ihres eigenen Geräts abhängt, nicht von einer Internetverbindung."
+            },
+            {
+              "question": "In welcher Reihenfolge werden Dateien zusammengeführt?",
+              "answer": "In der Reihenfolge, in der sie in der Dateiliste erscheinen, standardmäßig die Reihenfolge, in der Sie sie hinzugefügt haben. Verwenden Sie die Pfeile nach oben und unten neben jeder Datei, um sie vor dem Zusammenführen neu anzuordnen, falls Sie eine andere Seitenreihenfolge in der endgültigen PDF-Datei benötigen."
+            },
+            {
+              "question": "Wie schreibe ich einen Seitenbereich zum Aufteilen?",
+              "answer": "Verwenden Sie durch Kommas getrennte Seitenzahlen oder -bereiche, wie 1-3,5,8-9, was drei separate Dateien ergäbe: Seiten 1 bis 3, Seite 5 allein und Seiten 8 bis 9. Lassen Sie das Feld leer, um stattdessen jede einzelne Seite in eine eigene Datei aufzuteilen."
+            },
+            {
+              "question": "Warum gibt es eine Dateigrößenbeschränkung?",
+              "answer": "Da dieses Tool alles im Speicher Ihres Browsers statt auf einem Server verarbeitet, können extrem große Dateien oder eine sehr große Anzahl von Dateien die Seite auf leistungsschwächeren Geräten verlangsamen oder sogar zum Absturz bringen. Eine Gesamtgrenze von 25 MB hält das Tool für die überwiegende Mehrheit der alltäglichen Dokumente schnell und zuverlässig und schützt gleichzeitig Ihr Browsing-Erlebnis."
+            },
+            {
+              "question": "Kann dieses Tool einen Passwortschutz entfernen oder eine beschädigte PDF-Datei reparieren?",
+              "answer": "Nein. Dieses Tool arbeitet mit standardmäßigen, unverschlüsselten PDF-Dateien. Passwortgeschützte oder beschädigte Dateien lassen sich möglicherweise nicht laden; Sie müssten das Passwort entfernen oder die Datei mit spezieller Software reparieren, bevor Sie sie hier zusammenführen oder aufteilen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrundwissen zu diesem Tool",
+          "history": {
+            "title": "Von einem proprietären Format zu einem universellen Standard",
+            "paragraph": "PDF wurde 1993 von Adobe Systems als Portable Document Format entwickelt, mit dem Ziel, dass ein Dokument unabhängig von der öffnenden Software, Hardware oder dem Betriebssystem identisch aussieht — ein wirklich schwieriges Problem zu einer Zeit, in der Textverarbeitungsprogramme die Formatierung anderer Programme regelmäßig durcheinanderbrachten. Adobe hielt das Format zunächst proprietär und verkaufte Anzeigesoftware, veröffentlichte die Spezifikation jedoch Anfang der 2000er Jahre offen, und PDF wurde 2008 zu einem offiziellen internationalen ISO-Standard (ISO 32000), was es als wirklich plattformübergreifendes, anbieterneutrales Format festigte, statt an die Software eines einzelnen Unternehmens gebunden zu sein."
+          },
+          "modernDevelopments": {
+            "title": "Von spezialisierter Software zu einem Browser-Tab",
+            "paragraph": "Den größten Teil der PDF-Geschichte über erforderte das Zusammenführen oder Aufteilen von Dokumenten Desktop-Software — spezielle PDF-Editoren, Druckertreiber, die Druckaufträge kombinieren konnten, oder Kommandozeilen-Tools, die hauptsächlich von Entwicklern verstanden wurden. Moderne Webbrowser verfügen heute über JavaScript-Engines, die schnell genug sind, um die interne Seitenobjektstruktur von PDF direkt zu analysieren und neu zu schreiben — worauf sich Bibliotheken wie die hinter diesem Tool stützen. So wird aus einem Vorgang, der einst installierte Software erforderte, etwas, das in einem gewöhnlichen Browser-Tab läuft, ohne Upload und ohne Installation."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Dokumentformate, Dateistrukturen und Datenaustausch werden in Informatikprogrammen untersucht. Hier sind die 5 weltweit führenden Institutionen für Computer Science & Information Systems im QS World University Rankings by Subject 2025 sowie eine regionale Option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 in Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "Nein — der Kurs 6-3 des MIT (Computer Science and Engineering) ist ein Präsenz-Bachelorstudiengang auf dem Cambridge-Campus des MIT."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 2 in Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "Nein — der Bachelor-Studiengang Informatik von Stanford ist ein Präsenzabschluss auf dem Stanford-Campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Weltweit auf Platz 3 in Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "Nein — der Bachelor-Studiengang der School of Computer Science der CMU findet in Präsenz auf ihrem Pittsburgh-Campus statt."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Weltweit auf Platz 4 in Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/ug/cs/",
+                "online": "Nein — der Bachelor of Computing in Computer Science der NUS ist ein Präsenzprogramm auf ihrem Campus in Singapur."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 5 in Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/teaching/ug/",
+                "online": "Nein — Oxfords grundständiger Informatikabschluss wird in Präsenz über sein College- und Tutorensystem vermittelt."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — CEMSE-Abteilung",
+                "note": "Eine führende regionale Forschungsuniversität in der arabischen Welt, die MS- und PhD-Programme in Informatik innerhalb ihrer Abteilung Computer, Electrical and Mathematical Sciences and Engineering (CEMSE) anbietet.",
+                "url": "https://cs.kaust.edu.sa/",
+                "online": "Laut offiziellen Seiten der Abteilung nicht als Online-Programm angeboten; die Graduiertenprogramme von KAUST finden auf ihrem Campus in Thuwal, Saudi-Arabien, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Craft, J. R. (2003). Portable Document Format (PDF): Standardizing document files for publication. DESIDOC Bulletin of Information Technology, 23(1), 19-24.",
+          "note": "Ein Überblick, veröffentlicht als PDF zu einem weit verbreiteten Publikationsstandard wurde, der untersucht, warum ein formatunabhängiger, universell lesbarer Dokumentstandard für die zuverlässige Verteilung und Archivierung von Dokumenten wichtig war — dieselbe zugrunde liegende Dokumentstruktur, die dieses Tool beim Zusammenführen oder Aufteilen einer PDF-Datei liest und neu schreibt.",
+          "url": "https://doi.org/10.14429/dbit.23.1.3587",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "file-size-converter": {
       "title": "Dateigrößen-Umrechner",
       "description": "Rechnen Sie Dateigrößen gleichzeitig in jede Einheit um, vergleichen Sie dezimale (SI) mit binären (IEC) Standards und schätzen Sie die Download-Zeit — live während der Eingabe.",

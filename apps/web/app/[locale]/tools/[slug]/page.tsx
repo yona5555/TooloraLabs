@@ -35,6 +35,8 @@ import IdealWeightCalculator from "@/components/tools/ideal-weight-calculator/Id
 import IdealWeightEducation from "@/components/tools/ideal-weight-calculator/IdealWeightEducation";
 import ColorPaletteGeneratorTool from "@/components/tools/color-palette-generator/ColorPaletteGenerator";
 import ColorPaletteEducation from "@/components/tools/color-palette-generator/ColorPaletteEducation";
+import PdfMergeSplitTool from "@/components/tools/pdf-merge-split/PdfMergeSplitTool";
+import PdfMergeSplitEducation from "@/components/tools/pdf-merge-split/PdfMergeSplitEducation";
 import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
@@ -295,6 +297,9 @@ export default async function ToolPage({
     case "color-palette-generator":
       component = <ColorPaletteGeneratorTool education={<ColorPaletteEducation />} />;
       break;
+    case "pdf-merge-split":
+      component = <PdfMergeSplitTool education={<PdfMergeSplitEducation />} />;
+      break;
     case "world-time-converter":
       component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
       break;
@@ -377,6 +382,7 @@ export default async function ToolPage({
     slug === "debt-to-income-calculator" ||
     slug === "ideal-weight-calculator" ||
     slug === "color-palette-generator" ||
+    slug === "pdf-merge-split" ||
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
     slug === "percentage-calculator" ||

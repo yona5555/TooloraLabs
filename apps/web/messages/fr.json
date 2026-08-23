@@ -6605,6 +6605,159 @@
         }
       }
     },
+    "pdf-merge-split": {
+      "title": "Fusion et division de PDF",
+      "description": "Combinez plusieurs fichiers PDF en un seul, ou divisez un PDF unique en fichiers séparés par plage de pages, entièrement dans votre navigateur.",
+      "aboveFold": {
+        "resultTitle": "Résultat",
+        "processing": "Traitement en cours...",
+        "mergeReady": "Votre PDF fusionné est prêt.",
+        "splitReady": "Votre PDF a été divisé en {count} fichiers.",
+        "downloadMerged": "Télécharger le PDF fusionné",
+        "downloadZip": "Télécharger le ZIP",
+        "placeholderMerge": "Ajoutez deux fichiers PDF ou plus pour les fusionner en un seul.",
+        "placeholderSplit": "Choisissez un fichier PDF pour le diviser par page."
+      },
+      "nav": {
+        "tool": "Outil",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Fichiers PDF",
+        "modeMerge": "Fusionner",
+        "modeSplit": "Diviser",
+        "chooseFiles": "Cliquez ou déposez des fichiers PDF ici",
+        "chooseFile": "Cliquez ou déposez un fichier PDF ici",
+        "moveUp": "Monter",
+        "moveDown": "Descendre",
+        "remove": "Retirer",
+        "pageCount": "{count, plural, one {# page} other {# pages}}",
+        "rangesLabel": "Plages de pages (facultatif)",
+        "rangesHint": "ex. 1-3,5,8-9. Laissez vide pour diviser chaque page en un fichier séparé.",
+        "rangesPlaceholder": "1-3,5,8-9"
+      },
+      "errors": {
+        "tooLarge": "Ces fichiers sont trop volumineux pour que votre navigateur les traite en toute sécurité. Merci de garder un total inférieur à 25 Mo.",
+        "needTwoFiles": "Ajoutez au moins deux fichiers PDF à fusionner.",
+        "needFile": "Choisissez un fichier PDF à diviser.",
+        "invalidPdf": "Ce fichier n'a pas pu être lu comme un PDF. Il est peut-être corrompu ou protégé par mot de passe.",
+        "noPages": "Aucune page valide n'a été trouvée dans les plages de pages saisies.",
+        "processingFailed": "Une erreur s'est produite lors du traitement de votre PDF. Vérifiez le fichier et réessayez."
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne cet outil",
+          "paragraph1": "Cet outil lit et écrit des fichiers PDF entièrement dans votre navigateur, en utilisant la même structure de document sous-jacente que celle employée en interne par les lecteurs PDF : un PDF est une collection de pages, chacune un objet indépendant, accompagnées d'un ensemble de polices, d'images et d'autres ressources qu'elles référencent. Fusionner consiste simplement à copier chaque objet page de chaque fichier source, dans l'ordre, dans un nouveau document ; diviser copie un sous-ensemble choisi d'objets page dans un ou plusieurs nouveaux documents. Aucun fichier que vous téléversez ici n'est jamais envoyé à un serveur — tout se passe localement sur votre appareil.",
+          "paragraph2": "Comme tout s'exécute dans la mémoire de votre navigateur, des fichiers très volumineux ou un très grand nombre de fichiers peuvent ralentir ou surcharger la page. Cet outil plafonne la taille totale des fichiers traités en une seule opération à 25 Mo, une limite choisie pour garder le traitement rapide et fiable sur une large gamme d'appareils plutôt qu'une restriction arbitraire."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Quelques scénarios montrent comment la fusion et la division se comportent en pratique.",
+          "columnScenario": "Scénario",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "scenario": "Fusionner trois PDF de 2, 4, et 1 pages, dans cet ordre",
+              "result": "Un PDF de 7 pages, avec les pages dans le même ordre que les fichiers ajoutés"
+            },
+            {
+              "scenario": "Diviser un PDF de 6 pages sans plage de pages saisie",
+              "result": "Six PDF séparés d'une page chacun, téléchargés ensemble sous forme de fichier ZIP"
+            },
+            {
+              "scenario": "Diviser un PDF de 10 pages en utilisant les plages 1-3,4-7,8-10",
+              "result": "Trois PDF, contenant respectivement les pages 1 à 3, 4 à 7, et 8 à 10"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Mes fichiers PDF sont-ils téléversés quelque part ?",
+              "answer": "Non. Toute la fusion et la division se font localement dans votre navigateur via JavaScript ; vos fichiers ne quittent jamais votre appareil et ne sont envoyés à aucun serveur. Cela signifie aussi que la vitesse de traitement dépend des performances de votre propre appareil, pas d'une connexion internet."
+            },
+            {
+              "question": "Dans quel ordre les fichiers sont-ils fusionnés ?",
+              "answer": "Dans l'ordre où ils apparaissent dans la liste de fichiers, qui est par défaut l'ordre dans lequel vous les avez ajoutés. Utilisez les flèches vers le haut et vers le bas à côté de chaque fichier pour les réordonner avant la fusion si vous avez besoin d'un ordre de pages différent dans le PDF final."
+            },
+            {
+              "question": "Comment écrire une plage de pages pour la division ?",
+              "answer": "Utilisez des numéros de page ou des plages séparés par des virgules, comme 1-3,5,8-9, ce qui produirait trois fichiers séparés : les pages 1 à 3, la page 5 seule, et les pages 8 à 9. Laissez le champ vide pour diviser chaque page individuelle en son propre fichier à la place."
+            },
+            {
+              "question": "Pourquoi y a-t-il une limite de taille de fichier ?",
+              "answer": "Parce que cet outil traite tout dans la mémoire de votre navigateur plutôt que sur un serveur, des fichiers extrêmement volumineux ou un très grand nombre de fichiers peuvent ralentir voire faire planter la page sur des appareils moins puissants. Une limite totale de 25 Mo garde l'outil rapide et fiable pour la grande majorité des documents courants tout en protégeant votre expérience de navigation."
+            },
+            {
+              "question": "Cet outil peut-il retirer une protection par mot de passe ou réparer un PDF corrompu ?",
+              "answer": "Non. Cet outil fonctionne avec des fichiers PDF standards, non chiffrés. Les fichiers protégés par mot de passe ou corrompus peuvent échouer au chargement ; vous devrez retirer le mot de passe ou réparer le fichier avec un logiciel dédié avant de le fusionner ou de le diviser ici."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "D'un format propriétaire à une norme universelle",
+            "paragraph": "Le PDF a été créé par Adobe Systems en 1993 sous le nom de Portable Document Format, conçu pour qu'un document ait un rendu identique quel que soit le logiciel, le matériel ou le système d'exploitation qui l'ouvre — un problème véritablement difficile à une époque où les traitements de texte dénaturaient couramment le formatage les uns des autres. Adobe a d'abord gardé le format propriétaire et vendu des logiciels de visualisation, mais a publié la spécification ouvertement au début des années 2000, et le PDF est devenu une norme internationale ISO officielle (ISO 32000) en 2008, le consacrant comme un format véritablement multiplateforme et neutre vis-à-vis des éditeurs, plutôt que lié au logiciel d'une seule entreprise."
+          },
+          "modernDevelopments": {
+            "title": "D'un logiciel spécialisé à un onglet de navigateur",
+            "paragraph": "Pendant la majeure partie de l'histoire du PDF, fusionner ou diviser des documents nécessitait un logiciel de bureau — des éditeurs PDF dédiés, des pilotes d'imprimante capables de combiner des travaux d'impression, ou des outils en ligne de commande compris principalement par des développeurs. Les navigateurs web modernes intègrent désormais des moteurs JavaScript assez rapides pour analyser et réécrire directement la structure interne des objets page du PDF, ce sur quoi s'appuient des bibliothèques comme celle derrière cet outil, transformant une opération qui nécessitait autrefois un logiciel installé en quelque chose qui s'exécute dans un simple onglet de navigateur, sans téléversement ni installation."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les formats de documents, les structures de fichiers et l'échange de données sont étudiés dans les programmes d'informatique. Voici les 5 meilleures institutions mondiales en informatique et systèmes d'information selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "Non — le cursus 6-3 du MIT (informatique et ingénierie) est un programme de premier cycle en présentiel sur le campus de Cambridge du MIT."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 2 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "Non — le programme de licence en informatique de Stanford est un diplôme en présentiel sur le campus de Stanford."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Classée n° 3 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "Non — le programme de licence de la School of Computer Science de CMU est en présentiel sur son campus de Pittsburgh."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Classée n° 4 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/ug/cs/",
+                "online": "Non — le Bachelor of Computing en informatique de la NUS est un programme en présentiel sur son campus de Singapour."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 5 mondial en informatique et systèmes d'information (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/teaching/ug/",
+                "online": "Non — le diplôme de premier cycle en informatique d'Oxford est dispensé en présentiel via son système de collèges et de tutorat."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — Division CEMSE",
+                "note": "Une université de recherche régionale de premier plan dans le monde arabe, proposant des programmes de master et de doctorat en informatique au sein de sa division Computer, Electrical and Mathematical Sciences and Engineering (CEMSE).",
+                "url": "https://cs.kaust.edu.sa/",
+                "online": "Non proposé en ligne, selon les pages officielles de la division ; les programmes de troisième cycle de KAUST se déroulent sur son campus de Thuwal, en Arabie saoudite."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Craft, J. R. (2003). Portable Document Format (PDF): Standardizing document files for publication. DESIDOC Bulletin of Information Technology, 23(1), 19-24.",
+          "note": "Un aperçu publié alors que le PDF devenait une norme de publication largement adoptée, examinant pourquoi une norme documentaire indépendante du format et universellement lisible importait pour distribuer et archiver des documents de manière fiable — la même structure documentaire sous-jacente que cet outil lit et réécrit lors de la fusion ou de la division d'un PDF.",
+          "url": "https://doi.org/10.14429/dbit.23.1.3587",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "file-size-converter": {
       "title": "Convertisseur de taille de fichier",
       "description": "Convertissez une taille de fichier dans toutes les unités à la fois, comparez les normes décimale (SI) et binaire (CEI), et estimez le temps de téléchargement — en direct pendant la saisie.",

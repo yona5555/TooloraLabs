@@ -6605,6 +6605,159 @@
         }
       }
     },
+    "pdf-merge-split": {
+      "title": "Combinar y Dividir PDF",
+      "description": "Combina varios archivos PDF en uno solo, o divide un único PDF en archivos separados por rango de páginas, todo directamente en tu navegador.",
+      "aboveFold": {
+        "resultTitle": "Resultado",
+        "processing": "Procesando...",
+        "mergeReady": "Tu PDF combinado está listo.",
+        "splitReady": "Tu PDF se dividió en {count} archivos.",
+        "downloadMerged": "Descargar PDF combinado",
+        "downloadZip": "Descargar ZIP",
+        "placeholderMerge": "Añade dos o más archivos PDF para combinarlos en uno.",
+        "placeholderSplit": "Elige un archivo PDF para dividirlo por página."
+      },
+      "nav": {
+        "tool": "Herramienta",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Archivos PDF",
+        "modeMerge": "Combinar",
+        "modeSplit": "Dividir",
+        "chooseFiles": "Haz clic o suelta archivos PDF aquí",
+        "chooseFile": "Haz clic o suelta un archivo PDF aquí",
+        "moveUp": "Subir",
+        "moveDown": "Bajar",
+        "remove": "Quitar",
+        "pageCount": "{count, plural, one {# página} other {# páginas}}",
+        "rangesLabel": "Rangos de páginas (opcional)",
+        "rangesHint": "p. ej. 1-3,5,8-9. Déjalo en blanco para dividir cada página en su propio archivo.",
+        "rangesPlaceholder": "1-3,5,8-9"
+      },
+      "errors": {
+        "tooLarge": "Estos archivos son demasiado grandes para que tu navegador los procese de forma segura. Mantén el total por debajo de 25 MB.",
+        "needTwoFiles": "Añade al menos dos archivos PDF para combinar.",
+        "needFile": "Elige un archivo PDF para dividir.",
+        "invalidPdf": "No se pudo leer ese archivo como PDF. Puede estar dañado o protegido con contraseña.",
+        "noPages": "No se encontraron páginas válidas en los rangos de páginas introducidos.",
+        "processingFailed": "Algo salió mal al procesar tu PDF. Comprueba el archivo e inténtalo de nuevo."
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta herramienta",
+          "paragraph1": "Esta herramienta lee y escribe archivos PDF completamente dentro de tu navegador, usando la misma estructura de documento subyacente que utilizan internamente los lectores de PDF: un PDF es una colección de páginas, cada una un objeto independiente, junto con un conjunto de fuentes, imágenes y otros recursos a los que hacen referencia. Combinar simplemente copia cada objeto de página de cada archivo de origen, en orden, en un nuevo documento; dividir copia un subconjunto elegido de objetos de página en uno o varios documentos nuevos. Ningún archivo que subas aquí se envía jamás a un servidor: todo ocurre localmente en tu dispositivo.",
+          "paragraph2": "Como todo se ejecuta en la memoria de tu navegador, archivos muy grandes o un número muy elevado de archivos pueden ralentizar o sobrecargar la página. Esta herramienta limita el tamaño total de los archivos procesados en una sola operación a 25 MB, un límite elegido para mantener el procesamiento rápido y fiable en una amplia gama de dispositivos, no una restricción arbitraria."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos escenarios muestran cómo se comportan la combinación y la división en la práctica.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "scenario": "Combinar tres PDF de 2, 4 y 1 páginas, en ese orden",
+              "result": "Un PDF de 7 páginas, con las páginas en el mismo orden en que se añadieron los archivos"
+            },
+            {
+              "scenario": "Dividir un PDF de 6 páginas sin introducir rangos de páginas",
+              "result": "Seis PDF separados de 1 página cada uno, descargados juntos como un archivo ZIP"
+            },
+            {
+              "scenario": "Dividir un PDF de 10 páginas usando los rangos 1-3,4-7,8-10",
+              "result": "Tres PDF, que contienen respectivamente las páginas 1-3, 4-7 y 8-10"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Se suben mis archivos PDF a algún sitio?",
+              "answer": "No. Toda la combinación y división ocurre localmente en tu navegador mediante JavaScript; tus archivos nunca salen de tu dispositivo ni se envían a ningún servidor. Esto también significa que la velocidad de procesamiento depende del rendimiento de tu propio dispositivo, no de una conexión a internet."
+            },
+            {
+              "question": "¿En qué orden se combinan los archivos?",
+              "answer": "En el orden en que aparecen en la lista de archivos, que por defecto es el orden en que los añadiste. Usa las flechas hacia arriba y hacia abajo junto a cada archivo para reordenarlos antes de combinar si necesitas un orden de páginas distinto en el PDF final."
+            },
+            {
+              "question": "¿Cómo escribo un rango de páginas para dividir?",
+              "answer": "Usa números de página o rangos separados por comas, como 1-3,5,8-9, lo que produciría tres archivos separados: las páginas 1 a 3, la página 5 sola, y las páginas 8 a 9. Deja el campo en blanco para dividir cada página individual en su propio archivo en su lugar."
+            },
+            {
+              "question": "¿Por qué hay un límite de tamaño de archivo?",
+              "answer": "Porque esta herramienta procesa todo en la memoria de tu navegador en lugar de en un servidor, archivos extremadamente grandes o un número muy alto de archivos pueden ralentizar o incluso bloquear la página en dispositivos menos potentes. Un límite total de 25 MB mantiene la herramienta rápida y fiable para la gran mayoría de documentos cotidianos, protegiendo a la vez tu experiencia de navegación."
+            },
+            {
+              "question": "¿Puede esta herramienta quitar la protección por contraseña o reparar un PDF dañado?",
+              "answer": "No. Esta herramienta funciona con archivos PDF estándar, sin cifrar. Los archivos protegidos con contraseña o dañados pueden fallar al cargarse; necesitarías quitar la contraseña o reparar el archivo con software dedicado antes de combinarlo o dividirlo aquí."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De un formato propietario a un estándar universal",
+            "paragraph": "El PDF fue creado por Adobe Systems en 1993 como el Portable Document Format, diseñado para que un documento se vea idéntico sin importar qué software, hardware o sistema operativo lo abra, un problema genuinamente difícil en una época en que los procesadores de texto solían distorsionar el formato de otros programas. Adobe mantuvo inicialmente el formato como propietario y vendía software visor, pero publicó la especificación abiertamente a principios de la década de 2000, y el PDF se convirtió en un estándar internacional ISO oficial (ISO 32000) en 2008, consolidándolo como un formato verdaderamente multiplataforma y neutral respecto al proveedor, en lugar de estar ligado al software de una sola empresa."
+          },
+          "modernDevelopments": {
+            "title": "De software especializado a una pestaña del navegador",
+            "paragraph": "Durante la mayor parte de la historia del PDF, combinar o dividir documentos requería software de escritorio: editores de PDF dedicados, controladores de impresora capaces de combinar trabajos de impresión, o herramientas de línea de comandos entendidas principalmente por desarrolladores. Los navegadores web modernos ahora incluyen motores de JavaScript lo bastante rápidos para analizar y reescribir directamente la estructura interna de objetos de página del PDF, que es en lo que se basan bibliotecas como la que hay detrás de esta herramienta, convirtiendo una operación que antes requería software instalado en algo que se ejecuta en una pestaña de navegador común, sin subida de archivos ni instalación."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Los formatos de documentos, las estructuras de archivos y el intercambio de datos se estudian dentro de los programas de Ciencias de la Computación. Estas son las 5 mejores instituciones del mundo en Ciencias de la Computación y Sistemas de Información según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificado n.º 1 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No: el Curso 6-3 del MIT (Ciencias de la Computación e Ingeniería) es un programa de grado presencial en el campus de Cambridge del MIT."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada n.º 2 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No: el programa de licenciatura en Ciencias de la Computación de Stanford es un título presencial en el campus de Stanford."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Clasificada n.º 3 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No: el programa de licenciatura de la School of Computer Science de CMU es presencial en su campus de Pittsburgh."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Clasificada n.º 4 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/ug/cs/",
+                "online": "No: el Bachelor of Computing en Ciencias de la Computación de la NUS es un programa presencial en su campus de Singapur."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada n.º 5 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/teaching/ug/",
+                "online": "No: el título de grado en Ciencias de la Computación de Oxford se imparte de forma presencial a través de su sistema de colegios y tutorías."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — División CEMSE",
+                "note": "Una universidad de investigación regional destacada del mundo árabe, que ofrece programas de maestría y doctorado en Ciencias de la Computación dentro de su división Computer, Electrical and Mathematical Sciences and Engineering (CEMSE).",
+                "url": "https://cs.kaust.edu.sa/",
+                "online": "No se ofrece como programa en línea, según las páginas oficiales de la división; los programas de posgrado de KAUST se imparten en su campus de Thuwal, Arabia Saudita."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Craft, J. R. (2003). Portable Document Format (PDF): Standardizing document files for publication. DESIDOC Bulletin of Information Technology, 23(1), 19-24.",
+          "note": "Un resumen publicado cuando el PDF se estaba convirtiendo en un estándar de publicación ampliamente adoptado, que examina por qué un estándar de documento independiente del formato y universalmente legible importaba para distribuir y archivar documentos de forma fiable, la misma estructura documental subyacente que esta herramienta lee y reescribe al combinar o dividir un PDF.",
+          "url": "https://doi.org/10.14429/dbit.23.1.3587",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "file-size-converter": {
       "title": "Conversor de tamaño de archivo",
       "description": "Convierte tamaños de archivo a todas las unidades a la vez, compara los estándares decimal (SI) y binario (IEC), y calcula el tiempo de descarga estimado — en vivo mientras escribes.",

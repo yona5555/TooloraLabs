@@ -371,6 +371,14 @@ export const tools: Tool[] = [
     keywords: ["base64", "encode", "decode", "developer"],
   },
   {
+    slug: "pdf-merge-split",
+    title: "PDF Merge & Split",
+    category: "file-tools",
+    description: "Combine multiple PDF files into one, or split a single PDF into separate files by page range, entirely in your browser.",
+    featured: false,
+    keywords: ["pdf merge", "pdf split", "combine pdf", "pdf pages", "pdf tool"],
+  },
+  {
     slug: "csv-json-converter",
     title: "CSV to JSON Converter",
     category: "file-tools",

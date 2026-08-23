@@ -6601,6 +6601,159 @@
         }
       }
     },
+    "pdf-merge-split": {
+      "title": "PDF Merge & Split",
+      "description": "Combine multiple PDF files into one, or split a single PDF into separate files by page range, entirely in your browser.",
+      "aboveFold": {
+        "resultTitle": "Result",
+        "processing": "Processing...",
+        "mergeReady": "Your merged PDF is ready.",
+        "splitReady": "Your PDF was split into {count} files.",
+        "downloadMerged": "Download Merged PDF",
+        "downloadZip": "Download ZIP",
+        "placeholderMerge": "Add two or more PDF files to merge them into one.",
+        "placeholderSplit": "Choose a PDF file to split it by page."
+      },
+      "nav": {
+        "tool": "Tool",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "PDF Files",
+        "modeMerge": "Merge",
+        "modeSplit": "Split",
+        "chooseFiles": "Click or drop PDF files here",
+        "chooseFile": "Click or drop a PDF file here",
+        "moveUp": "Move up",
+        "moveDown": "Move down",
+        "remove": "Remove",
+        "pageCount": "{count, plural, one {# page} other {# pages}}",
+        "rangesLabel": "Page Ranges (optional)",
+        "rangesHint": "e.g. 1-3,5,8-9. Leave blank to split every page into its own file.",
+        "rangesPlaceholder": "1-3,5,8-9"
+      },
+      "errors": {
+        "tooLarge": "These files are too large for your browser to process safely. Please keep the total under 25 MB.",
+        "needTwoFiles": "Add at least two PDF files to merge.",
+        "needFile": "Choose a PDF file to split.",
+        "invalidPdf": "That file couldn't be read as a PDF. It may be corrupted or password-protected.",
+        "noPages": "No valid pages were found in the page ranges you entered.",
+        "processingFailed": "Something went wrong while processing your PDF. Please check the file and try again."
+      },
+      "education": {
+        "intro": {
+          "title": "How This Tool Works",
+          "paragraph1": "This tool reads and writes PDF files entirely inside your browser, using the same underlying document structure that PDF readers use internally: a PDF is a collection of pages, each an independent object, alongside a set of fonts, images, and other resources they reference. Merging simply copies every page object from each source file, in order, into a new document; splitting copies a chosen subset of page objects into one or more new documents. No file you upload here is ever sent to a server — everything happens locally on your device.",
+          "paragraph2": "Because this all runs in your browser's memory, very large files or a very large number of files can slow down or strain the page. This tool caps the total size of files processed in a single operation at 25 MB, a limit chosen to keep processing fast and reliable across a wide range of devices rather than an arbitrary restriction."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few scenarios show how merging and splitting behave in practice.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "scenario": "Merge three PDFs of 2, 4, and 1 pages, in that order",
+              "result": "One 7-page PDF, with pages in the same order the files were added"
+            },
+            {
+              "scenario": "Split a 6-page PDF with no page ranges entered",
+              "result": "Six separate 1-page PDFs, downloaded together as a ZIP file"
+            },
+            {
+              "scenario": "Split a 10-page PDF using the ranges 1-3,4-7,8-10",
+              "result": "Three PDFs, containing pages 1-3, 4-7, and 8-10 respectively"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Are my PDF files uploaded anywhere?",
+              "answer": "No. All merging and splitting happens locally in your browser using JavaScript; your files never leave your device or get sent to any server. This also means processing speed depends on your own device's performance, not an internet connection."
+            },
+            {
+              "question": "In what order are files merged?",
+              "answer": "In the order they appear in the file list, which is the order you added them by default. Use the up and down arrows next to each file to reorder them before merging if you need a different page order in the final PDF."
+            },
+            {
+              "question": "How do I write a page range for splitting?",
+              "answer": "Use comma-separated page numbers or ranges, like 1-3,5,8-9, which would produce three separate files: pages 1 through 3, page 5 alone, and pages 8 through 9. Leave the field blank to split every single page into its own file instead."
+            },
+            {
+              "question": "Why is there a file size limit?",
+              "answer": "Because this tool processes everything in your browser's memory rather than on a server, extremely large files or a very large number of files can slow down or even crash the page on lower-powered devices. A 25 MB total limit keeps the tool fast and reliable for the vast majority of everyday documents while protecting your browsing experience."
+            },
+            {
+              "question": "Can this tool remove password protection or fix a corrupted PDF?",
+              "answer": "No. This tool works with standard, unencrypted PDF files. Password-protected or corrupted files may fail to load; you would need to remove the password or repair the file with dedicated software before merging or splitting it here."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From a Proprietary Format to a Universal Standard",
+            "paragraph": "PDF was created by Adobe Systems in 1993 as the Portable Document Format, designed to let a document look identical regardless of what software, hardware, or operating system opened it — a genuinely hard problem at a time when word processors routinely mangled each other's formatting. Adobe initially kept the format proprietary and sold viewer software, but released the specification openly in the early 2000s, and PDF became an official ISO international standard (ISO 32000) in 2008, cementing it as a truly cross-platform, vendor-neutral format rather than one tied to a single company's software."
+          },
+          "modernDevelopments": {
+            "title": "From Specialized Software to a Browser Tab",
+            "paragraph": "For most of PDF's history, merging or splitting documents required desktop software — dedicated PDF editors, printer drivers that could combine print jobs, or command-line tools understood mainly by developers. Modern web browsers now include JavaScript engines fast enough to parse and rewrite PDF's internal page-object structure directly, which is what libraries like the one behind this tool rely on, making an operation that once required installed software into something that runs in an ordinary browser tab, with no upload and no installation."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Document formats, file structures, and data interchange are studied within Computer Science programs. Here are the top 5 globally for Computer Science & Information Systems in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/undergraduate-programs/curriculum/6-3-computer-science-and-engineering/",
+                "online": "No — MIT's Course 6-3 (Computer Science and Engineering) is an in-person undergraduate program on MIT's Cambridge campus."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/academics-overview/academics-bachelors-program",
+                "online": "No — Stanford's Computer Science Bachelor's program is an in-person degree on Stanford's campus."
+              },
+              {
+                "name": "Carnegie Mellon University",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cmu.edu/admission/majors-programs/school-of-computer-science/computer-science",
+                "online": "No — CMU's School of Computer Science Bachelor's program is in-person on its Pittsburgh campus."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/ug/cs/",
+                "online": "No — NUS's Bachelor of Computing in Computer Science is an in-person program on its Singapore campus."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.ox.ac.uk/teaching/ug/",
+                "online": "No — Oxford's Computer Science undergraduate degree is delivered in person through its college and tutorial system."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — CEMSE Division",
+                "note": "A leading regional research university in the Arab world, offering MS and PhD programs in Computer Science within its Computer, Electrical and Mathematical Sciences and Engineering (CEMSE) Division.",
+                "url": "https://cs.kaust.edu.sa/",
+                "online": "Not offered as an online program, per the division's official pages; KAUST's graduate programs are delivered on its Thuwal, Saudi Arabia campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Craft, J. R. (2003). Portable Document Format (PDF): Standardizing document files for publication. DESIDOC Bulletin of Information Technology, 23(1), 19-24.",
+          "note": "An overview published as PDF was becoming a widely adopted publication standard, examining why a format-independent, universally readable document standard mattered for reliably distributing and archiving documents — the same underlying document structure this tool reads and rewrites when merging or splitting a PDF.",
+          "url": "https://doi.org/10.14429/dbit.23.1.3587",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "file-size-converter": {
       "title": "File Size Converter",
       "description": "Convert file sizes across every unit at once, compare decimal (SI) vs binary (IEC) standards, and estimate download time — live as you type.",
