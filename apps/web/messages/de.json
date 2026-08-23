@@ -5330,6 +5330,155 @@
         }
       }
     },
+    "color-palette-generator": {
+      "title": "Farbpaletten-Generator",
+      "description": "Erstellen Sie komplementäre, analoge, triadische und andere Farbharmonien aus einer Grundfarbe, mit kopierbereiten HEX-, RGB- und HSL-Codes.",
+      "aboveFold": {
+        "resultTitle": "Erstellte Palette",
+        "placeholder": "Wählen Sie eine Grundfarbe und einen Harmonietyp, um eine Palette zu erstellen."
+      },
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrundwissen"
+      },
+      "form": {
+        "inputTitle": "Grundfarbe",
+        "baseColorLabel": "Grundfarbe",
+        "randomButton": "Zufällig",
+        "invalidHex": "Geben Sie einen gültigen sechsstelligen Hex-Farbcode ein, z. B. #3B82F6.",
+        "harmonyLabel": "Harmonietyp",
+        "harmony": {
+          "complementary": "Komplementär",
+          "analogous": "Analog",
+          "triadic": "Triadisch",
+          "splitComplementary": "Split-Komplementär",
+          "tetradic": "Tetradisch",
+          "monochromatic": "Monochromatisch"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "So funktioniert dieses Tool",
+          "paragraph1": "Dieses Tool erstellt Farbharmonien, indem es Ihre Grundfarbe in HSL (Farbton, Sättigung, Helligkeit) umwandelt und ihren Farbton um feste, für jeden Harmonietyp spezifische Winkel auf dem Farbkreis dreht — 180° für ein komplementäres Paar, 120°-Schritte für ein triadisches Trio und so weiter — während bei Monochromatisch stattdessen Farbton und Sättigung konstant bleiben und nur die Helligkeit variiert. Die gesamte Verarbeitung erfolgt lokal in Ihrem Browser; keine hier eingegebene Farbe wird jemals irgendwohin gesendet.",
+          "paragraph2": "Jeder Harmonietyp spiegelt eine klassische Beziehung des Farbkreises wider, die in einer jahrhundertealten Farbtheorie verwurzelt ist: Komplementärfarben liegen einander für maximalen Kontrast gegenüber, analoge Farben liegen für ein natürlich stimmiges Erscheinungsbild nebeneinander, und triadische oder tetradische Farben sind für eine ausgewogene Vielfalt gleichmäßig über den Kreis verteilt. Keine dieser Regeln garantiert für sich genommen ein gutes Design — sie sind ein Ausgangspunkt zum Erkunden, kein Ersatz für ein geschultes Auge."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Mit einer Grundfarbe von #3B82F6 (ein mittleres Blau) zeigt sich Folgendes für jeden Harmonietyp.",
+          "columnHarmony": "Harmonie",
+          "columnDescription": "Beschreibung",
+          "columnExample": "Beispielfarben",
+          "rows": [
+            {
+              "harmony": "Komplementär",
+              "description": "Die Grundfarbe plus ihr Gegenstück, 180° auf dem Kreis entfernt.",
+              "example": "#3b82f6, #f6af3b"
+            },
+            {
+              "harmony": "Analog",
+              "description": "Drei Farben mit 30° Abstand, Nachbarn auf dem Kreis.",
+              "example": "#3be0f6, #3b82f6, #513bf6"
+            },
+            {
+              "harmony": "Triadisch",
+              "description": "Drei Farben gleichmäßig mit 120° Abstand verteilt.",
+              "example": "#3b82f6, #f63b82, #82f63b"
+            },
+            {
+              "harmony": "Monochromatisch",
+              "description": "Fünf Nuancen desselben Farbtons bei unterschiedlichen Helligkeitsstufen.",
+              "example": "#042862, #0846ab, #0b64f4, #5492f7, #9dc1fb"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Was ist der Unterschied zwischen HEX, RGB und HSL?",
+              "answer": "Alle drei beschreiben dieselben Farben, nur in unterschiedlichen Formaten. HEX packt Rot-, Grün- und Blauwerte in einen im Webdesign weit verbreiteten sechsstelligen Code (wie #3B82F6). RGB gibt dieselben drei Werte als Zahlen von 0-255 an. HSL beschreibt eine Farbe stattdessen über Farbton (Position auf dem Farbkreis), Sättigung (Intensität) und Helligkeit — oft intuitiver, um die Nuance einer Farbe anzupassen, ohne ihren zugrunde liegenden Ton zu verändern, und genau das nutzt dieses Tool intern, um jede Harmonie zu erstellen."
+            },
+            {
+              "question": "Welchen Harmonietyp sollte ich verwenden?",
+              "answer": "Das hängt vom gewünschten Effekt ab. Komplementärpaare erzeugen starken Kontrast und eignen sich für Elemente, die hervorstechen sollen, wie einen Call-to-Action-Button. Analoge Farben erzeugen ein ruhiges, stimmiges Gefühl, geeignet für Hintergründe oder Verläufe. Triadische und tetradische Schemata bieten mehr Vielfalt bei gleichzeitiger Ausgewogenheit, nützlich für Oberflächen, die mehrere unterschiedliche, aber harmonische Farben benötigen. Monochromatisch ist die sicherste Wahl, wenn garantierte Konsistenz gewünscht ist, etwa für Hover- und Aktiv-Zustände einer einzelnen UI-Farbe."
+            },
+            {
+              "question": "Warum wirken manche erzeugten Farben trüb oder unpassend, obwohl die Berechnung sie als harmonisch ausweist?",
+              "answer": "Die Harmonieregeln des Farbkreises beschreiben Beziehungen zwischen Farbtönen, nicht wie eine bestimmte Kombination aus Farbton, Sättigung und Helligkeit tatsächlich auf einem Bildschirm oder im Druck wirkt. Ein mathematisch korrektes triadisches Set kann trotzdem unausgewogen wirken, wenn eine Farbe deutlich dunkler oder gesättigter ist als die anderen. Betrachten Sie diese Paletten als Ausgangspunkt zum Anpassen, nicht als fertiges Ergebnis."
+            },
+            {
+              "question": "Ist das dasselbe wie ein physischer, pigmentbasierter Farbkreis?",
+              "answer": "Nein. Dieses Tool arbeitet mit HSL, einem Modell für lichtbasierte Farbe auf Bildschirmen (additive Farbmischung), bei dem Rot, Grün und Blau sich zu Weiß kombinieren. Traditionelle Farbkreise von Malern basieren typischerweise auf subtraktiver, pigmentbasierter Mischung (Grundfarben Rot, Gelb, Blau), die anderen Beziehungen folgt. Beide sind gültige Systeme für ihr jeweiliges Medium, lassen sich aber nicht exakt aufeinander übertragen."
+            },
+            {
+              "question": "Prüft dieses Tool, ob meine Farben genug Kontrast für Barrierefreiheit haben?",
+              "answer": "Nein. Farbharmonie und Kontrast für Barrierefreiheit (etwa WCAG-Kontrastverhältnisanforderungen für die Lesbarkeit von Text) sind unterschiedliche Anliegen — ein harmonisches Farbpaar kann dennoch die Barrierefreiheits-Kontrastanforderungen verfehlen oder umgekehrt. Prüfen Sie jede für Text oder interaktive Elemente vorgesehene Palette separat anhand der Kontrastrichtlinien für Barrierefreiheit."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrundwissen zu diesem Tool",
+          "history": {
+            "title": "Von Newtons Farbkreis zum modernen Farbmodell",
+            "paragraph": "Der Farbkreis geht auf Isaac Newton zurück, der 1666 das Spektrum des sichtbaren Lichts kreisförmig anordnete, um zu zeigen, wie Farben zueinander in Beziehung stehen — ein erster Schritt hin zu einer geometrischen statt rein namentlichen Beschreibung von Farbbeziehungen. Maler und Theoretiker nach Newton, darunter Johann Wolfgang von Goethe und später Albert Munsell, bauten diese Idee mit auf Pigmentmischung basierenden Harmonieregeln aus und legten damit den Grundstein für die komplementären, analogen und triadischen Beziehungen, die noch heute gelehrt werden. Das von diesem Tool verwendete HSL-Modell ist eine Neuformulierung desselben zugrunde liegenden Farbton-Kreis-Konzepts aus dem 20. Jahrhundert, speziell angepasst zur Beschreibung lichtbasierter Farbe auf Bildschirmen anstelle von gemischtem Pigment."
+          },
+          "modernDevelopments": {
+            "title": "Von der Maler-Theorie zum Webdesign-Tool",
+            "paragraph": "Den größten Teil ihrer Geschichte über waren Farbharmonie-Regeln die Domäne ausgebildeter Maler und Designer, die mit physischen Pigmenten oder später Druckfarbsystemen arbeiteten. Der Wechsel zum bildschirmbasierten Design brachte HSL und RGB als Arbeitsfarbmodelle für Benutzeroberflächen hervor, und Farbpaletten-Generatoren wie dieser übertrugen dieselben jahrhundertealten Harmonieregeln auf ein interaktives Tool, das es jedem ohne formale Farbtheorie-Ausbildung ermöglicht, harmonische Kombinationen für eine Website, App oder Marke ausgehend von einer einzigen bereits vorhandenen Farbidee zu erkunden."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Farbtheorie und Farbharmonie sind Kernthemen der Kunst- und Designausbildung. Hier sind die 5 weltweit führenden Institutionen für Art & Design im QS World University Rankings by Subject 2025 sowie eine regionale Option:",
+            "universities": [
+              {
+                "name": "Royal College of Art (RCA)",
+                "note": "Weltweit auf Platz 1 in Art & Design (QS World University Rankings by Subject 2025), im elften Jahr in Folge.",
+                "url": "https://www.rca.ac.uk/",
+                "online": "Bietet ein Graduate Diploma in Art & Design an, verfügbar auf dem Campus, online oder in gemischter Form, sowie eigenständige Online-Kurzkurse; die vollständigen MA-Programme bleiben überwiegend präsenzbasiert."
+              },
+              {
+                "name": "University of the Arts London (UAL)",
+                "note": "Weltweit auf Platz 2 in Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://ualonline.arts.ac.uk/",
+                "online": "Bietet über UAL Online vollständig online absolvierbare Postgraduiertenabschlüsse (MA, PgDip, PgCert) in Design, Kommunikation und verwandten Fächern an."
+              },
+              {
+                "name": "The New School — Parsons School of Design",
+                "note": "Weltweit auf Platz 3 in Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://www.newschool.edu/parsons/graduate/",
+                "online": "Nein — Parsons' MFA-Designprogramme sind campusbasiert in New York City, ohne auf den offiziellen Seiten der Graduiertenprogramme angegebene Online-Option."
+              },
+              {
+                "name": "Rhode Island School of Design (RISD)",
+                "note": "Weltweit auf Platz 4 in Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://www.risd.edu/academics/graduate-study",
+                "online": "Nein — alle Graduiertenprogramme der RISD sind ausschließlich präsenzbasiert; RISD Continuing Education bietet separat nicht-abschlussbezogene Online-Zertifikatskurse an."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 5 in Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://architecture.mit.edu/",
+                "online": "Nein — die designbezogenen Programme des MIT, angesiedelt in der Architekturabteilung und im Media Lab, sind überwiegend präsenzbasiert; ein eigener Online-Abschluss in Art & Design wird nicht angeboten."
+              },
+              {
+                "name": "Virginia Commonwealth University School of the Arts in Qatar (VCUarts Qatar)",
+                "note": "Eine führende regionale Designschule in der arabischen Welt, akkreditiert von der US-amerikanischen National Association of Schools of Art and Design (NASAD), mit einem BFA in Grafikdesign neben weiteren Kunst- und Designabschlüssen.",
+                "url": "https://qatar.vcu.edu/",
+                "online": "Laut offiziellen Seiten der Schule nicht als Online-Programm angeboten; der Unterricht findet auf dem Campus in Doha, Katar, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Schloss, K. B., & Palmer, S. E. (2011). Aesthetic response to color combinations: preference, harmony, and similarity. Attention, Perception, & Psychophysics, 73(2), 551-571.",
+          "note": "Eine Studie, die untersucht, wie Menschen unterschiedliche Farbkombinationen tatsächlich wahrnehmen und bevorzugen, und feststellt, dass wahrgenommene Harmonie und bloße Vorliebe zwar verwandte, aber unterschiedliche Urteile sind — ein hilfreicher Kontext dafür, warum die von diesem Tool angewendeten klassischen Farbkreisregeln ein gut etablierter Ausgangspunkt sind, keine Garantie dafür, dass jeder Betrachter eine gegebene Kombination gleichermaßen ansprechend findet.",
+          "url": "https://doi.org/10.3758/s13414-010-0027-0",
+          "readOriginal": "Originalartikel lesen"
+        }
+      }
+    },
     "unit-converter": {
       "title": "Einheitenumrechner",
       "description": "Rechnen Sie Länge, Gewicht, Temperatur, Fläche, Volumen und Geschwindigkeit um – sehen Sie den Wert gleichzeitig in jede Einheit der Kategorie umgerechnet.",

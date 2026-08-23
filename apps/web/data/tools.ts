@@ -315,6 +315,21 @@ export const tools: Tool[] = [
     keywords: ["barcode", "upc", "ean", "code128", "gs1", "generator"],
   },
   {
+    slug: "color-palette-generator",
+    title: "Color Palette Generator",
+    category: "developer-tools",
+    description:
+      "Generate complementary, analogous, triadic, and other color harmonies from a base color, with HEX, RGB, and HSL codes ready to copy.",
+    featured: false,
+    keywords: [
+      "color palette generator",
+      "color scheme",
+      "complementary colors",
+      "hex color codes",
+      "color harmony",
+    ],
+  },
+  {
     slug: "password-generator",
     title: "Password Generator",
     category: "developer-tools",

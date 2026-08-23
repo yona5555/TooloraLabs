@@ -18,3 +18,4 @@ export * from "./RetirementCalculator";
 export * from "./HouseAffordabilityCalculator";
 export * from "./DebtToIncomeCalculator";
 export * from "./IdealWeightCalculator";
+export * from "./ColorPaletteGenerator";

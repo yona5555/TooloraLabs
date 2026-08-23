@@ -5326,6 +5326,155 @@
         }
       }
     },
+    "color-palette-generator": {
+      "title": "Color Palette Generator",
+      "description": "Generate complementary, analogous, triadic, and other color harmonies from a base color, with HEX, RGB, and HSL codes ready to copy.",
+      "aboveFold": {
+        "resultTitle": "Generated Palette",
+        "placeholder": "Choose a base color and a harmony type to generate a palette."
+      },
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Base Color",
+        "baseColorLabel": "Base Color",
+        "randomButton": "Random",
+        "invalidHex": "Enter a valid 6-digit hex color, like #3B82F6.",
+        "harmonyLabel": "Harmony Type",
+        "harmony": {
+          "complementary": "Complementary",
+          "analogous": "Analogous",
+          "triadic": "Triadic",
+          "splitComplementary": "Split-Complementary",
+          "tetradic": "Tetradic",
+          "monochromatic": "Monochromatic"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "How This Tool Works",
+          "paragraph1": "This tool generates color harmonies by converting your base color to HSL (hue, saturation, lightness) and rotating its hue around the color wheel by fixed angles specific to each harmony type — 180° for a complementary pair, 120° steps for a triadic trio, and so on — while monochromatic instead holds the hue and saturation constant and varies only lightness. All processing happens locally in your browser; no color you enter here is ever sent anywhere.",
+          "paragraph2": "Each harmony type reflects a different classic color-wheel relationship rooted in centuries-old color theory: complementary colors sit opposite each other for maximum contrast, analogous colors sit next to each other for a naturally cohesive look, and triadic or tetradic colors are evenly spaced around the wheel for balanced variety. None of these rules guarantee a good design on their own — they're a starting point for exploration, not a substitute for a trained eye."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Using a base color of #3B82F6 (a mid-tone blue), here is what each harmony type produces.",
+          "columnHarmony": "Harmony",
+          "columnDescription": "Description",
+          "columnExample": "Example Colors",
+          "rows": [
+            {
+              "harmony": "Complementary",
+              "description": "The base color plus its opposite, 180° around the wheel.",
+              "example": "#3b82f6, #f6af3b"
+            },
+            {
+              "harmony": "Analogous",
+              "description": "Three colors 30° apart, neighbors on the wheel.",
+              "example": "#3be0f6, #3b82f6, #513bf6"
+            },
+            {
+              "harmony": "Triadic",
+              "description": "Three colors evenly spaced 120° apart.",
+              "example": "#3b82f6, #f63b82, #82f63b"
+            },
+            {
+              "harmony": "Monochromatic",
+              "description": "Five shades of the same hue at different lightness levels.",
+              "example": "#042862, #0846ab, #0b64f4, #5492f7, #9dc1fb"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What's the difference between HEX, RGB, and HSL?",
+              "answer": "All three describe the same colors, just in different formats. HEX packs red, green, and blue values into a six-digit code widely used in web design (like #3B82F6). RGB spells out those same three values as numbers from 0-255. HSL instead describes a color by hue (position on the color wheel), saturation (intensity), and lightness — which is often more intuitive for adjusting a color's shade without changing its underlying tone, and is exactly what this tool uses internally to build each harmony."
+            },
+            {
+              "question": "Which harmony type should I use?",
+              "answer": "It depends on the effect you want. Complementary pairs create strong contrast and are useful for elements that need to stand out, like a call-to-action button. Analogous colors create a calm, cohesive feel suited to backgrounds or gradients. Triadic and tetradic schemes offer more variety while staying balanced, useful for interfaces needing several distinct but harmonious colors. Monochromatic is the safest choice when you want guaranteed consistency, such as shades for hover and active states of a single UI color."
+            },
+            {
+              "question": "Why do some generated colors look muddy or clash even though the math says they're harmonious?",
+              "answer": "Color-wheel harmony rules describe relationships between hues, not how a given hue, saturation, and lightness combination will actually look together on a screen or in print. A mathematically correct triadic set can still look unbalanced if one color is much darker or more saturated than the others. Treat these palettes as a starting point to adjust from, not a finished result."
+            },
+            {
+              "question": "Is this the same as how a physical, pigment-based color wheel works?",
+              "answer": "No. This tool works in HSL, a model built for light-based color on screens (additive color), where red, green, and blue combine to make white. Traditional painters' color wheels are typically based on subtractive, pigment-based mixing (red, yellow, blue primaries), which follows different relationships. Both are valid systems for their respective mediums, but they don't map onto each other exactly."
+            },
+            {
+              "question": "Does this check whether my colors have enough contrast for accessibility?",
+              "answer": "No. Color harmony and contrast accessibility (such as WCAG contrast ratio requirements for text readability) are different concerns — a harmonious pair of colors can still fail accessibility contrast requirements, or vice versa. Check any palette you plan to use for text or interactive elements against accessibility contrast guidelines separately."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Newton's Wheel to the Modern Color Model",
+            "paragraph": "The color wheel traces back to Isaac Newton, who in 1666 arranged the spectrum of visible light into a circle to show how colors relate to one another — the first step toward describing color relationships geometrically rather than just by name. Painters and theorists after Newton, including Johann Wolfgang von Goethe and later Albert Munsell, built on this idea with color-harmony rules based on pigment mixing, laying the groundwork for the complementary, analogous, and triadic relationships still taught today. The HSL model this tool uses is a 20th-century reformulation of the same underlying hue-circle concept, adapted specifically for describing light-based color on screens rather than mixed pigment."
+          },
+          "modernDevelopments": {
+            "title": "From Painter's Theory to a Web Design Tool",
+            "paragraph": "For most of their history, color-harmony rules were the province of trained painters and designers working with physical pigments or, later, print color systems. The shift to screen-based design introduced HSL and RGB as the working color models for user interfaces, and color-palette generators like this one moved the same centuries-old harmony rules onto an interactive tool, letting anyone without formal color-theory training explore harmonious combinations for a website, app, or brand starting from a single color they already have in mind."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Color theory and color harmony are core topics within art and design education. Here are the top 5 globally for Art & Design in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Royal College of Art (RCA)",
+                "note": "Ranked #1 worldwide for Art & Design (QS World University Rankings by Subject 2025), for the eleventh consecutive year.",
+                "url": "https://www.rca.ac.uk/",
+                "online": "Offers a Graduate Diploma in Art & Design available on-campus, online, or in a blended format, plus standalone online short courses; its full MA programmes remain primarily on-campus."
+              },
+              {
+                "name": "University of the Arts London (UAL)",
+                "note": "Ranked #2 worldwide for Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://ualonline.arts.ac.uk/",
+                "online": "Offers full online postgraduate degrees (MA, PgDip, PgCert) across design, communication, and related subjects through UAL Online."
+              },
+              {
+                "name": "The New School — Parsons School of Design",
+                "note": "Ranked #3 worldwide for Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://www.newschool.edu/parsons/graduate/",
+                "online": "No — Parsons' MFA design programs are campus-based in New York City, with no online delivery mode listed on the official graduate program pages."
+              },
+              {
+                "name": "Rhode Island School of Design (RISD)",
+                "note": "Ranked #4 worldwide for Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://www.risd.edu/academics/graduate-study",
+                "online": "No — all of RISD's graduate degree programs are on-campus only; RISD Continuing Education separately offers non-degree online certificate courses."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #5 worldwide for Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://architecture.mit.edu/",
+                "online": "No — MIT's design-related programs, based in its Department of Architecture and Media Lab, are primarily in-person; no dedicated online Art & Design degree is offered."
+              },
+              {
+                "name": "Virginia Commonwealth University School of the Arts in Qatar (VCUarts Qatar)",
+                "note": "A leading regional design school in the Arab world, accredited by the U.S. National Association of Schools of Art and Design (NASAD), offering a BFA in Graphic Design among other art and design degrees.",
+                "url": "https://qatar.vcu.edu/",
+                "online": "Not offered as an online program, per the school's official pages; instruction is delivered on its Doha, Qatar campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Schloss, K. B., & Palmer, S. E. (2011). Aesthetic response to color combinations: preference, harmony, and similarity. Attention, Perception, & Psychophysics, 73(2), 551-571.",
+          "note": "A study examining how people actually perceive and prefer different color combinations, finding that perceived harmony and simple preference are related but distinct judgments — useful context for why the classic color-wheel rules this tool applies are a well-established starting point, not a guarantee that every viewer will find a given combination equally pleasing.",
+          "url": "https://doi.org/10.3758/s13414-010-0027-0",
+          "readOriginal": "Read the Original Article"
+        }
+      }
+    },
     "unit-converter": {
       "title": "Unit Converter",
       "description": "Convert length, weight, temperature, area, volume, and speed — see the value converted to every unit in the category at once.",

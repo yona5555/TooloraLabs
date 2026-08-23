@@ -5330,6 +5330,155 @@
         }
       }
     },
+    "color-palette-generator": {
+      "title": "Generador de Paletas de Colores",
+      "description": "Genera armonías de colores complementarios, análogos, triádicos y otros a partir de un color base, con códigos HEX, RGB y HSL listos para copiar.",
+      "aboveFold": {
+        "resultTitle": "Paleta generada",
+        "placeholder": "Elige un color base y un tipo de armonía para generar una paleta."
+      },
+      "nav": {
+        "tool": "Generador",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Color base",
+        "baseColorLabel": "Color base",
+        "randomButton": "Aleatorio",
+        "invalidHex": "Introduce un color hexadecimal válido de 6 dígitos, como #3B82F6.",
+        "harmonyLabel": "Tipo de armonía",
+        "harmony": {
+          "complementary": "Complementaria",
+          "analogous": "Análoga",
+          "triadic": "Triádica",
+          "splitComplementary": "Complementaria dividida",
+          "tetradic": "Tetrádica",
+          "monochromatic": "Monocromática"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo funciona esta herramienta",
+          "paragraph1": "Esta herramienta genera armonías de color convirtiendo tu color base a HSL (tono, saturación, luminosidad) y rotando su tono alrededor de la rueda de color en ángulos fijos específicos de cada tipo de armonía —180° para un par complementario, pasos de 120° para un trío triádico, etc.—, mientras que el modo monocromático mantiene fijos el tono y la saturación y solo varía la luminosidad. Todo el procesamiento ocurre localmente en tu navegador; ningún color que introduzcas aquí se envía a ningún sitio.",
+          "paragraph2": "Cada tipo de armonía refleja una relación clásica de la rueda de color arraigada en una teoría del color de siglos de antigüedad: los colores complementarios se sitúan opuestos entre sí para un contraste máximo, los colores análogos se sitúan uno junto al otro para un aspecto naturalmente cohesivo, y los colores triádicos o tetrádicos se distribuyen uniformemente alrededor de la rueda para una variedad equilibrada. Ninguna de estas reglas garantiza por sí sola un buen diseño; son un punto de partida para explorar, no un sustituto de un ojo entrenado."
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Usando un color base #3B82F6 (un azul de tono medio), esto es lo que produce cada tipo de armonía.",
+          "columnHarmony": "Armonía",
+          "columnDescription": "Descripción",
+          "columnExample": "Colores de ejemplo",
+          "rows": [
+            {
+              "harmony": "Complementaria",
+              "description": "El color base más su opuesto, a 180° en la rueda.",
+              "example": "#3b82f6, #f6af3b"
+            },
+            {
+              "harmony": "Análoga",
+              "description": "Tres colores separados 30°, vecinos en la rueda.",
+              "example": "#3be0f6, #3b82f6, #513bf6"
+            },
+            {
+              "harmony": "Triádica",
+              "description": "Tres colores distribuidos uniformemente a 120° de distancia.",
+              "example": "#3b82f6, #f63b82, #82f63b"
+            },
+            {
+              "harmony": "Monocromática",
+              "description": "Cinco tonos del mismo matiz en distintos niveles de luminosidad.",
+              "example": "#042862, #0846ab, #0b64f4, #5492f7, #9dc1fb"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Cuál es la diferencia entre HEX, RGB y HSL?",
+              "answer": "Los tres describen los mismos colores, solo que en formatos distintos. HEX agrupa los valores de rojo, verde y azul en un código de seis dígitos muy usado en diseño web (como #3B82F6). RGB expresa esos mismos tres valores como números de 0 a 255. HSL, en cambio, describe un color por su tono (posición en la rueda de color), saturación (intensidad) y luminosidad, lo cual suele ser más intuitivo para ajustar el matiz de un color sin cambiar su tono subyacente, y es exactamente lo que esta herramienta usa internamente para construir cada armonía."
+            },
+            {
+              "question": "¿Qué tipo de armonía debería usar?",
+              "answer": "Depende del efecto que busques. Los pares complementarios crean un fuerte contraste y son útiles para elementos que necesitan destacar, como un botón de llamada a la acción. Los colores análogos crean una sensación calmada y cohesiva, adecuada para fondos o degradados. Los esquemas triádicos y tetrádicos ofrecen más variedad manteniendo el equilibrio, útiles para interfaces que necesitan varios colores distintos pero armoniosos. El monocromático es la opción más segura cuando quieres garantizar consistencia, como en los tonos para los estados hover y activo de un mismo color de interfaz."
+            },
+            {
+              "question": "¿Por qué algunos colores generados se ven apagados o chocan entre sí aunque el cálculo diga que son armoniosos?",
+              "answer": "Las reglas de armonía de la rueda de color describen relaciones entre tonos, no cómo se verá realmente en pantalla o en impresión una combinación dada de tono, saturación y luminosidad. Un conjunto triádico matemáticamente correcto aún puede verse desequilibrado si un color es mucho más oscuro o más saturado que los demás. Trata estas paletas como un punto de partida para ajustar, no como un resultado terminado."
+            },
+            {
+              "question": "¿Es esto lo mismo que una rueda de color física basada en pigmentos?",
+              "answer": "No. Esta herramienta funciona en HSL, un modelo creado para el color basado en luz en pantallas (color aditivo), donde el rojo, el verde y el azul se combinan para formar blanco. Las ruedas de color tradicionales de los pintores suelen basarse en mezcla sustractiva con pigmentos (primarios rojo, amarillo, azul), que sigue relaciones distintas. Ambos son sistemas válidos para sus respectivos medios, pero no se corresponden exactamente entre sí."
+            },
+            {
+              "question": "¿Esto comprueba si mis colores tienen suficiente contraste para la accesibilidad?",
+              "answer": "No. La armonía de color y el contraste de accesibilidad (como los requisitos de ratio de contraste WCAG para la legibilidad del texto) son aspectos distintos: un par de colores armonioso puede seguir sin cumplir los requisitos de contraste de accesibilidad, o viceversa. Verifica por separado cualquier paleta que planees usar para texto o elementos interactivos frente a las pautas de contraste de accesibilidad."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "De la rueda de Newton al modelo de color moderno",
+            "paragraph": "La rueda de color se remonta a Isaac Newton, quien en 1666 dispuso el espectro de luz visible en un círculo para mostrar cómo se relacionan los colores entre sí, un primer paso hacia describir las relaciones de color de forma geométrica en lugar de solo por nombre. Pintores y teóricos posteriores a Newton, entre ellos Johann Wolfgang von Goethe y más tarde Albert Munsell, ampliaron esta idea con reglas de armonía basadas en la mezcla de pigmentos, sentando las bases de las relaciones complementarias, análogas y triádicas que aún se enseñan hoy. El modelo HSL que usa esta herramienta es una reformulación del siglo XX del mismo concepto subyacente de círculo de tonos, adaptado específicamente para describir el color basado en luz en pantallas en lugar del pigmento mezclado."
+          },
+          "modernDevelopments": {
+            "title": "De la teoría del pintor a una herramienta de diseño web",
+            "paragraph": "Durante la mayor parte de su historia, las reglas de armonía de color fueron dominio de pintores y diseñadores formados que trabajaban con pigmentos físicos o, más tarde, con sistemas de color de impresión. El paso al diseño en pantalla introdujo HSL y RGB como modelos de color de trabajo para las interfaces de usuario, y generadores de paletas de color como este trasladaron esas mismas reglas de armonía centenarias a una herramienta interactiva, permitiendo que cualquiera sin formación formal en teoría del color explore combinaciones armoniosas para un sitio web, una app o una marca a partir de un solo color que ya tiene en mente."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La teoría del color y la armonía cromática son temas centrales en la educación de arte y diseño. Estas son las 5 mejores instituciones del mundo en Arte y Diseño según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Royal College of Art (RCA)",
+                "note": "Clasificado n.º 1 mundial en Arte y Diseño (QS World University Rankings by Subject 2025), por undécimo año consecutivo.",
+                "url": "https://www.rca.ac.uk/",
+                "online": "Ofrece un Graduate Diploma in Art & Design disponible en el campus, en línea o en formato mixto, además de cursos cortos en línea independientes; sus programas completos de MA siguen siendo principalmente presenciales."
+              },
+              {
+                "name": "University of the Arts London (UAL)",
+                "note": "Clasificada n.º 2 mundial en Arte y Diseño (QS World University Rankings by Subject 2025).",
+                "url": "https://ualonline.arts.ac.uk/",
+                "online": "Ofrece titulaciones de posgrado totalmente en línea (MA, PgDip, PgCert) en diseño, comunicación y disciplinas afines a través de UAL Online."
+              },
+              {
+                "name": "The New School — Parsons School of Design",
+                "note": "Clasificada n.º 3 mundial en Arte y Diseño (QS World University Rankings by Subject 2025).",
+                "url": "https://www.newschool.edu/parsons/graduate/",
+                "online": "No: los programas de MFA en diseño de Parsons se imparten en el campus de Nueva York, sin modalidad en línea indicada en las páginas oficiales de los programas de posgrado."
+              },
+              {
+                "name": "Rhode Island School of Design (RISD)",
+                "note": "Clasificada n.º 4 mundial en Arte y Diseño (QS World University Rankings by Subject 2025).",
+                "url": "https://www.risd.edu/academics/graduate-study",
+                "online": "No: todos los programas de posgrado de RISD son solo presenciales; RISD Continuing Education ofrece por separado cursos certificados en línea sin título."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificado n.º 5 mundial en Arte y Diseño (QS World University Rankings by Subject 2025).",
+                "url": "https://architecture.mit.edu/",
+                "online": "No: los programas relacionados con el diseño del MIT, con sede en su Departamento de Arquitectura y el Media Lab, son principalmente presenciales; no se ofrece un título dedicado en línea de Arte y Diseño."
+              },
+              {
+                "name": "Virginia Commonwealth University School of the Arts in Qatar (VCUarts Qatar)",
+                "note": "Una escuela de diseño regional destacada del mundo árabe, acreditada por la National Association of Schools of Art and Design (NASAD) de Estados Unidos, que ofrece un BFA en Diseño Gráfico entre otros títulos de arte y diseño.",
+                "url": "https://qatar.vcu.edu/",
+                "online": "No se ofrece como programa en línea, según las páginas oficiales de la escuela; la enseñanza se imparte en su campus de Doha, Catar."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Schloss, K. B., & Palmer, S. E. (2011). Aesthetic response to color combinations: preference, harmony, and similarity. Attention, Perception, & Psychophysics, 73(2), 551-571.",
+          "note": "Un estudio que examina cómo las personas realmente perciben y prefieren distintas combinaciones de color, encontrando que la armonía percibida y la simple preferencia son juicios relacionados pero distintos, un contexto útil para entender por qué las reglas clásicas de la rueda de color que aplica esta herramienta son un punto de partida bien establecido, no una garantía de que cada persona encontrará igualmente agradable una combinación dada.",
+          "url": "https://doi.org/10.3758/s13414-010-0027-0",
+          "readOriginal": "Leer el artículo original"
+        }
+      }
+    },
     "unit-converter": {
       "title": "Conversor de unidades",
       "description": "Convierte longitud, peso, temperatura, área, volumen y velocidad — mira el valor convertido a todas las unidades de la categoría a la vez.",

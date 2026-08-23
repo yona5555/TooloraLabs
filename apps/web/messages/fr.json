@@ -5330,6 +5330,155 @@
         }
       }
     },
+    "color-palette-generator": {
+      "title": "Générateur de palette de couleurs",
+      "description": "Générez des harmonies de couleurs complémentaires, analogues, triadiques et autres à partir d'une couleur de base, avec des codes HEX, RVB et HSL prêts à copier.",
+      "aboveFold": {
+        "resultTitle": "Palette générée",
+        "placeholder": "Choisissez une couleur de base et un type d'harmonie pour générer une palette."
+      },
+      "nav": {
+        "tool": "Générateur",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Couleur de base",
+        "baseColorLabel": "Couleur de base",
+        "randomButton": "Aléatoire",
+        "invalidHex": "Saisissez une couleur hexadécimale à 6 chiffres valide, comme #3B82F6.",
+        "harmonyLabel": "Type d'harmonie",
+        "harmony": {
+          "complementary": "Complémentaire",
+          "analogous": "Analogue",
+          "triadic": "Triadique",
+          "splitComplementary": "Complémentaire divisée",
+          "tetradic": "Tétradique",
+          "monochromatic": "Monochromatique"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comment fonctionne cet outil",
+          "paragraph1": "Cet outil génère des harmonies de couleurs en convertissant votre couleur de base en HSL (teinte, saturation, luminosité) et en faisant pivoter sa teinte sur la roue chromatique selon des angles fixes propres à chaque type d'harmonie — 180° pour une paire complémentaire, des pas de 120° pour un trio triadique, etc. — tandis que le mode monochromatique conserve teinte et saturation constantes en ne faisant varier que la luminosité. Tout le traitement s'effectue localement dans votre navigateur ; aucune couleur saisie ici n'est jamais envoyée où que ce soit.",
+          "paragraph2": "Chaque type d'harmonie reflète une relation classique de la roue chromatique ancrée dans une théorie des couleurs vieille de plusieurs siècles : les couleurs complémentaires sont opposées pour un contraste maximal, les couleurs analogues sont voisines pour un rendu naturellement cohérent, et les couleurs triadiques ou tétradiques sont réparties uniformément sur la roue pour une variété équilibrée. Aucune de ces règles ne garantit à elle seule un bon design — ce sont des points de départ pour explorer, pas un substitut à un œil exercé."
+        },
+        "examples": {
+          "title": "Exemples chiffrés",
+          "intro": "Avec une couleur de base #3B82F6 (un bleu de tonalité moyenne), voici ce que produit chaque type d'harmonie.",
+          "columnHarmony": "Harmonie",
+          "columnDescription": "Description",
+          "columnExample": "Couleurs exemple",
+          "rows": [
+            {
+              "harmony": "Complémentaire",
+              "description": "La couleur de base plus son opposée, à 180° sur la roue.",
+              "example": "#3b82f6, #f6af3b"
+            },
+            {
+              "harmony": "Analogue",
+              "description": "Trois couleurs à 30° d'écart, voisines sur la roue.",
+              "example": "#3be0f6, #3b82f6, #513bf6"
+            },
+            {
+              "harmony": "Triadique",
+              "description": "Trois couleurs réparties uniformément à 120° d'écart.",
+              "example": "#3b82f6, #f63b82, #82f63b"
+            },
+            {
+              "harmony": "Monochromatique",
+              "description": "Cinq nuances de la même teinte à différents niveaux de luminosité.",
+              "example": "#042862, #0846ab, #0b64f4, #5492f7, #9dc1fb"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la différence entre HEX, RVB et HSL ?",
+              "answer": "Ces trois formats décrivent les mêmes couleurs, simplement différemment. HEX condense les valeurs rouge, vert et bleu en un code à six chiffres largement utilisé en conception web (comme #3B82F6). RVB exprime ces mêmes trois valeurs sous forme de nombres de 0 à 255. HSL décrit plutôt une couleur par sa teinte (position sur la roue chromatique), sa saturation (intensité) et sa luminosité — souvent plus intuitif pour ajuster la nuance d'une couleur sans changer son ton sous-jacent, et c'est exactement ce que cet outil utilise en interne pour construire chaque harmonie."
+            },
+            {
+              "question": "Quel type d'harmonie devrais-je utiliser ?",
+              "answer": "Cela dépend de l'effet recherché. Les paires complémentaires créent un fort contraste et sont utiles pour des éléments qui doivent se démarquer, comme un bouton d'appel à l'action. Les couleurs analogues créent une ambiance calme et cohérente, adaptée aux arrière-plans ou aux dégradés. Les schémas triadiques et tétradiques offrent plus de variété tout en restant équilibrés, utiles pour des interfaces nécessitant plusieurs couleurs distinctes mais harmonieuses. Le monochromatique est le choix le plus sûr pour garantir une cohérence, par exemple pour les nuances des états de survol et actif d'une seule couleur d'interface."
+            },
+            {
+              "question": "Pourquoi certaines couleurs générées semblent-elles ternes ou en clash alors que le calcul dit qu'elles sont harmonieuses ?",
+              "answer": "Les règles d'harmonie de la roue chromatique décrivent des relations entre teintes, pas l'apparence réelle d'une combinaison donnée de teinte, saturation et luminosité à l'écran ou en impression. Un ensemble triadique mathématiquement correct peut malgré tout sembler déséquilibré si une couleur est bien plus sombre ou plus saturée que les autres. Considérez ces palettes comme un point de départ à ajuster, pas comme un résultat final."
+            },
+            {
+              "question": "Est-ce la même chose qu'une roue chromatique physique à base de pigments ?",
+              "answer": "Non. Cet outil fonctionne en HSL, un modèle conçu pour la couleur basée sur la lumière à l'écran (synthèse additive), où rouge, vert et bleu se combinent pour former du blanc. Les roues chromatiques traditionnelles des peintres reposent généralement sur un mélange soustractif à base de pigments (primaires rouge, jaune, bleu), qui suit des relations différentes. Les deux sont des systèmes valides pour leurs supports respectifs, mais ils ne se correspondent pas exactement."
+            },
+            {
+              "question": "Cet outil vérifie-t-il si mes couleurs ont un contraste suffisant pour l'accessibilité ?",
+              "answer": "Non. L'harmonie des couleurs et le contraste pour l'accessibilité (comme les exigences de ratio de contraste WCAG pour la lisibilité du texte) sont des préoccupations différentes — une paire de couleurs harmonieuse peut tout à fait échouer aux exigences de contraste d'accessibilité, ou inversement. Vérifiez séparément toute palette destinée au texte ou aux éléments interactifs par rapport aux directives de contraste d'accessibilité."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "De la roue de Newton au modèle de couleur moderne",
+            "paragraph": "La roue chromatique remonte à Isaac Newton, qui en 1666 disposa le spectre de la lumière visible en cercle pour montrer comment les couleurs se rapportent entre elles — un premier pas vers une description géométrique, plutôt que simplement nominale, des relations entre couleurs. Les peintres et théoriciens après Newton, dont Johann Wolfgang von Goethe puis Albert Munsell, ont enrichi cette idée de règles d'harmonie fondées sur le mélange de pigments, posant les bases des relations complémentaires, analogues et triadiques encore enseignées aujourd'hui. Le modèle HSL utilisé par cet outil est une reformulation du XXe siècle du même concept sous-jacent de cercle de teintes, adaptée spécifiquement pour décrire la couleur basée sur la lumière à l'écran plutôt que le pigment mélangé."
+          },
+          "modernDevelopments": {
+            "title": "De la théorie du peintre à un outil de conception web",
+            "paragraph": "Pendant l'essentiel de leur histoire, les règles d'harmonie des couleurs relevaient de peintres et designers formés, travaillant avec des pigments physiques ou, plus tard, des systèmes de couleurs d'impression. Le passage à la conception pour écran a introduit HSL et RVB comme modèles de couleur de travail pour les interfaces utilisateur, et des générateurs de palettes de couleurs comme celui-ci ont transposé ces mêmes règles d'harmonie séculaires vers un outil interactif, permettant à quiconque sans formation formelle en théorie des couleurs d'explorer des combinaisons harmonieuses pour un site web, une application ou une marque, à partir d'une seule couleur déjà en tête."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La théorie des couleurs et l'harmonie chromatique sont des sujets centraux de l'enseignement des arts et du design. Voici les 5 meilleures institutions mondiales en Art & Design selon le classement QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Royal College of Art (RCA)",
+                "note": "Classé n° 1 mondial en Art & Design (QS World University Rankings by Subject 2025), pour la onzième année consécutive.",
+                "url": "https://www.rca.ac.uk/",
+                "online": "Propose un Graduate Diploma in Art & Design disponible sur campus, en ligne ou en format hybride, ainsi que des cours courts en ligne autonomes ; ses programmes de MA complets restent principalement en présentiel."
+              },
+              {
+                "name": "University of the Arts London (UAL)",
+                "note": "Classée n° 2 mondial en Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://ualonline.arts.ac.uk/",
+                "online": "Propose des diplômes de troisième cycle entièrement en ligne (MA, PgDip, PgCert) en design, communication et disciplines connexes via UAL Online."
+              },
+              {
+                "name": "The New School — Parsons School of Design",
+                "note": "Classée n° 3 mondial en Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://www.newschool.edu/parsons/graduate/",
+                "online": "Non — les programmes de MFA en design de Parsons se déroulent sur le campus de New York, sans mode de diffusion en ligne mentionné sur les pages officielles des programmes de troisième cycle."
+              },
+              {
+                "name": "Rhode Island School of Design (RISD)",
+                "note": "Classée n° 4 mondial en Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://www.risd.edu/academics/graduate-study",
+                "online": "Non — tous les programmes de troisième cycle de RISD sont uniquement en présentiel ; RISD Continuing Education propose séparément des cours certifiants en ligne non diplômants."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 5 mondial en Art & Design (QS World University Rankings by Subject 2025).",
+                "url": "https://architecture.mit.edu/",
+                "online": "Non — les programmes liés au design du MIT, basés dans son département d'architecture et son Media Lab, sont principalement en présentiel ; aucun diplôme dédié en Art & Design n'est proposé en ligne."
+              },
+              {
+                "name": "Virginia Commonwealth University School of the Arts in Qatar (VCUarts Qatar)",
+                "note": "Une école de design régionale de premier plan dans le monde arabe, accréditée par la National Association of Schools of Art and Design (NASAD) des États-Unis, proposant un BFA en design graphique parmi d'autres diplômes d'art et de design.",
+                "url": "https://qatar.vcu.edu/",
+                "online": "Non proposé en ligne, selon les pages officielles de l'école ; l'enseignement est dispensé sur son campus de Doha, au Qatar."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Schloss, K. B., & Palmer, S. E. (2011). Aesthetic response to color combinations: preference, harmony, and similarity. Attention, Perception, & Psychophysics, 73(2), 551-571.",
+          "note": "Une étude examinant comment les personnes perçoivent et préfèrent réellement différentes combinaisons de couleurs, constatant que l'harmonie perçue et la simple préférence sont des jugements liés mais distincts — un contexte utile pour comprendre pourquoi les règles classiques de la roue chromatique appliquées par cet outil sont un point de départ bien établi, et non une garantie que chaque personne trouvera une combinaison donnée également plaisante.",
+          "url": "https://doi.org/10.3758/s13414-010-0027-0",
+          "readOriginal": "Lire l'article original"
+        }
+      }
+    },
     "unit-converter": {
       "title": "Convertisseur d'unités",
       "description": "Convertissez longueur, poids, température, surface, volume et vitesse — visualisez la valeur convertie dans toutes les unités de la catégorie à la fois.",
