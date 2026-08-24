@@ -45,6 +45,12 @@ export default function Navbar() {
             {t("categories")}
           </Link>
           <ToolsDropdown />
+          <Link
+            href="/coming-soon"
+            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+          >
+            {t("comingSoon")}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
