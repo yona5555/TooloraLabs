@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6">
+      <div className="relative mx-auto flex h-18 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

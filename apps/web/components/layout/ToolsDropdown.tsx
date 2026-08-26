@@ -21,7 +21,6 @@ export default function ToolsDropdown() {
   return (
     <div
       ref={containerRef}
-      className="relative"
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
@@ -40,7 +39,7 @@ export default function ToolsDropdown() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-20 mt-3 w-[min(90vw,42rem)] overflow-hidden rounded-2xl border border-blue-400/50 bg-zinc-900/85 shadow-2xl backdrop-blur-xl dark:bg-zinc-950/90"
+          className="absolute inset-x-6 top-full z-20 mt-3 overflow-hidden rounded-2xl border border-blue-400/50 bg-zinc-900/85 shadow-2xl backdrop-blur-xl dark:bg-black/95"
         >
           <div className="max-h-[70vh] overflow-y-auto p-6">
             <div className="columns-1 gap-8 sm:columns-2 lg:columns-3">
