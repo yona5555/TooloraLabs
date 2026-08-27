@@ -5771,6 +5771,184 @@
         }
       }
     },
+    "kinematics-calculator": {
+      "title": "Calculateur de Cinématique",
+      "description": "Résolvez des problèmes de mouvement à accélération constante pour la vitesse, la vitesse initiale, l'accélération, le temps ou le déplacement, avec un diagramme dynamique du mouvement.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Équations de Cinématique",
+          "intro": "Les équations centrales à accélération constante appliquées par ce calculateur (v₀ = vitesse initiale, v = vitesse finale, a = accélération, t = temps, Δx = déplacement).",
+          "formulas": {
+            "velocity": { "label": "Vitesse", "expression": "v = v₀ + at" },
+            "displacementTime": { "label": "Déplacement (avec le temps)", "expression": "Δx = v₀t + ½at²" },
+            "velocitySquared": { "label": "Vitesse au Carré", "expression": "v² = v₀² + 2aΔx" },
+            "displacementAvg": { "label": "Déplacement (vitesse moyenne)", "expression": "Δx = ½(v₀ + v)t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valeurs Connues",
+        "modeLabel": "Grandeurs Connues",
+        "mode": {
+          "timeBased": "Vitesse, Accélération et Temps (sans distance)",
+          "distanceBased": "Vitesse, Accélération et Déplacement (sans temps)"
+        },
+        "solveForLabel": "Calculer",
+        "solveForTime": {
+          "v": "Vitesse Finale (v)",
+          "v0": "Vitesse Initiale (v₀)",
+          "a": "Accélération (a)",
+          "t": "Temps (t)"
+        },
+        "solveForDistance": {
+          "v": "Vitesse Finale (v)",
+          "v0": "Vitesse Initiale (v₀)",
+          "a": "Accélération (a)",
+          "dx": "Déplacement (Δx)"
+        },
+        "v0Label": "Vitesse Initiale v₀ (m/s)",
+        "v0Placeholder": "p. ex. 0",
+        "vLabel": "Vitesse Finale v (m/s)",
+        "vPlaceholder": "p. ex. 10",
+        "aLabel": "Accélération a (m/s²)",
+        "aPlaceholder": "p. ex. 2",
+        "tLabel": "Temps t (s)",
+        "tPlaceholder": "p. ex. 5",
+        "dxLabel": "Déplacement Δx (m)",
+        "dxPlaceholder": "p. ex. 25"
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroTime": "Le temps doit être différent de zéro pour calculer l'accélération.",
+        "zeroAcceleration": "L'accélération doit être différente de zéro pour calculer le temps.",
+        "zeroDisplacement": "Le déplacement doit être différent de zéro pour calculer l'accélération.",
+        "negativeDiscriminant": "Ces valeurs impliquent que l'objet s'arrête avant de parcourir ce déplacement — aucune vitesse réelle ne résout cette combinaison.",
+        "v0": "v₀",
+        "v": "v",
+        "a": "a",
+        "t": "t",
+        "dx": "Δx",
+        "undefined": "indéfini",
+        "diagramStart": "Départ",
+        "diagramEnd": "Arrivée",
+        "diagramCaption": "Flèches de vitesse à l'échelle de v₀ (départ) et v (arrivée) ; la direction s'inverse pour les valeurs négatives."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Cinématique",
+          "paragraph1": "La cinématique décrit le mouvement — position, vitesse et accélération — sans référence aux forces qui le provoquent. Pour le cas courant d'une accélération constante, cinq grandeurs sont liées : vitesse initiale (v₀), vitesse finale (v), accélération (a), temps (t) et déplacement (Δx). Connaître trois quelconques de ces cinq grandeurs détermine les deux autres, à l'aide de l'une des quatre équations standard selon les grandeurs connues.",
+          "diagram": {
+            "startLabel": "Départ",
+            "endLabel": "Arrivée",
+            "caption": "Un objet accélérant depuis le repos (v₀ = 0) jusqu'à 10 m/s — la flèche finale est plus longue car la vitesse finale est plus grande."
+          },
+          "paragraph2": "Ce calculateur couvre deux types de problèmes courants. Lorsque la vitesse, l'accélération et le temps sont connus (mais pas le déplacement), il utilise v = v₀ + at et ses réarrangements — une algèbre linéaire pure, sans ambiguïté. Lorsque la vitesse, l'accélération et le déplacement sont connus (mais pas le temps) — le classique problème de « distance de freinage » ou « à quelle vitesse après cette distance » — il utilise v² = v₀² + 2aΔx, qui implique une racine carrée lors du calcul d'une vitesse.",
+          "paragraph3": "Le déplacement (Δx) diffère de la distance parcourue : le déplacement est le changement net de position et peut être négatif si un objet se retrouve en arrière de son point de départ, tandis que la distance est toujours positive et tient compte de la longueur totale du trajet, y compris tout retour en arrière. Ces équations à accélération constante utilisent le déplacement, et donnent la même réponse pour un mouvement rectiligne dans une seule direction, où les deux coïncident."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Calcul de différentes inconnues pour le même mouvement sous-jacent.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "v₀ = 0, a = 2 m/s², t = 5 s", "result": "v = 10 m/s, Δx = 25 m" },
+            { "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s", "result": "v₀ = 10 m/s" },
+            { "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m", "result": "a = 2 m/s² (type distance de freinage)" },
+            { "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m", "result": "v = 10 m/s" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi calculer la vitesse à partir du déplacement implique-t-il une racine carrée ?",
+              "answer": "L'équation v² = v₀² + 2aΔx relie le carré de la vitesse au déplacement, donc isoler v nécessite de prendre la racine carrée des deux côtés. Ce calculateur renvoie la racine non négative par convention, conformément à l'hypothèse habituelle selon laquelle la vitesse est indiquée comme une grandeur positive dans la direction du mouvement."
+            },
+            {
+              "question": "Que signifie le message indiquant qu'aucune vitesse réelle ne résout la combinaison ?",
+              "answer": "Cela se produit lorsque le discriminant v₀² + 2aΔx est négatif, ce qui n'est possible qu'avec un objet en décélération (accélération négative) — cela signifie que l'objet s'arrête physiquement avant d'atteindre le déplacement saisi, donc aucune vitesse finale réelle n'existe pour ce scénario. Réduire le déplacement ou vérifier le signe de l'accélération résout généralement le problème."
+            },
+            {
+              "question": "Quelle est la différence entre les deux modes de calcul ?",
+              "answer": "Le mode basé sur le temps utilise l'équation v = v₀ + at, adaptée lorsque la vitesse, l'accélération et le temps sont les grandeurs connues (la distance n'est pas nécessaire comme donnée d'entrée). Le mode basé sur la distance utilise v² = v₀² + 2aΔx, adapté lorsque le déplacement est connu à la place du temps — le type de problème classique « quelle distance pour s'arrêter » ou « à quelle vitesse après cette distance »."
+            },
+            {
+              "question": "L'accélération peut-elle être négative ?",
+              "answer": "Oui — une accélération négative (souvent appelée décélération lorsqu'elle s'oppose à la direction du mouvement) est mathématiquement identique à une accélération positive, avec simplement un signe opposé. Une voiture qui freine jusqu'à l'arrêt a une accélération négative si sa vitesse initiale est prise comme positive ; les mêmes équations s'appliquent sans modification."
+            },
+            {
+              "question": "Ces équations fonctionnent-elles pour un mouvement réel avec résistance de l'air ou frottement ?",
+              "answer": "Non — ces équations supposent strictement une accélération constante, ce qui nécessite une force nette constante (deuxième loi de Newton). La résistance de l'air et de nombreux scénarios de frottement produisent des forces qui varient avec la vitesse, rendant l'accélération non constante ; ces équations ne sont exactes que pour des cas idéalisés à accélération constante, comme la chute libre dans le vide ou un mouvement sous une seule force constante appliquée."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "Des Plans Inclinés de Galilée à une Discipline Nommée",
+            "paragraph": "La description mathématique du mouvement uniformément accéléré remonte à Galilée, qui dans son livre de 1638 Discours concernant deux sciences nouvelles (écrit alors qu'il était assigné à résidence à la fin de sa vie) démontra qu'un corps en chute ou en accélération uniforme parcourt une distance proportionnelle au carré du temps écoulé — la relation qui sous-tend aujourd'hui Δx = v₀t + ½at². Galilée en fit la démonstration principalement par des expériences consistant à faire rouler des billes sur des plans inclinés pour ralentir le mouvement suffisamment afin de le mesurer avec précision à l'aide des dispositifs de chronométrage alors disponibles. Le domaine lui-même n'eut de nom que près de deux siècles plus tard : le physicien et mathématicien français André-Marie Ampère forgea le terme « cinématique » dans son Essai sur la philosophie des sciences de 1834, à partir du grec kinêma (« mouvement »), spécifiquement pour séparer la description géométrique pure du mouvement de la dynamique, l'étude des forces qui le provoquent."
+          },
+          "modernDevelopments": {
+            "title": "La Cinématique Au-delà du Manuel Scolaire",
+            "paragraph": "Les mêmes équations à accélération constante que les travaux de Galilée ont rendues possibles restent fondamentales non seulement en physique introductive, mais aussi en ingénierie pratique : les calculs de distance de freinage automobile, les tables de balistique et de projectiles, les profils de contrôle de mouvement des ascenseurs et des robots, et la mécanique orbitale s'appuient tous sur ce cadre cinématique, superposant souvent des modèles d'accélération non constante plus complexes à ces relations de base pour une précision accrue."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La cinématique et l'analyse du mouvement sont des sujets fondamentaux de la physique. Voici les 5 meilleures universités mondiales en Physique et Astronomie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Non — le programme repose sur un accès présentiel aux laboratoires et un modèle de recherche résidentiel, sans mention d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Non — le département décrit une communauté de recherche en présentiel avec accès aux laboratoires sur place, et aucune option d'étude à distance n'est mentionnée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Non — les étudiants à temps plein doivent résider à Cambridge pendant au moins trois trimestres, sans option en ligne."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en physique appliquée — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Drake, S. (1964). Galileo and the Law of Inertia. American Journal of Physics, 32(8), 601–608.",
+          "note": "L'historien des sciences Stillman Drake examine le développement par Galilée de la cinématique du mouvement accéléré, retraçant le raisonnement derrière les équations que ce calculateur applique encore près de quatre siècles plus tard.",
+          "url": "https://doi.org/10.1119/1.1970872",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

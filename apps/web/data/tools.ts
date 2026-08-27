@@ -422,6 +422,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "kinematics-calculator",
+    title: "Kinematics Calculator",
+    category: "math-science",
+    description:
+      "Solve constant-acceleration motion problems for velocity, initial velocity, acceleration, time, or displacement, with a dynamic motion diagram.",
+    featured: false,
+    keywords: [
+      "kinematics calculator",
+      "constant acceleration motion",
+      "physics motion equations",
+      "SUVAT calculator",
+      "velocity acceleration time calculator",
+      "displacement calculator physics",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

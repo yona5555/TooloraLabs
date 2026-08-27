@@ -32,3 +32,4 @@ export * from "./StatisticsCalculator";
 export * from "./MolarityCalculator";
 export * from "./IdealGasLawCalculator";
 export * from "./EnergyWorkPowerCalculator";
+export * from "./KinematicsCalculator";

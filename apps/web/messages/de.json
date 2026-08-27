@@ -5771,6 +5771,184 @@
         }
       }
     },
+    "kinematics-calculator": {
+      "title": "Kinematik-Rechner",
+      "description": "Lösen Sie Bewegungsaufgaben mit konstanter Beschleunigung für Geschwindigkeit, Anfangsgeschwindigkeit, Beschleunigung, Zeit oder Verschiebung, mit einem dynamischen Bewegungsdiagramm.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Kinematik-Gleichungen",
+          "intro": "Die zentralen Gleichungen für konstante Beschleunigung, die dieser Rechner anwendet (v₀ = Anfangsgeschwindigkeit, v = Endgeschwindigkeit, a = Beschleunigung, t = Zeit, Δx = Verschiebung).",
+          "formulas": {
+            "velocity": { "label": "Geschwindigkeit", "expression": "v = v₀ + at" },
+            "displacementTime": { "label": "Verschiebung (zeitbasiert)", "expression": "Δx = v₀t + ½at²" },
+            "velocitySquared": { "label": "Geschwindigkeit im Quadrat", "expression": "v² = v₀² + 2aΔx" },
+            "displacementAvg": { "label": "Verschiebung (mittlere Geschwindigkeit)", "expression": "Δx = ½(v₀ + v)t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "modeLabel": "Bekannte Größen",
+        "mode": {
+          "timeBased": "Geschwindigkeit, Beschleunigung & Zeit (ohne Strecke)",
+          "distanceBased": "Geschwindigkeit, Beschleunigung & Verschiebung (ohne Zeit)"
+        },
+        "solveForLabel": "Berechnen",
+        "solveForTime": {
+          "v": "Endgeschwindigkeit (v)",
+          "v0": "Anfangsgeschwindigkeit (v₀)",
+          "a": "Beschleunigung (a)",
+          "t": "Zeit (t)"
+        },
+        "solveForDistance": {
+          "v": "Endgeschwindigkeit (v)",
+          "v0": "Anfangsgeschwindigkeit (v₀)",
+          "a": "Beschleunigung (a)",
+          "dx": "Verschiebung (Δx)"
+        },
+        "v0Label": "Anfangsgeschwindigkeit v₀ (m/s)",
+        "v0Placeholder": "z. B. 0",
+        "vLabel": "Endgeschwindigkeit v (m/s)",
+        "vPlaceholder": "z. B. 10",
+        "aLabel": "Beschleunigung a (m/s²)",
+        "aPlaceholder": "z. B. 2",
+        "tLabel": "Zeit t (s)",
+        "tPlaceholder": "z. B. 5",
+        "dxLabel": "Verschiebung Δx (m)",
+        "dxPlaceholder": "z. B. 25"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroTime": "Die Zeit darf nicht null sein, um die Beschleunigung zu berechnen.",
+        "zeroAcceleration": "Die Beschleunigung darf nicht null sein, um die Zeit zu berechnen.",
+        "zeroDisplacement": "Die Verschiebung darf nicht null sein, um die Beschleunigung zu berechnen.",
+        "negativeDiscriminant": "Diese Werte bedeuten, dass das Objekt zum Stillstand kommt, bevor es diese Verschiebung zurücklegt — keine reelle Geschwindigkeit löst diese Kombination.",
+        "v0": "v₀",
+        "v": "v",
+        "a": "a",
+        "t": "t",
+        "dx": "Δx",
+        "undefined": "undefiniert",
+        "diagramStart": "Start",
+        "diagramEnd": "Ende",
+        "diagramCaption": "Geschwindigkeitspfeile skaliert auf v₀ (Start) und v (Ende); die Richtung kehrt sich bei negativen Werten um."
+      },
+      "education": {
+        "intro": {
+          "title": "Kinematik verstehen",
+          "paragraph1": "Die Kinematik beschreibt Bewegung — Position, Geschwindigkeit und Beschleunigung — ohne Bezug auf die sie verursachenden Kräfte. Für den häufigen Fall konstanter Beschleunigung sind fünf Größen miteinander verknüpft: Anfangsgeschwindigkeit (v₀), Endgeschwindigkeit (v), Beschleunigung (a), Zeit (t) und Verschiebung (Δx). Die Kenntnis dreier beliebiger dieser fünf Größen bestimmt die anderen beiden, wobei je nach bekannten Größen eine von vier Standardgleichungen verwendet wird.",
+          "diagram": {
+            "startLabel": "Start",
+            "endLabel": "Ende",
+            "caption": "Ein Objekt, das aus dem Stillstand (v₀ = 0) auf 10 m/s beschleunigt — der Endpfeil ist länger, da die Endgeschwindigkeit größer ist."
+          },
+          "paragraph2": "Dieser Rechner deckt zwei häufige Aufgabentypen ab. Wenn Geschwindigkeit, Beschleunigung und Zeit bekannt sind (aber nicht die Verschiebung), verwendet er v = v₀ + at und dessen Umstellungen — reine lineare Algebra ohne Mehrdeutigkeit. Wenn Geschwindigkeit, Beschleunigung und Verschiebung bekannt sind (aber nicht die Zeit) — die klassische Aufgabe „Bremsweg“ oder „wie schnell nach dieser Strecke“ —, verwendet er v² = v₀² + 2aΔx, was beim Berechnen einer Geschwindigkeit eine Quadratwurzel erfordert.",
+          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Berechnung verschiedener Unbekannter für dieselbe zugrunde liegende Bewegung.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "v₀ = 0, a = 2 m/s², t = 5 s", "result": "v = 10 m/s, Δx = 25 m" },
+            { "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s", "result": "v₀ = 10 m/s" },
+            { "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m", "result": "a = 2 m/s² (Bremsweg-Typ)" },
+            { "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m", "result": "v = 10 m/s" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum ist beim Berechnen der Geschwindigkeit aus der Verschiebung eine Quadratwurzel nötig?",
+              "answer": "Die Gleichung v² = v₀² + 2aΔx setzt das Quadrat der Geschwindigkeit mit der Verschiebung in Beziehung, sodass zum Isolieren von v die Quadratwurzel auf beiden Seiten gezogen werden muss. Dieser Rechner gibt konventionsgemäß die nichtnegative Wurzel zurück, entsprechend der üblichen Annahme, dass die Geschwindigkeit als positive Größe in Bewegungsrichtung angegeben wird."
+            },
+            {
+              "question": "Was bedeutet es, wenn der Rechner meldet, dass keine reelle Geschwindigkeit die Kombination löst?",
+              "answer": "Dies tritt auf, wenn die Diskriminante v₀² + 2aΔx negativ ist, was nur bei einem abbremsenden Objekt (negative Beschleunigung) möglich ist — es bedeutet, dass das Objekt physikalisch zum Stillstand kommt, bevor es die eingegebene Verschiebung erreicht, sodass für dieses Szenario keine reelle Endgeschwindigkeit existiert. Eine Verringerung der Verschiebung oder Überprüfung des Vorzeichens der Beschleunigung löst dies meist."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen den beiden Berechnungsmodi?",
+              "answer": "Der zeitbasierte Modus verwendet die Gleichung v = v₀ + at, geeignet, wenn Geschwindigkeit, Beschleunigung und Zeit die bekannten Größen sind (die Strecke wird nicht als Eingabe benötigt). Der streckenbasierte Modus verwendet v² = v₀² + 2aΔx, geeignet, wenn statt der Zeit die Verschiebung bekannt ist — der klassische Aufgabentyp „wie weit bis zum Stillstand“ oder „wie schnell nach dieser Strecke“."
+            },
+            {
+              "question": "Kann die Beschleunigung negativ sein?",
+              "answer": "Ja — eine negative Beschleunigung (oft als Verzögerung bezeichnet, wenn sie der Bewegungsrichtung entgegenwirkt) ist mathematisch identisch mit einer positiven Beschleunigung, nur mit umgekehrtem Vorzeichen. Ein bis zum Stillstand bremsendes Auto hat eine negative Beschleunigung, wenn seine Anfangsgeschwindigkeit als positiv angenommen wird; dieselben Gleichungen gelten ohne Änderung."
+            },
+            {
+              "question": "Funktionieren diese Gleichungen für reale Bewegungen mit Luftwiderstand oder Reibung?",
+              "answer": "Nein — diese Gleichungen setzen streng konstante Beschleunigung voraus, was eine konstante Nettokraft erfordert (Newtons zweites Gesetz). Luftwiderstand und viele Reibungsszenarien erzeugen Kräfte, die sich mit der Geschwindigkeit ändern, wodurch die Beschleunigung nicht konstant ist; diese Gleichungen sind nur für idealisierte Fälle konstanter Beschleunigung exakt, etwa den freien Fall im Vakuum oder eine Bewegung unter einer einzigen konstanten wirkenden Kraft."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Von Galileis schiefen Ebenen zu einer benannten Disziplin",
+            "paragraph": "Die mathematische Beschreibung gleichmäßig beschleunigter Bewegung geht auf Galileo Galilei zurück, der in seinem 1638 erschienenen Buch Zwei neue Wissenschaften (verfasst spät in seinem Leben unter Hausarrest) zeigte, dass ein fallender oder gleichmäßig beschleunigter Körper eine Strecke zurücklegt, die proportional zum Quadrat der verstrichenen Zeit ist — die Beziehung, die heute Δx = v₀t + ½at² zugrunde liegt. Galilei leitete dies größtenteils durch Experimente her, bei denen er Kugeln schiefe Ebenen hinabrollen ließ, um die Bewegung so weit zu verlangsamen, dass sie mit den damals verfügbaren Zeitmessgeräten genau gemessen werden konnte. Das Fachgebiet selbst erhielt erst fast zwei Jahrhunderte später einen Namen: Der französische Physiker und Mathematiker André-Marie Ampère prägte 1834 in seinem Essai sur la philosophie des sciences den Begriff „cinématique“ (Kinematik), abgeleitet vom griechischen kinema („Bewegung“), speziell um die rein geometrische Beschreibung der Bewegung von der Dynamik, der Lehre von den sie verursachenden Kräften, zu trennen."
+          },
+          "modernDevelopments": {
+            "title": "Kinematik jenseits des Lehrbuchs",
+            "paragraph": "Dieselben Gleichungen für konstante Beschleunigung, die Galileis Arbeit ermöglichte, bleiben nicht nur in der Einführungsphysik grundlegend, sondern auch in der praktischen Technik: Berechnungen des Bremswegs von Fahrzeugen, Geschoss- und Ballistiktabellen, Bewegungssteuerungsprofile für Aufzüge und Roboter sowie die Bahnmechanik bauen alle auf diesem kinematischen Rahmen auf, oft ergänzt um komplexere, nicht konstante Beschleunigungsmodelle für höhere Präzision."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Kinematik und Bewegungsanalyse sind grundlegende Themen der Physik. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Drake, S. (1964). Galileo and the Law of Inertia. American Journal of Physics, 32(8), 601–608.",
+          "note": "Der Wissenschaftshistoriker Stillman Drake untersucht Galileis Entwicklung der Kinematik beschleunigter Bewegung und zeichnet die Argumentation hinter den Gleichungen nach, die dieser Rechner fast vier Jahrhunderte später noch anwendet.",
+          "url": "https://doi.org/10.1119/1.1970872",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

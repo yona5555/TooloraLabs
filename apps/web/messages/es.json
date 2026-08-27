@@ -5771,6 +5771,184 @@
         }
       }
     },
+    "kinematics-calculator": {
+      "title": "Calculadora de Cinemática",
+      "description": "Resuelve problemas de movimiento con aceleración constante para la velocidad, la velocidad inicial, la aceleración, el tiempo o el desplazamiento, con un diagrama dinámico del movimiento.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Ecuaciones de Cinemática",
+          "intro": "Las ecuaciones centrales de aceleración constante que aplica esta calculadora (v₀ = velocidad inicial, v = velocidad final, a = aceleración, t = tiempo, Δx = desplazamiento).",
+          "formulas": {
+            "velocity": { "label": "Velocidad", "expression": "v = v₀ + at" },
+            "displacementTime": { "label": "Desplazamiento (con tiempo)", "expression": "Δx = v₀t + ½at²" },
+            "velocitySquared": { "label": "Velocidad al Cuadrado", "expression": "v² = v₀² + 2aΔx" },
+            "displacementAvg": { "label": "Desplazamiento (velocidad promedio)", "expression": "Δx = ½(v₀ + v)t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valores Conocidos",
+        "modeLabel": "Cantidades Conocidas",
+        "mode": {
+          "timeBased": "Velocidad, Aceleración y Tiempo (sin distancia)",
+          "distanceBased": "Velocidad, Aceleración y Desplazamiento (sin tiempo)"
+        },
+        "solveForLabel": "Calcular",
+        "solveForTime": {
+          "v": "Velocidad Final (v)",
+          "v0": "Velocidad Inicial (v₀)",
+          "a": "Aceleración (a)",
+          "t": "Tiempo (t)"
+        },
+        "solveForDistance": {
+          "v": "Velocidad Final (v)",
+          "v0": "Velocidad Inicial (v₀)",
+          "a": "Aceleración (a)",
+          "dx": "Desplazamiento (Δx)"
+        },
+        "v0Label": "Velocidad Inicial v₀ (m/s)",
+        "v0Placeholder": "p. ej. 0",
+        "vLabel": "Velocidad Final v (m/s)",
+        "vPlaceholder": "p. ej. 10",
+        "aLabel": "Aceleración a (m/s²)",
+        "aPlaceholder": "p. ej. 2",
+        "tLabel": "Tiempo t (s)",
+        "tPlaceholder": "p. ej. 5",
+        "dxLabel": "Desplazamiento Δx (m)",
+        "dxPlaceholder": "p. ej. 25"
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroTime": "El tiempo debe ser distinto de cero para calcular la aceleración.",
+        "zeroAcceleration": "La aceleración debe ser distinta de cero para calcular el tiempo.",
+        "zeroDisplacement": "El desplazamiento debe ser distinto de cero para calcular la aceleración.",
+        "negativeDiscriminant": "Estos valores implican que el objeto se detiene antes de cubrir este desplazamiento; ninguna velocidad real resuelve esta combinación.",
+        "v0": "v₀",
+        "v": "v",
+        "a": "a",
+        "t": "t",
+        "dx": "Δx",
+        "undefined": "indefinido",
+        "diagramStart": "Inicio",
+        "diagramEnd": "Fin",
+        "diagramCaption": "Flechas de velocidad escaladas a v₀ (inicio) y v (fin); la dirección se invierte para valores negativos."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo la Cinemática",
+          "paragraph1": "La cinemática describe el movimiento —posición, velocidad y aceleración— sin hacer referencia a las fuerzas que lo causan. Para el caso común de aceleración constante, se relacionan cinco cantidades: velocidad inicial (v₀), velocidad final (v), aceleración (a), tiempo (t) y desplazamiento (Δx). Conocer tres cualesquiera de estas cinco determina las otras dos, usando una de cuatro ecuaciones estándar según las cantidades conocidas.",
+          "diagram": {
+            "startLabel": "Inicio",
+            "endLabel": "Fin",
+            "caption": "Un objeto que acelera desde el reposo (v₀ = 0) hasta 10 m/s: la flecha final es más larga porque la velocidad final es mayor."
+          },
+          "paragraph2": "Esta calculadora cubre dos tipos de problemas comunes. Cuando se conocen la velocidad, la aceleración y el tiempo (pero no el desplazamiento), usa v = v₀ + at y sus reordenamientos: álgebra lineal pura sin ambigüedad. Cuando se conocen la velocidad, la aceleración y el desplazamiento (pero no el tiempo) —el clásico problema de «distancia de frenado» o «qué tan rápido tras esta distancia»— usa v² = v₀² + 2aΔx, que involucra una raíz cuadrada al calcular una velocidad.",
+          "paragraph3": "El desplazamiento (Δx) es distinto de la distancia recorrida: el desplazamiento es el cambio neto de posición y puede ser negativo si un objeto termina detrás de donde comenzó, mientras que la distancia siempre es positiva y contabiliza la longitud total del recorrido, incluyendo cualquier retroceso. Estas ecuaciones de aceleración constante usan el desplazamiento, y dan la misma respuesta para un movimiento rectilíneo en una sola dirección, donde ambos coinciden."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Calculando distintas incógnitas para el mismo movimiento subyacente.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "v₀ = 0, a = 2 m/s², t = 5 s", "result": "v = 10 m/s, Δx = 25 m" },
+            { "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s", "result": "v₀ = 10 m/s" },
+            { "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m", "result": "a = 2 m/s² (estilo distancia de frenado)" },
+            { "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m", "result": "v = 10 m/s" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué calcular la velocidad a partir del desplazamiento implica una raíz cuadrada?",
+              "answer": "La ecuación v² = v₀² + 2aΔx relaciona el cuadrado de la velocidad con el desplazamiento, así que despejar v requiere tomar la raíz cuadrada de ambos lados. Esta calculadora devuelve la raíz no negativa por convención, siguiendo el supuesto habitual de que la velocidad se reporta como una magnitud positiva en la dirección del movimiento."
+            },
+            {
+              "question": "¿Qué significa que la calculadora indique que ninguna velocidad real resuelve la combinación?",
+              "answer": "Esto ocurre cuando el discriminante v₀² + 2aΔx es negativo, lo cual solo es posible con un objeto que desacelera (aceleración negativa); significa que el objeto se detiene físicamente antes de alcanzar el desplazamiento que ingresaste, por lo que no existe una velocidad final real para ese escenario. Reducir el desplazamiento o revisar el signo de la aceleración suele resolverlo."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre los dos modos de cálculo?",
+              "answer": "El modo basado en tiempo usa la ecuación v = v₀ + at, apropiada cuando la velocidad, la aceleración y el tiempo son las cantidades conocidas (no se necesita la distancia como entrada). El modo basado en distancia usa v² = v₀² + 2aΔx, apropiado cuando se conoce el desplazamiento en lugar del tiempo: el clásico tipo de problema de «qué distancia para detenerse» o «qué tan rápido tras esta distancia»."
+            },
+            {
+              "question": "¿Puede la aceleración ser negativa?",
+              "answer": "Sí: la aceleración negativa (a menudo llamada desaceleración cuando se opone a la dirección del movimiento) es matemáticamente idéntica a la aceleración positiva, solo con signo opuesto. Un auto que frena hasta detenerse tiene aceleración negativa si su velocidad inicial se toma como positiva; las mismas ecuaciones se aplican sin modificación."
+            },
+            {
+              "question": "¿Funcionan estas ecuaciones para el movimiento real con resistencia del aire o fricción?",
+              "answer": "No: estas ecuaciones suponen estrictamente una aceleración constante, lo que requiere una fuerza neta constante (segunda ley de Newton). La resistencia del aire y muchos escenarios de fricción producen fuerzas que cambian con la velocidad, haciendo que la aceleración no sea constante; estas ecuaciones son exactas solo en casos idealizados de aceleración constante, como la caída libre en el vacío o el movimiento bajo una única fuerza aplicada constante."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "De los Planos Inclinados de Galileo a una Disciplina con Nombre",
+            "paragraph": "La descripción matemática del movimiento uniformemente acelerado se remonta a Galileo Galilei, quien en su libro de 1638 Dos Nuevas Ciencias (escrito bajo arresto domiciliario al final de su vida) demostró que un cuerpo que cae o acelera uniformemente recorre una distancia proporcional al cuadrado del tiempo transcurrido, la relación que sustenta hoy Δx = v₀t + ½at². Galileo dedujo esto principalmente mediante experimentos haciendo rodar bolas por planos inclinados para desacelerar el movimiento lo suficiente como para medirlo con precisión usando los dispositivos de cronometraje disponibles entonces. El campo en sí no tuvo nombre hasta casi dos siglos después: el físico y matemático francés André-Marie Ampère acuñó el término «cinématique» (cinemática) en su Essai sur la philosophie des sciences de 1834, a partir del griego kinema («movimiento»), específicamente para separar la descripción geométrica pura del movimiento de la dinámica, el estudio de las fuerzas que lo causan."
+          },
+          "modernDevelopments": {
+            "title": "La Cinemática Más Allá del Libro de Texto",
+            "paragraph": "Las mismas ecuaciones de aceleración constante que el trabajo de Galileo hizo posibles siguen siendo fundamentales no solo en la física introductoria, sino en la ingeniería práctica: los cálculos de distancia de frenado automotriz, las tablas de proyectiles y balística, los perfiles de control de movimiento de ascensores y robots, y la mecánica orbital se construyen sobre este marco cinemático, a menudo añadiendo modelos de aceleración no constante más complejos sobre estas relaciones básicas para lograr mayor precisión."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La cinemática y el análisis del movimiento son temas fundamentales dentro de la física. Estas son las 5 mejores universidades del mundo en Física y Astronomía según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — el programa se basa en el acceso presencial a laboratorios y un modelo de investigación residencial, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — el departamento describe una comunidad de investigación presencial con acceso a laboratorios en el sitio, y no se indica ninguna opción de estudio a distancia."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #5 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — los estudiantes de tiempo completo deben residir en Cambridge durante al menos tres trimestres, sin opción en línea."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Física Aplicada — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Drake, S. (1964). Galileo and the Law of Inertia. American Journal of Physics, 32(8), 601–608.",
+          "note": "El historiador de la ciencia Stillman Drake examina el desarrollo de la cinemática del movimiento acelerado por parte de Galileo, rastreando el razonamiento detrás de las ecuaciones que esta calculadora sigue aplicando casi cuatro siglos después.",
+          "url": "https://doi.org/10.1119/1.1970872",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

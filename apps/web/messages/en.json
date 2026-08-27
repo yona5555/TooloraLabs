@@ -5767,6 +5767,184 @@
         }
       }
     },
+    "kinematics-calculator": {
+      "title": "Kinematics Calculator",
+      "description": "Solve constant-acceleration motion problems for velocity, initial velocity, acceleration, time, or displacement, with a dynamic motion diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Kinematics Equations",
+          "intro": "The core constant-acceleration equations this calculator applies (v₀ = initial velocity, v = final velocity, a = acceleration, t = time, Δx = displacement).",
+          "formulas": {
+            "velocity": { "label": "Velocity", "expression": "v = v₀ + at" },
+            "displacementTime": { "label": "Displacement (time-based)", "expression": "Δx = v₀t + ½at²" },
+            "velocitySquared": { "label": "Velocity Squared", "expression": "v² = v₀² + 2aΔx" },
+            "displacementAvg": { "label": "Displacement (average velocity)", "expression": "Δx = ½(v₀ + v)t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "modeLabel": "Known Quantities",
+        "mode": {
+          "timeBased": "Velocity, Acceleration & Time (no distance)",
+          "distanceBased": "Velocity, Acceleration & Displacement (no time)"
+        },
+        "solveForLabel": "Solve For",
+        "solveForTime": {
+          "v": "Final Velocity (v)",
+          "v0": "Initial Velocity (v₀)",
+          "a": "Acceleration (a)",
+          "t": "Time (t)"
+        },
+        "solveForDistance": {
+          "v": "Final Velocity (v)",
+          "v0": "Initial Velocity (v₀)",
+          "a": "Acceleration (a)",
+          "dx": "Displacement (Δx)"
+        },
+        "v0Label": "Initial Velocity v₀ (m/s)",
+        "v0Placeholder": "e.g. 0",
+        "vLabel": "Final Velocity v (m/s)",
+        "vPlaceholder": "e.g. 10",
+        "aLabel": "Acceleration a (m/s²)",
+        "aPlaceholder": "e.g. 2",
+        "tLabel": "Time t (s)",
+        "tPlaceholder": "e.g. 5",
+        "dxLabel": "Displacement Δx (m)",
+        "dxPlaceholder": "e.g. 25"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroTime": "Time must be nonzero to solve for acceleration.",
+        "zeroAcceleration": "Acceleration must be nonzero to solve for time.",
+        "zeroDisplacement": "Displacement must be nonzero to solve for acceleration.",
+        "negativeDiscriminant": "These values imply the object stops before covering this displacement — no real velocity solves this combination.",
+        "v0": "v₀",
+        "v": "v",
+        "a": "a",
+        "t": "t",
+        "dx": "Δx",
+        "undefined": "undefined",
+        "diagramStart": "Start",
+        "diagramEnd": "End",
+        "diagramCaption": "Velocity arrows scaled to v₀ (start) and v (end); direction flips for negative values."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Kinematics",
+          "paragraph1": "Kinematics describes motion — position, velocity, and acceleration — without reference to the forces that cause it. For the common case of constant acceleration, five quantities are related: initial velocity (v₀), final velocity (v), acceleration (a), time (t), and displacement (Δx). Knowing any three of these five determines the other two, using one of four standard equations depending on which quantities are known.",
+          "diagram": {
+            "startLabel": "Start",
+            "endLabel": "End",
+            "caption": "An object accelerating from rest (v₀ = 0) to 10 m/s — the end arrow is longer because the final velocity is greater."
+          },
+          "paragraph2": "This calculator covers two common problem types. When velocity, acceleration, and time are known (but not displacement), it uses v = v₀ + at and its rearrangements — pure linear algebra with no ambiguity. When velocity, acceleration, and displacement are known (but not time) — the classic \"stopping distance\" or \"how fast after this distance\" problem — it uses v² = v₀² + 2aΔx, which involves a square root when solving for a velocity.",
+          "paragraph3": "Displacement (Δx) is different from distance traveled: displacement is the net change in position and can be negative if an object ends up behind where it started, while distance is always positive and accounts for the full path length, including any backtracking. These constant-acceleration equations use displacement, and give the same answer for straight-line motion in one direction, where the two coincide."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Solving different unknowns for the same underlying motion.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "v₀ = 0, a = 2 m/s², t = 5 s", "result": "v = 10 m/s, Δx = 25 m" },
+            { "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s", "result": "v₀ = 10 m/s" },
+            { "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m", "result": "a = 2 m/s² (braking-distance style)" },
+            { "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m", "result": "v = 10 m/s" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does solving for velocity from displacement involve a square root?",
+              "answer": "The equation v² = v₀² + 2aΔx relates the square of velocity to displacement, so isolating v requires taking a square root of both sides. This calculator returns the non-negative root by convention, matching the typical assumption that speed is reported as a positive magnitude in the direction of motion."
+            },
+            {
+              "question": "What does it mean when the calculator says no real velocity solves the combination?",
+              "answer": "This happens when the discriminant v₀² + 2aΔx is negative, which is only possible with a decelerating object (negative a) — it means the object physically comes to a stop before reaching the displacement you entered, so no real final velocity exists for that scenario. Reducing the displacement or checking the sign of acceleration usually resolves it."
+            },
+            {
+              "question": "What's the difference between the two calculation modes?",
+              "answer": "The time-based mode uses the equation v = v₀ + at, appropriate when velocity, acceleration, and time are the known quantities (distance is not needed as an input). The distance-based mode uses v² = v₀² + 2aΔx, appropriate when displacement is known instead of time — the classic \"how far to stop\" or \"how fast after this distance\" problem type."
+            },
+            {
+              "question": "Can acceleration be negative?",
+              "answer": "Yes — negative acceleration (often called deceleration when it opposes the direction of motion) is mathematically identical to positive acceleration, just with an opposite sign. A car braking to a stop has negative acceleration if its initial velocity is taken as positive; the same equations apply without modification."
+            },
+            {
+              "question": "Do these equations work for real-world motion with air resistance or friction?",
+              "answer": "No — these equations strictly assume constant acceleration, which requires a constant net force (Newton's second law). Air resistance and many friction scenarios produce forces that change with speed, making the acceleration non-constant; these equations are exact only for idealized constant-acceleration cases, such as free fall in a vacuum or motion under a single constant applied force."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Galileo's Inclined Planes to a Named Discipline",
+            "paragraph": "The mathematical description of uniformly accelerated motion traces to Galileo Galilei, who in his 1638 book Two New Sciences (written under house arrest late in his life) demonstrated that a falling or uniformly accelerating body covers distance proportional to the square of elapsed time — the relationship underlying Δx = v₀t + ½at² today. Galileo derived this largely through experiments rolling balls down inclined planes to slow the motion enough to measure accurately with the timekeeping devices then available. The field itself did not have a name until nearly two centuries later: French physicist and mathematician André-Marie Ampère coined the term \"cinématique\" (kinematics) in his 1834 Essai sur la philosophie des sciences, from the Greek kinema (\"motion\"), specifically to separate the pure geometric description of motion from dynamics, the study of the forces that cause it."
+          },
+          "modernDevelopments": {
+            "title": "Kinematics Beyond the Textbook",
+            "paragraph": "The same constant-acceleration equations Galileo's work made possible remain foundational not just in introductory physics but in practical engineering: automotive braking-distance calculations, projectile and ballistics tables, elevator and robotic motion-control profiles, and orbital mechanics all build on this kinematic framework, often layering more complex, non-constant acceleration models on top of these basic relationships for greater precision."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Kinematics and motion analysis are foundational topics within physics. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is based on in-person lab access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an on-campus research community with on-site lab access, and no distance-study option is listed."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must reside in Cambridge for at least three terms, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Applied Physics — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus laboratories and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Drake, S. (1964). Galileo and the Law of Inertia. American Journal of Physics, 32(8), 601–608.",
+          "note": "Historian of science Stillman Drake examines Galileo's development of the kinematics of accelerated motion, tracing the reasoning behind the equations this calculator still applies nearly four centuries later.",
+          "url": "https://doi.org/10.1119/1.1970872",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
