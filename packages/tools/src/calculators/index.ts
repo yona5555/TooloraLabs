@@ -23,3 +23,4 @@ export * from "./PdfMergeSplit";
 export * from "./ZipCompressor";
 export * from "./FractionCalculator";
 export * from "./ScientificNotationConverter";
+export * from "./SignificantFiguresCalculator";

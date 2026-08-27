@@ -4291,6 +4291,171 @@
         }
       }
     },
+    "significant-figures-calculator": {
+      "title": "Rechner für Signifikante Stellen",
+      "description": "Zählen Sie die signifikanten Stellen eines Messwerts, runden Sie ihn auf eine gewählte Anzahl davon, und übertragen Sie die Messgenauigkeit korrekt durch Addition, Subtraktion, Multiplikation und Division.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Die Vier Zählregeln",
+          "intro": "Jede Regel für signifikante Stellen lässt sich auf diese vier Fälle zurückführen.",
+          "rules": {
+            "nonzero": { "example": "482", "text": "Jede Ziffer ungleich null ist immer signifikant — 3 signifikante Stellen." },
+            "sandwiched": { "example": "1002", "text": "Nullen zwischen zwei Ziffern ungleich null sind immer signifikant — 4 signifikante Stellen." },
+            "leading": { "example": "0,0053", "text": "Führende Nullen (vor der ersten Ziffer ungleich null) sind nie signifikant — 2 signifikante Stellen." },
+            "trailing": { "example": "1,200", "text": "Nachgestellte Nullen sind nur bei vorhandenem Dezimalkomma signifikant — 4 signifikante Stellen." }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Ihr Wert",
+        "operationLabel": "Rechenart",
+        "operation": {
+          "count": "Signifikante Stellen zählen",
+          "round": "Auf N signifikante Stellen runden",
+          "add": "Addieren (+)",
+          "subtract": "Subtrahieren (−)",
+          "multiply": "Multiplizieren (×)",
+          "divide": "Dividieren (÷)"
+        },
+        "valueLabel": "Messwert",
+        "firstValueLabel": "Erster Messwert",
+        "secondValueLabel": "Zweiter Messwert",
+        "valuePlaceholder": "z. B. 12,50",
+        "roundToLabel": "Runden Auf",
+        "roundToOption": "{count, plural, one {# signifikante Stelle} other {# signifikante Stellen}}"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidNumber": "Geben Sie eine gültige Zahl ein.",
+        "divideByZero": "Division durch null ist nicht möglich.",
+        "sigFigsBadge": "{count, plural, one {# signifikante Stelle} other {# signifikante Stellen}}",
+        "decimalPlacesBadge": "{count, plural, one {Angegeben mit # Nachkommastelle} other {Angegeben mit # Nachkommastellen}}",
+        "diagramCaption": "Hervorgehobene Ziffern sind signifikant; blasse Ziffern sind es nicht.",
+        "stepCount": "{value} hat {count} signifikante Stellen.",
+        "stepRound": "{value} gerundet auf {digits} signifikante Stellen ergibt {result}.",
+        "stepAddSubtract": "Der erste Wert ist auf {placesA} Nachkommastelle(n) genau, der zweite auf {placesB} — der Summe oder Differenz kann nur bis zur ungenaueren der beiden vertraut werden, {places} Nachkommastelle(n).",
+        "stepMultiplyDivide": "Der erste Wert hat {sigFigsA} signifikante Stellen, der zweite {sigFigsB} — dem Ergebnis kann nur bis zur kleineren der beiden Zahlen vertraut werden, {sigFigs} signifikante Stellen."
+      },
+      "education": {
+        "intro": {
+          "title": "Signifikante Stellen verstehen",
+          "paragraph1": "Signifikante Stellen sind die Ziffern eines Messwerts, die eine echte Aussage über seine Genauigkeit tragen — jede Ziffer ungleich null, plus jede Null, die entweder zwischen zwei Ziffern ungleich null steht oder nach einem Dezimalkomma erscheint, sobald bereits eine Ziffer ungleich null aufgetreten ist. Eine Messung von „12,50 cm“ gibt vier signifikante Stellen an und teilt dem Leser mit, dass das Messgerät präzise genug war, um 12,50 von 12,49 oder 12,51 zu unterscheiden; dieselbe Länge als „12,5 cm“ zu schreiben, beansprucht dagegen weniger Genauigkeit, nur drei signifikante Stellen.",
+          "diagram": {
+            "caption": "0,0050 hat 2 signifikante Stellen: Die führenden Nullen sind nicht signifikant, die Null nach der 5 hingegen schon, weil ein Dezimalkomma vorhanden ist."
+          },
+          "paragraph2": "Führende Nullen sind nie signifikant, da sie nur die Position des Dezimalkommas festlegen, nicht die Genauigkeit der Messung — 0,0050 und 5,0 (nach Umrechnung auf dieselbe Einheit) stellen dieselbe Genauigkeit dar, 2 signifikante Stellen, unabhängig davon, wie viele führende Nullen die kleinere Einheit erfordert. Nachgestellte Nullen sind der wirklich mehrdeutige Fall: „100 mL“ könnte je nach tatsächlicher Messgenauigkeit zwischen 1 und 3 signifikanten Stellen bedeuten — genau deshalb gibt es die wissenschaftliche Notation (1 × 10^2, 1,0 × 10^2 oder 1,00 × 10^2) als eindeutige Methode, die Genauigkeit einer Messung anzugeben.",
+          "paragraph3": "Eine Berechnung kann nicht genauer sein als ihr ungenauester Eingabewert. Deshalb wird das Ergebnis beim Multiplizieren oder Dividieren von Messwerten auf die geringste Anzahl signifikanter Stellen unter den Operanden gerundet, während beim Addieren oder Subtrahieren stattdessen auf die ungenaueste Nachkommastelle gerundet wird — eine eigene Regel, da Addition und Subtraktion absolute Genauigkeit (Nachkommastellen) statt relativer Genauigkeit (signifikante Stellen) kombinieren."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Je ein Beispiel für jede von diesem Tool unterstützte Rechenart.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Signifikante Stellen in 0,00500", "result": "3" },
+            { "calculation": "12345 gerundet auf 3 signifikante Stellen", "result": "1,23 × 10^4" },
+            { "calculation": "12,5 + 0,234", "result": "12,7" },
+            { "calculation": "18,0 − 2,545", "result": "15,5" },
+            { "calculation": "4,5 × 2,33", "result": "10" },
+            { "calculation": "10,0 ÷ 3,0", "result": "3,3" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum sind nachgestellte Nullen bei „100“ mehrdeutig, bei „100.“ oder „1,00 × 10^2“ aber nicht?",
+              "answer": "Bei der Schreibweise „100“ ohne Dezimalkomma lässt sich nicht erkennen, ob die Nullen tatsächlich gemessen wurden oder nur Platzhalter zur Kennzeichnung der Kommaposition sind — nach der Standardkonvention, der dieses Tool folgt, gelten sie als nicht signifikant, was 1 signifikante Stelle ergibt. Ein Dezimalkomma hinzuzufügen („100.“) oder die Zahl in wissenschaftlicher Notation zu schreiben (1,00 × 10^2) beseitigt die Mehrdeutigkeit und beansprucht ausdrücklich drei signifikante Stellen."
+            },
+            {
+              "question": "Warum verwendet die Multiplikation signifikante Stellen, die Addition aber Nachkommastellen?",
+              "answer": "Signifikante Stellen messen die relative Genauigkeit (wie viele aussagekräftige Ziffern ein Wert hat), während Nachkommastellen die absolute Genauigkeit messen (wie fein die kleinste gemessene Einheit ist). Multiplikation oder Division kombiniert relative Genauigkeit korrekt, indem die geringste Anzahl signifikanter Stellen der Eingabewerte beibehalten wird; Addition oder Subtraktion kombiniert absolute Genauigkeit korrekt, indem die ungenaueste Nachkommastelle beibehalten wird — die falsche Regel bei einer der beiden Operationen anzuwenden würde die Genauigkeit des Ergebnisses stillschweigend überschätzen."
+            },
+            {
+              "question": "Warum zeigt die volle Dezimalanzeige eines Taschenrechners nicht schon die richtige Genauigkeit?",
+              "answer": "Ein Taschenrechner rechnet mit so vielen Stellen, wie es seine Hardware zulässt, ohne jede Kenntnis darüber, welche Ziffern Ihrer ursprünglichen Messungen tatsächlich aussagekräftig waren — er zeigt bereitwillig 1/3 eines gemessenen Werts von 10,0 als 3,333333333 an, obwohl nur zwei dieser Ziffern (3,3) durch eine auf 2 signifikante Stellen genaue Messung tatsächlich gerechtfertigt sind. Erst die Anwendung der Regeln für signifikante Stellen nach der Berechnung stellt eine ehrliche Genauigkeit des Endergebnisses wieder her."
+            },
+            {
+              "question": "Haben exakte Zahlen und gezählte Mengen überhaupt signifikante Stellen?",
+              "answer": "Nein. Definierte Konstanten (ein Meter hat genau 100 Zentimeter) und gezählte ganze Mengen (genau 12 Eier in diesem Karton) sind per Definition exakt, mit praktisch unendlich vielen signifikanten Stellen, und begrenzen die Genauigkeit einer Berechnung nie so, wie es ein Messwert tut."
+            },
+            {
+              "question": "Wie runde ich eine Zahl, die genau auf einer 5 endet, wie 2,5, auf 1 signifikante Stelle?",
+              "answer": "Dieses Tool rundet Zwischenwerte aufwärts (2,5 wird zu 3, nicht zu 2 gerundet) — die in den meisten Taschenrechnern und Tabellenkalkulationen standardmäßig verwendete Konvention. Manche Laborkontexte schreiben stattdessen „kaufmännisches Runden“ (Runden zur geraden Ziffer) vor, um eine statistische Aufwärtsverzerrung über viele Rundungsvorgänge hinweg zu vermeiden — prüfen Sie die in Ihrem Kurs oder Fachgebiet erwartete Konvention, falls beide Methoden unterschiedliche Ergebnisse liefern würden."
+            },
+            {
+              "question": "Wo spielt Messgenauigkeit in der Praxis tatsächlich eine Rolle?",
+              "answer": "Jeder naturwissenschaftliche Versuchsbericht, jede technische Toleranz und jede Fertigungsspezifikation hängt davon ab, Genauigkeit ehrlich zu kommunizieren — die berechnete Tragfähigkeit einer Brückenstütze mit mehr Stellen anzugeben, als die ursprünglichen Material- und Maßmessungen tatsächlich rechtfertigen, erzeugt ein trügerisches Gefühl von Gewissheit, das ein reales technisches Risiko verschleiern kann."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Eine Lehrbuchkonvention ohne einzelnen Erfinder",
+            "paragraph": "Anders als viele wissenschaftliche Konventionen haben die standardisierten Regeln zum Zählen signifikanter Stellen weder einen einzelnen Begründer noch eine einzelne Gründungsveröffentlichung. Die zugrunde liegende Praxis — eine Messung nur mit den Ziffern anzugeben, die ihre Genauigkeit tatsächlich rechtfertigt — hat informelle Wurzeln, die Jahrhunderte in der beobachtenden Wissenschaft zurückreichen, von Isaac Newtons astronomischen Arbeiten bis zu Robert Millikans Präzisionsmessungen zu Beginn des 20. Jahrhunderts. Sie stützt sich auf dieselbe breitere Tradition der Quantifizierung von Messunsicherheit, die Carl Friedrich Gauss in seiner Theoria Motus (1809) mathematisch formalisierte, die die Methode der kleinsten Quadrate und die Normalverteilung von Beobachtungsfehlern einführte — wobei dies eine eigenständige Traditionslinie der Fehlertheorie ist, nicht der Ursprung der heute gelehrten Regeln für signifikante Stellen. Einer historischen Übersichtsarbeit von 2013 in The Physics Teacher zufolge fehlte das heute in einführenden Lehrbüchern standardmäßige Regelwerk (Ziffern ungleich null zählen immer, eingeschlossene Nullen zählen, führende Nullen zählen nie, nachgestellte Nullen zählen nur mit Dezimalkomma) noch bis in die frühen 1980er-Jahre weitgehend, und wurde erst in den letzten Jahrzehnten zu einem nahezu universellen Bestandteil."
+          },
+          "modernDevelopments": {
+            "title": "Signifikante Stellen in automatisierten Datenpipelines",
+            "paragraph": "Moderne Laborinstrumente und Datenerfassungssoftware geben routinemäßig weit mehr Ziffern aus, als eine physikalische Messung rechtfertigen kann, da digitale Sensoren und Gleitkommaarithmetik von sich aus nicht wissen, wie genau die zugrunde liegende Messung tatsächlich war. Wissenschaftliche und technische Software verfolgt zunehmend automatisch die Unsicherheit jedes einzelnen Werts — eine als Unsicherheitsfortpflanzung bezeichnete Praxis —, sodass ein abschließend gemeldetes Ergebnis eine explizite Fehlergrenze trägt, statt darauf angewiesen zu sein, dass ein Mensch am Ende einer langen Berechnung manuell die Regeln für signifikante Stellen anwendet."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Signifikante Stellen sind eine Kernkompetenz der umfassenderen Disziplin Physik, in der die ehrliche Angabe der Messgenauigkeit unerlässlich ist. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Carter, A. R. (2013). Evolution of the Significant Figure Rules. The Physics Teacher, 51(6), 340–343.",
+          "note": "Carters historische Übersichtsarbeit dokumentiert, dass die heute standardisierten Regeln für signifikante Stellen noch bis in die frühen 1980er-Jahre weitgehend in einführenden Physiklehrbüchern fehlten, und zeichnet ihre schrittweise Übernahme nach, statt sie einer einzelnen Quelle zuzuschreiben.",
+          "url": "https://doi.org/10.1119/1.4818368",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

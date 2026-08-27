@@ -294,6 +294,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "significant-figures-calculator",
+    title: "Significant Figures Calculator",
+    category: "math-science",
+    description:
+      "Count significant figures in a measured value, round to a chosen number of them, and correctly propagate measurement precision through addition, subtraction, multiplication, and division.",
+    featured: false,
+    keywords: [
+      "significant figures calculator",
+      "sig figs",
+      "round to sig figs",
+      "measurement precision",
+      "decimal places",
+      "rounding rules",
+    ],
+  },
+  {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
     category: "math-science",

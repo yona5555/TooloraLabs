@@ -4287,6 +4287,171 @@
         }
       }
     },
+    "significant-figures-calculator": {
+      "title": "Significant Figures Calculator",
+      "description": "Count significant figures in a measured value, round to a chosen number of them, and correctly propagate measurement precision through addition, subtraction, multiplication, and division.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "The Four Counting Rules",
+          "intro": "Every significant-figures rule reduces to these four cases.",
+          "rules": {
+            "nonzero": { "example": "482", "text": "Every nonzero digit is always significant — 3 significant figures." },
+            "sandwiched": { "example": "1002", "text": "Zeros between two nonzero digits are always significant — 4 significant figures." },
+            "leading": { "example": "0.0053", "text": "Leading zeros (before the first nonzero digit) are never significant — 2 significant figures." },
+            "trailing": { "example": "1.200", "text": "Trailing zeros are significant only when a decimal point is present — 4 significant figures." }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Your Value",
+        "operationLabel": "Operation",
+        "operation": {
+          "count": "Count Significant Figures",
+          "round": "Round to N Significant Figures",
+          "add": "Add (+)",
+          "subtract": "Subtract (−)",
+          "multiply": "Multiply (×)",
+          "divide": "Divide (÷)"
+        },
+        "valueLabel": "Measured Value",
+        "firstValueLabel": "First Measured Value",
+        "secondValueLabel": "Second Measured Value",
+        "valuePlaceholder": "e.g. 12.50",
+        "roundToLabel": "Round To",
+        "roundToOption": "{count, plural, one {# significant figure} other {# significant figures}}"
+      },
+      "result": {
+        "heading": "Result",
+        "invalidNumber": "Enter a valid number.",
+        "divideByZero": "Cannot divide by zero.",
+        "sigFigsBadge": "{count, plural, one {# significant figure} other {# significant figures}}",
+        "decimalPlacesBadge": "{count, plural, one {Reported to # decimal place} other {Reported to # decimal places}}",
+        "diagramCaption": "Highlighted digits are significant; muted digits are not.",
+        "stepCount": "{value} has {count} significant figures.",
+        "stepRound": "{value} rounded to {digits} significant figures is {result}.",
+        "stepAddSubtract": "The first value is precise to {placesA} decimal place(s) and the second to {placesB} — the sum or difference can only be trusted to the less precise of the two, {places} decimal place(s).",
+        "stepMultiplyDivide": "The first value has {sigFigsA} significant figures and the second has {sigFigsB} — the result can only be trusted to the fewer of the two, {sigFigs} significant figures."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Significant Figures",
+          "paragraph1": "Significant figures are the digits in a measured value that carry real meaning about its precision — every nonzero digit, plus any zero that either sits between two nonzero digits or comes after a decimal point once a nonzero digit has appeared. A measurement of \"12.50 cm\" reports four significant figures, telling the reader the instrument was precise enough to distinguish 12.50 from 12.49 or 12.51; writing the same length as \"12.5 cm\" instead claims less precision, only three significant figures.",
+          "diagram": {
+            "caption": "0.0050 has 2 significant figures: the leading zeros are not significant, but the zero after the 5 is, because a decimal point is present."
+          },
+          "paragraph2": "Leading zeros are never significant because they only fix the position of the decimal point, not the precision of the measurement — 0.0050 and 5.0 (once converted to the same unit) represent the same precision, 2 significant figures, regardless of how many leading zeros the smaller unit requires. Trailing zeros are the genuinely ambiguous case: \"100 mL\" could mean anywhere from 1 to 3 significant figures depending on how precisely it was measured, which is exactly why scientific notation (1 × 10^2, 1.0 × 10^2, or 1.00 × 10^2) exists as the unambiguous way to state a measurement's precision.",
+          "paragraph3": "A calculation is only as precise as its least precise input, which is why multiplying or dividing measured values rounds the result to the fewest significant figures among the operands, while adding or subtracting instead rounds to the least precise decimal place — a distinct rule, because addition and subtraction combine absolute precision (decimal places) rather than relative precision (significant figures)."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "One worked example for each operation this tool supports.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "Significant figures in 0.00500", "result": "3" },
+            { "calculation": "12345 rounded to 3 sig figs", "result": "1.23 × 10^4" },
+            { "calculation": "12.5 + 0.234", "result": "12.7" },
+            { "calculation": "18.0 − 2.545", "result": "15.5" },
+            { "calculation": "4.5 × 2.33", "result": "10" },
+            { "calculation": "10.0 ÷ 3.0", "result": "3.3" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why are trailing zeros in \"100\" ambiguous, but not in \"100.\" or \"1.00 × 10^2\"?",
+              "answer": "Written as plain \"100\" with no decimal point, there is no way to tell whether the zeros were actually measured or are just placeholders marking the decimal position — by the standard convention this tool follows, they are treated as not significant, giving 1 significant figure. Adding a decimal point (\"100.\") or writing it in scientific notation (1.00 × 10^2) removes the ambiguity, explicitly claiming 3 significant figures."
+            },
+            {
+              "question": "Why does multiplication use significant figures, but addition uses decimal places?",
+              "answer": "Significant figures measure relative precision (how many meaningful digits a value has), while decimal places measure absolute precision (how fine the smallest measured unit is). Multiplying or dividing combines relative precision correctly by keeping the fewest significant figures of the inputs; adding or subtracting combines absolute precision correctly by keeping the least precise decimal place — using the wrong rule for either operation would silently overstate the result's precision."
+            },
+            {
+              "question": "Why doesn't a calculator's full decimal display already show the correct precision?",
+              "answer": "A calculator computes with as many digits as its hardware allows, with no awareness of which digits in your original measurements were actually meaningful — it will happily display 1/3 of a measured 10.0 as 3.333333333, even though only two of those digits (3.3) are actually justified by a measurement good to 2 significant figures. Applying significant-figures rules after the calculation is what restores an honest precision to the final answer."
+            },
+            {
+              "question": "Do exact numbers and counted quantities have significant figures at all?",
+              "answer": "No. Defined constants (there are exactly 100 centimeters in a meter) and counted whole quantities (exactly 12 eggs in this carton) are exact by definition, with effectively infinite significant figures, and never limit the precision of a calculation the way a measured value does."
+            },
+            {
+              "question": "How do I round a number that ends exactly on a 5, like 2.5 to 1 significant figure?",
+              "answer": "This tool rounds half values up (2.5 rounds to 3, not 2), the same convention used by default in most calculators and spreadsheets. Some laboratory contexts instead specify \"round half to even\" (banker's rounding) to avoid a statistical upward bias across many rounding operations — check the convention your course or field expects if the two would give different answers."
+            },
+            {
+              "question": "Where does measurement precision actually matter in practice?",
+              "answer": "Any experimental science report, engineering tolerance, or manufacturing specification depends on communicating precision honestly — reporting a bridge support's calculated load capacity to more digits than the original material and dimension measurements actually justify creates a false sense of certainty that can mask real engineering risk."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Textbook Convention, Not a Single Inventor",
+            "paragraph": "Unlike many scientific conventions, the standardized rules for counting significant figures have no single founder or founding publication. The underlying practice — reporting a measurement with only the digits its precision actually justifies — has informal roots stretching back centuries in observational science, from Isaac Newton's astronomical work to Robert Millikan's precision measurements in the early 20th century. It draws on the same broader tradition of quantifying measurement uncertainty that Carl Friedrich Gauss formalized mathematically in his Theoria Motus (1809), which introduced the method of least squares and the normal distribution of observational errors — though that is a separate lineage in error theory, not the origin of the sig-fig rules taught today. According to a 2013 historical review in The Physics Teacher, the specific rule set now standard in introductory textbooks (nonzero digits always count, sandwiched zeros count, leading zeros never count, trailing zeros count only with a decimal point) was still largely absent from textbooks as recently as the early 1980s, becoming a near-universal fixture only in the last few decades."
+          },
+          "modernDevelopments": {
+            "title": "Significant Figures in Automated Data Pipelines",
+            "paragraph": "Modern laboratory instruments and data-logging software routinely output far more digits than any physical measurement can justify, since digital sensors and floating-point arithmetic do not inherently know how precise the underlying measurement really was. Scientific and engineering software increasingly tracks uncertainty automatically alongside each value — a practice called uncertainty propagation — so that a final reported result carries an explicit error bound rather than relying on a human to manually apply significant-figures rules at the end of a long calculation."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Significant figures are a core skill in the broader discipline of physics, where reporting measurement precision honestly is essential. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional research university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an in-person, lab-based research model with no remote or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is built around on-site laboratory access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an in-person research community with on-site lab access, and no remote-study option is stated."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must spend at least three terms in residence in Cambridge, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The top-ranked Arab-region university overall (QS World University Rankings: Arab Region 2025), offering an Applied Physics PhD track — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus labs and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Carter, A. R. (2013). Evolution of the Significant Figure Rules. The Physics Teacher, 51(6), 340–343.",
+          "note": "Carter's historical review documents that today's standardized significant-figures rules were largely absent from introductory physics textbooks as recently as the early 1980s, tracing their gradual adoption rather than attributing them to a single source.",
+          "url": "https://doi.org/10.1119/1.4818368",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

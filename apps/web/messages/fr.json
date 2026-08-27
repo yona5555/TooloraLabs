@@ -4291,6 +4291,171 @@
         }
       }
     },
+    "significant-figures-calculator": {
+      "title": "Calculatrice de Chiffres Significatifs",
+      "description": "Comptez les chiffres significatifs d'une valeur mesurée, arrondissez-la à un nombre choisi d'entre eux, et propagez correctement la précision de mesure lors d'additions, de soustractions, de multiplications et de divisions.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Les Quatre Règles de Comptage",
+          "intro": "Toute règle de chiffres significatifs se ramène à ces quatre cas.",
+          "rules": {
+            "nonzero": { "example": "482", "text": "Tout chiffre non nul est toujours significatif — 3 chiffres significatifs." },
+            "sandwiched": { "example": "1002", "text": "Les zéros entre deux chiffres non nuls sont toujours significatifs — 4 chiffres significatifs." },
+            "leading": { "example": "0,0053", "text": "Les zéros initiaux (avant le premier chiffre non nul) ne sont jamais significatifs — 2 chiffres significatifs." },
+            "trailing": { "example": "1,200", "text": "Les zéros finaux ne sont significatifs qu'en présence d'une virgule décimale — 4 chiffres significatifs." }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Votre Valeur",
+        "operationLabel": "Opération",
+        "operation": {
+          "count": "Compter les Chiffres Significatifs",
+          "round": "Arrondir à N Chiffres Significatifs",
+          "add": "Addition (+)",
+          "subtract": "Soustraction (−)",
+          "multiply": "Multiplication (×)",
+          "divide": "Division (÷)"
+        },
+        "valueLabel": "Valeur Mesurée",
+        "firstValueLabel": "Première Valeur Mesurée",
+        "secondValueLabel": "Seconde Valeur Mesurée",
+        "valuePlaceholder": "ex. 12,50",
+        "roundToLabel": "Arrondir À",
+        "roundToOption": "{count, plural, one {# chiffre significatif} other {# chiffres significatifs}}"
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidNumber": "Saisissez un nombre valide.",
+        "divideByZero": "Impossible de diviser par zéro.",
+        "sigFigsBadge": "{count, plural, one {# chiffre significatif} other {# chiffres significatifs}}",
+        "decimalPlacesBadge": "{count, plural, one {Donné à # décimale} other {Donné à # décimales}}",
+        "diagramCaption": "Les chiffres en surbrillance sont significatifs ; les chiffres atténués ne le sont pas.",
+        "stepCount": "{value} comporte {count} chiffres significatifs.",
+        "stepRound": "{value} arrondi à {digits} chiffres significatifs donne {result}.",
+        "stepAddSubtract": "La première valeur est précise à {placesA} décimale(s) et la seconde à {placesB} — la somme ou la différence ne peut être fiable qu'à hauteur de la moins précise des deux, soit {places} décimale(s).",
+        "stepMultiplyDivide": "La première valeur comporte {sigFigsA} chiffres significatifs et la seconde {sigFigsB} — le résultat ne peut être fiable qu'à hauteur du plus petit des deux, soit {sigFigs} chiffres significatifs."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Chiffres Significatifs",
+          "paragraph1": "Les chiffres significatifs sont les chiffres d'une valeur mesurée qui portent une information réelle sur sa précision — tout chiffre non nul, plus tout zéro situé soit entre deux chiffres non nuls, soit après une virgule décimale une fois qu'un chiffre non nul est apparu. Une mesure de « 12,50 cm » indique quatre chiffres significatifs, signalant au lecteur que l'instrument était assez précis pour distinguer 12,50 de 12,49 ou 12,51 ; écrire la même longueur « 12,5 cm » revendique au contraire une précision moindre, seulement trois chiffres significatifs.",
+          "diagram": {
+            "caption": "0,0050 comporte 2 chiffres significatifs : les zéros initiaux ne sont pas significatifs, mais le zéro après le 5 l'est, car une virgule décimale est présente."
+          },
+          "paragraph2": "Les zéros initiaux ne sont jamais significatifs car ils ne font que fixer la position de la virgule décimale, pas la précision de la mesure — 0,0050 et 5,0 (une fois convertis dans la même unité) représentent la même précision, 2 chiffres significatifs, quel que soit le nombre de zéros initiaux qu'exige la plus petite unité. Les zéros finaux constituent le cas véritablement ambigu : « 100 mL » pourrait signifier de 1 à 3 chiffres significatifs selon la précision réelle de la mesure, et c'est exactement pour cela que la notation scientifique (1 × 10^2, 1,0 × 10^2 ou 1,00 × 10^2) existe comme moyen non ambigu d'indiquer la précision d'une mesure.",
+          "paragraph3": "Un calcul ne peut pas être plus précis que sa donnée d'entrée la moins précise, c'est pourquoi multiplier ou diviser des valeurs mesurées arrondit le résultat au plus petit nombre de chiffres significatifs parmi les opérandes, tandis qu'additionner ou soustraire arrondit plutôt à la décimale la moins précise — une règle distincte, car l'addition et la soustraction combinent la précision absolue (les décimales) plutôt que la précision relative (les chiffres significatifs)."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Un exemple résolu pour chaque opération prise en charge par cet outil.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Chiffres significatifs dans 0,00500", "result": "3" },
+            { "calculation": "12345 arrondi à 3 chiffres significatifs", "result": "1,23 × 10^4" },
+            { "calculation": "12,5 + 0,234", "result": "12,7" },
+            { "calculation": "18,0 − 2,545", "result": "15,5" },
+            { "calculation": "4,5 × 2,33", "result": "10" },
+            { "calculation": "10,0 ÷ 3,0", "result": "3,3" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi les zéros finaux de « 100 » sont-ils ambigus, mais pas ceux de « 100. » ou « 1,00 × 10^2 » ?",
+              "answer": "Écrit « 100 » sans virgule décimale, rien n'indique si les zéros ont réellement été mesurés ou s'ils ne sont que des espaces réservés marquant la position de la virgule décimale — selon la convention standard suivie par cet outil, ils sont considérés comme non significatifs, donnant 1 chiffre significatif. Ajouter une virgule décimale (« 100. ») ou l'écrire en notation scientifique (1,00 × 10^2) lève l'ambiguïté, revendiquant explicitement trois chiffres significatifs."
+            },
+            {
+              "question": "Pourquoi la multiplication utilise-t-elle les chiffres significatifs, alors que l'addition utilise les décimales ?",
+              "answer": "Les chiffres significatifs mesurent la précision relative (combien de chiffres porteurs de sens comporte une valeur), tandis que les décimales mesurent la précision absolue (à quel point la plus petite unité mesurée est fine). Multiplier ou diviser combine correctement la précision relative en conservant le plus petit nombre de chiffres significatifs des données d'entrée ; additionner ou soustraire combine correctement la précision absolue en conservant la décimale la moins précise — utiliser la mauvaise règle pour l'une ou l'autre opération surestimerait silencieusement la précision du résultat."
+            },
+            {
+              "question": "Pourquoi l'affichage décimal complet d'une calculatrice ne montre-t-il pas déjà la bonne précision ?",
+              "answer": "Une calculatrice calcule avec autant de chiffres que son matériel le permet, sans aucune notion de quels chiffres de vos mesures d'origine étaient réellement significatifs — elle affichera sans hésiter 1/3 d'une valeur mesurée de 10,0 sous la forme 3,333333333, alors que seuls deux de ces chiffres (3,3) sont réellement justifiés par une mesure précise à 2 chiffres significatifs. Appliquer les règles des chiffres significatifs après le calcul est ce qui restitue une précision honnête au résultat final."
+            },
+            {
+              "question": "Les nombres exacts et les quantités comptées ont-ils des chiffres significatifs ?",
+              "answer": "Non. Les constantes définies (il y a exactement 100 centimètres dans un mètre) et les quantités entières comptées (exactement 12 œufs dans cette boîte) sont exactes par définition, avec un nombre de chiffres significatifs effectivement infini, et ne limitent jamais la précision d'un calcul comme le fait une valeur mesurée."
+            },
+            {
+              "question": "Comment arrondir un nombre se terminant exactement par 5, comme 2,5, à 1 chiffre significatif ?",
+              "answer": "Cet outil arrondit les valeurs intermédiaires vers le haut (2,5 s'arrondit à 3, pas à 2), la convention utilisée par défaut dans la plupart des calculatrices et tableurs. Certains contextes de laboratoire spécifient plutôt un « arrondi au pair le plus proche » pour éviter un biais statistique à la hausse sur de nombreuses opérations d'arrondi — vérifiez la convention attendue par votre cours ou votre domaine si les deux méthodes donneraient des résultats différents."
+            },
+            {
+              "question": "Où la précision de mesure importe-t-elle réellement en pratique ?",
+              "answer": "Tout rapport scientifique expérimental, toute tolérance d'ingénierie ou spécification de fabrication dépend d'une communication honnête de la précision — indiquer la capacité de charge calculée d'un support de pont avec plus de chiffres que ne le justifient réellement les mesures d'origine du matériau et des dimensions crée un faux sentiment de certitude pouvant masquer un risque d'ingénierie bien réel."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Une Convention de Manuel Scolaire, Sans Inventeur Unique",
+            "paragraph": "Contrairement à beaucoup de conventions scientifiques, les règles normalisées de comptage des chiffres significatifs n'ont ni fondateur unique ni publication fondatrice. La pratique sous-jacente — ne rapporter une mesure qu'avec les chiffres que sa précision justifie réellement — a des racines informelles remontant à des siècles dans la science observationnelle, des travaux astronomiques d'Isaac Newton aux mesures de précision de Robert Millikan au début du XXe siècle. Elle s'appuie sur la même tradition plus large de quantification de l'incertitude de mesure que Carl Friedrich Gauss a formalisée mathématiquement dans son Theoria Motus (1809), qui a introduit la méthode des moindres carrés et la distribution normale des erreurs d'observation — bien qu'il s'agisse là d'une filiation distincte, celle de la théorie des erreurs, et non de l'origine des règles de chiffres significatifs enseignées aujourd'hui. Selon une revue historique de 2013 publiée dans The Physics Teacher, l'ensemble précis de règles aujourd'hui standard dans les manuels d'introduction (les chiffres non nuls comptent toujours, les zéros intercalés comptent, les zéros initiaux ne comptent jamais, les zéros finaux ne comptent qu'en présence d'une virgule décimale) était encore largement absent des manuels au début des années 1980, et n'est devenu un élément quasi universel qu'au cours des dernières décennies."
+          },
+          "modernDevelopments": {
+            "title": "Les Chiffres Significatifs dans les Chaînes de Données Automatisées",
+            "paragraph": "Les instruments de laboratoire modernes et les logiciels d'enregistrement de données produisent couramment bien plus de chiffres qu'aucune mesure physique ne peut le justifier, car les capteurs numériques et l'arithmétique en virgule flottante ne savent pas intrinsèquement à quel point la mesure sous-jacente était réellement précise. Les logiciels scientifiques et d'ingénierie suivent de plus en plus l'incertitude automatiquement aux côtés de chaque valeur — une pratique appelée propagation de l'incertitude —, de sorte qu'un résultat final rapporté porte une marge d'erreur explicite plutôt que de dépendre d'une personne appliquant manuellement les règles des chiffres significatifs à la fin d'un long calcul."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les chiffres significatifs sont une compétence centrale de la discipline plus large de la physique, où rapporter honnêtement la précision de mesure est essentiel. Voici les 5 meilleures universités mondiales en Physique et Astronomie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Non — le programme repose sur un accès présentiel aux laboratoires et un modèle de recherche résidentiel, sans mention d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Non — le département décrit une communauté de recherche en présentiel avec accès aux laboratoires sur place, et aucune option d'étude à distance n'est mentionnée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Non — les étudiants à temps plein doivent résider à Cambridge pendant au moins trois trimestres, sans option en ligne."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en physique appliquée — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Carter, A. R. (2013). Evolution of the Significant Figure Rules. The Physics Teacher, 51(6), 340–343.",
+          "note": "La revue historique de Carter documente que les règles normalisées de chiffres significatifs utilisées aujourd'hui étaient encore largement absentes des manuels de physique d'introduction au début des années 1980, retraçant leur adoption progressive plutôt que de les attribuer à une source unique.",
+          "url": "https://doi.org/10.1119/1.4818368",
+          "readOriginal": "Lire le texte original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

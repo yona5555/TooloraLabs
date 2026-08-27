@@ -4291,6 +4291,171 @@
         }
       }
     },
+    "significant-figures-calculator": {
+      "title": "Calculadora de Cifras Significativas",
+      "description": "Cuente las cifras significativas de un valor medido, redondéelo a una cantidad elegida de ellas, y propague correctamente la precisión de la medición en sumas, restas, multiplicaciones y divisiones.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Las Cuatro Reglas de Conteo",
+          "intro": "Toda regla de cifras significativas se reduce a estos cuatro casos.",
+          "rules": {
+            "nonzero": { "example": "482", "text": "Todo dígito distinto de cero es siempre significativo — 3 cifras significativas." },
+            "sandwiched": { "example": "1002", "text": "Los ceros entre dos dígitos distintos de cero son siempre significativos — 4 cifras significativas." },
+            "leading": { "example": "0.0053", "text": "Los ceros iniciales (antes del primer dígito distinto de cero) nunca son significativos — 2 cifras significativas." },
+            "trailing": { "example": "1.200", "text": "Los ceros finales son significativos solo cuando hay un punto decimal — 4 cifras significativas." }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Su Valor",
+        "operationLabel": "Operación",
+        "operation": {
+          "count": "Contar Cifras Significativas",
+          "round": "Redondear a N Cifras Significativas",
+          "add": "Sumar (+)",
+          "subtract": "Restar (−)",
+          "multiply": "Multiplicar (×)",
+          "divide": "Dividir (÷)"
+        },
+        "valueLabel": "Valor Medido",
+        "firstValueLabel": "Primer Valor Medido",
+        "secondValueLabel": "Segundo Valor Medido",
+        "valuePlaceholder": "p. ej. 12.50",
+        "roundToLabel": "Redondear A",
+        "roundToOption": "{count, plural, one {# cifra significativa} other {# cifras significativas}}"
+      },
+      "result": {
+        "heading": "Resultado",
+        "invalidNumber": "Introduzca un número válido.",
+        "divideByZero": "No se puede dividir entre cero.",
+        "sigFigsBadge": "{count, plural, one {# cifra significativa} other {# cifras significativas}}",
+        "decimalPlacesBadge": "{count, plural, one {Redondeado a # decimal} other {Redondeado a # decimales}}",
+        "diagramCaption": "Los dígitos resaltados son significativos; los atenuados no lo son.",
+        "stepCount": "{value} tiene {count} cifras significativas.",
+        "stepRound": "{value} redondeado a {digits} cifras significativas es {result}.",
+        "stepAddSubtract": "El primer valor es preciso hasta {placesA} decimal(es) y el segundo hasta {placesB} — la suma o diferencia solo puede confiarse hasta el menos preciso de los dos, {places} decimal(es).",
+        "stepMultiplyDivide": "El primer valor tiene {sigFigsA} cifras significativas y el segundo tiene {sigFigsB} — el resultado solo puede confiarse hasta el menor de los dos, {sigFigs} cifras significativas."
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo Funcionan las Cifras Significativas",
+          "paragraph1": "Las cifras significativas son los dígitos de un valor medido que aportan un significado real sobre su precisión — todo dígito distinto de cero, más cualquier cero que esté entre dos dígitos distintos de cero o que aparezca después de un punto decimal una vez que ya apareció un dígito distinto de cero. Una medición de «12.50 cm» reporta cuatro cifras significativas, indicando al lector que el instrumento era lo bastante preciso para distinguir 12.50 de 12.49 o 12.51; escribir la misma longitud como «12.5 cm» reclama en cambio menos precisión, solo tres cifras significativas.",
+          "diagram": {
+            "caption": "0.0050 tiene 2 cifras significativas: los ceros iniciales no son significativos, pero el cero después del 5 sí lo es, porque hay un punto decimal presente."
+          },
+          "paragraph2": "Los ceros iniciales nunca son significativos porque solo fijan la posición del punto decimal, no la precisión de la medición — 0.0050 y 5.0 (una vez convertidos a la misma unidad) representan la misma precisión, 2 cifras significativas, sin importar cuántos ceros iniciales exija la unidad más pequeña. Los ceros finales son el caso genuinamente ambiguo: «100 mL» podría significar entre 1 y 3 cifras significativas según qué tan precisamente se midió, y por eso existe precisamente la notación científica (1 × 10^2, 1.0 × 10^2 o 1.00 × 10^2) como forma inequívoca de indicar la precisión de una medición.",
+          "paragraph3": "Un cálculo no puede ser más preciso que su dato de entrada menos preciso, por lo que multiplicar o dividir valores medidos redondea el resultado al menor número de cifras significativas entre los operandos, mientras que sumar o restar en cambio redondea al decimal menos preciso — una regla distinta, porque la suma y la resta combinan precisión absoluta (decimales) en lugar de precisión relativa (cifras significativas)."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Un ejemplo resuelto para cada operación que admite esta herramienta.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Cifras significativas en 0.00500", "result": "3" },
+            { "calculation": "12345 redondeado a 3 cifras significativas", "result": "1.23 × 10^4" },
+            { "calculation": "12.5 + 0.234", "result": "12.7" },
+            { "calculation": "18.0 − 2.545", "result": "15.5" },
+            { "calculation": "4.5 × 2.33", "result": "10" },
+            { "calculation": "10.0 ÷ 3.0", "result": "3.3" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué los ceros finales en «100» son ambiguos, pero no en «100.» o «1.00 × 10^2»?",
+              "answer": "Escrito como «100» sin punto decimal, no hay forma de saber si los ceros se midieron realmente o son solo marcadores de posición que indican la ubicación del punto decimal — según la convención estándar que sigue esta herramienta, se consideran no significativos, dando 1 cifra significativa. Añadir un punto decimal («100.») o escribirlo en notación científica (1.00 × 10^2) elimina la ambigüedad, reclamando explícitamente tres cifras significativas."
+            },
+            {
+              "question": "¿Por qué la multiplicación usa cifras significativas, pero la suma usa decimales?",
+              "answer": "Las cifras significativas miden la precisión relativa (cuántos dígitos con sentido tiene un valor), mientras que los decimales miden la precisión absoluta (cuán fina es la unidad más pequeña medida). Multiplicar o dividir combina correctamente la precisión relativa manteniendo el menor número de cifras significativas de los datos de entrada; sumar o restar combina correctamente la precisión absoluta manteniendo el decimal menos preciso — usar la regla equivocada en cualquiera de las dos operaciones sobreestimaría silenciosamente la precisión del resultado."
+            },
+            {
+              "question": "¿Por qué la pantalla decimal completa de una calculadora no muestra ya la precisión correcta?",
+              "answer": "Una calculadora opera con tantos dígitos como su hardware permita, sin ninguna noción de cuáles dígitos de sus mediciones originales eran realmente significativos — mostrará con gusto 1/3 de un valor medido de 10.0 como 3.333333333, aunque solo dos de esos dígitos (3.3) estén realmente justificados por una medición precisa a 2 cifras significativas. Aplicar las reglas de cifras significativas después del cálculo es lo que devuelve una precisión honesta al resultado final."
+            },
+            {
+              "question": "¿Los números exactos y las cantidades contadas tienen cifras significativas?",
+              "answer": "No. Las constantes definidas (hay exactamente 100 centímetros en un metro) y las cantidades enteras contadas (exactamente 12 huevos en este cartón) son exactas por definición, con un número de cifras significativas efectivamente infinito, y nunca limitan la precisión de un cálculo como lo hace un valor medido."
+            },
+            {
+              "question": "¿Cómo redondeo un número que termina exactamente en 5, como 2.5, a 1 cifra significativa?",
+              "answer": "Esta herramienta redondea los valores intermedios hacia arriba (2.5 se redondea a 3, no a 2), la convención usada por defecto en la mayoría de calculadoras y hojas de cálculo. Algunos contextos de laboratorio especifican en cambio «redondeo al par más cercano» para evitar un sesgo estadístico hacia arriba a lo largo de muchas operaciones de redondeo — verifique la convención que espera su curso o campo si ambos métodos darían resultados distintos."
+            },
+            {
+              "question": "¿Dónde importa realmente la precisión de la medición en la práctica?",
+              "answer": "Cualquier informe de ciencia experimental, tolerancia de ingeniería o especificación de fabricación depende de comunicar la precisión con honestidad — reportar la capacidad de carga calculada del soporte de un puente con más dígitos de los que realmente justifican las mediciones originales de material y dimensiones crea una falsa sensación de certeza que puede ocultar un riesgo de ingeniería real."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Una Convención de Libro de Texto, No un Único Inventor",
+            "paragraph": "A diferencia de muchas convenciones científicas, las reglas estandarizadas para contar cifras significativas no tienen un único fundador ni una publicación fundacional. La práctica subyacente — reportar una medición solo con los dígitos que su precisión realmente justifica — tiene raíces informales que se remontan siglos atrás en la ciencia observacional, desde el trabajo astronómico de Isaac Newton hasta las mediciones de precisión de Robert Millikan a principios del siglo XX. Se apoya en la misma tradición más amplia de cuantificar la incertidumbre de la medición que Carl Friedrich Gauss formalizó matemáticamente en su Theoria Motus (1809), que introdujo el método de mínimos cuadrados y la distribución normal de los errores de observación — aunque esa es una línea separada dentro de la teoría de errores, no el origen de las reglas de cifras significativas que se enseñan hoy. Según una revisión histórica de 2013 en The Physics Teacher, el conjunto específico de reglas ahora estándar en los libros de texto introductorios (los dígitos distintos de cero siempre cuentan, los ceros intermedios cuentan, los ceros iniciales nunca cuentan, los ceros finales cuentan solo con un punto decimal) todavía estaba en gran medida ausente de los libros de texto hasta principios de la década de 1980, y no se convirtió en un elemento casi universal hasta las últimas décadas."
+          },
+          "modernDevelopments": {
+            "title": "Las Cifras Significativas en los Flujos de Datos Automatizados",
+            "paragraph": "Los instrumentos de laboratorio modernos y el software de registro de datos generan habitualmente muchos más dígitos de los que cualquier medición física puede justificar, ya que los sensores digitales y la aritmética de punto flotante no saben inherentemente qué tan precisa era realmente la medición subyacente. El software científico y de ingeniería rastrea cada vez más la incertidumbre automáticamente junto con cada valor — una práctica llamada propagación de la incertidumbre —, de modo que un resultado final reportado lleve un margen de error explícito en lugar de depender de que una persona aplique manualmente las reglas de cifras significativas al final de un cálculo largo."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Las cifras significativas son una habilidad central en la disciplina más amplia de la física, donde reportar la precisión de la medición con honestidad es esencial. Estas son las 5 mejores universidades del mundo en Física y Astronomía según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — el programa se basa en el acceso presencial a laboratorios y un modelo de investigación residencial, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — el departamento describe una comunidad de investigación presencial con acceso a laboratorios en el sitio, y no se indica ninguna opción de estudio a distancia."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #5 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — los estudiantes de tiempo completo deben residir en Cambridge durante al menos tres trimestres, sin opción en línea."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Física Aplicada — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Carter, A. R. (2013). Evolution of the Significant Figure Rules. The Physics Teacher, 51(6), 340–343.",
+          "note": "La revisión histórica de Carter documenta que las reglas estandarizadas de cifras significativas usadas hoy estaban en gran medida ausentes de los libros de texto introductorios de física hasta principios de la década de 1980, siguiendo su adopción gradual en lugar de atribuirlas a una sola fuente.",
+          "url": "https://doi.org/10.1119/1.4818368",
+          "readOriginal": "Leer el texto original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",
