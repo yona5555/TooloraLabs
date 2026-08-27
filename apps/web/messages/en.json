@@ -5599,6 +5599,174 @@
         }
       }
     },
+    "energy-work-power-calculator": {
+      "title": "Energy, Work & Power Calculator",
+      "description": "Calculate mechanical work, kinetic energy, gravitational potential energy, or power, with a dynamic force-vector diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Mechanics Formulas",
+          "intro": "The four core formulas this calculator applies.",
+          "formulas": {
+            "work": { "label": "Work", "expression": "W = F·d·cos(θ)" },
+            "kineticEnergy": { "label": "Kinetic Energy", "expression": "KE = ½mv²" },
+            "potentialEnergy": { "label": "Gravitational Potential Energy", "expression": "PE = mgh" },
+            "power": { "label": "Power", "expression": "P = W / t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "modeLabel": "Calculate",
+        "mode": {
+          "work": "Work",
+          "kineticEnergy": "Kinetic Energy",
+          "potentialEnergy": "Potential Energy",
+          "power": "Power"
+        },
+        "forceLabel": "Force (N)",
+        "forcePlaceholder": "e.g. 10",
+        "distanceLabel": "Distance (m)",
+        "distancePlaceholder": "e.g. 5",
+        "angleLabel": "Angle Between Force and Displacement (°)",
+        "anglePlaceholder": "e.g. 0",
+        "massLabel": "Mass (kg)",
+        "massPlaceholder": "e.g. 2",
+        "velocityLabel": "Velocity (m/s)",
+        "velocityPlaceholder": "e.g. 3",
+        "heightLabel": "Height (m)",
+        "heightPlaceholder": "e.g. 5",
+        "workValueLabel": "Work Done (J)",
+        "workValuePlaceholder": "e.g. 100",
+        "timeLabel": "Time (s)",
+        "timePlaceholder": "e.g. 10"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroTime": "Time must be greater than zero to calculate power.",
+        "caption": {
+          "work": "Work done by the force over the displacement.",
+          "kineticEnergy": "Energy of motion at the given mass and velocity.",
+          "potentialEnergy": "Gravitational potential energy at the given height (g = 9.8 m/s²).",
+          "power": "Rate at which work is done over time."
+        },
+        "diagramCaptionWork": "Force vector at {angle}° from the direction of displacement.",
+        "diagramCaptionMagnitude": "{value} {unit} on a logarithmic magnitude scale."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Work, Energy, and Power",
+          "paragraph1": "In physics, work is done when a force causes displacement: W = F·d·cos(θ), where θ is the angle between the force and the direction of motion. Only the component of force acting along the direction of displacement contributes to work — a force applied entirely perpendicular to motion (θ = 90°) does zero work, no matter how large the force is, since cos(90°) = 0.",
+          "diagram": {
+            "caption": "A force applied at 30° to the direction of displacement — only its horizontal component contributes to the work done."
+          },
+          "paragraph2": "Kinetic energy, KE = ½mv², is the energy an object possesses because it is moving, and it grows with the square of velocity — doubling speed quadruples kinetic energy, not merely doubles it. Gravitational potential energy, PE = mgh, is the energy stored in an object's position within a gravitational field, proportional to its height above a reference level; the work-energy theorem connects both to work, since work done against gravity or applied to accelerate an object converts directly into these energy forms.",
+          "paragraph3": "Power, P = W/t, measures how quickly work is done or energy is transferred, not how much total work is done. Two machines can perform the identical amount of work, but the one that does it faster has greater power — this is why an engine's power rating (kilowatts or horsepower) matters separately from the total energy content of its fuel."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Solving each formula for representative values.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "10 N force over 5 m, parallel to motion (0°)", "result": "50 J of work" },
+            { "calculation": "10 N force over 5 m, at 60° to motion", "result": "25 J of work" },
+            { "calculation": "2 kg mass moving at 3 m/s", "result": "9 J of kinetic energy" },
+            { "calculation": "2 kg mass at 5 m height", "result": "98 J of potential energy" },
+            { "calculation": "100 J of work done in 10 s", "result": "10 W of power" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does a force perpendicular to motion do zero work?",
+              "answer": "Work depends only on the component of force acting along the direction of displacement, captured by the cos(θ) term in W = F·d·cos(θ). At exactly 90°, cos(90°) = 0, meaning the force has no component in the direction of motion at all — a satellite in circular orbit, for example, experiences a constant gravitational force perpendicular to its velocity, so gravity does zero work on it and its speed stays constant."
+            },
+            {
+              "question": "Why does kinetic energy depend on velocity squared rather than velocity directly?",
+              "answer": "Kinetic energy's v² dependence comes directly from combining Newton's second law (F = ma) with the work-energy theorem through calculus — integrating force over distance for a uniformly accelerating object naturally produces a squared velocity term. A practical consequence: a car going twice as fast doesn't need twice the stopping distance — it needs four times the stopping distance, all else equal, since the kinetic energy that must be dissipated quadruples."
+            },
+            {
+              "question": "What's the difference between energy and power?",
+              "answer": "Energy (measured in joules) is the total capacity to do work, while power (measured in watts) is the rate at which that work is done or energy is transferred — energy answers \"how much,\" power answers \"how fast.\" A car battery and a lightning bolt can release similar total energy, but the lightning bolt releases it in a fraction of a second, giving it vastly greater power."
+            },
+            {
+              "question": "Does gravitational potential energy depend on the path taken to reach a height?",
+              "answer": "No — gravity is a conservative force, meaning the potential energy mgh depends only on the object's final height relative to the reference level, not on the path used to get there. Climbing a hill by a long winding trail or a short steep one results in the same gain in potential energy at the top, provided the height gained is the same, though the winding path requires covering more total distance."
+            },
+            {
+              "question": "Can work be negative?",
+              "answer": "Yes — work is negative when the force has a component opposing the direction of motion (θ greater than 90°), such as friction acting against a sliding object or air resistance against a moving car. Negative work removes energy from a system rather than adding it, which is why friction causes kinetic energy to decrease over time as it converts that energy into heat."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "One Engineer's Precise New Vocabulary",
+            "paragraph": "The physics terms \"work\" and the modern definition of \"kinetic energy\" both trace to a single 1829 book: French mathematician and engineer Gaspard-Gustave de Coriolis's Du calcul de l'effet des machines (\"On the Calculation of the Effect of Machines\"). Coriolis was the first to precisely define work as force acting through a distance — coining the French term travail for it — and he added the crucial factor of one-half to the older concept of vis viva (\"living force,\" mv²), giving kinetic energy its now-familiar form of ½mv². Before Coriolis, engineers and physicists had related but inconsistently defined notions of mechanical effect; his precise, quantitative definitions were adopted rapidly by the emerging discipline of applied mechanics in France and then more broadly across European physics."
+          },
+          "modernDevelopments": {
+            "title": "From Named Units to the Watt-Hour",
+            "paragraph": "The SI unit of energy, the joule, was named in honor of James Prescott Joule, whose careful 1840s experiments established the mechanical equivalent of heat — demonstrating that mechanical work and heat were interchangeable forms of energy. The SI unit of power, the watt, was proposed in 1882 by engineer Carl Wilhelm Siemens in honor of James Watt's steam engine improvements, and formally adopted in 1889 by the British Association for the Advancement of Science. Today these named units appear throughout daily life, from a lightbulb's wattage rating to a utility bill's kilowatt-hours, a practical unit of energy (power multiplied by time) rather than the strict SI joule."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Work, energy, and power are foundational topics within physics. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is based on in-person lab access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an on-campus research community with on-site lab access, and no distance-study option is listed."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must reside in Cambridge for at least three terms, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Applied Physics — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus laboratories and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Mendelson, K. S. (2003). Physical and colloquial meanings of the term \"work\". American Journal of Physics, 71(3), 279–281.",
+          "note": "Mendelson traces the physics definition of work back to Coriolis's 1829 precise formulation, contrasting it with the term's everyday, non-technical meaning to clarify a common source of student confusion.",
+          "url": "https://doi.org/10.1119/1.1522707",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

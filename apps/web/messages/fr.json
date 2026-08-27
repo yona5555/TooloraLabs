@@ -5603,6 +5603,174 @@
         }
       }
     },
+    "energy-work-power-calculator": {
+      "title": "Calculateur d'Énergie, de Travail et de Puissance",
+      "description": "Calculez le travail mécanique, l'énergie cinétique, l'énergie potentielle gravitationnelle ou la puissance, avec un diagramme dynamique du vecteur force.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules de Mécanique",
+          "intro": "Les quatre formules centrales appliquées par ce calculateur.",
+          "formulas": {
+            "work": { "label": "Travail", "expression": "W = F·d·cos(θ)" },
+            "kineticEnergy": { "label": "Énergie Cinétique", "expression": "EC = ½mv²" },
+            "potentialEnergy": { "label": "Énergie Potentielle Gravitationnelle", "expression": "EP = mgh" },
+            "power": { "label": "Puissance", "expression": "P = W / t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valeurs Connues",
+        "modeLabel": "Calculer",
+        "mode": {
+          "work": "Travail",
+          "kineticEnergy": "Énergie Cinétique",
+          "potentialEnergy": "Énergie Potentielle",
+          "power": "Puissance"
+        },
+        "forceLabel": "Force (N)",
+        "forcePlaceholder": "p. ex. 10",
+        "distanceLabel": "Distance (m)",
+        "distancePlaceholder": "p. ex. 5",
+        "angleLabel": "Angle Entre la Force et le Déplacement (°)",
+        "anglePlaceholder": "p. ex. 0",
+        "massLabel": "Masse (kg)",
+        "massPlaceholder": "p. ex. 2",
+        "velocityLabel": "Vitesse (m/s)",
+        "velocityPlaceholder": "p. ex. 3",
+        "heightLabel": "Hauteur (m)",
+        "heightPlaceholder": "p. ex. 5",
+        "workValueLabel": "Travail Effectué (J)",
+        "workValuePlaceholder": "p. ex. 100",
+        "timeLabel": "Temps (s)",
+        "timePlaceholder": "p. ex. 10"
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroTime": "Le temps doit être supérieur à zéro pour calculer la puissance.",
+        "caption": {
+          "work": "Travail effectué par la force sur le déplacement.",
+          "kineticEnergy": "Énergie de mouvement pour la masse et la vitesse données.",
+          "potentialEnergy": "Énergie potentielle gravitationnelle à la hauteur donnée (g = 9,8 m/s²).",
+          "power": "Taux auquel le travail est effectué dans le temps."
+        },
+        "diagramCaptionWork": "Vecteur force à {angle}° de la direction du déplacement.",
+        "diagramCaptionMagnitude": "{value} {unit} sur une échelle de magnitude logarithmique."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le Travail, l'Énergie et la Puissance",
+          "paragraph1": "En physique, un travail est effectué lorsqu'une force provoque un déplacement : W = F·d·cos(θ), où θ est l'angle entre la force et la direction du mouvement. Seule la composante de la force agissant le long de la direction du déplacement contribue au travail — une force appliquée entièrement perpendiculairement au mouvement (θ = 90°) n'effectue aucun travail, quelle que soit son intensité, puisque cos(90°) = 0.",
+          "diagram": {
+            "caption": "Une force appliquée à 30° de la direction du déplacement — seule sa composante horizontale contribue au travail effectué."
+          },
+          "paragraph2": "L'énergie cinétique, EC = ½mv², est l'énergie que possède un objet du fait de son mouvement, et croît avec le carré de la vitesse — doubler la vitesse quadruple l'énergie cinétique, et ne la double pas simplement. L'énergie potentielle gravitationnelle, EP = mgh, est l'énergie stockée dans la position d'un objet au sein d'un champ gravitationnel, proportionnelle à sa hauteur au-dessus d'un niveau de référence ; le théorème de l'énergie cinétique relie les deux au travail, puisque le travail effectué contre la gravité ou appliqué pour accélérer un objet se convertit directement en ces formes d'énergie.",
+          "paragraph3": "La puissance, P = W/t, mesure la rapidité avec laquelle le travail est effectué ou l'énergie transférée, et non la quantité totale de travail effectué. Deux machines peuvent effectuer exactement la même quantité de travail, mais celle qui le fait plus vite a une puissance supérieure — c'est pourquoi la puissance nominale d'un moteur (kilowatts ou chevaux) compte indépendamment du contenu énergétique total de son carburant."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Résolution de chaque formule pour des valeurs représentatives.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Force de 10 N sur 5 m, parallèle au mouvement (0°)", "result": "50 J de travail" },
+            { "calculation": "Force de 10 N sur 5 m, à 60° du mouvement", "result": "25 J de travail" },
+            { "calculation": "Masse de 2 kg se déplaçant à 3 m/s", "result": "9 J d'énergie cinétique" },
+            { "calculation": "Masse de 2 kg à 5 m de hauteur", "result": "98 J d'énergie potentielle" },
+            { "calculation": "100 J de travail effectué en 10 s", "result": "10 W de puissance" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi une force perpendiculaire au mouvement n'effectue-t-elle aucun travail ?",
+              "answer": "Le travail dépend uniquement de la composante de la force agissant le long de la direction du déplacement, capturée par le terme cos(θ) dans W = F·d·cos(θ). Exactement à 90°, cos(90°) = 0, ce qui signifie que la force n'a aucune composante dans la direction du mouvement — un satellite en orbite circulaire, par exemple, subit une force gravitationnelle constante perpendiculaire à sa vitesse, si bien que la gravité n'effectue aucun travail sur lui et que sa vitesse reste constante."
+            },
+            {
+              "question": "Pourquoi l'énergie cinétique dépend-elle du carré de la vitesse plutôt que de la vitesse elle-même ?",
+              "answer": "La dépendance en v² de l'énergie cinétique découle directement de la combinaison de la deuxième loi de Newton (F = ma) avec le théorème de l'énergie cinétique par le calcul intégral — intégrer la force sur la distance pour un objet uniformément accéléré produit naturellement un terme de vitesse au carré. Conséquence pratique : une voiture roulant deux fois plus vite n'a pas besoin du double de la distance de freinage, mais de quatre fois cette distance, toutes choses égales par ailleurs, car l'énergie cinétique à dissiper est quadruplée."
+            },
+            {
+              "question": "Quelle est la différence entre énergie et puissance ?",
+              "answer": "L'énergie (mesurée en joules) est la capacité totale à effectuer un travail, tandis que la puissance (mesurée en watts) est le taux auquel ce travail est effectué ou cette énergie transférée — l'énergie répond à « combien », la puissance répond à « à quelle vitesse ». Une batterie de voiture et un éclair peuvent libérer une énergie totale similaire, mais l'éclair la libère en une fraction de seconde, ce qui lui confère une puissance bien plus grande."
+            },
+            {
+              "question": "L'énergie potentielle gravitationnelle dépend-elle du chemin emprunté pour atteindre une hauteur ?",
+              "answer": "Non — la gravité est une force conservative, ce qui signifie que l'énergie potentielle mgh ne dépend que de la hauteur finale de l'objet par rapport au niveau de référence, pas du chemin emprunté pour l'atteindre. Gravir une colline par un long sentier sinueux ou par un chemin court et raide produit le même gain d'énergie potentielle au sommet, tant que la hauteur gagnée est la même, bien que le chemin sinueux nécessite de parcourir une distance totale plus grande."
+            },
+            {
+              "question": "Le travail peut-il être négatif ?",
+              "answer": "Oui — le travail est négatif lorsque la force a une composante qui s'oppose à la direction du mouvement (angle supérieur à 90°), comme le frottement agissant contre un objet en glissement ou la résistance de l'air contre une voiture en mouvement. Le travail négatif retire de l'énergie à un système plutôt que d'en ajouter, ce qui explique pourquoi le frottement fait diminuer l'énergie cinétique au fil du temps en la convertissant en chaleur."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "Le Vocabulaire Précis d'un Seul Ingénieur",
+            "paragraph": "Les termes physiques « travail » et la définition moderne de « énergie cinétique » remontent tous deux à un seul ouvrage de 1829 : Du calcul de l'effet des machines, du mathématicien et ingénieur français Gaspard-Gustave de Coriolis. Coriolis fut le premier à définir précisément le travail comme une force agissant sur une distance — en forgeant le terme français travail à cet effet — et il ajouta le facteur crucial d'un demi au concept plus ancien de vis viva (« force vive », mv²), donnant à l'énergie cinétique sa forme aujourd'hui familière ½mv². Avant Coriolis, ingénieurs et physiciens avaient des notions apparentées mais définies de façon incohérente de l'effet mécanique ; ses définitions précises et quantitatives furent rapidement adoptées par la discipline naissante de la mécanique appliquée en France, puis plus largement dans la physique européenne."
+          },
+          "modernDevelopments": {
+            "title": "Des Unités Nommées au Kilowattheure",
+            "paragraph": "L'unité SI d'énergie, le joule, fut nommée en l'honneur de James Prescott Joule, dont les expériences minutieuses des années 1840 établirent l'équivalent mécanique de la chaleur, démontrant que le travail mécanique et la chaleur étaient des formes d'énergie interchangeables. L'unité SI de puissance, le watt, fut proposée en 1882 par l'ingénieur Carl Wilhelm Siemens en l'honneur des améliorations apportées par James Watt à la machine à vapeur, et officiellement adoptée en 1889 par la British Association for the Advancement of Science. Aujourd'hui, ces unités nommées apparaissent partout dans la vie quotidienne, de la puissance nominale d'une ampoule aux kilowattheures d'une facture d'électricité, une unité pratique d'énergie (puissance multipliée par le temps) distincte du joule strict du SI."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Le travail, l'énergie et la puissance sont des sujets fondamentaux de la physique. Voici les 5 meilleures universités mondiales en Physique et Astronomie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Non — le programme repose sur un accès présentiel aux laboratoires et un modèle de recherche résidentiel, sans mention d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Non — le département décrit une communauté de recherche en présentiel avec accès aux laboratoires sur place, et aucune option d'étude à distance n'est mentionnée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Non — les étudiants à temps plein doivent résider à Cambridge pendant au moins trois trimestres, sans option en ligne."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en physique appliquée — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Mendelson, K. S. (2003). Physical and colloquial meanings of the term \"work\". American Journal of Physics, 71(3), 279–281.",
+          "note": "Mendelson retrace la définition physique du travail jusqu'à la formulation précise de Coriolis en 1829, la comparant au sens courant et non technique du terme pour clarifier une source fréquente de confusion chez les étudiants.",
+          "url": "https://doi.org/10.1119/1.1522707",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

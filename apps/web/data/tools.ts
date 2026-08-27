@@ -406,6 +406,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "energy-work-power-calculator",
+    title: "Energy, Work & Power Calculator",
+    category: "math-science",
+    description:
+      "Calculate mechanical work, kinetic energy, gravitational potential energy, or power, with a dynamic force-vector diagram.",
+    featured: false,
+    keywords: [
+      "work calculator physics",
+      "kinetic energy calculator",
+      "potential energy calculator",
+      "power calculator physics",
+      "force distance work formula",
+      "joules watts calculator",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

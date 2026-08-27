@@ -5603,6 +5603,174 @@
         }
       }
     },
+    "energy-work-power-calculator": {
+      "title": "Energie-, Arbeits- und Leistungsrechner",
+      "description": "Berechnen Sie mechanische Arbeit, kinetische Energie, potenzielle Energie oder Leistung, mit einem dynamischen Kraftvektor-Diagramm.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Mechanik-Formeln",
+          "intro": "Die vier zentralen Formeln, die dieser Rechner anwendet.",
+          "formulas": {
+            "work": { "label": "Arbeit", "expression": "W = F·s·cos(θ)" },
+            "kineticEnergy": { "label": "Kinetische Energie", "expression": "E_kin = ½mv²" },
+            "potentialEnergy": { "label": "Potenzielle Energie", "expression": "E_pot = mgh" },
+            "power": { "label": "Leistung", "expression": "P = W / t" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "modeLabel": "Berechnen",
+        "mode": {
+          "work": "Arbeit",
+          "kineticEnergy": "Kinetische Energie",
+          "potentialEnergy": "Potenzielle Energie",
+          "power": "Leistung"
+        },
+        "forceLabel": "Kraft (N)",
+        "forcePlaceholder": "z. B. 10",
+        "distanceLabel": "Strecke (m)",
+        "distancePlaceholder": "z. B. 5",
+        "angleLabel": "Winkel zwischen Kraft und Verschiebung (°)",
+        "anglePlaceholder": "z. B. 0",
+        "massLabel": "Masse (kg)",
+        "massPlaceholder": "z. B. 2",
+        "velocityLabel": "Geschwindigkeit (m/s)",
+        "velocityPlaceholder": "z. B. 3",
+        "heightLabel": "Höhe (m)",
+        "heightPlaceholder": "z. B. 5",
+        "workValueLabel": "Verrichtete Arbeit (J)",
+        "workValuePlaceholder": "z. B. 100",
+        "timeLabel": "Zeit (s)",
+        "timePlaceholder": "z. B. 10"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroTime": "Die Zeit muss größer als null sein, um die Leistung zu berechnen.",
+        "caption": {
+          "work": "Von der Kraft über die Verschiebung verrichtete Arbeit.",
+          "kineticEnergy": "Bewegungsenergie bei der angegebenen Masse und Geschwindigkeit.",
+          "potentialEnergy": "Potenzielle Energie bei der angegebenen Höhe (g = 9,8 m/s²).",
+          "power": "Rate, mit der über die Zeit Arbeit verrichtet wird."
+        },
+        "diagramCaptionWork": "Kraftvektor bei {angle}° zur Verschiebungsrichtung.",
+        "diagramCaptionMagnitude": "{value} {unit} auf einer logarithmischen Größenordnungsskala."
+      },
+      "education": {
+        "intro": {
+          "title": "Arbeit, Energie und Leistung verstehen",
+          "paragraph1": "In der Physik wird Arbeit verrichtet, wenn eine Kraft eine Verschiebung bewirkt: W = F·s·cos(θ), wobei θ der Winkel zwischen Kraft und Bewegungsrichtung ist. Nur die entlang der Verschiebungsrichtung wirkende Komponente der Kraft trägt zur Arbeit bei — eine Kraft, die vollständig senkrecht zur Bewegung wirkt (θ = 90°), verrichtet keinerlei Arbeit, unabhängig von ihrer Größe, da cos(90°) = 0 ist.",
+          "diagram": {
+            "caption": "Eine Kraft, die im Winkel von 30° zur Verschiebungsrichtung wirkt — nur ihre horizontale Komponente trägt zur verrichteten Arbeit bei."
+          },
+          "paragraph2": "Kinetische Energie, E_kin = ½mv², ist die Energie, die ein Objekt aufgrund seiner Bewegung besitzt, und wächst mit dem Quadrat der Geschwindigkeit — eine Verdopplung der Geschwindigkeit vervierfacht die kinetische Energie, verdoppelt sie nicht bloß. Potenzielle Energie im Schwerefeld, E_pot = mgh, ist die in der Position eines Objekts innerhalb eines Gravitationsfelds gespeicherte Energie, proportional zu seiner Höhe über einem Bezugsniveau; der Arbeits-Energie-Satz verbindet beide mit der Arbeit, da gegen die Schwerkraft verrichtete oder zur Beschleunigung eines Objekts aufgewendete Arbeit sich direkt in diese Energieformen umwandelt.",
+          "paragraph3": "Leistung, P = W/t, misst, wie schnell Arbeit verrichtet oder Energie übertragen wird, nicht wie viel Arbeit insgesamt verrichtet wird. Zwei Maschinen können exakt dieselbe Arbeitsmenge verrichten, aber diejenige, die es schneller tut, hat eine höhere Leistung — deshalb ist die Leistungsangabe eines Motors (Kilowatt oder PS) unabhängig vom gesamten Energiegehalt seines Kraftstoffs von Bedeutung."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Lösung jeder Formel für repräsentative Werte.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "10-N-Kraft über 5 m, parallel zur Bewegung (0°)", "result": "50 J Arbeit" },
+            { "calculation": "10-N-Kraft über 5 m, im Winkel von 60° zur Bewegung", "result": "25 J Arbeit" },
+            { "calculation": "2-kg-Masse mit 3 m/s Geschwindigkeit", "result": "9 J kinetische Energie" },
+            { "calculation": "2-kg-Masse auf 5 m Höhe", "result": "98 J potenzielle Energie" },
+            { "calculation": "100 J Arbeit verrichtet in 10 s", "result": "10 W Leistung" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum verrichtet eine zur Bewegung senkrechte Kraft keine Arbeit?",
+              "answer": "Arbeit hängt nur von der Komponente der Kraft ab, die entlang der Verschiebungsrichtung wirkt, erfasst durch den Term cos(θ) in W = F·s·cos(θ). Bei genau 90° gilt cos(90°) = 0, das heißt, die Kraft hat überhaupt keine Komponente in Bewegungsrichtung — ein Satellit auf einer Kreisbahn beispielsweise erfährt eine konstante Gravitationskraft senkrecht zu seiner Geschwindigkeit, sodass die Schwerkraft keine Arbeit an ihm verrichtet und seine Geschwindigkeit konstant bleibt."
+            },
+            {
+              "question": "Warum hängt die kinetische Energie vom Quadrat der Geschwindigkeit ab und nicht direkt von der Geschwindigkeit?",
+              "answer": "Die v²-Abhängigkeit der kinetischen Energie ergibt sich direkt aus der Kombination von Newtons zweitem Gesetz (F = ma) mit dem Arbeits-Energie-Satz mittels Integralrechnung — das Integrieren der Kraft über die Strecke für ein gleichmäßig beschleunigtes Objekt erzeugt natürlich einen quadrierten Geschwindigkeitsterm. Eine praktische Folge: Ein Auto, das doppelt so schnell fährt, benötigt nicht die doppelte, sondern die vierfache Bremsstrecke, bei ansonsten gleichen Bedingungen, da sich die abzubauende kinetische Energie vervierfacht."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen Energie und Leistung?",
+              "answer": "Energie (gemessen in Joule) ist die Gesamtfähigkeit, Arbeit zu verrichten, während Leistung (gemessen in Watt) die Rate ist, mit der diese Arbeit verrichtet oder diese Energie übertragen wird — Energie beantwortet „wie viel“, Leistung beantwortet „wie schnell“. Eine Autobatterie und ein Blitz können eine ähnliche Gesamtenergie freisetzen, aber der Blitz setzt sie in einem Bruchteil einer Sekunde frei, was ihm eine weit größere Leistung verleiht."
+            },
+            {
+              "question": "Hängt die potenzielle Energie im Schwerefeld vom zurückgelegten Weg zu einer Höhe ab?",
+              "answer": "Nein — die Schwerkraft ist eine konservative Kraft, was bedeutet, dass die potenzielle Energie mgh nur von der Endhöhe des Objekts relativ zum Bezugsniveau abhängt, nicht vom Weg dorthin. Das Besteigen eines Hügels über einen langen, gewundenen Pfad oder einen kurzen, steilen Weg führt oben zum gleichen Zuwachs an potenzieller Energie, sofern die gewonnene Höhe gleich ist, obwohl der gewundene Weg eine größere Gesamtstrecke erfordert."
+            },
+            {
+              "question": "Kann Arbeit negativ sein?",
+              "answer": "Ja — Arbeit ist negativ, wenn die Kraft eine der Bewegungsrichtung entgegengesetzte Komponente hat (Winkel größer als 90°), etwa Reibung gegen ein gleitendes Objekt oder Luftwiderstand gegen ein fahrendes Auto. Negative Arbeit entzieht einem System Energie, statt sie hinzuzufügen, weshalb Reibung dazu führt, dass die kinetische Energie mit der Zeit abnimmt, indem sie in Wärme umgewandelt wird."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Das präzise neue Vokabular eines Ingenieurs",
+            "paragraph": "Die physikalischen Begriffe „Arbeit“ und die moderne Definition der „kinetischen Energie“ gehen beide auf ein einziges Buch aus dem Jahr 1829 zurück: Du calcul de l'effet des machines („Über die Berechnung der Wirkung von Maschinen“) des französischen Mathematikers und Ingenieurs Gaspard-Gustave de Coriolis. Coriolis war der Erste, der Arbeit präzise als eine über eine Strecke wirkende Kraft definierte — und dafür den französischen Begriff travail prägte —, und er fügte dem älteren Konzept der vis viva („lebendige Kraft“, mv²) den entscheidenden Faktor ein Halb hinzu, wodurch die kinetische Energie ihre heute vertraute Form ½mv² erhielt. Vor Coriolis hatten Ingenieure und Physiker verwandte, aber uneinheitlich definierte Vorstellungen von mechanischer Wirkung; seine präzisen, quantitativen Definitionen wurden von der aufkommenden Disziplin der angewandten Mechanik in Frankreich rasch übernommen und breiteten sich dann in der europäischen Physik weiter aus."
+          },
+          "modernDevelopments": {
+            "title": "Von benannten Einheiten zur Kilowattstunde",
+            "paragraph": "Die SI-Einheit der Energie, das Joule, wurde zu Ehren von James Prescott Joule benannt, dessen sorgfältige Experimente in den 1840er-Jahren das mechanische Wärmeäquivalent begründeten — sie zeigten, dass mechanische Arbeit und Wärme austauschbare Energieformen sind. Die SI-Einheit der Leistung, das Watt, wurde 1882 von Ingenieur Carl Wilhelm Siemens zu Ehren von James Watts Verbesserungen an der Dampfmaschine vorgeschlagen und 1889 von der British Association for the Advancement of Science offiziell übernommen. Heute begegnen diese benannten Einheiten überall im Alltag, von der Wattzahl einer Glühbirne bis zu den Kilowattstunden einer Stromrechnung — einer praktischen Energieeinheit (Leistung mal Zeit), die sich vom strengen SI-Joule unterscheidet."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Arbeit, Energie und Leistung sind grundlegende Themen der Physik. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Mendelson, K. S. (2003). Physical and colloquial meanings of the term \"work\". American Journal of Physics, 71(3), 279–281.",
+          "note": "Mendelson zeichnet die physikalische Definition von Arbeit bis zu Coriolis' präziser Formulierung von 1829 nach und stellt sie der alltäglichen, nichttechnischen Bedeutung des Begriffs gegenüber, um eine häufige Quelle studentischer Verwirrung zu klären.",
+          "url": "https://doi.org/10.1119/1.1522707",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",
