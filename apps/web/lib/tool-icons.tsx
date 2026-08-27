@@ -44,6 +44,7 @@ import {
   Wallet,
   Weight,
   Wrench,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -54,6 +55,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "significant-figures-calculator": Crosshair,
   "gpa-calculator": GraduationCap,
   "density-calculator": FlaskConical,
+  "ohms-law-calculator": Zap,
   "age-calculator": Calendar,
   "bmi-calculator": Scale,
   "ideal-weight-calculator": Weight,

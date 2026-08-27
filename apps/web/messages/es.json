@@ -4777,6 +4777,169 @@
         }
       }
     },
+    "ohms-law-calculator": {
+      "title": "Calculadora de la Ley de Ohm",
+      "description": "Calcula el voltaje, la corriente, la resistencia y la potencia a partir de dos cantidades eléctricas conocidas, con un diagrama dinámico del triángulo de la Ley de Ohm.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas de la Ley de Ohm",
+          "intro": "La relación central entre voltaje, corriente y resistencia, además de las tres fórmulas de potencia equivalentes.",
+          "formulas": {
+            "voltage": { "label": "Voltaje", "expression": "V = I × R" },
+            "current": { "label": "Corriente", "expression": "I = V ÷ R" },
+            "resistance": { "label": "Resistencia", "expression": "R = V ÷ I" },
+            "powerFromVI": { "label": "Potencia (V, I)", "expression": "P = V × I" },
+            "powerFromIR": { "label": "Potencia (I, R)", "expression": "P = I² × R" },
+            "powerFromVR": { "label": "Potencia (V, R)", "expression": "P = V² ÷ R" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valores Conocidos",
+        "knownPairLabel": "Cantidades Conocidas",
+        "pair": {
+          "VI": "Voltaje y Corriente",
+          "VR": "Voltaje y Resistencia",
+          "IR": "Corriente y Resistencia",
+          "VP": "Voltaje y Potencia",
+          "IP": "Corriente y Potencia",
+          "RP": "Resistencia y Potencia"
+        },
+        "voltageLabel": "Voltaje (V)",
+        "voltagePlaceholder": "p. ej. 12",
+        "currentLabel": "Corriente (A)",
+        "currentPlaceholder": "p. ej. 2",
+        "resistanceLabel": "Resistencia (Ω)",
+        "resistancePlaceholder": "p. ej. 6",
+        "powerLabel": "Potencia (W)",
+        "powerPlaceholder": "p. ej. 24"
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroCurrent": "La corriente no puede ser cero para esta combinación de valores conocidos.",
+        "zeroResistance": "La resistencia no puede ser cero para esta combinación de valores conocidos.",
+        "zeroVoltage": "El voltaje no puede ser cero para esta combinación de valores conocidos.",
+        "zeroPower": "La potencia no puede ser cero para esta combinación de valores conocidos.",
+        "voltage": "Voltaje",
+        "current": "Corriente",
+        "resistance": "Resistencia",
+        "power": "Potencia",
+        "diagramCaption": "El triángulo de la Ley de Ohm — los valores resaltados fueron calculados, no introducidos directamente."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo la Ley de Ohm",
+          "paragraph1": "La Ley de Ohm establece que la corriente que fluye a través de un conductor es directamente proporcional al voltaje aplicado sobre él e inversamente proporcional a su resistencia, expresada como V = I × R, donde V es el voltaje en voltios, I es la corriente en amperios y R es la resistencia en ohmios (Ω). Reordenando esa misma ecuación se obtiene I = V ÷ R y R = V ÷ I, de modo que conocer dos cualesquiera de las tres cantidades siempre determina la tercera.",
+          "diagram": {
+            "caption": "El triángulo de la Ley de Ohm para 12 V sobre una resistencia de 6 Ω, que da una corriente de 2 A — con la resistencia resaltada como el valor calculado."
+          },
+          "paragraph2": "La potencia eléctrica, medida en vatios (W), se combina con la Ley de Ohm mediante P = V × I. Sustituyendo V = I × R o I = V ÷ R en esa fórmula se obtienen dos expresiones de potencia equivalentes, P = I² × R y P = V² ÷ R, razón por la cual dos cualesquiera de voltaje, corriente, resistencia y potencia bastan para determinar las otras dos.",
+          "paragraph3": "Esta calculadora admite las seis combinaciones posibles de cantidades conocidas: voltaje y corriente, voltaje y resistencia, corriente y resistencia, y las tres combinaciones que incluyen la potencia, calculando el conjunto completo de V, I, R y P para cada una."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Resolviendo el mismo circuito a partir de distintos pares de cantidades conocidas.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "12 V sobre una resistencia de 6 Ω", "result": "2 A, 24 W" },
+            { "calculation": "2 A a través de una resistencia de 6 Ω", "result": "12 V, 24 W" },
+            { "calculation": "12 V consumiendo 24 W", "result": "2 A, 6 Ω" },
+            { "calculation": "6 Ω disipando 24 W", "result": "12 V, 2 A" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué la resistencia limita la corriente en lugar de detenerla por completo?",
+              "answer": "La resistencia describe cuán fuertemente se opone un material al flujo de carga, convirtiendo parte de la energía eléctrica en calor cuando los electrones chocan con los átomos del material, pero no crea una barrera absoluta: cualquier resistencia mayor que cero sigue permitiendo cierta corriente para un voltaje dado, siguiendo exactamente I = V ÷ R. Solo una resistencia infinita (un circuito abierto) reduce la corriente a cero."
+            },
+            {
+              "question": "¿Se aplica la Ley de Ohm a todos los componentes eléctricos?",
+              "answer": "No: se aplica estrictamente solo a los componentes «óhmicos», cuya resistencia permanece constante sin importar el voltaje o la corriente aplicados, como la mayoría de las resistencias fijas y los cables simples a temperatura estable. Componentes como diodos, transistores y bombillas con filamentos que se calientan son «no óhmicos»: su resistencia efectiva cambia con el voltaje, la corriente o la temperatura, por lo que V = I × R solo se cumple en un único punto de operación para ellos, no como una constante fija."
+            },
+            {
+              "question": "¿Por qué las tres fórmulas de potencia dan el mismo resultado?",
+              "answer": "P = V × I, P = I² × R y P = V² ÷ R son algebraicamente idénticas: las dos últimas se obtienen sustituyendo la Ley de Ohm (V = I × R o I = V ÷ R) directamente en la primera. Son simplemente la misma relación expresada con las dos variables que resulten conocidas en cada caso, y siempre coincidirán exactamente para un circuito óhmico dado."
+            },
+            {
+              "question": "¿Qué le ocurre a la potencia si la resistencia permanece igual pero el voltaje se duplica?",
+              "answer": "La potencia escala con el cuadrado del voltaje cuando la resistencia es constante, según P = V² ÷ R, así que duplicar el voltaje cuadruplica la potencia disipada, no simplemente la duplica. Por eso pequeñas sobretensiones pueden causar un calentamiento desproporcionadamente grande en los componentes resistivos."
+            },
+            {
+              "question": "¿Por qué la corriente se mide en amperios y no directamente en voltios u ohmios?",
+              "answer": "El voltaje, la corriente y la resistencia describen tres cantidades físicas distintas: el voltaje es la diferencia de potencial eléctrico que impulsa el flujo de carga, la corriente es la tasa real de flujo de carga (en amperios, culombios por segundo) y la resistencia es la oposición a ese flujo (en ohmios). La Ley de Ohm relaciona estas tres cantidades distintas entre sí; no las convierte en la misma unidad."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Una Ley Inicialmente Rechazada",
+            "paragraph": "El físico alemán Georg Simon Ohm publicó la relación entre voltaje, corriente y resistencia en su monografía de 1827 Die galvanische Kette, mathematisch bearbeitet («El Circuito Galvánico Investigado Matemáticamente»), editada en Berlín por T. H. Riemann. La acogida entre sus contemporáneos alemanes fue notablemente fría: el propio estudio retrospectivo del historiador de la física Morton Schagrin lleva el título, deliberadamente irónico, de «Resistencia a la Ley de Ohm», y describe cómo el enfoque matemático de Ohm, influido por Fourier, fue inicialmente rechazado por físicos de mayor edad por considerarlo demasiado abstracto. El reconocimiento llegó más despacio y desde otro lugar: la Royal Society de Londres le otorgó la Medalla Copley en 1841, y la unidad de resistencia eléctrica fue nombrada formalmente «ohmio» en su honor en el Congreso Eléctrico Internacional celebrado en París en 1881, más de medio siglo después de su publicación original y 27 años después de su muerte en 1854."
+          },
+          "modernDevelopments": {
+            "title": "La Ley de Ohm en la Electrónica Moderna",
+            "paragraph": "La Ley de Ohm sigue siendo una de las ecuaciones más directamente aplicadas en la ingeniería eléctrica actual, sustentando desde la selección básica de resistencias en el diseño de circuitos hasta los cálculos de limitación de corriente usados en fuentes de alimentación, controladores de LED y sistemas de gestión de baterías. Su alcance también se ha definido con mayor precisión con el tiempo: la electrónica moderna distingue cuidadosamente entre los componentes «óhmicos» que siguen V = I × R como una constante verdadera y los numerosos dispositivos semiconductores —diodos, transistores, circuitos integrados— cuya resistencia es a su vez una función del voltaje, la corriente o la temperatura."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El análisis de circuitos y la Ley de Ohm son temas fundamentales dentro de la física. Estas son las 5 mejores universidades del mundo en Física y Astronomía según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — el programa se basa en el acceso presencial a laboratorios y un modelo de investigación residencial, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — el departamento describe una comunidad de investigación presencial con acceso a laboratorios en el sitio, y no se indica ninguna opción de estudio a distancia."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #5 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — los estudiantes de tiempo completo deben residir en Cambridge durante al menos tres trimestres, sin opción en línea."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Física Aplicada — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Schagrin, M. L. (1963). Resistance to Ohm's Law. American Journal of Physics, 31(7), 536–547.",
+          "note": "El estudio histórico de Schagrin documenta la sorprendentemente fría acogida que recibió entre sus contemporáneos alemanes la ley de Ohm, hoy fundamental, y traza el cambio conceptual que finalmente llevó a su aceptación.",
+          "url": "https://doi.org/10.1119/1.1969620",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

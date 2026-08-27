@@ -326,6 +326,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "ohms-law-calculator",
+    title: "Ohm's Law Calculator",
+    category: "math-science",
+    description:
+      "Solve for voltage, current, resistance, and power from any two known electrical quantities, with a dynamic Ohm's Law triangle diagram.",
+    featured: false,
+    keywords: [
+      "ohms law calculator",
+      "voltage current resistance",
+      "V=IR calculator",
+      "power formula electrical",
+      "electrical circuit calculator",
+      "watts law calculator",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

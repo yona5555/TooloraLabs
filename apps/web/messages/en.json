@@ -4773,6 +4773,169 @@
         }
       }
     },
+    "ohms-law-calculator": {
+      "title": "Ohm's Law Calculator",
+      "description": "Solve for voltage, current, resistance, and power from any two known electrical quantities, with a dynamic Ohm's Law triangle diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Ohm's Law Formulas",
+          "intro": "The core voltage-current-resistance relationship, plus the three equivalent power formulas.",
+          "formulas": {
+            "voltage": { "label": "Voltage", "expression": "V = I × R" },
+            "current": { "label": "Current", "expression": "I = V ÷ R" },
+            "resistance": { "label": "Resistance", "expression": "R = V ÷ I" },
+            "powerFromVI": { "label": "Power (V, I)", "expression": "P = V × I" },
+            "powerFromIR": { "label": "Power (I, R)", "expression": "P = I² × R" },
+            "powerFromVR": { "label": "Power (V, R)", "expression": "P = V² ÷ R" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "knownPairLabel": "Known Quantities",
+        "pair": {
+          "VI": "Voltage and Current",
+          "VR": "Voltage and Resistance",
+          "IR": "Current and Resistance",
+          "VP": "Voltage and Power",
+          "IP": "Current and Power",
+          "RP": "Resistance and Power"
+        },
+        "voltageLabel": "Voltage (V)",
+        "voltagePlaceholder": "e.g. 12",
+        "currentLabel": "Current (A)",
+        "currentPlaceholder": "e.g. 2",
+        "resistanceLabel": "Resistance (Ω)",
+        "resistancePlaceholder": "e.g. 6",
+        "powerLabel": "Power (W)",
+        "powerPlaceholder": "e.g. 24"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroCurrent": "Current cannot be zero for this combination of known values.",
+        "zeroResistance": "Resistance cannot be zero for this combination of known values.",
+        "zeroVoltage": "Voltage cannot be zero for this combination of known values.",
+        "zeroPower": "Power cannot be zero for this combination of known values.",
+        "voltage": "Voltage",
+        "current": "Current",
+        "resistance": "Resistance",
+        "power": "Power",
+        "diagramCaption": "The Ohm's Law triangle — the highlighted values were solved for, not entered directly."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Ohm's Law",
+          "paragraph1": "Ohm's Law states that the current flowing through a conductor is directly proportional to the voltage across it and inversely proportional to its resistance, written as V = I × R, where V is voltage in volts, I is current in amperes, and R is resistance in ohms (Ω). Rearranging the same equation gives I = V ÷ R and R = V ÷ I, so knowing any two of the three quantities always determines the third.",
+          "diagram": {
+            "caption": "The Ohm's Law triangle for 12 V across a 6 Ω resistance, giving 2 A of current — resistance highlighted as the solved value."
+          },
+          "paragraph2": "Electrical power, measured in watts (W), combines with Ohm's Law through P = V × I. Substituting V = I × R or I = V ÷ R into that formula produces two equivalent power expressions, P = I² × R and P = V² ÷ R, which is why any two of voltage, current, resistance, and power are enough to determine the other two.",
+          "paragraph3": "This calculator supports all six possible pairs of known quantities — voltage & current, voltage & resistance, current & resistance, and the three pairings that include power — computing the full V, I, R, P set for each one."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Solving the same circuit from different pairs of known quantities.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "12 V across a 6 Ω resistor", "result": "2 A, 24 W" },
+            { "calculation": "2 A through a 6 Ω resistor", "result": "12 V, 24 W" },
+            { "calculation": "12 V drawing 24 W", "result": "2 A, 6 Ω" },
+            { "calculation": "6 Ω dissipating 24 W", "result": "12 V, 2 A" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does resistance limit current instead of stopping it entirely?",
+              "answer": "Resistance describes how strongly a material opposes the flow of charge, converting some electrical energy to heat as electrons collide with the material's atoms, but it does not create a hard barrier — any resistance greater than zero still permits some current for a given voltage, following I = V ÷ R exactly. Only infinite resistance (an open circuit) reduces current to zero."
+            },
+            {
+              "question": "Does Ohm's Law apply to every electrical component?",
+              "answer": "No — it strictly applies only to \"ohmic\" components, whose resistance stays constant regardless of the voltage or current applied, such as most fixed resistors and simple wires at stable temperature. Components like diodes, transistors, and light bulbs with heating filaments are \"non-ohmic\": their effective resistance changes with voltage, current, or temperature, so V = I × R only holds at a single operating point for them, not as a fixed constant."
+            },
+            {
+              "question": "Why do all three power formulas give the same answer?",
+              "answer": "P = V × I, P = I² × R, and P = V² ÷ R are algebraically identical — the second two are obtained by substituting Ohm's Law (V = I × R or I = V ÷ R) directly into the first. They are simply the same relationship expressed with whichever two variables happen to be known, and will always agree exactly for a given ohmic circuit."
+            },
+            {
+              "question": "What happens to power if resistance stays the same but voltage doubles?",
+              "answer": "Power scales with the square of voltage when resistance is constant, per P = V² ÷ R, so doubling the voltage quadruples the power dissipated — not merely doubles it. This is why small overvoltages can cause disproportionately large heating in resistive components."
+            },
+            {
+              "question": "Why is current measured in amperes and not volts or ohms directly?",
+              "answer": "Voltage, current, and resistance describe three distinct physical quantities: voltage is the electrical potential difference driving charge flow, current is the actual rate of charge flow (in amperes, coulombs per second), and resistance is the opposition to that flow (in ohms). Ohm's Law relates these three distinct quantities to each other; it does not make them the same unit."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Law Initially Resisted",
+            "paragraph": "German physicist Georg Simon Ohm published the relationship between voltage, current, and resistance in his 1827 monograph Die galvanische Kette, mathematisch bearbeitet (\"The Galvanic Circuit Investigated Mathematically\"), issued in Berlin by T. H. Riemann. The reception among his German contemporaries was notably cold — historian of physics Morton Schagrin's own retrospective study is pointedly titled \"Resistance to Ohm's Law,\" describing how the mathematical, Fourier-influenced approach Ohm took was initially rejected by older physicists as too abstract. Recognition came more slowly and from elsewhere: the Royal Society of London awarded Ohm its Copley Medal in 1841, and the unit of electrical resistance was formally named the \"ohm\" in his honor at the International Electrical Congress held in Paris in 1881, more than half a century after his original publication and 27 years after his death in 1854."
+          },
+          "modernDevelopments": {
+            "title": "Ohm's Law in Modern Electronics",
+            "paragraph": "Ohm's Law remains one of the most directly applied equations in electrical engineering today, underlying everything from basic resistor selection in circuit design to the current-limiting calculations used in power supplies, LED drivers, and battery management systems. Its scope has also become more precisely defined over time: modern electronics distinguishes carefully between \"ohmic\" components that follow V = I × R as a true constant and the many semiconductor devices — diodes, transistors, integrated circuits — whose resistance is itself a function of voltage, current, or temperature."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Circuit analysis and Ohm's Law are foundational topics within physics. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is based on in-person lab access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an on-campus research community with on-site lab access, and no distance-study option is listed."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must reside in Cambridge for at least three terms, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Applied Physics — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus laboratories and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Schagrin, M. L. (1963). Resistance to Ohm's Law. American Journal of Physics, 31(7), 536–547.",
+          "note": "Schagrin's historical study documents the surprisingly cool reception Ohm's now-fundamental law received among his German contemporaries, and traces the conceptual shift that eventually led to its acceptance.",
+          "url": "https://doi.org/10.1119/1.1969620",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

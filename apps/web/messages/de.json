@@ -4777,6 +4777,169 @@
         }
       }
     },
+    "ohms-law-calculator": {
+      "title": "Ohmsches-Gesetz-Rechner",
+      "description": "Berechnen Sie Spannung, Stromstärke, Widerstand und Leistung aus zwei bekannten elektrischen Größen, mit einem dynamischen Diagramm des Ohmschen Dreiecks.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formeln des Ohmschen Gesetzes",
+          "intro": "Die zentrale Beziehung zwischen Spannung, Stromstärke und Widerstand sowie die drei gleichwertigen Leistungsformeln.",
+          "formulas": {
+            "voltage": { "label": "Spannung", "expression": "V = I × R" },
+            "current": { "label": "Stromstärke", "expression": "I = V ÷ R" },
+            "resistance": { "label": "Widerstand", "expression": "R = V ÷ I" },
+            "powerFromVI": { "label": "Leistung (V, I)", "expression": "P = V × I" },
+            "powerFromIR": { "label": "Leistung (I, R)", "expression": "P = I² × R" },
+            "powerFromVR": { "label": "Leistung (V, R)", "expression": "P = V² ÷ R" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "knownPairLabel": "Bekannte Größen",
+        "pair": {
+          "VI": "Spannung und Stromstärke",
+          "VR": "Spannung und Widerstand",
+          "IR": "Stromstärke und Widerstand",
+          "VP": "Spannung und Leistung",
+          "IP": "Stromstärke und Leistung",
+          "RP": "Widerstand und Leistung"
+        },
+        "voltageLabel": "Spannung (V)",
+        "voltagePlaceholder": "z. B. 12",
+        "currentLabel": "Stromstärke (A)",
+        "currentPlaceholder": "z. B. 2",
+        "resistanceLabel": "Widerstand (Ω)",
+        "resistancePlaceholder": "z. B. 6",
+        "powerLabel": "Leistung (W)",
+        "powerPlaceholder": "z. B. 24"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroCurrent": "Die Stromstärke darf bei dieser Kombination bekannter Werte nicht null sein.",
+        "zeroResistance": "Der Widerstand darf bei dieser Kombination bekannter Werte nicht null sein.",
+        "zeroVoltage": "Die Spannung darf bei dieser Kombination bekannter Werte nicht null sein.",
+        "zeroPower": "Die Leistung darf bei dieser Kombination bekannter Werte nicht null sein.",
+        "voltage": "Spannung",
+        "current": "Stromstärke",
+        "resistance": "Widerstand",
+        "power": "Leistung",
+        "diagramCaption": "Das Ohmsche Dreieck — die hervorgehobenen Werte wurden berechnet, nicht direkt eingegeben."
+      },
+      "education": {
+        "intro": {
+          "title": "Das Ohmsche Gesetz verstehen",
+          "paragraph1": "Das Ohmsche Gesetz besagt, dass der durch einen Leiter fließende Strom direkt proportional zur an ihm anliegenden Spannung und umgekehrt proportional zu seinem Widerstand ist, geschrieben als V = I × R, wobei V die Spannung in Volt, I die Stromstärke in Ampere und R der Widerstand in Ohm (Ω) ist. Durch Umstellen derselben Gleichung ergeben sich I = V ÷ R und R = V ÷ I, sodass die Kenntnis zweier beliebiger der drei Größen stets die dritte bestimmt.",
+          "diagram": {
+            "caption": "Das Ohmsche Dreieck für 12 V an einem Widerstand von 6 Ω, was eine Stromstärke von 2 A ergibt — der Widerstand ist als berechneter Wert hervorgehoben."
+          },
+          "paragraph2": "Elektrische Leistung, gemessen in Watt (W), verbindet sich über P = V × I mit dem Ohmschen Gesetz. Setzt man V = I × R oder I = V ÷ R in diese Formel ein, ergeben sich zwei gleichwertige Leistungsausdrücke, P = I² × R und P = V² ÷ R, weshalb zwei beliebige der Größen Spannung, Stromstärke, Widerstand und Leistung genügen, um die anderen beiden zu bestimmen.",
+          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Lösung desselben Stromkreises anhand verschiedener Paare bekannter Größen.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "12 V an einem Widerstand von 6 Ω", "result": "2 A, 24 W" },
+            { "calculation": "2 A durch einen Widerstand von 6 Ω", "result": "12 V, 24 W" },
+            { "calculation": "12 V bei 24 W Leistungsaufnahme", "result": "2 A, 6 Ω" },
+            { "calculation": "6 Ω mit 24 W Verlustleistung", "result": "12 V, 2 A" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum begrenzt Widerstand den Strom, statt ihn ganz zu stoppen?",
+              "answer": "Widerstand beschreibt, wie stark sich ein Material dem Ladungsfluss widersetzt, wobei ein Teil der elektrischen Energie in Wärme umgewandelt wird, wenn Elektronen mit den Atomen des Materials kollidieren — er bildet jedoch keine absolute Barriere: Jeder Widerstand größer als null lässt bei gegebener Spannung noch einen gewissen Strom zu, genau gemäß I = V ÷ R. Nur ein unendlicher Widerstand (ein offener Stromkreis) reduziert den Strom auf null."
+            },
+            {
+              "question": "Gilt das Ohmsche Gesetz für jedes elektrische Bauteil?",
+              "answer": "Nein — es gilt strenggenommen nur für „ohmsche“ Bauteile, deren Widerstand unabhängig von angelegter Spannung oder Stromstärke konstant bleibt, wie die meisten festen Widerstände und einfache Drähte bei stabiler Temperatur. Bauteile wie Dioden, Transistoren und Glühlampen mit sich erhitzenden Filamenten sind „nichtohmsch“: Ihr effektiver Widerstand ändert sich mit Spannung, Stromstärke oder Temperatur, sodass V = I × R für sie nur an einem einzigen Arbeitspunkt gilt, nicht als feste Konstante."
+            },
+            {
+              "question": "Warum liefern alle drei Leistungsformeln dasselbe Ergebnis?",
+              "answer": "P = V × I, P = I² × R und P = V² ÷ R sind algebraisch identisch — die beiden letzteren ergeben sich, indem man das Ohmsche Gesetz (V = I × R oder I = V ÷ R) direkt in die erste Formel einsetzt. Es handelt sich einfach um dieselbe Beziehung, ausgedrückt mit den jeweils bekannten zwei Variablen, und sie stimmen für einen gegebenen ohmschen Stromkreis stets exakt überein."
+            },
+            {
+              "question": "Was geschieht mit der Leistung, wenn der Widerstand gleich bleibt, sich die Spannung aber verdoppelt?",
+              "answer": "Die Leistung skaliert bei konstantem Widerstand mit dem Quadrat der Spannung, gemäß P = V² ÷ R — eine Verdopplung der Spannung vervierfacht also die abgegebene Leistung, statt sie nur zu verdoppeln. Deshalb können schon kleine Überspannungen zu unverhältnismäßig starker Erwärmung in resistiven Bauteilen führen."
+            },
+            {
+              "question": "Warum wird Stromstärke in Ampere gemessen und nicht direkt in Volt oder Ohm?",
+              "answer": "Spannung, Stromstärke und Widerstand beschreiben drei unterschiedliche physikalische Größen: Spannung ist die elektrische Potenzialdifferenz, die den Ladungsfluss antreibt, Stromstärke ist die tatsächliche Rate des Ladungsflusses (in Ampere, Coulomb pro Sekunde), und Widerstand ist der Widerstand gegen diesen Fluss (in Ohm). Das Ohmsche Gesetz verknüpft diese drei unterschiedlichen Größen miteinander; es macht sie nicht zur selben Einheit."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Ein zunächst zurückgewiesenes Gesetz",
+            "paragraph": "Der deutsche Physiker Georg Simon Ohm veröffentlichte den Zusammenhang zwischen Spannung, Stromstärke und Widerstand 1827 in seiner Monografie Die galvanische Kette, mathematisch bearbeitet, erschienen in Berlin bei T. H. Riemann. Die Aufnahme durch seine deutschen Zeitgenossen fiel bemerkenswert kühl aus: Die eigene rückblickende Studie des Physikhistorikers Morton Schagrin trägt bezeichnenderweise den Titel „Resistance to Ohm's Law“ („Widerstand gegen das Ohmsche Gesetz“) und beschreibt, wie Ohms mathematischer, von Fourier beeinflusster Ansatz zunächst von älteren Physikern als zu abstrakt zurückgewiesen wurde. Anerkennung kam später und von anderer Seite: Die Royal Society in London verlieh Ohm 1841 die Copley-Medaille, und die Einheit des elektrischen Widerstands wurde ihm zu Ehren 1881 auf dem in Paris abgehaltenen Internationalen Elektrizitätskongress offiziell „Ohm“ genannt — mehr als ein halbes Jahrhundert nach seiner ursprünglichen Veröffentlichung und 27 Jahre nach seinem Tod 1854."
+          },
+          "modernDevelopments": {
+            "title": "Das Ohmsche Gesetz in der modernen Elektronik",
+            "paragraph": "Das Ohmsche Gesetz bleibt eine der heute am unmittelbarsten angewendeten Gleichungen der Elektrotechnik und liegt allem zugrunde, von der grundlegenden Widerstandsauswahl im Schaltungsdesign bis zu den Strombegrenzungsberechnungen in Netzteilen, LED-Treibern und Batteriemanagementsystemen. Auch sein Geltungsbereich wurde im Lauf der Zeit präziser gefasst: Die moderne Elektronik unterscheidet sorgfältig zwischen „ohmschen“ Bauteilen, die V = I × R als echte Konstante befolgen, und den vielen Halbleiterbauelementen — Dioden, Transistoren, integrierten Schaltkreisen —, deren Widerstand selbst eine Funktion von Spannung, Stromstärke oder Temperatur ist."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Schaltungsanalyse und das Ohmsche Gesetz sind grundlegende Themen der Physik. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Schagrin, M. L. (1963). Resistance to Ohm's Law. American Journal of Physics, 31(7), 536–547.",
+          "note": "Schagrins historische Studie dokumentiert die überraschend kühle Aufnahme, die das heute grundlegende Ohmsche Gesetz bei seinen deutschen Zeitgenossen erfuhr, und zeichnet den konzeptuellen Wandel nach, der schließlich zu seiner Anerkennung führte.",
+          "url": "https://doi.org/10.1119/1.1969620",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",
