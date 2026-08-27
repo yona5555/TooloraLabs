@@ -5104,6 +5104,163 @@
         }
       }
     },
+    "statistics-calculator": {
+      "title": "Statistics Calculator",
+      "description": "Calculate mean, median, mode, range, variance, and standard deviation for any data set, with a dynamic dot plot of the distribution.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Statistics Formulas",
+          "intro": "The core formulas this calculator applies, where n is the number of values and x̄ is the mean.",
+          "formulas": {
+            "mean": { "label": "Mean", "expression": "x̄ = Σx / n" },
+            "median": { "label": "Median", "expression": "middle value of sorted data" },
+            "populationStdDev": { "label": "Population Std. Dev.", "expression": "σ = √(Σ(x - x̄)² / n)" },
+            "sampleStdDev": { "label": "Sample Std. Dev.", "expression": "s = √(Σ(x - x̄)² / (n - 1))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Data Set",
+        "inputLabel": "Values",
+        "inputPlaceholder": "e.g. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Separate values with commas, spaces, or new lines."
+      },
+      "result": {
+        "heading": "Result",
+        "emptyDataset": "Enter at least one numeric value.",
+        "meanCaption": "Mean of {count} values",
+        "count": "Count",
+        "sum": "Sum",
+        "mean": "Mean",
+        "median": "Median",
+        "mode": "Mode",
+        "noMode": "No mode",
+        "min": "Minimum",
+        "max": "Maximum",
+        "range": "Range",
+        "populationVariance": "Population Variance",
+        "populationStdDev": "Population Std. Dev.",
+        "sampleVariance": "Sample Variance",
+        "sampleStdDev": "Sample Std. Dev.",
+        "stdDev": "Std. Dev.",
+        "diagramCaption": "Each value plotted on a number line, with the mean (▲) and median (⏐) marked."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Descriptive Statistics",
+          "paragraph1": "Descriptive statistics summarize a data set with a handful of representative numbers. The mean (arithmetic average) sums every value and divides by the count; the median is the middle value once the data is sorted, unaffected by how extreme the highest or lowest values are; and the mode is whichever value (or values) occurs most often, with no mode at all if every value is unique.",
+          "diagram": {
+            "meanLabel": "mean",
+            "medianLabel": "median",
+            "caption": "The data set 2, 4, 4, 4, 5, 5, 7, 9 — mean 5.0 (▲) sits slightly above the median 4.5 (⏐) because of the higher-value outlier at 9."
+          },
+          "paragraph2": "Variance measures how spread out the data is by averaging the squared distance of every value from the mean; standard deviation is simply variance's square root, which brings the units back in line with the original data (a data set of dollar values has a standard deviation in dollars, not squared dollars). A small standard deviation means values cluster tightly around the mean; a large one means they're spread widely.",
+          "paragraph3": "This calculator reports both population and sample statistics because the divisor differs: population variance divides by n (the full count), used when the data set is the entire group of interest, while sample variance divides by n − 1, used when the data set is only a sample drawn from a larger population — that smaller divisor (Bessel's correction) compensates for a sample systematically underestimating the true population variance."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Computing the core statistics for a small data set.",
+          "columnCalculation": "Data Set",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "2, 4, 4, 4, 5, 5, 7, 9", "result": "Mean 5, median 4.5, mode 4" },
+            { "calculation": "1, 2, 3, 4", "result": "Mean 2.5, median 2.5, no mode" },
+            { "calculation": "1, 1, 2, 2, 3", "result": "Modes 1 and 2 (bimodal)" },
+            { "calculation": "10, 12, 23, 23, 16, 23, 21, 16", "result": "Population std. dev. ≈ 4.9, sample std. dev. ≈ 5.24" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "When should I use the median instead of the mean?",
+              "answer": "The median is more resistant to outliers than the mean, since it only depends on the position of the middle value(s), not their magnitude. For skewed data — like household incomes or home prices, where a few very high values pull the mean upward — the median usually better represents a \"typical\" value than the mean does."
+            },
+            {
+              "question": "Why does this calculator show two different standard deviations?",
+              "answer": "Population standard deviation (dividing by n) is correct when your data set is the entire population you care about. Sample standard deviation (dividing by n − 1) is correct when your data is only a sample used to estimate a larger, unmeasured population — the smaller divisor makes the estimate less biased, since a sample's own spread tends to slightly underestimate the true population spread."
+            },
+            {
+              "question": "Can a data set have more than one mode?",
+              "answer": "Yes — a data set is called bimodal if exactly two values are tied for the highest frequency, or multimodal more generally for any number of tied values. If every value in the data set appears exactly once, there is no mode at all, since no value repeats more often than any other."
+            },
+            {
+              "question": "Why is standard deviation more commonly reported than variance?",
+              "answer": "Variance is expressed in squared units of the original data (squared dollars, squared centimeters), which makes it hard to interpret directly. Standard deviation, its square root, returns to the original units, making it directly comparable to the mean and other values in the data set — this is largely why standard deviation, not variance, became the standard way to report spread."
+            },
+            {
+              "question": "Does the order I enter my data matter?",
+              "answer": "No — every statistic this calculator computes (mean, median, mode, variance, standard deviation, min, max, range) depends only on which values are present and how many times each appears, not on the order they were entered in. The calculator sorts the data internally wherever order matters, such as for finding the median."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Vocabulary Built by One Statistician",
+            "paragraph": "The arithmetic mean and median have been used informally for millennia — ancient astronomers averaged repeated observations to reduce error long before statistics existed as a formal discipline. But much of the precise vocabulary this calculator relies on was coined by a single person: British mathematician Karl Pearson, widely regarded as a founder of modern mathematical statistics. Pearson introduced the term \"standard deviation\" in a lecture delivered on 31 January 1893, first used it in print the following year in his paper \"On the Dissection of Asymmetrical Frequency Curves\" (1894), and introduced the Greek letter σ as its symbol — the same period in which he also coined \"mode\" as a statistical term. Between 1893 and 1912, Pearson published eighteen papers titled \"Mathematical Contributions to the Theory of Evolution,\" which laid much of the groundwork for modern statistical methods, including regression analysis and the correlation coefficient."
+          },
+          "modernDevelopments": {
+            "title": "Statistics From Hand Calculation to Software",
+            "paragraph": "Pearson and his contemporaries computed these statistics by hand or with mechanical calculators, often for data sets of only dozens or a few hundred values. Modern statistical software can compute the same mean, variance, and standard deviation instantly for data sets of millions of points, which has shifted the discipline's central challenge from manual computation toward correctly choosing which statistic to trust, how to handle outliers, and how to avoid drawing unsupported conclusions from patterns that arise by chance."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Descriptive statistics are a foundational topic within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/math",
+                "online": "No — the program follows an on-campus, full-time research and coursework model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate",
+                "online": "No — the program is a full-time, in-residence course of study with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil requires full-time residence in Oxford, with no distance-study option listed."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — the PhD requires students to be in residence in Cambridge conducting original research, with no online option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a graduate program in Applied Mathematics and Computational Science — not separately ranked on this specific QS subject table.",
+                "url": "https://amcs.kaust.edu.sa/",
+                "online": "No — the program follows an on-campus, full-time research model on KAUST's Saudi Arabia campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Stigler, S. M. (2008). Karl Pearson's Theoretical Errors and the Advances They Inspired. Statistical Science, 23(2), 261–271.",
+          "note": "Stigler, a leading historian of statistics, traces how Karl Pearson's technical work — including the standard deviation and much of the vocabulary this calculator uses — reshaped statistics into a modern mathematical discipline.",
+          "url": "https://doi.org/10.1214/08-STS256",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

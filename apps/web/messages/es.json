@@ -5108,6 +5108,163 @@
         }
       }
     },
+    "statistics-calculator": {
+      "title": "Calculadora de Estadística",
+      "description": "Calcula la media, la mediana, la moda, el rango, la varianza y la desviación estándar de cualquier conjunto de datos, con un diagrama de puntos dinámico de la distribución.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas Estadísticas",
+          "intro": "Las fórmulas centrales que aplica esta calculadora, donde n es el número de valores y x̄ es la media.",
+          "formulas": {
+            "mean": { "label": "Media", "expression": "x̄ = Σx / n" },
+            "median": { "label": "Mediana", "expression": "valor central de los datos ordenados" },
+            "populationStdDev": { "label": "Desv. Est. Poblacional", "expression": "σ = √(Σ(x - x̄)² / n)" },
+            "sampleStdDev": { "label": "Desv. Est. Muestral", "expression": "s = √(Σ(x - x̄)² / (n - 1))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Conjunto de Datos",
+        "inputLabel": "Valores",
+        "inputPlaceholder": "p. ej. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Separa los valores con comas, espacios o saltos de línea."
+      },
+      "result": {
+        "heading": "Resultado",
+        "emptyDataset": "Ingresa al menos un valor numérico.",
+        "meanCaption": "Media de {count} valores",
+        "count": "Cantidad",
+        "sum": "Suma",
+        "mean": "Media",
+        "median": "Mediana",
+        "mode": "Moda",
+        "noMode": "Sin moda",
+        "min": "Mínimo",
+        "max": "Máximo",
+        "range": "Rango",
+        "populationVariance": "Varianza Poblacional",
+        "populationStdDev": "Desv. Est. Poblacional",
+        "sampleVariance": "Varianza Muestral",
+        "sampleStdDev": "Desv. Est. Muestral",
+        "stdDev": "Desv. Est.",
+        "diagramCaption": "Cada valor ubicado en una recta numérica, con la media (▲) y la mediana (⏐) marcadas."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo la Estadística Descriptiva",
+          "paragraph1": "La estadística descriptiva resume un conjunto de datos con un puñado de números representativos. La media (promedio aritmético) suma todos los valores y los divide entre la cantidad; la mediana es el valor central una vez ordenados los datos, sin verse afectada por cuán extremos sean los valores más altos o más bajos; y la moda es el valor (o valores) que aparece con más frecuencia, sin ninguna moda si todos los valores son únicos.",
+          "diagram": {
+            "meanLabel": "media",
+            "medianLabel": "mediana",
+            "caption": "El conjunto de datos 2, 4, 4, 4, 5, 5, 7, 9 — la media 5.0 (▲) se sitúa ligeramente por encima de la mediana 4.5 (⏐) debido al valor atípico más alto en 9."
+          },
+          "paragraph2": "La varianza mide qué tan dispersos están los datos promediando la distancia al cuadrado de cada valor respecto a la media; la desviación estándar es simplemente la raíz cuadrada de la varianza, lo que devuelve las unidades a las del dato original (un conjunto de datos en dólares tiene una desviación estándar en dólares, no en dólares al cuadrado). Una desviación estándar pequeña significa que los valores se agrupan estrechamente alrededor de la media; una grande significa que están muy dispersos.",
+          "paragraph3": "Esta calculadora reporta estadísticas tanto poblacionales como muestrales porque el divisor difiere: la varianza poblacional divide entre n (el conteo total), usada cuando el conjunto de datos es el grupo completo de interés, mientras que la varianza muestral divide entre n − 1, usada cuando el conjunto de datos es solo una muestra tomada de una población más grande; ese divisor más pequeño (la corrección de Bessel) compensa que una muestra tienda a subestimar sistemáticamente la varianza real de la población."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Calculando las estadísticas centrales de un conjunto de datos pequeño.",
+          "columnCalculation": "Conjunto de Datos",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "2, 4, 4, 4, 5, 5, 7, 9", "result": "Media 5, mediana 4.5, moda 4" },
+            { "calculation": "1, 2, 3, 4", "result": "Media 2.5, mediana 2.5, sin moda" },
+            { "calculation": "1, 1, 2, 2, 3", "result": "Modas 1 y 2 (bimodal)" },
+            { "calculation": "10, 12, 23, 23, 16, 23, 21, 16", "result": "Desv. est. poblacional ≈ 4.9, muestral ≈ 5.24" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Cuándo debo usar la mediana en lugar de la media?",
+              "answer": "La mediana es más resistente a los valores atípicos que la media, ya que solo depende de la posición del valor (o valores) central, no de su magnitud. Para datos sesgados —como ingresos familiares o precios de vivienda, donde unos pocos valores muy altos empujan la media hacia arriba— la mediana suele representar mejor un valor «típico» que la media."
+            },
+            {
+              "question": "¿Por qué esta calculadora muestra dos desviaciones estándar diferentes?",
+              "answer": "La desviación estándar poblacional (dividiendo entre n) es correcta cuando tu conjunto de datos es toda la población que te interesa. La desviación estándar muestral (dividiendo entre n − 1) es correcta cuando tus datos son solo una muestra usada para estimar una población más grande no medida en su totalidad; el divisor más pequeño hace que la estimación sea menos sesgada, ya que la dispersión de una muestra tiende a subestimar ligeramente la dispersión real de la población."
+            },
+            {
+              "question": "¿Puede un conjunto de datos tener más de una moda?",
+              "answer": "Sí: un conjunto de datos se llama bimodal si exactamente dos valores empatan con la frecuencia más alta, o multimodal en general para cualquier número de valores empatados. Si cada valor del conjunto aparece exactamente una vez, no hay moda en absoluto, ya que ningún valor se repite más que otro."
+            },
+            {
+              "question": "¿Por qué se reporta más comúnmente la desviación estándar que la varianza?",
+              "answer": "La varianza se expresa en unidades al cuadrado de los datos originales (dólares al cuadrado, centímetros al cuadrado), lo que dificulta interpretarla directamente. La desviación estándar, su raíz cuadrada, regresa a las unidades originales, haciéndola directamente comparable con la media y otros valores del conjunto de datos; esta es en gran parte la razón por la que la desviación estándar, y no la varianza, se convirtió en la forma estándar de reportar la dispersión."
+            },
+            {
+              "question": "¿Importa el orden en que ingreso mis datos?",
+              "answer": "No: cada estadística que calcula esta herramienta (media, mediana, moda, varianza, desviación estándar, mínimo, máximo, rango) depende solo de qué valores están presentes y cuántas veces aparece cada uno, no del orden en que se ingresaron. La calculadora ordena los datos internamente donde el orden importa, como al encontrar la mediana."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Un Vocabulario Construido por un Solo Estadístico",
+            "paragraph": "La media aritmética y la mediana se han usado de manera informal durante milenios: los astrónomos antiguos promediaban observaciones repetidas para reducir el error mucho antes de que la estadística existiera como disciplina formal. Pero gran parte del vocabulario preciso en el que se basa esta calculadora fue acuñado por una sola persona: el matemático británico Karl Pearson, ampliamente considerado uno de los fundadores de la estadística matemática moderna. Pearson introdujo el término «desviación estándar» en una conferencia impartida el 31 de enero de 1893, lo usó por primera vez en un texto impreso al año siguiente en su artículo «On the Dissection of Asymmetrical Frequency Curves» (1894), e introdujo la letra griega σ como su símbolo, el mismo período en el que también acuñó «moda» como término estadístico. Entre 1893 y 1912, Pearson publicó dieciocho artículos titulados «Mathematical Contributions to the Theory of Evolution», que sentaron gran parte de las bases de los métodos estadísticos modernos, incluyendo el análisis de regresión y el coeficiente de correlación."
+          },
+          "modernDevelopments": {
+            "title": "De la Estadística a Mano al Software",
+            "paragraph": "Pearson y sus contemporáneos calculaban estas estadísticas a mano o con calculadoras mecánicas, a menudo para conjuntos de datos de solo decenas o algunos cientos de valores. El software estadístico moderno puede calcular la misma media, varianza y desviación estándar instantáneamente para conjuntos de datos de millones de puntos, lo que ha desplazado el desafío central de la disciplina del cálculo manual hacia elegir correctamente en qué estadística confiar, cómo manejar los valores atípicos y cómo evitar sacar conclusiones no respaldadas a partir de patrones que surgen por azar."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La estadística descriptiva es un tema fundamental dentro de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/math",
+                "online": "No — el programa sigue un modelo presencial de tiempo completo de investigación y cursos, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate",
+                "online": "No — el programa es de tiempo completo y residencial, sin ninguna opción en línea mencionada."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil requiere residencia de tiempo completo en Oxford, sin ninguna opción de estudio a distancia indicada."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #4 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — el doctorado exige que los estudiantes residan en Cambridge realizando investigación original, sin opción en línea."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #5 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de posgrado en Matemáticas Aplicadas y Ciencias Computacionales — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://amcs.kaust.edu.sa/",
+                "online": "No — el programa sigue un modelo de investigación presencial de tiempo completo en el campus de KAUST en Arabia Saudita."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Stigler, S. M. (2008). Karl Pearson's Theoretical Errors and the Advances They Inspired. Statistical Science, 23(2), 261–271.",
+          "note": "Stigler, un destacado historiador de la estadística, traza cómo el trabajo técnico de Karl Pearson —incluyendo la desviación estándar y gran parte del vocabulario que usa esta calculadora— transformó la estadística en una disciplina matemática moderna.",
+          "url": "https://doi.org/10.1214/08-STS256",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

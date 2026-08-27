@@ -5108,6 +5108,163 @@
         }
       }
     },
+    "statistics-calculator": {
+      "title": "Statistik-Rechner",
+      "description": "Berechnen Sie Mittelwert, Median, Modus, Spannweite, Varianz und Standardabweichung für jeden Datensatz, mit einem dynamischen Punktdiagramm der Verteilung.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Statistik-Formeln",
+          "intro": "Die zentralen Formeln, die dieser Rechner anwendet, wobei n die Anzahl der Werte und x̄ der Mittelwert ist.",
+          "formulas": {
+            "mean": { "label": "Mittelwert", "expression": "x̄ = Σx / n" },
+            "median": { "label": "Median", "expression": "mittlerer Wert der sortierten Daten" },
+            "populationStdDev": { "label": "Standardabw. der Grundgesamtheit", "expression": "σ = √(Σ(x - x̄)² / n)" },
+            "sampleStdDev": { "label": "Standardabw. der Stichprobe", "expression": "s = √(Σ(x - x̄)² / (n - 1))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Datensatz",
+        "inputLabel": "Werte",
+        "inputPlaceholder": "z. B. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Trennen Sie Werte durch Kommas, Leerzeichen oder Zeilenumbrüche."
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "emptyDataset": "Geben Sie mindestens einen numerischen Wert ein.",
+        "meanCaption": "Mittelwert von {count} Werten",
+        "count": "Anzahl",
+        "sum": "Summe",
+        "mean": "Mittelwert",
+        "median": "Median",
+        "mode": "Modus",
+        "noMode": "Kein Modus",
+        "min": "Minimum",
+        "max": "Maximum",
+        "range": "Spannweite",
+        "populationVariance": "Varianz der Grundgesamtheit",
+        "populationStdDev": "Standardabw. der Grundgesamtheit",
+        "sampleVariance": "Varianz der Stichprobe",
+        "sampleStdDev": "Standardabw. der Stichprobe",
+        "stdDev": "Standardabw.",
+        "diagramCaption": "Jeder Wert auf einer Zahlengeraden dargestellt, mit markiertem Mittelwert (▲) und Median (⏐)."
+      },
+      "education": {
+        "intro": {
+          "title": "Deskriptive Statistik verstehen",
+          "paragraph1": "Deskriptive Statistik fasst einen Datensatz mit einer Handvoll aussagekräftiger Zahlen zusammen. Der Mittelwert (arithmetisches Mittel) summiert alle Werte und teilt durch deren Anzahl; der Median ist der mittlere Wert nach dem Sortieren der Daten, unbeeinflusst davon, wie extrem der höchste oder niedrigste Wert ist; und der Modus ist der Wert (oder die Werte), der am häufigsten vorkommt, wobei es keinen Modus gibt, wenn jeder Wert einzigartig ist.",
+          "diagram": {
+            "meanLabel": "Mittelwert",
+            "medianLabel": "Median",
+            "caption": "Der Datensatz 2, 4, 4, 4, 5, 5, 7, 9 — der Mittelwert 5,0 (▲) liegt aufgrund des höheren Ausreißers bei 9 leicht über dem Median 4,5 (⏐)."
+          },
+          "paragraph2": "Die Varianz misst, wie stark die Daten streuen, indem der quadrierte Abstand jedes Werts vom Mittelwert gemittelt wird; die Standardabweichung ist einfach die Quadratwurzel der Varianz, was die Einheiten wieder mit den Originaldaten in Einklang bringt (ein Datensatz mit Dollarwerten hat eine Standardabweichung in Dollar, nicht in Quadratdollar). Eine kleine Standardabweichung bedeutet, dass sich die Werte eng um den Mittelwert gruppieren; eine große bedeutet, dass sie weit gestreut sind.",
+          "paragraph3": "Dieser Rechner gibt sowohl Grundgesamtheits- als auch Stichprobenstatistiken an, da sich der Divisor unterscheidet: Die Varianz der Grundgesamtheit teilt durch n (die Gesamtzahl), verwendet, wenn der Datensatz die gesamte interessierende Gruppe ist, während die Varianz der Stichprobe durch n − 1 teilt, verwendet, wenn der Datensatz nur eine aus einer größeren Grundgesamtheit gezogene Stichprobe ist — dieser kleinere Divisor (die Bessel-Korrektur) gleicht aus, dass eine Stichprobe die wahre Varianz der Grundgesamtheit systematisch unterschätzt."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Berechnung der zentralen Statistiken für einen kleinen Datensatz.",
+          "columnCalculation": "Datensatz",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "2, 4, 4, 4, 5, 5, 7, 9", "result": "Mittelwert 5, Median 4,5, Modus 4" },
+            { "calculation": "1, 2, 3, 4", "result": "Mittelwert 2,5, Median 2,5, kein Modus" },
+            { "calculation": "1, 1, 2, 2, 3", "result": "Modi 1 und 2 (bimodal)" },
+            { "calculation": "10, 12, 23, 23, 16, 23, 21, 16", "result": "Standardabw. Grundgesamtheit ≈ 4,9, Stichprobe ≈ 5,24" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Wann sollte ich den Median statt des Mittelwerts verwenden?",
+              "answer": "Der Median ist widerstandsfähiger gegen Ausreißer als der Mittelwert, da er nur von der Position des mittleren Werts (oder der mittleren Werte) abhängt, nicht von deren Größe. Bei schiefen Daten — wie Haushaltseinkommen oder Immobilienpreisen, bei denen wenige sehr hohe Werte den Mittelwert nach oben ziehen — repräsentiert der Median meist besser einen „typischen“ Wert als der Mittelwert."
+            },
+            {
+              "question": "Warum zeigt dieser Rechner zwei verschiedene Standardabweichungen?",
+              "answer": "Die Standardabweichung der Grundgesamtheit (Division durch n) ist korrekt, wenn Ihr Datensatz die gesamte interessierende Grundgesamtheit ist. Die Standardabweichung der Stichprobe (Division durch n − 1) ist korrekt, wenn Ihre Daten nur eine Stichprobe sind, die zur Schätzung einer größeren, nicht vollständig erfassten Grundgesamtheit dient — der kleinere Divisor macht die Schätzung weniger verzerrt, da die Streuung einer Stichprobe selbst die wahre Streuung der Grundgesamtheit tendenziell leicht unterschätzt."
+            },
+            {
+              "question": "Kann ein Datensatz mehr als einen Modus haben?",
+              "answer": "Ja — ein Datensatz heißt bimodal, wenn genau zwei Werte mit der höchsten Häufigkeit gleichauf liegen, oder allgemeiner multimodal bei einer beliebigen Anzahl gleichauf liegender Werte. Kommt jeder Wert im Datensatz genau einmal vor, gibt es überhaupt keinen Modus, da kein Wert häufiger auftritt als ein anderer."
+            },
+            {
+              "question": "Warum wird die Standardabweichung häufiger angegeben als die Varianz?",
+              "answer": "Die Varianz wird in quadrierten Einheiten der Originaldaten ausgedrückt (Quadratdollar, Quadratzentimeter), was ihre direkte Interpretation erschwert. Die Standardabweichung, ihre Quadratwurzel, kehrt zu den ursprünglichen Einheiten zurück und macht sie direkt vergleichbar mit dem Mittelwert und anderen Werten im Datensatz — das ist weitgehend der Grund, warum sich die Standardabweichung und nicht die Varianz als Standardmaß für die Streuung durchgesetzt hat."
+            },
+            {
+              "question": "Spielt die Reihenfolge der Dateneingabe eine Rolle?",
+              "answer": "Nein — jede von diesem Rechner berechnete Statistik (Mittelwert, Median, Modus, Varianz, Standardabweichung, Minimum, Maximum, Spannweite) hängt nur davon ab, welche Werte vorhanden sind und wie oft jeder davon vorkommt, nicht von der Reihenfolge der Eingabe. Der Rechner sortiert die Daten intern dort, wo die Reihenfolge eine Rolle spielt, etwa bei der Bestimmung des Medians."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Ein von einem einzigen Statistiker geprägtes Vokabular",
+            "paragraph": "Das arithmetische Mittel und der Median werden seit Jahrtausenden informell verwendet — antike Astronomen mittelten wiederholte Beobachtungen, um Fehler zu verringern, lange bevor die Statistik als formale Disziplin existierte. Doch ein Großteil des präzisen Vokabulars, auf das sich dieser Rechner stützt, wurde von einer einzigen Person geprägt: dem britischen Mathematiker Karl Pearson, der weithin als einer der Begründer der modernen mathematischen Statistik gilt. Pearson führte den Begriff „Standardabweichung“ in einem Vortrag am 31. Januar 1893 ein, verwendete ihn im Jahr darauf erstmals schriftlich in seinem Aufsatz „On the Dissection of Asymmetrical Frequency Curves“ (1894) und führte den griechischen Buchstaben σ als Symbol dafür ein — in derselben Zeit prägte er auch den Begriff „Modus“ als statistischen Fachbegriff. Zwischen 1893 und 1912 veröffentlichte Pearson achtzehn Aufsätze mit dem Titel „Mathematical Contributions to the Theory of Evolution“, die einen Großteil der Grundlagen moderner statistischer Methoden legten, einschließlich der Regressionsanalyse und des Korrelationskoeffizienten."
+          },
+          "modernDevelopments": {
+            "title": "Statistik von der Handrechnung zur Software",
+            "paragraph": "Pearson und seine Zeitgenossen berechneten diese Statistiken von Hand oder mit mechanischen Rechenmaschinen, oft für Datensätze mit nur Dutzenden oder wenigen Hundert Werten. Moderne Statistiksoftware kann denselben Mittelwert, dieselbe Varianz und Standardabweichung sofort für Datensätze mit Millionen von Datenpunkten berechnen, was die zentrale Herausforderung der Disziplin von der manuellen Berechnung hin zur richtigen Wahl der vertrauenswürdigen Statistik, zum Umgang mit Ausreißern und zur Vermeidung nicht belegbarer Schlussfolgerungen aus zufällig entstandenen Mustern verschoben hat."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Deskriptive Statistik ist ein grundlegendes Thema der Mathematik. Hier sind die weltweit 5 besten Universitäten für Mathematik im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/math",
+                "online": "Nein — das Programm folgt einem Präsenzmodell mit Vollzeitforschung und Lehrveranstaltungen ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate",
+                "online": "Nein — das Programm ist ein residenzpflichtiges Vollzeitstudium; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — das DPhil erfordert Vollzeit-Residenz in Oxford; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — die Promotion verlangt, dass Studierende für eigenständige Forschung in Cambridge wohnhaft sind; keine Online-Option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Graduiertenprogramm in Angewandter Mathematik und Computational Science — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://amcs.kaust.edu.sa/",
+                "online": "Nein — das Programm folgt einem Präsenz-Vollzeitforschungsmodell auf dem KAUST-Campus in Saudi-Arabien."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Stigler, S. M. (2008). Karl Pearson's Theoretical Errors and the Advances They Inspired. Statistical Science, 23(2), 261–271.",
+          "note": "Stigler, ein führender Statistikhistoriker, zeichnet nach, wie Karl Pearsons technische Arbeit — einschließlich der Standardabweichung und eines Großteils des von diesem Rechner verwendeten Vokabulars — die Statistik zu einer modernen mathematischen Disziplin umgestaltete.",
+          "url": "https://doi.org/10.1214/08-STS256",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

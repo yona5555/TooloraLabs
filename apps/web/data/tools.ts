@@ -358,6 +358,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "statistics-calculator",
+    title: "Statistics Calculator",
+    category: "math-science",
+    description:
+      "Calculate mean, median, mode, range, variance, and standard deviation for any data set, with a dynamic dot plot of the distribution.",
+    featured: false,
+    keywords: [
+      "statistics calculator",
+      "mean median mode",
+      "standard deviation calculator",
+      "variance calculator",
+      "data set calculator",
+      "descriptive statistics",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

@@ -5108,6 +5108,163 @@
         }
       }
     },
+    "statistics-calculator": {
+      "title": "Calculateur de Statistiques",
+      "description": "Calculez la moyenne, la médiane, le mode, l'étendue, la variance et l'écart-type de tout jeu de données, avec un diagramme à points dynamique de la distribution.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules Statistiques",
+          "intro": "Les formules centrales appliquées par ce calculateur, où n est le nombre de valeurs et x̄ la moyenne.",
+          "formulas": {
+            "mean": { "label": "Moyenne", "expression": "x̄ = Σx / n" },
+            "median": { "label": "Médiane", "expression": "valeur centrale des données triées" },
+            "populationStdDev": { "label": "Écart-type de Population", "expression": "σ = √(Σ(x - x̄)² / n)" },
+            "sampleStdDev": { "label": "Écart-type d'Échantillon", "expression": "s = √(Σ(x - x̄)² / (n - 1))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Jeu de Données",
+        "inputLabel": "Valeurs",
+        "inputPlaceholder": "p. ex. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Séparez les valeurs par des virgules, des espaces ou des retours à la ligne."
+      },
+      "result": {
+        "heading": "Résultat",
+        "emptyDataset": "Saisissez au moins une valeur numérique.",
+        "meanCaption": "Moyenne de {count} valeurs",
+        "count": "Effectif",
+        "sum": "Somme",
+        "mean": "Moyenne",
+        "median": "Médiane",
+        "mode": "Mode",
+        "noMode": "Pas de mode",
+        "min": "Minimum",
+        "max": "Maximum",
+        "range": "Étendue",
+        "populationVariance": "Variance de Population",
+        "populationStdDev": "Écart-type de Population",
+        "sampleVariance": "Variance d'Échantillon",
+        "sampleStdDev": "Écart-type d'Échantillon",
+        "stdDev": "Écart-type",
+        "diagramCaption": "Chaque valeur placée sur une droite numérique, avec la moyenne (▲) et la médiane (⏐) indiquées."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Statistiques Descriptives",
+          "paragraph1": "Les statistiques descriptives résument un jeu de données par une poignée de nombres représentatifs. La moyenne (moyenne arithmétique) additionne toutes les valeurs et divise par leur nombre ; la médiane est la valeur centrale une fois les données triées, non affectée par le caractère extrême des valeurs les plus hautes ou les plus basses ; et le mode est la valeur (ou les valeurs) qui revient le plus souvent, avec aucun mode du tout si chaque valeur est unique.",
+          "diagram": {
+            "meanLabel": "moyenne",
+            "medianLabel": "médiane",
+            "caption": "Le jeu de données 2, 4, 4, 4, 5, 5, 7, 9 — la moyenne 5,0 (▲) se situe légèrement au-dessus de la médiane 4,5 (⏐) en raison de la valeur atypique élevée à 9."
+          },
+          "paragraph2": "La variance mesure la dispersion des données en faisant la moyenne de la distance au carré de chaque valeur par rapport à la moyenne ; l'écart-type est simplement la racine carrée de la variance, ce qui ramène les unités à celles des données d'origine (un jeu de données en dollars a un écart-type en dollars, non en dollars au carré). Un écart-type faible signifie que les valeurs se regroupent étroitement autour de la moyenne ; un écart-type élevé signifie qu'elles sont largement dispersées.",
+          "paragraph3": "Ce calculateur indique à la fois les statistiques de population et d'échantillon car le diviseur diffère : la variance de population divise par n (l'effectif total), utilisée lorsque le jeu de données représente l'ensemble du groupe étudié, tandis que la variance d'échantillon divise par n − 1, utilisée lorsque le jeu de données n'est qu'un échantillon tiré d'une population plus vaste — ce diviseur plus petit (la correction de Bessel) compense le fait qu'un échantillon sous-estime systématiquement la variance réelle de la population."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Calcul des statistiques centrales d'un petit jeu de données.",
+          "columnCalculation": "Jeu de Données",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "2, 4, 4, 4, 5, 5, 7, 9", "result": "Moyenne 5, médiane 4,5, mode 4" },
+            { "calculation": "1, 2, 3, 4", "result": "Moyenne 2,5, médiane 2,5, sans mode" },
+            { "calculation": "1, 1, 2, 2, 3", "result": "Modes 1 et 2 (bimodal)" },
+            { "calculation": "10, 12, 23, 23, 16, 23, 21, 16", "result": "Écart-type de population ≈ 4,9, d'échantillon ≈ 5,24" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Quand dois-je utiliser la médiane plutôt que la moyenne ?",
+              "answer": "La médiane résiste mieux aux valeurs atypiques que la moyenne, car elle ne dépend que de la position de la ou des valeurs centrales, non de leur ampleur. Pour des données asymétriques — comme les revenus des ménages ou les prix immobiliers, où quelques valeurs très élevées tirent la moyenne vers le haut — la médiane représente généralement mieux une valeur « typique » que la moyenne."
+            },
+            {
+              "question": "Pourquoi ce calculateur affiche-t-il deux écarts-types différents ?",
+              "answer": "L'écart-type de population (division par n) est correct lorsque votre jeu de données constitue l'ensemble de la population qui vous intéresse. L'écart-type d'échantillon (division par n − 1) est correct lorsque vos données ne sont qu'un échantillon utilisé pour estimer une population plus large non entièrement mesurée — le diviseur plus petit rend l'estimation moins biaisée, car la dispersion propre d'un échantillon tend à légèrement sous-estimer la dispersion réelle de la population."
+            },
+            {
+              "question": "Un jeu de données peut-il avoir plus d'un mode ?",
+              "answer": "Oui — un jeu de données est dit bimodal si exactement deux valeurs sont à égalité pour la fréquence la plus élevée, ou multimodal plus généralement pour un nombre quelconque de valeurs à égalité. Si chaque valeur du jeu de données apparaît exactement une fois, il n'y a aucun mode du tout, puisqu'aucune valeur ne se répète plus qu'une autre."
+            },
+            {
+              "question": "Pourquoi l'écart-type est-il plus couramment rapporté que la variance ?",
+              "answer": "La variance s'exprime dans les unités au carré des données d'origine (dollars au carré, centimètres au carré), ce qui la rend difficile à interpréter directement. L'écart-type, sa racine carrée, revient aux unités d'origine, le rendant directement comparable à la moyenne et aux autres valeurs du jeu de données — c'est en grande partie pourquoi l'écart-type, et non la variance, est devenu la façon standard de rapporter la dispersion."
+            },
+            {
+              "question": "L'ordre dans lequel je saisis mes données a-t-il de l'importance ?",
+              "answer": "Non — chaque statistique que calcule cet outil (moyenne, médiane, mode, variance, écart-type, minimum, maximum, étendue) ne dépend que des valeurs présentes et du nombre de fois où chacune apparaît, pas de l'ordre dans lequel elles ont été saisies. Le calculateur trie les données en interne partout où l'ordre importe, comme pour trouver la médiane."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "Un Vocabulaire Forgé par un Seul Statisticien",
+            "paragraph": "La moyenne arithmétique et la médiane sont utilisées de manière informelle depuis des millénaires — les astronomes de l'Antiquité faisaient déjà la moyenne d'observations répétées pour réduire l'erreur, bien avant que la statistique n'existe comme discipline formelle. Mais une grande partie du vocabulaire précis sur lequel repose ce calculateur a été forgée par une seule personne : le mathématicien britannique Karl Pearson, largement considéré comme l'un des fondateurs de la statistique mathématique moderne. Pearson a introduit le terme « écart-type » lors d'une conférence donnée le 31 janvier 1893, l'a utilisé pour la première fois à l'écrit l'année suivante dans son article « On the Dissection of Asymmetrical Frequency Curves » (1894), et a introduit la lettre grecque σ comme symbole — la même période où il a également forgé le terme « mode » en tant que terme statistique. Entre 1893 et 1912, Pearson a publié dix-huit articles intitulés « Mathematical Contributions to the Theory of Evolution », qui ont posé une grande partie des fondements des méthodes statistiques modernes, y compris l'analyse de régression et le coefficient de corrélation."
+          },
+          "modernDevelopments": {
+            "title": "Des Statistiques Calculées à la Main aux Logiciels",
+            "paragraph": "Pearson et ses contemporains calculaient ces statistiques à la main ou avec des calculatrices mécaniques, souvent pour des jeux de données de seulement quelques dizaines ou centaines de valeurs. Les logiciels statistiques modernes peuvent calculer instantanément la même moyenne, variance et écart-type pour des jeux de données de millions de points, ce qui a déplacé le défi central de la discipline du calcul manuel vers le choix correct de la statistique à privilégier, la gestion des valeurs atypiques et la manière d'éviter de tirer des conclusions non fondées à partir de motifs apparaissant par hasard."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les statistiques descriptives sont un sujet fondamental des mathématiques. Voici les 5 meilleures universités mondiales en Mathématiques selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/math",
+                "online": "Non — le programme suit un modèle en présentiel à temps plein de recherche et de cours, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate",
+                "online": "Non — le programme est un cursus résidentiel à temps plein, sans aucune option en ligne mentionnée."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil exige une résidence à temps plein à Oxford, sans option d'étude à distance mentionnée."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — le doctorat exige que les étudiants résident à Cambridge pour mener une recherche originale, sans option en ligne."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant un programme d'études supérieures en mathématiques appliquées et sciences computationnelles — non classé séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://amcs.kaust.edu.sa/",
+                "online": "Non — le programme suit un modèle de recherche en présentiel à temps plein sur le campus de KAUST en Arabie saoudite."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Stigler, S. M. (2008). Karl Pearson's Theoretical Errors and the Advances They Inspired. Statistical Science, 23(2), 261–271.",
+          "note": "Stigler, historien de premier plan des statistiques, retrace comment le travail technique de Karl Pearson — dont l'écart-type et une grande partie du vocabulaire qu'utilise ce calculateur — a transformé la statistique en une discipline mathématique moderne.",
+          "url": "https://doi.org/10.1214/08-STS256",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",
