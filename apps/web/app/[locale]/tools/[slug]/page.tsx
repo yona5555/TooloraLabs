@@ -57,6 +57,8 @@ import PhCalculator from "@/components/tools/ph-calculator/PhCalculator";
 import PhEducation from "@/components/tools/ph-calculator/PhEducation";
 import StatisticsCalculator from "@/components/tools/statistics-calculator/StatisticsCalculator";
 import StatisticsEducation from "@/components/tools/statistics-calculator/StatisticsEducation";
+import MolarityCalculator from "@/components/tools/molarity-calculator/MolarityCalculator";
+import MolarityEducation from "@/components/tools/molarity-calculator/MolarityEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -348,6 +350,9 @@ export default async function ToolPage({
     case "statistics-calculator":
       component = <StatisticsCalculator education={<StatisticsEducation />} />;
       break;
+    case "molarity-calculator":
+      component = <MolarityCalculator education={<MolarityEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -439,6 +444,7 @@ export default async function ToolPage({
     slug === "ohms-law-calculator" ||
     slug === "ph-calculator" ||
     slug === "statistics-calculator" ||
+    slug === "molarity-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

@@ -5265,6 +5265,186 @@
         }
       }
     },
+    "molarity-calculator": {
+      "title": "Molaritäts- und Verdünnungsrechner",
+      "description": "Berechnen Sie die molare Konzentration aus Stoffmenge oder Masse, oder lösen Sie Verdünnungsaufgaben mit C1V1 = C2V2, mit einem dynamischen Kolbendiagramm.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Molaritätsformeln",
+          "intro": "Die zentralen Beziehungen, die dieser Rechner anwendet.",
+          "formulas": {
+            "molarity": { "label": "Molarität", "expression": "M = mol / l" },
+            "molesFromMass": { "label": "Stoffmenge aus Masse", "expression": "mol = Masse (g) / molare Masse (g/mol)" },
+            "dilution": { "label": "Verdünnung", "expression": "C₁V₁ = C₂V₂" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "modeLabel": "Berechnen",
+        "mode": {
+          "concentration": "Molare Konzentration",
+          "dilution": "Verdünnung (C₁V₁ = C₂V₂)"
+        },
+        "basisLabel": "Aus",
+        "basis": {
+          "moles": "Stoffmenge",
+          "mass": "Masse und molare Masse"
+        },
+        "molesLabel": "Stoffmenge (mol)",
+        "molesPlaceholder": "z. B. 0.5",
+        "massLabel": "Masse (g)",
+        "massPlaceholder": "z. B. 58.44",
+        "molarMassLabel": "Molare Masse (g/mol)",
+        "molarMassPlaceholder": "z. B. 58.44",
+        "volumeLabel": "Volumen (l)",
+        "volumePlaceholder": "z. B. 2",
+        "solveForLabel": "Berechnen",
+        "solveFor": {
+          "c1": "C₁ (Stammlösungskonzentration)",
+          "v1": "V₁ (Stammlösungsvolumen)",
+          "c2": "C₂ (Konzentration nach Verdünnung)",
+          "v2": "V₂ (Volumen nach Verdünnung)"
+        },
+        "c1Label": "C₁ (mol/l)",
+        "c1Placeholder": "z. B. 2",
+        "v1Label": "V₁ (l)",
+        "v1Placeholder": "z. B. 0.5",
+        "c2Label": "C₂ (mol/l)",
+        "c2Placeholder": "z. B. 1",
+        "v2Label": "V₂ (l)",
+        "v2Placeholder": "z. B. 1"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroVolume": "Das Volumen muss größer als null sein, um die Molarität zu berechnen.",
+        "zeroMolarMass": "Die molare Masse muss größer als null sein, um die Stoffmenge aus der Masse zu berechnen.",
+        "zeroDenominator": "Der Divisor darf bei dieser Kombination bekannter Werte nicht null sein.",
+        "molesSummary": "Entspricht {moles} mol gelöst im angegebenen Volumen.",
+        "c1": "C₁",
+        "v1": "V₁",
+        "c2": "C₂",
+        "v2": "V₂",
+        "diagramStock": "Stammlösung",
+        "diagramDiluted": "Verdünnt",
+        "diagramCaption": "Die Flüssigkeitshöhe spiegelt das Volumen wider; die Farbintensität spiegelt die Konzentration wider."
+      },
+      "education": {
+        "intro": {
+          "title": "Molarität und Verdünnung verstehen",
+          "paragraph1": "Die Molarität (M) misst die Konzentration einer Lösung als Stoffmenge des gelösten Stoffs pro Liter Lösung: M = mol / l. Ist statt der Stoffmenge direkt die Masse des gelösten Stoffs bekannt, wird die Stoffmenge zunächst ermittelt, indem die Masse in Gramm durch die molare Masse des Stoffs in Gramm pro Mol geteilt wird — die molare Masse von Natriumchlorid, 58,44 g/mol, bedeutet, dass 58,44 g NaCl, gelöst zu einem Liter Lösung, eine 1-M-Lösung ergeben.",
+          "diagram": {
+            "stockLabel": "Stammlösung",
+            "dilutedLabel": "Verdünnt",
+            "caption": "Das Verdünnen von 0,5 l einer 2-mol/l-Stammlösung auf 1 l ergibt eine verdünnte Lösung mit 1 mol/l — dieselbe Gesamtstoffmenge, verteilt auf mehr Flüssigkeit."
+          },
+          "paragraph2": "Verdünnung folgt einem einfachen Erhaltungsprinzip: Das Hinzufügen von Lösungsmittel zu einer Lösung ändert deren Volumen und Konzentration, nicht aber die gesamte Stoffmenge des vorhandenen gelösten Stoffs. Daraus ergibt sich die Verdünnungsgleichung C₁V₁ = C₂V₂, wobei C₁ und V₁ Konzentration und Volumen vor der Verdünnung (die „Stammlösung“) sind und C₂ und V₂ Konzentration und Volumen nach Zugabe des Lösungsmittels. Da die Stoffmenge erhalten bleibt, lässt sich diese Gleichung nach jeder der vier Größen umstellen, sofern die anderen drei bekannt sind.",
+          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Berechnung der Konzentration und Lösung von Verdünnungsaufgaben.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "0,5 mol gelöst in 2 l", "result": "0,25 mol/l" },
+            { "calculation": "58,44 g NaCl (molare Masse 58,44 g/mol) in 1 l", "result": "1 mol/l" },
+            { "calculation": "0,5 l von 2 mol/l verdünnt auf 1 l", "result": "1 mol/l (C₂)" },
+            { "calculation": "0,5 l unbekannter C₁ verdünnt auf 1 l ergibt 1 mol/l", "result": "C₁ = 2 mol/l" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum senkt die Zugabe von Lösungsmittel die Konzentration, ohne die Stoffmenge zu ändern?",
+              "answer": "Konzentration ist ein Verhältnis von gelöstem Stoff zum Gesamtvolumen der Lösung, keine absolute Menge. Die Zugabe von reinem Lösungsmittel vergrößert den Nenner dieses Verhältnisses (das Volumen), während der Zähler (die Stoffmenge des gelösten Stoffs) exakt gleich bleibt, sodass das Verhältnis — die Konzentration — zwangsläufig sinkt, obwohl kein einziges Molekül des gelösten Stoffs hinzugefügt oder entfernt wurde."
+            },
+            {
+              "question": "Funktioniert die Verdünnungsgleichung C₁V₁ = C₂V₂ mit beliebigen Volumen- oder Konzentrationseinheiten?",
+              "answer": "Ja, solange auf beiden Seiten konsistent dieselben Einheiten verwendet werden — Liter und Milliliter funktionieren beide für das Volumen, und Molarität, Konzentrationsprozent oder jede andere konsistente Konzentrationseinheit funktionieren für C, da die Gleichung im Grunde nur besagt, dass die Stoffmenge (oder Masse oder jede andere erhaltene Größe) konstant bleibt, ausgedrückt als Konzentration mal Volumen vorher und nachher."
+            },
+            {
+              "question": "Warum benötige ich die molare Masse, um die Molarität aus einer gemessenen Masse zu bestimmen?",
+              "answer": "Molarität wird über die Stoffmenge definiert, nicht über Gramm, da die Stoffmenge tatsächliche Teilchen zählt (über die Avogadro-Konstante) statt Gewicht — und verschiedene Stoffe wiegen pro Mol unterschiedlich viel. Die molare Masse ist der Umrechnungsfaktor zwischen beiden: Das Teilen einer gemessenen Masse durch die molare Masse des Stoffs wandelt Gramm in die Stoffmenge um, die die Molaritätsformel tatsächlich benötigt."
+            },
+            {
+              "question": "Was passiert, wenn ich versuche, eine Verdünnungsaufgabe mit zwei Unbekannten zu lösen?",
+              "answer": "Die Gleichung C₁V₁ = C₂V₂ besteht aus genau einer Gleichung mit vier Variablen und kann daher nur gelöst werden, wenn drei der vier Größen bereits bekannt sind — bei zwei oder mehr Unbekannten gibt es unendlich viele Kombinationen, die die Gleichung erfüllen, und ohne weitere Informationen existiert keine eindeutig richtige Antwort."
+            },
+            {
+              "question": "Ist das Verdünnen einer Lösung dasselbe wie ihre chemische Neutralisation?",
+              "answer": "Nein — bei der Verdünnung wird lediglich Lösungsmittel (üblicherweise Wasser) zugegeben und die Konzentration durch einfaches Mischen verändert, ohne dass eine chemische Reaktion stattfindet; die Moleküle des gelösten Stoffs selbst bleiben unverändert, sie sind nur weiter verteilt. Die Neutralisation hingegen beinhaltet eine tatsächliche chemische Reaktion (typischerweise zwischen einer Säure und einer Base), die den ursprünglichen gelösten Stoff vollständig in andere Stoffe umwandelt."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Das „Mol“ — Benannt nach „Molekül“",
+            "paragraph": "Die Einheit im Zentrum der Molarität, das Mol, geht auf den deutschen Chemiker Wilhelm Ostwald zurück, einen der Begründer der physikalischen Chemie, der 1894 den Begriff „Mol“ als Kurzform des deutschen Wortes Molekül einführte. Ostwald definierte es als die Stoffmenge, deren Masse in Gramm ihrem Molekulargewicht entspricht — eine Definition, die vollständig auf messbaren Massenverhältnissen beruht und zu seiner umfassenderen wissenschaftlichen Haltung passte, direkt beobachtbare Größen unbewiesenen Behauptungen über die physikalische Realität von Atomen und Molekülen vorzuziehen, eine damals in der Chemie noch nicht entschiedene Debatte. Das deutsche „Mol“ ist der Ursprung des Begriffs, und die Molarität (Stoffmenge des gelösten Stoffs pro Liter Lösung) folgte natürlich, sobald das Mol selbst als Mengeneinheit akzeptiert war."
+          },
+          "modernDevelopments": {
+            "title": "Molarität im modernen Labor",
+            "paragraph": "Seit 2019 wird das Mol im Internationalen Einheitensystem (SI) formal nicht mehr durch einen physischen Massestandard definiert, sondern durch die exakte Festlegung des Zahlenwerts der Avogadro-Konstante auf 6,02214076 × 10²³ Teilchen pro Mol — eine Definition, die in einer fundamentalen Naturkonstante verwurzelt ist und nicht in einem physischen Artefakt. In der Praxis bleibt die Molarität eine der weltweit am routinemäßigsten verwendeten Messgrößen in Chemie- und Biologielaboren und liegt allem zugrunde, von der Herstellung von Reagenz- und Pufferlösungen bis zur Berechnung von Arzneimitteldosierungen und Verdünnungsreihen für Laboranalysen."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Molare Konzentration und Lösungschemie sind grundlegende Themen der Chemie. Hier sind die weltweit 5 besten Universitäten für Chemie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "Nein — die Promotion in Chemie und chemischer Biologie ist ein Vollzeit-Präsenzprogramm, das auf residenzpflichtiger Laborforschung basiert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 3 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "Nein — Vollzeit-Promotionsstudierende müssen für ihre Laborforschung in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 5 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "Nein — die Promotion (DPhil) erfordert Vollzeit-Residenz in Oxford für betreute Laborforschung."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Chemischer Wissenschaft — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Jensen, W. B. (2004). The Origin of the Mole Concept. Journal of Chemical Education, 81(10), 1409.",
+          "note": "Der Chemiehistoriker William Jensen zeichnet das Mol-Konzept von Wilhelm Ostwalds Namensgebung 1894 bis zu seinen sich wandelnden Definitionen nach und ordnet die Einheit, auf der dieser Rechner beruht, in die breitere Geschichte der physikalischen Chemie ein.",
+          "url": "https://doi.org/10.1021/ed081p1409",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

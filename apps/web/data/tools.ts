@@ -374,6 +374,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "molarity-calculator",
+    title: "Molarity & Dilution Calculator",
+    category: "math-science",
+    description:
+      "Calculate molar concentration from moles or mass, or solve dilution problems with C1V1 = C2V2, with a dynamic flask diagram.",
+    featured: false,
+    keywords: [
+      "molarity calculator",
+      "dilution calculator",
+      "c1v1 c2v2",
+      "molar concentration",
+      "moles to molarity",
+      "solution dilution formula",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

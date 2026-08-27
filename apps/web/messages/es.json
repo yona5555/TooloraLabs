@@ -5265,6 +5265,186 @@
         }
       }
     },
+    "molarity-calculator": {
+      "title": "Calculadora de Molaridad y Dilución",
+      "description": "Calcula la concentración molar a partir de moles o masa, o resuelve problemas de dilución con C1V1 = C2V2, con un diagrama dinámico de matraces.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas de Molaridad",
+          "intro": "Las relaciones centrales que aplica esta calculadora.",
+          "formulas": {
+            "molarity": { "label": "Molaridad", "expression": "M = mol / L" },
+            "molesFromMass": { "label": "Moles a partir de la Masa", "expression": "mol = masa (g) / masa molar (g/mol)" },
+            "dilution": { "label": "Dilución", "expression": "C₁V₁ = C₂V₂" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valores Conocidos",
+        "modeLabel": "Calcular",
+        "mode": {
+          "concentration": "Concentración Molar",
+          "dilution": "Dilución (C₁V₁ = C₂V₂)"
+        },
+        "basisLabel": "A partir de",
+        "basis": {
+          "moles": "Moles",
+          "mass": "Masa y Masa Molar"
+        },
+        "molesLabel": "Moles (mol)",
+        "molesPlaceholder": "p. ej. 0.5",
+        "massLabel": "Masa (g)",
+        "massPlaceholder": "p. ej. 58.44",
+        "molarMassLabel": "Masa Molar (g/mol)",
+        "molarMassPlaceholder": "p. ej. 58.44",
+        "volumeLabel": "Volumen (L)",
+        "volumePlaceholder": "p. ej. 2",
+        "solveForLabel": "Calcular",
+        "solveFor": {
+          "c1": "C₁ (Concentración Inicial)",
+          "v1": "V₁ (Volumen Inicial)",
+          "c2": "C₂ (Concentración Diluida)",
+          "v2": "V₂ (Volumen Diluido)"
+        },
+        "c1Label": "C₁ (mol/L)",
+        "c1Placeholder": "p. ej. 2",
+        "v1Label": "V₁ (L)",
+        "v1Placeholder": "p. ej. 0.5",
+        "c2Label": "C₂ (mol/L)",
+        "c2Placeholder": "p. ej. 1",
+        "v2Label": "V₂ (L)",
+        "v2Placeholder": "p. ej. 1"
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroVolume": "El volumen debe ser mayor que cero para calcular la molaridad.",
+        "zeroMolarMass": "La masa molar debe ser mayor que cero para calcular los moles a partir de la masa.",
+        "zeroDenominator": "El valor por el que se divide no puede ser cero para esta combinación de valores conocidos.",
+        "molesSummary": "Equivale a {moles} mol disueltos en el volumen indicado.",
+        "c1": "C₁",
+        "v1": "V₁",
+        "c2": "C₂",
+        "v2": "V₂",
+        "diagramStock": "Inicial",
+        "diagramDiluted": "Diluida",
+        "diagramCaption": "La altura del líquido refleja el volumen; la intensidad del color refleja la concentración."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo la Molaridad y la Dilución",
+          "paragraph1": "La molaridad (M) mide la concentración de una solución como moles de soluto por litro de solución: M = mol / L. Cuando se conoce la masa del soluto en lugar de sus moles directamente, primero se calculan los moles dividiendo la masa en gramos entre la masa molar de la sustancia en gramos por mol; la masa molar del cloruro de sodio, 58.44 g/mol, significa que disolver 58.44 g de NaCl para formar un litro de solución da una solución 1 M.",
+          "diagram": {
+            "stockLabel": "Inicial",
+            "dilutedLabel": "Diluida",
+            "caption": "Diluir 0.5 L de una solución inicial de 2 mol/L a 1 L produce una solución diluida de 1 mol/L: los mismos moles totales, repartidos en más líquido."
+          },
+          "paragraph2": "La dilución sigue un principio simple de conservación: agregar disolvente a una solución cambia su volumen y concentración, pero no los moles totales de soluto presentes. Esto da la ecuación de dilución C₁V₁ = C₂V₂, donde C₁ y V₁ son la concentración y el volumen antes de diluir (la solución «inicial»), y C₂ y V₂ son la concentración y el volumen después de agregar disolvente. Como los moles se conservan, esta ecuación puede reordenarse para calcular cualquiera de las cuatro cantidades conociendo las otras tres.",
+          "paragraph3": "Diluir una solución siempre reduce su concentración en proporción exacta a cuánto aumenta su volumen: duplicar el volumen reduce la concentración exactamente a la mitad, triplicarlo la reduce a un tercio, y así sucesivamente. Esta relación proporcional es la razón por la que los cálculos de dilución nunca requieren saber qué es realmente el soluto: la misma ecuación C₁V₁ = C₂V₂ se aplica sin importar la sustancia química específica involucrada."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Calculando la concentración y resolviendo problemas de dilución.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "0.5 mol disueltos en 2 L", "result": "0.25 mol/L" },
+            { "calculation": "58.44 g de NaCl (masa molar 58.44 g/mol) en 1 L", "result": "1 mol/L" },
+            { "calculation": "0.5 L de 2 mol/L diluidos a 1 L", "result": "1 mol/L (C₂)" },
+            { "calculation": "0.5 L de C₁ desconocida diluidos a 1 L dan 1 mol/L", "result": "C₁ = 2 mol/L" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué agregar disolvente reduce la concentración sin cambiar la cantidad de soluto?",
+              "answer": "La concentración es una razón entre el soluto y el volumen total de la solución, no una cantidad absoluta. Agregar disolvente puro aumenta el denominador de esa razón (el volumen) mientras que el numerador (los moles de soluto) permanece exactamente igual, así que la razón —la concentración— necesariamente disminuye, aunque no se haya añadido ni quitado ni una sola molécula de soluto."
+            },
+            {
+              "question": "¿Funciona la ecuación de dilución C₁V₁ = C₂V₂ con cualquier unidad de volumen o concentración?",
+              "answer": "Sí, siempre que se usen las mismas unidades de forma consistente en ambos lados: litros y mililitros funcionan para el volumen, y la molaridad, el porcentaje de concentración o cualquier otra unidad de concentración consistente funcionan para C, ya que la ecuación es en realidad solo una afirmación de que los moles (o la masa, o cualquier cantidad conservada) permanecen constantes, expresada como concentración por volumen antes y después."
+            },
+            {
+              "question": "¿Por qué necesito la masa molar para hallar la molaridad a partir de una masa medida?",
+              "answer": "La molaridad se define en términos de moles, no de gramos, porque los moles cuentan partículas reales (mediante el número de Avogadro) en lugar de peso, y sustancias distintas pesan cantidades distintas por mol. La masa molar es el factor de conversión entre ambos: dividir una masa medida entre la masa molar de la sustancia convierte los gramos en los moles que realmente requiere la fórmula de la molaridad."
+            },
+            {
+              "question": "¿Qué pasa si intento resolver un problema de dilución con dos incógnitas?",
+              "answer": "La ecuación C₁V₁ = C₂V₂ tiene exactamente una ecuación y cuatro variables, así que solo puede resolverse cuando ya se conocen tres de las cuatro cantidades; con dos o más incógnitas, existen infinitas combinaciones que satisfarían la ecuación, y no hay una única respuesta correcta sin más información."
+            },
+            {
+              "question": "¿Es diluir una solución lo mismo que neutralizarla químicamente?",
+              "answer": "No: la dilución solo agrega disolvente (típicamente agua) y cambia la concentración mediante una simple mezcla, sin que ocurra ninguna reacción química; las moléculas del soluto en sí no cambian, solo quedan más dispersas. La neutralización, en cambio, implica una reacción química real (típicamente entre un ácido y una base) que convierte el soluto original en sustancias completamente distintas."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "El «Mol» — Nombrado a partir de «Molécula»",
+            "paragraph": "La unidad en el centro de la molaridad, el mol, se remonta al químico alemán Wilhelm Ostwald, uno de los fundadores de la química física, quien introdujo el término «Mol» en 1894 como forma abreviada de la palabra alemana Molekül (molécula). Ostwald lo definió como la cantidad de una sustancia cuya masa en gramos es igual a su peso molecular, una definición basada enteramente en razones de masa medibles, acorde con su postura científica más amplia de favorecer cantidades directamente observables por encima de afirmaciones no comprobadas sobre la realidad física de los átomos y las moléculas, un debate aún sin resolver en la química de la época. El español «mol» es una traducción directa del término alemán de Ostwald, y la molaridad (moles de soluto por litro de solución) surgió de manera natural una vez que el mol mismo se aceptó como unidad de cantidad."
+          },
+          "modernDevelopments": {
+            "title": "La Molaridad en el Laboratorio Moderno",
+            "paragraph": "Desde 2019, el mol se define formalmente en el Sistema Internacional de Unidades (SI) no mediante un patrón físico de masa, sino fijando exactamente el valor numérico de la constante de Avogadro en 6.02214076 × 10²³ partículas por mol, una definición basada en una constante fundamental de la naturaleza y no en un objeto físico. En la práctica, la molaridad sigue siendo una de las mediciones más utilizadas de forma rutinaria en los laboratorios de química y biología de todo el mundo, y es la base de todo, desde la preparación de soluciones reactivas y amortiguadoras hasta el cálculo de dosis de fármacos y series de dilución para ensayos de laboratorio."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La concentración molar y la química de las soluciones son temas fundamentales dentro de la química. Estas son las 5 mejores universidades del mundo en Química según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #1 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — el doctorado en Química y Biología Química es un programa presencial de tiempo completo basado en la residencia de investigación en laboratorio."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #2 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #3 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "No — se exige a los estudiantes de doctorado de tiempo completo residir en Cambridge para su investigación de laboratorio, sin opción en línea."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #5 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — el doctorado (DPhil) requiere residencia de tiempo completo en Oxford para la investigación de laboratorio supervisada."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Ciencia Química — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Jensen, W. B. (2004). The Origin of the Mole Concept. Journal of Chemical Education, 81(10), 1409.",
+          "note": "El historiador de la química William Jensen traza el concepto de mol desde la denominación de Wilhelm Ostwald en 1894 hasta sus definiciones cambiantes, situando la unidad en la que se basa esta calculadora dentro de la historia más amplia de la química física.",
+          "url": "https://doi.org/10.1021/ed081p1409",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

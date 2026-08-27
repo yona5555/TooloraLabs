@@ -5261,6 +5261,186 @@
         }
       }
     },
+    "molarity-calculator": {
+      "title": "Molarity & Dilution Calculator",
+      "description": "Calculate molar concentration from moles or mass, or solve dilution problems with C1V1 = C2V2, with a dynamic flask diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Molarity Formulas",
+          "intro": "The core relationships this calculator applies.",
+          "formulas": {
+            "molarity": { "label": "Molarity", "expression": "M = mol / L" },
+            "molesFromMass": { "label": "Moles from Mass", "expression": "mol = mass (g) / molar mass (g/mol)" },
+            "dilution": { "label": "Dilution", "expression": "C₁V₁ = C₂V₂" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "modeLabel": "Calculate",
+        "mode": {
+          "concentration": "Molar Concentration",
+          "dilution": "Dilution (C₁V₁ = C₂V₂)"
+        },
+        "basisLabel": "From",
+        "basis": {
+          "moles": "Moles",
+          "mass": "Mass and Molar Mass"
+        },
+        "molesLabel": "Moles (mol)",
+        "molesPlaceholder": "e.g. 0.5",
+        "massLabel": "Mass (g)",
+        "massPlaceholder": "e.g. 58.44",
+        "molarMassLabel": "Molar Mass (g/mol)",
+        "molarMassPlaceholder": "e.g. 58.44",
+        "volumeLabel": "Volume (L)",
+        "volumePlaceholder": "e.g. 2",
+        "solveForLabel": "Solve For",
+        "solveFor": {
+          "c1": "C₁ (Stock Concentration)",
+          "v1": "V₁ (Stock Volume)",
+          "c2": "C₂ (Diluted Concentration)",
+          "v2": "V₂ (Diluted Volume)"
+        },
+        "c1Label": "C₁ (mol/L)",
+        "c1Placeholder": "e.g. 2",
+        "v1Label": "V₁ (L)",
+        "v1Placeholder": "e.g. 0.5",
+        "c2Label": "C₂ (mol/L)",
+        "c2Placeholder": "e.g. 1",
+        "v2Label": "V₂ (L)",
+        "v2Placeholder": "e.g. 1"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroVolume": "Volume must be greater than zero to calculate molarity.",
+        "zeroMolarMass": "Molar mass must be greater than zero to calculate moles from mass.",
+        "zeroDenominator": "The value being divided by cannot be zero for this combination of known values.",
+        "molesSummary": "Equal to {moles} mol dissolved in the given volume.",
+        "c1": "C₁",
+        "v1": "V₁",
+        "c2": "C₂",
+        "v2": "V₂",
+        "diagramStock": "Stock",
+        "diagramDiluted": "Diluted",
+        "diagramCaption": "Liquid height reflects volume; color intensity reflects concentration."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Molarity and Dilution",
+          "paragraph1": "Molarity (M) measures the concentration of a solution as moles of solute per liter of solution: M = mol / L. When the solute's mass is known instead of its moles directly, moles are found first by dividing mass in grams by the substance's molar mass in grams per mole — sodium chloride's molar mass of 58.44 g/mol means 58.44 g of NaCl dissolved to make one liter of solution gives a 1 M solution.",
+          "diagram": {
+            "stockLabel": "Stock",
+            "dilutedLabel": "Diluted",
+            "caption": "Diluting 0.5 L of a 2 mol/L stock solution to 1 L yields a 1 mol/L diluted solution — the same total moles, spread through more liquid."
+          },
+          "paragraph2": "Dilution follows a simple conservation principle: adding solvent to a solution changes its volume and concentration, but not the total moles of solute present. That gives the dilution equation C₁V₁ = C₂V₂, where C₁ and V₁ are the concentration and volume before dilution (the \"stock\" solution) and C₂ and V₂ are the concentration and volume after adding solvent. Because moles are conserved, this equation can be rearranged to solve for any one of the four quantities given the other three.",
+          "paragraph3": "Diluting a solution always lowers its concentration in exact proportion to how much its volume increases — doubling the volume exactly halves the concentration, tripling it cuts concentration to a third, and so on. This proportional relationship is why dilution calculations never require knowing what the solute actually is: the same C₁V₁ = C₂V₂ equation applies regardless of the specific chemical involved."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Computing concentration and solving dilution problems.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "0.5 mol dissolved in 2 L", "result": "0.25 mol/L" },
+            { "calculation": "58.44 g NaCl (molar mass 58.44 g/mol) in 1 L", "result": "1 mol/L" },
+            { "calculation": "0.5 L of 2 mol/L diluted to 1 L", "result": "1 mol/L (C₂)" },
+            { "calculation": "0.5 L of unknown C₁ diluted to 1 L gives 1 mol/L", "result": "C₁ = 2 mol/L" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does adding solvent lower concentration without changing the amount of solute?",
+              "answer": "Concentration is a ratio of solute to total solution volume, not an absolute amount. Adding pure solvent increases the denominator of that ratio (the volume) while the numerator (moles of solute) stays exactly the same, so the ratio — the concentration — necessarily decreases, even though not a single molecule of solute has been added or removed."
+            },
+            {
+              "question": "Does the dilution equation C₁V₁ = C₂V₂ work for any units of volume or concentration?",
+              "answer": "Yes, as long as the same units are used consistently on both sides — liters and milliliters both work for volume, and molarity, percent concentration, or any other consistent concentration unit both work for C, since the equation is really just a statement that moles (or mass, or any conserved quantity) stay constant, expressed as concentration times volume before and after."
+            },
+            {
+              "question": "Why do I need the molar mass to find molarity from a measured mass?",
+              "answer": "Molarity is defined in terms of moles, not grams, because moles count actual particles (via Avogadro's number) rather than weight — and different substances weigh different amounts per mole. Molar mass is the conversion factor between the two: dividing a measured mass by the substance's molar mass converts grams into the moles that the molarity formula actually requires."
+            },
+            {
+              "question": "What happens if I try to solve a dilution problem with two unknowns?",
+              "answer": "The equation C₁V₁ = C₂V₂ has exactly one equation and four variables, so it can only be solved when three of the four quantities are already known — with two or more unknowns, there are infinitely many combinations that would satisfy the equation, and no single correct answer exists without more information."
+            },
+            {
+              "question": "Is diluting a solution the same as neutralizing it chemically?",
+              "answer": "No — dilution only adds solvent (typically water) and changes concentration through simple mixing, without any chemical reaction taking place; the solute molecules themselves are unchanged, just more spread out. Neutralization, by contrast, involves an actual chemical reaction (typically between an acid and a base) that converts the original solute into different substances entirely."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The \"Mole\" — Named From \"Molecule\"",
+            "paragraph": "The unit at the heart of molarity, the mole, traces to German chemist Wilhelm Ostwald, one of the founders of physical chemistry, who introduced the term \"Mol\" in 1894 as a shortened form of the German word Molekül (molecule). Ostwald defined it as the amount of a substance whose mass in grams equals its molecular weight — a definition built entirely on measurable mass ratios, fitting his broader scientific stance of favoring directly observable quantities over unproven claims about the physical reality of atoms and molecules, a debate still unsettled in chemistry at the time. The English \"mole\" is a direct translation of Ostwald's German term, and molarity (moles of solute per liter of solution) followed naturally once the mole itself was an accepted unit of amount."
+          },
+          "modernDevelopments": {
+            "title": "Molarity in the Modern Laboratory",
+            "paragraph": "Since 2019, the mole has been formally defined in the International System of Units (SI) not by a physical mass standard but by fixing the numerical value of the Avogadro constant exactly, at 6.02214076 × 10²³ particles per mole — a definition rooted in a fundamental constant of nature rather than a physical artifact. In practice, molarity remains one of the most routinely used measurements in chemistry and biology laboratories worldwide, underlying everything from preparing reagent solutions and buffers to calculating drug dosages and dilution series for laboratory assays."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Molar concentration and solution chemistry are foundational topics within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — the PhD in Chemistry and Chemical Biology is a full-time, in-person program built around laboratory research residency."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "No — full-time PhD students are required to reside in Cambridge for their laboratory-based research, with no online option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — the DPhil requires full-time residence in Oxford for supervised laboratory research."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Chemical Science — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "No — the program follows an on-campus, laboratory-based research model centered on the university's catalysis and materials research centers."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Jensen, W. B. (2004). The Origin of the Mole Concept. Journal of Chemical Education, 81(10), 1409.",
+          "note": "Chemistry historian William Jensen traces the mole concept from Wilhelm Ostwald's 1894 naming through its evolving definitions, situating the unit this calculator relies on within the broader history of physical chemistry.",
+          "url": "https://doi.org/10.1021/ed081p1409",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

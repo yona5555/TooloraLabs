@@ -29,3 +29,4 @@ export * from "./DensityCalculator";
 export * from "./OhmsLawCalculator";
 export * from "./PhCalculator";
 export * from "./StatisticsCalculator";
+export * from "./MolarityCalculator";
