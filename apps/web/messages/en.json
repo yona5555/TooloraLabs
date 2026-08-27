@@ -4116,6 +4116,177 @@
         }
       }
     },
+    "scientific-notation-converter": {
+      "title": "Scientific Notation Converter",
+      "description": "Convert numbers between standard and scientific notation, plus multiply and divide values already in scientific notation, with engineering notation and named magnitudes.",
+      "nav": {
+        "tool": "Converter",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Powers of Ten",
+          "intro": "The common names for powers of ten from a trillionth to a quadrillion.",
+          "columnPower": "Power",
+          "columnName": "Name"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Number",
+        "operationLabel": "Operation",
+        "operation": {
+          "toScientific": "Standard → Scientific",
+          "toStandard": "Scientific → Standard",
+          "multiply": "Multiply (×)",
+          "divide": "Divide (÷)"
+        },
+        "standardValueLabel": "Standard Number",
+        "standardValuePlaceholder": "e.g. 299792458",
+        "yourNumberLabel": "Your Number",
+        "firstNumberLabel": "First Number",
+        "secondNumberLabel": "Second Number",
+        "coefficientLabel": "Coefficient",
+        "exponentLabel": "Exponent",
+        "coefficientPlaceholder": "Coefficient",
+        "exponentPlaceholder": "Exponent"
+      },
+      "result": {
+        "heading": "Result",
+        "divideByZero": "Cannot divide by a value whose coefficient is zero.",
+        "standardForm": "Standard form: {value}",
+        "engineeringForm": "Engineering notation: {coefficient} × 10^{exponent}",
+        "numberName": "That's about {coefficient} {name}.",
+        "diagramCaption": "Position of 10^{exponent} on a logarithmic magnitude scale.",
+        "stepToScientific": "Moved the decimal point of {standard} until exactly one nonzero digit remained before it — {exponent} places — giving a coefficient between 1 and 10.",
+        "stepToStandard": "Moved the decimal point of {coefficient} by {exponent} places to expand it to standard form.",
+        "stepMultiply": "Multiplied the coefficients ({coeffA} × {coeffB} = {rawCoeff}) and added the exponents ({expA} + {expB} = {rawExp}), then renormalized to keep the coefficient between 1 and 10.",
+        "stepDivide": "Divided the coefficients ({coeffA} ÷ {coeffB}) and subtracted the exponents ({expA} − {expB} = {rawExp}), then renormalized to keep the coefficient between 1 and 10.",
+        "numberNames": {
+          "thousand": "thousand",
+          "million": "million",
+          "billion": "billion",
+          "trillion": "trillion",
+          "quadrillion": "quadrillion",
+          "thousandth": "thousandth",
+          "millionth": "millionth",
+          "billionth": "billionth",
+          "trillionth": "trillionth"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Scientific Notation",
+          "paragraph1": "Scientific notation writes any number as a coefficient between 1 and 10 multiplied by a power of ten, such as 1.234 × 10^8 instead of 123,400,000. The exponent counts how many places the decimal point moved to get from the standard number to that single leading digit — a positive exponent for large numbers, a negative exponent for numbers smaller than 1. This makes it far easier to read, compare, and calculate with numbers that would otherwise be a long string of digits.",
+          "diagram": {
+            "caption": "Avogadro's number, 6.02 × 10^23, sits far to the right on a logarithmic magnitude scale."
+          },
+          "paragraph2": "Engineering notation is a close relative that restricts the exponent to a multiple of 3, matching the metric prefixes (kilo-, mega-, giga-, milli-, micro-, nano-) used throughout science and engineering — 1.5 × 10^8 in scientific notation becomes 150 × 10^6 in engineering notation, immediately readable as \"150 million.\" This tool shows both forms for every result, along with the everyday name of the magnitude whenever the number falls in a commonly named range.",
+          "paragraph3": "Multiplying or dividing numbers already in scientific notation follows two simple rules: multiply (or divide) the coefficients directly, and add (or subtract) the exponents — a direct consequence of the laws of exponents. The result is then renormalized if the coefficient lands outside the 1-to-10 range, exactly as this tool does automatically."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "One worked example for each operation this tool supports.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "123,400,000 in scientific notation", "result": "1.234 × 10^8" },
+            { "calculation": "6.02 × 10^23 in standard form", "result": "602,000,000,000,000,000,000,000" },
+            { "calculation": "(5 × 10^3) × (3 × 10^4)", "result": "1.5 × 10^8" },
+            { "calculation": "(6 × 10^7) ÷ (2 × 10^3)", "result": "3 × 10^4" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why must the coefficient in scientific notation always be between 1 and 10?",
+              "answer": "It's a convention that guarantees every number has exactly one standard scientific-notation form, which makes numbers easy to compare at a glance: whichever has the larger exponent is the larger number, regardless of the coefficient. Writing 12.34 × 10^7 instead of 1.234 × 10^8 is mathematically equal but is called unnormalized, since it breaks that one-glance comparison."
+            },
+            {
+              "question": "What's the difference between scientific notation and engineering notation?",
+              "answer": "Scientific notation always uses exactly one nonzero digit before the decimal point. Engineering notation instead restricts the exponent to a multiple of 3, allowing 1 to 3 digits before the decimal point, specifically so the exponent lines up with the metric prefixes (10^3 = kilo, 10^6 = mega, 10^9 = giga, and so on) used throughout science and engineering."
+            },
+            {
+              "question": "Why do I add exponents when multiplying, but subtract them when dividing?",
+              "answer": "This comes directly from the laws of exponents: multiplying powers of the same base adds their exponents (10^3 × 10^4 = 10^7), and dividing them subtracts (10^7 ÷ 10^3 = 10^4). Scientific notation multiplication and division apply this rule to the power-of-ten part while handling the coefficients with ordinary multiplication or division."
+            },
+            {
+              "question": "Why does a negative exponent mean a number smaller than 1?",
+              "answer": "A negative exponent represents a reciprocal: 10^-3 means 1/10^3, or 0.001. So 5 × 10^-4 means 5 × 0.0001, which equals 0.0005 — the more negative the exponent, the smaller the number."
+            },
+            {
+              "question": "Can the coefficient in scientific notation be negative?",
+              "answer": "Yes. A negative number in scientific notation simply carries a negative coefficient, such as -2.5 × 10^6 for -2,500,000. Only the coefficient's sign changes; the exponent describes magnitude, not sign."
+            },
+            {
+              "question": "Where is scientific notation used in everyday science?",
+              "answer": "Astronomy (distances measured in light-years, masses of stars), chemistry (Avogadro's number, atomic and molecular masses), physics (the speed of light, Planck's constant), and computing (byte sizes, processor clock speeds) all rely on scientific notation because the quantities involved are too large or too small to write comfortably in standard form."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "Archimedes and The Sand-Reckoner",
+            "paragraph": "Long before a base-ten convention existed, the Greek mathematician Archimedes tackled the same underlying problem this notation solves: naming numbers too large for ordinary counting. In The Sand-Reckoner (3rd century BCE), addressed to King Gelon of Syracuse, he set out to prove that the grains of sand needed to fill the entire universe were a finite, nameable number — not \"infinite,\" as commonly assumed. Because Greek numerals had no name for anything past a myriad (10,000), Archimedes invented his own hierarchy of \"orders\" of numbers, each built as a power of the one before it, along with a rule for combining them that is mathematically identical to the modern law of exponents bᵐ × bⁿ = bᵐ⁺ⁿ. Using conservative estimates of the size of the cosmos, he concluded that fewer than 10 million units of his eighth order of numbers — on the order of 10^63 grains — would fill it. His base unit was 10^8, not 10, so this is not scientific notation in its modern form, but it is the same core idea: naming enormous magnitudes with a systematic, exponent-based hierarchy rather than writing out endless digits."
+          },
+          "modernDevelopments": {
+            "title": "From Slide Rules to Calculator Displays",
+            "paragraph": "Scientific notation became a practical daily tool with the slide rule, which performs multiplication and division by adding and subtracting logarithms mechanically — a physical embodiment of the same exponent rules this tool uses. When electronic calculators arrived, screens too narrow to show a long string of digits adopted a compact \"E notation\" shorthand for the same idea, writing 1.234 × 10^8 as 1.234E8 — a convention still used today in spreadsheets, programming languages, and scientific instruments whenever a value would otherwise overflow the display."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Scientific notation is a foundational tool of the broader discipline of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "No — MIT's mathematics graduate program is a full-time, campus-based degree with no online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "No — the official program page states students are located in Cambridge, Massachusetts, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "No — the DPhil in Mathematics requires attendance in Oxford, with no distance-learning option."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "No — the PhD in Pure Mathematics and Mathematical Statistics is research-based and supervisor-led on campus, full-time or part-time, with no online mode stated."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford states directly that PhD students are expected to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "A leading Emirati university offering a PhD in Mathematics.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "No — the official program catalogue states the mode of study is full-time."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Ed. & Trans.). (1897). The Works of Archimedes. Cambridge University Press. \"The Sand-Reckoner,\" pp. 221–232.",
+          "note": "Heath's translation of The Sand-Reckoner documents Archimedes' system for naming and bounding enormous quantities using a hierarchy of numerical \"orders,\" including an exponent-combination rule equivalent to the modern law bᵐ × bⁿ = bᵐ⁺ⁿ.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

@@ -4120,6 +4120,177 @@
         }
       }
     },
+    "scientific-notation-converter": {
+      "title": "Convertidor de Notación Científica",
+      "description": "Convierta números entre la forma estándar y la notación científica, además de multiplicar y dividir valores ya expresados en notación científica, con notación de ingeniería y nombres de magnitudes.",
+      "nav": {
+        "tool": "Convertidor",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Potencias de Diez",
+          "intro": "Los nombres comunes de las potencias de diez, desde una billonésima hasta mil billones.",
+          "columnPower": "Potencia",
+          "columnName": "Nombre"
+        }
+      },
+      "form": {
+        "inputTitle": "Su Número",
+        "operationLabel": "Operación",
+        "operation": {
+          "toScientific": "Estándar → Científica",
+          "toStandard": "Científica → Estándar",
+          "multiply": "Multiplicar (×)",
+          "divide": "Dividir (÷)"
+        },
+        "standardValueLabel": "Número Estándar",
+        "standardValuePlaceholder": "p. ej. 299792458",
+        "yourNumberLabel": "Su Número",
+        "firstNumberLabel": "Primer Número",
+        "secondNumberLabel": "Segundo Número",
+        "coefficientLabel": "Coeficiente",
+        "exponentLabel": "Exponente",
+        "coefficientPlaceholder": "Coeficiente",
+        "exponentPlaceholder": "Exponente"
+      },
+      "result": {
+        "heading": "Resultado",
+        "divideByZero": "No se puede dividir entre un valor cuyo coeficiente es cero.",
+        "standardForm": "Forma estándar: {value}",
+        "engineeringForm": "Notación de ingeniería: {coefficient} × 10^{exponent}",
+        "numberName": "Es decir, aproximadamente {coefficient} {name}.",
+        "diagramCaption": "Posición de 10^{exponent} en una escala logarítmica de magnitud.",
+        "stepToScientific": "Se desplazó el punto decimal de {standard} hasta dejar exactamente un dígito distinto de cero antes de él — {exponent} posiciones —, obteniendo un coeficiente entre 1 y 10.",
+        "stepToStandard": "Se desplazó el punto decimal de {coefficient} en {exponent} posiciones para expandirlo a su forma estándar.",
+        "stepMultiply": "Se multiplicaron los coeficientes ({coeffA} × {coeffB} = {rawCoeff}) y se sumaron los exponentes ({expA} + {expB} = {rawExp}), y luego se renormalizó para mantener el coeficiente entre 1 y 10.",
+        "stepDivide": "Se dividieron los coeficientes ({coeffA} ÷ {coeffB}) y se restaron los exponentes ({expA} − {expB} = {rawExp}), y luego se renormalizó para mantener el coeficiente entre 1 y 10.",
+        "numberNames": {
+          "thousand": "mil",
+          "million": "millón",
+          "billion": "mil millones",
+          "trillion": "billón",
+          "quadrillion": "mil billones",
+          "thousandth": "milésima",
+          "millionth": "millonésima",
+          "billionth": "milmillonésima",
+          "trillionth": "billonésima"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo Funciona la Notación Científica",
+          "paragraph1": "La notación científica escribe cualquier número como un coeficiente entre 1 y 10 multiplicado por una potencia de diez, como 1.234 × 10^8 en lugar de 123.400.000. El exponente indica cuántas posiciones se desplazó el punto decimal desde el número estándar hasta ese único dígito inicial: un exponente positivo para números grandes y uno negativo para números menores que 1. Esto facilita mucho leer, comparar y calcular con números que de otro modo serían una larga cadena de dígitos.",
+          "diagram": {
+            "caption": "El número de Avogadro, 6,02 × 10^23, se sitúa muy a la derecha en una escala logarítmica de magnitud."
+          },
+          "paragraph2": "La notación de ingeniería es una prima cercana que restringe el exponente a un múltiplo de 3, alineándolo con los prefijos métricos (kilo-, mega-, giga-, mili-, micro-, nano-) usados en toda la ciencia y la ingeniería — 1,5 × 10^8 en notación científica se convierte en 150 × 10^6 en notación de ingeniería, que se lee de inmediato como «150 millones». Esta herramienta muestra ambas formas para cada resultado, junto con el nombre cotidiano de la magnitud siempre que el número caiga dentro de un rango con nombre común.",
+          "paragraph3": "Multiplicar o dividir números ya expresados en notación científica sigue dos reglas simples: multiplicar (o dividir) los coeficientes directamente y sumar (o restar) los exponentes, una consecuencia directa de las leyes de los exponentes. El resultado se renormaliza después si el coeficiente queda fuera del rango de 1 a 10, tal como hace esta herramienta automáticamente."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Un ejemplo resuelto para cada operación que admite esta herramienta.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "123.400.000 en notación científica", "result": "1,234 × 10^8" },
+            { "calculation": "6,02 × 10^23 en forma estándar", "result": "602.000.000.000.000.000.000.000" },
+            { "calculation": "(5 × 10^3) × (3 × 10^4)", "result": "1,5 × 10^8" },
+            { "calculation": "(6 × 10^7) ÷ (2 × 10^3)", "result": "3 × 10^4" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué el coeficiente en notación científica siempre debe estar entre 1 y 10?",
+              "answer": "Es una convención que garantiza que cada número tenga exactamente una forma científica estándar, lo que facilita comparar números de un vistazo: el que tenga el exponente mayor es el número mayor, sin importar el coeficiente. Escribir 12,34 × 10^7 en lugar de 1,234 × 10^8 es matemáticamente igual, pero se considera no normalizado, porque rompe esa comparación instantánea."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre la notación científica y la notación de ingeniería?",
+              "answer": "La notación científica siempre usa exactamente un dígito distinto de cero antes del punto decimal. La notación de ingeniería, en cambio, restringe el exponente a un múltiplo de 3, permitiendo de 1 a 3 dígitos antes del punto decimal, precisamente para que el exponente coincida con los prefijos métricos (10^3 = kilo, 10^6 = mega, 10^9 = giga, y así sucesivamente) usados en toda la ciencia y la ingeniería."
+            },
+            {
+              "question": "¿Por qué sumo los exponentes al multiplicar, pero los resto al dividir?",
+              "answer": "Esto proviene directamente de las leyes de los exponentes: multiplicar potencias de la misma base suma sus exponentes (10^3 × 10^4 = 10^7), y dividirlas los resta (10^7 ÷ 10^3 = 10^4). La multiplicación y la división en notación científica aplican esta regla a la parte de la potencia de diez, mientras que los coeficientes se multiplican o dividen de forma ordinaria."
+            },
+            {
+              "question": "¿Por qué un exponente negativo indica un número menor que 1?",
+              "answer": "Un exponente negativo representa un recíproco: 10^-3 significa 1/10^3, es decir, 0,001. Así, 5 × 10^-4 significa 5 × 0,0001, lo que equivale a 0,0005 — cuanto más negativo es el exponente, más pequeño es el número."
+            },
+            {
+              "question": "¿Puede el coeficiente en notación científica ser negativo?",
+              "answer": "Sí. Un número negativo en notación científica simplemente lleva un coeficiente negativo, como -2,5 × 10^6 para -2.500.000. Solo cambia el signo del coeficiente; el exponente describe la magnitud, no el signo."
+            },
+            {
+              "question": "¿Dónde se usa la notación científica en la ciencia cotidiana?",
+              "answer": "La astronomía (distancias medidas en años luz, masas de estrellas), la química (el número de Avogadro, las masas atómicas y moleculares), la física (la velocidad de la luz, la constante de Planck) y la informática (tamaños de bytes, velocidades de reloj de los procesadores) dependen de la notación científica porque las cantidades involucradas son demasiado grandes o demasiado pequeñas para escribirse cómodamente en forma estándar."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Arquímedes y El Contador de Arena",
+            "paragraph": "Mucho antes de que existiera una convención de base diez, el matemático griego Arquímedes abordó el mismo problema de fondo que resuelve esta notación: nombrar números demasiado grandes para el conteo ordinario. En El Contador de Arena (siglo III a. C.), dirigido al rey Gelón de Siracusa, se propuso demostrar que los granos de arena necesarios para llenar todo el universo eran un número finito y nombrable, no «infinito», como se creía comúnmente. Como los numerales griegos no tenían nombre para nada más allá de una miríada (10.000), Arquímedes inventó su propia jerarquía de «órdenes» de números, cada uno construido como una potencia del anterior, junto con una regla para combinarlos matemáticamente idéntica a la ley moderna de los exponentes bᵐ × bⁿ = bᵐ⁺ⁿ. Usando estimaciones conservadoras del tamaño del cosmos, concluyó que bastarían menos de diez millones de unidades de su octavo orden de números —del orden de 10^63 granos— para llenarlo. Como su unidad base era 10^8 y no 10, esto no es notación científica en su forma moderna, pero sí la misma idea esencial: nombrar magnitudes enormes mediante una jerarquía sistemática basada en exponentes, en lugar de escribir una cadena interminable de dígitos."
+          },
+          "modernDevelopments": {
+            "title": "De las Reglas de Cálculo a las Pantallas de las Calculadoras",
+            "paragraph": "La notación científica se volvió una herramienta práctica y cotidiana con la regla de cálculo, que realiza multiplicaciones y divisiones sumando y restando logaritmos mecánicamente, una materialización física de las mismas leyes de los exponentes que usa esta herramienta. Con la llegada de las calculadoras electrónicas, las pantallas demasiado estrechas para mostrar una larga cadena de dígitos adoptaron una abreviatura compacta conocida como «notación E», escribiendo 1,234 × 10^8 como 1.234E8, una convención que sigue usándose hoy en hojas de cálculo, lenguajes de programación e instrumentos científicos siempre que un valor desbordaría la pantalla."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La notación científica es una herramienta fundamental de la disciplina más amplia de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "No — el programa de posgrado en Matemáticas del MIT es un título presencial de tiempo completo, sin modalidad en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "No — la página oficial del programa indica que los estudiantes residen en Cambridge, Massachusetts, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "No — el doctorado (DPhil) en Matemáticas exige asistencia presencial en Oxford, sin opción de aprendizaje a distancia."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #4 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "No — el doctorado en Matemáticas Puras y Estadística Matemática es un programa de investigación supervisado presencialmente en el campus, a tiempo completo o parcial, sin ninguna modalidad en línea indicada."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #5 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford indica expresamente que se espera que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "Una destacada universidad emiratí que ofrece un doctorado en Matemáticas.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "No — el catálogo oficial del programa indica que la modalidad de estudio es de tiempo completo."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Heath, T. L. (Ed. & Trans.). (1897). The Works of Archimedes. Cambridge University Press. \"The Sand-Reckoner,\" pp. 221–232.",
+          "note": "La traducción de Heath de El Contador de Arena documenta el sistema de Arquímedes para nombrar y acotar cantidades enormes mediante una jerarquía de «órdenes» numéricos, incluida una regla de combinación de exponentes equivalente a la ley moderna bᵐ × bⁿ = bᵐ⁺ⁿ.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Leer el texto original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

@@ -43,6 +43,8 @@ import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTi
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
 import FractionCalculator from "@/components/tools/fraction-calculator/FractionCalculator";
 import FractionEducation from "@/components/tools/fraction-calculator/FractionEducation";
+import ScientificNotationConverter from "@/components/tools/scientific-notation-converter/ScientificNotationConverter";
+import ScientificNotationEducation from "@/components/tools/scientific-notation-converter/ScientificNotationEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -313,6 +315,9 @@ export default async function ToolPage({
     case "fraction-calculator":
       component = <FractionCalculator education={<FractionEducation />} />;
       break;
+    case "scientific-notation-converter":
+      component = <ScientificNotationConverter education={<ScientificNotationEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -397,6 +402,7 @@ export default async function ToolPage({
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
     slug === "fraction-calculator" ||
+    slug === "scientific-notation-converter" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

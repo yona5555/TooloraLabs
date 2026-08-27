@@ -277,6 +277,23 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "scientific-notation-converter",
+    title: "Scientific Notation Converter",
+    category: "math-science",
+    description:
+      "Convert numbers between standard and scientific notation, plus multiply and divide values already in scientific notation, with engineering notation and named magnitudes.",
+    featured: false,
+    keywords: [
+      "scientific notation converter",
+      "standard form",
+      "powers of ten",
+      "engineering notation",
+      "exponent calculator",
+      "significant figures",
+      "e notation",
+    ],
+  },
+  {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
     category: "math-science",

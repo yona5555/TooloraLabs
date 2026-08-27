@@ -22,3 +22,4 @@ export * from "./ColorPaletteGenerator";
 export * from "./PdfMergeSplit";
 export * from "./ZipCompressor";
 export * from "./FractionCalculator";
+export * from "./ScientificNotationConverter";

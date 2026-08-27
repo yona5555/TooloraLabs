@@ -4120,6 +4120,177 @@
         }
       }
     },
+    "scientific-notation-converter": {
+      "title": "Wissenschaftliche-Notation-Umrechner",
+      "description": "Rechnen Sie Zahlen zwischen Standardform und wissenschaftlicher Notation um, und multiplizieren oder dividieren Sie Werte, die bereits in wissenschaftlicher Notation vorliegen, mit technischer Notation und benannten Größenordnungen.",
+      "nav": {
+        "tool": "Umrechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Zehnerpotenzen",
+          "intro": "Die gängigen Namen für Zehnerpotenzen von einem Billionstel bis zu einer Billiarde.",
+          "columnPower": "Potenz",
+          "columnName": "Name"
+        }
+      },
+      "form": {
+        "inputTitle": "Ihre Zahl",
+        "operationLabel": "Rechenart",
+        "operation": {
+          "toScientific": "Standard → Wissenschaftlich",
+          "toStandard": "Wissenschaftlich → Standard",
+          "multiply": "Multiplizieren (×)",
+          "divide": "Dividieren (÷)"
+        },
+        "standardValueLabel": "Standardzahl",
+        "standardValuePlaceholder": "z. B. 299792458",
+        "yourNumberLabel": "Ihre Zahl",
+        "firstNumberLabel": "Erste Zahl",
+        "secondNumberLabel": "Zweite Zahl",
+        "coefficientLabel": "Koeffizient",
+        "exponentLabel": "Exponent",
+        "coefficientPlaceholder": "Koeffizient",
+        "exponentPlaceholder": "Exponent"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "divideByZero": "Division durch einen Wert mit dem Koeffizienten null ist nicht möglich.",
+        "standardForm": "Standardform: {value}",
+        "engineeringForm": "Technische Notation: {coefficient} × 10^{exponent}",
+        "numberName": "Das entspricht etwa {coefficient} {name}.",
+        "diagramCaption": "Position von 10^{exponent} auf einer logarithmischen Größenordnungsskala.",
+        "stepToScientific": "Das Dezimalkomma von {standard} wurde verschoben, bis genau eine Ziffer ungleich null davor stand — {exponent} Stellen —, wodurch ein Koeffizient zwischen 1 und 10 entstand.",
+        "stepToStandard": "Das Dezimalkomma von {coefficient} wurde um {exponent} Stellen verschoben, um es in die Standardform zu bringen.",
+        "stepMultiply": "Die Koeffizienten wurden multipliziert ({coeffA} × {coeffB} = {rawCoeff}) und die Exponenten addiert ({expA} + {expB} = {rawExp}), anschließend wurde auf einen Koeffizienten zwischen 1 und 10 renormiert.",
+        "stepDivide": "Die Koeffizienten wurden dividiert ({coeffA} ÷ {coeffB}) und die Exponenten subtrahiert ({expA} − {expB} = {rawExp}), anschließend wurde auf einen Koeffizienten zwischen 1 und 10 renormiert.",
+        "numberNames": {
+          "thousand": "Tausend",
+          "million": "Million",
+          "billion": "Milliarde",
+          "trillion": "Billion",
+          "quadrillion": "Billiarde",
+          "thousandth": "Tausendstel",
+          "millionth": "Millionstel",
+          "billionth": "Milliardstel",
+          "trillionth": "Billionstel"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Wissenschaftliche Notation verstehen",
+          "paragraph1": "Die wissenschaftliche Notation schreibt jede Zahl als Koeffizienten zwischen 1 und 10, multipliziert mit einer Zehnerpotenz, etwa 1,234 × 10^8 statt 123.400.000. Der Exponent zählt, um wie viele Stellen sich das Dezimalkomma von der Standardzahl bis zu dieser einen führenden Ziffer verschoben hat — ein positiver Exponent für große Zahlen, ein negativer für Zahlen kleiner als 1. Dadurch lassen sich Zahlen, die sonst eine lange Ziffernfolge wären, viel leichter lesen, vergleichen und berechnen.",
+          "diagram": {
+            "caption": "Die Avogadro-Konstante, 6,02 × 10^23, liegt auf einer logarithmischen Größenordnungsskala weit rechts."
+          },
+          "paragraph2": "Die technische Notation ist eng verwandt, beschränkt den Exponenten aber auf ein Vielfaches von 3, passend zu den in Wissenschaft und Technik verwendeten SI-Vorsätzen (Kilo-, Mega-, Giga-, Milli-, Mikro-, Nano-) — 1,5 × 10^8 in wissenschaftlicher Notation wird in technischer Notation zu 150 × 10^6, sofort lesbar als „150 Millionen“. Dieses Tool zeigt für jedes Ergebnis beide Formen an, zusammen mit dem gebräuchlichen Namen der Größenordnung, sofern die Zahl in einen üblicherweise benannten Bereich fällt.",
+          "paragraph3": "Das Multiplizieren oder Dividieren von Zahlen, die bereits in wissenschaftlicher Notation vorliegen, folgt zwei einfachen Regeln: die Koeffizienten werden direkt multipliziert (oder dividiert), und die Exponenten addiert (oder subtrahiert) — eine unmittelbare Folge der Potenzgesetze. Das Ergebnis wird anschließend renormiert, falls der Koeffizient außerhalb des Bereichs von 1 bis 10 liegt, genau wie es dieses Tool automatisch tut."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Je ein Beispiel für jede von diesem Tool unterstützte Rechenart.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "123.400.000 in wissenschaftlicher Notation", "result": "1,234 × 10^8" },
+            { "calculation": "6,02 × 10^23 in Standardform", "result": "602.000.000.000.000.000.000.000" },
+            { "calculation": "(5 × 10^3) × (3 × 10^4)", "result": "1,5 × 10^8" },
+            { "calculation": "(6 × 10^7) ÷ (2 × 10^3)", "result": "3 × 10^4" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum muss der Koeffizient in wissenschaftlicher Notation immer zwischen 1 und 10 liegen?",
+              "answer": "Das ist eine Konvention, die sicherstellt, dass jede Zahl genau eine standardisierte wissenschaftliche Form hat, wodurch sich Zahlen auf einen Blick vergleichen lassen: Wer den größeren Exponenten hat, hat unabhängig vom Koeffizienten die größere Zahl. 12,34 × 10^7 statt 1,234 × 10^8 zu schreiben ist mathematisch gleichwertig, gilt aber als nicht normiert, da dieser Vergleich auf einen Blick dadurch nicht mehr funktioniert."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen wissenschaftlicher Notation und technischer Notation?",
+              "answer": "Die wissenschaftliche Notation verwendet immer genau eine Ziffer ungleich null vor dem Dezimalkomma. Die technische Notation beschränkt den Exponenten stattdessen auf ein Vielfaches von 3 und erlaubt dadurch 1 bis 3 Ziffern vor dem Komma — gerade damit der Exponent zu den in Wissenschaft und Technik verwendeten SI-Vorsätzen passt (10^3 = Kilo, 10^6 = Mega, 10^9 = Giga usw.)."
+            },
+            {
+              "question": "Warum addiere ich Exponenten beim Multiplizieren, subtrahiere sie aber beim Dividieren?",
+              "answer": "Das folgt direkt aus den Potenzgesetzen: Beim Multiplizieren von Potenzen derselben Basis werden die Exponenten addiert (10^3 × 10^4 = 10^7), beim Dividieren subtrahiert (10^7 ÷ 10^3 = 10^4). Multiplikation und Division in wissenschaftlicher Notation wenden diese Regel auf den Zehnerpotenz-Teil an, während die Koeffizienten ganz gewöhnlich multipliziert oder dividiert werden."
+            },
+            {
+              "question": "Warum bedeutet ein negativer Exponent eine Zahl kleiner als 1?",
+              "answer": "Ein negativer Exponent stellt einen Kehrwert dar: 10^-3 bedeutet 1/10^3, also 0,001. Somit bedeutet 5 × 10^-4 gleich 5 × 0,0001, was 0,0005 entspricht — je negativer der Exponent, desto kleiner die Zahl."
+            },
+            {
+              "question": "Kann der Koeffizient in wissenschaftlicher Notation negativ sein?",
+              "answer": "Ja. Eine negative Zahl trägt in wissenschaftlicher Notation einfach einen negativen Koeffizienten, etwa -2,5 × 10^6 für -2.500.000. Nur das Vorzeichen des Koeffizienten ändert sich; der Exponent beschreibt die Größenordnung, nicht das Vorzeichen."
+            },
+            {
+              "question": "Wo wird wissenschaftliche Notation im Alltag der Naturwissenschaften verwendet?",
+              "answer": "Astronomie (Entfernungen in Lichtjahren, Massen von Sternen), Chemie (Avogadro-Konstante, atomare und molekulare Massen), Physik (Lichtgeschwindigkeit, Plancksches Wirkungsquantum) und Informatik (Byte-Größen, Prozessortaktfrequenzen) beruhen alle auf wissenschaftlicher Notation, weil die beteiligten Größen zu groß oder zu klein sind, um bequem in Standardform geschrieben zu werden."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Archimedes und der Sandrechner",
+            "paragraph": "Lange bevor es eine Konvention auf Basis der Zahl zehn gab, befasste sich der griechische Mathematiker Archimedes mit demselben grundlegenden Problem, das diese Notation löst: Zahlen zu benennen, die für gewöhnliches Zählen zu groß sind. In seinem Sandrechner (3. Jahrhundert v. Chr.), gerichtet an König Gelon von Syrakus, wollte er zeigen, dass die Sandkörner, die nötig wären, um das gesamte Universum zu füllen, eine endliche, benennbare Zahl sind — nicht „unendlich“, wie allgemein angenommen. Da die griechischen Zahlzeichen keinen Namen für etwas jenseits einer Myriade (10.000) kannten, erfand Archimedes eine eigene Hierarchie von „Ordnungen“ von Zahlen, von denen jede als Potenz der vorherigen aufgebaut ist, zusammen mit einer Regel zu ihrer Kombination, die mathematisch dem modernen Potenzgesetz bᵐ × bⁿ = bᵐ⁺ⁿ entspricht. Anhand vorsichtiger Schätzungen zur Größe des Kosmos kam er zu dem Schluss, dass weniger als zehn Millionen Einheiten seiner achten Zahlenordnung — in der Größenordnung von 10^63 Körnern — genügen würden, um es zu füllen. Da seine Grundeinheit 10^8 und nicht 10 war, handelt es sich nicht um wissenschaftliche Notation in ihrer modernen Form, wohl aber um dieselbe Grundidee: gewaltige Größenordnungen mittels einer systematischen, auf Exponenten beruhenden Hierarchie zu benennen, statt eine endlose Ziffernfolge zu schreiben."
+          },
+          "modernDevelopments": {
+            "title": "Vom Rechenschieber zur Taschenrechneranzeige",
+            "paragraph": "Die wissenschaftliche Notation wurde mit dem Rechenschieber zu einem praktischen Alltagswerkzeug: Er führt Multiplikation und Division aus, indem er Logarithmen mechanisch addiert und subtrahiert — eine physische Umsetzung derselben Potenzgesetze, die auch dieses Tool nutzt. Mit dem Aufkommen elektronischer Taschenrechner übernahmen Displays, die zu schmal für eine lange Ziffernfolge waren, eine kompakte Kurzschreibweise namens „E-Notation“ für dieselbe Idee und schrieben 1,234 × 10^8 als 1.234E8 — eine Konvention, die bis heute in Tabellenkalkulationen, Programmiersprachen und wissenschaftlichen Instrumenten verwendet wird, sobald ein Wert die Anzeige sonst überlaufen ließe."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die wissenschaftliche Notation ist ein grundlegendes Werkzeug der umfassenderen Disziplin Mathematik. Hier sind die weltweit 5 besten Universitäten für Mathematik im QS World University Rankings by Subject 2025, zusätzlich zu einer regionalen Option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "Nein — der Mathematik-Graduiertenstudiengang des MIT ist ein Vollzeit-Präsenzstudiengang ohne beworbene Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "Nein — die offizielle Programmseite gibt an, dass sich die Studierenden in Cambridge, Massachusetts, befinden; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "Nein — das DPhil in Mathematik setzt Anwesenheit in Oxford voraus, es gibt keine Fernstudienoption."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "Nein — die Promotion in Reiner Mathematik und Mathematischer Statistik ist ein forschungsbasiertes, vor Ort betreutes Programm in Vollzeit oder Teilzeit; ein Online-Modus wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Nein — Stanford gibt ausdrücklich an, dass von Promotionsstudierenden während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus erwartet wird."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "Eine führende Universität der Vereinigten Arabischen Emirate mit einem Promotionsprogramm in Mathematik.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "Nein — der offizielle Studienkatalog gibt Vollzeit als Studienform an."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Heath, T. L. (Ed. & Trans.). (1897). The Works of Archimedes. Cambridge University Press. \"The Sand-Reckoner,\" pp. 221–232.",
+          "note": "Heaths Übersetzung des Sandrechners dokumentiert Archimedes' System zur Benennung und Eingrenzung gewaltiger Mengen mittels einer Hierarchie numerischer „Ordnungen“, einschließlich einer Regel zur Kombination von Exponenten, die dem modernen Gesetz bᵐ × bⁿ = bᵐ⁺ⁿ entspricht.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

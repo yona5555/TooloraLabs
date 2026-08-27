@@ -4120,6 +4120,177 @@
         }
       }
     },
+    "scientific-notation-converter": {
+      "title": "Convertisseur de Notation Scientifique",
+      "description": "Convertissez des nombres entre la forme standard et la notation scientifique, et multipliez ou divisez des valeurs déjà en notation scientifique, avec la notation ingénieur et les noms des grandeurs.",
+      "nav": {
+        "tool": "Convertisseur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Puissances de Dix",
+          "intro": "Les noms courants des puissances de dix, d'un billionième à un billiard.",
+          "columnPower": "Puissance",
+          "columnName": "Nom"
+        }
+      },
+      "form": {
+        "inputTitle": "Votre Nombre",
+        "operationLabel": "Opération",
+        "operation": {
+          "toScientific": "Standard → Scientifique",
+          "toStandard": "Scientifique → Standard",
+          "multiply": "Multiplication (×)",
+          "divide": "Division (÷)"
+        },
+        "standardValueLabel": "Nombre Standard",
+        "standardValuePlaceholder": "ex. 299792458",
+        "yourNumberLabel": "Votre Nombre",
+        "firstNumberLabel": "Premier Nombre",
+        "secondNumberLabel": "Second Nombre",
+        "coefficientLabel": "Coefficient",
+        "exponentLabel": "Exposant",
+        "coefficientPlaceholder": "Coefficient",
+        "exponentPlaceholder": "Exposant"
+      },
+      "result": {
+        "heading": "Résultat",
+        "divideByZero": "Impossible de diviser par une valeur dont le coefficient est nul.",
+        "standardForm": "Forme standard : {value}",
+        "engineeringForm": "Notation ingénieur : {coefficient} × 10^{exponent}",
+        "numberName": "Soit environ {coefficient} {name}.",
+        "diagramCaption": "Position de 10^{exponent} sur une échelle logarithmique de grandeur.",
+        "stepToScientific": "La virgule décimale de {standard} a été déplacée jusqu'à ce qu'il ne reste qu'un seul chiffre non nul avant elle — {exponent} positions —, donnant un coefficient compris entre 1 et 10.",
+        "stepToStandard": "La virgule décimale de {coefficient} a été déplacée de {exponent} positions pour l'exprimer sous forme standard.",
+        "stepMultiply": "Les coefficients ont été multipliés ({coeffA} × {coeffB} = {rawCoeff}) et les exposants additionnés ({expA} + {expB} = {rawExp}), puis le résultat a été renormalisé pour garder un coefficient compris entre 1 et 10.",
+        "stepDivide": "Les coefficients ont été divisés ({coeffA} ÷ {coeffB}) et les exposants soustraits ({expA} − {expB} = {rawExp}), puis le résultat a été renormalisé pour garder un coefficient compris entre 1 et 10.",
+        "numberNames": {
+          "thousand": "mille",
+          "million": "million",
+          "billion": "milliard",
+          "trillion": "billion",
+          "quadrillion": "billiard",
+          "thousandth": "millième",
+          "millionth": "millionième",
+          "billionth": "milliardième",
+          "trillionth": "billionième"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Notation Scientifique",
+          "paragraph1": "La notation scientifique écrit tout nombre sous la forme d'un coefficient compris entre 1 et 10 multiplié par une puissance de dix, comme 1,234 × 10^8 au lieu de 123 400 000. L'exposant compte le nombre de positions dont la virgule décimale s'est déplacée entre le nombre standard et ce seul chiffre initial — un exposant positif pour les grands nombres, un exposant négatif pour les nombres inférieurs à 1. Cela rend beaucoup plus facile la lecture, la comparaison et le calcul de nombres qui seraient autrement une longue suite de chiffres.",
+          "diagram": {
+            "caption": "Le nombre d'Avogadro, 6,02 × 10^23, se situe très à droite sur une échelle logarithmique de grandeur."
+          },
+          "paragraph2": "La notation ingénieur est une proche parente qui limite l'exposant à un multiple de 3, en accord avec les préfixes métriques (kilo-, méga-, giga-, milli-, micro-, nano-) utilisés dans toutes les sciences et l'ingénierie — 1,5 × 10^8 en notation scientifique devient 150 × 10^6 en notation ingénieur, lisible immédiatement comme « 150 millions ». Cet outil affiche les deux formes pour chaque résultat, ainsi que le nom courant de la grandeur lorsque le nombre se situe dans une plage couramment nommée.",
+          "paragraph3": "Multiplier ou diviser des nombres déjà en notation scientifique suit deux règles simples : multiplier (ou diviser) directement les coefficients, et additionner (ou soustraire) les exposants — une conséquence directe des lois des exposants. Le résultat est ensuite renormalisé si le coefficient sort de la plage de 1 à 10, exactement comme le fait automatiquement cet outil."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Un exemple résolu pour chaque opération prise en charge par cet outil.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "123 400 000 en notation scientifique", "result": "1,234 × 10^8" },
+            { "calculation": "6,02 × 10^23 sous forme standard", "result": "602 000 000 000 000 000 000 000" },
+            { "calculation": "(5 × 10^3) × (3 × 10^4)", "result": "1,5 × 10^8" },
+            { "calculation": "(6 × 10^7) ÷ (2 × 10^3)", "result": "3 × 10^4" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi le coefficient en notation scientifique doit-il toujours être compris entre 1 et 10 ?",
+              "answer": "C'est une convention qui garantit à chaque nombre une seule forme scientifique standard, ce qui permet de comparer les nombres d'un coup d'œil : celui qui a l'exposant le plus grand est le plus grand nombre, quel que soit le coefficient. Écrire 12,34 × 10^7 au lieu de 1,234 × 10^8 est mathématiquement égal, mais qualifié de non normalisé, car cela rompt cette comparaison instantanée."
+            },
+            {
+              "question": "Quelle est la différence entre la notation scientifique et la notation ingénieur ?",
+              "answer": "La notation scientifique utilise toujours exactement un chiffre non nul avant la virgule décimale. La notation ingénieur limite quant à elle l'exposant à un multiple de 3, ce qui autorise 1 à 3 chiffres avant la virgule, précisément pour que l'exposant corresponde aux préfixes métriques (10^3 = kilo, 10^6 = méga, 10^9 = giga, et ainsi de suite) utilisés dans toutes les sciences et l'ingénierie."
+            },
+            {
+              "question": "Pourquoi additionne-t-on les exposants en multipliant, mais les soustrait-on en divisant ?",
+              "answer": "Cela découle directement des lois des exposants : multiplier des puissances de même base additionne leurs exposants (10^3 × 10^4 = 10^7), et les diviser les soustrait (10^7 ÷ 10^3 = 10^4). La multiplication et la division en notation scientifique appliquent cette règle à la partie « puissance de dix », tandis que les coefficients sont multipliés ou divisés normalement."
+            },
+            {
+              "question": "Pourquoi un exposant négatif signifie-t-il un nombre inférieur à 1 ?",
+              "answer": "Un exposant négatif représente un inverse : 10^-3 signifie 1/10^3, soit 0,001. Ainsi, 5 × 10^-4 signifie 5 × 0,0001, ce qui équivaut à 0,0005 — plus l'exposant est négatif, plus le nombre est petit."
+            },
+            {
+              "question": "Le coefficient en notation scientifique peut-il être négatif ?",
+              "answer": "Oui. Un nombre négatif en notation scientifique porte simplement un coefficient négatif, comme -2,5 × 10^6 pour -2 500 000. Seul le signe du coefficient change ; l'exposant décrit la grandeur, pas le signe."
+            },
+            {
+              "question": "Où la notation scientifique est-elle utilisée dans les sciences au quotidien ?",
+              "answer": "L'astronomie (distances mesurées en années-lumière, masses des étoiles), la chimie (nombre d'Avogadro, masses atomiques et moléculaires), la physique (vitesse de la lumière, constante de Planck) et l'informatique (tailles en octets, fréquences des processeurs) reposent toutes sur la notation scientifique, car les quantités en jeu sont trop grandes ou trop petites pour être écrites confortablement sous forme standard."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Archimède et L'Arénaire",
+            "paragraph": "Bien avant qu'une convention en base dix n'existe, le mathématicien grec Archimède s'est attaqué au même problème de fond que résout cette notation : nommer des nombres trop grands pour un dénombrement ordinaire. Dans L'Arénaire (IIIe siècle av. J.-C.), adressé au roi Gélon de Syracuse, il entreprit de démontrer que le nombre de grains de sable nécessaires pour remplir l'univers entier était fini et nommable, et non « infini », comme on le croyait communément. Les numéraux grecs n'ayant pas de nom au-delà d'une myriade (10 000), Archimède inventa sa propre hiérarchie d'« ordres » de nombres, chacun construit comme une puissance du précédent, avec une règle de combinaison mathématiquement identique à la loi moderne des exposants bᵐ × bⁿ = bᵐ⁺ⁿ. À partir d'estimations prudentes de la taille du cosmos, il conclut que moins de dix millions d'unités de son huitième ordre de nombres — de l'ordre de 10^63 grains — suffiraient à le remplir. Son unité de base étant 10^8 et non 10, il ne s'agit pas de la notation scientifique sous sa forme moderne, mais bien de la même idée fondamentale : nommer des grandeurs immenses au moyen d'une hiérarchie systématique fondée sur les exposants, plutôt que d'écrire une suite interminable de chiffres."
+          },
+          "modernDevelopments": {
+            "title": "Des Règles à Calcul aux Écrans des Calculatrices",
+            "paragraph": "La notation scientifique est devenue un outil pratique du quotidien avec la règle à calcul, qui effectue multiplications et divisions en additionnant et soustrayant mécaniquement des logarithmes — une incarnation physique des mêmes lois des exposants qu'utilise cet outil. Avec l'arrivée des calculatrices électroniques, les écrans trop étroits pour afficher une longue suite de chiffres ont adopté un raccourci compact appelé « notation E », écrivant 1,234 × 10^8 sous la forme 1.234E8 — une convention encore utilisée aujourd'hui dans les tableurs, les langages de programmation et les instruments scientifiques dès qu'une valeur dépasserait la capacité d'affichage."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La notation scientifique est un outil fondamental de la discipline plus large des mathématiques. Voici les 5 meilleures universités mondiales en Mathématiques selon le QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "Non — le programme de troisième cycle en mathématiques du MIT est un diplôme en présentiel à temps plein, sans filière en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "Non — la page officielle du programme indique que les étudiants résident à Cambridge, dans le Massachusetts, sans mentionner d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "Non — le doctorat (DPhil) en mathématiques exige une présence à Oxford, sans option d'enseignement à distance."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "Non — le doctorat en mathématiques pures et statistique mathématique est un programme de recherche encadré sur le campus, à temps plein ou partiel, sans aucune modalité en ligne indiquée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Non — Stanford indique explicitement que les doctorants doivent maintenir une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "Une université émiratie reconnue proposant un doctorat en mathématiques.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "Non — le catalogue officiel du programme indique que la formation se déroule à temps plein."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Heath, T. L. (Ed. & Trans.). (1897). The Works of Archimedes. Cambridge University Press. \"The Sand-Reckoner,\" pp. 221–232.",
+          "note": "La traduction de Heath de L'Arénaire documente le système d'Archimède pour nommer et borner des quantités immenses au moyen d'une hiérarchie d'« ordres » numériques, incluant une règle de combinaison des exposants équivalente à la loi moderne bᵐ × bⁿ = bᵐ⁺ⁿ.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Lire le texte original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

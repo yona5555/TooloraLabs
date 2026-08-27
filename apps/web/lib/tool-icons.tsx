@@ -28,6 +28,7 @@ import {
   QrCode,
   Ratio,
   ScanBarcode,
+  Superscript,
   Receipt,
   ReceiptText,
   Ruler,
@@ -46,6 +47,7 @@ import {
 export const toolIcons: Record<string, LucideIcon> = {
   "scientific-calculator": Sigma,
   "fraction-calculator": Divide,
+  "scientific-notation-converter": Superscript,
   "age-calculator": Calendar,
   "bmi-calculator": Scale,
   "ideal-weight-calculator": Weight,
