@@ -59,6 +59,8 @@ import StatisticsCalculator from "@/components/tools/statistics-calculator/Stati
 import StatisticsEducation from "@/components/tools/statistics-calculator/StatisticsEducation";
 import MolarityCalculator from "@/components/tools/molarity-calculator/MolarityCalculator";
 import MolarityEducation from "@/components/tools/molarity-calculator/MolarityEducation";
+import IdealGasLawCalculator from "@/components/tools/ideal-gas-law-calculator/IdealGasLawCalculator";
+import GasLawEducation from "@/components/tools/ideal-gas-law-calculator/GasLawEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -353,6 +355,9 @@ export default async function ToolPage({
     case "molarity-calculator":
       component = <MolarityCalculator education={<MolarityEducation />} />;
       break;
+    case "ideal-gas-law-calculator":
+      component = <IdealGasLawCalculator education={<GasLawEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -445,6 +450,7 @@ export default async function ToolPage({
     slug === "ph-calculator" ||
     slug === "statistics-calculator" ||
     slug === "molarity-calculator" ||
+    slug === "ideal-gas-law-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

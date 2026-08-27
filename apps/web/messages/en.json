@@ -5441,6 +5441,164 @@
         }
       }
     },
+    "ideal-gas-law-calculator": {
+      "title": "Ideal Gas Law Calculator",
+      "description": "Solve for pressure, volume, moles, or temperature using the ideal gas law, PV = nRT, with a dynamic gas cylinder diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Ideal Gas Law Reference",
+          "intro": "The formula and constant this calculator applies.",
+          "formulas": {
+            "idealGasLaw": { "label": "Ideal Gas Law", "expression": "PV = nRT" },
+            "gasConstant": { "label": "Gas Constant R", "expression": "0.0820574 L·atm / (mol·K)" },
+            "stp": { "label": "Molar Volume at STP", "expression": "22.414 L/mol at 1 atm, 273.15 K" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "solveForLabel": "Solve For",
+        "solveFor": {
+          "pressure": "Pressure (P)",
+          "volume": "Volume (V)",
+          "moles": "Moles (n)",
+          "temperature": "Temperature (T)"
+        },
+        "pressureLabel": "Pressure (atm)",
+        "pressurePlaceholder": "e.g. 1",
+        "volumeLabel": "Volume (L)",
+        "volumePlaceholder": "e.g. 22.414",
+        "molesLabel": "Moles (mol)",
+        "molesPlaceholder": "e.g. 1",
+        "temperatureLabel": "Temperature (K)",
+        "temperaturePlaceholder": "e.g. 273.15"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroVolume": "Volume must be greater than zero to solve for pressure.",
+        "zeroPressure": "Pressure must be greater than zero to solve for volume.",
+        "zeroTemperature": "Temperature must be greater than zero to solve for moles.",
+        "zeroMoles": "Moles must be greater than zero to solve for temperature.",
+        "pressure": "Pressure",
+        "volume": "Volume",
+        "moles": "Moles",
+        "temperature": "Temperature",
+        "diagramCaption": "Piston height reflects volume, particle count reflects moles, and color reflects temperature."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding the Ideal Gas Law",
+          "paragraph1": "The ideal gas law, PV = nRT, relates the four measurable properties of an ideal gas: pressure (P), volume (V), amount of substance in moles (n), and absolute temperature (T) in kelvins, connected by the universal gas constant R (0.0820574 L·atm per mol·K when pressure is in atmospheres and volume in liters). Given any three of the four quantities, the equation solves directly for the fourth.",
+          "diagram": {
+            "caption": "One mole of an ideal gas at standard temperature and pressure (0°C, 1 atm) occupies 22.414 liters."
+          },
+          "paragraph2": "The equation is a combination of three simpler, independently discovered relationships: Boyle's law (pressure and volume are inversely proportional at constant temperature), Charles's law (volume and temperature are directly proportional at constant pressure), and Avogadro's law (volume and moles are directly proportional at constant pressure and temperature). Combined, these three proportionalities produce the single unified equation PV = nRT.",
+          "paragraph3": "The \"ideal\" in ideal gas law describes a simplifying model: it assumes gas particles have no volume of their own and no attractive or repulsive forces between them. Real gases only approximate this behavior, deviating most under high pressure or low temperature, where molecular size and intermolecular forces become significant — but at ordinary pressures and temperatures, most gases follow the ideal gas law closely enough for practical calculations."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Solving for each quantity using the same gas sample.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "1 mol at 1 atm, 273.15 K", "result": "22.414 L (molar volume at STP)" },
+            { "calculation": "1 mol occupying 22.414 L at 273.15 K", "result": "1 atm" },
+            { "calculation": "1 atm, 22.414 L, 273.15 K", "result": "1 mol" },
+            { "calculation": "1 mol, 1 atm, 22.414 L", "result": "273.15 K" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does temperature have to be in kelvins, not Celsius or Fahrenheit?",
+              "answer": "The ideal gas law is a direct proportionality between volume (or pressure) and temperature, which only holds true when temperature is measured from absolute zero — the point at which gas particles theoretically have zero kinetic energy. The kelvin scale starts at absolute zero, while Celsius and Fahrenheit use arbitrary zero points, which would make the proportionality break down and could even produce negative or undefined results."
+            },
+            {
+              "question": "What exactly is \"standard temperature and pressure\" (STP)?",
+              "answer": "STP is a reference condition used to make gas measurements comparable: historically 0°C (273.15 K) and 1 atm, at which one mole of any ideal gas occupies 22.414 L — a convenient reference figure used throughout chemistry. Note that IUPAC's more recent recommended standard uses 100 kPa (0.9869 atm) instead of 1 atm, giving a very slightly different molar volume of 22.711 L; this calculator uses the older, still widely taught 1 atm convention."
+            },
+            {
+              "question": "Why do real gases deviate from the ideal gas law?",
+              "answer": "The ideal gas law assumes gas particles are point masses with zero volume and no intermolecular forces, which is only approximately true. At high pressure, gas particles are pushed close enough together that their actual volume becomes significant relative to the container's volume; at low temperature, weak attractive forces between molecules become significant relative to their reduced kinetic energy — both effects cause real gas behavior to diverge from the ideal prediction."
+            },
+            {
+              "question": "How is the ideal gas law related to Boyle's, Charles's, and Avogadro's laws?",
+              "answer": "Each of those laws describes how two gas properties relate while holding the others constant: Boyle's law holds temperature and moles constant to relate pressure and volume, Charles's law holds pressure and moles constant to relate volume and temperature, and Avogadro's law holds pressure and temperature constant to relate volume and moles. The ideal gas law generalizes all three into one equation that holds even when several properties change simultaneously."
+            },
+            {
+              "question": "Can the ideal gas law be used for mixtures of different gases?",
+              "answer": "Yes — for a mixture of ideal gases, n in PV = nRT can represent the total moles of all gas species combined, and the resulting P is the total pressure of the mixture. This connects to Dalton's law of partial pressures, which states that the total pressure of a gas mixture equals the sum of the pressures each gas would exert if it alone occupied the same volume."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "Combining a Century of Separate Discoveries",
+            "paragraph": "The ideal gas law was first written as a single combined equation in 1834 by French engineer Benoît Paul Émile Clapeyron, in his influential memoir on the Carnot cycle, one of the foundational works of thermodynamics. Clapeyron merged the already-established relationships credited to Robert Boyle (1662) and Joseph Louis Gay-Lussac (1802, building on earlier unpublished work by Jacques Charles), writing the combined equation as pv = R(267 + t). In 1845, French chemist Henri Victor Regnault incorporated Amedeo Avogadro's hypothesis to recast the equation into its now-familiar molar form, PV = nRT. The constant's letter itself, R, has no definitively documented origin — chemistry historian William Jensen notes the most plausible explanation is that it stood for \"ratio,\" since Clapeyron observed that the constant's value differed from gas to gas until Avogadro's and Regnault's later molar formulation made it universal."
+          },
+          "modernDevelopments": {
+            "title": "Where the Ideal Gas Law Still Applies",
+            "paragraph": "Despite being over 180 years old and known to be only an approximation, the ideal gas law remains a working tool across chemistry, physics, and engineering wherever gas behavior at ordinary pressures and temperatures needs to be estimated quickly — from calculating reaction stoichiometry involving gaseous products to sizing industrial gas storage and modeling atmospheric behavior. When greater accuracy is needed under extreme conditions, more complex equations of state, such as the van der Waals equation, account for the molecular volume and intermolecular forces the ideal gas law deliberately ignores."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The ideal gas law and gas behavior are foundational topics within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — the PhD in Chemistry and Chemical Biology is a full-time, in-person program built around laboratory research residency."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "No — full-time PhD students are required to reside in Cambridge for their laboratory-based research, with no online option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — the DPhil requires full-time residence in Oxford for supervised laboratory research."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Chemical Science — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "No — the program follows an on-campus, laboratory-based research model centered on the university's catalysis and materials research centers."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Jensen, W. B. (2003). The Universal Gas Constant R. Journal of Chemical Education, 80(7), 731–732.",
+          "note": "Chemistry historian William Jensen traces the ideal gas law from Clapeyron's 1834 combined equation through Regnault's 1845 molar reformulation, and examines the uncertain origin of the letter R itself.",
+          "url": "https://doi.org/10.1021/ed080p731",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

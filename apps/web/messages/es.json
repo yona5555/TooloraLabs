@@ -5445,6 +5445,164 @@
         }
       }
     },
+    "ideal-gas-law-calculator": {
+      "title": "Calculadora de la Ley de los Gases Ideales",
+      "description": "Calcula la presión, el volumen, los moles o la temperatura usando la ley de los gases ideales, PV = nRT, con un diagrama dinámico de cilindro de gas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Referencia de la Ley de los Gases Ideales",
+          "intro": "La fórmula y la constante que aplica esta calculadora.",
+          "formulas": {
+            "idealGasLaw": { "label": "Ley de los Gases Ideales", "expression": "PV = nRT" },
+            "gasConstant": { "label": "Constante de los Gases R", "expression": "0.0820574 L·atm / (mol·K)" },
+            "stp": { "label": "Volumen Molar en TPE", "expression": "22.414 L/mol a 1 atm, 273.15 K" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valores Conocidos",
+        "solveForLabel": "Calcular",
+        "solveFor": {
+          "pressure": "Presión (P)",
+          "volume": "Volumen (V)",
+          "moles": "Moles (n)",
+          "temperature": "Temperatura (T)"
+        },
+        "pressureLabel": "Presión (atm)",
+        "pressurePlaceholder": "p. ej. 1",
+        "volumeLabel": "Volumen (L)",
+        "volumePlaceholder": "p. ej. 22.414",
+        "molesLabel": "Moles (mol)",
+        "molesPlaceholder": "p. ej. 1",
+        "temperatureLabel": "Temperatura (K)",
+        "temperaturePlaceholder": "p. ej. 273.15"
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroVolume": "El volumen debe ser mayor que cero para calcular la presión.",
+        "zeroPressure": "La presión debe ser mayor que cero para calcular el volumen.",
+        "zeroTemperature": "La temperatura debe ser mayor que cero para calcular los moles.",
+        "zeroMoles": "Los moles deben ser mayores que cero para calcular la temperatura.",
+        "pressure": "Presión",
+        "volume": "Volumen",
+        "moles": "Moles",
+        "temperature": "Temperatura",
+        "diagramCaption": "La altura del pistón refleja el volumen, el número de partículas refleja los moles, y el color refleja la temperatura."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo la Ley de los Gases Ideales",
+          "paragraph1": "La ley de los gases ideales, PV = nRT, relaciona las cuatro propiedades medibles de un gas ideal: presión (P), volumen (V), cantidad de sustancia en moles (n) y temperatura absoluta (T) en kelvin, conectadas por la constante universal de los gases R (0.0820574 L·atm por mol·K cuando la presión está en atmósferas y el volumen en litros). Conocidas tres cualesquiera de las cuatro cantidades, la ecuación resuelve directamente la cuarta.",
+          "diagram": {
+            "caption": "Un mol de un gas ideal en condiciones estándar de temperatura y presión (0 °C, 1 atm) ocupa 22.414 litros."
+          },
+          "paragraph2": "La ecuación combina tres relaciones más simples descubiertas de forma independiente: la ley de Boyle (presión y volumen son inversamente proporcionales a temperatura constante), la ley de Charles (volumen y temperatura son directamente proporcionales a presión constante) y la ley de Avogadro (volumen y moles son directamente proporcionales a presión y temperatura constantes). Combinadas, estas tres proporcionalidades producen la única ecuación unificada PV = nRT.",
+          "paragraph3": "Lo «ideal» en la ley de los gases ideales describe un modelo simplificador: supone que las partículas de gas no tienen volumen propio ni fuerzas de atracción o repulsión entre ellas. Los gases reales solo se aproximan a este comportamiento, desviándose más bajo alta presión o baja temperatura, donde el tamaño molecular y las fuerzas intermoleculares se vuelven significativos; pero a presiones y temperaturas ordinarias, la mayoría de los gases siguen la ley de los gases ideales con suficiente precisión para cálculos prácticos."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Calculando cada cantidad usando la misma muestra de gas.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "1 mol a 1 atm, 273.15 K", "result": "22.414 L (volumen molar en TPE)" },
+            { "calculation": "1 mol que ocupa 22.414 L a 273.15 K", "result": "1 atm" },
+            { "calculation": "1 atm, 22.414 L, 273.15 K", "result": "1 mol" },
+            { "calculation": "1 mol, 1 atm, 22.414 L", "result": "273.15 K" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué la temperatura debe estar en kelvin y no en Celsius o Fahrenheit?",
+              "answer": "La ley de los gases ideales es una proporcionalidad directa entre el volumen (o la presión) y la temperatura, que solo se cumple cuando la temperatura se mide desde el cero absoluto, el punto en el que las partículas de gas tienen teóricamente energía cinética nula. La escala kelvin comienza en el cero absoluto, mientras que Celsius y Fahrenheit usan puntos cero arbitrarios, lo que rompería la proporcionalidad e incluso podría producir resultados negativos o indefinidos."
+            },
+            {
+              "question": "¿Qué son exactamente las «condiciones estándar de temperatura y presión» (TPE)?",
+              "answer": "El TPE es una condición de referencia usada para hacer comparables las mediciones de gases: históricamente 0 °C (273.15 K) y 1 atm, en las que un mol de cualquier gas ideal ocupa 22.414 L, una cifra de referencia conveniente usada en toda la química. Cabe señalar que la recomendación más reciente de la IUPAC usa 100 kPa (0.9869 atm) en lugar de 1 atm, lo que da un volumen molar ligeramente distinto de 22.711 L; esta calculadora usa la convención más antigua de 1 atm, aún ampliamente enseñada."
+            },
+            {
+              "question": "¿Por qué los gases reales se desvían de la ley de los gases ideales?",
+              "answer": "La ley de los gases ideales supone que las partículas de gas son masas puntuales sin volumen y sin fuerzas intermoleculares, lo cual solo es aproximadamente cierto. A alta presión, las partículas de gas se ven forzadas a estar lo bastante cerca como para que su volumen real se vuelva significativo respecto al volumen del contenedor; a baja temperatura, las fuerzas de atracción débiles entre moléculas se vuelven significativas respecto a su energía cinética reducida; ambos efectos hacen que el comportamiento del gas real diverja de la predicción ideal."
+            },
+            {
+              "question": "¿Cómo se relaciona la ley de los gases ideales con las leyes de Boyle, Charles y Avogadro?",
+              "answer": "Cada una de esas leyes describe cómo se relacionan dos propiedades del gas manteniendo las demás constantes: la ley de Boyle mantiene constantes la temperatura y los moles para relacionar presión y volumen, la ley de Charles mantiene constantes la presión y los moles para relacionar volumen y temperatura, y la ley de Avogadro mantiene constantes la presión y la temperatura para relacionar volumen y moles. La ley de los gases ideales generaliza las tres en una sola ecuación válida incluso cuando varias propiedades cambian simultáneamente."
+            },
+            {
+              "question": "¿Puede usarse la ley de los gases ideales para mezclas de gases distintos?",
+              "answer": "Sí — para una mezcla de gases ideales, n en PV = nRT puede representar los moles totales de todas las especies de gas combinadas, y la P resultante es la presión total de la mezcla. Esto se conecta con la ley de Dalton de las presiones parciales, que establece que la presión total de una mezcla de gases es igual a la suma de las presiones que cada gas ejercería si ocupara solo el mismo volumen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "La Combinación de un Siglo de Descubrimientos Separados",
+            "paragraph": "La ley de los gases ideales se escribió por primera vez como una sola ecuación combinada en 1834 por el ingeniero francés Benoît Paul Émile Clapeyron, en su influyente memoria sobre el ciclo de Carnot, una de las obras fundacionales de la termodinámica. Clapeyron fusionó las relaciones ya establecidas atribuidas a Robert Boyle (1662) y Joseph Louis Gay-Lussac (1802, basándose en un trabajo previo no publicado de Jacques Charles), escribiendo la ecuación combinada como pv = R(267 + t). En 1845, el químico francés Henri Victor Regnault incorporó la hipótesis de Amedeo Avogadro para reformular la ecuación en su forma molar hoy familiar, PV = nRT. La letra misma de la constante, R, no tiene un origen documentado de forma definitiva; el historiador de la química William Jensen señala que la explicación más plausible es que representaba «ratio» (razón), ya que Clapeyron observó que el valor de la constante difería de un gas a otro hasta que la posterior formulación molar de Avogadro y Regnault la hizo universal."
+          },
+          "modernDevelopments": {
+            "title": "Dónde Sigue Aplicándose la Ley de los Gases Ideales",
+            "paragraph": "A pesar de tener más de 180 años y saberse que es solo una aproximación, la ley de los gases ideales sigue siendo una herramienta de trabajo en química, física e ingeniería siempre que se necesite estimar rápidamente el comportamiento de un gas a presiones y temperaturas ordinarias, desde calcular la estequiometría de reacciones con productos gaseosos hasta dimensionar el almacenamiento industrial de gas y modelar el comportamiento atmosférico. Cuando se necesita mayor precisión en condiciones extremas, ecuaciones de estado más complejas, como la ecuación de van der Waals, tienen en cuenta el volumen molecular y las fuerzas intermoleculares que la ley de los gases ideales ignora deliberadamente."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La ley de los gases ideales y el comportamiento de los gases son temas fundamentales dentro de la química. Estas son las 5 mejores universidades del mundo en Química según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #1 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — el doctorado en Química y Biología Química es un programa presencial de tiempo completo basado en la residencia de investigación en laboratorio."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #2 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #3 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "No — se exige a los estudiantes de doctorado de tiempo completo residir en Cambridge para su investigación de laboratorio, sin opción en línea."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #5 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — el doctorado (DPhil) requiere residencia de tiempo completo en Oxford para la investigación de laboratorio supervisada."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Ciencia Química — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Jensen, W. B. (2003). The Universal Gas Constant R. Journal of Chemical Education, 80(7), 731–732.",
+          "note": "El historiador de la química William Jensen traza la ley de los gases ideales desde la ecuación combinada de Clapeyron de 1834 hasta la reformulación molar de Regnault de 1845, y examina el origen incierto de la propia letra R.",
+          "url": "https://doi.org/10.1021/ed080p731",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

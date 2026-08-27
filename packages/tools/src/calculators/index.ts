@@ -30,3 +30,4 @@ export * from "./OhmsLawCalculator";
 export * from "./PhCalculator";
 export * from "./StatisticsCalculator";
 export * from "./MolarityCalculator";
+export * from "./IdealGasLawCalculator";

@@ -5445,6 +5445,164 @@
         }
       }
     },
+    "ideal-gas-law-calculator": {
+      "title": "Calculateur de la Loi des Gaz Parfaits",
+      "description": "Calculez la pression, le volume, les moles ou la température à l'aide de la loi des gaz parfaits, PV = nRT, avec un diagramme dynamique de cylindre de gaz.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Référence de la Loi des Gaz Parfaits",
+          "intro": "La formule et la constante appliquées par ce calculateur.",
+          "formulas": {
+            "idealGasLaw": { "label": "Loi des Gaz Parfaits", "expression": "PV = nRT" },
+            "gasConstant": { "label": "Constante des Gaz R", "expression": "0.0820574 L·atm / (mol·K)" },
+            "stp": { "label": "Volume Molaire aux CNTP", "expression": "22.414 L/mol à 1 atm, 273.15 K" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valeurs Connues",
+        "solveForLabel": "Calculer",
+        "solveFor": {
+          "pressure": "Pression (P)",
+          "volume": "Volume (V)",
+          "moles": "Moles (n)",
+          "temperature": "Température (T)"
+        },
+        "pressureLabel": "Pression (atm)",
+        "pressurePlaceholder": "p. ex. 1",
+        "volumeLabel": "Volume (L)",
+        "volumePlaceholder": "p. ex. 22.414",
+        "molesLabel": "Moles (mol)",
+        "molesPlaceholder": "p. ex. 1",
+        "temperatureLabel": "Température (K)",
+        "temperaturePlaceholder": "p. ex. 273.15"
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroVolume": "Le volume doit être supérieur à zéro pour calculer la pression.",
+        "zeroPressure": "La pression doit être supérieure à zéro pour calculer le volume.",
+        "zeroTemperature": "La température doit être supérieure à zéro pour calculer les moles.",
+        "zeroMoles": "Les moles doivent être supérieures à zéro pour calculer la température.",
+        "pressure": "Pression",
+        "volume": "Volume",
+        "moles": "Moles",
+        "temperature": "Température",
+        "diagramCaption": "La hauteur du piston reflète le volume, le nombre de particules reflète les moles, et la couleur reflète la température."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Loi des Gaz Parfaits",
+          "paragraph1": "La loi des gaz parfaits, PV = nRT, relie les quatre propriétés mesurables d'un gaz parfait : la pression (P), le volume (V), la quantité de matière en moles (n) et la température absolue (T) en kelvins, reliées par la constante universelle des gaz R (0,0820574 L·atm par mol·K lorsque la pression est en atmosphères et le volume en litres). Trois quelconques des quatre grandeurs étant connues, l'équation résout directement la quatrième.",
+          "diagram": {
+            "caption": "Une mole d'un gaz parfait dans les conditions normales de température et de pression (0 °C, 1 atm) occupe 22,414 litres."
+          },
+          "paragraph2": "L'équation combine trois relations plus simples, découvertes indépendamment : la loi de Boyle (pression et volume sont inversement proportionnels à température constante), la loi de Charles (volume et température sont directement proportionnels à pression constante) et la loi d'Avogadro (volume et moles sont directement proportionnels à pression et température constantes). Combinées, ces trois proportionnalités produisent l'équation unifiée unique PV = nRT.",
+          "paragraph3": "Le terme « parfait » dans loi des gaz parfaits décrit un modèle simplificateur : il suppose que les particules de gaz n'ont pas de volume propre et qu'il n'existe entre elles aucune force d'attraction ou de répulsion. Les gaz réels ne font qu'approcher ce comportement, s'en écartant le plus sous forte pression ou basse température, où la taille moléculaire et les forces intermoléculaires deviennent significatives — mais à pressions et températures ordinaires, la plupart des gaz suivent la loi des gaz parfaits avec une précision suffisante pour des calculs pratiques."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Calcul de chaque grandeur pour un même échantillon de gaz.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "1 mol à 1 atm, 273,15 K", "result": "22,414 L (volume molaire aux CNTP)" },
+            { "calculation": "1 mol occupant 22,414 L à 273,15 K", "result": "1 atm" },
+            { "calculation": "1 atm, 22,414 L, 273,15 K", "result": "1 mol" },
+            { "calculation": "1 mol, 1 atm, 22,414 L", "result": "273,15 K" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi la température doit-elle être en kelvins et non en Celsius ou Fahrenheit ?",
+              "answer": "La loi des gaz parfaits établit une proportionnalité directe entre le volume (ou la pression) et la température, qui ne se vérifie que lorsque la température est mesurée à partir du zéro absolu — le point où les particules de gaz ont théoriquement une énergie cinétique nulle. L'échelle kelvin commence au zéro absolu, tandis que Celsius et Fahrenheit utilisent des points zéro arbitraires, ce qui romprait la proportionnalité et pourrait même produire des résultats négatifs ou indéfinis."
+            },
+            {
+              "question": "Que signifient exactement les « conditions normales de température et de pression » (CNTP) ?",
+              "answer": "Les CNTP constituent une condition de référence utilisée pour rendre comparables les mesures de gaz : historiquement 0 °C (273,15 K) et 1 atm, conditions dans lesquelles une mole de tout gaz parfait occupe 22,414 L — un chiffre de référence pratique utilisé dans toute la chimie. Notez que la recommandation la plus récente de l'IUPAC utilise 100 kPa (0,9869 atm) au lieu de 1 atm, donnant un volume molaire légèrement différent de 22,711 L ; ce calculateur utilise la convention plus ancienne de 1 atm, encore largement enseignée."
+            },
+            {
+              "question": "Pourquoi les gaz réels s'écartent-ils de la loi des gaz parfaits ?",
+              "answer": "La loi des gaz parfaits suppose que les particules de gaz sont des masses ponctuelles sans volume et sans forces intermoléculaires, ce qui n'est qu'approximativement vrai. À haute pression, les particules de gaz sont rapprochées suffisamment pour que leur volume réel devienne significatif par rapport au volume du récipient ; à basse température, les faibles forces d'attraction entre molécules deviennent significatives par rapport à leur énergie cinétique réduite — ces deux effets font diverger le comportement réel du gaz de la prédiction idéale."
+            },
+            {
+              "question": "Comment la loi des gaz parfaits est-elle liée aux lois de Boyle, Charles et Avogadro ?",
+              "answer": "Chacune de ces lois décrit comment deux propriétés du gaz sont liées en maintenant les autres constantes : la loi de Boyle maintient constantes la température et les moles pour relier pression et volume, la loi de Charles maintient constantes la pression et les moles pour relier volume et température, et la loi d'Avogadro maintient constantes la pression et la température pour relier volume et moles. La loi des gaz parfaits généralise ces trois lois en une seule équation valable même lorsque plusieurs propriétés changent simultanément."
+            },
+            {
+              "question": "La loi des gaz parfaits peut-elle être utilisée pour des mélanges de gaz différents ?",
+              "answer": "Oui — pour un mélange de gaz parfaits, n dans PV = nRT peut représenter les moles totales de toutes les espèces gazeuses combinées, et la P résultante est la pression totale du mélange. Cela rejoint la loi de Dalton sur les pressions partielles, qui énonce que la pression totale d'un mélange gazeux est égale à la somme des pressions que chaque gaz exercerait s'il occupait seul le même volume."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "La Combinaison d'un Siècle de Découvertes Séparées",
+            "paragraph": "La loi des gaz parfaits a été écrite pour la première fois sous forme d'une seule équation combinée en 1834 par l'ingénieur français Benoît Paul Émile Clapeyron, dans son influent mémoire sur le cycle de Carnot, l'une des œuvres fondatrices de la thermodynamique. Clapeyron fusionna les relations déjà établies attribuées à Robert Boyle (1662) et Joseph Louis Gay-Lussac (1802, s'appuyant sur des travaux antérieurs non publiés de Jacques Charles), écrivant l'équation combinée sous la forme pv = R(267 + t). En 1845, le chimiste français Henri Victor Regnault intégra l'hypothèse d'Amedeo Avogadro pour reformuler l'équation dans sa forme molaire aujourd'hui familière, PV = nRT. La lettre de la constante elle-même, R, n'a pas d'origine définitivement documentée — l'historien de la chimie William Jensen note que l'explication la plus plausible est qu'elle représentait « ratio » (rapport), puisque Clapeyron avait observé que la valeur de la constante différait d'un gaz à l'autre jusqu'à ce que la formulation molaire ultérieure d'Avogadro et de Regnault la rende universelle."
+          },
+          "modernDevelopments": {
+            "title": "Là où la Loi des Gaz Parfaits S'applique Encore",
+            "paragraph": "Bien qu'elle ait plus de 180 ans et ne soit connue que comme une approximation, la loi des gaz parfaits reste un outil de travail en chimie, en physique et en ingénierie partout où le comportement d'un gaz à pressions et températures ordinaires doit être estimé rapidement — du calcul de la stœchiométrie de réactions impliquant des produits gazeux au dimensionnement du stockage industriel de gaz et à la modélisation du comportement atmosphérique. Lorsqu'une précision accrue est nécessaire dans des conditions extrêmes, des équations d'état plus complexes, comme l'équation de van der Waals, prennent en compte le volume moléculaire et les forces intermoléculaires que la loi des gaz parfaits ignore délibérément."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La loi des gaz parfaits et le comportement des gaz sont des sujets fondamentaux de la chimie. Voici les 5 meilleures universités mondiales en Chimie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 1 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "Non — le doctorat en Chimie et Biologie Chimique est un programme en présentiel à temps plein fondé sur la résidence de recherche en laboratoire."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 2 mondial en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 3 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "Non — les doctorants à temps plein doivent résider à Cambridge pour leur recherche en laboratoire, sans option en ligne."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 5 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "Non — le doctorat (DPhil) exige une résidence à temps plein à Oxford pour une recherche en laboratoire encadrée."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en Sciences Chimiques — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Jensen, W. B. (2003). The Universal Gas Constant R. Journal of Chemical Education, 80(7), 731–732.",
+          "note": "L'historien de la chimie William Jensen retrace la loi des gaz parfaits depuis l'équation combinée de Clapeyron de 1834 jusqu'à la reformulation molaire de Regnault de 1845, et examine l'origine incertaine de la lettre R elle-même.",
+          "url": "https://doi.org/10.1021/ed080p731",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

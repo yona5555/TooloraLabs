@@ -5445,6 +5445,164 @@
         }
       }
     },
+    "ideal-gas-law-calculator": {
+      "title": "Rechner für das ideale Gasgesetz",
+      "description": "Berechnen Sie Druck, Volumen, Stoffmenge oder Temperatur mit dem idealen Gasgesetz PV = nRT, mit einem dynamischen Gaszylinder-Diagramm.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Referenz zum idealen Gasgesetz",
+          "intro": "Die Formel und die Konstante, die dieser Rechner anwendet.",
+          "formulas": {
+            "idealGasLaw": { "label": "Ideales Gasgesetz", "expression": "PV = nRT" },
+            "gasConstant": { "label": "Gaskonstante R", "expression": "0.0820574 L·atm / (mol·K)" },
+            "stp": { "label": "Molares Volumen bei Normbedingungen", "expression": "22.414 L/mol bei 1 atm, 273.15 K" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "solveForLabel": "Berechnen",
+        "solveFor": {
+          "pressure": "Druck (P)",
+          "volume": "Volumen (V)",
+          "moles": "Stoffmenge (n)",
+          "temperature": "Temperatur (T)"
+        },
+        "pressureLabel": "Druck (atm)",
+        "pressurePlaceholder": "z. B. 1",
+        "volumeLabel": "Volumen (l)",
+        "volumePlaceholder": "z. B. 22.414",
+        "molesLabel": "Stoffmenge (mol)",
+        "molesPlaceholder": "z. B. 1",
+        "temperatureLabel": "Temperatur (K)",
+        "temperaturePlaceholder": "z. B. 273.15"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroVolume": "Das Volumen muss größer als null sein, um den Druck zu berechnen.",
+        "zeroPressure": "Der Druck muss größer als null sein, um das Volumen zu berechnen.",
+        "zeroTemperature": "Die Temperatur muss größer als null sein, um die Stoffmenge zu berechnen.",
+        "zeroMoles": "Die Stoffmenge muss größer als null sein, um die Temperatur zu berechnen.",
+        "pressure": "Druck",
+        "volume": "Volumen",
+        "moles": "Stoffmenge",
+        "temperature": "Temperatur",
+        "diagramCaption": "Die Kolbenhöhe spiegelt das Volumen wider, die Teilchenzahl die Stoffmenge und die Farbe die Temperatur."
+      },
+      "education": {
+        "intro": {
+          "title": "Das ideale Gasgesetz verstehen",
+          "paragraph1": "Das ideale Gasgesetz, PV = nRT, verknüpft die vier messbaren Eigenschaften eines idealen Gases: Druck (P), Volumen (V), Stoffmenge in Mol (n) und absolute Temperatur (T) in Kelvin, verbunden durch die universelle Gaskonstante R (0,0820574 l·atm pro mol·K, wenn der Druck in Atmosphären und das Volumen in Litern angegeben wird). Sind drei beliebige der vier Größen bekannt, löst die Gleichung direkt nach der vierten auf.",
+          "diagram": {
+            "caption": "Ein Mol eines idealen Gases bei Standardtemperatur und -druck (0 °C, 1 atm) nimmt 22,414 Liter ein."
+          },
+          "paragraph2": "Die Gleichung ist eine Kombination dreier einfacherer, unabhängig voneinander entdeckter Beziehungen: das Boyle-Mariotte-Gesetz (Druck und Volumen sind bei konstanter Temperatur umgekehrt proportional), das Gesetz von Charles (Volumen und Temperatur sind bei konstantem Druck direkt proportional) und das Gesetz von Avogadro (Volumen und Stoffmenge sind bei konstantem Druck und konstanter Temperatur direkt proportional). Zusammen ergeben diese drei Proportionalitäten die eine vereinheitlichte Gleichung PV = nRT.",
+          "paragraph3": "Das „ideal“ im idealen Gasgesetz beschreibt ein vereinfachendes Modell: Es nimmt an, dass Gasteilchen kein eigenes Volumen besitzen und keine Anziehungs- oder Abstoßungskräfte zwischen ihnen wirken. Reale Gase nähern sich diesem Verhalten nur an und weichen am stärksten unter hohem Druck oder bei niedriger Temperatur ab, wo Molekülgröße und zwischenmolekulare Kräfte bedeutsam werden — bei üblichen Drücken und Temperaturen folgen die meisten Gase dem idealen Gasgesetz jedoch genau genug für praktische Berechnungen."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Berechnung jeder Größe anhand derselben Gasprobe.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "1 mol bei 1 atm, 273,15 K", "result": "22,414 l (molares Volumen bei Normbedingungen)" },
+            { "calculation": "1 mol mit 22,414 l Volumen bei 273,15 K", "result": "1 atm" },
+            { "calculation": "1 atm, 22,414 l, 273,15 K", "result": "1 mol" },
+            { "calculation": "1 mol, 1 atm, 22,414 l", "result": "273,15 K" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum muss die Temperatur in Kelvin angegeben werden, nicht in Celsius oder Fahrenheit?",
+              "answer": "Das ideale Gasgesetz beschreibt eine direkte Proportionalität zwischen Volumen (oder Druck) und Temperatur, die nur gilt, wenn die Temperatur ab dem absoluten Nullpunkt gemessen wird — dem Punkt, an dem Gasteilchen theoretisch keine kinetische Energie besitzen. Die Kelvin-Skala beginnt beim absoluten Nullpunkt, während Celsius und Fahrenheit willkürliche Nullpunkte verwenden, was die Proportionalität aufheben und sogar negative oder undefinierte Ergebnisse liefern würde."
+            },
+            {
+              "question": "Was genau sind „Standardbedingungen für Temperatur und Druck“ (Normbedingungen)?",
+              "answer": "Normbedingungen sind ein Referenzzustand, der Gasmessungen vergleichbar macht: historisch 0 °C (273,15 K) und 1 atm, bei denen ein Mol eines beliebigen idealen Gases 22,414 l einnimmt — ein praktischer Referenzwert, der in der gesamten Chemie verwendet wird. Zu beachten ist, dass die neuere IUPAC-Empfehlung 100 kPa (0,9869 atm) statt 1 atm verwendet, was ein geringfügig anderes molares Volumen von 22,711 l ergibt; dieser Rechner nutzt die ältere, weiterhin weit verbreitet gelehrte 1-atm-Konvention."
+            },
+            {
+              "question": "Warum weichen reale Gase vom idealen Gasgesetz ab?",
+              "answer": "Das ideale Gasgesetz geht davon aus, dass Gasteilchen punktförmige Massen ohne Volumen und ohne zwischenmolekulare Kräfte sind, was nur näherungsweise zutrifft. Bei hohem Druck werden Gasteilchen so nah zusammengedrängt, dass ihr tatsächliches Volumen im Verhältnis zum Behältervolumen bedeutsam wird; bei niedriger Temperatur werden schwache Anziehungskräfte zwischen Molekülen im Verhältnis zu ihrer verringerten kinetischen Energie bedeutsam — beide Effekte lassen das Verhalten realer Gase von der idealen Vorhersage abweichen."
+            },
+            {
+              "question": "Wie hängt das ideale Gasgesetz mit den Gesetzen von Boyle, Charles und Avogadro zusammen?",
+              "answer": "Jedes dieser Gesetze beschreibt, wie zwei Gaseigenschaften zusammenhängen, während die übrigen konstant gehalten werden: Das Boyle-Mariotte-Gesetz hält Temperatur und Stoffmenge konstant, um Druck und Volumen in Beziehung zu setzen, das Gesetz von Charles hält Druck und Stoffmenge konstant, um Volumen und Temperatur zu verknüpfen, und das Gesetz von Avogadro hält Druck und Temperatur konstant, um Volumen und Stoffmenge zu verbinden. Das ideale Gasgesetz verallgemeinert alle drei zu einer einzigen Gleichung, die auch gilt, wenn sich mehrere Eigenschaften gleichzeitig ändern."
+            },
+            {
+              "question": "Kann das ideale Gasgesetz für Gemische verschiedener Gase verwendet werden?",
+              "answer": "Ja — für ein Gemisch idealer Gase kann n in PV = nRT die Gesamtstoffmenge aller kombinierten Gasarten darstellen, und das resultierende P ist der Gesamtdruck des Gemischs. Dies knüpft an das Daltonsche Gesetz der Partialdrücke an, wonach der Gesamtdruck eines Gasgemisches gleich der Summe der Drücke ist, die jedes Gas ausüben würde, wenn es allein dasselbe Volumen einnähme."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Die Zusammenführung eines Jahrhunderts getrennter Entdeckungen",
+            "paragraph": "Das ideale Gasgesetz wurde 1834 erstmals als einzige kombinierte Gleichung vom französischen Ingenieur Benoît Paul Émile Clapeyron in seiner einflussreichen Abhandlung über den Carnot-Kreisprozess niedergeschrieben, einem der grundlegenden Werke der Thermodynamik. Clapeyron führte die bereits etablierten, Robert Boyle (1662) und Joseph Louis Gay-Lussac (1802, aufbauend auf früheren unveröffentlichten Arbeiten von Jacques Charles) zugeschriebenen Beziehungen zusammen und schrieb die kombinierte Gleichung als pv = R(267 + t). 1845 integrierte der französische Chemiker Henri Victor Regnault Amedeo Avogadros Hypothese, um die Gleichung in ihre heute vertraute molare Form PV = nRT umzuformulieren. Der Buchstabe der Konstante selbst, R, hat keinen eindeutig dokumentierten Ursprung — der Chemiehistoriker William Jensen weist darauf hin, dass die plausibelste Erklärung ist, dass er für „ratio“ (Verhältnis) stand, da Clapeyron beobachtete, dass sich der Wert der Konstante von Gas zu Gas unterschied, bis die spätere molare Formulierung von Avogadro und Regnault ihn universell machte."
+          },
+          "modernDevelopments": {
+            "title": "Wo das ideale Gasgesetz noch angewendet wird",
+            "paragraph": "Obwohl es über 180 Jahre alt und nur als Näherung bekannt ist, bleibt das ideale Gasgesetz ein praktisches Werkzeug in Chemie, Physik und Technik, wo immer das Gasverhalten bei üblichen Drücken und Temperaturen schnell abgeschätzt werden muss — von der Berechnung der Stöchiometrie von Reaktionen mit gasförmigen Produkten bis zur Dimensionierung industrieller Gasspeicher und der Modellierung des atmosphärischen Verhaltens. Wenn unter extremen Bedingungen höhere Genauigkeit erforderlich ist, berücksichtigen komplexere Zustandsgleichungen wie die Van-der-Waals-Gleichung das Molekülvolumen und die zwischenmolekularen Kräfte, die das ideale Gasgesetz bewusst ignoriert."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Das ideale Gasgesetz und das Verhalten von Gasen sind grundlegende Themen der Chemie. Hier sind die weltweit 5 besten Universitäten für Chemie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "Nein — die Promotion in Chemie und chemischer Biologie ist ein Vollzeit-Präsenzprogramm, das auf residenzpflichtiger Laborforschung basiert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 3 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "Nein — Vollzeit-Promotionsstudierende müssen für ihre Laborforschung in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 5 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "Nein — die Promotion (DPhil) erfordert Vollzeit-Residenz in Oxford für betreute Laborforschung."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Chemischer Wissenschaft — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Jensen, W. B. (2003). The Universal Gas Constant R. Journal of Chemical Education, 80(7), 731–732.",
+          "note": "Der Chemiehistoriker William Jensen zeichnet das ideale Gasgesetz von Clapeyrons kombinierter Gleichung von 1834 bis zu Regnaults molarer Neuformulierung von 1845 nach und untersucht den ungewissen Ursprung des Buchstabens R selbst.",
+          "url": "https://doi.org/10.1021/ed080p731",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

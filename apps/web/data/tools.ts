@@ -390,6 +390,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "ideal-gas-law-calculator",
+    title: "Ideal Gas Law Calculator",
+    category: "math-science",
+    description:
+      "Solve for pressure, volume, moles, or temperature using the ideal gas law, PV = nRT, with a dynamic gas cylinder diagram.",
+    featured: false,
+    keywords: [
+      "ideal gas law calculator",
+      "PV=nRT calculator",
+      "gas law calculator",
+      "gas constant R",
+      "boyle's law charles's law",
+      "molar volume STP",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",
