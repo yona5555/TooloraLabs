@@ -4616,6 +4616,167 @@
         }
       }
     },
+    "density-calculator": {
+      "title": "Calculateur de Densité",
+      "description": "Calculez la densité, la masse ou le volume à partir des deux autres valeurs, avec l'équivalent SI (kg/m³) et la densité relative par rapport à l'eau.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "materials": {
+        "air": "Air",
+        "ice": "Glace",
+        "water": "Eau",
+        "aluminum": "Aluminium",
+        "iron": "Fer",
+        "gold": "Or"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Densités des Matériaux Courants",
+          "intro": "Densités approximatives en grammes par centimètre cube (g/cm³), à température ambiante et pression standard sauf indication contraire.",
+          "columnMaterial": "Matériau",
+          "columnDensity": "g/cm³"
+        }
+      },
+      "form": {
+        "inputTitle": "Valeurs Connues",
+        "operationLabel": "Calculer",
+        "operation": {
+          "solveDensity": "Densité (à partir de la masse et du volume)",
+          "solveMass": "Masse (à partir de la densité et du volume)",
+          "solveVolume": "Volume (à partir de la masse et de la densité)"
+        },
+        "massLabel": "Masse (g)",
+        "massPlaceholder": "p. ex. 100",
+        "volumeLabel": "Volume (cm³)",
+        "volumePlaceholder": "p. ex. 50",
+        "densityLabel": "Densité (g/cm³)",
+        "densityPlaceholder": "p. ex. 2.7"
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroVolume": "Le volume doit être supérieur à zéro pour calculer la densité.",
+        "zeroDensity": "La densité doit être supérieure à zéro pour calculer le volume.",
+        "unitGrams": "g",
+        "unitCm3": "cm³",
+        "unitGPerCm3": "g/cm³",
+        "siSummary": "Équivaut à {si} kg/m³ en unités SI ; densité relative de {sg} par rapport à l'eau.",
+        "diagramCaption": "{value} g/cm³ sur une échelle de densité logarithmique, aux côtés de matériaux courants.",
+        "stepDensity": "{mass} g divisés par {volume} cm³.",
+        "stepMass": "{density} g/cm³ multipliés par {volume} cm³.",
+        "stepVolume": "{mass} g divisés par {density} g/cm³."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Densité",
+          "paragraph1": "La densité est la quantité de masse concentrée dans un volume donné, exprimée par densité = masse ÷ volume. Deux objets faits de matériaux très différents peuvent peser le même poids si le plus dense occupe proportionnellement moins de volume : un morceau d'or de la taille d'une balle de golf et un bloc de mousse de la taille d'un ballon de basket peuvent avoir des masses identiques, bien que l'or soit environ 19,3 fois plus dense que l'eau et que la mousse soit bien moins dense que l'eau. Comme la densité est un rapport, elle ne dépend pas de la quantité de substance disponible : un gramme de fer pur et une tonne de fer pur partagent la même densité, 7,87 g/cm³.",
+          "diagram": {
+            "caption": "La densité du fer, 7,87 g/cm³, placée sur une échelle logarithmique aux côtés de l'air, de l'eau et d'autres matériaux courants."
+          },
+          "paragraph2": "La densité relative reformule la densité comme un rapport à l'eau (1,0 g/cm³ à 4 °C, le point de densité maximale de l'eau), de sorte qu'une densité relative de 2,7, comme pour l'aluminium, signifie que le matériau est 2,7 fois plus dense que l'eau ; c'est pourquoi une densité relative inférieure à 1 prédit qu'un objet flottera dans l'eau, et supérieure à 1 qu'il coulera, toutes choses égales par ailleurs (tension superficielle, air emprisonné).",
+          "paragraph3": "L'unité SI de densité est le kilogramme par mètre cube (kg/m³), soit exactement 1000 fois la valeur en grammes par centimètre cube (g/cm³) plus couramment citée, car un mètre cube contient un million de centimètres cubes alors qu'un kilogramme ne représente que mille grammes ; le facteur de conversion de 1000 découle directement de ces deux faits."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Résolution de chacune des trois grandeurs de la relation de densité.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "100 g d'une substance occupant 50 cm³", "result": "Densité de 2 g/cm³" },
+            { "calculation": "193 g occupant 10 cm³", "result": "19,3 g/cm³ — correspond à l'or massif" },
+            { "calculation": "Densité 7,87 g/cm³, volume 10 cm³", "result": "Masse de 78,7 g" },
+            { "calculation": "Masse 78,7 g, densité 7,87 g/cm³", "result": "Volume de 10 cm³" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi certains objets flottent-ils alors que d'autres coulent dans le même liquide ?",
+              "answer": "Un objet flotte lorsque sa densité globale est inférieure à celle du liquide, car la force de flottaison générée par le liquide déplacé — égale au poids du liquide déplacé, selon le principe d'Archimède — dépasse le poids propre de l'objet. Un navire en acier flotte bien que l'acier soit beaucoup plus dense que l'eau, car la forme de sa coque déplace suffisamment d'eau pour que la densité moyenne du navire, coque plus air emprisonné, reste inférieure à celle de l'eau."
+            },
+            {
+              "question": "La densité change-t-elle avec la température ?",
+              "answer": "Oui — la plupart des substances se dilatent légèrement en chauffant, ce qui augmente le volume sans changer la masse, et diminue donc la densité. L'eau constitue une exception bien connue près du point de congélation : elle atteint sa densité maximale vers 4 °C, et la réchauffer au-dessus comme la refroidir en dessous de ce point (y compris la congélation en glace) la rend moins dense, ce qui explique pourquoi la glace flotte sur l'eau liquide."
+            },
+            {
+              "question": "Quelle est la différence entre densité et densité relative ?",
+              "answer": "La densité est une masse par unité de volume et possède des unités réelles (g/cm³ ou kg/m³), tandis que la densité relative est un rapport sans unité entre la densité d'une substance et celle d'une substance de référence, presque toujours l'eau à 4 °C. Une densité relative de 2,7 et une densité de 2,7 g/cm³ décrivent le même matériau, mais la densité relative rend explicite la comparaison à l'eau et supprime entièrement les unités."
+            },
+            {
+              "question": "Ce calculateur peut-il aussi être utilisé pour les gaz, en plus des solides et des liquides ?",
+              "answer": "Oui, la relation masse sur volume s'applique à tout état de la matière, bien que les densités des gaz soient généralement bien plus faibles (l'air a une densité d'environ 0,0012 g/cm³ au niveau de la mer) et varient sensiblement avec la température et la pression, si bien qu'une valeur de densité d'un gaz n'a de sens qu'accompagnée des conditions dans lesquelles elle a été mesurée."
+            },
+            {
+              "question": "Pourquoi la densité de certains matériaux est-elle donnée en g/cm³ et celle d'autres en kg/m³ ?",
+              "answer": "Les deux unités sont cohérentes avec le SI, mais g/cm³ produit des nombres plus pratiques et à échelle humaine pour les solides et liquides courants (l'eau donne un 1,0 très net), tandis que kg/m³ est l'unité SI stricte typiquement utilisée en ingénierie et dans les formules de physique. Ce calculateur affiche les deux, la conversion n'étant qu'un simple facteur de 1000."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "Un Principe Réel, et une Baignoire Légendaire",
+            "paragraph": "Le véritable fondement mathématique de la densité et de la flottabilité est le principe d'Archimède, établi rigoureusement par Archimède de Syracuse (v. 287–212 av. J.-C.) dans son propre traité conservé, Des Corps Flottants, qui démontre qu'un corps immergé dans un fluide subit une force ascendante égale au poids du fluide qu'il déplace. L'histoire célèbre d'Archimède criant « Eurêka ! » et courant nu hors de sa baignoire après avoir réalisé qu'il pouvait détecter de l'or falsifié à l'argent grâce à sa densité, en revanche, ne figure ni dans ce traité ni dans aucune source contemporaine de lui — elle apparaît pour la première fois environ deux siècles plus tard, dans le De Architectura de l'architecte romain Vitruve (Livre IX, préface), écrit à la fin du Ier siècle av. J.-C. Les historiens des sciences considèrent l'anecdote de la baignoire comme une légende tardive illustrant un principe véritable, et non comme un fait historique vérifié, tandis que la physique sous-jacente — le fait que le volume de fluide déplacé révèle la densité — est bien une contribution mathématique documentée d'Archimède lui-même."
+          },
+          "modernDevelopments": {
+            "title": "La Densité dans la Science des Matériaux Moderne",
+            "paragraph": "La mesure précise de la densité reste aujourd'hui une technique centrale de la science des matériaux et du contrôle qualité, de la vérification de la pureté des alliages métalliques à la vérification des spécifications de pièces fabriquées, en passant par l'identification de substances inconnues dans des travaux médico-légaux et géologiques. Des instruments modernes tels que les densimètres numériques et les pycnomètres peuvent mesurer la densité avec plusieurs décimales de précision en utilisant le même principe de volume déplacé décrit par Archimède, désormais automatisé et étalonné par rapport à des normes de référence certifiées."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La densité et la flottabilité sont des sujets fondamentaux de la physique. Voici les 5 meilleures universités mondiales en Physique et Astronomie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Non — le programme repose sur un accès présentiel aux laboratoires et un modèle de recherche résidentiel, sans mention d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Non — le département décrit une communauté de recherche en présentiel avec accès aux laboratoires sur place, et aucune option d'étude à distance n'est mentionnée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Non — les étudiants à temps plein doivent résider à Cambridge pendant au moins trois trimestres, sans option en ligne."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en physique appliquée — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Rorres, C. (2004). Completing Book II of Archimedes's On Floating Bodies. The Mathematical Intelligencer, 26(3), 32–42.",
+          "note": "L'étude de Rorres reconstruit et analyse l'argument mathématique du traité original d'Archimède sur les corps flottants, la source antique authentique du principe de flottabilité et de densité appliqué par ce calculateur — à distinguer de l'anecdote tardive et non vérifiée de la baignoire.",
+          "url": "https://doi.org/10.1007/BF02986750",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

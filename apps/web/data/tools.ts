@@ -310,6 +310,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "density-calculator",
+    title: "Density Calculator",
+    category: "math-science",
+    description:
+      "Solve for density, mass, or volume from the other two, with the SI (kg/m³) equivalent and specific gravity relative to water.",
+    featured: false,
+    keywords: [
+      "density calculator",
+      "mass volume density",
+      "specific gravity calculator",
+      "density formula",
+      "kg/m3 to g/cm3",
+      "archimedes principle",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

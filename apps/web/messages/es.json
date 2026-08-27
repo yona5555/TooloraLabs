@@ -4616,6 +4616,167 @@
         }
       }
     },
+    "density-calculator": {
+      "title": "Calculadora de Densidad",
+      "description": "Calcula la densidad, la masa o el volumen a partir de los otros dos valores, con el equivalente en el SI (kg/m³) y la gravedad específica respecto al agua.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "materials": {
+        "air": "Aire",
+        "ice": "Hielo",
+        "water": "Agua",
+        "aluminum": "Aluminio",
+        "iron": "Hierro",
+        "gold": "Oro"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Densidades de Materiales Comunes",
+          "intro": "Densidades aproximadas en gramos por centímetro cúbico (g/cm³), a temperatura ambiente y presión estándar salvo que se indique lo contrario.",
+          "columnMaterial": "Material",
+          "columnDensity": "g/cm³"
+        }
+      },
+      "form": {
+        "inputTitle": "Valores Conocidos",
+        "operationLabel": "Calcular",
+        "operation": {
+          "solveDensity": "Densidad (a partir de masa y volumen)",
+          "solveMass": "Masa (a partir de densidad y volumen)",
+          "solveVolume": "Volumen (a partir de masa y densidad)"
+        },
+        "massLabel": "Masa (g)",
+        "massPlaceholder": "p. ej. 100",
+        "volumeLabel": "Volumen (cm³)",
+        "volumePlaceholder": "p. ej. 50",
+        "densityLabel": "Densidad (g/cm³)",
+        "densityPlaceholder": "p. ej. 2.7"
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroVolume": "El volumen debe ser mayor que cero para calcular la densidad.",
+        "zeroDensity": "La densidad debe ser mayor que cero para calcular el volumen.",
+        "unitGrams": "g",
+        "unitCm3": "cm³",
+        "unitGPerCm3": "g/cm³",
+        "siSummary": "Equivale a {si} kg/m³ en unidades del SI; gravedad específica {sg} respecto al agua.",
+        "diagramCaption": "{value} g/cm³ en una escala de densidad logarítmica, junto a materiales comunes.",
+        "stepDensity": "{mass} g divididos entre {volume} cm³.",
+        "stepMass": "{density} g/cm³ multiplicados por {volume} cm³.",
+        "stepVolume": "{mass} g divididos entre {density} g/cm³."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo la Densidad",
+          "paragraph1": "La densidad es la cantidad de masa concentrada en un volumen dado, expresada como densidad = masa ÷ volumen. Dos objetos hechos de materiales muy distintos pueden pesar lo mismo si el más denso ocupa proporcionalmente menos volumen: un trozo de oro del tamaño de una pelota de golf y un bloque de espuma del tamaño de una pelota de baloncesto pueden tener masas idénticas, pese a que el oro es aproximadamente 19.3 veces más denso que el agua y la espuma es mucho menos densa que el agua. Como la densidad es una razón, no depende de la cantidad de sustancia que se tenga: un gramo de hierro puro y una tonelada de hierro puro comparten la misma densidad, 7.87 g/cm³.",
+          "diagram": {
+            "caption": "La densidad del hierro, 7.87 g/cm³, ubicada en una escala logarítmica junto al aire, el agua y otros materiales comunes."
+          },
+          "paragraph2": "La gravedad específica expresa la densidad como una razón respecto al agua (1.0 g/cm³ a 4 °C, el punto de máxima densidad del agua), de modo que una gravedad específica de 2.7, como la del aluminio, significa que el material es 2.7 veces más denso que el agua; por eso una gravedad específica menor que 1 predice que un objeto flotará en el agua, y mayor que 1 predice que se hundirá, manteniendo iguales los demás factores, como la tensión superficial y el aire atrapado.",
+          "paragraph3": "La unidad de densidad del SI es el kilogramo por metro cúbico (kg/m³), que equivale exactamente a 1000 veces el valor, más comúnmente citado, en gramos por centímetro cúbico (g/cm³), ya que un metro cúbico contiene un millón de centímetros cúbicos, pero solo mil gramos forman un kilogramo; el factor de conversión de 1000 surge directamente de esos dos hechos."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Resolviendo cada una de las tres cantidades en la relación de densidad.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "100 g de una sustancia que ocupa 50 cm³", "result": "Densidad de 2 g/cm³" },
+            { "calculation": "193 g que ocupan 10 cm³", "result": "19.3 g/cm³ — igual que el oro sólido" },
+            { "calculation": "Densidad 7.87 g/cm³, volumen 10 cm³", "result": "Masa de 78.7 g" },
+            { "calculation": "Masa 78.7 g, densidad 7.87 g/cm³", "result": "Volumen de 10 cm³" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué flotan algunos objetos y otros se hunden en el mismo líquido?",
+              "answer": "Un objeto flota cuando su densidad general es menor que la del líquido, porque la fuerza de flotación generada por el líquido desplazado —igual al peso del líquido desplazado, según el Principio de Arquímedes— supera el peso propio del objeto. Un barco de acero flota a pesar de que el acero es mucho más denso que el agua, porque la forma de su casco desplaza suficiente agua para que la densidad promedio del barco, casco más aire encerrado, siga siendo menor que la del agua."
+            },
+            {
+              "question": "¿Cambia la densidad con la temperatura?",
+              "answer": "Sí: la mayoría de las sustancias se expanden ligeramente al calentarse, lo que aumenta el volumen sin cambiar la masa, y por tanto reduce la densidad. El agua es una excepción conocida cerca del punto de congelación: alcanza su densidad máxima alrededor de los 4 °C, y tanto calentarla por encima como enfriarla por debajo de ese punto (incluida la congelación en hielo) la vuelven menos densa, razón por la cual el hielo flota sobre el agua líquida."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre densidad y gravedad específica?",
+              "answer": "La densidad es masa por unidad de volumen y tiene unidades reales (g/cm³ o kg/m³), mientras que la gravedad específica es una razón adimensional entre la densidad de una sustancia y la de una sustancia de referencia, casi siempre el agua a 4 °C. Una gravedad específica de 2.7 y una densidad de 2.7 g/cm³ describen el mismo material, pero la gravedad específica hace explícita la comparación con el agua y elimina por completo las unidades."
+            },
+            {
+              "question": "¿Puede usarse esta calculadora también para gases, además de sólidos y líquidos?",
+              "answer": "Sí, la relación masa entre volumen aplica a cualquier estado de la materia, aunque las densidades de los gases suelen ser mucho menores (el aire tiene aproximadamente 0.0012 g/cm³ al nivel del mar) y cambian notablemente con la temperatura y la presión, por lo que un valor de densidad de un gas solo tiene sentido junto con las condiciones bajo las que se midió."
+            },
+            {
+              "question": "¿Por qué la densidad de algunos materiales se da en g/cm³ y la de otros en kg/m³?",
+              "answer": "Ambas son unidades coherentes con el SI, pero g/cm³ produce números más cómodos y a escala humana para sólidos y líquidos cotidianos (la del agua es un limpio 1.0), mientras que kg/m³ es la unidad estricta del SI típicamente usada en ingeniería y fórmulas de física. Esta calculadora muestra ambas, ya que la conversión es simplemente un factor de 1000."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Un Principio Real, y una Bañera Legendaria",
+            "paragraph": "El fundamento matemático genuino de la densidad y la flotabilidad es el Principio de Arquímedes, expuesto rigurosamente por Arquímedes de Siracusa (c. 287–212 a. C.) en su propio tratado que ha sobrevivido, Sobre los Cuerpos Flotantes, el cual demuestra que un cuerpo sumergido en un fluido experimenta una fuerza hacia arriba igual al peso del fluido que desplaza. Sin embargo, la famosa historia de Arquímedes gritando «¡Eureka!» y saliendo corriendo desnudo de su bañera tras darse cuenta de que podía detectar oro adulterado con plata por su densidad no aparece en ese tratado ni en ninguna fuente contemporánea a él: surge por primera vez unos dos siglos después, en la obra del arquitecto romano Vitruvio, De Architectura (Libro IX, prefacio), escrita a finales del siglo I a. C. Los historiadores de la ciencia tratan la anécdota de la bañera como una leyenda posterior que ilustra un principio genuino, no como un hecho histórico verificado, mientras que la física subyacente —que el volumen de fluido desplazado revela la densidad— es una contribución matemática documentada del propio Arquímedes."
+          },
+          "modernDevelopments": {
+            "title": "La Densidad en la Ciencia de Materiales Moderna",
+            "paragraph": "La medición precisa de la densidad sigue siendo una técnica central en la ciencia de materiales y el control de calidad actuales, desde verificar la pureza de aleaciones metálicas hasta comprobar las especificaciones de piezas fabricadas e identificar sustancias desconocidas en trabajos forenses y geológicos. Instrumentos modernos como los densímetros digitales y los picnómetros pueden medir la densidad con varias cifras decimales de precisión usando el mismo principio de volumen desplazado que describió Arquímedes, ahora automatizado y calibrado frente a estándares de referencia certificados."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La densidad y la flotabilidad son temas fundamentales dentro de la física. Estas son las 5 mejores universidades del mundo en Física y Astronomía según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — el programa se basa en el acceso presencial a laboratorios y un modelo de investigación residencial, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — el departamento describe una comunidad de investigación presencial con acceso a laboratorios en el sitio, y no se indica ninguna opción de estudio a distancia."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #5 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — los estudiantes de tiempo completo deben residir en Cambridge durante al menos tres trimestres, sin opción en línea."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Física Aplicada — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Rorres, C. (2004). Completing Book II of Archimedes's On Floating Bodies. The Mathematical Intelligencer, 26(3), 32–42.",
+          "note": "El estudio de Rorres reconstruye y analiza el argumento matemático del tratado original de Arquímedes sobre cuerpos flotantes, la fuente antigua genuina del principio de flotabilidad y densidad que aplica esta calculadora, distinta de la anécdota posterior y no verificada de la bañera.",
+          "url": "https://doi.org/10.1007/BF02986750",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

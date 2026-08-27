@@ -4616,6 +4616,167 @@
         }
       }
     },
+    "density-calculator": {
+      "title": "Dichte-Rechner",
+      "description": "Berechnen Sie Dichte, Masse oder Volumen aus den beiden anderen Werten, mit dem SI-Äquivalent (kg/m³) und der relativen Dichte bezogen auf Wasser.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "materials": {
+        "air": "Luft",
+        "ice": "Eis",
+        "water": "Wasser",
+        "aluminum": "Aluminium",
+        "iron": "Eisen",
+        "gold": "Gold"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Dichte gängiger Materialien",
+          "intro": "Näherungswerte in Gramm pro Kubikzentimeter (g/cm³), bei Raumtemperatur und Normaldruck, sofern nicht anders angegeben.",
+          "columnMaterial": "Material",
+          "columnDensity": "g/cm³"
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "operationLabel": "Berechnen",
+        "operation": {
+          "solveDensity": "Dichte (aus Masse und Volumen)",
+          "solveMass": "Masse (aus Dichte und Volumen)",
+          "solveVolume": "Volumen (aus Masse und Dichte)"
+        },
+        "massLabel": "Masse (g)",
+        "massPlaceholder": "z. B. 100",
+        "volumeLabel": "Volumen (cm³)",
+        "volumePlaceholder": "z. B. 50",
+        "densityLabel": "Dichte (g/cm³)",
+        "densityPlaceholder": "z. B. 2.7"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroVolume": "Das Volumen muss größer als null sein, um die Dichte zu berechnen.",
+        "zeroDensity": "Die Dichte muss größer als null sein, um das Volumen zu berechnen.",
+        "unitGrams": "g",
+        "unitCm3": "cm³",
+        "unitGPerCm3": "g/cm³",
+        "siSummary": "Entspricht {si} kg/m³ in SI-Einheiten; relative Dichte {sg} bezogen auf Wasser.",
+        "diagramCaption": "{value} g/cm³ auf einer logarithmischen Dichteskala, neben gängigen Materialien.",
+        "stepDensity": "{mass} g geteilt durch {volume} cm³.",
+        "stepMass": "{density} g/cm³ multipliziert mit {volume} cm³.",
+        "stepVolume": "{mass} g geteilt durch {density} g/cm³."
+      },
+      "education": {
+        "intro": {
+          "title": "Dichte verstehen",
+          "paragraph1": "Dichte ist die Menge an Masse, die in einem bestimmten Volumen konzentriert ist, ausgedrückt als Dichte = Masse ÷ Volumen. Zwei Objekte aus sehr unterschiedlichen Materialien können dasselbe Gewicht haben, wenn das dichtere Objekt anteilig weniger Volumen einnimmt: ein golfballgroßes Stück Gold und ein basketballgroßer Schaumstoffblock können identische Massen haben, obwohl Gold etwa 19,3-mal dichter ist als Wasser und Schaumstoff weit weniger dicht ist als Wasser. Da Dichte ein Verhältnis ist, hängt sie nicht davon ab, wie viel Substanz vorhanden ist: ein Gramm reines Eisen und eine Tonne reines Eisen teilen dieselbe Dichte, 7,87 g/cm³.",
+          "diagram": {
+            "caption": "Die Dichte von Eisen, 7,87 g/cm³, dargestellt auf einer logarithmischen Skala neben Luft, Wasser und anderen gängigen Materialien."
+          },
+          "paragraph2": "Die relative Dichte formuliert die Dichte als Verhältnis zu Wasser (1,0 g/cm³ bei 4 °C, dem Punkt maximaler Dichte von Wasser); eine relative Dichte von 2,7, wie bei Aluminium, bedeutet also, dass das Material 2,7-mal dichter ist als Wasser — deshalb sagt eine relative Dichte unter 1 voraus, dass ein Objekt in Wasser schwimmt, und über 1, dass es sinkt, sofern andere Faktoren wie Oberflächenspannung und eingeschlossene Luft gleich bleiben.",
+          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Berechnung jeder der drei Größen in der Dichtebeziehung.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "100 g einer Substanz mit 50 cm³ Volumen", "result": "Dichte von 2 g/cm³" },
+            { "calculation": "193 g mit 10 cm³ Volumen", "result": "19,3 g/cm³ — entspricht massivem Gold" },
+            { "calculation": "Dichte 7,87 g/cm³, Volumen 10 cm³", "result": "Masse von 78,7 g" },
+            { "calculation": "Masse 78,7 g, Dichte 7,87 g/cm³", "result": "Volumen von 10 cm³" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum schwimmen manche Objekte, während andere in derselben Flüssigkeit sinken?",
+              "answer": "Ein Objekt schwimmt, wenn seine Gesamtdichte geringer ist als die der Flüssigkeit, weil die Auftriebskraft der verdrängten Flüssigkeit — gleich dem Gewicht der verdrängten Flüssigkeit, gemäß dem Archimedischen Prinzip — das Eigengewicht des Objekts übersteigt. Ein Stahlschiff schwimmt, obwohl Stahl weit dichter ist als Wasser, weil die Form seines Rumpfs genug Wasser verdrängt, sodass die durchschnittliche Dichte des Schiffs, Rumpf plus eingeschlossene Luft, geringer bleibt als die von Wasser."
+            },
+            {
+              "question": "Ändert sich die Dichte mit der Temperatur?",
+              "answer": "Ja — die meisten Substanzen dehnen sich beim Erwärmen leicht aus, was das Volumen erhöht, ohne die Masse zu ändern, und damit die Dichte verringert. Wasser ist eine bekannte Ausnahme nahe dem Gefrierpunkt: Es erreicht seine höchste Dichte bei etwa 4 °C, und sowohl Erwärmen über als auch Abkühlen unter diesen Punkt (einschließlich Gefrieren zu Eis) machen es weniger dicht — deshalb schwimmt Eis auf flüssigem Wasser."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen Dichte und relativer Dichte?",
+              "answer": "Dichte ist Masse pro Volumeneinheit und besitzt reale Einheiten (g/cm³ oder kg/m³), während relative Dichte ein einheitenloses Verhältnis zwischen der Dichte einer Substanz und der einer Referenzsubstanz ist, fast immer Wasser bei 4 °C. Eine relative Dichte von 2,7 und eine Dichte von 2,7 g/cm³ beschreiben dasselbe Material, doch die relative Dichte macht den Vergleich mit Wasser explizit und lässt die Einheiten vollständig entfallen."
+            },
+            {
+              "question": "Kann dieser Rechner auch für Gase verwendet werden, nicht nur für Feststoffe und Flüssigkeiten?",
+              "answer": "Ja, die Beziehung Masse zu Volumen gilt für jeden Aggregatzustand, wobei Gasdichten typischerweise deutlich kleiner sind (Luft hat auf Meereshöhe etwa 0,0012 g/cm³) und sich merklich mit Temperatur und Druck ändern, sodass ein Gasdichtewert nur zusammen mit den Messbedingungen aussagekräftig ist."
+            },
+            {
+              "question": "Warum wird die Dichte mancher Materialien in g/cm³ und die anderer in kg/m³ angegeben?",
+              "answer": "Beide sind SI-konforme Einheiten, aber g/cm³ liefert für alltägliche Feststoffe und Flüssigkeiten handlichere, menschengerechte Zahlen (Wasser ergibt einen klaren Wert von 1,0), während kg/m³ die strenge SI-Einheit ist, die typischerweise in Technik und physikalischen Formeln verwendet wird. Dieser Rechner zeigt beide, da die Umrechnung lediglich ein Faktor von 1000 ist."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Ein echtes Prinzip, und eine legendäre Badewanne",
+            "paragraph": "Die eigentliche mathematische Grundlage von Dichte und Auftrieb ist das Archimedische Prinzip, das Archimedes von Syrakus (ca. 287–212 v. Chr.) in seiner erhaltenen Abhandlung Über schwimmende Körper streng dargelegt hat; sie beweist, dass ein in eine Flüssigkeit eingetauchter Körper eine nach oben gerichtete Kraft erfährt, die dem Gewicht der von ihm verdrängten Flüssigkeit entspricht. Die berühmte Geschichte, wonach Archimedes „Heureka!“ gerufen und nackt aus seiner Badewanne gelaufen sei, nachdem er erkannt hatte, dass er mit Silber gestrecktes Gold anhand seiner Dichte nachweisen konnte, findet sich jedoch weder in jener Abhandlung noch in einer ihm zeitgenössischen Quelle — sie taucht erstmals etwa zwei Jahrhunderte später auf, in De Architectura (Buch IX, Vorwort) des römischen Architekten Vitruv, verfasst im späten 1. Jahrhundert v. Chr. Wissenschaftshistoriker behandeln die Badewannen-Anekdote als spätere Legende, die ein echtes Prinzip veranschaulicht, nicht als verifiziertes historisches Ereignis, während die zugrunde liegende Physik — dass verdrängtes Flüssigkeitsvolumen die Dichte offenbart — ein dokumentierter mathematischer Beitrag von Archimedes selbst ist."
+          },
+          "modernDevelopments": {
+            "title": "Dichte in der modernen Materialwissenschaft",
+            "paragraph": "Die präzise Dichtemessung ist heute weiterhin eine zentrale Technik in Materialwissenschaft und Qualitätskontrolle — von der Überprüfung der Reinheit von Metalllegierungen über die Kontrolle gefertigter Bauteilspezifikationen bis zur Identifizierung unbekannter Substanzen in forensischer und geologischer Arbeit. Moderne Instrumente wie digitale Dichtemesser und Pyknometer können die Dichte auf mehrere Nachkommastellen genau messen, nach demselben Prinzip des verdrängten Volumens, das Archimedes beschrieb, heute jedoch automatisiert und gegen zertifizierte Referenzstandards kalibriert."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Dichte und Auftrieb sind grundlegende Themen der Physik. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Rorres, C. (2004). Completing Book II of Archimedes's On Floating Bodies. The Mathematical Intelligencer, 26(3), 32–42.",
+          "note": "Rorres' Studie rekonstruiert und analysiert das mathematische Argument von Archimedes' Originalabhandlung über schwimmende Körper, die echte antike Quelle des Auftriebs- und Dichteprinzips, das dieser Rechner anwendet — im Unterschied zur späteren, unbestätigten Badewannen-Anekdote.",
+          "url": "https://doi.org/10.1007/BF02986750",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

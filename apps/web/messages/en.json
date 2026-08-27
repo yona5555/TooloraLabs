@@ -4612,6 +4612,167 @@
         }
       }
     },
+    "density-calculator": {
+      "title": "Density Calculator",
+      "description": "Solve for density, mass, or volume from the other two, with the SI (kg/m³) equivalent and specific gravity relative to water.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "materials": {
+        "air": "Air",
+        "ice": "Ice",
+        "water": "Water",
+        "aluminum": "Aluminum",
+        "iron": "Iron",
+        "gold": "Gold"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Common Material Densities",
+          "intro": "Approximate densities in grams per cubic centimeter (g/cm³), at room temperature and standard pressure unless noted.",
+          "columnMaterial": "Material",
+          "columnDensity": "g/cm³"
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "operationLabel": "Solve For",
+        "operation": {
+          "solveDensity": "Density (from mass and volume)",
+          "solveMass": "Mass (from density and volume)",
+          "solveVolume": "Volume (from mass and density)"
+        },
+        "massLabel": "Mass (g)",
+        "massPlaceholder": "e.g. 100",
+        "volumeLabel": "Volume (cm³)",
+        "volumePlaceholder": "e.g. 50",
+        "densityLabel": "Density (g/cm³)",
+        "densityPlaceholder": "e.g. 2.7"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroVolume": "Volume must be greater than zero to solve for density.",
+        "zeroDensity": "Density must be greater than zero to solve for volume.",
+        "unitGrams": "g",
+        "unitCm3": "cm³",
+        "unitGPerCm3": "g/cm³",
+        "siSummary": "Equal to {si} kg/m³ in SI units; specific gravity {sg} relative to water.",
+        "diagramCaption": "{value} g/cm³ on a logarithmic density scale, alongside common materials.",
+        "stepDensity": "{mass} g divided by {volume} cm³.",
+        "stepMass": "{density} g/cm³ multiplied by {volume} cm³.",
+        "stepVolume": "{mass} g divided by {density} g/cm³."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Density",
+          "paragraph1": "Density is the amount of mass packed into a given volume, expressed as density = mass ÷ volume. Two objects can be made of very different materials yet weigh the same if the denser one occupies proportionally less volume — a golf-ball-sized lump of gold and a basketball-sized block of foam can have identical masses despite gold being roughly 19.3 times denser than water and foam being far less dense than water. Because density is a ratio, it does not depend on how much of a substance you have: a gram of pure iron and a ton of pure iron share the same density, 7.87 g/cm³.",
+          "diagram": {
+            "caption": "Iron's density, 7.87 g/cm³, plotted on a logarithmic scale against air, water, and other common materials."
+          },
+          "paragraph2": "Specific gravity restates density as a ratio to water (1.0 g/cm³ at 4°C, water's point of maximum density), so a specific gravity of 2.7, as with aluminum, means the material is 2.7 times as dense as water — this is why a specific gravity below 1 predicts that an object will float in water, and above 1 predicts that it will sink, all else (like surface tension and trapped air) being equal.",
+          "paragraph3": "The SI unit of density is kilograms per cubic meter (kg/m³), which is exactly 1,000 times the more commonly quoted grams per cubic centimeter (g/cm³) value, since one cubic meter contains one million cubic centimeters but only a thousand grams make a kilogram — the conversion factor of 1,000 falls directly out of those two facts."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Solving for each of the three quantities in the density relationship.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "100 g of a substance occupying 50 cm³", "result": "2 g/cm³ density" },
+            { "calculation": "193 g occupying 10 cm³", "result": "19.3 g/cm³ — matching solid gold" },
+            { "calculation": "Density 7.87 g/cm³, volume 10 cm³", "result": "78.7 g mass" },
+            { "calculation": "Mass 78.7 g, density 7.87 g/cm³", "result": "10 cm³ volume" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why do some objects float and others sink even in the same liquid?",
+              "answer": "An object floats when its overall density is less than the liquid's density, because the buoyant force from the displaced liquid — equal to the weight of the liquid displaced, per Archimedes' Principle — exceeds the object's own weight. A steel ship floats despite steel being far denser than water because its hull shape displaces enough water that the ship's average density, hull plus enclosed air, is still less than water's."
+            },
+            {
+              "question": "Does density change with temperature?",
+              "answer": "Yes — most substances expand slightly as they warm, which increases volume without changing mass, and therefore lowers density. Water is a well-known exception near freezing: it is actually densest at about 4°C, and both warming above and cooling below that point (including freezing into ice) make it less dense, which is why ice floats on liquid water."
+            },
+            {
+              "question": "What's the difference between density and specific gravity?",
+              "answer": "Density is mass per unit volume with real units (g/cm³ or kg/m³), while specific gravity is a unitless ratio of a substance's density to the density of a reference substance, almost always water at 4°C. A specific gravity of 2.7 and a density of 2.7 g/cm³ describe the same material, but specific gravity makes the water comparison explicit and drops the units entirely."
+            },
+            {
+              "question": "Can this calculator be used for gases as well as solids and liquids?",
+              "answer": "Yes, the mass-over-volume relationship holds for any state of matter, though gas densities are typically far smaller (air is about 0.0012 g/cm³ at sea level) and change noticeably with temperature and pressure, so a gas density value is only meaningful alongside the conditions it was measured under."
+            },
+            {
+              "question": "Why is density given in g/cm³ for some materials and kg/m³ for others?",
+              "answer": "Both are SI-consistent units, but g/cm³ produces more convenient, human-scale numbers for everyday solids and liquids (water is a clean 1.0), while kg/m³ is the strict SI unit typically used in engineering and physics formulas. This calculator reports both, since the conversion is a simple factor of 1,000."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Real Principle, and a Legendary Bathtub",
+            "paragraph": "The genuine mathematical foundation of density and buoyancy is Archimedes' Principle, laid out rigorously by Archimedes of Syracuse (c. 287–212 BCE) in his own surviving treatise On Floating Bodies, which proves that a body immersed in a fluid experiences an upward force equal to the weight of the fluid it displaces. The famous story of Archimedes shouting \"Eureka\" and running naked from his bathtub after realizing he could detect gold adulterated with silver by its density, however, is not found in that treatise or in any source contemporary with him — it first appears roughly two centuries later, in the Roman architect Vitruvius's De Architectura (Book IX, preface), written in the late 1st century BCE. Historians of science treat the bathtub anecdote as a later legend illustrating a genuine principle, not as a verified historical event, while the underlying physics — that displaced fluid volume reveals density — is Archimedes' own documented mathematical contribution."
+          },
+          "modernDevelopments": {
+            "title": "Density in Modern Materials Science",
+            "paragraph": "Precise density measurement remains a core technique in materials science and quality control today, from verifying metal alloy purity to checking manufactured part specifications and identifying unknown substances in forensic and geological work. Modern instruments such as digital densitometers and pycnometers can measure density to several decimal places using the same displaced-volume principle Archimedes described, now automated and calibrated against certified reference standards."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Density and buoyancy are foundational topics within physics. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is based on in-person lab access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an on-campus research community with on-site lab access, and no distance-study option is listed."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must reside in Cambridge for at least three terms, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Applied Physics — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus laboratories and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Rorres, C. (2004). Completing Book II of Archimedes's On Floating Bodies. The Mathematical Intelligencer, 26(3), 32–42.",
+          "note": "Rorres's study reconstructs and analyzes the mathematical argument of Archimedes' original treatise on floating bodies, the genuine ancient source for the buoyancy and density principle this calculator applies — distinct from the later, unverified bathtub anecdote.",
+          "url": "https://doi.org/10.1007/BF02986750",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

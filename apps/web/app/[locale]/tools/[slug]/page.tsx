@@ -49,6 +49,8 @@ import SignificantFiguresCalculator from "@/components/tools/significant-figures
 import SignificantFiguresEducation from "@/components/tools/significant-figures-calculator/SignificantFiguresEducation";
 import GpaCalculator from "@/components/tools/gpa-calculator/GpaCalculator";
 import GpaEducation from "@/components/tools/gpa-calculator/GpaEducation";
+import DensityCalculator from "@/components/tools/density-calculator/DensityCalculator";
+import DensityEducation from "@/components/tools/density-calculator/DensityEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -328,6 +330,9 @@ export default async function ToolPage({
     case "gpa-calculator":
       component = <GpaCalculator education={<GpaEducation />} />;
       break;
+    case "density-calculator":
+      component = <DensityCalculator education={<DensityEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -415,6 +420,7 @@ export default async function ToolPage({
     slug === "scientific-notation-converter" ||
     slug === "significant-figures-calculator" ||
     slug === "gpa-calculator" ||
+    slug === "density-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||
