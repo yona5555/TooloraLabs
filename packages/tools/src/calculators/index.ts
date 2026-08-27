@@ -24,3 +24,4 @@ export * from "./ZipCompressor";
 export * from "./FractionCalculator";
 export * from "./ScientificNotationConverter";
 export * from "./SignificantFiguresCalculator";
+export * from "./GpaCalculator";

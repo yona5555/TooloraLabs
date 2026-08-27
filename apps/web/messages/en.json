@@ -4452,6 +4452,166 @@
         }
       }
     },
+    "gpa-calculator": {
+      "title": "GPA / Grade Calculator",
+      "description": "Calculate a credit-weighted grade point average from your courses, and find the GPA you need on upcoming credits to reach a target.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Letter Grade Scale",
+          "intro": "The standard 4.0-scale grade points used by this calculator.",
+          "columnGrade": "Grade",
+          "columnPoints": "Points"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Courses",
+        "operationLabel": "Mode",
+        "operation": {
+          "calculate": "Calculate GPA",
+          "target": "Find Required GPA"
+        },
+        "gradeLabel": "Grade",
+        "creditHoursLabel": "Credit Hours",
+        "creditHoursPlaceholder": "e.g. 3",
+        "addCourse": "Add Course",
+        "removeCourse": "Remove course",
+        "currentGpaLabel": "Current GPA",
+        "currentGpaPlaceholder": "e.g. 3.0",
+        "currentCreditsLabel": "Current Credit Hours",
+        "currentCreditsPlaceholder": "e.g. 60",
+        "targetGpaLabel": "Target GPA",
+        "targetGpaPlaceholder": "e.g. 3.5",
+        "plannedCreditsLabel": "Upcoming Credit Hours",
+        "plannedCreditsPlaceholder": "e.g. 30"
+      },
+      "result": {
+        "heading": "Result",
+        "noCourses": "Add at least one course with credit hours greater than zero.",
+        "invalidPlannedCredits": "Upcoming credit hours must be greater than zero.",
+        "achievable": "This GPA is achievable on a 4.0 scale.",
+        "notAchievable": "This GPA is above 4.0 — the target cannot be reached with these credits alone.",
+        "creditsSummary": "{credits} total credit hours, {points} quality points.",
+        "diagramCaption": "{value} on the 0-to-4.0 GPA scale.",
+        "stepCalculate": "Total quality points divided by {credits} total credit hours.",
+        "stepTarget": "Starting from a {current} GPA over {credits} total credit hours once the upcoming courses are included."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding GPA",
+          "paragraph1": "A grade point average converts letter grades into a single weighted number by first translating each grade into grade points on a fixed scale (commonly 4.0 = A, 3.0 = B, 2.0 = C, 1.0 = D, 0.0 = F, often with plus/minus increments of 0.3 or 0.33), multiplying each course's grade points by its credit hours to get that course's \"quality points,\" then dividing the sum of all quality points by the sum of all credit hours. A 4-credit course therefore counts more toward the final average than a 1-credit course with the same letter grade.",
+          "diagram": {
+            "caption": "A GPA of 3.51 plotted on the 0-to-4.0 scale."
+          },
+          "paragraph2": "This credit-weighting is what makes GPA more informative than a simple average of letter grades: two students with the same three grades but different credit loads on each course can end up with different GPAs, because the heavier course pulls the average further toward its own grade.",
+          "paragraph3": "A cumulative GPA combines every term completed so far, while a term GPA covers only the current semester or quarter — both use the identical quality-points-over-credit-hours formula, just over a different set of courses. Because of this, a single very strong or very weak term has a much smaller effect on a cumulative GPA built from many prior terms than it does on that term's own GPA."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A full GPA calculation, plus a target-GPA example.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "A (3 credits) + B (4 credits) + A- (3 credits)", "result": "3.51 GPA" },
+            { "calculation": "3.0 GPA over 60 credits, target 3.5 over 90 total", "result": "Needs 4.5 on the next 30 — not achievable" },
+            { "calculation": "3.0 GPA over 90 credits, target 3.1 over 120 total", "result": "Needs 3.4 on the next 30" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does a 4-credit course affect my GPA more than a 1-credit course with the same grade?",
+              "answer": "GPA is a credit-weighted average, not a simple average of letter grades — each course contributes \"quality points\" equal to its grade points multiplied by its credit hours, so a 4-credit A contributes four times as many quality points as a 1-credit A, and therefore pulls the overall average more strongly toward a 4.0."
+            },
+            {
+              "question": "What's the difference between a term GPA and a cumulative GPA?",
+              "answer": "A term GPA is calculated only from the courses taken in a single semester or quarter. A cumulative GPA uses the same formula but includes every course completed so far across all terms, which is why one unusually strong or weak term has a much smaller effect on the cumulative number than it does on that term's own GPA."
+            },
+            {
+              "question": "Why do some schools use a 4.3 scale where an A+ is worth more than a 4.0 A?",
+              "answer": "There is no single national standard for the GPA scale — most US institutions cap it at 4.0 with no bonus for a plus grade at the top, but some award 4.3 or 4.33 for an A+, which can make GPAs from different schools not directly comparable without knowing which scale was used."
+            },
+            {
+              "question": "Can my required GPA for a target come out above 4.0?",
+              "answer": "Yes, and when it does, the target is not mathematically achievable through those upcoming credits alone, since 4.0 (a perfect A average) is the highest grade point value on the standard scale. This calculator flags that case directly rather than showing a misleading number."
+            },
+            {
+              "question": "Do pass/fail or audited courses affect GPA?",
+              "answer": "Typically not — most institutions exclude pass/fail, audited, and withdrawn courses from the GPA calculation entirely, counting only courses graded on the standard letter scale, though the exact policy varies by school and should be checked against your own institution's academic catalog."
+            },
+            {
+              "question": "Why do two students with the same grades sometimes have different GPAs?",
+              "answer": "Because GPA weights by credit hours, not just by grade — two students who both earned an A and a B in one course each will have different GPAs if one student's A was in a 4-credit course and the other's A was in a 1-credit course, since the heavier course counts for more of the final average."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Contested Origin, and a Clearer One",
+            "paragraph": "The now-familiar A-through-F letter grade is most commonly and credibly traced to Mount Holyoke College, a women's college in Massachusetts, which introduced a lettered scale (A through E, with E for failing, later changed to F) in 1897 — a claim Mount Holyoke's own library describes cautiously as making it \"the first recorded school\" to do so, not a certainty. Before that, American colleges graded qualitatively or with ad hoc systems; Yale president Ezra Stiles, for example, sorted students into four Latin-named ranks as early as 1785. A separate, frequently repeated claim credits Cambridge tutor William Farish with inventing numerical grading in 1792, but this story rests on thin evidence and has been directly challenged by historian Christopher Stray, who called the case \"unpersuasive\" in a 2005 peer-reviewed study — it is best treated as popular folklore rather than settled history. The GPA itself, as a cumulative numeric average built on letter or point grades, spread gradually across American colleges in the early-to-mid 20th century and became a broadly standardized 4.0-scale convention by around the 1940s."
+          },
+          "modernDevelopments": {
+            "title": "GPA in Automated Academic Systems",
+            "paragraph": "Modern student information systems calculate and update GPA automatically the moment a grade is entered, instantly recomputing both the term and cumulative figures across a student's entire academic record. This automation has made GPA a real-time, always-current number rather than something calculated by hand at the end of a term, which in turn has made planning tools like target-GPA calculators genuinely useful for students actively managing which courses to prioritize."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Grading systems and academic assessment are core subjects within the discipline of education. Here are the top 5 globally for Education & Training in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "University College London (UCL)",
+                "note": "Ranked #1 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd",
+                "online": "Yes — the program explicitly states there are no residency requirements and is designed for distance learning, with supervision conducted remotely."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gse.harvard.edu/degrees/phd",
+                "online": "No — the PhD requires five years of full-time, in-person study with required colloquia, research apprenticeships, and teaching fellowships."
+              },
+              {
+                "name": "University of Hong Kong",
+                "note": "Ranked #3 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://web.edu.hku.hk/programme/mphil-phd",
+                "online": "No — the program follows an on-campus, full-time or part-time research model, with no distance-learning track advertised."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://ed.stanford.edu/academics/doctoral",
+                "online": "No — the doctoral program follows an on-campus apprenticeship model with multi-year in-person research and teaching assistantships."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/",
+                "online": "No — the program states directly that \"the PhD is not a distance learning programme,\" and requires fieldwork terms in Cambridge."
+              },
+              {
+                "name": "King Saud University (KSU)",
+                "note": "Ranked #86 worldwide for Education & Training (QS World University Rankings by Subject 2025), the leading Arab-region university in this subject.",
+                "url": "https://education.ksu.edu.sa/en",
+                "online": "No — the university's graduate education programs follow an on-campus, in-person model."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Schneider, J., & Hutt, E. (2014). Making the Grade: A History of the A–F Marking Scheme. Journal of Curriculum Studies, 46(2), 201–224.",
+          "note": "Schneider and Hutt's peer-reviewed history traces the gradual adoption and standardization of the A–F letter-grade scale across American education, situating the Mount Holyoke College precedent within a broader, more contested history of grading reform.",
+          "url": "https://doi.org/10.1080/00220272.2013.790480",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

@@ -4456,6 +4456,166 @@
         }
       }
     },
+    "gpa-calculator": {
+      "title": "Notendurchschnitt-Rechner (GPA)",
+      "description": "Berechnen Sie einen nach Leistungspunkten gewichteten Notendurchschnitt aus Ihren Kursen, und ermitteln Sie, welchen Durchschnitt Sie in kommenden Leistungspunkten benötigen, um ein Ziel zu erreichen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Notenskala",
+          "intro": "Die von diesem Rechner verwendeten Standard-Notenpunkte auf der 4,0-Skala.",
+          "columnGrade": "Note",
+          "columnPoints": "Punkte"
+        }
+      },
+      "form": {
+        "inputTitle": "Ihre Kurse",
+        "operationLabel": "Modus",
+        "operation": {
+          "calculate": "GPA berechnen",
+          "target": "Erforderlichen GPA ermitteln"
+        },
+        "gradeLabel": "Note",
+        "creditHoursLabel": "Leistungspunkte",
+        "creditHoursPlaceholder": "z. B. 3",
+        "addCourse": "Kurs hinzufügen",
+        "removeCourse": "Kurs entfernen",
+        "currentGpaLabel": "Aktueller GPA",
+        "currentGpaPlaceholder": "z. B. 3,0",
+        "currentCreditsLabel": "Aktuelle Leistungspunkte",
+        "currentCreditsPlaceholder": "z. B. 60",
+        "targetGpaLabel": "Ziel-GPA",
+        "targetGpaPlaceholder": "z. B. 3,5",
+        "plannedCreditsLabel": "Anstehende Leistungspunkte",
+        "plannedCreditsPlaceholder": "z. B. 30"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "noCourses": "Fügen Sie mindestens einen Kurs mit mehr als null Leistungspunkten hinzu.",
+        "invalidPlannedCredits": "Die anstehenden Leistungspunkte müssen größer als null sein.",
+        "achievable": "Dieser GPA ist auf einer 4,0-Skala erreichbar.",
+        "notAchievable": "Dieser GPA liegt über 4,0 — das Ziel lässt sich mit diesen Leistungspunkten allein nicht erreichen.",
+        "creditsSummary": "{credits} Leistungspunkte insgesamt, {points} Qualitätspunkte.",
+        "diagramCaption": "{value} auf der GPA-Skala von 0 bis 4,0.",
+        "stepCalculate": "Gesamte Qualitätspunkte geteilt durch {credits} Leistungspunkte insgesamt.",
+        "stepTarget": "Ausgehend von einem GPA von {current} über {credits} Leistungspunkte insgesamt, sobald die anstehenden Kurse einbezogen sind."
+      },
+      "education": {
+        "intro": {
+          "title": "Den Notendurchschnitt verstehen",
+          "paragraph1": "Ein Notendurchschnitt (GPA) wandelt Buchstabennoten in eine einzige gewichtete Zahl um: Zunächst wird jede Note nach einer festen Skala in Notenpunkte übersetzt (üblicherweise 4,0 = A, 3,0 = B, 2,0 = C, 1,0 = D, 0,0 = F, oft mit Plus-/Minus-Abstufungen von 0,3 oder 0,33), dann werden die Notenpunkte jedes Kurses mit seinen Leistungspunkten multipliziert, um dessen „Qualitätspunkte“ zu erhalten, und schließlich wird die Summe aller Qualitätspunkte durch die Summe aller Leistungspunkte geteilt. Ein 4-Leistungspunkte-Kurs zählt daher stärker zum Endergebnis als ein 1-Leistungspunkte-Kurs mit derselben Note.",
+          "diagram": {
+            "caption": "Ein GPA von 3,51 auf der Skala von 0 bis 4,0."
+          },
+          "paragraph2": "Diese Gewichtung nach Leistungspunkten macht den GPA aussagekräftiger als einen einfachen Durchschnitt der Buchstabennoten: Zwei Studierende mit denselben drei Noten, aber unterschiedlichen Leistungspunkten je Kurs, können am Ende unterschiedliche GPA-Werte haben, weil der umfangreichere Kurs den Durchschnitt stärker zu seiner eigenen Note hin zieht.",
+          "paragraph3": "Ein kumulativer GPA fasst alle bisher abgeschlossenen Semester zusammen, während ein Semester-GPA nur das aktuelle Semester oder Trimester umfasst — beide verwenden dieselbe Formel aus Qualitätspunkten geteilt durch Leistungspunkte, nur über eine unterschiedliche Kursmenge. Deshalb wirkt sich ein einzelnes besonders starkes oder schwaches Semester auf einen aus vielen vorherigen Semestern aufgebauten kumulativen GPA weit geringer aus als auf den GPA dieses einen Semesters selbst."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Eine vollständige GPA-Berechnung sowie ein Beispiel für einen Ziel-GPA.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "A (3 Leistungspunkte) + B (4 Leistungspunkte) + A- (3 Leistungspunkte)", "result": "GPA 3,51" },
+            { "calculation": "GPA 3,0 über 60 Leistungspunkte, Ziel 3,5 über 90 insgesamt", "result": "Benötigt 4,5 in den nächsten 30 — nicht erreichbar" },
+            { "calculation": "GPA 3,0 über 90 Leistungspunkte, Ziel 3,1 über 120 insgesamt", "result": "Benötigt 3,4 in den nächsten 30" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum wirkt sich ein 4-Leistungspunkte-Kurs stärker auf meinen GPA aus als ein 1-Leistungspunkte-Kurs mit derselben Note?",
+              "answer": "Der GPA ist ein nach Leistungspunkten gewichteter Durchschnitt, kein einfacher Durchschnitt der Buchstabennoten — jeder Kurs trägt „Qualitätspunkte“ bei, die seinen Notenpunkten multipliziert mit seinen Leistungspunkten entsprechen. Ein A in einem 4-Leistungspunkte-Kurs liefert daher viermal so viele Qualitätspunkte wie ein A in einem 1-Leistungspunkte-Kurs und zieht den Gesamtdurchschnitt entsprechend stärker in Richtung 4,0."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen einem Semester-GPA und einem kumulativen GPA?",
+              "answer": "Ein Semester-GPA wird ausschließlich aus den in einem einzigen Semester oder Trimester belegten Kursen berechnet. Ein kumulativer GPA verwendet dieselbe Formel, bezieht aber alle bisher über sämtliche Semester abgeschlossenen Kurse ein — deshalb wirkt sich ein ungewöhnlich starkes oder schwaches Semester weit weniger auf die kumulative Zahl aus als auf den GPA dieses Semesters selbst."
+            },
+            {
+              "question": "Warum verwenden manche Hochschulen eine 4,3-Skala, auf der ein A+ mehr wert ist als ein A mit 4,0?",
+              "answer": "Es gibt keinen einheitlichen nationalen Standard für die GPA-Skala — die meisten US-Hochschulen deckeln sie bei 4,0 ohne Bonus für ein Plus an der Spitze, manche vergeben für ein A+ jedoch 4,3 oder 4,33, wodurch GPA-Werte verschiedener Hochschulen ohne Kenntnis der jeweils verwendeten Skala nicht direkt vergleichbar sind."
+            },
+            {
+              "question": "Kann der für ein Ziel erforderliche GPA über 4,0 liegen?",
+              "answer": "Ja, und in diesem Fall ist das Ziel mit den anstehenden Leistungspunkten allein rechnerisch nicht erreichbar, da 4,0 (ein perfekter A-Durchschnitt) der höchste Notenpunktwert auf der Standardskala ist. Dieser Rechner weist diesen Fall direkt aus, statt eine irreführende Zahl anzuzeigen."
+            },
+            {
+              "question": "Wirken sich Bestanden/Nicht-bestanden- oder Gasthörer-Kurse auf den GPA aus?",
+              "answer": "In der Regel nicht — die meisten Hochschulen schließen Bestanden/Nicht-bestanden-Kurse, Gasthörerkurse und abgebrochene Kurse vollständig von der GPA-Berechnung aus und zählen nur nach der Standard-Buchstabenskala benotete Kurse. Die genaue Regelung ist jedoch von Hochschule zu Hochschule unterschiedlich und sollte im eigenen akademischen Katalog nachgeschlagen werden."
+            },
+            {
+              "question": "Warum haben zwei Studierende mit denselben Noten manchmal unterschiedliche GPA-Werte?",
+              "answer": "Weil der GPA nach Leistungspunkten und nicht nur nach der Note gewichtet wird — zwei Studierende, die jeweils in einem Kurs ein A und in einem anderen ein B erhalten haben, werden unterschiedliche GPA-Werte haben, wenn das A der einen Person in einem 4-Leistungspunkte-Kurs und das A der anderen Person in einem 1-Leistungspunkte-Kurs erzielt wurde, da der umfangreichere Kurs stärker in den Enddurchschnitt einfließt."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Ein umstrittener Ursprung, und ein klarerer",
+            "paragraph": "Die heute vertraute Buchstabennote von A bis F wird am glaubwürdigsten dem Mount Holyoke College zugeschrieben, einem Frauencollege in Massachusetts, das 1897 eine Buchstabenskala (A bis E, wobei E für „durchgefallen“ stand, im Folgejahr zu F geändert) einführte — eine Angabe, die die Bibliothek des Mount Holyoke College selbst vorsichtig als „die erste dokumentierte Schule“ formuliert, nicht als gesicherte Tatsache. Zuvor bewerteten amerikanische Colleges qualitativ oder mit Ad-hoc-Systemen; Yale-Präsident Ezra Stiles etwa teilte Studierende bereits 1785 in vier lateinisch benannte Ränge ein. Eine andere, häufig wiederholte Behauptung schreibt einem Cambridge-Tutor namens William Farish die Erfindung der numerischen Benotung im Jahr 1792 zu, doch diese Geschichte stützt sich auf dünne Beweise und wurde vom Historiker Christopher Stray direkt infrage gestellt, der die Beweislage für Farish in einer 2005 begutachteten Studie als „nicht überzeugend“ bezeichnete — sie sollte eher als vielfach wiederholte Legende denn als gesicherte Geschichte gelten. Der GPA selbst, als kumulativer Zahlendurchschnitt auf Basis von Buchstaben- oder Punktnoten, verbreitete sich in der ersten Hälfte des 20. Jahrhunderts allmählich an amerikanischen Hochschulen und wurde bis etwa in die 1940er-Jahre zu einer weithin standardisierten Konvention auf einer 4,0-Skala."
+          },
+          "modernDevelopments": {
+            "title": "GPA in automatisierten Hochschulsystemen",
+            "paragraph": "Moderne Studierendeninformationssysteme berechnen und aktualisieren den GPA automatisch in dem Moment, in dem eine Note eingetragen wird, und berechnen dabei sofort sowohl die Semester- als auch die kumulativen Werte über die gesamte akademische Laufbahn eines Studierenden neu. Diese Automatisierung hat den GPA zu einer stets aktuellen Echtzeitzahl gemacht, statt zu etwas, das erst am Ende eines Semesters von Hand berechnet wird — was wiederum Planungswerkzeuge wie Ziel-GPA-Rechner für Studierende, die aktiv entscheiden, welche Kurse Priorität haben sollen, wirklich nützlich gemacht hat."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Notensysteme und akademische Bewertung sind zentrale Themen innerhalb der Disziplin Pädagogik. Hier sind die weltweit 5 besten Universitäten für Education & Training im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Universität:",
+            "universities": [
+              {
+                "name": "University College London (UCL)",
+                "note": "Weltweit auf Platz 1 für Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd",
+                "online": "Ja — das Programm gibt ausdrücklich an, dass keine Residenzpflicht besteht und es für Fernstudium konzipiert ist, mit aus der Ferne durchgeführter Betreuung."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gse.harvard.edu/degrees/phd",
+                "online": "Nein — die Promotion erfordert fünf Jahre Vollzeitstudium in Präsenz mit verpflichtenden Kolloquien, Forschungspraktika und Lehrtätigkeiten."
+              },
+              {
+                "name": "University of Hong Kong",
+                "note": "Weltweit auf Platz 3 für Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://web.edu.hku.hk/programme/mphil-phd",
+                "online": "Nein — das Programm folgt einem Präsenz-Forschungsmodell in Vollzeit oder Teilzeit, ohne beworbenen Fernstudienweg."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://ed.stanford.edu/academics/doctoral",
+                "online": "Nein — das Promotionsprogramm folgt einem Präsenz-Lehrlingsmodell mit mehrjähriger Forschung und Lehrtätigkeit auf dem Campus."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/",
+                "online": "Nein — das Programm gibt direkt an, dass „die Promotion kein Fernstudienprogramm ist“, und verlangt Feldforschungsphasen in Cambridge."
+              },
+              {
+                "name": "King Saud University (KSU)",
+                "note": "Weltweit auf Platz 86 für Education & Training (QS World University Rankings by Subject 2025), die führende Universität der arabischen Region in diesem Fach.",
+                "url": "https://education.ksu.edu.sa/en",
+                "online": "Nein — die Graduiertenprogramme der Universität folgen einem Präsenzmodell auf dem Campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Schneider, J., & Hutt, E. (2014). Making the Grade: A History of the A–F Marking Scheme. Journal of Curriculum Studies, 46(2), 201–224.",
+          "note": "Die von Schneider und Hutt begutachtete historische Untersuchung zeichnet die schrittweise Übernahme und Standardisierung der Buchstabenskala von A bis F im amerikanischen Bildungswesen nach und ordnet den Präzedenzfall des Mount Holyoke College in eine breitere, umstrittenere Geschichte der Bewertungsreform ein.",
+          "url": "https://doi.org/10.1080/00220272.2013.790480",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

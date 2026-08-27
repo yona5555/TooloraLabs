@@ -4456,6 +4456,166 @@
         }
       }
     },
+    "gpa-calculator": {
+      "title": "Calculatrice de Moyenne Académique (GPA)",
+      "description": "Calculez une moyenne académique pondérée par les crédits à partir de vos cours, et déterminez la moyenne nécessaire sur les prochains crédits pour atteindre un objectif.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Échelle des Notes",
+          "intro": "Les points de note standard sur l'échelle de 4,0 utilisés par cette calculatrice.",
+          "columnGrade": "Note",
+          "columnPoints": "Points"
+        }
+      },
+      "form": {
+        "inputTitle": "Vos Cours",
+        "operationLabel": "Mode",
+        "operation": {
+          "calculate": "Calculer le GPA",
+          "target": "Trouver le GPA Requis"
+        },
+        "gradeLabel": "Note",
+        "creditHoursLabel": "Heures de Crédit",
+        "creditHoursPlaceholder": "ex. 3",
+        "addCourse": "Ajouter un Cours",
+        "removeCourse": "Supprimer le cours",
+        "currentGpaLabel": "GPA Actuel",
+        "currentGpaPlaceholder": "ex. 3,0",
+        "currentCreditsLabel": "Heures de Crédit Actuelles",
+        "currentCreditsPlaceholder": "ex. 60",
+        "targetGpaLabel": "GPA Cible",
+        "targetGpaPlaceholder": "ex. 3,5",
+        "plannedCreditsLabel": "Heures de Crédit à Venir",
+        "plannedCreditsPlaceholder": "ex. 30"
+      },
+      "result": {
+        "heading": "Résultat",
+        "noCourses": "Ajoutez au moins un cours avec plus de zéro heure de crédit.",
+        "invalidPlannedCredits": "Les heures de crédit à venir doivent être supérieures à zéro.",
+        "achievable": "Ce GPA est atteignable sur une échelle de 4,0.",
+        "notAchievable": "Ce GPA dépasse 4,0 — l'objectif ne peut pas être atteint avec ces seuls crédits.",
+        "creditsSummary": "{credits} heures de crédit au total, {points} points de qualité.",
+        "diagramCaption": "{value} sur l'échelle de GPA de 0 à 4,0.",
+        "stepCalculate": "Total des points de qualité divisé par {credits} heures de crédit au total.",
+        "stepTarget": "En partant d'un GPA de {current} sur {credits} heures de crédit au total une fois les prochains cours inclus."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le GPA",
+          "paragraph1": "Une moyenne académique (GPA) convertit les notes en lettres en un seul nombre pondéré : elle traduit d'abord chaque note en points selon une échelle fixe (généralement 4,0 = A, 3,0 = B, 2,0 = C, 1,0 = D, 0,0 = F, souvent avec des incréments plus/moins de 0,3 ou 0,33), multiplie ensuite les points de chaque cours par ses heures de crédit pour obtenir les « points de qualité » de ce cours, puis divise la somme de tous les points de qualité par la somme de toutes les heures de crédit. Un cours de 4 crédits compte donc davantage dans la moyenne finale qu'un cours de 1 crédit avec la même note.",
+          "diagram": {
+            "caption": "Un GPA de 3,51 représenté sur l'échelle de 0 à 4,0."
+          },
+          "paragraph2": "Cette pondération par les crédits est ce qui rend le GPA plus informatif qu'une simple moyenne des notes en lettres : deux étudiants ayant les trois mêmes notes mais des charges de crédits différentes sur chaque cours peuvent obtenir des GPA différents, car le cours le plus lourd tire la moyenne plus fortement vers sa propre note.",
+          "paragraph3": "Un GPA cumulatif combine tous les trimestres achevés jusqu'à présent, tandis qu'un GPA de trimestre ne porte que sur le semestre ou trimestre en cours — les deux utilisent la même formule de points de qualité sur heures de crédit, mais sur un ensemble de cours différent. C'est pourquoi un trimestre particulièrement fort ou faible a un effet bien plus faible sur un GPA cumulatif construit à partir de nombreux trimestres antérieurs que sur le GPA de ce trimestre lui-même."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Un calcul complet de GPA, ainsi qu'un exemple de GPA cible.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "A (3 crédits) + B (4 crédits) + A- (3 crédits)", "result": "GPA de 3,51" },
+            { "calculation": "GPA de 3,0 sur 60 crédits, cible de 3,5 sur 90 au total", "result": "Nécessite 4,5 sur les 30 prochains — impossible" },
+            { "calculation": "GPA de 3,0 sur 90 crédits, cible de 3,1 sur 120 au total", "result": "Nécessite 3,4 sur les 30 prochains" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi un cours de 4 crédits affecte-t-il davantage mon GPA qu'un cours de 1 crédit avec la même note ?",
+              "answer": "Le GPA est une moyenne pondérée par les crédits, pas une simple moyenne des notes en lettres — chaque cours apporte des « points de qualité » égaux à ses points de note multipliés par ses heures de crédit, si bien qu'un A dans un cours de 4 crédits apporte quatre fois plus de points de qualité qu'un A dans un cours de 1 crédit, et tire donc la moyenne globale plus fortement vers 4,0."
+            },
+            {
+              "question": "Quelle est la différence entre un GPA de trimestre et un GPA cumulatif ?",
+              "answer": "Un GPA de trimestre est calculé uniquement à partir des cours suivis lors d'un seul semestre ou trimestre. Un GPA cumulatif utilise la même formule mais inclut tous les cours achevés jusqu'à présent sur l'ensemble des trimestres, ce qui explique pourquoi un trimestre inhabituellement fort ou faible a un effet bien plus limité sur le chiffre cumulatif que sur le GPA de ce trimestre."
+            },
+            {
+              "question": "Pourquoi certains établissements utilisent-ils une échelle de 4,3 où un A+ vaut plus qu'un A à 4,0 ?",
+              "answer": "Il n'existe pas de norme nationale unique pour l'échelle du GPA — la plupart des établissements américains la plafonnent à 4,0 sans bonus pour une note « plus » au sommet, mais certains attribuent 4,3 ou 4,33 pour un A+, ce qui peut rendre les GPA de différents établissements non directement comparables sans savoir quelle échelle a été utilisée."
+            },
+            {
+              "question": "Le GPA requis pour un objectif peut-il dépasser 4,0 ?",
+              "answer": "Oui, et dans ce cas, l'objectif n'est mathématiquement pas atteignable avec ces seuls crédits à venir, puisque 4,0 (une moyenne parfaite de A) est la valeur de points la plus élevée sur l'échelle standard. Cette calculatrice signale directement ce cas plutôt que d'afficher un chiffre trompeur."
+            },
+            {
+              "question": "Les cours réussite/échec ou audités affectent-ils le GPA ?",
+              "answer": "Généralement pas — la plupart des établissements excluent entièrement du calcul du GPA les cours réussite/échec, audités et abandonnés, ne comptant que les cours notés selon l'échelle standard en lettres, bien que la politique exacte varie selon l'établissement et doive être vérifiée dans le catalogue académique de votre propre institution."
+            },
+            {
+              "question": "Pourquoi deux étudiants ayant les mêmes notes ont-ils parfois des GPA différents ?",
+              "answer": "Parce que le GPA est pondéré par les heures de crédit, pas seulement par la note — deux étudiants ayant chacun obtenu un A et un B dans un cours chacun auront des GPA différents si le A de l'un était dans un cours de 4 crédits et le A de l'autre dans un cours de 1 crédit, le cours le plus lourd comptant davantage dans la moyenne finale."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Une Origine Contestée, et une Plus Claire",
+            "paragraph": "La note en lettres désormais familière, de A à F, est le plus souvent et le plus sérieusement attribuée au Mount Holyoke College, un établissement féminin du Massachusetts, qui introduisit une échelle en lettres (de A à E, E signifiant échec, changée en F l'année suivante) en 1897 — une affirmation que la bibliothèque de Mount Holyoke elle-même formule avec prudence, en la présentant comme « le premier établissement recensé » à l'avoir fait, non comme une certitude. Auparavant, les collèges américains notaient de façon qualitative ou selon des systèmes improvisés ; le président de Yale, Ezra Stiles, par exemple, classait les étudiants en quatre rangs aux noms latins dès 1785. Une autre affirmation, très répandue, attribue à un tuteur de Cambridge nommé William Farish l'invention de la notation numérique en 1792, mais cette histoire repose sur des preuves ténues et a été directement contestée par l'historien Christopher Stray, qui a jugé le dossier de Farish « peu convaincant » dans une étude à comité de lecture de 2005 — il vaut mieux la considérer comme une légende largement répétée plutôt que comme une histoire établie. Le GPA lui-même, en tant que moyenne numérique cumulative fondée sur des notes en lettres ou en points, s'est répandu progressivement dans les collèges américains au cours de la première moitié du XXe siècle, et est devenu une convention largement normalisée fondée sur une échelle de 4,0 vers les années 1940."
+          },
+          "modernDevelopments": {
+            "title": "Le GPA dans les Systèmes Académiques Automatisés",
+            "paragraph": "Les systèmes d'information étudiante modernes calculent et mettent à jour le GPA automatiquement dès qu'une note est saisie, recalculant instantanément les chiffres du trimestre et du cumulatif sur l'ensemble du dossier académique d'un étudiant. Cette automatisation a fait du GPA un nombre en temps réel, toujours à jour, plutôt qu'une donnée calculée à la main en fin de trimestre — ce qui a rendu, en retour, des outils de planification comme les calculatrices de GPA cible véritablement utiles pour les étudiants qui gèrent activement les cours à prioriser."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les systèmes de notation et l'évaluation académique sont des sujets centraux de la discipline de l'éducation. Voici les 5 meilleures universités mondiales en Éducation et Formation selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université régionale :",
+            "universities": [
+              {
+                "name": "University College London (UCL)",
+                "note": "Classée n° 1 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd",
+                "online": "Oui — le programme précise explicitement qu'il n'y a pas d'obligation de résidence et qu'il est conçu pour l'enseignement à distance, avec un encadrement assuré à distance."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gse.harvard.edu/degrees/phd",
+                "online": "Non — le doctorat exige cinq ans d'études en présentiel à temps plein, avec colloques, stages de recherche et charges d'enseignement obligatoires."
+              },
+              {
+                "name": "University of Hong Kong",
+                "note": "Classée n° 3 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://web.edu.hku.hk/programme/mphil-phd",
+                "online": "Non — le programme suit un modèle de recherche en présentiel à temps plein ou partiel, sans filière d'apprentissage à distance annoncée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://ed.stanford.edu/academics/doctoral",
+                "online": "Non — le programme doctoral suit un modèle d'apprentissage en présentiel avec plusieurs années de recherche et de charges d'enseignement sur le campus."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/",
+                "online": "Non — le programme indique directement que « le doctorat n'est pas un programme d'enseignement à distance », et exige des périodes de terrain à Cambridge."
+              },
+              {
+                "name": "King Saud University (KSU)",
+                "note": "Classée 86e mondiale en Éducation et Formation (QS World University Rankings by Subject 2025), la première université de la région arabe dans cette discipline.",
+                "url": "https://education.ksu.edu.sa/en",
+                "online": "Non — les programmes de troisième cycle de l'université suivent un modèle en présentiel sur le campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Schneider, J., & Hutt, E. (2014). Making the Grade: A History of the A–F Marking Scheme. Journal of Curriculum Studies, 46(2), 201–224.",
+          "note": "L'étude historique à comité de lecture de Schneider et Hutt retrace l'adoption et la standardisation progressives de l'échelle de notation en lettres de A à F dans l'enseignement américain, replaçant le précédent du Mount Holyoke College dans une histoire plus large et plus contestée de la réforme de la notation.",
+          "url": "https://doi.org/10.1080/00220272.2013.790480",
+          "readOriginal": "Lire le texte original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

@@ -310,6 +310,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "gpa-calculator",
+    title: "GPA / Grade Calculator",
+    category: "math-science",
+    description:
+      "Calculate a credit-weighted grade point average from your courses, and find the GPA you need on upcoming credits to reach a target.",
+    featured: false,
+    keywords: [
+      "gpa calculator",
+      "grade point average",
+      "college gpa",
+      "grade calculator",
+      "cumulative gpa",
+      "target gpa",
+    ],
+  },
+  {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
     category: "math-science",

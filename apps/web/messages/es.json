@@ -4456,6 +4456,166 @@
         }
       }
     },
+    "gpa-calculator": {
+      "title": "Calculadora de Promedio Académico (GPA)",
+      "description": "Calcule un promedio académico ponderado por créditos a partir de sus cursos, y averigüe qué promedio necesita en los créditos próximos para alcanzar una meta.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Escala de Calificaciones",
+          "intro": "Los puntos de calificación estándar en la escala de 4.0 que usa esta calculadora.",
+          "columnGrade": "Calificación",
+          "columnPoints": "Puntos"
+        }
+      },
+      "form": {
+        "inputTitle": "Sus Cursos",
+        "operationLabel": "Modo",
+        "operation": {
+          "calculate": "Calcular el GPA",
+          "target": "Hallar el GPA Necesario"
+        },
+        "gradeLabel": "Calificación",
+        "creditHoursLabel": "Horas de Crédito",
+        "creditHoursPlaceholder": "p. ej. 3",
+        "addCourse": "Añadir Curso",
+        "removeCourse": "Eliminar curso",
+        "currentGpaLabel": "GPA Actual",
+        "currentGpaPlaceholder": "p. ej. 3.0",
+        "currentCreditsLabel": "Horas de Crédito Actuales",
+        "currentCreditsPlaceholder": "p. ej. 60",
+        "targetGpaLabel": "GPA Objetivo",
+        "targetGpaPlaceholder": "p. ej. 3.5",
+        "plannedCreditsLabel": "Horas de Crédito Próximas",
+        "plannedCreditsPlaceholder": "p. ej. 30"
+      },
+      "result": {
+        "heading": "Resultado",
+        "noCourses": "Añada al menos un curso con más de cero horas de crédito.",
+        "invalidPlannedCredits": "Las horas de crédito próximas deben ser mayores que cero.",
+        "achievable": "Este GPA es alcanzable en una escala de 4.0.",
+        "notAchievable": "Este GPA supera 4.0 — la meta no se puede alcanzar solo con estos créditos.",
+        "creditsSummary": "{credits} horas de crédito en total, {points} puntos de calidad.",
+        "diagramCaption": "{value} en la escala de GPA de 0 a 4.0.",
+        "stepCalculate": "Puntos de calidad totales divididos entre {credits} horas de crédito totales.",
+        "stepTarget": "Partiendo de un GPA de {current} sobre {credits} horas de crédito totales una vez incluidos los próximos cursos."
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo Funciona el GPA",
+          "paragraph1": "Un promedio académico (GPA) convierte las calificaciones en letra en un único número ponderado: primero traduce cada calificación a puntos según una escala fija (comúnmente 4.0 = A, 3.0 = B, 2.0 = C, 1.0 = D, 0.0 = F, a menudo con incrementos de más/menos de 0.3 o 0.33), luego multiplica los puntos de cada curso por sus horas de crédito para obtener los \"puntos de calidad\" de ese curso, y finalmente divide la suma de todos los puntos de calidad entre la suma de todas las horas de crédito. Por eso un curso de 4 créditos cuenta más en el promedio final que uno de 1 crédito con la misma calificación.",
+          "diagram": {
+            "caption": "Un GPA de 3.51 representado en la escala de 0 a 4.0."
+          },
+          "paragraph2": "Esta ponderación por créditos es lo que hace que el GPA sea más informativo que un simple promedio de calificaciones: dos estudiantes con las mismas tres calificaciones pero distinta carga de créditos en cada curso pueden terminar con GPA diferentes, porque el curso más pesado arrastra el promedio con más fuerza hacia su propia calificación.",
+          "paragraph3": "Un GPA acumulado combina todos los períodos completados hasta ahora, mientras que un GPA de período cubre solo el semestre o trimestre actual — ambos usan la misma fórmula de puntos de calidad entre horas de crédito, solo que sobre un conjunto distinto de cursos. Por eso un período muy fuerte o muy débil tiene un efecto mucho menor sobre un GPA acumulado construido a partir de muchos períodos anteriores que sobre el GPA de ese período en particular."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Un cálculo completo de GPA, además de un ejemplo de GPA objetivo.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "A (3 créditos) + B (4 créditos) + A- (3 créditos)", "result": "GPA de 3.51" },
+            { "calculation": "GPA de 3.0 sobre 60 créditos, meta de 3.5 sobre 90 en total", "result": "Necesita 4.5 en los próximos 30 — no alcanzable" },
+            { "calculation": "GPA de 3.0 sobre 90 créditos, meta de 3.1 sobre 120 en total", "result": "Necesita 3.4 en los próximos 30" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué un curso de 4 créditos afecta más mi GPA que uno de 1 crédito con la misma calificación?",
+              "answer": "El GPA es un promedio ponderado por créditos, no un promedio simple de calificaciones — cada curso aporta \"puntos de calidad\" iguales a sus puntos de calificación multiplicados por sus horas de crédito, así que una A en un curso de 4 créditos aporta cuatro veces más puntos de calidad que una A en uno de 1 crédito, y por eso arrastra el promedio general con más fuerza hacia 4.0."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre un GPA de período y un GPA acumulado?",
+              "answer": "Un GPA de período se calcula solo con los cursos tomados en un semestre o trimestre. Un GPA acumulado usa la misma fórmula pero incluye todos los cursos completados hasta ahora en todos los períodos, por lo que un período inusualmente fuerte o débil tiene un efecto mucho menor sobre el número acumulado que sobre el GPA de ese propio período."
+            },
+            {
+              "question": "¿Por qué algunas instituciones usan una escala de 4.3 donde una A+ vale más que una A de 4.0?",
+              "answer": "No existe un estándar nacional único para la escala de GPA — la mayoría de las instituciones estadounidenses la limitan a 4.0 sin bonificación por una calificación con más en la cima, pero algunas otorgan 4.3 o 4.33 por una A+, lo que puede hacer que los GPA de distintas instituciones no sean directamente comparables sin saber qué escala se usó."
+            },
+            {
+              "question": "¿Puede el GPA necesario para una meta resultar mayor que 4.0?",
+              "answer": "Sí, y cuando ocurre, la meta no es matemáticamente alcanzable solo con esos créditos próximos, ya que 4.0 (un promedio perfecto de A) es el valor de puntos de calificación más alto en la escala estándar. Esta calculadora señala ese caso directamente en lugar de mostrar un número engañoso."
+            },
+            {
+              "question": "¿Los cursos aprobado/reprobado o auditados afectan el GPA?",
+              "answer": "Normalmente no — la mayoría de las instituciones excluyen por completo del cálculo del GPA los cursos aprobado/reprobado, auditados y con retiro, contando solo los cursos calificados en la escala de letras estándar, aunque la política exacta varía según la institución y debe verificarse en el catálogo académico propio."
+            },
+            {
+              "question": "¿Por qué dos estudiantes con las mismas calificaciones a veces tienen GPA distintos?",
+              "answer": "Porque el GPA se pondera por horas de crédito, no solo por la calificación — dos estudiantes que obtuvieron una A y una B, uno en cada curso, tendrán GPA distintos si la A de uno fue en un curso de 4 créditos y la A del otro fue en uno de 1 crédito, ya que el curso más pesado cuenta más en el promedio final."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Un Origen Disputado, y Otro Más Claro",
+            "paragraph": "La ya familiar calificación en letra de la A a la F se atribuye con mayor solidez al Mount Holyoke College, una universidad femenina de Massachusetts, que introdujo una escala en letras (de la A a la E, con E para reprobado, cambiada luego a F) en 1897 — una afirmación que la propia biblioteca de Mount Holyoke describe con cautela como haberla convertido en \"la primera escuela registrada\" en hacerlo, no como una certeza. Antes de eso, las universidades estadounidenses calificaban de forma cualitativa o con sistemas improvisados; el presidente de Yale, Ezra Stiles, por ejemplo, clasificaba a los estudiantes en cuatro rangos con nombres latinos ya desde 1785. Una afirmación distinta y muy repetida atribuye a un tutor de Cambridge llamado William Farish la invención de la calificación numérica en 1792, pero esta historia se apoya en evidencia endeble y ha sido cuestionada directamente por el historiador Christopher Stray, quien calificó el caso de Farish como \"poco convincente\" en un estudio revisado por pares de 2005 — es mejor tratarla como folclore muy repetido que como historia establecida. El GPA en sí, como promedio numérico acumulado construido sobre calificaciones en letra o en puntos, se difundió gradualmente por las universidades estadounidenses a comienzos y mediados del siglo XX, y se convirtió en una convención ampliamente estandarizada basada en una escala de 4.0 hacia la década de 1940."
+          },
+          "modernDevelopments": {
+            "title": "El GPA en los Sistemas Académicos Automatizados",
+            "paragraph": "Los sistemas modernos de información estudiantil calculan y actualizan el GPA automáticamente en el momento en que se registra una calificación, recalculando al instante tanto las cifras del período como las acumuladas en todo el historial académico del estudiante. Esta automatización ha convertido al GPA en un número en tiempo real y siempre actualizado, en lugar de algo calculado a mano al final de un período, lo que a su vez ha hecho que herramientas de planificación como las calculadoras de GPA objetivo sean genuinamente útiles para estudiantes que gestionan activamente qué cursos priorizar."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Los sistemas de calificación y la evaluación académica son materias centrales dentro de la disciplina de la educación. Estas son las 5 mejores universidades del mundo en Educación y Formación según el QS World University Rankings by Subject 2025, además de una destacada universidad regional:",
+            "universities": [
+              {
+                "name": "University College London (UCL)",
+                "note": "Clasificada #1 del mundo en Educación y Formación (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd",
+                "online": "Sí — el programa establece explícitamente que no hay requisito de residencia y está diseñado para el aprendizaje a distancia, con supervisión realizada de forma remota."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Educación y Formación (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gse.harvard.edu/degrees/phd",
+                "online": "No — el doctorado exige cinco años de estudio presencial a tiempo completo, con coloquios, prácticas de investigación y ayudantías de docencia obligatorias."
+              },
+              {
+                "name": "University of Hong Kong",
+                "note": "Clasificada #3 del mundo en Educación y Formación (QS World University Rankings by Subject 2025).",
+                "url": "https://web.edu.hku.hk/programme/mphil-phd",
+                "online": "No — el programa sigue un modelo de investigación presencial a tiempo completo o parcial, sin una vía de aprendizaje a distancia anunciada."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Educación y Formación (QS World University Rankings by Subject 2025).",
+                "url": "https://ed.stanford.edu/academics/doctoral",
+                "online": "No — el programa doctoral sigue un modelo de aprendizaje presencial con varios años de investigación y ayudantías de docencia en el campus."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #5 del mundo en Educación y Formación (QS World University Rankings by Subject 2025).",
+                "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/",
+                "online": "No — el programa indica directamente que \"el doctorado no es un programa de aprendizaje a distancia\", y exige periodos de trabajo de campo en Cambridge."
+              },
+              {
+                "name": "King Saud University (KSU)",
+                "note": "Clasificada #86 del mundo en Educación y Formación (QS World University Rankings by Subject 2025), la universidad líder de la región árabe en esta materia.",
+                "url": "https://education.ksu.edu.sa/en",
+                "online": "No — los programas de posgrado de la universidad siguen un modelo presencial dentro del campus."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Schneider, J., & Hutt, E. (2014). Making the Grade: A History of the A–F Marking Scheme. Journal of Curriculum Studies, 46(2), 201–224.",
+          "note": "La revisión histórica de Schneider y Hutt, revisada por pares, documenta la adopción y estandarización graduales de la escala de calificación de la A a la F en la educación estadounidense, situando el precedente de Mount Holyoke College dentro de una historia más amplia y más disputada de la reforma de la calificación.",
+          "url": "https://doi.org/10.1080/00220272.2013.790480",
+          "readOriginal": "Leer el texto original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",
