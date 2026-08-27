@@ -41,6 +41,8 @@ import ZipCompressorTool from "@/components/tools/zip-compressor/ZipCompressorTo
 import ZipCompressorEducation from "@/components/tools/zip-compressor/ZipCompressorEducation";
 import WorldTimeCalculator from "@/components/tools/world-time-converter/WorldTimeCalculator";
 import WorldTimeEducation from "@/components/tools/world-time-converter/WorldTimeEducation";
+import FractionCalculator from "@/components/tools/fraction-calculator/FractionCalculator";
+import FractionEducation from "@/components/tools/fraction-calculator/FractionEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -308,6 +310,9 @@ export default async function ToolPage({
     case "world-time-converter":
       component = <WorldTimeCalculator education={<WorldTimeEducation />} />;
       break;
+    case "fraction-calculator":
+      component = <FractionCalculator education={<FractionEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -391,6 +396,7 @@ export default async function ToolPage({
     slug === "zip-compressor" ||
     slug === "world-time-converter" ||
     slug === "scientific-calculator" ||
+    slug === "fraction-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

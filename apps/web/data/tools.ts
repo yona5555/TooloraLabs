@@ -259,6 +259,24 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "fraction-calculator",
+    title: "Fraction Calculator",
+    category: "math-science",
+    description:
+      "Add, subtract, multiply, and divide fractions with full simplified steps, a mixed-number and decimal equivalent, and a diagram of every result.",
+    featured: false,
+    keywords: [
+      "fraction calculator",
+      "add fractions",
+      "subtract fractions",
+      "multiply fractions",
+      "divide fractions",
+      "simplify fraction",
+      "mixed number",
+      "common denominator",
+    ],
+  },
+  {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
     category: "math-science",

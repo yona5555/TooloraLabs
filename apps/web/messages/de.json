@@ -3963,6 +3963,163 @@
         }
       }
     },
+    "fraction-calculator": {
+      "title": "Bruchrechner",
+      "description": "Addieren, subtrahieren, multiplizieren und dividieren Sie Brüche mit allen vereinfachten Rechenschritten, dem Dezimal- und gemischtzahligen Äquivalent sowie einem Diagramm für jedes Ergebnis.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Gängige Brüche",
+          "intro": "Dezimaläquivalente der Brüche, die in alltäglichen Messungen am häufigsten vorkommen.",
+          "columnFraction": "Bruch",
+          "columnDecimal": "Dezimalzahl"
+        }
+      },
+      "form": {
+        "inputTitle": "Ihre Brüche",
+        "operationLabel": "Rechenart",
+        "operation": {
+          "add": "Addieren (+)",
+          "subtract": "Subtrahieren (−)",
+          "multiply": "Multiplizieren (×)",
+          "divide": "Dividieren (÷)"
+        },
+        "fractionALabel": "Erster Bruch",
+        "fractionBLabel": "Zweiter Bruch",
+        "numeratorLabel": "Zähler",
+        "denominatorLabel": "Nenner",
+        "numeratorPlaceholder": "Zähler",
+        "denominatorPlaceholder": "Nenner"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroDenominator": "Ein Nenner darf nicht null sein.",
+        "divideByZeroFraction": "Division durch einen Bruch mit dem Zähler null ist nicht möglich.",
+        "mixedNumber": "Gemischte Zahl: {whole} {numerator}/{denominator}",
+        "decimalEquivalent": "Dezimaläquivalent: {value}",
+        "diagramCaption": "{numerator}/{denominator} dargestellt als gleich große, markierte Teile.",
+        "stepAddSubtract": "Auf den gemeinsamen Nenner {commonDenominator} gebracht: {scaledA}/{commonDenominator} und {scaledB}/{commonDenominator}, anschließend auf die einfachste Form gekürzt.",
+        "stepMultiply": "Direkt multipliziert — Zähler {numA}×{numB} und Nenner {denA}×{denB} — anschließend auf die einfachste Form gekürzt.",
+        "stepDivide": "Mit dem Kehrwert des zweiten Bruchs multipliziert ({numB}/{denB} wird zu {denB}/{numB}), anschließend auf die einfachste Form gekürzt."
+      },
+      "education": {
+        "intro": {
+          "title": "Brüche verstehen",
+          "paragraph1": "Ein Bruch stellt einen Teil eines Ganzen dar und wird als eine ganze Zahl (der Zähler) über einer anderen (dem Nenner) geschrieben, getrennt durch einen waagerechten Strich. Der Zähler gibt an, wie viele gleich große Teile genommen werden; der Nenner gibt an, in wie viele gleich große Teile das Ganze geteilt wurde. Ein Bruch heißt echt, wenn sein Wert kleiner als 1 ist (der Zähler ist kleiner als der Nenner, wie bei 3/4), unecht, wenn sein Wert 1 oder größer ist (der Zähler ist gleich groß wie der Nenner oder größer, wie bei 7/4), und eine gemischte Zahl schreibt einen unechten Bruch als ganze Zahl plus echten Bruch, wie bei 1 3/4.",
+          "diagram": {
+            "caption": "3/8 — drei von acht gleich großen Teilen sind markiert."
+          },
+          "paragraph2": "Die vier Rechenarten verhalten sich unterschiedlich. Addition und Subtraktion benötigen zunächst einen gemeinsamen Nenner, da nur gleich große Teile direkt zusammengefasst werden können — dieses Tool wandelt beide Brüche zunächst in den kleinsten gemeinsamen Nenner um, bevor ihre Zähler zusammengeführt werden. Die Multiplikation benötigt niemals einen gemeinsamen Nenner: Es genügt, die beiden Zähler miteinander und die beiden Nenner miteinander zu multiplizieren. Die Division funktioniert, indem stattdessen mit dem Kehrwert des zweiten Bruchs multipliziert wird — also mit vertauschtem Zähler und Nenner —, was mathematisch der direkten Division entspricht. Jedes Ergebnis wird anschließend automatisch auf seine einfachste Form gekürzt, indem Zähler und Nenner durch ihren größten gemeinsamen Teiler (ggT) geteilt werden.",
+          "paragraph3": "Eine Berechnung in exakten Brüchen zu belassen, statt sie frühzeitig in eine Dezimalzahl umzuwandeln, vermeidet die Rundungsfehler, die sich aus periodischen Dezimalzahlen aufbauen — 1/3 ist exakt 1/3, aber 0,333 ist nicht exakt ein Drittel. Dieser Unterschied ist bei der Skalierung von Rezepten, bei Baumessungen und bei jeder Aufteilung von Anteilen oder Mengen wichtig, deren Teile sich exakt und nicht nur näherungsweise wieder zum Ganzen zusammenfügen müssen."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Je ein Beispiel für jede von diesem Tool unterstützte Rechenart, plus ein Beispiel zum Kürzen.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "1/2 + 1/3", "result": "5/6" },
+            { "calculation": "3/4 − 1/4", "result": "1/2" },
+            { "calculation": "2/3 × 3/4", "result": "1/2" },
+            { "calculation": "1/2 ÷ 1/4", "result": "2" },
+            { "calculation": "6/8 gekürzt", "result": "3/4" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum brauche ich einen gemeinsamen Nenner, um Brüche zu addieren oder zu subtrahieren, aber nicht, um sie zu multiplizieren oder zu dividieren?",
+              "answer": "Addition und Subtraktion fassen Teile zusammen, die von vornherein gleich groß sein müssen — man kann nicht einfach „Hälften“ zu „Dritteln“ addieren, ebenso wenig, wie man 2 Meter zu 3 Fuß addieren kann, ohne zuvor die Einheiten umzurechnen. Multiplikation und Division funktionieren anders: Die Multiplikation zweier Brüche skaliert ein Verhältnis direkt mit einem anderen (Zähler mit Zähler, Nenner mit Nenner), was unabhängig davon gilt, wie die Ganzen ursprünglich geteilt wurden."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen einem echten Bruch, einem unechten Bruch und einer gemischten Zahl?",
+              "answer": "Ein echter Bruch hat einen kleineren Zähler als Nenner und ist weniger als 1 wert, wie 3/4. Ein unechter Bruch hat einen Zähler, der gleich groß wie der Nenner oder größer ist, und ist 1 oder mehr wert, wie 7/4. Eine gemischte Zahl drückt denselben unechten Wert stattdessen als ganze Zahl plus echten Bruch aus — 7/4 und 1 3/4 sind genau derselbe Wert, nur auf zwei verschiedene Arten geschrieben."
+            },
+            {
+              "question": "Wie teilt man von Hand durch einen Bruch?",
+              "answer": "Multiplizieren Sie mit seinem Kehrwert — vertauschen Sie Zähler und Nenner des zweiten Bruchs und multiplizieren Sie dann direkt. Die Division durch 1/4 entspricht der Multiplikation mit 4/1 (also einfach 4), sodass 1/2 ÷ 1/4 zu 1/2 × 4 wird, was 2 ergibt."
+            },
+            {
+              "question": "Warum zeigt dieses Tool immer die gekürzte (vereinfachte) Form des Ergebnisses?",
+              "answer": "Ein Bruch lässt sich in unendlich vielen gleichwertigen Formen schreiben — 2/4, 3/6 und 50/100 haben alle denselben Wert wie 1/2 —, doch die mathematische Konvention zeigt die einfachste Form, die man erhält, indem man Zähler und Nenner durch ihren größten gemeinsamen Teiler (ggT) teilt. Gekürzte Brüche lassen sich zudem leichter vergleichen und auf einen Blick als gleich erkennen."
+            },
+            {
+              "question": "Kann ein Bruch einen negativen Zähler oder Nenner haben?",
+              "answer": "Ja. Üblicherweise wird ein negatives Vorzeichen am Zähler und nicht am Nenner geführt, sodass −1/2 und 1/−2 denselben Wert darstellen; dieses Tool normalisiert das Vorzeichen automatisch, unabhängig davon, in welches Feld es eingegeben wurde."
+            },
+            {
+              "question": "Wo werden im Alltag exakte Brüche statt Dezimalzahlen verwendet?",
+              "answer": "Koch- und Backmaße (3/4 Tasse, 1/3 Teelöffel), Tischlerei und Bauwesen (ein auf 5 1/2 Zoll zugeschnittenes Brett), die Dauer von Notenwerten (eine Viertelnote, eine Achtelnote) sowie die Aufteilung gemeinsamer Kosten oder eines Erbes in exakte Teile beruhen alle auf Brüchen — gerade weil diese die Menge exakt und ohne Rundung darstellen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Der waagerechte Bruchstrich",
+            "paragraph": "Die frühesten in der Mathematikgeschichte belegten Brüche, im ägyptischen Papyrus Rhind (um 1650 v. Chr.), waren fast ausschließlich Stammbrüche (mit dem Zähler 1) und wurden ganz ohne trennenden Strich zwischen Zähler und Nenner geschrieben. Die Verwendung des heute gebräuchlichen waagerechten Bruchstrichs schreibt der Historiker Florian Cajori dem arabischen Mathematiker al-Hassar aus dem 12. Jahrhundert zu, der schrieb: „Schreiben Sie die Nenner unter einen Strich und darüber jeweils die dazugehörigen Teile“ — auch wenn Cajori selbst anmerkt, dass diese Priorität nicht vollständig gesichert ist, da aus dieser Epoche nur wenig Mathematik überliefert ist. Die Notation gelangte über Leonardo von Pisa (Fibonacci) nach Europa, der denselben waagerechten Strich in seinem Liber Abaci (1202) verwendete — dem Buch, das maßgeblich für die Einführung der indisch-arabischen Arithmetik, Brüche eingeschlossen, im Westen verantwortlich war."
+          },
+          "modernDevelopments": {
+            "title": "Brüche in der modernen Informatik",
+            "paragraph": "Gewöhnliche Gleitkommazahlen, das Standardformat der meisten Programmiersprachen, können einen Wert wie 1/3 nicht exakt darstellen — sie speichern stattdessen eine gerundete Binärnäherung, und wiederholte Rechenoperationen auf dieser Näherung können sich zu sichtbaren Fehlern aufsummieren. In Anwendungen, in denen Exaktheit entscheidend ist — Computeralgebrasysteme, Finanzbuchhaltungen und Notationssoftware für Musik, die Notenwerte in exakten Bruchteilen eines Taktschlags misst —, stellen Programmiersprachen und Bibliotheken einen eigenen rationalen Datentyp bereit, der Zähler und Nenner direkt speichert und nach jeder Operation kürzt, genau wie dieser Rechner es tut, statt sie jemals in eine ungenaue Dezimalzahl umzuwandeln."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Bruchrechnung ist eine Grundlage der umfassenderen Disziplin Mathematik. Hier sind die weltweit 5 besten Universitäten für Mathematik im QS World University Rankings by Subject 2025, zusätzlich zu einer regionalen Option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "Nein — der Mathematik-Graduiertenstudiengang des MIT ist ein Vollzeit-Präsenzstudiengang ohne beworbene Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "Nein — die offizielle Programmseite gibt an, dass sich die Studierenden in Cambridge, Massachusetts, befinden; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "Nein — das DPhil in Mathematik setzt Anwesenheit in Oxford voraus, es gibt keine Fernstudienoption."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "Nein — die Promotion in Reiner Mathematik und Mathematischer Statistik ist ein forschungsbasiertes, vor Ort betreutes Programm in Vollzeit oder Teilzeit; ein Online-Modus wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Nein — Stanford gibt ausdrücklich an, dass von Promotionsstudierenden während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus erwartet wird."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "Eine führende Universität der Vereinigten Arabischen Emirate mit einem Promotionsprogramm in Mathematik.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "Nein — der offizielle Studienkatalog gibt Vollzeit als Studienform an."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Cajori, F. (1928). A History of Mathematical Notations, Volume I: Notations in Elementary Mathematics. Open Court Publishing Company, §235 and §272.",
+          "note": "Cajori dokumentiert al-Hassars Verwendung des waagerechten Bruchstrichs im 12. Jahrhundert sowie Fibonaccis Übernahme derselben Notation im Liber Abaci (1202) und weist dabei ausdrücklich darauf hin, dass al-Hassars Priorität gegenüber Fibonacci nicht vollständig gesichert ist.",
+          "url": "https://archive.org/details/historyofmathema031756mbp",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

@@ -3959,6 +3959,163 @@
         }
       }
     },
+    "fraction-calculator": {
+      "title": "Fraction Calculator",
+      "description": "Add, subtract, multiply, and divide fractions with the full simplified steps, a mixed-number and decimal equivalent, and a diagram of every result.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Common Fractions",
+          "intro": "Decimal equivalents for the fractions that come up most often in everyday measurements.",
+          "columnFraction": "Fraction",
+          "columnDecimal": "Decimal"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Fractions",
+        "operationLabel": "Operation",
+        "operation": {
+          "add": "Add (+)",
+          "subtract": "Subtract (−)",
+          "multiply": "Multiply (×)",
+          "divide": "Divide (÷)"
+        },
+        "fractionALabel": "First Fraction",
+        "fractionBLabel": "Second Fraction",
+        "numeratorLabel": "Numerator",
+        "denominatorLabel": "Denominator",
+        "numeratorPlaceholder": "Numerator",
+        "denominatorPlaceholder": "Denominator"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroDenominator": "A denominator cannot be zero.",
+        "divideByZeroFraction": "Cannot divide by a fraction whose numerator is zero.",
+        "mixedNumber": "Mixed number: {whole} {numerator}/{denominator}",
+        "decimalEquivalent": "Decimal equivalent: {value}",
+        "diagramCaption": "{numerator}/{denominator} shown as equal shaded parts.",
+        "stepAddSubtract": "Converted to a common denominator of {commonDenominator}: {scaledA}/{commonDenominator} and {scaledB}/{commonDenominator}, then simplified to lowest terms.",
+        "stepMultiply": "Multiplied straight across — numerators {numA}×{numB} and denominators {denA}×{denB} — then simplified to lowest terms.",
+        "stepDivide": "Multiplied by the reciprocal of the second fraction ({numB}/{denB} becomes {denB}/{numB}), then simplified to lowest terms."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Fractions",
+          "paragraph1": "A fraction represents a part of a whole, written as one integer (the numerator) over another (the denominator) and separated by a horizontal bar. The numerator counts how many equal parts are taken; the denominator states how many equal parts the whole was divided into. A fraction is proper when its value is less than 1 (the numerator is smaller than the denominator, as in 3/4), improper when its value is 1 or more (the numerator is equal to or larger than the denominator, as in 7/4), and a mixed number writes an improper fraction as a whole number plus a proper fraction, as in 1 3/4.",
+          "diagram": {
+            "caption": "3/8 — three of eight equal parts are shaded."
+          },
+          "paragraph2": "The four operations behave differently. Addition and subtraction require a common denominator first, because only equally-sized parts can be combined directly — this tool converts both fractions to the least common denominator before combining their numerators. Multiplication never needs a common denominator: it simply multiplies the two numerators together and the two denominators together. Division works by multiplying by the reciprocal of the second fraction instead — flipping its numerator and denominator — which is mathematically equivalent to dividing directly. Every result is then automatically reduced to its simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).",
+          "paragraph3": "Keeping a calculation in exact fractions rather than converting early to a decimal avoids the rounding errors that build up from repeating decimals — 1/3 is exactly 1/3, but 0.333 is not exactly one third. This distinction matters in recipe scaling, construction measurements, and any split of shares or quantities where the parts must add back up to the whole exactly, not approximately."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "One worked example for each operation this tool supports, plus a simplification example.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "1/2 + 1/3", "result": "5/6" },
+            { "calculation": "3/4 − 1/4", "result": "1/2" },
+            { "calculation": "2/3 × 3/4", "result": "1/2" },
+            { "calculation": "1/2 ÷ 1/4", "result": "2" },
+            { "calculation": "6/8 simplified", "result": "3/4" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why do I need a common denominator to add or subtract fractions, but not to multiply or divide them?",
+              "answer": "Addition and subtraction combine parts that must be the same size to begin with — you can't directly add \"halves\" to \"thirds\" any more than you can add 2 meters to 3 feet without converting units first. Multiplication and division work differently: multiplying two fractions scales one ratio by another directly (numerators together, denominators together), which is valid regardless of how the wholes were originally divided."
+            },
+            {
+              "question": "What's the difference between a proper fraction, an improper fraction, and a mixed number?",
+              "answer": "A proper fraction has a numerator smaller than its denominator and is worth less than 1, like 3/4. An improper fraction has a numerator equal to or larger than its denominator and is worth 1 or more, like 7/4. A mixed number expresses that same improper value as a whole number plus a proper fraction instead — 7/4 and 1 3/4 are exactly the same value written two different ways."
+            },
+            {
+              "question": "How do I divide by a fraction by hand?",
+              "answer": "Multiply by its reciprocal — flip the second fraction's numerator and denominator, then multiply straight across. Dividing by 1/4 is the same as multiplying by 4/1 (which is just 4), so 1/2 ÷ 1/4 becomes 1/2 × 4, which equals 2."
+            },
+            {
+              "question": "Why does this tool always show the simplified (reduced) form of the result?",
+              "answer": "A fraction can be written in infinitely many equivalent forms — 2/4, 3/6, and 50/100 are all the same value as 1/2 — but mathematical convention presents the simplest one, found by dividing both numerator and denominator by their greatest common divisor (GCD). Reduced fractions are also easier to compare and to recognize as equal at a glance."
+            },
+            {
+              "question": "Can a fraction have a negative numerator or a negative denominator?",
+              "answer": "Yes. By convention any negative sign is kept on the numerator rather than the denominator, so −1/2 and 1/−2 represent the same value; this tool normalizes the sign automatically regardless of which field it was entered in."
+            },
+            {
+              "question": "Where are exact fractions used instead of decimals in everyday life?",
+              "answer": "Cooking and baking measurements (3/4 cup, 1/3 teaspoon), carpentry and construction (a board cut to 5 1/2 inches), sheet-music note durations (a quarter note, an eighth note), and splitting a shared cost or inheritance into exact parts all rely on fractions specifically because they represent the quantity exactly, with no rounding."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The Horizontal Fraction Bar",
+            "paragraph": "The earliest fractions in recorded mathematics, in the Egyptian Rhind Papyrus (c. 1650 BCE), were almost entirely unit fractions (a numerator of 1) with no line separating numerator from denominator at all. The horizontal bar used today is credited by historian Florian Cajori to the 12th-century Arab mathematician al-Hassar, who wrote: \"Write the denominators below a line and over each of them the parts belonging to it\" — though Cajori himself notes this priority is not fully certain, since so little of the period's mathematics survives. The notation reached Europe through Leonardo of Pisa (Fibonacci), who used the same horizontal bar in his Liber Abaci (1202), the book most responsible for introducing Hindu-Arabic arithmetic — fractions included — to the West."
+          },
+          "modernDevelopments": {
+            "title": "Fractions in Modern Computing",
+            "paragraph": "Ordinary floating-point numbers, the format most programming languages use by default, cannot represent a value like 1/3 exactly — they store a rounded binary approximation instead, and repeated arithmetic on that approximation can accumulate visible errors. For applications where exactness matters — computer algebra systems, financial ledgers, and music-notation software that times notes in exact fractions of a beat — languages and libraries provide a dedicated rational-number type that stores a numerator and denominator directly and reduces them after every operation, exactly as this calculator does, instead of ever converting to a lossy decimal."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Fraction arithmetic is a foundation of the broader discipline of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional option:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "No — MIT's mathematics graduate program is a full-time, campus-based degree with no online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "No — the official program page states students are located in Cambridge, Massachusetts, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "No — the DPhil in Mathematics requires attendance in Oxford, with no distance-learning option."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "No — the PhD in Pure Mathematics and Mathematical Statistics is research-based and supervisor-led on campus, full-time or part-time, with no online mode stated."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford states directly that PhD students are expected to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "A leading Emirati university offering a PhD in Mathematics.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "No — the official program catalogue states the mode of study is full-time."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Cajori, F. (1928). A History of Mathematical Notations, Volume I: Notations in Elementary Mathematics. Open Court Publishing Company, §235 and §272.",
+          "note": "Cajori documents al-Hassar's 12th-century use of the horizontal fraction bar and Fibonacci's adoption of the same notation in Liber Abaci (1202), while explicitly noting that al-Hassar's priority over Fibonacci is not fully certain.",
+          "url": "https://archive.org/details/historyofmathema031756mbp",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

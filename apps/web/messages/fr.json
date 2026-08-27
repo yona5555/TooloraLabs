@@ -3963,6 +3963,163 @@
         }
       }
     },
+    "fraction-calculator": {
+      "title": "Calculatrice de Fractions",
+      "description": "Additionnez, soustrayez, multipliez et divisez des fractions avec toutes les étapes de simplification, l'équivalent décimal et en nombre fractionnaire, et un diagramme pour chaque résultat.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fractions Courantes",
+          "intro": "Équivalents décimaux des fractions les plus fréquentes dans les mesures du quotidien.",
+          "columnFraction": "Fraction",
+          "columnDecimal": "Décimal"
+        }
+      },
+      "form": {
+        "inputTitle": "Vos Fractions",
+        "operationLabel": "Opération",
+        "operation": {
+          "add": "Addition (+)",
+          "subtract": "Soustraction (−)",
+          "multiply": "Multiplication (×)",
+          "divide": "Division (÷)"
+        },
+        "fractionALabel": "Première Fraction",
+        "fractionBLabel": "Seconde Fraction",
+        "numeratorLabel": "Numérateur",
+        "denominatorLabel": "Dénominateur",
+        "numeratorPlaceholder": "Numérateur",
+        "denominatorPlaceholder": "Dénominateur"
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroDenominator": "Un dénominateur ne peut pas être nul.",
+        "divideByZeroFraction": "Impossible de diviser par une fraction dont le numérateur est nul.",
+        "mixedNumber": "Nombre fractionnaire : {whole} {numerator}/{denominator}",
+        "decimalEquivalent": "Équivalent décimal : {value}",
+        "diagramCaption": "{numerator}/{denominator} représenté par des parts égales colorées.",
+        "stepAddSubtract": "Converti à un dénominateur commun de {commonDenominator} : {scaledA}/{commonDenominator} et {scaledB}/{commonDenominator}, puis simplifié à sa forme la plus simple.",
+        "stepMultiply": "Multiplication directe — numérateurs {numA}×{numB} et dénominateurs {denA}×{denB} — puis simplifié à sa forme la plus simple.",
+        "stepDivide": "Multiplié par l'inverse de la seconde fraction ({numB}/{denB} devient {denB}/{numB}), puis simplifié à sa forme la plus simple."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Fractions",
+          "paragraph1": "Une fraction représente une partie d'un tout, écrite sous la forme d'un entier (le numérateur) au-dessus d'un autre (le dénominateur), séparés par une barre horizontale. Le numérateur indique combien de parts égales sont prises ; le dénominateur indique en combien de parts égales le tout a été divisé. Une fraction est propre lorsque sa valeur est inférieure à 1 (le numérateur est plus petit que le dénominateur, comme dans 3/4), impropre lorsque sa valeur est égale ou supérieure à 1 (le numérateur est égal ou supérieur au dénominateur, comme dans 7/4), et un nombre fractionnaire écrit une fraction impropre sous la forme d'un entier plus une fraction propre, comme dans 1 3/4.",
+          "diagram": {
+            "caption": "3/8 — trois parts sur huit parts égales sont colorées."
+          },
+          "paragraph2": "Les quatre opérations se comportent différemment. L'addition et la soustraction exigent d'abord un dénominateur commun, car seules des parts de même taille peuvent être combinées directement — cet outil convertit les deux fractions au plus petit dénominateur commun avant de combiner leurs numérateurs. La multiplication ne nécessite jamais de dénominateur commun : il suffit de multiplier les deux numérateurs entre eux et les deux dénominateurs entre eux. La division consiste à multiplier par l'inverse de la seconde fraction — en inversant son numérateur et son dénominateur —, ce qui équivaut mathématiquement à une division directe. Chaque résultat est ensuite automatiquement réduit à sa forme la plus simple en divisant le numérateur et le dénominateur par leur plus grand commun diviseur (PGCD).",
+          "paragraph3": "Conserver un calcul en fractions exactes, plutôt que de le convertir prématurément en décimal, évite les erreurs d'arrondi qui s'accumulent à partir des décimales périodiques — 1/3 vaut exactement 1/3, mais 0,333 ne vaut pas exactement un tiers. Cette distinction compte lors de la mise à l'échelle de recettes, dans les mesures de construction, et dans tout partage de parts ou de quantités dont les morceaux doivent reformer exactement le tout, sans approximation."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Un exemple résolu pour chaque opération prise en charge par cet outil, plus un exemple de simplification.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "1/2 + 1/3", "result": "5/6" },
+            { "calculation": "3/4 − 1/4", "result": "1/2" },
+            { "calculation": "2/3 × 3/4", "result": "1/2" },
+            { "calculation": "1/2 ÷ 1/4", "result": "2" },
+            { "calculation": "6/8 simplifié", "result": "3/4" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi ai-je besoin d'un dénominateur commun pour additionner ou soustraire des fractions, mais pas pour les multiplier ou les diviser ?",
+              "answer": "L'addition et la soustraction combinent des parts qui doivent d'abord être de même taille — on ne peut pas additionner directement des « moitiés » à des « tiers », pas plus qu'on ne peut additionner 2 mètres à 3 pieds sans convertir d'abord les unités. La multiplication et la division fonctionnent différemment : multiplier deux fractions met directement une proportion à l'échelle d'une autre (les numérateurs entre eux, les dénominateurs entre eux), ce qui reste valable quelle que soit la façon dont les touts ont été divisés à l'origine."
+            },
+            {
+              "question": "Quelle est la différence entre une fraction propre, une fraction impropre et un nombre fractionnaire ?",
+              "answer": "Une fraction propre a un numérateur plus petit que son dénominateur et vaut moins de 1, comme 3/4. Une fraction impropre a un numérateur égal ou supérieur à son dénominateur et vaut 1 ou plus, comme 7/4. Un nombre fractionnaire exprime cette même valeur impropre sous la forme d'un entier plus une fraction propre — 7/4 et 1 3/4 représentent exactement la même valeur, écrite de deux façons différentes."
+            },
+            {
+              "question": "Comment diviser par une fraction à la main ?",
+              "answer": "Multipliez par son inverse : inversez le numérateur et le dénominateur de la seconde fraction, puis multipliez directement. Diviser par 1/4 revient à multiplier par 4/1 (soit simplement 4), donc 1/2 ÷ 1/4 devient 1/2 × 4, ce qui donne 2."
+            },
+            {
+              "question": "Pourquoi cet outil affiche-t-il toujours la forme simplifiée (réduite) du résultat ?",
+              "answer": "Une fraction peut s'écrire d'une infinité de façons équivalentes — 2/4, 3/6 et 50/100 valent toutes la même chose que 1/2 —, mais la convention mathématique présente la plus simple, obtenue en divisant le numérateur et le dénominateur par leur plus grand commun diviseur (PGCD). Les fractions réduites sont aussi plus faciles à comparer et à reconnaître comme égales d'un coup d'œil."
+            },
+            {
+              "question": "Une fraction peut-elle avoir un numérateur ou un dénominateur négatif ?",
+              "answer": "Oui. Par convention, tout signe négatif est conservé sur le numérateur plutôt que sur le dénominateur, si bien que −1/2 et 1/−2 représentent la même valeur ; cet outil normalise automatiquement le signe, quel que soit le champ dans lequel il a été saisi."
+            },
+            {
+              "question": "Où utilise-t-on des fractions exactes plutôt que des décimales dans la vie quotidienne ?",
+              "answer": "Les mesures de cuisine et de pâtisserie (3/4 de tasse, 1/3 de cuillère à café), la menuiserie et la construction (une planche coupée à 5 1/2 pouces), la durée des notes de musique (une noire, une croche), et le partage d'un coût ou d'un héritage en parts exactes reposent tous sur les fractions précisément parce qu'elles représentent la quantité avec exactitude, sans arrondi."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "La Barre Horizontale de Fraction",
+            "paragraph": "Les fractions les plus anciennes connues en mathématiques, dans le papyrus égyptien de Rhind (vers 1650 av. J.-C.), étaient presque exclusivement des fractions unitaires (de numérateur 1), sans aucune barre séparant numérateur et dénominateur. L'historien Florian Cajori attribue l'usage de la barre horizontale employée aujourd'hui au mathématicien arabe du XIIe siècle al-Hassar, qui écrivait : « Écrivez les dénominateurs sous une ligne, et au-dessus de chacun d'eux les parts qui lui appartiennent » — bien que Cajori lui-même signale que cette antériorité n'est pas totalement établie, si peu des mathématiques de cette période ayant survécu. La notation atteignit l'Europe par l'intermédiaire de Léonard de Pise (Fibonacci), qui utilisa la même barre horizontale dans son Liber Abaci (1202), l'ouvrage le plus responsable de l'introduction de l'arithmétique indo-arabe — fractions comprises — en Occident."
+          },
+          "modernDevelopments": {
+            "title": "Les Fractions dans l'Informatique Moderne",
+            "paragraph": "Les nombres à virgule flottante ordinaires, le format que la plupart des langages de programmation utilisent par défaut, ne peuvent pas représenter exactement une valeur comme 1/3 — ils stockent à la place une approximation binaire arrondie, et des calculs répétés sur cette approximation peuvent accumuler des erreurs visibles. Dans les applications où l'exactitude compte — systèmes de calcul formel, registres financiers, et logiciels de notation musicale qui chronomètrent les notes en fractions exactes d'un temps —, les langages et bibliothèques proposent un type de donnée dédié aux nombres rationnels, qui stocke directement numérateur et dénominateur et les réduit après chaque opération, exactement comme le fait cette calculatrice, plutôt que de les convertir un jour en décimal approximatif."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'arithmétique des fractions est un fondement de la discipline plus large des mathématiques. Voici les 5 meilleures universités mondiales en Mathématiques selon le QS World University Rankings by Subject 2025, ainsi qu'une option régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "Non — le programme de troisième cycle en mathématiques du MIT est un diplôme en présentiel à temps plein, sans filière en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "Non — la page officielle du programme indique que les étudiants résident à Cambridge, dans le Massachusetts, sans mentionner d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "Non — le doctorat (DPhil) en mathématiques exige une présence à Oxford, sans option d'enseignement à distance."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "Non — le doctorat en mathématiques pures et statistique mathématique est un programme de recherche encadré sur le campus, à temps plein ou partiel, sans aucune modalité en ligne indiquée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Non — Stanford indique explicitement que les doctorants doivent maintenir une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "Une université émiratie reconnue proposant un doctorat en mathématiques.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "Non — le catalogue officiel du programme indique que la formation se déroule à temps plein."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Cajori, F. (1928). A History of Mathematical Notations, Volume I: Notations in Elementary Mathematics. Open Court Publishing Company, §235 and §272.",
+          "note": "Cajori documente l'usage par al-Hassar, au XIIe siècle, de la barre horizontale de fraction et son adoption par Fibonacci dans le Liber Abaci (1202), tout en signalant explicitement que l'antériorité d'al-Hassar sur Fibonacci n'est pas totalement établie.",
+          "url": "https://archive.org/details/historyofmathema031756mbp",
+          "readOriginal": "Lire le texte original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

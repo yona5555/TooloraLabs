@@ -7,6 +7,7 @@ import {
   Calendar,
   Clock,
   CloudSun,
+  Divide,
   Flame,
   FilePen,
   FileArchive,
@@ -44,6 +45,7 @@ import {
 
 export const toolIcons: Record<string, LucideIcon> = {
   "scientific-calculator": Sigma,
+  "fraction-calculator": Divide,
   "age-calculator": Calendar,
   "bmi-calculator": Scale,
   "ideal-weight-calculator": Weight,

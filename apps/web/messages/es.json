@@ -3963,6 +3963,163 @@
         }
       }
     },
+    "fraction-calculator": {
+      "title": "Calculadora de Fracciones",
+      "description": "Sume, reste, multiplique y divida fracciones con todos los pasos de simplificación, el equivalente decimal y en número mixto, y un diagrama de cada resultado.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fracciones Comunes",
+          "intro": "Equivalentes decimales de las fracciones que aparecen con más frecuencia en las mediciones cotidianas.",
+          "columnFraction": "Fracción",
+          "columnDecimal": "Decimal"
+        }
+      },
+      "form": {
+        "inputTitle": "Sus Fracciones",
+        "operationLabel": "Operación",
+        "operation": {
+          "add": "Sumar (+)",
+          "subtract": "Restar (−)",
+          "multiply": "Multiplicar (×)",
+          "divide": "Dividir (÷)"
+        },
+        "fractionALabel": "Primera Fracción",
+        "fractionBLabel": "Segunda Fracción",
+        "numeratorLabel": "Numerador",
+        "denominatorLabel": "Denominador",
+        "numeratorPlaceholder": "Numerador",
+        "denominatorPlaceholder": "Denominador"
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroDenominator": "Un denominador no puede ser cero.",
+        "divideByZeroFraction": "No se puede dividir entre una fracción cuyo numerador es cero.",
+        "mixedNumber": "Número mixto: {whole} {numerator}/{denominator}",
+        "decimalEquivalent": "Equivalente decimal: {value}",
+        "diagramCaption": "{numerator}/{denominator} representada como partes iguales sombreadas.",
+        "stepAddSubtract": "Convertido a un denominador común de {commonDenominator}: {scaledA}/{commonDenominator} y {scaledB}/{commonDenominator}, y luego simplificado a su mínima expresión.",
+        "stepMultiply": "Multiplicación directa — numeradores {numA}×{numB} y denominadores {denA}×{denB} — y luego simplificado a su mínima expresión.",
+        "stepDivide": "Multiplicado por el recíproco de la segunda fracción ({numB}/{denB} se convierte en {denB}/{numB}), y luego simplificado a su mínima expresión."
+      },
+      "education": {
+        "intro": {
+          "title": "Cómo Funcionan las Fracciones",
+          "paragraph1": "Una fracción representa una parte de un todo, escrita como un número entero (el numerador) sobre otro (el denominador), separados por una línea horizontal. El numerador indica cuántas partes iguales se toman; el denominador indica en cuántas partes iguales se dividió el todo. Una fracción es propia cuando su valor es menor que 1 (el numerador es menor que el denominador, como en 3/4), impropia cuando su valor es 1 o más (el numerador es igual o mayor que el denominador, como en 7/4), y un número mixto expresa una fracción impropia como un número entero más una fracción propia, como en 1 3/4.",
+          "diagram": {
+            "caption": "3/8 — tres de ocho partes iguales están sombreadas."
+          },
+          "paragraph2": "Las cuatro operaciones se comportan de forma distinta. La suma y la resta requieren primero un denominador común, porque solo pueden combinarse directamente partes del mismo tamaño — esta herramienta convierte ambas fracciones al mínimo común denominador antes de combinar sus numeradores. La multiplicación nunca necesita un denominador común: basta con multiplicar los dos numeradores entre sí y los dos denominadores entre sí. La división funciona multiplicando por el recíproco de la segunda fracción — invirtiendo su numerador y denominador —, lo cual equivale matemáticamente a dividir directamente. Cada resultado se reduce automáticamente a su forma más simple dividiendo el numerador y el denominador entre su máximo común divisor (MCD).",
+          "paragraph3": "Mantener un cálculo en fracciones exactas, en lugar de convertirlo pronto a decimal, evita los errores de redondeo que se acumulan a partir de decimales periódicos — 1/3 es exactamente 1/3, pero 0.333 no es exactamente un tercio. Esta distinción importa al escalar recetas, en medidas de construcción y en cualquier reparto de partes o cantidades cuyas piezas deban sumar exactamente el todo, no de forma aproximada."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Un ejemplo resuelto para cada operación que admite esta herramienta, además de un ejemplo de simplificación.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "1/2 + 1/3", "result": "5/6" },
+            { "calculation": "3/4 − 1/4", "result": "1/2" },
+            { "calculation": "2/3 × 3/4", "result": "1/2" },
+            { "calculation": "1/2 ÷ 1/4", "result": "2" },
+            { "calculation": "6/8 simplificado", "result": "3/4" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué necesito un denominador común para sumar o restar fracciones, pero no para multiplicarlas o dividirlas?",
+              "answer": "La suma y la resta combinan partes que deben tener el mismo tamaño de entrada — no se pueden sumar directamente «medios» a «tercios», del mismo modo que no se pueden sumar 2 metros a 3 pies sin convertir antes las unidades. La multiplicación y la división funcionan de otra manera: multiplicar dos fracciones escala una razón por otra directamente (los numeradores entre sí y los denominadores entre sí), lo cual es válido sin importar cómo se dividieron originalmente los todos."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre una fracción propia, una fracción impropia y un número mixto?",
+              "answer": "Una fracción propia tiene un numerador menor que su denominador y vale menos de 1, como 3/4. Una fracción impropia tiene un numerador igual o mayor que su denominador y vale 1 o más, como 7/4. Un número mixto expresa ese mismo valor impropio como un número entero más una fracción propia — 7/4 y 1 3/4 son exactamente el mismo valor escrito de dos formas distintas."
+            },
+            {
+              "question": "¿Cómo se divide entre una fracción a mano?",
+              "answer": "Multiplique por su recíproco: invierta el numerador y el denominador de la segunda fracción y luego multiplique directamente. Dividir entre 1/4 equivale a multiplicar por 4/1 (que es simplemente 4), así que 1/2 ÷ 1/4 se convierte en 1/2 × 4, que es igual a 2."
+            },
+            {
+              "question": "¿Por qué esta herramienta siempre muestra la forma simplificada (reducida) del resultado?",
+              "answer": "Una fracción puede escribirse de infinitas formas equivalentes — 2/4, 3/6 y 50/100 valen todas lo mismo que 1/2 —, pero la convención matemática presenta la más simple, obtenida al dividir el numerador y el denominador entre su máximo común divisor (MCD). Las fracciones reducidas también son más fáciles de comparar y de reconocer como iguales a simple vista."
+            },
+            {
+              "question": "¿Puede una fracción tener un numerador o un denominador negativos?",
+              "answer": "Sí. Por convención, cualquier signo negativo se mantiene en el numerador y no en el denominador, de modo que −1/2 y 1/−2 representan el mismo valor; esta herramienta normaliza el signo automáticamente sin importar en qué campo se haya introducido."
+            },
+            {
+              "question": "¿Dónde se usan las fracciones exactas en lugar de decimales en la vida cotidiana?",
+              "answer": "Las medidas de cocina y repostería (3/4 de taza, 1/3 de cucharadita), la carpintería y la construcción (una tabla cortada a 5 1/2 pulgadas), la duración de las notas musicales (una negra, una corchea) y el reparto de un costo compartido o una herencia en partes exactas dependen de las fracciones precisamente porque representan la cantidad de forma exacta, sin redondeos."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "La Línea Horizontal de Fracción",
+            "paragraph": "Las fracciones más antiguas registradas en matemáticas, en el papiro egipcio de Rhind (c. 1650 a. C.), eran casi en su totalidad fracciones unitarias (con numerador 1) y no llevaban ninguna línea que separara el numerador del denominador. El historiador Florian Cajori atribuye el uso de la línea horizontal empleada hoy al matemático árabe del siglo XII al-Hassar, quien escribió: «Escriba los denominadores bajo una línea, y sobre cada uno de ellos las partes que le pertenecen» — aunque el propio Cajori señala que esta prioridad no está del todo confirmada, dado lo poco que se conserva de las matemáticas de esa época. La notación llegó a Europa a través de Leonardo de Pisa (Fibonacci), quien usó la misma línea horizontal en su Liber Abaci (1202), el libro más responsable de introducir la aritmética indoarábiga — fracciones incluidas — en Occidente."
+          },
+          "modernDevelopments": {
+            "title": "Las Fracciones en la Informática Moderna",
+            "paragraph": "Los números de punto flotante habituales, el formato que la mayoría de los lenguajes de programación usan por defecto, no pueden representar un valor como 1/3 de forma exacta: almacenan en su lugar una aproximación binaria redondeada, y la aritmética repetida sobre esa aproximación puede acumular errores visibles. En aplicaciones donde la exactitud importa — sistemas de álgebra computacional, libros contables financieros y software de notación musical que mide el tiempo de las notas en fracciones exactas de un compás —, los lenguajes y las bibliotecas ofrecen un tipo de dato dedicado a números racionales que almacena directamente numerador y denominador y los reduce después de cada operación, tal como hace esta calculadora, en lugar de convertirlos en algún momento a un decimal aproximado."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La aritmética de fracciones es una base de la disciplina más amplia de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de una opción regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/index.php",
+                "online": "No — el programa de posgrado en Matemáticas del MIT es un título presencial de tiempo completo, sin modalidad en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/mathematics",
+                "online": "No — la página oficial del programa indica que los estudiantes residen en Cambridge, Massachusetts, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/doctor-philosophy-dphil",
+                "online": "No — el doctorado (DPhil) en Matemáticas exige asistencia presencial en Oxford, sin opción de aprendizaje a distancia."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #4 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mapmpdpms",
+                "online": "No — el doctorado en Matemáticas Puras y Estadística Matemática es un programa de investigación supervisado presencialmente en el campus, a tiempo completo o parcial, sin ninguna modalidad en línea indicada."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #5 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford indica expresamente que se espera que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "United Arab Emirates University (UAEU)",
+                "note": "Una destacada universidad emiratí que ofrece un doctorado en Matemáticas.",
+                "url": "https://www.uaeu.ac.ae/en/catalog/graduate/programs/doctor-of-philosophy-in-mathematics.shtml",
+                "online": "No — el catálogo oficial del programa indica que la modalidad de estudio es de tiempo completo."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Cajori, F. (1928). A History of Mathematical Notations, Volume I: Notations in Elementary Mathematics. Open Court Publishing Company, §235 and §272.",
+          "note": "Cajori documenta el uso que hizo al-Hassar en el siglo XII de la línea horizontal de fracción y la adopción de esa misma notación por Fibonacci en el Liber Abaci (1202), señalando explícitamente que la prioridad de al-Hassar sobre Fibonacci no está del todo confirmada.",
+          "url": "https://archive.org/details/historyofmathema031756mbp",
+          "readOriginal": "Leer el texto original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",
