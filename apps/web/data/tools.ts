@@ -342,6 +342,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "ph-calculator",
+    title: "pH Calculator",
+    category: "math-science",
+    description:
+      "Convert between pH, pOH, hydrogen ion concentration, and hydroxide ion concentration for aqueous solutions at 25°C.",
+    featured: false,
+    keywords: [
+      "ph calculator",
+      "poh calculator",
+      "hydrogen ion concentration",
+      "acid base calculator",
+      "hydroxide ion concentration",
+      "acidic basic neutral",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

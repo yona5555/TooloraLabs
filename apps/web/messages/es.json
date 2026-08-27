@@ -4940,6 +4940,174 @@
         }
       }
     },
+    "ph-calculator": {
+      "title": "Calculadora de pH",
+      "description": "Convierte entre pH, pOH, concentración de iones hidrógeno y concentración de iones hidróxido para soluciones acuosas a 25 °C.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "substances": {
+        "batteryAcid": "Ácido de batería",
+        "lemonJuice": "Jugo de limón",
+        "vinegar": "Vinagre",
+        "orangeJuice": "Jugo de naranja",
+        "blackCoffee": "Café negro",
+        "pureWater": "Agua pura",
+        "seawater": "Agua de mar",
+        "bakingSoda": "Solución de bicarbonato de sodio",
+        "ammonia": "Amoníaco doméstico",
+        "bleach": "Lejía"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "pH de Sustancias Comunes",
+          "intro": "Valores de pH aproximados y típicos a temperatura ambiente; los valores reales varían según la concentración y la fuente.",
+          "columnSubstance": "Sustancia",
+          "columnPh": "pH"
+        }
+      },
+      "form": {
+        "inputTitle": "Valor Conocido",
+        "operationLabel": "Convertir Desde",
+        "operation": {
+          "fromPH": "pH",
+          "fromH": "Concentración de Iones Hidrógeno [H⁺]",
+          "fromPOH": "pOH",
+          "fromOH": "Concentración de Iones Hidróxido [OH⁻]"
+        },
+        "pHLabel": "pH",
+        "pHPlaceholder": "p. ej. 7",
+        "hLabel": "[H⁺] (mol/L)",
+        "hPlaceholder": "p. ej. 0.0000001",
+        "pOHLabel": "pOH",
+        "pOHPlaceholder": "p. ej. 7",
+        "ohLabel": "[OH⁻] (mol/L)",
+        "ohPlaceholder": "p. ej. 0.0000001"
+      },
+      "result": {
+        "heading": "Resultado",
+        "nonPositiveConcentration": "La concentración debe ser mayor que cero para calcular su logaritmo.",
+        "classification": {
+          "acidic": "Ácido (pH < 7)",
+          "neutral": "Neutro (pH = 7)",
+          "basic": "Básico / Alcalino (pH > 7)"
+        },
+        "pOH": "pOH",
+        "hConcentration": "[H⁺]",
+        "ohConcentration": "[OH⁻]",
+        "diagramCaption": "pH {value} en la escala de 0 a 14, de ácido (rojo) a básico (azul)."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo el pH",
+          "paragraph1": "El pH mide qué tan ácida o básica es una solución acuosa, definido como pH = -log₁₀[H⁺], el logaritmo negativo en base 10 de la concentración de iones hidrógeno en moles por litro. Como es una escala logarítmica, cada disminución de una unidad entera en el pH representa un aumento de diez veces en la concentración de iones hidrógeno: una solución de pH 4 es diez veces más ácida que una de pH 5, y cien veces más ácida que una de pH 6.",
+          "diagram": {
+            "caption": "Un pH de 5.5 (levemente ácido, como el café negro) ubicado en la escala de 0 a 14."
+          },
+          "paragraph2": "El pOH es la medida paralela para la concentración de iones hidróxido, pOH = -log₁₀[OH⁻]. En el agua a 25 °C, el producto iónico Kw = [H⁺][OH⁻] = 10⁻¹⁴ siempre se cumple, y esto es exactamente lo que hace que pH + pOH = 14 a esa temperatura: por lo tanto, conocer cualquiera de pH, pOH, [H⁺] u [OH⁻] basta para calcular los otros tres.",
+          "paragraph3": "Una solución se clasifica como ácida cuando el pH es menor que 7, básica (o alcalina) cuando es mayor que 7, y neutra solo cuando el pH es exactamente 7 — el pH del agua pura a 25 °C, donde [H⁺] y [OH⁻] son iguales. Este rango de 0 a 14 es la escala convencional para soluciones acuosas a esa temperatura, aunque valores de pH fuera de él son matemáticamente posibles para ácidos o bases muy concentrados."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Conversión entre pH, pOH y concentraciones de iones para la misma solución.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "[H⁺] = 1 × 10⁻³ mol/L", "result": "pH 3, pOH 11 (ácido)" },
+            { "calculation": "pH 7 (agua pura)", "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L" },
+            { "calculation": "[OH⁻] = 1 × 10⁻² mol/L", "result": "pOH 2, pH 12 (básico)" },
+            { "calculation": "pOH 5", "result": "pH 9 (básico)" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué el pH es una escala logarítmica y no lineal?",
+              "answer": "Las concentraciones de iones hidrógeno en soluciones reales abarcan un rango enorme, desde aproximadamente 1 mol/L en ácidos fuertes hasta 10⁻¹⁴ mol/L en bases fuertes, un factor de 100 billones. Tomar el logaritmo negativo en base 10 comprime todo ese rango en la conveniente escala de 0 a 14, pero también significa que cada unidad de pH representa un cambio de diez veces en [H⁺], no una cantidad aditiva fija."
+            },
+            {
+              "question": "¿Puede el pH ser menor que 0 o mayor que 14?",
+              "answer": "Sí, matemáticamente: los ácidos fuertes extremadamente concentrados pueden tener un pH negativo, y las bases fuertes extremadamente concentradas pueden superar el pH 14. El rango de 0 a 14 es simplemente la escala práctica para soluciones acuosas diluidas típicas, no un límite matemático estricto; corresponde a concentraciones de iones hidrógeno entre aproximadamente 1 mol/L y 10⁻¹⁴ mol/L."
+            },
+            {
+              "question": "¿Por qué pH + pOH siempre es igual a 14?",
+              "answer": "En el agua a 25 °C, las concentraciones de iones H⁺ y OH⁻ están relacionadas por la constante del producto iónico del agua, Kw = [H⁺][OH⁻] = 1 × 10⁻¹⁴. Tomando el logaritmo negativo de ambos lados se obtiene pH + pOH = 14 exactamente a esa temperatura; la relación cambia ligeramente a otras temperaturas porque Kw en sí depende de la temperatura."
+            },
+            {
+              "question": "¿Afecta la temperatura a las lecturas de pH?",
+              "answer": "Sí: como Kw cambia con la temperatura, el pH del agua neutra es exactamente 7 solo a 25 °C; a temperaturas más altas el agua neutra tiene un pH ligeramente menor, y a temperaturas más bajas ligeramente mayor, aunque permanece químicamente neutra ([H⁺] = [OH⁻]) en todo momento. Por eso las mediciones precisas de pH suelen reportarse junto con la temperatura a la que se tomaron."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre un ácido fuerte y uno débil con el mismo pH?",
+              "answer": "Un ácido fuerte se ioniza casi por completo en agua, mientras que un ácido débil solo se ioniza parcialmente, dejando la mayor parte como moléculas intactas sin ionizar. Dos soluciones pueden compartir el mismo pH —es decir, la misma [H⁺] libre— mientras que la solución de ácido débil contiene una concentración total de ácido (ionizado más no ionizado) mucho mayor que la que necesita el ácido fuerte para alcanzar ese mismo pH."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "La Notación Práctica de un Químico Cervecero",
+            "paragraph": "El concepto de pH fue introducido en 1909 por el químico danés Søren Peter Lauritz Sørensen, quien dirigía el departamento de química del Laboratorio Carlsberg en Copenhague, una institución de investigación financiada por la cervecería Carlsberg. Sørensen necesitaba una forma precisa y conveniente de expresar la concentración de iones hidrógeno mientras estudiaba cómo la acidez afectaba a las enzimas en la elaboración de cerveza y en la química de las proteínas, y publicó su método (usando una técnica temprana de medición basada en electrodos) en la revista Biochemische Zeitschrift. El origen exacto de la letra «p» sigue siendo objeto de debate: los propios artículos de Sørensen apuntan a la palabra alemana «Potenz» (potencia, en el sentido de exponente), y esa misma letra inicia «puissance» en francés y «potens» en danés, los idiomas en los que también publicó, mientras que una explicación alternativa popular pero no respaldada, según la cual «p» vendría del latín «pondus hydrogenii» (peso del hidrógeno), es contradicha por sus textos originales."
+          },
+          "modernDevelopments": {
+            "title": "La Medición del pH desde Sørensen",
+            "paragraph": "El método original de Sørensen se basaba en comparar soluciones con indicadores químicos que cambian de color o con configuraciones tempranas de electrodo de hidrógeno; la medición moderna del pH utiliza en cambio pH-metros de electrodo de vidrio, calibrados con soluciones tampón certificadas y trazables a estándares internacionales, capaces de resolver el pH hasta centésimas de unidad en segundos. A comienzos del siglo XXI, el pH se había convertido en uno de los parámetros químicos medidos con mayor frecuencia en el mundo, utilizado rutinariamente en medicina, agricultura, ciencia de los alimentos, tratamiento de agua y la propia industria cervecera donde nació el concepto."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La química ácido-base y el pH son temas fundamentales dentro de la química. Estas son las 5 mejores universidades del mundo en Química según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #1 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — el doctorado en Química y Biología Química es un programa presencial de tiempo completo basado en la residencia de investigación en laboratorio."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #2 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #3 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "No — se exige a los estudiantes de doctorado de tiempo completo residir en Cambridge para su investigación de laboratorio, sin opción en línea."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #5 del mundo en Química (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — el doctorado (DPhil) requiere residencia de tiempo completo en Oxford para la investigación de laboratorio supervisada."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Ciencia Química — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, centrado en los centros de investigación en catálisis y materiales de la universidad."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Camões, M. F. (2009). The quality of pH measurements 100 years after its definition. Accreditation and Quality Assurance, 14, 521–523.",
+          "note": "Publicado en el centenario de la definición original de Sørensen en 1909, este estudio retrospectivo traza cómo la medición del pH evolucionó desde los primeros métodos de indicadores de color y electrodos hasta la práctica de medición trazable y estandarizada internacionalmente de hoy.",
+          "url": "https://doi.org/10.1007/s00769-009-0573-0",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

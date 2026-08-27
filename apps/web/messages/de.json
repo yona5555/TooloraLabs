@@ -4940,6 +4940,174 @@
         }
       }
     },
+    "ph-calculator": {
+      "title": "pH-Rechner",
+      "description": "Rechnen Sie zwischen pH-Wert, pOH-Wert, Wasserstoffionenkonzentration und Hydroxidionenkonzentration für wässrige Lösungen bei 25 °C um.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "substances": {
+        "batteryAcid": "Batteriesäure",
+        "lemonJuice": "Zitronensaft",
+        "vinegar": "Essig",
+        "orangeJuice": "Orangensaft",
+        "blackCoffee": "Schwarzer Kaffee",
+        "pureWater": "Reines Wasser",
+        "seawater": "Meerwasser",
+        "bakingSoda": "Natronlösung",
+        "ammonia": "Haushaltsammoniak",
+        "bleach": "Bleichmittel"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "pH-Wert gängiger Stoffe",
+          "intro": "Typische Näherungswerte bei Raumtemperatur; die tatsächlichen Werte variieren je nach Konzentration und Quelle.",
+          "columnSubstance": "Stoff",
+          "columnPh": "pH"
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannter Wert",
+        "operationLabel": "Umrechnen von",
+        "operation": {
+          "fromPH": "pH-Wert",
+          "fromH": "Wasserstoffionenkonzentration [H⁺]",
+          "fromPOH": "pOH-Wert",
+          "fromOH": "Hydroxidionenkonzentration [OH⁻]"
+        },
+        "pHLabel": "pH",
+        "pHPlaceholder": "z. B. 7",
+        "hLabel": "[H⁺] (mol/l)",
+        "hPlaceholder": "z. B. 0.0000001",
+        "pOHLabel": "pOH",
+        "pOHPlaceholder": "z. B. 7",
+        "ohLabel": "[OH⁻] (mol/l)",
+        "ohPlaceholder": "z. B. 0.0000001"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "nonPositiveConcentration": "Die Konzentration muss größer als null sein, um ihren Logarithmus zu berechnen.",
+        "classification": {
+          "acidic": "Sauer (pH < 7)",
+          "neutral": "Neutral (pH = 7)",
+          "basic": "Basisch / alkalisch (pH > 7)"
+        },
+        "pOH": "pOH",
+        "hConcentration": "[H⁺]",
+        "ohConcentration": "[OH⁻]",
+        "diagramCaption": "pH {value} auf der Skala von 0 bis 14, von sauer (rot) bis basisch (blau)."
+      },
+      "education": {
+        "intro": {
+          "title": "Den pH-Wert verstehen",
+          "paragraph1": "Der pH-Wert misst, wie sauer oder basisch eine wässrige Lösung ist, definiert als pH = -log₁₀[H⁺], der negative dekadische Logarithmus der Wasserstoffionenkonzentration in Mol pro Liter. Da es sich um eine logarithmische Skala handelt, entspricht jede ganzzahlige Abnahme des pH-Werts einer Verzehnfachung der Wasserstoffionenkonzentration — eine Lösung mit pH 4 ist zehnmal saurer als eine mit pH 5 und hundertmal saurer als eine mit pH 6.",
+          "diagram": {
+            "caption": "Ein pH-Wert von 5,5 (leicht sauer, wie schwarzer Kaffee) auf der Skala von 0 bis 14."
+          },
+          "paragraph2": "Der pOH-Wert ist das entsprechende Maß für die Hydroxidionenkonzentration, pOH = -log₁₀[OH⁻]. In Wasser bei 25 °C gilt stets das Ionenprodukt Kw = [H⁺][OH⁻] = 10⁻¹⁴, weshalb bei dieser Temperatur genau pH + pOH = 14 gilt: Die Kenntnis eines beliebigen Werts von pH, pOH, [H⁺] oder [OH⁻] genügt daher, um die anderen drei zu berechnen.",
+          "paragraph3": "Eine Lösung gilt als sauer, wenn der pH-Wert unter 7 liegt, als basisch (oder alkalisch), wenn er über 7 liegt, und nur bei genau pH 7 als neutral — dem pH-Wert von reinem Wasser bei 25 °C, bei dem [H⁺] und [OH⁻] gleich groß sind. Dieser Bereich von 0 bis 14 ist die übliche Skala für wässrige Lösungen bei dieser Temperatur, wobei pH-Werte außerhalb dieses Bereichs für sehr konzentrierte Säuren oder Basen mathematisch durchaus möglich sind."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Umrechnung zwischen pH-Wert, pOH-Wert und Ionenkonzentrationen für dieselbe Lösung.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "[H⁺] = 1 × 10⁻³ mol/l", "result": "pH 3, pOH 11 (sauer)" },
+            { "calculation": "pH 7 (reines Wasser)", "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/l" },
+            { "calculation": "[OH⁻] = 1 × 10⁻² mol/l", "result": "pOH 2, pH 12 (basisch)" },
+            { "calculation": "pOH 5", "result": "pH 9 (basisch)" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum ist der pH-Wert eine logarithmische statt einer linearen Skala?",
+              "answer": "Wasserstoffionenkonzentrationen in realen Lösungen erstrecken sich über einen enormen Bereich, von etwa 1 mol/l in starken Säuren bis 10⁻¹⁴ mol/l in starken Basen — ein Faktor von 100 Billionen. Der negative dekadische Logarithmus komprimiert diesen gesamten Bereich auf die praktische Skala von 0 bis 14, bedeutet aber auch, dass jede einzelne pH-Einheit eine Verzehnfachung von [H⁺] darstellt, keinen festen additiven Betrag."
+            },
+            {
+              "question": "Kann der pH-Wert unter 0 oder über 14 liegen?",
+              "answer": "Ja, mathematisch gesehen — extrem konzentrierte starke Säuren können einen negativen pH-Wert haben, und extrem konzentrierte starke Basen können pH 14 überschreiten. Der Bereich von 0 bis 14 ist lediglich die praktische Skala für typische verdünnte wässrige Lösungen, keine feste mathematische Grenze; er entspricht Wasserstoffionenkonzentrationen zwischen etwa 1 mol/l und 10⁻¹⁴ mol/l."
+            },
+            {
+              "question": "Warum ergeben pH-Wert und pOH-Wert zusammen immer 14?",
+              "answer": "In Wasser bei 25 °C sind die Konzentrationen der H⁺- und OH⁻-Ionen durch die Ionenproduktkonstante des Wassers verknüpft, Kw = [H⁺][OH⁻] = 1 × 10⁻¹⁴. Bildet man von beiden Seiten den negativen Logarithmus, ergibt sich bei dieser Temperatur exakt pH + pOH = 14 — bei anderen Temperaturen verschiebt sich diese Beziehung leicht, da Kw selbst temperaturabhängig ist."
+            },
+            {
+              "question": "Beeinflusst die Temperatur pH-Messwerte?",
+              "answer": "Ja — da sich Kw mit der Temperatur ändert, beträgt der pH-Wert von neutralem Wasser nur bei 25 °C exakt 7; bei höheren Temperaturen hat neutrales Wasser einen etwas niedrigeren pH-Wert, bei niedrigeren Temperaturen einen etwas höheren, obwohl es dabei durchgehend chemisch neutral bleibt ([H⁺] = [OH⁻]). Deshalb werden präzise pH-Messungen üblicherweise zusammen mit der Temperatur angegeben, bei der sie vorgenommen wurden."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen einer starken und einer schwachen Säure bei gleichem pH-Wert?",
+              "answer": "Eine starke Säure ionisiert in Wasser fast vollständig, während eine schwache Säure sich nur teilweise ionisiert und den größten Teil als intakte, nicht ionisierte Moleküle zurücklässt. Zwei Lösungen können denselben pH-Wert aufweisen — also dieselbe freie [H⁺] —, während die Lösung der schwachen Säure eine wesentlich höhere Gesamtkonzentration (ionisiert plus nicht ionisiert) der Säure enthält als die starke Säure, die für denselben pH-Wert nötig ist."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Eine praktische Notation eines Brauerei-Chemikers",
+            "paragraph": "Das pH-Konzept wurde 1909 vom dänischen Chemiker Søren Peter Lauritz Sørensen eingeführt, der die chemische Abteilung des Carlsberg-Laboratoriums in Kopenhagen leitete — einer Forschungseinrichtung, die von der Brauerei Carlsberg finanziert wurde. Sørensen benötigte eine präzise, praktische Möglichkeit, die Wasserstoffionenkonzentration auszudrücken, während er untersuchte, wie sich der Säuregehalt auf Enzyme beim Brauen und in der Proteinchemie auswirkt, und veröffentlichte seine Methode (unter Verwendung einer frühen elektrodenbasierten Messtechnik) in der Zeitschrift Biochemische Zeitschrift. Der genaue Ursprung des Buchstabens „p“ selbst bleibt umstritten: Sørensens eigene Arbeiten verweisen auf das deutsche Wort „Potenz“ (im Sinne eines Exponenten), und dasselbe Wort beginnt mit p im Französischen („puissance“) und Dänischen („potens“) — den Sprachen, in denen er ebenfalls veröffentlichte —, während eine populäre, aber nicht belegte alternative Erklärung, wonach „p“ für das lateinische „pondus hydrogenii“ (Gewicht des Wasserstoffs) stehe, seinen eigenen Originaltexten widerspricht."
+          },
+          "modernDevelopments": {
+            "title": "pH-Messung seit Sørensen",
+            "paragraph": "Sørensens ursprüngliche Methode beruhte auf dem Vergleich von Lösungen mit farbverändernden chemischen Indikatoren oder frühen Wasserstoffelektroden-Aufbauten; die moderne pH-Messung nutzt stattdessen pH-Meter mit Glaselektrode, kalibriert gegen zertifizierte Pufferlösungen, die auf internationale Standards rückführbar sind und den pH-Wert innerhalb von Sekunden auf Hundertstel einer Einheit genau bestimmen können. Zu Beginn des 21. Jahrhunderts war der pH-Wert einer der weltweit am häufigsten gemessenen chemischen Parameter geworden, routinemäßig eingesetzt in Medizin, Landwirtschaft, Lebensmittelwissenschaft, Wasseraufbereitung und der Brauindustrie, in der das Konzept selbst seinen Ursprung hatte."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Säure-Base-Chemie und der pH-Wert sind grundlegende Themen der Chemie. Hier sind die weltweit 5 besten Universitäten für Chemie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 1 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "Nein — die Promotion in Chemie und chemischer Biologie ist ein Vollzeit-Präsenzprogramm, das auf residenzpflichtiger Laborforschung basiert."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 2 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 3 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "Nein — Vollzeit-Promotionsstudierende müssen für ihre Laborforschung in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 5 für Chemie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "Nein — die Promotion (DPhil) erfordert Vollzeit-Residenz in Oxford für betreute Laborforschung."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Chemischer Wissenschaft — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell rund um die Katalyse- und Materialforschungszentren der Universität."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Camões, M. F. (2009). The quality of pH measurements 100 years after its definition. Accreditation and Quality Assurance, 14, 521–523.",
+          "note": "Veröffentlicht zum 100. Jahrestag von Sørensens ursprünglicher Definition von 1909, zeichnet dieser Rückblick nach, wie sich die pH-Messung von frühen Farbindikator- und Elektrodenmethoden zur heutigen international standardisierten, rückführbaren Messpraxis entwickelte.",
+          "url": "https://doi.org/10.1007/s00769-009-0573-0",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

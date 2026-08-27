@@ -4936,6 +4936,174 @@
         }
       }
     },
+    "ph-calculator": {
+      "title": "pH Calculator",
+      "description": "Convert between pH, pOH, hydrogen ion concentration, and hydroxide ion concentration for aqueous solutions at 25°C.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "substances": {
+        "batteryAcid": "Battery acid",
+        "lemonJuice": "Lemon juice",
+        "vinegar": "Vinegar",
+        "orangeJuice": "Orange juice",
+        "blackCoffee": "Black coffee",
+        "pureWater": "Pure water",
+        "seawater": "Seawater",
+        "bakingSoda": "Baking soda solution",
+        "ammonia": "Household ammonia",
+        "bleach": "Bleach"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "pH of Common Substances",
+          "intro": "Typical approximate pH values at room temperature; actual values vary by concentration and source.",
+          "columnSubstance": "Substance",
+          "columnPh": "pH"
+        }
+      },
+      "form": {
+        "inputTitle": "Known Value",
+        "operationLabel": "Convert From",
+        "operation": {
+          "fromPH": "pH",
+          "fromH": "Hydrogen Ion Concentration [H⁺]",
+          "fromPOH": "pOH",
+          "fromOH": "Hydroxide Ion Concentration [OH⁻]"
+        },
+        "pHLabel": "pH",
+        "pHPlaceholder": "e.g. 7",
+        "hLabel": "[H⁺] (mol/L)",
+        "hPlaceholder": "e.g. 0.0000001",
+        "pOHLabel": "pOH",
+        "pOHPlaceholder": "e.g. 7",
+        "ohLabel": "[OH⁻] (mol/L)",
+        "ohPlaceholder": "e.g. 0.0000001"
+      },
+      "result": {
+        "heading": "Result",
+        "nonPositiveConcentration": "Concentration must be greater than zero to take its logarithm.",
+        "classification": {
+          "acidic": "Acidic (pH < 7)",
+          "neutral": "Neutral (pH = 7)",
+          "basic": "Basic / Alkaline (pH > 7)"
+        },
+        "pOH": "pOH",
+        "hConcentration": "[H⁺]",
+        "ohConcentration": "[OH⁻]",
+        "diagramCaption": "pH {value} on the 0-to-14 scale, acidic (red) to basic (blue)."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding pH",
+          "paragraph1": "pH measures how acidic or basic an aqueous solution is, defined as pH = -log₁₀[H⁺], the negative base-10 logarithm of the hydrogen ion concentration in moles per liter. Because it is a logarithmic scale, each whole-number drop in pH represents a tenfold increase in hydrogen ion concentration — a solution of pH 4 is ten times more acidic than pH 5, and one hundred times more acidic than pH 6.",
+          "diagram": {
+            "caption": "A pH of 5.5 (mildly acidic, like black coffee) plotted on the 0-to-14 scale."
+          },
+          "paragraph2": "pOH is the parallel measure for hydroxide ion concentration, pOH = -log₁₀[OH⁻]. In water at 25°C, the ion product Kw = [H⁺][OH⁻] = 10⁻¹⁴ always holds, which is exactly why pH + pOH = 14 at that temperature: knowing any one of pH, pOH, [H⁺], or [OH⁻] is therefore enough to compute the other three.",
+          "paragraph3": "A solution is classified acidic when pH is below 7, basic (or alkaline) when it is above 7, and neutral only at exactly pH 7 — the pH of pure water at 25°C, where [H⁺] and [OH⁻] are equal. This 0-to-14 range is the conventional scale for aqueous solutions at that temperature, though pH values outside it are mathematically possible for very concentrated acids or bases."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Converting between pH, pOH, and ion concentrations for the same solution.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "[H⁺] = 1 × 10⁻³ mol/L", "result": "pH 3, pOH 11 (acidic)" },
+            { "calculation": "pH 7 (pure water)", "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L" },
+            { "calculation": "[OH⁻] = 1 × 10⁻² mol/L", "result": "pOH 2, pH 12 (basic)" },
+            { "calculation": "pOH 5", "result": "pH 9 (basic)" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why is pH a logarithmic scale instead of a linear one?",
+              "answer": "Hydrogen ion concentrations in real solutions span an enormous range, from about 1 mol/L in strong acids down to 10⁻¹⁴ mol/L in strong bases — a factor of 100 trillion. Taking the negative base-10 logarithm compresses that entire range into the convenient 0-to-14 scale, but it also means each single pH unit represents a tenfold change in [H⁺], not a fixed additive amount."
+            },
+            {
+              "question": "Can pH go below 0 or above 14?",
+              "answer": "Yes, mathematically — extremely concentrated strong acids can have a negative pH, and extremely concentrated strong bases can exceed pH 14. The 0-to-14 range is simply the practical scale for typical dilute aqueous solutions, not a hard mathematical boundary; it corresponds to hydrogen ion concentrations between roughly 1 mol/L and 10⁻¹⁴ mol/L."
+            },
+            {
+              "question": "Why does pH + pOH always equal 14?",
+              "answer": "In water at 25°C, the concentrations of H⁺ and OH⁻ ions are linked by the water ion-product constant, Kw = [H⁺][OH⁻] = 1 × 10⁻¹⁴. Taking the negative logarithm of both sides gives pH + pOH = 14 exactly at that temperature — the relationship shifts slightly at other temperatures because Kw itself is temperature-dependent."
+            },
+            {
+              "question": "Does temperature affect pH readings?",
+              "answer": "Yes — because Kw changes with temperature, the pH of neutral water is only exactly 7 at 25°C; at higher temperatures neutral water has a slightly lower pH, and at lower temperatures slightly higher, even though it remains chemically neutral ([H⁺] = [OH⁻]) throughout. This is why precise pH measurements are typically reported alongside the temperature at which they were taken."
+            },
+            {
+              "question": "What's the difference between a strong acid and a weak acid at the same pH?",
+              "answer": "A strong acid ionizes almost completely in water, while a weak acid only partially ionizes, leaving most of it as intact, un-ionized molecules. Two solutions can share the same pH — meaning the same free [H⁺] — while the weak acid solution contains a much higher total (ionized plus un-ionized) acid concentration than the strong acid solution needed to reach that pH."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Brewery Chemist's Convenient Notation",
+            "paragraph": "The pH concept was introduced in 1909 by Danish chemist Søren Peter Lauritz Sørensen, who directed the chemistry department at the Carlsberg Laboratory in Copenhagen — a research institution funded by the Carlsberg brewery. Sørensen needed a precise, convenient way to express hydrogen ion concentration while studying how acidity affected enzymes in brewing and protein chemistry, and published his method (using an early electrode-based measurement technique) in the journal Biochemische Zeitschrift. The exact origin of the letter \"p\" itself remains debated: Sørensen's own papers point to the German word \"Potenz\" (power, in the exponent sense), and the same word begins \"puissance\" in French and \"potens\" in Danish — the languages he published in — while a popular but unsupported alternate explanation, that \"p\" stood for the Latin \"pondus hydrogenii\" (weight of hydrogen), is contradicted by his original texts."
+          },
+          "modernDevelopments": {
+            "title": "pH Measurement Since Sørensen",
+            "paragraph": "Sørensen's original method relied on comparing solutions against color-changing chemical indicators or early hydrogen-electrode setups; modern pH measurement instead uses glass-electrode pH meters, calibrated against certified buffer solutions traceable to international standards, which can resolve pH to hundredths of a unit in seconds. By the early 21st century, pH had become one of the most frequently measured chemical parameters worldwide, used routinely across medicine, agriculture, food science, water treatment, and the brewing industry where the concept itself began."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Acid-base chemistry and pH are foundational topics within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — the PhD in Chemistry and Chemical Biology is a full-time, in-person program built around laboratory research residency."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://gradadmissions.mit.edu/programs/chemistry",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ch.cam.ac.uk/pgapp/phd-chemistry",
+                "online": "No — full-time PhD students are required to reside in Cambridge for their laboratory-based research, with no online option."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — the DPhil requires full-time residence in Oxford for supervised laboratory research."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Chemical Science — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/chemistry",
+                "online": "No — the program follows an on-campus, laboratory-based research model centered on the university's catalysis and materials research centers."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Camões, M. F. (2009). The quality of pH measurements 100 years after its definition. Accreditation and Quality Assurance, 14, 521–523.",
+          "note": "Published on the 100th anniversary of Sørensen's original 1909 definition, this retrospective traces how pH measurement evolved from early color-indicator and electrode methods into today's internationally standardized, traceable measurement practice.",
+          "url": "https://doi.org/10.1007/s00769-009-0573-0",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
