@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ShareButton from "./ShareButton";
 import ToolsDropdown from "./ToolsDropdown";
 
 export default function Navbar() {
@@ -55,6 +56,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
+          <ShareButton />
           <ThemeToggle />
         </div>
       </div>
