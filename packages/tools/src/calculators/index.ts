@@ -41,3 +41,4 @@ export * from "./VectorCalculator";
 export * from "./MatrixCalculator";
 export * from "./MolarMassCalculator";
 export * from "./StoichiometryCalculator";
+export * from "./ChemicalEquationBalancer";

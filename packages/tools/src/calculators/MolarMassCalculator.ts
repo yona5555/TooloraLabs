@@ -43,7 +43,7 @@ function clean(value: number): number {
   return Number(value.toPrecision(10));
 }
 
-class FormulaParseError extends Error {
+export class FormulaParseError extends Error {
   code: MolarMassCalculatorError;
   constructor(code: MolarMassCalculatorError, message: string) {
     super(message);
@@ -123,7 +123,13 @@ function readNumber(formula: string, index: number, fallback: number): { count: 
   return { count: parseInt(match[0], 10), nextIndex: index + match[0].length };
 }
 
-function parseFormula(rawFormula: string): Record<string, number> {
+/**
+ * Parses a chemical formula (including parenthesized/bracketed groups and
+ * hydrate notation) into element -> count. Exported for reuse by other
+ * calculators (e.g. ChemicalEquationBalancer) that need raw element counts
+ * without duplicating this parser.
+ */
+export function parseFormula(rawFormula: string): Record<string, number> {
   const formula = rawFormula.replace(/\s+/g, "");
   if (formula.length === 0) {
     throw new FormulaParseError("empty-formula", "Enter a chemical formula.");

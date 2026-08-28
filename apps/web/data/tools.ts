@@ -486,6 +486,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "chemical-equation-balancer",
+    title: "Chemical Equation Balancer",
+    category: "math-science",
+    description:
+      "Balance a chemical equation by finding the smallest whole-number coefficients that conserve every element.",
+    featured: false,
+    keywords: [
+      "chemical equation balancer",
+      "balance chemical equations",
+      "equation balancer chemistry",
+      "reaction balancer",
+      "coefficient balancer",
+      "conservation of mass calculator",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

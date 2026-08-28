@@ -6930,6 +6930,98 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Équilibreur d'Équations Chimiques",
+      "description": "Équilibrez une équation chimique en trouvant les plus petits coefficients entiers qui conservent chaque élément.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Exemples d'Équations",
+          "intro": "Des équations que cet équilibreur peut résoudre — essayez-en une, ou saisissez la vôtre.",
+          "syntaxHint": "Séparez les réactifs des produits avec ->, =, ou →, et séparez les termes de chaque côté par +. Tout coefficient déjà saisi est ignoré et recalculé depuis le début."
+        }
+      },
+      "form": {
+        "inputTitle": "Équation Non Équilibrée",
+        "equationLabel": "Équation",
+        "equationHint": "Utilisez la syntaxe standard des formules, par ex. Fe2O3, et séparez réactifs/produits par -> ou =.",
+        "equationPlaceholder": "ex. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Équation Équilibrée",
+        "emptyEquation": "Saisissez une équation chimique à équilibrer.",
+        "invalidEquation": "Ceci ne ressemble pas à une équation valide — utilisez -> ou = entre réactifs et produits, et + entre les termes.",
+        "unknownElement": "Cette équation contient un symbole qui n'est pas un élément reconnu.",
+        "cannotBalance": "Cette équation ne peut pas être équilibrée avec des coefficients entiers — vérifiez les formules à la recherche de fautes de frappe.",
+        "balancedCaption": "Les plus petits coefficients entiers qui conservent chaque élément",
+        "reactants": "Réactifs",
+        "products": "Produits"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'Équilibrage des Équations",
+          "paragraph1": "Équilibrer une équation chimique signifie trouver des coefficients — des nombres entiers placés devant chaque formule — de sorte que le même nombre d'atomes de chaque élément apparaisse des deux côtés. Cela reflète la loi de conservation de la masse : les atomes sont réarrangés lors d'une réaction chimique, mais aucun n'est créé ni détruit, donc tout ce qui entre en tant que réactifs, en éléments et en quantités, doit ressortir, au total, en tant que produits.",
+          "paragraph2": "Ce calculateur utilise la « méthode matricielle » : il traite le nombre d'atomes de chaque élément à travers toutes les formules comme une équation linéaire, construit une matrice à partir de toutes ces équations réunies, et résout les coefficients par élimination de Gauss avec des fractions exactes (évitant les erreurs d'arrondi que l'arithmétique à virgule flottante introduirait). Le résultat est un vecteur de proportions, que le calculateur met ensuite à l'échelle jusqu'au plus petit ensemble de nombres entiers positifs — la même réponse qu'un chimiste finirait par trouver par essais et erreurs, mais obtenue ici de façon systématique.",
+          "paragraph3": "Une équation correctement équilibrée devrait également conserver la charge électrique totale, pas seulement le nombre d'atomes, ce qui importe pour les réactions entre ions plutôt qu'entre molécules neutres. Ce calculateur équilibre les équations à formules neutres uniquement par le nombre d'atomes ; pour les réactions écrites avec des charges ioniques explicites, une méthode complète d'équilibrage redox (suivant les degrés d'oxydation et les électrons transférés) est nécessaire en plus de ce que cet outil calcule."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Des équations représentatives, équilibrées par ce calculateur.",
+          "columnCalculation": "Non Équilibrée",
+          "columnResult": "Équilibrée",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi l'équilibreur ignore-t-il les coefficients que j'ai déjà saisis ?", "answer": "Parce qu'un coefficient que vous avez deviné pourrait être incorrect, et il n'existe aucun moyen fiable de distinguer un coefficient choisi délibérément d'une faute de frappe accidentelle. Le calculateur résout toujours les coefficients depuis le début en se basant uniquement sur les formules, ce qui garantit un résultat correct quel que soit ce que vous avez saisi initialement." },
+            { "question": "Pourquoi les coefficients doivent-ils être des nombres entiers ?", "answer": "Une équation chimique décrit des molécules entières ou des unités formulaires réagissant ensemble — on ne peut pas avoir « 2,5 molécules » de quelque chose participant à une réaction. Si le rapport sous-jacent s'avère fractionnaire (comme cela arrive parfois en cours de calcul), chaque coefficient est mis à l'échelle par le même facteur jusqu'à ce que tous deviennent des nombres entiers, ce qui laisse inchangés les rapports entre les substances." },
+            { "question": "Pourquoi cet outil dit-il qu'une équation « ne peut pas être équilibrée » ?", "answer": "Généralement parce que les formules telles qu'écrites ne partagent pas réellement les éléments nécessaires à l'équilibrage — par exemple, si un élément n'apparaît que parmi les réactifs et jamais parmi les produits, aucun ensemble de coefficients ne peut rendre les deux côtés égaux pour cet élément. Vérifiez chaque formule à la recherche de fautes de frappe ou d'un produit/réactif manquant avant de supposer que la réaction elle-même est impossible." },
+            { "question": "Cela peut-il équilibrer des équations impliquant des ions ou une charge électrique ?", "answer": "Pas à lui seul — il équilibre le nombre d'atomes pour des formules neutres, ce qui est exactement ce dont ont besoin la plupart des réactions simples. Les réactions redox écrites avec des charges ioniques explicites (comme Fe²⁺ → Fe³⁺ + e⁻) doivent également conserver la charge totale et les électrons transférés, ce qui nécessite un suivi des degrés d'oxydation au-delà de ce que réalise cette méthode de comptage d'atomes." },
+            { "question": "Existe-t-il toujours exactement une version équilibrée correcte d'une équation ?", "answer": "Pour les réactifs et produits donnés, oui — il existe exactement un plus petit rapport entier, bien que tout multiple de celui-ci (4H2 + 2O2 → 4H2O au lieu de 2H2 + O2 → 2H2O) équilibre techniquement aussi. Par convention, et par défaut dans ce calculateur, les plus petits nombres entiers possibles sont indiqués, car tout multiple commun plus grand n'apporte aucune information nouvelle." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Une Loi Démontrée par une Balance Très Précise",
+            "paragraph": "L'exigence qu'une équation chimique doive être équilibrée remonte à la loi de conservation de la masse d'Antoine Lavoisier, publiée dans son Traité élémentaire de chimie de 1789. En pesant méticuleusement chaque substance impliquée dans une réaction — y compris les gaz, que beaucoup de ses contemporains ne prenaient pas la peine de capturer et de peser — Lavoisier a montré que la masse totale entrant dans une réaction est toujours égale à la masse totale qui en sort. Son Traité a également popularisé l'écriture des réactions sous la forme d'équation qui rendait ce principe de conservation visuellement évident, posant les bases des équations chimiques équilibrées encore écrites de la même manière aujourd'hui."
+          },
+          "modernDevelopments": {
+            "title": "De l'Essai-Erreur à un Système Résoluble",
+            "paragraph": "Pendant la plus grande partie de l'histoire de la chimie, les équations étaient équilibrées par inspection — en ajustant les coefficients par essais et erreurs jusqu'à ce que les deux côtés correspondent, une méthode qui devient vite lourde pour les réactions comportant de nombreux éléments ou termes. L'alternative utilisée par ce calculateur, parfois appelée méthode algébrique ou matricielle, traite le nombre d'atomes de chaque élément comme une équation linéaire et résout tout le système simultanément ; l'article de John A. Olson de 1997 dans le Journal of Chemical Education a analysé formellement cette approche, y compris la façon de l'étendre aux réactions devant également équilibrer oxydation et réduction. La même technique sous-jacente — résoudre le noyau d'une matrice — est ce que le logiciel moderne d'équilibrage d'équations, y compris cet outil, calcule réellement."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'équilibrage des équations chimiques est une compétence fondamentale en chimie. Voici les 5 meilleures universités au monde en Chimie selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
+            "universities": [
+              { "name": "Université Harvard", "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus." },
+              { "name": "Université de Cambridge", "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance." },
+              { "name": "Université Stanford", "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée." },
+              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines." },
+              { "name": "Université du Qatar — Département de Chimie et des Sciences de la Terre", "note": "Fondé en 1973, avec environ 30 enseignants-chercheurs en chimie à temps plein ; non classé séparément dans ce tableau mondial par discipline.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "Non — les programmes du département sont dispensés sur le campus de l'Université du Qatar." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "L'article d'Olson formalise la méthode algébrique (matricielle) d'équilibrage des équations chimiques que ce calculateur met en œuvre, y compris les conditions générales qu'un équilibrage valide doit satisfaire.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

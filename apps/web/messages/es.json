@@ -6906,6 +6906,98 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Balanceador de Ecuaciones Químicas",
+      "description": "Balancea una ecuación química encontrando los coeficientes enteros más pequeños que conservan cada elemento.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Ejemplos de Ecuaciones",
+          "intro": "Ecuaciones que este balanceador puede resolver — prueba una, o introduce la tuya propia.",
+          "syntaxHint": "Separa los reactivos de los productos con ->, =, o →, y separa los términos en cada lado con +. Cualquier coeficiente que ya hayas escrito se ignora y se recalcula desde cero."
+        }
+      },
+      "form": {
+        "inputTitle": "Ecuación Sin Balancear",
+        "equationLabel": "Ecuación",
+        "equationHint": "Usa la sintaxis estándar de fórmulas, p. ej. Fe2O3, y separa reactivos/productos con -> o =.",
+        "equationPlaceholder": "p. ej. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Ecuación Balanceada",
+        "emptyEquation": "Introduce una ecuación química para balancear.",
+        "invalidEquation": "Esto no parece una ecuación válida — usa -> o = entre reactivos y productos, y + entre términos.",
+        "unknownElement": "Esta ecuación contiene un símbolo que no es un elemento reconocido.",
+        "cannotBalance": "Esta ecuación no se puede balancear con coeficientes enteros — revisa las fórmulas en busca de errores tipográficos.",
+        "balancedCaption": "Los coeficientes enteros más pequeños que conservan cada elemento",
+        "reactants": "Reactivos",
+        "products": "Productos"
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Balanceo de Ecuaciones",
+          "paragraph1": "Balancear una ecuación química significa encontrar coeficientes — números enteros colocados delante de cada fórmula — de modo que aparezca el mismo número de átomos de cada elemento en ambos lados. Esto refleja la ley de conservación de la masa: los átomos se reorganizan en una reacción química, pero ninguno se crea ni se destruye, así que cualquier elemento y cantidad que entre como reactivo debe salir, en total, como producto.",
+          "paragraph2": "Esta calculadora utiliza el «método matricial»: trata el recuento de átomos de cada elemento en todas las fórmulas como una ecuación lineal, construye una matriz con todas esas ecuaciones juntas, y resuelve los coeficientes mediante eliminación gaussiana con fracciones exactas (evitando los errores de redondeo que introduciría la aritmética de punto flotante). El resultado es un vector de proporciones, que la calculadora luego escala hasta el conjunto más pequeño de números enteros positivos — la misma respuesta a la que un químico llegaría eventualmente por prueba y error, pero encontrada de forma sistemática.",
+          "paragraph3": "Una ecuación correctamente balanceada también debería conservar la carga eléctrica total, no solo el recuento de átomos, lo cual importa en reacciones entre iones en lugar de moléculas neutras. Esta calculadora balancea ecuaciones de fórmulas neutras solo por recuento de átomos; para reacciones escritas con cargas iónicas explícitas, se necesita además un método completo de balanceo redox (que siga los estados de oxidación y los electrones transferidos) además de lo que calcula esta herramienta."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Ecuaciones representativas, balanceadas por esta calculadora.",
+          "columnCalculation": "Sin Balancear",
+          "columnResult": "Balanceada",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué el balanceador ignora los coeficientes que ya escribí?", "answer": "Porque un coeficiente que hayas adivinado podría ser incorrecto, y no hay una forma fiable de distinguir un coeficiente elegido deliberadamente de un error tipográfico accidental. La calculadora siempre resuelve los coeficientes desde cero basándose únicamente en las fórmulas, lo que garantiza un resultado correcto sin importar lo que escribiste originalmente." },
+            { "question": "¿Por qué los coeficientes tienen que ser números enteros?", "answer": "Una ecuación química describe moléculas completas o unidades fórmula que reaccionan entre sí — no puede haber «2.5 moléculas» de algo participando en una reacción. Si la proporción subyacente resulta fraccionaria (como ocurre a veces a mitad del cálculo), cada coeficiente se escala por el mismo factor hasta que todos resultan en números enteros, lo que mantiene inalteradas las proporciones entre sustancias." },
+            { "question": "¿Por qué esta herramienta dice que una ecuación \"no se puede balancear\"?", "answer": "Normalmente porque las fórmulas tal como están escritas no comparten realmente los elementos necesarios para balancear — por ejemplo, si un elemento aparece solo entre los reactivos y nunca entre los productos, ningún conjunto de coeficientes puede igualar ambos lados para ese elemento. Verifica cada fórmula en busca de errores tipográficos o un producto/reactivo faltante antes de asumir que la reacción en sí es imposible." },
+            { "question": "¿Puede esto balancear ecuaciones que involucran iones o carga eléctrica?", "answer": "No por sí sola — balancea recuentos de átomos para fórmulas neutras, que es exactamente lo que necesitan la mayoría de las reacciones simples. Las reacciones redox escritas con cargas iónicas explícitas (como Fe²⁺ → Fe³⁺ + e⁻) también necesitan conservar la carga total y los electrones transferidos, lo cual requiere un seguimiento de los estados de oxidación más allá de lo que realiza este método de conteo de átomos." },
+            { "question": "¿Siempre existe exactamente una versión balanceada correcta de una ecuación?", "answer": "Para los reactivos y productos dados, sí — existe exactamente una proporción entera más pequeña, aunque técnicamente cualquier múltiplo de ella (4H2 + 2O2 → 4H2O en lugar de 2H2 + O2 → 2H2O) también balancea. Por convención, y de forma predeterminada en esta calculadora, se muestran los números enteros más pequeños posibles, ya que cualquier múltiplo común mayor no aporta información nueva." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Una Ley Demostrada por una Balanza Muy Cuidadosa",
+            "paragraph": "El requisito de que una ecuación química debe estar balanceada se remonta a la ley de conservación de la masa de Antoine Lavoisier, publicada en su Traité élémentaire de chimie de 1789. Pesando meticulosamente cada sustancia involucrada en una reacción — incluidos los gases, que muchos de sus contemporáneos no se molestaban en capturar y pesar — Lavoisier demostró que la masa total que entra en una reacción siempre es igual a la masa total que sale. Su Traité también popularizó escribir las reacciones en el formato similar a una ecuación que hizo visualmente evidente este principio de conservación, sentando las bases de las ecuaciones químicas balanceadas que aún hoy se escriben de la misma manera."
+          },
+          "modernDevelopments": {
+            "title": "De la Prueba y Error a un Sistema Resoluble",
+            "paragraph": "Durante la mayor parte de la historia de la química, las ecuaciones se balanceaban por inspección — ajustando coeficientes por prueba y error hasta que ambos lados coincidían, un método que se vuelve rápidamente inmanejable para reacciones con muchos elementos o términos. La alternativa que usa esta calculadora, a veces llamada método algebraico o matricial, trata el recuento de átomos de cada elemento como una ecuación lineal y resuelve todo el sistema simultáneamente; el artículo de John A. Olson de 1997 en el Journal of Chemical Education analizó formalmente este enfoque, incluyendo cómo extenderlo a reacciones que también necesitan balancear oxidación y reducción. La misma técnica subyacente — resolver el espacio nulo de una matriz — es lo que el software moderno de balanceo de ecuaciones, incluida esta herramienta, calcula en realidad."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El balanceo de ecuaciones químicas es una habilidad fundamental dentro de la química. Aquí están las 5 mejores del mundo en Química según el QS World University Rankings by Subject 2025, además de un departamento regional:",
+            "universities": [
+              { "name": "Universidad de Harvard", "note": "Clasificada #1 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — el departamento cubre la matrícula de todos los estudiantes de doctorado en un programa de investigación presencial." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificado #2 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — los estudiantes de doctorado admitidos reciben matrícula completa y un estipendio para un programa de investigación en el campus." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #3 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Parcialmente — el doctorado se ofrece como investigación a tiempo completo o parcial, aunque ambas modalidades son presenciales, no a distancia." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #4 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — el programa es un doctorado de investigación presencial con una revisión de admisión integral e individualizada." },
+              { "name": "Universidad de Oxford", "note": "Clasificada #5 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — el DPhil es un título de investigación presencial que abarca catálisis, materiales y química teórica, entre otras áreas." },
+              { "name": "Universidad de Catar — Departamento de Química y Ciencias de la Tierra", "note": "Fundado en 1973, con alrededor de 30 profesores de química a tiempo completo; no aparece clasificado por separado en esta tabla global de la materia.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "No — los programas del departamento se imparten en el campus de la Universidad de Catar." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "El artículo de Olson formaliza el método algebraico (matricial) para balancear ecuaciones químicas que implementa esta calculadora, incluyendo las condiciones generales que debe satisfacer un balance válido.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

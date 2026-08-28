@@ -6926,6 +6926,98 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Chemical Equation Balancer",
+      "description": "Balance a chemical equation by finding the smallest whole-number coefficients that conserve every element.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Example Equations",
+          "intro": "Equations this balancer can solve — try one, or enter your own.",
+          "syntaxHint": "Separate reactants from products with ->, =, or →, and separate terms on each side with +. Any coefficients you already type are ignored and recalculated from scratch."
+        }
+      },
+      "form": {
+        "inputTitle": "Unbalanced Equation",
+        "equationLabel": "Equation",
+        "equationHint": "Use standard formula syntax, e.g. Fe2O3, and separate reactants/products with -> or =.",
+        "equationPlaceholder": "e.g. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Balanced Equation",
+        "emptyEquation": "Enter a chemical equation to balance.",
+        "invalidEquation": "This doesn't look like a valid equation — use -> or = between reactants and products, and + between terms.",
+        "unknownElement": "This equation contains a symbol that isn't a recognized element.",
+        "cannotBalance": "This equation can't be balanced with whole-number coefficients — check the formulas for typos.",
+        "balancedCaption": "Smallest whole-number coefficients that conserve every element",
+        "reactants": "Reactants",
+        "products": "Products"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Equation Balancing",
+          "paragraph1": "Balancing a chemical equation means finding coefficients — whole numbers placed in front of each formula — so that the same number of atoms of every element appears on both sides. This reflects the law of conservation of mass: atoms are rearranged in a chemical reaction, but none are created or destroyed, so whatever elements and quantities go in as reactants must come out, in total, as products.",
+          "paragraph2": "This calculator uses the \"matrix method\": it treats each element's atom count across every formula as one linear equation, builds a matrix of all those equations together, and solves for the coefficients using Gaussian elimination with exact fractions (avoiding the rounding errors floating-point arithmetic would introduce). The result is a vector of ratios, which the calculator then scales up to the smallest set of positive whole numbers — the same answer a chemist would eventually reach by trial and error, found systematically instead.",
+          "paragraph3": "A properly balanced equation should also conserve overall electric charge, not just atom counts, which matters for reactions between ions rather than neutral molecules. This calculator balances neutral-formula equations by atom count alone; for reactions written with explicit ionic charges, a full redox-balancing method (tracking oxidation states and electrons transferred) is needed in addition to what this tool computes."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Representative equations, balanced by this calculator.",
+          "columnCalculation": "Unbalanced",
+          "columnResult": "Balanced",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why does the balancer ignore coefficients I already typed in?", "answer": "Because a coefficient you guessed might be wrong, and there's no reliable way to tell a deliberately chosen coefficient from an accidental typo. The calculator always solves for coefficients from scratch based on the formulas alone, which guarantees a correct result regardless of what you originally typed." },
+            { "question": "Why do the coefficients have to be whole numbers?", "answer": "A chemical equation describes whole molecules or formula units reacting together — you can't have \"2.5 molecules\" of something take part in a reaction. If the underlying ratio comes out fractional (as it sometimes does partway through the calculation), every coefficient is scaled up by the same factor until all of them land on whole numbers, which keeps the ratios between substances unchanged." },
+            { "question": "Why does this tool say an equation \"can't be balanced\"?", "answer": "Usually because the formulas as written don't actually share the elements needed to balance — for example, if an element appears only among the reactants and never among the products, no set of coefficients can make both sides equal for that element. Double-check every formula for typos or a missing product/reactant before assuming the reaction itself is impossible." },
+            { "question": "Can this balance equations involving ions or electric charge?", "answer": "Not on its own — it balances atom counts for neutral formulas, which is exactly what most simple reactions need. Redox reactions written with explicit ion charges (like Fe²⁺ → Fe³⁺ + e⁻) also need to conserve total charge and electrons transferred, which requires oxidation-state tracking beyond what this atom-counting method performs." },
+            { "question": "Is there always exactly one correct balanced version of an equation?", "answer": "For the reactants and products as given, yes — there's exactly one smallest whole-number ratio, though any multiple of it (4H2 + 2O2 → 4H2O instead of 2H2 + O2 → 2H2O) technically also balances. By convention, and by default in this calculator, the smallest possible whole numbers are reported, since any larger common multiple carries no new information." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Law Proven by a Very Careful Set of Scales",
+            "paragraph": "The requirement that a chemical equation must balance traces to Antoine Lavoisier's law of conservation of mass, published in his 1789 Traité élémentaire de chimie. By meticulously weighing every substance involved in a reaction — including gases, which many of his contemporaries didn't bother to capture and weigh — Lavoisier showed that the total mass going into a reaction always equals the total mass coming out. His Traité also popularized writing reactions in the equation-like format that made this conservation principle visually obvious, laying the groundwork for the balanced chemical equations still written the same way today."
+          },
+          "modernDevelopments": {
+            "title": "From Trial and Error to a Solvable System",
+            "paragraph": "For most of chemistry's history, equations were balanced by inspection — adjusting coefficients by trial and error until both sides matched, a method that gets unwieldy fast for reactions with many elements or terms. The alternative this calculator uses, sometimes called the algebraic or matrix method, treats each element's atom count as a linear equation and solves the whole system simultaneously; John A. Olson's 1997 Journal of Chemical Education paper analyzed this approach formally, including how to extend it to reactions that also need to balance oxidation and reduction. The same underlying technique — solving for the null space of a matrix — is what modern equation-balancing software, including this tool, actually computes."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Chemical equation balancing is a foundational skill within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
+              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
+              { "name": "Qatar University — Department of Chemistry and Earth Sciences", "note": "Founded in 1973 with around 30 full-time chemistry faculty; not separately ranked on this global subject table.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "No — the department's programs are delivered on Qatar University's campus." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "Olson's paper formalizes the algebraic (matrix) method for balancing chemical equations that this calculator implements, including the general conditions a valid balance must satisfy.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
