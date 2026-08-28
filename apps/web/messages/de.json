@@ -6826,6 +6826,110 @@
         }
       }
     },
+    "stoichiometry-calculator": {
+      "title": "Stöchiometrie-Rechner",
+      "description": "Rechnen Sie zwischen Mol oder Gramm zweier Stoffe in einer ausgeglichenen chemischen Gleichung mittels Stoffmengenverhältnis-Stöchiometrie um.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Stoffmengenverhältnis-Formel",
+          "intro": "Die grundlegende Beziehung, die dieser Rechner aus den Koeffizienten einer ausgeglichenen Gleichung anwendet.",
+          "formula": "mol(Ziel) = mol(bekannt) × (Koeffizient(Ziel) / Koeffizient(bekannt))"
+        }
+      },
+      "form": {
+        "inputTitle": "Daten der ausgeglichenen Gleichung",
+        "knownLabel": "Bekannter Stoff",
+        "targetLabel": "Gesuchter Stoff",
+        "formulaLabel": "Formel",
+        "knownFormulaPlaceholder": "z. B. H2",
+        "targetFormulaPlaceholder": "z. B. H2O",
+        "coefficientLabel": "Koeffizient in der ausgeglichenen Gleichung",
+        "amountLabel": "Bekannte Menge",
+        "unitLabel": "Einheit",
+        "unit": {
+          "grams": "Gramm",
+          "moles": "Mol"
+        },
+        "coefficientHint": "Die Koeffizienten stammen aus der ausgeglichenen Gleichung selbst, z. B. sind bei 2H2 + O2 → 2H2O die Koeffizienten 2 (H2), 1 (O2) und 2 (H2O)."
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidKnownFormula": "Die Formel des bekannten Stoffes ist ungültig — überprüfen Sie Schreibweise und Groß-/Kleinschreibung.",
+        "invalidTargetFormula": "Die Formel des gesuchten Stoffes ist ungültig — überprüfen Sie Schreibweise und Groß-/Kleinschreibung.",
+        "invalidCoefficient": "Beide Koeffizienten müssen größer als null sein.",
+        "invalidAmount": "Geben Sie eine bekannte Menge von null oder mehr ein.",
+        "molUnit": "mol",
+        "targetAmountCaption": "Menge an {formula}, die entsteht oder benötigt wird",
+        "knownMoles": "Mol des Bekannten",
+        "targetMoles": "Mol des Ziels",
+        "knownMolarMass": "Molmasse Bekannt",
+        "targetMolarMass": "Molmasse Ziel"
+      },
+      "education": {
+        "intro": {
+          "title": "Stöchiometrie verstehen",
+          "paragraph1": "Stöchiometrie ist die Berechnung, wie viel von jedem Stoff an einer chemischen Reaktion beteiligt ist, basierend auf den Koeffizienten der ausgeglichenen Gleichung. Diese Koeffizienten — die Zahlen vor jeder Formel, wie die 2 in 2H₂ + O₂ → 2H₂O — beschreiben ein festes Stoffmengenverhältnis: genau 2 Mol H₂ reagieren mit genau 1 Mol O₂ zu genau 2 Mol H₂O, unabhängig davon, wie groß oder klein die tatsächliche Reaktion ist. Dieser Rechner nutzt dieses Verhältnis direkt: Mol des Zielstoffs entsprechen Mol des bekannten Stoffs multipliziert mit (Zielkoeffizient ÷ bekanntem Koeffizient).",
+          "paragraph2": "Da Chemikalien im Labor nach Masse gemessen werden, nicht durch Zählen einzelner Moleküle, erfordert die Umrechnung von und zu Mol die Molmasse — dieselbe Berechnung, die der Molmassenrechner dieser Seite durchführt. Bei einer bekannten Menge in Gramm teilt dieser Rechner zunächst durch die Molmasse des bekannten Stoffes, um Mol zu erhalten; nach Anwendung des Stoffmengenverhältnisses multipliziert er, falls die Zielmenge in Gramm gewünscht wird, die Zielmol mit der Molmasse des Zielstoffs. Wird auf beiden Seiten Mol angefordert, entfällt die entsprechende Umrechnung.",
+          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt)."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Stöchiometrische Umrechnungen für die Reaktion 2H2 + O2 → 2H2O (Elektrolyse/Verbrennung von Wasser) und N2 + 3H2 → 2NH3 (Ammoniaksynthese), berechnet von diesem Rechner.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "4 g H2 (Koeffizient 2) → Gramm H2O (Koeffizient 2)", "result": "35,744 g H2O" },
+            { "calculation": "2 mol N2 (Koeffizient 1) → Mol NH3 (Koeffizient 2)", "result": "4 mol NH3" },
+            { "calculation": "32 g O2 (Koeffizient 1) → Mol H2 (Koeffizient 2)", "result": "2,0001 mol H2" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum muss ich die Koeffizienten selbst eingeben statt der vollständigen Gleichung?", "answer": "Das Parsen und korrekte Ausgleichen einer beliebigen chemischen Gleichung ist ein wesentlich schwierigeres Problem als das Anwenden eines Verhältnisses, wenn die Koeffizienten bereits bekannt sind — dieser Rechner konzentriert sich speziell auf den Stoffmengenverhältnis-Umrechnungsschritt. Wenn Sie noch keine ausgeglichene Gleichung haben, kann der Chemische-Gleichungen-Ausgleicher dieser Seite zunächst eine für Sie ausgleichen." },
+            { "question": "Spielt es eine Rolle, welchen Stoff ich „bekannt“ und welchen ich „Ziel“ nenne?", "answer": "Nein — die Stoffmengenverhältnis-Beziehung funktioniert symmetrisch. Welcher Stoff auch immer eine gemessene Menge hat, ist der „bekannte“, und welcher Stoff auch immer Sie finden möchten, ist das „Ziel“; sie zu vertauschen und die Zahlen andersherum einzugeben, liefert die umgekehrte Umrechnung." },
+            { "question": "Warum braucht der Rechner überhaupt die Molmasse, wenn ich nur Stoffmengenverhältnisse verwende?", "answer": "Stoffmengenverhältnisse rechnen Mol direkt in Mol um, aber in der Praxis beginnen Sie fast immer mit einer Masse in Gramm (oder wollen sie), da genau das eine Laborwaage misst. Die Molmasse ist der Umrechnungsfaktor zwischen Gramm und Mol für jeden bestimmten Stoff, weshalb sie nur an den Ein- und Ausgangspunkten der Berechnung benötigt wird — nicht im Verhältnisschritt selbst." },
+            { "question": "Was passiert, wenn ich die Koeffizienten aus einer unausgeglichenen Gleichung verwechsle?", "answer": "Der Rechner berechnet dennoch eine mathematisch konsistente Antwort, aber sie spiegelt keine echte Chemie wider — das Stoffmengenverhältnis muss aus einer korrekt ausgeglichenen Gleichung stammen, um sinnvoll zu sein. Überprüfen Sie, dass beide Seiten Ihrer Gleichung gleiche Anzahlen jeder Atomart enthalten, bevor Sie den eingegebenen Koeffizienten vertrauen." },
+            { "question": "Kann dies eine Reaktion mit mehr als zwei Stoffen gleichzeitig verarbeiten?", "answer": "Nicht direkt in einer einzigen Berechnung — er rechnet jeweils zwischen genau einem bekannten und einem Zielstoff um. Für eine Reaktion mit mehreren Produkten oder Edukten führen Sie den Rechner einmal pro gesuchtem Stoff aus, wobei Sie stets dieselbe bekannte Menge und ihren Koeffizienten als Ausgangspunkt verwenden." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Ein Wort, geprägt für die „Kunst des Messens“ chemischer Elemente",
+            "paragraph": "Der deutsche Chemiker Jeremias Benjamin Richter prägte den Begriff „Stöchiometrie“ in seinem dreibändigen Werk Anfangsgründe der Stöchyometrie oder Meßkunst chymischer Elemente (1792–1793). Richter war überzeugt, dass chemische Reaktionen strengen mathematischen Gesetzen folgten, und seine sorgfältigen Messungen der Gewichte von Säuren und Basen, die zur exakten Neutralisation nötig waren, führten ihn zu dem, was heute als Gesetz der reziproken Proportionen bekannt ist — ein früher, quantitativer Vorläufer der Stoffmengenverhältnis-Berechnungen, die dieser Rechner durchführt, Jahrzehnte bevor Atome oder Moleküle zuverlässig gezählt werden konnten."
+          },
+          "modernDevelopments": {
+            "title": "Die Reaktion, die etwa die Hälfte der Welt ernährt",
+            "paragraph": "Die in den Beispielrechnungen dieser Seite verwendete Reaktion N₂ + 3H₂ → 2NH₃ ist das Haber-Bosch-Verfahren, entwickelt von Fritz Haber (Laborsynthese, 1909) und industrialisiert von Carl Bosch (1913) — eine Arbeit, für die jeder von ihnen einen eigenen Nobelpreis erhielt (Haber 1918, Bosch 1931). Durch die Fixierung von atmosphärischem Stickstoff zu Ammoniak für synthetischen Dünger im industriellen Maßstab wird dem exakten Stoffmengenverhältnis 1:3:2 in dieser einen stöchiometrischen Gleichung zugeschrieben, etwa die Hälfte der heutigen weltweiten Nahrungsmittelproduktion zu tragen, da der größte Teil des Stickstoffs im menschlichen Körper heute über die Nahrungskette auf so hergestelltes Ammoniak zurückgeht."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Stöchiometrie ist eine grundlegende Fähigkeit innerhalb der Chemie. Hier sind die weltweit besten 5 im Fach Chemie im QS World University Rankings by Subject 2025, plus eine regionale Abteilung:",
+            "universities": [
+              { "name": "Harvard University", "note": "Weltweit auf Platz 1 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Nein — die Abteilung übernimmt die Studiengebühren für alle Promotionsstudierenden in einem präsenzpflichtigen Forschungsprogramm." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 2 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Nein — zugelassene Promotionsstudierende erhalten volle Studiengebührenübernahme und ein Stipendium für ein Forschungsprogramm auf dem Campus." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 3 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Teilweise — der PhD wird als Vollzeit- oder Teilzeitforschung angeboten, wobei beide Formen präsenzpflichtig statt Fernstudium sind." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 4 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Nein — das Programm ist ein präsenzpflichtiges Forschungspromotionsprogramm mit einer ganzheitlichen, individuellen Zulassungsprüfung." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 5 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Nein — der DPhil ist ein Forschungsgrad auf dem Campus, der unter anderem Katalyse, Materialien und theoretische Chemie umfasst." },
+              { "name": "Universität der Vereinigten Arabischen Emirate — Fachbereich Chemie", "note": "1979 gegründet, bietet einen Vollzeit-PhD in Chemie an; in dieser globalen Fachtabelle nicht gesondert gelistet.", "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml", "online": "Nein — der 54-Credit-Stunden-PhD wird in Vollzeit und Präsenzform durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Partington, J. R. (1951). Jeremias Benjamin Richter and the law of reciprocal proportions.—I. Annals of Science, 7(2), 173–198.",
+          "note": "Die zweiteilige Studie des Chemiehistorikers J. R. Partington rekonstruiert Richters ursprüngliche Messungen und die Überlegungen hinter dem Gesetz der reziproken Proportionen, der quantitativen Grundlage, auf der die Stöchiometrie aufbaute.",
+          "url": "https://doi.org/10.1080/00033795100202321",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

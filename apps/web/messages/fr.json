@@ -6826,6 +6826,110 @@
         }
       }
     },
+    "stoichiometry-calculator": {
+      "title": "Calculateur de Stœchiométrie",
+      "description": "Convertissez entre moles ou grammes de deux substances dans une équation chimique équilibrée grâce à la stœchiométrie par rapport molaire.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formule du Rapport Molaire",
+          "intro": "La relation fondamentale appliquée par ce calculateur, à partir des coefficients d'une équation équilibrée.",
+          "formula": "mol(cible) = mol(connu) × (coefficient(cible) / coefficient(connu))"
+        }
+      },
+      "form": {
+        "inputTitle": "Données de l'Équation Équilibrée",
+        "knownLabel": "Substance Connue",
+        "targetLabel": "Substance à Trouver",
+        "formulaLabel": "Formule",
+        "knownFormulaPlaceholder": "ex. H2",
+        "targetFormulaPlaceholder": "ex. H2O",
+        "coefficientLabel": "Coefficient dans l'Équation Équilibrée",
+        "amountLabel": "Quantité Connue",
+        "unitLabel": "Unité",
+        "unit": {
+          "grams": "Grammes",
+          "moles": "Moles"
+        },
+        "coefficientHint": "Les coefficients proviennent de l'équation équilibrée elle-même, par ex. pour 2H2 + O2 → 2H2O, les coefficients sont 2 (H2), 1 (O2) et 2 (H2O)."
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidKnownFormula": "La formule de la substance connue n'est pas valide — vérifiez son orthographe et sa casse.",
+        "invalidTargetFormula": "La formule de la substance cible n'est pas valide — vérifiez son orthographe et sa casse.",
+        "invalidCoefficient": "Les deux coefficients doivent être supérieurs à zéro.",
+        "invalidAmount": "Saisissez une quantité connue de zéro ou plus.",
+        "molUnit": "mol",
+        "targetAmountCaption": "Quantité de {formula} produite ou requise",
+        "knownMoles": "Moles du Connu",
+        "targetMoles": "Moles de la Cible",
+        "knownMolarMass": "Masse Molaire Connue",
+        "targetMolarMass": "Masse Molaire Cible"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Stœchiométrie",
+          "paragraph1": "La stœchiométrie est le calcul de la quantité de chaque substance participant à une réaction chimique, à partir des coefficients de l'équation équilibrée. Ces coefficients — les nombres devant chaque formule, comme le 2 dans 2H₂ + O₂ → 2H₂O — décrivent un rapport molaire fixe : exactement 2 moles de H₂ réagissent avec exactement 1 mole de O₂ pour produire exactement 2 moles de H₂O, quelle que soit l'ampleur réelle de la réaction. Ce calculateur utilise directement ce rapport : les moles de la substance cible équivalent aux moles de la substance connue multipliées par (coefficient cible ÷ coefficient connu).",
+          "paragraph2": "Comme les produits chimiques sont mesurés en masse en laboratoire, et non en comptant les molécules individuelles, la conversion vers et depuis les moles nécessite la masse molaire — le même calcul qu'effectue le Calculateur de Masse Molaire de ce site. Pour une quantité connue en grammes, ce calculateur divise d'abord par la masse molaire de la substance connue pour obtenir des moles ; après application du rapport molaire, si la quantité cible est souhaitée en grammes, il multiplie les moles cibles par la masse molaire de la substance cible. Demander des moles d'un côté ou de l'autre saute la conversion correspondante.",
+          "paragraph3": "Ce calculateur suppose que l'équation avec laquelle vous travaillez est déjà équilibrée et que la réaction va jusqu'à son terme sans réactif limitant restant à prendre en compte — il effectue le calcul de rapport et de masse une fois les coefficients connus, plutôt que d'équilibrer lui-même une équation non équilibrée (une tâche distincte et plus complexe que prend en charge l'Équilibreur d'Équations Chimiques de ce site)."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Conversions stœchiométriques pour la réaction 2H2 + O2 → 2H2O (électrolyse/combustion de l'eau) et N2 + 3H2 → 2NH3 (synthèse de l'ammoniac), calculées par ce calculateur.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "4 g de H2 (coefficient 2) → grammes de H2O (coefficient 2)", "result": "35,744 g H2O" },
+            { "calculation": "2 mol de N2 (coefficient 1) → moles de NH3 (coefficient 2)", "result": "4 mol NH3" },
+            { "calculation": "32 g de O2 (coefficient 1) → moles de H2 (coefficient 2)", "result": "2,0001 mol H2" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi dois-je saisir les coefficients moi-même plutôt que l'équation complète ?", "answer": "Analyser et équilibrer correctement une équation chimique arbitraire est un problème nettement plus difficile qu'appliquer un rapport une fois les coefficients déjà connus — ce calculateur se concentre spécifiquement sur l'étape de conversion par rapport molaire. Si vous n'avez pas encore d'équation équilibrée, l'Équilibreur d'Équations Chimiques de ce site peut d'abord en équilibrer une pour vous." },
+            { "question": "Est-ce important de savoir laquelle des substances j'appelle « connue » et laquelle j'appelle « cible » ?", "answer": "Non — la relation de rapport molaire fonctionne de manière symétrique. Quelle que soit la substance dont vous avez une quantité mesurée, c'est la « connue », et celle dont vous voulez trouver la quantité est la « cible » ; les inverser et ressaisir les nombres dans l'autre sens vous donne la conversion inverse." },
+            { "question": "Pourquoi le calculateur a-t-il besoin de la masse molaire si je n'utilise que des rapports molaires ?", "answer": "Les rapports molaires convertissent directement des moles en moles, mais en pratique vous partez presque toujours d'une masse en grammes (ou en voulez une), car c'est ce que mesure une balance de laboratoire. La masse molaire est le facteur de conversion entre grammes et moles pour chaque substance spécifique, elle n'est donc nécessaire qu'aux points d'entrée et de sortie du calcul, pas dans l'étape du rapport elle-même." },
+            { "question": "Que se passe-t-il si je mélange les coefficients d'une équation non équilibrée ?", "answer": "Le calculateur calculera tout de même une réponse mathématiquement cohérente, mais elle ne reflétera pas la chimie réelle — le rapport molaire doit provenir d'une équation correctement équilibrée pour avoir un sens. Vérifiez que les deux côtés de votre équation contiennent des nombres égaux de chaque type d'atome avant de faire confiance aux coefficients que vous saisissez." },
+            { "question": "Cela peut-il gérer une réaction avec plus de deux substances à la fois ?", "answer": "Pas directement en un seul calcul — il convertit entre exactement une substance connue et une substance cible à la fois. Pour une réaction avec plusieurs produits ou réactifs, exécutez le calculateur une fois par substance que vous voulez trouver, en utilisant toujours la même quantité connue et son coefficient comme point de départ." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Un Mot Inventé pour l'« Art de Mesurer » les Éléments Chimiques",
+            "paragraph": "Le chimiste allemand Jeremias Benjamin Richter a inventé le terme « stœchiométrie » dans son ouvrage en trois volumes de 1792-1793, Anfangsgründe der Stöchyometrie oder Meßkunst chymischer Elemente (« Éléments de stœchiométrie, ou l'art de mesurer les éléments chimiques »). Richter était convaincu que les réactions chimiques suivaient des lois mathématiques strictes, et ses mesures minutieuses des poids d'acides et de bases nécessaires pour se neutraliser exactement l'ont conduit à ce qu'on appelle aujourd'hui la loi des proportions réciproques — un précurseur quantitatif précoce des calculs de rapport molaire que réalise ce calculateur, établi des décennies avant que les atomes ou les molécules ne puissent être comptés de manière fiable."
+          },
+          "modernDevelopments": {
+            "title": "La Réaction qui Nourrit Environ la Moitié du Monde",
+            "paragraph": "La réaction N₂ + 3H₂ → 2NH₃ utilisée dans les exemples résolus de cette page est le procédé Haber-Bosch, développé par Fritz Haber (synthèse à l'échelle du laboratoire, 1909) puis industrialisé par Carl Bosch (1913) — un travail qui a valu à chacun d'eux un prix Nobel distinct (Haber en 1918, Bosch en 1931). En fixant l'azote atmosphérique en ammoniac pour un engrais synthétique à l'échelle industrielle, le rapport molaire exact de 1:3:2 dans cette seule équation stœchiométrique est crédité de soutenir environ la moitié de la production alimentaire mondiale actuelle, puisque la majeure partie de l'azote présent aujourd'hui dans un corps humain typique remonte, via la chaîne alimentaire, à de l'ammoniac fabriqué de cette manière."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La stœchiométrie est une compétence fondamentale en chimie. Voici les 5 meilleures universités au monde en Chimie selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
+            "universities": [
+              { "name": "Université Harvard", "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus." },
+              { "name": "Université de Cambridge", "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance." },
+              { "name": "Université Stanford", "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée." },
+              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines." },
+              { "name": "Université des Émirats Arabes Unis — Département de Chimie", "note": "Fondé en 1979, proposant un doctorat à temps plein en chimie ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml", "online": "Non — le doctorat de 54 crédits est dispensé à temps plein et en présentiel." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Partington, J. R. (1951). Jeremias Benjamin Richter and the law of reciprocal proportions.—I. Annals of Science, 7(2), 173–198.",
+          "note": "L'étude en deux parties de l'historien de la chimie J. R. Partington reconstitue les mesures et le raisonnement originaux de Richter derrière la loi des proportions réciproques, le fondement quantitatif sur lequel la stœchiométrie s'est construite.",
+          "url": "https://doi.org/10.1080/00033795100202321",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

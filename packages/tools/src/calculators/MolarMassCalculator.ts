@@ -147,6 +147,40 @@ function parseFormula(rawFormula: string): Record<string, number> {
   return parseGroup(formula, 0, null).counts;
 }
 
+export type MolarMassLookup =
+  | { error: null; totalMass: number; breakdown: ElementBreakdownRow[] }
+  | { error: MolarMassCalculatorError; errorDetail: string };
+
+/**
+ * Parses a chemical formula and returns its molar mass and per-element
+ * breakdown, or a typed error. Shared with other calculators (e.g.
+ * StoichiometryCalculator) that need molar mass without duplicating the
+ * formula parser or atomic-weight table.
+ */
+export function computeMolarMass(rawFormula: string): MolarMassLookup {
+  try {
+    const counts = parseFormula(rawFormula);
+    const symbols = Object.keys(counts);
+    if (symbols.length === 0) {
+      return { error: "empty-formula", errorDetail: "Enter a chemical formula." };
+    }
+
+    const breakdown: ElementBreakdownRow[] = symbols.map((symbol) => {
+      const atomicMass = ATOMIC_WEIGHTS[symbol];
+      const count = counts[symbol];
+      return { symbol, count, atomicMass: clean(atomicMass), subtotal: clean(atomicMass * count) };
+    });
+
+    const totalMass = breakdown.reduce((sum, row) => sum + row.subtotal, 0);
+    return { error: null, totalMass: clean(totalMass), breakdown };
+  } catch (err) {
+    if (err instanceof FormulaParseError) {
+      return { error: err.code, errorDetail: err.message };
+    }
+    return { error: "invalid-formula", errorDetail: "Could not parse this formula." };
+  }
+}
+
 export class MolarMassCalculator extends BaseCalculator<MolarMassCalculatorInput, MolarMassCalculatorOutput> {
   metadata = {
     id: "molar-mass-calculator",
@@ -158,38 +192,17 @@ export class MolarMassCalculator extends BaseCalculator<MolarMassCalculatorInput
   };
 
   execute(input: MolarMassCalculatorInput, _context: ToolContext): ToolResult<MolarMassCalculatorOutput> {
-    try {
-      const counts = parseFormula(input.formula);
-      const symbols = Object.keys(counts);
-      if (symbols.length === 0) {
-        return this.errorResult("empty-formula", "Enter a chemical formula.");
-      }
-
-      const breakdown: ElementBreakdownRow[] = symbols.map((symbol) => {
-        const atomicMass = ATOMIC_WEIGHTS[symbol];
-        const count = counts[symbol];
-        return { symbol, count, atomicMass: clean(atomicMass), subtotal: clean(atomicMass * count) };
-      });
-
-      const totalMass = breakdown.reduce((sum, row) => sum + row.subtotal, 0);
-
+    const result = computeMolarMass(input.formula);
+    if (result.error) {
       return {
         success: true,
-        data: { error: null, errorDetail: null, totalMass: clean(totalMass), breakdown },
+        data: { error: result.error, errorDetail: result.errorDetail, totalMass: 0, breakdown: [] },
         metadata: {},
       };
-    } catch (err) {
-      if (err instanceof FormulaParseError) {
-        return this.errorResult(err.code, err.message);
-      }
-      return this.errorResult("invalid-formula", "Could not parse this formula.");
     }
-  }
-
-  private errorResult(error: MolarMassCalculatorError, detail: string): ToolResult<MolarMassCalculatorOutput> {
     return {
       success: true,
-      data: { error, errorDetail: detail, totalMass: 0, breakdown: [] },
+      data: { error: null, errorDetail: null, totalMass: result.totalMass, breakdown: result.breakdown },
       metadata: {},
     };
   }

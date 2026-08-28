@@ -6802,6 +6802,110 @@
         }
       }
     },
+    "stoichiometry-calculator": {
+      "title": "Calculadora de Estequiometría",
+      "description": "Convierte entre moles o gramos de dos sustancias en una ecuación química balanceada usando estequiometría de proporción molar.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmula de Proporción Molar",
+          "intro": "La relación fundamental que aplica esta calculadora, a partir de los coeficientes de una ecuación balanceada.",
+          "formula": "mol(objetivo) = mol(conocido) × (coeficiente(objetivo) / coeficiente(conocido))"
+        }
+      },
+      "form": {
+        "inputTitle": "Datos de la Ecuación Balanceada",
+        "knownLabel": "Sustancia Conocida",
+        "targetLabel": "Sustancia a Encontrar",
+        "formulaLabel": "Fórmula",
+        "knownFormulaPlaceholder": "p. ej. H2",
+        "targetFormulaPlaceholder": "p. ej. H2O",
+        "coefficientLabel": "Coeficiente en la Ecuación Balanceada",
+        "amountLabel": "Cantidad Conocida",
+        "unitLabel": "Unidad",
+        "unit": {
+          "grams": "Gramos",
+          "moles": "Moles"
+        },
+        "coefficientHint": "Los coeficientes provienen de la propia ecuación balanceada, p. ej., en 2H2 + O2 → 2H2O, los coeficientes son 2 (H2), 1 (O2) y 2 (H2O)."
+      },
+      "result": {
+        "heading": "Resultado",
+        "invalidKnownFormula": "La fórmula de la sustancia conocida no es válida — revisa su ortografía y mayúsculas.",
+        "invalidTargetFormula": "La fórmula de la sustancia objetivo no es válida — revisa su ortografía y mayúsculas.",
+        "invalidCoefficient": "Ambos coeficientes deben ser mayores que cero.",
+        "invalidAmount": "Introduce una cantidad conocida de cero o más.",
+        "molUnit": "mol",
+        "targetAmountCaption": "Cantidad de {formula} producida o requerida",
+        "knownMoles": "Moles del Conocido",
+        "targetMoles": "Moles del Objetivo",
+        "knownMolarMass": "Masa Molar Conocida",
+        "targetMolarMass": "Masa Molar Objetivo"
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la Estequiometría",
+          "paragraph1": "La estequiometría es el cálculo de cuánta cantidad de cada sustancia participa en una reacción química, según los coeficientes de la ecuación balanceada. Esos coeficientes — los números delante de cada fórmula, como el 2 en 2H₂ + O₂ → 2H₂O — describen una proporción molar fija: exactamente 2 moles de H₂ reaccionan con exactamente 1 mol de O₂ para producir exactamente 2 moles de H₂O, sin importar cuán grande o pequeña sea la reacción real. Esta calculadora usa esa proporción directamente: los moles de la sustancia objetivo equivalen a los moles de la sustancia conocida multiplicados por (coeficiente objetivo ÷ coeficiente conocido).",
+          "paragraph2": "Como los productos químicos se miden por masa en un laboratorio, no contando moléculas individuales, convertir hacia y desde moles requiere la masa molar — el mismo cálculo que realiza la Calculadora de Masa Molar de este sitio. Dada una cantidad conocida en gramos, esta calculadora primero divide entre la masa molar de la sustancia conocida para obtener moles; tras aplicar la proporción molar, si se desea la cantidad objetivo en gramos, multiplica los moles objetivo por la masa molar de la sustancia objetivo. Pedir moles en cualquiera de los dos lados omite la conversión correspondiente.",
+          "paragraph3": "Esta calculadora asume que la ecuación con la que trabajas ya está balanceada y que la reacción se completa sin reactivo limitante sobrante que contabilizar — realiza la aritmética de proporción y masa una vez conocidos los coeficientes, en lugar de balancear ella misma una ecuación no balanceada (una tarea separada y más compleja que maneja el Balanceador de Ecuaciones Químicas de este sitio)."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Conversiones estequiométricas para la reacción 2H2 + O2 → 2H2O (electrólisis/combustión del agua) y N2 + 3H2 → 2NH3 (síntesis de amoniaco), calculadas por esta calculadora.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "4 g de H2 (coeficiente 2) → gramos de H2O (coeficiente 2)", "result": "35.744 g H2O" },
+            { "calculation": "2 mol de N2 (coeficiente 1) → moles de NH3 (coeficiente 2)", "result": "4 mol NH3" },
+            { "calculation": "32 g de O2 (coeficiente 1) → moles de H2 (coeficiente 2)", "result": "2.0001 mol H2" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué debo introducir los coeficientes yo mismo en lugar de la ecuación completa?", "answer": "Analizar y balancear correctamente una ecuación química arbitraria es un problema considerablemente más difícil que aplicar una proporción una vez que ya se conocen los coeficientes — esta calculadora se centra específicamente en el paso de conversión por proporción molar. Si aún no tienes una ecuación balanceada, el Balanceador de Ecuaciones Químicas de este sitio puede balancearla primero por ti." },
+            { "question": "¿Importa a cuál sustancia llamo \"conocida\" y a cuál \"objetivo\"?", "answer": "No — la relación de proporción molar funciona simétricamente. Cualquier sustancia de la que tengas una cantidad medida es la \"conocida\", y cualquiera cuya cantidad quieras encontrar es el \"objetivo\"; intercambiarlas y volver a introducir los números en el otro sentido te da la conversión inversa." },
+            { "question": "¿Por qué la calculadora necesita la masa molar si solo estoy usando proporciones molares?", "answer": "Las proporciones molares convierten moles a moles directamente, pero en la práctica casi siempre partes de (o quieres) una masa en gramos, ya que eso es lo que mide una balanza de laboratorio. La masa molar es el factor de conversión entre gramos y moles para cada sustancia específica, por lo que solo se necesita en los puntos de entrada y salida del cálculo, no en el paso de la proporción en sí." },
+            { "question": "¿Qué pasa si confundo los coeficientes de una ecuación no balanceada?", "answer": "La calculadora seguirá calculando una respuesta matemáticamente coherente, pero no reflejará química real — la proporción molar debe provenir de una ecuación correctamente balanceada para tener sentido. Verifica que ambos lados de tu ecuación tengan números iguales de cada tipo de átomo antes de confiar en los coeficientes que introduces." },
+            { "question": "¿Puede esto manejar una reacción con más de dos sustancias a la vez?", "answer": "No directamente en un solo cálculo — convierte entre exactamente una sustancia conocida y una objetivo a la vez. Para una reacción con varios productos o reactivos, ejecuta la calculadora una vez por cada sustancia que quieras encontrar, usando siempre la misma cantidad conocida y su coeficiente como punto de partida." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Una Palabra Acuñada para el «Arte de Medir» los Elementos Químicos",
+            "paragraph": "El químico alemán Jeremias Benjamin Richter acuñó el término «estequiometría» en su obra en tres volúmenes de 1792–1793, Anfangsgründe der Stöchyometrie oder Meßkunst chymischer Elemente («Elementos de estequiometría, o el arte de medir los elementos químicos»). Richter estaba convencido de que las reacciones químicas seguían leyes matemáticas estrictas, y sus cuidadosas mediciones de los pesos de ácidos y bases necesarios para neutralizarse exactamente lo llevaron a lo que hoy se llama la ley de las proporciones recíprocas — un precursor cuantitativo temprano de los cálculos de proporción molar que realiza esta calculadora, desarrollado décadas antes de que los átomos o moléculas pudieran contarse de forma fiable."
+          },
+          "modernDevelopments": {
+            "title": "La Reacción que Alimenta a Casi la Mitad del Mundo",
+            "paragraph": "La reacción N₂ + 3H₂ → 2NH₃ usada en los ejemplos resueltos de esta página es el proceso Haber-Bosch, desarrollado por Fritz Haber (síntesis a escala de laboratorio, 1909) e industrializado por Carl Bosch (1913) — trabajo que le valió a cada uno un Premio Nobel independiente (Haber en 1918, Bosch en 1931). Al fijar el nitrógeno atmosférico en amoniaco para fertilizante sintético a escala industrial, se atribuye a la proporción molar exacta 1:3:2 de esta única ecuación estequiométrica el sostener aproximadamente la mitad de la producción mundial actual de alimentos, ya que la mayor parte del nitrógeno en un cuerpo humano típico hoy proviene, a través de la cadena alimentaria, del amoniaco fabricado de esta manera."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La estequiometría es una habilidad fundamental dentro de la química. Aquí están las 5 mejores del mundo en Química según el QS World University Rankings by Subject 2025, además de un departamento regional:",
+            "universities": [
+              { "name": "Universidad de Harvard", "note": "Clasificada #1 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — el departamento cubre la matrícula de todos los estudiantes de doctorado en un programa de investigación presencial." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificado #2 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — los estudiantes de doctorado admitidos reciben matrícula completa y un estipendio para un programa de investigación en el campus." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #3 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Parcialmente — el doctorado se ofrece como investigación a tiempo completo o parcial, aunque ambas modalidades son presenciales, no a distancia." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #4 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — el programa es un doctorado de investigación presencial con una revisión de admisión integral e individualizada." },
+              { "name": "Universidad de Oxford", "note": "Clasificada #5 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — el DPhil es un título de investigación presencial que abarca catálisis, materiales y química teórica, entre otras áreas." },
+              { "name": "Universidad de los Emiratos Árabes Unidos — Departamento de Química", "note": "Fundado en 1979, ofrece un doctorado a tiempo completo en Química; no aparece clasificado por separado en esta tabla global de la materia.", "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml", "online": "No — el doctorado de 54 créditos se imparte a tiempo completo y de forma presencial." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Partington, J. R. (1951). Jeremias Benjamin Richter and the law of reciprocal proportions.—I. Annals of Science, 7(2), 173–198.",
+          "note": "El estudio en dos partes del historiador de la química J. R. Partington reconstruye las mediciones y el razonamiento originales de Richter detrás de la ley de las proporciones recíprocas, el fundamento cuantitativo sobre el que se construyó la estequiometría.",
+          "url": "https://doi.org/10.1080/00033795100202321",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

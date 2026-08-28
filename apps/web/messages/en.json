@@ -6822,6 +6822,110 @@
         }
       }
     },
+    "stoichiometry-calculator": {
+      "title": "Stoichiometry Calculator",
+      "description": "Convert between moles or grams of two substances in a balanced chemical equation using mole-ratio stoichiometry.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Mole-Ratio Formula",
+          "intro": "The core relationship this calculator applies, from a balanced equation's coefficients.",
+          "formula": "moles(target) = moles(known) × (coefficient(target) / coefficient(known))"
+        }
+      },
+      "form": {
+        "inputTitle": "Balanced Equation Data",
+        "knownLabel": "Known Substance",
+        "targetLabel": "Substance to Find",
+        "formulaLabel": "Formula",
+        "knownFormulaPlaceholder": "e.g. H2",
+        "targetFormulaPlaceholder": "e.g. H2O",
+        "coefficientLabel": "Coefficient in Balanced Equation",
+        "amountLabel": "Known Amount",
+        "unitLabel": "Unit",
+        "unit": {
+          "grams": "Grams",
+          "moles": "Moles"
+        },
+        "coefficientHint": "Coefficients come from the balanced equation itself, e.g. for 2H2 + O2 → 2H2O, the coefficients are 2 (H2), 1 (O2), and 2 (H2O)."
+      },
+      "result": {
+        "heading": "Result",
+        "invalidKnownFormula": "The known substance's formula isn't valid — check its spelling and capitalization.",
+        "invalidTargetFormula": "The target substance's formula isn't valid — check its spelling and capitalization.",
+        "invalidCoefficient": "Both coefficients must be greater than zero.",
+        "invalidAmount": "Enter a known amount of zero or more.",
+        "molUnit": "mol",
+        "targetAmountCaption": "Amount of {formula} produced or required",
+        "knownMoles": "Moles of Known",
+        "targetMoles": "Moles of Target",
+        "knownMolarMass": "Known Molar Mass",
+        "targetMolarMass": "Target Molar Mass"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Stoichiometry",
+          "paragraph1": "Stoichiometry is the calculation of how much of each substance participates in a chemical reaction, based on the balanced equation's coefficients. Those coefficients — the numbers in front of each formula, like the 2 in 2H₂ + O₂ → 2H₂O — describe a fixed mole ratio: exactly 2 moles of H₂ react with exactly 1 mole of O₂ to produce exactly 2 moles of H₂O, no matter how large or small the actual reaction is. This calculator uses that ratio directly: moles of the target substance equal moles of the known substance multiplied by (target coefficient ÷ known coefficient).",
+          "paragraph2": "Because chemicals are measured by mass in a lab, not by counting individual molecules, converting to and from moles requires molar mass — the same calculation this site's Molar Mass Calculator performs. Given a known amount in grams, this calculator first divides by the known substance's molar mass to get moles; after applying the mole ratio, if the target amount is wanted in grams, it multiplies the target moles by the target substance's molar mass. Requesting moles on either side skips the corresponding conversion.",
+          "paragraph3": "This calculator assumes the equation you're working from is already balanced and that the reaction goes to completion with no leftover limiting reagent to account for — it performs the ratio-and-mass arithmetic once the coefficients are known, rather than balancing an unbalanced equation itself (a separate, more involved task that this site's Chemical Equation Balancer handles)."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Stoichiometric conversions for the reaction 2H2 + O2 → 2H2O (electrolysis/combustion of water) and N2 + 3H2 → 2NH3 (ammonia synthesis), computed by this calculator.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "4 g of H2 (coefficient 2) → grams of H2O (coefficient 2)", "result": "35.744 g H2O" },
+            { "calculation": "2 mol of N2 (coefficient 1) → moles of NH3 (coefficient 2)", "result": "4 mol NH3" },
+            { "calculation": "32 g of O2 (coefficient 1) → moles of H2 (coefficient 2)", "result": "2.0001 mol H2" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why do I need to enter the coefficients myself instead of the full equation?", "answer": "Parsing and correctly balancing an arbitrary chemical equation is a substantially harder problem than applying a ratio once the coefficients are already known — this calculator focuses specifically on the mole-ratio conversion step. If you don't have a balanced equation yet, this site's Chemical Equation Balancer can balance one for you first." },
+            { "question": "Does it matter which substance I call \"known\" and which I call \"target\"?", "answer": "No — the mole-ratio relationship works symmetrically. Whichever substance you have a measured amount of is the \"known,\" and whichever one you want to find the amount of is the \"target\"; swapping them and re-entering the numbers the other way around gives you the reverse conversion." },
+            { "question": "Why does the calculator need molar mass at all if I'm just using mole ratios?", "answer": "Mole ratios convert moles to moles directly, but in practice you almost always start with (or want) a mass in grams, since that's what a lab balance measures. Molar mass is the conversion factor between grams and moles for each specific substance, so it's only needed at the entry and exit points of the calculation — not in the ratio step itself." },
+            { "question": "What happens if I mix up the coefficients from an unbalanced equation?", "answer": "The calculator will still compute a mathematically consistent answer, but it won't reflect real chemistry — the mole ratio has to come from a properly balanced equation to mean anything. Double-check that both sides of your equation have equal numbers of each type of atom before trusting the coefficients you enter." },
+            { "question": "Can this handle a reaction with more than two substances at once?", "answer": "Not directly in a single calculation — it converts between exactly one known and one target substance at a time. For a reaction with several products or reactants, run the calculator once per substance you want to find, always using the same known amount and its coefficient as the starting point." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Word Coined for the \"Art of Measuring\" Chemical Elements",
+            "paragraph": "German chemist Jeremias Benjamin Richter coined the term \"stoichiometry\" in his three-volume 1792–1793 work Anfangsgründe der Stöchyometrie oder Meßkunst chymischer Elemente (\"Elements of Stoichiometry, or the Art of Measuring Chemical Elements\"). Richter was convinced that chemical reactions followed strict mathematical laws, and his careful measurements of the weights of acids and bases needed to exactly neutralize each other led him to what's now called the law of reciprocal proportions — an early, quantitative precursor to the mole-ratio calculations this calculator performs, worked out decades before atoms or molecules were reliably countable."
+          },
+          "modernDevelopments": {
+            "title": "The Reaction That Feeds Roughly Half the World",
+            "paragraph": "The reaction N₂ + 3H₂ → 2NH₃ used in this page's worked examples is the Haber-Bosch process, developed by Fritz Haber (lab-scale synthesis, 1909) and industrialized by Carl Bosch (1913) — work that earned each of them a separate Nobel Prize (Haber in 1918, Bosch in 1931). By fixing atmospheric nitrogen into ammonia for synthetic fertilizer at industrial scale, the exact 1:3:2 mole ratio in that single stoichiometric equation is credited with sustaining roughly half of current global food production, since most of the nitrogen in a typical human body today traces back through the food supply to ammonia made this way."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Stoichiometry is a foundational skill within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
+              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
+              { "name": "United Arab Emirates University — Department of Chemistry", "note": "Established in 1979, offering a full-time PhD in Chemistry; not separately ranked on this global subject table.", "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml", "online": "No — the 54-credit-hour PhD is delivered on a full-time, in-residence basis." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Partington, J. R. (1951). Jeremias Benjamin Richter and the law of reciprocal proportions.—I. Annals of Science, 7(2), 173–198.",
+          "note": "Historian of chemistry J. R. Partington's two-part study reconstructs Richter's original measurements and reasoning behind the law of reciprocal proportions, the quantitative foundation stoichiometry was built on.",
+          "url": "https://doi.org/10.1080/00033795100202321",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

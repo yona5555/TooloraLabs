@@ -79,6 +79,8 @@ import MatrixCalculator from "@/components/tools/matrix-calculator/MatrixCalcula
 import MatrixEducation from "@/components/tools/matrix-calculator/MatrixEducation";
 import MolarMassCalculator from "@/components/tools/molar-mass-calculator/MolarMassCalculator";
 import MolarMassEducation from "@/components/tools/molar-mass-calculator/MolarMassEducation";
+import StoichiometryCalculator from "@/components/tools/stoichiometry-calculator/StoichiometryCalculator";
+import StoichiometryEducation from "@/components/tools/stoichiometry-calculator/StoichiometryEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -403,6 +405,9 @@ export default async function ToolPage({
     case "molar-mass-calculator":
       component = <MolarMassCalculator education={<MolarMassEducation />} />;
       break;
+    case "stoichiometry-calculator":
+      component = <StoichiometryCalculator education={<StoichiometryEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -505,6 +510,7 @@ export default async function ToolPage({
     slug === "vector-calculator" ||
     slug === "matrix-calculator" ||
     slug === "molar-mass-calculator" ||
+    slug === "stoichiometry-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

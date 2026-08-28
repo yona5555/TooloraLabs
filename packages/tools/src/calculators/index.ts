@@ -40,3 +40,4 @@ export * from "./StudyTimeCalculator";
 export * from "./VectorCalculator";
 export * from "./MatrixCalculator";
 export * from "./MolarMassCalculator";
+export * from "./StoichiometryCalculator";

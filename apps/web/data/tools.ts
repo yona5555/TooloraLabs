@@ -486,6 +486,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "stoichiometry-calculator",
+    title: "Stoichiometry Calculator",
+    category: "math-science",
+    description:
+      "Convert between moles or grams of two substances in a balanced chemical equation using mole-ratio stoichiometry.",
+    featured: false,
+    keywords: [
+      "stoichiometry calculator",
+      "mole ratio calculator",
+      "grams to moles calculator",
+      "chemical reaction calculator",
+      "limiting reactant calculator",
+      "stoichiometric conversion",
+    ],
+  },
+  {
     slug: "molar-mass-calculator",
     title: "Molar Mass Calculator",
     category: "math-science",
