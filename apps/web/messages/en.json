@@ -7018,6 +7018,120 @@
         }
       }
     },
+    "class-schedule-builder": {
+      "title": "Class Schedule Builder",
+      "description": "Build a weekly class schedule and instantly detect time conflicts between classes.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "How Conflict Detection Works",
+          "intro": "Add every class you're considering, with the days and times it meets — the builder checks every pair of classes for overlapping time on a shared day.",
+          "conflictHint": "Two classes only conflict if they share a day AND their time ranges actually overlap. Back-to-back classes (one ending exactly when the other starts) are not a conflict."
+        }
+      },
+      "form": {
+        "inputTitle": "Your Classes",
+        "classNameLabel": "Class Name",
+        "classNamePlaceholder": "e.g. Calculus II",
+        "removeClass": "Remove this class",
+        "daysLabel": "Meets on",
+        "day": {
+          "mon": "Mon",
+          "tue": "Tue",
+          "wed": "Wed",
+          "thu": "Thu",
+          "fri": "Fri",
+          "sat": "Sat",
+          "sun": "Sun"
+        },
+        "startTimeLabel": "Start Time",
+        "endTimeLabel": "End Time",
+        "addClass": "Add Another Class"
+      },
+      "result": {
+        "heading": "Schedule Check",
+        "emptySchedule": "Add at least one class to check your schedule.",
+        "invalidClassTime": "Every class needs an end time that's later than its start time.",
+        "missingDays": "Select at least one day for every class.",
+        "noConflicts": "No conflicts — this schedule works.",
+        "conflictsFoundLabel": "Conflicts found",
+        "conflictsWith": "conflicts with",
+        "hoursPerWeek": "hours per week total",
+        "day": {
+          "mon": "Monday",
+          "tue": "Tuesday",
+          "wed": "Wednesday",
+          "thu": "Thursday",
+          "fri": "Friday",
+          "sat": "Saturday",
+          "sun": "Sunday"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Schedule Conflicts",
+          "paragraph1": "A schedule conflict happens when two classes meet on the same day during overlapping time windows, so a student physically can't be in both places at once. Detecting this by eye gets error-prone fast once a schedule has more than a handful of classes, especially when classes meet on different combinations of days — a conflict on Monday might not repeat on Wednesday even for the same pair of classes.",
+          "paragraph2": "This builder checks every possible pair of classes against each other. For each pair, it first finds which days they share, then — for each shared day — compares their time ranges: if the later start time falls before the earlier end time, the ranges overlap and a conflict is recorded, along with exactly which portion of time overlaps. Classes that end exactly when another begins are deliberately not flagged, since back-to-back scheduling (with zero conflict, only zero passing time) is normal and often unavoidable.",
+          "paragraph3": "Beyond flagging conflicts, the tool totals the number of instructional hours per week across every class, counted once per day it meets — a schedule with no conflicts can still be flagged as unrealistic later by a student simply by comparing that total against how many hours are actually available in a week."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Representative scheduling scenarios and what this builder reports for each.",
+          "columnCalculation": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "Math 101 (Mon/Wed 9:00–10:30) + Physics 201 (Mon 10:00–11:00)", "result": "Conflict on Monday, 10:00–10:30" },
+            { "calculation": "History 100 (Tue/Thu 13:00–14:00) + Chemistry Lab (Wed 13:00–16:00)", "result": "No conflict — different days" },
+            { "calculation": "Seminar A (Fri 15:00–16:00) + Seminar B (Fri 16:00–17:00)", "result": "No conflict — back-to-back, no overlap" },
+            { "calculation": "Two sections of the same course, both Mon/Wed 9:00–10:00", "result": "Conflict on Monday and Wednesday, 9:00–10:00" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why doesn't the tool flag back-to-back classes as a conflict?", "answer": "Because there's no actual time overlap — one class ending at 10:00 and another starting at 10:00 don't compete for the same minute. The builder only flags a conflict when a class's start time falls strictly before another's end time on a shared day, which is the definition of two events genuinely overlapping." },
+            { "question": "What counts as a \"shared day\" between two classes?", "answer": "Any day of the week that both classes have selected. A class that meets Monday/Wednesday/Friday and another that meets only Tuesday/Thursday share no days, so they're compared against each other on zero days and can never conflict, no matter what times they use." },
+            { "question": "Does the total weekly hours figure include time between classes?", "answer": "No — it only sums the actual meeting duration of every class, counted once for each day it meets. A class that runs 1 hour on three days a week contributes 3 hours to the total, not the wider span of time between its first and last session." },
+            { "question": "Can I check a schedule with classes that span midnight or run overnight?", "answer": "The builder compares start and end times within the same day, so an overnight class needs to be entered as ending by 23:59 on the day it starts; a session that logically continues past midnight isn't represented as a single entry." },
+            { "question": "Why does the tool require every class to have at least one day selected?", "answer": "A class with no day assigned can't be checked for conflicts against anything, since conflict detection depends entirely on comparing shared days. Requiring at least one day keeps every class meaningful to the conflict check rather than silently ignored." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Problem as Old as the University Timetable",
+            "paragraph": "The class-scheduling (or \"timetabling\") problem was formalized in computing terms by C.C. Gotlieb, whose 1962 paper \"The Construction of Class-Teacher Time-Tables\" (Proceedings of the IFIP Congress) described how to represent the constraints of a school timetable — teachers, rooms, and time slots that can't double-book — in a form a computer could search over. Before Gotlieb's formal treatment, timetabling at most institutions was done entirely by hand, often taking staff members weeks to produce a single term's schedule by trial and error."
+          },
+          "modernDevelopments": {
+            "title": "Why Conflict-Free Scheduling Is Harder Than It Looks",
+            "paragraph": "In 1976, Shimon Even, Alon Itai, and Adi Shamir proved that even a stripped-down version of the timetabling problem is NP-complete — meaning no algorithm is known that can guarantee an optimal, fully conflict-free schedule for every possible input in a reasonable amount of time as the number of classes grows. That result explains why real institutional scheduling systems rely on heuristics and constraint solvers that search for a good-enough schedule rather than provably the best one. This tool sidesteps that harder problem entirely: rather than trying to construct a conflict-free schedule from scratch, it takes a schedule a student has already built and simply checks it, pairwise, for the overlaps that would make it unworkable."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Timetabling sits at the intersection of scheduling theory and algorithm design within computer science. Here are the top 5 globally for Computer Science & Information Systems in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "No — the PhD is an in-residence research program within the EECS department." },
+              { "name": "Stanford University", "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "No — the program is an in-residence research PhD with a single annual admissions cycle." },
+              { "name": "Carnegie Mellon University (CMU)", "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "No — the Computer Science Department's PhD is an on-campus research degree." },
+              { "name": "National University of Singapore (NUS)", "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "No — admitted PhD students undertake in-residence research at the NUS School of Computing." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "No — the DPhil is an on-campus research degree covering algorithms and complexity among other areas." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Computer Science Program", "note": "PhD program requires a minimum of 72 credits and a cumulative GPA of at least 3.0; not separately ranked on this global subject table.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "No — the program is delivered in residence on KAUST's campus in Thuwal, Saudi Arabia." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "This paper proved that a basic version of the class-timetabling problem is NP-complete, establishing why exact, guaranteed-conflict-free scheduling is computationally intractable at scale — the theoretical reason real-world tools check and refine schedules rather than solve them outright.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

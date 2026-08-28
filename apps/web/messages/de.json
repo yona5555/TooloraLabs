@@ -7022,6 +7022,120 @@
         }
       }
     },
+    "class-schedule-builder": {
+      "title": "Stundenplan-Ersteller",
+      "description": "Erstellen Sie einen wöchentlichen Stundenplan und erkennen Sie sofort Zeitüberschneidungen zwischen Kursen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "So funktioniert die Konflikterkennung",
+          "intro": "Fügen Sie jeden Kurs hinzu, den Sie in Betracht ziehen, mit den Tagen und Zeiten, zu denen er stattfindet — der Ersteller prüft jedes Kurspaar auf sich überschneidende Zeiten an einem gemeinsamen Tag.",
+          "conflictHint": "Zwei Kurse stehen nur dann im Konflikt, wenn sie sich einen Tag teilen UND sich ihre Zeitfenster tatsächlich überschneiden. Direkt aufeinanderfolgende Kurse (einer endet genau dann, wenn der andere beginnt) gelten nicht als Konflikt."
+        }
+      },
+      "form": {
+        "inputTitle": "Ihre Kurse",
+        "classNameLabel": "Kursname",
+        "classNamePlaceholder": "z. B. Analysis II",
+        "removeClass": "Diesen Kurs entfernen",
+        "daysLabel": "Findet statt an",
+        "day": {
+          "mon": "Mo",
+          "tue": "Di",
+          "wed": "Mi",
+          "thu": "Do",
+          "fri": "Fr",
+          "sat": "Sa",
+          "sun": "So"
+        },
+        "startTimeLabel": "Startzeit",
+        "endTimeLabel": "Endzeit",
+        "addClass": "Weiteren Kurs hinzufügen"
+      },
+      "result": {
+        "heading": "Stundenplan-Prüfung",
+        "emptySchedule": "Fügen Sie mindestens einen Kurs hinzu, um Ihren Stundenplan zu prüfen.",
+        "invalidClassTime": "Jeder Kurs benötigt eine Endzeit, die später als seine Startzeit liegt.",
+        "missingDays": "Wählen Sie für jeden Kurs mindestens einen Tag aus.",
+        "noConflicts": "Keine Konflikte — dieser Stundenplan funktioniert.",
+        "conflictsFoundLabel": "Konflikte gefunden",
+        "conflictsWith": "steht im Konflikt mit",
+        "hoursPerWeek": "Stunden pro Woche insgesamt",
+        "day": {
+          "mon": "Montag",
+          "tue": "Dienstag",
+          "wed": "Mittwoch",
+          "thu": "Donnerstag",
+          "fri": "Freitag",
+          "sat": "Samstag",
+          "sun": "Sonntag"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Stundenplankonflikte verstehen",
+          "paragraph1": "Ein Stundenplankonflikt entsteht, wenn zwei Kurse am selben Tag zu sich überschneidenden Zeitfenstern stattfinden, sodass ein Studierender physisch nicht an beiden Orten gleichzeitig sein kann. Dies mit bloßem Auge zu erkennen wird schnell fehleranfällig, sobald ein Stundenplan mehr als eine Handvoll Kurse enthält — besonders wenn Kurse an unterschiedlichen Tageskombinationen stattfinden, sodass sich ein Montagskonflikt am Mittwoch für dasselbe Kurspaar nicht wiederholen muss.",
+          "paragraph2": "Dieser Ersteller prüft jedes mögliche Kurspaar gegeneinander. Für jedes Paar werden zunächst die gemeinsamen Tage ermittelt, dann werden für jeden gemeinsamen Tag die Zeitfenster verglichen: Liegt die spätere Startzeit vor der früheren Endzeit, überschneiden sich die Zeiträume, und ein Konflikt wird zusammen mit dem genauen überschneidenden Zeitabschnitt erfasst. Kurse, die genau dann enden, wenn ein anderer beginnt, werden absichtlich nicht als Konflikt markiert, da direkt aufeinanderfolgende Termine (ohne jede Überschneidung, nur ohne Pufferzeit) normal und oft unvermeidbar sind.",
+          "paragraph3": "Zusätzlich zur Konflikterkennung summiert das Tool die wöchentlichen Unterrichtsstunden über alle Kurse hinweg, einmal pro Tag gezählt, an dem der Kurs stattfindet — ein konfliktfreier Stundenplan kann sich später dennoch als unrealistisch erweisen, wenn ein Studierender diese Summe mit der tatsächlich verfügbaren Zeit pro Woche vergleicht."
+        },
+        "examples": {
+          "title": "Ausgearbeitete Beispiele",
+          "intro": "Typische Planungsszenarien und was dieser Ersteller für jedes davon meldet.",
+          "columnCalculation": "Szenario",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Mathe 101 (Mo/Mi 9:00–10:30) + Physik 201 (Mo 10:00–11:00)", "result": "Konflikt am Montag, 10:00–10:30" },
+            { "calculation": "Geschichte 100 (Di/Do 13:00–14:00) + Chemie-Praktikum (Mi 13:00–16:00)", "result": "Kein Konflikt — unterschiedliche Tage" },
+            { "calculation": "Seminar A (Fr 15:00–16:00) + Seminar B (Fr 16:00–17:00)", "result": "Kein Konflikt — direkt aufeinanderfolgend, keine Überschneidung" },
+            { "calculation": "Zwei Gruppen desselben Kurses, beide Mo/Mi 9:00–10:00", "result": "Konflikt am Montag und Mittwoch, 9:00–10:00" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum markiert das Tool direkt aufeinanderfolgende Kurse nicht als Konflikt?", "answer": "Weil es keine tatsächliche zeitliche Überschneidung gibt — ein Kurs, der um 10:00 endet, und ein anderer, der genau dann beginnt, konkurrieren nicht um dieselbe Minute. Das Tool markiert einen Konflikt nur, wenn die Startzeit eines Kurses tatsächlich vor der Endzeit eines anderen an einem gemeinsamen Tag liegt — das ist die Definition einer echten Überschneidung zweier Ereignisse." },
+            { "question": "Was zählt als \"gemeinsamer Tag\" zwischen zwei Kursen?", "answer": "Jeder Wochentag, den beide Kurse ausgewählt haben. Ein Kurs, der Montag/Mittwoch/Freitag stattfindet, und ein anderer, der nur Dienstag/Donnerstag stattfindet, teilen sich keinen Tag, werden also an null Tagen miteinander verglichen und können unabhängig von den Uhrzeiten nie in Konflikt geraten." },
+            { "question": "Enthält die wöchentliche Gesamtstundenzahl die Zeit zwischen den Kursen?", "answer": "Nein — sie summiert nur die tatsächliche Dauer jedes Kurses, einmal pro Tag gezählt, an dem er stattfindet. Ein Kurs, der eine Stunde an drei Tagen pro Woche dauert, trägt 3 Stunden zur Summe bei, nicht die breitere Spanne zwischen seiner ersten und letzten Sitzung." },
+            { "question": "Kann ich einen Stundenplan mit Kursen prüfen, die sich über Mitternacht erstrecken?", "answer": "Der Ersteller vergleicht Start- und Endzeiten innerhalb desselben Tages, daher muss ein Nachtkurs so eingegeben werden, dass er bis 23:59 Uhr des Starttages endet; eine Sitzung, die logisch über Mitternacht hinaus andauert, lässt sich nicht als einzelner Eintrag abbilden." },
+            { "question": "Warum verlangt das Tool, dass jeder Kurs mindestens einen Tag hat?", "answer": "Ein Kurs ohne zugewiesenen Tag kann auf keinen Konflikt mit anderen geprüft werden, da die Konflikterkennung vollständig auf dem Vergleich gemeinsamer Tage beruht. Mindestens ein Tag pro Kurs stellt sicher, dass jeder Kurs für die Konfliktprüfung relevant bleibt, statt stillschweigend ignoriert zu werden." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Ein Problem so alt wie der Universitäts-Stundenplan",
+            "paragraph": "Das Klassen-Zeitplanungsproblem (\"Timetabling\") wurde von C.C. Gotlieb in informatischen Begriffen formalisiert; sein Aufsatz \"The Construction of Class-Teacher Time-Tables\" von 1962 (Proceedings of the IFIP Congress) beschrieb, wie sich die Einschränkungen eines Schulstundenplans — Lehrkräfte, Räume und Zeitfenster, die nicht doppelt belegt werden dürfen — in einer Form darstellen lassen, die ein Computer durchsuchen kann. Vor Gotliebs formaler Behandlung wurde die Stundenplanung an den meisten Institutionen vollständig von Hand erledigt, oft benötigten Mitarbeiter Wochen, um durch Ausprobieren einen einzigen Semesterplan zu erstellen."
+          },
+          "modernDevelopments": {
+            "title": "Warum konfliktfreie Planung schwieriger ist, als sie aussieht",
+            "paragraph": "1976 bewiesen Shimon Even, Alon Itai und Adi Shamir, dass selbst eine stark vereinfachte Version des Zeitplanungsproblems NP-vollständig ist — das heißt, es ist kein Algorithmus bekannt, der für jede mögliche Eingabe garantiert in vertretbarer Zeit einen optimalen, vollständig konfliktfreien Stundenplan liefert, sobald die Anzahl der Kurse wächst. Dieses Ergebnis erklärt, warum reale institutionelle Planungssysteme auf Heuristiken und Constraint-Solver setzen, die nach einem hinreichend guten statt nachweislich optimalen Stundenplan suchen. Dieses Tool umgeht dieses schwierigere Problem vollständig: Statt zu versuchen, einen konfliktfreien Stundenplan von Grund auf zu konstruieren, nimmt es einen bereits vom Studierenden erstellten Plan und prüft ihn paarweise auf genau die Überschneidungen, die ihn unpraktikabel machen würden."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Stundenplanung liegt an der Schnittstelle von Planungstheorie und Algorithmenentwurf innerhalb der Informatik. Hier sind die weltweit besten 5 für Computer Science & Information Systems im QS World University Rankings by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 1 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm innerhalb der Abteilung EECS." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 2 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion mit einem einzigen jährlichen Zulassungszyklus." },
+              { "name": "Carnegie Mellon University (CMU)", "note": "Weltweit auf Platz 3 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "Nein — die Promotion der Fachabteilung für Informatik ist ein Präsenz-Forschungsabschluss." },
+              { "name": "National University of Singapore (NUS)", "note": "Weltweit auf Platz 4 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "Nein — zugelassene Promovierende betreiben Präsenzforschung an der NUS School of Computing." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 5 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "Nein — der DPhil ist ein Präsenz-Forschungsabschluss, der unter anderem Algorithmen und Komplexitätstheorie abdeckt." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Computer Science Program", "note": "Das Promotionsprogramm erfordert mindestens 72 Credits und einen kumulierten Notendurchschnitt von mindestens 3,0; in diesem globalen Fachranking nicht separat gelistet.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "Nein — das Programm wird in Präsenz auf dem KAUST-Campus in Thuwal, Saudi-Arabien, durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "Dieser Aufsatz bewies, dass eine grundlegende Version des Klassen-Stundenplanungsproblems NP-vollständig ist, und begründet damit theoretisch, warum eine exakte, garantiert konfliktfreie Planung im großen Maßstab rechnerisch nicht praktikabel ist — der Grund, warum reale Tools Stundenpläne prüfen und verfeinern, statt sie vollständig neu zu lösen.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

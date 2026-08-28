@@ -502,6 +502,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "class-schedule-builder",
+    title: "Class Schedule Builder",
+    category: "calculators",
+    description:
+      "Build a weekly class schedule and instantly detect time conflicts between classes.",
+    featured: false,
+    keywords: [
+      "class schedule builder",
+      "class schedule maker",
+      "timetable conflict checker",
+      "schedule conflict checker",
+      "weekly class planner",
+      "course schedule builder",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

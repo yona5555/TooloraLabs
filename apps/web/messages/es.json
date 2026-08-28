@@ -6998,6 +6998,120 @@
         }
       }
     },
+    "class-schedule-builder": {
+      "title": "Creador de Horarios de Clase",
+      "description": "Crea tu horario semanal de clases y detecta al instante los conflictos de horario entre ellas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Cómo Funciona la Detección de Conflictos",
+          "intro": "Añade cada clase que estés considerando, con los días y horarios en que se imparte — el creador revisa cada par de clases en busca de horarios superpuestos en un día compartido.",
+          "conflictHint": "Dos clases solo entran en conflicto si comparten un día Y sus franjas horarias realmente se superponen. Las clases consecutivas (una termina justo cuando empieza la otra) no se consideran un conflicto."
+        }
+      },
+      "form": {
+        "inputTitle": "Tus Clases",
+        "classNameLabel": "Nombre de la Clase",
+        "classNamePlaceholder": "p. ej., Cálculo II",
+        "removeClass": "Eliminar esta clase",
+        "daysLabel": "Se imparte los",
+        "day": {
+          "mon": "Lun",
+          "tue": "Mar",
+          "wed": "Mié",
+          "thu": "Jue",
+          "fri": "Vie",
+          "sat": "Sáb",
+          "sun": "Dom"
+        },
+        "startTimeLabel": "Hora de Inicio",
+        "endTimeLabel": "Hora de Fin",
+        "addClass": "Añadir Otra Clase"
+      },
+      "result": {
+        "heading": "Revisión del Horario",
+        "emptySchedule": "Añade al menos una clase para revisar tu horario.",
+        "invalidClassTime": "Cada clase necesita una hora de fin posterior a su hora de inicio.",
+        "missingDays": "Selecciona al menos un día para cada clase.",
+        "noConflicts": "Sin conflictos — este horario funciona.",
+        "conflictsFoundLabel": "Conflictos encontrados",
+        "conflictsWith": "entra en conflicto con",
+        "hoursPerWeek": "horas semanales en total",
+        "day": {
+          "mon": "Lunes",
+          "tue": "Martes",
+          "wed": "Miércoles",
+          "thu": "Jueves",
+          "fri": "Viernes",
+          "sat": "Sábado",
+          "sun": "Domingo"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo los Conflictos de Horario",
+          "paragraph1": "Un conflicto de horario ocurre cuando dos clases se imparten el mismo día en franjas horarias superpuestas, de modo que un estudiante físicamente no puede estar en dos lugares a la vez. Detectar esto a simple vista se vuelve propenso a errores rápidamente cuando un horario tiene más de un puñado de clases, especialmente cuando las clases se imparten en distintas combinaciones de días — un conflicto en lunes podría no repetirse en miércoles para el mismo par de clases.",
+          "paragraph2": "Este creador revisa cada par posible de clases entre sí. Para cada par, primero identifica qué días comparten y luego, para cada día compartido, compara sus franjas horarias: si la hora de inicio más tardía cae antes de la hora de fin más temprana, las franjas se superponen y se registra un conflicto, junto con exactamente qué porción de tiempo se superpone. Las clases que terminan justo cuando otra empieza deliberadamente no se marcan como conflicto, ya que la programación consecutiva (con cero solapamiento, solo cero tiempo de holgura) es normal y a menudo inevitable.",
+          "paragraph3": "Además de señalar conflictos, la herramienta totaliza las horas de instrucción semanales en todas las clases, contadas una vez por cada día en que se imparten — un horario sin conflictos puede, aun así, resultar poco realista si un estudiante compara ese total con las horas realmente disponibles en una semana."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Escenarios de horarios representativos y lo que reporta este creador para cada uno.",
+          "columnCalculation": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Matemáticas 101 (Lun/Mié 9:00–10:30) + Física 201 (Lun 10:00–11:00)", "result": "Conflicto el lunes, 10:00–10:30" },
+            { "calculation": "Historia 100 (Mar/Jue 13:00–14:00) + Laboratorio de Química (Mié 13:00–16:00)", "result": "Sin conflicto — días diferentes" },
+            { "calculation": "Seminario A (Vie 15:00–16:00) + Seminario B (Vie 16:00–17:00)", "result": "Sin conflicto — consecutivos, sin superposición" },
+            { "calculation": "Dos secciones del mismo curso, ambas Lun/Mié 9:00–10:00", "result": "Conflicto el lunes y el miércoles, 9:00–10:00" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué la herramienta no marca las clases consecutivas como conflicto?", "answer": "Porque no hay superposición real de tiempo — una clase que termina a las 10:00 y otra que empieza en ese mismo momento no compiten por el mismo minuto. La herramienta solo marca un conflicto cuando la hora de inicio de una clase cae realmente antes de la hora de fin de otra en un día compartido, que es la definición de una superposición genuina entre dos eventos." },
+            { "question": "¿Qué cuenta como \"día compartido\" entre dos clases?", "answer": "Cualquier día de la semana que ambas clases tengan seleccionado. Una clase que se imparte lunes/miércoles/viernes y otra que solo se imparte martes/jueves no comparten ningún día, por lo que se comparan en cero días y nunca pueden entrar en conflicto, sin importar los horarios." },
+            { "question": "¿La cifra de horas totales semanales incluye el tiempo entre clases?", "answer": "No — solo suma la duración real de reunión de cada clase, contada una vez por cada día en que se imparte. Una clase que dura 1 hora tres días a la semana aporta 3 horas al total, no el intervalo más amplio entre su primera y última sesión." },
+            { "question": "¿Puedo revisar un horario con clases que se extienden más allá de la medianoche?", "answer": "El creador compara las horas de inicio y fin dentro del mismo día, por lo que una clase nocturna debe ingresarse de forma que termine a más tardar a las 23:59 del día en que empieza; una sesión que continúa lógicamente después de la medianoche no puede representarse como una sola entrada." },
+            { "question": "¿Por qué la herramienta exige que cada clase tenga al menos un día seleccionado?", "answer": "Una clase sin ningún día asignado no puede revisarse en busca de conflictos con nada, ya que la detección de conflictos depende por completo de comparar días compartidos. Exigir al menos un día mantiene a cada clase relevante para la revisión de conflictos en lugar de ignorarla silenciosamente." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Un Problema Tan Antiguo Como el Horario Universitario",
+            "paragraph": "El problema de la programación de clases (\"timetabling\") fue formalizado en términos computacionales por C.C. Gotlieb, cuyo artículo de 1962 \"The Construction of Class-Teacher Time-Tables\" (Proceedings of the IFIP Congress) describió cómo representar las restricciones de un horario escolar — profesores, aulas y franjas horarias que no pueden duplicarse — en una forma que una computadora pudiera explorar. Antes del tratamiento formal de Gotlieb, la programación de horarios en la mayoría de las instituciones se hacía completamente a mano, a menudo tomando semanas de trabajo del personal para producir el horario de un solo periodo lectivo por ensayo y error."
+          },
+          "modernDevelopments": {
+            "title": "Por Qué la Programación Sin Conflictos Es Más Difícil de Lo Que Parece",
+            "paragraph": "En 1976, Shimon Even, Alon Itai y Adi Shamir demostraron que incluso una versión simplificada del problema de programación de horarios es NP-completo — es decir, no se conoce ningún algoritmo que garantice un horario óptimo y totalmente libre de conflictos para cualquier entrada posible en un tiempo razonable a medida que aumenta el número de clases. Ese resultado explica por qué los sistemas de programación institucionales reales dependen de heurísticas y solucionadores de restricciones que buscan un horario suficientemente bueno en lugar de uno demostrablemente óptimo. Esta herramienta evita ese problema más difícil por completo: en lugar de intentar construir un horario libre de conflictos desde cero, toma un horario que un estudiante ya ha creado y simplemente lo revisa, par por par, en busca de las superposiciones que lo harían inviable."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La programación de horarios se sitúa en la intersección de la teoría de la programación y el diseño de algoritmos dentro de las ciencias de la computación. Estas son las 5 mejores universidades del mundo en Ciencias de la Computación y Sistemas de Información según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              { "name": "Instituto Tecnológico de Massachusetts (MIT)", "note": "Puesto #1 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "No — el doctorado es un programa de investigación presencial dentro del departamento de EECS." },
+              { "name": "Universidad de Stanford", "note": "Puesto #2 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "No — el programa es un doctorado de investigación presencial con un único ciclo de admisión anual." },
+              { "name": "Universidad Carnegie Mellon (CMU)", "note": "Puesto #3 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "No — el doctorado del Departamento de Ciencias de la Computación es un título de investigación presencial." },
+              { "name": "Universidad Nacional de Singapur (NUS)", "note": "Puesto #4 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "No — los estudiantes de doctorado admitidos realizan investigación presencial en la Escuela de Computación de la NUS." },
+              { "name": "Universidad de Oxford", "note": "Puesto #5 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "No — el DPhil es un título de investigación presencial que abarca algoritmos y teoría de la complejidad, entre otras áreas." },
+              { "name": "Universidad Rey Abdalá de Ciencia y Tecnología (KAUST) — Programa de Ciencias de la Computación", "note": "El programa de doctorado requiere un mínimo de 72 créditos y un promedio acumulado de al menos 3.0; no aparece clasificado por separado en esta tabla global por materia.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "No — el programa se imparte de forma presencial en el campus de KAUST en Thuwal, Arabia Saudita." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "Este artículo demostró que una versión básica del problema de programación de horarios de clase es NP-completo, estableciendo la razón teórica por la que una programación exacta y garantizadamente libre de conflictos es computacionalmente inviable a gran escala — la razón por la que las herramientas del mundo real revisan y refinan los horarios en lugar de resolverlos de una vez por todas.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

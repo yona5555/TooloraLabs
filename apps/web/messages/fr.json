@@ -7022,6 +7022,120 @@
         }
       }
     },
+    "class-schedule-builder": {
+      "title": "Créateur d'Emploi du Temps",
+      "description": "Créez votre emploi du temps hebdomadaire et détectez instantanément les conflits horaires entre vos cours.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Comment Fonctionne la Détection des Conflits",
+          "intro": "Ajoutez chaque cours que vous envisagez, avec les jours et horaires où il a lieu — le créateur vérifie chaque paire de cours à la recherche d'horaires qui se chevauchent un jour commun.",
+          "conflictHint": "Deux cours ne sont en conflit que s'ils partagent un jour ET que leurs plages horaires se chevauchent réellement. Des cours qui s'enchaînent (l'un se termine exactement quand l'autre commence) ne constituent pas un conflit."
+        }
+      },
+      "form": {
+        "inputTitle": "Vos Cours",
+        "classNameLabel": "Nom du Cours",
+        "classNamePlaceholder": "ex. Calcul II",
+        "removeClass": "Supprimer ce cours",
+        "daysLabel": "A lieu le",
+        "day": {
+          "mon": "Lun",
+          "tue": "Mar",
+          "wed": "Mer",
+          "thu": "Jeu",
+          "fri": "Ven",
+          "sat": "Sam",
+          "sun": "Dim"
+        },
+        "startTimeLabel": "Heure de Début",
+        "endTimeLabel": "Heure de Fin",
+        "addClass": "Ajouter un Autre Cours"
+      },
+      "result": {
+        "heading": "Vérification de l'Emploi du Temps",
+        "emptySchedule": "Ajoutez au moins un cours pour vérifier votre emploi du temps.",
+        "invalidClassTime": "Chaque cours doit avoir une heure de fin postérieure à son heure de début.",
+        "missingDays": "Sélectionnez au moins un jour pour chaque cours.",
+        "noConflicts": "Aucun conflit — cet emploi du temps fonctionne.",
+        "conflictsFoundLabel": "Conflits trouvés",
+        "conflictsWith": "est en conflit avec",
+        "hoursPerWeek": "heures par semaine au total",
+        "day": {
+          "mon": "Lundi",
+          "tue": "Mardi",
+          "wed": "Mercredi",
+          "thu": "Jeudi",
+          "fri": "Vendredi",
+          "sat": "Samedi",
+          "sun": "Dimanche"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Conflits d'Emploi du Temps",
+          "paragraph1": "Un conflit d'emploi du temps survient lorsque deux cours ont lieu le même jour pendant des plages horaires qui se chevauchent, de sorte qu'un étudiant ne peut physiquement pas être à deux endroits à la fois. Repérer cela à l'œil devient vite source d'erreurs dès qu'un emploi du temps compte plus d'une poignée de cours, surtout lorsque les cours ont lieu selon des combinaisons de jours différentes — un conflit le lundi peut ne pas se reproduire le mercredi pour la même paire de cours.",
+          "paragraph2": "Ce créateur vérifie chaque paire possible de cours l'une contre l'autre. Pour chaque paire, il détermine d'abord les jours communs, puis — pour chaque jour commun — compare leurs plages horaires : si l'heure de début la plus tardive tombe avant l'heure de fin la plus précoce, les plages se chevauchent et un conflit est enregistré, avec la portion exacte de temps concernée. Les cours qui se terminent exactement au moment où un autre commence ne sont volontairement pas signalés comme un conflit, car un enchaînement immédiat (sans aucun chevauchement, juste sans battement) est normal et souvent inévitable.",
+          "paragraph3": "Au-delà de la détection des conflits, l'outil totalise les heures d'enseignement hebdomadaires sur tous les cours, comptées une fois par jour où le cours a lieu — un emploi du temps sans conflit peut néanmoins s'avérer irréaliste si un étudiant compare ensuite ce total au nombre d'heures réellement disponibles dans une semaine."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Scénarios de planification représentatifs et ce que ce créateur rapporte pour chacun.",
+          "columnCalculation": "Scénario",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Maths 101 (Lun/Mer 9h00–10h30) + Physique 201 (Lun 10h00–11h00)", "result": "Conflit le lundi, 10h00–10h30" },
+            { "calculation": "Histoire 100 (Mar/Jeu 13h00–14h00) + TP de Chimie (Mer 13h00–16h00)", "result": "Aucun conflit — jours différents" },
+            { "calculation": "Séminaire A (Ven 15h00–16h00) + Séminaire B (Ven 16h00–17h00)", "result": "Aucun conflit — enchaînés, sans chevauchement" },
+            { "calculation": "Deux groupes du même cours, tous deux Lun/Mer 9h00–10h00", "result": "Conflit le lundi et le mercredi, 9h00–10h00" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi l'outil ne signale-t-il pas les cours enchaînés comme un conflit ?", "answer": "Parce qu'il n'y a aucun chevauchement horaire réel — un cours se terminant à 10h00 et un autre commençant à ce même instant ne se disputent pas la même minute. L'outil ne signale un conflit que lorsque l'heure de début d'un cours tombe réellement avant l'heure de fin d'un autre un jour commun, ce qui est la définition d'un véritable chevauchement entre deux événements." },
+            { "question": "Qu'est-ce qui compte comme \"jour commun\" entre deux cours ?", "answer": "Tout jour de la semaine sélectionné par les deux cours. Un cours ayant lieu lundi/mercredi/vendredi et un autre uniquement mardi/jeudi ne partagent aucun jour ; ils sont donc comparés sur zéro jour et ne peuvent jamais entrer en conflit, quels que soient les horaires." },
+            { "question": "Le total d'heures hebdomadaires inclut-il le temps entre les cours ?", "answer": "Non — il additionne uniquement la durée réelle de chaque cours, comptée une fois par jour où il a lieu. Un cours d'une heure, trois jours par semaine, contribue 3 heures au total, et non l'intervalle plus large entre sa première et sa dernière séance." },
+            { "question": "Puis-je vérifier un emploi du temps avec des cours qui s'étendent au-delà de minuit ?", "answer": "Le créateur compare les heures de début et de fin au sein d'un même jour ; un cours nocturne doit donc être saisi de manière à se terminer au plus tard à 23h59 le jour où il commence. Une séance qui se poursuit logiquement après minuit ne peut pas être représentée comme une seule entrée." },
+            { "question": "Pourquoi l'outil exige-t-il qu'au moins un jour soit sélectionné pour chaque cours ?", "answer": "Un cours sans jour attribué ne peut être vérifié pour aucun conflit avec les autres, car la détection des conflits repose entièrement sur la comparaison des jours communs. Exiger au moins un jour garantit que chaque cours reste pertinent pour la vérification des conflits, au lieu d'être silencieusement ignoré." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Un Problème Aussi Ancien que l'Emploi du Temps Universitaire",
+            "paragraph": "Le problème de la planification des cours (\"timetabling\") a été formalisé en termes informatiques par C.C. Gotlieb, dont l'article de 1962 \"The Construction of Class-Teacher Time-Tables\" (Proceedings of the IFIP Congress) décrivait comment représenter les contraintes d'un emploi du temps scolaire — enseignants, salles et créneaux horaires qui ne peuvent pas être doublement réservés — sous une forme qu'un ordinateur pouvait explorer. Avant le traitement formel de Gotlieb, la planification des emplois du temps dans la plupart des établissements se faisait entièrement à la main, nécessitant souvent des semaines de travail du personnel pour produire l'emploi du temps d'un seul trimestre par tâtonnements."
+          },
+          "modernDevelopments": {
+            "title": "Pourquoi une Planification Sans Conflit Est Plus Difficile Qu'il n'y Paraît",
+            "paragraph": "En 1976, Shimon Even, Alon Itai et Adi Shamir ont démontré que même une version simplifiée du problème de planification des emplois du temps est NP-complet — c'est-à-dire qu'aucun algorithme connu ne garantit un emploi du temps optimal, entièrement sans conflit, pour toute entrée possible en un temps raisonnable à mesure que le nombre de cours augmente. Ce résultat explique pourquoi les systèmes de planification institutionnels réels s'appuient sur des heuristiques et des solveurs de contraintes qui recherchent un emploi du temps suffisamment bon plutôt que prouvé optimal. Cet outil contourne entièrement ce problème plus difficile : plutôt que de tenter de construire un emploi du temps sans conflit à partir de zéro, il prend un emploi du temps déjà construit par un étudiant et le vérifie simplement, paire par paire, à la recherche des chevauchements qui le rendraient impraticable."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La planification des emplois du temps se situe à l'intersection de la théorie de l'ordonnancement et de la conception d'algorithmes en informatique. Voici les 5 meilleures universités mondiales en Informatique et Systèmes d'Information selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS." },
+              { "name": "Université Stanford", "note": "Classée #2 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec un seul cycle d'admission annuel." },
+              { "name": "Université Carnegie Mellon (CMU)", "note": "Classée #3 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "Non — le doctorat du département d'informatique est un diplôme de recherche sur campus." },
+              { "name": "Université Nationale de Singapour (NUS)", "note": "Classée #4 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "Non — les doctorants admis mènent une recherche en présentiel à la NUS School of Computing." },
+              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "Non — le DPhil est un diplôme de recherche sur campus couvrant notamment les algorithmes et la théorie de la complexité." },
+              { "name": "Université des Sciences et Technologies Roi Abdallah (KAUST) — Programme d'Informatique", "note": "Le programme de doctorat exige un minimum de 72 crédits et une moyenne cumulative d'au moins 3,0 ; non classée séparément dans ce tableau mondial par discipline.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "Non — le programme est dispensé en présentiel sur le campus de KAUST à Thuwal, en Arabie Saoudite." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "Cet article a démontré qu'une version de base du problème de planification des emplois du temps de classe est NP-complète, établissant la raison théorique pour laquelle une planification exacte et garantie sans conflit est impraticable sur le plan computationnel à grande échelle — la raison pour laquelle les outils réels vérifient et affinent les emplois du temps plutôt que de les résoudre entièrement d'un coup.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

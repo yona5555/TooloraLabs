@@ -83,6 +83,8 @@ import StoichiometryCalculator from "@/components/tools/stoichiometry-calculator
 import StoichiometryEducation from "@/components/tools/stoichiometry-calculator/StoichiometryEducation";
 import ChemicalEquationBalancer from "@/components/tools/chemical-equation-balancer/ChemicalEquationBalancer";
 import BalancerEducation from "@/components/tools/chemical-equation-balancer/BalancerEducation";
+import ClassScheduleBuilder from "@/components/tools/class-schedule-builder/ClassScheduleBuilder";
+import ClassScheduleEducation from "@/components/tools/class-schedule-builder/ClassScheduleEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -413,6 +415,9 @@ export default async function ToolPage({
     case "chemical-equation-balancer":
       component = <ChemicalEquationBalancer education={<BalancerEducation />} />;
       break;
+    case "class-schedule-builder":
+      component = <ClassScheduleBuilder education={<ClassScheduleEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -517,6 +522,7 @@ export default async function ToolPage({
     slug === "molar-mass-calculator" ||
     slug === "stoichiometry-calculator" ||
     slug === "chemical-equation-balancer" ||
+    slug === "class-schedule-builder" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

@@ -42,3 +42,4 @@ export * from "./MatrixCalculator";
 export * from "./MolarMassCalculator";
 export * from "./StoichiometryCalculator";
 export * from "./ChemicalEquationBalancer";
+export * from "./ClassScheduleBuilder";
