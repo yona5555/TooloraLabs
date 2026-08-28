@@ -6636,6 +6636,102 @@
         }
       }
     },
+    "matrix-calculator": {
+      "title": "Calculateur de Matrices",
+      "description": "Calculez la somme, la différence, le produit, le déterminant, la transposée et l'inverse de deux matrices 2×2.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules Matricielles",
+          "intro": "Les formules fondamentales appliquées par ce calculateur aux matrices 2×2.",
+          "formulas": {
+            "determinant": { "label": "Déterminant", "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁" },
+            "inverse": { "label": "Inverse", "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]" },
+            "product": { "label": "Produit Matriciel", "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Éléments de la Matrice",
+        "matrixALabel": "Matrice A",
+        "matrixBLabel": "Matrice B"
+      },
+      "result": {
+        "heading": "Résultat",
+        "singularMatrixA": "La matrice A a un déterminant de 0, elle n'a donc pas d'inverse.",
+        "sum": "Somme (A + B)",
+        "difference": "Différence (A − B)",
+        "product": "Produit (A × B)",
+        "transposeA": "Transposée de A",
+        "inverseA": "Inverse de A",
+        "determinantA": "Déterminant de A",
+        "determinantB": "Déterminant de B"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Matrices",
+          "paragraph1": "Une matrice est une grille rectangulaire de nombres utilisée pour représenter et résoudre des systèmes d'équations linéaires, des transformations, et bien plus, de façon beaucoup plus compacte qu'en écrivant chaque équation séparément. Ce calculateur travaille avec des matrices 2×2 — deux lignes, deux colonnes —, la plus petite taille pour laquelle chaque opération matricielle fondamentale (déterminant, inverse, multiplication) a déjà un sens. Additionner ou soustraire deux matrices se fait élément par élément : chaque position du résultat est simplement la somme ou la différence des deux éléments à cette position.",
+          "paragraph2": "La multiplication matricielle fonctionne différemment de la multiplication ordinaire : chaque élément du produit A×B est une somme de produits — l'élément en ligne i, colonne j provient de la multiplication de la ligne i de A par la colonne j de B, terme à terme, puis de l'addition des résultats. C'est aussi pourquoi A×B n'est généralement pas égal à B×A, contrairement à la multiplication de nombres ordinaires. Le déterminant, det(A) = a₁₁a₂₂ − a₁₂a₂₁ pour une matrice 2×2, est un nombre unique qui traduit la façon dont la matrice met à l'échelle les aires : un déterminant de 0 signifie que la matrice écrase toute forme en une droite ou un point, sans possibilité de revenir en arrière — c'est exactement pourquoi une matrice de déterminant 0 (dite singulière) n'a pas d'inverse.",
+          "paragraph3": "Lorsque le déterminant n'est pas nul, l'inverse A⁻¹ est la matrice unique qui annule la transformation de A, vérifiant A×A⁻¹ = la matrice identité (des 1 sur la diagonale, des 0 ailleurs). Pour une matrice 2×2, on l'obtient en échangeant les deux éléments diagonaux, en changeant le signe des deux éléments hors diagonale, et en divisant le tout par le déterminant. La transposée, obtenue en retournant la matrice le long de sa diagonale (les lignes deviennent des colonnes), est une opération bien plus simple, toujours définie, quel que soit le déterminant."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Des opérations matricielles représentatives, calculées par ce calculateur.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Déterminant de [1 2; 3 4]", "result": "det(A) = −2" },
+            { "calculation": "Produit de [1 2; 3 4] et [5 6; 7 8]", "result": "A×B = [19 22; 43 50]" },
+            { "calculation": "Inverse de [4 7; 2 6]", "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]" },
+            { "calculation": "Transposée de [1 2; 3 4]", "result": "Aᵀ = [1 3; 2 4]" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi A×B n'est-il pas égal à B×A dans la multiplication matricielle ?", "answer": "Parce que la multiplication matricielle combine des lignes entières d'une matrice avec des colonnes entières de l'autre, les deux ordres calculent en réalité des sommes différentes — rien n'impose que ligne-fois-colonne dans un ordre corresponde à ligne-fois-colonne dans l'autre. Cela rend la multiplication matricielle non commutative, contrairement à la multiplication de nombres ordinaires, et c'est l'une des premières propriétés surprenantes que rencontrent les étudiants en apprenant l'algèbre matricielle." },
+            { "question": "Pourquoi une matrice de déterminant nul n'a-t-elle pas d'inverse ?", "answer": "Le déterminant mesure à quel point une matrice met à l'échelle une aire (en 2D) ou un volume (en dimensions supérieures). Un déterminant de 0 signifie que la matrice fait s'effondrer chaque entrée sur une droite ou un point de dimension inférieure — plusieurs entrées différentes sont associées à la même sortie —, il n'y a donc aucun moyen d'inverser cet effondrement et de retrouver l'entrée d'origine de façon unique. Une telle matrice est dite singulière, et la formule de l'inverse exigerait de diviser par ce déterminant nul, ce qui est indéfini." },
+            { "question": "Quelle est la différence entre la transposée et l'inverse ?", "answer": "La transposée est purement un réarrangement — elle retourne la matrice le long de sa diagonale, échangeant lignes et colonnes — et elle est toujours définie pour toute matrice, sans aucun calcul au-delà du repositionnement des éléments. L'inverse, en revanche, est la matrice qui annule entièrement la transformation de A (A×A⁻¹ = identité), nécessite une division par le déterminant, et n'existe tout simplement pas lorsque ce déterminant est nul." },
+            { "question": "Ce calculateur peut-il traiter des matrices plus grandes que 2×2 ?", "answer": "Pas actuellement — il est conçu spécifiquement pour les matrices 2×2, ce qui permet à chaque formule (déterminant, inverse, produit) de rester une expression courte et exacte. Les matrices plus grandes utilisent les mêmes concepts sous-jacents, mais calculer un déterminant ou une inverse pour une matrice 3×3 ou plus grande nécessite des méthodes nettement plus élaborées (développement par cofacteurs, réduction en lignes, ou algorithmes numériques)." },
+            { "question": "Pourquoi l'addition matricielle est-elle tellement plus simple que la multiplication matricielle ?", "answer": "L'addition combine deux matrices de la même manière que l'on additionnerait deux grilles ordinaires de nombres — position par position, sans aucune interaction entre lignes ou colonnes différentes. La multiplication, elle, est conçue pour représenter la composition de deux transformations (en appliquer une après l'autre), et cette composition mélange intrinsèquement chaque ligne d'une matrice avec chaque colonne de l'autre, ce qui explique pourquoi elle nécessite le calcul plus élaboré ligne-fois-colonne." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Un Nom Inventé Avant que la Théorie N'existe",
+            "paragraph": "Le mot « matrice » a fait son entrée en mathématiques en 1850, inventé par le mathématicien anglais James Joseph Sylvester — mais à ce moment-là, ce n'était qu'un nom pour un tableau rectangulaire de nombres servant à générer des déterminants, pas encore un objet doté de sa propre algèbre. Cela changea huit ans plus tard lorsque Arthur Cayley, proche collaborateur de Sylvester, publia « A Memoir on the Theory of Matrices » (1858), l'article généralement crédité d'avoir fondé la théorie des matrices comme sujet à part entière. Le mémoire de Cayley introduisit l'addition et la multiplication matricielles, la matrice identité et la matrice inverse, et démontra ce qu'on appelle aujourd'hui le théorème de Cayley-Hamilton — le tout essentiellement dans ce seul article, qui transforma l'exercice de nomenclature de Sylvester en une véritable branche de l'algèbre."
+          },
+          "modernDevelopments": {
+            "title": "Le Vecteur Propre à Vingt-Cinq Milliards de Dollars",
+            "paragraph": "L'une des applications modernes les plus importantes de l'algèbre matricielle n'avait rien à voir avec la physique ou l'ingénierie : en 1998, les doctorants de Stanford Larry Page et Sergey Brin ont bâti l'algorithme PageRank original de Google sur un calcul de vecteur propre matriciel. Leur modèle représentait toute la structure liée du web comme une seule matrice immense, où évaluer l'importance d'une page revenait à trouver le vecteur propre principal de cette matrice — la même opération centrale (des matrices agissant sur des vecteurs) que Cayley formalisa en 1858, appliquée cette fois à l'échelle de milliards de pages web plutôt qu'aux petits exemples calculés à la main de l'algèbre du XIXe siècle."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les matrices sont un outil fondamental dans l'ensemble des mathématiques. Voici les 5 meilleures universités au monde en Mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un programme régional :",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "Non — le MIT n'admet des doctorants que pour des études sur le campus, sans filière de master ni en ligne." },
+              { "name": "Université Harvard", "note": "Classée #2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel, administré par la Griffin Graduate School of Arts and Sciences." },
+              { "name": "Université d'Oxford", "note": "Classée #3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "Non — le DPhil est un diplôme de recherche sur le campus, généralement achevé en trois à quatre ans." },
+              { "name": "Université de Cambridge", "note": "Classée #4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "Non — le doctorat est un programme de recherche en présentiel de trois ans dirigé par la Faculté de Mathématiques." },
+              { "name": "Université Stanford", "note": "Classée #5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige des doctorants une présence physique significative sur le campus." },
+              { "name": "Université Khalifa — Doctorat en Mathématiques", "note": "Un programme doctoral spécialisé en mathématiques parmi les universités de la région arabe, hébergé au sein du College of Computing and Mathematical Sciences ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://www.ku.ac.ae/program/phd-in-mathematics", "online": "Non — le programme de 60 crédits est dispensé sur le campus de l'Université Khalifa à Abou Dabi." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Higham, N. J. (2008). Cayley, Sylvester, and Early Matrix Theory. Linear Algebra and its Applications, 428(1), 39–43.",
+          "note": "L'article du spécialiste en analyse numérique Nicholas J. Higham, écrit pour le 150e anniversaire du mémoire de Cayley de 1858, retrace les rôles respectifs de Cayley et Sylvester dans la fondation de la théorie des matrices comme discipline mathématique à part entière.",
+          "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

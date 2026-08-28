@@ -6612,6 +6612,102 @@
         }
       }
     },
+    "matrix-calculator": {
+      "title": "Calculadora de Matrices",
+      "description": "Calcula la suma, la diferencia, el producto, el determinante, la transpuesta y la inversa de dos matrices 2×2.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas de Matrices",
+          "intro": "Las fórmulas fundamentales que aplica esta calculadora a matrices 2×2.",
+          "formulas": {
+            "determinant": { "label": "Determinante", "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁" },
+            "inverse": { "label": "Inversa", "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]" },
+            "product": { "label": "Producto Matricial", "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Entradas de la Matriz",
+        "matrixALabel": "Matriz A",
+        "matrixBLabel": "Matriz B"
+      },
+      "result": {
+        "heading": "Resultado",
+        "singularMatrixA": "La matriz A tiene un determinante de 0, por lo que no tiene inversa.",
+        "sum": "Suma (A + B)",
+        "difference": "Diferencia (A − B)",
+        "product": "Producto (A × B)",
+        "transposeA": "Transpuesta de A",
+        "inverseA": "Inversa de A",
+        "determinantA": "Determinante de A",
+        "determinantB": "Determinante de B"
+      },
+      "education": {
+        "intro": {
+          "title": "Entender las Matrices",
+          "paragraph1": "Una matriz es una cuadrícula rectangular de números usada para representar y resolver sistemas de ecuaciones lineales, transformaciones y más, de forma mucho más compacta que escribir cada ecuación por separado. Esta calculadora trabaja con matrices 2×2 — dos filas, dos columnas —, el tamaño más pequeño en el que cada operación fundamental (determinante, inversa, multiplicación) ya tiene sentido. Sumar o restar dos matrices se hace elemento por elemento: cada posición del resultado es simplemente la suma o resta de los dos elementos en esa posición.",
+          "paragraph2": "La multiplicación de matrices funciona de forma distinta a la multiplicación ordinaria: cada elemento del producto A×B es una suma de productos — el elemento en la fila i, columna j proviene de multiplicar la fila i de A por la columna j de B, término a término, y sumar los resultados. Esta es también la razón por la que A×B normalmente no es igual a B×A, a diferencia de multiplicar números ordinarios. El determinante, det(A) = a₁₁a₂₂ − a₁₂a₂₁ para una matriz 2×2, es un único número que capta cómo la matriz escala el área: un determinante de 0 significa que la matriz aplasta cualquier forma hasta convertirla en una línea o un punto, sin manera de deshacerlo — precisamente por eso una matriz con determinante 0 (llamada singular) no tiene inversa.",
+          "paragraph3": "Cuando el determinante no es cero, la inversa A⁻¹ es la única matriz que deshace la transformación de A, cumpliendo A×A⁻¹ = la matriz identidad (unos en la diagonal, ceros en el resto). Para una matriz 2×2, se obtiene intercambiando los dos elementos de la diagonal, invirtiendo el signo de los dos elementos fuera de la diagonal, y dividiendo todo entre el determinante. La transpuesta, formada al reflejar la matriz sobre su diagonal (las filas se convierten en columnas), es una operación mucho más simple que siempre está definida, sin importar el determinante."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Operaciones matriciales representativas, calculadas por esta calculadora.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Determinante de [1 2; 3 4]", "result": "det(A) = −2" },
+            { "calculation": "Producto de [1 2; 3 4] y [5 6; 7 8]", "result": "A×B = [19 22; 43 50]" },
+            { "calculation": "Inversa de [4 7; 2 6]", "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]" },
+            { "calculation": "Transpuesta de [1 2; 3 4]", "result": "Aᵀ = [1 3; 2 4]" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué A×B no es igual a B×A en la multiplicación de matrices?", "answer": "Porque la multiplicación de matrices combina filas enteras de una matriz con columnas enteras de la otra, los dos órdenes calculan realmente sumas distintas — no hay razón para que fila-por-columna en un orden coincida con fila-por-columna en el otro. Esto hace que la multiplicación de matrices no sea conmutativa, a diferencia de multiplicar números ordinarios, y es una de las primeras propiedades sorprendentes con las que se encuentran los estudiantes al aprender álgebra matricial." },
+            { "question": "¿Por qué una matriz con determinante cero no tiene inversa?", "answer": "El determinante mide cuánto escala una matriz el área (en 2D) o el volumen (en dimensiones superiores). Un determinante de 0 significa que la matriz colapsa cada entrada sobre una línea o un punto de menor dimensión — varias entradas distintas se asignan a la misma salida —, por lo que no hay forma de revertir ese colapso y recuperar de forma única la entrada original. Una matriz así se llama singular, y la fórmula de la inversa exigiría dividir entre ese determinante cero, lo cual no está definido." },
+            { "question": "¿Cuál es la diferencia entre la transpuesta y la inversa?", "answer": "La transpuesta es puramente una reordenación — refleja la matriz sobre su diagonal, intercambiando filas y columnas — y siempre está definida para cualquier matriz, sin ningún cálculo más allá de reposicionar los elementos. La inversa, en cambio, es la matriz que revierte por completo la transformación de A (A×A⁻¹ = identidad), requiere dividir entre el determinante, y simplemente no existe cuando ese determinante es cero." },
+            { "question": "¿Puede esta calculadora manejar matrices más grandes que 2×2?", "answer": "Actualmente no — está diseñada específicamente para matrices 2×2, lo que mantiene cada fórmula (determinante, inversa, producto) como una expresión corta y exacta. Las matrices más grandes usan los mismos conceptos subyacentes, pero calcular un determinante o una inversa para una matriz 3×3 o mayor requiere métodos considerablemente más elaborados (expansión por cofactores, reducción por filas o algoritmos numéricos)." },
+            { "question": "¿Por qué la suma de matrices es mucho más simple que la multiplicación de matrices?", "answer": "La suma combina dos matrices de la misma forma en que sumarías dos cuadrículas ordinarias de números — posición por posición, sin ninguna interacción entre filas o columnas distintas. La multiplicación, por diseño, busca representar la composición de dos transformaciones (aplicar una después de la otra), y esa composición mezcla inherentemente cada fila de una matriz con cada columna de la otra, razón por la cual necesita el cálculo más elaborado de fila por columna." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Un Nombre Acuñado Antes de que Existiera la Teoría",
+            "paragraph": "La palabra «matriz» entró en las matemáticas en 1850, acuñada por el matemático inglés James Joseph Sylvester — pero en ese momento era solo un nombre para una disposición rectangular de números usada para generar determinantes, aún no un objeto con álgebra propia. Eso cambió ocho años después, cuando Arthur Cayley, un estrecho colaborador de Sylvester, publicó «A Memoir on the Theory of Matrices» (1858), el artículo al que generalmente se atribuye la fundación de la teoría de matrices como materia propia. El memorándum de Cayley introdujo la suma y multiplicación de matrices, la matriz identidad y la matriz inversa, y demostró lo que hoy se conoce como el teorema de Cayley-Hamilton — todo ello esencialmente en el mismo artículo que convirtió el ejercicio de nomenclatura de Sylvester en una rama genuina del álgebra."
+          },
+          "modernDevelopments": {
+            "title": "El Vector Propio de Veinticinco Mil Millones de Dólares",
+            "paragraph": "Una de las aplicaciones modernas más trascendentales del álgebra matricial no tuvo nada que ver con la física ni la ingeniería: en 1998, los estudiantes de posgrado de Stanford Larry Page y Sergey Brin construyeron el algoritmo PageRank original de Google sobre un cálculo de vector propio de una matriz. Su modelo representaba toda la estructura enlazada de la web como una única matriz enorme, donde calificar la importancia de una página se reducía a encontrar el vector propio principal de esa matriz — la misma operación central (matrices actuando sobre vectores) que Cayley formalizó en 1858, aplicada a una escala de miles de millones de páginas web en lugar de los pequeños ejemplos calculados a mano del álgebra del siglo XIX."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Las matrices son una herramienta fundamental en toda la matemática. Aquí están las 5 mejores del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de un programa regional:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificado #1 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — el MIT admite estudiantes de doctorado solo para estudios presenciales en el campus, sin ninguna vía de maestría ni en línea." },
+              { "name": "Universidad de Harvard", "note": "Clasificada #2 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — el programa es un doctorado de investigación presencial, administrado a través de la Escuela de Posgrado en Artes y Ciencias Griffin." },
+              { "name": "Universidad de Oxford", "note": "Clasificada #3 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — el DPhil es un título de investigación presencial, que normalmente se completa en tres a cuatro años." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #4 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "No — el doctorado es un programa de investigación presencial de tres años dirigido por la Facultad de Matemáticas." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #5 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus." },
+              { "name": "Universidad Khalifa — Doctorado en Matemáticas", "note": "Un programa de doctorado especializado en matemáticas entre las universidades de la región árabe, alojado en el Colegio de Computación y Ciencias Matemáticas; no aparece clasificado por separado en esta tabla global de la materia.", "url": "https://www.ku.ac.ae/program/phd-in-mathematics", "online": "No — el programa de 60 créditos se imparte en el campus de la Universidad Khalifa en Abu Dabi." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Higham, N. J. (2008). Cayley, Sylvester, and Early Matrix Theory. Linear Algebra and its Applications, 428(1), 39–43.",
+          "note": "El artículo del analista numérico Nicholas J. Higham, escrito para el 150.º aniversario del memorándum de Cayley de 1858, traza los papeles que Cayley y Sylvester desempeñaron cada uno en la fundación de la teoría de matrices como materia matemática propia.",
+          "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

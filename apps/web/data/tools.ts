@@ -486,6 +486,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "matrix-calculator",
+    title: "Matrix Calculator",
+    category: "math-science",
+    description:
+      "Compute the sum, difference, product, determinant, transpose, and inverse of two 2x2 matrices.",
+    featured: false,
+    keywords: [
+      "matrix calculator",
+      "matrix inverse calculator",
+      "matrix determinant calculator",
+      "matrix multiplication calculator",
+      "2x2 matrix calculator",
+      "matrix transpose calculator",
+    ],
+  },
+  {
     slug: "vector-calculator",
     title: "Vector Calculator",
     category: "math-science",

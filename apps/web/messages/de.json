@@ -6636,6 +6636,102 @@
         }
       }
     },
+    "matrix-calculator": {
+      "title": "Matrixrechner",
+      "description": "Berechnen Sie Summe, Differenz, Produkt, Determinante, Transponierte und Inverse zweier 2x2-Matrizen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Matrixformeln",
+          "intro": "Die grundlegenden Formeln, die dieser Rechner auf 2x2-Matrizen anwendet.",
+          "formulas": {
+            "determinant": { "label": "Determinante", "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁" },
+            "inverse": { "label": "Inverse", "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]" },
+            "product": { "label": "Matrixprodukt", "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Matrixeinträge",
+        "matrixALabel": "Matrix A",
+        "matrixBLabel": "Matrix B"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "singularMatrixA": "Matrix A hat die Determinante 0 und besitzt daher keine Inverse.",
+        "sum": "Summe (A + B)",
+        "difference": "Differenz (A − B)",
+        "product": "Produkt (A × B)",
+        "transposeA": "Transponierte von A",
+        "inverseA": "Inverse von A",
+        "determinantA": "Determinante von A",
+        "determinantB": "Determinante von B"
+      },
+      "education": {
+        "intro": {
+          "title": "Matrizen verstehen",
+          "paragraph1": "Eine Matrix ist ein rechteckiges Zahlenraster, das verwendet wird, um Systeme linearer Gleichungen, Transformationen und mehr kompakter darzustellen und zu lösen, als jede Gleichung einzeln aufzuschreiben. Dieser Rechner arbeitet mit 2x2-Matrizen — zwei Zeilen, zwei Spalten — der kleinsten Größe, bei der bereits jede grundlegende Matrixoperation (Determinante, Inverse, Multiplikation) sinnvoll ist. Zwei Matrizen werden Eintrag für Eintrag addiert oder subtrahiert: Jede Position im Ergebnis ist einfach die Summe oder Differenz der beiden Einträge an dieser Position.",
+          "paragraph2": "Die Matrixmultiplikation funktioniert anders als die gewöhnliche Multiplikation: Jeder Eintrag des Produkts A×B ist eine Summe von Produkten — der Eintrag in Zeile i, Spalte j entsteht, indem Zeile i von A gliedweise mit Spalte j von B multipliziert und die Ergebnisse addiert werden. Deshalb ist A×B im Allgemeinen auch nicht gleich B×A, anders als bei der Multiplikation gewöhnlicher Zahlen. Die Determinante, det(A) = a₁₁a₂₂ − a₁₂a₂₁ für eine 2x2-Matrix, ist eine einzelne Zahl, die erfasst, wie die Matrix Flächen skaliert: Eine Determinante von 0 bedeutet, dass die Matrix jede Form auf eine Linie oder einen Punkt zusammendrückt, ohne Möglichkeit, das rückgängig zu machen — genau deshalb hat eine Matrix mit Determinante 0 (singulär genannt) keine Inverse.",
+          "paragraph3": "Ist die Determinante nicht null, ist die Inverse A⁻¹ die eindeutige Matrix, die A's Transformation rückgängig macht und A×A⁻¹ = die Einheitsmatrix erfüllt (Einsen auf der Diagonale, Nullen sonst). Bei einer 2x2-Matrix findet man sie, indem man die beiden Diagonaleinträge vertauscht, die beiden Nebendiagonaleinträge negiert und alles durch die Determinante teilt. Die Transponierte, gebildet durch Spiegelung der Matrix an ihrer Diagonale (Zeilen werden zu Spalten), ist eine viel einfachere Operation, die immer definiert ist, unabhängig von der Determinante."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Repräsentative Matrixoperationen, berechnet von diesem Rechner.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Determinante von [1 2; 3 4]", "result": "det(A) = −2" },
+            { "calculation": "Produkt von [1 2; 3 4] und [5 6; 7 8]", "result": "A×B = [19 22; 43 50]" },
+            { "calculation": "Inverse von [4 7; 2 6]", "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]" },
+            { "calculation": "Transponierte von [1 2; 3 4]", "result": "Aᵀ = [1 3; 2 4]" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum ist A×B nicht gleich B×A bei der Matrixmultiplikation?", "answer": "Weil die Matrixmultiplikation ganze Zeilen einer Matrix mit ganzen Spalten der anderen kombiniert, berechnen die beiden Reihenfolgen tatsächlich unterschiedliche Summen — es gibt keinen Grund, warum Zeile-mal-Spalte in der einen Reihenfolge mit Zeile-mal-Spalte in der anderen übereinstimmen sollte. Das macht die Matrixmultiplikation nicht kommutativ, anders als die Multiplikation gewöhnlicher Zahlen, und ist eine der ersten überraschenden Eigenschaften, denen Studierende beim Erlernen der Matrixalgebra begegnen." },
+            { "question": "Warum hat eine Matrix mit Determinante null keine Inverse?", "answer": "Die Determinante misst, wie stark eine Matrix Fläche (in 2D) oder Volumen (in höheren Dimensionen) skaliert. Eine Determinante von 0 bedeutet, dass die Matrix jede Eingabe auf eine niedrigerdimensionale Linie oder einen Punkt kollabiert — mehrere unterschiedliche Eingaben werden auf dieselbe Ausgabe abgebildet —, sodass es keine Möglichkeit gibt, diesen Kollaps rückgängig zu machen und die ursprüngliche Eingabe eindeutig wiederherzustellen. Eine solche Matrix heißt singulär, und die Inversenformel würde eine Division durch diese Nulldeterminante erfordern, was undefiniert ist." },
+            { "question": "Was ist der Unterschied zwischen Transponierter und Inverse?", "answer": "Die Transponierte ist reine Umordnung — sie spiegelt die Matrix an ihrer Diagonale und vertauscht Zeilen mit Spalten — und ist für jede Matrix immer definiert, ohne jede Berechnung über das Umpositionieren der Einträge hinaus. Die Inverse hingegen ist die Matrix, die A's Transformation vollständig rückgängig macht (A×A⁻¹ = Einheitsmatrix), erfordert eine Division durch die Determinante und existiert schlicht nicht, wenn diese Determinante null ist." },
+            { "question": "Kann dieser Rechner Matrizen behandeln, die größer als 2x2 sind?", "answer": "Derzeit nicht — er ist speziell für 2x2-Matrizen gebaut, wodurch jede Formel (Determinante, Inverse, Produkt) ein kurzer, exakter Ausdruck bleibt. Größere Matrizen nutzen dieselben zugrunde liegenden Konzepte, aber die Berechnung einer Determinante oder Inversen für eine 3x3-Matrix oder größer erfordert deutlich aufwendigere Methoden (Kofaktorentwicklung, Zeilenreduktion oder numerische Algorithmen)." },
+            { "question": "Warum ist die Matrixaddition so viel einfacher als die Matrixmultiplikation?", "answer": "Die Addition kombiniert zwei Matrizen genauso, wie man zwei gewöhnliche Zahlenraster addieren würde — Position für Position, ohne jede Wechselwirkung zwischen verschiedenen Zeilen oder Spalten. Die Multiplikation soll dagegen die Verkettung zweier Transformationen darstellen (eine nach der anderen anwenden), und diese Verkettung vermischt zwangsläufig jede Zeile der einen Matrix mit jeder Spalte der anderen, weshalb sie die aufwendigere Zeile-mal-Spalte-Berechnung benötigt." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Ein Name, geprägt bevor die Theorie existierte",
+            "paragraph": "Das Wort „Matrix“ hielt 1850 Einzug in die Mathematik, geprägt vom englischen Mathematiker James Joseph Sylvester — zu diesem Zeitpunkt war es jedoch nur eine Bezeichnung für ein rechteckiges Zahlenfeld, das zur Erzeugung von Determinanten diente, noch kein Objekt mit eigener Algebra. Das änderte sich acht Jahre später, als Arthur Cayley, ein enger Mitarbeiter Sylvesters, „A Memoir on the Theory of Matrices“ (1858) veröffentlichte — die Arbeit, der allgemein die Begründung der Matrizentheorie als eigenständiges Fachgebiet zugeschrieben wird. Cayleys Memoir führte die Matrixaddition, -multiplikation, die Einheitsmatrix und die inverse Matrix ein und bewies den heute als Satz von Cayley-Hamilton bekannten Satz — alles im Wesentlichen in dieser einen Arbeit, die Sylvesters Benennungsübung in einen eigenständigen Zweig der Algebra verwandelte."
+          },
+          "modernDevelopments": {
+            "title": "Der Fünfundzwanzig-Milliarden-Dollar-Eigenvektor",
+            "paragraph": "Eine der folgenreichsten modernen Anwendungen der Matrixalgebra hatte nichts mit Physik oder Ingenieurwesen zu tun: 1998 bauten die Stanford-Doktoranden Larry Page und Sergey Brin Googles ursprünglichen PageRank-Algorithmus auf einer Matrix-Eigenvektor-Berechnung auf. Ihr Modell stellte die gesamte verlinkte Struktur des Webs als eine einzige riesige Matrix dar, bei der die Bewertung der Wichtigkeit einer Seite darauf hinauslief, den Haupteigenvektor dieser Matrix zu finden — dieselbe Kernoperation (Matrizen, die auf Vektoren wirken), die Cayley 1858 formalisierte, angewandt im Maßstab von Milliarden Webseiten statt der kleinen handgerechneten Beispiele der Algebra des 19. Jahrhunderts."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Matrizen sind ein grundlegendes Werkzeug in der gesamten Mathematik. Hier sind die weltweit besten 5 im Fach Mathematik im QS World University Rankings by Subject 2025, plus ein regionales Programm:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 1 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "Nein — MIT nimmt Promotionsstudierende nur für ein Studium auf dem Campus auf, ohne Master- oder Online-Track." },
+              { "name": "Harvard University", "note": "Weltweit auf Platz 2 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "Nein — das Programm ist ein präsenzpflichtiges Forschungspromotionsprogramm, verwaltet über die Griffin Graduate School of Arts and Sciences." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 3 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "Nein — der DPhil ist ein Forschungsgrad auf dem Campus, typischerweise in drei bis vier Jahren abgeschlossen." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 4 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "Nein — der PhD ist ein dreijähriges, präsenzpflichtiges Forschungsprogramm der Faculty of Mathematics." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 5 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudien verlangt von Promotionsstudierenden eine erhebliche physische Präsenz auf dem Campus." },
+              { "name": "Khalifa University — PhD in Mathematics", "note": "Ein spezialisiertes Promotionsprogramm in Mathematik unter den Universitäten der arabischen Region, angesiedelt am College of Computing and Mathematical Sciences; in dieser globalen Fachtabelle nicht gesondert gelistet.", "url": "https://www.ku.ac.ae/program/phd-in-mathematics", "online": "Nein — das Programm mit 60 Credit-Stunden wird auf dem Campus der Khalifa University in Abu Dhabi durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Higham, N. J. (2008). Cayley, Sylvester, and Early Matrix Theory. Linear Algebra and its Applications, 428(1), 39–43.",
+          "note": "Der Aufsatz des Numerikers Nicholas J. Higham, verfasst zum 150. Jahrestag von Cayleys Memoir von 1858, zeichnet nach, welche Rollen Cayley und Sylvester jeweils bei der Begründung der Matrizentheorie als eigenständiges mathematisches Fachgebiet spielten.",
+          "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

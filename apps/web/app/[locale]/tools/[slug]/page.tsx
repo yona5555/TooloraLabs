@@ -75,6 +75,8 @@ import StudyTimeCalculator from "@/components/tools/study-time-calculator/StudyT
 import StudyTimeEducation from "@/components/tools/study-time-calculator/StudyTimeEducation";
 import VectorCalculator from "@/components/tools/vector-calculator/VectorCalculator";
 import VectorEducation from "@/components/tools/vector-calculator/VectorEducation";
+import MatrixCalculator from "@/components/tools/matrix-calculator/MatrixCalculator";
+import MatrixEducation from "@/components/tools/matrix-calculator/MatrixEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -393,6 +395,9 @@ export default async function ToolPage({
     case "vector-calculator":
       component = <VectorCalculator education={<VectorEducation />} />;
       break;
+    case "matrix-calculator":
+      component = <MatrixCalculator education={<MatrixEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -493,6 +498,7 @@ export default async function ToolPage({
     slug === "readability-score-calculator" ||
     slug === "study-time-calculator" ||
     slug === "vector-calculator" ||
+    slug === "matrix-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

@@ -6632,6 +6632,102 @@
         }
       }
     },
+    "matrix-calculator": {
+      "title": "Matrix Calculator",
+      "description": "Compute the sum, difference, product, determinant, transpose, and inverse of two 2x2 matrices.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Matrix Formulas",
+          "intro": "The core formulas this calculator applies to 2x2 matrices.",
+          "formulas": {
+            "determinant": { "label": "Determinant", "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁" },
+            "inverse": { "label": "Inverse", "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]" },
+            "product": { "label": "Matrix Product", "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Matrix Entries",
+        "matrixALabel": "Matrix A",
+        "matrixBLabel": "Matrix B"
+      },
+      "result": {
+        "heading": "Result",
+        "singularMatrixA": "Matrix A has a determinant of 0, so it has no inverse.",
+        "sum": "Sum (A + B)",
+        "difference": "Difference (A − B)",
+        "product": "Product (A × B)",
+        "transposeA": "Transpose of A",
+        "inverseA": "Inverse of A",
+        "determinantA": "Determinant of A",
+        "determinantB": "Determinant of B"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Matrices",
+          "paragraph1": "A matrix is a rectangular grid of numbers used to represent and solve systems of linear equations, transformations, and more compactly than writing out each equation separately. This calculator works with 2x2 matrices — two rows, two columns — the smallest size where every core matrix operation (determinant, inverse, multiplication) is already meaningful. Adding or subtracting two matrices is done entry by entry: each position in the result is just that position's two entries added or subtracted.",
+          "paragraph2": "Matrix multiplication works differently from ordinary multiplication: each entry of the product A×B is a sum of products — the entry in row i, column j comes from multiplying row i of A against column j of B, term by term, and adding the results. This is also why A×B usually doesn't equal B×A, unlike multiplying ordinary numbers. The determinant, det(A) = a₁₁a₂₂ − a₁₂a₂₁ for a 2x2 matrix, is a single number that captures how the matrix scales area: a determinant of 0 means the matrix squashes every shape down to a line or a point, with no way to undo that — which is exactly why a matrix with determinant 0 (called singular) has no inverse.",
+          "paragraph3": "When the determinant isn't zero, the inverse A⁻¹ is the unique matrix that undoes A's transformation, satisfying A×A⁻¹ = the identity matrix (1s on the diagonal, 0s elsewhere). For a 2x2 matrix, it's found by swapping the two diagonal entries, negating the two off-diagonal entries, and dividing everything by the determinant. The transpose, formed by flipping the matrix across its diagonal (rows become columns), is a much simpler operation that's always defined, regardless of the determinant."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Representative matrix operations, computed by this calculator.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "Determinant of [1 2; 3 4]", "result": "det(A) = −2" },
+            { "calculation": "Product of [1 2; 3 4] and [5 6; 7 8]", "result": "A×B = [19 22; 43 50]" },
+            { "calculation": "Inverse of [4 7; 2 6]", "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]" },
+            { "calculation": "Transpose of [1 2; 3 4]", "result": "Aᵀ = [1 3; 2 4]" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why doesn't A×B equal B×A in matrix multiplication?", "answer": "Because matrix multiplication combines entire rows of one matrix with entire columns of the other, the two orderings genuinely compute different sums — there's no reason for row-times-column in one order to match row-times-column in the other. This makes matrix multiplication non-commutative, unlike multiplying ordinary numbers, and it's one of the first surprising properties students encounter when learning matrix algebra." },
+            { "question": "Why does a matrix with a zero determinant have no inverse?", "answer": "The determinant measures how much a matrix scales area (in 2D) or volume (in higher dimensions). A determinant of 0 means the matrix collapses every input onto a lower-dimensional line or point — multiple different inputs get mapped to the same output — so there's no way to reverse that collapse and recover the original input uniquely. A matrix like this is called singular, and the inverse formula would require dividing by that zero determinant, which is undefined." },
+            { "question": "What's the difference between the transpose and the inverse?", "answer": "The transpose is purely a rearrangement — it flips the matrix across its diagonal, swapping rows and columns — and it's always defined for any matrix, with no calculation beyond repositioning entries. The inverse, by contrast, is the matrix that reverses A's transformation entirely (A×A⁻¹ = identity), requires dividing by the determinant, and simply doesn't exist when that determinant is zero." },
+            { "question": "Can this calculator handle matrices larger than 2x2?", "answer": "Not currently — it's built specifically for 2x2 matrices, which keeps every formula (determinant, inverse, product) a short, exact expression. Larger matrices use the same underlying concepts, but computing a determinant or inverse for a 3x3 or larger matrix requires substantially more involved methods (cofactor expansion, row reduction, or numerical algorithms)." },
+            { "question": "Why is matrix addition so much simpler than matrix multiplication?", "answer": "Addition combines two matrices the same way you'd add two ordinary grids of numbers — position by position, with no interaction between different rows or columns. Multiplication, by design, is meant to represent composing two transformations (applying one after another), and that composition inherently mixes each row of one matrix with each column of the other, which is why it needs the more involved row-times-column calculation." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Name Coined Before the Theory Existed",
+            "paragraph": "The word \"matrix\" entered mathematics in 1850, coined by English mathematician James Joseph Sylvester — but at that point it was just a name for a rectangular array of numbers used to generate determinants, not yet an object with its own algebra. That changed eight years later when Arthur Cayley, a close collaborator of Sylvester's, published \"A Memoir on the Theory of Matrices\" (1858), the paper generally credited with founding matrix theory as a subject in its own right. Cayley's memoir introduced matrix addition, multiplication, the identity matrix, and the inverse matrix, and proved what's now called the Cayley–Hamilton theorem — all essentially in the single paper that turned Sylvester's naming exercise into a genuine branch of algebra."
+          },
+          "modernDevelopments": {
+            "title": "The Twenty-Five-Billion-Dollar Eigenvector",
+            "paragraph": "One of the most consequential modern applications of matrix algebra had nothing to do with physics or engineering: in 1998, Stanford graduate students Larry Page and Sergey Brin built Google's original PageRank algorithm on a matrix eigenvector calculation. Their model represented the entire linked structure of the web as one enormous matrix, where ranking a page's importance came down to finding that matrix's principal eigenvector — the same core operation (matrices acting on vectors) that Cayley formalized in 1858, applied at a scale of billions of web pages instead of the small hand-worked examples of 19th-century algebra."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Matrices are a foundational tool across mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional program:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — MIT admits PhD students for on-campus study only, with no master's or online track." },
+              { "name": "Harvard University", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the program is an in-residence research PhD administered through the Griffin Graduate School of Arts and Sciences." },
+              { "name": "University of Oxford", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree, typically completed in three to four years." },
+              { "name": "University of Cambridge", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "No — the PhD is a three-year, in-residence research program run by the Faculty of Mathematics." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus." },
+              { "name": "Khalifa University — PhD in Mathematics", "note": "A dedicated Mathematics doctoral program among Arab region universities, housed in the College of Computing and Mathematical Sciences; not separately ranked on this global subject table.", "url": "https://www.ku.ac.ae/program/phd-in-mathematics", "online": "No — the 60-credit-hour program is delivered on Khalifa University's campus in Abu Dhabi." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Higham, N. J. (2008). Cayley, Sylvester, and Early Matrix Theory. Linear Algebra and its Applications, 428(1), 39–43.",
+          "note": "Numerical analyst Nicholas J. Higham's paper, written for the 150th anniversary of Cayley's 1858 memoir, traces the roles Cayley and Sylvester each played in founding matrix theory as a distinct mathematical subject.",
+          "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
