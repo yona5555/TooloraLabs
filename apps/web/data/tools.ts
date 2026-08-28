@@ -470,6 +470,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "readability-score-calculator",
+    title: "Readability Score Calculator",
+    category: "text-tools",
+    description:
+      "Calculate the Flesch Reading Ease score and Flesch-Kincaid Grade Level for a passage of English text, with word, sentence, and syllable counts.",
+    featured: false,
+    keywords: [
+      "readability score calculator",
+      "flesch reading ease calculator",
+      "flesch kincaid grade level calculator",
+      "readability test",
+      "reading level calculator",
+      "text complexity calculator",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

@@ -6290,6 +6290,112 @@
         }
       }
     },
+    "readability-score-calculator": {
+      "title": "Calculadora de Puntuación de Legibilidad",
+      "description": "Calcula la puntuación de Facilidad de Lectura de Flesch y el Nivel de Grado Flesch-Kincaid para un pasaje de texto en inglés, con recuento de palabras, oraciones y sílabas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas de Legibilidad",
+          "intro": "Las dos fórmulas que aplica esta calculadora.",
+          "formulas": {
+            "fleschReadingEase": { "label": "Facilidad de Lectura de Flesch", "expression": "206.835 − 1.015×(palabras/oraciones) − 84.6×(sílabas/palabras)" },
+            "fleschKincaidGrade": { "label": "Nivel de Grado Flesch-Kincaid", "expression": "0.39×(palabras/oraciones) + 11.8×(sílabas/palabras) − 15.59" }
+          },
+          "englishOnlyNote": "Ambas fórmulas están calibradas específicamente para texto en inglés — el conteo de sílabas y la estructura de las oraciones no se traducen de la misma manera a otros idiomas, por lo que los resultados para pasajes que no estén en inglés no serán significativos."
+        }
+      },
+      "form": {
+        "inputTitle": "Texto para Analizar",
+        "inputLabel": "Pega o escribe un pasaje en inglés",
+        "inputPlaceholder": "Pega aquí un párrafo de texto en inglés…",
+        "inputHint": "Funciona mejor con al menos algunas oraciones completas. Esta herramienta analiza únicamente texto en inglés."
+      },
+      "result": {
+        "heading": "Resultado de Legibilidad",
+        "emptyText": "Introduce un texto para analizar.",
+        "noSentences": "Añade al menos una oración que termine en punto, signo de interrogación o de exclamación.",
+        "fleschReadingEase": "Facilidad de Lectura de Flesch",
+        "fleschKincaidGrade": "Nivel de Grado Flesch-Kincaid",
+        "averageWordsPerSentence": "Prom. Palabras / Oración",
+        "averageSyllablesPerWord": "Prom. Sílabas / Palabra",
+        "wordCount": "Número de Palabras",
+        "sentenceCount": "Número de Oraciones",
+        "syllableCount": "Número de Sílabas",
+        "bands": {
+          "very-easy": "Muy Fácil",
+          "easy": "Fácil",
+          "fairly-easy": "Bastante Fácil",
+          "standard": "Estándar",
+          "fairly-difficult": "Bastante Difícil",
+          "difficult": "Difícil",
+          "very-confusing": "Muy Confuso"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Entender las Puntuaciones de Legibilidad",
+          "paragraph1": "Las fórmulas de legibilidad estiman qué tan difícil es leer un texto usando solo dos propiedades medibles: la longitud de la oración (palabras por oración) y la complejidad de las palabras (sílabas por palabra). La fórmula de Facilidad de Lectura de Flesch, 206.835 − 1.015×(palabras/oraciones) − 84.6×(sílabas/palabras), produce una puntuación típicamente entre 0 y 100 — cuanto más alta la puntuación, más fácil la lectura. Una puntuación en los 90 corresponde a un texto que un alumno promedio de quinto grado puede seguir, mientras que una puntuación inferior a 30 sugiere un texto que suelen entender mejor los graduados universitarios.",
+          "paragraph2": "La fórmula del Nivel de Grado Flesch-Kincaid, 0.39×(palabras/oraciones) + 11.8×(sílabas/palabras) − 15.59, reutiliza las mismas dos mediciones subyacentes pero las reescala según el sistema de grados escolares de EE. UU. — una puntuación de 8.0 sugiere que el texto es legible para un alumno promedio de octavo grado. Ambas fórmulas asumen que las oraciones más largas y las palabras más largas (con más sílabas) dificultan el texto de forma independiente, lo cual es una simplificación — la familiaridad con el vocabulario, la estructura de la oración y los conocimientos previos del lector también afectan la comprensión real, pero la longitud de la oración y la palabra son mucho más fáciles de medir automáticamente.",
+          "paragraph3": "Dado que estas fórmulas se construyeron en torno a los patrones silábicos y oracionales del inglés, solo producen resultados significativos para texto en inglés — la interfaz de esta herramienta está disponible en seis idiomas, pero el pasaje que analices debe estar en inglés para que la puntuación tenga sentido."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Tres pasajes que abarcan toda la escala de legibilidad, puntuados por esta calculadora.",
+          "columnCalculation": "Pasaje",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "\"The cat sat on the mat. The dog ran fast.\" (10 palabras, 2 oraciones)", "result": "Facilidad de Lectura de Flesch 117.2 (Muy Fácil) — Nivel de Grado −1.8" },
+            { "calculation": "Un pasaje de 36 palabras con oraciones cortas y palabras comunes (3 oraciones)", "result": "Facilidad de Lectura de Flesch 81.9 (Fácil) — Nivel de Grado 4.8" },
+            { "calculation": "Una sola oración de 22 palabras con vocabulario académico denso", "result": "Facilidad de Lectura de Flesch −92.4 (Muy Confuso) — Nivel de Grado 31.6" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué obtuve una puntuación negativa de Facilidad de Lectura de Flesch?", "answer": "La fórmula no tiene un límite inferior incorporado — oraciones extremadamente largas repletas de palabras de varias sílabas pueden empujar la puntuación por debajo de cero. Una puntuación negativa simplemente significa que el texto es más difícil que la categoría más difícil ya etiquetada en la escala (\"muy confuso\"), que comienza por debajo de 30." },
+            { "question": "¿Puede esta herramienta puntuar texto en español, árabe u otros idiomas?", "answer": "No de forma significativa. Ambas fórmulas se construyeron a partir de estudios sobre texto en inglés y dependen de una heurística de conteo de sílabas específica del inglés, por lo que ejecutar texto que no esté en inglés a través de ellas produce un número, pero no un número que refleje la dificultad de lectura real en ese idioma. Existen fórmulas de legibilidad dedicadas para algunos otros idiomas, pero esta herramienta no las implementa." },
+            { "question": "¿Por qué a veces parecen contradecirse la Facilidad de Lectura de Flesch y el Nivel de Grado Flesch-Kincaid?", "answer": "Ambas se construyen a partir de las mismas dos mediciones (palabras por oración, sílabas por palabra) pero con escalas diferentes — una en una escala de facilidad de 0 a 100 donde más alto es más fácil, la otra en la escala de grado escolar de EE. UU. donde más alto es más difícil. Deben moverse siempre en direcciones opuestas; si un pasaje puntúa como \"fácil\" en una y con un nivel de grado alto en la otra, comprueba que el texto tenga suficientes oraciones completas para un recuento de oraciones preciso." },
+            { "question": "¿Una puntuación de grado baja significa que la redacción es mala?", "answer": "No — el nivel de grado mide la accesibilidad, no la calidad. Muchas guías de estilo reconocidas para redacción técnica, comunicación gubernamental y periodismo recomiendan específicamente oraciones más cortas y palabras más sencillas para mantener bajo el nivel de grado, porque eso hace que el texto sea más fácil de entender rápidamente para más lectores, independientemente de la habilidad del autor o de la sofisticación del tema." },
+            { "question": "¿Cómo funciona el contador de sílabas, y es totalmente preciso?", "answer": "Cuenta grupos de letras vocálicas adyacentes como sílabas, con un ajuste para la \"e\" muda final (como en \"make\") y las terminaciones silábicas en \"-le\" (como en \"simple\"). Este enfoque basado en grupos de vocales es el mismo que usan la investigación original de Flesch y Kincaid y la mayoría de las herramientas de legibilidad, pero no es un análisis fonético completo, por lo que las palabras poco comunes o de origen extranjero pueden a veces variar en una sílaba." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Una Fórmula Nacida del Movimiento del Inglés Sencillo",
+            "paragraph": "Rudolf Flesch, un consultor de escritura nacido en Austria con un título en derecho y un doctorado en inglés de la Universidad de Columbia, publicó la fórmula de Facilidad de Lectura de Flesch en su artículo de 1948 \"A New Readability Yardstick\" (\"Una nueva vara de medir la legibilidad\") en el Journal of Applied Psychology. Flesch fue durante mucho tiempo defensor de una escritura clara y directa, y diseñó la fórmula específicamente para que editores y escritores — no solo investigadores — pudieran obtener una estimación de legibilidad rápida y repetible usando solo un conteo de palabras, oraciones y sílabas, sin necesitar formación especializada en lingüística."
+          },
+          "modernDevelopments": {
+            "title": "De las Redacciones a los Manuales de la Marina y a la Ley",
+            "paragraph": "En 1975, el psicólogo J. Peter Kincaid y sus colegas, bajo un contrato con la Marina de EE. UU., recalcularon la fórmula de Flesch a partir de pruebas de lectura realizadas por 531 miembros del personal alistado de la Marina en escuelas de entrenamiento en Memphis y Great Lakes, derivando la fórmula del Nivel de Grado Flesch-Kincaid para que la Marina pudiera ajustar los manuales técnicos al nivel de lectura real de los marineros. Las fórmulas de legibilidad pasaron después del uso militar y periodístico a la ley: varias jurisdicciones de EE. UU. ahora exigen legalmente que ciertos documentos alcancen una puntuación mínima de Facilidad de Lectura de Flesch — Nueva York y Florida, por ejemplo, establecen un mínimo de 45 para la mayoría de las pólizas de seguro, para que los consumidores no tengan que firmar una cobertura que razonablemente no se espera que puedan leer."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La legibilidad se encuentra en la intersección de la lingüística y la educación lingüística. Aquí están las 5 mejores del mundo en Lingüística según el QS World University Rankings by Subject 2025, además de un destacado departamento regional:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificada #1 mundialmente en Lingüística (QS World University Rankings by Subject 2025).", "url": "https://linguistics.mit.edu/graduate/", "online": "No — el programa es de investigación a tiempo completo y presencial, sin ninguna modalidad en línea anunciada." },
+              { "name": "Universidad de Pekín", "note": "Clasificada #2 mundialmente en Lingüística (QS World University Rankings by Subject 2025).", "url": "https://isd.pku.edu.cn/en/graduate_program.php", "online": "No — las admisiones de posgrado internacionales se gestionan a través de la División de Estudiantes Internacionales de la Universidad de Pekín, sin ninguna opción de estudio a distancia anunciada para los grados de investigación." },
+              { "name": "Lancaster University", "note": "Clasificada #3 mundialmente en Lingüística (QS World University Rankings by Subject 2025), sede del departamento de lingüística más grande del Reino Unido.", "url": "https://www.lancaster.ac.uk/linguistics/phd/", "online": "Parcialmente — los módulos obligatorios de metodología de investigación del primer año se imparten a distancia, pero el doctorado es, por lo demás, un programa de investigación que exige residencia." },
+              { "name": "University of Cambridge", "note": "Clasificada #4 mundialmente en Lingüística (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng", "online": "No — el doctorado en Lingüística Teórica y Aplicada es un programa de investigación presencial dentro del departamento." },
+              { "name": "University of Oxford", "note": "Clasificada #5 mundialmente en Lingüística (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics", "online": "No — el DPhil de Oxford exige un período mínimo de residencia de investigación en Oxford." },
+              { "name": "Universidad de Catar — Departamento de Literatura Inglesa y Lingüística", "note": "Organiza la conferencia periódica \"Linguistics in the Gulf\"; no aparece clasificada por separado en esta tabla global de la materia, pero es el departamento dedicado a inglés y lingüística más destacado entre las universidades de la región árabe.", "url": "http://www.qu.edu.qa/artssciences/departments/dell-home", "online": "No — los programas del departamento se imparten en el campus de la Universidad de Catar." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Flesch, R. (1948). A new readability yardstick. Journal of Applied Psychology, 32(3), 221–233.",
+          "note": "El artículo original de Flesch expone la derivación de la fórmula de Facilidad de Lectura a partir de pruebas de comprensión lectora, estableciendo el enfoque de longitud de palabra y oración sobre el que se construyeron después otras fórmulas de legibilidad, incluida Flesch-Kincaid.",
+          "url": "https://doi.org/10.1037/h0057532",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

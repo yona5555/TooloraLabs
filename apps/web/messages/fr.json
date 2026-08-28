@@ -6314,6 +6314,112 @@
         }
       }
     },
+    "readability-score-calculator": {
+      "title": "Calculateur de Score de Lisibilité",
+      "description": "Calculez le score de Facilité de Lecture de Flesch et le Niveau Scolaire Flesch-Kincaid pour un passage de texte en anglais, avec le nombre de mots, de phrases et de syllabes.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules de Lisibilité",
+          "intro": "Les deux formules appliquées par ce calculateur.",
+          "formulas": {
+            "fleschReadingEase": { "label": "Facilité de Lecture de Flesch", "expression": "206.835 − 1.015×(mots/phrases) − 84.6×(syllabes/mots)" },
+            "fleschKincaidGrade": { "label": "Niveau Scolaire Flesch-Kincaid", "expression": "0.39×(mots/phrases) + 11.8×(syllabes/mots) − 15.59" }
+          },
+          "englishOnlyNote": "Les deux formules sont calibrées spécifiquement pour le texte anglais — le comptage des syllabes et la structure des phrases ne se transposent pas de la même façon dans d'autres langues, donc les résultats pour un texte non anglais ne seront pas significatifs."
+        }
+      },
+      "form": {
+        "inputTitle": "Texte à Analyser",
+        "inputLabel": "Collez ou saisissez un passage en anglais",
+        "inputPlaceholder": "Collez ici un paragraphe de texte en anglais…",
+        "inputHint": "Fonctionne mieux avec au moins quelques phrases complètes. Cet outil n'analyse que du texte en anglais."
+      },
+      "result": {
+        "heading": "Résultat de Lisibilité",
+        "emptyText": "Saisissez un texte à analyser.",
+        "noSentences": "Ajoutez au moins une phrase se terminant par un point, un point d'interrogation ou d'exclamation.",
+        "fleschReadingEase": "Facilité de Lecture de Flesch",
+        "fleschKincaidGrade": "Niveau Scolaire Flesch-Kincaid",
+        "averageWordsPerSentence": "Moy. Mots / Phrase",
+        "averageSyllablesPerWord": "Moy. Syllabes / Mot",
+        "wordCount": "Nombre de Mots",
+        "sentenceCount": "Nombre de Phrases",
+        "syllableCount": "Nombre de Syllabes",
+        "bands": {
+          "very-easy": "Très Facile",
+          "easy": "Facile",
+          "fairly-easy": "Assez Facile",
+          "standard": "Standard",
+          "fairly-difficult": "Assez Difficile",
+          "difficult": "Difficile",
+          "very-confusing": "Très Confus"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Scores de Lisibilité",
+          "paragraph1": "Les formules de lisibilité estiment la difficulté de lecture d'un texte à partir de seulement deux propriétés mesurables : la longueur des phrases (mots par phrase) et la complexité des mots (syllabes par mot). La formule de Facilité de Lecture de Flesch, 206.835 − 1.015×(mots/phrases) − 84.6×(syllabes/mots), produit un score généralement compris entre 0 et 100 — plus le score est élevé, plus la lecture est facile. Un score dans les 90 correspond à un texte qu'un élève moyen de CM2 peut suivre, tandis qu'un score inférieur à 30 suggère un texte plutôt compris par des diplômés universitaires.",
+          "paragraph2": "La formule du Niveau Scolaire Flesch-Kincaid, 0.39×(mots/phrases) + 11.8×(syllabes/mots) − 15.59, réutilise les deux mêmes mesures sous-jacentes mais les recalibre sur l'échelle des niveaux scolaires américains — un score de 8,0 suggère que le texte est lisible par un élève moyen de troisième (8th grade). Les deux formules supposent que des phrases plus longues et des mots plus longs (avec plus de syllabes) rendent chacun, indépendamment, le texte plus difficile, ce qui est une simplification — la familiarité avec le vocabulaire, la structure des phrases et les connaissances préalables du lecteur influencent aussi la compréhension réelle, mais la longueur des phrases et des mots est bien plus facile à mesurer automatiquement.",
+          "paragraph3": "Comme ces formules ont été conçues autour des schémas syllabiques et phrastiques de l'anglais, elles ne produisent des résultats significatifs que pour du texte anglais — l'interface de cet outil est elle-même disponible en six langues, mais le passage que vous analysez doit être en anglais pour que le score ait un sens."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Trois passages couvrant toute l'échelle de lisibilité, notés par ce calculateur.",
+          "columnCalculation": "Passage",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "« The cat sat on the mat. The dog ran fast. » (10 mots, 2 phrases)", "result": "Facilité de Lecture de Flesch 117,2 (Très Facile) — Niveau Scolaire −1,8" },
+            { "calculation": "Un passage de 36 mots aux phrases courtes et mots courants (3 phrases)", "result": "Facilité de Lecture de Flesch 81,9 (Facile) — Niveau Scolaire 4,8" },
+            { "calculation": "Une seule phrase de 22 mots au vocabulaire académique dense", "result": "Facilité de Lecture de Flesch −92,4 (Très Confus) — Niveau Scolaire 31,6" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi ai-je obtenu un score de Facilité de Lecture de Flesch négatif ?", "answer": "La formule n'a pas de plancher intégré — des phrases extrêmement longues truffées de mots à plusieurs syllabes peuvent faire passer le score sous zéro. Un score négatif signifie simplement que le texte est plus difficile que la catégorie déjà la plus difficile de l'échelle (« très confus »), qui commence en dessous de 30." },
+            { "question": "Cet outil peut-il évaluer un texte en français, en arabe ou dans d'autres langues ?", "answer": "Pas de manière significative. Les deux formules ont été construites à partir d'études sur du texte anglais et reposent sur une heuristique de comptage de syllabes spécifique à l'anglais ; faire passer du texte non anglais dans ces formules produit donc un nombre, mais pas un nombre qui reflète la difficulté de lecture réelle dans cette langue. Des formules de lisibilité dédiées existent pour certaines autres langues, mais cet outil ne les met pas en œuvre." },
+            { "question": "Pourquoi la Facilité de Lecture de Flesch et le Niveau Scolaire Flesch-Kincaid semblent-ils parfois se contredire ?", "answer": "Elles reposent sur les deux mêmes mesures (mots par phrase, syllabes par mot) mais sont mises à l'échelle différemment — l'une sur une échelle de facilité de 0 à 100 où plus haut signifie plus facile, l'autre sur l'échelle des niveaux scolaires américains où plus haut signifie plus difficile. Elles devraient toujours évoluer dans des directions opposées ; si un passage semble « facile » sur l'une et affiche un niveau scolaire élevé sur l'autre, vérifiez que le texte contient assez de phrases complètes pour un comptage de phrases précis." },
+            { "question": "Un score de niveau scolaire bas signifie-t-il que l'écriture est mauvaise ?", "answer": "Non — le niveau scolaire mesure l'accessibilité, pas la qualité. De nombreux guides de style reconnus pour la rédaction technique, la communication gouvernementale et le journalisme recommandent spécifiquement des phrases plus courtes et des mots plus simples pour maintenir un niveau scolaire bas, car cela rend le texte plus rapidement compréhensible pour davantage de lecteurs, indépendamment du talent de l'auteur ou de la sophistication du sujet." },
+            { "question": "Comment fonctionne le compteur de syllabes, et est-il parfaitement précis ?", "answer": "Il compte les groupes de lettres voyelles adjacentes comme des syllabes, avec un ajustement pour le « e » final muet (comme dans « make ») et les terminaisons syllabiques en « -le » (comme dans « simple »). Cette approche fondée sur les groupes de voyelles est la même que celle utilisée dans les recherches originales de Flesch et Kincaid et dans la plupart des outils de lisibilité, mais ce n'est pas une analyse phonétique complète, donc les mots inhabituels ou d'origine étrangère peuvent occasionnellement être décomptés à une syllabe près." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Une Formule Née du Mouvement du Plain English",
+            "paragraph": "Rudolf Flesch, consultant en écriture né en Autriche, titulaire d'un diplôme de droit et d'un doctorat en anglais de l'Université Columbia, a publié la formule de Facilité de Lecture de Flesch dans son article de 1948, « A New Readability Yardstick » (« Un nouvel étalon de lisibilité »), dans le Journal of Applied Psychology. Flesch défendait de longue date une écriture claire et directe, et il a conçu la formule spécifiquement pour que les rédacteurs et les écrivains — pas seulement les chercheurs — puissent obtenir une estimation rapide et reproductible de la lisibilité à partir d'un simple comptage de mots, de phrases et de syllabes, sans nécessiter de formation spécialisée en linguistique."
+          },
+          "modernDevelopments": {
+            "title": "Des Salles de Rédaction aux Manuels de la Marine, Jusqu'à la Loi",
+            "paragraph": "En 1975, le psychologue J. Peter Kincaid et ses collègues, dans le cadre d'un contrat avec la Marine américaine, ont recalculé la formule de Flesch à partir de tests de lecture passés par 531 militaires du rang de la Marine dans des écoles de formation à Memphis et Great Lakes, pour en dériver la formule du Niveau Scolaire Flesch-Kincaid, afin que la Marine puisse adapter ses manuels techniques au niveau de lecture réel des marins. Les formules de lisibilité sont ensuite passées de l'usage militaire et journalistique au droit : plusieurs États américains exigent désormais légalement que certains documents atteignent un score minimal de Facilité de Lecture de Flesch — New York et la Floride, par exemple, fixent chacun un minimum de 45 pour la plupart des polices d'assurance, afin que les consommateurs ne soient pas amenés à signer une couverture qu'on ne peut raisonnablement pas attendre d'eux qu'ils sachent lire."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La lisibilité se situe à la croisée de la linguistique et de l'enseignement des langues. Voici les 5 meilleures universités au monde en Linguistique selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional de premier plan :",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://linguistics.mit.edu/graduate/", "online": "Non — le programme est un programme de recherche à temps plein et en présentiel, sans filière en ligne annoncée." },
+              { "name": "Université de Pékin", "note": "Classée #2 mondiale en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://isd.pku.edu.cn/en/graduate_program.php", "online": "Non — les admissions en cycle supérieur pour étudiants internationaux sont gérées par la Division des étudiants internationaux de l'Université de Pékin, sans option d'études à distance annoncée pour les diplômes de recherche." },
+              { "name": "Lancaster University", "note": "Classée #3 mondiale en Linguistique (QS World University Rankings by Subject 2025), siège du plus grand département de linguistique du Royaume-Uni.", "url": "https://www.lancaster.ac.uk/linguistics/phd/", "online": "Partiellement — les modules obligatoires de méthodologie de recherche de première année sont enseignés à distance, mais le doctorat est par ailleurs un programme de recherche exigeant une résidence." },
+              { "name": "University of Cambridge", "note": "Classée #4 mondiale en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng", "online": "Non — le doctorat en Linguistique Théorique et Appliquée est un programme de recherche en présentiel au sein du département." },
+              { "name": "University of Oxford", "note": "Classée #5 mondiale en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics", "online": "Non — le DPhil d'Oxford exige une période minimale de résidence de recherche à Oxford." },
+              { "name": "Université du Qatar — Département de Littérature Anglaise et de Linguistique", "note": "Organise la conférence récurrente « Linguistics in the Gulf » ; non classé séparément dans ce tableau mondial par discipline, mais le département dédié à l'anglais et à la linguistique le plus en vue parmi les universités de la région arabe.", "url": "http://www.qu.edu.qa/artssciences/departments/dell-home", "online": "Non — les programmes du département sont dispensés sur le campus de l'Université du Qatar." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Flesch, R. (1948). A new readability yardstick. Journal of Applied Psychology, 32(3), 221–233.",
+          "note": "L'article original de Flesch expose la dérivation de la formule de Facilité de Lecture à partir de tests de compréhension de lecteurs, établissant l'approche fondée sur la longueur des mots et des phrases sur laquelle se sont ensuite appuyées d'autres formules de lisibilité, dont Flesch-Kincaid.",
+          "url": "https://doi.org/10.1037/h0057532",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

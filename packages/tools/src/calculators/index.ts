@@ -35,3 +35,4 @@ export * from "./EnergyWorkPowerCalculator";
 export * from "./KinematicsCalculator";
 export * from "./ForceCalculator";
 export * from "./ProjectileMotionCalculator";
+export * from "./ReadabilityScoreCalculator";

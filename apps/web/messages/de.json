@@ -6314,6 +6314,112 @@
         }
       }
     },
+    "readability-score-calculator": {
+      "title": "Lesbarkeits-Score-Rechner",
+      "description": "Berechnen Sie den Flesch Reading Ease Score und den Flesch-Kincaid Grade Level für einen englischsprachigen Textabschnitt, mit Wort-, Satz- und Silbenzahl.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Lesbarkeitsformeln",
+          "intro": "Die beiden Formeln, die dieser Rechner anwendet.",
+          "formulas": {
+            "fleschReadingEase": { "label": "Flesch Reading Ease", "expression": "206.835 − 1.015×(Wörter/Sätze) − 84.6×(Silben/Wörter)" },
+            "fleschKincaidGrade": { "label": "Flesch-Kincaid Grade Level", "expression": "0.39×(Wörter/Sätze) + 11.8×(Silben/Wörter) − 15.59" }
+          },
+          "englishOnlyNote": "Beide Formeln sind speziell auf englischen Text kalibriert — Silbenzählung und Satzstruktur lassen sich nicht auf dieselbe Weise auf andere Sprachen übertragen, daher sind die Ergebnisse für nicht-englische Texte nicht aussagekräftig."
+        }
+      },
+      "form": {
+        "inputTitle": "Zu analysierender Text",
+        "inputLabel": "Fügen Sie einen englischsprachigen Textabschnitt ein oder tippen Sie ihn",
+        "inputPlaceholder": "Fügen Sie hier einen Absatz englischen Textes ein…",
+        "inputHint": "Funktioniert am besten mit mindestens ein paar vollständigen Sätzen. Dieses Tool analysiert ausschließlich englischen Text."
+      },
+      "result": {
+        "heading": "Lesbarkeitsergebnis",
+        "emptyText": "Geben Sie Text zur Analyse ein.",
+        "noSentences": "Fügen Sie mindestens einen Satz hinzu, der mit einem Punkt, Frage- oder Ausrufezeichen endet.",
+        "fleschReadingEase": "Flesch Reading Ease",
+        "fleschKincaidGrade": "Flesch-Kincaid Grade Level",
+        "averageWordsPerSentence": "Ø Wörter / Satz",
+        "averageSyllablesPerWord": "Ø Silben / Wort",
+        "wordCount": "Wortanzahl",
+        "sentenceCount": "Satzanzahl",
+        "syllableCount": "Silbenanzahl",
+        "bands": {
+          "very-easy": "Sehr leicht",
+          "easy": "Leicht",
+          "fairly-easy": "Ziemlich leicht",
+          "standard": "Standard",
+          "fairly-difficult": "Ziemlich schwierig",
+          "difficult": "Schwierig",
+          "very-confusing": "Sehr verwirrend"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Lesbarkeits-Scores verstehen",
+          "paragraph1": "Lesbarkeitsformeln schätzen, wie schwierig ein Text zu lesen ist, anhand nur zweier messbarer Eigenschaften: Satzlänge (Wörter pro Satz) und Wortkomplexität (Silben pro Wort). Die Flesch-Reading-Ease-Formel, 206.835 − 1.015×(Wörter/Sätze) − 84.6×(Silben/Wörter), ergibt einen Wert typischerweise zwischen 0 und 100 — je höher der Wert, desto leichter die Lektüre. Ein Wert im 90er-Bereich entspricht einem Text, dem ein durchschnittlicher Fünftklässler folgen kann, während ein Wert unter 30 auf einen Text hindeutet, der am ehesten von Hochschulabsolventen verstanden wird.",
+          "paragraph2": "Die Flesch-Kincaid-Grade-Level-Formel, 0.39×(Wörter/Sätze) + 11.8×(Silben/Wörter) − 15.59, verwendet dieselben beiden zugrunde liegenden Messgrößen, skaliert sie aber stattdessen auf die US-amerikanische Klassenstufen-Skala — ein Wert von 8,0 legt nahe, dass der Text für einen durchschnittlichen Achtklässler lesbar ist. Beide Formeln gehen davon aus, dass längere Sätze und längere (silbenreichere) Wörter jeweils unabhängig voneinander einen Text schwerer verständlich machen, was eine Vereinfachung ist — auch Wortschatzvertrautheit, Satzstruktur und Vorwissen des Lesers beeinflussen das tatsächliche Verständnis, aber Satz- und Wortlänge lassen sich weitaus leichter automatisch messen.",
+          "paragraph3": "Da beide Formeln um englische Silben- und Satzmuster herum entwickelt wurden, liefern sie nur für englischen Text aussagekräftige Ergebnisse — die Oberfläche dieses Tools selbst ist in sechs Sprachen verfügbar, doch der zu analysierende Text sollte auf Englisch sein, damit der Wert eine Bedeutung hat."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Drei Textabschnitte über die gesamte Lesbarkeitsskala, bewertet von diesem Rechner.",
+          "columnCalculation": "Textabschnitt",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "„The cat sat on the mat. The dog ran fast.“ (10 Wörter, 2 Sätze)", "result": "Flesch Reading Ease 117,2 (Sehr leicht) — Klassenstufe −1,8" },
+            { "calculation": "Ein 36-Wörter-Abschnitt aus kurzen Sätzen und geläufigen Wörtern (3 Sätze)", "result": "Flesch Reading Ease 81,9 (Leicht) — Klassenstufe 4,8" },
+            { "calculation": "Ein einzelner 22-Wörter-Satz mit dichtem akademischem Vokabular", "result": "Flesch Reading Ease −92,4 (Sehr verwirrend) — Klassenstufe 31,6" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum habe ich einen negativen Flesch-Reading-Ease-Wert erhalten?", "answer": "Die Formel hat keine eingebaute Untergrenze — extrem lange, mit mehrsilbigen Wörtern vollgepackte Sätze können den Wert unter null drücken. Ein negativer Wert bedeutet lediglich, dass der Text schwieriger ist als die bereits schwierigste benannte Stufe der Skala („sehr verwirrend“), die unter 30 beginnt." },
+            { "question": "Kann dieses Tool Text auf Deutsch, Spanisch oder in anderen Sprachen bewerten?", "answer": "Nicht sinnvoll. Beide Formeln wurden aus Studien an englischem Text entwickelt und beruhen auf einer englischspezifischen Silbenzähl-Heuristik. Nicht-englischer Text ergibt zwar eine Zahl, aber keine, die die tatsächliche Leseschwierigkeit in dieser Sprache widerspiegelt. Für einige andere Sprachen gibt es eigene Lesbarkeitsformeln, die dieses Tool jedoch nicht implementiert." },
+            { "question": "Warum scheinen sich Flesch Reading Ease und Flesch-Kincaid Grade Level manchmal zu widersprechen?", "answer": "Beide beruhen auf denselben zwei Messgrößen (Wörter pro Satz, Silben pro Wort), sind aber unterschiedlich skaliert — die eine auf einer 0–100-Leichtigkeitsskala, bei der höher leichter bedeutet, die andere auf der US-Klassenstufen-Skala, bei der höher schwieriger bedeutet. Sie sollten sich stets in entgegengesetzte Richtungen bewegen; wirkt ein Text bei der einen „leicht“ und weist gleichzeitig eine hohe Klassenstufe auf, prüfen Sie, ob der Text genügend vollständige Sätze für eine korrekte Satzzählung enthält." },
+            { "question": "Bedeutet eine niedrige Klassenstufe, dass der Text schlecht geschrieben ist?", "answer": "Nein — die Klassenstufe misst Zugänglichkeit, nicht Qualität. Viele angesehene Stilrichtlinien für technisches Schreiben, behördliche Kommunikation und Journalismus empfehlen ausdrücklich kürzere Sätze und einfachere Wörter, um die Klassenstufe niedrig zu halten, weil das den Text für mehr Leser schneller verständlich macht — unabhängig vom Können des Autors oder der Komplexität des Themas." },
+            { "question": "Wie funktioniert der Silbenzähler, und ist er völlig genau?", "answer": "Er zählt Gruppen benachbarter Vokalbuchstaben als Silben, mit einer Anpassung für ein stummes End-„e“ (wie in „make“) und silbische „-le“-Endungen (wie in „simple“). Dieser auf Vokalgruppen basierende Ansatz ist derselbe, der in Fleschs und Kincaids Originalforschung sowie in den meisten Lesbarkeitstools verwendet wird — es handelt sich jedoch nicht um eine vollständige phonetische Analyse, weshalb ungewöhnliche oder fremdsprachlich abgeleitete Wörter gelegentlich um eine Silbe daneben liegen können." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Eine Formel aus der Plain-English-Bewegung",
+            "paragraph": "Rudolf Flesch, ein in Österreich geborener Schreibberater mit einem Jurastudium und einem Doktortitel in Englisch von der Columbia University, veröffentlichte die Flesch-Reading-Ease-Formel 1948 in seinem Aufsatz „A New Readability Yardstick“ im Journal of Applied Psychology. Flesch war ein langjähriger Verfechter klarer, direkter Sprache und entwickelte die Formel gezielt so, dass nicht nur Forscher, sondern auch Redakteure und Autoren mithilfe von nichts als einer Wort-, Satz- und Silbenzählung eine schnelle, wiederholbare Lesbarkeitsschätzung erhalten konnten — ganz ohne spezielle linguistische Ausbildung."
+          },
+          "modernDevelopments": {
+            "title": "Von der Redaktion über Marinehandbücher bis ins Gesetz",
+            "paragraph": "1975 berechnete der Psychologe J. Peter Kincaid mit Kollegen im Auftrag der US-Marine Fleschs Formel anhand von Lesetests neu, die 531 Marinesoldaten an Ausbildungsschulen in Memphis und Great Lakes absolviert hatten, und leitete daraus die Flesch-Kincaid-Grade-Level-Formel ab, damit die Marine technische Handbücher an das tatsächliche Leseniveau der Matrosen anpassen konnte. Lesbarkeitsformeln wanderten später vom militärischen und journalistischen Einsatz ins Gesetz: Mehrere US-Bundesstaaten schreiben inzwischen gesetzlich vor, dass bestimmte Dokumente einen Mindest-Flesch-Reading-Ease-Wert erreichen müssen — New York und Florida etwa setzen für die meisten Versicherungspolicen einen Mindestwert von 45 fest, damit Verbraucher keinen Versicherungsschutz unterschreiben müssen, den sie vernünftigerweise nicht lesen können."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Lesbarkeit liegt an der Schnittstelle von Linguistik und Sprachbildung. Hier sind die weltweit besten 5 im Fach Linguistik im QS World University Rankings by Subject 2025, plus eine führende regionale Abteilung:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 1 in Linguistik (QS World University Rankings by Subject 2025).", "url": "https://linguistics.mit.edu/graduate/", "online": "Nein — das Programm ist ein Vollzeit-Präsenzforschungsprogramm ohne beworbenen Online-Studiengang." },
+              { "name": "Peking University", "note": "Weltweit auf Platz 2 in Linguistik (QS World University Rankings by Subject 2025).", "url": "https://isd.pku.edu.cn/en/graduate_program.php", "online": "Nein — internationale Zulassungen zum Aufbaustudium laufen über die International Students Division der Peking University; für Forschungsabschlüsse wird keine Fernstudienoption beworben." },
+              { "name": "Lancaster University", "note": "Weltweit auf Platz 3 in Linguistik (QS World University Rankings by Subject 2025), Sitz der größten Linguistikabteilung des Vereinigten Königreichs.", "url": "https://www.lancaster.ac.uk/linguistics/phd/", "online": "Teilweise — die verpflichtenden Methodenmodule des ersten Jahres werden im Fernstudium unterrichtet, ansonsten handelt es sich um ein präsenzpflichtiges Forschungsprogramm." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 4 in Linguistik (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng", "online": "Nein — der PhD in Theoretical and Applied Linguistics ist ein Präsenzforschungsprogramm innerhalb der Abteilung." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 5 in Linguistik (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics", "online": "Nein — der DPhil in Oxford erfordert eine Mindestaufenthaltsdauer zu Forschungszwecken in Oxford." },
+              { "name": "Universität Katar — Fachbereich für englische Literatur und Linguistik", "note": "Veranstaltet die wiederkehrende Konferenz „Linguistics in the Gulf“; in dieser globalen Fachtabelle nicht gesondert gelistet, aber die führende eigenständige Englisch- und Linguistikabteilung unter den Universitäten der arabischen Region.", "url": "http://www.qu.edu.qa/artssciences/departments/dell-home", "online": "Nein — die Programme der Abteilung finden auf dem Campus der Universität Katar statt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Flesch, R. (1948). A new readability yardstick. Journal of Applied Psychology, 32(3), 221–233.",
+          "note": "Fleschs Originalarbeit legt die Herleitung der Reading-Ease-Formel aus Verständnistests von Lesern dar und begründet den Wort- und Satzlängenansatz, auf dem spätere Lesbarkeitsformeln, einschließlich Flesch-Kincaid, aufbauten.",
+          "url": "https://doi.org/10.1037/h0057532",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

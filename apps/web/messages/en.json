@@ -6310,6 +6310,112 @@
         }
       }
     },
+    "readability-score-calculator": {
+      "title": "Readability Score Calculator",
+      "description": "Calculate the Flesch Reading Ease score and Flesch-Kincaid Grade Level for a passage of English text, with word, sentence, and syllable counts.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Readability Formulas",
+          "intro": "The two formulas this calculator applies.",
+          "formulas": {
+            "fleschReadingEase": { "label": "Flesch Reading Ease", "expression": "206.835 − 1.015(words/sentences) − 84.6(syllables/words)" },
+            "fleschKincaidGrade": { "label": "Flesch-Kincaid Grade Level", "expression": "0.39(words/sentences) + 11.8(syllables/words) − 15.59" }
+          },
+          "englishOnlyNote": "Both formulas are calibrated for English text — syllable counting and sentence structure don't translate the same way to other languages, so scores for non-English passages won't be meaningful."
+        }
+      },
+      "form": {
+        "inputTitle": "Text to Analyze",
+        "inputLabel": "Paste or type an English passage",
+        "inputPlaceholder": "Paste a paragraph of English text here…",
+        "inputHint": "Works best with at least a few complete sentences. This tool analyzes English text only."
+      },
+      "result": {
+        "heading": "Readability Result",
+        "emptyText": "Enter some text to analyze.",
+        "noSentences": "Add at least one sentence ending in a period, question mark, or exclamation point.",
+        "fleschReadingEase": "Flesch Reading Ease",
+        "fleschKincaidGrade": "Flesch-Kincaid Grade Level",
+        "averageWordsPerSentence": "Avg. Words / Sentence",
+        "averageSyllablesPerWord": "Avg. Syllables / Word",
+        "wordCount": "Word Count",
+        "sentenceCount": "Sentence Count",
+        "syllableCount": "Syllable Count",
+        "bands": {
+          "very-easy": "Very Easy",
+          "easy": "Easy",
+          "fairly-easy": "Fairly Easy",
+          "standard": "Standard",
+          "fairly-difficult": "Fairly Difficult",
+          "difficult": "Difficult",
+          "very-confusing": "Very Confusing"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Readability Scores",
+          "paragraph1": "Readability formulas estimate how difficult a piece of text is to read using only two measurable properties: sentence length (words per sentence) and word complexity (syllables per word). The Flesch Reading Ease formula, 206.835 − 1.015×(words/sentences) − 84.6×(syllables/words), produces a score typically between 0 and 100 — higher scores mean easier reading. A score in the 90s corresponds to text an average 5th grader can follow, while a score below 30 suggests text best understood by university graduates.",
+          "paragraph2": "The Flesch-Kincaid Grade Level formula, 0.39×(words/sentences) + 11.8×(syllables/words) − 15.59, reuses the same two underlying measurements but rescales them onto the U.S. school grade-level scale instead — a score of 8.0 suggests the text is readable by an average 8th-grade student. Both formulas assume that longer sentences and longer (more-syllable) words each independently make text harder to process, which is a simplification — vocabulary familiarity, sentence structure, and reader background all affect real comprehension too, but sentence and word length are far easier to measure automatically.",
+          "paragraph3": "Because these formulas were built around English syllable and sentence patterns, they only produce meaningful results for English text — this calculator's own interface is available in six languages, but the passage you analyze should be in English for the score to mean anything."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Three passages spanning the readability scale, scored by this calculator.",
+          "columnCalculation": "Passage",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "\"The cat sat on the mat. The dog ran fast.\" (10 words, 2 sentences)", "result": "Flesch Reading Ease 117.2 (Very Easy) — Grade Level −1.8" },
+            { "calculation": "A 36-word passage of short sentences and common words (3 sentences)", "result": "Flesch Reading Ease 81.9 (Easy) — Grade Level 4.8" },
+            { "calculation": "A single 22-word sentence of dense academic vocabulary", "result": "Flesch Reading Ease −92.4 (Very Confusing) — Grade Level 31.6" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why did I get a negative Flesch Reading Ease score?", "answer": "The formula has no built-in floor — extremely long sentences packed with multi-syllable words can push the score below zero. A negative score simply means the text is more difficult than the scale's already-hardest labeled band (\"very confusing\"), which starts below 30." },
+            { "question": "Can this tool score text in Arabic, Spanish, or other languages?", "answer": "Not meaningfully. Both formulas were built from studies of English text and rely on an English-specific syllable-counting heuristic, so running non-English text through them produces a number, but not a number that reflects real reading difficulty in that language. Dedicated readability formulas exist for some other languages, but this tool does not implement them." },
+            { "question": "Why do Flesch Reading Ease and Flesch-Kincaid Grade Level sometimes seem to disagree?", "answer": "They're built from the same two measurements (words per sentence, syllables per word) but scaled differently — one onto a 0–100 ease scale where higher is easier, the other onto a U.S. grade-level scale where higher is harder. They should move in opposite directions consistently; if a passage scores as \"easy\" on one and a high grade level on the other, double-check that the text has enough complete sentences for an accurate sentence count." },
+            { "question": "Does a low grade-level score mean the writing is bad?", "answer": "No — grade level measures accessibility, not quality. Many respected style guides for technical writing, government communication, and journalism specifically recommend shorter sentences and plainer words to keep grade level low, because that makes writing easier for more readers to understand quickly, regardless of the writer's own skill or the topic's sophistication." },
+            { "question": "How does the syllable counter work, and is it perfectly accurate?", "answer": "It counts groups of adjacent vowel letters as syllables, with an adjustment for silent trailing \"e\" (as in \"make\") and syllabic \"-le\" endings (as in \"simple\"). This vowel-group heuristic is the same approach used by the original Flesch and Kincaid research and by most readability tools, but it isn't a full phonetic analysis, so unusual or foreign-derived words can occasionally be off by one syllable." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Formula Born From the Plain English Movement",
+            "paragraph": "Rudolf Flesch, an Austrian-born writing consultant with a law degree and a PhD in English from Columbia University, published the Flesch Reading Ease formula in his 1948 paper \"A New Readability Yardstick\" in the Journal of Applied Psychology. Flesch was a longtime advocate of plain, direct writing, and he built the formula specifically so editors and writers — not just researchers — could get a quick, repeatable readability estimate using nothing but a word count, a sentence count, and a syllable count, without needing any specialized training in linguistics."
+          },
+          "modernDevelopments": {
+            "title": "From Newsrooms to Navy Manuals to State Law",
+            "paragraph": "In 1975, psychologist J. Peter Kincaid and colleagues, working under a U.S. Navy contract, recalculated Flesch's formula against reading tests taken by 531 Navy enlisted personnel at training schools in Memphis and Great Lakes, deriving the Flesch-Kincaid Grade Level formula so the Navy could match technical manuals to sailors' actual reading levels. Readability formulas later moved from military and newsroom use into law: several U.S. states now legally require certain documents to clear a minimum Flesch Reading Ease score — New York and Florida, for instance, each set a minimum score of 45 for most insurance policies, so that consumers aren't asked to sign coverage they can't reasonably be expected to read."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Readability sits at the intersection of linguistics and language education. Here are the top 5 globally for Linguistics in the QS World University Rankings by Subject 2025, plus one leading regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://linguistics.mit.edu/graduate/", "online": "No — the PhD program is a full-time, in-residence research program with no online track advertised." },
+              { "name": "Peking University", "note": "Ranked #2 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://isd.pku.edu.cn/en/graduate_program.php", "online": "No — international graduate admissions are handled through Peking University's International Students Division, with no distance-study option advertised for research degrees." },
+              { "name": "Lancaster University", "note": "Ranked #3 worldwide for Linguistics (QS World University Rankings by Subject 2025), home to the UK's largest linguistics department.", "url": "https://www.lancaster.ac.uk/linguistics/phd/", "online": "Partly — first-year compulsory research-methodology modules are taught by distance, but the PhD is otherwise a research-residency program." },
+              { "name": "University of Cambridge", "note": "Ranked #4 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng", "online": "No — the PhD in Theoretical and Applied Linguistics is an in-person research program based in the department." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics", "online": "No — Oxford's DPhil requires a minimum period of research residency in Oxford." },
+              { "name": "Qatar University — Department of English Literature and Linguistics", "note": "Runs the recurring \"Linguistics in the Gulf\" conference; not separately ranked on this global subject table, but the leading dedicated English-and-linguistics department among Arab region universities.", "url": "http://www.qu.edu.qa/artssciences/departments/dell-home", "online": "No — the department's programs are delivered on Qatar University's campus." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Flesch, R. (1948). A new readability yardstick. Journal of Applied Psychology, 32(3), 221–233.",
+          "note": "Flesch's original paper lays out the derivation of the Reading Ease formula from reader comprehension tests, establishing the word-length and sentence-length approach that later readability formulas, including Flesch-Kincaid, built upon.",
+          "url": "https://doi.org/10.1037/h0057532",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
