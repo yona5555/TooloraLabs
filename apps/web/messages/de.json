@@ -6732,6 +6732,100 @@
         }
       }
     },
+    "molar-mass-calculator": {
+      "title": "Molmassenrechner",
+      "description": "Berechnen Sie die Molmasse einer chemischen Verbindung aus ihrer Formel, mit einer Aufschlüsselung nach Elementen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Beispielformeln",
+          "intro": "Formeln, die dieser Rechner parsen kann — probieren Sie eine aus, oder geben Sie Ihre eigene ein.",
+          "syntaxHint": "Verwenden Sie runde oder eckige Klammern mit einer folgenden Zahl für Gruppen, z. B. Ca(OH)2 oder [Fe(CN)6]. Ein Mittelpunkt, Bullet-Punkt oder Punkt mit einer vorangestellten Zahl kennzeichnet ein Hydrat, z. B. CuSO4·5H2O."
+        }
+      },
+      "form": {
+        "inputTitle": "Chemische Formel",
+        "formulaLabel": "Formel",
+        "formulaHint": "Elementsymbole sind großschreibungsabhängig: Co (Kobalt) ist nicht dasselbe wie CO (Kohlenmonoxid).",
+        "formulaPlaceholder": "z. B. C6H12O6"
+      },
+      "result": {
+        "heading": "Molmasse",
+        "emptyFormula": "Geben Sie eine chemische Formel ein, um ihre Molmasse zu berechnen.",
+        "unknownElement": "Diese Formel enthält ein Symbol, das kein anerkanntes Element ist.",
+        "unbalancedParentheses": "Diese Formel hat unausgeglichene Klammern.",
+        "invalidFormula": "Das sieht nicht wie eine gültige chemische Formel aus.",
+        "totalMass": "Molmasse",
+        "columnElement": "Element",
+        "columnCount": "Anzahl",
+        "columnAtomicMass": "Atommasse",
+        "columnSubtotal": "Zwischensumme"
+      },
+      "education": {
+        "intro": {
+          "title": "Molmasse verstehen",
+          "paragraph1": "Die Molmasse ist die Masse eines Mols (6,022 × 10²³ Teilchen) eines Stoffes, ausgedrückt in Gramm pro Mol (g/mol). Bei einer Verbindung ermittelt man sie, indem man die Atommasse jedes Atoms in ihrer Formel addiert — Wasser, H₂O, hat eine Molmasse von 2×(1,008) + 15,999 = 18,015 g/mol, weil ein Wassermolekül zwei Wasserstoffatome und ein Sauerstoffatom enthält. Dieser Rechner analysiert die eingegebene Formel, zählt jedes Element (auch innerhalb von runden oder eckigen Klammern, wie die beiden Hydroxidgruppen in Ca(OH)₂), und schlägt für jedes Element sein Standardatomgewicht nach, um die Summe zu berechnen.",
+          "paragraph2": "Die von diesem Rechner verwendeten Atomgewichte sind die IUPAC-konventionellen Standardatomgewichte — im Wesentlichen ein gewichteter Durchschnitt der natürlich vorkommenden Isotope eines Elements, weshalb sie keine ganzen Zahlen sind (Chlors 35,45 spiegelt eine natürliche Mischung wider, überwiegend aus Chlor-35 mit etwas Chlor-37). Eine Handvoll der schwersten Elemente (Technetium, Promethium und alles ab Polonium) hat keine stabilen Isotope und somit keine natürliche Mischung zum Mitteln — für diese steht in eckigen Klammern stattdessen die Massenzahl ihres stabilsten bekannten Isotops.",
+          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Molmassen für eine Reihe gängiger Verbindungen, berechnet von diesem Rechner.",
+          "columnCalculation": "Formel",
+          "columnResult": "Molmasse",
+          "rows": [
+            { "calculation": "H2O (Wasser)", "result": "18,015 g/mol" },
+            { "calculation": "NaCl (Kochsalz)", "result": "58,44 g/mol" },
+            { "calculation": "C6H12O6 (Glukose)", "result": "180,156 g/mol" },
+            { "calculation": "CuSO4·5H2O (Kupfersulfat-Pentahydrat)", "result": "249,677 g/mol" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum ist die Groß-/Kleinschreibung beim Eingeben einer Formel wichtig?", "answer": "Jedes Elementsymbol besteht aus genau einem Großbuchstaben, gefolgt von optional ein oder zwei Kleinbuchstaben — die Groß-/Kleinschreibung ist, wie der Parser Elemente voneinander unterscheidet. „Co“ ist Kobalt, aber „CO“ sind zwei getrennte Elemente, Kohlenstoff und Sauerstoff, die Kohlenmonoxid bilden; eine falsche Schreibweise ändert, welche Verbindung Sie tatsächlich beschreiben." },
+            { "question": "Wie geht dieser Rechner mit Gruppen in runden oder eckigen Klammern um?", "answer": "Er liest alles innerhalb der Klammern als eigene Unterformel und multipliziert dann die Anzahl jedes Elements in dieser Unterformel mit der Zahl unmittelbar nach der schließenden Klammer (oder mit 1, wenn keine Zahl folgt). Bei Ca(OH)₂ bedeutet das, dass der einzelne Sauerstoff und der einzelne Wasserstoff innerhalb der Klammern jeweils doppelt gezählt werden, also insgesamt 2 Sauerstoff- und 2 Wasserstoffatome." },
+            { "question": "Was ist der Unterschied zwischen Molmasse und Molekulargewicht?", "answer": "In der Praxis für die meisten Alltagszwecke praktisch kein Unterschied — beide beschreiben dieselbe Größe (die Masse eines Mols eines Stoffes) und werden typischerweise in Gramm pro Mol angegeben. Chemiker verwenden meist „Molmasse“ als den allgemeineren, formal korrekteren Begriff (er gilt gleichermaßen für ionische Verbindungen und Netzwerkfeststoffe, nicht nur für diskrete Moleküle), während „Molekulargewicht“ ein älterer Begriff ist, der technisch spezifisch für tatsächliche Moleküle ist." },
+            { "question": "Warum stehen manche Atommassen in eckigen Klammern?", "answer": "Ein in Klammern gesetzter Wert, wie Technetiums [97], ist überhaupt kein Standardatomgewicht — es ist die Massenzahl des langlebigsten bekannten Isotops dieses Elements. Diese Elemente haben keine stabilen Isotope, daher gibt es keine natürlich vorkommende Isotopenmischung, die man wie bei Chlor oder Kohlenstoff zu einem Standardatomgewicht mitteln könnte." },
+            { "question": "Kann dieser Rechner Formeln mit mehr als einem Hydrat-Punkt verarbeiten?", "answer": "Nein — er unterstützt genau einen Hydrat-Trenner (einen Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl), was die überwiegende Mehrheit realer Hydratformeln wie CuSO₄·5H₂O oder MgSO₄·7H₂O abdeckt. Formeln, die mehr als einen solchen Trenner benötigen, sind äußerst selten und liegen außerhalb des Anwendungsbereichs dieses Rechners." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Eine Einheit, benannt nach einem Wort, das noch gar nicht ums Zählen ging",
+            "paragraph": "Das Wort „Mol“ hielt 1893 Einzug in die Chemie, als der deutsche Chemiker Wilhelm Ostwald es in einem Laborhandbuch schlicht als die Masse in Gramm definierte, die zahlenmäßig dem Molekulargewicht eines Stoffes entspricht — zu diesem Zeitpunkt eine praktische Abkürzung zum Abwiegen von Chemikalien, noch nicht an eine bestimmte Teilchenzahl gebunden. Die heute berühmte Anzahl von Teilchen in einem Mol geht auf Amedeo Avogadros Hypothese von 1811 zurück, dass gleiche Volumina eines Gases bei gleicher Temperatur und gleichem Druck gleiche Anzahlen von Molekülen enthalten — obwohl Avogadro selbst die Zahl, die später seinen Namen tragen sollte, nie berechnete oder benannte."
+          },
+          "modernDevelopments": {
+            "title": "Von einer benannten Konstante zu einer definierenden",
+            "paragraph": "Der französische Physiker Jean Perrin prägte 1908 den Begriff „Avogadro-Zahl“ zu Ehren Avogadros, nachdem Perrins eigene Experimente zur Brownschen Bewegung die erste einigermaßen präzise Messung dieser Zahl geliefert hatten — eine Arbeit, die auch half, die damals aktuelle wissenschaftliche Debatte darüber zu klären, ob Atome physisch real seien, und Perrin 1926 den Nobelpreis für Physik einbrachte. Die Beziehung zwischen Mol und Avogadro-Zahl wurde in der SI-Revision von 2019 vollständig umgekehrt: Statt die Avogadro-Zahl aus einem physikalisch durch Kohlenstoff-12 definierten Mol zu messen, wird das Mol nun definiert, indem die Avogadro-Zahl auf exakt 6,02214076 × 10²³ festgelegt wird — womit die Einheit dauerhaft von jedem physischen Artefakt oder Isotopenprobe entkoppelt ist."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Molmassenberechnungen stehen im Zentrum der quantitativen Chemie. Hier sind die weltweit besten 5 im Fach Chemie im QS World University Rankings by Subject 2025, plus eine regionale Abteilung:",
+            "universities": [
+              { "name": "Harvard University", "note": "Weltweit auf Platz 1 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Nein — die Abteilung übernimmt die Studiengebühren für alle Promotionsstudierenden in einem präsenzpflichtigen Forschungsprogramm." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 2 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Nein — zugelassene Promotionsstudierende erhalten volle Studiengebührenübernahme und ein Stipendium für ein Forschungsprogramm auf dem Campus." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 3 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Teilweise — der PhD wird als Vollzeit- oder Teilzeitforschung angeboten, wobei beide Formen präsenzpflichtig statt Fernstudium sind." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 4 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Nein — das Programm ist ein präsenzpflichtiges Forschungspromotionsprogramm mit einer ganzheitlichen, individuellen Zulassungsprüfung." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 5 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Nein — der DPhil ist ein Forschungsgrad auf dem Campus, der unter anderem Katalyse, Materialien und theoretische Chemie umfasst." },
+              { "name": "King Fahd University of Petroleum and Minerals (KFUPM) — Fachbereich Chemie", "note": "Einer der Gründungsfachbereiche der KFUPM und einer der führenden Chemiefachbereiche Saudi-Arabiens, mit über 30 Fakultätsmitgliedern und mehr als 3.000 Publikationen; in dieser globalen Fachtabelle nicht gesondert gelistet.", "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/", "online": "Nein — die B.S.-/M.S.-/Ph.D.-Programme werden auf dem Campus der KFUPM durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Schubert, F. E. (2020). Perrin's Experiment Handed Ostwald \"Avogadro's Constant\": He Lauded the Results but Did Not Move to Associate the Number with the Mole Definition. Journal of Chemical Education, 97(8), 2370–2371.",
+          "note": "Schuberts Aufsatz zeichnet nach, wie Jean Perrins Messungen der Brownschen Bewegung Wilhelm Ostwald 1908 eine benannte, numerische „Avogadro-Konstante“ lieferten — Jahrzehnte bevor diese Zahl formal an die Definition des Mols selbst gebunden wurde.",
+          "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

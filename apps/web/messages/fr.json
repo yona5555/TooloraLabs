@@ -6732,6 +6732,100 @@
         }
       }
     },
+    "molar-mass-calculator": {
+      "title": "Calculateur de Masse Molaire",
+      "description": "Calculez la masse molaire d'un composé chimique à partir de sa formule, avec une répartition par élément.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Exemples de Formules",
+          "intro": "Des formules que ce calculateur peut analyser — essayez-en une, ou saisissez la vôtre.",
+          "syntaxHint": "Utilisez des parenthèses ou des crochets suivis d'un nombre pour les groupes, par ex. Ca(OH)2 ou [Fe(CN)6]. Un point médian, une puce ou un point précédé d'un nombre indique un hydrate, par ex. CuSO4·5H2O."
+        }
+      },
+      "form": {
+        "inputTitle": "Formule Chimique",
+        "formulaLabel": "Formule",
+        "formulaHint": "Les symboles des éléments sont sensibles à la casse : Co (cobalt) n'est pas la même chose que CO (monoxyde de carbone).",
+        "formulaPlaceholder": "ex. C6H12O6"
+      },
+      "result": {
+        "heading": "Masse Molaire",
+        "emptyFormula": "Saisissez une formule chimique pour calculer sa masse molaire.",
+        "unknownElement": "Cette formule contient un symbole qui n'est pas un élément reconnu.",
+        "unbalancedParentheses": "Cette formule comporte des parenthèses ou crochets non équilibrés.",
+        "invalidFormula": "Ceci ne ressemble pas à une formule chimique valide.",
+        "totalMass": "Masse Molaire",
+        "columnElement": "Élément",
+        "columnCount": "Nombre",
+        "columnAtomicMass": "Masse Atomique",
+        "columnSubtotal": "Sous-total"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Masse Molaire",
+          "paragraph1": "La masse molaire est la masse d'une mole (6,022 × 10²³ particules) d'une substance, exprimée en grammes par mole (g/mol). Pour un composé, on l'obtient en additionnant la masse atomique de chaque atome de sa formule — l'eau, H₂O, a une masse molaire de 2×(1,008) + 15,999 = 18,015 g/mol, car une molécule d'eau contient deux atomes d'hydrogène et un atome d'oxygène. Ce calculateur analyse la formule que vous saisissez, compte chaque élément (y compris à l'intérieur des parenthèses ou crochets, comme les deux groupes hydroxyde dans Ca(OH)₂), et recherche la masse atomique standard de chaque élément pour calculer le total.",
+          "paragraph2": "Les masses atomiques utilisées par ce calculateur sont les masses atomiques standards conventionnelles de l'IUPAC — essentiellement une moyenne pondérée des isotopes naturels d'un élément, ce qui explique pourquoi ce ne sont pas des nombres entiers (le 35,45 du chlore reflète un mélange naturel majoritairement composé de chlore-35 avec un peu de chlore-37). Une poignée des éléments les plus lourds (technétium, prométhium et tout à partir du polonium) n'a pas d'isotopes stables et donc pas de mélange naturel à moyenner — pour ceux-ci, la valeur entre crochets correspond plutôt au nombre de masse de leur isotope connu le plus stable.",
+          "paragraph3": "Les formules comportant un point médian, une puce ou un point suivi d'un nombre représentent des hydrates — des composés qui incorporent des molécules d'eau dans leur structure cristalline, comme CuSO₄·5H₂O (sulfate de cuivre(II) pentahydraté). Le nombre avant l'eau indique combien de molécules d'eau sont liées par unité formulaire du composé, et ce calculateur ajoute la masse de cette eau à la masse du composé anhydre pour obtenir la masse molaire totale de l'hydrate."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Masses molaires pour une gamme de composés courants, calculées par ce calculateur.",
+          "columnCalculation": "Formule",
+          "columnResult": "Masse Molaire",
+          "rows": [
+            { "calculation": "H2O (eau)", "result": "18,015 g/mol" },
+            { "calculation": "NaCl (sel de table)", "result": "58,44 g/mol" },
+            { "calculation": "C6H12O6 (glucose)", "result": "180,156 g/mol" },
+            { "calculation": "CuSO4·5H2O (sulfate de cuivre pentahydraté)", "result": "249,677 g/mol" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi la casse compte-t-elle lors de la saisie d'une formule ?", "answer": "Chaque symbole d'élément est exactement une lettre majuscule, éventuellement suivie d'une ou deux lettres minuscules — la casse est ce qui permet à l'analyseur de distinguer les éléments entre eux. « Co » est le cobalt, mais « CO » désigne deux éléments distincts, le carbone et l'oxygène, formant le monoxyde de carbone ; une casse incorrecte change le composé que vous décrivez réellement." },
+            { "question": "Comment ce calculateur gère-t-il les groupes entre parenthèses ou crochets ?", "answer": "Il lit tout ce qui se trouve à l'intérieur des parenthèses ou crochets comme sa propre sous-formule, puis multiplie le nombre de chaque élément de cette sous-formule par le nombre suivant immédiatement le crochet fermant (ou par 1 si aucun nombre ne suit). Dans Ca(OH)₂, cela signifie que l'oxygène unique et l'hydrogène unique à l'intérieur des parenthèses sont chacun comptés deux fois, soit un total de 2 atomes d'oxygène et 2 d'hydrogène." },
+            { "question": "Quelle est la différence entre masse molaire et poids moléculaire ?", "answer": "En pratique, pratiquement aucune pour la plupart des usages courants — les deux décrivent la même quantité (la masse d'une mole d'une substance), et sont généralement exprimés en grammes par mole. Les chimistes utilisent surtout « masse molaire » comme terme plus général et formellement correct (il s'applique aussi bien aux composés ioniques et aux solides en réseau qu'aux molécules discrètes), tandis que « poids moléculaire » est un terme plus ancien techniquement spécifique aux molécules réelles." },
+            { "question": "Pourquoi certaines masses atomiques sont-elles entre crochets ?", "answer": "Une valeur entre crochets, comme le [97] du technétium, n'est pas du tout une masse atomique standard — c'est le nombre de masse de l'isotope connu le plus stable de cet élément. Ces éléments n'ont pas d'isotopes stables, il n'existe donc pas de mélange naturel d'isotopes à moyenner en une masse atomique standard comme c'est le cas pour le chlore ou le carbone." },
+            { "question": "Ce calculateur peut-il traiter des formules avec plus d'un point d'hydrate ?", "answer": "Non — il prend en charge un seul séparateur d'hydrate (un point médian, une puce ou un point suivi d'un nombre), ce qui couvre la grande majorité des formules d'hydrates réelles comme CuSO₄·5H₂O ou MgSO₄·7H₂O. Les formules nécessitant plus d'un tel séparateur sont extrêmement rares et sortent du cadre de ce calculateur." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Une Unité Nommée d'Après un Mot qui ne Parlait Pas Encore de Compter",
+            "paragraph": "Le mot « mole » a fait son entrée en chimie en 1893, lorsque le chimiste allemand Wilhelm Ostwald l'a défini dans un manuel de laboratoire comme simplement la masse en grammes numériquement égale au poids moléculaire d'une substance — à l'époque un raccourci pratique pour peser des produits chimiques, pas encore lié à un nombre précis de particules. Le nombre aujourd'hui célèbre de particules dans une mole remonte à l'hypothèse d'Amedeo Avogadro de 1811, selon laquelle des volumes égaux de gaz à même température et pression contiennent des nombres égaux de molécules, bien qu'Avogadro lui-même n'ait jamais calculé ni nommé le nombre qui finirait par porter son nom."
+          },
+          "modernDevelopments": {
+            "title": "D'une Constante Nommée à une Constante Définitoire",
+            "paragraph": "Le physicien français Jean Perrin a inventé l'expression « nombre d'Avogadro » en 1908 en l'honneur d'Avogadro, après que les propres expériences de Perrin sur le mouvement brownien ont fourni la première mesure raisonnablement précise de ce nombre — un travail qui a également aidé à trancher le débat scientifique alors en cours sur la réalité physique des atomes, et qui a valu à Perrin le prix Nobel de physique en 1926. La relation entre la mole et le nombre d'Avogadro a été entièrement inversée lors de la révision de 2019 du Système international d'unités (SI) : plutôt que de mesurer le nombre d'Avogadro à partir d'une mole physique définie par le carbone-12, la mole est désormais définie en fixant le nombre d'Avogadro à exactement 6,02214076 × 10²³, découplant définitivement l'unité de tout artefact physique ou échantillon isotopique."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les calculs de masse molaire sont au cœur de la chimie quantitative. Voici les 5 meilleures universités au monde en Chimie selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
+            "universities": [
+              { "name": "Université Harvard", "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus." },
+              { "name": "Université de Cambridge", "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance." },
+              { "name": "Université Stanford", "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée." },
+              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines." },
+              { "name": "Université Roi Fahd du Pétrole et des Minéraux (KFUPM) — Département de Chimie", "note": "L'un des départements fondateurs de la KFUPM et l'un des départements de chimie les plus en vue d'Arabie saoudite, avec plus de 30 enseignants-chercheurs et plus de 3000 publications ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/", "online": "Non — les programmes de licence, master et doctorat sont dispensés sur le campus de la KFUPM." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Schubert, F. E. (2020). Perrin's Experiment Handed Ostwald \"Avogadro's Constant\": He Lauded the Results but Did Not Move to Associate the Number with the Mole Definition. Journal of Chemical Education, 97(8), 2370–2371.",
+          "note": "L'article de Schubert retrace comment les mesures du mouvement brownien de Jean Perrin ont donné à Wilhelm Ostwald une « constante d'Avogadro » nommée et chiffrée en 1908 — des décennies avant que ce nombre ne soit formellement lié à la définition de la mole elle-même.",
+          "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

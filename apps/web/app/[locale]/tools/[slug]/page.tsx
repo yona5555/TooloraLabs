@@ -77,6 +77,8 @@ import VectorCalculator from "@/components/tools/vector-calculator/VectorCalcula
 import VectorEducation from "@/components/tools/vector-calculator/VectorEducation";
 import MatrixCalculator from "@/components/tools/matrix-calculator/MatrixCalculator";
 import MatrixEducation from "@/components/tools/matrix-calculator/MatrixEducation";
+import MolarMassCalculator from "@/components/tools/molar-mass-calculator/MolarMassCalculator";
+import MolarMassEducation from "@/components/tools/molar-mass-calculator/MolarMassEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -398,6 +400,9 @@ export default async function ToolPage({
     case "matrix-calculator":
       component = <MatrixCalculator education={<MatrixEducation />} />;
       break;
+    case "molar-mass-calculator":
+      component = <MolarMassCalculator education={<MolarMassEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -499,6 +504,7 @@ export default async function ToolPage({
     slug === "study-time-calculator" ||
     slug === "vector-calculator" ||
     slug === "matrix-calculator" ||
+    slug === "molar-mass-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

@@ -486,6 +486,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "molar-mass-calculator",
+    title: "Molar Mass Calculator",
+    category: "math-science",
+    description:
+      "Calculate the molar mass of a chemical compound from its formula, with a per-element breakdown.",
+    featured: false,
+    keywords: [
+      "molar mass calculator",
+      "molecular weight calculator",
+      "chemical formula calculator",
+      "atomic mass calculator",
+      "molar mass of compound",
+      "g/mol calculator",
+    ],
+  },
+  {
     slug: "matrix-calculator",
     title: "Matrix Calculator",
     category: "math-science",

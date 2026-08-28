@@ -6708,6 +6708,100 @@
         }
       }
     },
+    "molar-mass-calculator": {
+      "title": "Calculadora de Masa Molar",
+      "description": "Calcula la masa molar de un compuesto químico a partir de su fórmula, con un desglose por elemento.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas de Ejemplo",
+          "intro": "Fórmulas que esta calculadora puede analizar — prueba una, o introduce la tuya propia.",
+          "syntaxHint": "Usa paréntesis o corchetes con un número después para los grupos, p. ej. Ca(OH)2 o [Fe(CN)6]. Un punto medio, viñeta o punto con un número antes indica un hidrato, p. ej. CuSO4·5H2O."
+        }
+      },
+      "form": {
+        "inputTitle": "Fórmula Química",
+        "formulaLabel": "Fórmula",
+        "formulaHint": "Los símbolos de los elementos distinguen mayúsculas de minúsculas: Co (cobalto) no es lo mismo que CO (monóxido de carbono).",
+        "formulaPlaceholder": "p. ej. C6H12O6"
+      },
+      "result": {
+        "heading": "Masa Molar",
+        "emptyFormula": "Introduce una fórmula química para calcular su masa molar.",
+        "unknownElement": "Esta fórmula contiene un símbolo que no es un elemento reconocido.",
+        "unbalancedParentheses": "Esta fórmula tiene paréntesis o corchetes sin equilibrar.",
+        "invalidFormula": "Esto no parece una fórmula química válida.",
+        "totalMass": "Masa Molar",
+        "columnElement": "Elemento",
+        "columnCount": "Cantidad",
+        "columnAtomicMass": "Masa Atómica",
+        "columnSubtotal": "Subtotal"
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la Masa Molar",
+          "paragraph1": "La masa molar es la masa de un mol (6,022 × 10²³ partículas) de una sustancia, expresada en gramos por mol (g/mol). Para un compuesto, se calcula sumando la masa atómica de cada átomo de su fórmula — el agua, H₂O, tiene una masa molar de 2×(1,008) + 15,999 = 18,015 g/mol, porque una molécula de agua contiene dos átomos de hidrógeno y uno de oxígeno. Esta calculadora analiza la fórmula que introduces, cuenta cada elemento (incluso dentro de paréntesis o corchetes, como los dos grupos hidróxido en Ca(OH)₂), y busca el peso atómico estándar de cada elemento para calcular el total.",
+          "paragraph2": "Los pesos atómicos que usa esta calculadora son los pesos atómicos estándar convencionales de la IUPAC — esencialmente un promedio ponderado de los isótopos naturales de un elemento, por lo que no son números enteros (el 35,45 del cloro refleja una mezcla natural mayoritariamente de cloro-35 con algo de cloro-37). Un puñado de los elementos más pesados (tecnecio, prometio y todo a partir del polonio) no tiene isótopos estables y, por tanto, no hay mezcla natural que promediar — para estos, el valor entre corchetes es en su lugar el número másico de su isótopo más estable conocido.",
+          "paragraph3": "Las fórmulas con un punto medio, viñeta o punto seguido de un número representan hidratos — compuestos que incorporan moléculas de agua en su estructura cristalina, como CuSO₄·5H₂O (sulfato de cobre(II) pentahidratado). El número antes del agua indica cuántas moléculas de agua están unidas por unidad fórmula del compuesto, y esta calculadora añade la masa de esa agua a la masa del compuesto anhidro para obtener la masa molar total del hidrato."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Masas molares de una variedad de compuestos comunes, calculadas por esta calculadora.",
+          "columnCalculation": "Fórmula",
+          "columnResult": "Masa Molar",
+          "rows": [
+            { "calculation": "H2O (agua)", "result": "18,015 g/mol" },
+            { "calculation": "NaCl (sal de mesa)", "result": "58,44 g/mol" },
+            { "calculation": "C6H12O6 (glucosa)", "result": "180,156 g/mol" },
+            { "calculation": "CuSO4·5H2O (sulfato de cobre pentahidratado)", "result": "249,677 g/mol" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué importan las mayúsculas al escribir una fórmula?", "answer": "Cada símbolo de elemento es exactamente una letra mayúscula, seguida opcionalmente de una o dos letras minúsculas — las mayúsculas son cómo el analizador distingue los elementos entre sí. «Co» es cobalto, pero «CO» son dos elementos separados, carbono y oxígeno, que forman monóxido de carbono; escribir mal las mayúsculas cambia qué compuesto estás describiendo realmente." },
+            { "question": "¿Cómo maneja esta calculadora los grupos entre paréntesis o corchetes?", "answer": "Lee todo lo que hay dentro de los paréntesis o corchetes como su propia subfórmula, y luego multiplica el conteo de cada elemento en esa subfórmula por el número que sigue inmediatamente al corchete de cierre (o por 1 si no le sigue ningún número). En Ca(OH)₂, eso significa que el único oxígeno y el único hidrógeno dentro de los paréntesis se cuentan cada uno el doble, dando un total de 2 átomos de oxígeno y 2 de hidrógeno." },
+            { "question": "¿Cuál es la diferencia entre masa molar y peso molecular?", "answer": "En la práctica, prácticamente ninguna para la mayoría de los usos cotidianos — ambos describen la misma cantidad (la masa de un mol de una sustancia), y ambos suelen expresarse en gramos por mol. Los químicos suelen usar «masa molar» como el término más general y formalmente correcto (se aplica igual a compuestos iónicos y sólidos reticulares, no solo a moléculas discretas), mientras que «peso molecular» es un término más antiguo técnicamente específico de moléculas reales." },
+            { "question": "¿Por qué algunas masas atómicas aparecen entre corchetes?", "answer": "Un valor entre corchetes, como el [97] del tecnecio, no es en absoluto un peso atómico estándar — es el número másico del isótopo conocido de mayor vida media de ese elemento. Estos elementos no tienen isótopos estables, por lo que no existe una mezcla natural de isótopos que promediar en un peso atómico estándar como sí ocurre con el cloro o el carbono." },
+            { "question": "¿Puede esta calculadora manejar fórmulas con más de un punto de hidrato?", "answer": "No — admite un único separador de hidrato (un punto medio, viñeta o punto seguido de un número), lo que cubre la gran mayoría de las fórmulas de hidratos reales, como CuSO₄·5H₂O o MgSO₄·7H₂O. Las fórmulas que necesitan más de un separador de este tipo son extremadamente poco comunes y quedan fuera del alcance de esta calculadora." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Una Unidad Nombrada por una Palabra que Aún No Trataba de Contar",
+            "paragraph": "La palabra «mol» entró en la química en 1893, cuando el químico alemán Wilhelm Ostwald la definió en un manual de laboratorio simplemente como la masa en gramos numéricamente igual al peso molecular de una sustancia — en ese momento un atajo práctico para pesar sustancias químicas, aún no vinculado a ningún recuento específico de partículas. El ahora famoso número de partículas en un mol se remonta a la hipótesis de Amedeo Avogadro de 1811, según la cual volúmenes iguales de gas a la misma temperatura y presión contienen números iguales de moléculas, aunque el propio Avogadro nunca calculó ni nombró el número que acabaría llevando su nombre."
+          },
+          "modernDevelopments": {
+            "title": "De una Constante con Nombre a una Definitoria",
+            "paragraph": "El físico francés Jean Perrin acuñó el término «número de Avogadro» en 1908 en honor a Avogadro, después de que los propios experimentos de Perrin sobre el movimiento browniano proporcionaran la primera medición razonablemente precisa de ese número — un trabajo que también ayudó a resolver el entonces vigente debate científico sobre si los átomos eran físicamente reales, y que le valió a Perrin el Premio Nobel de Física de 1926. La relación entre el mol y el número de Avogadro se invirtió por completo en la revisión de 2019 del Sistema Internacional de Unidades (SI): en lugar de medir el número de Avogadro a partir de un mol físico definido por el carbono-12, el mol ahora se define fijando el número de Avogadro en exactamente 6,02214076 × 10²³, desvinculando permanentemente la unidad de cualquier artefacto físico o muestra de isótopo."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Los cálculos de masa molar están en el corazón de la química cuantitativa. Aquí están las 5 mejores del mundo en Química según el QS World University Rankings by Subject 2025, además de un departamento regional:",
+            "universities": [
+              { "name": "Universidad de Harvard", "note": "Clasificada #1 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — el departamento cubre la matrícula de todos los estudiantes de doctorado en un programa de investigación presencial." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificado #2 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — los estudiantes de doctorado admitidos reciben matrícula completa y un estipendio para un programa de investigación en el campus." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #3 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Parcialmente — el doctorado se ofrece como investigación a tiempo completo o parcial, aunque ambas modalidades son presenciales, no a distancia." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #4 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — el programa es un doctorado de investigación presencial con una revisión de admisión integral e individualizada." },
+              { "name": "Universidad de Oxford", "note": "Clasificada #5 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — el DPhil es un título de investigación presencial que abarca catálisis, materiales y química teórica, entre otras áreas." },
+              { "name": "Universidad Rey Fahd del Petróleo y los Minerales (KFUPM) — Departamento de Química", "note": "Uno de los departamentos fundadores de la KFUPM y uno de los departamentos de química líderes en Arabia Saudita, con más de 30 profesores y más de 3000 publicaciones; no aparece clasificado por separado en esta tabla global de la materia.", "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/", "online": "No — los programas de licenciatura, maestría y doctorado se imparten en el campus de la KFUPM." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Schubert, F. E. (2020). Perrin's Experiment Handed Ostwald \"Avogadro's Constant\": He Lauded the Results but Did Not Move to Associate the Number with the Mole Definition. Journal of Chemical Education, 97(8), 2370–2371.",
+          "note": "El artículo de Schubert traza cómo las mediciones del movimiento browniano de Jean Perrin le dieron a Wilhelm Ostwald una «constante de Avogadro» nombrada y numérica en 1908 — décadas antes de que ese número quedara formalmente vinculado a la definición del propio mol.",
+          "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

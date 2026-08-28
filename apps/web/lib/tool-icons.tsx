@@ -1,4 +1,5 @@
 import {
+  Atom,
   Banknote,
   Binary,
   Bitcoin,
@@ -80,6 +81,7 @@ export const toolIcons: Record<string, LucideIcon> = {
   "study-time-calculator": Timer,
   "vector-calculator": MoveUpRight,
   "matrix-calculator": Grid3x3,
+  "molar-mass-calculator": Atom,
   "age-calculator": Calendar,
   "bmi-calculator": Scale,
   "ideal-weight-calculator": Weight,

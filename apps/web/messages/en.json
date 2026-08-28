@@ -6728,6 +6728,100 @@
         }
       }
     },
+    "molar-mass-calculator": {
+      "title": "Molar Mass Calculator",
+      "description": "Calculate the molar mass of a chemical compound from its formula, with a per-element breakdown.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Example Formulas",
+          "intro": "Formulas this calculator can parse — try one, or enter your own.",
+          "syntaxHint": "Use parentheses or brackets with a following number for groups, e.g. Ca(OH)2 or [Fe(CN)6]. A middle dot, bullet, or period with a leading number marks a hydrate, e.g. CuSO4·5H2O."
+        }
+      },
+      "form": {
+        "inputTitle": "Chemical Formula",
+        "formulaLabel": "Formula",
+        "formulaHint": "Element symbols are case-sensitive: Co (cobalt) is not the same as CO (carbon monoxide).",
+        "formulaPlaceholder": "e.g. C6H12O6"
+      },
+      "result": {
+        "heading": "Molar Mass",
+        "emptyFormula": "Enter a chemical formula to calculate its molar mass.",
+        "unknownElement": "This formula contains a symbol that isn't a recognized element.",
+        "unbalancedParentheses": "This formula has unbalanced parentheses or brackets.",
+        "invalidFormula": "This doesn't look like a valid chemical formula.",
+        "totalMass": "Molar Mass",
+        "columnElement": "Element",
+        "columnCount": "Count",
+        "columnAtomicMass": "Atomic Mass",
+        "columnSubtotal": "Subtotal"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Molar Mass",
+          "paragraph1": "Molar mass is the mass of one mole (6.022 × 10²³ particles) of a substance, expressed in grams per mole (g/mol). For a compound, it's found by adding up the atomic mass of every atom in its formula — water, H₂O, has a molar mass of 2×(1.008) + 15.999 = 18.015 g/mol, because a water molecule contains two hydrogen atoms and one oxygen atom. This calculator parses the formula you enter, counts every element (including inside parentheses or brackets, like the two hydroxide groups in Ca(OH)₂), and looks up each element's standard atomic weight to compute the total.",
+          "paragraph2": "The atomic weights this calculator uses are the IUPAC conventional standard atomic weights — essentially a weighted average of an element's naturally occurring isotopes, which is why they aren't whole numbers (chlorine's 35.45 reflects a natural mix of mostly chlorine-35 and some chlorine-37). A handful of the heaviest elements (technetium, promethium, and everything from polonium onward) have no stable isotopes and thus no natural mixture to average — for these, the value in brackets is the mass number of their most stable known isotope instead.",
+          "paragraph3": "Formulas with a middle dot, bullet, or period followed by a number represent hydrates — compounds that incorporate water molecules into their crystal structure, like CuSO₄·5H₂O (copper(II) sulfate pentahydrate). The number before the water tells you how many water molecules are bound per formula unit of the compound, and this calculator adds that water's mass on top of the anhydrous compound's mass to get the hydrate's total molar mass."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Molar masses for a range of common compounds, computed by this calculator.",
+          "columnCalculation": "Formula",
+          "columnResult": "Molar Mass",
+          "rows": [
+            { "calculation": "H2O (water)", "result": "18.015 g/mol" },
+            { "calculation": "NaCl (table salt)", "result": "58.44 g/mol" },
+            { "calculation": "C6H12O6 (glucose)", "result": "180.156 g/mol" },
+            { "calculation": "CuSO4·5H2O (copper sulfate pentahydrate)", "result": "249.677 g/mol" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why does capitalization matter when typing a formula?", "answer": "Each element symbol is exactly one uppercase letter, optionally followed by one or two lowercase letters — capitalization is how the parser tells elements apart from each other. \"Co\" is cobalt, but \"CO\" is two separate elements, carbon and oxygen, forming carbon monoxide; getting the case wrong changes which compound you're actually describing." },
+            { "question": "How does this calculator handle groups in parentheses or brackets?", "answer": "It reads everything inside the parentheses or brackets as its own sub-formula, then multiplies every element's count in that sub-formula by the number immediately following the closing bracket (or by 1 if no number follows). In Ca(OH)₂, that means the single oxygen and single hydrogen inside the parentheses each get counted twice, for a total of 2 oxygen and 2 hydrogen atoms." },
+            { "question": "What's the difference between molar mass and molecular weight?", "answer": "In practice, essentially nothing for most everyday purposes — both describe the same quantity (the mass of one mole of a substance), and both are typically reported in grams per mole. Chemists mostly use \"molar mass\" as the more general, formally correct term (it applies equally to ionic compounds and network solids, not just discrete molecules), while \"molecular weight\" is an older term technically specific to actual molecules." },
+            { "question": "Why do some atomic masses have brackets around them?", "answer": "A bracketed value, like technetium's [97], isn't a standard atomic weight at all — it's the mass number of that element's longest-lived known isotope. These elements have no stable isotopes, so there's no naturally occurring mixture of isotopes to average into a standard atomic weight the way there is for something like chlorine or carbon." },
+            { "question": "Can this calculator handle formulas with more than one hydrate dot?", "answer": "No — it supports a single hydrate separator (a middle dot, bullet, or period followed by a number), which covers the vast majority of real hydrate formulas like CuSO₄·5H₂O or MgSO₄·7H₂O. Formulas needing more than one such separator are extremely uncommon and outside this calculator's scope." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Unit Named for a Word That Wasn't Even About Counting Yet",
+            "paragraph": "The word \"mole\" entered chemistry in 1893, when German chemist Wilhelm Ostwald defined it in a laboratory manual as simply the mass in grams numerically equal to a substance's molecular weight — at that point a practical shorthand for weighing out chemicals, not yet tied to any specific count of particles. The now-famous number of particles in a mole traces back to Amedeo Avogadro's 1811 hypothesis that equal volumes of gas at the same temperature and pressure contain equal numbers of molecules, though Avogadro himself never calculated or named the number that would eventually bear his name."
+          },
+          "modernDevelopments": {
+            "title": "From a Named Constant to a Defining One",
+            "paragraph": "French physicist Jean Perrin coined the term \"Avogadro's number\" in 1908 to honor Avogadro, after Perrin's own experiments on Brownian motion provided the first reasonably precise measurement of that number — work that also helped settle the then-live scientific debate over whether atoms were physically real, and earned Perrin the 1926 Nobel Prize in Physics. The relationship between the mole and Avogadro's number was inverted entirely in the 2019 revision of the International System of Units (SI): rather than measuring Avogadro's number from a physical mole defined by carbon-12, the mole is now defined by fixing Avogadro's number at exactly 6.02214076 × 10²³, permanently decoupling the unit from any physical artifact or isotope sample."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Molar mass calculations sit at the heart of quantitative chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
+              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
+              { "name": "King Fahd University of Petroleum and Minerals (KFUPM) — Department of Chemistry", "note": "One of KFUPM's founding departments and among the leading chemistry departments in Saudi Arabia, with over 30 faculty and more than 3,000 publications; not separately ranked on this global subject table.", "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/", "online": "No — the B.S./M.S./Ph.D. programs are delivered on KFUPM's campus." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Schubert, F. E. (2020). Perrin's Experiment Handed Ostwald \"Avogadro's Constant\": He Lauded the Results but Did Not Move to Associate the Number with the Mole Definition. Journal of Chemical Education, 97(8), 2370–2371.",
+          "note": "Schubert's paper traces how Jean Perrin's Brownian-motion measurements gave Wilhelm Ostwald a named, numerical \"Avogadro's constant\" in 1908 — decades before that number became formally tied to the definition of the mole itself.",
+          "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
