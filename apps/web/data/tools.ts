@@ -518,6 +518,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "citation-generator",
+    title: "Citation Generator",
+    category: "text-tools",
+    description:
+      "Generate APA, MLA, and Chicago style citations for books, journal articles, and websites.",
+    featured: false,
+    keywords: [
+      "citation generator",
+      "apa citation generator",
+      "mla citation generator",
+      "chicago style citation",
+      "bibliography generator",
+      "reference generator",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

@@ -7112,6 +7112,127 @@
         }
       }
     },
+    "citation-generator": {
+      "title": "Generador de Citas",
+      "description": "Genera citas en estilo APA, MLA y Chicago para libros, artículos de revistas científicas y sitios web.",
+      "nav": {
+        "tool": "Generador",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Guía Rápida de Estilos",
+          "intro": "Los tres estilos que produce este generador, y dónde suele exigirse cada uno.",
+          "apaHint": "El más común en ciencias sociales (psicología, educación, enfermería) — citas en el texto de autor-año.",
+          "mlaHint": "El más común en humanidades (literatura, idiomas, estudios culturales) — citas en el texto de autor-página.",
+          "chicagoHint": "Común en historia y algunas ciencias sociales — este generador produce la variante autor-fecha usada en las listas de referencias."
+        }
+      },
+      "form": {
+        "inputTitle": "Detalles de la Fuente",
+        "sourceTypeLabel": "Tipo de Fuente",
+        "sourceType": {
+          "book": "Libro",
+          "journal-article": "Artículo de Revista",
+          "website": "Sitio Web"
+        },
+        "authorsLabel": "Autor(es)",
+        "firstNameLabel": "Nombre",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Apellido",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Eliminar este autor",
+        "addAuthor": "Añadir Otro Autor",
+        "titleLabel": "Título",
+        "titlePlaceholder": "p. ej., The Craft of Research",
+        "yearLabel": "Año",
+        "yearPlaceholder": "p. ej., 2020",
+        "publisherLabel": "Editorial",
+        "publisherPlaceholder": "p. ej., University of Chicago Press",
+        "journalNameLabel": "Nombre de la Revista",
+        "journalNamePlaceholder": "p. ej., Journal of Information Science",
+        "volumeLabel": "Volumen",
+        "issueLabel": "Número",
+        "pagesLabel": "Páginas",
+        "pagesPlaceholder": "p. ej., 45-60",
+        "siteNameLabel": "Nombre del Sitio",
+        "siteNamePlaceholder": "p. ej., TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Fecha de Acceso (opcional)",
+        "accessDatePlaceholder": "p. ej., 5 de enero de 2024"
+      },
+      "result": {
+        "heading": "Tus Citas",
+        "missingTitle": "Introduce un título para la fuente.",
+        "missingJournalName": "Introduce el nombre de la revista en la que se publicó este artículo.",
+        "missingUrl": "Introduce la URL de la página web.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo los Estilos de Cita",
+          "paragraph1": "Un estilo de cita es una forma estandarizada de acreditar una fuente, de modo que un lector pueda saber de un vistazo quién escribió algo, cuándo y dónde se publicó — y pueda rastrear el original si quiere verificar una afirmación o leer más. Cada estilo registra los mismos datos subyacentes (autor, título, año, editorial o revista), pero los ordena y puntúa de forma diferente, por lo que la misma fuente produce tres citas visiblemente distintas según el estilo que haya adoptado una disciplina.",
+          "paragraph2": "Este generador solicita los datos de una fuente una sola vez y los formatea según los tres estilos principales al mismo tiempo. También sigue la regla propia de cada estilo sobre cuántos autores nombrar antes de cambiar a \"et al.\": esta herramienta nunca trunca la lista de autores en APA hasta pasar de 20 autores, cambia a \"et al.\" en MLA en cuanto una fuente tiene tres o más autores, y hace lo mismo en Chicago en cuanto una fuente tiene cuatro o más autores — coincidiendo con cómo maneja cada guía oficial las fuentes con múltiples autores.",
+          "paragraph3": "Algo que esta herramienta no puede hacer es aplicar cursiva: genera texto sin formato, ya que un botón de copiar no puede preservar de forma fiable el formato en todos los procesadores de texto y plataformas. En los tres estilos, el título de una obra independiente y completa — un libro, o el nombre de una revista o sitio web — debe ir en cursiva, mientras que un título que forma parte de un todo mayor, como un artículo de revista o una página web, lleva comillas normales en su lugar. Vuelve a aplicar la cursiva al título del contenedor después de pegar una cita en tu documento."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Las mismas fuentes, formateadas en los tres estilos, mostrando cómo difieren la puntuación y el orden de los nombres de autor.",
+          "columnCalculation": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Libro de Jane Doe, en formato APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "El mismo libro, en formato MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "El mismo libro, en formato Chicago (autor-fecha)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Artículo de revista con 3 autores, en MLA (regla de et al.)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Qué estilo de cita debo usar?", "answer": "Depende de tu disciplina y, a menudo, del requisito específico de tu profesor o editorial. APA es el más común en ciencias sociales, MLA en humanidades y literatura, y Chicago en historia y algunas ciencias sociales (Chicago también tiene una variante separada de notas y bibliografía, usada principalmente para notas al pie, que esta herramienta no genera — solo la forma autor-fecha para listas de referencias). Ante la duda, revisa las instrucciones de tu tarea o las normas para autores de una revista específica en lugar de adivinar." },
+            { "question": "¿Por qué APA y MLA formatean los nombres de los autores de forma tan diferente?", "answer": "Cada estilo se optimiza para un tipo distinto de lectura rápida. APA reduce los nombres de pila e intermedios a iniciales y usa \"&\" antes del último autor, priorizando listas de referencias compactas en campos con investigación muy coautoral. MLA escribe los nombres de pila completos y usa \"and\" (o \"y\"), ya que la investigación literaria y humanística cita con más frecuencia obras de uno o dos autores, donde el nombre completo se lee de forma más natural." },
+            { "question": "¿Qué significa \"et al.\", y cuándo empieza a usarlo esta herramienta?", "answer": "\"Et al.\" es latín para \"y otros\", y se usa para acortar una lista larga de autores al nombre del primer autor únicamente. Esta herramienta sigue el umbral oficial de cada estilo: APA lista a cada autor por su nombre hasta que una fuente tiene más de 20, MLA cambia a \"et al.\" con 3 o más autores, y Chicago cambia a \"et al.\" con 4 o más autores." },
+            { "question": "¿Por qué la cita empieza con el título en lugar de un autor si dejo los campos de autor vacíos?", "answer": "Los tres estilos tratan las fuentes sin autor indicado de la misma manera: como no hay un nombre de autor con el que empezar, el título ocupa la posición que normalmente ocuparía el nombre del autor, y todo lo demás en la cita se desplaza una posición. Esta es una práctica estándar, no una limitación de esta herramienta — así es como se espera alfabetizar una fuente sin autor en una lista de referencias." },
+            { "question": "¿Esta herramienta pone en cursiva los títulos de libros y revistas por mí?", "answer": "No — la salida es texto sin formato. En cada estilo aquí, el título de una obra completa e independiente (un libro, o el nombre de una revista o sitio web) debe ir en cursiva, mientras que un título que forma parte de algo más grande (un artículo, una página web) lleva comillas en su lugar, lo cual esta herramienta sí aplica. Después de pegar una cita en tu documento, pon en cursiva el título del contenedor a mano." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Un Estilo de Manuscrito Nacido en un Solo Artículo de Revista",
+            "paragraph": "El estilo APA se remonta a un artículo de siete páginas de 1929 en Psychological Bulletin, \"Instructions in Regard to Preparation of Manuscript\", escrito por un comité de psicólogos, un antropólogo y gerentes editoriales de revistas que querían un estándar compartido para que los envíos a distintas revistas de psicología no necesitaran reformatearse a mano cada vez. Lo que comenzó como un breve conjunto de normas de estilo interno para un solo campo creció, edición tras edición, hasta convertirse en el Manual de Publicaciones completo que se usa hoy en las ciencias sociales — pero la motivación central, facilitar que un lector localice la fuente detrás de una afirmación, no ha cambiado desde 1929."
+          },
+          "modernDevelopments": {
+            "title": "De Plantillas Fijas a un Sistema Universal de Elementos Básicos",
+            "paragraph": "Durante décadas, las guías de estilo abordaron los nuevos tipos de fuentes añadiendo una plantilla completamente nueva para cada formato — una plantilla para un libro, otra distinta para un artículo de revista general, otra para una película, y así sucesivamente, lo que resultaba difícil de mantener a medida que se multiplicaban las fuentes en línea. La 8ª edición de 2016 del MLA Handbook sustituyó ese enfoque por un único conjunto de nueve \"elementos básicos\" (autor, título, contenedor, editorial, fecha, etc.) que un autor completa para cualquier fuente, en cualquier medio, tratando la revista, el sitio web o la base de datos en la que aparece una fuente como un \"contenedor\" que a su vez puede estar dentro de otro contenedor. El propio enfoque de esta herramienta refleja ese cambio: en lugar de una plantilla rígida por tipo de fuente, rellena un pequeño conjunto de campos compartidos de forma distinta según si la fuente es un libro, un artículo o un sitio web."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La práctica de citación y la investigación basada en citas se sitúan dentro de la biblioteconomía y las ciencias de la información. Estas son las 5 mejores universidades del mundo en Library & Information Management según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              { "name": "Universidad de Sheffield", "note": "Puesto #1 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "No — el doctorado es un título de investigación presencial dentro de la Information School." },
+              { "name": "Universidad de Washington", "note": "Puesto #2 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "No — el doctorado en Information Science es un programa de investigación presencial a tiempo completo que suele durar de 5 a 6 años." },
+              { "name": "Universidad Tecnológica de Nanyang (NTU Singapur)", "note": "Puesto #3 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "No — el doctorado es un título de investigación presencial en la Wee Kim Wee School of Communication and Information." },
+              { "name": "Universidad de Carolina del Norte en Chapel Hill", "note": "Puesto #4 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "No — el doctorado en Information and Library Science es un programa de investigación presencial." },
+              { "name": "Universidad de Texas en Austin", "note": "Puesto #5 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "No — el doctorado en Information Studies es un programa de investigación presencial con una fecha límite de solicitud anual el 1 de diciembre." },
+              { "name": "Universidad Sultán Qaboos — Departamento de Estudios de la Información", "note": "Fundado en 1986 como el primer programa de biblioteconomía y ciencias de la información de Omán; no aparece clasificado por separado en esta tabla global por materia.", "url": "https://www.squ.edu.om/", "online": "No — los programas del departamento se imparten en el campus de la Universidad Sultán Qaboos en Mascate, Omán." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "El artículo de Garfield propuso tratar las citas mismas como un índice consultable de la investigación académica, sentando las bases conceptuales de por qué un formato de cita consistente y legible por máquina — la necesidad subyacente a la que sirve este generador — importa más allá de seguir simplemente una guía de estilo.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

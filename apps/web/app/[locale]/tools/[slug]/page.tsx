@@ -85,6 +85,8 @@ import ChemicalEquationBalancer from "@/components/tools/chemical-equation-balan
 import BalancerEducation from "@/components/tools/chemical-equation-balancer/BalancerEducation";
 import ClassScheduleBuilder from "@/components/tools/class-schedule-builder/ClassScheduleBuilder";
 import ClassScheduleEducation from "@/components/tools/class-schedule-builder/ClassScheduleEducation";
+import CitationGenerator from "@/components/tools/citation-generator/CitationGenerator";
+import CitationEducation from "@/components/tools/citation-generator/CitationEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -418,6 +420,9 @@ export default async function ToolPage({
     case "class-schedule-builder":
       component = <ClassScheduleBuilder education={<ClassScheduleEducation />} />;
       break;
+    case "citation-generator":
+      component = <CitationGenerator education={<CitationEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -523,6 +528,7 @@ export default async function ToolPage({
     slug === "stoichiometry-calculator" ||
     slug === "chemical-equation-balancer" ||
     slug === "class-schedule-builder" ||
+    slug === "citation-generator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

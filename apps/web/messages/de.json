@@ -7136,6 +7136,127 @@
         }
       }
     },
+    "citation-generator": {
+      "title": "Zitat-Generator",
+      "description": "Erstellen Sie Zitate im APA-, MLA- und Chicago-Stil für Bücher, Fachartikel und Websites.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Kurzübersicht der Stile",
+          "intro": "Die drei Stile, die dieser Generator erzeugt, und wo jeder am häufigsten verlangt wird.",
+          "apaHint": "Am häufigsten in den Sozialwissenschaften (Psychologie, Pädagogik, Pflegewissenschaft) — Autor-Jahr-Zitate im Text.",
+          "mlaHint": "Am häufigsten in den Geisteswissenschaften (Literatur, Sprachen, Kulturwissenschaften) — Autor-Seite-Zitate im Text.",
+          "chicagoHint": "Verbreitet in der Geschichtswissenschaft und einigen Sozialwissenschaften — dieser Generator erzeugt die Autor-Jahr-Variante für Literaturverzeichnisse."
+        }
+      },
+      "form": {
+        "inputTitle": "Angaben zur Quelle",
+        "sourceTypeLabel": "Quellentyp",
+        "sourceType": {
+          "book": "Buch",
+          "journal-article": "Fachartikel",
+          "website": "Website"
+        },
+        "authorsLabel": "Autor(en)",
+        "firstNameLabel": "Vorname",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Nachname",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Diesen Autor entfernen",
+        "addAuthor": "Weiteren Autor hinzufügen",
+        "titleLabel": "Titel",
+        "titlePlaceholder": "z. B. The Craft of Research",
+        "yearLabel": "Jahr",
+        "yearPlaceholder": "z. B. 2020",
+        "publisherLabel": "Verlag",
+        "publisherPlaceholder": "z. B. University of Chicago Press",
+        "journalNameLabel": "Name der Zeitschrift",
+        "journalNamePlaceholder": "z. B. Journal of Information Science",
+        "volumeLabel": "Band",
+        "issueLabel": "Heft",
+        "pagesLabel": "Seiten",
+        "pagesPlaceholder": "z. B. 45-60",
+        "siteNameLabel": "Name der Website",
+        "siteNamePlaceholder": "z. B. TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Zugriffsdatum (optional)",
+        "accessDatePlaceholder": "z. B. 5. Januar 2024"
+      },
+      "result": {
+        "heading": "Ihre Zitate",
+        "missingTitle": "Geben Sie einen Titel für die Quelle ein.",
+        "missingJournalName": "Geben Sie den Namen der Zeitschrift ein, in der dieser Artikel erschienen ist.",
+        "missingUrl": "Geben Sie die URL der Webseite ein.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Zitierstile verstehen",
+          "paragraph1": "Ein Zitierstil ist eine standardisierte Art, eine Quelle anzugeben, damit ein Leser auf einen Blick erkennt, wer etwas geschrieben hat, wann und wo es veröffentlicht wurde — und das Original nachverfolgen kann, um eine Aussage zu überprüfen oder weiterzulesen. Jeder Stil erfasst dieselben zugrunde liegenden Fakten (Autor, Titel, Jahr, Verlag oder Zeitschrift), ordnet und interpunktiert sie aber unterschiedlich, weshalb dieselbe Quelle je nach dem in einer Fachrichtung üblichen Stil drei sichtbar unterschiedliche Zitate ergibt.",
+          "paragraph2": "Dieser Generator fragt die Angaben zu einer Quelle einmal ab und formatiert sie gleichzeitig nach allen drei großen Stilen. Er folgt außerdem der jeweiligen Regel jedes Stils, wie viele Autoren namentlich genannt werden, bevor auf \"et al.\" umgeschaltet wird: Dieses Tool kürzt die Autorenliste in APA erst ab mehr als 20 Autoren, wechselt in MLA bereits ab drei oder mehr Autoren zu \"et al.\" und tut dies in Chicago ab vier oder mehr Autoren — genau wie es die jeweiligen offiziellen Stilrichtlinien für Quellen mit mehreren Autoren vorsehen.",
+          "paragraph3": "Eine Sache kann dieses Tool nicht leisten: Kursivsetzung. Es gibt reinen Text aus, da eine Kopieren-Schaltfläche die Formatierung nicht zuverlässig über jedes Textverarbeitungsprogramm und jede Plattform hinweg erhalten kann. In allen drei Stilen sollte der Titel eines eigenständigen Werks — eines Buches oder des Namens einer Zeitschrift oder Website — kursiv gesetzt werden, während ein Titel, der Teil eines größeren Ganzen ist, etwa ein Zeitschriftenartikel oder eine Webseite, stattdessen in Anführungszeichen steht. Setzen Sie den Titel des übergeordneten Werks nach dem Einfügen eines Zitats in Ihr Dokument von Hand kursiv."
+        },
+        "examples": {
+          "title": "Ausgearbeitete Beispiele",
+          "intro": "Dieselben Quellen, formatiert nach allen drei Stilen, zeigen, wie sich Zeichensetzung und Reihenfolge der Autorennamen unterscheiden.",
+          "columnCalculation": "Szenario",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Buch von Jane Doe, formatiert nach APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "Dasselbe Buch, formatiert nach MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "Dasselbe Buch, formatiert nach Chicago (Autor-Jahr)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Fachartikel mit 3 Autoren, nach MLA (Regel zu et al.)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Welchen Zitierstil sollte ich verwenden?", "answer": "Das hängt von Ihrer Fachrichtung und oft von der konkreten Vorgabe Ihres Dozenten oder Verlags ab. APA ist am häufigsten in den Sozialwissenschaften, MLA in den Geisteswissenschaften und der Literaturwissenschaft, Chicago in der Geschichtswissenschaft und einigen Sozialwissenschaften (Chicago hat außerdem eine separate Fußnoten-Bibliografie-Variante, die hauptsächlich für Fußnoten verwendet wird und von diesem Tool nicht erzeugt wird — nur die Autor-Jahr-Form für Literaturverzeichnisse). Prüfen Sie im Zweifel die Vorgaben Ihrer Aufgabenstellung oder die Autorenrichtlinien einer Zielzeitschrift, statt zu raten." },
+            { "question": "Warum formatieren APA und MLA Autorennamen so unterschiedlich?", "answer": "Jeder Stil optimiert für eine andere Art des Überfliegens. APA reduziert Vor- und mittlere Namen auf Initialen und setzt vor dem letzten Autor ein \"&\", um kompakte Literaturverzeichnisse in Fächern mit stark ko-autorenschaftlicher Forschung zu ermöglichen. MLA schreibt Vornamen vollständig aus und verwendet \"and\", da literatur- und geisteswissenschaftliche Arbeiten häufiger Werke mit ein oder zwei Autoren zitieren, bei denen der vollständige Name natürlicher wirkt." },
+            { "question": "Was bedeutet \"et al.\", und ab wann verwendet dieses Tool es?", "answer": "\"Et al.\" ist Lateinisch für \"und andere\" und dient dazu, eine lange Autorenliste auf den Namen des ersten Autors zu kürzen. Dieses Tool folgt dem jeweiligen offiziellen Schwellenwert: APA listet jeden Autor namentlich auf, bis eine Quelle mehr als 20 Autoren hat, MLA wechselt ab 3 oder mehr Autoren zu \"et al.\", und Chicago wechselt ab 4 oder mehr Autoren zu \"et al.\"" },
+            { "question": "Warum beginnt das Zitat mit dem Titel statt mit einem Autor, wenn ich die Autorenfelder leer lasse?", "answer": "Alle drei Stile behandeln Quellen ohne angegebenen Autor auf dieselbe Weise: Da kein Autorenname vorangestellt werden kann, rückt der Titel an die Stelle, die sonst der Autorenname einnehmen würde, und alles Weitere im Zitat verschiebt sich um eine Position. Dies ist gängige Praxis und keine Einschränkung dieses Tools — so soll eine Quelle ohne Autor in einem Literaturverzeichnis alphabetisch eingeordnet werden." },
+            { "question": "Setzt dieses Tool Buch- und Zeitschriftentitel automatisch kursiv?", "answer": "Nein — die Ausgabe ist reiner Text. In jedem Stil hier sollte der Titel eines vollständigen, eigenständigen Werks (ein Buch oder der Name einer Zeitschrift oder Website) kursiv gesetzt werden, während ein Titel, der Teil eines größeren Ganzen ist (ein Artikel, eine Webseite), stattdessen Anführungszeichen erhält — was dieses Tool bereits umsetzt. Setzen Sie nach dem Einfügen eines Zitats in Ihr Dokument den Titel des übergeordneten Werks von Hand kursiv." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Ein Manuskriptstil, geboren in einem einzigen Zeitschriftenartikel",
+            "paragraph": "Der APA-Stil geht auf einen siebenseitigen Artikel von 1929 im Psychological Bulletin zurück, \"Instructions in Regard to Preparation of Manuscript\", verfasst von einem Ausschuss aus Psychologen, einem Anthropologen und Redaktionsmitarbeitern von Fachzeitschriften, die einen gemeinsamen Standard wollten, damit Einreichungen bei verschiedenen Psychologiezeitschriften nicht jedes Mal von Hand neu formatiert werden mussten. Was als kurze Sammlung hausinterner Stilregeln für ein einzelnes Fach begann, wuchs Auflage für Auflage zum vollständigen Publication Manual heran, das heute in den Sozialwissenschaften verwendet wird — doch die Kernmotivation, es einem Leser zu erleichtern, die Quelle hinter einer Aussage zu finden, hat sich seit 1929 nicht geändert."
+          },
+          "modernDevelopments": {
+            "title": "Von festen Vorlagen zu einem universellen Kernelemente-System",
+            "paragraph": "Jahrzehntelang begegneten Stilrichtlinien neuen Quellenarten, indem sie für jedes Format eine völlig neue Vorlage hinzufügten — eine Vorlage für ein Buch, eine andere für einen Zeitschriftenartikel, wieder eine andere für einen Film und so weiter, was mit der wachsenden Zahl von Online-Quellen immer schwerer Schritt zu halten war. Die 8. Auflage des MLA Handbook von 2016 ersetzte diesen Ansatz durch einen einzigen Satz von neun \"Kernelementen\" (Autor, Titel, Container, Verlag, Datum und so weiter), die ein Verfasser für jede Quelle in jedem Medium ausfüllt, wobei die Zeitschrift, Website oder Datenbank, in der eine Quelle erscheint, als \"Container\" behandelt wird, der selbst wiederum in einem anderen Container stecken kann. Der Ansatz dieses Tools spiegelt diesen Wandel wider: Statt einer starren Vorlage pro Quellentyp füllt es einen kleinen Satz gemeinsamer Felder unterschiedlich aus, je nachdem, ob die Quelle ein Buch, ein Artikel oder eine Website ist."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Zitierpraxis und zitationsbasierte Forschung sind in der Bibliotheks- und Informationswissenschaft verortet. Hier sind die weltweit besten 5 für Library & Information Management im QS World University Rankings by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              { "name": "University of Sheffield", "note": "Weltweit auf Platz 1 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "Nein — die Promotion ist ein Präsenz-Forschungsabschluss innerhalb der Information School." },
+              { "name": "University of Washington", "note": "Weltweit auf Platz 2 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "Nein — die Promotion in Information Science ist ein Vollzeit-Präsenz-Forschungsprogramm, das typischerweise 5 bis 6 Jahre dauert." },
+              { "name": "Nanyang Technological University (NTU Singapur)", "note": "Weltweit auf Platz 3 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "Nein — die Promotion ist ein Präsenz-Forschungsabschluss an der Wee Kim Wee School of Communication and Information." },
+              { "name": "University of North Carolina at Chapel Hill", "note": "Weltweit auf Platz 4 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "Nein — die Promotion in Information and Library Science ist ein Präsenz-Forschungsprogramm." },
+              { "name": "University of Texas at Austin", "note": "Weltweit auf Platz 5 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "Nein — die Promotion in Information Studies ist ein Präsenz-Forschungsprogramm mit einer jährlichen Bewerbungsfrist am 1. Dezember." },
+              { "name": "Sultan Qaboos University — Department of Information Studies", "note": "1986 als erstes bibliotheks- und informationswissenschaftliches Programm Omans gegründet; in diesem globalen Fachranking nicht separat gelistet.", "url": "https://www.squ.edu.om/", "online": "Nein — die Programme der Fakultät werden auf dem Campus der Sultan Qaboos University in Maskat, Oman, durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "Garfields Aufsatz schlug vor, Zitate selbst als durchsuchbaren Index der Forschung zu betrachten, und legte damit die konzeptionelle Grundlage dafür, warum eine konsistente, maschinenlesbare Zitierformatierung — das eigentliche Bedürfnis, dem dieser Generator dient — über das bloße Befolgen einer Stilrichtlinie hinaus wichtig ist.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

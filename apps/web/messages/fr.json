@@ -7136,6 +7136,127 @@
         }
       }
     },
+    "citation-generator": {
+      "title": "Générateur de Citations",
+      "description": "Générez des citations aux styles APA, MLA et Chicago pour des livres, articles scientifiques et sites web.",
+      "nav": {
+        "tool": "Générateur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Guide Rapide des Styles",
+          "intro": "Les trois styles produits par ce générateur, et où chacun est le plus couramment exigé.",
+          "apaHint": "Le plus courant en sciences sociales (psychologie, sciences de l'éducation, sciences infirmières) — citations dans le texte auteur-date.",
+          "mlaHint": "Le plus courant en sciences humaines (littérature, langues, études culturelles) — citations dans le texte auteur-page.",
+          "chicagoHint": "Courant en histoire et dans certaines sciences sociales — ce générateur produit la variante auteur-date utilisée dans les listes de références."
+        }
+      },
+      "form": {
+        "inputTitle": "Détails de la Source",
+        "sourceTypeLabel": "Type de Source",
+        "sourceType": {
+          "book": "Livre",
+          "journal-article": "Article de Revue",
+          "website": "Site Web"
+        },
+        "authorsLabel": "Auteur(s)",
+        "firstNameLabel": "Prénom",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Nom de Famille",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Supprimer cet auteur",
+        "addAuthor": "Ajouter un Autre Auteur",
+        "titleLabel": "Titre",
+        "titlePlaceholder": "ex. The Craft of Research",
+        "yearLabel": "Année",
+        "yearPlaceholder": "ex. 2020",
+        "publisherLabel": "Éditeur",
+        "publisherPlaceholder": "ex. University of Chicago Press",
+        "journalNameLabel": "Nom de la Revue",
+        "journalNamePlaceholder": "ex. Journal of Information Science",
+        "volumeLabel": "Volume",
+        "issueLabel": "Numéro",
+        "pagesLabel": "Pages",
+        "pagesPlaceholder": "ex. 45-60",
+        "siteNameLabel": "Nom du Site",
+        "siteNamePlaceholder": "ex. TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Date de Consultation (facultatif)",
+        "accessDatePlaceholder": "ex. 5 janvier 2024"
+      },
+      "result": {
+        "heading": "Vos Citations",
+        "missingTitle": "Saisissez un titre pour la source.",
+        "missingJournalName": "Saisissez le nom de la revue dans laquelle cet article a été publié.",
+        "missingUrl": "Saisissez l'URL de la page web.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Styles de Citation",
+          "paragraph1": "Un style de citation est une manière normalisée de créditer une source, afin qu'un lecteur puisse voir en un coup d'œil qui a écrit un texte, quand et où il a été publié — et puisse retrouver l'original s'il souhaite vérifier une affirmation ou approfondir sa lecture. Chaque style enregistre les mêmes informations de base (auteur, titre, année, éditeur ou revue), mais les organise et les ponctue différemment, ce qui explique pourquoi une même source produit trois citations visiblement différentes selon le style adopté par une discipline.",
+          "paragraph2": "Ce générateur demande une seule fois les détails d'une source et les met en forme selon les trois principaux styles simultanément. Il applique aussi la règle propre à chaque style concernant le nombre d'auteurs à citer nommément avant de basculer vers \"et al.\" : cet outil ne tronque jamais la liste des auteurs en APA avant qu'elle ne dépasse 20 auteurs, passe à \"et al.\" en MLA dès qu'une source compte trois auteurs ou plus, et fait de même en Chicago dès qu'une source compte quatre auteurs ou plus — conformément à la façon dont chaque guide officiel traite les sources à plusieurs auteurs.",
+          "paragraph3": "Une chose que cet outil ne peut pas faire, c'est appliquer l'italique : il produit du texte brut, car un bouton de copie ne peut pas préserver de façon fiable la mise en forme sur tous les traitements de texte et toutes les plateformes. Dans les trois styles, le titre d'une œuvre autonome et complète — un livre, ou le nom d'une revue ou d'un site web — doit être en italique, tandis qu'un titre faisant partie d'un ensemble plus large, comme un article de revue ou une page web, prend des guillemets ordinaires à la place. Réappliquez l'italique au titre du contenant après avoir collé une citation dans votre document."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Les mêmes sources, mises en forme selon les trois styles, montrant en quoi la ponctuation et l'ordre des noms d'auteurs diffèrent.",
+          "columnCalculation": "Scénario",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Livre de Jane Doe, au format APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "Le même livre, au format MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "Le même livre, au format Chicago (auteur-date)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Article de revue avec 3 auteurs, en MLA (règle du et al.)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Quel style de citation devrais-je utiliser ?", "answer": "Cela dépend de votre discipline et, souvent, de l'exigence spécifique de votre enseignant ou de l'éditeur. L'APA est le plus courant en sciences sociales, le MLA en sciences humaines et en littérature, et Chicago en histoire et dans certaines sciences sociales (Chicago possède aussi une variante distincte à notes et bibliographie, utilisée principalement pour les notes de bas de page, que cet outil ne génère pas — seulement la forme auteur-date pour les listes de références). En cas de doute, consultez les consignes de votre travail ou les instructions aux auteurs d'une revue cible plutôt que de deviner." },
+            { "question": "Pourquoi l'APA et le MLA mettent-ils en forme les noms d'auteurs si différemment ?", "answer": "Chaque style s'optimise pour un type de lecture rapide différent. L'APA réduit les prénoms et deuxièmes prénoms à des initiales et utilise \"&\" avant le dernier auteur, privilégiant des listes de références compactes dans des domaines où la co-écriture est fréquente. Le MLA écrit les prénoms en entier et utilise \"and\", car les travaux littéraires et en sciences humaines citent plus souvent des ouvrages à un ou deux auteurs, où le nom complet se lit plus naturellement." },
+            { "question": "Que signifie \"et al.\", et à partir de quand cet outil commence-t-il à l'utiliser ?", "answer": "\"Et al.\" est du latin pour \"et autres\", utilisé pour raccourcir une longue liste d'auteurs au nom du seul premier auteur. Cet outil suit le seuil officiel propre à chaque style : l'APA cite chaque auteur nommément jusqu'à ce qu'une source compte plus de 20 auteurs, le MLA passe à \"et al.\" à partir de 3 auteurs ou plus, et Chicago passe à \"et al.\" à partir de 4 auteurs ou plus." },
+            { "question": "Pourquoi la citation commence-t-elle par le titre plutôt que par un auteur si je laisse les champs auteur vides ?", "answer": "Les trois styles traitent de la même manière les sources sans auteur indiqué : puisqu'il n'y a pas de nom d'auteur par lequel commencer, le titre occupe la position que le nom de l'auteur occuperait normalement, et tout le reste de la citation se décale d'une position. Il s'agit d'une pratique standard, et non d'une limitation de cet outil — c'est ainsi qu'une source sans auteur est censée être alphabétisée dans une liste de références." },
+            { "question": "Cet outil met-il automatiquement en italique les titres de livres et de revues ?", "answer": "Non — la sortie est du texte brut. Dans chaque style ici, le titre d'une œuvre complète et autonome (un livre, ou le nom d'une revue ou d'un site web) doit être en italique, tandis qu'un titre faisant partie d'un ensemble plus large (un article, une page web) prend des guillemets à la place, ce que cet outil applique déjà. Après avoir collé une citation dans votre document, mettez le titre du contenant en italique à la main." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Un Style de Manuscrit Né dans un Seul Article de Revue",
+            "paragraph": "Le style APA remonte à un article de sept pages publié en 1929 dans Psychological Bulletin, \"Instructions in Regard to Preparation of Manuscript\", rédigé par un comité de psychologues, un anthropologue et des responsables éditoriaux de revues qui souhaitaient une norme commune afin que les soumissions à différentes revues de psychologie n'aient pas à être reformatées à la main à chaque fois. Ce qui a commencé comme un court ensemble de règles de style interne pour un seul domaine a grandi, édition après édition, jusqu'à devenir le Publication Manual complet utilisé aujourd'hui dans les sciences sociales — mais la motivation centrale, faciliter pour un lecteur la localisation de la source derrière une affirmation, n'a pas changé depuis 1929."
+          },
+          "modernDevelopments": {
+            "title": "Des Modèles Fixes à un Système Universel d'Éléments Fondamentaux",
+            "paragraph": "Pendant des décennies, les guides de style ont traité les nouveaux types de sources en ajoutant un modèle entièrement nouveau pour chaque format — un modèle pour un livre, un autre différent pour un article de magazine, un autre encore pour un film, et ainsi de suite, une approche de plus en plus difficile à maintenir à mesure que les sources en ligne se multipliaient. La 8ᵉ édition de 2016 du MLA Handbook a remplacé cette approche par un ensemble unique de neuf \"éléments fondamentaux\" (auteur, titre, contenant, éditeur, date, etc.) qu'un rédacteur renseigne pour n'importe quelle source, sur n'importe quel support, en traitant la revue, le site web ou la base de données dans laquelle une source apparaît comme un \"contenant\" pouvant lui-même se trouver à l'intérieur d'un autre contenant. L'approche de cet outil reflète ce changement : plutôt qu'un modèle rigide par type de source, il remplit un petit ensemble de champs communs différemment selon que la source est un livre, un article ou un site web."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La pratique de la citation et la recherche fondée sur les citations relèvent des sciences de l'information et des bibliothèques. Voici les 5 meilleures universités mondiales en Library & Information Management selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              { "name": "Université de Sheffield", "note": "Classée #1 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "Non — le doctorat est un diplôme de recherche en présentiel au sein de l'Information School." },
+              { "name": "Université de Washington", "note": "Classée #2 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "Non — le doctorat en Information Science est un programme de recherche en présentiel à temps plein, durant généralement 5 à 6 ans." },
+              { "name": "Université technologique de Nanyang (NTU Singapour)", "note": "Classée #3 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "Non — le doctorat est un diplôme de recherche en présentiel à la Wee Kim Wee School of Communication and Information." },
+              { "name": "Université de Caroline du Nord à Chapel Hill", "note": "Classée #4 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "Non — le doctorat en Information and Library Science est un programme de recherche en présentiel." },
+              { "name": "Université du Texas à Austin", "note": "Classée #5 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "Non — le doctorat en Information Studies est un programme de recherche en présentiel avec une date limite de candidature annuelle fixée au 1er décembre." },
+              { "name": "Université Sultan Qaboos — Département des Sciences de l'Information", "note": "Fondé en 1986 comme premier programme de sciences de l'information et des bibliothèques d'Oman ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://www.squ.edu.om/", "online": "Non — les programmes du département sont dispensés sur le campus de l'Université Sultan Qaboos à Mascate, Oman." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "L'article de Garfield proposait de traiter les citations elles-mêmes comme un index consultable de la recherche scientifique, posant les bases conceptuelles expliquant pourquoi un formatage de citation cohérent et lisible par machine — le besoin sous-jacent auquel répond ce générateur — importe au-delà du simple respect d'un guide de style.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",
