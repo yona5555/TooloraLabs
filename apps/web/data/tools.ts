@@ -438,6 +438,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "force-calculator",
+    title: "Force & Newton's Law Calculator",
+    category: "math-science",
+    description:
+      "Solve Newton's second law (F = ma) or the law of universal gravitation for force, mass, acceleration, or distance, with a dynamic force diagram.",
+    featured: false,
+    keywords: [
+      "force calculator",
+      "newton's second law calculator",
+      "f=ma calculator",
+      "universal gravitation calculator",
+      "gravitational force calculator",
+      "mass acceleration calculator",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

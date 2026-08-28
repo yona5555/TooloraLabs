@@ -5949,6 +5949,187 @@
         }
       }
     },
+    "force-calculator": {
+      "title": "Kraft- und Newton-Gesetz-Rechner",
+      "description": "Lösen Sie Newtons zweites Gesetz (F = ma) oder das Gravitationsgesetz nach Kraft, Masse, Beschleunigung oder Entfernung, mit einem dynamischen Kraftdiagramm.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Kraftformeln",
+          "intro": "Die beiden Formeln, die dieser Rechner anwendet.",
+          "formulas": {
+            "secondLaw": { "label": "Newtons zweites Gesetz", "expression": "F = ma" },
+            "gravitation": { "label": "Universelle Gravitation", "expression": "F = Gm₁m₂ / r²" },
+            "gravitationalConstant": { "label": "Gravitationskonstante", "expression": "G ≈ 6,674 × 10⁻¹¹ N·m²/kg²" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "modeLabel": "Berechnen",
+        "mode": {
+          "secondLaw": "Newtons zweites Gesetz (F = ma)",
+          "gravitation": "Universelle Gravitation (F = Gm₁m₂/r²)"
+        },
+        "solveForLabel": "Berechnen",
+        "secondLawSolveFor": {
+          "force": "Kraft (F)",
+          "mass": "Masse (m)",
+          "acceleration": "Beschleunigung (a)"
+        },
+        "gravitationSolveFor": {
+          "force": "Gravitationskraft (F)",
+          "mass1": "Masse 1 (m₁)",
+          "mass2": "Masse 2 (m₂)",
+          "distance": "Entfernung (r)"
+        },
+        "forceLabel": "Kraft (N)",
+        "forcePlaceholder": "z. B. 10",
+        "massLabel": "Masse (kg)",
+        "massPlaceholder": "z. B. 2",
+        "accelerationLabel": "Beschleunigung (m/s²)",
+        "accelerationPlaceholder": "z. B. 5",
+        "mass1Label": "Masse 1 (kg)",
+        "mass1Placeholder": "z. B. 5.972e24",
+        "mass2Label": "Masse 2 (kg)",
+        "mass2Placeholder": "z. B. 1",
+        "distanceLabel": "Entfernung zwischen den Mittelpunkten (m)",
+        "distancePlaceholder": "z. B. 6.371e6"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroAcceleration": "Die Beschleunigung darf nicht null sein, um die Masse zu berechnen.",
+        "zeroMass": "Die Masse darf nicht null sein, um die Beschleunigung zu berechnen.",
+        "zeroMass1": "Masse 1 darf nicht null sein, um Masse 2 zu berechnen.",
+        "zeroMass2": "Masse 2 darf nicht null sein, um Masse 1 zu berechnen.",
+        "zeroDistance": "Die Entfernung darf nicht null sein, um die Gravitationskraft zu berechnen.",
+        "zeroForce": "Die Kraft darf nicht null sein, um die Entfernung zu berechnen.",
+        "force": "Kraft",
+        "mass": "Masse",
+        "acceleration": "Beschleunigung",
+        "mass1": "Masse 1",
+        "mass2": "Masse 2",
+        "distance": "Entfernung",
+        "diagramForce": "F={value} N",
+        "diagramAcceleration": "a={value} m/s²",
+        "diagramCaptionSecondLaw": "Kraft- und Beschleunigungspfeile skaliert auf ihre berechneten Beträge, in derselben Richtung.",
+        "diagramMass1": "m₁={value} kg",
+        "diagramMass2": "m₂={value} kg",
+        "diagramCaptionGravitation": "Kreisgrößen skaliert auf die relative Masse; Pfeile zeigen die gegenseitige Gravitationsanziehung."
+      },
+      "education": {
+        "intro": {
+          "title": "Kraft und Newtons Gesetze verstehen",
+          "paragraph1": "Newtons zweites Gesetz, F = ma, besagt, dass die Nettokraft auf ein Objekt gleich seiner Masse mal seiner Beschleunigung ist. Kraft wird in Newton (N) gemessen, wobei ein Newton die Kraft ist, die nötig ist, um eine Masse von 1 kg mit 1 m/s² zu beschleunigen. Umgestellt liefert dieselbe Gleichung die Masse (m = F/a) oder die Beschleunigung (a = F/m), sobald die anderen beiden Größen bekannt sind.",
+          "diagram": {
+            "caption": "Eine Masse von 2 kg beschleunigt mit 3 m/s² unter einer Nettokraft von 6 N — Kraft- und Beschleunigungspfeile zeigen in dieselbe Richtung und skalieren mit dem Betrag."
+          },
+          "paragraph2": "Das Gravitationsgesetz, F = Gm₁m₂/r², beschreibt eine andere Art von Kraft: die gegenseitige Anziehung zwischen zwei beliebigen Massen, proportional zum Produkt ihrer Massen und umgekehrt proportional zum Quadrat des Abstands zwischen ihren Mittelpunkten. Die Gravitationskonstante G (etwa 6,674 × 10⁻¹¹ N·m²/kg²) ist extrem klein, weshalb die Gravitationsanziehung zwischen Alltagsobjekten nicht wahrnehmbar ist — sie wird erst bedeutsam, wenn mindestens eine Masse astronomisch groß ist, wie ein Planet oder ein Stern.",
+          "paragraph3": "Beide Gleichungen beschreiben Kraft, beantworten aber unterschiedliche Fragen: F = ma verknüpft die Masse und Beschleunigung eines einzelnen Objekts unter einer beliebigen Nettokraft, während F = Gm₁m₂/r² speziell die Gravitationskraft zwischen zwei Massen anhand ihres Abstands berechnet. Ein fallendes Objekt an der Erdoberfläche erfährt beides — die Schwerkraft (aus F = Gm₁m₂/r², nahe der Erdoberfläche vereinfacht zu F = mg) ist die spezifische Kraft, und F = ma beschreibt, wie sich diese Kraft in seine Beschleunigung übersetzt."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Lösung beider Formeln für repräsentative Werte.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "2-kg-Masse beschleunigt mit 3 m/s²", "result": "F = 6 N" },
+            { "calculation": "10-N-Kraft beschleunigt ein Objekt mit 2 m/s²", "result": "m = 5 kg" },
+            { "calculation": "Erdmasse, ein 1-kg-Objekt, beim Erdradius", "result": "F ≈ 9,8 N (entspricht der Erdanziehung)" },
+            { "calculation": "Zwei 1 × 10¹⁰-kg-Massen, 100 km voneinander entfernt", "result": "F ≈ 0,667 N" }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum wiegt dieselbe Masse auf dem Mond weniger als auf der Erde?",
+              "answer": "Gewicht ist die Gravitationskraft, die auf eine Masse wirkt, F = Gm₁m₂/r², und die Masse des Mondes beträgt nur etwa 1,2 % der Erdmasse — deutlich weniger Masse bedeutet deutlich weniger Gravitationsanziehung, etwa ein Sechstel der Erdanziehung, obwohl die Masse des Objekts selbst (die Menge an enthaltener Materie) auf beiden Welten exakt gleich bleibt."
+            },
+            {
+              "question": "Ist die Gravitationskonstante G dasselbe wie die Gravitationsbeschleunigung g?",
+              "answer": "Nein — sie sind verwandt, aber unterschiedlich. G (6,674 × 10⁻¹¹ N·m²/kg²) ist eine universelle Konstante, die für die Gravitation zwischen beliebigen zwei Massen überall im Universum gilt. Das kleine g (etwa 9,8 m/s² an der Erdoberfläche) ist ein abgeleiteter, ortsspezifischer Wert: die Gravitationsbeschleunigung, die speziell durch die Erdmasse an der Erdoberfläche erzeugt wird, berechnet aus G, der Erdmasse und dem Erdradius."
+            },
+            {
+              "question": "Warum wird Newtons Gravitationsgesetz ein „Quadratisches-Abstands-Gesetz“ genannt?",
+              "answer": "Weil die Kraft umgekehrt proportional zum Quadrat des Abstands (1/r²) zwischen den beiden Massen ist, nicht zum Abstand selbst. Eine Verdopplung des Abstands zwischen zwei Massen halbiert die Gravitationskraft nicht — sie verringert sie auf ein Viertel, und eine Verdreifachung des Abstands verringert sie auf ein Neuntel, entsprechend der quadratischen Beziehung."
+            },
+            {
+              "question": "Gilt F = ma für jede Art von Kraft oder nur für Schwerkraft?",
+              "answer": "F = ma gilt für die Nettokraft aus jeder Quelle — Schwerkraft, Reibung, angewandte Schübe oder Züge, Spannung oder jede Kombination, die zusammenwirkt. Es ist eine allgemeine Aussage, die Masse und Beschleunigung eines beliebigen Objekts mit der Gesamtkraft verknüpft, die auf es wirkt, im Unterschied zu F = Gm₁m₂/r², das speziell die Gravitationskraft zwischen zwei Massen berechnet."
+            },
+            {
+              "question": "Warum benötigt ein massereicheres Objekt mehr Kraft, um dieselbe Beschleunigung zu erreichen?",
+              "answer": "Das folgt direkt aus F = ma: Bei fester Beschleunigung ist die erforderliche Kraft direkt proportional zur Masse. Masse stellt den Widerstand eines Objekts gegen Bewegungsänderungen dar (Trägheit), sodass ein massereicheres Objekt von Natur aus proportional mehr Nettokraft benötigt, um seine Geschwindigkeit mit derselben Rate zu ändern wie ein weniger massereiches."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Ein fallender Apfel, und eine Legende, die darum wuchs",
+            "paragraph": "Beide Gleichungen, die dieser Rechner anwendet, stammen aus Isaac Newtons Philosophiæ Naturalis Principia Mathematica, veröffentlicht 1687, das erstmals seine drei Bewegungsgesetze und das Gravitationsgesetz gemeinsam darlegte. Die berühmte Geschichte eines fallenden Apfels, der Newtons Einsicht in die Schwerkraft inspirierte, hat tatsächlich eine reale, wenn auch dünne, historische Grundlage: Newton selbst erzählte die Geschichte spät in seinem Leben seinem Freund William Stukeley im Jahr 1726, der sie aufzeichnete und 1752 posthum veröffentlichte. Doch Newtons eigener, auf etwa 1666 datierter Bericht erwähnt nie, dass der Apfel ihn am Kopf getroffen habe, und es gibt keine unabhängige zeitgenössische Bestätigung des Vorfalls — dieses dramatische Detail scheint, zusammen mit einem Großteil der populären Rahmung der Anekdote, eine spätere Ausschmückung zu sein, die einer Geschichte hinzugefügt wurde, die Newton selbst möglicherweise teilweise als vereinfachte Illustration erzählte, nicht als wortgetreue Schilderung."
+          },
+          "modernDevelopments": {
+            "title": "Die Messung der ungemessenen Konstante",
+            "paragraph": "Newtons Gravitationsgesetz beschrieb, wie die Gravitationskraft mit Masse und Entfernung skaliert, aber Newton bestimmte nie den numerischen Wert von G selbst — dafür war ein Experiment nötig, das empfindlich genug war, um die verschwindend geringe Gravitationsanziehung zwischen gewöhnlichen Laborobjekten zu messen. Der englische Wissenschaftler Henry Cavendish gelang dies 1797–1798 mit einer außerordentlich empfindlichen Torsionswaage, obwohl er sein Ziel als Bestimmung der Erddichte beschrieb, nicht als spezifische Messung von G — die moderne, auf G basierende Formulierung von Newtons Gesetz war eine spätere Neuinterpretation von Cavendishs Ergebnissen. Seine Messung war so präzise, dass sie danach etwa ein Jahrhundert lang im Wesentlichen unübertroffen blieb."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Kraft, Bewegung und Gravitation sind grundlegende Themen der Physik. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "McKie, D., & de Beer, G. R. (1951). Newton's apple. Notes and Records of the Royal Society, 9(1), 46–54.",
+          "note": "Die Historiker McKie und de Beer verfolgen die dokumentarischen Belege hinter der Anekdote von Newtons Apfel und unterscheiden, was Newton selbst nachweislich gesagt hat, von den Ausschmückungen, die die Geschichte später erhielt.",
+          "url": "https://doi.org/10.1098/rsnr.1951.0003",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

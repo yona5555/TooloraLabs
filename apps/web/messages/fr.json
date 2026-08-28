@@ -5949,6 +5949,187 @@
         }
       }
     },
+    "force-calculator": {
+      "title": "Calculateur de Force et Loi de Newton",
+      "description": "Résolvez la deuxième loi de Newton (F = ma) ou la loi de la gravitation universelle pour la force, la masse, l'accélération ou la distance, avec un diagramme dynamique de la force.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules de Force",
+          "intro": "Les deux formules appliquées par ce calculateur.",
+          "formulas": {
+            "secondLaw": { "label": "Deuxième Loi de Newton", "expression": "F = ma" },
+            "gravitation": { "label": "Gravitation Universelle", "expression": "F = Gm₁m₂ / r²" },
+            "gravitationalConstant": { "label": "Constante de Gravitation", "expression": "G ≈ 6,674 × 10⁻¹¹ N·m²/kg²" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Valeurs Connues",
+        "modeLabel": "Calculer",
+        "mode": {
+          "secondLaw": "Deuxième Loi de Newton (F = ma)",
+          "gravitation": "Gravitation Universelle (F = Gm₁m₂/r²)"
+        },
+        "solveForLabel": "Calculer",
+        "secondLawSolveFor": {
+          "force": "Force (F)",
+          "mass": "Masse (m)",
+          "acceleration": "Accélération (a)"
+        },
+        "gravitationSolveFor": {
+          "force": "Force Gravitationnelle (F)",
+          "mass1": "Masse 1 (m₁)",
+          "mass2": "Masse 2 (m₂)",
+          "distance": "Distance (r)"
+        },
+        "forceLabel": "Force (N)",
+        "forcePlaceholder": "p. ex. 10",
+        "massLabel": "Masse (kg)",
+        "massPlaceholder": "p. ex. 2",
+        "accelerationLabel": "Accélération (m/s²)",
+        "accelerationPlaceholder": "p. ex. 5",
+        "mass1Label": "Masse 1 (kg)",
+        "mass1Placeholder": "p. ex. 5.972e24",
+        "mass2Label": "Masse 2 (kg)",
+        "mass2Placeholder": "p. ex. 1",
+        "distanceLabel": "Distance Entre les Centres (m)",
+        "distancePlaceholder": "p. ex. 6.371e6"
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroAcceleration": "L'accélération doit être différente de zéro pour calculer la masse.",
+        "zeroMass": "La masse doit être différente de zéro pour calculer l'accélération.",
+        "zeroMass1": "La masse 1 doit être différente de zéro pour calculer la masse 2.",
+        "zeroMass2": "La masse 2 doit être différente de zéro pour calculer la masse 1.",
+        "zeroDistance": "La distance doit être différente de zéro pour calculer la force gravitationnelle.",
+        "zeroForce": "La force doit être différente de zéro pour calculer la distance.",
+        "force": "Force",
+        "mass": "Masse",
+        "acceleration": "Accélération",
+        "mass1": "Masse 1",
+        "mass2": "Masse 2",
+        "distance": "Distance",
+        "diagramForce": "F={value} N",
+        "diagramAcceleration": "a={value} m/s²",
+        "diagramCaptionSecondLaw": "Flèches de force et d'accélération à l'échelle de leurs magnitudes calculées, dans la même direction.",
+        "diagramMass1": "m₁={value} kg",
+        "diagramMass2": "m₂={value} kg",
+        "diagramCaptionGravitation": "Tailles de cercle à l'échelle de la masse relative ; les flèches montrent l'attraction gravitationnelle mutuelle."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Force et les Lois de Newton",
+          "paragraph1": "La deuxième loi de Newton, F = ma, énonce que la force nette sur un objet est égale à sa masse multipliée par son accélération. La force se mesure en newtons (N), un newton étant la force nécessaire pour accélérer une masse de 1 kg à 1 m/s². Réarrangée, cette même équation donne la masse (m = F/a) ou l'accélération (a = F/m) dès lors que les deux autres grandeurs sont connues.",
+          "diagram": {
+            "caption": "Une masse de 2 kg accélérant à 3 m/s² sous une force nette de 6 N — les flèches de force et d'accélération pointent dans la même direction et sont à l'échelle de la magnitude."
+          },
+          "paragraph2": "La loi de la gravitation universelle, F = Gm₁m₂/r², décrit un type de force différent : l'attraction mutuelle entre deux masses quelconques, proportionnelle au produit de leurs masses et inversement proportionnelle au carré de la distance entre leurs centres. La constante gravitationnelle G (environ 6,674 × 10⁻¹¹ N·m²/kg²) est extrêmement faible, ce qui explique pourquoi l'attraction gravitationnelle entre objets du quotidien est imperceptible — elle ne devient significative que lorsqu'au moins une masse est astronomiquement grande, comme une planète ou une étoile.",
+          "paragraph3": "Les deux équations décrivent une force, mais répondent à des questions différentes : F = ma relie la masse et l'accélération d'un seul objet sous n'importe quelle force nette, tandis que F = Gm₁m₂/r² calcule spécifiquement la force gravitationnelle entre deux masses en fonction de leur séparation. Un objet en chute à la surface de la Terre subit les deux à la fois — la gravité (issue de F = Gm₁m₂/r², simplifiée en F = mg près de la surface terrestre) est la force spécifique, et F = ma décrit comment cette force se traduit en accélération."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Résolution des deux formules pour des valeurs représentatives.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Masse de 2 kg accélérant à 3 m/s²", "result": "F = 6 N" },
+            { "calculation": "Force de 10 N accélérant un objet à 2 m/s²", "result": "m = 5 kg" },
+            { "calculation": "Masse de la Terre, un objet de 1 kg, au rayon terrestre", "result": "F ≈ 9,8 N (correspond à la gravité de surface)" },
+            { "calculation": "Deux masses de 1 × 10¹⁰ kg, séparées de 100 km", "result": "F ≈ 0,667 N" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi la même masse pèse-t-elle moins sur la Lune que sur Terre ?",
+              "answer": "Le poids est la force gravitationnelle agissant sur une masse, F = Gm₁m₂/r², et la masse de la Lune ne représente qu'environ 1,2 % de celle de la Terre — bien moins de masse signifie bien moins d'attraction gravitationnelle, environ un sixième de celle de la Terre, même si la masse propre de l'objet (la quantité de matière qu'il contient) reste exactement la même dans les deux mondes."
+            },
+            {
+              "question": "La constante gravitationnelle G est-elle la même chose que l'accélération gravitationnelle g ?",
+              "answer": "Non — elles sont liées mais différentes. G (6,674 × 10⁻¹¹ N·m²/kg²) est une constante universelle qui s'applique à la gravité entre deux masses quelconques, n'importe où dans l'univers. Le g minuscule (environ 9,8 m/s² à la surface terrestre) est une valeur dérivée et spécifique à un lieu : l'accélération gravitationnelle produite spécifiquement par la masse de la Terre à sa surface, calculée à partir de G, de la masse terrestre et du rayon terrestre."
+            },
+            {
+              "question": "Pourquoi la loi de gravitation de Newton est-elle appelée loi en « carré inverse » ?",
+              "answer": "Parce que la force est inversement proportionnelle au carré de la distance (1/r²) entre les deux masses, et non à la distance elle-même. Doubler la distance entre deux masses ne divise pas la force gravitationnelle par deux — elle la réduit au quart, et tripler la distance la réduit à un neuvième, suivant la relation quadratique."
+            },
+            {
+              "question": "F = ma s'applique-t-il à tout type de force, ou seulement à la gravité ?",
+              "answer": "F = ma s'applique à la force nette de n'importe quelle source — gravité, frottement, poussées ou tractions appliquées, tension, ou toute combinaison agissant ensemble. C'est une affirmation générale reliant la masse et l'accélération de tout objet à la force totale qui agit sur lui, distincte de F = Gm₁m₂/r², qui calcule spécifiquement la force gravitationnelle entre deux masses."
+            },
+            {
+              "question": "Pourquoi un objet plus massif nécessite-t-il plus de force pour atteindre la même accélération ?",
+              "answer": "Cela découle directement de F = ma : pour une accélération fixe, la force requise est directement proportionnelle à la masse. La masse représente la résistance d'un objet aux changements de mouvement (inertie), donc un objet plus massif nécessite intrinsèquement une force nette proportionnellement plus grande pour changer sa vitesse au même rythme qu'un objet moins massif."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "Une Pomme qui Tombe, et une Légende qui a Grandi Autour",
+            "paragraph": "Les deux équations appliquées par ce calculateur proviennent des Philosophiæ Naturalis Principia Mathematica d'Isaac Newton, publiés en 1687, qui exposèrent pour la première fois ensemble ses trois lois du mouvement et la loi de la gravitation universelle. La célèbre histoire d'une pomme tombant et inspirant l'intuition de Newton sur la gravité a bien une base historique réelle, quoique mince : Newton lui-même raconta l'histoire tard dans sa vie à son ami William Stukeley en 1726, qui la consigna et la publia à titre posthume en 1752. Mais le récit de Newton lui-même, situé vers 1666, ne mentionne jamais la pomme le frappant à la tête, et il n'existe aucune confirmation indépendante et contemporaine de l'incident — ce détail spectaculaire, ainsi qu'une grande partie de la mise en scène populaire de l'anecdote, semble être un ajout tardif à une histoire que Newton lui-même a peut-être racontée en partie comme une illustration simplifiée plutôt que comme un récit littéral détaillé."
+          },
+          "modernDevelopments": {
+            "title": "Mesurer la Constante Non Mesurée",
+            "paragraph": "La loi de gravitation de Newton décrivait comment la force gravitationnelle varie avec la masse et la distance, mais Newton n'a jamais déterminé la valeur numérique de G lui-même — cela nécessitait une expérience assez sensible pour mesurer l'attraction gravitationnelle infime entre des objets de laboratoire ordinaires. Le scientifique anglais Henry Cavendish y parvint en 1797-1798 à l'aide d'une balance de torsion extraordinairement sensible, bien qu'il ait décrit son objectif comme la détermination de la densité de la Terre plutôt que la mesure spécifique de G — la formulation moderne de la loi de Newton basée sur G fut une reformulation ultérieure des résultats de Cavendish. Sa mesure était si précise qu'elle resta essentiellement inégalée pendant environ un siècle par la suite."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La force, le mouvement et la gravitation sont des sujets fondamentaux de la physique. Voici les 5 meilleures universités mondiales en Physique et Astronomie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Non — le programme repose sur un accès présentiel aux laboratoires et un modèle de recherche résidentiel, sans mention d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Non — le département décrit une communauté de recherche en présentiel avec accès aux laboratoires sur place, et aucune option d'étude à distance n'est mentionnée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Non — les étudiants à temps plein doivent résider à Cambridge pendant au moins trois trimestres, sans option en ligne."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en physique appliquée — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "McKie, D., & de Beer, G. R. (1951). Newton's apple. Notes and Records of the Royal Society, 9(1), 46–54.",
+          "note": "Les historiens McKie et de Beer retracent les preuves documentaires derrière l'anecdote de la pomme de Newton, distinguant ce que Newton lui-même est enregistré comme ayant dit des embellissements que l'histoire a acquis par la suite.",
+          "url": "https://doi.org/10.1098/rsnr.1951.0003",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

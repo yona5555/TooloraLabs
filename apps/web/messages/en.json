@@ -5945,6 +5945,187 @@
         }
       }
     },
+    "force-calculator": {
+      "title": "Force & Newton's Law Calculator",
+      "description": "Solve Newton's second law (F = ma) or the law of universal gravitation for force, mass, acceleration, or distance, with a dynamic force diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Force Formulas",
+          "intro": "The two formulas this calculator applies.",
+          "formulas": {
+            "secondLaw": { "label": "Newton's Second Law", "expression": "F = ma" },
+            "gravitation": { "label": "Universal Gravitation", "expression": "F = Gm₁m₂ / r²" },
+            "gravitationalConstant": { "label": "Gravitational Constant", "expression": "G ≈ 6.674 × 10⁻¹¹ N·m²/kg²" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "modeLabel": "Calculate",
+        "mode": {
+          "secondLaw": "Newton's Second Law (F = ma)",
+          "gravitation": "Universal Gravitation (F = Gm₁m₂/r²)"
+        },
+        "solveForLabel": "Solve For",
+        "secondLawSolveFor": {
+          "force": "Force (F)",
+          "mass": "Mass (m)",
+          "acceleration": "Acceleration (a)"
+        },
+        "gravitationSolveFor": {
+          "force": "Gravitational Force (F)",
+          "mass1": "Mass 1 (m₁)",
+          "mass2": "Mass 2 (m₂)",
+          "distance": "Distance (r)"
+        },
+        "forceLabel": "Force (N)",
+        "forcePlaceholder": "e.g. 10",
+        "massLabel": "Mass (kg)",
+        "massPlaceholder": "e.g. 2",
+        "accelerationLabel": "Acceleration (m/s²)",
+        "accelerationPlaceholder": "e.g. 5",
+        "mass1Label": "Mass 1 (kg)",
+        "mass1Placeholder": "e.g. 5.972e24",
+        "mass2Label": "Mass 2 (kg)",
+        "mass2Placeholder": "e.g. 1",
+        "distanceLabel": "Distance Between Centers (m)",
+        "distancePlaceholder": "e.g. 6.371e6"
+      },
+      "result": {
+        "heading": "Result",
+        "zeroAcceleration": "Acceleration must be nonzero to solve for mass.",
+        "zeroMass": "Mass must be nonzero to solve for acceleration.",
+        "zeroMass1": "Mass 1 must be nonzero to solve for mass 2.",
+        "zeroMass2": "Mass 2 must be nonzero to solve for mass 1.",
+        "zeroDistance": "Distance must be nonzero to solve for gravitational force.",
+        "zeroForce": "Force must be nonzero to solve for distance.",
+        "force": "Force",
+        "mass": "Mass",
+        "acceleration": "Acceleration",
+        "mass1": "Mass 1",
+        "mass2": "Mass 2",
+        "distance": "Distance",
+        "diagramForce": "F={value} N",
+        "diagramAcceleration": "a={value} m/s²",
+        "diagramCaptionSecondLaw": "Force and acceleration arrows scaled to their computed magnitudes, in the same direction.",
+        "diagramMass1": "m₁={value} kg",
+        "diagramMass2": "m₂={value} kg",
+        "diagramCaptionGravitation": "Circle sizes scaled to relative mass; arrows show mutual gravitational attraction."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Force and Newton's Laws",
+          "paragraph1": "Newton's second law, F = ma, states that the net force on an object equals its mass times its acceleration. Force is measured in newtons (N), where one newton is the force needed to accelerate a 1 kg mass at 1 m/s². Rearranged, this same equation gives mass (m = F/a) or acceleration (a = F/m) whenever the other two quantities are known.",
+          "diagram": {
+            "caption": "A 2 kg mass accelerating at 3 m/s² under a 6 N net force — force and acceleration arrows point the same direction and scale with magnitude."
+          },
+          "paragraph2": "The law of universal gravitation, F = Gm₁m₂/r², describes a different kind of force: the mutual attraction between any two masses, proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The gravitational constant G (about 6.674 × 10⁻¹¹ N·m²/kg²) is extremely small, which is why gravitational attraction between everyday objects is imperceptible — it only becomes significant when at least one mass is astronomically large, like a planet or star.",
+          "paragraph3": "Both equations describe force, but they answer different questions: F = ma relates a single object's mass and acceleration under any net force, while F = Gm₁m₂/r² specifically calculates the gravitational force between two masses based on their separation. A falling object on Earth's surface experiences both — gravity (from F = Gm₁m₂/r², simplified to F = mg near Earth's surface) is the specific force, and F = ma describes how that force translates into its acceleration."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Solving both formulas for representative values.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "2 kg mass accelerating at 3 m/s²", "result": "F = 6 N" },
+            { "calculation": "10 N force accelerating an object at 2 m/s²", "result": "m = 5 kg" },
+            { "calculation": "Earth's mass, a 1 kg object, at Earth's radius", "result": "F ≈ 9.8 N (matches surface gravity)" },
+            { "calculation": "Two 1 × 10¹⁰ kg masses, 100 km apart", "result": "F ≈ 0.667 N" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does the same mass weigh less on the Moon than on Earth?",
+              "answer": "Weight is the gravitational force acting on a mass, F = Gm₁m₂/r², and the Moon's mass is only about 1.2% of Earth's — far less mass means far less gravitational attraction, roughly one-sixth of Earth's, even though the object's own mass (the amount of matter it contains) stays exactly the same on both worlds."
+            },
+            {
+              "question": "Is the gravitational constant G the same as gravitational acceleration g?",
+              "answer": "No — they're related but different. G (6.674 × 10⁻¹¹ N·m²/kg²) is a universal constant that applies to gravity between any two masses anywhere in the universe. Lowercase g (approximately 9.8 m/s² on Earth's surface) is a derived, location-specific value: the gravitational acceleration produced specifically by Earth's mass at Earth's surface, calculated from G, Earth's mass, and Earth's radius."
+            },
+            {
+              "question": "Why is Newton's law of gravitation called an \"inverse square\" law?",
+              "answer": "Because the force is inversely proportional to the square of the distance (1/r²) between the two masses, not to the distance itself. Doubling the distance between two masses doesn't halve the gravitational force — it reduces it to one-quarter, and tripling the distance reduces it to one-ninth, following the squared relationship."
+            },
+            {
+              "question": "Does F = ma apply to every kind of force, or only gravity?",
+              "answer": "F = ma applies to the net force from any source — gravity, friction, applied pushes or pulls, tension, or any combination acting together. It's a general statement relating any object's mass and acceleration to the total force acting on it, distinct from F = Gm₁m₂/r², which calculates specifically the gravitational force between two masses."
+            },
+            {
+              "question": "Why does a more massive object need more force to achieve the same acceleration?",
+              "answer": "This follows directly from F = ma: for a fixed acceleration, required force is directly proportional to mass. Mass represents an object's resistance to changes in motion (inertia), so a more massive object inherently requires proportionally more net force to change its velocity at the same rate as a less massive one."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Falling Apple, and a Legend That Grew Around It",
+            "paragraph": "Both equations this calculator applies come from Isaac Newton's Philosophiæ Naturalis Principia Mathematica, published in 1687, which laid out his three laws of motion and the law of universal gravitation together for the first time. The famous story of an apple falling and inspiring Newton's insight into gravity does have a real, if thin, historical basis: Newton himself told the story late in life to his friend William Stukeley in 1726, who recorded it and published it posthumously in 1752. But Newton's own account, set around 1666, never mentions the apple striking his head, and there is no independent contemporary confirmation of the incident — that dramatic detail, along with much of the anecdote's popular framing, appears to be a later embellishment layered onto a story Newton himself may have told partly as a simplified illustration rather than a literal blow-by-blow account."
+          },
+          "modernDevelopments": {
+            "title": "Measuring the Unmeasured Constant",
+            "paragraph": "Newton's law of gravitation described how gravitational force scales with mass and distance, but Newton never determined the numerical value of G itself — that required an experiment sensitive enough to measure the vanishingly small gravitational attraction between ordinary laboratory objects. English scientist Henry Cavendish achieved this in 1797–1798 using an extraordinarily sensitive torsion balance, though he described his goal as determining Earth's density rather than measuring G specifically — the modern G-based formulation of Newton's law was a later reframing of Cavendish's results. His measurement was so precise that it stood essentially unimproved for roughly a century afterward."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Force, motion, and gravitation are foundational topics within physics. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is based on in-person lab access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an on-campus research community with on-site lab access, and no distance-study option is listed."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must reside in Cambridge for at least three terms, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Applied Physics — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus laboratories and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "McKie, D., & de Beer, G. R. (1951). Newton's apple. Notes and Records of the Royal Society, 9(1), 46–54.",
+          "note": "Historians McKie and de Beer trace the documentary evidence behind the Newton's apple anecdote, distinguishing what Newton himself is recorded as having said from the embellishments the story acquired afterward.",
+          "url": "https://doi.org/10.1098/rsnr.1951.0003",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",
