@@ -37,3 +37,4 @@ export * from "./ForceCalculator";
 export * from "./ProjectileMotionCalculator";
 export * from "./ReadabilityScoreCalculator";
 export * from "./StudyTimeCalculator";
+export * from "./VectorCalculator";

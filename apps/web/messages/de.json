@@ -6531,6 +6531,111 @@
         }
       }
     },
+    "vector-calculator": {
+      "title": "Vektorrechner",
+      "description": "Berechnen Sie Betrag, Summe, Differenz, Skalarprodukt, Kreuzprodukt und den Winkel zwischen zwei 2D- oder 3D-Vektoren.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Vektorformeln",
+          "intro": "Die grundlegenden Formeln, die dieser Rechner anwendet.",
+          "formulas": {
+            "magnitude": { "label": "Betrag", "expression": "|A| = √(ax² + ay² + az²)" },
+            "dotProduct": { "label": "Skalarprodukt", "expression": "A·B = axbx + ayby + azbz" },
+            "crossProduct": { "label": "Kreuzprodukt", "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)" },
+            "angle": { "label": "Winkel dazwischen", "expression": "θ = cos⁻¹(A·B / (|A||B|))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Vektorkomponenten",
+        "vectorALabel": "Vektor A",
+        "vectorBLabel": "Vektor B",
+        "zHint": "Lassen Sie z bei 0 für einen 2D-Vektor, oder setzen Sie einen Wert, um in 3D zu arbeiten."
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "zeroVectorA": "Vektor A hat den Betrag null, daher sind sein Einheitsvektor und der Winkel zwischen den Vektoren nicht definiert.",
+        "zeroVectorB": "Vektor B hat den Betrag null, daher ist der Winkel zwischen den Vektoren nicht definiert.",
+        "notApplicable": "n. z.",
+        "magnitudeA": "Betrag von A",
+        "magnitudeB": "Betrag von B",
+        "dotProduct": "Skalarprodukt (A·B)",
+        "sum": "Summe (A + B)",
+        "difference": "Differenz (A − B)",
+        "crossProduct": "Kreuzprodukt (A×B)",
+        "angleBetween": "Winkel dazwischen",
+        "unitVectorA": "Einheitsvektor von A",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramSum": "A+B",
+        "diagramCaption": "2D-Projektion (nur x, y) der Vektoren A und B sowie ihrer Summe, maßstabsgetreu aus den eingegebenen Komponenten gezeichnet."
+      },
+      "education": {
+        "intro": {
+          "title": "Vektoren verstehen",
+          "paragraph1": "Ein Vektor ist eine Größe mit sowohl Betrag als auch Richtung, meist geschrieben als Komponenten entlang jeder Achse — (ax, ay, az) in drei Dimensionen, oder nur (ax, ay) in zwei. Der Betrag ist die Länge des Vektors, ermittelt mit dem auf drei Dimensionen erweiterten Satz des Pythagoras: |A| = √(ax² + ay² + az²). Vektoren werden komponentenweise addiert oder subtrahiert — (ax + bx, ay + by, az + bz) — was geometrisch dem Aneinanderreihen der Vektoren Spitze an Ende entspricht.",
+          "paragraph2": "Das Skalarprodukt, A·B = axbx + ayby + azbz, verbindet zwei Vektoren zu einer einzigen Zahl (einem Skalar), die am größten ist, wenn die Vektoren in dieselbe Richtung zeigen, und null, wenn sie senkrecht zueinander stehen — es steht über A·B = |A||B|cos(θ) in direktem Zusammenhang mit dem Winkel zwischen ihnen, und so ermittelt dieser Rechner diesen Winkel. Das Kreuzprodukt, A×B, erzeugt dagegen einen neuen Vektor senkrecht zu sowohl A als auch B, mit einem Betrag gleich der Fläche des von ihnen aufgespannten Parallelogramms; es ist nur in drei Dimensionen sinnvoll, weshalb ein 2D-Kreuzprodukt (z = 0 für beide Vektoren) immer rein entlang der z-Achse zeigt.",
+          "paragraph3": "Der Einheitsvektor von A, ermittelt durch Division jeder Komponente durch |A|, behält die Richtung von A bei, skaliert aber seine Länge auf genau 1 um — nützlich, wann immer eine Berechnung „welche Richtung“ braucht, ohne sich um „wie weit“ zu kümmern. Sowohl der Winkel zwischen zwei Vektoren als auch der Einheitsvektor eines Vektors sind für einen Nullvektor nicht definiert, da ein Vektor mit der Länge null keine definierte Richtung hat."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Repräsentative Vektoroperationen, berechnet von diesem Rechner.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Betrag von (3, 4, 0)", "result": "|A| = 5" },
+            { "calculation": "Skalarprodukt von (1, 2, 3) und (4, 5, 6)", "result": "A·B = 32" },
+            { "calculation": "Kreuzprodukt von (1, 0, 0) und (0, 1, 0)", "result": "A×B = (0, 0, 1)" },
+            { "calculation": "Winkel zwischen (1, 0, 0) und (0, 1, 0)", "result": "θ = 90°" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Was ist der Unterschied zwischen Skalarprodukt und Kreuzprodukt?", "answer": "Das Skalarprodukt liefert eine einzelne Zahl (einen Skalar), die misst, wie stark zwei Vektoren in dieselbe Richtung zeigen, während das Kreuzprodukt einen völlig neuen Vektor liefert, senkrecht zu beiden Eingaben, dessen Länge der Fläche des von den beiden ursprünglichen Vektoren aufgespannten Parallelogramms entspricht. Sie verhalten sich auch in zwei Dimensionen unterschiedlich — das Skalarprodukt ergibt weiterhin Sinn, aber das Kreuzprodukt braucht drei Dimensionen, um irgendwohin zu zeigen; setzt man z = 0 für 2D-Vektoren, kommt das Kreuzprodukt rein entlang der z-Achse heraus." },
+            { "question": "Warum ist der Winkel zwischen zwei Vektoren nicht definiert, wenn einer von ihnen ein Nullvektor ist?", "answer": "Die Winkelformel, θ = cos⁻¹(A·B / (|A||B|)), dividiert durch die Beträge beider Vektoren. Ein Nullvektor hat den Betrag null und keine definierte Richtung — er zeigt nirgendwo Bestimmtes hin — daher gibt es keinen sinnvollen Winkel, an dem er gemessen werden könnte, und der Rechner weist darauf hin, statt durch null zu dividieren." },
+            { "question": "Kann ich diesen Rechner für 2D-Vektoren verwenden?", "answer": "Ja — geben Sie für beide z-Komponenten 0 ein (die Voreinstellung). Jede Operation funktioniert weiterhin korrekt: Das Kreuzprodukt zweier 2D-Vektoren hat mathematisch nur eine z-Komponente, und genau das gibt dieser Rechner zurück — sie entspricht der vorzeichenbehafteten Fläche des von den beiden Vektoren aufgespannten Parallelogramms." },
+            { "question": "Warum hängt das Kreuzprodukt von der Reihenfolge der Vektoren ab?", "answer": "A×B und B×A zeigen in genau entgegengesetzte Richtungen (A×B = −(B×A)), weil das Kreuzprodukt einen bestimmten Rotationssinn kodiert — von A nach B, nach der Rechte-Hand-Regel — statt einer symmetrischen Beziehung zwischen den beiden Vektoren, wie es beim Skalarprodukt der Fall ist." },
+            { "question": "Wofür wird ein Einheitsvektor eigentlich verwendet?", "answer": "Ein Einheitsvektor isoliert die reine Richtung vom Betrag, was immer dann nützlich ist, wenn eine Formel wissen muss, „welche Richtung“, ohne sich um die Länge zu kümmern — etwa um die Richtung einer Kraft getrennt von ihrer Stärke auszudrücken, oder um in der Computergrafik einen Richtungsstrahl zu erzeugen, der später mit einem separaten Entfernungs- oder Geschwindigkeitswert skaliert wird." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Ein privates Heft mit der Aufschrift „Nicht veröffentlicht“",
+            "paragraph": "Die Vektoroperationen, die dieser Rechner berechnet, entstanden aus der Arbeit zweier Personen, die in den 1880er-Jahren unabhängig voneinander arbeiteten: dem amerikanischen Physiker Josiah Willard Gibbs an der Yale University und dem englischen Ingenieur Oliver Heaviside, die beide William Rowan Hamiltons Quaternionensystem von 1843 auf die einfacheren, getrennten Vektor- und Skalarwerkzeuge reduzierten, die heute noch verwendet werden. Gibbs zögerte so sehr, seinen Ansatz formal zu veröffentlichen — er hatte das Gefühl, wenig zu bieten, was andere nicht bereits gezeigt hatten —, dass er stattdessen 1881 privat ein Heft mit dem Titel Elements of Vector Analysis drucken ließ (mit einem zweiten Teil 1884), das auf dem Umschlag ausdrücklich mit „nicht veröffentlicht“ gekennzeichnet war, und es nur für seine eigenen Studenten in Yale nutzte, bevor er Exemplare an mehr als 130 Wissenschaftler verschickte, um die Idee informell zu verbreiten."
+          },
+          "modernDevelopments": {
+            "title": "Von den Vorlesungsmitschriften eines Studenten zur Standardnotation",
+            "paragraph": "Die heute nahezu universell verwendete Vektornotation und -terminologie stammt nicht direkt aus Gibbs' eigenen Schriften, sondern aus Vector Analysis (1901), einem Lehrbuch von Edwin Bidwell Wilson — Gibbs' einzigem Doktoranden — basierend auf den Vorlesungen, die Gibbs in Yale hielt. Wilsons Buch wurde bis in die 1940er-Jahre hinein wiederholt neu aufgelegt und ist bis heute erhältlich (über eine Dover-Ausgabe von 1960); es trug maßgeblich dazu bei, die modernen Vektorkonventionen zu etablieren, die Physiker und Ingenieure noch heute verwenden, lange nachdem die Debatte zwischen Quaternionen und Vektoren der 1880er- und 1890er-Jahre abgeklungen war."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Vektoren sind grundlegend sowohl für die Mathematik als auch für die Physik. Hier sind die weltweit besten 5 im Fach Mathematik im QS World University Rankings by Subject 2025, plus ein führendes regionales Programm für angewandte Mathematik:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 1 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "Nein — MIT nimmt Promotionsstudierende nur für ein Studium auf dem Campus auf, ohne Master- oder Online-Track." },
+              { "name": "Harvard University", "note": "Weltweit auf Platz 2 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "Nein — das Programm ist ein präsenzpflichtiges Forschungspromotionsprogramm, verwaltet über die Griffin Graduate School of Arts and Sciences." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 3 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "Nein — der DPhil ist ein Forschungsgrad auf dem Campus, typischerweise in drei bis vier Jahren abgeschlossen." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 4 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "Nein — der PhD ist ein dreijähriges, präsenzpflichtiges Forschungsprogramm der Faculty of Mathematics." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 5 in Mathematik (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudien verlangt von Promotionsstudierenden eine erhebliche physische Präsenz auf dem Campus." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Applied Mathematics and Computational Science (AMCS)", "note": "Ein spezialisiertes Forschungsprogramm für angewandte Mathematik unter den Universitäten der arabischen Region; in dieser globalen Fachtabelle nicht gesondert gelistet.", "url": "https://amcs.kaust.edu.sa/", "online": "Nein — der PhD erfordert 72 Credits und eine Präsenz-Qualifikationsprüfung auf dem KAUST-Campus." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Crowe, M. J. (1967). A History of Vector Analysis: The Evolution of the Idea of a Vectorial System. University of Notre Dame Press.",
+          "note": "Das Buch des Mathematikhistorikers Michael J. Crowe bleibt die maßgebliche wissenschaftliche Darstellung, wie die Vektoranalysis aus dem Streit der 1880er-Jahre zwischen Gibbs, Heaviside und den Verteidigern von Hamiltons Quaternionen hervorging.",
+          "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
+          "readOriginal": "Mehr über dieses Buch lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

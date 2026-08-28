@@ -6507,6 +6507,111 @@
         }
       }
     },
+    "vector-calculator": {
+      "title": "Calculadora de Vectores",
+      "description": "Calcula la magnitud, la suma, la diferencia, el producto punto, el producto cruz y el ángulo entre dos vectores 2D o 3D.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas de Vectores",
+          "intro": "Las fórmulas fundamentales que aplica esta calculadora.",
+          "formulas": {
+            "magnitude": { "label": "Magnitud", "expression": "|A| = √(ax² + ay² + az²)" },
+            "dotProduct": { "label": "Producto Punto", "expression": "A·B = axbx + ayby + azbz" },
+            "crossProduct": { "label": "Producto Cruz", "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)" },
+            "angle": { "label": "Ángulo Entre Ellos", "expression": "θ = cos⁻¹(A·B / (|A||B|))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Componentes de los Vectores",
+        "vectorALabel": "Vector A",
+        "vectorBLabel": "Vector B",
+        "zHint": "Deja z en 0 para un vector 2D, o asígnale un valor para trabajar en 3D."
+      },
+      "result": {
+        "heading": "Resultado",
+        "zeroVectorA": "El vector A tiene magnitud cero, por lo que su vector unitario y el ángulo entre los vectores no están definidos.",
+        "zeroVectorB": "El vector B tiene magnitud cero, por lo que el ángulo entre los vectores no está definido.",
+        "notApplicable": "N/D",
+        "magnitudeA": "Magnitud de A",
+        "magnitudeB": "Magnitud de B",
+        "dotProduct": "Producto Punto (A·B)",
+        "sum": "Suma (A + B)",
+        "difference": "Diferencia (A − B)",
+        "crossProduct": "Producto Cruz (A×B)",
+        "angleBetween": "Ángulo Entre Ellos",
+        "unitVectorA": "Vector Unitario de A",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramSum": "A+B",
+        "diagramCaption": "Proyección 2D (solo x, y) de los vectores A y B y su suma, dibujada a escala a partir de las componentes introducidas."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender los Vectores",
+          "paragraph1": "Un vector es una cantidad con magnitud y dirección a la vez, generalmente escrita como sus componentes a lo largo de cada eje — (ax, ay, az) en tres dimensiones, o solo (ax, ay) en dos. La magnitud es la longitud del vector, calculada con el teorema de Pitágoras extendido a tres dimensiones: |A| = √(ax² + ay² + az²). Los vectores se suman o restan componente a componente — (ax + bx, ay + by, az + bz) —, lo que corresponde geométricamente a colocar los vectores de punta a cola.",
+          "paragraph2": "El producto punto, A·B = axbx + ayby + azbz, combina dos vectores en un solo número (un escalar) que es máximo cuando los vectores apuntan en la misma dirección y cero cuando son perpendiculares — está directamente relacionado con el ángulo entre ellos mediante A·B = |A||B|cos(θ), que es como esta calculadora halla ese ángulo. El producto cruz, A×B, en cambio, produce un nuevo vector perpendicular tanto a A como a B, con una magnitud igual al área del paralelogramo que abarcan; solo tiene sentido en tres dimensiones, por lo que un producto cruz en 2D (z = 0 para ambos vectores) siempre resulta apuntando puramente a lo largo del eje z.",
+          "paragraph3": "El vector unitario de A, obtenido dividiendo cada componente entre |A|, conserva la dirección de A pero reescala su longitud a exactamente 1 — útil siempre que un cálculo necesite «hacia dónde» sin importarle «hasta dónde». Tanto el ángulo entre dos vectores como el vector unitario de un vector no están definidos para un vector cero, ya que un vector de longitud cero no tiene una dirección definida."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Operaciones vectoriales representativas, calculadas por esta calculadora.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Magnitud de (3, 4, 0)", "result": "|A| = 5" },
+            { "calculation": "Producto punto de (1, 2, 3) y (4, 5, 6)", "result": "A·B = 32" },
+            { "calculation": "Producto cruz de (1, 0, 0) y (0, 1, 0)", "result": "A×B = (0, 0, 1)" },
+            { "calculation": "Ángulo entre (1, 0, 0) y (0, 1, 0)", "result": "θ = 90°" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Cuál es la diferencia entre el producto punto y el producto cruz?", "answer": "El producto punto devuelve un solo número (un escalar) que mide cuánto apuntan dos vectores en la misma dirección, mientras que el producto cruz devuelve un vector completamente nuevo, perpendicular a ambas entradas, cuya longitud es igual al área del paralelogramo que abarcan los dos vectores originales. También se comportan de forma distinta en dos dimensiones — el producto punto sigue teniendo sentido, pero el producto cruz necesita tres dimensiones para apuntar hacia algún lugar; poner z = 0 en vectores 2D hace que el producto cruz resulte puramente a lo largo del eje z." },
+            { "question": "¿Por qué el ángulo entre dos vectores no está definido cuando uno de ellos es un vector cero?", "answer": "La fórmula del ángulo, θ = cos⁻¹(A·B / (|A||B|)), divide entre las magnitudes de ambos vectores. Un vector cero tiene magnitud cero y ninguna dirección definida — no apunta hacia ningún lugar en particular —, por lo que no hay un ángulo significativo que medir respecto a él, y la calculadora lo señala en lugar de dividir entre cero." },
+            { "question": "¿Puedo usar esta calculadora para vectores 2D?", "answer": "Sí — introduce 0 en ambas componentes z (el valor predeterminado). Todas las operaciones siguen funcionando correctamente: el producto cruz de dos vectores 2D matemáticamente solo tiene componente z, que es exactamente lo que devuelve esta calculadora, y corresponde al área con signo del paralelogramo que abarcan los dos vectores." },
+            { "question": "¿Por qué el producto cruz depende del orden de los vectores?", "answer": "A×B y B×A apuntan en direcciones exactamente opuestas (A×B = −(B×A)) porque el producto cruz codifica un sentido de rotación específico — de A hacia B, según la regla de la mano derecha — en lugar de una relación simétrica entre ambos vectores, como ocurre con el producto punto." },
+            { "question": "¿Para qué se usa realmente un vector unitario?", "answer": "Un vector unitario aísla la dirección pura de la magnitud, lo cual es útil siempre que una fórmula necesite saber «hacia dónde» sin importarle la longitud — por ejemplo, para expresar la dirección de una fuerza por separado de su intensidad, o para construir un rayo de dirección en gráficos por computadora que luego se escala con un valor de distancia o velocidad independiente." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Un Panfleto Privado Marcado como «No Publicado»",
+            "paragraph": "Las operaciones vectoriales que calcula esta herramienta surgieron del trabajo de dos personas que trabajaron de forma independiente en la década de 1880: el físico estadounidense Josiah Willard Gibbs, en Yale, y el ingeniero inglés Oliver Heaviside, quienes redujeron el sistema de cuaterniones de William Rowan Hamilton de 1843 a las herramientas vectoriales y escalares más simples y separadas que aún se usan hoy. Gibbs era tan reacio a publicar formalmente su enfoque — sintiendo que ofrecía poco más allá de lo que otros ya habían mostrado — que en su lugar imprimió de forma privada un panfleto titulado Elements of Vector Analysis en 1881 (con una segunda parte en 1884), marcado explícitamente en su portada como «no publicado», y lo usó solo para sus propios estudiantes en Yale antes de enviar copias a más de 130 científicos para difundir la idea de manera informal."
+          },
+          "modernDevelopments": {
+            "title": "De los Apuntes de Clase de un Estudiante a la Notación Estándar",
+            "paragraph": "La notación y terminología vectorial usada casi universalmente hoy no proviene directamente de los propios escritos de Gibbs, sino de Vector Analysis (1901), un libro de texto de Edwin Bidwell Wilson — el único estudiante de doctorado de Gibbs — basado en las conferencias que Gibbs impartió en Yale. El libro de Wilson se reimprimió repetidamente hasta la década de 1940 y sigue disponible (a través de una edición de Dover de 1960), y es en gran medida responsable de haber fijado las convenciones vectoriales modernas que físicos e ingenieros aún escriben hoy, mucho después de que se apagara el debate de notación entre cuaterniones y vectores de las décadas de 1880 y 1890."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Los vectores son fundamentales tanto para las matemáticas como para la física. Aquí están las 5 mejores del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de un destacado programa regional de matemáticas aplicadas:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificado #1 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — el MIT admite estudiantes de doctorado solo para estudios presenciales en el campus, sin ninguna vía de maestría ni en línea." },
+              { "name": "Universidad de Harvard", "note": "Clasificada #2 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — el programa es un doctorado de investigación presencial, administrado a través de la Escuela de Posgrado en Artes y Ciencias Griffin." },
+              { "name": "Universidad de Oxford", "note": "Clasificada #3 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — el DPhil es un título de investigación presencial, que normalmente se completa en tres a cuatro años." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #4 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "No — el doctorado es un programa de investigación presencial de tres años dirigido por la Facultad de Matemáticas." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #5 mundialmente en Matemáticas (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus." },
+              { "name": "Universidad Rey Abdalá de Ciencia y Tecnología (KAUST) — Matemáticas Aplicadas y Ciencias Computacionales (AMCS)", "note": "Un programa de investigación especializado en matemáticas aplicadas entre las universidades de la región árabe; no aparece clasificado por separado en esta tabla global de la materia.", "url": "https://amcs.kaust.edu.sa/", "online": "No — el doctorado requiere 72 créditos y un examen de calificación presencial en el campus de KAUST." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Crowe, M. J. (1967). A History of Vector Analysis: The Evolution of the Idea of a Vectorial System. University of Notre Dame Press.",
+          "note": "El libro del historiador de las matemáticas Michael J. Crowe sigue siendo el relato académico estándar de cómo surgió el análisis vectorial de la disputa de la década de 1880 entre Gibbs, Heaviside y los defensores de los cuaterniones de Hamilton.",
+          "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
+          "readOriginal": "Leer Más Sobre Este Libro"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

@@ -6527,6 +6527,111 @@
         }
       }
     },
+    "vector-calculator": {
+      "title": "Vector Calculator",
+      "description": "Compute the magnitude, sum, difference, dot product, cross product, and angle between two 2D or 3D vectors.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Vector Formulas",
+          "intro": "The core formulas this calculator applies.",
+          "formulas": {
+            "magnitude": { "label": "Magnitude", "expression": "|A| = √(ax² + ay² + az²)" },
+            "dotProduct": { "label": "Dot Product", "expression": "A·B = axbx + ayby + azbz" },
+            "crossProduct": { "label": "Cross Product", "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)" },
+            "angle": { "label": "Angle Between", "expression": "θ = cos⁻¹(A·B / (|A||B|))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Vector Components",
+        "vectorALabel": "Vector A",
+        "vectorBLabel": "Vector B",
+        "zHint": "Leave z at 0 for a 2D vector, or set it to work in 3D."
+      },
+      "result": {
+        "heading": "Result",
+        "zeroVectorA": "Vector A has zero magnitude, so its unit vector and the angle between the vectors are undefined.",
+        "zeroVectorB": "Vector B has zero magnitude, so the angle between the vectors is undefined.",
+        "notApplicable": "N/A",
+        "magnitudeA": "Magnitude of A",
+        "magnitudeB": "Magnitude of B",
+        "dotProduct": "Dot Product (A·B)",
+        "sum": "Sum (A + B)",
+        "difference": "Difference (A − B)",
+        "crossProduct": "Cross Product (A×B)",
+        "angleBetween": "Angle Between",
+        "unitVectorA": "Unit Vector of A",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramSum": "A+B",
+        "diagramCaption": "2D projection (x, y only) of vectors A and B and their sum, drawn to scale from the entered components."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Vectors",
+          "paragraph1": "A vector is a quantity with both magnitude and direction, usually written as its components along each axis — (ax, ay, az) in three dimensions, or just (ax, ay) in two. Magnitude is the vector's length, found with the Pythagorean theorem extended to three dimensions: |A| = √(ax² + ay² + az²). Adding or subtracting vectors is done component by component — (ax + bx, ay + by, az + bz) — which corresponds geometrically to placing the vectors tip-to-tail.",
+          "paragraph2": "The dot product, A·B = axbx + ayby + azbz, combines two vectors into a single number (a scalar) that's largest when the vectors point the same direction and zero when they're perpendicular — it's directly related to the angle between them through A·B = |A||B|cos(θ), which is how this calculator finds that angle. The cross product, A×B, instead produces a new vector perpendicular to both A and B, with a magnitude equal to the area of the parallelogram they span; it's only meaningful in three dimensions, which is why a 2D cross product (z = 0 for both vectors) always comes out pointing purely along the z-axis.",
+          "paragraph3": "The unit vector of A, found by dividing each component by |A|, keeps A's direction but rescales its length to exactly 1 — useful whenever a calculation needs \"which way\" without caring \"how far.\" Both the angle between two vectors and a vector's unit vector are undefined for a zero vector, since a vector with zero length has no defined direction."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Representative vector operations, computed by this calculator.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "Magnitude of (3, 4, 0)", "result": "|A| = 5" },
+            { "calculation": "Dot product of (1, 2, 3) and (4, 5, 6)", "result": "A·B = 32" },
+            { "calculation": "Cross product of (1, 0, 0) and (0, 1, 0)", "result": "A×B = (0, 0, 1)" },
+            { "calculation": "Angle between (1, 0, 0) and (0, 1, 0)", "result": "θ = 90°" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "What's the difference between the dot product and the cross product?", "answer": "The dot product returns a single number (a scalar) that measures how much two vectors point in the same direction, while the cross product returns an entirely new vector, perpendicular to both inputs, whose length equals the area of the parallelogram the two original vectors span. They also behave differently in two dimensions — the dot product still makes sense, but the cross product needs three dimensions to point somewhere; setting z = 0 for 2D vectors makes the cross product come out purely along the z-axis." },
+            { "question": "Why is the angle between two vectors undefined when one of them is a zero vector?", "answer": "The angle formula, θ = cos⁻¹(A·B / (|A||B|)), divides by both vectors' magnitudes. A zero vector has zero magnitude and no defined direction — it doesn't point anywhere in particular — so there's no meaningful angle to measure it against, and the calculator flags this rather than dividing by zero." },
+            { "question": "Can I use this calculator for 2D vectors?", "answer": "Yes — enter 0 for both z components (the default). Every operation still works correctly: the cross product of two 2D vectors mathematically only has a z-component, which is exactly what this calculator returns, and it corresponds to the signed area of the parallelogram the two vectors span." },
+            { "question": "Why does the cross product depend on the order of the vectors?", "answer": "A×B and B×A point in exactly opposite directions (A×B = −(B×A)) because the cross product encodes a specific rotational sense — from A toward B, using the right-hand rule — rather than a symmetric relationship between the two vectors the way the dot product does." },
+            { "question": "What's a unit vector actually used for?", "answer": "A unit vector isolates pure direction from magnitude, which is useful whenever a formula needs to know \"which way\" without caring about length — for example, expressing a force's direction separately from its strength, or building a direction ray in computer graphics that later gets scaled by a separate distance or speed value." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Private Pamphlet Marked \"Not Published\"",
+            "paragraph": "The vector operations this calculator computes emerged from the work of two people working independently in the 1880s: American physicist Josiah Willard Gibbs at Yale and English engineer Oliver Heaviside, both of whom stripped down William Rowan Hamilton's 1843 quaternion system into the simpler, separate vector and scalar tools still used today. Gibbs was so reluctant to formally publish his approach — feeling it offered little beyond what others had already shown — that he instead privately printed a pamphlet titled Elements of Vector Analysis in 1881 (with a second part in 1884) explicitly marked \"not published\" on its cover, using it only for his own Yale students before mailing copies to more than 130 scientists to spread the idea informally."
+          },
+          "modernDevelopments": {
+            "title": "From a Student's Lecture Notes to the Standard Notation",
+            "paragraph": "The vector notation and terminology used almost universally today didn't come directly from Gibbs's own writing, but from Vector Analysis (1901), a textbook by Edwin Bidwell Wilson — Gibbs's only doctoral student — based on the lectures Gibbs gave at Yale. Wilson's book was reprinted repeatedly through the 1940s and remains in print (via a 1960 Dover edition), and it's largely responsible for settling the modern vector conventions physicists and engineers still write today, well after the quaternion-versus-vector notational debate of the 1880s and 1890s had faded."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Vectors are foundational to mathematics and physics alike. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one leading regional applied-math program:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — MIT admits PhD students for on-campus study only, with no master's or online track." },
+              { "name": "Harvard University", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the program is an in-residence research PhD administered through the Griffin Graduate School of Arts and Sciences." },
+              { "name": "University of Oxford", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree, typically completed in three to four years." },
+              { "name": "University of Cambridge", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "No — the PhD is a three-year, in-residence research program run by the Faculty of Mathematics." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Applied Mathematics and Computational Science (AMCS)", "note": "A dedicated applied-mathematics research program among Arab region universities; not separately ranked on this global subject table.", "url": "https://amcs.kaust.edu.sa/", "online": "No — the PhD requires 72 credits and an in-person qualifying exam on KAUST's campus." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Crowe, M. J. (1967). A History of Vector Analysis: The Evolution of the Idea of a Vectorial System. University of Notre Dame Press.",
+          "note": "Historian of mathematics Michael J. Crowe's book remains the standard scholarly account of how vector analysis emerged from the 1880s dispute between Gibbs, Heaviside, and defenders of Hamilton's quaternions.",
+          "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
+          "readOriginal": "Read More About This Book"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

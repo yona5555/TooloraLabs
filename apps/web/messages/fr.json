@@ -6531,6 +6531,111 @@
         }
       }
     },
+    "vector-calculator": {
+      "title": "Calculateur de Vecteurs",
+      "description": "Calculez la norme, la somme, la différence, le produit scalaire, le produit vectoriel et l'angle entre deux vecteurs 2D ou 3D.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules Vectorielles",
+          "intro": "Les formules fondamentales appliquées par ce calculateur.",
+          "formulas": {
+            "magnitude": { "label": "Norme", "expression": "|A| = √(ax² + ay² + az²)" },
+            "dotProduct": { "label": "Produit Scalaire", "expression": "A·B = axbx + ayby + azbz" },
+            "crossProduct": { "label": "Produit Vectoriel", "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)" },
+            "angle": { "label": "Angle Entre les Deux", "expression": "θ = cos⁻¹(A·B / (|A||B|))" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Composantes des Vecteurs",
+        "vectorALabel": "Vecteur A",
+        "vectorBLabel": "Vecteur B",
+        "zHint": "Laissez z à 0 pour un vecteur 2D, ou définissez une valeur pour travailler en 3D."
+      },
+      "result": {
+        "heading": "Résultat",
+        "zeroVectorA": "Le vecteur A a une norme nulle, donc son vecteur unitaire et l'angle entre les vecteurs ne sont pas définis.",
+        "zeroVectorB": "Le vecteur B a une norme nulle, donc l'angle entre les vecteurs n'est pas défini.",
+        "notApplicable": "N/A",
+        "magnitudeA": "Norme de A",
+        "magnitudeB": "Norme de B",
+        "dotProduct": "Produit Scalaire (A·B)",
+        "sum": "Somme (A + B)",
+        "difference": "Différence (A − B)",
+        "crossProduct": "Produit Vectoriel (A×B)",
+        "angleBetween": "Angle Entre les Deux",
+        "unitVectorA": "Vecteur Unitaire de A",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramSum": "A+B",
+        "diagramCaption": "Projection 2D (x, y uniquement) des vecteurs A et B et de leur somme, tracée à l'échelle à partir des composantes saisies."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Vecteurs",
+          "paragraph1": "Un vecteur est une grandeur possédant à la fois une norme et une direction, généralement écrite sous forme de composantes le long de chaque axe — (ax, ay, az) en trois dimensions, ou simplement (ax, ay) en deux. La norme est la longueur du vecteur, obtenue par le théorème de Pythagore étendu à trois dimensions : |A| = √(ax² + ay² + az²). L'addition ou la soustraction de vecteurs se fait composante par composante — (ax + bx, ay + by, az + bz) —, ce qui correspond géométriquement à placer les vecteurs bout à bout.",
+          "paragraph2": "Le produit scalaire, A·B = axbx + ayby + azbz, combine deux vecteurs en un seul nombre (un scalaire) qui est maximal lorsque les vecteurs pointent dans la même direction, et nul lorsqu'ils sont perpendiculaires — il est directement lié à l'angle entre eux via A·B = |A||B|cos(θ), ce qui est la méthode utilisée par ce calculateur pour trouver cet angle. Le produit vectoriel, A×B, produit au contraire un nouveau vecteur perpendiculaire à la fois à A et à B, dont la norme est égale à l'aire du parallélogramme qu'ils délimitent ; il n'a de sens qu'en trois dimensions, ce qui explique pourquoi un produit vectoriel en 2D (z = 0 pour les deux vecteurs) pointe toujours purement le long de l'axe z.",
+          "paragraph3": "Le vecteur unitaire de A, obtenu en divisant chaque composante par |A|, conserve la direction de A mais redimensionne sa longueur à exactement 1 — utile chaque fois qu'un calcul a besoin de savoir « dans quelle direction » sans se soucier de « jusqu'où ». L'angle entre deux vecteurs et le vecteur unitaire d'un vecteur sont tous deux indéfinis pour un vecteur nul, puisqu'un vecteur de longueur nulle n'a pas de direction définie."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Des opérations vectorielles représentatives, calculées par ce calculateur.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Norme de (3, 4, 0)", "result": "|A| = 5" },
+            { "calculation": "Produit scalaire de (1, 2, 3) et (4, 5, 6)", "result": "A·B = 32" },
+            { "calculation": "Produit vectoriel de (1, 0, 0) et (0, 1, 0)", "result": "A×B = (0, 0, 1)" },
+            { "calculation": "Angle entre (1, 0, 0) et (0, 1, 0)", "result": "θ = 90°" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Quelle est la différence entre le produit scalaire et le produit vectoriel ?", "answer": "Le produit scalaire renvoie un seul nombre (un scalaire) qui mesure à quel point deux vecteurs pointent dans la même direction, tandis que le produit vectoriel renvoie un tout nouveau vecteur, perpendiculaire aux deux entrées, dont la longueur est égale à l'aire du parallélogramme délimité par les deux vecteurs d'origine. Ils se comportent aussi différemment en deux dimensions — le produit scalaire garde son sens, mais le produit vectoriel a besoin de trois dimensions pour pointer quelque part ; en posant z = 0 pour des vecteurs 2D, le produit vectoriel ressort purement le long de l'axe z." },
+            { "question": "Pourquoi l'angle entre deux vecteurs est-il indéfini lorsque l'un d'eux est un vecteur nul ?", "answer": "La formule de l'angle, θ = cos⁻¹(A·B / (|A||B|)), divise par les normes des deux vecteurs. Un vecteur nul a une norme nulle et aucune direction définie — il ne pointe nulle part en particulier — il n'y a donc aucun angle significatif à mesurer par rapport à lui, et le calculateur le signale plutôt que de diviser par zéro." },
+            { "question": "Puis-je utiliser ce calculateur pour des vecteurs 2D ?", "answer": "Oui — saisissez 0 pour les deux composantes z (la valeur par défaut). Chaque opération fonctionne toujours correctement : le produit vectoriel de deux vecteurs 2D n'a mathématiquement qu'une composante z, ce qui est exactement ce que renvoie ce calculateur, et cela correspond à l'aire signée du parallélogramme délimité par les deux vecteurs." },
+            { "question": "Pourquoi le produit vectoriel dépend-il de l'ordre des vecteurs ?", "answer": "A×B et B×A pointent dans des directions exactement opposées (A×B = −(B×A)) parce que le produit vectoriel encode un sens de rotation spécifique — de A vers B, selon la règle de la main droite — plutôt qu'une relation symétrique entre les deux vecteurs comme c'est le cas pour le produit scalaire." },
+            { "question": "À quoi sert réellement un vecteur unitaire ?", "answer": "Un vecteur unitaire isole la direction pure de la norme, ce qui est utile chaque fois qu'une formule a besoin de savoir « dans quelle direction » sans se soucier de la longueur — par exemple pour exprimer la direction d'une force indépendamment de son intensité, ou pour construire un rayon directionnel en infographie qui sera ensuite mis à l'échelle par une valeur de distance ou de vitesse distincte." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Un Livret Privé Marqué « Non Publié »",
+            "paragraph": "Les opérations vectorielles que calcule cet outil sont issues du travail de deux personnes ayant travaillé indépendamment dans les années 1880 : le physicien américain Josiah Willard Gibbs, à Yale, et l'ingénieur anglais Oliver Heaviside, qui ont tous deux réduit le système de quaternions de William Rowan Hamilton datant de 1843 aux outils vectoriels et scalaires plus simples et distincts encore utilisés aujourd'hui. Gibbs était si réticent à publier formellement son approche — estimant qu'elle n'apportait que peu de chose que d'autres n'avaient déjà montré — qu'il fit à la place imprimer à titre privé, en 1881, un livret intitulé Elements of Vector Analysis (avec une seconde partie en 1884), explicitement marqué « non publié » sur sa couverture, ne l'utilisant que pour ses propres étudiants à Yale avant d'en envoyer des exemplaires à plus de 130 scientifiques pour diffuser l'idée de manière informelle."
+          },
+          "modernDevelopments": {
+            "title": "Des Notes de Cours d'un Étudiant à la Notation Standard",
+            "paragraph": "La notation et la terminologie vectorielles utilisées aujourd'hui de façon quasi universelle ne proviennent pas directement des écrits de Gibbs lui-même, mais de Vector Analysis (1901), un manuel d'Edwin Bidwell Wilson — le seul doctorant de Gibbs — fondé sur les cours que Gibbs donnait à Yale. Le livre de Wilson fut réimprimé à plusieurs reprises jusque dans les années 1940 et reste disponible aujourd'hui (via une édition Dover de 1960) ; il est largement responsable de la fixation des conventions vectorielles modernes que physiciens et ingénieurs utilisent encore, bien après que le débat de notation entre quaternions et vecteurs des années 1880 et 1890 se soit apaisé."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les vecteurs sont fondamentaux aussi bien en mathématiques qu'en physique. Voici les 5 meilleures universités au monde en Mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un programme régional de premier plan en mathématiques appliquées :",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "Non — le MIT n'admet des doctorants que pour des études sur le campus, sans filière de master ni en ligne." },
+              { "name": "Université Harvard", "note": "Classée #2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel, administré par la Griffin Graduate School of Arts and Sciences." },
+              { "name": "Université d'Oxford", "note": "Classée #3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "Non — le DPhil est un diplôme de recherche sur le campus, généralement achevé en trois à quatre ans." },
+              { "name": "Université de Cambridge", "note": "Classée #4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "Non — le doctorat est un programme de recherche en présentiel de trois ans dirigé par la Faculté de Mathématiques." },
+              { "name": "Université Stanford", "note": "Classée #5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige des doctorants une présence physique significative sur le campus." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Mathématiques Appliquées et Sciences Computationnelles (AMCS)", "note": "Un programme de recherche spécialisé en mathématiques appliquées parmi les universités de la région arabe ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://amcs.kaust.edu.sa/", "online": "Non — le doctorat exige 72 crédits et un examen de qualification en présentiel sur le campus de KAUST." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Crowe, M. J. (1967). A History of Vector Analysis: The Evolution of the Idea of a Vectorial System. University of Notre Dame Press.",
+          "note": "Le livre de l'historien des mathématiques Michael J. Crowe reste le récit savant de référence sur la manière dont l'analyse vectorielle est née du différend des années 1880 entre Gibbs, Heaviside et les défenseurs des quaternions de Hamilton.",
+          "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
+          "readOriginal": "En Savoir Plus Sur Ce Livre"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

@@ -486,6 +486,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "vector-calculator",
+    title: "Vector Calculator",
+    category: "math-science",
+    description:
+      "Compute the magnitude, sum, difference, dot product, cross product, and angle between two 2D or 3D vectors.",
+    featured: false,
+    keywords: [
+      "vector calculator",
+      "dot product calculator",
+      "cross product calculator",
+      "vector magnitude calculator",
+      "angle between vectors calculator",
+      "unit vector calculator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "calculators",
