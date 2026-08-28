@@ -6126,6 +6126,190 @@
         }
       }
     },
+    "projectile-motion-calculator": {
+      "title": "Projectile Motion Calculator",
+      "description": "Compute time of flight, maximum height, range, and impact velocity for a projectile launched at an angle under uniform gravity, with an interactive trajectory diagram.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Projectile Motion Formulas",
+          "intro": "The core kinematic equations this calculator applies, for launch speed v₀, angle θ, launch height h₀, and gravity g.",
+          "formulas": {
+            "timeOfFlight": {
+              "label": "Time of Flight",
+              "expression": "t = [v₀sinθ + √((v₀sinθ)² + 2gh₀)] / g"
+            },
+            "maxHeight": {
+              "label": "Maximum Height",
+              "expression": "h_max = h₀ + (v₀sinθ)² / (2g)"
+            },
+            "range": {
+              "label": "Horizontal Range",
+              "expression": "R = v₀cosθ · t"
+            },
+            "impactSpeed": {
+              "label": "Impact Speed",
+              "expression": "v_impact = √(vx² + vy_impact²)"
+            }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Launch Conditions",
+        "speedLabel": "Launch Speed (v₀) (m/s)",
+        "speedPlaceholder": "e.g. 20",
+        "angleLabel": "Launch Angle (θ) (degrees above horizontal)",
+        "anglePlaceholder": "e.g. 45",
+        "heightLabel": "Launch Height (h₀) (m)",
+        "heightPlaceholder": "e.g. 0",
+        "gravityLabel": "Gravitational Acceleration (g) (m/s²)",
+        "gravityHint": "Defaults to Earth's surface gravity (9.81 m/s²) — change it to model the Moon, Mars, or another world.",
+        "gravityPlaceholder": "e.g. 9.81"
+      },
+      "result": {
+        "heading": "Result",
+        "invalidGravity": "Gravitational acceleration must be greater than zero.",
+        "invalidSpeed": "Launch speed cannot be negative.",
+        "invalidHeight": "Launch height cannot be negative.",
+        "timeOfFlight": "Time of Flight",
+        "maxHeight": "Maximum Height",
+        "range": "Range",
+        "impactSpeed": "Impact Speed",
+        "impactAngle": "Impact Angle",
+        "rangeCaption": "Horizontal range",
+        "diagramLaunch": "Launch",
+        "diagramPeak": "Peak ({value} m)",
+        "diagramLanding": "Landing",
+        "diagramCaption": "The parabolic trajectory computed from your launch speed, angle, height, and gravity — the peak and landing points are scaled to their actual computed values."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Projectile Motion",
+          "paragraph1": "Projectile motion describes the curved path traced by an object launched into the air and acted on only by gravity, with no propulsion and, in this idealized model, no air resistance. The key insight, proven rigorously by Galileo Galilei, is that the horizontal and vertical components of motion are entirely independent: horizontal velocity (v₀cosθ) stays constant for the whole flight, while vertical velocity (v₀sinθ) decelerates, momentarily stops at the peak, and then accelerates downward under gravity — exactly as if the object were thrown straight up and fell straight back down. Combining a constant horizontal velocity with a uniformly accelerating vertical velocity produces a path that is mathematically a parabola.",
+          "diagram": {
+            "launchLabel": "Launch (v₀ = 20 m/s, θ = 45°)",
+            "peakLabel": "Peak ≈ 10.19 m",
+            "landingLabel": "Landing (R ≈ 40.77 m)",
+            "caption": "The trajectory of a 20 m/s launch at 45° from level ground — a parabola formed by constant horizontal velocity and uniformly accelerated vertical velocity."
+          },
+          "paragraph2": "Four quantities fully describe this idealized flight: time of flight (how long the object stays airborne), maximum height (the peak of the parabola), range (the horizontal distance traveled), and impact velocity (the speed and angle at landing). When launched from ground level (h₀ = 0), the trajectory is symmetric — the object returns to the height it started from, its impact speed equals its launch speed, and its impact angle equals its launch angle. Launching from an elevation (h₀ > 0) breaks that symmetry: the object falls farther than it rose, so it lands faster and at a steeper angle than it was launched.",
+          "paragraph3": "Because launching from a height breaks the simple ground-level symmetry, time of flight can no longer be found from a single division — it requires solving the quadratic equation h₀ + v₀sinθ·t − ½gt² = 0 for its positive root. This calculator always applies that general quadratic solution, which reduces automatically to the familiar t = 2v₀sinθ/g whenever h₀ = 0."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Applying the equations to a range of representative launches.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "20 m/s launch at 45°, from ground level (h₀ = 0)",
+              "result": "t ≈ 2.88 s, R ≈ 40.77 m"
+            },
+            {
+              "calculation": "30 m/s launch at 30°, from ground level",
+              "result": "t ≈ 3.06 s, R ≈ 79.45 m"
+            },
+            {
+              "calculation": "10 m/s horizontal launch (θ = 0°) from a 20 m height",
+              "result": "t ≈ 2.02 s, impact speed ≈ 22.19 m/s"
+            },
+            {
+              "calculation": "15 m/s launch straight up (θ = 90°)",
+              "result": "Max height ≈ 11.47 m, range = 0 m"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does projectile motion follow a parabola?",
+              "answer": "Because the horizontal and vertical motions are independent of each other. Horizontal velocity stays constant (no horizontal force acts on the projectile in this idealized model), while vertical position changes according to the same constant-acceleration equation as any falling object. Plotting a constant-rate horizontal position against a squared-time vertical position produces a parabola — a result Galileo Galilei proved geometrically in the early 17th century."
+            },
+            {
+              "question": "What launch angle gives the maximum range?",
+              "answer": "On level ground with no air resistance, 45° maximizes range for a given launch speed, because range is proportional to sin(2θ), which peaks when 2θ = 90°. Launching from an elevation shifts the optimal angle slightly below 45°, since the projectile spends less time needing horizontal velocity and more time falling from its extra starting height."
+            },
+            {
+              "question": "Does this calculator account for air resistance?",
+              "answer": "No — like the classic textbook model, it assumes a vacuum trajectory: a pure parabola with no drag. Real projectiles, especially fast or lightweight ones, experience meaningful air resistance that shortens their range and flattens their trajectory compared to this idealized calculation, which is why real ballistics tables diverge from the simple parabola at high speeds."
+            },
+            {
+              "question": "Why does launching from a height require the quadratic formula, but launching from the ground doesn't?",
+              "answer": "From ground level, the projectile lands when its height returns to zero, which factors neatly into t = 2v₀sinθ/g. From an elevation, it lands below its starting height, and the equation h₀ + v₀sinθ·t − ½gt² = 0 no longer has that convenient factorization — it requires the general quadratic formula, keeping only the positive root since negative time isn't physical."
+            },
+            {
+              "question": "Why is the impact angle steeper than the launch angle when launching from an elevation?",
+              "answer": "On level ground, the trajectory is symmetric, so the object lands at the same angle it launched at. Launching from a height breaks that symmetry: the object falls farther than it rose, gaining extra downward velocity along the way, so its vertical velocity component at landing is larger relative to its constant horizontal component — producing a steeper impact angle than the launch angle."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "Tartaglia's Cannon and Galileo's Proof of the Parabola",
+            "paragraph": "Long before the equations this calculator uses were understood, gunners needed to aim cannons. In 1537, Italian mathematician Niccolò Tartaglia published Nova Scientia, the first work of ballistic theory, in which he reported — through calculation and observation — that a cannon reaches its maximum range at a 45° elevation. But Tartaglia's own model was still wrong in an important way: he assumed a cannonball traveled in straight lines punctuated by a curved arc, rather than curving continuously from the moment it left the barrel. It took a century for the correct picture to emerge. Galileo Galilei, in his 1638 book Two New Sciences — written and smuggled out of Italy for publication while he lived under house arrest — proved that when horizontal velocity is constant and vertical velocity is uniformly accelerated by gravity, the resulting path is a true, continuous parabola. Galileo had worked out the core of this result decades earlier, around 1608–1609, through careful experiments rolling balls off inclined ramps, but only published the finished mathematical proof near the end of his life."
+          },
+          "modernDevelopments": {
+            "title": "When the Parabola Meets the Air",
+            "paragraph": "Galileo's parabola describes projectile motion in a vacuum, but real projectiles fly through air. English mathematician Benjamin Robins, in his 1742 book New Principles of Gunnery, performed the first accurate measurements of air resistance on moving shot, firing balls through a series of thin screens to time their flight and using a ballistic pendulum of his own invention to measure a bullet's speed. He found that air resistance was far from negligible at the speeds real cannonballs and bullets travel, and that fast-moving projectiles often followed curved, twisting paths rather than a clean planar parabola. His work was translated and expanded mathematically by Swiss mathematician Leonhard Euler, and together their findings launched the modern science of ballistics — the discipline this calculator's idealized, no-drag equations still describe as a foundational first approximation."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Projectile motion and trajectory analysis are foundational topics within physics. Here are the top 5 globally for Physics & Astronomy in the QS World University Rankings by Subject 2025, plus one leading regional university:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — the program follows an on-campus, laboratory-based research model with no distance or online track advertised."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — the program is based on in-person lab access and a residential research model, with no online option mentioned."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — the department describes an on-campus research community with on-site lab access, and no distance-study option is listed."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus throughout their studies."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Physics & Astronomy (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — full-time students must reside in Cambridge for at least three terms, with no online option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "The overall top-ranked university in the Arab region (QS World University Rankings: Arab Region 2025), offering a PhD track in Applied Physics — not separately ranked on this specific QS subject table.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — the program emphasizes on-campus laboratories and hands-on, residential research."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Naylor, R. H. (1976). Galileo: The Search for the Parabolic Trajectory. Annals of Science, 33(2), 153–172.",
+          "note": "Historian of science R. H. Naylor traces Galileo's manuscript notes on projectile motion, reconstructing the experimental and theoretical steps that led to the finished 1638 proof that a projectile's path is a parabola.",
+          "url": "https://doi.org/10.1080/00033797600200201",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

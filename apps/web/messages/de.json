@@ -6130,6 +6130,190 @@
         }
       }
     },
+    "projectile-motion-calculator": {
+      "title": "Wurfbewegungs-Rechner",
+      "description": "Berechnen Sie Flugzeit, maximale Höhe, Reichweite und Aufprallgeschwindigkeit für einen unter einem Winkel abgeworfenen Körper bei gleichmäßiger Erdbeschleunigung, mit einem interaktiven Flugbahndiagramm.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formeln der Wurfbewegung",
+          "intro": "Die grundlegenden kinematischen Gleichungen, die dieser Rechner anwendet, für Abwurfgeschwindigkeit v₀, Winkel θ, Abwurfhöhe h₀ und Erdbeschleunigung g.",
+          "formulas": {
+            "timeOfFlight": {
+              "label": "Flugzeit",
+              "expression": "t = [v₀sinθ + √((v₀sinθ)² + 2gh₀)] / g"
+            },
+            "maxHeight": {
+              "label": "Maximale Höhe",
+              "expression": "h_max = h₀ + (v₀sinθ)² / (2g)"
+            },
+            "range": {
+              "label": "Reichweite",
+              "expression": "R = v₀cosθ · t"
+            },
+            "impactSpeed": {
+              "label": "Aufprallgeschwindigkeit",
+              "expression": "v_impact = √(vx² + vy_impact²)"
+            }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Abwurfbedingungen",
+        "speedLabel": "Abwurfgeschwindigkeit (v₀) (m/s)",
+        "speedPlaceholder": "z. B. 20",
+        "angleLabel": "Abwurfwinkel (θ) (Grad über der Horizontalen)",
+        "anglePlaceholder": "z. B. 45",
+        "heightLabel": "Abwurfhöhe (h₀) (m)",
+        "heightPlaceholder": "z. B. 0",
+        "gravityLabel": "Erdbeschleunigung (g) (m/s²)",
+        "gravityHint": "Standardmäßig die Erdbeschleunigung an der Erdoberfläche (9,81 m/s²) — ändern Sie den Wert, um den Mond, den Mars oder eine andere Welt zu modellieren.",
+        "gravityPlaceholder": "z. B. 9,81"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidGravity": "Die Erdbeschleunigung muss größer als null sein.",
+        "invalidSpeed": "Die Abwurfgeschwindigkeit darf nicht negativ sein.",
+        "invalidHeight": "Die Abwurfhöhe darf nicht negativ sein.",
+        "timeOfFlight": "Flugzeit",
+        "maxHeight": "Maximale Höhe",
+        "range": "Reichweite",
+        "impactSpeed": "Aufprallgeschwindigkeit",
+        "impactAngle": "Aufprallwinkel",
+        "rangeCaption": "Horizontale Reichweite",
+        "diagramLaunch": "Abwurf",
+        "diagramPeak": "Scheitelpunkt ({value} m)",
+        "diagramLanding": "Landung",
+        "diagramCaption": "Die aus Ihrer Abwurfgeschwindigkeit, Ihrem Winkel, Ihrer Höhe und der Erdbeschleunigung berechnete parabolische Flugbahn — Scheitelpunkt und Landepunkt sind auf ihre tatsächlich berechneten Werte skaliert."
+      },
+      "education": {
+        "intro": {
+          "title": "Wurfbewegung verstehen",
+          "paragraph1": "Die Wurfbewegung beschreibt die gekrümmte Bahn eines in die Luft geworfenen Körpers, auf den nur die Schwerkraft wirkt, ohne Antrieb und, in diesem idealisierten Modell, ohne Luftwiderstand. Die entscheidende Erkenntnis, die Galileo Galilei streng bewiesen hat, ist, dass die horizontale und die vertikale Bewegungskomponente völlig unabhängig voneinander sind: Die horizontale Geschwindigkeit (v₀cosθ) bleibt während des gesamten Flugs konstant, während die vertikale Geschwindigkeit (v₀sinθ) abnimmt, am Scheitelpunkt kurzzeitig null wird und dann unter der Schwerkraft nach unten beschleunigt — genau so, als würde der Körper senkrecht nach oben geworfen und fiele anschließend senkrecht wieder herab. Die Kombination einer konstanten horizontalen Geschwindigkeit mit einer gleichmäßig beschleunigten vertikalen Geschwindigkeit ergibt eine Bahn, die mathematisch eine Parabel ist.",
+          "diagram": {
+            "launchLabel": "Abwurf (v₀ = 20 m/s, θ = 45°)",
+            "peakLabel": "Scheitelpunkt ≈ 10,19 m",
+            "landingLabel": "Landung (R ≈ 40,77 m)",
+            "caption": "Die Flugbahn eines Abwurfs mit 20 m/s bei 45° von ebenem Boden aus — eine Parabel, gebildet durch konstante horizontale Geschwindigkeit und gleichmäßig beschleunigte vertikale Geschwindigkeit."
+          },
+          "paragraph2": "Vier Größen beschreiben diesen idealisierten Flug vollständig: die Flugzeit (wie lange der Körper in der Luft bleibt), die maximale Höhe (der Scheitelpunkt der Parabel), die Reichweite (die zurückgelegte horizontale Strecke) und die Aufprallgeschwindigkeit (Geschwindigkeit und Winkel bei der Landung). Bei einem Abwurf vom Boden aus (h₀ = 0) ist die Flugbahn symmetrisch — der Körper kehrt zu der Höhe zurück, von der er gestartet ist, seine Aufprallgeschwindigkeit entspricht seiner Abwurfgeschwindigkeit, und sein Aufprallwinkel entspricht seinem Abwurfwinkel. Ein Abwurf aus einer Höhe (h₀ > 0) durchbricht diese Symmetrie: Der Körper fällt weiter, als er gestiegen ist, und landet deshalb schneller und in einem steileren Winkel, als er abgeworfen wurde.",
+          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Anwendung der Gleichungen auf eine Reihe repräsentativer Abwürfe.",
+          "columnCalculation": "Rechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            {
+              "calculation": "Abwurf mit 20 m/s bei 45°, vom Boden aus (h₀ = 0)",
+              "result": "t ≈ 2,88 s, R ≈ 40,77 m"
+            },
+            {
+              "calculation": "Abwurf mit 30 m/s bei 30°, vom Boden aus",
+              "result": "t ≈ 3,06 s, R ≈ 79,45 m"
+            },
+            {
+              "calculation": "Horizontaler Abwurf mit 10 m/s (θ = 0°) aus 20 m Höhe",
+              "result": "t ≈ 2,02 s, Aufprallgeschwindigkeit ≈ 22,19 m/s"
+            },
+            {
+              "calculation": "Senkrechter Abwurf mit 15 m/s nach oben (θ = 90°)",
+              "result": "Maximale Höhe ≈ 11,47 m, Reichweite = 0 m"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufige Fragen",
+          "items": [
+            {
+              "question": "Warum folgt die Wurfbewegung einer Parabel?",
+              "answer": "Weil die horizontale und die vertikale Bewegung voneinander unabhängig sind. Die horizontale Geschwindigkeit bleibt konstant (in diesem idealisierten Modell wirkt keine horizontale Kraft auf den Körper), während sich die vertikale Position nach derselben Gleichung für gleichmäßig beschleunigte Bewegung ändert wie bei jedem fallenden Körper. Trägt man eine mit konstanter Rate wachsende horizontale Position gegen eine mit dem Quadrat der Zeit wachsende vertikale Position auf, ergibt sich eine Parabel — ein Ergebnis, das Galileo Galilei zu Beginn des 17. Jahrhunderts geometrisch bewiesen hat."
+            },
+            {
+              "question": "Welcher Abwurfwinkel ergibt die maximale Reichweite?",
+              "answer": "Auf ebenem Boden ohne Luftwiderstand maximiert ein Winkel von 45° die Reichweite bei gegebener Abwurfgeschwindigkeit, da die Reichweite proportional zu sin(2θ) ist, das bei 2θ = 90° sein Maximum erreicht. Ein Abwurf aus einer Höhe verschiebt den optimalen Winkel leicht unter 45°, da der Körper weniger Zeit mit der horizontalen Bewegung verbringt und mehr Zeit mit dem Fall aus seiner zusätzlichen Ausgangshöhe."
+            },
+            {
+              "question": "Berücksichtigt dieser Rechner den Luftwiderstand?",
+              "answer": "Nein — wie im klassischen Lehrbuchmodell wird eine Flugbahn im Vakuum angenommen: eine reine Parabel ohne Luftwiderstand. Reale Geschosse, besonders schnelle oder leichte, erfahren einen spürbaren Luftwiderstand, der ihre Reichweite verkürzt und ihre Flugbahn im Vergleich zu dieser idealisierten Berechnung abflacht — deshalb weichen echte ballistische Tabellen bei hohen Geschwindigkeiten von der einfachen Parabel ab."
+            },
+            {
+              "question": "Warum braucht man beim Abwurf aus einer Höhe die quadratische Lösungsformel, beim Abwurf vom Boden aus aber nicht?",
+              "answer": "Vom Boden aus landet der Körper, wenn seine Höhe wieder auf null zurückkehrt, was sich sauber zu t = 2v₀sinθ/g faktorisieren lässt. Aus einer Höhe landet er unterhalb seiner Ausgangshöhe, und die Gleichung h₀ + v₀sinθ·t − ½gt² = 0 lässt sich nicht mehr so bequem faktorisieren — sie erfordert die allgemeine quadratische Lösungsformel, wobei nur die positive Nullstelle beibehalten wird, da eine negative Zeit physikalisch nicht sinnvoll ist."
+            },
+            {
+              "question": "Warum ist der Aufprallwinkel steiler als der Abwurfwinkel, wenn aus einer Höhe abgeworfen wird?",
+              "answer": "Auf ebenem Boden ist die Flugbahn symmetrisch, sodass der Körper im selben Winkel landet, in dem er abgeworfen wurde. Ein Abwurf aus einer Höhe durchbricht diese Symmetrie: Der Körper fällt weiter, als er gestiegen ist, und gewinnt dabei zusätzliche Abwärtsgeschwindigkeit, sodass seine vertikale Geschwindigkeitskomponente bei der Landung im Verhältnis zur konstanten horizontalen Komponente größer ist — das ergibt einen steileren Aufprallwinkel als den Abwurfwinkel."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund des Tools",
+          "history": {
+            "title": "Tartaglias Kanone und Galileis Beweis der Parabel",
+            "paragraph": "Lange bevor die Gleichungen, die dieser Rechner verwendet, verstanden wurden, mussten Kanoniere ihre Geschütze ausrichten. 1537 veröffentlichte der italienische Mathematiker Niccolò Tartaglia Nova Scientia, das erste Werk zur Ballistiktheorie, in dem er durch Berechnung und Beobachtung berichtete, dass eine Kanone bei einer Erhöhung von 45° ihre maximale Reichweite erzielt. Doch Tartaglias eigenes Modell war in einem wichtigen Punkt noch falsch: Er nahm an, eine Kanonenkugel bewege sich auf geraden Linien, unterbrochen von einem gekrümmten Bogen, statt sich vom Moment des Abschusses an kontinuierlich zu krümmen. Es dauerte ein weiteres Jahrhundert, bis das richtige Bild entstand. Galileo Galilei bewies 1638 in seinem Buch Zwei neue Wissenschaften — geschrieben und aus Italien zur Veröffentlichung herausgeschmuggelt, während er unter Hausarrest lebte —, dass bei konstanter horizontaler Geschwindigkeit und einer durch die Schwerkraft gleichmäßig beschleunigten vertikalen Geschwindigkeit eine echte, durchgehende Parabel entsteht. Galilei hatte den Kern dieses Ergebnisses schon Jahrzehnte zuvor, um 1608–1609, durch sorgfältige Experimente mit Kugeln erarbeitet, die schiefe Ebenen hinabrollten, veröffentlichte den fertigen mathematischen Beweis jedoch erst gegen Ende seines Lebens."
+          },
+          "modernDevelopments": {
+            "title": "Wenn die Parabel auf die Luft trifft",
+            "paragraph": "Galileis Parabel beschreibt die Wurfbewegung im Vakuum, doch reale Geschosse fliegen durch die Luft. Der englische Mathematiker Benjamin Robins führte in seinem 1742 erschienenen Buch New Principles of Gunnery die ersten genauen Messungen des Luftwiderstands an fliegenden Geschossen durch, indem er Kugeln durch eine Reihe dünner Schirme schoss, um ihre Flugzeit zu messen, und ein von ihm selbst erfundenes ballistisches Pendel nutzte, um die Geschwindigkeit einer Kugel zu bestimmen. Er stellte fest, dass der Luftwiderstand bei den Geschwindigkeiten, mit denen echte Kanonenkugeln und Gewehrkugeln fliegen, keineswegs vernachlässigbar war und dass schnell fliegende Geschosse häufig gekrümmte, gewundene Bahnen statt einer sauberen ebenen Parabel beschrieben. Seine Arbeit wurde vom Schweizer Mathematiker Leonhard Euler übersetzt und mathematisch erweitert, und gemeinsam begründeten ihre Erkenntnisse die moderne Ballistik — jene Disziplin, für die die idealisierten, widerstandsfreien Gleichungen dieses Rechners noch heute eine grundlegende erste Näherung liefern."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Wurfbewegung und Flugbahnanalyse sind grundlegende Themen der Physik. Hier sind die weltweit 5 besten Universitäten für Physik & Astronomie im QS World University Rankings by Subject 2025, zusätzlich zu einer führenden regionalen Forschungsuniversität:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Nein — das Programm folgt einem laborbasierten Präsenzforschungsmodell ohne beworbene Fernstudien- oder Online-Option."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 2 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Nein — das Programm basiert auf Präsenzzugang zu Laboren und einem residenzpflichtigen Forschungsmodell; eine Online-Option wird nicht erwähnt."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 3 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Nein — die Fakultät beschreibt eine Präsenz-Forschungsgemeinschaft mit Laborzugang vor Ort; eine Fernstudienoption wird nicht genannt."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 4 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Nein — Stanfords Residenzpflicht für Graduiertenstudierende verlangt, dass Promotionsstudierende während des gesamten Studiums eine erhebliche physische Präsenz auf dem Campus aufrechterhalten."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 5 für Physik & Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Nein — Vollzeitstudierende müssen mindestens drei Trimester in Cambridge wohnhaft sein; keine Online-Option."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "Die insgesamt bestplatzierte Universität der arabischen Region (QS World University Rankings: Arab Region 2025), mit einem Promotionsprogramm in Angewandter Physik — auf dieser spezifischen QS-Fachtabelle nicht gesondert eingestuft.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Naylor, R. H. (1976). Galileo: The Search for the Parabolic Trajectory. Annals of Science, 33(2), 153–172.",
+          "note": "Der Wissenschaftshistoriker R. H. Naylor verfolgt Galileis Manuskriptnotizen zur Wurfbewegung und rekonstruiert die experimentellen und theoretischen Schritte, die 1638 zum fertigen Beweis führten, dass die Bahn eines Geschosses eine Parabel ist.",
+          "url": "https://doi.org/10.1080/00033797600200201",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

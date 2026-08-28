@@ -6130,6 +6130,190 @@
         }
       }
     },
+    "projectile-motion-calculator": {
+      "title": "Calculateur de Mouvement de Projectile",
+      "description": "Calculez le temps de vol, la hauteur maximale, la portée et la vitesse d'impact d'un projectile lancé selon un angle sous une gravité uniforme, avec un diagramme de trajectoire interactif.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formules du Mouvement de Projectile",
+          "intro": "Les équations cinématiques fondamentales appliquées par ce calculateur, pour une vitesse de lancement v₀, un angle θ, une hauteur de lancement h₀ et une gravité g.",
+          "formulas": {
+            "timeOfFlight": {
+              "label": "Temps de Vol",
+              "expression": "t = [v₀sinθ + √((v₀sinθ)² + 2gh₀)] / g"
+            },
+            "maxHeight": {
+              "label": "Hauteur Maximale",
+              "expression": "h_max = h₀ + (v₀sinθ)² / (2g)"
+            },
+            "range": {
+              "label": "Portée Horizontale",
+              "expression": "R = v₀cosθ · t"
+            },
+            "impactSpeed": {
+              "label": "Vitesse d'Impact",
+              "expression": "v_impact = √(vx² + vy_impact²)"
+            }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Conditions de Lancement",
+        "speedLabel": "Vitesse de Lancement (v₀) (m/s)",
+        "speedPlaceholder": "p. ex. 20",
+        "angleLabel": "Angle de Lancement (θ) (degrés au-dessus de l'horizontale)",
+        "anglePlaceholder": "p. ex. 45",
+        "heightLabel": "Hauteur de Lancement (h₀) (m)",
+        "heightPlaceholder": "p. ex. 0",
+        "gravityLabel": "Accélération Gravitationnelle (g) (m/s²)",
+        "gravityHint": "Par défaut, la gravité à la surface de la Terre (9,81 m/s²) — modifiez-la pour la Lune, Mars ou un autre monde.",
+        "gravityPlaceholder": "p. ex. 9.81"
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidGravity": "L'accélération gravitationnelle doit être supérieure à zéro.",
+        "invalidSpeed": "La vitesse de lancement ne peut pas être négative.",
+        "invalidHeight": "La hauteur de lancement ne peut pas être négative.",
+        "timeOfFlight": "Temps de Vol",
+        "maxHeight": "Hauteur Maximale",
+        "range": "Portée",
+        "impactSpeed": "Vitesse d'Impact",
+        "impactAngle": "Angle d'Impact",
+        "rangeCaption": "Portée horizontale",
+        "diagramLaunch": "Lancement",
+        "diagramPeak": "Sommet ({value} m)",
+        "diagramLanding": "Atterrissage",
+        "diagramCaption": "La trajectoire parabolique calculée à partir de votre vitesse de lancement, de l'angle, de la hauteur et de la gravité — le sommet et le point d'atterrissage sont à l'échelle de leurs valeurs réellement calculées."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le Mouvement de Projectile",
+          "paragraph1": "Le mouvement de projectile décrit la trajectoire courbe tracée par un objet lancé dans les airs et soumis uniquement à la gravité, sans propulsion et, dans ce modèle idéalisé, sans résistance de l'air. L'idée clé, démontrée rigoureusement par Galilée, est que les composantes horizontale et verticale du mouvement sont entièrement indépendantes : la vitesse horizontale (v₀cosθ) reste constante pendant tout le vol, tandis que la vitesse verticale (v₀sinθ) décélère, s'arrête momentanément au sommet, puis accélère vers le bas sous l'effet de la gravité — exactement comme si l'objet était lancé verticalement puis retombait tout droit. La combinaison d'une vitesse horizontale constante et d'une vitesse verticale uniformément accélérée produit une trajectoire qui est mathématiquement une parabole.",
+          "diagram": {
+            "launchLabel": "Lancement (v₀ = 20 m/s, θ = 45°)",
+            "peakLabel": "Sommet ≈ 10,19 m",
+            "landingLabel": "Atterrissage (R ≈ 40,77 m)",
+            "caption": "La trajectoire d'un lancement à 20 m/s et 45° depuis un sol plat — une parabole formée par une vitesse horizontale constante et une vitesse verticale uniformément accélérée."
+          },
+          "paragraph2": "Quatre grandeurs décrivent entièrement ce vol idéalisé : le temps de vol (la durée pendant laquelle l'objet reste en l'air), la hauteur maximale (le sommet de la parabole), la portée (la distance horizontale parcourue) et la vitesse d'impact (la vitesse et l'angle à l'atterrissage). Lorsque le lancement se fait au niveau du sol (h₀ = 0), la trajectoire est symétrique — l'objet retombe à la hauteur d'où il est parti, sa vitesse d'impact égale sa vitesse de lancement, et son angle d'impact égale son angle de lancement. Lancer depuis une élévation (h₀ > 0) rompt cette symétrie : l'objet chute plus qu'il ne s'est élevé, il atterrit donc plus vite et selon un angle plus prononcé qu'au lancement.",
+          "paragraph3": "Comme le lancement depuis une hauteur rompt la simple symétrie au niveau du sol, le temps de vol ne peut plus être trouvé par une simple division — il faut résoudre l'équation quadratique h₀ + v₀sinθ·t − ½gt² = 0 pour sa racine positive. Ce calculateur applique toujours cette solution quadratique générale, qui se réduit automatiquement à la formule familière t = 2v₀sinθ/g dès que h₀ = 0."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Application des équations à une série de lancements représentatifs.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "Lancement à 20 m/s et 45°, depuis le niveau du sol (h₀ = 0)",
+              "result": "t ≈ 2,88 s, R ≈ 40,77 m"
+            },
+            {
+              "calculation": "Lancement à 30 m/s et 30°, depuis le niveau du sol",
+              "result": "t ≈ 3,06 s, R ≈ 79,45 m"
+            },
+            {
+              "calculation": "Lancement horizontal à 10 m/s (θ = 0°) depuis une hauteur de 20 m",
+              "result": "t ≈ 2,02 s, vitesse d'impact ≈ 22,19 m/s"
+            },
+            {
+              "calculation": "Lancement vertical à 15 m/s (θ = 90°)",
+              "result": "Hauteur max ≈ 11,47 m, portée = 0 m"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi le mouvement de projectile suit-il une parabole ?",
+              "answer": "Parce que les mouvements horizontal et vertical sont indépendants l'un de l'autre. La vitesse horizontale reste constante (aucune force horizontale n'agit sur le projectile dans ce modèle idéalisé), tandis que la position verticale évolue selon la même équation à accélération constante que tout objet en chute libre. Tracer une position horizontale à taux constant en fonction d'une position verticale au carré du temps produit une parabole — un résultat démontré géométriquement par Galilée au début du XVIIe siècle."
+            },
+            {
+              "question": "Quel angle de lancement donne la portée maximale ?",
+              "answer": "Sur un sol plat et sans résistance de l'air, 45° maximise la portée pour une vitesse de lancement donnée, car la portée est proportionnelle à sin(2θ), qui atteint son maximum lorsque 2θ = 90°. Un lancement depuis une élévation déplace légèrement l'angle optimal en dessous de 45°, car le projectile a besoin de moins de temps de vitesse horizontale et passe plus de temps à chuter depuis sa hauteur de départ supplémentaire."
+            },
+            {
+              "question": "Ce calculateur tient-il compte de la résistance de l'air ?",
+              "answer": "Non — comme le modèle classique des manuels scolaires, il suppose une trajectoire dans le vide : une parabole pure sans traînée. Les projectiles réels, en particulier les plus rapides ou les plus légers, subissent une résistance de l'air significative qui raccourcit leur portée et aplatit leur trajectoire par rapport à ce calcul idéalisé, ce qui explique pourquoi les véritables tables balistiques s'écartent de la simple parabole à haute vitesse."
+            },
+            {
+              "question": "Pourquoi le lancement depuis une hauteur nécessite-t-il la formule quadratique, alors que le lancement depuis le sol n'en a pas besoin ?",
+              "answer": "Depuis le niveau du sol, le projectile atterrit lorsque sa hauteur revient à zéro, ce qui se factorise proprement en t = 2v₀sinθ/g. Depuis une élévation, il atterrit en dessous de sa hauteur de départ, et l'équation h₀ + v₀sinθ·t − ½gt² = 0 n'a plus cette factorisation pratique — elle nécessite la formule quadratique générale, en ne conservant que la racine positive puisqu'un temps négatif n'a pas de sens physique."
+            },
+            {
+              "question": "Pourquoi l'angle d'impact est-il plus prononcé que l'angle de lancement lors d'un lancement depuis une élévation ?",
+              "answer": "Sur un sol plat, la trajectoire est symétrique, donc l'objet atterrit selon le même angle qu'au lancement. Lancer depuis une hauteur rompt cette symétrie : l'objet chute plus qu'il ne s'est élevé, gagnant une vitesse verticale supplémentaire en chemin, de sorte que sa composante de vitesse verticale à l'atterrissage est plus grande par rapport à sa composante horizontale constante — ce qui produit un angle d'impact plus prononcé que l'angle de lancement."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de l'Outil",
+          "history": {
+            "title": "Le Canon de Tartaglia et la Preuve de la Parabole par Galilée",
+            "paragraph": "Bien avant que les équations utilisées par ce calculateur ne soient comprises, les artilleurs devaient viser leurs canons. En 1537, le mathématicien italien Niccolò Tartaglia publia Nova Scientia, le premier ouvrage de théorie balistique, dans lequel il rapporta — par le calcul et l'observation — qu'un canon atteint sa portée maximale à une élévation de 45°. Mais le modèle de Tartaglia lui-même comportait encore une erreur importante : il supposait qu'un boulet de canon se déplaçait en lignes droites ponctuées d'un arc courbe, plutôt que de courber continuellement dès sa sortie du canon. Il fallut un siècle pour que l'image correcte émerge. Galilée, dans son ouvrage de 1638 Discours concernant deux sciences nouvelles — rédigé et sorti clandestinement d'Italie pour publication alors qu'il vivait en résidence surveillée — démontra que lorsque la vitesse horizontale est constante et que la vitesse verticale est uniformément accélérée par la gravité, la trajectoire résultante est une véritable parabole continue. Galilée avait établi l'essentiel de ce résultat des décennies plus tôt, vers 1608-1609, par des expériences minutieuses consistant à faire rouler des billes sur des plans inclinés, mais il ne publia la démonstration mathématique achevée que vers la fin de sa vie."
+          },
+          "modernDevelopments": {
+            "title": "Quand la Parabole Rencontre l'Air",
+            "paragraph": "La parabole de Galilée décrit le mouvement de projectile dans le vide, mais les projectiles réels traversent l'air. Le mathématicien anglais Benjamin Robins, dans son ouvrage de 1742 New Principles of Gunnery, réalisa les premières mesures précises de la résistance de l'air sur un projectile en mouvement, en tirant des billes à travers une série d'écrans fins pour chronométrer leur vol et en utilisant un pendule balistique de sa propre invention pour mesurer la vitesse d'une balle. Il découvrit que la résistance de l'air était loin d'être négligeable aux vitesses atteintes par les vrais boulets de canon et les balles, et que les projectiles rapides suivaient souvent des trajectoires courbes et tourbillonnantes plutôt qu'une simple parabole plane. Ses travaux furent traduits et développés mathématiquement par le mathématicien suisse Leonhard Euler, et ensemble leurs découvertes lancèrent la science moderne de la balistique — la discipline que les équations idéalisées sans traînée de ce calculateur continuent de décrire comme une première approximation fondamentale."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Le mouvement de projectile et l'analyse de trajectoire sont des sujets fondamentaux de la physique. Voici les 5 meilleures universités mondiales en Physique et Astronomie selon le QS World University Rankings by Subject 2025, ainsi qu'une grande université de recherche régionale :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "Non — le programme suit un modèle de recherche en présentiel basé sur le laboratoire, sans aucune filière à distance ou en ligne annoncée."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 2 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "Non — le programme repose sur un accès présentiel aux laboratoires et un modèle de recherche résidentiel, sans mention d'option en ligne."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 3 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "Non — le département décrit une communauté de recherche en présentiel avec accès aux laboratoires sur place, et aucune option d'étude à distance n'est mentionnée."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 4 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige que les doctorants maintiennent une présence physique significative sur le campus tout au long de leurs études."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 5 mondiale en Physique et Astronomie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "Non — les étudiants à temps plein doivent résider à Cambridge pendant au moins trois trimestres, sans option en ligne."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "L'université la mieux classée de la région arabe dans l'ensemble (QS World University Rankings : Arab Region 2025), proposant une filière de doctorat en physique appliquée — non classée séparément dans ce tableau spécifique de QS par discipline.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Naylor, R. H. (1976). Galileo: The Search for the Parabolic Trajectory. Annals of Science, 33(2), 153–172.",
+          "note": "L'historien des sciences R. H. Naylor retrace les notes manuscrites de Galilée sur le mouvement de projectile, reconstituant les étapes expérimentales et théoriques qui menèrent à la démonstration achevée en 1638 selon laquelle la trajectoire d'un projectile est une parabole.",
+          "url": "https://doi.org/10.1080/00033797600200201",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

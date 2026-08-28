@@ -454,6 +454,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "projectile-motion-calculator",
+    title: "Projectile Motion Calculator",
+    category: "math-science",
+    description:
+      "Calculate time of flight, maximum height, range, and impact velocity for a projectile launched at an angle, with an interactive trajectory diagram.",
+    featured: false,
+    keywords: [
+      "projectile motion calculator",
+      "trajectory calculator",
+      "range calculator physics",
+      "time of flight calculator",
+      "maximum height calculator",
+      "launch angle calculator",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

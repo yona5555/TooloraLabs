@@ -67,6 +67,8 @@ import KinematicsCalculator from "@/components/tools/kinematics-calculator/Kinem
 import KinematicsEducation from "@/components/tools/kinematics-calculator/KinematicsEducation";
 import ForceCalculator from "@/components/tools/force-calculator/ForceCalculator";
 import ForceEducation from "@/components/tools/force-calculator/ForceEducation";
+import ProjectileMotionCalculator from "@/components/tools/projectile-motion-calculator/ProjectileMotionCalculator";
+import ProjectileMotionEducation from "@/components/tools/projectile-motion-calculator/ProjectileMotionEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -373,6 +375,9 @@ export default async function ToolPage({
     case "force-calculator":
       component = <ForceCalculator education={<ForceEducation />} />;
       break;
+    case "projectile-motion-calculator":
+      component = <ProjectileMotionCalculator education={<ProjectileMotionEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -469,6 +474,7 @@ export default async function ToolPage({
     slug === "energy-work-power-calculator" ||
     slug === "kinematics-calculator" ||
     slug === "force-calculator" ||
+    slug === "projectile-motion-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

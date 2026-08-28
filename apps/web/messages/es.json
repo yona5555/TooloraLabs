@@ -6130,6 +6130,166 @@
         }
       }
     },
+    "projectile-motion-calculator": {
+      "title": "Calculadora de Movimiento de Proyectiles",
+      "description": "Calcula el tiempo de vuelo, la altura máxima, el alcance y la velocidad de impacto de un proyectil lanzado con un ángulo bajo gravedad uniforme, con un diagrama interactivo de la trayectoria.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Fórmulas del Movimiento de Proyectiles",
+          "intro": "Las ecuaciones cinemáticas fundamentales que aplica esta calculadora, para la velocidad de lanzamiento v₀, el ángulo θ, la altura de lanzamiento h₀ y la gravedad g.",
+          "formulas": {
+            "timeOfFlight": { "label": "Tiempo de Vuelo", "expression": "t = [v₀sinθ + √((v₀sinθ)² + 2gh₀)] / g" },
+            "maxHeight": { "label": "Altura Máxima", "expression": "h_max = h₀ + (v₀sinθ)² / (2g)" },
+            "range": { "label": "Alcance Horizontal", "expression": "R = v₀cosθ · t" },
+            "impactSpeed": { "label": "Velocidad de Impacto", "expression": "v_impacto = √(vx² + vy_impacto²)" }
+          }
+        }
+      },
+      "form": {
+        "inputTitle": "Condiciones de Lanzamiento",
+        "speedLabel": "Velocidad de Lanzamiento (v₀) (m/s)",
+        "speedPlaceholder": "p. ej. 20",
+        "angleLabel": "Ángulo de Lanzamiento (θ) (grados sobre la horizontal)",
+        "anglePlaceholder": "p. ej. 45",
+        "heightLabel": "Altura de Lanzamiento (h₀) (m)",
+        "heightPlaceholder": "p. ej. 0",
+        "gravityLabel": "Aceleración Gravitacional (g) (m/s²)",
+        "gravityHint": "Por defecto usa la gravedad superficial de la Tierra (9.81 m/s²) — cámbiala para modelar la Luna, Marte u otro mundo.",
+        "gravityPlaceholder": "p. ej. 9.81"
+      },
+      "result": {
+        "heading": "Resultado",
+        "invalidGravity": "La aceleración gravitacional debe ser mayor que cero.",
+        "invalidSpeed": "La velocidad de lanzamiento no puede ser negativa.",
+        "invalidHeight": "La altura de lanzamiento no puede ser negativa.",
+        "timeOfFlight": "Tiempo de Vuelo",
+        "maxHeight": "Altura Máxima",
+        "range": "Alcance",
+        "impactSpeed": "Velocidad de Impacto",
+        "impactAngle": "Ángulo de Impacto",
+        "rangeCaption": "Alcance horizontal",
+        "diagramLaunch": "Lanzamiento",
+        "diagramPeak": "Punto máximo ({value} m)",
+        "diagramLanding": "Aterrizaje",
+        "diagramCaption": "La trayectoria parabólica calculada a partir de tu velocidad de lanzamiento, ángulo, altura y gravedad — el punto máximo y el punto de aterrizaje están escalados a sus valores calculados reales."
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo el Movimiento de Proyectiles",
+          "paragraph1": "El movimiento de proyectiles describe la trayectoria curva que traza un objeto lanzado al aire y sometido únicamente a la gravedad, sin propulsión y, en este modelo idealizado, sin resistencia del aire. La idea clave, demostrada rigurosamente por Galileo Galilei, es que las componentes horizontal y vertical del movimiento son totalmente independientes: la velocidad horizontal (v₀cosθ) permanece constante durante todo el vuelo, mientras que la velocidad vertical (v₀sinθ) se desacelera, se detiene momentáneamente en el punto más alto y luego acelera hacia abajo bajo la gravedad, exactamente como si el objeto se hubiera lanzado hacia arriba y hubiera caído de nuevo en línea recta. Combinar una velocidad horizontal constante con una velocidad vertical uniformemente acelerada produce una trayectoria que es matemáticamente una parábola.",
+          "diagram": {
+            "launchLabel": "Lanzamiento (v₀ = 20 m/s, θ = 45°)",
+            "peakLabel": "Punto máximo ≈ 10.19 m",
+            "landingLabel": "Aterrizaje (R ≈ 40.77 m)",
+            "caption": "La trayectoria de un lanzamiento a 20 m/s con un ángulo de 45° desde el suelo — una parábola formada por una velocidad horizontal constante y una velocidad vertical uniformemente acelerada."
+          },
+          "paragraph2": "Cuatro magnitudes describen por completo este vuelo idealizado: el tiempo de vuelo (cuánto tiempo permanece el objeto en el aire), la altura máxima (el punto más alto de la parábola), el alcance (la distancia horizontal recorrida) y la velocidad de impacto (la rapidez y el ángulo al aterrizar). Cuando se lanza desde el nivel del suelo (h₀ = 0), la trayectoria es simétrica: el objeto vuelve a la altura desde la que partió, su velocidad de impacto es igual a su velocidad de lanzamiento, y su ángulo de impacto es igual a su ángulo de lanzamiento. Lanzar desde una elevación (h₀ > 0) rompe esa simetría: el objeto cae más de lo que subió, así que aterriza más rápido y con un ángulo más pronunciado que el de lanzamiento.",
+          "paragraph3": "Como lanzar desde una altura rompe la simetría simple del nivel del suelo, el tiempo de vuelo ya no puede obtenerse con una sola división: requiere resolver la ecuación cuadrática h₀ + v₀sinθ·t − ½gt² = 0 para su raíz positiva. Esta calculadora siempre aplica esa solución cuadrática general, que se reduce automáticamente a la conocida t = 2v₀sinθ/g cuando h₀ = 0."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Aplicando las ecuaciones a una serie de lanzamientos representativos.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Lanzamiento a 20 m/s con un ángulo de 45°, desde el nivel del suelo (h₀ = 0)", "result": "t ≈ 2.88 s, R ≈ 40.77 m" },
+            { "calculation": "Lanzamiento a 30 m/s con un ángulo de 30°, desde el nivel del suelo", "result": "t ≈ 3.06 s, R ≈ 79.45 m" },
+            { "calculation": "Lanzamiento horizontal a 10 m/s (θ = 0°) desde una altura de 20 m", "result": "t ≈ 2.02 s, velocidad de impacto ≈ 22.19 m/s" },
+            { "calculation": "Lanzamiento vertical hacia arriba a 15 m/s (θ = 90°)", "result": "Altura máxima ≈ 11.47 m, alcance = 0 m" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué el movimiento de proyectiles sigue una parábola?",
+              "answer": "Porque los movimientos horizontal y vertical son independientes entre sí. La velocidad horizontal permanece constante (en este modelo idealizado no actúa ninguna fuerza horizontal sobre el proyectil), mientras que la posición vertical cambia según la misma ecuación de aceleración constante que cualquier objeto en caída. Al graficar una posición horizontal de ritmo constante frente a una posición vertical que depende del cuadrado del tiempo se obtiene una parábola, un resultado que Galileo Galilei demostró geométricamente a principios del siglo XVII."
+            },
+            {
+              "question": "¿Qué ángulo de lanzamiento produce el alcance máximo?",
+              "answer": "En terreno llano y sin resistencia del aire, 45° maximiza el alcance para una velocidad de lanzamiento dada, porque el alcance es proporcional a sin(2θ), que alcanza su máximo cuando 2θ = 90°. Lanzar desde una elevación desplaza el ángulo óptimo ligeramente por debajo de 45°, ya que el proyectil necesita menos tiempo de velocidad horizontal y más tiempo cayendo desde su altura inicial adicional."
+            },
+            {
+              "question": "¿Tiene en cuenta esta calculadora la resistencia del aire?",
+              "answer": "No: al igual que el modelo clásico de los libros de texto, asume una trayectoria en el vacío, una parábola pura sin arrastre. Los proyectiles reales, especialmente los rápidos o ligeros, experimentan una resistencia del aire considerable que acorta su alcance y aplana su trayectoria en comparación con este cálculo idealizado, razón por la cual las tablas balísticas reales se apartan de la parábola simple a altas velocidades."
+            },
+            {
+              "question": "¿Por qué lanzar desde una altura requiere la fórmula cuadrática, pero lanzar desde el suelo no?",
+              "answer": "Desde el nivel del suelo, el proyectil aterriza cuando su altura vuelve a cero, lo que se factoriza limpiamente en t = 2v₀sinθ/g. Desde una elevación, aterriza por debajo de su altura inicial, y la ecuación h₀ + v₀sinθ·t − ½gt² = 0 ya no tiene esa factorización conveniente: requiere la fórmula cuadrática general, conservando solo la raíz positiva, ya que un tiempo negativo no es físicamente posible."
+            },
+            {
+              "question": "¿Por qué el ángulo de impacto es más pronunciado que el ángulo de lanzamiento cuando se lanza desde una elevación?",
+              "answer": "En terreno llano, la trayectoria es simétrica, así que el objeto aterriza con el mismo ángulo con el que fue lanzado. Lanzar desde una altura rompe esa simetría: el objeto cae más de lo que subió, ganando velocidad hacia abajo adicional en el camino, de modo que su componente de velocidad vertical al aterrizar es mayor en relación con su componente horizontal constante, lo que produce un ángulo de impacto más pronunciado que el de lanzamiento."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "El Cañón de Tartaglia y la Prueba de la Parábola de Galileo",
+            "paragraph": "Mucho antes de que se comprendieran las ecuaciones que usa esta calculadora, los artilleros necesitaban apuntar sus cañones. En 1537, el matemático italiano Niccolò Tartaglia publicó Nova Scientia, la primera obra de teoría balística, en la que reportó —mediante cálculo y observación— que un cañón alcanza su máximo alcance con una elevación de 45°. Pero el propio modelo de Tartaglia aún era incorrecto en un aspecto importante: suponía que una bala de cañón viajaba en líneas rectas interrumpidas por un arco curvo, en lugar de curvarse de manera continua desde el momento en que salía del cañón. Pasó un siglo antes de que surgiera la imagen correcta. Galileo Galilei, en su libro de 1638 Discursos y demostraciones matemáticas en torno a dos nuevas ciencias —escrito y sacado clandestinamente de Italia para su publicación mientras vivía bajo arresto domiciliario— demostró que cuando la velocidad horizontal es constante y la velocidad vertical se acelera uniformemente por la gravedad, la trayectoria resultante es una parábola verdadera y continua. Galileo había desarrollado el núcleo de este resultado décadas antes, hacia 1608-1609, mediante cuidadosos experimentos haciendo rodar bolas por rampas inclinadas, pero solo publicó la demostración matemática terminada cerca del final de su vida."
+          },
+          "modernDevelopments": {
+            "title": "Cuando la Parábola se Encuentra con el Aire",
+            "paragraph": "La parábola de Galileo describe el movimiento de un proyectil en el vacío, pero los proyectiles reales vuelan a través del aire. El matemático inglés Benjamin Robins, en su libro de 1742 New Principles of Gunnery, realizó las primeras mediciones precisas de la resistencia del aire sobre proyectiles en movimiento, disparando balas a través de una serie de pantallas delgadas para cronometrar su vuelo y usando un péndulo balístico de su propia invención para medir la velocidad de una bala. Descubrió que la resistencia del aire estaba lejos de ser despreciable a las velocidades que alcanzan las balas de cañón y los proyectiles reales, y que los proyectiles de movimiento rápido a menudo seguían trayectorias curvas y sinuosas en lugar de una parábola plana y limpia. Su trabajo fue traducido y ampliado matemáticamente por el matemático suizo Leonhard Euler, y juntos sus hallazgos dieron origen a la ciencia moderna de la balística, la disciplina que las ecuaciones idealizadas y sin arrastre de esta calculadora siguen describiendo como una primera aproximación fundamental."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El movimiento de proyectiles y el análisis de trayectorias son temas fundamentales dentro de la física. Estas son las 5 mejores universidades del mundo en Física y Astronomía según el QS World University Rankings by Subject 2025, además de una destacada universidad de investigación regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.mit.edu/academic-programs/graduate-students/graduate-admissions",
+                "online": "No — el programa sigue un modelo de investigación presencial basado en laboratorio, sin ninguna modalidad remota o en línea anunciada."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #2 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://gsas.harvard.edu/program/physics",
+                "online": "No — el programa se basa en el acceso presencial a laboratorios y un modelo de investigación residencial, sin mencionar ninguna opción en línea."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #3 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.physics.ox.ac.uk/study/postgraduates",
+                "online": "No — el departamento describe una comunidad de investigación presencial con acceso a laboratorios en el sitio, y no se indica ninguna opción de estudio a distancia."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #4 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://physics.stanford.edu/prospective-students/graduate-admissions",
+                "online": "No — la política de residencia de posgrado de Stanford exige que los estudiantes de doctorado mantengan una presencia física significativa en el campus durante todos sus estudios."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #5 del mundo en Física y Astronomía (QS World University Rankings by Subject 2025).",
+                "url": "https://www.phy.cam.ac.uk/study/postgraduate/programmes/phd-in-physics/",
+                "online": "No — los estudiantes de tiempo completo deben residir en Cambridge durante al menos tres trimestres, sin opción en línea."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST)",
+                "note": "La universidad mejor clasificada de la región árabe en general (QS World University Rankings: Arab Region 2025), que ofrece un programa de doctorado en Física Aplicada — no clasificada por separado en esta tabla específica de QS por materia.",
+                "url": "https://pse.kaust.edu.sa/study/academic-programs/materials-science-applied-physics",
+                "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Naylor, R. H. (1976). Galileo: The Search for the Parabolic Trajectory. Annals of Science, 33(2), 153–172.",
+          "note": "El historiador de la ciencia R. H. Naylor rastrea las notas manuscritas de Galileo sobre el movimiento de proyectiles, reconstruyendo los pasos experimentales y teóricos que llevaron a la demostración terminada en 1638 de que la trayectoria de un proyectil es una parábola.",
+          "url": "https://doi.org/10.1080/00033797600200201",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",
