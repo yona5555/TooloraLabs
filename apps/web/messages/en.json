@@ -6416,6 +6416,117 @@
         }
       }
     },
+    "study-time-calculator": {
+      "title": "Study Time / Pomodoro Calculator",
+      "description": "Plan a study or work session using the Pomodoro Technique — see how many focus intervals and breaks fit in the time you have.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Pomodoro Defaults",
+          "intro": "The classic Pomodoro Technique intervals this calculator starts with — all fully adjustable.",
+          "defaultWork": "Work Interval",
+          "defaultShortBreak": "Short Break",
+          "defaultLongBreak": "Long Break"
+        }
+      },
+      "form": {
+        "inputTitle": "Session Settings",
+        "totalMinutesLabel": "Total Time Available (minutes)",
+        "totalMinutesHint": "How long you have for this study or work session, in minutes.",
+        "totalMinutesPlaceholder": "e.g. 120",
+        "workMinutesLabel": "Work Interval (minutes)",
+        "workMinutesPlaceholder": "e.g. 25",
+        "shortBreakMinutesLabel": "Short Break (minutes)",
+        "shortBreakMinutesPlaceholder": "e.g. 5",
+        "longBreakMinutesLabel": "Long Break (minutes)",
+        "longBreakMinutesPlaceholder": "e.g. 15",
+        "pomodorosBeforeLongBreakLabel": "Pomodoros Before Long Break",
+        "pomodorosBeforeLongBreakHint": "How many work intervals to complete before taking the longer break.",
+        "pomodorosBeforeLongBreakPlaceholder": "e.g. 4"
+      },
+      "result": {
+        "heading": "Session Plan",
+        "invalidTotalMinutes": "Enter a total available time greater than zero.",
+        "invalidWorkMinutes": "Enter a work interval greater than zero.",
+        "invalidBreakMinutes": "Break lengths can't be negative.",
+        "invalidCycleLength": "Enter a whole number of 1 or more for pomodoros before a long break.",
+        "sessionTooShort": "Your total time is shorter than a single work interval — shorten the work interval or add more time.",
+        "completedPomodoros": "Completed Pomodoros",
+        "shortBreaksTaken": "Short Breaks",
+        "longBreaksTaken": "Long Breaks",
+        "totalWorkMinutes": "Total Focused Work",
+        "totalBreakMinutes": "Total Break Time",
+        "leftoverMinutes": "Unscheduled Time",
+        "scheduledMinutes": "Scheduled Time",
+        "diagramWork": "Work",
+        "diagramBreak": "Break",
+        "diagramLeftover": "Unscheduled",
+        "diagramCaption": "Proportional breakdown of your session: focused work time, break time, and any leftover minutes too short for another full interval."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding the Pomodoro Technique",
+          "paragraph1": "The Pomodoro Technique breaks work into short, fixed intervals — traditionally 25 minutes — called \"pomodoros,\" each followed by a short break. After a set number of pomodoros (traditionally four), a longer break follows before the cycle restarts. The core idea is that a single pomodoro is treated as indivisible: once you start one, you commit to it fully rather than splitting your attention, which turns a vague, open-ended task into a concrete, timed unit of focused effort.",
+          "paragraph2": "This calculator applies the same idea in reverse: instead of just starting a timer, it works out in advance how many complete work intervals actually fit into the time you have, factoring in every short and long break along the way. That distinction matters because a break only \"counts\" once it fully fits in the remaining time — a session that runs out with only a few minutes left still keeps the pomodoro that was already completed, it just skips the trailing break that no longer fits.",
+          "paragraph3": "The default values (25-minute work intervals, 5-minute short breaks, 15-minute long breaks every 4 pomodoros) follow the technique's traditional numbers, but every value is adjustable — some people find longer 45–50 minute intervals suit deep, uninterrupted work better, while others prefer shorter intervals for tasks that are easy to resume."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Three sessions of different lengths, planned by this calculator (using the default 25/5/15-minute settings, 4 pomodoros per long break).",
+          "columnCalculation": "Session",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "30 minutes available", "result": "1 pomodoro + 1 short break — 0 minutes unscheduled" },
+            { "calculation": "130 minutes available", "result": "4 pomodoros, 3 short breaks, 1 long break — 0 minutes unscheduled" },
+            { "calculation": "100 minutes available", "result": "3 pomodoros, 2 short breaks — 10 minutes unscheduled (not enough for a 4th interval)" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why does my last pomodoro sometimes have no break after it?", "answer": "A break is only scheduled if it fully fits in whatever time remains after the work interval. If only a few minutes are left — less than the configured break length — the calculator keeps the pomodoro you already completed but doesn't schedule a break that wouldn't fit, and reports those minutes as unscheduled time instead." },
+            { "question": "Should I always use the traditional 25-minute interval?", "answer": "Not necessarily — 25 minutes is simply the interval Francesco Cirillo settled on when he created the technique, not a universal law of attention. Many people adjust the work interval to match the task: shorter intervals for tasks that are easy to pause and resume, longer ones (45–50 minutes) for deep work that takes time to get into." },
+            { "question": "Why take a longer break after several pomodoros instead of just repeating short breaks?", "answer": "The idea is that short breaks recover attention within a single work session, while the longer break marks a bigger recovery point after sustained effort — similar in spirit to research on 52-minute-work / 17-minute-break ratios among highly productive workers, which likewise found that occasional longer recovery periods, not just frequent short pauses, tracked with sustained productivity." },
+            { "question": "What should I actually do during a short break?", "answer": "The technique's traditional advice is to genuinely step away from the work — stand up, stretch, get water — rather than checking messages or switching to another screen, since a break spent on a different kind of screen-based task doesn't give attention the same chance to recover before the next work interval." },
+            { "question": "Can I use this for something other than studying, like focused work tasks?", "answer": "Yes — the technique and this calculator are task-agnostic. Cirillo originally developed it for his own university coursework, but it's since been widely adopted for programming, writing, and other work that benefits from protected, timer-bounded focus blocks." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Tomato-Shaped Kitchen Timer and a Bet With Himself",
+            "paragraph": "Francesco Cirillo developed the Pomodoro Technique in the late 1980s as a university student at Rome's Luiss Guido Carli, struggling to stay focused on his coursework. His starting point wasn't a 25-minute interval at all — it was a much smaller bet with himself: could he study with total focus for just 10 minutes? He grabbed the nearest timer in his kitchen to hold himself to it, a tomato-shaped one, and \"pomodoro\" — Italian for tomato — became both the technique's name and its unit of focused time, regardless of what kind of timer anyone else has used since."
+          },
+          "modernDevelopments": {
+            "title": "From a Self-Published PDF to Independent Productivity Research",
+            "paragraph": "Cirillo self-published a 130-page book on the technique in 2006, offering it as a free download reportedly claimed more than two million times before he restricted access to it in 2013; a commercial edition wasn't published through retail channels until 2018. Independently of the Pomodoro Technique itself, later workplace-productivity research has pointed toward a similar underlying pattern: a 2014 analysis by the time-tracking company DeskTime found its most productive users averaged roughly 52 minutes of focused work followed by a 17-minute break, and a 2021 repeat of that analysis — after remote work reshaped many people's schedules — found the ratio had shifted to roughly 112 minutes of work per 26-minute break."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Time management and study techniques sit within the broader field of education research. Here are the top 5 globally for Education & Training in the QS World University Rankings by Subject 2025, plus one leading regional college:",
+            "universities": [
+              { "name": "University College London (UCL)", "note": "Ranked #1 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd", "online": "Partly — UCL's Institute of Education offers this doctoral program in both face-to-face and fully online study modes." },
+              { "name": "Harvard University", "note": "Ranked #2 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.gse.harvard.edu/degrees/phd", "online": "No — admission runs through the Griffin Graduate School of Arts and Sciences for an in-residence research doctorate." },
+              { "name": "University of Hong Kong", "note": "Ranked #3 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://web.edu.hku.hk/programme/mphil-phd", "online": "No — a part-time study mode is available alongside full-time study, but no distance/online track is advertised." },
+              { "name": "Stanford University", "note": "Ranked #4 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://ed.stanford.edu/academics/doctoral", "online": "No — incoming PhD students are funded for an in-residence, multi-year research apprenticeship." },
+              { "name": "University of Cambridge", "note": "Ranked #5 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/", "online": "No — the PhD is an in-residence research degree (Cambridge's separate part-time EdD professional doctorate is instead built around periodic residential weekends)." },
+              { "name": "King Saud University — Deanship of Graduate Studies", "note": "Home to one of the Gulf's oldest colleges of education, annexed to the university in 1965; not separately ranked on this global subject table.", "url": "https://graduatestudies.ksu.edu.sa/en/node/621", "online": "No — graduate admissions are managed centrally by the Deanship of Graduate Studies, established in 1973, with no distance-study option advertised." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Biwer, F., Wiradhany, W., oude Egbrink, M. G. A., & de Bruin, A. B. H. (2023). Understanding effort regulation: Comparing 'Pomodoro' breaks and self-regulated breaks. British Journal of Educational Psychology, 93(S2), 353–367.",
+          "note": "In a real-life study-session experiment, Biwer and colleagues found that students who took fixed, systematic breaks (the Pomodoro pattern) reported less fatigue and distraction, and more concentration, than students who decided for themselves when to pause.",
+          "url": "https://doi.org/10.1111/bjep.12593",
+          "readOriginal": "Read the Original Text"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

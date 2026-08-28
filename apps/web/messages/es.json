@@ -6396,6 +6396,117 @@
         }
       }
     },
+    "study-time-calculator": {
+      "title": "Calculadora de Tiempo de Estudio / Pomodoro",
+      "description": "Planifica una sesión de estudio o trabajo con la Técnica Pomodoro — descubre cuántos intervalos de concentración y descansos caben en el tiempo que tienes.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Valores Predeterminados de Pomodoro",
+          "intro": "Los intervalos clásicos de la Técnica Pomodoro con los que empieza esta calculadora — todos totalmente ajustables.",
+          "defaultWork": "Intervalo de Trabajo",
+          "defaultShortBreak": "Descanso Corto",
+          "defaultLongBreak": "Descanso Largo"
+        }
+      },
+      "form": {
+        "inputTitle": "Configuración de la Sesión",
+        "totalMinutesLabel": "Tiempo Total Disponible (minutos)",
+        "totalMinutesHint": "Cuánto tiempo tienes para esta sesión de estudio o trabajo, en minutos.",
+        "totalMinutesPlaceholder": "p. ej. 120",
+        "workMinutesLabel": "Intervalo de Trabajo (minutos)",
+        "workMinutesPlaceholder": "p. ej. 25",
+        "shortBreakMinutesLabel": "Descanso Corto (minutos)",
+        "shortBreakMinutesPlaceholder": "p. ej. 5",
+        "longBreakMinutesLabel": "Descanso Largo (minutos)",
+        "longBreakMinutesPlaceholder": "p. ej. 15",
+        "pomodorosBeforeLongBreakLabel": "Pomodoros Antes del Descanso Largo",
+        "pomodorosBeforeLongBreakHint": "Cuántos intervalos de trabajo completas antes de tomar el descanso más largo.",
+        "pomodorosBeforeLongBreakPlaceholder": "p. ej. 4"
+      },
+      "result": {
+        "heading": "Plan de la Sesión",
+        "invalidTotalMinutes": "Introduce un tiempo total disponible mayor que cero.",
+        "invalidWorkMinutes": "Introduce un intervalo de trabajo mayor que cero.",
+        "invalidBreakMinutes": "Las duraciones de los descansos no pueden ser negativas.",
+        "invalidCycleLength": "Introduce un número entero de 1 o más para los pomodoros antes de un descanso largo.",
+        "sessionTooShort": "Tu tiempo total es más corto que un solo intervalo de trabajo — acorta el intervalo de trabajo o añade más tiempo.",
+        "completedPomodoros": "Pomodoros Completados",
+        "shortBreaksTaken": "Descansos Cortos",
+        "longBreaksTaken": "Descansos Largos",
+        "totalWorkMinutes": "Tiempo Total de Trabajo Concentrado",
+        "totalBreakMinutes": "Tiempo Total de Descanso",
+        "leftoverMinutes": "Tiempo No Programado",
+        "scheduledMinutes": "Tiempo Programado",
+        "diagramWork": "Trabajo",
+        "diagramBreak": "Descanso",
+        "diagramLeftover": "No Programado",
+        "diagramCaption": "Desglose proporcional de tu sesión: tiempo de trabajo concentrado, tiempo de descanso y cualquier minuto restante demasiado corto para otro intervalo completo."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la Técnica Pomodoro",
+          "paragraph1": "La Técnica Pomodoro divide el trabajo en intervalos cortos y fijos — tradicionalmente 25 minutos — llamados «pomodoros», cada uno seguido de un descanso corto. Después de un número determinado de pomodoros (tradicionalmente cuatro), llega un descanso más largo antes de que el ciclo vuelva a empezar. La idea central es tratar cada pomodoro como indivisible: una vez que empiezas uno, te comprometes con él por completo en lugar de repartir tu atención, lo que convierte una tarea vaga y sin límites claros en una unidad concreta y cronometrada de esfuerzo concentrado.",
+          "paragraph2": "Esta calculadora aplica la misma idea a la inversa: en lugar de simplemente poner en marcha un temporizador, calcula de antemano cuántos intervalos de trabajo completos caben realmente en el tiempo que tienes, teniendo en cuenta cada descanso corto y largo por el camino. Esa distinción importa porque un descanso solo «cuenta» si cabe por completo en el tiempo restante — una sesión que se queda sin tiempo con solo unos minutos restantes conserva el pomodoro que ya se completó, simplemente omite el descanso siguiente que ya no cabe.",
+          "paragraph3": "Los valores predeterminados (intervalos de trabajo de 25 minutos, descansos cortos de 5 minutos, descansos largos de 15 minutos cada 4 pomodoros) siguen las cifras tradicionales de la técnica, pero todos los valores se pueden ajustar — a algunas personas les resultan más adecuados intervalos más largos de 45 a 50 minutos para el trabajo profundo e ininterrumpido, mientras que otras prefieren intervalos más cortos para tareas fáciles de retomar."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Tres sesiones de diferente duración, planificadas por esta calculadora (con la configuración predeterminada de 25/5/15 minutos, 4 pomodoros por descanso largo).",
+          "columnCalculation": "Sesión",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "30 minutos disponibles", "result": "1 pomodoro + 1 descanso corto — 0 minutos sin programar" },
+            { "calculation": "130 minutos disponibles", "result": "4 pomodoros, 3 descansos cortos, 1 descanso largo — 0 minutos sin programar" },
+            { "calculation": "100 minutos disponibles", "result": "3 pomodoros, 2 descansos cortos — 10 minutos sin programar (no alcanza para un 4.º intervalo)" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué a veces mi último pomodoro no tiene descanso después?", "answer": "Un descanso solo se programa si cabe por completo en el tiempo que queda después del intervalo de trabajo. Si solo quedan unos minutos — menos que la duración de descanso configurada —, la calculadora conserva el pomodoro que ya completaste, pero no programa un descanso que no cabría, e informa esos minutos como tiempo sin programar en su lugar." },
+            { "question": "¿Debería usar siempre el intervalo tradicional de 25 minutos?", "answer": "No necesariamente — 25 minutos es simplemente el intervalo que Francesco Cirillo estableció al crear la técnica, no una ley universal de la atención. Muchas personas ajustan el intervalo de trabajo según la tarea: intervalos más cortos para tareas fáciles de pausar y retomar, más largos (45 a 50 minutos) para trabajo profundo que tarda en arrancar." },
+            { "question": "¿Por qué tomar un descanso más largo después de varios pomodoros en lugar de simplemente repetir descansos cortos?", "answer": "La idea es que los descansos cortos recuperan la atención dentro de una misma sesión de trabajo, mientras que el descanso más largo marca un punto de recuperación mayor tras un esfuerzo sostenido — de forma similar en espíritu a investigaciones sobre proporciones de 52 minutos de trabajo por 17 minutos de descanso entre trabajadores muy productivos, que igualmente encontraron que los periodos de recuperación más largos y ocasionales, no solo las pausas cortas frecuentes, se relacionaban con una productividad sostenida." },
+            { "question": "¿Qué debería hacer realmente durante un descanso corto?", "answer": "El consejo tradicional de la técnica es alejarse de verdad del trabajo — levantarse, estirarse, beber agua — en lugar de revisar mensajes o cambiar a otra pantalla, ya que un descanso dedicado a otro tipo de tarea frente a una pantalla no le da a la atención la misma oportunidad de recuperarse antes del siguiente intervalo de trabajo." },
+            { "question": "¿Puedo usar esto para algo distinto del estudio, como tareas de trabajo que requieren concentración?", "answer": "Sí — la técnica y esta calculadora son independientes del tipo de tarea. Cirillo la desarrolló originalmente para sus propios estudios universitarios, pero desde entonces se ha adoptado ampliamente para programación, escritura y otros trabajos que se benefician de bloques de concentración protegidos y delimitados por un temporizador." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Un Temporizador de Cocina con Forma de Tomate y una Apuesta Consigo Mismo",
+            "paragraph": "Francesco Cirillo desarrolló la Técnica Pomodoro a finales de la década de 1980 como estudiante universitario en la Luiss Guido Carli de Roma, con dificultades para concentrarse en sus estudios. Su punto de partida no fue en absoluto un intervalo de 25 minutos — fue una apuesta mucho más pequeña consigo mismo: ¿podría estudiar con total concentración durante solo 10 minutos? Tomó el temporizador más cercano en su cocina para obligarse a cumplirlo, uno con forma de tomate, y «pomodoro» — tomate en italiano — se convirtió tanto en el nombre de la técnica como en su unidad de tiempo de concentración, sin importar qué tipo de temporizador haya usado cualquier otra persona desde entonces."
+          },
+          "modernDevelopments": {
+            "title": "De un PDF Autopublicado a Investigación Independiente sobre Productividad",
+            "paragraph": "Cirillo autopublicó un libro de 130 páginas sobre la técnica en 2006, ofreciéndolo como descarga gratuita que, según se informa, se descargó más de dos millones de veces antes de que restringiera el acceso en 2013; una edición comercial no se publicó a través de canales minoristas hasta 2018. Al margen de la propia Técnica Pomodoro, investigaciones posteriores sobre productividad laboral han señalado un patrón subyacente similar: un análisis de 2014 de la empresa de seguimiento de tiempo DeskTime encontró que sus usuarios más productivos trabajaban en promedio unos 52 minutos de forma concentrada seguidos de un descanso de 17 minutos, y una repetición de ese análisis en 2021 — después de que el trabajo remoto reconfigurara los horarios de muchas personas — encontró que la proporción había cambiado a aproximadamente 112 minutos de trabajo por cada 26 minutos de descanso."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La gestión del tiempo y las técnicas de estudio se sitúan dentro del campo más amplio de la investigación educativa. Aquí están las 5 mejores del mundo en Educación y Formación según el QS World University Rankings by Subject 2025, además de una destacada facultad regional:",
+            "universities": [
+              { "name": "University College London (UCL)", "note": "Clasificada #1 mundialmente en Educación y Formación (QS World University Rankings by Subject 2025).", "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd", "online": "Parcialmente — el Instituto de Educación de la UCL ofrece este programa doctoral tanto en modalidad presencial como completamente en línea." },
+              { "name": "Universidad de Harvard", "note": "Clasificada #2 mundialmente en Educación y Formación (QS World University Rankings by Subject 2025).", "url": "https://www.gse.harvard.edu/degrees/phd", "online": "No — la admisión se gestiona a través de la Escuela de Posgrado en Artes y Ciencias Griffin para un doctorado de investigación presencial." },
+              { "name": "Universidad de Hong Kong", "note": "Clasificada #3 mundialmente en Educación y Formación (QS World University Rankings by Subject 2025).", "url": "https://web.edu.hku.hk/programme/mphil-phd", "online": "No — existe una modalidad de estudio a tiempo parcial además de la de tiempo completo, pero no se anuncia ninguna opción de estudio a distancia." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #4 mundialmente en Educación y Formación (QS World University Rankings by Subject 2025).", "url": "https://ed.stanford.edu/academics/doctoral", "online": "No — los nuevos estudiantes de doctorado reciben financiación para un programa de investigación presencial de varios años." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #5 mundialmente en Educación y Formación (QS World University Rankings by Subject 2025).", "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/", "online": "No — el doctorado es un título de investigación presencial (el programa profesional EdD de Cambridge, aparte y a tiempo parcial, se organiza en cambio en torno a fines de semana residenciales periódicos)." },
+              { "name": "Universidad Rey Saúd — Decanato de Estudios de Posgrado", "note": "Sede de una de las facultades de educación más antiguas del Golfo, incorporada a la universidad en 1965; no aparece clasificada por separado en esta tabla global de la materia.", "url": "https://graduatestudies.ksu.edu.sa/en/node/621", "online": "No — las admisiones de posgrado se gestionan de forma centralizada a través del Decanato de Estudios de Posgrado, fundado en 1973, sin ninguna opción de estudio a distancia anunciada." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Biwer, F., Wiradhany, W., oude Egbrink, M. G. A., & de Bruin, A. B. H. (2023). Understanding effort regulation: Comparing 'Pomodoro' breaks and self-regulated breaks. British Journal of Educational Psychology, 93(S2), 353–367.",
+          "note": "En un experimento realista sobre sesiones de estudio, Biwer y sus colegas encontraron que los estudiantes que tomaron descansos fijos y sistemáticos (el patrón Pomodoro) informaron menos fatiga y distracción, y más concentración, que los estudiantes que decidían por sí mismos cuándo pausar.",
+          "url": "https://doi.org/10.1111/bjep.12593",
+          "readOriginal": "Leer el Texto Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

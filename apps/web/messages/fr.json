@@ -6420,6 +6420,117 @@
         }
       }
     },
+    "study-time-calculator": {
+      "title": "Calculateur de Temps d'Étude / Pomodoro",
+      "description": "Planifiez une séance d'étude ou de travail avec la Technique Pomodoro — découvrez combien d'intervalles de concentration et de pauses tiennent dans le temps dont vous disposez.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Valeurs par Défaut Pomodoro",
+          "intro": "Les intervalles classiques de la Technique Pomodoro avec lesquels ce calculateur démarre — tous entièrement ajustables.",
+          "defaultWork": "Intervalle de Travail",
+          "defaultShortBreak": "Pause Courte",
+          "defaultLongBreak": "Pause Longue"
+        }
+      },
+      "form": {
+        "inputTitle": "Paramètres de la Séance",
+        "totalMinutesLabel": "Temps Total Disponible (minutes)",
+        "totalMinutesHint": "Le temps dont vous disposez pour cette séance d'étude ou de travail, en minutes.",
+        "totalMinutesPlaceholder": "ex. 120",
+        "workMinutesLabel": "Intervalle de Travail (minutes)",
+        "workMinutesPlaceholder": "ex. 25",
+        "shortBreakMinutesLabel": "Pause Courte (minutes)",
+        "shortBreakMinutesPlaceholder": "ex. 5",
+        "longBreakMinutesLabel": "Pause Longue (minutes)",
+        "longBreakMinutesPlaceholder": "ex. 15",
+        "pomodorosBeforeLongBreakLabel": "Pomodoros Avant la Pause Longue",
+        "pomodorosBeforeLongBreakHint": "Combien d'intervalles de travail vous terminez avant de prendre la pause la plus longue.",
+        "pomodorosBeforeLongBreakPlaceholder": "ex. 4"
+      },
+      "result": {
+        "heading": "Plan de la Séance",
+        "invalidTotalMinutes": "Saisissez un temps total disponible supérieur à zéro.",
+        "invalidWorkMinutes": "Saisissez un intervalle de travail supérieur à zéro.",
+        "invalidBreakMinutes": "Les durées de pause ne peuvent pas être négatives.",
+        "invalidCycleLength": "Saisissez un nombre entier de 1 ou plus pour les pomodoros avant une pause longue.",
+        "sessionTooShort": "Votre temps total est plus court qu'un seul intervalle de travail — raccourcissez l'intervalle de travail ou ajoutez du temps.",
+        "completedPomodoros": "Pomodoros Terminés",
+        "shortBreaksTaken": "Pauses Courtes",
+        "longBreaksTaken": "Pauses Longues",
+        "totalWorkMinutes": "Temps Total de Travail Concentré",
+        "totalBreakMinutes": "Temps Total de Pause",
+        "leftoverMinutes": "Temps Non Planifié",
+        "scheduledMinutes": "Temps Planifié",
+        "diagramWork": "Travail",
+        "diagramBreak": "Pause",
+        "diagramLeftover": "Non Planifié",
+        "diagramCaption": "Répartition proportionnelle de votre séance : temps de travail concentré, temps de pause, et minutes restantes trop courtes pour un autre intervalle complet."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Technique Pomodoro",
+          "paragraph1": "La Technique Pomodoro découpe le travail en intervalles courts et fixes — traditionnellement 25 minutes — appelés « pomodoros », chacun suivi d'une pause courte. Après un nombre défini de pomodoros (traditionnellement quatre), une pause plus longue suit avant que le cycle ne recommence. L'idée centrale est de traiter chaque pomodoro comme indivisible : une fois que vous en commencez un, vous vous y engagez pleinement plutôt que de partager votre attention, ce qui transforme une tâche vague et sans limite claire en une unité concrète et chronométrée d'effort concentré.",
+          "paragraph2": "Ce calculateur applique la même idée à l'envers : plutôt que de simplement lancer une minuterie, il détermine à l'avance combien d'intervalles de travail complets tiennent réellement dans le temps dont vous disposez, en tenant compte de chaque pause courte et longue en cours de route. Cette distinction compte parce qu'une pause ne « compte » que si elle tient entièrement dans le temps restant — une séance qui manque de temps avec seulement quelques minutes restantes conserve le pomodoro déjà terminé, mais saute simplement la pause suivante qui ne tient plus.",
+          "paragraph3": "Les valeurs par défaut (intervalles de travail de 25 minutes, pauses courtes de 5 minutes, pauses longues de 15 minutes toutes les 4 pomodoros) suivent les chiffres traditionnels de la technique, mais chaque valeur est ajustable — certaines personnes trouvent que des intervalles plus longs de 45 à 50 minutes conviennent mieux au travail profond et ininterrompu, tandis que d'autres préfèrent des intervalles plus courts pour des tâches faciles à reprendre."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Trois séances de durées différentes, planifiées par ce calculateur (avec les réglages par défaut de 25/5/15 minutes, 4 pomodoros par pause longue).",
+          "columnCalculation": "Séance",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "30 minutes disponibles", "result": "1 pomodoro + 1 pause courte — 0 minute non planifiée" },
+            { "calculation": "130 minutes disponibles", "result": "4 pomodoros, 3 pauses courtes, 1 pause longue — 0 minute non planifiée" },
+            { "calculation": "100 minutes disponibles", "result": "3 pomodoros, 2 pauses courtes — 10 minutes non planifiées (insuffisant pour un 4e intervalle)" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi mon dernier pomodoro n'a-t-il parfois pas de pause après lui ?", "answer": "Une pause n'est planifiée que si elle tient entièrement dans le temps restant après l'intervalle de travail. S'il ne reste que quelques minutes — moins que la durée de pause configurée —, le calculateur conserve le pomodoro que vous avez déjà terminé, mais ne planifie pas de pause qui ne tiendrait pas, et indique plutôt ces minutes comme temps non planifié." },
+            { "question": "Devrais-je toujours utiliser l'intervalle traditionnel de 25 minutes ?", "answer": "Pas nécessairement — 25 minutes est simplement l'intervalle retenu par Francesco Cirillo lorsqu'il a créé la technique, pas une loi universelle de l'attention. Beaucoup de gens ajustent l'intervalle de travail selon la tâche : des intervalles plus courts pour les tâches faciles à interrompre et reprendre, plus longs (45 à 50 minutes) pour un travail profond qui demande du temps pour s'y plonger." },
+            { "question": "Pourquoi prendre une pause plus longue après plusieurs pomodoros plutôt que de simplement répéter des pauses courtes ?", "answer": "L'idée est que les pauses courtes récupèrent l'attention au sein d'une même séance de travail, tandis que la pause plus longue marque un point de récupération plus important après un effort soutenu — dans un esprit similaire à des recherches sur des ratios de 52 minutes de travail pour 17 minutes de pause chez les travailleurs très productifs, qui ont également constaté que des périodes de récupération plus longues et occasionnelles, et pas seulement des pauses courtes fréquentes, étaient associées à une productivité soutenue." },
+            { "question": "Que devrais-je faire réellement pendant une pause courte ?", "answer": "Le conseil traditionnel de la technique est de véritablement s'éloigner du travail — se lever, s'étirer, boire de l'eau — plutôt que de consulter des messages ou de passer à un autre écran, car une pause passée sur un autre type de tâche à l'écran ne donne pas à l'attention la même chance de récupérer avant l'intervalle de travail suivant." },
+            { "question": "Puis-je utiliser cet outil pour autre chose que l'étude, comme des tâches de travail concentré ?", "answer": "Oui — la technique et ce calculateur sont indépendants du type de tâche. Cirillo l'a initialement développée pour ses propres études universitaires, mais elle a depuis été largement adoptée pour la programmation, l'écriture et d'autres travaux qui bénéficient de blocs de concentration protégés et délimités par une minuterie." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Une Minuterie de Cuisine en Forme de Tomate et un Pari avec Lui-Même",
+            "paragraph": "Francesco Cirillo a développé la Technique Pomodoro à la fin des années 1980 alors qu'il était étudiant à la Luiss Guido Carli de Rome, peinant à se concentrer sur ses études. Son point de départ n'était pas du tout un intervalle de 25 minutes — c'était un pari bien plus modeste avec lui-même : pourrait-il étudier avec une concentration totale pendant seulement 10 minutes ? Il a saisi la minuterie la plus proche dans sa cuisine pour s'y tenir, une en forme de tomate, et « pomodoro » — tomate en italien — est devenu à la fois le nom de la technique et son unité de temps de concentration, quel que soit le type de minuterie utilisé par quiconque depuis."
+          },
+          "modernDevelopments": {
+            "title": "D'un PDF Autopublié à une Recherche Indépendante sur la Productivité",
+            "paragraph": "Cirillo a autopublié en 2006 un livre de 130 pages sur la technique, le proposant en téléchargement gratuit qui aurait été téléchargé plus de deux millions de fois avant qu'il n'en restreigne l'accès en 2013 ; une édition commerciale n'a été publiée via des canaux de vente au détail qu'en 2018. Indépendamment de la Technique Pomodoro elle-même, des recherches ultérieures sur la productivité au travail ont mis en évidence un schéma sous-jacent similaire : une analyse de 2014 menée par l'entreprise de suivi du temps DeskTime a révélé que ses utilisateurs les plus productifs travaillaient en moyenne environ 52 minutes de façon concentrée, suivies d'une pause de 17 minutes, et une répétition de cette analyse en 2021 — après que le télétravail a redessiné les emplois du temps de nombreuses personnes — a montré que ce ratio était passé à environ 112 minutes de travail pour 26 minutes de pause."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La gestion du temps et les techniques d'étude relèvent du champ plus large de la recherche en éducation. Voici les 5 meilleures universités au monde en Éducation et Formation selon le classement QS World University Rankings by Subject 2025, ainsi qu'une faculté régionale de premier plan :",
+            "universities": [
+              { "name": "University College London (UCL)", "note": "Classé #1 mondial en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd", "online": "Partiellement — l'Institute of Education de l'UCL propose ce programme doctoral à la fois en présentiel et entièrement en ligne." },
+              { "name": "Université Harvard", "note": "Classée #2 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://www.gse.harvard.edu/degrees/phd", "online": "Non — l'admission se fait via la Griffin Graduate School of Arts and Sciences pour un doctorat de recherche en présentiel." },
+              { "name": "Université de Hong Kong", "note": "Classée #3 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://web.edu.hku.hk/programme/mphil-phd", "online": "Non — une modalité à temps partiel existe en plus du temps plein, mais aucune option d'études à distance n'est annoncée." },
+              { "name": "Université Stanford", "note": "Classée #4 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://ed.stanford.edu/academics/doctoral", "online": "Non — les nouveaux doctorants sont financés pour un programme de recherche en présentiel de plusieurs années." },
+              { "name": "Université de Cambridge", "note": "Classée #5 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/", "online": "Non — le doctorat est un diplôme de recherche en présentiel (le programme professionnel EdD à temps partiel de Cambridge, distinct, est plutôt organisé autour de week-ends résidentiels périodiques)." },
+              { "name": "Université Roi Saoud — Décanat des Études Supérieures", "note": "Abrite l'une des plus anciennes facultés d'éducation du Golfe, rattachée à l'université en 1965 ; non classée séparément dans ce tableau mondial par discipline.", "url": "https://graduatestudies.ksu.edu.sa/en/node/621", "online": "Non — les admissions en cycle supérieur sont gérées de façon centralisée par le Décanat des Études Supérieures, fondé en 1973, sans option d'études à distance annoncée." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Biwer, F., Wiradhany, W., oude Egbrink, M. G. A., & de Bruin, A. B. H. (2023). Understanding effort regulation: Comparing 'Pomodoro' breaks and self-regulated breaks. British Journal of Educational Psychology, 93(S2), 353–367.",
+          "note": "Dans une expérience réaliste sur des séances d'étude, Biwer et ses collègues ont constaté que les étudiants prenant des pauses fixes et systématiques (le schéma Pomodoro) rapportaient moins de fatigue et de distraction, et plus de concentration, que les étudiants décidant eux-mêmes du moment de leurs pauses.",
+          "url": "https://doi.org/10.1111/bjep.12593",
+          "readOriginal": "Lire le Texte Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",

@@ -486,6 +486,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "study-time-calculator",
+    title: "Study Time / Pomodoro Calculator",
+    category: "calculators",
+    description:
+      "Plan a study or work session using the Pomodoro Technique — see how many focus intervals and breaks fit in the time you have.",
+    featured: false,
+    keywords: [
+      "pomodoro calculator",
+      "study time calculator",
+      "pomodoro technique timer",
+      "focus session planner",
+      "study break calculator",
+      "work interval calculator",
+    ],
+  },
+  {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
     category: "math-science",

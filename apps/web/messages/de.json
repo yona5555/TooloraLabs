@@ -6420,6 +6420,117 @@
         }
       }
     },
+    "study-time-calculator": {
+      "title": "Lern-/Pomodoro-Zeitrechner",
+      "description": "Planen Sie eine Lern- oder Arbeitseinheit mit der Pomodoro-Technik — sehen Sie, wie viele Fokusintervalle und Pausen in die verfügbare Zeit passen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Pomodoro-Standardwerte",
+          "intro": "Die klassischen Pomodoro-Intervalle, mit denen dieser Rechner startet — alle vollständig anpassbar.",
+          "defaultWork": "Arbeitsintervall",
+          "defaultShortBreak": "Kurze Pause",
+          "defaultLongBreak": "Lange Pause"
+        }
+      },
+      "form": {
+        "inputTitle": "Sitzungseinstellungen",
+        "totalMinutesLabel": "Insgesamt verfügbare Zeit (Minuten)",
+        "totalMinutesHint": "Wie viel Zeit Sie für diese Lern- oder Arbeitseinheit haben, in Minuten.",
+        "totalMinutesPlaceholder": "z. B. 120",
+        "workMinutesLabel": "Arbeitsintervall (Minuten)",
+        "workMinutesPlaceholder": "z. B. 25",
+        "shortBreakMinutesLabel": "Kurze Pause (Minuten)",
+        "shortBreakMinutesPlaceholder": "z. B. 5",
+        "longBreakMinutesLabel": "Lange Pause (Minuten)",
+        "longBreakMinutesPlaceholder": "z. B. 15",
+        "pomodorosBeforeLongBreakLabel": "Pomodoros vor langer Pause",
+        "pomodorosBeforeLongBreakHint": "Wie viele Arbeitsintervalle Sie abschließen, bevor Sie die längere Pause machen.",
+        "pomodorosBeforeLongBreakPlaceholder": "z. B. 4"
+      },
+      "result": {
+        "heading": "Sitzungsplan",
+        "invalidTotalMinutes": "Geben Sie eine insgesamt verfügbare Zeit größer als null ein.",
+        "invalidWorkMinutes": "Geben Sie ein Arbeitsintervall größer als null ein.",
+        "invalidBreakMinutes": "Pausenlängen dürfen nicht negativ sein.",
+        "invalidCycleLength": "Geben Sie eine ganze Zahl von 1 oder mehr für Pomodoros vor der langen Pause ein.",
+        "sessionTooShort": "Ihre Gesamtzeit ist kürzer als ein einzelnes Arbeitsintervall — verkürzen Sie das Arbeitsintervall oder fügen Sie mehr Zeit hinzu.",
+        "completedPomodoros": "Abgeschlossene Pomodoros",
+        "shortBreaksTaken": "Kurze Pausen",
+        "longBreaksTaken": "Lange Pausen",
+        "totalWorkMinutes": "Gesamte fokussierte Arbeitszeit",
+        "totalBreakMinutes": "Gesamte Pausenzeit",
+        "leftoverMinutes": "Nicht verplante Zeit",
+        "scheduledMinutes": "Verplante Zeit",
+        "diagramWork": "Arbeit",
+        "diagramBreak": "Pause",
+        "diagramLeftover": "Nicht verplant",
+        "diagramCaption": "Anteilige Aufteilung Ihrer Sitzung: fokussierte Arbeitszeit, Pausenzeit und übrig gebliebene Minuten, die für ein weiteres volles Intervall nicht ausreichen."
+      },
+      "education": {
+        "intro": {
+          "title": "Die Pomodoro-Technik verstehen",
+          "paragraph1": "Die Pomodoro-Technik unterteilt Arbeit in kurze, feste Intervalle — traditionell 25 Minuten — sogenannte „Pomodoros“, auf die jeweils eine kurze Pause folgt. Nach einer festgelegten Anzahl von Pomodoros (traditionell vier) folgt eine längere Pause, bevor der Zyklus von vorn beginnt. Die Kernidee ist, einen einzelnen Pomodoro als unteilbar zu behandeln: Sobald Sie einen beginnen, verpflichten Sie sich voll und ganz dazu, statt Ihre Aufmerksamkeit aufzuteilen — das verwandelt eine vage, offene Aufgabe in eine konkrete, zeitlich begrenzte Einheit fokussierter Anstrengung.",
+          "paragraph2": "Dieser Rechner wendet dieselbe Idee umgekehrt an: Statt einfach nur einen Timer zu starten, berechnet er im Voraus, wie viele vollständige Arbeitsintervalle tatsächlich in die verfügbare Zeit passen, unter Berücksichtigung jeder kurzen und langen Pause auf dem Weg. Diese Unterscheidung ist wichtig, weil eine Pause nur dann „zählt“, wenn sie vollständig in die verbleibende Zeit passt — eine Sitzung, deren Zeit mit nur wenigen Minuten übrig abläuft, behält den bereits abgeschlossenen Pomodoro, überspringt aber lediglich die anschließende Pause, die nicht mehr passt.",
+          "paragraph3": "Die Standardwerte (25-minütige Arbeitsintervalle, 5-minütige kurze Pausen, 15-minütige lange Pausen alle 4 Pomodoros) folgen den traditionellen Zahlen der Technik, aber jeder Wert ist anpassbar — manche Menschen empfinden längere Intervalle von 45–50 Minuten als besser geeignet für tiefe, ununterbrochene Arbeit, während andere kürzere Intervalle für Aufgaben bevorzugen, die sich leicht wieder aufnehmen lassen."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Drei unterschiedlich lange Sitzungen, geplant von diesem Rechner (mit den Standardeinstellungen 25/5/15 Minuten, 4 Pomodoros pro langer Pause).",
+          "columnCalculation": "Sitzung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "30 Minuten verfügbar", "result": "1 Pomodoro + 1 kurze Pause — 0 Minuten nicht verplant" },
+            { "calculation": "130 Minuten verfügbar", "result": "4 Pomodoros, 3 kurze Pausen, 1 lange Pause — 0 Minuten nicht verplant" },
+            { "calculation": "100 Minuten verfügbar", "result": "3 Pomodoros, 2 kurze Pausen — 10 Minuten nicht verplant (reicht nicht für ein 4. Intervall)" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum hat mein letzter Pomodoro manchmal keine Pause danach?", "answer": "Eine Pause wird nur eingeplant, wenn sie vollständig in die nach dem Arbeitsintervall verbleibende Zeit passt. Bleiben nur noch wenige Minuten übrig — weniger als die eingestellte Pausenlänge —, behält der Rechner den bereits abgeschlossenen Pomodoro, plant aber keine Pause ein, die nicht passen würde, und weist diese Minuten stattdessen als nicht verplante Zeit aus." },
+            { "question": "Sollte ich immer das traditionelle 25-Minuten-Intervall verwenden?", "answer": "Nicht unbedingt — 25 Minuten sind einfach das Intervall, auf das sich Francesco Cirillo bei der Entwicklung der Technik festgelegt hat, kein universelles Gesetz der Aufmerksamkeit. Viele Menschen passen das Arbeitsintervall an die Aufgabe an: kürzere Intervalle für Aufgaben, die sich leicht unterbrechen und fortsetzen lassen, längere (45–50 Minuten) für vertiefte Arbeit, die Zeit zum Hineinfinden braucht." },
+            { "question": "Warum macht man nach mehreren Pomodoros eine längere Pause, statt einfach nur kurze Pausen zu wiederholen?", "answer": "Die Idee ist, dass kurze Pausen die Aufmerksamkeit innerhalb einer einzelnen Arbeitssitzung wiederherstellen, während die längere Pause einen größeren Erholungspunkt nach anhaltender Anstrengung markiert — ähnlich im Geist wie Forschung zu Verhältnissen von 52 Minuten Arbeit zu 17 Minuten Pause bei besonders produktiven Arbeitnehmern, die ebenfalls feststellte, dass gelegentliche längere Erholungsphasen — nicht nur häufige kurze Pausen — mit anhaltender Produktivität einhergingen." },
+            { "question": "Was sollte ich während einer kurzen Pause eigentlich tun?", "answer": "Der traditionelle Rat der Technik lautet, sich wirklich von der Arbeit zu entfernen — aufstehen, sich strecken, Wasser trinken — statt Nachrichten zu prüfen oder zu einem anderen Bildschirm zu wechseln, denn eine Pause, die mit einer anderen Art von Bildschirmaufgabe verbracht wird, gibt der Aufmerksamkeit vor dem nächsten Arbeitsintervall nicht dieselbe Chance zur Erholung." },
+            { "question": "Kann ich das auch für etwas anderes als Lernen nutzen, etwa für fokussierte Arbeitsaufgaben?", "answer": "Ja — die Technik und dieser Rechner sind aufgabenunabhängig. Cirillo entwickelte sie ursprünglich für sein eigenes Universitätsstudium, doch sie wird seitdem breit für Programmieren, Schreiben und andere Arbeit übernommen, die von geschützten, timerbegrenzten Fokusblöcken profitiert." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Ein tomatenförmiger Küchenwecker und eine Wette mit sich selbst",
+            "paragraph": "Francesco Cirillo entwickelte die Pomodoro-Technik in den späten 1980er-Jahren als Student an der römischen LUISS Guido Carli, der Schwierigkeiten hatte, sich auf sein Studium zu konzentrieren. Sein Ausgangspunkt war überhaupt kein 25-Minuten-Intervall — es war eine viel kleinere Wette mit sich selbst: Konnte er sich nur 10 Minuten lang mit völliger Konzentration dem Lernen widmen? Er griff sich den nächstbesten Timer in seiner Küche, um sich daran zu binden, einen in Tomatenform — und „Pomodoro“, italienisch für Tomate, wurde sowohl der Name der Technik als auch ihre Einheit fokussierter Zeit, unabhängig davon, welche Art von Timer seitdem sonst jemand verwendet hat."
+          },
+          "modernDevelopments": {
+            "title": "Von einem selbstveröffentlichten PDF zu unabhängiger Produktivitätsforschung",
+            "paragraph": "Cirillo veröffentlichte 2006 im Selbstverlag ein 130-seitiges Buch über die Technik und bot es als kostenlosen Download an, der Berichten zufolge mehr als zwei Millionen Mal heruntergeladen wurde, bevor er 2013 den Zugriff darauf einschränkte; eine kommerzielle Ausgabe über den Einzelhandel erschien erst 2018. Unabhängig von der Pomodoro-Technik selbst deutete spätere Forschung zur Produktivität am Arbeitsplatz auf ein ähnliches zugrunde liegendes Muster hin: Eine Analyse des Zeiterfassungsunternehmens DeskTime aus dem Jahr 2014 ergab, dass die produktivsten Nutzer im Schnitt rund 52 Minuten fokussiert arbeiteten, gefolgt von einer 17-minütigen Pause; eine Wiederholung dieser Analyse im Jahr 2021 — nachdem Homeoffice die Tagesabläufe vieler Menschen verändert hatte — ergab, dass sich das Verhältnis auf etwa 112 Minuten Arbeit pro 26-minütiger Pause verschoben hatte."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Zeitmanagement und Lerntechniken gehören zum breiteren Feld der Bildungsforschung. Hier sind die weltweit besten 5 im Fach Education & Training im QS World University Rankings by Subject 2025, plus eine führende regionale Hochschule:",
+            "universities": [
+              { "name": "University College London (UCL)", "note": "Weltweit auf Platz 1 in Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd", "online": "Teilweise — das Institute of Education der UCL bietet dieses Promotionsprogramm sowohl in Präsenz- als auch in vollständig online durchgeführten Studienformen an." },
+              { "name": "Harvard University", "note": "Weltweit auf Platz 2 in Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.gse.harvard.edu/degrees/phd", "online": "Nein — die Zulassung erfolgt über die Griffin Graduate School of Arts and Sciences für ein präsenzpflichtiges Forschungspromotionsprogramm." },
+              { "name": "University of Hong Kong", "note": "Weltweit auf Platz 3 in Education & Training (QS World University Rankings by Subject 2025).", "url": "https://web.edu.hku.hk/programme/mphil-phd", "online": "Nein — neben dem Vollzeitstudium steht ein Teilzeitstudium zur Verfügung, eine Fernstudienoption wird jedoch nicht beworben." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 4 in Education & Training (QS World University Rankings by Subject 2025).", "url": "https://ed.stanford.edu/academics/doctoral", "online": "Nein — neu aufgenommene Doktoranden werden für ein mehrjähriges, präsenzpflichtiges Forschungsprogramm finanziert." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 5 in Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/", "online": "Nein — der PhD ist ein präsenzpflichtiges Forschungsprogramm (Cambridges separates berufsbegleitendes EdD-Programm ist stattdessen um wiederkehrende Residenzwochenenden aufgebaut)." },
+              { "name": "King-Saud-Universität — Dekanat für Graduiertenstudien", "note": "Sitz einer der ältesten erziehungswissenschaftlichen Fakultäten am Golf, 1965 der Universität angegliedert; in dieser globalen Fachtabelle nicht gesondert gelistet.", "url": "https://graduatestudies.ksu.edu.sa/en/node/621", "online": "Nein — die Zulassungen zum Aufbaustudium werden zentral über das 1973 gegründete Dekanat für Graduiertenstudien verwaltet, eine Fernstudienoption wird nicht beworben." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Biwer, F., Wiradhany, W., oude Egbrink, M. G. A., & de Bruin, A. B. H. (2023). Understanding effort regulation: Comparing 'Pomodoro' breaks and self-regulated breaks. British Journal of Educational Psychology, 93(S2), 353–367.",
+          "note": "In einem realitätsnahen Experiment zu Lernsitzungen stellten Biwer und Kollegen fest, dass Studierende, die feste, systematische Pausen (das Pomodoro-Muster) einlegten, weniger Erschöpfung und Ablenkung sowie mehr Konzentration berichteten als Studierende, die selbst entschieden, wann sie pausierten.",
+          "url": "https://doi.org/10.1111/bjep.12593",
+          "readOriginal": "Originaltext lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",
