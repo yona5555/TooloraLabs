@@ -11,9 +11,18 @@ import SectionCard from "./SectionCard";
 type RelatedToolsSidebarProps = {
   currentSlug: string;
   category: string;
+  /** Optional curated list of tool slugs rendered as a quick-link list beneath the search box. Omit for the default search-only sidebar. */
+  relatedList?: string[];
+  /** Heading shown above `relatedList`. Ignored if `relatedList` is omitted. */
+  relatedListTitle?: string;
 };
 
-export default function RelatedToolsSidebar({ currentSlug, category }: RelatedToolsSidebarProps) {
+export default function RelatedToolsSidebar({
+  currentSlug,
+  category,
+  relatedList,
+  relatedListTitle,
+}: RelatedToolsSidebarProps) {
   const t = useTranslations("hero");
   const tTools = useTranslations("tools");
   const tCommon = useTranslations("common");
@@ -96,6 +105,34 @@ export default function RelatedToolsSidebar({ currentSlug, category }: RelatedTo
             </div>
           )}
         </div>
+
+        {relatedList && relatedList.length > 0 && (
+          <div className="flex flex-col gap-2">
+            {relatedListTitle && (
+              <p className="px-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+                {relatedListTitle}
+              </p>
+            )}
+            <ul className="flex flex-col divide-y divide-zinc-100 overflow-hidden rounded-xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+              {relatedList
+                .filter((slug) => slug !== currentSlug)
+                .map((slug) => {
+                  const Icon = getToolIcon(slug);
+                  return (
+                    <li key={slug}>
+                      <Link
+                        href={`/tools/${slug}`}
+                        className="flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-700 transition hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-200 dark:hover:bg-blue-500/10 dark:hover:text-blue-400"
+                      >
+                        <Icon size={14} className="shrink-0 text-zinc-400" />
+                        <span>{tTools(`${slug}.title`)}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+        )}
 
         <Link
           href={`/categories/${category}`}

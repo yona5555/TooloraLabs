@@ -1387,15 +1387,7 @@
         "quickInsightWithPmi": "Ce prêt comporte environ {pmi}/mois de PMI, car l'apport personnel est inférieur à 20 % — verser {extra} de plus franchirait ce seuil et supprimerait immédiatement cette charge, au lieu d'attendre que le solde se réduise progressivement.",
         "quickInsightWithPmiAtTwentyPercent": "Ce prêt comporte environ {pmi}/mois de PMI alors même que l'apport personnel est déjà de 20 % ou plus — cette charge n'est généralement appliquée qu'en dessous de 20 %, il est donc utile de vérifier cette prime auprès de votre prêteur.",
         "quickInsightNoPmi": "Avec un apport de 20 % ou plus, ce prêt ne comporte aucune PMI — chaque dollar de la mensualité va aux intérêts et à votre propre capital, aucun ne sert à assurer le prêteur contre votre défaut.",
-        "affordabilityMiniTitle": "Quel bien puis-je me permettre ?",
-        "affordabilityMiniIntro": "Une estimation rapide et indépendante basée sur la règle usuelle d'endettement 28 %/36 % couramment utilisée par les prêteurs.",
-        "affordabilityMiniIncome": "Revenu mensuel brut",
-        "affordabilityMiniDebts": "Autres dettes mensuelles",
-        "affordabilityMiniRate": "Taux d'intérêt (%)",
-        "affordabilityMiniYears": "Durée du prêt (années)",
-        "affordabilityMiniDownPercent": "Apport personnel (%)",
-        "affordabilityMiniResult": "Paiement abordable : {payment}/mois — prix de bien estimé : {homePrice}",
-        "affordabilityMiniPlaceholder": "Saisissez votre revenu pour voir une estimation."
+        "sentence": "Pour une maison de {price} avec {down} d'apport à {rate}% sur {years} ans, votre paiement mensuel estimé est de {payment}."
       },
       "education": {
         "intro": {
@@ -1635,7 +1627,8 @@
         "totalPrincipalLabel": "Capital total",
         "totalInterestLabel": "Intérêts totaux versés",
         "pmiNote": "D'après vos données, la suppression de la PMI pourrait être demandée vers l'année {dropYear} (ratio prêt/valeur de 80 %) et doit être résiliée automatiquement au plus tard l'année {autoYear} (ratio prêt/valeur de 78 %).",
-        "pmiNoDropoff": "Votre prêt comporte actuellement une PMI, mais aucun point de suppression n'a pu être estimé avec ces données."
+        "pmiNoDropoff": "Votre prêt comporte actuellement une PMI, mais aucun point de suppression n'a pu être estimé avec ces données.",
+        "tooltipYearLabel": "Année"
       },
       "amortizationTable": {
         "title": "Échéancier d'amortissement mensuel complet",
@@ -1682,6 +1675,73 @@
         "columnPayment": "Paiement",
         "pmiNote": "Dans le cadre de ce plan, la suppression de la PMI pourrait être demandée vers le paiement n° {period} et doit être résiliée automatiquement au plus tard au paiement n° {autoPeriod}.",
         "note": "Ceci suppose que le gestionnaire de prêt applique chaque paiement bihebdomadaire directement au capital et aux intérêts dès sa réception. Certains gestionnaires placent au contraire les paiements sur un compte d'attente jusqu'à ce qu'un montant mensuel complet soit atteint, ce qui annule cet avantage — vérifier la politique du gestionnaire permet de savoir si cela s'applique ici, ou l'on peut reproduire le même effet indépendamment en ajoutant simplement un douzième de la mensualité à chaque paiement mensuel régulier."
+      },
+      "tabs": {
+        "groupLabel": "Choisissez ce que vous voulez calculer",
+        "standard": "Paiement mensuel",
+        "payoffTime": "Durée de remboursement",
+        "homePrice": "Prix max. du bien"
+      },
+      "payoffTimeResult": {
+        "resultTitle": "Durée de remboursement",
+        "heroLabel": "Temps jusqu'au remboursement",
+        "heroLabelWithExtra": "Durée de remboursement raccourcie",
+        "standardPayoffLabel": "Durée de remboursement standard",
+        "monthsSavedLabel": "Temps économisé",
+        "interestSavedLabel": "Intérêts économisés",
+        "totalInterestLabel": "Total des intérêts payés",
+        "loanAmountLabel": "Montant du prêt",
+        "sentenceNoExtra": "Sans paiement mensuel supplémentaire, ce prêt est remboursé en {years} ans {months} mois — la durée complète de {termYears} ans.",
+        "sentenceWithExtra": "Payer {extra} de plus par mois raccourcit le remboursement de {standardYears} ans {standardMonths} mois à {years} ans {months} mois, économisant {interestSaved} d'intérêts."
+      },
+      "homePriceMode": {
+        "inputTitle": "Estimez votre prix d'achat maximal",
+        "resultTitle": "Prix d'achat maximal estimé",
+        "emptyStateMessage": "Saisissez vos revenus et vos données, puis appuyez sur Calculer pour estimer le prix du bien que vous pouvez vous permettre.",
+        "maxHomePriceLabel": "Prix max. du bien",
+        "loanAmountLabel": "Montant du prêt",
+        "monthlyPaymentLabel": "Paiement mensuel estimé",
+        "sentence": "Avec un revenu annuel de {income} et {debts}/mois d'autres dettes, vous pourriez vous permettre un bien d'un prix allant jusqu'à environ {price}.",
+        "form": {
+          "annualIncomeLabel": "Revenu brut annuel",
+          "annualIncomePlaceholder": "p. ex. 90 000",
+          "monthlyDebtsLabel": "Autres dettes mensuelles",
+          "monthlyDebtsPlaceholder": "p. ex. 400",
+          "downPaymentLabel": "Apport initial",
+          "downPaymentPlaceholder": "p. ex. 40 000",
+          "interestRateLabel": "Taux d'intérêt (%)",
+          "interestRatePlaceholder": "p. ex. 6,5",
+          "loanTermLabel": "Durée du prêt (années)",
+          "loanTermPlaceholder": "p. ex. 30",
+          "propertyTaxRateLabel": "Taux de taxe foncière (%)",
+          "propertyTaxRateHint": "Taxe foncière annuelle en pourcentage de la valeur du bien ; varie selon la localisation.",
+          "propertyTaxRatePlaceholder": "p. ex. 1,2",
+          "annualInsuranceLabel": "Assurance habitation annuelle",
+          "annualInsurancePlaceholder": "p. ex. 1 500",
+          "monthlyHoaLabel": "Charges de copropriété mensuelles",
+          "monthlyHoaPlaceholder": "p. ex. 0",
+          "calculate": "Calculer",
+          "clear": "Effacer"
+        }
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "contactSectionTitle": "Préparé pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "p. ex. Jean Dupont",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "p. ex. jean@exemple.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "p. ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "p. ex. Société Exemple",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "p. ex. 1 rue de la Paix, Paris",
+        "preparedForTitle": "Préparé pour",
+        "scheduleTableTitle": "Calendrier d'amortissement annuel",
+        "generatedOn": "Généré le",
+        "shareToSocial": "Partager sur les réseaux sociaux"
       }
     },
     "crypto-converter": {
@@ -2839,12 +2899,39 @@
         "principalLabel": "Capital",
         "contributionsLabel": "Versements",
         "interestLabel": "Intérêts gagnés",
+        "buyingPowerLabel": "Pouvoir d'achat après inflation",
+        "emptyStateMessage": "Saisissez les détails de votre investissement et cliquez sur « Calculer » pour voir vos résultats.",
+        "yearsUnit": "ans",
+        "resultLabels": {
+          "years": "Durée nécessaire",
+          "rate": "Rendement annuel requis",
+          "principal": "Montant de départ requis",
+          "contribution": "Versement mensuel requis"
+        },
+        "sentences": {
+          "endAmount": "Investir {principal} aujourd'hui avec un rendement annuel de {rate} pendant {years}, plus {contribution} versés chaque mois, devrait atteindre {result}.",
+          "investmentLength": "Vous devrez continuer à investir pendant environ {years} pour atteindre votre objectif de {target}.",
+          "investmentLengthUnreachable": "Votre objectif de {target} n'est pas atteignable en 100 ans avec ces données — essayez un rendement plus élevé ou un versement mensuel plus important.",
+          "returnRate": "Vous aurez besoin d'un rendement annuel moyen d'environ {rate} pour atteindre votre objectif de {target} en {years}.",
+          "returnRateUnreachable": "Atteindre {target} en {years} n'est pas réalisable dans une fourchette de rendement réaliste — essayez un horizon plus long ou un versement plus important.",
+          "startingAmount": "Vous devrez commencer aujourd'hui avec environ {principal} pour atteindre votre objectif de {target} en {years}.",
+          "additionalContribution": "Vous devrez verser environ {contribution} chaque mois pour atteindre votre objectif de {target} en {years}."
+        },
         "disclaimer": "Cet outil fournit des estimations pédagogiques générales de la croissance d'un investissement, à titre d'illustration uniquement, et ne constitue pas un conseil financier ou en investissement. Il suppose un taux de rendement constant et invariable qui ne reflète pas la volatilité des marchés réels, et aucun résultat obtenu ici n'est garanti. Consultez un conseiller financier agréé avant de prendre une décision d'investissement."
       },
       "nav": {
         "tool": "Calculateur",
+        "yearlyBreakdown": "Répartition annuelle",
         "faq": "FAQ",
         "behindTheTool": "Dans les coulisses"
+      },
+      "tabs": {
+        "groupLabel": "Mode de calcul de l'investissement",
+        "endAmount": "Montant Final",
+        "investmentLength": "Durée de l'Investissement",
+        "returnRate": "Taux de Rendement",
+        "startingAmount": "Montant de Départ",
+        "additionalContribution": "Versement Supplémentaire"
       },
       "form": {
         "principalLabel": "Montant de départ",
@@ -2862,15 +2949,64 @@
           "daily": "Quotidienne"
         },
         "monthlyContributionLabel": "Versement mensuel (facultatif)",
-        "monthlyContributionPlaceholder": "ex. 100"
+        "monthlyContributionPlaceholder": "ex. 100",
+        "taxRateLabel": "Taux d'imposition sur les intérêts (%) (facultatif)",
+        "taxRatePlaceholder": "ex. 15",
+        "inflationRateLabel": "Taux d'inflation annuel (%) (facultatif)",
+        "inflationRatePlaceholder": "ex. 3",
+        "targetLabel": "Votre objectif",
+        "targetPlaceholder": "ex. 50 000",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "growthChart": {
         "title": "Croissance dans le temps",
         "intro": "Ce graphique montre comment votre solde augmente année après année, en distinguant ce que vous avez versé au total (montant de départ plus versements mensuels) des intérêts accumulés par-dessus.",
+        "emptyStateMessage": "Cliquez sur « Calculer » pour voir votre graphique de croissance.",
         "contributedLabel": "Versé",
         "interestLabel": "Intérêts",
         "totalContributedLabel": "Total versé",
-        "totalInterestLabel": "Total des intérêts gagnés"
+        "totalInterestLabel": "Total des intérêts gagnés",
+        "tooltipYearLabel": "Année",
+        "tooltipBalanceLabel": "Solde total"
+      },
+      "yearlyBreakdown": {
+        "title": "Calendrier d'Accumulation",
+        "emptyStateMessage": "Cliquez sur « Calculer » pour voir votre répartition annuelle.",
+        "intro": "Le calendrier d'accumulation complet de votre investissement — basculez entre une répartition annuelle ou mensuelle de votre solde, de vos versements et des intérêts gagnés.",
+        "columnYear": "Année",
+        "columnMonth": "Mois",
+        "columnOpeningBalance": "Solde d'ouverture",
+        "columnContributions": "Versements",
+        "columnInterestEarned": "Intérêts gagnés",
+        "columnEndingBalance": "Solde de clôture",
+        "annualView": "Calendrier Annuel",
+        "monthlyView": "Calendrier Mensuel",
+        "viewFullTable": "Voir la répartition complète",
+        "showLess": "Afficher moins"
+      },
+      "relatedTools": {
+        "title": "Calculateurs financiers populaires"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "shareText": "Mon investissement devrait atteindre {result} après {years} — calculé avec le Calculateur d'Intérêts Composés de TooloraLabs.",
+        "scheduleTableTitle": "Calendrier d'Accumulation Annuel",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société Exemple",
+        "contactAddressPlaceholder": "ex. 1 rue Exemple, Paris"
       },
       "education": {
         "intro": {
@@ -2882,9 +3018,40 @@
             "compoundLabel": "Intérêts composés",
             "timeLabel": "Temps",
             "valueLabel": "Valeur",
-            "caption": "Deux dépôts de départ égaux, croissant au même taux : la courbe des intérêts composés s'accélère avec le temps, tandis que la droite des intérêts simples augmente du même montant fixe à chaque période."
+            "chartAriaLabel": "Graphique linéaire comparant la croissance de vos intérêts composés à celle des intérêts simples sur la durée de l'investissement",
+            "tooltipYearLabel": "Année",
+            "tooltipDifferenceLabel": "Différence",
+            "volumeLabel": "Gain annuel",
+            "emptyStateMessage": "Cliquez sur « Calculer » ci-dessus pour voir comment vos propres chiffres se comparent aux intérêts simples dans le temps.",
+            "caption": "Après {years}, les intérêts composés vous ont rapporté {difference} de plus que les intérêts simples — d'après vos chiffres réels ci-dessus."
           },
           "disclaimer": "Les chiffres et explications de cette page sont purement pédagogiques et ne remplacent pas un conseil financier personnalisé."
+        },
+        "variables": {
+          "title": "Variables en Jeu",
+          "intro": "Cinq variables définissent toute projection d'intérêts composés — fixer quatre d'entre elles détermine la cinquième, ce qui est exactement la relation que résout chacun des onglets ci-dessus.",
+          "items": [
+            {
+              "name": "Montant de Départ (Capital)",
+              "description": "La somme investie en une fois au tout début, avant toute croissance ou tout versement supplémentaire. C'est la base à partir de laquelle chaque dollar d'intérêt futur est finalement calculé."
+            },
+            {
+              "name": "Taux de Rendement",
+              "description": "Le pourcentage annuel que l'investissement est censé rapporter, avant tout ajustement lié à la fréquence de capitalisation. De petites différences ici s'accumulent en écarts importants sur le long terme."
+            },
+            {
+              "name": "Durée de l'Investissement",
+              "description": "La période, en années, pendant laquelle l'argent reste investi et continue de se capitaliser. Comme la croissance s'accélère avec le temps, la durée est souvent la variable la plus puissante à prolonger."
+            },
+            {
+              "name": "Versement Supplémentaire",
+              "description": "Un montant fixe ajouté au solde chaque mois, en plus du montant de départ. Chaque versement génère ensuite son propre rendement composé tant qu'il reste investi."
+            },
+            {
+              "name": "Montant Final (Objectif)",
+              "description": "La valeur future atteinte par l'investissement — soit le résultat des quatre autres variables, soit, sur les quatre autres onglets, l'objectif utilisé pour calculer la variable manquante."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples résolus",
@@ -2902,6 +3069,28 @@
               "scenario": "Capital de 1 000 $ + 200 $/mois, taux annuel de 6 %, capitalisation mensuelle, 15 ans",
               "futureValue": "60 617,84 $",
               "interest": "23 617,84 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Les Intérêts Composés en Pratique",
+          "intro": "Les intérêts composés ne se limitent pas aux portefeuilles d'investissement — ils régissent les calculs derrière plusieurs produits financiers du quotidien, à l'avantage ou au désavantage selon le côté de la balance où l'on se trouve.",
+          "items": [
+            {
+              "title": "Comptes d'Épargne et Certificats de Dépôt",
+              "description": "Les banques versent des intérêts composés sur les soldes d'épargne et les certificats de dépôt, en créditant les intérêts selon un calendrier régulier (souvent quotidien ou mensuel), de sorte que les intérêts déjà gagnés génèrent eux-mêmes davantage d'intérêts — exactement le mécanisme que l'onglet « Montant Final » de cette calculatrice modélise directement."
+            },
+            {
+              "title": "Soldes de Cartes de Crédit",
+              "description": "Les soldes impayés de cartes de crédit accumulent des intérêts composés au détriment du titulaire, généralement capitalisés quotidiennement à un taux bien plus élevé que celui payé par la plupart des produits d'épargne — c'est pourquoi un solde reporté pendant plusieurs mois peut croître bien plus vite que les paiements minimums ne le réduisent."
+            },
+            {
+              "title": "Prêts et Hypothèques",
+              "description": "Les prêts amortissables appliquent des intérêts composés sur le solde restant à chaque période, puis répartissent chaque paiement entre les intérêts de cette période et le capital restant — une structure que le Calculateur de Prêt Hypothécaire et le Calculateur de Prêt de ce site modélisent en détail."
+            },
+            {
+              "title": "Fonds de Retraite",
+              "description": "Les comptes de retraite financés par l'employeur comme l'épargne-retraite personnelle reposent tous deux sur des décennies de capitalisation, souvent combinées à des versements réguliers sur salaire, pour transformer une épargne périodique modeste en un solde nettement plus important à l'âge de la retraite."
             }
           ]
         },
@@ -3002,6 +3191,19 @@
         "totalPaymentLabel": "Paiement total",
         "loanAmountLabel": "Montant du prêt",
         "totalInterestLabel": "Intérêts totaux",
+        "emptyStateMessage": "Saisissez les détails de votre prêt et cliquez sur « Calculer » pour voir vos résultats.",
+        "totalLabel": "Total",
+        "yearsUnit": "ans",
+        "resultLabels": {
+          "payment": "Montant du paiement",
+          "amountDue": "Montant dû à l'échéance",
+          "amountReceived": "Montant que vous recevez aujourd'hui"
+        },
+        "sentences": {
+          "amortized": "Pour un prêt de {amount} à un taux annuel de {rate} sur {term}, votre mensualité fixe est de {payment} par période de paiement.",
+          "deferred": "Pour un prêt de {amount} contracté aujourd'hui à un taux annuel de {rate} sur {term} sans paiement jusqu'à l'échéance, vous devrez {due} à l'échéance.",
+          "bond": "Pour recevoir {due} à l'échéance dans {term} à un taux annuel de {rate}, il vous faudrait investir {received} aujourd'hui."
+        },
         "disclaimer": "Cet outil fournit uniquement une estimation pédagogique générale des mensualités d'un prêt, et non une offre de prêt ni un conseil financier. Les taux, frais et conditions réels proposés par un prêteur dépendent de votre solvabilité et d'autres facteurs, et peuvent différer de cette estimation. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt."
       },
       "nav": {
@@ -3010,30 +3212,92 @@
         "behindTheTool": "Dans les coulisses",
         "amortization": "Amortissement"
       },
+      "tabs": {
+        "groupLabel": "Type de prêt",
+        "amortized": "Prêt amortissable",
+        "deferred": "Prêt à paiement différé",
+        "bond": "Obligation"
+      },
       "form": {
         "loanAmountLabel": "Montant du prêt",
         "loanAmountPlaceholder": "ex. 10 000",
+        "dueAmountLabel": "Montant fixé à l'échéance",
+        "dueAmountPlaceholder": "ex. 10 000",
         "interestRateLabel": "Taux d'intérêt annuel (%)",
         "interestRatePlaceholder": "ex. 6,5",
-        "loanTermLabel": "Durée du prêt (années)",
-        "loanTermPlaceholder": "ex. 5"
+        "loanTermLabel": "Durée du prêt",
+        "loanTermPlaceholder": "ex. 5",
+        "termUnitYears": "Années",
+        "termUnitMonths": "Mois",
+        "compoundLabel": "Fréquence de capitalisation",
+        "payBackLabel": "Fréquence de paiement",
+        "frequency": {
+          "annually": "Annuelle",
+          "semiannually": "Semestrielle",
+          "quarterly": "Trimestrielle",
+          "monthly": "Mensuelle",
+          "daily": "Quotidienne"
+        },
+        "payFrequency": {
+          "annually": "Annuelle",
+          "semiannually": "Semestrielle",
+          "quarterly": "Trimestrielle",
+          "monthly": "Mensuelle",
+          "biweekly": "Bimensuelle",
+          "weekly": "Hebdomadaire"
+        },
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "payoffChart": {
         "title": "Remboursement dans le temps",
-        "intro": "Ce graphique montre, pour chaque année, la répartition des paiements entre capital et intérêts, ainsi que la baisse du solde restant sur toute la durée du prêt.",
+        "intro": "Ce graphique montre, pour chaque paiement, la répartition entre capital et intérêts, ainsi que la baisse du solde restant sur toute la durée du prêt.",
         "principalLabel": "Capital",
         "interestLabel": "Intérêts",
         "balanceLabel": "Solde",
         "totalPrincipalLabel": "Capital total",
-        "totalInterestLabel": "Intérêts totaux"
+        "totalInterestLabel": "Intérêts totaux",
+        "tooltipPeriodLabel": "Période"
       },
       "amortizationTable": {
         "title": "Tableau d'amortissement",
-        "intro": "Un résumé année par année de la part de vos paiements consacrée au capital par rapport aux intérêts, ainsi que du solde restant à la fin de chaque année.",
+        "intro": "Un résumé par période de paiement de la part de chaque paiement consacrée au capital par rapport aux intérêts, ainsi que du solde restant après chaque paiement.",
+        "growthIntro": "Une vue année par année de la croissance du solde restant sous l'effet des intérêts cumulés, d'aujourd'hui jusqu'à l'échéance du prêt.",
         "columnYear": "Année",
+        "columnPeriod": "Période",
         "yearLabel": "Année {year}",
         "viewFullTable": "Voir le tableau complet",
         "showLess": "Afficher moins"
+      },
+      "deferredGrowthChart": {
+        "title": "Croissance du solde jusqu'à l'échéance",
+        "intro": "Ce graphique montre comment le solde restant croît chaque année sous l'effet des intérêts composés, sans aucun paiement jusqu'au paiement final unique à l'échéance."
+      },
+      "bondGrowthChart": {
+        "title": "Croissance de la valeur actuelle jusqu'à l'échéance",
+        "intro": "Ce graphique montre comment le montant investi aujourd'hui croît année après année jusqu'à atteindre le montant à l'échéance de l'obligation."
+      },
+      "relatedTools": {
+        "title": "Calculateurs financiers populaires"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "scheduleTableTitle": "Tableau complet",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       },
       "education": {
         "intro": {
@@ -3041,13 +3305,63 @@
           "paragraph1": "Un prêt à taux fixe — qu'il finance une voiture, des travaux, un achat professionnel ou tout autre projet — se rembourse généralement par des mensualités fixes et égales sur une durée déterminée : une structure appelée prêt amortissable. Même si chaque paiement est d'un montant identique, sa composition change constamment : les premiers paiements sont largement consacrés aux intérêts, puisque ceux-ci sont calculés sur la totalité du solde restant dû, tandis que les derniers paiements sont davantage consacrés au capital, le solde — et les intérêts qu'il génère — ayant diminué.",
           "paragraph2": "La mensualité elle-même est calculée de manière à ce que le prêt atteigne un solde nul exactement à la fin de sa durée, compte tenu du montant emprunté et du taux d'intérêt. Contrairement à un prêt immobilier, le prêt calculé ici n'inclut ni assurance emprunteur, ni taxe foncière, ni frais de copropriété — son coût se limite aux intérêts facturés sur le solde décroissant pendant la durée choisie, quel que soit l'usage du prêt.",
           "diagram": {
-            "principalLabel": "Capital",
-            "interestLabel": "Intérêts",
-            "startLabel": "Début du prêt",
-            "endLabel": "Fin du prêt",
-            "caption": "Chaque mensualité fixe se répartit entre intérêts (calculés sur le solde restant) et capital (qui le réduit) — une répartition qui bascule progressivement vers le capital à mesure que le prêt avance."
+            "title": "Où va votre mensualité",
+            "emptyStateMessage": "Cliquez sur « Calculer » ci-dessus (dans l'onglet Prêt amortissable) pour voir comment vos propres mensualités se répartissent entre intérêts et capital dans le temps.",
+            "caption": "À partir de la période {period}, votre mensualité fixe bascule d'une part majoritairement d'intérêts à une part majoritairement de capital — le point où la part de capital dépasse définitivement celle des intérêts.",
+            "captionNoCrossover": "Sur toute la durée de ce prêt, votre mensualité fixe reste majoritairement du capital dès la toute première période.",
+            "chartAriaLabel": "Graphique interactif des intérêts par rapport au capital pour chaque paiement sur la durée du prêt"
           },
           "disclaimer": "Les chiffres et explications de cette page sont fournis à titre pédagogique uniquement et ne remplacent pas un conseil financier personnalisé."
+        },
+        "loanBasics": {
+          "title": "Notions de base sur les prêts",
+          "intro": "Avant de comparer ou de souscrire un prêt, quelques notions de base permettent de comprendre ce que signifient réellement les chiffres d'une offre de prêt.",
+          "aprVsApy": {
+            "title": "Taux nominal et taux annuel effectif global",
+            "paragraph": "Le taux annuel nominal (affiché) est le taux de base avant prise en compte de l'effet des intérêts composés. Le taux annuel effectif tient compte de la fréquence à laquelle les intérêts sont capitalisés au cours de l'année — une capitalisation plus fréquente (par exemple mensuelle plutôt qu'annuelle) rend le taux effectif supérieur au taux nominal, même si deux prêts affichent le même taux nominal."
+          },
+          "compoundingFrequency": {
+            "title": "Fréquence de capitalisation",
+            "paragraph": "La fréquence de capitalisation détermine à quelle fréquence les intérêts courus sont ajoutés au solde restant, de sorte que les intérêts futurs sont eux-mêmes calculés sur des intérêts déjà générés. À taux nominal égal, une capitalisation plus fréquente entraîne un coût total du prêt légèrement plus élevé."
+          },
+          "termLength": {
+            "title": "Durée du prêt",
+            "paragraph": "Une durée plus longue réduit la mensualité en répartissant le remboursement sur davantage de périodes, mais augmente généralement le total des intérêts payés puisque le solde restant génère des intérêts plus longtemps. Une durée plus courte augmente la mensualité mais réduit le coût total des intérêts."
+          }
+        },
+        "consumerLoanTypes": {
+          "title": "Types de prêts à la consommation",
+          "intro": "Les prêts varient considérablement selon la manière dont ils sont garantis et la façon dont les prêteurs évaluent la probabilité de remboursement.",
+          "securedVsUnsecured": {
+            "title": "Prêts garantis et prêts non garantis",
+            "paragraph": "Un prêt garanti est adossé à un bien — comme un véhicule ou un bien immobilier — que le prêteur peut saisir en cas de défaut de paiement, ce qui permet généralement d'obtenir un taux plus bas. Un prêt non garanti, comme la plupart des prêts personnels, repose uniquement sur l'engagement de remboursement de l'emprunteur et représente un risque plus élevé pour le prêteur, ce qui se traduit souvent par un taux plus élevé."
+          },
+          "fiveCs": {
+            "title": "Les cinq C du crédit",
+            "paragraph": "Les prêteurs évaluent traditionnellement les demandes de prêt selon cinq facteurs, connus collectivement sous le nom des « cinq C ».",
+            "items": [
+              {
+                "name": "Caractère (Character)",
+                "description": "L'historique de crédit et la réputation de l'emprunteur — sa fiabilité dans le respect de ses engagements passés."
+              },
+              {
+                "name": "Capacité (Capacity)",
+                "description": "La capacité de l'emprunteur à assurer les futurs paiements à partir de son revenu actuel au regard de ses engagements existants."
+              },
+              {
+                "name": "Capital (Capital)",
+                "description": "Les ressources financières propres de l'emprunteur, pouvant servir d'apport ou de coussin financier."
+              },
+              {
+                "name": "Garantie (Collateral)",
+                "description": "Les biens adossés au prêt, que le prêteur peut saisir en cas de défaut de paiement."
+              },
+              {
+                "name": "Conditions (Conditions)",
+                "description": "L'objet du prêt, le montant emprunté et la conjoncture économique plus large influant sur le risque de remboursement."
+              }
+            ]
+          }
         },
         "examples": {
           "title": "Exemples chiffrés",
@@ -3164,8 +3478,19 @@
         "maxLoanAmountLabel": "Montant maximal empruntable",
         "totalPaymentLabel": "Paiement total",
         "totalInterestLabel": "Intérêts totaux",
+        "requiredPaymentLabel": "Mensualité requise",
+        "emptyStateMessage": "Saisissez vos données et cliquez sur « Calculer » pour voir vos résultats.",
+        "sentences": {
+          "maxLoan": "Avec une mensualité de {payment}, le montant maximal empruntable que vous pouvez vous permettre est de {amount}.",
+          "requiredPayment": "Pour rembourser un prêt de {amount}, votre mensualité requise est de {payment}."
+        },
         "placeholder": "Saisissez une mensualité, un taux et une durée pour voir le montant maximal empruntable correspondant.",
         "disclaimer": "Cet outil fournit uniquement une estimation éducative générale de la capacité d'emprunt, et non une offre de prêt, une préqualification ni un conseil financier. Le montant maximal réellement accordé par un prêteur dépend de votre profil de crédit complet, de vos dettes existantes et d'autres facteurs. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt."
+      },
+      "tabs": {
+        "groupLabel": "Type de calcul",
+        "maxLoan": "Prêt maximal",
+        "requiredPayment": "Mensualité requise"
       },
       "nav": {
         "tool": "Calculateur",
@@ -3176,10 +3501,33 @@
         "monthlyPaymentLabel": "Mensualité que vous pouvez vous permettre",
         "monthlyPaymentHint": "Le montant maximal que vous êtes à l'aise de payer chaque mois pour ce prêt.",
         "monthlyPaymentPlaceholder": "ex. 300",
+        "loanAmountLabel": "Montant du prêt",
+        "loanAmountHint": "Le montant que vous souhaitez emprunter.",
+        "loanAmountPlaceholder": "ex. 10 000",
         "interestRateLabel": "Taux d'intérêt annuel (%)",
         "interestRatePlaceholder": "ex. 6",
         "loanTermLabel": "Durée du prêt (années)",
-        "loanTermPlaceholder": "ex. 5"
+        "loanTermPlaceholder": "ex. 5",
+        "calculate": "Calculer",
+        "clear": "Effacer"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       },
       "education": {
         "intro": {
@@ -3296,21 +3644,35 @@
     "retirement-calculator": {
       "title": "Calculateur de retraite",
       "description": "Projetez le solde de votre épargne retraite à partir d'un montant de départ et de cotisations mensuelles régulières, avec un rendement annuel attendu.",
+      "tabs": {
+        "groupLabel": "Choisissez ce que vous voulez calculer",
+        "endAmount": "Solde projeté",
+        "requiredContribution": "Cotisation requise",
+        "requiredYears": "Années jusqu'à l'objectif"
+      },
       "aboveFold": {
         "inputTitle": "Votre plan de retraite",
-        "resultTitle": "Solde de retraite projeté",
+        "resultTitle": "Résultat de retraite",
+        "emptyStateMessage": "Saisissez votre âge, votre épargne et vos cotisations, puis appuyez sur Calculer pour voir votre projection.",
+        "yearsUnit": "ans",
         "projectedBalanceLabel": "Solde projeté",
-        "totalContributionsLabel": "Cotisations totales",
+        "requiredContributionLabel": "Cotisation mensuelle requise",
+        "yearsNeededLabel": "Années nécessaires",
+        "totalContributedLabel": "Total cotisé",
         "totalGrowthLabel": "Croissance totale",
-        "yearsToRetirementLabel": "Années avant la retraite",
-        "yearsToRetirementValue": "Projection sur {years} ans",
-        "placeholder": "Saisissez votre âge, votre épargne et vos cotisations pour voir votre solde de retraite projeté.",
-        "disclaimer": "Cet outil fournit uniquement une projection éducative générale, et non un conseil financier ou d'investissement. Il suppose un rendement annuel constant, sans impôts, frais, ajustement à l'inflation ni plafonds de cotisation, autant d'éléments qui ne se vérifient jamais tels quels sur les marchés réels ou dans de vrais comptes de retraite. Consultez un conseiller financier agréé avant de prendre des décisions relatives à la retraite."
+        "retirementAgeReachedLabel": "Âge atteint",
+        "sentences": {
+          "endAmount": "En commençant à {currentAge} ans avec {savings} d'épargne et en cotisant {contribution} par mois avec un rendement annuel attendu de {rate}, votre solde projeté sera de {balance} à {retirementAge} ans.",
+          "requiredContribution": "Pour atteindre {target} à {retirementAge} ans, en partant de {savings} à {currentAge} ans avec un rendement annuel attendu de {rate}, vous devez cotiser {requiredContribution} par mois.",
+          "requiredYears": "En cotisant {contribution} par mois à partir de {savings} à {currentAge} ans avec un rendement annuel attendu de {rate}, vous atteindrez {target} en environ {years}, soit vers {retirementAgeReached} ans.",
+          "requiredYearsUnreachable": "Avec {contribution} par mois à partir de {savings} et un rendement annuel attendu de {rate}, {target} n'est pas atteint en 80 ans — essayez une cotisation ou un rendement plus élevés."
+        }
       },
       "nav": {
-        "tool": "Calculateur",
+        "tool": "Calculatrice",
+        "yearlyBreakdown": "Répartition annuelle",
         "faq": "FAQ",
-        "behindTheTool": "Dans les coulisses"
+        "behindTheTool": "Dans les coulisses de l'outil"
       },
       "form": {
         "currentAgeLabel": "Âge actuel",
@@ -3323,7 +3685,55 @@
         "monthlyContributionPlaceholder": "ex. 500",
         "annualReturnRateLabel": "Rendement annuel attendu (%)",
         "annualReturnRateHint": "Une hypothèse courante à long terme pour un portefeuille diversifié actions/obligations se situe souvent entre 5 % et 8 % ; ce n'est en aucun cas une garantie de rendement réel.",
-        "annualReturnRatePlaceholder": "ex. 7"
+        "annualReturnRatePlaceholder": "ex. 7",
+        "targetBalanceLabel": "Solde de retraite visé",
+        "targetBalanceHint": "Le solde de retraite que vous souhaitez atteindre.",
+        "targetBalancePlaceholder": "p. ex. 1 000 000",
+        "calculate": "Calculer",
+        "clear": "Effacer"
+      },
+      "growthChart": {
+        "title": "Croissance de l'épargne dans le temps",
+        "emptyStateMessage": "Calculez une projection pour voir votre épargne croître année après année.",
+        "intro": "Le bleu représente l'argent versé (épargne de départ plus cotisations mensuelles) ; l'ambre représente la croissance des placements qui s'y ajoute.",
+        "interestLabel": "Croissance",
+        "contributedLabel": "Versé",
+        "totalContributedLabel": "Total cotisé",
+        "totalInterestLabel": "Croissance totale",
+        "tooltipYearLabel": "Année",
+        "tooltipBalanceLabel": "Solde"
+      },
+      "yearlyBreakdown": {
+        "title": "Répartition année par année",
+        "emptyStateMessage": "Calculez une projection pour voir la répartition complète année par année.",
+        "intro": "Voyez exactement comment votre solde croît chaque année (ou chaque mois) grâce aux cotisations et à la croissance des placements.",
+        "annualView": "Annuel",
+        "monthlyView": "Mensuel",
+        "columnYear": "Année",
+        "columnMonth": "Mois",
+        "columnOpeningBalance": "Solde d'ouverture",
+        "columnContributions": "Cotisations",
+        "columnInterestEarned": "Croissance générée",
+        "columnEndingBalance": "Solde de clôture"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "contactSectionTitle": "Préparé pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "p. ex. Jean Dupont",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "p. ex. jean@exemple.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "p. ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "p. ex. Société Exemple",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "p. ex. 1 rue de la Paix, Paris",
+        "preparedForTitle": "Préparé pour",
+        "scheduleTableTitle": "Calendrier annuel",
+        "generatedOn": "Généré le",
+        "shareToSocial": "Partager sur les réseaux sociaux"
       },
       "education": {
         "intro": {
@@ -3448,8 +3858,24 @@
         "monthlyPaymentLabel": "Mensualité",
         "monthlyPrincipalAndInterestLabel": "Capital et intérêts",
         "monthlyPropertyTaxLabel": "Taxe foncière",
+        "requiredAnnualIncomeLabel": "Revenu annuel requis",
+        "bindingConstraintLabel": "Facteur limitant",
+        "bindingConstraint": {
+          "frontEnd": "Coût du logement (règle des 28 %)",
+          "backEnd": "Dette totale (règle des 36 %)"
+        },
+        "emptyStateMessage": "Saisissez vos données et cliquez sur « Calculer » pour voir vos résultats.",
+        "sentences": {
+          "homePrice": "Avec un revenu annuel brut de {income}, le prix maximal du logement que vous pouvez vous permettre est de {price}.",
+          "requiredIncome": "Pour vous permettre un logement à {price}, votre revenu annuel brut doit être d'au moins {income}."
+        },
         "placeholder": "Saisissez vos revenus, vos dettes, votre acompte et les conditions du prêt pour voir le prix maximal du logement que vous pouvez vous permettre.",
         "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une préapprobation hypothécaire, une offre de prêt ni un conseil financier. Les prêteurs appliquent leurs propres règles de souscription, qui peuvent différer de la règle 28/36 utilisée ici, et le montant réellement approuvé dépend de votre profil de crédit complet et des exigences du prêteur. Consultez un prêteur hypothécaire agréé ou un conseiller financier avant de chercher un logement ou de solliciter un prêt."
+      },
+      "tabs": {
+        "groupLabel": "Type de calcul",
+        "homePrice": "Prix max",
+        "requiredIncome": "Revenu requis"
       },
       "nav": {
         "tool": "Calculateur",
@@ -3459,6 +3885,8 @@
       "form": {
         "annualIncomeLabel": "Revenu annuel brut",
         "annualIncomePlaceholder": "ex. 90 000",
+        "targetHomePriceLabel": "Prix de logement cible",
+        "targetHomePricePlaceholder": "ex. 400 000",
         "monthlyDebtsLabel": "Autres dettes mensuelles",
         "monthlyDebtsHint": "Prêts auto, prêts étudiants, cartes de crédit et toute autre dette récurrente — hors nouveau prêt immobilier.",
         "monthlyDebtsPlaceholder": "ex. 400",
@@ -3475,7 +3903,27 @@
         "annualHomeInsurancePlaceholder": "ex. 1 500",
         "monthlyHOALabel": "Charges de copropriété mensuelles",
         "monthlyHOAHint": "Frais d'association de propriétaires, le cas échéant. Saisissez 0 si non applicable.",
-        "monthlyHOAPlaceholder": "ex. 0"
+        "monthlyHOAPlaceholder": "ex. 0",
+        "calculate": "Calculer",
+        "clear": "Effacer"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       },
       "education": {
         "intro": {
@@ -3611,7 +4059,19 @@
           "veryHigh": "Très élevé"
         },
         "placeholder": "Saisissez votre revenu et vos paiements de dettes mensuels pour voir votre ratio dette/revenu.",
+        "emptyStateMessage": "Saisissez vos revenus et vos dettes et cliquez sur « Calculer » pour voir vos résultats.",
+        "maxTotalMonthlyDebtLabel": "Dette mensuelle totale maximale",
+        "maxAdditionalMonthlyDebtLabel": "Marge supplémentaire disponible",
+        "sentences": {
+          "ratio": "Avec un revenu mensuel brut de {income}, votre dette mensuelle totale place votre ratio dette/revenu à {ratio} — évalué comme {category}.",
+          "maxDebt": "Pour rester à un ratio dette/revenu de {target} ou moins avec un revenu mensuel brut de {income}, vos paiements de dette mensuels totaux ne devraient pas dépasser {maxDebt}."
+        },
         "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une décision de prêt ni un conseil financier. Les prêteurs calculent le DTI selon leurs propres règles, qui peuvent différer de la formule utilisée ici, et l'approbation dépend de nombreux facteurs au-delà de ce seul ratio. Consultez un prêteur agréé ou un conseiller financier pour des conseils adaptés à votre situation."
+      },
+      "tabs": {
+        "groupLabel": "Type de calcul",
+        "ratio": "Ratio dette/revenu",
+        "maxDebt": "Dette max"
       },
       "nav": {
         "tool": "Calculateur",
@@ -3632,7 +4092,33 @@
         "creditCardPaymentsPlaceholder": "ex. 100",
         "otherPaymentsLabel": "Autres dettes mensuelles",
         "otherPaymentsHint": "Prêts personnels ou tout autre paiement de dette récurrent non listé ci-dessus.",
-        "otherPaymentsPlaceholder": "ex. 0"
+        "otherPaymentsPlaceholder": "ex. 0",
+        "targetBackEndRatioLabel": "Ratio dette/revenu cible (%)",
+        "targetBackEndRatioHint": "Le ratio global maximal que vous souhaitez ne pas dépasser — 36 % est un seuil sain couramment cité.",
+        "targetBackEndRatioPlaceholder": "ex. 36",
+        "existingMonthlyDebtLabel": "Dette mensuelle existante",
+        "existingMonthlyDebtHint": "Tout paiement de dette mensuel que vous avez déjà, pour voir la marge supplémentaire que laisse le ratio cible.",
+        "existingMonthlyDebtPlaceholder": "ex. 600",
+        "calculate": "Calculer",
+        "clear": "Effacer"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       },
       "education": {
         "intro": {
@@ -4022,11 +4508,26 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "1/2 + 1/3", "result": "5/6" },
-            { "calculation": "3/4 − 1/4", "result": "1/2" },
-            { "calculation": "2/3 × 3/4", "result": "1/2" },
-            { "calculation": "1/2 ÷ 1/4", "result": "2" },
-            { "calculation": "6/8 simplifié", "result": "3/4" }
+            {
+              "calculation": "1/2 + 1/3",
+              "result": "5/6"
+            },
+            {
+              "calculation": "3/4 − 1/4",
+              "result": "1/2"
+            },
+            {
+              "calculation": "2/3 × 3/4",
+              "result": "1/2"
+            },
+            {
+              "calculation": "1/2 ÷ 1/4",
+              "result": "2"
+            },
+            {
+              "calculation": "6/8 simplifié",
+              "result": "3/4"
+            }
           ]
         },
         "faq": {
@@ -4194,10 +4695,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "123 400 000 en notation scientifique", "result": "1,234 × 10^8" },
-            { "calculation": "6,02 × 10^23 sous forme standard", "result": "602 000 000 000 000 000 000 000" },
-            { "calculation": "(5 × 10^3) × (3 × 10^4)", "result": "1,5 × 10^8" },
-            { "calculation": "(6 × 10^7) ÷ (2 × 10^3)", "result": "3 × 10^4" }
+            {
+              "calculation": "123 400 000 en notation scientifique",
+              "result": "1,234 × 10^8"
+            },
+            {
+              "calculation": "6,02 × 10^23 sous forme standard",
+              "result": "602 000 000 000 000 000 000 000"
+            },
+            {
+              "calculation": "(5 × 10^3) × (3 × 10^4)",
+              "result": "1,5 × 10^8"
+            },
+            {
+              "calculation": "(6 × 10^7) ÷ (2 × 10^3)",
+              "result": "3 × 10^4"
+            }
           ]
         },
         "faq": {
@@ -4304,10 +4817,22 @@
           "title": "Les Quatre Règles de Comptage",
           "intro": "Toute règle de chiffres significatifs se ramène à ces quatre cas.",
           "rules": {
-            "nonzero": { "example": "482", "text": "Tout chiffre non nul est toujours significatif — 3 chiffres significatifs." },
-            "sandwiched": { "example": "1002", "text": "Les zéros entre deux chiffres non nuls sont toujours significatifs — 4 chiffres significatifs." },
-            "leading": { "example": "0,0053", "text": "Les zéros initiaux (avant le premier chiffre non nul) ne sont jamais significatifs — 2 chiffres significatifs." },
-            "trailing": { "example": "1,200", "text": "Les zéros finaux ne sont significatifs qu'en présence d'une virgule décimale — 4 chiffres significatifs." }
+            "nonzero": {
+              "example": "482",
+              "text": "Tout chiffre non nul est toujours significatif — 3 chiffres significatifs."
+            },
+            "sandwiched": {
+              "example": "1002",
+              "text": "Les zéros entre deux chiffres non nuls sont toujours significatifs — 4 chiffres significatifs."
+            },
+            "leading": {
+              "example": "0,0053",
+              "text": "Les zéros initiaux (avant le premier chiffre non nul) ne sont jamais significatifs — 2 chiffres significatifs."
+            },
+            "trailing": {
+              "example": "1,200",
+              "text": "Les zéros finaux ne sont significatifs qu'en présence d'une virgule décimale — 4 chiffres significatifs."
+            }
           }
         }
       },
@@ -4357,12 +4882,30 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "Chiffres significatifs dans 0,00500", "result": "3" },
-            { "calculation": "12345 arrondi à 3 chiffres significatifs", "result": "1,23 × 10^4" },
-            { "calculation": "12,5 + 0,234", "result": "12,7" },
-            { "calculation": "18,0 − 2,545", "result": "15,5" },
-            { "calculation": "4,5 × 2,33", "result": "10" },
-            { "calculation": "10,0 ÷ 3,0", "result": "3,3" }
+            {
+              "calculation": "Chiffres significatifs dans 0,00500",
+              "result": "3"
+            },
+            {
+              "calculation": "12345 arrondi à 3 chiffres significatifs",
+              "result": "1,23 × 10^4"
+            },
+            {
+              "calculation": "12,5 + 0,234",
+              "result": "12,7"
+            },
+            {
+              "calculation": "18,0 − 2,545",
+              "result": "15,5"
+            },
+            {
+              "calculation": "4,5 × 2,33",
+              "result": "10"
+            },
+            {
+              "calculation": "10,0 ÷ 3,0",
+              "result": "3,3"
+            }
           ]
         },
         "faq": {
@@ -4520,9 +5063,18 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "A (3 crédits) + B (4 crédits) + A- (3 crédits)", "result": "GPA de 3,51" },
-            { "calculation": "GPA de 3,0 sur 60 crédits, cible de 3,5 sur 90 au total", "result": "Nécessite 4,5 sur les 30 prochains — impossible" },
-            { "calculation": "GPA de 3,0 sur 90 crédits, cible de 3,1 sur 120 au total", "result": "Nécessite 3,4 sur les 30 prochains" }
+            {
+              "calculation": "A (3 crédits) + B (4 crédits) + A- (3 crédits)",
+              "result": "GPA de 3,51"
+            },
+            {
+              "calculation": "GPA de 3,0 sur 60 crédits, cible de 3,5 sur 90 au total",
+              "result": "Nécessite 4,5 sur les 30 prochains — impossible"
+            },
+            {
+              "calculation": "GPA de 3,0 sur 90 crédits, cible de 3,1 sur 120 au total",
+              "result": "Nécessite 3,4 sur les 30 prochains"
+            }
           ]
         },
         "faq": {
@@ -4684,10 +5236,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "100 g d'une substance occupant 50 cm³", "result": "Densité de 2 g/cm³" },
-            { "calculation": "193 g occupant 10 cm³", "result": "19,3 g/cm³ — correspond à l'or massif" },
-            { "calculation": "Densité 7,87 g/cm³, volume 10 cm³", "result": "Masse de 78,7 g" },
-            { "calculation": "Masse 78,7 g, densité 7,87 g/cm³", "result": "Volume de 10 cm³" }
+            {
+              "calculation": "100 g d'une substance occupant 50 cm³",
+              "result": "Densité de 2 g/cm³"
+            },
+            {
+              "calculation": "193 g occupant 10 cm³",
+              "result": "19,3 g/cm³ — correspond à l'or massif"
+            },
+            {
+              "calculation": "Densité 7,87 g/cm³, volume 10 cm³",
+              "result": "Masse de 78,7 g"
+            },
+            {
+              "calculation": "Masse 78,7 g, densité 7,87 g/cm³",
+              "result": "Volume de 10 cm³"
+            }
           ]
         },
         "faq": {
@@ -4790,12 +5354,30 @@
           "title": "Formules de la Loi d'Ohm",
           "intro": "La relation centrale entre tension, courant et résistance, ainsi que les trois formules de puissance équivalentes.",
           "formulas": {
-            "voltage": { "label": "Tension", "expression": "V = I × R" },
-            "current": { "label": "Courant", "expression": "I = V ÷ R" },
-            "resistance": { "label": "Résistance", "expression": "R = V ÷ I" },
-            "powerFromVI": { "label": "Puissance (V, I)", "expression": "P = V × I" },
-            "powerFromIR": { "label": "Puissance (I, R)", "expression": "P = I² × R" },
-            "powerFromVR": { "label": "Puissance (V, R)", "expression": "P = V² ÷ R" }
+            "voltage": {
+              "label": "Tension",
+              "expression": "V = I × R"
+            },
+            "current": {
+              "label": "Courant",
+              "expression": "I = V ÷ R"
+            },
+            "resistance": {
+              "label": "Résistance",
+              "expression": "R = V ÷ I"
+            },
+            "powerFromVI": {
+              "label": "Puissance (V, I)",
+              "expression": "P = V × I"
+            },
+            "powerFromIR": {
+              "label": "Puissance (I, R)",
+              "expression": "P = I² × R"
+            },
+            "powerFromVR": {
+              "label": "Puissance (V, R)",
+              "expression": "P = V² ÷ R"
+            }
           }
         }
       },
@@ -4847,10 +5429,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "12 V aux bornes d'une résistance de 6 Ω", "result": "2 A, 24 W" },
-            { "calculation": "2 A à travers une résistance de 6 Ω", "result": "12 V, 24 W" },
-            { "calculation": "12 V consommant 24 W", "result": "2 A, 6 Ω" },
-            { "calculation": "6 Ω dissipant 24 W", "result": "12 V, 2 A" }
+            {
+              "calculation": "12 V aux bornes d'une résistance de 6 Ω",
+              "result": "2 A, 24 W"
+            },
+            {
+              "calculation": "2 A à travers une résistance de 6 Ω",
+              "result": "12 V, 24 W"
+            },
+            {
+              "calculation": "12 V consommant 24 W",
+              "result": "2 A, 6 Ω"
+            },
+            {
+              "calculation": "6 Ω dissipant 24 W",
+              "result": "12 V, 2 A"
+            }
           ]
         },
         "faq": {
@@ -5015,10 +5609,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "[H⁺] = 1 × 10⁻³ mol/L", "result": "pH 3, pOH 11 (acide)" },
-            { "calculation": "pH 7 (eau pure)", "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L" },
-            { "calculation": "[OH⁻] = 1 × 10⁻² mol/L", "result": "pOH 2, pH 12 (basique)" },
-            { "calculation": "pOH 5", "result": "pH 9 (basique)" }
+            {
+              "calculation": "[H⁺] = 1 × 10⁻³ mol/L",
+              "result": "pH 3, pOH 11 (acide)"
+            },
+            {
+              "calculation": "pH 7 (eau pure)",
+              "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L"
+            },
+            {
+              "calculation": "[OH⁻] = 1 × 10⁻² mol/L",
+              "result": "pOH 2, pH 12 (basique)"
+            },
+            {
+              "calculation": "pOH 5",
+              "result": "pH 9 (basique)"
+            }
           ]
         },
         "faq": {
@@ -5121,10 +5727,22 @@
           "title": "Formules Statistiques",
           "intro": "Les formules centrales appliquées par ce calculateur, où n est le nombre de valeurs et x̄ la moyenne.",
           "formulas": {
-            "mean": { "label": "Moyenne", "expression": "x̄ = Σx / n" },
-            "median": { "label": "Médiane", "expression": "valeur centrale des données triées" },
-            "populationStdDev": { "label": "Écart-type de Population", "expression": "σ = √(Σ(x - x̄)² / n)" },
-            "sampleStdDev": { "label": "Écart-type d'Échantillon", "expression": "s = √(Σ(x - x̄)² / (n - 1))" }
+            "mean": {
+              "label": "Moyenne",
+              "expression": "x̄ = Σx / n"
+            },
+            "median": {
+              "label": "Médiane",
+              "expression": "valeur centrale des données triées"
+            },
+            "populationStdDev": {
+              "label": "Écart-type de Population",
+              "expression": "σ = √(Σ(x - x̄)² / n)"
+            },
+            "sampleStdDev": {
+              "label": "Écart-type d'Échantillon",
+              "expression": "s = √(Σ(x - x̄)² / (n - 1))"
+            }
           }
         }
       },
@@ -5172,10 +5790,22 @@
           "columnCalculation": "Jeu de Données",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "2, 4, 4, 4, 5, 5, 7, 9", "result": "Moyenne 5, médiane 4,5, mode 4" },
-            { "calculation": "1, 2, 3, 4", "result": "Moyenne 2,5, médiane 2,5, sans mode" },
-            { "calculation": "1, 1, 2, 2, 3", "result": "Modes 1 et 2 (bimodal)" },
-            { "calculation": "10, 12, 23, 23, 16, 23, 21, 16", "result": "Écart-type de population ≈ 4,9, d'échantillon ≈ 5,24" }
+            {
+              "calculation": "2, 4, 4, 4, 5, 5, 7, 9",
+              "result": "Moyenne 5, médiane 4,5, mode 4"
+            },
+            {
+              "calculation": "1, 2, 3, 4",
+              "result": "Moyenne 2,5, médiane 2,5, sans mode"
+            },
+            {
+              "calculation": "1, 1, 2, 2, 3",
+              "result": "Modes 1 et 2 (bimodal)"
+            },
+            {
+              "calculation": "10, 12, 23, 23, 16, 23, 21, 16",
+              "result": "Écart-type de population ≈ 4,9, d'échantillon ≈ 5,24"
+            }
           ]
         },
         "faq": {
@@ -5278,9 +5908,18 @@
           "title": "Formules de Molarité",
           "intro": "Les relations centrales appliquées par ce calculateur.",
           "formulas": {
-            "molarity": { "label": "Molarité", "expression": "M = mol / L" },
-            "molesFromMass": { "label": "Moles à partir de la Masse", "expression": "mol = masse (g) / masse molaire (g/mol)" },
-            "dilution": { "label": "Dilution", "expression": "C₁V₁ = C₂V₂" }
+            "molarity": {
+              "label": "Molarité",
+              "expression": "M = mol / L"
+            },
+            "molesFromMass": {
+              "label": "Moles à partir de la Masse",
+              "expression": "mol = masse (g) / masse molaire (g/mol)"
+            },
+            "dilution": {
+              "label": "Dilution",
+              "expression": "C₁V₁ = C₂V₂"
+            }
           }
         }
       },
@@ -5352,10 +5991,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "0,5 mol dissous dans 2 L", "result": "0,25 mol/L" },
-            { "calculation": "58,44 g de NaCl (masse molaire 58,44 g/mol) dans 1 L", "result": "1 mol/L" },
-            { "calculation": "0,5 L de 2 mol/L dilué à 1 L", "result": "1 mol/L (C₂)" },
-            { "calculation": "0,5 L de C₁ inconnue dilué à 1 L donne 1 mol/L", "result": "C₁ = 2 mol/L" }
+            {
+              "calculation": "0,5 mol dissous dans 2 L",
+              "result": "0,25 mol/L"
+            },
+            {
+              "calculation": "58,44 g de NaCl (masse molaire 58,44 g/mol) dans 1 L",
+              "result": "1 mol/L"
+            },
+            {
+              "calculation": "0,5 L de 2 mol/L dilué à 1 L",
+              "result": "1 mol/L (C₂)"
+            },
+            {
+              "calculation": "0,5 L de C₁ inconnue dilué à 1 L donne 1 mol/L",
+              "result": "C₁ = 2 mol/L"
+            }
           ]
         },
         "faq": {
@@ -5458,9 +6109,18 @@
           "title": "Référence de la Loi des Gaz Parfaits",
           "intro": "La formule et la constante appliquées par ce calculateur.",
           "formulas": {
-            "idealGasLaw": { "label": "Loi des Gaz Parfaits", "expression": "PV = nRT" },
-            "gasConstant": { "label": "Constante des Gaz R", "expression": "0.0820574 L·atm / (mol·K)" },
-            "stp": { "label": "Volume Molaire aux CNTP", "expression": "22.414 L/mol à 1 atm, 273.15 K" }
+            "idealGasLaw": {
+              "label": "Loi des Gaz Parfaits",
+              "expression": "PV = nRT"
+            },
+            "gasConstant": {
+              "label": "Constante des Gaz R",
+              "expression": "0.0820574 L·atm / (mol·K)"
+            },
+            "stp": {
+              "label": "Volume Molaire aux CNTP",
+              "expression": "22.414 L/mol à 1 atm, 273.15 K"
+            }
           }
         }
       },
@@ -5510,10 +6170,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "1 mol à 1 atm, 273,15 K", "result": "22,414 L (volume molaire aux CNTP)" },
-            { "calculation": "1 mol occupant 22,414 L à 273,15 K", "result": "1 atm" },
-            { "calculation": "1 atm, 22,414 L, 273,15 K", "result": "1 mol" },
-            { "calculation": "1 mol, 1 atm, 22,414 L", "result": "273,15 K" }
+            {
+              "calculation": "1 mol à 1 atm, 273,15 K",
+              "result": "22,414 L (volume molaire aux CNTP)"
+            },
+            {
+              "calculation": "1 mol occupant 22,414 L à 273,15 K",
+              "result": "1 atm"
+            },
+            {
+              "calculation": "1 atm, 22,414 L, 273,15 K",
+              "result": "1 mol"
+            },
+            {
+              "calculation": "1 mol, 1 atm, 22,414 L",
+              "result": "273,15 K"
+            }
           ]
         },
         "faq": {
@@ -5616,10 +6288,22 @@
           "title": "Formules de Mécanique",
           "intro": "Les quatre formules centrales appliquées par ce calculateur.",
           "formulas": {
-            "work": { "label": "Travail", "expression": "W = F·d·cos(θ)" },
-            "kineticEnergy": { "label": "Énergie Cinétique", "expression": "EC = ½mv²" },
-            "potentialEnergy": { "label": "Énergie Potentielle Gravitationnelle", "expression": "EP = mgh" },
-            "power": { "label": "Puissance", "expression": "P = W / t" }
+            "work": {
+              "label": "Travail",
+              "expression": "W = F·d·cos(θ)"
+            },
+            "kineticEnergy": {
+              "label": "Énergie Cinétique",
+              "expression": "EC = ½mv²"
+            },
+            "potentialEnergy": {
+              "label": "Énergie Potentielle Gravitationnelle",
+              "expression": "EP = mgh"
+            },
+            "power": {
+              "label": "Puissance",
+              "expression": "P = W / t"
+            }
           }
         }
       },
@@ -5677,11 +6361,26 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "Force de 10 N sur 5 m, parallèle au mouvement (0°)", "result": "50 J de travail" },
-            { "calculation": "Force de 10 N sur 5 m, à 60° du mouvement", "result": "25 J de travail" },
-            { "calculation": "Masse de 2 kg se déplaçant à 3 m/s", "result": "9 J d'énergie cinétique" },
-            { "calculation": "Masse de 2 kg à 5 m de hauteur", "result": "98 J d'énergie potentielle" },
-            { "calculation": "100 J de travail effectué en 10 s", "result": "10 W de puissance" }
+            {
+              "calculation": "Force de 10 N sur 5 m, parallèle au mouvement (0°)",
+              "result": "50 J de travail"
+            },
+            {
+              "calculation": "Force de 10 N sur 5 m, à 60° du mouvement",
+              "result": "25 J de travail"
+            },
+            {
+              "calculation": "Masse de 2 kg se déplaçant à 3 m/s",
+              "result": "9 J d'énergie cinétique"
+            },
+            {
+              "calculation": "Masse de 2 kg à 5 m de hauteur",
+              "result": "98 J d'énergie potentielle"
+            },
+            {
+              "calculation": "100 J de travail effectué en 10 s",
+              "result": "10 W de puissance"
+            }
           ]
         },
         "faq": {
@@ -5784,10 +6483,22 @@
           "title": "Équations de Cinématique",
           "intro": "Les équations centrales à accélération constante appliquées par ce calculateur (v₀ = vitesse initiale, v = vitesse finale, a = accélération, t = temps, Δx = déplacement).",
           "formulas": {
-            "velocity": { "label": "Vitesse", "expression": "v = v₀ + at" },
-            "displacementTime": { "label": "Déplacement (avec le temps)", "expression": "Δx = v₀t + ½at²" },
-            "velocitySquared": { "label": "Vitesse au Carré", "expression": "v² = v₀² + 2aΔx" },
-            "displacementAvg": { "label": "Déplacement (vitesse moyenne)", "expression": "Δx = ½(v₀ + v)t" }
+            "velocity": {
+              "label": "Vitesse",
+              "expression": "v = v₀ + at"
+            },
+            "displacementTime": {
+              "label": "Déplacement (avec le temps)",
+              "expression": "Δx = v₀t + ½at²"
+            },
+            "velocitySquared": {
+              "label": "Vitesse au Carré",
+              "expression": "v² = v₀² + 2aΔx"
+            },
+            "displacementAvg": {
+              "label": "Déplacement (vitesse moyenne)",
+              "expression": "Δx = ½(v₀ + v)t"
+            }
           }
         }
       },
@@ -5856,10 +6567,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "v₀ = 0, a = 2 m/s², t = 5 s", "result": "v = 10 m/s, Δx = 25 m" },
-            { "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s", "result": "v₀ = 10 m/s" },
-            { "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m", "result": "a = 2 m/s² (type distance de freinage)" },
-            { "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m", "result": "v = 10 m/s" }
+            {
+              "calculation": "v₀ = 0, a = 2 m/s², t = 5 s",
+              "result": "v = 10 m/s, Δx = 25 m"
+            },
+            {
+              "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s",
+              "result": "v₀ = 10 m/s"
+            },
+            {
+              "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m",
+              "result": "a = 2 m/s² (type distance de freinage)"
+            },
+            {
+              "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m",
+              "result": "v = 10 m/s"
+            }
           ]
         },
         "faq": {
@@ -5962,9 +6685,18 @@
           "title": "Formules de Force",
           "intro": "Les deux formules appliquées par ce calculateur.",
           "formulas": {
-            "secondLaw": { "label": "Deuxième Loi de Newton", "expression": "F = ma" },
-            "gravitation": { "label": "Gravitation Universelle", "expression": "F = Gm₁m₂ / r²" },
-            "gravitationalConstant": { "label": "Constante de Gravitation", "expression": "G ≈ 6,674 × 10⁻¹¹ N·m²/kg²" }
+            "secondLaw": {
+              "label": "Deuxième Loi de Newton",
+              "expression": "F = ma"
+            },
+            "gravitation": {
+              "label": "Gravitation Universelle",
+              "expression": "F = Gm₁m₂ / r²"
+            },
+            "gravitationalConstant": {
+              "label": "Constante de Gravitation",
+              "expression": "G ≈ 6,674 × 10⁻¹¹ N·m²/kg²"
+            }
           }
         }
       },
@@ -6037,10 +6769,22 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "Masse de 2 kg accélérant à 3 m/s²", "result": "F = 6 N" },
-            { "calculation": "Force de 10 N accélérant un objet à 2 m/s²", "result": "m = 5 kg" },
-            { "calculation": "Masse de la Terre, un objet de 1 kg, au rayon terrestre", "result": "F ≈ 9,8 N (correspond à la gravité de surface)" },
-            { "calculation": "Deux masses de 1 × 10¹⁰ kg, séparées de 100 km", "result": "F ≈ 0,667 N" }
+            {
+              "calculation": "Masse de 2 kg accélérant à 3 m/s²",
+              "result": "F = 6 N"
+            },
+            {
+              "calculation": "Force de 10 N accélérant un objet à 2 m/s²",
+              "result": "m = 5 kg"
+            },
+            {
+              "calculation": "Masse de la Terre, un objet de 1 kg, au rayon terrestre",
+              "result": "F ≈ 9,8 N (correspond à la gravité de surface)"
+            },
+            {
+              "calculation": "Deux masses de 1 × 10¹⁰ kg, séparées de 100 km",
+              "result": "F ≈ 0,667 N"
+            }
           ]
         },
         "faq": {
@@ -6327,8 +7071,14 @@
           "title": "Formules de Lisibilité",
           "intro": "Les deux formules appliquées par ce calculateur.",
           "formulas": {
-            "fleschReadingEase": { "label": "Facilité de Lecture de Flesch", "expression": "206.835 − 1.015×(mots/phrases) − 84.6×(syllabes/mots)" },
-            "fleschKincaidGrade": { "label": "Niveau Scolaire Flesch-Kincaid", "expression": "0.39×(mots/phrases) + 11.8×(syllabes/mots) − 15.59" }
+            "fleschReadingEase": {
+              "label": "Facilité de Lecture de Flesch",
+              "expression": "206.835 − 1.015×(mots/phrases) − 84.6×(syllabes/mots)"
+            },
+            "fleschKincaidGrade": {
+              "label": "Niveau Scolaire Flesch-Kincaid",
+              "expression": "0.39×(mots/phrases) + 11.8×(syllabes/mots) − 15.59"
+            }
           },
           "englishOnlyNote": "Les deux formules sont calibrées spécifiquement pour le texte anglais — le comptage des syllabes et la structure des phrases ne se transposent pas de la même façon dans d'autres langues, donc les résultats pour un texte non anglais ne seront pas significatifs."
         }
@@ -6373,19 +7123,43 @@
           "columnCalculation": "Passage",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "« The cat sat on the mat. The dog ran fast. » (10 mots, 2 phrases)", "result": "Facilité de Lecture de Flesch 117,2 (Très Facile) — Niveau Scolaire −1,8" },
-            { "calculation": "Un passage de 36 mots aux phrases courtes et mots courants (3 phrases)", "result": "Facilité de Lecture de Flesch 81,9 (Facile) — Niveau Scolaire 4,8" },
-            { "calculation": "Une seule phrase de 22 mots au vocabulaire académique dense", "result": "Facilité de Lecture de Flesch −92,4 (Très Confus) — Niveau Scolaire 31,6" }
+            {
+              "calculation": "« The cat sat on the mat. The dog ran fast. » (10 mots, 2 phrases)",
+              "result": "Facilité de Lecture de Flesch 117,2 (Très Facile) — Niveau Scolaire −1,8"
+            },
+            {
+              "calculation": "Un passage de 36 mots aux phrases courtes et mots courants (3 phrases)",
+              "result": "Facilité de Lecture de Flesch 81,9 (Facile) — Niveau Scolaire 4,8"
+            },
+            {
+              "calculation": "Une seule phrase de 22 mots au vocabulaire académique dense",
+              "result": "Facilité de Lecture de Flesch −92,4 (Très Confus) — Niveau Scolaire 31,6"
+            }
           ]
         },
         "faq": {
           "title": "Questions Fréquentes",
           "items": [
-            { "question": "Pourquoi ai-je obtenu un score de Facilité de Lecture de Flesch négatif ?", "answer": "La formule n'a pas de plancher intégré — des phrases extrêmement longues truffées de mots à plusieurs syllabes peuvent faire passer le score sous zéro. Un score négatif signifie simplement que le texte est plus difficile que la catégorie déjà la plus difficile de l'échelle (« très confus »), qui commence en dessous de 30." },
-            { "question": "Cet outil peut-il évaluer un texte en français, en arabe ou dans d'autres langues ?", "answer": "Pas de manière significative. Les deux formules ont été construites à partir d'études sur du texte anglais et reposent sur une heuristique de comptage de syllabes spécifique à l'anglais ; faire passer du texte non anglais dans ces formules produit donc un nombre, mais pas un nombre qui reflète la difficulté de lecture réelle dans cette langue. Des formules de lisibilité dédiées existent pour certaines autres langues, mais cet outil ne les met pas en œuvre." },
-            { "question": "Pourquoi la Facilité de Lecture de Flesch et le Niveau Scolaire Flesch-Kincaid semblent-ils parfois se contredire ?", "answer": "Elles reposent sur les deux mêmes mesures (mots par phrase, syllabes par mot) mais sont mises à l'échelle différemment — l'une sur une échelle de facilité de 0 à 100 où plus haut signifie plus facile, l'autre sur l'échelle des niveaux scolaires américains où plus haut signifie plus difficile. Elles devraient toujours évoluer dans des directions opposées ; si un passage semble « facile » sur l'une et affiche un niveau scolaire élevé sur l'autre, vérifiez que le texte contient assez de phrases complètes pour un comptage de phrases précis." },
-            { "question": "Un score de niveau scolaire bas signifie-t-il que l'écriture est mauvaise ?", "answer": "Non — le niveau scolaire mesure l'accessibilité, pas la qualité. De nombreux guides de style reconnus pour la rédaction technique, la communication gouvernementale et le journalisme recommandent spécifiquement des phrases plus courtes et des mots plus simples pour maintenir un niveau scolaire bas, car cela rend le texte plus rapidement compréhensible pour davantage de lecteurs, indépendamment du talent de l'auteur ou de la sophistication du sujet." },
-            { "question": "Comment fonctionne le compteur de syllabes, et est-il parfaitement précis ?", "answer": "Il compte les groupes de lettres voyelles adjacentes comme des syllabes, avec un ajustement pour le « e » final muet (comme dans « make ») et les terminaisons syllabiques en « -le » (comme dans « simple »). Cette approche fondée sur les groupes de voyelles est la même que celle utilisée dans les recherches originales de Flesch et Kincaid et dans la plupart des outils de lisibilité, mais ce n'est pas une analyse phonétique complète, donc les mots inhabituels ou d'origine étrangère peuvent occasionnellement être décomptés à une syllabe près." }
+            {
+              "question": "Pourquoi ai-je obtenu un score de Facilité de Lecture de Flesch négatif ?",
+              "answer": "La formule n'a pas de plancher intégré — des phrases extrêmement longues truffées de mots à plusieurs syllabes peuvent faire passer le score sous zéro. Un score négatif signifie simplement que le texte est plus difficile que la catégorie déjà la plus difficile de l'échelle (« très confus »), qui commence en dessous de 30."
+            },
+            {
+              "question": "Cet outil peut-il évaluer un texte en français, en arabe ou dans d'autres langues ?",
+              "answer": "Pas de manière significative. Les deux formules ont été construites à partir d'études sur du texte anglais et reposent sur une heuristique de comptage de syllabes spécifique à l'anglais ; faire passer du texte non anglais dans ces formules produit donc un nombre, mais pas un nombre qui reflète la difficulté de lecture réelle dans cette langue. Des formules de lisibilité dédiées existent pour certaines autres langues, mais cet outil ne les met pas en œuvre."
+            },
+            {
+              "question": "Pourquoi la Facilité de Lecture de Flesch et le Niveau Scolaire Flesch-Kincaid semblent-ils parfois se contredire ?",
+              "answer": "Elles reposent sur les deux mêmes mesures (mots par phrase, syllabes par mot) mais sont mises à l'échelle différemment — l'une sur une échelle de facilité de 0 à 100 où plus haut signifie plus facile, l'autre sur l'échelle des niveaux scolaires américains où plus haut signifie plus difficile. Elles devraient toujours évoluer dans des directions opposées ; si un passage semble « facile » sur l'une et affiche un niveau scolaire élevé sur l'autre, vérifiez que le texte contient assez de phrases complètes pour un comptage de phrases précis."
+            },
+            {
+              "question": "Un score de niveau scolaire bas signifie-t-il que l'écriture est mauvaise ?",
+              "answer": "Non — le niveau scolaire mesure l'accessibilité, pas la qualité. De nombreux guides de style reconnus pour la rédaction technique, la communication gouvernementale et le journalisme recommandent spécifiquement des phrases plus courtes et des mots plus simples pour maintenir un niveau scolaire bas, car cela rend le texte plus rapidement compréhensible pour davantage de lecteurs, indépendamment du talent de l'auteur ou de la sophistication du sujet."
+            },
+            {
+              "question": "Comment fonctionne le compteur de syllabes, et est-il parfaitement précis ?",
+              "answer": "Il compte les groupes de lettres voyelles adjacentes comme des syllabes, avec un ajustement pour le « e » final muet (comme dans « make ») et les terminaisons syllabiques en « -le » (comme dans « simple »). Cette approche fondée sur les groupes de voyelles est la même que celle utilisée dans les recherches originales de Flesch et Kincaid et dans la plupart des outils de lisibilité, mais ce n'est pas une analyse phonétique complète, donc les mots inhabituels ou d'origine étrangère peuvent occasionnellement être décomptés à une syllabe près."
+            }
           ]
         },
         "behindTheTool": {
@@ -6402,12 +7176,42 @@
             "title": "Parcours Académique",
             "intro": "La lisibilité se situe à la croisée de la linguistique et de l'enseignement des langues. Voici les 5 meilleures universités au monde en Linguistique selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional de premier plan :",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://linguistics.mit.edu/graduate/", "online": "Non — le programme est un programme de recherche à temps plein et en présentiel, sans filière en ligne annoncée." },
-              { "name": "Université de Pékin", "note": "Classée #2 mondiale en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://isd.pku.edu.cn/en/graduate_program.php", "online": "Non — les admissions en cycle supérieur pour étudiants internationaux sont gérées par la Division des étudiants internationaux de l'Université de Pékin, sans option d'études à distance annoncée pour les diplômes de recherche." },
-              { "name": "Lancaster University", "note": "Classée #3 mondiale en Linguistique (QS World University Rankings by Subject 2025), siège du plus grand département de linguistique du Royaume-Uni.", "url": "https://www.lancaster.ac.uk/linguistics/phd/", "online": "Partiellement — les modules obligatoires de méthodologie de recherche de première année sont enseignés à distance, mais le doctorat est par ailleurs un programme de recherche exigeant une résidence." },
-              { "name": "University of Cambridge", "note": "Classée #4 mondiale en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng", "online": "Non — le doctorat en Linguistique Théorique et Appliquée est un programme de recherche en présentiel au sein du département." },
-              { "name": "University of Oxford", "note": "Classée #5 mondiale en Linguistique (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics", "online": "Non — le DPhil d'Oxford exige une période minimale de résidence de recherche à Oxford." },
-              { "name": "Université du Qatar — Département de Littérature Anglaise et de Linguistique", "note": "Organise la conférence récurrente « Linguistics in the Gulf » ; non classé séparément dans ce tableau mondial par discipline, mais le département dédié à l'anglais et à la linguistique le plus en vue parmi les universités de la région arabe.", "url": "http://www.qu.edu.qa/artssciences/departments/dell-home", "online": "Non — les programmes du département sont dispensés sur le campus de l'Université du Qatar." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé #1 mondial en Linguistique (QS World University Rankings by Subject 2025).",
+                "url": "https://linguistics.mit.edu/graduate/",
+                "online": "Non — le programme est un programme de recherche à temps plein et en présentiel, sans filière en ligne annoncée."
+              },
+              {
+                "name": "Université de Pékin",
+                "note": "Classée #2 mondiale en Linguistique (QS World University Rankings by Subject 2025).",
+                "url": "https://isd.pku.edu.cn/en/graduate_program.php",
+                "online": "Non — les admissions en cycle supérieur pour étudiants internationaux sont gérées par la Division des étudiants internationaux de l'Université de Pékin, sans option d'études à distance annoncée pour les diplômes de recherche."
+              },
+              {
+                "name": "Lancaster University",
+                "note": "Classée #3 mondiale en Linguistique (QS World University Rankings by Subject 2025), siège du plus grand département de linguistique du Royaume-Uni.",
+                "url": "https://www.lancaster.ac.uk/linguistics/phd/",
+                "online": "Partiellement — les modules obligatoires de méthodologie de recherche de première année sont enseignés à distance, mais le doctorat est par ailleurs un programme de recherche exigeant une résidence."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée #4 mondiale en Linguistique (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng",
+                "online": "Non — le doctorat en Linguistique Théorique et Appliquée est un programme de recherche en présentiel au sein du département."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée #5 mondiale en Linguistique (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics",
+                "online": "Non — le DPhil d'Oxford exige une période minimale de résidence de recherche à Oxford."
+              },
+              {
+                "name": "Université du Qatar — Département de Littérature Anglaise et de Linguistique",
+                "note": "Organise la conférence récurrente « Linguistics in the Gulf » ; non classé séparément dans ce tableau mondial par discipline, mais le département dédié à l'anglais et à la linguistique le plus en vue parmi les universités de la région arabe.",
+                "url": "http://www.qu.edu.qa/artssciences/departments/dell-home",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'Université du Qatar."
+              }
             ]
           }
         },
@@ -6484,19 +7288,43 @@
           "columnCalculation": "Séance",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "30 minutes disponibles", "result": "1 pomodoro + 1 pause courte — 0 minute non planifiée" },
-            { "calculation": "130 minutes disponibles", "result": "4 pomodoros, 3 pauses courtes, 1 pause longue — 0 minute non planifiée" },
-            { "calculation": "100 minutes disponibles", "result": "3 pomodoros, 2 pauses courtes — 10 minutes non planifiées (insuffisant pour un 4e intervalle)" }
+            {
+              "calculation": "30 minutes disponibles",
+              "result": "1 pomodoro + 1 pause courte — 0 minute non planifiée"
+            },
+            {
+              "calculation": "130 minutes disponibles",
+              "result": "4 pomodoros, 3 pauses courtes, 1 pause longue — 0 minute non planifiée"
+            },
+            {
+              "calculation": "100 minutes disponibles",
+              "result": "3 pomodoros, 2 pauses courtes — 10 minutes non planifiées (insuffisant pour un 4e intervalle)"
+            }
           ]
         },
         "faq": {
           "title": "Questions Fréquentes",
           "items": [
-            { "question": "Pourquoi mon dernier pomodoro n'a-t-il parfois pas de pause après lui ?", "answer": "Une pause n'est planifiée que si elle tient entièrement dans le temps restant après l'intervalle de travail. S'il ne reste que quelques minutes — moins que la durée de pause configurée —, le calculateur conserve le pomodoro que vous avez déjà terminé, mais ne planifie pas de pause qui ne tiendrait pas, et indique plutôt ces minutes comme temps non planifié." },
-            { "question": "Devrais-je toujours utiliser l'intervalle traditionnel de 25 minutes ?", "answer": "Pas nécessairement — 25 minutes est simplement l'intervalle retenu par Francesco Cirillo lorsqu'il a créé la technique, pas une loi universelle de l'attention. Beaucoup de gens ajustent l'intervalle de travail selon la tâche : des intervalles plus courts pour les tâches faciles à interrompre et reprendre, plus longs (45 à 50 minutes) pour un travail profond qui demande du temps pour s'y plonger." },
-            { "question": "Pourquoi prendre une pause plus longue après plusieurs pomodoros plutôt que de simplement répéter des pauses courtes ?", "answer": "L'idée est que les pauses courtes récupèrent l'attention au sein d'une même séance de travail, tandis que la pause plus longue marque un point de récupération plus important après un effort soutenu — dans un esprit similaire à des recherches sur des ratios de 52 minutes de travail pour 17 minutes de pause chez les travailleurs très productifs, qui ont également constaté que des périodes de récupération plus longues et occasionnelles, et pas seulement des pauses courtes fréquentes, étaient associées à une productivité soutenue." },
-            { "question": "Que devrais-je faire réellement pendant une pause courte ?", "answer": "Le conseil traditionnel de la technique est de véritablement s'éloigner du travail — se lever, s'étirer, boire de l'eau — plutôt que de consulter des messages ou de passer à un autre écran, car une pause passée sur un autre type de tâche à l'écran ne donne pas à l'attention la même chance de récupérer avant l'intervalle de travail suivant." },
-            { "question": "Puis-je utiliser cet outil pour autre chose que l'étude, comme des tâches de travail concentré ?", "answer": "Oui — la technique et ce calculateur sont indépendants du type de tâche. Cirillo l'a initialement développée pour ses propres études universitaires, mais elle a depuis été largement adoptée pour la programmation, l'écriture et d'autres travaux qui bénéficient de blocs de concentration protégés et délimités par une minuterie." }
+            {
+              "question": "Pourquoi mon dernier pomodoro n'a-t-il parfois pas de pause après lui ?",
+              "answer": "Une pause n'est planifiée que si elle tient entièrement dans le temps restant après l'intervalle de travail. S'il ne reste que quelques minutes — moins que la durée de pause configurée —, le calculateur conserve le pomodoro que vous avez déjà terminé, mais ne planifie pas de pause qui ne tiendrait pas, et indique plutôt ces minutes comme temps non planifié."
+            },
+            {
+              "question": "Devrais-je toujours utiliser l'intervalle traditionnel de 25 minutes ?",
+              "answer": "Pas nécessairement — 25 minutes est simplement l'intervalle retenu par Francesco Cirillo lorsqu'il a créé la technique, pas une loi universelle de l'attention. Beaucoup de gens ajustent l'intervalle de travail selon la tâche : des intervalles plus courts pour les tâches faciles à interrompre et reprendre, plus longs (45 à 50 minutes) pour un travail profond qui demande du temps pour s'y plonger."
+            },
+            {
+              "question": "Pourquoi prendre une pause plus longue après plusieurs pomodoros plutôt que de simplement répéter des pauses courtes ?",
+              "answer": "L'idée est que les pauses courtes récupèrent l'attention au sein d'une même séance de travail, tandis que la pause plus longue marque un point de récupération plus important après un effort soutenu — dans un esprit similaire à des recherches sur des ratios de 52 minutes de travail pour 17 minutes de pause chez les travailleurs très productifs, qui ont également constaté que des périodes de récupération plus longues et occasionnelles, et pas seulement des pauses courtes fréquentes, étaient associées à une productivité soutenue."
+            },
+            {
+              "question": "Que devrais-je faire réellement pendant une pause courte ?",
+              "answer": "Le conseil traditionnel de la technique est de véritablement s'éloigner du travail — se lever, s'étirer, boire de l'eau — plutôt que de consulter des messages ou de passer à un autre écran, car une pause passée sur un autre type de tâche à l'écran ne donne pas à l'attention la même chance de récupérer avant l'intervalle de travail suivant."
+            },
+            {
+              "question": "Puis-je utiliser cet outil pour autre chose que l'étude, comme des tâches de travail concentré ?",
+              "answer": "Oui — la technique et ce calculateur sont indépendants du type de tâche. Cirillo l'a initialement développée pour ses propres études universitaires, mais elle a depuis été largement adoptée pour la programmation, l'écriture et d'autres travaux qui bénéficient de blocs de concentration protégés et délimités par une minuterie."
+            }
           ]
         },
         "behindTheTool": {
@@ -6513,12 +7341,42 @@
             "title": "Parcours Académique",
             "intro": "La gestion du temps et les techniques d'étude relèvent du champ plus large de la recherche en éducation. Voici les 5 meilleures universités au monde en Éducation et Formation selon le classement QS World University Rankings by Subject 2025, ainsi qu'une faculté régionale de premier plan :",
             "universities": [
-              { "name": "University College London (UCL)", "note": "Classé #1 mondial en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd", "online": "Partiellement — l'Institute of Education de l'UCL propose ce programme doctoral à la fois en présentiel et entièrement en ligne." },
-              { "name": "Université Harvard", "note": "Classée #2 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://www.gse.harvard.edu/degrees/phd", "online": "Non — l'admission se fait via la Griffin Graduate School of Arts and Sciences pour un doctorat de recherche en présentiel." },
-              { "name": "Université de Hong Kong", "note": "Classée #3 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://web.edu.hku.hk/programme/mphil-phd", "online": "Non — une modalité à temps partiel existe en plus du temps plein, mais aucune option d'études à distance n'est annoncée." },
-              { "name": "Université Stanford", "note": "Classée #4 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://ed.stanford.edu/academics/doctoral", "online": "Non — les nouveaux doctorants sont financés pour un programme de recherche en présentiel de plusieurs années." },
-              { "name": "Université de Cambridge", "note": "Classée #5 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).", "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/", "online": "Non — le doctorat est un diplôme de recherche en présentiel (le programme professionnel EdD à temps partiel de Cambridge, distinct, est plutôt organisé autour de week-ends résidentiels périodiques)." },
-              { "name": "Université Roi Saoud — Décanat des Études Supérieures", "note": "Abrite l'une des plus anciennes facultés d'éducation du Golfe, rattachée à l'université en 1965 ; non classée séparément dans ce tableau mondial par discipline.", "url": "https://graduatestudies.ksu.edu.sa/en/node/621", "online": "Non — les admissions en cycle supérieur sont gérées de façon centralisée par le Décanat des Études Supérieures, fondé en 1973, sans option d'études à distance annoncée." }
+              {
+                "name": "University College London (UCL)",
+                "note": "Classé #1 mondial en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd",
+                "online": "Partiellement — l'Institute of Education de l'UCL propose ce programme doctoral à la fois en présentiel et entièrement en ligne."
+              },
+              {
+                "name": "Université Harvard",
+                "note": "Classée #2 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gse.harvard.edu/degrees/phd",
+                "online": "Non — l'admission se fait via la Griffin Graduate School of Arts and Sciences pour un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Hong Kong",
+                "note": "Classée #3 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://web.edu.hku.hk/programme/mphil-phd",
+                "online": "Non — une modalité à temps partiel existe en plus du temps plein, mais aucune option d'études à distance n'est annoncée."
+              },
+              {
+                "name": "Université Stanford",
+                "note": "Classée #4 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://ed.stanford.edu/academics/doctoral",
+                "online": "Non — les nouveaux doctorants sont financés pour un programme de recherche en présentiel de plusieurs années."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "Classée #5 mondiale en Éducation et Formation (QS World University Rankings by Subject 2025).",
+                "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/",
+                "online": "Non — le doctorat est un diplôme de recherche en présentiel (le programme professionnel EdD à temps partiel de Cambridge, distinct, est plutôt organisé autour de week-ends résidentiels périodiques)."
+              },
+              {
+                "name": "Université Roi Saoud — Décanat des Études Supérieures",
+                "note": "Abrite l'une des plus anciennes facultés d'éducation du Golfe, rattachée à l'université en 1965 ; non classée séparément dans ce tableau mondial par discipline.",
+                "url": "https://graduatestudies.ksu.edu.sa/en/node/621",
+                "online": "Non — les admissions en cycle supérieur sont gérées de façon centralisée par le Décanat des Études Supérieures, fondé en 1973, sans option d'études à distance annoncée."
+              }
             ]
           }
         },
@@ -6544,10 +7402,22 @@
           "title": "Formules Vectorielles",
           "intro": "Les formules fondamentales appliquées par ce calculateur.",
           "formulas": {
-            "magnitude": { "label": "Norme", "expression": "|A| = √(ax² + ay² + az²)" },
-            "dotProduct": { "label": "Produit Scalaire", "expression": "A·B = axbx + ayby + azbz" },
-            "crossProduct": { "label": "Produit Vectoriel", "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)" },
-            "angle": { "label": "Angle Entre les Deux", "expression": "θ = cos⁻¹(A·B / (|A||B|))" }
+            "magnitude": {
+              "label": "Norme",
+              "expression": "|A| = √(ax² + ay² + az²)"
+            },
+            "dotProduct": {
+              "label": "Produit Scalaire",
+              "expression": "A·B = axbx + ayby + azbz"
+            },
+            "crossProduct": {
+              "label": "Produit Vectoriel",
+              "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)"
+            },
+            "angle": {
+              "label": "Angle Entre les Deux",
+              "expression": "θ = cos⁻¹(A·B / (|A||B|))"
+            }
           }
         }
       },
@@ -6588,20 +7458,47 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "Norme de (3, 4, 0)", "result": "|A| = 5" },
-            { "calculation": "Produit scalaire de (1, 2, 3) et (4, 5, 6)", "result": "A·B = 32" },
-            { "calculation": "Produit vectoriel de (1, 0, 0) et (0, 1, 0)", "result": "A×B = (0, 0, 1)" },
-            { "calculation": "Angle entre (1, 0, 0) et (0, 1, 0)", "result": "θ = 90°" }
+            {
+              "calculation": "Norme de (3, 4, 0)",
+              "result": "|A| = 5"
+            },
+            {
+              "calculation": "Produit scalaire de (1, 2, 3) et (4, 5, 6)",
+              "result": "A·B = 32"
+            },
+            {
+              "calculation": "Produit vectoriel de (1, 0, 0) et (0, 1, 0)",
+              "result": "A×B = (0, 0, 1)"
+            },
+            {
+              "calculation": "Angle entre (1, 0, 0) et (0, 1, 0)",
+              "result": "θ = 90°"
+            }
           ]
         },
         "faq": {
           "title": "Questions Fréquentes",
           "items": [
-            { "question": "Quelle est la différence entre le produit scalaire et le produit vectoriel ?", "answer": "Le produit scalaire renvoie un seul nombre (un scalaire) qui mesure à quel point deux vecteurs pointent dans la même direction, tandis que le produit vectoriel renvoie un tout nouveau vecteur, perpendiculaire aux deux entrées, dont la longueur est égale à l'aire du parallélogramme délimité par les deux vecteurs d'origine. Ils se comportent aussi différemment en deux dimensions — le produit scalaire garde son sens, mais le produit vectoriel a besoin de trois dimensions pour pointer quelque part ; en posant z = 0 pour des vecteurs 2D, le produit vectoriel ressort purement le long de l'axe z." },
-            { "question": "Pourquoi l'angle entre deux vecteurs est-il indéfini lorsque l'un d'eux est un vecteur nul ?", "answer": "La formule de l'angle, θ = cos⁻¹(A·B / (|A||B|)), divise par les normes des deux vecteurs. Un vecteur nul a une norme nulle et aucune direction définie — il ne pointe nulle part en particulier — il n'y a donc aucun angle significatif à mesurer par rapport à lui, et le calculateur le signale plutôt que de diviser par zéro." },
-            { "question": "Puis-je utiliser ce calculateur pour des vecteurs 2D ?", "answer": "Oui — saisissez 0 pour les deux composantes z (la valeur par défaut). Chaque opération fonctionne toujours correctement : le produit vectoriel de deux vecteurs 2D n'a mathématiquement qu'une composante z, ce qui est exactement ce que renvoie ce calculateur, et cela correspond à l'aire signée du parallélogramme délimité par les deux vecteurs." },
-            { "question": "Pourquoi le produit vectoriel dépend-il de l'ordre des vecteurs ?", "answer": "A×B et B×A pointent dans des directions exactement opposées (A×B = −(B×A)) parce que le produit vectoriel encode un sens de rotation spécifique — de A vers B, selon la règle de la main droite — plutôt qu'une relation symétrique entre les deux vecteurs comme c'est le cas pour le produit scalaire." },
-            { "question": "À quoi sert réellement un vecteur unitaire ?", "answer": "Un vecteur unitaire isole la direction pure de la norme, ce qui est utile chaque fois qu'une formule a besoin de savoir « dans quelle direction » sans se soucier de la longueur — par exemple pour exprimer la direction d'une force indépendamment de son intensité, ou pour construire un rayon directionnel en infographie qui sera ensuite mis à l'échelle par une valeur de distance ou de vitesse distincte." }
+            {
+              "question": "Quelle est la différence entre le produit scalaire et le produit vectoriel ?",
+              "answer": "Le produit scalaire renvoie un seul nombre (un scalaire) qui mesure à quel point deux vecteurs pointent dans la même direction, tandis que le produit vectoriel renvoie un tout nouveau vecteur, perpendiculaire aux deux entrées, dont la longueur est égale à l'aire du parallélogramme délimité par les deux vecteurs d'origine. Ils se comportent aussi différemment en deux dimensions — le produit scalaire garde son sens, mais le produit vectoriel a besoin de trois dimensions pour pointer quelque part ; en posant z = 0 pour des vecteurs 2D, le produit vectoriel ressort purement le long de l'axe z."
+            },
+            {
+              "question": "Pourquoi l'angle entre deux vecteurs est-il indéfini lorsque l'un d'eux est un vecteur nul ?",
+              "answer": "La formule de l'angle, θ = cos⁻¹(A·B / (|A||B|)), divise par les normes des deux vecteurs. Un vecteur nul a une norme nulle et aucune direction définie — il ne pointe nulle part en particulier — il n'y a donc aucun angle significatif à mesurer par rapport à lui, et le calculateur le signale plutôt que de diviser par zéro."
+            },
+            {
+              "question": "Puis-je utiliser ce calculateur pour des vecteurs 2D ?",
+              "answer": "Oui — saisissez 0 pour les deux composantes z (la valeur par défaut). Chaque opération fonctionne toujours correctement : le produit vectoriel de deux vecteurs 2D n'a mathématiquement qu'une composante z, ce qui est exactement ce que renvoie ce calculateur, et cela correspond à l'aire signée du parallélogramme délimité par les deux vecteurs."
+            },
+            {
+              "question": "Pourquoi le produit vectoriel dépend-il de l'ordre des vecteurs ?",
+              "answer": "A×B et B×A pointent dans des directions exactement opposées (A×B = −(B×A)) parce que le produit vectoriel encode un sens de rotation spécifique — de A vers B, selon la règle de la main droite — plutôt qu'une relation symétrique entre les deux vecteurs comme c'est le cas pour le produit scalaire."
+            },
+            {
+              "question": "À quoi sert réellement un vecteur unitaire ?",
+              "answer": "Un vecteur unitaire isole la direction pure de la norme, ce qui est utile chaque fois qu'une formule a besoin de savoir « dans quelle direction » sans se soucier de la longueur — par exemple pour exprimer la direction d'une force indépendamment de son intensité, ou pour construire un rayon directionnel en infographie qui sera ensuite mis à l'échelle par une valeur de distance ou de vitesse distincte."
+            }
           ]
         },
         "behindTheTool": {
@@ -6618,12 +7515,42 @@
             "title": "Parcours Académique",
             "intro": "Les vecteurs sont fondamentaux aussi bien en mathématiques qu'en physique. Voici les 5 meilleures universités au monde en Mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un programme régional de premier plan en mathématiques appliquées :",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "Non — le MIT n'admet des doctorants que pour des études sur le campus, sans filière de master ni en ligne." },
-              { "name": "Université Harvard", "note": "Classée #2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel, administré par la Griffin Graduate School of Arts and Sciences." },
-              { "name": "Université d'Oxford", "note": "Classée #3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "Non — le DPhil est un diplôme de recherche sur le campus, généralement achevé en trois à quatre ans." },
-              { "name": "Université de Cambridge", "note": "Classée #4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "Non — le doctorat est un programme de recherche en présentiel de trois ans dirigé par la Faculté de Mathématiques." },
-              { "name": "Université Stanford", "note": "Classée #5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige des doctorants une présence physique significative sur le campus." },
-              { "name": "King Abdullah University of Science and Technology (KAUST) — Mathématiques Appliquées et Sciences Computationnelles (AMCS)", "note": "Un programme de recherche spécialisé en mathématiques appliquées parmi les universités de la région arabe ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://amcs.kaust.edu.sa/", "online": "Non — le doctorat exige 72 crédits et un examen de qualification en présentiel sur le campus de KAUST." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé #1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le MIT n'admet des doctorants que pour des études sur le campus, sans filière de master ni en ligne."
+              },
+              {
+                "name": "Université Harvard",
+                "note": "Classée #2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le programme est un doctorat de recherche en présentiel, administré par la Griffin Graduate School of Arts and Sciences."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "Classée #3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un diplôme de recherche sur le campus, généralement achevé en trois à quatre ans."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "Classée #4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics",
+                "online": "Non — le doctorat est un programme de recherche en présentiel de trois ans dirigé par la Faculté de Mathématiques."
+              },
+              {
+                "name": "Université Stanford",
+                "note": "Classée #5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige des doctorants une présence physique significative sur le campus."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — Mathématiques Appliquées et Sciences Computationnelles (AMCS)",
+                "note": "Un programme de recherche spécialisé en mathématiques appliquées parmi les universités de la région arabe ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://amcs.kaust.edu.sa/",
+                "online": "Non — le doctorat exige 72 crédits et un examen de qualification en présentiel sur le campus de KAUST."
+              }
             ]
           }
         },
@@ -6649,9 +7576,18 @@
           "title": "Formules Matricielles",
           "intro": "Les formules fondamentales appliquées par ce calculateur aux matrices 2×2.",
           "formulas": {
-            "determinant": { "label": "Déterminant", "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁" },
-            "inverse": { "label": "Inverse", "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]" },
-            "product": { "label": "Produit Matriciel", "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ" }
+            "determinant": {
+              "label": "Déterminant",
+              "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁"
+            },
+            "inverse": {
+              "label": "Inverse",
+              "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]"
+            },
+            "product": {
+              "label": "Produit Matriciel",
+              "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ"
+            }
           }
         }
       },
@@ -6684,20 +7620,47 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "Déterminant de [1 2; 3 4]", "result": "det(A) = −2" },
-            { "calculation": "Produit de [1 2; 3 4] et [5 6; 7 8]", "result": "A×B = [19 22; 43 50]" },
-            { "calculation": "Inverse de [4 7; 2 6]", "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]" },
-            { "calculation": "Transposée de [1 2; 3 4]", "result": "Aᵀ = [1 3; 2 4]" }
+            {
+              "calculation": "Déterminant de [1 2; 3 4]",
+              "result": "det(A) = −2"
+            },
+            {
+              "calculation": "Produit de [1 2; 3 4] et [5 6; 7 8]",
+              "result": "A×B = [19 22; 43 50]"
+            },
+            {
+              "calculation": "Inverse de [4 7; 2 6]",
+              "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]"
+            },
+            {
+              "calculation": "Transposée de [1 2; 3 4]",
+              "result": "Aᵀ = [1 3; 2 4]"
+            }
           ]
         },
         "faq": {
           "title": "Questions Fréquentes",
           "items": [
-            { "question": "Pourquoi A×B n'est-il pas égal à B×A dans la multiplication matricielle ?", "answer": "Parce que la multiplication matricielle combine des lignes entières d'une matrice avec des colonnes entières de l'autre, les deux ordres calculent en réalité des sommes différentes — rien n'impose que ligne-fois-colonne dans un ordre corresponde à ligne-fois-colonne dans l'autre. Cela rend la multiplication matricielle non commutative, contrairement à la multiplication de nombres ordinaires, et c'est l'une des premières propriétés surprenantes que rencontrent les étudiants en apprenant l'algèbre matricielle." },
-            { "question": "Pourquoi une matrice de déterminant nul n'a-t-elle pas d'inverse ?", "answer": "Le déterminant mesure à quel point une matrice met à l'échelle une aire (en 2D) ou un volume (en dimensions supérieures). Un déterminant de 0 signifie que la matrice fait s'effondrer chaque entrée sur une droite ou un point de dimension inférieure — plusieurs entrées différentes sont associées à la même sortie —, il n'y a donc aucun moyen d'inverser cet effondrement et de retrouver l'entrée d'origine de façon unique. Une telle matrice est dite singulière, et la formule de l'inverse exigerait de diviser par ce déterminant nul, ce qui est indéfini." },
-            { "question": "Quelle est la différence entre la transposée et l'inverse ?", "answer": "La transposée est purement un réarrangement — elle retourne la matrice le long de sa diagonale, échangeant lignes et colonnes — et elle est toujours définie pour toute matrice, sans aucun calcul au-delà du repositionnement des éléments. L'inverse, en revanche, est la matrice qui annule entièrement la transformation de A (A×A⁻¹ = identité), nécessite une division par le déterminant, et n'existe tout simplement pas lorsque ce déterminant est nul." },
-            { "question": "Ce calculateur peut-il traiter des matrices plus grandes que 2×2 ?", "answer": "Pas actuellement — il est conçu spécifiquement pour les matrices 2×2, ce qui permet à chaque formule (déterminant, inverse, produit) de rester une expression courte et exacte. Les matrices plus grandes utilisent les mêmes concepts sous-jacents, mais calculer un déterminant ou une inverse pour une matrice 3×3 ou plus grande nécessite des méthodes nettement plus élaborées (développement par cofacteurs, réduction en lignes, ou algorithmes numériques)." },
-            { "question": "Pourquoi l'addition matricielle est-elle tellement plus simple que la multiplication matricielle ?", "answer": "L'addition combine deux matrices de la même manière que l'on additionnerait deux grilles ordinaires de nombres — position par position, sans aucune interaction entre lignes ou colonnes différentes. La multiplication, elle, est conçue pour représenter la composition de deux transformations (en appliquer une après l'autre), et cette composition mélange intrinsèquement chaque ligne d'une matrice avec chaque colonne de l'autre, ce qui explique pourquoi elle nécessite le calcul plus élaboré ligne-fois-colonne." }
+            {
+              "question": "Pourquoi A×B n'est-il pas égal à B×A dans la multiplication matricielle ?",
+              "answer": "Parce que la multiplication matricielle combine des lignes entières d'une matrice avec des colonnes entières de l'autre, les deux ordres calculent en réalité des sommes différentes — rien n'impose que ligne-fois-colonne dans un ordre corresponde à ligne-fois-colonne dans l'autre. Cela rend la multiplication matricielle non commutative, contrairement à la multiplication de nombres ordinaires, et c'est l'une des premières propriétés surprenantes que rencontrent les étudiants en apprenant l'algèbre matricielle."
+            },
+            {
+              "question": "Pourquoi une matrice de déterminant nul n'a-t-elle pas d'inverse ?",
+              "answer": "Le déterminant mesure à quel point une matrice met à l'échelle une aire (en 2D) ou un volume (en dimensions supérieures). Un déterminant de 0 signifie que la matrice fait s'effondrer chaque entrée sur une droite ou un point de dimension inférieure — plusieurs entrées différentes sont associées à la même sortie —, il n'y a donc aucun moyen d'inverser cet effondrement et de retrouver l'entrée d'origine de façon unique. Une telle matrice est dite singulière, et la formule de l'inverse exigerait de diviser par ce déterminant nul, ce qui est indéfini."
+            },
+            {
+              "question": "Quelle est la différence entre la transposée et l'inverse ?",
+              "answer": "La transposée est purement un réarrangement — elle retourne la matrice le long de sa diagonale, échangeant lignes et colonnes — et elle est toujours définie pour toute matrice, sans aucun calcul au-delà du repositionnement des éléments. L'inverse, en revanche, est la matrice qui annule entièrement la transformation de A (A×A⁻¹ = identité), nécessite une division par le déterminant, et n'existe tout simplement pas lorsque ce déterminant est nul."
+            },
+            {
+              "question": "Ce calculateur peut-il traiter des matrices plus grandes que 2×2 ?",
+              "answer": "Pas actuellement — il est conçu spécifiquement pour les matrices 2×2, ce qui permet à chaque formule (déterminant, inverse, produit) de rester une expression courte et exacte. Les matrices plus grandes utilisent les mêmes concepts sous-jacents, mais calculer un déterminant ou une inverse pour une matrice 3×3 ou plus grande nécessite des méthodes nettement plus élaborées (développement par cofacteurs, réduction en lignes, ou algorithmes numériques)."
+            },
+            {
+              "question": "Pourquoi l'addition matricielle est-elle tellement plus simple que la multiplication matricielle ?",
+              "answer": "L'addition combine deux matrices de la même manière que l'on additionnerait deux grilles ordinaires de nombres — position par position, sans aucune interaction entre lignes ou colonnes différentes. La multiplication, elle, est conçue pour représenter la composition de deux transformations (en appliquer une après l'autre), et cette composition mélange intrinsèquement chaque ligne d'une matrice avec chaque colonne de l'autre, ce qui explique pourquoi elle nécessite le calcul plus élaboré ligne-fois-colonne."
+            }
           ]
         },
         "behindTheTool": {
@@ -6714,12 +7677,42 @@
             "title": "Parcours Académique",
             "intro": "Les matrices sont un outil fondamental dans l'ensemble des mathématiques. Voici les 5 meilleures universités au monde en Mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un programme régional :",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "Non — le MIT n'admet des doctorants que pour des études sur le campus, sans filière de master ni en ligne." },
-              { "name": "Université Harvard", "note": "Classée #2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel, administré par la Griffin Graduate School of Arts and Sciences." },
-              { "name": "Université d'Oxford", "note": "Classée #3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "Non — le DPhil est un diplôme de recherche sur le campus, généralement achevé en trois à quatre ans." },
-              { "name": "Université de Cambridge", "note": "Classée #4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "Non — le doctorat est un programme de recherche en présentiel de trois ans dirigé par la Faculté de Mathématiques." },
-              { "name": "Université Stanford", "note": "Classée #5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige des doctorants une présence physique significative sur le campus." },
-              { "name": "Université Khalifa — Doctorat en Mathématiques", "note": "Un programme doctoral spécialisé en mathématiques parmi les universités de la région arabe, hébergé au sein du College of Computing and Mathematical Sciences ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://www.ku.ac.ae/program/phd-in-mathematics", "online": "Non — le programme de 60 crédits est dispensé sur le campus de l'Université Khalifa à Abou Dabi." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé #1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le MIT n'admet des doctorants que pour des études sur le campus, sans filière de master ni en ligne."
+              },
+              {
+                "name": "Université Harvard",
+                "note": "Classée #2 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le programme est un doctorat de recherche en présentiel, administré par la Griffin Graduate School of Arts and Sciences."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "Classée #3 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un diplôme de recherche sur le campus, généralement achevé en trois à quatre ans."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "Classée #4 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics",
+                "online": "Non — le doctorat est un programme de recherche en présentiel de trois ans dirigé par la Faculté de Mathématiques."
+              },
+              {
+                "name": "Université Stanford",
+                "note": "Classée #5 mondiale en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "Non — la politique de résidence des cycles supérieurs de Stanford exige des doctorants une présence physique significative sur le campus."
+              },
+              {
+                "name": "Université Khalifa — Doctorat en Mathématiques",
+                "note": "Un programme doctoral spécialisé en mathématiques parmi les universités de la région arabe, hébergé au sein du College of Computing and Mathematical Sciences ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.ku.ac.ae/program/phd-in-mathematics",
+                "online": "Non — le programme de 60 crédits est dispensé sur le campus de l'Université Khalifa à Abou Dabi."
+              }
             ]
           }
         },
@@ -6778,20 +7771,47 @@
           "columnCalculation": "Formule",
           "columnResult": "Masse Molaire",
           "rows": [
-            { "calculation": "H2O (eau)", "result": "18,015 g/mol" },
-            { "calculation": "NaCl (sel de table)", "result": "58,44 g/mol" },
-            { "calculation": "C6H12O6 (glucose)", "result": "180,156 g/mol" },
-            { "calculation": "CuSO4·5H2O (sulfate de cuivre pentahydraté)", "result": "249,677 g/mol" }
+            {
+              "calculation": "H2O (eau)",
+              "result": "18,015 g/mol"
+            },
+            {
+              "calculation": "NaCl (sel de table)",
+              "result": "58,44 g/mol"
+            },
+            {
+              "calculation": "C6H12O6 (glucose)",
+              "result": "180,156 g/mol"
+            },
+            {
+              "calculation": "CuSO4·5H2O (sulfate de cuivre pentahydraté)",
+              "result": "249,677 g/mol"
+            }
           ]
         },
         "faq": {
           "title": "Questions Fréquentes",
           "items": [
-            { "question": "Pourquoi la casse compte-t-elle lors de la saisie d'une formule ?", "answer": "Chaque symbole d'élément est exactement une lettre majuscule, éventuellement suivie d'une ou deux lettres minuscules — la casse est ce qui permet à l'analyseur de distinguer les éléments entre eux. « Co » est le cobalt, mais « CO » désigne deux éléments distincts, le carbone et l'oxygène, formant le monoxyde de carbone ; une casse incorrecte change le composé que vous décrivez réellement." },
-            { "question": "Comment ce calculateur gère-t-il les groupes entre parenthèses ou crochets ?", "answer": "Il lit tout ce qui se trouve à l'intérieur des parenthèses ou crochets comme sa propre sous-formule, puis multiplie le nombre de chaque élément de cette sous-formule par le nombre suivant immédiatement le crochet fermant (ou par 1 si aucun nombre ne suit). Dans Ca(OH)₂, cela signifie que l'oxygène unique et l'hydrogène unique à l'intérieur des parenthèses sont chacun comptés deux fois, soit un total de 2 atomes d'oxygène et 2 d'hydrogène." },
-            { "question": "Quelle est la différence entre masse molaire et poids moléculaire ?", "answer": "En pratique, pratiquement aucune pour la plupart des usages courants — les deux décrivent la même quantité (la masse d'une mole d'une substance), et sont généralement exprimés en grammes par mole. Les chimistes utilisent surtout « masse molaire » comme terme plus général et formellement correct (il s'applique aussi bien aux composés ioniques et aux solides en réseau qu'aux molécules discrètes), tandis que « poids moléculaire » est un terme plus ancien techniquement spécifique aux molécules réelles." },
-            { "question": "Pourquoi certaines masses atomiques sont-elles entre crochets ?", "answer": "Une valeur entre crochets, comme le [97] du technétium, n'est pas du tout une masse atomique standard — c'est le nombre de masse de l'isotope connu le plus stable de cet élément. Ces éléments n'ont pas d'isotopes stables, il n'existe donc pas de mélange naturel d'isotopes à moyenner en une masse atomique standard comme c'est le cas pour le chlore ou le carbone." },
-            { "question": "Ce calculateur peut-il traiter des formules avec plus d'un point d'hydrate ?", "answer": "Non — il prend en charge un seul séparateur d'hydrate (un point médian, une puce ou un point suivi d'un nombre), ce qui couvre la grande majorité des formules d'hydrates réelles comme CuSO₄·5H₂O ou MgSO₄·7H₂O. Les formules nécessitant plus d'un tel séparateur sont extrêmement rares et sortent du cadre de ce calculateur." }
+            {
+              "question": "Pourquoi la casse compte-t-elle lors de la saisie d'une formule ?",
+              "answer": "Chaque symbole d'élément est exactement une lettre majuscule, éventuellement suivie d'une ou deux lettres minuscules — la casse est ce qui permet à l'analyseur de distinguer les éléments entre eux. « Co » est le cobalt, mais « CO » désigne deux éléments distincts, le carbone et l'oxygène, formant le monoxyde de carbone ; une casse incorrecte change le composé que vous décrivez réellement."
+            },
+            {
+              "question": "Comment ce calculateur gère-t-il les groupes entre parenthèses ou crochets ?",
+              "answer": "Il lit tout ce qui se trouve à l'intérieur des parenthèses ou crochets comme sa propre sous-formule, puis multiplie le nombre de chaque élément de cette sous-formule par le nombre suivant immédiatement le crochet fermant (ou par 1 si aucun nombre ne suit). Dans Ca(OH)₂, cela signifie que l'oxygène unique et l'hydrogène unique à l'intérieur des parenthèses sont chacun comptés deux fois, soit un total de 2 atomes d'oxygène et 2 d'hydrogène."
+            },
+            {
+              "question": "Quelle est la différence entre masse molaire et poids moléculaire ?",
+              "answer": "En pratique, pratiquement aucune pour la plupart des usages courants — les deux décrivent la même quantité (la masse d'une mole d'une substance), et sont généralement exprimés en grammes par mole. Les chimistes utilisent surtout « masse molaire » comme terme plus général et formellement correct (il s'applique aussi bien aux composés ioniques et aux solides en réseau qu'aux molécules discrètes), tandis que « poids moléculaire » est un terme plus ancien techniquement spécifique aux molécules réelles."
+            },
+            {
+              "question": "Pourquoi certaines masses atomiques sont-elles entre crochets ?",
+              "answer": "Une valeur entre crochets, comme le [97] du technétium, n'est pas du tout une masse atomique standard — c'est le nombre de masse de l'isotope connu le plus stable de cet élément. Ces éléments n'ont pas d'isotopes stables, il n'existe donc pas de mélange naturel d'isotopes à moyenner en une masse atomique standard comme c'est le cas pour le chlore ou le carbone."
+            },
+            {
+              "question": "Ce calculateur peut-il traiter des formules avec plus d'un point d'hydrate ?",
+              "answer": "Non — il prend en charge un seul séparateur d'hydrate (un point médian, une puce ou un point suivi d'un nombre), ce qui couvre la grande majorité des formules d'hydrates réelles comme CuSO₄·5H₂O ou MgSO₄·7H₂O. Les formules nécessitant plus d'un tel séparateur sont extrêmement rares et sortent du cadre de ce calculateur."
+            }
           ]
         },
         "behindTheTool": {
@@ -6808,12 +7828,42 @@
             "title": "Parcours Académique",
             "intro": "Les calculs de masse molaire sont au cœur de la chimie quantitative. Voici les 5 meilleures universités au monde en Chimie selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
             "universities": [
-              { "name": "Université Harvard", "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel." },
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus." },
-              { "name": "Université de Cambridge", "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance." },
-              { "name": "Université Stanford", "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée." },
-              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines." },
-              { "name": "Université Roi Fahd du Pétrole et des Minéraux (KFUPM) — Département de Chimie", "note": "L'un des départements fondateurs de la KFUPM et l'un des départements de chimie les plus en vue d'Arabie saoudite, avec plus de 30 enseignants-chercheurs et plus de 3000 publications ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/", "online": "Non — les programmes de licence, master et doctorat sont dispensés sur le campus de la KFUPM." }
+              {
+                "name": "Université Harvard",
+                "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/",
+                "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch",
+                "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance."
+              },
+              {
+                "name": "Université Stanford",
+                "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines."
+              },
+              {
+                "name": "Université Roi Fahd du Pétrole et des Minéraux (KFUPM) — Département de Chimie",
+                "note": "L'un des départements fondateurs de la KFUPM et l'un des départements de chimie les plus en vue d'Arabie saoudite, avec plus de 30 enseignants-chercheurs et plus de 3000 publications ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/",
+                "online": "Non — les programmes de licence, master et doctorat sont dispensés sur le campus de la KFUPM."
+              }
             ]
           }
         },
@@ -6883,19 +7933,43 @@
           "columnCalculation": "Calcul",
           "columnResult": "Résultat",
           "rows": [
-            { "calculation": "4 g de H2 (coefficient 2) → grammes de H2O (coefficient 2)", "result": "35,744 g H2O" },
-            { "calculation": "2 mol de N2 (coefficient 1) → moles de NH3 (coefficient 2)", "result": "4 mol NH3" },
-            { "calculation": "32 g de O2 (coefficient 1) → moles de H2 (coefficient 2)", "result": "2,0001 mol H2" }
+            {
+              "calculation": "4 g de H2 (coefficient 2) → grammes de H2O (coefficient 2)",
+              "result": "35,744 g H2O"
+            },
+            {
+              "calculation": "2 mol de N2 (coefficient 1) → moles de NH3 (coefficient 2)",
+              "result": "4 mol NH3"
+            },
+            {
+              "calculation": "32 g de O2 (coefficient 1) → moles de H2 (coefficient 2)",
+              "result": "2,0001 mol H2"
+            }
           ]
         },
         "faq": {
           "title": "Questions Fréquentes",
           "items": [
-            { "question": "Pourquoi dois-je saisir les coefficients moi-même plutôt que l'équation complète ?", "answer": "Analyser et équilibrer correctement une équation chimique arbitraire est un problème nettement plus difficile qu'appliquer un rapport une fois les coefficients déjà connus — ce calculateur se concentre spécifiquement sur l'étape de conversion par rapport molaire. Si vous n'avez pas encore d'équation équilibrée, l'Équilibreur d'Équations Chimiques de ce site peut d'abord en équilibrer une pour vous." },
-            { "question": "Est-ce important de savoir laquelle des substances j'appelle « connue » et laquelle j'appelle « cible » ?", "answer": "Non — la relation de rapport molaire fonctionne de manière symétrique. Quelle que soit la substance dont vous avez une quantité mesurée, c'est la « connue », et celle dont vous voulez trouver la quantité est la « cible » ; les inverser et ressaisir les nombres dans l'autre sens vous donne la conversion inverse." },
-            { "question": "Pourquoi le calculateur a-t-il besoin de la masse molaire si je n'utilise que des rapports molaires ?", "answer": "Les rapports molaires convertissent directement des moles en moles, mais en pratique vous partez presque toujours d'une masse en grammes (ou en voulez une), car c'est ce que mesure une balance de laboratoire. La masse molaire est le facteur de conversion entre grammes et moles pour chaque substance spécifique, elle n'est donc nécessaire qu'aux points d'entrée et de sortie du calcul, pas dans l'étape du rapport elle-même." },
-            { "question": "Que se passe-t-il si je mélange les coefficients d'une équation non équilibrée ?", "answer": "Le calculateur calculera tout de même une réponse mathématiquement cohérente, mais elle ne reflétera pas la chimie réelle — le rapport molaire doit provenir d'une équation correctement équilibrée pour avoir un sens. Vérifiez que les deux côtés de votre équation contiennent des nombres égaux de chaque type d'atome avant de faire confiance aux coefficients que vous saisissez." },
-            { "question": "Cela peut-il gérer une réaction avec plus de deux substances à la fois ?", "answer": "Pas directement en un seul calcul — il convertit entre exactement une substance connue et une substance cible à la fois. Pour une réaction avec plusieurs produits ou réactifs, exécutez le calculateur une fois par substance que vous voulez trouver, en utilisant toujours la même quantité connue et son coefficient comme point de départ." }
+            {
+              "question": "Pourquoi dois-je saisir les coefficients moi-même plutôt que l'équation complète ?",
+              "answer": "Analyser et équilibrer correctement une équation chimique arbitraire est un problème nettement plus difficile qu'appliquer un rapport une fois les coefficients déjà connus — ce calculateur se concentre spécifiquement sur l'étape de conversion par rapport molaire. Si vous n'avez pas encore d'équation équilibrée, l'Équilibreur d'Équations Chimiques de ce site peut d'abord en équilibrer une pour vous."
+            },
+            {
+              "question": "Est-ce important de savoir laquelle des substances j'appelle « connue » et laquelle j'appelle « cible » ?",
+              "answer": "Non — la relation de rapport molaire fonctionne de manière symétrique. Quelle que soit la substance dont vous avez une quantité mesurée, c'est la « connue », et celle dont vous voulez trouver la quantité est la « cible » ; les inverser et ressaisir les nombres dans l'autre sens vous donne la conversion inverse."
+            },
+            {
+              "question": "Pourquoi le calculateur a-t-il besoin de la masse molaire si je n'utilise que des rapports molaires ?",
+              "answer": "Les rapports molaires convertissent directement des moles en moles, mais en pratique vous partez presque toujours d'une masse en grammes (ou en voulez une), car c'est ce que mesure une balance de laboratoire. La masse molaire est le facteur de conversion entre grammes et moles pour chaque substance spécifique, elle n'est donc nécessaire qu'aux points d'entrée et de sortie du calcul, pas dans l'étape du rapport elle-même."
+            },
+            {
+              "question": "Que se passe-t-il si je mélange les coefficients d'une équation non équilibrée ?",
+              "answer": "Le calculateur calculera tout de même une réponse mathématiquement cohérente, mais elle ne reflétera pas la chimie réelle — le rapport molaire doit provenir d'une équation correctement équilibrée pour avoir un sens. Vérifiez que les deux côtés de votre équation contiennent des nombres égaux de chaque type d'atome avant de faire confiance aux coefficients que vous saisissez."
+            },
+            {
+              "question": "Cela peut-il gérer une réaction avec plus de deux substances à la fois ?",
+              "answer": "Pas directement en un seul calcul — il convertit entre exactement une substance connue et une substance cible à la fois. Pour une réaction avec plusieurs produits ou réactifs, exécutez le calculateur une fois par substance que vous voulez trouver, en utilisant toujours la même quantité connue et son coefficient comme point de départ."
+            }
           ]
         },
         "behindTheTool": {
@@ -6912,12 +7986,42 @@
             "title": "Parcours Académique",
             "intro": "La stœchiométrie est une compétence fondamentale en chimie. Voici les 5 meilleures universités au monde en Chimie selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
             "universities": [
-              { "name": "Université Harvard", "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel." },
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus." },
-              { "name": "Université de Cambridge", "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance." },
-              { "name": "Université Stanford", "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée." },
-              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines." },
-              { "name": "Université des Émirats Arabes Unis — Département de Chimie", "note": "Fondé en 1979, proposant un doctorat à temps plein en chimie ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml", "online": "Non — le doctorat de 54 crédits est dispensé à temps plein et en présentiel." }
+              {
+                "name": "Université Harvard",
+                "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/",
+                "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch",
+                "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance."
+              },
+              {
+                "name": "Université Stanford",
+                "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines."
+              },
+              {
+                "name": "Université des Émirats Arabes Unis — Département de Chimie",
+                "note": "Fondé en 1979, proposant un doctorat à temps plein en chimie ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml",
+                "online": "Non — le doctorat de 54 crédits est dispensé à temps plein et en présentiel."
+              }
             ]
           }
         },
@@ -10804,6 +11908,11 @@
         "chartTotalCost": "Coût total",
         "chartRevenue": "Revenus",
         "chartBreakEven": "Le point où les courbes des revenus et du coût total se croisent est le seuil de rentabilité — le nombre exact d'unités à partir duquel le profit passe du négatif au positif.",
+        "emptyStateMessage": "Saisissez vos coûts et votre prix et cliquez sur « Calculer » pour voir vos résultats.",
+        "sentences": {
+          "breakEven": "Vous devez vendre {units} unités — {revenue} de revenus — pour couvrir vos coûts fixes et atteindre le seuil de rentabilité.",
+          "targetProfit": "Pour atteindre un profit cible de {profit}, vous devez vendre {units} unités."
+        },
         "glossary": {
           "title": "Le vocabulaire CVP, en clair",
           "intro": "Le vocabulaire de l'analyse coûts-volume-profit (CVP), expliqué sans jargon.",
@@ -10825,7 +11934,11 @@
               "meaning": "Le volume de ventes exact où le chiffre d'affaires total égale le coût total — ni profit, ni perte."
             }
           ]
-        }
+        },
+        "chartTargetProfit": "Point de profit cible",
+        "tooltipUnits": "Unités",
+        "tooltipProfit": "Profit / Perte",
+        "chartAriaLabel": "Graphique interactif du coût total par rapport aux revenus selon le volume d'unités, indiquant le seuil de rentabilité"
       },
       "form": {
         "inputTitle": "Vos coûts",
@@ -10837,7 +11950,31 @@
         "targetProfit": "Profit cible (facultatif)",
         "targetProfitHint": "Découvrez combien d'unités vous devriez vendre pour atteindre un objectif de profit précis, au-delà du simple seuil de rentabilité.",
         "targetProfitPlaceholder": "ex. 5000",
-        "calculate": "Calculer"
+        "calculate": "Calculer",
+        "clear": "Effacer"
+      },
+      "tabs": {
+        "groupLabel": "Type de calcul",
+        "breakEven": "Seuil de rentabilité",
+        "targetProfit": "Profit cible"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       },
       "result": {
         "title": "Rapport de rentabilité",
@@ -10845,7 +11982,8 @@
         "breakEvenRevenue": "Revenus au seuil de rentabilité",
         "contributionMarginPerUnit": "Marge sur coût variable / unité",
         "contributionMarginRatio": "Taux de marge sur coût variable",
-        "targetProfitUnits": "Unités pour le profit cible"
+        "targetProfitUnits": "Unités pour le profit cible",
+        "targetProfitRevenue": "Revenus au profit cible"
       },
       "errors": {
         "required": "Veuillez saisir des nombres valides dans tous les champs.",

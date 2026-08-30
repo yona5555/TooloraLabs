@@ -4,14 +4,18 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import GrowthCurveDiagram from "./GrowthCurveDiagram";
+import CompoundInterestComparisonChart from "./CompoundInterestComparisonChart";
 
 type ExampleRow = { scenario: string; futureValue: string; interest: string };
+type VariableItem = { name: string; description: string };
+type ApplicationItem = { title: string; description: string };
 
 export default async function CompoundInterestEducation() {
   const t = await getTranslations("tools.compound-interest-calculator.education");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
+  const variableItems = t.raw("variables.items") as VariableItem[];
+  const applicationItems = t.raw("applications.items") as ApplicationItem[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
@@ -20,14 +24,20 @@ export default async function CompoundInterestEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <GrowthCurveDiagram
-          simpleLabel={t("intro.diagram.simpleLabel")}
-          compoundLabel={t("intro.diagram.compoundLabel")}
-          timeLabel={t("intro.diagram.timeLabel")}
-          valueLabel={t("intro.diagram.valueLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <CompoundInterestComparisonChart />
         <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
+      </InfoSection>
+
+      <InfoSection title={t("variables.title")}>
+        <p>{t("variables.intro")}</p>
+        <dl className="space-y-4">
+          {variableItems.map((item) => (
+            <div key={item.name}>
+              <dt className="font-semibold">{item.name}</dt>
+              <dd className="mt-1">{item.description}</dd>
+            </div>
+          ))}
+        </dl>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -51,6 +61,18 @@ export default async function CompoundInterestEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("applications.title")}>
+        <p>{t("applications.intro")}</p>
+        <div className="space-y-4">
+          {applicationItems.map((item) => (
+            <div key={item.title}>
+              <h3 className="font-semibold">{item.title}</h3>
+              <p className="mt-1">{item.description}</p>
+            </div>
+          ))}
         </div>
       </InfoSection>
 

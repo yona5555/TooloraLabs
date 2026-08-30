@@ -1,63 +1,163 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { BreakEvenCalculator } from "@tooloralabs/tools";
+import { BreakEvenCalculator, type BreakEvenOutput } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import BreakEvenModeTabs from "./BreakEvenModeTabs";
 import BreakEvenInputPanel from "./BreakEvenInputPanel";
 import BreakEvenResult from "./BreakEvenResult";
 import BreakEvenReference from "./BreakEvenReference";
+import type { BreakEvenMode } from "./types";
 
 const tool = new BreakEvenCalculator();
+
+const DEFAULTS = { fixedCosts: "5000", variableCostPerUnit: "20", pricePerUnit: "45", targetProfit: "10000" };
+
+type Inputs = typeof DEFAULTS;
+type ComputeOutcome = { result: BreakEvenOutput | null; errorKey: string };
+
+function computeResult(targetMode: BreakEvenMode, inputs: Inputs): ComputeOutcome {
+  const parsedFixedCosts = parseLocalizedNumber(inputs.fixedCosts);
+  const parsedVariableCost = parseLocalizedNumber(inputs.variableCostPerUnit);
+  const parsedPrice = parseLocalizedNumber(inputs.pricePerUnit);
+  const parsedTargetProfit = parseLocalizedNumber(inputs.targetProfit);
+
+  if (Number.isNaN(parsedFixedCosts) || Number.isNaN(parsedVariableCost) || Number.isNaN(parsedPrice)) {
+    return { result: null, errorKey: "required" };
+  }
+  if (targetMode === "targetProfit" && (Number.isNaN(parsedTargetProfit) || parsedTargetProfit <= 0)) {
+    return { result: null, errorKey: "required" };
+  }
+
+  const output = tool.execute(
+    {
+      fixedCosts: parsedFixedCosts,
+      variableCostPerUnit: parsedVariableCost,
+      pricePerUnit: parsedPrice,
+      targetProfit: targetMode === "targetProfit" && !Number.isNaN(parsedTargetProfit) ? parsedTargetProfit : undefined,
+    },
+    { locale: "en-US" }
+  );
+
+  if (!output.success) {
+    const key = output.metadata.error === "NO_BREAK_EVEN" ? "noBreakEven" : "invalidValues";
+    return { result: null, errorKey: key };
+  }
+
+  return { result: output.data, errorKey: "" };
+}
 
 export default function BreakEvenCalculatorTool({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.break-even-calculator.errors");
   const tNav = useTranslations("tools.break-even-calculator.nav");
 
-  const [fixedCosts, setFixedCosts] = useState("");
-  const [variableCostPerUnit, setVariableCostPerUnit] = useState("");
-  const [pricePerUnit, setPricePerUnit] = useState("");
-  const [targetProfit, setTargetProfit] = useState("");
+  const [mode, setMode] = useState<BreakEvenMode>("breakEven");
 
-  const digitStyle: DigitStyle = resolveDigitStyle(fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit);
+  const [fixedCosts, setFixedCosts] = useState(DEFAULTS.fixedCosts);
+  const [variableCostPerUnit, setVariableCostPerUnit] = useState(DEFAULTS.variableCostPerUnit);
+  const [pricePerUnit, setPricePerUnit] = useState(DEFAULTS.pricePerUnit);
+  const [targetProfit, setTargetProfit] = useState(DEFAULTS.targetProfit);
 
-  const { result, errorKey } = useMemo(() => {
-    if (!fixedCosts.trim() && !variableCostPerUnit.trim() && !pricePerUnit.trim()) {
-      return { result: null, errorKey: "" };
-    }
+  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
 
-    const parsedFixedCosts = parseLocalizedNumber(fixedCosts);
-    const parsedVariableCost = parseLocalizedNumber(variableCostPerUnit);
-    const parsedPrice = parseLocalizedNumber(pricePerUnit);
-    const parsedTargetProfit = parseLocalizedNumber(targetProfit);
+  const [breakEvenOutcome, setBreakEvenOutcome] = useState<ComputeOutcome>(() => computeResult("breakEven", DEFAULTS));
+  const [targetProfitOutcome, setTargetProfitOutcome] = useState<ComputeOutcome>({ result: null, errorKey: "" });
+  const [hasCalculated, setHasCalculated] = useState<Record<BreakEvenMode, boolean>>({ breakEven: true, targetProfit: false });
+  const [initializedModes, setInitializedModes] = useState<Record<BreakEvenMode, boolean>>({ breakEven: true, targetProfit: false });
 
-    if (Number.isNaN(parsedFixedCosts) || Number.isNaN(parsedVariableCost) || Number.isNaN(parsedPrice)) {
-      return { result: null, errorKey: "required" };
-    }
+  const [navBarVisible, setNavBarVisible] = useState(false);
+  const headerSentinelRef = useRef<HTMLDivElement>(null);
 
-    const output = tool.execute(
-      {
-        fixedCosts: parsedFixedCosts,
-        variableCostPerUnit: parsedVariableCost,
-        pricePerUnit: parsedPrice,
-        targetProfit: Number.isNaN(parsedTargetProfit) ? undefined : parsedTargetProfit,
+  // Same dual-observer hysteresis technique validated on Compound Interest/Loan Calculator: two
+  // margins (a deeper "show" line, a shallower "hide" line) create a dead zone so momentum-
+  // scroll jitter near either line can't flip visibility back and forth every frame.
+  useEffect(() => {
+    const el = headerSentinelRef.current;
+    if (!el) return;
+
+    let isVisible = false;
+
+    const showObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && !isVisible) {
+          isVisible = true;
+          setNavBarVisible(true);
+        }
       },
-      { locale: "en-US" }
+      { rootMargin: "-88px 0px 0px 0px", threshold: 0 }
+    );
+    const hideObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && isVisible) {
+          isVisible = false;
+          setNavBarVisible(false);
+        }
+      },
+      { rootMargin: "-56px 0px 0px 0px", threshold: 0 }
     );
 
-    if (!output.success) {
-      const key = output.metadata.error === "NO_BREAK_EVEN" ? "noBreakEven" : "invalidValues";
-      return { result: null, errorKey: key };
+    showObserver.observe(el);
+    hideObserver.observe(el);
+    return () => {
+      showObserver.disconnect();
+      hideObserver.disconnect();
+    };
+  }, []);
+
+  function performCalculate(targetMode: BreakEvenMode, options: { updateUrl: boolean }) {
+    const inputs: Inputs = { fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit };
+    const outcome = computeResult(targetMode, inputs);
+
+    if (targetMode === "breakEven") {
+      setBreakEvenOutcome(outcome);
+    } else {
+      setTargetProfitOutcome(outcome);
     }
 
-    return { result: output.data, errorKey: "" };
-  }, [fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit]);
+    setHasCalculated((prev) => ({ ...prev, [targetMode]: true }));
+    setInitializedModes((prev) => ({ ...prev, [targetMode]: true }));
+    setDigitStyle(resolveDigitStyle(fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit));
 
-  const errorMessage = errorKey ? t(errorKey) : "";
+    if (options.updateUrl) {
+      const params = new URLSearchParams();
+      params.set("mode", targetMode);
+      params.set("fixed", fixedCosts);
+      params.set("variable", variableCostPerUnit);
+      params.set("price", pricePerUnit);
+      params.set("profit", targetProfit);
+      window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+    }
+  }
+
+  function handleCalculate(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    performCalculate(mode, { updateUrl: true });
+  }
+
+  function handleModeChange(newMode: BreakEvenMode) {
+    setMode(newMode);
+    if (!initializedModes[newMode]) {
+      performCalculate(newMode, { updateUrl: false });
+    }
+  }
+
+  function handleClear() {
+    setFixedCosts(DEFAULTS.fixedCosts);
+    setVariableCostPerUnit(DEFAULTS.variableCostPerUnit);
+    setPricePerUnit(DEFAULTS.pricePerUnit);
+    setTargetProfit(DEFAULTS.targetProfit);
+    setDigitStyle("western");
+    setHasCalculated((prev) => ({ ...prev, [mode]: false }));
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+
+  const activeOutcome = mode === "breakEven" ? breakEvenOutcome : targetProfitOutcome;
+  const errorMessage = activeOutcome.errorKey ? t(activeOutcome.errorKey) : "";
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -67,10 +167,12 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
 
   return (
     <>
+      <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
             <BreakEvenInputPanel
+              mode={mode}
               fixedCosts={fixedCosts}
               onFixedCostsChange={setFixedCosts}
               variableCostPerUnit={variableCostPerUnit}
@@ -79,22 +181,30 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
               onPricePerUnitChange={setPricePerUnit}
               targetProfit={targetProfit}
               onTargetProfitChange={setTargetProfit}
+              onCalculate={handleCalculate}
+              onClear={handleClear}
             />
           }
           result={
-            <BreakEvenResult
-              result={result}
-              errorMessage={errorMessage}
-              digitStyle={digitStyle}
-              fixedCosts={parseLocalizedNumber(fixedCosts) || 0}
-              variableCostPerUnit={parseLocalizedNumber(variableCostPerUnit) || 0}
-              pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
-            />
+            <div className="flex flex-col gap-3">
+              <BreakEvenResult
+                mode={mode}
+                hasCalculated={hasCalculated[mode]}
+                result={activeOutcome.result}
+                errorMessage={errorMessage}
+                digitStyle={digitStyle}
+                fixedCosts={parseLocalizedNumber(fixedCosts) || 0}
+                variableCostPerUnit={parseLocalizedNumber(variableCostPerUnit) || 0}
+                pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
+                targetProfit={parseLocalizedNumber(targetProfit) || 0}
+              />
+              <BreakEvenModeTabs mode={mode} onModeChange={handleModeChange} />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="break-even-calculator" category="calculators" />}
           secondary={
             <div className="flex flex-col gap-6">
-              <SectionNav items={navItems} />
+              <SectionNav items={navItems} visible={navBarVisible} />
               <BreakEvenReference />
             </div>
           }

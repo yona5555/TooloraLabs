@@ -59,3 +59,37 @@ export function calculateDebtToIncome(
 
   return { totalMonthlyDebt, frontEndRatio, backEndRatio, category };
 }
+
+export type MaxAllowedDebtResult = {
+  maxTotalMonthlyDebt: number;
+  maxAdditionalMonthlyDebt: number;
+  currentOtherDebt: number;
+};
+
+/**
+ * The reverse of `calculateDebtToIncome`'s back-end ratio: given a target
+ * DTI ratio instead of computing one, finds the total monthly debt payment
+ * that ratio allows against a given income — the same percentage-of-income
+ * relationship solved for the debt side instead of the ratio side.
+ */
+export function calculateMaxAllowedDebt(
+  monthlyGrossIncome: number,
+  targetBackEndRatio: number,
+  existingNonHousingDebt: number
+): MaxAllowedDebtResult {
+  if (
+    !Number.isFinite(monthlyGrossIncome) ||
+    monthlyGrossIncome <= 0 ||
+    !Number.isFinite(targetBackEndRatio) ||
+    targetBackEndRatio < 0 ||
+    !Number.isFinite(existingNonHousingDebt) ||
+    existingNonHousingDebt < 0
+  ) {
+    return { maxTotalMonthlyDebt: 0, maxAdditionalMonthlyDebt: 0, currentOtherDebt: existingNonHousingDebt };
+  }
+
+  const maxTotalMonthlyDebt = monthlyGrossIncome * (targetBackEndRatio / 100);
+  const maxAdditionalMonthlyDebt = Math.max(maxTotalMonthlyDebt - existingNonHousingDebt, 0);
+
+  return { maxTotalMonthlyDebt, maxAdditionalMonthlyDebt, currentOtherDebt: existingNonHousingDebt };
+}

@@ -1,10 +1,13 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import type { CompoundingFrequency } from "./types";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import type { CompoundingFrequency, SolveMode } from "./types";
 
 type CompoundInterestInputPanelProps = {
+  mode: SolveMode;
   principal: string;
   onPrincipalChange: (value: string) => void;
   rate: string;
@@ -15,11 +18,20 @@ type CompoundInterestInputPanelProps = {
   onFrequencyChange: (value: CompoundingFrequency) => void;
   monthlyContribution: string;
   onMonthlyContributionChange: (value: string) => void;
+  targetAmount: string;
+  onTargetAmountChange: (value: string) => void;
+  taxRate: string;
+  onTaxRateChange: (value: string) => void;
+  inflationRate: string;
+  onInflationRateChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 const FREQUENCIES: CompoundingFrequency[] = ["annually", "semiannually", "quarterly", "monthly", "daily"];
 
 export default function CompoundInterestInputPanel({
+  mode,
   principal,
   onPrincipalChange,
   rate,
@@ -30,38 +42,63 @@ export default function CompoundInterestInputPanel({
   onFrequencyChange,
   monthlyContribution,
   onMonthlyContributionChange,
+  targetAmount,
+  onTargetAmountChange,
+  taxRate,
+  onTaxRateChange,
+  inflationRate,
+  onInflationRateChange,
+  onCalculate,
+  onClear,
 }: CompoundInterestInputPanelProps) {
   const t = useTranslations("tools.compound-interest-calculator");
 
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
-      <div className="space-y-5">
-        <ToolInput
-          label={t("form.principalLabel")}
-          type="text"
-          inputMode="decimal"
-          placeholder={t("form.principalPlaceholder")}
-          value={principal}
-          onChange={(e) => onPrincipalChange(e.target.value)}
-        />
+      <form onSubmit={onCalculate} className="space-y-5">
+        {mode !== "endAmount" && (
+          <ToolInput
+            label={t("form.targetLabel")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.targetPlaceholder")}
+            value={targetAmount}
+            onChange={(e) => onTargetAmountChange(e.target.value)}
+          />
+        )}
 
-        <ToolInput
-          label={t("form.rateLabel")}
-          type="text"
-          inputMode="decimal"
-          placeholder={t("form.ratePlaceholder")}
-          value={rate}
-          onChange={(e) => onRateChange(e.target.value)}
-        />
+        {mode !== "startingAmount" && (
+          <ToolInput
+            label={t("form.principalLabel")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.principalPlaceholder")}
+            value={principal}
+            onChange={(e) => onPrincipalChange(e.target.value)}
+          />
+        )}
 
-        <ToolInput
-          label={t("form.yearsLabel")}
-          type="text"
-          inputMode="decimal"
-          placeholder={t("form.yearsPlaceholder")}
-          value={years}
-          onChange={(e) => onYearsChange(e.target.value)}
-        />
+        {mode !== "returnRate" && (
+          <ToolInput
+            label={t("form.rateLabel")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.ratePlaceholder")}
+            value={rate}
+            onChange={(e) => onRateChange(e.target.value)}
+          />
+        )}
+
+        {mode !== "investmentLength" && (
+          <ToolInput
+            label={t("form.yearsLabel")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.yearsPlaceholder")}
+            value={years}
+            onChange={(e) => onYearsChange(e.target.value)}
+          />
+        )}
 
         <label className="block space-y-2">
           <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.frequencyLabel")}</span>
@@ -78,15 +115,50 @@ export default function CompoundInterestInputPanel({
           </select>
         </label>
 
-        <ToolInput
-          label={t("form.monthlyContributionLabel")}
-          type="text"
-          inputMode="decimal"
-          placeholder={t("form.monthlyContributionPlaceholder")}
-          value={monthlyContribution}
-          onChange={(e) => onMonthlyContributionChange(e.target.value)}
-        />
-      </div>
+        {mode !== "additionalContribution" && (
+          <ToolInput
+            label={t("form.monthlyContributionLabel")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.monthlyContributionPlaceholder")}
+            value={monthlyContribution}
+            onChange={(e) => onMonthlyContributionChange(e.target.value)}
+          />
+        )}
+
+        {mode === "endAmount" && (
+          <>
+            <ToolInput
+              label={t("form.taxRateLabel")}
+              type="text"
+              inputMode="decimal"
+              placeholder={t("form.taxRatePlaceholder")}
+              value={taxRate}
+              onChange={(e) => onTaxRateChange(e.target.value)}
+            />
+
+            <ToolInput
+              label={t("form.inflationRateLabel")}
+              type="text"
+              inputMode="decimal"
+              placeholder={t("form.inflationRatePlaceholder")}
+              value={inflationRate}
+              onChange={(e) => onInflationRateChange(e.target.value)}
+            />
+          </>
+        )}
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("form.calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("form.clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

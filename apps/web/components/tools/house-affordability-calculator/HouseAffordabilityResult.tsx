@@ -1,17 +1,23 @@
 "use client";
+import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import PdfDownloadButton from "@/components/tool-ui/PdfDownloadButton";
-import type { HouseAffordabilityResult as HouseAffordabilityResultData } from "@tooloralabs/tools";
+import HouseAffordabilityShareExportModal from "./HouseAffordabilityShareExportModal";
+import type { HouseAffordabilityResult as HomePriceResult, RequiredIncomeResult } from "@tooloralabs/tools";
+import type { HouseAffordabilityMode } from "./types";
 
 type HouseAffordabilityResultProps = {
-  result: HouseAffordabilityResultData | null;
-  annualIncome: number;
+  mode: HouseAffordabilityMode;
+  hasCalculated: boolean;
+  digitStyle: DigitStyle;
   downPayment: number;
   interestRate: number;
   loanTermYears: number;
-  digitStyle: DigitStyle;
+  annualIncome: number;
+  targetHomePrice: number;
+  homePriceResult: HomePriceResult;
+  requiredIncomeResult: RequiredIncomeResult;
 };
 
 function Stat({ title, value }: { title: string; value: string }) {
@@ -26,62 +32,91 @@ function Stat({ title, value }: { title: string; value: string }) {
 }
 
 export default function HouseAffordabilityResult({
-  result,
-  annualIncome,
+  mode,
+  hasCalculated,
+  digitStyle,
   downPayment,
   interestRate,
   loanTermYears,
-  digitStyle,
+  annualIncome,
+  targetHomePrice,
+  homePriceResult,
+  requiredIncomeResult,
 }: HouseAffordabilityResultProps) {
   const t = useTranslations("tools.house-affordability-calculator");
 
-  const money = (value: number) =>
-    formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const percent = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 })}%`;
 
-  const hasResult = result !== null && result.maxHomePrice > 0;
+  if (!hasCalculated) {
+    return (
+      <SectionCard title={t("aboveFold.resultTitle")}>
+        <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
+          <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
+          <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.emptyStateMessage")}</p>
+        </div>
+      </SectionCard>
+    );
+  }
+
+  const heroLabel = mode === "homePrice" ? t("aboveFold.maxHomePriceLabel") : t("aboveFold.requiredAnnualIncomeLabel");
+  const heroValue = mode === "homePrice" ? money(homePriceResult.maxHomePrice) : money(requiredIncomeResult.requiredAnnualIncome);
+  const sentence =
+    mode === "homePrice"
+      ? t("aboveFold.sentences.homePrice", { income: money(annualIncome), price: money(homePriceResult.maxHomePrice) })
+      : t("aboveFold.sentences.requiredIncome", { price: money(targetHomePrice), income: money(requiredIncomeResult.requiredAnnualIncome) });
+
+  const sharedInputRows = [
+    { label: t("form.downPaymentLabel"), value: money(downPayment) },
+    { label: t("form.interestRateLabel"), value: percent(interestRate) },
+    { label: t("form.loanTermLabel"), value: String(formatLocalizedNumber(loanTermYears, digitStyle)) },
+  ];
+  const inputRows =
+    mode === "homePrice"
+      ? [{ label: t("form.annualIncomeLabel"), value: money(annualIncome) }, ...sharedInputRows]
+      : [{ label: t("form.targetHomePriceLabel"), value: money(targetHomePrice) }, ...sharedInputRows];
+
+  const resultRows =
+    mode === "homePrice"
+      ? [
+          { label: t("aboveFold.loanAmountLabel"), value: money(homePriceResult.loanAmount) },
+          { label: t("aboveFold.monthlyPaymentLabel"), value: money(homePriceResult.monthlyPayment) },
+          { label: t("aboveFold.monthlyPrincipalAndInterestLabel"), value: money(homePriceResult.monthlyPrincipalAndInterest) },
+          { label: t("aboveFold.monthlyPropertyTaxLabel"), value: money(homePriceResult.monthlyPropertyTax) },
+        ]
+      : [
+          { label: t("aboveFold.loanAmountLabel"), value: money(requiredIncomeResult.loanAmount) },
+          { label: t("aboveFold.monthlyPaymentLabel"), value: money(requiredIncomeResult.monthlyPayment) },
+          { label: t("aboveFold.bindingConstraintLabel"), value: t(`aboveFold.bindingConstraint.${requiredIncomeResult.bindingConstraint}`) },
+        ];
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
-      action={
-        hasResult ? (
-          <PdfDownloadButton
-            toolName={t("title")}
-            inputs={[
-              { label: t("form.annualIncomeLabel"), value: money(annualIncome) },
-              { label: t("form.downPaymentLabel"), value: money(downPayment) },
-              { label: t("form.interestRateLabel"), value: `${formatLocalizedNumber(interestRate, digitStyle)}%` },
-              { label: t("form.loanTermLabel"), value: String(formatLocalizedNumber(loanTermYears, digitStyle)) },
-            ]}
-            results={[
-              { label: t("aboveFold.maxHomePriceLabel"), value: money(result.maxHomePrice) },
-              { label: t("aboveFold.loanAmountLabel"), value: money(result.loanAmount) },
-              { label: t("aboveFold.monthlyPaymentLabel"), value: money(result.monthlyPayment) },
-            ]}
-            filename="house-affordability-calculator-result.pdf"
-          />
-        ) : undefined
-      }
+      action={<HouseAffordabilityShareExportModal mode={mode} inputRows={inputRows} resultRows={resultRows} heroLabel={heroLabel} heroValue={heroValue} sentence={sentence} />}
     >
-      {hasResult ? (
-        <>
-          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.maxHomePriceLabel")}</p>
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {money(result.maxHomePrice)}
-          </p>
+      <p className="text-center text-sm leading-6 text-zinc-500 dark:text-zinc-400">{sentence}</p>
 
-          <div className="mt-5 grid grid-cols-2 gap-2">
-            <Stat title={t("aboveFold.loanAmountLabel")} value={money(result.loanAmount)} />
-            <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(result.monthlyPayment)} />
-            <Stat title={t("aboveFold.monthlyPrincipalAndInterestLabel")} value={money(result.monthlyPrincipalAndInterest)} />
-            <Stat title={t("aboveFold.monthlyPropertyTaxLabel")} value={money(result.monthlyPropertyTax)} />
-          </div>
-        </>
-      ) : (
-        <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
-          {t("aboveFold.placeholder")}
-        </p>
-      )}
+      <p className="mt-4 text-center text-sm text-zinc-500 dark:text-zinc-400">{heroLabel}</p>
+      <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
+        {heroValue}
+      </p>
+
+      <div className="mt-5 grid grid-cols-2 gap-2">
+        {mode === "homePrice" ? (
+          <>
+            <Stat title={t("aboveFold.loanAmountLabel")} value={money(homePriceResult.loanAmount)} />
+            <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(homePriceResult.monthlyPayment)} />
+            <Stat title={t("aboveFold.monthlyPrincipalAndInterestLabel")} value={money(homePriceResult.monthlyPrincipalAndInterest)} />
+            <Stat title={t("aboveFold.monthlyPropertyTaxLabel")} value={money(homePriceResult.monthlyPropertyTax)} />
+          </>
+        ) : (
+          <>
+            <Stat title={t("aboveFold.loanAmountLabel")} value={money(requiredIncomeResult.loanAmount)} />
+            <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(requiredIncomeResult.monthlyPayment)} />
+          </>
+        )}
+      </div>
     </SectionCard>
   );
 }

@@ -4,9 +4,10 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import LoanAmortizationDiagram from "./LoanAmortizationDiagram";
+import LoanAmortizationAreaChart from "./LoanAmortizationAreaChart";
 
 type ExampleRow = { scenario: string; monthlyPayment: string; totalInterest: string };
+type CreditFactor = { name: string; description: string };
 
 export default async function LoanEducation() {
   const t = await getTranslations("tools.loan-calculator.education");
@@ -14,20 +15,51 @@ export default async function LoanEducation() {
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
+  const creditFactors = t.raw("consumerLoanTypes.fiveCs.items") as CreditFactor[];
 
   return (
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <LoanAmortizationDiagram
-          principalLabel={t("intro.diagram.principalLabel")}
-          interestLabel={t("intro.diagram.interestLabel")}
-          startLabel={t("intro.diagram.startLabel")}
-          endLabel={t("intro.diagram.endLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <LoanAmortizationAreaChart />
         <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
+      </InfoSection>
+
+      <InfoSection title={t("loanBasics.title")}>
+        <p>{t("loanBasics.intro")}</p>
+        <div>
+          <h3 className="font-semibold">{t("loanBasics.aprVsApy.title")}</h3>
+          <p className="mt-2">{t("loanBasics.aprVsApy.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("loanBasics.compoundingFrequency.title")}</h3>
+          <p className="mt-2">{t("loanBasics.compoundingFrequency.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("loanBasics.termLength.title")}</h3>
+          <p className="mt-2">{t("loanBasics.termLength.paragraph")}</p>
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("consumerLoanTypes.title")}>
+        <p>{t("consumerLoanTypes.intro")}</p>
+        <div>
+          <h3 className="font-semibold">{t("consumerLoanTypes.securedVsUnsecured.title")}</h3>
+          <p className="mt-2">{t("consumerLoanTypes.securedVsUnsecured.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("consumerLoanTypes.fiveCs.title")}</h3>
+          <p className="mt-2">{t("consumerLoanTypes.fiveCs.paragraph")}</p>
+          <dl className="mt-4 space-y-4">
+            {creditFactors.map((item) => (
+              <div key={item.name}>
+                <dt className="font-semibold">{item.name}</dt>
+                <dd className="mt-1">{item.description}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

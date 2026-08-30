@@ -2,12 +2,26 @@ import { drawGaugeCanvas, type GaugeSpec } from "./gauge";
 
 export type PdfRow = { label: string; value: string };
 
+export type PdfTable = { title: string; columns: string[]; rows: string[][] };
+
 export type GenerateToolPdfOptions = {
   locale: string;
   toolName: string;
   inputs: PdfRow[];
   results: PdfRow[];
   gauge?: GaugeSpec;
+  /** Optional wide multi-column table (e.g. a full year-by-year schedule) rendered after results. Paginated row-aware: a row is never split across two pages, and its header repeats on every page it continues onto. */
+  table?: PdfTable;
+  /** Optional "prepared for" rows (already-translated label/value pairs) — callers filter out empty fields themselves. Rendered near the top, right after the title, only when non-empty. */
+  preparedFor?: PdfRow[];
+  /** Section title for `preparedFor`; ignored if `preparedFor` is empty. */
+  preparedForTitle?: string;
+  /**
+   * Opt-in trial branding: moves the site URL and email out of the header and into a
+   * small line in the footer instead of appearing in both places. Defaults to false so
+   * existing callers' PDF output (URL/email in the header) is unchanged.
+   */
+  brandingEnhancements?: boolean;
   filename: string;
 };
 
@@ -21,12 +35,14 @@ const COPY = {
     generatedOn: "Generated on",
     inputsTitle: "Your Inputs",
     resultsTitle: "Results",
+    preparedForTitle: "Prepared For",
     field: "Field",
     value: "Value",
     footer: `© ${new Date().getFullYear()} TooloraLabs. All rights reserved.`,
   },
   ar: {
     generatedOn: "تاريخ الإنشاء",
+    preparedForTitle: "معدّ لـ",
     inputsTitle: "بياناتك المدخلة",
     resultsTitle: "النتائج",
     field: "الحقل",
@@ -75,6 +91,41 @@ function buildTable(rows: PdfRow[], copy: { field: string; value: string }): HTM
   return table;
 }
 
+/** Marks the wide schedule table so it can be found again post-insertion for row-aware pagination measurements. */
+const SCHEDULE_TABLE_SELECTOR = '[data-schedule-table="true"]';
+
+function buildWideTable(spec: PdfTable): HTMLTableElement {
+  const table = document.createElement("table");
+  table.setAttribute("data-schedule-table", "true");
+  table.style.cssText = "width:100%; border-collapse:collapse; font-size:11px;";
+
+  const thead = document.createElement("thead");
+  const headerCells = spec.columns
+    .map(
+      (col) =>
+        `<th style="text-align:start; padding:6px 8px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(col)}</th>`
+    )
+    .join("");
+  thead.innerHTML = `<tr>${headerCells}</tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement("tbody");
+  spec.rows.forEach((row, i) => {
+    const tr = document.createElement("tr");
+    tr.style.background = i % 2 === 0 ? "#ffffff" : "#fafafa";
+    tr.innerHTML = row
+      .map(
+        (cell) =>
+          `<td style="padding:6px 8px; border:1px solid #e4e4e7; color:#3f3f46;">${escapeHtml(cell)}</td>`
+      )
+      .join("");
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+
+  return table;
+}
+
 /**
  * Builds a branded, tabular one-page(+) summary as a hidden real DOM node,
  * rasterizes it with html2canvas, and assembles a multi-page PDF with jsPDF.
@@ -85,9 +136,20 @@ function buildTable(rows: PdfRow[], copy: { field: string; value: string }): HTM
  * the actual browser first means the browser's own text engine — already
  * loaded with the site's Arabic font — does correct shaping/bidi, and
  * html2canvas just screenshots the already-correct result.
+ *
+ * The main content strip is rasterized once and then sliced into per-page
+ * images. Naive fixed-height slicing would cut a schedule-table row in half
+ * whenever a page boundary happened to fall mid-row, so when `table` is
+ * supplied, each schedule-table row's real on-screen boundary (measured via
+ * `getBoundingClientRect`, before rasterizing) is recorded, and every slice
+ * boundary that would fall inside the table's row region snaps down to the
+ * nearest row boundary instead. The table's `<thead>` is rasterized
+ * separately once and redrawn at the top of every subsequent page the table
+ * continues onto, so column headers stay visible without re-measuring text.
  */
 export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<void> {
-  const { locale, toolName, inputs, results, gauge, filename } = options;
+  const { locale, toolName, inputs, results, gauge, table, preparedFor, preparedForTitle, brandingEnhancements, filename } =
+    options;
   const dir = locale === "ar" ? "rtl" : "ltr";
   const copy = locale === "ar" ? COPY.ar : COPY.en;
 
@@ -116,7 +178,7 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
       <div style="font-size:22px; font-weight:700;">
         <span style="color:#18181b;">Toolora</span><span style="color:#2563eb;">Labs</span>
       </div>
-      <div style="font-size:12px; color:#71717a; margin-top:4px;">${BRAND.siteUrl} · ${BRAND.email}</div>
+      ${brandingEnhancements ? "" : `<div style="font-size:12px; color:#71717a; margin-top:4px;">${BRAND.siteUrl} · ${BRAND.email}</div>`}
     </div>
     <div style="font-size:12px; color:#71717a; text-align:${dir === "rtl" ? "left" : "right"};">
       ${escapeHtml(copy.generatedOn)}<br/>
@@ -129,6 +191,11 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
   title.textContent = toolName;
   title.style.cssText = "font-size:22px; font-weight:700; margin:0 0 8px 0; color:#18181b;";
   container.appendChild(title);
+
+  if (preparedFor && preparedFor.length > 0) {
+    container.appendChild(buildSectionTitle(preparedForTitle ?? copy.preparedForTitle));
+    container.appendChild(buildTable(preparedFor, copy));
+  }
 
   if (inputs.length > 0) {
     container.appendChild(buildSectionTitle(copy.inputsTitle));
@@ -147,16 +214,59 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     container.appendChild(gaugeWrap);
   }
 
+  if (table && table.rows.length > 0) {
+    container.appendChild(buildSectionTitle(table.title));
+    container.appendChild(buildWideTable(table));
+  }
+
   const footer = document.createElement("div");
-  footer.style.cssText =
-    "margin-top:32px; padding-top:16px; border-top:1px solid #e4e4e7; font-size:11px; color:#a1a1aa; text-align:center;";
-  footer.textContent = copy.footer;
+  footer.style.cssText = "margin-top:32px; padding-top:16px; border-top:1px solid #e4e4e7; text-align:center;";
+  footer.innerHTML = brandingEnhancements
+    ? `
+      <div style="font-size:8px; color:#a1a1aa;">${escapeHtml(BRAND.siteUrl)} &middot; ${escapeHtml(BRAND.email)}</div>
+      <div style="font-size:11px; color:#a1a1aa; margin-top:4px;">${escapeHtml(copy.footer)}</div>
+    `
+    : escapeHtml(copy.footer);
   container.appendChild(footer);
 
   document.body.appendChild(container);
 
   try {
-    const canvas = await html2canvas(container, { scale: 2, backgroundColor: "#ffffff" });
+    const scale = 2;
+
+    // Measure the schedule table's row boundaries and header height in the live DOM,
+    // in canvas-pixel space, before rasterizing — html2canvas's own coordinate system
+    // matches getBoundingClientRect() scaled by the same `scale` factor.
+    let scheduleHeaderCanvas: HTMLCanvasElement | null = null;
+    let scheduleHeaderHeightPx = 0;
+    let scheduleHeaderLeftPx = 0;
+    let scheduleHeaderWidthPx = 0;
+    let scheduleTableTopPx = 0;
+    let scheduleTableBottomPx = 0;
+    let scheduleRowBottomsPx: number[] = [];
+
+    const scheduleTableEl = container.querySelector<HTMLTableElement>(SCHEDULE_TABLE_SELECTOR);
+    if (scheduleTableEl) {
+      const containerRect = container.getBoundingClientRect();
+      const theadEl = scheduleTableEl.querySelector("thead") as HTMLElement;
+      const theadRect = theadEl.getBoundingClientRect();
+      scheduleTableTopPx = (theadRect.top - containerRect.top) * scale;
+      scheduleHeaderHeightPx = theadRect.height * scale;
+      // The header snapshot is captured from just the <thead> (narrower than the full
+      // padded container), so its placement must be offset/sized to that same region —
+      // otherwise it would stretch across the full page width and misalign with the
+      // row columns below it.
+      scheduleHeaderLeftPx = (theadRect.left - containerRect.left) * scale;
+      scheduleHeaderWidthPx = theadRect.width * scale;
+
+      const bodyRows = Array.from(scheduleTableEl.querySelectorAll("tbody tr"));
+      scheduleRowBottomsPx = bodyRows.map((tr) => (tr.getBoundingClientRect().bottom - containerRect.top) * scale);
+      scheduleTableBottomPx = scheduleRowBottomsPx[scheduleRowBottomsPx.length - 1] ?? scheduleTableTopPx;
+
+      scheduleHeaderCanvas = await html2canvas(theadEl, { scale, backgroundColor: "#ffffff" });
+    }
+
+    const canvas = await html2canvas(container, { scale, backgroundColor: "#ffffff" });
 
     const pdf = new jsPDF({ unit: "mm", format: "a4" });
     const pageWidthMM = pdf.internal.pageSize.getWidth();
@@ -167,7 +277,38 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     let renderedHeight = 0;
     let firstPage = true;
     while (renderedHeight < canvas.height) {
-      const sliceHeight = Math.min(pageHeightPx, canvas.height - renderedHeight);
+      // The table's own header is already visible in-place the first time this page's
+      // range crosses it; only repeat it on later pages that continue mid-table.
+      const repeatsHeader =
+        !firstPage &&
+        scheduleHeaderCanvas !== null &&
+        renderedHeight >= scheduleTableTopPx &&
+        renderedHeight < scheduleTableBottomPx;
+      const headerOverlayPx = repeatsHeader ? scheduleHeaderHeightPx : 0;
+
+      const availablePagePx = pageHeightPx - headerOverlayPx;
+      const remainingContentPx = canvas.height - renderedHeight;
+      let sliceHeight = Math.min(availablePagePx, remainingContentPx);
+
+      // Only snap to a row boundary when the page height is actually the limiting
+      // factor — i.e. pagination is genuinely forced here. If all remaining content
+      // (including anything after the table, like the footer) already fits within
+      // this page, leave it alone so nothing gets needlessly cut off before the end.
+      const wasPageLimited = availablePagePx < remainingContentPx;
+      if (wasPageLimited) {
+        const naiveEnd = renderedHeight + sliceHeight;
+        const crossesTableRows = naiveEnd > scheduleTableTopPx && renderedHeight < scheduleTableBottomPx;
+        if (crossesTableRows) {
+          const fittingBoundaries = scheduleRowBottomsPx.filter((b) => b > renderedHeight && b <= naiveEnd);
+          if (fittingBoundaries.length > 0) {
+            sliceHeight = fittingBoundaries[fittingBoundaries.length - 1] - renderedHeight;
+          } else {
+            const nextBoundary = scheduleRowBottomsPx.find((b) => b > renderedHeight);
+            if (nextBoundary !== undefined) sliceHeight = nextBoundary - renderedHeight;
+          }
+        }
+      }
+
       const pageCanvas = document.createElement("canvas");
       pageCanvas.width = canvas.width;
       pageCanvas.height = sliceHeight;
@@ -175,7 +316,16 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
       ctx?.drawImage(canvas, 0, renderedHeight, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
 
       if (!firstPage) pdf.addPage();
-      pdf.addImage(pageCanvas.toDataURL("image/png"), "PNG", 0, 0, pageWidthMM, sliceHeight / pxPerMM);
+
+      let yOffsetMM = 0;
+      if (repeatsHeader && scheduleHeaderCanvas) {
+        const headerHeightMM = headerOverlayPx / pxPerMM;
+        const headerXmm = scheduleHeaderLeftPx / pxPerMM;
+        const headerWidthMM = scheduleHeaderWidthPx / pxPerMM;
+        pdf.addImage(scheduleHeaderCanvas.toDataURL("image/png"), "PNG", headerXmm, 0, headerWidthMM, headerHeightMM);
+        yOffsetMM = headerHeightMM;
+      }
+      pdf.addImage(pageCanvas.toDataURL("image/png"), "PNG", 0, yOffsetMM, pageWidthMM, sliceHeight / pxPerMM);
 
       renderedHeight += sliceHeight;
       firstPage = false;

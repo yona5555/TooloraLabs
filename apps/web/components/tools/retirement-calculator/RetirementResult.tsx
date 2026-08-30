@@ -1,16 +1,22 @@
 "use client";
+import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import PdfDownloadButton from "@/components/tool-ui/PdfDownloadButton";
-import type { RetirementResult as RetirementResultData } from "@tooloralabs/tools";
+import RetirementShareExportModal from "./RetirementShareExportModal";
+import type { RetirementMode, RetirementOutcome } from "./types";
 
 type RetirementResultProps = {
-  result: RetirementResultData | null;
+  mode: RetirementMode;
+  hasCalculated: boolean;
+  digitStyle: DigitStyle;
+  currentAge: number;
+  retirementAge: number;
   currentSavings: number;
   monthlyContribution: number;
   annualReturnRate: number;
-  digitStyle: DigitStyle;
+  targetBalance: number;
+  outcome: RetirementOutcome;
 };
 
 function Stat({ title, value }: { title: string; value: string }) {
@@ -25,61 +31,139 @@ function Stat({ title, value }: { title: string; value: string }) {
 }
 
 export default function RetirementResult({
-  result,
+  mode,
+  hasCalculated,
+  digitStyle,
+  currentAge,
+  retirementAge,
   currentSavings,
   monthlyContribution,
   annualReturnRate,
-  digitStyle,
+  targetBalance,
+  outcome,
 }: RetirementResultProps) {
   const t = useTranslations("tools.retirement-calculator");
 
-  const money = (value: number) =>
-    formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const percent = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 })}%`;
+  const yearsText = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 })} ${t("aboveFold.yearsUnit")}`;
 
-  const hasResult = result !== null && result.projectedBalance > 0;
+  if (!hasCalculated) {
+    return (
+      <SectionCard title={t("aboveFold.resultTitle")}>
+        <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
+          <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
+          <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.emptyStateMessage")}</p>
+        </div>
+      </SectionCard>
+    );
+  }
+
+  const heroLabel =
+    mode === "endAmount" ? t("aboveFold.projectedBalanceLabel") : mode === "requiredContribution" ? t("aboveFold.requiredContributionLabel") : t("aboveFold.yearsNeededLabel");
+
+  const heroValue = outcome.unreachable
+    ? "—"
+    : mode === "endAmount"
+      ? money(outcome.projectedBalance)
+      : mode === "requiredContribution"
+        ? money(outcome.requiredMonthlyContribution)
+        : yearsText(outcome.yearsToRetirement);
+
+  const sentenceKey = outcome.unreachable ? "aboveFold.sentences.requiredYearsUnreachable" : `aboveFold.sentences.${mode}`;
+  const sentence = t(sentenceKey, {
+    currentAge: formatLocalizedNumber(currentAge, digitStyle, { maximumFractionDigits: 0 }),
+    retirementAge: formatLocalizedNumber(retirementAge, digitStyle, { maximumFractionDigits: 0 }),
+    savings: money(currentSavings),
+    contribution: money(monthlyContribution),
+    rate: percent(annualReturnRate),
+    target: money(targetBalance),
+    balance: money(outcome.projectedBalance),
+    requiredContribution: money(outcome.requiredMonthlyContribution),
+    years: yearsText(outcome.yearsToRetirement),
+    retirementAgeReached: formatLocalizedNumber(outcome.retirementAgeReached ?? 0, digitStyle, { maximumFractionDigits: 0 }),
+  });
+
+  const sharedInputRows = [
+    { label: t("form.currentAgeLabel"), value: formatLocalizedNumber(currentAge, digitStyle, { maximumFractionDigits: 0 }) },
+    { label: t("form.currentSavingsLabel"), value: money(currentSavings) },
+    { label: t("form.annualReturnRateLabel"), value: percent(annualReturnRate) },
+  ];
+  const inputRows =
+    mode === "endAmount"
+      ? [{ label: t("form.retirementAgeLabel"), value: formatLocalizedNumber(retirementAge, digitStyle, { maximumFractionDigits: 0 }) }, ...sharedInputRows, { label: t("form.monthlyContributionLabel"), value: money(monthlyContribution) }]
+      : mode === "requiredContribution"
+        ? [
+            { label: t("form.targetBalanceLabel"), value: money(targetBalance) },
+            { label: t("form.retirementAgeLabel"), value: formatLocalizedNumber(retirementAge, digitStyle, { maximumFractionDigits: 0 }) },
+            ...sharedInputRows,
+          ]
+        : [{ label: t("form.targetBalanceLabel"), value: money(targetBalance) }, ...sharedInputRows, { label: t("form.monthlyContributionLabel"), value: money(monthlyContribution) }];
+
+  const resultRows = outcome.unreachable
+    ? [{ label: heroLabel, value: "—" }]
+    : mode === "endAmount"
+      ? [
+          { label: t("aboveFold.totalContributedLabel"), value: money(outcome.totalContributionsPure) },
+          { label: t("aboveFold.totalGrowthLabel"), value: money(outcome.totalGrowth) },
+        ]
+      : mode === "requiredContribution"
+        ? [
+            { label: t("aboveFold.projectedBalanceLabel"), value: money(outcome.projectedBalance) },
+            { label: t("aboveFold.totalGrowthLabel"), value: money(outcome.totalGrowth) },
+          ]
+        : [
+            { label: t("aboveFold.retirementAgeReachedLabel"), value: formatLocalizedNumber(outcome.retirementAgeReached ?? 0, digitStyle, { maximumFractionDigits: 0 }) },
+            { label: t("aboveFold.projectedBalanceLabel"), value: money(outcome.projectedBalance) },
+          ];
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
       action={
-        hasResult ? (
-          <PdfDownloadButton
-            toolName={t("title")}
-            inputs={[
-              { label: t("form.currentSavingsLabel"), value: money(currentSavings) },
-              { label: t("form.monthlyContributionLabel"), value: money(monthlyContribution) },
-              { label: t("form.annualReturnRateLabel"), value: `${formatLocalizedNumber(annualReturnRate, digitStyle)}%` },
-              { label: t("aboveFold.yearsToRetirementLabel"), value: String(result.yearsToRetirement) },
-            ]}
-            results={[
-              { label: t("aboveFold.projectedBalanceLabel"), value: money(result.projectedBalance) },
-              { label: t("aboveFold.totalContributionsLabel"), value: money(result.totalContributions) },
-              { label: t("aboveFold.totalGrowthLabel"), value: money(result.totalGrowth) },
-            ]}
-            filename="retirement-calculator-result.pdf"
-          />
-        ) : undefined
+        <RetirementShareExportModal
+          mode={mode}
+          inputRows={inputRows}
+          resultRows={resultRows}
+          heroLabel={heroLabel}
+          heroValue={heroValue}
+          sentence={sentence}
+          yearlySchedule={outcome.yearlySchedule}
+          columnYearLabel={t("yearlyBreakdown.columnYear")}
+          columnBalanceLabel={t("yearlyBreakdown.columnEndingBalance")}
+          columnInterestLabel={t("yearlyBreakdown.columnInterestEarned")}
+          digitStyle={digitStyle}
+        />
       }
     >
-      {hasResult ? (
-        <>
-          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.projectedBalanceLabel")}</p>
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {money(result.projectedBalance)}
-          </p>
-          <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">
-            {t("aboveFold.yearsToRetirementValue", { years: result.yearsToRetirement })}
-          </p>
+      <p className="text-center text-sm leading-6 text-zinc-500 dark:text-zinc-400">{sentence}</p>
 
-          <div className="mt-5 grid grid-cols-2 gap-2">
-            <Stat title={t("aboveFold.totalContributionsLabel")} value={money(result.totalContributions)} />
-            <Stat title={t("aboveFold.totalGrowthLabel")} value={money(result.totalGrowth)} />
-          </div>
-        </>
-      ) : (
-        <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
-          {t("aboveFold.placeholder")}
-        </p>
+      <p className="mt-4 text-center text-sm text-zinc-500 dark:text-zinc-400">{heroLabel}</p>
+      <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
+        {heroValue}
+      </p>
+
+      {!outcome.unreachable && (
+        <div className="mt-5 grid grid-cols-2 gap-2">
+          {mode === "endAmount" && (
+            <>
+              <Stat title={t("aboveFold.totalContributedLabel")} value={money(outcome.totalContributionsPure)} />
+              <Stat title={t("aboveFold.totalGrowthLabel")} value={money(outcome.totalGrowth)} />
+            </>
+          )}
+          {mode === "requiredContribution" && (
+            <>
+              <Stat title={t("aboveFold.projectedBalanceLabel")} value={money(outcome.projectedBalance)} />
+              <Stat title={t("aboveFold.totalGrowthLabel")} value={money(outcome.totalGrowth)} />
+            </>
+          )}
+          {mode === "requiredYears" && (
+            <>
+              <Stat title={t("aboveFold.retirementAgeReachedLabel")} value={formatLocalizedNumber(outcome.retirementAgeReached ?? 0, digitStyle, { maximumFractionDigits: 0 })} />
+              <Stat title={t("aboveFold.projectedBalanceLabel")} value={money(outcome.projectedBalance)} />
+            </>
+          )}
+        </div>
       )}
     </SectionCard>
   );

@@ -1,3 +1,6 @@
+import { calculateCompoundInterest, type YearlyGrowthPoint, type MonthlyGrowthPoint } from "./CompoundInterestCalculator";
+import { solveInvestmentLength, solveAdditionalContribution } from "./InvestmentGoalSolver";
+
 export type RetirementResult = {
   projectedBalance: number;
   totalContributions: number;
@@ -66,4 +69,97 @@ export function calculateRetirement(
     totalGrowth,
     yearsToRetirement,
   };
+}
+
+export type RetirementProjection = RetirementResult & {
+  yearlySchedule: YearlyGrowthPoint[];
+  monthlySchedule: MonthlyGrowthPoint[];
+};
+
+/**
+ * Same projection as `calculateRetirement`, plus the full year-by-year and month-by-month
+ * growth schedule. Retirement growth is the identical future-value-of-an-annuity-plus-lump-sum
+ * math Compound Interest Calculator already simulates month by month, so this is a thin wrapper
+ * around `calculateCompoundInterest` (always monthly compounding, no tax or inflation
+ * adjustment — this tool doesn't expose those as inputs) rather than a second simulation loop.
+ */
+export function calculateRetirementProjection(
+  currentAge: number,
+  retirementAge: number,
+  currentSavings: number,
+  monthlyContribution: number,
+  annualReturnRate: number
+): RetirementProjection {
+  const base = calculateRetirement(currentAge, retirementAge, currentSavings, monthlyContribution, annualReturnRate);
+  if (base.yearsToRetirement <= 0) {
+    return { ...base, yearlySchedule: [], monthlySchedule: [] };
+  }
+
+  const forward = calculateCompoundInterest(currentSavings, annualReturnRate, base.yearsToRetirement, "monthly", monthlyContribution);
+  return { ...base, yearlySchedule: forward.yearlySchedule, monthlySchedule: forward.monthlySchedule };
+}
+
+export type RequiredContributionResult = {
+  requiredMonthlyContribution: number;
+  yearsToRetirement: number;
+  yearlySchedule: YearlyGrowthPoint[];
+  monthlySchedule: MonthlyGrowthPoint[];
+};
+
+/**
+ * The reverse of the contribution side of a retirement projection: given a target balance at
+ * retirement, finds the required monthly contribution — reusing the same closed-form
+ * contribution solver Compound Interest Calculator's "Additional Contribution" tab uses, since
+ * the underlying math (future value linear in a level monthly contribution) is identical.
+ */
+export function solveRequiredContribution(
+  targetBalance: number,
+  currentAge: number,
+  retirementAge: number,
+  currentSavings: number,
+  annualReturnRate: number
+): RequiredContributionResult {
+  if (!Number.isFinite(currentAge) || currentAge < 0 || !Number.isFinite(retirementAge) || retirementAge <= currentAge || !Number.isFinite(targetBalance) || targetBalance <= 0) {
+    return { requiredMonthlyContribution: 0, yearsToRetirement: 0, yearlySchedule: [], monthlySchedule: [] };
+  }
+
+  const yearsToRetirement = retirementAge - currentAge;
+  const requiredMonthlyContribution = solveAdditionalContribution(targetBalance, currentSavings, annualReturnRate, yearsToRetirement, "monthly");
+  const forward = calculateCompoundInterest(currentSavings, annualReturnRate, yearsToRetirement, "monthly", requiredMonthlyContribution);
+
+  return { requiredMonthlyContribution, yearsToRetirement, yearlySchedule: forward.yearlySchedule, monthlySchedule: forward.monthlySchedule };
+}
+
+export type RequiredYearsResult = {
+  yearsNeeded: number | null;
+  retirementAgeReached: number | null;
+  yearlySchedule: YearlyGrowthPoint[];
+  monthlySchedule: MonthlyGrowthPoint[];
+};
+
+/**
+ * The reverse of the time side of a retirement projection: given a target balance, finds how
+ * many years of growth it takes to reach it — reusing the same month-by-month search Compound
+ * Interest Calculator's "Investment Length" tab uses, since balance is monotonically
+ * non-decreasing in time and the search is exact, not an approximation.
+ */
+export function solveRequiredYears(
+  targetBalance: number,
+  currentAge: number,
+  currentSavings: number,
+  monthlyContribution: number,
+  annualReturnRate: number,
+  maxYears: number
+): RequiredYearsResult {
+  if (!Number.isFinite(currentAge) || currentAge < 0 || !Number.isFinite(targetBalance) || targetBalance <= 0) {
+    return { yearsNeeded: null, retirementAgeReached: null, yearlySchedule: [], monthlySchedule: [] };
+  }
+
+  const yearsNeeded = solveInvestmentLength(targetBalance, currentSavings, annualReturnRate, "monthly", monthlyContribution, maxYears);
+  if (yearsNeeded === null) {
+    return { yearsNeeded: null, retirementAgeReached: null, yearlySchedule: [], monthlySchedule: [] };
+  }
+
+  const forward = calculateCompoundInterest(currentSavings, annualReturnRate, yearsNeeded, "monthly", monthlyContribution);
+  return { yearsNeeded, retirementAgeReached: currentAge + yearsNeeded, yearlySchedule: forward.yearlySchedule, monthlySchedule: forward.monthlySchedule };
 }

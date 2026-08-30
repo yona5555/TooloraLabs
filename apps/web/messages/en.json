@@ -1383,15 +1383,7 @@
         "quickInsightWithPmi": "This loan carries about {pmi}/mo in PMI because the down payment is under 20% — putting down {extra} more would cross that threshold and drop the charge immediately, instead of waiting for the balance to pay it down over time.",
         "quickInsightWithPmiAtTwentyPercent": "This loan carries about {pmi}/mo in PMI even though the down payment is already 20% or more — that's usually only charged below 20%, so it's worth confirming this premium with your lender.",
         "quickInsightNoPmi": "With 20% or more down, this loan carries no PMI at all — every dollar of the payment goes toward interest and your own equity, none of it toward insuring the lender against your default.",
-        "affordabilityMiniTitle": "How much home can I afford?",
-        "affordabilityMiniIntro": "A quick, independent estimate using the standard 28%/36% debt-to-income guideline lenders commonly reference.",
-        "affordabilityMiniIncome": "Monthly gross income",
-        "affordabilityMiniDebts": "Other monthly debts",
-        "affordabilityMiniRate": "Interest rate (%)",
-        "affordabilityMiniYears": "Loan term (years)",
-        "affordabilityMiniDownPercent": "Down payment (%)",
-        "affordabilityMiniResult": "Affordable payment: {payment}/mo — estimated home price: {homePrice}",
-        "affordabilityMiniPlaceholder": "Enter your income to see an estimate."
+        "sentence": "For a {price} home with {down} down at {rate}% over {years} years, your estimated monthly payment is {payment}."
       },
       "education": {
         "intro": {
@@ -1631,7 +1623,8 @@
         "totalPrincipalLabel": "Total Principal",
         "totalInterestLabel": "Total Interest Paid",
         "pmiNote": "Based on your inputs, PMI could be requested for removal around year {dropYear} (80% loan-to-value) and must be automatically terminated by year {autoYear} (78% loan-to-value) at the latest.",
-        "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs."
+        "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs.",
+        "tooltipYearLabel": "Year"
       },
       "amortizationTable": {
         "title": "Full Monthly Amortization Schedule",
@@ -1678,6 +1671,73 @@
         "columnPayment": "Payment",
         "pmiNote": "Under this plan, PMI could be requested for removal around payment #{period} and must be automatically terminated by payment #{autoPeriod} at the latest.",
         "note": "This assumes the servicer applies each bi-weekly payment straight to principal and interest as it arrives. Some servicers instead hold payments in a suspense account until a full monthly amount accrues, which erases this benefit — checking the servicer's policy clarifies whether it applies here, or the same effect can be reproduced independently of it by simply adding one-twelfth of the monthly payment to every regular monthly payment."
+      },
+      "tabs": {
+        "groupLabel": "Choose what to calculate",
+        "standard": "Monthly Payment",
+        "payoffTime": "Payoff Time",
+        "homePrice": "Max Home Price"
+      },
+      "payoffTimeResult": {
+        "resultTitle": "Payoff Time",
+        "heroLabel": "Time to Payoff",
+        "heroLabelWithExtra": "Shortened Payoff Time",
+        "standardPayoffLabel": "Standard Payoff Time",
+        "monthsSavedLabel": "Time Saved",
+        "interestSavedLabel": "Interest Saved",
+        "totalInterestLabel": "Total Interest Paid",
+        "loanAmountLabel": "Loan Amount",
+        "sentenceNoExtra": "With no extra monthly payment, this loan pays off in {years} years {months} months — the full {termYears}-year term.",
+        "sentenceWithExtra": "Paying an extra {extra}/mo shortens payoff from {standardYears}y {standardMonths}m to {years}y {months}m, saving {interestSaved} in interest."
+      },
+      "homePriceMode": {
+        "inputTitle": "Estimate Your Max Home Price",
+        "resultTitle": "Estimated Max Home Price",
+        "emptyStateMessage": "Enter your income and details, then press Calculate to estimate the home price you can afford.",
+        "maxHomePriceLabel": "Max Home Price",
+        "loanAmountLabel": "Loan Amount",
+        "monthlyPaymentLabel": "Estimated Monthly Payment",
+        "sentence": "Based on an annual income of {income} and {debts}/mo in other debts, you could afford a home price of up to about {price}.",
+        "form": {
+          "annualIncomeLabel": "Annual Gross Income",
+          "annualIncomePlaceholder": "e.g. 90,000",
+          "monthlyDebtsLabel": "Other Monthly Debts",
+          "monthlyDebtsPlaceholder": "e.g. 400",
+          "downPaymentLabel": "Down Payment",
+          "downPaymentPlaceholder": "e.g. 40,000",
+          "interestRateLabel": "Interest Rate (%)",
+          "interestRatePlaceholder": "e.g. 6.5",
+          "loanTermLabel": "Loan Term (years)",
+          "loanTermPlaceholder": "e.g. 30",
+          "propertyTaxRateLabel": "Property Tax Rate (%)",
+          "propertyTaxRateHint": "Annual property tax as a percentage of the home's value; varies by location.",
+          "propertyTaxRatePlaceholder": "e.g. 1.2",
+          "annualInsuranceLabel": "Annual Home Insurance",
+          "annualInsurancePlaceholder": "e.g. 1,500",
+          "monthlyHoaLabel": "Monthly HOA Fee",
+          "monthlyHoaPlaceholder": "e.g. 0",
+          "calculate": "Calculate",
+          "clear": "Clear"
+        }
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jane Doe",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jane@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Acme Financial",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City",
+        "preparedForTitle": "Prepared For",
+        "scheduleTableTitle": "Year-by-Year Amortization",
+        "generatedOn": "Generated on",
+        "shareToSocial": "Share to Social"
       }
     },
     "crypto-converter": {
@@ -2835,12 +2895,39 @@
         "principalLabel": "Principal",
         "contributionsLabel": "Contributions",
         "interestLabel": "Interest Earned",
+        "buyingPowerLabel": "Buying Power After Inflation",
+        "emptyStateMessage": "Enter your investment details and press Calculate to see your results.",
+        "yearsUnit": "years",
+        "resultLabels": {
+          "years": "Time Needed",
+          "rate": "Required Annual Return",
+          "principal": "Required Starting Amount",
+          "contribution": "Required Monthly Contribution"
+        },
+        "sentences": {
+          "endAmount": "Investing {principal} today at a {rate} annual return for {years}, plus {contribution} contributed monthly, is projected to grow to {result}.",
+          "investmentLength": "You'll need to keep investing for about {years} to reach your target of {target}.",
+          "investmentLengthUnreachable": "Your target of {target} isn't reachable within 100 years with these inputs — try a higher return rate or a larger monthly contribution.",
+          "returnRate": "You'll need an average annual return of about {rate} to reach your target of {target} in {years}.",
+          "returnRateUnreachable": "Reaching {target} in {years} isn't achievable within a realistic return range — try a longer time horizon or a larger contribution.",
+          "startingAmount": "You'll need to start with about {principal} today to reach your target of {target} in {years}.",
+          "additionalContribution": "You'll need to contribute about {contribution} each month to reach your target of {target} in {years}."
+        },
         "disclaimer": "This tool provides general educational estimates of investment growth for illustration purposes only, not financial or investment advice. It assumes a constant, unchanging rate of return that does not reflect the volatility of real markets, and no result here is guaranteed. Consult a licensed financial advisor before making investment decisions."
       },
       "nav": {
         "tool": "Calculator",
+        "yearlyBreakdown": "Yearly Breakdown",
         "faq": "FAQ",
         "behindTheTool": "Behind the Tool"
+      },
+      "tabs": {
+        "groupLabel": "Investment calculation mode",
+        "endAmount": "End Amount",
+        "investmentLength": "Investment Length",
+        "returnRate": "Return Rate",
+        "startingAmount": "Starting Amount",
+        "additionalContribution": "Additional Contribution"
       },
       "form": {
         "principalLabel": "Starting Amount",
@@ -2858,15 +2945,64 @@
           "daily": "Daily"
         },
         "monthlyContributionLabel": "Monthly Contribution (optional)",
-        "monthlyContributionPlaceholder": "e.g. 100"
+        "monthlyContributionPlaceholder": "e.g. 100",
+        "taxRateLabel": "Tax Rate on Interest (%) (optional)",
+        "taxRatePlaceholder": "e.g. 15",
+        "inflationRateLabel": "Inflation Rate (%) (optional)",
+        "inflationRatePlaceholder": "e.g. 3",
+        "targetLabel": "Your Target",
+        "targetPlaceholder": "e.g. 50,000",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "growthChart": {
         "title": "Growth Over Time",
         "intro": "This chart shows how your balance grows year by year, split between what you've contributed in total (starting amount plus monthly contributions) and the interest that has accumulated on top of it.",
+        "emptyStateMessage": "Press Calculate to see your growth chart.",
         "contributedLabel": "Contributed",
         "interestLabel": "Interest",
         "totalContributedLabel": "Total Contributed",
-        "totalInterestLabel": "Total Interest Earned"
+        "totalInterestLabel": "Total Interest Earned",
+        "tooltipYearLabel": "Year",
+        "tooltipBalanceLabel": "Total Balance"
+      },
+      "yearlyBreakdown": {
+        "title": "Accumulation Schedule",
+        "intro": "The full accumulation schedule for your investment — switch between an annual or monthly breakdown of your balance, contributions, and interest earned.",
+        "emptyStateMessage": "Press Calculate to see your year-by-year breakdown.",
+        "columnYear": "Year",
+        "columnMonth": "Month",
+        "columnOpeningBalance": "Opening Balance",
+        "columnContributions": "Contributions",
+        "columnInterestEarned": "Interest Earned",
+        "columnEndingBalance": "Ending Balance",
+        "annualView": "Annual Schedule",
+        "monthlyView": "Monthly Schedule",
+        "viewFullTable": "View full breakdown",
+        "showLess": "Show less"
+      },
+      "relatedTools": {
+        "title": "Popular Financial Calculators"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "shareText": "My investment is projected to grow to {result} after {years} — calculated with TooloraLabs' Compound Interest Calculator.",
+        "scheduleTableTitle": "Yearly Accumulation Schedule",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       },
       "education": {
         "intro": {
@@ -2878,9 +3014,40 @@
             "compoundLabel": "Compound Interest",
             "timeLabel": "Time",
             "valueLabel": "Value",
-            "caption": "Two equal starting deposits growing at the same rate: the compound-interest curve accelerates over time, while the simple-interest line grows by the same fixed amount every period."
+            "chartAriaLabel": "Line chart comparing your compound interest growth to simple interest growth over the investment period",
+            "tooltipYearLabel": "Year",
+            "tooltipDifferenceLabel": "Difference",
+            "volumeLabel": "Yearly Gain",
+            "emptyStateMessage": "Press Calculate above to see how your own numbers compare to simple interest over time.",
+            "caption": "After {years}, compound interest earned you {difference} more than simple interest — based on your actual numbers above."
           },
           "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for personalized financial advice."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Five variables define any compound-interest projection — fixing any four of them determines the fifth, which is exactly the relationship each tab above solves for.",
+          "items": [
+            {
+              "name": "Starting Amount (Principal)",
+              "description": "The lump sum invested at the very start, before any growth or additional contributions are added. It's the base every future dollar of interest is ultimately calculated from."
+            },
+            {
+              "name": "Return Rate",
+              "description": "The annual percentage rate the investment is assumed to earn, before any compounding-frequency adjustment. Small differences here compound into large differences over long horizons."
+            },
+            {
+              "name": "Investment Duration",
+              "description": "The length of time, in years, the money stays invested and continues compounding. Because growth accelerates over time, duration is often the single most powerful variable to extend."
+            },
+            {
+              "name": "Additional Contribution",
+              "description": "A fixed amount added to the balance every month, on top of the starting amount. Each contribution then earns its own compounding return for however long it remains invested."
+            },
+            {
+              "name": "End Amount (Target)",
+              "description": "The future value the investment reaches — either the result of the other four variables, or, on the other four tabs, the goal used to solve for whichever variable is missing."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -2898,6 +3065,28 @@
               "scenario": "$1,000 principal + $200/month, 6% annual rate, monthly compounding, 15 years",
               "futureValue": "$60,617.84",
               "interest": "$23,617.84"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Compound Interest in Practice",
+          "intro": "Compound interest isn't limited to investment portfolios — it governs the math behind several everyday financial products, for better or worse depending on which side of the balance a person is on.",
+          "items": [
+            {
+              "title": "Savings Accounts and Certificates of Deposit",
+              "description": "Banks pay compound interest on savings balances and CDs, crediting interest on a regular schedule (often daily or monthly) so that previously earned interest itself starts earning more — the same mechanism this calculator's \"End Amount\" tab models directly."
+            },
+            {
+              "title": "Credit Card Balances",
+              "description": "Unpaid credit card balances accrue compound interest against the cardholder, typically compounded daily at a much higher rate than most savings products pay — which is why a balance carried for months can grow substantially faster than the minimum payments reduce it."
+            },
+            {
+              "title": "Loans and Mortgages",
+              "description": "Amortizing loans apply compound interest to the outstanding balance each period, then split every payment between that period's interest and the remaining principal — a structure this site's Mortgage Calculator and Loan Calculator model in full detail."
+            },
+            {
+              "title": "Retirement Funds",
+              "description": "Employer-sponsored retirement accounts and personal retirement savings both rely on decades of compounding, often combined with regular payroll contributions, to turn modest periodic savings into a substantially larger balance by retirement age."
             }
           ]
         },
@@ -2998,6 +3187,19 @@
         "totalPaymentLabel": "Total Payment",
         "loanAmountLabel": "Loan Amount",
         "totalInterestLabel": "Total Interest",
+        "emptyStateMessage": "Enter your loan details and press Calculate to see your results.",
+        "totalLabel": "Total",
+        "yearsUnit": "years",
+        "resultLabels": {
+          "payment": "Payment Amount",
+          "amountDue": "Amount Due at Maturity",
+          "amountReceived": "Amount You Receive Today"
+        },
+        "sentences": {
+          "amortized": "Borrowing {amount} at {rate} annual interest over {term}, your fixed payment comes to {payment} each period.",
+          "deferred": "Borrowing {amount} today at {rate} annual interest for {term} with no payments until maturity, you'll owe {due} when the loan comes due.",
+          "bond": "To receive {due} at maturity in {term} at {rate} annual interest, you would need to invest {received} today."
+        },
         "disclaimer": "This tool provides a general educational estimate of loan payments only, not a loan offer or financial advice. Actual rates, fees, and terms offered by a lender depend on your creditworthiness and other factors and may differ from this estimate. Consult a licensed lender or financial advisor before taking out a loan."
       },
       "nav": {
@@ -3006,30 +3208,92 @@
         "behindTheTool": "Behind the Tool",
         "amortization": "Amortization"
       },
+      "tabs": {
+        "groupLabel": "Loan type",
+        "amortized": "Amortized Loan",
+        "deferred": "Deferred Payment Loan",
+        "bond": "Bond"
+      },
       "form": {
         "loanAmountLabel": "Loan Amount",
         "loanAmountPlaceholder": "e.g. 10,000",
+        "dueAmountLabel": "Predetermined Due Amount",
+        "dueAmountPlaceholder": "e.g. 10,000",
         "interestRateLabel": "Annual Interest Rate (%)",
         "interestRatePlaceholder": "e.g. 6.5",
-        "loanTermLabel": "Loan Term (years)",
-        "loanTermPlaceholder": "e.g. 5"
+        "loanTermLabel": "Loan Term",
+        "loanTermPlaceholder": "e.g. 5",
+        "termUnitYears": "Years",
+        "termUnitMonths": "Months",
+        "compoundLabel": "Compound",
+        "payBackLabel": "Pay Back",
+        "frequency": {
+          "annually": "Annually",
+          "semiannually": "Semiannually",
+          "quarterly": "Quarterly",
+          "monthly": "Monthly",
+          "daily": "Daily"
+        },
+        "payFrequency": {
+          "annually": "Annually",
+          "semiannually": "Semiannually",
+          "quarterly": "Quarterly",
+          "monthly": "Monthly",
+          "biweekly": "Biweekly",
+          "weekly": "Weekly"
+        },
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "payoffChart": {
         "title": "Payoff Over Time",
-        "intro": "This chart shows each year's payments split between principal and interest, along with how the remaining balance declines over the life of the loan.",
+        "intro": "This chart shows each payment split between principal and interest, along with how the remaining balance declines over the life of the loan.",
         "principalLabel": "Principal",
         "interestLabel": "Interest",
         "balanceLabel": "Balance",
         "totalPrincipalLabel": "Total Principal",
-        "totalInterestLabel": "Total Interest"
+        "totalInterestLabel": "Total Interest",
+        "tooltipPeriodLabel": "Period"
       },
       "amortizationTable": {
         "title": "Amortization Schedule",
-        "intro": "A year-by-year summary of how much of your payments goes to principal versus interest, and your remaining balance at the end of each year.",
+        "intro": "A period-by-period summary of how much of each payment goes to principal versus interest, and your remaining balance after each one.",
+        "growthIntro": "A year-by-year view of how the balance grows as interest accrues, from today until the loan matures.",
         "columnYear": "Year",
+        "columnPeriod": "Period",
         "yearLabel": "Year {year}",
         "viewFullTable": "View Full Schedule",
         "showLess": "Show Less"
+      },
+      "deferredGrowthChart": {
+        "title": "Balance Growth Until Maturity",
+        "intro": "This chart shows how the loan balance grows each year as interest compounds, with no payments due until the single balloon payment at maturity."
+      },
+      "bondGrowthChart": {
+        "title": "Present Value Growth to Maturity",
+        "intro": "This chart shows how the amount you invest today grows year by year until it reaches the bond's due amount at maturity."
+      },
+      "relatedTools": {
+        "title": "Popular Financial Calculators"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "scheduleTableTitle": "Full Schedule",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       },
       "education": {
         "intro": {
@@ -3037,13 +3301,63 @@
           "paragraph1": "A fixed-rate installment loan — whether it funds a car, a home renovation, a business purchase, or anything else — is typically repaid through fixed, equal monthly payments over a set term, a structure called an amortizing loan. Even though every payment is the same size, the mix inside it changes constantly: early payments are weighted heavily toward interest, since interest is charged on the full outstanding balance, while later payments are weighted toward principal, since the balance — and the interest charged on it — has shrunk.",
           "paragraph2": "The monthly payment itself is calculated so that the loan reaches a zero balance exactly at the end of the term, given the loan amount and interest rate. Unlike a mortgage, the loan calculated here has no mortgage insurance, property tax, or homeowners association fee built in — its cost is just the interest charged on the declining balance over the term you choose, whatever the loan is actually for.",
           "diagram": {
-            "principalLabel": "Principal",
-            "interestLabel": "Interest",
-            "startLabel": "Start of Loan",
-            "endLabel": "End of Loan",
-            "caption": "Each fixed monthly payment splits between interest (charged on the remaining balance) and principal (which reduces it) — a split that shifts toward principal as the loan matures."
+            "title": "Where Your Payment Goes",
+            "emptyStateMessage": "Press Calculate above (on the Amortized Loan tab) to see how your own payments split between interest and principal over time.",
+            "caption": "By period {period}, your fixed payment flips from being mostly interest to mostly principal — the point where the principal share overtakes the interest share for good.",
+            "captionNoCrossover": "Across this loan's term, your fixed payment stays weighted toward principal from the very first period.",
+            "chartAriaLabel": "Interactive chart of interest versus principal for each payment across the loan term"
           },
           "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for personalized financial advice."
+        },
+        "loanBasics": {
+          "title": "Loan Basics",
+          "intro": "A few core concepts explain almost everything about how a loan's true cost is determined and displayed.",
+          "aprVsApy": {
+            "title": "APR vs. APY: Two Different Numbers for a Reason",
+            "paragraph": "The Annual Percentage Rate (APR) is the nominal yearly interest rate a lender quotes, before accounting for how often interest compounds within the year. The Annual Percentage Yield (APY) — sometimes called the effective annual rate — is the actual rate you'd pay or earn over a full year once that compounding is factored in. The two are identical only when interest compounds once a year; the more often it compounds — monthly, daily — the further APY rises above APR for the same quoted rate, because each compounding period's interest starts earning its own interest sooner. Lenders are required to disclose APR on consumer loans, which is why it's the number most commonly advertised, even though APY better reflects what compounding actually costs over a year."
+          },
+          "compoundingFrequency": {
+            "title": "Why Compounding Frequency Matters",
+            "paragraph": "Compounding frequency sets how often accrued interest is added to the balance so that future interest is calculated on that larger amount. A loan compounding daily accrues slightly more total interest over a year than one compounding annually at the identical nominal rate, because interest starts compounding on itself much sooner. This calculator lets the compounding frequency and the payment frequency be set independently — a loan can compound monthly while payments are made weekly, for instance — which is why the payment amount is derived from the loan's effective annual rate rather than its nominal rate directly."
+          },
+          "termLength": {
+            "title": "How the Loan Term Shapes Total Cost",
+            "paragraph": "The loan term is the single input with the largest effect on the trade-off between monthly affordability and total cost. Stretching the same principal over a longer term lowers each individual payment, since it's spread across more periods — but it also means the outstanding balance stays higher for longer, so more total interest accrues before the loan is paid off. Shortening the term does the reverse: higher individual payments, but a lower total cost over the life of the loan, since the balance falls faster and accrues interest for fewer periods."
+          }
+        },
+        "consumerLoanTypes": {
+          "title": "Types of Consumer Loans",
+          "intro": "Every consumer loan sits somewhere on two independent spectrums: whether it's backed by collateral, and how a lender decides whether to approve it.",
+          "securedVsUnsecured": {
+            "title": "Secured vs. Unsecured Loans",
+            "paragraph": "A secured loan is backed by an asset — a vehicle for an auto loan, a home for a mortgage, or a savings account for a secured personal loan — that the lender can seize if payments stop. That collateral lowers the lender's risk, which is typically reflected in a lower interest rate and, often, a larger amount a borrower can qualify for. An unsecured loan, common for general-purpose personal loans and most credit cards, is backed only by the borrower's promise to repay and their credit history, so lenders price in the added risk with a higher rate and typically stricter approval standards."
+          },
+          "fiveCs": {
+            "title": "The Five Cs of Credit",
+            "paragraph": "Lenders commonly weigh five broad factors — nicknamed the five Cs — when deciding whether to approve a loan and at what rate.",
+            "items": [
+              {
+                "name": "Character",
+                "description": "A borrower's track record of repaying past debts, typically summarized by a credit report and credit score."
+              },
+              {
+                "name": "Capacity",
+                "description": "Whether current income is sufficient to cover the new payment on top of existing debt obligations, often measured through a debt-to-income ratio."
+              },
+              {
+                "name": "Capital",
+                "description": "The borrower's own money already committed to the purchase or held in savings — a down payment or reserve funds signal lower risk to a lender."
+              },
+              {
+                "name": "Collateral",
+                "description": "Any asset pledged to secure the loan, which the lender could claim if the borrower defaults — the deciding factor in secured versus unsecured pricing."
+              },
+              {
+                "name": "Conditions",
+                "description": "The purpose of the loan and the broader economic environment, including prevailing interest rates and industry-specific risk factors."
+              }
+            ]
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -3160,8 +3474,19 @@
         "maxLoanAmountLabel": "Maximum Loan Amount",
         "totalPaymentLabel": "Total Payment",
         "totalInterestLabel": "Total Interest",
+        "requiredPaymentLabel": "Required Monthly Payment",
+        "emptyStateMessage": "Enter your details and press Calculate to see your results.",
+        "sentences": {
+          "maxLoan": "With a monthly payment of {payment}, the maximum loan amount you can afford is {amount}.",
+          "requiredPayment": "To pay off a loan of {amount}, your required monthly payment is {payment}."
+        },
         "placeholder": "Enter a monthly payment, rate, and term to see the maximum loan amount it supports.",
         "disclaimer": "This tool provides a general educational estimate of borrowing capacity only, not a loan offer, pre-qualification, or financial advice. A lender's actual maximum loan amount depends on your full credit profile, existing debts, and other factors. Consult a licensed lender or financial advisor before taking out a loan."
+      },
+      "tabs": {
+        "groupLabel": "Calculation Type",
+        "maxLoan": "Max Loan",
+        "requiredPayment": "Required Payment"
       },
       "nav": {
         "tool": "Calculator",
@@ -3172,10 +3497,33 @@
         "monthlyPaymentLabel": "Monthly Payment You Can Afford",
         "monthlyPaymentHint": "The most you're comfortable paying each month toward this loan.",
         "monthlyPaymentPlaceholder": "e.g. 300",
+        "loanAmountLabel": "Loan Amount",
+        "loanAmountHint": "The amount you'd like to borrow.",
+        "loanAmountPlaceholder": "e.g. 10,000",
         "interestRateLabel": "Annual Interest Rate (%)",
         "interestRatePlaceholder": "e.g. 6",
         "loanTermLabel": "Loan Term (years)",
-        "loanTermPlaceholder": "e.g. 5"
+        "loanTermPlaceholder": "e.g. 5",
+        "calculate": "Calculate",
+        "clear": "Clear"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       },
       "education": {
         "intro": {
@@ -3292,19 +3640,33 @@
     "retirement-calculator": {
       "title": "Retirement Calculator",
       "description": "Project your retirement savings balance from a starting amount plus regular monthly contributions, compounding at an expected annual return.",
+      "tabs": {
+        "groupLabel": "Choose what to calculate",
+        "endAmount": "Projected Balance",
+        "requiredContribution": "Required Savings",
+        "requiredYears": "Years to Goal"
+      },
       "aboveFold": {
         "inputTitle": "Your Retirement Plan",
-        "resultTitle": "Projected Retirement Balance",
+        "resultTitle": "Retirement Result",
+        "emptyStateMessage": "Enter your age, savings, and contributions, then press Calculate to see your projection.",
+        "yearsUnit": "years",
         "projectedBalanceLabel": "Projected Balance",
-        "totalContributionsLabel": "Total Contributions",
+        "requiredContributionLabel": "Required Monthly Contribution",
+        "yearsNeededLabel": "Years Needed",
+        "totalContributedLabel": "Total Contributed",
         "totalGrowthLabel": "Total Growth",
-        "yearsToRetirementLabel": "Years to Retirement",
-        "yearsToRetirementValue": "Projected over {years} years",
-        "placeholder": "Enter your age, savings, and contributions to see your projected retirement balance.",
-        "disclaimer": "This tool provides a general educational projection only, not financial or investment advice. It assumes a constant annual return with no taxes, fees, inflation adjustment, or contribution limits, none of which hold true in real markets or real retirement accounts. Consult a licensed financial advisor before making retirement decisions."
+        "retirementAgeReachedLabel": "Age Reached",
+        "sentences": {
+          "endAmount": "Starting at age {currentAge} with {savings} saved and contributing {contribution} a month at a {rate} expected annual return, you're projected to have {balance} by age {retirementAge}.",
+          "requiredContribution": "To reach {target} by age {retirementAge}, starting from {savings} at age {currentAge} with a {rate} expected annual return, you need to contribute {requiredContribution} a month.",
+          "requiredYears": "Contributing {contribution} a month starting from {savings} at age {currentAge} with a {rate} expected annual return, you'll reach {target} in about {years} — around age {retirementAgeReached}.",
+          "requiredYearsUnreachable": "At {contribution} a month starting from {savings} with a {rate} expected annual return, {target} isn't reached within 80 years — try a higher contribution or return rate."
+        }
       },
       "nav": {
         "tool": "Calculator",
+        "yearlyBreakdown": "Yearly Breakdown",
         "faq": "FAQ",
         "behindTheTool": "Behind the Tool"
       },
@@ -3313,13 +3675,61 @@
         "currentAgePlaceholder": "e.g. 30",
         "retirementAgeLabel": "Retirement Age",
         "retirementAgePlaceholder": "e.g. 65",
+        "targetBalanceLabel": "Target Retirement Balance",
+        "targetBalanceHint": "The retirement balance you want to reach.",
+        "targetBalancePlaceholder": "e.g. 1,000,000",
         "currentSavingsLabel": "Current Retirement Savings",
         "currentSavingsPlaceholder": "e.g. 10,000",
         "monthlyContributionLabel": "Monthly Contribution",
         "monthlyContributionPlaceholder": "e.g. 500",
         "annualReturnRateLabel": "Expected Annual Return (%)",
         "annualReturnRateHint": "A typical long-term assumption for a diversified stock/bond portfolio is often between 5% and 8%; this is not a guarantee of any actual return.",
-        "annualReturnRatePlaceholder": "e.g. 7"
+        "annualReturnRatePlaceholder": "e.g. 7",
+        "calculate": "Calculate",
+        "clear": "Clear"
+      },
+      "growthChart": {
+        "title": "Savings Growth Over Time",
+        "emptyStateMessage": "Calculate a projection to see your savings grow year by year.",
+        "intro": "Blue shows money contributed (starting savings plus monthly contributions); amber shows investment growth on top of it.",
+        "interestLabel": "Growth",
+        "contributedLabel": "Contributed",
+        "totalContributedLabel": "Total Contributed",
+        "totalInterestLabel": "Total Growth",
+        "tooltipYearLabel": "Year",
+        "tooltipBalanceLabel": "Balance"
+      },
+      "yearlyBreakdown": {
+        "title": "Year-by-Year Breakdown",
+        "emptyStateMessage": "Calculate a projection to see the full year-by-year breakdown.",
+        "intro": "See exactly how your balance grows each year (or month) from contributions and investment growth.",
+        "annualView": "Annual",
+        "monthlyView": "Monthly",
+        "columnYear": "Year",
+        "columnMonth": "Month",
+        "columnOpeningBalance": "Opening Balance",
+        "columnContributions": "Contributions",
+        "columnInterestEarned": "Growth Earned",
+        "columnEndingBalance": "Ending Balance"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jane Doe",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jane@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Acme Financial",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City",
+        "preparedForTitle": "Prepared For",
+        "scheduleTableTitle": "Year-by-Year Schedule",
+        "generatedOn": "Generated on",
+        "shareToSocial": "Share to Social"
       },
       "education": {
         "intro": {
@@ -3444,8 +3854,24 @@
         "monthlyPaymentLabel": "Monthly Payment",
         "monthlyPrincipalAndInterestLabel": "Principal & Interest",
         "monthlyPropertyTaxLabel": "Property Tax",
+        "requiredAnnualIncomeLabel": "Required Annual Income",
+        "bindingConstraintLabel": "Limiting Factor",
+        "bindingConstraint": {
+          "frontEnd": "Housing cost (28% rule)",
+          "backEnd": "Total debt (36% rule)"
+        },
+        "emptyStateMessage": "Enter your details and press Calculate to see your results.",
+        "sentences": {
+          "homePrice": "With a gross annual income of {income}, the maximum home price you can afford is {price}.",
+          "requiredIncome": "To afford a {price} home, your gross annual income needs to be at least {income}."
+        },
         "placeholder": "Enter your income, debts, down payment, and loan terms to see the maximum home price you can afford.",
         "disclaimer": "This tool provides a general educational estimate only, not a mortgage pre-approval, loan offer, or financial advice. Lenders use their own underwriting rules, which can differ from the 28/36 rule used here, and your actual approved amount depends on your full credit profile and the lender's requirements. Consult a licensed mortgage lender or financial advisor before house hunting or applying for a loan."
+      },
+      "tabs": {
+        "groupLabel": "Calculation Type",
+        "homePrice": "Max Home Price",
+        "requiredIncome": "Required Income"
       },
       "nav": {
         "tool": "Calculator",
@@ -3455,6 +3881,8 @@
       "form": {
         "annualIncomeLabel": "Gross Annual Income",
         "annualIncomePlaceholder": "e.g. 90,000",
+        "targetHomePriceLabel": "Target Home Price",
+        "targetHomePricePlaceholder": "e.g. 400,000",
         "monthlyDebtsLabel": "Other Monthly Debt Payments",
         "monthlyDebtsHint": "Car loans, student loans, credit cards, and any other recurring debt — not including the new home loan.",
         "monthlyDebtsPlaceholder": "e.g. 400",
@@ -3471,7 +3899,27 @@
         "annualHomeInsurancePlaceholder": "e.g. 1,500",
         "monthlyHOALabel": "Monthly HOA Dues",
         "monthlyHOAHint": "Homeowners association fees, if any. Enter 0 if not applicable.",
-        "monthlyHOAPlaceholder": "e.g. 0"
+        "monthlyHOAPlaceholder": "e.g. 0",
+        "calculate": "Calculate",
+        "clear": "Clear"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       },
       "education": {
         "intro": {
@@ -3607,7 +4055,19 @@
           "veryHigh": "Very High"
         },
         "placeholder": "Enter your income and monthly debt payments to see your debt-to-income ratio.",
+        "emptyStateMessage": "Enter your income and debts and press Calculate to see your results.",
+        "maxTotalMonthlyDebtLabel": "Max Total Monthly Debt",
+        "maxAdditionalMonthlyDebtLabel": "Additional Room Available",
+        "sentences": {
+          "ratio": "With a gross monthly income of {income}, your total monthly debt puts your debt-to-income ratio at {ratio} — rated {category}.",
+          "maxDebt": "To stay at or below a {target} debt-to-income ratio on a gross monthly income of {income}, your total monthly debt payments should not exceed {maxDebt}."
+        },
         "disclaimer": "This tool provides a general educational estimate only, not a lending decision or financial advice. Lenders calculate DTI using their own rules, which can differ from the formula used here, and approval depends on many factors beyond this ratio. Consult a licensed lender or financial advisor for guidance specific to your situation."
+      },
+      "tabs": {
+        "groupLabel": "Calculation Type",
+        "ratio": "DTI Ratio",
+        "maxDebt": "Max Debt"
       },
       "nav": {
         "tool": "Calculator",
@@ -3628,7 +4088,33 @@
         "creditCardPaymentsPlaceholder": "e.g. 100",
         "otherPaymentsLabel": "Other Monthly Debt",
         "otherPaymentsHint": "Personal loans or any other recurring debt payment not listed above.",
-        "otherPaymentsPlaceholder": "e.g. 0"
+        "otherPaymentsPlaceholder": "e.g. 0",
+        "targetBackEndRatioLabel": "Target Debt-to-Income Ratio (%)",
+        "targetBackEndRatioHint": "The maximum back-end ratio you want to stay under — 36% is a commonly cited healthy threshold.",
+        "targetBackEndRatioPlaceholder": "e.g. 36",
+        "existingMonthlyDebtLabel": "Existing Monthly Debt",
+        "existingMonthlyDebtHint": "Any monthly debt payments you already have, to see how much additional room the target ratio leaves.",
+        "existingMonthlyDebtPlaceholder": "e.g. 600",
+        "calculate": "Calculate",
+        "clear": "Clear"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       },
       "education": {
         "intro": {
@@ -4018,11 +4504,26 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "1/2 + 1/3", "result": "5/6" },
-            { "calculation": "3/4 − 1/4", "result": "1/2" },
-            { "calculation": "2/3 × 3/4", "result": "1/2" },
-            { "calculation": "1/2 ÷ 1/4", "result": "2" },
-            { "calculation": "6/8 simplified", "result": "3/4" }
+            {
+              "calculation": "1/2 + 1/3",
+              "result": "5/6"
+            },
+            {
+              "calculation": "3/4 − 1/4",
+              "result": "1/2"
+            },
+            {
+              "calculation": "2/3 × 3/4",
+              "result": "1/2"
+            },
+            {
+              "calculation": "1/2 ÷ 1/4",
+              "result": "2"
+            },
+            {
+              "calculation": "6/8 simplified",
+              "result": "3/4"
+            }
           ]
         },
         "faq": {
@@ -4190,10 +4691,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "123,400,000 in scientific notation", "result": "1.234 × 10^8" },
-            { "calculation": "6.02 × 10^23 in standard form", "result": "602,000,000,000,000,000,000,000" },
-            { "calculation": "(5 × 10^3) × (3 × 10^4)", "result": "1.5 × 10^8" },
-            { "calculation": "(6 × 10^7) ÷ (2 × 10^3)", "result": "3 × 10^4" }
+            {
+              "calculation": "123,400,000 in scientific notation",
+              "result": "1.234 × 10^8"
+            },
+            {
+              "calculation": "6.02 × 10^23 in standard form",
+              "result": "602,000,000,000,000,000,000,000"
+            },
+            {
+              "calculation": "(5 × 10^3) × (3 × 10^4)",
+              "result": "1.5 × 10^8"
+            },
+            {
+              "calculation": "(6 × 10^7) ÷ (2 × 10^3)",
+              "result": "3 × 10^4"
+            }
           ]
         },
         "faq": {
@@ -4300,10 +4813,22 @@
           "title": "The Four Counting Rules",
           "intro": "Every significant-figures rule reduces to these four cases.",
           "rules": {
-            "nonzero": { "example": "482", "text": "Every nonzero digit is always significant — 3 significant figures." },
-            "sandwiched": { "example": "1002", "text": "Zeros between two nonzero digits are always significant — 4 significant figures." },
-            "leading": { "example": "0.0053", "text": "Leading zeros (before the first nonzero digit) are never significant — 2 significant figures." },
-            "trailing": { "example": "1.200", "text": "Trailing zeros are significant only when a decimal point is present — 4 significant figures." }
+            "nonzero": {
+              "example": "482",
+              "text": "Every nonzero digit is always significant — 3 significant figures."
+            },
+            "sandwiched": {
+              "example": "1002",
+              "text": "Zeros between two nonzero digits are always significant — 4 significant figures."
+            },
+            "leading": {
+              "example": "0.0053",
+              "text": "Leading zeros (before the first nonzero digit) are never significant — 2 significant figures."
+            },
+            "trailing": {
+              "example": "1.200",
+              "text": "Trailing zeros are significant only when a decimal point is present — 4 significant figures."
+            }
           }
         }
       },
@@ -4353,12 +4878,30 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "Significant figures in 0.00500", "result": "3" },
-            { "calculation": "12345 rounded to 3 sig figs", "result": "1.23 × 10^4" },
-            { "calculation": "12.5 + 0.234", "result": "12.7" },
-            { "calculation": "18.0 − 2.545", "result": "15.5" },
-            { "calculation": "4.5 × 2.33", "result": "10" },
-            { "calculation": "10.0 ÷ 3.0", "result": "3.3" }
+            {
+              "calculation": "Significant figures in 0.00500",
+              "result": "3"
+            },
+            {
+              "calculation": "12345 rounded to 3 sig figs",
+              "result": "1.23 × 10^4"
+            },
+            {
+              "calculation": "12.5 + 0.234",
+              "result": "12.7"
+            },
+            {
+              "calculation": "18.0 − 2.545",
+              "result": "15.5"
+            },
+            {
+              "calculation": "4.5 × 2.33",
+              "result": "10"
+            },
+            {
+              "calculation": "10.0 ÷ 3.0",
+              "result": "3.3"
+            }
           ]
         },
         "faq": {
@@ -4516,9 +5059,18 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "A (3 credits) + B (4 credits) + A- (3 credits)", "result": "3.51 GPA" },
-            { "calculation": "3.0 GPA over 60 credits, target 3.5 over 90 total", "result": "Needs 4.5 on the next 30 — not achievable" },
-            { "calculation": "3.0 GPA over 90 credits, target 3.1 over 120 total", "result": "Needs 3.4 on the next 30" }
+            {
+              "calculation": "A (3 credits) + B (4 credits) + A- (3 credits)",
+              "result": "3.51 GPA"
+            },
+            {
+              "calculation": "3.0 GPA over 60 credits, target 3.5 over 90 total",
+              "result": "Needs 4.5 on the next 30 — not achievable"
+            },
+            {
+              "calculation": "3.0 GPA over 90 credits, target 3.1 over 120 total",
+              "result": "Needs 3.4 on the next 30"
+            }
           ]
         },
         "faq": {
@@ -4680,10 +5232,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "100 g of a substance occupying 50 cm³", "result": "2 g/cm³ density" },
-            { "calculation": "193 g occupying 10 cm³", "result": "19.3 g/cm³ — matching solid gold" },
-            { "calculation": "Density 7.87 g/cm³, volume 10 cm³", "result": "78.7 g mass" },
-            { "calculation": "Mass 78.7 g, density 7.87 g/cm³", "result": "10 cm³ volume" }
+            {
+              "calculation": "100 g of a substance occupying 50 cm³",
+              "result": "2 g/cm³ density"
+            },
+            {
+              "calculation": "193 g occupying 10 cm³",
+              "result": "19.3 g/cm³ — matching solid gold"
+            },
+            {
+              "calculation": "Density 7.87 g/cm³, volume 10 cm³",
+              "result": "78.7 g mass"
+            },
+            {
+              "calculation": "Mass 78.7 g, density 7.87 g/cm³",
+              "result": "10 cm³ volume"
+            }
           ]
         },
         "faq": {
@@ -4786,12 +5350,30 @@
           "title": "Ohm's Law Formulas",
           "intro": "The core voltage-current-resistance relationship, plus the three equivalent power formulas.",
           "formulas": {
-            "voltage": { "label": "Voltage", "expression": "V = I × R" },
-            "current": { "label": "Current", "expression": "I = V ÷ R" },
-            "resistance": { "label": "Resistance", "expression": "R = V ÷ I" },
-            "powerFromVI": { "label": "Power (V, I)", "expression": "P = V × I" },
-            "powerFromIR": { "label": "Power (I, R)", "expression": "P = I² × R" },
-            "powerFromVR": { "label": "Power (V, R)", "expression": "P = V² ÷ R" }
+            "voltage": {
+              "label": "Voltage",
+              "expression": "V = I × R"
+            },
+            "current": {
+              "label": "Current",
+              "expression": "I = V ÷ R"
+            },
+            "resistance": {
+              "label": "Resistance",
+              "expression": "R = V ÷ I"
+            },
+            "powerFromVI": {
+              "label": "Power (V, I)",
+              "expression": "P = V × I"
+            },
+            "powerFromIR": {
+              "label": "Power (I, R)",
+              "expression": "P = I² × R"
+            },
+            "powerFromVR": {
+              "label": "Power (V, R)",
+              "expression": "P = V² ÷ R"
+            }
           }
         }
       },
@@ -4843,10 +5425,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "12 V across a 6 Ω resistor", "result": "2 A, 24 W" },
-            { "calculation": "2 A through a 6 Ω resistor", "result": "12 V, 24 W" },
-            { "calculation": "12 V drawing 24 W", "result": "2 A, 6 Ω" },
-            { "calculation": "6 Ω dissipating 24 W", "result": "12 V, 2 A" }
+            {
+              "calculation": "12 V across a 6 Ω resistor",
+              "result": "2 A, 24 W"
+            },
+            {
+              "calculation": "2 A through a 6 Ω resistor",
+              "result": "12 V, 24 W"
+            },
+            {
+              "calculation": "12 V drawing 24 W",
+              "result": "2 A, 6 Ω"
+            },
+            {
+              "calculation": "6 Ω dissipating 24 W",
+              "result": "12 V, 2 A"
+            }
           ]
         },
         "faq": {
@@ -5011,10 +5605,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "[H⁺] = 1 × 10⁻³ mol/L", "result": "pH 3, pOH 11 (acidic)" },
-            { "calculation": "pH 7 (pure water)", "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L" },
-            { "calculation": "[OH⁻] = 1 × 10⁻² mol/L", "result": "pOH 2, pH 12 (basic)" },
-            { "calculation": "pOH 5", "result": "pH 9 (basic)" }
+            {
+              "calculation": "[H⁺] = 1 × 10⁻³ mol/L",
+              "result": "pH 3, pOH 11 (acidic)"
+            },
+            {
+              "calculation": "pH 7 (pure water)",
+              "result": "[H⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L"
+            },
+            {
+              "calculation": "[OH⁻] = 1 × 10⁻² mol/L",
+              "result": "pOH 2, pH 12 (basic)"
+            },
+            {
+              "calculation": "pOH 5",
+              "result": "pH 9 (basic)"
+            }
           ]
         },
         "faq": {
@@ -5117,10 +5723,22 @@
           "title": "Statistics Formulas",
           "intro": "The core formulas this calculator applies, where n is the number of values and x̄ is the mean.",
           "formulas": {
-            "mean": { "label": "Mean", "expression": "x̄ = Σx / n" },
-            "median": { "label": "Median", "expression": "middle value of sorted data" },
-            "populationStdDev": { "label": "Population Std. Dev.", "expression": "σ = √(Σ(x - x̄)² / n)" },
-            "sampleStdDev": { "label": "Sample Std. Dev.", "expression": "s = √(Σ(x - x̄)² / (n - 1))" }
+            "mean": {
+              "label": "Mean",
+              "expression": "x̄ = Σx / n"
+            },
+            "median": {
+              "label": "Median",
+              "expression": "middle value of sorted data"
+            },
+            "populationStdDev": {
+              "label": "Population Std. Dev.",
+              "expression": "σ = √(Σ(x - x̄)² / n)"
+            },
+            "sampleStdDev": {
+              "label": "Sample Std. Dev.",
+              "expression": "s = √(Σ(x - x̄)² / (n - 1))"
+            }
           }
         }
       },
@@ -5168,10 +5786,22 @@
           "columnCalculation": "Data Set",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "2, 4, 4, 4, 5, 5, 7, 9", "result": "Mean 5, median 4.5, mode 4" },
-            { "calculation": "1, 2, 3, 4", "result": "Mean 2.5, median 2.5, no mode" },
-            { "calculation": "1, 1, 2, 2, 3", "result": "Modes 1 and 2 (bimodal)" },
-            { "calculation": "10, 12, 23, 23, 16, 23, 21, 16", "result": "Population std. dev. ≈ 4.9, sample std. dev. ≈ 5.24" }
+            {
+              "calculation": "2, 4, 4, 4, 5, 5, 7, 9",
+              "result": "Mean 5, median 4.5, mode 4"
+            },
+            {
+              "calculation": "1, 2, 3, 4",
+              "result": "Mean 2.5, median 2.5, no mode"
+            },
+            {
+              "calculation": "1, 1, 2, 2, 3",
+              "result": "Modes 1 and 2 (bimodal)"
+            },
+            {
+              "calculation": "10, 12, 23, 23, 16, 23, 21, 16",
+              "result": "Population std. dev. ≈ 4.9, sample std. dev. ≈ 5.24"
+            }
           ]
         },
         "faq": {
@@ -5274,9 +5904,18 @@
           "title": "Molarity Formulas",
           "intro": "The core relationships this calculator applies.",
           "formulas": {
-            "molarity": { "label": "Molarity", "expression": "M = mol / L" },
-            "molesFromMass": { "label": "Moles from Mass", "expression": "mol = mass (g) / molar mass (g/mol)" },
-            "dilution": { "label": "Dilution", "expression": "C₁V₁ = C₂V₂" }
+            "molarity": {
+              "label": "Molarity",
+              "expression": "M = mol / L"
+            },
+            "molesFromMass": {
+              "label": "Moles from Mass",
+              "expression": "mol = mass (g) / molar mass (g/mol)"
+            },
+            "dilution": {
+              "label": "Dilution",
+              "expression": "C₁V₁ = C₂V₂"
+            }
           }
         }
       },
@@ -5348,10 +5987,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "0.5 mol dissolved in 2 L", "result": "0.25 mol/L" },
-            { "calculation": "58.44 g NaCl (molar mass 58.44 g/mol) in 1 L", "result": "1 mol/L" },
-            { "calculation": "0.5 L of 2 mol/L diluted to 1 L", "result": "1 mol/L (C₂)" },
-            { "calculation": "0.5 L of unknown C₁ diluted to 1 L gives 1 mol/L", "result": "C₁ = 2 mol/L" }
+            {
+              "calculation": "0.5 mol dissolved in 2 L",
+              "result": "0.25 mol/L"
+            },
+            {
+              "calculation": "58.44 g NaCl (molar mass 58.44 g/mol) in 1 L",
+              "result": "1 mol/L"
+            },
+            {
+              "calculation": "0.5 L of 2 mol/L diluted to 1 L",
+              "result": "1 mol/L (C₂)"
+            },
+            {
+              "calculation": "0.5 L of unknown C₁ diluted to 1 L gives 1 mol/L",
+              "result": "C₁ = 2 mol/L"
+            }
           ]
         },
         "faq": {
@@ -5454,9 +6105,18 @@
           "title": "Ideal Gas Law Reference",
           "intro": "The formula and constant this calculator applies.",
           "formulas": {
-            "idealGasLaw": { "label": "Ideal Gas Law", "expression": "PV = nRT" },
-            "gasConstant": { "label": "Gas Constant R", "expression": "0.0820574 L·atm / (mol·K)" },
-            "stp": { "label": "Molar Volume at STP", "expression": "22.414 L/mol at 1 atm, 273.15 K" }
+            "idealGasLaw": {
+              "label": "Ideal Gas Law",
+              "expression": "PV = nRT"
+            },
+            "gasConstant": {
+              "label": "Gas Constant R",
+              "expression": "0.0820574 L·atm / (mol·K)"
+            },
+            "stp": {
+              "label": "Molar Volume at STP",
+              "expression": "22.414 L/mol at 1 atm, 273.15 K"
+            }
           }
         }
       },
@@ -5506,10 +6166,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "1 mol at 1 atm, 273.15 K", "result": "22.414 L (molar volume at STP)" },
-            { "calculation": "1 mol occupying 22.414 L at 273.15 K", "result": "1 atm" },
-            { "calculation": "1 atm, 22.414 L, 273.15 K", "result": "1 mol" },
-            { "calculation": "1 mol, 1 atm, 22.414 L", "result": "273.15 K" }
+            {
+              "calculation": "1 mol at 1 atm, 273.15 K",
+              "result": "22.414 L (molar volume at STP)"
+            },
+            {
+              "calculation": "1 mol occupying 22.414 L at 273.15 K",
+              "result": "1 atm"
+            },
+            {
+              "calculation": "1 atm, 22.414 L, 273.15 K",
+              "result": "1 mol"
+            },
+            {
+              "calculation": "1 mol, 1 atm, 22.414 L",
+              "result": "273.15 K"
+            }
           ]
         },
         "faq": {
@@ -5612,10 +6284,22 @@
           "title": "Mechanics Formulas",
           "intro": "The four core formulas this calculator applies.",
           "formulas": {
-            "work": { "label": "Work", "expression": "W = F·d·cos(θ)" },
-            "kineticEnergy": { "label": "Kinetic Energy", "expression": "KE = ½mv²" },
-            "potentialEnergy": { "label": "Gravitational Potential Energy", "expression": "PE = mgh" },
-            "power": { "label": "Power", "expression": "P = W / t" }
+            "work": {
+              "label": "Work",
+              "expression": "W = F·d·cos(θ)"
+            },
+            "kineticEnergy": {
+              "label": "Kinetic Energy",
+              "expression": "KE = ½mv²"
+            },
+            "potentialEnergy": {
+              "label": "Gravitational Potential Energy",
+              "expression": "PE = mgh"
+            },
+            "power": {
+              "label": "Power",
+              "expression": "P = W / t"
+            }
           }
         }
       },
@@ -5673,11 +6357,26 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "10 N force over 5 m, parallel to motion (0°)", "result": "50 J of work" },
-            { "calculation": "10 N force over 5 m, at 60° to motion", "result": "25 J of work" },
-            { "calculation": "2 kg mass moving at 3 m/s", "result": "9 J of kinetic energy" },
-            { "calculation": "2 kg mass at 5 m height", "result": "98 J of potential energy" },
-            { "calculation": "100 J of work done in 10 s", "result": "10 W of power" }
+            {
+              "calculation": "10 N force over 5 m, parallel to motion (0°)",
+              "result": "50 J of work"
+            },
+            {
+              "calculation": "10 N force over 5 m, at 60° to motion",
+              "result": "25 J of work"
+            },
+            {
+              "calculation": "2 kg mass moving at 3 m/s",
+              "result": "9 J of kinetic energy"
+            },
+            {
+              "calculation": "2 kg mass at 5 m height",
+              "result": "98 J of potential energy"
+            },
+            {
+              "calculation": "100 J of work done in 10 s",
+              "result": "10 W of power"
+            }
           ]
         },
         "faq": {
@@ -5780,10 +6479,22 @@
           "title": "Kinematics Equations",
           "intro": "The core constant-acceleration equations this calculator applies (v₀ = initial velocity, v = final velocity, a = acceleration, t = time, Δx = displacement).",
           "formulas": {
-            "velocity": { "label": "Velocity", "expression": "v = v₀ + at" },
-            "displacementTime": { "label": "Displacement (time-based)", "expression": "Δx = v₀t + ½at²" },
-            "velocitySquared": { "label": "Velocity Squared", "expression": "v² = v₀² + 2aΔx" },
-            "displacementAvg": { "label": "Displacement (average velocity)", "expression": "Δx = ½(v₀ + v)t" }
+            "velocity": {
+              "label": "Velocity",
+              "expression": "v = v₀ + at"
+            },
+            "displacementTime": {
+              "label": "Displacement (time-based)",
+              "expression": "Δx = v₀t + ½at²"
+            },
+            "velocitySquared": {
+              "label": "Velocity Squared",
+              "expression": "v² = v₀² + 2aΔx"
+            },
+            "displacementAvg": {
+              "label": "Displacement (average velocity)",
+              "expression": "Δx = ½(v₀ + v)t"
+            }
           }
         }
       },
@@ -5852,10 +6563,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "v₀ = 0, a = 2 m/s², t = 5 s", "result": "v = 10 m/s, Δx = 25 m" },
-            { "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s", "result": "v₀ = 10 m/s" },
-            { "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m", "result": "a = 2 m/s² (braking-distance style)" },
-            { "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m", "result": "v = 10 m/s" }
+            {
+              "calculation": "v₀ = 0, a = 2 m/s², t = 5 s",
+              "result": "v = 10 m/s, Δx = 25 m"
+            },
+            {
+              "calculation": "v = 20 m/s, a = 2 m/s², t = 5 s",
+              "result": "v₀ = 10 m/s"
+            },
+            {
+              "calculation": "v₀ = 0, v = 10 m/s, Δx = 25 m",
+              "result": "a = 2 m/s² (braking-distance style)"
+            },
+            {
+              "calculation": "v₀ = 0, a = 2 m/s², Δx = 25 m",
+              "result": "v = 10 m/s"
+            }
           ]
         },
         "faq": {
@@ -5958,9 +6681,18 @@
           "title": "Force Formulas",
           "intro": "The two formulas this calculator applies.",
           "formulas": {
-            "secondLaw": { "label": "Newton's Second Law", "expression": "F = ma" },
-            "gravitation": { "label": "Universal Gravitation", "expression": "F = Gm₁m₂ / r²" },
-            "gravitationalConstant": { "label": "Gravitational Constant", "expression": "G ≈ 6.674 × 10⁻¹¹ N·m²/kg²" }
+            "secondLaw": {
+              "label": "Newton's Second Law",
+              "expression": "F = ma"
+            },
+            "gravitation": {
+              "label": "Universal Gravitation",
+              "expression": "F = Gm₁m₂ / r²"
+            },
+            "gravitationalConstant": {
+              "label": "Gravitational Constant",
+              "expression": "G ≈ 6.674 × 10⁻¹¹ N·m²/kg²"
+            }
           }
         }
       },
@@ -6033,10 +6765,22 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "2 kg mass accelerating at 3 m/s²", "result": "F = 6 N" },
-            { "calculation": "10 N force accelerating an object at 2 m/s²", "result": "m = 5 kg" },
-            { "calculation": "Earth's mass, a 1 kg object, at Earth's radius", "result": "F ≈ 9.8 N (matches surface gravity)" },
-            { "calculation": "Two 1 × 10¹⁰ kg masses, 100 km apart", "result": "F ≈ 0.667 N" }
+            {
+              "calculation": "2 kg mass accelerating at 3 m/s²",
+              "result": "F = 6 N"
+            },
+            {
+              "calculation": "10 N force accelerating an object at 2 m/s²",
+              "result": "m = 5 kg"
+            },
+            {
+              "calculation": "Earth's mass, a 1 kg object, at Earth's radius",
+              "result": "F ≈ 9.8 N (matches surface gravity)"
+            },
+            {
+              "calculation": "Two 1 × 10¹⁰ kg masses, 100 km apart",
+              "result": "F ≈ 0.667 N"
+            }
           ]
         },
         "faq": {
@@ -6323,8 +7067,14 @@
           "title": "Readability Formulas",
           "intro": "The two formulas this calculator applies.",
           "formulas": {
-            "fleschReadingEase": { "label": "Flesch Reading Ease", "expression": "206.835 − 1.015(words/sentences) − 84.6(syllables/words)" },
-            "fleschKincaidGrade": { "label": "Flesch-Kincaid Grade Level", "expression": "0.39(words/sentences) + 11.8(syllables/words) − 15.59" }
+            "fleschReadingEase": {
+              "label": "Flesch Reading Ease",
+              "expression": "206.835 − 1.015(words/sentences) − 84.6(syllables/words)"
+            },
+            "fleschKincaidGrade": {
+              "label": "Flesch-Kincaid Grade Level",
+              "expression": "0.39(words/sentences) + 11.8(syllables/words) − 15.59"
+            }
           },
           "englishOnlyNote": "Both formulas are calibrated for English text — syllable counting and sentence structure don't translate the same way to other languages, so scores for non-English passages won't be meaningful."
         }
@@ -6369,19 +7119,43 @@
           "columnCalculation": "Passage",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "\"The cat sat on the mat. The dog ran fast.\" (10 words, 2 sentences)", "result": "Flesch Reading Ease 117.2 (Very Easy) — Grade Level −1.8" },
-            { "calculation": "A 36-word passage of short sentences and common words (3 sentences)", "result": "Flesch Reading Ease 81.9 (Easy) — Grade Level 4.8" },
-            { "calculation": "A single 22-word sentence of dense academic vocabulary", "result": "Flesch Reading Ease −92.4 (Very Confusing) — Grade Level 31.6" }
+            {
+              "calculation": "\"The cat sat on the mat. The dog ran fast.\" (10 words, 2 sentences)",
+              "result": "Flesch Reading Ease 117.2 (Very Easy) — Grade Level −1.8"
+            },
+            {
+              "calculation": "A 36-word passage of short sentences and common words (3 sentences)",
+              "result": "Flesch Reading Ease 81.9 (Easy) — Grade Level 4.8"
+            },
+            {
+              "calculation": "A single 22-word sentence of dense academic vocabulary",
+              "result": "Flesch Reading Ease −92.4 (Very Confusing) — Grade Level 31.6"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why did I get a negative Flesch Reading Ease score?", "answer": "The formula has no built-in floor — extremely long sentences packed with multi-syllable words can push the score below zero. A negative score simply means the text is more difficult than the scale's already-hardest labeled band (\"very confusing\"), which starts below 30." },
-            { "question": "Can this tool score text in Arabic, Spanish, or other languages?", "answer": "Not meaningfully. Both formulas were built from studies of English text and rely on an English-specific syllable-counting heuristic, so running non-English text through them produces a number, but not a number that reflects real reading difficulty in that language. Dedicated readability formulas exist for some other languages, but this tool does not implement them." },
-            { "question": "Why do Flesch Reading Ease and Flesch-Kincaid Grade Level sometimes seem to disagree?", "answer": "They're built from the same two measurements (words per sentence, syllables per word) but scaled differently — one onto a 0–100 ease scale where higher is easier, the other onto a U.S. grade-level scale where higher is harder. They should move in opposite directions consistently; if a passage scores as \"easy\" on one and a high grade level on the other, double-check that the text has enough complete sentences for an accurate sentence count." },
-            { "question": "Does a low grade-level score mean the writing is bad?", "answer": "No — grade level measures accessibility, not quality. Many respected style guides for technical writing, government communication, and journalism specifically recommend shorter sentences and plainer words to keep grade level low, because that makes writing easier for more readers to understand quickly, regardless of the writer's own skill or the topic's sophistication." },
-            { "question": "How does the syllable counter work, and is it perfectly accurate?", "answer": "It counts groups of adjacent vowel letters as syllables, with an adjustment for silent trailing \"e\" (as in \"make\") and syllabic \"-le\" endings (as in \"simple\"). This vowel-group heuristic is the same approach used by the original Flesch and Kincaid research and by most readability tools, but it isn't a full phonetic analysis, so unusual or foreign-derived words can occasionally be off by one syllable." }
+            {
+              "question": "Why did I get a negative Flesch Reading Ease score?",
+              "answer": "The formula has no built-in floor — extremely long sentences packed with multi-syllable words can push the score below zero. A negative score simply means the text is more difficult than the scale's already-hardest labeled band (\"very confusing\"), which starts below 30."
+            },
+            {
+              "question": "Can this tool score text in Arabic, Spanish, or other languages?",
+              "answer": "Not meaningfully. Both formulas were built from studies of English text and rely on an English-specific syllable-counting heuristic, so running non-English text through them produces a number, but not a number that reflects real reading difficulty in that language. Dedicated readability formulas exist for some other languages, but this tool does not implement them."
+            },
+            {
+              "question": "Why do Flesch Reading Ease and Flesch-Kincaid Grade Level sometimes seem to disagree?",
+              "answer": "They're built from the same two measurements (words per sentence, syllables per word) but scaled differently — one onto a 0–100 ease scale where higher is easier, the other onto a U.S. grade-level scale where higher is harder. They should move in opposite directions consistently; if a passage scores as \"easy\" on one and a high grade level on the other, double-check that the text has enough complete sentences for an accurate sentence count."
+            },
+            {
+              "question": "Does a low grade-level score mean the writing is bad?",
+              "answer": "No — grade level measures accessibility, not quality. Many respected style guides for technical writing, government communication, and journalism specifically recommend shorter sentences and plainer words to keep grade level low, because that makes writing easier for more readers to understand quickly, regardless of the writer's own skill or the topic's sophistication."
+            },
+            {
+              "question": "How does the syllable counter work, and is it perfectly accurate?",
+              "answer": "It counts groups of adjacent vowel letters as syllables, with an adjustment for silent trailing \"e\" (as in \"make\") and syllabic \"-le\" endings (as in \"simple\"). This vowel-group heuristic is the same approach used by the original Flesch and Kincaid research and by most readability tools, but it isn't a full phonetic analysis, so unusual or foreign-derived words can occasionally be off by one syllable."
+            }
           ]
         },
         "behindTheTool": {
@@ -6398,12 +7172,42 @@
             "title": "Academic Path",
             "intro": "Readability sits at the intersection of linguistics and language education. Here are the top 5 globally for Linguistics in the QS World University Rankings by Subject 2025, plus one leading regional department:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://linguistics.mit.edu/graduate/", "online": "No — the PhD program is a full-time, in-residence research program with no online track advertised." },
-              { "name": "Peking University", "note": "Ranked #2 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://isd.pku.edu.cn/en/graduate_program.php", "online": "No — international graduate admissions are handled through Peking University's International Students Division, with no distance-study option advertised for research degrees." },
-              { "name": "Lancaster University", "note": "Ranked #3 worldwide for Linguistics (QS World University Rankings by Subject 2025), home to the UK's largest linguistics department.", "url": "https://www.lancaster.ac.uk/linguistics/phd/", "online": "Partly — first-year compulsory research-methodology modules are taught by distance, but the PhD is otherwise a research-residency program." },
-              { "name": "University of Cambridge", "note": "Ranked #4 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng", "online": "No — the PhD in Theoretical and Applied Linguistics is an in-person research program based in the department." },
-              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Linguistics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics", "online": "No — Oxford's DPhil requires a minimum period of research residency in Oxford." },
-              { "name": "Qatar University — Department of English Literature and Linguistics", "note": "Runs the recurring \"Linguistics in the Gulf\" conference; not separately ranked on this global subject table, but the leading dedicated English-and-linguistics department among Arab region universities.", "url": "http://www.qu.edu.qa/artssciences/departments/dell-home", "online": "No — the department's programs are delivered on Qatar University's campus." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Linguistics (QS World University Rankings by Subject 2025).",
+                "url": "https://linguistics.mit.edu/graduate/",
+                "online": "No — the PhD program is a full-time, in-residence research program with no online track advertised."
+              },
+              {
+                "name": "Peking University",
+                "note": "Ranked #2 worldwide for Linguistics (QS World University Rankings by Subject 2025).",
+                "url": "https://isd.pku.edu.cn/en/graduate_program.php",
+                "online": "No — international graduate admissions are handled through Peking University's International Students Division, with no distance-study option advertised for research degrees."
+              },
+              {
+                "name": "Lancaster University",
+                "note": "Ranked #3 worldwide for Linguistics (QS World University Rankings by Subject 2025), home to the UK's largest linguistics department.",
+                "url": "https://www.lancaster.ac.uk/linguistics/phd/",
+                "online": "Partly — first-year compulsory research-methodology modules are taught by distance, but the PhD is otherwise a research-residency program."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Linguistics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/mmalpdlng",
+                "online": "No — the PhD in Theoretical and Applied Linguistics is an in-person research program based in the department."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Linguistics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-linguistics-philology-phonetics",
+                "online": "No — Oxford's DPhil requires a minimum period of research residency in Oxford."
+              },
+              {
+                "name": "Qatar University — Department of English Literature and Linguistics",
+                "note": "Runs the recurring \"Linguistics in the Gulf\" conference; not separately ranked on this global subject table, but the leading dedicated English-and-linguistics department among Arab region universities.",
+                "url": "http://www.qu.edu.qa/artssciences/departments/dell-home",
+                "online": "No — the department's programs are delivered on Qatar University's campus."
+              }
             ]
           }
         },
@@ -6480,19 +7284,43 @@
           "columnCalculation": "Session",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "30 minutes available", "result": "1 pomodoro + 1 short break — 0 minutes unscheduled" },
-            { "calculation": "130 minutes available", "result": "4 pomodoros, 3 short breaks, 1 long break — 0 minutes unscheduled" },
-            { "calculation": "100 minutes available", "result": "3 pomodoros, 2 short breaks — 10 minutes unscheduled (not enough for a 4th interval)" }
+            {
+              "calculation": "30 minutes available",
+              "result": "1 pomodoro + 1 short break — 0 minutes unscheduled"
+            },
+            {
+              "calculation": "130 minutes available",
+              "result": "4 pomodoros, 3 short breaks, 1 long break — 0 minutes unscheduled"
+            },
+            {
+              "calculation": "100 minutes available",
+              "result": "3 pomodoros, 2 short breaks — 10 minutes unscheduled (not enough for a 4th interval)"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why does my last pomodoro sometimes have no break after it?", "answer": "A break is only scheduled if it fully fits in whatever time remains after the work interval. If only a few minutes are left — less than the configured break length — the calculator keeps the pomodoro you already completed but doesn't schedule a break that wouldn't fit, and reports those minutes as unscheduled time instead." },
-            { "question": "Should I always use the traditional 25-minute interval?", "answer": "Not necessarily — 25 minutes is simply the interval Francesco Cirillo settled on when he created the technique, not a universal law of attention. Many people adjust the work interval to match the task: shorter intervals for tasks that are easy to pause and resume, longer ones (45–50 minutes) for deep work that takes time to get into." },
-            { "question": "Why take a longer break after several pomodoros instead of just repeating short breaks?", "answer": "The idea is that short breaks recover attention within a single work session, while the longer break marks a bigger recovery point after sustained effort — similar in spirit to research on 52-minute-work / 17-minute-break ratios among highly productive workers, which likewise found that occasional longer recovery periods, not just frequent short pauses, tracked with sustained productivity." },
-            { "question": "What should I actually do during a short break?", "answer": "The technique's traditional advice is to genuinely step away from the work — stand up, stretch, get water — rather than checking messages or switching to another screen, since a break spent on a different kind of screen-based task doesn't give attention the same chance to recover before the next work interval." },
-            { "question": "Can I use this for something other than studying, like focused work tasks?", "answer": "Yes — the technique and this calculator are task-agnostic. Cirillo originally developed it for his own university coursework, but it's since been widely adopted for programming, writing, and other work that benefits from protected, timer-bounded focus blocks." }
+            {
+              "question": "Why does my last pomodoro sometimes have no break after it?",
+              "answer": "A break is only scheduled if it fully fits in whatever time remains after the work interval. If only a few minutes are left — less than the configured break length — the calculator keeps the pomodoro you already completed but doesn't schedule a break that wouldn't fit, and reports those minutes as unscheduled time instead."
+            },
+            {
+              "question": "Should I always use the traditional 25-minute interval?",
+              "answer": "Not necessarily — 25 minutes is simply the interval Francesco Cirillo settled on when he created the technique, not a universal law of attention. Many people adjust the work interval to match the task: shorter intervals for tasks that are easy to pause and resume, longer ones (45–50 minutes) for deep work that takes time to get into."
+            },
+            {
+              "question": "Why take a longer break after several pomodoros instead of just repeating short breaks?",
+              "answer": "The idea is that short breaks recover attention within a single work session, while the longer break marks a bigger recovery point after sustained effort — similar in spirit to research on 52-minute-work / 17-minute-break ratios among highly productive workers, which likewise found that occasional longer recovery periods, not just frequent short pauses, tracked with sustained productivity."
+            },
+            {
+              "question": "What should I actually do during a short break?",
+              "answer": "The technique's traditional advice is to genuinely step away from the work — stand up, stretch, get water — rather than checking messages or switching to another screen, since a break spent on a different kind of screen-based task doesn't give attention the same chance to recover before the next work interval."
+            },
+            {
+              "question": "Can I use this for something other than studying, like focused work tasks?",
+              "answer": "Yes — the technique and this calculator are task-agnostic. Cirillo originally developed it for his own university coursework, but it's since been widely adopted for programming, writing, and other work that benefits from protected, timer-bounded focus blocks."
+            }
           ]
         },
         "behindTheTool": {
@@ -6509,12 +7337,42 @@
             "title": "Academic Path",
             "intro": "Time management and study techniques sit within the broader field of education research. Here are the top 5 globally for Education & Training in the QS World University Rankings by Subject 2025, plus one leading regional college:",
             "universities": [
-              { "name": "University College London (UCL)", "note": "Ranked #1 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd", "online": "Partly — UCL's Institute of Education offers this doctoral program in both face-to-face and fully online study modes." },
-              { "name": "Harvard University", "note": "Ranked #2 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.gse.harvard.edu/degrees/phd", "online": "No — admission runs through the Griffin Graduate School of Arts and Sciences for an in-residence research doctorate." },
-              { "name": "University of Hong Kong", "note": "Ranked #3 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://web.edu.hku.hk/programme/mphil-phd", "online": "No — a part-time study mode is available alongside full-time study, but no distance/online track is advertised." },
-              { "name": "Stanford University", "note": "Ranked #4 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://ed.stanford.edu/academics/doctoral", "online": "No — incoming PhD students are funded for an in-residence, multi-year research apprenticeship." },
-              { "name": "University of Cambridge", "note": "Ranked #5 worldwide for Education & Training (QS World University Rankings by Subject 2025).", "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/", "online": "No — the PhD is an in-residence research degree (Cambridge's separate part-time EdD professional doctorate is instead built around periodic residential weekends)." },
-              { "name": "King Saud University — Deanship of Graduate Studies", "note": "Home to one of the Gulf's oldest colleges of education, annexed to the university in 1965; not separately ranked on this global subject table.", "url": "https://graduatestudies.ksu.edu.sa/en/node/621", "online": "No — graduate admissions are managed centrally by the Deanship of Graduate Studies, established in 1973, with no distance-study option advertised." }
+              {
+                "name": "University College London (UCL)",
+                "note": "Ranked #1 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ucl.ac.uk/prospective-students/graduate/research-degrees/education-mphil-phd",
+                "online": "Partly — UCL's Institute of Education offers this doctoral program in both face-to-face and fully online study modes."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.gse.harvard.edu/degrees/phd",
+                "online": "No — admission runs through the Griffin Graduate School of Arts and Sciences for an in-residence research doctorate."
+              },
+              {
+                "name": "University of Hong Kong",
+                "note": "Ranked #3 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://web.edu.hku.hk/programme/mphil-phd",
+                "online": "No — a part-time study mode is available alongside full-time study, but no distance/online track is advertised."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://ed.stanford.edu/academics/doctoral",
+                "online": "No — incoming PhD students are funded for an in-residence, multi-year research apprenticeship."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #5 worldwide for Education & Training (QS World University Rankings by Subject 2025).",
+                "url": "https://www.educ.cam.ac.uk/courses/postgraduate/doctoral/phd/",
+                "online": "No — the PhD is an in-residence research degree (Cambridge's separate part-time EdD professional doctorate is instead built around periodic residential weekends)."
+              },
+              {
+                "name": "King Saud University — Deanship of Graduate Studies",
+                "note": "Home to one of the Gulf's oldest colleges of education, annexed to the university in 1965; not separately ranked on this global subject table.",
+                "url": "https://graduatestudies.ksu.edu.sa/en/node/621",
+                "online": "No — graduate admissions are managed centrally by the Deanship of Graduate Studies, established in 1973, with no distance-study option advertised."
+              }
             ]
           }
         },
@@ -6540,10 +7398,22 @@
           "title": "Vector Formulas",
           "intro": "The core formulas this calculator applies.",
           "formulas": {
-            "magnitude": { "label": "Magnitude", "expression": "|A| = √(ax² + ay² + az²)" },
-            "dotProduct": { "label": "Dot Product", "expression": "A·B = axbx + ayby + azbz" },
-            "crossProduct": { "label": "Cross Product", "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)" },
-            "angle": { "label": "Angle Between", "expression": "θ = cos⁻¹(A·B / (|A||B|))" }
+            "magnitude": {
+              "label": "Magnitude",
+              "expression": "|A| = √(ax² + ay² + az²)"
+            },
+            "dotProduct": {
+              "label": "Dot Product",
+              "expression": "A·B = axbx + ayby + azbz"
+            },
+            "crossProduct": {
+              "label": "Cross Product",
+              "expression": "A×B = (aybz−azby, azbx−axbz, axby−aybx)"
+            },
+            "angle": {
+              "label": "Angle Between",
+              "expression": "θ = cos⁻¹(A·B / (|A||B|))"
+            }
           }
         }
       },
@@ -6584,20 +7454,47 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "Magnitude of (3, 4, 0)", "result": "|A| = 5" },
-            { "calculation": "Dot product of (1, 2, 3) and (4, 5, 6)", "result": "A·B = 32" },
-            { "calculation": "Cross product of (1, 0, 0) and (0, 1, 0)", "result": "A×B = (0, 0, 1)" },
-            { "calculation": "Angle between (1, 0, 0) and (0, 1, 0)", "result": "θ = 90°" }
+            {
+              "calculation": "Magnitude of (3, 4, 0)",
+              "result": "|A| = 5"
+            },
+            {
+              "calculation": "Dot product of (1, 2, 3) and (4, 5, 6)",
+              "result": "A·B = 32"
+            },
+            {
+              "calculation": "Cross product of (1, 0, 0) and (0, 1, 0)",
+              "result": "A×B = (0, 0, 1)"
+            },
+            {
+              "calculation": "Angle between (1, 0, 0) and (0, 1, 0)",
+              "result": "θ = 90°"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "What's the difference between the dot product and the cross product?", "answer": "The dot product returns a single number (a scalar) that measures how much two vectors point in the same direction, while the cross product returns an entirely new vector, perpendicular to both inputs, whose length equals the area of the parallelogram the two original vectors span. They also behave differently in two dimensions — the dot product still makes sense, but the cross product needs three dimensions to point somewhere; setting z = 0 for 2D vectors makes the cross product come out purely along the z-axis." },
-            { "question": "Why is the angle between two vectors undefined when one of them is a zero vector?", "answer": "The angle formula, θ = cos⁻¹(A·B / (|A||B|)), divides by both vectors' magnitudes. A zero vector has zero magnitude and no defined direction — it doesn't point anywhere in particular — so there's no meaningful angle to measure it against, and the calculator flags this rather than dividing by zero." },
-            { "question": "Can I use this calculator for 2D vectors?", "answer": "Yes — enter 0 for both z components (the default). Every operation still works correctly: the cross product of two 2D vectors mathematically only has a z-component, which is exactly what this calculator returns, and it corresponds to the signed area of the parallelogram the two vectors span." },
-            { "question": "Why does the cross product depend on the order of the vectors?", "answer": "A×B and B×A point in exactly opposite directions (A×B = −(B×A)) because the cross product encodes a specific rotational sense — from A toward B, using the right-hand rule — rather than a symmetric relationship between the two vectors the way the dot product does." },
-            { "question": "What's a unit vector actually used for?", "answer": "A unit vector isolates pure direction from magnitude, which is useful whenever a formula needs to know \"which way\" without caring about length — for example, expressing a force's direction separately from its strength, or building a direction ray in computer graphics that later gets scaled by a separate distance or speed value." }
+            {
+              "question": "What's the difference between the dot product and the cross product?",
+              "answer": "The dot product returns a single number (a scalar) that measures how much two vectors point in the same direction, while the cross product returns an entirely new vector, perpendicular to both inputs, whose length equals the area of the parallelogram the two original vectors span. They also behave differently in two dimensions — the dot product still makes sense, but the cross product needs three dimensions to point somewhere; setting z = 0 for 2D vectors makes the cross product come out purely along the z-axis."
+            },
+            {
+              "question": "Why is the angle between two vectors undefined when one of them is a zero vector?",
+              "answer": "The angle formula, θ = cos⁻¹(A·B / (|A||B|)), divides by both vectors' magnitudes. A zero vector has zero magnitude and no defined direction — it doesn't point anywhere in particular — so there's no meaningful angle to measure it against, and the calculator flags this rather than dividing by zero."
+            },
+            {
+              "question": "Can I use this calculator for 2D vectors?",
+              "answer": "Yes — enter 0 for both z components (the default). Every operation still works correctly: the cross product of two 2D vectors mathematically only has a z-component, which is exactly what this calculator returns, and it corresponds to the signed area of the parallelogram the two vectors span."
+            },
+            {
+              "question": "Why does the cross product depend on the order of the vectors?",
+              "answer": "A×B and B×A point in exactly opposite directions (A×B = −(B×A)) because the cross product encodes a specific rotational sense — from A toward B, using the right-hand rule — rather than a symmetric relationship between the two vectors the way the dot product does."
+            },
+            {
+              "question": "What's a unit vector actually used for?",
+              "answer": "A unit vector isolates pure direction from magnitude, which is useful whenever a formula needs to know \"which way\" without caring about length — for example, expressing a force's direction separately from its strength, or building a direction ray in computer graphics that later gets scaled by a separate distance or speed value."
+            }
           ]
         },
         "behindTheTool": {
@@ -6614,12 +7511,42 @@
             "title": "Academic Path",
             "intro": "Vectors are foundational to mathematics and physics alike. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one leading regional applied-math program:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — MIT admits PhD students for on-campus study only, with no master's or online track." },
-              { "name": "Harvard University", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the program is an in-residence research PhD administered through the Griffin Graduate School of Arts and Sciences." },
-              { "name": "University of Oxford", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree, typically completed in three to four years." },
-              { "name": "University of Cambridge", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "No — the PhD is a three-year, in-residence research program run by the Faculty of Mathematics." },
-              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus." },
-              { "name": "King Abdullah University of Science and Technology (KAUST) — Applied Mathematics and Computational Science (AMCS)", "note": "A dedicated applied-mathematics research program among Arab region universities; not separately ranked on this global subject table.", "url": "https://amcs.kaust.edu.sa/", "online": "No — the PhD requires 72 credits and an in-person qualifying exam on KAUST's campus." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — MIT admits PhD students for on-campus study only, with no master's or online track."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the program is an in-residence research PhD administered through the Griffin Graduate School of Arts and Sciences."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree, typically completed in three to four years."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics",
+                "online": "No — the PhD is a three-year, in-residence research program run by the Faculty of Mathematics."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — Applied Mathematics and Computational Science (AMCS)",
+                "note": "A dedicated applied-mathematics research program among Arab region universities; not separately ranked on this global subject table.",
+                "url": "https://amcs.kaust.edu.sa/",
+                "online": "No — the PhD requires 72 credits and an in-person qualifying exam on KAUST's campus."
+              }
             ]
           }
         },
@@ -6645,9 +7572,18 @@
           "title": "Matrix Formulas",
           "intro": "The core formulas this calculator applies to 2x2 matrices.",
           "formulas": {
-            "determinant": { "label": "Determinant", "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁" },
-            "inverse": { "label": "Inverse", "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]" },
-            "product": { "label": "Matrix Product", "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ" }
+            "determinant": {
+              "label": "Determinant",
+              "expression": "det(A) = a₁₁a₂₂ − a₁₂a₂₁"
+            },
+            "inverse": {
+              "label": "Inverse",
+              "expression": "A⁻¹ = (1/det(A)) [a₂₂ −a₁₂; −a₂₁ a₁₁]"
+            },
+            "product": {
+              "label": "Matrix Product",
+              "expression": "(AB)ᵢⱼ = Σₖ aᵢₖbₖⱼ"
+            }
           }
         }
       },
@@ -6680,20 +7616,47 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "Determinant of [1 2; 3 4]", "result": "det(A) = −2" },
-            { "calculation": "Product of [1 2; 3 4] and [5 6; 7 8]", "result": "A×B = [19 22; 43 50]" },
-            { "calculation": "Inverse of [4 7; 2 6]", "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]" },
-            { "calculation": "Transpose of [1 2; 3 4]", "result": "Aᵀ = [1 3; 2 4]" }
+            {
+              "calculation": "Determinant of [1 2; 3 4]",
+              "result": "det(A) = −2"
+            },
+            {
+              "calculation": "Product of [1 2; 3 4] and [5 6; 7 8]",
+              "result": "A×B = [19 22; 43 50]"
+            },
+            {
+              "calculation": "Inverse of [4 7; 2 6]",
+              "result": "A⁻¹ = [0.6 −0.7; −0.2 0.4]"
+            },
+            {
+              "calculation": "Transpose of [1 2; 3 4]",
+              "result": "Aᵀ = [1 3; 2 4]"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why doesn't A×B equal B×A in matrix multiplication?", "answer": "Because matrix multiplication combines entire rows of one matrix with entire columns of the other, the two orderings genuinely compute different sums — there's no reason for row-times-column in one order to match row-times-column in the other. This makes matrix multiplication non-commutative, unlike multiplying ordinary numbers, and it's one of the first surprising properties students encounter when learning matrix algebra." },
-            { "question": "Why does a matrix with a zero determinant have no inverse?", "answer": "The determinant measures how much a matrix scales area (in 2D) or volume (in higher dimensions). A determinant of 0 means the matrix collapses every input onto a lower-dimensional line or point — multiple different inputs get mapped to the same output — so there's no way to reverse that collapse and recover the original input uniquely. A matrix like this is called singular, and the inverse formula would require dividing by that zero determinant, which is undefined." },
-            { "question": "What's the difference between the transpose and the inverse?", "answer": "The transpose is purely a rearrangement — it flips the matrix across its diagonal, swapping rows and columns — and it's always defined for any matrix, with no calculation beyond repositioning entries. The inverse, by contrast, is the matrix that reverses A's transformation entirely (A×A⁻¹ = identity), requires dividing by the determinant, and simply doesn't exist when that determinant is zero." },
-            { "question": "Can this calculator handle matrices larger than 2x2?", "answer": "Not currently — it's built specifically for 2x2 matrices, which keeps every formula (determinant, inverse, product) a short, exact expression. Larger matrices use the same underlying concepts, but computing a determinant or inverse for a 3x3 or larger matrix requires substantially more involved methods (cofactor expansion, row reduction, or numerical algorithms)." },
-            { "question": "Why is matrix addition so much simpler than matrix multiplication?", "answer": "Addition combines two matrices the same way you'd add two ordinary grids of numbers — position by position, with no interaction between different rows or columns. Multiplication, by design, is meant to represent composing two transformations (applying one after another), and that composition inherently mixes each row of one matrix with each column of the other, which is why it needs the more involved row-times-column calculation." }
+            {
+              "question": "Why doesn't A×B equal B×A in matrix multiplication?",
+              "answer": "Because matrix multiplication combines entire rows of one matrix with entire columns of the other, the two orderings genuinely compute different sums — there's no reason for row-times-column in one order to match row-times-column in the other. This makes matrix multiplication non-commutative, unlike multiplying ordinary numbers, and it's one of the first surprising properties students encounter when learning matrix algebra."
+            },
+            {
+              "question": "Why does a matrix with a zero determinant have no inverse?",
+              "answer": "The determinant measures how much a matrix scales area (in 2D) or volume (in higher dimensions). A determinant of 0 means the matrix collapses every input onto a lower-dimensional line or point — multiple different inputs get mapped to the same output — so there's no way to reverse that collapse and recover the original input uniquely. A matrix like this is called singular, and the inverse formula would require dividing by that zero determinant, which is undefined."
+            },
+            {
+              "question": "What's the difference between the transpose and the inverse?",
+              "answer": "The transpose is purely a rearrangement — it flips the matrix across its diagonal, swapping rows and columns — and it's always defined for any matrix, with no calculation beyond repositioning entries. The inverse, by contrast, is the matrix that reverses A's transformation entirely (A×A⁻¹ = identity), requires dividing by the determinant, and simply doesn't exist when that determinant is zero."
+            },
+            {
+              "question": "Can this calculator handle matrices larger than 2x2?",
+              "answer": "Not currently — it's built specifically for 2x2 matrices, which keeps every formula (determinant, inverse, product) a short, exact expression. Larger matrices use the same underlying concepts, but computing a determinant or inverse for a 3x3 or larger matrix requires substantially more involved methods (cofactor expansion, row reduction, or numerical algorithms)."
+            },
+            {
+              "question": "Why is matrix addition so much simpler than matrix multiplication?",
+              "answer": "Addition combines two matrices the same way you'd add two ordinary grids of numbers — position by position, with no interaction between different rows or columns. Multiplication, by design, is meant to represent composing two transformations (applying one after another), and that composition inherently mixes each row of one matrix with each column of the other, which is why it needs the more involved row-times-column calculation."
+            }
           ]
         },
         "behindTheTool": {
@@ -6710,12 +7673,42 @@
             "title": "Academic Path",
             "intro": "Matrices are a foundational tool across mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional program:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — MIT admits PhD students for on-campus study only, with no master's or online track." },
-              { "name": "Harvard University", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the program is an in-residence research PhD administered through the Griffin Graduate School of Arts and Sciences." },
-              { "name": "University of Oxford", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree, typically completed in three to four years." },
-              { "name": "University of Cambridge", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics", "online": "No — the PhD is a three-year, in-residence research program run by the Faculty of Mathematics." },
-              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program", "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus." },
-              { "name": "Khalifa University — PhD in Mathematics", "note": "A dedicated Mathematics doctoral program among Arab region universities, housed in the College of Computing and Mathematical Sciences; not separately ranked on this global subject table.", "url": "https://www.ku.ac.ae/program/phd-in-mathematics", "online": "No — the 60-credit-hour program is delivered on Khalifa University's campus in Abu Dhabi." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — MIT admits PhD students for on-campus study only, with no master's or online track."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the program is an in-residence research PhD administered through the Griffin Graduate School of Arts and Sciences."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree, typically completed in three to four years."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/phd-pure-mathematics-and-mathematical-statistics",
+                "online": "No — the PhD is a three-year, in-residence research program run by the Faculty of Mathematics."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate-students/phd-program",
+                "online": "No — Stanford's graduate residency policy requires PhD students to maintain a significant physical presence on campus."
+              },
+              {
+                "name": "Khalifa University — PhD in Mathematics",
+                "note": "A dedicated Mathematics doctoral program among Arab region universities, housed in the College of Computing and Mathematical Sciences; not separately ranked on this global subject table.",
+                "url": "https://www.ku.ac.ae/program/phd-in-mathematics",
+                "online": "No — the 60-credit-hour program is delivered on Khalifa University's campus in Abu Dhabi."
+              }
             ]
           }
         },
@@ -6774,20 +7767,47 @@
           "columnCalculation": "Formula",
           "columnResult": "Molar Mass",
           "rows": [
-            { "calculation": "H2O (water)", "result": "18.015 g/mol" },
-            { "calculation": "NaCl (table salt)", "result": "58.44 g/mol" },
-            { "calculation": "C6H12O6 (glucose)", "result": "180.156 g/mol" },
-            { "calculation": "CuSO4·5H2O (copper sulfate pentahydrate)", "result": "249.677 g/mol" }
+            {
+              "calculation": "H2O (water)",
+              "result": "18.015 g/mol"
+            },
+            {
+              "calculation": "NaCl (table salt)",
+              "result": "58.44 g/mol"
+            },
+            {
+              "calculation": "C6H12O6 (glucose)",
+              "result": "180.156 g/mol"
+            },
+            {
+              "calculation": "CuSO4·5H2O (copper sulfate pentahydrate)",
+              "result": "249.677 g/mol"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why does capitalization matter when typing a formula?", "answer": "Each element symbol is exactly one uppercase letter, optionally followed by one or two lowercase letters — capitalization is how the parser tells elements apart from each other. \"Co\" is cobalt, but \"CO\" is two separate elements, carbon and oxygen, forming carbon monoxide; getting the case wrong changes which compound you're actually describing." },
-            { "question": "How does this calculator handle groups in parentheses or brackets?", "answer": "It reads everything inside the parentheses or brackets as its own sub-formula, then multiplies every element's count in that sub-formula by the number immediately following the closing bracket (or by 1 if no number follows). In Ca(OH)₂, that means the single oxygen and single hydrogen inside the parentheses each get counted twice, for a total of 2 oxygen and 2 hydrogen atoms." },
-            { "question": "What's the difference between molar mass and molecular weight?", "answer": "In practice, essentially nothing for most everyday purposes — both describe the same quantity (the mass of one mole of a substance), and both are typically reported in grams per mole. Chemists mostly use \"molar mass\" as the more general, formally correct term (it applies equally to ionic compounds and network solids, not just discrete molecules), while \"molecular weight\" is an older term technically specific to actual molecules." },
-            { "question": "Why do some atomic masses have brackets around them?", "answer": "A bracketed value, like technetium's [97], isn't a standard atomic weight at all — it's the mass number of that element's longest-lived known isotope. These elements have no stable isotopes, so there's no naturally occurring mixture of isotopes to average into a standard atomic weight the way there is for something like chlorine or carbon." },
-            { "question": "Can this calculator handle formulas with more than one hydrate dot?", "answer": "No — it supports a single hydrate separator (a middle dot, bullet, or period followed by a number), which covers the vast majority of real hydrate formulas like CuSO₄·5H₂O or MgSO₄·7H₂O. Formulas needing more than one such separator are extremely uncommon and outside this calculator's scope." }
+            {
+              "question": "Why does capitalization matter when typing a formula?",
+              "answer": "Each element symbol is exactly one uppercase letter, optionally followed by one or two lowercase letters — capitalization is how the parser tells elements apart from each other. \"Co\" is cobalt, but \"CO\" is two separate elements, carbon and oxygen, forming carbon monoxide; getting the case wrong changes which compound you're actually describing."
+            },
+            {
+              "question": "How does this calculator handle groups in parentheses or brackets?",
+              "answer": "It reads everything inside the parentheses or brackets as its own sub-formula, then multiplies every element's count in that sub-formula by the number immediately following the closing bracket (or by 1 if no number follows). In Ca(OH)₂, that means the single oxygen and single hydrogen inside the parentheses each get counted twice, for a total of 2 oxygen and 2 hydrogen atoms."
+            },
+            {
+              "question": "What's the difference between molar mass and molecular weight?",
+              "answer": "In practice, essentially nothing for most everyday purposes — both describe the same quantity (the mass of one mole of a substance), and both are typically reported in grams per mole. Chemists mostly use \"molar mass\" as the more general, formally correct term (it applies equally to ionic compounds and network solids, not just discrete molecules), while \"molecular weight\" is an older term technically specific to actual molecules."
+            },
+            {
+              "question": "Why do some atomic masses have brackets around them?",
+              "answer": "A bracketed value, like technetium's [97], isn't a standard atomic weight at all — it's the mass number of that element's longest-lived known isotope. These elements have no stable isotopes, so there's no naturally occurring mixture of isotopes to average into a standard atomic weight the way there is for something like chlorine or carbon."
+            },
+            {
+              "question": "Can this calculator handle formulas with more than one hydrate dot?",
+              "answer": "No — it supports a single hydrate separator (a middle dot, bullet, or period followed by a number), which covers the vast majority of real hydrate formulas like CuSO₄·5H₂O or MgSO₄·7H₂O. Formulas needing more than one such separator are extremely uncommon and outside this calculator's scope."
+            }
           ]
         },
         "behindTheTool": {
@@ -6804,12 +7824,42 @@
             "title": "Academic Path",
             "intro": "Molar mass calculations sit at the heart of quantitative chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
-              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
-              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
-              { "name": "King Fahd University of Petroleum and Minerals (KFUPM) — Department of Chemistry", "note": "One of KFUPM's founding departments and among the leading chemistry departments in Saudi Arabia, with over 30 faculty and more than 3,000 publications; not separately ranked on this global subject table.", "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/", "online": "No — the B.S./M.S./Ph.D. programs are delivered on KFUPM's campus." }
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — the department covers tuition for all PhD students in an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/",
+                "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch",
+                "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas."
+              },
+              {
+                "name": "King Fahd University of Petroleum and Minerals (KFUPM) — Department of Chemistry",
+                "note": "One of KFUPM's founding departments and among the leading chemistry departments in Saudi Arabia, with over 30 faculty and more than 3,000 publications; not separately ranked on this global subject table.",
+                "url": "https://pure.kfupm.edu.sa/en/organisations/department-of-chemistry/",
+                "online": "No — the B.S./M.S./Ph.D. programs are delivered on KFUPM's campus."
+              }
             ]
           }
         },
@@ -6879,19 +7929,43 @@
           "columnCalculation": "Calculation",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "4 g of H2 (coefficient 2) → grams of H2O (coefficient 2)", "result": "35.744 g H2O" },
-            { "calculation": "2 mol of N2 (coefficient 1) → moles of NH3 (coefficient 2)", "result": "4 mol NH3" },
-            { "calculation": "32 g of O2 (coefficient 1) → moles of H2 (coefficient 2)", "result": "2.0001 mol H2" }
+            {
+              "calculation": "4 g of H2 (coefficient 2) → grams of H2O (coefficient 2)",
+              "result": "35.744 g H2O"
+            },
+            {
+              "calculation": "2 mol of N2 (coefficient 1) → moles of NH3 (coefficient 2)",
+              "result": "4 mol NH3"
+            },
+            {
+              "calculation": "32 g of O2 (coefficient 1) → moles of H2 (coefficient 2)",
+              "result": "2.0001 mol H2"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why do I need to enter the coefficients myself instead of the full equation?", "answer": "Parsing and correctly balancing an arbitrary chemical equation is a substantially harder problem than applying a ratio once the coefficients are already known — this calculator focuses specifically on the mole-ratio conversion step. If you don't have a balanced equation yet, this site's Chemical Equation Balancer can balance one for you first." },
-            { "question": "Does it matter which substance I call \"known\" and which I call \"target\"?", "answer": "No — the mole-ratio relationship works symmetrically. Whichever substance you have a measured amount of is the \"known,\" and whichever one you want to find the amount of is the \"target\"; swapping them and re-entering the numbers the other way around gives you the reverse conversion." },
-            { "question": "Why does the calculator need molar mass at all if I'm just using mole ratios?", "answer": "Mole ratios convert moles to moles directly, but in practice you almost always start with (or want) a mass in grams, since that's what a lab balance measures. Molar mass is the conversion factor between grams and moles for each specific substance, so it's only needed at the entry and exit points of the calculation — not in the ratio step itself." },
-            { "question": "What happens if I mix up the coefficients from an unbalanced equation?", "answer": "The calculator will still compute a mathematically consistent answer, but it won't reflect real chemistry — the mole ratio has to come from a properly balanced equation to mean anything. Double-check that both sides of your equation have equal numbers of each type of atom before trusting the coefficients you enter." },
-            { "question": "Can this handle a reaction with more than two substances at once?", "answer": "Not directly in a single calculation — it converts between exactly one known and one target substance at a time. For a reaction with several products or reactants, run the calculator once per substance you want to find, always using the same known amount and its coefficient as the starting point." }
+            {
+              "question": "Why do I need to enter the coefficients myself instead of the full equation?",
+              "answer": "Parsing and correctly balancing an arbitrary chemical equation is a substantially harder problem than applying a ratio once the coefficients are already known — this calculator focuses specifically on the mole-ratio conversion step. If you don't have a balanced equation yet, this site's Chemical Equation Balancer can balance one for you first."
+            },
+            {
+              "question": "Does it matter which substance I call \"known\" and which I call \"target\"?",
+              "answer": "No — the mole-ratio relationship works symmetrically. Whichever substance you have a measured amount of is the \"known,\" and whichever one you want to find the amount of is the \"target\"; swapping them and re-entering the numbers the other way around gives you the reverse conversion."
+            },
+            {
+              "question": "Why does the calculator need molar mass at all if I'm just using mole ratios?",
+              "answer": "Mole ratios convert moles to moles directly, but in practice you almost always start with (or want) a mass in grams, since that's what a lab balance measures. Molar mass is the conversion factor between grams and moles for each specific substance, so it's only needed at the entry and exit points of the calculation — not in the ratio step itself."
+            },
+            {
+              "question": "What happens if I mix up the coefficients from an unbalanced equation?",
+              "answer": "The calculator will still compute a mathematically consistent answer, but it won't reflect real chemistry — the mole ratio has to come from a properly balanced equation to mean anything. Double-check that both sides of your equation have equal numbers of each type of atom before trusting the coefficients you enter."
+            },
+            {
+              "question": "Can this handle a reaction with more than two substances at once?",
+              "answer": "Not directly in a single calculation — it converts between exactly one known and one target substance at a time. For a reaction with several products or reactants, run the calculator once per substance you want to find, always using the same known amount and its coefficient as the starting point."
+            }
           ]
         },
         "behindTheTool": {
@@ -6908,12 +7982,42 @@
             "title": "Academic Path",
             "intro": "Stoichiometry is a foundational skill within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
-              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
-              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
-              { "name": "United Arab Emirates University — Department of Chemistry", "note": "Established in 1979, offering a full-time PhD in Chemistry; not separately ranked on this global subject table.", "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml", "online": "No — the 54-credit-hour PhD is delivered on a full-time, in-residence basis." }
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — the department covers tuition for all PhD students in an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/",
+                "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch",
+                "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas."
+              },
+              {
+                "name": "United Arab Emirates University — Department of Chemistry",
+                "note": "Established in 1979, offering a full-time PhD in Chemistry; not separately ranked on this global subject table.",
+                "url": "https://www.uaeu.ac.ae/en/cos/departments/chemistry.shtml",
+                "online": "No — the 54-credit-hour PhD is delivered on a full-time, in-residence basis."
+              }
             ]
           }
         },
@@ -10796,10 +11900,19 @@
       "aboveFold": {
         "resultTitle": "Break-Even Point",
         "placeholder": "Enter your fixed costs, variable cost, and price to see your break-even point here.",
+        "emptyStateMessage": "Enter your costs and price and press Calculate to see your results.",
+        "sentences": {
+          "breakEven": "You need to sell {units} units — {revenue} in revenue — to cover your fixed costs and break even.",
+          "targetProfit": "To reach a target profit of {profit}, you need to sell {units} units."
+        },
         "chartFixedCosts": "Fixed costs",
         "chartTotalCost": "Total cost",
         "chartRevenue": "Revenue",
         "chartBreakEven": "Where the revenue and total-cost lines cross is the break-even point — the exact unit count at which profit turns from negative to positive.",
+        "chartTargetProfit": "Target profit point",
+        "tooltipUnits": "Units",
+        "tooltipProfit": "Profit / Loss",
+        "chartAriaLabel": "Interactive chart of total cost versus revenue across unit volume, marking the break-even point",
         "glossary": {
           "title": "CVP Terms, Plainly",
           "intro": "The vocabulary of cost-volume-profit (CVP) analysis, defined without the jargon.",
@@ -10833,7 +11946,31 @@
         "targetProfit": "Target Profit (optional)",
         "targetProfitHint": "See how many units you'd need to sell to hit a specific profit goal, not just break even.",
         "targetProfitPlaceholder": "e.g. 5000",
-        "calculate": "Calculate"
+        "calculate": "Calculate",
+        "clear": "Clear"
+      },
+      "tabs": {
+        "groupLabel": "Calculation Type",
+        "breakEven": "Break-Even",
+        "targetProfit": "Target Profit"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       },
       "result": {
         "title": "Break-Even Report",
@@ -10841,7 +11978,8 @@
         "breakEvenRevenue": "Break-Even Revenue",
         "contributionMarginPerUnit": "Contribution Margin / Unit",
         "contributionMarginRatio": "Contribution Margin Ratio",
-        "targetProfitUnits": "Units for Target Profit"
+        "targetProfitUnits": "Units for Target Profit",
+        "targetProfitRevenue": "Revenue at Target Profit"
       },
       "errors": {
         "required": "Please enter valid numbers for all fields.",

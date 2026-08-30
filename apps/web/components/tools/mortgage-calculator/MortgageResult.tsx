@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import MortgagePaymentDonut from "./MortgagePaymentDonut";
+import MortgageShareExportModal from "./MortgageShareExportModal";
 import type { MortgageExtendedResult } from "./types";
 
 type MortgageResultProps = {
@@ -44,12 +44,40 @@ export default function MortgageResult({ result, digitStyle }: MortgageResultPro
   ];
 
   const payoff = monthsToYearsMonths(result.actualPayoffMonths);
-  const summaryText = `${t("title")}: ${currency(result.monthlyPayment)}/${t("aboveFold.perMonthShort")}`;
+
+  const heroLabel = t("aboveFold.perMonth");
+  const heroValue = currency(result.monthlyPayment);
+  const sentence = t("aboveFold.sentence", {
+    price: currency(result.homePrice),
+    down: currency(result.downPayment),
+    rate: fmt(result.annualInterestRate, { maximumFractionDigits: 2 }),
+    years: fmt(result.loanTermYears),
+    payment: currency(result.monthlyPayment),
+  });
+
+  const inputRows = [
+    { label: t("form.homePrice"), value: currency(result.homePrice) },
+    { label: t("form.downPayment"), value: currency(result.downPayment) },
+    { label: t("form.interestRate"), value: `${fmt(result.annualInterestRate, { maximumFractionDigits: 2 })}%` },
+    { label: t("form.loanTerm"), value: t("form.loanTermPreset", { years: fmt(result.loanTermYears) }) },
+    { label: t("form.extraMonthlyPayment"), value: currency(result.extraMonthlyPayment) },
+  ];
+  const resultRows = [
+    { label: t("aboveFold.loanAmountLabel"), value: currency(result.loanAmount) },
+    { label: t("aboveFold.totalInterestLabel"), value: currency(result.totalInterest) },
+    { label: t("aboveFold.totalCostLabel"), value: currency(result.loanAmount + result.totalInterest) },
+    { label: t("aboveFold.payoffTimeLabel"), value: t("aboveFold.payoffTimeValue", { years: fmt(payoff.years), months: fmt(payoff.months) }) },
+  ];
+  const scheduleTable = {
+    title: t("shareExport.scheduleTableTitle"),
+    columns: [t("payoffChart.tooltipYearLabel"), t("payoffChart.principalLabel"), t("payoffChart.interestLabel"), t("payoffChart.balanceLabel")],
+    rows: result.amortizationSchedule.map((row) => [String(row.year), currency(row.principalPaid), currency(row.interestPaid), currency(row.endingBalance)]),
+  };
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
-      action={<CopyButton text={summaryText} className="!text-white dark:!text-zinc-200" />}
+      action={<MortgageShareExportModal mode="standard" inputRows={inputRows} resultRows={resultRows} heroLabel={heroLabel} heroValue={heroValue} sentence={sentence} table={scheduleTable} />}
     >
       <div className="flex flex-wrap items-center justify-center gap-6">
         <MortgagePaymentDonut

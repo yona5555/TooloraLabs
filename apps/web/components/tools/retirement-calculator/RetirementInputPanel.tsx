@@ -1,38 +1,63 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import type { RetirementMode } from "./types";
 
 type RetirementInputPanelProps = {
+  mode: RetirementMode;
   currentAge: string;
   onCurrentAgeChange: (value: string) => void;
   retirementAge: string;
   onRetirementAgeChange: (value: string) => void;
+  targetBalance: string;
+  onTargetBalanceChange: (value: string) => void;
   currentSavings: string;
   onCurrentSavingsChange: (value: string) => void;
   monthlyContribution: string;
   onMonthlyContributionChange: (value: string) => void;
   annualReturnRate: string;
   onAnnualReturnRateChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function RetirementInputPanel({
+  mode,
   currentAge,
   onCurrentAgeChange,
   retirementAge,
   onRetirementAgeChange,
+  targetBalance,
+  onTargetBalanceChange,
   currentSavings,
   onCurrentSavingsChange,
   monthlyContribution,
   onMonthlyContributionChange,
   annualReturnRate,
   onAnnualReturnRateChange,
+  onCalculate,
+  onClear,
 }: RetirementInputPanelProps) {
   const t = useTranslations("tools.retirement-calculator");
 
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
-      <div className="space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
+        {mode !== "endAmount" && (
+          <ToolInput
+            label={t("form.targetBalanceLabel")}
+            hint={t("form.targetBalanceHint")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.targetBalancePlaceholder")}
+            value={targetBalance}
+            onChange={(e) => onTargetBalanceChange(e.target.value)}
+          />
+        )}
+
         <div className="grid grid-cols-2 gap-4">
           <ToolInput
             label={t("form.currentAgeLabel")}
@@ -42,14 +67,16 @@ export default function RetirementInputPanel({
             value={currentAge}
             onChange={(e) => onCurrentAgeChange(e.target.value)}
           />
-          <ToolInput
-            label={t("form.retirementAgeLabel")}
-            type="text"
-            inputMode="numeric"
-            placeholder={t("form.retirementAgePlaceholder")}
-            value={retirementAge}
-            onChange={(e) => onRetirementAgeChange(e.target.value)}
-          />
+          {mode !== "requiredYears" && (
+            <ToolInput
+              label={t("form.retirementAgeLabel")}
+              type="text"
+              inputMode="numeric"
+              placeholder={t("form.retirementAgePlaceholder")}
+              value={retirementAge}
+              onChange={(e) => onRetirementAgeChange(e.target.value)}
+            />
+          )}
         </div>
 
         <ToolInput
@@ -61,14 +88,16 @@ export default function RetirementInputPanel({
           onChange={(e) => onCurrentSavingsChange(e.target.value)}
         />
 
-        <ToolInput
-          label={t("form.monthlyContributionLabel")}
-          type="text"
-          inputMode="decimal"
-          placeholder={t("form.monthlyContributionPlaceholder")}
-          value={monthlyContribution}
-          onChange={(e) => onMonthlyContributionChange(e.target.value)}
-        />
+        {mode !== "requiredContribution" && (
+          <ToolInput
+            label={t("form.monthlyContributionLabel")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.monthlyContributionPlaceholder")}
+            value={monthlyContribution}
+            onChange={(e) => onMonthlyContributionChange(e.target.value)}
+          />
+        )}
 
         <ToolInput
           label={t("form.annualReturnRateLabel")}
@@ -79,7 +108,18 @@ export default function RetirementInputPanel({
           value={annualReturnRate}
           onChange={(e) => onAnnualReturnRateChange(e.target.value)}
         />
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("form.calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("form.clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

@@ -9,6 +9,13 @@ type SectionNavProps = {
   items: SectionNavItem[];
   /** Opt-in: adds a "Jump to Bottom" action next to "Back to Top". Off by default so existing callers are unaffected. */
   showJumpToBottom?: boolean;
+  /**
+   * Opt-in visibility gate, independent of the bar's own sticky logic — lets a caller
+   * keep it invisible (no layout shift, since it stays in flow) until some condition of
+   * its own choosing (e.g. having scrolled past a tall page header) is met. Defaults to
+   * `true`, so callers that don't pass it render exactly as before.
+   */
+  visible?: boolean;
 };
 
 const STUCK_TOP_OFFSET = 72; // px — matches the `top-18` sticky/fixed offset below the site header.
@@ -16,7 +23,7 @@ const STUCK_TOP_OFFSET = 72; // px — matches the `top-18` sticky/fixed offset 
 const navSurfaceClassName =
   "z-40 border-b border-zinc-200 bg-white/90 px-4 py-2 backdrop-blur-xl sm:px-6 dark:border-zinc-800 dark:bg-zinc-950/90";
 
-export default function SectionNav({ items, showJumpToBottom = false }: SectionNavProps) {
+export default function SectionNav({ items, showJumpToBottom = false, visible = true }: SectionNavProps) {
   const t = useTranslations("common");
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
   const [isStuck, setIsStuck] = useState(false);
@@ -160,7 +167,7 @@ export default function SectionNav({ items, showJumpToBottom = false }: SectionN
       <nav
         ref={navRef}
         aria-label={t("sectionNavLabel")}
-        className={isStuck ? `fixed top-18 ${navSurfaceClassName}` : `relative mb-6 ${navSurfaceClassName}`}
+        className={`${isStuck ? `fixed top-18 ${navSurfaceClassName}` : `relative mb-6 ${navSurfaceClassName}`} transition-opacity duration-300 ${visible ? "opacity-100" : "pointer-events-none opacity-0"}`}
         style={isStuck && stuckRect ? { left: stuckRect.left, width: stuckRect.width } : undefined}
       >
         <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto">

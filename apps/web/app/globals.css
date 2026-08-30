@@ -21,4 +21,16 @@ body {
     inset: 0;
     padding: 2rem;
   }
+
+  [data-print-area] table {
+    page-break-inside: auto;
+  }
+
+  [data-print-area] tr {
+    page-break-inside: avoid;
+  }
+
+  [data-print-area] thead {
+    display: table-header-group;
+  }
 }

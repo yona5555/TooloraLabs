@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { calculateRetirement } from "../RetirementCalculator";
+import { calculateRetirement, calculateRetirementProjection, solveRequiredContribution, solveRequiredYears } from "../RetirementCalculator";
 
 describe("calculateRetirement", () => {
   it("projects a balance from a starting amount plus contributions", () => {
@@ -40,5 +40,43 @@ describe("calculateRetirement", () => {
     expect(calculateRetirement(30, 65, -100, 500, 7).projectedBalance).toBe(0);
     expect(calculateRetirement(30, 65, 10000, -50, 7).projectedBalance).toBe(0);
     expect(calculateRetirement(30, 65, 10000, 500, -1).projectedBalance).toBe(0);
+  });
+});
+
+describe("calculateRetirementProjection", () => {
+  it("matches calculateRetirement's headline numbers and adds a yearly schedule", () => {
+    const base = calculateRetirement(30, 65, 10000, 500, 7);
+    const projection = calculateRetirementProjection(30, 65, 10000, 500, 7);
+    expect(projection.projectedBalance).toBeCloseTo(base.projectedBalance, 2);
+    expect(projection.yearlySchedule).toHaveLength(35);
+    expect(projection.yearlySchedule[34].balance).toBeCloseTo(base.projectedBalance, 1);
+  });
+});
+
+describe("solveRequiredContribution", () => {
+  it("is the exact inverse of calculateRetirementProjection's contribution side", () => {
+    const forward = calculateRetirementProjection(30, 65, 10000, 500, 7);
+    const reverse = solveRequiredContribution(forward.projectedBalance, 30, 65, 10000, 7);
+    expect(reverse.requiredMonthlyContribution).toBeCloseTo(500, 0);
+  });
+
+  it("returns zeros for invalid inputs", () => {
+    expect(solveRequiredContribution(0, 30, 65, 10000, 7).requiredMonthlyContribution).toBe(0);
+    expect(solveRequiredContribution(1000000, 65, 60, 10000, 7).requiredMonthlyContribution).toBe(0);
+  });
+});
+
+describe("solveRequiredYears", () => {
+  it("is the exact inverse of calculateRetirementProjection's time side", () => {
+    const forward = calculateRetirementProjection(30, 65, 10000, 500, 7);
+    const reverse = solveRequiredYears(forward.projectedBalance, 30, 10000, 500, 7, 100);
+    expect(reverse.yearsNeeded).toBeCloseTo(35, 0);
+    expect(reverse.retirementAgeReached).toBeCloseTo(65, 0);
+  });
+
+  it("returns nulls when the target is unreachable within maxYears", () => {
+    const reverse = solveRequiredYears(10000000, 30, 0, 10, 1, 10);
+    expect(reverse.yearsNeeded).toBeNull();
+    expect(reverse.retirementAgeReached).toBeNull();
   });
 });

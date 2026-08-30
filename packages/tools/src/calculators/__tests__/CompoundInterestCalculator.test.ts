@@ -42,6 +42,8 @@ describe("calculateCompoundInterest", () => {
       totalContributions: 0,
       totalInterest: 0,
       yearlySchedule: [],
+      monthlySchedule: [],
+      buyingPowerAfterInflation: 0,
     });
     expect(calculateCompoundInterest(1000, 5, 0, "monthly")).toEqual({
       futureValue: 0,
@@ -49,6 +51,8 @@ describe("calculateCompoundInterest", () => {
       totalContributions: 0,
       totalInterest: 0,
       yearlySchedule: [],
+      monthlySchedule: [],
+      buyingPowerAfterInflation: 0,
     });
   });
 
@@ -56,5 +60,41 @@ describe("calculateCompoundInterest", () => {
     const result = calculateCompoundInterest(1000, 0, 1, "monthly", 100);
     expect(result.futureValue).toBeCloseTo(1000 + 1200, 5);
     expect(result.totalInterest).toBeCloseTo(0, 5);
+  });
+
+  it("tracks opening balance and per-year deltas in the yearly schedule", () => {
+    const result = calculateCompoundInterest(1000, 12, 2, "monthly", 100);
+    expect(result.yearlySchedule[0].openingBalance).toBe(1000);
+    expect(result.yearlySchedule[1].openingBalance).toBeCloseTo(result.yearlySchedule[0].balance, 5);
+    const totalYearlyContributions = result.yearlySchedule.reduce((sum, row) => sum + row.yearlyContributions, 0);
+    const totalYearlyInterest = result.yearlySchedule.reduce((sum, row) => sum + row.yearlyInterest, 0);
+    expect(totalYearlyContributions).toBeCloseTo(result.totalContributions, 5);
+    expect(totalYearlyInterest).toBeCloseTo(result.totalInterest, 5);
+  });
+
+  it("reduces growth when a tax rate on interest is supplied", () => {
+    const untaxed = calculateCompoundInterest(1000, 10, 5, "monthly", 0, 0);
+    const taxed = calculateCompoundInterest(1000, 10, 5, "monthly", 0, 25);
+    expect(taxed.futureValue).toBeLessThan(untaxed.futureValue);
+    expect(taxed.totalInterest).toBeGreaterThan(0);
+  });
+
+  it("builds a monthly schedule that reconciles with the yearly schedule", () => {
+    const result = calculateCompoundInterest(1000, 6, 2, "monthly", 50);
+    expect(result.monthlySchedule).toHaveLength(24);
+    expect(result.monthlySchedule[0].openingBalance).toBe(1000);
+    expect(result.monthlySchedule[23].balance).toBeCloseTo(result.futureValue, 5);
+    const year1Interest = result.monthlySchedule
+      .filter((row) => row.year === 1)
+      .reduce((sum, row) => sum + row.interest, 0);
+    expect(year1Interest).toBeCloseTo(result.yearlySchedule[0].yearlyInterest, 5);
+  });
+
+  it("leaves the nominal future value unaffected by inflation but deflates buying power", () => {
+    const noInflation = calculateCompoundInterest(1000, 7, 10, "monthly", 0, 0, 0);
+    const withInflation = calculateCompoundInterest(1000, 7, 10, "monthly", 0, 0, 3);
+    expect(withInflation.futureValue).toBeCloseTo(noInflation.futureValue, 5);
+    expect(withInflation.buyingPowerAfterInflation).toBeLessThan(withInflation.futureValue);
+    expect(withInflation.buyingPowerAfterInflation).toBeCloseTo(withInflation.futureValue / Math.pow(1.03, 10), 5);
   });
 });
