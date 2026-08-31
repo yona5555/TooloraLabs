@@ -1,3 +1,3 @@
-export type DtiMode = "ratio" | "maxDebt";
+export type DtiMode = "ratio" | "maxDebt" | "scenario";
 
-export const DTI_MODES: DtiMode[] = ["ratio", "maxDebt"];
+export const DTI_MODES: DtiMode[] = ["ratio", "maxDebt", "scenario"];

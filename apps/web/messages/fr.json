@@ -19,7 +19,21 @@
     "affiliateLabel": "Lien affilié",
     "relatedToolsTitle": "Outils associés",
     "viewAllCta": "Voir tout : {category}",
-    "toolSearchNoResults": "Aucun outil trouvé."
+    "toolSearchNoResults": "Aucun outil trouvé.",
+    "currency": {
+      "label": "Devise",
+      "approximateNote": "Conversion approximative à un taux de référence fixe — pas un taux de change en temps réel.",
+      "names": {
+        "USD": "Dollar américain (USD)",
+        "EUR": "Euro (EUR)",
+        "GBP": "Livre sterling (GBP)",
+        "SAR": "Riyal saoudien (SAR)",
+        "AED": "Dirham des É.A.U. (AED)",
+        "EGP": "Livre égyptienne (EGP)",
+        "JPY": "Yen japonais (JPY)",
+        "INR": "Roupie indienne (INR)"
+      }
+    }
   },
   "site": {
     "title": "TooloraLabs",
@@ -3495,7 +3509,8 @@
       "nav": {
         "tool": "Calculateur",
         "faq": "FAQ",
-        "behindTheTool": "Dans les coulisses"
+        "behindTheTool": "Dans les coulisses",
+        "termComparison": "Comparaison des durées"
       },
       "form": {
         "monthlyPaymentLabel": "Mensualité que vous pouvez vous permettre",
@@ -3639,6 +3654,21 @@
           "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
           "readOriginal": "Lire l'article original"
         }
+      },
+      "termChart": {
+        "title": "Montant maximal du prêt par durée",
+        "intro": "Combien de plus vous pourriez emprunter avec le même paiement mensuel en choisissant simplement une durée de prêt plus longue.",
+        "emptyStateMessage": "Saisissez vos informations ci-dessus pour comparer les durées de prêt.",
+        "termLabel": "{years} ans",
+        "maxLoanLabel": "Montant maximal du prêt",
+        "paymentForLoanLabel": "Paiement pour le montant de prêt actuel"
+      },
+      "termTable": {
+        "title": "Comparer les durées de prêt",
+        "intro": "Voyez comment une durée plus courte ou plus longue modifie à la fois votre paiement mensuel et le montant maximal que vous pourriez emprunter, à votre taux d'intérêt actuel.",
+        "columnTerm": "Durée",
+        "columnMonthlyPayment": "Paiement mensuel",
+        "columnMaxLoan": "Montant maximal du prêt"
       }
     },
     "retirement-calculator": {
@@ -3666,7 +3696,8 @@
           "requiredContribution": "Pour atteindre {target} à {retirementAge} ans, en partant de {savings} à {currentAge} ans avec un rendement annuel attendu de {rate}, vous devez cotiser {requiredContribution} par mois.",
           "requiredYears": "En cotisant {contribution} par mois à partir de {savings} à {currentAge} ans avec un rendement annuel attendu de {rate}, vous atteindrez {target} en environ {years}, soit vers {retirementAgeReached} ans.",
           "requiredYearsUnreachable": "Avec {contribution} par mois à partir de {savings} et un rendement annuel attendu de {rate}, {target} n'est pas atteint en 80 ans — essayez une cotisation ou un rendement plus élevés."
-        }
+        },
+        "inflationAdjustedBalanceLabel": "Solde ajusté à l'inflation"
       },
       "nav": {
         "tool": "Calculatrice",
@@ -3690,7 +3721,10 @@
         "targetBalanceHint": "Le solde de retraite que vous souhaitez atteindre.",
         "targetBalancePlaceholder": "p. ex. 1 000 000",
         "calculate": "Calculer",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "inflationRateLabel": "Taux d'inflation prévu (%)",
+        "inflationRateHint": "Facultatif — affiche votre solde projeté en pouvoir d'achat actuel à côté du chiffre nominal. Laissez à 0 pour ignorer cet ajustement.",
+        "inflationRatePlaceholder": "p. ex. 3"
       },
       "growthChart": {
         "title": "Croissance de l'épargne dans le temps",
@@ -3701,7 +3735,8 @@
         "totalContributedLabel": "Total cotisé",
         "totalInterestLabel": "Croissance totale",
         "tooltipYearLabel": "Année",
-        "tooltipBalanceLabel": "Solde"
+        "tooltipBalanceLabel": "Solde",
+        "inflationAdjustedLabel": "Solde ajusté à l'inflation"
       },
       "yearlyBreakdown": {
         "title": "Répartition année par année",
@@ -3867,20 +3902,30 @@
         "emptyStateMessage": "Saisissez vos données et cliquez sur « Calculer » pour voir vos résultats.",
         "sentences": {
           "homePrice": "Avec un revenu annuel brut de {income}, le prix maximal du logement que vous pouvez vous permettre est de {price}.",
-          "requiredIncome": "Pour vous permettre un logement à {price}, votre revenu annuel brut doit être d'au moins {income}."
+          "requiredIncome": "Pour vous permettre un logement à {price}, votre revenu annuel brut doit être d'au moins {income}.",
+          "car": "Avec un revenu annuel brut de {income}, le prix maximal du véhicule que vous pouvez vous permettre est de {price}, pour un paiement mensuel de {payment}.",
+          "personal": "Avec un revenu annuel brut de {income}, vous pourriez vous permettre un prêt personnel allant jusqu'à {amount}, pour un paiement mensuel de {payment}.",
+          "business": "Avec un revenu mensuel moyen de {revenue}, votre entreprise pourrait supporter un prêt allant jusqu'à {amount}, pour un paiement mensuel de {payment}."
         },
         "placeholder": "Saisissez vos revenus, vos dettes, votre acompte et les conditions du prêt pour voir le prix maximal du logement que vous pouvez vous permettre.",
-        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une préapprobation hypothécaire, une offre de prêt ni un conseil financier. Les prêteurs appliquent leurs propres règles de souscription, qui peuvent différer de la règle 28/36 utilisée ici, et le montant réellement approuvé dépend de votre profil de crédit complet et des exigences du prêteur. Consultez un prêteur hypothécaire agréé ou un conseiller financier avant de chercher un logement ou de solliciter un prêt."
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une préapprobation hypothécaire, une offre de prêt ni un conseil financier. Les prêteurs appliquent leurs propres règles de souscription, qui peuvent différer de la règle 28/36 utilisée ici, et le montant réellement approuvé dépend de votre profil de crédit complet et des exigences du prêteur. Consultez un prêteur hypothécaire agréé ou un conseiller financier avant de chercher un logement ou de solliciter un prêt.",
+        "maxCarPriceLabel": "Prix maximal du véhicule",
+        "maxPersonalLoanLabel": "Prêt personnel maximal",
+        "maxBusinessLoanLabel": "Prêt professionnel maximal"
       },
       "tabs": {
         "groupLabel": "Type de calcul",
         "homePrice": "Prix max",
-        "requiredIncome": "Revenu requis"
+        "requiredIncome": "Revenu requis",
+        "car": "Prêt automobile",
+        "business": "Prêt professionnel",
+        "personal": "Prêt personnel"
       },
       "nav": {
         "tool": "Calculateur",
         "faq": "FAQ",
-        "behindTheTool": "Dans les coulisses"
+        "behindTheTool": "Dans les coulisses",
+        "borrowingComparison": "Comparer les usages"
       },
       "form": {
         "annualIncomeLabel": "Revenu annuel brut",
@@ -3905,7 +3950,22 @@
         "monthlyHOAHint": "Frais d'association de propriétaires, le cas échéant. Saisissez 0 si non applicable.",
         "monthlyHOAPlaceholder": "ex. 0",
         "calculate": "Calculer",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "carDownPaymentHint": "Facultatif pour un prêt automobile — saisissez 0 si vous ne versez aucun apport.",
+        "carDownPaymentPlaceholder": "p. ex. 3 000",
+        "carInterestRatePlaceholder": "p. ex. 6",
+        "carLoanTermHint": "Les prêts automobiles sont généralement plus courts que les prêts immobiliers — souvent de 3 à 7 ans.",
+        "carLoanTermPlaceholder": "p. ex. 5",
+        "personalInterestRateHint": "Les prêts personnels non garantis ont généralement des taux plus élevés qu'un prêt immobilier ou automobile.",
+        "personalInterestRatePlaceholder": "p. ex. 12",
+        "personalLoanTermPlaceholder": "p. ex. 3",
+        "businessMonthlyRevenueLabel": "Revenu mensuel moyen de l'entreprise",
+        "businessMonthlyRevenueHint": "Le revenu mensuel habituel de votre entreprise — utilisé pour vérifier qu'il couvre confortablement le paiement du prêt.",
+        "businessMonthlyRevenuePlaceholder": "p. ex. 20 000",
+        "businessExistingDebtLabel": "Paiements de dettes mensuels existants",
+        "businessExistingDebtPlaceholder": "p. ex. 3 000",
+        "businessInterestRatePlaceholder": "p. ex. 9",
+        "businessLoanTermPlaceholder": "p. ex. 7"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -4040,6 +4100,17 @@
           "url": "https://doi.org/10.1080/02673039508720833",
           "readOriginal": "Lire l'article original"
         }
+      },
+      "comparisonChart": {
+        "title": "Comparer la capacité d'emprunt selon l'usage",
+        "intro": "Combien vous pourriez emprunter pour un logement, une voiture, une entreprise ou un prêt personnel, côte à côte — chacun utilisant sa propre règle d'accessibilité et vos données actuelles dans cet onglet.",
+        "maxAmountLabel": "Montant max.",
+        "purposeLabels": {
+          "home": "Logement",
+          "car": "Voiture",
+          "business": "Entreprise",
+          "personal": "Personnel"
+        }
       }
     },
     "debt-to-income-calculator": {
@@ -4064,14 +4135,16 @@
         "maxAdditionalMonthlyDebtLabel": "Marge supplémentaire disponible",
         "sentences": {
           "ratio": "Avec un revenu mensuel brut de {income}, votre dette mensuelle totale place votre ratio dette/revenu à {ratio} — évalué comme {category}.",
-          "maxDebt": "Pour rester à un ratio dette/revenu de {target} ou moins avec un revenu mensuel brut de {income}, vos paiements de dette mensuels totaux ne devraient pas dépasser {maxDebt}."
+          "maxDebt": "Pour rester à un ratio dette/revenu de {target} ou moins avec un revenu mensuel brut de {income}, vos paiements de dette mensuels totaux ne devraient pas dépasser {maxDebt}.",
+          "scenario": "Ajouter un nouveau paiement mensuel de {payment} ferait passer votre taux d'endettement de {before} à {after} — classé {category}."
         },
         "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une décision de prêt ni un conseil financier. Les prêteurs calculent le DTI selon leurs propres règles, qui peuvent différer de la formule utilisée ici, et l'approbation dépend de nombreux facteurs au-delà de ce seul ratio. Consultez un prêteur agréé ou un conseiller financier pour des conseils adaptés à votre situation."
       },
       "tabs": {
         "groupLabel": "Type de calcul",
         "ratio": "Ratio dette/revenu",
-        "maxDebt": "Dette max"
+        "maxDebt": "Dette max",
+        "scenario": "Comparaison de scénarios"
       },
       "nav": {
         "tool": "Calculateur",
@@ -4100,7 +4173,10 @@
         "existingMonthlyDebtHint": "Tout paiement de dette mensuel que vous avez déjà, pour voir la marge supplémentaire que laisse le ratio cible.",
         "existingMonthlyDebtPlaceholder": "ex. 600",
         "calculate": "Calculer",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "proposedMonthlyPaymentLabel": "Nouveau paiement mensuel proposé",
+        "proposedMonthlyPaymentHint": "Le paiement mensuel d'un nouveau prêt ou d'une nouvelle dette que vous envisagez.",
+        "proposedMonthlyPaymentPlaceholder": "p. ex. 250"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -4240,6 +4316,14 @@
           "url": "https://doi.org/10.1111/jofi.12482",
           "readOriginal": "Lire l'article original"
         }
+      },
+      "scenarioChart": {
+        "title": "Taux d'endettement : avant vs. après",
+        "intro": "Compare votre taux d'endettement global actuel au taux que vous auriez après avoir pris le nouveau paiement mensuel proposé. Les lignes pointillées marquent les seuils de 36 %/43 %/50 % couramment utilisés par les prêteurs.",
+        "emptyStateMessage": "Saisissez vos revenus, vos dettes et un nouveau paiement proposé, puis appuyez sur Calculer pour comparer.",
+        "beforeLabel": "Avant",
+        "afterLabel": "Après",
+        "thresholdLabel": "seuil de {value} %"
       }
     },
     "world-time-converter": {

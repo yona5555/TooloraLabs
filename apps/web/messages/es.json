@@ -19,7 +19,21 @@
     "affiliateLabel": "Enlace de afiliado",
     "relatedToolsTitle": "Herramientas relacionadas",
     "viewAllCta": "Ver todo: {category}",
-    "toolSearchNoResults": "No se encontraron herramientas."
+    "toolSearchNoResults": "No se encontraron herramientas.",
+    "currency": {
+      "label": "Moneda",
+      "approximateNote": "Conversión aproximada a un tipo de cambio de referencia fijo, no un tipo de cambio en tiempo real.",
+      "names": {
+        "USD": "Dólar estadounidense (USD)",
+        "EUR": "Euro (EUR)",
+        "GBP": "Libra esterlina (GBP)",
+        "SAR": "Rial saudí (SAR)",
+        "AED": "Dirham de los EAU (AED)",
+        "EGP": "Libra egipcia (EGP)",
+        "JPY": "Yen japonés (JPY)",
+        "INR": "Rupia india (INR)"
+      }
+    }
   },
   "site": {
     "title": "TooloraLabs",
@@ -3495,7 +3509,8 @@
       "nav": {
         "tool": "Calculadora",
         "faq": "Preguntas frecuentes",
-        "behindTheTool": "Detrás de la herramienta"
+        "behindTheTool": "Detrás de la herramienta",
+        "termComparison": "Comparación de plazos"
       },
       "form": {
         "monthlyPaymentLabel": "Cuota mensual que puedes pagar",
@@ -3639,6 +3654,21 @@
           "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
           "readOriginal": "Leer el artículo original"
         }
+      },
+      "termChart": {
+        "title": "Monto máximo de préstamo por plazo",
+        "intro": "Cuánto más podrías pedir prestado con el mismo pago mensual simplemente eligiendo un plazo de préstamo más largo.",
+        "emptyStateMessage": "Introduce tus datos arriba para comparar plazos de préstamo.",
+        "termLabel": "{years} años",
+        "maxLoanLabel": "Monto máximo de préstamo",
+        "paymentForLoanLabel": "Pago para el monto de préstamo actual"
+      },
+      "termTable": {
+        "title": "Comparar plazos de préstamo",
+        "intro": "Observa cómo un plazo más corto o más largo cambia tanto tu pago mensual como el monto máximo que podrías pedir prestado, a tu tasa de interés actual.",
+        "columnTerm": "Plazo",
+        "columnMonthlyPayment": "Pago mensual",
+        "columnMaxLoan": "Monto máximo de préstamo"
       }
     },
     "retirement-calculator": {
@@ -3666,7 +3696,8 @@
           "requiredContribution": "Para alcanzar {target} a los {retirementAge} años, comenzando con {savings} a los {currentAge} años con una rentabilidad anual esperada del {rate}, necesitas aportar {requiredContribution} al mes.",
           "requiredYears": "Aportando {contribution} al mes desde {savings} a los {currentAge} años con una rentabilidad anual esperada del {rate}, alcanzarás {target} en aproximadamente {years}, es decir, alrededor de los {retirementAgeReached} años.",
           "requiredYearsUnreachable": "Con {contribution} al mes desde {savings} y una rentabilidad anual esperada del {rate}, no se alcanza {target} en 80 años; prueba con una aportación o una rentabilidad mayores."
-        }
+        },
+        "inflationAdjustedBalanceLabel": "Saldo ajustado por inflación"
       },
       "nav": {
         "tool": "Calculadora",
@@ -3690,7 +3721,10 @@
         "targetBalanceHint": "El saldo de jubilación que deseas alcanzar.",
         "targetBalancePlaceholder": "p. ej. 1,000,000",
         "calculate": "Calcular",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "inflationRateLabel": "Tasa de inflación esperada (%)",
+        "inflationRateHint": "Opcional: muestra tu saldo proyectado en poder adquisitivo actual junto con la cifra nominal. Déjalo en 0 para omitir este ajuste.",
+        "inflationRatePlaceholder": "p. ej. 3"
       },
       "growthChart": {
         "title": "Crecimiento del ahorro a lo largo del tiempo",
@@ -3701,7 +3735,8 @@
         "totalContributedLabel": "Total aportado",
         "totalInterestLabel": "Crecimiento total",
         "tooltipYearLabel": "Año",
-        "tooltipBalanceLabel": "Saldo"
+        "tooltipBalanceLabel": "Saldo",
+        "inflationAdjustedLabel": "Saldo ajustado por inflación"
       },
       "yearlyBreakdown": {
         "title": "Desglose año a año",
@@ -3867,20 +3902,30 @@
         "emptyStateMessage": "Introduce tus datos y pulsa \"Calcular\" para ver tus resultados.",
         "sentences": {
           "homePrice": "Con un ingreso anual bruto de {income}, el precio máximo de vivienda que puedes permitirte es {price}.",
-          "requiredIncome": "Para permitirte una vivienda de {price}, tu ingreso anual bruto debe ser de al menos {income}."
+          "requiredIncome": "Para permitirte una vivienda de {price}, tu ingreso anual bruto debe ser de al menos {income}.",
+          "car": "Con un ingreso bruto anual de {income}, el precio máximo de auto que puedes permitirte es {price}, con un pago mensual de {payment}.",
+          "personal": "Con un ingreso bruto anual de {income}, podrías permitirte un préstamo personal de hasta {amount}, con un pago mensual de {payment}.",
+          "business": "Con un ingreso mensual promedio de {revenue}, tu negocio podría respaldar un préstamo de hasta {amount}, con un pago mensual de {payment}."
         },
         "placeholder": "Introduce tus ingresos, deudas, pago inicial y condiciones del préstamo para ver el precio máximo de vivienda que puedes permitirte.",
-        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no una preaprobación hipotecaria, una oferta de préstamo ni asesoramiento financiero. Los prestamistas aplican sus propias reglas de suscripción, que pueden diferir de la regla 28/36 usada aquí, y el monto realmente aprobado depende de tu perfil de crédito completo y los requisitos del prestamista. Consulta a un prestamista hipotecario autorizado o a un asesor financiero antes de buscar vivienda o solicitar un préstamo."
+        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no una preaprobación hipotecaria, una oferta de préstamo ni asesoramiento financiero. Los prestamistas aplican sus propias reglas de suscripción, que pueden diferir de la regla 28/36 usada aquí, y el monto realmente aprobado depende de tu perfil de crédito completo y los requisitos del prestamista. Consulta a un prestamista hipotecario autorizado o a un asesor financiero antes de buscar vivienda o solicitar un préstamo.",
+        "maxCarPriceLabel": "Precio máximo de auto",
+        "maxPersonalLoanLabel": "Préstamo personal máximo",
+        "maxBusinessLoanLabel": "Préstamo comercial máximo"
       },
       "tabs": {
         "groupLabel": "Tipo de cálculo",
         "homePrice": "Precio máximo",
-        "requiredIncome": "Ingreso requerido"
+        "requiredIncome": "Ingreso requerido",
+        "car": "Préstamo de auto",
+        "business": "Préstamo comercial",
+        "personal": "Préstamo personal"
       },
       "nav": {
         "tool": "Calculadora",
         "faq": "Preguntas frecuentes",
-        "behindTheTool": "Detrás de la herramienta"
+        "behindTheTool": "Detrás de la herramienta",
+        "borrowingComparison": "Comparar propósitos"
       },
       "form": {
         "annualIncomeLabel": "Ingreso anual bruto",
@@ -3905,7 +3950,22 @@
         "monthlyHOAHint": "Cuotas de la asociación de propietarios, si las hay. Introduce 0 si no aplica.",
         "monthlyHOAPlaceholder": "p. ej. 0",
         "calculate": "Calcular",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "carDownPaymentHint": "Opcional para un préstamo de auto — introduce 0 si no darás ningún pago inicial.",
+        "carDownPaymentPlaceholder": "p. ej. 3,000",
+        "carInterestRatePlaceholder": "p. ej. 6",
+        "carLoanTermHint": "Los préstamos de auto suelen ser más cortos que las hipotecas — comúnmente de 3 a 7 años.",
+        "carLoanTermPlaceholder": "p. ej. 5",
+        "personalInterestRateHint": "Los préstamos personales sin garantía suelen tener tasas más altas que una hipoteca o un préstamo de auto.",
+        "personalInterestRatePlaceholder": "p. ej. 12",
+        "personalLoanTermPlaceholder": "p. ej. 3",
+        "businessMonthlyRevenueLabel": "Ingreso mensual promedio del negocio",
+        "businessMonthlyRevenueHint": "El ingreso mensual típico de tu negocio, usado para comprobar que puede cubrir cómodamente el pago del préstamo.",
+        "businessMonthlyRevenuePlaceholder": "p. ej. 20,000",
+        "businessExistingDebtLabel": "Pagos de deuda mensuales existentes",
+        "businessExistingDebtPlaceholder": "p. ej. 3,000",
+        "businessInterestRatePlaceholder": "p. ej. 9",
+        "businessLoanTermPlaceholder": "p. ej. 7"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -4040,6 +4100,17 @@
           "url": "https://doi.org/10.1080/02673039508720833",
           "readOriginal": "Leer el artículo original"
         }
+      },
+      "comparisonChart": {
+        "title": "Comparar la capacidad de endeudamiento por propósito",
+        "intro": "Cuánto podrías permitirte pedir prestado para una vivienda, un auto, un negocio o un préstamo personal, lado a lado — cada uno usando su propia regla de asequibilidad y tus datos actuales en esa pestaña.",
+        "maxAmountLabel": "Monto máximo",
+        "purposeLabels": {
+          "home": "Vivienda",
+          "car": "Auto",
+          "business": "Negocio",
+          "personal": "Personal"
+        }
       }
     },
     "debt-to-income-calculator": {
@@ -4064,14 +4135,16 @@
         "maxAdditionalMonthlyDebtLabel": "Margen adicional disponible",
         "sentences": {
           "ratio": "Con un ingreso mensual bruto de {income}, tu deuda mensual total sitúa tu ratio deuda-ingreso en {ratio} — calificado como {category}.",
-          "maxDebt": "Para mantenerte en un ratio deuda-ingreso de {target} o menos con un ingreso mensual bruto de {income}, tus pagos de deuda mensuales totales no deberían superar {maxDebt}."
+          "maxDebt": "Para mantenerte en un ratio deuda-ingreso de {target} o menos con un ingreso mensual bruto de {income}, tus pagos de deuda mensuales totales no deberían superar {maxDebt}.",
+          "scenario": "Añadir un nuevo pago mensual de {payment} llevaría tu relación deuda-ingresos de {before} a {after}, clasificada como {category}."
         },
         "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no una decisión de préstamo ni asesoramiento financiero. Los prestamistas calculan el DTI con sus propias reglas, que pueden diferir de la fórmula usada aquí, y la aprobación depende de muchos factores más allá de este ratio. Consulta a un prestamista autorizado o a un asesor financiero para obtener orientación específica para tu situación."
       },
       "tabs": {
         "groupLabel": "Tipo de cálculo",
         "ratio": "Ratio deuda-ingreso",
-        "maxDebt": "Deuda máxima"
+        "maxDebt": "Deuda máxima",
+        "scenario": "Comparación de escenarios"
       },
       "nav": {
         "tool": "Calculadora",
@@ -4100,7 +4173,10 @@
         "existingMonthlyDebtHint": "Cualquier pago de deuda mensual que ya tengas, para ver cuánto margen adicional deja el ratio objetivo.",
         "existingMonthlyDebtPlaceholder": "p. ej. 600",
         "calculate": "Calcular",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "proposedMonthlyPaymentLabel": "Nuevo pago mensual propuesto",
+        "proposedMonthlyPaymentHint": "El pago mensual de un nuevo préstamo o deuda que estás considerando.",
+        "proposedMonthlyPaymentPlaceholder": "p. ej. 250"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -4240,6 +4316,14 @@
           "url": "https://doi.org/10.1111/jofi.12482",
           "readOriginal": "Leer el artículo original"
         }
+      },
+      "scenarioChart": {
+        "title": "Deuda-ingresos: Antes vs. Después",
+        "intro": "Compara tu ratio de deuda-ingresos back-end actual con el ratio que tendrías después de asumir el nuevo pago mensual propuesto. Las líneas discontinuas marcan los umbrales del 36%/43%/50% que muchos prestamistas utilizan como referencia.",
+        "emptyStateMessage": "Introduce tus ingresos, deudas y un nuevo pago propuesto, y pulsa Calcular para comparar.",
+        "beforeLabel": "Antes",
+        "afterLabel": "Después",
+        "thresholdLabel": "umbral del {value}%"
       }
     },
     "world-time-converter": {

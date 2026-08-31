@@ -5,16 +5,21 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DebtToIncomeShareExportModal from "./DebtToIncomeShareExportModal";
 import type { DebtToIncomeResult as RatioResult, MaxAllowedDebtResult } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 import type { DtiMode } from "./types";
 
 type DebtToIncomeResultProps = {
   mode: DtiMode;
+  currency: CurrencyCode;
   hasCalculated: boolean;
   digitStyle: DigitStyle;
   monthlyGrossIncome: number;
   ratioResult: RatioResult;
   maxDebtResult: MaxAllowedDebtResult;
   targetBackEndRatio: number;
+  scenarioBefore: RatioResult;
+  scenarioAfter: RatioResult;
+  proposedMonthlyPayment: number;
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -37,16 +42,20 @@ function Stat({ title, value }: { title: string; value: string }) {
 
 export default function DebtToIncomeResult({
   mode,
+  currency,
   hasCalculated,
   digitStyle,
   monthlyGrossIncome,
   ratioResult,
   maxDebtResult,
   targetBackEndRatio,
+  scenarioBefore,
+  scenarioAfter,
+  proposedMonthlyPayment,
 }: DebtToIncomeResultProps) {
   const t = useTranslations("tools.debt-to-income-calculator");
 
-  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 })}%`;
 
   if (!hasCalculated) {
@@ -60,22 +69,35 @@ export default function DebtToIncomeResult({
     );
   }
 
-  const heroLabel = mode === "ratio" ? t("aboveFold.backEndRatioLabel") : t("aboveFold.maxTotalMonthlyDebtLabel");
-  const heroValue = mode === "ratio" ? percent(ratioResult.backEndRatio) : money(maxDebtResult.maxTotalMonthlyDebt);
-  const sentenceKey = mode === "ratio" ? "aboveFold.sentences.ratio" : "aboveFold.sentences.maxDebt";
+  const heroLabel = mode === "ratio" ? t("aboveFold.backEndRatioLabel") : mode === "maxDebt" ? t("aboveFold.maxTotalMonthlyDebtLabel") : t("scenarioChart.afterLabel");
+  const heroValue = mode === "ratio" ? percent(ratioResult.backEndRatio) : mode === "maxDebt" ? money(maxDebtResult.maxTotalMonthlyDebt) : percent(scenarioAfter.backEndRatio);
+  const sentenceKey = mode === "ratio" ? "aboveFold.sentences.ratio" : mode === "maxDebt" ? "aboveFold.sentences.maxDebt" : "aboveFold.sentences.scenario";
   const sentence =
     mode === "ratio"
       ? t(sentenceKey, { income: money(monthlyGrossIncome), ratio: percent(ratioResult.backEndRatio), category: t(`aboveFold.category.${ratioResult.category}`) })
-      : t(sentenceKey, { income: money(monthlyGrossIncome), target: percent(targetBackEndRatio), maxDebt: money(maxDebtResult.maxTotalMonthlyDebt) });
+      : mode === "maxDebt"
+        ? t(sentenceKey, { income: money(monthlyGrossIncome), target: percent(targetBackEndRatio), maxDebt: money(maxDebtResult.maxTotalMonthlyDebt) })
+        : t(sentenceKey, {
+            payment: money(proposedMonthlyPayment),
+            before: percent(scenarioBefore.backEndRatio),
+            after: percent(scenarioAfter.backEndRatio),
+            category: t(`aboveFold.category.${scenarioAfter.category}`),
+          });
 
   const inputRows =
     mode === "ratio"
       ? [{ label: t("form.monthlyGrossIncomeLabel"), value: money(monthlyGrossIncome) }]
-      : [
-          { label: t("form.monthlyGrossIncomeLabel"), value: money(monthlyGrossIncome) },
-          { label: t("form.targetBackEndRatioLabel"), value: percent(targetBackEndRatio) },
-          { label: t("form.existingMonthlyDebtLabel"), value: money(maxDebtResult.currentOtherDebt) },
-        ];
+      : mode === "maxDebt"
+        ? [
+            { label: t("form.monthlyGrossIncomeLabel"), value: money(monthlyGrossIncome) },
+            { label: t("form.targetBackEndRatioLabel"), value: percent(targetBackEndRatio) },
+            { label: t("form.existingMonthlyDebtLabel"), value: money(maxDebtResult.currentOtherDebt) },
+          ]
+        : [
+            { label: t("form.monthlyGrossIncomeLabel"), value: money(monthlyGrossIncome) },
+            { label: t("aboveFold.totalMonthlyDebtLabel"), value: money(scenarioBefore.totalMonthlyDebt) },
+            { label: t("form.proposedMonthlyPaymentLabel"), value: money(proposedMonthlyPayment) },
+          ];
 
   const resultRows =
     mode === "ratio"
@@ -84,7 +106,13 @@ export default function DebtToIncomeResult({
           { label: t("aboveFold.totalMonthlyDebtLabel"), value: money(ratioResult.totalMonthlyDebt) },
           { label: t("aboveFold.categoryLabel"), value: t(`aboveFold.category.${ratioResult.category}`) },
         ]
-      : [{ label: t("aboveFold.maxAdditionalMonthlyDebtLabel"), value: money(maxDebtResult.maxAdditionalMonthlyDebt) }];
+      : mode === "maxDebt"
+        ? [{ label: t("aboveFold.maxAdditionalMonthlyDebtLabel"), value: money(maxDebtResult.maxAdditionalMonthlyDebt) }]
+        : [
+            { label: t("scenarioChart.beforeLabel"), value: percent(scenarioBefore.backEndRatio) },
+            { label: t("scenarioChart.afterLabel"), value: percent(scenarioAfter.backEndRatio) },
+            { label: t("aboveFold.categoryLabel"), value: t(`aboveFold.category.${scenarioAfter.category}`) },
+          ];
 
   return (
     <SectionCard
@@ -100,6 +128,9 @@ export default function DebtToIncomeResult({
       {mode === "ratio" && (
         <p className={`mt-1 text-center text-sm font-semibold ${CATEGORY_COLORS[ratioResult.category]}`}>{t(`aboveFold.category.${ratioResult.category}`)}</p>
       )}
+      {mode === "scenario" && (
+        <p className={`mt-1 text-center text-sm font-semibold ${CATEGORY_COLORS[scenarioAfter.category]}`}>{t(`aboveFold.category.${scenarioAfter.category}`)}</p>
+      )}
 
       <div className="mt-5 grid grid-cols-2 gap-2">
         {mode === "ratio" ? (
@@ -107,10 +138,15 @@ export default function DebtToIncomeResult({
             <Stat title={t("aboveFold.frontEndRatioLabel")} value={percent(ratioResult.frontEndRatio)} />
             <Stat title={t("aboveFold.totalMonthlyDebtLabel")} value={money(ratioResult.totalMonthlyDebt)} />
           </>
-        ) : (
+        ) : mode === "maxDebt" ? (
           <>
             <Stat title={t("aboveFold.maxAdditionalMonthlyDebtLabel")} value={money(maxDebtResult.maxAdditionalMonthlyDebt)} />
             <Stat title={t("form.existingMonthlyDebtLabel")} value={money(maxDebtResult.currentOtherDebt)} />
+          </>
+        ) : (
+          <>
+            <Stat title={t("scenarioChart.beforeLabel")} value={percent(scenarioBefore.backEndRatio)} />
+            <Stat title={t("form.proposedMonthlyPaymentLabel")} value={money(proposedMonthlyPayment)} />
           </>
         )}
       </div>

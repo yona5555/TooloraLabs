@@ -4,10 +4,12 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import RetirementShareExportModal from "./RetirementShareExportModal";
+import type { CurrencyCode } from "@/lib/currency";
 import type { RetirementMode, RetirementOutcome } from "./types";
 
 type RetirementResultProps = {
   mode: RetirementMode;
+  currency: CurrencyCode;
   hasCalculated: boolean;
   digitStyle: DigitStyle;
   currentAge: number;
@@ -16,6 +18,7 @@ type RetirementResultProps = {
   monthlyContribution: number;
   annualReturnRate: number;
   targetBalance: number;
+  inflationRate: number;
   outcome: RetirementOutcome;
 };
 
@@ -32,6 +35,7 @@ function Stat({ title, value }: { title: string; value: string }) {
 
 export default function RetirementResult({
   mode,
+  currency,
   hasCalculated,
   digitStyle,
   currentAge,
@@ -40,11 +44,12 @@ export default function RetirementResult({
   monthlyContribution,
   annualReturnRate,
   targetBalance,
+  inflationRate,
   outcome,
 }: RetirementResultProps) {
   const t = useTranslations("tools.retirement-calculator");
 
-  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 })}%`;
   const yearsText = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 })} ${t("aboveFold.yearsUnit")}`;
 
@@ -100,12 +105,15 @@ export default function RetirementResult({
           ]
         : [{ label: t("form.targetBalanceLabel"), value: money(targetBalance) }, ...sharedInputRows, { label: t("form.monthlyContributionLabel"), value: money(monthlyContribution) }];
 
+  const showInflation = mode === "endAmount" && inflationRate > 0 && !outcome.unreachable;
+
   const resultRows = outcome.unreachable
     ? [{ label: heroLabel, value: "—" }]
     : mode === "endAmount"
       ? [
           { label: t("aboveFold.totalContributedLabel"), value: money(outcome.totalContributionsPure) },
           { label: t("aboveFold.totalGrowthLabel"), value: money(outcome.totalGrowth) },
+          ...(showInflation ? [{ label: t("aboveFold.inflationAdjustedBalanceLabel"), value: money(outcome.inflationAdjustedBalance) }] : []),
         ]
       : mode === "requiredContribution"
         ? [
@@ -123,6 +131,7 @@ export default function RetirementResult({
       action={
         <RetirementShareExportModal
           mode={mode}
+          currency={currency}
           inputRows={inputRows}
           resultRows={resultRows}
           heroLabel={heroLabel}
@@ -143,12 +152,22 @@ export default function RetirementResult({
         {heroValue}
       </p>
 
+      {showInflation && (
+        <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">
+          {t("aboveFold.inflationAdjustedBalanceLabel")}:{" "}
+          <span dir="ltr" className="font-mono font-semibold text-zinc-700 dark:text-zinc-300">
+            {money(outcome.inflationAdjustedBalance)}
+          </span>
+        </p>
+      )}
+
       {!outcome.unreachable && (
         <div className="mt-5 grid grid-cols-2 gap-2">
           {mode === "endAmount" && (
             <>
               <Stat title={t("aboveFold.totalContributedLabel")} value={money(outcome.totalContributionsPure)} />
               <Stat title={t("aboveFold.totalGrowthLabel")} value={money(outcome.totalGrowth)} />
+              {showInflation && <Stat title={t("aboveFold.inflationAdjustedBalanceLabel")} value={money(outcome.inflationAdjustedBalance)} />}
             </>
           )}
           {mode === "requiredContribution" && (

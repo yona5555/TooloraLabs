@@ -2,11 +2,13 @@
 import { createContext, useContext, type ReactNode } from "react";
 import type { DigitStyle } from "@tooloralabs/core";
 import type { LoanPaymentRow } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 
 export type LoanLiveInputs = {
   hasCalculatedAmortized: boolean;
   amortizedSchedule: LoanPaymentRow[];
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
 };
 
 /**

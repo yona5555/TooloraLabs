@@ -2,9 +2,11 @@
 import { createContext, useContext, type ReactNode } from "react";
 import type { DigitStyle } from "@tooloralabs/core";
 import type { YearlyGrowthPoint, CompoundingFrequency } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 
 export type CompoundInterestLiveInputs = {
   hasCalculated: boolean;
+  currency: CurrencyCode;
   principal: number;
   rate: number;
   years: number;

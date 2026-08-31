@@ -5,12 +5,14 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { LoanGrowthRow } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { computeNiceTicks } from "./niceTicks";
+import type { CurrencyCode } from "@/lib/currency";
 
 type LoanGrowthChartProps = {
   schedule: LoanGrowthRow[];
   loanAmount: number;
   totalInterest: number;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
   titleKey: "deferredGrowthChart" | "bondGrowthChart";
 };
 
@@ -26,7 +28,7 @@ const BAR_WIDTH_RATIO = 14 / 22;
 const TOOLTIP_WIDTH = 168;
 const TOOLTIP_HEIGHT = 78;
 
-export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, digitStyle, titleKey }: LoanGrowthChartProps) {
+export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, digitStyle, currency, titleKey }: LoanGrowthChartProps) {
   const t = useTranslations(`tools.loan-calculator.${titleKey}`);
   const tShared = useTranslations("tools.loan-calculator.payoffChart");
   const svgRef = useRef<SVGSVGElement>(null);
@@ -64,11 +66,11 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
   const barX = (i: number) => MARGIN.left + i * step;
   const barCenterX = (i: number) => barX(i) + barWidth / 2;
 
-  const currency = (value: number) => {
+  const money = (value: number) => {
     const useCompact = Math.abs(value) >= 100_000;
     return formatLocalizedNumber(value, digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
@@ -116,7 +118,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
               <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {currency(tick)}
+                {money(tick)}
               </text>
             </g>
           ))}
@@ -136,7 +138,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
                 />
                 {isLast && (
                   <text x={barCenterX(i)} y={yForValue(row.endingBalance) - 10} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
-                    {currency(row.endingBalance)}
+                    {money(row.endingBalance)}
                   </text>
                 )}
               </g>
@@ -175,13 +177,13 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
                   {tShared("tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 1 })}
                 </text>
                 <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
-                  {tShared("principalLabel")}: {currency(loanAmount)}
+                  {tShared("principalLabel")}: {money(loanAmount)}
                 </text>
                 <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
-                  {tShared("interestLabel")}: {currency(Math.max(active.endingBalance - loanAmount, 0))}
+                  {tShared("interestLabel")}: {money(Math.max(active.endingBalance - loanAmount, 0))}
                 </text>
                 <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {tShared("balanceLabel")}: {currency(active.endingBalance)}
+                  {tShared("balanceLabel")}: {money(active.endingBalance)}
                 </text>
               </g>
             </>
@@ -204,13 +206,13 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
         <span className="text-zinc-600 dark:text-zinc-300">
           {tShared("totalPrincipalLabel")}:{" "}
           <strong dir="ltr" className="text-zinc-900 dark:text-zinc-100">
-            {currency(loanAmount)}
+            {money(loanAmount)}
           </strong>
         </span>
         <span className="text-zinc-600 dark:text-zinc-300">
           {tShared("totalInterestLabel")}:{" "}
           <strong dir="ltr" className="text-zinc-900 dark:text-zinc-100">
-            {currency(totalInterest)}
+            {money(totalInterest)}
           </strong>
         </span>
       </div>

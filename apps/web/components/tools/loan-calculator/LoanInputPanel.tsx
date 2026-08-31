@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { LoanMode, TermUnit, CompoundingFrequency, PaymentFrequency } from "./types";
 
 const COMPOUND_FREQUENCIES: CompoundingFrequency[] = ["annually", "semiannually", "quarterly", "monthly", "daily"];
@@ -11,6 +13,8 @@ const PAYMENT_FREQUENCIES: PaymentFrequency[] = ["annually", "semiannually", "qu
 
 type LoanInputPanelProps = {
   mode: LoanMode;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   loanAmount: string;
   onLoanAmountChange: (value: string) => void;
   dueAmount: string;
@@ -31,6 +35,8 @@ type LoanInputPanelProps = {
 
 export default function LoanInputPanel({
   mode,
+  currency,
+  onCurrencyChange,
   loanAmount,
   onLoanAmountChange,
   dueAmount,
@@ -53,9 +59,11 @@ export default function LoanInputPanel({
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         {mode === "bond" ? (
           <ToolInput
-            label={t("form.dueAmountLabel")}
+            label={`${t("form.dueAmountLabel")} (${currency})`}
             type="text"
             inputMode="decimal"
             placeholder={t("form.dueAmountPlaceholder")}
@@ -64,7 +72,7 @@ export default function LoanInputPanel({
           />
         ) : (
           <ToolInput
-            label={t("form.loanAmountLabel")}
+            label={`${t("form.loanAmountLabel")} (${currency})`}
             type="text"
             inputMode="decimal"
             placeholder={t("form.loanAmountPlaceholder")}

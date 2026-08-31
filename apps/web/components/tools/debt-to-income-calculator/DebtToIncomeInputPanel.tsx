@@ -4,10 +4,14 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { DtiMode } from "./types";
 
 type DebtToIncomeInputPanelProps = {
   mode: DtiMode;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   monthlyGrossIncome: string;
   onMonthlyGrossIncomeChange: (value: string) => void;
   housingPayment: string;
@@ -24,12 +28,16 @@ type DebtToIncomeInputPanelProps = {
   onTargetBackEndRatioChange: (value: string) => void;
   existingMonthlyDebt: string;
   onExistingMonthlyDebtChange: (value: string) => void;
+  proposedMonthlyPayment: string;
+  onProposedMonthlyPaymentChange: (value: string) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
 
 export default function DebtToIncomeInputPanel({
   mode,
+  currency,
+  onCurrencyChange,
   monthlyGrossIncome,
   onMonthlyGrossIncomeChange,
   housingPayment,
@@ -46,6 +54,8 @@ export default function DebtToIncomeInputPanel({
   onTargetBackEndRatioChange,
   existingMonthlyDebt,
   onExistingMonthlyDebtChange,
+  proposedMonthlyPayment,
+  onProposedMonthlyPaymentChange,
   onCalculate,
   onClear,
 }: DebtToIncomeInputPanelProps) {
@@ -54,8 +64,10 @@ export default function DebtToIncomeInputPanel({
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         <ToolInput
-          label={t("form.monthlyGrossIncomeLabel")}
+          label={`${t("form.monthlyGrossIncomeLabel")} (${currency})`}
           type="text"
           inputMode="decimal"
           placeholder={t("form.monthlyGrossIncomePlaceholder")}
@@ -63,10 +75,10 @@ export default function DebtToIncomeInputPanel({
           onChange={(e) => onMonthlyGrossIncomeChange(e.target.value)}
         />
 
-        {mode === "ratio" ? (
+        {mode !== "maxDebt" ? (
           <>
             <ToolInput
-              label={t("form.housingPaymentLabel")}
+              label={`${t("form.housingPaymentLabel")} (${currency})`}
               hint={t("form.housingPaymentHint")}
               type="text"
               inputMode="decimal"
@@ -77,7 +89,7 @@ export default function DebtToIncomeInputPanel({
 
             <div className="grid grid-cols-2 gap-4">
               <ToolInput
-                label={t("form.carPaymentsLabel")}
+                label={`${t("form.carPaymentsLabel")} (${currency})`}
                 type="text"
                 inputMode="decimal"
                 placeholder={t("form.carPaymentsPlaceholder")}
@@ -85,7 +97,7 @@ export default function DebtToIncomeInputPanel({
                 onChange={(e) => onCarPaymentsChange(e.target.value)}
               />
               <ToolInput
-                label={t("form.studentLoanPaymentsLabel")}
+                label={`${t("form.studentLoanPaymentsLabel")} (${currency})`}
                 type="text"
                 inputMode="decimal"
                 placeholder={t("form.studentLoanPaymentsPlaceholder")}
@@ -96,7 +108,7 @@ export default function DebtToIncomeInputPanel({
 
             <div className="grid grid-cols-2 gap-4">
               <ToolInput
-                label={t("form.creditCardPaymentsLabel")}
+                label={`${t("form.creditCardPaymentsLabel")} (${currency})`}
                 type="text"
                 inputMode="decimal"
                 placeholder={t("form.creditCardPaymentsPlaceholder")}
@@ -104,7 +116,7 @@ export default function DebtToIncomeInputPanel({
                 onChange={(e) => onCreditCardPaymentsChange(e.target.value)}
               />
               <ToolInput
-                label={t("form.otherPaymentsLabel")}
+                label={`${t("form.otherPaymentsLabel")} (${currency})`}
                 hint={t("form.otherPaymentsHint")}
                 type="text"
                 inputMode="decimal"
@@ -113,6 +125,18 @@ export default function DebtToIncomeInputPanel({
                 onChange={(e) => onOtherPaymentsChange(e.target.value)}
               />
             </div>
+
+            {mode === "scenario" && (
+              <ToolInput
+                label={`${t("form.proposedMonthlyPaymentLabel")} (${currency})`}
+                hint={t("form.proposedMonthlyPaymentHint")}
+                type="text"
+                inputMode="decimal"
+                placeholder={t("form.proposedMonthlyPaymentPlaceholder")}
+                value={proposedMonthlyPayment}
+                onChange={(e) => onProposedMonthlyPaymentChange(e.target.value)}
+              />
+            )}
           </>
         ) : (
           <>
@@ -126,7 +150,7 @@ export default function DebtToIncomeInputPanel({
               onChange={(e) => onTargetBackEndRatioChange(e.target.value)}
             />
             <ToolInput
-              label={t("form.existingMonthlyDebtLabel")}
+              label={`${t("form.existingMonthlyDebtLabel")} (${currency})`}
               hint={t("form.existingMonthlyDebtHint")}
               type="text"
               inputMode="decimal"

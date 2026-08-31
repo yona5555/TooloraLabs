@@ -37,6 +37,7 @@ export default function LoanAmortizationAreaChart() {
 
   const liveSchedule = live?.amortizedSchedule;
   const digitStyle = live?.digitStyle ?? "western";
+  const currency = live?.currency ?? "USD";
 
   const schedule = useMemo(() => liveSchedule ?? [], [liveSchedule]);
 
@@ -78,11 +79,11 @@ export default function LoanAmortizationAreaChart() {
   const principalAreaPoints = `${xForIndex(0).toFixed(1)},${mainBottom} ${principalBoundary.join(" ")} ${xForIndex(pointCount - 1).toFixed(1)},${mainBottom}`;
   const interestAreaPoints = `${totalBoundary.join(" ")} ${[...principalBoundary].reverse().join(" ")}`;
 
-  const currency = (value: number) => {
+  const money = (value: number) => {
     const useCompact = Math.abs(value) >= 100_000;
     return formatLocalizedNumber(value, digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
@@ -139,7 +140,7 @@ export default function LoanAmortizationAreaChart() {
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
               <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {currency(tick)}
+                {money(tick)}
               </text>
             </g>
           ))}
@@ -168,13 +169,13 @@ export default function LoanAmortizationAreaChart() {
                   {t("payoffChart.tooltipPeriodLabel")} {formatLocalizedNumber(active.period, digitStyle, { maximumFractionDigits: 0 })}
                 </text>
                 <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
-                  {t("payoffChart.principalLabel")}: {currency(active.principalPaid)}
+                  {t("payoffChart.principalLabel")}: {money(active.principalPaid)}
                 </text>
                 <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
-                  {t("payoffChart.interestLabel")}: {currency(active.interestPaid)}
+                  {t("payoffChart.interestLabel")}: {money(active.interestPaid)}
                 </text>
                 <text x={10} y={65} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t("payoffChart.balanceLabel")}: {currency(active.endingBalance)}
+                  {t("payoffChart.balanceLabel")}: {money(active.endingBalance)}
                 </text>
               </g>
             </>

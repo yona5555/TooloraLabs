@@ -6,10 +6,12 @@ import type { LoanPaymentRow, LoanGrowthRow } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import LoanBreakdownDonut from "./LoanBreakdownDonut";
 import LoanShareExportModal from "./LoanShareExportModal";
+import type { CurrencyCode } from "@/lib/currency";
 import type { LoanMode, CompoundingFrequency, PaymentFrequency } from "./types";
 
 type LoanResultProps = {
   mode: LoanMode;
+  currency: CurrencyCode;
   hasCalculated: boolean;
   heroLabel: string;
   heroValue: string;
@@ -29,6 +31,7 @@ type LoanResultProps = {
 
 export default function LoanResult({
   mode,
+  currency,
   hasCalculated,
   heroLabel,
   heroValue,
@@ -47,7 +50,7 @@ export default function LoanResult({
 }: LoanResultProps) {
   const t = useTranslations("tools.loan-calculator");
 
-  const currency = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
 
   if (!hasCalculated) {
     return (
@@ -68,6 +71,7 @@ export default function LoanResult({
       action={
         <LoanShareExportModal
           mode={mode}
+          currency={currency}
           digitStyle={digitStyle}
           loanAmount={loanAmount}
           dueAmount={dueAmount}
@@ -93,7 +97,7 @@ export default function LoanResult({
 
       <div className="mt-5">
         <LoanBreakdownDonut
-          centerValue={currency(total)}
+          centerValue={money(total)}
           centerLabel={t("aboveFold.totalLabel")}
           segments={[
             { key: "principal", value: principalForDonut, label: t("aboveFold.loanAmountLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
@@ -106,13 +110,13 @@ export default function LoanResult({
         <div>
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.loanAmountLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-            {currency(principalForDonut)}
+            {money(principalForDonut)}
           </dd>
         </div>
         <div>
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.totalInterestLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-amber-600 dark:text-amber-400">
-            {currency(totalInterest)}
+            {money(totalInterest)}
           </dd>
         </div>
       </div>

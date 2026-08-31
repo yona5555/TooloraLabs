@@ -94,11 +94,11 @@ export default function CompoundInterestComparisonChart() {
   const groupX = (i: number) => MARGIN.left + i * step;
   const groupCenterX = (i: number) => groupX(i) + groupWidth / 2;
 
-  const currency = (value: number, compact = true) => {
+  const money = (value: number, compact = true) => {
     const useCompact = compact && Math.abs(value) >= 100_000;
     return formatLocalizedNumber(value, live.digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency: live.currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
@@ -157,7 +157,7 @@ export default function CompoundInterestComparisonChart() {
                 opacity={0.08}
               />
               <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {currency(tick)}
+                {money(tick)}
               </text>
             </g>
           ))}
@@ -241,13 +241,13 @@ export default function CompoundInterestComparisonChart() {
                   {t("education.intro.diagram.tooltipYearLabel")} {formatLocalizedNumber(active.year, live.digitStyle, { maximumFractionDigits: 0 })}
                 </text>
                 <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
-                  {t("education.intro.diagram.compoundLabel")}: {currency(active.compound, false)}
+                  {t("education.intro.diagram.compoundLabel")}: {money(active.compound, false)}
                 </text>
                 <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
-                  {t("education.intro.diagram.simpleLabel")}: {currency(active.simple, false)}
+                  {t("education.intro.diagram.simpleLabel")}: {money(active.simple, false)}
                 </text>
                 <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t("education.intro.diagram.tooltipDifferenceLabel")}: {currency(active.gap, false)}
+                  {t("education.intro.diagram.tooltipDifferenceLabel")}: {money(active.gap, false)}
                 </text>
               </g>
             </>
@@ -267,7 +267,7 @@ export default function CompoundInterestComparisonChart() {
       </div>
 
       <figcaption className="mt-2 text-sm opacity-70">
-        {t("education.intro.diagram.caption", { years: yearsText(finalPoint.year), difference: currency(finalDifference, false) })}
+        {t("education.intro.diagram.caption", { years: yearsText(finalPoint.year), difference: money(finalDifference, false) })}
       </figcaption>
     </figure>
   );

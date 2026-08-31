@@ -6,6 +6,7 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { YearlyGrowthPoint } from "@tooloralabs/tools";
 import { computeNiceTicks } from "./niceTicks";
+import type { CurrencyCode } from "@/lib/currency";
 
 type RetirementGrowthChartProps = {
   hasCalculated: boolean;
@@ -14,6 +15,9 @@ type RetirementGrowthChartProps = {
   totalContributions: number;
   totalGrowth: number;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
+  /** When > 0, an inflation-adjusted balance line is drawn alongside the nominal bars — scoped to the Projected Balance tab, where this input is offered. */
+  inflationRate: number;
 };
 
 const MARGIN = { top: 30, left: 56, right: 16 };
@@ -27,10 +31,11 @@ const MIN_STEP = 22;
 const BAR_WIDTH_RATIO = 14 / 22;
 const TOOLTIP_WIDTH = 168;
 const TOOLTIP_HEIGHT = 78;
+const TOOLTIP_HEIGHT_WITH_INFLATION = 94;
 /** Beyond this many years, only every Nth x-axis label is drawn so they don't overlap. */
 const MAX_DENSE_LABELS = 40;
 
-export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, currentSavings, totalContributions, totalGrowth, digitStyle }: RetirementGrowthChartProps) {
+export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, currentSavings, totalContributions, totalGrowth, digitStyle, currency, inflationRate }: RetirementGrowthChartProps) {
   const t = useTranslations("tools.retirement-calculator");
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,15 +81,21 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
   const barX = (i: number) => MARGIN.left + i * step;
   const barCenterX = (i: number) => barX(i) + barWidth / 2;
 
-  const currency = (value: number) => {
+  const money = (value: number) => {
     const useCompact = Math.abs(value) >= 100_000;
     return formatLocalizedNumber(value, digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
   };
+
+  // Today's-purchasing-power line: each year's nominal balance deflated by inflation compounded
+  // over that many years — mirrors the same single-figure deflation already shown for the final
+  // balance, just applied point by point so the chart can plot it alongside the nominal bars.
+  const inflationAdjustedPoints =
+    inflationRate > 0 ? yearlySchedule.map((row, i) => ({ x: barCenterX(i), y: yForValue(row.balance / Math.pow(1 + inflationRate / 100, row.year)) })) : [];
 
   const activeIndex = hoverIndex;
   const active = activeIndex !== null ? yearlySchedule[activeIndex] : null;
@@ -130,7 +141,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
               <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {currency(tick)}
+                {money(tick)}
               </text>
             </g>
           ))}
@@ -145,12 +156,22 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
                 <rect x={barX(i)} y={yForValue(row.balance)} width={barWidth} height={Math.max(yForValue(contributed) - yForValue(row.balance), 0)} className="fill-amber-400 dark:fill-amber-500" />
                 {isLast && (
                   <text x={barCenterX(i)} y={yForValue(row.balance) - 10} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
-                    {currency(row.balance)}
+                    {money(row.balance)}
                   </text>
                 )}
               </g>
             );
           })}
+
+          {inflationAdjustedPoints.length > 0 && (
+            <polyline
+              points={inflationAdjustedPoints.map((p) => `${p.x},${p.y}`).join(" ")}
+              fill="none"
+              strokeWidth={2}
+              strokeDasharray="5 3"
+              className="stroke-emerald-600 dark:stroke-emerald-400"
+            />
+          )}
 
           <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
             {t("growthChart.interestLabel")}
@@ -181,19 +202,30 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
             <>
               <line x1={barCenterX(activeIndex)} y1={MARGIN.top} x2={barCenterX(activeIndex)} y2={volumeBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
               <g transform={`translate(${tooltipX}, ${tooltipY})`}>
-                <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
+                <rect
+                  width={TOOLTIP_WIDTH}
+                  height={inflationRate > 0 ? TOOLTIP_HEIGHT_WITH_INFLATION : TOOLTIP_HEIGHT}
+                  rx={6}
+                  className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700"
+                  strokeWidth={1}
+                />
                 <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {t("growthChart.tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 0 })}
                 </text>
                 <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
-                  {t("growthChart.contributedLabel")}: {currency(currentSavings + active.contributions)}
+                  {t("growthChart.contributedLabel")}: {money(currentSavings + active.contributions)}
                 </text>
                 <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
-                  {t("growthChart.interestLabel")}: {currency(active.interest)}
+                  {t("growthChart.interestLabel")}: {money(active.interest)}
                 </text>
                 <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t("growthChart.tooltipBalanceLabel")}: {currency(active.balance)}
+                  {t("growthChart.tooltipBalanceLabel")}: {money(active.balance)}
                 </text>
+                {inflationRate > 0 && (
+                  <text x={10} y={82} fontSize={9} className="fill-emerald-600 dark:fill-emerald-400">
+                    {t("growthChart.inflationAdjustedLabel")}: {money(active.balance / Math.pow(1 + inflationRate / 100, active.year))}
+                  </text>
+                )}
               </g>
             </>
           )}
@@ -209,21 +241,35 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
           <span className="h-2 w-2 rounded-full bg-amber-400 dark:bg-amber-500" />
           {t("growthChart.interestLabel")}
         </span>
+        {inflationRate > 0 && (
+          <span className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full border-2 border-dashed border-emerald-600 dark:border-emerald-400" />
+            {t("growthChart.inflationAdjustedLabel")}
+          </span>
+        )}
       </div>
 
       <div className="mt-4 flex flex-wrap justify-center gap-x-8 gap-y-2 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
         <span className="text-zinc-600 dark:text-zinc-300">
           {t("growthChart.totalContributedLabel")}:{" "}
           <strong dir="ltr" className="text-zinc-900 dark:text-zinc-100">
-            {currency(currentSavings + totalContributions)}
+            {money(currentSavings + totalContributions)}
           </strong>
         </span>
         <span className="text-zinc-600 dark:text-zinc-300">
           {t("growthChart.totalInterestLabel")}:{" "}
           <strong dir="ltr" className="text-zinc-900 dark:text-zinc-100">
-            {currency(totalGrowth)}
+            {money(totalGrowth)}
           </strong>
         </span>
+        {inflationRate > 0 && yearlySchedule.length > 0 && (
+          <span className="text-zinc-600 dark:text-zinc-300">
+            {t("growthChart.inflationAdjustedLabel")}:{" "}
+            <strong dir="ltr" className="text-emerald-700 dark:text-emerald-400">
+              {money(yearlySchedule[yearlySchedule.length - 1].balance / Math.pow(1 + inflationRate / 100, yearlySchedule[yearlySchedule.length - 1].year))}
+            </strong>
+          </span>
+        )}
       </div>
     </SectionCard>
   );

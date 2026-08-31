@@ -4,10 +4,12 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DownloadButton from "@/components/tool-ui/DownloadButton";
 import type { LoanPaymentRow } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 
 type LoanAmortizationTableProps = {
   schedule: LoanPaymentRow[];
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
 };
 
 function buildCsv(schedule: LoanPaymentRow[], headers: { period: string; principal: string; interest: string; balance: string }): string {
@@ -18,12 +20,12 @@ function buildCsv(schedule: LoanPaymentRow[], headers: { period: string; princip
   return rows.join("\n");
 }
 
-export default function LoanAmortizationTable({ schedule, digitStyle }: LoanAmortizationTableProps) {
+export default function LoanAmortizationTable({ schedule, digitStyle, currency }: LoanAmortizationTableProps) {
   const t = useTranslations("tools.loan-calculator");
 
   if (schedule.length === 0) return null;
 
-  const currency = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
 
   const csvContent = buildCsv(schedule, {
     period: t("amortizationTable.columnPeriod"),
@@ -54,9 +56,9 @@ export default function LoanAmortizationTable({ schedule, digitStyle }: LoanAmor
             {schedule.map((row) => (
               <tr key={row.period} className="border-t border-zinc-100 dark:border-zinc-800/60">
                 <td className="px-4 py-2.5 font-medium text-zinc-900 dark:text-zinc-100">{row.period}</td>
-                <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.principalPaid)}</td>
-                <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.interestPaid)}</td>
-                <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.endingBalance)}</td>
+                <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.principalPaid)}</td>
+                <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.interestPaid)}</td>
+                <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.endingBalance)}</td>
               </tr>
             ))}
           </tbody>

@@ -19,7 +19,21 @@
     "affiliateLabel": "رابط تابع",
     "relatedToolsTitle": "أدوات ذات صلة",
     "viewAllCta": "عرض كل {category}",
-    "toolSearchNoResults": "لم يتم العثور على أدوات."
+    "toolSearchNoResults": "لم يتم العثور على أدوات.",
+    "currency": {
+      "label": "العملة",
+      "approximateNote": "تحويل تقريبي بسعر صرف ثابت مرجعي — وليس سعر صرف لحظيًا.",
+      "names": {
+        "USD": "دولار أمريكي (USD)",
+        "EUR": "يورو (EUR)",
+        "GBP": "جنيه إسترليني (GBP)",
+        "SAR": "ريال سعودي (SAR)",
+        "AED": "درهم إماراتي (AED)",
+        "EGP": "جنيه مصري (EGP)",
+        "JPY": "ين ياباني (JPY)",
+        "INR": "روبية هندية (INR)"
+      }
+    }
   },
   "site": {
     "title": "تولورا لابز",
@@ -3491,7 +3505,8 @@
       "nav": {
         "tool": "الحاسبة",
         "faq": "الأسئلة الشائعة",
-        "behindTheTool": "خلف الأداة"
+        "behindTheTool": "خلف الأداة",
+        "termComparison": "مقارنة المدد"
       },
       "form": {
         "monthlyPaymentLabel": "القسط الشهري الذي تقدر على تحمّله",
@@ -3635,6 +3650,21 @@
           "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
           "readOriginal": "قراءة المقالة الأصلية"
         }
+      },
+      "termChart": {
+        "title": "أقصى مبلغ قرض حسب المدة",
+        "intro": "كم يمكنك اقتراض أكثر بنفس القسط الشهري فقط باختيار مدة قرض أطول.",
+        "emptyStateMessage": "أدخل بياناتك أعلاه لمقارنة مدد القرض.",
+        "termLabel": "{years} سنوات",
+        "maxLoanLabel": "أقصى مبلغ قرض",
+        "paymentForLoanLabel": "القسط لمبلغ القرض الحالي"
+      },
+      "termTable": {
+        "title": "قارن مدد القرض",
+        "intro": "شاهد كيف تغيّر مدة أقصر أو أطول كلًا من قسطك الشهري وأقصى مبلغ يمكنك اقتراضه، بمعدل الفائدة الحالي.",
+        "columnTerm": "المدة",
+        "columnMonthlyPayment": "القسط الشهري",
+        "columnMaxLoan": "أقصى مبلغ قرض"
       }
     },
     "retirement-calculator": {
@@ -3662,7 +3692,8 @@
           "requiredContribution": "للوصول إلى {target} عند بلوغك سن {retirementAge}، بدءًا من {savings} في عمر {currentAge} بعائد سنوي متوقّع {rate}، يجب أن تساهم بمبلغ {requiredContribution} شهريًا.",
           "requiredYears": "بمساهمة شهرية {contribution} بدءًا من {savings} في عمر {currentAge} بعائد سنوي متوقّع {rate}، ستصل إلى {target} خلال {years} تقريبًا — أي في نحو سن {retirementAgeReached}.",
           "requiredYearsUnreachable": "بمساهمة شهرية {contribution} بدءًا من {savings} بعائد سنوي متوقّع {rate}، لن يتحقّق هدف {target} خلال 80 سنة — جرّب مساهمة أكبر أو عائدًا أعلى."
-        }
+        },
+        "inflationAdjustedBalanceLabel": "الرصيد المعدَّل بالتضخم"
       },
       "nav": {
         "tool": "الحاسبة",
@@ -3686,7 +3717,10 @@
         "targetBalanceHint": "رصيد التقاعد الذي تريد الوصول إليه.",
         "targetBalancePlaceholder": "مثال: 1,000,000",
         "calculate": "احسب",
-        "clear": "مسح"
+        "clear": "مسح",
+        "inflationRateLabel": "معدل التضخم المتوقّع (%)",
+        "inflationRateHint": "اختياري — يعرض رصيدك المتوقّع بالقوة الشرائية الحالية إلى جانب الرقم الاسمي. اتركه عند 0 لتجاوز هذا التعديل.",
+        "inflationRatePlaceholder": "مثال: 3"
       },
       "growthChart": {
         "title": "نمو المدّخرات عبر الزمن",
@@ -3697,7 +3731,8 @@
         "totalContributedLabel": "إجمالي المساهمات",
         "totalInterestLabel": "إجمالي النمو",
         "tooltipYearLabel": "السنة",
-        "tooltipBalanceLabel": "الرصيد"
+        "tooltipBalanceLabel": "الرصيد",
+        "inflationAdjustedLabel": "الرصيد المعدَّل بالتضخم"
       },
       "yearlyBreakdown": {
         "title": "التفصيل السنوي",
@@ -3863,20 +3898,30 @@
         "emptyStateMessage": "أدخل بياناتك واضغط \"احسب\" لرؤية نتائجك.",
         "sentences": {
           "homePrice": "بدخل سنوي إجمالي قدره {income}، الحد الأقصى لسعر المنزل الذي يمكنك تحمّله هو {price}.",
-          "requiredIncome": "لتحمّل تكلفة منزل بسعر {price}، يجب أن يبلغ دخلك السنوي الإجمالي {income} على الأقل."
+          "requiredIncome": "لتحمّل تكلفة منزل بسعر {price}، يجب أن يبلغ دخلك السنوي الإجمالي {income} على الأقل.",
+          "car": "بدخل سنوي إجمالي {income}، أقصى سعر سيارة يمكنك تحمّل تكلفتها هو {price}، بدفعة شهرية {payment}.",
+          "personal": "بدخل سنوي إجمالي {income}، يمكنك تحمّل قرض شخصي يصل إلى {amount}، بدفعة شهرية {payment}.",
+          "business": "بمتوسط إيراد شهري {revenue}، يمكن لمشروعك تحمّل قرض يصل إلى {amount}، بدفعة شهرية {payment}."
         },
         "placeholder": "أدخل دخلك وديونك والدفعة الأولى وشروط القرض لمعرفة الحد الأقصى لسعر المنزل الذي يمكنك تحمّل تكلفته.",
-        "disclaimer": "تقدّم هذه الأداة تقديرًا تعليميًا عامًا فقط، وليست موافقة مسبقة على قرض عقاري أو عرض تمويل أو نصيحة مالية. تطبّق جهات الإقراض قواعد اكتتاب خاصة بها قد تختلف عن قاعدة 28/36 المستخدمة هنا، ويعتمد المبلغ الذي تُوافَق عليه فعليًا على ملفك الائتماني الكامل ومتطلبات جهة الإقراض. يُرجى استشارة جهة إقراض عقاري مرخَّصة أو مستشار مالي قبل البحث عن منزل أو التقدّم بطلب قرض."
+        "disclaimer": "تقدّم هذه الأداة تقديرًا تعليميًا عامًا فقط، وليست موافقة مسبقة على قرض عقاري أو عرض تمويل أو نصيحة مالية. تطبّق جهات الإقراض قواعد اكتتاب خاصة بها قد تختلف عن قاعدة 28/36 المستخدمة هنا، ويعتمد المبلغ الذي تُوافَق عليه فعليًا على ملفك الائتماني الكامل ومتطلبات جهة الإقراض. يُرجى استشارة جهة إقراض عقاري مرخَّصة أو مستشار مالي قبل البحث عن منزل أو التقدّم بطلب قرض.",
+        "maxCarPriceLabel": "أقصى سعر سيارة",
+        "maxPersonalLoanLabel": "أقصى قرض شخصي",
+        "maxBusinessLoanLabel": "أقصى قرض تجاري"
       },
       "tabs": {
         "groupLabel": "نوع الحساب",
         "homePrice": "أقصى سعر منزل",
-        "requiredIncome": "الدخل المطلوب"
+        "requiredIncome": "الدخل المطلوب",
+        "car": "قرض سيارة",
+        "business": "قرض تجاري",
+        "personal": "قرض شخصي"
       },
       "nav": {
         "tool": "الحاسبة",
         "faq": "الأسئلة الشائعة",
-        "behindTheTool": "خلف الأداة"
+        "behindTheTool": "خلف الأداة",
+        "borrowingComparison": "مقارنة الأغراض"
       },
       "form": {
         "annualIncomeLabel": "الدخل السنوي الإجمالي",
@@ -3901,7 +3946,22 @@
         "monthlyHOAHint": "رسوم اتحاد ملاك العقار، إن وجدت. أدخل 0 إذا لم تكن منطبقة.",
         "monthlyHOAPlaceholder": "مثال: 0",
         "calculate": "احسب",
-        "clear": "مسح"
+        "clear": "مسح",
+        "carDownPaymentHint": "اختياري لقرض السيارة — أدخل 0 إذا لم تدفع أي دفعة أولى.",
+        "carDownPaymentPlaceholder": "مثال: 3,000",
+        "carInterestRatePlaceholder": "مثال: 6",
+        "carLoanTermHint": "قروض السيارات أقصر عادةً من قروض العقارات — غالبًا من 3 إلى 7 سنوات.",
+        "carLoanTermPlaceholder": "مثال: 5",
+        "personalInterestRateHint": "القروض الشخصية غير المضمونة تحمل عادةً معدلات فائدة أعلى من قروض العقارات أو السيارات.",
+        "personalInterestRatePlaceholder": "مثال: 12",
+        "personalLoanTermPlaceholder": "مثال: 3",
+        "businessMonthlyRevenueLabel": "متوسط الإيراد الشهري للمشروع",
+        "businessMonthlyRevenueHint": "الإيراد الشهري المعتاد لمشروعك — يُستخدم للتحقق من قدرته على تغطية دفعة القرض بشكل مريح.",
+        "businessMonthlyRevenuePlaceholder": "مثال: 20,000",
+        "businessExistingDebtLabel": "مدفوعات الديون الشهرية الحالية",
+        "businessExistingDebtPlaceholder": "مثال: 3,000",
+        "businessInterestRatePlaceholder": "مثال: 9",
+        "businessLoanTermPlaceholder": "مثال: 7"
       },
       "shareExport": {
         "triggerLabel": "مشاركة / تصدير",
@@ -4036,6 +4096,17 @@
           "url": "https://doi.org/10.1080/02673039508720833",
           "readOriginal": "قراءة المقال الأصلي"
         }
+      },
+      "comparisonChart": {
+        "title": "مقارنة القدرة على الاقتراض عبر الأغراض",
+        "intro": "كم يمكنك تحمّل اقتراضه لمنزل أو سيارة أو مشروع أو قرض شخصي، جنبًا إلى جنب — كل منها يستخدم قاعدة القدرة على التحمّل الخاصة به ومدخلاتك الحالية في ذلك التبويب.",
+        "maxAmountLabel": "أقصى مبلغ",
+        "purposeLabels": {
+          "home": "منزل",
+          "car": "سيارة",
+          "business": "مشروع",
+          "personal": "شخصي"
+        }
       }
     },
     "debt-to-income-calculator": {
@@ -4060,14 +4131,16 @@
         "maxAdditionalMonthlyDebtLabel": "المساحة الإضافية المتاحة",
         "sentences": {
           "ratio": "بدخل شهري إجمالي قدره {income}، يبلغ إجمالي دينك الشهري نسبة دين إلى دخل قدرها {ratio} — بتقييم {category}.",
-          "maxDebt": "للبقاء عند نسبة دين إلى دخل {target} أو أقل بدخل شهري إجمالي قدره {income}، يجب ألا تتجاوز مدفوعات دينك الشهري الإجمالية {maxDebt}."
+          "maxDebt": "للبقاء عند نسبة دين إلى دخل {target} أو أقل بدخل شهري إجمالي قدره {income}، يجب ألا تتجاوز مدفوعات دينك الشهري الإجمالية {maxDebt}.",
+          "scenario": "إضافة دفعة شهرية جديدة قدرها {payment} سترفع نسبة الدين إلى الدخل من {before} إلى {after} — بتصنيف {category}."
         },
         "disclaimer": "تقدّم هذه الأداة تقديرًا تعليميًا عامًا فقط، وليست قرار إقراض أو نصيحة مالية. تحسب جهات الإقراض نسبة DTI وفق قواعدها الخاصة، التي قد تختلف عن الصيغة المستخدمة هنا، وتعتمد الموافقة على عوامل كثيرة تتجاوز هذه النسبة. يُرجى استشارة جهة إقراض مرخَّصة أو مستشار مالي للحصول على إرشادات خاصة بوضعك."
       },
       "tabs": {
         "groupLabel": "نوع الحساب",
         "ratio": "نسبة الدين إلى الدخل",
-        "maxDebt": "أقصى دين"
+        "maxDebt": "أقصى دين",
+        "scenario": "مقارنة سيناريو"
       },
       "nav": {
         "tool": "الحاسبة",
@@ -4096,7 +4169,10 @@
         "existingMonthlyDebtHint": "أي مدفوعات دين شهرية لديك حاليًا، لمعرفة المساحة الإضافية التي تتيحها النسبة المستهدفة.",
         "existingMonthlyDebtPlaceholder": "مثال: 600",
         "calculate": "احسب",
-        "clear": "مسح"
+        "clear": "مسح",
+        "proposedMonthlyPaymentLabel": "الدفعة الشهرية الجديدة المقترحة",
+        "proposedMonthlyPaymentHint": "القسط الشهري لقرض أو دين جديد تفكّر في الحصول عليه.",
+        "proposedMonthlyPaymentPlaceholder": "مثال: 250"
       },
       "shareExport": {
         "triggerLabel": "مشاركة / تصدير",
@@ -4236,6 +4312,14 @@
           "url": "https://doi.org/10.1111/jofi.12482",
           "readOriginal": "قراءة المقال الأصلي"
         }
+      },
+      "scenarioChart": {
+        "title": "نسبة الدين إلى الدخل: قبل مقابل بعد",
+        "intro": "يقارن نسبة الدين إلى الدخل الخلفية الحالية بالنسبة التي ستكون عليها بعد إضافة الدفعة الشهرية الجديدة المقترحة. الخطوط المتقطعة تمثّل عتبات 36%/43%/50% التي يعتمدها كثير من المُقرضين.",
+        "emptyStateMessage": "أدخل دخلك وديونك ودفعة جديدة مقترحة، ثم اضغط احسب للمقارنة.",
+        "beforeLabel": "قبل",
+        "afterLabel": "بعد",
+        "thresholdLabel": "عتبة {value}%"
       }
     },
     "world-time-converter": {

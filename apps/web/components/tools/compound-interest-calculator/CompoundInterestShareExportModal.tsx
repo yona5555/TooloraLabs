@@ -7,10 +7,12 @@ import type { CompoundingFrequency, YearlyGrowthPoint } from "@tooloralabs/tools
 import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import type { CurrencyCode } from "@/lib/currency";
 import type { SolveMode } from "./types";
 
 type CompoundInterestShareExportModalProps = {
   mode: SolveMode;
+  currency: CurrencyCode;
   digitStyle: DigitStyle;
   principal: number;
   rate: number;
@@ -32,6 +34,7 @@ type CompoundInterestShareExportModalProps = {
 
 export default function CompoundInterestShareExportModal({
   mode,
+  currency,
   digitStyle,
   principal,
   rate,
@@ -75,8 +78,8 @@ export default function CompoundInterestShareExportModal({
     };
   }, [open]);
 
-  const currency = (value: number) =>
-    formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) =>
+    formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) =>
     formatLocalizedNumber(value / 100, digitStyle, { style: "percent", maximumFractionDigits: 2 });
   const yearsText = `${formatLocalizedNumber(years, digitStyle, { maximumFractionDigits: 1 })} ${t("aboveFold.yearsUnit")}`;
@@ -90,19 +93,19 @@ export default function CompoundInterestShareExportModal({
   // Which fields are given inputs vs. the value being solved for varies by mode — mirrors the
   // exact same conditions CompoundInterestInputPanel uses to show/hide each field.
   const inputRows = [
-    ...(mode !== "endAmount" ? [{ label: t("form.targetLabel"), value: currency(targetAmount) }] : []),
-    ...(mode !== "startingAmount" ? [{ label: t("form.principalLabel"), value: currency(principal) }] : []),
+    ...(mode !== "endAmount" ? [{ label: t("form.targetLabel"), value: money(targetAmount) }] : []),
+    ...(mode !== "startingAmount" ? [{ label: t("form.principalLabel"), value: money(principal) }] : []),
     ...(mode !== "returnRate" ? [{ label: t("form.rateLabel"), value: percent(rate) }] : []),
     ...(mode !== "investmentLength" ? [{ label: t("form.yearsLabel"), value: yearsText }] : []),
     { label: t("form.frequencyLabel"), value: frequencyLabel },
-    ...(mode !== "additionalContribution" ? [{ label: t("form.monthlyContributionLabel"), value: currency(contribution) }] : []),
+    ...(mode !== "additionalContribution" ? [{ label: t("form.monthlyContributionLabel"), value: money(contribution) }] : []),
   ];
 
   const resultRows = [
     { label: heroLabel, value: unreachable ? "—" : heroValue },
-    { label: t("aboveFold.principalLabel"), value: `${currency(principal)} (${sharePercent(principal)})` },
-    { label: t("aboveFold.contributionsLabel"), value: `${currency(totalContributions)} (${sharePercent(totalContributions)})` },
-    { label: t("aboveFold.interestLabel"), value: `${currency(totalInterest)} (${sharePercent(totalInterest)})` },
+    { label: t("aboveFold.principalLabel"), value: `${money(principal)} (${sharePercent(principal)})` },
+    { label: t("aboveFold.contributionsLabel"), value: `${money(totalContributions)} (${sharePercent(totalContributions)})` },
+    { label: t("aboveFold.interestLabel"), value: `${money(totalInterest)} (${sharePercent(totalInterest)})` },
   ];
 
   const preparedForRows = [
@@ -134,10 +137,10 @@ export default function CompoundInterestShareExportModal({
           ],
           rows: yearlySchedule.map((row) => [
             String(row.year),
-            currency(row.openingBalance),
-            currency(row.yearlyContributions),
-            currency(row.yearlyInterest),
-            currency(row.balance),
+            money(row.openingBalance),
+            money(row.yearlyContributions),
+            money(row.yearlyInterest),
+            money(row.balance),
           ]),
         },
         preparedFor: preparedForRows,
@@ -387,10 +390,10 @@ export default function CompoundInterestShareExportModal({
             {yearlySchedule.map((row) => (
               <tr key={row.year}>
                 <td className="border border-zinc-200 px-2 py-1">{row.year}</td>
-                <td className="border border-zinc-200 px-2 py-1">{currency(row.openingBalance)}</td>
-                <td className="border border-zinc-200 px-2 py-1">{currency(row.yearlyContributions)}</td>
-                <td className="border border-zinc-200 px-2 py-1">{currency(row.yearlyInterest)}</td>
-                <td className="border border-zinc-200 px-2 py-1">{currency(row.balance)}</td>
+                <td className="border border-zinc-200 px-2 py-1">{money(row.openingBalance)}</td>
+                <td className="border border-zinc-200 px-2 py-1">{money(row.yearlyContributions)}</td>
+                <td className="border border-zinc-200 px-2 py-1">{money(row.yearlyInterest)}</td>
+                <td className="border border-zinc-200 px-2 py-1">{money(row.balance)}</td>
               </tr>
             ))}
           </tbody>

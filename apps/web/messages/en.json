@@ -19,7 +19,21 @@
     "affiliateLabel": "Affiliate Link",
     "relatedToolsTitle": "Related Tools",
     "viewAllCta": "View all {category}",
-    "toolSearchNoResults": "No tools found."
+    "toolSearchNoResults": "No tools found.",
+    "currency": {
+      "label": "Currency",
+      "approximateNote": "Approximate conversion at a fixed reference rate — not a live exchange rate.",
+      "names": {
+        "USD": "US Dollar (USD)",
+        "EUR": "Euro (EUR)",
+        "GBP": "British Pound (GBP)",
+        "SAR": "Saudi Riyal (SAR)",
+        "AED": "UAE Dirham (AED)",
+        "EGP": "Egyptian Pound (EGP)",
+        "JPY": "Japanese Yen (JPY)",
+        "INR": "Indian Rupee (INR)"
+      }
+    }
   },
   "site": {
     "title": "TooloraLabs",
@@ -3491,7 +3505,8 @@
       "nav": {
         "tool": "Calculator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Behind the Tool",
+        "termComparison": "Term Comparison"
       },
       "form": {
         "monthlyPaymentLabel": "Monthly Payment You Can Afford",
@@ -3635,6 +3650,21 @@
           "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
           "readOriginal": "Read the Original Article"
         }
+      },
+      "termChart": {
+        "title": "Max Loan Amount by Term",
+        "intro": "How much more you could borrow at the same monthly payment simply by choosing a longer loan term.",
+        "emptyStateMessage": "Enter your details above to compare loan terms.",
+        "termLabel": "{years}-year",
+        "maxLoanLabel": "Max Loan Amount",
+        "paymentForLoanLabel": "Payment for Current Loan Amount"
+      },
+      "termTable": {
+        "title": "Compare Loan Terms",
+        "intro": "See how a shorter or longer term changes both your monthly payment and the maximum amount you could borrow, at your current interest rate.",
+        "columnTerm": "Term",
+        "columnMonthlyPayment": "Monthly Payment",
+        "columnMaxLoan": "Max Loan Amount"
       }
     },
     "retirement-calculator": {
@@ -3662,7 +3692,8 @@
           "requiredContribution": "To reach {target} by age {retirementAge}, starting from {savings} at age {currentAge} with a {rate} expected annual return, you need to contribute {requiredContribution} a month.",
           "requiredYears": "Contributing {contribution} a month starting from {savings} at age {currentAge} with a {rate} expected annual return, you'll reach {target} in about {years} — around age {retirementAgeReached}.",
           "requiredYearsUnreachable": "At {contribution} a month starting from {savings} with a {rate} expected annual return, {target} isn't reached within 80 years — try a higher contribution or return rate."
-        }
+        },
+        "inflationAdjustedBalanceLabel": "Inflation-Adjusted Balance"
       },
       "nav": {
         "tool": "Calculator",
@@ -3686,7 +3717,10 @@
         "annualReturnRateHint": "A typical long-term assumption for a diversified stock/bond portfolio is often between 5% and 8%; this is not a guarantee of any actual return.",
         "annualReturnRatePlaceholder": "e.g. 7",
         "calculate": "Calculate",
-        "clear": "Clear"
+        "clear": "Clear",
+        "inflationRateLabel": "Expected Inflation Rate (%)",
+        "inflationRateHint": "Optional — shows your projected balance in today's purchasing power alongside the nominal figure. Leave at 0 to skip this adjustment.",
+        "inflationRatePlaceholder": "e.g. 3"
       },
       "growthChart": {
         "title": "Savings Growth Over Time",
@@ -3697,7 +3731,8 @@
         "totalContributedLabel": "Total Contributed",
         "totalInterestLabel": "Total Growth",
         "tooltipYearLabel": "Year",
-        "tooltipBalanceLabel": "Balance"
+        "tooltipBalanceLabel": "Balance",
+        "inflationAdjustedLabel": "Inflation-Adjusted Balance"
       },
       "yearlyBreakdown": {
         "title": "Year-by-Year Breakdown",
@@ -3863,20 +3898,30 @@
         "emptyStateMessage": "Enter your details and press Calculate to see your results.",
         "sentences": {
           "homePrice": "With a gross annual income of {income}, the maximum home price you can afford is {price}.",
-          "requiredIncome": "To afford a {price} home, your gross annual income needs to be at least {income}."
+          "requiredIncome": "To afford a {price} home, your gross annual income needs to be at least {income}.",
+          "car": "With a gross annual income of {income}, the maximum car price you can afford is {price}, at a monthly payment of {payment}.",
+          "personal": "With a gross annual income of {income}, you could afford a personal loan of up to {amount}, at a monthly payment of {payment}.",
+          "business": "With average monthly revenue of {revenue}, your business could support a loan of up to {amount}, at a monthly payment of {payment}."
         },
         "placeholder": "Enter your income, debts, down payment, and loan terms to see the maximum home price you can afford.",
-        "disclaimer": "This tool provides a general educational estimate only, not a mortgage pre-approval, loan offer, or financial advice. Lenders use their own underwriting rules, which can differ from the 28/36 rule used here, and your actual approved amount depends on your full credit profile and the lender's requirements. Consult a licensed mortgage lender or financial advisor before house hunting or applying for a loan."
+        "disclaimer": "This tool provides a general educational estimate only, not a mortgage pre-approval, loan offer, or financial advice. Lenders use their own underwriting rules, which can differ from the 28/36 rule used here, and your actual approved amount depends on your full credit profile and the lender's requirements. Consult a licensed mortgage lender or financial advisor before house hunting or applying for a loan.",
+        "maxCarPriceLabel": "Maximum Car Price",
+        "maxPersonalLoanLabel": "Maximum Personal Loan",
+        "maxBusinessLoanLabel": "Maximum Business Loan"
       },
       "tabs": {
         "groupLabel": "Calculation Type",
         "homePrice": "Max Home Price",
-        "requiredIncome": "Required Income"
+        "requiredIncome": "Required Income",
+        "car": "Car Loan",
+        "business": "Business Loan",
+        "personal": "Personal Loan"
       },
       "nav": {
         "tool": "Calculator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Behind the Tool",
+        "borrowingComparison": "Compare Purposes"
       },
       "form": {
         "annualIncomeLabel": "Gross Annual Income",
@@ -3901,7 +3946,22 @@
         "monthlyHOAHint": "Homeowners association fees, if any. Enter 0 if not applicable.",
         "monthlyHOAPlaceholder": "e.g. 0",
         "calculate": "Calculate",
-        "clear": "Clear"
+        "clear": "Clear",
+        "carDownPaymentHint": "Optional for a car loan — enter 0 if you're not putting anything down.",
+        "carDownPaymentPlaceholder": "e.g. 3,000",
+        "carInterestRatePlaceholder": "e.g. 6",
+        "carLoanTermHint": "Auto loans are typically shorter than mortgages — commonly 3 to 7 years.",
+        "carLoanTermPlaceholder": "e.g. 5",
+        "personalInterestRateHint": "Unsecured personal loans typically carry higher rates than a mortgage or auto loan.",
+        "personalInterestRatePlaceholder": "e.g. 12",
+        "personalLoanTermPlaceholder": "e.g. 3",
+        "businessMonthlyRevenueLabel": "Average Monthly Business Revenue",
+        "businessMonthlyRevenueHint": "Your business's typical monthly revenue — used to check it can comfortably cover the loan payment.",
+        "businessMonthlyRevenuePlaceholder": "e.g. 20,000",
+        "businessExistingDebtLabel": "Existing Monthly Debt Payments",
+        "businessExistingDebtPlaceholder": "e.g. 3,000",
+        "businessInterestRatePlaceholder": "e.g. 9",
+        "businessLoanTermPlaceholder": "e.g. 7"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -4036,6 +4096,17 @@
           "url": "https://doi.org/10.1080/02673039508720833",
           "readOriginal": "Read the Original Article"
         }
+      },
+      "comparisonChart": {
+        "title": "Compare Borrowing Power Across Purposes",
+        "intro": "How much you could afford to borrow for a home, a car, a business, or a personal loan, side by side — each using its own affordability rule and your current inputs on that tab.",
+        "maxAmountLabel": "Max Amount",
+        "purposeLabels": {
+          "home": "Home",
+          "car": "Car",
+          "business": "Business",
+          "personal": "Personal"
+        }
       }
     },
     "debt-to-income-calculator": {
@@ -4060,14 +4131,16 @@
         "maxAdditionalMonthlyDebtLabel": "Additional Room Available",
         "sentences": {
           "ratio": "With a gross monthly income of {income}, your total monthly debt puts your debt-to-income ratio at {ratio} — rated {category}.",
-          "maxDebt": "To stay at or below a {target} debt-to-income ratio on a gross monthly income of {income}, your total monthly debt payments should not exceed {maxDebt}."
+          "maxDebt": "To stay at or below a {target} debt-to-income ratio on a gross monthly income of {income}, your total monthly debt payments should not exceed {maxDebt}.",
+          "scenario": "Adding a new monthly payment of {payment} would move your debt-to-income ratio from {before} to {after} — rated {category}."
         },
         "disclaimer": "This tool provides a general educational estimate only, not a lending decision or financial advice. Lenders calculate DTI using their own rules, which can differ from the formula used here, and approval depends on many factors beyond this ratio. Consult a licensed lender or financial advisor for guidance specific to your situation."
       },
       "tabs": {
         "groupLabel": "Calculation Type",
         "ratio": "DTI Ratio",
-        "maxDebt": "Max Debt"
+        "maxDebt": "Max Debt",
+        "scenario": "Scenario Comparison"
       },
       "nav": {
         "tool": "Calculator",
@@ -4096,7 +4169,10 @@
         "existingMonthlyDebtHint": "Any monthly debt payments you already have, to see how much additional room the target ratio leaves.",
         "existingMonthlyDebtPlaceholder": "e.g. 600",
         "calculate": "Calculate",
-        "clear": "Clear"
+        "clear": "Clear",
+        "proposedMonthlyPaymentLabel": "Proposed New Monthly Payment",
+        "proposedMonthlyPaymentHint": "The monthly payment for a new loan or debt you're considering taking on.",
+        "proposedMonthlyPaymentPlaceholder": "e.g. 250"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -4236,6 +4312,14 @@
           "url": "https://doi.org/10.1111/jofi.12482",
           "readOriginal": "Read the Original Article"
         }
+      },
+      "scenarioChart": {
+        "title": "Debt-to-Income: Before vs. After",
+        "intro": "Compares your current back-end debt-to-income ratio against the ratio you'd have after taking on the proposed new monthly payment. The dashed lines mark the 36%/43%/50% thresholds many lenders reference.",
+        "emptyStateMessage": "Enter your income, debts, and a proposed new payment, then press Calculate to compare.",
+        "beforeLabel": "Before",
+        "afterLabel": "After",
+        "thresholdLabel": "{value}% threshold"
       }
     },
     "world-time-converter": {

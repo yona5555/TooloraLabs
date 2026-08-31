@@ -20,4 +20,10 @@ export type RetirementOutcome = {
   requiredMonthlyContribution: number;
   retirementAgeReached: number | null;
   unreachable: boolean;
+  /**
+   * `projectedBalance` deflated by the "Projected Balance" tab's optional inflation-rate input,
+   * expressed in today's purchasing power — equal to `projectedBalance` itself whenever inflation
+   * isn't set (rate 0) or on the two reverse-solve tabs, where this feature isn't offered.
+   */
+  inflationAdjustedBalance: number;
 };

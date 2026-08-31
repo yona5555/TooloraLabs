@@ -5,6 +5,7 @@ import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { calculateRetirementProjection, solveRequiredContribution, solveRequiredYears } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
@@ -25,6 +26,7 @@ const DEFAULTS = {
   currentSavings: "10000",
   monthlyContribution: "500",
   annualReturnRate: "7",
+  inflationRate: "0",
 };
 
 const EMPTY_OUTCOME: RetirementOutcome = {
@@ -37,6 +39,7 @@ const EMPTY_OUTCOME: RetirementOutcome = {
   requiredMonthlyContribution: 0,
   retirementAgeReached: null,
   unreachable: false,
+  inflationAdjustedBalance: 0,
 };
 
 const QUERY_PARAM_KEYS = {
@@ -47,6 +50,8 @@ const QUERY_PARAM_KEYS = {
   currentSavings: "savings",
   monthlyContribution: "contribution",
   annualReturnRate: "rate",
+  inflationRate: "inflation",
+  currency: "currency",
 } as const;
 
 type Inputs = typeof DEFAULTS;
@@ -59,9 +64,13 @@ function computeOutcome(mode: RetirementMode, inputs: Inputs): RetirementOutcome
   const monthlyContribution = parseLocalizedNumber(inputs.monthlyContribution) || 0;
   const annualReturnRate = parseLocalizedNumber(inputs.annualReturnRate) || 0;
   const targetBalance = parseLocalizedNumber(inputs.targetBalance) || 0;
+  const inflationRate = Math.max(parseLocalizedNumber(inputs.inflationRate) || 0, 0);
 
   if (mode === "endAmount") {
     const projection = calculateRetirementProjection(currentAge, retirementAge, currentSavings, monthlyContribution, annualReturnRate);
+    // Same nominal-to-real deflation Compound Interest Calculator uses: today's-purchasing-power
+    // equivalent of the projected balance, compounding the inflation rate over the same horizon.
+    const inflationAdjustedBalance = inflationRate > 0 ? projection.projectedBalance / Math.pow(1 + inflationRate / 100, projection.yearsToRetirement) : projection.projectedBalance;
     return {
       yearlySchedule: projection.yearlySchedule,
       monthlySchedule: projection.monthlySchedule,
@@ -72,6 +81,7 @@ function computeOutcome(mode: RetirementMode, inputs: Inputs): RetirementOutcome
       requiredMonthlyContribution: 0,
       retirementAgeReached: null,
       unreachable: false,
+      inflationAdjustedBalance,
     };
   }
 
@@ -88,6 +98,7 @@ function computeOutcome(mode: RetirementMode, inputs: Inputs): RetirementOutcome
       requiredMonthlyContribution: solved.requiredMonthlyContribution,
       retirementAgeReached: null,
       unreachable: false,
+      inflationAdjustedBalance: last?.balance ?? currentSavings,
     };
   }
 
@@ -103,6 +114,7 @@ function computeOutcome(mode: RetirementMode, inputs: Inputs): RetirementOutcome
     requiredMonthlyContribution: 0,
     retirementAgeReached: solved.retirementAgeReached,
     unreachable: solved.yearsNeeded === null,
+    inflationAdjustedBalance: last?.balance ?? currentSavings,
   };
 }
 
@@ -117,8 +129,10 @@ export default function RetirementCalculator({ education }: { education: ReactNo
   const [currentSavings, setCurrentSavings] = useState(DEFAULTS.currentSavings);
   const [monthlyContribution, setMonthlyContribution] = useState(DEFAULTS.monthlyContribution);
   const [annualReturnRate, setAnnualReturnRate] = useState(DEFAULTS.annualReturnRate);
+  const [inflationRate, setInflationRate] = useState(DEFAULTS.inflationRate);
 
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
 
   // The default active mode ("endAmount") starts pre-calculated from the default field values,
   // computed once as a lazy useState initializer so it's present on the very first render
@@ -182,13 +196,13 @@ export default function RetirementCalculator({ education }: { education: ReactNo
   }, []);
 
   function performCalculate(targetMode: RetirementMode, options: { updateUrl: boolean }) {
-    const inputs: Inputs = { currentAge, retirementAge, targetBalance, currentSavings, monthlyContribution, annualReturnRate };
+    const inputs: Inputs = { currentAge, retirementAge, targetBalance, currentSavings, monthlyContribution, annualReturnRate, inflationRate };
     const outcome = computeOutcome(targetMode, inputs);
 
     setOutcomes((prev) => ({ ...prev, [targetMode]: outcome }));
     setHasCalculated((prev) => ({ ...prev, [targetMode]: true }));
     setInitializedModes((prev) => ({ ...prev, [targetMode]: true }));
-    setDigitStyle(resolveDigitStyle(currentAge, retirementAge, targetBalance, currentSavings, monthlyContribution, annualReturnRate));
+    setDigitStyle(resolveDigitStyle(currentAge, retirementAge, targetBalance, currentSavings, monthlyContribution, annualReturnRate, inflationRate));
 
     if (options.updateUrl) {
       const params = new URLSearchParams();
@@ -199,6 +213,8 @@ export default function RetirementCalculator({ education }: { education: ReactNo
       params.set(QUERY_PARAM_KEYS.currentSavings, currentSavings);
       params.set(QUERY_PARAM_KEYS.monthlyContribution, monthlyContribution);
       params.set(QUERY_PARAM_KEYS.annualReturnRate, annualReturnRate);
+      params.set(QUERY_PARAM_KEYS.inflationRate, inflationRate);
+      params.set(QUERY_PARAM_KEYS.currency, currency);
       window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
     }
   }
@@ -215,6 +231,52 @@ export default function RetirementCalculator({ education }: { education: ReactNo
     }
   }
 
+  // Currency is a pure unit conversion on already-entered amounts, not a new calculation — so it
+  // takes effect immediately (converting every money-denominated field in place and recomputing
+  // every tab visited so far) rather than waiting for an explicit Calculate press.
+  function handleCurrencyChange(next: CurrencyCode) {
+    if (next === currency) return;
+    const convert = (value: string) => convertAmountString(value, currency, next, (raw) => parseLocalizedNumber(raw) || 0);
+
+    const convertedTarget = convert(targetBalance);
+    const convertedSavings = convert(currentSavings);
+    const convertedContribution = convert(monthlyContribution);
+
+    setTargetBalance(convertedTarget);
+    setCurrentSavings(convertedSavings);
+    setMonthlyContribution(convertedContribution);
+    setCurrency(next);
+
+    const convertedInputs: Inputs = {
+      currentAge,
+      retirementAge,
+      targetBalance: convertedTarget,
+      currentSavings: convertedSavings,
+      monthlyContribution: convertedContribution,
+      annualReturnRate,
+      inflationRate,
+    };
+    setOutcomes((prev) => {
+      const updated = { ...prev };
+      (Object.keys(initializedModes) as RetirementMode[]).forEach((m) => {
+        if (initializedModes[m]) updated[m] = computeOutcome(m, convertedInputs);
+      });
+      return updated;
+    });
+
+    const params = new URLSearchParams();
+    params.set(QUERY_PARAM_KEYS.mode, mode);
+    params.set(QUERY_PARAM_KEYS.currentAge, currentAge);
+    params.set(QUERY_PARAM_KEYS.retirementAge, retirementAge);
+    params.set(QUERY_PARAM_KEYS.targetBalance, convertedTarget);
+    params.set(QUERY_PARAM_KEYS.currentSavings, convertedSavings);
+    params.set(QUERY_PARAM_KEYS.monthlyContribution, convertedContribution);
+    params.set(QUERY_PARAM_KEYS.annualReturnRate, annualReturnRate);
+    params.set(QUERY_PARAM_KEYS.inflationRate, inflationRate);
+    params.set(QUERY_PARAM_KEYS.currency, next);
+    window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+  }
+
   function handleClear() {
     setCurrentAge(DEFAULTS.currentAge);
     setRetirementAge(DEFAULTS.retirementAge);
@@ -222,7 +284,9 @@ export default function RetirementCalculator({ education }: { education: ReactNo
     setCurrentSavings(DEFAULTS.currentSavings);
     setMonthlyContribution(DEFAULTS.monthlyContribution);
     setAnnualReturnRate(DEFAULTS.annualReturnRate);
+    setInflationRate(DEFAULTS.inflationRate);
     setDigitStyle("western");
+    setCurrency(DEFAULT_CURRENCY);
     setHasCalculated((prev) => ({ ...prev, [mode]: false }));
     window.history.replaceState(null, "", window.location.pathname);
   }
@@ -245,6 +309,8 @@ export default function RetirementCalculator({ education }: { education: ReactNo
           input={
             <RetirementInputPanel
               mode={mode}
+              currency={currency}
+              onCurrencyChange={handleCurrencyChange}
               currentAge={currentAge}
               onCurrentAgeChange={setCurrentAge}
               retirementAge={retirementAge}
@@ -257,6 +323,8 @@ export default function RetirementCalculator({ education }: { education: ReactNo
               onMonthlyContributionChange={setMonthlyContribution}
               annualReturnRate={annualReturnRate}
               onAnnualReturnRateChange={setAnnualReturnRate}
+              inflationRate={inflationRate}
+              onInflationRateChange={setInflationRate}
               onCalculate={handleCalculate}
               onClear={handleClear}
             />
@@ -265,6 +333,7 @@ export default function RetirementCalculator({ education }: { education: ReactNo
             <div className="flex flex-col gap-3">
               <RetirementResult
                 mode={mode}
+                currency={currency}
                 hasCalculated={activeCalculated}
                 digitStyle={digitStyle}
                 currentAge={parseLocalizedNumber(currentAge) || 0}
@@ -273,6 +342,7 @@ export default function RetirementCalculator({ education }: { education: ReactNo
                 monthlyContribution={parseLocalizedNumber(monthlyContribution) || 0}
                 annualReturnRate={parseLocalizedNumber(annualReturnRate) || 0}
                 targetBalance={parseLocalizedNumber(targetBalance) || 0}
+                inflationRate={parseLocalizedNumber(inflationRate) || 0}
                 outcome={outcome}
               />
               <RetirementModeTabs mode={mode} onModeChange={handleModeChange} />
@@ -294,12 +364,15 @@ export default function RetirementCalculator({ education }: { education: ReactNo
                 totalContributions={outcome.totalContributionsPure}
                 totalGrowth={outcome.totalGrowth}
                 digitStyle={digitStyle}
+                currency={currency}
+                inflationRate={mode === "endAmount" ? parseLocalizedNumber(inflationRate) || 0 : 0}
               />
               <RetirementYearlyBreakdownTable
                 hasCalculated={activeCalculated}
                 yearlySchedule={outcome.yearlySchedule}
                 monthlySchedule={outcome.monthlySchedule}
                 digitStyle={digitStyle}
+                currency={currency}
               />
             </div>
           }

@@ -5,9 +5,11 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { MonthlyGrowthPoint, YearlyGrowthPoint } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 
 type CompoundInterestYearlyBreakdownTableProps = {
   hasCalculated: boolean;
+  currency: CurrencyCode;
   yearlySchedule: YearlyGrowthPoint[];
   monthlySchedule: MonthlyGrowthPoint[];
   digitStyle: DigitStyle;
@@ -19,6 +21,7 @@ const SCROLL_CONTAINER_CLASS = "max-h-[560px] overflow-y-auto overflow-x-auto";
 
 export default function CompoundInterestYearlyBreakdownTable({
   hasCalculated,
+  currency,
   yearlySchedule,
   monthlySchedule,
   digitStyle,
@@ -37,11 +40,11 @@ export default function CompoundInterestYearlyBreakdownTable({
     );
   }
 
-  const currency = (value: number) => {
+  const money = (value: number) => {
     const useCompact = Math.abs(value) >= 1_000_000;
     return formatLocalizedNumber(value, digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
@@ -86,16 +89,16 @@ export default function CompoundInterestYearlyBreakdownTable({
                 <tr key={row.year} className="border-t border-zinc-100 dark:border-zinc-800/60">
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.year}</td>
                   <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">
-                    {currency(row.openingBalance)}
+                    {money(row.openingBalance)}
                   </td>
                   <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">
-                    {currency(row.yearlyContributions)}
+                    {money(row.yearlyContributions)}
                   </td>
                   <td className="px-4 py-2 text-end font-mono text-amber-600 dark:text-amber-400">
-                    {currency(row.yearlyInterest)}
+                    {money(row.yearlyInterest)}
                   </td>
                   <td className="px-4 py-2 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-                    {currency(row.balance)}
+                    {money(row.balance)}
                   </td>
                 </tr>
               ))}
@@ -121,16 +124,16 @@ export default function CompoundInterestYearlyBreakdownTable({
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.month}</td>
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.year}</td>
                   <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">
-                    {currency(row.openingBalance)}
+                    {money(row.openingBalance)}
                   </td>
                   <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">
-                    {currency(row.contribution)}
+                    {money(row.contribution)}
                   </td>
                   <td className="px-4 py-2 text-end font-mono text-amber-600 dark:text-amber-400">
-                    {currency(row.interest)}
+                    {money(row.interest)}
                   </td>
                   <td className="px-4 py-2 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-                    {currency(row.balance)}
+                    {money(row.balance)}
                   </td>
                 </tr>
               ))}

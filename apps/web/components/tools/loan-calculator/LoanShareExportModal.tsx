@@ -7,10 +7,12 @@ import type { LoanPaymentRow, LoanGrowthRow } from "@tooloralabs/tools";
 import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import type { CurrencyCode } from "@/lib/currency";
 import type { LoanMode, CompoundingFrequency, PaymentFrequency } from "./types";
 
 type LoanShareExportModalProps = {
   mode: LoanMode;
+  currency: CurrencyCode;
   digitStyle: DigitStyle;
   loanAmount: number;
   dueAmount: number;
@@ -28,6 +30,7 @@ type LoanShareExportModalProps = {
 
 export default function LoanShareExportModal({
   mode,
+  currency,
   digitStyle,
   loanAmount,
   dueAmount,
@@ -70,7 +73,7 @@ export default function LoanShareExportModal({
     };
   }, [open]);
 
-  const currency = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) => formatLocalizedNumber(value / 100, digitStyle, { style: "percent", maximumFractionDigits: 2 });
   const termText = `${formatLocalizedNumber(termYears, digitStyle, { maximumFractionDigits: 1 })} ${t("aboveFold.yearsUnit")}`;
   const compoundLabel = t(`form.frequency.${compoundFrequency}`);
@@ -82,20 +85,20 @@ export default function LoanShareExportModal({
   const inputRows =
     mode === "bond"
       ? [
-          { label: t("form.dueAmountLabel"), value: currency(dueAmount) },
+          { label: t("form.dueAmountLabel"), value: money(dueAmount) },
           { label: t("form.interestRateLabel"), value: percent(interestRate) },
           { label: t("form.loanTermLabel"), value: termText },
           { label: t("form.compoundLabel"), value: compoundLabel },
         ]
       : mode === "deferred"
         ? [
-            { label: t("form.loanAmountLabel"), value: currency(loanAmount) },
+            { label: t("form.loanAmountLabel"), value: money(loanAmount) },
             { label: t("form.interestRateLabel"), value: percent(interestRate) },
             { label: t("form.loanTermLabel"), value: termText },
             { label: t("form.compoundLabel"), value: compoundLabel },
           ]
         : [
-            { label: t("form.loanAmountLabel"), value: currency(loanAmount) },
+            { label: t("form.loanAmountLabel"), value: money(loanAmount) },
             { label: t("form.interestRateLabel"), value: percent(interestRate) },
             { label: t("form.loanTermLabel"), value: termText },
             { label: t("form.compoundLabel"), value: compoundLabel },
@@ -104,7 +107,7 @@ export default function LoanShareExportModal({
 
   const resultRows = [
     { label: heroLabel, value: heroValue },
-    { label: t("aboveFold.totalInterestLabel"), value: currency(totalInterest) },
+    { label: t("aboveFold.totalInterestLabel"), value: money(totalInterest) },
   ];
 
   const preparedForRows = [
@@ -122,12 +125,12 @@ export default function LoanShareExportModal({
       ? {
           title: t("shareExport.scheduleTableTitle"),
           columns: [t("amortizationTable.columnPeriod"), t("payoffChart.principalLabel"), t("payoffChart.interestLabel"), t("payoffChart.balanceLabel")],
-          rows: paymentSchedule.map((row) => [String(row.period), currency(row.principalPaid), currency(row.interestPaid), currency(row.endingBalance)]),
+          rows: paymentSchedule.map((row) => [String(row.period), money(row.principalPaid), money(row.interestPaid), money(row.endingBalance)]),
         }
       : {
           title: t("shareExport.scheduleTableTitle"),
           columns: [t("amortizationTable.columnYear"), t("payoffChart.interestLabel"), t("payoffChart.balanceLabel")],
-          rows: growthSchedule.map((row) => [String(row.year), currency(row.interestAccrued), currency(row.endingBalance)]),
+          rows: growthSchedule.map((row) => [String(row.year), money(row.interestAccrued), money(row.endingBalance)]),
         };
 
   async function handleDownloadPdf() {

@@ -5,10 +5,12 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { YearlyGrowthPoint } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 import { computeNiceTicks } from "./niceTicks";
 
 type CompoundInterestGrowthChartProps = {
   hasCalculated: boolean;
+  currency: CurrencyCode;
   yearlySchedule: YearlyGrowthPoint[];
   principal: number;
   totalContributions: number;
@@ -32,6 +34,7 @@ const TOOLTIP_HEIGHT = 78;
 
 export default function CompoundInterestGrowthChart({
   hasCalculated,
+  currency,
   yearlySchedule,
   principal,
   totalContributions,
@@ -85,11 +88,11 @@ export default function CompoundInterestGrowthChart({
   const barX = (i: number) => MARGIN.left + i * step;
   const barCenterX = (i: number) => barX(i) + barWidth / 2;
 
-  const currency = (value: number) => {
+  const money = (value: number) => {
     const useCompact = Math.abs(value) >= 100_000;
     return formatLocalizedNumber(value, digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
@@ -146,7 +149,7 @@ export default function CompoundInterestGrowthChart({
                 opacity={0.08}
               />
               <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {currency(tick)}
+                {money(tick)}
               </text>
             </g>
           ))}
@@ -181,7 +184,7 @@ export default function CompoundInterestGrowthChart({
                     fontWeight={700}
                     className="fill-zinc-900 dark:fill-zinc-100"
                   >
-                    {currency(row.balance)}
+                    {money(row.balance)}
                   </text>
                 )}
               </g>
@@ -246,13 +249,13 @@ export default function CompoundInterestGrowthChart({
                   {t("growthChart.tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 0 })}
                 </text>
                 <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
-                  {t("growthChart.contributedLabel")}: {currency(principal + active.contributions)}
+                  {t("growthChart.contributedLabel")}: {money(principal + active.contributions)}
                 </text>
                 <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
-                  {t("growthChart.interestLabel")}: {currency(active.interest)}
+                  {t("growthChart.interestLabel")}: {money(active.interest)}
                 </text>
                 <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t("growthChart.tooltipBalanceLabel")}: {currency(active.balance)}
+                  {t("growthChart.tooltipBalanceLabel")}: {money(active.balance)}
                 </text>
               </g>
             </>
@@ -275,13 +278,13 @@ export default function CompoundInterestGrowthChart({
         <span className="text-zinc-600 dark:text-zinc-300">
           {t("growthChart.totalContributedLabel")}:{" "}
           <strong dir="ltr" className="text-zinc-900 dark:text-zinc-100">
-            {currency(principal + totalContributions)}
+            {money(principal + totalContributions)}
           </strong>
         </span>
         <span className="text-zinc-600 dark:text-zinc-300">
           {t("growthChart.totalInterestLabel")}:{" "}
           <strong dir="ltr" className="text-zinc-900 dark:text-zinc-100">
-            {currency(totalInterest)}
+            {money(totalInterest)}
           </strong>
         </span>
       </div>

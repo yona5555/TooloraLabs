@@ -5,27 +5,29 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { MonthlyGrowthPoint, YearlyGrowthPoint } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 
 type RetirementYearlyBreakdownTableProps = {
   hasCalculated: boolean;
   yearlySchedule: YearlyGrowthPoint[];
   monthlySchedule: MonthlyGrowthPoint[];
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
 };
 
 type ScheduleView = "annual" | "monthly";
 
 const SCROLL_CONTAINER_CLASS = "max-h-[560px] overflow-y-auto overflow-x-auto";
 
-export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySchedule, monthlySchedule, digitStyle }: RetirementYearlyBreakdownTableProps) {
+export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySchedule, monthlySchedule, digitStyle, currency }: RetirementYearlyBreakdownTableProps) {
   const t = useTranslations("tools.retirement-calculator");
   const [view, setView] = useState<ScheduleView>("annual");
 
-  const currency = (value: number) => {
+  const money = (value: number) => {
     const useCompact = Math.abs(value) >= 1_000_000;
     return formatLocalizedNumber(value, digitStyle, {
       style: "currency",
-      currency: "USD",
+      currency,
       notation: useCompact ? "compact" : "standard",
       maximumFractionDigits: useCompact ? 1 : 0,
     });
@@ -78,10 +80,10 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
               {yearlySchedule.map((row) => (
                 <tr key={row.year} className="border-t border-zinc-100 dark:border-zinc-800/60">
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.year}</td>
-                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.openingBalance)}</td>
-                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.yearlyContributions)}</td>
-                  <td className="px-4 py-2 text-end font-mono text-amber-600 dark:text-amber-400">{currency(row.yearlyInterest)}</td>
-                  <td className="px-4 py-2 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">{currency(row.balance)}</td>
+                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.openingBalance)}</td>
+                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.yearlyContributions)}</td>
+                  <td className="px-4 py-2 text-end font-mono text-amber-600 dark:text-amber-400">{money(row.yearlyInterest)}</td>
+                  <td className="px-4 py-2 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">{money(row.balance)}</td>
                 </tr>
               ))}
             </tbody>
@@ -105,10 +107,10 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
                 <tr key={row.month} className="border-t border-zinc-100 dark:border-zinc-800/60">
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.month}</td>
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.year}</td>
-                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.openingBalance)}</td>
-                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{currency(row.contribution)}</td>
-                  <td className="px-4 py-2 text-end font-mono text-amber-600 dark:text-amber-400">{currency(row.interest)}</td>
-                  <td className="px-4 py-2 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">{currency(row.balance)}</td>
+                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.openingBalance)}</td>
+                  <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.contribution)}</td>
+                  <td className="px-4 py-2 text-end font-mono text-amber-600 dark:text-amber-400">{money(row.interest)}</td>
+                  <td className="px-4 py-2 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">{money(row.balance)}</td>
                 </tr>
               ))}
             </tbody>

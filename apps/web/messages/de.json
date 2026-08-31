@@ -19,7 +19,21 @@
     "affiliateLabel": "Affiliate-Link",
     "relatedToolsTitle": "Ähnliche Tools",
     "viewAllCta": "Alle ansehen: {category}",
-    "toolSearchNoResults": "Keine Tools gefunden."
+    "toolSearchNoResults": "Keine Tools gefunden.",
+    "currency": {
+      "label": "Währung",
+      "approximateNote": "Ungefähre Umrechnung zu einem festen Referenzkurs — kein Echtzeit-Wechselkurs.",
+      "names": {
+        "USD": "US-Dollar (USD)",
+        "EUR": "Euro (EUR)",
+        "GBP": "Britisches Pfund (GBP)",
+        "SAR": "Saudi-Riyal (SAR)",
+        "AED": "VAE-Dirham (AED)",
+        "EGP": "Ägyptisches Pfund (EGP)",
+        "JPY": "Japanischer Yen (JPY)",
+        "INR": "Indische Rupie (INR)"
+      }
+    }
   },
   "site": {
     "title": "TooloraLabs",
@@ -3495,7 +3509,8 @@
       "nav": {
         "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Hinter dem Tool"
+        "behindTheTool": "Hinter dem Tool",
+        "termComparison": "Laufzeitvergleich"
       },
       "form": {
         "monthlyPaymentLabel": "Für Sie tragbare monatliche Rate",
@@ -3639,6 +3654,21 @@
           "url": "https://doi.org/10.1016/j.pmedr.2025.102987",
           "readOriginal": "Originalartikel lesen"
         }
+      },
+      "termChart": {
+        "title": "Maximaler Kreditbetrag nach Laufzeit",
+        "intro": "Wie viel mehr Sie bei derselben monatlichen Rate leihen könnten, wenn Sie einfach eine längere Kreditlaufzeit wählen.",
+        "emptyStateMessage": "Geben Sie oben Ihre Daten ein, um Kreditlaufzeiten zu vergleichen.",
+        "termLabel": "{years} Jahre",
+        "maxLoanLabel": "Maximaler Kreditbetrag",
+        "paymentForLoanLabel": "Rate für aktuellen Kreditbetrag"
+      },
+      "termTable": {
+        "title": "Kreditlaufzeiten vergleichen",
+        "intro": "Sehen Sie, wie eine kürzere oder längere Laufzeit sowohl Ihre monatliche Rate als auch den maximal möglichen Kreditbetrag bei Ihrem aktuellen Zinssatz verändert.",
+        "columnTerm": "Laufzeit",
+        "columnMonthlyPayment": "Monatliche Rate",
+        "columnMaxLoan": "Maximaler Kreditbetrag"
       }
     },
     "retirement-calculator": {
@@ -3666,7 +3696,8 @@
           "requiredContribution": "Um im Alter von {retirementAge} {target} zu erreichen, ausgehend von {savings} im Alter von {currentAge} bei einer erwarteten jährlichen Rendite von {rate}, müssen Sie monatlich {requiredContribution} beitragen.",
           "requiredYears": "Mit einem monatlichen Beitrag von {contribution}, ausgehend von {savings} im Alter von {currentAge} bei einer erwarteten jährlichen Rendite von {rate}, erreichen Sie {target} in etwa {years} — also im Alter von etwa {retirementAgeReached}.",
           "requiredYearsUnreachable": "Mit einem monatlichen Beitrag von {contribution}, ausgehend von {savings} bei einer erwarteten jährlichen Rendite von {rate}, wird {target} innerhalb von 80 Jahren nicht erreicht — versuchen Sie einen höheren Beitrag oder eine höhere Rendite."
-        }
+        },
+        "inflationAdjustedBalanceLabel": "Inflationsbereinigter Saldo"
       },
       "nav": {
         "tool": "Rechner",
@@ -3690,7 +3721,10 @@
         "targetBalanceHint": "Der Ruhestandssaldo, den Sie erreichen möchten.",
         "targetBalancePlaceholder": "z. B. 1.000.000",
         "calculate": "Berechnen",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "inflationRateLabel": "Erwartete Inflationsrate (%)",
+        "inflationRateHint": "Optional — zeigt Ihren prognostizierten Saldo in heutiger Kaufkraft neben dem nominalen Wert. Lassen Sie es bei 0, um diese Anpassung zu überspringen.",
+        "inflationRatePlaceholder": "z. B. 3"
       },
       "growthChart": {
         "title": "Sparwachstum im Zeitverlauf",
@@ -3701,7 +3735,8 @@
         "totalContributedLabel": "Gesamtbeiträge",
         "totalInterestLabel": "Gesamtwachstum",
         "tooltipYearLabel": "Jahr",
-        "tooltipBalanceLabel": "Saldo"
+        "tooltipBalanceLabel": "Saldo",
+        "inflationAdjustedLabel": "Inflationsbereinigter Saldo"
       },
       "yearlyBreakdown": {
         "title": "Jährliche Aufschlüsselung",
@@ -3867,20 +3902,30 @@
         "emptyStateMessage": "Geben Sie Ihre Daten ein und klicken Sie auf \"Berechnen\", um Ihre Ergebnisse zu sehen.",
         "sentences": {
           "homePrice": "Bei einem Bruttojahreseinkommen von {income} beträgt der maximale Immobilienpreis, den Sie sich leisten können, {price}.",
-          "requiredIncome": "Um sich eine Immobilie im Wert von {price} leisten zu können, muss Ihr Bruttojahreseinkommen mindestens {income} betragen."
+          "requiredIncome": "Um sich eine Immobilie im Wert von {price} leisten zu können, muss Ihr Bruttojahreseinkommen mindestens {income} betragen.",
+          "car": "Bei einem Bruttojahreseinkommen von {income} beträgt der maximale Autopreis, den Sie sich leisten können, {price} bei einer monatlichen Rate von {payment}.",
+          "personal": "Bei einem Bruttojahreseinkommen von {income} könnten Sie sich einen Privatkredit von bis zu {amount} leisten, bei einer monatlichen Rate von {payment}.",
+          "business": "Bei einem durchschnittlichen monatlichen Umsatz von {revenue} könnte Ihr Unternehmen einen Kredit von bis zu {amount} tragen, bei einer monatlichen Rate von {payment}."
         },
         "placeholder": "Geben Sie Ihr Einkommen, Ihre Schulden, Ihre Anzahlung und die Kreditbedingungen ein, um den maximalen Immobilienpreis zu sehen, den Sie sich leisten können.",
-        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine Hypotheken-Vorabgenehmigung, kein Kreditangebot und keine Finanzberatung. Kreditgeber wenden eigene Vergaberichtlinien an, die von der hier verwendeten 28/36-Regel abweichen können, und Ihr tatsächlich genehmigter Betrag hängt von Ihrem vollständigen Bonitätsprofil und den Anforderungen des Kreditgebers ab. Wenden Sie sich vor der Haussuche oder einer Kreditbeantragung an einen zugelassenen Hypothekenkreditgeber oder Finanzberater."
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine Hypotheken-Vorabgenehmigung, kein Kreditangebot und keine Finanzberatung. Kreditgeber wenden eigene Vergaberichtlinien an, die von der hier verwendeten 28/36-Regel abweichen können, und Ihr tatsächlich genehmigter Betrag hängt von Ihrem vollständigen Bonitätsprofil und den Anforderungen des Kreditgebers ab. Wenden Sie sich vor der Haussuche oder einer Kreditbeantragung an einen zugelassenen Hypothekenkreditgeber oder Finanzberater.",
+        "maxCarPriceLabel": "Maximaler Autopreis",
+        "maxPersonalLoanLabel": "Maximaler Privatkredit",
+        "maxBusinessLoanLabel": "Maximaler Geschäftskredit"
       },
       "tabs": {
         "groupLabel": "Berechnungsart",
         "homePrice": "Max. Immobilienpreis",
-        "requiredIncome": "Erforderliches Einkommen"
+        "requiredIncome": "Erforderliches Einkommen",
+        "car": "Autokredit",
+        "business": "Geschäftskredit",
+        "personal": "Privatkredit"
       },
       "nav": {
         "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Hintergrundwissen"
+        "behindTheTool": "Hintergrundwissen",
+        "borrowingComparison": "Zwecke vergleichen"
       },
       "form": {
         "annualIncomeLabel": "Bruttojahreseinkommen",
@@ -3905,7 +3950,22 @@
         "monthlyHOAHint": "Gebühren einer Eigentümergemeinschaft, falls vorhanden. Geben Sie 0 ein, falls nicht zutreffend.",
         "monthlyHOAPlaceholder": "z. B. 0",
         "calculate": "Berechnen",
-        "clear": "Löschen"
+        "clear": "Löschen",
+        "carDownPaymentHint": "Optional bei einem Autokredit — geben Sie 0 ein, wenn Sie nichts anzahlen.",
+        "carDownPaymentPlaceholder": "z. B. 3.000",
+        "carInterestRatePlaceholder": "z. B. 6",
+        "carLoanTermHint": "Autokredite sind in der Regel kürzer als Hypotheken — üblich sind 3 bis 7 Jahre.",
+        "carLoanTermPlaceholder": "z. B. 5",
+        "personalInterestRateHint": "Unbesicherte Privatkredite haben in der Regel höhere Zinssätze als eine Hypothek oder ein Autokredit.",
+        "personalInterestRatePlaceholder": "z. B. 12",
+        "personalLoanTermPlaceholder": "z. B. 3",
+        "businessMonthlyRevenueLabel": "Durchschnittlicher monatlicher Geschäftsumsatz",
+        "businessMonthlyRevenueHint": "Der typische monatliche Umsatz Ihres Unternehmens — wird genutzt, um zu prüfen, ob er die Kreditrate problemlos deckt.",
+        "businessMonthlyRevenuePlaceholder": "z. B. 20.000",
+        "businessExistingDebtLabel": "Bestehende monatliche Schuldenzahlungen",
+        "businessExistingDebtPlaceholder": "z. B. 3.000",
+        "businessInterestRatePlaceholder": "z. B. 9",
+        "businessLoanTermPlaceholder": "z. B. 7"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -4040,6 +4100,17 @@
           "url": "https://doi.org/10.1080/02673039508720833",
           "readOriginal": "Originalartikel lesen"
         }
+      },
+      "comparisonChart": {
+        "title": "Kreditfähigkeit nach Zweck vergleichen",
+        "intro": "Wie viel Sie sich für ein Haus, ein Auto, ein Unternehmen oder einen Privatkredit leihen könnten — nebeneinander, jeweils nach eigener Erschwinglichkeitsregel und Ihren aktuellen Eingaben in diesem Tab.",
+        "maxAmountLabel": "Max. Betrag",
+        "purposeLabels": {
+          "home": "Haus",
+          "car": "Auto",
+          "business": "Unternehmen",
+          "personal": "Privat"
+        }
       }
     },
     "debt-to-income-calculator": {
@@ -4064,14 +4135,16 @@
         "maxAdditionalMonthlyDebtLabel": "Verfügbarer zusätzlicher Spielraum",
         "sentences": {
           "ratio": "Bei einem monatlichen Bruttoeinkommen von {income} liegt Ihr Schulden-Einkommen-Verhältnis mit Ihrer gesamten monatlichen Schuld bei {ratio} — eingestuft als {category}.",
-          "maxDebt": "Um bei einem monatlichen Bruttoeinkommen von {income} ein Schulden-Einkommen-Verhältnis von {target} oder darunter einzuhalten, sollten Ihre monatlichen Gesamtschuldenzahlungen {maxDebt} nicht überschreiten."
+          "maxDebt": "Um bei einem monatlichen Bruttoeinkommen von {income} ein Schulden-Einkommen-Verhältnis von {target} oder darunter einzuhalten, sollten Ihre monatlichen Gesamtschuldenzahlungen {maxDebt} nicht überschreiten.",
+          "scenario": "Eine neue monatliche Zahlung von {payment} würde Ihre Schulden-Einkommens-Quote von {before} auf {after} erhöhen — eingestuft als {category}."
         },
         "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine Kreditentscheidung und keine Finanzberatung. Kreditgeber berechnen das DTI nach eigenen Regeln, die von der hier verwendeten Formel abweichen können, und die Genehmigung hängt von vielen Faktoren jenseits dieses Verhältnisses ab. Wenden Sie sich für eine auf Ihre Situation zugeschnittene Beratung an einen zugelassenen Kreditgeber oder Finanzberater."
       },
       "tabs": {
         "groupLabel": "Berechnungsart",
         "ratio": "Schulden-Einkommen-Verhältnis",
-        "maxDebt": "Max. Schulden"
+        "maxDebt": "Max. Schulden",
+        "scenario": "Szenarienvergleich"
       },
       "nav": {
         "tool": "Rechner",
@@ -4100,7 +4173,10 @@
         "existingMonthlyDebtHint": "Monatliche Schuldenzahlungen, die Sie bereits haben, um zu sehen, wie viel zusätzlichen Spielraum das Zielverhältnis lässt.",
         "existingMonthlyDebtPlaceholder": "z. B. 600",
         "calculate": "Berechnen",
-        "clear": "Löschen"
+        "clear": "Löschen",
+        "proposedMonthlyPaymentLabel": "Vorgeschlagene neue monatliche Zahlung",
+        "proposedMonthlyPaymentHint": "Die monatliche Zahlung für einen neuen Kredit oder eine neue Schuld, die Sie in Erwägung ziehen.",
+        "proposedMonthlyPaymentPlaceholder": "z. B. 250"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -4240,6 +4316,14 @@
           "url": "https://doi.org/10.1111/jofi.12482",
           "readOriginal": "Originalartikel lesen"
         }
+      },
+      "scenarioChart": {
+        "title": "Schulden-Einkommens-Quote: Vorher vs. Nachher",
+        "intro": "Vergleicht Ihre aktuelle Back-End-Schulden-Einkommens-Quote mit der Quote, die Sie nach Aufnahme der vorgeschlagenen neuen monatlichen Zahlung hätten. Die gestrichelten Linien markieren die von vielen Kreditgebern verwendeten Schwellenwerte von 36 %/43 %/50 %.",
+        "emptyStateMessage": "Geben Sie Ihr Einkommen, Ihre Schulden und eine vorgeschlagene neue Zahlung ein und klicken Sie auf Berechnen, um zu vergleichen.",
+        "beforeLabel": "Vorher",
+        "afterLabel": "Nachher",
+        "thresholdLabel": "{value}%-Schwelle"
       }
     },
     "world-time-converter": {

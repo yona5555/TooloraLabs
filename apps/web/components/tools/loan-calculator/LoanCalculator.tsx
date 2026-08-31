@@ -13,6 +13,7 @@ import {
 } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
@@ -54,6 +55,7 @@ const QUERY_PARAM_KEYS = {
   termUnit: "termUnit",
   compound: "compound",
   payFrequency: "payFrequency",
+  currency: "currency",
 } as const;
 
 function termToYears(termValue: string, termUnit: TermUnit): number {
@@ -98,6 +100,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
   const [paymentFrequency, setPaymentFrequency] = useState<PaymentFrequency>("monthly");
 
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
 
   // The Amortized tab starts pre-calculated (see getDefaultAmortizedResult above); Deferred and
   // Bond stay uncalculated until their tab is first visited or Calculate is pressed on them.
@@ -189,6 +192,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
       params2.set(QUERY_PARAM_KEYS.termUnit, termUnit);
       params2.set(QUERY_PARAM_KEYS.compound, compoundFrequency);
       params2.set(QUERY_PARAM_KEYS.payFrequency, paymentFrequency);
+      params2.set(QUERY_PARAM_KEYS.currency, currency);
       window.history.replaceState(null, "", `${window.location.pathname}?${params2.toString()}`);
     }
   }
@@ -196,6 +200,41 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
   function handleCalculate(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     performCalculate(mode, { updateUrl: true });
+  }
+
+  // Currency is a pure unit conversion on already-entered amounts, not a new calculation — so it
+  // takes effect immediately (converting loanAmount/dueAmount in place and recomputing every tab
+  // visited so far) rather than waiting for an explicit Calculate press.
+  function handleCurrencyChange(next: CurrencyCode) {
+    if (next === currency) return;
+    const convert = (value: string) => convertAmountString(value, currency, next, (raw) => parseLocalizedNumber(raw) || 0);
+    const convertedLoanAmount = convert(loanAmount);
+    const convertedDueAmount = convert(dueAmount);
+
+    setLoanAmount(convertedLoanAmount);
+    setDueAmount(convertedDueAmount);
+    setCurrency(next);
+
+    const interestRateValue = parseLocalizedNumber(interestRate) || 0;
+    const termYearsValue = Math.min(Math.max(termToYears(termValue, termUnit), 0), MAX_LOAN_TERM_YEARS);
+    const loanAmountValue = parseLocalizedNumber(convertedLoanAmount) || 0;
+    const dueAmountValue = parseLocalizedNumber(convertedDueAmount) || 0;
+
+    if (initializedModes.amortized) setAmortizedResult(calculateAmortizedLoan(loanAmountValue, interestRateValue, termYearsValue, compoundFrequency, paymentFrequency));
+    if (initializedModes.deferred) setDeferredResult(calculateDeferredPaymentLoan(loanAmountValue, interestRateValue, termYearsValue, compoundFrequency));
+    if (initializedModes.bond) setBondResult(calculateBond(dueAmountValue, interestRateValue, termYearsValue, compoundFrequency));
+
+    const params2 = new URLSearchParams();
+    params2.set(QUERY_PARAM_KEYS.mode, mode);
+    params2.set(QUERY_PARAM_KEYS.loanAmount, convertedLoanAmount);
+    params2.set(QUERY_PARAM_KEYS.dueAmount, convertedDueAmount);
+    params2.set(QUERY_PARAM_KEYS.interestRate, interestRate);
+    params2.set(QUERY_PARAM_KEYS.termValue, termValue);
+    params2.set(QUERY_PARAM_KEYS.termUnit, termUnit);
+    params2.set(QUERY_PARAM_KEYS.compound, compoundFrequency);
+    params2.set(QUERY_PARAM_KEYS.payFrequency, paymentFrequency);
+    params2.set(QUERY_PARAM_KEYS.currency, next);
+    window.history.replaceState(null, "", `${window.location.pathname}?${params2.toString()}`);
   }
 
   // Switching to a tab that's never been visited auto-computes its result from whatever is
@@ -218,6 +257,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
     setCompoundFrequency("monthly");
     setPaymentFrequency("monthly");
     setDigitStyle("western");
+    setCurrency(DEFAULT_CURRENCY);
     setHasCalculated((prev) => ({ ...prev, [mode]: false }));
     window.history.replaceState(null, "", window.location.pathname);
   }
@@ -234,7 +274,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
   const heroLabel =
     mode === "amortized" ? t("aboveFold.resultLabels.payment") : mode === "deferred" ? t("aboveFold.resultLabels.amountDue") : t("aboveFold.resultLabels.amountReceived");
 
-  const currency = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) => formatLocalizedNumber(value / 100, digitStyle, { style: "percent", maximumFractionDigits: 2 });
   const yearsText = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 })} ${t("aboveFold.yearsUnit")}`;
 
@@ -244,23 +284,23 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
   const sentence =
     mode === "amortized"
       ? t(sentenceKey, {
-          amount: currency(amortizedResult.loanAmount),
+          amount: money(amortizedResult.loanAmount),
           rate: percent(amortizedParams.interestRate),
           term: yearsText(amortizedParams.termYears),
-          payment: currency(amortizedResult.payment),
+          payment: money(amortizedResult.payment),
         })
       : mode === "deferred"
         ? t(sentenceKey, {
-            amount: currency(deferredResult.loanAmount),
+            amount: money(deferredResult.loanAmount),
             rate: percent(deferredParams.interestRate),
             term: yearsText(deferredParams.termYears),
-            due: currency(deferredResult.amountDue),
+            due: money(deferredResult.amountDue),
           })
         : t(sentenceKey, {
-            due: currency(bondResult.dueAmount),
+            due: money(bondResult.dueAmount),
             rate: percent(bondParams.interestRate),
             term: yearsText(bondParams.termYears),
-            received: currency(bondResult.amountReceived),
+            received: money(bondResult.amountReceived),
           });
 
   const principalForDonut = mode === "amortized" ? amortizedResult.loanAmount : mode === "deferred" ? deferredResult.loanAmount : bondResult.amountReceived;
@@ -268,13 +308,15 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
   const activeParams = mode === "amortized" ? amortizedParams : mode === "deferred" ? deferredParams : bondParams;
 
   return (
-    <LoanLiveInputsProvider value={{ hasCalculatedAmortized: hasCalculated.amortized, amortizedSchedule: amortizedResult.schedule, digitStyle }}>
+    <LoanLiveInputsProvider value={{ hasCalculatedAmortized: hasCalculated.amortized, amortizedSchedule: amortizedResult.schedule, digitStyle, currency }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
             <LoanInputPanel
               mode={mode}
+              currency={currency}
+              onCurrencyChange={handleCurrencyChange}
               loanAmount={loanAmount}
               onLoanAmountChange={setLoanAmount}
               dueAmount={dueAmount}
@@ -297,9 +339,10 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
             <div className="flex flex-col gap-3">
               <LoanResult
                 mode={mode}
+                currency={currency}
                 hasCalculated={activeCalculated}
                 heroLabel={heroLabel}
-                heroValue={currency(heroValueRaw)}
+                heroValue={money(heroValueRaw)}
                 sentence={sentence}
                 principalForDonut={principalForDonut}
                 totalInterest={totalInterest}
@@ -330,20 +373,20 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
 
               {activeCalculated && mode === "amortized" && (
                 <>
-                  <LoanAmortizationChart schedule={amortizedResult.schedule} loanAmount={amortizedResult.loanAmount} totalInterest={amortizedResult.totalInterest} digitStyle={digitStyle} />
-                  <LoanAmortizationTable schedule={amortizedResult.schedule} digitStyle={digitStyle} />
+                  <LoanAmortizationChart schedule={amortizedResult.schedule} loanAmount={amortizedResult.loanAmount} totalInterest={amortizedResult.totalInterest} digitStyle={digitStyle} currency={currency} />
+                  <LoanAmortizationTable schedule={amortizedResult.schedule} digitStyle={digitStyle} currency={currency} />
                 </>
               )}
               {activeCalculated && mode === "deferred" && (
                 <>
-                  <LoanGrowthChart schedule={deferredResult.schedule} loanAmount={deferredResult.loanAmount} totalInterest={deferredResult.totalInterest} digitStyle={digitStyle} titleKey="deferredGrowthChart" />
-                  <LoanGrowthTable schedule={deferredResult.schedule} digitStyle={digitStyle} />
+                  <LoanGrowthChart schedule={deferredResult.schedule} loanAmount={deferredResult.loanAmount} totalInterest={deferredResult.totalInterest} digitStyle={digitStyle} currency={currency} titleKey="deferredGrowthChart" />
+                  <LoanGrowthTable schedule={deferredResult.schedule} digitStyle={digitStyle} currency={currency} />
                 </>
               )}
               {activeCalculated && mode === "bond" && (
                 <>
-                  <LoanGrowthChart schedule={bondResult.schedule} loanAmount={bondResult.amountReceived} totalInterest={bondResult.totalInterest} digitStyle={digitStyle} titleKey="bondGrowthChart" />
-                  <LoanGrowthTable schedule={bondResult.schedule} digitStyle={digitStyle} />
+                  <LoanGrowthChart schedule={bondResult.schedule} loanAmount={bondResult.amountReceived} totalInterest={bondResult.totalInterest} digitStyle={digitStyle} currency={currency} titleKey="bondGrowthChart" />
+                  <LoanGrowthTable schedule={bondResult.schedule} digitStyle={digitStyle} currency={currency} />
                 </>
               )}
 

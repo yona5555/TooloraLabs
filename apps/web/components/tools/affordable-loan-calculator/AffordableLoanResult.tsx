@@ -5,10 +5,12 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import AffordableLoanShareExportModal from "./AffordableLoanShareExportModal";
 import type { AffordableLoanResult as MaxLoanResult, LoanResult as RequiredPaymentResult } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 import type { AffordableLoanMode } from "./types";
 
 type AffordableLoanResultProps = {
   mode: AffordableLoanMode;
+  currency: CurrencyCode;
   hasCalculated: boolean;
   digitStyle: DigitStyle;
   interestRate: number;
@@ -31,6 +33,7 @@ function Stat({ title, value }: { title: string; value: string }) {
 
 export default function AffordableLoanResult({
   mode,
+  currency,
   hasCalculated,
   digitStyle,
   interestRate,
@@ -41,7 +44,7 @@ export default function AffordableLoanResult({
 }: AffordableLoanResultProps) {
   const t = useTranslations("tools.affordable-loan-calculator");
 
-  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 })}%`;
 
   if (!hasCalculated) {

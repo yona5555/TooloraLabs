@@ -4,11 +4,19 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import HouseAffordabilityShareExportModal from "./HouseAffordabilityShareExportModal";
-import type { HouseAffordabilityResult as HomePriceResult, RequiredIncomeResult } from "@tooloralabs/tools";
+import type {
+  HouseAffordabilityResult as HomePriceResult,
+  RequiredIncomeResult,
+  CarAffordabilityResult,
+  PersonalLoanAffordabilityResult,
+  BusinessLoanAffordabilityResult,
+} from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 import type { HouseAffordabilityMode } from "./types";
 
 type HouseAffordabilityResultProps = {
   mode: HouseAffordabilityMode;
+  currency: CurrencyCode;
   hasCalculated: boolean;
   digitStyle: DigitStyle;
   downPayment: number;
@@ -18,6 +26,16 @@ type HouseAffordabilityResultProps = {
   targetHomePrice: number;
   homePriceResult: HomePriceResult;
   requiredIncomeResult: RequiredIncomeResult;
+
+  carAnnualIncome: number;
+  carDownPayment: number;
+  carResult: CarAffordabilityResult;
+
+  personalAnnualIncome: number;
+  personalResult: PersonalLoanAffordabilityResult;
+
+  businessMonthlyRevenue: number;
+  businessResult: BusinessLoanAffordabilityResult;
 };
 
 function Stat({ title, value }: { title: string; value: string }) {
@@ -33,6 +51,7 @@ function Stat({ title, value }: { title: string; value: string }) {
 
 export default function HouseAffordabilityResult({
   mode,
+  currency,
   hasCalculated,
   digitStyle,
   downPayment,
@@ -42,10 +61,17 @@ export default function HouseAffordabilityResult({
   targetHomePrice,
   homePriceResult,
   requiredIncomeResult,
+  carAnnualIncome,
+  carDownPayment,
+  carResult,
+  personalAnnualIncome,
+  personalResult,
+  businessMonthlyRevenue,
+  businessResult,
 }: HouseAffordabilityResultProps) {
   const t = useTranslations("tools.house-affordability-calculator");
 
-  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 })}%`;
 
   if (!hasCalculated) {
@@ -59,22 +85,68 @@ export default function HouseAffordabilityResult({
     );
   }
 
-  const heroLabel = mode === "homePrice" ? t("aboveFold.maxHomePriceLabel") : t("aboveFold.requiredAnnualIncomeLabel");
-  const heroValue = mode === "homePrice" ? money(homePriceResult.maxHomePrice) : money(requiredIncomeResult.requiredAnnualIncome);
+  const heroLabel =
+    mode === "homePrice"
+      ? t("aboveFold.maxHomePriceLabel")
+      : mode === "requiredIncome"
+        ? t("aboveFold.requiredAnnualIncomeLabel")
+        : mode === "car"
+          ? t("aboveFold.maxCarPriceLabel")
+          : mode === "personal"
+            ? t("aboveFold.maxPersonalLoanLabel")
+            : t("aboveFold.maxBusinessLoanLabel");
+
+  const heroValue =
+    mode === "homePrice"
+      ? money(homePriceResult.maxHomePrice)
+      : mode === "requiredIncome"
+        ? money(requiredIncomeResult.requiredAnnualIncome)
+        : mode === "car"
+          ? money(carResult.maxCarPrice)
+          : mode === "personal"
+            ? money(personalResult.maxLoanAmount)
+            : money(businessResult.maxLoanAmount);
+
   const sentence =
     mode === "homePrice"
       ? t("aboveFold.sentences.homePrice", { income: money(annualIncome), price: money(homePriceResult.maxHomePrice) })
-      : t("aboveFold.sentences.requiredIncome", { price: money(targetHomePrice), income: money(requiredIncomeResult.requiredAnnualIncome) });
+      : mode === "requiredIncome"
+        ? t("aboveFold.sentences.requiredIncome", { price: money(targetHomePrice), income: money(requiredIncomeResult.requiredAnnualIncome) })
+        : mode === "car"
+          ? t("aboveFold.sentences.car", { income: money(carAnnualIncome), price: money(carResult.maxCarPrice), payment: money(carResult.monthlyPayment) })
+          : mode === "personal"
+            ? t("aboveFold.sentences.personal", { income: money(personalAnnualIncome), amount: money(personalResult.maxLoanAmount), payment: money(personalResult.monthlyPayment) })
+            : t("aboveFold.sentences.business", { revenue: money(businessMonthlyRevenue), amount: money(businessResult.maxLoanAmount), payment: money(businessResult.monthlyPayment) });
 
   const sharedInputRows = [
     { label: t("form.downPaymentLabel"), value: money(downPayment) },
     { label: t("form.interestRateLabel"), value: percent(interestRate) },
     { label: t("form.loanTermLabel"), value: String(formatLocalizedNumber(loanTermYears, digitStyle)) },
   ];
+
   const inputRows =
     mode === "homePrice"
       ? [{ label: t("form.annualIncomeLabel"), value: money(annualIncome) }, ...sharedInputRows]
-      : [{ label: t("form.targetHomePriceLabel"), value: money(targetHomePrice) }, ...sharedInputRows];
+      : mode === "requiredIncome"
+        ? [{ label: t("form.targetHomePriceLabel"), value: money(targetHomePrice) }, ...sharedInputRows]
+        : mode === "car"
+          ? [
+              { label: t("form.annualIncomeLabel"), value: money(carAnnualIncome) },
+              { label: t("form.downPaymentLabel"), value: money(carDownPayment) },
+              { label: t("form.interestRateLabel"), value: percent(interestRate) },
+              { label: t("form.loanTermLabel"), value: String(formatLocalizedNumber(loanTermYears, digitStyle)) },
+            ]
+          : mode === "personal"
+            ? [
+                { label: t("form.annualIncomeLabel"), value: money(personalAnnualIncome) },
+                { label: t("form.interestRateLabel"), value: percent(interestRate) },
+                { label: t("form.loanTermLabel"), value: String(formatLocalizedNumber(loanTermYears, digitStyle)) },
+              ]
+            : [
+                { label: t("form.businessMonthlyRevenueLabel"), value: money(businessMonthlyRevenue) },
+                { label: t("form.interestRateLabel"), value: percent(interestRate) },
+                { label: t("form.loanTermLabel"), value: String(formatLocalizedNumber(loanTermYears, digitStyle)) },
+              ];
 
   const resultRows =
     mode === "homePrice"
@@ -84,11 +156,20 @@ export default function HouseAffordabilityResult({
           { label: t("aboveFold.monthlyPrincipalAndInterestLabel"), value: money(homePriceResult.monthlyPrincipalAndInterest) },
           { label: t("aboveFold.monthlyPropertyTaxLabel"), value: money(homePriceResult.monthlyPropertyTax) },
         ]
-      : [
-          { label: t("aboveFold.loanAmountLabel"), value: money(requiredIncomeResult.loanAmount) },
-          { label: t("aboveFold.monthlyPaymentLabel"), value: money(requiredIncomeResult.monthlyPayment) },
-          { label: t("aboveFold.bindingConstraintLabel"), value: t(`aboveFold.bindingConstraint.${requiredIncomeResult.bindingConstraint}`) },
-        ];
+      : mode === "requiredIncome"
+        ? [
+            { label: t("aboveFold.loanAmountLabel"), value: money(requiredIncomeResult.loanAmount) },
+            { label: t("aboveFold.monthlyPaymentLabel"), value: money(requiredIncomeResult.monthlyPayment) },
+            { label: t("aboveFold.bindingConstraintLabel"), value: t(`aboveFold.bindingConstraint.${requiredIncomeResult.bindingConstraint}`) },
+          ]
+        : mode === "car"
+          ? [
+              { label: t("aboveFold.loanAmountLabel"), value: money(carResult.loanAmount) },
+              { label: t("aboveFold.monthlyPaymentLabel"), value: money(carResult.monthlyPayment) },
+            ]
+          : mode === "personal"
+            ? [{ label: t("aboveFold.monthlyPaymentLabel"), value: money(personalResult.monthlyPayment) }]
+            : [{ label: t("aboveFold.monthlyPaymentLabel"), value: money(businessResult.monthlyPayment) }];
 
   return (
     <SectionCard
@@ -103,19 +184,28 @@ export default function HouseAffordabilityResult({
       </p>
 
       <div className="mt-5 grid grid-cols-2 gap-2">
-        {mode === "homePrice" ? (
+        {mode === "homePrice" && (
           <>
             <Stat title={t("aboveFold.loanAmountLabel")} value={money(homePriceResult.loanAmount)} />
             <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(homePriceResult.monthlyPayment)} />
             <Stat title={t("aboveFold.monthlyPrincipalAndInterestLabel")} value={money(homePriceResult.monthlyPrincipalAndInterest)} />
             <Stat title={t("aboveFold.monthlyPropertyTaxLabel")} value={money(homePriceResult.monthlyPropertyTax)} />
           </>
-        ) : (
+        )}
+        {mode === "requiredIncome" && (
           <>
             <Stat title={t("aboveFold.loanAmountLabel")} value={money(requiredIncomeResult.loanAmount)} />
             <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(requiredIncomeResult.monthlyPayment)} />
           </>
         )}
+        {mode === "car" && (
+          <>
+            <Stat title={t("aboveFold.loanAmountLabel")} value={money(carResult.loanAmount)} />
+            <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(carResult.monthlyPayment)} />
+          </>
+        )}
+        {mode === "personal" && <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(personalResult.monthlyPayment)} />}
+        {mode === "business" && <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(businessResult.monthlyPayment)} />}
       </div>
     </SectionCard>
   );

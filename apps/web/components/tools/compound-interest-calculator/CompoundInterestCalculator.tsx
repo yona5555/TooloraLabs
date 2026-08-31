@@ -13,6 +13,7 @@ import {
 } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { convertAmountString, isSupportedCurrency, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
@@ -46,6 +47,7 @@ const QUERY_PARAM_KEYS = {
   targetAmount: "target",
   taxRate: "tax",
   inflationRate: "inflation",
+  currency: "currency",
 } as const;
 
 const DEFAULTS = {
@@ -172,6 +174,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
   const [inflationRate, setInflationRate] = useState(DEFAULTS.inflationRate);
 
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
 
   // The End Amount tab (the default active tab) starts pre-calculated from the default field
   // values, computed once as a lazy useState initializer — present in the very first render
@@ -280,6 +283,9 @@ export default function CompoundInterestCalculator({ education }: { education: R
       inflationRate: params.get(QUERY_PARAM_KEYS.inflationRate) ?? DEFAULTS.inflationRate,
     };
 
+    const currencyParam = params.get(QUERY_PARAM_KEYS.currency);
+    setCurrency(isSupportedCurrency(currencyParam) ? currencyParam : DEFAULT_CURRENCY);
+
     setMode(effectiveMode);
     setPrincipal(effectiveInputs.principal);
     setRate(effectiveInputs.rate);
@@ -323,8 +329,57 @@ export default function CompoundInterestCalculator({ education }: { education: R
       params.set(QUERY_PARAM_KEYS.targetAmount, targetAmount);
       params.set(QUERY_PARAM_KEYS.taxRate, taxRate);
       params.set(QUERY_PARAM_KEYS.inflationRate, inflationRate);
+      params.set(QUERY_PARAM_KEYS.currency, currency);
       window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
     }
+  }
+
+  // Currency is a pure unit conversion on already-entered amounts, not a new calculation — so it
+  // takes effect immediately (converting every money-denominated field in place and recomputing
+  // every tab visited so far) rather than waiting for an explicit Calculate press.
+  function handleCurrencyChange(next: CurrencyCode) {
+    if (next === currency) return;
+    const convert = (value: string) => convertAmountString(value, currency, next, (raw) => parseLocalizedNumber(raw) || 0);
+
+    const convertedPrincipal = convert(principal);
+    const convertedContribution = convert(monthlyContribution);
+    const convertedTarget = convert(targetAmount);
+
+    setPrincipal(convertedPrincipal);
+    setMonthlyContribution(convertedContribution);
+    setTargetAmount(convertedTarget);
+    setCurrency(next);
+
+    const convertedInputs: ComputationInputs = {
+      principal: convertedPrincipal,
+      rate,
+      years,
+      frequency,
+      monthlyContribution: convertedContribution,
+      targetAmount: convertedTarget,
+      taxRate,
+      inflationRate,
+    };
+    setResults((prev) => {
+      const updated = { ...prev };
+      (Object.keys(initializedModes) as SolveMode[]).forEach((m) => {
+        if (initializedModes[m]) updated[m] = computeResult(m, convertedInputs);
+      });
+      return updated;
+    });
+
+    const params = new URLSearchParams();
+    params.set(QUERY_PARAM_KEYS.mode, mode);
+    params.set(QUERY_PARAM_KEYS.principal, convertedPrincipal);
+    params.set(QUERY_PARAM_KEYS.rate, rate);
+    params.set(QUERY_PARAM_KEYS.years, years);
+    params.set(QUERY_PARAM_KEYS.frequency, frequency);
+    params.set(QUERY_PARAM_KEYS.monthlyContribution, convertedContribution);
+    params.set(QUERY_PARAM_KEYS.targetAmount, convertedTarget);
+    params.set(QUERY_PARAM_KEYS.taxRate, taxRate);
+    params.set(QUERY_PARAM_KEYS.inflationRate, inflationRate);
+    params.set(QUERY_PARAM_KEYS.currency, next);
+    window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
   }
 
   function handleCalculate(e: FormEvent<HTMLFormElement>) {
@@ -353,6 +408,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
     setTaxRate(DEFAULTS.taxRate);
     setInflationRate(DEFAULTS.inflationRate);
     setDigitStyle("western");
+    setCurrency(DEFAULT_CURRENCY);
     setHasCalculated((prev) => ({ ...prev, [mode]: false }));
     window.history.replaceState(null, "", window.location.pathname);
   }
@@ -371,6 +427,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
     <CompoundInterestLiveInputsProvider
       value={{
         hasCalculated: activeCalculated,
+        currency,
         principal: computation.forward.principal,
         rate: computation.resolvedRate,
         years: computation.resolvedYears,
@@ -387,6 +444,8 @@ export default function CompoundInterestCalculator({ education }: { education: R
           input={
             <CompoundInterestInputPanel
               mode={mode}
+              currency={currency}
+              onCurrencyChange={handleCurrencyChange}
               principal={principal}
               onPrincipalChange={setPrincipal}
               rate={rate}
@@ -411,6 +470,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
             <div className="flex flex-col gap-3">
               <CompoundInterestResult
                 mode={mode}
+                currency={currency}
                 hasCalculated={activeCalculated}
                 futureValue={computation.forward.futureValue}
                 principal={computation.forward.principal}
@@ -453,6 +513,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
               <SectionNav items={navItems} visible={navBarVisible} />
               <CompoundInterestGrowthChart
                 hasCalculated={activeCalculated}
+                currency={currency}
                 yearlySchedule={computation.forward.yearlySchedule}
                 principal={computation.forward.principal}
                 totalContributions={computation.forward.totalContributions}
@@ -461,6 +522,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
               />
               <CompoundInterestYearlyBreakdownTable
                 hasCalculated={activeCalculated}
+                currency={currency}
                 yearlySchedule={computation.forward.yearlySchedule}
                 monthlySchedule={computation.forward.monthlySchedule}
                 digitStyle={digitStyle}

@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { calculateHouseAffordability, calculateRequiredIncome } from "../HouseAffordabilityCalculator";
+import {
+  calculateHouseAffordability,
+  calculateRequiredIncome,
+  calculateCarAffordability,
+  calculatePersonalLoanAffordability,
+  calculateBusinessLoanAffordability,
+} from "../HouseAffordabilityCalculator";
 
 describe("calculateHouseAffordability", () => {
   it("caps the housing budget at 28% of gross income when that is the binding constraint", () => {
@@ -81,5 +87,69 @@ describe("calculateRequiredIncome", () => {
     expect(calculateRequiredIncome(300000, 400, 300000, 6.5, 30, 1.2, 1500, 0).requiredAnnualIncome).toBe(0);
     expect(calculateRequiredIncome(300000, -1, 40000, 6.5, 30, 1.2, 1500, 0).requiredAnnualIncome).toBe(0);
     expect(calculateRequiredIncome(300000, 400, 40000, 6.5, 0, 1.2, 1500, 0).requiredAnnualIncome).toBe(0);
+  });
+});
+
+describe("calculateCarAffordability", () => {
+  it("caps the car payment at 15% of gross income when that is the binding constraint", () => {
+    const result = calculateCarAffordability(72000, 200, 3000, 6, 5);
+    expect(result.monthlyPayment).toBeCloseTo(900, 0);
+    expect(result.loanAmount).toBeCloseTo(46553, 0);
+    expect(result.maxCarPrice).toBeCloseTo(49553, 0);
+  });
+
+  it("caps the car payment at the 36% back-end limit when existing debts are high", () => {
+    const result = calculateCarAffordability(40000, 900, 0, 6, 5);
+    expect(result.monthlyPayment).toBeCloseTo(300, 0);
+  });
+
+  it("returns a zeroed result once existing debts consume the entire back-end limit", () => {
+    expect(calculateCarAffordability(40000, 5000, 3000, 6, 5)).toEqual({ maxCarPrice: 0, loanAmount: 0, monthlyPayment: 0 });
+  });
+
+  it("returns zeros for invalid inputs", () => {
+    expect(calculateCarAffordability(-1, 200, 3000, 6, 5).maxCarPrice).toBe(0);
+    expect(calculateCarAffordability(72000, -1, 3000, 6, 5).maxCarPrice).toBe(0);
+    expect(calculateCarAffordability(72000, 200, -1, 6, 5).maxCarPrice).toBe(0);
+    expect(calculateCarAffordability(72000, 200, 3000, -1, 5).maxCarPrice).toBe(0);
+    expect(calculateCarAffordability(72000, 200, 3000, 6, 0).maxCarPrice).toBe(0);
+  });
+});
+
+describe("calculatePersonalLoanAffordability", () => {
+  it("uses the full remaining 36% back-end budget as the payment ceiling", () => {
+    const result = calculatePersonalLoanAffordability(60000, 500, 12, 3);
+    expect(result.monthlyPayment).toBeCloseTo(1300, 0);
+    expect(result.maxLoanAmount).toBeCloseTo(39140, 0);
+  });
+
+  it("returns a zeroed result once existing debts consume the entire back-end limit", () => {
+    expect(calculatePersonalLoanAffordability(60000, 1800, 12, 3)).toEqual({ maxLoanAmount: 0, monthlyPayment: 0 });
+  });
+
+  it("returns zeros for invalid inputs", () => {
+    expect(calculatePersonalLoanAffordability(-1, 500, 12, 3).maxLoanAmount).toBe(0);
+    expect(calculatePersonalLoanAffordability(60000, -1, 12, 3).maxLoanAmount).toBe(0);
+    expect(calculatePersonalLoanAffordability(60000, 500, -1, 3).maxLoanAmount).toBe(0);
+    expect(calculatePersonalLoanAffordability(60000, 500, 12, 0).maxLoanAmount).toBe(0);
+  });
+});
+
+describe("calculateBusinessLoanAffordability", () => {
+  it("sizes the loan payment to a 1.25x debt-service coverage ratio on monthly revenue", () => {
+    const result = calculateBusinessLoanAffordability(20000, 3000, 9, 7);
+    expect(result.monthlyPayment).toBeCloseTo(13000, 0);
+    expect(result.maxLoanAmount).toBeCloseTo(808002, -2);
+  });
+
+  it("returns a zeroed result once existing debt service already exceeds the DSCR-allowed total", () => {
+    expect(calculateBusinessLoanAffordability(10000, 9000, 9, 7)).toEqual({ maxLoanAmount: 0, monthlyPayment: 0 });
+  });
+
+  it("returns zeros for invalid inputs", () => {
+    expect(calculateBusinessLoanAffordability(-1, 3000, 9, 7).maxLoanAmount).toBe(0);
+    expect(calculateBusinessLoanAffordability(20000, -1, 9, 7).maxLoanAmount).toBe(0);
+    expect(calculateBusinessLoanAffordability(20000, 3000, -1, 7).maxLoanAmount).toBe(0);
+    expect(calculateBusinessLoanAffordability(20000, 3000, 9, 0).maxLoanAmount).toBe(0);
   });
 });

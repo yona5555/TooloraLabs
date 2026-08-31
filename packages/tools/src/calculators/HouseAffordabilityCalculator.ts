@@ -1,3 +1,11 @@
+/** Shared reverse-amortization step: given a monthly payment budget, the loan amount it supports at a fixed rate/term. Duplicated inline (rather than exported) to match this file's existing style, where `calculateHouseAffordability` and `calculateRequiredIncome` each already compute the same `paymentFactor` independently. */
+function reverseAmortizeLoanAmount(monthlyPayment: number, interestRate: number, loanTermYears: number): number {
+  const monthlyRate = interestRate / 100 / 12;
+  const numberOfPayments = Math.round(loanTermYears * 12);
+  const paymentFactor = monthlyRate === 0 ? 1 / numberOfPayments : monthlyRate / (1 - Math.pow(1 + monthlyRate, -numberOfPayments));
+  return monthlyPayment / paymentFactor;
+}
+
 export type HouseAffordabilityResult = {
   maxHomePrice: number;
   loanAmount: number;
@@ -181,4 +189,134 @@ export function calculateRequiredIncome(
     monthlyInsurance,
     bindingConstraint: monthlyIncomeForFrontEnd >= monthlyIncomeForBackEnd ? "frontEnd" : "backEnd",
   };
+}
+
+/** Debt-to-income ratio ceiling shared by the car and personal-loan estimates below — the same back-end limit `calculateHouseAffordability` uses for housing, applied here to non-housing borrowing capacity. */
+const BACK_END_RATIO = 0.36;
+
+export type CarAffordabilityResult = {
+  maxCarPrice: number;
+  loanAmount: number;
+  monthlyPayment: number;
+};
+
+/**
+ * Estimates the maximum car price a buyer can afford. Unlike a mortgage, an auto loan has no
+ * property-tax or insurance-escrow component and is conventionally sized against a standalone
+ * "car payment" affordability rule of thumb (here, 15% of gross monthly income) rather than the
+ * mortgage-specific 28% front-end ratio — capped, as with housing, by the 36% back-end ratio once
+ * other monthly debts are accounted for.
+ */
+export function calculateCarAffordability(
+  annualIncome: number,
+  monthlyDebts: number,
+  downPayment: number,
+  interestRate: number,
+  loanTermYears: number
+): CarAffordabilityResult {
+  if (
+    !Number.isFinite(annualIncome) ||
+    annualIncome <= 0 ||
+    !Number.isFinite(monthlyDebts) ||
+    monthlyDebts < 0 ||
+    !Number.isFinite(downPayment) ||
+    downPayment < 0 ||
+    !Number.isFinite(interestRate) ||
+    interestRate < 0 ||
+    !Number.isFinite(loanTermYears) ||
+    loanTermYears <= 0
+  ) {
+    return { maxCarPrice: 0, loanAmount: 0, monthlyPayment: 0 };
+  }
+
+  const monthlyIncome = annualIncome / 12;
+  const carPaymentRuleLimit = monthlyIncome * 0.15;
+  const backEndLimit = monthlyIncome * BACK_END_RATIO - monthlyDebts;
+  const monthlyPayment = Math.max(Math.min(carPaymentRuleLimit, backEndLimit), 0);
+
+  if (monthlyPayment <= 0) {
+    return { maxCarPrice: 0, loanAmount: 0, monthlyPayment: 0 };
+  }
+
+  const loanAmount = reverseAmortizeLoanAmount(monthlyPayment, interestRate, loanTermYears);
+  return { maxCarPrice: loanAmount + downPayment, loanAmount, monthlyPayment };
+}
+
+export type PersonalLoanAffordabilityResult = {
+  maxLoanAmount: number;
+  monthlyPayment: number;
+};
+
+/**
+ * Estimates the maximum unsecured personal loan (e.g. for travel or other personal expenses) a
+ * borrower can afford. With no collateral and no separate housing-style front-end ratio to apply,
+ * the whole remaining 36% back-end debt-to-income budget (after existing monthly debts) is what's
+ * available to service the new loan.
+ */
+export function calculatePersonalLoanAffordability(annualIncome: number, monthlyDebts: number, interestRate: number, loanTermYears: number): PersonalLoanAffordabilityResult {
+  if (
+    !Number.isFinite(annualIncome) ||
+    annualIncome <= 0 ||
+    !Number.isFinite(monthlyDebts) ||
+    monthlyDebts < 0 ||
+    !Number.isFinite(interestRate) ||
+    interestRate < 0 ||
+    !Number.isFinite(loanTermYears) ||
+    loanTermYears <= 0
+  ) {
+    return { maxLoanAmount: 0, monthlyPayment: 0 };
+  }
+
+  const monthlyIncome = annualIncome / 12;
+  const monthlyPayment = Math.max(monthlyIncome * BACK_END_RATIO - monthlyDebts, 0);
+
+  if (monthlyPayment <= 0) {
+    return { maxLoanAmount: 0, monthlyPayment: 0 };
+  }
+
+  return { maxLoanAmount: reverseAmortizeLoanAmount(monthlyPayment, interestRate, loanTermYears), monthlyPayment };
+}
+
+export type BusinessLoanAffordabilityResult = {
+  maxLoanAmount: number;
+  monthlyPayment: number;
+};
+
+/** Minimum debt-service-coverage ratio (net operating income ÷ total debt service) commonly cited by commercial lenders as an underwriting floor. */
+const TARGET_DEBT_SERVICE_COVERAGE_RATIO = 1.25;
+
+/**
+ * Estimates the maximum business loan a monthly revenue figure can support, using the standard
+ * commercial-lending debt-service coverage ratio (DSCR) rather than a personal income ratio:
+ * revenue must cover total monthly debt service (existing plus the new loan) by at least the
+ * target DSCR, so the new payment is whatever revenue leaves once that coverage margin and any
+ * existing debt service are set aside.
+ */
+export function calculateBusinessLoanAffordability(
+  monthlyRevenue: number,
+  existingMonthlyDebtPayments: number,
+  interestRate: number,
+  loanTermYears: number
+): BusinessLoanAffordabilityResult {
+  if (
+    !Number.isFinite(monthlyRevenue) ||
+    monthlyRevenue <= 0 ||
+    !Number.isFinite(existingMonthlyDebtPayments) ||
+    existingMonthlyDebtPayments < 0 ||
+    !Number.isFinite(interestRate) ||
+    interestRate < 0 ||
+    !Number.isFinite(loanTermYears) ||
+    loanTermYears <= 0
+  ) {
+    return { maxLoanAmount: 0, monthlyPayment: 0 };
+  }
+
+  const maxTotalDebtService = monthlyRevenue / TARGET_DEBT_SERVICE_COVERAGE_RATIO;
+  const monthlyPayment = Math.max(maxTotalDebtService - existingMonthlyDebtPayments, 0);
+
+  if (monthlyPayment <= 0) {
+    return { maxLoanAmount: 0, monthlyPayment: 0 };
+  }
+
+  return { maxLoanAmount: reverseAmortizeLoanAmount(monthlyPayment, interestRate, loanTermYears), monthlyPayment };
 }

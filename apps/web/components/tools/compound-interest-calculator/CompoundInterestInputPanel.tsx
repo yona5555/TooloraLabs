@@ -4,10 +4,14 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { CompoundingFrequency, SolveMode } from "./types";
 
 type CompoundInterestInputPanelProps = {
   mode: SolveMode;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   principal: string;
   onPrincipalChange: (value: string) => void;
   rate: string;
@@ -32,6 +36,8 @@ const FREQUENCIES: CompoundingFrequency[] = ["annually", "semiannually", "quarte
 
 export default function CompoundInterestInputPanel({
   mode,
+  currency,
+  onCurrencyChange,
   principal,
   onPrincipalChange,
   rate,
@@ -56,9 +62,11 @@ export default function CompoundInterestInputPanel({
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         {mode !== "endAmount" && (
           <ToolInput
-            label={t("form.targetLabel")}
+            label={`${t("form.targetLabel")} (${currency})`}
             type="text"
             inputMode="decimal"
             placeholder={t("form.targetPlaceholder")}
@@ -69,7 +77,7 @@ export default function CompoundInterestInputPanel({
 
         {mode !== "startingAmount" && (
           <ToolInput
-            label={t("form.principalLabel")}
+            label={`${t("form.principalLabel")} (${currency})`}
             type="text"
             inputMode="decimal"
             placeholder={t("form.principalPlaceholder")}
@@ -117,7 +125,7 @@ export default function CompoundInterestInputPanel({
 
         {mode !== "additionalContribution" && (
           <ToolInput
-            label={t("form.monthlyContributionLabel")}
+            label={`${t("form.monthlyContributionLabel")} (${currency})`}
             type="text"
             inputMode="decimal"
             placeholder={t("form.monthlyContributionPlaceholder")}

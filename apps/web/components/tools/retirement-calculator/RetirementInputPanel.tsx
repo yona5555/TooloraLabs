@@ -4,10 +4,14 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { RetirementMode } from "./types";
 
 type RetirementInputPanelProps = {
   mode: RetirementMode;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   currentAge: string;
   onCurrentAgeChange: (value: string) => void;
   retirementAge: string;
@@ -20,12 +24,16 @@ type RetirementInputPanelProps = {
   onMonthlyContributionChange: (value: string) => void;
   annualReturnRate: string;
   onAnnualReturnRateChange: (value: string) => void;
+  inflationRate: string;
+  onInflationRateChange: (value: string) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
 
 export default function RetirementInputPanel({
   mode,
+  currency,
+  onCurrencyChange,
   currentAge,
   onCurrentAgeChange,
   retirementAge,
@@ -38,6 +46,8 @@ export default function RetirementInputPanel({
   onMonthlyContributionChange,
   annualReturnRate,
   onAnnualReturnRateChange,
+  inflationRate,
+  onInflationRateChange,
   onCalculate,
   onClear,
 }: RetirementInputPanelProps) {
@@ -46,9 +56,11 @@ export default function RetirementInputPanel({
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         {mode !== "endAmount" && (
           <ToolInput
-            label={t("form.targetBalanceLabel")}
+            label={`${t("form.targetBalanceLabel")} (${currency})`}
             hint={t("form.targetBalanceHint")}
             type="text"
             inputMode="decimal"
@@ -80,7 +92,7 @@ export default function RetirementInputPanel({
         </div>
 
         <ToolInput
-          label={t("form.currentSavingsLabel")}
+          label={`${t("form.currentSavingsLabel")} (${currency})`}
           type="text"
           inputMode="decimal"
           placeholder={t("form.currentSavingsPlaceholder")}
@@ -90,7 +102,7 @@ export default function RetirementInputPanel({
 
         {mode !== "requiredContribution" && (
           <ToolInput
-            label={t("form.monthlyContributionLabel")}
+            label={`${t("form.monthlyContributionLabel")} (${currency})`}
             type="text"
             inputMode="decimal"
             placeholder={t("form.monthlyContributionPlaceholder")}
@@ -108,6 +120,18 @@ export default function RetirementInputPanel({
           value={annualReturnRate}
           onChange={(e) => onAnnualReturnRateChange(e.target.value)}
         />
+
+        {mode === "endAmount" && (
+          <ToolInput
+            label={t("form.inflationRateLabel")}
+            hint={t("form.inflationRateHint")}
+            type="text"
+            inputMode="decimal"
+            placeholder={t("form.inflationRatePlaceholder")}
+            value={inflationRate}
+            onChange={(e) => onInflationRateChange(e.target.value)}
+          />
+        )}
 
         <div className="flex flex-wrap gap-4">
           <ToolButton type="submit">{t("form.calculate")}</ToolButton>

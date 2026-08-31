@@ -6,10 +6,12 @@ import type { YearlyGrowthPoint } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CompoundInterestBreakdownDonut from "./CompoundInterestBreakdownDonut";
 import CompoundInterestShareExportModal from "./CompoundInterestShareExportModal";
+import type { CurrencyCode } from "@/lib/currency";
 import type { CompoundingFrequency, SolveMode } from "./types";
 
 type CompoundInterestResultProps = {
   mode: SolveMode;
+  currency: CurrencyCode;
   hasCalculated: boolean;
   futureValue: number;
   principal: number;
@@ -29,6 +31,7 @@ type CompoundInterestResultProps = {
 
 export default function CompoundInterestResult({
   mode,
+  currency,
   hasCalculated,
   futureValue,
   principal,
@@ -58,8 +61,8 @@ export default function CompoundInterestResult({
     );
   }
 
-  const currency = (value: number) =>
-    formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) =>
+    formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
   const percent = (value: number) =>
     formatLocalizedNumber(value / 100, digitStyle, { style: "percent", maximumFractionDigits: 2 });
   const yearsText = (value: number) =>
@@ -79,23 +82,23 @@ export default function CompoundInterestResult({
   const heroValue = unreachable
     ? "—"
     : mode === "endAmount"
-      ? currency(futureValue)
+      ? money(futureValue)
       : mode === "investmentLength"
         ? yearsText(resolvedYears)
         : mode === "returnRate"
           ? percent(resolvedRate)
           : mode === "startingAmount"
-            ? currency(principal)
-            : currency(resolvedContribution);
+            ? money(principal)
+            : money(resolvedContribution);
 
   const sentenceKey = unreachable ? `aboveFold.sentences.${mode}Unreachable` : `aboveFold.sentences.${mode}`;
   const sentence = t(sentenceKey, {
-    principal: currency(principal),
+    principal: money(principal),
     rate: percent(resolvedRate),
     years: yearsText(resolvedYears),
-    contribution: currency(resolvedContribution),
-    target: currency(targetAmount),
-    result: currency(futureValue),
+    contribution: money(resolvedContribution),
+    target: money(targetAmount),
+    result: money(futureValue),
   });
 
   return (
@@ -104,6 +107,7 @@ export default function CompoundInterestResult({
       action={
         <CompoundInterestShareExportModal
           mode={mode}
+          currency={currency}
           digitStyle={digitStyle}
           principal={principal}
           rate={resolvedRate}
@@ -132,14 +136,14 @@ export default function CompoundInterestResult({
         <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">
           {t("aboveFold.buyingPowerLabel")}:{" "}
           <span dir="ltr" className="font-mono font-semibold text-zinc-700 dark:text-zinc-300">
-            {currency(buyingPowerAfterInflation)}
+            {money(buyingPowerAfterInflation)}
           </span>
         </p>
       )}
 
       <div className="mt-5">
         <CompoundInterestBreakdownDonut
-          centerValue={currency(futureValue)}
+          centerValue={money(futureValue)}
           centerLabel={t("aboveFold.futureValueLabel")}
           segments={[
             { key: "principal", value: principal, label: t("aboveFold.principalLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
@@ -153,19 +157,19 @@ export default function CompoundInterestResult({
         <div>
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.principalLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-            {currency(principal)}
+            {money(principal)}
           </dd>
         </div>
         <div>
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.contributionsLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-            {currency(totalContributions)}
+            {money(totalContributions)}
           </dd>
         </div>
         <div>
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.interestLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-amber-600 dark:text-amber-400">
-            {currency(totalInterest)}
+            {money(totalInterest)}
           </dd>
         </div>
       </div>

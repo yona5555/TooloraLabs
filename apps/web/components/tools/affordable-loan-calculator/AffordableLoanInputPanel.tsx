@@ -4,10 +4,14 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { AffordableLoanMode } from "./types";
 
 type AffordableLoanInputPanelProps = {
   mode: AffordableLoanMode;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   monthlyPayment: string;
   onMonthlyPaymentChange: (value: string) => void;
   loanAmount: string;
@@ -22,6 +26,8 @@ type AffordableLoanInputPanelProps = {
 
 export default function AffordableLoanInputPanel({
   mode,
+  currency,
+  onCurrencyChange,
   monthlyPayment,
   onMonthlyPaymentChange,
   loanAmount,
@@ -38,9 +44,11 @@ export default function AffordableLoanInputPanel({
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         {mode === "maxLoan" ? (
           <ToolInput
-            label={t("form.monthlyPaymentLabel")}
+            label={`${t("form.monthlyPaymentLabel")} (${currency})`}
             hint={t("form.monthlyPaymentHint")}
             type="text"
             inputMode="decimal"
@@ -50,7 +58,7 @@ export default function AffordableLoanInputPanel({
           />
         ) : (
           <ToolInput
-            label={t("form.loanAmountLabel")}
+            label={`${t("form.loanAmountLabel")} (${currency})`}
             hint={t("form.loanAmountHint")}
             type="text"
             inputMode="decimal"

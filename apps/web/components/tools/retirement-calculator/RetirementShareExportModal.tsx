@@ -6,12 +6,14 @@ import type { YearlyGrowthPoint } from "@tooloralabs/tools";
 import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import type { CurrencyCode } from "@/lib/currency";
 import type { RetirementMode } from "./types";
 
 type Row = { label: string; value: string };
 
 type RetirementShareExportModalProps = {
   mode: RetirementMode;
+  currency: CurrencyCode;
   inputRows: Row[];
   resultRows: Row[];
   heroLabel: string;
@@ -26,6 +28,7 @@ type RetirementShareExportModalProps = {
 
 export default function RetirementShareExportModal({
   mode,
+  currency,
   inputRows,
   resultRows,
   heroLabel,
@@ -78,15 +81,15 @@ export default function RetirementShareExportModal({
     .map((row) => ({ label: row.label, value: row.value.trim() }))
     .filter((row) => row.value.length > 0);
 
-  const currency = (value: number) => {
-    const fmt = new Intl.NumberFormat(digitStyle === "eastern" ? "ar" : "en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const money = (value: number) => {
+    const fmt = new Intl.NumberFormat(digitStyle === "eastern" ? "ar" : "en-US", { style: "currency", currency, maximumFractionDigits: 0 });
     return fmt.format(value);
   };
 
   const scheduleTable = {
     title: t("shareExport.scheduleTableTitle"),
     columns: [columnYearLabel, columnInterestLabel, columnBalanceLabel],
-    rows: yearlySchedule.map((row) => [String(row.year), currency(row.yearlyInterest), currency(row.balance)]),
+    rows: yearlySchedule.map((row) => [String(row.year), money(row.yearlyInterest), money(row.balance)]),
   };
 
   async function handleDownloadPdf() {
