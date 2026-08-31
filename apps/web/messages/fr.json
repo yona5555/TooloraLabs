@@ -2910,6 +2910,9 @@
         "inputTitle": "Votre investissement",
         "resultTitle": "Croissance projetée",
         "futureValueLabel": "Valeur future",
+        "ruleOf72Title": "La règle des 72",
+        "ruleOf72Intro": "Un raccourci de calcul mental pour estimer le temps nécessaire pour doubler un investissement : divisez 72 par le taux de croissance annuel.",
+        "ruleOf72Result": "À {rate} %, votre argent doublerait environ tous les {years} ans.",
         "principalLabel": "Capital",
         "contributionsLabel": "Versements",
         "interestLabel": "Intérêts gagnés",
@@ -3208,6 +3211,12 @@
         "emptyStateMessage": "Saisissez les détails de votre prêt et cliquez sur « Calculer » pour voir vos résultats.",
         "totalLabel": "Total",
         "yearsUnit": "ans",
+        "loanTipsTitle": "Conseils pour comparer les prêts",
+        "loanTips": {
+          "compounding": "La fréquence de capitalisation des intérêts et celle de vos paiements influencent toutes deux le coût réel — une capitalisation plus fréquente l'augmente, des paiements plus fréquents le réduisent.",
+          "extraPayments": "Même de petits paiements supplémentaires sur le capital peuvent réduire sensiblement les intérêts totaux et raccourcir la durée de remboursement.",
+          "apr": "Comparez le TAEG, pas seulement le taux d'intérêt affiché — les frais inclus dans le TAEG peuvent changer quelle offre est réellement la moins chère."
+        },
         "resultLabels": {
           "payment": "Montant du paiement",
           "amountDue": "Montant dû à l'échéance",
@@ -3493,6 +3502,12 @@
         "totalPaymentLabel": "Paiement total",
         "totalInterestLabel": "Intérêts totaux",
         "requiredPaymentLabel": "Mensualité requise",
+        "borrowingTipsTitle": "Conseils d'emprunt",
+        "borrowingTips": {
+          "rate": "Un écart de taux d'intérêt de 1 à 2 % peut modifier le montant empruntable plus que prévu — mieux vaut comparer les offres.",
+          "term": "Une durée plus courte réduit le total des intérêts payés mais augmente la mensualité — une durée plus longue fait l'inverse.",
+          "budget": "La plupart des prêteurs souhaitent que vos mensualités de dette totales, celle-ci incluse, restent sous environ 36 % de votre revenu brut."
+        },
         "emptyStateMessage": "Saisissez vos données et cliquez sur « Calculer » pour voir vos résultats.",
         "sentences": {
           "maxLoan": "Avec une mensualité de {payment}, le montant maximal empruntable que vous pouvez vous permettre est de {amount}.",
@@ -3548,7 +3563,34 @@
         "intro": {
           "title": "Comment fonctionne ce calculateur",
           "paragraph1": "Cet outil applique le calcul standard de mensualité de prêt à l'envers. Plutôt que de partir d'un montant emprunté pour en déduire la mensualité, il part d'une mensualité que vous choisissez pour en déduire le montant maximal qu'elle peut entièrement rembourser — capital et intérêts — d'ici la fin de la durée choisie. Le calcul sous-jacent est la même formule de valeur actuelle d'une annuité que celle qui régit tout prêt amortissable à taux fixe ; elle est simplement résolue pour une inconnue différente.",
-          "paragraph2": "Cela en fait un outil de budgétisation plutôt qu'un outil de recherche de prêt : au lieu de trouver d'abord un prêt puis de découvrir son coût, vous partez de ce que vous pouvez réellement vous permettre chaque mois pour déterminer le montant qu'il permet d'emprunter, avant même de commencer à chercher une voiture, un prêteur ou tout autre achat à financer."
+          "paragraph2": "Cela en fait un outil de budgétisation plutôt qu'un outil de recherche de prêt : au lieu de trouver d'abord un prêt puis de découvrir son coût, vous partez de ce que vous pouvez réellement vous permettre chaque mois pour déterminer le montant qu'il permet d'emprunter, avant même de commencer à chercher une voiture, un prêteur ou tout autre achat à financer.",
+          "diagram": {
+            "chartAriaLabel": "Diagramme à barres comparant le montant maximal empruntable soutenu par une mensualité de 300 $ à des taux annuels de 5 %, 8 % et 11 %, chacun sur une durée de 5 ans",
+            "rateLabel": "taux de {rate} %",
+            "caption": "Même mensualité de 300 $, même durée de 5 ans — seul le taux change : à 5 %, la mensualité soutient un prêt de 15 897 $, mais à 11 %, seulement 13 798 $. Un écart de 6 points de taux représente environ 2 100 $ de capacité d'emprunt, ce qui justifie de comparer les offres."
+          }
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "Ce calculateur fonctionne selon deux modes — déterminer le montant maximal empruntable qu'une mensualité budgétée permet, ou déterminer la mensualité qu'exige un montant de prêt précis — et ces quatre variables alimentent les deux.",
+          "items": [
+            {
+              "name": "Mensualité que vous pouvez vous permettre",
+              "description": "Le plafond budgétaire saisi dans l'onglet « Prêt max. ». Le calculateur le considère comme fixe et résout à l'envers la formule de valeur actuelle d'une annuité pour trouver le plus grand montant de prêt que cette mensualité peut entièrement rembourser d'ici la fin de la durée."
+            },
+            {
+              "name": "Montant du prêt",
+              "description": "Le montant saisi dans l'onglet « Mensualité requise » lorsque vous avez déjà un prix ou une offre précis en tête. Le calculateur applique alors la même formule dans l'autre sens, pour déterminer cette fois la mensualité qu'exige ce montant."
+            },
+            {
+              "name": "Taux d'intérêt annuel",
+              "description": "Le taux annuel du prêteur, converti en interne en taux mensuel avant l'amortissement. Comme il se capitalise chaque mois sur toute la durée, un écart d'un ou deux points de pourcentage peut modifier sensiblement le montant empruntable ou la mensualité requise."
+            },
+            {
+              "name": "Durée du prêt",
+              "description": "Le nombre d'années sur lesquelles le prêt est remboursé. Une durée plus longue répartit la même mensualité sur davantage de mois, ce qui augmente le montant empruntable dans l'onglet « Prêt max. » et réduit la mensualité requise dans l'onglet « Mensualité requise » — tout en augmentant, dans les deux cas, le total des intérêts payés."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples chiffrés",
@@ -3566,6 +3608,24 @@
               "scenario": "Budget de 500 $/mois, taux annuel de 7 %, durée de 4 ans",
               "maxLoanAmount": "20 880,10 $",
               "totalInterest": "3 119,90 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "La capacité d'emprunt en pratique",
+          "intro": "Les deux onglets de ce calculateur répondent à des questions concrètes différentes, selon que vous partez d'un budget ou d'une offre précise.",
+          "items": [
+            {
+              "title": "Se fixer un budget avant de commencer à chercher",
+              "description": "L'onglet « Prêt max. » transforme une mensualité que vous pouvez assumer en plafond d'emprunt avant même de comparer des voitures, des prêts personnels ou tout autre achat financé — vous connaissez ainsi votre limite avant de vous attacher à quelque chose qui la dépasse."
+            },
+            {
+              "title": "Vérifier une offre précise à l'envers",
+              "description": "L'onglet « Mensualité requise » fonctionne dans l'autre sens : une fois qu'un montant de prêt précis a été trouvé, comme le prix d'une voiture ou une offre de prêt personnel, il indique la mensualité que ce montant exige réellement avant de vous engager."
+            },
+            {
+              "title": "Comparer des offres de taux et de durée entre elles",
+              "description": "Comme les deux onglets sont sensibles au taux et à la durée, recalculer les mêmes chiffres avec le taux et la durée annoncés par un prêteur concurrent est un moyen rapide de voir quelle offre est réellement la moins chère — la même comparaison qui sous-tend la carte de conseils d'emprunt et le graphique de comparaison des durées de cette page."
             }
           ]
         },
@@ -3691,6 +3751,12 @@
         "totalContributedLabel": "Total cotisé",
         "totalGrowthLabel": "Croissance totale",
         "retirementAgeReachedLabel": "Âge atteint",
+        "ageProgressLabel": "Progression de l'âge vers l'objectif",
+        "ageProgressCurrent": "Maintenant : {age} ans",
+        "ageProgressTarget": "Objectif atteint : {age} ans",
+        "milestonesCardTitle": "Jalons d'épargne retraite",
+        "milestonesCardRow": "À {age} ans",
+        "milestonesCardNote": "Une règle empirique souvent citée sur le multiple du salaire (Fidelity) — un repère général, pas un conseil personnalisé.",
         "sentences": {
           "endAmount": "En commençant à {currentAge} ans avec {savings} d'épargne et en cotisant {contribution} par mois avec un rendement annuel attendu de {rate}, votre solde projeté sera de {balance} à {retirementAge} ans.",
           "requiredContribution": "Pour atteindre {target} à {retirementAge} ans, en partant de {savings} à {currentAge} ans avec un rendement annuel attendu de {rate}, vous devez cotiser {requiredContribution} par mois.",
@@ -3749,7 +3815,9 @@
         "columnOpeningBalance": "Solde d'ouverture",
         "columnContributions": "Cotisations",
         "columnInterestEarned": "Croissance générée",
-        "columnEndingBalance": "Solde de clôture"
+        "columnEndingBalance": "Solde de clôture",
+        "showAllRows": "Afficher les {count} lignes",
+        "showLess": "Afficher moins"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -3774,7 +3842,62 @@
         "intro": {
           "title": "Comment fonctionne ce calculateur",
           "paragraph1": "Cet outil projette un solde de retraite en appliquant le même calcul de valeur future que celui qui sous-tend tout plan d'épargne à long terme : un solde de départ croît de lui-même par capitalisation, tandis qu'une série de cotisations mensuelles régulières croît en parallèle comme une annuité capitalisée. Les deux éléments sont capitalisés mensuellement au taux de rendement annuel saisi, puis additionnés pour produire le solde projeté à l'âge de retraite choisi.",
-          "paragraph2": "Cette projection est volontairement simplifiée. Elle ne modélise ni les impôts sur les comptes à avantages fiscaux, ni les frais de gestion, ni l'inflation, ni les cotisations de l'employeur, ni les plafonds de cotisation annuels applicables aux comptes de retraite réels, aucun de ces éléments n'étant suffisamment homogène d'un pays, d'un type de compte ou d'un employeur à l'autre pour être intégré dans un calculateur généraliste unique. Utilisez-le pour comprendre la dynamique de la capitalisation dans le temps, et non comme un substitut à un plan de retraite complet établi avec un conseiller financier."
+          "paragraph2": "Cette projection est volontairement simplifiée. Elle ne modélise ni les impôts sur les comptes à avantages fiscaux, ni les frais de gestion, ni l'inflation, ni les cotisations de l'employeur, ni les plafonds de cotisation annuels applicables aux comptes de retraite réels, aucun de ces éléments n'étant suffisamment homogène d'un pays, d'un type de compte ou d'un employeur à l'autre pour être intégré dans un calculateur généraliste unique. Utilisez-le pour comprendre la dynamique de la capitalisation dans le temps, et non comme un substitut à un plan de retraite complet établi avec un conseiller financier.",
+          "diagram": {
+            "chartAriaLabel": "Diagramme en barres comparant le solde de retraite projeté selon que les cotisations débutent à 25 ans ou à 35 ans",
+            "ageLabel": "Début à {age} ans",
+            "contributedLabel": "Cotisé",
+            "growthLabel": "Croissance",
+            "caption": "Même cotisation mensuelle de 300 $ et rendement de 7 %, en commençant dix ans plus tôt : seulement 36 000 $ de cotisations totales en plus, mais plus de 420 000 $ de solde final en plus — uniquement grâce à cette décennie supplémentaire de capitalisation."
+          }
+        },
+        "variables": {
+          "title": "Variables impliquées",
+          "intro": "Cinq données définissent cette projection, et le mode choisi détermine laquelle le calculateur résout au lieu de vous la demander.",
+          "items": [
+            {
+              "name": "Âge actuel",
+              "description": "L'âge à partir duquel démarre la projection. Combiné à l'âge de la retraite, il fixe le nombre d'années de capitalisation dont dispose le plan — le levier le plus puissant de toute projection à long terme."
+            },
+            {
+              "name": "Âge de la retraite",
+              "description": "L'âge auquel les retraits sont censés commencer, marquant la fin de la période d'accumulation modélisée par ce calculateur. Dans l'onglet « Années jusqu'à l'objectif », cette valeur devient un résultat plutôt qu'une donnée d'entrée."
+            },
+            {
+              "name": "Épargne retraite actuelle",
+              "description": "Ce qui est déjà épargné pour la retraite aujourd'hui. Ce solde de départ se capitalise seul pendant toute la projection, indépendamment des cotisations futures qui s'y ajoutent."
+            },
+            {
+              "name": "Cotisation mensuelle",
+              "description": "Le montant ajouté au solde chaque mois à partir de maintenant. Comme le solde de départ, chaque cotisation se capitalise pendant les années restant jusqu'à la retraite — les cotisations les plus précoces croissent donc le plus."
+            },
+            {
+              "name": "Rendement annuel attendu",
+              "description": "Le taux de croissance annuel supposé, appliqué à l'ensemble du solde et capitalisé mensuellement. C'est une hypothèse, pas une garantie — les marchés réels varient d'une année à l'autre."
+            }
+          ]
+        },
+        "applications": {
+          "title": "La planification de la retraite en pratique",
+          "intro": "Le même calcul de capitalisation derrière ce calculateur répond à des questions différentes selon la variable que vous cherchez à résoudre.",
+          "items": [
+            {
+              "title": "Vérifier si vous êtes sur la bonne voie",
+              "description": "L'onglet « Solde projeté » prend tels quels votre âge, votre épargne et votre taux de cotisation actuels et projette où ils mènent — un moyen rapide de voir si vos habitudes actuelles suffiront pour une retraite confortable ou non."
+            },
+            {
+              "title": "Partir d'un objectif et remonter",
+              "description": "L'onglet « Cotisation requise » inverse la question : à partir d'un solde cible et d'un âge de retraite, il calcule la cotisation mensuelle nécessaire pour l'atteindre — souvent plus utile qu'une projection quand vous savez déjà pour quoi vous épargnez."
+            },
+            {
+              "title": "Déterminer quand vous pourrez partir à la retraite",
+              "description": "L'onglet « Années jusqu'à l'objectif » résout le temps plutôt que l'argent — utile pour quiconque se demande « à ce rythme d'épargne, combien d'années me faut-il encore avant d'atteindre mon objectif ? » plutôt que « combien aurai-je à un âge fixe ? »"
+            },
+            {
+              "title": "Mettre vos hypothèses à l'épreuve",
+              "description": "Comme un petit écart dans le taux de rendement supposé se transforme, sur des décennies, en une différence considérable, il vaut la peine de relancer la projection avec un taux plus bas que votre meilleure estimation pour voir à quel point votre plan dépend réellement de la performance des marchés."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples chiffrés",
@@ -3893,6 +4016,18 @@
         "monthlyPaymentLabel": "Mensualité",
         "monthlyPrincipalAndInterestLabel": "Capital et intérêts",
         "monthlyPropertyTaxLabel": "Taxe foncière",
+        "ratioBarFrontEndLabel": "Coût du logement / Revenu",
+        "ratioBarBackEndLabel": "Dette totale / Revenu",
+        "ratioBarCarLabel": "Mensualité auto / Revenu",
+        "ratioBarDscrLabel": "Service de la dette / Revenu",
+        "ratioBarCapSuffix": "Seuil recommandé de {cap} %",
+        "guidelinesCardTitle": "Repères de prêt en un coup d'œil",
+        "guidelinesCard": {
+          "home": "Logement — 28 % du revenu / 36 % dette totale",
+          "car": "Auto — 15 % du revenu / 36 % dette totale",
+          "personal": "Prêt personnel — 36 % dette totale",
+          "business": "Prêt professionnel — couverture de dette de 1,25x"
+        },
         "requiredAnnualIncomeLabel": "Revenu annuel requis",
         "bindingConstraintLabel": "Facteur limitant",
         "bindingConstraint": {
@@ -3989,7 +4124,38 @@
         "intro": {
           "title": "Comment fonctionne ce calculateur",
           "paragraph1": "Cet outil applique la règle 28/36, une directive de prêt largement utilisée : votre coût de logement mensuel total — capital, intérêts, taxe foncière, assurance habitation et charges de copropriété, regroupés sous le sigle PITI — ne devrait généralement pas dépasser 28 % de votre revenu mensuel brut, et votre endettement mensuel total, ce coût de logement inclus, ne devrait généralement pas dépasser 36 %. Le calculateur retient la plus basse de ces deux limites comme budget logement, puis remonte le calcul du prêt et de la taxe foncière — en tenant compte du fait qu'un logement plus cher entraîne aussi une taxe plus élevée — pour déterminer le prix de logement le plus élevé que ce budget peut soutenir.",
-          "paragraph2": "La règle 28/36 est un point de départ largement utilisé, pas un seuil universel. Les prêteurs réels fixent leurs propres limites, parfois plus élevées pour les emprunteurs très solvables ou certains programmes de prêt, et parfois plus basses pour d'autres. Utilisez cette estimation pour situer approximativement votre budget avant de chercher un logement ou de contacter un prêteur, non comme une garantie d'approbation du prêt."
+          "paragraph2": "La règle 28/36 est un point de départ largement utilisé, pas un seuil universel. Les prêteurs réels fixent leurs propres limites, parfois plus élevées pour les emprunteurs très solvables ou certains programmes de prêt, et parfois plus basses pour d'autres. Utilisez cette estimation pour situer approximativement votre budget avant de chercher un logement ou de contacter un prêteur, non comme une garantie d'approbation du prêt.",
+          "diagram": {
+            "chartAriaLabel": "Diagramme à barres montrant le prix de logement maximal abordable à quatre niveaux de revenu annuel différents, selon la règle 28/36",
+            "incomeLabel": "{income} $/an",
+            "caption": "Selon la règle 28/36, votre revenu détermine directement le plafond : avec ces hypothèses (acompte de 20 000 $, taux de 6,5 %, durée de 30 ans), le prix de logement maximal atteint environ 3,2 fois le revenu annuel, à chaque niveau de revenu présenté."
+          }
+        },
+        "variables": {
+          "title": "Variables impliquées",
+          "intro": "Ces cinq données constituent la base de la règle standard 28/36 sur l'onglet « Prix max. du logement » ; les quatre autres onglets du calculateur — Revenu requis, Prêt auto, Prêt personnel et Prêt professionnel — appliquent leurs propres plafonds apparentés à cette même logique d'endettement, présentés dans la section ci-dessous.",
+          "items": [
+            {
+              "name": "Revenu annuel brut",
+              "description": "Votre revenu total avant impôts et déductions. Les plafonds de 28 % (frontal) et de 36 % (global) sont tous deux calculés en pourcentage de ce chiffre, divisé en douze mensualités égales."
+            },
+            {
+              "name": "Autres paiements de dette mensuels",
+              "description": "Les dettes hors logement que vous portez déjà — prêts auto, prêts étudiants, minimums de carte de crédit, et autres. Chaque dollar engagé ici est un dollar en moins dans le budget de 36 % consacré au logement, ce qui explique pourquoi une dette existante plus élevée abaisse le prix de logement maximal."
+            },
+            {
+              "name": "Acompte",
+              "description": "L'argent que vous versez d'avance réduit le montant à emprunter, ce qui abaisse la mensualité de capital et d'intérêts requise et laisse davantage de marge dans votre budget logement pour un prix d'achat plus élevé."
+            },
+            {
+              "name": "Taux d'intérêt",
+              "description": "Le taux d'intérêt annuel du prêt, converti en taux mensuel et amorti sur la durée du prêt pour déterminer la part de chaque mensualité consacrée aux intérêts plutôt qu'au capital."
+            },
+            {
+              "name": "Taux de taxe foncière",
+              "description": "Un taux annuel, dépendant de la localisation, appliqué au prix du logement. Comme il revient chaque mois aux côtés du capital, des intérêts et de l'assurance, il est intégré directement au plafond de 28 %, plutôt que traité comme un coût ponctuel."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples chiffrés",
@@ -4012,6 +4178,28 @@
               "scenario": "Revenu de 60 000 $, dettes de 1 200 $/mois, acompte de 20 000 $, taux de 6 %, durée de 30 ans",
               "maxHomePrice": "90 778 $",
               "monthlyPayment": "600 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "L'accessibilité au logement en pratique",
+          "intro": "La règle 28/36 et ses variantes proches répondent à plusieurs questions d'emprunt distinctes, selon lequel des cinq onglets de ce calculateur vous utilisez.",
+          "items": [
+            {
+              "title": "Fixer un budget d'achat immobilier",
+              "description": "L'onglet « Prix max. du logement » transforme vos revenus, vos dettes et les conditions de prêt en un plafond unique — un chiffre à connaître avant de commencer à visiter des logements ou à s'attacher à des annonces au-delà de ce que vos finances peuvent réellement soutenir."
+            },
+            {
+              "title": "Vérifier une annonce spécifique dans l'autre sens",
+              "description": "L'onglet « Revenu requis » inverse la question : à partir d'un prix de logement donné, il calcule le revenu minimal nécessaire pour se le permettre selon la règle 28/36 — utile pour un acheteur qui vise une annonce précise, ou un agent immobilier qui qualifie rapidement un client."
+            },
+            {
+              "title": "Capacité d'emprunt pour un prêt auto ou personnel",
+              "description": "Les onglets « Prêt auto » et « Prêt personnel » appliquent la même logique d'endettement en dehors du logement — un plafond de 15 % du revenu combiné à la limite globale de 36 % pour une mensualité auto, et le seul budget de 36 % restant pour un prêt personnel non garanti."
+            },
+            {
+              "title": "Dimensionner un prêt professionnel par la couverture du chiffre d'affaires",
+              "description": "L'onglet « Prêt professionnel » utilise une logique de prêt entièrement différente : plutôt qu'un ratio de revenu personnel, il applique un ratio de couverture du service de la dette (DSCR), vérifiant que le chiffre d'affaires de l'entreprise couvre ses mensualités de dette totales avec la marge exigée par le prêteur."
             }
           ]
         },
@@ -4132,6 +4320,7 @@
         "placeholder": "Saisissez votre revenu et vos paiements de dettes mensuels pour voir votre ratio dette/revenu.",
         "emptyStateMessage": "Saisissez vos revenus et vos dettes et cliquez sur « Calculer » pour voir vos résultats.",
         "maxTotalMonthlyDebtLabel": "Dette mensuelle totale maximale",
+        "categoryReferenceTitle": "Repère des catégories de DTI",
         "maxAdditionalMonthlyDebtLabel": "Marge supplémentaire disponible",
         "sentences": {
           "ratio": "Avec un revenu mensuel brut de {income}, votre dette mensuelle totale place votre ratio dette/revenu à {ratio} — évalué comme {category}.",
@@ -4200,7 +4389,38 @@
         "intro": {
           "title": "Comment fonctionne ce calculateur",
           "paragraph1": "Cet outil calcule deux pourcentages liés. Le ratio de premier rang divise uniquement votre paiement de logement par votre revenu mensuel brut. Le ratio global — généralement simplement appelé ratio dette/revenu, ou DTI — divise l'ensemble de vos paiements de dettes mensuels, logement inclus, par ce même revenu. Les prêteurs se fient couramment au ratio global comme instantané unique de la part de votre revenu déjà engagée avant l'ajout de toute nouvelle dette.",
-          "paragraph2": "Le calculateur attribue aussi une catégorie à votre ratio global selon des seuils couramment cités en souscription hypothécaire : en dessous de 36 %, la charge de dette est généralement considérée comme saine ; entre 36 % et 43 %, de nombreux prêteurs conventionnels travaillent encore avec cette fourchette ; entre 43 % et 50 %, la limite dépasse celle utilisée pour de nombreux prêts hypothécaires qualifiés ; à 50 % ou plus, la charge de dette est largement considérée comme à haut risque. Ces seuils sont des repères courants, pas des règles universelles — différents prêteurs et programmes de prêt tracent ces limites différemment."
+          "paragraph2": "Le calculateur attribue aussi une catégorie à votre ratio global selon des seuils couramment cités en souscription hypothécaire : en dessous de 36 %, la charge de dette est généralement considérée comme saine ; entre 36 % et 43 %, de nombreux prêteurs conventionnels travaillent encore avec cette fourchette ; entre 43 % et 50 %, la limite dépasse celle utilisée pour de nombreux prêts hypothécaires qualifiés ; à 50 % ou plus, la charge de dette est largement considérée comme à haut risque. Ces seuils sont des repères courants, pas des règles universelles — différents prêteurs et programmes de prêt tracent ces limites différemment.",
+          "diagram": {
+            "chartAriaLabel": "Trois jauges montrant des ratios dette-revenu global d'exemple et la catégorie dans laquelle chacun se situe",
+            "exampleLabel": "Foyer {letter}",
+            "caption": "Les ratios globaux inférieurs à 36 % sont généralement considérés comme sains, 36-43 % comme gérables, 43-50 % comme élevés, et 50 % ou plus comme à très haut risque."
+          }
+        },
+        "variables": {
+          "title": "Variables impliquées",
+          "intro": "Ces cinq entrées alimentent à la fois le ratio de premier rang et le ratio global calculés par cet outil, même si celles qui comptent dépendent de l'onglet utilisé.",
+          "items": [
+            {
+              "name": "Revenu mensuel brut",
+              "description": "Votre revenu total avant impôts et autres retenues, saisi une seule fois et utilisé comme dénominateur pour les deux ratios calculés ici. Un revenu plus élevé abaisse directement les deux ratios pour le même montant de dette."
+            },
+            {
+              "name": "Paiement de logement",
+              "description": "Votre loyer, ou votre paiement hypothécaire incluant taxe foncière et assurance le cas échéant. C'est la seule entrée du ratio de premier rang, et elle entre aussi dans le total du ratio global aux côtés de toutes vos autres dettes récurrentes."
+            },
+            {
+              "name": "Autres dettes récurrentes",
+              "description": "Paiements de prêt auto, de prêt étudiant, minimums de carte de crédit et toute autre dette mensuelle, saisis séparément mais additionnés au logement pour former le total de dette mensuelle du ratio global."
+            },
+            {
+              "name": "Ratio global cible",
+              "description": "Le plafond que vous souhaitez ne pas dépasser, utilisé dans l'onglet « Dette maximale » pour calculer, à partir d'un ratio choisi — 36 % par défaut —, le paiement mensuel total (et supplémentaire) que ce ratio autorise compte tenu de votre revenu."
+            },
+            {
+              "name": "Paiement mensuel proposé",
+              "description": "Un nouveau prêt ou une nouvelle dette que vous envisagez, utilisé dans l'onglet « Comparaison de scénarios » pour voir précisément comment son ajout ferait évoluer votre ratio et votre catégorie avant de vous engager."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples chiffrés",
@@ -4228,6 +4448,28 @@
               "scenario": "Revenu de 5 000 $, logement 1 800 $, auto 400 $, prêt étudiant 300 $, carte de crédit 200 $, autre 100 $",
               "backEndRatio": "56 %",
               "category": "Très élevé"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Le DTI en pratique",
+          "intro": "Le même ratio répond à plusieurs besoins concrets distincts, selon l'onglet depuis lequel vous l'utilisez.",
+          "items": [
+            {
+              "title": "Préqualification hypothécaire",
+              "description": "Dans l'onglet « Ratio DTI », les prêteurs s'appuient fortement sur le ratio global pour qualifier un demandeur de prêt hypothécaire, en citant souvent les mêmes seuils de 36/43/50 % qu'utilise cet outil pour évaluer la marge dont dispose un emprunteur avant de contracter un nouveau prêt immobilier."
+            },
+            {
+              "title": "Marge budgétaire avant une nouvelle dette",
+              "description": "L'onglet « Dette maximale » détermine combien de paiement de dette mensuel supplémentaire tient encore sous un ratio cible — utile avant de chercher un prêt auto ou un prêt personnel, lorsque vous préférez connaître votre plafond à l'avance plutôt que de l'apprendre du prêteur."
+            },
+            {
+              "title": "Test de résistance pour un nouveau paiement précis",
+              "description": "L'onglet « Comparaison de scénarios » montre précisément comment un paiement proposé — un prêt auto, une nouvelle ligne de crédit — ferait évoluer votre ratio et votre catégorie, afin que vous voyiez l'impact d'une décision précise avant de vous y engager plutôt qu'après."
+            },
+            {
+              "title": "Bilans financiers généraux",
+              "description": "Au-delà de toute décision d'emprunt spécifique, le DTI reste un repère simple et bien connu qu'il vaut la peine de revoir périodiquement pour lui-même, de la même façon qu'un foyer pourrait suivre son taux d'épargne ou son patrimoine net au fil du temps."
             }
           ]
         },

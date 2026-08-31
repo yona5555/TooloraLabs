@@ -146,6 +146,13 @@ function buildWideTable(spec: PdfTable): HTMLTableElement {
  * nearest row boundary instead. The table's `<thead>` is rasterized
  * separately once and redrawn at the top of every subsequent page the table
  * continues onto, so column headers stay visible without re-measuring text.
+ *
+ * The footer is rasterized separately too, from a detached element never
+ * appended into the main content flow, and is redrawn fixed to the bottom of
+ * every page in the pagination loop below — its height is reserved out of
+ * every page's usable content area up front, so it never overlaps real
+ * content and never merely appears once whenever the content canvas happens
+ * to end.
  */
 export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<void> {
   const { locale, toolName, inputs, results, gauge, table, preparedFor, preparedForTitle, brandingEnhancements, filename } =
@@ -219,17 +226,31 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     container.appendChild(buildWideTable(table));
   }
 
+  // Rendered as a separate off-screen element (not appended into `container`'s scrollable
+  // content) and rasterized on its own, so it can be redrawn fixed to the bottom of *every*
+  // page below — rather than appearing once, inline, wherever the content canvas happened to
+  // end (which left every page but the last with no footer at all, and stranded it mid-page
+  // with blank space beneath it whenever content ended short of a full page).
+  const footerWrap = document.createElement("div");
+  footerWrap.dir = dir;
+  footerWrap.lang = locale;
+  footerWrap.style.cssText = `
+    position: fixed; top: 0; left: -10000px; width: 800px;
+    background: #ffffff; color: #18181b; font-family: ${fontFamily};
+    padding: 0 40px; box-sizing: border-box;
+  `;
   const footer = document.createElement("div");
-  footer.style.cssText = "margin-top:32px; padding-top:16px; border-top:1px solid #e4e4e7; text-align:center;";
+  footer.style.cssText = "padding:16px 0; border-top:1px solid #e4e4e7; text-align:center;";
   footer.innerHTML = brandingEnhancements
     ? `
       <div style="font-size:8px; color:#a1a1aa;">${escapeHtml(BRAND.siteUrl)} &middot; ${escapeHtml(BRAND.email)}</div>
       <div style="font-size:11px; color:#a1a1aa; margin-top:4px;">${escapeHtml(copy.footer)}</div>
     `
     : escapeHtml(copy.footer);
-  container.appendChild(footer);
+  footerWrap.appendChild(footer);
 
   document.body.appendChild(container);
+  document.body.appendChild(footerWrap);
 
   try {
     const scale = 2;
@@ -267,12 +288,19 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     }
 
     const canvas = await html2canvas(container, { scale, backgroundColor: "#ffffff" });
+    const footerCanvas = await html2canvas(footerWrap, { scale, backgroundColor: "#ffffff" });
 
     const pdf = new jsPDF({ unit: "mm", format: "a4" });
     const pageWidthMM = pdf.internal.pageSize.getWidth();
     const pageHeightMM = pdf.internal.pageSize.getHeight();
     const pxPerMM = canvas.width / pageWidthMM;
     const pageHeightPx = Math.floor(pageHeightMM * pxPerMM);
+    // footerCanvas shares the same 800px width basis and `scale` as the main content canvas
+    // (footerWrap mirrors container's outer width exactly), so its pixel height is already in
+    // the same coordinate space as pageHeightPx/pxPerMM — no separate unit conversion needed.
+    const footerHeightPx = footerCanvas.height;
+    const footerHeightMM = footerHeightPx / pxPerMM;
+    const usablePageHeightPx = pageHeightPx - footerHeightPx;
 
     let renderedHeight = 0;
     let firstPage = true;
@@ -286,14 +314,14 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
         renderedHeight < scheduleTableBottomPx;
       const headerOverlayPx = repeatsHeader ? scheduleHeaderHeightPx : 0;
 
-      const availablePagePx = pageHeightPx - headerOverlayPx;
+      const availablePagePx = usablePageHeightPx - headerOverlayPx;
       const remainingContentPx = canvas.height - renderedHeight;
       let sliceHeight = Math.min(availablePagePx, remainingContentPx);
 
       // Only snap to a row boundary when the page height is actually the limiting
       // factor — i.e. pagination is genuinely forced here. If all remaining content
-      // (including anything after the table, like the footer) already fits within
-      // this page, leave it alone so nothing gets needlessly cut off before the end.
+      // already fits within this page, leave it alone so nothing gets needlessly cut
+      // off before the end.
       const wasPageLimited = availablePagePx < remainingContentPx;
       if (wasPageLimited) {
         const naiveEnd = renderedHeight + sliceHeight;
@@ -327,6 +355,11 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
       }
       pdf.addImage(pageCanvas.toDataURL("image/png"), "PNG", 0, yOffsetMM, pageWidthMM, sliceHeight / pxPerMM);
 
+      // Drawn fixed to the bottom of every single page (not just the last one, and not
+      // wherever the content canvas happened to end) — content height was already reserved
+      // above via usablePageHeightPx, so this never overlaps real content.
+      pdf.addImage(footerCanvas.toDataURL("image/png"), "PNG", 0, pageHeightMM - footerHeightMM, pageWidthMM, footerHeightMM);
+
       renderedHeight += sliceHeight;
       firstPage = false;
     }
@@ -334,5 +367,6 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     pdf.save(filename);
   } finally {
     document.body.removeChild(container);
+    document.body.removeChild(footerWrap);
   }
 }

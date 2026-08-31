@@ -23,6 +23,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import HouseAffordabilityModeTabs from "./HouseAffordabilityModeTabs";
 import HouseAffordabilityInputPanel from "./HouseAffordabilityInputPanel";
 import HouseAffordabilityResult from "./HouseAffordabilityResult";
+import AffordabilityGuidelinesCard from "./AffordabilityGuidelinesCard";
 import BorrowingComparisonChart from "./BorrowingComparisonChart";
 import type { HouseAffordabilityMode, ComparisonRow } from "./types";
 
@@ -535,17 +536,22 @@ export default function HouseAffordabilityCalculator({ education }: { education:
                 loanTermYears={parseLocalizedNumber(activeLoanTermYears) || 0}
                 annualIncome={parseLocalizedNumber(annualIncome) || 0}
                 targetHomePrice={parseLocalizedNumber(targetHomePrice) || 0}
+                monthlyDebts={parseLocalizedNumber(monthlyDebts) || 0}
                 homePriceResult={homePriceResult}
                 requiredIncomeResult={requiredIncomeResult}
                 carAnnualIncome={parseLocalizedNumber(carAnnualIncome) || 0}
                 carDownPayment={parseLocalizedNumber(carDownPayment) || 0}
+                carMonthlyDebts={parseLocalizedNumber(carMonthlyDebts) || 0}
                 carResult={carResult}
                 personalAnnualIncome={parseLocalizedNumber(personalAnnualIncome) || 0}
+                personalMonthlyDebts={parseLocalizedNumber(personalMonthlyDebts) || 0}
                 personalResult={personalResult}
                 businessMonthlyRevenue={parseLocalizedNumber(businessMonthlyRevenue) || 0}
+                businessExistingDebt={parseLocalizedNumber(businessExistingDebt) || 0}
                 businessResult={businessResult}
               />
               <HouseAffordabilityModeTabs mode={mode} onModeChange={handleModeChange} />
+              <AffordabilityGuidelinesCard mode={mode} />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="house-affordability-calculator" category="calculators" />}

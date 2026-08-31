@@ -18,10 +18,12 @@ type RetirementYearlyBreakdownTableProps = {
 type ScheduleView = "annual" | "monthly";
 
 const SCROLL_CONTAINER_CLASS = "max-h-[560px] overflow-y-auto overflow-x-auto";
+const COLLAPSED_ROW_COUNT = 8;
 
 export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySchedule, monthlySchedule, digitStyle, currency }: RetirementYearlyBreakdownTableProps) {
   const t = useTranslations("tools.retirement-calculator");
   const [view, setView] = useState<ScheduleView>("annual");
+  const [expanded, setExpanded] = useState(false);
 
   const money = (value: number) => {
     const useCompact = Math.abs(value) >= 1_000_000;
@@ -53,7 +55,10 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
             <button
               key={value}
               type="button"
-              onClick={() => setView(value)}
+              onClick={() => {
+                setView(value);
+                setExpanded(false);
+              }}
               className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
                 view === value ? "bg-blue-600 text-white" : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
               }`}
@@ -64,7 +69,7 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
         </div>
       </div>
 
-      {view === "annual" ? (
+      {view === "annual" && (
         <div dir="ltr" className={`mt-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 ${SCROLL_CONTAINER_CLASS}`}>
           <table className="w-full min-w-[560px] text-sm">
             <thead className="sticky top-0 z-10">
@@ -77,7 +82,7 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
               </tr>
             </thead>
             <tbody>
-              {yearlySchedule.map((row) => (
+              {(expanded ? yearlySchedule : yearlySchedule.slice(0, COLLAPSED_ROW_COUNT)).map((row) => (
                 <tr key={row.year} className="border-t border-zinc-100 dark:border-zinc-800/60">
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.year}</td>
                   <td className="px-4 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.openingBalance)}</td>
@@ -89,7 +94,13 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
             </tbody>
           </table>
         </div>
-      ) : (
+      )}
+      {view === "annual" && yearlySchedule.length > COLLAPSED_ROW_COUNT && (
+        <button type="button" onClick={() => setExpanded((v) => !v)} className="mt-3 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400">
+          {expanded ? t("yearlyBreakdown.showLess") : t("yearlyBreakdown.showAllRows", { count: yearlySchedule.length })}
+        </button>
+      )}
+      {view === "monthly" && (
         <div dir="ltr" className={`mt-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 ${SCROLL_CONTAINER_CLASS}`}>
           <table className="w-full min-w-[640px] text-sm">
             <thead className="sticky top-0 z-10">
@@ -103,7 +114,7 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
               </tr>
             </thead>
             <tbody>
-              {monthlySchedule.map((row) => (
+              {(expanded ? monthlySchedule : monthlySchedule.slice(0, COLLAPSED_ROW_COUNT)).map((row) => (
                 <tr key={row.month} className="border-t border-zinc-100 dark:border-zinc-800/60">
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.month}</td>
                   <td className="px-4 py-2 font-mono text-zinc-500 dark:text-zinc-400">{row.year}</td>
@@ -116,6 +127,11 @@ export default function RetirementYearlyBreakdownTable({ hasCalculated, yearlySc
             </tbody>
           </table>
         </div>
+      )}
+      {view === "monthly" && monthlySchedule.length > COLLAPSED_ROW_COUNT && (
+        <button type="button" onClick={() => setExpanded((v) => !v)} className="mt-3 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400">
+          {expanded ? t("yearlyBreakdown.showLess") : t("yearlyBreakdown.showAllRows", { count: monthlySchedule.length })}
+        </button>
       )}
     </SectionCard>
   );

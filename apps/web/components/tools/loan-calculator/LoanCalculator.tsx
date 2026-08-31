@@ -18,6 +18,7 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import LoanModeTabs from "./LoanModeTabs";
+import LoanTipsCard from "./LoanTipsCard";
 import LoanInputPanel from "./LoanInputPanel";
 import LoanResult from "./LoanResult";
 import LoanAmortizationChart from "./LoanAmortizationChart";
@@ -357,6 +358,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
                 growthSchedule={mode === "bond" ? bondResult.schedule : deferredResult.schedule}
               />
               <LoanModeTabs mode={mode} onModeChange={handleModeChange} />
+              <LoanTipsCard />
             </div>
           }
           sidebar={

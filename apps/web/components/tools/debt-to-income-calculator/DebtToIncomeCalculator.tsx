@@ -2,7 +2,13 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { calculateDebtToIncome, calculateMaxAllowedDebt, type DebtToIncomeResult as RatioResult, type MaxAllowedDebtResult } from "@tooloralabs/tools";
+import {
+  calculateDebtToIncome,
+  calculateMaxAllowedDebt,
+  type DebtToIncomeResult as RatioResult,
+  type MaxAllowedDebtResult,
+  type DebtToIncomeCategory,
+} from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
 import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
@@ -13,7 +19,16 @@ import DebtToIncomeModeTabs from "./DebtToIncomeModeTabs";
 import DebtToIncomeInputPanel from "./DebtToIncomeInputPanel";
 import DebtToIncomeResult from "./DebtToIncomeResult";
 import DebtToIncomeScenarioChart from "./DebtToIncomeScenarioChart";
+import DtiCategoryReferenceCard from "./DtiCategoryReferenceCard";
 import type { DtiMode } from "./types";
+
+/** Same back-end-ratio thresholds `calculateDebtToIncome` buckets its own result into, applied here to the max-debt tab's target ratio (which has no computed result of its own to read a category off of). */
+function categorizeRatio(ratio: number): DebtToIncomeCategory {
+  if (ratio < 36) return "healthy";
+  if (ratio < 43) return "manageable";
+  if (ratio < 50) return "high";
+  return "veryHigh";
+}
 
 const DEFAULTS = {
   monthlyGrossIncome: "6000",
@@ -339,6 +354,8 @@ export default function DebtToIncomeCalculator({ education }: { education: React
               {mode === "scenario" && (
                 <DebtToIncomeScenarioChart hasCalculated={hasCalculated.scenario} before={scenarioBefore} after={scenarioAfter} digitStyle={digitStyle} currency={currency} />
               )}
+              {mode === "ratio" && <DtiCategoryReferenceCard activeCategory={ratioResult.category} />}
+              {mode === "maxDebt" && <DtiCategoryReferenceCard activeCategory={categorizeRatio(parseLocalizedNumber(targetBackEndRatio) || 0)} />}
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="debt-to-income-calculator" category="calculators" />}

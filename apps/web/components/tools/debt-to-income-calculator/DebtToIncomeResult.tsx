@@ -3,6 +3,8 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
+import DebtToIncomeBreakdownDonut from "./DebtToIncomeBreakdownDonut";
 import DebtToIncomeShareExportModal from "./DebtToIncomeShareExportModal";
 import type { DebtToIncomeResult as RatioResult, MaxAllowedDebtResult } from "@tooloralabs/tools";
 import type { CurrencyCode } from "@/lib/currency";
@@ -28,6 +30,22 @@ const CATEGORY_COLORS: Record<string, string> = {
   high: "text-orange-600 dark:text-orange-400",
   veryHigh: "text-red-600 dark:text-red-400",
 };
+
+const ZONE_STROKE_COLORS: Record<string, string> = {
+  healthy: "stroke-green-500 dark:stroke-green-400",
+  manageable: "stroke-amber-500 dark:stroke-amber-400",
+  high: "stroke-orange-500 dark:stroke-orange-400",
+  veryHigh: "stroke-red-500 dark:stroke-red-400",
+};
+
+function buildDtiGaugeZones(domainMax: number) {
+  return [
+    { key: "healthy", from: 0, to: 36, colorClass: ZONE_STROKE_COLORS.healthy },
+    { key: "manageable", from: 36, to: 43, colorClass: ZONE_STROKE_COLORS.manageable },
+    { key: "high", from: 43, to: 50, colorClass: ZONE_STROKE_COLORS.high },
+    { key: "veryHigh", from: 50, to: domainMax, colorClass: ZONE_STROKE_COLORS.veryHigh },
+  ];
+}
 
 function Stat({ title, value }: { title: string; value: string }) {
   return (
@@ -150,6 +168,41 @@ export default function DebtToIncomeResult({
           </>
         )}
       </div>
+
+      {(mode === "ratio" || mode === "scenario") &&
+        (() => {
+          const gaugeValue = mode === "ratio" ? ratioResult.backEndRatio : scenarioAfter.backEndRatio;
+          const gaugeCategory = mode === "ratio" ? ratioResult.category : scenarioAfter.category;
+          const domainMax = Math.max(70, Math.ceil((gaugeValue + 10) / 10) * 10);
+          return (
+            <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+              <RatioGauge
+                value={gaugeValue}
+                domainMin={0}
+                domainMax={domainMax}
+                zones={buildDtiGaugeZones(domainMax)}
+                valueLabel={percent(gaugeValue)}
+                caption={t(`aboveFold.category.${gaugeCategory}`)}
+                captionColorClass={CATEGORY_COLORS[gaugeCategory]}
+                ticks={[0, 36, 43, 50]}
+                tickFormatter={(tick) => `${tick}%`}
+              />
+            </div>
+          );
+        })()}
+
+      {mode === "maxDebt" && (
+        <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+          <DebtToIncomeBreakdownDonut
+            centerValue={money(maxDebtResult.maxTotalMonthlyDebt)}
+            centerLabel={t("aboveFold.maxTotalMonthlyDebtLabel")}
+            segments={[
+              { key: "existing", value: maxDebtResult.currentOtherDebt, label: t("form.existingMonthlyDebtLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+              { key: "additional", value: maxDebtResult.maxAdditionalMonthlyDebt, label: t("aboveFold.maxAdditionalMonthlyDebtLabel"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
+            ]}
+          />
+        </div>
+      )}
     </SectionCard>
   );
 }

@@ -3,6 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import RatioBar from "@/components/tool-ui/RatioBar";
 import HouseAffordabilityShareExportModal from "./HouseAffordabilityShareExportModal";
 import type {
   HouseAffordabilityResult as HomePriceResult,
@@ -24,19 +25,29 @@ type HouseAffordabilityResultProps = {
   loanTermYears: number;
   annualIncome: number;
   targetHomePrice: number;
+  monthlyDebts: number;
   homePriceResult: HomePriceResult;
   requiredIncomeResult: RequiredIncomeResult;
 
   carAnnualIncome: number;
   carDownPayment: number;
+  carMonthlyDebts: number;
   carResult: CarAffordabilityResult;
 
   personalAnnualIncome: number;
+  personalMonthlyDebts: number;
   personalResult: PersonalLoanAffordabilityResult;
 
   businessMonthlyRevenue: number;
+  businessExistingDebt: number;
   businessResult: BusinessLoanAffordabilityResult;
 };
+
+const RATIO_BAR_CAPS = { frontEnd: 28, backEnd: 36, car: 15, dscr: 80 };
+
+function pct(numerator: number, denominator: number): number {
+  return denominator > 0 ? (numerator / denominator) * 100 : 0;
+}
 
 function Stat({ title, value }: { title: string; value: string }) {
   return (
@@ -59,14 +70,18 @@ export default function HouseAffordabilityResult({
   loanTermYears,
   annualIncome,
   targetHomePrice,
+  monthlyDebts,
   homePriceResult,
   requiredIncomeResult,
   carAnnualIncome,
   carDownPayment,
+  carMonthlyDebts,
   carResult,
   personalAnnualIncome,
+  personalMonthlyDebts,
   personalResult,
   businessMonthlyRevenue,
+  businessExistingDebt,
   businessResult,
 }: HouseAffordabilityResultProps) {
   const t = useTranslations("tools.house-affordability-calculator");
@@ -206,6 +221,81 @@ export default function HouseAffordabilityResult({
         )}
         {mode === "personal" && <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(personalResult.monthlyPayment)} />}
         {mode === "business" && <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(businessResult.monthlyPayment)} />}
+      </div>
+
+      <div className="mt-5 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        {mode === "homePrice" && (
+          <>
+            <RatioBar
+              label={t("aboveFold.ratioBarFrontEndLabel")}
+              valuePercent={pct(homePriceResult.monthlyPayment, annualIncome / 12)}
+              capPercent={RATIO_BAR_CAPS.frontEnd}
+              valueLabel={percent(pct(homePriceResult.monthlyPayment, annualIncome / 12))}
+              capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.frontEnd })}
+            />
+            <RatioBar
+              label={t("aboveFold.ratioBarBackEndLabel")}
+              valuePercent={pct(homePriceResult.monthlyPayment + monthlyDebts, annualIncome / 12)}
+              capPercent={RATIO_BAR_CAPS.backEnd}
+              valueLabel={percent(pct(homePriceResult.monthlyPayment + monthlyDebts, annualIncome / 12))}
+              capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.backEnd })}
+            />
+          </>
+        )}
+        {mode === "requiredIncome" && (
+          <>
+            <RatioBar
+              label={t("aboveFold.ratioBarFrontEndLabel")}
+              valuePercent={pct(requiredIncomeResult.monthlyPayment, requiredIncomeResult.requiredAnnualIncome / 12)}
+              capPercent={RATIO_BAR_CAPS.frontEnd}
+              valueLabel={percent(pct(requiredIncomeResult.monthlyPayment, requiredIncomeResult.requiredAnnualIncome / 12))}
+              capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.frontEnd })}
+            />
+            <RatioBar
+              label={t("aboveFold.ratioBarBackEndLabel")}
+              valuePercent={pct(requiredIncomeResult.monthlyPayment + monthlyDebts, requiredIncomeResult.requiredAnnualIncome / 12)}
+              capPercent={RATIO_BAR_CAPS.backEnd}
+              valueLabel={percent(pct(requiredIncomeResult.monthlyPayment + monthlyDebts, requiredIncomeResult.requiredAnnualIncome / 12))}
+              capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.backEnd })}
+            />
+          </>
+        )}
+        {mode === "car" && (
+          <>
+            <RatioBar
+              label={t("aboveFold.ratioBarCarLabel")}
+              valuePercent={pct(carResult.monthlyPayment, carAnnualIncome / 12)}
+              capPercent={RATIO_BAR_CAPS.car}
+              valueLabel={percent(pct(carResult.monthlyPayment, carAnnualIncome / 12))}
+              capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.car })}
+            />
+            <RatioBar
+              label={t("aboveFold.ratioBarBackEndLabel")}
+              valuePercent={pct(carResult.monthlyPayment + carMonthlyDebts, carAnnualIncome / 12)}
+              capPercent={RATIO_BAR_CAPS.backEnd}
+              valueLabel={percent(pct(carResult.monthlyPayment + carMonthlyDebts, carAnnualIncome / 12))}
+              capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.backEnd })}
+            />
+          </>
+        )}
+        {mode === "personal" && (
+          <RatioBar
+            label={t("aboveFold.ratioBarBackEndLabel")}
+            valuePercent={pct(personalResult.monthlyPayment + personalMonthlyDebts, personalAnnualIncome / 12)}
+            capPercent={RATIO_BAR_CAPS.backEnd}
+            valueLabel={percent(pct(personalResult.monthlyPayment + personalMonthlyDebts, personalAnnualIncome / 12))}
+            capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.backEnd })}
+          />
+        )}
+        {mode === "business" && (
+          <RatioBar
+            label={t("aboveFold.ratioBarDscrLabel")}
+            valuePercent={pct(businessResult.monthlyPayment + businessExistingDebt, businessMonthlyRevenue)}
+            capPercent={RATIO_BAR_CAPS.dscr}
+            valueLabel={percent(pct(businessResult.monthlyPayment + businessExistingDebt, businessMonthlyRevenue))}
+            capLabel={t("aboveFold.ratioBarCapSuffix", { cap: RATIO_BAR_CAPS.dscr })}
+          />
+        )}
       </div>
     </SectionCard>
   );

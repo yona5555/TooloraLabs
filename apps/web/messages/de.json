@@ -2910,6 +2910,9 @@
         "inputTitle": "Ihre Investition",
         "resultTitle": "Prognostiziertes Wachstum",
         "futureValueLabel": "Zukünftiger Wert",
+        "ruleOf72Title": "Die 72er-Regel",
+        "ruleOf72Intro": "Eine schnelle Kopfrechen-Faustregel, um abzuschätzen, wie lange sich eine Anlage verdoppelt: 72 durch die jährliche Wachstumsrate teilen.",
+        "ruleOf72Result": "Bei {rate}% verdoppelt sich Ihr Geld etwa alle {years} Jahre.",
         "principalLabel": "Startbetrag",
         "contributionsLabel": "Einzahlungen",
         "interestLabel": "Erzielte Zinsen",
@@ -3208,6 +3211,12 @@
         "emptyStateMessage": "Geben Sie Ihre Kreditdetails ein und klicken Sie auf \"Berechnen\", um Ihre Ergebnisse zu sehen.",
         "totalLabel": "Gesamt",
         "yearsUnit": "Jahre",
+        "loanTipsTitle": "Tipps zum Kreditvergleich",
+        "loanTips": {
+          "compounding": "Wie oft Zinsen verzinst werden und wie oft Sie zahlen, beeinflussen beide die tatsächlichen Kosten — häufigere Verzinsung erhöht sie, häufigere Zahlungen senken sie.",
+          "extraPayments": "Schon kleine Sondertilgungen auf die Restschuld können die Gesamtzinsen spürbar senken und die Laufzeit verkürzen.",
+          "apr": "Vergleichen Sie den effektiven Jahreszins, nicht nur den nominalen Zinssatz — Gebühren im effektiven Zins können zeigen, welches Angebot wirklich günstiger ist."
+        },
         "resultLabels": {
           "payment": "Zahlungsbetrag",
           "amountDue": "Fälliger Betrag bei Endfälligkeit",
@@ -3493,6 +3502,12 @@
         "totalPaymentLabel": "Gesamtzahlung",
         "totalInterestLabel": "Gesamtzinsen",
         "requiredPaymentLabel": "Erforderliche monatliche Rate",
+        "borrowingTipsTitle": "Tipps zur Kreditaufnahme",
+        "borrowingTips": {
+          "rate": "Schon 1-2 % Zinsunterschied können den leistbaren Kreditbetrag stärker verändern als erwartet — ein Vergleich lohnt sich.",
+          "term": "Eine kürzere Laufzeit bedeutet weniger Gesamtzinsen, aber eine höhere monatliche Rate — bei einer längeren Laufzeit ist es umgekehrt.",
+          "budget": "Die meisten Kreditgeber möchten, dass Ihre gesamten monatlichen Schuldenzahlungen, einschließlich dieser, unter etwa 36 % Ihres Bruttoeinkommens bleiben."
+        },
         "emptyStateMessage": "Geben Sie Ihre Daten ein und klicken Sie auf \"Berechnen\", um Ihre Ergebnisse zu sehen.",
         "sentences": {
           "maxLoan": "Bei einer monatlichen Rate von {payment} beträgt der maximale Kreditbetrag, den Sie sich leisten können, {amount}.",
@@ -3548,7 +3563,34 @@
         "intro": {
           "title": "So funktioniert dieser Rechner",
           "paragraph1": "Dieses Tool wendet die übliche Berechnung der Kreditrate umgekehrt an. Statt von einem Kreditbetrag auszugehen und die monatliche Rate zu berechnen, geht es von einer von Ihnen gewählten monatlichen Rate aus und berechnet den größten Kreditbetrag, den diese Rate bis zum Ende der von Ihnen gewählten Laufzeit vollständig zurückzahlen kann – Tilgung und Zinsen. Die zugrunde liegende Mathematik ist dieselbe Barwert-einer-Rentenformel, die jedem Tilgungsdarlehen mit festem Zinssatz zugrunde liegt; sie wird nur nach einer anderen Unbekannten aufgelöst.",
-          "paragraph2": "Das macht es zu einem Budgetierungs- statt einem Kreditsuch-Werkzeug: Statt zuerst einen Kredit zu finden und dann herauszufinden, was er kostet, gehen Sie von dem aus, was Sie sich monatlich tatsächlich leisten können, und ermitteln, welchen Kreditbetrag das trägt – bevor Sie überhaupt anfangen, nach einem Auto, einem Kreditgeber oder etwas anderem zu suchen, das finanziert werden soll."
+          "paragraph2": "Das macht es zu einem Budgetierungs- statt einem Kreditsuch-Werkzeug: Statt zuerst einen Kredit zu finden und dann herauszufinden, was er kostet, gehen Sie von dem aus, was Sie sich monatlich tatsächlich leisten können, und ermitteln, welchen Kreditbetrag das trägt – bevor Sie überhaupt anfangen, nach einem Auto, einem Kreditgeber oder etwas anderem zu suchen, das finanziert werden soll.",
+          "diagram": {
+            "chartAriaLabel": "Balkendiagramm: maximaler Kreditbetrag, den eine monatliche Rate von 300 $ bei 5 %, 8 % und 11 % Jahreszins jeweils über eine Laufzeit von 5 Jahren trägt",
+            "rateLabel": "{rate} % Zins",
+            "caption": "Gleiche monatliche Rate von 300 $, gleiche Laufzeit von 5 Jahren — nur der Zinssatz ändert sich: Bei 5 % trägt die Rate einen Kredit von 15.897 $, bei 11 % nur noch 13.798 $. Ein Unterschied von 6 Prozentpunkten macht rund 2.100 $ an Kreditspielraum aus — ein Grund, Angebote zu vergleichen."
+          }
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Dieser Rechner arbeitet in zwei Modi – er berechnet entweder den maximalen Kreditbetrag, den ein monatliches Ratenbudget trägt, oder die monatliche Rate, die ein bestimmter Kreditbetrag erfordert – und diese vier Eingaben fließen in beide ein.",
+          "items": [
+            {
+              "name": "Monatliche Rate, die Sie sich leisten können",
+              "description": "Die Budgetobergrenze, die Sie im Tab „Max. Kredit“ eingeben. Der Rechner behandelt sie als fest und löst die Barwert-einer-Rentenformel rückwärts nach dem größten Kreditbetrag auf, den diese Rate bis zum Ende der Laufzeit vollständig zurückzahlen kann."
+            },
+            {
+              "name": "Kreditbetrag",
+              "description": "Der Betrag, den Sie im Tab „Erforderliche Rate“ eingeben, wenn Sie bereits einen konkreten Preis oder ein konkretes Angebot vor Augen haben. Hier wendet der Rechner dieselbe Formel vorwärts an und ermittelt stattdessen die monatliche Rate, die dieser Betrag erfordert."
+            },
+            {
+              "name": "Jährlicher Zinssatz",
+              "description": "Der Jahreszins des Kreditgebers, der vor der Tilgungsberechnung intern in einen Monatszins umgerechnet wird. Da er sich über die gesamte Laufzeit monatlich verzinst, kann schon ein Unterschied von ein oder zwei Prozentpunkten den leistbaren Kreditbetrag oder die erforderliche Rate spürbar verschieben."
+            },
+            {
+              "name": "Kreditlaufzeit",
+              "description": "Die Anzahl der Jahre, über die der Kredit zurückgezahlt wird. Eine längere Laufzeit verteilt dieselbe Rate auf mehr Monate, was den leistbaren Kreditbetrag im Tab „Max. Kredit“ erhöht und die erforderliche Rate im Tab „Erforderliche Rate“ senkt – erhöht dabei aber in beiden Fällen die insgesamt gezahlten Zinsen."
+            }
+          ]
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -3566,6 +3608,24 @@
               "scenario": "Budget 500 $/Monat, 7% Jahreszins, 4 Jahre Laufzeit",
               "maxLoanAmount": "20.880,10 $",
               "totalInterest": "3.119,90 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Kreditfähigkeit in der Praxis",
+          "intro": "Die beiden Tabs dieses Rechners beantworten unterschiedliche praktische Fragen, je nachdem, ob Sie von einem Budget oder von einem konkreten Angebot ausgehen.",
+          "items": [
+            {
+              "title": "Budgetieren, bevor Sie mit der Suche beginnen",
+              "description": "Der Tab „Max. Kredit“ verwandelt eine monatliche Rate, die Sie sich zutrauen, in eine Kreditobergrenze, bevor Sie anfangen, Autos, Privatkredite oder anderes Finanziertes zu vergleichen – so kennen Sie Ihr Limit, bevor Sie sich in etwas verlieben, das darüber liegt."
+            },
+            {
+              "title": "Ein konkretes Angebot rückwärts prüfen",
+              "description": "Der Tab „Erforderliche Rate“ funktioniert umgekehrt: Haben Sie bereits einen bestimmten Kreditbetrag gefunden, etwa den Preis eines Autos oder ein Privatkreditangebot, zeigt er Ihnen, welche monatliche Rate dieser Betrag tatsächlich erfordert, bevor Sie sich darauf festlegen."
+            },
+            {
+              "title": "Zins- und Laufzeitangebote nebeneinander vergleichen",
+              "description": "Da beide Tabs empfindlich auf Zins und Laufzeit reagieren, lassen sich dieselben Zahlen mit dem Zins- und Laufzeitangebot eines konkurrierenden Kreditgebers schnell gegenrechnen, um zu sehen, welches Angebot wirklich günstiger ist – derselbe Vergleich, der auch hinter der Karte mit Tipps zum Leihen und dem Laufzeitvergleichsdiagramm dieser Seite steckt."
             }
           ]
         },
@@ -3691,6 +3751,12 @@
         "totalContributedLabel": "Gesamtbeiträge",
         "totalGrowthLabel": "Gesamtwachstum",
         "retirementAgeReachedLabel": "Erreichtes Alter",
+        "ageProgressLabel": "Altersfortschritt zum Ziel",
+        "ageProgressCurrent": "Jetzt: {age} Jahre",
+        "ageProgressTarget": "Ziel erreicht: {age} Jahre",
+        "milestonesCardTitle": "Meilensteine für die Altersvorsorge",
+        "milestonesCardRow": "Bis zum Alter {age}",
+        "milestonesCardNote": "Eine oft zitierte Faustregel zum Gehaltsvielfachen (Fidelity) — eine allgemeine Orientierung, keine persönliche Beratung.",
         "sentences": {
           "endAmount": "Beginnend im Alter von {currentAge} Jahren mit {savings} Ersparnissen und einem monatlichen Beitrag von {contribution} bei einer erwarteten jährlichen Rendite von {rate} wird Ihr Saldo im Alter von {retirementAge} voraussichtlich {balance} betragen.",
           "requiredContribution": "Um im Alter von {retirementAge} {target} zu erreichen, ausgehend von {savings} im Alter von {currentAge} bei einer erwarteten jährlichen Rendite von {rate}, müssen Sie monatlich {requiredContribution} beitragen.",
@@ -3749,7 +3815,9 @@
         "columnOpeningBalance": "Anfangssaldo",
         "columnContributions": "Beiträge",
         "columnInterestEarned": "Erzieltes Wachstum",
-        "columnEndingBalance": "Endsaldo"
+        "columnEndingBalance": "Endsaldo",
+        "showAllRows": "Alle {count} Zeilen anzeigen",
+        "showLess": "Weniger anzeigen"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -3774,7 +3842,62 @@
         "intro": {
           "title": "So funktioniert dieser Rechner",
           "paragraph1": "Dieses Tool projiziert einen Altersvorsorge-Kontostand mit derselben Endwertberechnung, die jedem langfristigen Sparplan zugrunde liegt: Ein Startguthaben wächst durch Zinseszins von selbst, während eine Reihe regelmäßiger monatlicher Beiträge parallel dazu als verzinste Rentenzahlung wächst. Beide Teile werden monatlich mit dem eingegebenen jährlichen Renditesatz verzinst und anschließend addiert, um den projizierten Kontostand zum gewählten Renteneintrittsalter zu ergeben.",
-          "paragraph2": "Die Projektion ist bewusst vereinfacht. Sie bildet weder Steuern auf steuerbegünstigten Konten noch Anlagegebühren, Inflation, Arbeitgeberzuschüsse oder die jährlichen Beitragsgrenzen ab, die für reale Altersvorsorgekonten gelten – keiner dieser Faktoren ist über Länder, Kontotypen oder Arbeitgeber hinweg einheitlich genug, um in einen einzigen, allgemeinen Rechner integriert zu werden. Nutzen Sie ihn, um die Dynamik des Zinseszinses über die Zeit zu verstehen, nicht als Ersatz für einen vollständigen, mit einem Finanzberater erstellten Altersvorsorgeplan."
+          "paragraph2": "Die Projektion ist bewusst vereinfacht. Sie bildet weder Steuern auf steuerbegünstigten Konten noch Anlagegebühren, Inflation, Arbeitgeberzuschüsse oder die jährlichen Beitragsgrenzen ab, die für reale Altersvorsorgekonten gelten – keiner dieser Faktoren ist über Länder, Kontotypen oder Arbeitgeber hinweg einheitlich genug, um in einen einzigen, allgemeinen Rechner integriert zu werden. Nutzen Sie ihn, um die Dynamik des Zinseszinses über die Zeit zu verstehen, nicht als Ersatz für einen vollständigen, mit einem Finanzberater erstellten Altersvorsorgeplan.",
+          "diagram": {
+            "chartAriaLabel": "Balkendiagramm: projizierter Altersvorsorge-Kontostand bei Beitragsbeginn mit 25 gegenüber 35 Jahren",
+            "ageLabel": "Start mit {age}",
+            "contributedLabel": "Eingezahlt",
+            "growthLabel": "Wachstum",
+            "caption": "Gleicher monatlicher Beitrag von 300 $ und 7 % Rendite, aber zehn Jahre früher gestartet: nur 36.000 $ mehr insgesamt eingezahlt, aber über 420.000 $ mehr im Endsaldo — allein durch das zusätzliche Jahrzehnt Zinseszins."
+          }
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Fünf Eingaben bestimmen diese Prognose, und der gewählte Modus legt fest, welche davon der Rechner löst, statt sie von Ihnen abzufragen.",
+          "items": [
+            {
+              "name": "Aktuelles Alter",
+              "description": "Das Alter, von dem aus die Prognose startet. Zusammen mit dem Renteneintrittsalter bestimmt es, wie viele Jahre Zinseszins dem Plan zur Verfügung stehen — der größte Hebel bei jeder langfristigen Prognose."
+            },
+            {
+              "name": "Renteneintrittsalter",
+              "description": "Das Alter, ab dem Entnahmen angenommen werden, und damit das Ende des in diesem Rechner abgebildeten Ansparzeitraums. Im Tab „Jahre bis zum Ziel“ wird daraus ein Ergebnis statt einer Eingabe."
+            },
+            {
+              "name": "Aktuelles Altersvorsorge-Guthaben",
+              "description": "Was heute bereits für die Rente angespart ist. Dieses Startguthaben verzinst sich über die gesamte Prognose hinweg unabhängig von künftig hinzukommenden Beiträgen."
+            },
+            {
+              "name": "Monatlicher Beitrag",
+              "description": "Der Betrag, der von jetzt an jeden Monat zum Guthaben hinzukommt. Wie das Startguthaben verzinst sich jeder Beitrag für die verbleibenden Jahre bis zur Rente — frühere Beiträge wachsen daher am meisten."
+            },
+            {
+              "name": "Erwartete jährliche Rendite",
+              "description": "Die angenommene jährliche Wachstumsrate, die auf den gesamten Kontostand angewendet und monatlich verzinst wird. Es handelt sich um eine Annahme, keine Garantie — reale Märkte schwanken von Jahr zu Jahr."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Altersvorsorgeplanung in der Praxis",
+          "intro": "Dieselbe Zinseszinsrechnung hinter diesem Rechner beantwortet je nach gesuchter Variable unterschiedliche Fragen.",
+          "items": [
+            {
+              "title": "Prüfen, ob Sie auf Kurs sind",
+              "description": "Der Tab „Projizierter Kontostand“ nimmt Ihr aktuelles Alter, Guthaben und Ihre Beitragsrate wie eingegeben und projiziert, wohin sie führen — ein schneller Weg zu erkennen, ob Ihre aktuellen Gewohnheiten für eine komfortable Rente reichen oder nicht."
+            },
+            {
+              "title": "Rückwärts von einem Ziel aus rechnen",
+              "description": "Der Tab „Erforderliche Sparrate“ dreht die Frage um: Ausgehend von Zielguthaben und Renteneintrittsalter berechnet er den nötigen monatlichen Beitrag — oft nützlicher als eine Prognose, wenn Sie bereits wissen, wofür Sie sparen."
+            },
+            {
+              "title": "Herausfinden, wann Sie in Rente gehen können",
+              "description": "Der Tab „Jahre bis zum Ziel“ löst nach der Zeit statt nach dem Geld — nützlich für alle, die fragen „Bei dieser Sparrate, wie viele Jahre noch bis zu meinem Ziel?“ statt „Wie viel habe ich mit einem festen Alter?“"
+            },
+            {
+              "title": "Ihre Annahmen auf die Probe stellen",
+              "description": "Da eine kleine Änderung der angenommenen Rendite sich über Jahrzehnte zu einem großen Unterschied aufsummiert, lohnt es sich, die Prognose auch mit einer niedrigeren als Ihrer besten Schätzung durchzurechnen, um zu sehen, wie empfindlich Ihr Plan wirklich auf die Marktentwicklung reagiert."
+            }
+          ]
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -3893,6 +4016,18 @@
         "monthlyPaymentLabel": "Monatliche Rate",
         "monthlyPrincipalAndInterestLabel": "Tilgung & Zinsen",
         "monthlyPropertyTaxLabel": "Grundsteuer",
+        "ratioBarFrontEndLabel": "Wohnkosten / Einkommen",
+        "ratioBarBackEndLabel": "Gesamtschulden / Einkommen",
+        "ratioBarCarLabel": "Kfz-Rate / Einkommen",
+        "ratioBarDscrLabel": "Schuldendienst / Umsatz",
+        "ratioBarCapSuffix": "Richtwert {cap}%",
+        "guidelinesCardTitle": "Kreditrichtwerte im Überblick",
+        "guidelinesCard": {
+          "home": "Haus — 28 % Wohnkosten / 36 % Gesamtschulden",
+          "car": "Auto — 15 % des Einkommens / 36 % Gesamtschulden",
+          "personal": "Privatkredit — 36 % Gesamtschulden",
+          "business": "Geschäftskredit — 1,25-facher Schuldendienstdeckungsgrad"
+        },
         "requiredAnnualIncomeLabel": "Erforderliches Jahreseinkommen",
         "bindingConstraintLabel": "Limitierender Faktor",
         "bindingConstraint": {
@@ -3989,7 +4124,38 @@
         "intro": {
           "title": "So funktioniert dieser Rechner",
           "paragraph1": "Dieses Tool wendet die 28/36-Regel an, eine weit verbreitete Kreditvergaberichtlinie: Ihre monatlichen Gesamtwohnkosten – Tilgung, Zinsen, Grundsteuer, Wohngebäudeversicherung und Hausgeld, zusammen als PITI bezeichnet – sollten in der Regel 28 % Ihres monatlichen Bruttoeinkommens nicht überschreiten, und Ihre gesamten monatlichen Schuldenzahlungen einschließlich dieser Wohnkosten sollten in der Regel 36 % nicht überschreiten. Der Rechner verwendet die niedrigere dieser beiden Grenzen als Ihr Wohnbudget und rechnet dann rückwärts durch die Kredittilgungs- und Grundsteuerrechnung – unter Berücksichtigung der Tatsache, dass ein höherer Immobilienpreis auch eine höhere Steuer bedeutet –, um den höchsten Immobilienpreis zu ermitteln, den dieses Budget tragen kann.",
-          "paragraph2": "Die 28/36-Regel ist ein weit verbreiteter Ausgangspunkt, keine universelle Obergrenze. Tatsächliche Kreditgeber legen ihre eigenen Grenzen fest, die für gut qualifizierte Kreditnehmer oder bestimmte Kreditprogramme höher und für andere niedriger ausfallen können. Nutzen Sie diese Schätzung, um ungefähr einzuschätzen, wo Ihr Budget liegt, bevor Sie mit der Haussuche beginnen oder mit einem Kreditgeber sprechen, nicht als Garantie für eine Kreditgenehmigung."
+          "paragraph2": "Die 28/36-Regel ist ein weit verbreiteter Ausgangspunkt, keine universelle Obergrenze. Tatsächliche Kreditgeber legen ihre eigenen Grenzen fest, die für gut qualifizierte Kreditnehmer oder bestimmte Kreditprogramme höher und für andere niedriger ausfallen können. Nutzen Sie diese Schätzung, um ungefähr einzuschätzen, wo Ihr Budget liegt, bevor Sie mit der Haussuche beginnen oder mit einem Kreditgeber sprechen, nicht als Garantie für eine Kreditgenehmigung.",
+          "diagram": {
+            "chartAriaLabel": "Balkendiagramm: maximal erschwinglicher Immobilienpreis bei vier verschiedenen Jahreseinkommen, nach der 28/36-Regel",
+            "incomeLabel": "{income} $/Jahr",
+            "caption": "Nach der 28/36-Regel bestimmt Ihr Einkommen die Obergrenze direkt: Bei diesen Annahmen (20.000 $ Anzahlung, 6,5 % Zinssatz, 30 Jahre Laufzeit) beläuft sich der maximale Immobilienpreis auf etwa das 3,2-Fache des Jahreseinkommens – bei jeder hier gezeigten Einkommensstufe."
+          }
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Diese fünf Eingaben bilden die Grundlage der 28/36-Regel im Tab „Max. Immobilienpreis“; die übrigen vier Tabs des Rechners – Erforderliches Einkommen, Autokredit, Privatkredit und Geschäftskredit – wenden auf dieselbe Schulden-Einkommens-Logik ihre eigenen, verwandten Obergrenzen an, die im folgenden Abschnitt behandelt werden.",
+          "items": [
+            {
+              "name": "Brutto-Jahreseinkommen",
+              "description": "Ihr gesamtes Einkommen vor Steuern und Abzügen. Sowohl die 28%-Obergrenze für Wohnkosten als auch die 36%-Obergrenze für Gesamtschulden werden als Prozentsatz dieser Zahl berechnet, aufgeteilt auf zwölf gleiche Monatsbeträge."
+            },
+            {
+              "name": "Sonstige monatliche Schuldenzahlungen",
+              "description": "Nicht wohnungsbezogene Schulden, die Sie bereits tragen – Autokredite, Studienkredite, Mindestzahlungen für Kreditkarten und Ähnliches. Jeder hier gebundene Dollar fehlt im 36%-Budget für Wohnkosten, weshalb höhere bestehende Schulden den maximalen Immobilienpreis senken."
+            },
+            {
+              "name": "Anzahlung",
+              "description": "Das Bargeld, das Sie im Voraus einbringen, verringert die benötigte Kreditsumme, senkt dadurch die erforderliche monatliche Tilgungs- und Zinsrate und lässt mehr von Ihrem Wohnbudget für einen höheren Kaufpreis übrig."
+            },
+            {
+              "name": "Zinssatz",
+              "description": "Der jährliche Zinssatz des Kredits, umgerechnet in einen monatlichen Satz und über die Kreditlaufzeit amortisiert, um zu bestimmen, wie viel jeder monatlichen Rate auf Zinsen statt auf Tilgung entfällt."
+            },
+            {
+              "name": "Grundsteuersatz",
+              "description": "Ein jährlicher, standortabhängiger Satz, der auf den Immobilienpreis angewendet wird. Da er wie Tilgung, Zinsen und Versicherung monatlich wiederkehrt, fließt er direkt in die 28%-Obergrenze für Wohnkosten ein, statt als einmalige Kostenposition behandelt zu werden."
+            }
+          ]
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -4012,6 +4178,28 @@
               "scenario": "60.000 $ Einkommen, 1.200 $/Monat Schulden, 20.000 $ Anzahlung, 6% Zinssatz, 30 Jahre Laufzeit",
               "maxHomePrice": "90.778 $",
               "monthlyPayment": "600 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Erschwinglichkeitsrechner in der Praxis",
+          "intro": "Die 28/36-Regel und ihre nahen Verwandten beantworten je nach genutztem Tab dieses Rechners unterschiedliche Kreditfragen.",
+          "items": [
+            {
+              "title": "Ein Budget für die Haussuche festlegen",
+              "description": "Der Tab „Max. Immobilienpreis“ verwandelt Einkommen, Schulden und Kreditbedingungen in eine einzige Obergrenze – ein Wert, den es sich lohnt zu kennen, bevor Sie mit Besichtigungen beginnen oder sich in Angebote verlieben, die Ihr Budget übersteigen."
+            },
+            {
+              "title": "Eine bestimmte Immobilie rückwärts prüfen",
+              "description": "Der Tab „Erforderliches Einkommen“ dreht die Frage um: Ausgehend von einem Immobilienpreis berechnet er das nach der 28/36-Regel mindestens erforderliche Einkommen – nützlich für Käufer mit einem bestimmten Objekt im Blick oder für Makler, die einen Kunden schnell einschätzen wollen."
+            },
+            {
+              "title": "Kreditfähigkeit für Auto- und Privatkredite",
+              "description": "Die Tabs „Autokredit“ und „Privatkredit“ wenden dieselbe Schulden-Einkommens-Logik außerhalb des Wohnbereichs an – eine 15%-Einkommensobergrenze plus die 36%-Gesamtschuldengrenze für eine Autorate, und für einen unbesicherten Privatkredit allein das verbleibende 36%-Budget."
+            },
+            {
+              "title": "Geschäftskredite anhand der Schuldendienstdeckung bemessen",
+              "description": "Der Tab „Geschäftskredit“ verwendet eine völlig andere Kreditlogik: Statt eines persönlichen Einkommensverhältnisses prüft er anhand einer Schuldendienstdeckungsquote (DSCR), ob der Umsatz eines Unternehmens die gesamten monatlichen Schuldenzahlungen um die vom Kreditgeber geforderte Marge übersteigt."
             }
           ]
         },
@@ -4132,6 +4320,7 @@
         "placeholder": "Geben Sie Ihr Einkommen und Ihre monatlichen Schuldenzahlungen ein, um Ihr Schulden-Einkommen-Verhältnis zu sehen.",
         "emptyStateMessage": "Geben Sie Ihr Einkommen und Ihre Schulden ein und klicken Sie auf \"Berechnen\", um Ihre Ergebnisse zu sehen.",
         "maxTotalMonthlyDebtLabel": "Maximale monatliche Gesamtschuld",
+        "categoryReferenceTitle": "DTI-Kategorien im Überblick",
         "maxAdditionalMonthlyDebtLabel": "Verfügbarer zusätzlicher Spielraum",
         "sentences": {
           "ratio": "Bei einem monatlichen Bruttoeinkommen von {income} liegt Ihr Schulden-Einkommen-Verhältnis mit Ihrer gesamten monatlichen Schuld bei {ratio} — eingestuft als {category}.",
@@ -4200,7 +4389,38 @@
         "intro": {
           "title": "So funktioniert dieser Rechner",
           "paragraph1": "Dieses Tool berechnet zwei verwandte Prozentsätze. Das Front-End-Verhältnis teilt allein Ihre Wohnkosten durch Ihr monatliches Bruttoeinkommen. Das Back-End-Verhältnis — meist einfach als Schulden-Einkommen-Verhältnis oder DTI bezeichnet — teilt alle Ihre monatlichen Schuldenzahlungen, Wohnkosten eingeschlossen, durch dasselbe Einkommen. Kreditgeber betrachten üblicherweise das Back-End-Verhältnis als einzelnen Momentaufnahme-Wert dafür, wie viel Ihres Einkommens bereits gebunden ist, bevor überhaupt neue Schulden hinzukommen.",
-          "paragraph2": "Der Rechner weist Ihrem Back-End-Verhältnis außerdem eine Kategorie zu, basierend auf Schwellenwerten, die in der Hypothekenvergabe häufig herangezogen werden: unter 36 % gilt eine Schuldenlast im Allgemeinen als gesund, 36-43 % ist eine Spanne, mit der viele konventionelle Kreditgeber noch arbeiten, 43-50 % überschreitet die Back-End-Grenze, die für viele qualifizierte Hypotheken gilt, und 50 % oder mehr wird weithin als risikoreiche Schuldenlast betrachtet. Diese Schwellenwerte sind gängige Orientierungspunkte, keine universellen Regeln — verschiedene Kreditgeber und Kreditprogramme ziehen diese Grenzen unterschiedlich."
+          "paragraph2": "Der Rechner weist Ihrem Back-End-Verhältnis außerdem eine Kategorie zu, basierend auf Schwellenwerten, die in der Hypothekenvergabe häufig herangezogen werden: unter 36 % gilt eine Schuldenlast im Allgemeinen als gesund, 36-43 % ist eine Spanne, mit der viele konventionelle Kreditgeber noch arbeiten, 43-50 % überschreitet die Back-End-Grenze, die für viele qualifizierte Hypotheken gilt, und 50 % oder mehr wird weithin als risikoreiche Schuldenlast betrachtet. Diese Schwellenwerte sind gängige Orientierungspunkte, keine universellen Regeln — verschiedene Kreditgeber und Kreditprogramme ziehen diese Grenzen unterschiedlich.",
+          "diagram": {
+            "chartAriaLabel": "Drei Anzeigen mit beispielhaften Back-End-Schulden-Einkommen-Verhältnissen und der jeweiligen Kategorie",
+            "exampleLabel": "Haushalt {letter}",
+            "caption": "Back-End-Verhältnisse unter 36 % gelten im Allgemeinen als gesund, 36-43 % als handhabbar, 43-50 % als hoch und 50 % oder mehr als sehr hohes Risiko."
+          }
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Diese fünf Eingaben fließen sowohl in das Front-End- als auch in das Back-End-Verhältnis ein, das dieser Rechner berechnet — welche davon jeweils zählt, hängt vom gewählten Tab ab.",
+          "items": [
+            {
+              "name": "Monatliches Bruttoeinkommen",
+              "description": "Ihr Gesamteinkommen vor Steuern und weiteren Abzügen, einmal eingegeben und als Nenner für beide hier berechneten Verhältnisse verwendet. Ein höheres Einkommen senkt bei gleicher Schuldenhöhe sowohl das Front-End- als auch das Back-End-Verhältnis."
+            },
+            {
+              "name": "Wohnkosten",
+              "description": "Ihre Miete oder Ihre Hypothekenrate einschließlich Grundsteuer und Versicherung, falls zutreffend. Dies ist die einzige Eingabe für das Front-End-Verhältnis und fließt zugleich, zusammen mit allen anderen laufenden Schulden, in die Gesamtsumme des Back-End-Verhältnisses ein."
+            },
+            {
+              "name": "Weitere laufende Schulden",
+              "description": "Autokredit-Raten, Studienkredit-Raten, Kreditkarten-Mindestzahlungen und alle sonstigen monatlichen Schuldenzahlungen, jeweils einzeln eingegeben, aber zusammen mit den Wohnkosten zur Gesamtsumme des Back-End-Verhältnisses addiert."
+            },
+            {
+              "name": "Ziel-Back-End-Verhältnis",
+              "description": "Die Obergrenze, unter der Sie bleiben möchten, verwendet im Tab „Maximale Schulden“, um ausgehend von einem gewählten Verhältnis — standardmäßig 36 % — die gesamte (und zusätzlich mögliche) monatliche Schuldenzahlung zu berechnen, die dieses Verhältnis bei Ihrem Einkommen zulässt."
+            },
+            {
+              "name": "Geplante monatliche Zahlung",
+              "description": "Ein neuer Kredit oder eine neue Schuldenzahlung, die Sie in Erwägung ziehen, verwendet im Tab „Szenariovergleich“, um genau zu sehen, wie sich Ihr Back-End-Verhältnis und Ihre Kategorie dadurch verändern würden, bevor Sie sich festlegen."
+            }
+          ]
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -4228,6 +4448,28 @@
               "scenario": "5.000 $ Einkommen, 1.800 $ Wohnen, 400 $ Auto, 300 $ Studienkredit, 200 $ Kreditkarte, 100 $ sonstige",
               "backEndRatio": "56%",
               "category": "Sehr hoch"
+            }
+          ]
+        },
+        "applications": {
+          "title": "DTI in der Praxis",
+          "intro": "Dasselbe Verhältnis dient je nach genutztem Tab unterschiedlichen praktischen Zwecken.",
+          "items": [
+            {
+              "title": "Vorqualifizierung für eine Hypothek",
+              "description": "Im Tab „DTI-Verhältnis“ stützen sich Kreditgeber bei der Qualifizierung eines Hypothekenantragstellers stark auf das Back-End-Verhältnis und berufen sich dabei häufig auf dieselben Schwellenwerte von 36/43/50 %, die auch dieser Rechner verwendet, um den verbleibenden Spielraum vor einem neuen Immobilienkredit einzuschätzen."
+            },
+            {
+              "title": "Budgetspielraum vor neuen Schulden",
+              "description": "Der Tab „Maximale Schulden“ ermittelt, wie viel zusätzliche monatliche Schuldenzahlung noch innerhalb eines Zielverhältnisses Platz hat — nützlich, bevor Sie sich nach einem Autokredit oder Privatkredit umsehen, wenn Sie Ihre Obergrenze lieber vorab kennen möchten, statt sie erst vom Kreditgeber zu erfahren."
+            },
+            {
+              "title": "Stresstest für eine bestimmte neue Zahlung",
+              "description": "Der Tab „Szenariovergleich“ zeigt genau, wie eine geplante Zahlung — ein Autokredit, eine neue Kreditlinie — Ihr Verhältnis und Ihre Kategorie verändern würde, sodass Sie die Auswirkung einer konkreten Entscheidung sehen, bevor Sie sich darauf festlegen, statt erst danach."
+            },
+            {
+              "title": "Allgemeine finanzielle Gesundheitschecks",
+              "description": "Unabhängig von einer konkreten Kreditentscheidung lohnt es sich, das DTI als einfachen, bekannten Richtwert regelmäßig erneut zu prüfen — ähnlich wie ein Haushalt seine Sparquote oder sein Vermögen über die Zeit verfolgt."
             }
           ]
         },

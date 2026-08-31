@@ -18,6 +18,7 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import CompoundInterestModeTabs from "./CompoundInterestModeTabs";
+import RuleOf72Card from "./RuleOf72Card";
 import CompoundInterestInputPanel from "./CompoundInterestInputPanel";
 import CompoundInterestResult from "./CompoundInterestResult";
 import CompoundInterestGrowthChart from "./CompoundInterestGrowthChart";
@@ -488,6 +489,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
                 yearlySchedule={computation.forward.yearlySchedule}
               />
               <CompoundInterestModeTabs mode={mode} onModeChange={handleModeChange} />
+              <RuleOf72Card ratePercent={computation.resolvedRate} digitStyle={digitStyle} />
             </div>
           }
           sidebar={

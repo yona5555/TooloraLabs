@@ -3,6 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import RetirementBreakdownDonut from "./RetirementBreakdownDonut";
 import RetirementShareExportModal from "./RetirementShareExportModal";
 import type { CurrencyCode } from "@/lib/currency";
 import type { RetirementMode, RetirementOutcome } from "./types";
@@ -161,6 +162,30 @@ export default function RetirementResult({
         </p>
       )}
 
+      {!outcome.unreachable && mode === "requiredYears" && outcome.retirementAgeReached !== null && (
+        <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+          {(() => {
+            const reached = outcome.retirementAgeReached as number;
+            const trackMax = Math.max(100, reached + 5);
+            const trackSpan = Math.max(trackMax - currentAge, 1);
+            const fillPct = Math.min(Math.max(((reached - currentAge) / trackSpan) * 100, 0), 100);
+            const ageLabel = (age: number) => formatLocalizedNumber(age, digitStyle, { maximumFractionDigits: 0 });
+            return (
+              <>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.ageProgressLabel")}</p>
+                <div dir="ltr" className="relative mt-2 h-2.5 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+                  <div className="h-full rounded-full bg-blue-600 transition-all duration-700 ease-out dark:bg-blue-400" style={{ width: `${fillPct}%` }} />
+                </div>
+                <div dir="ltr" className="mt-1.5 flex justify-between text-[11px] text-zinc-400 dark:text-zinc-500">
+                  <span>{t("aboveFold.ageProgressCurrent", { age: ageLabel(currentAge) })}</span>
+                  <span className="font-semibold text-blue-700 dark:text-blue-400">{t("aboveFold.ageProgressTarget", { age: ageLabel(reached) })}</span>
+                </div>
+              </>
+            );
+          })()}
+        </div>
+      )}
+
       {!outcome.unreachable && (
         <div className="mt-5 grid grid-cols-2 gap-2">
           {mode === "endAmount" && (
@@ -182,6 +207,20 @@ export default function RetirementResult({
               <Stat title={t("aboveFold.projectedBalanceLabel")} value={money(outcome.projectedBalance)} />
             </>
           )}
+        </div>
+      )}
+
+      {!outcome.unreachable && (
+        <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+          <RetirementBreakdownDonut
+            centerValue={money(outcome.projectedBalance)}
+            centerLabel={t("aboveFold.projectedBalanceLabel")}
+            segments={[
+              { key: "savings", value: currentSavings, label: t("form.currentSavingsLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+              { key: "contributions", value: outcome.totalContributionsPure, label: t("aboveFold.totalContributedLabel"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
+              { key: "growth", value: outcome.totalGrowth, label: t("aboveFold.totalGrowthLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
+            ]}
+          />
         </div>
       )}
     </SectionCard>

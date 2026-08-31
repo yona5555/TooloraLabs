@@ -19,6 +19,7 @@ import AffordableLoanInputPanel from "./AffordableLoanInputPanel";
 import AffordableLoanResult from "./AffordableLoanResult";
 import AffordableLoanTermTable from "./AffordableLoanTermTable";
 import AffordableLoanTermChart from "./AffordableLoanTermChart";
+import BorrowingTipsCard from "./BorrowingTipsCard";
 import type { AffordableLoanMode, TermComparisonRow } from "./types";
 
 /** Consumer loans rarely run longer than this; also bounds calculateLoan's month-by-month loop against a freeze from an unbounded term. */
@@ -266,6 +267,7 @@ export default function AffordableLoanCalculator({ education }: { education: Rea
                 requiredPaymentResult={requiredPaymentResult}
               />
               <AffordableLoanModeTabs mode={mode} onModeChange={handleModeChange} />
+              <BorrowingTipsCard />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="affordable-loan-calculator" category="calculators" />}

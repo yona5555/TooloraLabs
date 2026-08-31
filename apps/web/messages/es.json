@@ -2910,6 +2910,9 @@
         "inputTitle": "Tu inversión",
         "resultTitle": "Crecimiento proyectado",
         "futureValueLabel": "Valor futuro",
+        "ruleOf72Title": "La regla del 72",
+        "ruleOf72Intro": "Un atajo mental rápido para estimar cuánto tarda una inversión en duplicarse: divide 72 entre la tasa de crecimiento anual.",
+        "ruleOf72Result": "Al {rate}%, tu dinero se duplicaría aproximadamente cada {years} años.",
         "principalLabel": "Capital inicial",
         "contributionsLabel": "Aportaciones",
         "interestLabel": "Interés generado",
@@ -3208,6 +3211,12 @@
         "emptyStateMessage": "Introduce los datos de tu préstamo y pulsa \"Calcular\" para ver tus resultados.",
         "totalLabel": "Total",
         "yearsUnit": "años",
+        "loanTipsTitle": "Consejos para comparar préstamos",
+        "loanTips": {
+          "compounding": "La frecuencia de capitalización y la de tus pagos afectan el costo real: capitalizar con más frecuencia lo aumenta, pagar con más frecuencia lo reduce.",
+          "extraPayments": "Incluso pagos adicionales pequeños al principal pueden reducir notablemente el interés total y el tiempo para liquidar el préstamo.",
+          "apr": "Compara la TAE, no solo la tasa de interés anunciada — las comisiones incluidas en la TAE pueden revelar cuál oferta es realmente más barata."
+        },
         "resultLabels": {
           "payment": "Importe del pago",
           "amountDue": "Importe adeudado al vencimiento",
@@ -3493,6 +3502,12 @@
         "totalPaymentLabel": "Pago total",
         "totalInterestLabel": "Interés total",
         "requiredPaymentLabel": "Cuota mensual requerida",
+        "borrowingTipsTitle": "Consejos para pedir prestado",
+        "borrowingTips": {
+          "rate": "Una diferencia de 1-2% en la tasa de interés puede cambiar el monto que puedes pagar más de lo esperado — vale la pena comparar opciones.",
+          "term": "Un plazo más corto significa menos interés total pagado, pero una cuota mensual más alta; un plazo más largo hace lo contrario.",
+          "budget": "La mayoría de los prestamistas prefieren que tu deuda mensual total, incluyendo esta, se mantenga por debajo de aproximadamente el 36% de tu ingreso bruto."
+        },
         "emptyStateMessage": "Introduce tus datos y pulsa \"Calcular\" para ver tus resultados.",
         "sentences": {
           "maxLoan": "Con una cuota mensual de {payment}, el monto máximo de préstamo que puedes permitirte es {amount}.",
@@ -3548,7 +3563,34 @@
         "intro": {
           "title": "Cómo funciona esta calculadora",
           "paragraph1": "Esta herramienta aplica el cálculo estándar de la cuota de un préstamo a la inversa. En lugar de partir de un importe prestado para obtener la cuota, parte de una cuota mensual que tú eliges para obtener el importe máximo que esa cuota puede pagar por completo —capital e interés— antes de que termine el plazo que fijes. El cálculo subyacente es la misma fórmula de valor presente de una anualidad que rige cualquier préstamo amortizable a tasa fija; simplemente se resuelve para una incógnita distinta.",
-          "paragraph2": "Esto la convierte en una herramienta de presupuesto, no de búsqueda de préstamo: en lugar de encontrar primero un préstamo y descubrir después su coste, partes de lo que realmente puedes pagar cada mes para calcular cuánto préstamo soporta eso, antes de empezar a buscar un auto, un prestamista o cualquier otra cosa que vayas a financiar."
+          "paragraph2": "Esto la convierte en una herramienta de presupuesto, no de búsqueda de préstamo: en lugar de encontrar primero un préstamo y descubrir después su coste, partes de lo que realmente puedes pagar cada mes para calcular cuánto préstamo soporta eso, antes de empezar a buscar un auto, un prestamista o cualquier otra cosa que vayas a financiar.",
+          "diagram": {
+            "chartAriaLabel": "Gráfico de barras que compara el monto máximo de préstamo que soporta una cuota mensual de 300 $ a tasas anuales del 5 %, 8 % y 11 %, cada una a un plazo de 5 años",
+            "rateLabel": "tasa del {rate} %",
+            "caption": "Misma cuota mensual de 300 $, mismo plazo de 5 años: solo cambia la tasa. Al 5 % la cuota soporta un préstamo de 15.897 $, pero al 11 % solo 13.798 $. Una diferencia de 6 puntos en la tasa equivale a unos 2.100 $ de capacidad de préstamo, así que vale la pena comparar ofertas."
+          }
+        },
+        "variables": {
+          "title": "Variables involucradas",
+          "intro": "Esta calculadora funciona en dos modos —calcula el monto máximo de préstamo que soporta un presupuesto de cuota mensual, o la cuota mensual que exige un monto de préstamo específico— y estos cuatro datos alimentan ambos.",
+          "items": [
+            {
+              "name": "Cuota mensual que puedes pagar",
+              "description": "El límite de presupuesto que introduces en la pestaña «Préstamo máximo». La calculadora la trata como fija y resuelve a la inversa la fórmula de valor presente de una anualidad para hallar el mayor monto de préstamo que esa cuota puede amortizar por completo antes de que termine el plazo."
+            },
+            {
+              "name": "Monto del préstamo",
+              "description": "El importe que introduces en la pestaña «Cuota requerida» cuando ya tienes en mente un precio u oferta concretos. Aquí la calculadora aplica la misma fórmula hacia adelante y calcula, en cambio, la cuota mensual que exige ese monto."
+            },
+            {
+              "name": "Tasa de interés anual",
+              "description": "La tasa anual del prestamista, convertida internamente en una tasa mensual antes de amortizar. Como se capitaliza cada mes durante todo el plazo, incluso una diferencia de uno o dos puntos porcentuales puede alterar de forma notable el monto de préstamo asequible o la cuota requerida."
+            },
+            {
+              "name": "Plazo del préstamo",
+              "description": "El número de años en que se reembolsa el préstamo. Un plazo más largo reparte la misma cuota entre más meses, lo que eleva el monto de préstamo asequible en la pestaña «Préstamo máximo» y reduce la cuota requerida en la pestaña «Cuota requerida», aunque en ambos casos aumenta el interés total pagado."
+            }
+          ]
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -3566,6 +3608,24 @@
               "scenario": "Presupuesto de 500 $/mes, tasa anual del 7 %, plazo de 4 años",
               "maxLoanAmount": "20.880,10 $",
               "totalInterest": "3.119,90 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "La capacidad de préstamo en la práctica",
+          "intro": "Las dos pestañas de esta calculadora responden a preguntas distintas de la vida real, según partas de un presupuesto o de una oferta concreta.",
+          "items": [
+            {
+              "title": "Presupuestar antes de salir a buscar",
+              "description": "La pestaña «Préstamo máximo» convierte una cuota mensual con la que te sientes cómodo en un límite de endeudamiento antes de empezar a comparar autos, préstamos personales o cualquier otra compra financiada, así conoces tu límite antes de encariñarte con algo que lo supera."
+            },
+            {
+              "title": "Verificar una oferta concreta a la inversa",
+              "description": "La pestaña «Cuota requerida» funciona al revés: una vez que has encontrado un monto de préstamo específico, como el precio de un auto o una oferta de préstamo personal, te indica qué cuota mensual exige realmente ese monto antes de que te comprometas."
+            },
+            {
+              "title": "Comparar ofertas de tasa y plazo entre sí",
+              "description": "Como ambas pestañas son sensibles a la tasa y al plazo, volver a calcular las mismas cifras con la tasa y el plazo que cotiza un prestamista de la competencia es una forma rápida de ver qué oferta es realmente más barata, la misma comparación que hay detrás de la tarjeta de consejos para pedir prestado y del gráfico de comparación de plazos de esta página."
             }
           ]
         },
@@ -3691,6 +3751,12 @@
         "totalContributedLabel": "Total aportado",
         "totalGrowthLabel": "Crecimiento total",
         "retirementAgeReachedLabel": "Edad alcanzada",
+        "ageProgressLabel": "Progreso de edad hacia la meta",
+        "ageProgressCurrent": "Ahora: {age} años",
+        "ageProgressTarget": "Meta alcanzada: {age} años",
+        "milestonesCardTitle": "Hitos de ahorro para la jubilación",
+        "milestonesCardRow": "A los {age} años",
+        "milestonesCardNote": "Una regla general muy citada sobre múltiplos del salario (Fidelity); orientación general, no asesoría personalizada.",
         "sentences": {
           "endAmount": "Comenzando a los {currentAge} años con {savings} ahorrados y aportando {contribution} al mes con una rentabilidad anual esperada del {rate}, se proyecta que tendrás {balance} a los {retirementAge} años.",
           "requiredContribution": "Para alcanzar {target} a los {retirementAge} años, comenzando con {savings} a los {currentAge} años con una rentabilidad anual esperada del {rate}, necesitas aportar {requiredContribution} al mes.",
@@ -3749,7 +3815,9 @@
         "columnOpeningBalance": "Saldo inicial",
         "columnContributions": "Aportaciones",
         "columnInterestEarned": "Crecimiento generado",
-        "columnEndingBalance": "Saldo final"
+        "columnEndingBalance": "Saldo final",
+        "showAllRows": "Mostrar las {count} filas",
+        "showLess": "Mostrar menos"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -3774,7 +3842,62 @@
         "intro": {
           "title": "Cómo funciona esta calculadora",
           "paragraph1": "Esta herramienta proyecta un saldo de jubilación usando el mismo cálculo de valor futuro que sustenta cualquier plan de ahorro a largo plazo: un saldo inicial crece por sí solo mediante interés compuesto, mientras que una serie de aportes mensuales regulares crece junto a él como una anualidad capitalizada. Ambas partes se capitalizan mensualmente a la tasa de rentabilidad anual introducida y luego se suman para producir el saldo proyectado a la edad de jubilación elegida.",
-          "paragraph2": "La proyección se simplifica deliberadamente. No modela impuestos sobre cuentas con ventajas fiscales, comisiones de inversión, inflación, aportes del empleador ni los límites anuales de aportación que se aplican a las cuentas de jubilación reales, ya que ninguno de estos elementos es lo bastante uniforme entre países, tipos de cuenta o empleadores como para incorporarlo a una calculadora de uso general única. Úsala para entender la dinámica del interés compuesto a lo largo del tiempo, no como sustituto de un plan de jubilación completo elaborado con un asesor financiero."
+          "paragraph2": "La proyección se simplifica deliberadamente. No modela impuestos sobre cuentas con ventajas fiscales, comisiones de inversión, inflación, aportes del empleador ni los límites anuales de aportación que se aplican a las cuentas de jubilación reales, ya que ninguno de estos elementos es lo bastante uniforme entre países, tipos de cuenta o empleadores como para incorporarlo a una calculadora de uso general única. Úsala para entender la dinámica del interés compuesto a lo largo del tiempo, no como sustituto de un plan de jubilación completo elaborado con un asesor financiero.",
+          "diagram": {
+            "chartAriaLabel": "Gráfico de barras que compara el saldo de jubilación proyectado al empezar a aportar a los 25 años frente a los 35",
+            "ageLabel": "Empieza a los {age}",
+            "contributedLabel": "Aportado",
+            "growthLabel": "Crecimiento",
+            "caption": "Mismo aporte mensual de 300 $ y rentabilidad del 7 %, empezando diez años antes: solo 36.000 $ más aportados en total, pero más de 420.000 $ adicionales en el saldo final — solo por la década extra de interés compuesto."
+          }
+        },
+        "variables": {
+          "title": "Variables implicadas",
+          "intro": "Cinco datos definen esta proyección, y el modo que elijas determina cuál de ellos resuelve la calculadora en lugar de pedírtelo.",
+          "items": [
+            {
+              "name": "Edad actual",
+              "description": "La edad desde la que arranca la proyección. Junto con la edad de jubilación, determina cuántos años de interés compuesto tiene el plan a su disposición — la palanca más poderosa en cualquier proyección a largo plazo."
+            },
+            {
+              "name": "Edad de jubilación",
+              "description": "La edad a la que se asume que empiezan los retiros, marcando el fin del período de acumulación que modela esta calculadora. En la pestaña «Años hasta la meta», esto pasa de ser un dato de entrada a un resultado."
+            },
+            {
+              "name": "Ahorro de jubilación actual",
+              "description": "Lo que ya tienes ahorrado hoy para la jubilación. Este saldo inicial se capitaliza por sí solo durante toda la proyección, independientemente de los aportes futuros que se añadan encima."
+            },
+            {
+              "name": "Aporte mensual",
+              "description": "La cantidad que se añade al saldo cada mes en adelante. Al igual que el saldo inicial, cada aporte se capitaliza durante los años que queden hasta la jubilación, así que los aportes más tempranos crecen más."
+            },
+            {
+              "name": "Rentabilidad anual esperada",
+              "description": "La tasa de crecimiento anual asumida, aplicada a todo el saldo y capitalizada mensualmente. Es una suposición, no una garantía — los mercados reales varían de un año a otro."
+            }
+          ]
+        },
+        "applications": {
+          "title": "La planificación de la jubilación en la práctica",
+          "intro": "El mismo cálculo de interés compuesto detrás de esta calculadora responde a preguntas distintas según qué variable necesites resolver.",
+          "items": [
+            {
+              "title": "Comprobar si vas por buen camino",
+              "description": "La pestaña «Saldo proyectado» toma tu edad, ahorros y tasa de aporte actuales tal cual y proyecta a dónde llevan — una forma rápida de ver si tus hábitos actuales probablemente alcancen una jubilación cómoda o se quedan cortos."
+            },
+            {
+              "title": "Trabajar hacia atrás desde una meta",
+              "description": "La pestaña «Aporte requerido» invierte la pregunta: dado un saldo objetivo y una edad de jubilación, calcula el aporte mensual necesario para llegar — a menudo más útil que una proyección cuando ya sabes para qué estás ahorrando."
+            },
+            {
+              "title": "Averiguar cuándo puedes jubilarte",
+              "description": "La pestaña «Años hasta la meta» resuelve el tiempo en lugar del dinero — útil para quien se pregunta «a este ritmo de ahorro, ¿cuántos años me faltan para llegar a mi cifra?» en vez de «¿cuánto tendré a una edad fija?»."
+            },
+            {
+              "title": "Poner a prueba tus suposiciones",
+              "description": "Como un pequeño cambio en la rentabilidad asumida se acumula en una gran diferencia a lo largo de décadas, vale la pena volver a calcular la proyección con una tasa más baja que tu mejor estimación para ver cuán sensible es realmente tu plan al comportamiento del mercado."
+            }
+          ]
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -3893,6 +4016,18 @@
         "monthlyPaymentLabel": "Pago mensual",
         "monthlyPrincipalAndInterestLabel": "Capital e intereses",
         "monthlyPropertyTaxLabel": "Impuesto predial",
+        "ratioBarFrontEndLabel": "Costo de vivienda / Ingresos",
+        "ratioBarBackEndLabel": "Deuda total / Ingresos",
+        "ratioBarCarLabel": "Pago del auto / Ingresos",
+        "ratioBarDscrLabel": "Servicio de deuda / Ingresos",
+        "ratioBarCapSuffix": "Guía del {cap}%",
+        "guidelinesCardTitle": "Guías de préstamo de un vistazo",
+        "guidelinesCard": {
+          "home": "Vivienda — 28% costo/ingreso, 36% deuda total",
+          "car": "Auto — 15% del ingreso / 36% deuda total",
+          "personal": "Préstamo personal — 36% deuda total",
+          "business": "Préstamo comercial — cobertura de deuda de 1.25x"
+        },
         "requiredAnnualIncomeLabel": "Ingreso anual requerido",
         "bindingConstraintLabel": "Factor limitante",
         "bindingConstraint": {
@@ -3989,7 +4124,38 @@
         "intro": {
           "title": "Cómo funciona esta calculadora",
           "paragraph1": "Esta herramienta aplica la regla 28/36, una pauta de préstamo muy utilizada: tu costo mensual total de vivienda —capital, intereses, impuesto predial, seguro de vivienda y cuotas de comunidad, conocidos en conjunto como PITI— generalmente no debería superar el 28 % de tu ingreso mensual bruto, y tu deuda mensual total, incluido ese costo de vivienda, generalmente no debería superar el 36 %. La calculadora toma el más bajo de estos dos límites como tu presupuesto de vivienda y luego trabaja hacia atrás a través del cálculo del préstamo y del impuesto predial —teniendo en cuenta que una vivienda más cara también implica un impuesto más alto— para encontrar el precio de vivienda más alto que ese presupuesto puede sostener.",
-          "paragraph2": "La regla 28/36 es un punto de partida ampliamente usado, no un límite universal. Los prestamistas reales fijan sus propios límites, que pueden ser más altos para prestatarios muy calificados o para ciertos programas de préstamo, y más bajos para otros. Usa esta estimación para entender aproximadamente dónde se sitúa tu presupuesto antes de empezar a buscar vivienda o hablar con un prestamista, no como una garantía de aprobación del préstamo."
+          "paragraph2": "La regla 28/36 es un punto de partida ampliamente usado, no un límite universal. Los prestamistas reales fijan sus propios límites, que pueden ser más altos para prestatarios muy calificados o para ciertos programas de préstamo, y más bajos para otros. Usa esta estimación para entender aproximadamente dónde se sitúa tu presupuesto antes de empezar a buscar vivienda o hablar con un prestamista, no como una garantía de aprobación del préstamo.",
+          "diagram": {
+            "chartAriaLabel": "Gráfico de barras que muestra el precio máximo de vivienda asequible en cuatro niveles de ingreso anual distintos, según la regla 28/36",
+            "incomeLabel": "{income} $/año",
+            "caption": "Según la regla 28/36, tu ingreso determina el límite directamente: con estos supuestos (pago inicial de 20.000 $, tasa del 6,5 %, plazo de 30 años), el precio máximo de vivienda resulta ser aproximadamente 3,2 veces el ingreso anual, en cada nivel de ingreso mostrado."
+          }
+        },
+        "variables": {
+          "title": "Variables implicadas",
+          "intro": "Estas cinco entradas son la base de la regla estándar 28/36 en la pestaña «Precio máx. de vivienda»; las otras cuatro pestañas de la calculadora —Ingreso requerido, Préstamo de auto, Préstamo personal y Préstamo empresarial— aplican sus propios límites relacionados a esa misma lógica de deuda-ingreso, cubiertos en la sección siguiente.",
+          "items": [
+            {
+              "name": "Ingreso anual bruto",
+              "description": "Tu ingreso total antes de impuestos y deducciones. Tanto el límite del 28 % (front-end) como el del 36 % (back-end) se calculan como porcentajes de esta cifra, dividida en doce mensualidades iguales."
+            },
+            {
+              "name": "Otros pagos mensuales de deuda",
+              "description": "Deuda ajena a la vivienda que ya tienes —préstamos de auto, préstamos estudiantiles, pagos mínimos de tarjetas de crédito y similares. Cada dólar comprometido aquí es un dólar que no está disponible en el presupuesto del 36 %, por lo que una deuda existente más alta reduce el precio máximo de vivienda."
+            },
+            {
+              "name": "Pago inicial",
+              "description": "El efectivo que aportas por adelantado reduce cuánto necesitas pedir prestado, lo que baja el pago mensual de capital e intereses requerido y deja más margen en tu presupuesto de vivienda para un precio de compra más alto."
+            },
+            {
+              "name": "Tasa de interés",
+              "description": "La tasa de interés anual del préstamo, convertida a una tasa mensual y amortizada durante el plazo del préstamo para determinar cuánto de cada pago mensual va a intereses frente a capital."
+            },
+            {
+              "name": "Tasa de impuesto predial",
+              "description": "Una tasa anual, dependiente de la ubicación, aplicada sobre el precio de la vivienda. Como se repite cada mes junto con el capital, los intereses y el seguro, se incorpora directamente al límite del 28 % en lugar de tratarse como un costo único."
+            }
+          ]
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -4012,6 +4178,28 @@
               "scenario": "Ingreso de 60.000 $, deudas de 1.200 $/mes, pago inicial de 20.000 $, tasa del 6 %, plazo de 30 años",
               "maxHomePrice": "90.778 $",
               "monthlyPayment": "600 $"
+            }
+          ]
+        },
+        "applications": {
+          "title": "La asequibilidad de vivienda en la práctica",
+          "intro": "La regla 28/36 y sus parientes cercanos responden a preguntas de endeudamiento distintas, según cuál de las cinco pestañas de esta calculadora uses.",
+          "items": [
+            {
+              "title": "Fijar un presupuesto para buscar vivienda",
+              "description": "La pestaña «Precio máx. de vivienda» convierte tu ingreso, tus deudas y las condiciones del préstamo en un único límite —una cifra que vale la pena conocer antes de empezar a visitar casas o encariñarte con listados que superan lo que tus finanzas pueden sostener realmente."
+            },
+            {
+              "title": "Verificar en sentido inverso un listado específico",
+              "description": "La pestaña «Ingreso requerido» invierte la pregunta: dado un precio de vivienda, calcula el ingreso mínimo necesario para permitírtelo bajo la regla 28/36 —útil para un comprador interesado en un listado concreto, o para un agente inmobiliario que necesita calificar rápido a un cliente."
+            },
+            {
+              "title": "Capacidad de endeudamiento para autos y préstamos personales",
+              "description": "Las pestañas «Préstamo de auto» y «Préstamo personal» aplican la misma lógica de deuda-ingreso fuera de la vivienda —un límite del 15 % del ingreso más el límite del 36 % para una cuota de auto, y solo el presupuesto restante del 36 % para un préstamo personal sin garantía."
+            },
+            {
+              "title": "Dimensionar un préstamo empresarial por cobertura de deuda",
+              "description": "La pestaña «Préstamo empresarial» usa una lógica de crédito completamente distinta: en lugar de un ratio de ingreso personal, aplica un ratio de cobertura del servicio de deuda (DSCR), verificando que los ingresos de un negocio cubran sus pagos de deuda totales por el margen que exige el prestamista."
             }
           ]
         },
@@ -4132,6 +4320,7 @@
         "placeholder": "Introduce tus ingresos y tus pagos de deuda mensuales para ver tu ratio deuda-ingreso.",
         "emptyStateMessage": "Introduce tus ingresos y deudas y pulsa \"Calcular\" para ver tus resultados.",
         "maxTotalMonthlyDebtLabel": "Deuda mensual total máxima",
+        "categoryReferenceTitle": "Referencia de categorías de DTI",
         "maxAdditionalMonthlyDebtLabel": "Margen adicional disponible",
         "sentences": {
           "ratio": "Con un ingreso mensual bruto de {income}, tu deuda mensual total sitúa tu ratio deuda-ingreso en {ratio} — calificado como {category}.",
@@ -4200,7 +4389,38 @@
         "intro": {
           "title": "Cómo funciona esta calculadora",
           "paragraph1": "Esta herramienta calcula dos porcentajes relacionados. El ratio de primer nivel divide solo tu pago de vivienda entre tu ingreso mensual bruto. El ratio global —normalmente llamado simplemente ratio deuda-ingreso, o DTI— divide todos tus pagos de deuda mensuales, vivienda incluida, entre ese mismo ingreso. Los prestamistas suelen fijarse en el ratio global como una instantánea única de cuánto de tu ingreso ya está comprometido antes de añadir cualquier deuda nueva.",
-          "paragraph2": "La calculadora también asigna una categoría a tu ratio global usando umbrales comúnmente citados en la suscripción hipotecaria: por debajo del 36 % generalmente se considera una carga de deuda saludable, entre el 36 % y el 43 % es un rango con el que muchos prestamistas convencionales aún trabajan, entre el 43 % y el 50 % supera el límite global usado por muchas hipotecas calificadas, y el 50 % o más se considera ampliamente una carga de deuda de alto riesgo. Estos umbrales son puntos de referencia comunes, no reglas universales: diferentes prestamistas y programas de préstamo trazan estos límites de forma distinta."
+          "paragraph2": "La calculadora también asigna una categoría a tu ratio global usando umbrales comúnmente citados en la suscripción hipotecaria: por debajo del 36 % generalmente se considera una carga de deuda saludable, entre el 36 % y el 43 % es un rango con el que muchos prestamistas convencionales aún trabajan, entre el 43 % y el 50 % supera el límite global usado por muchas hipotecas calificadas, y el 50 % o más se considera ampliamente una carga de deuda de alto riesgo. Estos umbrales son puntos de referencia comunes, no reglas universales: diferentes prestamistas y programas de préstamo trazan estos límites de forma distinta.",
+          "diagram": {
+            "chartAriaLabel": "Tres medidores que muestran ratios de deuda-ingreso global de ejemplo y la categoría en la que cae cada uno",
+            "exampleLabel": "Hogar {letter}",
+            "caption": "Los ratios globales por debajo del 36 % generalmente se consideran saludables, 36-43 % manejables, 43-50 % altos, y 50 % o más de muy alto riesgo."
+          }
+        },
+        "variables": {
+          "title": "Variables involucradas",
+          "intro": "Estas cinco entradas alimentan tanto el ratio de primer nivel como el ratio global que calcula esta herramienta, aunque cuáles importan depende de la pestaña que estés usando.",
+          "items": [
+            {
+              "name": "Ingreso mensual bruto",
+              "description": "Tu ingreso total antes de impuestos y otras deducciones, introducido una sola vez y usado como denominador de ambos ratios que calcula esta herramienta. Un ingreso más alto reduce directamente tanto el ratio de primer nivel como el global para la misma cantidad de deuda."
+            },
+            {
+              "name": "Pago de vivienda",
+              "description": "Tu alquiler, o tu pago de hipoteca incluyendo impuesto predial y seguro si corresponde. Es la única entrada del ratio de primer nivel, y también se incluye en el total del ratio global junto con el resto de tus deudas recurrentes."
+            },
+            {
+              "name": "Otras deudas recurrentes",
+              "description": "Pagos de préstamo de auto, préstamo estudiantil, pagos mínimos de tarjeta de crédito y cualquier otra deuda mensual, introducidos por separado pero sumados junto con la vivienda para obtener el total de deuda mensual del ratio global."
+            },
+            {
+              "name": "Ratio global objetivo",
+              "description": "El límite máximo que quieres mantener, usado en la pestaña \"Deuda máxima\" para calcular, a partir de un ratio elegido —36 % por defecto—, el pago mensual total (y adicional) que ese ratio permite frente a tu ingreso."
+            },
+            {
+              "name": "Pago mensual propuesto",
+              "description": "Un nuevo préstamo o deuda que estás considerando, usado en la pestaña \"Comparación de escenarios\" para ver exactamente cómo añadirlo movería tu ratio global y tu categoría antes de comprometerte."
+            }
+          ]
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -4228,6 +4448,28 @@
               "scenario": "Ingreso de 5.000 $, vivienda 1.800 $, auto 400 $, préstamo estudiantil 300 $, tarjeta de crédito 200 $, otra 100 $",
               "backEndRatio": "56 %",
               "category": "Muy alto"
+            }
+          ]
+        },
+        "applications": {
+          "title": "El DTI en la práctica",
+          "intro": "El mismo ratio cumple varios propósitos distintos en la práctica, según la pestaña desde la que lo uses.",
+          "items": [
+            {
+              "title": "Precalificación hipotecaria",
+              "description": "En la pestaña \"Ratio DTI\", los prestamistas se apoyan fuertemente en el ratio global al calificar a un solicitante de hipoteca, citando a menudo los mismos umbrales de 36/43/50 % que usa esta herramienta para medir cuánto margen tiene un prestatario antes de asumir un nuevo préstamo de vivienda."
+            },
+            {
+              "title": "Margen presupuestario antes de nueva deuda",
+              "description": "La pestaña \"Deuda máxima\" calcula cuánto pago de deuda mensual adicional aún cabe dentro de un ratio objetivo — útil antes de buscar un préstamo de auto o un préstamo personal, cuando prefieres conocer tu límite de antemano en lugar de descubrirlo con el prestamista."
+            },
+            {
+              "title": "Prueba de estrés para un pago nuevo específico",
+              "description": "La pestaña \"Comparación de escenarios\" muestra exactamente cómo un pago propuesto —un préstamo de auto, una nueva línea de crédito— movería tu ratio y tu categoría, para que veas el impacto de una decisión concreta antes de comprometerte, en lugar de después."
+            },
+            {
+              "title": "Revisiones generales de salud financiera",
+              "description": "Más allá de cualquier decisión de endeudamiento puntual, el DTI es un punto de referencia simple y bien conocido que vale la pena revisar periódicamente por sí solo, de la misma forma en que un hogar podría seguir su tasa de ahorro o su patrimonio neto a lo largo del tiempo."
             }
           ]
         },

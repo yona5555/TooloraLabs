@@ -13,6 +13,7 @@ import RetirementModeTabs from "./RetirementModeTabs";
 import RetirementInputPanel from "./RetirementInputPanel";
 import RetirementResult from "./RetirementResult";
 import RetirementGrowthChart from "./RetirementGrowthChart";
+import RetirementMilestonesCard from "./RetirementMilestonesCard";
 import RetirementYearlyBreakdownTable from "./RetirementYearlyBreakdownTable";
 import type { RetirementMode, RetirementOutcome } from "./types";
 
@@ -346,6 +347,7 @@ export default function RetirementCalculator({ education }: { education: ReactNo
                 outcome={outcome}
               />
               <RetirementModeTabs mode={mode} onModeChange={handleModeChange} />
+              <RetirementMilestonesCard currentAge={parseLocalizedNumber(currentAge) || 0} />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="retirement-calculator" category="calculators" />}

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -20,8 +21,11 @@ function buildCsv(schedule: LoanGrowthRow[], headers: { year: string; interest: 
   return rows.join("\n");
 }
 
+const COLLAPSED_ROW_COUNT = 8;
+
 export default function LoanGrowthTable({ schedule, digitStyle, currency }: LoanGrowthTableProps) {
   const t = useTranslations("tools.loan-calculator");
+  const [expanded, setExpanded] = useState(false);
 
   if (schedule.length === 0) return null;
 
@@ -51,7 +55,7 @@ export default function LoanGrowthTable({ schedule, digitStyle, currency }: Loan
             </tr>
           </thead>
           <tbody>
-            {schedule.map((row) => (
+            {(expanded ? schedule : schedule.slice(0, COLLAPSED_ROW_COUNT)).map((row) => (
               <tr key={row.year} className="border-t border-zinc-100 dark:border-zinc-800/60">
                 <td className="px-4 py-2.5 font-medium text-zinc-900 dark:text-zinc-100">{formatLocalizedNumber(row.year, digitStyle, { maximumFractionDigits: 1 })}</td>
                 <td className="px-4 py-2.5 text-end font-mono text-zinc-900 dark:text-zinc-100">{money(row.interestAccrued)}</td>
@@ -61,6 +65,11 @@ export default function LoanGrowthTable({ schedule, digitStyle, currency }: Loan
           </tbody>
         </table>
       </div>
+      {schedule.length > COLLAPSED_ROW_COUNT && (
+        <button type="button" onClick={() => setExpanded((v) => !v)} className="mt-3 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400">
+          {expanded ? t("amortizationTable.showLess") : t("amortizationTable.viewFullTable")}
+        </button>
+      )}
     </SectionCard>
   );
 }

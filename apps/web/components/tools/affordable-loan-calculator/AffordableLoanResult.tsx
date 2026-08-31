@@ -3,6 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import AffordableLoanBreakdownDonut from "./AffordableLoanBreakdownDonut";
 import AffordableLoanShareExportModal from "./AffordableLoanShareExportModal";
 import type { AffordableLoanResult as MaxLoanResult, LoanResult as RequiredPaymentResult } from "@tooloralabs/tools";
 import type { CurrencyCode } from "@/lib/currency";
@@ -112,6 +113,28 @@ export default function AffordableLoanResult({
             <Stat title={t("aboveFold.totalPaymentLabel")} value={money(requiredPaymentResult.totalPayment)} />
             <Stat title={t("aboveFold.totalInterestLabel")} value={money(requiredPaymentResult.totalInterest)} />
           </>
+        )}
+      </div>
+
+      <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        {mode === "maxLoan" ? (
+          <AffordableLoanBreakdownDonut
+            centerValue={money(maxLoanResult.totalPayment)}
+            centerLabel={t("aboveFold.totalPaymentLabel")}
+            segments={[
+              { key: "principal", value: maxLoanResult.maxLoanAmount, label: t("aboveFold.maxLoanAmountLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+              { key: "interest", value: maxLoanResult.totalInterest, label: t("aboveFold.totalInterestLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
+            ]}
+          />
+        ) : (
+          <AffordableLoanBreakdownDonut
+            centerValue={money(requiredPaymentResult.totalPayment)}
+            centerLabel={t("aboveFold.totalPaymentLabel")}
+            segments={[
+              { key: "principal", value: loanAmount, label: t("form.loanAmountLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+              { key: "interest", value: requiredPaymentResult.totalInterest, label: t("aboveFold.totalInterestLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
+            ]}
+          />
         )}
       </div>
     </SectionCard>

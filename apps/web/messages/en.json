@@ -2906,6 +2906,9 @@
         "inputTitle": "Your Investment",
         "resultTitle": "Projected Growth",
         "futureValueLabel": "Future Value",
+        "ruleOf72Title": "The Rule of 72",
+        "ruleOf72Intro": "A quick mental-math shortcut for estimating how long it takes an investment to double: divide 72 by the annual growth rate.",
+        "ruleOf72Result": "At {rate}%, your money would roughly double every {years} years.",
         "principalLabel": "Principal",
         "contributionsLabel": "Contributions",
         "interestLabel": "Interest Earned",
@@ -3204,6 +3207,12 @@
         "emptyStateMessage": "Enter your loan details and press Calculate to see your results.",
         "totalLabel": "Total",
         "yearsUnit": "years",
+        "loanTipsTitle": "Loan Shopping Tips",
+        "loanTips": {
+          "compounding": "How often interest compounds and how often you pay both affect the true cost — more frequent compounding raises it, more frequent payments lower it.",
+          "extraPayments": "Even small extra payments toward the principal can cut total interest and shorten the payoff time meaningfully.",
+          "apr": "Compare APR, not just the headline interest rate, when shopping — fees folded into the APR can change which offer is really cheaper."
+        },
         "resultLabels": {
           "payment": "Payment Amount",
           "amountDue": "Amount Due at Maturity",
@@ -3489,6 +3498,12 @@
         "totalPaymentLabel": "Total Payment",
         "totalInterestLabel": "Total Interest",
         "requiredPaymentLabel": "Required Monthly Payment",
+        "borrowingTipsTitle": "Borrowing Tips",
+        "borrowingTips": {
+          "rate": "A 1-2% difference in interest rate can change your affordable loan amount more than you'd expect — it's worth shopping around.",
+          "term": "A shorter term means less total interest paid, but a higher monthly payment — a longer term does the opposite.",
+          "budget": "Most lenders like your total monthly debt payments, including this one, to stay under about 36% of your gross income."
+        },
         "emptyStateMessage": "Enter your details and press Calculate to see your results.",
         "sentences": {
           "maxLoan": "With a monthly payment of {payment}, the maximum loan amount you can afford is {amount}.",
@@ -3544,7 +3559,34 @@
         "intro": {
           "title": "How This Calculator Works",
           "paragraph1": "This tool runs the standard loan-payment calculation in reverse. Instead of starting with a loan amount and solving for the monthly payment, it starts with a monthly payment you choose and solves for the largest loan amount that payment can fully pay off — principal and interest — by the end of the term you set. The underlying math is the same present-value-of-an-annuity formula behind every fixed-rate installment loan; it's simply solved for a different unknown.",
-          "paragraph2": "This makes it a budgeting tool rather than a shopping tool: instead of finding a loan first and then discovering what it costs, you start from what you can actually afford each month and work out how much loan that supports, before you start shopping for a car, a lender, or anything else that would be financed."
+          "paragraph2": "This makes it a budgeting tool rather than a shopping tool: instead of finding a loan first and then discovering what it costs, you start from what you can actually afford each month and work out how much loan that supports, before you start shopping for a car, a lender, or anything else that would be financed.",
+          "diagram": {
+            "chartAriaLabel": "Bar chart comparing the maximum loan amount a $300 monthly payment supports at 5%, 8%, and 11% annual interest rates, each over a 5-year term",
+            "rateLabel": "{rate}% rate",
+            "caption": "Same $300 monthly payment, same 5-year term — only the rate changes: 5% supports a $15,897 loan, but 11% supports just $13,798. A 6-point rate difference is worth roughly $2,100 in borrowing power, which is why it pays to shop around."
+          }
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "This calculator works in two modes — solving for the maximum loan amount a monthly payment budget supports, or solving for the monthly payment a specific loan amount requires — and these four inputs feed both.",
+          "items": [
+            {
+              "name": "Monthly Payment You Can Afford",
+              "description": "The budget ceiling you enter on the \"Max Loan\" tab. The calculator treats this as fixed and reverse-solves the present-value-of-an-annuity formula for the largest loan amount that payment can fully retire by the end of the term."
+            },
+            {
+              "name": "Loan Amount",
+              "description": "The amount you enter on the \"Required Payment\" tab once you already have a specific price or offer in mind. Here the calculator runs the same formula forward, solving for the monthly payment that amount requires instead."
+            },
+            {
+              "name": "Annual Interest Rate",
+              "description": "The lender's yearly rate, converted internally to a monthly rate before amortizing. Because it compounds every month over the full term, even a percentage point or two of difference can meaningfully shift either the affordable loan amount or the required payment."
+            },
+            {
+              "name": "Loan Term",
+              "description": "The number of years the loan is repaid over. A longer term spreads the same payment across more months, which raises the affordable loan amount on the \"Max Loan\" tab and lowers the required payment on the \"Required Payment\" tab — while increasing the total interest paid either way."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -3562,6 +3604,24 @@
               "scenario": "$500/month budget, 7% annual rate, 4-year term",
               "maxLoanAmount": "$20,880.10",
               "totalInterest": "$3,119.90"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Loan Affordability in Practice",
+          "intro": "The two tabs on this calculator answer different real-world questions, depending on whether you're starting from a budget or from a specific offer.",
+          "items": [
+            {
+              "title": "Budgeting Before You Start Shopping",
+              "description": "The \"Max Loan\" tab turns a monthly payment you're comfortable with into a borrowing ceiling before you start comparing cars, personal loans, or anything else that would be financed — so you know your limit before you fall in love with something outside it."
+            },
+            {
+              "title": "Reverse-Checking a Specific Offer",
+              "description": "The \"Required Payment\" tab works the other way: once you've found a specific loan amount, such as a car's price or a personal loan offer, it tells you what monthly payment that amount actually requires before you commit to it."
+            },
+            {
+              "title": "Comparing Rate and Term Offers Side by Side",
+              "description": "Because both tabs are sensitive to rate and term, re-running the same numbers at a competing lender's quoted rate and term is a quick way to see which offer is genuinely cheaper — the same comparison behind this page's Borrowing Tips card and its term comparison chart."
             }
           ]
         },
@@ -3687,6 +3747,12 @@
         "totalContributedLabel": "Total Contributed",
         "totalGrowthLabel": "Total Growth",
         "retirementAgeReachedLabel": "Age Reached",
+        "ageProgressLabel": "Age Progress to Goal",
+        "ageProgressCurrent": "Now: age {age}",
+        "ageProgressTarget": "Goal reached: age {age}",
+        "milestonesCardTitle": "Retirement Savings Milestones",
+        "milestonesCardRow": "By age {age}",
+        "milestonesCardNote": "A widely cited salary-multiple rule of thumb (Fidelity) — a general guide, not personalized advice.",
         "sentences": {
           "endAmount": "Starting at age {currentAge} with {savings} saved and contributing {contribution} a month at a {rate} expected annual return, you're projected to have {balance} by age {retirementAge}.",
           "requiredContribution": "To reach {target} by age {retirementAge}, starting from {savings} at age {currentAge} with a {rate} expected annual return, you need to contribute {requiredContribution} a month.",
@@ -3745,7 +3811,9 @@
         "columnOpeningBalance": "Opening Balance",
         "columnContributions": "Contributions",
         "columnInterestEarned": "Growth Earned",
-        "columnEndingBalance": "Ending Balance"
+        "columnEndingBalance": "Ending Balance",
+        "showAllRows": "Show all {count} rows",
+        "showLess": "Show less"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -3770,7 +3838,62 @@
         "intro": {
           "title": "How This Calculator Works",
           "paragraph1": "This tool projects a retirement balance using the same future-value math that underlies any long-term savings plan: a starting balance grows on its own through compounding, while a stream of regular monthly contributions grows alongside it as a compounding annuity. Both pieces are compounded monthly at the annual return rate you enter, then added together to produce the projected balance at your chosen retirement age.",
-          "paragraph2": "The projection is deliberately simplified. It does not model taxes on tax-advantaged accounts, investment fees, inflation, employer matching, or the annual contribution limits that apply to real-world retirement accounts, none of which are consistent enough across countries, account types, or employers to build into a single general-purpose calculator. Use it to understand the shape of compounding over time, not as a substitute for a full retirement plan built with a financial advisor."
+          "paragraph2": "The projection is deliberately simplified. It does not model taxes on tax-advantaged accounts, investment fees, inflation, employer matching, or the annual contribution limits that apply to real-world retirement accounts, none of which are consistent enough across countries, account types, or employers to build into a single general-purpose calculator. Use it to understand the shape of compounding over time, not as a substitute for a full retirement plan built with a financial advisor.",
+          "diagram": {
+            "chartAriaLabel": "Bar chart comparing a projected retirement balance starting contributions at age 25 versus age 35",
+            "ageLabel": "Start at {age}",
+            "contributedLabel": "Contributed",
+            "growthLabel": "Growth",
+            "caption": "Same $300 monthly contribution and 7% return, starting ten years earlier: only $36,000 more contributed in total, yet over $420,000 more in the final balance — purely from the extra decade of compounding."
+          }
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Five inputs define this projection, and the mode you pick determines which one the calculator solves for instead of asking you to supply it.",
+          "items": [
+            {
+              "name": "Current Age",
+              "description": "The age the projection starts from. Combined with retirement age, it sets how many years of compounding the plan gets to work with — the single biggest lever in any long-horizon projection."
+            },
+            {
+              "name": "Retirement Age",
+              "description": "The age withdrawals are assumed to begin, marking the end of the accumulation period this calculator models. On the \"Years to Goal\" tab, this becomes an output instead of an input."
+            },
+            {
+              "name": "Current Retirement Savings",
+              "description": "Whatever is already saved toward retirement today. This starting balance compounds on its own for the full projection, independent of any future contributions added on top of it."
+            },
+            {
+              "name": "Monthly Contribution",
+              "description": "The amount added to the balance every month going forward. Like the starting balance, each contribution compounds for however many years remain until retirement, so earlier contributions grow the most."
+            },
+            {
+              "name": "Expected Annual Return",
+              "description": "The assumed yearly growth rate applied to the whole balance, compounded monthly. It's an assumption, not a guarantee — real markets vary from year to year."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Retirement Planning in Practice",
+          "intro": "The same compounding math behind this calculator answers a few distinct questions, depending on which variable you need solved.",
+          "items": [
+            {
+              "title": "Checking Whether You're On Track",
+              "description": "The \"Projected Balance\" tab takes your current age, savings, and contribution rate at face value and projects where they lead — a quick way to see whether your current habits are likely to reach a comfortable retirement or fall short."
+            },
+            {
+              "title": "Working Backward From a Goal",
+              "description": "The \"Required Savings\" tab flips the question around: given a target balance and retirement age, it solves for the monthly contribution needed to get there, which is often more useful than a projection when you already know what you're saving for."
+            },
+            {
+              "title": "Finding Out When You Can Retire",
+              "description": "The \"Years to Goal\" tab solves for time instead of money — useful for anyone asking \"at this savings rate, how many more years until I reach my number?\" rather than \"how much will I have by a fixed age?\""
+            },
+            {
+              "title": "Stress-Testing Your Assumptions",
+              "description": "Because a small change in the assumed return rate compounds into a large difference over decades, it's worth re-running the projection at a lower rate than your best guess to see how sensitive your plan really is to market performance."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -3889,6 +4012,18 @@
         "monthlyPaymentLabel": "Monthly Payment",
         "monthlyPrincipalAndInterestLabel": "Principal & Interest",
         "monthlyPropertyTaxLabel": "Property Tax",
+        "ratioBarFrontEndLabel": "Housing Cost / Income",
+        "ratioBarBackEndLabel": "Total Debt / Income",
+        "ratioBarCarLabel": "Car Payment / Income",
+        "ratioBarDscrLabel": "Debt Service / Revenue",
+        "ratioBarCapSuffix": "{cap}% guideline",
+        "guidelinesCardTitle": "Lending Guidelines at a Glance",
+        "guidelinesCard": {
+          "home": "Home — 28% front-end / 36% back-end",
+          "car": "Car — 15% of income / 36% back-end",
+          "personal": "Personal loan — 36% back-end",
+          "business": "Business loan — 1.25x debt-service coverage"
+        },
         "requiredAnnualIncomeLabel": "Required Annual Income",
         "bindingConstraintLabel": "Limiting Factor",
         "bindingConstraint": {
@@ -3985,7 +4120,38 @@
         "intro": {
           "title": "How This Calculator Works",
           "paragraph1": "This tool applies the 28/36 rule, a widely used lending guideline: your total monthly housing cost — principal, interest, property tax, home insurance, and HOA dues, together known as PITI — generally shouldn't exceed 28% of your gross monthly income, and your total monthly debt including that housing cost generally shouldn't exceed 36%. The calculator takes the lower of these two limits as your housing budget, then works backward through the loan-payment and property-tax math — accounting for the fact that a larger home price also means a larger tax bill — to find the highest home price that budget can support.",
-          "paragraph2": "The 28/36 rule is a widely used starting point, not a universal cutoff. Actual lenders set their own limits, which can run higher for well-qualified borrowers or for certain loan programs, and lower for others. Use this estimate to understand roughly where your budget sits before you start house hunting or speak with a lender, not as a guarantee of loan approval."
+          "paragraph2": "The 28/36 rule is a widely used starting point, not a universal cutoff. Actual lenders set their own limits, which can run higher for well-qualified borrowers or for certain loan programs, and lower for others. Use this estimate to understand roughly where your budget sits before you start house hunting or speak with a lender, not as a guarantee of loan approval.",
+          "diagram": {
+            "chartAriaLabel": "Bar chart showing the maximum home price affordable at four different annual income levels, under the 28/36 rule",
+            "incomeLabel": "${income}/year",
+            "caption": "Under the 28/36 rule, income sets the ceiling directly: at these assumptions (a $20,000 down payment, 6.5% rate, 30-year term), the maximum home price comes out to roughly 3.2 times annual income at every level shown."
+          }
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "These five inputs are what the standard 28/36 affordability rule is built from on the Max Home Price tab; the calculator's other four tabs — Required Income, Car Loan, Personal Loan, and Business Loan — apply their own related caps to the same debt-to-income logic, covered in the section below.",
+          "items": [
+            {
+              "name": "Gross Annual Income",
+              "description": "Your total income before taxes and deductions. Both the 28% front-end and 36% back-end caps are calculated as percentages of this figure, divided into twelve equal monthly amounts."
+            },
+            {
+              "name": "Other Monthly Debt Payments",
+              "description": "Non-housing debt you already carry — car loans, student loans, credit card minimums, and the like. Every dollar committed here is a dollar unavailable for the 36% back-end housing budget, which is why higher existing debt lowers the maximum home price."
+            },
+            {
+              "name": "Down Payment",
+              "description": "The cash you put down upfront reduces how much you need to borrow, which lowers the required monthly principal-and-interest payment and leaves more of your housing budget available for a higher purchase price."
+            },
+            {
+              "name": "Interest Rate",
+              "description": "The loan's annual interest rate, converted to a monthly rate and amortized over the loan term to determine how much of each monthly payment goes toward interest versus principal."
+            },
+            {
+              "name": "Property Tax Rate",
+              "description": "An annual, location-dependent rate applied to the home's price. Because it recurs every month alongside principal, interest, and insurance, it's folded directly into the 28% front-end cap rather than treated as a one-time cost."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -4008,6 +4174,28 @@
               "scenario": "$60,000 income, $1,200/month debts, $20,000 down, 6% rate, 30-year term",
               "maxHomePrice": "$90,778",
               "monthlyPayment": "$600"
+            }
+          ]
+        },
+        "applications": {
+          "title": "House Affordability in Practice",
+          "intro": "The 28/36 rule and its close relatives answer a few distinct borrowing questions, depending on which of this calculator's five tabs you use.",
+          "items": [
+            {
+              "title": "Setting a Home Shopping Budget",
+              "description": "The \"Max Home Price\" tab turns your income, debts, and loan terms into a single ceiling — a number worth knowing before you start touring homes or getting attached to listings above what your finances can actually support."
+            },
+            {
+              "title": "Reverse-Checking a Specific Listing",
+              "description": "The \"Required Income\" tab flips the question around: given a home price, it solves for the minimum income needed to afford it under the 28/36 rule — useful for a buyer eyeing a particular listing, or a real-estate agent quickly qualifying a client."
+            },
+            {
+              "title": "Car and Personal Loan Borrowing Capacity",
+              "description": "The \"Car Loan\" and \"Personal Loan\" tabs apply the same debt-to-income logic outside of housing — a 15%-of-income cap combined with the 36% back-end limit for a car payment, and the remaining 36% budget alone for an unsecured personal loan."
+            },
+            {
+              "title": "Sizing a Business Loan by Revenue Coverage",
+              "description": "The \"Business Loan\" tab uses a different lending logic entirely: rather than a personal income ratio, it applies a debt-service coverage ratio (DSCR), checking that a business's revenue covers its total monthly debt payments by a lender-required margin."
             }
           ]
         },
@@ -4128,6 +4316,7 @@
         "placeholder": "Enter your income and monthly debt payments to see your debt-to-income ratio.",
         "emptyStateMessage": "Enter your income and debts and press Calculate to see your results.",
         "maxTotalMonthlyDebtLabel": "Max Total Monthly Debt",
+        "categoryReferenceTitle": "DTI Category Reference",
         "maxAdditionalMonthlyDebtLabel": "Additional Room Available",
         "sentences": {
           "ratio": "With a gross monthly income of {income}, your total monthly debt puts your debt-to-income ratio at {ratio} — rated {category}.",
@@ -4196,7 +4385,38 @@
         "intro": {
           "title": "How This Calculator Works",
           "paragraph1": "This tool computes two related percentages. The front-end ratio divides your housing payment alone by your gross monthly income. The back-end ratio — usually just called the debt-to-income ratio, or DTI — divides your total monthly debt payments, housing included, by that same income. Lenders commonly look at the back-end ratio as a single snapshot of how much of your income is already committed before any new debt is added.",
-          "paragraph2": "The calculator also assigns a category to your back-end ratio using thresholds commonly referenced in mortgage underwriting: below 36% is generally considered a healthy debt load, 36-43% is a range many conventional lenders still work with, 43-50% exceeds the back-end limit used for many qualified mortgages, and 50% or higher is widely treated as a high-risk debt load. These thresholds are common reference points, not universal rules — different lenders and loan programs draw the lines differently."
+          "paragraph2": "The calculator also assigns a category to your back-end ratio using thresholds commonly referenced in mortgage underwriting: below 36% is generally considered a healthy debt load, 36-43% is a range many conventional lenders still work with, 43-50% exceeds the back-end limit used for many qualified mortgages, and 50% or higher is widely treated as a high-risk debt load. These thresholds are common reference points, not universal rules — different lenders and loan programs draw the lines differently.",
+          "diagram": {
+            "chartAriaLabel": "Three gauges showing example back-end debt-to-income ratios and the category each falls into",
+            "exampleLabel": "Household {letter}",
+            "caption": "Back-end ratios below 36% are generally considered healthy, 36-43% manageable, 43-50% high, and 50% or higher very high risk."
+          }
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "These five inputs feed both the front-end and back-end ratios this calculator computes, though which ones matter depends on which tab you're using.",
+          "items": [
+            {
+              "name": "Gross Monthly Income",
+              "description": "Your total income before taxes and other deductions, entered once and used as the denominator for both ratios this calculator computes. A higher income directly lowers both the front-end and back-end ratio for the same dollar amount of debt."
+            },
+            {
+              "name": "Housing Payment",
+              "description": "Your rent, or your mortgage payment including property tax and insurance if applicable. This is the only input to the front-end ratio, and it's also folded into the back-end ratio's total alongside every other recurring debt."
+            },
+            {
+              "name": "Other Recurring Debts",
+              "description": "Car loan payments, student loan payments, credit card minimums, and any other monthly debt payment, entered separately but summed together with housing to produce the back-end ratio's total monthly debt figure."
+            },
+            {
+              "name": "Target Back-End Ratio",
+              "description": "The ceiling you'd like to stay under, used on the \"Max Debt\" tab to work backward from a chosen ratio — 36% by default — to the total (and additional) monthly debt payment that ratio allows against your income."
+            },
+            {
+              "name": "Proposed Monthly Payment",
+              "description": "A new loan or debt payment you're considering, used on the \"Scenario Comparison\" tab to see exactly how adding it would move your back-end ratio and category before you commit to it."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -4224,6 +4444,28 @@
               "scenario": "$5,000 income, $1,800 housing, $400 car, $300 student loan, $200 credit card, $100 other",
               "backEndRatio": "56%",
               "category": "Very High"
+            }
+          ]
+        },
+        "applications": {
+          "title": "DTI in Practice",
+          "intro": "The same ratio serves a few distinct real-world purposes, depending on which tab you use it from.",
+          "items": [
+            {
+              "title": "Mortgage Pre-Qualification",
+              "description": "On the \"DTI Ratio\" tab, lenders lean heavily on the back-end ratio when qualifying a mortgage applicant, commonly citing the same 36/43/50% thresholds this calculator uses to gauge how much room a borrower has before taking on a new home loan."
+            },
+            {
+              "title": "Budgeting Headroom Before New Debt",
+              "description": "The \"Max Debt\" tab works out how much additional monthly debt payment still fits under a target ratio — useful before shopping for a car loan or personal loan, when you'd rather know your ceiling in advance than find out from a lender."
+            },
+            {
+              "title": "Stress-Testing a Specific New Payment",
+              "description": "The \"Scenario Comparison\" tab shows exactly how one proposed payment — a car loan, a new credit line — would move your ratio and category, so you can see the impact of a specific decision before committing to it rather than after."
+            },
+            {
+              "title": "General Financial Health Checkups",
+              "description": "Beyond any single borrowing decision, DTI is a simple, well-known benchmark worth revisiting periodically on its own, the same way a household might track savings rate or net worth over time."
             }
           ]
         },
