@@ -20,6 +20,7 @@ import AffordableLoanResult from "./AffordableLoanResult";
 import AffordableLoanTermTable from "./AffordableLoanTermTable";
 import AffordableLoanTermChart from "./AffordableLoanTermChart";
 import BorrowingTipsCard from "./BorrowingTipsCard";
+import AffordableLoanConceptDiagram from "./AffordableLoanConceptDiagram";
 import type { AffordableLoanMode, TermComparisonRow } from "./types";
 
 /** Consumer loans rarely run longer than this; also bounds calculateLoan's month-by-month loop against a freeze from an unbounded term. */
@@ -235,6 +236,9 @@ export default function AffordableLoanCalculator({ education }: { education: Rea
     <>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
+        <div className="mb-6">
+          <AffordableLoanConceptDiagram />
+        </div>
         <ToolAboveFold
           input={
             <AffordableLoanInputPanel

@@ -2930,7 +2930,16 @@
           "startingAmount": "You'll need to start with about {principal} today to reach your target of {target} in {years}.",
           "additionalContribution": "You'll need to contribute about {contribution} each month to reach your target of {target} in {years}."
         },
-        "disclaimer": "This tool provides general educational estimates of investment growth for illustration purposes only, not financial or investment advice. It assumes a constant, unchanging rate of return that does not reflect the volatility of real markets, and no result here is guaranteed. Consult a licensed financial advisor before making investment decisions."
+        "disclaimer": "This tool provides general educational estimates of investment growth for illustration purposes only, not financial or investment advice. It assumes a constant, unchanging rate of return that does not reflect the volatility of real markets, and no result here is guaranteed. Consult a licensed financial advisor before making investment decisions.",
+        "conceptDiagram": {
+          "title": "How Compounding Works",
+          "intro": "A starting deposit and steady monthly contributions grow on their own — compounding interest pulls the total further ahead of that the longer the money stays invested.",
+          "ariaLabel": "Diagram showing a starting amount and monthly contributions growing steadily, with compounding interest widening the gap between them and the final future value over time",
+          "timeLabel": "Time",
+          "startingAmountCaption": "Your initial deposit",
+          "contributionsCaption": "Added every month",
+          "interestCaption": "Interest earning interest"
+        }
       },
       "nav": {
         "tool": "Calculator",
@@ -3223,7 +3232,20 @@
           "deferred": "Borrowing {amount} today at {rate} annual interest for {term} with no payments until maturity, you'll owe {due} when the loan comes due.",
           "bond": "To receive {due} at maturity in {term} at {rate} annual interest, you would need to invest {received} today."
         },
-        "disclaimer": "This tool provides a general educational estimate of loan payments only, not a loan offer or financial advice. Actual rates, fees, and terms offered by a lender depend on your creditworthiness and other factors and may differ from this estimate. Consult a licensed lender or financial advisor before taking out a loan."
+        "disclaimer": "This tool provides a general educational estimate of loan payments only, not a loan offer or financial advice. Actual rates, fees, and terms offered by a lender depend on your creditworthiness and other factors and may differ from this estimate. Consult a licensed lender or financial advisor before taking out a loan.",
+        "conceptDiagram": {
+          "title": "Where Your Payment Goes",
+          "intro": "A fixed-rate loan's payment stays the same every period, but the mix inside it shifts steadily — from mostly interest early on toward mostly principal by the end.",
+          "ariaLabel": "Diagram showing four equal-sized loan payments over time, each split differently between interest and principal — mostly interest in early payments, mostly principal in later ones",
+          "timeLabel": "Loan Term",
+          "interestLabel": "Interest",
+          "principalLabel": "Principal",
+          "earlyLabel": "Early Payments",
+          "lateLabel": "Later Payments",
+          "mostlyInterestCaption": "Mostly interest",
+          "mostlyPrincipalCaption": "Mostly principal",
+          "samePaymentCaption": "Same payment amount each period"
+        }
       },
       "nav": {
         "tool": "Calculator",
@@ -3510,7 +3532,16 @@
           "requiredPayment": "To pay off a loan of {amount}, your required monthly payment is {payment}."
         },
         "placeholder": "Enter a monthly payment, rate, and term to see the maximum loan amount it supports.",
-        "disclaimer": "This tool provides a general educational estimate of borrowing capacity only, not a loan offer, pre-qualification, or financial advice. A lender's actual maximum loan amount depends on your full credit profile, existing debts, and other factors. Consult a licensed lender or financial advisor before taking out a loan."
+        "disclaimer": "This tool provides a general educational estimate of borrowing capacity only, not a loan offer, pre-qualification, or financial advice. A lender's actual maximum loan amount depends on your full credit profile, existing debts, and other factors. Consult a licensed lender or financial advisor before taking out a loan.",
+        "conceptDiagram": {
+          "title": "How Much You Can Borrow",
+          "intro": "The same rate-and-term math runs in either direction — from a payment budget to the loan it supports, or from a loan amount to the payment it requires.",
+          "ariaLabel": "Diagram showing two flows: a monthly payment budget combined with rate and term produces a maximum loan amount, and a loan amount combined with rate and term produces a required payment",
+          "rateLabel": "Rate",
+          "termLabel": "Term",
+          "row1Caption": "\"Max Loan\" tab",
+          "row2Caption": "\"Required Payment\" tab"
+        }
       },
       "tabs": {
         "groupLabel": "Calculation Type",
@@ -3759,7 +3790,19 @@
           "requiredYears": "Contributing {contribution} a month starting from {savings} at age {currentAge} with a {rate} expected annual return, you'll reach {target} in about {years} — around age {retirementAgeReached}.",
           "requiredYearsUnreachable": "At {contribution} a month starting from {savings} with a {rate} expected annual return, {target} isn't reached within 80 years — try a higher contribution or return rate."
         },
-        "inflationAdjustedBalanceLabel": "Inflation-Adjusted Balance"
+        "inflationAdjustedBalanceLabel": "Inflation-Adjusted Balance",
+        "conceptDiagram": {
+          "title": "The Path to Retirement",
+          "intro": "A starting balance plus regular contributions compound from today's age up to retirement age, growing faster the longer they have to work.",
+          "ariaLabel": "Diagram showing a balance growing from today's age to retirement age, starting from savings, boosted by monthly contributions, and accelerating from compounding growth toward a retirement goal",
+          "ageAxisLabel": "Age",
+          "todayLabel": "Today",
+          "retirementDayLabel": "Retirement Day",
+          "contributionsLabel": "Monthly Contributions",
+          "startingSavingsLabel": "Starting Savings",
+          "compoundingLabel": "Compounding Growth",
+          "goalLabel": "Retirement Goal"
+        }
       },
       "nav": {
         "tool": "Calculator",
@@ -4040,6 +4083,19 @@
         },
         "placeholder": "Enter your income, debts, down payment, and loan terms to see the maximum home price you can afford.",
         "disclaimer": "This tool provides a general educational estimate only, not a mortgage pre-approval, loan offer, or financial advice. Lenders use their own underwriting rules, which can differ from the 28/36 rule used here, and your actual approved amount depends on your full credit profile and the lender's requirements. Consult a licensed mortgage lender or financial advisor before house hunting or applying for a loan.",
+        "conceptDiagram": {
+          "title": "The 28/36 Rule",
+          "intro": "Two caps set the ceiling: housing costs alone can't exceed 28% of income, and housing plus every other debt payment can't exceed 36%.",
+          "ariaLabel": "Diagram of a gross monthly income bar split into a housing segment capped at 28%, an other-debt segment bringing the total to 36%, and the remaining income beyond that",
+          "incomeLabel": "Gross Monthly Income",
+          "backEndCapLabel": "Total Debt ≤ 36%",
+          "frontEndCapLabel": "Housing ≤ 28%",
+          "housingLabel": "Housing",
+          "otherDebtLabel": "Other Debt",
+          "remainingLabel": "Remaining Income",
+          "housingCaption": "Principal, interest, tax, insurance, HOA",
+          "remainingCaption": "Available for everything else"
+        },
         "maxCarPriceLabel": "Maximum Car Price",
         "maxPersonalLoanLabel": "Maximum Personal Loan",
         "maxBusinessLoanLabel": "Maximum Business Loan"
@@ -4323,7 +4379,23 @@
           "maxDebt": "To stay at or below a {target} debt-to-income ratio on a gross monthly income of {income}, your total monthly debt payments should not exceed {maxDebt}.",
           "scenario": "Adding a new monthly payment of {payment} would move your debt-to-income ratio from {before} to {after} — rated {category}."
         },
-        "disclaimer": "This tool provides a general educational estimate only, not a lending decision or financial advice. Lenders calculate DTI using their own rules, which can differ from the formula used here, and approval depends on many factors beyond this ratio. Consult a licensed lender or financial advisor for guidance specific to your situation."
+        "disclaimer": "This tool provides a general educational estimate only, not a lending decision or financial advice. Lenders calculate DTI using their own rules, which can differ from the formula used here, and approval depends on many factors beyond this ratio. Consult a licensed lender or financial advisor for guidance specific to your situation.",
+        "conceptDiagram": {
+          "title": "What DTI Measures",
+          "intro": "Every recurring debt payment — housing included — gets added up and divided by gross income to produce a single ratio.",
+          "ariaLabel": "Diagram of a gross monthly income bar split into housing, car, student loan, credit card, and other debt segments, bracketed as total debt payments, with the remaining income shown separately",
+          "incomeLabel": "Gross Monthly Income",
+          "totalDebtLabel": "Total Debt Payments",
+          "housingLabel": "Housing",
+          "remainingLabel": "Remaining Income",
+          "legend": {
+            "car": "Car",
+            "student": "Student Loan",
+            "creditCard": "Credit Card",
+            "other": "Other"
+          },
+          "formulaLabel": "Total Debt Payments ÷ Gross Income = DTI Ratio"
+        }
       },
       "tabs": {
         "groupLabel": "Calculation Type",

@@ -2934,7 +2934,16 @@
           "startingAmount": "Vous devrez commencer aujourd'hui avec environ {principal} pour atteindre votre objectif de {target} en {years}.",
           "additionalContribution": "Vous devrez verser environ {contribution} chaque mois pour atteindre votre objectif de {target} en {years}."
         },
-        "disclaimer": "Cet outil fournit des estimations pédagogiques générales de la croissance d'un investissement, à titre d'illustration uniquement, et ne constitue pas un conseil financier ou en investissement. Il suppose un taux de rendement constant et invariable qui ne reflète pas la volatilité des marchés réels, et aucun résultat obtenu ici n'est garanti. Consultez un conseiller financier agréé avant de prendre une décision d'investissement."
+        "disclaimer": "Cet outil fournit des estimations pédagogiques générales de la croissance d'un investissement, à titre d'illustration uniquement, et ne constitue pas un conseil financier ou en investissement. Il suppose un taux de rendement constant et invariable qui ne reflète pas la volatilité des marchés réels, et aucun résultat obtenu ici n'est garanti. Consultez un conseiller financier agréé avant de prendre une décision d'investissement.",
+        "conceptDiagram": {
+          "title": "Comment fonctionnent les intérêts composés",
+          "intro": "Un dépôt initial et des versements mensuels réguliers progressent d'eux-mêmes — les intérêts composés creusent l'écart d'autant plus que l'argent reste investi longtemps.",
+          "ariaLabel": "Diagramme montrant un montant de départ et des versements mensuels progresser régulièrement, avec les intérêts composés creusant l'écart entre eux et la valeur future finale au fil du temps",
+          "timeLabel": "Temps",
+          "startingAmountCaption": "Votre dépôt initial",
+          "contributionsCaption": "Ajouté chaque mois",
+          "interestCaption": "Les intérêts qui rapportent des intérêts"
+        }
       },
       "nav": {
         "tool": "Calculateur",
@@ -3227,7 +3236,20 @@
           "deferred": "Pour un prêt de {amount} contracté aujourd'hui à un taux annuel de {rate} sur {term} sans paiement jusqu'à l'échéance, vous devrez {due} à l'échéance.",
           "bond": "Pour recevoir {due} à l'échéance dans {term} à un taux annuel de {rate}, il vous faudrait investir {received} aujourd'hui."
         },
-        "disclaimer": "Cet outil fournit uniquement une estimation pédagogique générale des mensualités d'un prêt, et non une offre de prêt ni un conseil financier. Les taux, frais et conditions réels proposés par un prêteur dépendent de votre solvabilité et d'autres facteurs, et peuvent différer de cette estimation. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt."
+        "disclaimer": "Cet outil fournit uniquement une estimation pédagogique générale des mensualités d'un prêt, et non une offre de prêt ni un conseil financier. Les taux, frais et conditions réels proposés par un prêteur dépendent de votre solvabilité et d'autres facteurs, et peuvent différer de cette estimation. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt.",
+        "conceptDiagram": {
+          "title": "Où va votre paiement",
+          "intro": "La mensualité d'un prêt à taux fixe reste identique à chaque période, mais sa composition évolue progressivement — surtout des intérêts au début, puis surtout du capital vers la fin.",
+          "ariaLabel": "Diagramme montrant quatre mensualités de prêt de taille égale réparties dans le temps, chacune divisée différemment entre intérêts et capital — surtout des intérêts pour les premiers paiements, surtout du capital pour les derniers",
+          "timeLabel": "Durée du prêt",
+          "interestLabel": "Intérêts",
+          "principalLabel": "Capital",
+          "earlyLabel": "Premiers paiements",
+          "lateLabel": "Derniers paiements",
+          "mostlyInterestCaption": "Surtout des intérêts",
+          "mostlyPrincipalCaption": "Surtout du capital",
+          "samePaymentCaption": "Même montant de paiement à chaque période"
+        }
       },
       "nav": {
         "tool": "Calculateur",
@@ -3514,7 +3536,16 @@
           "requiredPayment": "Pour rembourser un prêt de {amount}, votre mensualité requise est de {payment}."
         },
         "placeholder": "Saisissez une mensualité, un taux et une durée pour voir le montant maximal empruntable correspondant.",
-        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale de la capacité d'emprunt, et non une offre de prêt, une préqualification ni un conseil financier. Le montant maximal réellement accordé par un prêteur dépend de votre profil de crédit complet, de vos dettes existantes et d'autres facteurs. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt."
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale de la capacité d'emprunt, et non une offre de prêt, une préqualification ni un conseil financier. Le montant maximal réellement accordé par un prêteur dépend de votre profil de crédit complet, de vos dettes existantes et d'autres facteurs. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt.",
+        "conceptDiagram": {
+          "title": "Combien vous pouvez emprunter",
+          "intro": "Le même calcul de taux et de durée fonctionne dans les deux sens — d'un budget mensuel vers le prêt qu'il permet de financer, ou d'un montant de prêt vers la mensualité qu'il exige.",
+          "ariaLabel": "Diagramme montrant deux flux : un budget mensuel combiné à un taux et une durée produit un montant maximal empruntable, et un montant de prêt combiné à un taux et une durée produit une mensualité requise",
+          "rateLabel": "Taux",
+          "termLabel": "Durée",
+          "row1Caption": "Onglet « Prêt maximal »",
+          "row2Caption": "Onglet « Mensualité requise »"
+        }
       },
       "tabs": {
         "groupLabel": "Type de calcul",
@@ -3763,7 +3794,19 @@
           "requiredYears": "En cotisant {contribution} par mois à partir de {savings} à {currentAge} ans avec un rendement annuel attendu de {rate}, vous atteindrez {target} en environ {years}, soit vers {retirementAgeReached} ans.",
           "requiredYearsUnreachable": "Avec {contribution} par mois à partir de {savings} et un rendement annuel attendu de {rate}, {target} n'est pas atteint en 80 ans — essayez une cotisation ou un rendement plus élevés."
         },
-        "inflationAdjustedBalanceLabel": "Solde ajusté à l'inflation"
+        "inflationAdjustedBalanceLabel": "Solde ajusté à l'inflation",
+        "conceptDiagram": {
+          "title": "Le chemin vers la retraite",
+          "intro": "Un solde de départ et des cotisations régulières se cumulent depuis votre âge actuel jusqu'à l'âge de la retraite, en croissant d'autant plus vite qu'ils ont de temps pour travailler.",
+          "ariaLabel": "Diagramme montrant un solde croître de l'âge actuel jusqu'à l'âge de la retraite, partant de l'épargne, renforcé par les cotisations mensuelles, et s'accélérant grâce à la croissance composée vers un objectif de retraite",
+          "ageAxisLabel": "Âge",
+          "todayLabel": "Aujourd'hui",
+          "retirementDayLabel": "Jour de la retraite",
+          "contributionsLabel": "Cotisations mensuelles",
+          "startingSavingsLabel": "Épargne de départ",
+          "compoundingLabel": "Croissance composée",
+          "goalLabel": "Objectif de retraite"
+        }
       },
       "nav": {
         "tool": "Calculatrice",
@@ -4044,6 +4087,19 @@
         },
         "placeholder": "Saisissez vos revenus, vos dettes, votre acompte et les conditions du prêt pour voir le prix maximal du logement que vous pouvez vous permettre.",
         "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une préapprobation hypothécaire, une offre de prêt ni un conseil financier. Les prêteurs appliquent leurs propres règles de souscription, qui peuvent différer de la règle 28/36 utilisée ici, et le montant réellement approuvé dépend de votre profil de crédit complet et des exigences du prêteur. Consultez un prêteur hypothécaire agréé ou un conseiller financier avant de chercher un logement ou de solliciter un prêt.",
+        "conceptDiagram": {
+          "title": "La règle des 28/36",
+          "intro": "Deux plafonds fixent la limite : le coût du logement seul ne peut dépasser 28 % du revenu, et le logement plus toutes les autres dettes ne peuvent dépasser 36 %.",
+          "ariaLabel": "Diagramme d'une barre de revenu mensuel brut divisée en un segment logement plafonné à 28 %, un segment autres dettes portant le total à 36 %, et le revenu restant au-delà",
+          "incomeLabel": "Revenu mensuel brut",
+          "backEndCapLabel": "Dette totale ≤ 36 %",
+          "frontEndCapLabel": "Logement ≤ 28 %",
+          "housingLabel": "Logement",
+          "otherDebtLabel": "Autres dettes",
+          "remainingLabel": "Revenu restant",
+          "housingCaption": "Capital, intérêts, taxe foncière, assurance, charges de copropriété",
+          "remainingCaption": "Disponible pour tout le reste"
+        },
         "maxCarPriceLabel": "Prix maximal du véhicule",
         "maxPersonalLoanLabel": "Prêt personnel maximal",
         "maxBusinessLoanLabel": "Prêt professionnel maximal"
@@ -4327,7 +4383,23 @@
           "maxDebt": "Pour rester à un ratio dette/revenu de {target} ou moins avec un revenu mensuel brut de {income}, vos paiements de dette mensuels totaux ne devraient pas dépasser {maxDebt}.",
           "scenario": "Ajouter un nouveau paiement mensuel de {payment} ferait passer votre taux d'endettement de {before} à {after} — classé {category}."
         },
-        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une décision de prêt ni un conseil financier. Les prêteurs calculent le DTI selon leurs propres règles, qui peuvent différer de la formule utilisée ici, et l'approbation dépend de nombreux facteurs au-delà de ce seul ratio. Consultez un prêteur agréé ou un conseiller financier pour des conseils adaptés à votre situation."
+        "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non une décision de prêt ni un conseil financier. Les prêteurs calculent le DTI selon leurs propres règles, qui peuvent différer de la formule utilisée ici, et l'approbation dépend de nombreux facteurs au-delà de ce seul ratio. Consultez un prêteur agréé ou un conseiller financier pour des conseils adaptés à votre situation.",
+        "conceptDiagram": {
+          "title": "Ce que mesure le DTI",
+          "intro": "Chaque paiement de dette récurrent — logement inclus — est additionné puis divisé par le revenu brut pour produire un ratio unique.",
+          "ariaLabel": "Diagramme d'une barre de revenu mensuel brut divisée en segments logement, auto, prêt étudiant, carte de crédit et autres dettes, regroupés comme paiements de dette totaux, avec le revenu restant indiqué séparément",
+          "incomeLabel": "Revenu mensuel brut",
+          "totalDebtLabel": "Paiements de dette totaux",
+          "housingLabel": "Logement",
+          "remainingLabel": "Revenu restant",
+          "legend": {
+            "car": "Auto",
+            "student": "Prêt étudiant",
+            "creditCard": "Carte de crédit",
+            "other": "Autre"
+          },
+          "formulaLabel": "Paiements de dette totaux ÷ Revenu brut = Ratio DTI"
+        }
       },
       "tabs": {
         "groupLabel": "Type de calcul",

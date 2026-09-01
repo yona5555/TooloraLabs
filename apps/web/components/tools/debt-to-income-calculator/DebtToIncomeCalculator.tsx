@@ -20,6 +20,7 @@ import DebtToIncomeInputPanel from "./DebtToIncomeInputPanel";
 import DebtToIncomeResult from "./DebtToIncomeResult";
 import DebtToIncomeScenarioChart from "./DebtToIncomeScenarioChart";
 import DtiCategoryReferenceCard from "./DtiCategoryReferenceCard";
+import DebtToIncomeConceptDiagram from "./DebtToIncomeConceptDiagram";
 import type { DtiMode } from "./types";
 
 /** Same back-end-ratio thresholds `calculateDebtToIncome` buckets its own result into, applied here to the max-debt tab's target ratio (which has no computed result of its own to read a category off of). */
@@ -307,6 +308,9 @@ export default function DebtToIncomeCalculator({ education }: { education: React
     <>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
+        <div className="mb-6">
+          <DebtToIncomeConceptDiagram />
+        </div>
         <ToolAboveFold
           input={
             <DebtToIncomeInputPanel

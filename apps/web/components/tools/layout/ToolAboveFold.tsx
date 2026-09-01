@@ -60,12 +60,28 @@ type ToolAboveFoldProps = {
  * boxless empty column behind it. Tools with balanced columns (contentHeight
  * <= sidebarHeight) get no extra height and no sticky class — this is a
  * no-op for them, not a behavior change.
+ *
+ * The same automatic height-mismatch handling applies to `input` versus
+ * `result`, independent of the sidebar comparison above: whenever a tool's
+ * result column (hero number, breakdown chart, mode tabs, any "fill the
+ * gap" card stacked beneath) runs taller than its input form, the input
+ * card is stretched to match and made sticky at the same `top-20` offset,
+ * so the fields stay reachable while the visitor scrolls through a long
+ * result column instead of scrolling out of view after one screen. Tools
+ * whose input is already the taller (or equal) column get no extra height
+ * and no sticky class — a no-op, not a behavior change. `top-20` matches
+ * the sidebar's own offset, so both columns clear the site header by the
+ * same margin and never fight each other for the same sticky band.
  */
 export default function ToolAboveFold({ input, result, sidebar, secondary }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
+  const [inputHeight, setInputHeight] = useState(0);
+  const [resultHeight, setResultHeight] = useState(0);
 
   useLayoutEffect(() => {
     const el = sidebarRef.current;
@@ -92,7 +108,30 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
     return () => observer.disconnect();
   }, []);
 
+  useLayoutEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      setInputHeight(entries[0].contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const el = resultRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      setResultHeight(entries[0].contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const sidebarBoxHeight = contentHeight > sidebarHeight ? contentHeight : undefined;
+  const inputBoxHeight = resultHeight > inputHeight ? resultHeight : undefined;
 
   return (
     <div
@@ -100,8 +139,17 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
       className="relative grid grid-cols-1 content-start items-start gap-6 lg:grid-cols-[320px_minmax(360px,1fr)_320px]"
       style={{ minHeight: sidebarHeight || undefined }}
     >
-      <div className="min-w-0 lg:col-start-1 lg:row-start-1">{input}</div>
-      <div className="min-w-0 lg:col-start-2 lg:row-start-1">{result}</div>
+      <div
+        className="min-w-0 lg:col-start-1 lg:row-start-1"
+        style={inputBoxHeight ? { height: inputBoxHeight } : undefined}
+      >
+        <div ref={inputRef} className={inputBoxHeight ? "lg:sticky lg:top-20" : undefined}>
+          {input}
+        </div>
+      </div>
+      <div ref={resultRef} className="min-w-0 lg:col-start-2 lg:row-start-1">
+        {result}
+      </div>
       {secondary && (
         <div className="min-w-0 lg:col-start-1 lg:col-span-2 lg:row-start-2">{secondary}</div>
       )}

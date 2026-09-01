@@ -14,6 +14,7 @@ import RetirementInputPanel from "./RetirementInputPanel";
 import RetirementResult from "./RetirementResult";
 import RetirementGrowthChart from "./RetirementGrowthChart";
 import RetirementMilestonesCard from "./RetirementMilestonesCard";
+import RetirementConceptDiagram from "./RetirementConceptDiagram";
 import RetirementYearlyBreakdownTable from "./RetirementYearlyBreakdownTable";
 import type { RetirementMode, RetirementOutcome } from "./types";
 
@@ -306,6 +307,9 @@ export default function RetirementCalculator({ education }: { education: ReactNo
     <>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
+        <div className="mb-6">
+          <RetirementConceptDiagram />
+        </div>
         <ToolAboveFold
           input={
             <RetirementInputPanel

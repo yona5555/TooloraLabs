@@ -17,6 +17,7 @@ import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import PlainDisclaimer from "@/components/tool-ui/PlainDisclaimer";
 import LoanModeTabs from "./LoanModeTabs";
 import LoanTipsCard from "./LoanTipsCard";
 import LoanInputPanel from "./LoanInputPanel";
@@ -25,7 +26,7 @@ import LoanAmortizationChart from "./LoanAmortizationChart";
 import LoanGrowthChart from "./LoanGrowthChart";
 import LoanAmortizationTable from "./LoanAmortizationTable";
 import LoanGrowthTable from "./LoanGrowthTable";
-import LoanDisclaimer from "./LoanDisclaimer";
+import LoanConceptDiagram from "./LoanConceptDiagram";
 import { LoanLiveInputsProvider } from "./LoanLiveInputsContext";
 import type { LoanMode, TermUnit, CompoundingFrequency, PaymentFrequency } from "./types";
 
@@ -312,6 +313,9 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
     <LoanLiveInputsProvider value={{ hasCalculatedAmortized: hasCalculated.amortized, amortizedSchedule: amortizedResult.schedule, digitStyle, currency }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
+        <div className="mb-6">
+          <LoanConceptDiagram />
+        </div>
         <ToolAboveFold
           input={
             <LoanInputPanel
@@ -392,13 +396,13 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
                 </>
               )}
 
-              <LoanDisclaimer />
             </div>
           }
         />
       </div>
 
       {education}
+      <PlainDisclaimer text={t("aboveFold.disclaimer")} />
     </LoanLiveInputsProvider>
   );
 }

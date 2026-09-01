@@ -17,13 +17,14 @@ import { convertAmountString, isSupportedCurrency, DEFAULT_CURRENCY, type Curren
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import PlainDisclaimer from "@/components/tool-ui/PlainDisclaimer";
 import CompoundInterestModeTabs from "./CompoundInterestModeTabs";
 import RuleOf72Card from "./RuleOf72Card";
 import CompoundInterestInputPanel from "./CompoundInterestInputPanel";
 import CompoundInterestResult from "./CompoundInterestResult";
 import CompoundInterestGrowthChart from "./CompoundInterestGrowthChart";
 import CompoundInterestYearlyBreakdownTable from "./CompoundInterestYearlyBreakdownTable";
-import CompoundInterestDisclaimer from "./CompoundInterestDisclaimer";
+import CompoundInterestConceptDiagram from "./CompoundInterestConceptDiagram";
 import { CompoundInterestLiveInputsProvider } from "./CompoundInterestLiveInputsContext";
 import { SOLVE_MODES, type CompoundingFrequency, type SolveMode } from "./types";
 
@@ -441,6 +442,9 @@ export default function CompoundInterestCalculator({ education }: { education: R
     >
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
+        <div className="mb-6">
+          <CompoundInterestConceptDiagram />
+        </div>
         <ToolAboveFold
           input={
             <CompoundInterestInputPanel
@@ -529,13 +533,13 @@ export default function CompoundInterestCalculator({ education }: { education: R
                 monthlySchedule={computation.forward.monthlySchedule}
                 digitStyle={digitStyle}
               />
-              <CompoundInterestDisclaimer />
             </div>
           }
         />
       </div>
 
       {education}
+      <PlainDisclaimer text={t("aboveFold.disclaimer")} />
     </CompoundInterestLiveInputsProvider>
   );
 }
