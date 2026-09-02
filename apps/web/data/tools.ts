@@ -582,6 +582,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "step-by-step-math-solver",
+    title: "Step-by-Step Math Solver",
+    category: "math-science",
+    description:
+      "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+    featured: false,
+    keywords: [
+      "step by step math solver",
+      "algebra solver",
+      "quadratic equation solver",
+      "fraction calculator with steps",
+      "derivative calculator",
+      "show work math solver",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

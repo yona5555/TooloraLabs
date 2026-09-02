@@ -8991,6 +8991,98 @@
         }
       }
     },
+    "step-by-step-math-solver": {
+      "title": "Step-by-Step Math Solver",
+      "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+      "nav": { "tool": "Solver", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "aboveFold": {
+        "quickReference": {
+          "title": "What This Solver Covers",
+          "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
+          "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+        }
+      },
+      "form": {
+        "inputTitle": "Problem",
+        "modeLabel": "Problem Type",
+        "mode": {
+          "linear-equation": "Linear Equation",
+          "quadratic-equation": "Quadratic Equation",
+          "fraction-operation": "Fraction Operation",
+          "derivative": "Derivative"
+        },
+        "numeratorLabel": "Numerator",
+        "denominatorLabel": "Denominator",
+        "operationLabel": "Operation",
+        "fracOp": {
+          "add": "Add (+)",
+          "subtract": "Subtract (−)",
+          "multiply": "Multiply (×)",
+          "divide": "Divide (÷)"
+        },
+        "termsLabel": "Polynomial Terms",
+        "coefficientLabel": "Coefficient",
+        "powerLabel": "Power of x",
+        "removeTerm": "Remove this term",
+        "addTerm": "Add Another Term"
+      },
+      "result": {
+        "heading": "Solution",
+        "missingInput": "Enter all the required values.",
+        "noUniqueSolution": "This equation doesn't have a single unique solution.",
+        "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
+        "invalidFraction": "A fraction's denominator can't be zero.",
+        "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
+        "emptyPolynomial": "Enter at least one non-zero term."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Step-by-Step Solving",
+          "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
+          "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "One problem from each of the four supported types.",
+          "columnCalculation": "Problem",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "3x + 5 = 2x + 9", "result": "x = 4" },
+            { "calculation": "x² − 5x + 6 = 0", "result": "x₁ = 3, x₂ = 2" },
+            { "calculation": "1/2 + 1/3", "result": "5/6" },
+            { "calculation": "f(x) = 3x² + 2x + 5", "result": "f'(x) = 6x + 2" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "What does it mean when a linear equation has \"no unique solution\"?", "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal." },
+            { "question": "Why does a quadratic equation sometimes have complex solutions?", "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis." },
+            { "question": "Why do fraction results always come back reduced to lowest terms?", "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result." },
+            { "question": "Why does the derivative of a constant term always come out to 0?", "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The Book That Named Algebra",
+            "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
+              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
+              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
+              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+            ]
+          }
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "حاسبة النسبة المئوية",
       "description": "احسب النسب المئوية والنسب العكسية والفرق النسبي فورًا، مع رسم بياني مقارن حي لكل نتيجة.",
