@@ -320,11 +320,29 @@ export default function HeroMathDoodles() {
       </Doodle>
 
       {/* scattered through the category grid itself — allowed to sit behind the cards */}
+      <Doodle top="20%" left="20%" rotate={5} fontSize={16}>
+        <EquationText>√2</EquationText>
+      </Doodle>
+      <Doodle top="20%" right="20%" rotate={-5} size={18}>
+        <Diamond />
+      </Doodle>
+      <Doodle top="27%" left="35%" rotate={-4} size={16}>
+        <CircleShape />
+      </Doodle>
+      <Doodle top="27%" right="35%" rotate={4} fontSize={15}>
+        <EquationText>1/3</EquationText>
+      </Doodle>
       <Doodle top="34%" left="18%" rotate={4} fontSize={15}>
         <EquationText>x + y = z</EquationText>
       </Doodle>
       <Doodle top="34%" right="18%" rotate={-4} fontSize={17}>
         <EquationText>2a = 10</EquationText>
+      </Doodle>
+      <Doodle top="40%" left="30%" rotate={6} size={16}>
+        <Triangle />
+      </Doodle>
+      <Doodle top="40%" right="30%" rotate={-6} fontSize={16}>
+        <EquationText>π/2</EquationText>
       </Doodle>
       <Doodle top="46%" left="22%" rotate={-5} size={20}>
         <InfinityShape />
@@ -332,25 +350,50 @@ export default function HeroMathDoodles() {
       <Doodle top="46%" right="22%" rotate={5} fontSize={16}>
         <EquationText>y = mx + b</EquationText>
       </Doodle>
+      <Doodle top="52%" left="35%" rotate={4} fontSize={15}>
+        <EquationText>x̄</EquationText>
+      </Doodle>
+      <Doodle top="52%" right="35%" rotate={-4} size={16}>
+        <SquareShape />
+      </Doodle>
       <Doodle top="58%" left="16%" rotate={5} fontSize={15}>
         <EquationText>∆</EquationText>
       </Doodle>
       <Doodle top="58%" right="16%" rotate={-5} size={18}>
         <SquareShape />
       </Doodle>
-
-      {/* the open band below the category grid, at the section's bottom edge */}
-      <Doodle bottom="3%" left="15%" rotate={-4} fontSize={16}>
-        <EquationText>x² + 2x + 1</EquationText>
-      </Doodle>
-      <Doodle bottom="3%" left="40%" rotate={5} size={20}>
+      <Doodle top="64%" left="30%" rotate={-5} size={16}>
         <CircleShape />
       </Doodle>
-      <Doodle bottom="3%" right="40%" rotate={-5} fontSize={15}>
+      <Doodle top="64%" right="30%" rotate={5} fontSize={16}>
+        <EquationText>b²</EquationText>
+      </Doodle>
+
+      {/* the band below the category grid, reaching all the way to the section's true bottom edge
+          (the wrapper's own bottom padding) so no bare strip is left before the footer */}
+      <Doodle bottom="0.5%" left="4%" rotate={6} size={22}>
+        <Triangle />
+      </Doodle>
+      <Doodle bottom="1%" left="15%" rotate={-4} fontSize={16}>
+        <EquationText>x² + 2x + 1</EquationText>
+      </Doodle>
+      <Doodle bottom="0.5%" left="30%" rotate={4} fontSize={17}>
+        <EquationText>a + b</EquationText>
+      </Doodle>
+      <Doodle bottom="1%" left="40%" rotate={5} size={20}>
+        <CircleShape />
+      </Doodle>
+      <Doodle bottom="0.5%" right="40%" rotate={-5} fontSize={15}>
         <EquationText>sin θ</EquationText>
       </Doodle>
-      <Doodle bottom="3%" right="15%" rotate={4} fontSize={18}>
+      <Doodle bottom="1%" right="30%" rotate={-4} size={18}>
+        <SquareShape />
+      </Doodle>
+      <Doodle bottom="0.5%" right="15%" rotate={4} fontSize={18}>
         <EquationText>%</EquationText>
+      </Doodle>
+      <Doodle bottom="1%" right="4%" rotate={-6} size={22}>
+        <Pentagon />
       </Doodle>
     </div>
   );
