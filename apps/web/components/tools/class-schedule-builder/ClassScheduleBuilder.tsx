@@ -56,7 +56,7 @@ export default function ClassScheduleBuilder({ education }: { education: ReactNo
         <ToolAboveFold
           input={<ScheduleInputPanel classes={classes} onClassesChange={setClasses} />}
           result={<ScheduleResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="class-schedule-builder" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="class-schedule-builder" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

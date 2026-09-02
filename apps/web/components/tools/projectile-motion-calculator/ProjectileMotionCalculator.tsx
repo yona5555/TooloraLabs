@@ -74,7 +74,7 @@ export default function ProjectileMotionCalculator({ education }: { education: R
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="projectile-motion-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="projectile-motion-calculator" category="physics" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

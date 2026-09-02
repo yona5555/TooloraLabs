@@ -73,7 +73,7 @@ export default function SignificantFiguresCalculator({ education }: { education:
             />
           }
           result={<SignificantFiguresResult result={result} computed={computed} />}
-          sidebar={<RelatedToolsSidebar currentSlug="significant-figures-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="significant-figures-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

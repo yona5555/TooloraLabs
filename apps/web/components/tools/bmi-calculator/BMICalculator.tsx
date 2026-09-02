@@ -220,7 +220,7 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
             <BMIMiniConverter />
           </div>
         }
-        sidebar={<RelatedToolsSidebar currentSlug="bmi-calculator" category="calculators" />}
+        sidebar={<RelatedToolsSidebar currentSlug="bmi-calculator" category="health-fitness" />}
         secondary={
           <div className="flex flex-col gap-6">
             <SectionNav items={navItems} />

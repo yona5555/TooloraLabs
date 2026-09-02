@@ -495,7 +495,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
           sidebar={
             <RelatedToolsSidebar
               currentSlug="compound-interest-calculator"
-              category="calculators"
+              category="financial-calculators"
               relatedList={RELATED_TOOLS_BY_MODE[mode]}
               relatedListTitle={t("relatedTools.title")}
             />
@@ -507,7 +507,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
               <div className="hidden md:block lg:hidden">
                 <RelatedToolsSidebar
                   currentSlug="compound-interest-calculator"
-                  category="calculators"
+                  category="financial-calculators"
                   relatedList={RELATED_TOOLS_BY_MODE[mode]}
                   relatedListTitle={t("relatedTools.title")}
                 />

@@ -277,7 +277,7 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
             <AgeMiniDateDiff />
           </div>
         }
-        sidebar={<RelatedToolsSidebar currentSlug="age-calculator" category="calculators" />}
+        sidebar={<RelatedToolsSidebar currentSlug="age-calculator" category="date-time" />}
         secondary={<AgeMilestones result={result} digitStyle={digitStyle} />}
       />
 

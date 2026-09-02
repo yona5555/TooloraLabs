@@ -90,7 +90,7 @@ export default function ScientificNotationConverter({ education }: { education: 
             />
           }
           result={<ScientificNotationResult result={result} computed={computed} />}
-          sidebar={<RelatedToolsSidebar currentSlug="scientific-notation-converter" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="scientific-notation-converter" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

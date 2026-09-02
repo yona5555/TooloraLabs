@@ -61,7 +61,7 @@ export default function DensityCalculator({ education }: { education: ReactNode 
             />
           }
           result={<DensityResult result={result} operation={operation} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="density-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="density-calculator" category="physics" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

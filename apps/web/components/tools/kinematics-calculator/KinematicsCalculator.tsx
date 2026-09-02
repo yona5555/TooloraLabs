@@ -77,7 +77,7 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
             />
           }
           result={<KinematicsResult result={result} mode={mode} solveForTime={solveForTime} solveForDistance={solveForDistance} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="kinematics-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="kinematics-calculator" category="physics" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

@@ -66,7 +66,7 @@ export default function CitationGenerator({ education }: { education: ReactNode 
         <ToolAboveFold
           input={<CitationInputPanel draft={draft} onChange={setDraft} />}
           result={<CitationResult result={result} />}
-          sidebar={<RelatedToolsSidebar currentSlug="citation-generator" category="text-tools" />}
+          sidebar={<RelatedToolsSidebar currentSlug="citation-generator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

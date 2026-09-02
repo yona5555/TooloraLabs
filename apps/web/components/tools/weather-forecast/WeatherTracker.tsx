@@ -77,7 +77,7 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="weather-forecast" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="weather-forecast" category="weather" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

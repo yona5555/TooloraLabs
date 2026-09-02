@@ -34,7 +34,7 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
         <ToolAboveFold
           input={<BalancerInputPanel equation={equation} onEquationChange={setEquation} />}
           result={<BalancerResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="chemical-equation-balancer" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="chemical-equation-balancer" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

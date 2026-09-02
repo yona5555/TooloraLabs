@@ -201,7 +201,7 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
               <BreakEvenModeTabs mode={mode} onModeChange={handleModeChange} />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="break-even-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="break-even-calculator" category="business-finance" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

@@ -89,7 +89,7 @@ export default function ForceCalculator({ education }: { education: ReactNode })
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="force-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="force-calculator" category="physics" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

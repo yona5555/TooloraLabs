@@ -81,7 +81,7 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
             />
           }
           result={<EnergyResult result={result} mode={mode} angleDegrees={parseLocalizedNumber(angleDegrees) || 0} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="energy-work-power-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="energy-work-power-calculator" category="physics" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

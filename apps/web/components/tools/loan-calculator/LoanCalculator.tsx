@@ -364,7 +364,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
           sidebar={
             <RelatedToolsSidebar
               currentSlug="loan-calculator"
-              category="calculators"
+              category="financial-calculators"
               relatedList={["mortgage-calculator", "affordable-loan-calculator", "compound-interest-calculator", "retirement-calculator"]}
               relatedListTitle={t("relatedTools.title")}
             />

@@ -55,7 +55,7 @@ export default function TipCalculator({ education }: { education: ReactNode }) {
             />
           }
           result={<TipResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="tip-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="tip-calculator" category="business-finance" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

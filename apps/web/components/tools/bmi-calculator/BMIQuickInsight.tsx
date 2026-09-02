@@ -23,7 +23,7 @@ export default function BMIQuickInsight({ result }: { result: BMIExtendedResult 
         href="/tools/age-calculator"
         className="mt-4 flex items-center gap-3 rounded-xl border border-zinc-200 p-3 transition hover:border-blue-200 hover:bg-blue-50/50 dark:border-zinc-800 dark:hover:border-blue-500/40 dark:hover:bg-blue-500/10"
       >
-        <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${getCategoryIconColor("calculators")}`}>
+        <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${getCategoryIconColor("date-time")}`}>
           <AgeIcon size={16} strokeWidth={2} />
         </div>
         <div>

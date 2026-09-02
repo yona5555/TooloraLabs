@@ -65,7 +65,7 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
             />
           }
           result={<GasLawResult result={result} solveFor={solveFor} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="ideal-gas-law-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="ideal-gas-law-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

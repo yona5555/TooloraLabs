@@ -66,7 +66,7 @@ export default function SalesTaxCalculator({ education }: { education: ReactNode
             />
           }
           result={<SalesTaxResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="sales-tax-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="sales-tax-calculator" category="business-finance" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

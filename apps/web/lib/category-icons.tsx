@@ -1,10 +1,17 @@
 import {
+  Atom,
   Calculator,
+  CalendarClock,
+  CloudSun,
   Code2,
   FileText,
+  FlaskConical,
   Folder,
+  GraduationCap,
   Globe,
   HeartPulse,
+  PiggyBank,
+  Receipt,
   RefreshCw,
   Sigma,
   TrendingUp,
@@ -21,6 +28,13 @@ export const categoryIcons: Record<string, LucideIcon> = {
   sigma: Sigma,
   "heart-pulse": HeartPulse,
   globe: Globe,
+  "piggy-bank": PiggyBank,
+  receipt: Receipt,
+  atom: Atom,
+  flask: FlaskConical,
+  "graduation-cap": GraduationCap,
+  "calendar-clock": CalendarClock,
+  "cloud-sun": CloudSun,
 };
 
 export function getCategoryIcon(icon: string): LucideIcon {

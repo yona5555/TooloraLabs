@@ -67,7 +67,7 @@ export default function DiscountCalculator({ education }: { education: ReactNode
             />
           }
           result={<DiscountResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="discount-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="discount-calculator" category="business-finance" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

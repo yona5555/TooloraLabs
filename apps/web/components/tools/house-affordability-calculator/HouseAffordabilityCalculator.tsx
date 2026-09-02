@@ -555,7 +555,7 @@ export default function HouseAffordabilityCalculator({ education }: { education:
               <BorrowingComparisonChart rows={comparisonRows} digitStyle={digitStyle} currency={currency} />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="house-affordability-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="house-affordability-calculator" category="financial-calculators" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

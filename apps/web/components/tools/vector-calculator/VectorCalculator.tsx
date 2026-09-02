@@ -68,7 +68,7 @@ export default function VectorCalculator({ education }: { education: ReactNode }
             />
           }
           result={<VectorResult result={result} ax={axValue} ay={ayValue} bx={bxValue} by={byValue} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="vector-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="vector-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

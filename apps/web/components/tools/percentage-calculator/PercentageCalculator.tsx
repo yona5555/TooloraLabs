@@ -70,7 +70,7 @@ export default function PercentageCalculator({ education }: { education: ReactNo
             />
           }
           result={<PercentageResult result={result} computed={computed} />}
-          sidebar={<RelatedToolsSidebar currentSlug="percentage-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="percentage-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

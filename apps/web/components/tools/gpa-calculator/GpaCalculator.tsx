@@ -91,7 +91,7 @@ export default function GpaCalculator({ education }: { education: ReactNode }) {
             />
           }
           result={<GpaResult result={result} operation={operation} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="gpa-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="gpa-calculator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

@@ -109,7 +109,7 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="tdee-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="tdee-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

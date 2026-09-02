@@ -144,7 +144,7 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
               onPrint={handlePrint}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="invoice-generator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="invoice-generator" category="business-finance" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

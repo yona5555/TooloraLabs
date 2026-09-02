@@ -40,7 +40,7 @@ export default function StatisticsCalculator({ education }: { education: ReactNo
         <ToolAboveFold
           input={<StatisticsInputPanel rawData={rawData} onRawDataChange={setRawData} />}
           result={<StatisticsResult result={result} values={values} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="statistics-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="statistics-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

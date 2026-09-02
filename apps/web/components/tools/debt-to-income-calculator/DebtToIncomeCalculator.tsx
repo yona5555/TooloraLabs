@@ -358,7 +358,7 @@ export default function DebtToIncomeCalculator({ education }: { education: React
               {mode === "maxDebt" && <DtiCategoryReferenceCard activeCategory={categorizeRatio(parseLocalizedNumber(targetBackEndRatio) || 0)} />}
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="debt-to-income-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="debt-to-income-calculator" category="financial-calculators" />}
           secondary={<SectionNav items={navItems} visible={navBarVisible} />}
         />
       </div>

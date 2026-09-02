@@ -73,7 +73,7 @@ export default function StoichiometryCalculator({ education }: { education: Reac
             />
           }
           result={<StoichiometryResult result={result} targetFormula={targetFormula} targetUnit={targetUnit} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="stoichiometry-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="stoichiometry-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

@@ -101,7 +101,7 @@ export default function WorldTimeCalculator({ education }: { education: ReactNod
             />
           }
           result={<WorldTimeResult fromCity={fromCity} toCity={toCity} result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="world-time-converter" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="world-time-converter" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

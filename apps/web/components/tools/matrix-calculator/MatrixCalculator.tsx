@@ -76,7 +76,7 @@ export default function MatrixCalculator({ education }: { education: ReactNode }
             />
           }
           result={<MatrixResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="matrix-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="matrix-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

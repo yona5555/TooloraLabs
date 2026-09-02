@@ -65,7 +65,7 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
             />
           }
           result={<OhmsLawResult result={result} knownPair={knownPair} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="ohms-law-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="ohms-law-calculator" category="physics" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

@@ -87,7 +87,7 @@ export default function ScientificCalculator({ education }: { education: ReactNo
             />
           }
           result={<ScientificKeypad state={state} dispatch={dispatch} />}
-          sidebar={<RelatedToolsSidebar currentSlug="scientific-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="scientific-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

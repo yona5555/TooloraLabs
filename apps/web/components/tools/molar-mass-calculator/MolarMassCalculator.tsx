@@ -34,7 +34,7 @@ export default function MolarMassCalculator({ education }: { education: ReactNod
         <ToolAboveFold
           input={<MolarMassInputPanel formula={formula} onFormulaChange={setFormula} />}
           result={<MolarMassResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="molar-mass-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="molar-mass-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

@@ -46,7 +46,7 @@ export const tools: Tool[] = [
   {
     slug: "compound-interest-calculator",
     title: "Compound Interest Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "See how your savings or investment grows over time with compound interest and optional monthly contributions, with a year-by-year growth chart.",
     featured: true,
@@ -61,7 +61,7 @@ export const tools: Tool[] = [
   {
     slug: "loan-calculator",
     title: "Loan Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "Calculate the monthly payment, total interest, and full amortization schedule for any fixed-rate installment loan.",
     featured: true,
@@ -76,7 +76,7 @@ export const tools: Tool[] = [
   {
     slug: "affordable-loan-calculator",
     title: "Affordable Loan Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "Find the maximum loan amount a monthly payment you can afford will support, at a given interest rate and term.",
     featured: false,
@@ -91,7 +91,7 @@ export const tools: Tool[] = [
   {
     slug: "retirement-calculator",
     title: "Retirement Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "Project your retirement savings balance from a starting amount plus regular monthly contributions, compounding at an expected annual return.",
     featured: false,
@@ -106,7 +106,7 @@ export const tools: Tool[] = [
   {
     slug: "house-affordability-calculator",
     title: "House Affordability Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "Estimate the maximum home price you can afford based on your income, existing debts, down payment, and loan terms, using the standard 28/36 affordability rule.",
     featured: false,
@@ -121,7 +121,7 @@ export const tools: Tool[] = [
   {
     slug: "debt-to-income-calculator",
     title: "Debt-to-Income Ratio Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "Calculate your front-end and back-end debt-to-income (DTI) ratios from your income and monthly debt payments, with a category rating lenders commonly use.",
     featured: false,
@@ -136,7 +136,7 @@ export const tools: Tool[] = [
   {
     slug: "weather-forecast",
     title: "Weather Forecast",
-    category: "calculators",
+    category: "weather",
     description:
       "Current conditions and a 7-day forecast for major world cities or any city you search, with temperature, humidity, wind, and precipitation chance.",
     featured: true,
@@ -189,7 +189,7 @@ export const tools: Tool[] = [
   {
     slug: "scientific-calculator",
     title: "Scientific Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "A full scientific calculator with trigonometric, logarithmic, and power functions.",
     featured: true,
@@ -198,7 +198,7 @@ export const tools: Tool[] = [
   {
     slug: "age-calculator",
     title: "Age Calculator",
-    category: "calculators",
+    category: "date-time",
     description: "Calculate your exact age in years, months and days.",
     featured: true,
     keywords: [
@@ -240,7 +240,7 @@ export const tools: Tool[] = [
   {
     slug: "mortgage-calculator",
     title: "Mortgage Calculator",
-    category: "calculators",
+    category: "financial-calculators",
     description:
       "Calculate your monthly mortgage payment, full amortization schedule, PMI removal date, and extra-payment savings.",
     featured: true,
@@ -261,7 +261,7 @@ export const tools: Tool[] = [
   {
     slug: "fraction-calculator",
     title: "Fraction Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Add, subtract, multiply, and divide fractions with full simplified steps, a mixed-number and decimal equivalent, and a diagram of every result.",
     featured: false,
@@ -279,7 +279,7 @@ export const tools: Tool[] = [
   {
     slug: "scientific-notation-converter",
     title: "Scientific Notation Converter",
-    category: "math-science",
+    category: "math",
     description:
       "Convert numbers between standard and scientific notation, plus multiply and divide values already in scientific notation, with engineering notation and named magnitudes.",
     featured: false,
@@ -296,7 +296,7 @@ export const tools: Tool[] = [
   {
     slug: "significant-figures-calculator",
     title: "Significant Figures Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Count significant figures in a measured value, round to a chosen number of them, and correctly propagate measurement precision through addition, subtraction, multiplication, and division.",
     featured: false,
@@ -312,7 +312,7 @@ export const tools: Tool[] = [
   {
     slug: "density-calculator",
     title: "Density Calculator",
-    category: "math-science",
+    category: "physics",
     description:
       "Solve for density, mass, or volume from the other two, with the SI (kg/m³) equivalent and specific gravity relative to water.",
     featured: false,
@@ -328,7 +328,7 @@ export const tools: Tool[] = [
   {
     slug: "ohms-law-calculator",
     title: "Ohm's Law Calculator",
-    category: "math-science",
+    category: "physics",
     description:
       "Solve for voltage, current, resistance, and power from any two known electrical quantities, with a dynamic Ohm's Law triangle diagram.",
     featured: false,
@@ -344,7 +344,7 @@ export const tools: Tool[] = [
   {
     slug: "ph-calculator",
     title: "pH Calculator",
-    category: "math-science",
+    category: "chemistry",
     description:
       "Convert between pH, pOH, hydrogen ion concentration, and hydroxide ion concentration for aqueous solutions at 25°C.",
     featured: false,
@@ -360,7 +360,7 @@ export const tools: Tool[] = [
   {
     slug: "statistics-calculator",
     title: "Statistics Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Calculate mean, median, mode, range, variance, and standard deviation for any data set, with a dynamic dot plot of the distribution.",
     featured: false,
@@ -376,7 +376,7 @@ export const tools: Tool[] = [
   {
     slug: "molarity-calculator",
     title: "Molarity & Dilution Calculator",
-    category: "math-science",
+    category: "chemistry",
     description:
       "Calculate molar concentration from moles or mass, or solve dilution problems with C1V1 = C2V2, with a dynamic flask diagram.",
     featured: false,
@@ -392,7 +392,7 @@ export const tools: Tool[] = [
   {
     slug: "ideal-gas-law-calculator",
     title: "Ideal Gas Law Calculator",
-    category: "math-science",
+    category: "chemistry",
     description:
       "Solve for pressure, volume, moles, or temperature using the ideal gas law, PV = nRT, with a dynamic gas cylinder diagram.",
     featured: false,
@@ -408,7 +408,7 @@ export const tools: Tool[] = [
   {
     slug: "energy-work-power-calculator",
     title: "Energy, Work & Power Calculator",
-    category: "math-science",
+    category: "physics",
     description:
       "Calculate mechanical work, kinetic energy, gravitational potential energy, or power, with a dynamic force-vector diagram.",
     featured: false,
@@ -424,7 +424,7 @@ export const tools: Tool[] = [
   {
     slug: "kinematics-calculator",
     title: "Kinematics Calculator",
-    category: "math-science",
+    category: "physics",
     description:
       "Solve constant-acceleration motion problems for velocity, initial velocity, acceleration, time, or displacement, with a dynamic motion diagram.",
     featured: false,
@@ -440,7 +440,7 @@ export const tools: Tool[] = [
   {
     slug: "force-calculator",
     title: "Force & Newton's Law Calculator",
-    category: "math-science",
+    category: "physics",
     description:
       "Solve Newton's second law (F = ma) or the law of universal gravitation for force, mass, acceleration, or distance, with a dynamic force diagram.",
     featured: false,
@@ -456,7 +456,7 @@ export const tools: Tool[] = [
   {
     slug: "projectile-motion-calculator",
     title: "Projectile Motion Calculator",
-    category: "math-science",
+    category: "physics",
     description:
       "Calculate time of flight, maximum height, range, and impact velocity for a projectile launched at an angle, with an interactive trajectory diagram.",
     featured: false,
@@ -488,7 +488,7 @@ export const tools: Tool[] = [
   {
     slug: "chemical-equation-balancer",
     title: "Chemical Equation Balancer",
-    category: "math-science",
+    category: "chemistry",
     description:
       "Balance a chemical equation by finding the smallest whole-number coefficients that conserve every element.",
     featured: false,
@@ -504,7 +504,7 @@ export const tools: Tool[] = [
   {
     slug: "class-schedule-builder",
     title: "Class Schedule Builder",
-    category: "calculators",
+    category: "student-productivity",
     description:
       "Build a weekly class schedule and instantly detect time conflicts between classes.",
     featured: false,
@@ -520,7 +520,7 @@ export const tools: Tool[] = [
   {
     slug: "citation-generator",
     title: "Citation Generator",
-    category: "text-tools",
+    category: "student-productivity",
     description:
       "Generate APA, MLA, and Chicago style citations for books, journal articles, and websites.",
     featured: false,
@@ -536,7 +536,7 @@ export const tools: Tool[] = [
   {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
-    category: "math-science",
+    category: "chemistry",
     description:
       "Convert between moles or grams of two substances in a balanced chemical equation using mole-ratio stoichiometry.",
     featured: false,
@@ -552,7 +552,7 @@ export const tools: Tool[] = [
   {
     slug: "molar-mass-calculator",
     title: "Molar Mass Calculator",
-    category: "math-science",
+    category: "chemistry",
     description:
       "Calculate the molar mass of a chemical compound from its formula, with a per-element breakdown.",
     featured: false,
@@ -568,7 +568,7 @@ export const tools: Tool[] = [
   {
     slug: "matrix-calculator",
     title: "Matrix Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Compute the sum, difference, product, determinant, transpose, and inverse of two 2x2 matrices.",
     featured: false,
@@ -584,7 +584,7 @@ export const tools: Tool[] = [
   {
     slug: "vector-calculator",
     title: "Vector Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Compute the magnitude, sum, difference, dot product, cross product, and angle between two 2D or 3D vectors.",
     featured: false,
@@ -600,7 +600,7 @@ export const tools: Tool[] = [
   {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
-    category: "calculators",
+    category: "student-productivity",
     description:
       "Plan a study or work session using the Pomodoro Technique — see how many focus intervals and breaks fit in the time you have.",
     featured: false,
@@ -616,7 +616,7 @@ export const tools: Tool[] = [
   {
     slug: "gpa-calculator",
     title: "GPA / Grade Calculator",
-    category: "math-science",
+    category: "student-productivity",
     description:
       "Calculate a credit-weighted grade point average from your courses, and find the GPA you need on upcoming credits to reach a target.",
     featured: false,
@@ -632,7 +632,7 @@ export const tools: Tool[] = [
   {
     slug: "percentage-calculator",
     title: "Percentage Calculator",
-    category: "math-science",
+    category: "math",
     description: "Perform fast percentage calculations.",
     featured: true,
     keywords: ["percentage", "math"],
@@ -640,7 +640,7 @@ export const tools: Tool[] = [
   {
     slug: "tip-calculator",
     title: "Tip Calculator",
-    category: "calculators",
+    category: "business-finance",
     description: "Calculate tip amount and split the bill between people.",
     featured: true,
     keywords: ["tip", "bill", "split", "restaurant"],
@@ -648,7 +648,7 @@ export const tools: Tool[] = [
   {
     slug: "discount-calculator",
     title: "Discount Calculator",
-    category: "calculators",
+    category: "business-finance",
     description: "Calculate discounted price and how much you save.",
     featured: true,
     keywords: ["discount", "sale", "price", "savings"],
@@ -656,7 +656,7 @@ export const tools: Tool[] = [
   {
     slug: "sales-tax-calculator",
     title: "Sales Tax Calculator",
-    category: "calculators",
+    category: "business-finance",
     description: "Calculate sales tax and total price.",
     featured: true,
     keywords: ["sales tax", "tax", "price", "total"],
@@ -792,7 +792,7 @@ export const tools: Tool[] = [
   {
     slug: "invoice-generator",
     title: "Invoice Generator",
-    category: "calculators",
+    category: "business-finance",
     description: "Build an itemized invoice with subtotal, discount, and tax.",
     featured: false,
     keywords: ["invoice", "billing", "receipt", "tax", "business"],
@@ -800,7 +800,7 @@ export const tools: Tool[] = [
   {
     slug: "inventory-valuation-calculator",
     title: "Inventory Valuation Calculator",
-    category: "calculators",
+    category: "business-finance",
     description: "Value your stock and flag items below their reorder threshold.",
     featured: false,
     keywords: ["inventory", "stock", "valuation", "warehouse", "reorder", "business"],
@@ -808,7 +808,7 @@ export const tools: Tool[] = [
   {
     slug: "break-even-calculator",
     title: "Break-Even Point Calculator",
-    category: "calculators",
+    category: "business-finance",
     description: "Find how many units you need to sell to cover your fixed costs.",
     featured: false,
     keywords: ["break-even", "business", "profit", "fixed costs", "unit economics"],
@@ -816,7 +816,7 @@ export const tools: Tool[] = [
   {
     slug: "world-time-converter",
     title: "World Time Converter",
-    category: "calculators",
+    category: "date-time",
     description:
       "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",
     featured: true,

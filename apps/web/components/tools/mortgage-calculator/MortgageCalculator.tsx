@@ -440,7 +440,7 @@ export default function MortgageCalculator({ education }: { education: ReactNode
               <MortgageModeTabs mode={mode} onModeChange={setMode} />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="mortgage-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="mortgage-calculator" category="financial-calculators" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} showJumpToBottom visible={navBarVisible} />

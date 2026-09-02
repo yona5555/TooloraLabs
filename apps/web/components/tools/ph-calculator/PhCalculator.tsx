@@ -65,7 +65,7 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
             />
           }
           result={<PhResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="ph-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="ph-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

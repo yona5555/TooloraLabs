@@ -76,7 +76,7 @@ export default function InventoryValuationTool({ education }: { education: React
         <ToolAboveFold
           input={<InventoryInputPanel items={items} onItemsChange={setItems} />}
           result={<InventoryResult result={result} errorMessage={errorMessage} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="inventory-valuation-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="inventory-valuation-calculator" category="business-finance" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

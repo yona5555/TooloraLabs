@@ -70,7 +70,7 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
             />
           }
           result={<StudyTimeResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="study-time-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="study-time-calculator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

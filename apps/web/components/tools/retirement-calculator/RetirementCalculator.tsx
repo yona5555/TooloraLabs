@@ -350,13 +350,13 @@ export default function RetirementCalculator({ education }: { education: ReactNo
               <RetirementMilestonesCard currentAge={parseLocalizedNumber(currentAge) || 0} />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="retirement-calculator" category="calculators" />}
+          sidebar={<RelatedToolsSidebar currentSlug="retirement-calculator" category="financial-calculators" />}
           secondary={
             <div className="flex flex-col gap-6">
               {/* Tablet width (md-only) full-width: the sidebar (with Related Tools) is hidden below `lg` by
                   the shared above-the-fold layout, so this tool surfaces it here specifically for that gap. */}
               <div className="hidden md:block lg:hidden">
-                <RelatedToolsSidebar currentSlug="retirement-calculator" category="calculators" />
+                <RelatedToolsSidebar currentSlug="retirement-calculator" category="financial-calculators" />
               </div>
               <SectionNav items={navItems} visible={navBarVisible} />
               <RetirementGrowthChart

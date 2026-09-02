@@ -82,7 +82,7 @@ export default function FractionCalculator({ education }: { education: ReactNode
             />
           }
           result={<FractionResult result={result} computed={computed} />}
-          sidebar={<RelatedToolsSidebar currentSlug="fraction-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="fraction-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

@@ -89,7 +89,7 @@ export default function MolarityCalculator({ education }: { education: ReactNode
             />
           }
           result={<MolarityResult result={result} mode={mode} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="molarity-calculator" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="molarity-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
