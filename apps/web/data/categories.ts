@@ -8,19 +8,19 @@ export type Category = {
 export const categories: Category[] = [
   {
     slug: "financial-calculators",
-    title: "Financial Calculators",
+    title: "Finance",
     description: "Loans, mortgages, retirement, and other long-term personal finance planning tools.",
     icon: "piggy-bank",
   },
   {
     slug: "business-finance",
-    title: "Business & Everyday Finance",
+    title: "Business",
     description: "Tips, discounts, sales tax, invoicing, and other everyday and small-business money math.",
     icon: "receipt",
   },
   {
     slug: "financial-markets",
-    title: "Financial Markets",
+    title: "Markets",
     description: "Live data and neutral, educational tools for crypto, forex, and commodities.",
     icon: "trending-up",
   },
@@ -50,7 +50,7 @@ export const categories: Category[] = [
   },
   {
     slug: "developer-tools",
-    title: "Developer Tools",
+    title: "Dev Tools",
     description: "Utilities for developers.",
     icon: "code",
   },
@@ -68,7 +68,7 @@ export const categories: Category[] = [
   },
   {
     slug: "student-productivity",
-    title: "Student & Productivity",
+    title: "Student Tools",
     description: "Schedules, study sessions, citations, and grades for students and focused work.",
     icon: "graduation-cap",
   },

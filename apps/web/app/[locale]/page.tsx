@@ -10,7 +10,7 @@ export default async function Home({ params }: HomeProps) {
   setRequestLocale(locale);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-[#F4F4F4] to-[#F4F4F4] dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-950">
+    <main className="bg-gradient-to-b from-slate-50 via-[#F4F4F4] to-[#F4F4F4] dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-950">
       <Hero />
     </main>
   );
