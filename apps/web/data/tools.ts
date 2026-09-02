@@ -550,6 +550,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "surface-area-calculator",
+    title: "Surface Area Calculator",
+    category: "math-science",
+    description:
+      "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+    featured: false,
+    keywords: [
+      "surface area calculator",
+      "cube surface area",
+      "sphere surface area",
+      "cylinder surface area",
+      "cone surface area",
+      "3d shape calculator",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

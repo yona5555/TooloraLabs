@@ -89,6 +89,8 @@ import CitationGenerator from "@/components/tools/citation-generator/CitationGen
 import CitationEducation from "@/components/tools/citation-generator/CitationEducation";
 import AreaCalculator from "@/components/tools/area-calculator/AreaCalculator";
 import AreaEducation from "@/components/tools/area-calculator/AreaEducation";
+import SurfaceAreaCalculator from "@/components/tools/surface-area-calculator/SurfaceAreaCalculator";
+import SurfaceAreaEducation from "@/components/tools/surface-area-calculator/SurfaceAreaEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -428,6 +430,9 @@ export default async function ToolPage({
     case "area-calculator":
       component = <AreaCalculator education={<AreaEducation />} />;
       break;
+    case "surface-area-calculator":
+      component = <SurfaceAreaCalculator education={<SurfaceAreaEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -535,6 +540,7 @@ export default async function ToolPage({
     slug === "class-schedule-builder" ||
     slug === "citation-generator" ||
     slug === "area-calculator" ||
+    slug === "surface-area-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||
