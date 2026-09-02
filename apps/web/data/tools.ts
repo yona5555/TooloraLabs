@@ -534,6 +534,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "area-calculator",
+    title: "Area Calculator",
+    category: "math-science",
+    description:
+      "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+    featured: false,
+    keywords: [
+      "area calculator",
+      "square area",
+      "rectangle area",
+      "triangle area",
+      "circle area calculator",
+      "geometry area calculator",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",
