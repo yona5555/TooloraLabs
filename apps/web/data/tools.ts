@@ -566,6 +566,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "volume-calculator",
+    title: "Volume Calculator",
+    category: "math-science",
+    description:
+      "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+    featured: false,
+    keywords: [
+      "volume calculator",
+      "cube volume",
+      "sphere volume calculator",
+      "cylinder volume",
+      "cone volume calculator",
+      "3d shape volume",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

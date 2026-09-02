@@ -91,6 +91,8 @@ import AreaCalculator from "@/components/tools/area-calculator/AreaCalculator";
 import AreaEducation from "@/components/tools/area-calculator/AreaEducation";
 import SurfaceAreaCalculator from "@/components/tools/surface-area-calculator/SurfaceAreaCalculator";
 import SurfaceAreaEducation from "@/components/tools/surface-area-calculator/SurfaceAreaEducation";
+import VolumeCalculator from "@/components/tools/volume-calculator/VolumeCalculator";
+import VolumeEducation from "@/components/tools/volume-calculator/VolumeEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -433,6 +435,9 @@ export default async function ToolPage({
     case "surface-area-calculator":
       component = <SurfaceAreaCalculator education={<SurfaceAreaEducation />} />;
       break;
+    case "volume-calculator":
+      component = <VolumeCalculator education={<VolumeEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -541,6 +546,7 @@ export default async function ToolPage({
     slug === "citation-generator" ||
     slug === "area-calculator" ||
     slug === "surface-area-calculator" ||
+    slug === "volume-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

@@ -49,3 +49,4 @@ export * from "./ClassScheduleBuilder";
 export * from "./CitationGenerator";
 export * from "./AreaCalculator";
 export * from "./SurfaceAreaCalculator";
+export * from "./VolumeCalculator";

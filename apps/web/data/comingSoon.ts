@@ -49,7 +49,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "iq-estimate-calculator", icon: "Brain" },
     { id: "weekly-task-planner-generator", icon: "ClipboardList" },
     { id: "travel-cost-calculator", icon: "Plane" },
-    { id: "volume-calculator", icon: "Boxes" },
   ],
   "phase-2": [
     { id: "simple-video-converter", icon: "Video" },
