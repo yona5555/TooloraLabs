@@ -8418,6 +8418,333 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Chemischer Gleichungs-Ausgleicher",
+      "description": "Gleichen Sie eine chemische Gleichung aus, indem Sie die kleinsten ganzzahligen Koeffizienten finden, die jedes Element erhalten.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "Häufige Fragen",
+        "behindTheTool": "Hintergrund des Tools"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Beispielgleichungen",
+          "intro": "Gleichungen, die dieser Ausgleicher lösen kann — probieren Sie eine aus, oder geben Sie Ihre eigene ein.",
+          "syntaxHint": "Trennen Sie Edukte von Produkten mit ->, =, oder →, und trennen Sie Terme auf jeder Seite mit +. Bereits eingegebene Koeffizienten werden ignoriert und von Grund auf neu berechnet."
+        }
+      },
+      "form": {
+        "inputTitle": "Unausgeglichene Gleichung",
+        "equationLabel": "Gleichung",
+        "equationHint": "Verwenden Sie die Standard-Formelsyntax, z. B. Fe2O3, und trennen Sie Edukte/Produkte mit -> oder =.",
+        "equationPlaceholder": "z. B. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Ausgeglichene Gleichung",
+        "emptyEquation": "Geben Sie eine chemische Gleichung zum Ausgleichen ein.",
+        "invalidEquation": "Das sieht nicht wie eine gültige Gleichung aus — verwenden Sie -> oder = zwischen Edukten und Produkten sowie + zwischen den Termen.",
+        "unknownElement": "Diese Gleichung enthält ein Symbol, das kein anerkanntes Element ist.",
+        "cannotBalance": "Diese Gleichung kann nicht mit ganzzahligen Koeffizienten ausgeglichen werden — überprüfen Sie die Formeln auf Tippfehler.",
+        "balancedCaption": "Kleinste ganzzahlige Koeffizienten, die jedes Element erhalten",
+        "reactants": "Edukte",
+        "products": "Produkte"
+      },
+      "education": {
+        "intro": {
+          "title": "Gleichungsausgleich verstehen",
+          "paragraph1": "Eine chemische Gleichung auszugleichen bedeutet, Koeffizienten zu finden — ganze Zahlen, die vor jede Formel gesetzt werden —, sodass auf beiden Seiten die gleiche Anzahl von Atomen jedes Elements erscheint. Dies spiegelt das Gesetz der Erhaltung der Masse wider: Atome werden in einer chemischen Reaktion umgeordnet, aber keine werden erzeugt oder vernichtet, daher muss alles, was als Edukte an Elementen und Mengen hineingeht, insgesamt als Produkte wieder herauskommen.",
+          "paragraph2": "Dieser Rechner verwendet die „Matrixmethode“: Er behandelt die Atomanzahl jedes Elements über alle Formeln hinweg als eine lineare Gleichung, baut eine Matrix aus all diesen Gleichungen zusammen und löst nach den Koeffizienten mittels Gauß-Elimination mit exakten Brüchen (wodurch die Rundungsfehler vermieden werden, die Gleitkommaarithmetik einführen würde). Das Ergebnis ist ein Vektor von Verhältnissen, den der Rechner dann auf die kleinste Menge positiver ganzer Zahlen skaliert — dieselbe Antwort, zu der ein Chemiker letztlich durch Ausprobieren gelangen würde, hier jedoch systematisch gefunden.",
+          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich."
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Repräsentative Gleichungen, ausgeglichen von diesem Rechner.",
+          "columnCalculation": "Unausgeglichen",
+          "columnResult": "Ausgeglichen",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum ignoriert der Ausgleicher bereits eingegebene Koeffizienten?", "answer": "Weil ein von Ihnen geschätzter Koeffizient falsch sein könnte, und es keine zuverlässige Möglichkeit gibt, einen bewusst gewählten Koeffizienten von einem versehentlichen Tippfehler zu unterscheiden. Der Rechner löst immer von Grund auf nach Koeffizienten allein anhand der Formeln, was ein korrektes Ergebnis garantiert, unabhängig davon, was Sie ursprünglich eingegeben haben." },
+            { "question": "Warum müssen die Koeffizienten ganze Zahlen sein?", "answer": "Eine chemische Gleichung beschreibt ganze Moleküle oder Formeleinheiten, die miteinander reagieren — es kann nicht „2,5 Moleküle“ von etwas an einer Reaktion teilnehmen. Wenn das zugrunde liegende Verhältnis gebrochen herauskommt (wie es manchmal mitten in der Berechnung geschieht), wird jeder Koeffizient um denselben Faktor hochskaliert, bis alle bei ganzen Zahlen landen, wodurch die Verhältnisse zwischen den Stoffen unverändert bleiben." },
+            { "question": "Warum sagt dieses Tool, eine Gleichung „kann nicht ausgeglichen werden“?", "answer": "Meist, weil die wie geschrieben vorliegenden Formeln nicht tatsächlich die zum Ausgleich nötigen Elemente teilen — wenn beispielsweise ein Element nur unter den Edukten und nie unter den Produkten auftaucht, kann keine Koeffizientenmenge beide Seiten für dieses Element gleich machen. Überprüfen Sie jede Formel auf Tippfehler oder ein fehlendes Produkt/Edukt, bevor Sie annehmen, dass die Reaktion selbst unmöglich ist." },
+            { "question": "Kann dies Gleichungen mit Ionen oder elektrischer Ladung ausgleichen?", "answer": "Nicht von allein — er gleicht Atomanzahlen für neutrale Formeln aus, was genau das ist, was die meisten einfachen Reaktionen benötigen. Redoxreaktionen mit expliziten Ionenladungen (wie Fe²⁺ → Fe³⁺ + e⁻) müssen zudem die Gesamtladung und übertragenen Elektronen erhalten, was eine Verfolgung der Oxidationsstufen über diese reine Atomzählmethode hinaus erfordert." },
+            { "question": "Gibt es immer genau eine korrekt ausgeglichene Version einer Gleichung?", "answer": "Für die gegebenen Edukte und Produkte, ja — es gibt genau ein kleinstes ganzzahliges Verhältnis, obwohl technisch auch jedes Vielfache davon (4H2 + 2O2 → 4H2O statt 2H2 + O2 → 2H2O) ausgleicht. Konventionell, und standardmäßig in diesem Rechner, werden die kleinstmöglichen ganzen Zahlen angezeigt, da jedes größere gemeinsame Vielfache keine neue Information liefert." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Ein Gesetz, bewiesen durch eine sehr sorgfältige Waage",
+            "paragraph": "Die Forderung, dass eine chemische Gleichung ausgeglichen sein muss, geht auf Antoine Lavoisiers Gesetz der Erhaltung der Masse zurück, veröffentlicht in seinem 1789 erschienenen Traité élémentaire de chimie. Durch akribisches Wiegen jeder an einer Reaktion beteiligten Substanz — einschließlich Gase, die viele seiner Zeitgenossen sich nicht die Mühe machten aufzufangen und zu wiegen — zeigte Lavoisier, dass die Gesamtmasse, die in eine Reaktion eingeht, stets der Gesamtmasse entspricht, die herauskommt. Sein Traité machte zudem das Schreiben von Reaktionen im gleichungsähnlichen Format populär, das dieses Erhaltungsprinzip visuell offensichtlich machte, und legte damit den Grundstein für die ausgeglichenen chemischen Gleichungen, die noch heute auf dieselbe Weise geschrieben werden."
+          },
+          "modernDevelopments": {
+            "title": "Vom Ausprobieren zu einem lösbaren System",
+            "paragraph": "Den größten Teil der Geschichte der Chemie hindurch wurden Gleichungen durch Betrachtung ausgeglichen — durch Anpassen der Koeffizienten per Ausprobieren, bis beide Seiten übereinstimmten, eine Methode, die bei Reaktionen mit vielen Elementen oder Termen schnell unhandlich wird. Die Alternative, die dieser Rechner verwendet, manchmal die algebraische oder Matrixmethode genannt, behandelt die Atomanzahl jedes Elements als lineare Gleichung und löst das gesamte System gleichzeitig; John A. Olsons 1997 im Journal of Chemical Education erschienener Aufsatz analysierte diesen Ansatz formal, einschließlich der Frage, wie er auf Reaktionen erweitert werden kann, die auch Oxidation und Reduktion ausgleichen müssen. Dieselbe zugrunde liegende Technik — das Lösen nach dem Nullraum einer Matrix — ist das, was moderne Software zum Gleichungsausgleich, einschließlich dieses Tools, tatsächlich berechnet."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Der Ausgleich chemischer Gleichungen ist eine grundlegende Fähigkeit innerhalb der Chemie. Hier sind die weltweit besten 5 im Fach Chemie im QS World University Rankings by Subject 2025, plus eine regionale Abteilung:",
+            "universities": [
+              { "name": "Harvard University", "note": "Weltweit auf Platz 1 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Nein — die Abteilung übernimmt die Studiengebühren für alle Promotionsstudierenden in einem präsenzpflichtigen Forschungsprogramm." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 2 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Nein — zugelassene Promotionsstudierende erhalten volle Studiengebührenübernahme und ein Stipendium für ein Forschungsprogramm auf dem Campus." },
+              { "name": "University of Cambridge", "note": "Weltweit auf Platz 3 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Teilweise — der PhD wird als Vollzeit- oder Teilzeitforschung angeboten, wobei beide Formen präsenzpflichtig statt Fernstudium sind." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 4 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Nein — das Programm ist ein präsenzpflichtiges Forschungspromotionsprogramm mit einer ganzheitlichen, individuellen Zulassungsprüfung." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 5 in Chemie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Nein — der DPhil ist ein Forschungsgrad auf dem Campus, der unter anderem Katalyse, Materialien und theoretische Chemie umfasst." },
+              { "name": "Universität Katar — Fachbereich für Chemie und Geowissenschaften", "note": "1973 gegründet, mit rund 30 hauptamtlichen Chemie-Fakultätsmitgliedern; in dieser globalen Fachtabelle nicht gesondert gelistet.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "Nein — die Programme des Fachbereichs werden auf dem Campus der Universität Katar durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "Olsons Aufsatz formalisiert die algebraische (Matrix-)Methode zum Ausgleich chemischer Gleichungen, die dieser Rechner implementiert, einschließlich der allgemeinen Bedingungen, die ein gültiger Ausgleich erfüllen muss.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
+    "class-schedule-builder": {
+      "title": "Stundenplan-Ersteller",
+      "description": "Erstellen Sie einen wöchentlichen Stundenplan und erkennen Sie sofort Zeitüberschneidungen zwischen Kursen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "So funktioniert die Konflikterkennung",
+          "intro": "Fügen Sie jeden Kurs hinzu, den Sie in Betracht ziehen, mit den Tagen und Zeiten, zu denen er stattfindet — der Ersteller prüft jedes Kurspaar auf sich überschneidende Zeiten an einem gemeinsamen Tag.",
+          "conflictHint": "Zwei Kurse stehen nur dann im Konflikt, wenn sie sich einen Tag teilen UND sich ihre Zeitfenster tatsächlich überschneiden. Direkt aufeinanderfolgende Kurse (einer endet genau dann, wenn der andere beginnt) gelten nicht als Konflikt."
+        }
+      },
+      "form": {
+        "inputTitle": "Ihre Kurse",
+        "classNameLabel": "Kursname",
+        "classNamePlaceholder": "z. B. Analysis II",
+        "removeClass": "Diesen Kurs entfernen",
+        "daysLabel": "Findet statt an",
+        "day": {
+          "mon": "Mo",
+          "tue": "Di",
+          "wed": "Mi",
+          "thu": "Do",
+          "fri": "Fr",
+          "sat": "Sa",
+          "sun": "So"
+        },
+        "startTimeLabel": "Startzeit",
+        "endTimeLabel": "Endzeit",
+        "addClass": "Weiteren Kurs hinzufügen"
+      },
+      "result": {
+        "heading": "Stundenplan-Prüfung",
+        "emptySchedule": "Fügen Sie mindestens einen Kurs hinzu, um Ihren Stundenplan zu prüfen.",
+        "invalidClassTime": "Jeder Kurs benötigt eine Endzeit, die später als seine Startzeit liegt.",
+        "missingDays": "Wählen Sie für jeden Kurs mindestens einen Tag aus.",
+        "noConflicts": "Keine Konflikte — dieser Stundenplan funktioniert.",
+        "conflictsFoundLabel": "Konflikte gefunden",
+        "conflictsWith": "steht im Konflikt mit",
+        "hoursPerWeek": "Stunden pro Woche insgesamt",
+        "day": {
+          "mon": "Montag",
+          "tue": "Dienstag",
+          "wed": "Mittwoch",
+          "thu": "Donnerstag",
+          "fri": "Freitag",
+          "sat": "Samstag",
+          "sun": "Sonntag"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Stundenplankonflikte verstehen",
+          "paragraph1": "Ein Stundenplankonflikt entsteht, wenn zwei Kurse am selben Tag zu sich überschneidenden Zeitfenstern stattfinden, sodass ein Studierender physisch nicht an beiden Orten gleichzeitig sein kann. Dies mit bloßem Auge zu erkennen wird schnell fehleranfällig, sobald ein Stundenplan mehr als eine Handvoll Kurse enthält — besonders wenn Kurse an unterschiedlichen Tageskombinationen stattfinden, sodass sich ein Montagskonflikt am Mittwoch für dasselbe Kurspaar nicht wiederholen muss.",
+          "paragraph2": "Dieser Ersteller prüft jedes mögliche Kurspaar gegeneinander. Für jedes Paar werden zunächst die gemeinsamen Tage ermittelt, dann werden für jeden gemeinsamen Tag die Zeitfenster verglichen: Liegt die spätere Startzeit vor der früheren Endzeit, überschneiden sich die Zeiträume, und ein Konflikt wird zusammen mit dem genauen überschneidenden Zeitabschnitt erfasst. Kurse, die genau dann enden, wenn ein anderer beginnt, werden absichtlich nicht als Konflikt markiert, da direkt aufeinanderfolgende Termine (ohne jede Überschneidung, nur ohne Pufferzeit) normal und oft unvermeidbar sind.",
+          "paragraph3": "Zusätzlich zur Konflikterkennung summiert das Tool die wöchentlichen Unterrichtsstunden über alle Kurse hinweg, einmal pro Tag gezählt, an dem der Kurs stattfindet — ein konfliktfreier Stundenplan kann sich später dennoch als unrealistisch erweisen, wenn ein Studierender diese Summe mit der tatsächlich verfügbaren Zeit pro Woche vergleicht."
+        },
+        "examples": {
+          "title": "Ausgearbeitete Beispiele",
+          "intro": "Typische Planungsszenarien und was dieser Ersteller für jedes davon meldet.",
+          "columnCalculation": "Szenario",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Mathe 101 (Mo/Mi 9:00–10:30) + Physik 201 (Mo 10:00–11:00)", "result": "Konflikt am Montag, 10:00–10:30" },
+            { "calculation": "Geschichte 100 (Di/Do 13:00–14:00) + Chemie-Praktikum (Mi 13:00–16:00)", "result": "Kein Konflikt — unterschiedliche Tage" },
+            { "calculation": "Seminar A (Fr 15:00–16:00) + Seminar B (Fr 16:00–17:00)", "result": "Kein Konflikt — direkt aufeinanderfolgend, keine Überschneidung" },
+            { "calculation": "Zwei Gruppen desselben Kurses, beide Mo/Mi 9:00–10:00", "result": "Konflikt am Montag und Mittwoch, 9:00–10:00" }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Warum markiert das Tool direkt aufeinanderfolgende Kurse nicht als Konflikt?", "answer": "Weil es keine tatsächliche zeitliche Überschneidung gibt — ein Kurs, der um 10:00 endet, und ein anderer, der genau dann beginnt, konkurrieren nicht um dieselbe Minute. Das Tool markiert einen Konflikt nur, wenn die Startzeit eines Kurses tatsächlich vor der Endzeit eines anderen an einem gemeinsamen Tag liegt — das ist die Definition einer echten Überschneidung zweier Ereignisse." },
+            { "question": "Was zählt als \"gemeinsamer Tag\" zwischen zwei Kursen?", "answer": "Jeder Wochentag, den beide Kurse ausgewählt haben. Ein Kurs, der Montag/Mittwoch/Freitag stattfindet, und ein anderer, der nur Dienstag/Donnerstag stattfindet, teilen sich keinen Tag, werden also an null Tagen miteinander verglichen und können unabhängig von den Uhrzeiten nie in Konflikt geraten." },
+            { "question": "Enthält die wöchentliche Gesamtstundenzahl die Zeit zwischen den Kursen?", "answer": "Nein — sie summiert nur die tatsächliche Dauer jedes Kurses, einmal pro Tag gezählt, an dem er stattfindet. Ein Kurs, der eine Stunde an drei Tagen pro Woche dauert, trägt 3 Stunden zur Summe bei, nicht die breitere Spanne zwischen seiner ersten und letzten Sitzung." },
+            { "question": "Kann ich einen Stundenplan mit Kursen prüfen, die sich über Mitternacht erstrecken?", "answer": "Der Ersteller vergleicht Start- und Endzeiten innerhalb desselben Tages, daher muss ein Nachtkurs so eingegeben werden, dass er bis 23:59 Uhr des Starttages endet; eine Sitzung, die logisch über Mitternacht hinaus andauert, lässt sich nicht als einzelner Eintrag abbilden." },
+            { "question": "Warum verlangt das Tool, dass jeder Kurs mindestens einen Tag hat?", "answer": "Ein Kurs ohne zugewiesenen Tag kann auf keinen Konflikt mit anderen geprüft werden, da die Konflikterkennung vollständig auf dem Vergleich gemeinsamer Tage beruht. Mindestens ein Tag pro Kurs stellt sicher, dass jeder Kurs für die Konfliktprüfung relevant bleibt, statt stillschweigend ignoriert zu werden." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Ein Problem so alt wie der Universitäts-Stundenplan",
+            "paragraph": "Das Klassen-Zeitplanungsproblem (\"Timetabling\") wurde von C.C. Gotlieb in informatischen Begriffen formalisiert; sein Aufsatz \"The Construction of Class-Teacher Time-Tables\" von 1962 (Proceedings of the IFIP Congress) beschrieb, wie sich die Einschränkungen eines Schulstundenplans — Lehrkräfte, Räume und Zeitfenster, die nicht doppelt belegt werden dürfen — in einer Form darstellen lassen, die ein Computer durchsuchen kann. Vor Gotliebs formaler Behandlung wurde die Stundenplanung an den meisten Institutionen vollständig von Hand erledigt, oft benötigten Mitarbeiter Wochen, um durch Ausprobieren einen einzigen Semesterplan zu erstellen."
+          },
+          "modernDevelopments": {
+            "title": "Warum konfliktfreie Planung schwieriger ist, als sie aussieht",
+            "paragraph": "1976 bewiesen Shimon Even, Alon Itai und Adi Shamir, dass selbst eine stark vereinfachte Version des Zeitplanungsproblems NP-vollständig ist — das heißt, es ist kein Algorithmus bekannt, der für jede mögliche Eingabe garantiert in vertretbarer Zeit einen optimalen, vollständig konfliktfreien Stundenplan liefert, sobald die Anzahl der Kurse wächst. Dieses Ergebnis erklärt, warum reale institutionelle Planungssysteme auf Heuristiken und Constraint-Solver setzen, die nach einem hinreichend guten statt nachweislich optimalen Stundenplan suchen. Dieses Tool umgeht dieses schwierigere Problem vollständig: Statt zu versuchen, einen konfliktfreien Stundenplan von Grund auf zu konstruieren, nimmt es einen bereits vom Studierenden erstellten Plan und prüft ihn paarweise auf genau die Überschneidungen, die ihn unpraktikabel machen würden."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Stundenplanung liegt an der Schnittstelle von Planungstheorie und Algorithmenentwurf innerhalb der Informatik. Hier sind die weltweit besten 5 für Computer Science & Information Systems im QS World University Rankings by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Weltweit auf Platz 1 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm innerhalb der Abteilung EECS." },
+              { "name": "Stanford University", "note": "Weltweit auf Platz 2 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion mit einem einzigen jährlichen Zulassungszyklus." },
+              { "name": "Carnegie Mellon University (CMU)", "note": "Weltweit auf Platz 3 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "Nein — die Promotion der Fachabteilung für Informatik ist ein Präsenz-Forschungsabschluss." },
+              { "name": "National University of Singapore (NUS)", "note": "Weltweit auf Platz 4 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "Nein — zugelassene Promovierende betreiben Präsenzforschung an der NUS School of Computing." },
+              { "name": "University of Oxford", "note": "Weltweit auf Platz 5 für Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "Nein — der DPhil ist ein Präsenz-Forschungsabschluss, der unter anderem Algorithmen und Komplexitätstheorie abdeckt." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Computer Science Program", "note": "Das Promotionsprogramm erfordert mindestens 72 Credits und einen kumulierten Notendurchschnitt von mindestens 3,0; in diesem globalen Fachranking nicht separat gelistet.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "Nein — das Programm wird in Präsenz auf dem KAUST-Campus in Thuwal, Saudi-Arabien, durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "Dieser Aufsatz bewies, dass eine grundlegende Version des Klassen-Stundenplanungsproblems NP-vollständig ist, und begründet damit theoretisch, warum eine exakte, garantiert konfliktfreie Planung im großen Maßstab rechnerisch nicht praktikabel ist — der Grund, warum reale Tools Stundenpläne prüfen und verfeinern, statt sie vollständig neu zu lösen.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
+    "citation-generator": {
+      "title": "Zitat-Generator",
+      "description": "Erstellen Sie Zitate im APA-, MLA- und Chicago-Stil für Bücher, Fachartikel und Websites.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Kurzübersicht der Stile",
+          "intro": "Die drei Stile, die dieser Generator erzeugt, und wo jeder am häufigsten verlangt wird.",
+          "apaHint": "Am häufigsten in den Sozialwissenschaften (Psychologie, Pädagogik, Pflegewissenschaft) — Autor-Jahr-Zitate im Text.",
+          "mlaHint": "Am häufigsten in den Geisteswissenschaften (Literatur, Sprachen, Kulturwissenschaften) — Autor-Seite-Zitate im Text.",
+          "chicagoHint": "Verbreitet in der Geschichtswissenschaft und einigen Sozialwissenschaften — dieser Generator erzeugt die Autor-Jahr-Variante für Literaturverzeichnisse."
+        }
+      },
+      "form": {
+        "inputTitle": "Angaben zur Quelle",
+        "sourceTypeLabel": "Quellentyp",
+        "sourceType": {
+          "book": "Buch",
+          "journal-article": "Fachartikel",
+          "website": "Website"
+        },
+        "authorsLabel": "Autor(en)",
+        "firstNameLabel": "Vorname",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Nachname",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Diesen Autor entfernen",
+        "addAuthor": "Weiteren Autor hinzufügen",
+        "titleLabel": "Titel",
+        "titlePlaceholder": "z. B. The Craft of Research",
+        "yearLabel": "Jahr",
+        "yearPlaceholder": "z. B. 2020",
+        "publisherLabel": "Verlag",
+        "publisherPlaceholder": "z. B. University of Chicago Press",
+        "journalNameLabel": "Name der Zeitschrift",
+        "journalNamePlaceholder": "z. B. Journal of Information Science",
+        "volumeLabel": "Band",
+        "issueLabel": "Heft",
+        "pagesLabel": "Seiten",
+        "pagesPlaceholder": "z. B. 45-60",
+        "siteNameLabel": "Name der Website",
+        "siteNamePlaceholder": "z. B. TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Zugriffsdatum (optional)",
+        "accessDatePlaceholder": "z. B. 5. Januar 2024"
+      },
+      "result": {
+        "heading": "Ihre Zitate",
+        "missingTitle": "Geben Sie einen Titel für die Quelle ein.",
+        "missingJournalName": "Geben Sie den Namen der Zeitschrift ein, in der dieser Artikel erschienen ist.",
+        "missingUrl": "Geben Sie die URL der Webseite ein.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Zitierstile verstehen",
+          "paragraph1": "Ein Zitierstil ist eine standardisierte Art, eine Quelle anzugeben, damit ein Leser auf einen Blick erkennt, wer etwas geschrieben hat, wann und wo es veröffentlicht wurde — und das Original nachverfolgen kann, um eine Aussage zu überprüfen oder weiterzulesen. Jeder Stil erfasst dieselben zugrunde liegenden Fakten (Autor, Titel, Jahr, Verlag oder Zeitschrift), ordnet und interpunktiert sie aber unterschiedlich, weshalb dieselbe Quelle je nach dem in einer Fachrichtung üblichen Stil drei sichtbar unterschiedliche Zitate ergibt.",
+          "paragraph2": "Dieser Generator fragt die Angaben zu einer Quelle einmal ab und formatiert sie gleichzeitig nach allen drei großen Stilen. Er folgt außerdem der jeweiligen Regel jedes Stils, wie viele Autoren namentlich genannt werden, bevor auf \"et al.\" umgeschaltet wird: Dieses Tool kürzt die Autorenliste in APA erst ab mehr als 20 Autoren, wechselt in MLA bereits ab drei oder mehr Autoren zu \"et al.\" und tut dies in Chicago ab vier oder mehr Autoren — genau wie es die jeweiligen offiziellen Stilrichtlinien für Quellen mit mehreren Autoren vorsehen.",
+          "paragraph3": "Eine Sache kann dieses Tool nicht leisten: Kursivsetzung. Es gibt reinen Text aus, da eine Kopieren-Schaltfläche die Formatierung nicht zuverlässig über jedes Textverarbeitungsprogramm und jede Plattform hinweg erhalten kann. In allen drei Stilen sollte der Titel eines eigenständigen Werks — eines Buches oder des Namens einer Zeitschrift oder Website — kursiv gesetzt werden, während ein Titel, der Teil eines größeren Ganzen ist, etwa ein Zeitschriftenartikel oder eine Webseite, stattdessen in Anführungszeichen steht. Setzen Sie den Titel des übergeordneten Werks nach dem Einfügen eines Zitats in Ihr Dokument von Hand kursiv."
+        },
+        "examples": {
+          "title": "Ausgearbeitete Beispiele",
+          "intro": "Dieselben Quellen, formatiert nach allen drei Stilen, zeigen, wie sich Zeichensetzung und Reihenfolge der Autorennamen unterscheiden.",
+          "columnCalculation": "Szenario",
+          "columnResult": "Ergebnis",
+          "rows": [
+            { "calculation": "Buch von Jane Doe, formatiert nach APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "Dasselbe Buch, formatiert nach MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "Dasselbe Buch, formatiert nach Chicago (Autor-Jahr)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Fachartikel mit 3 Autoren, nach MLA (Regel zu et al.)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            { "question": "Welchen Zitierstil sollte ich verwenden?", "answer": "Das hängt von Ihrer Fachrichtung und oft von der konkreten Vorgabe Ihres Dozenten oder Verlags ab. APA ist am häufigsten in den Sozialwissenschaften, MLA in den Geisteswissenschaften und der Literaturwissenschaft, Chicago in der Geschichtswissenschaft und einigen Sozialwissenschaften (Chicago hat außerdem eine separate Fußnoten-Bibliografie-Variante, die hauptsächlich für Fußnoten verwendet wird und von diesem Tool nicht erzeugt wird — nur die Autor-Jahr-Form für Literaturverzeichnisse). Prüfen Sie im Zweifel die Vorgaben Ihrer Aufgabenstellung oder die Autorenrichtlinien einer Zielzeitschrift, statt zu raten." },
+            { "question": "Warum formatieren APA und MLA Autorennamen so unterschiedlich?", "answer": "Jeder Stil optimiert für eine andere Art des Überfliegens. APA reduziert Vor- und mittlere Namen auf Initialen und setzt vor dem letzten Autor ein \"&\", um kompakte Literaturverzeichnisse in Fächern mit stark ko-autorenschaftlicher Forschung zu ermöglichen. MLA schreibt Vornamen vollständig aus und verwendet \"and\", da literatur- und geisteswissenschaftliche Arbeiten häufiger Werke mit ein oder zwei Autoren zitieren, bei denen der vollständige Name natürlicher wirkt." },
+            { "question": "Was bedeutet \"et al.\", und ab wann verwendet dieses Tool es?", "answer": "\"Et al.\" ist Lateinisch für \"und andere\" und dient dazu, eine lange Autorenliste auf den Namen des ersten Autors zu kürzen. Dieses Tool folgt dem jeweiligen offiziellen Schwellenwert: APA listet jeden Autor namentlich auf, bis eine Quelle mehr als 20 Autoren hat, MLA wechselt ab 3 oder mehr Autoren zu \"et al.\", und Chicago wechselt ab 4 oder mehr Autoren zu \"et al.\"" },
+            { "question": "Warum beginnt das Zitat mit dem Titel statt mit einem Autor, wenn ich die Autorenfelder leer lasse?", "answer": "Alle drei Stile behandeln Quellen ohne angegebenen Autor auf dieselbe Weise: Da kein Autorenname vorangestellt werden kann, rückt der Titel an die Stelle, die sonst der Autorenname einnehmen würde, und alles Weitere im Zitat verschiebt sich um eine Position. Dies ist gängige Praxis und keine Einschränkung dieses Tools — so soll eine Quelle ohne Autor in einem Literaturverzeichnis alphabetisch eingeordnet werden." },
+            { "question": "Setzt dieses Tool Buch- und Zeitschriftentitel automatisch kursiv?", "answer": "Nein — die Ausgabe ist reiner Text. In jedem Stil hier sollte der Titel eines vollständigen, eigenständigen Werks (ein Buch oder der Name einer Zeitschrift oder Website) kursiv gesetzt werden, während ein Titel, der Teil eines größeren Ganzen ist (ein Artikel, eine Webseite), stattdessen Anführungszeichen erhält — was dieses Tool bereits umsetzt. Setzen Sie nach dem Einfügen eines Zitats in Ihr Dokument den Titel des übergeordneten Werks von Hand kursiv." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter diesem Tool",
+          "history": {
+            "title": "Ein Manuskriptstil, geboren in einem einzigen Zeitschriftenartikel",
+            "paragraph": "Der APA-Stil geht auf einen siebenseitigen Artikel von 1929 im Psychological Bulletin zurück, \"Instructions in Regard to Preparation of Manuscript\", verfasst von einem Ausschuss aus Psychologen, einem Anthropologen und Redaktionsmitarbeitern von Fachzeitschriften, die einen gemeinsamen Standard wollten, damit Einreichungen bei verschiedenen Psychologiezeitschriften nicht jedes Mal von Hand neu formatiert werden mussten. Was als kurze Sammlung hausinterner Stilregeln für ein einzelnes Fach begann, wuchs Auflage für Auflage zum vollständigen Publication Manual heran, das heute in den Sozialwissenschaften verwendet wird — doch die Kernmotivation, es einem Leser zu erleichtern, die Quelle hinter einer Aussage zu finden, hat sich seit 1929 nicht geändert."
+          },
+          "modernDevelopments": {
+            "title": "Von festen Vorlagen zu einem universellen Kernelemente-System",
+            "paragraph": "Jahrzehntelang begegneten Stilrichtlinien neuen Quellenarten, indem sie für jedes Format eine völlig neue Vorlage hinzufügten — eine Vorlage für ein Buch, eine andere für einen Zeitschriftenartikel, wieder eine andere für einen Film und so weiter, was mit der wachsenden Zahl von Online-Quellen immer schwerer Schritt zu halten war. Die 8. Auflage des MLA Handbook von 2016 ersetzte diesen Ansatz durch einen einzigen Satz von neun \"Kernelementen\" (Autor, Titel, Container, Verlag, Datum und so weiter), die ein Verfasser für jede Quelle in jedem Medium ausfüllt, wobei die Zeitschrift, Website oder Datenbank, in der eine Quelle erscheint, als \"Container\" behandelt wird, der selbst wiederum in einem anderen Container stecken kann. Der Ansatz dieses Tools spiegelt diesen Wandel wider: Statt einer starren Vorlage pro Quellentyp füllt es einen kleinen Satz gemeinsamer Felder unterschiedlich aus, je nachdem, ob die Quelle ein Buch, ein Artikel oder eine Website ist."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Zitierpraxis und zitationsbasierte Forschung sind in der Bibliotheks- und Informationswissenschaft verortet. Hier sind die weltweit besten 5 für Library & Information Management im QS World University Rankings by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              { "name": "University of Sheffield", "note": "Weltweit auf Platz 1 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "Nein — die Promotion ist ein Präsenz-Forschungsabschluss innerhalb der Information School." },
+              { "name": "University of Washington", "note": "Weltweit auf Platz 2 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "Nein — die Promotion in Information Science ist ein Vollzeit-Präsenz-Forschungsprogramm, das typischerweise 5 bis 6 Jahre dauert." },
+              { "name": "Nanyang Technological University (NTU Singapur)", "note": "Weltweit auf Platz 3 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "Nein — die Promotion ist ein Präsenz-Forschungsabschluss an der Wee Kim Wee School of Communication and Information." },
+              { "name": "University of North Carolina at Chapel Hill", "note": "Weltweit auf Platz 4 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "Nein — die Promotion in Information and Library Science ist ein Präsenz-Forschungsprogramm." },
+              { "name": "University of Texas at Austin", "note": "Weltweit auf Platz 5 für Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "Nein — die Promotion in Information Studies ist ein Präsenz-Forschungsprogramm mit einer jährlichen Bewerbungsfrist am 1. Dezember." },
+              { "name": "Sultan Qaboos University — Department of Information Studies", "note": "1986 als erstes bibliotheks- und informationswissenschaftliches Programm Omans gegründet; in diesem globalen Fachranking nicht separat gelistet.", "url": "https://www.squ.edu.om/", "online": "Nein — die Programme der Fakultät werden auf dem Campus der Sultan Qaboos University in Maskat, Oman, durchgeführt." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "Garfields Aufsatz schlug vor, Zitate selbst als durchsuchbaren Index der Forschung zu betrachten, und legte damit die konzeptionelle Grundlage dafür, warum eine konsistente, maschinenlesbare Zitierformatierung — das eigentliche Bedürfnis, dem dieser Generator dient — über das bloße Befolgen einer Stilrichtlinie hinaus wichtig ist.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Prozentrechner",
       "description": "Berechnen Sie Prozentsätze, umgekehrte Prozentsätze und Prozentdifferenzen sofort – mit einem Live-Vergleichsdiagramm für jedes Ergebnis.",

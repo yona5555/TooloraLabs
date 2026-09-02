@@ -81,6 +81,12 @@ import MolarMassCalculator from "@/components/tools/molar-mass-calculator/MolarM
 import MolarMassEducation from "@/components/tools/molar-mass-calculator/MolarMassEducation";
 import StoichiometryCalculator from "@/components/tools/stoichiometry-calculator/StoichiometryCalculator";
 import StoichiometryEducation from "@/components/tools/stoichiometry-calculator/StoichiometryEducation";
+import ChemicalEquationBalancer from "@/components/tools/chemical-equation-balancer/ChemicalEquationBalancer";
+import BalancerEducation from "@/components/tools/chemical-equation-balancer/BalancerEducation";
+import ClassScheduleBuilder from "@/components/tools/class-schedule-builder/ClassScheduleBuilder";
+import ClassScheduleEducation from "@/components/tools/class-schedule-builder/ClassScheduleEducation";
+import CitationGenerator from "@/components/tools/citation-generator/CitationGenerator";
+import CitationEducation from "@/components/tools/citation-generator/CitationEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -408,6 +414,15 @@ export default async function ToolPage({
     case "stoichiometry-calculator":
       component = <StoichiometryCalculator education={<StoichiometryEducation />} />;
       break;
+    case "chemical-equation-balancer":
+      component = <ChemicalEquationBalancer education={<BalancerEducation />} />;
+      break;
+    case "class-schedule-builder":
+      component = <ClassScheduleBuilder education={<ClassScheduleEducation />} />;
+      break;
+    case "citation-generator":
+      component = <CitationGenerator education={<CitationEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -511,6 +526,9 @@ export default async function ToolPage({
     slug === "matrix-calculator" ||
     slug === "molar-mass-calculator" ||
     slug === "stoichiometry-calculator" ||
+    slug === "chemical-equation-balancer" ||
+    slug === "class-schedule-builder" ||
+    slug === "citation-generator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

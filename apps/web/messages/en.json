@@ -8414,6 +8414,333 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Chemical Equation Balancer",
+      "description": "Balance a chemical equation by finding the smallest whole-number coefficients that conserve every element.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Example Equations",
+          "intro": "Equations this balancer can solve — try one, or enter your own.",
+          "syntaxHint": "Separate reactants from products with ->, =, or →, and separate terms on each side with +. Any coefficients you already type are ignored and recalculated from scratch."
+        }
+      },
+      "form": {
+        "inputTitle": "Unbalanced Equation",
+        "equationLabel": "Equation",
+        "equationHint": "Use standard formula syntax, e.g. Fe2O3, and separate reactants/products with -> or =.",
+        "equationPlaceholder": "e.g. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Balanced Equation",
+        "emptyEquation": "Enter a chemical equation to balance.",
+        "invalidEquation": "This doesn't look like a valid equation — use -> or = between reactants and products, and + between terms.",
+        "unknownElement": "This equation contains a symbol that isn't a recognized element.",
+        "cannotBalance": "This equation can't be balanced with whole-number coefficients — check the formulas for typos.",
+        "balancedCaption": "Smallest whole-number coefficients that conserve every element",
+        "reactants": "Reactants",
+        "products": "Products"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Equation Balancing",
+          "paragraph1": "Balancing a chemical equation means finding coefficients — whole numbers placed in front of each formula — so that the same number of atoms of every element appears on both sides. This reflects the law of conservation of mass: atoms are rearranged in a chemical reaction, but none are created or destroyed, so whatever elements and quantities go in as reactants must come out, in total, as products.",
+          "paragraph2": "This calculator uses the \"matrix method\": it treats each element's atom count across every formula as one linear equation, builds a matrix of all those equations together, and solves for the coefficients using Gaussian elimination with exact fractions (avoiding the rounding errors floating-point arithmetic would introduce). The result is a vector of ratios, which the calculator then scales up to the smallest set of positive whole numbers — the same answer a chemist would eventually reach by trial and error, found systematically instead.",
+          "paragraph3": "A properly balanced equation should also conserve overall electric charge, not just atom counts, which matters for reactions between ions rather than neutral molecules. This calculator balances neutral-formula equations by atom count alone; for reactions written with explicit ionic charges, a full redox-balancing method (tracking oxidation states and electrons transferred) is needed in addition to what this tool computes."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Representative equations, balanced by this calculator.",
+          "columnCalculation": "Unbalanced",
+          "columnResult": "Balanced",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why does the balancer ignore coefficients I already typed in?", "answer": "Because a coefficient you guessed might be wrong, and there's no reliable way to tell a deliberately chosen coefficient from an accidental typo. The calculator always solves for coefficients from scratch based on the formulas alone, which guarantees a correct result regardless of what you originally typed." },
+            { "question": "Why do the coefficients have to be whole numbers?", "answer": "A chemical equation describes whole molecules or formula units reacting together — you can't have \"2.5 molecules\" of something take part in a reaction. If the underlying ratio comes out fractional (as it sometimes does partway through the calculation), every coefficient is scaled up by the same factor until all of them land on whole numbers, which keeps the ratios between substances unchanged." },
+            { "question": "Why does this tool say an equation \"can't be balanced\"?", "answer": "Usually because the formulas as written don't actually share the elements needed to balance — for example, if an element appears only among the reactants and never among the products, no set of coefficients can make both sides equal for that element. Double-check every formula for typos or a missing product/reactant before assuming the reaction itself is impossible." },
+            { "question": "Can this balance equations involving ions or electric charge?", "answer": "Not on its own — it balances atom counts for neutral formulas, which is exactly what most simple reactions need. Redox reactions written with explicit ion charges (like Fe²⁺ → Fe³⁺ + e⁻) also need to conserve total charge and electrons transferred, which requires oxidation-state tracking beyond what this atom-counting method performs." },
+            { "question": "Is there always exactly one correct balanced version of an equation?", "answer": "For the reactants and products as given, yes — there's exactly one smallest whole-number ratio, though any multiple of it (4H2 + 2O2 → 4H2O instead of 2H2 + O2 → 2H2O) technically also balances. By convention, and by default in this calculator, the smallest possible whole numbers are reported, since any larger common multiple carries no new information." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Law Proven by a Very Careful Set of Scales",
+            "paragraph": "The requirement that a chemical equation must balance traces to Antoine Lavoisier's law of conservation of mass, published in his 1789 Traité élémentaire de chimie. By meticulously weighing every substance involved in a reaction — including gases, which many of his contemporaries didn't bother to capture and weigh — Lavoisier showed that the total mass going into a reaction always equals the total mass coming out. His Traité also popularized writing reactions in the equation-like format that made this conservation principle visually obvious, laying the groundwork for the balanced chemical equations still written the same way today."
+          },
+          "modernDevelopments": {
+            "title": "From Trial and Error to a Solvable System",
+            "paragraph": "For most of chemistry's history, equations were balanced by inspection — adjusting coefficients by trial and error until both sides matched, a method that gets unwieldy fast for reactions with many elements or terms. The alternative this calculator uses, sometimes called the algebraic or matrix method, treats each element's atom count as a linear equation and solves the whole system simultaneously; John A. Olson's 1997 Journal of Chemical Education paper analyzed this approach formally, including how to extend it to reactions that also need to balance oxidation and reduction. The same underlying technique — solving for the null space of a matrix — is what modern equation-balancing software, including this tool, actually computes."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Chemical equation balancing is a foundational skill within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
+              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
+              { "name": "Qatar University — Department of Chemistry and Earth Sciences", "note": "Founded in 1973 with around 30 full-time chemistry faculty; not separately ranked on this global subject table.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "No — the department's programs are delivered on Qatar University's campus." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "Olson's paper formalizes the algebraic (matrix) method for balancing chemical equations that this calculator implements, including the general conditions a valid balance must satisfy.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
+    "class-schedule-builder": {
+      "title": "Class Schedule Builder",
+      "description": "Build a weekly class schedule and instantly detect time conflicts between classes.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "How Conflict Detection Works",
+          "intro": "Add every class you're considering, with the days and times it meets — the builder checks every pair of classes for overlapping time on a shared day.",
+          "conflictHint": "Two classes only conflict if they share a day AND their time ranges actually overlap. Back-to-back classes (one ending exactly when the other starts) are not a conflict."
+        }
+      },
+      "form": {
+        "inputTitle": "Your Classes",
+        "classNameLabel": "Class Name",
+        "classNamePlaceholder": "e.g. Calculus II",
+        "removeClass": "Remove this class",
+        "daysLabel": "Meets on",
+        "day": {
+          "mon": "Mon",
+          "tue": "Tue",
+          "wed": "Wed",
+          "thu": "Thu",
+          "fri": "Fri",
+          "sat": "Sat",
+          "sun": "Sun"
+        },
+        "startTimeLabel": "Start Time",
+        "endTimeLabel": "End Time",
+        "addClass": "Add Another Class"
+      },
+      "result": {
+        "heading": "Schedule Check",
+        "emptySchedule": "Add at least one class to check your schedule.",
+        "invalidClassTime": "Every class needs an end time that's later than its start time.",
+        "missingDays": "Select at least one day for every class.",
+        "noConflicts": "No conflicts — this schedule works.",
+        "conflictsFoundLabel": "Conflicts found",
+        "conflictsWith": "conflicts with",
+        "hoursPerWeek": "hours per week total",
+        "day": {
+          "mon": "Monday",
+          "tue": "Tuesday",
+          "wed": "Wednesday",
+          "thu": "Thursday",
+          "fri": "Friday",
+          "sat": "Saturday",
+          "sun": "Sunday"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Schedule Conflicts",
+          "paragraph1": "A schedule conflict happens when two classes meet on the same day during overlapping time windows, so a student physically can't be in both places at once. Detecting this by eye gets error-prone fast once a schedule has more than a handful of classes, especially when classes meet on different combinations of days — a conflict on Monday might not repeat on Wednesday even for the same pair of classes.",
+          "paragraph2": "This builder checks every possible pair of classes against each other. For each pair, it first finds which days they share, then — for each shared day — compares their time ranges: if the later start time falls before the earlier end time, the ranges overlap and a conflict is recorded, along with exactly which portion of time overlaps. Classes that end exactly when another begins are deliberately not flagged, since back-to-back scheduling (with zero conflict, only zero passing time) is normal and often unavoidable.",
+          "paragraph3": "Beyond flagging conflicts, the tool totals the number of instructional hours per week across every class, counted once per day it meets — a schedule with no conflicts can still be flagged as unrealistic later by a student simply by comparing that total against how many hours are actually available in a week."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "Representative scheduling scenarios and what this builder reports for each.",
+          "columnCalculation": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "Math 101 (Mon/Wed 9:00–10:30) + Physics 201 (Mon 10:00–11:00)", "result": "Conflict on Monday, 10:00–10:30" },
+            { "calculation": "History 100 (Tue/Thu 13:00–14:00) + Chemistry Lab (Wed 13:00–16:00)", "result": "No conflict — different days" },
+            { "calculation": "Seminar A (Fri 15:00–16:00) + Seminar B (Fri 16:00–17:00)", "result": "No conflict — back-to-back, no overlap" },
+            { "calculation": "Two sections of the same course, both Mon/Wed 9:00–10:00", "result": "Conflict on Monday and Wednesday, 9:00–10:00" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why doesn't the tool flag back-to-back classes as a conflict?", "answer": "Because there's no actual time overlap — one class ending at 10:00 and another starting at 10:00 don't compete for the same minute. The builder only flags a conflict when a class's start time falls strictly before another's end time on a shared day, which is the definition of two events genuinely overlapping." },
+            { "question": "What counts as a \"shared day\" between two classes?", "answer": "Any day of the week that both classes have selected. A class that meets Monday/Wednesday/Friday and another that meets only Tuesday/Thursday share no days, so they're compared against each other on zero days and can never conflict, no matter what times they use." },
+            { "question": "Does the total weekly hours figure include time between classes?", "answer": "No — it only sums the actual meeting duration of every class, counted once for each day it meets. A class that runs 1 hour on three days a week contributes 3 hours to the total, not the wider span of time between its first and last session." },
+            { "question": "Can I check a schedule with classes that span midnight or run overnight?", "answer": "The builder compares start and end times within the same day, so an overnight class needs to be entered as ending by 23:59 on the day it starts; a session that logically continues past midnight isn't represented as a single entry." },
+            { "question": "Why does the tool require every class to have at least one day selected?", "answer": "A class with no day assigned can't be checked for conflicts against anything, since conflict detection depends entirely on comparing shared days. Requiring at least one day keeps every class meaningful to the conflict check rather than silently ignored." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Problem as Old as the University Timetable",
+            "paragraph": "The class-scheduling (or \"timetabling\") problem was formalized in computing terms by C.C. Gotlieb, whose 1962 paper \"The Construction of Class-Teacher Time-Tables\" (Proceedings of the IFIP Congress) described how to represent the constraints of a school timetable — teachers, rooms, and time slots that can't double-book — in a form a computer could search over. Before Gotlieb's formal treatment, timetabling at most institutions was done entirely by hand, often taking staff members weeks to produce a single term's schedule by trial and error."
+          },
+          "modernDevelopments": {
+            "title": "Why Conflict-Free Scheduling Is Harder Than It Looks",
+            "paragraph": "In 1976, Shimon Even, Alon Itai, and Adi Shamir proved that even a stripped-down version of the timetabling problem is NP-complete — meaning no algorithm is known that can guarantee an optimal, fully conflict-free schedule for every possible input in a reasonable amount of time as the number of classes grows. That result explains why real institutional scheduling systems rely on heuristics and constraint solvers that search for a good-enough schedule rather than provably the best one. This tool sidesteps that harder problem entirely: rather than trying to construct a conflict-free schedule from scratch, it takes a schedule a student has already built and simply checks it, pairwise, for the overlaps that would make it unworkable."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Timetabling sits at the intersection of scheduling theory and algorithm design within computer science. Here are the top 5 globally for Computer Science & Information Systems in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "No — the PhD is an in-residence research program within the EECS department." },
+              { "name": "Stanford University", "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "No — the program is an in-residence research PhD with a single annual admissions cycle." },
+              { "name": "Carnegie Mellon University (CMU)", "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "No — the Computer Science Department's PhD is an on-campus research degree." },
+              { "name": "National University of Singapore (NUS)", "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "No — admitted PhD students undertake in-residence research at the NUS School of Computing." },
+              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "No — the DPhil is an on-campus research degree covering algorithms and complexity among other areas." },
+              { "name": "King Abdullah University of Science and Technology (KAUST) — Computer Science Program", "note": "PhD program requires a minimum of 72 credits and a cumulative GPA of at least 3.0; not separately ranked on this global subject table.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "No — the program is delivered in residence on KAUST's campus in Thuwal, Saudi Arabia." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "This paper proved that a basic version of the class-timetabling problem is NP-complete, establishing why exact, guaranteed-conflict-free scheduling is computationally intractable at scale — the theoretical reason real-world tools check and refine schedules rather than solve them outright.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
+    "citation-generator": {
+      "title": "Citation Generator",
+      "description": "Generate APA, MLA, and Chicago style citations for books, journal articles, and websites.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Quick Style Guide",
+          "intro": "The three styles this generator produces, and where each is most commonly required.",
+          "apaHint": "Most common in the social sciences (psychology, education, nursing) — author-date in-text citations.",
+          "mlaHint": "Most common in the humanities (literature, languages, cultural studies) — author-page in-text citations.",
+          "chicagoHint": "Common in history and some social sciences — this generator produces the author-date variant used in reference lists."
+        }
+      },
+      "form": {
+        "inputTitle": "Source Details",
+        "sourceTypeLabel": "Source Type",
+        "sourceType": {
+          "book": "Book",
+          "journal-article": "Journal Article",
+          "website": "Website"
+        },
+        "authorsLabel": "Author(s)",
+        "firstNameLabel": "First Name",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Last Name",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Remove this author",
+        "addAuthor": "Add Another Author",
+        "titleLabel": "Title",
+        "titlePlaceholder": "e.g. The Craft of Research",
+        "yearLabel": "Year",
+        "yearPlaceholder": "e.g. 2020",
+        "publisherLabel": "Publisher",
+        "publisherPlaceholder": "e.g. University of Chicago Press",
+        "journalNameLabel": "Journal Name",
+        "journalNamePlaceholder": "e.g. Journal of Information Science",
+        "volumeLabel": "Volume",
+        "issueLabel": "Issue",
+        "pagesLabel": "Pages",
+        "pagesPlaceholder": "e.g. 45-60",
+        "siteNameLabel": "Site Name",
+        "siteNamePlaceholder": "e.g. TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Access Date (optional)",
+        "accessDatePlaceholder": "e.g. January 5, 2024"
+      },
+      "result": {
+        "heading": "Your Citations",
+        "missingTitle": "Enter a title for the source.",
+        "missingJournalName": "Enter the name of the journal this article was published in.",
+        "missingUrl": "Enter the URL of the web page.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Citation Styles",
+          "paragraph1": "A citation style is a standardized way of crediting a source, so that a reader can tell at a glance who wrote something, when, and where it was published — and can track down the original if they want to verify a claim or read further. Every style records the same underlying facts (author, title, year, publisher or journal), but arranges and punctuates them differently, which is why the same source produces three visibly different citations depending on which style a discipline has adopted.",
+          "paragraph2": "This generator asks for a source's details once and formats them according to all three major styles at the same time. It also follows each style's own rule for how many authors to list by name before switching to \"et al.\": this tool never truncates the author list in APA until beyond 20 authors, switches to \"et al.\" in MLA once a source has three or more authors, and does the same in Chicago once a source has four or more authors — matching how each style's own official guide handles multi-author sources.",
+          "paragraph3": "One thing this tool can't do is apply italics: it outputs plain text, since a copy button can't reliably preserve formatting across every word processor and platform. In all three styles, the title of a stand-alone work — a book, or the name of a journal or website — is meant to be italicized, while a title that's part of a larger whole, like a journal article or a web page, takes plain quotation marks instead. Re-apply italics to the container title after pasting a citation into your document."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "The same sources, formatted across all three styles, showing how punctuation and author-name order differ.",
+          "columnCalculation": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "Book by Jane Doe, formatted in APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "The same book, formatted in MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "The same book, formatted in Chicago (author-date)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Journal article with 3 authors, in MLA (et al. rule)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Which citation style should I use?", "answer": "It depends on your discipline and, often, your instructor or publisher's specific requirement. APA is most common in the social sciences, MLA in the humanities and literature, and Chicago in history and some social sciences (Chicago also has a separate notes-and-bibliography variant used mainly for footnotes, which this tool doesn't generate — only the author-date reference-list form). When in doubt, check your assignment instructions or a target journal's author guidelines rather than guessing." },
+            { "question": "Why do APA and MLA format author names so differently?", "answer": "Each style optimizes for a different kind of scanning. APA reduces first and middle names to initials and uses \"&\" before the final author, prioritizing compact reference lists in fields with heavily co-authored research. MLA spells out first names in full and uses \"and,\" since literary and humanities scholarship more often cites single or dual-authored works where the full name reads more naturally." },
+            { "question": "What does \"et al.\" mean, and when does this tool start using it?", "answer": "\"Et al.\" is Latin for \"and others,\" used to shorten a long author list to just the first author's name. This tool follows each style's own official threshold: APA lists every author by name until a source has more than 20, MLA switches to \"et al.\" at 3 or more authors, and Chicago switches to \"et al.\" at 4 or more authors." },
+            { "question": "Why does the citation start with the title instead of an author if I leave the author fields blank?", "answer": "All three styles handle sources with no listed author the same way: since there's no author name to lead with, the title moves into the position an author's name would normally occupy, and everything else in the citation shifts over by one slot. This is standard practice, not a limitation of this tool — it's how a reader is meant to alphabetize an unauthored source in a reference list." },
+            { "question": "Does this tool italicize book and journal titles for me?", "answer": "No — the output is plain text. In every style here, the title of a complete, stand-alone work (a book, or a journal's or website's name) is meant to be italicized, while a title that's part of something larger (an article, a web page) takes quotation marks instead, which this tool does apply. After pasting a citation into your document, italicize the container title by hand." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "A Manuscript Style Born in a Single Journal Article",
+            "paragraph": "APA style traces to a seven-page 1929 article in Psychological Bulletin, \"Instructions in Regard to Preparation of Manuscript,\" written by a committee of psychologists, an anthropologist, and journal business managers who wanted a shared standard so that submissions across different psychology journals wouldn't each need reformatting by hand. What started as a short set of house-style rules for one field grew, edition by edition, into the full Publication Manual used across the social sciences today — but the core motivation, making it easier for a reader to locate the source behind a claim, hasn't changed since 1929."
+          },
+          "modernDevelopments": {
+            "title": "From Fixed Templates to a Universal Core-Elements System",
+            "paragraph": "For decades, style guides handled new kinds of sources by adding an entirely new template for each format — a template for a book, a different one for a magazine article, another for a film, and so on, which struggled to keep up as online sources multiplied. The 2016 (8th) edition of the MLA Handbook replaced that approach with a single set of nine \"core elements\" (author, title, container, publisher, date, and so on) that a writer fills in for any source, in any medium, treating the journal, website, or database a source appears in as a \"container\" that can itself sit inside another container. This tool's own approach mirrors that shift: rather than one rigid template per source type, it fills a small set of shared fields differently depending on whether the source is a book, article, or website."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Citation practice and citation-based scholarship sit within library and information science. Here are the top 5 globally for Library & Information Management in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "University of Sheffield", "note": "Ranked #1 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "No — the PhD is an in-residence research degree within the Information School." },
+              { "name": "University of Washington", "note": "Ranked #2 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "No — the Information Science PhD is a full-time, in-residence research program typically taking 5 to 6 years." },
+              { "name": "Nanyang Technological University (NTU Singapore)", "note": "Ranked #3 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "No — the PhD is an in-residence research degree at the Wee Kim Wee School of Communication and Information." },
+              { "name": "University of North Carolina at Chapel Hill", "note": "Ranked #4 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "No — the PhD in Information and Library Science is an in-residence research program." },
+              { "name": "University of Texas at Austin", "note": "Ranked #5 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "No — the PhD in Information Studies is an in-residence research program with an annual December 1 application deadline." },
+              { "name": "Sultan Qaboos University — Department of Information Studies", "note": "Founded in 1986 as Oman's founding library and information science program; not separately ranked on this global subject table.", "url": "https://www.squ.edu.om/", "online": "No — the department's programs are delivered on Sultan Qaboos University's campus in Muscat, Oman." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "Garfield's paper proposed treating citations themselves as a searchable index of scholarship, laying the conceptual groundwork for why consistent, machine-readable citation formatting — the underlying need this generator serves — matters beyond just following a style guide.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Percentage Calculator",
       "description": "Calculate percentages, reverse percentages, and percentage differences instantly, with a live comparison chart for every result.",

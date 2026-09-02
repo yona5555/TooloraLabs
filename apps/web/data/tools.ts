@@ -486,6 +486,54 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "chemical-equation-balancer",
+    title: "Chemical Equation Balancer",
+    category: "math-science",
+    description:
+      "Balance a chemical equation by finding the smallest whole-number coefficients that conserve every element.",
+    featured: false,
+    keywords: [
+      "chemical equation balancer",
+      "balance chemical equations",
+      "equation balancer chemistry",
+      "reaction balancer",
+      "coefficient balancer",
+      "conservation of mass calculator",
+    ],
+  },
+  {
+    slug: "class-schedule-builder",
+    title: "Class Schedule Builder",
+    category: "calculators",
+    description:
+      "Build a weekly class schedule and instantly detect time conflicts between classes.",
+    featured: false,
+    keywords: [
+      "class schedule builder",
+      "class schedule maker",
+      "timetable conflict checker",
+      "schedule conflict checker",
+      "weekly class planner",
+      "course schedule builder",
+    ],
+  },
+  {
+    slug: "citation-generator",
+    title: "Citation Generator",
+    category: "text-tools",
+    description:
+      "Generate APA, MLA, and Chicago style citations for books, journal articles, and websites.",
+    featured: false,
+    keywords: [
+      "citation generator",
+      "apa citation generator",
+      "mla citation generator",
+      "chicago style citation",
+      "bibliography generator",
+      "reference generator",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "math-science",

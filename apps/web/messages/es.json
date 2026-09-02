@@ -8418,6 +8418,333 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Balanceador de Ecuaciones Químicas",
+      "description": "Balancea una ecuación química encontrando los coeficientes enteros más pequeños que conservan cada elemento.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de esta Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Ejemplos de Ecuaciones",
+          "intro": "Ecuaciones que este balanceador puede resolver — prueba una, o introduce la tuya propia.",
+          "syntaxHint": "Separa los reactivos de los productos con ->, =, o →, y separa los términos en cada lado con +. Cualquier coeficiente que ya hayas escrito se ignora y se recalcula desde cero."
+        }
+      },
+      "form": {
+        "inputTitle": "Ecuación Sin Balancear",
+        "equationLabel": "Ecuación",
+        "equationHint": "Usa la sintaxis estándar de fórmulas, p. ej. Fe2O3, y separa reactivos/productos con -> o =.",
+        "equationPlaceholder": "p. ej. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Ecuación Balanceada",
+        "emptyEquation": "Introduce una ecuación química para balancear.",
+        "invalidEquation": "Esto no parece una ecuación válida — usa -> o = entre reactivos y productos, y + entre términos.",
+        "unknownElement": "Esta ecuación contiene un símbolo que no es un elemento reconocido.",
+        "cannotBalance": "Esta ecuación no se puede balancear con coeficientes enteros — revisa las fórmulas en busca de errores tipográficos.",
+        "balancedCaption": "Los coeficientes enteros más pequeños que conservan cada elemento",
+        "reactants": "Reactivos",
+        "products": "Productos"
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Balanceo de Ecuaciones",
+          "paragraph1": "Balancear una ecuación química significa encontrar coeficientes — números enteros colocados delante de cada fórmula — de modo que aparezca el mismo número de átomos de cada elemento en ambos lados. Esto refleja la ley de conservación de la masa: los átomos se reorganizan en una reacción química, pero ninguno se crea ni se destruye, así que cualquier elemento y cantidad que entre como reactivo debe salir, en total, como producto.",
+          "paragraph2": "Esta calculadora utiliza el «método matricial»: trata el recuento de átomos de cada elemento en todas las fórmulas como una ecuación lineal, construye una matriz con todas esas ecuaciones juntas, y resuelve los coeficientes mediante eliminación gaussiana con fracciones exactas (evitando los errores de redondeo que introduciría la aritmética de punto flotante). El resultado es un vector de proporciones, que la calculadora luego escala hasta el conjunto más pequeño de números enteros positivos — la misma respuesta a la que un químico llegaría eventualmente por prueba y error, pero encontrada de forma sistemática.",
+          "paragraph3": "Una ecuación correctamente balanceada también debería conservar la carga eléctrica total, no solo el recuento de átomos, lo cual importa en reacciones entre iones en lugar de moléculas neutras. Esta calculadora balancea ecuaciones de fórmulas neutras solo por recuento de átomos; para reacciones escritas con cargas iónicas explícitas, se necesita además un método completo de balanceo redox (que siga los estados de oxidación y los electrones transferidos) además de lo que calcula esta herramienta."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Ecuaciones representativas, balanceadas por esta calculadora.",
+          "columnCalculation": "Sin Balancear",
+          "columnResult": "Balanceada",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué el balanceador ignora los coeficientes que ya escribí?", "answer": "Porque un coeficiente que hayas adivinado podría ser incorrecto, y no hay una forma fiable de distinguir un coeficiente elegido deliberadamente de un error tipográfico accidental. La calculadora siempre resuelve los coeficientes desde cero basándose únicamente en las fórmulas, lo que garantiza un resultado correcto sin importar lo que escribiste originalmente." },
+            { "question": "¿Por qué los coeficientes tienen que ser números enteros?", "answer": "Una ecuación química describe moléculas completas o unidades fórmula que reaccionan entre sí — no puede haber «2.5 moléculas» de algo participando en una reacción. Si la proporción subyacente resulta fraccionaria (como ocurre a veces a mitad del cálculo), cada coeficiente se escala por el mismo factor hasta que todos resultan en números enteros, lo que mantiene inalteradas las proporciones entre sustancias." },
+            { "question": "¿Por qué esta herramienta dice que una ecuación \"no se puede balancear\"?", "answer": "Normalmente porque las fórmulas tal como están escritas no comparten realmente los elementos necesarios para balancear — por ejemplo, si un elemento aparece solo entre los reactivos y nunca entre los productos, ningún conjunto de coeficientes puede igualar ambos lados para ese elemento. Verifica cada fórmula en busca de errores tipográficos o un producto/reactivo faltante antes de asumir que la reacción en sí es imposible." },
+            { "question": "¿Puede esto balancear ecuaciones que involucran iones o carga eléctrica?", "answer": "No por sí sola — balancea recuentos de átomos para fórmulas neutras, que es exactamente lo que necesitan la mayoría de las reacciones simples. Las reacciones redox escritas con cargas iónicas explícitas (como Fe²⁺ → Fe³⁺ + e⁻) también necesitan conservar la carga total y los electrones transferidos, lo cual requiere un seguimiento de los estados de oxidación más allá de lo que realiza este método de conteo de átomos." },
+            { "question": "¿Siempre existe exactamente una versión balanceada correcta de una ecuación?", "answer": "Para los reactivos y productos dados, sí — existe exactamente una proporción entera más pequeña, aunque técnicamente cualquier múltiplo de ella (4H2 + 2O2 → 4H2O en lugar de 2H2 + O2 → 2H2O) también balancea. Por convención, y de forma predeterminada en esta calculadora, se muestran los números enteros más pequeños posibles, ya que cualquier múltiplo común mayor no aporta información nueva." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta Herramienta",
+          "history": {
+            "title": "Una Ley Demostrada por una Balanza Muy Cuidadosa",
+            "paragraph": "El requisito de que una ecuación química debe estar balanceada se remonta a la ley de conservación de la masa de Antoine Lavoisier, publicada en su Traité élémentaire de chimie de 1789. Pesando meticulosamente cada sustancia involucrada en una reacción — incluidos los gases, que muchos de sus contemporáneos no se molestaban en capturar y pesar — Lavoisier demostró que la masa total que entra en una reacción siempre es igual a la masa total que sale. Su Traité también popularizó escribir las reacciones en el formato similar a una ecuación que hizo visualmente evidente este principio de conservación, sentando las bases de las ecuaciones químicas balanceadas que aún hoy se escriben de la misma manera."
+          },
+          "modernDevelopments": {
+            "title": "De la Prueba y Error a un Sistema Resoluble",
+            "paragraph": "Durante la mayor parte de la historia de la química, las ecuaciones se balanceaban por inspección — ajustando coeficientes por prueba y error hasta que ambos lados coincidían, un método que se vuelve rápidamente inmanejable para reacciones con muchos elementos o términos. La alternativa que usa esta calculadora, a veces llamada método algebraico o matricial, trata el recuento de átomos de cada elemento como una ecuación lineal y resuelve todo el sistema simultáneamente; el artículo de John A. Olson de 1997 en el Journal of Chemical Education analizó formalmente este enfoque, incluyendo cómo extenderlo a reacciones que también necesitan balancear oxidación y reducción. La misma técnica subyacente — resolver el espacio nulo de una matriz — es lo que el software moderno de balanceo de ecuaciones, incluida esta herramienta, calcula en realidad."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El balanceo de ecuaciones químicas es una habilidad fundamental dentro de la química. Aquí están las 5 mejores del mundo en Química según el QS World University Rankings by Subject 2025, además de un departamento regional:",
+            "universities": [
+              { "name": "Universidad de Harvard", "note": "Clasificada #1 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — el departamento cubre la matrícula de todos los estudiantes de doctorado en un programa de investigación presencial." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Clasificado #2 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — los estudiantes de doctorado admitidos reciben matrícula completa y un estipendio para un programa de investigación en el campus." },
+              { "name": "Universidad de Cambridge", "note": "Clasificada #3 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Parcialmente — el doctorado se ofrece como investigación a tiempo completo o parcial, aunque ambas modalidades son presenciales, no a distancia." },
+              { "name": "Universidad de Stanford", "note": "Clasificada #4 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — el programa es un doctorado de investigación presencial con una revisión de admisión integral e individualizada." },
+              { "name": "Universidad de Oxford", "note": "Clasificada #5 mundialmente en Química (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — el DPhil es un título de investigación presencial que abarca catálisis, materiales y química teórica, entre otras áreas." },
+              { "name": "Universidad de Catar — Departamento de Química y Ciencias de la Tierra", "note": "Fundado en 1973, con alrededor de 30 profesores de química a tiempo completo; no aparece clasificado por separado en esta tabla global de la materia.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "No — los programas del departamento se imparten en el campus de la Universidad de Catar." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "El artículo de Olson formaliza el método algebraico (matricial) para balancear ecuaciones químicas que implementa esta calculadora, incluyendo las condiciones generales que debe satisfacer un balance válido.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
+    "class-schedule-builder": {
+      "title": "Creador de Horarios de Clase",
+      "description": "Crea tu horario semanal de clases y detecta al instante los conflictos de horario entre ellas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Cómo Funciona la Detección de Conflictos",
+          "intro": "Añade cada clase que estés considerando, con los días y horarios en que se imparte — el creador revisa cada par de clases en busca de horarios superpuestos en un día compartido.",
+          "conflictHint": "Dos clases solo entran en conflicto si comparten un día Y sus franjas horarias realmente se superponen. Las clases consecutivas (una termina justo cuando empieza la otra) no se consideran un conflicto."
+        }
+      },
+      "form": {
+        "inputTitle": "Tus Clases",
+        "classNameLabel": "Nombre de la Clase",
+        "classNamePlaceholder": "p. ej., Cálculo II",
+        "removeClass": "Eliminar esta clase",
+        "daysLabel": "Se imparte los",
+        "day": {
+          "mon": "Lun",
+          "tue": "Mar",
+          "wed": "Mié",
+          "thu": "Jue",
+          "fri": "Vie",
+          "sat": "Sáb",
+          "sun": "Dom"
+        },
+        "startTimeLabel": "Hora de Inicio",
+        "endTimeLabel": "Hora de Fin",
+        "addClass": "Añadir Otra Clase"
+      },
+      "result": {
+        "heading": "Revisión del Horario",
+        "emptySchedule": "Añade al menos una clase para revisar tu horario.",
+        "invalidClassTime": "Cada clase necesita una hora de fin posterior a su hora de inicio.",
+        "missingDays": "Selecciona al menos un día para cada clase.",
+        "noConflicts": "Sin conflictos — este horario funciona.",
+        "conflictsFoundLabel": "Conflictos encontrados",
+        "conflictsWith": "entra en conflicto con",
+        "hoursPerWeek": "horas semanales en total",
+        "day": {
+          "mon": "Lunes",
+          "tue": "Martes",
+          "wed": "Miércoles",
+          "thu": "Jueves",
+          "fri": "Viernes",
+          "sat": "Sábado",
+          "sun": "Domingo"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo los Conflictos de Horario",
+          "paragraph1": "Un conflicto de horario ocurre cuando dos clases se imparten el mismo día en franjas horarias superpuestas, de modo que un estudiante físicamente no puede estar en dos lugares a la vez. Detectar esto a simple vista se vuelve propenso a errores rápidamente cuando un horario tiene más de un puñado de clases, especialmente cuando las clases se imparten en distintas combinaciones de días — un conflicto en lunes podría no repetirse en miércoles para el mismo par de clases.",
+          "paragraph2": "Este creador revisa cada par posible de clases entre sí. Para cada par, primero identifica qué días comparten y luego, para cada día compartido, compara sus franjas horarias: si la hora de inicio más tardía cae antes de la hora de fin más temprana, las franjas se superponen y se registra un conflicto, junto con exactamente qué porción de tiempo se superpone. Las clases que terminan justo cuando otra empieza deliberadamente no se marcan como conflicto, ya que la programación consecutiva (con cero solapamiento, solo cero tiempo de holgura) es normal y a menudo inevitable.",
+          "paragraph3": "Además de señalar conflictos, la herramienta totaliza las horas de instrucción semanales en todas las clases, contadas una vez por cada día en que se imparten — un horario sin conflictos puede, aun así, resultar poco realista si un estudiante compara ese total con las horas realmente disponibles en una semana."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Escenarios de horarios representativos y lo que reporta este creador para cada uno.",
+          "columnCalculation": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Matemáticas 101 (Lun/Mié 9:00–10:30) + Física 201 (Lun 10:00–11:00)", "result": "Conflicto el lunes, 10:00–10:30" },
+            { "calculation": "Historia 100 (Mar/Jue 13:00–14:00) + Laboratorio de Química (Mié 13:00–16:00)", "result": "Sin conflicto — días diferentes" },
+            { "calculation": "Seminario A (Vie 15:00–16:00) + Seminario B (Vie 16:00–17:00)", "result": "Sin conflicto — consecutivos, sin superposición" },
+            { "calculation": "Dos secciones del mismo curso, ambas Lun/Mié 9:00–10:00", "result": "Conflicto el lunes y el miércoles, 9:00–10:00" }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Por qué la herramienta no marca las clases consecutivas como conflicto?", "answer": "Porque no hay superposición real de tiempo — una clase que termina a las 10:00 y otra que empieza en ese mismo momento no compiten por el mismo minuto. La herramienta solo marca un conflicto cuando la hora de inicio de una clase cae realmente antes de la hora de fin de otra en un día compartido, que es la definición de una superposición genuina entre dos eventos." },
+            { "question": "¿Qué cuenta como \"día compartido\" entre dos clases?", "answer": "Cualquier día de la semana que ambas clases tengan seleccionado. Una clase que se imparte lunes/miércoles/viernes y otra que solo se imparte martes/jueves no comparten ningún día, por lo que se comparan en cero días y nunca pueden entrar en conflicto, sin importar los horarios." },
+            { "question": "¿La cifra de horas totales semanales incluye el tiempo entre clases?", "answer": "No — solo suma la duración real de reunión de cada clase, contada una vez por cada día en que se imparte. Una clase que dura 1 hora tres días a la semana aporta 3 horas al total, no el intervalo más amplio entre su primera y última sesión." },
+            { "question": "¿Puedo revisar un horario con clases que se extienden más allá de la medianoche?", "answer": "El creador compara las horas de inicio y fin dentro del mismo día, por lo que una clase nocturna debe ingresarse de forma que termine a más tardar a las 23:59 del día en que empieza; una sesión que continúa lógicamente después de la medianoche no puede representarse como una sola entrada." },
+            { "question": "¿Por qué la herramienta exige que cada clase tenga al menos un día seleccionado?", "answer": "Una clase sin ningún día asignado no puede revisarse en busca de conflictos con nada, ya que la detección de conflictos depende por completo de comparar días compartidos. Exigir al menos un día mantiene a cada clase relevante para la revisión de conflictos en lugar de ignorarla silenciosamente." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Un Problema Tan Antiguo Como el Horario Universitario",
+            "paragraph": "El problema de la programación de clases (\"timetabling\") fue formalizado en términos computacionales por C.C. Gotlieb, cuyo artículo de 1962 \"The Construction of Class-Teacher Time-Tables\" (Proceedings of the IFIP Congress) describió cómo representar las restricciones de un horario escolar — profesores, aulas y franjas horarias que no pueden duplicarse — en una forma que una computadora pudiera explorar. Antes del tratamiento formal de Gotlieb, la programación de horarios en la mayoría de las instituciones se hacía completamente a mano, a menudo tomando semanas de trabajo del personal para producir el horario de un solo periodo lectivo por ensayo y error."
+          },
+          "modernDevelopments": {
+            "title": "Por Qué la Programación Sin Conflictos Es Más Difícil de Lo Que Parece",
+            "paragraph": "En 1976, Shimon Even, Alon Itai y Adi Shamir demostraron que incluso una versión simplificada del problema de programación de horarios es NP-completo — es decir, no se conoce ningún algoritmo que garantice un horario óptimo y totalmente libre de conflictos para cualquier entrada posible en un tiempo razonable a medida que aumenta el número de clases. Ese resultado explica por qué los sistemas de programación institucionales reales dependen de heurísticas y solucionadores de restricciones que buscan un horario suficientemente bueno en lugar de uno demostrablemente óptimo. Esta herramienta evita ese problema más difícil por completo: en lugar de intentar construir un horario libre de conflictos desde cero, toma un horario que un estudiante ya ha creado y simplemente lo revisa, par por par, en busca de las superposiciones que lo harían inviable."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La programación de horarios se sitúa en la intersección de la teoría de la programación y el diseño de algoritmos dentro de las ciencias de la computación. Estas son las 5 mejores universidades del mundo en Ciencias de la Computación y Sistemas de Información según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              { "name": "Instituto Tecnológico de Massachusetts (MIT)", "note": "Puesto #1 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "No — el doctorado es un programa de investigación presencial dentro del departamento de EECS." },
+              { "name": "Universidad de Stanford", "note": "Puesto #2 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "No — el programa es un doctorado de investigación presencial con un único ciclo de admisión anual." },
+              { "name": "Universidad Carnegie Mellon (CMU)", "note": "Puesto #3 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "No — el doctorado del Departamento de Ciencias de la Computación es un título de investigación presencial." },
+              { "name": "Universidad Nacional de Singapur (NUS)", "note": "Puesto #4 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "No — los estudiantes de doctorado admitidos realizan investigación presencial en la Escuela de Computación de la NUS." },
+              { "name": "Universidad de Oxford", "note": "Puesto #5 mundial en Ciencias de la Computación y Sistemas de Información (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "No — el DPhil es un título de investigación presencial que abarca algoritmos y teoría de la complejidad, entre otras áreas." },
+              { "name": "Universidad Rey Abdalá de Ciencia y Tecnología (KAUST) — Programa de Ciencias de la Computación", "note": "El programa de doctorado requiere un mínimo de 72 créditos y un promedio acumulado de al menos 3.0; no aparece clasificado por separado en esta tabla global por materia.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "No — el programa se imparte de forma presencial en el campus de KAUST en Thuwal, Arabia Saudita." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "Este artículo demostró que una versión básica del problema de programación de horarios de clase es NP-completo, estableciendo la razón teórica por la que una programación exacta y garantizadamente libre de conflictos es computacionalmente inviable a gran escala — la razón por la que las herramientas del mundo real revisan y refinan los horarios en lugar de resolverlos de una vez por todas.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
+    "citation-generator": {
+      "title": "Generador de Citas",
+      "description": "Genera citas en estilo APA, MLA y Chicago para libros, artículos de revistas científicas y sitios web.",
+      "nav": {
+        "tool": "Generador",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Guía Rápida de Estilos",
+          "intro": "Los tres estilos que produce este generador, y dónde suele exigirse cada uno.",
+          "apaHint": "El más común en ciencias sociales (psicología, educación, enfermería) — citas en el texto de autor-año.",
+          "mlaHint": "El más común en humanidades (literatura, idiomas, estudios culturales) — citas en el texto de autor-página.",
+          "chicagoHint": "Común en historia y algunas ciencias sociales — este generador produce la variante autor-fecha usada en las listas de referencias."
+        }
+      },
+      "form": {
+        "inputTitle": "Detalles de la Fuente",
+        "sourceTypeLabel": "Tipo de Fuente",
+        "sourceType": {
+          "book": "Libro",
+          "journal-article": "Artículo de Revista",
+          "website": "Sitio Web"
+        },
+        "authorsLabel": "Autor(es)",
+        "firstNameLabel": "Nombre",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Apellido",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Eliminar este autor",
+        "addAuthor": "Añadir Otro Autor",
+        "titleLabel": "Título",
+        "titlePlaceholder": "p. ej., The Craft of Research",
+        "yearLabel": "Año",
+        "yearPlaceholder": "p. ej., 2020",
+        "publisherLabel": "Editorial",
+        "publisherPlaceholder": "p. ej., University of Chicago Press",
+        "journalNameLabel": "Nombre de la Revista",
+        "journalNamePlaceholder": "p. ej., Journal of Information Science",
+        "volumeLabel": "Volumen",
+        "issueLabel": "Número",
+        "pagesLabel": "Páginas",
+        "pagesPlaceholder": "p. ej., 45-60",
+        "siteNameLabel": "Nombre del Sitio",
+        "siteNamePlaceholder": "p. ej., TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Fecha de Acceso (opcional)",
+        "accessDatePlaceholder": "p. ej., 5 de enero de 2024"
+      },
+      "result": {
+        "heading": "Tus Citas",
+        "missingTitle": "Introduce un título para la fuente.",
+        "missingJournalName": "Introduce el nombre de la revista en la que se publicó este artículo.",
+        "missingUrl": "Introduce la URL de la página web.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Entendiendo los Estilos de Cita",
+          "paragraph1": "Un estilo de cita es una forma estandarizada de acreditar una fuente, de modo que un lector pueda saber de un vistazo quién escribió algo, cuándo y dónde se publicó — y pueda rastrear el original si quiere verificar una afirmación o leer más. Cada estilo registra los mismos datos subyacentes (autor, título, año, editorial o revista), pero los ordena y puntúa de forma diferente, por lo que la misma fuente produce tres citas visiblemente distintas según el estilo que haya adoptado una disciplina.",
+          "paragraph2": "Este generador solicita los datos de una fuente una sola vez y los formatea según los tres estilos principales al mismo tiempo. También sigue la regla propia de cada estilo sobre cuántos autores nombrar antes de cambiar a \"et al.\": esta herramienta nunca trunca la lista de autores en APA hasta pasar de 20 autores, cambia a \"et al.\" en MLA en cuanto una fuente tiene tres o más autores, y hace lo mismo en Chicago en cuanto una fuente tiene cuatro o más autores — coincidiendo con cómo maneja cada guía oficial las fuentes con múltiples autores.",
+          "paragraph3": "Algo que esta herramienta no puede hacer es aplicar cursiva: genera texto sin formato, ya que un botón de copiar no puede preservar de forma fiable el formato en todos los procesadores de texto y plataformas. En los tres estilos, el título de una obra independiente y completa — un libro, o el nombre de una revista o sitio web — debe ir en cursiva, mientras que un título que forma parte de un todo mayor, como un artículo de revista o una página web, lleva comillas normales en su lugar. Vuelve a aplicar la cursiva al título del contenedor después de pegar una cita en tu documento."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Las mismas fuentes, formateadas en los tres estilos, mostrando cómo difieren la puntuación y el orden de los nombres de autor.",
+          "columnCalculation": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            { "calculation": "Libro de Jane Doe, en formato APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "El mismo libro, en formato MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "El mismo libro, en formato Chicago (autor-fecha)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Artículo de revista con 3 autores, en MLA (regla de et al.)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            { "question": "¿Qué estilo de cita debo usar?", "answer": "Depende de tu disciplina y, a menudo, del requisito específico de tu profesor o editorial. APA es el más común en ciencias sociales, MLA en humanidades y literatura, y Chicago en historia y algunas ciencias sociales (Chicago también tiene una variante separada de notas y bibliografía, usada principalmente para notas al pie, que esta herramienta no genera — solo la forma autor-fecha para listas de referencias). Ante la duda, revisa las instrucciones de tu tarea o las normas para autores de una revista específica en lugar de adivinar." },
+            { "question": "¿Por qué APA y MLA formatean los nombres de los autores de forma tan diferente?", "answer": "Cada estilo se optimiza para un tipo distinto de lectura rápida. APA reduce los nombres de pila e intermedios a iniciales y usa \"&\" antes del último autor, priorizando listas de referencias compactas en campos con investigación muy coautoral. MLA escribe los nombres de pila completos y usa \"and\" (o \"y\"), ya que la investigación literaria y humanística cita con más frecuencia obras de uno o dos autores, donde el nombre completo se lee de forma más natural." },
+            { "question": "¿Qué significa \"et al.\", y cuándo empieza a usarlo esta herramienta?", "answer": "\"Et al.\" es latín para \"y otros\", y se usa para acortar una lista larga de autores al nombre del primer autor únicamente. Esta herramienta sigue el umbral oficial de cada estilo: APA lista a cada autor por su nombre hasta que una fuente tiene más de 20, MLA cambia a \"et al.\" con 3 o más autores, y Chicago cambia a \"et al.\" con 4 o más autores." },
+            { "question": "¿Por qué la cita empieza con el título en lugar de un autor si dejo los campos de autor vacíos?", "answer": "Los tres estilos tratan las fuentes sin autor indicado de la misma manera: como no hay un nombre de autor con el que empezar, el título ocupa la posición que normalmente ocuparía el nombre del autor, y todo lo demás en la cita se desplaza una posición. Esta es una práctica estándar, no una limitación de esta herramienta — así es como se espera alfabetizar una fuente sin autor en una lista de referencias." },
+            { "question": "¿Esta herramienta pone en cursiva los títulos de libros y revistas por mí?", "answer": "No — la salida es texto sin formato. En cada estilo aquí, el título de una obra completa e independiente (un libro, o el nombre de una revista o sitio web) debe ir en cursiva, mientras que un título que forma parte de algo más grande (un artículo, una página web) lleva comillas en su lugar, lo cual esta herramienta sí aplica. Después de pegar una cita en tu documento, pon en cursiva el título del contenedor a mano." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Un Estilo de Manuscrito Nacido en un Solo Artículo de Revista",
+            "paragraph": "El estilo APA se remonta a un artículo de siete páginas de 1929 en Psychological Bulletin, \"Instructions in Regard to Preparation of Manuscript\", escrito por un comité de psicólogos, un antropólogo y gerentes editoriales de revistas que querían un estándar compartido para que los envíos a distintas revistas de psicología no necesitaran reformatearse a mano cada vez. Lo que comenzó como un breve conjunto de normas de estilo interno para un solo campo creció, edición tras edición, hasta convertirse en el Manual de Publicaciones completo que se usa hoy en las ciencias sociales — pero la motivación central, facilitar que un lector localice la fuente detrás de una afirmación, no ha cambiado desde 1929."
+          },
+          "modernDevelopments": {
+            "title": "De Plantillas Fijas a un Sistema Universal de Elementos Básicos",
+            "paragraph": "Durante décadas, las guías de estilo abordaron los nuevos tipos de fuentes añadiendo una plantilla completamente nueva para cada formato — una plantilla para un libro, otra distinta para un artículo de revista general, otra para una película, y así sucesivamente, lo que resultaba difícil de mantener a medida que se multiplicaban las fuentes en línea. La 8ª edición de 2016 del MLA Handbook sustituyó ese enfoque por un único conjunto de nueve \"elementos básicos\" (autor, título, contenedor, editorial, fecha, etc.) que un autor completa para cualquier fuente, en cualquier medio, tratando la revista, el sitio web o la base de datos en la que aparece una fuente como un \"contenedor\" que a su vez puede estar dentro de otro contenedor. El propio enfoque de esta herramienta refleja ese cambio: en lugar de una plantilla rígida por tipo de fuente, rellena un pequeño conjunto de campos compartidos de forma distinta según si la fuente es un libro, un artículo o un sitio web."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La práctica de citación y la investigación basada en citas se sitúan dentro de la biblioteconomía y las ciencias de la información. Estas son las 5 mejores universidades del mundo en Library & Information Management según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              { "name": "Universidad de Sheffield", "note": "Puesto #1 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "No — el doctorado es un título de investigación presencial dentro de la Information School." },
+              { "name": "Universidad de Washington", "note": "Puesto #2 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "No — el doctorado en Information Science es un programa de investigación presencial a tiempo completo que suele durar de 5 a 6 años." },
+              { "name": "Universidad Tecnológica de Nanyang (NTU Singapur)", "note": "Puesto #3 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "No — el doctorado es un título de investigación presencial en la Wee Kim Wee School of Communication and Information." },
+              { "name": "Universidad de Carolina del Norte en Chapel Hill", "note": "Puesto #4 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "No — el doctorado en Information and Library Science es un programa de investigación presencial." },
+              { "name": "Universidad de Texas en Austin", "note": "Puesto #5 mundial en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "No — el doctorado en Information Studies es un programa de investigación presencial con una fecha límite de solicitud anual el 1 de diciembre." },
+              { "name": "Universidad Sultán Qaboos — Departamento de Estudios de la Información", "note": "Fundado en 1986 como el primer programa de biblioteconomía y ciencias de la información de Omán; no aparece clasificado por separado en esta tabla global por materia.", "url": "https://www.squ.edu.om/", "online": "No — los programas del departamento se imparten en el campus de la Universidad Sultán Qaboos en Mascate, Omán." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "El artículo de Garfield propuso tratar las citas mismas como un índice consultable de la investigación académica, sentando las bases conceptuales de por qué un formato de cita consistente y legible por máquina — la necesidad subyacente a la que sirve este generador — importa más allá de seguir simplemente una guía de estilo.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",

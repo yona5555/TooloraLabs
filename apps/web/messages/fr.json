@@ -8418,6 +8418,333 @@
         }
       }
     },
+    "chemical-equation-balancer": {
+      "title": "Équilibreur d'Équations Chimiques",
+      "description": "Équilibrez une équation chimique en trouvant les plus petits coefficients entiers qui conservent chaque élément.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Les Coulisses de l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Exemples d'Équations",
+          "intro": "Des équations que cet équilibreur peut résoudre — essayez-en une, ou saisissez la vôtre.",
+          "syntaxHint": "Séparez les réactifs des produits avec ->, =, ou →, et séparez les termes de chaque côté par +. Tout coefficient déjà saisi est ignoré et recalculé depuis le début."
+        }
+      },
+      "form": {
+        "inputTitle": "Équation Non Équilibrée",
+        "equationLabel": "Équation",
+        "equationHint": "Utilisez la syntaxe standard des formules, par ex. Fe2O3, et séparez réactifs/produits par -> ou =.",
+        "equationPlaceholder": "ex. Fe + O2 -> Fe2O3"
+      },
+      "result": {
+        "heading": "Équation Équilibrée",
+        "emptyEquation": "Saisissez une équation chimique à équilibrer.",
+        "invalidEquation": "Ceci ne ressemble pas à une équation valide — utilisez -> ou = entre réactifs et produits, et + entre les termes.",
+        "unknownElement": "Cette équation contient un symbole qui n'est pas un élément reconnu.",
+        "cannotBalance": "Cette équation ne peut pas être équilibrée avec des coefficients entiers — vérifiez les formules à la recherche de fautes de frappe.",
+        "balancedCaption": "Les plus petits coefficients entiers qui conservent chaque élément",
+        "reactants": "Réactifs",
+        "products": "Produits"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'Équilibrage des Équations",
+          "paragraph1": "Équilibrer une équation chimique signifie trouver des coefficients — des nombres entiers placés devant chaque formule — de sorte que le même nombre d'atomes de chaque élément apparaisse des deux côtés. Cela reflète la loi de conservation de la masse : les atomes sont réarrangés lors d'une réaction chimique, mais aucun n'est créé ni détruit, donc tout ce qui entre en tant que réactifs, en éléments et en quantités, doit ressortir, au total, en tant que produits.",
+          "paragraph2": "Ce calculateur utilise la « méthode matricielle » : il traite le nombre d'atomes de chaque élément à travers toutes les formules comme une équation linéaire, construit une matrice à partir de toutes ces équations réunies, et résout les coefficients par élimination de Gauss avec des fractions exactes (évitant les erreurs d'arrondi que l'arithmétique à virgule flottante introduirait). Le résultat est un vecteur de proportions, que le calculateur met ensuite à l'échelle jusqu'au plus petit ensemble de nombres entiers positifs — la même réponse qu'un chimiste finirait par trouver par essais et erreurs, mais obtenue ici de façon systématique.",
+          "paragraph3": "Une équation correctement équilibrée devrait également conserver la charge électrique totale, pas seulement le nombre d'atomes, ce qui importe pour les réactions entre ions plutôt qu'entre molécules neutres. Ce calculateur équilibre les équations à formules neutres uniquement par le nombre d'atomes ; pour les réactions écrites avec des charges ioniques explicites, une méthode complète d'équilibrage redox (suivant les degrés d'oxydation et les électrons transférés) est nécessaire en plus de ce que cet outil calcule."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Des équations représentatives, équilibrées par ce calculateur.",
+          "columnCalculation": "Non Équilibrée",
+          "columnResult": "Équilibrée",
+          "rows": [
+            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
+            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
+            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
+            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi l'équilibreur ignore-t-il les coefficients que j'ai déjà saisis ?", "answer": "Parce qu'un coefficient que vous avez deviné pourrait être incorrect, et il n'existe aucun moyen fiable de distinguer un coefficient choisi délibérément d'une faute de frappe accidentelle. Le calculateur résout toujours les coefficients depuis le début en se basant uniquement sur les formules, ce qui garantit un résultat correct quel que soit ce que vous avez saisi initialement." },
+            { "question": "Pourquoi les coefficients doivent-ils être des nombres entiers ?", "answer": "Une équation chimique décrit des molécules entières ou des unités formulaires réagissant ensemble — on ne peut pas avoir « 2,5 molécules » de quelque chose participant à une réaction. Si le rapport sous-jacent s'avère fractionnaire (comme cela arrive parfois en cours de calcul), chaque coefficient est mis à l'échelle par le même facteur jusqu'à ce que tous deviennent des nombres entiers, ce qui laisse inchangés les rapports entre les substances." },
+            { "question": "Pourquoi cet outil dit-il qu'une équation « ne peut pas être équilibrée » ?", "answer": "Généralement parce que les formules telles qu'écrites ne partagent pas réellement les éléments nécessaires à l'équilibrage — par exemple, si un élément n'apparaît que parmi les réactifs et jamais parmi les produits, aucun ensemble de coefficients ne peut rendre les deux côtés égaux pour cet élément. Vérifiez chaque formule à la recherche de fautes de frappe ou d'un produit/réactif manquant avant de supposer que la réaction elle-même est impossible." },
+            { "question": "Cela peut-il équilibrer des équations impliquant des ions ou une charge électrique ?", "answer": "Pas à lui seul — il équilibre le nombre d'atomes pour des formules neutres, ce qui est exactement ce dont ont besoin la plupart des réactions simples. Les réactions redox écrites avec des charges ioniques explicites (comme Fe²⁺ → Fe³⁺ + e⁻) doivent également conserver la charge totale et les électrons transférés, ce qui nécessite un suivi des degrés d'oxydation au-delà de ce que réalise cette méthode de comptage d'atomes." },
+            { "question": "Existe-t-il toujours exactement une version équilibrée correcte d'une équation ?", "answer": "Pour les réactifs et produits donnés, oui — il existe exactement un plus petit rapport entier, bien que tout multiple de celui-ci (4H2 + 2O2 → 4H2O au lieu de 2H2 + O2 → 2H2O) équilibre techniquement aussi. Par convention, et par défaut dans ce calculateur, les plus petits nombres entiers possibles sont indiqués, car tout multiple commun plus grand n'apporte aucune information nouvelle." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Les Coulisses de cet Outil",
+          "history": {
+            "title": "Une Loi Démontrée par une Balance Très Précise",
+            "paragraph": "L'exigence qu'une équation chimique doive être équilibrée remonte à la loi de conservation de la masse d'Antoine Lavoisier, publiée dans son Traité élémentaire de chimie de 1789. En pesant méticuleusement chaque substance impliquée dans une réaction — y compris les gaz, que beaucoup de ses contemporains ne prenaient pas la peine de capturer et de peser — Lavoisier a montré que la masse totale entrant dans une réaction est toujours égale à la masse totale qui en sort. Son Traité a également popularisé l'écriture des réactions sous la forme d'équation qui rendait ce principe de conservation visuellement évident, posant les bases des équations chimiques équilibrées encore écrites de la même manière aujourd'hui."
+          },
+          "modernDevelopments": {
+            "title": "De l'Essai-Erreur à un Système Résoluble",
+            "paragraph": "Pendant la plus grande partie de l'histoire de la chimie, les équations étaient équilibrées par inspection — en ajustant les coefficients par essais et erreurs jusqu'à ce que les deux côtés correspondent, une méthode qui devient vite lourde pour les réactions comportant de nombreux éléments ou termes. L'alternative utilisée par ce calculateur, parfois appelée méthode algébrique ou matricielle, traite le nombre d'atomes de chaque élément comme une équation linéaire et résout tout le système simultanément ; l'article de John A. Olson de 1997 dans le Journal of Chemical Education a analysé formellement cette approche, y compris la façon de l'étendre aux réactions devant également équilibrer oxydation et réduction. La même technique sous-jacente — résoudre le noyau d'une matrice — est ce que le logiciel moderne d'équilibrage d'équations, y compris cet outil, calcule réellement."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'équilibrage des équations chimiques est une compétence fondamentale en chimie. Voici les 5 meilleures universités au monde en Chimie selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
+            "universities": [
+              { "name": "Université Harvard", "note": "Classée #1 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "Non — le département prend en charge les frais de scolarité de tous les doctorants dans un programme de recherche en présentiel." },
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #2 mondial en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "Non — les doctorants admis reçoivent la prise en charge complète des frais de scolarité et une allocation pour un programme de recherche sur le campus." },
+              { "name": "Université de Cambridge", "note": "Classée #3 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partiellement — le doctorat est proposé en recherche à temps plein ou à temps partiel, mais les deux formules sont en présentiel plutôt qu'à distance." },
+              { "name": "Université Stanford", "note": "Classée #4 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec une évaluation d'admission holistique et individualisée." },
+              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Chimie (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "Non — le DPhil est un diplôme de recherche sur le campus couvrant la catalyse, les matériaux et la chimie théorique, entre autres domaines." },
+              { "name": "Université du Qatar — Département de Chimie et des Sciences de la Terre", "note": "Fondé en 1973, avec environ 30 enseignants-chercheurs en chimie à temps plein ; non classé séparément dans ce tableau mondial par discipline.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "Non — les programmes du département sont dispensés sur le campus de l'Université du Qatar." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Olson, J. A. (1997). An Analysis of the Algebraic Method for Balancing Chemical Reactions. Journal of Chemical Education, 74(5), 538–542.",
+          "note": "L'article d'Olson formalise la méthode algébrique (matricielle) d'équilibrage des équations chimiques que ce calculateur met en œuvre, y compris les conditions générales qu'un équilibrage valide doit satisfaire.",
+          "url": "https://doi.org/10.1021/ed074p538",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
+    "class-schedule-builder": {
+      "title": "Créateur d'Emploi du Temps",
+      "description": "Créez votre emploi du temps hebdomadaire et détectez instantanément les conflits horaires entre vos cours.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Comment Fonctionne la Détection des Conflits",
+          "intro": "Ajoutez chaque cours que vous envisagez, avec les jours et horaires où il a lieu — le créateur vérifie chaque paire de cours à la recherche d'horaires qui se chevauchent un jour commun.",
+          "conflictHint": "Deux cours ne sont en conflit que s'ils partagent un jour ET que leurs plages horaires se chevauchent réellement. Des cours qui s'enchaînent (l'un se termine exactement quand l'autre commence) ne constituent pas un conflit."
+        }
+      },
+      "form": {
+        "inputTitle": "Vos Cours",
+        "classNameLabel": "Nom du Cours",
+        "classNamePlaceholder": "ex. Calcul II",
+        "removeClass": "Supprimer ce cours",
+        "daysLabel": "A lieu le",
+        "day": {
+          "mon": "Lun",
+          "tue": "Mar",
+          "wed": "Mer",
+          "thu": "Jeu",
+          "fri": "Ven",
+          "sat": "Sam",
+          "sun": "Dim"
+        },
+        "startTimeLabel": "Heure de Début",
+        "endTimeLabel": "Heure de Fin",
+        "addClass": "Ajouter un Autre Cours"
+      },
+      "result": {
+        "heading": "Vérification de l'Emploi du Temps",
+        "emptySchedule": "Ajoutez au moins un cours pour vérifier votre emploi du temps.",
+        "invalidClassTime": "Chaque cours doit avoir une heure de fin postérieure à son heure de début.",
+        "missingDays": "Sélectionnez au moins un jour pour chaque cours.",
+        "noConflicts": "Aucun conflit — cet emploi du temps fonctionne.",
+        "conflictsFoundLabel": "Conflits trouvés",
+        "conflictsWith": "est en conflit avec",
+        "hoursPerWeek": "heures par semaine au total",
+        "day": {
+          "mon": "Lundi",
+          "tue": "Mardi",
+          "wed": "Mercredi",
+          "thu": "Jeudi",
+          "fri": "Vendredi",
+          "sat": "Samedi",
+          "sun": "Dimanche"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Conflits d'Emploi du Temps",
+          "paragraph1": "Un conflit d'emploi du temps survient lorsque deux cours ont lieu le même jour pendant des plages horaires qui se chevauchent, de sorte qu'un étudiant ne peut physiquement pas être à deux endroits à la fois. Repérer cela à l'œil devient vite source d'erreurs dès qu'un emploi du temps compte plus d'une poignée de cours, surtout lorsque les cours ont lieu selon des combinaisons de jours différentes — un conflit le lundi peut ne pas se reproduire le mercredi pour la même paire de cours.",
+          "paragraph2": "Ce créateur vérifie chaque paire possible de cours l'une contre l'autre. Pour chaque paire, il détermine d'abord les jours communs, puis — pour chaque jour commun — compare leurs plages horaires : si l'heure de début la plus tardive tombe avant l'heure de fin la plus précoce, les plages se chevauchent et un conflit est enregistré, avec la portion exacte de temps concernée. Les cours qui se terminent exactement au moment où un autre commence ne sont volontairement pas signalés comme un conflit, car un enchaînement immédiat (sans aucun chevauchement, juste sans battement) est normal et souvent inévitable.",
+          "paragraph3": "Au-delà de la détection des conflits, l'outil totalise les heures d'enseignement hebdomadaires sur tous les cours, comptées une fois par jour où le cours a lieu — un emploi du temps sans conflit peut néanmoins s'avérer irréaliste si un étudiant compare ensuite ce total au nombre d'heures réellement disponibles dans une semaine."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Scénarios de planification représentatifs et ce que ce créateur rapporte pour chacun.",
+          "columnCalculation": "Scénario",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Maths 101 (Lun/Mer 9h00–10h30) + Physique 201 (Lun 10h00–11h00)", "result": "Conflit le lundi, 10h00–10h30" },
+            { "calculation": "Histoire 100 (Mar/Jeu 13h00–14h00) + TP de Chimie (Mer 13h00–16h00)", "result": "Aucun conflit — jours différents" },
+            { "calculation": "Séminaire A (Ven 15h00–16h00) + Séminaire B (Ven 16h00–17h00)", "result": "Aucun conflit — enchaînés, sans chevauchement" },
+            { "calculation": "Deux groupes du même cours, tous deux Lun/Mer 9h00–10h00", "result": "Conflit le lundi et le mercredi, 9h00–10h00" }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Pourquoi l'outil ne signale-t-il pas les cours enchaînés comme un conflit ?", "answer": "Parce qu'il n'y a aucun chevauchement horaire réel — un cours se terminant à 10h00 et un autre commençant à ce même instant ne se disputent pas la même minute. L'outil ne signale un conflit que lorsque l'heure de début d'un cours tombe réellement avant l'heure de fin d'un autre un jour commun, ce qui est la définition d'un véritable chevauchement entre deux événements." },
+            { "question": "Qu'est-ce qui compte comme \"jour commun\" entre deux cours ?", "answer": "Tout jour de la semaine sélectionné par les deux cours. Un cours ayant lieu lundi/mercredi/vendredi et un autre uniquement mardi/jeudi ne partagent aucun jour ; ils sont donc comparés sur zéro jour et ne peuvent jamais entrer en conflit, quels que soient les horaires." },
+            { "question": "Le total d'heures hebdomadaires inclut-il le temps entre les cours ?", "answer": "Non — il additionne uniquement la durée réelle de chaque cours, comptée une fois par jour où il a lieu. Un cours d'une heure, trois jours par semaine, contribue 3 heures au total, et non l'intervalle plus large entre sa première et sa dernière séance." },
+            { "question": "Puis-je vérifier un emploi du temps avec des cours qui s'étendent au-delà de minuit ?", "answer": "Le créateur compare les heures de début et de fin au sein d'un même jour ; un cours nocturne doit donc être saisi de manière à se terminer au plus tard à 23h59 le jour où il commence. Une séance qui se poursuit logiquement après minuit ne peut pas être représentée comme une seule entrée." },
+            { "question": "Pourquoi l'outil exige-t-il qu'au moins un jour soit sélectionné pour chaque cours ?", "answer": "Un cours sans jour attribué ne peut être vérifié pour aucun conflit avec les autres, car la détection des conflits repose entièrement sur la comparaison des jours communs. Exiger au moins un jour garantit que chaque cours reste pertinent pour la vérification des conflits, au lieu d'être silencieusement ignoré." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Un Problème Aussi Ancien que l'Emploi du Temps Universitaire",
+            "paragraph": "Le problème de la planification des cours (\"timetabling\") a été formalisé en termes informatiques par C.C. Gotlieb, dont l'article de 1962 \"The Construction of Class-Teacher Time-Tables\" (Proceedings of the IFIP Congress) décrivait comment représenter les contraintes d'un emploi du temps scolaire — enseignants, salles et créneaux horaires qui ne peuvent pas être doublement réservés — sous une forme qu'un ordinateur pouvait explorer. Avant le traitement formel de Gotlieb, la planification des emplois du temps dans la plupart des établissements se faisait entièrement à la main, nécessitant souvent des semaines de travail du personnel pour produire l'emploi du temps d'un seul trimestre par tâtonnements."
+          },
+          "modernDevelopments": {
+            "title": "Pourquoi une Planification Sans Conflit Est Plus Difficile Qu'il n'y Paraît",
+            "paragraph": "En 1976, Shimon Even, Alon Itai et Adi Shamir ont démontré que même une version simplifiée du problème de planification des emplois du temps est NP-complet — c'est-à-dire qu'aucun algorithme connu ne garantit un emploi du temps optimal, entièrement sans conflit, pour toute entrée possible en un temps raisonnable à mesure que le nombre de cours augmente. Ce résultat explique pourquoi les systèmes de planification institutionnels réels s'appuient sur des heuristiques et des solveurs de contraintes qui recherchent un emploi du temps suffisamment bon plutôt que prouvé optimal. Cet outil contourne entièrement ce problème plus difficile : plutôt que de tenter de construire un emploi du temps sans conflit à partir de zéro, il prend un emploi du temps déjà construit par un étudiant et le vérifie simplement, paire par paire, à la recherche des chevauchements qui le rendraient impraticable."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La planification des emplois du temps se situe à l'intersection de la théorie de l'ordonnancement et de la conception d'algorithmes en informatique. Voici les 5 meilleures universités mondiales en Informatique et Systèmes d'Information selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Classé #1 mondial en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS." },
+              { "name": "Université Stanford", "note": "Classée #2 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "Non — le programme est un doctorat de recherche en présentiel avec un seul cycle d'admission annuel." },
+              { "name": "Université Carnegie Mellon (CMU)", "note": "Classée #3 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "Non — le doctorat du département d'informatique est un diplôme de recherche sur campus." },
+              { "name": "Université Nationale de Singapour (NUS)", "note": "Classée #4 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "Non — les doctorants admis mènent une recherche en présentiel à la NUS School of Computing." },
+              { "name": "Université d'Oxford", "note": "Classée #5 mondiale en Informatique et Systèmes d'Information (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "Non — le DPhil est un diplôme de recherche sur campus couvrant notamment les algorithmes et la théorie de la complexité." },
+              { "name": "Université des Sciences et Technologies Roi Abdallah (KAUST) — Programme d'Informatique", "note": "Le programme de doctorat exige un minimum de 72 crédits et une moyenne cumulative d'au moins 3,0 ; non classée séparément dans ce tableau mondial par discipline.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "Non — le programme est dispensé en présentiel sur le campus de KAUST à Thuwal, en Arabie Saoudite." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Even, S., Itai, A., & Shamir, A. (1976). On the Complexity of Timetable and Multicommodity Flow Problems. SIAM Journal on Computing, 5(4), 691–703.",
+          "note": "Cet article a démontré qu'une version de base du problème de planification des emplois du temps de classe est NP-complète, établissant la raison théorique pour laquelle une planification exacte et garantie sans conflit est impraticable sur le plan computationnel à grande échelle — la raison pour laquelle les outils réels vérifient et affinent les emplois du temps plutôt que de les résoudre entièrement d'un coup.",
+          "url": "https://doi.org/10.1137/0205048",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
+    "citation-generator": {
+      "title": "Générateur de Citations",
+      "description": "Générez des citations aux styles APA, MLA et Chicago pour des livres, articles scientifiques et sites web.",
+      "nav": {
+        "tool": "Générateur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Guide Rapide des Styles",
+          "intro": "Les trois styles produits par ce générateur, et où chacun est le plus couramment exigé.",
+          "apaHint": "Le plus courant en sciences sociales (psychologie, sciences de l'éducation, sciences infirmières) — citations dans le texte auteur-date.",
+          "mlaHint": "Le plus courant en sciences humaines (littérature, langues, études culturelles) — citations dans le texte auteur-page.",
+          "chicagoHint": "Courant en histoire et dans certaines sciences sociales — ce générateur produit la variante auteur-date utilisée dans les listes de références."
+        }
+      },
+      "form": {
+        "inputTitle": "Détails de la Source",
+        "sourceTypeLabel": "Type de Source",
+        "sourceType": {
+          "book": "Livre",
+          "journal-article": "Article de Revue",
+          "website": "Site Web"
+        },
+        "authorsLabel": "Auteur(s)",
+        "firstNameLabel": "Prénom",
+        "firstNamePlaceholder": "Jane",
+        "lastNameLabel": "Nom de Famille",
+        "lastNamePlaceholder": "Doe",
+        "removeAuthor": "Supprimer cet auteur",
+        "addAuthor": "Ajouter un Autre Auteur",
+        "titleLabel": "Titre",
+        "titlePlaceholder": "ex. The Craft of Research",
+        "yearLabel": "Année",
+        "yearPlaceholder": "ex. 2020",
+        "publisherLabel": "Éditeur",
+        "publisherPlaceholder": "ex. University of Chicago Press",
+        "journalNameLabel": "Nom de la Revue",
+        "journalNamePlaceholder": "ex. Journal of Information Science",
+        "volumeLabel": "Volume",
+        "issueLabel": "Numéro",
+        "pagesLabel": "Pages",
+        "pagesPlaceholder": "ex. 45-60",
+        "siteNameLabel": "Nom du Site",
+        "siteNamePlaceholder": "ex. TooloraLabs",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com/page",
+        "accessDateLabel": "Date de Consultation (facultatif)",
+        "accessDatePlaceholder": "ex. 5 janvier 2024"
+      },
+      "result": {
+        "heading": "Vos Citations",
+        "missingTitle": "Saisissez un titre pour la source.",
+        "missingJournalName": "Saisissez le nom de la revue dans laquelle cet article a été publié.",
+        "missingUrl": "Saisissez l'URL de la page web.",
+        "apaLabel": "APA",
+        "mlaLabel": "MLA",
+        "chicagoLabel": "Chicago"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Styles de Citation",
+          "paragraph1": "Un style de citation est une manière normalisée de créditer une source, afin qu'un lecteur puisse voir en un coup d'œil qui a écrit un texte, quand et où il a été publié — et puisse retrouver l'original s'il souhaite vérifier une affirmation ou approfondir sa lecture. Chaque style enregistre les mêmes informations de base (auteur, titre, année, éditeur ou revue), mais les organise et les ponctue différemment, ce qui explique pourquoi une même source produit trois citations visiblement différentes selon le style adopté par une discipline.",
+          "paragraph2": "Ce générateur demande une seule fois les détails d'une source et les met en forme selon les trois principaux styles simultanément. Il applique aussi la règle propre à chaque style concernant le nombre d'auteurs à citer nommément avant de basculer vers \"et al.\" : cet outil ne tronque jamais la liste des auteurs en APA avant qu'elle ne dépasse 20 auteurs, passe à \"et al.\" en MLA dès qu'une source compte trois auteurs ou plus, et fait de même en Chicago dès qu'une source compte quatre auteurs ou plus — conformément à la façon dont chaque guide officiel traite les sources à plusieurs auteurs.",
+          "paragraph3": "Une chose que cet outil ne peut pas faire, c'est appliquer l'italique : il produit du texte brut, car un bouton de copie ne peut pas préserver de façon fiable la mise en forme sur tous les traitements de texte et toutes les plateformes. Dans les trois styles, le titre d'une œuvre autonome et complète — un livre, ou le nom d'une revue ou d'un site web — doit être en italique, tandis qu'un titre faisant partie d'un ensemble plus large, comme un article de revue ou une page web, prend des guillemets ordinaires à la place. Réappliquez l'italique au titre du contenant après avoir collé une citation dans votre document."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Les mêmes sources, mises en forme selon les trois styles, montrant en quoi la ponctuation et l'ordre des noms d'auteurs diffèrent.",
+          "columnCalculation": "Scénario",
+          "columnResult": "Résultat",
+          "rows": [
+            { "calculation": "Livre de Jane Doe, au format APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
+            { "calculation": "Le même livre, au format MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
+            { "calculation": "Le même livre, au format Chicago (auteur-date)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
+            { "calculation": "Article de revue avec 3 auteurs, en MLA (règle du et al.)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            { "question": "Quel style de citation devrais-je utiliser ?", "answer": "Cela dépend de votre discipline et, souvent, de l'exigence spécifique de votre enseignant ou de l'éditeur. L'APA est le plus courant en sciences sociales, le MLA en sciences humaines et en littérature, et Chicago en histoire et dans certaines sciences sociales (Chicago possède aussi une variante distincte à notes et bibliographie, utilisée principalement pour les notes de bas de page, que cet outil ne génère pas — seulement la forme auteur-date pour les listes de références). En cas de doute, consultez les consignes de votre travail ou les instructions aux auteurs d'une revue cible plutôt que de deviner." },
+            { "question": "Pourquoi l'APA et le MLA mettent-ils en forme les noms d'auteurs si différemment ?", "answer": "Chaque style s'optimise pour un type de lecture rapide différent. L'APA réduit les prénoms et deuxièmes prénoms à des initiales et utilise \"&\" avant le dernier auteur, privilégiant des listes de références compactes dans des domaines où la co-écriture est fréquente. Le MLA écrit les prénoms en entier et utilise \"and\", car les travaux littéraires et en sciences humaines citent plus souvent des ouvrages à un ou deux auteurs, où le nom complet se lit plus naturellement." },
+            { "question": "Que signifie \"et al.\", et à partir de quand cet outil commence-t-il à l'utiliser ?", "answer": "\"Et al.\" est du latin pour \"et autres\", utilisé pour raccourcir une longue liste d'auteurs au nom du seul premier auteur. Cet outil suit le seuil officiel propre à chaque style : l'APA cite chaque auteur nommément jusqu'à ce qu'une source compte plus de 20 auteurs, le MLA passe à \"et al.\" à partir de 3 auteurs ou plus, et Chicago passe à \"et al.\" à partir de 4 auteurs ou plus." },
+            { "question": "Pourquoi la citation commence-t-elle par le titre plutôt que par un auteur si je laisse les champs auteur vides ?", "answer": "Les trois styles traitent de la même manière les sources sans auteur indiqué : puisqu'il n'y a pas de nom d'auteur par lequel commencer, le titre occupe la position que le nom de l'auteur occuperait normalement, et tout le reste de la citation se décale d'une position. Il s'agit d'une pratique standard, et non d'une limitation de cet outil — c'est ainsi qu'une source sans auteur est censée être alphabétisée dans une liste de références." },
+            { "question": "Cet outil met-il automatiquement en italique les titres de livres et de revues ?", "answer": "Non — la sortie est du texte brut. Dans chaque style ici, le titre d'une œuvre complète et autonome (un livre, ou le nom d'une revue ou d'un site web) doit être en italique, tandis qu'un titre faisant partie d'un ensemble plus large (un article, une page web) prend des guillemets à la place, ce que cet outil applique déjà. Après avoir collé une citation dans votre document, mettez le titre du contenant en italique à la main." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière Cet Outil",
+          "history": {
+            "title": "Un Style de Manuscrit Né dans un Seul Article de Revue",
+            "paragraph": "Le style APA remonte à un article de sept pages publié en 1929 dans Psychological Bulletin, \"Instructions in Regard to Preparation of Manuscript\", rédigé par un comité de psychologues, un anthropologue et des responsables éditoriaux de revues qui souhaitaient une norme commune afin que les soumissions à différentes revues de psychologie n'aient pas à être reformatées à la main à chaque fois. Ce qui a commencé comme un court ensemble de règles de style interne pour un seul domaine a grandi, édition après édition, jusqu'à devenir le Publication Manual complet utilisé aujourd'hui dans les sciences sociales — mais la motivation centrale, faciliter pour un lecteur la localisation de la source derrière une affirmation, n'a pas changé depuis 1929."
+          },
+          "modernDevelopments": {
+            "title": "Des Modèles Fixes à un Système Universel d'Éléments Fondamentaux",
+            "paragraph": "Pendant des décennies, les guides de style ont traité les nouveaux types de sources en ajoutant un modèle entièrement nouveau pour chaque format — un modèle pour un livre, un autre différent pour un article de magazine, un autre encore pour un film, et ainsi de suite, une approche de plus en plus difficile à maintenir à mesure que les sources en ligne se multipliaient. La 8ᵉ édition de 2016 du MLA Handbook a remplacé cette approche par un ensemble unique de neuf \"éléments fondamentaux\" (auteur, titre, contenant, éditeur, date, etc.) qu'un rédacteur renseigne pour n'importe quelle source, sur n'importe quel support, en traitant la revue, le site web ou la base de données dans laquelle une source apparaît comme un \"contenant\" pouvant lui-même se trouver à l'intérieur d'un autre contenant. L'approche de cet outil reflète ce changement : plutôt qu'un modèle rigide par type de source, il remplit un petit ensemble de champs communs différemment selon que la source est un livre, un article ou un site web."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La pratique de la citation et la recherche fondée sur les citations relèvent des sciences de l'information et des bibliothèques. Voici les 5 meilleures universités mondiales en Library & Information Management selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              { "name": "Université de Sheffield", "note": "Classée #1 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "Non — le doctorat est un diplôme de recherche en présentiel au sein de l'Information School." },
+              { "name": "Université de Washington", "note": "Classée #2 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "Non — le doctorat en Information Science est un programme de recherche en présentiel à temps plein, durant généralement 5 à 6 ans." },
+              { "name": "Université technologique de Nanyang (NTU Singapour)", "note": "Classée #3 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "Non — le doctorat est un diplôme de recherche en présentiel à la Wee Kim Wee School of Communication and Information." },
+              { "name": "Université de Caroline du Nord à Chapel Hill", "note": "Classée #4 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "Non — le doctorat en Information and Library Science est un programme de recherche en présentiel." },
+              { "name": "Université du Texas à Austin", "note": "Classée #5 mondiale en Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "Non — le doctorat en Information Studies est un programme de recherche en présentiel avec une date limite de candidature annuelle fixée au 1er décembre." },
+              { "name": "Université Sultan Qaboos — Département des Sciences de l'Information", "note": "Fondé en 1986 comme premier programme de sciences de l'information et des bibliothèques d'Oman ; non classé séparément dans ce tableau mondial par discipline.", "url": "https://www.squ.edu.om/", "online": "Non — les programmes du département sont dispensés sur le campus de l'Université Sultan Qaboos à Mascate, Oman." }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Garfield, E. (1955). Citation Indexes for Science: A New Dimension in Documentation through Association of Ideas. Science, 122(3159), 108–111.",
+          "note": "L'article de Garfield proposait de traiter les citations elles-mêmes comme un index consultable de la recherche scientifique, posant les bases conceptuelles expliquant pourquoi un formatage de citation cohérent et lisible par machine — le besoin sous-jacent auquel répond ce générateur — importe au-delà du simple respect d'un guide de style.",
+          "url": "https://doi.org/10.1126/science.122.3159.108",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculateur de pourcentage",
       "description": "Calculez des pourcentages, des pourcentages inversés et des différences en pourcentage instantanément, avec un graphique comparatif en direct pour chaque résultat.",
