@@ -199,202 +199,122 @@ function EquationText({ children }: { children: ReactNode }) {
   return <span className={`${caveat.className} ${INK} block leading-none whitespace-nowrap`}>{children}</span>;
 }
 
+/** Deterministic pseudo-random in [0, 1) — same input always gives the same output, so server and client render identically (no hydration mismatch) while still looking organic instead of gridded. */
+function pseudoRandom(seed: number): number {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+type IconComponent = () => ReactNode;
+const ICONS: IconComponent[] = [
+  Pi,
+  Sigma,
+  SquareRoot,
+  CircleShape,
+  Triangle,
+  InfinityShape,
+  SquareShape,
+  Pentagon,
+  Diamond,
+  CheckMark,
+  LabeledCircle,
+  LabeledRectangle,
+  LabeledCube,
+  LabeledCone,
+];
+const EQUATIONS = [
+  "x² + y² = z²",
+  "π ≈ 3.14",
+  "a² + b² = c²",
+  "F = ma",
+  "E = mc²",
+  "%",
+  "$",
+  "€",
+  "½",
+  "¾",
+  "⅓",
+  "÷",
+  "≈",
+  "2πr",
+  "V = πr²h",
+  "10²",
+  "n²",
+  "log",
+  "∆",
+  "sin θ",
+  "x + y = z",
+  "y = mx + b",
+  "2a = 10",
+  "x² + 2x + 1",
+  "√2",
+  "b²",
+  "a + b",
+  "π/2",
+];
+
 /**
- * Purely decorative, original hand-drawn SVG doodles scattered densely across the full hero area —
- * the title/calculator/search row and the category grid below it — reflecting the site's math,
- * finance, and science tool categories. A handful (LabeledCircle/Rectangle/Cube/Cone) are drawn as
+ * A GRID_COLS × GRID_ROWS lattice of anchor points spanning the whole canvas (a small inset from
+ * the true edges so nothing gets clipped), each nudged by a deterministic pseudo-random jitter so
+ * the result reads as organically scattered rather than a visible grid — this is what guarantees no
+ * two neighboring doodles are ever more than roughly one cell apart, closing the large empty
+ * stretches an earlier hand-placed layout left behind (particularly the lower half of both side
+ * margins, and the strip just above the footer).
+ */
+const GRID_COLS = 8;
+const GRID_ROWS = 9;
+const MARGIN = 3;
+
+const DOODLE_GRID = Array.from({ length: GRID_COLS * GRID_ROWS }, (_, index) => {
+  const col = index % GRID_COLS;
+  const row = Math.floor(index / GRID_COLS);
+  const cellW = (100 - MARGIN * 2) / (GRID_COLS - 1);
+  const cellH = (100 - MARGIN * 2) / (GRID_ROWS - 1);
+  const jitterX = (pseudoRandom(index * 2.31) - 0.5) * cellW * 0.55;
+  const jitterY = (pseudoRandom(index * 4.17 + 1) - 0.5) * cellH * 0.55;
+  const left = Math.min(97, Math.max(1, MARGIN + col * cellW + jitterX));
+  const top = Math.min(97, Math.max(1, MARGIN + row * cellH + jitterY));
+  const rotate = Math.round((pseudoRandom(index * 7.77 + 2) - 0.5) * 24);
+  const isIcon = pseudoRandom(index * 3.03 + 3) > 0.4;
+  const scale = 0.75 + pseudoRandom(index * 5.55 + 4) * 0.6;
+  return {
+    key: `d${index}`,
+    top: `${top.toFixed(2)}%`,
+    left: `${left.toFixed(2)}%`,
+    rotate,
+    isIcon,
+    Icon: ICONS[index % ICONS.length],
+    text: EQUATIONS[index % EQUATIONS.length],
+    fontSize: Math.round(17 * scale),
+    iconSize: Math.round(24 * scale),
+  };
+});
+
+/**
+ * Purely decorative, original hand-drawn SVG doodles laid out on a jittered grid (see DOODLE_GRID
+ * above) spanning the entire hero canvas — title/calculator/search row, the category grid, and the
+ * band down to the section's true bottom edge — so there are no bare stretches at any point, not
+ * just along the outer edges. A handful of the icon slots (LabeledCircle/Rectangle/Cube/Cone) are
  * precise, thin-lined technical figures with their formula variables labeled (r, l, w, a, h) rather
  * than loose sketches, echoing the clean reference diagrams on sites like calculator.net without
  * tracing them. Everything else stays hand-drawn: custom path data or short text set in a
  * self-hosted handwriting webfont. Deliberately allowed to sit behind the white calculator, search,
- * and category cards (at this same low opacity, which is never a readability problem) so coverage
- * reaches the whole canvas instead of just the outer edges.
+ * and category cards (at this same low opacity, which is never a readability problem).
  */
 export default function HeroMathDoodles() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.22] dark:opacity-[0.3]">
-      {/* top edge, above and beside the title */}
-      <Doodle top="2%" left="3%" rotate={-8} size={40}>
-        <Pi />
-      </Doodle>
-      <Doodle top="3%" right="4%" rotate={10} size={36}>
-        <Sigma />
-      </Doodle>
-      <Doodle top="7%" left="12%" rotate={-3} fontSize={16}>
-        <EquationText>x² + y² = z²</EquationText>
-      </Doodle>
-      <Doodle top="8%" right="12%" rotate={6} fontSize={22}>
-        <EquationText>n²</EquationText>
-      </Doodle>
-      <Doodle top="10%" left="3%" rotate={9} fontSize={20}>
-        <EquationText>⅓</EquationText>
-      </Doodle>
-      <Doodle top="10%" right="24%" rotate={-4} size={40}>
-        <LabeledCircle />
-      </Doodle>
-      <Doodle top="9%" left="24%" rotate={5} size={44}>
-        <LabeledCone />
-      </Doodle>
-
-      {/* the open band between the title and the calculator/search row */}
-      <Doodle top="13%" left="9%" rotate={-5} fontSize={24}>
-        <EquationText>%</EquationText>
-      </Doodle>
-      <Doodle top="13%" left="30%" rotate={-4} fontSize={15}>
-        <EquationText>π ≈ 3.14</EquationText>
-      </Doodle>
-      <Doodle top="13%" left="49%" rotate={4} size={24}>
-        <CheckMark />
-      </Doodle>
-      <Doodle top="13%" right="30%" rotate={5} fontSize={20}>
-        <EquationText>10²</EquationText>
-      </Doodle>
-      <Doodle top="13%" right="9%" rotate={4} size={30}>
-        <SquareShape />
-      </Doodle>
-      <Doodle top="17%" left="40%" rotate={5} fontSize={15}>
-        <EquationText>a² + b² = c²</EquationText>
-      </Doodle>
-      <Doodle top="17%" right="42%" rotate={-6} fontSize={16}>
-        <EquationText>F = ma</EquationText>
-      </Doodle>
-
-      {/* the calculator card's left margin */}
-      <Doodle top="24%" left="2.5%" rotate={-6} fontSize={22}>
-        <EquationText>$</EquationText>
-      </Doodle>
-      <Doodle top="33%" left="2%" rotate={0} size={34}>
-        <CircleShape />
-      </Doodle>
-      <Doodle top="42%" left="2.5%" rotate={5} fontSize={18}>
-        <EquationText>log</EquationText>
-      </Doodle>
-      <Doodle top="51%" left="2.5%" rotate={5} fontSize={22}>
-        <EquationText>€</EquationText>
-      </Doodle>
-      <Doodle top="60%" left="2%" rotate={-4} size={36}>
-        <LabeledCube />
-      </Doodle>
-      <Doodle top="70%" left="2.5%" rotate={4} fontSize={16}>
-        <EquationText>E = mc²</EquationText>
-      </Doodle>
-
-      {/* the narrow open gutter between the calculator card and the search/category column */}
-      <Doodle top="21%" left="45.7%" rotate={6} fontSize={16}>
-        <EquationText>≈</EquationText>
-      </Doodle>
-      <Doodle top="30%" left="45.7%" rotate={-6} size={18}>
-        <Diamond />
-      </Doodle>
-      <Doodle top="39%" left="45.7%" rotate={5} fontSize={16}>
-        <EquationText>¾</EquationText>
-      </Doodle>
-      <Doodle top="48%" left="45.7%" rotate={-5} size={18}>
-        <CircleShape />
-      </Doodle>
-      <Doodle top="57%" left="45.7%" rotate={4} fontSize={15}>
-        <EquationText>2πr</EquationText>
-      </Doodle>
-      <Doodle top="66%" left="45.7%" rotate={-4} size={18}>
-        <Triangle />
-      </Doodle>
-
-      {/* the category grid's right margin */}
-      <Doodle top="24%" right="2.5%" rotate={8} fontSize={20}>
-        <EquationText>½</EquationText>
-      </Doodle>
-      <Doodle top="33%" right="1.5%" rotate={-4} size={32}>
-        <Pentagon />
-      </Doodle>
-      <Doodle top="42%" right="2.5%" rotate={4} fontSize={20}>
-        <EquationText>÷</EquationText>
-      </Doodle>
-      <Doodle top="51%" right="2%" rotate={-6} size={36}>
-        <SquareRoot />
-      </Doodle>
-      <Doodle top="60%" right="2.5%" rotate={5} size={38}>
-        <LabeledRectangle />
-      </Doodle>
-      <Doodle top="71%" right="2.5%" rotate={-4} fontSize={16}>
-        <EquationText>V = πr²h</EquationText>
-      </Doodle>
-
-      {/* scattered through the category grid itself — allowed to sit behind the cards */}
-      <Doodle top="20%" left="20%" rotate={5} fontSize={16}>
-        <EquationText>√2</EquationText>
-      </Doodle>
-      <Doodle top="20%" right="20%" rotate={-5} size={18}>
-        <Diamond />
-      </Doodle>
-      <Doodle top="27%" left="35%" rotate={-4} size={16}>
-        <CircleShape />
-      </Doodle>
-      <Doodle top="27%" right="35%" rotate={4} fontSize={15}>
-        <EquationText>1/3</EquationText>
-      </Doodle>
-      <Doodle top="34%" left="18%" rotate={4} fontSize={15}>
-        <EquationText>x + y = z</EquationText>
-      </Doodle>
-      <Doodle top="34%" right="18%" rotate={-4} fontSize={17}>
-        <EquationText>2a = 10</EquationText>
-      </Doodle>
-      <Doodle top="40%" left="30%" rotate={6} size={16}>
-        <Triangle />
-      </Doodle>
-      <Doodle top="40%" right="30%" rotate={-6} fontSize={16}>
-        <EquationText>π/2</EquationText>
-      </Doodle>
-      <Doodle top="46%" left="22%" rotate={-5} size={20}>
-        <InfinityShape />
-      </Doodle>
-      <Doodle top="46%" right="22%" rotate={5} fontSize={16}>
-        <EquationText>y = mx + b</EquationText>
-      </Doodle>
-      <Doodle top="52%" left="35%" rotate={4} fontSize={15}>
-        <EquationText>x̄</EquationText>
-      </Doodle>
-      <Doodle top="52%" right="35%" rotate={-4} size={16}>
-        <SquareShape />
-      </Doodle>
-      <Doodle top="58%" left="16%" rotate={5} fontSize={15}>
-        <EquationText>∆</EquationText>
-      </Doodle>
-      <Doodle top="58%" right="16%" rotate={-5} size={18}>
-        <SquareShape />
-      </Doodle>
-      <Doodle top="64%" left="30%" rotate={-5} size={16}>
-        <CircleShape />
-      </Doodle>
-      <Doodle top="64%" right="30%" rotate={5} fontSize={16}>
-        <EquationText>b²</EquationText>
-      </Doodle>
-
-      {/* the band below the category grid, reaching all the way to the section's true bottom edge
-          (the wrapper's own bottom padding) so no bare strip is left before the footer */}
-      <Doodle bottom="0.5%" left="4%" rotate={6} size={22}>
-        <Triangle />
-      </Doodle>
-      <Doodle bottom="1%" left="15%" rotate={-4} fontSize={16}>
-        <EquationText>x² + 2x + 1</EquationText>
-      </Doodle>
-      <Doodle bottom="0.5%" left="30%" rotate={4} fontSize={17}>
-        <EquationText>a + b</EquationText>
-      </Doodle>
-      <Doodle bottom="1%" left="40%" rotate={5} size={20}>
-        <CircleShape />
-      </Doodle>
-      <Doodle bottom="0.5%" right="40%" rotate={-5} fontSize={15}>
-        <EquationText>sin θ</EquationText>
-      </Doodle>
-      <Doodle bottom="1%" right="30%" rotate={-4} size={18}>
-        <SquareShape />
-      </Doodle>
-      <Doodle bottom="0.5%" right="15%" rotate={4} fontSize={18}>
-        <EquationText>%</EquationText>
-      </Doodle>
-      <Doodle bottom="1%" right="4%" rotate={-6} size={22}>
-        <Pentagon />
-      </Doodle>
+      {DOODLE_GRID.map((cell) =>
+        cell.isIcon ? (
+          <Doodle key={cell.key} top={cell.top} left={cell.left} rotate={cell.rotate} size={cell.iconSize}>
+            <cell.Icon />
+          </Doodle>
+        ) : (
+          <Doodle key={cell.key} top={cell.top} left={cell.left} rotate={cell.rotate} fontSize={cell.fontSize}>
+            <EquationText>{cell.text}</EquationText>
+          </Doodle>
+        )
+      )}
     </div>
   );
 }
