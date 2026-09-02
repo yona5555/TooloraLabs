@@ -100,6 +100,26 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
 
   const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS));
 
+  // Three always-visible markers on the balance line — not hover-only, unlike the tooltip below —
+  // spread across the term so the shape of the payoff (full balance, roughly halfway paid down,
+  // paid off) is legible at a glance instead of requiring the visitor to hover to find it.
+  const midBalanceIndex = Math.floor((schedule.length - 1) / 2);
+  const balanceMarkers: { x: number; y: number; label: string; anchor: "start" | "middle" | "end" }[] = [
+    { x: MARGIN.left, y: yForBalance(initialBalance), label: t("payoffChart.markerStartLabel"), anchor: "start" },
+    {
+      x: barCenterX(midBalanceIndex),
+      y: yForBalance(schedule[midBalanceIndex].endingBalance),
+      label: t("payoffChart.markerMidLabel"),
+      anchor: "middle",
+    },
+    {
+      x: barCenterX(schedule.length - 1),
+      y: yForBalance(schedule[schedule.length - 1].endingBalance),
+      label: t("payoffChart.markerEndLabel"),
+      anchor: "end",
+    },
+  ];
+
   return (
     <SectionCard title={t("payoffChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("payoffChart.intro")}</p>
@@ -131,6 +151,25 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
             <polyline points={balancePolyline(standardSchedule)} fill="none" strokeWidth={1.5} strokeDasharray="4 3" className="stroke-zinc-400 dark:stroke-zinc-500" />
           )}
           <polyline points={balancePolyline(schedule)} fill="none" strokeWidth={2} className="stroke-zinc-900 dark:stroke-zinc-100" />
+
+          {balanceMarkers.map((marker) => {
+            const dx = marker.anchor === "start" ? 6 : marker.anchor === "end" ? -6 : 0;
+            return (
+              <g key={marker.anchor}>
+                <circle cx={marker.x} cy={marker.y} r={4} className="fill-zinc-900 dark:fill-zinc-100" />
+                <text
+                  x={marker.x + dx}
+                  y={Math.max(marker.y - 10, MARGIN.top + 10)}
+                  textAnchor={marker.anchor}
+                  fontSize={10}
+                  fontWeight={700}
+                  className="fill-zinc-700 dark:fill-zinc-200"
+                >
+                  {marker.label}
+                </text>
+              </g>
+            );
+          })}
 
           <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
             {t("payoffChart.interestLabel")}

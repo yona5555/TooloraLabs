@@ -121,6 +121,27 @@ export default function LoanAmortizationAreaChart() {
       ? t("education.intro.diagram.caption", { period: formatLocalizedNumber(crossoverPeriod, digitStyle, { maximumFractionDigits: 0 }) })
       : t("education.intro.diagram.captionNoCrossover");
 
+  // Three always-visible markers (not hover-only, unlike the tooltip below) spread across the
+  // line: the first period, the crossover period where principal overtakes interest (or the
+  // term's midpoint when the loan never crosses over), and the last period — so the shape of the
+  // payoff is legible at a glance instead of requiring the visitor to hover to find it.
+  const crossoverIndex = crossoverPeriod !== null ? schedule.findIndex((row) => row.period === crossoverPeriod) : Math.floor((pointCount - 1) / 2);
+  const markerDefs: { index: number; label: string; anchor: "start" | "middle" | "end" }[] = [
+    { index: 0, label: t("education.intro.diagram.markerStartLabel"), anchor: "start" },
+    {
+      index: crossoverIndex,
+      label: crossoverPeriod !== null ? t("education.intro.diagram.markerCrossoverLabel") : t("education.intro.diagram.markerMidLabel"),
+      anchor: "middle",
+    },
+    { index: pointCount - 1, label: t("education.intro.diagram.markerEndLabel"), anchor: "end" },
+  ];
+  const seenMarkerIndexes = new Set<number>();
+  const markers = markerDefs.filter((marker) => {
+    if (marker.index < 0 || marker.index >= pointCount || seenMarkerIndexes.has(marker.index)) return false;
+    seenMarkerIndexes.add(marker.index);
+    return true;
+  });
+
   return (
     <SectionCard title={t("education.intro.diagram.title")}>
       <div ref={containerRef} dir="ltr" className="overflow-x-auto">
@@ -149,6 +170,28 @@ export default function LoanAmortizationAreaChart() {
           <polygon points={interestAreaPoints} className="fill-amber-400/70 dark:fill-amber-500/60" />
           <polygon points={principalAreaPoints} className="fill-blue-600 dark:fill-blue-400" />
           <polyline points={principalBoundary.join(" ")} fill="none" className="stroke-blue-800 dark:stroke-blue-200" strokeWidth={1.5} />
+
+          {markers.map((marker) => {
+            const row = schedule[marker.index];
+            const x = xForIndex(marker.index);
+            const y = yForValue(row.principalPaid);
+            const dx = marker.anchor === "start" ? 6 : marker.anchor === "end" ? -6 : 0;
+            return (
+              <g key={marker.index}>
+                <circle cx={x} cy={y} r={4} className="fill-blue-800 dark:fill-blue-200" />
+                <text
+                  x={x + dx}
+                  y={Math.max(y - 10, MARGIN.top + 10)}
+                  textAnchor={marker.anchor}
+                  fontSize={10}
+                  fontWeight={700}
+                  className="fill-zinc-700 dark:fill-zinc-200"
+                >
+                  {marker.label}
+                </text>
+              </g>
+            );
+          })}
 
           {schedule.map((row, i) =>
             i % labelEvery === 0 ? (

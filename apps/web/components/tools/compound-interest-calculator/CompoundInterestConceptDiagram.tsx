@@ -79,7 +79,10 @@ export default function CompoundInterestConceptDiagram() {
             {d("contributionsCaption")}
           </text>
 
-          {/* interest band label with leader line */}
+          {/* interest band marker + label with leader line — the middle of the three always-visible
+              points along this diagram (starting amount, this one, future value), matching where
+              the leader line meets the total curve */}
+          <circle cx={505} cy={104} r={5} className="fill-amber-500 dark:fill-amber-300" />
           <line x1={560} y1={130} x2={505} y2={104} strokeWidth={1.5} className="stroke-amber-700 dark:stroke-amber-300" opacity={0.7} />
           <text x={565} y={134} fontSize={13} fontWeight={700} textAnchor="start" className="fill-amber-700 dark:fill-amber-300">
             {t("interestLabel")}

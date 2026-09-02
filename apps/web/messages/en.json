@@ -168,17 +168,9 @@
     "shareViaApps": "Share via Apps"
   },
   "hero": {
-    "titleLine1": "All the Tools You Need",
-    "titleLine2": "in One Place",
     "searchPlaceholder": "Search calculators, converters, generators...",
     "search": "Search",
     "searchNoResults": "No tools found for \"{query}\""
-  },
-  "stats": {
-    "tools": "Online Tools",
-    "categories": "Categories",
-    "free": "Free Forever",
-    "available": "Available"
   },
   "heroCalculatorLog": {
     "title": "Calculation Log",
@@ -1638,7 +1630,10 @@
         "totalInterestLabel": "Total Interest Paid",
         "pmiNote": "Based on your inputs, PMI could be requested for removal around year {dropYear} (80% loan-to-value) and must be automatically terminated by year {autoYear} (78% loan-to-value) at the latest.",
         "pmiNoDropoff": "Your loan currently carries PMI, but no removal point could be estimated with these inputs.",
-        "tooltipYearLabel": "Year"
+        "tooltipYearLabel": "Year",
+        "markerStartLabel": "Loan starts — full balance",
+        "markerMidLabel": "Roughly halfway through the term",
+        "markerEndLabel": "Paid off"
       },
       "amortizationTable": {
         "title": "Full Monthly Amortization Schedule",
@@ -3232,20 +3227,7 @@
           "deferred": "Borrowing {amount} today at {rate} annual interest for {term} with no payments until maturity, you'll owe {due} when the loan comes due.",
           "bond": "To receive {due} at maturity in {term} at {rate} annual interest, you would need to invest {received} today."
         },
-        "disclaimer": "This tool provides a general educational estimate of loan payments only, not a loan offer or financial advice. Actual rates, fees, and terms offered by a lender depend on your creditworthiness and other factors and may differ from this estimate. Consult a licensed lender or financial advisor before taking out a loan.",
-        "conceptDiagram": {
-          "title": "How a Fixed Payment Splits Over Time",
-          "intro": "A fixed-rate loan's payment stays the same every period, but the mix inside it shifts steadily — from mostly interest early on toward mostly principal by the end.",
-          "ariaLabel": "Diagram showing four equal-sized loan payments over time, each split differently between interest and principal — mostly interest in early payments, mostly principal in later ones",
-          "timeLabel": "Loan Term",
-          "interestLabel": "Interest",
-          "principalLabel": "Principal",
-          "earlyLabel": "Early Payments",
-          "lateLabel": "Later Payments",
-          "mostlyInterestCaption": "Mostly interest",
-          "mostlyPrincipalCaption": "Mostly principal",
-          "samePaymentCaption": "Same payment amount each period"
-        }
+        "disclaimer": "This tool provides a general educational estimate of loan payments only, not a loan offer or financial advice. Actual rates, fees, and terms offered by a lender depend on your creditworthiness and other factors and may differ from this estimate. Consult a licensed lender or financial advisor before taking out a loan."
       },
       "nav": {
         "tool": "Calculator",
@@ -3350,7 +3332,11 @@
             "emptyStateMessage": "Press Calculate above (on the Amortized Loan tab) to see how your own payments split between interest and principal over time.",
             "caption": "By period {period}, your fixed payment flips from being mostly interest to mostly principal — the point where the principal share overtakes the interest share for good.",
             "captionNoCrossover": "Across this loan's term, your fixed payment stays weighted toward principal from the very first period.",
-            "chartAriaLabel": "Interactive chart of interest versus principal for each payment across the loan term"
+            "chartAriaLabel": "Interactive chart of interest versus principal for each payment across the loan term",
+            "markerStartLabel": "Start of loan — mostly interest",
+            "markerCrossoverLabel": "Break-even between interest and principal",
+            "markerMidLabel": "Midpoint of the term",
+            "markerEndLabel": "Near payoff — mostly principal"
           },
           "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for personalized financial advice."
         },

@@ -168,17 +168,9 @@
     "shareViaApps": "Partager via des applications"
   },
   "hero": {
-    "titleLine1": "Tous vos outils",
-    "titleLine2": "au même endroit",
     "searchPlaceholder": "Rechercher des calculateurs, convertisseurs, générateurs...",
     "search": "Rechercher",
     "searchNoResults": "Aucun outil trouvé pour « {query} »"
-  },
-  "stats": {
-    "tools": "Outils en ligne",
-    "categories": "Catégories",
-    "free": "Gratuit à vie",
-    "available": "Disponibles"
   },
   "heroCalculatorLog": {
     "title": "Journal des calculs",
@@ -1642,7 +1634,10 @@
         "totalInterestLabel": "Intérêts totaux versés",
         "pmiNote": "D'après vos données, la suppression de la PMI pourrait être demandée vers l'année {dropYear} (ratio prêt/valeur de 80 %) et doit être résiliée automatiquement au plus tard l'année {autoYear} (ratio prêt/valeur de 78 %).",
         "pmiNoDropoff": "Votre prêt comporte actuellement une PMI, mais aucun point de suppression n'a pu être estimé avec ces données.",
-        "tooltipYearLabel": "Année"
+        "tooltipYearLabel": "Année",
+        "markerStartLabel": "Début du prêt — solde complet",
+        "markerMidLabel": "Environ à mi-parcours",
+        "markerEndLabel": "Prêt remboursé"
       },
       "amortizationTable": {
         "title": "Échéancier d'amortissement mensuel complet",
@@ -3236,20 +3231,7 @@
           "deferred": "Pour un prêt de {amount} contracté aujourd'hui à un taux annuel de {rate} sur {term} sans paiement jusqu'à l'échéance, vous devrez {due} à l'échéance.",
           "bond": "Pour recevoir {due} à l'échéance dans {term} à un taux annuel de {rate}, il vous faudrait investir {received} aujourd'hui."
         },
-        "disclaimer": "Cet outil fournit uniquement une estimation pédagogique générale des mensualités d'un prêt, et non une offre de prêt ni un conseil financier. Les taux, frais et conditions réels proposés par un prêteur dépendent de votre solvabilité et d'autres facteurs, et peuvent différer de cette estimation. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt.",
-        "conceptDiagram": {
-          "title": "Comment se répartit une mensualité fixe",
-          "intro": "La mensualité d'un prêt à taux fixe reste identique à chaque période, mais sa composition évolue progressivement — surtout des intérêts au début, puis surtout du capital vers la fin.",
-          "ariaLabel": "Diagramme montrant quatre mensualités de prêt de taille égale réparties dans le temps, chacune divisée différemment entre intérêts et capital — surtout des intérêts pour les premiers paiements, surtout du capital pour les derniers",
-          "timeLabel": "Durée du prêt",
-          "interestLabel": "Intérêts",
-          "principalLabel": "Capital",
-          "earlyLabel": "Premiers paiements",
-          "lateLabel": "Derniers paiements",
-          "mostlyInterestCaption": "Surtout des intérêts",
-          "mostlyPrincipalCaption": "Surtout du capital",
-          "samePaymentCaption": "Même montant de paiement à chaque période"
-        }
+        "disclaimer": "Cet outil fournit uniquement une estimation pédagogique générale des mensualités d'un prêt, et non une offre de prêt ni un conseil financier. Les taux, frais et conditions réels proposés par un prêteur dépendent de votre solvabilité et d'autres facteurs, et peuvent différer de cette estimation. Consultez un prêteur agréé ou un conseiller financier avant de souscrire un prêt."
       },
       "nav": {
         "tool": "Calculateur",
@@ -3354,7 +3336,11 @@
             "emptyStateMessage": "Cliquez sur « Calculer » ci-dessus (dans l'onglet Prêt amortissable) pour voir comment vos propres mensualités se répartissent entre intérêts et capital dans le temps.",
             "caption": "À partir de la période {period}, votre mensualité fixe bascule d'une part majoritairement d'intérêts à une part majoritairement de capital — le point où la part de capital dépasse définitivement celle des intérêts.",
             "captionNoCrossover": "Sur toute la durée de ce prêt, votre mensualité fixe reste majoritairement du capital dès la toute première période.",
-            "chartAriaLabel": "Graphique interactif des intérêts par rapport au capital pour chaque paiement sur la durée du prêt"
+            "chartAriaLabel": "Graphique interactif des intérêts par rapport au capital pour chaque paiement sur la durée du prêt",
+            "markerStartLabel": "Début du prêt — surtout des intérêts",
+            "markerCrossoverLabel": "Seuil d'équilibre entre intérêts et capital",
+            "markerMidLabel": "Milieu de la durée",
+            "markerEndLabel": "Fin de prêt proche — surtout du capital"
           },
           "disclaimer": "Les chiffres et explications de cette page sont fournis à titre pédagogique uniquement et ne remplacent pas un conseil financier personnalisé."
         },

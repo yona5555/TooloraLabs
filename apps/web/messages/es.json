@@ -168,17 +168,9 @@
     "shareViaApps": "Compartir mediante aplicaciones"
   },
   "hero": {
-    "titleLine1": "Todas sus herramientas",
-    "titleLine2": "en un solo lugar",
     "searchPlaceholder": "Buscar calculadoras, convertidores, generadores...",
     "search": "Buscar",
     "searchNoResults": "No se encontraron herramientas para \"{query}\""
-  },
-  "stats": {
-    "tools": "Herramientas en Línea",
-    "categories": "Categorías",
-    "free": "Gratis para Siempre",
-    "available": "Disponible"
   },
   "heroCalculatorLog": {
     "title": "Registro de cálculos",
@@ -1642,7 +1634,10 @@
         "totalInterestLabel": "Interés total pagado",
         "pmiNote": "Según tus datos, el PMI podría solicitarse para su eliminación alrededor del año {dropYear} (80 % de relación préstamo-valor) y debe terminarse automáticamente, como muy tarde, en el año {autoYear} (78 % de relación préstamo-valor).",
         "pmiNoDropoff": "Tu préstamo actualmente conlleva PMI, pero no fue posible estimar un punto de eliminación con estos datos.",
-        "tooltipYearLabel": "Año"
+        "tooltipYearLabel": "Año",
+        "markerStartLabel": "Inicio del préstamo — saldo completo",
+        "markerMidLabel": "Aproximadamente a mitad del plazo",
+        "markerEndLabel": "Préstamo saldado"
       },
       "amortizationTable": {
         "title": "Tabla de amortización mensual completa",
@@ -3236,20 +3231,7 @@
           "deferred": "Con un préstamo de {amount} solicitado hoy a una tasa anual del {rate} durante {term} sin pagos hasta el vencimiento, deberás {due} al vencimiento.",
           "bond": "Para recibir {due} al vencimiento en {term} a una tasa anual del {rate}, tendrías que invertir {received} hoy."
         },
-        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general de los pagos del préstamo, no una oferta de préstamo ni asesoramiento financiero. Las tasas, comisiones y condiciones reales que ofrezca un prestamista dependen de tu solvencia y otros factores, y pueden diferir de esta estimación. Consulta a un prestamista autorizado o a un asesor financiero antes de solicitar un préstamo.",
-        "conceptDiagram": {
-          "title": "Cómo se divide una cuota fija",
-          "intro": "La cuota de un préstamo a tasa fija se mantiene igual en cada periodo, pero su composición cambia de forma constante: al principio es sobre todo interés, y hacia el final, sobre todo capital.",
-          "ariaLabel": "Diagrama que muestra cuatro cuotas de préstamo del mismo tamaño a lo largo del tiempo, cada una dividida de forma distinta entre interés y capital — sobre todo interés en las primeras cuotas, sobre todo capital en las últimas",
-          "timeLabel": "Plazo del préstamo",
-          "interestLabel": "Interés",
-          "principalLabel": "Capital",
-          "earlyLabel": "Primeras cuotas",
-          "lateLabel": "Últimas cuotas",
-          "mostlyInterestCaption": "Sobre todo interés",
-          "mostlyPrincipalCaption": "Sobre todo capital",
-          "samePaymentCaption": "La misma cuota en cada periodo"
-        }
+        "disclaimer": "Esta herramienta ofrece solo una estimación educativa general de los pagos del préstamo, no una oferta de préstamo ni asesoramiento financiero. Las tasas, comisiones y condiciones reales que ofrezca un prestamista dependen de tu solvencia y otros factores, y pueden diferir de esta estimación. Consulta a un prestamista autorizado o a un asesor financiero antes de solicitar un préstamo."
       },
       "nav": {
         "tool": "Calculadora",
@@ -3354,7 +3336,11 @@
             "emptyStateMessage": "Pulsa \"Calcular\" arriba (en la pestaña Préstamo amortizable) para ver cómo se reparten realmente tus cuotas entre interés y capital a lo largo del tiempo.",
             "caption": "A partir del periodo {period}, tu cuota fija pasa de ser mayoritariamente interés a ser mayoritariamente capital — el punto en el que la parte de capital supera a la de interés de forma definitiva.",
             "captionNoCrossover": "Durante toda la vida de este préstamo, tu cuota fija se mantiene mayoritariamente capital desde el primer periodo.",
-            "chartAriaLabel": "Gráfico interactivo de interés frente a capital para cada cuota a lo largo del plazo del préstamo"
+            "chartAriaLabel": "Gráfico interactivo de interés frente a capital para cada cuota a lo largo del plazo del préstamo",
+            "markerStartLabel": "Inicio del préstamo — sobre todo interés",
+            "markerCrossoverLabel": "Punto de equilibrio entre interés y capital",
+            "markerMidLabel": "Punto medio del plazo",
+            "markerEndLabel": "Cerca del final — sobre todo capital"
           },
           "disclaimer": "Las cifras y explicaciones de esta página son solo educativas y no sustituyen el asesoramiento financiero personalizado."
         },

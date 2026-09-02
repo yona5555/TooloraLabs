@@ -63,7 +63,9 @@ export default function RetirementConceptDiagram() {
             {d("startingSavingsLabel")}
           </text>
 
-          {/* compounding growth bracket over the steep part of the curve */}
+          {/* compounding marker + label over the steep part of the curve — the middle of the three
+              always-visible points along this diagram (starting savings, this one, retirement goal) */}
+          <circle cx={470} cy={140} r={5} className="fill-amber-500 dark:fill-amber-300" />
           <line x1={470} y1={140} x2={560} y2={100} strokeWidth={1.5} className="stroke-amber-700 dark:stroke-amber-300" opacity={0.7} />
           <text x={565} y={98} fontSize={13} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
             {d("compoundingLabel")}

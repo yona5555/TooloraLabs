@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className="bg-white text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
+      <body className="bg-[#F4F4F4] text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
         <ThemeInitScript />
         <GoogleAnalytics />
         {children}

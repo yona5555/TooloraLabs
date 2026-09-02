@@ -168,17 +168,9 @@
     "shareViaApps": "Über Apps teilen"
   },
   "hero": {
-    "titleLine1": "Alle Tools, die Sie brauchen",
-    "titleLine2": "an einem Ort",
     "searchPlaceholder": "Rechner, Umrechner, Generatoren durchsuchen...",
     "search": "Suchen",
     "searchNoResults": "Keine Tools gefunden für „{query}“"
-  },
-  "stats": {
-    "tools": "Online-Tools",
-    "categories": "Kategorien",
-    "free": "Für immer kostenlos",
-    "available": "Verfügbar"
   },
   "heroCalculatorLog": {
     "title": "Rechenprotokoll",
@@ -1642,7 +1634,10 @@
         "totalInterestLabel": "Gezahlte Gesamtzinsen",
         "pmiNote": "Nach Ihren Angaben könnte die PMI-Kündigung um Jahr {dropYear} beantragt werden (80 % Beleihungsauslauf) und muss spätestens bis Jahr {autoYear} automatisch beendet werden (78 % Beleihungsauslauf).",
         "pmiNoDropoff": "Ihr Darlehen umfasst derzeit eine PMI, ein Wegfallzeitpunkt konnte mit diesen Angaben jedoch nicht geschätzt werden.",
-        "tooltipYearLabel": "Jahr"
+        "tooltipYearLabel": "Jahr",
+        "markerStartLabel": "Kreditbeginn — voller Saldo",
+        "markerMidLabel": "Etwa auf halber Laufzeit",
+        "markerEndLabel": "Abbezahlt"
       },
       "amortizationTable": {
         "title": "Vollständiger monatlicher Tilgungsplan",
@@ -3236,20 +3231,7 @@
           "deferred": "Bei einem heute aufgenommenen Kredit über {amount} mit {rate} Jahreszins für {term} ohne Zahlungen bis zur Fälligkeit schulden Sie bei Endfälligkeit {due}.",
           "bond": "Um bei Endfälligkeit in {term} bei {rate} Jahreszins {due} zu erhalten, müssten Sie heute {received} investieren."
         },
-        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung von Kreditraten, kein Kreditangebot und keine Finanzberatung. Die tatsächlichen Zinssätze, Gebühren und Konditionen eines Kreditgebers hängen von Ihrer Kreditwürdigkeit und weiteren Faktoren ab und können von dieser Schätzung abweichen. Wenden Sie sich vor der Aufnahme eines Kredits an einen zugelassenen Kreditgeber oder Finanzberater.",
-        "conceptDiagram": {
-          "title": "Wie sich eine feste Rate aufteilt",
-          "intro": "Die Rate eines Kredits mit festem Zinssatz bleibt jede Periode gleich hoch, doch die Aufteilung dahinter verschiebt sich stetig – anfangs überwiegend Zinsen, gegen Ende überwiegend Tilgung.",
-          "ariaLabel": "Diagramm mit vier gleich großen Kreditraten im Zeitverlauf, die jeweils unterschiedlich zwischen Zinsen und Tilgung aufgeteilt sind – bei frühen Raten überwiegend Zinsen, bei späteren überwiegend Tilgung",
-          "timeLabel": "Kreditlaufzeit",
-          "interestLabel": "Zinsen",
-          "principalLabel": "Tilgung",
-          "earlyLabel": "Frühe Raten",
-          "lateLabel": "Spätere Raten",
-          "mostlyInterestCaption": "Überwiegend Zinsen",
-          "mostlyPrincipalCaption": "Überwiegend Tilgung",
-          "samePaymentCaption": "Gleiche Ratenhöhe jede Periode"
-        }
+        "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung von Kreditraten, kein Kreditangebot und keine Finanzberatung. Die tatsächlichen Zinssätze, Gebühren und Konditionen eines Kreditgebers hängen von Ihrer Kreditwürdigkeit und weiteren Faktoren ab und können von dieser Schätzung abweichen. Wenden Sie sich vor der Aufnahme eines Kredits an einen zugelassenen Kreditgeber oder Finanzberater."
       },
       "nav": {
         "tool": "Rechner",
@@ -3354,7 +3336,11 @@
             "emptyStateMessage": "Klicken Sie oben auf \"Berechnen\" (im Tab Tilgungsdarlehen), um zu sehen, wie sich Ihre eigenen Raten im Zeitverlauf zwischen Zinsen und Tilgung aufteilen.",
             "caption": "Ab Periode {period} kippt Ihre feste Rate von überwiegend Zinsen zu überwiegend Tilgung – der Punkt, an dem der Tilgungsanteil den Zinsanteil endgültig übersteigt.",
             "captionNoCrossover": "Über die gesamte Laufzeit dieses Kredits bleibt Ihre feste Rate von der allerersten Periode an überwiegend Tilgung.",
-            "chartAriaLabel": "Interaktives Diagramm von Zinsen im Vergleich zu Tilgung für jede Rate über die Kreditlaufzeit"
+            "chartAriaLabel": "Interaktives Diagramm von Zinsen im Vergleich zu Tilgung für jede Rate über die Kreditlaufzeit",
+            "markerStartLabel": "Kreditbeginn — überwiegend Zinsen",
+            "markerCrossoverLabel": "Break-even zwischen Zinsen und Tilgung",
+            "markerMidLabel": "Mitte der Laufzeit",
+            "markerEndLabel": "Kurz vor Rückzahlung — überwiegend Tilgung"
           },
           "disclaimer": "Die Zahlen und Erklärungen auf dieser Seite dienen nur der Bildung und ersetzen keine individuelle Finanzberatung."
         },
