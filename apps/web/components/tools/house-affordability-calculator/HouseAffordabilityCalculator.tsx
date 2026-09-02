@@ -24,7 +24,6 @@ import HouseAffordabilityModeTabs from "./HouseAffordabilityModeTabs";
 import HouseAffordabilityInputPanel from "./HouseAffordabilityInputPanel";
 import HouseAffordabilityResult from "./HouseAffordabilityResult";
 import AffordabilityGuidelinesCard from "./AffordabilityGuidelinesCard";
-import HouseAffordabilityConceptDiagram from "./HouseAffordabilityConceptDiagram";
 import BorrowingComparisonChart from "./BorrowingComparisonChart";
 import type { HouseAffordabilityMode, ComparisonRow } from "./types";
 
@@ -471,9 +470,6 @@ export default function HouseAffordabilityCalculator({ education }: { education:
     <>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
-        <div className="mb-6">
-          <HouseAffordabilityConceptDiagram />
-        </div>
         <ToolAboveFold
           input={
             <HouseAffordabilityInputPanel
@@ -556,13 +552,13 @@ export default function HouseAffordabilityCalculator({ education }: { education:
               />
               <HouseAffordabilityModeTabs mode={mode} onModeChange={handleModeChange} />
               <AffordabilityGuidelinesCard mode={mode} />
+              <BorrowingComparisonChart rows={comparisonRows} digitStyle={digitStyle} currency={currency} />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="house-affordability-calculator" category="calculators" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />
-              <BorrowingComparisonChart rows={comparisonRows} digitStyle={digitStyle} currency={currency} />
             </div>
           }
         />

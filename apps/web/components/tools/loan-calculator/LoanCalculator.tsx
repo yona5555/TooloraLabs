@@ -26,7 +26,6 @@ import LoanAmortizationChart from "./LoanAmortizationChart";
 import LoanGrowthChart from "./LoanGrowthChart";
 import LoanAmortizationTable from "./LoanAmortizationTable";
 import LoanGrowthTable from "./LoanGrowthTable";
-import LoanConceptDiagram from "./LoanConceptDiagram";
 import { LoanLiveInputsProvider } from "./LoanLiveInputsContext";
 import type { LoanMode, TermUnit, CompoundingFrequency, PaymentFrequency } from "./types";
 
@@ -313,9 +312,6 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
     <LoanLiveInputsProvider value={{ hasCalculatedAmortized: hasCalculated.amortized, amortizedSchedule: amortizedResult.schedule, digitStyle, currency }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
-        <div className="mb-6">
-          <LoanConceptDiagram />
-        </div>
         <ToolAboveFold
           input={
             <LoanInputPanel

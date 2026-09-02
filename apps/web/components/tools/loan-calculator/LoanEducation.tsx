@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import LoanAmortizationAreaChart from "./LoanAmortizationAreaChart";
+import LoanConceptDiagram from "./LoanConceptDiagram";
 
 type ExampleRow = { scenario: string; monthlyPayment: string; totalInterest: string };
 type CreditFactor = { name: string; description: string };
@@ -22,6 +23,7 @@ export default async function LoanEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <LoanConceptDiagram />
         <LoanAmortizationAreaChart />
         <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
       </InfoSection>

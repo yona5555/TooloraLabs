@@ -24,7 +24,6 @@ import CompoundInterestInputPanel from "./CompoundInterestInputPanel";
 import CompoundInterestResult from "./CompoundInterestResult";
 import CompoundInterestGrowthChart from "./CompoundInterestGrowthChart";
 import CompoundInterestYearlyBreakdownTable from "./CompoundInterestYearlyBreakdownTable";
-import CompoundInterestConceptDiagram from "./CompoundInterestConceptDiagram";
 import { CompoundInterestLiveInputsProvider } from "./CompoundInterestLiveInputsContext";
 import { SOLVE_MODES, type CompoundingFrequency, type SolveMode } from "./types";
 
@@ -442,9 +441,6 @@ export default function CompoundInterestCalculator({ education }: { education: R
     >
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
-        <div className="mb-6">
-          <CompoundInterestConceptDiagram />
-        </div>
         <ToolAboveFold
           input={
             <CompoundInterestInputPanel

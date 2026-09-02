@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import DebtToIncomeCategoryExamples from "./DebtToIncomeCategoryExamples";
+import DebtToIncomeConceptDiagram from "./DebtToIncomeConceptDiagram";
 
 type ExampleRow = { scenario: string; backEndRatio: string; category: string };
 type VariableItem = { name: string; description: string };
@@ -24,6 +25,7 @@ export default async function DebtToIncomeEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <DebtToIncomeConceptDiagram />
         <DebtToIncomeCategoryExamples />
       </InfoSection>
 

@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CompoundInterestComparisonChart from "./CompoundInterestComparisonChart";
+import CompoundInterestConceptDiagram from "./CompoundInterestConceptDiagram";
 
 type ExampleRow = { scenario: string; futureValue: string; interest: string };
 type VariableItem = { name: string; description: string };
@@ -24,6 +25,7 @@ export default async function CompoundInterestEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <CompoundInterestConceptDiagram />
         <CompoundInterestComparisonChart />
         <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
       </InfoSection>
