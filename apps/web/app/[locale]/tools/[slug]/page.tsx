@@ -95,6 +95,8 @@ import VolumeCalculator from "@/components/tools/volume-calculator/VolumeCalcula
 import VolumeEducation from "@/components/tools/volume-calculator/VolumeEducation";
 import MathSolver from "@/components/tools/step-by-step-math-solver/MathSolver";
 import MathSolverEducation from "@/components/tools/step-by-step-math-solver/MathSolverEducation";
+import GraphingCalculator from "@/components/tools/graphing-calculator/GraphingCalculator";
+import GraphingEducation from "@/components/tools/graphing-calculator/GraphingEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -443,6 +445,9 @@ export default async function ToolPage({
     case "step-by-step-math-solver":
       component = <MathSolver education={<MathSolverEducation />} />;
       break;
+    case "graphing-calculator":
+      component = <GraphingCalculator education={<GraphingEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -553,6 +558,7 @@ export default async function ToolPage({
     slug === "surface-area-calculator" ||
     slug === "volume-calculator" ||
     slug === "step-by-step-math-solver" ||
+    slug === "graphing-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

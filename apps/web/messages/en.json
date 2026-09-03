@@ -8482,20 +8482,47 @@
           "columnCalculation": "Unbalanced",
           "columnResult": "Balanced",
           "rows": [
-            { "calculation": "H2 + O2 -> H2O", "result": "2H2 + O2 → 2H2O" },
-            { "calculation": "N2 + H2 -> NH3", "result": "N2 + 3H2 → 2NH3" },
-            { "calculation": "Fe + O2 -> Fe2O3", "result": "4Fe + 3O2 → 2Fe2O3" },
-            { "calculation": "CH4 + O2 -> CO2 + H2O", "result": "CH4 + 2O2 → CO2 + 2H2O" }
+            {
+              "calculation": "H2 + O2 -> H2O",
+              "result": "2H2 + O2 → 2H2O"
+            },
+            {
+              "calculation": "N2 + H2 -> NH3",
+              "result": "N2 + 3H2 → 2NH3"
+            },
+            {
+              "calculation": "Fe + O2 -> Fe2O3",
+              "result": "4Fe + 3O2 → 2Fe2O3"
+            },
+            {
+              "calculation": "CH4 + O2 -> CO2 + H2O",
+              "result": "CH4 + 2O2 → CO2 + 2H2O"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why does the balancer ignore coefficients I already typed in?", "answer": "Because a coefficient you guessed might be wrong, and there's no reliable way to tell a deliberately chosen coefficient from an accidental typo. The calculator always solves for coefficients from scratch based on the formulas alone, which guarantees a correct result regardless of what you originally typed." },
-            { "question": "Why do the coefficients have to be whole numbers?", "answer": "A chemical equation describes whole molecules or formula units reacting together — you can't have \"2.5 molecules\" of something take part in a reaction. If the underlying ratio comes out fractional (as it sometimes does partway through the calculation), every coefficient is scaled up by the same factor until all of them land on whole numbers, which keeps the ratios between substances unchanged." },
-            { "question": "Why does this tool say an equation \"can't be balanced\"?", "answer": "Usually because the formulas as written don't actually share the elements needed to balance — for example, if an element appears only among the reactants and never among the products, no set of coefficients can make both sides equal for that element. Double-check every formula for typos or a missing product/reactant before assuming the reaction itself is impossible." },
-            { "question": "Can this balance equations involving ions or electric charge?", "answer": "Not on its own — it balances atom counts for neutral formulas, which is exactly what most simple reactions need. Redox reactions written with explicit ion charges (like Fe²⁺ → Fe³⁺ + e⁻) also need to conserve total charge and electrons transferred, which requires oxidation-state tracking beyond what this atom-counting method performs." },
-            { "question": "Is there always exactly one correct balanced version of an equation?", "answer": "For the reactants and products as given, yes — there's exactly one smallest whole-number ratio, though any multiple of it (4H2 + 2O2 → 4H2O instead of 2H2 + O2 → 2H2O) technically also balances. By convention, and by default in this calculator, the smallest possible whole numbers are reported, since any larger common multiple carries no new information." }
+            {
+              "question": "Why does the balancer ignore coefficients I already typed in?",
+              "answer": "Because a coefficient you guessed might be wrong, and there's no reliable way to tell a deliberately chosen coefficient from an accidental typo. The calculator always solves for coefficients from scratch based on the formulas alone, which guarantees a correct result regardless of what you originally typed."
+            },
+            {
+              "question": "Why do the coefficients have to be whole numbers?",
+              "answer": "A chemical equation describes whole molecules or formula units reacting together — you can't have \"2.5 molecules\" of something take part in a reaction. If the underlying ratio comes out fractional (as it sometimes does partway through the calculation), every coefficient is scaled up by the same factor until all of them land on whole numbers, which keeps the ratios between substances unchanged."
+            },
+            {
+              "question": "Why does this tool say an equation \"can't be balanced\"?",
+              "answer": "Usually because the formulas as written don't actually share the elements needed to balance — for example, if an element appears only among the reactants and never among the products, no set of coefficients can make both sides equal for that element. Double-check every formula for typos or a missing product/reactant before assuming the reaction itself is impossible."
+            },
+            {
+              "question": "Can this balance equations involving ions or electric charge?",
+              "answer": "Not on its own — it balances atom counts for neutral formulas, which is exactly what most simple reactions need. Redox reactions written with explicit ion charges (like Fe²⁺ → Fe³⁺ + e⁻) also need to conserve total charge and electrons transferred, which requires oxidation-state tracking beyond what this atom-counting method performs."
+            },
+            {
+              "question": "Is there always exactly one correct balanced version of an equation?",
+              "answer": "For the reactants and products as given, yes — there's exactly one smallest whole-number ratio, though any multiple of it (4H2 + 2O2 → 4H2O instead of 2H2 + O2 → 2H2O) technically also balances. By convention, and by default in this calculator, the smallest possible whole numbers are reported, since any larger common multiple carries no new information."
+            }
           ]
         },
         "behindTheTool": {
@@ -8512,12 +8539,42 @@
             "title": "Academic Path",
             "intro": "Chemical equation balancing is a foundational skill within chemistry. Here are the top 5 globally for Chemistry in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Harvard University", "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.chemistry.harvard.edu/prospective-students", "online": "No — the department covers tuition for all PhD students in an in-residence research program." },
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/", "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch", "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study." },
-              { "name": "Stanford University", "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://chemistry.stanford.edu/academics/phd-program/admissions", "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review." },
-              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry", "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas." },
-              { "name": "Qatar University — Department of Chemistry and Earth Sciences", "note": "Founded in 1973 with around 30 full-time chemistry faculty; not separately ranked on this global subject table.", "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry", "online": "No — the department's programs are delivered on Qatar University's campus." }
+              {
+                "name": "Harvard University",
+                "note": "Ranked #1 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.chemistry.harvard.edu/prospective-students",
+                "online": "No — the department covers tuition for all PhD students in an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #2 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.mit.edu/academic-programs/graduate-programs/",
+                "online": "No — admitted PhD students receive full tuition and a stipend for an on-campus research program."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.postgraduate.study.cam.ac.uk/courses/directory/pcchpdpch",
+                "online": "Partly — the PhD is offered as full-time or part-time research, though both are in-residence rather than distance study."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #4 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://chemistry.stanford.edu/academics/phd-program/admissions",
+                "online": "No — the program is an in-residence research PhD with a holistic, individualized admissions review."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Chemistry (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-chemistry",
+                "online": "No — the DPhil is an on-campus research degree spanning catalysis, materials, and theoretical chemistry among other areas."
+              },
+              {
+                "name": "Qatar University — Department of Chemistry and Earth Sciences",
+                "note": "Founded in 1973 with around 30 full-time chemistry faculty; not separately ranked on this global subject table.",
+                "url": "http://www.qu.edu.qa/artssciences/departments/dept-chemistry",
+                "online": "No — the department's programs are delivered on Qatar University's campus."
+              }
             ]
           }
         },
@@ -8596,20 +8653,47 @@
           "columnCalculation": "Scenario",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "Math 101 (Mon/Wed 9:00–10:30) + Physics 201 (Mon 10:00–11:00)", "result": "Conflict on Monday, 10:00–10:30" },
-            { "calculation": "History 100 (Tue/Thu 13:00–14:00) + Chemistry Lab (Wed 13:00–16:00)", "result": "No conflict — different days" },
-            { "calculation": "Seminar A (Fri 15:00–16:00) + Seminar B (Fri 16:00–17:00)", "result": "No conflict — back-to-back, no overlap" },
-            { "calculation": "Two sections of the same course, both Mon/Wed 9:00–10:00", "result": "Conflict on Monday and Wednesday, 9:00–10:00" }
+            {
+              "calculation": "Math 101 (Mon/Wed 9:00–10:30) + Physics 201 (Mon 10:00–11:00)",
+              "result": "Conflict on Monday, 10:00–10:30"
+            },
+            {
+              "calculation": "History 100 (Tue/Thu 13:00–14:00) + Chemistry Lab (Wed 13:00–16:00)",
+              "result": "No conflict — different days"
+            },
+            {
+              "calculation": "Seminar A (Fri 15:00–16:00) + Seminar B (Fri 16:00–17:00)",
+              "result": "No conflict — back-to-back, no overlap"
+            },
+            {
+              "calculation": "Two sections of the same course, both Mon/Wed 9:00–10:00",
+              "result": "Conflict on Monday and Wednesday, 9:00–10:00"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why doesn't the tool flag back-to-back classes as a conflict?", "answer": "Because there's no actual time overlap — one class ending at 10:00 and another starting at 10:00 don't compete for the same minute. The builder only flags a conflict when a class's start time falls strictly before another's end time on a shared day, which is the definition of two events genuinely overlapping." },
-            { "question": "What counts as a \"shared day\" between two classes?", "answer": "Any day of the week that both classes have selected. A class that meets Monday/Wednesday/Friday and another that meets only Tuesday/Thursday share no days, so they're compared against each other on zero days and can never conflict, no matter what times they use." },
-            { "question": "Does the total weekly hours figure include time between classes?", "answer": "No — it only sums the actual meeting duration of every class, counted once for each day it meets. A class that runs 1 hour on three days a week contributes 3 hours to the total, not the wider span of time between its first and last session." },
-            { "question": "Can I check a schedule with classes that span midnight or run overnight?", "answer": "The builder compares start and end times within the same day, so an overnight class needs to be entered as ending by 23:59 on the day it starts; a session that logically continues past midnight isn't represented as a single entry." },
-            { "question": "Why does the tool require every class to have at least one day selected?", "answer": "A class with no day assigned can't be checked for conflicts against anything, since conflict detection depends entirely on comparing shared days. Requiring at least one day keeps every class meaningful to the conflict check rather than silently ignored." }
+            {
+              "question": "Why doesn't the tool flag back-to-back classes as a conflict?",
+              "answer": "Because there's no actual time overlap — one class ending at 10:00 and another starting at 10:00 don't compete for the same minute. The builder only flags a conflict when a class's start time falls strictly before another's end time on a shared day, which is the definition of two events genuinely overlapping."
+            },
+            {
+              "question": "What counts as a \"shared day\" between two classes?",
+              "answer": "Any day of the week that both classes have selected. A class that meets Monday/Wednesday/Friday and another that meets only Tuesday/Thursday share no days, so they're compared against each other on zero days and can never conflict, no matter what times they use."
+            },
+            {
+              "question": "Does the total weekly hours figure include time between classes?",
+              "answer": "No — it only sums the actual meeting duration of every class, counted once for each day it meets. A class that runs 1 hour on three days a week contributes 3 hours to the total, not the wider span of time between its first and last session."
+            },
+            {
+              "question": "Can I check a schedule with classes that span midnight or run overnight?",
+              "answer": "The builder compares start and end times within the same day, so an overnight class needs to be entered as ending by 23:59 on the day it starts; a session that logically continues past midnight isn't represented as a single entry."
+            },
+            {
+              "question": "Why does the tool require every class to have at least one day selected?",
+              "answer": "A class with no day assigned can't be checked for conflicts against anything, since conflict detection depends entirely on comparing shared days. Requiring at least one day keeps every class meaningful to the conflict check rather than silently ignored."
+            }
           ]
         },
         "behindTheTool": {
@@ -8626,12 +8710,42 @@
             "title": "Academic Path",
             "intro": "Timetabling sits at the intersection of scheduling theory and algorithm design within computer science. Here are the top 5 globally for Computer Science & Information Systems in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/", "online": "No — the PhD is an in-residence research program within the EECS department." },
-              { "name": "Stanford University", "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.cs.stanford.edu/admissions/phd-admissions", "online": "No — the program is an in-residence research PhD with a single annual admissions cycle." },
-              { "name": "Carnegie Mellon University (CMU)", "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions", "online": "No — the Computer Science Department's PhD is an on-campus research degree." },
-              { "name": "National University of Singapore (NUS)", "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/", "online": "No — admitted PhD students undertake in-residence research at the NUS School of Computing." },
-              { "name": "University of Oxford", "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science", "online": "No — the DPhil is an on-campus research degree covering algorithms and complexity among other areas." },
-              { "name": "King Abdullah University of Science and Technology (KAUST) — Computer Science Program", "note": "PhD program requires a minimum of 72 credits and a cumulative GPA of at least 3.0; not separately ranked on this global subject table.", "url": "https://cemse.kaust.edu.sa/cs/study", "online": "No — the program is delivered in residence on KAUST's campus in Thuwal, Saudi Arabia." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/admission-process/",
+                "online": "No — the PhD is an in-residence research program within the EECS department."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #2 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.cs.stanford.edu/admissions/phd-admissions",
+                "online": "No — the program is an in-residence research PhD with a single annual admissions cycle."
+              },
+              {
+                "name": "Carnegie Mellon University (CMU)",
+                "note": "Ranked #3 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.csd.cs.cmu.edu/academics/doctoral/admissions",
+                "online": "No — the Computer Science Department's PhD is an on-campus research degree."
+              },
+              {
+                "name": "National University of Singapore (NUS)",
+                "note": "Ranked #4 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.comp.nus.edu.sg/programmes/pg/phdcs/admissions/",
+                "online": "No — admitted PhD students undertake in-residence research at the NUS School of Computing."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #5 worldwide for Computer Science & Information Systems (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-computer-science",
+                "online": "No — the DPhil is an on-campus research degree covering algorithms and complexity among other areas."
+              },
+              {
+                "name": "King Abdullah University of Science and Technology (KAUST) — Computer Science Program",
+                "note": "PhD program requires a minimum of 72 credits and a cumulative GPA of at least 3.0; not separately ranked on this global subject table.",
+                "url": "https://cemse.kaust.edu.sa/cs/study",
+                "online": "No — the program is delivered in residence on KAUST's campus in Thuwal, Saudi Arabia."
+              }
             ]
           }
         },
@@ -8717,20 +8831,47 @@
           "columnCalculation": "Scenario",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "Book by Jane Doe, formatted in APA", "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press." },
-            { "calculation": "The same book, formatted in MLA", "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020." },
-            { "calculation": "The same book, formatted in Chicago (author-date)", "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press." },
-            { "calculation": "Journal article with 3 authors, in MLA (et al. rule)", "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20." }
+            {
+              "calculation": "Book by Jane Doe, formatted in APA",
+              "result": "Doe, J. (2020). The Craft of Research. University of Chicago Press."
+            },
+            {
+              "calculation": "The same book, formatted in MLA",
+              "result": "Doe, Jane. The Craft of Research. University of Chicago Press, 2020."
+            },
+            {
+              "calculation": "The same book, formatted in Chicago (author-date)",
+              "result": "Doe, Jane. 2020. The Craft of Research. University of Chicago Press."
+            },
+            {
+              "calculation": "Journal article with 3 authors, in MLA (et al. rule)",
+              "result": "Doe, Jane, et al. \"Article Title.\" Journal Name, vol. 5, no. 2, 2021, pp. 10-20."
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Which citation style should I use?", "answer": "It depends on your discipline and, often, your instructor or publisher's specific requirement. APA is most common in the social sciences, MLA in the humanities and literature, and Chicago in history and some social sciences (Chicago also has a separate notes-and-bibliography variant used mainly for footnotes, which this tool doesn't generate — only the author-date reference-list form). When in doubt, check your assignment instructions or a target journal's author guidelines rather than guessing." },
-            { "question": "Why do APA and MLA format author names so differently?", "answer": "Each style optimizes for a different kind of scanning. APA reduces first and middle names to initials and uses \"&\" before the final author, prioritizing compact reference lists in fields with heavily co-authored research. MLA spells out first names in full and uses \"and,\" since literary and humanities scholarship more often cites single or dual-authored works where the full name reads more naturally." },
-            { "question": "What does \"et al.\" mean, and when does this tool start using it?", "answer": "\"Et al.\" is Latin for \"and others,\" used to shorten a long author list to just the first author's name. This tool follows each style's own official threshold: APA lists every author by name until a source has more than 20, MLA switches to \"et al.\" at 3 or more authors, and Chicago switches to \"et al.\" at 4 or more authors." },
-            { "question": "Why does the citation start with the title instead of an author if I leave the author fields blank?", "answer": "All three styles handle sources with no listed author the same way: since there's no author name to lead with, the title moves into the position an author's name would normally occupy, and everything else in the citation shifts over by one slot. This is standard practice, not a limitation of this tool — it's how a reader is meant to alphabetize an unauthored source in a reference list." },
-            { "question": "Does this tool italicize book and journal titles for me?", "answer": "No — the output is plain text. In every style here, the title of a complete, stand-alone work (a book, or a journal's or website's name) is meant to be italicized, while a title that's part of something larger (an article, a web page) takes quotation marks instead, which this tool does apply. After pasting a citation into your document, italicize the container title by hand." }
+            {
+              "question": "Which citation style should I use?",
+              "answer": "It depends on your discipline and, often, your instructor or publisher's specific requirement. APA is most common in the social sciences, MLA in the humanities and literature, and Chicago in history and some social sciences (Chicago also has a separate notes-and-bibliography variant used mainly for footnotes, which this tool doesn't generate — only the author-date reference-list form). When in doubt, check your assignment instructions or a target journal's author guidelines rather than guessing."
+            },
+            {
+              "question": "Why do APA and MLA format author names so differently?",
+              "answer": "Each style optimizes for a different kind of scanning. APA reduces first and middle names to initials and uses \"&\" before the final author, prioritizing compact reference lists in fields with heavily co-authored research. MLA spells out first names in full and uses \"and,\" since literary and humanities scholarship more often cites single or dual-authored works where the full name reads more naturally."
+            },
+            {
+              "question": "What does \"et al.\" mean, and when does this tool start using it?",
+              "answer": "\"Et al.\" is Latin for \"and others,\" used to shorten a long author list to just the first author's name. This tool follows each style's own official threshold: APA lists every author by name until a source has more than 20, MLA switches to \"et al.\" at 3 or more authors, and Chicago switches to \"et al.\" at 4 or more authors."
+            },
+            {
+              "question": "Why does the citation start with the title instead of an author if I leave the author fields blank?",
+              "answer": "All three styles handle sources with no listed author the same way: since there's no author name to lead with, the title moves into the position an author's name would normally occupy, and everything else in the citation shifts over by one slot. This is standard practice, not a limitation of this tool — it's how a reader is meant to alphabetize an unauthored source in a reference list."
+            },
+            {
+              "question": "Does this tool italicize book and journal titles for me?",
+              "answer": "No — the output is plain text. In every style here, the title of a complete, stand-alone work (a book, or a journal's or website's name) is meant to be italicized, while a title that's part of something larger (an article, a web page) takes quotation marks instead, which this tool does apply. After pasting a citation into your document, italicize the container title by hand."
+            }
           ]
         },
         "behindTheTool": {
@@ -8747,12 +8888,42 @@
             "title": "Academic Path",
             "intro": "Citation practice and citation-based scholarship sit within library and information science. Here are the top 5 globally for Library & Information Management in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "University of Sheffield", "note": "Ranked #1 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.sheffield.ac.uk/is/study/phd/apply", "online": "No — the PhD is an in-residence research degree within the Information School." },
-              { "name": "University of Washington", "note": "Ranked #2 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements", "online": "No — the Information Science PhD is a full-time, in-residence research program typically taking 5 to 6 years." },
-              { "name": "Nanyang Technological University (NTU Singapore)", "note": "Ranked #3 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes", "online": "No — the PhD is an in-residence research degree at the Wee Kim Wee School of Communication and Information." },
-              { "name": "University of North Carolina at Chapel Hill", "note": "Ranked #4 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://sils.unc.edu/graduate-admissions/", "online": "No — the PhD in Information and Library Science is an in-residence research program." },
-              { "name": "University of Texas at Austin", "note": "Ranked #5 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).", "url": "https://ischool.utexas.edu/programs/phd/admissions", "online": "No — the PhD in Information Studies is an in-residence research program with an annual December 1 application deadline." },
-              { "name": "Sultan Qaboos University — Department of Information Studies", "note": "Founded in 1986 as Oman's founding library and information science program; not separately ranked on this global subject table.", "url": "https://www.squ.edu.om/", "online": "No — the department's programs are delivered on Sultan Qaboos University's campus in Muscat, Oman." }
+              {
+                "name": "University of Sheffield",
+                "note": "Ranked #1 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).",
+                "url": "https://www.sheffield.ac.uk/is/study/phd/apply",
+                "online": "No — the PhD is an in-residence research degree within the Information School."
+              },
+              {
+                "name": "University of Washington",
+                "note": "Ranked #2 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).",
+                "url": "https://ischool.uw.edu/programs/phd/curriculum/degree-requirements",
+                "online": "No — the Information Science PhD is a full-time, in-residence research program typically taking 5 to 6 years."
+              },
+              {
+                "name": "Nanyang Technological University (NTU Singapore)",
+                "note": "Ranked #3 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ntu.edu.sg/wkwsci/admissions/graduate-programmes",
+                "online": "No — the PhD is an in-residence research degree at the Wee Kim Wee School of Communication and Information."
+              },
+              {
+                "name": "University of North Carolina at Chapel Hill",
+                "note": "Ranked #4 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).",
+                "url": "https://sils.unc.edu/graduate-admissions/",
+                "online": "No — the PhD in Information and Library Science is an in-residence research program."
+              },
+              {
+                "name": "University of Texas at Austin",
+                "note": "Ranked #5 worldwide for Library & Information Management (QS World University Rankings by Subject 2025).",
+                "url": "https://ischool.utexas.edu/programs/phd/admissions",
+                "online": "No — the PhD in Information Studies is an in-residence research program with an annual December 1 application deadline."
+              },
+              {
+                "name": "Sultan Qaboos University — Department of Information Studies",
+                "note": "Founded in 1986 as Oman's founding library and information science program; not separately ranked on this global subject table.",
+                "url": "https://www.squ.edu.om/",
+                "online": "No — the department's programs are delivered on Sultan Qaboos University's campus in Muscat, Oman."
+              }
             ]
           }
         },
@@ -8768,7 +8939,11 @@
     "area-calculator": {
       "title": "Area Calculator",
       "description": "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
-      "nav": { "tool": "Calculator", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
       "aboveFold": {
         "quickReference": {
           "title": "Area Formulas",
@@ -8817,19 +8992,43 @@
           "columnCalculation": "Shape & Dimensions",
           "columnResult": "Area",
           "rows": [
-            { "calculation": "Square, side = 4", "result": "16 square units" },
-            { "calculation": "Rectangle, width = 5, height = 3", "result": "15 square units" },
-            { "calculation": "Circle, radius = 3", "result": "≈ 28.27 square units" },
-            { "calculation": "Circular sector, radius = 4, angle = 90°", "result": "≈ 12.57 square units" }
+            {
+              "calculation": "Square, side = 4",
+              "result": "16 square units"
+            },
+            {
+              "calculation": "Rectangle, width = 5, height = 3",
+              "result": "15 square units"
+            },
+            {
+              "calculation": "Circle, radius = 3",
+              "result": "≈ 28.27 square units"
+            },
+            {
+              "calculation": "Circular sector, radius = 4, angle = 90°",
+              "result": "≈ 12.57 square units"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "What's the difference between area and perimeter?", "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other." },
-            { "question": "Why does a triangle only need a base and height, not all three sides?", "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it." },
-            { "question": "Why can't a circular sector's angle exceed 360°?", "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector." },
-            { "question": "How is an ellipse's area related to a circle's?", "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r." }
+            {
+              "question": "What's the difference between area and perimeter?",
+              "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other."
+            },
+            {
+              "question": "Why does a triangle only need a base and height, not all three sides?",
+              "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it."
+            },
+            {
+              "question": "Why can't a circular sector's angle exceed 360°?",
+              "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector."
+            },
+            {
+              "question": "How is an ellipse's area related to a circle's?",
+              "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r."
+            }
           ]
         },
         "behindTheTool": {
@@ -8842,12 +9041,42 @@
             "title": "Academic Path",
             "intro": "Area and the broader study of geometric measurement sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
-              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
-              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
-              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
-              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
             ]
           }
         }
@@ -8856,7 +9085,11 @@
     "surface-area-calculator": {
       "title": "Surface Area Calculator",
       "description": "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
-      "nav": { "tool": "Calculator", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
       "aboveFold": {
         "quickReference": {
           "title": "Surface Area Formulas",
@@ -8899,18 +9132,39 @@
           "columnCalculation": "Shape & Dimensions",
           "columnResult": "Surface Area",
           "rows": [
-            { "calculation": "Cube, side = 3", "result": "54 square units" },
-            { "calculation": "Sphere, radius = 3", "result": "≈ 113.10 square units" },
-            { "calculation": "Cylinder, radius = 2, height = 5", "result": "≈ 87.96 square units" },
-            { "calculation": "Cone, radius = 3, height = 4", "result": "≈ 75.40 square units" }
+            {
+              "calculation": "Cube, side = 3",
+              "result": "54 square units"
+            },
+            {
+              "calculation": "Sphere, radius = 3",
+              "result": "≈ 113.10 square units"
+            },
+            {
+              "calculation": "Cylinder, radius = 2, height = 5",
+              "result": "≈ 87.96 square units"
+            },
+            {
+              "calculation": "Cone, radius = 3, height = 4",
+              "result": "≈ 75.40 square units"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why does the cone ask for height instead of slant height?", "answer": "A perpendicular height is what most people can measure directly (straight up from the base), while a slant height runs along the cone's slanted surface and is harder to measure by hand. This calculator derives the slant height for you from the radius and perpendicular height using the Pythagorean theorem, so you only need to supply the measurement that's actually easy to take." },
-            { "question": "What's the difference between surface area and volume?", "answer": "Surface area totals the area of a solid's outer faces — how much material would wrap it. Volume measures the space enclosed inside it — how much it would hold. Two solids can have the same volume with very different surface areas (a sphere has the least surface area of any shape for a given volume), which is why both measurements matter for different practical questions." },
-            { "question": "Why does a rectangular prism need three separate dimensions?", "answer": "A rectangular prism has three pairs of matching rectangular faces (length×width, length×height, width×height), and unlike a cube, none of its three dimensions can be assumed equal to the others — all three are independently needed to compute the total surface area." }
+            {
+              "question": "Why does the cone ask for height instead of slant height?",
+              "answer": "A perpendicular height is what most people can measure directly (straight up from the base), while a slant height runs along the cone's slanted surface and is harder to measure by hand. This calculator derives the slant height for you from the radius and perpendicular height using the Pythagorean theorem, so you only need to supply the measurement that's actually easy to take."
+            },
+            {
+              "question": "What's the difference between surface area and volume?",
+              "answer": "Surface area totals the area of a solid's outer faces — how much material would wrap it. Volume measures the space enclosed inside it — how much it would hold. Two solids can have the same volume with very different surface areas (a sphere has the least surface area of any shape for a given volume), which is why both measurements matter for different practical questions."
+            },
+            {
+              "question": "Why does a rectangular prism need three separate dimensions?",
+              "answer": "A rectangular prism has three pairs of matching rectangular faces (length×width, length×height, width×height), and unlike a cube, none of its three dimensions can be assumed equal to the others — all three are independently needed to compute the total surface area."
+            }
           ]
         },
         "behindTheTool": {
@@ -8923,12 +9177,42 @@
             "title": "Academic Path",
             "intro": "Surface area and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
-              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
-              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
-              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
-              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
             ]
           }
         }
@@ -8937,7 +9221,11 @@
     "volume-calculator": {
       "title": "Volume Calculator",
       "description": "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
-      "nav": { "tool": "Calculator", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
       "aboveFold": {
         "quickReference": {
           "title": "Volume Formulas",
@@ -8980,18 +9268,39 @@
           "columnCalculation": "Shape & Dimensions",
           "columnResult": "Volume",
           "rows": [
-            { "calculation": "Cube, side = 3", "result": "27 cubic units" },
-            { "calculation": "Sphere, radius = 3", "result": "≈ 113.10 cubic units" },
-            { "calculation": "Cylinder, radius = 2, height = 5", "result": "≈ 62.83 cubic units" },
-            { "calculation": "Cone, radius = 3, height = 4", "result": "≈ 37.70 cubic units" }
+            {
+              "calculation": "Cube, side = 3",
+              "result": "27 cubic units"
+            },
+            {
+              "calculation": "Sphere, radius = 3",
+              "result": "≈ 113.10 cubic units"
+            },
+            {
+              "calculation": "Cylinder, radius = 2, height = 5",
+              "result": "≈ 62.83 cubic units"
+            },
+            {
+              "calculation": "Cone, radius = 3, height = 4",
+              "result": "≈ 37.70 cubic units"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "Why is a cone's volume exactly one-third of a cylinder's?", "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen." },
-            { "question": "Why does a square pyramid's volume include a factor of one-third too?", "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor." },
-            { "question": "Does volume use the same height as surface area for a cone?", "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all." }
+            {
+              "question": "Why is a cone's volume exactly one-third of a cylinder's?",
+              "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen."
+            },
+            {
+              "question": "Why does a square pyramid's volume include a factor of one-third too?",
+              "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor."
+            },
+            {
+              "question": "Does volume use the same height as surface area for a cone?",
+              "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all."
+            }
           ]
         },
         "behindTheTool": {
@@ -9004,12 +9313,42 @@
             "title": "Academic Path",
             "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
-              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
-              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
-              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
-              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
             ]
           }
         }
@@ -9018,7 +9357,11 @@
     "step-by-step-math-solver": {
       "title": "Step-by-Step Math Solver",
       "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
-      "nav": { "tool": "Solver", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "nav": {
+        "tool": "Solver",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
       "aboveFold": {
         "quickReference": {
           "title": "What This Solver Covers",
@@ -9071,19 +9414,43 @@
           "columnCalculation": "Problem",
           "columnResult": "Result",
           "rows": [
-            { "calculation": "3x + 5 = 2x + 9", "result": "x = 4" },
-            { "calculation": "x² − 5x + 6 = 0", "result": "x₁ = 3, x₂ = 2" },
-            { "calculation": "1/2 + 1/3", "result": "5/6" },
-            { "calculation": "f(x) = 3x² + 2x + 5", "result": "f'(x) = 6x + 2" }
+            {
+              "calculation": "3x + 5 = 2x + 9",
+              "result": "x = 4"
+            },
+            {
+              "calculation": "x² − 5x + 6 = 0",
+              "result": "x₁ = 3, x₂ = 2"
+            },
+            {
+              "calculation": "1/2 + 1/3",
+              "result": "5/6"
+            },
+            {
+              "calculation": "f(x) = 3x² + 2x + 5",
+              "result": "f'(x) = 6x + 2"
+            }
           ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
           "items": [
-            { "question": "What does it mean when a linear equation has \"no unique solution\"?", "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal." },
-            { "question": "Why does a quadratic equation sometimes have complex solutions?", "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis." },
-            { "question": "Why do fraction results always come back reduced to lowest terms?", "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result." },
-            { "question": "Why does the derivative of a constant term always come out to 0?", "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out." }
+            {
+              "question": "What does it mean when a linear equation has \"no unique solution\"?",
+              "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal."
+            },
+            {
+              "question": "Why does a quadratic equation sometimes have complex solutions?",
+              "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis."
+            },
+            {
+              "question": "Why do fraction results always come back reduced to lowest terms?",
+              "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result."
+            },
+            {
+              "question": "Why does the derivative of a constant term always come out to 0?",
+              "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out."
+            }
           ]
         },
         "behindTheTool": {
@@ -9096,12 +9463,42 @@
             "title": "Academic Path",
             "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
             "universities": [
-              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
-              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
-              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
-              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
-              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
-              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
             ]
           }
         }
@@ -13181,6 +13578,136 @@
           "note": "A foundational academic treatment of cost-volume-profit analysis within the broader discipline of management accounting, covering the same contribution-margin logic this tool calculates.",
           "url": "https://doi.org/10.1007/978-1-349-18054-7_5",
           "readOriginal": "Read the Original Chapter"
+        }
+      }
+    },
+    "graphing-calculator": {
+      "title": "Graphing Calculator",
+      "description": "Plot the graph of a mathematical function of x over a chosen range, with support for trigonometric, logarithmic, and power expressions.",
+      "nav": {
+        "tool": "Graph",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Supported Expression Syntax",
+          "intro": "Type any single-variable function of x using standard operators and functions — a few examples:"
+        }
+      },
+      "form": {
+        "inputTitle": "Function",
+        "expressionLabel": "f(x) =",
+        "expressionPlaceholder": "e.g. x^2 - 3*x + 1",
+        "expressionHint": "Use + − * / ^ for operators, and sin, cos, tan, sqrt, abs, ln, log, exp, pi, e for functions and constants.",
+        "xMinLabel": "Minimum x",
+        "xMaxLabel": "Maximum x"
+      },
+      "result": {
+        "heading": "Graph",
+        "invalidExpression": "This doesn't look like a valid expression — check for a typo, an unmatched parenthesis, or an unrecognized function name.",
+        "invalidRange": "Enter a maximum x-value that's greater than the minimum.",
+        "noValidPoints": "No point in this range produced a real result — try widening the range, or check the expression for values (like a negative square root) that aren't defined here."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Function Graphing",
+          "paragraph1": "A graph turns an abstract rule — for every x, compute this y — into a shape you can see: a line, a curve, a wave. That shape often reveals things a table of numbers hides at a glance, like where a function crosses zero, where it's increasing or decreasing, or where it has a peak, a dip, or a gap.",
+          "paragraph2": "This tool works by sampling: it evaluates your expression at 300 evenly spaced x-values across the range you choose, then connects the resulting points with straight line segments. Any x-value where the expression is undefined — such as 1/x at x = 0, or sqrt(x) for a negative x — is simply skipped, which is why a graph can show a visible break or gap instead of a continuous line."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few functions and the shape they trace.",
+          "columnCalculation": "Function",
+          "columnResult": "Shape",
+          "rows": [
+            {
+              "calculation": "x^2",
+              "result": "Parabola opening upward, vertex at (0, 0)"
+            },
+            {
+              "calculation": "sin(x)",
+              "result": "Wave oscillating between −1 and 1"
+            },
+            {
+              "calculation": "1/x",
+              "result": "Hyperbola with an undefined gap at x = 0"
+            },
+            {
+              "calculation": "sqrt(x)",
+              "result": "Curve defined only for x ≥ 0"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does my graph look jagged or blocky instead of smooth?",
+              "answer": "The tool plots 300 sample points across your chosen range and connects them with straight segments. Over a very wide range, those 300 points get spread thin, so a fast-changing function (like a high-frequency wave) can look more angular than it really is — narrowing the x-range gives the same 300 points more detail to work with."
+            },
+            {
+              "question": "Why do some graphs have a visible gap or break in them?",
+              "answer": "That happens at any x-value where the expression is mathematically undefined — dividing by zero (1/x at x = 0), taking the square root of a negative number (sqrt(x) for x < 0), or a similar case. Rather than guessing, the tool simply omits that point, which shows up as a break in the line."
+            },
+            {
+              "question": "What functions and operators are supported?",
+              "answer": "Arithmetic operators + − * / ^ (power), the trigonometric functions sin, cos, tan, asin, acos, atan, sqrt, abs, natural log ln, base-10 log log, exp (e^x), max, and min, plus the constants pi and e. Parentheses can be nested freely to control order of operations."
+            },
+            {
+              "question": "Why does changing the minimum and maximum x change the shape I see?",
+              "answer": "The range doesn't change the function itself, only which slice of it you're looking at — the same way zooming a map doesn't change the terrain, only how much of it fits on screen. A function like x^3 can look almost flat near the origin and dramatically steep once the range widens, because it's the same curve at a different scale."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The First Calculator You Could See a Curve On",
+            "paragraph": "Casio released the fx-7000G in October 1985 — the world's first hand-held graphing calculator sold to the public. It packed 82 scientific functions into a device that could also plot them as a line graph or a bar chart directly on its small LCD screen, letting a student see a parabola or a sine wave instead of just computing isolated points on it. Texas Instruments followed a few years later with the TI-81 in 1990, which became a fixture of American algebra and precalculus classrooms for the next decade. The core idea both machines introduced — sampling a function at many points and drawing the result as a curve — is exactly what this browser-based tool still does, just without the dedicated hardware."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Functions, curves, and their graphs are core topics in mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Sharjah — Department of Mathematics and Statistics",
+                "note": "Offers a Bachelor of Science in Mathematics within the College of Arts and Sciences; not separately ranked on this global subject table.",
+                "url": "https://www.aus.edu/cas/department-of-mathematics-and-statistics",
+                "online": "No — programs are delivered on AUS's campus in Sharjah, United Arab Emirates."
+              }
+            ]
+          }
         }
       }
     }

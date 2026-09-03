@@ -662,6 +662,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "graphing-calculator",
+    title: "Graphing Calculator",
+    category: "math",
+    description:
+      "Plot the graph of a mathematical function of x over a chosen range, with support for trigonometric, logarithmic, and power expressions.",
+    featured: false,
+    keywords: [
+      "graphing calculator",
+      "function graph",
+      "plot a function",
+      "graph a function online",
+      "math graphing tool",
+      "curve plotter",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
