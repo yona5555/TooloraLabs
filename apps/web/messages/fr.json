@@ -13714,6 +13714,132 @@
           }
         }
       }
+    },
+    "notepad-calculator": {
+      "title": "Calculatrice Bloc-notes",
+      "description": "Écrivez des notes libres mêlées de calculs — chaque ligne contenant un calcul est évaluée en direct, avec des variables transmises d'une ligne à l'autre.",
+      "nav": {
+        "tool": "Bloc-notes",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Comment fonctionne l'évaluation ligne par ligne",
+          "intro": "Toute ligne correspondant au format \"nom = expression\" définit une variable que les lignes suivantes peuvent utiliser par son nom ; toute autre ligne est évaluée comme un calcul indépendant.",
+          "variableHint": "Les lignes qui ne sont que des notes ou des titres n'affichent tout simplement aucun résultat — c'est normal, pas une erreur."
+        }
+      },
+      "form": {
+        "inputTitle": "Notes",
+        "inputLabel": "Texte du bloc-notes",
+        "inputPlaceholder": "Loyer\nrent = 1200\nutilities = 85\ntotal = rent + utilities\npartagé entre 3 colocataires :\ntotal / 3"
+      },
+      "result": {
+        "heading": "Résultats",
+        "noCalculations": "Rien à calculer pour l'instant — saisissez une expression sur n'importe quelle ligne, comme 2 + 2 ou rent = 1200."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les calculatrices ligne par ligne",
+          "paragraph1": "Une calculatrice bloc-notes se situe entre un simple éditeur de texte et un tableur : vous écrivez comme vous noteriez sur papier — un mélange d'étiquettes, de contexte et de chiffres — et toute ligne qui ressemble à un calcul est résolue automatiquement juste à côté, sans passer à une application de calculatrice distincte ni construire des cellules et des formules dans un tableur.",
+          "paragraph2": "Cet outil évalue chaque ligne de haut en bas. Une ligne écrite sous la forme \"nom = expression\" calcule un résultat et le stocke sous ce nom en même temps, de sorte que toute ligne suivante peut y faire référence — ce qui permet de définir un total cumulé, un taux de taxe ou un prix unitaire une seule fois en haut et de le réutiliser dans le reste de la note. Les lignes purement textuelles, les titres ou les lignes vides ne produisent tout simplement aucun résultat, ce qui est normal et non une erreur, puisque tout l'intérêt est de mélanger librement notes et calculs dans le même document."
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques lignes et leur résultat.",
+          "columnCalculation": "Ligne",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "3 + 4 * 2",
+              "result": "11"
+            },
+            {
+              "calculation": "price = 19.99",
+              "result": "19.99"
+            },
+            {
+              "calculation": "price * 3",
+              "result": "59.97"
+            },
+            {
+              "calculation": "tip = 42 * 0.18",
+              "result": "7.56"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Foire aux questions",
+          "items": [
+            {
+              "question": "Pourquoi certaines lignes n'affichent-elles aucun résultat ?",
+              "answer": "Seules les lignes que l'outil peut interpréter comme un calcul ou une affectation de variable obtiennent un résultat. Une ligne de texte ordinaire, un titre ou une ligne vide n'en font tout simplement pas partie — elles sont traitées comme une note, pas comme une erreur, car une calculatrice bloc-notes est conçue pour accueillir librement les deux."
+            },
+            {
+              "question": "Comment les variables se transmettent-elles d'une ligne à l'autre ?",
+              "answer": "Une ligne correspondant au format \"nom = expression\" est évaluée et stockée sous ce nom dans l'ordre, du haut de la note vers le bas. Toute ligne située en dessous peut alors utiliser ce nom dans sa propre expression — définir rent = 1200 une seule fois permet donc à chaque ligne suivante de référencer rent sans retaper le chiffre."
+            },
+            {
+              "question": "Puis-je réutiliser un nom de variable pour autre chose plus bas ?",
+              "answer": "Oui — une ligne \"nom = expression\" ultérieure écrase la valeur précédente pour toute ligne qui la suit. Les lignes situées au-dessus de la réaffectation continuent de refléter la valeur en vigueur au moment de leur évaluation, car l'outil fonctionne strictement de haut en bas."
+            },
+            {
+              "question": "Pourquoi un résultat affiche-t-il parfois plus ou moins de décimales que prévu ?",
+              "answer": "Les résultats sont arrondis à 8 décimales et les zéros finaux sont supprimés, de sorte que 10 / 4 s'affiche 2.5 plutôt que 2.50000000 — cela garde les nombres entiers et les fractions simples lisibles sans masquer la précision utile sur les nombres qui en ont besoin."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "L'appli qui a placé une colonne de résultats à côté de vos notes",
+            "paragraph": "Acqualia Software a lancé la première version de Soulver en 2005, introduisant ce qui est aujourd'hui considéré comme l'interface moderne de la calculatrice bloc-notes : un éditeur de texte brut doté d'une \"colonne de résultats\" en direct courant le long du bord droit, affichant le résultat de toute ligne ressemblant à un calcul. Une mise à jour l'année suivante, Soulver 1.2, est allée plus loin en permettant à une ligne de mélanger des mots ordinaires avec des chiffres — \"rent 1200 + utilities 85\" — tout en s'évaluant correctement, plutôt que d'exiger qu'une ligne soit de l'arithmétique pure. Cette combinaison — texte libre, résultats en contexte, et variables transmises tout au long de la page — est exactement le modèle que suit cet outil fonctionnant dans le navigateur."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Analyser du texte libre pour en extraire des expressions évaluables et suivre des variables ligne après ligne est un problème enraciné dans les mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le QS World University Rankings by Subject 2025, ainsi qu'un programme régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé 1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "Classée 2e mondiale en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un diplôme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "Classée 3e mondiale en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se préparent en présentiel à la Faculty of Mathematics."
+              },
+              {
+                "name": "Université Harvard",
+                "note": "Classée 4e mondiale en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université Stanford",
+                "note": "Classée 5e mondiale en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "The American University in Cairo — Department of Mathematics and Actuarial Science",
+                "note": "Propose une licence (Bachelor) en mathématiques ; non classée séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aucegypt.edu/academics/undergraduate-programs/mathematics",
+                "online": "Non — le programme est dispensé sur le campus de l'AUC au Nouveau Caire, en Égypte."
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "toolPage": {

@@ -678,6 +678,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "notepad-calculator",
+    title: "Notepad Calculator",
+    category: "math",
+    description:
+      "Type free-form notes mixed with math — every line with a calculation is evaluated live, with variables carried from line to line.",
+    featured: false,
+    keywords: [
+      "notepad calculator",
+      "soulver alternative",
+      "text calculator",
+      "line by line calculator",
+      "free form calculator",
+      "notes with math",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

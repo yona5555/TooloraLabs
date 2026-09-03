@@ -13710,6 +13710,132 @@
           }
         }
       }
+    },
+    "notepad-calculator": {
+      "title": "Notepad Calculator",
+      "description": "Type free-form notes mixed with math — every line with a calculation is evaluated live, with variables carried from line to line.",
+      "nav": {
+        "tool": "Notepad",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "How Line-by-Line Evaluation Works",
+          "intro": "Any line matching \"name = expression\" defines a variable that later lines can use by name; every other line is evaluated as a calculation on its own.",
+          "variableHint": "Lines that are just notes or headings simply show no result — that's expected, not an error."
+        }
+      },
+      "form": {
+        "inputTitle": "Notes",
+        "inputLabel": "Notepad text",
+        "inputPlaceholder": "Rent\nrent = 1200\nutilities = 85\ntotal = rent + utilities\nsplit between 3 roommates:\ntotal / 3"
+      },
+      "result": {
+        "heading": "Results",
+        "noCalculations": "Nothing to calculate yet — type an expression on any line, like 2 + 2 or rent = 1200."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Line-by-Line Calculators",
+          "paragraph1": "A notepad calculator sits between a plain text editor and a spreadsheet: you write the way you'd jot notes on paper — a mix of labels, context, and numbers — and any line that looks like a calculation gets solved automatically next to it, without switching to a separate calculator app or building out spreadsheet cells and formulas.",
+          "paragraph2": "This tool evaluates every line from top to bottom. A line written as \"name = expression\" both computes a result and stores it under that name, so any later line can reference it — letting a running total, a tax rate, or a unit price be defined once near the top and reused throughout the rest of the note. Lines that are pure prose, headings, or blank simply produce no result, which is expected rather than an error, since the whole point is mixing notes and math freely in the same document."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few lines and what they evaluate to.",
+          "columnCalculation": "Line",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "3 + 4 * 2",
+              "result": "11"
+            },
+            {
+              "calculation": "price = 19.99",
+              "result": "19.99"
+            },
+            {
+              "calculation": "price * 3",
+              "result": "59.97"
+            },
+            {
+              "calculation": "tip = 42 * 0.18",
+              "result": "7.56"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why do some lines show no result at all?",
+              "answer": "Only lines the tool can parse as a calculation or a variable assignment get a result. A line of plain prose, a heading, or a blank line simply isn't one of those — it's treated as a note, not an error, since a notepad calculator is meant to hold both freely."
+            },
+            {
+              "question": "How do variables carry from one line to the next?",
+              "answer": "A line matching \"name = expression\" is evaluated and stored under that name in order, from the top of the note down. Any line below it can then use that name in its own expression — so defining rent = 1200 once lets every later line reference rent without retyping the number."
+            },
+            {
+              "question": "Can I reuse a variable name for something else further down?",
+              "answer": "Yes — a later \"name = expression\" line overwrites the earlier value for every line that follows it. Lines above the reassignment still reflect whatever value was in effect when they were evaluated, since the tool works strictly top to bottom."
+            },
+            {
+              "question": "Why does a result sometimes show more or fewer decimal places than I expected?",
+              "answer": "Results are rounded to 8 decimal places and trailing zeros are dropped, so 10 / 4 shows as 2.5 rather than 2.50000000 — this keeps whole numbers and simple fractions readable without hiding meaningful precision on numbers that need it."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The App That Put an Answer Column Next to Your Notes",
+            "paragraph": "Acqualia Software released the first version of Soulver in 2005, introducing what's now considered the modern notepad calculator interface: a plain-text editor with a live \"answer column\" running down the right-hand side, showing the result of any line that looked like a calculation. A follow-up update the next year, Soulver 1.2, went further by letting a line mix ordinary words with numbers — \"rent 1200 + utilities 85\" — and still evaluate correctly, rather than requiring a line to be pure arithmetic. That combination — free-form text, inline results, and variables that carry down the page — is the same model this browser-based tool follows."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Parsing free-form text into evaluable expressions and tracking variables across lines is a problem rooted in mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional program:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "The American University in Cairo — Department of Mathematics and Actuarial Science",
+                "note": "Offers a Bachelor of Mathematics; not separately ranked on this global subject table.",
+                "url": "https://www.aucegypt.edu/academics/undergraduate-programs/mathematics",
+                "online": "No — the program is delivered on AUC's campus in New Cairo, Egypt."
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "toolPage": {
