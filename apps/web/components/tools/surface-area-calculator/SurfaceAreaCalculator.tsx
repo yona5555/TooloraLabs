@@ -54,7 +54,7 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<SurfaceAreaInputPanel draft={draft} onChange={setDraft} />}
-          result={<SurfaceAreaResult result={result} digitStyle={digitStyle} />}
+          result={<SurfaceAreaResult result={result} digitStyle={digitStyle} draft={draft} />}
           sidebar={<RelatedToolsSidebar currentSlug="surface-area-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

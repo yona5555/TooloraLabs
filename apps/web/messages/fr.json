@@ -9170,138 +9170,220 @@
       }
     },
     "surface-area-calculator": {
-      "title": "Surface Area Calculator",
-      "description": "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "title": "Calculateur de surface",
+      "description": "Calculez la surface totale des cubes, pavés droits, sphères, cylindres, cônes et pyramides à base carrée.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Calculateur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses"
       },
       "aboveFold": {
+        "sideLabel": "Longueur du côté",
+        "heightLabel": "Hauteur",
         "quickReference": {
-          "title": "Surface Area Formulas",
-          "intro": "For the cone and square pyramid, this calculator derives the slant height from the perpendicular height you enter."
+          "title": "Formules de surface",
+          "intro": "Pour le cône et la pyramide à base carrée, ce calculateur déduit l'apothème (la hauteur oblique) à partir de la hauteur perpendiculaire que vous saisissez.",
+          "slantHeight": "hauteur oblique"
+        },
+        "conceptDiagram": {
+          "title": "Pourquoi c'est une somme de faces",
+          "intro": "La surface totale est l'aire de chaque pièce plate obtenue en dépliant un solide — le patron d'un cube donne six carrés plats, et la face courbe d'un cylindre se déroule en un rectangle plat.",
+          "ariaLabel": "Diagramme du patron d'un cube déplié en six carrés, et d'un cylindre déroulé en deux cercles plus un rectangle, chacun avec sa formule de surface écrite en dessous",
+          "cubeCaption": "Six faces carrées identiques",
+          "cylinderCaption": "Deux disques plus un rectangle déroulé"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "Forme et dimensions",
+        "shapeLabel": "Forme",
         "shape": {
           "cube": "Cube",
-          "rectangular-prism": "Rectangular Prism",
-          "sphere": "Sphere",
-          "cylinder": "Cylinder",
-          "cone": "Cone",
-          "square-pyramid": "Square Pyramid"
+          "rectangular-prism": "Pavé droit",
+          "sphere": "Sphère",
+          "cylinder": "Cylindre",
+          "cone": "Cône",
+          "square-pyramid": "Pyramide à base carrée"
         },
-        "sideLabel": "Side Length",
-        "lengthLabel": "Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "sideLabel": "Longueur du côté",
+        "lengthLabel": "Longueur",
+        "widthLabel": "Largeur",
+        "heightLabel": "Hauteur",
+        "radiusLabel": "Rayon",
+        "baseSideLabel": "Côté de la base",
+        "hint": {
+          "cubeSide": "Les douze arêtes d'un cube sont égales, une seule mesure suffit donc.",
+          "prismLength": "L'une des trois arêtes indépendantes — aucune ne peut être supposée égale aux autres.",
+          "prismWidth": "L'arête perpendiculaire à la longueur, le long de la base.",
+          "prismHeight": "L'arête perpendiculaire à la base, à la verticale.",
+          "sphereRadius": "La distance du centre à n'importe quel point de la surface de la sphère.",
+          "cylinderRadius": "Le rayon des cercles supérieur et inférieur.",
+          "cylinderHeight": "La distance perpendiculaire entre les cercles supérieur et inférieur.",
+          "coneHeight": "La distance verticale de la base au sommet — pas la distance oblique le long de la surface du cône.",
+          "pyramidBaseSide": "La longueur d'un côté de la base carrée.",
+          "pyramidHeight": "La distance verticale entre le centre de la base et le sommet."
+        }
       },
       "result": {
-        "heading": "Surface Area",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers.",
-        "squareUnits": "square units"
+        "heading": "Surface totale",
+        "missingDimension": "Renseignez toutes les dimensions nécessaires à cette forme.",
+        "invalidDimension": "Toutes les dimensions doivent être des nombres positifs.",
+        "squareUnits": "unités carrées",
+        "shapePreviewCaption": "Un croquis proportionnel du solide saisi, redessiné en direct à partir de vos dimensions."
       },
       "education": {
         "intro": {
-          "title": "Understanding Surface Area",
-          "paragraph1": "Surface area is the total area of every face of a 3D solid added together — the amount of material it would take to wrap the solid completely, in square units. Unlike volume, which measures the space a solid encloses, surface area only cares about its outer boundary.",
-          "paragraph2": "For a cone or square pyramid, this calculator asks for the perpendicular height (the distance straight up from the base to the apex) rather than the slant height along the surface, since the perpendicular height is what's usually easy to measure directly. It then derives the slant height internally using the Pythagorean theorem before applying the surface-area formula."
+          "title": "Comprendre la surface",
+          "paragraph1": "La surface totale est l'aire de toutes les faces d'un solide 3D additionnées — la quantité de matière nécessaire pour l'envelopper entièrement, exprimée en unités carrées. Contrairement au volume, qui mesure l'espace enfermé par un solide, la surface ne s'intéresse qu'à sa frontière extérieure.",
+          "paragraph2": "Pour un cône ou une pyramide à base carrée, ce calculateur demande la hauteur perpendiculaire (la distance verticale de la base au sommet) plutôt que la hauteur oblique le long de la surface, car la hauteur perpendiculaire est généralement plus facile à mesurer directement. Il en déduit ensuite la hauteur oblique grâce au théorème de Pythagore avant d'appliquer la formule de surface."
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "La formule de chaque solide se ramène au même petit ensemble d'arêtes et de rayons mesurables — lesquels s'appliquent dépend de la forme choisie.",
+          "items": [
+            {
+              "name": "Longueur du côté (s)",
+              "description": "L'unique mesure qui définit un cube — comme toutes les arêtes sont égales, ses six faces sont des carrés identiques de côté s."
+            },
+            {
+              "name": "Longueur, largeur, hauteur (l, w, h)",
+              "description": "Les trois arêtes indépendantes d'un pavé droit, qui s'associent deux à deux pour former ses trois paires de faces rectangulaires identiques."
+            },
+            {
+              "name": "Rayon (r)",
+              "description": "La mesure qui définit une sphère, ainsi que la base circulaire commune au cylindre et au cône."
+            },
+            {
+              "name": "Hauteur perpendiculaire (h)",
+              "description": "La distance verticale d'une base à un sommet ou à une face opposée — pour un cône ou une pyramide, ce calculateur la convertit en la hauteur oblique dont la formule de surface a réellement besoin."
+            },
+            {
+              "name": "Hauteur oblique",
+              "description": "La distance le long de la surface inclinée d'un cône ou d'une pyramide, du bord de la base jusqu'au sommet — déduite automatiquement ici par le théorème de Pythagore, plutôt que demandée directement."
+            }
+          ]
+        },
+        "applications": {
+          "title": "La surface en pratique",
+          "intro": "La surface intervient partout où une quantité réelle de matière doit couvrir, enduire ou envelopper un objet en trois dimensions.",
+          "items": [
+            {
+              "title": "Emballage et fabrication",
+              "description": "Carton, tôle et emballages plastiques sont découpés dans des matériaux plats, si bien que la surface d'un emballage détermine directement la quantité de matière première — et donc le coût — que consomme chaque unité."
+            },
+            {
+              "title": "Peinture et revêtement",
+              "description": "Peintures, apprêts et revêtements protecteurs s'achètent et s'appliquent au mètre carré, si bien que peintres et applicateurs industriels calculent d'abord la surface totale pour estimer la quantité de produit nécessaire."
+            },
+            {
+              "title": "Transfert thermique et ingénierie",
+              "description": "La surface d'un radiateur ou d'un dissipateur thermique détermine la vitesse à laquelle il transfère la chaleur à l'air ambiant — les ingénieurs maximisent délibérément la surface (avec des ailettes ou des nervures) quand une conception doit évacuer la chaleur efficacement."
+            },
+            {
+              "title": "Biologie",
+              "description": "Le rapport surface/volume d'une cellule ou d'un animal limite l'efficacité avec laquelle il échange nutriments, gaz et chaleur avec son environnement — une des raisons pour lesquelles les organismes très petits et très grands ont des formes corporelles si différentes."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few solids and the surface area this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Surface Area",
+          "title": "Exemples résolus",
+          "intro": "Quelques solides et la surface que ce calculateur renvoie pour chacun.",
+          "columnCalculation": "Forme et dimensions",
+          "columnResult": "Surface",
           "rows": [
             {
-              "calculation": "Cube, side = 3",
-              "result": "54 square units"
+              "calculation": "Cube, côté = 3",
+              "result": "54 unités carrées"
             },
             {
-              "calculation": "Sphere, radius = 3",
-              "result": "≈ 113.10 square units"
+              "calculation": "Sphère, rayon = 3",
+              "result": "≈ 113,10 unités carrées"
             },
             {
-              "calculation": "Cylinder, radius = 2, height = 5",
-              "result": "≈ 87.96 square units"
+              "calculation": "Cylindre, rayon = 2, hauteur = 5",
+              "result": "≈ 87,96 unités carrées"
             },
             {
-              "calculation": "Cone, radius = 3, height = 4",
-              "result": "≈ 75.40 square units"
+              "calculation": "Cône, rayon = 3, hauteur = 4",
+              "result": "≈ 75,40 unités carrées"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "Why does the cone ask for height instead of slant height?",
-              "answer": "A perpendicular height is what most people can measure directly (straight up from the base), while a slant height runs along the cone's slanted surface and is harder to measure by hand. This calculator derives the slant height for you from the radius and perpendicular height using the Pythagorean theorem, so you only need to supply the measurement that's actually easy to take."
+              "question": "Pourquoi le cône demande-t-il la hauteur plutôt que la hauteur oblique ?",
+              "answer": "Une hauteur perpendiculaire est ce que la plupart des gens peuvent mesurer directement (verticalement depuis la base), tandis qu'une hauteur oblique suit la surface inclinée du cône et se mesure difficilement à la main. Ce calculateur déduit pour vous la hauteur oblique à partir du rayon et de la hauteur perpendiculaire grâce au théorème de Pythagore, afin que vous n'ayez à fournir que la mesure réellement facile à prendre."
             },
             {
-              "question": "What's the difference between surface area and volume?",
-              "answer": "Surface area totals the area of a solid's outer faces — how much material would wrap it. Volume measures the space enclosed inside it — how much it would hold. Two solids can have the same volume with very different surface areas (a sphere has the least surface area of any shape for a given volume), which is why both measurements matter for different practical questions."
+              "question": "Quelle est la différence entre surface et volume ?",
+              "answer": "La surface totalise l'aire des faces extérieures d'un solide — la quantité de matière nécessaire pour l'envelopper. Le volume mesure l'espace enfermé à l'intérieur — ce qu'il pourrait contenir. Deux solides peuvent avoir le même volume avec des surfaces très différentes (une sphère a la plus petite surface possible pour un volume donné), ce qui explique pourquoi les deux mesures comptent selon la question pratique posée."
             },
             {
-              "question": "Why does a rectangular prism need three separate dimensions?",
-              "answer": "A rectangular prism has three pairs of matching rectangular faces (length×width, length×height, width×height), and unlike a cube, none of its three dimensions can be assumed equal to the others — all three are independently needed to compute the total surface area."
+              "question": "Pourquoi un pavé droit nécessite-t-il trois dimensions distinctes ?",
+              "answer": "Un pavé droit possède trois paires de faces rectangulaires identiques (longueur×largeur, longueur×hauteur, largeur×hauteur), et contrairement à un cube, aucune de ses trois dimensions ne peut être supposée égale aux autres — les trois sont nécessaires indépendamment pour calculer la surface totale."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "Archimedes and the Sphere Inside a Cylinder",
-            "paragraph": "Archimedes of Syracuse (c. 287–212 BCE) proved in his treatise On the Sphere and Cylinder that a sphere's surface area equals exactly two-thirds the total surface area of the smallest cylinder that encloses it — a result he considered his finest achievement and reportedly asked to have engraved on his tombstone, alongside a diagram of the sphere and cylinder. That same treatise worked out the surface-area formulas for spheres, cylinders, and cones that this calculator still uses today, more than two thousand years later."
+            "title": "Archimède et la sphère inscrite dans un cylindre",
+            "paragraph": "Archimède de Syracuse (v. 287–212 av. J.-C.) a démontré dans son traité De la sphère et du cylindre que la surface d'une sphère équivaut exactement aux deux tiers de la surface totale du plus petit cylindre qui la contient — un résultat qu'il considérait comme son plus bel accomplissement et qu'il aurait demandé de faire graver sur sa tombe, accompagné d'un diagramme de la sphère et du cylindre. Ce même traité établissait déjà les formules de surface pour les sphères, cylindres et cônes que ce calculateur utilise encore aujourd'hui, plus de deux mille ans plus tard."
+          },
+          "modernDevelopments": {
+            "title": "Des patrons découpés à la main aux surfaces imprimées en 3D",
+            "paragraph": "Pendant des siècles, calculer la surface d'un objet complexe signifiait le déplier physiquement en un patron plat ou l'approximer par les solides simples déjà résolus par Archimède et Euclide. Les logiciels modernes de CAO et de modélisation 3D représentent au contraire toute surface — aussi irrégulière soit-elle — comme un maillage de nombreux petits triangles plats, et additionnent l'aire de chaque triangle pour obtenir le total, une technique également utilisée pour estimer la surface d'une pièce fabriquée numérisée en 3D ou d'un modèle numérique de terrain d'une chaîne de montagnes."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Surface area and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Parcours académique",
+            "intro": "La surface et la géométrie dans l'espace relèvent des mathématiques. Voici le top 5 mondial en mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n°1 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°2 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "Non — le DPhil est un diplôme de recherche sur le campus."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°3 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°4 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n°5 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "American University of Beirut — Département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "La démonstration originale d'Archimède selon laquelle la surface d'une sphère équivaut aux deux tiers de celle du cylindre qui la circonscrit — la même relation qu'incarnent les formules de la sphère et du cylindre dans ce calculateur.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Lire les Œuvres d'Archimède"
         }
       }
     },

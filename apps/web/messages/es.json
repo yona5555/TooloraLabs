@@ -9170,138 +9170,220 @@
       }
     },
     "surface-area-calculator": {
-      "title": "Surface Area Calculator",
-      "description": "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "title": "Calculadora de área de superficie",
+      "description": "Calcula el área de superficie total de cubos, prismas rectangulares, esferas, cilindros, conos y pirámides cuadradas.",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
       },
       "aboveFold": {
+        "sideLabel": "Longitud del lado",
+        "heightLabel": "Altura",
         "quickReference": {
-          "title": "Surface Area Formulas",
-          "intro": "For the cone and square pyramid, this calculator derives the slant height from the perpendicular height you enter."
+          "title": "Fórmulas de área de superficie",
+          "intro": "Para el cono y la pirámide cuadrada, esta calculadora deriva la altura inclinada a partir de la altura perpendicular que introduces.",
+          "slantHeight": "altura inclinada"
+        },
+        "conceptDiagram": {
+          "title": "Por qué es una suma de caras",
+          "intro": "El área de superficie es la suma del área de cada pieza plana que resultaría al desplegar un sólido: el desarrollo de un cubo son seis cuadrados planos, y la cara curva de un cilindro se desenrolla en un rectángulo plano.",
+          "ariaLabel": "Diagrama del desarrollo de un cubo en seis cuadrados, y de un cilindro desenrollado en dos círculos más un rectángulo, cada uno con su fórmula de área de superficie escrita debajo",
+          "cubeCaption": "Seis caras cuadradas idénticas",
+          "cylinderCaption": "Dos tapas circulares más un rectángulo desenrollado"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "Forma y dimensiones",
+        "shapeLabel": "Forma",
         "shape": {
-          "cube": "Cube",
-          "rectangular-prism": "Rectangular Prism",
-          "sphere": "Sphere",
-          "cylinder": "Cylinder",
-          "cone": "Cone",
-          "square-pyramid": "Square Pyramid"
+          "cube": "Cubo",
+          "rectangular-prism": "Prisma rectangular",
+          "sphere": "Esfera",
+          "cylinder": "Cilindro",
+          "cone": "Cono",
+          "square-pyramid": "Pirámide cuadrada"
         },
-        "sideLabel": "Side Length",
-        "lengthLabel": "Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "sideLabel": "Longitud del lado",
+        "lengthLabel": "Longitud",
+        "widthLabel": "Ancho",
+        "heightLabel": "Altura",
+        "radiusLabel": "Radio",
+        "baseSideLabel": "Longitud del lado de la base",
+        "hint": {
+          "cubeSide": "Las doce aristas de un cubo son iguales, así que basta con una sola medida.",
+          "prismLength": "Una de las tres aristas independientes: ninguna puede asumirse igual a las otras.",
+          "prismWidth": "La arista perpendicular a la longitud, a lo largo de la base.",
+          "prismHeight": "La arista perpendicular a la base, en sentido vertical.",
+          "sphereRadius": "La distancia desde el centro hasta cualquier punto de la superficie de la esfera.",
+          "cylinderRadius": "El radio de los círculos superior e inferior.",
+          "cylinderHeight": "La distancia perpendicular entre el círculo superior y el inferior.",
+          "coneHeight": "La distancia vertical desde la base hasta el vértice, no la distancia inclinada a lo largo de la superficie del cono.",
+          "pyramidBaseSide": "La longitud de un lado de la base cuadrada.",
+          "pyramidHeight": "La distancia vertical desde el centro de la base hasta el vértice."
+        }
       },
       "result": {
-        "heading": "Surface Area",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers.",
-        "squareUnits": "square units"
+        "heading": "Área de superficie",
+        "missingDimension": "Introduce todas las dimensiones que necesita esta forma.",
+        "invalidDimension": "Todas las dimensiones deben ser números positivos.",
+        "squareUnits": "unidades cuadradas",
+        "shapePreviewCaption": "Un boceto proporcional del sólido introducido, redibujado en directo a partir de tus dimensiones."
       },
       "education": {
         "intro": {
-          "title": "Understanding Surface Area",
-          "paragraph1": "Surface area is the total area of every face of a 3D solid added together — the amount of material it would take to wrap the solid completely, in square units. Unlike volume, which measures the space a solid encloses, surface area only cares about its outer boundary.",
-          "paragraph2": "For a cone or square pyramid, this calculator asks for the perpendicular height (the distance straight up from the base to the apex) rather than the slant height along the surface, since the perpendicular height is what's usually easy to measure directly. It then derives the slant height internally using the Pythagorean theorem before applying the surface-area formula."
+          "title": "Entendiendo el área de superficie",
+          "paragraph1": "El área de superficie es la suma del área de todas las caras de un sólido tridimensional: la cantidad de material que haría falta para envolverlo por completo, en unidades cuadradas. A diferencia del volumen, que mide el espacio que encierra un sólido, el área de superficie solo tiene en cuenta su límite exterior.",
+          "paragraph2": "Para un cono o una pirámide cuadrada, esta calculadora pide la altura perpendicular (la distancia vertical desde la base hasta el vértice) en lugar de la altura inclinada a lo largo de la superficie, ya que la altura perpendicular suele ser fácil de medir directamente. Después deriva internamente la altura inclinada mediante el teorema de Pitágoras antes de aplicar la fórmula del área de superficie."
+        },
+        "variables": {
+          "title": "Variables implicadas",
+          "intro": "La fórmula de cada sólido se reduce al mismo pequeño conjunto de aristas y radios medibles; cuáles se aplican depende del sólido elegido.",
+          "items": [
+            {
+              "name": "Longitud del lado (s)",
+              "description": "La única medida que define un cubo: como todas sus aristas son iguales, sus seis caras son cuadrados idénticos de lado s."
+            },
+            {
+              "name": "Longitud, ancho, altura (l, w, h)",
+              "description": "Las tres aristas independientes de un prisma rectangular, que se combinan para formar sus tres pares de caras rectangulares idénticas."
+            },
+            {
+              "name": "Radio (r)",
+              "description": "La medida que define una esfera, y también la base circular que comparten un cilindro y un cono."
+            },
+            {
+              "name": "Altura perpendicular (h)",
+              "description": "La distancia vertical desde una base hasta un vértice o la cara opuesta; para un cono o una pirámide, esta calculadora la convierte en la altura inclinada que realmente necesita la fórmula del área de superficie."
+            },
+            {
+              "name": "Altura inclinada",
+              "description": "La distancia a lo largo de la superficie exterior inclinada de un cono o una pirámide, desde el borde de la base hasta el vértice; aquí se deriva automáticamente mediante el teorema de Pitágoras, en lugar de pedirse directamente."
+            }
+          ]
+        },
+        "applications": {
+          "title": "El área de superficie en la práctica",
+          "intro": "El área de superficie aparece en cualquier situación donde una cantidad real de material tenga que cubrir, recubrir o envolver un objeto tridimensional.",
+          "items": [
+            {
+              "title": "Embalaje y fabricación",
+              "description": "El cartón, la chapa metálica y el plástico de embalaje se cortan de material plano, por lo que el área de superficie de un envase determina directamente cuánta materia prima —y cuánto coste— consume cada unidad."
+            },
+            {
+              "title": "Pintura y recubrimientos",
+              "description": "La pintura, el imprimador y los recubrimientos protectores se compran y se aplican por área, así que pintores y operaciones industriales de recubrimiento calculan primero el área total de una superficie para estimar cuánto producto necesita un trabajo."
+            },
+            {
+              "title": "Transferencia de calor e ingeniería",
+              "description": "El área de superficie de un radiador o un disipador determina la rapidez con la que puede transferir calor al aire circundante; los ingenieros maximizan deliberadamente el área de superficie (con aletas o resaltes) cuando un diseño necesita disipar calor con eficacia."
+            },
+            {
+              "title": "Biología",
+              "description": "La relación entre el área de superficie y el volumen de una célula o un animal limita la eficacia con la que puede intercambiar nutrientes, gases y calor con su entorno; una razón clave por la que los organismos muy pequeños y los muy grandes tienen formas corporales tan distintas."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few solids and the surface area this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Surface Area",
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos sólidos y el área de superficie que devuelve esta calculadora para cada uno.",
+          "columnCalculation": "Forma y dimensiones",
+          "columnResult": "Área de superficie",
           "rows": [
             {
-              "calculation": "Cube, side = 3",
-              "result": "54 square units"
+              "calculation": "Cubo, lado = 3",
+              "result": "54 unidades cuadradas"
             },
             {
-              "calculation": "Sphere, radius = 3",
-              "result": "≈ 113.10 square units"
+              "calculation": "Esfera, radio = 3",
+              "result": "≈ 113,10 unidades cuadradas"
             },
             {
-              "calculation": "Cylinder, radius = 2, height = 5",
-              "result": "≈ 87.96 square units"
+              "calculation": "Cilindro, radio = 2, altura = 5",
+              "result": "≈ 87,96 unidades cuadradas"
             },
             {
-              "calculation": "Cone, radius = 3, height = 4",
-              "result": "≈ 75.40 square units"
+              "calculation": "Cono, radio = 3, altura = 4",
+              "result": "≈ 75,40 unidades cuadradas"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "Why does the cone ask for height instead of slant height?",
-              "answer": "A perpendicular height is what most people can measure directly (straight up from the base), while a slant height runs along the cone's slanted surface and is harder to measure by hand. This calculator derives the slant height for you from the radius and perpendicular height using the Pythagorean theorem, so you only need to supply the measurement that's actually easy to take."
+              "question": "¿Por qué el cono pide la altura en lugar de la altura inclinada?",
+              "answer": "La altura perpendicular es lo que la mayoría de personas puede medir directamente (en vertical desde la base), mientras que la altura inclinada recorre la superficie inclinada del cono y es más difícil de medir a mano. Esta calculadora deriva la altura inclinada por ti a partir del radio y la altura perpendicular mediante el teorema de Pitágoras, así que solo necesitas aportar la medida que realmente es fácil de tomar."
             },
             {
-              "question": "What's the difference between surface area and volume?",
-              "answer": "Surface area totals the area of a solid's outer faces — how much material would wrap it. Volume measures the space enclosed inside it — how much it would hold. Two solids can have the same volume with very different surface areas (a sphere has the least surface area of any shape for a given volume), which is why both measurements matter for different practical questions."
+              "question": "¿Cuál es la diferencia entre área de superficie y volumen?",
+              "answer": "El área de superficie suma el área de las caras exteriores de un sólido: cuánto material haría falta para envolverlo. El volumen mide el espacio que encierra en su interior: cuánto podría contener. Dos sólidos pueden tener el mismo volumen con áreas de superficie muy distintas (la esfera tiene el menor área de superficie posible para un volumen dado), por lo que ambas medidas importan para preguntas prácticas diferentes."
             },
             {
-              "question": "Why does a rectangular prism need three separate dimensions?",
-              "answer": "A rectangular prism has three pairs of matching rectangular faces (length×width, length×height, width×height), and unlike a cube, none of its three dimensions can be assumed equal to the others — all three are independently needed to compute the total surface area."
+              "question": "¿Por qué un prisma rectangular necesita tres dimensiones distintas?",
+              "answer": "Un prisma rectangular tiene tres pares de caras rectangulares idénticas (longitud×ancho, longitud×altura, ancho×altura), y a diferencia de un cubo, ninguna de sus tres dimensiones puede asumirse igual a las demás: las tres son necesarias de forma independiente para calcular el área de superficie total."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Detrás de esta herramienta",
           "history": {
-            "title": "Archimedes and the Sphere Inside a Cylinder",
-            "paragraph": "Archimedes of Syracuse (c. 287–212 BCE) proved in his treatise On the Sphere and Cylinder that a sphere's surface area equals exactly two-thirds the total surface area of the smallest cylinder that encloses it — a result he considered his finest achievement and reportedly asked to have engraved on his tombstone, alongside a diagram of the sphere and cylinder. That same treatise worked out the surface-area formulas for spheres, cylinders, and cones that this calculator still uses today, more than two thousand years later."
+            "title": "Arquímedes y la esfera dentro del cilindro",
+            "paragraph": "Arquímedes de Siracusa (c. 287–212 a. C.) demostró en su tratado Sobre la esfera y el cilindro que el área de superficie de una esfera equivale exactamente a dos tercios del área de superficie total del cilindro más pequeño que la circunscribe: un resultado que consideraba su mayor logro y que, según se cuenta, pidió que se grabara en su lápida, junto a un diagrama de la esfera y el cilindro. Ese mismo tratado desarrolló las fórmulas de área de superficie para esferas, cilindros y conos que esta calculadora sigue usando hoy, más de dos mil años después."
+          },
+          "modernDevelopments": {
+            "title": "De los desarrollos recortados a mano a las superficies impresas en 3D",
+            "paragraph": "Durante siglos, calcular el área de superficie de un objeto complejo significaba desplegarlo físicamente en un desarrollo plano o aproximarlo con los sólidos simples que Arquímedes y Euclides ya habían resuelto. El software moderno de diseño asistido por ordenador (CAD) y de modelado 3D representa en cambio cualquier superficie —por irregular que sea— como una malla de muchos triángulos planos pequeños, y suma el área de cada triángulo para obtener el total; una técnica que también se usa para estimar el área de superficie de todo tipo de objetos, desde una pieza fabricada escaneada en 3D hasta un modelo digital del terreno de una cordillera."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Surface area and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Trayectoria académica",
+            "intro": "El área de superficie y la geometría de sólidos pertenecen al ámbito de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de un departamento regional:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "No — el DPhil es un programa de investigación presencial."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "No — los títulos de investigación se cursan de forma presencial en la Facultad de Matemáticas."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "No — el doctorado es un programa de investigación presencial."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "No — el programa es un doctorado de investigación presencial."
               },
               {
                 "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "note": "Fundado en 1866; no aparece por separado en esta clasificación global por materia.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "No — los programas del departamento se imparten en el campus de la AUB en Beirut, Líbano."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "La demostración original de Arquímedes de que el área de superficie de una esfera equivale a dos tercios de la del cilindro que la circunscribe: la misma relación que encarnan las fórmulas de esta calculadora para la esfera y el cilindro.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Leer Las obras de Arquímedes"
         }
       }
     },

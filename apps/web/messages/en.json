@@ -9174,9 +9174,19 @@
         "behindTheTool": "Behind the Tool"
       },
       "aboveFold": {
+        "sideLabel": "Side Length",
+        "heightLabel": "Height",
         "quickReference": {
           "title": "Surface Area Formulas",
-          "intro": "For the cone and square pyramid, this calculator derives the slant height from the perpendicular height you enter."
+          "intro": "For the cone and square pyramid, this calculator derives the slant height from the perpendicular height you enter.",
+          "slantHeight": "slant height"
+        },
+        "conceptDiagram": {
+          "title": "Why It's a Sum of Faces",
+          "intro": "Surface area is the total area of every flat piece that would result from unfolding a solid — a cube's net is six flat squares, and a cylinder's curved side unrolls into a flat rectangle.",
+          "ariaLabel": "Diagram of a cube's net unfolded into six squares, and a cylinder unrolled into two circles plus a rectangle, each with its surface-area formula written beneath it",
+          "cubeCaption": "Six identical square faces",
+          "cylinderCaption": "Two circular caps plus one unrolled rectangle"
         }
       },
       "form": {
@@ -9195,19 +9205,80 @@
         "widthLabel": "Width",
         "heightLabel": "Height",
         "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "baseSideLabel": "Base Side Length",
+        "hint": {
+          "cubeSide": "All twelve edges of a cube are equal, so one measurement is enough.",
+          "prismLength": "One of the three independent edge lengths — none can be assumed equal to the others.",
+          "prismWidth": "The edge perpendicular to the length, along the base.",
+          "prismHeight": "The edge perpendicular to the base, running vertically.",
+          "sphereRadius": "The distance from the center to any point on the sphere's surface.",
+          "cylinderRadius": "The radius of the circular top and bottom.",
+          "cylinderHeight": "The perpendicular distance between the top and bottom circles.",
+          "coneHeight": "The straight-up distance from the base to the apex — not the slanted distance along the cone's surface.",
+          "pyramidBaseSide": "The length of one side of the square base.",
+          "pyramidHeight": "The straight-up distance from the center of the base to the apex."
+        }
       },
       "result": {
         "heading": "Surface Area",
         "missingDimension": "Enter all the dimensions this shape needs.",
         "invalidDimension": "All dimensions must be positive numbers.",
-        "squareUnits": "square units"
+        "squareUnits": "square units",
+        "shapePreviewCaption": "A proportional sketch of the solid you entered, redrawn live from your dimensions."
       },
       "education": {
         "intro": {
           "title": "Understanding Surface Area",
           "paragraph1": "Surface area is the total area of every face of a 3D solid added together — the amount of material it would take to wrap the solid completely, in square units. Unlike volume, which measures the space a solid encloses, surface area only cares about its outer boundary.",
           "paragraph2": "For a cone or square pyramid, this calculator asks for the perpendicular height (the distance straight up from the base to the apex) rather than the slant height along the surface, since the perpendicular height is what's usually easy to measure directly. It then derives the slant height internally using the Pythagorean theorem before applying the surface-area formula."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Every solid's formula reduces to the same small set of measurable edges and radii — which ones apply depends on which solid you pick.",
+          "items": [
+            {
+              "name": "Side Length (s)",
+              "description": "A cube's single defining edge — since all edges are equal, its six faces are all identical squares of side s."
+            },
+            {
+              "name": "Length, Width, Height (l, w, h)",
+              "description": "The three independent edges of a rectangular prism, pairing up to form its three pairs of matching rectangular faces."
+            },
+            {
+              "name": "Radius (r)",
+              "description": "The defining measurement of a sphere, and of the circular base shared by a cylinder and a cone."
+            },
+            {
+              "name": "Perpendicular Height (h)",
+              "description": "The straight-up distance from a base to an apex or opposite face — for a cone or pyramid, this calculator converts it into the slant height the surface-area formula actually needs."
+            },
+            {
+              "name": "Slant Height",
+              "description": "The distance along a cone's or pyramid's slanted outer surface from the base edge to the apex — derived automatically here via the Pythagorean theorem, rather than asked for directly."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Surface Area in Practice",
+          "intro": "Surface area shows up anywhere a real quantity of material has to cover, coat, or wrap a 3D object.",
+          "items": [
+            {
+              "title": "Packaging and Manufacturing",
+              "description": "Cardboard, sheet metal, and plastic packaging are cut from flat stock, so a package's surface area directly determines how much raw material — and cost — each unit consumes."
+            },
+            {
+              "title": "Painting and Coating",
+              "description": "Paint, primer, and protective coatings are bought and applied by area, so painters and industrial coating operations calculate a surface's total area first to estimate how much product a job requires."
+            },
+            {
+              "title": "Heat Transfer and Engineering",
+              "description": "A radiator's or heat sink's surface area governs how quickly it can transfer heat to the surrounding air — engineers deliberately maximize surface area (with fins or ridges) when a design needs to shed heat efficiently."
+            },
+            {
+              "title": "Biology",
+              "description": "A cell's or an animal's surface-area-to-volume ratio constrains how efficiently it can exchange nutrients, gases, and heat with its environment — a key reason very small organisms and very large ones have such different body shapes."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -9256,6 +9327,10 @@
             "title": "Archimedes and the Sphere Inside a Cylinder",
             "paragraph": "Archimedes of Syracuse (c. 287–212 BCE) proved in his treatise On the Sphere and Cylinder that a sphere's surface area equals exactly two-thirds the total surface area of the smallest cylinder that encloses it — a result he considered his finest achievement and reportedly asked to have engraved on his tombstone, alongside a diagram of the sphere and cylinder. That same treatise worked out the surface-area formulas for spheres, cylinders, and cones that this calculator still uses today, more than two thousand years later."
           },
+          "modernDevelopments": {
+            "title": "From Hand-Cut Nets to 3D-Printed Surfaces",
+            "paragraph": "For centuries, working out a complex object's surface area meant physically unfolding it into a flat net or approximating it with the simple solids Archimedes and Euclid had already solved. Modern CAD and 3D-modeling software instead represents any surface — however irregular — as a mesh of many small flat triangles, and sums each triangle's area to compute the total, a technique also used to estimate the surface area of everything from a 3D-scanned manufactured part to a digital terrain model of a mountain range."
+          },
           "academicPath": {
             "title": "Academic Path",
             "intro": "Surface area and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
@@ -9298,6 +9373,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "Archimedes' original proof that a sphere's surface area equals two-thirds that of its circumscribing cylinder — the same relationship this calculator's sphere and cylinder formulas embody.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Read The Works of Archimedes"
         }
       }
     },
