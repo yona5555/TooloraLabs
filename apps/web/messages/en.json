@@ -8945,9 +8945,19 @@
         "behindTheTool": "Behind the Tool"
       },
       "aboveFold": {
+        "widthLabel": "Width",
+        "heightLabel": "Height",
+        "baseLabel": "Base",
         "quickReference": {
           "title": "Area Formulas",
           "intro": "The standard closed-form area formula this calculator applies for each shape."
+        },
+        "conceptDiagram": {
+          "title": "What a Dimension Actually Measures",
+          "intro": "Every area formula consumes a small set of straight-line or angle measurements — here's what those lines mean on three representative shapes.",
+          "ariaLabel": "Diagram of a rectangle with its width and height labeled, a circle with its radius labeled, and a triangle with its base and perpendicular height labeled, each with its area formula written beneath it",
+          "rectangleCaption": "Two perpendicular sides",
+          "circleCaption": "One radius, from center to edge"
         }
       },
       "form": {
@@ -8972,19 +8982,59 @@
         "semiMinorAxisLabel": "Semi-Minor Axis",
         "base1Label": "Base 1",
         "base2Label": "Base 2",
-        "angleLabel": "Angle (degrees)"
+        "angleLabel": "Angle (degrees)",
+        "hint": {
+          "side": "All four sides of a square are equal, so one measurement is enough.",
+          "rectangleWidth": "The longer (or either) pair of parallel sides.",
+          "rectangleHeight": "The pair of sides perpendicular to the width.",
+          "triangleBase": "Any one side you choose to treat as the base.",
+          "triangleHeight": "The perpendicular distance from the base to the opposite vertex — not one of the triangle's slanted sides.",
+          "circleRadius": "The distance from the center to any point on the circle, not the diameter.",
+          "ellipseMajor": "Half of the ellipse's longest diameter (the semi-major axis).",
+          "ellipseMinor": "Half of the ellipse's shortest diameter (the semi-minor axis).",
+          "trapezoidBase1": "One of the two parallel sides.",
+          "trapezoidBase2": "The other parallel side — it doesn't need to match Base 1.",
+          "sectorAngle": "The angle of the pie-slice at the center, measured in degrees, from 0 to 360."
+        }
       },
       "result": {
         "heading": "Area",
         "missingDimension": "Enter all the dimensions this shape needs.",
         "invalidDimension": "All dimensions must be positive numbers, and an angle can't exceed 360°.",
-        "squareUnits": "square units"
+        "squareUnits": "square units",
+        "shapePreviewCaption": "A proportional sketch of the shape you entered, redrawn live from your dimensions."
       },
       "education": {
         "intro": {
           "title": "Understanding Area",
           "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
           "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Every shape's formula is built from a small vocabulary of measurable dimensions — which ones apply depends on which shape you pick.",
+          "items": [
+            {
+              "name": "Side Length (s)",
+              "description": "A square's single defining measurement — since all four sides are equal, area is simply that length multiplied by itself."
+            },
+            {
+              "name": "Base and Height (b, h)",
+              "description": "Two perpendicular measurements shared by triangles, parallelograms, and trapezoids. Height specifically means the perpendicular distance to the base, which is not necessarily one of the shape's own edges."
+            },
+            {
+              "name": "Radius (r)",
+              "description": "The distance from a circle's or sector's center to its edge. Doubling the radius quadruples the area, since area scales with the square of the radius."
+            },
+            {
+              "name": "Semi-Major and Semi-Minor Axis (a, b)",
+              "description": "Half of an ellipse's longest and shortest diameters respectively — the two-radius generalization of a circle's single radius."
+            },
+            {
+              "name": "Central Angle (θ)",
+              "description": "How wide a sector's pie-slice opens, in degrees out of a full 360° circle — it scales the full circle's area down to the fraction the sector actually covers."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -9007,6 +9057,28 @@
             {
               "calculation": "Circular sector, radius = 4, angle = 90°",
               "result": "≈ 12.57 square units"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Area in Practice",
+          "intro": "Measuring area isn't just a classroom exercise — it's the number several everyday trades and professions actually build their estimates and prices around.",
+          "items": [
+            {
+              "title": "Land Surveying and Real Estate",
+              "description": "Property deeds, tax assessments, and listing prices are all tied to a parcel's or a home's measured area — surveyors decompose irregular plots into simple shapes like these, sum the pieces, and record the total."
+            },
+            {
+              "title": "Construction and Interior Design",
+              "description": "Flooring, tiling, carpet, paint, and drywall are all quoted and purchased by area, so a contractor calculates a room's or a roof's area first to know how much material to order and what the job should cost."
+            },
+            {
+              "title": "Agriculture",
+              "description": "Farmers plan seed, fertilizer, and irrigation quantities per unit area of a field, so an accurate field-area figure — often built from several trapezoids and triangles stitched together — directly drives input costs."
+            },
+            {
+              "title": "Manufacturing and Materials",
+              "description": "Cutting fabric, sheet metal, or glass to a design efficiently depends on knowing each piece's area, both to price the material and to minimize offcut waste."
             }
           ]
         },
@@ -9036,6 +9108,10 @@
           "history": {
             "title": "From Land Surveying to Euclid's Elements",
             "paragraph": "Practical area calculation predates written mathematics itself — ancient Egyptian and Babylonian surveyors needed to re-measure farmland area after the Nile's annual floods redrew field boundaries, and early clay tablets and papyri already show working (if sometimes approximate) rules for rectangles, triangles, and trapezoids. Around 300 BCE, Euclid's Elements organized these practical rules into a rigorous deductive system, proving area formulas from first principles rather than stating them as recipes — the same formulas this calculator still applies today are, for the most part, the ones Euclid formally established over two thousand years ago."
+          },
+          "modernDevelopments": {
+            "title": "From Compass and Straightedge to GIS and CAD",
+            "paragraph": "Euclid's proofs handled idealized shapes with straight edges and perfect circles, but real plots of land, building footprints, and manufactured parts are rarely so tidy. Modern surveying and geographic information systems (GIS) extend the same underlying idea — decomposing any closed shape into triangles, or applying the shoelace formula to sum signed area directly from a polygon's vertex coordinates — to measure arbitrarily irregular boundaries from satellite imagery or GPS survey points. Computer-aided design (CAD) software applies the very same closed-form formulas this calculator uses, just computed automatically the moment an engineer sketches a part's geometry rather than by hand."
           },
           "academicPath": {
             "title": "Academic Path",
@@ -9079,6 +9155,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Book I (2nd ed.). Cambridge University Press.",
+          "note": "Euclid's geometric proofs establishing that a parallelogram's area equals base × height and the Pythagorean relationship underlying right-triangle area — the same identities this calculator's formulas encode symbolically today.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Read Euclid's Elements, Book I"
         }
       }
     },

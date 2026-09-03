@@ -58,7 +58,7 @@ export default function AreaCalculator({ education }: { education: ReactNode }) 
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<AreaInputPanel draft={draft} onChange={setDraft} />}
-          result={<AreaResult result={result} digitStyle={digitStyle} />}
+          result={<AreaResult result={result} digitStyle={digitStyle} draft={draft} />}
           sidebar={<RelatedToolsSidebar currentSlug="area-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

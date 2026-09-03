@@ -8941,148 +8941,231 @@
       }
     },
     "area-calculator": {
-      "title": "Area Calculator",
-      "description": "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+      "title": "Calculadora de área",
+      "description": "Calcula el área de cuadrados, rectángulos, triángulos, círculos, elipses, trapecios, paralelogramos y sectores circulares.",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Sobre esta herramienta"
       },
       "aboveFold": {
+        "widthLabel": "Ancho",
+        "heightLabel": "Altura",
+        "baseLabel": "Base",
         "quickReference": {
-          "title": "Area Formulas",
-          "intro": "The standard closed-form area formula this calculator applies for each shape."
+          "title": "Fórmulas de área",
+          "intro": "La fórmula de área estándar, en forma cerrada, que esta calculadora aplica para cada figura."
+        },
+        "conceptDiagram": {
+          "title": "Qué mide realmente una dimensión",
+          "intro": "Toda fórmula de área se apoya en un pequeño conjunto de medidas de longitud o de ángulo — esto es lo que representan esas líneas en tres figuras representativas.",
+          "ariaLabel": "Diagrama de un rectángulo con su ancho y su altura indicados, un círculo con su radio indicado y un triángulo con su base y su altura perpendicular indicadas, cada uno con su fórmula de área escrita debajo",
+          "rectangleCaption": "Dos lados perpendiculares",
+          "circleCaption": "Un radio, del centro al borde"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "Figura y dimensiones",
+        "shapeLabel": "Figura",
         "shape": {
-          "square": "Square",
-          "rectangle": "Rectangle",
-          "triangle": "Triangle",
-          "circle": "Circle",
-          "ellipse": "Ellipse",
-          "trapezoid": "Trapezoid",
-          "parallelogram": "Parallelogram",
-          "sector": "Circular Sector"
+          "square": "Cuadrado",
+          "rectangle": "Rectángulo",
+          "triangle": "Triángulo",
+          "circle": "Círculo",
+          "ellipse": "Elipse",
+          "trapezoid": "Trapecio",
+          "parallelogram": "Paralelogramo",
+          "sector": "Sector circular"
         },
-        "sideLabel": "Side Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
+        "sideLabel": "Longitud del lado",
+        "widthLabel": "Ancho",
+        "heightLabel": "Altura",
         "baseLabel": "Base",
-        "radiusLabel": "Radius",
-        "semiMajorAxisLabel": "Semi-Major Axis",
-        "semiMinorAxisLabel": "Semi-Minor Axis",
+        "radiusLabel": "Radio",
+        "semiMajorAxisLabel": "Semieje mayor",
+        "semiMinorAxisLabel": "Semieje menor",
         "base1Label": "Base 1",
         "base2Label": "Base 2",
-        "angleLabel": "Angle (degrees)"
+        "angleLabel": "Ángulo (grados)",
+        "hint": {
+          "side": "Los cuatro lados de un cuadrado son iguales, así que basta con una medida.",
+          "rectangleWidth": "El par de lados paralelos más largo (o cualquiera de los dos).",
+          "rectangleHeight": "El par de lados perpendicular al ancho.",
+          "triangleBase": "Cualquier lado que elijas tratar como base.",
+          "triangleHeight": "La distancia perpendicular desde la base hasta el vértice opuesto, no uno de los lados inclinados del triángulo.",
+          "circleRadius": "La distancia del centro a cualquier punto del círculo, no el diámetro.",
+          "ellipseMajor": "La mitad del diámetro más largo de la elipse (el semieje mayor).",
+          "ellipseMinor": "La mitad del diámetro más corto de la elipse (el semieje menor).",
+          "trapezoidBase1": "Uno de los dos lados paralelos.",
+          "trapezoidBase2": "El otro lado paralelo — no necesita coincidir con la Base 1.",
+          "sectorAngle": "El ángulo central de la porción, en grados, de 0 a 360."
+        }
       },
       "result": {
-        "heading": "Area",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers, and an angle can't exceed 360°.",
-        "squareUnits": "square units"
+        "heading": "Área",
+        "missingDimension": "Introduce todas las dimensiones que necesita esta figura.",
+        "invalidDimension": "Todas las dimensiones deben ser números positivos, y un ángulo no puede superar los 360°.",
+        "squareUnits": "unidades cuadradas",
+        "shapePreviewCaption": "Un boceto proporcional de la figura introducida, redibujado en directo a partir de tus dimensiones."
       },
       "education": {
         "intro": {
-          "title": "Understanding Area",
-          "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
-          "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+          "title": "Entender el área",
+          "paragraph1": "El área mide cuánta superficie cubre una figura plana, expresada en unidades cuadradas — el número de cuadrados unitarios que la cubrirían exactamente. Cada figura plana tiene su propia fórmula en forma cerrada para calcular ese valor a partir de unas pocas dimensiones medibles, deducida una vez y reutilizada siempre, en lugar de aproximarse contando cuadrados unitarios uno a uno.",
+          "paragraph2": "Esta calculadora aplica la fórmula estándar de la geometría euclidiana para cada una de las ocho figuras habituales, desde el simple lado² de un cuadrado hasta la fracción, escalada por el ángulo, del área de un círculo completo en un sector circular. Cada dimensión que introduces se valida como un número estrictamente positivo antes de usarse, ya que una longitud o un ángulo negativo o nulo no corresponde a ninguna figura física."
+        },
+        "variables": {
+          "title": "Variables implicadas",
+          "intro": "La fórmula de cada figura se construye con un pequeño vocabulario de dimensiones medibles — cuáles se aplican depende de la figura elegida.",
+          "items": [
+            {
+              "name": "Longitud del lado (s)",
+              "description": "La única medida que define un cuadrado — como sus cuatro lados son iguales, el área es simplemente esa longitud multiplicada por sí misma."
+            },
+            {
+              "name": "Base y altura (b, h)",
+              "description": "Dos medidas perpendiculares compartidas por triángulos, paralelogramos y trapecios. La altura se refiere concretamente a la distancia perpendicular hasta la base, que no tiene por qué ser uno de los propios lados de la figura."
+            },
+            {
+              "name": "Radio (r)",
+              "description": "La distancia entre el centro de un círculo o sector y su borde. Duplicar el radio cuadruplica el área, porque esta escala con el cuadrado del radio."
+            },
+            {
+              "name": "Semieje mayor y semieje menor (a, b)",
+              "description": "La mitad del diámetro más largo y del más corto de una elipse, respectivamente — la generalización a dos radios del radio único de un círculo."
+            },
+            {
+              "name": "Ángulo central (θ)",
+              "description": "Cuánto se abre la porción de un sector, en grados sobre un círculo completo de 360° — reduce el área del círculo completo a la fracción que realmente cubre el sector."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few shapes and the area this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Area",
+          "title": "Ejemplos resueltos",
+          "intro": "Algunas figuras y el área que esta calculadora devuelve para cada una.",
+          "columnCalculation": "Figura y dimensiones",
+          "columnResult": "Área",
           "rows": [
             {
-              "calculation": "Square, side = 4",
-              "result": "16 square units"
+              "calculation": "Cuadrado, lado = 4",
+              "result": "16 unidades cuadradas"
             },
             {
-              "calculation": "Rectangle, width = 5, height = 3",
-              "result": "15 square units"
+              "calculation": "Rectángulo, ancho = 5, altura = 3",
+              "result": "15 unidades cuadradas"
             },
             {
-              "calculation": "Circle, radius = 3",
-              "result": "≈ 28.27 square units"
+              "calculation": "Círculo, radio = 3",
+              "result": "≈ 28,27 unidades cuadradas"
             },
             {
-              "calculation": "Circular sector, radius = 4, angle = 90°",
-              "result": "≈ 12.57 square units"
+              "calculation": "Sector circular, radio = 4, ángulo = 90°",
+              "result": "≈ 12,57 unidades cuadradas"
+            }
+          ]
+        },
+        "applications": {
+          "title": "El área en la práctica",
+          "intro": "Medir el área no es solo un ejercicio escolar — es la cifra sobre la que varios oficios cotidianos construyen de verdad sus presupuestos y precios.",
+          "items": [
+            {
+              "title": "Agrimensura y bienes raíces",
+              "description": "Las escrituras de propiedad, las valoraciones fiscales y los precios de venta dependen todos del área medida de una parcela o una vivienda — los agrimensores descomponen los terrenos irregulares en figuras simples como estas, suman las partes y registran el total."
+            },
+            {
+              "title": "Construcción y diseño de interiores",
+              "description": "Suelos, azulejos, moqueta, pintura y placas de yeso se presupuestan y compran por área, así que un contratista calcula primero el área de una habitación o de un tejado para saber cuánto material pedir y cuánto debería costar el trabajo."
+            },
+            {
+              "title": "Agricultura",
+              "description": "Los agricultores planifican las cantidades de semillas, fertilizante y riego por unidad de área de un terreno, de modo que una cifra de área precisa —a menudo construida a partir de varios trapecios y triángulos combinados— determina directamente el coste de los insumos."
+            },
+            {
+              "title": "Fabricación y materiales",
+              "description": "Cortar tela, chapa metálica o vidrio de forma eficiente según un patrón depende de conocer el área de cada pieza, tanto para calcular el precio del material como para minimizar los recortes desperdiciados."
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Preguntas frecuentes",
           "items": [
             {
-              "question": "What's the difference between area and perimeter?",
-              "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other."
+              "question": "¿Cuál es la diferencia entre área y perímetro?",
+              "answer": "El área mide la superficie que cubre una figura, en unidades cuadradas; el perímetro mide la longitud total de su contorno, en unidades de longitud simples. Un rectángulo largo y estrecho y un cuadrado pueden compartir el mismo perímetro y aun así tener áreas muy distintas, por lo que ambos necesitan fórmulas separadas en lugar de que una se derive de la otra."
             },
             {
-              "question": "Why does a triangle only need a base and height, not all three sides?",
-              "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it."
+              "question": "¿Por qué un triángulo solo necesita base y altura, y no sus tres lados?",
+              "answer": "La fórmula base × altura / 2 funciona para cualquier triángulo sin importar la longitud de sus otros dos lados, porque \"altura\" aquí significa la distancia perpendicular desde la base hasta el vértice opuesto — el área de un triángulo depende únicamente de esa distancia perpendicular, no de cómo se dispongan los otros dos lados a su alrededor."
             },
             {
-              "question": "Why can't a circular sector's angle exceed 360°?",
-              "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector."
+              "question": "¿Por qué el ángulo de un sector circular no puede superar los 360°?",
+              "answer": "360° es un círculo completo, así que un ángulo mayor pediría más área de la que tiene el círculo entero, algo que no tiene sentido para un sector. Si necesitas el área de un círculo completo, usa directamente la figura círculo en lugar de un sector de 360°."
             },
             {
-              "question": "How is an ellipse's area related to a circle's?",
-              "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r."
+              "question": "¿Cómo se relaciona el área de una elipse con la de un círculo?",
+              "answer": "Un círculo es un caso particular de elipse en el que ambos ejes son iguales (semieje mayor = semieje menor = radio), por lo que la fórmula de la elipse (π × a × b) se reduce exactamente a la conocida π × r² cuando a y b valen ambos r."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Sobre esta herramienta",
           "history": {
-            "title": "From Land Surveying to Euclid's Elements",
-            "paragraph": "Practical area calculation predates written mathematics itself — ancient Egyptian and Babylonian surveyors needed to re-measure farmland area after the Nile's annual floods redrew field boundaries, and early clay tablets and papyri already show working (if sometimes approximate) rules for rectangles, triangles, and trapezoids. Around 300 BCE, Euclid's Elements organized these practical rules into a rigorous deductive system, proving area formulas from first principles rather than stating them as recipes — the same formulas this calculator still applies today are, for the most part, the ones Euclid formally established over two thousand years ago."
+            "title": "De la agrimensura a los Elementos de Euclides",
+            "paragraph": "El cálculo práctico del área es anterior a las matemáticas escritas: los agrimensores del antiguo Egipto y Babilonia necesitaban volver a medir la tierra de cultivo después de que las crecidas anuales del Nilo redibujaran los límites de los campos, y las primeras tablillas de arcilla y papiros ya muestran reglas funcionales —a veces aproximadas— para rectángulos, triángulos y trapecios. Hacia el 300 a. C., los Elementos de Euclides organizaron estas reglas prácticas en un sistema deductivo riguroso, demostrando las fórmulas de área a partir de principios fundamentales en lugar de enunciarlas como simples recetas — las fórmulas que esta calculadora sigue aplicando hoy son, en su mayor parte, las que Euclides estableció formalmente hace más de dos mil años."
+          },
+          "modernDevelopments": {
+            "title": "Del compás y la regla a los SIG y el CAD",
+            "paragraph": "Las demostraciones de Euclides trataban figuras idealizadas, de bordes perfectamente rectos y círculos perfectos, pero las parcelas reales, las huellas de los edificios y las piezas fabricadas rara vez son tan ordenadas. La agrimensura moderna y los sistemas de información geográfica (SIG) extienden la misma idea de fondo —descomponer cualquier figura cerrada en triángulos, o aplicar la fórmula del área de Gauss (shoelace formula) para sumar el área con signo directamente a partir de las coordenadas de los vértices de un polígono— para medir contornos arbitrariamente irregulares a partir de imágenes de satélite o puntos de un levantamiento GPS. El software de diseño asistido por computadora (CAD) aplica exactamente las mismas fórmulas en forma cerrada que usa esta calculadora, solo que calculadas de forma automática en cuanto un ingeniero o ingeniera dibuja la geometría de una pieza, en lugar de a mano."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Area and the broader study of geometric measurement sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Itinerario académico",
+            "intro": "El área y el estudio más amplio de la medición geométrica pertenecen a las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, más un departamento regional:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "No — el DPhil es un título de investigación presencial en el campus."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "No — los títulos de investigación son presenciales en la Facultad de Matemáticas."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "No — el doctorado es un programa de investigación presencial."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "N.º 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "No — el programa es un doctorado de investigación presencial."
               },
               {
                 "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla mundial por disciplina.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "No — los programas del departamento se imparten en el campus de la AUB, en Beirut, Líbano."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Book I (2nd ed.). Cambridge University Press.",
+          "note": "Las demostraciones geométricas de Euclides que establecen que el área de un paralelogramo es base × altura, y la relación pitagórica que subyace al área de los triángulos rectángulos — las mismas identidades que las fórmulas de esta calculadora codifican hoy de forma simbólica.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Leer los Elementos de Euclides, Libro I"
         }
       }
     },

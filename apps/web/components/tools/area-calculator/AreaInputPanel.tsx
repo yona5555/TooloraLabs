@@ -19,8 +19,15 @@ export default function AreaInputPanel({ draft, onChange }: Props) {
     onChange({ ...draft, ...partial });
   }
 
-  const field = (key: keyof AreaDraft, label: string) => (
-    <ToolInput label={label} type="text" inputMode="decimal" value={draft[key]} onChange={(e) => patch({ [key]: e.target.value } as Partial<AreaDraft>)} />
+  const field = (key: keyof AreaDraft, label: string, hint?: string) => (
+    <ToolInput
+      label={label}
+      hint={hint}
+      type="text"
+      inputMode="decimal"
+      value={draft[key]}
+      onChange={(e) => patch({ [key]: e.target.value } as Partial<AreaDraft>)}
+    />
   );
 
   return (
@@ -41,43 +48,50 @@ export default function AreaInputPanel({ draft, onChange }: Props) {
       </label>
 
       <div className="mt-5 space-y-5">
-        {draft.shape === "square" && field("side", t("sideLabel"))}
+        {draft.shape === "square" && field("side", t("sideLabel"), t("hint.side"))}
 
         {draft.shape === "rectangle" && (
           <>
-            {field("width", t("widthLabel"))}
-            {field("height", t("heightLabel"))}
+            {field("width", t("widthLabel"), t("hint.rectangleWidth"))}
+            {field("height", t("heightLabel"), t("hint.rectangleHeight"))}
           </>
         )}
 
-        {(draft.shape === "triangle" || draft.shape === "parallelogram") && (
+        {draft.shape === "triangle" && (
           <>
-            {field("base", t("baseLabel"))}
-            {field("height", t("heightLabel"))}
+            {field("base", t("baseLabel"), t("hint.triangleBase"))}
+            {field("height", t("heightLabel"), t("hint.triangleHeight"))}
           </>
         )}
 
-        {draft.shape === "circle" && field("radius", t("radiusLabel"))}
+        {draft.shape === "parallelogram" && (
+          <>
+            {field("base", t("baseLabel"), t("hint.triangleBase"))}
+            {field("height", t("heightLabel"), t("hint.triangleHeight"))}
+          </>
+        )}
+
+        {draft.shape === "circle" && field("radius", t("radiusLabel"), t("hint.circleRadius"))}
 
         {draft.shape === "ellipse" && (
           <>
-            {field("semiMajorAxis", t("semiMajorAxisLabel"))}
-            {field("semiMinorAxis", t("semiMinorAxisLabel"))}
+            {field("semiMajorAxis", t("semiMajorAxisLabel"), t("hint.ellipseMajor"))}
+            {field("semiMinorAxis", t("semiMinorAxisLabel"), t("hint.ellipseMinor"))}
           </>
         )}
 
         {draft.shape === "trapezoid" && (
           <>
-            {field("base1", t("base1Label"))}
-            {field("base2", t("base2Label"))}
-            {field("height", t("heightLabel"))}
+            {field("base1", t("base1Label"), t("hint.trapezoidBase1"))}
+            {field("base2", t("base2Label"), t("hint.trapezoidBase2"))}
+            {field("height", t("heightLabel"), t("hint.triangleHeight"))}
           </>
         )}
 
         {draft.shape === "sector" && (
           <>
-            {field("radius", t("radiusLabel"))}
-            {field("angleDegrees", t("angleLabel"))}
+            {field("radius", t("radiusLabel"), t("hint.circleRadius"))}
+            {field("angleDegrees", t("angleLabel"), t("hint.sectorAngle"))}
           </>
         )}
       </div>

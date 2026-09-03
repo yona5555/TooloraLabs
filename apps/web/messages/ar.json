@@ -8937,148 +8937,231 @@
       }
     },
     "area-calculator": {
-      "title": "Area Calculator",
-      "description": "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+      "title": "حاسبة المساحة",
+      "description": "احسب مساحة المربعات والمستطيلات والمثلثات والدوائر والأشكال البيضاوية وشبه المنحرف ومتوازيات الأضلاع والقطاعات الدائرية.",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "الحاسبة",
+        "faq": "الأسئلة الشائعة",
+        "behindTheTool": "خلف هذه الأداة"
       },
       "aboveFold": {
+        "widthLabel": "العرض",
+        "heightLabel": "الارتفاع",
+        "baseLabel": "القاعدة",
         "quickReference": {
-          "title": "Area Formulas",
-          "intro": "The standard closed-form area formula this calculator applies for each shape."
+          "title": "صيغ المساحة",
+          "intro": "صيغة المساحة القياسية المغلقة التي تطبّقها هذه الحاسبة لكل شكل."
+        },
+        "conceptDiagram": {
+          "title": "ما الذي يقيسه البُعد فعليًا",
+          "intro": "كل صيغة مساحة تعتمد على مجموعة صغيرة من قياسات الأطوال المستقيمة أو الزوايا — إليك ما تعنيه هذه الخطوط على ثلاثة أشكال تمثيلية.",
+          "ariaLabel": "رسم توضيحي لمستطيل موضَّح عليه العرض والارتفاع، ودائرة موضَّح عليها نصف القطر، ومثلث موضَّح عليه القاعدة والارتفاع العمودي، مع كتابة صيغة المساحة أسفل كل شكل",
+          "rectangleCaption": "ضلعان متعامدان",
+          "circleCaption": "نصف قطر واحد، من المركز إلى الحافة"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "الشكل والأبعاد",
+        "shapeLabel": "الشكل",
         "shape": {
-          "square": "Square",
-          "rectangle": "Rectangle",
-          "triangle": "Triangle",
-          "circle": "Circle",
-          "ellipse": "Ellipse",
-          "trapezoid": "Trapezoid",
-          "parallelogram": "Parallelogram",
-          "sector": "Circular Sector"
+          "square": "مربع",
+          "rectangle": "مستطيل",
+          "triangle": "مثلث",
+          "circle": "دائرة",
+          "ellipse": "شكل بيضاوي",
+          "trapezoid": "شبه منحرف",
+          "parallelogram": "متوازي أضلاع",
+          "sector": "قطاع دائري"
         },
-        "sideLabel": "Side Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "baseLabel": "Base",
-        "radiusLabel": "Radius",
-        "semiMajorAxisLabel": "Semi-Major Axis",
-        "semiMinorAxisLabel": "Semi-Minor Axis",
-        "base1Label": "Base 1",
-        "base2Label": "Base 2",
-        "angleLabel": "Angle (degrees)"
+        "sideLabel": "طول الضلع",
+        "widthLabel": "العرض",
+        "heightLabel": "الارتفاع",
+        "baseLabel": "القاعدة",
+        "radiusLabel": "نصف القطر",
+        "semiMajorAxisLabel": "نصف المحور الأكبر",
+        "semiMinorAxisLabel": "نصف المحور الأصغر",
+        "base1Label": "القاعدة 1",
+        "base2Label": "القاعدة 2",
+        "angleLabel": "الزاوية (بالدرجات)",
+        "hint": {
+          "side": "أضلاع المربع الأربعة متساوية، لذا يكفي قياس واحد.",
+          "rectangleWidth": "أحد زوجَي الأضلاع المتوازية (الأطول، أو أيّهما).",
+          "rectangleHeight": "زوج الأضلاع العمودي على العرض.",
+          "triangleBase": "أي ضلع تختار اعتباره القاعدة.",
+          "triangleHeight": "المسافة العمودية من القاعدة إلى الرأس المقابل — وليست أحد ضلعَي المثلث المائلين.",
+          "circleRadius": "المسافة من المركز إلى أي نقطة على الدائرة، وليست القطر.",
+          "ellipseMajor": "نصف أطول قطر في الشكل البيضاوي (نصف المحور الأكبر).",
+          "ellipseMinor": "نصف أقصر قطر في الشكل البيضاوي (نصف المحور الأصغر).",
+          "trapezoidBase1": "أحد الضلعين المتوازيين.",
+          "trapezoidBase2": "الضلع المتوازي الآخر — لا يلزم أن يساوي القاعدة 1.",
+          "sectorAngle": "زاوية قطعة الدائرة عند المركز، بالدرجات، من 0 إلى 360."
+        }
       },
       "result": {
-        "heading": "Area",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers, and an angle can't exceed 360°.",
-        "squareUnits": "square units"
+        "heading": "المساحة",
+        "missingDimension": "أدخل جميع الأبعاد التي يحتاجها هذا الشكل.",
+        "invalidDimension": "يجب أن تكون جميع الأبعاد أرقامًا موجبة، ولا يمكن أن تتجاوز الزاوية 360°.",
+        "squareUnits": "وحدة مربعة",
+        "shapePreviewCaption": "رسم تخطيطي متناسب للشكل الذي أدخلته، يُعاد رسمه مباشرةً من أبعادك."
       },
       "education": {
         "intro": {
-          "title": "Understanding Area",
-          "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
-          "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+          "title": "فهم المساحة",
+          "paragraph1": "تقيس المساحة مقدار السطح الذي يغطيه شكل مستوٍ، معبَّرًا عنه بوحدات مربعة — أي عدد المربعات الوحدوية التي تغطي الشكل تمامًا لو رُصفت عليه. لكل شكل مستوٍ صيغته الخاصة المغلقة لحساب هذه القيمة من عدد قليل من الأبعاد القابلة للقياس، تُشتَقّ مرة واحدة وتُستخدم إلى الأبد بدلًا من تقديرها بعدّ المربعات الوحدوية فعليًا.",
+          "paragraph2": "تطبّق هذه الحاسبة الصيغة القياسية للهندسة الإقليدية على كل شكل من الأشكال الثمانية الشائعة، من ضلع² المربع البسيط إلى كسر القطاع الدائري المتناسب مع الزاوية من مساحة الدائرة الكاملة. يُتحقَّق من كل بُعد تُدخله كرقم موجب تمامًا قبل استخدامه، لأن الطول أو الزاوية السالبة أو الصفرية لا يقابلها أي شكل فعلي."
+        },
+        "variables": {
+          "title": "المتغيرات المستخدمة",
+          "intro": "تُبنى صيغة كل شكل من مجموعة صغيرة من الأبعاد القابلة للقياس — وما ينطبق منها يتوقف على الشكل الذي تختاره.",
+          "items": [
+            {
+              "name": "طول الضلع (s)",
+              "description": "القياس الوحيد المحدِّد للمربع — وبما أن أضلاعه الأربعة متساوية، فالمساحة هي ببساطة هذا الطول مضروبًا في نفسه."
+            },
+            {
+              "name": "القاعدة والارتفاع (b، h)",
+              "description": "قياسان متعامدان مشتركان بين المثلثات ومتوازيات الأضلاع وأشباه المنحرف. يعني الارتفاع هنا تحديدًا المسافة العمودية إلى القاعدة، وهي ليست بالضرورة أحد أضلاع الشكل نفسه."
+            },
+            {
+              "name": "نصف القطر (r)",
+              "description": "المسافة من مركز الدائرة أو القطاع إلى حافته. مضاعفة نصف القطر تُربّع المساحة أربع مرات، لأن المساحة تتغيّر مع مربع نصف القطر."
+            },
+            {
+              "name": "نصف المحور الأكبر ونصف المحور الأصغر (a، b)",
+              "description": "نصف أطول قطر وأقصر قطر في الشكل البيضاوي على التوالي — وهو تعميم نصف قطر الدائرة الواحد إلى قطرين."
+            },
+            {
+              "name": "الزاوية المركزية (θ)",
+              "description": "مدى اتساع قطعة القطاع الدائري، بالدرجات من دائرة كاملة مقدارها 360° — وهي تُنزل مساحة الدائرة الكاملة إلى الجزء الذي يغطيه القطاع فعليًا."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few shapes and the area this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Area",
+          "title": "أمثلة محلولة",
+          "intro": "بعض الأشكال والمساحة التي تُرجعها هذه الحاسبة لكل منها.",
+          "columnCalculation": "الشكل والأبعاد",
+          "columnResult": "المساحة",
           "rows": [
             {
-              "calculation": "Square, side = 4",
-              "result": "16 square units"
+              "calculation": "مربع، الضلع = 4",
+              "result": "16 وحدة مربعة"
             },
             {
-              "calculation": "Rectangle, width = 5, height = 3",
-              "result": "15 square units"
+              "calculation": "مستطيل، العرض = 5، الارتفاع = 3",
+              "result": "15 وحدة مربعة"
             },
             {
-              "calculation": "Circle, radius = 3",
-              "result": "≈ 28.27 square units"
+              "calculation": "دائرة، نصف القطر = 3",
+              "result": "≈ 28.27 وحدة مربعة"
             },
             {
-              "calculation": "Circular sector, radius = 4, angle = 90°",
-              "result": "≈ 12.57 square units"
+              "calculation": "قطاع دائري، نصف القطر = 4، الزاوية = 90°",
+              "result": "≈ 12.57 وحدة مربعة"
+            }
+          ]
+        },
+        "applications": {
+          "title": "المساحة في الواقع العملي",
+          "intro": "قياس المساحة ليس مجرد تمرين مدرسي — بل هو الرقم الذي تبني عليه عدة مهن يومية تقديراتها وأسعارها فعليًا.",
+          "items": [
+            {
+              "title": "المساحة العقارية والعقارات",
+              "description": "تعتمد سندات الملكية والتقييمات الضريبية وأسعار العروض العقارية كلها على المساحة المقيسة لقطعة الأرض أو المنزل — يقسّم المساحون القطع غير المنتظمة إلى أشكال بسيطة كهذه، ثم يجمعون الأجزاء ويسجّلون المجموع."
+            },
+            {
+              "title": "البناء وتصميم الديكور الداخلي",
+              "description": "تُسعَّر أرضيات المنازل والبلاط والسجاد والدهان وألواح الجبس وتُشترى كلها بحسب المساحة، لذا يحسب المقاول أولًا مساحة الغرفة أو السقف ليعرف كمية المواد المطلوب طلبها وتكلفة العمل المتوقعة."
+            },
+            {
+              "title": "الزراعة",
+              "description": "يخطط المزارعون كميات البذور والأسمدة والري لكل وحدة مساحة من الحقل، لذا فإن رقم مساحة الحقل الدقيق — الذي يُبنى غالبًا من عدة أشباه منحرف ومثلثات مجمَّعة — يحدد تكلفة المستلزمات مباشرةً."
+            },
+            {
+              "title": "التصنيع والمواد",
+              "description": "يعتمد قصّ القماش أو الصفائح المعدنية أو الزجاج بكفاءة وفق تصميم معيّن على معرفة مساحة كل قطعة، سواء لتسعير المادة أو لتقليل الفاقد الناتج عن القصّ."
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "الأسئلة الشائعة",
           "items": [
             {
-              "question": "What's the difference between area and perimeter?",
-              "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other."
+              "question": "ما الفرق بين المساحة والمحيط؟",
+              "answer": "تقيس المساحة السطح الذي يغطيه الشكل، بوحدات مربعة؛ ويقيس المحيط الطول الكلي لحدوده، بوحدات طول بسيطة. يمكن لمستطيل طويل ونحيل ومربع أن يتشاركا المحيط نفسه بينما يختلفان كثيرًا في المساحة، ولهذا يحتاج كل منهما صيغة منفصلة بدلًا من أن يُشتق أحدهما من الآخر."
             },
             {
-              "question": "Why does a triangle only need a base and height, not all three sides?",
-              "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it."
+              "question": "لماذا يحتاج المثلث إلى القاعدة والارتفاع فقط، وليس أضلاعه الثلاثة؟",
+              "answer": "صيغة القاعدة والارتفاع (½ × القاعدة × الارتفاع) تصلح لأي مثلث بصرف النظر عن طولَي ضلعيه الآخرين، لأن \"الارتفاع\" هنا يعني المسافة العمودية من القاعدة إلى الرأس المقابل — فمساحة المثلث تتوقف على هذه المسافة العمودية وحدها، لا على شكل الضلعين الآخرين حولها."
             },
             {
-              "question": "Why can't a circular sector's angle exceed 360°?",
-              "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector."
+              "question": "لماذا لا يمكن أن تتجاوز زاوية القطاع الدائري 360°؟",
+              "answer": "الدائرة الكاملة تساوي 360°، فأي زاوية أكبر من ذلك ستطلب مساحة أكبر من الدائرة كلها — وهو أمر لا معنى له بالنسبة لقطاع دائري. إذا احتجت مساحة دائرة كاملة، استخدم شكل الدائرة مباشرةً بدلًا من قطاع بزاوية 360°."
             },
             {
-              "question": "How is an ellipse's area related to a circle's?",
-              "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r."
+              "question": "كيف ترتبط مساحة الشكل البيضاوي بمساحة الدائرة؟",
+              "answer": "الدائرة حالة خاصة من الشكل البيضاوي يتساوى فيها المحوران (نصف المحور الأكبر = نصف المحور الأصغر = نصف القطر)، ولهذا تنحصر صيغة الشكل البيضاوي (π × a × b) بالضبط في الصيغة المألوفة π × r² عندما يكون كل من a وb مساويًا لـ r."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "خلف هذه الأداة",
           "history": {
-            "title": "From Land Surveying to Euclid's Elements",
-            "paragraph": "Practical area calculation predates written mathematics itself — ancient Egyptian and Babylonian surveyors needed to re-measure farmland area after the Nile's annual floods redrew field boundaries, and early clay tablets and papyri already show working (if sometimes approximate) rules for rectangles, triangles, and trapezoids. Around 300 BCE, Euclid's Elements organized these practical rules into a rigorous deductive system, proving area formulas from first principles rather than stating them as recipes — the same formulas this calculator still applies today are, for the most part, the ones Euclid formally established over two thousand years ago."
+            "title": "من مساحة الأراضي إلى أصول إقليدس",
+            "paragraph": "يسبق حساب المساحة عمليًا الرياضيات المكتوبة نفسها — فقد كان مساحو مصر وبابل القدامى بحاجة إلى إعادة قياس مساحة الأراضي الزراعية بعد أن تعيد فيضانات نهر النيل السنوية رسم حدود الحقول، وتُظهر الألواح الطينية والبرديات المبكرة بالفعل قواعد عملية (وإن كانت تقريبية أحيانًا) للمستطيلات والمثلثات وأشباه المنحرف. وحوالي عام 300 قبل الميلاد، نظّم كتاب أصول إقليدس (Elements) هذه القواعد العملية في نظام استنباطي صارم، مثبتًا صيغ المساحة انطلاقًا من مبادئ أولية بدلًا من ذكرها كوصفات جاهزة — والصيغ التي لا تزال هذه الحاسبة تطبّقها اليوم هي، في معظمها، الصيغ نفسها التي أرساها إقليدس رسميًا قبل أكثر من ألفَي عام."
+          },
+          "modernDevelopments": {
+            "title": "من الفرجار والمسطرة إلى نظم المعلومات الجغرافية والتصميم بمساعدة الحاسوب",
+            "paragraph": "تعاملت براهين إقليدس مع أشكال مثالية ذات حواف مستقيمة تمامًا ودوائر كاملة، لكن قطع الأراضي الفعلية ومساحات المباني والقطع المصنَّعة نادرًا ما تكون بهذا الانتظام. يوسّع المسح الحديث ونظم المعلومات الجغرافية (GIS) الفكرة الأساسية نفسها — تقسيم أي شكل مغلق إلى مثلثات، أو تطبيق صيغة رباط الحذاء (shoelace formula) لجمع المساحة الموقَّعة مباشرةً من إحداثيات رؤوس مضلَّع — لقياس حدود غير منتظمة إطلاقًا انطلاقًا من صور الأقمار الصناعية أو نقاط المسح بنظام تحديد المواقع (GPS). ويطبّق برنامج التصميم بمساعدة الحاسوب (CAD) الصيغ المغلقة نفسها التي تستخدمها هذه الحاسبة، لكنها تُحسب تلقائيًا بمجرد أن يرسم المهندس هندسة أي قطعة، بدلًا من حسابها يدويًا."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Area and the broader study of geometric measurement sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "المسار الأكاديمي",
+            "intro": "تندرج المساحة والدراسة الأوسع للقياس الهندسي ضمن الرياضيات. فيما يلي أفضل 5 جامعات عالميًا في الرياضيات وفق تصنيف QS العالمي للجامعات حسب التخصص لعام 2025، بالإضافة إلى قسم إقليمي واحد:",
             "universities": [
               {
-                "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "معهد ماساتشوستس للتقنية (MIT)",
+                "note": "المرتبة الأولى عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "لا — الدكتوراه برنامج بحثي حضوري ضمن قسم الرياضيات."
               },
               {
-                "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة أكسفورد",
+                "note": "المرتبة الثانية عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "لا — درجة الدكتوراه (DPhil) درجة بحثية حضورية داخل الحرم الجامعي."
               },
               {
-                "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة كامبريدج",
+                "note": "المرتبة الثالثة عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "لا — الدرجات البحثية حضورية في كلية الرياضيات."
               },
               {
-                "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة هارفارد",
+                "note": "المرتبة الرابعة عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "لا — الدكتوراه برنامج بحثي حضوري."
               },
               {
-                "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة ستانفورد",
+                "note": "المرتبة الخامسة عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "لا — البرنامج دكتوراه بحثية حضورية."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "الجامعة الأمريكية في بيروت — قسم الرياضيات",
+                "note": "تأسست عام 1866؛ غير مصنَّفة بشكل منفصل في هذا الجدول العالمي حسب التخصص.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "لا — تُقدَّم برامج القسم في حرم الجامعة الأمريكية في بيروت، لبنان."
               }
             ]
           }
+        },
+        "references": {
+          "title": "المراجع العلمية",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Book I (2nd ed.). Cambridge University Press.",
+          "note": "براهين إقليدس الهندسية التي تُثبت أن مساحة متوازي الأضلاع تساوي القاعدة × الارتفاع، والعلاقة الفيثاغورية التي تقوم عليها مساحة المثلث القائم الزاوية — وهي المتطابقات نفسها التي تُرمِّزها صيغ هذه الحاسبة اليوم رمزيًا.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "قراءة أصول إقليدس، الكتاب الأول"
         }
       }
     },

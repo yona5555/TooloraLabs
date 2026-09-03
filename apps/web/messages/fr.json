@@ -8941,148 +8941,231 @@
       }
     },
     "area-calculator": {
-      "title": "Area Calculator",
-      "description": "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+      "title": "Calculateur d'aire",
+      "description": "Calculez l'aire des carrés, rectangles, triangles, cercles, ellipses, trapèzes, parallélogrammes et secteurs circulaires.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Calculateur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses"
       },
       "aboveFold": {
+        "widthLabel": "Largeur",
+        "heightLabel": "Hauteur",
+        "baseLabel": "Base",
         "quickReference": {
-          "title": "Area Formulas",
-          "intro": "The standard closed-form area formula this calculator applies for each shape."
+          "title": "Formules d'aire",
+          "intro": "La formule d'aire classique, sous forme close, que ce calculateur applique pour chaque forme."
+        },
+        "conceptDiagram": {
+          "title": "Ce que mesure vraiment une dimension",
+          "intro": "Chaque formule d'aire repose sur un petit nombre de mesures — des longueurs ou un angle — voici ce que ces lignes représentent sur trois formes types.",
+          "ariaLabel": "Diagramme d'un rectangle avec sa largeur et sa hauteur indiquées, d'un cercle avec son rayon indiqué, et d'un triangle avec sa base et sa hauteur perpendiculaire indiquées, chacun accompagné de sa formule d'aire",
+          "rectangleCaption": "Deux côtés perpendiculaires",
+          "circleCaption": "Un rayon, du centre au bord"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "Forme et dimensions",
+        "shapeLabel": "Forme",
         "shape": {
-          "square": "Square",
+          "square": "Carré",
           "rectangle": "Rectangle",
           "triangle": "Triangle",
-          "circle": "Circle",
+          "circle": "Cercle",
           "ellipse": "Ellipse",
-          "trapezoid": "Trapezoid",
-          "parallelogram": "Parallelogram",
-          "sector": "Circular Sector"
+          "trapezoid": "Trapèze",
+          "parallelogram": "Parallélogramme",
+          "sector": "Secteur circulaire"
         },
-        "sideLabel": "Side Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
+        "sideLabel": "Longueur du côté",
+        "widthLabel": "Largeur",
+        "heightLabel": "Hauteur",
         "baseLabel": "Base",
-        "radiusLabel": "Radius",
-        "semiMajorAxisLabel": "Semi-Major Axis",
-        "semiMinorAxisLabel": "Semi-Minor Axis",
+        "radiusLabel": "Rayon",
+        "semiMajorAxisLabel": "Demi-grand axe",
+        "semiMinorAxisLabel": "Demi-petit axe",
         "base1Label": "Base 1",
         "base2Label": "Base 2",
-        "angleLabel": "Angle (degrees)"
+        "angleLabel": "Angle (degrés)",
+        "hint": {
+          "side": "Les quatre côtés d'un carré sont égaux, une seule mesure suffit donc.",
+          "rectangleWidth": "L'une des deux paires de côtés parallèles (la plus longue, ou l'une ou l'autre).",
+          "rectangleHeight": "La paire de côtés perpendiculaire à la largeur.",
+          "triangleBase": "N'importe quel côté que vous choisissez de traiter comme base.",
+          "triangleHeight": "La distance perpendiculaire entre la base et le sommet opposé — pas l'un des côtés inclinés du triangle.",
+          "circleRadius": "La distance entre le centre et n'importe quel point du cercle, pas le diamètre.",
+          "ellipseMajor": "La moitié du plus grand diamètre de l'ellipse (le demi-grand axe).",
+          "ellipseMinor": "La moitié du plus petit diamètre de l'ellipse (le demi-petit axe).",
+          "trapezoidBase1": "L'un des deux côtés parallèles.",
+          "trapezoidBase2": "L'autre côté parallèle — il n'a pas besoin d'être égal à la Base 1.",
+          "sectorAngle": "L'angle au centre de la part de tarte, en degrés, de 0 à 360."
+        }
       },
       "result": {
-        "heading": "Area",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers, and an angle can't exceed 360°.",
-        "squareUnits": "square units"
+        "heading": "Aire",
+        "missingDimension": "Renseignez toutes les dimensions nécessaires à cette forme.",
+        "invalidDimension": "Toutes les dimensions doivent être des nombres positifs, et un angle ne peut pas dépasser 360°.",
+        "squareUnits": "unités carrées",
+        "shapePreviewCaption": "Un croquis proportionnel de la forme saisie, redessiné en direct à partir de vos dimensions."
       },
       "education": {
         "intro": {
-          "title": "Understanding Area",
-          "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
-          "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+          "title": "Comprendre l'aire",
+          "paragraph1": "L'aire mesure la surface couverte par une forme plane, exprimée en unités carrées — le nombre de carrés unitaires qui la paveraient exactement. Chaque figure plane possède sa propre formule sous forme close permettant de calculer cette valeur à partir de quelques dimensions mesurables, établie une fois pour toutes plutôt qu'approximée en comptant réellement des carrés unitaires.",
+          "paragraph2": "Ce calculateur applique la formule d'aire classique de la géométrie euclidienne pour chacune des huit formes courantes, du simple côté² d'un carré à la fraction, proportionnelle à l'angle, de l'aire d'un cercle complet pour un secteur circulaire. Chaque dimension saisie est validée comme un nombre strictement positif avant d'être utilisée, car une longueur ou un angle négatif ou nul ne correspond à aucune forme physique."
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "La formule de chaque forme repose sur un petit vocabulaire de dimensions mesurables — celles qui s'appliquent dépendent de la forme choisie.",
+          "items": [
+            {
+              "name": "Longueur du côté (s)",
+              "description": "L'unique mesure qui définit un carré — puisque ses quatre côtés sont égaux, l'aire est simplement cette longueur multipliée par elle-même."
+            },
+            {
+              "name": "Base et hauteur (b, h)",
+              "description": "Deux mesures perpendiculaires communes aux triangles, parallélogrammes et trapèzes. La hauteur désigne précisément la distance perpendiculaire à la base, qui n'est pas nécessairement l'un des côtés propres de la forme."
+            },
+            {
+              "name": "Rayon (r)",
+              "description": "La distance entre le centre d'un cercle ou d'un secteur et son bord. Doubler le rayon quadruple l'aire, puisque celle-ci varie avec le carré du rayon."
+            },
+            {
+              "name": "Demi-grand axe et demi-petit axe (a, b)",
+              "description": "La moitié respectivement du plus grand et du plus petit diamètre d'une ellipse — la généralisation à deux rayons du rayon unique d'un cercle."
+            },
+            {
+              "name": "Angle au centre (θ)",
+              "description": "L'ouverture de la part de tarte d'un secteur, en degrés sur un cercle complet de 360° — il ramène l'aire du cercle complet à la fraction que couvre réellement le secteur."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few shapes and the area this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Area",
+          "title": "Exemples résolus",
+          "intro": "Quelques formes et l'aire que ce calculateur renvoie pour chacune.",
+          "columnCalculation": "Forme et dimensions",
+          "columnResult": "Aire",
           "rows": [
             {
-              "calculation": "Square, side = 4",
-              "result": "16 square units"
+              "calculation": "Carré, côté = 4",
+              "result": "16 unités carrées"
             },
             {
-              "calculation": "Rectangle, width = 5, height = 3",
-              "result": "15 square units"
+              "calculation": "Rectangle, largeur = 5, hauteur = 3",
+              "result": "15 unités carrées"
             },
             {
-              "calculation": "Circle, radius = 3",
-              "result": "≈ 28.27 square units"
+              "calculation": "Cercle, rayon = 3",
+              "result": "≈ 28,27 unités carrées"
             },
             {
-              "calculation": "Circular sector, radius = 4, angle = 90°",
-              "result": "≈ 12.57 square units"
+              "calculation": "Secteur circulaire, rayon = 4, angle = 90°",
+              "result": "≈ 12,57 unités carrées"
+            }
+          ]
+        },
+        "applications": {
+          "title": "L'aire en pratique",
+          "intro": "Mesurer une aire n'est pas qu'un exercice scolaire — c'est le chiffre sur lequel plusieurs métiers du quotidien fondent réellement leurs estimations et leurs prix.",
+          "items": [
+            {
+              "title": "Arpentage et immobilier",
+              "description": "Actes de propriété, évaluations fiscales et prix affichés reposent tous sur l'aire mesurée d'une parcelle ou d'un logement — les géomètres décomposent les parcelles irrégulières en formes simples comme celles-ci, additionnent les morceaux et consignent le total."
+            },
+            {
+              "title": "Construction et architecture d'intérieur",
+              "description": "Revêtements de sol, carrelage, moquette, peinture et plaques de plâtre se devisent et s'achètent tous à l'aire, si bien qu'un entrepreneur calcule d'abord l'aire d'une pièce ou d'une toiture pour savoir quelle quantité de matériau commander et ce que le chantier devrait coûter."
+            },
+            {
+              "title": "Agriculture",
+              "description": "Les agriculteurs planifient les quantités de semences, d'engrais et d'irrigation par unité d'aire d'un champ, si bien qu'une aire de champ précise — souvent obtenue en assemblant plusieurs trapèzes et triangles — détermine directement le coût des intrants."
+            },
+            {
+              "title": "Fabrication et matériaux",
+              "description": "Découper efficacement du tissu, de la tôle ou du verre selon un patron dépend de la connaissance de l'aire de chaque pièce, à la fois pour chiffrer le matériau et pour limiter les chutes."
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "What's the difference between area and perimeter?",
-              "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other."
+              "question": "Quelle est la différence entre aire et périmètre ?",
+              "answer": "L'aire mesure la surface couverte par une forme, en unités carrées ; le périmètre mesure la longueur totale de son contour, en unités de longueur simples. Un rectangle long et étroit et un carré peuvent partager le même périmètre tout en ayant des aires très différentes, ce qui explique pourquoi les deux nécessitent des formules distinctes plutôt que l'une ne se déduise de l'autre."
             },
             {
-              "question": "Why does a triangle only need a base and height, not all three sides?",
-              "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it."
+              "question": "Pourquoi un triangle n'a-t-il besoin que d'une base et d'une hauteur, et non de ses trois côtés ?",
+              "answer": "La formule base × hauteur / 2 fonctionne pour n'importe quel triangle, quelles que soient les longueurs de ses deux autres côtés, car la « hauteur » désigne ici la distance perpendiculaire entre la base et le sommet opposé — l'aire d'un triangle ne dépend que de cette distance perpendiculaire, pas de la manière dont les deux autres côtés s'organisent autour d'elle."
             },
             {
-              "question": "Why can't a circular sector's angle exceed 360°?",
-              "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector."
+              "question": "Pourquoi l'angle d'un secteur circulaire ne peut-il pas dépasser 360° ?",
+              "answer": "360° correspond à un cercle complet, donc un angle supérieur demanderait plus que l'aire du cercle entier — ce qui n'a pas de sens pour un secteur. Si vous avez besoin de l'aire d'un cercle complet, utilisez directement la forme cercle plutôt qu'un secteur de 360°."
             },
             {
-              "question": "How is an ellipse's area related to a circle's?",
-              "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r."
+              "question": "Quel est le lien entre l'aire d'une ellipse et celle d'un cercle ?",
+              "answer": "Un cercle est un cas particulier d'ellipse où les deux axes sont égaux (demi-grand axe = demi-petit axe = rayon), ce qui explique que la formule de l'ellipse (π × a × b) se réduise exactement à la formule familière π × r² lorsque a et b valent tous deux r."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "From Land Surveying to Euclid's Elements",
-            "paragraph": "Practical area calculation predates written mathematics itself — ancient Egyptian and Babylonian surveyors needed to re-measure farmland area after the Nile's annual floods redrew field boundaries, and early clay tablets and papyri already show working (if sometimes approximate) rules for rectangles, triangles, and trapezoids. Around 300 BCE, Euclid's Elements organized these practical rules into a rigorous deductive system, proving area formulas from first principles rather than stating them as recipes — the same formulas this calculator still applies today are, for the most part, the ones Euclid formally established over two thousand years ago."
+            "title": "De l'arpentage des terres aux Éléments d'Euclide",
+            "paragraph": "Le calcul pratique de l'aire précède les mathématiques écrites elles-mêmes — les arpenteurs de l'Égypte et de la Babylonie antiques devaient remesurer l'aire des terres agricoles après que les crues annuelles du Nil aient redessiné les limites des champs, et les premières tablettes d'argile et papyrus montrent déjà des règles pratiques (parfois approximatives) pour les rectangles, triangles et trapèzes. Vers 300 av. J.-C., les Éléments d'Euclide organisent ces règles pratiques en un système déductif rigoureux, démontrant les formules d'aire à partir de principes premiers plutôt que de les énoncer comme de simples recettes — les formules que ce calculateur applique encore aujourd'hui sont, pour l'essentiel, celles qu'Euclide a formellement établies il y a plus de deux mille ans."
+          },
+          "modernDevelopments": {
+            "title": "Du compas et de la règle aux SIG et à la CAO",
+            "paragraph": "Les démonstrations d'Euclide traitaient des formes idéalisées, aux bords parfaitement droits et aux cercles parfaits, mais les parcelles de terrain réelles, les emprises de bâtiments et les pièces manufacturées sont rarement aussi nettes. L'arpentage moderne et les systèmes d'information géographique (SIG) prolongent la même idée de base — décomposer toute forme fermée en triangles, ou appliquer la formule du lacet (shoelace formula) pour additionner l'aire signée directement à partir des coordonnées des sommets d'un polygone — afin de mesurer des contours arbitrairement irréguliers à partir d'images satellite ou de relevés GPS. Les logiciels de conception assistée par ordinateur (CAO) appliquent ces mêmes formules sous forme close que ce calculateur utilise, simplement calculées automatiquement dès qu'un ingénieur esquisse la géométrie d'une pièce, plutôt qu'à la main."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Area and the broader study of geometric measurement sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Parcours académique",
+            "intro": "L'aire et l'étude plus large de la mesure géométrique relèvent des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 1 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 2 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "Non — le DPhil est un diplôme de recherche dispensé sur le campus."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 3 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 4 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classée n° 5 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
               },
               {
                 "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "Non — les programmes du département se déroulent sur le campus de l'AUB, à Beyrouth, au Liban."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Book I (2nd ed.). Cambridge University Press.",
+          "note": "Les démonstrations géométriques d'Euclide établissant que l'aire d'un parallélogramme égale base × hauteur, ainsi que la relation pythagoricienne qui sous-tend l'aire des triangles rectangles — les mêmes identités que les formules de ce calculateur codent aujourd'hui symboliquement.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Lire les Éléments d'Euclide, Livre I"
         }
       }
     },

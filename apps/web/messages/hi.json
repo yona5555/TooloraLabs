@@ -8941,148 +8941,231 @@
       }
     },
     "area-calculator": {
-      "title": "Area Calculator",
-      "description": "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+      "title": "क्षेत्रफल कैलकुलेटर",
+      "description": "वर्ग, आयत, त्रिभुज, वृत्त, दीर्घवृत्त, समलंब, समांतर चतुर्भुज और वृत्तखंड का क्षेत्रफल निकालें।",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कैलकुलेटर",
+        "faq": "सामान्य प्रश्न",
+        "behindTheTool": "इस टूल के पीछे"
       },
       "aboveFold": {
+        "widthLabel": "चौड़ाई",
+        "heightLabel": "ऊँचाई",
+        "baseLabel": "आधार",
         "quickReference": {
-          "title": "Area Formulas",
-          "intro": "The standard closed-form area formula this calculator applies for each shape."
+          "title": "क्षेत्रफल सूत्र",
+          "intro": "हर आकृति के लिए यह कैलकुलेटर जो मानक क्लोज़्ड-फ़ॉर्म क्षेत्रफल सूत्र लागू करता है।"
+        },
+        "conceptDiagram": {
+          "title": "एक डायमेंशन असल में क्या मापता है",
+          "intro": "हर क्षेत्रफल सूत्र कुछ गिनी-चुनी सीधी-रेखा या कोण की माप पर टिका होता है — यहाँ तीन प्रतिनिधि आकृतियों पर उन रेखाओं का मतलब दिखाया गया है।",
+          "ariaLabel": "एक आयत का डायग्राम जिसमें उसकी चौड़ाई और ऊँचाई अंकित है, एक वृत्त जिसमें उसकी त्रिज्या अंकित है, और एक त्रिभुज जिसमें उसका आधार और लंब ऊँचाई अंकित है, हर एक के नीचे उसका क्षेत्रफल सूत्र लिखा है",
+          "rectangleCaption": "दो लंबवत भुजाएँ",
+          "circleCaption": "केंद्र से किनारे तक एक त्रिज्या"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "आकृति और डायमेंशन",
+        "shapeLabel": "आकृति",
         "shape": {
-          "square": "Square",
-          "rectangle": "Rectangle",
-          "triangle": "Triangle",
-          "circle": "Circle",
-          "ellipse": "Ellipse",
-          "trapezoid": "Trapezoid",
-          "parallelogram": "Parallelogram",
-          "sector": "Circular Sector"
+          "square": "वर्ग",
+          "rectangle": "आयत",
+          "triangle": "त्रिभुज",
+          "circle": "वृत्त",
+          "ellipse": "दीर्घवृत्त",
+          "trapezoid": "समलंब",
+          "parallelogram": "समांतर चतुर्भुज",
+          "sector": "वृत्तखंड"
         },
-        "sideLabel": "Side Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "baseLabel": "Base",
-        "radiusLabel": "Radius",
-        "semiMajorAxisLabel": "Semi-Major Axis",
-        "semiMinorAxisLabel": "Semi-Minor Axis",
-        "base1Label": "Base 1",
-        "base2Label": "Base 2",
-        "angleLabel": "Angle (degrees)"
+        "sideLabel": "भुजा की लंबाई",
+        "widthLabel": "चौड़ाई",
+        "heightLabel": "ऊँचाई",
+        "baseLabel": "आधार",
+        "radiusLabel": "त्रिज्या",
+        "semiMajorAxisLabel": "अर्ध-दीर्घ अक्ष",
+        "semiMinorAxisLabel": "अर्ध-लघु अक्ष",
+        "base1Label": "आधार 1",
+        "base2Label": "आधार 2",
+        "angleLabel": "कोण (डिग्री)",
+        "hint": {
+          "side": "वर्ग की चारों भुजाएँ बराबर होती हैं, इसलिए एक माप ही काफ़ी है।",
+          "rectangleWidth": "समानांतर भुजाओं की लंबी (या कोई भी) जोड़ी।",
+          "rectangleHeight": "चौड़ाई के लंबवत भुजाओं की जोड़ी।",
+          "triangleBase": "कोई भी भुजा जिसे आप आधार मानना चाहें।",
+          "triangleHeight": "आधार से विपरीत शीर्ष तक की लंब दूरी — त्रिभुज की ढलानदार भुजाओं में से कोई नहीं।",
+          "circleRadius": "केंद्र से वृत्त पर किसी भी बिंदु तक की दूरी, व्यास नहीं।",
+          "ellipseMajor": "दीर्घवृत्त के सबसे लंबे व्यास का आधा (अर्ध-दीर्घ अक्ष)।",
+          "ellipseMinor": "दीर्घवृत्त के सबसे छोटे व्यास का आधा (अर्ध-लघु अक्ष)।",
+          "trapezoidBase1": "दो समानांतर भुजाओं में से एक।",
+          "trapezoidBase2": "दूसरी समानांतर भुजा — इसका आधार 1 के बराबर होना ज़रूरी नहीं।",
+          "sectorAngle": "पाई-स्लाइस का केंद्रीय कोण, डिग्री में, 0 से 360 तक।"
+        }
       },
       "result": {
-        "heading": "Area",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers, and an angle can't exceed 360°.",
-        "squareUnits": "square units"
+        "heading": "क्षेत्रफल",
+        "missingDimension": "इस आकृति के लिए ज़रूरी सभी डायमेंशन दर्ज करें।",
+        "invalidDimension": "सभी डायमेंशन धनात्मक संख्याएँ होनी चाहिए, और कोण 360° से ज़्यादा नहीं हो सकता।",
+        "squareUnits": "वर्ग इकाइयाँ",
+        "shapePreviewCaption": "आपके दर्ज किए गए डायमेंशन से लाइव बनी आकृति का एक अनुपातिक स्केच।"
       },
       "education": {
         "intro": {
-          "title": "Understanding Area",
-          "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
-          "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+          "title": "क्षेत्रफल को समझना",
+          "paragraph1": "क्षेत्रफल यह मापता है कि एक समतल आकृति कितनी सतह घेरती है, वर्ग इकाइयों में — यानी उतने यूनिट वर्गों की संख्या जो उस आकृति को बिल्कुल ढँक देंगे। हर समतल आकृति का अपना क्लोज़्ड-फ़ॉर्म सूत्र होता है जो इसे कुछ मापने-योग्य डायमेंशन से निकाल देता है — जो एक बार निकाला गया और हमेशा के लिए इस्तेमाल होता है, न कि हर बार यूनिट वर्ग गिनकर अनुमान लगाया जाता है।",
+          "paragraph2": "यह कैलकुलेटर आठ आम आकृतियों में से हर एक के लिए यूक्लिडियन ज्यामिति का मानक सूत्र लागू करता है — वर्ग के सीधे-सादे भुजा² से लेकर वृत्तखंड के कोण-अनुसार पूर्ण वृत्त के क्षेत्रफल के अंश तक। इस्तेमाल होने से पहले आपके दर्ज किए हर डायमेंशन को सख़्ती से धनात्मक संख्या के रूप में जाँचा जाता है, क्योंकि ऋणात्मक या शून्य लंबाई या कोण किसी भौतिक आकृति के अनुरूप नहीं होता।"
+        },
+        "variables": {
+          "title": "शामिल वेरिएबल",
+          "intro": "हर आकृति का सूत्र मापने-योग्य डायमेंशन की एक छोटी शब्दावली से बनता है — इनमें से कौन-सा लागू होगा यह इस बात पर निर्भर है कि आपने कौन-सी आकृति चुनी है।",
+          "items": [
+            {
+              "name": "भुजा की लंबाई (s)",
+              "description": "वर्ग की एकमात्र परिभाषित माप — चूँकि चारों भुजाएँ बराबर होती हैं, क्षेत्रफल बस उस लंबाई को खुद से गुणा करने पर मिलता है।"
+            },
+            {
+              "name": "आधार और ऊँचाई (b, h)",
+              "description": "त्रिभुज, समांतर चतुर्भुज और समलंब में साझा दो लंबवत माप। ऊँचाई का मतलब खासतौर पर आधार तक की लंब दूरी है, जो ज़रूरी नहीं कि आकृति की अपनी किसी भुजा के बराबर हो।"
+            },
+            {
+              "name": "त्रिज्या (r)",
+              "description": "वृत्त या वृत्तखंड के केंद्र से उसके किनारे तक की दूरी। त्रिज्या दोगुनी करने पर क्षेत्रफल चार गुना हो जाता है, क्योंकि क्षेत्रफल त्रिज्या के वर्ग के अनुसार बढ़ता है।"
+            },
+            {
+              "name": "अर्ध-दीर्घ और अर्ध-लघु अक्ष (a, b)",
+              "description": "दीर्घवृत्त के सबसे लंबे और सबसे छोटे व्यास का क्रमशः आधा — वृत्त की एक त्रिज्या का दो-त्रिज्या वाला सामान्यीकृत रूप।"
+            },
+            {
+              "name": "केंद्रीय कोण (θ)",
+              "description": "वृत्तखंड का पाई-स्लाइस कितना खुलता है, पूरे 360° वृत्त में से डिग्री में — यह पूरे वृत्त के क्षेत्रफल को उस अंश तक सीमित कर देता है जितना वृत्तखंड असल में घेरता है।"
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few shapes and the area this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Area",
+          "title": "हल किए गए उदाहरण",
+          "intro": "कुछ आकृतियाँ और हर एक के लिए यह कैलकुलेटर जो क्षेत्रफल देता है।",
+          "columnCalculation": "आकृति और डायमेंशन",
+          "columnResult": "क्षेत्रफल",
           "rows": [
             {
-              "calculation": "Square, side = 4",
-              "result": "16 square units"
+              "calculation": "वर्ग, भुजा = 4",
+              "result": "16 वर्ग इकाइयाँ"
             },
             {
-              "calculation": "Rectangle, width = 5, height = 3",
-              "result": "15 square units"
+              "calculation": "आयत, चौड़ाई = 5, ऊँचाई = 3",
+              "result": "15 वर्ग इकाइयाँ"
             },
             {
-              "calculation": "Circle, radius = 3",
-              "result": "≈ 28.27 square units"
+              "calculation": "वृत्त, त्रिज्या = 3",
+              "result": "≈ 28.27 वर्ग इकाइयाँ"
             },
             {
-              "calculation": "Circular sector, radius = 4, angle = 90°",
-              "result": "≈ 12.57 square units"
+              "calculation": "वृत्तखंड, त्रिज्या = 4, कोण = 90°",
+              "result": "≈ 12.57 वर्ग इकाइयाँ"
+            }
+          ]
+        },
+        "applications": {
+          "title": "व्यवहार में क्षेत्रफल",
+          "intro": "क्षेत्रफल नापना सिर्फ़ क्लासरूम की कवायद नहीं है — यह वह संख्या है जिस पर कई रोज़मर्रा के पेशे असल में अपने अनुमान और कीमतें तय करते हैं।",
+          "items": [
+            {
+              "title": "भूमि सर्वेक्षण और रियल एस्टेट",
+              "description": "प्रॉपर्टी डीड, टैक्स आकलन और लिस्टिंग कीमतें — सब किसी प्लॉट या घर के नापे गए क्षेत्रफल पर टिकी होती हैं। सर्वेयर अनियमित प्लॉट को इन्हीं जैसी सरल आकृतियों में तोड़ते हैं, हिस्सों को जोड़ते हैं, और कुल दर्ज करते हैं।"
+            },
+            {
+              "title": "निर्माण और इंटीरियर डिज़ाइन",
+              "description": "फ़्लोरिंग, टाइलिंग, कारपेट, पेंट और ड्राईवॉल — सब क्षेत्रफल के हिसाब से बताए और खरीदे जाते हैं, इसलिए कोई ठेकेदार पहले कमरे या छत का क्षेत्रफल निकालता है ताकि जान सके कितना मटीरियल मँगाना है और काम की कीमत क्या होनी चाहिए।"
+            },
+            {
+              "title": "कृषि",
+              "description": "किसान खेत के प्रति इकाई क्षेत्रफल के हिसाब से बीज, खाद और सिंचाई की मात्रा तय करते हैं, इसलिए एक सटीक खेत-क्षेत्रफल आँकड़ा — जो अक्सर कई समलंब और त्रिभुज जोड़कर बनाया जाता है — सीधे इनपुट लागत तय करता है।"
+            },
+            {
+              "title": "विनिर्माण और सामग्री",
+              "description": "किसी डिज़ाइन के हिसाब से कपड़ा, शीट मेटल या काँच को कुशलता से काटना हर टुकड़े का क्षेत्रफल जानने पर निर्भर करता है, ताकि मटीरियल की कीमत तय की जा सके और बर्बाद होने वाला हिस्सा कम से कम रहे।"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले प्रश्न",
           "items": [
             {
-              "question": "What's the difference between area and perimeter?",
-              "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other."
+              "question": "क्षेत्रफल और परिमाप में क्या फ़र्क़ है?",
+              "answer": "क्षेत्रफल यह मापता है कि कोई आकृति कितनी सतह घेरती है, वर्ग इकाइयों में; परिमाप उसकी सीमा की कुल लंबाई मापता है, सामान्य लंबाई की इकाइयों में। एक लंबा, पतला आयत और एक वर्ग एक ही परिमाप रखते हुए भी बहुत अलग क्षेत्रफल रख सकते हैं, इसीलिए दोनों को अलग-अलग सूत्रों की ज़रूरत पड़ती है, न कि एक को दूसरे से निकाला जा सके।"
             },
             {
-              "question": "Why does a triangle only need a base and height, not all three sides?",
-              "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it."
+              "question": "त्रिभुज को सिर्फ़ आधार और ऊँचाई की ज़रूरत क्यों पड़ती है, तीनों भुजाओं की नहीं?",
+              "answer": "आधार-और-ऊँचाई का सूत्र (½ × आधार × ऊँचाई) किसी भी त्रिभुज के लिए काम करता है, चाहे उसकी बाक़ी दो भुजाओं की लंबाई कुछ भी हो, क्योंकि यहाँ \"ऊँचाई\" का मतलब आधार से विपरीत शीर्ष तक की लंब दूरी है — त्रिभुज का क्षेत्रफल सिर्फ़ इस लंब दूरी पर निर्भर करता है, न कि बाक़ी दो भुजाएँ उसके इर्द-गिर्द कैसे बनी हैं इस पर।"
             },
             {
-              "question": "Why can't a circular sector's angle exceed 360°?",
-              "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector."
+              "question": "वृत्तखंड का कोण 360° से ज़्यादा क्यों नहीं हो सकता?",
+              "answer": "360° एक पूरा वृत्त है, इसलिए इससे ज़्यादा कोण पूरे वृत्त के क्षेत्रफल से भी ज़्यादा माँगेगा — जो किसी वृत्तखंड के लिए मायने नहीं रखता। अगर आपको पूरे वृत्त का क्षेत्रफल चाहिए, तो 360° के वृत्तखंड की बजाय सीधे वृत्त वाली आकृति इस्तेमाल करें।"
             },
             {
-              "question": "How is an ellipse's area related to a circle's?",
-              "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r."
+              "question": "दीर्घवृत्त का क्षेत्रफल वृत्त से कैसे जुड़ा है?",
+              "answer": "वृत्त दीर्घवृत्त का एक खास मामला है जिसमें दोनों अक्ष बराबर होते हैं (अर्ध-दीर्घ अक्ष = अर्ध-लघु अक्ष = त्रिज्या), इसीलिए दीर्घवृत्त का सूत्र (π × a × b) ठीक तब जाने-पहचाने π × r² में बदल जाता है जब a और b दोनों r के बराबर रख दिए जाएँ।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "From Land Surveying to Euclid's Elements",
-            "paragraph": "Practical area calculation predates written mathematics itself — ancient Egyptian and Babylonian surveyors needed to re-measure farmland area after the Nile's annual floods redrew field boundaries, and early clay tablets and papyri already show working (if sometimes approximate) rules for rectangles, triangles, and trapezoids. Around 300 BCE, Euclid's Elements organized these practical rules into a rigorous deductive system, proving area formulas from first principles rather than stating them as recipes — the same formulas this calculator still applies today are, for the most part, the ones Euclid formally established over two thousand years ago."
+            "title": "भूमि सर्वेक्षण से यूक्लिड के Elements तक",
+            "paragraph": "क्षेत्रफल की व्यावहारिक गणना लिखित गणित से भी पुरानी है — प्राचीन मिस्र और बेबीलोन के सर्वेयरों को नील नदी की सालाना बाढ़ के बाद, जब खेतों की सीमाएँ फिर से बदल जाती थीं, तब खेती की ज़मीन का क्षेत्रफल फिर से नापना पड़ता था, और शुरुआती मिट्टी की पट्टिकाओं और पपाइरस में आयत, त्रिभुज और समलंब के लिए काम करने वाले (कभी-कभी अनुमानित) नियम पहले से मौजूद हैं। लगभग 300 ईसा पूर्व, यूक्लिड के Elements ने इन व्यावहारिक नियमों को एक कठोर निगमनात्मक प्रणाली में संगठित किया, क्षेत्रफल के सूत्रों को नुस्खों की तरह बताने के बजाय मूल सिद्धांतों से सिद्ध किया — यह कैलकुलेटर आज भी जो सूत्र इस्तेमाल करता है, वे ज़्यादातर वही हैं जिन्हें यूक्लिड ने दो हज़ार साल से भी पहले औपचारिक रूप से स्थापित किया था।"
+          },
+          "modernDevelopments": {
+            "title": "कंपास और स्ट्रेटएज से GIS और CAD तक",
+            "paragraph": "यूक्लिड के प्रमाण आदर्श आकृतियों — सीधी भुजाओं और सम्पूर्ण वृत्तों — से निपटते थे, लेकिन असली ज़मीन के प्लॉट, इमारतों की बुनियाद और बनाए गए पुर्ज़े शायद ही कभी इतने सुव्यवस्थित होते हैं। आधुनिक सर्वेक्षण और भौगोलिक सूचना प्रणालियाँ (GIS) उसी बुनियादी विचार को आगे बढ़ाती हैं — किसी भी बंद आकृति को त्रिभुजों में तोड़कर, या किसी बहुभुज के शीर्ष निर्देशांकों से सीधे साइन किया गया क्षेत्रफल जोड़ने के लिए शूलेस फ़ॉर्मूला (shoelace formula) लगाकर — ताकि सैटेलाइट इमेजरी या GPS सर्वे बिंदुओं से मनमाने ढंग से अनियमित सीमाओं को नापा जा सके। कंप्यूटर-एडेड डिज़ाइन (CAD) सॉफ़्टवेयर बिल्कुल वही क्लोज़्ड-फ़ॉर्म सूत्र इस्तेमाल करता है जो यह कैलकुलेटर इस्तेमाल करता है, बस जैसे ही कोई इंजीनियर किसी पुर्ज़े की ज्यामिति स्केच करता है, वे हाथ से नहीं बल्कि अपने-आप निकाले जाते हैं।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Area and the broader study of geometric measurement sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "क्षेत्रफल और ज्यामितीय माप का व्यापक अध्ययन गणित के अंतर्गत आता है। यहाँ QS World University Rankings by Subject 2025 में गणित के लिए दुनिया भर की टॉप 5 यूनिवर्सिटीज़ हैं, साथ ही एक क्षेत्रीय विभाग:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "गणित में दुनिया भर में #1 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "नहीं — यह PhD गणित विभाग के भीतर एक इन-रेज़िडेंस रिसर्च प्रोग्राम है।"
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "गणित में दुनिया भर में #2 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "नहीं — DPhil कैंपस पर होने वाली एक रिसर्च डिग्री है।"
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "गणित में दुनिया भर में #3 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "नहीं — रिसर्च डिग्रियाँ Faculty of Mathematics में इन-रेज़िडेंस होती हैं।"
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "गणित में दुनिया भर में #4 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "नहीं — यह PhD एक इन-रेज़िडेंस रिसर्च प्रोग्राम है।"
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "गणित में दुनिया भर में #5 स्थान (QS World University Rankings by Subject 2025)।",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "नहीं — यह प्रोग्राम एक इन-रेज़िडेंस रिसर्च PhD है।"
               },
               {
                 "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "note": "1866 में स्थापित; इस वैश्विक विषय-तालिका में अलग से रैंक नहीं किया गया।",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "नहीं — विभाग के प्रोग्राम AUB के बेरूत, लेबनान वाले कैंपस में होते हैं।"
               }
             ]
           }
+        },
+        "references": {
+          "title": "वैज्ञानिक संदर्भ",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Book I (2nd ed.). Cambridge University Press.",
+          "note": "यूक्लिड के ज्यामितीय प्रमाण जो स्थापित करते हैं कि समांतर चतुर्भुज का क्षेत्रफल आधार × ऊँचाई के बराबर होता है, और वह पाइथागोरियन संबंध जो समकोण त्रिभुज के क्षेत्रफल के पीछे है — वही पहचान जिन्हें यह कैलकुलेटर के सूत्र आज भी प्रतीकात्मक रूप से दर्शाते हैं।",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "यूक्लिड के Elements, Book I पढ़ें"
         }
       }
     },
