@@ -62,7 +62,7 @@ export default function MathSolver({ education }: { education: ReactNode }) {
         <ToolAboveFold
           input={<MathSolverInputPanel draft={draft} onChange={setDraft} />}
           result={<MathSolverResult result={result} />}
-          sidebar={<RelatedToolsSidebar currentSlug="step-by-step-math-solver" category="math-science" />}
+          sidebar={<RelatedToolsSidebar currentSlug="step-by-step-math-solver" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

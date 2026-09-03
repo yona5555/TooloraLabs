@@ -536,7 +536,7 @@ export const tools: Tool[] = [
   {
     slug: "area-calculator",
     title: "Area Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
     featured: false,
@@ -552,7 +552,7 @@ export const tools: Tool[] = [
   {
     slug: "surface-area-calculator",
     title: "Surface Area Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
     featured: false,
@@ -568,7 +568,7 @@ export const tools: Tool[] = [
   {
     slug: "volume-calculator",
     title: "Volume Calculator",
-    category: "math-science",
+    category: "math",
     description:
       "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
     featured: false,
@@ -584,7 +584,7 @@ export const tools: Tool[] = [
   {
     slug: "step-by-step-math-solver",
     title: "Step-by-Step Math Solver",
-    category: "math-science",
+    category: "math",
     description:
       "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
     featured: false,
