@@ -47,3 +47,7 @@ export * from "./StoichiometryCalculator";
 export * from "./ChemicalEquationBalancer";
 export * from "./ClassScheduleBuilder";
 export * from "./CitationGenerator";
+export * from "./AreaCalculator";
+export * from "./SurfaceAreaCalculator";
+export * from "./VolumeCalculator";
+export * from "./StepByStepMathSolver";

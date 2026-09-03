@@ -8769,6 +8769,348 @@
         }
       }
     },
+    "area-calculator": {
+      "title": "Area Calculator",
+      "description": "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+      "nav": { "tool": "Calculator", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Area Formulas",
+          "intro": "The standard closed-form area formula this calculator applies for each shape."
+        }
+      },
+      "form": {
+        "inputTitle": "Shape & Dimensions",
+        "shapeLabel": "Shape",
+        "shape": {
+          "square": "Square",
+          "rectangle": "Rectangle",
+          "triangle": "Triangle",
+          "circle": "Circle",
+          "ellipse": "Ellipse",
+          "trapezoid": "Trapezoid",
+          "parallelogram": "Parallelogram",
+          "sector": "Circular Sector"
+        },
+        "sideLabel": "Side Length",
+        "widthLabel": "Width",
+        "heightLabel": "Height",
+        "baseLabel": "Base",
+        "radiusLabel": "Radius",
+        "semiMajorAxisLabel": "Semi-Major Axis",
+        "semiMinorAxisLabel": "Semi-Minor Axis",
+        "base1Label": "Base 1",
+        "base2Label": "Base 2",
+        "angleLabel": "Angle (degrees)"
+      },
+      "result": {
+        "heading": "Area",
+        "missingDimension": "Enter all the dimensions this shape needs.",
+        "invalidDimension": "All dimensions must be positive numbers, and an angle can't exceed 360°.",
+        "squareUnits": "square units"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Area",
+          "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
+          "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few shapes and the area this calculator returns for each.",
+          "columnCalculation": "Shape & Dimensions",
+          "columnResult": "Area",
+          "rows": [
+            { "calculation": "Square, side = 4", "result": "16 square units" },
+            { "calculation": "Rectangle, width = 5, height = 3", "result": "15 square units" },
+            { "calculation": "Circle, radius = 3", "result": "≈ 28.27 square units" },
+            { "calculation": "Circular sector, radius = 4, angle = 90°", "result": "≈ 12.57 square units" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "What's the difference between area and perimeter?", "answer": "Area measures the surface a shape covers, in square units; perimeter measures the total length of its boundary, in plain length units. A long, thin rectangle and a square can share the same perimeter while having very different areas, which is why the two need separate formulas rather than one being derivable from the other." },
+            { "question": "Why does a triangle only need a base and height, not all three sides?", "answer": "The base-and-height formula (½ × base × height) works for any triangle regardless of its other two side lengths, because \"height\" here means the perpendicular distance from the base to the opposite vertex — a triangle's area depends only on that perpendicular distance, not on how the other two sides are shaped around it." },
+            { "question": "Why can't a circular sector's angle exceed 360°?", "answer": "360° is a full circle, so an angle beyond that would ask for more than the entire circle's area — which isn't a meaningful sector. If you need a full circle's area, use the circle shape directly instead of a 360° sector." },
+            { "question": "How is an ellipse's area related to a circle's?", "answer": "A circle is a special case of an ellipse where both axes are equal (semi-major = semi-minor = radius), which is why the ellipse formula (π × a × b) collapses to the familiar π × r² exactly when a and b are both set to r." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "From Land Surveying to Euclid's Elements",
+            "paragraph": "Practical area calculation predates written mathematics itself — ancient Egyptian and Babylonian surveyors needed to re-measure farmland area after the Nile's annual floods redrew field boundaries, and early clay tablets and papyri already show working (if sometimes approximate) rules for rectangles, triangles, and trapezoids. Around 300 BCE, Euclid's Elements organized these practical rules into a rigorous deductive system, proving area formulas from first principles rather than stating them as recipes — the same formulas this calculator still applies today are, for the most part, the ones Euclid formally established over two thousand years ago."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Area and the broader study of geometric measurement sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
+              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
+              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
+              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+            ]
+          }
+        }
+      }
+    },
+    "surface-area-calculator": {
+      "title": "Surface Area Calculator",
+      "description": "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "nav": { "tool": "Calculator", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Surface Area Formulas",
+          "intro": "For the cone and square pyramid, this calculator derives the slant height from the perpendicular height you enter."
+        }
+      },
+      "form": {
+        "inputTitle": "Shape & Dimensions",
+        "shapeLabel": "Shape",
+        "shape": {
+          "cube": "Cube",
+          "rectangular-prism": "Rectangular Prism",
+          "sphere": "Sphere",
+          "cylinder": "Cylinder",
+          "cone": "Cone",
+          "square-pyramid": "Square Pyramid"
+        },
+        "sideLabel": "Side Length",
+        "lengthLabel": "Length",
+        "widthLabel": "Width",
+        "heightLabel": "Height",
+        "radiusLabel": "Radius",
+        "baseSideLabel": "Base Side Length"
+      },
+      "result": {
+        "heading": "Surface Area",
+        "missingDimension": "Enter all the dimensions this shape needs.",
+        "invalidDimension": "All dimensions must be positive numbers.",
+        "squareUnits": "square units"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Surface Area",
+          "paragraph1": "Surface area is the total area of every face of a 3D solid added together — the amount of material it would take to wrap the solid completely, in square units. Unlike volume, which measures the space a solid encloses, surface area only cares about its outer boundary.",
+          "paragraph2": "For a cone or square pyramid, this calculator asks for the perpendicular height (the distance straight up from the base to the apex) rather than the slant height along the surface, since the perpendicular height is what's usually easy to measure directly. It then derives the slant height internally using the Pythagorean theorem before applying the surface-area formula."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few solids and the surface area this calculator returns for each.",
+          "columnCalculation": "Shape & Dimensions",
+          "columnResult": "Surface Area",
+          "rows": [
+            { "calculation": "Cube, side = 3", "result": "54 square units" },
+            { "calculation": "Sphere, radius = 3", "result": "≈ 113.10 square units" },
+            { "calculation": "Cylinder, radius = 2, height = 5", "result": "≈ 87.96 square units" },
+            { "calculation": "Cone, radius = 3, height = 4", "result": "≈ 75.40 square units" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why does the cone ask for height instead of slant height?", "answer": "A perpendicular height is what most people can measure directly (straight up from the base), while a slant height runs along the cone's slanted surface and is harder to measure by hand. This calculator derives the slant height for you from the radius and perpendicular height using the Pythagorean theorem, so you only need to supply the measurement that's actually easy to take." },
+            { "question": "What's the difference between surface area and volume?", "answer": "Surface area totals the area of a solid's outer faces — how much material would wrap it. Volume measures the space enclosed inside it — how much it would hold. Two solids can have the same volume with very different surface areas (a sphere has the least surface area of any shape for a given volume), which is why both measurements matter for different practical questions." },
+            { "question": "Why does a rectangular prism need three separate dimensions?", "answer": "A rectangular prism has three pairs of matching rectangular faces (length×width, length×height, width×height), and unlike a cube, none of its three dimensions can be assumed equal to the others — all three are independently needed to compute the total surface area." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "Archimedes and the Sphere Inside a Cylinder",
+            "paragraph": "Archimedes of Syracuse (c. 287–212 BCE) proved in his treatise On the Sphere and Cylinder that a sphere's surface area equals exactly two-thirds the total surface area of the smallest cylinder that encloses it — a result he considered his finest achievement and reportedly asked to have engraved on his tombstone, alongside a diagram of the sphere and cylinder. That same treatise worked out the surface-area formulas for spheres, cylinders, and cones that this calculator still uses today, more than two thousand years later."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Surface area and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
+              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
+              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
+              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+            ]
+          }
+        }
+      }
+    },
+    "volume-calculator": {
+      "title": "Volume Calculator",
+      "description": "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "nav": { "tool": "Calculator", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Volume Formulas",
+          "intro": "The standard closed-form volume formula this calculator applies for each solid."
+        }
+      },
+      "form": {
+        "inputTitle": "Shape & Dimensions",
+        "shapeLabel": "Shape",
+        "shape": {
+          "cube": "Cube",
+          "rectangular-prism": "Rectangular Prism",
+          "sphere": "Sphere",
+          "cylinder": "Cylinder",
+          "cone": "Cone",
+          "square-pyramid": "Square Pyramid"
+        },
+        "sideLabel": "Side Length",
+        "lengthLabel": "Length",
+        "widthLabel": "Width",
+        "heightLabel": "Height",
+        "radiusLabel": "Radius",
+        "baseSideLabel": "Base Side Length"
+      },
+      "result": {
+        "heading": "Volume",
+        "missingDimension": "Enter all the dimensions this shape needs.",
+        "invalidDimension": "All dimensions must be positive numbers.",
+        "cubicUnits": "cubic units"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Volume",
+          "paragraph1": "Volume measures how much three-dimensional space a solid encloses, expressed in cubic units — the number of unit cubes that would exactly fill it. Each solid shape has its own closed-form formula derived from its geometry, letting volume be computed directly from a few measurements instead of estimated by physically packing it with unit cubes.",
+          "paragraph2": "This calculator uses the same dimension fields as the companion Surface Area Calculator for identical shapes — the same radius and perpendicular height describe a cylinder or cone in both tools — so a solid you've already measured for one calculation works immediately for the other."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few solids and the volume this calculator returns for each.",
+          "columnCalculation": "Shape & Dimensions",
+          "columnResult": "Volume",
+          "rows": [
+            { "calculation": "Cube, side = 3", "result": "27 cubic units" },
+            { "calculation": "Sphere, radius = 3", "result": "≈ 113.10 cubic units" },
+            { "calculation": "Cylinder, radius = 2, height = 5", "result": "≈ 62.83 cubic units" },
+            { "calculation": "Cone, radius = 3, height = 4", "result": "≈ 37.70 cubic units" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "Why is a cone's volume exactly one-third of a cylinder's?", "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen." },
+            { "question": "Why does a square pyramid's volume include a factor of one-third too?", "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor." },
+            { "question": "Does volume use the same height as surface area for a cone?", "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "Archimedes, a Bathtub, and a Crown",
+            "paragraph": "According to a story recorded by the Roman engineer Vitruvius, Archimedes of Syracuse worked out how to measure an irregular object's volume by water displacement while stepping into a bath — reportedly rushing into the street shouting \"Eureka\" (\"I have found it\") — after being asked to determine whether King Hiero II's crown was pure gold without damaging it. Archimedes also proved, in his treatise On the Sphere and Cylinder, that a sphere's volume equals exactly two-thirds the volume of the smallest cylinder enclosing it — a companion result to his surface-area finding, and one of the volume formulas this calculator still applies today."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
+              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
+              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
+              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+            ]
+          }
+        }
+      }
+    },
+    "step-by-step-math-solver": {
+      "title": "Step-by-Step Math Solver",
+      "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+      "nav": { "tool": "Solver", "faq": "FAQ", "behindTheTool": "Behind the Tool" },
+      "aboveFold": {
+        "quickReference": {
+          "title": "What This Solver Covers",
+          "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
+          "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+        }
+      },
+      "form": {
+        "inputTitle": "Problem",
+        "modeLabel": "Problem Type",
+        "mode": {
+          "linear-equation": "Linear Equation",
+          "quadratic-equation": "Quadratic Equation",
+          "fraction-operation": "Fraction Operation",
+          "derivative": "Derivative"
+        },
+        "numeratorLabel": "Numerator",
+        "denominatorLabel": "Denominator",
+        "operationLabel": "Operation",
+        "fracOp": {
+          "add": "Add (+)",
+          "subtract": "Subtract (−)",
+          "multiply": "Multiply (×)",
+          "divide": "Divide (÷)"
+        },
+        "termsLabel": "Polynomial Terms",
+        "coefficientLabel": "Coefficient",
+        "powerLabel": "Power of x",
+        "removeTerm": "Remove this term",
+        "addTerm": "Add Another Term"
+      },
+      "result": {
+        "heading": "Solution",
+        "missingInput": "Enter all the required values.",
+        "noUniqueSolution": "This equation doesn't have a single unique solution.",
+        "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
+        "invalidFraction": "A fraction's denominator can't be zero.",
+        "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
+        "emptyPolynomial": "Enter at least one non-zero term."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Step-by-Step Solving",
+          "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
+          "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "One problem from each of the four supported types.",
+          "columnCalculation": "Problem",
+          "columnResult": "Result",
+          "rows": [
+            { "calculation": "3x + 5 = 2x + 9", "result": "x = 4" },
+            { "calculation": "x² − 5x + 6 = 0", "result": "x₁ = 3, x₂ = 2" },
+            { "calculation": "1/2 + 1/3", "result": "5/6" },
+            { "calculation": "f(x) = 3x² + 2x + 5", "result": "f'(x) = 6x + 2" }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            { "question": "What does it mean when a linear equation has \"no unique solution\"?", "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal." },
+            { "question": "Why does a quadratic equation sometimes have complex solutions?", "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis." },
+            { "question": "Why do fraction results always come back reduced to lowest terms?", "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result." },
+            { "question": "Why does the derivative of a constant term always come out to 0?", "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out." }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The Book That Named Algebra",
+            "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              { "name": "Massachusetts Institute of Technology (MIT)", "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://math.mit.edu/academics/grad/admission", "online": "No — the PhD is an in-residence research program within the Department of Mathematics." },
+              { "name": "University of Oxford", "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics", "online": "No — the DPhil is an on-campus research degree." },
+              { "name": "University of Cambridge", "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees", "online": "No — research degrees are in-residence at the Faculty of Mathematics." },
+              { "name": "Harvard University", "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://www.math.harvard.edu/graduate/admissions", "online": "No — the PhD is an in-residence research program." },
+              { "name": "Stanford University", "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).", "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/", "online": "No — the program is an in-residence research PhD." },
+              { "name": "American University of Beirut — Department of Mathematics", "note": "Founded in 1866; not separately ranked on this global subject table.", "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx", "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon." }
+            ]
+          }
+        }
+      }
+    },
     "percentage-calculator": {
       "title": "Calculadora de porcentajes",
       "description": "Calcula porcentajes, porcentajes inversos y diferencias porcentuales al instante, con un gráfico comparativo en vivo para cada resultado.",
@@ -12998,7 +13340,6 @@
     "roman-numeral-converter": "Convertidor de números romanos",
     "quadratic-equation-calculator": "Calculadora de ecuación cuadrática",
     "trigonometry-calculator": "Calculadora de trigonometría",
-    "area-volume-calculator": "Calculadora de área y volumen",
     "gcf-lcm-calculator": "Calculadora de MCD/MCM",
     "qr-generator-extended": "Generador avanzado de códigos QR",
     "countdown-to-event-calculator": "Cuenta regresiva para un evento",
@@ -13026,9 +13367,6 @@
     "iq-estimate-calculator": "Estimación de CI",
     "weekly-task-planner-generator": "Generador de planificador semanal de tareas",
     "travel-cost-calculator": "Calculadora de costo de viaje",
-    "volume-calculator": "Calculadora de volumen",
-    "surface-area-calculator": "Calculadora de área superficial",
-    "area-calculator": "Calculadora de área",
     "simple-video-converter": "Convertidor de video simple",
     "password-strength-checker": "Verificador de fortaleza de contraseña",
     "project-timeline-calculator": "Calculadora de cronograma de proyecto",

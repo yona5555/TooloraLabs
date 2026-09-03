@@ -534,6 +534,70 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "area-calculator",
+    title: "Area Calculator",
+    category: "math-science",
+    description:
+      "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
+    featured: false,
+    keywords: [
+      "area calculator",
+      "square area",
+      "rectangle area",
+      "triangle area",
+      "circle area calculator",
+      "geometry area calculator",
+    ],
+  },
+  {
+    slug: "surface-area-calculator",
+    title: "Surface Area Calculator",
+    category: "math-science",
+    description:
+      "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+    featured: false,
+    keywords: [
+      "surface area calculator",
+      "cube surface area",
+      "sphere surface area",
+      "cylinder surface area",
+      "cone surface area",
+      "3d shape calculator",
+    ],
+  },
+  {
+    slug: "volume-calculator",
+    title: "Volume Calculator",
+    category: "math-science",
+    description:
+      "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+    featured: false,
+    keywords: [
+      "volume calculator",
+      "cube volume",
+      "sphere volume calculator",
+      "cylinder volume",
+      "cone volume calculator",
+      "3d shape volume",
+    ],
+  },
+  {
+    slug: "step-by-step-math-solver",
+    title: "Step-by-Step Math Solver",
+    category: "math-science",
+    description:
+      "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+    featured: false,
+    keywords: [
+      "step by step math solver",
+      "algebra solver",
+      "quadratic equation solver",
+      "fraction calculator with steps",
+      "derivative calculator",
+      "show work math solver",
+    ],
+  },
+  {
     slug: "stoichiometry-calculator",
     title: "Stoichiometry Calculator",
     category: "chemistry",

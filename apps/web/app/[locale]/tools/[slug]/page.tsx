@@ -87,6 +87,14 @@ import ClassScheduleBuilder from "@/components/tools/class-schedule-builder/Clas
 import ClassScheduleEducation from "@/components/tools/class-schedule-builder/ClassScheduleEducation";
 import CitationGenerator from "@/components/tools/citation-generator/CitationGenerator";
 import CitationEducation from "@/components/tools/citation-generator/CitationEducation";
+import AreaCalculator from "@/components/tools/area-calculator/AreaCalculator";
+import AreaEducation from "@/components/tools/area-calculator/AreaEducation";
+import SurfaceAreaCalculator from "@/components/tools/surface-area-calculator/SurfaceAreaCalculator";
+import SurfaceAreaEducation from "@/components/tools/surface-area-calculator/SurfaceAreaEducation";
+import VolumeCalculator from "@/components/tools/volume-calculator/VolumeCalculator";
+import VolumeEducation from "@/components/tools/volume-calculator/VolumeEducation";
+import MathSolver from "@/components/tools/step-by-step-math-solver/MathSolver";
+import MathSolverEducation from "@/components/tools/step-by-step-math-solver/MathSolverEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -423,6 +431,18 @@ export default async function ToolPage({
     case "citation-generator":
       component = <CitationGenerator education={<CitationEducation />} />;
       break;
+    case "area-calculator":
+      component = <AreaCalculator education={<AreaEducation />} />;
+      break;
+    case "surface-area-calculator":
+      component = <SurfaceAreaCalculator education={<SurfaceAreaEducation />} />;
+      break;
+    case "volume-calculator":
+      component = <VolumeCalculator education={<VolumeEducation />} />;
+      break;
+    case "step-by-step-math-solver":
+      component = <MathSolver education={<MathSolverEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -529,6 +549,10 @@ export default async function ToolPage({
     slug === "chemical-equation-balancer" ||
     slug === "class-schedule-builder" ||
     slug === "citation-generator" ||
+    slug === "area-calculator" ||
+    slug === "surface-area-calculator" ||
+    slug === "volume-calculator" ||
+    slug === "step-by-step-math-solver" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||
