@@ -9388,138 +9388,214 @@
       }
     },
     "volume-calculator": {
-      "title": "Volume Calculator",
-      "description": "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "title": "Volumenrechner",
+      "description": "Berechnen Sie das Volumen von Würfeln, Quadern, Kugeln, Zylindern, Kegeln und quadratischen Pyramiden.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hintergrundwissen"
       },
       "aboveFold": {
+        "heightLabel": "Höhe",
         "quickReference": {
-          "title": "Volume Formulas",
-          "intro": "The standard closed-form volume formula this calculator applies for each solid."
+          "title": "Volumenformeln",
+          "intro": "Die geschlossene Standardformel, die dieser Rechner für jeden Körper anwendet."
+        },
+        "conceptDiagram": {
+          "title": "Warum ein Kegel ein Drittel eines Zylinders ist",
+          "intro": "Das Volumen eines Zylinders ist ein Stapel identischer kreisförmiger Querschnitte (Grundfläche × Höhe). Ein Kegel mit derselben Grundfläche und Höhe passt genau in diesen Zylinder hinein — und nimmt dabei immer genau ein Drittel seines Volumens ein.",
+          "ariaLabel": "Diagramm eines Zylinders, dargestellt als Stapel kreisförmiger Scheiben, und eines Kegels innerhalb eines identischen Zylinderumrisses, der genau ein Drittel seines Volumens einnimmt, jeweils mit der darunter geschriebenen Volumenformel",
+          "cylinderCaption": "Ein Stapel identischer kreisförmiger Querschnitte",
+          "coneCaption": "Immer genau ⅓ des umschließenden Zylinders"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "Form & Abmessungen",
+        "shapeLabel": "Form",
         "shape": {
-          "cube": "Cube",
-          "rectangular-prism": "Rectangular Prism",
-          "sphere": "Sphere",
-          "cylinder": "Cylinder",
-          "cone": "Cone",
-          "square-pyramid": "Square Pyramid"
+          "cube": "Würfel",
+          "rectangular-prism": "Quader",
+          "sphere": "Kugel",
+          "cylinder": "Zylinder",
+          "cone": "Kegel",
+          "square-pyramid": "Quadratische Pyramide"
         },
-        "sideLabel": "Side Length",
-        "lengthLabel": "Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
+        "sideLabel": "Seitenlänge",
+        "lengthLabel": "Länge",
+        "widthLabel": "Breite",
+        "heightLabel": "Höhe",
         "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "baseSideLabel": "Grundseitenlänge",
+        "hint": {
+          "cubeSide": "Alle zwölf Kanten eines Würfels sind gleich lang, ein Maß genügt also.",
+          "prismLength": "Eine der drei unabhängigen Kantenlängen — keine kann als gleich den anderen angenommen werden.",
+          "prismWidth": "Die Kante senkrecht zur Länge, entlang der Grundfläche.",
+          "prismHeight": "Die Kante senkrecht zur Grundfläche, senkrecht nach oben verlaufend.",
+          "sphereRadius": "Der Abstand vom Mittelpunkt zu jedem Punkt auf der Kugeloberfläche.",
+          "cylinderRadius": "Der Radius der kreisförmigen Ober- und Unterseite.",
+          "cylinderHeight": "Der senkrechte Abstand zwischen den beiden Kreisflächen.",
+          "coneHeight": "Der senkrechte Abstand von der Grundfläche zur Spitze — nicht die schräge Strecke entlang der Kegeloberfläche.",
+          "pyramidBaseSide": "Die Länge einer Seite der quadratischen Grundfläche.",
+          "pyramidHeight": "Der senkrechte Abstand von der Mitte der Grundfläche zur Spitze."
+        }
       },
       "result": {
-        "heading": "Volume",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers.",
-        "cubicUnits": "cubic units"
+        "heading": "Volumen",
+        "missingDimension": "Geben Sie alle für diese Form benötigten Maße ein.",
+        "invalidDimension": "Alle Maße müssen positive Zahlen sein.",
+        "cubicUnits": "Kubikeinheiten",
+        "shapePreviewCaption": "Eine proportionale Skizze des eingegebenen Körpers, live aus Ihren Maßen neu gezeichnet."
       },
       "education": {
         "intro": {
-          "title": "Understanding Volume",
-          "paragraph1": "Volume measures how much three-dimensional space a solid encloses, expressed in cubic units — the number of unit cubes that would exactly fill it. Each solid shape has its own closed-form formula derived from its geometry, letting volume be computed directly from a few measurements instead of estimated by physically packing it with unit cubes.",
-          "paragraph2": "This calculator uses the same dimension fields as the companion Surface Area Calculator for identical shapes — the same radius and perpendicular height describe a cylinder or cone in both tools — so a solid you've already measured for one calculation works immediately for the other."
+          "title": "Volumen verstehen",
+          "paragraph1": "Volumen misst, wie viel dreidimensionalen Raum ein Körper einschließt, ausgedrückt in Kubikeinheiten — der Anzahl der Einheitswürfel, die ihn genau ausfüllen würden. Jede Körperform hat ihre eigene geschlossene Formel, die aus ihrer Geometrie abgeleitet ist, sodass sich das Volumen direkt aus wenigen Maßen berechnen lässt, statt es durch physisches Auffüllen mit Einheitswürfeln zu schätzen.",
+          "paragraph2": "Dieser Rechner verwendet für identische Formen dieselben Eingabefelder wie der zugehörige Oberflächenrechner — derselbe Radius und dieselbe senkrechte Höhe beschreiben einen Zylinder oder Kegel in beiden Werkzeugen —, sodass ein Körper, den Sie bereits für eine Berechnung gemessen haben, sofort auch für die andere funktioniert."
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Die Volumenformel jedes Körpers lässt sich auf dieselbe kleine Menge messbarer Kanten und Radien zurückführen — welche davon gelten, hängt vom gewählten Körper ab.",
+          "items": [
+            {
+              "name": "Seitenlänge (s)",
+              "description": "Die einzige maßgebliche Kante eines Würfels — das Volumen ist einfach diese Länge hoch drei, s³."
+            },
+            {
+              "name": "Länge, Breite, Höhe (l, b, h)",
+              "description": "Die drei unabhängigen Kanten eines Quaders, die direkt miteinander multipliziert den von ihnen definierten Kasten füllen."
+            },
+            {
+              "name": "Radius (r)",
+              "description": "Das maßgebliche Maß einer Kugel sowie der kreisförmigen Grundfläche, die sich Zylinder und Kegel teilen. Bei einer Kugel skaliert das Volumen mit der dritten Potenz des Radius, bei Zylinder oder Kegel mit dem Quadrat des Radius."
+            },
+            {
+              "name": "Senkrechte Höhe (h)",
+              "description": "Der senkrechte Abstand von einer Grundfläche zu einer Spitze oder gegenüberliegenden Fläche — immer die senkrechte Höhe, nie die schräge Strecke entlang der Oberfläche eines Kegels oder einer Pyramide."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Volumen in der Praxis",
+          "intro": "Volumen beantwortet die praktische Frage, wie viel Platz ein Körper einnimmt oder wie viel er fassen oder aufnehmen kann.",
+          "items": [
+            {
+              "title": "Versand und Lagerung",
+              "description": "Frachtpreise, Containerbeladung und Lagerhaltung hängen alle vom Volumen eines Artikels oder eines Kartons ab, weshalb Logistikunternehmen es direkt berechnen, um zu planen, wie viel in einen bestimmten Container oder Lkw passt."
+            },
+            {
+              "title": "Bauwesen und Baustoffe",
+              "description": "Beton, Kies und Verfüllmaterial werden nach Volumen bestellt, weshalb ein Bauunternehmer zuerst das Volumen eines Fundaments, einer Fundamentplatte oder eines Aushubs berechnet, um zu wissen, wie viel Material zu bestellen ist."
+            },
+            {
+              "title": "Fertigung und 3D-Druck",
+              "description": "Das Volumen eines Teils ergibt zusammen mit der Dichte eines Materials sein Gewicht, noch bevor es überhaupt hergestellt wird — nützlich zur Kalkulation von Rohmaterial und zur Abschätzung, wie lange ein 3D-Druck dauern wird."
+            },
+            {
+              "title": "Kochen und Chemie",
+              "description": "Rezepte und chemische Formulierungen skalieren nach Volumen, und das Volumen eines Behälters (einer Rührschüssel, eines Kolbens, eines Tanks) setzt eine feste Obergrenze dafür, wie viel Flüssigkeit oder körniges Material er sicher fassen kann."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few solids and the volume this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Volume",
+          "title": "Beispielrechnungen",
+          "intro": "Einige Körper und das Volumen, das dieser Rechner für jeden zurückgibt.",
+          "columnCalculation": "Form & Abmessungen",
+          "columnResult": "Volumen",
           "rows": [
             {
-              "calculation": "Cube, side = 3",
-              "result": "27 cubic units"
+              "calculation": "Würfel, Seite = 3",
+              "result": "27 Kubikeinheiten"
             },
             {
-              "calculation": "Sphere, radius = 3",
-              "result": "≈ 113.10 cubic units"
+              "calculation": "Kugel, Radius = 3",
+              "result": "≈ 113,10 Kubikeinheiten"
             },
             {
-              "calculation": "Cylinder, radius = 2, height = 5",
-              "result": "≈ 62.83 cubic units"
+              "calculation": "Zylinder, Radius = 2, Höhe = 5",
+              "result": "≈ 62,83 Kubikeinheiten"
             },
             {
-              "calculation": "Cone, radius = 3, height = 4",
-              "result": "≈ 37.70 cubic units"
+              "calculation": "Kegel, Radius = 3, Höhe = 4",
+              "result": "≈ 37,70 Kubikeinheiten"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "Why is a cone's volume exactly one-third of a cylinder's?",
-              "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen."
+              "question": "Warum beträgt das Volumen eines Kegels genau ein Drittel des Zylindervolumens?",
+              "answer": "Ein Kegel und ein Zylinder mit demselben Grundradius und derselben Höhe stehen im festen Volumenverhältnis von genau 1:3 — ein Ergebnis, das sich mit Infinitesimalrechnung (durch Integration kreisförmiger Querschnitte) beweisen lässt, aber lange vor deren Existenz bekannt war und genutzt wurde, da es unabhängig vom gewählten Radius oder der gewählten Höhe gilt."
             },
             {
-              "question": "Why does a square pyramid's volume include a factor of one-third too?",
-              "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor."
+              "question": "Warum enthält auch das Volumen einer quadratischen Pyramide einen Faktor von einem Drittel?",
+              "answer": "Dasselbe Verhältnis von 1:3, das einen Kegel mit seinem umschließenden Zylinder verbindet, verbindet auch eine Pyramide mit ihrem umschließenden Prisma gleicher Grundfläche und Höhe — jede Pyramide oder jeder Kegel nimmt genau ein Drittel des sie eng umschließenden Prismas oder Zylinders ein, weshalb beide Formeln diesen Faktor teilen."
             },
             {
-              "question": "Does volume use the same height as surface area for a cone?",
-              "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all."
+              "question": "Verwendet das Volumen für einen Kegel dieselbe Höhe wie die Oberfläche?",
+              "answer": "Ja — sowohl dieser Rechner als auch der zugehörige Oberflächenrechner fragen nach der senkrechten Höhe des Kegels (senkrecht von der Grundfläche zur Spitze), nicht nach der Mantellinie. Die Oberfläche leitet die Mantellinie intern ab, wenn sie benötigt wird; das Volumen benötigt sie hingegen überhaupt nicht."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hintergrundwissen zu diesem Rechner",
           "history": {
-            "title": "Archimedes, a Bathtub, and a Crown",
-            "paragraph": "According to a story recorded by the Roman engineer Vitruvius, Archimedes of Syracuse worked out how to measure an irregular object's volume by water displacement while stepping into a bath — reportedly rushing into the street shouting \"Eureka\" (\"I have found it\") — after being asked to determine whether King Hiero II's crown was pure gold without damaging it. Archimedes also proved, in his treatise On the Sphere and Cylinder, that a sphere's volume equals exactly two-thirds the volume of the smallest cylinder enclosing it — a companion result to his surface-area finding, and one of the volume formulas this calculator still applies today."
+            "title": "Archimedes, eine Badewanne und eine Krone",
+            "paragraph": "Einer vom römischen Ingenieur Vitruv überlieferten Geschichte zufolge fand Archimedes von Syrakus heraus, wie man das Volumen eines unregelmäßigen Gegenstands durch Wasserverdrängung misst, während er in eine Badewanne stieg — und soll daraufhin rufend \"Heureka\" (\"Ich habe es gefunden\") auf die Straße gelaufen sein —, nachdem er gebeten worden war, festzustellen, ob die Krone von König Hieron II. aus reinem Gold bestand, ohne sie zu beschädigen. Archimedes bewies zudem in seiner Abhandlung Über Kugel und Zylinder, dass das Volumen einer Kugel genau zwei Drittel des Volumens des kleinsten sie umschließenden Zylinders beträgt — ein zu seinem Oberflächenergebnis gehörendes Resultat und eine der Volumenformeln, die dieser Rechner bis heute anwendet."
+          },
+          "modernDevelopments": {
+            "title": "Von der Wasserverdrängung zur Computertomographie",
+            "paragraph": "Archimedes' Verdrängungsmethode funktioniert noch heute für jeden Gegenstand, den man in Wasser tauchen kann, doch die moderne Volumenmessung ist längst über die Badewanne hinausgewachsen. CT- und MRT-Scanner rekonstruieren die vollständige 3D-Form eines Objekts — oder eines Organs — aus Querschnittsbildern und berechnen das eingeschlossene Volumen numerisch, nach derselben Idee des Stapelns von Querschnitten, die auch der Formel πr²h eines Zylinders zugrunde liegt, nur eben Scheibe für Scheibe auf eine unregelmäßige Form angewandt. 3D-Scanner und CAD-Software leisten Entsprechendes für gefertigte Teile und berechnen exakte Volumina für Formen, die für jede geschlossene Formel viel zu unregelmäßig sind."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Akademischer Werdegang",
+            "intro": "Volumen und räumliche Geometrie gehören zur Mathematik. Hier sind die weltweit fünf besten Hochschulen für Mathematik im QS World University Rankings by Subject 2025, plus eine regionale Fakultät:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "Nein — die Promotion ist ein Präsenzforschungsprogramm innerhalb der Fakultät für Mathematik."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "Nein — die Forschungsstudiengänge finden in Präsenz an der Fakultät für Mathematik statt."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "Nein — die Promotion ist ein Präsenzforschungsprogramm."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "American University of Beirut — Fachbereich Mathematik",
+                "note": "Gegründet 1866; in dieser globalen Fachtabelle nicht separat gelistet.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "Nein — die Studiengänge des Fachbereichs finden auf dem Campus der AUB in Beirut, Libanon, statt."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "Archimedes' ursprünglicher Beweis, dass das Volumen einer Kugel zwei Drittel des Volumens ihres umschreibenden Zylinders beträgt — das zu derselben Abhandlung gehörende Gegenstück zu der Oberflächenbeziehung, die im Oberflächenrechner dieser Website zitiert wird.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Die Werke des Archimedes lesen"
         }
       }
     },

@@ -19,8 +19,15 @@ export default function VolumeInputPanel({ draft, onChange }: Props) {
     onChange({ ...draft, ...partial });
   }
 
-  const field = (key: keyof Solid3DDraft, label: string) => (
-    <ToolInput label={label} type="text" inputMode="decimal" value={draft[key]} onChange={(e) => patch({ [key]: e.target.value } as Partial<Solid3DDraft>)} />
+  const field = (key: keyof Solid3DDraft, label: string, hint?: string) => (
+    <ToolInput
+      label={label}
+      hint={hint}
+      type="text"
+      inputMode="decimal"
+      value={draft[key]}
+      onChange={(e) => patch({ [key]: e.target.value } as Partial<Solid3DDraft>)}
+    />
   );
 
   return (
@@ -41,29 +48,36 @@ export default function VolumeInputPanel({ draft, onChange }: Props) {
       </label>
 
       <div className="mt-5 space-y-5">
-        {draft.shape === "cube" && field("side", t("sideLabel"))}
+        {draft.shape === "cube" && field("side", t("sideLabel"), t("hint.cubeSide"))}
 
         {draft.shape === "rectangular-prism" && (
           <>
-            {field("length", t("lengthLabel"))}
-            {field("width", t("widthLabel"))}
-            {field("height", t("heightLabel"))}
+            {field("length", t("lengthLabel"), t("hint.prismLength"))}
+            {field("width", t("widthLabel"), t("hint.prismWidth"))}
+            {field("height", t("heightLabel"), t("hint.prismHeight"))}
           </>
         )}
 
-        {draft.shape === "sphere" && field("radius", t("radiusLabel"))}
+        {draft.shape === "sphere" && field("radius", t("radiusLabel"), t("hint.sphereRadius"))}
 
-        {(draft.shape === "cylinder" || draft.shape === "cone") && (
+        {draft.shape === "cylinder" && (
           <>
-            {field("radius", t("radiusLabel"))}
-            {field("height", t("heightLabel"))}
+            {field("radius", t("radiusLabel"), t("hint.cylinderRadius"))}
+            {field("height", t("heightLabel"), t("hint.cylinderHeight"))}
+          </>
+        )}
+
+        {draft.shape === "cone" && (
+          <>
+            {field("radius", t("radiusLabel"), t("hint.cylinderRadius"))}
+            {field("height", t("heightLabel"), t("hint.coneHeight"))}
           </>
         )}
 
         {draft.shape === "square-pyramid" && (
           <>
-            {field("baseSide", t("baseSideLabel"))}
-            {field("height", t("heightLabel"))}
+            {field("baseSide", t("baseSideLabel"), t("hint.pyramidBaseSide"))}
+            {field("height", t("heightLabel"), t("hint.pyramidHeight"))}
           </>
         )}
       </div>

@@ -54,7 +54,7 @@ export default function VolumeCalculator({ education }: { education: ReactNode }
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<VolumeInputPanel draft={draft} onChange={setDraft} />}
-          result={<VolumeResult result={result} digitStyle={digitStyle} />}
+          result={<VolumeResult result={result} digitStyle={digitStyle} draft={draft} />}
           sidebar={<RelatedToolsSidebar currentSlug="volume-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

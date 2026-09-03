@@ -9388,138 +9388,214 @@
       }
     },
     "volume-calculator": {
-      "title": "Volume Calculator",
-      "description": "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "title": "Calculateur de volume",
+      "description": "Calculez le volume de cubes, pavés droits, sphères, cylindres, cônes et pyramides à base carrée.",
       "nav": {
-        "tool": "Calculator",
+        "tool": "Calculateur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses"
       },
       "aboveFold": {
+        "heightLabel": "Hauteur",
         "quickReference": {
-          "title": "Volume Formulas",
-          "intro": "The standard closed-form volume formula this calculator applies for each solid."
+          "title": "Formules de volume",
+          "intro": "La formule fermée standard que ce calculateur applique à chaque solide."
+        },
+        "conceptDiagram": {
+          "title": "Pourquoi un cône vaut un tiers d'un cylindre",
+          "intro": "Le volume d'un cylindre est un empilement de sections transversales circulaires identiques (aire de la base × hauteur). Un cône partageant la même base et la même hauteur s'inscrit exactement dans ce cylindre — et occupe toujours exactement un tiers de son volume.",
+          "ariaLabel": "Diagramme d'un cylindre représenté comme un empilement de disques circulaires, et d'un cône dessiné à l'intérieur du contour d'un cylindre identique, occupant exactement un tiers de son volume, chacun avec sa formule de volume inscrite en dessous",
+          "cylinderCaption": "Un empilement de sections transversales circulaires identiques",
+          "coneCaption": "Toujours exactement ⅓ du cylindre englobant"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "Forme et dimensions",
+        "shapeLabel": "Forme",
         "shape": {
           "cube": "Cube",
-          "rectangular-prism": "Rectangular Prism",
-          "sphere": "Sphere",
-          "cylinder": "Cylinder",
-          "cone": "Cone",
-          "square-pyramid": "Square Pyramid"
+          "rectangular-prism": "Pavé droit",
+          "sphere": "Sphère",
+          "cylinder": "Cylindre",
+          "cone": "Cône",
+          "square-pyramid": "Pyramide à base carrée"
         },
-        "sideLabel": "Side Length",
-        "lengthLabel": "Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "sideLabel": "Longueur du côté",
+        "lengthLabel": "Longueur",
+        "widthLabel": "Largeur",
+        "heightLabel": "Hauteur",
+        "radiusLabel": "Rayon",
+        "baseSideLabel": "Côté de la base",
+        "hint": {
+          "cubeSide": "Les douze arêtes d'un cube sont égales, une seule mesure suffit donc.",
+          "prismLength": "L'une des trois dimensions indépendantes des arêtes — aucune ne peut être supposée égale aux autres.",
+          "prismWidth": "L'arête perpendiculaire à la longueur, le long de la base.",
+          "prismHeight": "L'arête perpendiculaire à la base, orientée verticalement.",
+          "sphereRadius": "La distance entre le centre et n'importe quel point de la surface de la sphère.",
+          "cylinderRadius": "Le rayon des cercles du dessus et du dessous.",
+          "cylinderHeight": "La distance perpendiculaire entre les deux cercles.",
+          "coneHeight": "La distance verticale directe entre la base et le sommet — pas la distance inclinée le long de la surface du cône.",
+          "pyramidBaseSide": "La longueur d'un côté de la base carrée.",
+          "pyramidHeight": "La distance verticale directe entre le centre de la base et le sommet."
+        }
       },
       "result": {
         "heading": "Volume",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers.",
-        "cubicUnits": "cubic units"
+        "missingDimension": "Saisissez toutes les dimensions requises par cette forme.",
+        "invalidDimension": "Toutes les dimensions doivent être des nombres positifs.",
+        "cubicUnits": "unités cubes",
+        "shapePreviewCaption": "Un croquis proportionnel du solide saisi, redessiné en direct à partir de vos dimensions."
       },
       "education": {
         "intro": {
-          "title": "Understanding Volume",
-          "paragraph1": "Volume measures how much three-dimensional space a solid encloses, expressed in cubic units — the number of unit cubes that would exactly fill it. Each solid shape has its own closed-form formula derived from its geometry, letting volume be computed directly from a few measurements instead of estimated by physically packing it with unit cubes.",
-          "paragraph2": "This calculator uses the same dimension fields as the companion Surface Area Calculator for identical shapes — the same radius and perpendicular height describe a cylinder or cone in both tools — so a solid you've already measured for one calculation works immediately for the other."
+          "title": "Comprendre le volume",
+          "paragraph1": "Le volume mesure la quantité d'espace tridimensionnel enfermée par un solide, exprimée en unités cubes — le nombre de cubes unitaires qui le rempliraient exactement. Chaque forme solide possède sa propre formule fermée dérivée de sa géométrie, ce qui permet de calculer le volume directement à partir de quelques mesures plutôt que de l'estimer en le remplissant physiquement de cubes unitaires.",
+          "paragraph2": "Ce calculateur utilise les mêmes champs de dimensions que le Calculateur de surface qui l'accompagne pour des formes identiques — le même rayon et la même hauteur perpendiculaire décrivent un cylindre ou un cône dans les deux outils —, de sorte qu'un solide déjà mesuré pour un calcul fonctionne immédiatement pour l'autre."
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "La formule de volume de chaque solide se ramène au même petit ensemble d'arêtes et de rayons mesurables — ceux qui s'appliquent dépendent du solide choisi.",
+          "items": [
+            {
+              "name": "Longueur du côté (s)",
+              "description": "L'unique arête déterminante d'un cube — le volume est simplement cette longueur au cube, s³."
+            },
+            {
+              "name": "Longueur, largeur, hauteur (l, l, h)",
+              "description": "Les trois arêtes indépendantes d'un pavé droit, multipliées directement entre elles pour remplir la boîte qu'elles définissent."
+            },
+            {
+              "name": "Rayon (r)",
+              "description": "La mesure déterminante d'une sphère, et de la base circulaire partagée par un cylindre et un cône. Le volume évolue avec le cube du rayon pour une sphère, et avec le carré du rayon pour un cylindre ou un cône."
+            },
+            {
+              "name": "Hauteur perpendiculaire (h)",
+              "description": "La distance verticale directe entre une base et un sommet ou une face opposée — toujours la hauteur perpendiculaire, jamais la distance inclinée le long de la surface d'un cône ou d'une pyramide."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Le volume en pratique",
+          "intro": "Le volume répond à la question pratique de savoir combien d'espace occupe un solide, ou combien il peut contenir.",
+          "items": [
+            {
+              "title": "Expédition et stockage",
+              "description": "La tarification du fret, le chargement des conteneurs et le stockage en entrepôt dépendent tous du volume d'un article ou d'un carton, si bien que les entreprises de logistique le calculent directement pour prévoir ce qui tient dans un conteneur ou un camion donné."
+            },
+            {
+              "title": "Construction et matériaux",
+              "description": "Le béton, le gravier et les remblais se commandent au volume, si bien qu'un entrepreneur calcule d'abord le volume d'une fondation, d'une semelle ou d'une excavation pour savoir quelle quantité de matériau commander."
+            },
+            {
+              "title": "Fabrication et impression 3D",
+              "description": "Le volume d'une pièce, combiné à la densité d'un matériau, donne son poids avant même sa fabrication — utile pour chiffrer la matière première et pour estimer la durée d'une impression 3D."
+            },
+            {
+              "title": "Cuisine et chimie",
+              "description": "Les recettes et les formulations chimiques s'ajustent au volume, et le volume d'un récipient (un bol de mélange, une fiole, une cuve) fixe une limite ferme à la quantité de liquide ou de matière granulaire qu'il peut contenir en toute sécurité."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few solids and the volume this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
+          "title": "Exemples résolus",
+          "intro": "Quelques solides et le volume que ce calculateur renvoie pour chacun.",
+          "columnCalculation": "Forme et dimensions",
           "columnResult": "Volume",
           "rows": [
             {
-              "calculation": "Cube, side = 3",
-              "result": "27 cubic units"
+              "calculation": "Cube, côté = 3",
+              "result": "27 unités cubes"
             },
             {
-              "calculation": "Sphere, radius = 3",
-              "result": "≈ 113.10 cubic units"
+              "calculation": "Sphère, rayon = 3",
+              "result": "≈ 113,10 unités cubes"
             },
             {
-              "calculation": "Cylinder, radius = 2, height = 5",
-              "result": "≈ 62.83 cubic units"
+              "calculation": "Cylindre, rayon = 2, hauteur = 5",
+              "result": "≈ 62,83 unités cubes"
             },
             {
-              "calculation": "Cone, radius = 3, height = 4",
-              "result": "≈ 37.70 cubic units"
+              "calculation": "Cône, rayon = 3, hauteur = 4",
+              "result": "≈ 37,70 unités cubes"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Foire aux questions",
           "items": [
             {
-              "question": "Why is a cone's volume exactly one-third of a cylinder's?",
-              "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen."
+              "question": "Pourquoi le volume d'un cône vaut-il exactement un tiers de celui d'un cylindre ?",
+              "answer": "Un cône et un cylindre partageant le même rayon de base et la même hauteur ont un rapport de volume fixe exactement égal à 1:3 — un résultat démontrable par le calcul intégral (en intégrant des sections transversales circulaires), mais connu et utilisé bien avant l'existence de ce calcul, car il se vérifie quels que soient le rayon ou la hauteur choisis."
             },
             {
-              "question": "Why does a square pyramid's volume include a factor of one-third too?",
-              "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor."
+              "question": "Pourquoi le volume d'une pyramide à base carrée comporte-t-il lui aussi un facteur d'un tiers ?",
+              "answer": "Le même rapport 1:3 qui relie un cône au cylindre qui l'englobe relie aussi une pyramide au prisme qui l'englobe avec la même base et la même hauteur — toute pyramide ou tout cône occupe exactement un tiers du prisme ou du cylindre qui l'enveloppe étroitement, ce qui explique pourquoi les deux formules partagent ce facteur."
             },
             {
-              "question": "Does volume use the same height as surface area for a cone?",
-              "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all."
+              "question": "Le volume utilise-t-il la même hauteur que la surface pour un cône ?",
+              "answer": "Oui — ce calculateur et le Calculateur de surface qui l'accompagne demandent tous deux la hauteur perpendiculaire du cône (verticalement de la base au sommet), et non la hauteur inclinée. La surface dérive la hauteur inclinée en interne lorsqu'elle en a besoin ; le volume n'en a jamais besoin du tout."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "Archimedes, a Bathtub, and a Crown",
-            "paragraph": "According to a story recorded by the Roman engineer Vitruvius, Archimedes of Syracuse worked out how to measure an irregular object's volume by water displacement while stepping into a bath — reportedly rushing into the street shouting \"Eureka\" (\"I have found it\") — after being asked to determine whether King Hiero II's crown was pure gold without damaging it. Archimedes also proved, in his treatise On the Sphere and Cylinder, that a sphere's volume equals exactly two-thirds the volume of the smallest cylinder enclosing it — a companion result to his surface-area finding, and one of the volume formulas this calculator still applies today."
+            "title": "Archimède, une baignoire et une couronne",
+            "paragraph": "Selon une histoire rapportée par l'ingénieur romain Vitruve, Archimède de Syracuse aurait découvert comment mesurer le volume d'un objet irrégulier par déplacement d'eau en entrant dans un bain — se précipitant alors dans la rue, dit-on, en criant \"Eurêka\" (\"J'ai trouvé\") — après qu'on lui eut demandé de déterminer si la couronne du roi Hiéron II était en or pur sans l'endommager. Archimède démontra également, dans son traité De la sphère et du cylindre, que le volume d'une sphère équivaut exactement aux deux tiers du volume du plus petit cylindre qui la contient — un résultat complémentaire à sa découverte sur la surface, et l'une des formules de volume que ce calculateur applique encore aujourd'hui."
+          },
+          "modernDevelopments": {
+            "title": "Du déplacement d'eau au scanner",
+            "paragraph": "La méthode de déplacement d'Archimède fonctionne encore aujourd'hui pour tout objet que l'on peut plonger dans l'eau, mais la mesure moderne du volume est allée bien au-delà de la baignoire. Les scanners CT et IRM reconstruisent la forme 3D complète d'un objet — ou d'un organe — à partir d'images en coupe et intègrent numériquement le volume enfermé, selon la même idée d'empilement de sections transversales que la formule πr²h d'un cylindre, appliquée cette fois à une forme irrégulière, une fine tranche à la fois. Les scanners 3D et les logiciels de CAO font l'équivalent pour les pièces fabriquées, calculant des volumes exacts pour des formes bien trop irrégulières pour toute formule fermée."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Parcours académique",
+            "intro": "Le volume et la géométrie dans l'espace relèvent des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 1 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
               },
               {
-                "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "Université d'Oxford",
+                "note": "Classée n° 2 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "Non — le DPhil est un diplôme de recherche sur campus."
               },
               {
-                "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "Université de Cambridge",
+                "note": "Classée n° 3 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
               },
               {
-                "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "Université Harvard",
+                "note": "Classée n° 4 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
               },
               {
-                "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "Université Stanford",
+                "note": "Classée n° 5 mondiale en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "Université américaine de Beyrouth — Département de mathématiques",
+                "note": "Fondée en 1866 ; non classée séparément dans ce tableau mondial par discipline.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB, à Beyrouth, au Liban."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "La démonstration originale d'Archimède selon laquelle le volume d'une sphère équivaut aux deux tiers de celui du cylindre qui la circonscrit — le résultat complémentaire, dans le même traité, à la relation de surface citée par le Calculateur de surface de ce site.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Lire les Œuvres d'Archimède"
         }
       }
     },

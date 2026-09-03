@@ -9384,138 +9384,214 @@
       }
     },
     "volume-calculator": {
-      "title": "Volume Calculator",
-      "description": "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "title": "حاسبة الحجم",
+      "description": "احسب حجم المكعبات، ومتوازيات المستطيلات، والكرات، والأسطوانات، والمخروطات، والأهرامات الرباعية.",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "الحاسبة",
+        "faq": "الأسئلة الشائعة",
+        "behindTheTool": "خلف الأداة"
       },
       "aboveFold": {
+        "heightLabel": "الارتفاع",
         "quickReference": {
-          "title": "Volume Formulas",
-          "intro": "The standard closed-form volume formula this calculator applies for each solid."
+          "title": "صيغ الحجم",
+          "intro": "الصيغة المغلقة القياسية لحساب الحجم التي تطبّقها هذه الحاسبة لكل مجسم."
+        },
+        "conceptDiagram": {
+          "title": "لماذا يساوي حجم المخروط ثلث حجم الأسطوانة",
+          "intro": "حجم الأسطوانة هو تكديس لمقاطع دائرية متطابقة (مساحة القاعدة × الارتفاع). والمخروط الذي يشارك القاعدة والارتفاع نفسهما يقع تمامًا داخل تلك الأسطوانة — ويشغل دائمًا ثلث حجمها بالضبط.",
+          "ariaLabel": "رسم توضيحي لأسطوانة معروضة كتكديس من أقراص دائرية، ومخروط مرسوم داخل مخطط أسطوانة مطابق يشغل ثلث حجمها بالضبط، مع كتابة صيغة الحجم أسفل كل منهما",
+          "cylinderCaption": "تكديس من مقاطع دائرية متطابقة",
+          "coneCaption": "دائمًا ⅓ من الأسطوانة المحيطة بالضبط"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "الشكل والأبعاد",
+        "shapeLabel": "الشكل",
         "shape": {
-          "cube": "Cube",
-          "rectangular-prism": "Rectangular Prism",
-          "sphere": "Sphere",
-          "cylinder": "Cylinder",
-          "cone": "Cone",
-          "square-pyramid": "Square Pyramid"
+          "cube": "مكعب",
+          "rectangular-prism": "متوازي مستطيلات",
+          "sphere": "كرة",
+          "cylinder": "أسطوانة",
+          "cone": "مخروط",
+          "square-pyramid": "هرم رباعي"
         },
-        "sideLabel": "Side Length",
-        "lengthLabel": "Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "sideLabel": "طول الضلع",
+        "lengthLabel": "الطول",
+        "widthLabel": "العرض",
+        "heightLabel": "الارتفاع",
+        "radiusLabel": "نصف القطر",
+        "baseSideLabel": "طول ضلع القاعدة",
+        "hint": {
+          "cubeSide": "جميع حواف المكعب الاثنتي عشرة متساوية، فيكفي قياس واحد.",
+          "prismLength": "أحد الأبعاد الثلاثة المستقلة للحواف — لا يمكن افتراض تساوي أي منها مع الأخرى.",
+          "prismWidth": "الحافة العمودية على الطول، على امتداد القاعدة.",
+          "prismHeight": "الحافة العمودية على القاعدة، والممتدة رأسيًا.",
+          "sphereRadius": "المسافة من المركز إلى أي نقطة على سطح الكرة.",
+          "cylinderRadius": "نصف قطر الدائرتين العلوية والسفلية.",
+          "cylinderHeight": "المسافة العمودية بين الدائرتين العلوية والسفلية.",
+          "coneHeight": "المسافة الرأسية المباشرة من القاعدة إلى القمة — وليست المسافة المائلة على طول سطح المخروط.",
+          "pyramidBaseSide": "طول أحد أضلاع القاعدة المربعة.",
+          "pyramidHeight": "المسافة الرأسية المباشرة من مركز القاعدة إلى القمة."
+        }
       },
       "result": {
-        "heading": "Volume",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers.",
-        "cubicUnits": "cubic units"
+        "heading": "الحجم",
+        "missingDimension": "أدخل جميع الأبعاد التي يحتاجها هذا الشكل.",
+        "invalidDimension": "يجب أن تكون جميع الأبعاد أرقامًا موجبة.",
+        "cubicUnits": "وحدة مكعبة",
+        "shapePreviewCaption": "رسم تناسبي للمجسم الذي أدخلته، يُعاد رسمه حيًّا من أبعادك."
       },
       "education": {
         "intro": {
-          "title": "Understanding Volume",
-          "paragraph1": "Volume measures how much three-dimensional space a solid encloses, expressed in cubic units — the number of unit cubes that would exactly fill it. Each solid shape has its own closed-form formula derived from its geometry, letting volume be computed directly from a few measurements instead of estimated by physically packing it with unit cubes.",
-          "paragraph2": "This calculator uses the same dimension fields as the companion Surface Area Calculator for identical shapes — the same radius and perpendicular height describe a cylinder or cone in both tools — so a solid you've already measured for one calculation works immediately for the other."
+          "title": "فهم الحجم",
+          "paragraph1": "يقيس الحجم مقدار الحيّز ثلاثي الأبعاد الذي يحتويه مجسم ما، ويُعبَّر عنه بوحدات مكعبة — أي عدد المكعبات الوحدوية التي تملؤه تمامًا. ولكل شكل مجسم صيغته المغلقة الخاصة المشتقة من هندسته، مما يتيح حساب الحجم مباشرة من عدد قليل من القياسات بدلًا من تقديره بملء المجسم فعليًا بمكعبات وحدوية.",
+          "paragraph2": "تستخدم هذه الحاسبة حقول الأبعاد نفسها المستخدمة في حاسبة المساحة السطحية المرافقة لها بالنسبة للأشكال المطابقة — فنصف القطر والارتفاع العمودي نفسهما يصفان الأسطوانة أو المخروط في كلتا الأداتين — بحيث يعمل المجسم الذي قِستَه سابقًا لحساب واحد فورًا في الحساب الآخر."
+        },
+        "variables": {
+          "title": "المتغيرات المعنية",
+          "intro": "تختزل صيغة الحجم لكل مجسم إلى المجموعة الصغيرة نفسها من الحواف وأنصاف الأقطار القابلة للقياس — وأيها ينطبق يعتمد على المجسم الذي تختاره.",
+          "items": [
+            {
+              "name": "طول الضلع (s)",
+              "description": "الحافة المحددة الوحيدة للمكعب — والحجم ببساطة هو هذا الطول مرفوعًا إلى القوة الثالثة، s³."
+            },
+            {
+              "name": "الطول والعرض والارتفاع (l, w, h)",
+              "description": "الحواف المستقلة الثلاث لمتوازي المستطيلات، تُضرب معًا مباشرة لتملأ الصندوق الذي تحدده."
+            },
+            {
+              "name": "نصف القطر (r)",
+              "description": "القياس المحدد للكرة، وللقاعدة الدائرية التي تشترك فيها الأسطوانة والمخروط. يتناسب الحجم مع مكعب نصف القطر في حالة الكرة، ومع مربعه في حالة الأسطوانة أو المخروط."
+            },
+            {
+              "name": "الارتفاع العمودي (h)",
+              "description": "المسافة الرأسية المباشرة من قاعدة إلى قمة أو وجه مقابل — وهي دائمًا الارتفاع العمودي، لا المسافة المائلة على طول سطح المخروط أو الهرم."
+            }
+          ]
+        },
+        "applications": {
+          "title": "الحجم في التطبيق العملي",
+          "intro": "يجيب الحجم عن السؤال العملي المتعلق بمقدار الحيّز الذي يشغله مجسم ما، أو مقدار ما يمكنه استيعابه أو احتواؤه.",
+          "items": [
+            {
+              "title": "الشحن والتخزين",
+              "description": "تعتمد تسعيرة الشحن وتحميل الحاويات وتخزين المستودعات كلها على حجم الصنف أو الصندوق، لذا تحسبه شركات اللوجستيات مباشرة لتخطيط ما يتّسع له حاوية أو شاحنة معينة."
+            },
+            {
+              "title": "البناء ومواد التشييد",
+              "description": "يُطلَب الخرسانة والحصى وتراب الردم بحسب الحجم، لذا يحسب المقاول أولًا حجم الأساس أو القاعدة أو الحفر لمعرفة كمية المواد الواجب طلبها."
+            },
+            {
+              "title": "التصنيع والطباعة ثلاثية الأبعاد",
+              "description": "يعطي حجم القطعة، مقترنًا بكثافة المادة، وزنها قبل إنتاجها فعليًا — وهو مفيد لتقدير تكلفة المواد الخام ولتقدير المدة التي ستستغرقها عملية الطباعة ثلاثية الأبعاد."
+            },
+            {
+              "title": "الطهي والكيمياء",
+              "description": "تُقاس الوصفات والتركيبات الكيميائية بحسب الحجم، ويضع حجم الوعاء (وعاء الخلط، أو الدورق، أو الخزان) حدًّا أقصى ثابتًا لكمية السائل أو المادة الحبيبية التي يمكنه استيعابها بأمان."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few solids and the volume this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Volume",
+          "title": "أمثلة محلولة",
+          "intro": "بعض المجسمات والحجم الذي تُرجعه هذه الحاسبة لكل منها.",
+          "columnCalculation": "الشكل والأبعاد",
+          "columnResult": "الحجم",
           "rows": [
             {
-              "calculation": "Cube, side = 3",
-              "result": "27 cubic units"
+              "calculation": "مكعب، الضلع = 3",
+              "result": "27 وحدة مكعبة"
             },
             {
-              "calculation": "Sphere, radius = 3",
-              "result": "≈ 113.10 cubic units"
+              "calculation": "كرة، نصف القطر = 3",
+              "result": "≈ 113.10 وحدة مكعبة"
             },
             {
-              "calculation": "Cylinder, radius = 2, height = 5",
-              "result": "≈ 62.83 cubic units"
+              "calculation": "أسطوانة، نصف القطر = 2، الارتفاع = 5",
+              "result": "≈ 62.83 وحدة مكعبة"
             },
             {
-              "calculation": "Cone, radius = 3, height = 4",
-              "result": "≈ 37.70 cubic units"
+              "calculation": "مخروط، نصف القطر = 3، الارتفاع = 4",
+              "result": "≈ 37.70 وحدة مكعبة"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "الأسئلة الشائعة",
           "items": [
             {
-              "question": "Why is a cone's volume exactly one-third of a cylinder's?",
-              "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen."
+              "question": "لماذا يساوي حجم المخروط ثلث حجم الأسطوانة بالضبط؟",
+              "answer": "المخروط والأسطوانة اللذان يشتركان في نصف قطر القاعدة والارتفاع نفسهما لهما نسبة حجم ثابتة تساوي 1:3 بالضبط — نتيجة يمكن إثباتها بحساب التفاضل والتكامل (عبر تكامل المقاطع الدائرية)، لكنها كانت معروفة ومستخدمة قبل وجود هذا الحساب بزمن طويل، لأنها تصح بصرف النظر عن نصف القطر أو الارتفاع المحددين."
             },
             {
-              "question": "Why does a square pyramid's volume include a factor of one-third too?",
-              "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor."
+              "question": "لماذا يتضمن حجم الهرم الرباعي أيضًا عامل الثلث؟",
+              "answer": "النسبة نفسها 1:3 التي تربط المخروط بالأسطوانة المحيطة به تربط أيضًا الهرم بالمنشور المحيط به الذي يشاركه القاعدة والارتفاع نفسهما — فأي هرم أو مخروط يشغل ثلث حجم المنشور أو الأسطوانة المحيطة به تمامًا، وهو سبب اشتراك الصيغتين في هذا العامل."
             },
             {
-              "question": "Does volume use the same height as surface area for a cone?",
-              "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all."
+              "question": "هل يستخدم الحجم الارتفاع نفسه المستخدم في المساحة السطحية للمخروط؟",
+              "answer": "نعم — تطلب كل من هذه الحاسبة وحاسبة المساحة السطحية المرافقة لها الارتفاع العمودي للمخروط (المسافة الرأسية المباشرة من القاعدة إلى القمة)، وليس الميل الجانبي. تشتق المساحة السطحية الميل الجانبي داخليًا عند الحاجة إليه؛ أما الحجم فلا يحتاج إلى الميل الجانبي إطلاقًا."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "خلف هذه الأداة",
           "history": {
-            "title": "Archimedes, a Bathtub, and a Crown",
-            "paragraph": "According to a story recorded by the Roman engineer Vitruvius, Archimedes of Syracuse worked out how to measure an irregular object's volume by water displacement while stepping into a bath — reportedly rushing into the street shouting \"Eureka\" (\"I have found it\") — after being asked to determine whether King Hiero II's crown was pure gold without damaging it. Archimedes also proved, in his treatise On the Sphere and Cylinder, that a sphere's volume equals exactly two-thirds the volume of the smallest cylinder enclosing it — a companion result to his surface-area finding, and one of the volume formulas this calculator still applies today."
+            "title": "أرخميدس وحوض الاستحمام والتاج",
+            "paragraph": "وفقًا لقصة سجّلها المهندس الروماني فيتروفيوس، توصّل أرخميدس السرقوسي إلى طريقة قياس حجم جسم غير منتظم عن طريق إزاحة الماء أثناء نزوله إلى حوض استحمام — وقد اندفع، بحسب الرواية، إلى الشارع صائحًا \"يوريكا\" (\"لقد وجدتها\") — بعدما طُلب منه تحديد ما إذا كان تاج الملك هيرون الثاني مصنوعًا من ذهب خالص دون إتلافه. كما أثبت أرخميدس في رسالته عن الكرة والأسطوانة أن حجم الكرة يساوي ثلثي حجم أصغر أسطوانة تحيط بها بالضبط — وهي نتيجة مرافقة لاكتشافه المتعلق بالمساحة السطحية، وإحدى صيغ الحجم التي لا تزال هذه الحاسبة تطبّقها حتى اليوم."
+          },
+          "modernDevelopments": {
+            "title": "من إزاحة الماء إلى الأشعة المقطعية",
+            "paragraph": "لا تزال طريقة أرخميدس في إزاحة الماء تصلح اليوم لأي جسم يمكن غمسه في الماء، لكن قياس الحجم الحديث تجاوز حوض الاستحمام بمراحل. تعيد أجهزة الأشعة المقطعية والرنين المغناطيسي بناء الشكل ثلاثي الأبعاد الكامل لجسم — أو لعضو — من صور مقطعية، وتحسب الحجم المحصور عدديًّا، وفق الفكرة نفسها لتكديس المقاطع التي تقوم عليها صيغة الأسطوانة πr²h، لكنها مطبَّقة على شكل غير منتظم شريحة رقيقة تلو الأخرى. وتقوم الماسحات ثلاثية الأبعاد وبرمجيات التصميم بمساعدة الحاسوب بالمهمة نفسها للقطع المصنَّعة، فتحسب أحجامًا دقيقة لأشكال معقدة أكثر مما تحتمله أي صيغة مغلقة."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "المسار الأكاديمي",
+            "intro": "يندرج الحجم والهندسة الفراغية ضمن الرياضيات. إليك أفضل 5 جامعات عالميًا في تصنيف QS العالمي للجامعات حسب التخصص لعام 2025 لتخصص الرياضيات، بالإضافة إلى قسم إقليمي واحد:",
             "universities": [
               {
-                "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "معهد ماساتشوستس للتكنولوجيا (MIT)",
+                "note": "الأول عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "لا — الدكتوراه برنامج بحثي حضوري ضمن قسم الرياضيات."
               },
               {
-                "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة أكسفورد",
+                "note": "الثاني عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "لا — الدكتوراه (DPhil) درجة بحثية حضورية داخل الحرم الجامعي."
               },
               {
-                "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة كامبريدج",
+                "note": "الثالث عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "لا — الدرجات البحثية حضورية في كلية الرياضيات."
               },
               {
-                "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة هارفارد",
+                "note": "الرابع عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "لا — الدكتوراه برنامج بحثي حضوري."
               },
               {
-                "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة ستانفورد",
+                "note": "الخامس عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "لا — البرنامج دكتوراه بحثية حضورية."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "الجامعة الأمريكية في بيروت — قسم الرياضيات",
+                "note": "تأسست عام 1866؛ غير مصنّفة بشكل منفصل في هذا الجدول العالمي للتخصص.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "لا — تُقدَّم برامج القسم في حرم الجامعة الأمريكية في بيروت، لبنان."
               }
             ]
           }
+        },
+        "references": {
+          "title": "المراجع العلمية",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "برهان أرخميدس الأصلي على أن حجم الكرة يساوي ثلثي حجم الأسطوانة المحيطة بها — وهي النتيجة المرافقة، ضمن الرسالة نفسها، للعلاقة الخاصة بالمساحة السطحية التي تستشهد بها حاسبة المساحة السطحية في هذا الموقع.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "قراءة أعمال أرخميدس"
         }
       }
     },

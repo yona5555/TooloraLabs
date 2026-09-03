@@ -9392,9 +9392,17 @@
         "behindTheTool": "Behind the Tool"
       },
       "aboveFold": {
+        "heightLabel": "Height",
         "quickReference": {
           "title": "Volume Formulas",
           "intro": "The standard closed-form volume formula this calculator applies for each solid."
+        },
+        "conceptDiagram": {
+          "title": "Why a Cone Is One-Third of a Cylinder",
+          "intro": "A cylinder's volume is a stack of identical circular cross-sections (base area × height). A cone sharing the same base and height fits exactly inside that cylinder — and always occupies exactly one-third of it.",
+          "ariaLabel": "Diagram of a cylinder shown as a stack of circular discs, and a cone drawn inside an identical cylinder outline occupying exactly one-third of its volume, each with its volume formula written beneath it",
+          "cylinderCaption": "A stack of identical circular cross-sections",
+          "coneCaption": "Always exactly ⅓ of the enclosing cylinder"
         }
       },
       "form": {
@@ -9413,19 +9421,76 @@
         "widthLabel": "Width",
         "heightLabel": "Height",
         "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "baseSideLabel": "Base Side Length",
+        "hint": {
+          "cubeSide": "All twelve edges of a cube are equal, so one measurement is enough.",
+          "prismLength": "One of the three independent edge lengths — none can be assumed equal to the others.",
+          "prismWidth": "The edge perpendicular to the length, along the base.",
+          "prismHeight": "The edge perpendicular to the base, running vertically.",
+          "sphereRadius": "The distance from the center to any point on the sphere's surface.",
+          "cylinderRadius": "The radius of the circular top and bottom.",
+          "cylinderHeight": "The perpendicular distance between the top and bottom circles.",
+          "coneHeight": "The straight-up distance from the base to the apex — not the slanted distance along the cone's surface.",
+          "pyramidBaseSide": "The length of one side of the square base.",
+          "pyramidHeight": "The straight-up distance from the center of the base to the apex."
+        }
       },
       "result": {
         "heading": "Volume",
         "missingDimension": "Enter all the dimensions this shape needs.",
         "invalidDimension": "All dimensions must be positive numbers.",
-        "cubicUnits": "cubic units"
+        "cubicUnits": "cubic units",
+        "shapePreviewCaption": "A proportional sketch of the solid you entered, redrawn live from your dimensions."
       },
       "education": {
         "intro": {
           "title": "Understanding Volume",
           "paragraph1": "Volume measures how much three-dimensional space a solid encloses, expressed in cubic units — the number of unit cubes that would exactly fill it. Each solid shape has its own closed-form formula derived from its geometry, letting volume be computed directly from a few measurements instead of estimated by physically packing it with unit cubes.",
           "paragraph2": "This calculator uses the same dimension fields as the companion Surface Area Calculator for identical shapes — the same radius and perpendicular height describe a cylinder or cone in both tools — so a solid you've already measured for one calculation works immediately for the other."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Every solid's volume formula reduces to the same small set of measurable edges and radii — which ones apply depends on which solid you pick.",
+          "items": [
+            {
+              "name": "Side Length (s)",
+              "description": "A cube's single defining edge — volume is simply that length cubed, s³."
+            },
+            {
+              "name": "Length, Width, Height (l, w, h)",
+              "description": "The three independent edges of a rectangular prism, multiplied together directly to fill the box they define."
+            },
+            {
+              "name": "Radius (r)",
+              "description": "The defining measurement of a sphere, and of the circular base shared by a cylinder and a cone. Volume scales with the cube of the radius for a sphere, and the square of the radius for a cylinder or cone."
+            },
+            {
+              "name": "Perpendicular Height (h)",
+              "description": "The straight-up distance from a base to an apex or opposite face — always the perpendicular height, never the slanted distance along a cone's or pyramid's surface."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Volume in Practice",
+          "intro": "Volume answers the practical question of how much space a solid takes up, or how much it can hold or contain.",
+          "items": [
+            {
+              "title": "Shipping and Storage",
+              "description": "Freight pricing, container loading, and warehouse storage all depend on an item's or a box's volume, so logistics companies calculate it directly to plan how much fits in a given container or truck."
+            },
+            {
+              "title": "Construction and Materials",
+              "description": "Concrete, gravel, and fill dirt are ordered by volume, so a contractor calculates the volume of a foundation, footing, or excavation first to know how much material to order."
+            },
+            {
+              "title": "Manufacturing and 3D Printing",
+              "description": "A part's volume, combined with a material's density, gives its weight before it's ever produced — useful for costing raw material and for estimating how long a 3D print will take."
+            },
+            {
+              "title": "Cooking and Chemistry",
+              "description": "Recipes and chemical formulations scale by volume, and the volume of a container (a mixing bowl, a flask, a tank) sets a hard upper limit on how much liquid or granular material it can safely hold."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -9474,6 +9539,10 @@
             "title": "Archimedes, a Bathtub, and a Crown",
             "paragraph": "According to a story recorded by the Roman engineer Vitruvius, Archimedes of Syracuse worked out how to measure an irregular object's volume by water displacement while stepping into a bath — reportedly rushing into the street shouting \"Eureka\" (\"I have found it\") — after being asked to determine whether King Hiero II's crown was pure gold without damaging it. Archimedes also proved, in his treatise On the Sphere and Cylinder, that a sphere's volume equals exactly two-thirds the volume of the smallest cylinder enclosing it — a companion result to his surface-area finding, and one of the volume formulas this calculator still applies today."
           },
+          "modernDevelopments": {
+            "title": "From Water Displacement to CT Scans",
+            "paragraph": "Archimedes' displacement method still works today for any object you can dunk in water, but modern volume measurement has moved well beyond the bathtub. CT and MRI scanners reconstruct an object's — or an organ's — full 3D shape from cross-sectional images and integrate the enclosed volume numerically, the same cross-section-stacking idea behind a cylinder's πr²h formula, just applied to an irregular shape one thin slice at a time. 3D scanners and CAD software do the equivalent for manufactured parts, computing exact volumes for shapes far too irregular for any closed-form formula."
+          },
           "academicPath": {
             "title": "Academic Path",
             "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
@@ -9516,6 +9585,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "Archimedes' original proof that a sphere's volume equals two-thirds that of its circumscribing cylinder — the companion result, in the same treatise, to the surface-area relationship cited by this site's Surface Area Calculator.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Read The Works of Archimedes"
         }
       }
     },

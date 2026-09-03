@@ -9388,138 +9388,214 @@
       }
     },
     "volume-calculator": {
-      "title": "Volume Calculator",
-      "description": "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
+      "title": "आयतन कैलकुलेटर",
+      "description": "घन, आयताकार प्रिज्म, गोला, बेलन, शंकु और वर्गाकार पिरामिड के आयतन की गणना करें।",
       "nav": {
-        "tool": "Calculator",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "कैलकुलेटर",
+        "faq": "सामान्य प्रश्न",
+        "behindTheTool": "इस टूल के पीछे"
       },
       "aboveFold": {
+        "heightLabel": "ऊँचाई",
         "quickReference": {
-          "title": "Volume Formulas",
-          "intro": "The standard closed-form volume formula this calculator applies for each solid."
+          "title": "आयतन के सूत्र",
+          "intro": "यह कैलकुलेटर प्रत्येक ठोस के लिए जो मानक संवृत-रूप आयतन सूत्र लागू करता है।"
+        },
+        "conceptDiagram": {
+          "title": "शंकु, बेलन का एक-तिहाई क्यों होता है",
+          "intro": "बेलन का आयतन समान वृत्ताकार अनुप्रस्थ काट का एक ढेर है (आधार क्षेत्रफल × ऊँचाई)। वही आधार और ऊँचाई साझा करने वाला शंकु उसी बेलन के भीतर ठीक-ठीक समा जाता है — और हमेशा उसके आयतन का ठीक एक-तिहाई भाग घेरता है।",
+          "ariaLabel": "वृत्ताकार डिस्कों के ढेर के रूप में दिखाया गया एक बेलन, और एक समान बेलन की रूपरेखा के भीतर बना एक शंकु जो उसके आयतन का ठीक एक-तिहाई घेरता है, प्रत्येक के नीचे उसका आयतन सूत्र लिखा हुआ है, का आरेख",
+          "cylinderCaption": "समान वृत्ताकार अनुप्रस्थ कटावों का एक ढेर",
+          "coneCaption": "हमेशा घेरने वाले बेलन का ठीक ⅓ भाग"
         }
       },
       "form": {
-        "inputTitle": "Shape & Dimensions",
-        "shapeLabel": "Shape",
+        "inputTitle": "आकृति और आयाम",
+        "shapeLabel": "आकृति",
         "shape": {
-          "cube": "Cube",
-          "rectangular-prism": "Rectangular Prism",
-          "sphere": "Sphere",
-          "cylinder": "Cylinder",
-          "cone": "Cone",
-          "square-pyramid": "Square Pyramid"
+          "cube": "घन",
+          "rectangular-prism": "आयताकार प्रिज्म",
+          "sphere": "गोला",
+          "cylinder": "बेलन",
+          "cone": "शंकु",
+          "square-pyramid": "वर्गाकार पिरामिड"
         },
-        "sideLabel": "Side Length",
-        "lengthLabel": "Length",
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "radiusLabel": "Radius",
-        "baseSideLabel": "Base Side Length"
+        "sideLabel": "भुजा की लंबाई",
+        "lengthLabel": "लंबाई",
+        "widthLabel": "चौड़ाई",
+        "heightLabel": "ऊँचाई",
+        "radiusLabel": "त्रिज्या",
+        "baseSideLabel": "आधार भुजा की लंबाई",
+        "hint": {
+          "cubeSide": "घन की सभी बारह भुजाएँ बराबर होती हैं, इसलिए एक माप ही पर्याप्त है।",
+          "prismLength": "तीन स्वतंत्र किनारों की लंबाइयों में से एक — किसी को भी दूसरे के बराबर नहीं माना जा सकता।",
+          "prismWidth": "आधार के साथ, लंबाई के लंबवत किनारा।",
+          "prismHeight": "आधार के लंबवत, ऊर्ध्वाधर दिशा में जाने वाला किनारा।",
+          "sphereRadius": "केंद्र से गोले की सतह पर किसी भी बिंदु तक की दूरी।",
+          "cylinderRadius": "ऊपरी और निचले वृत्तों की त्रिज्या।",
+          "cylinderHeight": "ऊपरी और निचले वृत्तों के बीच की लंबवत दूरी।",
+          "coneHeight": "आधार से शीर्ष तक की सीधी ऊर्ध्वाधर दूरी — शंकु की सतह पर तिरछी दूरी नहीं।",
+          "pyramidBaseSide": "वर्गाकार आधार की एक भुजा की लंबाई।",
+          "pyramidHeight": "आधार के केंद्र से शीर्ष तक की सीधी ऊर्ध्वाधर दूरी।"
+        }
       },
       "result": {
-        "heading": "Volume",
-        "missingDimension": "Enter all the dimensions this shape needs.",
-        "invalidDimension": "All dimensions must be positive numbers.",
-        "cubicUnits": "cubic units"
+        "heading": "आयतन",
+        "missingDimension": "इस आकृति के लिए आवश्यक सभी आयाम दर्ज करें।",
+        "invalidDimension": "सभी आयाम धनात्मक संख्याएँ होनी चाहिए।",
+        "cubicUnits": "घन इकाई",
+        "shapePreviewCaption": "आपके द्वारा दर्ज की गई आकृति का एक आनुपातिक रेखाचित्र, जो आपके आयामों से लाइव फिर से बनाया गया है।"
       },
       "education": {
         "intro": {
-          "title": "Understanding Volume",
-          "paragraph1": "Volume measures how much three-dimensional space a solid encloses, expressed in cubic units — the number of unit cubes that would exactly fill it. Each solid shape has its own closed-form formula derived from its geometry, letting volume be computed directly from a few measurements instead of estimated by physically packing it with unit cubes.",
-          "paragraph2": "This calculator uses the same dimension fields as the companion Surface Area Calculator for identical shapes — the same radius and perpendicular height describe a cylinder or cone in both tools — so a solid you've already measured for one calculation works immediately for the other."
+          "title": "आयतन को समझना",
+          "paragraph1": "आयतन मापता है कि कोई ठोस कितना त्रि-आयामी स्थान घेरता है, जिसे घन इकाइयों में व्यक्त किया जाता है — यानी उतनी इकाई-घनों की संख्या जो उसे बिल्कुल भर देंगी। प्रत्येक ठोस आकृति का अपना ज्यामिति से व्युत्पन्न संवृत-रूप सूत्र होता है, जिससे आयतन को कुछ ही मापों से सीधे परिकलित किया जा सकता है, न कि उसे भौतिक रूप से इकाई-घनों से भरकर अनुमानित करना पड़ता है।",
+          "paragraph2": "यह कैलकुलेटर समान आकृतियों के लिए साथी सतह क्षेत्रफल कैलकुलेटर के समान ही आयाम फ़ील्ड का उपयोग करता है — दोनों टूल में एक ही त्रिज्या और लंबवत ऊँचाई एक बेलन या शंकु का वर्णन करती हैं — जिससे किसी एक गणना के लिए पहले से मापा गया ठोस दूसरे के लिए तुरंत काम आ जाता है।"
+        },
+        "variables": {
+          "title": "शामिल चर",
+          "intro": "प्रत्येक ठोस का आयतन सूत्र मापने योग्य किनारों और त्रिज्याओं के उसी छोटे समूह तक सिमट जाता है — कौन-से लागू होते हैं यह इस पर निर्भर करता है कि आप कौन-सा ठोस चुनते हैं।",
+          "items": [
+            {
+              "name": "भुजा की लंबाई (s)",
+              "description": "घन का एकमात्र निर्धारक किनारा — आयतन बस उस लंबाई का घन है, s³।"
+            },
+            {
+              "name": "लंबाई, चौड़ाई, ऊँचाई (l, w, h)",
+              "description": "आयताकार प्रिज्म के तीन स्वतंत्र किनारे, जिन्हें सीधे आपस में गुणा करने पर वे जिस बॉक्स को परिभाषित करते हैं वह भर जाता है।"
+            },
+            {
+              "name": "त्रिज्या (r)",
+              "description": "गोले का निर्धारक माप, और बेलन तथा शंकु द्वारा साझा किए जाने वाले वृत्ताकार आधार का भी। गोले के लिए आयतन त्रिज्या के घन के अनुपात में बढ़ता है, जबकि बेलन या शंकु के लिए त्रिज्या के वर्ग के अनुपात में।"
+            },
+            {
+              "name": "लंबवत ऊँचाई (h)",
+              "description": "आधार से शीर्ष या विपरीत फलक तक की सीधी ऊर्ध्वाधर दूरी — हमेशा लंबवत ऊँचाई, कभी भी शंकु या पिरामिड की सतह पर तिरछी दूरी नहीं।"
+            }
+          ]
+        },
+        "applications": {
+          "title": "व्यवहार में आयतन",
+          "intro": "आयतन इस व्यावहारिक प्रश्न का उत्तर देता है कि कोई ठोस कितना स्थान घेरता है, या वह कितना धारण या समा सकता है।",
+          "items": [
+            {
+              "title": "शिपिंग और भंडारण",
+              "description": "माल-भाड़े की कीमत, कंटेनर लोडिंग, और गोदाम भंडारण सभी किसी वस्तु या बॉक्स के आयतन पर निर्भर करते हैं, इसलिए लॉजिस्टिक्स कंपनियाँ यह जानने के लिए इसे सीधे परिकलित करती हैं कि किसी दिए गए कंटेनर या ट्रक में कितना समा सकता है।"
+            },
+            {
+              "title": "निर्माण और सामग्री",
+              "description": "कंक्रीट, बजरी और भराव मिट्टी आयतन के अनुसार मंगाए जाते हैं, इसलिए एक ठेकेदार यह जानने के लिए पहले नींव, फुटिंग या खुदाई का आयतन परिकलित करता है कि कितनी सामग्री मंगानी है।"
+            },
+            {
+              "title": "विनिर्माण और 3D प्रिंटिंग",
+              "description": "किसी पुर्जे का आयतन, सामग्री के घनत्व के साथ मिलकर, उसके बनने से पहले ही उसका वजन बता देता है — जो कच्चे माल की लागत जानने और यह अनुमान लगाने में उपयोगी है कि 3D प्रिंट में कितना समय लगेगा।"
+            },
+            {
+              "title": "खाना पकाना और रसायन विज्ञान",
+              "description": "व्यंजन विधियाँ और रासायनिक फॉर्मूलेशन आयतन के अनुसार बदले जाते हैं, और किसी पात्र (मिश्रण कटोरा, फ्लास्क, टैंक) का आयतन यह तय करता है कि वह सुरक्षित रूप से कितना तरल या कणिकामय पदार्थ धारण कर सकता है।"
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few solids and the volume this calculator returns for each.",
-          "columnCalculation": "Shape & Dimensions",
-          "columnResult": "Volume",
+          "title": "हल किए गए उदाहरण",
+          "intro": "कुछ ठोस और यह कैलकुलेटर प्रत्येक के लिए जो आयतन देता है।",
+          "columnCalculation": "आकृति और आयाम",
+          "columnResult": "आयतन",
           "rows": [
             {
-              "calculation": "Cube, side = 3",
-              "result": "27 cubic units"
+              "calculation": "घन, भुजा = 3",
+              "result": "27 घन इकाई"
             },
             {
-              "calculation": "Sphere, radius = 3",
-              "result": "≈ 113.10 cubic units"
+              "calculation": "गोला, त्रिज्या = 3",
+              "result": "≈ 113.10 घन इकाई"
             },
             {
-              "calculation": "Cylinder, radius = 2, height = 5",
-              "result": "≈ 62.83 cubic units"
+              "calculation": "बेलन, त्रिज्या = 2, ऊँचाई = 5",
+              "result": "≈ 62.83 घन इकाई"
             },
             {
-              "calculation": "Cone, radius = 3, height = 4",
-              "result": "≈ 37.70 cubic units"
+              "calculation": "शंकु, त्रिज्या = 3, ऊँचाई = 4",
+              "result": "≈ 37.70 घन इकाई"
             }
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "सामान्य प्रश्न",
           "items": [
             {
-              "question": "Why is a cone's volume exactly one-third of a cylinder's?",
-              "answer": "A cone and a cylinder that share the same base radius and height have a fixed volume ratio of exactly 1:3 — a result provable with calculus (integrating circular cross-sections) but known and used long before calculus existed, since it holds regardless of the specific radius or height chosen."
+              "question": "शंकु का आयतन ठीक बेलन के एक-तिहाई के बराबर क्यों होता है?",
+              "answer": "समान आधार त्रिज्या और ऊँचाई साझा करने वाले शंकु और बेलन का आयतन अनुपात ठीक 1:3 होता है — यह परिणाम कैलकुलस (वृत्ताकार अनुप्रस्थ कटावों का समाकलन करके) से सिद्ध किया जा सकता है, लेकिन इसे कैलकुलस के अस्तित्व में आने से बहुत पहले से जाना और उपयोग किया जाता रहा है, क्योंकि यह चुनी गई किसी भी विशिष्ट त्रिज्या या ऊँचाई से स्वतंत्र होकर सत्य रहता है।"
             },
             {
-              "question": "Why does a square pyramid's volume include a factor of one-third too?",
-              "answer": "The same 1:3 ratio that relates a cone to its enclosing cylinder also relates a pyramid to its enclosing prism with the same base and height — any pyramid or cone occupies exactly one-third of the prism or cylinder that tightly encloses it, which is why both formulas share that factor."
+              "question": "वर्गाकार पिरामिड के आयतन में भी एक-तिहाई का गुणक क्यों शामिल है?",
+              "answer": "वही 1:3 अनुपात जो शंकु को उसे घेरने वाले बेलन से जोड़ता है, वही समान आधार और ऊँचाई वाले पिरामिड को उसे घेरने वाले प्रिज्म से भी जोड़ता है — कोई भी पिरामिड या शंकु उसे कसकर घेरने वाले प्रिज्म या बेलन का ठीक एक-तिहाई घेरता है, यही कारण है कि दोनों सूत्र यह गुणक साझा करते हैं।"
             },
             {
-              "question": "Does volume use the same height as surface area for a cone?",
-              "answer": "Yes — both this calculator and the companion Surface Area Calculator ask for the cone's perpendicular height (straight up from the base to the apex), not the slant height. Surface area derives the slant height internally when it needs it; volume never needs slant height at all."
+              "question": "क्या शंकु के लिए आयतन वही ऊँचाई उपयोग करता है जो सतह क्षेत्रफल करता है?",
+              "answer": "हाँ — यह कैलकुलेटर और साथी सतह क्षेत्रफल कैलकुलेटर दोनों शंकु की लंबवत ऊँचाई (आधार से शीर्ष तक सीधे ऊपर) माँगते हैं, न कि तिरछी ऊँचाई। सतह क्षेत्रफल आवश्यकता होने पर तिरछी ऊँचाई को आंतरिक रूप से व्युत्पन्न करता है; आयतन को तिरछी ऊँचाई की कभी भी आवश्यकता नहीं होती।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "Archimedes, a Bathtub, and a Crown",
-            "paragraph": "According to a story recorded by the Roman engineer Vitruvius, Archimedes of Syracuse worked out how to measure an irregular object's volume by water displacement while stepping into a bath — reportedly rushing into the street shouting \"Eureka\" (\"I have found it\") — after being asked to determine whether King Hiero II's crown was pure gold without damaging it. Archimedes also proved, in his treatise On the Sphere and Cylinder, that a sphere's volume equals exactly two-thirds the volume of the smallest cylinder enclosing it — a companion result to his surface-area finding, and one of the volume formulas this calculator still applies today."
+            "title": "आर्किमिडीज़, एक बाथटब, और एक मुकुट",
+            "paragraph": "रोमन इंजीनियर विट्रूवियस द्वारा दर्ज एक कहानी के अनुसार, आर्किमिडीज़ ने एक स्नानघर में उतरते समय जल-विस्थापन द्वारा किसी अनियमित वस्तु के आयतन को मापने का तरीका खोजा — और कथित तौर पर \"यूरेका\" (\"मुझे मिल गया\") चिल्लाते हुए सड़क पर दौड़ पड़े — यह तब हुआ जब उनसे यह पता लगाने को कहा गया था कि राजा हिएरो द्वितीय का मुकुट बिना नुकसान पहुँचाए शुद्ध सोने का है या नहीं। आर्किमिडीज़ ने अपने ग्रंथ गोले और बेलन पर में यह भी सिद्ध किया कि किसी गोले का आयतन उसे घेरने वाले सबसे छोटे बेलन के आयतन के ठीक दो-तिहाई के बराबर होता है — जो उनकी सतह क्षेत्रफल संबंधी खोज का साथी परिणाम है, और आज भी यह कैलकुलेटर जिन आयतन सूत्रों का उपयोग करता है उनमें से एक है।"
+          },
+          "modernDevelopments": {
+            "title": "जल-विस्थापन से लेकर सीटी स्कैन तक",
+            "paragraph": "आर्किमिडीज़ की विस्थापन विधि आज भी किसी भी ऐसी वस्तु के लिए काम करती है जिसे पानी में डुबोया जा सकता है, लेकिन आधुनिक आयतन माप बाथटब से बहुत आगे निकल चुका है। सीटी और एमआरआई स्कैनर अनुप्रस्थ-काट छवियों से किसी वस्तु — या अंग — के पूरे 3D आकार का पुनर्निर्माण करते हैं और संलग्न आयतन की संख्यात्मक रूप से गणना करते हैं, वही अनुप्रस्थ-काट-ढेर वाला विचार जो बेलन के πr²h सूत्र के पीछे है, बस एक अनियमित आकृति पर एक बार में एक पतली परत लागू किया जाता है। 3D स्कैनर और CAD सॉफ़्टवेयर निर्मित पुर्जों के लिए यही काम करते हैं, ऐसी आकृतियों के लिए सटीक आयतन परिकलित करते हैं जो किसी भी संवृत-रूप सूत्र के लिए बहुत अनियमित हैं।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Volume and solid geometry sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "आयतन और ठोस ज्यामिति गणित के अंतर्गत आते हैं। QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025 में गणित के लिए विश्व स्तर पर शीर्ष 5, साथ ही एक क्षेत्रीय विभाग यहाँ दिए गए हैं:",
             "universities": [
               {
-                "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "मैसाचुसेट्स इंस्टिट्यूट ऑफ़ टेक्नोलॉजी (MIT)",
+                "note": "गणित में विश्व स्तर पर #1 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "नहीं — पीएचडी गणित विभाग के भीतर एक कैंपस-आधारित शोध कार्यक्रम है।"
               },
               {
-                "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "ऑक्सफ़ोर्ड विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #2 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "नहीं — DPhil एक कैंपस-आधारित शोध डिग्री है।"
               },
               {
-                "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "कैम्ब्रिज विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #3 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "नहीं — शोध डिग्रियाँ गणित संकाय में कैंपस-आधारित हैं।"
               },
               {
-                "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "हार्वर्ड विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #4 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "नहीं — पीएचडी एक कैंपस-आधारित शोध कार्यक्रम है।"
               },
               {
-                "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "स्टैनफ़ोर्ड विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #5 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "नहीं — यह कार्यक्रम एक कैंपस-आधारित शोध पीएचडी है।"
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "अमेरिकन यूनिवर्सिटी ऑफ़ बेरूत — गणित विभाग",
+                "note": "1866 में स्थापित; इस वैश्विक विषय तालिका में अलग से रैंक नहीं किया गया।",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "नहीं — विभाग के कार्यक्रम बेरूत, लेबनान में AUB के कैंपस में आयोजित किए जाते हैं।"
               }
             ]
           }
+        },
+        "references": {
+          "title": "वैज्ञानिक संदर्भ",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes, \"On the Sphere and Cylinder\", Book I. Cambridge University Press.",
+          "note": "आर्किमिडीज़ का मूल प्रमाण कि किसी गोले का आयतन उसे घेरने वाले बेलन के आयतन के दो-तिहाई के बराबर होता है — यही परिणाम, उसी ग्रंथ में, इस साइट के सतह क्षेत्रफल कैलकुलेटर द्वारा उद्धृत सतह क्षेत्रफल संबंधी संबंध का साथी है।",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "आर्किमिडीज़ की कृतियाँ पढ़ें"
         }
       }
     },
