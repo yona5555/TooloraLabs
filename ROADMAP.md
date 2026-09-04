@@ -147,3 +147,29 @@
 - الدوال المضافة اليوم تحديدًا (`detectDigitStyle`، `formatLocalizedNumber` في `packages/core`) تستخدم فقط regex عادي و`Intl.NumberFormat` — وهذي ليست API خاصة بالمتصفح، بل جزء من مواصفة JavaScript القياسية (ECMA-402) وموجودة في Node.js وReact Native (عبر محرك Hermes) على حد سواء.
 - كل منطق التحقق (validation) اللي أضفناه اليوم بحدود الحاسبات السبع موجود بالكامل داخل `apps/web/components/tools/*` — مو داخل `packages/tools`. الحزمة المشتركة نفسها ما فيها أي حدود تحقق مكتوبة، فقط التنفيذ الحسابي الخالص.
 - **ملاحظة إضافية مهمة:** ملف `tsconfig.base.json` (اللي ترثه الحزم الثلاث) يحدد `"lib": ["ES2022"]` فقط — بدون `"DOM"`. يعني حتى لو حاول أحد بالمستقبل يستخدم `window`/`document` بالخطأ داخل هذي الحزم، TypeScript نفسه بيرفض يبني الكود لأن أنواع DOM غير معرّفة أصلًا بهذا الإعداد. هذا قيد مفروض تلقائيًا على مستوى الأدوات، مو بس اتفاق شفهي.
+
+## خارطة طريق الأدوات القادمة (تحديث 2026-09-04)
+
+> يوثّق هذا القسم تحديدًا الأدوات الرياضية المخطَّطة القادمة، بعد فحص فعلي للأدوات الحالية لتفادي أي تكرار، بالإضافة لحالة الدفعة الأخيرة من الأدوات المنجزة على جهاز اللينكس.
+
+### أدوات رياضية مخطَّطة (25 أداة، مرتّبة من الأسهل للأصعب)
+
+**المستوى 1 — الأسهل:** GCF & LCM Calculator, Prime Factorization Calculator, Ratio & Proportion Calculator, Exponents & Powers Calculator, Number Base Converter (Binary/Octal/Decimal/Hex)
+
+**المستوى 2 — سهل-متوسط:** Pythagorean Theorem Calculator, Triangle Angle Calculator, Trigonometry Calculator (SOH-CAH-TOA), Slope & Distance Formula Calculator, Arithmetic & Geometric Sequence Calculator, Permutations & Combinations Calculator, Basic Probability Calculator
+
+**المستوى 3 — متوسط:** Simple Pendulum Period Calculator, Torque Calculator, Wave Speed/Frequency/Wavelength Calculator, Half-Life & Radioactive Decay Calculator, Percent Composition & Empirical Formula Calculator, Boyle's & Charles's Law Calculator, System of Linear Equations Solver, Complex Numbers Calculator
+
+**المستوى 4 — الأصعب:** Limits Calculator, Advanced Derivative Calculator (امتداد حقيقي لوضع derivative المحدود في Step-by-Step Math Solver — دوال مثلثية/أسية/سلسلة، وليس تكرارًا)، Integral Calculator, Logarithm & Exponential Equation Solver, Binomial Theorem/Series Expansion Calculator
+
+### أدوات إضافية معتمدة
+
+- **Pace Calculator** (Health & Fitness) — قيد البناء من اللينكس: 4 أوضاع (Pace/Time/Distance, Multipoint, Converter, Finish Time).
+
+### أدوات منافسة تطبيقات مدفوعة (منجزة من اللينكس، رُفعت لاحقًا لمعايير الجودة الكاملة من الماك)
+
+Step-by-Step Math Solver ✅، Graphing Calculator ✅، Notepad Calculator ✅
+
+### أدوات هندسية (منجزة من اللينكس، رُفعت لاحقًا لمعايير الجودة الكاملة من الماك)
+
+Area Calculator ✅، Surface Area Calculator ✅، Volume Calculator ✅
