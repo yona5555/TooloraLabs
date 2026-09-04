@@ -15195,6 +15195,168 @@
           "readOriginal": "Read the Original Paper"
         }
       }
+    },
+    "circle-calculator": {
+      "title": "Circle Calculator",
+      "description": "Calculate a circle's radius, diameter, circumference, and area from any one of the four, with a live interactive diagram scaled to your result.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Enter a Known Value",
+        "knownFieldLabel": "You Know the",
+        "fields": {
+          "radius": "Radius",
+          "diameter": "Diameter",
+          "circumference": "Circumference",
+          "area": "Area"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "A circle drawn to scale with its radius marked as a dashed line from the center"
+      },
+      "result": {
+        "heading": "Result",
+        "invalidValue": "Enter a positive number to see a result.",
+        "fields": {
+          "radius": "Radius",
+          "diameter": "Diameter",
+          "circumference": "Circumference",
+          "area": "Area"
+        }
+      },
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Every property of a circle follows from its radius alone."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Circle Measurements",
+          "paragraph1": "A circle is fully defined by a single number: its radius, the distance from its center to any point on its edge. Every other common measurement — diameter, circumference, area — is a fixed multiple or function of that one radius, which is why knowing any one of the four measurements is always enough to recover the other three; there's no such thing as an \"underdetermined\" circle the way there can be for a general triangle or quadrilateral.",
+          "paragraph2": "The constant that links a circle's circumference to its diameter is π (pi) — an irrational number, roughly 3.14159, that never terminates or repeats in decimal form. Diameter is simply twice the radius; circumference is π times the diameter (equivalently, 2π times the radius); and area is π times the radius squared. This tool accepts whichever one of the four you already know and derives the rest instantly."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few common circle calculations, computed the same way this tool computes them.",
+          "columnCalculation": "Known Value",
+          "columnResult": "Radius → Other Values",
+          "rows": [
+            {
+              "calculation": "Radius = 5",
+              "result": "Diameter = 10, Circumference ≈ 31.42, Area ≈ 78.54"
+            },
+            {
+              "calculation": "Diameter = 12",
+              "result": "Radius = 6, Circumference ≈ 37.70, Area ≈ 113.10"
+            },
+            {
+              "calculation": "Area = 50.27",
+              "result": "Radius ≈ 4, Diameter ≈ 8, Circumference ≈ 25.13"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Where Circle Measurements Matter",
+          "intro": "Circular geometry shows up constantly in engineering, construction, and everyday measurement.",
+          "items": [
+            {
+              "title": "Engineering and manufacturing",
+              "description": "Pipe diameters, gear radii, wheel circumferences, and the cross-sectional area of a cylindrical part are all circle measurements that directly determine flow capacity, mechanical fit, and material strength in countless manufactured components."
+            },
+            {
+              "title": "Construction and landscaping",
+              "description": "Estimating the material needed for a circular garden bed, pool, or rounded architectural feature starts with converting between whichever dimension is easiest to measure on site (usually diameter or circumference with a tape measure) and the area needed to calculate material coverage."
+            },
+            {
+              "title": "Everyday estimation",
+              "description": "Wrapping a circular object, fitting a round rug to a room, or comparing pizza sizes by diameter rather than price all come down to the same handful of circle relationships this tool computes."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why is π an irrational number, and does that affect the accuracy of this calculator?",
+              "answer": "π's digits never terminate or fall into a repeating pattern, so any calculation using it necessarily works with a rounded approximation. This tool uses your browser's built-in double-precision value of π (accurate to about 15-16 significant digits), which is far more precision than any real-world measurement could ever need or justify."
+            },
+            {
+              "question": "What's the difference between circumference and perimeter?",
+              "answer": "They describe the same thing — the total distance around a shape's boundary — but \"circumference\" is the term used specifically for circles and other curved closed shapes, while \"perimeter\" is the general term used for any shape, including polygons with straight sides."
+            },
+            {
+              "question": "Can I enter a negative number or zero?",
+              "answer": "No. A circle's radius, diameter, circumference, and area are all inherently positive quantities — a circle with zero or negative size isn't a meaningful circle, so this tool requires a positive value for whichever measurement you provide."
+            },
+            {
+              "question": "How do I find the area of a circle if I only know its circumference?",
+              "answer": "First divide the circumference by 2π to get the radius, then square that radius and multiply by π to get the area — exactly the two-step conversion this tool performs automatically when you select \"Circumference\" as your known value."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The relationship between a circle's circumference and its diameter was studied across many ancient civilizations, but the first rigorous mathematical method for bounding its value came from the Greek mathematician Archimedes of Syracuse around 250 BCE, in his treatise \"Measurement of a Circle.\" Archimedes inscribed and circumscribed regular polygons with up to 96 sides around a circle, using the polygons' known perimeters to trap the true value of what we now call π between two close bounds — proving it fell between 3+10/71 and 3+1/7, a result accurate to two decimal places that stood as the best-known approximation for centuries."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern computers, using algorithms like the Chudnovsky algorithm (based on a rapidly converging series discovered by the Chudnovsky brothers in 1989), have calculated π to over 100 trillion decimal digits — a scale with no practical engineering use (NASA's most demanding calculations, like plotting interplanetary trajectories, need fewer than 20 digits), but which serves as a demanding real-world stress test for supercomputer hardware and serves ongoing research into the still-unproven question of whether π's digits are truly statistically random."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Circle geometry and the properties of π are studied within geometry, part of the broader field of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Trans.). (1897). The Works of Archimedes. Cambridge University Press.",
+          "note": "Heath's classic translation, including Archimedes' \"Measurement of a Circle\" — the treatise that first rigorously bounded the value of π using inscribed and circumscribed polygons.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Read the Original Translation"
+        }
+      }
     }
   },
   "toolPage": {

@@ -15199,6 +15199,168 @@
           "readOriginal": "Originalarbeit lesen"
         }
       }
+    },
+    "circle-calculator": {
+      "title": "Kreisrechner",
+      "description": "Berechnen Sie Radius, Durchmesser, Umfang und Fläche eines Kreises aus einem beliebigen der vier Werte, mit einem live interaktiven Diagramm, das an Ihr Ergebnis angepasst ist.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "form": {
+        "inputTitle": "Bekannten Wert eingeben",
+        "knownFieldLabel": "Sie kennen den/die/das",
+        "fields": {
+          "radius": "Radius",
+          "diameter": "Durchmesser",
+          "circumference": "Umfang",
+          "area": "Fläche"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Ein maßstabsgetreu gezeichneter Kreis mit seinem Radius als gestrichelte Linie vom Mittelpunkt markiert"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidValue": "Geben Sie eine positive Zahl ein, um ein Ergebnis zu sehen.",
+        "fields": {
+          "radius": "Radius",
+          "diameter": "Durchmesser",
+          "circumference": "Umfang",
+          "area": "Fläche"
+        }
+      },
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Jede Eigenschaft eines Kreises folgt allein aus seinem Radius."
+      },
+      "education": {
+        "intro": {
+          "title": "Kreismessungen verstehen",
+          "paragraph1": "Ein Kreis wird vollständig durch eine einzige Zahl definiert: seinen Radius, den Abstand von seinem Mittelpunkt zu jedem Punkt auf seinem Rand. Jede andere gängige Messung — Durchmesser, Umfang, Fläche — ist ein fester Vielfacher oder eine Funktion dieses einen Radius, weshalb die Kenntnis einer der vier Messungen immer ausreicht, um die anderen drei zu ermitteln; es gibt keinen \"unterbestimmten\" Kreis, wie es ihn bei einem allgemeinen Dreieck oder Viereck geben kann.",
+          "paragraph2": "Die Konstante, die den Umfang eines Kreises mit seinem Durchmesser verbindet, ist π (Pi) — eine irrationale Zahl, ungefähr 3,14159, die in Dezimalform nie endet oder sich wiederholt. Der Durchmesser ist einfach das Doppelte des Radius; der Umfang ist π mal der Durchmesser (gleichbedeutend 2π mal der Radius); und die Fläche ist π mal das Quadrat des Radius. Dieses Tool akzeptiert, welchen der vier Werte auch immer Sie bereits kennen, und leitet die restlichen sofort ab."
+        },
+        "examples": {
+          "title": "Berechnete Beispiele",
+          "intro": "Ein paar gängige Kreisberechnungen, so berechnet, wie dieses Tool sie berechnet.",
+          "columnCalculation": "Bekannter Wert",
+          "columnResult": "Radius → Andere Werte",
+          "rows": [
+            {
+              "calculation": "Radius = 5",
+              "result": "Durchmesser = 10, Umfang ≈ 31,42, Fläche ≈ 78,54"
+            },
+            {
+              "calculation": "Durchmesser = 12",
+              "result": "Radius = 6, Umfang ≈ 37,70, Fläche ≈ 113,10"
+            },
+            {
+              "calculation": "Fläche = 50,27",
+              "result": "Radius ≈ 4, Durchmesser ≈ 8, Umfang ≈ 25,13"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Wo Kreismessungen wichtig sind",
+          "intro": "Kreisgeometrie taucht ständig in Technik, Bauwesen und alltäglichen Messungen auf.",
+          "items": [
+            {
+              "title": "Technik und Fertigung",
+              "description": "Rohrdurchmesser, Zahnradradien, Radumfänge und die Querschnittsfläche eines zylindrischen Teils sind alles Kreismessungen, die direkt Durchflusskapazität, mechanische Passgenauigkeit und Materialfestigkeit in unzähligen gefertigten Bauteilen bestimmen."
+            },
+            {
+              "title": "Bauwesen und Landschaftsgestaltung",
+              "description": "Die Schätzung des benötigten Materials für ein rundes Gartenbeet, einen Pool oder ein rundes architektonisches Element beginnt mit der Umrechnung zwischen der Abmessung, die vor Ort am einfachsten zu messen ist (meist Durchmesser oder Umfang mit einem Maßband), und der Fläche, die zur Berechnung der Materialabdeckung benötigt wird."
+            },
+            {
+              "title": "Alltägliche Abschätzung",
+              "description": "Einen runden Gegenstand einpacken, einen runden Teppich in einen Raum einpassen oder Pizzagrößen nach Durchmesser statt nach Preis vergleichen — all das läuft auf dieselbe Handvoll Kreisbeziehungen hinaus, die dieses Tool berechnet."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum ist π eine irrationale Zahl, und beeinflusst das die Genauigkeit dieses Rechners?",
+              "answer": "Die Ziffern von π enden nie und fallen nie in ein sich wiederholendes Muster, sodass jede Berechnung damit zwangsläufig mit einer gerundeten Näherung arbeitet. Dieses Tool verwendet den eingebauten Doppelpräzisionswert von π Ihres Browsers (genau auf etwa 15-16 signifikante Stellen), was weit mehr Präzision ist, als jede reale Messung je benötigen oder rechtfertigen könnte."
+            },
+            {
+              "question": "Was ist der Unterschied zwischen Umfang (circumference) und Umfang allgemein (perimeter)?",
+              "answer": "Sie beschreiben dasselbe — die Gesamtstrecke um die Grenze einer Form —, aber \"circumference\" wird speziell für Kreise und andere gekrümmte geschlossene Formen verwendet, während \"perimeter\" der allgemeine Begriff für jede Form ist, einschließlich Polygonen mit geraden Seiten."
+            },
+            {
+              "question": "Kann ich eine negative Zahl oder null eingeben?",
+              "answer": "Nein. Radius, Durchmesser, Umfang und Fläche eines Kreises sind alle von Natur aus positive Größen — ein Kreis mit null oder negativer Größe ist kein sinnvoller Kreis, daher benötigt dieses Tool für die von Ihnen angegebene Messung einen positiven Wert."
+            },
+            {
+              "question": "Wie finde ich die Fläche eines Kreises, wenn ich nur seinen Umfang kenne?",
+              "answer": "Teilen Sie zunächst den Umfang durch 2π, um den Radius zu erhalten, quadrieren Sie dann diesen Radius und multiplizieren Sie mit π, um die Fläche zu erhalten — genau die zweistufige Umrechnung, die dieses Tool automatisch durchführt, wenn Sie \"Umfang\" als bekannten Wert auswählen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter dem Tool",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Beziehung zwischen dem Umfang eines Kreises und seinem Durchmesser wurde in vielen antiken Kulturen untersucht, aber die erste strenge mathematische Methode zur Eingrenzung ihres Werts stammte vom griechischen Mathematiker Archimedes von Syrakus um 250 v. Chr. in seiner Abhandlung \"Kreismessung\". Archimedes beschrieb einem Kreis regelmäßige Vielecke mit bis zu 96 Seiten ein und um, und nutzte deren bekannte Umfänge, um den wahren Wert dessen, was wir heute π nennen, zwischen zwei engen Grenzen einzufangen — er bewies, dass er zwischen 3+10/71 und 3+1/7 lag, ein auf zwei Dezimalstellen genaues Ergebnis, das jahrhundertelang als beste bekannte Näherung galt."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Moderne Computer haben mithilfe von Algorithmen wie dem Chudnovsky-Algorithmus (basierend auf einer schnell konvergierenden, 1989 von den Chudnovsky-Brüdern entdeckten Reihe) π auf über 100 Billionen Dezimalstellen berechnet — ein Umfang ohne praktischen technischen Nutzen (selbst die anspruchsvollsten Berechnungen der NASA, wie die Planung interplanetarer Flugbahnen, benötigen weniger als 20 Stellen), der aber als anspruchsvoller realer Stresstest für Supercomputer-Hardware dient und laufende Forschung zu der noch unbewiesenen Frage unterstützt, ob die Ziffern von π wirklich statistisch zufällig sind."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Kreisgeometrie und die Eigenschaften von π werden innerhalb der Geometrie untersucht, Teil des breiteren Feldes der Mathematik. Hier sind die weltweit besten 5 für Mathematik im QS World University Rankings by Subject 2025, plus eine regionale Abteilung:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Vor-Ort-Forschungsprogramm innerhalb der Mathematikabteilung."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Vor-Ort-Forschungsabschluss."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — Forschungsabschlüsse finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Vor-Ort-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Vor-Ort-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Fachbereich Mathematik",
+                "note": "Gegründet 1866; in dieser globalen Fachtabelle nicht separat gerankt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Abteilung finden vor Ort auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Heath, T. L. (Übers.). (1897). The Works of Archimedes. Cambridge University Press.",
+          "note": "Heaths klassische Übersetzung, einschließlich Archimedes' \"Kreismessung\" — die Abhandlung, die den Wert von π erstmals streng mit ein- und umbeschriebenen Vielecken eingrenzte.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Originalübersetzung lesen"
+        }
+      }
     }
   },
   "toolPage": {

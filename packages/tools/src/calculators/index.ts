@@ -56,3 +56,4 @@ export * from "./NotepadCalculator";
 export * from "./PaceCalculator";
 export * from "./RandomNumberGenerator";
 export * from "./StandardDeviationCalculator";
+export * from "./CircleCalculator";

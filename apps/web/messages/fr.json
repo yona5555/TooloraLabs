@@ -15199,6 +15199,168 @@
           "readOriginal": "Lire l'Article Original"
         }
       }
+    },
+    "circle-calculator": {
+      "title": "Calculateur de Cercle",
+      "description": "Calculez le rayon, le diamètre, la circonférence et l'aire d'un cercle à partir de l'un des quatre, avec un diagramme interactif en direct à l'échelle de votre résultat.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "form": {
+        "inputTitle": "Saisir une Valeur Connue",
+        "knownFieldLabel": "Vous connaissez le/la",
+        "fields": {
+          "radius": "Rayon",
+          "diameter": "Diamètre",
+          "circumference": "Circonférence",
+          "area": "Aire"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Un cercle dessiné à l'échelle avec son rayon marqué par une ligne pointillée depuis le centre"
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidValue": "Saisissez un nombre positif pour voir un résultat.",
+        "fields": {
+          "radius": "Rayon",
+          "diameter": "Diamètre",
+          "circumference": "Circonférence",
+          "area": "Aire"
+        }
+      },
+      "quickReference": {
+        "title": "Les Formules",
+        "intro": "Chaque propriété d'un cercle découle uniquement de son rayon."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Mesures du Cercle",
+          "paragraph1": "Un cercle est entièrement défini par un seul nombre : son rayon, la distance de son centre à n'importe quel point de son bord. Toute autre mesure courante — diamètre, circonférence, aire — est un multiple fixe ou une fonction de ce seul rayon, c'est pourquoi connaître l'une des quatre mesures suffit toujours à retrouver les trois autres ; il n'existe pas de cercle \"sous-déterminé\" comme cela peut être le cas pour un triangle ou un quadrilatère général.",
+          "paragraph2": "La constante qui relie la circonférence d'un cercle à son diamètre est π (pi) — un nombre irrationnel, environ 3,14159, qui ne se termine ni ne se répète jamais sous forme décimale. Le diamètre est simplement le double du rayon ; la circonférence est π fois le diamètre (soit, de manière équivalente, 2π fois le rayon) ; et l'aire est π fois le rayon au carré. Cet outil accepte celle des quatre valeurs que vous connaissez déjà et en déduit instantanément les autres."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Quelques calculs courants sur les cercles, résolus de la même manière que cet outil les calcule.",
+          "columnCalculation": "Valeur Connue",
+          "columnResult": "Rayon → Autres Valeurs",
+          "rows": [
+            {
+              "calculation": "Rayon = 5",
+              "result": "Diamètre = 10, Circonférence ≈ 31,42, Aire ≈ 78,54"
+            },
+            {
+              "calculation": "Diamètre = 12",
+              "result": "Rayon = 6, Circonférence ≈ 37,70, Aire ≈ 113,10"
+            },
+            {
+              "calculation": "Aire = 50,27",
+              "result": "Rayon ≈ 4, Diamètre ≈ 8, Circonférence ≈ 25,13"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Où les Mesures du Cercle Comptent",
+          "intro": "La géométrie circulaire apparaît constamment en ingénierie, en construction et dans les mesures quotidiennes.",
+          "items": [
+            {
+              "title": "Ingénierie et fabrication",
+              "description": "Les diamètres de tuyaux, les rayons d'engrenages, les circonférences de roues et l'aire de la section transversale d'une pièce cylindrique sont autant de mesures circulaires qui déterminent directement la capacité d'écoulement, l'ajustement mécanique et la résistance des matériaux dans d'innombrables composants manufacturés."
+            },
+            {
+              "title": "Construction et aménagement paysager",
+              "description": "Estimer le matériau nécessaire pour un massif de jardin circulaire, une piscine ou un élément architectural arrondi commence par convertir entre la dimension la plus facile à mesurer sur place (généralement le diamètre ou la circonférence au mètre ruban) et l'aire nécessaire pour calculer la couverture en matériau."
+            },
+            {
+              "title": "Estimation quotidienne",
+              "description": "Emballer un objet circulaire, ajuster un tapis rond à une pièce, ou comparer la taille des pizzas par diamètre plutôt que par prix reviennent tous aux mêmes quelques relations circulaires que cet outil calcule."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi π est-il un nombre irrationnel, et cela affecte-t-il la précision de ce calculateur ?",
+              "answer": "Les chiffres de π ne se terminent jamais ni ne tombent dans un motif répétitif, donc tout calcul l'utilisant travaille nécessairement avec une approximation arrondie. Cet outil utilise la valeur de π en double précision intégrée à votre navigateur (précise à environ 15-16 chiffres significatifs), ce qui est bien plus de précision qu'aucune mesure réelle ne pourrait jamais nécessiter ou justifier."
+            },
+            {
+              "question": "Quelle est la différence entre circonférence (circumference) et périmètre (perimeter) ?",
+              "answer": "Ils décrivent la même chose — la distance totale autour du contour d'une forme —, mais \"circonférence\" est le terme utilisé spécifiquement pour les cercles et autres formes fermées courbes, tandis que \"périmètre\" est le terme général utilisé pour toute forme, y compris les polygones à côtés droits."
+            },
+            {
+              "question": "Puis-je saisir un nombre négatif ou zéro ?",
+              "answer": "Non. Le rayon, le diamètre, la circonférence et l'aire d'un cercle sont tous des grandeurs intrinsèquement positives — un cercle de taille nulle ou négative n'est pas un cercle au sens propre, cet outil exige donc une valeur positive pour la mesure que vous fournissez."
+            },
+            {
+              "question": "Comment trouver l'aire d'un cercle si je ne connais que sa circonférence ?",
+              "answer": "Divisez d'abord la circonférence par 2π pour obtenir le rayon, puis élevez ce rayon au carré et multipliez par π pour obtenir l'aire — exactement la conversion en deux étapes que cet outil effectue automatiquement lorsque vous sélectionnez \"Circonférence\" comme valeur connue."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière l'Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La relation entre la circonférence d'un cercle et son diamètre a été étudiée dans de nombreuses civilisations anciennes, mais la première méthode mathématique rigoureuse pour encadrer sa valeur est venue du mathématicien grec Archimède de Syracuse vers 250 av. J.-C., dans son traité \"De la Mesure du Cercle\". Archimède a inscrit et circonscrit des polygones réguliers allant jusqu'à 96 côtés autour d'un cercle, utilisant les périmètres connus de ces polygones pour enfermer la valeur réelle de ce que nous appelons aujourd'hui π entre deux bornes proches — prouvant qu'elle se situait entre 3+10/71 et 3+1/7, un résultat exact à deux décimales près qui est resté la meilleure approximation connue pendant des siècles."
+          },
+          "modernDevelopments": {
+            "title": "Développements Modernes",
+            "paragraph": "Les ordinateurs modernes, utilisant des algorithmes comme l'algorithme de Chudnovsky (basé sur une série à convergence rapide découverte par les frères Chudnovsky en 1989), ont calculé π à plus de 100 000 milliards de décimales — une échelle sans utilité pratique en ingénierie (les calculs les plus exigeants de la NASA, comme le tracé de trajectoires interplanétaires, nécessitent moins de 20 chiffres), mais qui sert de test de résistance réel exigeant pour le matériel des superordinateurs et alimente des recherches en cours sur la question encore non résolue de savoir si les chiffres de π sont véritablement aléatoires statistiquement."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La géométrie du cercle et les propriétés de π sont étudiées dans le cadre de la géométrie, au sein du domaine plus large des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche sur place au sein du département de mathématiques."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 2 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un diplôme de recherche sur place."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 3 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent sur place à la faculté de mathématiques."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 4 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche sur place."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 5 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche sur place."
+              },
+              {
+                "name": "Université Américaine de Beyrouth — Département de Mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Heath, T. L. (Trad.). (1897). The Works of Archimedes. Cambridge University Press.",
+          "note": "La traduction classique de Heath, incluant \"De la Mesure du Cercle\" d'Archimède — le traité qui a rigoureusement encadré pour la première fois la valeur de π à l'aide de polygones inscrits et circonscrits.",
+          "url": "https://archive.org/details/worksofarchimede00arch",
+          "readOriginal": "Lire la Traduction Originale"
+        }
+      }
     }
   },
   "toolPage": {

@@ -972,4 +972,19 @@ export const tools: Tool[] = [
       "statistics calculator",
     ],
   },
+  {
+    slug: "circle-calculator",
+    title: "Circle Calculator",
+    category: "math",
+    description:
+      "Calculate a circle's radius, diameter, circumference, and area from any one of the four, with a live interactive diagram scaled to your result.",
+    featured: false,
+    keywords: [
+      "circle calculator",
+      "radius calculator",
+      "circumference calculator",
+      "area of a circle",
+      "diameter calculator",
+    ],
+  },
 ];
