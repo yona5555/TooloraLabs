@@ -1,18 +1,22 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { AreaShape } from "@tooloralabs/tools";
 import type { AreaDraft } from "./types";
+import type { FormEvent } from "react";
 
 const SHAPES: AreaShape[] = ["square", "rectangle", "triangle", "circle", "ellipse", "trapezoid", "parallelogram", "sector"];
 
 type Props = {
   draft: AreaDraft;
   onChange: (draft: AreaDraft) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
-export default function AreaInputPanel({ draft, onChange }: Props) {
+export default function AreaInputPanel({ draft, onChange, onCalculate, onClear }: Props) {
   const t = useTranslations("tools.area-calculator.form");
 
   function patch(partial: Partial<AreaDraft>) {
@@ -32,6 +36,7 @@ export default function AreaInputPanel({ draft, onChange }: Props) {
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <form onSubmit={onCalculate}>
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("shapeLabel")}</span>
         <select
@@ -95,6 +100,18 @@ export default function AreaInputPanel({ draft, onChange }: Props) {
           </>
         )}
       </div>
+
+      <div className="mt-6 flex flex-wrap gap-4">
+        <ToolButton type="submit">{t("calculate")}</ToolButton>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
+      </div>
+      </form>
     </SectionCard>
   );
 }
