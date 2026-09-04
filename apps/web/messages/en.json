@@ -9608,6 +9608,19 @@
           "title": "What This Solver Covers",
           "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
           "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+        },
+        "conceptDiagram": {
+          "title": "What the Discriminant Tells You, Visually",
+          "intro": "For a quadratic equation, the discriminant's sign predicts the shape of the answer before you even finish solving it — three example parabolas show what each case looks like graphically.",
+          "twoRootsLabel": "D > 0",
+          "twoRootsCaption": "Two real roots",
+          "twoRootsAriaLabel": "A parabola crossing the x-axis at two distinct points, illustrating a positive discriminant",
+          "oneRootLabel": "D = 0",
+          "oneRootCaption": "One repeated root",
+          "oneRootAriaLabel": "A parabola touching the x-axis at exactly one point, illustrating a zero discriminant",
+          "noRootsLabel": "D < 0",
+          "noRootsCaption": "No real roots",
+          "noRootsAriaLabel": "A parabola that stays entirely above the x-axis and never crosses it, illustrating a negative discriminant"
         }
       },
       "form": {
@@ -9632,7 +9645,14 @@
         "coefficientLabel": "Coefficient",
         "powerLabel": "Power of x",
         "removeTerm": "Remove this term",
-        "addTerm": "Add Another Term"
+        "addTerm": "Add Another Term",
+        "loadExample": "Load a Worked Example",
+        "hint": {
+          "linear": "a and c are the coefficients of x; b and d are the plain numbers on each side.",
+          "quadratic": "a can't be zero — otherwise the x² term disappears and this stops being a quadratic equation.",
+          "fraction": "Enter each fraction as a numerator over a denominator, then choose how to combine them.",
+          "derivative": "Add one row per term of the polynomial — a coefficient and the power of x it multiplies (0 for a constant term)."
+        }
       },
       "result": {
         "heading": "Solution",
@@ -9641,13 +9661,62 @@
         "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
         "invalidFraction": "A fraction's denominator can't be zero.",
         "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
-        "emptyPolynomial": "Enter at least one non-zero term."
+        "emptyPolynomial": "Enter at least one non-zero term.",
+        "nature": {
+          "twoRealRoots": "Two real roots (D > 0)",
+          "oneRepeatedRoot": "One repeated root (D = 0)",
+          "complexRoots": "Complex roots (D < 0)"
+        }
       },
       "education": {
         "intro": {
           "title": "Understanding Step-by-Step Solving",
           "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
           "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Each problem type reduces to a small handful of coefficients — the letters below appear throughout the worked steps this solver shows.",
+          "items": [
+            {
+              "name": "Coefficients (a, b, c, d)",
+              "description": "The fixed numbers multiplying x, or standing alone, in a linear or quadratic equation — everything this solver needs to fully determine the problem."
+            },
+            {
+              "name": "Discriminant (D = b² − 4ac)",
+              "description": "A single number computed from a quadratic equation's three coefficients whose sign alone determines whether the equation has two real roots, one repeated root, or two complex roots — before you even finish solving it."
+            },
+            {
+              "name": "Numerator and Denominator",
+              "description": "The top and bottom of a fraction — the denominator can never be zero, since division by zero is undefined."
+            },
+            {
+              "name": "Coefficient and Power",
+              "description": "Each term of a polynomial is a coefficient multiplying x raised to a power; the power rule differentiates every term independently before the results are added back together."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Where These Techniques Show Up",
+          "intro": "Linear equations, quadratics, fractions, and derivatives aren't just classroom exercises — they're the working vocabulary behind a wide range of practical calculations.",
+          "items": [
+            {
+              "title": "Physics and Engineering",
+              "description": "Projectile motion, falling objects, and many circuit and structural equations are quadratic in form, so solving for when a projectile lands or a beam reaches a critical stress often comes down to exactly the quadratic formula this solver applies."
+            },
+            {
+              "title": "Finance and Business",
+              "description": "Break-even analysis, cost and revenue modeling, and simple interest problems frequently reduce to linear equations — isolating an unknown price, quantity, or rate the same way this solver isolates x."
+            },
+            {
+              "title": "Recipes, Mixing, and Ratios",
+              "description": "Scaling a recipe, diluting a solution, or combining two mixtures in a given ratio are fraction-arithmetic problems in disguise — finding a common denominator to combine two quantities correctly."
+            },
+            {
+              "title": "Optimization",
+              "description": "Finding a maximum or minimum — the least material for a given volume, the highest profit at a given price — starts with a derivative, since a function's rate of change is exactly zero at its peaks and valleys."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -9700,6 +9769,10 @@
             "title": "The Book That Named Algebra",
             "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
           },
+          "modernDevelopments": {
+            "title": "From Verbal Procedures to Computer Algebra Systems",
+            "paragraph": "Al-Khwarizmi solved equations entirely in words, since the +, −, and = symbols used today weren't invented until centuries later — French mathematician François Viète introduced systematic symbolic notation in the 1590s, and the modern = sign traces to Welsh mathematician Robert Recorde in 1557. That symbolic notation made it possible, in the 20th century, to build computer algebra systems that manipulate equations automatically, and this solver follows the same idea on a small scale: instead of a single opaque answer, it walks through the same named steps — isolating terms, computing a discriminant, finding a common denominator — that al-Khwarizmi's original procedures described in prose."
+          },
           "academicPath": {
             "title": "Academic Path",
             "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
@@ -9742,6 +9815,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Rosen, F. (Trans.). (1831). The Algebra of Mohammed Ben Musa (Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala). Oriental Translation Fund.",
+          "note": "The first English translation of al-Khwarizmi's founding algebra text, showing his original verbal, step-by-step procedures for solving linear and quadratic equations — the same structure this solver's step-by-step output follows.",
+          "url": "https://archive.org/details/algebraofmohamme00khuwrich",
+          "readOriginal": "Read The Algebra of Mohammed Ben Musa"
         }
       }
     },

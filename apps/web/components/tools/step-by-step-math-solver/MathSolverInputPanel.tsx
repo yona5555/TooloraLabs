@@ -4,7 +4,7 @@ import { Plus, Trash2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { MathSolverMode, FractionOperator } from "@tooloralabs/tools";
-import { emptyTerm, type MathSolverDraft } from "./types";
+import { emptyMathSolverDraft, emptyTerm, type MathSolverDraft } from "./types";
 
 const MODES: MathSolverMode[] = ["linear-equation", "quadratic-equation", "fraction-operation", "derivative"];
 const FRACTION_OPS: FractionOperator[] = ["add", "subtract", "multiply", "divide"];
@@ -21,9 +21,22 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
     onChange({ ...draft, ...partial });
   }
 
-  const field = (key: "linearA" | "linearB" | "linearC" | "linearD" | "quadA" | "quadB" | "quadC" | "fracA" | "fracB" | "fracC" | "fracD", label: string) => (
-    <ToolInput label={label} type="text" inputMode="decimal" value={draft[key]} onChange={(e) => patch({ [key]: e.target.value } as Partial<MathSolverDraft>)} />
+  const field = (key: "linearA" | "linearB" | "linearC" | "linearD" | "quadA" | "quadB" | "quadC" | "fracA" | "fracB" | "fracC" | "fracD", label: string, hint?: string) => (
+    <ToolInput label={label} hint={hint} type="text" inputMode="decimal" value={draft[key]} onChange={(e) => patch({ [key]: e.target.value } as Partial<MathSolverDraft>)} />
   );
+
+  function loadExample() {
+    const example = emptyMathSolverDraft();
+    if (draft.mode === "linear-equation") {
+      patch({ linearA: example.linearA, linearB: example.linearB, linearC: example.linearC, linearD: example.linearD });
+    } else if (draft.mode === "quadratic-equation") {
+      patch({ quadA: example.quadA, quadB: example.quadB, quadC: example.quadC });
+    } else if (draft.mode === "fraction-operation") {
+      patch({ fracA: example.fracA, fracB: example.fracB, fracOp: example.fracOp, fracC: example.fracC, fracD: example.fracD });
+    } else {
+      patch({ polynomialTerms: example.polynomialTerms });
+    }
+  }
 
   function updateTerm(index: number, partial: Partial<{ coefficient: string; power: string }>) {
     patch({ polynomialTerms: draft.polynomialTerms.map((term, i) => (i === index ? { ...term, ...partial } : term)) });
@@ -52,12 +65,21 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
         </select>
       </label>
 
+      <button
+        type="button"
+        onClick={loadExample}
+        className="mt-3 w-full rounded-xl border border-dashed border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        {t("loadExample")}
+      </button>
+
       <div className="mt-5 space-y-5">
         {draft.mode === "linear-equation" && (
           <>
             <p dir="ltr" className="text-center text-sm font-mono text-zinc-500 dark:text-zinc-400">
               ax + b = cx + d
             </p>
+            <p className="text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint.linear")}</p>
             <div className="grid grid-cols-2 gap-3">
               {field("linearA", "a")}
               {field("linearB", "b")}
@@ -72,6 +94,7 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
             <p dir="ltr" className="text-center text-sm font-mono text-zinc-500 dark:text-zinc-400">
               ax² + bx + c = 0
             </p>
+            <p className="text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint.quadratic")}</p>
             <div className="grid grid-cols-3 gap-3">
               {field("quadA", "a")}
               {field("quadB", "b")}
@@ -82,6 +105,7 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
 
         {draft.mode === "fraction-operation" && (
           <>
+            <p className="text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint.fraction")}</p>
             <div className="grid grid-cols-2 gap-3">
               {field("fracA", t("numeratorLabel"))}
               {field("fracB", t("denominatorLabel"))}
@@ -110,6 +134,7 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
         {draft.mode === "derivative" && (
           <div>
             <p className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("termsLabel")}</p>
+            <p className="mb-3 text-xs text-zinc-500 dark:text-zinc-400">{t("hint.derivative")}</p>
             <div className="space-y-3">
               {draft.polynomialTerms.map((term, index) => (
                 <div key={index} className="flex items-end gap-2">

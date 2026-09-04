@@ -9600,64 +9600,133 @@
       }
     },
     "step-by-step-math-solver": {
-      "title": "Step-by-Step Math Solver",
-      "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+      "title": "Schritt-für-Schritt-Mathe-Löser",
+      "description": "Lösen Sie lineare Gleichungen, quadratische Gleichungen, Bruchrechnungen und Ableitungen von Polynomen mit vollständig gezeigtem Rechenweg, Schritt für Schritt.",
       "nav": {
-        "tool": "Solver",
+        "tool": "Löser",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Hintergrundwissen"
       },
       "aboveFold": {
         "quickReference": {
-          "title": "What This Solver Covers",
-          "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
-          "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+          "title": "Was dieser Löser abdeckt",
+          "intro": "Vier gängige Aufgabentypen, jeweils mit jedem Zwischenschritt gelöst, nicht nur mit dem Endergebnis.",
+          "modesHint": "Wechseln Sie den Modus, um eine lineare Gleichung, eine quadratische Gleichung, eine Bruchrechnung oder die Ableitung eines Polynoms zu lösen."
+        },
+        "conceptDiagram": {
+          "title": "Was die Diskriminante visuell verrät",
+          "intro": "Bei einer quadratischen Gleichung sagt das Vorzeichen der Diskriminante schon vor der eigentlichen Lösung voraus, wie die Antwort aussieht — drei Beispielparabeln zeigen, wie jeder Fall grafisch aussieht.",
+          "twoRootsLabel": "D > 0",
+          "twoRootsCaption": "Zwei reelle Nullstellen",
+          "twoRootsAriaLabel": "Eine Parabel, die die x-Achse an zwei verschiedenen Punkten schneidet, zur Veranschaulichung einer positiven Diskriminante",
+          "oneRootLabel": "D = 0",
+          "oneRootCaption": "Eine doppelte Nullstelle",
+          "oneRootAriaLabel": "Eine Parabel, die die x-Achse an genau einem Punkt berührt, zur Veranschaulichung einer Diskriminante von null",
+          "noRootsLabel": "D < 0",
+          "noRootsCaption": "Keine reellen Nullstellen",
+          "noRootsAriaLabel": "Eine Parabel, die vollständig oberhalb der x-Achse verläuft und sie nie schneidet, zur Veranschaulichung einer negativen Diskriminante"
         }
       },
       "form": {
-        "inputTitle": "Problem",
-        "modeLabel": "Problem Type",
+        "inputTitle": "Aufgabe",
+        "modeLabel": "Aufgabentyp",
         "mode": {
-          "linear-equation": "Linear Equation",
-          "quadratic-equation": "Quadratic Equation",
-          "fraction-operation": "Fraction Operation",
-          "derivative": "Derivative"
+          "linear-equation": "Lineare Gleichung",
+          "quadratic-equation": "Quadratische Gleichung",
+          "fraction-operation": "Bruchrechnung",
+          "derivative": "Ableitung"
         },
-        "numeratorLabel": "Numerator",
-        "denominatorLabel": "Denominator",
+        "numeratorLabel": "Zähler",
+        "denominatorLabel": "Nenner",
         "operationLabel": "Operation",
         "fracOp": {
-          "add": "Add (+)",
-          "subtract": "Subtract (−)",
-          "multiply": "Multiply (×)",
-          "divide": "Divide (÷)"
+          "add": "Addieren (+)",
+          "subtract": "Subtrahieren (−)",
+          "multiply": "Multiplizieren (×)",
+          "divide": "Dividieren (÷)"
         },
-        "termsLabel": "Polynomial Terms",
-        "coefficientLabel": "Coefficient",
-        "powerLabel": "Power of x",
-        "removeTerm": "Remove this term",
-        "addTerm": "Add Another Term"
+        "termsLabel": "Polynomterme",
+        "coefficientLabel": "Koeffizient",
+        "powerLabel": "Potenz von x",
+        "removeTerm": "Diesen Term entfernen",
+        "addTerm": "Weiteren Term hinzufügen",
+        "loadExample": "Beispielaufgabe laden",
+        "hint": {
+          "linear": "a und c sind die Koeffizienten von x; b und d sind die reinen Zahlen auf jeder Seite.",
+          "quadratic": "a darf nicht null sein — sonst verschwindet der x²-Term, und es handelt sich nicht mehr um eine quadratische Gleichung.",
+          "fraction": "Geben Sie jeden Bruch als Zähler über Nenner ein und wählen Sie dann, wie sie verknüpft werden sollen.",
+          "derivative": "Fügen Sie pro Polynomterm eine Zeile hinzu — einen Koeffizienten und die Potenz von x, mit der er multipliziert wird (0 für einen konstanten Term)."
+        }
       },
       "result": {
-        "heading": "Solution",
-        "missingInput": "Enter all the required values.",
-        "noUniqueSolution": "This equation doesn't have a single unique solution.",
-        "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
-        "invalidFraction": "A fraction's denominator can't be zero.",
-        "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
-        "emptyPolynomial": "Enter at least one non-zero term."
+        "heading": "Lösung",
+        "missingInput": "Geben Sie alle erforderlichen Werte ein.",
+        "noUniqueSolution": "Diese Gleichung hat keine eindeutige Lösung.",
+        "invalidQuadraticEquation": "Der Koeffizient „a“ darf nicht null sein — dies wäre keine quadratische Gleichung.",
+        "invalidFraction": "Der Nenner eines Bruchs darf nicht null sein.",
+        "divisionByZero": "Division durch einen Bruch mit dem Zähler null ist nicht möglich.",
+        "emptyPolynomial": "Geben Sie mindestens einen Term ungleich null ein.",
+        "nature": {
+          "twoRealRoots": "Zwei reelle Nullstellen (D > 0)",
+          "oneRepeatedRoot": "Eine doppelte Nullstelle (D = 0)",
+          "complexRoots": "Komplexe Nullstellen (D < 0)"
+        }
       },
       "education": {
         "intro": {
-          "title": "Understanding Step-by-Step Solving",
-          "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
-          "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+          "title": "Schritt-für-Schritt-Lösen verstehen",
+          "paragraph1": "In den meisten Klassenzimmern ist ein Endergebnis nur die halbe Antwort auf eine Matheaufgabe — den Gedankengang zu zeigen, der dorthin führte, ist meist der eigentliche Zweck der Übung. Dieser Löser erzeugt dieselben Zwischenschritte, die ein Schüler von Hand aufschreiben würde: eine Variable isolieren, eine Diskriminante berechnen, einen gemeinsamen Nenner finden oder die Potenzregel Term für Term anwenden.",
+          "paragraph2": "Vier Aufgabentypen werden abgedeckt, jeder mit seinem eigenen klar definierten Lösungsverfahren: lineare Gleichungen (x algebraisch isolieren), quadratische Gleichungen (die Mitternachtsformel, mit reellen, doppelten und komplexen Nullstellen), Bruchrechnung (gemeinsame Nenner und Kürzen auf die einfachste Form) und Ableitungen von Polynomen (die Potenzregel Term für Term angewandt)."
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Jeder Aufgabentyp lässt sich auf eine kleine Handvoll Koeffizienten zurückführen — die folgenden Buchstaben tauchen in den gezeigten Lösungsschritten immer wieder auf.",
+          "items": [
+            {
+              "name": "Koeffizienten (a, b, c, d)",
+              "description": "Die festen Zahlen, die x multiplizieren oder allein stehen, in einer linearen oder quadratischen Gleichung — alles, was dieser Löser braucht, um die Aufgabe vollständig zu bestimmen."
+            },
+            {
+              "name": "Diskriminante (D = b² − 4ac)",
+              "description": "Eine einzige, aus den drei Koeffizienten einer quadratischen Gleichung berechnete Zahl, deren Vorzeichen allein bestimmt, ob die Gleichung zwei reelle Nullstellen, eine doppelte Nullstelle oder zwei komplexe Nullstellen hat — noch bevor Sie überhaupt fertig gerechnet haben."
+            },
+            {
+              "name": "Zähler und Nenner",
+              "description": "Der obere und untere Teil eines Bruchs — der Nenner darf nie null sein, da Division durch null nicht definiert ist."
+            },
+            {
+              "name": "Koeffizient und Potenz",
+              "description": "Jeder Term eines Polynoms ist ein Koeffizient multipliziert mit x hoch einer Potenz; die Potenzregel leitet jeden Term unabhängig ab, bevor die Ergebnisse wieder addiert werden."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Wo diese Techniken zum Einsatz kommen",
+          "intro": "Lineare Gleichungen, Quadratische Gleichungen, Brüche und Ableitungen sind keine reinen Schulübungen — sie sind das Handwerkszeug hinter einer Vielzahl praktischer Berechnungen.",
+          "items": [
+            {
+              "title": "Physik und Ingenieurwesen",
+              "description": "Wurfbahnen, fallende Körper sowie viele Schaltkreis- und Tragwerksgleichungen sind quadratischer Natur, sodass die Frage, wann ein Geschoss landet oder ein Träger eine kritische Spannung erreicht, oft genau auf die Mitternachtsformel hinausläuft, die dieser Löser anwendet."
+            },
+            {
+              "title": "Finanzen und Wirtschaft",
+              "description": "Break-Even-Analysen, Kosten- und Erlösmodellierung sowie einfache Zinsaufgaben reduzieren sich häufig auf lineare Gleichungen — das Isolieren eines unbekannten Preises, einer Menge oder eines Zinssatzes, genau wie dieser Löser x isoliert."
+            },
+            {
+              "title": "Rezepte, Mischungen und Verhältnisse",
+              "description": "Ein Rezept hoch- oder herunterzuskalieren, eine Lösung zu verdünnen oder zwei Mischungen in einem bestimmten Verhältnis zu kombinieren, sind verkleidete Bruchrechnungsaufgaben — einen gemeinsamen Nenner zu finden, um zwei Größen korrekt zu kombinieren."
+            },
+            {
+              "title": "Optimierung",
+              "description": "Ein Maximum oder Minimum zu finden — das geringste Material für ein gegebenes Volumen, den höchsten Gewinn bei einem gegebenen Preis — beginnt mit einer Ableitung, da die Änderungsrate einer Funktion an ihren Hoch- und Tiefpunkten genau null ist."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "One problem from each of the four supported types.",
-          "columnCalculation": "Problem",
-          "columnResult": "Result",
+          "title": "Beispielrechnungen",
+          "intro": "Eine Aufgabe aus jedem der vier unterstützten Typen.",
+          "columnCalculation": "Aufgabe",
+          "columnResult": "Ergebnis",
           "rows": [
             {
               "calculation": "3x + 5 = 2x + 9",
@@ -9678,74 +9747,85 @@
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Häufig gestellte Fragen",
           "items": [
             {
-              "question": "What does it mean when a linear equation has \"no unique solution\"?",
-              "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal."
+              "question": "Was bedeutet es, wenn eine lineare Gleichung „keine eindeutige Lösung“ hat?",
+              "answer": "Es bedeutet, dass sich die x-Terme auf beiden Seiten beim Isolieren von x vollständig aufheben. Ist die verbleibende Aussage wahr (wie 3 = 3), gilt die ursprüngliche Gleichung für jeden Wert von x — unendlich viele Lösungen. Ist sie falsch (wie 3 = 7), kann kein Wert von x die beiden Seiten jemals gleich machen."
             },
             {
-              "question": "Why does a quadratic equation sometimes have complex solutions?",
-              "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis."
+              "question": "Warum hat eine quadratische Gleichung manchmal komplexe Lösungen?",
+              "answer": "Immer wenn die Diskriminante (b² − 4ac) negativ ausfällt, verlangt die Mitternachtsformel die Quadratwurzel einer negativen Zahl, die keine reelle Zahl ist — aber eine wohldefinierte komplexe Zahl (ein Vielfaches von i, wobei i² = −1). Das passiert immer dann, wenn die Parabel der Gleichung die x-Achse nie tatsächlich schneidet."
             },
             {
-              "question": "Why do fraction results always come back reduced to lowest terms?",
-              "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result."
+              "question": "Warum werden Bruchergebnisse immer vollständig gekürzt zurückgegeben?",
+              "answer": "Ein Bruch wie 4/8 und 1/2 stellen genau denselben Wert dar, sodass das Kürzen um den größten gemeinsamen Teiler von Zähler und Nenner das Ergebnis nicht verändert — es drückt es nur in seiner einfachsten, konventionellen Form aus, die übliche Art, ein Bruchergebnis anzugeben."
             },
             {
-              "question": "Why does the derivative of a constant term always come out to 0?",
-              "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out."
+              "question": "Warum ergibt die Ableitung eines konstanten Terms immer 0?",
+              "answer": "Ein konstanter Term ändert sich nicht, wenn sich x ändert, und eine Ableitung misst die Änderungsrate — ein Term ohne x hat also eine Änderungsrate von genau null. In der Sprache der Potenzregel ist eine Konstante x⁰, und die Potenzregel multipliziert mit dieser Potenz (0), bevor sie reduziert wird, was den Term stets auf null setzt."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Hintergrundwissen zu diesem Rechner",
           "history": {
-            "title": "The Book That Named Algebra",
-            "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
+            "title": "Das Buch, das der Algebra ihren Namen gab",
+            "paragraph": "Das Wort „Algebra“ stammt von al-jabr, Teil des Titels eines um 825 n. Chr. vom persischen Mathematiker Muhammad ibn Musa al-Chwarizmi verfassten Buchs: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala („Das kurzgefasste Buch über das Rechnen durch Ergänzen und Ausgleichen“). Das Buch klassifizierte und löste lineare und quadratische Gleichungen systematisch mithilfe verbaler, schrittweiser Verfahren — quadratische Ergänzung, Ausgleich von Termen über eine Gleichung hinweg — statt der heute verwendeten symbolischen Notation, und gerade dieser systematische, prozedurale Ansatz zum Lösen von Gleichungen, mehr als jede einzelne Formel, verschafft al-Chwarizmi den traditionellen Titel „Vater der Algebra“."
+          },
+          "modernDevelopments": {
+            "title": "Von verbalen Verfahren zu Computeralgebrasystemen",
+            "paragraph": "Al-Chwarizmi löste Gleichungen vollständig in Worten, da die heute verwendeten Zeichen +, − und = erst Jahrhunderte später erfunden wurden — der französische Mathematiker François Viète führte in den 1590er-Jahren eine systematische symbolische Notation ein, und das moderne Gleichheitszeichen geht auf den walisischen Mathematiker Robert Recorde im Jahr 1557 zurück. Diese symbolische Notation machte es im 20. Jahrhundert möglich, Computeralgebrasysteme zu entwickeln, die Gleichungen automatisch umformen, und dieser Löser folgt derselben Idee im Kleinen: Statt eines einzelnen, undurchsichtigen Ergebnisses durchläuft er dieselben benannten Schritte — Terme isolieren, eine Diskriminante berechnen, einen gemeinsamen Nenner finden —, die al-Chwarizmis ursprüngliche Verfahren in Worten beschrieben."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Akademischer Werdegang",
+            "intro": "Algebra, das Lösen von Gleichungen und Analysis gehören zur Mathematik. Hier sind die weltweit fünf besten Hochschulen für Mathematik im QS World University Rankings by Subject 2025, plus eine regionale Fakultät:",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "Nein — die Promotion ist ein Präsenzforschungsprogramm innerhalb der Fakultät für Mathematik."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "Nein — die Forschungsstudiengänge finden in Präsenz an der Fakultät für Mathematik statt."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "Nein — die Promotion ist ein Präsenzforschungsprogramm."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "American University of Beirut — Fachbereich Mathematik",
+                "note": "Gegründet 1866; in dieser globalen Fachtabelle nicht separat gelistet.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "Nein — die Studiengänge des Fachbereichs finden auf dem Campus der AUB in Beirut, Libanon, statt."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Rosen, F. (Trans.). (1831). The Algebra of Mohammed Ben Musa (Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala). Oriental Translation Fund.",
+          "note": "Die erste englische Übersetzung von al-Chwarizmis grundlegendem Algebra-Text, die seine ursprünglichen verbalen, schrittweisen Verfahren zum Lösen linearer und quadratischer Gleichungen zeigt — dieselbe Struktur, der die schrittweise Ausgabe dieses Lösers folgt.",
+          "url": "https://archive.org/details/algebraofmohamme00khuwrich",
+          "readOriginal": "Die Algebra von Mohammed Ben Musa lesen"
         }
       }
     },

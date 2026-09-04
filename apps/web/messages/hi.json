@@ -9600,64 +9600,133 @@
       }
     },
     "step-by-step-math-solver": {
-      "title": "Step-by-Step Math Solver",
-      "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+      "title": "चरण-दर-चरण गणित समाधानकर्ता",
+      "description": "रैखिक समीकरण, द्विघात समीकरण, भिन्न संक्रियाएँ, और बहुपद अवकलज को हर चरण दिखाते हुए हल करें।",
       "nav": {
-        "tool": "Solver",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "समाधानकर्ता",
+        "faq": "सामान्य प्रश्न",
+        "behindTheTool": "इस टूल के पीछे"
       },
       "aboveFold": {
         "quickReference": {
-          "title": "What This Solver Covers",
-          "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
-          "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+          "title": "यह समाधानकर्ता क्या-क्या हल करता है",
+          "intro": "चार सामान्य प्रकार की समस्याएँ, हर एक को पूरे मध्यवर्ती चरणों के साथ हल किया जाता है, न कि केवल अंतिम उत्तर।",
+          "modesHint": "रैखिक समीकरण, द्विघात समीकरण, भिन्न संक्रिया, या बहुपद अवकलज हल करने के लिए मोड बदलें।"
+        },
+        "conceptDiagram": {
+          "title": "विविक्तकर (Discriminant) आपको दृश्य रूप से क्या बताता है",
+          "intro": "द्विघात समीकरण के लिए, विविक्तकर का चिह्न हल पूरा करने से पहले ही उत्तर के स्वरूप की भविष्यवाणी कर देता है — तीन उदाहरण परवलय दिखाते हैं कि हर स्थिति ग्राफ़ पर कैसी दिखती है।",
+          "twoRootsLabel": "D > 0",
+          "twoRootsCaption": "दो वास्तविक मूल",
+          "twoRootsAriaLabel": "एक परवलय जो x-अक्ष को दो अलग-अलग बिंदुओं पर काटती है, जो धनात्मक विविक्तकर को दर्शाती है",
+          "oneRootLabel": "D = 0",
+          "oneRootCaption": "एक पुनरावृत्त मूल",
+          "oneRootAriaLabel": "एक परवलय जो x-अक्ष को ठीक एक बिंदु पर स्पर्श करती है, जो शून्य विविक्तकर को दर्शाती है",
+          "noRootsLabel": "D < 0",
+          "noRootsCaption": "कोई वास्तविक मूल नहीं",
+          "noRootsAriaLabel": "एक परवलय जो पूरी तरह x-अक्ष के ऊपर रहती है और उसे कभी नहीं काटती, जो ऋणात्मक विविक्तकर को दर्शाती है"
         }
       },
       "form": {
-        "inputTitle": "Problem",
-        "modeLabel": "Problem Type",
+        "inputTitle": "समस्या",
+        "modeLabel": "समस्या का प्रकार",
         "mode": {
-          "linear-equation": "Linear Equation",
-          "quadratic-equation": "Quadratic Equation",
-          "fraction-operation": "Fraction Operation",
-          "derivative": "Derivative"
+          "linear-equation": "रैखिक समीकरण",
+          "quadratic-equation": "द्विघात समीकरण",
+          "fraction-operation": "भिन्न संक्रिया",
+          "derivative": "अवकलज"
         },
-        "numeratorLabel": "Numerator",
-        "denominatorLabel": "Denominator",
-        "operationLabel": "Operation",
+        "numeratorLabel": "अंश",
+        "denominatorLabel": "हर",
+        "operationLabel": "संक्रिया",
         "fracOp": {
-          "add": "Add (+)",
-          "subtract": "Subtract (−)",
-          "multiply": "Multiply (×)",
-          "divide": "Divide (÷)"
+          "add": "जोड़ें (+)",
+          "subtract": "घटाएँ (−)",
+          "multiply": "गुणा करें (×)",
+          "divide": "भाग करें (÷)"
         },
-        "termsLabel": "Polynomial Terms",
-        "coefficientLabel": "Coefficient",
-        "powerLabel": "Power of x",
-        "removeTerm": "Remove this term",
-        "addTerm": "Add Another Term"
+        "termsLabel": "बहुपद के पद",
+        "coefficientLabel": "गुणांक",
+        "powerLabel": "x की घात",
+        "removeTerm": "यह पद हटाएँ",
+        "addTerm": "एक और पद जोड़ें",
+        "loadExample": "एक हल किया हुआ उदाहरण लोड करें",
+        "hint": {
+          "linear": "a और c, x के गुणांक हैं; b और d प्रत्येक पक्ष की सादी संख्याएँ हैं।",
+          "quadratic": "a शून्य नहीं हो सकता — अन्यथा x² वाला पद गायब हो जाता है और यह द्विघात समीकरण नहीं रह जाता।",
+          "fraction": "प्रत्येक भिन्न को अंश और हर के रूप में दर्ज करें, फिर चुनें कि उन्हें कैसे संयोजित करना है।",
+          "derivative": "बहुपद के प्रत्येक पद के लिए एक पंक्ति जोड़ें — एक गुणांक और उससे गुणा होने वाली x की घात (स्थिरांक पद के लिए 0)।"
+        }
       },
       "result": {
-        "heading": "Solution",
-        "missingInput": "Enter all the required values.",
-        "noUniqueSolution": "This equation doesn't have a single unique solution.",
-        "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
-        "invalidFraction": "A fraction's denominator can't be zero.",
-        "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
-        "emptyPolynomial": "Enter at least one non-zero term."
+        "heading": "समाधान",
+        "missingInput": "सभी आवश्यक मान दर्ज करें।",
+        "noUniqueSolution": "इस समीकरण का कोई एक अद्वितीय हल नहीं है।",
+        "invalidQuadraticEquation": "गुणांक 'a' शून्य नहीं हो सकता — यह द्विघात समीकरण नहीं होगा।",
+        "invalidFraction": "भिन्न का हर शून्य नहीं हो सकता।",
+        "divisionByZero": "ऐसी भिन्न से भाग नहीं किया जा सकता जिसका अंश शून्य हो।",
+        "emptyPolynomial": "कम से कम एक अशून्य पद दर्ज करें।",
+        "nature": {
+          "twoRealRoots": "दो वास्तविक मूल (D > 0)",
+          "oneRepeatedRoot": "एक पुनरावृत्त मूल (D = 0)",
+          "complexRoots": "सम्मिश्र मूल (D < 0)"
+        }
       },
       "education": {
         "intro": {
-          "title": "Understanding Step-by-Step Solving",
-          "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
-          "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+          "title": "चरण-दर-चरण हल को समझना",
+          "paragraph1": "अधिकांश कक्षाओं में गणित की समस्या जो माँगती है, उसका अंतिम उत्तर पाना केवल आधा हिस्सा है — उस तर्क को दिखाना जिसने वहाँ तक पहुँचाया, वास्तव में अभ्यास का मुख्य उद्देश्य होता है। यह समाधानकर्ता वही मध्यवर्ती चरण उत्पन्न करता है जो एक छात्र हाथ से लिखता: एक चर को अलग करना, विविक्तकर की गणना करना, उभयनिष्ठ हर ज्ञात करना, या घात नियम को पद-दर-पद लागू करना।",
+          "paragraph2": "चार प्रकार की समस्याएँ शामिल हैं, प्रत्येक की अपनी सुपरिभाषित हल प्रक्रिया है: रैखिक समीकरण (x को बीजगणितीय रूप से अलग करना), द्विघात समीकरण (द्विघात सूत्र, वास्तविक, पुनरावृत्त, और सम्मिश्र मूलों को संभालना), भिन्न अंकगणित (उभयनिष्ठ हर और निम्नतम पदों में सरलीकरण), और बहुपद अवकलज (घात नियम को पद-दर-पद लागू करना)।"
+        },
+        "variables": {
+          "title": "संबंधित चर",
+          "intro": "प्रत्येक प्रकार की समस्या कुछ गुणांकों तक सिमट जाती है — नीचे दिए गए अक्षर इस समाधानकर्ता द्वारा दिखाए गए हल के चरणों में बार-बार दिखाई देते हैं।",
+          "items": [
+            {
+              "name": "गुणांक (a, b, c, d)",
+              "description": "रैखिक या द्विघात समीकरण में x से गुणा होने वाली, या अकेली खड़ी, निश्चित संख्याएँ — यह समाधानकर्ता समस्या को पूरी तरह निर्धारित करने के लिए इन्हीं की आवश्यकता रखता है।"
+            },
+            {
+              "name": "विविक्तकर (D = b² − 4ac)",
+              "description": "द्विघात समीकरण के तीन गुणांकों से गणना की गई एक अकेली संख्या जिसका चिह्न ही यह तय करता है कि समीकरण के दो वास्तविक मूल हैं, एक पुनरावृत्त मूल है, या दो सम्मिश्र मूल हैं — हल पूरा करने से पहले ही।"
+            },
+            {
+              "name": "अंश और हर",
+              "description": "भिन्न का ऊपरी और निचला भाग — हर कभी शून्य नहीं हो सकता, क्योंकि शून्य से भाग अपरिभाषित है।"
+            },
+            {
+              "name": "गुणांक और घात",
+              "description": "बहुपद का प्रत्येक पद एक गुणांक है जो x की किसी घात से गुणा होता है; घात नियम प्रत्येक पद को स्वतंत्र रूप से अवकलित करता है, इससे पहले कि परिणामों को वापस जोड़ा जाए।"
+            }
+          ]
+        },
+        "applications": {
+          "title": "ये तकनीकें कहाँ काम आती हैं",
+          "intro": "रैखिक समीकरण, द्विघात समीकरण, भिन्न, और अवकलज केवल कक्षा के अभ्यास नहीं हैं — ये व्यावहारिक गणनाओं की एक विस्तृत श्रृंखला के पीछे की कार्यशील शब्दावली हैं।",
+          "items": [
+            {
+              "title": "भौतिकी और अभियांत्रिकी",
+              "description": "प्रक्षेप्य गति, गिरती वस्तुएँ, और कई परिपथ व अवसंरचनात्मक समीकरण द्विघात रूप के होते हैं, इसलिए यह हल करना कि कोई प्रक्षेप्य कब उतरेगा या कोई बीम कब गंभीर तनाव तक पहुँचेगा, अक्सर ठीक उसी द्विघात सूत्र पर आ जाता है जिसे यह समाधानकर्ता लागू करता है।"
+            },
+            {
+              "title": "वित्त और व्यवसाय",
+              "description": "ब्रेक-ईवन विश्लेषण, लागत और राजस्व मॉडलिंग, और साधारण ब्याज की समस्याएँ अक्सर रैखिक समीकरणों में सिमट जाती हैं — किसी अज्ञात मूल्य, मात्रा, या दर को उसी तरह अलग करना जैसे यह समाधानकर्ता x को अलग करता है।"
+            },
+            {
+              "title": "व्यंजन, मिश्रण, और अनुपात",
+              "description": "किसी व्यंजन को बड़ा या छोटा करना, किसी घोल को पतला करना, या दो मिश्रणों को किसी दिए गए अनुपात में मिलाना, वास्तव में छिपी हुई भिन्न-अंकगणित की समस्याएँ हैं — दो मात्राओं को सही ढंग से मिलाने के लिए उभयनिष्ठ हर ज्ञात करना।"
+            },
+            {
+              "title": "अनुकूलन (Optimization)",
+              "description": "अधिकतम या न्यूनतम ज्ञात करना — किसी दिए गए आयतन के लिए सबसे कम सामग्री, किसी दिए गए मूल्य पर सबसे अधिक लाभ — अवकलज से शुरू होता है, क्योंकि किसी फलन की परिवर्तन दर उसके शिखर और गर्तों पर ठीक शून्य होती है।"
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "One problem from each of the four supported types.",
-          "columnCalculation": "Problem",
-          "columnResult": "Result",
+          "title": "हल किए गए उदाहरण",
+          "intro": "चारों समर्थित प्रकारों में से एक-एक समस्या।",
+          "columnCalculation": "समस्या",
+          "columnResult": "परिणाम",
           "rows": [
             {
               "calculation": "3x + 5 = 2x + 9",
@@ -9678,74 +9747,85 @@
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "अक्सर पूछे जाने वाले प्रश्न",
           "items": [
             {
-              "question": "What does it mean when a linear equation has \"no unique solution\"?",
-              "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal."
+              "question": "जब किसी रैखिक समीकरण का \"कोई अद्वितीय हल नहीं\" होता है, तो इसका क्या मतलब है?",
+              "answer": "इसका अर्थ है कि x को अलग करने की कोशिश करते ही दोनों पक्षों के x-पद पूरी तरह कट जाते हैं। यदि जो शेष रहता है वह एक सत्य कथन है (जैसे 3 = 3), तो मूल समीकरण x के हर मान के लिए सत्य है — अनंत हल। यदि जो शेष रहता है वह असत्य है (जैसे 3 = 7), तो x का कोई भी मान दोनों पक्षों को कभी बराबर नहीं बना सकता।"
             },
             {
-              "question": "Why does a quadratic equation sometimes have complex solutions?",
-              "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis."
+              "question": "द्विघात समीकरण के कभी-कभी सम्मिश्र हल क्यों होते हैं?",
+              "answer": "जब भी विविक्तकर (b² − 4ac) ऋणात्मक निकलता है, द्विघात सूत्र एक ऋणात्मक संख्या का वर्गमूल माँगता है, जो वास्तविक संख्या नहीं है — लेकिन यह एक सुपरिभाषित सम्मिश्र संख्या है (i का गुणज, जहाँ i² = −1)। ऐसा तब होता है जब समीकरण की परवलय वास्तव में कभी x-अक्ष को नहीं काटती।"
             },
             {
-              "question": "Why do fraction results always come back reduced to lowest terms?",
-              "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result."
+              "question": "भिन्न परिणाम हमेशा निम्नतम पदों में सरलीकृत होकर क्यों आते हैं?",
+              "answer": "4/8 और 1/2 जैसी भिन्नें बिल्कुल एक ही मान को दर्शाती हैं, इसलिए अंश और हर के महत्तम समापवर्तक से सरल करने पर उत्तर नहीं बदलता — यह केवल इसे इसके सबसे सरल, सबसे मानक रूप में व्यक्त करता है, जो भिन्न परिणाम बताने का पारंपरिक तरीका है।"
             },
             {
-              "question": "Why does the derivative of a constant term always come out to 0?",
-              "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out."
+              "question": "किसी स्थिरांक पद का अवकलज हमेशा 0 क्यों आता है?",
+              "answer": "एक स्थिरांक पद x के बदलने पर नहीं बदलता, और अवकलज परिवर्तन की दर मापता है — इसलिए बिना x वाले पद की परिवर्तन दर ठीक शून्य होती है। घात नियम की भाषा में, स्थिरांक x⁰ होता है, और घात नियम उसे उस घात (0) से गुणा करता है इससे पहले कि उसे घटाया जाए, जिससे पद हमेशा शून्य हो जाता है।"
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "इस टूल के पीछे",
           "history": {
-            "title": "The Book That Named Algebra",
-            "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
+            "title": "वह किताब जिसने बीजगणित को नाम दिया",
+            "paragraph": "\"algebra\" (बीजगणित) शब्द अल-जब्र (al-jabr) से आया है, जो लगभग 825 ईस्वी में फ़ारसी गणितज्ञ मुहम्मद इब्न मूसा अल-ख्वारिज़्मी द्वारा लिखी गई एक किताब के शीर्षक का हिस्सा है: अल-किताब अल-मुख़्तसर फ़ी हिसाब अल-जब्र वल-मुक़ाबला (\"पूर्णन और संतुलन द्वारा गणना पर संक्षिप्त पुस्तक\")। इस किताब ने रैखिक और द्विघात समीकरणों को आज इस्तेमाल होने वाले प्रतीकात्मक संकेतन के बजाय मौखिक, चरण-दर-चरण प्रक्रियाओं — वर्ग पूर्ण करना, समीकरण के आर-पार पदों को संतुलित करना — का उपयोग करके व्यवस्थित रूप से वर्गीकृत और हल किया, और यही समीकरण हल करने का यह व्यवस्थित, प्रक्रियात्मक दृष्टिकोण है, किसी एक सूत्र से कहीं अधिक, जो अल-ख्वारिज़्मी को पारंपरिक उपाधि \"बीजगणित के जनक\" दिलाता है।"
+          },
+          "modernDevelopments": {
+            "title": "मौखिक प्रक्रियाओं से कंप्यूटर बीजगणित प्रणालियों तक",
+            "paragraph": "अल-ख्वारिज़्मी ने समीकरण पूरी तरह शब्दों में हल किए, क्योंकि आज उपयोग होने वाले +, −, और = जैसे प्रतीक सदियों बाद तक आविष्कृत नहीं हुए थे — फ़्रांसीसी गणितज्ञ फ़्रांस्वा वियत ने 1590 के दशक में व्यवस्थित प्रतीकात्मक संकेतन प्रस्तुत किया, और आधुनिक = चिह्न वेल्श गणितज्ञ रॉबर्ट रिकॉर्ड से, 1557 में, मिलता है। उस प्रतीकात्मक संकेतन ने 20वीं सदी में ऐसी कंप्यूटर बीजगणित प्रणालियाँ बनाना संभव बनाया जो समीकरणों को स्वचालित रूप से संचालित करती हैं, और यह समाधानकर्ता उसी विचार को छोटे स्तर पर अपनाता है: एक अस्पष्ट उत्तर देने के बजाय, यह उन्हीं नामित चरणों से होकर गुजरता है — पदों को अलग करना, विविक्तकर की गणना करना, उभयनिष्ठ हर ज्ञात करना — जिन्हें अल-ख्वारिज़्मी की मूल प्रक्रियाओं ने गद्य में वर्णित किया था।"
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "शैक्षणिक मार्ग",
+            "intro": "बीजगणित, समीकरण-समाधान, और कलन गणित के अंतर्गत आते हैं। QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025 में गणित के लिए विश्व स्तर पर शीर्ष 5, साथ ही एक क्षेत्रीय विभाग यहाँ दिए गए हैं:",
             "universities": [
               {
-                "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "मैसाचुसेट्स इंस्टिट्यूट ऑफ़ टेक्नोलॉजी (MIT)",
+                "note": "गणित में विश्व स्तर पर #1 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "नहीं — पीएचडी गणित विभाग के भीतर एक कैंपस-आधारित शोध कार्यक्रम है।"
               },
               {
-                "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "ऑक्सफ़ोर्ड विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #2 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "नहीं — DPhil एक कैंपस-आधारित शोध डिग्री है।"
               },
               {
-                "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "कैम्ब्रिज विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #3 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "नहीं — शोध डिग्रियाँ गणित संकाय में कैंपस-आधारित हैं।"
               },
               {
-                "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "हार्वर्ड विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #4 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "नहीं — पीएचडी एक कैंपस-आधारित शोध कार्यक्रम है।"
               },
               {
-                "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "स्टैनफ़ोर्ड विश्वविद्यालय",
+                "note": "गणित में विश्व स्तर पर #5 स्थान (QS वर्ल्ड यूनिवर्सिटी रैंकिंग्स बाय सब्जेक्ट 2025)।",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "नहीं — यह कार्यक्रम एक कैंपस-आधारित शोध पीएचडी है।"
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "अमेरिकन यूनिवर्सिटी ऑफ़ बेरूत — गणित विभाग",
+                "note": "1866 में स्थापित; इस वैश्विक विषय तालिका में अलग से रैंक नहीं किया गया।",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "नहीं — विभाग के कार्यक्रम बेरूत, लेबनान में AUB के कैंपस में आयोजित किए जाते हैं।"
               }
             ]
           }
+        },
+        "references": {
+          "title": "वैज्ञानिक संदर्भ",
+          "citation": "Rosen, F. (Trans.). (1831). The Algebra of Mohammed Ben Musa (Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala). Oriental Translation Fund.",
+          "note": "अल-ख्वारिज़्मी के बीजगणित के मूल ग्रंथ का पहला अंग्रेज़ी अनुवाद, जो रैखिक और द्विघात समीकरणों को हल करने की उनकी मूल मौखिक, चरण-दर-चरण प्रक्रियाएँ दिखाता है — वही संरचना जिसका पालन यह समाधानकर्ता अपने चरण-दर-चरण आउटपुट में करता है।",
+          "url": "https://archive.org/details/algebraofmohamme00khuwrich",
+          "readOriginal": "The Algebra of Mohammed Ben Musa पढ़ें"
         }
       }
     },

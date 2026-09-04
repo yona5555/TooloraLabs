@@ -61,7 +61,7 @@ export default function MathSolver({ education }: { education: ReactNode }) {
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<MathSolverInputPanel draft={draft} onChange={setDraft} />}
-          result={<MathSolverResult result={result} />}
+          result={<MathSolverResult result={result} draft={draft} />}
           sidebar={<RelatedToolsSidebar currentSlug="step-by-step-math-solver" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

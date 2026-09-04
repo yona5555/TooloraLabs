@@ -9600,64 +9600,133 @@
       }
     },
     "step-by-step-math-solver": {
-      "title": "Step-by-Step Math Solver",
-      "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+      "title": "Solveur de mathématiques pas à pas",
+      "description": "Résolvez des équations linéaires, des équations du second degré, des opérations sur des fractions et des dérivées de polynômes, avec le détail complet du raisonnement affiché étape par étape.",
       "nav": {
-        "tool": "Solver",
+        "tool": "Solveur",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Dans les coulisses"
       },
       "aboveFold": {
         "quickReference": {
-          "title": "What This Solver Covers",
-          "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
-          "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+          "title": "Ce que couvre ce solveur",
+          "intro": "Quatre types de problèmes courants, chacun résolu avec toutes les étapes intermédiaires affichées, et pas seulement la réponse finale.",
+          "modesHint": "Changez de mode pour résoudre une équation linéaire, une équation du second degré, une opération sur des fractions ou une dérivée de polynôme."
+        },
+        "conceptDiagram": {
+          "title": "Ce que le discriminant révèle, visuellement",
+          "intro": "Pour une équation du second degré, le signe du discriminant prédit la forme de la réponse avant même d'avoir terminé de résoudre — trois paraboles d'exemple montrent à quoi ressemble chaque cas graphiquement.",
+          "twoRootsLabel": "D > 0",
+          "twoRootsCaption": "Deux racines réelles",
+          "twoRootsAriaLabel": "Une parabole coupant l'axe des x en deux points distincts, illustrant un discriminant positif",
+          "oneRootLabel": "D = 0",
+          "oneRootCaption": "Une racine double",
+          "oneRootAriaLabel": "Une parabole touchant l'axe des x en un seul point, illustrant un discriminant nul",
+          "noRootsLabel": "D < 0",
+          "noRootsCaption": "Aucune racine réelle",
+          "noRootsAriaLabel": "Une parabole restant entièrement au-dessus de l'axe des x sans jamais le croiser, illustrant un discriminant négatif"
         }
       },
       "form": {
-        "inputTitle": "Problem",
-        "modeLabel": "Problem Type",
+        "inputTitle": "Problème",
+        "modeLabel": "Type de problème",
         "mode": {
-          "linear-equation": "Linear Equation",
-          "quadratic-equation": "Quadratic Equation",
-          "fraction-operation": "Fraction Operation",
-          "derivative": "Derivative"
+          "linear-equation": "Équation linéaire",
+          "quadratic-equation": "Équation du second degré",
+          "fraction-operation": "Opération sur fractions",
+          "derivative": "Dérivée"
         },
-        "numeratorLabel": "Numerator",
-        "denominatorLabel": "Denominator",
-        "operationLabel": "Operation",
+        "numeratorLabel": "Numérateur",
+        "denominatorLabel": "Dénominateur",
+        "operationLabel": "Opération",
         "fracOp": {
-          "add": "Add (+)",
-          "subtract": "Subtract (−)",
-          "multiply": "Multiply (×)",
-          "divide": "Divide (÷)"
+          "add": "Addition (+)",
+          "subtract": "Soustraction (−)",
+          "multiply": "Multiplication (×)",
+          "divide": "Division (÷)"
         },
-        "termsLabel": "Polynomial Terms",
+        "termsLabel": "Termes du polynôme",
         "coefficientLabel": "Coefficient",
-        "powerLabel": "Power of x",
-        "removeTerm": "Remove this term",
-        "addTerm": "Add Another Term"
+        "powerLabel": "Puissance de x",
+        "removeTerm": "Supprimer ce terme",
+        "addTerm": "Ajouter un autre terme",
+        "loadExample": "Charger un exemple résolu",
+        "hint": {
+          "linear": "a et c sont les coefficients de x ; b et d sont les nombres seuls de chaque côté.",
+          "quadratic": "a ne peut pas être nul — sinon le terme en x² disparaît et ce n'est plus une équation du second degré.",
+          "fraction": "Saisissez chaque fraction sous forme d'un numérateur sur un dénominateur, puis choisissez comment les combiner.",
+          "derivative": "Ajoutez une ligne par terme du polynôme — un coefficient et la puissance de x qu'il multiplie (0 pour un terme constant)."
+        }
       },
       "result": {
         "heading": "Solution",
-        "missingInput": "Enter all the required values.",
-        "noUniqueSolution": "This equation doesn't have a single unique solution.",
-        "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
-        "invalidFraction": "A fraction's denominator can't be zero.",
-        "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
-        "emptyPolynomial": "Enter at least one non-zero term."
+        "missingInput": "Saisissez toutes les valeurs requises.",
+        "noUniqueSolution": "Cette équation n'a pas de solution unique.",
+        "invalidQuadraticEquation": "Le coefficient « a » ne peut pas être nul — ce ne serait alors plus une équation du second degré.",
+        "invalidFraction": "Le dénominateur d'une fraction ne peut pas être nul.",
+        "divisionByZero": "Impossible de diviser par une fraction dont le numérateur est nul.",
+        "emptyPolynomial": "Saisissez au moins un terme non nul.",
+        "nature": {
+          "twoRealRoots": "Deux racines réelles (D > 0)",
+          "oneRepeatedRoot": "Une racine double (D = 0)",
+          "complexRoots": "Racines complexes (D < 0)"
+        }
       },
       "education": {
         "intro": {
-          "title": "Understanding Step-by-Step Solving",
-          "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
-          "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+          "title": "Comprendre la résolution pas à pas",
+          "paragraph1": "Obtenir une réponse finale n'est que la moitié de ce qu'un problème de mathématiques demande dans la plupart des classes — montrer le raisonnement qui y mène est généralement le véritable objectif de l'exercice. Ce solveur produit les mêmes étapes intermédiaires qu'un élève écrirait à la main : isoler une variable, calculer un discriminant, trouver un dénominateur commun ou appliquer la règle de dérivation terme par terme.",
+          "paragraph2": "Quatre types de problèmes sont couverts, chacun avec sa propre procédure de résolution bien définie : les équations linéaires (isoler x algébriquement), les équations du second degré (la formule quadratique, en gérant les racines réelles, doubles et complexes), l'arithmétique des fractions (dénominateurs communs et réduction à la forme irréductible), et les dérivées de polynômes (la règle de puissance appliquée terme par terme)."
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "Chaque type de problème se ramène à une poignée de coefficients — les lettres ci-dessous apparaissent tout au long des étapes détaillées que ce solveur affiche.",
+          "items": [
+            {
+              "name": "Coefficients (a, b, c, d)",
+              "description": "Les nombres fixes multipliant x, ou isolés, dans une équation linéaire ou du second degré — tout ce dont ce solveur a besoin pour déterminer entièrement le problème."
+            },
+            {
+              "name": "Discriminant (D = b² − 4ac)",
+              "description": "Un nombre unique calculé à partir des trois coefficients d'une équation du second degré, dont le seul signe détermine si l'équation a deux racines réelles, une racine double ou deux racines complexes — avant même d'avoir terminé de résoudre."
+            },
+            {
+              "name": "Numérateur et dénominateur",
+              "description": "Le haut et le bas d'une fraction — le dénominateur ne peut jamais être nul, car la division par zéro n'est pas définie."
+            },
+            {
+              "name": "Coefficient et puissance",
+              "description": "Chaque terme d'un polynôme est un coefficient multipliant x élevé à une puissance ; la règle de puissance dérive chaque terme indépendamment avant que les résultats ne soient additionnés."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Où ces techniques interviennent",
+          "intro": "Les équations linéaires, du second degré, les fractions et les dérivées ne sont pas de simples exercices scolaires — elles forment le vocabulaire de travail derrière un large éventail de calculs pratiques.",
+          "items": [
+            {
+              "title": "Physique et ingénierie",
+              "description": "Le mouvement d'un projectile, la chute des corps, ainsi que de nombreuses équations de circuits et de structures sont de forme quadratique, si bien que déterminer quand un projectile atterrit ou quand une poutre atteint une contrainte critique revient souvent exactement à la formule quadratique que ce solveur applique."
+            },
+            {
+              "title": "Finance et affaires",
+              "description": "L'analyse du seuil de rentabilité, la modélisation des coûts et des revenus, et les problèmes d'intérêts simples se ramènent fréquemment à des équations linéaires — isoler un prix, une quantité ou un taux inconnu de la même façon que ce solveur isole x."
+            },
+            {
+              "title": "Recettes, mélanges et proportions",
+              "description": "Adapter les quantités d'une recette, diluer une solution ou combiner deux mélanges selon une proportion donnée sont en réalité des problèmes d'arithmétique des fractions — trouver un dénominateur commun pour combiner correctement deux quantités."
+            },
+            {
+              "title": "Optimisation",
+              "description": "Trouver un maximum ou un minimum — le moins de matière pour un volume donné, le profit le plus élevé à un prix donné — commence par une dérivée, car le taux de variation d'une fonction est exactement nul à ses sommets et ses creux."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "One problem from each of the four supported types.",
-          "columnCalculation": "Problem",
-          "columnResult": "Result",
+          "title": "Exemples résolus",
+          "intro": "Un problème pour chacun des quatre types pris en charge.",
+          "columnCalculation": "Problème",
+          "columnResult": "Résultat",
           "rows": [
             {
               "calculation": "3x + 5 = 2x + 9",
@@ -9678,74 +9747,85 @@
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "Questions fréquentes",
           "items": [
             {
-              "question": "What does it mean when a linear equation has \"no unique solution\"?",
-              "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal."
+              "question": "Que signifie « pas de solution unique » pour une équation linéaire ?",
+              "answer": "Cela signifie que les termes en x des deux côtés s'annulent complètement une fois qu'on essaie d'isoler x. Si ce qui reste est une affirmation vraie (comme 3 = 3), l'équation initiale est vérifiée pour toute valeur de x — il y a une infinité de solutions. Si ce qui reste est faux (comme 3 = 7), aucune valeur de x ne peut jamais rendre les deux côtés égaux."
             },
             {
-              "question": "Why does a quadratic equation sometimes have complex solutions?",
-              "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis."
+              "question": "Pourquoi une équation du second degré a-t-elle parfois des solutions complexes ?",
+              "answer": "Dès que le discriminant (b² − 4ac) est négatif, la formule quadratique demande la racine carrée d'un nombre négatif, qui n'est pas un nombre réel — mais c'est un nombre complexe parfaitement défini (un multiple de i, où i² = −1). Cela se produit chaque fois que la parabole de l'équation ne croise jamais réellement l'axe des x."
             },
             {
-              "question": "Why do fraction results always come back reduced to lowest terms?",
-              "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result."
+              "question": "Pourquoi les résultats de fractions sont-ils toujours ramenés à leur forme irréductible ?",
+              "answer": "Une fraction comme 4/8 et 1/2 représentent exactement la même valeur, donc réduire par le plus grand diviseur commun du numérateur et du dénominateur ne change pas la réponse — cela l'exprime simplement sous sa forme la plus simple et la plus standard, ce qui est la manière conventionnelle de présenter un résultat fractionnaire."
             },
             {
-              "question": "Why does the derivative of a constant term always come out to 0?",
-              "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out."
+              "question": "Pourquoi la dérivée d'un terme constant est-elle toujours nulle ?",
+              "answer": "Un terme constant ne change pas quand x change, et une dérivée mesure le taux de variation — donc un terme sans x a un taux de variation exactement nul. En termes de règle de puissance, une constante est x⁰, et la règle de puissance multiplie par cette puissance (0) avant de la réduire, ce qui annule toujours le terme."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "Dans les coulisses de cet outil",
           "history": {
-            "title": "The Book That Named Algebra",
-            "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
+            "title": "Le livre qui a donné son nom à l'algèbre",
+            "paragraph": "Le mot « algèbre » vient d'al-jabr, extrait du titre d'un ouvrage écrit vers 825 apr. J.-C. par le mathématicien persan Muhammad ibn Musa al-Khwarizmi : Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (« L'Abrégé du calcul par la restauration et la comparaison »). Ce livre classait et résolvait systématiquement les équations linéaires et du second degré au moyen de procédures verbales, pas à pas — compléter un carré, équilibrer les termes de part et d'autre d'une équation — plutôt qu'avec la notation symbolique utilisée aujourd'hui ; c'est cette approche systématique et procédurale de la résolution des équations, plus qu'une formule unique, qui vaut à al-Khwarizmi le titre traditionnel de « père de l'algèbre »."
+          },
+          "modernDevelopments": {
+            "title": "Des procédures verbales aux systèmes de calcul formel",
+            "paragraph": "Al-Khwarizmi résolvait les équations entièrement en mots, car les symboles +, − et = utilisés aujourd'hui n'ont été inventés que des siècles plus tard — le mathématicien français François Viète a introduit une notation symbolique systématique dans les années 1590, et le signe = moderne remonte au mathématicien gallois Robert Recorde en 1557. Cette notation symbolique a rendu possible, au XXe siècle, la construction de systèmes de calcul formel manipulant les équations automatiquement, et ce solveur suit la même idée à petite échelle : au lieu d'une réponse unique et opaque, il parcourt les mêmes étapes nommées — isoler des termes, calculer un discriminant, trouver un dénominateur commun — que les procédures originales d'al-Khwarizmi décrivaient en prose."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "Parcours académique",
+            "intro": "L'algèbre, la résolution d'équations et le calcul infinitésimal relèvent des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, ainsi qu'un département régional :",
             "universities": [
               {
                 "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 1 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
               },
               {
                 "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 2 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "Non — le DPhil est un diplôme de recherche sur site."
               },
               {
                 "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 3 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "Non — les diplômes de recherche se font en présentiel à la Faculté de mathématiques."
               },
               {
                 "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 4 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
               },
               {
                 "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "note": "Classé n° 5 mondial en mathématiques (QS World University Rankings by Subject 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
               },
               {
                 "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
               }
             ]
           }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Rosen, F. (Trans.). (1831). The Algebra of Mohammed Ben Musa (Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala). Oriental Translation Fund.",
+          "note": "La première traduction anglaise du texte fondateur d'al-Khwarizmi sur l'algèbre, montrant ses procédures verbales originales, pas à pas, pour résoudre les équations linéaires et du second degré — la même structure que suit la sortie pas à pas de ce solveur.",
+          "url": "https://archive.org/details/algebraofmohamme00khuwrich",
+          "readOriginal": "Lire The Algebra of Mohammed Ben Musa"
         }
       }
     },

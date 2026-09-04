@@ -9596,64 +9596,133 @@
       }
     },
     "step-by-step-math-solver": {
-      "title": "Step-by-Step Math Solver",
-      "description": "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
+      "title": "حلّال الرياضيات خطوة بخطوة",
+      "description": "حلّ المعادلات الخطية، والمعادلات التربيعية، وعمليات الكسور، ومشتقات كثيرات الحدود مع عرض كامل خطوات الحل.",
       "nav": {
-        "tool": "Solver",
-        "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "tool": "الحلّال",
+        "faq": "الأسئلة الشائعة",
+        "behindTheTool": "خلف الأداة"
       },
       "aboveFold": {
         "quickReference": {
-          "title": "What This Solver Covers",
-          "intro": "Four common problem types, each solved with every intermediate step shown, not just the final answer.",
-          "modesHint": "Switch modes to solve a linear equation, a quadratic equation, a fraction operation, or a polynomial derivative."
+          "title": "ما الذي يغطيه هذا الحلّال",
+          "intro": "أربعة أنواع شائعة من المسائل، تُحلّ كل منها مع عرض كل خطوة وسيطة، لا الإجابة النهائية فقط.",
+          "modesHint": "بدّل الوضع لحل معادلة خطية، أو معادلة تربيعية، أو عملية على الكسور، أو مشتقة كثيرة حدود."
+        },
+        "conceptDiagram": {
+          "title": "ماذا يخبرك المميّز بصريًا",
+          "intro": "في المعادلة التربيعية، تتنبأ إشارة المميّز بشكل الإجابة قبل أن تنتهي من الحل أصلًا — تُظهر ثلاثة أمثلة لقطع مكافئة كيف يبدو كل حالة بيانيًا.",
+          "twoRootsLabel": "D > 0",
+          "twoRootsCaption": "جذران حقيقيان",
+          "twoRootsAriaLabel": "قطع مكافئ يقطع محور السينات في نقطتين متمايزتين، لتوضيح مميّز موجب",
+          "oneRootLabel": "D = 0",
+          "oneRootCaption": "جذر مكرر واحد",
+          "oneRootAriaLabel": "قطع مكافئ يلامس محور السينات في نقطة واحدة بالضبط، لتوضيح مميّز يساوي صفرًا",
+          "noRootsLabel": "D < 0",
+          "noRootsCaption": "لا توجد جذور حقيقية",
+          "noRootsAriaLabel": "قطع مكافئ يبقى بالكامل فوق محور السينات ولا يقطعه أبدًا، لتوضيح مميّز سالب"
         }
       },
       "form": {
-        "inputTitle": "Problem",
-        "modeLabel": "Problem Type",
+        "inputTitle": "المسألة",
+        "modeLabel": "نوع المسألة",
         "mode": {
-          "linear-equation": "Linear Equation",
-          "quadratic-equation": "Quadratic Equation",
-          "fraction-operation": "Fraction Operation",
-          "derivative": "Derivative"
+          "linear-equation": "معادلة خطية",
+          "quadratic-equation": "معادلة تربيعية",
+          "fraction-operation": "عملية على الكسور",
+          "derivative": "مشتقة"
         },
-        "numeratorLabel": "Numerator",
-        "denominatorLabel": "Denominator",
-        "operationLabel": "Operation",
+        "numeratorLabel": "البسط",
+        "denominatorLabel": "المقام",
+        "operationLabel": "العملية",
         "fracOp": {
-          "add": "Add (+)",
-          "subtract": "Subtract (−)",
-          "multiply": "Multiply (×)",
-          "divide": "Divide (÷)"
+          "add": "جمع (+)",
+          "subtract": "طرح (−)",
+          "multiply": "ضرب (×)",
+          "divide": "قسمة (÷)"
         },
-        "termsLabel": "Polynomial Terms",
-        "coefficientLabel": "Coefficient",
-        "powerLabel": "Power of x",
-        "removeTerm": "Remove this term",
-        "addTerm": "Add Another Term"
+        "termsLabel": "حدود كثيرة الحدود",
+        "coefficientLabel": "المعامل",
+        "powerLabel": "أُس x",
+        "removeTerm": "إزالة هذا الحد",
+        "addTerm": "إضافة حد آخر",
+        "loadExample": "تحميل مثال محلول",
+        "hint": {
+          "linear": "a و c هما معاملا x؛ أما b و d فهما العددان الصرفان في كل طرف.",
+          "quadratic": "لا يمكن أن يكون a صفرًا — وإلا يختفي حد x² وتتوقف المعادلة عن كونها تربيعية.",
+          "fraction": "أدخل كل كسر كبسط فوق مقام، ثم اختر طريقة الجمع بينهما.",
+          "derivative": "أضف صفًا واحدًا لكل حد من كثيرة الحدود — معاملًا وأُس x الذي يضربه (0 للحد الثابت)."
+        }
       },
       "result": {
-        "heading": "Solution",
-        "missingInput": "Enter all the required values.",
-        "noUniqueSolution": "This equation doesn't have a single unique solution.",
-        "invalidQuadraticEquation": "The coefficient 'a' can't be zero — this wouldn't be a quadratic equation.",
-        "invalidFraction": "A fraction's denominator can't be zero.",
-        "divisionByZero": "Can't divide by a fraction whose numerator is zero.",
-        "emptyPolynomial": "Enter at least one non-zero term."
+        "heading": "الحل",
+        "missingInput": "أدخل جميع القيم المطلوبة.",
+        "noUniqueSolution": "لا تملك هذه المعادلة حلًا وحيدًا محددًا.",
+        "invalidQuadraticEquation": "لا يمكن أن يكون المعامل 'a' صفرًا — وإلا فلن تكون هذه معادلة تربيعية.",
+        "invalidFraction": "لا يمكن أن يكون مقام الكسر صفرًا.",
+        "divisionByZero": "لا يمكن القسمة على كسر بسطه صفر.",
+        "emptyPolynomial": "أدخل حدًا واحدًا غير صفري على الأقل.",
+        "nature": {
+          "twoRealRoots": "جذران حقيقيان (D > 0)",
+          "oneRepeatedRoot": "جذر مكرر واحد (D = 0)",
+          "complexRoots": "جذور عقدية (D < 0)"
+        }
       },
       "education": {
         "intro": {
-          "title": "Understanding Step-by-Step Solving",
-          "paragraph1": "Getting a final answer is only half of what a math problem asks for in most classrooms — showing the reasoning that led there is usually the actual point of the exercise. This solver produces the same intermediate steps a student would write out by hand: isolating a variable, computing a discriminant, finding a common denominator, or applying the power rule term by term.",
-          "paragraph2": "Four problem types are covered, each with its own well-defined solving procedure: linear equations (isolate x algebraically), quadratic equations (the quadratic formula, handling real, repeated, and complex roots), fraction arithmetic (common denominators and reduction to lowest terms), and polynomial derivatives (the power rule applied term by term)."
+          "title": "فهم الحل خطوة بخطوة",
+          "paragraph1": "الوصول إلى الإجابة النهائية ليس سوى نصف ما تطلبه مسألة رياضية في معظم الصفوف الدراسية — فإظهار المنطق الذي أوصل إليها هو عادةً الهدف الحقيقي من التمرين. يُنتج هذا الحلّال نفس الخطوات الوسيطة التي كان سيكتبها طالب بيده: عزل متغير، حساب مميّز، إيجاد مقام مشترك، أو تطبيق قاعدة الأُس حدًا بحد.",
+          "paragraph2": "تُغطّى أربعة أنواع من المسائل، ولكل منها إجراء حل محدد بوضوح: المعادلات الخطية (عزل x جبريًا)، والمعادلات التربيعية (القانون العام، مع التعامل مع الجذور الحقيقية والمكررة والعقدية)، وحساب الكسور (المقامات المشتركة والاختزال إلى أبسط صورة)، ومشتقات كثيرات الحدود (قاعدة الأُس مطبّقة حدًا بحد)."
+        },
+        "variables": {
+          "title": "المتغيرات المعنية",
+          "intro": "يختزل كل نوع من المسائل إلى مجموعة صغيرة من المعاملات — تظهر الحروف التالية في جميع أنحاء الخطوات المحلولة التي يعرضها هذا الحلّال.",
+          "items": [
+            {
+              "name": "المعاملات (a, b, c, d)",
+              "description": "الأعداد الثابتة التي تضرب x، أو تقف وحدها، في معادلة خطية أو تربيعية — كل ما يحتاجه هذا الحلّال لتحديد المسألة بالكامل."
+            },
+            {
+              "name": "المميّز (D = b² − 4ac)",
+              "description": "عدد واحد محسوب من معاملات المعادلة التربيعية الثلاثة، تحدد إشارته وحدها ما إذا كانت المعادلة تملك جذرين حقيقيين، أو جذرًا مكررًا واحدًا، أو جذرين عقديين — حتى قبل أن تنتهي من الحل."
+            },
+            {
+              "name": "البسط والمقام",
+              "description": "الجزءان العلوي والسفلي من الكسر — لا يمكن أن يكون المقام صفرًا أبدًا، لأن القسمة على صفر غير معرّفة."
+            },
+            {
+              "name": "المعامل والأُس",
+              "description": "كل حد من كثيرة الحدود هو معامل مضروب في x مرفوعًا إلى أُس؛ وتشتق قاعدة الأُس كل حد بشكل مستقل قبل جمع النتائج مرة أخرى."
+            }
+          ]
+        },
+        "applications": {
+          "title": "أين تظهر هذه التقنيات",
+          "intro": "المعادلات الخطية والتربيعية والكسور والمشتقات ليست مجرد تمارين صفية — إنها المفردات العملية وراء طيف واسع من الحسابات التطبيقية.",
+          "items": [
+            {
+              "title": "الفيزياء والهندسة",
+              "description": "حركة المقذوفات، والأجسام الساقطة، والعديد من معادلات الدوائر والإنشاءات ذات طبيعة تربيعية، لذا فإن معرفة متى يهبط مقذوف أو متى تصل عارضة إلى إجهاد حرج غالبًا ما يؤول تمامًا إلى القانون العام التربيعي الذي يطبّقه هذا الحلّال."
+            },
+            {
+              "title": "المالية والأعمال",
+              "description": "غالبًا ما يتحول تحليل نقطة التعادل، ونمذجة التكلفة والإيرادات، ومسائل الفائدة البسيطة إلى معادلات خطية — عزل سعر أو كمية أو معدل مجهول بالطريقة نفسها التي يعزل بها هذا الحلّال x."
+            },
+            {
+              "title": "الوصفات والمزج والنسب",
+              "description": "تكبير أو تصغير وصفة، أو تخفيف محلول، أو مزج خليطين بنسبة معينة، كلها مسائل حساب كسور متنكرة — إيجاد مقام مشترك لدمج كميتين بشكل صحيح."
+            },
+            {
+              "title": "التحسين (الأمثلية)",
+              "description": "إيجاد قيمة عظمى أو صغرى — أقل كمية من المادة لحجم معين، أو أعلى ربح عند سعر معين — يبدأ بمشتقة، لأن معدل تغير الدالة يساوي صفرًا تمامًا عند قممها وقيعانها."
+            }
+          ]
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "One problem from each of the four supported types.",
-          "columnCalculation": "Problem",
-          "columnResult": "Result",
+          "title": "أمثلة محلولة",
+          "intro": "مسألة واحدة من كل نوع من الأنواع الأربعة المدعومة.",
+          "columnCalculation": "المسألة",
+          "columnResult": "النتيجة",
           "rows": [
             {
               "calculation": "3x + 5 = 2x + 9",
@@ -9674,74 +9743,85 @@
           ]
         },
         "faq": {
-          "title": "Frequently Asked Questions",
+          "title": "الأسئلة الشائعة",
           "items": [
             {
-              "question": "What does it mean when a linear equation has \"no unique solution\"?",
-              "answer": "It means the x-terms on both sides cancel out completely once you try to isolate x. If what's left is a true statement (like 3 = 3), the original equation holds for every value of x — infinitely many solutions. If what's left is false (like 3 = 7), no value of x can ever make the two sides equal."
+              "question": "ماذا يعني ألا تملك معادلة خطية \"حلًا وحيدًا محددًا\"؟",
+              "answer": "يعني ذلك أن حدود x في الطرفين تُلغي بعضها بعضًا تمامًا بمجرد محاولة عزل x. فإذا كانت العبارة المتبقية صحيحة (مثل 3 = 3)، فإن المعادلة الأصلية تصح لكل قيمة لـ x — أي حلول لا نهائية. أما إذا كانت خاطئة (مثل 3 = 7)، فلا توجد قيمة لـ x يمكن أن تجعل الطرفين متساويين أبدًا."
             },
             {
-              "question": "Why does a quadratic equation sometimes have complex solutions?",
-              "answer": "Whenever the discriminant (b² − 4ac) comes out negative, the quadratic formula asks for the square root of a negative number, which isn't a real number — but it is a well-defined complex number (a multiple of i, where i² = −1). This happens whenever the equation's parabola never actually crosses the x-axis."
+              "question": "لماذا تملك المعادلة التربيعية أحيانًا حلولًا عقدية؟",
+              "answer": "كلما كان المميّز (b² − 4ac) سالبًا، يطلب القانون العام الجذر التربيعي لعدد سالب، وهو ليس عددًا حقيقيًا — لكنه عدد عقدي معرّف جيدًا (مضاعف لـ i، حيث i² = −1). يحدث هذا كلما كان القطع المكافئ للمعادلة لا يقطع محور السينات أبدًا."
             },
             {
-              "question": "Why do fraction results always come back reduced to lowest terms?",
-              "answer": "A fraction like 4/8 and 1/2 represent exactly the same value, so reducing by the greatest common divisor of the numerator and denominator doesn't change the answer — it just expresses it in its simplest, most standard form, which is the conventional way to report a fraction result."
+              "question": "لماذا تعود نتائج الكسور دائمًا مختزلة إلى أبسط صورة؟",
+              "answer": "يمثّل كسر مثل 4/8 والكسر 1/2 القيمة نفسها تمامًا، لذا فإن الاختزال بالقاسم المشترك الأكبر للبسط والمقام لا يغيّر الإجابة — بل يعبّر عنها فقط بأبسط صورتها القياسية، وهي الطريقة التقليدية لعرض نتيجة كسرية."
             },
             {
-              "question": "Why does the derivative of a constant term always come out to 0?",
-              "answer": "A constant term doesn't change as x changes, and a derivative measures the rate of change — so a term with no x in it has a rate of change of exactly zero. In power-rule terms, a constant is x⁰, and the power rule multiplies by that power (0) before reducing it, which always zeroes the term out."
+              "question": "لماذا تكون مشتقة الحد الثابت دائمًا صفرًا؟",
+              "answer": "الحد الثابت لا يتغير مع تغيّر x، والمشتقة تقيس معدل التغير — لذا فإن حدًا لا يحتوي على x له معدل تغير يساوي صفرًا تمامًا. بلغة قاعدة الأُس، يكون الثابت هو x⁰، وتضرب قاعدة الأُس في هذا الأُس (0) قبل تخفيضه، مما يجعل الحد يتلاشى دائمًا إلى صفر."
             }
           ]
         },
         "behindTheTool": {
-          "title": "Behind This Tool",
+          "title": "خلف هذه الأداة",
           "history": {
-            "title": "The Book That Named Algebra",
-            "paragraph": "The word \"algebra\" comes from al-jabr, part of the title of a book written around 825 CE by the Persian mathematician Muhammad ibn Musa al-Khwarizmi: Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala (\"The Compendious Book on Calculation by Completion and Balancing\"). The book systematically classified and solved linear and quadratic equations using verbal, step-by-step procedures — completing a square, balancing terms across an equation — rather than the symbolic notation used today, and it's this systematic, procedural approach to solving equations, more than any single formula, that earns al-Khwarizmi the traditional title \"father of algebra.\""
+            "title": "الكتاب الذي أطلق اسم الجبر",
+            "paragraph": "كلمة \"الجبر\" مشتقة من \"الجبر\" نفسها، وهي جزء من عنوان كتاب ألّفه حوالي عام 825م عالم الرياضيات الفارسي محمد بن موسى الخوارزمي: الكتاب المختصر في حساب الجبر والمقابلة. صنّف الكتاب وحلّ المعادلات الخطية والتربيعية بشكل منهجي باستخدام إجراءات لفظية خطوة بخطوة — إتمام المربع، موازنة الحدود عبر المعادلة — بدلًا من الترميز الرمزي المستخدم اليوم، وهذا النهج المنهجي والإجرائي في حل المعادلات، أكثر من أي صيغة منفردة، هو ما يمنح الخوارزمي لقبه التقليدي \"أبو الجبر\"."
+          },
+          "modernDevelopments": {
+            "title": "من الإجراءات اللفظية إلى أنظمة الجبر الحاسوبية",
+            "paragraph": "حلّ الخوارزمي المعادلات بالكامل بالكلمات، إذ لم تُخترع رموز +، −، و= المستخدمة اليوم إلا بعد قرون — أدخل عالم الرياضيات الفرنسي فرانسوا فييت ترميزًا رمزيًا منهجيًا في تسعينيات القرن السادس عشر، ويعود إشارة المساواة الحديثة إلى عالم الرياضيات الويلزي روبرت ريكورد عام 1557. جعل هذا الترميز الرمزي ممكنًا، في القرن العشرين، بناء أنظمة جبر حاسوبية تتعامل مع المعادلات تلقائيًا، ويتبع هذا الحلّال الفكرة نفسها على نطاق صغير: فبدلًا من إجابة واحدة غامضة، يستعرض الخطوات المسمّاة نفسها — عزل الحدود، حساب مميّز، إيجاد مقام مشترك — التي وصفتها إجراءات الخوارزمي الأصلية نثرًا."
           },
           "academicPath": {
-            "title": "Academic Path",
-            "intro": "Algebra, equation-solving, and calculus sit within mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "title": "المسار الأكاديمي",
+            "intro": "تندرج الجبر وحل المعادلات وحساب التفاضل والتكامل ضمن الرياضيات. إليك أفضل 5 جامعات عالميًا في تصنيف QS العالمي للجامعات حسب التخصص لعام 2025 لتخصص الرياضيات، بالإضافة إلى قسم إقليمي واحد:",
             "universities": [
               {
-                "name": "Massachusetts Institute of Technology (MIT)",
-                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "معهد ماساتشوستس للتكنولوجيا (MIT)",
+                "note": "الأول عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://math.mit.edu/academics/grad/admission",
-                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+                "online": "لا — الدكتوراه برنامج بحثي حضوري ضمن قسم الرياضيات."
               },
               {
-                "name": "University of Oxford",
-                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة أكسفورد",
+                "note": "الثاني عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
-                "online": "No — the DPhil is an on-campus research degree."
+                "online": "لا — الدكتوراه (DPhil) درجة بحثية حضورية داخل الحرم الجامعي."
               },
               {
-                "name": "University of Cambridge",
-                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة كامبريدج",
+                "note": "الثالث عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
-                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+                "online": "لا — الدرجات البحثية حضورية في كلية الرياضيات."
               },
               {
-                "name": "Harvard University",
-                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة هارفارد",
+                "note": "الرابع عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://www.math.harvard.edu/graduate/admissions",
-                "online": "No — the PhD is an in-residence research program."
+                "online": "لا — الدكتوراه برنامج بحثي حضوري."
               },
               {
-                "name": "Stanford University",
-                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "name": "جامعة ستانفورد",
+                "note": "الخامس عالميًا في الرياضيات (تصنيف QS العالمي للجامعات حسب التخصص 2025).",
                 "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
-                "online": "No — the program is an in-residence research PhD."
+                "online": "لا — البرنامج دكتوراه بحثية حضورية."
               },
               {
-                "name": "American University of Beirut — Department of Mathematics",
-                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "name": "الجامعة الأمريكية في بيروت — قسم الرياضيات",
+                "note": "تأسست عام 1866؛ غير مصنّفة بشكل منفصل في هذا الجدول العالمي للتخصص.",
                 "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
-                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+                "online": "لا — تُقدَّم برامج القسم في حرم الجامعة الأمريكية في بيروت، لبنان."
               }
             ]
           }
+        },
+        "references": {
+          "title": "المراجع العلمية",
+          "citation": "Rosen, F. (Trans.). (1831). The Algebra of Mohammed Ben Musa (Al-Kitāb al-Mukhtaṣar fī Ḥisāb al-Jabr wal-Muqābala). Oriental Translation Fund.",
+          "note": "أول ترجمة إنجليزية لنص الخوارزمي التأسيسي في الجبر، تُظهر إجراءاته اللفظية الأصلية خطوة بخطوة لحل المعادلات الخطية والتربيعية — البنية ذاتها التي يتبعها ناتج هذا الحلّال خطوة بخطوة.",
+          "url": "https://archive.org/details/algebraofmohamme00khuwrich",
+          "readOriginal": "قراءة كتاب جبر محمد بن موسى"
         }
       }
     },
