@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 type Props = {
   text: string;
   onChange: (text: string) => void;
+  onClear: () => void;
 };
 
 const SNIPPETS: Record<string, string> = {
@@ -13,7 +14,7 @@ const SNIPPETS: Record<string, string> = {
   unitPrice: "Bulk grocery run\npack of 12 eggs = 4.20\nprice per egg = 4.20 / 12",
 };
 
-export default function NotepadInputPanel({ text, onChange }: Props) {
+export default function NotepadInputPanel({ text, onChange, onClear }: Props) {
   const t = useTranslations("tools.notepad-calculator.form");
 
   return (
@@ -41,6 +42,16 @@ export default function NotepadInputPanel({ text, onChange }: Props) {
           className="w-full resize-y rounded-xl border border-zinc-300 bg-white px-4 py-3 font-mono text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
         />
       </label>
+
+      <div className="mt-4">
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
+      </div>
     </SectionCard>
   );
 }

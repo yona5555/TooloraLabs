@@ -12,12 +12,18 @@ import NotepadQuickReference from "./NotepadQuickReference";
 import { defaultNotepadText } from "./types";
 
 const tool = new NotepadCalculatorTool();
+const RELATED_TOOLS = ["scientific-calculator", "step-by-step-math-solver", "percentage-calculator"];
 
 export default function NotepadCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.notepad-calculator.nav");
+  const t = useTranslations("tools.notepad-calculator");
   const [text, setText] = useState(defaultNotepadText());
 
   const result = useMemo(() => tool.execute({ text }, { locale: "en-US" }).data, [text]);
+
+  function handleClear() {
+    setText("");
+  }
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -29,9 +35,16 @@ export default function NotepadCalculator({ education }: { education: ReactNode 
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<NotepadInputPanel text={text} onChange={setText} />}
+          input={<NotepadInputPanel text={text} onChange={setText} onClear={handleClear} />}
           result={<NotepadResult result={result} />}
-          sidebar={<RelatedToolsSidebar currentSlug="notepad-calculator" category="math" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="notepad-calculator"
+              category="math"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
