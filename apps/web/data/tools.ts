@@ -941,4 +941,20 @@ export const tools: Tool[] = [
       "race pace chart",
     ],
   },
+  {
+    slug: "random-number-generator",
+    title: "Random Number Generator",
+    category: "math",
+    description:
+      "Generate random integers within a range you choose, with control over how many results, whether duplicates are allowed, and the sort order of the output.",
+    featured: false,
+    keywords: [
+      "random number generator",
+      "rng",
+      "random integer generator",
+      "lottery number generator",
+      "dice roller",
+      "number picker",
+    ],
+  },
 ];

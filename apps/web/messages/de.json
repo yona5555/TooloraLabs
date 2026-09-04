@@ -14866,6 +14866,170 @@
           "readOriginal": "Originalarbeit lesen"
         }
       }
+    },
+    "random-number-generator": {
+      "title": "Zufallszahlengenerator",
+      "description": "Erzeugen Sie zufällige ganze Zahlen innerhalb eines von Ihnen gewählten Bereichs, mit Kontrolle über die Anzahl der Ergebnisse, ob Duplikate erlaubt sind, und die Sortierreihenfolge der Ausgabe.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "form": {
+        "inputTitle": "Einstellungen",
+        "minLabel": "Minimum",
+        "maxLabel": "Maximum",
+        "countLabel": "Anzahl der Zahlen",
+        "duplicatesLabel": "Duplikate",
+        "duplicatesAllow": "Erlauben",
+        "duplicatesDisallow": "Keine Duplikate",
+        "sortOrderLabel": "Sortierreihenfolge",
+        "sortOrders": {
+          "none": "Wie generiert",
+          "ascending": "Aufsteigend",
+          "descending": "Absteigend"
+        },
+        "generate": "Generieren"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidRange": "Minimum und Maximum müssen beide ganze Zahlen sein.",
+        "invalidCount": "Geben Sie eine ganze Anzahl von Ergebnissen zwischen 1 und 10.000 ein.",
+        "rangeTooSmall": "Der Bereich enthält nicht genug ganze Zahlen, um diese Anzahl an Ergebnissen ohne Duplikate zu erzeugen.",
+        "countLabel": "Anzahl",
+        "sumLabel": "Summe",
+        "averageLabel": "Durchschnitt"
+      },
+      "quickReference": {
+        "title": "Gängige Zufallsziehungen",
+        "intro": "Ein paar typische Bereiche und Einstellungen, für die dieser Generator gebaut ist."
+      },
+      "education": {
+        "intro": {
+          "title": "Zufallszahlen verstehen",
+          "paragraph1": "Ein Computer kann keine wirklich unvorhersehbare Zahl erzeugen, wie es ein physischer Würfelwurf oder Münzwurf tut — jede Berechnung, die ein Prozessor ausführt, ist deterministisch, dieselbe Eingabe erzeugt immer dieselbe Ausgabe. Was dieses Tool (und praktisch jede allgemeine Zufallszahlenfunktion in Software) tatsächlich verwendet, ist ein Pseudozufallszahlengenerator: ein deterministischer Algorithmus, der von einem unvorhersehbaren Startwert (Seed) ausgeht und eine lange Folge von Zahlen erzeugt, die statistische Tests auf Zufälligkeit bestehen — obwohl die Folge technisch reproduzierbar wäre, wenn der Seed bekannt wäre.",
+          "paragraph2": "Eine zufällige ganze Zahl innerhalb eines gewählten Bereichs zu erzeugen, ohne eine bestimmte Zahl zu bevorzugen, ist weniger trivial, als es klingt — einen zufälligen Wert naiv modulo der Bereichsgröße zu nehmen, verzerrt leicht zugunsten kleinerer Zahlen, sofern der Bereich den Ausgaberaum des Generators nicht exakt gleichmäßig teilt. Dieses Tool vermeidet diese Verzerrung, und wenn Duplikate ausgeschlossen sind, zieht es ohne Zurücklegen, indem es den gesamten Bereich mischt, statt wiederholt neu zu würfeln, bis ein neuer Wert erscheint — das bleibt schnell und gleichmäßig, selbst wenn die angeforderte Anzahl sich der Größe des Bereichs selbst annähert."
+        },
+        "examples": {
+          "title": "Häufige Anwendungen",
+          "intro": "Derselbe Generator, drei verschiedene alltägliche Einstellungen.",
+          "columnUseCase": "Anwendungsfall",
+          "columnSettings": "Einstellungen",
+          "rows": [
+            {
+              "calculation": "Einen sechsseitigen Würfel werfen",
+              "result": "1–6, 1 Ergebnis, Duplikate erlaubt"
+            },
+            {
+              "calculation": "6 Lottozahlen ziehen",
+              "result": "1–49, 6 Ergebnisse, keine Duplikate"
+            },
+            {
+              "calculation": "Einen zufälligen Gewinner aus 250 Teilnehmern auswählen",
+              "result": "1–250, 1 Ergebnis"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Wo Zufallszahlen eingesetzt werden",
+          "intro": "Über Glücksspiele hinaus ist die Erzeugung von Zufallszahlen ein grundlegendes Werkzeug in vielen Bereichen.",
+          "items": [
+            {
+              "title": "Statistische Stichproben",
+              "description": "Die Auswahl einer zufälligen Teilmenge aus einer größeren Grundgesamtheit — Umfrageteilnehmer, Qualitätskontrollproben in einer Produktionslinie oder Teilnehmer, die einer Studiengruppe zugewiesen werden — hängt von zufälliger Auswahl ab, um die Verzerrung zu vermeiden, die eine manuell gewählte Stichprobe einbringen würde."
+            },
+            {
+              "title": "Simulation und Modellierung",
+              "description": "Monte-Carlo-Simulationen, eingesetzt von der Finanzwelt bis zur Physik, führen ein Modell tausende oder Millionen Male mit zufällig variierten Eingaben aus, um eine Bandbreite möglicher Ergebnisse zu schätzen statt einer einzigen deterministischen Antwort."
+            },
+            {
+              "title": "Zufällige Entscheidungen und Fairness",
+              "description": "Die Zuteilung von Aufgaben, das Ziehen von Losgewinnern, das Mischen eines Kartenspiels oder das faire Auflösen von Gleichständen beruhen alle auf einer Zufallsquelle, die kein Teilnehmer im Voraus vorhersagen oder beeinflussen kann."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Eignet sich dieser Generator für sicherheitsrelevante Zwecke, wie das Erzeugen eines Passworts oder Verschlüsselungsschlüssels?",
+              "answer": "Nein. Dieses Tool verwendet einen Standard-Pseudozufallsgenerator, der für alltägliche Aufgaben wie Spiele, Stichproben und Simulationen geeignet ist, keinen kryptografisch sicheren Zufallszahlengenerator (CSPRNG). Sicherheitskritische Werte benötigen speziell einen CSPRNG, der einem Angreifer widersteht, zukünftige Ausgaben vorherzusagen, selbst nachdem er vergangene Ausgaben beobachtet hat — eine Garantie, die gewöhnliche Zufallszahlengeneratoren nicht bieten."
+            },
+            {
+              "question": "Warum kann ich nicht 10 eindeutige Zahlen zwischen 1 und 5 generieren?",
+              "answer": "Dieser Bereich enthält nur 5 verschiedene ganze Zahlen, daher ist es mathematisch unmöglich, 10 davon zu ziehen, ohne mindestens eine zu wiederholen. Das Ausschließen von Duplikaten begrenzt die mögliche Anzahl auf die Größe des Bereichs selbst."
+            },
+            {
+              "question": "Ändert die Sortierreihenfolge, welche Zahlen generiert werden?",
+              "answer": "Nein. Die Sortierung wird erst nach der Erzeugung der Zahlen angewendet — sie ändert, wie das Ergebnis angezeigt wird, nicht welche Werte gezogen wurden oder wie wahrscheinlich ein Wert war."
+            },
+            {
+              "question": "Warum liefern zwei verschiedene Zufallszahlengeneratoren für denselben Bereich manchmal unterschiedlich wirkende Ergebnisse?",
+              "answer": "Verschiedene Tools verwenden unterschiedliche zugrunde liegende Pseudozufallsalgorithmen und Seeding-Methoden, was die konkret erzeugte Folge beeinflusst (und wie lange es dauert, bis sich diese Folge wiederholt), auch wenn beide für den alltäglichen Gebrauch statistisch gültige Zufallsquellen sein können."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter dem Tool",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Bevor Computer Zufälligkeit algorithmisch erzeugen konnten, benötigten Forscher für statistische Arbeiten Zufälligkeit, die nachweislich frei von jedem verborgenen Muster war. 1955 veröffentlichte die RAND Corporation \"A Million Random Digits with 100,000 Normal Deviates\", ein Buch mit einer Million Zufallsziffern, erzeugt von einem elektronischen, roulette-radähnlichen Gerät und rigoros auf statistische Verzerrung getestet — jahrelang war es eine Standardreferenzquelle für Zufälligkeit für Forscher, die sie benötigten. Der moderne Pseudozufallszahlengenerator entstand kurz darauf, als Möglichkeit, vergleichbar zufällig wirkende Folgen algorithmisch, auf Abruf, zu erzeugen, ohne eine physische Tabelle konsultieren zu müssen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Der 1998 veröffentlichte Mersenne-Twister-Algorithmus wurde aufgrund seiner extrem langen Periode (bevor sich seine Ausgabefolge wiederholt) und starker statistischer Eigenschaften zu einem der am weitesten verbreiteten allgemeinen Pseudozufallsgeneratoren und bleibt heute der Standardgenerator in vielen Programmiersprachen und statistischen Tools. Für sicherheitskritische Anwendungen setzen moderne Systeme stattdessen auf kryptografisch sichere Generatoren, die aus echten Hardware-Entropiequellen gespeist werden — thermisches Rauschen, Timing-Jitter oder dedizierte Hardware-Zufallszahlengeneratoren, die in moderne CPUs eingebaut sind —, die Browser Webanwendungen speziell zu diesem Zweck über die Web-Crypto-API zugänglich machen."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Erzeugung von Zufallszahlen liegt innerhalb der Zahlentheorie und Informatik, Teil des breiteren Feldes der Mathematik. Hier sind die weltweit besten 5 für Mathematik im QS World University Rankings by Subject 2025, plus eine regionale Abteilung:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Vor-Ort-Forschungsprogramm innerhalb der Mathematikabteilung."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Vor-Ort-Forschungsabschluss."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — Forschungsabschlüsse finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Vor-Ort-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Vor-Ort-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Fachbereich Mathematik",
+                "note": "Gegründet 1866; in dieser globalen Fachtabelle nicht separat gerankt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Abteilung finden vor Ort auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
+          "note": "Die Studie, die den Mersenne-Twister-Algorithmus einführte, einen der heute am weitesten verbreiteten Pseudozufallszahlengeneratoren in Software, geschätzt für seine extrem lange Periode und starke statistische Gleichverteilung.",
+          "url": "https://doi.org/10.1145/272991.272995",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
     }
   },
   "toolPage": {

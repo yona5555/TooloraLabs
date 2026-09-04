@@ -14862,6 +14862,170 @@
           "readOriginal": "Read the Original Paper"
         }
       }
+    },
+    "random-number-generator": {
+      "title": "Random Number Generator",
+      "description": "Generate random integers within a range you choose, with control over how many results, whether duplicates are allowed, and the sort order of the output.",
+      "nav": {
+        "tool": "Generator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Settings",
+        "minLabel": "Minimum",
+        "maxLabel": "Maximum",
+        "countLabel": "How Many Numbers",
+        "duplicatesLabel": "Duplicates",
+        "duplicatesAllow": "Allow",
+        "duplicatesDisallow": "No Duplicates",
+        "sortOrderLabel": "Sort Order",
+        "sortOrders": {
+          "none": "As Generated",
+          "ascending": "Ascending",
+          "descending": "Descending"
+        },
+        "generate": "Generate"
+      },
+      "result": {
+        "heading": "Result",
+        "invalidRange": "Minimum and maximum must both be whole numbers.",
+        "invalidCount": "Enter a whole number of results between 1 and 10,000.",
+        "rangeTooSmall": "The range doesn't contain enough whole numbers to generate this many results without duplicates.",
+        "countLabel": "Count",
+        "sumLabel": "Sum",
+        "averageLabel": "Average"
+      },
+      "quickReference": {
+        "title": "Common Random Draws",
+        "intro": "A few typical ranges and settings this generator is built to handle."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Random Number Generation",
+          "paragraph1": "A computer can't produce a truly unpredictable number the way a physical dice roll or a coin flip does — every calculation a processor performs is deterministic, the same input always producing the same output. What this tool (and virtually every general-purpose random number feature in software) actually uses is a pseudorandom number generator: a deterministic algorithm that starts from an unpredictable seed value and produces a long sequence of numbers that pass statistical tests for randomness, even though the sequence is technically reproducible if the seed were known.",
+          "paragraph2": "Generating a random integer within a chosen range, without introducing bias toward any particular value, is less trivial than it sounds — naively taking a random value modulo the range size skews slightly toward smaller numbers unless the range divides evenly into the generator's output space. This tool avoids that bias, and when duplicates are disallowed, it draws without replacement by shuffling the full range rather than repeatedly re-rolling until a new value appears, which stays fast and uniform even as the requested count approaches the size of the range itself."
+        },
+        "examples": {
+          "title": "Common Uses",
+          "intro": "The same generator, three different everyday settings.",
+          "columnUseCase": "Use Case",
+          "columnSettings": "Settings",
+          "rows": [
+            {
+              "calculation": "Rolling a six-sided die",
+              "result": "1–6, 1 result, duplicates allowed"
+            },
+            {
+              "calculation": "Drawing 6 lottery numbers",
+              "result": "1–49, 6 results, no duplicates"
+            },
+            {
+              "calculation": "Picking a random winner from 250 entries",
+              "result": "1–250, 1 result"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Where Random Numbers Are Used",
+          "intro": "Beyond games of chance, random number generation is a foundational tool across many fields.",
+          "items": [
+            {
+              "title": "Statistical sampling",
+              "description": "Selecting a random subset of a larger population — survey respondents, quality-control samples on a production line, or participants assigned to a study group — depends on random selection to avoid the bias a manually chosen sample would introduce."
+            },
+            {
+              "title": "Simulation and modeling",
+              "description": "Monte Carlo simulations, used in fields from finance to physics, run a model thousands or millions of times with randomly varied inputs to estimate a range of possible outcomes rather than a single deterministic answer."
+            },
+            {
+              "title": "Randomized decisions and fairness",
+              "description": "Assigning tasks, drawing raffle winners, shuffling a deck, or breaking ties fairly all rely on a source of randomness that no participant can predict or influence in advance."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is this generator suitable for security purposes, like generating a password or encryption key?",
+              "answer": "No. This tool uses a standard pseudorandom generator suited for everyday tasks like games, sampling, and simulations, not a cryptographically secure random number generator (CSPRNG). Security-sensitive values need a CSPRNG specifically, which resists an attacker predicting future output even after observing past output — a guarantee ordinary random number generators don't make."
+            },
+            {
+              "question": "Why can't I generate 10 unique numbers between 1 and 5?",
+              "answer": "There are only 5 distinct whole numbers in that range, so it's mathematically impossible to draw 10 of them without repeating at least one. Disallowing duplicates caps the possible count at the size of the range itself."
+            },
+            {
+              "question": "Does the sort order change which numbers are generated?",
+              "answer": "No. Sorting is applied only after the numbers are generated — it changes how the result is displayed, not which values were drawn or how likely any value was to appear."
+            },
+            {
+              "question": "Why do two different random number generators sometimes give different-feeling results for the same range?",
+              "answer": "Different tools use different underlying pseudorandom algorithms and seeding methods, which affect the specific sequence produced (and how long it takes before that sequence repeats) even though both can be statistically valid sources of randomness for everyday use."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Before computers could generate randomness algorithmically, researchers needed randomness that was demonstrably free of any hidden pattern for statistical work. In 1955, the RAND Corporation published \"A Million Random Digits with 100,000 Normal Deviates,\" a book of a million random digits generated from an electronic roulette-wheel-like device and rigorously tested for statistical bias — for years, it was a standard reference source of randomness for researchers who needed it. The modern pseudorandom number generator emerged shortly after, as a way to produce comparably random-looking sequences algorithmically, on demand, without needing to consult a physical table."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "The Mersenne Twister algorithm, published in 1998, became one of the most widely used general-purpose pseudorandom generators due to its extremely long period (before its output sequence repeats) and strong statistical properties, and remains the default generator in many programming languages and statistical tools today. For security-sensitive uses, modern systems instead rely on cryptographically secure generators seeded from genuine hardware entropy sources — thermal noise, timing jitter, or dedicated hardware random number generators built into modern CPUs — which browsers expose to web applications through the Web Crypto API specifically for that purpose."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Random number generation sits within number theory and computer science, part of the broader field of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
+          "note": "The paper introducing the Mersenne Twister algorithm, one of the most widely deployed pseudorandom number generators in software today, prized for its extremely long period and strong statistical uniformity.",
+          "url": "https://doi.org/10.1145/272991.272995",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
     }
   },
   "toolPage": {

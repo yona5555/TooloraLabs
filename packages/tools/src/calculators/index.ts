@@ -54,3 +54,4 @@ export * from "./StepByStepMathSolver";
 export * from "./GraphingCalculator";
 export * from "./NotepadCalculator";
 export * from "./PaceCalculator";
+export * from "./RandomNumberGenerator";

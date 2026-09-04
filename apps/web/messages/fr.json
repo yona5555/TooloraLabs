@@ -14866,6 +14866,170 @@
           "readOriginal": "Lire l'Article Original"
         }
       }
+    },
+    "random-number-generator": {
+      "title": "Générateur de Nombres Aléatoires",
+      "description": "Générez des nombres entiers aléatoires dans une plage que vous choisissez, avec un contrôle sur le nombre de résultats, l'autorisation des doublons et l'ordre de tri de la sortie.",
+      "nav": {
+        "tool": "Générateur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "form": {
+        "inputTitle": "Paramètres",
+        "minLabel": "Minimum",
+        "maxLabel": "Maximum",
+        "countLabel": "Combien de Nombres",
+        "duplicatesLabel": "Doublons",
+        "duplicatesAllow": "Autoriser",
+        "duplicatesDisallow": "Sans Doublons",
+        "sortOrderLabel": "Ordre de Tri",
+        "sortOrders": {
+          "none": "Comme Généré",
+          "ascending": "Croissant",
+          "descending": "Décroissant"
+        },
+        "generate": "Générer"
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidRange": "Le minimum et le maximum doivent tous deux être des nombres entiers.",
+        "invalidCount": "Saisissez un nombre entier de résultats entre 1 et 10 000.",
+        "rangeTooSmall": "La plage ne contient pas assez de nombres entiers pour générer ce nombre de résultats sans doublons.",
+        "countLabel": "Nombre",
+        "sumLabel": "Somme",
+        "averageLabel": "Moyenne"
+      },
+      "quickReference": {
+        "title": "Tirages Aléatoires Courants",
+        "intro": "Quelques plages et paramètres typiques pour lesquels ce générateur est conçu."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Génération de Nombres Aléatoires",
+          "paragraph1": "Un ordinateur ne peut pas produire un nombre véritablement imprévisible comme le fait un lancer de dé physique ou un tirage à pile ou face — chaque calcul effectué par un processeur est déterministe, la même entrée produit toujours la même sortie. Ce que cet outil (et pratiquement toute fonction de nombres aléatoires à usage général dans les logiciels) utilise en réalité, c'est un générateur de nombres pseudo-aléatoires : un algorithme déterministe qui part d'une valeur de départ (graine) imprévisible et produit une longue séquence de nombres qui réussissent les tests statistiques d'aléatoire, même si la séquence est techniquement reproductible si la graine était connue.",
+          "paragraph2": "Générer un entier aléatoire dans une plage choisie, sans introduire de biais envers une valeur particulière, est moins trivial qu'il n'y paraît — prendre naïvement une valeur aléatoire modulo la taille de la plage biaise légèrement vers les nombres plus petits, sauf si la plage divise exactement l'espace de sortie du générateur. Cet outil évite ce biais, et lorsque les doublons sont interdits, il tire sans remise en mélangeant la plage entière plutôt qu'en relançant à répétition jusqu'à ce qu'une nouvelle valeur apparaisse, ce qui reste rapide et uniforme même lorsque le nombre demandé s'approche de la taille de la plage elle-même."
+        },
+        "examples": {
+          "title": "Usages Courants",
+          "intro": "Le même générateur, trois réglages quotidiens différents.",
+          "columnUseCase": "Cas d'Usage",
+          "columnSettings": "Paramètres",
+          "rows": [
+            {
+              "calculation": "Lancer un dé à six faces",
+              "result": "1–6, 1 résultat, doublons autorisés"
+            },
+            {
+              "calculation": "Tirer 6 numéros de loterie",
+              "result": "1–49, 6 résultats, sans doublons"
+            },
+            {
+              "calculation": "Choisir un gagnant au hasard parmi 250 participants",
+              "result": "1–250, 1 résultat"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Où les Nombres Aléatoires Sont Utilisés",
+          "intro": "Au-delà des jeux de hasard, la génération de nombres aléatoires est un outil fondamental dans de nombreux domaines.",
+          "items": [
+            {
+              "title": "Échantillonnage statistique",
+              "description": "Sélectionner un sous-ensemble aléatoire d'une population plus large — répondants à une enquête, échantillons de contrôle qualité sur une chaîne de production, ou participants affectés à un groupe d'étude — dépend d'une sélection aléatoire pour éviter le biais qu'introduirait un échantillon choisi manuellement."
+            },
+            {
+              "title": "Simulation et modélisation",
+              "description": "Les simulations de Monte-Carlo, utilisées dans des domaines allant de la finance à la physique, exécutent un modèle des milliers ou des millions de fois avec des entrées variées aléatoirement afin d'estimer une gamme de résultats possibles plutôt qu'une seule réponse déterministe."
+            },
+            {
+              "title": "Décisions aléatoires et équité",
+              "description": "Attribuer des tâches, tirer les gagnants d'une tombola, mélanger un jeu de cartes ou départager équitablement reposent tous sur une source d'aléatoire qu'aucun participant ne peut prédire ni influencer à l'avance."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Ce générateur convient-il à des fins de sécurité, comme générer un mot de passe ou une clé de chiffrement ?",
+              "answer": "Non. Cet outil utilise un générateur pseudo-aléatoire standard adapté aux tâches quotidiennes comme les jeux, l'échantillonnage et les simulations, pas un générateur de nombres aléatoires cryptographiquement sûr (CSPRNG). Les valeurs sensibles à la sécurité nécessitent spécifiquement un CSPRNG, qui résiste à un attaquant tentant de prédire la sortie future même après avoir observé la sortie passée — une garantie que les générateurs de nombres aléatoires ordinaires n'offrent pas."
+            },
+            {
+              "question": "Pourquoi ne puis-je pas générer 10 nombres uniques entre 1 et 5 ?",
+              "answer": "Cette plage ne contient que 5 nombres entiers distincts, il est donc mathématiquement impossible d'en tirer 10 sans en répéter au moins un. Interdire les doublons limite le nombre possible à la taille de la plage elle-même."
+            },
+            {
+              "question": "L'ordre de tri change-t-il les nombres générés ?",
+              "answer": "Non. Le tri n'est appliqué qu'après la génération des nombres — il change la façon dont le résultat est affiché, pas les valeurs qui ont été tirées ni la probabilité qu'une valeur donnée apparaisse."
+            },
+            {
+              "question": "Pourquoi deux générateurs de nombres aléatoires différents donnent-ils parfois des résultats d'apparence différente pour la même plage ?",
+              "answer": "Différents outils utilisent des algorithmes pseudo-aléatoires et des méthodes d'amorçage (seeding) sous-jacents différents, ce qui affecte la séquence précise produite (et le temps avant que cette séquence ne se répète), même si les deux peuvent constituer des sources d'aléatoire statistiquement valides pour un usage quotidien."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière l'Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Avant que les ordinateurs ne puissent générer de l'aléatoire de façon algorithmique, les chercheurs avaient besoin d'un aléatoire démontrablement exempt de tout schéma caché pour leurs travaux statistiques. En 1955, la RAND Corporation a publié \"A Million Random Digits with 100,000 Normal Deviates\", un livre d'un million de chiffres aléatoires générés par un dispositif électronique semblable à une roue de roulette et rigoureusement testé pour tout biais statistique — pendant des années, ce fut une source de référence standard d'aléatoire pour les chercheurs qui en avaient besoin. Le générateur de nombres pseudo-aléatoires moderne est apparu peu après, comme moyen de produire algorithmiquement, à la demande, des séquences d'apparence comparablement aléatoire, sans avoir à consulter une table physique."
+          },
+          "modernDevelopments": {
+            "title": "Développements Modernes",
+            "paragraph": "L'algorithme Mersenne Twister, publié en 1998, est devenu l'un des générateurs pseudo-aléatoires à usage général les plus utilisés grâce à sa période extrêmement longue (avant que sa séquence de sortie ne se répète) et à ses solides propriétés statistiques, et reste aujourd'hui le générateur par défaut dans de nombreux langages de programmation et outils statistiques. Pour les usages sensibles à la sécurité, les systèmes modernes s'appuient plutôt sur des générateurs cryptographiquement sûrs amorcés à partir de véritables sources d'entropie matérielle — bruit thermique, gigue de synchronisation, ou générateurs de nombres aléatoires matériels dédiés intégrés aux processeurs modernes —, que les navigateurs exposent aux applications web via l'API Web Crypto précisément à cette fin."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La génération de nombres aléatoires s'inscrit dans la théorie des nombres et l'informatique, au sein du domaine plus large des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche sur place au sein du département de mathématiques."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 2 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un diplôme de recherche sur place."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 3 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent sur place à la faculté de mathématiques."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 4 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche sur place."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 5 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche sur place."
+              },
+              {
+                "name": "Université Américaine de Beyrouth — Département de Mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
+          "note": "L'article ayant introduit l'algorithme Mersenne Twister, l'un des générateurs de nombres pseudo-aléatoires les plus largement déployés dans les logiciels aujourd'hui, apprécié pour sa période extrêmement longue et sa forte uniformité statistique.",
+          "url": "https://doi.org/10.1145/272991.272995",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
     }
   },
   "toolPage": {
