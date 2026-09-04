@@ -14122,22 +14122,59 @@
           "title": "So funktioniert die zeilenweise Auswertung",
           "intro": "Jede Zeile nach dem Muster \"name = Ausdruck\" definiert eine Variable, die spätere Zeilen unter diesem Namen verwenden können; jede andere Zeile wird eigenständig als Berechnung ausgewertet.",
           "variableHint": "Zeilen, die nur Notizen oder Überschriften sind, zeigen einfach kein Ergebnis — das ist so vorgesehen, kein Fehler."
+        },
+        "conceptDiagram": {
+          "title": "Rechenreihenfolge",
+          "intro": "Jeder Ausdruck, den dieses Tool auswertet — in einer Notizblock-Zeile oder im Grafikrechner — folgt derselben festen Reihenfolge: zuerst Klammern, dann Multiplikation und Division, dann Addition und Subtraktion.",
+          "step": {
+            "parens": "Zuerst Klammern",
+            "multiply": "Dann multiplizieren",
+            "result": "Ergebnis"
+          }
         }
       },
       "form": {
         "inputTitle": "Notizen",
         "inputLabel": "Notizblock-Text",
-        "inputPlaceholder": "Miete\nrent = 1200\nutilities = 85\ntotal = rent + utilities\naufgeteilt auf 3 Mitbewohner:\ntotal / 3"
+        "inputPlaceholder": "Miete\nrent = 1200\nutilities = 85\ntotal = rent + utilities\naufgeteilt auf 3 Mitbewohner:\ntotal / 3",
+        "snippet": {
+          "splitBill": "Rechnung teilen",
+          "tip": "Trinkgeld berechnen",
+          "unitPrice": "Stückpreis"
+        }
       },
       "result": {
         "heading": "Ergebnisse",
-        "noCalculations": "Noch nichts zu berechnen — geben Sie in einer beliebigen Zeile einen Ausdruck ein, etwa 2 + 2 oder rent = 1200."
+        "noCalculations": "Noch nichts zu berechnen — geben Sie in einer beliebigen Zeile einen Ausdruck ein, etwa 2 + 2 oder rent = 1200.",
+        "calculatedCount": "{count, plural, one {# Zeile berechnet} other {# Zeilen berechnet}}"
       },
       "education": {
         "intro": {
           "title": "Zeilenweise Rechner verstehen",
           "paragraph1": "Ein Notizblock-Rechner steht zwischen einem einfachen Texteditor und einer Tabellenkalkulation: Sie schreiben so, wie Sie Notizen auf Papier machen würden — eine Mischung aus Beschriftungen, Kontext und Zahlen — und jede Zeile, die wie eine Berechnung aussieht, wird automatisch direkt daneben gelöst, ohne zu einer separaten Rechner-App zu wechseln oder Zellen und Formeln in einer Tabelle aufzubauen.",
           "paragraph2": "Dieses Tool wertet jede Zeile von oben nach unten aus. Eine Zeile im Format \"name = Ausdruck\" berechnet ein Ergebnis und speichert es gleichzeitig unter diesem Namen, sodass jede spätere Zeile darauf verweisen kann — so lässt sich eine laufende Summe, ein Steuersatz oder ein Stückpreis einmal weiter oben definieren und im restlichen Text wiederverwenden. Zeilen mit reinem Fließtext, Überschriften oder leere Zeilen liefern einfach kein Ergebnis, was so vorgesehen und kein Fehler ist, denn der ganze Sinn besteht darin, Notizen und Mathematik frei im selben Dokument zu mischen."
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Eine Notizblock-Berechnung besteht nur aus wenigen Bausteinen — egal ob es sich um eine einzelne Zeile oder eine ganze Seite Notizen handelt.",
+          "items": [
+            {
+              "name": "Ausdruck",
+              "description": "Jede Zeile, die der Auswerter als Arithmetik erkennen kann — Zahlen, Operatoren, Funktionen und zuvor definierte Variablennamen, miteinander kombiniert."
+            },
+            {
+              "name": "Zuweisung (name = Ausdruck)",
+              "description": "Eine Zeile, die einen Wert sowohl berechnet als auch unter einem Namen speichert, sodass jede darunterliegende Zeile diesen Namen wiederverwenden kann, statt die Zahl erneut einzutippen."
+            },
+            {
+              "name": "Gültigkeitsbereich",
+              "description": "Die laufende Menge der bisher definierten Variablen, von oben nach unten — ein Name lässt sich nur in Zeilen nach der Zeile verwenden, die ihn zuerst definiert, und eine Neuzuweisung ändert den Wert, den jede spätere Zeile sieht."
+            },
+            {
+              "name": "Notiz",
+              "description": "Jede Zeile, die kein gültiger Ausdruck oder keine Zuweisung ist — reiner Fließtext, eine Überschrift oder eine leere Zeile —, die das Tool unangetastet lässt und für die kein Ergebnis angezeigt wird."
+            }
+          ]
         },
         "examples": {
           "title": "Berechnete Beispiele",
@@ -14160,6 +14197,28 @@
             {
               "calculation": "tip = 42 * 0.18",
               "result": "7.56"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Notizblock-Berechnung in der Praxis",
+          "intro": "Das Mischen einfacher Notizen mit live berechneter Arithmetik passt natürlich zu Alltagsaufgaben, für die eine einfache Rechner-App zu wenig und eine vollständige Tabellenkalkulation zu viel wäre.",
+          "items": [
+            {
+              "title": "Budgetierung und Rechnungsteilung",
+              "description": "Miete, Nebenkosten und gemeinsame Ausgaben als beschriftete Zeilen aufzulisten — und dann eine laufende Summe unter Mitbewohnern aufzuteilen — hält sowohl die Rechnung als auch die Überlegung dahinter an einem Ort sichtbar."
+            },
+            {
+              "title": "Einkaufen und Stückpreise",
+              "description": "Einen Großpackungspreis mit einem Stückpreis zu vergleichen oder einen Warenkorb mit einem einmal oben definierten Steuersatz zu summieren, macht aus einer Einkaufsliste etwas, das seine eigene Rechnung gleich mitprüft."
+            },
+            {
+              "title": "Schnelle Schätzungen und Überschlagsrechnungen",
+              "description": "Eine grobe Schätzung — ein Trinkgeld, ein Rabatt, eine Einheitenumrechnung — zusammen mit dem Kontext zu skizzieren, der sie hervorgebracht hat, geht schneller, als für eine einzelne Berechnung eine Tabellenkalkulation zu öffnen."
+            },
+            {
+              "title": "Besprechungsnotizen und Planung",
+              "description": "Ein Budgetvorschlag, ein Projektzeitplan oder eine Reiseplanungsnotiz kann die dazugehörige Rechnung direkt eingebettet enthalten, sodass die Zahlen mit den erklärenden Notizen verbunden bleiben, statt in einer separaten Datei zu leben."
             }
           ]
         },
@@ -14189,6 +14248,10 @@
           "history": {
             "title": "Die App, die eine Ergebnisspalte neben Ihre Notizen setzte",
             "paragraph": "Acqualia Software veröffentlichte 2005 die erste Version von Soulver und führte damit ein, was heute als die moderne Notizblock-Rechner-Oberfläche gilt: ein reiner Texteditor mit einer live mitlaufenden „Ergebnisspalte\" am rechten Rand, die das Ergebnis jeder Zeile anzeigt, die wie eine Berechnung aussieht. Ein Folge-Update im Jahr darauf, Soulver 1.2, ging noch weiter, indem es einer Zeile erlaubte, gewöhnliche Wörter mit Zahlen zu mischen — „rent 1200 + utilities 85\" — und trotzdem korrekt auszuwerten, statt zu verlangen, dass eine Zeile reine Arithmetik sei. Genau diese Kombination — frei formulierter Text, Ergebnisse direkt im Kontext, und Variablen, die sich über die Seite fortsetzen — ist das Modell, dem dieses browserbasierte Tool folgt."
+          },
+          "modernDevelopments": {
+            "title": "Von einer einzelnen App zu einer ganzen Kategorie",
+            "paragraph": "Soulvers Idee der Ergebnisspalte hat sich seither weit über eine einzelne App hinaus verbreitet: Numi, SpeQ und mehrere Browser-Erweiterungen bieten dieselbe Kombination aus Freitext und live berechneter Mathematik, und allgemeine Notiz-Apps wie Obsidian und Notion haben Plugins erhalten, die eingebettete Mathematik auf dieselbe Weise auswerten. Die zugrundeliegende Technik — freien Text zeilenweise zu zerlegen, das auszuwerten, was wie ein Ausdruck aussieht, und benannte Werte weiterzutragen — ist inzwischen eine kleine, etablierte Werkzeugkategorie und keine Neuheit einer einzelnen App mehr."
           },
           "academicPath": {
             "title": "Akademischer Weg",
@@ -14232,6 +14295,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Wissenschaftliche Quellen",
+          "citation": "Aho, A. V., Sethi, R., & Ullman, J. D. (1986). Compilers: Principles, Techniques, and Tools. Addison-Wesley.",
+          "note": "Das Standardwerk zum rekursiven Abstiegs-Parsing von Ausdrücken und zur Operatorrangfolge-Auswertung — die allgemeine Technik hinter dem korrekten Lesen und Auswerten einer Zeile wie „rent = 1200 + utilities\".",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
+          "readOriginal": "Über Compilers: Principles, Techniques, and Tools"
         }
       }
     }

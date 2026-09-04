@@ -14118,22 +14118,59 @@
           "title": "How Line-by-Line Evaluation Works",
           "intro": "Any line matching \"name = expression\" defines a variable that later lines can use by name; every other line is evaluated as a calculation on its own.",
           "variableHint": "Lines that are just notes or headings simply show no result — that's expected, not an error."
+        },
+        "conceptDiagram": {
+          "title": "Order of Operations",
+          "intro": "Every expression this tool evaluates — on a notepad line or in the Graphing Calculator — follows the same fixed order: parentheses first, then multiplication and division, then addition and subtraction.",
+          "step": {
+            "parens": "Parentheses first",
+            "multiply": "Then multiply",
+            "result": "Result"
+          }
         }
       },
       "form": {
         "inputTitle": "Notes",
         "inputLabel": "Notepad text",
-        "inputPlaceholder": "Rent\nrent = 1200\nutilities = 85\ntotal = rent + utilities\nsplit between 3 roommates:\ntotal / 3"
+        "inputPlaceholder": "Rent\nrent = 1200\nutilities = 85\ntotal = rent + utilities\nsplit between 3 roommates:\ntotal / 3",
+        "snippet": {
+          "splitBill": "Split a Bill",
+          "tip": "Tip Calculation",
+          "unitPrice": "Unit Price"
+        }
       },
       "result": {
         "heading": "Results",
-        "noCalculations": "Nothing to calculate yet — type an expression on any line, like 2 + 2 or rent = 1200."
+        "noCalculations": "Nothing to calculate yet — type an expression on any line, like 2 + 2 or rent = 1200.",
+        "calculatedCount": "{count, plural, one {# line calculated} other {# lines calculated}}"
       },
       "education": {
         "intro": {
           "title": "Understanding Line-by-Line Calculators",
           "paragraph1": "A notepad calculator sits between a plain text editor and a spreadsheet: you write the way you'd jot notes on paper — a mix of labels, context, and numbers — and any line that looks like a calculation gets solved automatically next to it, without switching to a separate calculator app or building out spreadsheet cells and formulas.",
           "paragraph2": "This tool evaluates every line from top to bottom. A line written as \"name = expression\" both computes a result and stores it under that name, so any later line can reference it — letting a running total, a tax rate, or a unit price be defined once near the top and reused throughout the rest of the note. Lines that are pure prose, headings, or blank simply produce no result, which is expected rather than an error, since the whole point is mixing notes and math freely in the same document."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "A notepad calculation is built from just a few moving parts, whether it's a single line or a whole page of notes.",
+          "items": [
+            {
+              "name": "Expression",
+              "description": "Any line the evaluator can parse as arithmetic — numbers, operators, functions, and previously defined variable names combined together."
+            },
+            {
+              "name": "Assignment (name = expression)",
+              "description": "A line that both computes a value and stores it under a name, so every line below can reuse that name instead of retyping the number."
+            },
+            {
+              "name": "Scope",
+              "description": "The running set of variables defined so far, top to bottom — a name is only usable on lines after the one that first defines it, and reassigning it changes the value every later line sees."
+            },
+            {
+              "name": "Note",
+              "description": "Any line that isn't a valid expression or assignment — plain prose, a heading, or a blank line — which the tool leaves alone and shows no result for."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -14156,6 +14193,28 @@
             {
               "calculation": "tip = 42 * 0.18",
               "result": "7.56"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Notepad Calculation in Practice",
+          "intro": "Mixing plain notes with live arithmetic fits naturally into everyday tasks that a plain calculator app or a full spreadsheet would over- or under-serve.",
+          "items": [
+            {
+              "title": "Budgeting and Bill-Splitting",
+              "description": "Listing rent, utilities, and shared costs as labeled lines — then dividing a running total among roommates — keeps both the math and the reasoning behind it visible in one place."
+            },
+            {
+              "title": "Shopping and Unit Pricing",
+              "description": "Comparing a bulk price against a per-unit price, or totaling a cart with a tax rate defined once near the top, turns a shopping list into something that also checks its own arithmetic."
+            },
+            {
+              "title": "Quick Estimates and Back-of-Envelope Math",
+              "description": "Sketching out a rough estimate — a tip, a discount, a unit conversion — alongside the context that produced it is faster than opening a spreadsheet for a single calculation."
+            },
+            {
+              "title": "Meeting Notes and Planning",
+              "description": "A budget proposal, a project timeline, or a trip-planning note can carry its own supporting math inline, so the numbers stay attached to the notes that explain them instead of living in a separate file."
             }
           ]
         },
@@ -14185,6 +14244,10 @@
           "history": {
             "title": "The App That Put an Answer Column Next to Your Notes",
             "paragraph": "Acqualia Software released the first version of Soulver in 2005, introducing what's now considered the modern notepad calculator interface: a plain-text editor with a live \"answer column\" running down the right-hand side, showing the result of any line that looked like a calculation. A follow-up update the next year, Soulver 1.2, went further by letting a line mix ordinary words with numbers — \"rent 1200 + utilities 85\" — and still evaluate correctly, rather than requiring a line to be pure arithmetic. That combination — free-form text, inline results, and variables that carry down the page — is the same model this browser-based tool follows."
+          },
+          "modernDevelopments": {
+            "title": "From a Single App to a Whole Category",
+            "paragraph": "Soulver's answer-column idea has since spread well beyond one app: Numi, SpeQ, and several browser extensions offer the same free-text-plus-live-math interface, and general-purpose note apps like Obsidian and Notion have added plugins that evaluate inline math the same way. The underlying technique — parsing free text line by line, evaluating what looks like an expression, and carrying named values forward — is now a small, well-established category of tool rather than one app's novelty."
           },
           "academicPath": {
             "title": "Academic Path",
@@ -14228,6 +14291,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Aho, A. V., Sethi, R., & Ullman, J. D. (1986). Compilers: Principles, Techniques, and Tools. Addison-Wesley.",
+          "note": "The standard reference for recursive-descent expression parsing and operator-precedence evaluation — the general technique behind reading a line like \"rent = 1200 + utilities\" and evaluating it correctly.",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
+          "readOriginal": "About Compilers: Principles, Techniques, and Tools"
         }
       }
     }

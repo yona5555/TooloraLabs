@@ -14122,22 +14122,59 @@
           "title": "Cómo funciona la evaluación línea por línea",
           "intro": "Cualquier línea que coincida con \"nombre = expresión\" define una variable que las líneas siguientes pueden usar por su nombre; cualquier otra línea se evalúa como un cálculo independiente.",
           "variableHint": "Las líneas que son solo notas o títulos simplemente no muestran resultado — eso es lo esperado, no un error."
+        },
+        "conceptDiagram": {
+          "title": "Orden de las operaciones",
+          "intro": "Toda expresión que evalúa esta herramienta — en una línea de notas o en la Calculadora Gráfica — sigue el mismo orden fijo: primero los paréntesis, luego la multiplicación y la división, y por último la suma y la resta.",
+          "step": {
+            "parens": "Primero los paréntesis",
+            "multiply": "Luego se multiplica",
+            "result": "Resultado"
+          }
         }
       },
       "form": {
         "inputTitle": "Notas",
         "inputLabel": "Texto de notas",
-        "inputPlaceholder": "Alquiler\nrent = 1200\nutilities = 85\ntotal = rent + utilities\ndividido entre 3 compañeros de piso:\ntotal / 3"
+        "inputPlaceholder": "Alquiler\nrent = 1200\nutilities = 85\ntotal = rent + utilities\ndividido entre 3 compañeros de piso:\ntotal / 3",
+        "snippet": {
+          "splitBill": "Dividir una cuenta",
+          "tip": "Cálculo de propina",
+          "unitPrice": "Precio unitario"
+        }
       },
       "result": {
         "heading": "Resultados",
-        "noCalculations": "Todavía no hay nada que calcular — escribe una expresión en cualquier línea, como 2 + 2 o rent = 1200."
+        "noCalculations": "Todavía no hay nada que calcular — escribe una expresión en cualquier línea, como 2 + 2 o rent = 1200.",
+        "calculatedCount": "{count, plural, one {# línea calculada} other {# líneas calculadas}}"
       },
       "education": {
         "intro": {
           "title": "Entender las calculadoras línea por línea",
           "paragraph1": "Una calculadora de notas se sitúa entre un editor de texto simple y una hoja de cálculo: escribes como anotarías en papel — una mezcla de etiquetas, contexto y números — y cualquier línea que parezca un cálculo se resuelve automáticamente junto a ella, sin cambiar a una app de calculadora aparte ni montar celdas y fórmulas en una hoja de cálculo.",
           "paragraph2": "Esta herramienta evalúa cada línea de arriba abajo. Una línea escrita como \"nombre = expresión\" calcula un resultado y lo guarda bajo ese nombre a la vez, de modo que cualquier línea posterior puede referenciarlo — permitiendo definir un total acumulado, una tasa de impuesto o un precio unitario una sola vez cerca del principio y reutilizarlo en el resto de la nota. Las líneas que son solo texto, títulos o líneas en blanco simplemente no producen resultado, lo cual es lo esperado y no un error, ya que el objetivo es mezclar libremente notas y matemáticas en el mismo documento."
+        },
+        "variables": {
+          "title": "Variables involucradas",
+          "intro": "Un cálculo en la calculadora de notas se construye con solo unas pocas piezas, ya sea una sola línea o toda una página de notas.",
+          "items": [
+            {
+              "name": "Expresión",
+              "description": "Cualquier línea que el evaluador pueda interpretar como aritmética — números, operadores, funciones y nombres de variables definidas previamente combinados entre sí."
+            },
+            {
+              "name": "Asignación (nombre = expresión)",
+              "description": "Una línea que calcula un valor y lo guarda bajo un nombre a la vez, de modo que cada línea posterior puede reutilizar ese nombre en lugar de volver a escribir el número."
+            },
+            {
+              "name": "Ámbito",
+              "description": "El conjunto de variables definidas hasta ese punto, de arriba abajo — un nombre solo se puede usar en las líneas posteriores a la que lo define por primera vez, y reasignarlo cambia el valor que ven todas las líneas siguientes."
+            },
+            {
+              "name": "Nota",
+              "description": "Cualquier línea que no sea una expresión o asignación válida — texto normal, un título o una línea en blanco — que la herramienta deja tal cual, sin mostrar resultado."
+            }
+          ]
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -14160,6 +14197,28 @@
             {
               "calculation": "tip = 42 * 0.18",
               "result": "7.56"
+            }
+          ]
+        },
+        "applications": {
+          "title": "El cálculo en notas en la práctica",
+          "intro": "Mezclar notas normales con aritmética en vivo encaja de forma natural en tareas cotidianas que una app de calculadora simple o una hoja de cálculo completa no cubrirían igual de bien.",
+          "items": [
+            {
+              "title": "Presupuestos y reparto de gastos",
+              "description": "Anotar el alquiler, los servicios y los gastos compartidos como líneas con nombre — y luego dividir un total acumulado entre compañeros de piso — mantiene visibles a la vez las matemáticas y el razonamiento detrás de ellas."
+            },
+            {
+              "title": "Compras y precio por unidad",
+              "description": "Comparar un precio a granel con un precio por unidad, o totalizar un carrito con una tasa de impuesto definida una sola vez al principio, convierte una lista de la compra en algo que además verifica su propia aritmética."
+            },
+            {
+              "title": "Estimaciones rápidas y cálculos al vuelo",
+              "description": "Esbozar una estimación aproximada — una propina, un descuento, una conversión de unidades — junto con el contexto que la originó es más rápido que abrir una hoja de cálculo para un único cálculo."
+            },
+            {
+              "title": "Notas de reuniones y planificación",
+              "description": "Una propuesta de presupuesto, un cronograma de proyecto o una nota de planificación de un viaje pueden llevar sus propias matemáticas de apoyo en línea, de modo que los números queden pegados a las notas que los explican en lugar de vivir en un archivo aparte."
             }
           ]
         },
@@ -14189,6 +14248,10 @@
           "history": {
             "title": "La app que colocó una columna de resultados junto a tus notas",
             "paragraph": "Acqualia Software lanzó la primera versión de Soulver en 2005, introduciendo lo que hoy se considera la interfaz moderna de calculadora de notas: un editor de texto plano con una \"columna de resultados\" en vivo a lo largo del lado derecho, que muestra el resultado de cualquier línea que parezca un cálculo. Una actualización posterior al año siguiente, Soulver 1.2, fue más allá al permitir que una línea mezclara palabras normales con números — \"rent 1200 + utilities 85\" — y aun así se evaluara correctamente, en lugar de exigir que una línea fuera aritmética pura. Esa combinación — texto libre, resultados en línea y variables que se transmiten a lo largo de la página — es el mismo modelo que sigue esta herramienta basada en el navegador."
+          },
+          "modernDevelopments": {
+            "title": "De una sola app a toda una categoría",
+            "paragraph": "La idea de la columna de resultados de Soulver se ha extendido mucho más allá de una sola app: Numi, SpeQ y varias extensiones de navegador ofrecen la misma interfaz de texto libre más matemáticas en vivo, y apps de notas de propósito general como Obsidian y Notion han añadido complementos que evalúan matemáticas en línea de la misma manera. La técnica subyacente — analizar texto libre línea por línea, evaluar lo que parece una expresión y transmitir los valores con nombre hacia adelante — es hoy una categoría de herramientas pequeña pero bien establecida, y no solo la novedad de una app."
           },
           "academicPath": {
             "title": "Trayectoria académica",
@@ -14232,6 +14295,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Aho, A. V., Sethi, R., & Ullman, J. D. (1986). Compilers: Principles, Techniques, and Tools. Addison-Wesley.",
+          "note": "La referencia estándar sobre el análisis sintáctico descendente recursivo y la evaluación por precedencia de operadores — la técnica general detrás de leer una línea como \"rent = 1200 + utilities\" y evaluarla correctamente.",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
+          "readOriginal": "Sobre Compilers: Principles, Techniques, and Tools"
         }
       }
     }

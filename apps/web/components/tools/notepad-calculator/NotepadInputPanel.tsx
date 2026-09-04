@@ -7,11 +7,29 @@ type Props = {
   onChange: (text: string) => void;
 };
 
+const SNIPPETS: Record<string, string> = {
+  splitBill: "Rent\nrent = 1200\nutilities = 85\ntotal = rent + utilities\nsplit between 3 roommates:\ntotal / 3",
+  tip: "Dinner bill\nbill = 64.50\ntip = bill * 0.18\ntotal = bill + tip",
+  unitPrice: "Bulk grocery run\npack of 12 eggs = 4.20\nprice per egg = 4.20 / 12",
+};
+
 export default function NotepadInputPanel({ text, onChange }: Props) {
   const t = useTranslations("tools.notepad-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-3 flex flex-wrap gap-2">
+        {Object.keys(SNIPPETS).map((key) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => onChange(SNIPPETS[key])}
+            className="rounded-full border border-dashed border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            {t(`snippet.${key}`)}
+          </button>
+        ))}
+      </div>
       <label className="block space-y-2">
         <span className="sr-only">{t("inputLabel")}</span>
         <textarea

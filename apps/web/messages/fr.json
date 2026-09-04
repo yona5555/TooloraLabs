@@ -14122,22 +14122,59 @@
           "title": "Comment fonctionne l'évaluation ligne par ligne",
           "intro": "Toute ligne correspondant au format \"nom = expression\" définit une variable que les lignes suivantes peuvent utiliser par son nom ; toute autre ligne est évaluée comme un calcul indépendant.",
           "variableHint": "Les lignes qui ne sont que des notes ou des titres n'affichent tout simplement aucun résultat — c'est normal, pas une erreur."
+        },
+        "conceptDiagram": {
+          "title": "Ordre des opérations",
+          "intro": "Toute expression évaluée par cet outil — sur une ligne du bloc-notes comme dans la Calculatrice Graphique — suit toujours le même ordre fixe : d'abord les parenthèses, puis la multiplication et la division, enfin l'addition et la soustraction.",
+          "step": {
+            "parens": "D'abord les parenthèses",
+            "multiply": "Puis la multiplication",
+            "result": "Résultat"
+          }
         }
       },
       "form": {
         "inputTitle": "Notes",
         "inputLabel": "Texte du bloc-notes",
-        "inputPlaceholder": "Loyer\nrent = 1200\nutilities = 85\ntotal = rent + utilities\npartagé entre 3 colocataires :\ntotal / 3"
+        "inputPlaceholder": "Loyer\nrent = 1200\nutilities = 85\ntotal = rent + utilities\npartagé entre 3 colocataires :\ntotal / 3",
+        "snippet": {
+          "splitBill": "Partager une facture",
+          "tip": "Calcul de pourboire",
+          "unitPrice": "Prix unitaire"
+        }
       },
       "result": {
         "heading": "Résultats",
-        "noCalculations": "Rien à calculer pour l'instant — saisissez une expression sur n'importe quelle ligne, comme 2 + 2 ou rent = 1200."
+        "noCalculations": "Rien à calculer pour l'instant — saisissez une expression sur n'importe quelle ligne, comme 2 + 2 ou rent = 1200.",
+        "calculatedCount": "{count, plural, one {# ligne calculée} other {# lignes calculées}}"
       },
       "education": {
         "intro": {
           "title": "Comprendre les calculatrices ligne par ligne",
           "paragraph1": "Une calculatrice bloc-notes se situe entre un simple éditeur de texte et un tableur : vous écrivez comme vous noteriez sur papier — un mélange d'étiquettes, de contexte et de chiffres — et toute ligne qui ressemble à un calcul est résolue automatiquement juste à côté, sans passer à une application de calculatrice distincte ni construire des cellules et des formules dans un tableur.",
           "paragraph2": "Cet outil évalue chaque ligne de haut en bas. Une ligne écrite sous la forme \"nom = expression\" calcule un résultat et le stocke sous ce nom en même temps, de sorte que toute ligne suivante peut y faire référence — ce qui permet de définir un total cumulé, un taux de taxe ou un prix unitaire une seule fois en haut et de le réutiliser dans le reste de la note. Les lignes purement textuelles, les titres ou les lignes vides ne produisent tout simplement aucun résultat, ce qui est normal et non une erreur, puisque tout l'intérêt est de mélanger librement notes et calculs dans le même document."
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "Un calcul dans le bloc-notes repose sur quelques éléments seulement, qu'il s'agisse d'une simple ligne ou de toute une page de notes.",
+          "items": [
+            {
+              "name": "Expression",
+              "description": "Toute ligne que l'évaluateur peut interpréter comme une opération arithmétique — nombres, opérateurs, fonctions et noms de variables déjà définis, combinés ensemble."
+            },
+            {
+              "name": "Affectation (nom = expression)",
+              "description": "Une ligne qui calcule une valeur tout en la stockant sous un nom, afin que chaque ligne suivante puisse réutiliser ce nom plutôt que de retaper le chiffre."
+            },
+            {
+              "name": "Portée",
+              "description": "L'ensemble courant des variables définies jusque-là, de haut en bas — un nom n'est utilisable que sur les lignes suivant celle qui le définit pour la première fois, et le réaffecter change la valeur vue par chaque ligne ultérieure."
+            },
+            {
+              "name": "Note",
+              "description": "Toute ligne qui n'est ni une expression valide ni une affectation — texte libre, titre ou ligne vide — que l'outil laisse telle quelle sans afficher de résultat."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples résolus",
@@ -14160,6 +14197,28 @@
             {
               "calculation": "tip = 42 * 0.18",
               "result": "7.56"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Le calcul en bloc-notes dans la pratique",
+          "intro": "Mélanger des notes libres avec des calculs en direct s'intègre naturellement à des tâches quotidiennes qu'une simple application de calculatrice ou un tableur complet serviraient mal — l'une par excès de simplicité, l'autre par excès de complexité.",
+          "items": [
+            {
+              "title": "Budget et partage de factures",
+              "description": "Lister le loyer, les charges et les frais partagés comme des lignes étiquetées — puis diviser un total cumulé entre colocataires — garde à la fois le calcul et le raisonnement qui le sous-tend visibles au même endroit."
+            },
+            {
+              "title": "Courses et prix unitaires",
+              "description": "Comparer un prix en gros à un prix unitaire, ou totaliser un panier avec un taux de taxe défini une seule fois en haut, transforme une liste de courses en un document qui vérifie aussi sa propre arithmétique."
+            },
+            {
+              "title": "Estimations rapides et calculs au dos d'une enveloppe",
+              "description": "Esquisser une estimation approximative — un pourboire, une remise, une conversion d'unité — aux côtés du contexte qui l'a produite est plus rapide que d'ouvrir un tableur pour un seul calcul."
+            },
+            {
+              "title": "Notes de réunion et planification",
+              "description": "Une proposition de budget, un calendrier de projet ou une note de planification de voyage peuvent porter leur propre calcul intégré, de sorte que les chiffres restent attachés aux notes qui les expliquent plutôt que de vivre dans un fichier séparé."
             }
           ]
         },
@@ -14189,6 +14248,10 @@
           "history": {
             "title": "L'appli qui a placé une colonne de résultats à côté de vos notes",
             "paragraph": "Acqualia Software a lancé la première version de Soulver en 2005, introduisant ce qui est aujourd'hui considéré comme l'interface moderne de la calculatrice bloc-notes : un éditeur de texte brut doté d'une \"colonne de résultats\" en direct courant le long du bord droit, affichant le résultat de toute ligne ressemblant à un calcul. Une mise à jour l'année suivante, Soulver 1.2, est allée plus loin en permettant à une ligne de mélanger des mots ordinaires avec des chiffres — \"rent 1200 + utilities 85\" — tout en s'évaluant correctement, plutôt que d'exiger qu'une ligne soit de l'arithmétique pure. Cette combinaison — texte libre, résultats en contexte, et variables transmises tout au long de la page — est exactement le modèle que suit cet outil fonctionnant dans le navigateur."
+          },
+          "modernDevelopments": {
+            "title": "D'une seule application à toute une catégorie",
+            "paragraph": "L'idée de colonne de résultats de Soulver s'est depuis répandue bien au-delà d'une seule application : Numi, SpeQ et plusieurs extensions de navigateur proposent la même interface de texte libre associée à un calcul en direct, et des applications de prise de notes généralistes comme Obsidian et Notion ont ajouté des extensions qui évaluent les calculs intégrés de la même manière. La technique sous-jacente — analyser du texte libre ligne par ligne, évaluer ce qui ressemble à une expression, et transmettre les valeurs nommées vers le bas — constitue désormais une catégorie d'outils à part entière et bien établie, plutôt qu'une simple nouveauté d'une seule application."
           },
           "academicPath": {
             "title": "Parcours académique",
@@ -14232,6 +14295,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Aho, A. V., Sethi, R., & Ullman, J. D. (1986). Compilers: Principles, Techniques, and Tools. Addison-Wesley.",
+          "note": "L'ouvrage de référence sur l'analyse syntaxique descendante récursive et l'évaluation par priorité des opérateurs — la technique générale permettant de lire une ligne comme \"rent = 1200 + utilities\" et de l'évaluer correctement.",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
+          "readOriginal": "À propos de Compilers: Principles, Techniques, and Tools"
         }
       }
     }
