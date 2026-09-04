@@ -15026,6 +15026,175 @@
           "readOriginal": "Read the Original Paper"
         }
       }
+    },
+    "standard-deviation-calculator": {
+      "title": "Standard Deviation Calculator",
+      "description": "Calculate the population and sample standard deviation, variance, and mean of a data set, with every subtract-square-average step shown.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Data Set",
+        "inputLabel": "Values",
+        "inputPlaceholder": "e.g. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Separate values with commas, spaces, or new lines."
+      },
+      "result": {
+        "heading": "Result",
+        "emptyDataset": "Enter at least one number to see a result.",
+        "populationStdDev": "Population Std. Dev. (σ)",
+        "sampleStdDev": "Sample Std. Dev. (s)",
+        "countLabel": "Count (N)",
+        "meanLabel": "Mean (μ)",
+        "populationVariance": "Population Variance (σ²)",
+        "sampleVariance": "Sample Variance (s²)",
+        "stepsTitle": "Step-by-Step Deviations",
+        "columnValue": "Value",
+        "columnDeviation": "Deviation (x − μ)",
+        "columnSquared": "Squared"
+      },
+      "chart": {
+        "ariaLabel": "Number line showing each entered value as a dot, with a shaded band spanning one population standard deviation on either side of the mean",
+        "legendValues": "Values",
+        "legendBand": "Mean ± 1σ"
+      },
+      "quickReference": {
+        "title": "The Two Formulas",
+        "intro": "Population and sample standard deviation differ only in the denominator."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Standard Deviation",
+          "paragraph1": "Standard deviation measures how spread out a set of values is around its mean — a small standard deviation means most values sit close to the average, while a large one means they're scattered widely. It's the square root of the variance, which itself is the average of each value's squared distance from the mean; squaring first (rather than just averaging the raw distances) ensures that deviations above and below the mean don't cancel each other out, and taking the square root at the end brings the result back to the data's original unit rather than a squared one.",
+          "paragraph2": "This tool computes both the population standard deviation (σ), used when your data set is the entire group you care about, and the sample standard deviation (s), used when your data is a subset drawn from a larger population you're trying to draw conclusions about. The two formulas differ only in the denominator — population divides by N, the sample divides by n − 1 — a small but deliberate adjustment called Bessel's correction, which corrects for the tendency of a sample's own mean to sit closer to its own data points than the true population mean would."
+        },
+        "formula": {
+          "title": "The Formulas",
+          "paragraph1": "Both formulas start the same way: find the mean, subtract it from every value to get each value's deviation, then square each deviation (so negative and positive deviations both count as spread) and average them.",
+          "paragraph2": "σ is the population standard deviation and μ is the population mean, used when the data set is the entire group of interest. s is the sample standard deviation and x̄ is the sample mean, used when the data is only a subset of a larger population — dividing by n − 1 instead of n makes s a better (unbiased) estimate of the true population standard deviation than dividing by n would give."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few data sets, computed the same way this tool computes them.",
+          "columnCalculation": "Data Set",
+          "columnResult": "Population σ",
+          "rows": [
+            {
+              "calculation": "2, 4, 4, 4, 5, 5, 7, 9",
+              "result": "2.0"
+            },
+            {
+              "calculation": "10, 10, 10, 10",
+              "result": "0"
+            },
+            {
+              "calculation": "1, 2, 3, 4, 5",
+              "result": "≈ 1.414"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Where Standard Deviation Is Used",
+          "intro": "Standard deviation is one of the most widely used statistics because it quantifies uncertainty and consistency in a single number.",
+          "items": [
+            {
+              "title": "Quality control",
+              "description": "Manufacturing processes track the standard deviation of a measured dimension or weight across a production run — a low standard deviation means the process is consistent, while a rising one often signals a machine going out of calibration before any single defective part is even produced."
+            },
+            {
+              "title": "Finance and risk",
+              "description": "In finance, the standard deviation of an asset's historical returns is one of the most common measures of volatility — a higher standard deviation means returns swing more widely around their average, which is generally read as higher risk."
+            },
+            {
+              "title": "Grading and test design",
+              "description": "Standardized test scores are typically reported alongside the test's standard deviation, since it tells you how meaningful a given point difference actually is — a 10-point gap matters far more on a test with a standard deviation of 15 than one with a standard deviation of 100."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Should I use population or sample standard deviation?",
+              "answer": "Use population standard deviation (σ) only when your data set is genuinely the entire group you're interested in — every student in a specific class, every unit produced in a specific batch. Use sample standard deviation (s) whenever your data is a subset meant to represent a larger population you can't measure in full, which is the far more common situation in practice, including most surveys, experiments, and quality-control spot checks."
+            },
+            {
+              "question": "Why is the sample standard deviation always slightly larger than the population standard deviation for the same data?",
+              "answer": "Because the sample formula divides the sum of squared deviations by a smaller number (n − 1 instead of n), which necessarily produces a larger result. This is deliberate: a sample's own mean is always at least as close to its own data points as any other value could be, which without correction would make the sample systematically underestimate the true spread of the population it was drawn from."
+            },
+            {
+              "question": "What does it mean if the standard deviation is 0?",
+              "answer": "A standard deviation of exactly 0 means every value in the data set is identical — there's no spread at all, so every value equals the mean exactly."
+            },
+            {
+              "question": "How is standard deviation different from variance?",
+              "answer": "Variance is the average of the squared deviations; standard deviation is simply its square root. Variance is expressed in squared units (which is mathematically convenient for further statistical calculations), while standard deviation is expressed in the same unit as the original data, which is usually easier to interpret directly."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The term \"standard deviation\" was coined by the English mathematician Karl Pearson, one of the founders of modern mathematical statistics, in a lecture in 1893 and in print the following year in his 1894 paper \"Contributions to the Mathematical Theory of Evolution,\" published in Philosophical Transactions of the Royal Society of London. Pearson introduced the term as a more convenient replacement for the older, more cumbersome phrases then in use, such as \"error of mean square\" and \"root mean square error\" — the underlying calculation itself had already been used by earlier statisticians and astronomers analyzing measurement error, but Pearson's terminology and systematic treatment are what stuck."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "The n − 1 denominator used in the sample formula is known as Bessel's correction, after the German astronomer and mathematician Friedrich Bessel, who worked out the adjustment needed to remove the systematic bias that arises from estimating a population's spread using a sample's own mean rather than the population's true (and usually unknown) mean. Today, standard deviation calculations are built into essentially every statistical software package and spreadsheet application, and remain a foundational input to more advanced techniques including confidence intervals, hypothesis testing, and control charts used throughout science, engineering, and business analytics."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Standard deviation and variance are core topics within statistics, part of the broader field of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Pearson, K. (1894). Contributions to the Mathematical Theory of Evolution. Philosophical Transactions of the Royal Society of London A, 185, 71-110.",
+          "note": "The paper in which Karl Pearson introduced the term \"standard deviation,\" now the standard measure of spread taught in every introductory statistics course.",
+          "url": "https://doi.org/10.1098/rsta.1894.0003",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
     }
   },
   "toolPage": {

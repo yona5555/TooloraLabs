@@ -15030,6 +15030,175 @@
           "readOriginal": "Lire l'Article Original"
         }
       }
+    },
+    "standard-deviation-calculator": {
+      "title": "Calculateur d'Écart-Type",
+      "description": "Calculez l'écart-type de population et d'échantillon, la variance et la moyenne d'un jeu de données, avec chaque étape de soustraction, mise au carré et moyenne affichée.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "form": {
+        "inputTitle": "Jeu de Données",
+        "inputLabel": "Valeurs",
+        "inputPlaceholder": "ex. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Séparez les valeurs par des virgules, des espaces ou des retours à la ligne."
+      },
+      "result": {
+        "heading": "Résultat",
+        "emptyDataset": "Saisissez au moins un nombre pour voir un résultat.",
+        "populationStdDev": "Écart-Type de Population (σ)",
+        "sampleStdDev": "Écart-Type d'Échantillon (s)",
+        "countLabel": "Effectif (N)",
+        "meanLabel": "Moyenne (μ)",
+        "populationVariance": "Variance de Population (σ²)",
+        "sampleVariance": "Variance d'Échantillon (s²)",
+        "stepsTitle": "Écarts Étape par Étape",
+        "columnValue": "Valeur",
+        "columnDeviation": "Écart (x − μ)",
+        "columnSquared": "Au Carré"
+      },
+      "chart": {
+        "ariaLabel": "Droite numérique montrant chaque valeur saisie sous forme de point, avec une bande ombrée couvrant un écart-type de population de chaque côté de la moyenne",
+        "legendValues": "Valeurs",
+        "legendBand": "Moyenne ± 1σ"
+      },
+      "quickReference": {
+        "title": "Les Deux Formules",
+        "intro": "L'écart-type de population et d'échantillon ne diffèrent que par le dénominateur."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'Écart-Type",
+          "paragraph1": "L'écart-type mesure la dispersion d'un ensemble de valeurs autour de sa moyenne — un petit écart-type signifie que la plupart des valeurs sont proches de la moyenne, tandis qu'un grand signifie qu'elles sont largement dispersées. C'est la racine carrée de la variance, qui est elle-même la moyenne des distances au carré de chaque valeur par rapport à la moyenne ; élever au carré d'abord (plutôt que de simplement faire la moyenne des distances brutes) garantit que les écarts au-dessus et en dessous de la moyenne ne s'annulent pas mutuellement, et prendre la racine carrée à la fin ramène le résultat à l'unité d'origine des données plutôt qu'à une unité au carré.",
+          "paragraph2": "Cet outil calcule à la fois l'écart-type de population (σ), utilisé lorsque votre jeu de données constitue l'ensemble du groupe qui vous intéresse, et l'écart-type d'échantillon (s), utilisé lorsque vos données sont un sous-ensemble tiré d'une population plus large sur laquelle vous essayez de tirer des conclusions. Les deux formules ne diffèrent que par le dénominateur — la population divise par N, l'échantillon divise par n − 1 —, un ajustement modeste mais délibéré appelé correction de Bessel, qui corrige la tendance de la moyenne d'un échantillon à être plus proche de ses propres points de données que ne le serait la véritable moyenne de la population."
+        },
+        "formula": {
+          "title": "Les Formules",
+          "paragraph1": "Les deux formules commencent de la même façon : trouver la moyenne, la soustraire de chaque valeur pour obtenir l'écart de chaque valeur, puis élever chaque écart au carré (afin que les écarts négatifs et positifs comptent tous deux comme dispersion) et en faire la moyenne.",
+          "paragraph2": "σ est l'écart-type de population et μ la moyenne de population, utilisés lorsque le jeu de données constitue l'ensemble du groupe d'intérêt. s est l'écart-type d'échantillon et x̄ la moyenne d'échantillon, utilisés lorsque les données ne sont qu'un sous-ensemble d'une population plus large — diviser par n − 1 plutôt que par n fait de s une meilleure estimation (non biaisée) du véritable écart-type de la population que ne le donnerait une division par n."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Quelques jeux de données, résolus de la même manière que cet outil les calcule.",
+          "columnCalculation": "Jeu de Données",
+          "columnResult": "σ de Population",
+          "rows": [
+            {
+              "calculation": "2, 4, 4, 4, 5, 5, 7, 9",
+              "result": "2,0"
+            },
+            {
+              "calculation": "10, 10, 10, 10",
+              "result": "0"
+            },
+            {
+              "calculation": "1, 2, 3, 4, 5",
+              "result": "≈ 1,414"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Où l'Écart-Type Est Utilisé",
+          "intro": "L'écart-type est l'une des statistiques les plus utilisées car elle quantifie l'incertitude et la cohérence en un seul nombre.",
+          "items": [
+            {
+              "title": "Contrôle qualité",
+              "description": "Les processus de fabrication suivent l'écart-type d'une dimension ou d'un poids mesuré tout au long d'une série de production — un écart-type faible signifie que le processus est cohérent, tandis qu'un écart-type croissant signale souvent qu'une machine se déréglemente avant même qu'une seule pièce défectueuse ne soit produite."
+            },
+            {
+              "title": "Finance et risque",
+              "description": "En finance, l'écart-type des rendements historiques d'un actif est l'une des mesures de volatilité les plus courantes — un écart-type plus élevé signifie que les rendements oscillent plus largement autour de leur moyenne, ce qui est généralement interprété comme un risque plus élevé."
+            },
+            {
+              "title": "Notation et conception de tests",
+              "description": "Les scores des tests standardisés sont généralement communiqués avec l'écart-type du test, car il indique à quel point un écart de points donné est réellement significatif — un écart de 10 points compte bien plus sur un test avec un écart-type de 15 que sur un test avec un écart-type de 100."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Dois-je utiliser l'écart-type de population ou d'échantillon ?",
+              "answer": "Utilisez l'écart-type de population (σ) uniquement lorsque votre jeu de données constitue réellement l'ensemble du groupe qui vous intéresse — chaque élève d'une classe précise, chaque unité produite dans un lot précis. Utilisez l'écart-type d'échantillon (s) chaque fois que vos données sont un sous-ensemble censé représenter une population plus large que vous ne pouvez pas mesurer intégralement, ce qui est de loin la situation la plus courante en pratique, y compris la plupart des enquêtes, expériences et contrôles qualité ponctuels."
+            },
+            {
+              "question": "Pourquoi l'écart-type d'échantillon est-il toujours légèrement plus grand que celui de la population pour les mêmes données ?",
+              "answer": "Parce que la formule de l'échantillon divise la somme des écarts au carré par un nombre plus petit (n − 1 au lieu de n), ce qui produit nécessairement un résultat plus grand. C'est délibéré : la moyenne d'un échantillon est toujours au moins aussi proche de ses propres points de données que ne pourrait l'être toute autre valeur, ce qui, sans correction, ferait systématiquement sous-estimer par l'échantillon la dispersion réelle de la population dont il est issu."
+            },
+            {
+              "question": "Que signifie un écart-type de 0 ?",
+              "answer": "Un écart-type exactement égal à 0 signifie que toutes les valeurs du jeu de données sont identiques — il n'y a aucune dispersion, chaque valeur est exactement égale à la moyenne."
+            },
+            {
+              "question": "Quelle est la différence entre l'écart-type et la variance ?",
+              "answer": "La variance est la moyenne des écarts au carré ; l'écart-type en est simplement la racine carrée. La variance s'exprime en unités au carré (ce qui est mathématiquement pratique pour d'autres calculs statistiques), tandis que l'écart-type s'exprime dans la même unité que les données d'origine, ce qui est généralement plus facile à interpréter directement."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière l'Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Le terme \"écart-type\" a été inventé par le mathématicien anglais Karl Pearson, l'un des fondateurs de la statistique mathématique moderne, lors d'une conférence en 1893, puis par écrit l'année suivante dans son article de 1894 \"Contributions to the Mathematical Theory of Evolution\", publié dans les Philosophical Transactions of the Royal Society of London. Pearson a introduit ce terme comme un substitut plus pratique aux expressions plus anciennes et plus lourdes alors en usage, telles que \"erreur quadratique moyenne\" — le calcul sous-jacent lui-même avait déjà été utilisé par des statisticiens et astronomes antérieurs analysant les erreurs de mesure, mais c'est la terminologie et le traitement systématique de Pearson qui se sont imposés."
+          },
+          "modernDevelopments": {
+            "title": "Développements Modernes",
+            "paragraph": "Le dénominateur n − 1 utilisé dans la formule de l'échantillon est appelé correction de Bessel, du nom de l'astronome et mathématicien allemand Friedrich Bessel, qui a établi l'ajustement nécessaire pour éliminer le biais systématique résultant de l'estimation de la dispersion d'une population à partir de la moyenne d'un échantillon plutôt que de la véritable moyenne (généralement inconnue) de la population. Aujourd'hui, les calculs d'écart-type sont intégrés dans pratiquement tous les logiciels statistiques et tableurs, et restent une donnée fondamentale pour des techniques plus avancées, notamment les intervalles de confiance, les tests d'hypothèses et les cartes de contrôle utilisés en science, en ingénierie et en analyse d'affaires."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'écart-type et la variance sont des sujets centraux des statistiques, au sein du domaine plus large des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Classé n° 1 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche sur place au sein du département de mathématiques."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Classée n° 2 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un diplôme de recherche sur place."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Classée n° 3 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent sur place à la faculté de mathématiques."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Classée n° 4 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche sur place."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Classée n° 5 mondial en Mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche sur place."
+              },
+              {
+                "name": "Université Américaine de Beyrouth — Département de Mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Pearson, K. (1894). Contributions to the Mathematical Theory of Evolution. Philosophical Transactions of the Royal Society of London A, 185, 71-110.",
+          "note": "L'article dans lequel Karl Pearson a introduit le terme \"écart-type\", aujourd'hui la mesure standard de dispersion enseignée dans tout cours d'introduction aux statistiques.",
+          "url": "https://doi.org/10.1098/rsta.1894.0003",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
     }
   },
   "toolPage": {

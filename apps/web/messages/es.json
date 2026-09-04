@@ -15030,6 +15030,175 @@
           "readOriginal": "Leer el Artículo Original"
         }
       }
+    },
+    "standard-deviation-calculator": {
+      "title": "Calculadora de Desviación Estándar",
+      "description": "Calcula la desviación estándar poblacional y muestral, la varianza y la media de un conjunto de datos, mostrando cada paso de restar, elevar al cuadrado y promediar.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "form": {
+        "inputTitle": "Conjunto de Datos",
+        "inputLabel": "Valores",
+        "inputPlaceholder": "p. ej. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Separa los valores con comas, espacios o saltos de línea."
+      },
+      "result": {
+        "heading": "Resultado",
+        "emptyDataset": "Introduce al menos un número para ver un resultado.",
+        "populationStdDev": "Desv. Estándar Poblacional (σ)",
+        "sampleStdDev": "Desv. Estándar Muestral (s)",
+        "countLabel": "Cantidad (N)",
+        "meanLabel": "Media (μ)",
+        "populationVariance": "Varianza Poblacional (σ²)",
+        "sampleVariance": "Varianza Muestral (s²)",
+        "stepsTitle": "Desviaciones Paso a Paso",
+        "columnValue": "Valor",
+        "columnDeviation": "Desviación (x − μ)",
+        "columnSquared": "Al Cuadrado"
+      },
+      "chart": {
+        "ariaLabel": "Recta numérica que muestra cada valor introducido como un punto, con una banda sombreada que abarca una desviación estándar poblacional a cada lado de la media",
+        "legendValues": "Valores",
+        "legendBand": "Media ± 1σ"
+      },
+      "quickReference": {
+        "title": "Las Dos Fórmulas",
+        "intro": "La desviación estándar poblacional y muestral solo difieren en el denominador."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la Desviación Estándar",
+          "paragraph1": "La desviación estándar mide cuán dispersos están los valores de un conjunto respecto a su media — una desviación estándar pequeña significa que la mayoría de los valores están cerca del promedio, mientras que una grande significa que están muy dispersos. Es la raíz cuadrada de la varianza, que a su vez es el promedio de la distancia al cuadrado de cada valor respecto a la media; elevar al cuadrado primero (en lugar de simplemente promediar las distancias en bruto) garantiza que las desviaciones por encima y por debajo de la media no se cancelen entre sí, y sacar la raíz cuadrada al final devuelve el resultado a la unidad original de los datos en lugar de a una al cuadrado.",
+          "paragraph2": "Esta herramienta calcula tanto la desviación estándar poblacional (σ), usada cuando tu conjunto de datos es todo el grupo que te interesa, como la desviación estándar muestral (s), usada cuando tus datos son un subconjunto extraído de una población más grande sobre la que intentas sacar conclusiones. Las dos fórmulas solo difieren en el denominador — la población divide entre N, la muestra divide entre n − 1 —, un ajuste pequeño pero deliberado llamado corrección de Bessel, que corrige la tendencia de la media de una muestra a estar más cerca de sus propios datos de lo que estaría la verdadera media poblacional."
+        },
+        "formula": {
+          "title": "Las Fórmulas",
+          "paragraph1": "Ambas fórmulas empiezan igual: hallar la media, restarla de cada valor para obtener la desviación de cada uno, luego elevar al cuadrado cada desviación (para que las desviaciones negativas y positivas cuenten ambas como dispersión) y promediarlas.",
+          "paragraph2": "σ es la desviación estándar poblacional y μ la media poblacional, usadas cuando el conjunto de datos es todo el grupo de interés. s es la desviación estándar muestral y x̄ la media muestral, usadas cuando los datos son solo un subconjunto de una población más grande — dividir entre n − 1 en lugar de n hace que s sea una estimación mejor (insesgada) de la verdadera desviación estándar poblacional de lo que daría dividir entre n."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Algunos conjuntos de datos, resueltos de la misma forma en que esta herramienta los calcula.",
+          "columnCalculation": "Conjunto de Datos",
+          "columnResult": "σ Poblacional",
+          "rows": [
+            {
+              "calculation": "2, 4, 4, 4, 5, 5, 7, 9",
+              "result": "2,0"
+            },
+            {
+              "calculation": "10, 10, 10, 10",
+              "result": "0"
+            },
+            {
+              "calculation": "1, 2, 3, 4, 5",
+              "result": "≈ 1,414"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Dónde se Usa la Desviación Estándar",
+          "intro": "La desviación estándar es una de las estadísticas más utilizadas porque cuantifica la incertidumbre y la consistencia en un solo número.",
+          "items": [
+            {
+              "title": "Control de calidad",
+              "description": "Los procesos de fabricación siguen la desviación estándar de una dimensión o peso medido a lo largo de una tanda de producción — una desviación estándar baja significa que el proceso es consistente, mientras que una que aumenta suele señalar que una máquina se está desajustando antes de que se produzca siquiera una sola pieza defectuosa."
+            },
+            {
+              "title": "Finanzas y riesgo",
+              "description": "En finanzas, la desviación estándar de los rendimientos históricos de un activo es una de las medidas de volatilidad más comunes — una desviación estándar más alta significa que los rendimientos oscilan más ampliamente alrededor de su promedio, lo que generalmente se interpreta como un riesgo mayor."
+            },
+            {
+              "title": "Calificación y diseño de pruebas",
+              "description": "Las puntuaciones de pruebas estandarizadas suelen reportarse junto con la desviación estándar de la prueba, ya que indica cuán significativa es en realidad una diferencia de puntos determinada — una brecha de 10 puntos importa mucho más en una prueba con una desviación estándar de 15 que en una con una desviación estándar de 100."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Debo usar la desviación estándar poblacional o muestral?",
+              "answer": "Usa la desviación estándar poblacional (σ) solo cuando tu conjunto de datos sea genuinamente todo el grupo que te interesa — cada estudiante de una clase específica, cada unidad producida en un lote específico. Usa la desviación estándar muestral (s) siempre que tus datos sean un subconjunto destinado a representar una población más grande que no puedes medir por completo, que es la situación mucho más común en la práctica, incluyendo la mayoría de encuestas, experimentos y controles de calidad puntuales."
+            },
+            {
+              "question": "¿Por qué la desviación estándar muestral siempre es ligeramente mayor que la poblacional para los mismos datos?",
+              "answer": "Porque la fórmula muestral divide la suma de las desviaciones al cuadrado entre un número menor (n − 1 en lugar de n), lo que necesariamente produce un resultado mayor. Esto es deliberado: la media de una muestra siempre está al menos tan cerca de sus propios datos como podría estarlo cualquier otro valor, lo que sin corrección haría que la muestra subestimara sistemáticamente la dispersión real de la población de la que se extrajo."
+            },
+            {
+              "question": "¿Qué significa que la desviación estándar sea 0?",
+              "answer": "Una desviación estándar de exactamente 0 significa que todos los valores del conjunto de datos son idénticos — no hay dispersión alguna, cada valor es exactamente igual a la media."
+            },
+            {
+              "question": "¿En qué se diferencia la desviación estándar de la varianza?",
+              "answer": "La varianza es el promedio de las desviaciones al cuadrado; la desviación estándar es simplemente su raíz cuadrada. La varianza se expresa en unidades al cuadrado (lo cual es matemáticamente conveniente para cálculos estadísticos posteriores), mientras que la desviación estándar se expresa en la misma unidad que los datos originales, lo que suele ser más fácil de interpretar directamente."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de la Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "El término \"desviación estándar\" fue acuñado por el matemático inglés Karl Pearson, uno de los fundadores de la estadística matemática moderna, en una conferencia en 1893 y por escrito al año siguiente en su artículo de 1894 \"Contributions to the Mathematical Theory of Evolution\", publicado en Philosophical Transactions of the Royal Society of London. Pearson introdujo el término como un sustituto más práctico de las frases más antiguas y engorrosas entonces en uso, como \"error cuadrático medio\" — el cálculo subyacente ya había sido utilizado por estadísticos y astrónomos anteriores que analizaban el error de medición, pero la terminología y el tratamiento sistemático de Pearson son los que perduraron."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos Modernos",
+            "paragraph": "El denominador n − 1 usado en la fórmula muestral se conoce como corrección de Bessel, en honor al astrónomo y matemático alemán Friedrich Bessel, quien determinó el ajuste necesario para eliminar el sesgo sistemático que surge al estimar la dispersión de una población usando la media de una muestra en lugar de la verdadera (y normalmente desconocida) media poblacional. Hoy en día, los cálculos de desviación estándar están integrados en prácticamente todo paquete de software estadístico y aplicación de hojas de cálculo, y siguen siendo una entrada fundamental para técnicas más avanzadas, incluyendo intervalos de confianza, pruebas de hipótesis y gráficos de control usados en ciencia, ingeniería y análisis de negocios."
+          },
+          "academicPath": {
+            "title": "Ruta Académica",
+            "intro": "La desviación estándar y la varianza son temas centrales dentro de la estadística, parte del campo más amplio de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de un departamento regional:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Clasificada #1 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Clasificada #2 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un título de investigación presencial."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Clasificada #3 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los títulos de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Clasificada #4 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Clasificada #5 del mundo en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no clasificado por separado en esta tabla global por materia.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de la AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Pearson, K. (1894). Contributions to the Mathematical Theory of Evolution. Philosophical Transactions of the Royal Society of London A, 185, 71-110.",
+          "note": "El artículo en el que Karl Pearson introdujo el término \"desviación estándar\", hoy la medida estándar de dispersión enseñada en todo curso introductorio de estadística.",
+          "url": "https://doi.org/10.1098/rsta.1894.0003",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
     }
   },
   "toolPage": {

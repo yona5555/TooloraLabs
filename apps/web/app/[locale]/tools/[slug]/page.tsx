@@ -103,6 +103,8 @@ import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
 import RandomNumberEducation from "@/components/tools/random-number-generator/RandomNumberEducation";
+import StandardDeviationCalculator from "@/components/tools/standard-deviation-calculator/StandardDeviationCalculator";
+import StandardDeviationEducation from "@/components/tools/standard-deviation-calculator/StandardDeviationEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -463,6 +465,9 @@ export default async function ToolPage({
     case "random-number-generator":
       component = <RandomNumberGenerator education={<RandomNumberEducation />} />;
       break;
+    case "standard-deviation-calculator":
+      component = <StandardDeviationCalculator education={<StandardDeviationEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -577,6 +582,7 @@ export default async function ToolPage({
     slug === "notepad-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
+    slug === "standard-deviation-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

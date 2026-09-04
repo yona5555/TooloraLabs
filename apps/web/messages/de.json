@@ -15030,6 +15030,175 @@
           "readOriginal": "Originalarbeit lesen"
         }
       }
+    },
+    "standard-deviation-calculator": {
+      "title": "Standardabweichungsrechner",
+      "description": "Berechnen Sie die Standardabweichung von Grundgesamtheit und Stichprobe, die Varianz und den Mittelwert eines Datensatzes, mit jedem Subtrahier-Quadrier-Mittel-Schritt.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "form": {
+        "inputTitle": "Datensatz",
+        "inputLabel": "Werte",
+        "inputPlaceholder": "z. B. 2, 4, 4, 4, 5, 5, 7, 9",
+        "inputHint": "Trennen Sie Werte durch Kommas, Leerzeichen oder Zeilenumbrüche."
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "emptyDataset": "Geben Sie mindestens eine Zahl ein, um ein Ergebnis zu sehen.",
+        "populationStdDev": "Standardabw. der Grundgesamtheit (σ)",
+        "sampleStdDev": "Standardabw. der Stichprobe (s)",
+        "countLabel": "Anzahl (N)",
+        "meanLabel": "Mittelwert (μ)",
+        "populationVariance": "Varianz der Grundgesamtheit (σ²)",
+        "sampleVariance": "Varianz der Stichprobe (s²)",
+        "stepsTitle": "Abweichungen Schritt für Schritt",
+        "columnValue": "Wert",
+        "columnDeviation": "Abweichung (x − μ)",
+        "columnSquared": "Quadriert"
+      },
+      "chart": {
+        "ariaLabel": "Zahlenstrahl, der jeden eingegebenen Wert als Punkt zeigt, mit einem schattierten Band, das eine Standardabweichung der Grundgesamtheit auf jeder Seite des Mittelwerts umfasst",
+        "legendValues": "Werte",
+        "legendBand": "Mittelwert ± 1σ"
+      },
+      "quickReference": {
+        "title": "Die Beiden Formeln",
+        "intro": "Grundgesamtheits- und Stichproben-Standardabweichung unterscheiden sich nur im Nenner."
+      },
+      "education": {
+        "intro": {
+          "title": "Standardabweichung verstehen",
+          "paragraph1": "Die Standardabweichung misst, wie stark eine Reihe von Werten um ihren Mittelwert gestreut ist — eine kleine Standardabweichung bedeutet, dass die meisten Werte nahe am Durchschnitt liegen, eine große bedeutet, dass sie weit gestreut sind. Sie ist die Quadratwurzel der Varianz, die selbst der Durchschnitt der quadrierten Abstände jedes Wertes vom Mittelwert ist; das vorherige Quadrieren (statt einfach die rohen Abstände zu mitteln) stellt sicher, dass sich Abweichungen über und unter dem Mittelwert nicht gegenseitig aufheben, und das abschließende Ziehen der Quadratwurzel bringt das Ergebnis zurück in die ursprüngliche Einheit der Daten statt in eine quadrierte.",
+          "paragraph2": "Dieses Tool berechnet sowohl die Standardabweichung der Grundgesamtheit (σ), verwendet, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert, als auch die Standardabweichung der Stichprobe (s), verwendet, wenn Ihre Daten eine Teilmenge sind, die aus einer größeren Population gezogen wurde, über die Sie Schlüsse ziehen möchten. Die beiden Formeln unterscheiden sich nur im Nenner — die Grundgesamtheit teilt durch N, die Stichprobe teilt durch n − 1 — eine kleine, aber bewusste Anpassung namens Bessel-Korrektur, die die Tendenz des Stichprobenmittelwerts korrigiert, näher an den eigenen Datenpunkten zu liegen, als es der wahre Populationsmittelwert tun würde."
+        },
+        "formula": {
+          "title": "Die Formeln",
+          "paragraph1": "Beide Formeln beginnen gleich: den Mittelwert finden, ihn von jedem Wert subtrahieren, um die Abweichung jedes Wertes zu erhalten, dann jede Abweichung quadrieren (damit negative und positive Abweichungen beide als Streuung zählen) und sie mitteln.",
+          "paragraph2": "σ ist die Standardabweichung der Grundgesamtheit und μ der Mittelwert der Grundgesamtheit, verwendet, wenn der Datensatz die gesamte interessierende Gruppe ist. s ist die Standardabweichung der Stichprobe und x̄ der Stichprobenmittelwert, verwendet, wenn die Daten nur eine Teilmenge einer größeren Population sind — die Division durch n − 1 statt n macht s zu einer besseren (unverzerrten) Schätzung der wahren Standardabweichung der Grundgesamtheit, als es die Division durch n ergäbe."
+        },
+        "examples": {
+          "title": "Berechnete Beispiele",
+          "intro": "Ein paar Datensätze, so berechnet, wie dieses Tool sie berechnet.",
+          "columnCalculation": "Datensatz",
+          "columnResult": "Grundgesamtheit σ",
+          "rows": [
+            {
+              "calculation": "2, 4, 4, 4, 5, 5, 7, 9",
+              "result": "2,0"
+            },
+            {
+              "calculation": "10, 10, 10, 10",
+              "result": "0"
+            },
+            {
+              "calculation": "1, 2, 3, 4, 5",
+              "result": "≈ 1,414"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Wo Standardabweichung eingesetzt wird",
+          "intro": "Die Standardabweichung ist eine der am häufigsten verwendeten Statistiken, da sie Unsicherheit und Konsistenz in einer einzigen Zahl quantifiziert.",
+          "items": [
+            {
+              "title": "Qualitätskontrolle",
+              "description": "Fertigungsprozesse verfolgen die Standardabweichung einer gemessenen Abmessung oder eines Gewichts über einen Produktionslauf hinweg — eine niedrige Standardabweichung bedeutet, dass der Prozess konsistent ist, während eine steigende oft signalisiert, dass eine Maschine aus der Kalibrierung gerät, bevor überhaupt ein einzelnes fehlerhaftes Teil produziert wird."
+            },
+            {
+              "title": "Finanzen und Risiko",
+              "description": "In der Finanzwelt ist die Standardabweichung der historischen Renditen eines Assets eines der gebräuchlichsten Volatilitätsmaße — eine höhere Standardabweichung bedeutet, dass die Renditen stärker um ihren Durchschnitt schwanken, was allgemein als höheres Risiko gedeutet wird."
+            },
+            {
+              "title": "Benotung und Testdesign",
+              "description": "Standardisierte Testergebnisse werden typischerweise zusammen mit der Standardabweichung des Tests angegeben, da sie zeigt, wie bedeutsam ein bestimmter Punktunterschied tatsächlich ist — eine Lücke von 10 Punkten ist bei einem Test mit einer Standardabweichung von 15 weit bedeutsamer als bei einem mit einer Standardabweichung von 100."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Soll ich die Standardabweichung der Grundgesamtheit oder der Stichprobe verwenden?",
+              "answer": "Verwenden Sie die Standardabweichung der Grundgesamtheit (σ) nur, wenn Ihr Datensatz tatsächlich die gesamte Gruppe ist, die Sie interessiert — jeder Schüler einer bestimmten Klasse, jede in einer bestimmten Charge produzierte Einheit. Verwenden Sie die Standardabweichung der Stichprobe (s), wenn Ihre Daten eine Teilmenge sind, die eine größere Population repräsentieren soll, die Sie nicht vollständig messen können — die in der Praxis weitaus häufigere Situation, einschließlich der meisten Umfragen, Experimente und stichprobenartigen Qualitätskontrollen."
+            },
+            {
+              "question": "Warum ist die Stichproben-Standardabweichung für dieselben Daten immer etwas größer als die der Grundgesamtheit?",
+              "answer": "Weil die Stichprobenformel die Summe der quadrierten Abweichungen durch eine kleinere Zahl teilt (n − 1 statt n), was zwangsläufig ein größeres Ergebnis erzeugt. Das ist beabsichtigt: Der Mittelwert einer Stichprobe liegt immer mindestens so nah an ihren eigenen Datenpunkten wie jeder andere Wert es könnte, was ohne Korrektur dazu führen würde, dass die Stichprobe die wahre Streuung der Population, aus der sie gezogen wurde, systematisch unterschätzt."
+            },
+            {
+              "question": "Was bedeutet es, wenn die Standardabweichung 0 ist?",
+              "answer": "Eine Standardabweichung von genau 0 bedeutet, dass jeder Wert im Datensatz identisch ist — es gibt überhaupt keine Streuung, jeder Wert entspricht genau dem Mittelwert."
+            },
+            {
+              "question": "Wie unterscheidet sich die Standardabweichung von der Varianz?",
+              "answer": "Die Varianz ist der Durchschnitt der quadrierten Abweichungen; die Standardabweichung ist einfach ihre Quadratwurzel. Die Varianz wird in quadrierten Einheiten ausgedrückt (was für weitere statistische Berechnungen mathematisch praktisch ist), während die Standardabweichung in derselben Einheit wie die ursprünglichen Daten ausgedrückt wird, was in der Regel direkter zu interpretieren ist."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter dem Tool",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Der Begriff \"Standardabweichung\" wurde vom englischen Mathematiker Karl Pearson, einem der Begründer der modernen mathematischen Statistik, in einem Vortrag im Jahr 1893 geprägt und im Jahr darauf in seiner 1894 erschienenen Arbeit \"Contributions to the Mathematical Theory of Evolution\" veröffentlicht, erschienen in den Philosophical Transactions of the Royal Society of London. Pearson führte den Begriff als bequemeren Ersatz für die älteren, umständlicheren damals gebräuchlichen Formulierungen ein, wie \"mittlerer quadratischer Fehler\" — die zugrunde liegende Berechnung selbst war bereits von früheren Statistikern und Astronomen verwendet worden, die Messfehler analysierten, aber Pearsons Terminologie und systematische Behandlung setzten sich durch."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Der in der Stichprobenformel verwendete Nenner n − 1 ist als Bessel-Korrektur bekannt, benannt nach dem deutschen Astronomen und Mathematiker Friedrich Bessel, der die notwendige Anpassung entwickelte, um die systematische Verzerrung zu beseitigen, die entsteht, wenn die Streuung einer Population anhand des Mittelwerts einer Stichprobe statt des wahren (und meist unbekannten) Populationsmittelwerts geschätzt wird. Heute sind Berechnungen der Standardabweichung praktisch in jedem Statistikpaket und jeder Tabellenkalkulationsanwendung integriert und bleiben eine grundlegende Eingabe für fortgeschrittenere Techniken wie Konfidenzintervalle, Hypothesentests und Kontrollkarten, die in Wissenschaft, Technik und Geschäftsanalytik verwendet werden."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Standardabweichung und Varianz sind Kernthemen der Statistik, Teil des breiteren Feldes der Mathematik. Hier sind die weltweit besten 5 für Mathematik im QS World University Rankings by Subject 2025, plus eine regionale Abteilung:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit auf Platz 1 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Vor-Ort-Forschungsprogramm innerhalb der Mathematikabteilung."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit auf Platz 2 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Vor-Ort-Forschungsabschluss."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit auf Platz 3 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — Forschungsabschlüsse finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit auf Platz 4 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Vor-Ort-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit auf Platz 5 für Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Vor-Ort-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Fachbereich Mathematik",
+                "note": "Gegründet 1866; in dieser globalen Fachtabelle nicht separat gerankt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Abteilung finden vor Ort auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Pearson, K. (1894). Contributions to the Mathematical Theory of Evolution. Philosophical Transactions of the Royal Society of London A, 185, 71-110.",
+          "note": "Die Arbeit, in der Karl Pearson den Begriff \"Standardabweichung\" einführte, heute das Standardmaß für Streuung, das in jedem einführenden Statistikkurs gelehrt wird.",
+          "url": "https://doi.org/10.1098/rsta.1894.0003",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
     }
   },
   "toolPage": {

@@ -957,4 +957,19 @@ export const tools: Tool[] = [
       "number picker",
     ],
   },
+  {
+    slug: "standard-deviation-calculator",
+    title: "Standard Deviation Calculator",
+    category: "math",
+    description:
+      "Calculate the population and sample standard deviation, variance, and mean of a data set, with every subtract-square-average step shown.",
+    featured: false,
+    keywords: [
+      "standard deviation calculator",
+      "variance calculator",
+      "population standard deviation",
+      "sample standard deviation",
+      "statistics calculator",
+    ],
+  },
 ];
