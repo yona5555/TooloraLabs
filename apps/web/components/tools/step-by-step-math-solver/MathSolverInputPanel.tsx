@@ -1,7 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { Plus, Trash2 } from "lucide-react";
+import type { FormEvent } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { MathSolverMode, FractionOperator } from "@tooloralabs/tools";
 import { emptyMathSolverDraft, emptyTerm, type MathSolverDraft } from "./types";
@@ -12,9 +14,11 @@ const FRACTION_OPS: FractionOperator[] = ["add", "subtract", "multiply", "divide
 type Props = {
   draft: MathSolverDraft;
   onChange: (draft: MathSolverDraft) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
-export default function MathSolverInputPanel({ draft, onChange }: Props) {
+export default function MathSolverInputPanel({ draft, onChange, onCalculate, onClear }: Props) {
   const t = useTranslations("tools.step-by-step-math-solver.form");
 
   function patch(partial: Partial<MathSolverDraft>) {
@@ -50,6 +54,7 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <form onSubmit={onCalculate}>
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
         <select
@@ -178,6 +183,18 @@ export default function MathSolverInputPanel({ draft, onChange }: Props) {
           </div>
         )}
       </div>
+
+      <div className="mt-6 flex flex-wrap gap-4">
+        <ToolButton type="submit">{t("calculate")}</ToolButton>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
+      </div>
+      </form>
     </SectionCard>
   );
 }

@@ -1,11 +1,15 @@
+"use client";
+import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import MathSolverShareExportModal from "./MathSolverShareExportModal";
 import type { MathSolverDraft, MathSolverResult as Result } from "./types";
 
 type Props = {
   result: Result;
   draft: MathSolverDraft;
+  hasCalculated: boolean;
 };
 
 function toNum(s: string): number | undefined {
@@ -14,8 +18,19 @@ function toNum(s: string): number | undefined {
   return Number.isNaN(n) ? undefined : n;
 }
 
-export default function MathSolverResult({ result, draft }: Props) {
+export default function MathSolverResult({ result, draft, hasCalculated }: Props) {
   const t = useTranslations("tools.step-by-step-math-solver.result");
+
+  if (!hasCalculated) {
+    return (
+      <SectionCard title={t("heading")}>
+        <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
+          <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
+          <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("emptyStateMessage")}</p>
+        </div>
+      </SectionCard>
+    );
+  }
 
   if (result.error) {
     const key =
@@ -31,18 +46,11 @@ export default function MathSolverResult({ result, draft }: Props) {
                 ? "divisionByZero"
                 : "emptyPolynomial";
     return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(key)}</p>
-        </div>
-      </div>
+      <SectionCard title={t("heading")}>
+        <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(key)}</p>
+      </SectionCard>
     );
   }
-
-  const copyText = [...result.steps, "", result.result].join("\n");
 
   let natureBadge: { label: string; tone: "emerald" | "amber" | "rose" } | null = null;
   if (draft.mode === "quadratic-equation") {
@@ -67,27 +75,21 @@ export default function MathSolverResult({ result, draft }: Props) {
   };
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={copyText} className="!text-white dark:!text-white" />
+    <SectionCard title={t("heading")} action={<MathSolverShareExportModal result={result} draft={draft} />}>
+      {natureBadge && (
+        <div className={`mb-4 inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${badgeClasses[natureBadge.tone]}`}>{natureBadge.label}</div>
+      )}
+      <ol dir="ltr" className="space-y-2 text-start text-sm">
+        {result.steps.map((step, i) => (
+          <li key={i} className="flex gap-2">
+            <span className="shrink-0 font-semibold text-blue-600 dark:text-blue-400">{i + 1}.</span>
+            <span className="text-zinc-700 dark:text-zinc-200">{step}</span>
+          </li>
+        ))}
+      </ol>
+      <div dir="ltr" className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-center text-lg font-bold text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
+        {result.result}
       </div>
-      <div className="p-4 lg:p-6">
-        {natureBadge && (
-          <div className={`mb-4 inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${badgeClasses[natureBadge.tone]}`}>{natureBadge.label}</div>
-        )}
-        <ol dir="ltr" className="space-y-2 text-start text-sm">
-          {result.steps.map((step, i) => (
-            <li key={i} className="flex gap-2">
-              <span className="shrink-0 font-semibold text-blue-600 dark:text-blue-400">{i + 1}.</span>
-              <span className="text-zinc-700 dark:text-zinc-200">{step}</span>
-            </li>
-          ))}
-        </ol>
-        <div dir="ltr" className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-center text-lg font-bold text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
-          {result.result}
-        </div>
-      </div>
-    </div>
+    </SectionCard>
   );
 }
