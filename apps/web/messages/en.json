@@ -14547,6 +14547,321 @@
         "lineColumn": "Line",
         "resultColumn": "Result"
       }
+    },
+    "pace-calculator": {
+      "title": "Pace Calculator",
+      "description": "Calculate running, walking, or cycling pace, time, or distance, log splits across multiple checkpoints, convert pace between kilometers and miles, and predict a finish time for any race distance using the Riegel endurance formula.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "topTabs": {
+        "groupLabel": "Pace calculator mode",
+        "calculator": "Pace Calculator",
+        "multipoint": "Multipoint Pace",
+        "converter": "Pace Converter",
+        "finish-time": "Finish Time"
+      },
+      "solveTabs": {
+        "groupLabel": "Value to solve for",
+        "pace": "Pace",
+        "time": "Time",
+        "distance": "Distance"
+      },
+      "form": {
+        "inputTitle": "Enter Values",
+        "distanceLabel": "Distance",
+        "unitLabel": "Unit",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "racePresetLabel": "Race distance",
+        "racePresetCustom": "Custom distance",
+        "racePresets": {
+          "5k": "5K",
+          "10k": "10K",
+          "half-marathon": "Half Marathon (21.0975 km)",
+          "marathon": "Marathon (42.195 km)"
+        },
+        "timeLabel": "Time",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds",
+        "paceLabelKm": "Pace per km",
+        "paceLabelMi": "Pace per mile"
+      },
+      "result": {
+        "heading": "Result",
+        "invalidInput": "Enter positive values for both known fields to see a result.",
+        "solvedFor": {
+          "pace": "Pace",
+          "time": "Finish Time",
+          "distance": "Distance"
+        },
+        "distanceLabel": "Distance",
+        "timeLabel": "Time",
+        "paceLabelKm": "Pace",
+        "paceLabelMi": "Pace",
+        "perKm": "/ km",
+        "perMi": "/ mi",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "speedKmh": "Speed",
+        "speedMph": "Speed",
+        "kmh": "km/h",
+        "mph": "mph"
+      },
+      "gauge": {
+        "ariaLabel": "Pace on the effort scale",
+        "ariaLabelEmpty": "Pace effort scale, no value entered yet",
+        "zones": {
+          "elite": "Elite",
+          "fast": "Fast",
+          "moderate": "Moderate",
+          "easy": "Easy",
+          "recovery": "Recovery"
+        }
+      },
+      "quickReference": {
+        "title": "Pace at a Glance",
+        "intro": "A quick worked example and two common pace-to-speed conversions."
+      },
+      "multipoint": {
+        "inputTitle": "Checkpoints",
+        "checkpointLabel": "Checkpoint {number}",
+        "hint": "Enter the cumulative distance and elapsed time at each checkpoint, in the order you passed them (row 1 is usually the start, at 0 / 0:00). The pace between each pair of consecutive rows is computed automatically.",
+        "unitLabel": "Unit",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "columnDistance": "Distance ({unit})",
+        "columnTime": "Elapsed Time (h : m : s)",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds",
+        "removeRow": "Remove this checkpoint",
+        "addPoint": "Add Checkpoint",
+        "resultHeading": "Splits",
+        "noSegments": "Add at least two checkpoints with increasing distance and time to see split paces.",
+        "overallDistance": "Total distance",
+        "overallTime": "Total time",
+        "columnSegment": "Segment",
+        "columnDistanceShort": "Distance",
+        "columnSplitTime": "Split time",
+        "columnPace": "Pace"
+      },
+      "converter": {
+        "inputTitle": "Convert Pace",
+        "hint": "Enter a pace in one unit to see the equivalent pace and speed in the other.",
+        "fromUnitLabel": "Pace is measured per",
+        "paceValueLabel": "Pace (minutes : seconds)",
+        "resultHeading": "Converted Pace",
+        "equals": "equals"
+      },
+      "finishTime": {
+        "inputTitle": "Predict a Finish Time",
+        "hint": "Enter a distance and time you've already run or raced, then pick (or enter) the target race distance to predict.",
+        "knownDistanceLabel": "Known distance",
+        "knownTimeLabel": "Known time",
+        "targetDistanceLabel": "Target distance",
+        "resultHeading": "Predicted Finish Time",
+        "predictedTime": "Predicted Time"
+      },
+      "aboveFold": {
+        "conceptDiagram": {
+          "title": "What Pace Actually Measures",
+          "intro": "Pace is the time spent covering one unit of distance. Between any two checkpoints on a route, it's simply the elapsed time divided by the distance covered since the last one — which is exactly what the Multipoint mode computes for real, uneven splits.",
+          "ariaLabel": "A route with three checkpoints at 0 km / 0:00, 5 km / 25:00, and 10 km / 56:00, with the pace for each segment (5:00 per km, then 6:12 per km) labeled between the checkpoints",
+          "caption": "Pace between two checkpoints = elapsed time ÷ distance covered"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Pace",
+          "paragraph1": "Pace is a rate expressed as time per unit of distance — minutes and seconds per kilometer or per mile — rather than distance per unit of time, which is what speed measures. The two describe the same motion from opposite directions: a pace of 5:00 per kilometer and a speed of 12 km/h are the same running effort, just expressed differently. Runners, walkers, and cyclists generally think in pace because it maps directly onto a training plan (\"hold 5:00 per km for the middle three kilometers\") and onto a finishing time (multiply pace by race distance), while speed is more common in cycling and motorized contexts.",
+          "paragraph2": "The underlying arithmetic is simple — pace = time ÷ distance, time = distance × pace, distance = time ÷ pace — but converting between a fixed pace and a finishing time by hand, across unit systems, and across race distances that aren't round numbers (a half marathon's 21.0975 km, a marathon's 42.195 km) is where a calculator earns its keep. This tool solves any one of pace, time, or distance from the other two, logs pace across multiple real checkpoints instead of assuming a constant effort for an entire run, converts pace between kilometers and miles directly, and projects a finishing time for a different distance from a result you've already run."
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few common pace calculations, computed the same way this tool computes them.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "5 km in 25:00 → pace",
+              "result": "5:00 / km (8:03 / mi)"
+            },
+            {
+              "calculation": "10 km at 5:30 / km → time",
+              "result": "55:00"
+            },
+            {
+              "calculation": "50:00 at 5:00 / km → distance",
+              "result": "10 km"
+            },
+            {
+              "calculation": "Marathon (42.195 km) in 3:30:00 → pace",
+              "result": "4:58 / km (8:00 / mi)"
+            },
+            {
+              "calculation": "6:00 / km → speed",
+              "result": "10.0 km/h (6.2 mph)"
+            }
+          ]
+        },
+        "finishTimeFormula": {
+          "title": "Predicting a Finish Time",
+          "paragraph1": "A naive way to predict a longer race from a shorter one is to scale linearly: if you can hold a given pace for 10K, just multiply that time by 4.2195 to guess a marathon time. In practice this always predicts too fast a marathon, because endurance performance doesn't scale linearly with distance — pace predictably slows as an effort gets longer, due to fuel depletion, heat accumulation, and cumulative muscular fatigue that a short race never has time to expose.",
+          "paragraph2": "This tool instead uses the formula American research engineer and marathoner Peter Riegel published in Runner's World in 1977, and formalized the following distance-independent year in a 1981 paper for American Scientist: T₂ = T₁ × (D₂ ÷ D₁)^1.06. The exponent 1.06, derived by fitting the formula to a wide range of world-record and personal-best performances across running, walking, and swimming, is what captures that predictable slowdown — it's why the formula predicts a marathon time slower than simple linear scaling would, and why it's widely used (in a similar form) by race-prediction features in GPS running watches and training apps today. Riegel's own paper notes the formula holds best for efforts lasting between about 3.5 and 230 minutes, and gets less reliable for predictions across very different terrain, temperature, or training specificity — a 5K best predicts a marathon time only as well as your marathon-specific endurance actually matches your 5K speed."
+        },
+        "worldRecords": {
+          "title": "Typical Races and World Record Paces",
+          "intro": "For context, here are the current outdoor world records for four commonly raced distances, and the average pace each one implies. These are ratified records, not typical results — most runners finish these distances many times slower, which is exactly the point of comparison.",
+          "columnMen": "Men",
+          "columnWomen": "Women",
+          "note": "Times current as of 2026; verify against World Athletics' official records list, since records are broken periodically.",
+          "rows": [
+            {
+              "event": "100 m",
+              "menTime": "9.58 s",
+              "menHolder": "Usain Bolt (JAM)",
+              "menYear": "2009",
+              "womenTime": "10.49 s",
+              "womenHolder": "Florence Griffith-Joyner (USA)",
+              "womenYear": "1988"
+            },
+            {
+              "event": "400 m",
+              "menTime": "43.03 s",
+              "menHolder": "Wayde van Niekerk (RSA)",
+              "menYear": "2016",
+              "womenTime": "47.60 s",
+              "womenHolder": "Marita Koch (GDR)",
+              "womenYear": "1985"
+            },
+            {
+              "event": "5000 m",
+              "menTime": "12:35.36",
+              "menHolder": "Joshua Cheptegei (UGA)",
+              "menYear": "2020",
+              "womenTime": "13:58.06",
+              "womenHolder": "Beatrice Chebet (KEN)",
+              "womenYear": "2025"
+            },
+            {
+              "event": "Marathon",
+              "menTime": "1:59:30",
+              "menHolder": "Sabastian Sawe (KEN)",
+              "menYear": "2026",
+              "womenTime": "2:09:56",
+              "womenHolder": "Ruth Chepngetich (KEN)",
+              "womenYear": "2024"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Where Pace Matters",
+          "intro": "Pace-based pacing is the standard way endurance sports are planned, coached, and raced.",
+          "items": [
+            {
+              "title": "Training plans",
+              "description": "Structured running plans prescribe target paces for different workout types — easy runs, tempo runs, interval repeats — usually derived from a recent race result, so that each session trains a specific physiological system instead of just \"running.\""
+            },
+            {
+              "title": "Race strategy",
+              "description": "Even pacing (running each split at close to the same pace) is measurably more efficient than starting fast and slowing down, since a too-fast start burns limited glycogen reserves and accumulates fatigue faster than it can be recovered from later in the race — which is exactly what the Multipoint mode is built to check after the fact."
+            },
+            {
+              "title": "Course and event planning",
+              "description": "Race organizers set course time limits and aid-station cutoffs from an assumed minimum pace, and GPS watches and pace bands (wristbands printed with a target split at each mile or kilometer) are built directly from a single target pace applied across an entire race distance."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What's the difference between pace and speed?",
+              "answer": "They're the same underlying rate of motion expressed in inverse units. Pace is time per unit of distance (minutes per kilometer or mile) — smaller means faster. Speed is distance per unit of time (kilometers or miles per hour) — larger means faster. Converting between them is a division either way: speed = 60 ÷ pace-in-minutes-per-unit, and pace = 60 ÷ speed-in-units-per-hour."
+            },
+            {
+              "question": "Why does my pace change slightly when I switch between km and miles?",
+              "answer": "It doesn't change your actual running speed — a mile (1.609344 km) is longer than a kilometer, so the same speed corresponds to a larger number of minutes per mile than per kilometer. A 5:00/km pace and an 8:03/mi pace describe the exact same speed, just measured against a different unit of distance."
+            },
+            {
+              "question": "How accurate is the Finish Time prediction?",
+              "answer": "The Riegel formula is a well-established statistical fit across many athletes and distances, not a guarantee for any one individual race. It tends to be most accurate when the known and target distances are reasonably close and both efforts are run under similar conditions (terrain, weather, training state) — it will systematically over-predict how fast you can run a much longer distance if you haven't specifically trained your endurance for it."
+            },
+            {
+              "question": "What should I enter as checkpoints in the Multipoint mode?",
+              "answer": "Cumulative distance and elapsed time measured from the very start of your run — the same numbers a GPS watch's mile or kilometer auto-lap alerts show, not the distance or time of each segment on its own. The tool subtracts each row from the one before it to compute the pace of that segment."
+            },
+            {
+              "question": "Why is the marathon world record pace so much slower than the 100 m record pace?",
+              "answer": "Sprinting and endurance running draw on different physiological systems. A 100 m sprint is run almost entirely on stored ATP and creatine phosphate at a pace no runner could sustain for more than a few seconds, while a marathon is paced against the much slower rate at which the body can supply oxygen and fuel to muscles continuously for two hours — which is exactly the fatigue effect the Riegel exponent above is built to model."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Pace as a concept is as old as measured racing itself — ancient Greek stadion races were already timed against a fixed, standardized distance. What's more recent is the mathematics of comparing effort across different distances. American research engineer and competitive marathoner Peter Riegel noticed that world-record times across running, walking, and swimming, plotted against their distances on a logarithmic scale, fell close to a single curve rather than a straight line — meaning record pace slows by a predictable, near-constant factor as distance increases, regardless of the sport. He first published the resulting time-versus-distance equation in Runner's World magazine in 1977, then formalized it academically in \"Athletic Records and Human Endurance,\" American Scientist, 69(3), 285-290 (1981), giving endurance athletes and coaches a mathematical way to compare a runner's 10K performance against their marathon potential for the first time."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Consumer GPS watches (Garmin, Coros, Polar, and similar devices) now compute live pace every second from satellite positioning or a wrist-based accelerometer, and several running and cycling platforms build race-time predictors directly into their apps using a formula functionally equivalent to Riegel's. On the official-record side, world-record courses are certified against a physical, traceable calibration standard: a bicycle fitted with a Jones Counter, ridden along the exact course at least twice, per the measurement standard maintained jointly by World Athletics and the Association of International Marathons and Distance Races (AIMS) — the same certification process behind every marathon course record referenced in the table above."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Pacing, endurance physiology, and athletic performance are studied within exercise science, sports science, and the broader field of sports-related subjects. The following universities are consistently ranked among the world's best for the subject.",
+            "universities": [
+              {
+                "name": "Loughborough University, United Kingdom",
+                "note": "Ranked #1 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026, for the tenth consecutive year.",
+                "online": "The Sport, Exercise and Health Sciences degree programs are on-campus only.",
+                "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/"
+              },
+              {
+                "name": "The University of Queensland, Australia",
+                "note": "Ranked #2 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "The Human Movement and Nutrition Sciences degree programs are on-campus only.",
+                "url": "https://hmns.uq.edu.au/"
+              },
+              {
+                "name": "The University of Sydney, Australia",
+                "note": "Ranked #3 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "The Exercise and Sport Science degree programs are on-campus only.",
+                "url": "https://www.sydney.edu.au/medicine-health/study-medicine-and-health/study-areas/health-sciences/exercise-and-sport-science.html"
+              },
+              {
+                "name": "University of British Columbia, Canada",
+                "note": "Ranked #4 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "The Kinesiology degree programs are on-campus only.",
+                "url": "https://kin.educ.ubc.ca/"
+              },
+              {
+                "name": "Norwegian School of Sport Sciences, Norway",
+                "note": "Ranked #5 worldwide for Sports-related Subjects in the QS World University Rankings by Subject 2026.",
+                "online": "Most degree programs are on-campus only; the school separately offers some one-year and short programs taught in English.",
+                "url": "https://www.nih.no/english/"
+              },
+              {
+                "name": "King Saud University, Saudi Arabia",
+                "note": "Home to a dedicated Sport Sciences and Physical Activity program within the College of Sport Sciences, the leading such program in the Arab region.",
+                "online": "The Sport Sciences degree programs are offered on-campus only.",
+                "url": "https://ssa.ksu.edu.sa/en"
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Riegel, P. S. (1981). Athletic Records and Human Endurance. American Scientist, 69(3), 285-290.",
+          "note": "The paper behind the Finish Time mode's Riegel formula (T₂ = T₁ × (D₂ ÷ D₁)^1.06), derived from fitting world-record performances across running, walking, and swimming to a single time-versus-distance curve.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
+          "readOriginal": "Read the Original Paper"
+        }
+      }
     }
   },
   "toolPage": {

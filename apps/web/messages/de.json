@@ -14551,6 +14551,321 @@
         "lineColumn": "Zeile",
         "resultColumn": "Ergebnis"
       }
+    },
+    "pace-calculator": {
+      "title": "Pace-Rechner",
+      "description": "Berechnen Sie Lauf-, Geh- oder Radtempo, Zeit oder Distanz, protokollieren Sie Splits über mehrere Kontrollpunkte hinweg, rechnen Sie Pace zwischen Kilometern und Meilen um und schätzen Sie mit der Riegel-Formel eine Zielzeit für jede beliebige Renndistanz.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hinter dem Tool"
+      },
+      "topTabs": {
+        "groupLabel": "Modus des Pace-Rechners",
+        "calculator": "Pace-Rechner",
+        "multipoint": "Mehrpunkt-Pace",
+        "converter": "Pace-Umrechner",
+        "finish-time": "Zielzeit"
+      },
+      "solveTabs": {
+        "groupLabel": "Zu berechnender Wert",
+        "pace": "Pace",
+        "time": "Zeit",
+        "distance": "Distanz"
+      },
+      "form": {
+        "inputTitle": "Werte eingeben",
+        "distanceLabel": "Distanz",
+        "unitLabel": "Einheit",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "racePresetLabel": "Renndistanz",
+        "racePresetCustom": "Eigene Distanz",
+        "racePresets": {
+          "5k": "5 km",
+          "10k": "10 km",
+          "half-marathon": "Halbmarathon (21,0975 km)",
+          "marathon": "Marathon (42,195 km)"
+        },
+        "timeLabel": "Zeit",
+        "hours": "Stunden",
+        "minutes": "Minuten",
+        "seconds": "Sekunden",
+        "paceLabelKm": "Pace pro km",
+        "paceLabelMi": "Pace pro Meile"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidInput": "Geben Sie für beide bekannten Felder positive Werte ein, um ein Ergebnis zu sehen.",
+        "solvedFor": {
+          "pace": "Pace",
+          "time": "Zielzeit",
+          "distance": "Distanz"
+        },
+        "distanceLabel": "Distanz",
+        "timeLabel": "Zeit",
+        "paceLabelKm": "Pace",
+        "paceLabelMi": "Pace",
+        "perKm": "/ km",
+        "perMi": "/ mi",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "speedKmh": "Geschwindigkeit",
+        "speedMph": "Geschwindigkeit",
+        "kmh": "km/h",
+        "mph": "mph"
+      },
+      "gauge": {
+        "ariaLabel": "Pace auf der Belastungsskala",
+        "ariaLabelEmpty": "Pace-Belastungsskala, noch kein Wert eingegeben",
+        "zones": {
+          "elite": "Elite",
+          "fast": "Schnell",
+          "moderate": "Moderat",
+          "easy": "Locker",
+          "recovery": "Erholung"
+        }
+      },
+      "quickReference": {
+        "title": "Pace auf einen Blick",
+        "intro": "Ein kurzes Rechenbeispiel und zwei gängige Umrechnungen von Pace in Geschwindigkeit."
+      },
+      "multipoint": {
+        "inputTitle": "Kontrollpunkte",
+        "checkpointLabel": "Kontrollpunkt {number}",
+        "hint": "Geben Sie die kumulierte Distanz und die verstrichene Zeit an jedem Kontrollpunkt ein, in der Reihenfolge, in der Sie ihn passiert haben (Zeile 1 ist meist der Start bei 0 / 0:00). Die Pace zwischen je zwei aufeinanderfolgenden Zeilen wird automatisch berechnet.",
+        "unitLabel": "Einheit",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "columnDistance": "Distanz ({unit})",
+        "columnTime": "Verstrichene Zeit (h : m : s)",
+        "hours": "Stunden",
+        "minutes": "Minuten",
+        "seconds": "Sekunden",
+        "removeRow": "Diesen Kontrollpunkt entfernen",
+        "addPoint": "Kontrollpunkt hinzufügen",
+        "resultHeading": "Splits",
+        "noSegments": "Fügen Sie mindestens zwei Kontrollpunkte mit steigender Distanz und Zeit hinzu, um die Split-Pace zu sehen.",
+        "overallDistance": "Gesamtdistanz",
+        "overallTime": "Gesamtzeit",
+        "columnSegment": "Abschnitt",
+        "columnDistanceShort": "Distanz",
+        "columnSplitTime": "Split-Zeit",
+        "columnPace": "Pace"
+      },
+      "converter": {
+        "inputTitle": "Pace umrechnen",
+        "hint": "Geben Sie eine Pace in einer Einheit ein, um die entsprechende Pace und Geschwindigkeit in der anderen Einheit zu sehen.",
+        "fromUnitLabel": "Pace gemessen pro",
+        "paceValueLabel": "Pace (Minuten : Sekunden)",
+        "resultHeading": "Umgerechnete Pace",
+        "equals": "entspricht"
+      },
+      "finishTime": {
+        "inputTitle": "Zielzeit vorhersagen",
+        "hint": "Geben Sie eine bereits gelaufene Distanz und Zeit ein und wählen Sie dann die Ziel-Renndistanz (oder tragen Sie sie manuell ein), für die eine Zielzeit vorhergesagt werden soll.",
+        "knownDistanceLabel": "Bekannte Distanz",
+        "knownTimeLabel": "Bekannte Zeit",
+        "targetDistanceLabel": "Zieldistanz",
+        "resultHeading": "Vorhergesagte Zielzeit",
+        "predictedTime": "Vorhergesagte Zeit"
+      },
+      "aboveFold": {
+        "conceptDiagram": {
+          "title": "Was Pace tatsächlich misst",
+          "intro": "Pace ist die Zeit, die für eine Distanzeinheit benötigt wird. Zwischen zwei beliebigen Kontrollpunkten auf einer Strecke ist sie schlicht die verstrichene Zeit geteilt durch die seit dem letzten Punkt zurückgelegte Distanz — genau das, was der Mehrpunkt-Modus für echte, ungleichmäßige Splits berechnet.",
+          "ariaLabel": "Eine Strecke mit drei Kontrollpunkten bei 0 km / 0:00, 5 km / 25:00 und 10 km / 56:00, mit der Pace für jeden Abschnitt (5:00 pro km, dann 6:12 pro km) zwischen den Kontrollpunkten beschriftet",
+          "caption": "Pace zwischen zwei Kontrollpunkten = verstrichene Zeit ÷ zurückgelegte Distanz"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Pace verstehen",
+          "paragraph1": "Pace ist eine Rate, ausgedrückt als Zeit pro Distanzeinheit — Minuten und Sekunden pro Kilometer oder Meile —, statt Distanz pro Zeiteinheit, was die Geschwindigkeit misst. Beide beschreiben dieselbe Bewegung aus entgegengesetzter Richtung: eine Pace von 5:00 pro Kilometer und eine Geschwindigkeit von 12 km/h sind dieselbe Laufanstrengung, nur unterschiedlich ausgedrückt. Läufer, Geher und Radfahrer denken meist in Pace, weil sie sich direkt in einen Trainingsplan übersetzen lässt (\"5:00 pro km für die mittleren drei Kilometer halten\") und in eine Zielzeit (Pace mal Renndistanz), während Geschwindigkeit eher beim Radfahren und in motorisierten Kontexten gebräuchlich ist.",
+          "paragraph2": "Die zugrunde liegende Rechnung ist einfach — Pace = Zeit ÷ Distanz, Zeit = Distanz × Pace, Distanz = Zeit ÷ Pace —, aber die Umrechnung zwischen einer festen Pace und einer Zielzeit von Hand, über Einheitensysteme und über Renndistanzen hinweg, die keine runden Zahlen sind (21,0975 km beim Halbmarathon, 42,195 km beim Marathon), ist genau da, wo ein Rechner seinen Nutzen zeigt. Dieses Tool berechnet jede beliebige der drei Größen Pace, Zeit oder Distanz aus den beiden anderen, protokolliert die Pace über mehrere reale Kontrollpunkte statt eine konstante Anstrengung für einen ganzen Lauf anzunehmen, rechnet Pace direkt zwischen Kilometern und Meilen um und prognostiziert eine Zielzeit für eine andere Distanz aus einem bereits erzielten Ergebnis."
+        },
+        "examples": {
+          "title": "Berechnete Beispiele",
+          "intro": "Ein paar gängige Pace-Berechnungen, so berechnet, wie dieses Tool sie berechnet.",
+          "columnCalculation": "Berechnung",
+          "columnResult": "Ergebnis",
+          "rows": [
+            {
+              "calculation": "5 km in 25:00 → Pace",
+              "result": "5:00 / km (8:03 / mi)"
+            },
+            {
+              "calculation": "10 km bei 5:30 / km → Zeit",
+              "result": "55:00"
+            },
+            {
+              "calculation": "50:00 bei 5:00 / km → Distanz",
+              "result": "10 km"
+            },
+            {
+              "calculation": "Marathon (42,195 km) in 3:30:00 → Pace",
+              "result": "4:58 / km (8:00 / mi)"
+            },
+            {
+              "calculation": "6:00 / km → Geschwindigkeit",
+              "result": "10,0 km/h (6,2 mph)"
+            }
+          ]
+        },
+        "finishTimeFormula": {
+          "title": "Eine Zielzeit vorhersagen",
+          "paragraph1": "Eine naive Methode, ein längeres Rennen aus einem kürzeren vorherzusagen, ist lineares Skalieren: Wer ein bestimmtes Tempo über 10 km halten kann, müsste diese Zeit nur mit 4,2195 multiplizieren, um eine Marathonzeit zu schätzen. In der Praxis sagt das immer eine zu schnelle Marathonzeit voraus, weil Ausdauerleistung nicht linear mit der Distanz skaliert — die Pace verlangsamt sich vorhersehbar, je länger die Anstrengung dauert, wegen Erschöpfung der Energiespeicher, Wärmeansammlung und kumulativer Muskelermüdung, die ein kurzes Rennen nie zu spüren bekommt.",
+          "paragraph2": "Dieses Tool nutzt stattdessen die Formel, die der amerikanische Forschungsingenieur und Marathonläufer Peter Riegel 1977 in Runner's World veröffentlichte und im Folgejahr in einem 1981 erschienenen Aufsatz für American Scientist distanzunabhängig formalisierte: T₂ = T₁ × (D₂ ÷ D₁)^1,06. Der Exponent 1,06, ermittelt durch Anpassung der Formel an eine große Bandbreite von Weltrekord- und Bestleistungen im Laufen, Gehen und Schwimmen, bildet genau diese vorhersehbare Verlangsamung ab — deshalb sagt die Formel eine langsamere Marathonzeit voraus, als eine simple lineare Skalierung es täte, und deshalb wird sie (in ähnlicher Form) heute von Zielzeit-Vorhersagefunktionen in GPS-Laufuhren und Trainings-Apps verwendet. Riegels eigener Aufsatz vermerkt, dass die Formel am besten für Belastungen zwischen etwa 3,5 und 230 Minuten funktioniert und bei Vorhersagen über sehr unterschiedliches Gelände, Temperaturen oder trainingsspezifische Unterschiede hinweg weniger verlässlich wird — eine 5-km-Bestzeit sagt eine Marathonzeit nur so gut voraus, wie Ihre marathonspezifische Ausdauer tatsächlich zu Ihrer 5-km-Geschwindigkeit passt."
+        },
+        "worldRecords": {
+          "title": "Typische Rennen und Weltrekord-Pace",
+          "intro": "Zur Einordnung hier die aktuellen Freiluft-Weltrekorde für vier häufig gelaufene Distanzen und die Durchschnittspace, die sie jeweils bedeuten. Dies sind ratifizierte Rekorde, keine typischen Ergebnisse — die meisten Läufer benötigen für diese Distanzen ein Vielfaches der Zeit, was genau der Sinn des Vergleichs ist.",
+          "columnMen": "Männer",
+          "columnWomen": "Frauen",
+          "note": "Stand der Zeiten: 2026; bitte gegen die offizielle Rekordliste von World Athletics prüfen, da Rekorde regelmäßig gebrochen werden.",
+          "rows": [
+            {
+              "event": "100 m",
+              "menTime": "9,58 s",
+              "menHolder": "Usain Bolt (JAM)",
+              "menYear": "2009",
+              "womenTime": "10,49 s",
+              "womenHolder": "Florence Griffith-Joyner (USA)",
+              "womenYear": "1988"
+            },
+            {
+              "event": "400 m",
+              "menTime": "43,03 s",
+              "menHolder": "Wayde van Niekerk (RSA)",
+              "menYear": "2016",
+              "womenTime": "47,60 s",
+              "womenHolder": "Marita Koch (DDR)",
+              "womenYear": "1985"
+            },
+            {
+              "event": "5000 m",
+              "menTime": "12:35,36",
+              "menHolder": "Joshua Cheptegei (UGA)",
+              "menYear": "2020",
+              "womenTime": "13:58,06",
+              "womenHolder": "Beatrice Chebet (KEN)",
+              "womenYear": "2025"
+            },
+            {
+              "event": "Marathon",
+              "menTime": "1:59:30",
+              "menHolder": "Sabastian Sawe (KEN)",
+              "menYear": "2026",
+              "womenTime": "2:09:56",
+              "womenHolder": "Ruth Chepngetich (KEN)",
+              "womenYear": "2024"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Wo Pace eine Rolle spielt",
+          "intro": "Pace-basiertes Pacing ist die Standardmethode, mit der Ausdauersportarten geplant, trainiert und bestritten werden.",
+          "items": [
+            {
+              "title": "Trainingspläne",
+              "description": "Strukturierte Laufpläne schreiben für unterschiedliche Trainingsarten Zielpaces vor — lockere Läufe, Tempoläufe, Intervalle —, meist abgeleitet aus einem aktuellen Wettkampfergebnis, damit jede Einheit gezielt ein bestimmtes physiologisches System trainiert, statt einfach nur \"zu laufen\"."
+            },
+            {
+              "title": "Rennstrategie",
+              "description": "Gleichmäßiges Pacing (jeden Abschnitt in nahezu derselben Pace laufen) ist nachweislich effizienter als schnell zu starten und dann langsamer zu werden, da ein zu schneller Start begrenzte Glykogenreserven verbraucht und schneller Ermüdung ansammelt, als sie später im Rennen wieder ausgeglichen werden kann — genau das, was der Mehrpunkt-Modus im Nachhinein zu überprüfen erlaubt."
+            },
+            {
+              "title": "Strecken- und Veranstaltungsplanung",
+              "description": "Veranstalter legen Zeitlimits für die Strecke und Cut-off-Zeiten an Verpflegungsstationen anhand einer angenommenen Mindestpace fest, und GPS-Uhren sowie Pace-Bänder (Armbänder mit aufgedruckter Zielzeit je Meile oder Kilometer) werden direkt aus einer einzigen Zielpace für die gesamte Renndistanz erstellt."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Was ist der Unterschied zwischen Pace und Geschwindigkeit?",
+              "answer": "Beide beschreiben dieselbe Bewegungsrate in umgekehrten Einheiten. Pace ist Zeit pro Distanzeinheit (Minuten pro Kilometer oder Meile) — kleiner bedeutet schneller. Geschwindigkeit ist Distanz pro Zeiteinheit (Kilometer oder Meilen pro Stunde) — größer bedeutet schneller. Die Umrechnung zwischen beiden ist in beide Richtungen eine Division: Geschwindigkeit = 60 ÷ Pace-in-Minuten-pro-Einheit, und Pace = 60 ÷ Geschwindigkeit-in-Einheiten-pro-Stunde."
+            },
+            {
+              "question": "Warum ändert sich meine Pace leicht, wenn ich zwischen km und Meilen wechsle?",
+              "answer": "Ihre tatsächliche Laufgeschwindigkeit ändert sich dadurch nicht — eine Meile (1,609344 km) ist länger als ein Kilometer, daher entspricht dieselbe Geschwindigkeit einer größeren Minutenzahl pro Meile als pro Kilometer. Eine Pace von 5:00/km und eine Pace von 8:03/mi beschreiben exakt dieselbe Geschwindigkeit, nur gegen eine andere Distanzeinheit gemessen."
+            },
+            {
+              "question": "Wie genau ist die Zielzeit-Vorhersage?",
+              "answer": "Die Riegel-Formel ist eine gut etablierte statistische Anpassung über viele Athleten und Distanzen hinweg, keine Garantie für ein bestimmtes individuelles Rennen. Sie ist meist am genauesten, wenn bekannte und Zieldistanz einigermaßen nah beieinanderliegen und beide Läufe unter ähnlichen Bedingungen (Gelände, Wetter, Trainingszustand) absolviert wurden — sie überschätzt systematisch, wie schnell Sie eine deutlich längere Distanz laufen können, wenn Sie Ihre Ausdauer dafür nicht gezielt trainiert haben."
+            },
+            {
+              "question": "Was soll ich im Mehrpunkt-Modus als Kontrollpunkte eintragen?",
+              "answer": "Kumulierte Distanz und verstrichene Zeit gemessen ab dem eigentlichen Start Ihres Laufs — dieselben Zahlen, die die automatischen Meilen- oder Kilometer-Rundenmarken einer GPS-Uhr anzeigen, nicht die Distanz oder Zeit jedes Abschnitts für sich. Das Tool zieht jede Zeile von der vorherigen ab, um die Pace dieses Abschnitts zu berechnen."
+            },
+            {
+              "question": "Warum ist die Marathon-Weltrekordpace so viel langsamer als die 100-m-Rekordpace?",
+              "answer": "Sprinten und Ausdauerlaufen greifen auf unterschiedliche physiologische Systeme zurück. Ein 100-m-Sprint wird fast vollständig aus gespeichertem ATP und Kreatinphosphat bestritten, in einer Pace, die kein Läufer länger als ein paar Sekunden durchhalten könnte, während ein Marathon gegen das viel langsamere Tempo gepaced wird, in dem der Körper Muskeln über zwei Stunden hinweg kontinuierlich mit Sauerstoff und Energie versorgen kann — genau der Ermüdungseffekt, den der oben beschriebene Riegel-Exponent modelliert."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hinter dem Tool",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Pace als Konzept ist so alt wie das gemessene Wettrennen selbst — schon die antiken griechischen Stadion-Läufe wurden gegen eine feste, standardisierte Distanz gestoppt. Neueren Datums ist die Mathematik, mit der man Leistung über verschiedene Distanzen hinweg vergleicht. Der amerikanische Forschungsingenieur und Wettkampf-Marathonläufer Peter Riegel bemerkte, dass Weltrekordzeiten im Laufen, Gehen und Schwimmen, gegen ihre Distanz auf einer logarithmischen Skala aufgetragen, nahe an einer einzigen Kurve statt an einer Geraden lagen — was bedeutet, dass sich die Rekordpace mit zunehmender Distanz um einen vorhersehbaren, nahezu konstanten Faktor verlangsamt, unabhängig von der Sportart. Er veröffentlichte die daraus resultierende Zeit-Distanz-Gleichung erstmals 1977 im Magazin Runner's World und formalisierte sie 1981 wissenschaftlich in \"Athletic Records and Human Endurance\", American Scientist, 69(3), 285-290 — und gab Ausdauersportlern und Trainern damit erstmals eine mathematische Möglichkeit, die 10-km-Leistung eines Läufers mit dessen Marathonpotenzial zu vergleichen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Handelsübliche GPS-Uhren (Garmin, Coros, Polar und ähnliche Geräte) berechnen die aktuelle Pace heute sekündlich aus Satellitenpositionierung oder einem am Handgelenk getragenen Beschleunigungssensor, und mehrere Lauf- und Rad-Plattformen bauen Zielzeit-Vorhersagen direkt in ihre Apps ein, mit einer Formel, die funktional der Riegel-Formel entspricht. Bei offiziellen Rekorden werden Streckenrekorde gegen einen physischen, nachvollziehbaren Kalibrierstandard zertifiziert: ein mit einem Jones Counter ausgestattetes Fahrrad wird mindestens zweimal exakt entlang der Strecke gefahren, gemäß dem Messstandard, den World Athletics gemeinsam mit der Association of International Marathons and Distance Races (AIMS) pflegt — derselbe Zertifizierungsprozess steht hinter jedem Marathon-Streckenrekord aus der obigen Tabelle."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Pacing, Ausdauerphysiologie und sportliche Leistung werden in der Sportwissenschaft, den Bewegungswissenschaften und dem breiteren Feld der sportbezogenen Fachgebiete erforscht. Die folgenden Universitäten sind durchgehend unter den weltweit besten für dieses Fachgebiet gerankt.",
+            "universities": [
+              {
+                "name": "Loughborough University, Vereinigtes Königreich",
+                "note": "Zum zehnten Jahr in Folge weltweit auf Platz 1 für sportbezogene Fachgebiete im QS World University Rankings by Subject 2026.",
+                "online": "Die Studiengänge Sport, Exercise and Health Sciences finden nur auf dem Campus statt.",
+                "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/"
+              },
+              {
+                "name": "The University of Queensland, Australien",
+                "note": "Weltweit auf Platz 2 für sportbezogene Fachgebiete im QS World University Rankings by Subject 2026.",
+                "online": "Die Studiengänge Human Movement and Nutrition Sciences finden nur auf dem Campus statt.",
+                "url": "https://hmns.uq.edu.au/"
+              },
+              {
+                "name": "The University of Sydney, Australien",
+                "note": "Weltweit auf Platz 3 für sportbezogene Fachgebiete im QS World University Rankings by Subject 2026.",
+                "online": "Die Studiengänge Exercise and Sport Science finden nur auf dem Campus statt.",
+                "url": "https://www.sydney.edu.au/medicine-health/study-medicine-and-health/study-areas/health-sciences/exercise-and-sport-science.html"
+              },
+              {
+                "name": "University of British Columbia, Kanada",
+                "note": "Weltweit auf Platz 4 für sportbezogene Fachgebiete im QS World University Rankings by Subject 2026.",
+                "online": "Die Studiengänge Kinesiology finden nur auf dem Campus statt.",
+                "url": "https://kin.educ.ubc.ca/"
+              },
+              {
+                "name": "Norwegian School of Sport Sciences, Norwegen",
+                "note": "Weltweit auf Platz 5 für sportbezogene Fachgebiete im QS World University Rankings by Subject 2026.",
+                "online": "Die meisten Studiengänge finden nur auf dem Campus statt; die Hochschule bietet daneben einige einjährige und kurze, auf Englisch unterrichtete Programme an.",
+                "url": "https://www.nih.no/english/"
+              },
+              {
+                "name": "King Saud University, Saudi-Arabien",
+                "note": "Beheimatet ein eigenes Programm für Sportwissenschaften innerhalb des College of Sport Sciences, das führende derartige Programm in der arabischen Region.",
+                "online": "Die Studiengänge Sportwissenschaften finden nur auf dem Campus statt.",
+                "url": "https://ssa.ksu.edu.sa/en"
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Riegel, P. S. (1981). Athletic Records and Human Endurance. American Scientist, 69(3), 285-290.",
+          "note": "Die Studie hinter der Riegel-Formel im Zielzeit-Modus (T₂ = T₁ × (D₂ ÷ D₁)^1,06), abgeleitet aus der Anpassung von Weltrekordleistungen im Laufen, Gehen und Schwimmen an eine einzige Zeit-Distanz-Kurve.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
+          "readOriginal": "Originalarbeit lesen"
+        }
+      }
     }
   },
   "toolPage": {

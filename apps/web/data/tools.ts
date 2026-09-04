@@ -925,4 +925,20 @@ export const tools: Tool[] = [
       "daylight saving time",
     ],
   },
+  {
+    slug: "pace-calculator",
+    title: "Pace Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate running, walking, or cycling pace, time, or distance, log splits across multiple checkpoints, convert pace between km and miles, and predict a finish time for any race distance.",
+    featured: false,
+    keywords: [
+      "pace calculator",
+      "running pace",
+      "minutes per mile",
+      "minutes per km",
+      "finish time predictor",
+      "race pace chart",
+    ],
+  },
 ];

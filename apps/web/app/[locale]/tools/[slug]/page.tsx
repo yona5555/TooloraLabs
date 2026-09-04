@@ -99,6 +99,8 @@ import GraphingCalculator from "@/components/tools/graphing-calculator/GraphingC
 import GraphingEducation from "@/components/tools/graphing-calculator/GraphingEducation";
 import NotepadCalculator from "@/components/tools/notepad-calculator/NotepadCalculator";
 import NotepadEducation from "@/components/tools/notepad-calculator/NotepadEducation";
+import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
+import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -453,6 +455,9 @@ export default async function ToolPage({
     case "notepad-calculator":
       component = <NotepadCalculator education={<NotepadEducation />} />;
       break;
+    case "pace-calculator":
+      component = <PaceCalculator education={<PaceEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -565,6 +570,7 @@ export default async function ToolPage({
     slug === "step-by-step-math-solver" ||
     slug === "graphing-calculator" ||
     slug === "notepad-calculator" ||
+    slug === "pace-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

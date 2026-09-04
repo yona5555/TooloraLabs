@@ -14551,6 +14551,321 @@
         "lineColumn": "Ligne",
         "resultColumn": "Résultat"
       }
+    },
+    "pace-calculator": {
+      "title": "Calculateur d'Allure",
+      "description": "Calculez l'allure, le temps ou la distance en course, marche ou vélo, enregistrez des relais sur plusieurs points de contrôle, convertissez l'allure entre kilomètres et miles, et prédisez un temps d'arrivée pour n'importe quelle distance de course grâce à la formule d'endurance de Riegel.",
+      "nav": {
+        "tool": "Calculateur",
+        "faq": "FAQ",
+        "behindTheTool": "Derrière l'Outil"
+      },
+      "topTabs": {
+        "groupLabel": "Mode du calculateur d'allure",
+        "calculator": "Calculateur d'Allure",
+        "multipoint": "Allure Multipoint",
+        "converter": "Convertisseur d'Allure",
+        "finish-time": "Temps d'Arrivée"
+      },
+      "solveTabs": {
+        "groupLabel": "Valeur à calculer",
+        "pace": "Allure",
+        "time": "Temps",
+        "distance": "Distance"
+      },
+      "form": {
+        "inputTitle": "Saisir les Valeurs",
+        "distanceLabel": "Distance",
+        "unitLabel": "Unité",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "racePresetLabel": "Distance de course",
+        "racePresetCustom": "Distance personnalisée",
+        "racePresets": {
+          "5k": "5 km",
+          "10k": "10 km",
+          "half-marathon": "Semi-marathon (21,0975 km)",
+          "marathon": "Marathon (42,195 km)"
+        },
+        "timeLabel": "Temps",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes",
+        "paceLabelKm": "Allure au km",
+        "paceLabelMi": "Allure au mile"
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidInput": "Saisissez des valeurs positives dans les deux champs connus pour voir un résultat.",
+        "solvedFor": {
+          "pace": "Allure",
+          "time": "Temps d'Arrivée",
+          "distance": "Distance"
+        },
+        "distanceLabel": "Distance",
+        "timeLabel": "Temps",
+        "paceLabelKm": "Allure",
+        "paceLabelMi": "Allure",
+        "perKm": "/ km",
+        "perMi": "/ mi",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "speedKmh": "Vitesse",
+        "speedMph": "Vitesse",
+        "kmh": "km/h",
+        "mph": "mph"
+      },
+      "gauge": {
+        "ariaLabel": "Allure sur l'échelle d'effort",
+        "ariaLabelEmpty": "Échelle d'effort d'allure, aucune valeur saisie pour l'instant",
+        "zones": {
+          "elite": "Élite",
+          "fast": "Rapide",
+          "moderate": "Modéré",
+          "easy": "Facile",
+          "recovery": "Récupération"
+        }
+      },
+      "quickReference": {
+        "title": "L'Allure en un Coup d'Œil",
+        "intro": "Un exemple résolu rapide et deux conversions courantes d'allure vers vitesse."
+      },
+      "multipoint": {
+        "inputTitle": "Points de Contrôle",
+        "checkpointLabel": "Point de Contrôle {number}",
+        "hint": "Saisissez la distance cumulée et le temps écoulé à chaque point de contrôle, dans l'ordre où vous les avez passés (la ligne 1 est généralement le départ, à 0 / 0:00). L'allure entre chaque paire de lignes consécutives est calculée automatiquement.",
+        "unitLabel": "Unité",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "columnDistance": "Distance ({unit})",
+        "columnTime": "Temps Écoulé (h : m : s)",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes",
+        "removeRow": "Supprimer ce point de contrôle",
+        "addPoint": "Ajouter un Point de Contrôle",
+        "resultHeading": "Relais",
+        "noSegments": "Ajoutez au moins deux points de contrôle avec distance et temps croissants pour voir l'allure de chaque relais.",
+        "overallDistance": "Distance totale",
+        "overallTime": "Temps total",
+        "columnSegment": "Segment",
+        "columnDistanceShort": "Distance",
+        "columnSplitTime": "Temps du relais",
+        "columnPace": "Allure"
+      },
+      "converter": {
+        "inputTitle": "Convertir l'Allure",
+        "hint": "Saisissez une allure dans une unité pour voir l'allure et la vitesse équivalentes dans l'autre.",
+        "fromUnitLabel": "Allure mesurée par",
+        "paceValueLabel": "Allure (minutes : secondes)",
+        "resultHeading": "Allure Convertie",
+        "equals": "équivaut à"
+      },
+      "finishTime": {
+        "inputTitle": "Prédire un Temps d'Arrivée",
+        "hint": "Saisissez une distance et un temps que vous avez déjà courus, puis choisissez (ou saisissez) la distance de course cible à prédire.",
+        "knownDistanceLabel": "Distance connue",
+        "knownTimeLabel": "Temps connu",
+        "targetDistanceLabel": "Distance cible",
+        "resultHeading": "Temps d'Arrivée Prédit",
+        "predictedTime": "Temps Prédit"
+      },
+      "aboveFold": {
+        "conceptDiagram": {
+          "title": "Ce que l'Allure Mesure Réellement",
+          "intro": "L'allure est le temps passé à parcourir une unité de distance. Entre deux points de contrôle quelconques d'un parcours, c'est simplement le temps écoulé divisé par la distance parcourue depuis le dernier point — exactement ce que calcule le mode Multipoint pour des relais réels et inégaux.",
+          "ariaLabel": "Un parcours avec trois points de contrôle à 0 km / 0:00, 5 km / 25:00 et 10 km / 56:00, avec l'allure de chaque segment (5:00 au km, puis 6:12 au km) indiquée entre les points de contrôle",
+          "caption": "Allure entre deux points de contrôle = temps écoulé ÷ distance parcourue"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'Allure",
+          "paragraph1": "L'allure est un taux exprimé en temps par unité de distance — minutes et secondes par kilomètre ou par mile —, plutôt qu'en distance par unité de temps, ce que mesure la vitesse. Les deux décrivent le même mouvement depuis des directions opposées : une allure de 5:00 au kilomètre et une vitesse de 12 km/h représentent le même effort de course, exprimé différemment. Les coureurs, marcheurs et cyclistes raisonnent généralement en allure car elle se traduit directement dans un plan d'entraînement (\"tenir 5:00 au km sur les trois kilomètres du milieu\") et dans un temps d'arrivée (multiplier l'allure par la distance de course), tandis que la vitesse est plus courante en cyclisme et dans les contextes motorisés.",
+          "paragraph2": "L'arithmétique sous-jacente est simple — allure = temps ÷ distance, temps = distance × allure, distance = temps ÷ allure —, mais convertir à la main entre une allure fixe et un temps d'arrivée, entre systèmes d'unités et entre distances de course qui ne sont pas des nombres ronds (les 21,0975 km d'un semi-marathon, les 42,195 km d'un marathon), c'est précisément là qu'un calculateur devient utile. Cet outil résout n'importe laquelle des trois valeurs — allure, temps ou distance — à partir des deux autres, enregistre l'allure sur plusieurs points de contrôle réels au lieu de supposer un effort constant sur toute la course, convertit l'allure directement entre kilomètres et miles, et projette un temps d'arrivée pour une distance différente à partir d'un résultat déjà couru."
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Quelques calculs d'allure courants, résolus de la même manière que cet outil les calcule.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "5 km en 25:00 → allure",
+              "result": "5:00 / km (8:03 / mi)"
+            },
+            {
+              "calculation": "10 km à 5:30 / km → temps",
+              "result": "55:00"
+            },
+            {
+              "calculation": "50:00 à 5:00 / km → distance",
+              "result": "10 km"
+            },
+            {
+              "calculation": "Marathon (42,195 km) en 3:30:00 → allure",
+              "result": "4:58 / km (8:00 / mi)"
+            },
+            {
+              "calculation": "6:00 / km → vitesse",
+              "result": "10,0 km/h (6,2 mph)"
+            }
+          ]
+        },
+        "finishTimeFormula": {
+          "title": "Prédire un Temps d'Arrivée",
+          "paragraph1": "Une façon naïve de prédire une course plus longue à partir d'une plus courte consiste à mettre à l'échelle linéairement : si vous pouvez tenir une certaine allure sur 10 km, il suffirait de multiplier ce temps par 4,2195 pour estimer un temps de marathon. En pratique, cela prédit toujours un temps de marathon trop rapide, car la performance d'endurance ne s'étend pas linéairement avec la distance — l'allure ralentit de façon prévisible à mesure que l'effort s'allonge, en raison de l'épuisement des réserves énergétiques, de l'accumulation de chaleur et de la fatigue musculaire cumulée, qu'une course courte n'a jamais le temps de révéler.",
+          "paragraph2": "Cet outil utilise plutôt la formule que l'ingénieur de recherche et marathonien américain Peter Riegel a publiée dans Runner's World en 1977, puis formalisée indépendamment de la distance l'année suivante dans un article de 1981 pour American Scientist : T₂ = T₁ × (D₂ ÷ D₁)^1,06. L'exposant 1,06, obtenu en ajustant la formule à un large éventail de records du monde et de records personnels en course à pied, marche et natation, est ce qui capture ce ralentissement prévisible — c'est pourquoi la formule prédit un temps de marathon plus lent qu'une simple mise à l'échelle linéaire, et pourquoi elle est largement utilisée (sous une forme similaire) par les fonctions de prédiction de temps de course des montres GPS et des applications d'entraînement actuelles. L'article de Riegel lui-même note que la formule fonctionne mieux pour des efforts d'environ 3,5 à 230 minutes, et devient moins fiable pour des prédictions sur des terrains, températures ou spécificités d'entraînement très différents — un record sur 5 km ne prédit bien un temps de marathon que dans la mesure où votre endurance spécifique au marathon correspond réellement à votre vitesse sur 5 km."
+        },
+        "worldRecords": {
+          "title": "Courses Typiques et Allures de Record du Monde",
+          "intro": "À titre de comparaison, voici les records du monde en plein air actuels pour quatre distances couramment courues, et l'allure moyenne qu'ils impliquent. Ce sont des records homologués, pas des résultats typiques — la plupart des coureurs mettent bien plus de temps sur ces distances, ce qui est précisément l'intérêt de la comparaison.",
+          "columnMen": "Hommes",
+          "columnWomen": "Femmes",
+          "note": "Temps à jour en 2026 ; vérifiez la liste officielle des records de World Athletics, car les records sont régulièrement battus.",
+          "rows": [
+            {
+              "event": "100 m",
+              "menTime": "9,58 s",
+              "menHolder": "Usain Bolt (JAM)",
+              "menYear": "2009",
+              "womenTime": "10,49 s",
+              "womenHolder": "Florence Griffith-Joyner (USA)",
+              "womenYear": "1988"
+            },
+            {
+              "event": "400 m",
+              "menTime": "43,03 s",
+              "menHolder": "Wayde van Niekerk (RSA)",
+              "menYear": "2016",
+              "womenTime": "47,60 s",
+              "womenHolder": "Marita Koch (RDA)",
+              "womenYear": "1985"
+            },
+            {
+              "event": "5000 m",
+              "menTime": "12:35,36",
+              "menHolder": "Joshua Cheptegei (UGA)",
+              "menYear": "2020",
+              "womenTime": "13:58,06",
+              "womenHolder": "Beatrice Chebet (KEN)",
+              "womenYear": "2025"
+            },
+            {
+              "event": "Marathon",
+              "menTime": "1:59:30",
+              "menHolder": "Sabastian Sawe (KEN)",
+              "menYear": "2026",
+              "womenTime": "2:09:56",
+              "womenHolder": "Ruth Chepngetich (KEN)",
+              "womenYear": "2024"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Où l'Allure Compte",
+          "intro": "La gestion d'allure est la méthode standard pour planifier, entraîner et courir les sports d'endurance.",
+          "items": [
+            {
+              "title": "Plans d'entraînement",
+              "description": "Les plans de course structurés prescrivent des allures cibles pour différents types de séances — footing facile, seuil, fractionné —, généralement dérivées d'un résultat de course récent, afin que chaque séance entraîne un système physiologique précis plutôt que de simplement \"courir\"."
+            },
+            {
+              "title": "Stratégie de course",
+              "description": "Une allure régulière (courir chaque portion à une allure proche de la même) est mesurablement plus efficace que partir vite puis ralentir, car un départ trop rapide épuise des réserves de glycogène limitées et accumule de la fatigue plus vite qu'elle ne peut être récupérée plus tard dans la course — précisément ce que le mode Multipoint permet de vérifier après coup."
+            },
+            {
+              "title": "Planification du parcours et de l'événement",
+              "description": "Les organisateurs de courses fixent les limites de temps du parcours et les fermetures de ravitaillement à partir d'une allure minimale supposée, et les montres GPS ainsi que les bracelets d'allure (bandeaux imprimés avec un temps de passage cible à chaque mile ou kilomètre) sont construits directement à partir d'une seule allure cible appliquée à toute la distance de course."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la différence entre allure et vitesse ?",
+              "answer": "Elles décrivent le même taux de déplacement, exprimé en unités inverses. L'allure est le temps par unité de distance (minutes par kilomètre ou mile) — plus petit signifie plus rapide. La vitesse est la distance par unité de temps (kilomètres ou miles par heure) — plus grand signifie plus rapide. Convertir entre les deux revient toujours à une division : vitesse = 60 ÷ allure-en-minutes-par-unité, et allure = 60 ÷ vitesse-en-unités-par-heure."
+            },
+            {
+              "question": "Pourquoi mon allure change-t-elle légèrement quand je passe des km aux miles ?",
+              "answer": "Cela ne change pas votre vitesse de course réelle — un mile (1,609344 km) est plus long qu'un kilomètre, donc la même vitesse correspond à un nombre de minutes par mile plus élevé que par kilomètre. Une allure de 5:00/km et une allure de 8:03/mi décrivent exactement la même vitesse, seulement mesurée par rapport à une unité de distance différente."
+            },
+            {
+              "question": "Quelle est la précision de la prédiction du Temps d'Arrivée ?",
+              "answer": "La formule de Riegel est un ajustement statistique bien établi sur de nombreux athlètes et distances, pas une garantie pour une course individuelle donnée. Elle est généralement la plus précise lorsque la distance connue et la distance cible sont raisonnablement proches et que les deux efforts se déroulent dans des conditions similaires (terrain, météo, état de forme) — elle surestimera systématiquement votre capacité à courir une distance bien plus longue si vous n'avez pas entraîné spécifiquement cette endurance."
+            },
+            {
+              "question": "Que dois-je saisir comme points de contrôle en mode Multipoint ?",
+              "answer": "La distance cumulée et le temps écoulé mesurés depuis le tout début de votre course — les mêmes chiffres qu'affichent les alertes automatiques de tour au mile ou au kilomètre d'une montre GPS, pas la distance ou le temps de chaque segment pris isolément. L'outil soustrait chaque ligne à la précédente pour calculer l'allure de ce segment."
+            },
+            {
+              "question": "Pourquoi l'allure du record du monde du marathon est-elle tellement plus lente que celle du 100 m ?",
+              "answer": "Le sprint et la course d'endurance sollicitent des systèmes physiologiques différents. Un sprint de 100 m se court presque entièrement grâce à l'ATP et à la phosphocréatine stockés, à une allure qu'aucun coureur ne pourrait soutenir plus de quelques secondes, tandis qu'un marathon est couru au rythme bien plus lent auquel le corps peut approvisionner en continu les muscles en oxygène et en énergie pendant deux heures — exactement l'effet de fatigue que modélise l'exposant de Riegel décrit ci-dessus."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Derrière l'Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "L'allure en tant que concept est aussi ancienne que la course mesurée elle-même — les courses du stade dans la Grèce antique étaient déjà chronométrées sur une distance fixe et standardisée. Ce qui est plus récent, c'est la mathématique permettant de comparer la performance sur différentes distances. L'ingénieur de recherche et marathonien américain Peter Riegel a remarqué que les temps de record du monde en course à pied, marche et natation, portés sur une échelle logarithmique en fonction de leur distance, s'alignaient sur une seule courbe plutôt que sur une droite — ce qui signifie que l'allure record ralentit selon un facteur prévisible et quasi constant à mesure que la distance augmente, quel que soit le sport. Il a d'abord publié l'équation temps-distance qui en résulte dans le magazine Runner's World en 1977, puis l'a formalisée académiquement dans \"Athletic Records and Human Endurance\", American Scientist, 69(3), 285-290 (1981), donnant pour la première fois aux athlètes d'endurance et à leurs entraîneurs un moyen mathématique de comparer la performance d'un coureur sur 10 km à son potentiel sur marathon."
+          },
+          "modernDevelopments": {
+            "title": "Développements Modernes",
+            "paragraph": "Les montres GPS grand public (Garmin, Coros, Polar et appareils similaires) calculent aujourd'hui l'allure en direct chaque seconde à partir du positionnement satellite ou d'un accéléromètre porté au poignet, et plusieurs plateformes de course et de vélo intègrent directement des prédicteurs de temps de course dans leurs applications, avec une formule fonctionnellement équivalente à celle de Riegel. Côté records officiels, les parcours sont certifiés selon un étalon de calibration physique et traçable : un vélo équipé d'un Jones Counter parcourt le tracé exact au moins deux fois, selon la norme de mesure maintenue conjointement par World Athletics et l'Association of International Marathons and Distance Races (AIMS) — le même processus de certification qui garantit chaque record de parcours de marathon cité dans le tableau ci-dessus."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La gestion d'allure, la physiologie de l'endurance et la performance sportive sont étudiées dans le cadre des sciences de l'exercice, des sciences du sport et plus largement des disciplines liées au sport. Voici des universités constamment classées parmi les meilleures au monde dans ce domaine :",
+            "universities": [
+              {
+                "name": "Loughborough University, Royaume-Uni",
+                "note": "Classée n° 1 mondial pour les disciplines liées au sport dans le QS World University Rankings by Subject 2026, pour la dixième année consécutive.",
+                "online": "Les programmes en sciences du sport, de l'exercice et de la santé sont dispensés uniquement sur campus.",
+                "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/"
+              },
+              {
+                "name": "The University of Queensland, Australie",
+                "note": "Classée n° 2 mondial pour les disciplines liées au sport dans le QS World University Rankings by Subject 2026.",
+                "online": "Les programmes en sciences du mouvement humain et de la nutrition sont dispensés uniquement sur campus.",
+                "url": "https://hmns.uq.edu.au/"
+              },
+              {
+                "name": "The University of Sydney, Australie",
+                "note": "Classée n° 3 mondial pour les disciplines liées au sport dans le QS World University Rankings by Subject 2026.",
+                "online": "Les programmes en sciences de l'exercice et du sport sont dispensés uniquement sur campus.",
+                "url": "https://www.sydney.edu.au/medicine-health/study-medicine-and-health/study-areas/health-sciences/exercise-and-sport-science.html"
+              },
+              {
+                "name": "University of British Columbia, Canada",
+                "note": "Classée n° 4 mondial pour les disciplines liées au sport dans le QS World University Rankings by Subject 2026.",
+                "online": "Les programmes en kinésiologie sont dispensés uniquement sur campus.",
+                "url": "https://kin.educ.ubc.ca/"
+              },
+              {
+                "name": "Norwegian School of Sport Sciences, Norvège",
+                "note": "Classée n° 5 mondial pour les disciplines liées au sport dans le QS World University Rankings by Subject 2026.",
+                "online": "La plupart des programmes sont dispensés uniquement sur campus ; l'école propose par ailleurs quelques programmes courts, d'un an ou moins, enseignés en anglais.",
+                "url": "https://www.nih.no/english/"
+              },
+              {
+                "name": "King Saud University, Arabie saoudite",
+                "note": "Abrite un programme dédié en sciences du sport au sein de son College of Sport Sciences, le programme de référence de ce type dans la région arabe.",
+                "online": "Les programmes en sciences du sport sont dispensés uniquement sur campus.",
+                "url": "https://ssa.ksu.edu.sa/en"
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Riegel, P. S. (1981). Athletic Records and Human Endurance. American Scientist, 69(3), 285-290.",
+          "note": "L'article à l'origine de la formule de Riegel utilisée par le mode Temps d'Arrivée (T₂ = T₁ × (D₂ ÷ D₁)^1,06), obtenue en ajustant des performances de record du monde en course à pied, marche et natation à une seule courbe temps-distance.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
+          "readOriginal": "Lire l'Article Original"
+        }
+      }
     }
   },
   "toolPage": {

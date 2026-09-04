@@ -14551,6 +14551,321 @@
         "lineColumn": "Línea",
         "resultColumn": "Resultado"
       }
+    },
+    "pace-calculator": {
+      "title": "Calculadora de Ritmo",
+      "description": "Calcula el ritmo, el tiempo o la distancia al correr, caminar o pedalear, registra parciales en varios puntos de control, convierte el ritmo entre kilómetros y millas, y predice un tiempo de meta para cualquier distancia de carrera usando la fórmula de resistencia de Riegel.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas Frecuentes",
+        "behindTheTool": "Detrás de la Herramienta"
+      },
+      "topTabs": {
+        "groupLabel": "Modo de la calculadora de ritmo",
+        "calculator": "Calculadora de Ritmo",
+        "multipoint": "Ritmo Multipunto",
+        "converter": "Conversor de Ritmo",
+        "finish-time": "Tiempo de Meta"
+      },
+      "solveTabs": {
+        "groupLabel": "Valor a calcular",
+        "pace": "Ritmo",
+        "time": "Tiempo",
+        "distance": "Distancia"
+      },
+      "form": {
+        "inputTitle": "Introducir Valores",
+        "distanceLabel": "Distancia",
+        "unitLabel": "Unidad",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "racePresetLabel": "Distancia de carrera",
+        "racePresetCustom": "Distancia personalizada",
+        "racePresets": {
+          "5k": "5 km",
+          "10k": "10 km",
+          "half-marathon": "Media Maratón (21,0975 km)",
+          "marathon": "Maratón (42,195 km)"
+        },
+        "timeLabel": "Tiempo",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos",
+        "paceLabelKm": "Ritmo por km",
+        "paceLabelMi": "Ritmo por milla"
+      },
+      "result": {
+        "heading": "Resultado",
+        "invalidInput": "Introduce valores positivos en ambos campos conocidos para ver un resultado.",
+        "solvedFor": {
+          "pace": "Ritmo",
+          "time": "Tiempo de Meta",
+          "distance": "Distancia"
+        },
+        "distanceLabel": "Distancia",
+        "timeLabel": "Tiempo",
+        "paceLabelKm": "Ritmo",
+        "paceLabelMi": "Ritmo",
+        "perKm": "/ km",
+        "perMi": "/ mi",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "speedKmh": "Velocidad",
+        "speedMph": "Velocidad",
+        "kmh": "km/h",
+        "mph": "mph"
+      },
+      "gauge": {
+        "ariaLabel": "Ritmo en la escala de esfuerzo",
+        "ariaLabelEmpty": "Escala de esfuerzo de ritmo, aún sin valor introducido",
+        "zones": {
+          "elite": "Élite",
+          "fast": "Rápido",
+          "moderate": "Moderado",
+          "easy": "Suave",
+          "recovery": "Recuperación"
+        }
+      },
+      "quickReference": {
+        "title": "Ritmo de un Vistazo",
+        "intro": "Un ejemplo resuelto rápido y dos conversiones habituales de ritmo a velocidad."
+      },
+      "multipoint": {
+        "inputTitle": "Puntos de Control",
+        "checkpointLabel": "Punto de Control {number}",
+        "hint": "Introduce la distancia acumulada y el tiempo transcurrido en cada punto de control, en el orden en que los pasaste (la fila 1 suele ser la salida, en 0 / 0:00). El ritmo entre cada par de filas consecutivas se calcula automáticamente.",
+        "unitLabel": "Unidad",
+        "unitKm": "km",
+        "unitMi": "mi",
+        "columnDistance": "Distancia ({unit})",
+        "columnTime": "Tiempo Transcurrido (h : m : s)",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos",
+        "removeRow": "Eliminar este punto de control",
+        "addPoint": "Añadir Punto de Control",
+        "resultHeading": "Parciales",
+        "noSegments": "Añade al menos dos puntos de control con distancia y tiempo crecientes para ver el ritmo de cada parcial.",
+        "overallDistance": "Distancia total",
+        "overallTime": "Tiempo total",
+        "columnSegment": "Tramo",
+        "columnDistanceShort": "Distancia",
+        "columnSplitTime": "Tiempo parcial",
+        "columnPace": "Ritmo"
+      },
+      "converter": {
+        "inputTitle": "Convertir Ritmo",
+        "hint": "Introduce un ritmo en una unidad para ver el ritmo y la velocidad equivalentes en la otra.",
+        "fromUnitLabel": "El ritmo se mide por",
+        "paceValueLabel": "Ritmo (minutos : segundos)",
+        "resultHeading": "Ritmo Convertido",
+        "equals": "equivale a"
+      },
+      "finishTime": {
+        "inputTitle": "Predecir un Tiempo de Meta",
+        "hint": "Introduce una distancia y un tiempo que ya hayas corrido, y luego elige (o introduce) la distancia de carrera objetivo a predecir.",
+        "knownDistanceLabel": "Distancia conocida",
+        "knownTimeLabel": "Tiempo conocido",
+        "targetDistanceLabel": "Distancia objetivo",
+        "resultHeading": "Tiempo de Meta Predicho",
+        "predictedTime": "Tiempo Predicho"
+      },
+      "aboveFold": {
+        "conceptDiagram": {
+          "title": "Qué Mide Realmente el Ritmo",
+          "intro": "El ritmo es el tiempo empleado en recorrer una unidad de distancia. Entre dos puntos de control cualesquiera de una ruta, es simplemente el tiempo transcurrido dividido por la distancia recorrida desde el último punto — exactamente lo que calcula el modo Multipunto para parciales reales y desiguales.",
+          "ariaLabel": "Una ruta con tres puntos de control en 0 km / 0:00, 5 km / 25:00 y 10 km / 56:00, con el ritmo de cada tramo (5:00 por km, luego 6:12 por km) indicado entre los puntos de control",
+          "caption": "Ritmo entre dos puntos de control = tiempo transcurrido ÷ distancia recorrida"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Ritmo",
+          "paragraph1": "El ritmo es una tasa expresada como tiempo por unidad de distancia — minutos y segundos por kilómetro o por milla —, en lugar de distancia por unidad de tiempo, que es lo que mide la velocidad. Ambos describen el mismo movimiento desde direcciones opuestas: un ritmo de 5:00 por kilómetro y una velocidad de 12 km/h son el mismo esfuerzo al correr, solo que expresado de forma distinta. Los corredores, caminantes y ciclistas suelen pensar en ritmo porque se traduce directamente en un plan de entrenamiento (\"mantener 5:00 por km en los tres kilómetros centrales\") y en un tiempo de meta (multiplicar el ritmo por la distancia de carrera), mientras que la velocidad es más habitual en el ciclismo y en contextos motorizados.",
+          "paragraph2": "La aritmética subyacente es sencilla — ritmo = tiempo ÷ distancia, tiempo = distancia × ritmo, distancia = tiempo ÷ ritmo —, pero convertir a mano entre un ritmo fijo y un tiempo de meta, entre sistemas de unidades y entre distancias de carrera que no son números redondos (los 21,0975 km de una media maratón, los 42,195 km de una maratón), es donde una calculadora demuestra su utilidad. Esta herramienta resuelve cualquiera de los tres valores — ritmo, tiempo o distancia — a partir de los otros dos, registra el ritmo en varios puntos de control reales en lugar de asumir un esfuerzo constante durante toda la carrera, convierte el ritmo directamente entre kilómetros y millas, y proyecta un tiempo de meta para una distancia distinta a partir de un resultado que ya has corrido."
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Algunos cálculos de ritmo habituales, resueltos de la misma forma en que esta herramienta los calcula.",
+          "columnCalculation": "Cálculo",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "calculation": "5 km en 25:00 → ritmo",
+              "result": "5:00 / km (8:03 / mi)"
+            },
+            {
+              "calculation": "10 km a 5:30 / km → tiempo",
+              "result": "55:00"
+            },
+            {
+              "calculation": "50:00 a 5:00 / km → distancia",
+              "result": "10 km"
+            },
+            {
+              "calculation": "Maratón (42,195 km) en 3:30:00 → ritmo",
+              "result": "4:58 / km (8:00 / mi)"
+            },
+            {
+              "calculation": "6:00 / km → velocidad",
+              "result": "10,0 km/h (6,2 mph)"
+            }
+          ]
+        },
+        "finishTimeFormula": {
+          "title": "Predecir un Tiempo de Meta",
+          "paragraph1": "Una forma ingenua de predecir una carrera más larga a partir de una más corta es escalar linealmente: si puedes mantener cierto ritmo en 10K, bastaría con multiplicar ese tiempo por 4,2195 para estimar un tiempo de maratón. En la práctica, esto siempre predice un tiempo de maratón demasiado rápido, porque el rendimiento de resistencia no escala linealmente con la distancia — el ritmo se ralentiza de forma predecible a medida que el esfuerzo se alarga, debido al agotamiento del combustible, la acumulación de calor y la fatiga muscular acumulada, algo que una carrera corta nunca llega a poner a prueba.",
+          "paragraph2": "En su lugar, esta herramienta usa la fórmula que el ingeniero de investigación y maratonista estadounidense Peter Riegel publicó en Runner's World en 1977, y que formalizó de manera independiente de la distancia al año siguiente en un artículo de 1981 para American Scientist: T₂ = T₁ × (D₂ ÷ D₁)^1,06. El exponente 1,06, obtenido al ajustar la fórmula a una amplia variedad de récords mundiales y marcas personales en carrera a pie, marcha y natación, es lo que capta esa ralentización predecible — por eso la fórmula predice un tiempo de maratón más lento que una simple escala lineal, y por eso se usa (en una forma similar) en las funciones de predicción de tiempo de carrera de relojes GPS y aplicaciones de entrenamiento actuales. El propio artículo de Riegel señala que la fórmula funciona mejor para esfuerzos de entre 3,5 y 230 minutos aproximadamente, y se vuelve menos fiable en predicciones que abarcan terrenos, temperaturas o especificidad de entrenamiento muy distintos — una mejor marca en 5K solo predice bien un tiempo de maratón en la medida en que tu resistencia específica de maratón realmente iguale tu velocidad en 5K."
+        },
+        "worldRecords": {
+          "title": "Carreras Típicas y Ritmos de Récord Mundial",
+          "intro": "A modo de referencia, estos son los récords mundiales al aire libre vigentes para cuatro distancias habituales, y el ritmo medio que implican. Son récords ratificados, no resultados típicos — la mayoría de corredores tarda muchas veces más en estas distancias, que es precisamente el sentido de la comparación.",
+          "columnMen": "Hombres",
+          "columnWomen": "Mujeres",
+          "note": "Tiempos vigentes a 2026; verifica la lista oficial de récords de World Athletics, ya que los récords se baten periódicamente.",
+          "rows": [
+            {
+              "event": "100 m",
+              "menTime": "9,58 s",
+              "menHolder": "Usain Bolt (JAM)",
+              "menYear": "2009",
+              "womenTime": "10,49 s",
+              "womenHolder": "Florence Griffith-Joyner (USA)",
+              "womenYear": "1988"
+            },
+            {
+              "event": "400 m",
+              "menTime": "43,03 s",
+              "menHolder": "Wayde van Niekerk (RSA)",
+              "menYear": "2016",
+              "womenTime": "47,60 s",
+              "womenHolder": "Marita Koch (RDA)",
+              "womenYear": "1985"
+            },
+            {
+              "event": "5000 m",
+              "menTime": "12:35,36",
+              "menHolder": "Joshua Cheptegei (UGA)",
+              "menYear": "2020",
+              "womenTime": "13:58,06",
+              "womenHolder": "Beatrice Chebet (KEN)",
+              "womenYear": "2025"
+            },
+            {
+              "event": "Maratón",
+              "menTime": "1:59:30",
+              "menHolder": "Sabastian Sawe (KEN)",
+              "menYear": "2026",
+              "womenTime": "2:09:56",
+              "womenHolder": "Ruth Chepngetich (KEN)",
+              "womenYear": "2024"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Dónde Importa el Ritmo",
+          "intro": "El pacing basado en ritmo es la forma estándar de planificar, entrenar y competir en los deportes de resistencia.",
+          "items": [
+            {
+              "title": "Planes de entrenamiento",
+              "description": "Los planes de entrenamiento estructurados prescriben ritmos objetivo para distintos tipos de sesión — rodajes suaves, series de umbral, repeticiones de intervalos —, normalmente derivados de un resultado de carrera reciente, para que cada sesión entrene un sistema fisiológico concreto en lugar de simplemente \"correr\"."
+            },
+            {
+              "title": "Estrategia de carrera",
+              "description": "Un ritmo uniforme (correr cada tramo a un ritmo similar) es medible más eficiente que salir rápido y luego bajar el ritmo, ya que un inicio demasiado rápido agota reservas limitadas de glucógeno y acumula fatiga más deprisa de lo que puede recuperarse en el resto de la carrera — exactamente lo que el modo Multipunto permite comprobar a posteriori."
+            },
+            {
+              "title": "Planificación de recorrido y evento",
+              "description": "Los organizadores de carreras fijan límites de tiempo del recorrido y cortes en los avituallamientos a partir de un ritmo mínimo asumido, y los relojes GPS y las pulseras de ritmo (bandas con el parcial objetivo impreso en cada milla o kilómetro) se elaboran directamente a partir de un único ritmo objetivo aplicado a toda la distancia de carrera."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Cuál es la diferencia entre ritmo y velocidad?",
+              "answer": "Son la misma tasa de movimiento subyacente expresada en unidades inversas. El ritmo es tiempo por unidad de distancia (minutos por kilómetro o milla) — cuanto menor, más rápido. La velocidad es distancia por unidad de tiempo (kilómetros o millas por hora) — cuanto mayor, más rápido. Convertir entre ambos es una división en cualquier dirección: velocidad = 60 ÷ ritmo-en-minutos-por-unidad, y ritmo = 60 ÷ velocidad-en-unidades-por-hora."
+            },
+            {
+              "question": "¿Por qué cambia ligeramente mi ritmo al pasar de km a millas?",
+              "answer": "No cambia tu velocidad real al correr — una milla (1,609344 km) es más larga que un kilómetro, así que la misma velocidad corresponde a más minutos por milla que por kilómetro. Un ritmo de 5:00/km y uno de 8:03/mi describen exactamente la misma velocidad, solo medida frente a una unidad de distancia distinta."
+            },
+            {
+              "question": "¿Cuán precisa es la predicción de Tiempo de Meta?",
+              "answer": "La fórmula de Riegel es un ajuste estadístico bien establecido a partir de muchos atletas y distancias, no una garantía para una carrera individual concreta. Suele ser más precisa cuando la distancia conocida y la objetivo son razonablemente cercanas y ambos esfuerzos se realizan en condiciones similares (terreno, clima, estado de forma) — sobreestimará sistemáticamente lo rápido que puedes correr una distancia mucho mayor si no has entrenado específicamente esa resistencia."
+            },
+            {
+              "question": "¿Qué debo introducir como puntos de control en el modo Multipunto?",
+              "answer": "Distancia acumulada y tiempo transcurrido medidos desde el inicio mismo de tu carrera — los mismos números que muestran las alertas automáticas de vuelta por milla o kilómetro de un reloj GPS, no la distancia o el tiempo de cada tramo por separado. La herramienta resta cada fila de la anterior para calcular el ritmo de ese tramo."
+            },
+            {
+              "question": "¿Por qué el ritmo del récord mundial de maratón es tan lento comparado con el de los 100 m?",
+              "answer": "El esprint y la carrera de resistencia recurren a sistemas fisiológicos distintos. Un esprint de 100 m se corre casi por completo con ATP y fosfocreatina almacenados, a un ritmo que ningún corredor podría mantener más de unos segundos, mientras que una maratón se pacea contra el ritmo mucho más lento al que el cuerpo puede suministrar oxígeno y combustible a los músculos de forma continua durante dos horas — exactamente el efecto de fatiga que modela el exponente de Riegel descrito arriba."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de la Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "El ritmo como concepto es tan antiguo como las carreras medidas: los antiguos estadios griegos ya cronometraban carreras sobre una distancia fija y estandarizada. Lo más reciente es la matemática para comparar el rendimiento entre distintas distancias. El ingeniero de investigación y maratonista estadounidense Peter Riegel observó que los tiempos récord mundiales en carrera a pie, marcha y natación, representados frente a su distancia en escala logarítmica, se ajustaban a una única curva en lugar de a una línea recta — lo que significa que el ritmo de récord se ralentiza en un factor predecible y casi constante a medida que aumenta la distancia, independientemente del deporte. Publicó por primera vez la ecuación tiempo-distancia resultante en la revista Runner's World en 1977, y la formalizó académicamente en 1981 en \"Athletic Records and Human Endurance\", American Scientist, 69(3), 285-290, dando por primera vez a atletas de resistencia y entrenadores una forma matemática de comparar el rendimiento en 10K de un corredor con su potencial en maratón."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos Modernos",
+            "paragraph": "Los relojes GPS de consumo (Garmin, Coros, Polar y dispositivos similares) calculan hoy el ritmo en vivo cada segundo a partir del posicionamiento por satélite o de un acelerómetro en la muñeca, y varias plataformas de running y ciclismo integran predictores de tiempo de carrera directamente en sus aplicaciones, con una fórmula funcionalmente equivalente a la de Riegel. En el ámbito de los récords oficiales, los recorridos se certifican frente a un estándar de calibración físico y trazable: una bicicleta equipada con un Jones Counter recorre el trazado exacto al menos dos veces, según el estándar de medición mantenido conjuntamente por World Athletics y la Association of International Marathons and Distance Races (AIMS) — el mismo proceso de certificación que respalda cada récord de recorrido de maratón citado en la tabla anterior."
+          },
+          "academicPath": {
+            "title": "Ruta Académica",
+            "intro": "El pacing, la fisiología de la resistencia y el rendimiento deportivo se estudian dentro de las ciencias del ejercicio, las ciencias del deporte y el campo más amplio de las disciplinas relacionadas con el deporte. Estas universidades aparecen sistemáticamente entre las mejor clasificadas del mundo en esta materia.",
+            "universities": [
+              {
+                "name": "Loughborough University, United Kingdom",
+                "note": "Clasificada #1 del mundo en Disciplinas relacionadas con el Deporte según el QS World University Rankings by Subject 2026, por décimo año consecutivo.",
+                "online": "Los programas de grado en Ciencias del Deporte, el Ejercicio y la Salud son solo presenciales.",
+                "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/"
+              },
+              {
+                "name": "The University of Queensland, Australia",
+                "note": "Clasificada #2 del mundo en Disciplinas relacionadas con el Deporte según el QS World University Rankings by Subject 2026.",
+                "online": "Los programas de grado en Movimiento Humano y Ciencias de la Nutrición son solo presenciales.",
+                "url": "https://hmns.uq.edu.au/"
+              },
+              {
+                "name": "The University of Sydney, Australia",
+                "note": "Clasificada #3 del mundo en Disciplinas relacionadas con el Deporte según el QS World University Rankings by Subject 2026.",
+                "online": "Los programas de grado en Ciencias del Ejercicio y el Deporte son solo presenciales.",
+                "url": "https://www.sydney.edu.au/medicine-health/study-medicine-and-health/study-areas/health-sciences/exercise-and-sport-science.html"
+              },
+              {
+                "name": "University of British Columbia, Canada",
+                "note": "Clasificada #4 del mundo en Disciplinas relacionadas con el Deporte según el QS World University Rankings by Subject 2026.",
+                "online": "Los programas de grado en Kinesiología son solo presenciales.",
+                "url": "https://kin.educ.ubc.ca/"
+              },
+              {
+                "name": "Norwegian School of Sport Sciences, Norway",
+                "note": "Clasificada #5 del mundo en Disciplinas relacionadas con el Deporte según el QS World University Rankings by Subject 2026.",
+                "online": "La mayoría de los programas de grado son solo presenciales; la escuela ofrece por separado algunos programas cortos, de un año o menos, impartidos en inglés.",
+                "url": "https://www.nih.no/english/"
+              },
+              {
+                "name": "King Saud University, Saudi Arabia",
+                "note": "Cuenta con un programa dedicado de Ciencias del Deporte dentro de su Facultad de Ciencias del Deporte, el programa de referencia de este tipo en la región árabe.",
+                "online": "Los programas de grado en Ciencias del Deporte son solo presenciales.",
+                "url": "https://ssa.ksu.edu.sa/en"
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Riegel, P. S. (1981). Athletic Records and Human Endurance. American Scientist, 69(3), 285-290.",
+          "note": "El artículo detrás de la fórmula de Riegel del modo Tiempo de Meta (T₂ = T₁ × (D₂ ÷ D₁)^1,06), obtenida al ajustar marcas de récord mundial en carrera a pie, marcha y natación a una única curva tiempo-distancia.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
+          "readOriginal": "Leer el Artículo Original"
+        }
+      }
     }
   },
   "toolPage": {
