@@ -13918,6 +13918,14 @@
         "quickReference": {
           "title": "Unterstützte Ausdruckssyntax",
           "intro": "Geben Sie eine beliebige einvariable Funktion von x mit den üblichen Operatoren und Funktionen ein — einige Beispiele:"
+        },
+        "conceptDiagram": {
+          "title": "Was die Orientierungspunkte eines Graphen bedeuten",
+          "intro": "Drei Dinge, nach denen die meisten Menschen in einem Graphen tatsächlich suchen: wo er jede Achse kreuzt und wie schnell er zwischen zwei Punkten steigt.",
+          "ariaLabel": "Diagramm einer Linie auf x-y-Achsen mit Beschriftung ihres y-Achsenabschnitts, ihres x-Achsenabschnitts und eines Steigungsdreiecks, das den Anstieg über die Laufweite zwischen zwei Punkten zeigt",
+          "yInterceptLabel": "y-Achsenabschnitt — bei x = 0",
+          "xInterceptLabel": "x-Achsenabschnitt — bei y = 0",
+          "slopeLabel": "Steigung = Δy / Δx"
         }
       },
       "form": {
@@ -13926,19 +13934,51 @@
         "expressionPlaceholder": "z. B. x^2 - 3*x + 1",
         "expressionHint": "Verwenden Sie + − * / ^ als Operatoren sowie sin, cos, tan, sqrt, abs, ln, log, exp, pi, e als Funktionen und Konstanten.",
         "xMinLabel": "Minimum x",
-        "xMaxLabel": "Maximum x"
+        "xMaxLabel": "Maximum x",
+        "preset": {
+          "parabola": "Parabel",
+          "sine": "Sinuswelle",
+          "sqrt": "Quadratwurzel",
+          "reciprocal": "Kehrwert"
+        }
       },
       "result": {
         "heading": "Graph",
         "invalidExpression": "Das sieht nicht nach einem gültigen Ausdruck aus — prüfen Sie auf einen Tippfehler, eine nicht geschlossene Klammer oder einen unbekannten Funktionsnamen.",
         "invalidRange": "Geben Sie einen maximalen x-Wert ein, der größer als das Minimum ist.",
-        "noValidPoints": "Kein Punkt in diesem Bereich ergab ein reelles Ergebnis — versuchen Sie, den Bereich zu erweitern, oder prüfen Sie den Ausdruck auf Werte (wie eine negative Quadratwurzel), die hier nicht definiert sind."
+        "noValidPoints": "Kein Punkt in diesem Bereich ergab ein reelles Ergebnis — versuchen Sie, den Bereich zu erweitern, oder prüfen Sie den Ausdruck auf Werte (wie eine negative Quadratwurzel), die hier nicht definiert sind.",
+        "yRangeLabel": "y-Bereich im Blickfeld",
+        "gapsLabel": "übersprungene undefinierte Punkte",
+        "tableOfValues": "Wertetabelle",
+        "undefined": "undefiniert"
       },
       "education": {
         "intro": {
           "title": "Funktionsgraphen verstehen",
           "paragraph1": "Ein Graph verwandelt eine abstrakte Regel — berechne für jedes x dieses y — in eine sichtbare Form: eine Linie, eine Kurve, eine Welle. Diese Form zeigt oft auf einen Blick, was eine Zahlentabelle verbirgt, etwa wo eine Funktion null kreuzt, wo sie steigt oder fällt, oder wo sie ein Maximum, ein Minimum oder eine Lücke hat.",
           "paragraph2": "Dieses Tool arbeitet durch Abtastung: Es berechnet Ihren Ausdruck an 300 gleichmäßig verteilten x-Werten innerhalb des gewählten Bereichs und verbindet die resultierenden Punkte mit geraden Liniensegmenten. Jeder x-Wert, an dem der Ausdruck undefiniert ist — etwa 1/x bei x = 0 oder sqrt(x) für ein negatives x — wird einfach übersprungen, weshalb ein Graph statt einer durchgehenden Linie eine sichtbare Lücke oder Unterbrechung zeigen kann."
+        },
+        "variables": {
+          "title": "Beteiligte Variablen",
+          "intro": "Eine Handvoll Konzepte beschreibt jeden Graphen, unabhängig davon, welche Funktion ihn erzeugt hat.",
+          "items": [
+            {
+              "name": "Unabhängige Variable (x)",
+              "description": "Der Eingabewert, den Sie frei wählen — dieses Tool tastet ihn an 300 gleichmäßig verteilten Werten zwischen Ihrem gewählten Minimum und Maximum ab."
+            },
+            {
+              "name": "Abhängige Variable (y)",
+              "description": "Der aus x durch Ihren Ausdruck berechnete Ausgabewert — auf der vertikalen Achse aufgetragen, ein Wert für jedes abgetastete x."
+            },
+            {
+              "name": "Definitionsbereich",
+              "description": "Die Menge der x-Werte, für die der Ausdruck tatsächlich definiert ist — eine Lücke im Graphen markiert einen x-Wert außerhalb des Definitionsbereichs, wie x = 0 bei 1/x."
+            },
+            {
+              "name": "Achsenabschnitte",
+              "description": "Die bestimmten Punkte, an denen ein Graph die x-Achse (y = 0) oder die y-Achse (x = 0) kreuzt — oft die ersten Orientierungspunkte, die es sich lohnt, an einem Graphen abzulesen."
+            }
+          ]
         },
         "examples": {
           "title": "Berechnete Beispiele",
@@ -13961,6 +14001,28 @@
             {
               "calculation": "sqrt(x)",
               "result": "Kurve nur für x ≥ 0 definiert"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Graphen in der Praxis",
+          "intro": "Eine Gleichung in eine sichtbare Form zu verwandeln, ist weit über den Mathematikunterricht hinaus nützlich.",
+          "items": [
+            {
+              "title": "Physik und Ingenieurwesen",
+              "description": "Position, Geschwindigkeit und Spannung über die Zeit werden alle grafisch dargestellt, um Muster zu erkennen — ein Höhepunkt, eine gleichbleibende Rate, eine Schwingung —, die aus einer Tabelle roher Zahlen allein schwer zu erkennen sind."
+            },
+            {
+              "title": "Wirtschaft und Finanzen",
+              "description": "Angebots- und Nachfragekurven oder das Wachstum einer Investition über die Zeit werden grafisch dargestellt, um zu finden, wo sich zwei Funktionen schneiden (ein Gleichgewichtspreis) oder wie sich eine Rate visuell verzinst."
+            },
+            {
+              "title": "Data Science und Statistik",
+              "description": "Eine Kurve an reale Daten anzupassen und beide gemeinsam zu zeichnen, ist eine gängige Methode, um mit bloßem Auge zu prüfen, ob ein Modell das Muster in den Daten tatsächlich erfasst oder verfehlt."
+            },
+            {
+              "title": "Computergrafik",
+              "description": "Kurven und Flächen in Animation, Spielen und CAD-Software basieren auf derselben zugrunde liegenden Idee — eine mathematische Funktion an vielen Punkten abzutasten und sie zu verbinden —, die dieses Tool zum Zeichnen einer 2D-Linie verwendet."
             }
           ]
         },
@@ -13990,6 +14052,10 @@
           "history": {
             "title": "Der erste Taschenrechner, auf dem man eine Kurve sehen konnte",
             "paragraph": "Casio brachte im Oktober 1985 den fx-7000G auf den Markt — den weltweit ersten für die Öffentlichkeit verkauften grafikfähigen Taschenrechner. Er vereinte 82 wissenschaftliche Funktionen in einem Gerät, das sie auch als Liniengraph oder Balkendiagramm direkt auf seinem kleinen LCD-Display darstellen konnte, sodass Schüler eine Parabel oder eine Sinuswelle sehen konnten, statt nur einzelne Punkte darauf zu berechnen. Texas Instruments folgte einige Jahre später mit dem TI-81 im Jahr 1990, der für das folgende Jahrzehnt zu einem festen Bestandteil amerikanischer Algebra- und Vorkalkulus-Klassenzimmer wurde. Die zentrale Idee, die beide Geräte einführten — eine Funktion an vielen Punkten abzutasten und das Ergebnis als Kurve zu zeichnen — ist genau das, was dieses browserbasierte Tool noch heute tut, nur ohne dedizierte Hardware."
+          },
+          "modernDevelopments": {
+            "title": "Von dedizierter Hardware zum Browser",
+            "paragraph": "Eigenständige grafikfähige Taschenrechner gehören in vielen Klassenzimmern noch immer zur Standardausrüstung, doch dieselbe Technik des Abtastens und Zeichnens läuft inzwischen nativ im Webbrowser — in Tools wie diesem — und in vollwertigen Computer-Algebra-Systemen (Desmos, GeoGebra, Wolfram Alpha), die den zugrunde liegenden Ausdruck zusätzlich symbolisch lösen, ableiten und umformen können, statt ihn nur zu zeichnen. Die grundlegende visuelle Kompetenz, die der fx-7000G den Schülern erstmals in die Hand gab — die Form einer Kurve zu lesen, um das Verhalten einer Funktion zu verstehen —, ist genau dieselbe Fähigkeit, um die diese neueren Tools herum gebaut sind."
           },
           "academicPath": {
             "title": "Akademischer Weg",
@@ -14033,6 +14099,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Descartes, R. (1637). La Géométrie (appendix to Discours de la méthode). Leiden: Jan Maire.",
+          "note": "Das Werk, das die kartesischen Koordinaten einführte und Algebra und Geometrie vereinte, indem es eine Gleichung eine Kurve in der Ebene definieren ließ — dasselbe Koordinatensystem, auf dem dieser Rechner Funktionen fast vier Jahrhunderte später noch immer zeichnet.",
+          "url": "https://archive.org/details/bub_gb_LZQPAAAAQAAJ",
+          "readOriginal": "La Géométrie lesen"
         }
       }
     },

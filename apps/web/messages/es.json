@@ -13918,6 +13918,14 @@
         "quickReference": {
           "title": "Sintaxis de expresión admitida",
           "intro": "Escribe cualquier función de una variable x usando operadores y funciones estándar — algunos ejemplos:"
+        },
+        "conceptDiagram": {
+          "title": "Qué significan los puntos de referencia de una gráfica",
+          "intro": "Tres cosas que la mayoría busca en una gráfica: dónde cruza cada eje y con qué rapidez sube entre dos puntos.",
+          "ariaLabel": "Diagrama de una línea sobre los ejes x-y con su intersección con el eje y, su intersección con el eje x, y un triángulo de pendiente que muestra el cambio vertical sobre el horizontal entre dos puntos",
+          "yInterceptLabel": "Intersección con el eje y — donde x = 0",
+          "xInterceptLabel": "Intersección con el eje x — donde y = 0",
+          "slopeLabel": "pendiente = Δy / Δx"
         }
       },
       "form": {
@@ -13926,19 +13934,73 @@
         "expressionPlaceholder": "p. ej. x^2 - 3*x + 1",
         "expressionHint": "Usa + − * / ^ como operadores, y sin, cos, tan, sqrt, abs, ln, log, exp, pi, e como funciones y constantes.",
         "xMinLabel": "x mínimo",
-        "xMaxLabel": "x máximo"
+        "xMaxLabel": "x máximo",
+        "preset": {
+          "parabola": "Parábola",
+          "sine": "Onda senoidal",
+          "sqrt": "Raíz cuadrada",
+          "reciprocal": "Recíproca"
+        }
       },
       "result": {
         "heading": "Gráfica",
         "invalidExpression": "Esto no parece una expresión válida — revisa si hay un error tipográfico, un paréntesis sin cerrar o un nombre de función desconocido.",
         "invalidRange": "Introduce un valor máximo de x mayor que el mínimo.",
-        "noValidPoints": "Ningún punto de este rango produjo un resultado real — prueba a ampliar el rango o revisa la expresión en busca de valores (como una raíz cuadrada negativa) que no están definidos aquí."
+        "noValidPoints": "Ningún punto de este rango produjo un resultado real — prueba a ampliar el rango o revisa la expresión en busca de valores (como una raíz cuadrada negativa) que no están definidos aquí.",
+        "yRangeLabel": "Rango de y visible",
+        "gapsLabel": "puntos no definidos omitidos",
+        "tableOfValues": "Tabla de valores",
+        "undefined": "no definido"
       },
       "education": {
         "intro": {
           "title": "Entender la representación gráfica de funciones",
           "paragraph1": "Una gráfica convierte una regla abstracta — para cada x, calcula este y — en una forma que puedes ver: una línea, una curva, una onda. Esa forma suele revelar cosas que una tabla de números oculta a simple vista, como dónde la función cruza el cero, dónde crece o decrece, o dónde tiene un pico, un valle o un hueco.",
           "paragraph2": "Esta herramienta funciona por muestreo: evalúa tu expresión en 300 valores de x distribuidos uniformemente en el rango que elijas, y luego conecta los puntos resultantes con segmentos de línea recta. Cualquier valor de x en el que la expresión no esté definida — como 1/x en x = 0, o sqrt(x) para un x negativo — simplemente se omite, por lo que una gráfica puede mostrar un hueco o una interrupción visible en lugar de una línea continua."
+        },
+        "variables": {
+          "title": "Variables involucradas",
+          "intro": "Un puñado de conceptos describe cualquier gráfica, sin importar qué función la haya producido.",
+          "items": [
+            {
+              "name": "Variable independiente (x)",
+              "description": "El valor de entrada que eliges libremente — esta herramienta lo muestrea en 300 valores distribuidos uniformemente entre el mínimo y el máximo elegidos."
+            },
+            {
+              "name": "Variable dependiente (y)",
+              "description": "El resultado que tu expresión calcula a partir de x — se representa en el eje vertical, un valor por cada x muestreado."
+            },
+            {
+              "name": "Dominio",
+              "description": "El conjunto de valores de x para los que la expresión está realmente definida — un hueco en la gráfica marca un valor de x fuera del dominio, como x = 0 para 1/x."
+            },
+            {
+              "name": "Intersecciones",
+              "description": "Los puntos concretos donde una gráfica cruza el eje x (y = 0) o el eje y (x = 0) — a menudo las primeras referencias que vale la pena leer en una gráfica."
+            }
+          ]
+        },
+        "applications": {
+          "title": "La representación gráfica en la práctica",
+          "intro": "Convertir una ecuación en una forma visible es útil mucho más allá de una clase de matemáticas.",
+          "items": [
+            {
+              "title": "Física e ingeniería",
+              "description": "La posición, la velocidad y el voltaje a lo largo del tiempo se representan gráficamente para detectar patrones — un pico, una tasa constante, una oscilación — que son difíciles de ver solo con una tabla de números en bruto."
+            },
+            {
+              "title": "Economía y finanzas",
+              "description": "Las curvas de oferta y demanda, o el crecimiento de una inversión con el tiempo, se representan gráficamente para encontrar dónde se cruzan dos funciones (un precio de equilibrio) o cómo se compone una tasa de forma visual."
+            },
+            {
+              "title": "Ciencia de datos y estadística",
+              "description": "Ajustar una curva a datos reales y representar ambas cosas juntas es una forma estándar de comprobar, a simple vista, si un modelo realmente capta el patrón de los datos o si lo pasa por alto."
+            },
+            {
+              "title": "Gráficos por computadora",
+              "description": "Las curvas y superficies de la animación, los videojuegos y el software CAD se construyen a partir de la misma idea subyacente — muestrear una función matemática en muchos puntos y conectarlos — que esta herramienta usa para dibujar una línea en 2D."
+            }
+          ]
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -13991,6 +14053,10 @@
             "title": "La primera calculadora en la que se podía ver una curva",
             "paragraph": "Casio lanzó la fx-7000G en octubre de 1985: la primera calculadora gráfica de bolsillo del mundo vendida al público. Reunía 82 funciones científicas en un dispositivo que también podía representarlas como una gráfica de líneas o un diagrama de barras directamente en su pequeña pantalla LCD, permitiendo a un estudiante ver una parábola o una onda senoidal en lugar de calcular solo puntos aislados de ella. Texas Instruments la siguió unos años después con la TI-81 en 1990, que se convirtió en un elemento habitual de las aulas estadounidenses de álgebra y precálculo durante la década siguiente. La idea central que introdujeron ambas máquinas — muestrear una función en muchos puntos y dibujar el resultado como una curva — es exactamente lo que esta herramienta basada en el navegador sigue haciendo, solo que sin hardware dedicado."
           },
+          "modernDevelopments": {
+            "title": "Del hardware dedicado al navegador",
+            "paragraph": "Las calculadoras gráficas independientes siguen siendo equipo estándar en muchas aulas, pero la misma técnica de muestreo y trazado ahora funciona de forma nativa en un navegador web, en herramientas como esta, y en sistemas completos de álgebra computacional (Desmos, GeoGebra, Wolfram Alpha) que también pueden resolver, derivar y manipular la expresión subyacente de forma simbólica, en lugar de solo representarla gráficamente. La alfabetización visual central que la fx-7000G puso por primera vez en manos de los estudiantes — leer la forma de una curva para entender el comportamiento de una función — sigue siendo exactamente la misma habilidad en la que se basan estas herramientas más nuevas."
+          },
           "academicPath": {
             "title": "Trayectoria académica",
             "intro": "Las funciones, las curvas y sus gráficas son temas centrales de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, además de un departamento regional:",
@@ -14033,6 +14099,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Descartes, R. (1637). La Géométrie (appendix to Discours de la méthode). Leiden: Jan Maire.",
+          "note": "La obra que introdujo las coordenadas cartesianas, unificando el álgebra y la geometría al permitir que una ecuación defina una curva en un plano — el mismo sistema de coordenadas en el que esta calculadora sigue representando funciones casi cuatro siglos después.",
+          "url": "https://archive.org/details/bub_gb_LZQPAAAAQAAJ",
+          "readOriginal": "Leer La Géométrie"
         }
       }
     },

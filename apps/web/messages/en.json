@@ -13914,6 +13914,14 @@
         "quickReference": {
           "title": "Supported Expression Syntax",
           "intro": "Type any single-variable function of x using standard operators and functions — a few examples:"
+        },
+        "conceptDiagram": {
+          "title": "What a Graph's Landmarks Mean",
+          "intro": "Three things most people actually look for on a graph: where it crosses each axis, and how fast it's rising between two points.",
+          "ariaLabel": "Diagram of a line on x-y axes labeled with its y-intercept, its x-intercept, and a slope triangle showing rise over run between two points",
+          "yInterceptLabel": "y-intercept — where x = 0",
+          "xInterceptLabel": "x-intercept — where y = 0",
+          "slopeLabel": "slope = Δy / Δx"
         }
       },
       "form": {
@@ -13922,19 +13930,73 @@
         "expressionPlaceholder": "e.g. x^2 - 3*x + 1",
         "expressionHint": "Use + − * / ^ for operators, and sin, cos, tan, sqrt, abs, ln, log, exp, pi, e for functions and constants.",
         "xMinLabel": "Minimum x",
-        "xMaxLabel": "Maximum x"
+        "xMaxLabel": "Maximum x",
+        "preset": {
+          "parabola": "Parabola",
+          "sine": "Sine wave",
+          "sqrt": "Square root",
+          "reciprocal": "Reciprocal"
+        }
       },
       "result": {
         "heading": "Graph",
         "invalidExpression": "This doesn't look like a valid expression — check for a typo, an unmatched parenthesis, or an unrecognized function name.",
         "invalidRange": "Enter a maximum x-value that's greater than the minimum.",
-        "noValidPoints": "No point in this range produced a real result — try widening the range, or check the expression for values (like a negative square root) that aren't defined here."
+        "noValidPoints": "No point in this range produced a real result — try widening the range, or check the expression for values (like a negative square root) that aren't defined here.",
+        "yRangeLabel": "y-range in view",
+        "gapsLabel": "undefined points skipped",
+        "tableOfValues": "Table of Values",
+        "undefined": "undefined"
       },
       "education": {
         "intro": {
           "title": "Understanding Function Graphing",
           "paragraph1": "A graph turns an abstract rule — for every x, compute this y — into a shape you can see: a line, a curve, a wave. That shape often reveals things a table of numbers hides at a glance, like where a function crosses zero, where it's increasing or decreasing, or where it has a peak, a dip, or a gap.",
           "paragraph2": "This tool works by sampling: it evaluates your expression at 300 evenly spaced x-values across the range you choose, then connects the resulting points with straight line segments. Any x-value where the expression is undefined — such as 1/x at x = 0, or sqrt(x) for a negative x — is simply skipped, which is why a graph can show a visible break or gap instead of a continuous line."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "A handful of concepts describe any graph, regardless of which function produced it.",
+          "items": [
+            {
+              "name": "Independent Variable (x)",
+              "description": "The input you choose freely — this tool samples it at 300 evenly spaced values across your chosen minimum and maximum."
+            },
+            {
+              "name": "Dependent Variable (y)",
+              "description": "The output computed from x by your expression — plotted on the vertical axis, one value for each x sampled."
+            },
+            {
+              "name": "Domain",
+              "description": "The set of x-values for which the expression is actually defined — a gap in the graph marks an x-value outside the domain, like x = 0 for 1/x."
+            },
+            {
+              "name": "Intercepts",
+              "description": "The specific points where a graph crosses the x-axis (y = 0) or the y-axis (x = 0) — often the first landmarks worth reading off a graph."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Graphing in Practice",
+          "intro": "Turning an equation into a visible shape is useful well beyond a math classroom.",
+          "items": [
+            {
+              "title": "Physics and Engineering",
+              "description": "Position, velocity, and voltage over time are all graphed to spot patterns — a peak, a steady rate, an oscillation — that are hard to see from a table of raw numbers alone."
+            },
+            {
+              "title": "Economics and Finance",
+              "description": "Supply and demand curves, or an investment's growth over time, are graphed to find where two functions intersect (an equilibrium price) or how a rate compounds visually."
+            },
+            {
+              "title": "Data Science and Statistics",
+              "description": "Fitting a curve to real data and graphing both together is a standard way to check, by eye, whether a model actually captures the pattern in the data or misses it."
+            },
+            {
+              "title": "Computer Graphics",
+              "description": "Curves and surfaces in animation, games, and CAD software are built from the same underlying idea — sampling a mathematical function at many points and connecting them — that this tool uses to draw a 2D line."
+            }
+          ]
         },
         "examples": {
           "title": "Worked Examples",
@@ -13987,6 +14049,10 @@
             "title": "The First Calculator You Could See a Curve On",
             "paragraph": "Casio released the fx-7000G in October 1985 — the world's first hand-held graphing calculator sold to the public. It packed 82 scientific functions into a device that could also plot them as a line graph or a bar chart directly on its small LCD screen, letting a student see a parabola or a sine wave instead of just computing isolated points on it. Texas Instruments followed a few years later with the TI-81 in 1990, which became a fixture of American algebra and precalculus classrooms for the next decade. The core idea both machines introduced — sampling a function at many points and drawing the result as a curve — is exactly what this browser-based tool still does, just without the dedicated hardware."
           },
+          "modernDevelopments": {
+            "title": "From Dedicated Hardware to the Browser",
+            "paragraph": "Standalone graphing calculators are still standard equipment in many classrooms, but the same sampling-and-plotting technique now runs natively in a web browser, in tools like this one, and in full computer algebra systems (Desmos, GeoGebra, Wolfram Alpha) that can also solve, differentiate, and manipulate the underlying expression symbolically rather than only plotting it. The core visual literacy the fx-7000G first put in students' hands — reading a curve's shape to understand a function's behavior — remains exactly the same skill these newer tools are built around."
+          },
           "academicPath": {
             "title": "Academic Path",
             "intro": "Functions, curves, and their graphs are core topics in mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
@@ -14029,6 +14095,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Descartes, R. (1637). La Géométrie (appendix to Discours de la méthode). Leiden: Jan Maire.",
+          "note": "The work that introduced Cartesian coordinates, unifying algebra and geometry by letting an equation define a curve on a plane — the same coordinate system this calculator still plots functions on nearly four centuries later.",
+          "url": "https://archive.org/details/bub_gb_LZQPAAAAQAAJ",
+          "readOriginal": "Read La Géométrie"
         }
       }
     },

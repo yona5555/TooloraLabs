@@ -13918,6 +13918,14 @@
         "quickReference": {
           "title": "Syntaxe d'expression prise en charge",
           "intro": "Saisissez n'importe quelle fonction à une variable x à l'aide des opérateurs et fonctions standards — quelques exemples :"
+        },
+        "conceptDiagram": {
+          "title": "Ce que signifient les repères d'un graphique",
+          "intro": "Trois éléments que l'on cherche généralement à lire sur un graphique : où il croise chaque axe, et à quelle vitesse il monte entre deux points.",
+          "ariaLabel": "Diagramme d'une droite sur des axes x-y, avec son ordonnée à l'origine, son abscisse à l'origine, et un triangle de pente montrant la variation verticale sur la variation horizontale entre deux points",
+          "yInterceptLabel": "ordonnée à l'origine — où x = 0",
+          "xInterceptLabel": "abscisse à l'origine — où y = 0",
+          "slopeLabel": "pente = Δy / Δx"
         }
       },
       "form": {
@@ -13926,19 +13934,51 @@
         "expressionPlaceholder": "ex. x^2 - 3*x + 1",
         "expressionHint": "Utilisez + − * / ^ comme opérateurs, et sin, cos, tan, sqrt, abs, ln, log, exp, pi, e comme fonctions et constantes.",
         "xMinLabel": "x minimum",
-        "xMaxLabel": "x maximum"
+        "xMaxLabel": "x maximum",
+        "preset": {
+          "parabola": "Parabole",
+          "sine": "Onde sinusoïdale",
+          "sqrt": "Racine carrée",
+          "reciprocal": "Fonction inverse"
+        }
       },
       "result": {
         "heading": "Graphique",
         "invalidExpression": "Cela ne ressemble pas à une expression valide — vérifiez une faute de frappe, une parenthèse non fermée ou un nom de fonction inconnu.",
         "invalidRange": "Saisissez une valeur maximale de x supérieure au minimum.",
-        "noValidPoints": "Aucun point de cette plage n'a produit de résultat réel — essayez d'élargir la plage, ou vérifiez si l'expression contient des valeurs (comme une racine carrée négative) qui ne sont pas définies ici."
+        "noValidPoints": "Aucun point de cette plage n'a produit de résultat réel — essayez d'élargir la plage, ou vérifiez si l'expression contient des valeurs (comme une racine carrée négative) qui ne sont pas définies ici.",
+        "yRangeLabel": "plage de y affichée",
+        "gapsLabel": "points non définis ignorés",
+        "tableOfValues": "Tableau de valeurs",
+        "undefined": "non défini"
       },
       "education": {
         "intro": {
           "title": "Comprendre le tracé de fonctions",
           "paragraph1": "Un graphique transforme une règle abstraite — pour chaque x, calcule ce y — en une forme visible : une droite, une courbe, une onde. Cette forme révèle souvent des choses qu'un tableau de nombres cache au premier coup d'œil, comme l'endroit où une fonction croise zéro, où elle croît ou décroît, ou où elle présente un pic, un creux ou un vide.",
           "paragraph2": "Cet outil fonctionne par échantillonnage : il évalue votre expression en 300 valeurs de x régulièrement espacées sur la plage choisie, puis relie les points obtenus par des segments de droite. Toute valeur de x pour laquelle l'expression n'est pas définie — comme 1/x en x = 0, ou sqrt(x) pour un x négatif — est simplement ignorée, ce qui explique pourquoi un graphique peut présenter une coupure ou un vide visible plutôt qu'une ligne continue."
+        },
+        "variables": {
+          "title": "Variables en jeu",
+          "intro": "Quelques notions suffisent à décrire n'importe quel graphique, quelle que soit la fonction qui l'a produit.",
+          "items": [
+            {
+              "name": "Variable indépendante (x)",
+              "description": "L'entrée que vous choisissez librement — cet outil l'échantillonne en 300 valeurs régulièrement espacées entre le minimum et le maximum choisis."
+            },
+            {
+              "name": "Variable dépendante (y)",
+              "description": "La sortie calculée à partir de x par votre expression — tracée sur l'axe vertical, une valeur pour chaque x échantillonné."
+            },
+            {
+              "name": "Domaine",
+              "description": "L'ensemble des valeurs de x pour lesquelles l'expression est réellement définie — un vide dans le graphique marque une valeur de x hors du domaine, comme x = 0 pour 1/x."
+            },
+            {
+              "name": "Points d'intersection avec les axes",
+              "description": "Les points précis où un graphique croise l'axe des x (y = 0) ou l'axe des y (x = 0) — souvent les premiers repères à lire sur un graphique."
+            }
+          ]
         },
         "examples": {
           "title": "Exemples résolus",
@@ -13961,6 +14001,28 @@
             {
               "calculation": "sqrt(x)",
               "result": "Courbe définie uniquement pour x ≥ 0"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Le tracé de graphiques en pratique",
+          "intro": "Transformer une équation en une forme visible est utile bien au-delà de la salle de classe.",
+          "items": [
+            {
+              "title": "Physique et ingénierie",
+              "description": "La position, la vitesse et la tension dans le temps sont toutes tracées pour repérer des motifs — un pic, un taux constant, une oscillation — difficiles à voir dans un simple tableau de chiffres bruts."
+            },
+            {
+              "title": "Économie et finance",
+              "description": "Les courbes d'offre et de demande, ou la croissance d'un investissement dans le temps, sont tracées pour trouver où deux fonctions se croisent (un prix d'équilibre) ou pour visualiser la façon dont un taux se compose."
+            },
+            {
+              "title": "Science des données et statistiques",
+              "description": "Ajuster une courbe à des données réelles et tracer les deux ensemble est une méthode courante pour vérifier, visuellement, si un modèle capture réellement le motif présent dans les données ou s'il le manque."
+            },
+            {
+              "title": "Infographie",
+              "description": "Les courbes et surfaces utilisées en animation, dans les jeux vidéo et les logiciels de CAO reposent sur la même idée sous-jacente — échantillonner une fonction mathématique en de nombreux points et les relier — que celle utilisée par cet outil pour tracer une ligne en 2D."
             }
           ]
         },
@@ -13990,6 +14052,10 @@
           "history": {
             "title": "La première calculatrice où l'on pouvait voir une courbe",
             "paragraph": "Casio a lancé la fx-7000G en octobre 1985 — la première calculatrice graphique de poche au monde vendue au grand public. Elle regroupait 82 fonctions scientifiques dans un appareil capable également de les tracer sous forme de graphique linéaire ou de diagramme à barres directement sur son petit écran LCD, permettant à un élève de voir une parabole ou une onde sinusoïdale plutôt que de simplement calculer des points isolés. Texas Instruments a suivi quelques années plus tard avec la TI-81 en 1990, qui est devenue un incontournable des salles de classe américaines d'algèbre et de précalcul pendant la décennie suivante. L'idée centrale introduite par ces deux machines — échantillonner une fonction en de nombreux points et tracer le résultat sous forme de courbe — est exactement ce que cet outil fonctionnant dans le navigateur continue de faire, simplement sans matériel dédié."
+          },
+          "modernDevelopments": {
+            "title": "Du matériel dédié au navigateur",
+            "paragraph": "Les calculatrices graphiques autonomes restent un équipement courant dans de nombreuses salles de classe, mais la même technique d'échantillonnage et de tracé fonctionne désormais nativement dans un navigateur web, dans des outils comme celui-ci, ainsi que dans des logiciels de calcul formel complets (Desmos, GeoGebra, Wolfram Alpha) capables aussi de résoudre, dériver et manipuler symboliquement l'expression sous-jacente plutôt que de simplement la tracer. La compétence visuelle fondamentale que la fx-7000G a d'abord mise entre les mains des élèves — lire la forme d'une courbe pour comprendre le comportement d'une fonction — reste exactement la même que celle sur laquelle reposent ces outils plus récents."
           },
           "academicPath": {
             "title": "Parcours académique",
@@ -14033,6 +14099,13 @@
               }
             ]
           }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Descartes, R. (1637). La Géométrie (appendice au Discours de la méthode). Leyde : Jan Maire.",
+          "note": "L'ouvrage qui a introduit les coordonnées cartésiennes, unifiant l'algèbre et la géométrie en permettant à une équation de définir une courbe sur un plan — le même système de coordonnées sur lequel cette calculatrice trace encore des fonctions près de quatre siècles plus tard.",
+          "url": "https://archive.org/details/bub_gb_LZQPAAAAQAAJ",
+          "readOriginal": "Lire La Géométrie"
         }
       }
     },
