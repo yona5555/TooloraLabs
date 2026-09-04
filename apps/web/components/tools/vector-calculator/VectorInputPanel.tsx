@@ -1,6 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
+import type { FormEvent } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 
 type VectorInputPanelProps = {
@@ -16,6 +18,8 @@ type VectorInputPanelProps = {
   onByChange: (value: string) => void;
   bz: string;
   onBzChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function VectorInputPanel({
@@ -31,12 +35,14 @@ export default function VectorInputPanel({
   onByChange,
   bz,
   onBzChange,
+  onCalculate,
+  onClear,
 }: VectorInputPanelProps) {
   const t = useTranslations("tools.vector-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
         <div>
           <p className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("vectorALabel")}</p>
           <div className="grid grid-cols-3 gap-3">
@@ -54,7 +60,18 @@ export default function VectorInputPanel({
           </div>
         </div>
         <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("zHint")}</p>
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

@@ -7821,6 +7821,10 @@
             "angle": {
               "label": "Angle Between",
               "expression": "θ = cos⁻¹(A·B / (|A||B|))"
+            },
+            "projection": {
+              "label": "Projection of A onto B",
+              "expression": "projᴮA = (A·B / |B|²) B"
             }
           }
         }
@@ -7829,7 +7833,9 @@
         "inputTitle": "Vector Components",
         "vectorALabel": "Vector A",
         "vectorBLabel": "Vector B",
-        "zHint": "Leave z at 0 for a 2D vector, or set it to work in 3D."
+        "zHint": "Leave z at 0 for a 2D vector, or set it to work in 3D.",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Result",
@@ -7847,7 +7853,12 @@
         "diagramA": "A",
         "diagramB": "B",
         "diagramSum": "A+B",
-        "diagramCaption": "2D projection (x, y only) of vectors A and B and their sum, drawn to scale from the entered components."
+        "diagramCaption": "2D projection (x, y only) of vectors A and B and their sum, drawn to scale from the entered components.",
+        "projectionAOntoB": "Projection of A onto B",
+        "emptyStateMessage": "Enter both vectors and press Calculate to see the full set of results.",
+        "angleDiagramTitle": "Angle Between the Vectors",
+        "angleDiagramIntro": "The same angle the dot-product formula solves for, traced as an arc between A and B.",
+        "angleDiagramCaption": "2D projection (x, y only) of vectors A and B with the angle between them traced as an arc."
       },
       "education": {
         "intro": {
@@ -7902,6 +7913,14 @@
             {
               "question": "What's a unit vector actually used for?",
               "answer": "A unit vector isolates pure direction from magnitude, which is useful whenever a formula needs to know \"which way\" without caring about length — for example, expressing a force's direction separately from its strength, or building a direction ray in computer graphics that later gets scaled by a separate distance or speed value."
+            },
+            {
+              "question": "What does the projection of A onto B actually represent?",
+              "answer": "It's the component of A that points along B's direction — geometrically, the shadow A would cast on B's line under light falling perpendicular to B. It shows up naturally in physics (the work done by a force is the dot product of force and displacement, which is really the projected force times distance) and in graphics (decomposing a vector into a direction-aligned part and a perpendicular part)."
+            },
+            {
+              "question": "Why is the projection of A onto B undefined when B is a zero vector?",
+              "answer": "The projection formula, projᴮA = (A·B / |B|²) B, divides by |B|², and a zero vector has zero magnitude — there's no line for B to define, so nothing for A to project onto. The calculator flags this the same way it flags an undefined angle or unit vector."
             }
           ]
         },
@@ -7956,6 +7975,10 @@
                 "online": "No — the PhD requires 72 credits and an in-person qualifying exam on KAUST's campus."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "From Blackboard to GPU: Vectors in Modern Computing",
+            "paragraph": "The same component-wise operations Gibbs and Heaviside formalized in the 1880s are now executed billions of times per second inside graphics processing units (GPUs), which are architecturally built around parallel vector and matrix arithmetic — every 3D game, CAD model, and physics simulation rendered today ultimately reduces to dot products, cross products, and vector sums computed at massive scale. The same operations, generalized to higher dimensions, also underpin the vector embeddings used throughout modern machine learning, where the dot product (via cosine similarity) measures how alike two pieces of data are."
           }
         },
         "references": {
@@ -7964,7 +7987,83 @@
           "note": "Historian of mathematics Michael J. Crowe's book remains the standard scholarly account of how vector analysis emerged from the 1880s dispute between Gibbs, Heaviside, and defenders of Hamilton's quaternions.",
           "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
           "readOriginal": "Read More About This Book"
+        },
+        "variables": {
+          "title": "Understanding Each Operation",
+          "intro": "Four more vector relationships worth seeing on their own, each with its own picture rather than just a formula.",
+          "difference": {
+            "title": "Vector Difference (A − B)",
+            "description": "Subtracting B from A is the same as adding A to the reverse of B (−B), and geometrically it draws the vector that goes from B's tip to A's tip when both start at the same origin — it's the displacement needed to get from B to A. Like the sum, it's computed component by component: (ax − bx, ay − by, az − bz).",
+            "diagramCaption": "A, B, and their difference A − B, drawn to scale."
+          },
+          "crossProduct": {
+            "title": "Cross Product (A × B) in Three Dimensions",
+            "description": "Unlike every other operation on this page, the cross product only makes full sense in three dimensions: it produces a new vector that's perpendicular to the plane containing both A and B (its direction set by the right-hand rule), with a length equal to the area of the parallelogram A and B span. Flip the order — B×A instead of A×B — and the result points the opposite way.",
+            "diagramCaption": "An isometric (3D) view of A, B, the parallelogram they span, and their cross product A×B, perpendicular to that plane."
+          },
+          "unitVector": {
+            "title": "Unit Vector (Â)",
+            "description": "Dividing a vector by its own magnitude produces a unit vector — same direction, but rescaled so its length is exactly 1. It's the standard way to isolate \"which way\" from \"how far,\" and every unit vector's tip lands exactly on the unit circle (or unit sphere, in 3D) by definition.",
+            "diagramCaption": "Vector A alongside its unit vector Â, which lands exactly on the dashed unit circle."
+          },
+          "projection": {
+            "title": "Projection of A onto B",
+            "description": "The projection of A onto B is the \"shadow\" A would cast on B's line if light fell perpendicular to B — the part of A that actually points along B's direction. Its length (the scalar projection) is A·B / |B|, and the full vector projection scales B itself by that same fraction: projᴮA = (A·B / |B|²) B. It's the geometric heart of the dot product, and it's undefined whenever B is a zero vector, since a zero vector has no line to project onto.",
+            "diagramLabel": "projᴮA",
+            "diagramCaption": "A's shadow cast onto B's line — the vector projection of A onto B, with a dashed perpendicular connecting A's tip to the projection point."
+          }
+        },
+        "applications": {
+          "title": "Real-World Applications",
+          "intro": "Vector operations aren't just a classroom exercise — they're the working machinery behind several everyday and professional fields.",
+          "items": [
+            {
+              "title": "Physics: Combining Forces",
+              "description": "Whenever more than one force acts on an object — gravity, friction, an applied push — physicists find the net force by adding the individual force vectors component by component, exactly as this calculator's Sum operation does. The resulting vector's magnitude and direction determine the object's actual acceleration under Newton's second law."
+            },
+            {
+              "title": "Computer Graphics: Surface Normals and Lighting",
+              "description": "3D rendering engines use the cross product of two edges of a triangle to compute its surface normal — the perpendicular vector that determines which way a polygon faces, and therefore how brightly it should be lit given a light source's direction (found via the dot product between the normal and the direction to the light)."
+            },
+            {
+              "title": "Navigation and GPS: Bearing and Distance",
+              "description": "Displacement between two positions is a vector difference — the destination's coordinates minus the current position's — and its magnitude gives straight-line distance while its direction (converted to a compass bearing) tells a navigation system which way to point."
+            },
+            {
+              "title": "Robotics and Game Development: Steering and Aiming",
+              "description": "A character or robot that needs to face or move toward a target computes the unit vector pointing from its current position to the target, then scales that direction by whatever speed or torque the situation calls for — separating \"which way\" from \"how fast\" is exactly what a unit vector is for."
+            }
+          ],
+          "forceExample": {
+            "title": "Worked Example: Two Forces on One Object",
+            "description": "A 30 N force pulls east-northeast at (30, 40) N and a second 20 N force pulls east-southeast at (20, −10) N on the same object. Adding them component by component gives a resultant force of (50, 30) N — a single equivalent push whose magnitude (≈58.3 N) and direction determine the object's actual acceleration, exactly as the Sum operation above computes for any two vectors.",
+            "labelF1": "F₁",
+            "labelF2": "F₂",
+            "labelResultant": "Resultant",
+            "diagramCaption": "Two forces, F₁ and F₂, combined into a single resultant force by vector addition."
+          }
         }
+      },
+      "relatedTools": {
+        "title": "Related Math Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Prepared For (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. Jane Doe",
+        "contactEmailPlaceholder": "e.g. jane@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Financial",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       }
     },
     "matrix-calculator": {

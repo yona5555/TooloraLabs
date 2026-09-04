@@ -7825,6 +7825,10 @@
             "angle": {
               "label": "Winkel dazwischen",
               "expression": "θ = cos⁻¹(A·B / (|A||B|))"
+            },
+            "projection": {
+              "label": "Projektion von A auf B",
+              "expression": "projᴮA = (A·B / |B|²) B"
             }
           }
         }
@@ -7833,7 +7837,9 @@
         "inputTitle": "Vektorkomponenten",
         "vectorALabel": "Vektor A",
         "vectorBLabel": "Vektor B",
-        "zHint": "Lassen Sie z bei 0 für einen 2D-Vektor, oder setzen Sie einen Wert, um in 3D zu arbeiten."
+        "zHint": "Lassen Sie z bei 0 für einen 2D-Vektor, oder setzen Sie einen Wert, um in 3D zu arbeiten.",
+        "calculate": "Berechnen",
+        "clear": "Löschen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -7851,7 +7857,12 @@
         "diagramA": "A",
         "diagramB": "B",
         "diagramSum": "A+B",
-        "diagramCaption": "2D-Projektion (nur x, y) der Vektoren A und B sowie ihrer Summe, maßstabsgetreu aus den eingegebenen Komponenten gezeichnet."
+        "diagramCaption": "2D-Projektion (nur x, y) der Vektoren A und B sowie ihrer Summe, maßstabsgetreu aus den eingegebenen Komponenten gezeichnet.",
+        "projectionAOntoB": "Projektion von A auf B",
+        "emptyStateMessage": "Geben Sie beide Vektoren ein und klicken Sie auf „Berechnen“, um alle Ergebnisse zu sehen.",
+        "angleDiagramTitle": "Winkel zwischen den Vektoren",
+        "angleDiagramIntro": "Derselbe Winkel, den die Skalarprodukt-Formel berechnet, als Bogen zwischen A und B dargestellt.",
+        "angleDiagramCaption": "2D-Projektion (nur x, y) der Vektoren A und B mit dem Winkel zwischen ihnen als Bogen."
       },
       "education": {
         "intro": {
@@ -7906,6 +7917,14 @@
             {
               "question": "Wofür wird ein Einheitsvektor eigentlich verwendet?",
               "answer": "Ein Einheitsvektor isoliert die reine Richtung vom Betrag, was immer dann nützlich ist, wenn eine Formel wissen muss, „welche Richtung“, ohne sich um die Länge zu kümmern — etwa um die Richtung einer Kraft getrennt von ihrer Stärke auszudrücken, oder um in der Computergrafik einen Richtungsstrahl zu erzeugen, der später mit einem separaten Entfernungs- oder Geschwindigkeitswert skaliert wird."
+            },
+            {
+              "question": "Was bedeutet die Projektion von A auf B eigentlich?",
+              "answer": "Es ist der Teil von A, der entlang der Richtung von B zeigt — geometrisch der Schatten, den A auf die Linie von B werfen würde, wenn Licht senkrecht auf B fiele. Das taucht natürlich in der Physik auf (die von einer Kraft verrichtete Arbeit ist das Skalarprodukt aus Kraft und Verschiebung, also im Grunde die projizierte Kraft mal Distanz) und in der Grafik (Zerlegung eines Vektors in einen richtungsparallelen und einen senkrechten Teil)."
+            },
+            {
+              "question": "Warum ist die Projektion von A auf B undefiniert, wenn B ein Nullvektor ist?",
+              "answer": "Die Projektionsformel projᴮA = (A·B / |B|²) B teilt durch |B|², und ein Nullvektor hat den Betrag null — es gibt keine von B definierte Linie, auf die A projiziert werden könnte. Der Rechner meldet dies genauso wie einen undefinierten Winkel oder Einheitsvektor."
             }
           ]
         },
@@ -7960,6 +7979,10 @@
                 "online": "Nein — der PhD erfordert 72 Credits und eine Präsenz-Qualifikationsprüfung auf dem KAUST-Campus."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "Von der Tafel zur GPU: Vektoren in der modernen Datenverarbeitung",
+            "paragraph": "Dieselben komponentenweisen Operationen, die Gibbs und Heaviside in den 1880er-Jahren formalisierten, laufen heute milliardenfach pro Sekunde in Grafikprozessoren (GPUs) ab, die architektonisch auf paralleler Vektor- und Matrixarithmetik aufbauen — jedes heute gerenderte 3D-Spiel, CAD-Modell und jede Physiksimulation reduziert sich letztlich auf massenhaft berechnete Skalarprodukte, Kreuzprodukte und Vektorsummen. Dieselben, auf höhere Dimensionen verallgemeinerten Operationen liegen auch den Vektor-Embeddings zugrunde, die im modernen maschinellen Lernen verwendet werden, wo das Skalarprodukt (über die Kosinus-Ähnlichkeit) misst, wie ähnlich sich zwei Datenpunkte sind."
           }
         },
         "references": {
@@ -7968,7 +7991,83 @@
           "note": "Das Buch des Mathematikhistorikers Michael J. Crowe bleibt die maßgebliche wissenschaftliche Darstellung, wie die Vektoranalysis aus dem Streit der 1880er-Jahre zwischen Gibbs, Heaviside und den Verteidigern von Hamiltons Quaternionen hervorging.",
           "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
           "readOriginal": "Mehr über dieses Buch lesen"
+        },
+        "variables": {
+          "title": "Jede Operation im Detail",
+          "intro": "Vier weitere Vektorbeziehungen, die eine eigene Betrachtung verdienen — jede mit ihrer eigenen Abbildung statt nur einer Formel.",
+          "difference": {
+            "title": "Vektordifferenz (A − B)",
+            "description": "B von A zu subtrahieren ist dasselbe wie A zum umgekehrten B (−B) zu addieren, und geometrisch ergibt sich der Vektor von der Spitze von B zur Spitze von A, wenn beide vom selben Ursprung ausgehen — die Verschiebung, um von B nach A zu gelangen. Wie die Summe wird sie komponentenweise berechnet: (ax − bx, ay − by, az − bz).",
+            "diagramCaption": "A, B und ihre Differenz A − B, maßstabsgetreu dargestellt."
+          },
+          "crossProduct": {
+            "title": "Kreuzprodukt (A × B) im dreidimensionalen Raum",
+            "description": "Anders als jede andere Operation auf dieser Seite ergibt das Kreuzprodukt nur im dreidimensionalen Raum vollen Sinn: Es erzeugt einen neuen Vektor senkrecht zur Ebene, die A und B aufspannen (seine Richtung folgt der Rechte-Hand-Regel), mit einer Länge gleich der Fläche des von A und B aufgespannten Parallelogramms. Vertauscht man die Reihenfolge — B×A statt A×B — zeigt das Ergebnis in die entgegengesetzte Richtung.",
+            "diagramCaption": "Eine isometrische (3D-)Ansicht von A, B, dem von ihnen aufgespannten Parallelogramm und ihrem Kreuzprodukt A×B senkrecht zu dieser Ebene."
+          },
+          "unitVector": {
+            "title": "Einheitsvektor (Â)",
+            "description": "Teilt man einen Vektor durch seinen eigenen Betrag, erhält man einen Einheitsvektor — gleiche Richtung, aber auf eine Länge von genau 1 skaliert. So isoliert man standardmäßig „welche Richtung“ von „wie weit“, und die Spitze jedes Einheitsvektors liegt per Definition genau auf dem Einheitskreis (bzw. der Einheitskugel in 3D).",
+            "diagramCaption": "Vektor A neben seinem Einheitsvektor Â, der genau auf dem gestrichelten Einheitskreis liegt."
+          },
+          "projection": {
+            "title": "Projektion von A auf B",
+            "description": "Die Projektion von A auf B ist der „Schatten“, den A auf die Linie von B werfen würde, wenn das Licht senkrecht auf B fiele — der Teil von A, der tatsächlich entlang der Richtung von B zeigt. Ihre Länge (die Skalarprojektion) ist A·B / |B|, und die vollständige Vektorprojektion skaliert B selbst um denselben Faktor: projᴮA = (A·B / |B|²) B. Sie ist der geometrische Kern des Skalarprodukts und ist immer dann undefiniert, wenn B ein Nullvektor ist, da ein Nullvektor keine Linie definiert, auf die projiziert werden könnte.",
+            "diagramLabel": "projᴮA",
+            "diagramCaption": "Der Schatten von A auf die Linie von B — die Vektorprojektion von A auf B, mit einer gestrichelten Senkrechten von der Spitze von A zum Projektionspunkt."
+          }
+        },
+        "applications": {
+          "title": "Anwendungen aus der Praxis",
+          "intro": "Vektoroperationen sind keine reine Schulübung — sie sind der eigentliche Mechanismus hinter mehreren alltäglichen und beruflichen Bereichen.",
+          "items": [
+            {
+              "title": "Physik: Kräfte zusammensetzen",
+              "description": "Wirken mehrere Kräfte auf ein Objekt — Schwerkraft, Reibung, ein Anstoß —, ermitteln Physiker die resultierende Kraft, indem sie die einzelnen Kraftvektoren komponentenweise addieren, genau wie die Summenoperation dieser Rechners. Betrag und Richtung des resultierenden Vektors bestimmen nach Newtons zweitem Gesetz die tatsächliche Beschleunigung des Objekts."
+            },
+            {
+              "title": "Computergrafik: Flächennormalen und Beleuchtung",
+              "description": "3D-Rendering-Engines nutzen das Kreuzprodukt zweier Kanten eines Dreiecks, um dessen Flächennormale zu berechnen — den senkrechten Vektor, der bestimmt, in welche Richtung ein Polygon zeigt und damit, wie hell es angesichts der Richtung einer Lichtquelle erscheinen soll (ermittelt über das Skalarprodukt zwischen Normale und Lichtrichtung)."
+            },
+            {
+              "title": "Navigation und GPS: Peilung und Entfernung",
+              "description": "Die Verschiebung zwischen zwei Positionen ist eine Vektordifferenz — die Koordinaten des Ziels minus die der aktuellen Position —, deren Betrag die Luftlinienentfernung liefert, während ihre Richtung (umgerechnet in eine Kompasspeilung) einem Navigationssystem sagt, wohin es zeigen soll."
+            },
+            {
+              "title": "Robotik und Spieleentwicklung: Lenken und Zielen",
+              "description": "Eine Figur oder ein Roboter, die sich einem Ziel zuwenden oder darauf zubewegen soll, berechnet den Einheitsvektor von der aktuellen Position zum Ziel und skaliert diese Richtung dann mit der jeweils passenden Geschwindigkeit oder dem Drehmoment — „welche Richtung“ von „wie schnell“ zu trennen ist genau der Zweck eines Einheitsvektors."
+            }
+          ],
+          "forceExample": {
+            "title": "Beispielrechnung: Zwei Kräfte an einem Objekt",
+            "description": "Eine Kraft von 30 N zieht ost-nordöstlich mit (30, 40) N, eine zweite Kraft von 20 N zieht ost-südöstlich mit (20, −10) N am selben Objekt. Komponentenweise Addition ergibt eine resultierende Kraft von (50, 30) N — einen einzigen gleichwertigen Stoß, dessen Betrag (≈58,3 N) und Richtung die tatsächliche Beschleunigung des Objekts bestimmen, genau wie es die Summenoperation oben für beliebige zwei Vektoren berechnet.",
+            "labelF1": "F₁",
+            "labelF2": "F₂",
+            "labelResultant": "Resultierende",
+            "diagramCaption": "Zwei Kräfte, F₁ und F₂, durch Vektoraddition zu einer einzigen resultierenden Kraft zusammengesetzt."
+          }
         }
+      },
+      "relatedTools": {
+        "title": "Verwandte Mathe-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Unternehmen",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@beispiel.de",
+        "contactPhonePlaceholder": "z. B. +49 30 123456",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
       }
     },
     "matrix-calculator": {

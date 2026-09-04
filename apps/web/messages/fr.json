@@ -7825,6 +7825,10 @@
             "angle": {
               "label": "Angle Entre les Deux",
               "expression": "θ = cos⁻¹(A·B / (|A||B|))"
+            },
+            "projection": {
+              "label": "Projection de A sur B",
+              "expression": "projᴮA = (A·B / |B|²) B"
             }
           }
         }
@@ -7833,7 +7837,9 @@
         "inputTitle": "Composantes des Vecteurs",
         "vectorALabel": "Vecteur A",
         "vectorBLabel": "Vecteur B",
-        "zHint": "Laissez z à 0 pour un vecteur 2D, ou définissez une valeur pour travailler en 3D."
+        "zHint": "Laissez z à 0 pour un vecteur 2D, ou définissez une valeur pour travailler en 3D.",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "heading": "Résultat",
@@ -7851,7 +7857,12 @@
         "diagramA": "A",
         "diagramB": "B",
         "diagramSum": "A+B",
-        "diagramCaption": "Projection 2D (x, y uniquement) des vecteurs A et B et de leur somme, tracée à l'échelle à partir des composantes saisies."
+        "diagramCaption": "Projection 2D (x, y uniquement) des vecteurs A et B et de leur somme, tracée à l'échelle à partir des composantes saisies.",
+        "projectionAOntoB": "Projection de A sur B",
+        "emptyStateMessage": "Saisissez les deux vecteurs et cliquez sur « Calculer » pour voir l'ensemble complet des résultats.",
+        "angleDiagramTitle": "Angle entre les vecteurs",
+        "angleDiagramIntro": "Le même angle que calcule la formule du produit scalaire, tracé comme un arc entre A et B.",
+        "angleDiagramCaption": "Projection 2D (x, y uniquement) des vecteurs A et B avec l'angle entre eux tracé comme un arc."
       },
       "education": {
         "intro": {
@@ -7906,6 +7917,14 @@
             {
               "question": "À quoi sert réellement un vecteur unitaire ?",
               "answer": "Un vecteur unitaire isole la direction pure de la norme, ce qui est utile chaque fois qu'une formule a besoin de savoir « dans quelle direction » sans se soucier de la longueur — par exemple pour exprimer la direction d'une force indépendamment de son intensité, ou pour construire un rayon directionnel en infographie qui sera ensuite mis à l'échelle par une valeur de distance ou de vitesse distincte."
+            },
+            {
+              "question": "Que représente réellement la projection de A sur B ?",
+              "answer": "C'est la composante de A qui pointe dans la direction de B — géométriquement, l'ombre que A projetterait sur la droite de B sous une lumière tombant perpendiculairement à B. Cela apparaît naturellement en physique (le travail effectué par une force est le produit scalaire de la force et du déplacement, ce qui correspond en réalité à la force projetée multipliée par la distance) et en infographie (décomposer un vecteur en une partie alignée sur une direction et une partie perpendiculaire)."
+            },
+            {
+              "question": "Pourquoi la projection de A sur B est-elle indéfinie lorsque B est un vecteur nul ?",
+              "answer": "La formule de projection, projᴮA = (A·B / |B|²) B, divise par |B|², et un vecteur nul a une norme nulle — il n'y a aucune droite définie par B sur laquelle projeter A. La calculatrice le signale de la même façon qu'un angle ou un vecteur unitaire indéfinis."
             }
           ]
         },
@@ -7960,6 +7979,10 @@
                 "online": "Non — le doctorat exige 72 crédits et un examen de qualification en présentiel sur le campus de KAUST."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "Du tableau noir au GPU : les vecteurs dans l'informatique moderne",
+            "paragraph": "Les mêmes opérations composante par composante que Gibbs et Heaviside ont formalisées dans les années 1880 s'exécutent aujourd'hui des milliards de fois par seconde à l'intérieur des processeurs graphiques (GPU), architecturalement construits autour du calcul vectoriel et matriciel parallèle — chaque jeu 3D, modèle CAO et simulation physique rendus aujourd'hui se réduisent finalement à des produits scalaires, des produits vectoriels et des sommes de vecteurs calculés à grande échelle. Ces mêmes opérations, généralisées à des dimensions supérieures, sous-tendent également les plongements vectoriels (embeddings) utilisés dans l'apprentissage automatique moderne, où le produit scalaire (via la similarité cosinus) mesure à quel point deux éléments de données se ressemblent."
           }
         },
         "references": {
@@ -7968,7 +7991,83 @@
           "note": "Le livre de l'historien des mathématiques Michael J. Crowe reste le récit savant de référence sur la manière dont l'analyse vectorielle est née du différend des années 1880 entre Gibbs, Heaviside et les défenseurs des quaternions de Hamilton.",
           "url": "https://old.maa.org/press/maa-reviews/a-history-of-vector-analysisthe-evolution-of-the-idea-of-a-vectorial-system",
           "readOriginal": "En Savoir Plus Sur Ce Livre"
+        },
+        "variables": {
+          "title": "Comprendre chaque opération",
+          "intro": "Quatre autres relations vectorielles qui méritent d'être vues séparément, chacune avec sa propre illustration plutôt qu'une simple formule.",
+          "difference": {
+            "title": "Différence de vecteurs (A − B)",
+            "description": "Soustraire B de A revient à ajouter A à l'inverse de B (−B), et géométriquement cela trace le vecteur allant de la pointe de B à la pointe de A lorsque les deux partent de la même origine — c'est le déplacement nécessaire pour aller de B à A. Comme la somme, elle se calcule composante par composante : (ax − bx, ay − by, az − bz).",
+            "diagramCaption": "A, B et leur différence A − B, dessinés à l'échelle."
+          },
+          "crossProduct": {
+            "title": "Produit vectoriel (A × B) en trois dimensions",
+            "description": "Contrairement à toute autre opération de cette page, le produit vectoriel n'a pleinement de sens qu'en trois dimensions : il produit un nouveau vecteur perpendiculaire au plan contenant A et B (sa direction étant fixée par la règle de la main droite), d'une longueur égale à l'aire du parallélogramme formé par A et B. Inverser l'ordre — B×A au lieu de A×B — fait pointer le résultat dans la direction opposée.",
+            "diagramCaption": "Une vue isométrique (3D) de A, B, du parallélogramme qu'ils forment, et de leur produit vectoriel A×B, perpendiculaire à ce plan."
+          },
+          "unitVector": {
+            "title": "Vecteur unitaire (Â)",
+            "description": "Diviser un vecteur par sa propre norme produit un vecteur unitaire — même direction, mais redimensionné pour avoir une longueur exactement égale à 1. C'est la façon standard d'isoler « dans quelle direction » de « à quelle distance », et la pointe de tout vecteur unitaire tombe exactement sur le cercle unité (ou la sphère unité, en 3D) par définition.",
+            "diagramCaption": "Le vecteur A à côté de son vecteur unitaire Â, qui tombe exactement sur le cercle unité en pointillés."
+          },
+          "projection": {
+            "title": "Projection de A sur B",
+            "description": "La projection de A sur B est « l'ombre » que A projetterait sur la droite de B si la lumière tombait perpendiculairement à B — la partie de A qui pointe réellement dans la direction de B. Sa longueur (la projection scalaire) vaut A·B / |B|, et la projection vectorielle complète met B lui-même à l'échelle de cette même fraction : projᴮA = (A·B / |B|²) B. C'est le cœur géométrique du produit scalaire, et elle reste indéfinie dès que B est un vecteur nul, puisqu'un vecteur nul ne définit aucune droite sur laquelle projeter.",
+            "diagramLabel": "projᴮA",
+            "diagramCaption": "L'ombre de A projetée sur la droite de B — la projection vectorielle de A sur B, avec une perpendiculaire en pointillés reliant la pointe de A au point de projection."
+          }
+        },
+        "applications": {
+          "title": "Applications concrètes",
+          "intro": "Les opérations vectorielles ne sont pas qu'un exercice scolaire — elles sont le mécanisme réel derrière plusieurs domaines quotidiens et professionnels.",
+          "items": [
+            {
+              "title": "Physique : composition des forces",
+              "description": "Lorsque plusieurs forces agissent sur un objet — gravité, frottement, une poussée appliquée —, les physiciens trouvent la force nette en additionnant les vecteurs de force individuels composante par composante, exactement comme le fait l'opération Somme de cette calculatrice. La norme et la direction du vecteur résultant déterminent l'accélération réelle de l'objet selon la deuxième loi de Newton."
+            },
+            {
+              "title": "Infographie : normales de surface et éclairage",
+              "description": "Les moteurs de rendu 3D utilisent le produit vectoriel de deux arêtes d'un triangle pour calculer sa normale de surface — le vecteur perpendiculaire qui détermine dans quelle direction un polygone fait face, et donc à quel point il doit être éclairé selon la direction d'une source lumineuse (trouvée via le produit scalaire entre la normale et la direction vers la lumière)."
+            },
+            {
+              "title": "Navigation et GPS : cap et distance",
+              "description": "Le déplacement entre deux positions est une différence de vecteurs — les coordonnées de la destination moins celles de la position actuelle —, et sa norme donne la distance à vol d'oiseau tandis que sa direction (convertie en cap boussole) indique à un système de navigation où pointer."
+            },
+            {
+              "title": "Robotique et développement de jeux vidéo : orientation et visée",
+              "description": "Un personnage ou un robot devant faire face à une cible ou s'en approcher calcule le vecteur unitaire pointant de sa position actuelle vers la cible, puis met cette direction à l'échelle selon la vitesse ou le couple requis par la situation — séparer « dans quelle direction » de « à quelle vitesse » est exactement le rôle d'un vecteur unitaire."
+            }
+          ],
+          "forceExample": {
+            "title": "Exemple résolu : deux forces sur un même objet",
+            "description": "Une force de 30 N tire vers l'est-nord-est à (30, 40) N et une seconde force de 20 N tire vers l'est-sud-est à (20, −10) N sur le même objet. Les additionner composante par composante donne une force résultante de (50, 30) N — une poussée équivalente unique dont la norme (≈58,3 N) et la direction déterminent l'accélération réelle de l'objet, exactement comme le calcule l'opération Somme ci-dessus pour deux vecteurs quelconques.",
+            "labelF1": "F₁",
+            "labelF2": "F₂",
+            "labelResultant": "Résultante",
+            "diagramCaption": "Deux forces, F₁ et F₂, combinées en une seule force résultante par addition vectorielle."
+          }
         }
+      },
+      "relatedTools": {
+        "title": "Outils mathématiques associés"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       }
     },
     "matrix-calculator": {

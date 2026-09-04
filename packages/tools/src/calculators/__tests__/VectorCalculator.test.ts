@@ -80,4 +80,26 @@ describe("VectorCalculator", () => {
     const r = calc.execute({ ax: 0, ay: 0, az: 0, bx: 0, by: 0, bz: 0 }, context);
     expect(r.data.error).toBe("zero-vector-a");
   });
+
+  it("computes the vector projection of A onto B", () => {
+    // A = (3, 4, 0) onto B = (1, 0, 0): the projection is just A's x-component along B.
+    const r = calc.execute({ ax: 3, ay: 4, az: 0, bx: 1, by: 0, bz: 0 }, context);
+    expect(r.data.projectionScalar).toBe(3);
+    expect(r.data.projectionX).toBe(3);
+    expect(r.data.projectionY).toBe(0);
+    expect(r.data.projectionZ).toBe(0);
+  });
+
+  it("computes a negative scalar projection when the angle is obtuse", () => {
+    const r = calc.execute({ ax: 1, ay: 0, az: 0, bx: -1, by: 0, bz: 0 }, context);
+    expect(r.data.projectionScalar).toBe(-1);
+  });
+
+  it("leaves the projection null when B is a zero vector", () => {
+    const r = calc.execute({ ax: 1, ay: 2, az: 3, bx: 0, by: 0, bz: 0 }, context);
+    expect(r.data.projectionScalar).toBeNull();
+    expect(r.data.projectionX).toBeNull();
+    expect(r.data.projectionY).toBeNull();
+    expect(r.data.projectionZ).toBeNull();
+  });
 });

@@ -30,6 +30,12 @@ export type VectorCalculatorOutput = {
   unitAX: number | null;
   unitAY: number | null;
   unitAZ: number | null;
+  /** Scalar projection of A onto B — the signed length of A's shadow along B's direction. Null when B is a zero vector, since B has no direction to project onto. */
+  projectionScalar: number | null;
+  /** Vector projection of A onto B — the component of A that points along B. Null when B is a zero vector. */
+  projectionX: number | null;
+  projectionY: number | null;
+  projectionZ: number | null;
 };
 
 function clean(value: number): number {
@@ -79,6 +85,10 @@ export class VectorCalculator extends BaseCalculator<VectorCalculatorInput, Vect
     let unitAX: number | null = null;
     let unitAY: number | null = null;
     let unitAZ: number | null = null;
+    let projectionScalar: number | null = null;
+    let projectionX: number | null = null;
+    let projectionY: number | null = null;
+    let projectionZ: number | null = null;
 
     if (magnitudeA === 0) {
       error = "zero-vector-a";
@@ -90,6 +100,12 @@ export class VectorCalculator extends BaseCalculator<VectorCalculatorInput, Vect
 
     if (magnitudeB === 0) {
       error = error ?? "zero-vector-b";
+    } else {
+      projectionScalar = dotProduct / magnitudeB;
+      const factor = dotProduct / (magnitudeB * magnitudeB);
+      projectionX = factor * bx;
+      projectionY = factor * by;
+      projectionZ = factor * bz;
     }
 
     if (magnitudeA > 0 && magnitudeB > 0) {
@@ -115,6 +131,10 @@ export class VectorCalculator extends BaseCalculator<VectorCalculatorInput, Vect
       unitAX,
       unitAY,
       unitAZ,
+      projectionScalar,
+      projectionX,
+      projectionY,
+      projectionZ,
     });
   }
 
@@ -139,6 +159,10 @@ export class VectorCalculator extends BaseCalculator<VectorCalculatorInput, Vect
         unitAX: data.unitAX === null ? null : clean(data.unitAX),
         unitAY: data.unitAY === null ? null : clean(data.unitAY),
         unitAZ: data.unitAZ === null ? null : clean(data.unitAZ),
+        projectionScalar: data.projectionScalar === null ? null : clean(data.projectionScalar),
+        projectionX: data.projectionX === null ? null : clean(data.projectionX),
+        projectionY: data.projectionY === null ? null : clean(data.projectionY),
+        projectionZ: data.projectionZ === null ? null : clean(data.projectionZ),
       },
       metadata: {},
     };

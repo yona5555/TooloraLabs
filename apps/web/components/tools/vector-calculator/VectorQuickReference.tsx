@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
-const FORMULA_KEYS = ["magnitude", "dotProduct", "crossProduct", "angle"] as const;
+const FORMULA_KEYS = ["magnitude", "dotProduct", "crossProduct", "angle", "projection"] as const;
 
 export default function VectorQuickReference() {
   const t = useTranslations("tools.vector-calculator.aboveFold.quickReference");
