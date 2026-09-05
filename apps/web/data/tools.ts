@@ -906,6 +906,36 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "dice-roller",
+    title: "Dice Roller",
+    category: "date-time",
+    description:
+      "Roll customizable virtual dice (d4, d6, d8, d10, d12, d20) with a roll history log.",
+    featured: false,
+    keywords: [
+      "dice roller",
+      "roll a dice",
+      "virtual dice",
+      "d20 roller",
+      "online dice simulator",
+    ],
+  },
+  {
+    slug: "love-calculator",
+    title: "Love Calculator",
+    category: "date-time",
+    description:
+      "A fun, name-based compatibility percentage calculator. For entertainment purposes only.",
+    featured: false,
+    keywords: [
+      "love calculator",
+      "love percentage calculator",
+      "name compatibility test",
+      "relationship compatibility calculator",
+      "fun love test",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

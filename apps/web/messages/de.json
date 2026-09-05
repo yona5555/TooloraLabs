@@ -17992,6 +17992,308 @@
           "readOriginal": "Referenzwerk ansehen"
         }
       }
+    },
+    "dice-roller": {
+      "title": "Würfelroller",
+      "description": "Wirf anpassbare virtuelle Würfel (d4, d6, d8, d10, d12, d20) und führe eine Historie deiner Würfe.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Wurfeinstellungen",
+        "diceCountLabel": "Anzahl der Würfel",
+        "facesLabel": "Würfeltyp",
+        "rollButton": "Würfeln",
+        "rolling": "Würfelt..."
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidDiceCount": "Gib eine Würfelanzahl zwischen 1 und 20 ein.",
+        "invalidFaces": "Wähle einen der unterstützten Würfeltypen.",
+        "totalLabel": "Gesamt",
+        "historyLabel": "Wurfhistorie",
+        "clearHistory": "Löschen"
+      },
+      "quickReference": {
+        "title": "Die Rechnung",
+        "intro": "Jeder Würfel erzeugt unabhängig eine gleichverteilte Zufallszahl von 1 bis zu seiner Anzahl an Seiten."
+      },
+      "education": {
+        "intro": {
+          "title": "Würfelwahrscheinlichkeit verstehen",
+          "paragraph1": "Ein fairer Würfel mit n Seiten erzeugt jedes seiner möglichen Ergebnisse (1 bis n) bei jedem Wurf mit gleicher Wahrscheinlichkeit, 1/n, unabhängig von jedem vorherigen Wurf — eine Eigenschaft, die als \"gedächtnislos\" bezeichnet wird. Dieses Tool simuliert dieses Verhalten mit einem Pseudozufallszahlengenerator: Jeder Wurf zieht einen gleichmäßig zwischen 1 und der gewählten Seitenzahl verteilten Zufallswert, sodass sich die Ergebnisse über viele Würfe hinweg derselben 1/n-Häufigkeit annähern, die ein fairer physischer Würfel erzeugen würde.",
+          "paragraph2": "Das gleichzeitige Werfen mehrerer Würfel verändert die Form der Verteilung der Summe, obwohl jeder einzelne Würfel gleichverteilt bleibt. Ein einzelner d6-Wurf landet mit gleicher Wahrscheinlichkeit auf jeder Seite von 1 bis 6, aber die Summe zweier d6-Würfel ist nicht gleichverteilt — Summen nahe 7 (der Mitte des möglichen Bereichs von 2 bis 12) sind weit häufiger als Summen nahe 2 oder 12, weil es mehr Kombinationen zweier Würfel gibt, die 7 ergeben (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), als Kombinationen, die 2 (nur 1+1) oder 12 (nur 6+6) ergeben. Dies ist dasselbe Prinzip hinter der glockenförmigen Verteilung, die man bei Brettspielen und Tabletop-Rollenspiel-Würfelpools beobachtet."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Virtuelles Würfeln kommt überall dort vor, wo ein faires, unvorhersehbares Ergebnis benötigt wird.",
+          "items": [
+            {
+              "title": "Tabletop- und Rollenspiele",
+              "description": "Das Auflösen von Aktionen in Spielen wie Dungeons & Dragons, die für Kampfwürfe, Fertigkeitsproben und Schadensberechnungen auf polyedrische Würfel (d4, d6, d8, d10, d12, d20) angewiesen sind."
+            },
+            {
+              "title": "Brettspiele und Partyspiele",
+              "description": "Das Bestimmen der Zugreihenfolge, Bewegung oder zufälliger Ergebnisse in klassischen Brettspielen, ohne dass physische Würfel zur Hand sein müssen."
+            },
+            {
+              "title": "Vermittlung von Wahrscheinlichkeit und Statistik",
+              "description": "Das Demonstrieren von Konzepten wie Gleichverteilungen, Erwartungswert und dem Gesetz der großen Zahlen, indem (simulierte) Würfel viele Male geworfen werden und beobachtet wird, wie sich die Ergebnisse den theoretischen Wahrscheinlichkeiten annähern."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Wahrscheinlichkeitsfakten über Standardwürfel.",
+          "columnScenario": "Szenario",
+          "columnProbability": "Wahrscheinlichkeit",
+          "rows": [
+            {
+              "scenario": "Eine 6 mit einem einzelnen d6 würfeln",
+              "probability": "1/6 ≈ 16,7%"
+            },
+            {
+              "scenario": "Eine 20 mit einem einzelnen d20 würfeln (ein \"kritischer Treffer\")",
+              "probability": "1/20 = 5%"
+            },
+            {
+              "scenario": "Eine Summe von 7 mit zwei d6 würfeln",
+              "probability": "6/36 ≈ 16,7%"
+            },
+            {
+              "scenario": "Eine Summe von 2 mit zwei d6 würfeln (\"Schlangenaugen\")",
+              "probability": "1/36 ≈ 2,8%"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Sind diese Würfe wirklich zufällig?",
+              "answer": "Dieses Tool verwendet den in deinen Browser integrierten Pseudozufallszahlengenerator, der statistisch gleichverteilt und unvorhersehbar genug für Spiele, Unterricht und den gelegentlichen Gebrauch ist, jedoch keine kryptografisch sichere Zufallsquelle für sicherheitskritische Anwendungen darstellt."
+            },
+            {
+              "question": "Warum häuft sich die Summe mehrerer Würfel um die Mitte?",
+              "answer": "Weil es mehr Möglichkeiten gibt, Würfel zu einer mittleren Summe zu kombinieren als zu einer extremen. Bei zwei d6 ergibt nur eine Kombination (1+1) eine Summe von 2, aber sechs Kombinationen ergeben eine Summe von 7, was 7 sechsmal wahrscheinlicher macht als 2."
+            },
+            {
+              "question": "Wie viele Würfel kann ich maximal auf einmal werfen?",
+              "answer": "Dieses Tool unterstützt das gleichzeitige Werfen von bis zu 20 Würfeln, was Würfelpools in Tabletop-Spielen und die meisten Wahrscheinlichkeitsdemonstrationen im Unterricht bequem abdeckt."
+            },
+            {
+              "question": "Warum sind d4, d6, d8, d10, d12 und d20 die Standard-Würfeltypen?",
+              "answer": "Diese entsprechen den fünf platonischen Körpern (Tetraeder, Würfel, Oktaeder, Dodekaeder, Ikosaeder) plus dem zehnseitigen Würfel, die alle gleich große und gleich geformte Seiten haben, wodurch jedes Ergebnis bei einem fairen und gleichmäßig gewichteten Würfel gleich wahrscheinlich ist."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Würfel gehören zu den ältesten archäologisch bekannten Spielobjekten: würfelförmige Würfel wurden an Fundstätten im Nahen Osten und im Indus-Tal gefunden und sind etwa 5.000 Jahre alt, und noch frühere Astragali (Fußwurzelknochen von Tieren, die als Proto-Würfel dienten) wurden an neolithischen Fundstätten entdeckt. Das heute standardmäßige Set polyedrischer Würfel (d4 bis d20), das in modernen Tabletop-Rollenspielen verwendet wird, wurde in den 1970er-Jahren zusammen mit dem Aufstieg von Spielen wie Dungeons & Dragons populär, obwohl Würfel in Form der platonischen Körper bis in die Antike Griechenlands und Roms zurückreichen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Digitale Würfelroller wie dieser verwenden Pseudozufallszahlen-Generierungsalgorithmen, die deterministische mathematische Formeln nutzen, die mit unvorhersehbaren Eingaben (wie Systemzeit oder Hardware-Entropie) initialisiert werden, um Zahlenfolgen zu erzeugen, die statistische Zufälligkeitstests bestehen. Dies macht physische Würfel für die große Mehrheit der gelegentlichen Spiel- und Bildungskontexte überflüssig, während echte Zufallszahlengeneratoren, die auf physikalischen Prozessen wie atmosphärischem Rauschen oder radioaktivem Zerfall beruhen, höherwertigen Anwendungen wie der Kryptografie vorbehalten bleiben."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Wahrscheinlichkeitstheorie, die mathematische Grundlage von Würfelspielen, ist ein Kernfach innerhalb von Statistik- und Mathematikabteilungen. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Weltweit Rang 1 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm der Fakultät für Mathematik."
+              },
+              {
+                "name": "Stanford University — Department of Statistics",
+                "note": "Eine der weltweit führenden Statistikabteilungen mit umfassender Wahrscheinlichkeitstheorie.",
+                "url": "https://statistics.stanford.edu/academics/phd-program",
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Weltweit Rang 3 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "University of Oxford — Department of Statistics",
+                "note": "Ein führendes Zentrum für Wahrscheinlichkeitstheorie und ihre Anwendungen.",
+                "url": "https://www.stats.ox.ac.uk/prospective-students/postgraduate-research-programmes",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "Harvard University — Department of Statistics",
+                "note": "Gehört weltweit zu den besten Statistik- und Wahrscheinlichkeitsprogrammen.",
+                "url": "https://statistics.fas.harvard.edu/phd-program",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Grinstead, C. M., & Snell, J. L. (1997). Introduction to Probability (2nd ed.). American Mathematical Society.",
+          "note": "Ein weit verbreitetes, frei verfügbares Lehrbuch, das die Grundlagen der Wahrscheinlichkeitstheorie behandelt, einschließlich diskreter Gleichverteilungen und würfelbasierter Beispiele.",
+          "url": "https://math.dartmouth.edu/~prob/prob/prob.pdf",
+          "readOriginal": "Referenzwerk ansehen"
+        }
+      }
+    },
+    "love-calculator": {
+      "title": "Liebesrechner",
+      "description": "Ein unterhaltsamer, namensbasierter Kompatibilitätsprozentsatz-Rechner. Nur zu Unterhaltungszwecken.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Zwei Namen eingeben",
+        "name1Label": "Dein Name",
+        "name2Label": "Name der anderen Person",
+        "name1Placeholder": "z.B. Alex",
+        "name2Placeholder": "z.B. Jordan",
+        "calculateButton": "Liebes-Match berechnen",
+        "disclaimer": "Nur zum Spaß — kein echtes Maß für Beziehungskompatibilität."
+      },
+      "diagram": {
+        "ariaLabel": "Ein zu {percentage} Prozent gefülltes Herz"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "emptyName": "Gib beide Namen ein und klicke auf \"Liebes-Match berechnen\", um ein unterhaltsames Ergebnis zu sehen.",
+        "tiers": {
+          "veryLow": "Die Sterne stehen diesmal nicht ganz günstig — aber Namen entscheiden nicht über Beziehungen, Menschen tun das!",
+          "low": "Hier gibt es einen Funken Potenzial, es lohnt sich, sich besser kennenzulernen.",
+          "medium": "Ein solides Match mit echtem Potenzial — Kommunikation macht den entscheidenden Unterschied.",
+          "high": "Großartige Chemie laut dieser Rechnung — klingt nach einem vielversprechenden Paar!",
+          "veryHigh": "Außergewöhnlich! Dieser Rechner hält euch beide für ein wunderbares Paar."
+        },
+        "forFunOnly": "Denk daran: Dies ist ein numerologisches Spiel zur Unterhaltung, kein wissenschaftliches Ergebnis."
+      },
+      "quickReference": {
+        "title": "So funktioniert es",
+        "intro": "Beide Namen werden kombiniert und durch eine numerische Formel geführt, die für dasselbe Namenspaar immer denselben Prozentsatz ergibt.",
+        "disclaimer": "Rein zur Unterhaltung — keine wissenschaftliche oder psychologische Bewertung."
+      },
+      "education": {
+        "intro": {
+          "title": "Dieses Tool verstehen",
+          "paragraph1": "Dieser Rechner nimmt die beiden eingegebenen Namen, kombiniert und normalisiert sie und führt sie durch eine deterministische numerische Formel, die die Buchstaben in einen Prozentsatz zwischen 0 und 100 umwandelt. Da die Formel deterministisch ist, ergeben dieselben zwei Namen immer denselben Prozentsatz, egal wie oft du nachschaust, und auch die Reihenfolge, in der du sie eingibst, spielt keine Rolle — \"Alex und Jordan\" ergibt dasselbe Ergebnis wie \"Jordan und Alex\".",
+          "disclaimer": "Wichtig: Dieser Prozentsatz wird rein zur Unterhaltung generiert. Er hat keine Grundlage in Psychologie, Beziehungswissenschaft oder einem echten Maß für Kompatibilität — es ist einfach ein spielerisches Zahlenspiel, das auf den Buchstaben eines Namens basiert."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Namensbasierte Liebesrechner sind ein langjähriger Bestandteil der Internet- und Schulhofkultur, die für unbeschwerten Spaß statt für ernsthafte Entscheidungen genutzt werden.",
+          "items": [
+            {
+              "title": "Eisbrecher und Partyspiele",
+              "description": "Eine schnelle, spielerische Aktivität unter Freunden oder auf Partys, ähnlich wie Wahrsagespiele wie Magic-8-Balls oder Papier-Wahrsager."
+            },
+            {
+              "title": "Soziale Medien und Teilen",
+              "description": "Das Erzeugen eines teilbaren, unbeschwerten Prozentsatzes, um ihn nur zum Spaß zu posten oder an Freunde zu senden."
+            },
+            {
+              "title": "Nostalgischer Spaß",
+              "description": "Das Nachstellen des klassischen Schulhof-Notizbuchspiels zum Testen der Namenskompatibilität, jetzt als schnelle digitale Version."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Ist das ein echtes Maß für Kompatibilität?",
+              "answer": "Nein. Dieses Tool ist rein zur Unterhaltung gedacht. Echte Beziehungskompatibilität hängt von Faktoren wie gemeinsamen Werten, Kommunikation, Vertrauen und Einsatz ab — von denen keiner aus der Schreibweise eines Namens gemessen werden kann."
+            },
+            {
+              "question": "Warum erhalte ich für dieselben zwei Namen immer denselben Prozentsatz?",
+              "answer": "Der Rechner verwendet eine deterministische Formel: Er wandelt dieselben Eingabebuchstaben immer in dieselbe Ausgabezahl um. Dies ist beabsichtigt, damit das \"Ergebnis\" für ein bestimmtes Namenspaar konsistent bleibt, ähnlich wie ein Wahrsagespiel eine einprägsame, wiederholbare Antwort gibt."
+            },
+            {
+              "question": "Spielt die Reihenfolge, in der ich die Namen eingebe, eine Rolle?",
+              "answer": "Nein — das Tool behandelt \"Alex und Jordan\" genauso wie \"Jordan und Alex\", indem es die beiden Namen vor der Kombination sortiert, sodass der Prozentsatz unabhängig von der Eingabereihenfolge immer symmetrisch ist."
+            },
+            {
+              "question": "Kann ich Namen in jeder Sprache oder jedem Alphabet verwenden?",
+              "answer": "Ja. Die Formel funktioniert mit den zugrunde liegenden Zeichen eines beliebigen eingegebenen Namens, egal ob in lateinischer, arabischer, Devanagari- oder einer anderen Schrift, sodass sie über alle auf dieser Seite unterstützten Sprachen hinweg gleich funktioniert."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Namensbasierte Kompatibilitätsspiele haben eine lange Geschichte in der Populärkultur, vom Papier-und-Stift-Spiel \"FLAMES\", das Schulkinder spielen (ein Akronym für Freunde, Liebende, Zuneigung, Ehe, Feinde, Geschwister im Englischen), bis hin zu numerologischen Traditionen, die Buchstaben numerische Werte zuweisen und die Ergebnisse interpretieren. Diese Spiele verbreiteten sich von Schulhöfen und Zeitschriften bis ins frühe Internet der 1990er und 2000er Jahre und wurden zu einer der ersten weit verbreiteten Kategorien von Neuheiten-Rechner-Websites."
+          },
+          "realCompatibility": {
+            "title": "Was Kompatibilität tatsächlich vorhersagt",
+            "paragraph": "Jahrzehnte der Beziehungsforschung deuten auf ganz andere Faktoren hin als die Buchstaben eines Namens. Die Langzeitstudien des Psychologen John Gottman über Paare identifizierten Muster wie das Verhältnis von positiven zu negativen Interaktionen, wie Partner mit Konflikten umgehen, sowie gegenseitigen Respekt und Bewunderung als starke Prädiktoren für den Beziehungserfolg — siehe die Referenz unten als Ausgangspunkt für diesen Forschungsbereich. Wenn du dich für echte Kompatibilität interessierst, sind Kommunikationsfähigkeiten, gemeinsame Werte und wie ein Paar mit Meinungsverschiedenheiten umgeht, tendenziell weit wichtiger als jeder Rechner es je sein könnte."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die wissenschaftliche Erforschung von Beziehungen und Kompatibilität fällt unter die Psychologie, insbesondere die Sozial- und klinische Psychologie. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Stanford University — Department of Psychology",
+                "note": "Eine der weltweit führenden Psychologie-Abteilungen mit starker Forschung in Sozial- und Beziehungspsychologie.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Harvard University — Department of Psychology",
+                "note": "Gehört weltweit zu den besten Psychologieprogrammen.",
+                "url": "https://psychology.fas.harvard.edu/phd-program",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Cambridge — Department of Psychology",
+                "note": "Ein führendes Zentrum für psychologische Wissenschaft im Vereinigten Königreich.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort statt."
+              },
+              {
+                "name": "University of Oxford — Department of Experimental Psychology",
+                "note": "Ein führendes Zentrum für experimentelle und sozialpsychologische Forschung.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of California, Berkeley — Department of Psychology",
+                "note": "Eine top-bewertete Psychologie-Abteilung mit starker sozialpsychologischer Forschung.",
+                "url": "https://psychology.berkeley.edu/graduate-program",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "American University of Beirut — Department of Psychology",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Gottman, J. M., & Silver, N. (1999). The Seven Principles for Making Marriage Work. Crown Publishers.",
+          "note": "Eine weithin zitierte Zusammenfassung jahrzehntelanger empirischer Forschung darüber, was tatsächlich langfristigen Beziehungserfolg vorhersagt, im Gegensatz zum reinen Unterhaltungsalgorithmus dieses Tools.",
+          "url": "https://www.gottman.com/about/research/",
+          "readOriginal": "Forschung ansehen"
+        }
+      }
     }
   },
   "toolPage": {
