@@ -17641,6 +17641,189 @@
           "readOriginal": "Ver el estudio original de Mifflin-St Jeor"
         }
       }
+    },
+    "date-calculator": {
+      "title": "Calculadora de Fechas",
+      "description": "Encuentra la diferencia entre dos fechas en días, semanas, meses y años, o suma/resta una duración a una fecha.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "modes": {
+        "groupLabel": "Modo",
+        "labels": {
+          "difference": "Diferencia de Fechas",
+          "addSubtract": "Sumar/Restar"
+        }
+      },
+      "form": {
+        "inputTitle": "Tus fechas",
+        "startDate": "Fecha de Inicio",
+        "endDate": "Fecha de Fin",
+        "baseDate": "Fecha Base",
+        "operations": {
+          "add": "Sumar",
+          "subtract": "Restar"
+        },
+        "amount": "Cantidad",
+        "unit": "Unidad",
+        "units": {
+          "days": "Días",
+          "weeks": "Semanas",
+          "months": "Meses",
+          "years": "Años"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Una línea de tiempo que muestra el intervalo entre la fecha de inicio y fin",
+        "start": "Inicio",
+        "end": "Fin"
+      },
+      "result": {
+        "heading": "Resultado",
+        "totalDays": "Días Totales",
+        "totalWeeks": "Semanas Totales",
+        "years": "Años",
+        "months": "Meses",
+        "days": "Días",
+        "endBeforeStart": "la fecha de fin es anterior a la de inicio",
+        "resultDate": "Fecha Resultante",
+        "errors": {
+          "invalid-date": "Introduce fechas válidas para ver un resultado.",
+          "invalid-amount": "Introduce una cantidad no negativa para ver un resultado."
+        }
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "Cada cálculo aquí es una resta o una suma de calendario."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la aritmética de fechas",
+          "paragraph1": "Calcular con fechas de calendario es más complejo que la aritmética simple porque los meses tienen longitudes desiguales (28 a 31 días), los años pueden ser bisiestos (366 días en lugar de 365), y \"un mes después\" no significa un número fijo de días —sumar un mes al 31 de enero, por ejemplo, no puede producir literalmente el 31 de febrero, ya que febrero nunca tiene tantos días. Esta calculadora maneja estas irregularidades automáticamente para que obtengas una fecha de calendario real y válida o un conteo de días preciso cada vez.",
+          "paragraph2": "Las dos preguntas de fecha más comunes —\"¿cuánto tiempo hay entre estas dos fechas?\" y \"¿qué fecha es cierta duración desde ahora?\"— surgen constantemente en la planificación cotidiana: seguir un aniversario o una fecha límite, calcular la edad exacta de alguien, determinar la fecha de finalización de un proyecto a partir de su inicio y duración, o calcular cuándo vencerá una garantía o suscripción."
+        },
+        "modes": {
+          "title": "Los dos modos",
+          "intro": "Cada modo responde a una de las dos preguntas de calendario más comunes.",
+          "items": [
+            {
+              "title": "Diferencia de Fechas",
+              "description": "Dadas dos fechas, este modo informa el número total de días y semanas entre ellas, más una cifra desglosada de años/meses/días (la forma en que una persona describiría naturalmente una edad o una duración, en lugar de un solo número grande de días)."
+            },
+            {
+              "title": "Sumar/Restar",
+              "description": "Dada una fecha de inicio y una duración en días, semanas, meses o años, este modo calcula la fecha resultante —manejando automáticamente los casos límite de longitud de mes y años bisiestos, incluyendo ajustar un día fuera de rango (como el 31 de enero más un mes) al último día válido del mes objetivo."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunas preguntas de fecha comunes, calculadas de la misma forma en que esta herramienta las calcula.",
+          "columnCalculation": "Pregunta",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "calculation": "Días entre el 1 ene 2020 y el 15 jun 2025",
+              "result": "1.992 días (5 años, 5 meses, 14 días)"
+            },
+            {
+              "calculation": "30 días después del 1 de marzo",
+              "result": "31 de marzo"
+            },
+            {
+              "calculation": "1 mes después del 31 de enero",
+              "result": "28 de febrero (o 29 en año bisiesto)"
+            },
+            {
+              "calculation": "1 año después del 29 de febrero de 2020 (bisiesto)",
+              "result": "28 de febrero de 2021"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué sumar un mes al 31 de enero da el 28 de febrero en lugar del 3 de marzo?",
+              "answer": "Esta calculadora usa un comportamiento de \"ajuste\": sumar un mes mantiene el mismo número de día cuando es posible, y si el mes objetivo no tiene tantos días, cae en el último día real del mes objetivo en lugar de desbordarse al mes siguiente. Esto coincide con lo que la mayoría de las personas entienden intuitivamente por \"un mes después\" y es la misma convención usada por la mayoría del software de calendario."
+            },
+            {
+              "question": "¿Cómo se manejan los años bisiestos?",
+              "answer": "Esta calculadora determina los años bisiestos usando la regla estándar del calendario gregoriano (un año es bisiesto si es divisible entre 4, excepto los años seculares, que deben ser divisibles entre 400), por lo que el 29 de febrero se incluye correctamente en los conteos de días y la aritmética de fechas solo en los años en que realmente existe."
+            },
+            {
+              "question": "¿Por qué el desglose de años/meses/días es diferente de simplemente dividir el total de días?",
+              "answer": "Un desglose consciente del calendario tiene en cuenta las longitudes realmente variables de los meses y años abarcados, por lo que no puede producirse simplemente dividiendo el conteo total de días entre 30 o 365 —eso daría una respuesta aproximada pero a menudo notablemente inexacta, especialmente en rangos de fechas que abarcan años bisiestos o meses de diferente longitud."
+            },
+            {
+              "question": "¿Importa qué fecha pongo primero en el modo de Diferencia de Fechas?",
+              "answer": "No —esta herramienta siempre informa el intervalo absoluto entre las dos fechas independientemente de cuál introduzcas como inicio o fin, aunque indicará si la fecha que etiquetaste como \"fin\" en realidad es cronológicamente anterior a la que etiquetaste como \"inicio\"."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "El calendario que usa esta calculadora —el calendario gregoriano— fue introducido por el Papa Gregorio XIII en 1582 como un refinamiento del calendario juliano anterior, corrigiendo una pequeña pero acumulativa desviación entre el año calendario y el año solar real. Su regla distintiva de años bisiestos (omitir el día bisiesto en años seculares no divisibles entre 400) fue diseñada específicamente para mantener el calendario alineado con las estaciones a lo largo de escalas de tiempo largas, y sigue siendo el calendario civil aceptado internacionalmente usado por casi todos los países hoy."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "Los sistemas informáticos modernos representan fechas y horas usando estándares como ISO 8601 (el formato de fecha AAAA-MM-DD) y el tiempo Unix (un conteo de segundos desde el 1 de enero de 1970), que hacen que la aritmética de fechas entre zonas horarias, calendarios y sistemas de software sea consistente e inequívoca. Las bibliotecas de programación construidas sobre estos estándares —como la que impulsa esta calculadora— manejan los muchos casos límite del calendario (años bisiestos, longitudes de mes variables, transiciones de horario de verano) para que las aplicaciones no necesiten reimplementar la lógica del calendario desde cero."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Los sistemas de calendario y sus matemáticas se estudian dentro de la historia de las matemáticas y, computacionalmente, dentro de las ciencias de la computación. Estos son cinco programas respetados que tocan esta área, más una institución regional:",
+            "universities": [
+              {
+                "name": "Universidad de Cambridge — Facultad de Matemáticas",
+                "note": "Un centro líder en la historia y matemáticas de los sistemas calendáricos.",
+                "url": "https://www.maths.cam.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Matemáticas",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Oxford — Facultad de Historia",
+                "note": "Un centro líder en historia de la ciencia, incluidos los sistemas calendáricos históricos.",
+                "url": "https://www.history.ox.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad Carnegie Mellon — Escuela de Ciencias de la Computación",
+                "note": "Un programa estadounidense líder en ciencias de la computación con fortaleza en sistemas de software y estándares.",
+                "url": "https://www.cs.cmu.edu/",
+                "online": "Algunos programas ofrecen opciones en línea; el doctorado de investigación principal es presencial."
+              },
+              {
+                "name": "ETH Zúrich — Departamento de Ciencias de la Computación",
+                "note": "Un programa europeo líder en ciencias de la computación.",
+                "url": "https://inf.ethz.ch/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundada en 1866; no aparece clasificada por separado en tablas globales de materias.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "International Organization for Standardization. (2019). ISO 8601-1:2019 — Date and time — Representations for information interchange.",
+          "note": "El estándar internacional que define una representación inequívoca de fecha y hora, incluidas las reglas del calendario gregoriano que sigue la aritmética de fechas de esta calculadora.",
+          "url": "https://www.iso.org/iso-8601-date-and-time-format.html",
+          "readOriginal": "Ver el estándar ISO 8601"
+        }
+      }
     }
   },
   "toolPage": {

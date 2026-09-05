@@ -17637,6 +17637,189 @@
           "readOriginal": "View the Mifflin-St Jeor Original Study"
         }
       }
+    },
+    "date-calculator": {
+      "title": "Date Calculator",
+      "description": "Find the difference between two dates in days, weeks, months, and years, or add/subtract a duration from a date.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "modes": {
+        "groupLabel": "Mode",
+        "labels": {
+          "difference": "Date Difference",
+          "addSubtract": "Add/Subtract"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Dates",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "baseDate": "Base Date",
+        "operations": {
+          "add": "Add",
+          "subtract": "Subtract"
+        },
+        "amount": "Amount",
+        "unit": "Unit",
+        "units": {
+          "days": "Days",
+          "weeks": "Weeks",
+          "months": "Months",
+          "years": "Years"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "A timeline showing the span between the start and end dates",
+        "start": "Start",
+        "end": "End"
+      },
+      "result": {
+        "heading": "Result",
+        "totalDays": "Total Days",
+        "totalWeeks": "Total Weeks",
+        "years": "Years",
+        "months": "Months",
+        "days": "Days",
+        "endBeforeStart": "end date is before start date",
+        "resultDate": "Resulting Date",
+        "errors": {
+          "invalid-date": "Enter valid dates to see a result.",
+          "invalid-amount": "Enter a non-negative amount to see a result."
+        }
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Every calculation here is either a calendar subtraction or a calendar addition."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Date Arithmetic",
+          "paragraph1": "Calculating with calendar dates is more involved than simple arithmetic because months have unequal lengths (28 to 31 days), years can be leap years (366 days instead of 365), and \"a month later\" doesn't mean a fixed number of days — adding one month to January 31st, for instance, can't literally produce February 31st, since February never has that many days. This calculator handles those irregularities automatically so you get a real, valid calendar date or an accurate day count every time.",
+          "paragraph2": "The two most common date questions — \"how far apart are these two dates?\" and \"what date is a certain duration from now?\" — both come up constantly in everyday planning: tracking an anniversary or a deadline, calculating someone's exact age, figuring out a project's end date from its start and duration, or working out when a warranty or subscription period will lapse."
+        },
+        "modes": {
+          "title": "The Two Modes",
+          "intro": "Each mode answers one of the two most common calendar questions.",
+          "items": [
+            {
+              "title": "Date Difference",
+              "description": "Given two dates, this mode reports the total number of days and weeks between them, plus a broken-down years/months/days figure (the way a person would naturally describe an age or a length of time, rather than one large day count)."
+            },
+            {
+              "title": "Add/Subtract",
+              "description": "Given a starting date and a duration in days, weeks, months, or years, this mode calculates the resulting date — handling month-length and leap-year edge cases automatically, including clamping an out-of-range day (like January 31st plus one month) to the last valid day of the target month."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few common date questions, computed the same way this tool computes them.",
+          "columnCalculation": "Question",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "Days between Jan 1, 2020 and Jun 15, 2025",
+              "result": "1,992 days (5 years, 5 months, 14 days)"
+            },
+            {
+              "calculation": "30 days after March 1",
+              "result": "March 31"
+            },
+            {
+              "calculation": "1 month after January 31",
+              "result": "February 28 (or 29 in a leap year)"
+            },
+            {
+              "calculation": "1 year after February 29, 2020 (leap year)",
+              "result": "February 28, 2021"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why does adding a month to January 31st give February 28th instead of March 3rd?",
+              "answer": "This calculator uses \"clamping\" behavior: adding a month keeps the day number the same when possible, and if the target month doesn't have that many days, it lands on the target month's actual last day rather than overflowing into the next month. This matches how most people intuitively mean \"one month later\" and is the same convention used by most calendar software."
+            },
+            {
+              "question": "How are leap years handled?",
+              "answer": "This calculator determines leap years using the standard Gregorian calendar rule (a year is a leap year if divisible by 4, except century years, which must be divisible by 400), so February 29th is correctly included in day counts and date arithmetic only in years where it actually exists."
+            },
+            {
+              "question": "Why is the years/months/days breakdown different from just dividing total days?",
+              "answer": "A calendar-aware breakdown accounts for the actual varying lengths of the months and years spanned, which is why it can't be produced by simply dividing the total day count by 30 or 365 — doing that would give an approximate but often noticeably inaccurate answer, especially over date ranges spanning leap years or months of different lengths."
+            },
+            {
+              "question": "Does it matter which date I put first in Date Difference mode?",
+              "answer": "No — this tool always reports the absolute span between the two dates regardless of which one you enter as the start or end, though it will note if the date you labeled \"end\" actually comes chronologically before the one you labeled \"start.\""
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The calendar this calculator uses — the Gregorian calendar — was introduced by Pope Gregory XIII in 1582 as a refinement of the earlier Julian calendar, correcting a small but compounding drift between the calendar year and the actual solar year. Its defining leap-year rule (skipping the leap day in century years not divisible by 400) was specifically designed to keep the calendar aligned with the seasons over long timescales, and it remains the internationally accepted civil calendar used by nearly every country today."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern computing systems represent dates and times using standards like ISO 8601 (the YYYY-MM-DD date format) and Unix time (a count of seconds since January 1, 1970), which make date arithmetic across time zones, calendars, and software systems consistent and unambiguous. Programming libraries built on these standards — like the one powering this calculator — handle the many calendar edge cases (leap years, varying month lengths, daylight saving transitions) so that applications don't need to reimplement calendar logic from scratch."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Calendar systems and their mathematics are studied within the history of mathematics and, computationally, within computer science. Here are five respected programs touching this area, plus one regional institution:",
+            "universities": [
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "A leading center for the history and mathematics of calendrical systems.",
+                "url": "https://www.maths.cam.ac.uk/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Oxford — Faculty of History",
+                "note": "A leading center for the history of science, including historical calendar systems.",
+                "url": "https://www.history.ox.ac.uk/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Carnegie Mellon University — School of Computer Science",
+                "note": "A leading US computer science program with strength in software systems and standards.",
+                "url": "https://www.cs.cmu.edu/",
+                "online": "Select programs offer online options; the core research PhD is in-residence."
+              },
+              {
+                "name": "ETH Zurich — Department of Computer Science",
+                "note": "A leading European computer science program.",
+                "url": "https://inf.ethz.ch/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on global subject tables.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "International Organization for Standardization. (2019). ISO 8601-1:2019 — Date and time — Representations for information interchange.",
+          "note": "The international standard defining unambiguous date and time representation, including the Gregorian calendar rules this calculator's date arithmetic follows.",
+          "url": "https://www.iso.org/iso-8601-date-and-time-format.html",
+          "readOriginal": "View the ISO 8601 Standard"
+        }
+      }
     }
   },
   "toolPage": {

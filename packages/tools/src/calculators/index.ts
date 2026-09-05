@@ -69,3 +69,4 @@ export * from "./OvulationCalculator";
 export * from "./PregnancyCalculator";
 export * from "./MacroCalculator";
 export * from "./BMRCalculator";
+export * from "./DateCalculator";
