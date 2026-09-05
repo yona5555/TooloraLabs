@@ -17991,6 +17991,164 @@
           "readOriginal": "Ver la obra de referencia"
         }
       }
+    },
+    "dice-roller": {
+      "title": "Lanzador de Dados",
+      "description": "Lanza dados virtuales personalizables (d4, d6, d8, d10, d12, d20) y mantén un historial de tus tiradas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Ajustes de la tirada",
+        "diceCountLabel": "Número de dados",
+        "facesLabel": "Tipo de dado",
+        "rollButton": "Lanzar dados",
+        "rolling": "Lanzando..."
+      },
+      "result": {
+        "heading": "Resultado",
+        "invalidDiceCount": "Introduce un número de dados entre 1 y 20.",
+        "invalidFaces": "Elige uno de los tipos de dado admitidos.",
+        "totalLabel": "Total",
+        "historyLabel": "Historial de Tiradas",
+        "clearHistory": "Borrar"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "Cada dado produce de forma independiente un número entero aleatorio uniforme de 1 a su número de caras."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la probabilidad de los dados",
+          "paragraph1": "Un dado justo con n caras produce cada uno de sus posibles resultados (del 1 al n) con igual probabilidad, 1/n, en cada tirada, independientemente de cualquier tirada anterior —una propiedad llamada \"sin memoria\". Esta herramienta simula ese comportamiento usando un generador de números pseudoaleatorios: cada tirada extrae un valor aleatorio distribuido uniformemente entre 1 y el número de caras seleccionado, de modo que a lo largo de muchas tiradas los resultados convergen hacia la misma frecuencia 1/n que produciría un dado físico justo.",
+          "paragraph2": "Lanzar varios dados a la vez cambia la forma de la distribución del total, aunque cada dado individual siga siendo uniforme. Una sola tirada de d6 tiene igual probabilidad de caer en cualquier cara del 1 al 6, pero la suma de dos dados d6 no es uniforme —los totales cercanos a 7 (el punto medio del rango posible de 2 a 12) son mucho más comunes que los totales cercanos a 2 o 12, porque hay más combinaciones de dos dados que suman 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1) que combinaciones que suman 2 (solo 1+1) o 12 (solo 6+6). Este es el mismo principio detrás de la distribución en forma de campana que se observa en los juegos de mesa y en los grupos de dados de los juegos de rol de mesa."
+        },
+        "useCases": {
+          "title": "Usos comunes",
+          "intro": "El lanzamiento de dados virtuales aparece en cualquier lugar donde se necesite un resultado justo e impredecible.",
+          "items": [
+            {
+              "title": "Juegos de mesa y de rol",
+              "description": "Resolver acciones en juegos como Dungeons & Dragons, que dependen de dados poliédricos (d4, d6, d8, d10, d12, d20) para tiradas de combate, pruebas de habilidad y cálculos de daño."
+            },
+            {
+              "title": "Juegos de mesa y juegos de fiesta",
+              "description": "Determinar el orden de turnos, el movimiento o resultados aleatorios en juegos de mesa clásicos, sin necesidad de tener dados físicos a mano."
+            },
+            {
+              "title": "Enseñar probabilidad y estadística",
+              "description": "Demostrar conceptos como las distribuciones uniformes, el valor esperado y la ley de los grandes números lanzando dados (simulados) muchas veces y observando cómo los resultados convergen hacia las probabilidades teóricas."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos datos de probabilidad sobre dados estándar.",
+          "columnScenario": "Escenario",
+          "columnProbability": "Probabilidad",
+          "rows": [
+            {
+              "scenario": "Sacar un 6 con un solo d6",
+              "probability": "1/6 ≈ 16.7%"
+            },
+            {
+              "scenario": "Sacar un 20 con un solo d20 (un \"crítico\")",
+              "probability": "1/20 = 5%"
+            },
+            {
+              "scenario": "Sacar un total de 7 con dos d6",
+              "probability": "6/36 ≈ 16.7%"
+            },
+            {
+              "scenario": "Sacar un total de 2 con dos d6 (\"ojos de serpiente\")",
+              "probability": "1/36 ≈ 2.8%"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Son estas tiradas verdaderamente aleatorias?",
+              "answer": "Esta herramienta usa el generador de números pseudoaleatorios integrado en tu navegador, que es estadísticamente uniforme e impredecible lo suficiente para juegos, enseñanza y uso casual, aunque no es una fuente de aleatoriedad criptográficamente segura adecuada para aplicaciones sensibles a la seguridad."
+            },
+            {
+              "question": "¿Por qué el total de varios dados se agrupa alrededor del medio?",
+              "answer": "Porque hay más formas de combinar dados para llegar a un total medio que a uno extremo. Con dos d6, solo una combinación (1+1) produce un total de 2, pero seis combinaciones producen un total de 7, lo que hace que 7 sea seis veces más probable que 2."
+            },
+            {
+              "question": "¿Cuál es el número máximo de dados que puedo lanzar a la vez?",
+              "answer": "Esta herramienta admite lanzar hasta 20 dados a la vez, lo que cubre cómodamente los grupos de dados usados en juegos de mesa y la mayoría de las demostraciones de probabilidad en el aula."
+            },
+            {
+              "question": "¿Por qué d4, d6, d8, d10, d12 y d20 son los tipos de dado estándar?",
+              "answer": "Estos corresponden a los cinco sólidos platónicos (tetraedro, cubo, octaedro, dodecaedro, icosaedro) más el dado de diez caras, todos los cuales tienen caras del mismo tamaño y forma, garantizando que cada resultado sea igualmente probable cuando el dado es justo y está equilibrado uniformemente."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "Los dados se encuentran entre los objetos de juego más antiguos conocidos por la arqueología, con dados en forma de cubo hallados en yacimientos de Oriente Medio y el valle del Indo que datan de hace unos 5.000 años, e incluso astrágalos aún más antiguos (huesos del tobillo de animales usados como proto-dados) hallados en yacimientos neolíticos. El conjunto ahora estándar de dados poliédricos (del d4 al d20) usado en los juegos de rol de mesa modernos se popularizó en la década de 1970 junto con el auge de juegos como Dungeons & Dragons, aunque los dados con forma de sólidos platónicos se remontan a la antigua Grecia y Roma."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "Los lanzadores de dados digitales como este dependen de algoritmos de generación de números pseudoaleatorios, que usan fórmulas matemáticas deterministas inicializadas con entradas impredecibles (como la hora del sistema o la entropía del hardware) para producir secuencias de números que superan las pruebas estadísticas de aleatoriedad. Esto hace innecesarios los dados físicos para la gran mayoría de los contextos de juego casual y educativos, mientras que los generadores de números verdaderamente aleatorios, basados en procesos físicos como el ruido atmosférico o la desintegración radiactiva, siguen reservados para aplicaciones de mayor riesgo como la criptografía."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La teoría de la probabilidad, el fundamento matemático de los juegos de dados, es una materia central dentro de los departamentos de estadística y matemáticas. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Matemáticas",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Estadística",
+                "note": "Uno de los departamentos de estadística líderes a nivel mundial, con amplia cobertura de la teoría de la probabilidad.",
+                "url": "https://statistics.stanford.edu/academics/phd-program",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Facultad de Matemáticas",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford — Departamento de Estadística",
+                "note": "Un centro líder en teoría de la probabilidad y sus aplicaciones.",
+                "url": "https://www.stats.ox.ac.uk/prospective-students/postgraduate-research-programmes",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Harvard — Departamento de Estadística",
+                "note": "Entre los mejores programas de estadística y probabilidad del mundo.",
+                "url": "https://statistics.fas.harvard.edu/phd-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Grinstead, C. M., & Snell, J. L. (1997). Introduction to Probability (2nd ed.). American Mathematical Society.",
+          "note": "Un libro de texto ampliamente utilizado y disponible gratuitamente que cubre los fundamentos de la teoría de la probabilidad, incluidas las distribuciones uniformes discretas y ejemplos basados en dados.",
+          "url": "https://math.dartmouth.edu/~prob/prob/prob.pdf",
+          "readOriginal": "Ver la obra de referencia"
+        }
+      }
     }
   },
   "toolPage": {

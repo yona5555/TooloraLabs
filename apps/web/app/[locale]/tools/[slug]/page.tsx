@@ -127,6 +127,8 @@ import DateCalculator from "@/components/tools/date-calculator/DateCalculator";
 import DateEducation from "@/components/tools/date-calculator/DateEducation";
 import TimeCalculator from "@/components/tools/time-calculator/TimeCalculator";
 import TimeEducation from "@/components/tools/time-calculator/TimeEducation";
+import DiceRoller from "@/components/tools/dice-roller/DiceRoller";
+import DiceEducation from "@/components/tools/dice-roller/DiceEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -531,6 +533,9 @@ export default async function ToolPage({
     case "time-calculator":
       component = <TimeCalculator education={<TimeEducation />} />;
       break;
+    case "dice-roller":
+      component = <DiceRoller education={<DiceEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -669,6 +674,7 @@ export default async function ToolPage({
     slug === "bmr-calculator" ||
     slug === "date-calculator" ||
     slug === "time-calculator" ||
+    slug === "dice-roller" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

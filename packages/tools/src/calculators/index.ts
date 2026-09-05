@@ -71,3 +71,4 @@ export * from "./MacroCalculator";
 export * from "./BMRCalculator";
 export * from "./DateCalculator";
 export * from "./TimeCalculator";
+export * from "./DiceRollerCalculator";

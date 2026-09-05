@@ -17987,6 +17987,164 @@
           "readOriginal": "View the Reference Work"
         }
       }
+    },
+    "dice-roller": {
+      "title": "Dice Roller",
+      "description": "Roll customizable virtual dice (d4, d6, d8, d10, d12, d20) and keep a history of your rolls.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Roll Settings",
+        "diceCountLabel": "Number of Dice",
+        "facesLabel": "Die Type",
+        "rollButton": "Roll Dice",
+        "rolling": "Rolling..."
+      },
+      "result": {
+        "heading": "Result",
+        "invalidDiceCount": "Enter a number of dice between 1 and 20.",
+        "invalidFaces": "Choose one of the supported die types.",
+        "totalLabel": "Total",
+        "historyLabel": "Roll History",
+        "clearHistory": "Clear"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Each die independently produces a uniformly random whole number from 1 to its number of faces."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Dice Probability",
+          "paragraph1": "A fair die with n faces produces each of its possible outcomes (1 through n) with equal probability, 1/n, on every roll, independent of any previous roll — a property called being \"memoryless.\" This tool simulates that behavior using a pseudorandom number generator: each roll draws a random value uniformly between 1 and the selected number of faces, so over many rolls the outcomes converge toward the same 1/n frequency a fair physical die would produce.",
+          "paragraph2": "Rolling multiple dice at once changes the shape of the total's distribution even though each individual die stays uniform. A single d6 roll is equally likely to land on any face from 1 to 6, but the sum of two d6 dice is not uniform — totals near 7 (the middle of the possible range of 2 to 12) are far more common than totals near 2 or 12, because there are more combinations of two dice that add up to 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1) than combinations that add up to 2 (only 1+1) or 12 (only 6+6). This is the same principle behind the bell-shaped distribution seen in board games and tabletop role-playing dice pools."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Virtual dice rolling shows up anywhere a fair, unpredictable outcome is needed.",
+          "items": [
+            {
+              "title": "Tabletop and Role-Playing Games",
+              "description": "Resolving actions in games like Dungeons & Dragons, which rely on polyhedral dice (d4, d6, d8, d10, d12, d20) for combat rolls, skill checks, and damage calculations."
+            },
+            {
+              "title": "Board Games and Party Games",
+              "description": "Determining turn order, movement, or random outcomes in classic board games, without needing physical dice on hand."
+            },
+            {
+              "title": "Teaching Probability and Statistics",
+              "description": "Demonstrating concepts like uniform distributions, expected value, and the law of large numbers by rolling (simulated) dice many times and observing the results converge toward theoretical probabilities."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few probability facts about standard dice.",
+          "columnScenario": "Scenario",
+          "columnProbability": "Probability",
+          "rows": [
+            {
+              "scenario": "Rolling a 6 on a single d6",
+              "probability": "1/6 ≈ 16.7%"
+            },
+            {
+              "scenario": "Rolling a 20 on a single d20 (a \"critical\")",
+              "probability": "1/20 = 5%"
+            },
+            {
+              "scenario": "Rolling a total of 7 with two d6",
+              "probability": "6/36 ≈ 16.7%"
+            },
+            {
+              "scenario": "Rolling a total of 2 with two d6 (\"snake eyes\")",
+              "probability": "1/36 ≈ 2.8%"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Are these rolls truly random?",
+              "answer": "This tool uses your browser's built-in pseudorandom number generator, which is statistically uniform and unpredictable enough for games, teaching, and casual use, though it is not a cryptographically secure source of randomness suitable for security-sensitive applications."
+            },
+            {
+              "question": "Why does the total of multiple dice cluster around the middle?",
+              "answer": "Because there are more ways to combine dice to reach a middle total than an extreme one. With two d6, only one combination (1+1) produces a total of 2, but six combinations produce a total of 7, making 7 six times more likely than 2."
+            },
+            {
+              "question": "What's the maximum number of dice I can roll at once?",
+              "answer": "This tool supports rolling up to 20 dice at a time, which comfortably covers dice pools used in tabletop games and most classroom probability demonstrations."
+            },
+            {
+              "question": "Why are d4, d6, d8, d10, d12, and d20 the standard die types?",
+              "answer": "These correspond to the five Platonic solids (tetrahedron, cube, octahedron, dodecahedron, icosahedron) plus the ten-sided die, all of which have faces of equal size and shape, ensuring every outcome is equally likely when the die is fair and evenly weighted."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Dice are among the oldest gaming objects known to archaeology, with cube-shaped dice found at sites in the Middle East and the Indus Valley dating back roughly 5,000 years, and even earlier astragali (animal knucklebones used as proto-dice) found at Neolithic sites. The now-standard set of polyhedral dice (d4 through d20) used in modern tabletop role-playing games was popularized in the 1970s alongside the rise of games like Dungeons & Dragons, though dice shaped as the Platonic solids date back to ancient Greece and Rome."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Digital dice rollers like this one rely on pseudorandom number generation algorithms, which use deterministic mathematical formulas seeded by unpredictable inputs (like system time or hardware entropy) to produce sequences of numbers that pass statistical tests for randomness. This makes physical dice unnecessary for the vast majority of casual gaming and educational contexts, while true random number generators, based on physical processes like atmospheric noise or radioactive decay, remain reserved for higher-stakes applications like cryptography."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Probability theory, the mathematical foundation of dice games, is a core subject within statistics and mathematics departments. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "Stanford University — Department of Statistics",
+                "note": "One of the leading statistics departments worldwide, with deep coverage of probability theory.",
+                "url": "https://statistics.stanford.edu/academics/phd-program",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "University of Oxford — Department of Statistics",
+                "note": "A leading center for probability theory and its applications.",
+                "url": "https://www.stats.ox.ac.uk/prospective-students/postgraduate-research-programmes",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "Harvard University — Department of Statistics",
+                "note": "Ranked among the top statistics and probability programs worldwide.",
+                "url": "https://statistics.fas.harvard.edu/phd-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Grinstead, C. M., & Snell, J. L. (1997). Introduction to Probability (2nd ed.). American Mathematical Society.",
+          "note": "A widely used, freely available textbook covering the foundations of probability theory, including discrete uniform distributions and dice-based examples.",
+          "url": "https://math.dartmouth.edu/~prob/prob/prob.pdf",
+          "readOriginal": "View the Reference Work"
+        }
+      }
     }
   },
   "toolPage": {

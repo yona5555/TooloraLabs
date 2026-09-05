@@ -17991,6 +17991,164 @@
           "readOriginal": "Consulter l'ouvrage de référence"
         }
       }
+    },
+    "dice-roller": {
+      "title": "Lanceur de Dés",
+      "description": "Lancez des dés virtuels personnalisables (d4, d6, d8, d10, d12, d20) et conservez un historique de vos lancers.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Paramètres du lancer",
+        "diceCountLabel": "Nombre de dés",
+        "facesLabel": "Type de dé",
+        "rollButton": "Lancer les dés",
+        "rolling": "Lancement..."
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidDiceCount": "Saisissez un nombre de dés entre 1 et 20.",
+        "invalidFaces": "Choisissez l'un des types de dé pris en charge.",
+        "totalLabel": "Total",
+        "historyLabel": "Historique des Lancers",
+        "clearHistory": "Effacer"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Chaque dé produit indépendamment un nombre entier aléatoire uniforme de 1 à son nombre de faces."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la probabilité des dés",
+          "paragraph1": "Un dé équilibré à n faces produit chacun de ses résultats possibles (1 à n) avec une probabilité égale, 1/n, à chaque lancer, indépendamment de tout lancer précédent — une propriété appelée \"sans mémoire\". Cet outil simule ce comportement à l'aide d'un générateur de nombres pseudo-aléatoires : chaque lancer tire une valeur aléatoire uniformément répartie entre 1 et le nombre de faces sélectionné, de sorte que sur de nombreux lancers, les résultats convergent vers la même fréquence 1/n qu'un dé physique équilibré produirait.",
+          "paragraph2": "Lancer plusieurs dés à la fois change la forme de la distribution du total, même si chaque dé individuel reste uniforme. Un seul lancer de d6 a autant de chances de tomber sur n'importe quelle face de 1 à 6, mais la somme de deux dés d6 n'est pas uniforme — les totaux proches de 7 (le milieu de la plage possible de 2 à 12) sont beaucoup plus fréquents que les totaux proches de 2 ou 12, car il existe plus de combinaisons de deux dés dont la somme fait 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1) que de combinaisons dont la somme fait 2 (seulement 1+1) ou 12 (seulement 6+6). C'est le même principe derrière la distribution en forme de cloche observée dans les jeux de société et les pools de dés des jeux de rôle sur table."
+        },
+        "useCases": {
+          "title": "Utilisations courantes",
+          "intro": "Le lancer de dés virtuel intervient partout où un résultat équitable et imprévisible est nécessaire.",
+          "items": [
+            {
+              "title": "Jeux de table et jeux de rôle",
+              "description": "Résoudre des actions dans des jeux comme Donjons & Dragons, qui s'appuient sur des dés polyédriques (d4, d6, d8, d10, d12, d20) pour les jets de combat, les tests de compétence et les calculs de dégâts."
+            },
+            {
+              "title": "Jeux de société et jeux d'ambiance",
+              "description": "Déterminer l'ordre des tours, les déplacements ou les résultats aléatoires dans les jeux de société classiques, sans avoir besoin de dés physiques sous la main."
+            },
+            {
+              "title": "Enseigner les probabilités et les statistiques",
+              "description": "Démontrer des concepts comme les distributions uniformes, l'espérance mathématique et la loi des grands nombres en lançant des dés (simulés) de nombreuses fois et en observant les résultats converger vers les probabilités théoriques."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques faits de probabilité sur les dés standards.",
+          "columnScenario": "Scénario",
+          "columnProbability": "Probabilité",
+          "rows": [
+            {
+              "scenario": "Obtenir un 6 avec un seul d6",
+              "probability": "1/6 ≈ 16,7%"
+            },
+            {
+              "scenario": "Obtenir un 20 avec un seul d20 (un \"critique\")",
+              "probability": "1/20 = 5%"
+            },
+            {
+              "scenario": "Obtenir un total de 7 avec deux d6",
+              "probability": "6/36 ≈ 16,7%"
+            },
+            {
+              "scenario": "Obtenir un total de 2 avec deux d6 (\"yeux de serpent\")",
+              "probability": "1/36 ≈ 2,8%"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Ces lancers sont-ils vraiment aléatoires ?",
+              "answer": "Cet outil utilise le générateur de nombres pseudo-aléatoires intégré à votre navigateur, qui est statistiquement uniforme et suffisamment imprévisible pour les jeux, l'enseignement et un usage occasionnel, bien qu'il ne s'agisse pas d'une source d'aléa cryptographiquement sécurisée adaptée aux applications sensibles à la sécurité."
+            },
+            {
+              "question": "Pourquoi le total de plusieurs dés se regroupe-t-il autour du milieu ?",
+              "answer": "Parce qu'il existe plus de façons de combiner des dés pour atteindre un total moyen qu'un total extrême. Avec deux d6, une seule combinaison (1+1) produit un total de 2, mais six combinaisons produisent un total de 7, ce qui rend 7 six fois plus probable que 2."
+            },
+            {
+              "question": "Quel est le nombre maximum de dés que je peux lancer à la fois ?",
+              "answer": "Cet outil permet de lancer jusqu'à 20 dés à la fois, ce qui couvre confortablement les pools de dés utilisés dans les jeux de table et la plupart des démonstrations de probabilité en classe."
+            },
+            {
+              "question": "Pourquoi d4, d6, d8, d10, d12 et d20 sont-ils les types de dés standards ?",
+              "answer": "Ceux-ci correspondent aux cinq solides de Platon (tétraèdre, cube, octaèdre, dodécaèdre, icosaèdre) plus le dé à dix faces, qui ont tous des faces de taille et de forme égales, garantissant que chaque résultat soit également probable lorsque le dé est équilibré et pondéré uniformément."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "Les dés comptent parmi les plus anciens objets de jeu connus de l'archéologie, des dés cubiques ayant été retrouvés sur des sites du Moyen-Orient et de la vallée de l'Indus datant d'environ 5 000 ans, et des astragales encore plus anciens (osselets d'animaux utilisés comme proto-dés) ayant été trouvés sur des sites néolithiques. L'ensemble aujourd'hui standard de dés polyédriques (du d4 au d20) utilisé dans les jeux de rôle sur table modernes s'est popularisé dans les années 1970 avec l'essor de jeux comme Donjons & Dragons, bien que des dés en forme de solides de Platon remontent à la Grèce et à la Rome antiques."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Les lanceurs de dés numériques comme celui-ci reposent sur des algorithmes de génération de nombres pseudo-aléatoires, qui utilisent des formules mathématiques déterministes initialisées par des entrées imprévisibles (comme l'heure système ou l'entropie matérielle) pour produire des séquences de nombres qui réussissent les tests statistiques d'aléa. Cela rend les dés physiques inutiles pour la grande majorité des contextes de jeu occasionnel et éducatifs, tandis que les véritables générateurs de nombres aléatoires, basés sur des processus physiques comme le bruit atmosphérique ou la désintégration radioactive, restent réservés à des applications à plus fort enjeu comme la cryptographie."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La théorie des probabilités, fondement mathématique des jeux de dés, est une matière centrale au sein des départements de statistique et de mathématiques. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université de Stanford — Department of Statistics",
+                "note": "L'un des départements de statistique les plus reconnus au monde, avec une large couverture de la théorie des probabilités.",
+                "url": "https://statistics.stanford.edu/academics/phd-program",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Mathematics",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford — Department of Statistics",
+                "note": "Un centre de premier plan pour la théorie des probabilités et ses applications.",
+                "url": "https://www.stats.ox.ac.uk/prospective-students/postgraduate-research-programmes",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Harvard — Department of Statistics",
+                "note": "Compte parmi les meilleurs programmes de statistique et de probabilité au monde.",
+                "url": "https://statistics.fas.harvard.edu/phd-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Grinstead, C. M., & Snell, J. L. (1997). Introduction to Probability (2nd ed.). American Mathematical Society.",
+          "note": "Un manuel largement utilisé et disponible gratuitement couvrant les fondements de la théorie des probabilités, y compris les distributions uniformes discrètes et des exemples basés sur les dés.",
+          "url": "https://math.dartmouth.edu/~prob/prob/prob.pdf",
+          "readOriginal": "Consulter l'ouvrage de référence"
+        }
+      }
     }
   },
   "toolPage": {

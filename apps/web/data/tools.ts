@@ -906,6 +906,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "dice-roller",
+    title: "Dice Roller",
+    category: "date-time",
+    description:
+      "Roll customizable virtual dice (d4, d6, d8, d10, d12, d20) with a roll history log.",
+    featured: false,
+    keywords: [
+      "dice roller",
+      "roll a dice",
+      "virtual dice",
+      "d20 roller",
+      "online dice simulator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
