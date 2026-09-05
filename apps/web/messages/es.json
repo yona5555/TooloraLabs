@@ -18294,6 +18294,174 @@
           "readOriginal": "Ver la Investigación"
         }
       }
+    },
+    "fuel-cost-calculator": {
+      "title": "Calculadora de Costo de Combustible",
+      "description": "Estima el costo de combustible de un viaje a partir de la distancia, la tasa de consumo y el precio del combustible.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Detalles del Viaje",
+        "distanceLabel": "Distancia del Viaje",
+        "rateModeLabel": "Tipo de Tasa",
+        "rateModes": {
+          "consumption": "Combustible por distancia (p. ej. L/100km)",
+          "efficiency": "Distancia por combustible (p. ej. km/L, mpg)"
+        },
+        "rateValueLabelConsumption": "Tasa de Consumo de Combustible",
+        "rateValueLabelEfficiency": "Tasa de Eficiencia de Combustible",
+        "rateValueHintConsumption": "Cuánto combustible usa tu vehículo por cada 100 unidades de distancia (p. ej. 8 L por 100 km).",
+        "rateValueHintEfficiency": "Qué tan lejos viaja tu vehículo por unidad de combustible (p. ej. 12.5 km por litro, o 30 millas por galón).",
+        "priceLabel": "Precio del Combustible (por Unidad)",
+        "priceHint": "Precio por litro o por galón, coincidiendo con la unidad de combustible usada arriba."
+      },
+      "diagram": {
+        "ariaLabel": "Diagrama de flujo desde la distancia del viaje hasta el combustible usado hasta el costo total",
+        "distance": "Distancia",
+        "fuelUsed": "Combustible Usado",
+        "totalCost": "Costo Total"
+      },
+      "result": {
+        "heading": "Costo Estimado",
+        "invalidDistance": "Introduce una distancia de viaje mayor que cero.",
+        "invalidRate": "Introduce una tasa de consumo o eficiencia mayor que cero.",
+        "invalidPrice": "Introduce un precio de combustible mayor que cero.",
+        "fuelUsedLabel": "Combustible Usado",
+        "costPerDistanceLabel": "Costo por Unidad de Distancia"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "El cálculo depende del tipo de tasa que elijas, pero ambos terminan con costo = combustible usado × precio."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la Estimación del Costo de Combustible",
+          "paragraph1": "Estimar el costo de combustible de un viaje se reduce a calcular cuánto combustible consumirá el viaje, y luego multiplicar esa cantidad por el precio del combustible. El uso de combustible en sí puede describirse de dos formas matemáticamente equivalentes pero formuladas de manera diferente: como una tasa de consumo (cuánto combustible se usa por una distancia fija, como litros por 100 kilómetros, común en la mayor parte del mundo) o como una tasa de eficiencia (qué tan lejos viaja un vehículo por unidad de combustible, como kilómetros por litro o millas por galón, común en Estados Unidos y el Reino Unido).",
+          "paragraph2": "Los dos tipos de tasa son simplemente inversos entre sí reorganizados por conveniencia: un auto que usa 8 litros por 100 km es exactamente tan eficiente como uno que viaja 12.5 km por litro (ya que 100 ÷ 8 = 12.5). Esta calculadora acepta cualquiera de los dos formatos directamente, por lo que no necesitas convertir las cifras de economía de combustible de tu vehículo a un formato diferente antes de estimar el costo de un viaje —solo necesitas mantener consistente la unidad de distancia y la unidad de distancia de la tasa de combustible (ambas en kilómetros, o ambas en millas)."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "La estimación del costo de combustible es útil en cualquier lugar donde se necesite planificar o comparar el costo de un viaje con anticipación.",
+          "items": [
+            {
+              "title": "Presupuesto para Viajes por Carretera",
+              "description": "Estimar el costo total de combustible para un viaje largo antes de partir, para planificar un presupuesto de viaje junto con los costos de alojamiento y comida."
+            },
+            {
+              "title": "Comparar Vehículos",
+              "description": "Comparar el costo de funcionamiento de dos vehículos diferentes con distintas calificaciones de eficiencia de combustible en el mismo trayecto o ruta regular."
+            },
+            {
+              "title": "División de Costos en Viajes Compartidos y Entregas",
+              "description": "Estimar una contribución justa de costo de combustible por persona o por entrega basada en la distancia recorrida y la eficiencia de combustible del vehículo."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Algunos cálculos de costo de combustible, calculados de la misma forma en que esta herramienta los calcula.",
+          "columnScenario": "Escenario",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "scenario": "Viaje de 500 km, 8 L/100km, $1.50/L",
+              "result": "40 L usados, $60.00 total"
+            },
+            {
+              "scenario": "Viaje de 500 km, 12.5 km/L, $1.50/L",
+              "result": "40 L usados, $60.00 total"
+            },
+            {
+              "scenario": "Viaje de 300 mi, 30 mpg, $3.50/gal",
+              "result": "10 gal usados, $35.00 total"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Qué tipo de tasa debo usar?",
+              "answer": "Usa la cifra que ya muestre el manual o el tablero de tu vehículo. La mayor parte del mundo (Europa, la mayor parte de Asia) reporta el consumo de combustible en litros por 100 km, mientras que Estados Unidos y el Reino Unido típicamente reportan la eficiencia de combustible en millas por galón."
+            },
+            {
+              "question": "¿Necesito convertir kilómetros a millas o litros a galones?",
+              "answer": "No —esta calculadora no realiza conversiones de unidades entre sistemas de medida. Solo asegúrate de que la distancia que introduces y la unidad de distancia implícita en tu cifra de tasa coincidan (ambas en kilómetros, o ambas en millas), y que tu precio sea por la misma unidad de combustible (litro o galón) que tu cifra de tasa."
+            },
+            {
+              "question": "¿Esto tiene en cuenta el tráfico, el terreno o el estilo de conducción?",
+              "answer": "No. Esta calculadora usa una única tasa de consumo de combustible fija que tú proporcionas, y asume que se aplica uniformemente a lo largo de todo el viaje. La economía de combustible real varía con el tráfico, la pendiente de la carretera, la velocidad, el peso de la carga y los hábitos de conducción, así que trata el resultado como una estimación en lugar de una predicción exacta."
+            },
+            {
+              "question": "¿Qué significa \"costo por unidad de distancia\"?",
+              "answer": "Es el costo total del viaje dividido por la distancia total, lo que te da una cifra de costo por kilómetro o por milla, útil para comparar viajes de diferentes longitudes o comparar con una tasa de reembolso por milla."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La medición de la economía de combustible se convirtió en un asunto de interés público y regulatorio tras la crisis del petróleo de 1973, cuando la escasez de combustible y los picos de precios impulsaron a los gobiernos a exigir el etiquetado estandarizado de economía de combustible en los vehículos nuevos. Estados Unidos introdujo los estándares de Economía de Combustible Promedio Corporativa (CAFE) en 1975, reportados en millas por galón, mientras que la mayor parte del resto del mundo adoptó la convención de litros por 100 kilómetros, que tiene la ventaja práctica de que un número más bajo siempre significa mejor eficiencia (a diferencia de millas por galón, donde un número más alto es mejor, lo que hace que las diferencias directas sean menos intuitivas de comparar)."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos Modernos",
+            "paragraph": "Los vehículos modernos incluyen computadoras de viaje integradas que estiman el consumo de combustible en tiempo real y promedio usando datos de la unidad de control del motor, aunque las calificaciones oficiales de economía de combustible (como las de la EPA en Estados Unidos o el procedimiento de prueba WLTP en la Unión Europea) se miden bajo condiciones de laboratorio estandarizadas que pueden no coincidir exactamente con la conducción real, razón por la cual los costos de combustible reales a menudo son algo más altos de lo que sugeriría la calificación oficial."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La eficiencia de combustible de vehículos y el consumo de energía se estudian dentro de la ingeniería mecánica y automotriz. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ingeniería Mecánica",
+                "note": "Uno de los departamentos de ingeniería mecánica líderes del mundo, con sólida investigación en sistemas automotrices y energéticos.",
+                "url": "https://meche.mit.edu/degree-programs",
+                "online": "No — los títulos de investigación principales del departamento son presenciales."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ingeniería Mecánica",
+                "note": "Un centro líder en investigación de ingeniería automotriz y energética.",
+                "url": "https://me.stanford.edu/academics/graduate",
+                "online": "No — el programa es un título de investigación presencial."
+              },
+              {
+                "name": "Universidad de Michigan — Departamento de Ingeniería Mecánica",
+                "note": "Sede de uno de los programas de investigación en ingeniería automotriz más grandes de Estados Unidos, estrechamente vinculado a la industria automotriz.",
+                "url": "https://me.engin.umich.edu/academics/graduate/",
+                "online": "No — los títulos de investigación del departamento son presenciales."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Ingeniería",
+                "note": "Un departamento de ingeniería líder con sólidos grupos de investigación en energía y transporte.",
+                "url": "https://www.eng.cam.ac.uk/postgraduate",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ingeniería."
+              },
+              {
+                "name": "Universidad Técnica de Múnich — Departamento de Ingeniería Mecánica",
+                "note": "Uno de los departamentos de ingeniería automotriz líderes de Europa, estrechamente vinculado a la industria automotriz alemana.",
+                "url": "https://www.mw.tum.de/en/mw/for-prospective-students/doctorate/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ingeniería Mecánica",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/mech/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "U.S. Environmental Protection Agency & U.S. Department of Energy. (2024). Fuel Economy Guide.",
+          "note": "La referencia oficial del gobierno de EE. UU. que explica cómo se prueba y califica la economía de combustible, y cómo la conducción real afecta el consumo de combustible.",
+          "url": "https://www.fueleconomy.gov/",
+          "readOriginal": "Ver la Referencia"
+        }
+      }
     }
   },
   "toolPage": {

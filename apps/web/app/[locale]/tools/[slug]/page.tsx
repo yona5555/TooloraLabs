@@ -131,6 +131,8 @@ import DiceRoller from "@/components/tools/dice-roller/DiceRoller";
 import DiceEducation from "@/components/tools/dice-roller/DiceEducation";
 import LoveCalculator from "@/components/tools/love-calculator/LoveCalculator";
 import LoveEducation from "@/components/tools/love-calculator/LoveEducation";
+import FuelCostCalculator from "@/components/tools/fuel-cost-calculator/FuelCostCalculator";
+import FuelEducation from "@/components/tools/fuel-cost-calculator/FuelEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -541,6 +543,9 @@ export default async function ToolPage({
     case "love-calculator":
       component = <LoveCalculator education={<LoveEducation />} />;
       break;
+    case "fuel-cost-calculator":
+      component = <FuelCostCalculator education={<FuelEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -681,6 +686,7 @@ export default async function ToolPage({
     slug === "time-calculator" ||
     slug === "dice-roller" ||
     slug === "love-calculator" ||
+    slug === "fuel-cost-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

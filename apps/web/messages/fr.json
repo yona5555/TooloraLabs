@@ -18294,6 +18294,174 @@
           "readOriginal": "Consulter la Recherche"
         }
       }
+    },
+    "fuel-cost-calculator": {
+      "title": "Calculatrice de Coût de Carburant",
+      "description": "Estimez le coût en carburant d'un trajet à partir de la distance, du taux de consommation et du prix du carburant.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Détails du Trajet",
+        "distanceLabel": "Distance du Trajet",
+        "rateModeLabel": "Type de Taux",
+        "rateModes": {
+          "consumption": "Carburant par distance (ex. L/100km)",
+          "efficiency": "Distance par carburant (ex. km/L, mpg)"
+        },
+        "rateValueLabelConsumption": "Taux de Consommation de Carburant",
+        "rateValueLabelEfficiency": "Taux d'Efficacité du Carburant",
+        "rateValueHintConsumption": "Quelle quantité de carburant votre véhicule utilise par 100 unités de distance (ex. 8 L pour 100 km).",
+        "rateValueHintEfficiency": "Quelle distance votre véhicule parcourt par unité de carburant (ex. 12,5 km par litre, ou 30 miles par gallon).",
+        "priceLabel": "Prix du Carburant (par Unité)",
+        "priceHint": "Prix par litre ou par gallon, correspondant à l'unité de carburant utilisée ci-dessus."
+      },
+      "diagram": {
+        "ariaLabel": "Diagramme de flux de la distance du trajet au carburant utilisé jusqu'au coût total",
+        "distance": "Distance",
+        "fuelUsed": "Carburant Utilisé",
+        "totalCost": "Coût Total"
+      },
+      "result": {
+        "heading": "Coût Estimé",
+        "invalidDistance": "Saisissez une distance de trajet supérieure à zéro.",
+        "invalidRate": "Saisissez un taux de consommation ou d'efficacité supérieur à zéro.",
+        "invalidPrice": "Saisissez un prix de carburant supérieur à zéro.",
+        "fuelUsedLabel": "Carburant Utilisé",
+        "costPerDistanceLabel": "Coût par Unité de Distance"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Le calcul dépend du type de taux choisi, mais les deux se terminent par coût = carburant utilisé × prix."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'Estimation du Coût de Carburant",
+          "paragraph1": "Estimer le coût en carburant d'un trajet revient à déterminer la quantité de carburant que le trajet consommera, puis à multiplier cette quantité par le prix du carburant. La consommation de carburant elle-même peut être décrite de deux façons mathématiquement équivalentes mais formulées différemment : comme un taux de consommation (la quantité de carburant utilisée pour une distance fixe, comme des litres pour 100 kilomètres, courant dans la majeure partie du monde) ou comme un taux d'efficacité (la distance parcourue par un véhicule par unité de carburant, comme des kilomètres par litre ou des miles par gallon, courant aux États-Unis et au Royaume-Uni).",
+          "paragraph2": "Les deux types de taux sont simplement des inverses l'un de l'autre, réarrangés par commodité : une voiture consommant 8 litres pour 100 km est exactement aussi efficace qu'une voiture parcourant 12,5 km par litre (puisque 100 ÷ 8 = 12,5). Cette calculatrice accepte directement les deux formats, vous n'avez donc pas besoin de convertir les chiffres de consommation de votre véhicule dans un format différent avant d'estimer le coût d'un trajet — vous devez simplement veiller à ce que l'unité de distance et l'unité de distance du taux de carburant soient cohérentes (toutes deux en kilomètres, ou toutes deux en miles)."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "L'estimation du coût de carburant est utile partout où le coût d'un trajet doit être planifié ou comparé à l'avance.",
+          "items": [
+            {
+              "title": "Budgétisation de Road Trips",
+              "description": "Estimer le coût total en carburant pour un long trajet avant de partir, afin de planifier un budget de voyage avec les coûts d'hébergement et de repas."
+            },
+            {
+              "title": "Comparaison de Véhicules",
+              "description": "Comparer le coût de fonctionnement de deux véhicules différents avec des indices d'efficacité de carburant différents sur le même trajet régulier."
+            },
+            {
+              "title": "Partage des Coûts en Covoiturage et Livraison",
+              "description": "Estimer une contribution équitable au coût du carburant par personne ou par livraison en fonction de la distance parcourue et de l'efficacité du carburant du véhicule."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Quelques calculs de coût de carburant, effectués de la même manière que cet outil les calcule.",
+          "columnScenario": "Scénario",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "scenario": "Trajet de 500 km, 8 L/100km, 1,50 $/L",
+              "result": "40 L utilisés, 60,00 $ au total"
+            },
+            {
+              "scenario": "Trajet de 500 km, 12,5 km/L, 1,50 $/L",
+              "result": "40 L utilisés, 60,00 $ au total"
+            },
+            {
+              "scenario": "Trajet de 300 mi, 30 mpg, 3,50 $/gal",
+              "result": "10 gal utilisés, 35,00 $ au total"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Quel type de taux dois-je utiliser ?",
+              "answer": "Utilisez le chiffre déjà indiqué par le manuel ou le tableau de bord de votre véhicule. La majeure partie du monde (Europe, la plupart de l'Asie) indique la consommation de carburant en litres pour 100 km, tandis que les États-Unis et le Royaume-Uni indiquent généralement l'efficacité du carburant en miles par gallon."
+            },
+            {
+              "question": "Dois-je convertir les kilomètres en miles ou les litres en gallons ?",
+              "answer": "Non — cette calculatrice n'effectue pas de conversions d'unités entre systèmes de mesure. Assurez-vous simplement que la distance que vous saisissez et l'unité de distance impliquée par votre chiffre de taux correspondent (toutes deux en kilomètres, ou toutes deux en miles), et que votre prix soit par la même unité de carburant (litre ou gallon) que votre chiffre de taux."
+            },
+            {
+              "question": "Cela tient-il compte du trafic, du terrain ou du style de conduite ?",
+              "answer": "Non. Cette calculatrice utilise un taux de consommation de carburant unique et fixe que vous fournissez, et suppose qu'il s'applique uniformément sur l'ensemble du trajet. La consommation de carburant réelle varie selon le trafic, la pente de la route, la vitesse, le poids de la charge et les habitudes de conduite, alors considérez le résultat comme une estimation plutôt qu'une prédiction exacte."
+            },
+            {
+              "question": "Que signifie \"coût par unité de distance\" ?",
+              "answer": "C'est le coût total du trajet divisé par la distance totale, ce qui vous donne un chiffre de coût par kilomètre ou par mile, utile pour comparer des trajets de différentes longueurs ou comparer avec un taux de remboursement par mile."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La mesure de la consommation de carburant est devenue une question d'intérêt public et réglementaire après la crise pétrolière de 1973, lorsque les pénuries de carburant et les flambées de prix ont poussé les gouvernements à exiger un étiquetage standardisé de la consommation de carburant sur les véhicules neufs. Les États-Unis ont introduit les normes Corporate Average Fuel Economy (CAFE) en 1975, exprimées en miles par gallon, tandis que la majeure partie du reste du monde a adopté la convention litres pour 100 kilomètres, qui présente l'avantage pratique qu'un chiffre plus bas signifie toujours une meilleure efficacité (contrairement aux miles par gallon, où un chiffre plus élevé est meilleur, ce qui rend les différences directes moins intuitives à comparer)."
+          },
+          "modernDevelopments": {
+            "title": "Développements Modernes",
+            "paragraph": "Les véhicules modernes comprennent des ordinateurs de bord intégrés qui estiment la consommation de carburant en temps réel et moyenne à partir des données du calculateur moteur, bien que les indices officiels de consommation de carburant (comme ceux de l'EPA aux États-Unis ou la procédure d'essai WLTP dans l'Union européenne) soient mesurés dans des conditions de laboratoire standardisées qui peuvent ne pas correspondre exactement à la conduite réelle, ce qui explique pourquoi les coûts de carburant réels sont souvent un peu plus élevés que ce que l'indice officiel suggérerait."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'efficacité énergétique des véhicules et la consommation d'énergie sont étudiées en génie mécanique et automobile. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mechanical Engineering",
+                "note": "L'un des départements de génie mécanique les plus reconnus au monde, avec une solide recherche en systèmes automobiles et énergétiques.",
+                "url": "https://meche.mit.edu/degree-programs",
+                "online": "Non — les diplômes de recherche principaux du département sont en présentiel."
+              },
+              {
+                "name": "Université de Stanford — Department of Mechanical Engineering",
+                "note": "Un centre de premier plan pour la recherche en ingénierie automobile et énergétique.",
+                "url": "https://me.stanford.edu/academics/graduate",
+                "online": "Non — le programme est un diplôme de recherche en présentiel."
+              },
+              {
+                "name": "Université du Michigan — Department of Mechanical Engineering",
+                "note": "Abrite l'un des plus grands programmes de recherche en ingénierie automobile aux États-Unis, étroitement lié à l'industrie automobile.",
+                "url": "https://me.engin.umich.edu/academics/graduate/",
+                "online": "Non — les diplômes de recherche du département sont en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Engineering",
+                "note": "Un département d'ingénierie de premier plan avec de solides groupes de recherche en énergie et transport.",
+                "url": "https://www.eng.cam.ac.uk/postgraduate",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel au département d'ingénierie."
+              },
+              {
+                "name": "Université technique de Munich — Department of Mechanical Engineering",
+                "note": "L'un des départements d'ingénierie automobile les plus reconnus d'Europe, étroitement lié à l'industrie automobile allemande.",
+                "url": "https://www.mw.tum.de/en/mw/for-prospective-students/doctorate/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de génie mécanique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/mech/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "U.S. Environmental Protection Agency & U.S. Department of Energy. (2024). Fuel Economy Guide.",
+          "note": "La référence officielle du gouvernement américain expliquant comment la consommation de carburant est testée et évaluée, et comment la conduite réelle affecte la consommation de carburant.",
+          "url": "https://www.fueleconomy.gov/",
+          "readOriginal": "Consulter la Référence"
+        }
+      }
     }
   },
   "toolPage": {

@@ -936,6 +936,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "fuel-cost-calculator",
+    title: "Fuel Cost Calculator",
+    category: "business-finance",
+    description:
+      "Estimate the fuel cost of a trip from distance, fuel consumption rate, and fuel price.",
+    featured: false,
+    keywords: [
+      "fuel cost calculator",
+      "gas cost calculator",
+      "trip fuel calculator",
+      "fuel consumption calculator",
+      "road trip cost calculator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
