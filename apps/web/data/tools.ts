@@ -756,6 +756,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "target-heart-rate-calculator",
+    title: "Target Heart Rate Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate your maximum heart rate and five training zones from your age, optionally refined with your resting heart rate using the Karvonen method.",
+    featured: false,
+    keywords: [
+      "target heart rate calculator",
+      "max heart rate calculator",
+      "heart rate zones",
+      "karvonen method",
+      "training zones",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

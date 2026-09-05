@@ -16105,6 +16105,184 @@
           "readOriginal": "Leer el artículo original de Pearson"
         }
       }
+    },
+    "target-heart-rate-calculator": {
+      "title": "Calculadora de Frecuencia Cardíaca Objetivo",
+      "description": "Calcula tu frecuencia cardíaca máxima y cinco zonas de entrenamiento a partir de tu edad, refinadas opcionalmente con tu frecuencia cardíaca en reposo mediante el método de Karvonen.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tus datos",
+        "age": "Edad",
+        "useRestingHeartRate": "Conozco mi frecuencia cardíaca en reposo",
+        "restingHeartRate": "Frecuencia cardíaca en reposo (lpm)",
+        "hintSimple": "Las zonas se calculan como un porcentaje directo de tu frecuencia cardíaca máxima estimada.",
+        "hintKarvonen": "Las zonas se calculan con el método de Karvonen, que tiene en cuenta tu frecuencia cardíaca en reposo para un rango más personalizado."
+      },
+      "diagram": {
+        "ariaLabel": "Una barra horizontal que muestra las cinco zonas de entrenamiento de frecuencia cardíaca escaladas de 0 a tu frecuencia cardíaca máxima"
+      },
+      "zones": {
+        "veryLight": "Muy ligera",
+        "light": "Ligera",
+        "moderate": "Moderada",
+        "hard": "Intensa",
+        "maximum": "Máxima"
+      },
+      "result": {
+        "heading": "Resultado",
+        "maxHeartRate": "Frecuencia cardíaca máxima estimada (lpm)",
+        "bpm": "lpm",
+        "errors": {
+          "invalid-age": "Introduce una edad entre 1 y 120 para ver un resultado.",
+          "invalid-resting-heart-rate": "Introduce una frecuencia cardíaca en reposo entre 1 y 220 lpm."
+        }
+      },
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Cada zona de entrenamiento es una banda porcentual de tu frecuencia cardíaca máxima estimada."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la frecuencia cardíaca objetivo",
+          "paragraph1": "Las zonas de frecuencia cardíaca objetivo traducen la intensidad del ejercicio en un rango de frecuencia cardíaca que puedes monitorear en tiempo real, para entrenar a un nivel de esfuerzo específico en lugar de adivinar. El punto de partida es tu frecuencia cardíaca máxima estimada — la velocidad más rápida a la que tu corazón puede latir con seguridad durante un esfuerzo máximo —, a partir de la cual se calculan cinco zonas de entrenamiento estándar como bandas porcentuales, desde actividad muy ligera hasta esfuerzo máximo.",
+          "paragraph2": "Esta calculadora estima la frecuencia cardíaca máxima usando la fórmula clásica \"220 menos la edad\", que sigue siendo la estimación más citada a pesar de ser un promedio poblacional que puede diferir en 10-20 latidos por minuto para cualquier persona en particular. Cuando también proporcionas tu frecuencia cardíaca en reposo, cambia al método de Karvonen, que calcula las zonas a partir de tu reserva de frecuencia cardíaca (máxima menos reposo) en lugar de porcentajes directos del máximo — una estimación más personalizada, ya que tiene en cuenta tu nivel de forma física actual en lugar de tratar a todas las personas de la misma edad por igual."
+        },
+        "zones": {
+          "title": "Las cinco zonas de entrenamiento",
+          "intro": "Cada zona corresponde a un objetivo de entrenamiento y un efecto fisiológico diferentes.",
+          "items": [
+            {
+              "title": "Muy ligera (50-60%)",
+              "description": "Intensidad de calentamiento y enfriamiento, y la zona más asociada con la recuperación activa entre sesiones más intensas. Suficientemente fácil como para mantener una conversación completa sin notar tu respiración."
+            },
+            {
+              "title": "Ligera (60-70%)",
+              "description": "A menudo llamada \"zona de quema de grasa\" porque un mayor porcentaje de las calorías quemadas a esta intensidad proviene de la grasa frente a los carbohidratos — aunque el total de calorías quemadas por minuto es menor que en zonas más intensas, así que no es necesariamente la forma más rápida de quemar grasa en general."
+            },
+            {
+              "title": "Moderada (70-80%)",
+              "description": "La clásica zona aeróbica o de \"cardio\", ampliamente recomendada como objetivo para desarrollar la resistencia cardiovascular. La respiración se profundiza notablemente y mantener una conversación se vuelve difícil."
+            },
+            {
+              "title": "Intensa (80-90%)",
+              "description": "La zona de umbral anaeróbico, donde el cuerpo empieza a depender más de sistemas de energía que no requieren oxígeno. Se usa para entrenamiento por intervalos y para desarrollar velocidad y rendimiento en lugar de resistencia pura."
+            },
+            {
+              "title": "Máxima (90-100%)",
+              "description": "Esfuerzo casi máximo a máximo, sostenible solo durante ráfagas cortas. Se usa con moderación en entrenamiento por intervalos por atletas bien entrenados, y generalmente no es una zona para entrenar de forma continua."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunas edades y lo que devuelve esta calculadora para cada una.",
+          "columnCalculation": "Entrada",
+          "columnResult": "FC máx. / Zona moderada (70-80%)",
+          "rows": [
+            {
+              "calculation": "Edad 20 (método simple)",
+              "result": "FC máx. = 200, Moderada = 140-160 lpm"
+            },
+            {
+              "calculation": "Edad 40 (método simple)",
+              "result": "FC máx. = 180, Moderada = 126-144 lpm"
+            },
+            {
+              "calculation": "Edad 20, FC reposo 60 (Karvonen)",
+              "result": "FC máx. = 200, Moderada = 158-172 lpm"
+            },
+            {
+              "calculation": "Edad 60 (método simple)",
+              "result": "FC máx. = 160, Moderada = 112-128 lpm"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Qué tan precisa es la fórmula \"220 menos la edad\"?",
+              "answer": "Es una estimación promedio poblacional derivada de estudios de la década de 1970, y para cualquier persona en particular la frecuencia cardíaca máxima real puede diferir de esta estimación en 10-20 latidos por minuto en cualquier dirección. Sigue siendo útil como guía general para establecer zonas de entrenamiento, pero una prueba de esfuerzo máxima supervisada es la única forma de conocer con precisión tu frecuencia cardíaca máxima real."
+            },
+            {
+              "question": "¿Por qué añadir mi frecuencia cardíaca en reposo cambia las zonas?",
+              "answer": "El método de Karvonen calcula las zonas como un porcentaje de tu reserva de frecuencia cardíaca (frecuencia cardíaca máxima menos frecuencia cardíaca en reposo) en lugar de un porcentaje de la frecuencia cardíaca máxima por sí sola. Dos personas con la misma frecuencia cardíaca máxima pero distinto nivel de forma física —y por tanto distinta frecuencia cardíaca en reposo— obtendrán zonas objetivo diferentes y más personalizadas con este método."
+            },
+            {
+              "question": "¿Cuál es una frecuencia cardíaca en reposo normal?",
+              "answer": "La mayoría de los adultos tienen una frecuencia cardíaca en reposo de entre 60 y 100 latidos por minuto, medida tras varios minutos de reposo, idealmente a primera hora de la mañana antes de levantarse de la cama. Los atletas bien entrenados suelen tener frecuencias cardíacas en reposo muy por debajo de 60, a veces en los 40, lo que refleja un corazón más eficiente."
+            },
+            {
+              "question": "¿Debo entrenar siempre en la zona de \"quema de grasa\" para perder peso?",
+              "answer": "No necesariamente. Aunque la zona ligera quema un mayor porcentaje de calorías provenientes de la grasa, el total de calorías quemadas (y por tanto de grasa quemada) por minuto suele ser mayor en zonas más intensas, ya que se gasta más energía en general. El total de calorías quemadas a lo largo del tiempo tiende a importar más para la pérdida de peso que la fuente de combustible específica usada minuto a minuto."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La fórmula \"220 menos la edad\" para estimar la frecuencia cardíaca máxima se remonta a una revisión de 1971 del fisiólogo William Haskell y el cardiólogo Samuel Fox, quienes resumieron datos existentes (en gran parte no publicados) en lo que se convirtió en la estimación más citada en la ciencia del ejercicio. Las zonas de entrenamiento de frecuencia cardíaca en sí surgieron de la investigación sobre la fisiología del ejercicio aeróbico en los años 60 y 70, cuando los científicos del deporte buscaban formas objetivas y medibles de prescribir y monitorear la intensidad del ejercicio más allá de la sensación subjetiva de esfuerzo de una persona."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "Investigaciones posteriores han producido fórmulas más refinadas para estimar la frecuencia cardíaca máxima — como la fórmula de Tanaka (208 menos 0,7 por la edad), publicada en 2001 a partir de un metaanálisis de más de 18.000 sujetos —, que tienden a ser más precisas para adultos mayores, aunque \"220 menos la edad\" sigue siendo la más utilizada en dispositivos de fitness para el consumidor. Los wearables y rastreadores de actividad modernos ahora miden la frecuencia cardíaca continuamente mediante sensores ópticos, lo que permite a los atletas monitorear su zona en tiempo real durante un entrenamiento en lugar de depender solo de la estimación, y algunos dispositivos refinan aún más las estimaciones de zona usando una frecuencia cardíaca máxima medida en laboratorio o en campo en lugar de una fórmula basada en la edad."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "El entrenamiento de frecuencia cardíaca y la fisiología del ejercicio se estudian dentro de la kinesiología y las ciencias del ejercicio, parte del campo más amplio de las ciencias de la salud. Estos son cinco programas respetados en fisiología del ejercicio y ciencias del deporte, más una institución regional:",
+            "universities": [
+              {
+                "name": "Universidad de Oregón — Departamento de Fisiología Humana",
+                "note": "Un programa estadounidense líder en fisiología humana e investigación en ciencias del deporte.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "No — los programas de posgrado son programas de investigación presenciales."
+              },
+              {
+                "name": "Universidad de Texas en Austin — Departamento de Kinesiología y Educación para la Salud",
+                "note": "Uno de los departamentos de kinesiología más grandes y consolidados de EE. UU.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Algunos programas de posgrado ofrecen opciones en línea; el doctorado de investigación principal es presencial."
+              },
+              {
+                "name": "Universidad de Loughborough — Escuela de Ciencias del Deporte, Ejercicio y Salud",
+                "note": "Clasificada de forma constante entre las mejores universidades del mundo en materias relacionadas con el deporte (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "No — los títulos de investigación de posgrado son presenciales."
+              },
+              {
+                "name": "Universidad de Copenhague — Departamento de Nutrición, Ejercicio y Deporte",
+                "note": "Un centro europeo líder en investigación de fisiología del ejercicio.",
+                "url": "https://nexs.ku.dk/english/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Instituto Australiano del Deporte",
+                "note": "El instituto nacional australiano de ciencias del deporte de alto rendimiento y medicina deportiva.",
+                "url": "https://www.ais.gov.au/",
+                "online": "No — es un instituto nacional de formación e investigación, no una universidad que otorgue títulos."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Educación Física",
+                "note": "Fundada en 1866; ofrece programas de educación física y ciencias del deporte a nivel regional.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Fox, S. M., Naughton, J. P., & Haskell, W. L. (1971). Physical activity and the prevention of coronary heart disease. Annals of Clinical Research, 3(6), 404-432.",
+          "note": "La revisión ampliamente citada que popularizó la fórmula \"220 menos la edad\" para estimar la frecuencia cardíaca máxima, aún la estimación más utilizada en aplicaciones de fitness para el consumidor.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/5134317/",
+          "readOriginal": "Ver el estudio original"
+        }
+      }
     }
   },
   "toolPage": {

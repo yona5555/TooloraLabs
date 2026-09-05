@@ -16105,6 +16105,184 @@
           "readOriginal": "Lire l'article original de Pearson"
         }
       }
+    },
+    "target-heart-rate-calculator": {
+      "title": "Calculatrice de Fréquence Cardiaque Cible",
+      "description": "Calculez votre fréquence cardiaque maximale et cinq zones d'entraînement à partir de votre âge, affinées facultativement avec votre fréquence cardiaque au repos via la méthode de Karvonen.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Vos données",
+        "age": "Âge",
+        "useRestingHeartRate": "Je connais ma fréquence cardiaque au repos",
+        "restingHeartRate": "Fréquence cardiaque au repos (bpm)",
+        "hintSimple": "Les zones sont calculées comme un pourcentage direct de votre fréquence cardiaque maximale estimée.",
+        "hintKarvonen": "Les zones sont calculées avec la méthode de Karvonen, qui prend en compte votre fréquence cardiaque au repos pour une plage plus personnalisée."
+      },
+      "diagram": {
+        "ariaLabel": "Une barre horizontale montrant les cinq zones d'entraînement de fréquence cardiaque, mises à l'échelle de 0 à votre fréquence cardiaque maximale"
+      },
+      "zones": {
+        "veryLight": "Très légère",
+        "light": "Légère",
+        "moderate": "Modérée",
+        "hard": "Intense",
+        "maximum": "Maximale"
+      },
+      "result": {
+        "heading": "Résultat",
+        "maxHeartRate": "Fréquence cardiaque maximale estimée (bpm)",
+        "bpm": "bpm",
+        "errors": {
+          "invalid-age": "Saisissez un âge entre 1 et 120 pour voir un résultat.",
+          "invalid-resting-heart-rate": "Saisissez une fréquence cardiaque au repos entre 1 et 220 bpm."
+        }
+      },
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Chaque zone d'entraînement est une bande de pourcentage de votre fréquence cardiaque maximale estimée."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la fréquence cardiaque cible",
+          "paragraph1": "Les zones de fréquence cardiaque cible traduisent l'intensité de l'exercice en une plage de fréquence cardiaque que vous pouvez surveiller en temps réel, afin de vous entraîner à un niveau d'effort précis plutôt que de deviner. Le point de départ est votre fréquence cardiaque maximale estimée — la vitesse la plus rapide à laquelle votre cœur peut battre en toute sécurité lors d'un effort maximal —, à partir de laquelle cinq zones d'entraînement standards sont calculées sous forme de bandes de pourcentage, d'une activité très légère à un effort maximal.",
+          "paragraph2": "Cette calculatrice estime la fréquence cardiaque maximale à l'aide de la formule classique \"220 moins l'âge\", toujours l'estimation la plus citée bien qu'il s'agisse d'une moyenne de population pouvant varier de 10 à 20 battements par minute pour un individu donné. Lorsque vous fournissez également votre fréquence cardiaque au repos, elle bascule vers la méthode de Karvonen, qui calcule les zones à partir de votre réserve de fréquence cardiaque (maximum moins repos) plutôt que de pourcentages directs du maximum — une estimation plus personnalisée, car elle tient compte de votre niveau de forme physique actuel plutôt que de traiter toutes les personnes du même âge de façon identique."
+        },
+        "zones": {
+          "title": "Les cinq zones d'entraînement",
+          "intro": "Chaque zone correspond à un objectif d'entraînement et un effet physiologique différents.",
+          "items": [
+            {
+              "title": "Très légère (50-60 %)",
+              "description": "Intensité d'échauffement et de récupération, et la zone la plus associée à la récupération active entre des séances plus intenses. Assez facile pour tenir une conversation complète sans remarquer sa respiration."
+            },
+            {
+              "title": "Légère (60-70 %)",
+              "description": "Souvent appelée \"zone de combustion des graisses\" car un pourcentage plus élevé des calories brûlées à cette intensité provient des graisses plutôt que des glucides — bien que le total de calories brûlées par minute soit inférieur à celui des zones plus intenses, ce qui n'en fait pas nécessairement le moyen le plus rapide de brûler des graisses au total."
+            },
+            {
+              "title": "Modérée (70-80 %)",
+              "description": "La zone aérobie ou \"cardio\" classique, largement recommandée comme objectif pour développer l'endurance cardiovasculaire. La respiration s'approfondit nettement et tenir une conversation devient difficile."
+            },
+            {
+              "title": "Intense (80-90 %)",
+              "description": "La zone de seuil anaérobie, où le corps commence à s'appuyer davantage sur des systèmes énergétiques ne nécessitant pas d'oxygène. Utilisée pour l'entraînement par intervalles et le développement de la vitesse et de la performance plutôt que de l'endurance pure."
+            },
+            {
+              "title": "Maximale (90-100 %)",
+              "description": "Effort quasi maximal à maximal, tenable seulement par courtes rafales. Utilisée avec parcimonie en entraînement par intervalles par des athlètes bien entraînés, et généralement pas une zone où s'entraîner en continu."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques âges et ce que cette calculatrice renvoie pour chacun.",
+          "columnCalculation": "Saisie",
+          "columnResult": "FC max / Zone modérée (70-80 %)",
+          "rows": [
+            {
+              "calculation": "Âge 20 (méthode simple)",
+              "result": "FC max = 200, Modérée = 140-160 bpm"
+            },
+            {
+              "calculation": "Âge 40 (méthode simple)",
+              "result": "FC max = 180, Modérée = 126-144 bpm"
+            },
+            {
+              "calculation": "Âge 20, FC repos 60 (Karvonen)",
+              "result": "FC max = 200, Modérée = 158-172 bpm"
+            },
+            {
+              "calculation": "Âge 60 (méthode simple)",
+              "result": "FC max = 160, Modérée = 112-128 bpm"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la précision de la formule \"220 moins l'âge\" ?",
+              "answer": "Il s'agit d'une estimation moyenne de population dérivée d'études des années 1970, et pour un individu donné, la fréquence cardiaque maximale réelle peut différer de cette estimation de 10 à 20 battements par minute dans un sens ou dans l'autre. Elle reste utile comme guide général pour définir les zones d'entraînement, mais un test d'effort maximal supervisé est le seul moyen de connaître précisément votre fréquence cardiaque maximale réelle."
+            },
+            {
+              "question": "Pourquoi l'ajout de ma fréquence cardiaque au repos change-t-il les zones ?",
+              "answer": "La méthode de Karvonen calcule les zones comme un pourcentage de votre réserve de fréquence cardiaque (fréquence cardiaque maximale moins fréquence cardiaque au repos) plutôt qu'un pourcentage de la fréquence cardiaque maximale seule. Deux personnes ayant la même fréquence cardiaque maximale mais des niveaux de forme physique différents — et donc des fréquences cardiaques au repos différentes — obtiendront des zones cibles différentes et plus personnalisées avec cette méthode."
+            },
+            {
+              "question": "Qu'est-ce qu'une fréquence cardiaque au repos normale ?",
+              "answer": "La plupart des adultes ont une fréquence cardiaque au repos comprise entre 60 et 100 battements par minute, mesurée après plusieurs minutes de repos, idéalement au réveil avant de se lever. Les athlètes bien entraînés ont souvent des fréquences cardiaques au repos bien inférieures à 60, parfois dans les 40, reflétant un cœur plus efficace."
+            },
+            {
+              "question": "Dois-je toujours m'entraîner dans la zone de \"combustion des graisses\" pour perdre du poids ?",
+              "answer": "Pas nécessairement. Bien que la zone légère brûle un pourcentage plus élevé de calories provenant des graisses, la combustion calorique totale (et donc la graisse totale brûlée) par minute est généralement plus élevée dans les zones plus intenses, car davantage d'énergie globale est dépensée. Le total de calories brûlées dans le temps tend à compter davantage pour la perte de poids que la source d'énergie spécifique utilisée minute par minute."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "La formule \"220 moins l'âge\" pour estimer la fréquence cardiaque maximale remonte à une revue de 1971 du physiologiste William Haskell et du cardiologue Samuel Fox, qui ont résumé des données existantes (en grande partie non publiées) en ce qui est devenu l'estimation la plus citée en science de l'exercice. Les zones d'entraînement de fréquence cardiaque elles-mêmes sont issues de la recherche sur la physiologie de l'exercice aérobie dans les années 1960 et 1970, alors que les scientifiques du sport cherchaient des moyens objectifs et mesurables de prescrire et de surveiller l'intensité de l'exercice au-delà du ressenti subjectif d'effort d'une personne."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Des recherches ultérieures ont produit des formules plus affinées pour estimer la fréquence cardiaque maximale — comme la formule de Tanaka (208 moins 0,7 fois l'âge), publiée en 2001 à partir d'une méta-analyse de plus de 18 000 sujets — qui tendent à être plus précises pour les adultes plus âgés, bien que \"220 moins l'âge\" reste la plus utilisée dans les appareils de fitness grand public. Les objets connectés et trackers de fitness modernes mesurent désormais la fréquence cardiaque en continu via des capteurs optiques, permettant aux athlètes de surveiller leur zone réelle pendant un entraînement plutôt que de se fier uniquement à l'estimation, et certains appareils affinent encore les estimations de zone à l'aide d'une fréquence cardiaque maximale mesurée en laboratoire ou sur le terrain plutôt qu'une formule basée sur l'âge."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "L'entraînement en fréquence cardiaque et la physiologie de l'exercice sont étudiés en kinésiologie et en sciences de l'exercice, au sein du domaine plus large des sciences de la santé. Voici cinq programmes reconnus en physiologie de l'exercice et sciences du sport, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "University of Oregon — Department of Human Physiology",
+                "note": "Un programme américain de premier plan en physiologie humaine et recherche en sciences du sport.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "Non — les programmes de troisième cycle sont des programmes de recherche en présentiel."
+              },
+              {
+                "name": "University of Texas at Austin — Department of Kinesiology and Health Education",
+                "note": "L'un des départements de kinésiologie les plus grands et les plus établis des États-Unis.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Certains programmes de troisième cycle proposent des options en ligne ; le doctorat de recherche principal est en présentiel."
+              },
+              {
+                "name": "Loughborough University — School of Sport, Exercise and Health Sciences",
+                "note": "Constamment classée parmi les meilleures universités mondiales pour les disciplines liées au sport (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "Non — les diplômes de recherche de troisième cycle sont en présentiel."
+              },
+              {
+                "name": "University of Copenhagen — Department of Nutrition, Exercise and Sports",
+                "note": "Un centre européen de premier plan pour la recherche en physiologie de l'exercice.",
+                "url": "https://nexs.ku.dk/english/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Institut australien du sport",
+                "note": "L'institut national australien des sciences du sport de haute performance et de médecine sportive.",
+                "url": "https://www.ais.gov.au/",
+                "online": "Non — c'est un institut national de formation et de recherche, pas une université délivrant des diplômes."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'éducation physique",
+                "note": "Fondée en 1866 ; propose des programmes d'éducation physique et de sciences du sport à l'échelle régionale.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Fox, S. M., Naughton, J. P., & Haskell, W. L. (1971). Physical activity and the prevention of coronary heart disease. Annals of Clinical Research, 3(6), 404-432.",
+          "note": "La revue largement citée qui a popularisé la formule \"220 moins l'âge\" pour estimer la fréquence cardiaque maximale, toujours l'estimation la plus utilisée dans les applications de fitness grand public.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/5134317/",
+          "readOriginal": "Consulter l'étude originale"
+        }
+      }
     }
   },
   "toolPage": {

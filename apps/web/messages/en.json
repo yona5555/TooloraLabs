@@ -16101,6 +16101,184 @@
           "readOriginal": "Read Pearson's Original Paper"
         }
       }
+    },
+    "target-heart-rate-calculator": {
+      "title": "Target Heart Rate Calculator",
+      "description": "Calculate your maximum heart rate and five training zones from your age, optionally refined with your resting heart rate using the Karvonen method.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Details",
+        "age": "Age",
+        "useRestingHeartRate": "I know my resting heart rate",
+        "restingHeartRate": "Resting Heart Rate (bpm)",
+        "hintSimple": "Zones are calculated as a straight percentage of your estimated maximum heart rate.",
+        "hintKarvonen": "Zones are calculated with the Karvonen method, which factors in your resting heart rate for a more personalized range."
+      },
+      "diagram": {
+        "ariaLabel": "A horizontal bar showing the five heart rate training zones scaled from 0 to your maximum heart rate"
+      },
+      "zones": {
+        "veryLight": "Very Light",
+        "light": "Light",
+        "moderate": "Moderate",
+        "hard": "Hard",
+        "maximum": "Maximum"
+      },
+      "result": {
+        "heading": "Result",
+        "maxHeartRate": "Estimated Max Heart Rate (bpm)",
+        "bpm": "bpm",
+        "errors": {
+          "invalid-age": "Enter an age between 1 and 120 to see a result.",
+          "invalid-resting-heart-rate": "Enter a resting heart rate between 1 and 220 bpm."
+        }
+      },
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Every training zone is a percentage band of your estimated maximum heart rate."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Target Heart Rate",
+          "paragraph1": "Target heart rate zones translate exercise intensity into a heart rate range you can monitor in real time, so you can train at a specific effort level rather than guessing. The starting point is your estimated maximum heart rate — the fastest your heart can safely beat during maximal exertion — from which five standard training zones are calculated as percentage bands, from very light activity up to maximum effort.",
+          "paragraph2": "This calculator estimates maximum heart rate using the classic \"220 minus age\" formula, still the most widely cited estimate despite being a population average that can be off by 10-20 beats per minute for any specific individual. When you also provide your resting heart rate, it switches to the Karvonen method, which calculates zones from your heart rate reserve (max minus resting) instead of straight percentages of max — a more personalized estimate, since it accounts for your current fitness level rather than treating everyone the same age as identical."
+        },
+        "zones": {
+          "title": "The Five Training Zones",
+          "intro": "Each zone corresponds to a different training goal and physiological effect.",
+          "items": [
+            {
+              "title": "Very Light (50-60%)",
+              "description": "Warm-up and cool-down intensity, and the zone most associated with active recovery between harder sessions. Easy enough to sustain a full conversation without noticing your breathing."
+            },
+            {
+              "title": "Light (60-70%)",
+              "description": "Often called the \"fat-burning zone\" because a higher percentage of calories burned at this intensity come from fat versus carbohydrates — though total calories burned per minute is lower than in harder zones, so it isn't necessarily the fastest way to burn fat overall."
+            },
+            {
+              "title": "Moderate (70-80%)",
+              "description": "The classic aerobic or \"cardio\" zone, widely recommended as the target for building cardiovascular endurance. Breathing noticeably deepens and holding a conversation becomes difficult."
+            },
+            {
+              "title": "Hard (80-90%)",
+              "description": "The anaerobic threshold zone, where the body starts relying more heavily on energy systems that don't require oxygen. Used for interval training and building speed and performance rather than pure endurance."
+            },
+            {
+              "title": "Maximum (90-100%)",
+              "description": "Near-maximal to maximal effort, sustainable only for short bursts. Used sparingly in interval training by well-conditioned athletes, and generally not a zone to train in continuously."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few ages and what this calculator returns for each.",
+          "columnCalculation": "Input",
+          "columnResult": "Max HR / Moderate Zone (70-80%)",
+          "rows": [
+            {
+              "calculation": "Age 20 (simple method)",
+              "result": "Max HR = 200, Moderate = 140-160 bpm"
+            },
+            {
+              "calculation": "Age 40 (simple method)",
+              "result": "Max HR = 180, Moderate = 126-144 bpm"
+            },
+            {
+              "calculation": "Age 20, resting HR 60 (Karvonen)",
+              "result": "Max HR = 200, Moderate = 158-172 bpm"
+            },
+            {
+              "calculation": "Age 60 (simple method)",
+              "result": "Max HR = 160, Moderate = 112-128 bpm"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "How accurate is the \"220 minus age\" formula?",
+              "answer": "It's a population-average estimate derived from studies in the 1970s, and for any specific individual the true maximum heart rate can differ from this estimate by 10-20 beats per minute in either direction. It remains useful as a general guide for setting training zones, but a supervised maximal exercise test is the only way to know your actual maximum heart rate precisely."
+            },
+            {
+              "question": "Why does adding my resting heart rate change the zones?",
+              "answer": "The Karvonen method calculates zones as a percentage of your heart rate reserve (max heart rate minus resting heart rate) rather than a percentage of max heart rate alone. Two people with the same max heart rate but different fitness levels — and therefore different resting heart rates — will get different, more personalized target zones with this method."
+            },
+            {
+              "question": "What's a normal resting heart rate?",
+              "answer": "Most adults have a resting heart rate between 60 and 100 beats per minute, measured after several minutes of rest, ideally first thing in the morning before getting out of bed. Well-conditioned athletes often have resting heart rates well below 60, sometimes in the 40s, reflecting a more efficient heart."
+            },
+            {
+              "question": "Should I always train in the \"fat-burning\" zone to lose weight?",
+              "answer": "Not necessarily. While the light zone burns a higher percentage of calories from fat, total calorie burn (and therefore total fat burned) per minute is generally higher in more intense zones, since more overall energy is being expended. Total calories burned over time tends to matter more for weight loss than which specific fuel source is used minute to minute."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The \"220 minus age\" formula for estimating maximum heart rate traces back to a 1971 review by physiologist William Haskell and cardiologist Samuel Fox, who summarized existing (and largely unpublished) data into what became the most commonly cited estimate in exercise science. Heart rate training zones themselves grew out of research into aerobic exercise physiology in the 1960s and 70s, as sports scientists sought objective, measurable ways to prescribe and monitor exercise intensity beyond a person's own subjective sense of effort."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Subsequent research has produced more refined maximum heart rate formulas — such as the Tanaka formula (208 minus 0.7 times age), published in 2001 from a meta-analysis of over 18,000 subjects — that tend to be more accurate for older adults, though \"220 minus age\" remains the most widely used in consumer fitness devices. Modern wearables and fitness trackers now measure heart rate continuously via optical sensors, letting athletes monitor their real-time zone during a workout rather than relying on the estimate alone, and some devices further refine zone estimates using a lab-measured or field-tested maximum heart rate instead of an age-based formula."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Heart rate training and exercise physiology are studied within kinesiology and exercise science, part of the broader field of health sciences. Here are five respected programs in exercise physiology and sports science, plus one regional institution:",
+            "universities": [
+              {
+                "name": "University of Oregon — Department of Human Physiology",
+                "note": "A leading US program in human physiology and exercise science research.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "No — the graduate programs are in-residence research programs."
+              },
+              {
+                "name": "University of Texas at Austin — Department of Kinesiology and Health Education",
+                "note": "One of the largest and most established kinesiology departments in the US.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Select graduate programs offer online options; the core research PhD is in-residence."
+              },
+              {
+                "name": "Loughborough University — School of Sport, Exercise and Health Sciences",
+                "note": "Consistently ranked among the world's top universities for sports-related subjects (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "No — postgraduate research degrees are in-residence."
+              },
+              {
+                "name": "University of Copenhagen — Department of Nutrition, Exercise and Sports",
+                "note": "A leading European center for exercise physiology research.",
+                "url": "https://nexs.ku.dk/english/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Australian Institute of Sport",
+                "note": "Australia's national high-performance sports science and sports medicine institute.",
+                "url": "https://www.ais.gov.au/",
+                "online": "No — it is a national training and research institute rather than a degree-granting university."
+              },
+              {
+                "name": "American University of Beirut — Department of Physical Education",
+                "note": "Founded in 1866; offers physical education and sport science programs regionally.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Fox, S. M., Naughton, J. P., & Haskell, W. L. (1971). Physical activity and the prevention of coronary heart disease. Annals of Clinical Research, 3(6), 404-432.",
+          "note": "The widely cited review that popularized the \"220 minus age\" formula for estimating maximum heart rate, still the most commonly used estimate in consumer fitness applications.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/5134317/",
+          "readOriginal": "View the Original Study"
+        }
+      }
     }
   },
   "toolPage": {

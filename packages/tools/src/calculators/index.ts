@@ -61,3 +61,4 @@ export * from "./CircleCalculator";
 export * from "./TriangleCalculator";
 export * from "./ProbabilityCalculator";
 export * from "./MeanMedianModeRangeCalculator";
+export * from "./TargetHeartRateCalculator";

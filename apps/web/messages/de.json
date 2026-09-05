@@ -16105,6 +16105,184 @@
           "readOriginal": "Pearsons Originalarbeit lesen"
         }
       }
+    },
+    "target-heart-rate-calculator": {
+      "title": "Zielherzfrequenz-Rechner",
+      "description": "Berechne deine maximale Herzfrequenz und fünf Trainingszonen aus deinem Alter, optional verfeinert mit deiner Ruheherzfrequenz nach der Karvonen-Methode.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Deine Angaben",
+        "age": "Alter",
+        "useRestingHeartRate": "Ich kenne meine Ruheherzfrequenz",
+        "restingHeartRate": "Ruheherzfrequenz (Schläge/Min.)",
+        "hintSimple": "Die Zonen werden als direkter Prozentsatz deiner geschätzten maximalen Herzfrequenz berechnet.",
+        "hintKarvonen": "Die Zonen werden mit der Karvonen-Methode berechnet, die deine Ruheherzfrequenz für einen individuelleren Bereich berücksichtigt."
+      },
+      "diagram": {
+        "ariaLabel": "Ein horizontaler Balken, der die fünf Herzfrequenz-Trainingszonen von 0 bis zu deiner maximalen Herzfrequenz zeigt"
+      },
+      "zones": {
+        "veryLight": "Sehr leicht",
+        "light": "Leicht",
+        "moderate": "Moderat",
+        "hard": "Intensiv",
+        "maximum": "Maximal"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "maxHeartRate": "Geschätzte maximale Herzfrequenz (Schläge/Min.)",
+        "bpm": "Schläge/Min.",
+        "errors": {
+          "invalid-age": "Gib ein Alter zwischen 1 und 120 ein, um ein Ergebnis zu sehen.",
+          "invalid-resting-heart-rate": "Gib eine Ruheherzfrequenz zwischen 1 und 220 Schlägen/Min. ein."
+        }
+      },
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Jede Trainingszone ist ein Prozentband deiner geschätzten maximalen Herzfrequenz."
+      },
+      "education": {
+        "intro": {
+          "title": "Zielherzfrequenz verstehen",
+          "paragraph1": "Zielherzfrequenzzonen übersetzen die Trainingsintensität in einen Herzfrequenzbereich, den du in Echtzeit überwachen kannst, sodass du mit einem bestimmten Anstrengungsgrad trainierst, statt zu raten. Ausgangspunkt ist deine geschätzte maximale Herzfrequenz — die schnellste Rate, mit der dein Herz bei maximaler Anstrengung sicher schlagen kann —, aus der fünf standardisierte Trainingszonen als Prozentbänder berechnet werden, von sehr leichter Aktivität bis zu maximaler Anstrengung.",
+          "paragraph2": "Dieser Rechner schätzt die maximale Herzfrequenz mit der klassischen Formel \"220 minus Alter\", die trotz ihres Charakters als Bevölkerungsdurchschnitt, der bei einer bestimmten Person um 10-20 Schläge pro Minute abweichen kann, immer noch die am häufigsten zitierte Schätzung ist. Gibst du zusätzlich deine Ruheherzfrequenz an, wechselt der Rechner zur Karvonen-Methode, die Zonen aus deiner Herzfrequenzreserve (Maximum minus Ruhe) statt aus direkten Prozentsätzen des Maximums berechnet — eine individuellere Schätzung, da sie dein aktuelles Fitnessniveau berücksichtigt, statt alle Gleichaltrigen gleichzusetzen."
+        },
+        "zones": {
+          "title": "Die fünf Trainingszonen",
+          "intro": "Jede Zone entspricht einem anderen Trainingsziel und einer anderen physiologischen Wirkung.",
+          "items": [
+            {
+              "title": "Sehr leicht (50-60%)",
+              "description": "Aufwärm- und Abkühlintensität und die Zone, die am häufigsten mit aktiver Erholung zwischen intensiveren Einheiten verbunden wird. Leicht genug, um sich zu unterhalten, ohne die eigene Atmung zu bemerken."
+            },
+            {
+              "title": "Leicht (60-70%)",
+              "description": "Oft \"Fettverbrennungszone\" genannt, weil bei dieser Intensität ein höherer Prozentsatz der verbrannten Kalorien aus Fett statt aus Kohlenhydraten stammt — allerdings ist die gesamte Kalorienverbrennung pro Minute geringer als in intensiveren Zonen, weshalb sie nicht zwangsläufig der schnellste Weg ist, insgesamt Fett zu verbrennen."
+            },
+            {
+              "title": "Moderat (70-80%)",
+              "description": "Die klassische aerobe oder \"Cardio\"-Zone, die häufig als Ziel für den Aufbau kardiovaskulärer Ausdauer empfohlen wird. Die Atmung vertieft sich merklich, und ein Gespräch fällt schwer."
+            },
+            {
+              "title": "Intensiv (80-90%)",
+              "description": "Die anaerobe Schwellenzone, in der der Körper stärker auf Energiesysteme ohne Sauerstoffbedarf zurückgreift. Wird für Intervalltraining und den Aufbau von Geschwindigkeit und Leistung statt reiner Ausdauer genutzt."
+            },
+            {
+              "title": "Maximal (90-100%)",
+              "description": "Nahezu maximale bis maximale Anstrengung, nur für kurze Ausbrüche durchhaltbar. Wird von gut trainierten Athleten sparsam im Intervalltraining eingesetzt und ist generell keine Zone für dauerhaftes Training."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Altersangaben und die Ergebnisse, die dieser Rechner für sie liefert.",
+          "columnCalculation": "Eingabe",
+          "columnResult": "Max. HF / Moderate Zone (70-80%)",
+          "rows": [
+            {
+              "calculation": "Alter 20 (einfache Methode)",
+              "result": "Max. HF = 200, Moderat = 140-160 Schläge/Min."
+            },
+            {
+              "calculation": "Alter 40 (einfache Methode)",
+              "result": "Max. HF = 180, Moderat = 126-144 Schläge/Min."
+            },
+            {
+              "calculation": "Alter 20, Ruhe-HF 60 (Karvonen)",
+              "result": "Max. HF = 200, Moderat = 158-172 Schläge/Min."
+            },
+            {
+              "calculation": "Alter 60 (einfache Methode)",
+              "result": "Max. HF = 160, Moderat = 112-128 Schläge/Min."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wie genau ist die Formel \"220 minus Alter\"?",
+              "answer": "Es handelt sich um eine Bevölkerungsdurchschnittsschätzung aus Studien der 1970er-Jahre, und bei einer bestimmten Person kann die tatsächliche maximale Herzfrequenz in beide Richtungen um 10-20 Schläge pro Minute von dieser Schätzung abweichen. Sie bleibt als allgemeine Richtlinie für die Festlegung von Trainingszonen nützlich, aber nur ein überwachter maximaler Belastungstest kann deine tatsächliche maximale Herzfrequenz genau bestimmen."
+            },
+            {
+              "question": "Warum ändert die Angabe meiner Ruheherzfrequenz die Zonen?",
+              "answer": "Die Karvonen-Methode berechnet die Zonen als Prozentsatz deiner Herzfrequenzreserve (maximale Herzfrequenz minus Ruheherzfrequenz) statt als Prozentsatz der maximalen Herzfrequenz allein. Zwei Personen mit derselben maximalen Herzfrequenz, aber unterschiedlichem Fitnesslevel — und damit unterschiedlicher Ruheherzfrequenz — erhalten mit dieser Methode unterschiedliche, individuellere Zielzonen."
+            },
+            {
+              "question": "Was ist eine normale Ruheherzfrequenz?",
+              "answer": "Die meisten Erwachsenen haben eine Ruheherzfrequenz zwischen 60 und 100 Schlägen pro Minute, gemessen nach mehreren Minuten Ruhe, idealerweise morgens vor dem Aufstehen. Gut trainierte Athleten haben oft Ruheherzfrequenzen deutlich unter 60, manchmal sogar in den 40ern, was ein effizienteres Herz widerspiegelt."
+            },
+            {
+              "question": "Sollte ich zum Abnehmen immer in der \"Fettverbrennungszone\" trainieren?",
+              "answer": "Nicht unbedingt. Zwar wird in der leichten Zone ein höherer Prozentsatz der Kalorien aus Fett verbrannt, aber die gesamte Kalorienverbrennung (und damit die gesamte Fettverbrennung) pro Minute ist in intensiveren Zonen im Allgemeinen höher, da insgesamt mehr Energie verbraucht wird. Für die Gewichtsabnahme zählt in der Regel die insgesamt verbrannte Kalorienmenge über die Zeit mehr als die genaue Energiequelle Minute für Minute."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Formel \"220 minus Alter\" zur Schätzung der maximalen Herzfrequenz geht auf eine Übersichtsarbeit von 1971 des Physiologen William Haskell und des Kardiologen Samuel Fox zurück, die vorhandene (größtenteils unveröffentlichte) Daten zusammenfassten und damit die in der Sportwissenschaft am häufigsten zitierte Schätzung schufen. Herzfrequenz-Trainingszonen selbst entstanden aus der Erforschung der aeroben Trainingsphysiologie in den 1960er- und 70er-Jahren, als Sportwissenschaftler nach objektiven, messbaren Wegen suchten, um Trainingsintensität jenseits des subjektiven Anstrengungsempfindens einer Person vorzuschreiben und zu überwachen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Spätere Forschung hat verfeinerte Formeln zur Schätzung der maximalen Herzfrequenz hervorgebracht — etwa die Tanaka-Formel (208 minus 0,7 mal Alter), veröffentlicht 2001 aus einer Metaanalyse von über 18.000 Personen —, die für ältere Erwachsene tendenziell genauer sind, obwohl \"220 minus Alter\" in Fitnessgeräten für Verbraucher am weitesten verbreitet bleibt. Moderne Wearables und Fitness-Tracker messen die Herzfrequenz heute kontinuierlich über optische Sensoren, sodass Sportler ihre tatsächliche Zone während des Trainings überwachen können, statt sich allein auf die Schätzung zu verlassen, und manche Geräte verfeinern die Zonenschätzung zusätzlich mit einer im Labor oder im Feld gemessenen maximalen Herzfrequenz statt einer altersbasierten Formel."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Herzfrequenztraining und Sportphysiologie werden in der Kinesiologie und Sportwissenschaft studiert, einem Teilgebiet der Gesundheitswissenschaften. Hier sind fünf angesehene Programme in Sportphysiologie und Sportwissenschaft, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "University of Oregon — Department of Human Physiology",
+                "note": "Ein führendes US-Programm für Humanphysiologie und sportwissenschaftliche Forschung.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "Nein — die Graduiertenprogramme sind Präsenz-Forschungsprogramme."
+              },
+              {
+                "name": "University of Texas at Austin — Department of Kinesiology and Health Education",
+                "note": "Eine der größten und etabliertesten Fakultäten für Bewegungswissenschaft in den USA.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Ausgewählte Graduiertenprogramme bieten Online-Optionen; die zentrale Forschungspromotion ist Präsenz."
+              },
+              {
+                "name": "Loughborough University — School of Sport, Exercise and Health Sciences",
+                "note": "Zählt beständig zu den weltweit besten Universitäten für sportbezogene Fächer (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "Nein — postgraduale Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "University of Copenhagen — Department of Nutrition, Exercise and Sports",
+                "note": "Ein führendes europäisches Zentrum für sportphysiologische Forschung.",
+                "url": "https://nexs.ku.dk/english/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Australian Institute of Sport",
+                "note": "Australiens nationales Institut für Spitzensportwissenschaft und Sportmedizin.",
+                "url": "https://www.ais.gov.au/",
+                "online": "Nein — es ist ein nationales Trainings- und Forschungsinstitut, keine gradverleihende Universität."
+              },
+              {
+                "name": "American University of Beirut — Department of Physical Education",
+                "note": "Gegründet 1866; bietet regional Programme in Sportpädagogik und Sportwissenschaft an.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Fox, S. M., Naughton, J. P., & Haskell, W. L. (1971). Physical activity and the prevention of coronary heart disease. Annals of Clinical Research, 3(6), 404-432.",
+          "note": "Die vielzitierte Übersichtsarbeit, die die Formel \"220 minus Alter\" zur Schätzung der maximalen Herzfrequenz bekannt machte und die bis heute gängigste Schätzung in Verbraucher-Fitnessanwendungen ist.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/5134317/",
+          "readOriginal": "Originalstudie ansehen"
+        }
+      }
     }
   },
   "toolPage": {

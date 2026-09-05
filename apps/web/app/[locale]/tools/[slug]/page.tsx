@@ -107,6 +107,8 @@ import ProbabilityCalculator from "@/components/tools/probability-calculator/Pro
 import ProbabilityEducation from "@/components/tools/probability-calculator/ProbabilityEducation";
 import MeanMedianModeRangeCalculator from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeCalculator";
 import MeanMedianModeRangeEducation from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeEducation";
+import TargetHeartRateCalculator from "@/components/tools/target-heart-rate-calculator/TargetHeartRateCalculator";
+import TargetHeartRateEducation from "@/components/tools/target-heart-rate-calculator/TargetHeartRateEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -481,6 +483,9 @@ export default async function ToolPage({
     case "mean-median-mode-range-calculator":
       component = <MeanMedianModeRangeCalculator education={<MeanMedianModeRangeEducation />} />;
       break;
+    case "target-heart-rate-calculator":
+      component = <TargetHeartRateCalculator education={<TargetHeartRateEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -609,6 +614,7 @@ export default async function ToolPage({
     slug === "triangle-calculator" ||
     slug === "probability-calculator" ||
     slug === "mean-median-mode-range-calculator" ||
+    slug === "target-heart-rate-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||
