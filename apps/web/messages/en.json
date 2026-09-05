@@ -10914,7 +10914,10 @@
             }
           ],
           "source": "Source: Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (as of July 1, 2026). Figures are population-weighted average combined state + local rates; your actual local rate may differ."
-        }
+        },
+        "emptyStateMessage": "Enter a price and a tax rate, then press Calculate to see your results.",
+        "sentenceAdd": "{price} plus {rate}% tax comes to {total}.",
+        "sentenceReverse": "A tax-inclusive total of {total} at {rate}% tax means a pre-tax price of {price}."
       },
       "form": {
         "inputTitle": "Your Purchase",
@@ -10924,13 +10927,21 @@
         "totalPriceLabel": "Total Price (tax included)",
         "pricePlaceholder": "e.g. 100",
         "taxRateLabel": "Sales Tax Rate (%)",
-        "taxRatePlaceholder": "e.g. 8"
+        "taxRatePlaceholder": "e.g. 8",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "price": "Price (before tax)",
         "totalPrice": "Total Price",
         "taxAmount": "Sales Tax",
-        "reverseNote": "Reverse-calculated from a {rate}% tax-inclusive total."
+        "reverseNote": "Reverse-calculated from a {rate}% tax-inclusive total.",
+        "gaugeZones": {
+          "low": "Low",
+          "moderate": "Moderate",
+          "high": "High",
+          "veryHigh": "Very High"
+        }
       },
       "education": {
         "intro": {
@@ -11056,7 +11067,81 @@
           "note": "A landmark study finding that posting tax-inclusive prices reduces demand more than adding the same tax at the register — consumers systematically underreact to taxes that aren't already folded into the sticker price they see.",
           "url": "https://doi.org/10.1257/aer.99.4.1145",
           "readOriginal": "Read the Original Article"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Every sales tax calculation in this tool comes from two kinds of input.",
+          "items": [
+            {
+              "name": "Price (before tax)",
+              "description": "The pre-tax price of the purchase, used in Add mode as the base the tax rate is applied to."
+            },
+            {
+              "name": "Total Price (tax included)",
+              "description": "The known tax-inclusive total — such as a receipt total — used in Reverse mode to back out the pre-tax price."
+            },
+            {
+              "name": "Sales Tax Rate",
+              "description": "The combined tax rate applied at checkout, often a stack of state, county, and city rates rolled into one percentage."
+            },
+            {
+              "name": "Sales Tax Amount",
+              "description": "The dollar amount of tax itself — the difference between the pre-tax price and the tax-inclusive total."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Sales tax math comes up anywhere a percentage-based tax is added to or extracted from a price.",
+          "items": [
+            {
+              "title": "Checkout and Budgeting",
+              "description": "Estimating the real total before reaching the register, especially useful when combining several local tax rates."
+            },
+            {
+              "title": "Expense and Receipt Reconciliation",
+              "description": "Reverse mode recovers the pre-tax price from a receipt total — useful for bookkeeping, reimbursements, or expense reports."
+            },
+            {
+              "title": "Comparison Shopping Across Jurisdictions",
+              "description": "Comparing the same purchase across different tax rates helps evaluate whether traveling to a lower-tax area is worth it."
+            },
+            {
+              "title": "Invoicing and Quoting",
+              "description": "Businesses quoting a pre-tax price to a customer use this same math to state the tax-inclusive total they'll actually be charged."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Please enter valid, non-negative numbers for the price and the tax rate."
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "comparisonDiagram": {
+        "title": "Total at Benchmark Rates",
+        "caption": "Your total price at this purchase amount, compared across common tax rates."
+      },
+      "totalByRateDiagram": {
+        "title": "Total Price by Tax Rate",
+        "caption": "How the total price rises with the tax rate, for your purchase amount.",
+        "xLabel": "Tax Rate"
       }
     },
     "image-converter": {

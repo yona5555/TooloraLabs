@@ -10918,7 +10918,10 @@
             }
           ],
           "source": "Quelle: Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (Stand: 1. Juli 2026). Angaben sind bevölkerungsgewichtete durchschnittliche kombinierte Bundesstaats- und Kommunalsätze; Ihr tatsächlicher örtlicher Satz kann abweichen."
-        }
+        },
+        "emptyStateMessage": "Geben Sie einen Preis und einen Steuersatz ein und klicken Sie auf Berechnen, um Ihre Ergebnisse zu sehen.",
+        "sentenceAdd": "{price} plus {rate}% Steuer ergibt {total}.",
+        "sentenceReverse": "Ein steuerinklusiver Gesamtbetrag von {total} bei {rate}% Steuer bedeutet einen Preis vor Steuern von {price}."
       },
       "form": {
         "inputTitle": "Ihr Einkauf",
@@ -10928,13 +10931,21 @@
         "totalPriceLabel": "Gesamtpreis (inkl. Steuern)",
         "pricePlaceholder": "z. B. 100",
         "taxRateLabel": "Umsatzsteuersatz (%)",
-        "taxRatePlaceholder": "z. B. 8"
+        "taxRatePlaceholder": "z. B. 8",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "price": "Preis (vor Steuern)",
         "totalPrice": "Gesamtpreis",
         "taxAmount": "Umsatzsteuer",
-        "reverseNote": "Rückgerechnet aus einem steuerinklusiven Gesamtbetrag bei {rate}%."
+        "reverseNote": "Rückgerechnet aus einem steuerinklusiven Gesamtbetrag bei {rate}%.",
+        "gaugeZones": {
+          "low": "Niedrig",
+          "moderate": "Moderat",
+          "high": "Hoch",
+          "veryHigh": "Sehr Hoch"
+        }
       },
       "education": {
         "intro": {
@@ -11060,7 +11071,81 @@
           "note": "Eine wegweisende Studie, die zeigt, dass die Anzeige steuerinklusiver Preise die Nachfrage stärker senkt als das Hinzufügen derselben Steuer erst an der Kasse – Verbraucher reagieren systematisch zu schwach auf Steuern, die nicht bereits im gesehenen Preisschild enthalten sind.",
           "url": "https://doi.org/10.1257/aer.99.4.1145",
           "readOriginal": "Originalartikel lesen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Umsatzsteuerberechnung in diesem Tool basiert auf zwei Arten von Eingaben.",
+          "items": [
+            {
+              "name": "Preis (vor Steuern)",
+              "description": "Der Preis des Kaufs vor Steuern, im Hinzufügen-Modus die Basis, auf die der Steuersatz angewendet wird."
+            },
+            {
+              "name": "Gesamtpreis (inkl. Steuer)",
+              "description": "Der bekannte steuerinklusive Gesamtbetrag — etwa ein Quittungsbetrag — im Umkehr-Modus verwendet, um den Preis vor Steuern zu ermitteln."
+            },
+            {
+              "name": "Umsatzsteuersatz",
+              "description": "Der kombinierte Steuersatz an der Kasse, oft ein Stapel aus Landes-, Kreis- und Stadtsätzen in einem Prozentsatz."
+            },
+            {
+              "name": "Umsatzsteuerbetrag",
+              "description": "Der Steuerbetrag selbst — die Differenz zwischen dem Preis vor Steuern und dem steuerinklusiven Gesamtbetrag."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Umsatzsteuermathematik kommt überall vor, wo eine prozentuale Steuer zu einem Preis hinzugefügt oder daraus entnommen wird.",
+          "items": [
+            {
+              "title": "Kasse und Budgetierung",
+              "description": "Schätzung des tatsächlichen Gesamtbetrags vor Erreichen der Kasse, besonders nützlich bei Kombination mehrerer lokaler Steuersätze."
+            },
+            {
+              "title": "Spesen- und Belegabstimmung",
+              "description": "Der Umkehr-Modus ermittelt den Preis vor Steuern aus einem Quittungsbetrag — nützlich für Buchhaltung, Erstattungen oder Spesenabrechnungen."
+            },
+            {
+              "title": "Preisvergleich über Zuständigkeiten hinweg",
+              "description": "Der Vergleich desselben Kaufs über unterschiedliche Steuersätze hilft zu bewerten, ob eine Reise in ein Gebiet mit niedrigerer Steuer lohnenswert ist."
+            },
+            {
+              "title": "Rechnungsstellung und Angebote",
+              "description": "Unternehmen, die einem Kunden einen Preis vor Steuern anbieten, nutzen dieselbe Mathematik, um den tatsächlich berechneten steuerinklusiven Gesamtbetrag anzugeben."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Bitte geben Sie gültige, nicht negative Zahlen für den Preis und den Steuersatz ein."
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@example.com",
+        "contactPhonePlaceholder": "z. B. +49 151 12345678",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Stadt"
+      },
+      "comparisonDiagram": {
+        "title": "Gesamtbetrag bei Referenzsätzen",
+        "caption": "Ihr Gesamtpreis bei diesem Kaufbetrag, verglichen über gängige Steuersätze."
+      },
+      "totalByRateDiagram": {
+        "title": "Gesamtpreis nach Steuersatz",
+        "caption": "Wie der Gesamtpreis mit dem Steuersatz für Ihren Kaufbetrag steigt.",
+        "xLabel": "Steuersatz"
       }
     },
     "image-converter": {

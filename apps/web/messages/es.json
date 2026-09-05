@@ -10918,7 +10918,10 @@
             }
           ],
           "source": "Fuente: Tax Foundation, State and Local Sales Tax Rates, mediados de 2026 (a 1 de julio de 2026). Las cifras son tasas combinadas estatales y locales, promediadas por población; tu tasa local real puede diferir."
-        }
+        },
+        "emptyStateMessage": "Ingresa un precio y una tasa de impuesto, luego presiona Calcular para ver tus resultados.",
+        "sentenceAdd": "{price} más un {rate}% de impuesto suma {total}.",
+        "sentenceReverse": "Un total con impuesto incluido de {total} al {rate}% de impuesto implica un precio antes de impuestos de {price}."
       },
       "form": {
         "inputTitle": "Tu compra",
@@ -10928,13 +10931,21 @@
         "totalPriceLabel": "Precio total (impuestos incluidos)",
         "pricePlaceholder": "p. ej. 100",
         "taxRateLabel": "Tasa del impuesto sobre las ventas (%)",
-        "taxRatePlaceholder": "p. ej. 8"
+        "taxRatePlaceholder": "p. ej. 8",
+        "calculate": "Calcular",
+        "clear": "Borrar"
       },
       "result": {
         "price": "Precio (antes de impuestos)",
         "totalPrice": "Precio total",
         "taxAmount": "Impuesto sobre las ventas",
-        "reverseNote": "Calculado en sentido inverso a partir de un total con el {rate} % de impuesto incluido."
+        "reverseNote": "Calculado en sentido inverso a partir de un total con el {rate} % de impuesto incluido.",
+        "gaugeZones": {
+          "low": "Baja",
+          "moderate": "Moderada",
+          "high": "Alta",
+          "veryHigh": "Muy Alta"
+        }
       },
       "education": {
         "intro": {
@@ -11060,7 +11071,81 @@
           "note": "Un estudio de referencia que descubrió que mostrar precios con impuestos incluidos reduce más la demanda que añadir el mismo impuesto en caja — los consumidores reaccionan sistemáticamente menos a los impuestos que no están ya incorporados en el precio que ven en la etiqueta.",
           "url": "https://doi.org/10.1257/aer.99.4.1145",
           "readOriginal": "Leer el artículo original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Cada cálculo de impuesto sobre ventas en esta herramienta proviene de dos tipos de datos.",
+          "items": [
+            {
+              "name": "Precio (antes de impuestos)",
+              "description": "El precio antes de impuestos de la compra, usado en el modo Añadir como la base sobre la que se aplica la tasa de impuesto."
+            },
+            {
+              "name": "Precio Total (impuesto incluido)",
+              "description": "El total conocido con impuesto incluido — como el total de un recibo — usado en el modo Inverso para deducir el precio antes de impuestos."
+            },
+            {
+              "name": "Tasa de Impuesto sobre Ventas",
+              "description": "La tasa de impuesto combinada aplicada al pagar, a menudo una acumulación de tasas estatales, de condado y municipales en un solo porcentaje."
+            },
+            {
+              "name": "Monto del Impuesto sobre Ventas",
+              "description": "El monto en dinero del impuesto en sí — la diferencia entre el precio antes de impuestos y el total con impuesto incluido."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Aplicaciones",
+          "intro": "La matemática del impuesto sobre ventas aparece donde sea que se añada o se extraiga un impuesto porcentual de un precio.",
+          "items": [
+            {
+              "title": "Pago y Presupuesto",
+              "description": "Estimar el total real antes de llegar a la caja, especialmente útil al combinar varias tasas de impuesto locales."
+            },
+            {
+              "title": "Conciliación de Gastos y Recibos",
+              "description": "El modo Inverso recupera el precio antes de impuestos a partir de un total de recibo — útil para contabilidad, reembolsos o informes de gastos."
+            },
+            {
+              "title": "Comparación de Compras Entre Jurisdicciones",
+              "description": "Comparar la misma compra entre diferentes tasas de impuesto ayuda a evaluar si vale la pena viajar a una zona con menor impuesto."
+            },
+            {
+              "title": "Facturación y Cotizaciones",
+              "description": "Las empresas que cotizan un precio antes de impuestos a un cliente usan esta misma matemática para indicar el total con impuesto incluido que realmente se les cobrará."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Ingresa números válidos y no negativos para el precio y la tasa de impuesto."
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir y Exportar",
+        "shareToSocial": "Compartir en Redes Sociales",
+        "generatedOn": "Generado el",
+        "contactSectionTitle": "Información de Contacto (opcional)",
+        "preparedForTitle": "Preparado Para",
+        "contactName": "Nombre",
+        "contactEmail": "Correo Electrónico",
+        "contactPhone": "Teléfono",
+        "contactOrganization": "Organización",
+        "contactAddress": "Dirección",
+        "contactNamePlaceholder": "p. ej. Juan Pérez",
+        "contactEmailPlaceholder": "p. ej. juan@example.com",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganizationPlaceholder": "p. ej. Empresa S.A.",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Ciudad"
+      },
+      "comparisonDiagram": {
+        "title": "Total a Tasas de Referencia",
+        "caption": "Tu precio total con este monto de compra, comparado entre tasas de impuesto comunes."
+      },
+      "totalByRateDiagram": {
+        "title": "Precio Total por Tasa de Impuesto",
+        "caption": "Cómo sube el precio total con la tasa de impuesto, para tu monto de compra.",
+        "xLabel": "Tasa de Impuesto"
       }
     },
     "image-converter": {

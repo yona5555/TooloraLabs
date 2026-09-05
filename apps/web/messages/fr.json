@@ -10918,7 +10918,10 @@
             }
           ],
           "source": "Source : Tax Foundation, State and Local Sales Tax Rates, Midyear 2026 (au 1er juillet 2026). Les chiffres correspondent à une moyenne pondérée par la population des taux combinés État + local ; votre taux local réel peut différer."
-        }
+        },
+        "emptyStateMessage": "Saisissez un prix et un taux de taxe, puis appuyez sur Calculer pour voir vos résultats.",
+        "sentenceAdd": "{price} plus {rate}% de taxe donne {total}.",
+        "sentenceReverse": "Un total toutes taxes comprises de {total} à {rate}% de taxe implique un prix hors taxe de {price}."
       },
       "form": {
         "inputTitle": "Votre achat",
@@ -10928,13 +10931,21 @@
         "totalPriceLabel": "Prix total (taxe comprise)",
         "pricePlaceholder": "ex. 100",
         "taxRateLabel": "Taux de taxe de vente (%)",
-        "taxRatePlaceholder": "ex. 8"
+        "taxRatePlaceholder": "ex. 8",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "price": "Prix (hors taxe)",
         "totalPrice": "Prix total",
         "taxAmount": "Taxe de vente",
-        "reverseNote": "Calculé à rebours à partir d'un total toutes taxes comprises de {rate} %."
+        "reverseNote": "Calculé à rebours à partir d'un total toutes taxes comprises de {rate} %.",
+        "gaugeZones": {
+          "low": "Faible",
+          "moderate": "Modéré",
+          "high": "Élevé",
+          "veryHigh": "Très Élevé"
+        }
       },
       "education": {
         "intro": {
@@ -11060,7 +11071,81 @@
           "note": "Une étude marquante montrant qu'afficher des prix toutes taxes comprises réduit davantage la demande que d'ajouter la même taxe en caisse — les consommateurs réagissent systématiquement moins aux taxes qui ne sont pas déjà intégrées dans le prix affiché qu'ils voient.",
           "url": "https://doi.org/10.1257/aer.99.4.1145",
           "readOriginal": "Lire l'article original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Chaque calcul de taxe de vente dans cet outil provient de deux types de données.",
+          "items": [
+            {
+              "name": "Prix (hors taxe)",
+              "description": "Le prix hors taxe de l'achat, utilisé en mode Ajouter comme base sur laquelle le taux de taxe est appliqué."
+            },
+            {
+              "name": "Prix Total (taxe incluse)",
+              "description": "Le total connu taxe incluse — comme le total d'un reçu — utilisé en mode Inverse pour déduire le prix hors taxe."
+            },
+            {
+              "name": "Taux de Taxe de Vente",
+              "description": "Le taux de taxe combiné appliqué à la caisse, souvent un empilement des taux d'État, de comté et de ville en un seul pourcentage."
+            },
+            {
+              "name": "Montant de la Taxe de Vente",
+              "description": "Le montant en argent de la taxe elle-même — la différence entre le prix hors taxe et le total taxe incluse."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Les calculs de taxe de vente interviennent partout où une taxe en pourcentage est ajoutée à un prix ou en est extraite.",
+          "items": [
+            {
+              "title": "Caisse et Budgétisation",
+              "description": "Estimer le total réel avant d'arriver à la caisse, particulièrement utile en combinant plusieurs taux de taxe locaux."
+            },
+            {
+              "title": "Rapprochement des Dépenses et Reçus",
+              "description": "Le mode Inverse récupère le prix hors taxe à partir d'un total de reçu — utile pour la comptabilité, les remboursements ou les notes de frais."
+            },
+            {
+              "title": "Comparaison d'Achats Entre Juridictions",
+              "description": "Comparer le même achat selon différents taux de taxe aide à évaluer si voyager vers une zone à taxe plus faible en vaut la peine."
+            },
+            {
+              "title": "Facturation et Devis",
+              "description": "Les entreprises qui proposent un prix hors taxe à un client utilisent ce même calcul pour indiquer le total taxe incluse qui sera réellement facturé."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Veuillez saisir des nombres valides et non négatifs pour le prix et le taux de taxe."
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les Réseaux Sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé Pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@example.com",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Acme SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Ville"
+      },
+      "comparisonDiagram": {
+        "title": "Total à des Taux de Référence",
+        "caption": "Votre prix total pour ce montant d'achat, comparé selon des taux de taxe courants."
+      },
+      "totalByRateDiagram": {
+        "title": "Prix Total selon le Taux de Taxe",
+        "caption": "Comment le prix total augmente avec le taux de taxe, pour votre montant d'achat.",
+        "xLabel": "Taux de Taxe"
       }
     },
     "image-converter": {
