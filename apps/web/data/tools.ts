@@ -921,6 +921,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "love-calculator",
+    title: "Love Calculator",
+    category: "date-time",
+    description:
+      "A fun, name-based compatibility percentage calculator. For entertainment purposes only.",
+    featured: false,
+    keywords: [
+      "love calculator",
+      "love percentage calculator",
+      "name compatibility test",
+      "relationship compatibility calculator",
+      "fun love test",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

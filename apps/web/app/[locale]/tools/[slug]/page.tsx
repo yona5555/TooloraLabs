@@ -129,6 +129,8 @@ import TimeCalculator from "@/components/tools/time-calculator/TimeCalculator";
 import TimeEducation from "@/components/tools/time-calculator/TimeEducation";
 import DiceRoller from "@/components/tools/dice-roller/DiceRoller";
 import DiceEducation from "@/components/tools/dice-roller/DiceEducation";
+import LoveCalculator from "@/components/tools/love-calculator/LoveCalculator";
+import LoveEducation from "@/components/tools/love-calculator/LoveEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -536,6 +538,9 @@ export default async function ToolPage({
     case "dice-roller":
       component = <DiceRoller education={<DiceEducation />} />;
       break;
+    case "love-calculator":
+      component = <LoveCalculator education={<LoveEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -675,6 +680,7 @@ export default async function ToolPage({
     slug === "date-calculator" ||
     slug === "time-calculator" ||
     slug === "dice-roller" ||
+    slug === "love-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

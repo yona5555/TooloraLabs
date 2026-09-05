@@ -72,3 +72,4 @@ export * from "./BMRCalculator";
 export * from "./DateCalculator";
 export * from "./TimeCalculator";
 export * from "./DiceRollerCalculator";
+export * from "./LoveCalculator";
