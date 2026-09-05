@@ -33,7 +33,8 @@
         "JPY": "Yen japonés (JPY)",
         "INR": "Rupia india (INR)"
       }
-    }
+    },
+    "viewDocumentation": "Ver documentación"
   },
   "site": {
     "title": "TooloraLabs",
@@ -17865,5 +17866,166 @@
     "full-document-translator": "Traductor de documentos completos",
     "auto-image-colorizer": "Colorización automática de imágenes",
     "personal-avatar-generator": "Generador de avatar personal"
+  },
+  "docsNav": {
+    "navLabel": "Navegación de la documentación",
+    "searchPlaceholder": "Buscar en la documentación...",
+    "overview": "Resumen",
+    "toolsGuide": "Guía de herramientas",
+    "reference": "Referencia",
+    "soon": "Próximamente",
+    "browseDocs": "Explorar documentación",
+    "onThisPage": "En esta página",
+    "wasThisHelpful": "¿Te resultó útil?",
+    "yes": "Sí",
+    "no": "No",
+    "feedbackThanksYes": "¡Gracias por tu opinión!",
+    "feedbackThanksNo": "Gracias — lo usaremos para mejorar la página.",
+    "indexIntro": "Documentación de referencia para las calculadoras de TooloraLabs: las fórmulas, la lógica de cálculo paso a paso y los casos límite que gestiona cada herramienta. Disponible actualmente para una herramienta como prueba piloto, con más por venir.",
+    "indexCta": "Ver documentación de la Calculadora de Interés Compuesto"
+  },
+  "docs": {
+    "tools": {
+      "compound-interest-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Interés Compuesto: la fórmula en la que se basa, cómo el motor calcula realmente un resultado paso a paso, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionGrowthComparison": "Crecimiento compuesto vs. simple",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "FV = P(1 + r/n)ⁿᵗ + aportaciones",
+          "note": "La clásica fórmula cerrada para el crecimiento compuesto de un principal inicial P a una tasa anual r, capitalizada n veces al año durante t años. Sin embargo, el motor de esta herramienta no evalúa esta fórmula directamente — consulta \"Cómo se calcula\" abajo para saber por qué."
+        },
+        "flowchart": {
+          "intro": "El motor simula mes a mes en lugar de evaluar la fórmula cerrada una sola vez, porque una aportación mensual recurrente también necesita capitalizarse — algo que la fórmula simple anterior no contempla.",
+          "steps": [
+            "Convertir la tasa anual a su equivalente mensual, según la frecuencia de capitalización elegida",
+            "Cada mes: aplicar el interés de ese período, neto de cualquier impuesto",
+            "Cada mes: añadir la aportación mensual (si la hay) al saldo",
+            "Repetir para cada mes a lo largo de todo el plazo de la inversión",
+            "Aplicar el ajuste por inflación al saldo final, si se proporcionó una tasa de inflación"
+          ],
+          "caption": "El bucle de simulación mes a mes que realmente ejecuta el motor de esta herramienta, no la fórmula cerrada."
+        },
+        "growthComparison": {
+          "intro": "Un ejemplo fijo — 1000 $ al 8 % durante 20 años — que muestra por qué la capitalización supera al interés simple: la ventaja de la curva compuesta sobre la curva lineal de interés simple crece cada año, porque el interés compuesto gana interés sobre interés ya ganado.",
+          "labelCompound": "Compuesto",
+          "labelSimple": "Simple",
+          "caption": "1000 $ al 8 % de interés anual durante 20 años: crecimiento compuesto (línea sólida) frente a interés simple (línea discontinua)."
+        },
+        "anatomy": {
+          "intro": "Todo resultado que produce esta herramienta se descompone exactamente en tres componentes — ilustrados aquí con un ejemplo representativo (10 000 $ de principal inicial, 100 $/mes durante 10 años al 7 %).",
+          "labelPrincipal": "Principal",
+          "labelContributions": "Aportaciones",
+          "labelInterest": "Interés",
+          "labelTotal": "Valor futuro",
+          "caption": "Los tres componentes del valor futuro: el principal original, el total de aportaciones añadidas con el tiempo y el interés ganado sobre ambos."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "P",
+            "meaning": "Principal inicial — el monto invertido al comienzo.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Tasa de interés anual.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Duración de la inversión.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "n",
+            "meaning": "Frecuencia de capitalización — cuántas veces al año se aplica el interés.",
+            "unit": "Veces/año"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Aportación mensual añadida al saldo cada mes (opcional).",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "τ",
+            "meaning": "Tasa de impuesto aplicada al interés ganado cada período (opcional).",
+            "unit": "%"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Tasa de inflación anual, usada solo para deflactar el saldo final a poder adquisitivo actual (opcional).",
+            "unit": "%"
+          },
+          {
+            "symbol": "Meta",
+            "meaning": "Un valor futuro objetivo — usado solo en los modos \"Duración de la inversión\", \"Tasa de rendimiento\", \"Monto inicial\" y \"Aportación adicional\" para resolver la incógnita correspondiente.",
+            "unit": "Moneda"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Años cero o negativos",
+            "description": "Protegido a nivel del motor: una duración de cero o menos devuelve un resultado vacío (valor futuro cero, sin cronograma) en lugar de dividir entre cero o entrar en un bucle infinito."
+          },
+          {
+            "title": "Tasa de interés cero",
+            "description": "Una tasa del 0 % igualmente se calcula correctamente — la tasa mensual equivalente se resuelve exactamente en 0, por lo que el saldo crece solo con las aportaciones, sin componente de interés."
+          },
+          {
+            "title": "Tasa de impuesto fuera de 0–100 %",
+            "description": "Cualquier valor de tasa de impuesto se limita al rango 0–100 % antes de usarse, de modo que una entrada fuera de rango no pueda producir un interés negativo ni un impuesto superior al 100 %."
+          },
+          {
+            "title": "Aportación mensual negativa",
+            "description": "Las aportaciones tienen un piso de cero — un valor negativo introducido en el campo opcional de aportación se trata como ninguna aportación, no como un retiro."
+          },
+          {
+            "title": "Tasa de inflación dejada en cero",
+            "description": "Cuando no se proporciona una tasa de inflación (el valor predeterminado), el resultado ajustado por poder adquisitivo queda idéntico al valor futuro nominal, en lugar de dividir innecesariamente entre 1 o mostrar una cifra separada sin diferencia real."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el motor simula mes a mes en lugar de usar simplemente la fórmula de interés compuesto?",
+            "answer": "La fórmula clásica, FV = P(1 + r/n)ⁿᵗ, no tiene forma de añadir una aportación recurrente a mitad del cálculo — solo describe una única suma global que crece sin tocarse. Simular mes a mes permite al motor añadir una aportación cada período y que empiece a capitalizarse de inmediato, algo que la fórmula cerrada por sí sola no puede expresar."
+          },
+          {
+            "question": "¿Cómo interactúa la frecuencia de capitalización con las aportaciones mensuales?",
+            "answer": "Sin importar si el interés se capitaliza anual, trimestral o diariamente, la simulación siempre avanza un mes a la vez — la frecuencia de capitalización solo cambia la tasa de interés aplicada cada mes (convertida a su equivalente mensual mediante r_mes = (1 + r/n)^(n/12) − 1), no cuántas veces se ejecuta el propio bucle. Esto es lo que permite que una aportación mensual funcione de forma consistente sin importar la frecuencia elegida."
+          },
+          {
+            "question": "¿A qué se aplica exactamente la tasa de impuesto?",
+            "answer": "La tasa de impuesto se aplica solo al interés ganado cada mes, antes de que ese interés se añada al saldo — las aportaciones y el principal en sí nunca son gravados por esta calculadora. Una tasa de impuesto del 15 %, por ejemplo, significa que el interés bruto de cada mes se multiplica por 0.85 antes de capitalizarse."
+          },
+          {
+            "question": "¿Por qué la cifra ajustada por inflación a veces se describe como \"poder adquisitivo actual\" en lugar de un segundo valor futuro?",
+            "answer": "El ajuste por inflación no cambia lo que la cuenta realmente valdrá en el futuro — divide ese valor futuro nominal entre (1 + inflación)^t para expresar la misma cantidad en términos de lo que podría comprar hoy, lo cual es una pregunta distinta (poder adquisitivo) del saldo de la cuenta en sí (valor nominal)."
+          },
+          {
+            "question": "¿Puede esta herramienta resolver hacia atrás, por ejemplo, hallar la tasa de interés necesaria para alcanzar una meta?",
+            "answer": "Sí — eso es lo que hacen los cuatro modos alternativos (Duración de la inversión, Tasa de rendimiento, Monto inicial, Aportación adicional). Cada uno mantiene fijas todas las demás variables y busca la única incógnita que alcanza el valor futuro objetivo que proporcionaste, usando una búsqueda numérica (bisección) en lugar de una inversa de forma cerrada, ya que la simulación mes a mes subyacente no tiene una inversa algebraica sencilla."
+          }
+        ]
+      }
+    }
   }
 }

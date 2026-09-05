@@ -17,6 +17,7 @@ import { convertAmountString, isSupportedCurrency, DEFAULT_CURRENCY, type Curren
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PlainDisclaimer from "@/components/tool-ui/PlainDisclaimer";
 import CompoundInterestModeTabs from "./CompoundInterestModeTabs";
 import RuleOf72Card from "./RuleOf72Card";
@@ -513,6 +514,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
                 />
               </div>
               <SectionNav items={navItems} visible={navBarVisible} />
+              <ViewDocsLink slug="compound-interest-calculator" />
               <CompoundInterestGrowthChart
                 hasCalculated={activeCalculated}
                 currency={currency}

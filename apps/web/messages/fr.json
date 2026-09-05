@@ -33,7 +33,8 @@
         "JPY": "Yen japonais (JPY)",
         "INR": "Roupie indienne (INR)"
       }
-    }
+    },
+    "viewDocumentation": "Voir la documentation"
   },
   "site": {
     "title": "TooloraLabs",
@@ -17865,5 +17866,166 @@
     "full-document-translator": "Traducteur de documents complets",
     "auto-image-colorizer": "Colorisation automatique d'images",
     "personal-avatar-generator": "Générateur d'avatar personnel"
+  },
+  "docsNav": {
+    "navLabel": "Navigation de la documentation",
+    "searchPlaceholder": "Rechercher dans la documentation...",
+    "overview": "Aperçu",
+    "toolsGuide": "Guide des outils",
+    "reference": "Référence",
+    "soon": "Bientôt",
+    "browseDocs": "Parcourir la documentation",
+    "onThisPage": "Sur cette page",
+    "wasThisHelpful": "Cela vous a-t-il été utile ?",
+    "yes": "Oui",
+    "no": "Non",
+    "feedbackThanksYes": "Merci pour votre retour !",
+    "feedbackThanksNo": "Merci — nous nous en servirons pour améliorer la page.",
+    "indexIntro": "Documentation de référence pour les calculateurs de TooloraLabs : les formules, la logique de calcul étape par étape, et les cas limites que chaque outil gère. Actuellement disponible pour un seul outil à titre pilote, d'autres suivront.",
+    "indexCta": "Voir la documentation du calculateur d'intérêts composés"
+  },
+  "docs": {
+    "tools": {
+      "compound-interest-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur d'intérêts composés : la formule qui le sous-tend, comment le moteur calcule réellement un résultat étape par étape, les variables qu'il accepte et les cas limites qu'il gère.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionGrowthComparison": "Croissance composée vs. simple",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "5",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "FV = P(1 + r/n)ⁿᵗ + versements",
+          "note": "La formule fermée classique pour la croissance composée d'un capital initial P à un taux annuel r, composé n fois par an sur t années. Le moteur de cet outil n'évalue toutefois pas cette formule directement — voir « Comment c'est calculé » ci-dessous pour la raison."
+        },
+        "flowchart": {
+          "intro": "Le moteur simule mois par mois plutôt que d'évaluer la formule fermée une seule fois, car un versement mensuel récurrent doit lui aussi générer des intérêts composés — ce que la formule simple ci-dessus ne prend pas en compte.",
+          "steps": [
+            "Convertir le taux annuel en son équivalent mensuel, selon la fréquence de capitalisation choisie",
+            "Chaque mois : appliquer l'intérêt de cette période, net de toute taxe",
+            "Chaque mois : ajouter le versement mensuel (le cas échéant) au solde",
+            "Répéter pour chaque mois sur toute la durée de l'investissement",
+            "Appliquer la déflation liée à l'inflation au solde final, si un taux d'inflation a été fourni"
+          ],
+          "caption": "La boucle de simulation mois par mois que le moteur de cet outil exécute réellement, et non la formule fermée."
+        },
+        "growthComparison": {
+          "intro": "Un exemple fixe — 1 000 $ à 8 % sur 20 ans — montrant pourquoi la capitalisation l'emporte sur l'intérêt simple : l'avantage de la courbe composée sur la courbe linéaire de l'intérêt simple augmente chaque année, car l'intérêt composé rapporte des intérêts sur des intérêts déjà gagnés.",
+          "labelCompound": "Composé",
+          "labelSimple": "Simple",
+          "caption": "1 000 $ à 8 % d'intérêt annuel sur 20 ans : croissance composée (ligne pleine) contre intérêt simple (ligne pointillée)."
+        },
+        "anatomy": {
+          "intro": "Chaque résultat produit par cet outil se décompose en exactement trois composantes — illustrées ici par un exemple représentatif (10 000 $ de capital initial, 100 $/mois pendant 10 ans à 7 %).",
+          "labelPrincipal": "Capital",
+          "labelContributions": "Versements",
+          "labelInterest": "Intérêts",
+          "labelTotal": "Valeur future",
+          "caption": "Les trois composantes de la valeur future : le capital initial, le total des versements ajoutés au fil du temps, et les intérêts gagnés sur les deux."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "P",
+            "meaning": "Capital initial — le montant investi au départ.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Taux d'intérêt annuel.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Durée de l'investissement.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "n",
+            "meaning": "Fréquence de capitalisation — le nombre de fois par an où l'intérêt est appliqué.",
+            "unit": "Fois/an"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Versement mensuel ajouté au solde chaque mois (facultatif).",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "τ",
+            "meaning": "Taux d'imposition appliqué aux intérêts gagnés chaque période (facultatif).",
+            "unit": "%"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Taux d'inflation annuel, utilisé uniquement pour déflater le solde final en pouvoir d'achat actuel (facultatif).",
+            "unit": "%"
+          },
+          {
+            "symbol": "Objectif",
+            "meaning": "Une valeur future cible — utilisée uniquement dans les modes « Durée de l'investissement », « Taux de rendement », « Montant initial » et « Versement supplémentaire » pour résoudre l'inconnue correspondante.",
+            "unit": "Devise"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Durée nulle ou négative",
+            "description": "Protégé au niveau du moteur : une durée nulle ou négative renvoie un résultat vide (valeur future nulle, aucun échéancier) plutôt qu'une division par zéro ou une boucle infinie."
+          },
+          {
+            "title": "Taux d'intérêt nul",
+            "description": "Un taux de 0 % se calcule tout de même correctement — le taux mensuel équivalent se résout exactement à 0, de sorte que le solde ne croît que grâce aux versements, sans composante d'intérêt."
+          },
+          {
+            "title": "Taux d'imposition hors de 0–100 %",
+            "description": "Toute valeur de taux d'imposition est bornée à la plage 0–100 % avant utilisation, de sorte qu'une saisie hors plage ne puisse pas produire un intérêt négatif ou une imposition supérieure à 100 %."
+          },
+          {
+            "title": "Versement mensuel négatif",
+            "description": "Les versements sont plafonnés à zéro au minimum — une valeur négative saisie dans le champ facultatif de versement est traitée comme l'absence de versement, et non comme un retrait."
+          },
+          {
+            "title": "Taux d'inflation laissé à zéro",
+            "description": "Lorsqu'aucun taux d'inflation n'est fourni (valeur par défaut), le résultat ajusté au pouvoir d'achat reste identique à la valeur future nominale, plutôt que de diviser inutilement par 1 ou d'afficher un chiffre distinct sans réelle différence."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le moteur simule-t-il mois par mois plutôt que d'utiliser simplement la formule des intérêts composés ?",
+            "answer": "La formule classique, FV = P(1 + r/n)ⁿᵗ, ne permet pas d'ajouter un versement récurrent en cours de calcul — elle décrit uniquement une somme unique qui croît sans y toucher. Simuler mois par mois permet au moteur d'ajouter un versement à chaque période et de le faire commencer à générer des intérêts composés immédiatement, ce que la formule fermée seule ne peut exprimer."
+          },
+          {
+            "question": "Comment la fréquence de capitalisation interagit-elle avec les versements mensuels ?",
+            "answer": "Que les intérêts soient composés annuellement, trimestriellement ou quotidiennement, la simulation avance toujours d'un mois à la fois — la fréquence de capitalisation ne change que le taux d'intérêt appliqué chaque mois (converti en son équivalent mensuel via r_mois = (1 + r/n)^(n/12) − 1), pas la fréquence d'exécution de la boucle elle-même. C'est ce qui permet à un versement mensuel de fonctionner de façon cohérente quelle que soit la fréquence choisie."
+          },
+          {
+            "question": "À quoi s'applique exactement le taux d'imposition ?",
+            "answer": "Le taux d'imposition s'applique uniquement aux intérêts gagnés chaque mois, avant que ces intérêts ne soient ajoutés au solde — les versements et le capital lui-même ne sont jamais imposés par ce calculateur. Un taux d'imposition de 15 %, par exemple, signifie que l'intérêt brut de chaque mois est multiplié par 0,85 avant capitalisation."
+          },
+          {
+            "question": "Pourquoi le chiffre ajusté à l'inflation est-il parfois décrit comme le « pouvoir d'achat actuel » plutôt que comme une seconde valeur future ?",
+            "answer": "L'ajustement à l'inflation ne change pas ce que le compte vaudra réellement à l'avenir — il divise cette valeur future nominale par (1 + inflation)^t pour exprimer le même montant en termes de ce qu'il pourrait acheter aujourd'hui, ce qui est une question différente (pouvoir d'achat) du solde du compte lui-même (valeur nominale)."
+          },
+          {
+            "question": "Cet outil peut-il résoudre à rebours — par exemple, trouver le taux d'intérêt nécessaire pour atteindre un objectif ?",
+            "answer": "Oui — c'est exactement ce que font les quatre modes alternatifs (Durée de l'investissement, Taux de rendement, Montant initial, Versement supplémentaire). Chacun fixe toutes les autres variables et recherche la seule inconnue qui atteint la valeur future cible que vous avez fournie, en utilisant une recherche numérique (bissection) plutôt qu'une formule inverse fermée, car la simulation mois par mois sous-jacente n'a pas d'inverse algébrique simple."
+          }
+        ]
+      }
+    }
   }
 }

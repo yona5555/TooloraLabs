@@ -33,7 +33,8 @@
         "JPY": "Japanese Yen (JPY)",
         "INR": "Indian Rupee (INR)"
       }
-    }
+    },
+    "viewDocumentation": "View Documentation"
   },
   "site": {
     "title": "TooloraLabs",
@@ -17861,5 +17862,166 @@
     "full-document-translator": "Full Document Translator",
     "auto-image-colorizer": "Automatic Image Colorizer",
     "personal-avatar-generator": "Personal Avatar Generator"
+  },
+  "docsNav": {
+    "navLabel": "Documentation navigation",
+    "searchPlaceholder": "Search docs...",
+    "overview": "Overview",
+    "toolsGuide": "Tools Guide",
+    "reference": "Reference",
+    "soon": "Soon",
+    "browseDocs": "Browse Docs",
+    "onThisPage": "On This Page",
+    "wasThisHelpful": "Was this helpful?",
+    "yes": "Yes",
+    "no": "No",
+    "feedbackThanksYes": "Thanks for the feedback!",
+    "feedbackThanksNo": "Thanks — we'll use this to improve the page.",
+    "indexIntro": "Reference documentation for TooloraLabs' calculators: the formulas, the step-by-step calculation logic, and the edge cases each tool handles. Currently available for one tool as a pilot, with more being added.",
+    "indexCta": "View Compound Interest Calculator Docs"
+  },
+  "docs": {
+    "tools": {
+      "compound-interest-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Compound Interest Calculator: the formula behind it, how the engine actually computes a result step by step, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionGrowthComparison": "Compound vs. Simple Growth",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "FV = P(1 + r/n)ⁿᵗ + contributions",
+          "note": "The classic closed-form formula for compound growth of a starting principal P at annual rate r, compounded n times per year for t years. This tool's engine doesn't evaluate this formula directly, though — see \"How It's Calculated\" below for why."
+        },
+        "flowchart": {
+          "intro": "The engine simulates month by month rather than evaluating the closed-form formula once, because a recurring monthly contribution needs to compound too — something the plain formula above doesn't account for.",
+          "steps": [
+            "Convert the annual rate to its monthly-equivalent, based on the chosen compounding frequency",
+            "Each month: apply that period's interest, net of any tax rate",
+            "Each month: add the monthly contribution (if any) to the balance",
+            "Repeat for every month across the full investment term",
+            "Apply inflation deflation to the final balance, if an inflation rate was supplied"
+          ],
+          "caption": "The month-by-month simulation loop this tool's engine actually runs, not the closed-form formula."
+        },
+        "growthComparison": {
+          "intro": "A fixed example — $1,000 at 8% for 20 years — showing why compounding beats simple interest: the compound curve's advantage over the straight-line simple-interest curve grows every year, because compound interest earns interest on interest already earned.",
+          "labelCompound": "Compound",
+          "labelSimple": "Simple",
+          "caption": "$1,000 at 8% annual interest for 20 years: compound growth (solid) versus simple interest (dashed)."
+        },
+        "anatomy": {
+          "intro": "Every result this tool produces breaks down into exactly three components — illustrated here with a representative example ($10,000 starting principal, $100/month for 10 years at 7%).",
+          "labelPrincipal": "Principal",
+          "labelContributions": "Contributions",
+          "labelInterest": "Interest",
+          "labelTotal": "Future Value",
+          "caption": "The future value's three components: the original principal, total contributions added over time, and interest earned on both."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "P",
+            "meaning": "Starting principal — the initial amount invested.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Annual interest rate.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Investment duration.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "n",
+            "meaning": "Compounding frequency — how many times per year interest is applied.",
+            "unit": "Times/year"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Monthly contribution added to the balance each month (optional).",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "τ",
+            "meaning": "Tax rate applied to interest earned each period (optional).",
+            "unit": "%"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Annual inflation rate, used only to deflate the final balance into today's purchasing power (optional).",
+            "unit": "%"
+          },
+          {
+            "symbol": "Target",
+            "meaning": "A target future value — used only in \"Investment Length\", \"Return Rate\", \"Starting Amount\", and \"Additional Contribution\" modes to solve for the corresponding unknown.",
+            "unit": "Currency"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero or negative years",
+            "description": "Guarded at the engine level: a duration of zero or less returns an empty result (zero future value, no schedule) rather than dividing by zero or looping infinitely."
+          },
+          {
+            "title": "Zero interest rate",
+            "description": "A 0% rate still computes correctly — the monthly-equivalent rate resolves to exactly 0, so the balance grows from contributions alone, with no interest component."
+          },
+          {
+            "title": "Tax rate outside 0–100%",
+            "description": "Any tax rate value is clamped to the 0–100% range before use, so an out-of-range input can't produce a negative-interest or over-100%-taxed result."
+          },
+          {
+            "title": "Negative monthly contribution",
+            "description": "Contributions are floored at zero — a negative value entered for the optional contribution field is treated as no contribution, rather than as a withdrawal."
+          },
+          {
+            "title": "Inflation rate left at zero",
+            "description": "When no inflation rate is supplied (the default), the buying-power-adjusted result is left identical to the nominal future value, rather than dividing by 1 needlessly or showing a separate figure with no real difference."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the engine simulate month by month instead of just using the compound interest formula?",
+            "answer": "The classic formula, FV = P(1 + r/n)ⁿᵗ, has no way to add a recurring contribution partway through the calculation — it only describes a single lump sum growing untouched. Simulating month by month lets the engine add a contribution every period and have it start compounding immediately, which the closed-form formula alone can't express."
+          },
+          {
+            "question": "How does compounding frequency interact with monthly contributions?",
+            "answer": "Regardless of whether interest compounds annually, quarterly, or daily, the simulation always steps forward one month at a time — the compounding frequency only changes the interest rate applied each month (converted to its monthly-equivalent via r_month = (1 + r/n)^(n/12) − 1), not how often the loop itself runs. This is what allows a monthly contribution to work consistently no matter which frequency is selected."
+          },
+          {
+            "question": "What exactly does the tax rate apply to?",
+            "answer": "The tax rate is applied only to interest earned each month, before that interest is added to the balance — contributions and the principal itself are never taxed by this calculator. A 15% tax rate, for instance, means every month's gross interest is multiplied by 0.85 before compounding."
+          },
+          {
+            "question": "Why is the inflation-adjusted figure sometimes described as \"today's purchasing power\" rather than a second future value?",
+            "answer": "The inflation adjustment doesn't change what the account will actually be worth in the future — it divides that nominal future value by (1 + inflation)^t to express the same amount in terms of what it could buy today, which is a different question (purchasing power) than the account balance itself (nominal value)."
+          },
+          {
+            "question": "Can this tool solve backward — for example, find the interest rate needed to reach a target?",
+            "answer": "Yes — that's what the four alternate modes (Investment Length, Return Rate, Starting Amount, Additional Contribution) do. Each one holds every other variable fixed and searches for the one unknown that reaches your supplied target future value, using a numerical search (bisection) rather than a closed-form inverse, since the underlying month-by-month simulation has no simple algebraic inverse."
+          }
+        ]
+      }
+    }
   }
 }
