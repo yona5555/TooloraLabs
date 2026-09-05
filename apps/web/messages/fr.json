@@ -10350,7 +10350,9 @@
             }
           ],
           "disclaimer": "Indication générale uniquement — les usages locaux varient selon l'établissement et évoluent avec le temps ; en cas de doute, vérifiez si des frais de service sont déjà inclus dans l'addition."
-        }
+        },
+        "emptyStateMessage": "Saisissez le montant de l'addition, le pourcentage de pourboire et le nombre de personnes, puis appuyez sur Calculer pour voir vos résultats.",
+        "sentence": "Répartition de {total} par personne entre {people} personnes avec un pourboire de {tip}."
       },
       "form": {
         "inputTitle": "Votre addition",
@@ -10361,7 +10363,9 @@
         "peopleLabel": "Nombre de personnes",
         "peoplePlaceholder": "ex. 2",
         "roundUpLabel": "Arrondir par personne",
-        "roundUpHint": "Arrondit le total de chaque personne au chiffre entier supérieur pour que personne n'ait besoin de faire l'appoint — la différence est ajoutée au pourboire."
+        "roundUpHint": "Arrondit le total de chaque personne au chiffre entier supérieur pour que personne n'ait besoin de faire l'appoint — la différence est ajoutée au pourboire.",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "billAmount": "Montant de l'addition",
@@ -10369,7 +10373,13 @@
         "tipAmount": "Montant du pourboire",
         "totalAmount": "Montant total",
         "tipPerPerson": "Pourboire / personne",
-        "totalPerPerson": "Total / personne"
+        "totalPerPerson": "Total / personne",
+        "gaugeZones": {
+          "belowStandard": "En Dessous de la Norme",
+          "standard": "Standard",
+          "generous": "Généreux",
+          "veryGenerous": "Très Généreux"
+        }
       },
       "education": {
         "intro": {
@@ -10515,7 +10525,81 @@
           "note": "Une étude de terrain comparant les évaluations de satisfaction client en ligne pour une même chaîne de restaurants, sous un système de pourboire classique par rapport à un modèle de tarification sans pourboire, service inclus.",
           "url": "https://doi.org/10.1111/joca.12171",
           "readOriginal": "Lire l'article original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Chaque calcul de pourboire dans cet outil provient de seulement quatre données.",
+          "items": [
+            {
+              "name": "Montant de l'Addition",
+              "description": "Le total avant pourboire sur l'addition — la base sur laquelle le pourcentage de pourboire est appliqué."
+            },
+            {
+              "name": "Pourcentage de Pourboire",
+              "description": "La part de l'addition ajoutée en pourboire, choisie selon la coutume, la qualité du service ou la norme locale."
+            },
+            {
+              "name": "Nombre de Personnes",
+              "description": "Combien de personnes partagent le total — l'addition et le pourboire sont divisés également entre ce nombre."
+            },
+            {
+              "name": "Arrondir par Personne",
+              "description": "Une option facultative qui arrondit la part de chaque personne à l'unité monétaire supérieure, afin que personne ne doive de monnaie impaire."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Répartir un pourboire équitablement se produit dans plus de situations que le simple repas au restaurant.",
+          "items": [
+            {
+              "title": "Repas de Groupe au Restaurant",
+              "description": "Le cas d'usage le plus courant — un groupe partage une addition et souhaite une répartition juste et égale qui aboutit tout de même à un pourboire total raisonnable."
+            },
+            {
+              "title": "Salons et Services Personnels",
+              "description": "Les normes de pourboire pour les coupes de cheveux, massages et services similaires suivent souvent la même convention de pourcentage de l'addition qu'au restaurant."
+            },
+            {
+              "title": "Livraison et Covoiturage",
+              "description": "De nombreuses applications de livraison et de covoiturage suggèrent un pourboire en pourcentage du tarif, suivant exactement le même calcul que cet outil automatise."
+            },
+            {
+              "title": "Personnel d'Événements et de Restauration",
+              "description": "Les événements de groupe avec une facture de restauration ou de service partagée bénéficient de la même logique de répartition égale lors du pourboire collectif au personnel."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Veuillez saisir des nombres valides et non négatifs pour l'addition, le pourcentage de pourboire et le nombre de personnes."
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les Réseaux Sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé Pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@example.com",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Acme SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Ville"
+      },
+      "splitDiagram": {
+        "title": "Répartition dans le Groupe",
+        "caption": "Chacune des {count} personnes doit le même montant."
+      },
+      "sensitivityDiagram": {
+        "title": "Sensibilité au Pourboire",
+        "caption": "Combien chaque personne paie par personne selon différents pourcentages de pourboire, pour votre addition.",
+        "xLabel": "Pourboire %"
       }
     },
     "discount-calculator": {
@@ -18873,7 +18957,8 @@
     "feedbackThanksYes": "Merci pour votre retour !",
     "feedbackThanksNo": "Merci — nous nous en servirons pour améliorer la page.",
     "indexIntro": "Documentation de référence pour les calculateurs de TooloraLabs : les formules, la logique de calcul étape par étape, et les cas limites que chaque outil gère. Actuellement disponible pour un seul outil à titre pilote, d'autres suivront.",
-    "indexCta": "Voir la documentation du calculateur d'intérêts composés"
+    "indexCta": "Voir la documentation du calculateur d'intérêts composés",
+    "indexAvailableNow": "Disponible maintenant"
   },
   "docs": {
     "tools": {
@@ -19014,6 +19099,743 @@
           {
             "question": "Cet outil peut-il résoudre à rebours — par exemple, trouver le taux d'intérêt nécessaire pour atteindre un objectif ?",
             "answer": "Oui — c'est exactement ce que font les quatre modes alternatifs (Durée de l'investissement, Taux de rendement, Montant initial, Versement supplémentaire). Chacun fixe toutes les autres variables et recherche la seule inconnue qui atteint la valeur future cible que vous avez fournie, en utilisant une recherche numérique (bissection) plutôt qu'une formule inverse fermée, car la simulation mois par mois sous-jacente n'a pas d'inverse algébrique simple."
+          }
+        ]
+      },
+      "loan-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Prêt : la formule d'amortissement derrière ses trois modes (amorti, paiement différé et obligation), les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAmortization": "Amortissement dans le temps",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "M = L[c(1+c)ⁿ] / [(1+c)ⁿ − 1]",
+          "note": "La formule standard de mensualité amortie pour le mode Amorti, où L est le montant du prêt, c le taux d'intérêt périodique et n le nombre de paiements. Les modes Différé et Obligation utilisent plutôt une croissance composée directe jusqu'à un paiement final unique, sans formule périodique à résoudre."
+        },
+        "flowchart": {
+          "intro": "Le mode Amorti convertit le taux annuel nominal en un taux réel par période de paiement (via le taux annuel effectif), permettant à la fréquence de capitalisation et à la fréquence de paiement de différer — un taux mensuel de type hypothécaire peut tout de même être remboursé chaque semaine.",
+          "steps": [
+            "Convertir le taux annuel nominal en taux annuel effectif, selon la fréquence de capitalisation choisie",
+            "Convertir le taux annuel effectif en un taux réel par période de paiement, selon la fréquence de paiement choisie",
+            "Résoudre la formule d'annuité standard pour la mensualité fixe qui amortit entièrement le prêt",
+            "Chaque période : diviser cette mensualité en intérêt (solde × taux de la période) et capital (le reste)",
+            "Répéter jusqu'à ce que le solde atteigne zéro"
+          ],
+          "caption": "La conversion de taux et la boucle d'amortissement réellement exécutées par le mode Amorti."
+        },
+        "amortization": {
+          "intro": "Un prêt représentatif de 10 000 $ sur 5 ans à 8 % — la part d'intérêt de la mensualité fixe commence élevée puis diminue à chaque période à mesure que le solde du capital diminue aussi.",
+          "labelPrincipal": "Capital",
+          "labelInterest": "Intérêt",
+          "caption": "Part de capital et d'intérêt de chaque paiement sur toute la durée du prêt."
+        },
+        "anatomy": {
+          "intro": "Le remboursement total de tout prêt amorti se décompose en exactement deux parties.",
+          "labelPrincipal": "Capital",
+          "labelInterest": "Intérêt",
+          "labelTotal": "Total remboursé",
+          "caption": "Un prêt représentatif de 10 000 $ à 8 % sur 5 ans."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "L",
+            "meaning": "Montant du prêt (modes Amorti/Différé) — la somme empruntée aujourd'hui.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Taux d'intérêt annuel nominal.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Durée du prêt.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "nc",
+            "meaning": "Fréquence de capitalisation — le nombre de fois par an où l'intérêt est capitalisé.",
+            "unit": "Fois/an"
+          },
+          {
+            "symbol": "np",
+            "meaning": "Fréquence de paiement — le nombre de fois par an où des paiements sont effectués (mode Amorti uniquement).",
+            "unit": "Fois/an"
+          },
+          {
+            "symbol": "Échéance",
+            "meaning": "Montant dû à l'échéance (mode Obligation uniquement) — la calculatrice résout à rebours le montant actuel reçu aujourd'hui.",
+            "unit": "Devise"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Montant de prêt ou durée nul ou négatif",
+            "description": "Protégé au niveau du moteur : un montant de prêt ou une durée non finis, nuls ou négatifs renvoie un résultat vide plutôt qu'une erreur de division."
+          },
+          {
+            "title": "Taux d'intérêt nul",
+            "description": "Correctement calculé dans tous les modes : à un taux de 0 %, la mensualité amortie est simplement le montant du prêt divisé également entre tous les paiements, et les soldes différé/obligation ne croissent pas du tout."
+          },
+          {
+            "title": "Durée plafonnée à 50 ans",
+            "description": "Les options de fréquence de paiement du mode Amorti (jusqu'à hebdomadaire, 52 paiements par an) sont plafonnées à une durée maximale de 50 ans, limitant le pire cas de l'échéancier à 2 600 lignes plutôt qu'un tableau illimité."
+          },
+          {
+            "title": "Fréquence de capitalisation indépendante de la fréquence de paiement",
+            "description": "Le moteur convertit spécifiquement via le taux annuel effectif afin que les deux puissent différer en toute sécurité — par exemple, un intérêt capitalisé mensuellement avec des paiements toutes les deux semaines — sans aucune dérive d'arrondi dans le taux périodique."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la Calculatrice de Prêt a-t-elle trois modes distincts ?",
+            "answer": "Amorti, Paiement Différé et Obligation représentent trois structures de remboursement réellement distinctes — des mensualités régulières, une somme unique remboursée plus tard, et une somme reçue aujourd'hui en échange d'une somme plus importante due plus tard — chacune nécessitant donc sa propre formule plutôt qu'un calcul générique de « prêt »."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la Calculatrice d'Intérêt Composé ?",
+            "answer": "La Calculatrice d'Intérêt Composé projette un solde d'épargne qui croît vers l'avant à partir de contributions ; les modes Différé et Obligation ici utilisent les mêmes mathématiques de croissance mais les présentent comme une dette — de l'argent dû qui croît jusqu'à un remboursement unique, plutôt que de l'argent épargné qui croît pour votre propre bénéfice futur."
+          },
+          {
+            "question": "Pourquoi la fréquence de capitalisation et la fréquence de paiement peuvent-elles différer ?",
+            "answer": "Les prêts à tempérament réels citent souvent un taux capitalisé mensuellement (comme la plupart des hypothèques) tout en permettant des paiements hebdomadaires ou bihebdomadaires. Convertir via le taux annuel effectif garde les mathématiques correctes quelle que soit la relation entre ces deux fréquences."
+          },
+          {
+            "question": "Que calcule réellement le mode Obligation ?",
+            "answer": "C'est l'image miroir du mode Différé : au lieu de demander « à combien ce montant de prêt va-t-il croître ? », il demande « combien devrais-je prêter aujourd'hui pour recevoir un montant spécifique à l'échéance ? » — la valeur actuelle de ce montant futur dû, actualisée au taux donné."
+          }
+        ]
+      },
+      "affordable-loan-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Prêt Abordable : la formule d'amortissement inverse qu'elle résout, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "1",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "L = M[1 − (1+c)⁻ⁿ] / c",
+          "note": "La valeur actuelle d'une annuité — la même formule d'amortissement que la Calculatrice de Prêt résout pour la mensualité M, réarrangée pour résoudre plutôt le montant de prêt L qu'une mensualité fixe peut soutenir."
+        },
+        "flowchart": {
+          "intro": "Il s'agit d'un réarrangement algébrique direct, pas d'une recherche ou d'une simulation — le montant maximal du prêt est calculé en une seule étape à partir de la mensualité que vous pouvez vous permettre.",
+          "steps": [
+            "Convertir le taux annuel nominal en taux mensuel",
+            "Calculer le nombre total de mensualités sur la durée",
+            "Résoudre directement la formule d'annuité pour le montant de prêt qui produit exactement votre mensualité cible",
+            "Paiement total = mensualité × nombre de paiements ; intérêt total = paiement total − montant du prêt"
+          ],
+          "caption": "Le calcul d'annuité inverse en une seule étape exécuté par cet outil."
+        },
+        "anatomy": {
+          "intro": "Le prêt maximal soutenu par une mensualité donnée se décompose en exactement deux parties, comme tout prêt amorti.",
+          "labelLoanAmount": "Montant du Prêt",
+          "labelInterest": "Intérêt",
+          "labelTotal": "Total remboursé",
+          "caption": "Un prêt représentatif soutenu par une mensualité fixe sur sa durée."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "M",
+            "meaning": "Mensualité que vous pouvez vous permettre — la donnée connue dont part cet outil.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Taux d'intérêt annuel.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Durée du prêt.",
+            "unit": "Années"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Mensualité nulle ou négative",
+            "description": "Protégé au niveau du moteur : une mensualité non finie, nulle ou négative renvoie un résultat vide plutôt qu'un montant de prêt indéfini."
+          },
+          {
+            "title": "Taux d'intérêt négatif",
+            "description": "Également rejeté — un taux d'intérêt inférieur à zéro n'a pas de taux périodique valide vers lequel se convertir, donc le moteur renvoie un résultat vide plutôt que de calculer avec un taux négatif dénué de sens."
+          },
+          {
+            "title": "Taux d'intérêt nul",
+            "description": "Toujours correctement calculé : à un taux de 0 %, le montant maximal du prêt est simplement la mensualité multipliée par le nombre de paiements, sans besoin de formule d'intérêt."
+          },
+          {
+            "title": "Durée nulle ou négative",
+            "description": "Protégée de la même façon que le montant du prêt et le taux — une durée non positive renvoie un résultat vide plutôt qu'une division par zéro paiement."
+          }
+        ],
+        "faq": [
+          {
+            "question": "En quoi cela diffère-t-il du mode Amorti de la Calculatrice de Prêt ?",
+            "answer": "Ce sont des images miroir exactes de la même formule : la Calculatrice de Prêt part d'un montant de prêt et résout la mensualité qu'il exige ; cet outil part d'une mensualité que vous pouvez vous permettre et résout le montant de prêt qu'elle soutient — la même équation d'annuité, réarrangée pour une inconnue différente."
+          },
+          {
+            "question": "Pourquoi la calculatrice a-t-elle besoin de ma mensualité cible plutôt que de mon revenu ?",
+            "answer": "Cet outil répond à une question plus étroite et directe — « quel prêt cette mensualité spécifique soutient-elle ? » — plutôt qu'une évaluation complète de la capacité de paiement. Pour un budget de mensualité dérivé du revenu et d'autres dettes, la Calculatrice de Capacité d'Achat Immobilier et la Calculatrice de Ratio Dette-Revenu sont des points de départ plus adaptés."
+          },
+          {
+            "question": "Un acompte plus important change-t-il ce que cette calculatrice calcule ?",
+            "answer": "Pas directement — cet outil résout le montant du prêt lui-même, pas le prix d'achat. Si vous achetez quelque chose avec un acompte, ajoutez le montant du prêt renvoyé par cet outil à votre acompte pour obtenir le prix total que vous pourriez vous permettre."
+          },
+          {
+            "question": "Pourquoi le résultat est-il un seul nombre plutôt qu'un échéancier ?",
+            "answer": "La question centrale à laquelle répond cet outil — le montant maximal du prêt — est une valeur unique par conception. Pour l'échéancier complet de remboursement mois par mois ou année par année d'un prêt de ce montant, le mode Amorti de la Calculatrice de Prêt continue exactement là où cet outil s'arrête."
+          }
+        ]
+      },
+      "retirement-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Retraite : la formule de valeur future d'une annuité plus une somme forfaitaire derrière sa projection, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionGrowth": "Croissance du solde jusqu'à la retraite",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "FV = S(1+i)ᵐ + C[((1+i)ᵐ − 1) / i]",
+          "note": "Le solde projeté est une somme forfaitaire S (épargne actuelle) capitalisée mensuellement, plus la valeur future d'une annuité de contribution mensuelle C — exactement les mêmes mathématiques que la Calculatrice d'Intérêt Composé simule mois par mois, appliquées ici à un horizon d'épargne jusqu'à l'âge de la retraite."
+        },
+        "flowchart": {
+          "intro": "Plutôt qu'un second moteur de simulation, cet outil est une fine enveloppe autour de la propre simulation mois par mois de la Calculatrice d'Intérêt Composé, toujours exécutée avec une capitalisation mensuelle et sans ajustement fiscal ou d'inflation (aucun des deux n'est exposé comme donnée ici).",
+          "steps": [
+            "Calculer les années jusqu'à la retraite comme l'âge de retraite moins l'âge actuel",
+            "Convertir le taux de rendement annuel en taux mensuel",
+            "Chaque mois : appliquer la croissance de ce mois au solde actuel",
+            "Chaque mois : ajouter la contribution mensuelle au solde",
+            "Répéter pour chaque mois jusqu'à atteindre l'âge de la retraite"
+          ],
+          "caption": "La simulation de croissance mois par mois que cet outil réutilise de la Calculatrice d'Intérêt Composé."
+        },
+        "growth": {
+          "intro": "Un exemple représentatif — en commençant à 30 ans avec 20 000 $ épargnés, en contribuant 300 $/mois avec un rendement annuel de 7 % jusqu'à 65 ans.",
+          "label": "Solde Projeté",
+          "caption": "Croissance du solde projeté de 30 ans jusqu'à un âge de retraite de 65 ans."
+        },
+        "anatomy": {
+          "intro": "Tout solde projeté se décompose en exactement trois composantes.",
+          "labelStarting": "Croissance du Solde Initial",
+          "labelContributions": "Contributions",
+          "labelGrowth": "Croissance sur les Contributions",
+          "labelTotal": "Solde Projeté",
+          "caption": "Le même exemple sur 35 ans : quelle part du solde final provient de la croissance propre de l'épargne initiale, par rapport aux contributions et à la croissance qu'elles ont elles-mêmes générée."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Âge",
+            "meaning": "Âge actuel.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "ÂgeRetraite",
+            "meaning": "Âge de retraite cible — les années jusqu'à la retraite sont la différence entre les deux âges.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "S",
+            "meaning": "Solde d'épargne-retraite actuel.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Contribution mensuelle ajoutée au solde chaque mois.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Taux de rendement annuel, supposé constant sur toute la projection.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Cible",
+            "meaning": "Un solde cible — utilisé uniquement par les modes inverses qui résolvent la contribution mensuelle requise ou le nombre d'années nécessaires pour l'atteindre.",
+            "unit": "Devise"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Âge de retraite non postérieur à l'âge actuel",
+            "description": "Protégé au niveau du moteur : un âge de retraite égal ou antérieur à l'âge actuel renvoie un résultat vide plutôt qu'un horizon de projection négatif ou nul."
+          },
+          {
+            "title": "Âge, épargne ou contribution négatifs",
+            "description": "Chacun est vérifié indépendamment — une valeur négative dans l'un d'eux renvoie un résultat vide, car aucun ne peut avoir de sens négatif dans cette projection."
+          },
+          {
+            "title": "Taux de rendement négatif",
+            "description": "Également rejeté : un rendement annuel négatif n'est pas modélisé par cet outil, qui suppose que l'épargne croît (ou au moins se maintient à 0 %) plutôt que de diminuer avec le temps."
+          },
+          {
+            "title": "Modes inverses avec une cible non positive",
+            "description": "Le mode « contribution requise » comme le mode « années nécessaires » se protègent contre un solde cible nul ou négatif, car aucune contribution ou durée significative ne peut « atteindre » une cible déjà remplie ou invalide."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cet outil ne prend-il pas en compte les impôts ou l'inflation ?",
+            "answer": "Les comptes de retraite varient trop dans leur traitement fiscal (401(k), IRA, compte de courtage imposable et autres) pour supposer une règle universelle, donc cet outil laisse intentionnellement de côté les impôts et l'inflation — le mode Montant Final de la Calculatrice d'Intérêt Composé expose les deux comme données optionnelles si vous souhaitez une projection qui les prend en compte."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la Calculatrice d'Intérêt Composé ?",
+            "answer": "Elles partagent le même moteur de croissance sous-jacent, mais cet outil encadre chaque donnée spécifiquement autour d'une chronologie de retraite (âge actuel et âge de retraite, plutôt qu'un nombre brut d'années) et suppose toujours une capitalisation mensuelle, sacrifiant un peu de généralité pour une interface plus directe destinée à la planification de la retraite."
+          },
+          {
+            "question": "Cet outil peut-il me dire combien je dois épargner ?",
+            "answer": "Oui — ses modes inverses font exactement cela : étant donné un solde cible, l'un résout la contribution mensuelle requise pour l'atteindre avant votre âge de retraite, et l'autre résout plutôt combien d'années supplémentaires d'épargne à votre taux de contribution actuel seraient nécessaires."
+          },
+          {
+            "question": "Pourquoi le taux de croissance est-il supposé constant sur toute la projection ?",
+            "answer": "Un taux unique constant garde les mathématiques de la projection exactes et ses hypothèses transparentes, plutôt que d'impliquer une fausse précision en devinant comment les rendements pourraient varier d'année en année — les marchés réels fluctuent, donc cette projection se lit mieux comme une estimation illustrative, pas une garantie."
+          }
+        ]
+      },
+      "house-affordability-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Capacité d'Achat Immobilier : la règle 28/36 derrière son mode principal, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionRatio": "La règle 28/36",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "5",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Budget Logement = min(0,28 × Revenu, 0,36 × Revenu − Autres Dettes)",
+          "note": "La règle standard de capacité d'achat 28/36 : coûts mensuels de logement plafonnés à 28 % du revenu brut (le ratio front-end), et la dette mensuelle totale — logement plus tout le reste — plafonnée à 36 % (le ratio back-end). Le plus bas des deux plafonds fixe le budget logement réel, qui est ensuite résolu à rebours en un prix maximal de logement."
+        },
+        "flowchart": {
+          "intro": "Résoudre à rebours d'un budget de mensualité à un prix de logement est plus complexe qu'une simple formule, car la taxe foncière elle-même est un pourcentage du prix recherché — le calcul doit d'abord isoler les coûts indépendants du prix.",
+          "steps": [
+            "Calculer le plafond front-end (28 % du revenu mensuel) et le plafond back-end (36 % du revenu mensuel moins les dettes existantes)",
+            "Prendre le plus bas des deux comme paiement logement mensuel maximal",
+            "Soustraire l'assurance et les frais de copropriété (des montants fixes, indépendants du prix du logement) de ce budget",
+            "Résoudre le prix du logement où le budget restant couvre exactement le capital, l'intérêt et la taxe foncière à ce prix",
+            "Montant du prêt = prix du logement − acompte"
+          ],
+          "caption": "Le calcul de capacité d'achat inverse exécuté par le mode principal (Prix du Logement) de cet outil."
+        },
+        "ratio": {
+          "intro": "Un exemple représentatif au plafond front-end de 28 % — le même seuil auquel le mode principal de cet outil se compare avant de vérifier le plafond back-end de 36 % par rapport aux dettes existantes.",
+          "gaugeCaption": "Ratio front-end",
+          "caption": "28 % est le plafond front-end standard ; 36 % est le plafond back-end une fois les dettes existantes incluses."
+        },
+        "anatomy": {
+          "intro": "Le paiement logement mensuel maximal résolu par cet outil se décompose en trois parties (les frais de copropriété, lorsqu'ils sont indiqués, en ajoutent une quatrième).",
+          "labelPrincipalInterest": "Capital et Intérêt",
+          "labelTax": "Taxe Foncière",
+          "labelInsurance": "Assurance",
+          "labelTotal": "Paiement Logement Mensuel",
+          "caption": "Un paiement logement représentatif au plafond front-end de 28 %."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Revenu",
+            "meaning": "Revenu brut annuel.",
+            "unit": "Devise/an"
+          },
+          {
+            "symbol": "Dette",
+            "meaning": "Paiements de dette mensuels existants (auto, prêts étudiants, cartes de crédit, etc.), hors logement.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Acompte",
+            "meaning": "Acompte disponible.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Taux d'intérêt hypothécaire annuel.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Durée du prêt.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "TauxTaxe",
+            "meaning": "Taux de taxe foncière annuel, en pourcentage du prix du logement.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Assurance",
+            "meaning": "Assurance habitation annuelle.",
+            "unit": "Devise/an"
+          },
+          {
+            "symbol": "Copro",
+            "meaning": "Frais de copropriété mensuels, le cas échéant.",
+            "unit": "Devise/mois"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Toute donnée négative ou non finie",
+            "description": "Chaque donnée est vérifiée indépendamment au niveau du moteur — revenu, dettes, acompte, taux, durée, taux de taxe, assurance et frais de copropriété sont tous protégés contre les valeurs négatives ou non finies, renvoyant un résultat vide plutôt qu'un prix dénué de sens."
+          },
+          {
+            "title": "Budget trop serré après assurance et copropriété",
+            "description": "Si l'assurance et les frais de copropriété à eux seuls dépassent déjà le budget logement autorisé par la règle 28/36, il ne reste aucune place pour le capital, l'intérêt ou la taxe — la calculatrice renvoie un résultat vide plutôt qu'un prix de logement négatif."
+          },
+          {
+            "title": "Plafond back-end réduit par la dette existante",
+            "description": "Le plafond back-end de 36 % n'est pas un plafond fixe pour le logement seul — il est directement réduit par toute dette non liée au logement saisie, de sorte que des paiements de dette existants plus élevés réduisent correctement le prix maximal de logement abordable."
+          },
+          {
+            "title": "La taxe foncière évolue avec le prix inconnu",
+            "description": "Comme la taxe foncière est un pourcentage du prix du logement plutôt qu'un montant fixe, la calculatrice résout le prix et la taxe ensemble, plutôt que de supposer un chiffre de taxe à l'avance et de calculer le prix séparément à partir de celui-ci."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi spécifiquement 28 % et 36 % ?",
+            "answer": "Ce sont les seuils classiques de capacité d'achat hypothécaire conventionnelle utilisés depuis longtemps dans la souscription hypothécaire : 28 % plafonne uniquement les coûts de logement (ratio front-end), et 36 % plafonne le logement plus tous les autres paiements de dette combinés (ratio back-end) — les deux exprimés en pourcentage du revenu brut, pas net."
+          },
+          {
+            "question": "Pourquoi cet outil a-t-il cinq modes ?",
+            "answer": "Prix du Logement et Revenu Requis sont deux directions à travers les mêmes mathématiques de capacité d'achat immobilier ; Auto, Prêt Personnel et Prêt Entreprise appliquent la même logique de budget en pourcentage du revenu à d'autres achats importants, car la question sous-jacente — « que peut soutenir ce revenu ? » — est la même dans les cinq cas."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la Calculatrice de Ratio Dette-Revenu ?",
+            "answer": "La Calculatrice de Ratio Dette-Revenu rapporte vos ratios actuels compte tenu des dettes que vous avez déjà ; le mode Prix du Logement de cet outil travaille dans la direction opposée — partant des seuils 28/36 et résolvant le prix maximal du logement qui vous maintient dans ces limites."
+          },
+          {
+            "question": "Pourquoi un acompte plus important augmente-t-il le prix maximal du logement de plus que l'acompte lui-même ?",
+            "answer": "Un acompte plus important réduit le montant de prêt nécessaire, ce qui réduit le paiement de capital et d'intérêt requis — libérant ainsi davantage du budget logement fixe pour un prix plus élevé, en plus de la propre contribution directe de l'acompte à ce prix."
+          }
+        ]
+      },
+      "debt-to-income-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Ratio Dette-Revenu : les formules des ratios front-end et back-end, les seuils de souscription auxquels elle catégorise les résultats, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionRatio": "Catégories de ratio",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Ratio Back-End = (Logement + Auto + Étudiant + CarteCrédit + Autre) / Revenu × 100",
+          "note": "Le ratio back-end (communément appelé simplement « DTI ») additionne chaque paiement de dette mensuel et le divise par le revenu brut mensuel ; le ratio front-end utilise la même formule avec seulement le paiement logement au numérateur."
+        },
+        "flowchart": {
+          "intro": "Les deux ratios sont calculés directement à partir des mêmes données — sans itération ni recherche, seulement deux divisions et une consultation de seuil.",
+          "steps": [
+            "Additionner chaque paiement de dette mensuel (logement, auto, prêts étudiants, cartes de crédit, autre) en un total",
+            "Ratio front-end = paiement logement ÷ revenu brut mensuel × 100",
+            "Ratio back-end = dette mensuelle totale ÷ revenu brut mensuel × 100",
+            "Catégoriser le ratio back-end : sain (<36 %), gérable (36–43 %), élevé (43–50 %), ou très élevé (50 %+)"
+          ],
+          "caption": "Les deux calculs de ratio et la catégorisation exécutés par cet outil."
+        },
+        "ratio": {
+          "intro": "Un ratio back-end représentatif de 38 %, dans la zone « gérable » entre les seuils de souscription de 36 % et 43 %.",
+          "gaugeCaption": "Ratio back-end (DTI)",
+          "caption": "En dessous de 36 % est généralement considéré comme sain ; 36–43 % est la fourchette dans laquelle de nombreux prêteurs conventionnels travaillent encore ; au-dessus de 50 % est largement traité comme un fardeau de dette à haut risque."
+        },
+        "anatomy": {
+          "intro": "La dette mensuelle totale se décompose en jusqu'à cinq catégories, chacune saisie séparément.",
+          "labelHousing": "Logement",
+          "labelCar": "Auto",
+          "labelStudent": "Prêts Étudiants",
+          "labelCreditCard": "Cartes de Crédit",
+          "labelOther": "Autre",
+          "labelTotal": "Dette Mensuelle Totale",
+          "caption": "Une répartition de dette représentative additionnant le total utilisé dans les deux ratios."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Revenu",
+            "meaning": "Revenu brut mensuel.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Logement",
+            "meaning": "Paiement logement mensuel (loyer ou hypothèque).",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Auto",
+            "meaning": "Paiements mensuels de prêt ou de location auto.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Étudiant",
+            "meaning": "Paiements mensuels de prêts étudiants.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "CC",
+            "meaning": "Paiements minimums mensuels de cartes de crédit.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Autre",
+            "meaning": "Tout autre paiement de dette mensuel récurrent.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Cible",
+            "meaning": "Un ratio back-end cible — utilisé uniquement par le mode inverse qui résout le paiement de dette maximal que ce ratio autorise.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Revenu nul ou négatif",
+            "description": "Protégé au niveau du moteur : un revenu brut non fini, nul ou négatif renvoie un résultat vide plutôt qu'une division par zéro ou un dénominateur négatif."
+          },
+          {
+            "title": "Paiement de dette négatif dans une catégorie",
+            "description": "Chacun des cinq champs de dette est vérifié indépendamment — une valeur négative dans l'un d'eux renvoie un résultat vide, car aucun paiement de dette individuel ne peut être significativement négatif."
+          },
+          {
+            "title": "Les seuils de catégorie ne concernent que le ratio back-end",
+            "description": "La catégorisation sain/gérable/élevé/très élevé utilise toujours le ratio back-end (dette totale), jamais le front-end (logement seul) — un paiement logement élevé compensé par aucune autre dette est toujours catégorisé correctement selon le chiffre combiné."
+          },
+          {
+            "title": "Plancher du mode inverse selon la dette existante",
+            "description": "Le mode « dette maximale autorisée » plafonne l'espace de dette supplémentaire à zéro — si la dette non liée au logement déjà existante dépasse ce que le ratio cible autorise, il indique qu'aucun espace supplémentaire n'est disponible plutôt qu'une marge négative."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Quelle est la différence entre le ratio front-end et le ratio back-end ?",
+            "answer": "Le ratio front-end ne compte que les coûts de logement ; le ratio back-end (auquel « DTI » fait normalement référence) compte chaque paiement de dette mensuel — logement, auto, prêts étudiants, cartes de crédit, et tout autre paiement récurrent. Les prêteurs considèrent typiquement les deux, mais le ratio back-end est le chiffre le plus couramment cité."
+          },
+          {
+            "question": "Pourquoi les seuils de catégorie sont-ils 36 %, 43 % et 50 % ?",
+            "answer": "Ces seuils reflètent des repères couramment cités dans la souscription hypothécaire : en dessous de 36 % est généralement considéré comme sain, 36–43 % est la fourchette dans laquelle de nombreux prêteurs conventionnels travaillent encore, 43 % est le seuil back-end de prêt hypothécaire qualifié utilisé par de nombreux prêteurs, et 50 %+ est largement traité comme un fardeau de dette à haut risque."
+          },
+          {
+            "question": "Cette calculatrice inclut-elle une nouvelle dette potentielle que j'envisage ?",
+            "answer": "Seulement si vous la saisissez comme l'une des cinq catégories existantes — cet outil rapporte votre ratio tel qu'il est actuellement. Pour savoir combien de dette supplémentaire un ratio cible autoriserait plutôt, utilisez l'autre mode de la calculatrice, qui résout dans cette direction."
+          },
+          {
+            "question": "Pourquoi un ratio plus bas s'affiche-t-il comme « sain » plutôt qu'un simple résultat réussite/échec ?",
+            "answer": "Le ratio dette-revenu est un spectre que les prêteurs pondèrent différemment selon le type de prêt et d'autres facteurs, pas une coupure stricte unique — quatre catégories communiquent plus utilement où vous vous situez qu'un verdict tout ou rien."
+          }
+        ]
+      },
+      "mortgage-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice Hypothécaire : la formule complète du paiement PITI, les seuils d'annulation du PMI qu'elle suit, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAmortization": "Amortissement dans le temps",
+        "sectionAnatomy": "Anatomie du résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "1",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "7 min"
+        },
+        "formula": {
+          "expression": "PITI = Capital et Intérêt + Taxe + Assurance + Copropriété + PMI",
+          "note": "Le paiement logement mensuel complet, où Capital et Intérêt est le paiement amorti standard sur le montant du prêt (prix du logement moins acompte), et les quatre termes restants s'ajoutent directement à partir de leurs propres données."
+        },
+        "flowchart": {
+          "intro": "Au-delà de l'échéancier de base capital-intérêt, cet outil simule également un scénario optionnel de paiement supplémentaire et un scénario indépendant de paiement bihebdomadaire, afin que les trois puissent être comparés côte à côte.",
+          "steps": [
+            "Montant du prêt = prix du logement − acompte",
+            "Résoudre la formule d'annuité standard pour le paiement mensuel de base capital-intérêt",
+            "Simuler l'amortissement standard mois par mois, en suivant quand le solde franchit 80 % et 78 % du prix initial du logement (les seuils d'annulation et de terminaison automatique du PMI)",
+            "Si un paiement mensuel supplémentaire est saisi, simuler un second échéancier avec celui-ci ajouté à chaque paiement et comparer la durée de remboursement et l'intérêt total",
+            "Indépendamment, simuler le plan bihebdomadaire accéléré (la moitié du paiement capital-intérêt tous les 14 jours) et le comparer également à l'échéancier standard"
+          ],
+          "caption": "L'amortissement de base, le suivi du PMI et les deux simulations alternatives de paiement exécutés par cet outil."
+        },
+        "amortization": {
+          "intro": "Un prêt représentatif sur 30 ans de 320 000 $ à 6,5 % — le même basculement entre capital et intérêt que tout prêt amorti, simplement étalé sur une durée bien plus longue qu'un prêt personnel typique.",
+          "labelPrincipal": "Capital",
+          "labelInterest": "Intérêt",
+          "caption": "Part de capital et d'intérêt de chaque paiement sur une durée hypothécaire de 30 ans."
+        },
+        "anatomy": {
+          "intro": "Le paiement mensuel PITI complet se décompose en jusqu'à cinq parties (copropriété et PMI ne s'appliquent que lorsqu'ils sont saisis).",
+          "labelPrincipalInterest": "Capital et Intérêt",
+          "labelTax": "Taxe Foncière",
+          "labelInsurance": "Assurance",
+          "labelHoa": "Copropriété",
+          "labelPmi": "PMI",
+          "labelTotal": "Paiement Mensuel",
+          "caption": "Un paiement PITI complet représentatif, incluant frais de copropriété et PMI."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Prix",
+            "meaning": "Prix du logement.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Acompte",
+            "meaning": "Acompte.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Taux d'intérêt hypothécaire annuel.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Durée du prêt.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "Taxe",
+            "meaning": "Taxe foncière annuelle.",
+            "unit": "Devise/an"
+          },
+          {
+            "symbol": "Assurance",
+            "meaning": "Assurance habitation annuelle.",
+            "unit": "Devise/an"
+          },
+          {
+            "symbol": "Copro",
+            "meaning": "Frais de copropriété mensuels, le cas échéant.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "PMI",
+            "meaning": "Assurance hypothécaire privée mensuelle, le cas échéant — typiquement requise lorsque l'acompte est inférieur à 20 %.",
+            "unit": "Devise/mois"
+          },
+          {
+            "symbol": "Supplément",
+            "meaning": "Montant supplémentaire optionnel versé au capital chaque mois, au-delà du paiement capital-intérêt requis.",
+            "unit": "Devise/mois"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Acompte égal ou supérieur au prix du logement",
+            "description": "Le montant du prêt est plafonné à zéro au minimum — un acompte égal ou supérieur au prix du logement signifie aucun prêt du tout, plutôt qu'un solde de capital négatif."
+          },
+          {
+            "title": "Paiement mensuel supplémentaire négatif",
+            "description": "Plafonné à zéro au minimum — une valeur négative saisie pour le paiement supplémentaire optionnel est traitée comme aucun paiement supplémentaire, plutôt que de réduire le paiement capital-intérêt requis lui-même."
+          },
+          {
+            "title": "Seuils d'annulation du PMI (80 %/78 % LTV)",
+            "description": "Lorsqu'un PMI mensuel est saisi, l'échéancier suit le premier mois où le solde atteint 80 % du prix initial du logement (lorsqu'un emprunteur peut demander l'annulation en vertu du Homeowners Protection Act de 1998) et 78 % (lorsque le PMI doit être automatiquement résilié par la loi) — les deux sont nuls lorsque le prêt ne comporte pas de PMI."
+          },
+          {
+            "title": "Plan bihebdomadaire calculé indépendamment",
+            "description": "L'échéancier bihebdomadaire accéléré est simulé seul, non superposé à un paiement mensuel supplémentaire — ce sont deux stratégies de paiement alternatives à comparer, pas des effets destinés à se combiner."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Que signifie réellement PITI ?",
+            "answer": "Principal (capital), Interest (intérêt), Taxes (impôts) et Insurance (assurance) — les quatre composantes que les prêteurs regroupent typiquement en un seul paiement logement mensuel. Cette calculatrice ajoute les frais de copropriété et le PMI comme deux composantes optionnelles supplémentaires, car les deux sont des coûts réels courants qui ne s'intègrent pas parfaitement dans l'acronyme classique à quatre lettres."
+          },
+          {
+            "question": "Quand le PMI disparaît-il ?",
+            "answer": "En vertu du Homeowners Protection Act de 1998, un emprunteur peut généralement demander l'annulation du PMI une fois que le solde du prêt atteint 80 % de la valeur initiale du logement, et les prêteurs doivent le résilier automatiquement à 78 % — cette calculatrice indique le mois précis où chaque seuil est atteint, selon le montant de PMI que vous avez saisi."
+          },
+          {
+            "question": "En quoi le scénario de paiement supplémentaire diffère-t-il du plan bihebdomadaire ?",
+            "answer": "Un paiement mensuel supplémentaire ajoute un montant fixe à chaque paiement régulier ; le plan bihebdomadaire perçoit plutôt la moitié du paiement capital-intérêt tous les 14 jours, ce qui donne 26 périodes par an — 13 paiements mensuels équivalents au lieu de 12. Les deux accélèrent le remboursement, mais via des échéanciers distincts, donc cet outil les simule et les rapporte indépendamment plutôt que de supposer que vous utiliseriez les deux à la fois."
+          },
+          {
+            "question": "Pourquoi la taxe foncière et l'assurance sont-elles saisies comme un chiffre annuel mais affichées mensuellement ?",
+            "answer": "Les factures de taxe foncière et les primes d'assurance sont typiquement calculées annuellement, ce qui est la façon la plus naturelle de les saisir ; la calculatrice divise simplement chacune par 12 pour les intégrer au paiement mensuel PITI aux côtés du montant mensuel capital-intérêt."
           }
         ]
       }

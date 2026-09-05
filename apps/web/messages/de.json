@@ -10350,7 +10350,9 @@
             }
           ],
           "disclaimer": "Nur allgemeine Orientierung – örtliche Gepflogenheiten variieren je nach Lokal und ändern sich mit der Zeit; prüfen Sie im Zweifel die Rechnung auf eine bereits enthaltene Servicegebühr."
-        }
+        },
+        "emptyStateMessage": "Geben Sie Rechnungsbetrag, Trinkgeldprozentsatz und Personenzahl ein und klicken Sie auf Berechnen, um Ihre Ergebnisse zu sehen.",
+        "sentence": "Aufteilung von {total} pro Person auf {people} Personen bei {tip} Trinkgeld."
       },
       "form": {
         "inputTitle": "Ihre Rechnung",
@@ -10361,7 +10363,9 @@
         "peopleLabel": "Anzahl der Personen",
         "peoplePlaceholder": "z. B. 2",
         "roundUpLabel": "Pro Person aufrunden",
-        "roundUpHint": "Rundet den Gesamtbetrag jeder Person auf eine ganze Zahl auf, damit niemand Kleingeld braucht – die Differenz wird dem Trinkgeld hinzugefügt."
+        "roundUpHint": "Rundet den Gesamtbetrag jeder Person auf eine ganze Zahl auf, damit niemand Kleingeld braucht – die Differenz wird dem Trinkgeld hinzugefügt.",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "billAmount": "Rechnungsbetrag",
@@ -10369,7 +10373,13 @@
         "tipAmount": "Trinkgeldbetrag",
         "totalAmount": "Gesamtbetrag",
         "tipPerPerson": "Trinkgeld / Person",
-        "totalPerPerson": "Gesamt / Person"
+        "totalPerPerson": "Gesamt / Person",
+        "gaugeZones": {
+          "belowStandard": "Unter dem Üblichen",
+          "standard": "Üblich",
+          "generous": "Großzügig",
+          "veryGenerous": "Sehr Großzügig"
+        }
       },
       "education": {
         "intro": {
@@ -10515,7 +10525,81 @@
           "note": "Eine Feldstudie, die Online-Kundenzufriedenheitsbewertungen für dieselbe Restaurantkette unter einem Standard-Trinkgeldsystem mit einem trinkgeldfreien, servicepauschalierten Preismodell vergleicht.",
           "url": "https://doi.org/10.1111/joca.12171",
           "readOriginal": "Originalartikel lesen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Trinkgeldberechnung in diesem Tool basiert auf nur vier Eingaben.",
+          "items": [
+            {
+              "name": "Rechnungsbetrag",
+              "description": "Die Summe auf der Rechnung vor dem Trinkgeld — die Basis, auf die der Trinkgeldprozentsatz angewendet wird."
+            },
+            {
+              "name": "Trinkgeldprozentsatz",
+              "description": "Der als Trinkgeld hinzugefügte Anteil der Rechnung, gewählt nach Brauch, Servicequalität oder örtlicher Norm."
+            },
+            {
+              "name": "Personenzahl",
+              "description": "Wie viele Personen sich die Summe teilen — Rechnung und Trinkgeld werden gleichmäßig auf diese Anzahl aufgeteilt."
+            },
+            {
+              "name": "Pro Person Aufrunden",
+              "description": "Eine optionale Einstellung, die den Anteil jeder Person auf eine ganze Währungseinheit aufrundet, sodass niemand krummes Wechselgeld schuldet."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Ein Trinkgeld gleichmäßig aufzuteilen kommt in mehr Situationen vor als nur beim Restaurantbesuch.",
+          "items": [
+            {
+              "title": "Gemeinsames Restaurantessen",
+              "description": "Der häufigste Anwendungsfall — eine Gruppe teilt sich eine Rechnung und möchte eine gerechte, gleichmäßige Aufteilung, die dennoch zu einem sinnvollen Gesamttrinkgeld führt."
+            },
+            {
+              "title": "Salons und persönliche Dienstleistungen",
+              "description": "Trinkgeldnormen für Haarschnitte, Massagen und Ähnliches folgen oft derselben Prozentsatz-der-Rechnung-Konvention wie beim Essen."
+            },
+            {
+              "title": "Lieferung und Fahrdienste",
+              "description": "Viele Liefer- und Fahrdienst-Apps schlagen ein Trinkgeld als Prozentsatz des Fahrpreises vor und folgen damit genau der Mathematik, die dieses Tool automatisiert."
+            },
+            {
+              "title": "Veranstaltungs- und Cateringpersonal",
+              "description": "Gruppenveranstaltungen mit gemeinsamer Catering- oder Servicerechnung profitieren von derselben gleichmäßigen Aufteilungslogik, wenn dem Personal gemeinsam Trinkgeld gegeben wird."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Bitte geben Sie gültige, nicht negative Zahlen für Rechnungsbetrag, Trinkgeldprozentsatz und Personenzahl ein."
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@example.com",
+        "contactPhonePlaceholder": "z. B. +49 151 12345678",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Stadt"
+      },
+      "splitDiagram": {
+        "title": "Aufteilung in der Gruppe",
+        "caption": "Jede der {count} Personen zahlt denselben Betrag."
+      },
+      "sensitivityDiagram": {
+        "title": "Trinkgeld-Sensitivität",
+        "caption": "Wie viel jede Person bei unterschiedlichen Trinkgeldprozentsätzen für Ihre Rechnung zahlt.",
+        "xLabel": "Trinkgeld %"
       }
     },
     "discount-calculator": {
@@ -18873,7 +18957,8 @@
     "feedbackThanksYes": "Danke für Ihr Feedback!",
     "feedbackThanksNo": "Danke — wir nutzen das, um die Seite zu verbessern.",
     "indexIntro": "Referenzdokumentation für die Rechner von TooloraLabs: die Formeln, die Schritt-für-Schritt-Berechnungslogik und die Randfälle, die jedes Tool behandelt. Derzeit als Pilotprojekt für ein Tool verfügbar, weitere folgen.",
-    "indexCta": "Dokumentation zum Zinseszinsrechner ansehen"
+    "indexCta": "Dokumentation zum Zinseszinsrechner ansehen",
+    "indexAvailableNow": "Jetzt verfügbar"
   },
   "docs": {
     "tools": {
@@ -19014,6 +19099,743 @@
           {
             "question": "Kann dieses Tool rückwärts rechnen — zum Beispiel den nötigen Zinssatz für ein Ziel ermitteln?",
             "answer": "Ja — genau das tun die vier alternativen Modi (Anlagedauer, Rendite, Startkapital, Zusätzliche Einzahlung). Jeder hält alle anderen Variablen fest und sucht nach der einen Unbekannten, die den von Ihnen angegebenen Ziel-Endwert erreicht — mittels numerischer Suche (Bisektion) statt einer geschlossenen Umkehrformel, da die zugrunde liegende monatsweise Simulation keine einfache algebraische Umkehrung besitzt."
+          }
+        ]
+      },
+      "loan-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Kreditrechner: die Tilgungsformel hinter seinen drei Modi (Annuität, aufgeschobene Zahlung und Anleihe), die akzeptierten Variablen und die behandelten Randfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionAmortization": "Tilgung im Zeitverlauf",
+        "sectionAnatomy": "Aufbau des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Randfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "M = L[c(1+c)ⁿ] / [(1+c)ⁿ − 1]",
+          "note": "Die Standard-Annuitätenformel für den Modus „Annuität“, wobei L der Kreditbetrag, c der periodische Zinssatz und n die Anzahl der Zahlungen ist. Die Modi „Aufgeschobene Zahlung“ und „Anleihe“ nutzen stattdessen einfaches Zinseszinswachstum bis zu einer einzigen Schlusszahlung, ohne periodische Formel."
+        },
+        "flowchart": {
+          "intro": "Der Annuitätsmodus rechnet den nominalen Jahreszins in einen echten Zinssatz pro Zahlungsperiode um (über den effektiven Jahreszins), wodurch sich Zinsperiode und Zahlungsperiode unterscheiden können — ein monatlicher Hypothekenzins kann so etwa auch wöchentlich abbezahlt werden.",
+          "steps": [
+            "Den nominalen Jahreszins mithilfe der gewählten Zinsperiode in den effektiven Jahreszins umrechnen",
+            "Den effektiven Jahreszins mithilfe der gewählten Zahlungsperiode in einen echten Satz pro Zahlungsperiode umrechnen",
+            "Die Standard-Annuitätenformel nach der festen Zahlung lösen, die den Kredit vollständig tilgt",
+            "Jede Periode: diese Zahlung in Zinsen (Saldo × Periodenzins) und Tilgung (den Rest) aufteilen",
+            "Wiederholen, bis der Saldo null erreicht"
+          ],
+          "caption": "Die Zinsumrechnung und die Tilgungsschleife, die der Annuitätsmodus tatsächlich ausführt."
+        },
+        "amortization": {
+          "intro": "Ein repräsentativer 5-Jahres-Kredit über 10.000 $ bei 8 % — der Zinsanteil der gleichbleibenden Zahlung beginnt hoch und schrumpft mit jeder Periode, während auch der Restsaldo selbst schrumpft.",
+          "labelPrincipal": "Tilgung",
+          "labelInterest": "Zinsen",
+          "caption": "Tilgungs- vs. Zinsanteil jeder Zahlung über die Kreditlaufzeit."
+        },
+        "anatomy": {
+          "intro": "Die gesamte Rückzahlung jedes Annuitätskredits gliedert sich in genau zwei Teile.",
+          "labelPrincipal": "Tilgung",
+          "labelInterest": "Zinsen",
+          "labelTotal": "Gesamt zurückgezahlt",
+          "caption": "Ein repräsentativer Kredit über 10.000 $ bei 8 % über 5 Jahre."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "L",
+            "meaning": "Kreditbetrag (Modi Annuität/Aufgeschoben) — der heute geliehene Betrag.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Nomineller Jahreszinssatz.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Kreditlaufzeit.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "nc",
+            "meaning": "Zinsperiode — wie oft pro Jahr Zinsen verzinst werden.",
+            "unit": "Mal/Jahr"
+          },
+          {
+            "symbol": "np",
+            "meaning": "Zahlungsperiode — wie oft pro Jahr gezahlt wird (nur Annuitätsmodus).",
+            "unit": "Mal/Jahr"
+          },
+          {
+            "symbol": "Fällig",
+            "meaning": "Bei Fälligkeit geschuldeter Betrag (nur Anleihemodus) — der Rechner löst rückwärts nach dem heute erhaltenen Barwert.",
+            "unit": "Währung"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Kreditbetrag oder Laufzeit null oder negativ",
+            "description": "Auf Engine-Ebene abgesichert: ein nicht endlicher, null- oder negativer Kreditbetrag bzw. Laufzeit liefert ein leeres Ergebnis statt eines Divisionsfehlers."
+          },
+          {
+            "title": "Zinssatz null",
+            "description": "Wird in jedem Modus korrekt berechnet: bei 0 % ist die Annuitätszahlung einfach der Kreditbetrag gleichmäßig auf alle Zahlungen verteilt, und aufgeschobene/Anleihesalden wachsen gar nicht."
+          },
+          {
+            "title": "Laufzeit auf 50 Jahre begrenzt",
+            "description": "Die Zahlungsperioden-Optionen des Annuitätsmodus (bis wöchentlich, 52 Zahlungen jährlich) sind auf maximal 50 Jahre begrenzt, was den Worst-Case-Zeitplan auf 2.600 Zeilen statt eines unbegrenzten Arrays beschränkt."
+          },
+          {
+            "title": "Zinsperiode unabhängig von Zahlungsperiode",
+            "description": "Die Engine rechnet gezielt über den effektiven Jahreszins um, damit sich beide sicher unterscheiden können — etwa monatliche Verzinsung bei zweiwöchentlichen Zahlungen — ohne Rundungsdrift im periodischen Zinssatz."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum hat der Kreditrechner drei separate Modi?",
+            "answer": "Annuität, Aufgeschobene Zahlung und Anleihe stellen drei tatsächlich unterschiedliche Rückzahlungsstrukturen dar — regelmäßige Raten, eine einzige spätere Pauschalzahlung, und eine heute erhaltene Pauschalsumme gegen eine größere später fällige Summe —, sodass jede ihre eigene Formel statt einer generischen „Kredit“-Berechnung braucht."
+          },
+          {
+            "question": "Wie unterscheidet sich das vom Zinseszinsrechner?",
+            "answer": "Der Zinseszinsrechner projiziert ein wachsendes Sparguthaben aus Einzahlungen; die Modi Aufgeschoben und Anleihe hier nutzen dieselbe Wachstumsmathematik, rahmen sie aber als Schuld — geschuldetes Geld, das bis zu einer einzigen Rückzahlung wächst, statt gespartem Geld, das zu Ihrem eigenen Vorteil wächst."
+          },
+          {
+            "question": "Warum können Zinsperiode und Zahlungsperiode unterschiedlich sein?",
+            "answer": "Reale Ratenkredite geben oft einen monatlich verzinsten Satz an (wie die meisten Hypotheken), erlauben aber wöchentliche oder zweiwöchentliche Zahlungen. Die Umrechnung über den effektiven Jahreszins hält die Mathematik korrekt, unabhängig davon, wie diese beiden Perioden zueinander stehen."
+          },
+          {
+            "question": "Was berechnet der Anleihemodus eigentlich?",
+            "answer": "Er ist das Spiegelbild der Aufgeschobenen Zahlung: statt zu fragen „wie viel wird dieser Kreditbetrag anwachsen“, fragt er „wie viel müsste ich heute verleihen, um bei Fälligkeit einen bestimmten Betrag zu erhalten“ — der Barwert dieses zukünftigen fälligen Betrags, abgezinst mit dem angegebenen Satz."
+          }
+        ]
+      },
+      "affordable-loan-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Rechner für leistbare Kredite: die umgekehrte Tilgungsformel, die er löst, die akzeptierten Variablen und die behandelten Randfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionAnatomy": "Aufbau des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Randfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "1",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "L = M[1 − (1+c)⁻ⁿ] / c",
+          "note": "Der Barwert einer Annuität — dieselbe Tilgungsformel, die der Kreditrechner nach der Zahlung M löst, hier umgestellt, um stattdessen den Kreditbetrag L zu ermitteln, den eine feste Zahlung trägt."
+        },
+        "flowchart": {
+          "intro": "Dies ist eine direkte algebraische Umstellung, keine Suche oder Simulation — der maximale Kreditbetrag wird in einem einzigen Schritt aus der leistbaren Zahlung berechnet.",
+          "steps": [
+            "Den nominalen Jahreszins in einen Monatszins umrechnen",
+            "Die Gesamtzahl der monatlichen Zahlungen über die Laufzeit berechnen",
+            "Die Annuitätenformel direkt nach dem Kreditbetrag lösen, der genau Ihre Ziel-Monatszahlung ergibt",
+            "Gesamtzahlung = Monatszahlung × Anzahl Zahlungen; Gesamtzinsen = Gesamtzahlung − Kreditbetrag"
+          ],
+          "caption": "Die einstufige umgekehrte Annuitätenberechnung, die dieses Tool ausführt."
+        },
+        "anatomy": {
+          "intro": "Der maximale Kredit, den eine gegebene Zahlung trägt, gliedert sich wie jeder Annuitätskredit in genau zwei Teile.",
+          "labelLoanAmount": "Kreditbetrag",
+          "labelInterest": "Zinsen",
+          "labelTotal": "Gesamt zurückgezahlt",
+          "caption": "Ein repräsentativer Kredit, getragen von einer festen monatlichen Zahlung über seine Laufzeit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "M",
+            "meaning": "Leistbare Monatszahlung — die bekannte Eingabe, aus der dieses Tool löst.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Jährlicher Zinssatz.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Kreditlaufzeit.",
+            "unit": "Jahre"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Monatszahlung null oder negativ",
+            "description": "Auf Engine-Ebene abgesichert: eine nicht endliche, null- oder negative Zahlung liefert ein leeres Ergebnis statt eines undefinierten Kreditbetrags."
+          },
+          {
+            "title": "Negativer Zinssatz",
+            "description": "Wird ebenso abgelehnt — ein Zinssatz unter null hat keinen gültigen periodischen Satz, in den umgerechnet werden könnte, sodass die Engine ein leeres Ergebnis liefert statt mit einem sinnlosen negativen Satz zu rechnen."
+          },
+          {
+            "title": "Zinssatz null",
+            "description": "Wird weiterhin korrekt berechnet: bei 0 % ist der maximale Kreditbetrag einfach die Monatszahlung multipliziert mit der Anzahl der Zahlungen, ohne Zinsformel."
+          },
+          {
+            "title": "Laufzeit null oder negativ",
+            "description": "Genauso abgesichert wie Kreditbetrag und Zinssatz — eine nicht positive Laufzeit liefert ein leeres Ergebnis statt einer Division durch null Zahlungen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wie unterscheidet sich das vom Annuitätsmodus des Kreditrechners?",
+            "answer": "Sie sind exakte Spiegelbilder derselben Formel: Der Kreditrechner geht von einem Kreditbetrag aus und löst nach der erforderlichen Zahlung; dieses Tool geht von einer leistbaren Zahlung aus und löst nach dem dadurch getragenen Kreditbetrag — dieselbe Annuitätengleichung, nach einer anderen Unbekannten umgestellt."
+          },
+          {
+            "question": "Warum benötigt der Rechner meine Ziel-Monatszahlung statt meines Einkommens?",
+            "answer": "Dieses Tool beantwortet eine engere, direktere Frage — „welchen Kredit trägt diese bestimmte Zahlung?“ — statt einer vollständigen Leistbarkeitsbewertung. Für ein aus Einkommen und anderen Schulden abgeleitetes Zahlungsbudget sind der Rechner für Wohnkosten-Leistbarkeit und der Schulden-Einkommens-Verhältnis-Rechner die passenderen Ausgangspunkte."
+          },
+          {
+            "question": "Ändert eine größere Anzahlung, was dieser Rechner berechnet?",
+            "answer": "Nicht direkt — dieses Tool löst nach dem Kreditbetrag selbst, nicht dem Kaufpreis. Wenn Sie etwas mit einer Anzahlung kaufen, addieren Sie den von diesem Tool gelieferten Kreditbetrag zu Ihrer Anzahlung, um den leistbaren Gesamtpreis zu erhalten."
+          },
+          {
+            "question": "Warum ist das Ergebnis eine einzelne Zahl statt eines Zeitplans?",
+            "answer": "Die Kernfrage, die dieses Tool beantwortet — der maximale Kreditbetrag — ist bewusst ein einzelner Wert. Für den vollständigen monats- oder jahresweisen Tilgungsplan eines Kredits in dieser Höhe knüpft der Annuitätsmodus des Kreditrechners genau dort an, wo dieses Tool aufhört."
+          }
+        ]
+      },
+      "retirement-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Altersvorsorgerechner: die Formel für den Zukunftswert einer Annuität plus Einmalbetrag hinter seiner Projektion, die akzeptierten Variablen und die behandelten Randfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionGrowth": "Saldowachstum bis zur Rente",
+        "sectionAnatomy": "Aufbau des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Randfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "FV = S(1+i)ᵐ + C[((1+i)ᵐ − 1) / i]",
+          "note": "Der projizierte Saldo ist ein Einmalbetrag S (aktuelle Ersparnisse), der monatlich verzinst wird, plus der Zukunftswert einer monatlichen Einzahlungs-Annuität C — genau dieselbe Mathematik, die der Zinseszinsrechner Monat für Monat simuliert, hier angewendet auf einen Sparzeitraum bis zum Rentenalter."
+        },
+        "flowchart": {
+          "intro": "Statt einer zweiten Simulations-Engine ist dieses Tool ein schlanker Wrapper um die eigene monatliche Simulation des Zinseszinsrechners, immer mit monatlicher Verzinsung und ohne Steuer- oder Inflationsanpassung (keines von beiden wird hier als Eingabe angeboten) ausgeführt.",
+          "steps": [
+            "Jahre bis zur Rente als Rentenalter minus aktuellem Alter berechnen",
+            "Den jährlichen Renditesatz in einen Monatssatz umrechnen",
+            "Jeden Monat: das Wachstum dieses Monats auf den aktuellen Saldo anwenden",
+            "Jeden Monat: die monatliche Einzahlung zum Saldo hinzufügen",
+            "Für jeden Monat wiederholen, bis das Rentenalter erreicht ist"
+          ],
+          "caption": "Die monatliche Wachstumssimulation, die dieses Tool vom Zinseszinsrechner wiederverwendet."
+        },
+        "growth": {
+          "intro": "Ein repräsentatives Beispiel — Start mit 30 Jahren bei 20.000 $ Ersparnissen, monatlicher Einzahlung von 300 $ bei 7 % jährlicher Rendite bis zum Alter von 65.",
+          "label": "Projizierter Saldo",
+          "caption": "Projiziertes Saldowachstum vom 30. Lebensjahr bis zu einem Renteneintrittsalter von 65."
+        },
+        "anatomy": {
+          "intro": "Jeder projizierte Saldo gliedert sich in genau drei Komponenten.",
+          "labelStarting": "Wachstum des Startsaldos",
+          "labelContributions": "Einzahlungen",
+          "labelGrowth": "Wachstum auf Einzahlungen",
+          "labelTotal": "Projizierter Saldo",
+          "caption": "Dasselbe 35-Jahres-Beispiel: wie viel des Endsaldos aus dem eigenständigen Wachstum der Startersparnisse stammt, gegenüber Einzahlungen und dem von ihnen erzielten Wachstum."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Alter",
+            "meaning": "Aktuelles Alter.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "RentAlter",
+            "meaning": "Ziel-Renteneintrittsalter — die Jahre bis zur Rente sind die Differenz beider Alter.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "S",
+            "meaning": "Aktueller Altersvorsorge-Sparsaldo.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Monatliche Einzahlung, die jeden Monat zum Saldo hinzugefügt wird.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Jährlicher Renditesatz, für die gesamte Projektion als konstant angenommen.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Ziel",
+            "meaning": "Ein Zielsaldo — nur von den umgekehrten Modi verwendet, die nach der erforderlichen Monatseinzahlung oder den benötigten Jahren lösen.",
+            "unit": "Währung"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Rentenalter nicht nach dem aktuellen Alter",
+            "description": "Auf Engine-Ebene abgesichert: ein Rentenalter am oder vor dem aktuellen Alter liefert ein leeres Ergebnis statt eines negativen oder null Projektionshorizonts."
+          },
+          {
+            "title": "Negatives Alter, negative Ersparnisse oder Einzahlung",
+            "description": "Jedes wird unabhängig geprüft — ein negativer Wert für eines davon liefert ein leeres Ergebnis, da keines davon in dieser Projektion sinnvoll negativ sein kann."
+          },
+          {
+            "title": "Negativer Renditesatz",
+            "description": "Ebenfalls abgelehnt: eine negative Jahresrendite wird von diesem Tool nicht modelliert, das davon ausgeht, dass Ersparnisse wachsen (oder bei 0 % zumindest stagnieren), statt im Zeitverlauf zu schrumpfen."
+          },
+          {
+            "title": "Umgekehrte Modi mit nicht positivem Ziel",
+            "description": "Sowohl der Modus „erforderliche Einzahlung“ als auch „benötigte Jahre“ schützen sich gegen einen Zielsaldo von null oder weniger, da keine sinnvolle Einzahlung oder Dauer ein bereits erreichtes oder ungültiges Ziel „erreichen“ kann."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum berücksichtigt dieses Tool keine Steuern oder Inflation?",
+            "answer": "Altersvorsorgekonten variieren steuerlich zu stark (401(k), IRA, steuerpflichtiges Brokerkonto und andere), um eine universelle Regel anzunehmen, daher lässt dieses Tool Steuern und Inflation bewusst weg — der Modus „Endbetrag“ des Zinseszinsrechners bietet beides als optionale Eingaben, falls Sie eine Projektion wünschen, die sie berücksichtigt."
+          },
+          {
+            "question": "Wie unterscheidet sich das vom Zinseszinsrechner?",
+            "answer": "Sie teilen sich dieselbe Wachstums-Engine, aber dieses Tool rahmt jede Eingabe speziell um einen Rentenzeitplan (aktuelles Alter und Rentenalter statt einer rohen Jahreszahl) und nimmt immer monatliche Verzinsung an — es tauscht etwas Allgemeingültigkeit gegen eine direktere Oberfläche für die Altersvorsorgeplanung."
+          },
+          {
+            "question": "Kann mir dieses Tool sagen, wie viel ich sparen muss?",
+            "answer": "Ja — genau das tun seine umgekehrten Modi: Bei einem Zielsaldo löst einer nach der erforderlichen Monatseinzahlung, um ihn bis zu Ihrem Rentenalter zu erreichen, und der andere löst stattdessen, wie viele zusätzliche Sparjahre bei Ihrer aktuellen Einzahlungsrate nötig wären."
+          },
+          {
+            "question": "Warum wird die Wachstumsrate für die gesamte Projektion als konstant angenommen?",
+            "answer": "Ein einzelner konstanter Satz hält die Mathematik der Projektion exakt und ihre Annahmen transparent, statt eine falsche Präzision durch Raten vorzutäuschen, wie sich Renditen Jahr für Jahr ändern könnten — reale Märkte schwanken, daher sollte diese Projektion als illustrative Schätzung gelesen werden, nicht als Garantie."
+          }
+        ]
+      },
+      "house-affordability-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Rechner für Wohnkosten-Leistbarkeit: die 28/36-Regel hinter seinem Hauptmodus, die akzeptierten Variablen und die behandelten Randfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionRatio": "Die 28/36-Regel",
+        "sectionAnatomy": "Aufbau des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Randfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "6 Min."
+        },
+        "formula": {
+          "expression": "Wohnbudget = min(0,28 × Einkommen, 0,36 × Einkommen − Sonstige Schulden)",
+          "note": "Die Standard-28/36-Leistbarkeitsregel: monatliche Wohnkosten gedeckelt auf 28 % des Bruttoeinkommens (Front-End-Quote) und die gesamte monatliche Verschuldung — Wohnen plus alles andere — gedeckelt auf 36 % (Back-End-Quote). Das niedrigere der beiden Limits legt das tatsächliche Wohnbudget fest, das dann rückwärts in einen maximalen Hauspreis aufgelöst wird."
+        },
+        "flowchart": {
+          "intro": "Die Rückrechnung von einem Zahlungsbudget zu einem Hauspreis ist aufwendiger als eine einzelne Formel, weil die Grundsteuer selbst ein Prozentsatz des gesuchten Preises ist — die Berechnung muss zuerst die preisunabhängigen Kosten isolieren.",
+          "steps": [
+            "Das Front-End-Limit (28 % des Monatseinkommens) und das Back-End-Limit (36 % des Monatseinkommens abzüglich bestehender Schulden) berechnen",
+            "Das kleinere der beiden als maximale Gesamt-Wohnzahlung nehmen",
+            "Versicherung und Hausgeld (feste, preisunabhängige Beträge) von diesem Budget abziehen",
+            "Nach dem Hauspreis auflösen, bei dem das verbleibende Budget genau Tilgung, Zinsen und Grundsteuer zu diesem Preis deckt",
+            "Kreditbetrag = Hauspreis − Anzahlung"
+          ],
+          "caption": "Die Rückwärts-Leistbarkeitsberechnung, die der Hauptmodus (Hauspreis) dieses Tools ausführt."
+        },
+        "ratio": {
+          "intro": "Ein repräsentatives Beispiel beim 28-%-Front-End-Limit — derselbe Schwellenwert, gegen den der Hauptmodus dieses Tools budgetiert, bevor das 36-%-Back-End-Limit gegen bestehende Schulden geprüft wird.",
+          "gaugeCaption": "Front-End-Quote",
+          "caption": "28 % ist der Standard-Front-End-Deckel; 36 % der Back-End-Deckel nach Einbeziehung bestehender Schulden."
+        },
+        "anatomy": {
+          "intro": "Die maximale monatliche Wohnzahlung, nach der dieses Tool auflöst, gliedert sich in drei Teile (Hausgeld, falls eingegeben, fügt einen vierten hinzu).",
+          "labelPrincipalInterest": "Tilgung & Zinsen",
+          "labelTax": "Grundsteuer",
+          "labelInsurance": "Versicherung",
+          "labelTotal": "Monatliche Wohnzahlung",
+          "caption": "Eine repräsentative Wohnzahlung beim 28-%-Front-End-Limit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Einkommen",
+            "meaning": "Brutto-Jahreseinkommen.",
+            "unit": "Währung/Jahr"
+          },
+          {
+            "symbol": "Schulden",
+            "meaning": "Bestehende monatliche Schuldenzahlungen (Auto, Studienkredite, Kreditkarten usw.), ohne Wohnen.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Anzahlung",
+            "meaning": "Verfügbare Anzahlung.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Jährlicher Hypothekenzinssatz.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Kreditlaufzeit.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "Steuersatz",
+            "meaning": "Jährlicher Grundsteuersatz, als Prozentsatz des Hauspreises.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Vers",
+            "meaning": "Jährliche Wohngebäudeversicherung.",
+            "unit": "Währung/Jahr"
+          },
+          {
+            "symbol": "Hausgeld",
+            "meaning": "Monatliches Hausgeld, falls vorhanden.",
+            "unit": "Währung/Monat"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Jede negative oder nicht endliche Eingabe",
+            "description": "Jede Eingabe wird auf Engine-Ebene unabhängig geprüft — Einkommen, Schulden, Anzahlung, Zinssatz, Laufzeit, Steuersatz, Versicherung und Hausgeld schützen sich alle gegen negative oder nicht endliche Werte und liefern ein leeres Ergebnis statt eines sinnlosen Preises."
+          },
+          {
+            "title": "Budget nach Versicherung und Hausgeld zu knapp",
+            "description": "Wenn Versicherung und Hausgeld allein bereits das von der 28/36-Regel erlaubte Wohnbudget übersteigen, bleibt kein Raum für Tilgung, Zinsen oder Steuer — der Rechner liefert ein leeres Ergebnis statt eines negativen Hauspreises."
+          },
+          {
+            "title": "Back-End-Limit durch bestehende Schulden reduziert",
+            "description": "Das 36-%-Back-End-Limit ist keine pauschale Obergrenze nur für Wohnen — es wird direkt um jede eingegebene Nicht-Wohnschuld reduziert, sodass höhere bestehende Schuldenzahlungen den maximal leistbaren Hauspreis korrekt schrumpfen lassen."
+          },
+          {
+            "title": "Grundsteuer skaliert mit dem unbekannten Preis",
+            "description": "Da die Grundsteuer ein Prozentsatz des Hauspreises statt eines festen Betrags ist, löst der Rechner Preis und Steuer gemeinsam auf, statt vorab eine Steuerzahl anzunehmen und den Preis separat davon zu berechnen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum genau 28 % und 36 %?",
+            "answer": "Dies sind die klassischen konventionellen Hypotheken-Leistbarkeitsschwellen, die lange in der Hypothekenvergabe verwendet wurden: 28 % deckelt Wohnkosten allein (Front-End-Quote), und 36 % deckelt Wohnen plus jede andere Schuldenzahlung zusammen (Back-End-Quote) — beide als Anteil am Brutto-, nicht am Nettoeinkommen ausgedrückt."
+          },
+          {
+            "question": "Warum hat dieses Tool fünf Modi?",
+            "answer": "Hauspreis und Erforderliches Einkommen sind zwei Richtungen durch dieselbe Wohnkosten-Leistbarkeitsmathematik; Auto, Privatkredit und Geschäftskredit wenden dieselbe Einkommensprozent-Budgetierungslogik auf andere große Anschaffungen an, da die zugrunde liegende Frage — „was kann dieses Einkommen tragen?“ — bei allen fünf dieselbe ist."
+          },
+          {
+            "question": "Wie unterscheidet sich das vom Schulden-Einkommens-Verhältnis-Rechner?",
+            "answer": "Der Schulden-Einkommens-Verhältnis-Rechner meldet Ihre aktuellen Quoten anhand bereits bestehender Schulden; der Hauspreis-Modus dieses Tools arbeitet in die entgegengesetzte Richtung — ausgehend von den 28/36-Schwellenwerten und Auflösen nach dem maximalen Hauspreis, der Sie innerhalb dieser hält."
+          },
+          {
+            "question": "Warum erhöht eine größere Anzahlung den maximalen Hauspreis um mehr als die Anzahlung selbst?",
+            "answer": "Eine größere Anzahlung reduziert den benötigten Kreditbetrag, was die erforderliche Tilgungs-und-Zins-Zahlung senkt — das setzt mehr vom festen Wohnbudget für einen höheren Preis frei, zusätzlich zum eigenen direkten Beitrag der Anzahlung zu diesem Preis."
+          }
+        ]
+      },
+      "debt-to-income-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Schulden-Einkommens-Verhältnis-Rechner: die Formeln für Front-End- und Back-End-Quote, die Vergabe-Schwellenwerte, nach denen Ergebnisse kategorisiert werden, die akzeptierten Variablen und die behandelten Randfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionRatio": "Quoten-Kategorien",
+        "sectionAnatomy": "Aufbau des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Randfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Back-End-Quote = (Wohnen + Auto + Studium + Kreditkarte + Sonstiges) / Einkommen × 100",
+          "note": "Die Back-End-Quote (üblicherweise einfach „DTI“ genannt) summiert jede monatliche Schuldenzahlung und teilt sie durch das Brutto-Monatseinkommen; die Front-End-Quote nutzt dieselbe Formel mit nur der Wohnzahlung im Zähler."
+        },
+        "flowchart": {
+          "intro": "Beide Quoten werden direkt aus denselben Eingaben berechnet — keine Iteration oder Suche, nur zwei Divisionen und ein Schwellenwert-Nachschlag.",
+          "steps": [
+            "Jede monatliche Schuldenzahlung (Wohnen, Auto, Studienkredite, Kreditkarten, Sonstiges) zu einer Summe addieren",
+            "Front-End-Quote = Wohnzahlung ÷ Brutto-Monatseinkommen × 100",
+            "Back-End-Quote = gesamte monatliche Schulden ÷ Brutto-Monatseinkommen × 100",
+            "Die Back-End-Quote kategorisieren: gesund (<36 %), handhabbar (36–43 %), hoch (43–50 %) oder sehr hoch (50 %+)"
+          ],
+          "caption": "Die beiden Quotenberechnungen und die Kategorisierung, die dieses Tool ausführt."
+        },
+        "ratio": {
+          "intro": "Eine repräsentative Back-End-Quote von 38 %, die in der Zone „handhabbar“ zwischen den Vergabe-Schwellenwerten von 36 % und 43 % liegt.",
+          "gaugeCaption": "Back-End-Quote (DTI)",
+          "caption": "Unter 36 % gilt allgemein als gesund; 36–43 % ist der Bereich, in dem viele konventionelle Kreditgeber noch arbeiten; über 50 % gilt weithin als hochriskante Schuldenlast."
+        },
+        "anatomy": {
+          "intro": "Die gesamte monatliche Verschuldung gliedert sich in bis zu fünf Kategorien, jede separat eingegeben.",
+          "labelHousing": "Wohnen",
+          "labelCar": "Auto",
+          "labelStudent": "Studienkredite",
+          "labelCreditCard": "Kreditkarten",
+          "labelOther": "Sonstiges",
+          "labelTotal": "Gesamte monatliche Schulden",
+          "caption": "Eine repräsentative Schuldenaufschlüsselung, die sich zur in beiden Quoten verwendeten Summe addiert."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Einkommen",
+            "meaning": "Brutto-Monatseinkommen.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Wohnen",
+            "meaning": "Monatliche Wohnzahlung (Miete oder Hypothek).",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Auto",
+            "meaning": "Monatliche Autokredit- oder Leasingzahlungen.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Studium",
+            "meaning": "Monatliche Studienkreditzahlungen.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "KK",
+            "meaning": "Monatliche Mindestzahlungen für Kreditkarten.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Sonstiges",
+            "meaning": "Jede andere wiederkehrende monatliche Schuldenzahlung.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Ziel",
+            "meaning": "Eine Ziel-Back-End-Quote — nur vom umgekehrten Modus verwendet, der nach der maximal erlaubten Schuldenzahlung dieser Quote löst.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Einkommen null oder negativ",
+            "description": "Auf Engine-Ebene abgesichert: ein nicht endliches, null- oder negatives Bruttoeinkommen liefert ein leeres Ergebnis statt einer Division durch null oder einen negativen Nenner."
+          },
+          {
+            "title": "Negative Schuldenzahlung in einer Kategorie",
+            "description": "Jedes der fünf Schuldenfelder wird unabhängig geprüft — ein negativer Wert in einem davon liefert ein leeres Ergebnis, da keine einzelne Schuldenzahlung sinnvoll negativ sein kann."
+          },
+          {
+            "title": "Kategorie-Schwellenwerte gelten nur für die Back-End-Quote",
+            "description": "Die Kategorisierung gesund/handhabbar/hoch/sehr hoch nutzt immer die Back-End-Quote (Gesamtschulden), nie die Front-End-Quote (Wohnen allein) — eine hohe Wohnzahlung ohne andere Schulden wird trotzdem korrekt anhand der kombinierten Zahl kategorisiert."
+          },
+          {
+            "title": "Untergrenze des umgekehrten Modus bei bestehenden Schulden",
+            "description": "Der Modus „maximal erlaubte Schulden“ deckelt den zusätzlichen Schuldenspielraum bei null — übersteigen bestehende Nicht-Wohnschulden bereits, was die Zielquote erlaubt, meldet er keinen zusätzlichen Spielraum statt eines negativen Betrags."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was ist der Unterschied zwischen Front-End- und Back-End-Quote?",
+            "answer": "Die Front-End-Quote zählt nur Wohnkosten; die Back-End-Quote (üblicherweise mit „DTI“ gemeint) zählt jede monatliche Schuldenzahlung — Wohnen, Auto, Studienkredite, Kreditkarten und alles andere Wiederkehrende. Kreditgeber betrachten typischerweise beide, aber die Back-End-Quote ist die häufiger zitierte Zahl."
+          },
+          {
+            "question": "Warum sind die Kategorie-Schwellenwerte 36 %, 43 % und 50 %?",
+            "answer": "Diese spiegeln in der Hypothekenvergabe häufig genannte Schwellenwerte wider: unter 36 % gilt allgemein als gesund, 36–43 % ist der Bereich, in dem viele konventionelle Kreditgeber noch arbeiten, 43 % ist die Back-End-Schwelle für qualifizierte Hypotheken, die viele Kreditgeber verwenden, und 50 %+ gilt weithin als hochriskante Schuldenlast."
+          },
+          {
+            "question": "Berücksichtigt dieser Rechner mögliche neue Schulden, die ich erwäge?",
+            "answer": "Nur wenn Sie sie als eine der fünf bestehenden Kategorien eingeben — dieses Tool meldet Ihre Quote so, wie die Dinge aktuell stehen. Um herauszufinden, wie viel zusätzliche Schulden eine Zielquote stattdessen erlauben würde, nutzen Sie den anderen Modus des Rechners, der in diese Richtung löst."
+          },
+          {
+            "question": "Warum wird eine niedrigere Quote als „gesund“ angezeigt statt eines einzelnen Bestehen/Nicht-Bestehen-Ergebnisses?",
+            "answer": "Das Schulden-Einkommens-Verhältnis ist ein Spektrum, das Kreditgeber je nach Kreditart und anderen Faktoren unterschiedlich gewichten, kein einzelner harter Grenzwert — vier Kategorien vermitteln ungefähr, wo Sie stehen, nützlicher als ein Alles-oder-nichts-Urteil."
+          }
+        ]
+      },
+      "mortgage-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Hypothekenrechner: die vollständige PITI-Zahlungsformel, die verfolgten PMI-Kündigungsschwellen, die akzeptierten Variablen und die behandelten Randfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionAmortization": "Tilgung im Zeitverlauf",
+        "sectionAnatomy": "Aufbau des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Randfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "1",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "7 Min."
+        },
+        "formula": {
+          "expression": "PITI = Tilgung & Zinsen + Steuer + Versicherung + Hausgeld + PMI",
+          "note": "Die vollständige monatliche Wohnzahlung, wobei Tilgung & Zinsen die Standard-Annuitätszahlung auf den Kreditbetrag (Hauspreis minus Anzahlung) ist und die übrigen vier Posten direkt aus ihren eigenen Eingaben hinzugefügt werden."
+        },
+        "flowchart": {
+          "intro": "Über den Basis-Tilgungsplan hinaus simuliert dieses Tool auch ein optionales Extrazahlungs-Szenario und ein unabhängiges Zweiwochen-Zahlungsszenario, sodass alle drei nebeneinander verglichen werden können.",
+          "steps": [
+            "Kreditbetrag = Hauspreis − Anzahlung",
+            "Die Standard-Annuitätenformel nach der monatlichen Basiszahlung für Tilgung und Zinsen lösen",
+            "Die Standard-Tilgung Monat für Monat simulieren und dabei verfolgen, wann der Saldo 80 % und 78 % des ursprünglichen Hauspreises erreicht (die PMI-Kündigungs- und automatischen Beendigungsschwellen)",
+            "Falls eine monatliche Extrazahlung eingegeben wurde, einen zweiten Zeitplan mit dieser Zahlung bei jeder Rate simulieren und Tilgungsdauer sowie Gesamtzinsen vergleichen",
+            "Unabhängig davon den beschleunigten Zweiwochen-Plan (halbe Tilgungs-und-Zins-Zahlung alle 14 Tage) simulieren und ebenfalls mit dem Standardplan vergleichen"
+          ],
+          "caption": "Die Basistilgung, PMI-Verfolgung und zwei alternativen Tilgungssimulationen, die dieses Tool ausführt."
+        },
+        "amortization": {
+          "intro": "Ein repräsentativer 30-jähriger Kredit über 320.000 $ bei 6,5 % — derselbe Wechsel zwischen Tilgung und Zinsen wie bei jedem Annuitätskredit, nur über eine viel längere Laufzeit als ein typischer Privatkredit gestreckt.",
+          "labelPrincipal": "Tilgung",
+          "labelInterest": "Zinsen",
+          "caption": "Tilgungs- vs. Zinsanteil jeder Zahlung über eine 30-jährige Hypothekenlaufzeit."
+        },
+        "anatomy": {
+          "intro": "Die vollständige monatliche PITI-Zahlung gliedert sich in bis zu fünf Teile (Hausgeld und PMI gelten nur, wenn eingegeben).",
+          "labelPrincipalInterest": "Tilgung & Zinsen",
+          "labelTax": "Grundsteuer",
+          "labelInsurance": "Versicherung",
+          "labelHoa": "Hausgeld",
+          "labelPmi": "PMI",
+          "labelTotal": "Monatliche Zahlung",
+          "caption": "Eine repräsentative vollständige PITI-Zahlung, einschließlich Hausgeld und PMI."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Preis",
+            "meaning": "Hauspreis.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Anzahlung",
+            "meaning": "Anzahlung.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Jährlicher Hypothekenzinssatz.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Kreditlaufzeit.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "Steuer",
+            "meaning": "Jährliche Grundsteuer.",
+            "unit": "Währung/Jahr"
+          },
+          {
+            "symbol": "Vers",
+            "meaning": "Jährliche Wohngebäudeversicherung.",
+            "unit": "Währung/Jahr"
+          },
+          {
+            "symbol": "Hausgeld",
+            "meaning": "Monatliches Hausgeld, falls vorhanden.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "PMI",
+            "meaning": "Monatliche private Hypothekenversicherung, falls vorhanden — typischerweise erforderlich, wenn die Anzahlung unter 20 % liegt.",
+            "unit": "Währung/Monat"
+          },
+          {
+            "symbol": "Extra",
+            "meaning": "Optionaler zusätzlicher Betrag, der jeden Monat zusätzlich zur erforderlichen Tilgungs-und-Zins-Zahlung auf die Tilgung gezahlt wird.",
+            "unit": "Währung/Monat"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Anzahlung gleich oder größer als Hauspreis",
+            "description": "Der Kreditbetrag wird auf null begrenzt — eine Anzahlung, die dem Hauspreis entspricht oder ihn übersteigt, bedeutet keinen Kredit, statt eines negativen Tilgungssaldos."
+          },
+          {
+            "title": "Negative monatliche Extrazahlung",
+            "description": "Auf null begrenzt — ein negativer Wert im optionalen Extrazahlungsfeld wird als keine Extrazahlung behandelt, nicht als Reduzierung der erforderlichen Tilgungs-und-Zins-Zahlung selbst."
+          },
+          {
+            "title": "PMI-Kündigungsschwellen (80 %/78 % Beleihungsauslauf)",
+            "description": "Bei eingegebener monatlicher PMI verfolgt der Zeitplan den ersten Monat, in dem der Saldo 80 % des ursprünglichen Hauspreises erreicht (wenn ein Kreditnehmer die Kündigung nach dem Homeowners Protection Act von 1998 beantragen kann) und 78 % (wenn PMI gesetzlich automatisch beendet werden muss) — beide null, wenn der Kredit keine PMI trägt."
+          },
+          {
+            "title": "Zweiwochen-Plan unabhängig berechnet",
+            "description": "Der beschleunigte Zweiwochen-Zeitplan wird eigenständig simuliert, nicht auf eine monatliche Extrazahlung aufgestapelt — beide sind alternative Tilgungsstrategien zum Vergleich, keine Effekte, die kombiniert werden sollen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wofür steht PITI eigentlich?",
+            "answer": "Principal (Tilgung), Interest (Zinsen), Taxes (Steuern) und Insurance (Versicherung) — die vier Komponenten, die Kreditgeber typischerweise in einer einzigen monatlichen Wohnzahlung bündeln. Dieser Rechner fügt Hausgeld und PMI als zwei weitere optionale Komponenten hinzu, da beide übliche reale Kosten sind, die nicht sauber in das klassische vierbuchstabige Akronym passen."
+          },
+          {
+            "question": "Wann entfällt PMI?",
+            "answer": "Nach dem Homeowners Protection Act von 1998 kann ein Kreditnehmer generell die PMI-Kündigung beantragen, sobald der Kreditsaldo 80 % des ursprünglichen Hauswerts erreicht, und Kreditgeber müssen sie bei 78 % automatisch beenden — dieser Rechner meldet den genauen Monat, in dem jede Schwelle erreicht wird, basierend auf Ihrem eingegebenen PMI-Betrag."
+          },
+          {
+            "question": "Wie unterscheidet sich das Extrazahlungs-Szenario vom Zweiwochen-Plan?",
+            "answer": "Eine monatliche Extrazahlung fügt jeder regulären Zahlung einen festen Betrag hinzu; der Zweiwochen-Plan sammelt stattdessen alle 14 Tage die halbe Tilgungs-und-Zins-Zahlung ein, was 26 Perioden pro Jahr ergibt — 13 monatsäquivalente Zahlungen statt 12. Beide beschleunigen die Tilgung, aber über unterschiedliche Zahlungspläne, daher simuliert und meldet dieses Tool sie unabhängig, statt anzunehmen, Sie würden beide gleichzeitig nutzen."
+          },
+          {
+            "question": "Warum werden Grundsteuer und Versicherung als Jahresbetrag eingegeben, aber monatlich angezeigt?",
+            "answer": "Grundsteuerbescheide und Versicherungsprämien werden typischerweise jährlich veranlagt, was die natürlichere Eingabeform ist; der Rechner teilt beide einfach durch 12, um sie neben dem monatlichen Tilgungs-und-Zins-Betrag in die monatliche PITI-Zahlung einzubeziehen."
           }
         ]
       }

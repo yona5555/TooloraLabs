@@ -3,27 +3,28 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getOgLocale } from "@/lib/locale-meta";
+import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
-import TableOfContents from "@/components/docs/TableOfContents";
+import TableOfContents, { type TocItem } from "@/components/docs/TableOfContents";
 import CompoundInterestDocsPage, { getCompoundInterestTocItems } from "@/components/docs/compound-interest-calculator/CompoundInterestDocsPage";
+import LoanCalculatorDocsPage, { getLoanCalculatorTocItems } from "@/components/docs/loan-calculator/LoanCalculatorDocsPage";
+import AffordableLoanCalculatorDocsPage, { getAffordableLoanCalculatorTocItems } from "@/components/docs/affordable-loan-calculator/AffordableLoanCalculatorDocsPage";
+import RetirementCalculatorDocsPage, { getRetirementCalculatorTocItems } from "@/components/docs/retirement-calculator/RetirementCalculatorDocsPage";
+import HouseAffordabilityCalculatorDocsPage, { getHouseAffordabilityCalculatorTocItems } from "@/components/docs/house-affordability-calculator/HouseAffordabilityCalculatorDocsPage";
+import DebtToIncomeCalculatorDocsPage, { getDebtToIncomeCalculatorTocItems } from "@/components/docs/debt-to-income-calculator/DebtToIncomeCalculatorDocsPage";
+import MortgageCalculatorDocsPage, { getMortgageCalculatorTocItems } from "@/components/docs/mortgage-calculator/MortgageCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-// Pilot phase: only compound-interest-calculator has a documentation page built
-// so far (see MULTI-DEVICE-COORDINATION.md / project notes for the rollout plan).
-// Adding the next tool means adding one more case to the switch below, mirroring
-// apps/web/app/[locale]/tools/[slug]/page.tsx's own extensibility pattern.
-const DOCUMENTED_SLUGS = ["compound-interest-calculator"];
-
 export function generateStaticParams() {
-  return DOCUMENTED_SLUGS.map((slug) => ({ slug }));
+  return DOCUMENTED_TOOL_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: DocsPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  if (!DOCUMENTED_SLUGS.includes(slug)) {
+  if (!DOCUMENTED_TOOL_SLUGS.includes(slug)) {
     const t = await getTranslations({ locale, namespace: "toolPage" });
     return { title: `${t("notFoundTitle")} | TooloraLabs` };
   }
@@ -54,17 +55,41 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
 
 export default async function DocsToolPage({ params }: DocsPageProps) {
   const { slug } = await params;
-  if (!DOCUMENTED_SLUGS.includes(slug)) {
+  if (!DOCUMENTED_TOOL_SLUGS.includes(slug)) {
     notFound();
   }
 
   let content = null;
-  let tocItems: Awaited<ReturnType<typeof getCompoundInterestTocItems>> = [];
+  let tocItems: TocItem[] = [];
 
   switch (slug) {
     case "compound-interest-calculator":
       content = <CompoundInterestDocsPage />;
       tocItems = await getCompoundInterestTocItems();
+      break;
+    case "loan-calculator":
+      content = <LoanCalculatorDocsPage />;
+      tocItems = await getLoanCalculatorTocItems();
+      break;
+    case "affordable-loan-calculator":
+      content = <AffordableLoanCalculatorDocsPage />;
+      tocItems = await getAffordableLoanCalculatorTocItems();
+      break;
+    case "retirement-calculator":
+      content = <RetirementCalculatorDocsPage />;
+      tocItems = await getRetirementCalculatorTocItems();
+      break;
+    case "house-affordability-calculator":
+      content = <HouseAffordabilityCalculatorDocsPage />;
+      tocItems = await getHouseAffordabilityCalculatorTocItems();
+      break;
+    case "debt-to-income-calculator":
+      content = <DebtToIncomeCalculatorDocsPage />;
+      tocItems = await getDebtToIncomeCalculatorTocItems();
+      break;
+    case "mortgage-calculator":
+      content = <MortgageCalculatorDocsPage />;
+      tocItems = await getMortgageCalculatorTocItems();
       break;
   }
 

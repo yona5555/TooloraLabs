@@ -1,11 +1,17 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 
 const QUICK_TIP_PERCENTAGES = [15, 18, 20, 25];
 
 type TipInputPanelProps = {
+  currency: CurrencyCode;
+  onCurrencyChange: (currency: CurrencyCode) => void;
   billAmount: string;
   onBillAmountChange: (value: string) => void;
   tipPercent: string;
@@ -14,9 +20,13 @@ type TipInputPanelProps = {
   onPeopleChange: (value: string) => void;
   roundUpPerPerson: boolean;
   onRoundUpPerPersonChange: (value: boolean) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function TipInputPanel({
+  currency,
+  onCurrencyChange,
   billAmount,
   onBillAmountChange,
   tipPercent,
@@ -25,12 +35,16 @@ export default function TipInputPanel({
   onPeopleChange,
   roundUpPerPerson,
   onRoundUpPerPersonChange,
+  onCalculate,
+  onClear,
 }: TipInputPanelProps) {
   const t = useTranslations("tools.tip-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         <ToolInput
           label={t("billLabel")}
           type="text"
@@ -88,7 +102,18 @@ export default function TipInputPanel({
             <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">{t("roundUpHint")}</span>
           </span>
         </label>
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

@@ -7,11 +7,15 @@ import AdSpace from "@/components/tool-ui/AdSpace";
 import TipPercentBarDiagram from "./TipPercentBarDiagram";
 
 type ExampleRow = { scenario: string; tipAmount: string; totalPerPerson: string };
+type VariableItem = { name: string; description: string };
+type ApplicationItem = { title: string; description: string };
 
 export default async function TipEducation() {
   const t = await getTranslations("tools.tip-calculator.education");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
+  const variableItems = t.raw("variables.items") as VariableItem[];
+  const applicationItems = t.raw("applications.items") as ApplicationItem[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
   const diagramBars = t.raw("intro.diagram.bars") as { label: string; value: number }[];
@@ -22,6 +26,18 @@ export default async function TipEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <TipPercentBarDiagram bars={diagramBars} caption={t("intro.diagram.caption")} />
+      </InfoSection>
+
+      <InfoSection title={t("variables.title")}>
+        <p>{t("variables.intro")}</p>
+        <dl className="space-y-4">
+          {variableItems.map((item) => (
+            <div key={item.name}>
+              <dt className="font-semibold">{item.name}</dt>
+              <dd className="mt-1">{item.description}</dd>
+            </div>
+          ))}
+        </dl>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -45,6 +61,18 @@ export default async function TipEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("applications.title")}>
+        <p>{t("applications.intro")}</p>
+        <div className="space-y-4">
+          {applicationItems.map((item) => (
+            <div key={item.title}>
+              <h3 className="font-semibold">{item.title}</h3>
+              <p className="mt-1">{item.description}</p>
+            </div>
+          ))}
         </div>
       </InfoSection>
 

@@ -15,6 +15,7 @@ import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DebtToIncomeModeTabs from "./DebtToIncomeModeTabs";
 import DebtToIncomeInputPanel from "./DebtToIncomeInputPanel";
 import DebtToIncomeResult from "./DebtToIncomeResult";
@@ -359,7 +360,12 @@ export default function DebtToIncomeCalculator({ education }: { education: React
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="debt-to-income-calculator" category="financial-calculators" />}
-          secondary={<SectionNav items={navItems} visible={navBarVisible} />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} visible={navBarVisible} />
+              <ViewDocsLink slug="debt-to-income-calculator" />
+            </div>
+          }
         />
       </div>
 

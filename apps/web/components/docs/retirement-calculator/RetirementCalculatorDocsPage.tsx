@@ -12,16 +12,32 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import type { TocItem } from "@/components/docs/TableOfContents";
 import CalculationFlowchart from "@/components/docs/CalculationFlowchart";
 import BreakdownBarDiagram from "@/components/docs/BreakdownBarDiagram";
-import GrowthComparisonDiagram from "./GrowthComparisonDiagram";
+import GrowthCurveDiagram from "@/components/docs/GrowthCurveDiagram";
 
-export const RELATED_TOOLS = ["mortgage-calculator", "loan-calculator", "retirement-calculator", "affordable-loan-calculator", "debt-to-income-calculator"];
+export const RELATED_TOOLS = ["compound-interest-calculator", "mortgage-calculator", "debt-to-income-calculator", "affordable-loan-calculator", "house-affordability-calculator"];
 
-export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+// A representative example (age 30 -> 65, $20,000 starting, $300/month at 7%) — 35 years of
+// monthly compounding sampled yearly, illustrating the shape of any retirement projection.
+function buildSampleGrowth() {
+  const years = 35;
+  const monthlyRate = 0.07 / 12;
+  let balance = 20000;
+  const points = [{ x: 0, y: balance }];
+  for (let year = 1; year <= years; year++) {
+    for (let m = 0; m < 12; m++) {
+      balance = balance * (1 + monthlyRate) + 300;
+    }
+    points.push({ x: year, y: Math.round(balance) });
+  }
+  return points;
+}
+
+export async function getRetirementCalculatorTocItems(): Promise<TocItem[]> {
+  const t = await getTranslations("docs.tools.retirement-calculator");
   return [
     { id: "formula", label: t("sectionFormula") },
     { id: "flowchart", label: t("sectionFlowchart") },
-    { id: "growth-comparison", label: t("sectionGrowthComparison") },
+    { id: "growth", label: t("sectionGrowth") },
     { id: "anatomy", label: t("sectionAnatomy") },
     { id: "variables", label: t("sectionVariables") },
     { id: "edge-cases", label: t("sectionEdgeCases") },
@@ -30,8 +46,8 @@ export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
   ];
 }
 
-export default async function CompoundInterestDocsPage() {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+export default async function RetirementCalculatorDocsPage() {
+  const t = await getTranslations("docs.tools.retirement-calculator");
   const tNav = await getTranslations("docsNav");
   const tTools = await getTranslations("tools");
 
@@ -39,18 +55,12 @@ export default async function CompoundInterestDocsPage() {
   const edgeCases = t.raw("edgeCases") as EdgeCase[];
   const faqItems = t.raw("faq") as FAQItem[];
   const flowchartSteps = t.raw("flowchart.steps") as string[];
+  const growthPoints = buildSampleGrowth();
 
   return (
     <>
-      <DocsBreadcrumb
-        items={[
-          { label: tNav("overview"), href: "/docs" },
-          { label: tNav("toolsGuide"), href: "/docs" },
-          { label: tTools("compound-interest-calculator.title") },
-        ]}
-      />
-
-      <DocsHero title={tTools("compound-interest-calculator.title")} version={t("version")} description={t("description")} />
+      <DocsBreadcrumb items={[{ label: tNav("overview"), href: "/docs" }, { label: tNav("toolsGuide"), href: "/docs" }, { label: tTools("retirement-calculator.title") }]} />
+      <DocsHero title={tTools("retirement-calculator.title")} version={t("version")} description={t("description")} />
 
       <QuickFacts
         facts={[
@@ -70,18 +80,18 @@ export default async function CompoundInterestDocsPage() {
         <CalculationFlowchart steps={flowchartSteps} caption={t("flowchart.caption")} />
       </DocsSection>
 
-      <DocsSection id="growth-comparison" title={t("sectionGrowthComparison")}>
-        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("growthComparison.intro")}</p>
-        <GrowthComparisonDiagram labelCompound={t("growthComparison.labelCompound")} labelSimple={t("growthComparison.labelSimple")} caption={t("growthComparison.caption")} />
+      <DocsSection id="growth" title={t("sectionGrowth")}>
+        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("growth.intro")}</p>
+        <GrowthCurveDiagram points={growthPoints} label={t("growth.label")} caption={t("growth.caption")} xUnit="y" />
       </DocsSection>
 
       <DocsSection id="anatomy" title={t("sectionAnatomy")}>
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("anatomy.intro")}</p>
         <BreakdownBarDiagram
           segments={[
-            { label: t("anatomy.labelPrincipal"), value: 10000, colorClass: "fill-blue-600 dark:fill-blue-400" },
-            { label: t("anatomy.labelContributions"), value: 12000, colorClass: "fill-orange-400 dark:fill-orange-500" },
-            { label: t("anatomy.labelInterest"), value: 8100, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
+            { label: t("anatomy.labelStarting"), value: 20000, colorClass: "fill-blue-600 dark:fill-blue-400" },
+            { label: t("anatomy.labelContributions"), value: 126000, colorClass: "fill-orange-400 dark:fill-orange-500" },
+            { label: t("anatomy.labelGrowth"), value: 208000, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
           ]}
           totalLabel={t("anatomy.labelTotal")}
           caption={t("anatomy.caption")}
