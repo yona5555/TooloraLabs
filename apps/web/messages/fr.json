@@ -18462,6 +18462,176 @@
           "readOriginal": "Consulter la Référence"
         }
       }
+    },
+    "batch-invoice-calculator": {
+      "title": "Calculatrice de Factures Groupées",
+      "description": "Créez plusieurs factures avec des lignes d'articles et de la taxe, et suivez un total cumulé pour toutes. Enregistré dans votre navigateur.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Détails de la Facture",
+        "invoiceNumberLabel": "Numéro de Facture (Facultatif)",
+        "invoiceNumberPlaceholder": "ex. INV-1001",
+        "dateLabel": "Date",
+        "vendorLabel": "Fournisseur / Nom du Client (Facultatif)",
+        "vendorPlaceholder": "ex. Fournitures Acme",
+        "itemsLabel": "Lignes d'Articles",
+        "itemNamePlaceholder": "Nom de l'article",
+        "itemQuantityPlaceholder": "Qté",
+        "itemUnitPricePlaceholder": "Prix unitaire",
+        "removeItem": "Supprimer l'article",
+        "addItem": "Ajouter une Ligne d'Article",
+        "taxPercentLabel": "Taux de Taxe (%)",
+        "saveAndAddNew": "Enregistrer Cette Facture et en Ajouter une Nouvelle",
+        "updateInvoice": "Mettre à Jour Cette Facture"
+      },
+      "draftPreview": {
+        "heading": "Cette Facture",
+        "noLineItems": "Ajoutez au moins une ligne d'article pour voir un total.",
+        "invalidLineItem": "Chaque ligne d'article nécessite une quantité supérieure à zéro et un prix unitaire non négatif.",
+        "invalidTax": "Saisissez un taux de taxe de zéro ou plus.",
+        "subtotalLabel": "Sous-total",
+        "taxLabel": "Taxe",
+        "totalLabel": "Total de la Facture"
+      },
+      "table": {
+        "empty": "Aucune facture enregistrée pour le moment. Créez-en une à gauche et enregistrez-la pour l'ajouter ici.",
+        "columnNumber": "Numéro",
+        "columnDate": "Date",
+        "columnVendor": "Fournisseur",
+        "columnTotal": "Total",
+        "columnActions": "Actions",
+        "noNumber": "—",
+        "noVendor": "—",
+        "editInvoice": "Modifier la facture",
+        "deleteInvoice": "Supprimer la facture"
+      },
+      "summary": {
+        "heading": "Résumé Cumulé",
+        "invoiceCountLabel": "Factures Enregistrées",
+        "netBeforeTaxLabel": "Net Avant Taxe",
+        "taxTotalLabel": "Taxe Totale",
+        "grandTotalLabel": "Total Général",
+        "printExport": "Imprimer / Exporter",
+        "clearAll": "Tout Effacer"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Chaque facture est calculée de la même manière, puis toutes les factures enregistrées sont additionnées pour le résumé cumulé."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Facturation Groupée",
+          "paragraph1": "Cet outil sépare deux calculs liés mais distincts : le calcul du total d'une seule facture (lignes d'articles additionnées en un sous-total, avec la taxe appliquée par-dessus), et l'agrégation de nombreuses factures déjà calculées en un résumé cumulé. Chaque facture peut avoir son propre taux de taxe, car les entreprises réelles facturent parfois différents clients, catégories de produits ou juridictions à des taux de taxe différents au sein du même lot de travail.",
+          "paragraph2": "Tout ce que vous enregistrez est stocké uniquement dans votre propre navigateur (via son stockage local), pas sur un serveur — ce qui signifie que les données de vos factures restent privées sur votre appareil, mais cela signifie aussi qu'elles n'apparaîtront pas sur un autre navigateur ou appareil, et que l'effacement des données de site de votre navigateur les supprimera. Cela rend l'outil bien adapté aux calculs rapides par lots — comme totaliser une pile de reçus papier, ou rapprocher les factures clients d'un mois — sans créer de comptes ni téléverser de données financières où que ce soit."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "L'agrégation de plusieurs factures en un total cumulé apparaît dans la comptabilité quotidienne des petites entreprises et des indépendants.",
+          "items": [
+            {
+              "title": "Facturation des Indépendants et Contractants",
+              "description": "Suivre plusieurs factures clients émises sur une semaine ou un mois et voir le total combiné, la taxe due et le nombre de factures en un coup d'œil."
+            },
+            {
+              "title": "Rapprochement des Dépenses des Petites Entreprises",
+              "description": "Ressaisir une pile de factures papier ou PDF de fournisseurs pour obtenir un total combiné précis pour une période comptable, sans ouvrir de logiciel de tableur."
+            },
+            {
+              "title": "Préparation Fiscale Trimestrielle ou Mensuelle",
+              "description": "Séparer rapidement la part de taxe du montant avant taxe sur de nombreuses factures, pour obtenir les deux totaux qu'une déclaration fiscale exige généralement."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Où sont stockées les données de ma facture ?",
+              "answer": "Entièrement dans le stockage local de votre propre navigateur, sur votre propre appareil. Elles ne sont jamais téléversées vers un serveur, ce qui signifie qu'elles restent privées, mais cela signifie aussi qu'elles ne se synchroniseront pas entre différents navigateurs ou appareils, et qu'elles seront perdues si vous effacez les données de site de votre navigateur."
+            },
+            {
+              "question": "Puis-je modifier une facture après l'avoir enregistrée ?",
+              "answer": "Oui — cliquez sur l'icône de modification (crayon) à côté de n'importe quelle facture enregistrée dans le tableau pour la recharger dans le formulaire ci-dessus, apportez vos modifications, puis cliquez sur \"Mettre à Jour Cette Facture\" pour enregistrer les modifications sur place."
+            },
+            {
+              "question": "Chaque facture a-t-elle besoin de son propre taux de taxe ?",
+              "answer": "Oui, le taux de taxe est défini par facture plutôt que globalement, car un lot de factures pourrait mélanger différents taux de taxe — par exemple, certains articles exonérés de taxe aux côtés d'articles à taux standard, ou des clients dans différentes juridictions fiscales."
+            },
+            {
+              "question": "Est-ce la même chose que l'outil Générateur de Factures ?",
+              "answer": "Non — le Générateur de Factures crée un seul document de facture soigné et imprimable avec les détails de votre entreprise et ceux d'un client. Cet outil est construit pour la direction opposée : totaliser de nombreuses factures déjà créées pour répondre à \"combien ai-je facturé au total ce mois-ci, et quelle part est de la taxe ?\""
+            },
+            {
+              "question": "Que fait le bouton Imprimer/Exporter ?",
+              "answer": "Il ouvre la boîte de dialogue d'impression de votre navigateur avec une vue propre et formatée de votre liste de factures enregistrées et de votre résumé cumulé — à partir de là, vous pouvez imprimer une copie physique ou choisir \"Enregistrer en PDF\" (disponible dans la plupart des boîtes de dialogue d'impression des navigateurs) pour l'exporter en tant que fichier."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Les factures comptent parmi les plus anciens documents commerciaux répertoriés, des tablettes d'argile enregistrant des biens détaillés, des quantités et des totaux ayant été retrouvées en Mésopotamie antique et datant de plus de 5 000 ans — certaines des premières écritures connues étaient en fait des documents comptables. Les méthodes comptables systématiques derrière la facturation moderne et le rapprochement par lots remontent au traité de Luca Pacioli de 1494, Summa de Arithmetica, qui décrivait le système de comptabilité en partie double utilisé par les marchands vénitiens et qui est largement reconnu comme le fondement de la comptabilité moderne. La structure centrale d'une facture (quantités et prix détaillés additionnés en un total, parfois avec une taxe ou un droit ajouté) est restée conceptuellement inchangée pendant des siècles, même si le support est passé des registres papier aux tableurs numériques et aux logiciels de facturation."
+          },
+          "dataPrivacy": {
+            "title": "Stockage de Données Uniquement Local",
+            "paragraph": "Cet outil utilise la fonctionnalité de stockage local intégrée de votre navigateur pour se souvenir de vos factures enregistrées entre les visites, plutôt que d'envoyer des données à un serveur distant. Il s'agit d'un choix de conception délibéré axé sur la confidentialité pour un outil traitant des chiffres financiers : vos numéros de facture, noms de fournisseurs et montants ne quittent jamais votre appareil. Le compromis est que ces données sont liées à un navigateur spécifique sur un appareil spécifique — elles ne seront pas disponibles si vous changez de navigateur, utilisez un autre ordinateur ou effacez vos données de navigation."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La facturation, la comptabilisation et la tenue de registres financiers sont étudiées en comptabilité et en administration des affaires. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université de Pennsylvanie — Wharton School, Department of Accounting",
+                "note": "L'un des départements de comptabilité les plus reconnus au monde, étroitement lié à la Wharton Business School dans son ensemble.",
+                "url": "https://accounting.wharton.upenn.edu/phd-program/",
+                "online": "Non — le programme de doctorat est un diplôme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Chicago — Booth School of Business, Accounting",
+                "note": "Un centre de premier plan pour la recherche en comptabilité et finance.",
+                "url": "https://www.chicagobooth.edu/phd/academics/accounting",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Stanford Graduate School of Business — Accounting",
+                "note": "Un centre de premier plan pour la recherche en comptabilité et information financière.",
+                "url": "https://www.gsb.stanford.edu/programs/phd/academic-experience/accounting",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "London School of Economics — Department of Accounting",
+                "note": "L'un des départements de comptabilité et de finance les plus reconnus d'Europe.",
+                "url": "https://www.lse.ac.uk/accounting/phd-programme",
+                "online": "Non — les diplômes de recherche sont en présentiel au département de comptabilité."
+              },
+              {
+                "name": "Harvard Business School — Accounting and Management",
+                "note": "Un centre de premier plan pour la recherche en comptabilité, étroitement lié à des études de cas commerciales réelles.",
+                "url": "https://www.hbs.edu/doctoral/academic-units/accounting-management/",
+                "online": "Non — le programme doctoral est un diplôme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — Suliman S. Olayan School of Business",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "Non — les programmes de l'école sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Pacioli, L. (1494). Summa de Arithmetica, Geometria, Proportioni et Proportionalita. Venise.",
+          "note": "Le traité de 1494 qui a décrit pour la première fois la comptabilité en partie double imprimée, largement reconnu par les historiens comme le fondement de la pratique comptable et de facturation moderne.",
+          "url": "https://www.britannica.com/biography/Luca-Pacioli",
+          "readOriginal": "Voir les Lectures Complémentaires"
+        }
+      }
     }
   },
   "toolPage": {
@@ -18685,7 +18855,8 @@
     "audio-to-sheet-music-converter": "Convertisseur audio vers partition musicale",
     "full-document-translator": "Traducteur de documents complets",
     "auto-image-colorizer": "Colorisation automatique d'images",
-    "personal-avatar-generator": "Générateur d'avatar personnel"
+    "personal-avatar-generator": "Générateur d'avatar personnel",
+    "invoice-photo-scanner": "Scanner de Photos de Factures"
   },
   "docsNav": {
     "navLabel": "Navigation de la documentation",

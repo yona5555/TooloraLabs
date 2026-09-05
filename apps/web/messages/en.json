@@ -18458,6 +18458,176 @@
           "readOriginal": "View the Reference"
         }
       }
+    },
+    "batch-invoice-calculator": {
+      "title": "Batch Invoice Calculator",
+      "description": "Build multiple invoices with line items and tax, and track a running total across all of them. Saved in your browser.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Invoice Details",
+        "invoiceNumberLabel": "Invoice Number (Optional)",
+        "invoiceNumberPlaceholder": "e.g. INV-1001",
+        "dateLabel": "Date",
+        "vendorLabel": "Vendor / Client Name (Optional)",
+        "vendorPlaceholder": "e.g. Acme Supplies",
+        "itemsLabel": "Line Items",
+        "itemNamePlaceholder": "Item name",
+        "itemQuantityPlaceholder": "Qty",
+        "itemUnitPricePlaceholder": "Unit price",
+        "removeItem": "Remove item",
+        "addItem": "Add Line Item",
+        "taxPercentLabel": "Tax Rate (%)",
+        "saveAndAddNew": "Save This Invoice & Add a New One",
+        "updateInvoice": "Update This Invoice"
+      },
+      "draftPreview": {
+        "heading": "This Invoice",
+        "noLineItems": "Add at least one line item to see a total.",
+        "invalidLineItem": "Each line item needs a quantity greater than zero and a non-negative unit price.",
+        "invalidTax": "Enter a tax rate of zero or more.",
+        "subtotalLabel": "Subtotal",
+        "taxLabel": "Tax",
+        "totalLabel": "Invoice Total"
+      },
+      "table": {
+        "empty": "No invoices saved yet. Build one on the left and save it to add it here.",
+        "columnNumber": "Number",
+        "columnDate": "Date",
+        "columnVendor": "Vendor",
+        "columnTotal": "Total",
+        "columnActions": "Actions",
+        "noNumber": "—",
+        "noVendor": "—",
+        "editInvoice": "Edit invoice",
+        "deleteInvoice": "Delete invoice"
+      },
+      "summary": {
+        "heading": "Running Summary",
+        "invoiceCountLabel": "Invoices Saved",
+        "netBeforeTaxLabel": "Net Before Tax",
+        "taxTotalLabel": "Tax Total",
+        "grandTotalLabel": "Grand Total",
+        "printExport": "Print / Export",
+        "clearAll": "Clear All"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Every invoice is calculated the same way, then all saved invoices are added together for the running summary."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Batch Invoicing",
+          "paragraph1": "This tool separates two related but distinct calculations: computing a single invoice's total (line items summed into a subtotal, with tax applied on top), and aggregating many already-computed invoices into a running summary. Each invoice can carry its own tax rate, since real businesses sometimes bill different clients, product categories, or jurisdictions at different tax rates within the same batch of work.",
+          "paragraph2": "Everything you save is stored only in your own browser (using its local storage), not on a server — which means your invoice data stays private to your device, but also means it won't appear on a different browser or device, and clearing your browser's site data will remove it. This makes the tool well suited for quick batch calculations — like totaling a stack of paper receipts, or reconciling a month's worth of client invoices — without creating accounts or uploading financial data anywhere."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Aggregating multiple invoices into one running total comes up in everyday small-business and freelance bookkeeping.",
+          "items": [
+            {
+              "title": "Freelance and Contractor Billing",
+              "description": "Tracking several client invoices issued over a week or month and seeing the combined total, tax owed, and invoice count at a glance."
+            },
+            {
+              "title": "Small Business Expense Reconciliation",
+              "description": "Re-entering a stack of paper or PDF invoices from suppliers to get an accurate combined total for a bookkeeping period, without opening spreadsheet software."
+            },
+            {
+              "title": "Quarterly or Monthly Tax Preparation",
+              "description": "Quickly separating the tax portion from the pre-tax amount across many invoices, to get the two totals a tax filing typically requires."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Where is my invoice data stored?",
+              "answer": "Entirely in your own browser's local storage, on your own device. It is never uploaded to a server, which means it stays private, but it also means it won't sync across different browsers or devices, and it will be lost if you clear your browser's site data."
+            },
+            {
+              "question": "Can I edit an invoice after saving it?",
+              "answer": "Yes — click the edit (pencil) icon next to any saved invoice in the table to load it back into the form above, make your changes, and click \"Update This Invoice\" to save the changes in place."
+            },
+            {
+              "question": "Does each invoice need its own tax rate?",
+              "answer": "Yes, the tax rate is set per invoice rather than globally, since a batch of invoices might mix different tax rates — for example, some tax-exempt items alongside standard-rate items, or clients in different tax jurisdictions."
+            },
+            {
+              "question": "Is this the same as the Invoice Generator tool?",
+              "answer": "No — the Invoice Generator creates one polished, printable invoice document with your business details and a client's details. This tool is built for the opposite direction: totaling up many already-created invoices to answer \"how much have I billed in total this month, and how much of that is tax?\""
+            },
+            {
+              "question": "What does the Print/Export button do?",
+              "answer": "It opens your browser's print dialog with a clean, formatted view of your saved invoice list and running summary — from there you can print a physical copy or choose \"Save as PDF\" (available in most browsers' print dialogs) to export it as a file."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Invoices are among the oldest documented business records, with clay tablets recording itemized goods, quantities, and totals found in ancient Mesopotamia dating back over 5,000 years — some of the earliest known writing was, in fact, accounting records. The systematic bookkeeping methods behind modern invoicing and batch reconciliation trace back to Luca Pacioli's 1494 treatise Summa de Arithmetica, which described the double-entry bookkeeping system used by Venetian merchants and is widely credited as the foundation of modern accounting. The core structure of an invoice (itemized quantities and prices summed into a total, sometimes with a tax or duty added) has remained conceptually unchanged for centuries, even as the medium moved from paper ledgers to digital spreadsheets and invoicing software."
+          },
+          "dataPrivacy": {
+            "title": "Local-Only Data Storage",
+            "paragraph": "This tool uses your browser's built-in local storage feature to remember your saved invoices between visits, rather than sending any data to a remote server. This is a deliberate privacy-first design choice for a tool handling financial figures: your invoice numbers, vendor names, and amounts never leave your device. The tradeoff is that this data is tied to one specific browser on one specific device — it won't be available if you switch browsers, use a different computer, or clear your browsing data."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Invoicing, billing, and financial record-keeping are studied within accounting and business administration. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "University of Pennsylvania — Wharton School, Accounting Department",
+                "note": "One of the world's leading accounting departments, closely tied to the broader Wharton business school.",
+                "url": "https://accounting.wharton.upenn.edu/phd-program/",
+                "online": "No — the PhD program is an in-residence research degree."
+              },
+              {
+                "name": "University of Chicago — Booth School of Business, Accounting",
+                "note": "A top-ranked center for accounting and financial research.",
+                "url": "https://www.chicagobooth.edu/phd/academics/accounting",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "Stanford Graduate School of Business — Accounting",
+                "note": "A leading center for accounting and financial reporting research.",
+                "url": "https://www.gsb.stanford.edu/programs/phd/academic-experience/accounting",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "London School of Economics — Department of Accounting",
+                "note": "One of Europe's leading accounting and finance departments.",
+                "url": "https://www.lse.ac.uk/accounting/phd-programme",
+                "online": "No — research degrees are in-residence at the Department of Accounting."
+              },
+              {
+                "name": "Harvard Business School — Accounting and Management",
+                "note": "A leading center for accounting research, closely tied to real-world business case studies.",
+                "url": "https://www.hbs.edu/doctoral/academic-units/accounting-management/",
+                "online": "No — the doctoral program is an in-residence research degree."
+              },
+              {
+                "name": "American University of Beirut — Suliman S. Olayan School of Business",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "No — the school's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Pacioli, L. (1494). Summa de Arithmetica, Geometria, Proportioni et Proportionalita. Venice.",
+          "note": "The 1494 treatise that first described double-entry bookkeeping in print, widely credited by historians as the foundation of modern accounting and invoicing practice.",
+          "url": "https://www.britannica.com/biography/Luca-Pacioli",
+          "readOriginal": "View Further Reading"
+        }
+      }
     }
   },
   "toolPage": {
@@ -18681,7 +18851,8 @@
     "audio-to-sheet-music-converter": "Audio to Sheet Music Converter",
     "full-document-translator": "Full Document Translator",
     "auto-image-colorizer": "Automatic Image Colorizer",
-    "personal-avatar-generator": "Personal Avatar Generator"
+    "personal-avatar-generator": "Personal Avatar Generator",
+    "invoice-photo-scanner": "Invoice Photo Scanner"
   },
   "docsNav": {
     "navLabel": "Documentation navigation",

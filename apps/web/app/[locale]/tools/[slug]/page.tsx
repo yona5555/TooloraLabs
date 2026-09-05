@@ -133,6 +133,8 @@ import LoveCalculator from "@/components/tools/love-calculator/LoveCalculator";
 import LoveEducation from "@/components/tools/love-calculator/LoveEducation";
 import FuelCostCalculator from "@/components/tools/fuel-cost-calculator/FuelCostCalculator";
 import FuelEducation from "@/components/tools/fuel-cost-calculator/FuelEducation";
+import BatchInvoiceCalculator from "@/components/tools/batch-invoice-calculator/BatchInvoiceCalculator";
+import BatchInvoiceEducation from "@/components/tools/batch-invoice-calculator/BatchInvoiceEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -546,6 +548,9 @@ export default async function ToolPage({
     case "fuel-cost-calculator":
       component = <FuelCostCalculator education={<FuelEducation />} />;
       break;
+    case "batch-invoice-calculator":
+      component = <BatchInvoiceCalculator education={<BatchInvoiceEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -687,6 +692,7 @@ export default async function ToolPage({
     slug === "dice-roller" ||
     slug === "love-calculator" ||
     slug === "fuel-cost-calculator" ||
+    slug === "batch-invoice-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||
