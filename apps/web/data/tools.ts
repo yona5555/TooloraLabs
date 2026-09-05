@@ -861,6 +861,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "bmr-calculator",
+    title: "BMR Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate your Basal Metabolic Rate using the Harris-Benedict (1919) and Mifflin-St Jeor (1990) equations, with a side-by-side comparison.",
+    featured: false,
+    keywords: [
+      "bmr calculator",
+      "basal metabolic rate",
+      "harris benedict equation",
+      "mifflin st jeor equation",
+      "resting metabolic rate",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

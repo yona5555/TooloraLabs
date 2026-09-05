@@ -17379,6 +17379,180 @@
           "readOriginal": "Ver el informe original"
         }
       }
+    },
+    "bmr-calculator": {
+      "title": "Calculadora de TMB",
+      "description": "Calcula tu Tasa Metabólica Basal (TMB) usando las ecuaciones de Harris-Benedict (1919) y Mifflin-St Jeor (1990), con una comparación lado a lado.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "formulas": {
+        "groupLabel": "Fórmula",
+        "labels": {
+          "harrisBenedict": "Harris-Benedict",
+          "mifflinStJeor": "Mifflin-St Jeor",
+          "compare": "Comparar Ambas"
+        }
+      },
+      "form": {
+        "inputTitle": "Tus datos",
+        "genderLabel": "Sexo",
+        "genderMale": "Hombre",
+        "genderFemale": "Mujer",
+        "weight": "Peso (kg)",
+        "height": "Altura (cm)",
+        "age": "Edad",
+        "formulaLabel": "Fórmula",
+        "hints": {
+          "harrisBenedict": "La ecuación original de 1919, históricamente el primer método ampliamente usado para estimar el metabolismo en reposo.",
+          "mifflinStJeor": "La ecuación de 1990, ahora recomendada por la Academy of Nutrition and Dietetics como la más precisa para la mayoría de los adultos.",
+          "compare": "Ve ambas estimaciones lado a lado para entender cómo difieren las dos fórmulas para tus medidas."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Un gráfico de barras que compara las estimaciones de TMB de Harris-Benedict y Mifflin-St Jeor"
+      },
+      "result": {
+        "heading": "Resultado",
+        "harrisBenedict": "Harris-Benedict (1919)",
+        "mifflinStJeor": "Mifflin-St Jeor (1990)",
+        "bmrUnit": "Calorías por Día (TMB)",
+        "difference": "Las dos fórmulas difieren en {value} calorías por día para estas medidas.",
+        "invalidMeasurements": "Introduce un peso, altura y edad válidos para ver un resultado."
+      },
+      "disclaimer": "Esta herramienta ofrece únicamente una estimación general y educativa, y no sustituye el asesoramiento personalizado de un dietista-nutricionista registrado, un médico u otro profesional de la salud cualificado —la tasa metabólica real solo puede medirse con precisión mediante calorimetría indirecta clínica.",
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Ambas ecuaciones estiman la TMB a partir de las mismas tres medidas —peso, altura y edad— combinadas de forma diferente."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la Tasa Metabólica Basal",
+          "paragraph1": "La Tasa Metabólica Basal (TMB) es el número de calorías que tu cuerpo quema en reposo completo para sostener funciones básicas de soporte vital —respiración, circulación, producción celular y mantenimiento de la temperatura corporal— sin contar la digestión, el movimiento u otra actividad. Típicamente representa el 60-75% del gasto calórico diario total para la mayoría de las personas, lo que la convierte en el componente individual más grande del gasto energético diario, aunque no incluye las calorías quemadas por la actividad física o la digestión de alimentos (el Gasto Energético Total Diario, o TDEE, añade esos factores sobre la TMB).",
+          "paragraph2": "Debido a que la TMB solo puede medirse con precisión en un entorno de laboratorio usando calorimetría indirecta (midiendo el consumo de oxígeno y la producción de dióxido de carbono en reposo completo), se desarrollaron ecuaciones predictivas basadas en variables fácilmente medibles —peso, altura, edad y sexo— para estimarla sin equipo especializado. Esta calculadora implementa las dos ecuaciones históricamente más significativas de este tipo lado a lado, permitiéndote ver tanto una fórmula de hace más de un siglo como la que la sustituyó en la preferencia clínica."
+        },
+        "formulas": {
+          "title": "Las dos fórmulas",
+          "intro": "Ambas ecuaciones usan las mismas cuatro entradas pero las combinan con coeficientes diferentes, reflejando distintas poblaciones de origen y épocas de medición.",
+          "items": [
+            {
+              "title": "Harris-Benedict (1919)",
+              "description": "Desarrollada por James Arthur Harris y Francis Gano Benedict a partir de datos de unos cientos de sujetos, esta fue la primera ecuación ampliamente adoptada para estimar el metabolismo en reposo y siguió siendo el estándar clínico durante más de 60 años. Una revisión de 1984 por Roza y Shizgal ajustó ligeramente sus coeficientes, pero la versión mostrada aquí es la forma original de 1919 para una comparación histórica directa."
+            },
+            {
+              "title": "Mifflin-St Jeor (1990)",
+              "description": "Desarrollada por Mark Mifflin y Sachiko St Jeor usando un grupo de sujetos más grande, más diverso demográficamente y medido más recientemente, con una medición de composición corporal más precisa de la disponible en 1919, esta ecuación ha sido validada repetidamente como más precisa para la población adulta general moderna y es la fórmula que la Academy of Nutrition and Dietetics recomienda actualmente como opción predeterminada."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Un par de conjuntos de medidas y lo que devuelve cada fórmula.",
+          "columnCalculation": "Medidas",
+          "columnResult": "Harris-Benedict / Mifflin-St Jeor",
+          "rows": [
+            {
+              "calculation": "Hombre, 80kg, 180cm, 30 años",
+              "result": "1.853 / 1.780 kcal/día"
+            },
+            {
+              "calculation": "Mujer, 65kg, 165cm, 28 años",
+              "result": "1.458 / 1.381 kcal/día"
+            },
+            {
+              "calculation": "Hombre, 100kg, 175cm, 45 años",
+              "result": "1.933 / 1.873 kcal/día"
+            },
+            {
+              "calculation": "Mujer, 55kg, 160cm, 22 años",
+              "result": "1.352 / 1.282 kcal/día"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿En qué fórmula debería confiar más?",
+              "answer": "La Academy of Nutrition and Dietetics recomienda Mifflin-St Jeor como la ecuación más precisa para la mayoría de la población adulta general de hoy, ya que se desarrolló a partir de datos más recientes y representativos. Harris-Benedict sigue siendo útil como punto de referencia histórico y aún se cita en algunos contextos clínicos y de investigación, pero Mifflin-St Jeor es la mejor opción predeterminada para la mayoría de las personas hoy en día."
+            },
+            {
+              "question": "¿Por qué las dos fórmulas dan números diferentes para la misma persona?",
+              "answer": "Fueron construidas a partir de poblaciones de sujetos diferentes medidas con seis décadas de diferencia, usando métodos estadísticos distintos disponibles en su momento. Las normas de composición corporal, la precisión de medición y la composición demográfica de las muestras de estudio difieren entre 1919 y 1990, lo cual se refleja en los coeficientes específicos de cada fórmula —la diferencia entre ellas para cualquier individuo es típicamente modesta pero no nula."
+            },
+            {
+              "question": "¿Por qué esta calculadora no incluye el nivel de actividad o un objetivo calórico?",
+              "answer": "Esta herramienta se centra deliberadamente en el número único de TMB y la comparación histórica/científica entre las dos ecuaciones que lo estiman, sin añadir las variables adicionales (multiplicador de actividad, objetivo de peso) que una calculadora de Gasto Energético Total Diario (TDEE) añade sobre la TMB. Si quieres un objetivo calórico diario completo, la Calculadora de TDEE separada de este sitio se basa en la TMB añadiendo exactamente esos factores adicionales."
+            },
+            {
+              "question": "¿Son estas fórmulas precisas para todos?",
+              "answer": "Ambas son ecuaciones de promedio poblacional validadas principalmente en personas de composición corporal típica; tienden a ser menos precisas para personas muy musculosas, muy delgadas, o con obesidad, ya que ninguna de las fórmulas mide directamente la grasa corporal o la masa muscular. Para esos casos, una fórmula que incorpore el porcentaje de grasa corporal (como Katch-McArdle) o una medición clínica directa suele ser más precisa."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La ecuación de Harris-Benedict fue publicada en 1919 por los científicos estadounidenses James Arthur Harris y Francis Gano Benedict en el Laboratorio de Nutrición del Carnegie Institution, basada en mediciones metabólicas de unos cientos de hombres y mujeres —un hito temprano en el intento de predecir el metabolismo en reposo a partir de medidas corporales simples en lugar de requerir una medición directa para cada individuo. Se convirtió en la fórmula de referencia estándar en nutrición clínica y medicina durante las siguientes seis décadas, sufriendo una revisión menor de coeficientes por Roza y Shizgal en 1984."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "En 1990, Mark D. Mifflin y Sachiko T. St Jeor publicaron una nueva ecuación derivada de un grupo de sujetos más grande, demográficamente más diverso y medido más recientemente, usando métodos de evaluación de composición corporal más avanzados que los disponibles para Harris y Benedict siete décadas antes. Múltiples estudios de validación posteriores que compararon ecuaciones predictivas con la tasa metabólica en reposo medida (mediante calorimetría indirecta) han encontrado que Mifflin-St Jeor es más precisa para la población adulta general en promedio, llevando a la Academy of Nutrition and Dietetics a recomendarla como la ecuación preferida en ausencia de medición directa."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La tasa metabólica y el gasto energético se estudian dentro de la ciencia nutricional y la fisiología del ejercicio, parte del campo más amplio de las ciencias de la salud. Estos son cinco programas respetados en esta área, más una institución regional:",
+            "universities": [
+              {
+                "name": "Universidad de Tufts — Escuela Friedman de Ciencia y Política de la Nutrición",
+                "note": "Una escuela de posgrado estadounidense líder enfocada exclusivamente en la ciencia de la nutrición.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Algunos programas de posgrado ofrecen opciones en línea; el doctorado de investigación principal es presencial."
+              },
+              {
+                "name": "Escuela de Salud Pública Harvard T.H. Chan — Departamento de Nutrición",
+                "note": "Un centro líder en epidemiología nutricional e investigación del metabolismo.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "No — el programa doctoral principal es presencial."
+              },
+              {
+                "name": "Universidad de Colorado Anschutz — Centro de Salud y Bienestar Anschutz",
+                "note": "Un centro estadounidense líder en investigación del balance energético y el metabolismo.",
+                "url": "https://www.ucdenver.edu/anschutz-health-and-wellness-center",
+                "online": "No — los programas de investigación y clínicos son presenciales."
+              },
+              {
+                "name": "Universidad de Oxford — Departamento Nuffield de Neurociencia Clínica (Investigación Metabólica)",
+                "note": "Un centro europeo líder en investigación metabólica y de gasto energético.",
+                "url": "https://www.ndcn.ox.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de Deakin — Instituto de Actividad Física y Nutrición (IPAN)",
+                "note": "Un instituto de investigación líder en nutrición y ciencias del ejercicio en Australia.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "No — la formación de investigación y clínica es presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Nutrición y Ciencias de los Alimentos",
+                "note": "Fundada en 1866; un programa regional líder en ciencia de la nutrición.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Harris, J. A., & Benedict, F. G. (1919). A Biometric Study of Basal Metabolism in Man. Carnegie Institution of Washington. Mifflin, M. D., St Jeor, S. T., et al. (1990). A new predictive equation for resting energy expenditure in healthy individuals. The American Journal of Clinical Nutrition, 51(2), 241-247.",
+          "note": "La publicación original de 1919 que estableció la ecuación de Harris-Benedict, junto con el artículo de 1990 que introdujo la ecuación de Mifflin-St Jeor con la que esta calculadora la compara.",
+          "url": "https://doi.org/10.1093/ajcn/51.2.241",
+          "readOriginal": "Ver el estudio original de Mifflin-St Jeor"
+        }
+      }
     }
   },
   "toolPage": {

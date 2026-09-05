@@ -17379,6 +17379,180 @@
           "readOriginal": "Originalbericht ansehen"
         }
       }
+    },
+    "bmr-calculator": {
+      "title": "Grundumsatz-Rechner",
+      "description": "Berechne deinen Grundumsatz (BMR) mit den Harris-Benedict- (1919) und Mifflin-St-Jeor- (1990) Gleichungen, mit direktem Vergleich.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "formulas": {
+        "groupLabel": "Formel",
+        "labels": {
+          "harrisBenedict": "Harris-Benedict",
+          "mifflinStJeor": "Mifflin-St Jeor",
+          "compare": "Beide vergleichen"
+        }
+      },
+      "form": {
+        "inputTitle": "Deine Angaben",
+        "genderLabel": "Geschlecht",
+        "genderMale": "Männlich",
+        "genderFemale": "Weiblich",
+        "weight": "Gewicht (kg)",
+        "height": "Größe (cm)",
+        "age": "Alter",
+        "formulaLabel": "Formel",
+        "hints": {
+          "harrisBenedict": "Die ursprüngliche Gleichung von 1919, historisch die erste weit verbreitete Methode zur Schätzung des Ruhestoffwechsels.",
+          "mifflinStJeor": "Die Gleichung von 1990, heute von der Academy of Nutrition and Dietetics als die genaueste für die meisten Erwachsenen empfohlen.",
+          "compare": "Sieh beide Schätzungen nebeneinander, um zu verstehen, wie sich die beiden Formeln für deine Maße unterscheiden."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Ein Balkendiagramm, das die Harris-Benedict- und Mifflin-St-Jeor-BMR-Schätzungen vergleicht"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "harrisBenedict": "Harris-Benedict (1919)",
+        "mifflinStJeor": "Mifflin-St Jeor (1990)",
+        "bmrUnit": "Kalorien pro Tag (BMR)",
+        "difference": "Die beiden Formeln unterscheiden sich um {value} Kalorien pro Tag für diese Maße.",
+        "invalidMeasurements": "Gib ein gültiges Gewicht, eine gültige Größe und ein gültiges Alter ein, um ein Ergebnis zu sehen."
+      },
+      "disclaimer": "Dieses Tool bietet nur eine allgemeine, informative Schätzung und ersetzt keine persönliche Beratung durch eine zugelassene Ernährungsfachkraft, einen Arzt oder eine andere qualifizierte medizinische Fachkraft — der tatsächliche Stoffwechselumsatz kann nur mit klinischer indirekter Kalorimetrie präzise gemessen werden.",
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Beide Gleichungen schätzen den BMR aus denselben drei Maßen — Gewicht, Größe und Alter — kombinieren sie aber unterschiedlich."
+      },
+      "education": {
+        "intro": {
+          "title": "Den Grundumsatz verstehen",
+          "paragraph1": "Der Grundumsatz (BMR) ist die Anzahl der Kalorien, die dein Körper in völliger Ruhe verbrennt, um grundlegende lebenserhaltende Funktionen aufrechtzuerhalten — Atmung, Kreislauf, Zellproduktion und Aufrechterhaltung der Körpertemperatur — ohne Verdauung, Bewegung oder andere Aktivität. Er macht typischerweise 60-75% des gesamten täglichen Kalorienverbrauchs der meisten Menschen aus und ist damit die größte einzelne Komponente des täglichen Energieverbrauchs, obwohl er die durch körperliche Aktivität oder Verdauung verbrannten Kalorien nicht einschließt (der Gesamtenergieumsatz, TDEE, fügt diese Faktoren zum BMR hinzu).",
+          "paragraph2": "Da der BMR nur in einer Laborumgebung mittels indirekter Kalorimetrie (Messung des Sauerstoffverbrauchs und der Kohlendioxidproduktion in völliger Ruhe) präzise gemessen werden kann, wurden Vorhersagegleichungen basierend auf leicht messbaren Variablen — Gewicht, Größe, Alter und Geschlecht — entwickelt, um ihn ohne Spezialausrüstung zu schätzen. Dieser Rechner setzt die zwei historisch bedeutendsten dieser Gleichungen nebeneinander um und zeigt dir sowohl eine Formel von vor über einem Jahrhundert als auch die, die sie in der klinischen Präferenz später ablöste."
+        },
+        "formulas": {
+          "title": "Die zwei Formeln",
+          "intro": "Beide Gleichungen verwenden dieselben vier Eingaben, kombinieren sie aber mit unterschiedlichen Koeffizienten, die verschiedene Quellpopulationen und Messepochen widerspiegeln.",
+          "items": [
+            {
+              "title": "Harris-Benedict (1919)",
+              "description": "Entwickelt von James Arthur Harris und Francis Gano Benedict aus Daten von einigen hundert Probanden — dies war die erste weit verbreitete Gleichung zur Schätzung des Ruhestoffwechsels und blieb über 60 Jahre lang der klinische Standard. Eine Revision von Roza und Shizgal 1984 passte ihre Koeffizienten leicht an, aber die hier gezeigte Version ist die ursprüngliche Form von 1919 für den direkten historischen Vergleich."
+            },
+            {
+              "title": "Mifflin-St Jeor (1990)",
+              "description": "Entwickelt von Mark Mifflin und Sachiko St Jeor unter Verwendung einer größeren und demografisch vielfältigeren, aktuelleren Probandengruppe mit genauerer Körperzusammensetzungsmessung, als sie 1919 verfügbar war. Diese Gleichung wurde wiederholt als genauer für die moderne allgemeine erwachsene Bevölkerung validiert und ist die Formel, die die Academy of Nutrition and Dietetics derzeit als Standardwahl empfiehlt."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Messwertsätze und was jede Formel liefert.",
+          "columnCalculation": "Maße",
+          "columnResult": "Harris-Benedict / Mifflin-St Jeor",
+          "rows": [
+            {
+              "calculation": "Mann, 80kg, 180cm, 30 Jahre",
+              "result": "1.853 / 1.780 kcal/Tag"
+            },
+            {
+              "calculation": "Frau, 65kg, 165cm, 28 Jahre",
+              "result": "1.458 / 1.381 kcal/Tag"
+            },
+            {
+              "calculation": "Mann, 100kg, 175cm, 45 Jahre",
+              "result": "1.933 / 1.873 kcal/Tag"
+            },
+            {
+              "calculation": "Frau, 55kg, 160cm, 22 Jahre",
+              "result": "1.352 / 1.282 kcal/Tag"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Welcher Formel sollte ich mehr vertrauen?",
+              "answer": "Die Academy of Nutrition and Dietetics empfiehlt Mifflin-St Jeor als die genauere Gleichung für die meisten heutigen Erwachsenen, da sie aus aktuelleren und repräsentativeren Daten entwickelt wurde. Harris-Benedict bleibt als historischer Referenzpunkt nützlich und wird noch in manchen klinischen und Forschungskontexten zitiert, aber Mifflin-St Jeor ist heute die bessere Standardwahl für die meisten Menschen."
+            },
+            {
+              "question": "Warum liefern die beiden Formeln für dieselbe Person unterschiedliche Zahlen?",
+              "answer": "Sie wurden aus unterschiedlichen Probandenpopulationen erstellt, die sechs Jahrzehnte auseinander gemessen wurden, mit unterschiedlichen damals verfügbaren statistischen Methoden. Körperzusammensetzungsnormen, Messgenauigkeit und die demografische Zusammensetzung der Studienstichproben unterscheiden sich zwischen 1919 und 1990, was sich in den spezifischen Koeffizienten jeder Formel widerspiegelt — der Unterschied zwischen ihnen ist für jede Person typischerweise moderat, aber nicht null."
+            },
+            {
+              "question": "Warum enthält dieser Rechner kein Aktivitätsniveau oder Kalorienziel?",
+              "answer": "Dieses Tool konzentriert sich bewusst auf die einzelne BMR-Zahl und den historischen/wissenschaftlichen Vergleich zwischen den beiden Gleichungen, die ihn schätzen, ohne die zusätzlichen Variablen (Aktivitätsfaktor, Gewichtsziel) hinzuzufügen, die ein Gesamtenergieumsatz-Rechner (TDEE) auf den BMR aufbaut. Wenn du ein vollständiges tägliches Kalorienziel möchtest, baut der separate TDEE-Rechner dieser Website mit genau diesen zusätzlichen Faktoren auf dem BMR auf."
+            },
+            {
+              "question": "Sind diese Formeln für jeden genau?",
+              "answer": "Beide sind Bevölkerungsdurchschnittsgleichungen, die hauptsächlich an Menschen mit typischer Körperzusammensetzung validiert wurden; sie sind tendenziell weniger genau für sehr muskulöse, sehr schlanke oder adipöse Menschen, da keine der beiden Formeln direkt Körperfett oder Muskelmasse misst. Für diese Fälle ist eine Formel, die den Körperfettanteil einbezieht (wie Katch-McArdle), oder eine direkte klinische Messung im Allgemeinen genauer."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Harris-Benedict-Gleichung wurde 1919 von den amerikanischen Wissenschaftlern James Arthur Harris und Francis Gano Benedict am Nutrition Laboratory der Carnegie Institution veröffentlicht, basierend auf Stoffwechselmessungen einiger hundert Männer und Frauen — ein wegweisender früher Versuch, den Ruhestoffwechsel aus einfachen Körpermaßen vorherzusagen, statt eine direkte Messung für jeden Einzelnen zu erfordern. Sie wurde für die folgenden sechs Jahrzehnte zur Standardreferenzformel in klinischer Ernährung und Medizin und erhielt 1984 eine kleinere Koeffizientenrevision durch Roza und Shizgal."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "1990 veröffentlichten Mark D. Mifflin und Sachiko T. St Jeor eine neue Gleichung, abgeleitet aus einer größeren, demografisch vielfältigeren und aktueller gemessenen Probandengruppe, unter Verwendung fortschrittlicherer Körperzusammensetzungsmethoden, als sie Harris und Benedict sieben Jahrzehnte zuvor zur Verfügung standen. Mehrere nachfolgende Validierungsstudien, die Vorhersagegleichungen mit gemessenem Ruheenergieumsatz (via indirekter Kalorimetrie) verglichen, fanden Mifflin-St Jeor im Durchschnitt genauer für die allgemeine erwachsene Bevölkerung, was die Academy of Nutrition and Dietetics dazu veranlasste, sie als bevorzugte Gleichung bei fehlender direkter Messung zu empfehlen."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Stoffwechselrate und Energieverbrauch werden in der Ernährungswissenschaft und Sportphysiologie studiert, einem Teilgebiet der Gesundheitswissenschaften. Hier sind fünf angesehene Programme in diesem Bereich, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "Tufts University — Friedman School of Nutrition Science and Policy",
+                "note": "Eine führende US-Graduiertenschule, die sich ausschließlich auf Ernährungswissenschaft konzentriert.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Ausgewählte Graduiertenprogramme bieten Online-Optionen; die zentrale Forschungspromotion ist Präsenz."
+              },
+              {
+                "name": "Harvard T.H. Chan School of Public Health — Department of Nutrition",
+                "note": "Ein führendes Zentrum für Ernährungsepidemiologie und Stoffwechselforschung.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "Nein — das zentrale Doktorandenprogramm ist Präsenz."
+              },
+              {
+                "name": "University of Colorado Anschutz — Anschutz Health and Wellness Center",
+                "note": "Ein führendes US-Zentrum für Energiebilanz- und Stoffwechselforschung.",
+                "url": "https://www.ucdenver.edu/anschutz-health-and-wellness-center",
+                "online": "Nein — Forschungs- und klinische Programme sind Präsenz."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Clinical Neurosciences (Stoffwechselforschung)",
+                "note": "Ein führendes europäisches Zentrum für Stoffwechsel- und Energieverbrauchsforschung.",
+                "url": "https://www.ndcn.ox.ac.uk/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Deakin University — Institute for Physical Activity and Nutrition (IPAN)",
+                "note": "Ein führendes Forschungsinstitut für Ernährung und Sportwissenschaft in Australien.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "Nein — Forschungs- und klinische Ausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "American University of Beirut — Department of Nutrition and Food Sciences",
+                "note": "Gegründet 1866; ein führendes regionales Programm in Ernährungswissenschaft.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Harris, J. A., & Benedict, F. G. (1919). A Biometric Study of Basal Metabolism in Man. Carnegie Institution of Washington. Mifflin, M. D., St Jeor, S. T., et al. (1990). A new predictive equation for resting energy expenditure in healthy individuals. The American Journal of Clinical Nutrition, 51(2), 241-247.",
+          "note": "Die ursprüngliche Veröffentlichung von 1919, die die Harris-Benedict-Gleichung etablierte, zusammen mit der Arbeit von 1990, die die Mifflin-St-Jeor-Gleichung einführte, mit der dieser Rechner sie vergleicht.",
+          "url": "https://doi.org/10.1093/ajcn/51.2.241",
+          "readOriginal": "Mifflin-St-Jeor-Originalstudie ansehen"
+        }
+      }
     }
   },
   "toolPage": {

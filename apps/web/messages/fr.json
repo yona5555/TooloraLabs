@@ -17379,6 +17379,180 @@
           "readOriginal": "Consulter le rapport original"
         }
       }
+    },
+    "bmr-calculator": {
+      "title": "Calculatrice de Métabolisme de Base",
+      "description": "Calculez votre métabolisme de base (MB) en utilisant les équations de Harris-Benedict (1919) et Mifflin-St Jeor (1990), avec une comparaison côte à côte.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "formulas": {
+        "groupLabel": "Formule",
+        "labels": {
+          "harrisBenedict": "Harris-Benedict",
+          "mifflinStJeor": "Mifflin-St Jeor",
+          "compare": "Comparer les Deux"
+        }
+      },
+      "form": {
+        "inputTitle": "Vos informations",
+        "genderLabel": "Sexe",
+        "genderMale": "Homme",
+        "genderFemale": "Femme",
+        "weight": "Poids (kg)",
+        "height": "Taille (cm)",
+        "age": "Âge",
+        "formulaLabel": "Formule",
+        "hints": {
+          "harrisBenedict": "L'équation originale de 1919, historiquement la première méthode largement utilisée pour estimer le métabolisme au repos.",
+          "mifflinStJeor": "L'équation de 1990, désormais recommandée par l'Academy of Nutrition and Dietetics comme la plus précise pour la plupart des adultes.",
+          "compare": "Voyez les deux estimations côte à côte pour comprendre comment les deux formules diffèrent pour vos mesures."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Un graphique à barres comparant les estimations du MB selon Harris-Benedict et Mifflin-St Jeor"
+      },
+      "result": {
+        "heading": "Résultat",
+        "harrisBenedict": "Harris-Benedict (1919)",
+        "mifflinStJeor": "Mifflin-St Jeor (1990)",
+        "bmrUnit": "Calories par Jour (MB)",
+        "difference": "Les deux formules diffèrent de {value} calories par jour pour ces mesures.",
+        "invalidMeasurements": "Saisissez un poids, une taille et un âge valides pour voir un résultat."
+      },
+      "disclaimer": "Cet outil fournit uniquement une estimation générale et éducative et ne remplace pas les conseils personnalisés d'un(e) diététicien(ne) nutritionniste agréé(e), d'un médecin ou d'un autre professionnel de santé qualifié — le taux métabolique réel ne peut être mesuré avec précision que par calorimétrie indirecte clinique.",
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Les deux équations estiment le MB à partir des trois mêmes mesures — poids, taille et âge — combinées différemment."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le métabolisme de base",
+          "paragraph1": "Le métabolisme de base (MB) est le nombre de calories que votre corps brûle au repos complet pour soutenir les fonctions vitales de base — respiration, circulation, production cellulaire et maintien de la température corporelle — sans compter la digestion, le mouvement ou toute autre activité. Il représente typiquement 60 à 75 % de la dépense calorique quotidienne totale pour la plupart des gens, en faisant la plus grande composante unique de la dépense énergétique quotidienne, même s'il n'inclut pas les calories brûlées par l'activité physique ou la digestion des aliments (la dépense énergétique totale quotidienne, ou TDEE, ajoute ces facteurs au MB).",
+          "paragraph2": "Comme le MB ne peut être mesuré avec précision qu'en laboratoire par calorimétrie indirecte (mesure de la consommation d'oxygène et de la production de dioxyde de carbone au repos complet), des équations prédictives basées sur des variables facilement mesurables — poids, taille, âge et sexe — ont été développées pour l'estimer sans équipement spécialisé. Cette calculatrice met en œuvre côte à côte les deux équations historiquement les plus significatives de ce type, vous permettant de voir à la fois une formule vieille de plus d'un siècle et celle qui l'a supplantée dans la préférence clinique."
+        },
+        "formulas": {
+          "title": "Les deux formules",
+          "intro": "Les deux équations utilisent les mêmes quatre entrées mais les combinent avec des coefficients différents, reflétant des populations sources et des époques de mesure différentes.",
+          "items": [
+            {
+              "title": "Harris-Benedict (1919)",
+              "description": "Développée par James Arthur Harris et Francis Gano Benedict à partir de données sur quelques centaines de sujets, ce fut la première équation largement adoptée pour estimer le métabolisme au repos et est restée la référence clinique pendant plus de 60 ans. Une révision de 1984 par Roza et Shizgal a légèrement ajusté ses coefficients, mais la version présentée ici est la forme originale de 1919 pour une comparaison historique directe."
+            },
+            {
+              "title": "Mifflin-St Jeor (1990)",
+              "description": "Développée par Mark Mifflin et Sachiko St Jeor à partir d'un groupe de sujets plus large, plus diversifié démographiquement et mesuré plus récemment, avec une mesure de la composition corporelle plus précise que celle disponible en 1919, cette équation a été validée à plusieurs reprises comme plus précise pour la population adulte générale moderne et est la formule que l'Academy of Nutrition and Dietetics recommande actuellement comme choix par défaut."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques ensembles de mesures et ce que chaque formule renvoie.",
+          "columnCalculation": "Mesures",
+          "columnResult": "Harris-Benedict / Mifflin-St Jeor",
+          "rows": [
+            {
+              "calculation": "Homme, 80kg, 180cm, 30 ans",
+              "result": "1 853 / 1 780 kcal/jour"
+            },
+            {
+              "calculation": "Femme, 65kg, 165cm, 28 ans",
+              "result": "1 458 / 1 381 kcal/jour"
+            },
+            {
+              "calculation": "Homme, 100kg, 175cm, 45 ans",
+              "result": "1 933 / 1 873 kcal/jour"
+            },
+            {
+              "calculation": "Femme, 55kg, 160cm, 22 ans",
+              "result": "1 352 / 1 282 kcal/jour"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "À quelle formule devrais-je faire le plus confiance ?",
+              "answer": "L'Academy of Nutrition and Dietetics recommande Mifflin-St Jeor comme équation la plus précise pour la plupart de la population adulte générale d'aujourd'hui, car elle a été développée à partir de données plus récentes et plus représentatives. Harris-Benedict reste utile comme point de référence historique et est encore citée dans certains contextes cliniques et de recherche, mais Mifflin-St Jeor est le meilleur choix par défaut pour la plupart des gens aujourd'hui."
+            },
+            {
+              "question": "Pourquoi les deux formules donnent-elles des chiffres différents pour la même personne ?",
+              "answer": "Elles ont été construites à partir de populations de sujets différentes mesurées à six décennies d'intervalle, en utilisant des méthodes statistiques différentes disponibles à l'époque. Les normes de composition corporelle, la précision de mesure et la composition démographique des échantillons d'étude diffèrent entre 1919 et 1990, ce qui se reflète dans les coefficients spécifiques de chaque formule — l'écart entre elles pour un individu donné est généralement modeste mais non nul."
+            },
+            {
+              "question": "Pourquoi cette calculatrice n'inclut-elle pas le niveau d'activité ou un objectif calorique ?",
+              "answer": "Cet outil se concentre délibérément sur le seul chiffre du MB et la comparaison historique/scientifique entre les deux équations qui l'estiment, sans ajouter les variables supplémentaires (multiplicateur d'activité, objectif de poids) qu'une calculatrice de dépense énergétique totale quotidienne (TDEE) superpose au MB. Si vous voulez un objectif calorique quotidien complet, la calculatrice TDEE distincte de ce site s'appuie sur le MB en ajoutant exactement ces facteurs supplémentaires."
+            },
+            {
+              "question": "Ces formules sont-elles précises pour tout le monde ?",
+              "answer": "Les deux sont des équations de moyenne de population validées principalement sur des personnes de composition corporelle typique ; elles ont tendance à être moins précises pour les personnes très musclées, très minces ou obèses, car aucune des deux formules ne mesure directement la graisse corporelle ou la masse musculaire. Pour ces cas, une formule intégrant le pourcentage de graisse corporelle (comme Katch-McArdle) ou une mesure clinique directe est généralement plus précise."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "L'équation de Harris-Benedict a été publiée en 1919 par les scientifiques américains James Arthur Harris et Francis Gano Benedict au laboratoire de nutrition de la Carnegie Institution, basée sur des mesures métaboliques de quelques centaines d'hommes et de femmes — une tentative pionnière précoce de prédire le métabolisme au repos à partir de mesures corporelles simples plutôt que d'exiger une mesure directe pour chaque individu. Elle est devenue la formule de référence standard en nutrition clinique et en médecine pendant les six décennies suivantes, subissant une révision mineure des coefficients par Roza et Shizgal en 1984."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "En 1990, Mark D. Mifflin et Sachiko T. St Jeor ont publié une nouvelle équation dérivée d'un groupe de sujets plus large, plus diversifié démographiquement et mesuré plus récemment, utilisant des méthodes d'évaluation de la composition corporelle plus avancées que celles disponibles pour Harris et Benedict sept décennies plus tôt. Plusieurs études de validation ultérieures comparant des équations prédictives au taux métabolique au repos mesuré (via calorimétrie indirecte) ont trouvé Mifflin-St Jeor plus précise en moyenne pour la population adulte générale, amenant l'Academy of Nutrition and Dietetics à la recommander comme équation préférée en l'absence de mesure directe."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Le taux métabolique et la dépense énergétique sont étudiés en science nutritionnelle et physiologie de l'exercice, au sein du domaine plus large des sciences de la santé. Voici cinq programmes reconnus dans ce domaine, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "Université Tufts — Friedman School of Nutrition Science and Policy",
+                "note": "Une école supérieure américaine de premier plan consacrée exclusivement à la science de la nutrition.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Certains programmes de troisième cycle proposent des options en ligne ; le doctorat de recherche principal est en présentiel."
+              },
+              {
+                "name": "Harvard T.H. Chan School of Public Health — Department of Nutrition",
+                "note": "Un centre de premier plan pour l'épidémiologie nutritionnelle et la recherche sur le métabolisme.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "Non — le programme doctoral principal est en présentiel."
+              },
+              {
+                "name": "University of Colorado Anschutz — Anschutz Health and Wellness Center",
+                "note": "Un centre américain de premier plan pour la recherche sur le bilan énergétique et le métabolisme.",
+                "url": "https://www.ucdenver.edu/anschutz-health-and-wellness-center",
+                "online": "Non — les programmes de recherche et cliniques sont en présentiel."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Clinical Neurosciences (recherche métabolique)",
+                "note": "Un centre européen de premier plan pour la recherche sur le métabolisme et la dépense énergétique.",
+                "url": "https://www.ndcn.ox.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Université Deakin — Institute for Physical Activity and Nutrition (IPAN)",
+                "note": "Un institut de recherche de premier plan pour la nutrition et les sciences de l'exercice en Australie.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "Non — la formation de recherche et clinique est en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de nutrition et sciences alimentaires",
+                "note": "Fondée en 1866 ; un programme régional de premier plan en science de la nutrition.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Harris, J. A., & Benedict, F. G. (1919). A Biometric Study of Basal Metabolism in Man. Carnegie Institution of Washington. Mifflin, M. D., St Jeor, S. T., et al. (1990). A new predictive equation for resting energy expenditure in healthy individuals. The American Journal of Clinical Nutrition, 51(2), 241-247.",
+          "note": "La publication originale de 1919 établissant l'équation de Harris-Benedict, ainsi que l'article de 1990 introduisant l'équation de Mifflin-St Jeor à laquelle cette calculatrice la compare.",
+          "url": "https://doi.org/10.1093/ajcn/51.2.241",
+          "readOriginal": "Consulter l'étude originale de Mifflin-St Jeor"
+        }
+      }
     }
   },
   "toolPage": {

@@ -17375,6 +17375,180 @@
           "readOriginal": "View the Original Report"
         }
       }
+    },
+    "bmr-calculator": {
+      "title": "BMR Calculator",
+      "description": "Calculate your Basal Metabolic Rate using the Harris-Benedict (1919) and Mifflin-St Jeor (1990) equations, with a side-by-side comparison.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "formulas": {
+        "groupLabel": "Formula",
+        "labels": {
+          "harrisBenedict": "Harris-Benedict",
+          "mifflinStJeor": "Mifflin-St Jeor",
+          "compare": "Compare Both"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Details",
+        "genderLabel": "Gender",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "weight": "Weight (kg)",
+        "height": "Height (cm)",
+        "age": "Age",
+        "formulaLabel": "Formula",
+        "hints": {
+          "harrisBenedict": "The original 1919 equation, historically the first widely used method for estimating resting metabolism.",
+          "mifflinStJeor": "The 1990 equation, now recommended by the Academy of Nutrition and Dietetics as the most accurate for most adults.",
+          "compare": "See both estimates side by side to understand how the two formulas differ for your measurements."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "A bar chart comparing the Harris-Benedict and Mifflin-St Jeor BMR estimates"
+      },
+      "result": {
+        "heading": "Result",
+        "harrisBenedict": "Harris-Benedict (1919)",
+        "mifflinStJeor": "Mifflin-St Jeor (1990)",
+        "bmrUnit": "Calories per Day (BMR)",
+        "difference": "The two formulas differ by {value} calories per day for these measurements.",
+        "invalidMeasurements": "Enter a valid weight, height, and age to see a result."
+      },
+      "disclaimer": "This tool provides a general, educational estimate only and is not a substitute for personalized advice from a registered dietitian, physician, or other qualified healthcare provider — actual metabolic rate can only be measured precisely with clinical indirect calorimetry.",
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Both equations estimate BMR from the same three measurements — weight, height, and age — combined differently."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Basal Metabolic Rate",
+          "paragraph1": "Basal Metabolic Rate (BMR) is the number of calories your body burns at complete rest to sustain basic life-supporting functions — breathing, circulation, cell production, and maintaining body temperature — with no digestion, movement, or other activity factored in. It typically accounts for 60-75% of total daily calorie burn for most people, making it the largest single component of daily energy expenditure, even though it doesn't include the calories burned through physical activity or digesting food (Total Daily Energy Expenditure, or TDEE, adds those factors on top of BMR).",
+          "paragraph2": "Because BMR can only be measured precisely in a lab setting using indirect calorimetry (measuring oxygen consumption and carbon dioxide production while at complete rest), predictive equations based on easily measured variables — weight, height, age, and sex — were developed to estimate it without specialized equipment. This calculator implements the two most historically significant of these equations side by side, letting you see both a formula from over a century ago and the one that superseded it in clinical preference."
+        },
+        "formulas": {
+          "title": "The Two Formulas",
+          "intro": "Both equations use the same four inputs but combine them with different coefficients, reflecting different source populations and eras of measurement.",
+          "items": [
+            {
+              "title": "Harris-Benedict (1919)",
+              "description": "Developed by James Arthur Harris and Francis Gano Benedict from data on a few hundred subjects, this was the first widely adopted equation for estimating resting metabolism and remained the clinical standard for over 60 years. A 1984 revision by Roza and Shizgal adjusted its coefficients slightly, but the version shown here is the original 1919 form for direct historical comparison."
+            },
+            {
+              "title": "Mifflin-St Jeor (1990)",
+              "description": "Developed by Mark Mifflin and Sachiko St Jeor using a larger and more contemporary subject group with more accurate body composition measurement than was available in 1919, this equation has been repeatedly validated as more accurate for the modern general adult population and is the formula the Academy of Nutrition and Dietetics currently recommends as the default choice."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A couple of measurement sets and what each formula returns.",
+          "columnCalculation": "Measurements",
+          "columnResult": "Harris-Benedict / Mifflin-St Jeor",
+          "rows": [
+            {
+              "calculation": "Male, 80kg, 180cm, 30yo",
+              "result": "1,853 / 1,780 kcal/day"
+            },
+            {
+              "calculation": "Female, 65kg, 165cm, 28yo",
+              "result": "1,458 / 1,381 kcal/day"
+            },
+            {
+              "calculation": "Male, 100kg, 175cm, 45yo",
+              "result": "1,933 / 1,873 kcal/day"
+            },
+            {
+              "calculation": "Female, 55kg, 160cm, 22yo",
+              "result": "1,352 / 1,282 kcal/day"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Which formula should I trust more?",
+              "answer": "The Academy of Nutrition and Dietetics recommends Mifflin-St Jeor as the more accurate equation for most of today's general adult population, since it was developed from more recent and more representative data. Harris-Benedict remains useful as the historical reference point and is still cited in some clinical and research contexts, but Mifflin-St Jeor is the better default choice for most people today."
+            },
+            {
+              "question": "Why do the two formulas give different numbers for the same person?",
+              "answer": "They were built from different subject populations measured six decades apart, using different statistical methods available at the time. Body composition norms, measurement precision, and the demographic makeup of the study samples all differ between 1919 and 1990, which is reflected in each formula's specific coefficients — the gap between them for any individual is typically modest but not zero."
+            },
+            {
+              "question": "Why doesn't this calculator include activity level or a calorie target?",
+              "answer": "This tool deliberately focuses on the single BMR number and the historical/scientific comparison between the two equations that estimate it, without adding the extra variables (activity multiplier, weight goal) that a Total Daily Energy Expenditure (TDEE) calculator layers on top of BMR. If you want a full daily calorie target, this site's separate TDEE Calculator builds on BMR with exactly those additional factors."
+            },
+            {
+              "question": "Are these formulas accurate for everyone?",
+              "answer": "Both are population-average equations validated primarily on people of typical body composition; they tend to be less accurate for people who are very muscular, very lean, or have obesity, since neither formula directly measures body fat or muscle mass. For those cases, a formula that incorporates body fat percentage (like Katch-McArdle) or a direct clinical measurement is generally more accurate."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The Harris-Benedict equation was published in 1919 by American scientists James Arthur Harris and Francis Gano Benedict at the Carnegie Institution's Nutrition Laboratory, based on metabolic measurements of a few hundred men and women — a landmark early attempt to predict resting metabolism from simple body measurements rather than requiring direct measurement for every individual. It became the standard reference formula in clinical nutrition and medicine for the following six decades, undergoing a minor coefficient revision by Roza and Shizgal in 1984."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "In 1990, Mark D. Mifflin and Sachiko T. St Jeor published a new equation derived from a larger, more demographically diverse, and more recently measured subject pool, using body composition assessment methods more advanced than those available to Harris and Benedict seven decades earlier. Multiple subsequent validation studies comparing predictive equations against measured resting metabolic rate (via indirect calorimetry) have found Mifflin-St Jeor more accurate for the general adult population on average, leading the Academy of Nutrition and Dietetics to recommend it as the preferred equation in the absence of direct measurement."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Metabolic rate and energy expenditure are studied within nutritional science and exercise physiology, part of the broader field of health sciences. Here are five respected programs in this area, plus one regional institution:",
+            "universities": [
+              {
+                "name": "Tufts University — Friedman School of Nutrition Science and Policy",
+                "note": "A leading US graduate school focused exclusively on nutrition science.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Select graduate programs offer online options; the core research PhD is in-residence."
+              },
+              {
+                "name": "Harvard T.H. Chan School of Public Health — Department of Nutrition",
+                "note": "A leading center for nutritional epidemiology and metabolism research.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "No — the core doctoral program is in-residence."
+              },
+              {
+                "name": "University of Colorado Anschutz — Anschutz Health and Wellness Center",
+                "note": "A leading US center for energy balance and metabolism research.",
+                "url": "https://www.ucdenver.edu/anschutz-health-and-wellness-center",
+                "online": "No — research and clinical programs are in-residence."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Clinical Neurosciences (Metabolic Research)",
+                "note": "A leading European center for metabolic and energy expenditure research.",
+                "url": "https://www.ndcn.ox.ac.uk/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Deakin University — Institute for Physical Activity and Nutrition (IPAN)",
+                "note": "A leading research institute for nutrition and exercise science in Australia.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "No — research and clinical training are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Nutrition and Food Sciences",
+                "note": "Founded in 1866; a leading regional program in nutrition science.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Harris, J. A., & Benedict, F. G. (1919). A Biometric Study of Basal Metabolism in Man. Carnegie Institution of Washington. Mifflin, M. D., St Jeor, S. T., et al. (1990). A new predictive equation for resting energy expenditure in healthy individuals. The American Journal of Clinical Nutrition, 51(2), 241-247.",
+          "note": "The original 1919 publication establishing the Harris-Benedict equation, alongside the 1990 paper introducing the Mifflin-St Jeor equation this calculator compares it against.",
+          "url": "https://doi.org/10.1093/ajcn/51.2.241",
+          "readOriginal": "View the Mifflin-St Jeor Original Study"
+        }
+      }
     }
   },
   "toolPage": {
