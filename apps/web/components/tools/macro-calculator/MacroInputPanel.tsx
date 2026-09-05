@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import MacroGoalTabs from "./MacroGoalTabs";
-import { readStoredTdeeResult, type MacroGoal, type StoredTdeeResult } from "./types";
+import { readStoredTdeeResult, type MacroGoal } from "./types";
 
 type Props = {
   totalCalories: string;
@@ -13,13 +13,20 @@ type Props = {
   onGoalChange: (goal: MacroGoal) => void;
 };
 
+function subscribeToStorage(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getServerSnapshot() {
+  return null;
+}
+
 export default function MacroInputPanel({ totalCalories, onTotalCaloriesChange, goal, onGoalChange }: Props) {
   const t = useTranslations("tools.macro-calculator.form");
-  const [storedTdee, setStoredTdee] = useState<StoredTdeeResult | null>(null);
-
-  useEffect(() => {
-    setStoredTdee(readStoredTdeeResult());
-  }, []);
+  // Reads the TDEE Calculator's last saved result as an external store (localStorage), rather
+  // than setState-in-an-effect, since the value can also change in another tab.
+  const storedTdee = useSyncExternalStore(subscribeToStorage, readStoredTdeeResult, getServerSnapshot);
 
   return (
     <SectionCard title={t("inputTitle")}>
