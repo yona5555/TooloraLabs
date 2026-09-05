@@ -951,6 +951,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "batch-invoice-calculator",
+    title: "Batch Invoice Calculator",
+    category: "business-finance",
+    description:
+      "Build multiple invoices with line items and tax, and track a running total across all of them. Saved in your browser.",
+    featured: false,
+    keywords: [
+      "batch invoice calculator",
+      "multiple invoice tracker",
+      "invoice total calculator",
+      "invoice tax calculator",
+      "invoice summary tool",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

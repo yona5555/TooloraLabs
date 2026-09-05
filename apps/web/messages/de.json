@@ -18633,6 +18633,176 @@
           "readOriginal": "Referenz ansehen"
         }
       }
+    },
+    "batch-invoice-calculator": {
+      "title": "Sammelrechnungsrechner",
+      "description": "Erstelle mehrere Rechnungen mit Positionen und Steuer, und verfolge eine laufende Summe über alle hinweg. In deinem Browser gespeichert.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Rechnungsdetails",
+        "invoiceNumberLabel": "Rechnungsnummer (Optional)",
+        "invoiceNumberPlaceholder": "z.B. INV-1001",
+        "dateLabel": "Datum",
+        "vendorLabel": "Lieferant / Kundenname (Optional)",
+        "vendorPlaceholder": "z.B. Acme Lieferungen",
+        "itemsLabel": "Rechnungspositionen",
+        "itemNamePlaceholder": "Artikelname",
+        "itemQuantityPlaceholder": "Menge",
+        "itemUnitPricePlaceholder": "Einzelpreis",
+        "removeItem": "Position entfernen",
+        "addItem": "Position hinzufügen",
+        "taxPercentLabel": "Steuersatz (%)",
+        "saveAndAddNew": "Diese Rechnung speichern & eine neue hinzufügen",
+        "updateInvoice": "Diese Rechnung aktualisieren"
+      },
+      "draftPreview": {
+        "heading": "Diese Rechnung",
+        "noLineItems": "Füge mindestens eine Position hinzu, um eine Summe zu sehen.",
+        "invalidLineItem": "Jede Position benötigt eine Menge größer als null und einen nicht-negativen Einzelpreis.",
+        "invalidTax": "Gib einen Steuersatz von null oder mehr ein.",
+        "subtotalLabel": "Zwischensumme",
+        "taxLabel": "Steuer",
+        "totalLabel": "Rechnungssumme"
+      },
+      "table": {
+        "empty": "Noch keine Rechnungen gespeichert. Erstelle links eine und speichere sie, um sie hier hinzuzufügen.",
+        "columnNumber": "Nummer",
+        "columnDate": "Datum",
+        "columnVendor": "Lieferant",
+        "columnTotal": "Summe",
+        "columnActions": "Aktionen",
+        "noNumber": "—",
+        "noVendor": "—",
+        "editInvoice": "Rechnung bearbeiten",
+        "deleteInvoice": "Rechnung löschen"
+      },
+      "summary": {
+        "heading": "Laufende Zusammenfassung",
+        "invoiceCountLabel": "Gespeicherte Rechnungen",
+        "netBeforeTaxLabel": "Netto vor Steuer",
+        "taxTotalLabel": "Steuer Gesamt",
+        "grandTotalLabel": "Gesamtsumme",
+        "printExport": "Drucken / Exportieren",
+        "clearAll": "Alles Löschen"
+      },
+      "quickReference": {
+        "title": "Die Rechnung",
+        "intro": "Jede Rechnung wird auf die gleiche Weise berechnet, dann werden alle gespeicherten Rechnungen für die laufende Zusammenfassung addiert."
+      },
+      "education": {
+        "intro": {
+          "title": "Sammelrechnungen verstehen",
+          "paragraph1": "Dieses Tool trennt zwei verwandte, aber unterschiedliche Berechnungen: die Berechnung der Summe einer einzelnen Rechnung (Positionen zu einer Zwischensumme addiert, mit Steuer obendrauf) und die Aggregation vieler bereits berechneter Rechnungen zu einer laufenden Zusammenfassung. Jede Rechnung kann ihren eigenen Steuersatz haben, da reale Unternehmen manchmal verschiedene Kunden, Produktkategorien oder Rechtsordnungen innerhalb derselben Arbeitscharge mit unterschiedlichen Steuersätzen abrechnen.",
+          "paragraph2": "Alles, was du speicherst, wird nur in deinem eigenen Browser gespeichert (über dessen lokalen Speicher), nicht auf einem Server — das bedeutet, dass deine Rechnungsdaten privat auf deinem Gerät bleiben, aber auch, dass sie nicht auf einem anderen Browser oder Gerät erscheinen und beim Löschen der Website-Daten deines Browsers entfernt werden. Dies macht das Tool gut geeignet für schnelle Sammelberechnungen — wie das Aufsummieren eines Stapels Papierbelege oder den Abgleich der Kundenrechnungen eines Monats — ohne Konten zu erstellen oder Finanzdaten irgendwohin hochzuladen."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Die Aggregation mehrerer Rechnungen zu einer laufenden Summe kommt in der alltäglichen Buchhaltung von Kleinunternehmen und Freiberuflern vor.",
+          "items": [
+            {
+              "title": "Freiberufler- und Auftragnehmer-Abrechnung",
+              "description": "Das Verfolgen mehrerer über eine Woche oder einen Monat ausgestellter Kundenrechnungen und das Erkennen der kombinierten Summe, geschuldeten Steuer und Rechnungsanzahl auf einen Blick."
+            },
+            {
+              "title": "Abgleich der Ausgaben von Kleinunternehmen",
+              "description": "Das erneute Eingeben eines Stapels Papier- oder PDF-Rechnungen von Lieferanten, um eine genaue kombinierte Summe für einen Buchhaltungszeitraum zu erhalten, ohne eine Tabellenkalkulationssoftware zu öffnen."
+            },
+            {
+              "title": "Vierteljährliche oder monatliche Steuervorbereitung",
+              "description": "Das schnelle Trennen des Steueranteils vom Vorsteuerbetrag über viele Rechnungen hinweg, um die beiden Summen zu erhalten, die eine Steuererklärung typischerweise erfordert."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wo werden meine Rechnungsdaten gespeichert?",
+              "answer": "Vollständig im lokalen Speicher deines eigenen Browsers, auf deinem eigenen Gerät. Sie werden niemals auf einen Server hochgeladen, was bedeutet, dass sie privat bleiben, aber auch, dass sie nicht über verschiedene Browser oder Geräte synchronisiert werden und verloren gehen, wenn du die Website-Daten deines Browsers löschst."
+            },
+            {
+              "question": "Kann ich eine Rechnung nach dem Speichern bearbeiten?",
+              "answer": "Ja — klicke auf das Bearbeiten-Symbol (Stift) neben jeder gespeicherten Rechnung in der Tabelle, um sie zurück in das Formular oben zu laden, nimm deine Änderungen vor und klicke auf \"Diese Rechnung aktualisieren\", um die Änderungen an Ort und Stelle zu speichern."
+            },
+            {
+              "question": "Braucht jede Rechnung ihren eigenen Steuersatz?",
+              "answer": "Ja, der Steuersatz wird pro Rechnung und nicht global festgelegt, da eine Charge von Rechnungen unterschiedliche Steuersätze mischen könnte — zum Beispiel einige steuerbefreite Artikel neben Artikeln mit Standardsatz oder Kunden in unterschiedlichen Steuerhoheitsgebieten."
+            },
+            {
+              "question": "Ist das dasselbe wie das Rechnungsgenerator-Tool?",
+              "answer": "Nein — der Rechnungsgenerator erstellt ein einziges, gepflegtes, druckbares Rechnungsdokument mit deinen Geschäftsdetails und den Details eines Kunden. Dieses Tool ist für die entgegengesetzte Richtung gebaut: das Aufsummieren vieler bereits erstellter Rechnungen, um die Frage zu beantworten \"wie viel habe ich diesen Monat insgesamt in Rechnung gestellt, und wie viel davon ist Steuer?\""
+            },
+            {
+              "question": "Was macht die Schaltfläche Drucken/Exportieren?",
+              "answer": "Sie öffnet den Druckdialog deines Browsers mit einer sauberen, formatierten Ansicht deiner gespeicherten Rechnungsliste und laufenden Zusammenfassung — von dort aus kannst du eine physische Kopie drucken oder \"Als PDF speichern\" wählen (in den meisten Browser-Druckdialogen verfügbar), um sie als Datei zu exportieren."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Rechnungen gehören zu den ältesten dokumentierten Geschäftsunterlagen: Tontafeln, die aufgeschlüsselte Waren, Mengen und Summen aufzeichnen, wurden im antiken Mesopotamien gefunden und sind über 5.000 Jahre alt — einige der frühesten bekannten Schriften waren tatsächlich Buchhaltungsunterlagen. Die systematischen Buchhaltungsmethoden hinter modernen Rechnungen und Sammelabgleichen gehen auf Luca Paciolis Abhandlung Summa de Arithmetica von 1494 zurück, die das von venezianischen Kaufleuten verwendete System der doppelten Buchführung beschrieb und weithin als Grundlage der modernen Buchhaltung gilt. Die Grundstruktur einer Rechnung (aufgeschlüsselte Mengen und Preise, zu einer Summe addiert, manchmal mit einer hinzugefügten Steuer oder Abgabe) ist seit Jahrhunderten konzeptionell unverändert geblieben, auch wenn sich das Medium von Papierhauptbüchern zu digitalen Tabellenkalkulationen und Rechnungssoftware gewandelt hat."
+          },
+          "dataPrivacy": {
+            "title": "Nur lokale Datenspeicherung",
+            "paragraph": "Dieses Tool nutzt die integrierte lokale Speicherfunktion deines Browsers, um sich deine gespeicherten Rechnungen zwischen Besuchen zu merken, anstatt Daten an einen entfernten Server zu senden. Dies ist eine bewusste, datenschutzorientierte Designentscheidung für ein Tool, das mit Finanzzahlen umgeht: deine Rechnungsnummern, Lieferantennamen und Beträge verlassen niemals dein Gerät. Der Kompromiss ist, dass diese Daten an einen bestimmten Browser auf einem bestimmten Gerät gebunden sind — sie sind nicht verfügbar, wenn du den Browser wechselst, einen anderen Computer verwendest oder deine Browserdaten löschst."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Rechnungsstellung, Abrechnung und finanzielle Aufzeichnung werden im Rechnungswesen und in der Betriebswirtschaftslehre studiert. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "University of Pennsylvania — Wharton School, Accounting Department",
+                "note": "Eine der weltweit führenden Abteilungen für Rechnungswesen, eng mit der breiteren Wharton Business School verbunden.",
+                "url": "https://accounting.wharton.upenn.edu/phd-program/",
+                "online": "Nein — das Promotionsprogramm ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Chicago — Booth School of Business, Accounting",
+                "note": "Ein top-bewertetes Zentrum für Rechnungswesen- und Finanzforschung.",
+                "url": "https://www.chicagobooth.edu/phd/academics/accounting",
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
+              },
+              {
+                "name": "Stanford Graduate School of Business — Accounting",
+                "note": "Ein führendes Zentrum für Rechnungswesen- und Finanzberichterstattungsforschung.",
+                "url": "https://www.gsb.stanford.edu/programs/phd/academic-experience/accounting",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "London School of Economics — Department of Accounting",
+                "note": "Eine der führenden Abteilungen für Rechnungswesen und Finanzen in Europa.",
+                "url": "https://www.lse.ac.uk/accounting/phd-programme",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Abteilung für Rechnungswesen statt."
+              },
+              {
+                "name": "Harvard Business School — Accounting and Management",
+                "note": "Ein führendes Zentrum für Rechnungswesenforschung, eng mit praxisnahen Fallstudien verbunden.",
+                "url": "https://www.hbs.edu/doctoral/academic-units/accounting-management/",
+                "online": "Nein — das Promotionsprogramm ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "American University of Beirut — Suliman S. Olayan School of Business",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/osb/Pages/default.aspx",
+                "online": "Nein — die Programme der Schule finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Pacioli, L. (1494). Summa de Arithmetica, Geometria, Proportioni et Proportionalita. Venedig.",
+          "note": "Die Abhandlung von 1494, die erstmals die doppelte Buchführung im Druck beschrieb, von Historikern weithin als Grundlage der modernen Buchhaltungs- und Rechnungspraxis anerkannt.",
+          "url": "https://www.britannica.com/biography/Luca-Pacioli",
+          "readOriginal": "Weiterführende Literatur ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -18856,7 +19026,8 @@
     "audio-to-sheet-music-converter": "Audio-zu-Notenblatt-Konverter",
     "full-document-translator": "Vollständiger Dokumentübersetzer",
     "auto-image-colorizer": "Automatische Bildkolorierung",
-    "personal-avatar-generator": "Persönlicher Avatar-Generator"
+    "personal-avatar-generator": "Persönlicher Avatar-Generator",
+    "invoice-photo-scanner": "Rechnungsfoto-Scanner"
   },
   "docsNav": {
     "navLabel": "Dokumentationsnavigation",

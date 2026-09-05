@@ -93,5 +93,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "full-document-translator", icon: "Globe2" },
     { id: "auto-image-colorizer", icon: "Palette" },
     { id: "personal-avatar-generator", icon: "UserCircle" },
+    { id: "invoice-photo-scanner", icon: "Camera" },
   ],
 };
