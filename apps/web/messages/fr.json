@@ -14162,7 +14162,9 @@
               "meaning": "Le coût attribué aux unités effectivement vendues pendant la période — il réduit directement le bénéfice déclaré, et son montant dépend de la méthode de valorisation utilisée."
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Ajoutez au moins un article avec un lot d'achat, puis appuyez sur Calculer la Valeur pour voir vos résultats.",
+        "sentence": "{count} articles évalués, avec une valeur d'inventaire final FIFO de {value}."
       },
       "form": {
         "inputTitle": "Votre stock",
@@ -14179,7 +14181,8 @@
         "removeBatch": "Supprimer le lot",
         "addItem": "Ajouter un article",
         "removeItem": "Supprimer l'article",
-        "calculate": "Calculer la valeur"
+        "calculate": "Calculer la valeur",
+        "clear": "Effacer"
       },
       "result": {
         "title": "Rapport de stock",
@@ -14189,7 +14192,14 @@
         "endingUnits": "Unités en stock final",
         "methodFifo": "FIFO",
         "methodLifo": "LIFO",
-        "methodWeightedAverage": "Coût moy. pondéré"
+        "methodWeightedAverage": "Coût moy. pondéré",
+        "stockHealth": {
+          "good": "Bonne",
+          "fair": "Correcte",
+          "atRisk": "À Risque",
+          "caption": "Part des articles au-dessus de leur seuil de réapprovisionnement."
+        },
+        "unitsSuffix": "unités"
       },
       "errors": {
         "emptyItems": "Ajoutez au moins un article.",
@@ -14313,7 +14323,79 @@
           "note": "Une étude fondatrice sur la manière dont le choix entre les méthodes de valorisation des stocks affecte les bénéfices déclarés, la charge fiscale et les décisions de gestion liées aux stocks — le même arbitrage FIFO/LIFO/coût moyen pondéré que calcule cet outil.",
           "url": "https://doi.org/10.2307/2490341",
           "readOriginal": "Lire l'étude originale"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Chaque évaluation dans cet outil provient d'un historique d'achats et d'un chiffre d'unités vendues, par article.",
+          "items": [
+            {
+              "name": "Lots d'Achat",
+              "description": "Chaque lot de stock acheté, avec sa quantité et son coût unitaire, classé du plus ancien en premier — les couches dans lesquelles FIFO et LIFO puisent en directions opposées."
+            },
+            {
+              "name": "Unités Vendues",
+              "description": "Combien d'unités ont quitté le stock cette période, puisées dans les lots selon la méthode de valorisation choisie."
+            },
+            {
+              "name": "Seuil de Réapprovisionnement",
+              "description": "Un niveau de stock facultatif en dessous duquel l'article est signalé comme stock faible dans le rapport."
+            },
+            {
+              "name": "Unités Finales",
+              "description": "Unités achetées moins unités vendues — la quantité physique restante, identique dans les trois méthodes de valorisation."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Choisir et appliquer une méthode de valorisation compte partout où une entreprise suit un stock physique acheté à des prix variables.",
+          "items": [
+            {
+              "title": "Rapports Financiers et Impôts",
+              "description": "La méthode de valorisation choisie modifie directement le coût des marchandises vendues déclaré et la valeur du stock final, ce qui affecte le revenu imposable."
+            },
+            {
+              "title": "Gestion de Stock en Retail et E-commerce",
+              "description": "Suivre la valeur du stock final et signaler les articles à faible stock soutient les décisions de réapprovisionnement et la planification de trésorerie."
+            },
+            {
+              "title": "Matières Premières de Fabrication",
+              "description": "Les matériaux achetés à des moments et prix différents sont valorisés de la même manière que le stock de produits finis, selon la même logique FIFO/LIFO/moyenne pondérée."
+            },
+            {
+              "title": "Comparer l'Impact de la Méthode de Valorisation",
+              "description": "Faire passer le même historique d'achats par les trois méthodes côte à côte montre exactement à quel point un choix de valorisation changerait les chiffres déclarés."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les Réseaux Sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé Pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@example.com",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Acme SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Ville"
+      },
+      "stockLevelDiagram": {
+        "title": "Niveaux de Stock par Article",
+        "caption": "Unités finales par article — les barres ambrées sont au niveau ou en dessous de leur seuil de réapprovisionnement."
+      },
+      "compositionDiagram": {
+        "title": "Vendu vs. Restant",
+        "caption": "Comment les unités achetées de chaque article se répartissent entre vendues et encore en stock.",
+        "soldLabel": "Unités Vendues",
+        "endingLabel": "Unités Finales"
       }
     },
     "break-even-calculator": {

@@ -1,16 +1,24 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Plus, Trash2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import { emptyBatch, emptyItem, type DraftItem } from "./types";
 
 type InventoryInputPanelProps = {
+  currency: CurrencyCode;
+  onCurrencyChange: (currency: CurrencyCode) => void;
   items: DraftItem[];
   onItemsChange: (items: DraftItem[]) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
-export default function InventoryInputPanel({ items, onItemsChange }: InventoryInputPanelProps) {
+export default function InventoryInputPanel({ currency, onCurrencyChange, items, onItemsChange, onCalculate, onClear }: InventoryInputPanelProps) {
   const t = useTranslations("tools.inventory-valuation-calculator.form");
 
   function updateItem(index: number, patch: Partial<DraftItem>) {
@@ -37,7 +45,9 @@ export default function InventoryInputPanel({ items, onItemsChange }: InventoryI
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="space-y-6">
+      <form onSubmit={onCalculate} className="space-y-6">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         {items.map((item, itemIndex) => (
           <div
             key={itemIndex}
@@ -127,7 +137,18 @@ export default function InventoryInputPanel({ items, onItemsChange }: InventoryI
           <Plus size={16} />
           {t("addItem")}
         </button>
-      </div>
+
+        <div className="flex flex-wrap gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

@@ -14158,7 +14158,9 @@
               "meaning": "The cost assigned to the units actually sold this period — it directly reduces reported profit, and its size depends on which costing method is used."
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Add at least one item with a purchase batch, then press Calculate Value to see your results.",
+        "sentence": "{count} items valued, with a FIFO ending inventory value of {value}."
       },
       "form": {
         "inputTitle": "Your Stock",
@@ -14175,7 +14177,8 @@
         "removeBatch": "Remove batch",
         "addItem": "Add Item",
         "removeItem": "Remove item",
-        "calculate": "Calculate Value"
+        "calculate": "Calculate Value",
+        "clear": "Clear"
       },
       "result": {
         "title": "Inventory Report",
@@ -14185,7 +14188,14 @@
         "endingUnits": "Ending Units",
         "methodFifo": "FIFO",
         "methodLifo": "LIFO",
-        "methodWeightedAverage": "Weighted Avg."
+        "methodWeightedAverage": "Weighted Avg.",
+        "stockHealth": {
+          "good": "Good",
+          "fair": "Fair",
+          "atRisk": "At Risk",
+          "caption": "Share of items above their reorder threshold."
+        },
+        "unitsSuffix": "units"
       },
       "errors": {
         "emptyItems": "Add at least one item.",
@@ -14309,7 +14319,79 @@
           "note": "A foundational study of how the choice between inventory costing methods affects reported earnings, tax liability, and inventory-related management decisions — the same FIFO/LIFO/weighted-average trade-off this tool computes.",
           "url": "https://doi.org/10.2307/2490341",
           "readOriginal": "Read the Original Study"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Every valuation in this tool comes from a purchase history and a units-sold figure, per item.",
+          "items": [
+            {
+              "name": "Purchase Batches",
+              "description": "Each lot of stock bought, with its quantity and unit cost, ordered oldest first — the layers FIFO and LIFO draw down from in opposite directions."
+            },
+            {
+              "name": "Units Sold",
+              "description": "How many units left inventory this period, drawn down against the batches according to the costing method chosen."
+            },
+            {
+              "name": "Reorder Threshold",
+              "description": "An optional stock level below which the item is flagged as low stock in the report."
+            },
+            {
+              "name": "Ending Units",
+              "description": "Units purchased minus units sold — the physical quantity remaining, the same across all three costing methods."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Choosing and applying a costing method matters anywhere a business tracks physical stock bought at varying prices.",
+          "items": [
+            {
+              "title": "Financial Reporting and Taxes",
+              "description": "The costing method chosen directly changes reported cost of goods sold and ending inventory value, which affects taxable income."
+            },
+            {
+              "title": "Retail and E-commerce Stock Management",
+              "description": "Tracking ending inventory value and flagging low-stock items supports reordering decisions and cash-flow planning."
+            },
+            {
+              "title": "Manufacturing Raw Materials",
+              "description": "Materials purchased at different times and prices are valued the same way finished-goods inventory is, using the same FIFO/LIFO/weighted-average logic."
+            },
+            {
+              "title": "Comparing Costing Method Impact",
+              "description": "Running the same purchase history through all three methods side by side shows exactly how much a costing choice would change reported figures."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "stockLevelDiagram": {
+        "title": "Stock Levels by Item",
+        "caption": "Ending units per item — amber bars are at or below their reorder threshold."
+      },
+      "compositionDiagram": {
+        "title": "Sold vs. Remaining",
+        "caption": "How each item's purchased units split between sold and still on hand.",
+        "soldLabel": "Units Sold",
+        "endingLabel": "Ending Units"
       }
     },
     "break-even-calculator": {

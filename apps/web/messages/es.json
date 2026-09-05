@@ -14162,7 +14162,9 @@
               "meaning": "El coste asignado a las unidades realmente vendidas en este período: reduce directamente el beneficio declarado, y su magnitud depende del método de costeo utilizado."
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Añade al menos un artículo con un lote de compra, luego presiona Calcular Valor para ver tus resultados.",
+        "sentence": "{count} artículos valorados, con un valor de inventario final FIFO de {value}."
       },
       "form": {
         "inputTitle": "Tu stock",
@@ -14179,7 +14181,8 @@
         "removeBatch": "Eliminar lote",
         "addItem": "Añadir artículo",
         "removeItem": "Eliminar artículo",
-        "calculate": "Calcular valor"
+        "calculate": "Calcular valor",
+        "clear": "Borrar"
       },
       "result": {
         "title": "Informe de inventario",
@@ -14189,7 +14192,14 @@
         "endingUnits": "Unidades finales",
         "methodFifo": "FIFO",
         "methodLifo": "LIFO",
-        "methodWeightedAverage": "Media pond."
+        "methodWeightedAverage": "Media pond.",
+        "stockHealth": {
+          "good": "Buena",
+          "fair": "Regular",
+          "atRisk": "En Riesgo",
+          "caption": "Proporción de artículos por encima de su umbral de reabastecimiento."
+        },
+        "unitsSuffix": "unidades"
       },
       "errors": {
         "emptyItems": "Añade al menos un artículo.",
@@ -14313,7 +14323,79 @@
           "note": "Un estudio fundacional sobre cómo la elección entre métodos de costeo de inventario afecta a las ganancias declaradas, la carga fiscal y las decisiones de gestión relacionadas con el inventario: el mismo compromiso entre FIFO, LIFO y coste medio ponderado que calcula esta herramienta.",
           "url": "https://doi.org/10.2307/2490341",
           "readOriginal": "Leer el estudio original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Cada valoración en esta herramienta proviene de un historial de compras y una cifra de unidades vendidas, por artículo.",
+          "items": [
+            {
+              "name": "Lotes de Compra",
+              "description": "Cada lote de stock comprado, con su cantidad y costo unitario, ordenado del más antiguo primero — las capas de las que FIFO y LIFO extraen en direcciones opuestas."
+            },
+            {
+              "name": "Unidades Vendidas",
+              "description": "Cuántas unidades salieron del inventario en este período, extraídas de los lotes según el método de valoración elegido."
+            },
+            {
+              "name": "Umbral de Reabastecimiento",
+              "description": "Un nivel de stock opcional por debajo del cual el artículo se marca como stock bajo en el informe."
+            },
+            {
+              "name": "Unidades Finales",
+              "description": "Unidades compradas menos unidades vendidas — la cantidad física restante, igual en los tres métodos de valoración."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Aplicaciones",
+          "intro": "Elegir y aplicar un método de valoración importa en cualquier lugar donde un negocio rastree existencias físicas compradas a precios variables.",
+          "items": [
+            {
+              "title": "Informes Financieros e Impuestos",
+              "description": "El método de valoración elegido cambia directamente el costo de bienes vendidos reportado y el valor de inventario final, lo que afecta el ingreso gravable."
+            },
+            {
+              "title": "Gestión de Stock en Retail y Comercio Electrónico",
+              "description": "Rastrear el valor de inventario final y marcar artículos con poco stock apoya las decisiones de reabastecimiento y la planificación de flujo de caja."
+            },
+            {
+              "title": "Materias Primas de Manufactura",
+              "description": "Los materiales comprados en momentos y precios diferentes se valoran de la misma manera que el inventario de productos terminados, usando la misma lógica FIFO/LIFO/promedio ponderado."
+            },
+            {
+              "title": "Comparar el Impacto del Método de Valoración",
+              "description": "Ejecutar el mismo historial de compras a través de los tres métodos lado a lado muestra exactamente cuánto cambiaría una elección de valoración las cifras reportadas."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir y Exportar",
+        "shareToSocial": "Compartir en Redes Sociales",
+        "generatedOn": "Generado el",
+        "contactSectionTitle": "Información de Contacto (opcional)",
+        "preparedForTitle": "Preparado Para",
+        "contactName": "Nombre",
+        "contactEmail": "Correo Electrónico",
+        "contactPhone": "Teléfono",
+        "contactOrganization": "Organización",
+        "contactAddress": "Dirección",
+        "contactNamePlaceholder": "p. ej. Juan Pérez",
+        "contactEmailPlaceholder": "p. ej. juan@example.com",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganizationPlaceholder": "p. ej. Empresa S.A.",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Ciudad"
+      },
+      "stockLevelDiagram": {
+        "title": "Niveles de Stock por Artículo",
+        "caption": "Unidades finales por artículo — las barras ámbar están en o por debajo de su umbral de reabastecimiento."
+      },
+      "compositionDiagram": {
+        "title": "Vendido vs. Restante",
+        "caption": "Cómo se dividen las unidades compradas de cada artículo entre vendidas y aún en existencia.",
+        "soldLabel": "Unidades Vendidas",
+        "endingLabel": "Unidades Finales"
       }
     },
     "break-even-calculator": {

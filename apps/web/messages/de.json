@@ -14162,7 +14162,9 @@
               "meaning": "Die den in dieser Periode tatsächlich verkauften Einheiten zugeordneten Kosten – sie mindern direkt den ausgewiesenen Gewinn, und ihre Höhe hängt davon ab, welche Bewertungsmethode verwendet wird."
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Fügen Sie mindestens einen Artikel mit einer Einkaufscharge hinzu und klicken Sie auf Wert Berechnen, um Ihre Ergebnisse zu sehen.",
+        "sentence": "{count} Artikel bewertet, mit einem FIFO-Endbestandswert von {value}."
       },
       "form": {
         "inputTitle": "Ihr Lagerbestand",
@@ -14179,7 +14181,8 @@
         "removeBatch": "Charge entfernen",
         "addItem": "Artikel hinzufügen",
         "removeItem": "Artikel entfernen",
-        "calculate": "Wert berechnen"
+        "calculate": "Wert berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "title": "Lagerbericht",
@@ -14189,7 +14192,14 @@
         "endingUnits": "Endbestand",
         "methodFifo": "FIFO",
         "methodLifo": "LIFO",
-        "methodWeightedAverage": "Gew. Durchschn."
+        "methodWeightedAverage": "Gew. Durchschn.",
+        "stockHealth": {
+          "good": "Gut",
+          "fair": "Mäßig",
+          "atRisk": "Gefährdet",
+          "caption": "Anteil der Artikel über ihrem Nachbestellungsschwellenwert."
+        },
+        "unitsSuffix": "Einheiten"
       },
       "errors": {
         "emptyItems": "Fügen Sie mindestens einen Artikel hinzu.",
@@ -14313,7 +14323,79 @@
           "note": "Eine grundlegende Studie darüber, wie die Wahl zwischen Lagerbewertungsmethoden ausgewiesene Erträge, Steuerpflicht und lagerbezogene Managemententscheidungen beeinflusst – derselbe FIFO/LIFO/gewichteter-Durchschnitt-Kompromiss, den dieses Tool berechnet.",
           "url": "https://doi.org/10.2307/2490341",
           "readOriginal": "Originalstudie lesen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Bewertung in diesem Tool basiert auf einer Einkaufshistorie und einer Verkaufszahl, pro Artikel.",
+          "items": [
+            {
+              "name": "Einkaufschargen",
+              "description": "Jede gekaufte Bestandscharge, mit Menge und Stückkosten, zuerst nach ältestem sortiert — die Schichten, aus denen FIFO und LIFO in entgegengesetzter Richtung abbauen."
+            },
+            {
+              "name": "Verkaufte Einheiten",
+              "description": "Wie viele Einheiten diese Periode den Bestand verlassen haben, abgebaut gegen die Chargen entsprechend der gewählten Bewertungsmethode."
+            },
+            {
+              "name": "Nachbestellungsschwelle",
+              "description": "Ein optionaler Bestandswert, unterhalb dessen der Artikel im Bericht als niedriger Bestand markiert wird."
+            },
+            {
+              "name": "Endbestand",
+              "description": "Gekaufte Einheiten minus verkaufte Einheiten — die physisch verbleibende Menge, gleich über alle drei Bewertungsmethoden hinweg."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Die Wahl und Anwendung einer Bewertungsmethode ist überall relevant, wo ein Unternehmen physischen Bestand verfolgt, der zu unterschiedlichen Preisen gekauft wurde.",
+          "items": [
+            {
+              "title": "Finanzberichterstattung und Steuern",
+              "description": "Die gewählte Bewertungsmethode ändert direkt die ausgewiesenen Herstellungskosten und den Endbestandswert, was das zu versteuernde Einkommen beeinflusst."
+            },
+            {
+              "title": "Einzelhandels- und E-Commerce-Bestandsverwaltung",
+              "description": "Die Verfolgung des Endbestandswerts und die Markierung von Artikeln mit niedrigem Bestand unterstützt Nachbestellungsentscheidungen und Cashflow-Planung."
+            },
+            {
+              "title": "Rohstoffe in der Fertigung",
+              "description": "Zu unterschiedlichen Zeiten und Preisen gekaufte Materialien werden auf die gleiche Weise bewertet wie Fertigwarenbestand, mit derselben FIFO/LIFO/gewichteter-Durchschnitt-Logik."
+            },
+            {
+              "title": "Vergleich der Auswirkung der Bewertungsmethode",
+              "description": "Dieselbe Einkaufshistorie durch alle drei Methoden nebeneinander laufen zu lassen zeigt genau, wie stark eine Bewertungswahl die ausgewiesenen Zahlen ändern würde."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@example.com",
+        "contactPhonePlaceholder": "z. B. +49 151 12345678",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Stadt"
+      },
+      "stockLevelDiagram": {
+        "title": "Lagerbestände nach Artikel",
+        "caption": "Endbestand pro Artikel — bernsteinfarbene Balken liegen auf oder unter ihrem Nachbestellungsschwellenwert."
+      },
+      "compositionDiagram": {
+        "title": "Verkauft vs. Verbleibend",
+        "caption": "Wie sich die gekauften Einheiten jedes Artikels zwischen verkauft und noch vorrätig aufteilen.",
+        "soldLabel": "Verkaufte Einheiten",
+        "endingLabel": "Endbestand"
       }
     },
     "break-even-calculator": {
