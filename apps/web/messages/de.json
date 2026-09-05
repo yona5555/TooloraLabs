@@ -15553,6 +15553,197 @@
           "readOriginal": "Euklids Elemente, Buch VII lesen"
         }
       }
+    },
+    "triangle-calculator": {
+      "title": "Dreiecksrechner",
+      "description": "Löse jedes Dreieck aus drei bekannten Seiten oder Winkeln (SSS, SAS, ASA oder AAS) — die übrigen Seiten, Winkel, die Fläche und der Umfang werden sofort abgeleitet.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Bekannte Werte",
+        "fields": {
+          "sideA": "Seite a",
+          "sideB": "Seite b",
+          "sideC": "Seite c",
+          "includedAngleC": "Eingeschlossener Winkel C",
+          "angleA": "Winkel A",
+          "includedSideC": "Eingeschlossene Seite c",
+          "angleB": "Winkel B",
+          "oppositeSideA": "Seite a (gegenüber A)"
+        },
+        "hints": {
+          "sss": "Gib alle drei Seitenlängen ein.",
+          "sas": "Gib zwei Seiten und den Winkel zwischen ihnen ein (in Grad).",
+          "asa": "Gib zwei Winkel und die Seite zwischen ihnen ein (Winkel in Grad).",
+          "aas": "Gib zwei Winkel und eine nicht dazwischen liegende Seite ein (Winkel in Grad)."
+        }
+      },
+      "modes": {
+        "groupLabel": "Bekannte Werte",
+        "sss": "SSS",
+        "sas": "SAS",
+        "asa": "ASA",
+        "aas": "AAS"
+      },
+      "diagram": {
+        "ariaLabel": "Ein maßstabsgetreu aus den berechneten Seitenlängen gezeichnetes Dreieck mit den Eckpunkten A, B und C"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "sideA": "Seite a",
+        "sideB": "Seite b",
+        "sideC": "Seite c",
+        "angleA": "Winkel A",
+        "angleB": "Winkel B",
+        "angleC": "Winkel C",
+        "area": "Fläche",
+        "perimeter": "Umfang",
+        "invalidSides": "Gib positive Seitenlängen ein, um ein Ergebnis zu sehen.",
+        "invalidAngles": "Gib positive Winkel ein, um ein Ergebnis zu sehen.",
+        "triangleInequalityViolated": "Diese Seiten können kein Dreieck bilden — die Summe zweier beliebiger Seiten muss größer sein als die dritte.",
+        "angleSumInvalid": "Diese Winkel können kein Dreieck bilden — die Summe der beiden gegebenen Winkel muss kleiner als 180° sein."
+      },
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Jeder Lösungsmodus reduziert sich auf den Kosinussatz oder den Sinussatz."
+      },
+      "education": {
+        "intro": {
+          "title": "Dreiecksberechnung verstehen",
+          "paragraph1": "Ein Dreieck hat sechs Größen — drei Seiten und drei Winkel —, aber nur drei davon, in der richtigen Kombination, legen die gesamte Form fest. Ein Dreieck zu \"lösen\" bedeutet, von drei bekannten Größen auszugehen und die übrigen drei sowie abgeleitete Größen wie Fläche und Umfang zu bestimmen. Die vier Kombinationen, die ein Dreieck immer eindeutig festlegen, sind unter den Kürzeln SSS (drei Seiten), SAS (zwei Seiten und der eingeschlossene Winkel), ASA (zwei Winkel und die eingeschlossene Seite) und AAS (zwei Winkel und eine nicht eingeschlossene Seite) bekannt.",
+          "paragraph2": "Zwei klassische Sätze leisten die gesamte Arbeit: der Kosinussatz, der den Satz des Pythagoras auf beliebige Dreiecke verallgemeinert (nicht nur rechtwinklige) und immer dann verwendet wird, wenn alle Seiten oder ein eingeschlossener Winkel bekannt sind, und der Sinussatz, der jede Seite mit dem Sinus des gegenüberliegenden Winkels verknüpft und verwendet wird, wenn bereits zwei Winkel bekannt sind. Dieser Rechner wählt den zur Eingabekombination passenden Satz aus und prüft das Ergebnis anschließend anhand der Dreiecksungleichung (zwei beliebige Seiten müssen zusammen größer sein als die dritte) und der Tatsache, dass die Winkel jedes Dreiecks immer genau 180° ergeben."
+        },
+        "modes": {
+          "title": "Die vier Lösungsmodi",
+          "intro": "Jeder Modus entspricht einer anderen Kombination von drei bekannten Größen.",
+          "items": [
+            {
+              "title": "SSS — Seite-Seite-Seite",
+              "description": "Alle drei Seitenlängen sind bekannt. Der Kosinussatz leitet nacheinander jeden Winkel aus den drei Seiten ab; dies ist der einzige Modus, bei dem Größe und Form des Dreiecks allein durch die Eingabe vollständig festgelegt sind."
+            },
+            {
+              "title": "SAS — Seite-Winkel-Seite",
+              "description": "Zwei Seiten und der zwischen ihnen eingeschlossene Winkel sind bekannt. Der Kosinussatz bestimmt die dritte Seite direkt aus diesem Winkel, danach werden die übrigen Winkel wie bei SSS abgeleitet."
+            },
+            {
+              "title": "ASA — Winkel-Seite-Winkel",
+              "description": "Zwei Winkel und die zwischen ihnen liegende Seite sind bekannt. Der dritte Winkel ergibt sich sofort, da alle drei zusammen 180° ergeben müssen, und der Sinussatz skaliert dann die beiden anderen Seiten passend zur bekannten Seite."
+            },
+            {
+              "title": "AAS — Winkel-Winkel-Seite",
+              "description": "Zwei Winkel und eine nicht dazwischen liegende Seite sind bekannt. Sobald der dritte Winkel gefunden ist, wird dies genau wie ASA gelöst (dasselbe Sinussatz-Verhältnis gilt), weshalb AAS und ASA immer dieselbe Art eindeutiger Lösung liefern."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Einige klassische Dreiecke, gelöst genau so, wie dieses Tool sie löst.",
+          "columnCalculation": "Bekannte Werte",
+          "columnResult": "Gelöstes Dreieck",
+          "rows": [
+            {
+              "calculation": "SSS: a=3, b=4, c=5",
+              "result": "A≈36,87°, B≈53,13°, C=90°, Fläche=6"
+            },
+            {
+              "calculation": "SSS: a=5, b=5, c=5",
+              "result": "A=B=C=60°, Fläche≈10,83"
+            },
+            {
+              "calculation": "SAS: a=3, C=90°, b=4",
+              "result": "c=5, A≈36,87°, B≈53,13°"
+            },
+            {
+              "calculation": "ASA: A≈36,87°, c=5, B≈53,13°",
+              "result": "C=90°, a=3, b=4"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum brauche ich genau drei Größen, nicht zwei oder vier?",
+              "answer": "Zwei Größen lassen die Form eines Dreiecks mehrdeutig — unendlich viele Dreiecke können sich zum Beispiel nur zwei Seitenlängen teilen. Vier oder mehr Größen sind meist überbestimmt und können widersprüchlich sein (sie beschreiben möglicherweise gar kein reales Dreieck). Drei Größen, in einer der vier gültigen Kombinationen, sind notwendig und ausreichend, um ein Dreieck eindeutig festzulegen."
+            },
+            {
+              "question": "Was passiert, wenn ich Werte eingebe, die kein reales Dreieck bilden können?",
+              "answer": "Dieses Tool prüft zwei feste Regeln: die Dreiecksungleichung (die Summe zweier beliebiger Seiten muss die dritte übersteigen — sonst sind die Seiten zu kurz, um sich zu treffen und die Form zu schließen) und die Winkelsummenregel (die drei Winkel eines Dreiecks müssen sich immer zu genau 180° addieren). Wird eine der Regeln verletzt, meldet das Tool, dass kein gültiges Dreieck existiert, statt ein irreführendes Ergebnis zu zeigen."
+            },
+            {
+              "question": "Warum unterstützt dieses Tool nicht SSW (Seite-Seite-Winkel)?",
+              "answer": "SSW wird bewusst ausgelassen, da es mehrdeutig ist: Anders als die anderen vier Kombinationen kann ein gegebener Satz aus zwei Seiten und einem nicht eingeschlossenen Winkel null, ein oder zwei verschiedenen gültigen Dreiecken entsprechen (der bekannte \"mehrdeutige Fall\" der Trigonometrie), sodass er nicht zuverlässig eine einzige Antwort liefert, wie es SSS, SAS, ASA und AAS tun."
+            },
+            {
+              "question": "Wie genau sind die Ergebnisse?",
+              "answer": "Die Berechnungen verwenden Gleitkomma-Trigonometrie mit doppelter Genauigkeit, präzise auf etwa 15 signifikante Stellen — weit mehr, als jede physische Messung je benötigen würde. Die Ergebnisse werden zur Anzeige gerundet, aber die zugrunde liegenden Werte für Fläche, Umfang und Winkel werden mit voller Präzision berechnet."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Methoden zur Dreiecksberechnung gehen auf die babylonische und ägyptische Landvermessung zurück, doch ihre systematische mathematische Behandlung begann mit griechischen Geometern, insbesondere mit Euklids \"Elementen\" (ca. 300 v. Chr.), die die Winkelsummen- und Seitenlängenbeziehungen bewiesen, auf denen dieses Tool beruht. Der Sinus- und der Kosinussatz selbst wurden von Mathematikern und Astronomen des islamischen Goldenen Zeitalters weiter ausgearbeitet — insbesondere von Al-Battani und Nasir al-Din al-Tusi im 9. bis 13. Jahrhundert —, die für astronomische Berechnungen präzise Lösungen sphärischer und ebener Dreiecke benötigten und als Erste die Trigonometrie als von der Astronomie unabhängiges Fachgebiet behandelten."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Dieselben Dreiecksbeziehungen bilden heute die Grundlage der GPS-Ortung (die die Position eines Empfängers aus Satellitenentfernungen trianguliert), der Computergrafik (wo jede 3D-Oberfläche durch ein Netz von Dreiecken angenähert wird, das effizient vermessen und gerendert werden muss) und des Bauingenieurwesens, wo dreieckige Fachwerke genau mit diesen Seiten- und Winkelbeziehungen analysiert werden, weil das Dreieck das einzige Vieleck ist, dessen Form allein durch seine Seitenlängen starr festgelegt ist."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Dreiecksgeometrie und Trigonometrie gehören zur Geometrie, einem Teilgebiet der Mathematik. Hier sind die weltweit fünf besten Fakultäten für Mathematik im QS World University Ranking by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit Rang 1 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm der Fakultät für Mathematik."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit Rang 2 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit Rang 3 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit Rang 4 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit Rang 5 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Heath, T. L. (Übers.). (1908). The Thirteen Books of Euclid's Elements, Bd. 1, Buch I (2. Aufl.). Cambridge University Press.",
+          "note": "Euklids ursprüngliche Sätze zur Dreieckskongruenz und zum Winkelsummensatz — die grundlegenden Ergebnisse, die garantieren, dass drei bekannte Größen ein Dreieck eindeutig bestimmen können.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Euklids Elemente, Buch I lesen"
+        }
+      }
     }
   },
   "toolPage": {

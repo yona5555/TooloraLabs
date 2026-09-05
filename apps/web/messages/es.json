@@ -15553,6 +15553,197 @@
           "readOriginal": "Leer los Elementos de Euclides, Libro VII"
         }
       }
+    },
+    "triangle-calculator": {
+      "title": "Calculadora de Triángulos",
+      "description": "Resuelve cualquier triángulo a partir de tres lados o ángulos conocidos (SSS, SAS, ASA o AAS), con los lados, ángulos, área y perímetro restantes derivados al instante.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Valores conocidos",
+        "fields": {
+          "sideA": "Lado a",
+          "sideB": "Lado b",
+          "sideC": "Lado c",
+          "includedAngleC": "Ángulo incluido C",
+          "angleA": "Ángulo A",
+          "includedSideC": "Lado incluido c",
+          "angleB": "Ángulo B",
+          "oppositeSideA": "Lado a (opuesto a A)"
+        },
+        "hints": {
+          "sss": "Introduce las tres longitudes de los lados.",
+          "sas": "Introduce dos lados y el ángulo entre ellos (en grados).",
+          "asa": "Introduce dos ángulos y el lado entre ellos (ángulos en grados).",
+          "aas": "Introduce dos ángulos y un lado no situado entre ellos (ángulos en grados)."
+        }
+      },
+      "modes": {
+        "groupLabel": "Valores conocidos",
+        "sss": "SSS",
+        "sas": "SAS",
+        "asa": "ASA",
+        "aas": "AAS"
+      },
+      "diagram": {
+        "ariaLabel": "Un triángulo dibujado a escala a partir de las longitudes de lado calculadas, con los vértices etiquetados A, B y C"
+      },
+      "result": {
+        "heading": "Resultado",
+        "sideA": "Lado a",
+        "sideB": "Lado b",
+        "sideC": "Lado c",
+        "angleA": "Ángulo A",
+        "angleB": "Ángulo B",
+        "angleC": "Ángulo C",
+        "area": "Área",
+        "perimeter": "Perímetro",
+        "invalidSides": "Introduce longitudes de lado positivas para ver un resultado.",
+        "invalidAngles": "Introduce ángulos positivos para ver un resultado.",
+        "triangleInequalityViolated": "Estos lados no pueden formar un triángulo — la suma de dos lados cualesquiera debe superar al tercero.",
+        "angleSumInvalid": "Estos ángulos no pueden formar un triángulo — la suma de los dos ángulos dados debe ser menor que 180°."
+      },
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Todo modo de resolución de triángulos se reduce a la ley del coseno o a la ley del seno."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la resolución de triángulos",
+          "paragraph1": "Un triángulo tiene seis medidas — tres lados y tres ángulos —, pero solo tres de ellas, en la combinación correcta, bastan para fijar toda la forma. \"Resolver\" un triángulo significa partir de tres medidas conocidas y derivar las otras tres, junto con cantidades derivadas como el área y el perímetro. Las cuatro combinaciones que siempre determinan un triángulo único se conocen con las siglas SSS (tres lados), SAS (dos lados y el ángulo entre ellos), ASA (dos ángulos y el lado entre ellos) y AAS (dos ángulos y un lado no situado entre ellos).",
+          "paragraph2": "Dos relaciones clásicas hacen todo el trabajo: la ley del coseno, que generaliza el teorema de Pitágoras a cualquier triángulo (no solo a los rectángulos) y se usa siempre que se conoce un conjunto completo de lados o un ángulo incluido, y la ley del seno, que relaciona cada lado con el seno de su ángulo opuesto y se usa cuando ya se conocen dos ángulos. Esta calculadora elige la ley que corresponde a la combinación de datos que proporcionas, y luego comprueba el resultado contra la desigualdad triangular (la suma de dos lados cualesquiera debe superar al tercero) y el hecho de que los ángulos de todo triángulo suman siempre exactamente 180°."
+        },
+        "modes": {
+          "title": "Los cuatro modos de resolución",
+          "intro": "Cada modo corresponde a una combinación diferente de tres medidas conocidas.",
+          "items": [
+            {
+              "title": "SSS — Lado-Lado-Lado",
+              "description": "Se conocen las tres longitudes de los lados. La ley del coseno deriva cada ángulo a partir de los tres lados; este es el único modo en el que el tamaño y la forma del triángulo quedan completamente fijados solo por los datos de entrada."
+            },
+            {
+              "title": "SAS — Lado-Ángulo-Lado",
+              "description": "Se conocen dos lados y el ángulo comprendido entre ellos. La ley del coseno halla el tercer lado directamente a partir de ese ángulo, tras lo cual los demás ángulos se derivan igual que en SSS."
+            },
+            {
+              "title": "ASA — Ángulo-Lado-Ángulo",
+              "description": "Se conocen dos ángulos y el lado entre ellos. El tercer ángulo se obtiene de inmediato ya que los tres deben sumar 180°, y la ley del seno escala luego los otros dos lados para que coincidan con el lado conocido."
+            },
+            {
+              "title": "AAS — Ángulo-Ángulo-Lado",
+              "description": "Se conocen dos ángulos y un lado que no está entre ellos. Esto se resuelve igual que ASA una vez hallado el tercer ángulo (se aplica la misma proporción de la ley del seno), por lo que AAS y ASA siempre producen el mismo tipo de solución única."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos triángulos clásicos resueltos de la misma forma en que esta herramienta los resuelve.",
+          "columnCalculation": "Valores conocidos",
+          "columnResult": "Triángulo resuelto",
+          "rows": [
+            {
+              "calculation": "SSS: a=3, b=4, c=5",
+              "result": "A≈36,87°, B≈53,13°, C=90°, Área=6"
+            },
+            {
+              "calculation": "SSS: a=5, b=5, c=5",
+              "result": "A=B=C=60°, Área≈10,83"
+            },
+            {
+              "calculation": "SAS: a=3, C=90°, b=4",
+              "result": "c=5, A≈36,87°, B≈53,13°"
+            },
+            {
+              "calculation": "ASA: A≈36,87°, c=5, B≈53,13°",
+              "result": "C=90°, a=3, b=4"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué necesito exactamente tres medidas, no dos o cuatro?",
+              "answer": "Dos medidas dejan ambigua la forma de un triángulo — infinitos triángulos pueden compartir, por ejemplo, solo dos longitudes de lado. Cuatro o más medidas suelen estar sobredeterminadas y pueden ser incoherentes entre sí (puede que no describan ningún triángulo real). Tres medidas, en una de las cuatro combinaciones válidas, son necesarias y suficientes para fijar un triángulo de forma única."
+            },
+            {
+              "question": "¿Qué pasa si introduzco valores que no pueden formar un triángulo real?",
+              "answer": "Esta herramienta comprueba dos reglas estrictas: la desigualdad triangular (la suma de dos lados cualesquiera debe superar al tercero — de lo contrario los lados son demasiado cortos para encontrarse y cerrar la forma) y la regla de la suma de ángulos (los tres ángulos de un triángulo siempre deben sumar exactamente 180°). Si se incumple alguna regla, se informa de que no existe un triángulo válido en lugar de mostrar un resultado engañoso."
+            },
+            {
+              "question": "¿Por qué esta herramienta no admite LLA (lado-lado-ángulo)?",
+              "answer": "LLA se excluye deliberadamente porque es ambiguo: a diferencia de las otras cuatro combinaciones, un conjunto dado de dos lados y un ángulo no incluido puede corresponder a cero, uno o dos triángulos válidos distintos (el conocido \"caso ambiguo\" de la trigonometría), por lo que no determina de forma fiable una única respuesta como sí lo hacen SSS, SAS, ASA y AAS."
+            },
+            {
+              "question": "¿Qué tan precisos son los resultados?",
+              "answer": "Los cálculos usan trigonometría de coma flotante de doble precisión, exacta hasta unos 15 dígitos significativos — mucho más de lo que cualquier medición física podría necesitar. Los resultados se redondean para mostrarlos, pero los valores subyacentes de área, perímetro y ángulos se calculan con precisión completa."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "Los métodos de resolución de triángulos se remontan a la topografía babilónica y egipcia antiguas, pero su tratamiento matemático sistemático comenzó con los geómetras griegos, especialmente los \"Elementos\" de Euclides (c. 300 a. C.), que demostraron las relaciones de suma de ángulos y longitudes de lado en las que se basa esta herramienta. La ley del seno y la ley del coseno se desarrollaron más plenamente gracias a matemáticos y astrónomos de la Edad de Oro islámica —en particular Al-Battani y Nasir al-Din al-Tusi, entre los siglos IX y XIII—, que necesitaban soluciones precisas de triángulos esféricos y planos para cálculos astronómicos y fueron los primeros en tratar la trigonometría como una materia independiente de la astronomía."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "Las mismas relaciones de resolución de triángulos sustentan hoy el posicionamiento GPS (que triangula la ubicación de un receptor a partir de las distancias a los satélites), los gráficos por computadora (donde toda superficie 3D se aproxima mediante una malla de triángulos que debe medirse y renderizarse eficientemente) y la ingeniería estructural, donde las armaduras triangulares se analizan usando exactamente estas relaciones entre lados y ángulos, porque el triángulo es el único polígono cuya forma queda rígidamente fijada solo por las longitudes de sus lados."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La geometría de triángulos y la trigonometría se estudian dentro de la geometría, una rama de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT)",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Harvard",
+                "note": "Nº 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Stanford",
+                "note": "Nº 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Heath, T. L. (Trad.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Libro I (2ª ed.). Cambridge University Press.",
+          "note": "Las proposiciones originales de Euclides sobre la congruencia de triángulos y el teorema de la suma de ángulos — los resultados fundamentales que garantizan que tres medidas conocidas puedan determinar un triángulo de forma única.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Leer los Elementos de Euclides, Libro I"
+        }
+      }
     }
   },
   "toolPage": {

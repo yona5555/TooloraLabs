@@ -15553,6 +15553,197 @@
           "readOriginal": "Lire les Éléments d'Euclide, Livre VII"
         }
       }
+    },
+    "triangle-calculator": {
+      "title": "Calculatrice de Triangle",
+      "description": "Résolvez n'importe quel triangle à partir de trois côtés ou angles connus (CCC, CAC, ACA ou AAC), avec les côtés, angles, aire et périmètre restants dérivés instantanément.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Valeurs connues",
+        "fields": {
+          "sideA": "Côté a",
+          "sideB": "Côté b",
+          "sideC": "Côté c",
+          "includedAngleC": "Angle inclus C",
+          "angleA": "Angle A",
+          "includedSideC": "Côté inclus c",
+          "angleB": "Angle B",
+          "oppositeSideA": "Côté a (opposé à A)"
+        },
+        "hints": {
+          "sss": "Saisissez les trois longueurs des côtés.",
+          "sas": "Saisissez deux côtés et l'angle entre eux (en degrés).",
+          "asa": "Saisissez deux angles et le côté entre eux (angles en degrés).",
+          "aas": "Saisissez deux angles et un côté non compris entre eux (angles en degrés)."
+        }
+      },
+      "modes": {
+        "groupLabel": "Valeurs connues",
+        "sss": "CCC",
+        "sas": "CAC",
+        "asa": "ACA",
+        "aas": "AAC"
+      },
+      "diagram": {
+        "ariaLabel": "Un triangle dessiné à l'échelle à partir des longueurs de côtés calculées, avec les sommets étiquetés A, B et C"
+      },
+      "result": {
+        "heading": "Résultat",
+        "sideA": "Côté a",
+        "sideB": "Côté b",
+        "sideC": "Côté c",
+        "angleA": "Angle A",
+        "angleB": "Angle B",
+        "angleC": "Angle C",
+        "area": "Aire",
+        "perimeter": "Périmètre",
+        "invalidSides": "Saisissez des longueurs de côtés positives pour voir un résultat.",
+        "invalidAngles": "Saisissez des angles positifs pour voir un résultat.",
+        "triangleInequalityViolated": "Ces côtés ne peuvent pas former un triangle — la somme de deux côtés quelconques doit dépasser le troisième.",
+        "angleSumInvalid": "Ces angles ne peuvent pas former un triangle — la somme des deux angles donnés doit être inférieure à 180°."
+      },
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Chaque mode de résolution de triangle se ramène à la loi des cosinus ou à la loi des sinus."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la résolution de triangles",
+          "paragraph1": "Un triangle possède six mesures — trois côtés et trois angles —, mais seules trois d'entre elles, dans la bonne combinaison, suffisent à fixer toute la forme. \"Résoudre\" un triangle signifie partir de trois mesures connues et en déduire les trois autres, ainsi que des grandeurs dérivées comme l'aire et le périmètre. Les quatre combinaisons qui déterminent toujours un triangle unique sont connues sous les abréviations CCC (trois côtés), CAC (deux côtés et l'angle entre eux), ACA (deux angles et le côté entre eux) et AAC (deux angles et un côté non compris entre eux).",
+          "paragraph2": "Deux relations classiques font tout le travail : la loi des cosinus, qui généralise le théorème de Pythagore à tout triangle (pas seulement les triangles rectangles) et s'utilise dès qu'un ensemble complet de côtés ou un angle inclus est connu, et la loi des sinus, qui relie chaque côté au sinus de son angle opposé et s'utilise lorsque deux angles sont déjà connus. Cette calculatrice choisit la loi adaptée à la combinaison de données fournies, puis vérifie le résultat par rapport à l'inégalité triangulaire (deux côtés quelconques doivent dépasser le troisième) et au fait que les angles de tout triangle totalisent toujours exactement 180°."
+        },
+        "modes": {
+          "title": "Les quatre modes de résolution",
+          "intro": "Chaque mode correspond à une combinaison différente de trois mesures connues.",
+          "items": [
+            {
+              "title": "CCC — Côté-Côté-Côté",
+              "description": "Les trois longueurs de côtés sont connues. La loi des cosinus dérive tour à tour chaque angle à partir des trois côtés ; c'est le seul mode où la taille et la forme du triangle sont entièrement fixées par les seules données saisies."
+            },
+            {
+              "title": "CAC — Côté-Angle-Côté",
+              "description": "Deux côtés et l'angle compris entre eux sont connus. La loi des cosinus trouve directement le troisième côté à partir de cet angle, après quoi les angles restants se dérivent comme en CCC."
+            },
+            {
+              "title": "ACA — Angle-Côté-Angle",
+              "description": "Deux angles et le côté entre eux sont connus. Le troisième angle en découle immédiatement puisque les trois doivent totaliser 180°, et la loi des sinus met ensuite à l'échelle les deux autres côtés pour correspondre au côté connu."
+            },
+            {
+              "title": "AAC — Angle-Angle-Côté",
+              "description": "Deux angles et un côté non compris entre eux sont connus. Cela se résout de la même façon qu'ACA une fois le troisième angle trouvé (le même rapport de la loi des sinus s'applique), ce qui explique pourquoi AAC et ACA produisent toujours le même type de solution unique."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques triangles classiques résolus de la même manière que cet outil les résout.",
+          "columnCalculation": "Valeurs connues",
+          "columnResult": "Triangle résolu",
+          "rows": [
+            {
+              "calculation": "CCC : a=3, b=4, c=5",
+              "result": "A≈36,87°, B≈53,13°, C=90°, Aire=6"
+            },
+            {
+              "calculation": "CCC : a=5, b=5, c=5",
+              "result": "A=B=C=60°, Aire≈10,83"
+            },
+            {
+              "calculation": "CAC : a=3, C=90°, b=4",
+              "result": "c=5, A≈36,87°, B≈53,13°"
+            },
+            {
+              "calculation": "ACA : A≈36,87°, c=5, B≈53,13°",
+              "result": "C=90°, a=3, b=4"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi ai-je besoin d'exactement trois mesures, pas deux ni quatre ?",
+              "answer": "Deux mesures laissent la forme d'un triangle ambiguë — une infinité de triangles peuvent partager, par exemple, seulement deux longueurs de côtés. Quatre mesures ou plus sont généralement surdéterminées et peuvent être incohérentes entre elles (elles pourraient ne décrire aucun triangle réel). Trois mesures, dans l'une des quatre combinaisons valides, sont à la fois nécessaires et suffisantes pour fixer un triangle de façon unique."
+            },
+            {
+              "question": "Que se passe-t-il si je saisis des valeurs qui ne peuvent pas former un triangle réel ?",
+              "answer": "Cet outil vérifie deux règles strictes : l'inégalité triangulaire (la somme de deux côtés quelconques doit dépasser le troisième — sinon les côtés sont trop courts pour se rejoindre et fermer la forme) et la règle de la somme des angles (les trois angles d'un triangle doivent toujours totaliser exactement 180°). Si l'une de ces règles est enfreinte, l'outil signale qu'aucun triangle valide n'existe plutôt que d'afficher un résultat trompeur."
+            },
+            {
+              "question": "Pourquoi cet outil ne prend-il pas en charge CCA (côté-côté-angle) ?",
+              "answer": "CCA est délibérément exclu car il est ambigu : contrairement aux quatre autres combinaisons, un ensemble donné de deux côtés et d'un angle non inclus peut correspondre à zéro, un ou deux triangles valides différents (le fameux \"cas ambigu\" de la trigonométrie), et ne détermine donc pas de façon fiable une réponse unique comme le font CCC, CAC, ACA et AAC."
+            },
+            {
+              "question": "Quelle est la précision des résultats ?",
+              "answer": "Les calculs utilisent une trigonométrie en virgule flottante double précision, exacte à environ 15 chiffres significatifs — bien plus que ce dont toute mesure physique pourrait avoir besoin. Les résultats sont arrondis pour l'affichage, mais les valeurs sous-jacentes de l'aire, du périmètre et des angles sont calculées avec une précision complète."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "Les méthodes de résolution de triangles remontent à l'arpentage babylonien et égyptien antique, mais leur traitement mathématique systématique a commencé avec les géomètres grecs, en particulier les \"Éléments\" d'Euclide (vers 300 av. J.-C.), qui ont démontré les relations de somme des angles et de longueurs de côtés sur lesquelles repose cet outil. La loi des sinus et la loi des cosinus elles-mêmes ont été développées plus complètement par les mathématiciens et astronomes de l'âge d'or islamique — notamment Al-Battani et Nasir al-Din al-Tusi aux 9e-13e siècles —, qui avaient besoin de solutions précises de triangles sphériques et plans pour des calculs astronomiques et furent les premiers à traiter la trigonométrie comme une discipline indépendante de l'astronomie."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Ces mêmes relations de résolution de triangles sous-tendent aujourd'hui le positionnement GPS (qui triangule la position d'un récepteur à partir des distances aux satellites), l'infographie (où chaque surface 3D est approximée par un maillage de triangles qui doit être mesuré et rendu efficacement) et le génie civil, où les fermes triangulaires sont analysées en utilisant exactement ces relations entre côtés et angles, car le triangle est le seul polygone dont la forme est rigidement fixée par ses seules longueurs de côtés."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La géométrie des triangles et la trigonométrie relèvent de la géométrie, une branche des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Heath, T. L. (Trad.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Livre I (2e éd.). Cambridge University Press.",
+          "note": "Les propositions originales d'Euclide sur la congruence des triangles et le théorème de la somme des angles — les résultats fondamentaux qui garantissent que trois mesures connues peuvent déterminer un triangle de façon unique.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Lire les Éléments d'Euclide, Livre I"
+        }
+      }
     }
   },
   "toolPage": {

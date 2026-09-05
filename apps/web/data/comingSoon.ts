@@ -34,7 +34,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "bill-split-calculator", icon: "Receipt" },
     { id: "zakat-calculator", icon: "HandCoins" },
     { id: "advanced-temperature-converter", icon: "Thermometer" },
-    { id: "triangle-angle-calculator", icon: "Compass" },
     { id: "stacked-discount-calculator", icon: "Layers" },
     { id: "text-logo-generator", icon: "Sparkles" },
     { id: "speech-word-count-calculator", icon: "Mic" },

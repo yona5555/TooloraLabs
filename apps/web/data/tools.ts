@@ -710,6 +710,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "triangle-calculator",
+    title: "Triangle Calculator",
+    category: "math",
+    description:
+      "Solve any triangle from three known sides or angles (SSS, SAS, ASA, or AAS), with the remaining sides, angles, area, and perimeter derived instantly.",
+    featured: false,
+    keywords: [
+      "triangle calculator",
+      "triangle solver",
+      "law of cosines",
+      "law of sines",
+      "triangle angle calculator",
+      "sss sas asa aas",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

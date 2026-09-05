@@ -15549,6 +15549,197 @@
           "readOriginal": "Read the Original Translation"
         }
       }
+    },
+    "triangle-calculator": {
+      "title": "Triangle Calculator",
+      "description": "Solve any triangle from three known sides or angles (SSS, SAS, ASA, or AAS), with the remaining sides, angles, area, and perimeter derived instantly.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Known Values",
+        "fields": {
+          "sideA": "Side a",
+          "sideB": "Side b",
+          "sideC": "Side c",
+          "includedAngleC": "Included Angle C",
+          "angleA": "Angle A",
+          "includedSideC": "Included Side c",
+          "angleB": "Angle B",
+          "oppositeSideA": "Side a (opposite A)"
+        },
+        "hints": {
+          "sss": "Enter all three side lengths.",
+          "sas": "Enter two sides and the angle between them (in degrees).",
+          "asa": "Enter two angles and the side between them (in degrees for angles).",
+          "aas": "Enter two angles and a side not between them (in degrees for angles)."
+        }
+      },
+      "modes": {
+        "groupLabel": "Known values",
+        "sss": "SSS",
+        "sas": "SAS",
+        "asa": "ASA",
+        "aas": "AAS"
+      },
+      "diagram": {
+        "ariaLabel": "A triangle drawn to scale from the solved side lengths, with vertices labeled A, B, and C"
+      },
+      "result": {
+        "heading": "Result",
+        "sideA": "Side a",
+        "sideB": "Side b",
+        "sideC": "Side c",
+        "angleA": "Angle A",
+        "angleB": "Angle B",
+        "angleC": "Angle C",
+        "area": "Area",
+        "perimeter": "Perimeter",
+        "invalidSides": "Enter positive side lengths to see a result.",
+        "invalidAngles": "Enter positive angles to see a result.",
+        "triangleInequalityViolated": "These sides can't form a triangle — any two sides must add up to more than the third.",
+        "angleSumInvalid": "These angles can't form a triangle — the two given angles must add up to less than 180°."
+      },
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Every triangle-solving mode reduces to the Law of Cosines or the Law of Sines."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Triangle Solving",
+          "paragraph1": "A triangle has six measurements — three sides and three angles — but only three of them, in the right combination, are needed to pin down the whole shape. \"Solving\" a triangle means starting from three known measurements and deriving the other three, along with derived quantities like area and perimeter. The four combinations that always determine a unique triangle are known by the shorthand SSS (three sides), SAS (two sides and the angle between them), ASA (two angles and the side between them), and AAS (two angles and a side not between them).",
+          "paragraph2": "Two classical relationships do all the work: the Law of Cosines, which generalizes the Pythagorean theorem to any triangle (not just right triangles) and is used whenever a full set of sides or an included angle is known, and the Law of Sines, which relates each side to the sine of its opposite angle and is used whenever two angles are already known. This calculator picks whichever law fits the combination of inputs you provide, then checks the result against the triangle inequality (any two sides must outweigh the third) and the fact that every triangle's angles sum to exactly 180°."
+        },
+        "modes": {
+          "title": "The Four Solving Modes",
+          "intro": "Each mode corresponds to a different combination of three known measurements.",
+          "items": [
+            {
+              "title": "SSS — Side-Side-Side",
+              "description": "All three side lengths are known. The Law of Cosines derives each angle in turn from the three sides; this is the only mode where the triangle's size and shape are both fully fixed by the input alone."
+            },
+            {
+              "title": "SAS — Side-Angle-Side",
+              "description": "Two sides and the angle trapped between them are known. The Law of Cosines finds the third side directly from that angle, after which the remaining angles follow the same way as in SSS."
+            },
+            {
+              "title": "ASA — Angle-Side-Angle",
+              "description": "Two angles and the side between them are known. The third angle follows immediately since all three must sum to 180°, and the Law of Sines then scales the other two sides to match the known side."
+            },
+            {
+              "title": "AAS — Angle-Angle-Side",
+              "description": "Two angles and a side that is not between them are known. This solves identically to ASA once the third angle is found (the same Law of Sines ratio applies), which is why AAS and ASA always produce the same kind of unique solution."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few classic triangles solved the same way this tool solves them.",
+          "columnCalculation": "Known Values",
+          "columnResult": "Solved Triangle",
+          "rows": [
+            {
+              "calculation": "SSS: a=3, b=4, c=5",
+              "result": "A≈36.87°, B≈53.13°, C=90°, Area=6"
+            },
+            {
+              "calculation": "SSS: a=5, b=5, c=5",
+              "result": "A=B=C=60°, Area≈10.83"
+            },
+            {
+              "calculation": "SAS: a=3, C=90°, b=4",
+              "result": "c=5, A≈36.87°, B≈53.13°"
+            },
+            {
+              "calculation": "ASA: A≈36.87°, c=5, B≈53.13°",
+              "result": "C=90°, a=3, b=4"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why do I need exactly three measurements, not two or four?",
+              "answer": "Two measurements leave a triangle's shape ambiguous — infinitely many triangles can share, say, just two side lengths. Four or more measurements are usually over-determined and can be mutually inconsistent (they might not describe any real triangle at all). Three measurements, in one of the four valid combinations, are both necessary and sufficient to fix a triangle uniquely."
+            },
+            {
+              "question": "What happens if I enter values that can't form a real triangle?",
+              "answer": "This tool checks two hard rules: the triangle inequality (the sum of any two sides must exceed the third — otherwise the sides are too short to meet and close the shape) and the angle sum rule (a triangle's three angles must always add up to exactly 180°). If either rule is broken, it reports that no valid triangle exists rather than showing a misleading result."
+            },
+            {
+              "question": "Why doesn't this tool support SSA (side-side-angle)?",
+              "answer": "SSA is deliberately left out because it's ambiguous: unlike the other four combinations, a given set of two sides and a non-included angle can correspond to zero, one, or two different valid triangles (the well-known \"ambiguous case\" from trigonometry), so it doesn't reliably determine a single answer the way SSS, SAS, ASA, and AAS do."
+            },
+            {
+              "question": "How accurate are the results?",
+              "answer": "Calculations use double-precision floating-point trigonometry, accurate to roughly 15 significant digits — far beyond what any physical measurement could need. Results are rounded for display, but the underlying area, perimeter, and angle values are computed at full precision."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Triangle-solving methods trace back to ancient Babylonian and Egyptian surveying, but their systematic mathematical treatment began with Greek geometers, especially Euclid's Elements (c. 300 BCE), which proved the angle-sum and side-length relationships this tool relies on. The Law of Sines and Law of Cosines themselves were developed more fully by Islamic Golden Age mathematicians and astronomers — notably Al-Battani and Nasir al-Din al-Tusi in the 9th–13th centuries — who needed precise spherical and planar triangle solutions for astronomical calculations and were the first to treat trigonometry as a subject independent of astronomy."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "The same triangle-solving relationships now underpin GPS positioning (which triangulates a receiver's location from satellite distances), computer graphics (where every 3D surface is approximated by a mesh of triangles that must be measured and rendered efficiently), and structural engineering, where triangular trusses are analyzed using exactly these side-and-angle relationships because a triangle is the only polygon whose shape is rigidly fixed by its side lengths alone."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Triangle geometry and trigonometry are studied within geometry, part of the broader field of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 1, Book I (2nd ed.). Cambridge University Press.",
+          "note": "Euclid's original propositions on triangle congruence and the angle-sum theorem, the foundational results that guarantee three known measurements can uniquely determine a triangle.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
+          "readOriginal": "Read Euclid's Elements, Book I"
+        }
+      }
     }
   },
   "toolPage": {
