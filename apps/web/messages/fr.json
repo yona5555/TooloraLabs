@@ -15744,6 +15744,195 @@
           "readOriginal": "Lire les Éléments d'Euclide, Livre I"
         }
       }
+    },
+    "probability-calculator": {
+      "title": "Calculatrice de Probabilité",
+      "description": "Calculez la probabilité et les cotes d'un événement unique, ou combinez deux événements avec les règles ET, OU et de probabilité conditionnelle.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "modes": {
+        "groupLabel": "Type de calcul",
+        "labels": {
+          "single": "Événement unique",
+          "and": "A et B",
+          "or": "A ou B",
+          "conditional": "A sachant B"
+        }
+      },
+      "form": {
+        "inputTitle": "Valeurs",
+        "fields": {
+          "favorable": "Résultats favorables",
+          "total": "Total des résultats possibles",
+          "pA": "P(A) %",
+          "pB": "P(B) %",
+          "pBoth": "P(A et B) %",
+          "pAAndB": "P(A et B) %"
+        },
+        "hints": {
+          "single": "Saisissez le nombre de résultats favorables et le nombre total de résultats également probables.",
+          "and": "Saisissez la probabilité individuelle de chaque événement indépendant, en pourcentage.",
+          "or": "Saisissez la probabilité de chaque événement et la probabilité qu'ils se produisent ensemble (0 s'ils sont mutuellement exclusifs), en pourcentages.",
+          "conditional": "Saisissez la probabilité que les deux événements se produisent ensemble et la probabilité de la condition B, en pourcentages."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Une barre horizontale remplie jusqu'au pourcentage de probabilité calculé"
+      },
+      "result": {
+        "heading": "Résultat",
+        "probability": "Probabilité",
+        "percentage": "En pourcentage",
+        "oddsFor": "Cotes pour",
+        "oddsAgainst": "Cotes contre",
+        "invalid": {
+          "single": "Les résultats favorables doivent être un nombre de 0 jusqu'au total, et le total doit être supérieur à 0.",
+          "and": "Saisissez deux probabilités comprises entre 0 % et 100 %.",
+          "or": "Saisissez des probabilités entre 0 % et 100 %, avec P(A et B) ne dépassant pas le plus petit de P(A) et P(B).",
+          "conditional": "Saisissez des probabilités entre 0 % et 100 %, avec P(A et B) ne dépassant pas P(B), et P(B) supérieur à 0 %."
+        }
+      },
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Chaque règle de probabilité repose sur le même rapport de base favorable/total."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la probabilité",
+          "paragraph1": "La probabilité mesure à quel point un événement est susceptible de se produire, exprimée par un nombre compris entre 0 (impossible) et 1 (certain) — ou, de manière équivalente, entre 0 % et 100 %. Pour un événement unique aux résultats également probables, la probabilité est simplement le nombre de résultats favorables divisé par le nombre total de résultats possibles : obtenir un 3 en lançant un dé équilibré à six faces a une probabilité de 1/6, car exactement une des six faces également probables est un 3.",
+          "paragraph2": "Les situations réelles impliquent généralement plus d'un événement, d'où l'intérêt des règles de combinaison des probabilités. La règle ET multiplie deux probabilités indépendantes pour trouver la chance que les deux se produisent. La règle OU additionne deux probabilités et soustrait leur chevauchement, afin que les résultats partagés ne soient pas comptés deux fois. La probabilité conditionnelle restreint le champ aux seuls résultats où une condition est déjà connue comme vraie, puis demande quelle est la probabilité de l'événement au sein de cet ensemble plus restreint. Cette calculatrice met en œuvre ces quatre relations directement à partir de leurs définitions standards."
+        },
+        "modes": {
+          "title": "Les quatre modes de calcul",
+          "intro": "Chaque mode répond à un type différent de question de probabilité.",
+          "items": [
+            {
+              "title": "Événement unique",
+              "description": "Le cas le plus simple : étant donné un nombre de résultats favorables sur un nombre total de résultats également probables, ce mode renvoie la probabilité, sa forme en pourcentage, ainsi que la notation équivalente en cotes de pari (pour et contre)."
+            },
+            {
+              "title": "A et B (événements indépendants)",
+              "description": "Trouve la probabilité que deux événements indépendants — où le résultat de l'un n'affecte pas l'autre — se produisent tous les deux, en multipliant leurs probabilités individuelles. L'indépendance est l'hypothèse clé : cette règle ne s'applique pas aux événements qui s'influencent mutuellement."
+            },
+            {
+              "title": "A ou B (union d'événements)",
+              "description": "Trouve la probabilité qu'au moins l'un des deux événements se produise, en additionnant leurs probabilités individuelles et en soustrayant la probabilité qu'ils se produisent ensemble (pour éviter de compter deux fois le chevauchement). Saisir 0 pour la probabilité \"les deux\" traite correctement les événements mutuellement exclusifs qui ne peuvent jamais se produire en même temps."
+            },
+            {
+              "title": "A sachant B (probabilité conditionnelle)",
+              "description": "Trouve la probabilité que l'événement A se produise, restreinte aux seuls scénarios où l'événement B est déjà connu pour s'être produit, en divisant la probabilité que les deux se produisent ensemble par la probabilité de B seul. C'est la base mathématique permettant de mettre à jour une estimation de probabilité à la lumière de nouvelles informations."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques questions de probabilité classiques, calculées de la même manière que cet outil les calcule.",
+          "columnCalculation": "Question",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "Obtenir un 3 avec un dé équilibré (1 résultat sur 6)",
+              "result": "P = 1/6 ≈ 16,67 %"
+            },
+            {
+              "calculation": "Deux lancers de pièce tombent tous deux sur face",
+              "result": "P(A et B) = 0,5 × 0,5 = 25 %"
+            },
+            {
+              "calculation": "Tirer un roi ou un cœur d'un jeu de cartes",
+              "result": "P(A ou B) = 4/52 + 13/52 − 1/52 ≈ 30,77 %"
+            },
+            {
+              "calculation": "P(pluie et froid) = 20 %, P(froid) = 40 %",
+              "result": "P(pluie | froid) = 20 % / 40 % = 50 %"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la différence entre probabilité et cotes (odds) ?",
+              "answer": "La probabilité est le nombre de résultats favorables divisé par le total des résultats (une fraction du tout, de 0 à 1). Les cotes comparent directement les résultats favorables aux résultats défavorables (un rapport entre les deux, comme \"5 contre 1\"). Elles décrivent la même chance sous-jacente, mais dans deux formats différents couramment utilisés — le mode événement unique de cette calculatrice affiche les deux."
+            },
+            {
+              "question": "Pourquoi la règle ET ne fonctionne-t-elle que pour des événements indépendants ?",
+              "answer": "La règle ET (multiplication des probabilités) suppose que le résultat d'un événement ne modifie en rien la probabilité de l'autre. Si les événements sont dépendants — comme tirer deux cartes d'un jeu sans remise, où le premier tirage change ce qui reste pour le second —, cette simple multiplication donne une réponse erronée, et la probabilité conditionnelle doit être utilisée à la place."
+            },
+            {
+              "question": "Pourquoi soustrais-je le chevauchement dans la règle OU ?",
+              "answer": "Additionner directement deux probabilités compte deux fois tout résultat qui satisfait les deux événements — une fois dans chaque probabilité. Soustraire la probabilité que les deux se produisent ensemble supprime ce double comptage, laissant la probabilité correcte qu'au moins l'un des deux événements se produise."
+            },
+            {
+              "question": "Une probabilité peut-elle être négative ou supérieure à 100 % ?",
+              "answer": "Non. La probabilité est fondamentalement bornée entre 0 % (l'événement ne se produit jamais) et 100 % (l'événement se produit toujours), puisqu'elle représente une fraction de tous les résultats possibles. Cette calculatrice rejette comme invalide toute saisie qui produirait une valeur en dehors de cette plage."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "L'étude mathématique formelle de la probabilité a commencé en 1654 avec une correspondance entre les mathématiciens français Blaise Pascal et Pierre de Fermat, suscitée par la question d'un joueur sur la manière de répartir équitablement les mises d'une partie de dés interrompue. Leur échange de lettres a élaboré les premières règles rigoureuses de combinaison des probabilités d'événements distincts — posant les bases, des décennies plus tard, de ce que Pierre-Simon Laplace formaliserait sous le nom de théorie classique des probabilités dans son traité de 1812 \"Théorie Analytique des Probabilités\"."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "En 1933, le mathématicien soviétique Andreï Kolmogorov a placé la probabilité sur une base axiomatique rigoureuse à l'aide de la théorie de la mesure, unifiant des siècles de résultats distincts (y compris les règles ET, OU et conditionnelle mises en œuvre par cette calculatrice) en un cadre unique et cohérent encore utilisé aujourd'hui. Les applications modernes reposant sur ces mêmes règles vont des tests de diagnostic médical (interpréter ce qu'implique réellement un résultat positif via la probabilité conditionnelle) aux classificateurs d'apprentissage automatique, en passant par la tarification du risque en assurance et les méthodes statistiques derrière presque toute la recherche scientifique."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La théorie des probabilités est étudiée au sein des statistiques et des mathématiques, une partie du domaine plus large des sciences mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Laplace, P.-S. (1812). Théorie Analytique des Probabilités. Courcier.",
+          "note": "Le traité fondateur de Laplace formalisant la théorie classique des probabilités, y compris les règles de combinaison des probabilités d'événements indépendants et conditionnels que cette calculatrice met en œuvre.",
+          "url": "https://archive.org/details/thoriean00lapl",
+          "readOriginal": "Lire le traité original de Laplace"
+        }
+      }
     }
   },
   "toolPage": {

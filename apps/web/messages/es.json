@@ -15744,6 +15744,195 @@
           "readOriginal": "Leer los Elementos de Euclides, Libro I"
         }
       }
+    },
+    "probability-calculator": {
+      "title": "Calculadora de Probabilidad",
+      "description": "Calcula la probabilidad y las probabilidades (odds) de un solo evento, o combina dos eventos con las reglas Y, O y de probabilidad condicional.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "modes": {
+        "groupLabel": "Tipo de cálculo",
+        "labels": {
+          "single": "Evento único",
+          "and": "A y B",
+          "or": "A o B",
+          "conditional": "A dado B"
+        }
+      },
+      "form": {
+        "inputTitle": "Valores",
+        "fields": {
+          "favorable": "Resultados favorables",
+          "total": "Total de resultados posibles",
+          "pA": "P(A) %",
+          "pB": "P(B) %",
+          "pBoth": "P(A y B) %",
+          "pAAndB": "P(A y B) %"
+        },
+        "hints": {
+          "single": "Introduce el número de resultados favorables y el número total de resultados igualmente probables.",
+          "and": "Introduce la probabilidad individual de cada evento independiente, en porcentaje.",
+          "or": "Introduce la probabilidad de cada evento y la probabilidad de que ambos ocurran juntos (0 si son mutuamente excluyentes), en porcentajes.",
+          "conditional": "Introduce la probabilidad de que ambos eventos ocurran juntos y la probabilidad de la condición B, en porcentajes."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Una barra horizontal rellena hasta el porcentaje de probabilidad calculado"
+      },
+      "result": {
+        "heading": "Resultado",
+        "probability": "Probabilidad",
+        "percentage": "Como porcentaje",
+        "oddsFor": "Probabilidades a favor",
+        "oddsAgainst": "Probabilidades en contra",
+        "invalid": {
+          "single": "Los resultados favorables deben ser un número de 0 hasta el total, y el total debe ser mayor que 0.",
+          "and": "Introduce dos probabilidades entre 0% y 100%.",
+          "or": "Introduce probabilidades entre 0% y 100%, con P(A y B) no mayor que el menor de P(A) y P(B).",
+          "conditional": "Introduce probabilidades entre 0% y 100%, con P(A y B) no mayor que P(B), y P(B) mayor que 0%."
+        }
+      },
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Toda regla de probabilidad se basa en la misma proporción básica de favorables sobre total."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la probabilidad",
+          "paragraph1": "La probabilidad mide qué tan probable es que ocurra un evento, expresada como un número entre 0 (imposible) y 1 (seguro) — o, de forma equivalente, entre 0% y 100%. Para un solo evento con resultados igualmente probables, la probabilidad es simplemente el número de resultados favorables dividido entre el número total de resultados posibles: sacar un 3 con un dado justo de seis caras tiene una probabilidad de 1/6, porque exactamente una de las seis caras igualmente probables es un 3.",
+          "paragraph2": "Las situaciones reales suelen involucrar más de un evento, y ahí es donde entran las reglas para combinar probabilidades. La regla Y multiplica dos probabilidades independientes para hallar la posibilidad de que ambas ocurran. La regla O suma dos probabilidades y resta su superposición, para que los resultados compartidos no se cuenten dos veces. La probabilidad condicional reduce el campo solo a los resultados en los que ya se sabe que una condición es verdadera, y luego pregunta qué tan probable es el evento dentro de ese conjunto más reducido. Esta calculadora implementa las cuatro relaciones directamente a partir de sus definiciones estándar."
+        },
+        "modes": {
+          "title": "Los cuatro modos de cálculo",
+          "intro": "Cada modo responde a un tipo diferente de pregunta de probabilidad.",
+          "items": [
+            {
+              "title": "Evento único",
+              "description": "El caso más simple: dado un número de resultados favorables sobre un número total de resultados igualmente probables, este modo devuelve la probabilidad, su forma porcentual y la notación equivalente de probabilidades de apuesta (a favor y en contra)."
+            },
+            {
+              "title": "A y B (eventos independientes)",
+              "description": "Halla la probabilidad de que ocurran dos eventos independientes —donde el resultado de uno no afecta al otro— multiplicando sus probabilidades individuales. La independencia es la suposición clave: esta regla no se aplica a eventos que se influyen entre sí."
+            },
+            {
+              "title": "A o B (unión de eventos)",
+              "description": "Halla la probabilidad de que ocurra al menos uno de dos eventos, sumando sus probabilidades individuales y restando la probabilidad de que ambos ocurran juntos (para evitar contar la superposición dos veces). Introducir 0 en la probabilidad de \"ambos\" maneja correctamente los eventos mutuamente excluyentes que nunca pueden ocurrir al mismo tiempo."
+            },
+            {
+              "title": "A dado B (probabilidad condicional)",
+              "description": "Halla la probabilidad de que ocurra el evento A, restringida solo a los escenarios en los que ya se sabe que ocurrió el evento B, dividiendo la probabilidad de que ambos ocurran juntos entre la probabilidad de B por sí sola. Esta es la base matemática para actualizar una estimación de probabilidad a la luz de nueva información."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunas preguntas clásicas de probabilidad, calculadas de la misma forma en que esta herramienta las calcula.",
+          "columnCalculation": "Pregunta",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "calculation": "Sacar un 3 con un dado justo (1 de 6 resultados)",
+              "result": "P = 1/6 ≈ 16,67%"
+            },
+            {
+              "calculation": "Dos lanzamientos de moneda caen ambos en cara",
+              "result": "P(A y B) = 0,5 × 0,5 = 25%"
+            },
+            {
+              "calculation": "Sacar un rey o un corazón de una baraja",
+              "result": "P(A o B) = 4/52 + 13/52 − 1/52 ≈ 30,77%"
+            },
+            {
+              "calculation": "P(lluvia y frío) = 20%, P(frío) = 40%",
+              "result": "P(lluvia | frío) = 20% / 40% = 50%"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Cuál es la diferencia entre probabilidad y probabilidades (odds)?",
+              "answer": "La probabilidad es el número de resultados favorables dividido entre el total de resultados (una fracción del todo, de 0 a 1). Las odds comparan directamente los resultados favorables con los desfavorables (una razón entre ambos, como \"5 a 1\"). Ambas describen la misma posibilidad subyacente, solo en dos formatos diferentes de uso común — el modo de evento único de esta calculadora muestra ambas."
+            },
+            {
+              "question": "¿Por qué la regla Y solo funciona para eventos independientes?",
+              "answer": "La regla Y (multiplicar probabilidades) supone que el resultado de un evento no cambia en absoluto la probabilidad del otro. Si los eventos son dependientes —como sacar dos cartas de una baraja sin reemplazo, donde la primera extracción cambia lo que queda para la segunda—, esta simple multiplicación da una respuesta incorrecta, y en su lugar debe usarse la probabilidad condicional."
+            },
+            {
+              "question": "¿Por qué resto la superposición en la regla O?",
+              "answer": "Sumar directamente dos probabilidades cuenta dos veces cualquier resultado que satisfaga ambos eventos —una vez en cada probabilidad—. Restar la probabilidad de que ambos ocurran juntos elimina ese doble conteo, dejando la probabilidad correcta de que ocurra al menos uno de los dos eventos."
+            },
+            {
+              "question": "¿Puede una probabilidad ser negativa o mayor que el 100%?",
+              "answer": "No. La probabilidad está fundamentalmente acotada entre 0% (el evento nunca ocurre) y 100% (el evento siempre ocurre), ya que representa una fracción de todos los resultados posibles. Esta calculadora rechaza como no válida cualquier entrada que produjera un valor fuera de ese rango."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "El estudio matemático formal de la probabilidad comenzó en 1654 con una correspondencia entre los matemáticos franceses Blaise Pascal y Pierre de Fermat, motivada por la pregunta de un jugador sobre cómo dividir de forma justa las apuestas de un juego de dados interrumpido. Su intercambio de cartas desarrolló las primeras reglas rigurosas para combinar probabilidades de eventos distintos, sentando las bases, décadas después, de lo que Pierre-Simon Laplace formalizaría como teoría clásica de la probabilidad en su tratado de 1812 \"Théorie Analytique des Probabilités\"."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "En 1933, el matemático soviético Andréi Kolmogórov colocó la probabilidad sobre una base axiomática rigurosa usando la teoría de la medida, unificando siglos de resultados independientes (incluidas las reglas Y, O y condicional que implementa esta calculadora) en un único marco coherente que aún se usa hoy. Las aplicaciones modernas basadas en estas mismas reglas abarcan las pruebas de diagnóstico médico (interpretar lo que realmente implica un resultado positivo mediante la probabilidad condicional), los clasificadores de aprendizaje automático, la fijación de precios de riesgo en seguros y los métodos estadísticos detrás de casi toda la investigación científica."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La teoría de la probabilidad se estudia dentro de la estadística y las matemáticas, parte del campo más amplio de las ciencias matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT)",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Harvard",
+                "note": "Nº 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Stanford",
+                "note": "Nº 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Laplace, P.-S. (1812). Théorie Analytique des Probabilités. Courcier.",
+          "note": "El tratado fundacional de Laplace que formalizó la teoría clásica de la probabilidad, incluidas las reglas para combinar las probabilidades de eventos independientes y condicionales que implementa esta calculadora.",
+          "url": "https://archive.org/details/thoriean00lapl",
+          "readOriginal": "Leer el tratado original de Laplace"
+        }
+      }
     }
   },
   "toolPage": {

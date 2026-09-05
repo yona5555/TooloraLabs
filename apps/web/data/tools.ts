@@ -726,6 +726,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "probability-calculator",
+    title: "Probability Calculator",
+    category: "math",
+    description:
+      "Calculate single-event probability and odds, or combine two events with AND, OR, and conditional probability rules.",
+    featured: false,
+    keywords: [
+      "probability calculator",
+      "odds calculator",
+      "conditional probability",
+      "and or probability",
+      "chance calculator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

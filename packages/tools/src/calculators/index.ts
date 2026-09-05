@@ -59,3 +59,4 @@ export * from "./RandomNumberGenerator";
 export * from "./StandardDeviationCalculator";
 export * from "./CircleCalculator";
 export * from "./TriangleCalculator";
+export * from "./ProbabilityCalculator";

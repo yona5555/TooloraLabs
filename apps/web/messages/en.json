@@ -15740,6 +15740,195 @@
           "readOriginal": "Read Euclid's Elements, Book I"
         }
       }
+    },
+    "probability-calculator": {
+      "title": "Probability Calculator",
+      "description": "Calculate single-event probability and odds, or combine two events with AND, OR, and conditional probability rules.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "modes": {
+        "groupLabel": "Calculation type",
+        "labels": {
+          "single": "Single Event",
+          "and": "A and B",
+          "or": "A or B",
+          "conditional": "A given B"
+        }
+      },
+      "form": {
+        "inputTitle": "Values",
+        "fields": {
+          "favorable": "Favorable Outcomes",
+          "total": "Total Possible Outcomes",
+          "pA": "P(A) %",
+          "pB": "P(B) %",
+          "pBoth": "P(A and B) %",
+          "pAAndB": "P(A and B) %"
+        },
+        "hints": {
+          "single": "Enter the number of favorable outcomes and the total number of equally likely outcomes.",
+          "and": "Enter the individual probability of each independent event, as a percentage.",
+          "or": "Enter each event's probability and the probability both occur together (0 if mutually exclusive), as percentages.",
+          "conditional": "Enter the probability both events occur together and the probability of the condition B, as percentages."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "A horizontal meter filled to the calculated probability percentage"
+      },
+      "result": {
+        "heading": "Result",
+        "probability": "Probability",
+        "percentage": "As a Percentage",
+        "oddsFor": "Odds For",
+        "oddsAgainst": "Odds Against",
+        "invalid": {
+          "single": "Favorable outcomes must be a number from 0 up to the total, and the total must be greater than 0.",
+          "and": "Enter two probabilities between 0% and 100%.",
+          "or": "Enter probabilities between 0% and 100%, with P(A and B) no greater than the smaller of P(A) and P(B).",
+          "conditional": "Enter probabilities between 0% and 100%, with P(A and B) no greater than P(B), and P(B) greater than 0%."
+        }
+      },
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Every probability rule builds on the same basic favorable-over-total ratio."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Probability",
+          "paragraph1": "Probability measures how likely an event is to happen, expressed as a number between 0 (impossible) and 1 (certain) — or, equivalently, between 0% and 100%. For a single event with equally likely outcomes, probability is simply the count of favorable outcomes divided by the total count of possible outcomes: rolling a 3 on a fair six-sided die has probability 1/6, because exactly one of the six equally likely faces is a 3.",
+          "paragraph2": "Real situations usually involve more than one event, which is where the rules for combining probabilities come in. The AND rule multiplies two independent probabilities together to find the chance both happen. The OR rule adds two probabilities and subtracts their overlap, so shared outcomes aren't counted twice. Conditional probability narrows the field to only the outcomes where a condition is already known to be true, then asks how likely the event is within that narrower set. This calculator implements all four relationships directly from their standard definitions."
+        },
+        "modes": {
+          "title": "The Four Calculation Modes",
+          "intro": "Each mode answers a different kind of probability question.",
+          "items": [
+            {
+              "title": "Single Event",
+              "description": "The simplest case: given a number of favorable outcomes out of a total number of equally likely outcomes, this mode returns the probability, its percentage form, and the equivalent betting-odds notation (odds for and against)."
+            },
+            {
+              "title": "A and B (Independent Events)",
+              "description": "Finds the probability that two independent events — where one event's outcome has no effect on the other's — both occur, by multiplying their individual probabilities together. Independence is the key assumption: this rule does not apply to events that influence each other."
+            },
+            {
+              "title": "A or B (Union of Events)",
+              "description": "Finds the probability that at least one of two events occurs, by adding their individual probabilities and subtracting the probability that both occur together (to avoid double-counting the overlap). Entering 0 for the \"both\" probability correctly handles mutually exclusive events that can never happen at the same time."
+            },
+            {
+              "title": "A given B (Conditional Probability)",
+              "description": "Finds the probability of event A occurring, restricted to only the scenarios where event B is already known to have happened, by dividing the probability of both occurring together by the probability of B alone. This is the mathematical basis for updating a probability estimate in light of new information."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few classic probability questions, computed the same way this tool computes them.",
+          "columnCalculation": "Question",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "Rolling a 3 on a fair die (1 of 6 outcomes)",
+              "result": "P = 1/6 ≈ 16.67%"
+            },
+            {
+              "calculation": "Two coin flips both landing heads",
+              "result": "P(A and B) = 0.5 × 0.5 = 25%"
+            },
+            {
+              "calculation": "Drawing a king or a heart from a deck",
+              "result": "P(A or B) = 4/52 + 13/52 − 1/52 ≈ 30.77%"
+            },
+            {
+              "calculation": "P(rain and cold) = 20%, P(cold) = 40%",
+              "result": "P(rain | cold) = 20% / 40% = 50%"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What's the difference between probability and odds?",
+              "answer": "Probability is favorable outcomes divided by total outcomes (a fraction of the whole, from 0 to 1). Odds compare favorable outcomes directly to unfavorable outcomes (a ratio of the two, like \"5 to 1\"). They describe the same underlying chance, just in two different, commonly used formats — this calculator's single-event mode reports both."
+            },
+            {
+              "question": "Why does the AND rule only work for independent events?",
+              "answer": "The AND rule (multiplying probabilities) assumes one event's outcome doesn't change the other event's probability at all. If the events are dependent — like drawing two cards from a deck without replacement, where the first draw changes what's left for the second — this simple multiplication gives the wrong answer, and conditional probability must be used instead."
+            },
+            {
+              "question": "Why do I subtract the overlap in the OR rule?",
+              "answer": "Adding two probabilities directly counts any outcome that satisfies both events twice — once in each probability. Subtracting the probability that both happen together removes that double-count, leaving the correct probability that at least one of the two events occurs."
+            },
+            {
+              "question": "Can a probability be negative or greater than 100%?",
+              "answer": "No. Probability is fundamentally bounded between 0% (the event never happens) and 100% (the event always happens), since it represents a fraction of all possible outcomes. This calculator rejects any input that would produce a value outside that range as invalid."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The formal mathematical study of probability began in 1654 with a correspondence between French mathematicians Blaise Pascal and Pierre de Fermat, prompted by a gambler's question about how to fairly divide the stakes of an interrupted dice game. Their exchange of letters worked out the first rigorous rules for combining probabilities of separate events — laying the foundation, decades later, for what Pierre-Simon Laplace would formalize as classical probability theory in his 1812 treatise \"Théorie Analytique des Probabilités.\""
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "In 1933, Soviet mathematician Andrey Kolmogorov placed probability on a rigorous axiomatic foundation using measure theory, unifying centuries of separate results (including the AND, OR, and conditional rules this calculator implements) into a single consistent framework still used today. Modern applications built on these same rules span medical diagnostic testing (interpreting what a positive test result actually implies via conditional probability), machine learning classifiers, insurance risk pricing, and the statistical methods behind nearly all scientific research."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Probability theory is studied within statistics and mathematics, part of the broader field of mathematical sciences. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Laplace, P.-S. (1812). Théorie Analytique des Probabilités. Courcier.",
+          "note": "Laplace's foundational treatise formalizing classical probability theory, including the rules for combining the probabilities of independent and conditional events that this calculator implements.",
+          "url": "https://archive.org/details/thoriean00lapl",
+          "readOriginal": "Read Laplace's Original Treatise"
+        }
+      }
     }
   },
   "toolPage": {
