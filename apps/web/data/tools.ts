@@ -694,6 +694,188 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "gcf-lcm-calculator",
+    title: "GCF & LCM Calculator",
+    category: "math",
+    description:
+      "Find the greatest common factor and least common multiple of two or more numbers, with prime factorizations shown.",
+    featured: false,
+    keywords: [
+      "gcf calculator",
+      "lcm calculator",
+      "greatest common factor",
+      "least common multiple",
+      "prime factorization",
+      "gcd calculator",
+    ],
+  },
+  {
+    slug: "triangle-calculator",
+    title: "Triangle Calculator",
+    category: "math",
+    description:
+      "Solve any triangle from three known sides or angles (SSS, SAS, ASA, or AAS), with the remaining sides, angles, area, and perimeter derived instantly.",
+    featured: false,
+    keywords: [
+      "triangle calculator",
+      "triangle solver",
+      "law of cosines",
+      "law of sines",
+      "triangle angle calculator",
+      "sss sas asa aas",
+    ],
+  },
+  {
+    slug: "probability-calculator",
+    title: "Probability Calculator",
+    category: "math",
+    description:
+      "Calculate single-event probability and odds, or combine two events with AND, OR, and conditional probability rules.",
+    featured: false,
+    keywords: [
+      "probability calculator",
+      "odds calculator",
+      "conditional probability",
+      "and or probability",
+      "chance calculator",
+    ],
+  },
+  {
+    slug: "mean-median-mode-range-calculator",
+    title: "Mean, Median, Mode & Range Calculator",
+    category: "math",
+    description:
+      "Calculate the mean, median, mode, and range of a data set, with a sorted breakdown and a dot-plot diagram showing how each measure relates to the data.",
+    featured: false,
+    keywords: [
+      "mean median mode calculator",
+      "statistics calculator",
+      "average calculator",
+      "range calculator",
+      "central tendency",
+    ],
+  },
+  {
+    slug: "target-heart-rate-calculator",
+    title: "Target Heart Rate Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate your maximum heart rate and five training zones from your age, optionally refined with your resting heart rate using the Karvonen method.",
+    featured: false,
+    keywords: [
+      "target heart rate calculator",
+      "max heart rate calculator",
+      "heart rate zones",
+      "karvonen method",
+      "training zones",
+    ],
+  },
+  {
+    slug: "sleep-calculator",
+    title: "Sleep Calculator",
+    category: "health-fitness",
+    description:
+      "Find the best bedtimes or wake-up times based on 90-minute sleep cycles, so you wake up between cycles instead of mid-cycle.",
+    featured: false,
+    keywords: [
+      "sleep calculator",
+      "sleep cycle calculator",
+      "bedtime calculator",
+      "wake up time calculator",
+      "90 minute sleep cycle",
+    ],
+  },
+  {
+    slug: "body-fat-calculator",
+    title: "Body Fat Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate body fat percentage from neck, waist, and (for women) hip circumference using the US Navy method, with a category scale showing where your result falls.",
+    featured: false,
+    keywords: [
+      "body fat calculator",
+      "body fat percentage",
+      "us navy body fat formula",
+      "body composition calculator",
+      "navy method",
+    ],
+  },
+  {
+    slug: "due-date-calculator",
+    title: "Due Date Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate your due date from your last menstrual period, conception date, or IVF transfer date, with current gestational age and trimester.",
+    featured: false,
+    keywords: [
+      "due date calculator",
+      "pregnancy due date",
+      "naegele's rule",
+      "gestational age calculator",
+      "ivf due date",
+    ],
+  },
+  {
+    slug: "ovulation-calculator",
+    title: "Ovulation Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate your next ovulation date and fertile window from your last period and average cycle length, projected across the next three cycles.",
+    featured: false,
+    keywords: [
+      "ovulation calculator",
+      "fertile window calculator",
+      "ovulation date",
+      "fertility calculator",
+      "cycle tracker",
+    ],
+  },
+  {
+    slug: "pregnancy-calculator",
+    title: "Pregnancy Calculator",
+    category: "health-fitness",
+    description:
+      "Track your pregnancy week by week from your last menstrual period, with your current trimester, due date, and a size-comparison milestone for this week.",
+    featured: false,
+    keywords: [
+      "pregnancy calculator",
+      "pregnancy week by week",
+      "pregnancy tracker",
+      "gestational age",
+      "baby size by week",
+    ],
+  },
+  {
+    slug: "macro-calculator",
+    title: "Macro Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate your daily protein, carbohydrate, and fat targets in grams and calories from your total daily calories and goal.",
+    featured: false,
+    keywords: [
+      "macro calculator",
+      "macronutrient calculator",
+      "protein carbs fat calculator",
+      "diet macros",
+      "iifym calculator",
+    ],
+  },
+  {
+    slug: "bmr-calculator",
+    title: "BMR Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate your Basal Metabolic Rate using the Harris-Benedict (1919) and Mifflin-St Jeor (1990) equations, with a side-by-side comparison.",
+    featured: false,
+    keywords: [
+      "bmr calculator",
+      "basal metabolic rate",
+      "harris benedict equation",
+      "mifflin st jeor equation",
+      "resting metabolic rate",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
@@ -923,6 +1105,68 @@ export const tools: Tool[] = [
       "meeting planner",
       "utc converter",
       "daylight saving time",
+    ],
+  },
+  {
+    slug: "pace-calculator",
+    title: "Pace Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate running, walking, or cycling pace, time, or distance, log splits across multiple checkpoints, convert pace between km and miles, and predict a finish time for any race distance.",
+    featured: false,
+    keywords: [
+      "pace calculator",
+      "running pace",
+      "minutes per mile",
+      "minutes per km",
+      "finish time predictor",
+      "race pace chart",
+    ],
+  },
+  {
+    slug: "random-number-generator",
+    title: "Random Number Generator",
+    category: "math",
+    description:
+      "Generate random integers within a range you choose, with control over how many results, whether duplicates are allowed, and the sort order of the output.",
+    featured: false,
+    keywords: [
+      "random number generator",
+      "rng",
+      "random integer generator",
+      "lottery number generator",
+      "dice roller",
+      "number picker",
+    ],
+  },
+  {
+    slug: "standard-deviation-calculator",
+    title: "Standard Deviation Calculator",
+    category: "math",
+    description:
+      "Calculate the population and sample standard deviation, variance, and mean of a data set, with every subtract-square-average step shown.",
+    featured: false,
+    keywords: [
+      "standard deviation calculator",
+      "variance calculator",
+      "population standard deviation",
+      "sample standard deviation",
+      "statistics calculator",
+    ],
+  },
+  {
+    slug: "circle-calculator",
+    title: "Circle Calculator",
+    category: "math",
+    description:
+      "Calculate a circle's radius, diameter, circumference, and area from any one of the four, with a live interactive diagram scaled to your result.",
+    featured: false,
+    keywords: [
+      "circle calculator",
+      "radius calculator",
+      "circumference calculator",
+      "area of a circle",
+      "diameter calculator",
     ],
   },
 ];

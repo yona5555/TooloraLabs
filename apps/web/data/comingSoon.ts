@@ -9,20 +9,17 @@ export const comingSoonPhaseIds: ComingSoonPhaseId[] = ["phase-1", "phase-2", "p
 
 export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
   "phase-1": [
-    { id: "pregnancy-calendar", icon: "Baby" },
     { id: "random-name-generator", icon: "Wand2" },
     { id: "golden-ratio-calculator", icon: "Infinity" },
     { id: "reading-time-calculator", icon: "BookOpen" },
     { id: "cagr-calculator", icon: "TrendingUp" },
     { id: "personal-budget-calculator", icon: "Wallet" },
     { id: "present-future-value-calculator", icon: "LineChart" },
-    { id: "body-fat-calculator", icon: "Activity" },
     { id: "calories-burned-calculator", icon: "Flame" },
     { id: "passphrase-generator", icon: "KeyRound" },
     { id: "roman-numeral-converter", icon: "Hash" },
     { id: "quadratic-equation-calculator", icon: "Sigma" },
     { id: "trigonometry-calculator", icon: "Triangle" },
-    { id: "gcf-lcm-calculator", icon: "Divide" },
     { id: "qr-generator-extended", icon: "QrCode" },
     { id: "countdown-to-event-calculator", icon: "CalendarClock" },
     { id: "historical-currency-converter", icon: "History" },
@@ -35,7 +32,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "bill-split-calculator", icon: "Receipt" },
     { id: "zakat-calculator", icon: "HandCoins" },
     { id: "advanced-temperature-converter", icon: "Thermometer" },
-    { id: "triangle-angle-calculator", icon: "Compass" },
     { id: "stacked-discount-calculator", icon: "Layers" },
     { id: "text-logo-generator", icon: "Sparkles" },
     { id: "speech-word-count-calculator", icon: "Mic" },

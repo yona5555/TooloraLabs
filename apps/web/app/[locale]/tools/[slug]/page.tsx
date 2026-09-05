@@ -99,6 +99,38 @@ import GraphingCalculator from "@/components/tools/graphing-calculator/GraphingC
 import GraphingEducation from "@/components/tools/graphing-calculator/GraphingEducation";
 import NotepadCalculator from "@/components/tools/notepad-calculator/NotepadCalculator";
 import NotepadEducation from "@/components/tools/notepad-calculator/NotepadEducation";
+import GcfLcmCalculator from "@/components/tools/gcf-lcm-calculator/GcfLcmCalculator";
+import GcfLcmEducation from "@/components/tools/gcf-lcm-calculator/GcfLcmEducation";
+import TriangleCalculator from "@/components/tools/triangle-calculator/TriangleCalculator";
+import TriangleEducation from "@/components/tools/triangle-calculator/TriangleEducation";
+import ProbabilityCalculator from "@/components/tools/probability-calculator/ProbabilityCalculator";
+import ProbabilityEducation from "@/components/tools/probability-calculator/ProbabilityEducation";
+import MeanMedianModeRangeCalculator from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeCalculator";
+import MeanMedianModeRangeEducation from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeEducation";
+import TargetHeartRateCalculator from "@/components/tools/target-heart-rate-calculator/TargetHeartRateCalculator";
+import TargetHeartRateEducation from "@/components/tools/target-heart-rate-calculator/TargetHeartRateEducation";
+import SleepCalculator from "@/components/tools/sleep-calculator/SleepCalculator";
+import SleepEducation from "@/components/tools/sleep-calculator/SleepEducation";
+import BodyFatCalculator from "@/components/tools/body-fat-calculator/BodyFatCalculator";
+import BodyFatEducation from "@/components/tools/body-fat-calculator/BodyFatEducation";
+import DueDateCalculator from "@/components/tools/due-date-calculator/DueDateCalculator";
+import DueDateEducation from "@/components/tools/due-date-calculator/DueDateEducation";
+import OvulationCalculator from "@/components/tools/ovulation-calculator/OvulationCalculator";
+import OvulationEducation from "@/components/tools/ovulation-calculator/OvulationEducation";
+import PregnancyCalculator from "@/components/tools/pregnancy-calculator/PregnancyCalculator";
+import PregnancyEducation from "@/components/tools/pregnancy-calculator/PregnancyEducation";
+import MacroCalculator from "@/components/tools/macro-calculator/MacroCalculator";
+import MacroEducation from "@/components/tools/macro-calculator/MacroEducation";
+import BMRCalculator from "@/components/tools/bmr-calculator/BMRCalculator";
+import BMREducation from "@/components/tools/bmr-calculator/BMREducation";
+import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
+import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
+import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
+import RandomNumberEducation from "@/components/tools/random-number-generator/RandomNumberEducation";
+import StandardDeviationCalculator from "@/components/tools/standard-deviation-calculator/StandardDeviationCalculator";
+import StandardDeviationEducation from "@/components/tools/standard-deviation-calculator/StandardDeviationEducation";
+import CircleCalculator from "@/components/tools/circle-calculator/CircleCalculator";
+import CircleEducation from "@/components/tools/circle-calculator/CircleEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -453,6 +485,54 @@ export default async function ToolPage({
     case "notepad-calculator":
       component = <NotepadCalculator education={<NotepadEducation />} />;
       break;
+    case "gcf-lcm-calculator":
+      component = <GcfLcmCalculator education={<GcfLcmEducation />} />;
+      break;
+    case "triangle-calculator":
+      component = <TriangleCalculator education={<TriangleEducation />} />;
+      break;
+    case "probability-calculator":
+      component = <ProbabilityCalculator education={<ProbabilityEducation />} />;
+      break;
+    case "mean-median-mode-range-calculator":
+      component = <MeanMedianModeRangeCalculator education={<MeanMedianModeRangeEducation />} />;
+      break;
+    case "target-heart-rate-calculator":
+      component = <TargetHeartRateCalculator education={<TargetHeartRateEducation />} />;
+      break;
+    case "sleep-calculator":
+      component = <SleepCalculator education={<SleepEducation />} />;
+      break;
+    case "body-fat-calculator":
+      component = <BodyFatCalculator education={<BodyFatEducation />} />;
+      break;
+    case "due-date-calculator":
+      component = <DueDateCalculator education={<DueDateEducation />} />;
+      break;
+    case "ovulation-calculator":
+      component = <OvulationCalculator education={<OvulationEducation />} />;
+      break;
+    case "pregnancy-calculator":
+      component = <PregnancyCalculator education={<PregnancyEducation />} />;
+      break;
+    case "macro-calculator":
+      component = <MacroCalculator education={<MacroEducation />} />;
+      break;
+    case "bmr-calculator":
+      component = <BMRCalculator education={<BMREducation />} />;
+      break;
+    case "pace-calculator":
+      component = <PaceCalculator education={<PaceEducation />} />;
+      break;
+    case "random-number-generator":
+      component = <RandomNumberGenerator education={<RandomNumberEducation />} />;
+      break;
+    case "standard-deviation-calculator":
+      component = <StandardDeviationCalculator education={<StandardDeviationEducation />} />;
+      break;
+    case "circle-calculator":
+      component = <CircleCalculator education={<CircleEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -565,6 +645,22 @@ export default async function ToolPage({
     slug === "step-by-step-math-solver" ||
     slug === "graphing-calculator" ||
     slug === "notepad-calculator" ||
+    slug === "gcf-lcm-calculator" ||
+    slug === "triangle-calculator" ||
+    slug === "probability-calculator" ||
+    slug === "mean-median-mode-range-calculator" ||
+    slug === "target-heart-rate-calculator" ||
+    slug === "sleep-calculator" ||
+    slug === "body-fat-calculator" ||
+    slug === "due-date-calculator" ||
+    slug === "ovulation-calculator" ||
+    slug === "pregnancy-calculator" ||
+    slug === "macro-calculator" ||
+    slug === "bmr-calculator" ||
+    slug === "pace-calculator" ||
+    slug === "random-number-generator" ||
+    slug === "standard-deviation-calculator" ||
+    slug === "circle-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||
