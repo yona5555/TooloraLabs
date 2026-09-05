@@ -64,3 +64,4 @@ export * from "./MeanMedianModeRangeCalculator";
 export * from "./TargetHeartRateCalculator";
 export * from "./SleepCalculator";
 export * from "./BodyFatCalculator";
+export * from "./DueDateCalculator";

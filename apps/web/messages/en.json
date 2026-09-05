@@ -16627,6 +16627,201 @@
           "readOriginal": "View the Original Navy Technical Report"
         }
       }
+    },
+    "due-date-calculator": {
+      "title": "Due Date Calculator",
+      "description": "Estimate your due date from your last menstrual period, conception date, or IVF transfer date, with current gestational age and trimester.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "modes": {
+        "groupLabel": "Calculate from",
+        "labels": {
+          "lmp": "Last Period",
+          "conception": "Conception Date",
+          "ivf3day": "IVF (3-Day Transfer)",
+          "ivf5day": "IVF (5-Day Transfer)"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Details",
+        "dateLabels": {
+          "lmp": "First Day of Last Period",
+          "conception": "Conception Date",
+          "ivf3day": "3-Day Transfer Date",
+          "ivf5day": "5-Day Transfer Date"
+        },
+        "cycleLengthDays": "Average Cycle Length (days)",
+        "hints": {
+          "lmp": "Uses Naegele's rule, adjusted for your average cycle length if it differs from 28 days.",
+          "conception": "Adds the standard 266-day (38-week) conception-to-birth interval directly.",
+          "ivf3day": "A 3-day-old embryo is 3 days past conception, so 266 minus 3 days are added to the transfer date.",
+          "ivf5day": "A 5-day-old embryo (blastocyst) is 5 days past conception, so 266 minus 5 days are added to the transfer date."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "A progress bar from 0 to 40 weeks showing how far along the pregnancy is, with trimester boundaries marked",
+        "weeksShort": "weeks",
+        "weekLabel": "Week {week}"
+      },
+      "result": {
+        "heading": "Result",
+        "dueDate": "Estimated Due Date",
+        "gestationalAge": "Gestational Age",
+        "trimester": "Trimester",
+        "trimesterValue": {
+          "1": "1st",
+          "2": "2nd",
+          "3": "3rd"
+        },
+        "conceptionDate": "Estimated Conception Date",
+        "daysUntilDue": "Days Until Due Date",
+        "errors": {
+          "invalid-date": "Enter a valid date to see a result.",
+          "invalid-cycle-length": "Enter a cycle length between 20 and 45 days.",
+          "date-in-future": "The date entered can't be after today."
+        }
+      },
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Every method ultimately estimates a conception date, then adds the standard 266-day gestation period."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Due Date Estimation",
+          "paragraph1": "A due date is an estimate, not a prediction with pinpoint accuracy — only about 5% of babies are actually born on their calculated due date, with the large majority arriving anywhere within two weeks before or after it. Despite that inherent uncertainty, an estimated due date remains a clinically essential anchor point: it's used to time prenatal screening tests, track fetal growth against expected milestones, and decide when a pregnancy is considered \"full term\" versus early or late.",
+          "paragraph2": "Pregnancy is conventionally measured in \"gestational age,\" counted from the first day of the last menstrual period (LMP) rather than from the actual date of conception — even though conception typically happens about two weeks after that date. This convention exists simply because the LMP date is usually known with confidence, while the exact conception date rarely is. A full-term pregnancy is defined as 280 days (40 weeks) from the LMP, which is equivalent to 266 days (38 weeks) from conception itself."
+        },
+        "methods": {
+          "title": "The Four Calculation Methods",
+          "intro": "Each method anchors the estimate to whichever date you actually know with confidence.",
+          "items": [
+            {
+              "title": "Last Menstrual Period (Naegele's Rule)",
+              "description": "The most common method: adds 280 days to the first day of the last period. Originally described assuming a standard 28-day cycle with ovulation on day 14, this calculator adjusts the estimate for a different average cycle length by shifting the assumed ovulation day accordingly."
+            },
+            {
+              "title": "Conception Date",
+              "description": "If the conception date is known precisely (for example, from ovulation tracking), 266 days are added directly to it — skipping the LMP-based estimate of when ovulation occurred, since the actual date is already known."
+            },
+            {
+              "title": "IVF 3-Day Transfer",
+              "description": "In IVF, the embryo's exact age is known precisely at the moment of transfer. A 3-day-old embryo (cleavage stage) is already 3 days past conception, so only 263 more days (266 minus 3) are added to the transfer date."
+            },
+            {
+              "title": "IVF 5-Day Transfer",
+              "description": "A 5-day-old embryo (blastocyst stage) is 5 days past conception at transfer, so only 261 more days (266 minus 5) are added — IVF due dates are generally considered the most precise of the four methods, since both the embryo's age and the transfer date are known exactly."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few scenarios and what this calculator returns for each.",
+          "columnCalculation": "Method and Date",
+          "columnResult": "Estimated Due Date",
+          "rows": [
+            {
+              "calculation": "LMP: Jan 1 (28-day cycle)",
+              "result": "Oct 8 (280 days later)"
+            },
+            {
+              "calculation": "LMP: Jan 1 (35-day cycle)",
+              "result": "Oct 15 (adjusted +7 days)"
+            },
+            {
+              "calculation": "Conception date: Jan 15",
+              "result": "Oct 8 (266 days later)"
+            },
+            {
+              "calculation": "IVF 5-day transfer: Jan 20",
+              "result": "Oct 8 (261 days later)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "How accurate is a calculated due date?",
+              "answer": "Due dates estimated this way are a statistical average, not a precise prediction — most healthy pregnancies deliver anywhere within about two weeks before or after the calculated date, and only a small fraction of births land exactly on it. An early ultrasound (typically in the first trimester) can refine the estimate based on measured fetal size, which is often considered more accurate than an LMP-based calculation alone, especially for irregular cycles."
+            },
+            {
+              "question": "Why is pregnancy measured from the last period instead of conception?",
+              "answer": "The last menstrual period date is almost always known with confidence, while the exact date of conception (fertilization) is rarely known precisely, since it can happen anywhere within the several-day fertile window around ovulation. Counting from a reliably known date, even though it precedes actual conception by about two weeks, makes gestational age a consistent, comparable measure across pregnancies."
+            },
+            {
+              "question": "What's considered \"full term\"?",
+              "answer": "Full term is conventionally defined as 39 weeks 0 days through 40 weeks 6 days of gestational age. Babies born from 37 weeks 0 days to 38 weeks 6 days are considered \"early term,\" and those born before 37 weeks are considered preterm — these distinctions matter clinically because outcomes and typical care differ across these windows."
+            },
+            {
+              "question": "Why does a longer cycle length shift the due date later?",
+              "answer": "In a longer cycle, ovulation (and therefore conception) tends to happen later relative to the start of the period, since the follicular phase before ovulation varies more in length than the luteal phase after it. Since gestational age is counted from the LMP regardless, a later actual conception means the same LMP date corresponds to a later true due date."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The convention of adding 280 days to the last menstrual period is widely known as Naegele's rule, after German obstetrician Franz Karl Naegele, who described it in his 1830 textbook on obstetrics. Naegele himself credited the underlying idea to earlier observations, including work by Swedish obstetrician Peter Alexander Wibom, but Naegele's clear formulation became the version that persisted in medical education and practice for nearly two centuries."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern research has scrutinized the assumptions behind Naegele's rule, including a widely cited study by Jukic and colleagues in 2013, which found the average pregnancy actually lasted closer to 268 days from ovulation for first-time mothers (versus the 266 the classic rule assumes) with substantial individual variation. Modern obstetric practice now typically combines LMP-based dating with first-trimester ultrasound measurements of fetal crown-rump length, which research has shown provides a more accurate due date estimate than LMP alone, particularly for people with irregular cycles or uncertain LMP dates."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Pregnancy dating and prenatal care are studied within obstetrics, a branch of medicine. Here are five respected obstetrics and gynecology research programs, plus one regional institution:",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "One of the top-ranked obstetrics and gynecology departments in the United States.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "No — clinical and research training is in-residence."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "A leading center for reproductive health research in the United Kingdom.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Karolinska Institute — Department of Women's and Children's Health",
+                "note": "A leading Scandinavian center for obstetric and perinatal research.",
+                "url": "https://ki.se/en/kbh",
+                "online": "No — research programs are in-residence."
+              },
+              {
+                "name": "University of California, San Francisco — Department of Obstetrics, Gynecology & Reproductive Sciences",
+                "note": "A leading US center for maternal-fetal medicine research.",
+                "url": "https://obgyn.ucsf.edu/",
+                "online": "No — clinical and research training is in-residence."
+              },
+              {
+                "name": "University of Melbourne — Department of Obstetrics and Gynaecology",
+                "note": "A leading center for obstetric research in Australia.",
+                "url": "https://medicine.unimelb.edu.au/school-structure/obstetrics-and-gynaecology",
+                "online": "No — research and clinical training are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Obstetrics and Gynecology",
+                "note": "Founded in 1866; a leading regional center for obstetric care and training.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Jukic, A. M., Baird, D. D., Weinberg, C. R., McConnaughey, D. R., & Wilcox, A. J. (2013). Length of human pregnancy and contributors to its natural variation. Human Reproduction, 28(10), 2848-2855.",
+          "note": "A large prospective study measuring pregnancy length from a precisely known ovulation date, finding significant natural variation around the traditional 266-day (from conception) estimate.",
+          "url": "https://doi.org/10.1093/humrep/det297",
+          "readOriginal": "View the Original Study"
+        }
+      }
     }
   },
   "toolPage": {

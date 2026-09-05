@@ -16631,6 +16631,201 @@
           "readOriginal": "Originalen Navy-Bericht ansehen"
         }
       }
+    },
+    "due-date-calculator": {
+      "title": "Geburtstermin-Rechner",
+      "description": "Schätze deinen Geburtstermin aus deiner letzten Periode, dem Empfängnisdatum oder dem IVF-Transferdatum, mit aktuellem Schwangerschaftsalter und Trimester.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "modes": {
+        "groupLabel": "Berechnen ausgehend von",
+        "labels": {
+          "lmp": "Letzte Periode",
+          "conception": "Empfängnisdatum",
+          "ivf3day": "IVF (3-Tage-Transfer)",
+          "ivf5day": "IVF (5-Tage-Transfer)"
+        }
+      },
+      "form": {
+        "inputTitle": "Deine Angaben",
+        "dateLabels": {
+          "lmp": "Erster Tag der letzten Periode",
+          "conception": "Empfängnisdatum",
+          "ivf3day": "3-Tage-Transferdatum",
+          "ivf5day": "5-Tage-Transferdatum"
+        },
+        "cycleLengthDays": "Durchschnittliche Zykluslänge (Tage)",
+        "hints": {
+          "lmp": "Verwendet die Naegele-Regel, angepasst an deine durchschnittliche Zykluslänge, falls diese von 28 Tagen abweicht.",
+          "conception": "Addiert direkt das übliche 266-Tage-Intervall (38 Wochen) von der Empfängnis bis zur Geburt.",
+          "ivf3day": "Ein 3 Tage altes Embryo liegt bereits 3 Tage nach der Empfängnis, daher werden 266 minus 3 Tage zum Transferdatum addiert.",
+          "ivf5day": "Ein 5 Tage altes Embryo (Blastozyste) liegt 5 Tage nach der Empfängnis, daher werden 266 minus 5 Tage addiert."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Ein Fortschrittsbalken von 0 bis 40 Wochen, der zeigt, wie weit die Schwangerschaft fortgeschritten ist, mit markierten Trimestergrenzen",
+        "weeksShort": "Wochen",
+        "weekLabel": "Woche {week}"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "dueDate": "Geschätzter Geburtstermin",
+        "gestationalAge": "Schwangerschaftsalter",
+        "trimester": "Trimester",
+        "trimesterValue": {
+          "1": "1.",
+          "2": "2.",
+          "3": "3."
+        },
+        "conceptionDate": "Geschätztes Empfängnisdatum",
+        "daysUntilDue": "Tage bis zum Geburtstermin",
+        "errors": {
+          "invalid-date": "Gib ein gültiges Datum ein, um ein Ergebnis zu sehen.",
+          "invalid-cycle-length": "Gib eine Zykluslänge zwischen 20 und 45 Tagen ein.",
+          "date-in-future": "Das eingegebene Datum darf nicht nach heute liegen."
+        }
+      },
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Jede Methode schätzt letztlich ein Empfängnisdatum und addiert dann die übliche Schwangerschaftsdauer von 266 Tagen."
+      },
+      "education": {
+        "intro": {
+          "title": "Geburtstermin-Schätzung verstehen",
+          "paragraph1": "Ein Geburtstermin ist eine Schätzung, keine punktgenaue Vorhersage — nur etwa 5% der Babys werden tatsächlich am berechneten Termin geboren, die große Mehrheit kommt irgendwann innerhalb von zwei Wochen davor oder danach zur Welt. Trotz dieser inhärenten Unsicherheit bleibt ein geschätzter Geburtstermin ein klinisch essenzieller Ankerpunkt: Er wird verwendet, um pränatale Screening-Tests zu terminieren, das fetale Wachstum gegen erwartete Meilensteine zu verfolgen und zu entscheiden, wann eine Schwangerschaft als \"termingerecht\" statt früh oder spät gilt.",
+          "paragraph2": "Schwangerschaft wird üblicherweise im \"Schwangerschaftsalter\" gemessen, gezählt ab dem ersten Tag der letzten Periode (LMP) statt ab dem tatsächlichen Empfängnisdatum — obwohl die Empfängnis typischerweise etwa zwei Wochen nach diesem Datum stattfindet. Diese Konvention existiert einfach, weil das LMP-Datum meist zuverlässig bekannt ist, während das genaue Empfängnisdatum selten bekannt ist. Eine termingerechte Schwangerschaft wird als 280 Tage (40 Wochen) ab der LMP definiert, was 266 Tagen (38 Wochen) ab der Empfängnis selbst entspricht."
+        },
+        "methods": {
+          "title": "Die vier Berechnungsmethoden",
+          "intro": "Jede Methode verankert die Schätzung an dem Datum, das du tatsächlich zuverlässig kennst.",
+          "items": [
+            {
+              "title": "Letzte Periode (Naegele-Regel)",
+              "description": "Die häufigste Methode: addiert 280 Tage zum ersten Tag der letzten Periode. Ursprünglich unter Annahme eines Standardzyklus von 28 Tagen mit Eisprung an Tag 14 beschrieben, passt dieser Rechner die Schätzung bei abweichender durchschnittlicher Zykluslänge an, indem er den angenommenen Eisprungtag entsprechend verschiebt."
+            },
+            {
+              "title": "Empfängnisdatum",
+              "description": "Ist das Empfängnisdatum genau bekannt (zum Beispiel durch Eisprungverfolgung), werden direkt 266 Tage dazu addiert — die LMP-basierte Schätzung des Eisprungzeitpunkts wird übersprungen, da das tatsächliche Datum bereits bekannt ist."
+            },
+            {
+              "title": "IVF 3-Tage-Transfer",
+              "description": "Bei IVF ist das genaue Alter des Embryos zum Zeitpunkt des Transfers bekannt. Ein 3 Tage altes Embryo (Teilungsstadium) liegt bereits 3 Tage nach der Empfängnis, daher werden nur noch 263 Tage (266 minus 3) zum Transferdatum addiert."
+            },
+            {
+              "title": "IVF 5-Tage-Transfer",
+              "description": "Ein 5 Tage altes Embryo (Blastozystenstadium) liegt beim Transfer 5 Tage nach der Empfängnis, daher werden nur noch 261 Tage (266 minus 5) addiert — IVF-Geburtstermine gelten allgemein als die präzisesten der vier Methoden, da sowohl das Alter des Embryos als auch das Transferdatum genau bekannt sind."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Szenarien und die Ergebnisse, die dieser Rechner für sie liefert.",
+          "columnCalculation": "Methode und Datum",
+          "columnResult": "Geschätzter Geburtstermin",
+          "rows": [
+            {
+              "calculation": "LMP: 1. Januar (28-Tage-Zyklus)",
+              "result": "8. Oktober (280 Tage später)"
+            },
+            {
+              "calculation": "LMP: 1. Januar (35-Tage-Zyklus)",
+              "result": "15. Oktober (angepasst +7 Tage)"
+            },
+            {
+              "calculation": "Empfängnisdatum: 15. Januar",
+              "result": "8. Oktober (266 Tage später)"
+            },
+            {
+              "calculation": "IVF 5-Tage-Transfer: 20. Januar",
+              "result": "8. Oktober (261 Tage später)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wie genau ist ein berechneter Geburtstermin?",
+              "answer": "Auf diese Weise geschätzte Geburtstermine sind ein statistischer Durchschnitt, keine präzise Vorhersage — die meisten gesunden Schwangerschaften enden irgendwann innerhalb von etwa zwei Wochen vor oder nach dem berechneten Datum, und nur ein kleiner Teil der Geburten fällt genau darauf. Ein früher Ultraschall (typischerweise im ersten Trimester) kann die Schätzung anhand der gemessenen fetalen Größe verfeinern, was oft als genauer gilt als eine reine LMP-basierte Berechnung, besonders bei unregelmäßigen Zyklen."
+            },
+            {
+              "question": "Warum wird die Schwangerschaft ab der letzten Periode statt ab der Empfängnis gemessen?",
+              "answer": "Das Datum der letzten Periode ist fast immer zuverlässig bekannt, während das genaue Empfängnisdatum (Befruchtung) selten präzise bekannt ist, da es irgendwann innerhalb des mehrtägigen fruchtbaren Fensters um den Eisprung stattfinden kann. Die Zählung ab einem zuverlässig bekannten Datum, auch wenn es der tatsächlichen Empfängnis um etwa zwei Wochen vorausgeht, macht das Schwangerschaftsalter zu einem konsistenten, vergleichbaren Maß über Schwangerschaften hinweg."
+            },
+            {
+              "question": "Was gilt als \"termingerecht\"?",
+              "answer": "Termingerecht ist üblicherweise definiert als 39 Wochen 0 Tage bis 40 Wochen 6 Tage Schwangerschaftsalter. Babys, die von 37 Wochen 0 Tagen bis 38 Wochen 6 Tagen geboren werden, gelten als \"früh termingerecht\", und jene vor 37 Wochen als Frühgeburten — diese Unterscheidungen sind klinisch wichtig, da sich Ergebnisse und übliche Versorgung zwischen diesen Fenstern unterscheiden."
+            },
+            {
+              "question": "Warum verschiebt eine längere Zykluslänge den Geburtstermin nach hinten?",
+              "answer": "Bei einem längeren Zyklus findet der Eisprung (und damit die Empfängnis) tendenziell später relativ zum Periodenbeginn statt, da die follikuläre Phase vor dem Eisprung stärker variiert als die Lutealphase danach. Da das Schwangerschaftsalter unabhängig davon ab der LMP gezählt wird, bedeutet eine später tatsächlich stattfindende Empfängnis, dass dasselbe LMP-Datum einem später liegenden tatsächlichen Geburtstermin entspricht."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Konvention, 280 Tage zur letzten Periode zu addieren, ist weithin als Naegele-Regel bekannt, benannt nach dem deutschen Geburtshelfer Franz Karl Naegele, der sie 1830 in seinem Lehrbuch der Geburtshilfe beschrieb. Naegele selbst führte die zugrunde liegende Idee auf frühere Beobachtungen zurück, darunter Arbeiten des schwedischen Geburtshelfers Peter Alexander Wibom, doch Naegeles klare Formulierung wurde zu der Version, die sich fast zwei Jahrhunderte lang in medizinischer Ausbildung und Praxis hielt."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Moderne Forschung hat die Annahmen hinter der Naegele-Regel genau untersucht, darunter eine vielzitierte Studie von Jukic und Kollegen aus dem Jahr 2013, die feststellte, dass die durchschnittliche Schwangerschaft bei Erstgebärenden tatsächlich näher an 268 Tagen ab dem Eisprung dauerte (gegenüber den von der klassischen Regel angenommenen 266) mit erheblicher individueller Variation. Die moderne geburtshilfliche Praxis kombiniert die LMP-basierte Terminierung heute typischerweise mit Ultraschallmessungen der fetalen Scheitel-Steiß-Länge im ersten Trimester, was der Forschung zufolge eine genauere Geburtstermin-Schätzung liefert als die LMP allein, besonders bei Personen mit unregelmäßigen Zyklen oder unsicheren LMP-Daten."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Schwangerschaftsdatierung und Schwangerschaftsvorsorge werden in der Geburtshilfe studiert, einem Teilgebiet der Medizin. Hier sind fünf angesehene Forschungsprogramme in Geburtshilfe und Gynäkologie, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "Eine der bestplatzierten Abteilungen für Gynäkologie und Geburtshilfe in den USA.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "Nein — klinische und Forschungsausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "Ein führendes Zentrum für Reproduktionsgesundheitsforschung im Vereinigten Königreich.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Karolinska-Institut — Department of Women's and Children's Health",
+                "note": "Ein führendes skandinavisches Zentrum für geburtshilfliche und perinatale Forschung.",
+                "url": "https://ki.se/en/kbh",
+                "online": "Nein — Forschungsprogramme sind Präsenzprogramme."
+              },
+              {
+                "name": "University of California, San Francisco — Department of Obstetrics, Gynecology & Reproductive Sciences",
+                "note": "Ein führendes US-Zentrum für Mutter-Kind-Medizin-Forschung.",
+                "url": "https://obgyn.ucsf.edu/",
+                "online": "Nein — klinische und Forschungsausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "University of Melbourne — Department of Obstetrics and Gynaecology",
+                "note": "Ein führendes Zentrum für geburtshilfliche Forschung in Australien.",
+                "url": "https://medicine.unimelb.edu.au/school-structure/obstetrics-and-gynaecology",
+                "online": "Nein — Forschungs- und klinische Ausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "American University of Beirut — Department of Obstetrics and Gynecology",
+                "note": "Gegründet 1866; ein führendes regionales Zentrum für geburtshilfliche Versorgung und Ausbildung.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Jukic, A. M., Baird, D. D., Weinberg, C. R., McConnaughey, D. R., & Wilcox, A. J. (2013). Length of human pregnancy and contributors to its natural variation. Human Reproduction, 28(10), 2848-2855.",
+          "note": "Eine große prospektive Studie, die die Schwangerschaftsdauer ab einem genau bekannten Eisprungdatum maß und dabei erhebliche natürliche Variation um die traditionelle Schätzung von 266 Tagen (ab Empfängnis) feststellte.",
+          "url": "https://doi.org/10.1093/humrep/det297",
+          "readOriginal": "Originalstudie ansehen"
+        }
+      }
     }
   },
   "toolPage": {

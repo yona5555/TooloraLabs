@@ -16631,6 +16631,201 @@
           "readOriginal": "Ver el informe técnico original de la Marina"
         }
       }
+    },
+    "due-date-calculator": {
+      "title": "Calculadora de Fecha de Parto",
+      "description": "Estima tu fecha de parto a partir de tu última regla, fecha de concepción, o fecha de transferencia de FIV, con la edad gestacional actual y el trimestre.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "modes": {
+        "groupLabel": "Calcular a partir de",
+        "labels": {
+          "lmp": "Última Regla",
+          "conception": "Fecha de Concepción",
+          "ivf3day": "FIV (Transferencia día 3)",
+          "ivf5day": "FIV (Transferencia día 5)"
+        }
+      },
+      "form": {
+        "inputTitle": "Tus datos",
+        "dateLabels": {
+          "lmp": "Primer Día de la Última Regla",
+          "conception": "Fecha de Concepción",
+          "ivf3day": "Fecha de Transferencia Día 3",
+          "ivf5day": "Fecha de Transferencia Día 5"
+        },
+        "cycleLengthDays": "Duración Media del Ciclo (días)",
+        "hints": {
+          "lmp": "Usa la regla de Naegele, ajustada según la duración media de tu ciclo si difiere de 28 días.",
+          "conception": "Añade directamente el intervalo estándar de 266 días (38 semanas) de concepción a nacimiento.",
+          "ivf3day": "Un embrión de 3 días ya está 3 días después de la concepción, así que se añaden 266 menos 3 días a la fecha de transferencia.",
+          "ivf5day": "Un embrión de 5 días (blastocisto) está 5 días después de la concepción, así que se añaden 266 menos 5 días."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Una barra de progreso de 0 a 40 semanas que muestra el avance del embarazo, con los límites de trimestre marcados",
+        "weeksShort": "semanas",
+        "weekLabel": "Semana {week}"
+      },
+      "result": {
+        "heading": "Resultado",
+        "dueDate": "Fecha de Parto Estimada",
+        "gestationalAge": "Edad Gestacional",
+        "trimester": "Trimestre",
+        "trimesterValue": {
+          "1": "1º",
+          "2": "2º",
+          "3": "3º"
+        },
+        "conceptionDate": "Fecha de Concepción Estimada",
+        "daysUntilDue": "Días Hasta la Fecha de Parto",
+        "errors": {
+          "invalid-date": "Introduce una fecha válida para ver un resultado.",
+          "invalid-cycle-length": "Introduce una duración de ciclo entre 20 y 45 días.",
+          "date-in-future": "La fecha introducida no puede ser posterior a hoy."
+        }
+      },
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Todo método estima finalmente una fecha de concepción y luego añade el período de gestación estándar de 266 días."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la estimación de la fecha de parto",
+          "paragraph1": "Una fecha de parto es una estimación, no una predicción con precisión exacta — solo alrededor del 5% de los bebés nacen realmente en su fecha calculada, y la gran mayoría llega en cualquier momento dentro de dos semanas antes o después de ella. A pesar de esta incertidumbre inherente, una fecha de parto estimada sigue siendo un punto de referencia clínicamente esencial: se usa para programar pruebas de detección prenatal, seguir el crecimiento fetal frente a los hitos esperados, y decidir cuándo se considera un embarazo \"a término\" frente a prematuro o postérmino.",
+          "paragraph2": "El embarazo se mide convencionalmente en \"edad gestacional\", contada desde el primer día de la última regla (FUR) en lugar de desde la fecha real de concepción — aunque la concepción típicamente ocurre unas dos semanas después de esa fecha. Esta convención existe simplemente porque la fecha de la FUR suele conocerse con confianza, mientras que la fecha exacta de concepción rara vez se conoce. Un embarazo a término se define como 280 días (40 semanas) desde la FUR, lo que equivale a 266 días (38 semanas) desde la concepción misma."
+        },
+        "methods": {
+          "title": "Los cuatro métodos de cálculo",
+          "intro": "Cada método ancla la estimación a la fecha que realmente conoces con confianza.",
+          "items": [
+            {
+              "title": "Última Regla (Regla de Naegele)",
+              "description": "El método más común: añade 280 días al primer día de la última regla. Descrito originalmente asumiendo un ciclo estándar de 28 días con ovulación en el día 14, esta calculadora ajusta la estimación para una duración media de ciclo diferente desplazando el día de ovulación asumido en consecuencia."
+            },
+            {
+              "title": "Fecha de Concepción",
+              "description": "Si la fecha de concepción se conoce con precisión (por ejemplo, mediante seguimiento de la ovulación), se le añaden 266 días directamente — omitiendo la estimación basada en la FUR de cuándo ocurrió la ovulación, ya que la fecha real ya se conoce."
+            },
+            {
+              "title": "FIV Transferencia Día 3",
+              "description": "En la FIV, se conoce con precisión la edad exacta del embrión en el momento de la transferencia. Un embrión de 3 días (etapa de división) ya está 3 días después de la concepción, así que solo se añaden 263 días más (266 menos 3) a la fecha de transferencia."
+            },
+            {
+              "title": "FIV Transferencia Día 5",
+              "description": "Un embrión de 5 días (etapa de blastocisto) está 5 días después de la concepción en la transferencia, así que solo se añaden 261 días más (266 menos 5) — las fechas de parto por FIV generalmente se consideran las más precisas de los cuatro métodos, ya que tanto la edad del embrión como la fecha de transferencia se conocen exactamente."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos escenarios y lo que devuelve esta calculadora para cada uno.",
+          "columnCalculation": "Método y Fecha",
+          "columnResult": "Fecha de Parto Estimada",
+          "rows": [
+            {
+              "calculation": "FUR: 1 de enero (ciclo de 28 días)",
+              "result": "8 de octubre (280 días después)"
+            },
+            {
+              "calculation": "FUR: 1 de enero (ciclo de 35 días)",
+              "result": "15 de octubre (ajustado +7 días)"
+            },
+            {
+              "calculation": "Fecha de concepción: 15 de enero",
+              "result": "8 de octubre (266 días después)"
+            },
+            {
+              "calculation": "Transferencia FIV día 5: 20 de enero",
+              "result": "8 de octubre (261 días después)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Qué tan precisa es una fecha de parto calculada?",
+              "answer": "Las fechas de parto estimadas de esta manera son un promedio estadístico, no una predicción precisa — la mayoría de los embarazos saludables terminan en cualquier momento dentro de unas dos semanas antes o después de la fecha calculada, y solo una pequeña fracción de los nacimientos cae exactamente en ella. Una ecografía temprana (típicamente en el primer trimestre) puede refinar la estimación según el tamaño fetal medido, lo que a menudo se considera más preciso que un cálculo basado solo en la FUR, especialmente para ciclos irregulares."
+            },
+            {
+              "question": "¿Por qué se mide el embarazo desde la última regla en lugar de la concepción?",
+              "answer": "La fecha de la última regla casi siempre se conoce con confianza, mientras que la fecha exacta de la concepción (fecundación) rara vez se conoce con precisión, ya que puede ocurrir en cualquier momento dentro de la ventana fértil de varios días alrededor de la ovulación. Contar desde una fecha conocida de forma fiable, aunque preceda a la concepción real en unas dos semanas, hace que la edad gestacional sea una medida consistente y comparable entre embarazos."
+            },
+            {
+              "question": "¿Qué se considera \"a término\"?",
+              "answer": "El término completo se define convencionalmente como de 39 semanas 0 días a 40 semanas 6 días de edad gestacional. Los bebés nacidos entre las 37 semanas 0 días y las 38 semanas 6 días se consideran \"término temprano\", y los nacidos antes de las 37 semanas se consideran prematuros — estas distinciones importan clínicamente porque los resultados y la atención típica difieren entre estas ventanas."
+            },
+            {
+              "question": "¿Por qué un ciclo más largo retrasa la fecha de parto?",
+              "answer": "En un ciclo más largo, la ovulación (y por tanto la concepción) tiende a ocurrir más tarde en relación con el inicio de la regla, ya que la fase folicular antes de la ovulación varía más en duración que la fase lútea posterior. Como la edad gestacional se cuenta desde la FUR independientemente, una concepción real más tardía significa que la misma fecha de FUR corresponde a una fecha de parto verdadera más tardía."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La convención de añadir 280 días a la última regla se conoce ampliamente como la regla de Naegele, en honor al obstetra alemán Franz Karl Naegele, quien la describió en su libro de texto de obstetricia de 1830. El propio Naegele atribuyó la idea subyacente a observaciones anteriores, incluido el trabajo del obstetra sueco Peter Alexander Wibom, pero la formulación clara de Naegele se convirtió en la versión que persistió en la educación y práctica médica durante casi dos siglos."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "La investigación moderna ha examinado a fondo los supuestos detrás de la regla de Naegele, incluido un estudio ampliamente citado de Jukic y colegas en 2013, que encontró que el embarazo promedio en realidad duraba más cerca de 268 días desde la ovulación para madres primerizas (frente a los 266 que asume la regla clásica) con una variación individual sustancial. La práctica obstétrica moderna ahora típicamente combina la datación basada en la FUR con mediciones ecográficas de la longitud céfalo-caudal fetal en el primer trimestre, lo que la investigación ha demostrado que proporciona una estimación de fecha de parto más precisa que la FUR sola, particularmente para personas con ciclos irregulares o fechas de FUR inciertas."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La datación del embarazo y la atención prenatal se estudian dentro de la obstetricia, una rama de la medicina. Estos son cinco programas de investigación respetados en obstetricia y ginecología, más una institución regional:",
+            "universities": [
+              {
+                "name": "Facultad de Medicina de Johns Hopkins — Departamento de Ginecología y Obstetricia",
+                "note": "Uno de los departamentos de obstetricia y ginecología mejor clasificados de Estados Unidos.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "No — la formación clínica y de investigación es presencial."
+              },
+              {
+                "name": "Universidad de Oxford — Departamento Nuffield de Salud de la Mujer y Reproductiva",
+                "note": "Un centro líder en investigación sobre salud reproductiva en el Reino Unido.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Instituto Karolinska — Departamento de Salud de la Mujer y el Niño",
+                "note": "Un centro escandinavo líder en investigación obstétrica y perinatal.",
+                "url": "https://ki.se/en/kbh",
+                "online": "No — los programas de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de California, San Francisco — Departamento de Obstetricia, Ginecología y Ciencias Reproductivas",
+                "note": "Un centro estadounidense líder en investigación de medicina materno-fetal.",
+                "url": "https://obgyn.ucsf.edu/",
+                "online": "No — la formación clínica y de investigación es presencial."
+              },
+              {
+                "name": "Universidad de Melbourne — Departamento de Obstetricia y Ginecología",
+                "note": "Un centro líder en investigación obstétrica en Australia.",
+                "url": "https://medicine.unimelb.edu.au/school-structure/obstetrics-and-gynaecology",
+                "online": "No — la formación de investigación y clínica es presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Obstetricia y Ginecología",
+                "note": "Fundada en 1866; un centro regional líder en atención y formación obstétrica.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Jukic, A. M., Baird, D. D., Weinberg, C. R., McConnaughey, D. R., & Wilcox, A. J. (2013). Length of human pregnancy and contributors to its natural variation. Human Reproduction, 28(10), 2848-2855.",
+          "note": "Un gran estudio prospectivo que midió la duración del embarazo desde una fecha de ovulación conocida con precisión, encontrando una variación natural significativa alrededor de la estimación tradicional de 266 días (desde la concepción).",
+          "url": "https://doi.org/10.1093/humrep/det297",
+          "readOriginal": "Ver el estudio original"
+        }
+      }
     }
   },
   "toolPage": {

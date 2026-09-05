@@ -16631,6 +16631,201 @@
           "readOriginal": "Consulter le rapport technique original de la marine"
         }
       }
+    },
+    "due-date-calculator": {
+      "title": "Calculatrice de Date d'Accouchement",
+      "description": "Estimez votre date d'accouchement à partir de vos dernières règles, de la date de conception, ou de la date de transfert FIV, avec l'âge gestationnel actuel et le trimestre.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "modes": {
+        "groupLabel": "Calculer à partir de",
+        "labels": {
+          "lmp": "Dernières Règles",
+          "conception": "Date de Conception",
+          "ivf3day": "FIV (Transfert J3)",
+          "ivf5day": "FIV (Transfert J5)"
+        }
+      },
+      "form": {
+        "inputTitle": "Vos informations",
+        "dateLabels": {
+          "lmp": "Premier Jour des Dernières Règles",
+          "conception": "Date de Conception",
+          "ivf3day": "Date de Transfert J3",
+          "ivf5day": "Date de Transfert J5"
+        },
+        "cycleLengthDays": "Durée Moyenne du Cycle (jours)",
+        "hints": {
+          "lmp": "Utilise la règle de Naegele, ajustée selon la durée moyenne de votre cycle si elle diffère de 28 jours.",
+          "conception": "Ajoute directement l'intervalle standard de 266 jours (38 semaines) entre la conception et la naissance.",
+          "ivf3day": "Un embryon de 3 jours est déjà à 3 jours après la conception, donc 266 moins 3 jours sont ajoutés à la date de transfert.",
+          "ivf5day": "Un embryon de 5 jours (blastocyste) est à 5 jours après la conception, donc 266 moins 5 jours sont ajoutés."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Une barre de progression de 0 à 40 semaines montrant l'avancement de la grossesse, avec les limites de trimestre marquées",
+        "weeksShort": "semaines",
+        "weekLabel": "Semaine {week}"
+      },
+      "result": {
+        "heading": "Résultat",
+        "dueDate": "Date d'Accouchement Estimée",
+        "gestationalAge": "Âge Gestationnel",
+        "trimester": "Trimestre",
+        "trimesterValue": {
+          "1": "1er",
+          "2": "2e",
+          "3": "3e"
+        },
+        "conceptionDate": "Date de Conception Estimée",
+        "daysUntilDue": "Jours Restants",
+        "errors": {
+          "invalid-date": "Saisissez une date valide pour voir un résultat.",
+          "invalid-cycle-length": "Saisissez une durée de cycle entre 20 et 45 jours.",
+          "date-in-future": "La date saisie ne peut pas être postérieure à aujourd'hui."
+        }
+      },
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Chaque méthode estime finalement une date de conception, puis ajoute la période de gestation standard de 266 jours."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'estimation de la date d'accouchement",
+          "paragraph1": "Une date d'accouchement est une estimation, pas une prédiction d'une précision absolue — seulement environ 5% des bébés naissent réellement à leur date calculée, la grande majorité arrivant à un moment donné dans les deux semaines précédant ou suivant cette date. Malgré cette incertitude inhérente, une date d'accouchement estimée reste un point de repère cliniquement essentiel : elle sert à programmer les tests de dépistage prénatal, à suivre la croissance fœtale par rapport aux étapes attendues, et à décider quand une grossesse est considérée \"à terme\" par opposition à précoce ou tardive.",
+          "paragraph2": "La grossesse est classiquement mesurée en \"âge gestationnel\", compté à partir du premier jour des dernières règles (DDR) plutôt qu'à partir de la date réelle de conception — même si la conception survient généralement environ deux semaines après cette date. Cette convention existe simplement parce que la date des DDR est généralement connue avec confiance, alors que la date exacte de conception l'est rarement. Une grossesse à terme est définie comme 280 jours (40 semaines) à partir des DDR, ce qui équivaut à 266 jours (38 semaines) à partir de la conception elle-même."
+        },
+        "methods": {
+          "title": "Les quatre méthodes de calcul",
+          "intro": "Chaque méthode ancre l'estimation sur la date que vous connaissez réellement avec confiance.",
+          "items": [
+            {
+              "title": "Dernières règles (règle de Naegele)",
+              "description": "La méthode la plus courante : ajoute 280 jours au premier jour des dernières règles. Décrite à l'origine en supposant un cycle standard de 28 jours avec ovulation au jour 14, cette calculatrice ajuste l'estimation pour une durée de cycle moyenne différente en décalant le jour d'ovulation supposé en conséquence."
+            },
+            {
+              "title": "Date de conception",
+              "description": "Si la date de conception est connue avec précision (par exemple, via le suivi de l'ovulation), 266 jours y sont ajoutés directement — sautant l'estimation basée sur les DDR du moment de l'ovulation, puisque la date réelle est déjà connue."
+            },
+            {
+              "title": "FIV Transfert J3",
+              "description": "En FIV, l'âge exact de l'embryon est connu précisément au moment du transfert. Un embryon de 3 jours (stade de clivage) est déjà à 3 jours après la conception, donc seulement 263 jours de plus (266 moins 3) sont ajoutés à la date de transfert."
+            },
+            {
+              "title": "FIV Transfert J5",
+              "description": "Un embryon de 5 jours (stade blastocyste) est à 5 jours après la conception lors du transfert, donc seulement 261 jours de plus (266 moins 5) sont ajoutés — les dates d'accouchement en FIV sont généralement considérées comme les plus précises des quatre méthodes, car l'âge de l'embryon et la date de transfert sont tous deux connus exactement."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques scénarios et ce que cette calculatrice renvoie pour chacun.",
+          "columnCalculation": "Méthode et Date",
+          "columnResult": "Date d'Accouchement Estimée",
+          "rows": [
+            {
+              "calculation": "DDR : 1er janvier (cycle de 28 jours)",
+              "result": "8 octobre (280 jours plus tard)"
+            },
+            {
+              "calculation": "DDR : 1er janvier (cycle de 35 jours)",
+              "result": "15 octobre (ajusté +7 jours)"
+            },
+            {
+              "calculation": "Date de conception : 15 janvier",
+              "result": "8 octobre (266 jours plus tard)"
+            },
+            {
+              "calculation": "Transfert FIV J5 : 20 janvier",
+              "result": "8 octobre (261 jours plus tard)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la précision d'une date d'accouchement calculée ?",
+              "answer": "Les dates d'accouchement estimées de cette manière sont une moyenne statistique, pas une prédiction précise — la plupart des grossesses en bonne santé accouchent à un moment donné dans les deux semaines précédant ou suivant la date calculée, et seule une petite fraction des naissances tombe exactement dessus. Une échographie précoce (généralement au premier trimestre) peut affiner l'estimation en fonction de la taille fœtale mesurée, souvent considérée comme plus précise qu'un calcul basé uniquement sur les DDR, surtout pour les cycles irréguliers."
+            },
+            {
+              "question": "Pourquoi la grossesse est-elle mesurée à partir des dernières règles plutôt que de la conception ?",
+              "answer": "La date des dernières règles est presque toujours connue avec confiance, tandis que la date exacte de la conception (fécondation) est rarement connue précisément, car elle peut survenir à tout moment dans la fenêtre de fertilité de plusieurs jours autour de l'ovulation. Compter à partir d'une date connue de manière fiable, même si elle précède la conception réelle d'environ deux semaines, fait de l'âge gestationnel une mesure cohérente et comparable entre les grossesses."
+            },
+            {
+              "question": "Qu'est-ce qui est considéré comme \"à terme\" ?",
+              "answer": "Le terme est classiquement défini comme allant de 39 semaines 0 jour à 40 semaines 6 jours d'âge gestationnel. Les bébés nés entre 37 semaines 0 jour et 38 semaines 6 jours sont considérés comme \"terme précoce\", et ceux nés avant 37 semaines comme prématurés — ces distinctions comptent cliniquement car les résultats et les soins habituels diffèrent selon ces fenêtres."
+            },
+            {
+              "question": "Pourquoi un cycle plus long décale-t-il la date d'accouchement plus tard ?",
+              "answer": "Dans un cycle plus long, l'ovulation (et donc la conception) a tendance à survenir plus tard par rapport au début des règles, car la phase folliculaire avant l'ovulation varie davantage en durée que la phase lutéale qui suit. Comme l'âge gestationnel est compté à partir des DDR quoi qu'il arrive, une conception réelle plus tardive signifie que la même date de DDR correspond à une date d'accouchement réelle plus tardive."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "La convention consistant à ajouter 280 jours aux dernières règles est largement connue sous le nom de règle de Naegele, du nom de l'obstétricien allemand Franz Karl Naegele, qui l'a décrite dans son manuel d'obstétrique de 1830. Naegele lui-même a attribué l'idée sous-jacente à des observations antérieures, notamment les travaux de l'obstétricien suédois Peter Alexander Wibom, mais la formulation claire de Naegele est devenue la version qui a persisté dans l'enseignement et la pratique médicale pendant près de deux siècles."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Des recherches modernes ont examiné de près les hypothèses derrière la règle de Naegele, notamment une étude largement citée de Jukic et ses collègues en 2013, qui a révélé que la grossesse moyenne durait en réalité plus près de 268 jours à partir de l'ovulation pour les primipares (contre les 266 supposés par la règle classique) avec une variation individuelle substantielle. La pratique obstétrique moderne combine désormais généralement la datation basée sur les DDR avec des mesures échographiques de la longueur cranio-caudale fœtale au premier trimestre, ce que la recherche a montré fournir une estimation de date d'accouchement plus précise que les DDR seules, particulièrement pour les personnes ayant des cycles irréguliers ou des dates de DDR incertaines."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La datation de grossesse et les soins prénataux sont étudiés en obstétrique, une branche de la médecine. Voici cinq programmes de recherche reconnus en obstétrique et gynécologie, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "L'un des départements de gynécologie-obstétrique les mieux classés aux États-Unis.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "Non — la formation clinique et de recherche est en présentiel."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "Un centre de premier plan pour la recherche sur la santé reproductive au Royaume-Uni.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Institut Karolinska — Department of Women's and Children's Health",
+                "note": "Un centre scandinave de premier plan pour la recherche obstétrique et périnatale.",
+                "url": "https://ki.se/en/kbh",
+                "online": "Non — les programmes de recherche sont en présentiel."
+              },
+              {
+                "name": "University of California, San Francisco — Department of Obstetrics, Gynecology & Reproductive Sciences",
+                "note": "Un centre américain de premier plan pour la recherche en médecine materno-fœtale.",
+                "url": "https://obgyn.ucsf.edu/",
+                "online": "Non — la formation clinique et de recherche est en présentiel."
+              },
+              {
+                "name": "University of Melbourne — Department of Obstetrics and Gynaecology",
+                "note": "Un centre de premier plan pour la recherche obstétrique en Australie.",
+                "url": "https://medicine.unimelb.edu.au/school-structure/obstetrics-and-gynaecology",
+                "online": "Non — la formation de recherche et clinique est en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'obstétrique et de gynécologie",
+                "note": "Fondée en 1866 ; un centre régional de premier plan pour les soins et la formation obstétriques.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Jukic, A. M., Baird, D. D., Weinberg, C. R., McConnaughey, D. R., & Wilcox, A. J. (2013). Length of human pregnancy and contributors to its natural variation. Human Reproduction, 28(10), 2848-2855.",
+          "note": "Une vaste étude prospective mesurant la durée de la grossesse à partir d'une date d'ovulation connue avec précision, révélant une variation naturelle significative autour de l'estimation traditionnelle de 266 jours (à partir de la conception).",
+          "url": "https://doi.org/10.1093/humrep/det297",
+          "readOriginal": "Consulter l'étude originale"
+        }
+      }
     }
   },
   "toolPage": {

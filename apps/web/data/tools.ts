@@ -801,6 +801,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "due-date-calculator",
+    title: "Due Date Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate your due date from your last menstrual period, conception date, or IVF transfer date, with current gestational age and trimester.",
+    featured: false,
+    keywords: [
+      "due date calculator",
+      "pregnancy due date",
+      "naegele's rule",
+      "gestational age calculator",
+      "ivf due date",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
