@@ -16990,6 +16990,212 @@
           "readOriginal": "View the Original Study"
         }
       }
+    },
+    "pregnancy-calculator": {
+      "title": "Pregnancy Calculator",
+      "description": "Track your pregnancy week by week from your last menstrual period, with your current trimester, due date, and a size-comparison milestone for this week.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Pregnancy",
+        "lastPeriodDate": "First Day of Last Period",
+        "hint": "Gestational age is counted from this date, following standard medical convention, even though conception typically happens about two weeks later."
+      },
+      "diagram": {
+        "ariaLabel": "A progress bar from 0 to 40 weeks showing how far along the pregnancy is, with trimester boundaries marked",
+        "weeksShort": "weeks",
+        "weekLabel": "Week {week}"
+      },
+      "sizeComparisonIntro": "Your baby is about the size of a",
+      "sizeComparisons": {
+        "poppySeed": "Poppy Seed",
+        "sesameSeed": "Sesame Seed",
+        "lentil": "Lentil",
+        "blueberry": "Blueberry",
+        "raspberry": "Raspberry",
+        "grape": "Grape",
+        "kumquat": "Kumquat",
+        "fig": "Fig",
+        "lime": "Lime",
+        "lemon": "Lemon",
+        "peach": "Peach",
+        "apple": "Apple",
+        "avocado": "Avocado",
+        "turnip": "Turnip",
+        "bellPepper": "Bell Pepper",
+        "tomato": "Tomato",
+        "banana": "Banana",
+        "carrot": "Carrot",
+        "spaghettiSquash": "Spaghetti Squash",
+        "mango": "Mango",
+        "cornOnTheCob": "Corn on the Cob",
+        "rutabaga": "Rutabaga",
+        "zucchini": "Zucchini",
+        "cauliflower": "Cauliflower",
+        "eggplant": "Eggplant",
+        "butternutSquash": "Butternut Squash",
+        "cabbage": "Cabbage",
+        "coconut": "Coconut",
+        "jicama": "Jicama",
+        "pineapple": "Pineapple",
+        "cantaloupe": "Cantaloupe",
+        "honeydewMelon": "Honeydew Melon",
+        "romaineLettuce": "Romaine Lettuce",
+        "swissChard": "Swiss Chard",
+        "leek": "Leek",
+        "miniWatermelon": "Mini Watermelon",
+        "smallPumpkin": "Small Pumpkin"
+      },
+      "result": {
+        "heading": "Result",
+        "week": "Week",
+        "weekValue": "Week {weeks}, {days}d",
+        "trimesterValue": "Trimester {n}",
+        "dueDate": "Estimated Due Date",
+        "daysUntilDue": "Days Until Due Date",
+        "errors": {
+          "invalid-date": "Enter a valid date to see a result.",
+          "date-in-future": "The date entered can't be after today.",
+          "beyond-full-term": "This date is more than three weeks past full term — please double-check it, or if the pregnancy has already ended, this tracker no longer applies."
+        }
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Pregnancy is tracked in gestational age, counted from the last menstrual period, not from conception."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Week-by-Week Pregnancy Tracking",
+          "paragraph1": "This tracker follows a pregnancy's progress in \"gestational age\" — time counted from the first day of the last menstrual period (LMP), the standard convention used throughout obstetric care, even though actual conception typically occurs about two weeks after that date. A full-term pregnancy spans 40 weeks (280 days) of gestational age, divided into three trimesters of roughly 13-14 weeks each, each associated with distinct stages of fetal development and different typical experiences for the pregnant person.",
+          "paragraph2": "Alongside the numeric gestational age, this tracker includes a weekly size comparison — the popular \"your baby is about the size of a lemon\" style of milestone that many pregnancy trackers use to make fetal growth more tangible than a length-in-centimeters figure alone. These comparisons are based on typical published average fetal growth curves; actual size varies from pregnancy to pregnancy and is properly assessed via ultrasound, not a calendar estimate."
+        },
+        "trimesters": {
+          "title": "The Three Trimesters",
+          "intro": "Each trimester spans a distinct phase of fetal development.",
+          "items": [
+            {
+              "title": "First Trimester (Weeks 1-12)",
+              "description": "All major organs and body systems begin forming during this period, making it the most developmentally critical window of the entire pregnancy. Many of the more commonly known early pregnancy symptoms (nausea, fatigue, breast tenderness) are most pronounced here, and the risk of miscarriage, while present throughout pregnancy, is statistically highest in this trimester."
+            },
+            {
+              "title": "Second Trimester (Weeks 13-26)",
+              "description": "Often called the most comfortable trimester for many people, as early symptoms typically ease while the physical size and discomfort of late pregnancy haven't yet set in. Fetal movement usually becomes noticeable during this period, and a detailed anatomy ultrasound is typically performed around the midpoint to check organ development."
+            },
+            {
+              "title": "Third Trimester (Weeks 27-40)",
+              "description": "The fetus gains the majority of its birth weight during this final stretch, while physical discomfort for the pregnant person (back pain, reduced mobility, frequent urination) tends to increase. Prenatal visits typically become more frequent, and this is when full-term status and labor readiness become the primary clinical focus."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few LMP dates and what this tracker would show as of a later reference date.",
+          "columnCalculation": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "LMP 12 weeks before today",
+              "result": "Week 12, Trimester 1, baby about the size of a lime"
+            },
+            {
+              "calculation": "LMP 20 weeks before today",
+              "result": "Week 20, Trimester 2, baby about the size of a banana"
+            },
+            {
+              "calculation": "LMP 30 weeks before today",
+              "result": "Week 30, Trimester 3, baby about the size of a cabbage"
+            },
+            {
+              "calculation": "LMP 40 weeks before today",
+              "result": "Week 40, Trimester 3, due date, baby about the size of a small pumpkin"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why is gestational age counted from the last period, not conception?",
+              "answer": "The last menstrual period date is almost always known with confidence, while the exact date of conception is rarely known precisely, since it can occur anywhere within the several-day fertile window around ovulation. Counting from a reliably known date, even though it precedes actual conception by about two weeks, gives a consistent, comparable measure across pregnancies and matches how prenatal care providers date and discuss a pregnancy."
+            },
+            {
+              "question": "How accurate are the weekly size comparisons?",
+              "answer": "They're illustrative averages drawn from typical published fetal growth curves, meant to make development easier to visualize — not a personalized or diagnostic measurement. Actual fetal size varies meaningfully between pregnancies and is only properly assessed through ultrasound measurements taken during prenatal care."
+            },
+            {
+              "question": "What's the difference between this tracker and a due date calculator?",
+              "answer": "A due date calculator typically answers one specific question — when is the baby likely to arrive — often supporting multiple starting methods (last period, conception date, IVF transfer). This week-by-week tracker instead focuses on the ongoing journey: where the pregnancy currently stands, moving through weeks and trimesters with a size-comparison milestone at each stage."
+            },
+            {
+              "question": "Does this tracker account for irregular cycles?",
+              "answer": "No — like the standard 280-day rule it's built on, this tracker assumes a typical 28-day cycle. For irregular cycles, an early ultrasound-based estimate from a healthcare provider is generally considered more accurate than a calculation based on the last period date alone."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Dividing pregnancy into trimesters and measuring it in gestational weeks from the last menstrual period both stem from Naegele's rule, described by German obstetrician Franz Karl Naegele in his 1830 obstetrics textbook, which established the 280-day (40-week) full-term convention still used today. The \"size comparison\" style of week-by-week tracking is a much more recent, informal tradition that grew alongside consumer pregnancy books and websites from the late 20th century onward, popularizing fetal development for expectant parents beyond clinical measurements alone."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern prenatal care combines LMP-based gestational dating with early ultrasound measurements (typically crown-rump length in the first trimester), which research has shown provides a more accurate estimate of gestational age than LMP alone, particularly for people with irregular cycles or uncertain LMP dates. Digital pregnancy tracking apps and websites, building on the same size-comparison tradition featured here, have become one of the most widely used ways expectant parents follow fetal development week to week, alongside formal prenatal visits."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Prenatal care and fetal development are studied within obstetrics, a branch of medicine. Here are five respected obstetrics and maternal-fetal medicine research programs, plus one regional institution:",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "One of the top-ranked obstetrics and gynecology departments in the United States.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "No — clinical and research training is in-residence."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "A leading center for reproductive and maternal health research in the United Kingdom.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Karolinska Institute — Department of Women's and Children's Health",
+                "note": "A leading Scandinavian center for obstetric and perinatal research.",
+                "url": "https://ki.se/en/kbh",
+                "online": "No — research programs are in-residence."
+              },
+              {
+                "name": "University of California, San Francisco — Department of Obstetrics, Gynecology & Reproductive Sciences",
+                "note": "A leading US center for maternal-fetal medicine research.",
+                "url": "https://obgyn.ucsf.edu/",
+                "online": "No — clinical and research training is in-residence."
+              },
+              {
+                "name": "University of Melbourne — Department of Obstetrics and Gynaecology",
+                "note": "A leading center for obstetric research in Australia.",
+                "url": "https://medicine.unimelb.edu.au/school-structure/obstetrics-and-gynaecology",
+                "online": "No — research and clinical training are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Obstetrics and Gynecology",
+                "note": "Founded in 1866; a leading regional center for obstetric care and training.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "American College of Obstetricians and Gynecologists. (2017, Reaffirmed 2023). Committee Opinion No. 700: Methods for Estimating the Due Date. Obstetrics & Gynecology, 129(5), e150-e154.",
+          "note": "The professional guidance establishing standard methods for dating a pregnancy and calculating gestational age, including the role of LMP-based dating alongside ultrasound confirmation.",
+          "url": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/05/methods-for-estimating-the-due-date",
+          "readOriginal": "View the Original Committee Opinion"
+        }
+      }
     }
   },
   "toolPage": {

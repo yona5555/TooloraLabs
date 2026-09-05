@@ -831,6 +831,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "pregnancy-calculator",
+    title: "Pregnancy Calculator",
+    category: "health-fitness",
+    description:
+      "Track your pregnancy week by week from your last menstrual period, with your current trimester, due date, and a size-comparison milestone for this week.",
+    featured: false,
+    keywords: [
+      "pregnancy calculator",
+      "pregnancy week by week",
+      "pregnancy tracker",
+      "gestational age",
+      "baby size by week",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

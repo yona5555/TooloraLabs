@@ -9,7 +9,6 @@ export const comingSoonPhaseIds: ComingSoonPhaseId[] = ["phase-1", "phase-2", "p
 
 export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
   "phase-1": [
-    { id: "pregnancy-calendar", icon: "Baby" },
     { id: "random-name-generator", icon: "Wand2" },
     { id: "golden-ratio-calculator", icon: "Infinity" },
     { id: "reading-time-calculator", icon: "BookOpen" },
