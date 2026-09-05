@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import type { SleepResult as Result, SleepMode } from "./types";
-import { minutesToTimeString } from "./types";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import SleepCycleDiagram from "./SleepCycleDiagram";
 
