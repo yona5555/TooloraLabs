@@ -816,6 +816,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "ovulation-calculator",
+    title: "Ovulation Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate your next ovulation date and fertile window from your last period and average cycle length, projected across the next three cycles.",
+    featured: false,
+    keywords: [
+      "ovulation calculator",
+      "fertile window calculator",
+      "ovulation date",
+      "fertility calculator",
+      "cycle tracker",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

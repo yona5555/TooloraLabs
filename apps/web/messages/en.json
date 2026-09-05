@@ -16822,6 +16822,174 @@
           "readOriginal": "View the Original Study"
         }
       }
+    },
+    "ovulation-calculator": {
+      "title": "Ovulation Calculator",
+      "description": "Estimate your next ovulation date and fertile window from your last period and average cycle length, projected across the next three cycles.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Cycle",
+        "lastPeriodDate": "First Day of Last Period",
+        "cycleLengthDays": "Average Cycle Length (days)",
+        "lutealPhaseDays": "Luteal Phase Length (days)",
+        "showAdvanced": "I know my luteal phase length",
+        "hint": "Ovulation is estimated by counting backward from your next expected period, since the luteal phase is more consistent in length than the phase before ovulation."
+      },
+      "diagram": {
+        "ariaLabel": "A timeline of the next three cycles showing each fertile window and ovulation day",
+        "fertileWindow": "Fertile Window",
+        "ovulationDay": "Ovulation Day"
+      },
+      "result": {
+        "heading": "Result",
+        "nextOvulation": "Next Estimated Ovulation",
+        "cycle": "Cycle {n}",
+        "fertileWindow": "Fertile Window",
+        "nextPeriod": "Next Period",
+        "errors": {
+          "invalid-date": "Enter a valid date to see a result.",
+          "invalid-cycle-length": "Enter a cycle length between 20 and 45 days.",
+          "invalid-luteal-phase": "Enter a luteal phase length between 10 and 17 days."
+        }
+      },
+      "quickReference": {
+        "title": "The Formula",
+        "intro": "Ovulation is estimated backward from the next expected period, not forward from the last one."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Ovulation and the Fertile Window",
+          "paragraph1": "Ovulation is the release of a mature egg from an ovary, the single event in the menstrual cycle when pregnancy becomes possible. Because the egg survives for only about 24 hours after release, and sperm can survive in the reproductive tract for up to about 5 days, the \"fertile window\" — the days when intercourse can result in pregnancy — spans roughly the 5 days before ovulation through the day after it, even though conception itself can only happen on ovulation day.",
+          "paragraph2": "A key insight behind estimating ovulation from cycle length is that the menstrual cycle has two phases of unequal consistency: the follicular phase (from the start of the period to ovulation) varies considerably in length from person to person and cycle to cycle, while the luteal phase (from ovulation to the next period) is remarkably consistent, typically 12-14 days regardless of overall cycle length. This is why this calculator estimates ovulation by counting backward a fixed number of days from the next expected period, rather than counting forward a fixed number of days from the last one."
+        },
+        "phases": {
+          "title": "The Phases of the Menstrual Cycle",
+          "intro": "Each phase is governed by a different balance of reproductive hormones.",
+          "items": [
+            {
+              "title": "Menstrual Phase",
+              "description": "The shedding of the uterine lining, marking day 1 of the cycle. Typically lasts 3-7 days, though this varies by individual."
+            },
+            {
+              "title": "Follicular Phase",
+              "description": "Runs from day 1 until ovulation, during which follicles in the ovary mature under the influence of follicle-stimulating hormone (FSH), and the uterine lining rebuilds. This is the phase most responsible for overall cycle length variability."
+            },
+            {
+              "title": "Ovulation",
+              "description": "Triggered by a surge in luteinizing hormone (LH), a mature egg is released from the dominant follicle. This single-day event is the only point in the cycle when fertilization can occur."
+            },
+            {
+              "title": "Luteal Phase",
+              "description": "Runs from ovulation to the start of the next period. The ruptured follicle transforms into the corpus luteum, which produces progesterone to prepare the uterine lining for a potential pregnancy. Its length is remarkably consistent, which is why it anchors this calculator's backward-counting method."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A couple of scenarios and what this calculator returns for the first projected cycle.",
+          "columnCalculation": "Input",
+          "columnResult": "Cycle 1 Result",
+          "rows": [
+            {
+              "calculation": "Last period Jan 1, 28-day cycle, 14-day luteal phase",
+              "result": "Ovulation ≈ Jan 15, fertile window Jan 10-16"
+            },
+            {
+              "calculation": "Last period Jan 1, 32-day cycle, 14-day luteal phase",
+              "result": "Ovulation ≈ Jan 19, fertile window Jan 14-20"
+            },
+            {
+              "calculation": "Last period Jan 1, 28-day cycle, 12-day luteal phase",
+              "result": "Ovulation ≈ Jan 17, fertile window Jan 12-18"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "How accurate is an ovulation estimate based on cycle length alone?",
+              "answer": "It's a useful starting estimate, especially for people with regular cycles, but it can't account for cycle-to-cycle variation that affects almost everyone to some degree. Tracking methods that observe direct physical signals — basal body temperature, cervical mucus changes, or urine LH test strips — generally provide more precise, real-time confirmation of ovulation than a calendar estimate alone."
+            },
+            {
+              "question": "Why does this calculator project three cycles instead of just one?",
+              "answer": "Showing the next few cycles helps illustrate the pattern and gives a practical planning window beyond just the immediate cycle, which is useful whether the goal is trying to conceive or avoiding pregnancy. Each projected cycle uses the same average cycle length assumption, so accuracy for cycles further in the future depends on how consistent an individual's actual cycle length is."
+            },
+            {
+              "question": "What if my cycles are irregular?",
+              "answer": "This calculator's estimates are least reliable for irregular cycles, since it assumes a consistent average cycle length. In that case, direct fertility tracking methods (basal body temperature charting, ovulation predictor kits, or cervical mucus monitoring) are considerably more useful than calendar-based calculations, and a healthcare provider can help investigate the cause of irregularity if it's a persistent concern."
+            },
+            {
+              "question": "Can I get pregnant on any day of my cycle?",
+              "answer": "No — pregnancy can only result from intercourse during the fertile window, roughly the 5 days before ovulation through the day after it, because that's the only period when both a viable egg and viable sperm can be present simultaneously in the reproductive tract. Outside that window, conception is not possible regardless of when intercourse occurs."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Understanding of ovulation timing advanced significantly in the 1920s through the independent work of Japanese gynecologist Kyusaku Ogino and Austrian gynecologist Hermann Knaus, who each separately established that ovulation occurs at a predictable interval before the next menstrual period, rather than at a fixed interval after the last one. Their calendar-based insight, now known as the Ogino-Knaus method, became the scientific foundation for the rhythm method of natural family planning and remains the conceptual basis for how ovulation calculators like this one estimate timing today."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern fertility tracking has moved well beyond calendar calculations alone, incorporating basal body temperature monitoring (which rises slightly after ovulation due to progesterone), urine test strips that detect the LH surge directly 24-36 hours before ovulation, and consumer wearables that track multiple physiological signals continuously. Research comparing these methods consistently shows that direct hormonal or physiological tracking provides more precise, individualized ovulation timing than calendar-based calculation alone, which is best used as a general planning estimate rather than a precise prediction."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Reproductive endocrinology and fertility are studied within obstetrics and gynecology, a branch of medicine. Here are five respected research programs in this area, plus one regional institution:",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "One of the top-ranked obstetrics and gynecology departments in the United States.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "No — clinical and research training is in-residence."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "A leading center for reproductive health research in the United Kingdom.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Karolinska Institute — Department of Women's and Children's Health",
+                "note": "A leading Scandinavian center for reproductive and perinatal research.",
+                "url": "https://ki.se/en/kbh",
+                "online": "No — research programs are in-residence."
+              },
+              {
+                "name": "University of California, San Francisco — Center for Reproductive Health",
+                "note": "A leading US center for reproductive endocrinology and fertility research.",
+                "url": "https://reproductivehealth.ucsf.edu/",
+                "online": "No — clinical and research training is in-residence."
+              },
+              {
+                "name": "Monash University — Monash IVF and Fertility Preservation Research Group",
+                "note": "A leading center for reproductive medicine research in Australia.",
+                "url": "https://www.monash.edu/medicine/mifc",
+                "online": "No — research and clinical training are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Obstetrics and Gynecology",
+                "note": "Founded in 1866; a leading regional center for reproductive health care and training.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Wilcox, A. J., Weinberg, C. R., & Baird, D. D. (1995). Timing of Sexual Intercourse in Relation to Ovulation. New England Journal of Medicine, 333(23), 1517-1521.",
+          "note": "A landmark prospective study that precisely established the modern 6-day fertile window (5 days before ovulation through the day of ovulation) by directly tracking hormone levels alongside recorded intercourse timing and pregnancy outcomes.",
+          "url": "https://doi.org/10.1056/NEJM199512073332301",
+          "readOriginal": "View the Original Study"
+        }
+      }
     }
   },
   "toolPage": {

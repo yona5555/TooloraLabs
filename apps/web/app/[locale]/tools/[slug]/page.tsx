@@ -115,6 +115,8 @@ import BodyFatCalculator from "@/components/tools/body-fat-calculator/BodyFatCal
 import BodyFatEducation from "@/components/tools/body-fat-calculator/BodyFatEducation";
 import DueDateCalculator from "@/components/tools/due-date-calculator/DueDateCalculator";
 import DueDateEducation from "@/components/tools/due-date-calculator/DueDateEducation";
+import OvulationCalculator from "@/components/tools/ovulation-calculator/OvulationCalculator";
+import OvulationEducation from "@/components/tools/ovulation-calculator/OvulationEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -501,6 +503,9 @@ export default async function ToolPage({
     case "due-date-calculator":
       component = <DueDateCalculator education={<DueDateEducation />} />;
       break;
+    case "ovulation-calculator":
+      component = <OvulationCalculator education={<OvulationEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -633,6 +638,7 @@ export default async function ToolPage({
     slug === "sleep-calculator" ||
     slug === "body-fat-calculator" ||
     slug === "due-date-calculator" ||
+    slug === "ovulation-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

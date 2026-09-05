@@ -16826,6 +16826,174 @@
           "readOriginal": "Consulter l'étude originale"
         }
       }
+    },
+    "ovulation-calculator": {
+      "title": "Calculatrice d'Ovulation",
+      "description": "Estimez votre prochaine date d'ovulation et votre fenêtre de fertilité à partir de vos dernières règles et de la durée moyenne du cycle, projetées sur les trois prochains cycles.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre cycle",
+        "lastPeriodDate": "Premier Jour des Dernières Règles",
+        "cycleLengthDays": "Durée Moyenne du Cycle (jours)",
+        "lutealPhaseDays": "Durée de la Phase Lutéale (jours)",
+        "showAdvanced": "Je connais la durée de ma phase lutéale",
+        "hint": "L'ovulation est estimée en comptant à rebours à partir de vos prochaines règles attendues, car la phase lutéale est plus constante en durée que la phase précédant l'ovulation."
+      },
+      "diagram": {
+        "ariaLabel": "Une chronologie des trois prochains cycles montrant chaque fenêtre de fertilité et jour d'ovulation",
+        "fertileWindow": "Fenêtre de Fertilité",
+        "ovulationDay": "Jour d'Ovulation"
+      },
+      "result": {
+        "heading": "Résultat",
+        "nextOvulation": "Prochaine Ovulation Estimée",
+        "cycle": "Cycle {n}",
+        "fertileWindow": "Fenêtre de Fertilité",
+        "nextPeriod": "Prochaines Règles",
+        "errors": {
+          "invalid-date": "Saisissez une date valide pour voir un résultat.",
+          "invalid-cycle-length": "Saisissez une durée de cycle entre 20 et 45 jours.",
+          "invalid-luteal-phase": "Saisissez une durée de phase lutéale entre 10 et 17 jours."
+        }
+      },
+      "quickReference": {
+        "title": "La formule",
+        "intro": "L'ovulation est estimée à rebours à partir des prochaines règles attendues, pas en avant à partir des dernières."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'ovulation et la fenêtre de fertilité",
+          "paragraph1": "L'ovulation est la libération d'un ovule mature par un ovaire, le seul événement du cycle menstruel où une grossesse devient possible. Comme l'ovule ne survit qu'environ 24 heures après sa libération, et que les spermatozoïdes peuvent survivre dans les voies reproductives jusqu'à environ 5 jours, la \"fenêtre de fertilité\" — les jours où un rapport sexuel peut entraîner une grossesse — s'étend approximativement des 5 jours précédant l'ovulation jusqu'au lendemain, même si la conception elle-même ne peut se produire que le jour de l'ovulation.",
+          "paragraph2": "Une idée clé derrière l'estimation de l'ovulation à partir de la durée du cycle est que le cycle menstruel comporte deux phases de constance inégale : la phase folliculaire (du début des règles à l'ovulation) varie considérablement en durée d'une personne à l'autre et d'un cycle à l'autre, tandis que la phase lutéale (de l'ovulation aux prochaines règles) est remarquablement constante, typiquement de 12 à 14 jours quelle que soit la durée globale du cycle. C'est pourquoi cette calculatrice estime l'ovulation en comptant à rebours un nombre fixe de jours à partir des prochaines règles attendues, plutôt qu'en comptant en avant un nombre fixe de jours à partir des dernières."
+        },
+        "phases": {
+          "title": "Les phases du cycle menstruel",
+          "intro": "Chaque phase est régie par un équilibre différent d'hormones reproductives.",
+          "items": [
+            {
+              "title": "Phase menstruelle",
+              "description": "La perte de la muqueuse utérine, marquant le jour 1 du cycle. Dure généralement 3 à 7 jours, bien que cela varie selon les individus."
+            },
+            {
+              "title": "Phase folliculaire",
+              "description": "Va du jour 1 jusqu'à l'ovulation, période durant laquelle les follicules de l'ovaire mûrissent sous l'influence de l'hormone folliculo-stimulante (FSH), et la muqueuse utérine se reconstitue. Cette phase est la principale responsable de la variabilité de la durée globale du cycle."
+            },
+            {
+              "title": "Ovulation",
+              "description": "Déclenchée par un pic d'hormone lutéinisante (LH), un ovule mature est libéré du follicule dominant. Cet événement d'un seul jour est le seul moment du cycle où la fécondation peut avoir lieu."
+            },
+            {
+              "title": "Phase lutéale",
+              "description": "Va de l'ovulation au début des prochaines règles. Le follicule rompu se transforme en corps jaune, qui produit de la progestérone pour préparer la muqueuse utérine à une éventuelle grossesse. Sa durée est remarquablement constante, ce qui en fait le point d'ancrage de la méthode de comptage à rebours de cette calculatrice."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques scénarios et ce que cette calculatrice renvoie pour le premier cycle projeté.",
+          "columnCalculation": "Saisie",
+          "columnResult": "Résultat du Cycle 1",
+          "rows": [
+            {
+              "calculation": "Dernières règles 1er janv., cycle de 28 jours, phase lutéale de 14 jours",
+              "result": "Ovulation ≈ 15 janv., fenêtre de fertilité 10-16 janv."
+            },
+            {
+              "calculation": "Dernières règles 1er janv., cycle de 32 jours, phase lutéale de 14 jours",
+              "result": "Ovulation ≈ 19 janv., fenêtre de fertilité 14-20 janv."
+            },
+            {
+              "calculation": "Dernières règles 1er janv., cycle de 28 jours, phase lutéale de 12 jours",
+              "result": "Ovulation ≈ 17 janv., fenêtre de fertilité 12-18 janv."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la précision d'une estimation d'ovulation basée uniquement sur la durée du cycle ?",
+              "answer": "C'est une estimation de départ utile, en particulier pour les personnes ayant des cycles réguliers, mais elle ne peut pas tenir compte de la variation d'un cycle à l'autre qui affecte presque tout le monde dans une certaine mesure. Les méthodes de suivi qui observent des signaux physiques directs — température basale, changements de la glaire cervicale, ou bandelettes de test LH urinaire — fournissent généralement une confirmation plus précise et en temps réel de l'ovulation qu'une simple estimation calendaire."
+            },
+            {
+              "question": "Pourquoi cette calculatrice projette-t-elle trois cycles au lieu d'un seul ?",
+              "answer": "Afficher les prochains cycles aide à illustrer le schéma et offre une fenêtre de planification pratique au-delà du cycle immédiat, ce qui est utile que l'objectif soit de chercher à concevoir ou d'éviter une grossesse. Chaque cycle projeté utilise la même hypothèse de durée moyenne de cycle, donc la précision pour les cycles plus éloignés dans le futur dépend de la constance réelle de la durée du cycle d'un individu."
+            },
+            {
+              "question": "Que se passe-t-il si mes cycles sont irréguliers ?",
+              "answer": "Les estimations de cette calculatrice sont les moins fiables pour les cycles irréguliers, car elle suppose une durée moyenne de cycle constante. Dans ce cas, les méthodes directes de suivi de la fertilité (courbe de température basale, kits prédicteurs d'ovulation, ou surveillance de la glaire cervicale) sont bien plus utiles que les calculs basés sur le calendrier, et un professionnel de santé peut aider à examiner la cause de l'irrégularité si elle constitue une préoccupation persistante."
+            },
+            {
+              "question": "Puis-je tomber enceinte n'importe quel jour de mon cycle ?",
+              "answer": "Non — une grossesse ne peut résulter que d'un rapport sexuel pendant la fenêtre de fertilité, environ les 5 jours précédant l'ovulation jusqu'au lendemain, car c'est la seule période où un ovule viable et des spermatozoïdes viables peuvent être présents simultanément dans les voies reproductives. En dehors de cette fenêtre, la conception n'est pas possible quel que soit le moment du rapport sexuel."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "La compréhension du moment de l'ovulation a considérablement progressé dans les années 1920 grâce aux travaux indépendants du gynécologue japonais Kyusaku Ogino et du gynécologue autrichien Hermann Knaus, qui ont chacun établi séparément que l'ovulation se produit à un intervalle prévisible avant les prochaines règles, plutôt qu'à un intervalle fixe après les dernières. Leur intuition basée sur le calendrier, aujourd'hui connue sous le nom de méthode Ogino-Knaus, est devenue le fondement scientifique de la méthode du rythme de planification familiale naturelle et reste la base conceptuelle de la façon dont les calculatrices d'ovulation comme celle-ci estiment le moment aujourd'hui."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Le suivi moderne de la fertilité va aujourd'hui bien au-delà des calculs calendaires seuls, intégrant la surveillance de la température basale (qui augmente légèrement après l'ovulation en raison de la progestérone), des bandelettes de test urinaire qui détectent directement le pic de LH 24 à 36 heures avant l'ovulation, et des objets connectés grand public qui suivent en continu plusieurs signaux physiologiques. Les recherches comparant ces méthodes montrent systématiquement que le suivi hormonal ou physiologique direct fournit un moment d'ovulation plus précis et individualisé que le calcul calendaire seul, qui est mieux utilisé comme une estimation générale de planification plutôt qu'une prédiction précise."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "L'endocrinologie de la reproduction et la fertilité sont étudiées en obstétrique et gynécologie, une branche de la médecine. Voici cinq programmes de recherche reconnus dans ce domaine, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "L'un des départements de gynécologie-obstétrique les mieux classés aux États-Unis.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "Non — la formation clinique et de recherche est en présentiel."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "Un centre de premier plan pour la recherche sur la santé reproductive au Royaume-Uni.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Institut Karolinska — Department of Women's and Children's Health",
+                "note": "Un centre scandinave de premier plan pour la recherche reproductive et périnatale.",
+                "url": "https://ki.se/en/kbh",
+                "online": "Non — les programmes de recherche sont en présentiel."
+              },
+              {
+                "name": "University of California, San Francisco — Center for Reproductive Health",
+                "note": "Un centre américain de premier plan pour la recherche en endocrinologie reproductive et fertilité.",
+                "url": "https://reproductivehealth.ucsf.edu/",
+                "online": "Non — la formation clinique et de recherche est en présentiel."
+              },
+              {
+                "name": "Université Monash — Monash IVF and Fertility Preservation Research Group",
+                "note": "Un centre de premier plan pour la recherche en médecine reproductive en Australie.",
+                "url": "https://www.monash.edu/medicine/mifc",
+                "online": "Non — la formation de recherche et clinique est en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'obstétrique et de gynécologie",
+                "note": "Fondée en 1866 ; un centre régional de premier plan pour les soins et la formation en santé reproductive.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Wilcox, A. J., Weinberg, C. R., & Baird, D. D. (1995). Timing of Sexual Intercourse in Relation to Ovulation. New England Journal of Medicine, 333(23), 1517-1521.",
+          "note": "Une étude prospective marquante qui a établi précisément la fenêtre de fertilité moderne de 6 jours (5 jours avant l'ovulation jusqu'au jour de l'ovulation) en suivant directement les niveaux hormonaux ainsi que le moment enregistré des rapports sexuels et les issues de grossesse.",
+          "url": "https://doi.org/10.1056/NEJM199512073332301",
+          "readOriginal": "Consulter l'étude originale"
+        }
+      }
     }
   },
   "toolPage": {

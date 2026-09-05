@@ -16826,6 +16826,174 @@
           "readOriginal": "Originalstudie ansehen"
         }
       }
+    },
+    "ovulation-calculator": {
+      "title": "Eisprungrechner",
+      "description": "Schätze deinen nächsten Eisprung und dein fruchtbares Fenster aus deiner letzten Periode und durchschnittlichen Zykluslänge, projiziert über die nächsten drei Zyklen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Dein Zyklus",
+        "lastPeriodDate": "Erster Tag der letzten Periode",
+        "cycleLengthDays": "Durchschnittliche Zykluslänge (Tage)",
+        "lutealPhaseDays": "Länge der Lutealphase (Tage)",
+        "showAdvanced": "Ich kenne meine Lutealphasenlänge",
+        "hint": "Der Eisprung wird durch Rückwärtszählen von deiner nächsten erwarteten Periode geschätzt, da die Lutealphase konsistenter in der Länge ist als die Phase vor dem Eisprung."
+      },
+      "diagram": {
+        "ariaLabel": "Eine Zeitleiste der nächsten drei Zyklen mit jeweiligem fruchtbarem Fenster und Eisprungtag",
+        "fertileWindow": "Fruchtbares Fenster",
+        "ovulationDay": "Eisprungtag"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "nextOvulation": "Nächster geschätzter Eisprung",
+        "cycle": "Zyklus {n}",
+        "fertileWindow": "Fruchtbares Fenster",
+        "nextPeriod": "Nächste Periode",
+        "errors": {
+          "invalid-date": "Gib ein gültiges Datum ein, um ein Ergebnis zu sehen.",
+          "invalid-cycle-length": "Gib eine Zykluslänge zwischen 20 und 45 Tagen ein.",
+          "invalid-luteal-phase": "Gib eine Lutealphasenlänge zwischen 10 und 17 Tagen ein."
+        }
+      },
+      "quickReference": {
+        "title": "Die Formel",
+        "intro": "Der Eisprung wird rückwärts von der nächsten erwarteten Periode geschätzt, nicht vorwärts von der letzten."
+      },
+      "education": {
+        "intro": {
+          "title": "Eisprung und fruchtbares Fenster verstehen",
+          "paragraph1": "Der Eisprung ist die Freisetzung einer reifen Eizelle aus einem Eierstock — das einzige Ereignis im Menstruationszyklus, bei dem eine Schwangerschaft möglich wird. Da die Eizelle nach der Freisetzung nur etwa 24 Stunden überlebt und Spermien im Fortpflanzungstrakt bis zu etwa 5 Tage überleben können, umfasst das \"fruchtbare Fenster\" — die Tage, an denen Geschlechtsverkehr zu einer Schwangerschaft führen kann — ungefähr die 5 Tage vor dem Eisprung bis zum Tag danach, auch wenn die eigentliche Befruchtung nur am Eisprungtag selbst stattfinden kann.",
+          "paragraph2": "Eine zentrale Erkenntnis hinter der Schätzung des Eisprungs aus der Zykluslänge ist, dass der Menstruationszyklus zwei Phasen unterschiedlicher Konsistenz hat: Die Follikelphase (vom Beginn der Periode bis zum Eisprung) variiert von Person zu Person und von Zyklus zu Zyklus erheblich in der Länge, während die Lutealphase (vom Eisprung bis zur nächsten Periode) bemerkenswert konsistent ist, typischerweise 12-14 Tage, unabhängig von der Gesamtzykluslänge. Deshalb schätzt dieser Rechner den Eisprung, indem er eine feste Anzahl von Tagen von der nächsten erwarteten Periode zurückzählt, statt eine feste Anzahl von Tagen von der letzten Periode vorwärtszuzählen."
+        },
+        "phases": {
+          "title": "Die Phasen des Menstruationszyklus",
+          "intro": "Jede Phase wird von einem unterschiedlichen Gleichgewicht der Fortpflanzungshormone gesteuert.",
+          "items": [
+            {
+              "title": "Menstruationsphase",
+              "description": "Die Abstoßung der Gebärmutterschleimhaut, die Tag 1 des Zyklus markiert. Dauert typischerweise 3-7 Tage, variiert aber individuell."
+            },
+            {
+              "title": "Follikelphase",
+              "description": "Läuft von Tag 1 bis zum Eisprung, während Follikel im Eierstock unter dem Einfluss des follikelstimulierenden Hormons (FSH) heranreifen und sich die Gebärmutterschleimhaut wieder aufbaut. Diese Phase ist hauptsächlich für die Variabilität der Gesamtzykluslänge verantwortlich."
+            },
+            {
+              "title": "Eisprung",
+              "description": "Ausgelöst durch einen Anstieg des luteinisierenden Hormons (LH) wird eine reife Eizelle aus dem dominanten Follikel freigesetzt. Dieses eintägige Ereignis ist der einzige Zeitpunkt im Zyklus, an dem eine Befruchtung stattfinden kann."
+            },
+            {
+              "title": "Lutealphase",
+              "description": "Läuft vom Eisprung bis zum Beginn der nächsten Periode. Der geplatzte Follikel wandelt sich in den Gelbkörper um, der Progesteron produziert, um die Gebärmutterschleimhaut auf eine mögliche Schwangerschaft vorzubereiten. Ihre Länge ist bemerkenswert konsistent, weshalb sie die Rückwärtszählmethode dieses Rechners verankert."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Szenarien und die Ergebnisse, die dieser Rechner für den ersten projizierten Zyklus liefert.",
+          "columnCalculation": "Eingabe",
+          "columnResult": "Ergebnis Zyklus 1",
+          "rows": [
+            {
+              "calculation": "Letzte Periode 1. Jan, 28-Tage-Zyklus, 14-Tage-Lutealphase",
+              "result": "Eisprung ≈ 15. Jan, fruchtbares Fenster 10.-16. Jan"
+            },
+            {
+              "calculation": "Letzte Periode 1. Jan, 32-Tage-Zyklus, 14-Tage-Lutealphase",
+              "result": "Eisprung ≈ 19. Jan, fruchtbares Fenster 14.-20. Jan"
+            },
+            {
+              "calculation": "Letzte Periode 1. Jan, 28-Tage-Zyklus, 12-Tage-Lutealphase",
+              "result": "Eisprung ≈ 17. Jan, fruchtbares Fenster 12.-18. Jan"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wie genau ist eine Eisprungschätzung allein basierend auf der Zykluslänge?",
+              "answer": "Es ist eine nützliche erste Schätzung, besonders für Personen mit regelmäßigen Zyklen, kann aber die Zyklus-zu-Zyklus-Variation nicht berücksichtigen, die fast jeden in gewissem Maße betrifft. Tracking-Methoden, die direkte physische Signale beobachten — Basaltemperatur, Veränderungen des Zervixschleims oder Urin-LH-Teststreifen — liefern im Allgemeinen eine präzisere Echtzeitbestätigung des Eisprungs als eine reine Kalenderschätzung."
+            },
+            {
+              "question": "Warum projiziert dieser Rechner drei Zyklen statt nur einen?",
+              "answer": "Die Anzeige der nächsten paar Zyklen hilft, das Muster zu veranschaulichen, und bietet ein praktisches Planungsfenster über den unmittelbaren Zyklus hinaus, was nützlich ist, ob das Ziel eine Schwangerschaft anstrebt oder vermeidet. Jeder projizierte Zyklus verwendet dieselbe durchschnittliche Zykluslängenannahme, sodass die Genauigkeit für weiter in der Zukunft liegende Zyklen davon abhängt, wie konsistent die tatsächliche Zykluslänge einer Person ist."
+            },
+            {
+              "question": "Was, wenn meine Zyklen unregelmäßig sind?",
+              "answer": "Die Schätzungen dieses Rechners sind bei unregelmäßigen Zyklen am wenigsten zuverlässig, da eine konsistente durchschnittliche Zykluslänge angenommen wird. In diesem Fall sind direkte Fruchtbarkeits-Tracking-Methoden (Basaltemperaturmessung, Ovulationstests oder Zervixschleim-Beobachtung) deutlich nützlicher als kalenderbasierte Berechnungen, und eine medizinische Fachkraft kann helfen, die Ursache der Unregelmäßigkeit zu untersuchen, falls dies ein anhaltendes Anliegen ist."
+            },
+            {
+              "question": "Kann ich an jedem Tag meines Zyklus schwanger werden?",
+              "answer": "Nein — eine Schwangerschaft kann nur durch Geschlechtsverkehr während des fruchtbaren Fensters entstehen, ungefähr die 5 Tage vor dem Eisprung bis zum Tag danach, da dies der einzige Zeitraum ist, in dem sowohl eine lebensfähige Eizelle als auch lebensfähige Spermien gleichzeitig im Fortpflanzungstrakt vorhanden sein können. Außerhalb dieses Fensters ist eine Befruchtung unabhängig vom Zeitpunkt des Geschlechtsverkehrs nicht möglich."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Das Verständnis des Eisprungzeitpunkts entwickelte sich in den 1920er-Jahren durch die unabhängigen Arbeiten des japanischen Gynäkologen Kyusaku Ogino und des österreichischen Gynäkologen Hermann Knaus erheblich weiter, die jeweils getrennt feststellten, dass der Eisprung in einem vorhersagbaren Intervall vor der nächsten Menstruation auftritt, statt in einem festen Intervall nach der letzten. Ihre kalenderbasierte Erkenntnis, heute als Ogino-Knaus-Methode bekannt, wurde zur wissenschaftlichen Grundlage der Kalendermethode der natürlichen Familienplanung und bleibt bis heute die konzeptionelle Basis dafür, wie Eisprungrechner wie dieser den Zeitpunkt schätzen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Die moderne Fruchtbarkeitsverfolgung geht heute weit über reine Kalenderberechnungen hinaus und bezieht die Überwachung der Basaltemperatur (die nach dem Eisprung durch Progesteron leicht ansteigt), Urin-Teststreifen, die den LH-Anstieg direkt 24-36 Stunden vor dem Eisprung erkennen, und Consumer-Wearables ein, die kontinuierlich mehrere physiologische Signale verfolgen. Forschung, die diese Methoden vergleicht, zeigt durchweg, dass direktes hormonelles oder physiologisches Tracking einen präziseren, individualisierten Eisprungzeitpunkt liefert als die reine Kalenderberechnung, die am besten als allgemeine Planungsschätzung und nicht als präzise Vorhersage verwendet wird."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Reproduktionsendokrinologie und Fruchtbarkeit werden in der Geburtshilfe und Gynäkologie studiert, einem Teilgebiet der Medizin. Hier sind fünf angesehene Forschungsprogramme in diesem Bereich, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "Johns Hopkins University School of Medicine — Department of Gynecology and Obstetrics",
+                "note": "Eine der bestplatzierten Abteilungen für Gynäkologie und Geburtshilfe in den USA.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "Nein — klinische und Forschungsausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "University of Oxford — Nuffield Department of Women's & Reproductive Health",
+                "note": "Ein führendes Zentrum für Reproduktionsgesundheitsforschung im Vereinigten Königreich.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Karolinska-Institut — Department of Women's and Children's Health",
+                "note": "Ein führendes skandinavisches Zentrum für Reproduktions- und Perinatalforschung.",
+                "url": "https://ki.se/en/kbh",
+                "online": "Nein — Forschungsprogramme sind Präsenzprogramme."
+              },
+              {
+                "name": "University of California, San Francisco — Center for Reproductive Health",
+                "note": "Ein führendes US-Zentrum für Reproduktionsendokrinologie und Fruchtbarkeitsforschung.",
+                "url": "https://reproductivehealth.ucsf.edu/",
+                "online": "Nein — klinische und Forschungsausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "Monash University — Monash IVF and Fertility Preservation Research Group",
+                "note": "Ein führendes Zentrum für Reproduktionsmedizinforschung in Australien.",
+                "url": "https://www.monash.edu/medicine/mifc",
+                "online": "Nein — Forschungs- und klinische Ausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "American University of Beirut — Department of Obstetrics and Gynecology",
+                "note": "Gegründet 1866; ein führendes regionales Zentrum für reproduktive Gesundheitsversorgung und Ausbildung.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Wilcox, A. J., Weinberg, C. R., & Baird, D. D. (1995). Timing of Sexual Intercourse in Relation to Ovulation. New England Journal of Medicine, 333(23), 1517-1521.",
+          "note": "Eine wegweisende prospektive Studie, die das moderne 6-Tage-fruchtbare-Fenster (5 Tage vor dem Eisprung bis zum Eisprungtag) präzise durch direkte Verfolgung von Hormonspiegeln zusammen mit erfasstem Geschlechtsverkehrszeitpunkt und Schwangerschaftsergebnissen etablierte.",
+          "url": "https://doi.org/10.1056/NEJM199512073332301",
+          "readOriginal": "Originalstudie ansehen"
+        }
+      }
     }
   },
   "toolPage": {

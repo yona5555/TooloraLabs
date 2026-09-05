@@ -16826,6 +16826,174 @@
           "readOriginal": "Ver el estudio original"
         }
       }
+    },
+    "ovulation-calculator": {
+      "title": "Calculadora de Ovulación",
+      "description": "Estima tu próxima fecha de ovulación y ventana fértil a partir de tu última regla y duración media del ciclo, proyectada a lo largo de los próximos tres ciclos.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu ciclo",
+        "lastPeriodDate": "Primer Día de la Última Regla",
+        "cycleLengthDays": "Duración Media del Ciclo (días)",
+        "lutealPhaseDays": "Duración de la Fase Lútea (días)",
+        "showAdvanced": "Conozco la duración de mi fase lútea",
+        "hint": "La ovulación se estima contando hacia atrás desde tu próxima regla esperada, ya que la fase lútea es más consistente en duración que la fase previa a la ovulación."
+      },
+      "diagram": {
+        "ariaLabel": "Una línea de tiempo de los próximos tres ciclos mostrando cada ventana fértil y día de ovulación",
+        "fertileWindow": "Ventana Fértil",
+        "ovulationDay": "Día de Ovulación"
+      },
+      "result": {
+        "heading": "Resultado",
+        "nextOvulation": "Próxima Ovulación Estimada",
+        "cycle": "Ciclo {n}",
+        "fertileWindow": "Ventana Fértil",
+        "nextPeriod": "Próxima Regla",
+        "errors": {
+          "invalid-date": "Introduce una fecha válida para ver un resultado.",
+          "invalid-cycle-length": "Introduce una duración de ciclo entre 20 y 45 días.",
+          "invalid-luteal-phase": "Introduce una duración de fase lútea entre 10 y 17 días."
+        }
+      },
+      "quickReference": {
+        "title": "La fórmula",
+        "intro": "La ovulación se estima hacia atrás desde la próxima regla esperada, no hacia adelante desde la última."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la ovulación y la ventana fértil",
+          "paragraph1": "La ovulación es la liberación de un óvulo maduro de un ovario, el único evento del ciclo menstrual en que el embarazo se vuelve posible. Como el óvulo sobrevive solo unas 24 horas tras su liberación, y los espermatozoides pueden sobrevivir en el tracto reproductivo hasta unos 5 días, la \"ventana fértil\" —los días en que las relaciones sexuales pueden resultar en embarazo— abarca aproximadamente los 5 días antes de la ovulación hasta el día después, aunque la concepción en sí solo puede ocurrir el día de la ovulación.",
+          "paragraph2": "Una idea clave detrás de estimar la ovulación a partir de la duración del ciclo es que el ciclo menstrual tiene dos fases de consistencia desigual: la fase folicular (desde el inicio de la regla hasta la ovulación) varía considerablemente en duración de una persona a otra y de un ciclo a otro, mientras que la fase lútea (desde la ovulación hasta la próxima regla) es notablemente consistente, típicamente de 12-14 días independientemente de la duración total del ciclo. Por eso esta calculadora estima la ovulación contando hacia atrás un número fijo de días desde la próxima regla esperada, en lugar de contar hacia adelante un número fijo de días desde la última."
+        },
+        "phases": {
+          "title": "Las fases del ciclo menstrual",
+          "intro": "Cada fase está gobernada por un equilibrio diferente de hormonas reproductivas.",
+          "items": [
+            {
+              "title": "Fase menstrual",
+              "description": "El desprendimiento del revestimiento uterino, marcando el día 1 del ciclo. Suele durar de 3 a 7 días, aunque varía según la persona."
+            },
+            {
+              "title": "Fase folicular",
+              "description": "Va desde el día 1 hasta la ovulación, durante la cual los folículos del ovario maduran bajo la influencia de la hormona folículo-estimulante (FSH), y el revestimiento uterino se reconstruye. Esta es la fase más responsable de la variabilidad en la duración total del ciclo."
+            },
+            {
+              "title": "Ovulación",
+              "description": "Desencadenada por un aumento de la hormona luteinizante (LH), se libera un óvulo maduro del folículo dominante. Este evento de un solo día es el único momento del ciclo en que puede ocurrir la fecundación."
+            },
+            {
+              "title": "Fase lútea",
+              "description": "Va desde la ovulación hasta el inicio de la próxima regla. El folículo roto se transforma en el cuerpo lúteo, que produce progesterona para preparar el revestimiento uterino para un posible embarazo. Su duración es notablemente consistente, por lo que ancla el método de conteo hacia atrás de esta calculadora."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Un par de escenarios y lo que devuelve esta calculadora para el primer ciclo proyectado.",
+          "columnCalculation": "Entrada",
+          "columnResult": "Resultado del Ciclo 1",
+          "rows": [
+            {
+              "calculation": "Última regla 1 ene, ciclo de 28 días, fase lútea de 14 días",
+              "result": "Ovulación ≈ 15 ene, ventana fértil 10-16 ene"
+            },
+            {
+              "calculation": "Última regla 1 ene, ciclo de 32 días, fase lútea de 14 días",
+              "result": "Ovulación ≈ 19 ene, ventana fértil 14-20 ene"
+            },
+            {
+              "calculation": "Última regla 1 ene, ciclo de 28 días, fase lútea de 12 días",
+              "result": "Ovulación ≈ 17 ene, ventana fértil 12-18 ene"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Qué tan precisa es una estimación de ovulación basada solo en la duración del ciclo?",
+              "answer": "Es una estimación inicial útil, especialmente para personas con ciclos regulares, pero no puede explicar la variación de ciclo a ciclo que afecta a casi todos en cierta medida. Los métodos de seguimiento que observan señales físicas directas —temperatura basal corporal, cambios en el moco cervical, o tiras de prueba de LH en orina— generalmente proporcionan una confirmación más precisa y en tiempo real de la ovulación que una estimación de calendario por sí sola."
+            },
+            {
+              "question": "¿Por qué esta calculadora proyecta tres ciclos en lugar de solo uno?",
+              "answer": "Mostrar los próximos ciclos ayuda a ilustrar el patrón y ofrece una ventana de planificación práctica más allá del ciclo inmediato, lo cual es útil ya sea que el objetivo sea buscar el embarazo o evitarlo. Cada ciclo proyectado usa la misma suposición de duración media del ciclo, por lo que la precisión para ciclos más futuros depende de cuán consistente sea la duración real del ciclo de un individuo."
+            },
+            {
+              "question": "¿Qué pasa si mis ciclos son irregulares?",
+              "answer": "Las estimaciones de esta calculadora son menos fiables para ciclos irregulares, ya que asume una duración media de ciclo consistente. En ese caso, los métodos directos de seguimiento de la fertilidad (registro de temperatura basal corporal, kits predictores de ovulación, o monitoreo del moco cervical) son considerablemente más útiles que los cálculos basados en calendario, y un proveedor de atención médica puede ayudar a investigar la causa de la irregularidad si es una preocupación persistente."
+            },
+            {
+              "question": "¿Puedo quedar embarazada en cualquier día de mi ciclo?",
+              "answer": "No —el embarazo solo puede resultar de relaciones sexuales durante la ventana fértil, aproximadamente los 5 días antes de la ovulación hasta el día después, porque ese es el único período en que puede haber simultáneamente un óvulo viable y espermatozoides viables en el tracto reproductivo. Fuera de esa ventana, la concepción no es posible sin importar cuándo ocurran las relaciones sexuales."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La comprensión del momento de la ovulación avanzó significativamente en la década de 1920 gracias al trabajo independiente del ginecólogo japonés Kyusaku Ogino y el ginecólogo austríaco Hermann Knaus, quienes cada uno estableció por separado que la ovulación ocurre en un intervalo predecible antes de la próxima menstruación, en lugar de un intervalo fijo después de la última. Su idea basada en el calendario, ahora conocida como el método Ogino-Knaus, se convirtió en la base científica del método del ritmo de planificación familiar natural y sigue siendo la base conceptual de cómo las calculadoras de ovulación como esta estiman el momento hoy en día."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "El seguimiento moderno de la fertilidad ha avanzado mucho más allá de los cálculos de calendario por sí solos, incorporando el monitoreo de la temperatura basal corporal (que sube ligeramente después de la ovulación debido a la progesterona), tiras de prueba de orina que detectan directamente el aumento de LH 24-36 horas antes de la ovulación, y dispositivos portátiles de consumo que rastrean múltiples señales fisiológicas continuamente. La investigación que compara estos métodos muestra consistentemente que el seguimiento hormonal o fisiológico directo proporciona un momento de ovulación más preciso e individualizado que el cálculo basado en calendario por sí solo, que se usa mejor como una estimación general de planificación en lugar de una predicción precisa."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La endocrinología reproductiva y la fertilidad se estudian dentro de la obstetricia y ginecología, una rama de la medicina. Estos son cinco programas de investigación respetados en esta área, más una institución regional:",
+            "universities": [
+              {
+                "name": "Facultad de Medicina de Johns Hopkins — Departamento de Ginecología y Obstetricia",
+                "note": "Uno de los departamentos de obstetricia y ginecología mejor clasificados de Estados Unidos.",
+                "url": "https://www.hopkinsmedicine.org/gynecology_obstetrics",
+                "online": "No — la formación clínica y de investigación es presencial."
+              },
+              {
+                "name": "Universidad de Oxford — Departamento Nuffield de Salud de la Mujer y Reproductiva",
+                "note": "Un centro líder en investigación sobre salud reproductiva en el Reino Unido.",
+                "url": "https://www.wrh.ox.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Instituto Karolinska — Departamento de Salud de la Mujer y el Niño",
+                "note": "Un centro escandinavo líder en investigación reproductiva y perinatal.",
+                "url": "https://ki.se/en/kbh",
+                "online": "No — los programas de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de California, San Francisco — Centro de Salud Reproductiva",
+                "note": "Un centro estadounidense líder en investigación de endocrinología reproductiva y fertilidad.",
+                "url": "https://reproductivehealth.ucsf.edu/",
+                "online": "No — la formación clínica y de investigación es presencial."
+              },
+              {
+                "name": "Universidad de Monash — Grupo de Investigación de FIV y Preservación de la Fertilidad de Monash",
+                "note": "Un centro líder en investigación de medicina reproductiva en Australia.",
+                "url": "https://www.monash.edu/medicine/mifc",
+                "online": "No — la formación de investigación y clínica es presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Obstetricia y Ginecología",
+                "note": "Fundada en 1866; un centro regional líder en atención y formación en salud reproductiva.",
+                "url": "https://www.aub.edu.lb/fm/obgyn/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Wilcox, A. J., Weinberg, C. R., & Baird, D. D. (1995). Timing of Sexual Intercourse in Relation to Ovulation. New England Journal of Medicine, 333(23), 1517-1521.",
+          "note": "Un estudio prospectivo histórico que estableció con precisión la ventana fértil moderna de 6 días (5 días antes de la ovulación hasta el día de la ovulación) mediante el seguimiento directo de los niveles hormonales junto con el momento registrado de las relaciones sexuales y los resultados del embarazo.",
+          "url": "https://doi.org/10.1056/NEJM199512073332301",
+          "readOriginal": "Ver el estudio original"
+        }
+      }
     }
   },
   "toolPage": {

@@ -65,3 +65,4 @@ export * from "./TargetHeartRateCalculator";
 export * from "./SleepCalculator";
 export * from "./BodyFatCalculator";
 export * from "./DueDateCalculator";
+export * from "./OvulationCalculator";
