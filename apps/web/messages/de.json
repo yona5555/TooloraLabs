@@ -15933,6 +15933,178 @@
           "readOriginal": "Laplaces Originalabhandlung lesen"
         }
       }
+    },
+    "mean-median-mode-range-calculator": {
+      "title": "Mittelwert-, Median-, Modus- & Spannweiten-Rechner",
+      "description": "Berechne Mittelwert, Median, Modus und Spannweite eines Datensatzes, mit einer sortierten Übersicht und einem Punktdiagramm, das zeigt, wie sich jede Kennzahl zu den Daten verhält.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Datensatz",
+        "hint": "Gib eine oder mehrere Zahlen ein.",
+        "valueLabel": "Wert {position}",
+        "addValue": "Weiteren Wert hinzufügen",
+        "removeValue": "Diesen Wert entfernen"
+      },
+      "diagram": {
+        "ariaLabel": "Ein Punktdiagramm des Datensatzes auf einer Zahlengeraden, mit markiertem Mittelwert und Median",
+        "mean": "Mittelwert",
+        "median": "Median"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "emptyDataset": "Gib mindestens einen Wert ein, um ein Ergebnis zu sehen.",
+        "mean": "Mittelwert",
+        "median": "Median",
+        "mode": "Modus",
+        "range": "Spannweite",
+        "noMode": "Kein Modus",
+        "count": "Anzahl",
+        "sum": "Summe",
+        "min": "Minimum",
+        "max": "Maximum"
+      },
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Vier verschiedene Wege, einen Datensatz mit einer einzigen Zahl zusammenzufassen."
+      },
+      "education": {
+        "intro": {
+          "title": "Zentraltendenz und Streuung verstehen",
+          "paragraph1": "Mittelwert, Median und Modus sind die drei gängigsten \"Lagemaße\" — verschiedene Möglichkeiten, einen gesamten Datensatz mit einer repräsentativen Zahl zusammenzufassen. Die Spannweite dagegen ist ein Streuungsmaß: Sie zeigt, wie weit sich die Daten erstrecken, nicht wo ihr Zentrum liegt. Zusammen liefern diese vier Zahlen einen schnellen statistischen Überblick über einen Datensatz, ohne jeden einzelnen Wert betrachten zu müssen.",
+          "paragraph2": "Der Mittelwert (der alltägliche \"Durchschnitt\") ist die Summe aller Werte geteilt durch ihre Anzahl. Der Median ist der mittlere Wert, wenn die Daten von klein nach groß sortiert werden — der Mittelpunkt der geordneten Daten, ermittelt durch Mittelung der beiden mittleren Werte bei einer geraden Anzahl. Der Modus ist der Wert (oder die Werte), der am häufigsten vorkommt; ist jeder Wert einzigartig, gibt es überhaupt keinen Modus. Die Spannweite ist einfach der größte Wert minus dem kleinsten."
+        },
+        "measures": {
+          "title": "Die vier Kennzahlen",
+          "intro": "Jede Kennzahl erfasst etwas anderes über denselben Datensatz.",
+          "items": [
+            {
+              "title": "Mittelwert",
+              "description": "Das arithmetische Mittel — alle Werte addieren und durch die Anzahl teilen. Der Mittelwert bezieht jeden einzelnen Wert des Datensatzes ein, was ihn empfindlich gegenüber Ausreißern macht: Ein extrem großer oder kleiner Wert kann ihn spürbar von dem Bereich wegziehen, in dem sich die meisten Daten tatsächlich befinden."
+            },
+            {
+              "title": "Median",
+              "description": "Der mittlere Wert nach dem Sortieren der Daten. Da er nur von der Position der Werte abhängt, nicht von ihrer genauen Größe, ist der Median weit widerstandsfähiger gegenüber Ausreißern als der Mittelwert — eine nützliche Eigenschaft, wenn ein Datensatz möglicherweise ungewöhnlich große oder kleine Werte enthält, wie Haushaltseinkommen oder Immobilienpreise."
+            },
+            {
+              "title": "Modus",
+              "description": "Der am häufigsten vorkommende Wert. Anders als Mittelwert und Median kann der Modus auch auf nicht-numerische, kategoriale Daten angewendet werden (wie \"Lieblingsfarbe\"), und ein Datensatz kann einen Modus, mehrere Modi (wenn mehrere Werte gleich häufig auftreten) oder gar keinen Modus haben (wenn jeder Wert genau einmal vorkommt)."
+            },
+            {
+              "title": "Spannweite",
+              "description": "Die Differenz zwischen dem größten und kleinsten Wert — das einfachste mögliche Streuungsmaß eines Datensatzes. Sie ist leicht zu berechnen, aber da sie nur von den beiden extremsten Werten abhängt, kann ein einzelner Ausreißer die Spannweite weit größer erscheinen lassen, als es die meisten Daten tatsächlich widerspiegeln."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Einige Datensätze und die Ergebnisse, die dieser Rechner für sie liefert.",
+          "columnCalculation": "Datensatz",
+          "columnResult": "Mittelwert / Median / Modus / Spannweite",
+          "rows": [
+            {
+              "calculation": "{2, 4, 5, 6, 8, 8}",
+              "result": "Mittelwert=5,5, Median=5,5, Modus=8, Spannweite=6"
+            },
+            {
+              "calculation": "{1, 2, 3, 4}",
+              "result": "Mittelwert=2,5, Median=2,5, kein Modus, Spannweite=3"
+            },
+            {
+              "calculation": "{7, 1, 3}",
+              "result": "Mittelwert≈3,67, Median=3, kein Modus, Spannweite=6"
+            },
+            {
+              "calculation": "{5, 5, 9, 9, 1}",
+              "result": "Mittelwert=5,8, Median=5, Modus=5, 9, Spannweite=8"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wann sollte ich den Median statt des Mittelwerts verwenden?",
+              "answer": "Verwende den Median, wenn ein Datensatz extreme Ausreißer enthalten könnte, die den Mittelwert verzerren würden, etwa Einkommen, Immobilienpreise oder Reaktionszeiten. Ein bekanntes Beispiel: Fügt man einem Raum mit hundert Personen einen einzigen Milliardär hinzu, bewegt sich der Median des Einkommens kaum, während der Mittelwert des Einkommens stark ansteigt, da der Mittelwert von Extremwerten angezogen wird, der Median hingegen nicht."
+            },
+            {
+              "question": "Kann ein Datensatz mehr als einen Modus haben?",
+              "answer": "Ja. Ein Datensatz heißt \"bimodal\", wenn genau zwei Werte die höchste Häufigkeit teilen, oder allgemeiner \"multimodal\", wenn drei oder mehr Werte gleich häufig sind. Dieser Rechner gibt jeden Wert an, der die höchste Häufigkeit teilt, in aufsteigender Reihenfolge."
+            },
+            {
+              "question": "Warum hat ein Datensatz manchmal keinen Modus?",
+              "answer": "Der Modus existiert nur, wenn mindestens ein Wert häufiger vorkommt als die anderen. Kommt jeder Wert im Datensatz genau einmal vor, sticht kein Wert als \"am häufigsten\" hervor, sodass es per Konvention überhaupt keinen Modus gibt — statt jeden einzigartigen Wert gleichermaßen als Modus zu behandeln."
+            },
+            {
+              "question": "Wie wird der Median bei einer geraden Anzahl von Werten berechnet?",
+              "answer": "Sortiere die Daten und nimm dann die beiden Werte in der Mitte und mittle sie. Zum Beispiel sind bei {2, 4, 5, 6, 8, 8} (6 Werte) die beiden mittleren Werte nach dem Sortieren 5 und 6, sodass der Median (5+6)/2 = 5,5 ist."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Das arithmetische Mittel wird seit der Antike für Aufgaben wie die gerechte Aufteilung von Gütern verwendet, doch Median und Modus als formale statistische Konzepte entstanden viel später. Der Begriff \"Median\" in diesem statistischen Sinn wurde in den 1880er-Jahren von Francis Galton popularisiert, der ihn wegen seiner Widerstandsfähigkeit gegenüber Ausreißern bei der Untersuchung vererbter Merkmale bevorzugte, während der Begriff \"Modus\" 1895 von Karl Pearson eingeführt wurde, als Teil seines umfassenderen Bemühens, die deskriptive Statistik zu formalisieren — den Zweig der Statistik, der sich mit der Zusammenfassung von Datensätzen befasst, im Gegensatz zum Ziehen von Schlussfolgerungen aus ihnen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Diese vier Kennzahlen bleiben grundlegend für die moderne Datenanalyse: Sie sind in der Regel die allerersten Berechnungen, die für jeden neuen Datensatz durchgeführt werden, sei es in der wissenschaftlichen Forschung, der Geschäftsanalytik oder der Vorverarbeitung für maschinelles Lernen (wo etwa die Wahl zwischen Mittelwert und Median zur Behandlung fehlender Werte das Verhalten eines Modells spürbar verändern kann). Interaktive Dashboards und Business-Intelligence-Tools berechnen alle vier automatisch und fortlaufend, sobald neue Daten eintreffen, was sie weltweit zu den am häufigsten berechneten Statistiken in der täglichen Datenarbeit macht."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Deskriptive Statistiken wie diese gehören zur Statistik, einem Teilgebiet der Mathematik. Hier sind die weltweit fünf besten Fakultäten für Mathematik im QS World University Ranking by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit Rang 1 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm der Fakultät für Mathematik."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit Rang 2 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit Rang 3 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit Rang 4 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit Rang 5 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Pearson, K. (1895). Contributions to the Mathematical Theory of Evolution, II: Skew Variation in Homogeneous Material. Philosophical Transactions of the Royal Society A, 186, 343-414.",
+          "note": "Pearsons Aufsatz, der den Begriff \"Modus\" formal in die Statistik einführte, im Rahmen seiner umfassenderen Arbeit zur Formalisierung deskriptiver statistischer Maße.",
+          "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
+          "readOriginal": "Pearsons Originalarbeit lesen"
+        }
+      }
     }
   },
   "toolPage": {

@@ -15933,6 +15933,178 @@
           "readOriginal": "Leer el tratado original de Laplace"
         }
       }
+    },
+    "mean-median-mode-range-calculator": {
+      "title": "Calculadora de Media, Mediana, Moda y Rango",
+      "description": "Calcula la media, la mediana, la moda y el rango de un conjunto de datos, con un desglose ordenado y un diagrama de puntos que muestra cómo se relaciona cada medida con los datos.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Conjunto de datos",
+        "hint": "Introduce uno o más números.",
+        "valueLabel": "Valor {position}",
+        "addValue": "Añadir otro valor",
+        "removeValue": "Eliminar este valor"
+      },
+      "diagram": {
+        "ariaLabel": "Un diagrama de puntos del conjunto de datos en una recta numérica, con la media y la mediana marcadas",
+        "mean": "Media",
+        "median": "Mediana"
+      },
+      "result": {
+        "heading": "Resultado",
+        "emptyDataset": "Introduce al menos un valor para ver un resultado.",
+        "mean": "Media",
+        "median": "Mediana",
+        "mode": "Moda",
+        "range": "Rango",
+        "noMode": "Sin moda",
+        "count": "Cantidad",
+        "sum": "Suma",
+        "min": "Mínimo",
+        "max": "Máximo"
+      },
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Cuatro formas distintas de resumir un conjunto de datos con un solo número."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender la tendencia central y la dispersión",
+          "paragraph1": "La media, la mediana y la moda son las tres \"medidas de tendencia central\" más comunes — distintas formas de resumir todo un conjunto de datos con un único número representativo. El rango, en cambio, es una medida de dispersión: indica cuánto se extienden los datos, no dónde está su centro. Juntos, estos cuatro números ofrecen una instantánea estadística rápida de un conjunto de datos sin necesidad de examinar cada valor individual.",
+          "paragraph2": "La media (el \"promedio\" cotidiano) es la suma de todos los valores dividida entre su cantidad. La mediana es el valor central cuando los datos se ordenan de menor a mayor — el punto medio de los datos ordenados, que se halla promediando los dos valores centrales cuando la cantidad es par. La moda es el valor (o valores) que aparece con más frecuencia; si cada valor es único, no hay moda en absoluto. El rango es simplemente el valor mayor menos el menor."
+        },
+        "measures": {
+          "title": "Las cuatro medidas",
+          "intro": "Cada medida capta algo diferente sobre el mismo conjunto de datos.",
+          "items": [
+            {
+              "title": "Media",
+              "description": "El promedio aritmético — suma cada valor y divide entre la cantidad. La media utiliza todos y cada uno de los valores del conjunto de datos, lo que la hace sensible a los valores atípicos: un valor extremadamente grande o pequeño puede alejarla notablemente de donde realmente se concentran la mayoría de los datos."
+            },
+            {
+              "title": "Mediana",
+              "description": "El valor central una vez ordenados los datos. Como solo depende de la posición de los valores, no de su magnitud exacta, la mediana es mucho más resistente a los valores atípicos que la media — una propiedad útil siempre que un conjunto de datos pueda contener valores inusualmente grandes o pequeños, como los ingresos familiares o los precios de las viviendas."
+            },
+            {
+              "title": "Moda",
+              "description": "El valor que ocurre con mayor frecuencia. A diferencia de la media y la mediana, la moda puede usarse con datos categóricos no numéricos (como \"color favorito\"), y un conjunto de datos puede tener una moda, varias modas (si varios valores empatan en la frecuencia más alta), o ninguna moda en absoluto (si cada valor aparece exactamente una vez)."
+            },
+            {
+              "title": "Rango",
+              "description": "La diferencia entre el valor mayor y el menor — la medida más simple posible de cuán disperso está un conjunto de datos. Es fácil de calcular, pero como depende solo de los dos valores más extremos, un único valor atípico puede hacer que el rango sea mucho mayor de lo que realmente reflejan la mayoría de los datos."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos conjuntos de datos y lo que devuelve esta calculadora para cada uno.",
+          "columnCalculation": "Conjunto de datos",
+          "columnResult": "Media / Mediana / Moda / Rango",
+          "rows": [
+            {
+              "calculation": "{2, 4, 5, 6, 8, 8}",
+              "result": "Media=5,5, Mediana=5,5, Moda=8, Rango=6"
+            },
+            {
+              "calculation": "{1, 2, 3, 4}",
+              "result": "Media=2,5, Mediana=2,5, sin moda, Rango=3"
+            },
+            {
+              "calculation": "{7, 1, 3}",
+              "result": "Media≈3,67, Mediana=3, sin moda, Rango=6"
+            },
+            {
+              "calculation": "{5, 5, 9, 9, 1}",
+              "result": "Media=5,8, Mediana=5, Moda=5, 9, Rango=8"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Cuándo debo usar la mediana en lugar de la media?",
+              "answer": "Usa la mediana siempre que un conjunto de datos pueda contener valores atípicos extremos que sesguen la media, como ingresos, precios de viviendas o tiempos de respuesta. Un ejemplo famoso: añadir un solo multimillonario a una sala de cien personas apenas mueve la mediana de ingresos, pero dispara la media de ingresos, ya que la media se ve arrastrada por los valores extremos mientras que la mediana no."
+            },
+            {
+              "question": "¿Puede un conjunto de datos tener más de una moda?",
+              "answer": "Sí. Un conjunto de datos se llama \"bimodal\" si exactamente dos valores empatan en la frecuencia más alta, o \"multimodal\" en general si empatan tres o más valores. Esta calculadora informa de todos los valores que empatan en la frecuencia más alta, en orden ascendente."
+            },
+            {
+              "question": "¿Por qué a veces un conjunto de datos no tiene moda?",
+              "answer": "La moda solo existe cuando al menos un valor se repite con más frecuencia que los demás. Si cada valor del conjunto de datos aparece exactamente una vez, ningún valor destaca como \"el más frecuente\", por lo que, por convención, no hay moda en absoluto, en lugar de tratar cada valor único como moda por igual."
+            },
+            {
+              "question": "¿Cómo se calcula la mediana cuando hay un número par de valores?",
+              "answer": "Ordena los datos, luego toma los dos valores centrales y promédialos. Por ejemplo, en {2, 4, 5, 6, 8, 8} (6 valores), los dos valores centrales tras ordenar son 5 y 6, por lo que la mediana es (5+6)/2 = 5,5."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La media aritmética se ha usado desde la antigüedad para tareas como repartir bienes de forma equitativa, pero la mediana y la moda como conceptos estadísticos formales surgieron mucho más tarde. El término \"mediana\" en este sentido estadístico fue popularizado por Francis Galton en la década de 1880, quien lo prefería por su resistencia a los valores atípicos al estudiar rasgos heredados, mientras que el término \"moda\" fue introducido por Karl Pearson en 1895 como parte de su esfuerzo más amplio por formalizar la estadística descriptiva — la rama de la estadística que se ocupa de resumir conjuntos de datos, en contraposición a extraer inferencias de ellos."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "Estas cuatro medidas siguen siendo fundamentales para el análisis de datos moderno: suelen ser los primerísimos cálculos que se realizan sobre cualquier conjunto de datos nuevo, ya sea en investigación científica, análisis de negocio o preprocesamiento para aprendizaje automático (donde, por ejemplo, la elección entre media y mediana para tratar valores faltantes puede cambiar de forma significativa el comportamiento de un modelo). Los paneles interactivos y las herramientas de inteligencia de negocio calculan las cuatro automáticamente y de forma continua a medida que llegan nuevos datos, lo que las convierte en las estadísticas más calculadas en el trabajo diario con datos en todo el mundo."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "Estadísticas descriptivas como estas se enmarcan en la estadística, una rama de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT)",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Harvard",
+                "note": "Nº 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Stanford",
+                "note": "Nº 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Pearson, K. (1895). Contributions to the Mathematical Theory of Evolution, II: Skew Variation in Homogeneous Material. Philosophical Transactions of the Royal Society A, 186, 343-414.",
+          "note": "El artículo de Pearson, que introdujo formalmente el término \"moda\" en la estadística, junto con su trabajo más amplio de formalización de las medidas estadísticas descriptivas.",
+          "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
+          "readOriginal": "Leer el artículo original de Pearson"
+        }
+      }
     }
   },
   "toolPage": {

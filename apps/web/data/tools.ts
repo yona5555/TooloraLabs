@@ -741,6 +741,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "mean-median-mode-range-calculator",
+    title: "Mean, Median, Mode & Range Calculator",
+    category: "math",
+    description:
+      "Calculate the mean, median, mode, and range of a data set, with a sorted breakdown and a dot-plot diagram showing how each measure relates to the data.",
+    featured: false,
+    keywords: [
+      "mean median mode calculator",
+      "statistics calculator",
+      "average calculator",
+      "range calculator",
+      "central tendency",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

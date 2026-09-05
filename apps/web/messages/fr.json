@@ -15933,6 +15933,178 @@
           "readOriginal": "Lire le traité original de Laplace"
         }
       }
+    },
+    "mean-median-mode-range-calculator": {
+      "title": "Calculatrice de Moyenne, Médiane, Mode et Étendue",
+      "description": "Calculez la moyenne, la médiane, le mode et l'étendue d'un ensemble de données, avec un détail trié et un diagramme en points montrant comment chaque mesure se rapporte aux données.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Ensemble de données",
+        "hint": "Saisissez un ou plusieurs nombres.",
+        "valueLabel": "Valeur {position}",
+        "addValue": "Ajouter une autre valeur",
+        "removeValue": "Supprimer cette valeur"
+      },
+      "diagram": {
+        "ariaLabel": "Un diagramme en points de l'ensemble de données sur une droite numérique, avec la moyenne et la médiane marquées",
+        "mean": "Moyenne",
+        "median": "Médiane"
+      },
+      "result": {
+        "heading": "Résultat",
+        "emptyDataset": "Saisissez au moins une valeur pour voir un résultat.",
+        "mean": "Moyenne",
+        "median": "Médiane",
+        "mode": "Mode",
+        "range": "Étendue",
+        "noMode": "Aucun mode",
+        "count": "Effectif",
+        "sum": "Somme",
+        "min": "Minimum",
+        "max": "Maximum"
+      },
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Quatre façons différentes de résumer un ensemble de données avec un seul nombre."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la tendance centrale et la dispersion",
+          "paragraph1": "La moyenne, la médiane et le mode sont les trois \"mesures de tendance centrale\" les plus courantes — différentes façons de résumer tout un ensemble de données avec un seul nombre représentatif. L'étendue, en revanche, est une mesure de dispersion : elle indique jusqu'où s'étendent les données, pas où se situe leur centre. Ensemble, ces quatre nombres offrent un aperçu statistique rapide d'un ensemble de données sans avoir à examiner chaque valeur individuelle.",
+          "paragraph2": "La moyenne (la \"moyenne\" du quotidien) est la somme de toutes les valeurs divisée par leur nombre. La médiane est la valeur centrale lorsque les données sont triées de la plus petite à la plus grande — le point médian des données ordonnées, obtenu en faisant la moyenne des deux valeurs centrales lorsque l'effectif est pair. Le mode est la valeur (ou les valeurs) qui apparaît le plus souvent ; si chaque valeur est unique, il n'y a aucun mode. L'étendue est simplement la plus grande valeur moins la plus petite."
+        },
+        "measures": {
+          "title": "Les quatre mesures",
+          "intro": "Chaque mesure capture un aspect différent du même ensemble de données.",
+          "items": [
+            {
+              "title": "Moyenne",
+              "description": "La moyenne arithmétique — additionnez chaque valeur et divisez par l'effectif. La moyenne utilise chaque valeur de l'ensemble de données, ce qui la rend sensible aux valeurs aberrantes : une valeur extrêmement grande ou petite peut l'éloigner sensiblement de l'endroit où se situe réellement la majorité des données."
+            },
+            {
+              "title": "Médiane",
+              "description": "La valeur centrale une fois les données triées. Comme elle ne dépend que de la position des valeurs, et non de leur ampleur exacte, la médiane résiste bien mieux aux valeurs aberrantes que la moyenne — une propriété utile chaque fois qu'un ensemble de données peut contenir des valeurs inhabituellement grandes ou petites, comme les revenus des ménages ou les prix de l'immobilier."
+            },
+            {
+              "title": "Mode",
+              "description": "La valeur qui apparaît le plus fréquemment. Contrairement à la moyenne et à la médiane, le mode peut être utilisé sur des données catégorielles non numériques (comme \"couleur préférée\"), et un ensemble de données peut avoir un mode, plusieurs modes (si plusieurs valeurs sont à égalité pour la fréquence la plus élevée), ou aucun mode du tout (si chaque valeur apparaît exactement une fois)."
+            },
+            {
+              "title": "Étendue",
+              "description": "La différence entre la plus grande et la plus petite valeur — la mesure la plus simple possible de la dispersion d'un ensemble de données. Elle est facile à calculer mais, comme elle ne dépend que des deux valeurs les plus extrêmes, une seule valeur aberrante peut rendre l'étendue bien plus grande que ce que la majorité des données reflète réellement."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques ensembles de données et ce que cette calculatrice renvoie pour chacun.",
+          "columnCalculation": "Ensemble de données",
+          "columnResult": "Moyenne / Médiane / Mode / Étendue",
+          "rows": [
+            {
+              "calculation": "{2, 4, 5, 6, 8, 8}",
+              "result": "Moyenne=5,5, Médiane=5,5, Mode=8, Étendue=6"
+            },
+            {
+              "calculation": "{1, 2, 3, 4}",
+              "result": "Moyenne=2,5, Médiane=2,5, aucun mode, Étendue=3"
+            },
+            {
+              "calculation": "{7, 1, 3}",
+              "result": "Moyenne≈3,67, Médiane=3, aucun mode, Étendue=6"
+            },
+            {
+              "calculation": "{5, 5, 9, 9, 1}",
+              "result": "Moyenne=5,8, Médiane=5, Mode=5, 9, Étendue=8"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quand dois-je utiliser la médiane plutôt que la moyenne ?",
+              "answer": "Utilisez la médiane chaque fois qu'un ensemble de données peut contenir des valeurs aberrantes extrêmes qui fausseraient la moyenne, comme les revenus, les prix de l'immobilier ou les temps de réponse. Un exemple célèbre : ajouter un seul milliardaire dans une salle de cent personnes déplace à peine le revenu médian mais fait grimper en flèche le revenu moyen, car la moyenne est attirée vers les valeurs extrêmes alors que la médiane ne l'est pas."
+            },
+            {
+              "question": "Un ensemble de données peut-il avoir plusieurs modes ?",
+              "answer": "Oui. Un ensemble de données est dit \"bimodal\" si exactement deux valeurs sont à égalité pour la fréquence la plus élevée, ou \"multimodal\" plus généralement si trois valeurs ou plus sont à égalité. Cette calculatrice indique toutes les valeurs à égalité pour la fréquence la plus élevée, par ordre croissant."
+            },
+            {
+              "question": "Pourquoi un ensemble de données n'a-t-il parfois aucun mode ?",
+              "answer": "Le mode n'existe que lorsqu'au moins une valeur se répète plus souvent que les autres. Si chaque valeur de l'ensemble de données apparaît exactement une fois, aucune valeur ne se distingue comme \"la plus fréquente\", donc par convention il n'y a aucun mode du tout — plutôt que de considérer chaque valeur unique comme étant également le mode."
+            },
+            {
+              "question": "Comment la médiane est-elle calculée lorsqu'il y a un nombre pair de valeurs ?",
+              "answer": "Triez les données, puis prenez les deux valeurs centrales et faites-en la moyenne. Par exemple, dans {2, 4, 5, 6, 8, 8} (6 valeurs), les deux valeurs centrales après tri sont 5 et 6, donc la médiane est (5+6)/2 = 5,5."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "La moyenne arithmétique est utilisée depuis l'Antiquité pour des tâches comme le partage équitable de biens, mais la médiane et le mode en tant que concepts statistiques formels sont apparus bien plus tard. Le terme \"médiane\" dans ce sens statistique a été popularisé par Francis Galton dans les années 1880, qui le préférait pour sa résistance aux valeurs aberrantes lors de l'étude des traits héréditaires, tandis que le terme \"mode\" a été introduit par Karl Pearson en 1895 dans le cadre de son effort plus large pour formaliser la statistique descriptive — la branche de la statistique consacrée à résumer des ensembles de données, par opposition à en tirer des inférences."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Ces quatre mesures restent fondamentales pour l'analyse de données moderne : ce sont généralement les tout premiers calculs effectués sur tout nouvel ensemble de données, que ce soit en recherche scientifique, en analytique d'entreprise ou dans le prétraitement pour l'apprentissage automatique (où le choix entre moyenne et médiane pour traiter les valeurs manquantes, par exemple, peut modifier sensiblement le comportement d'un modèle). Les tableaux de bord interactifs et les outils de business intelligence calculent automatiquement et en continu ces quatre mesures à mesure que de nouvelles données arrivent, ce qui en fait les statistiques les plus calculées dans le travail quotidien sur les données à travers le monde."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les statistiques descriptives comme celles-ci relèvent de la statistique, une branche des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Pearson, K. (1895). Contributions to the Mathematical Theory of Evolution, II: Skew Variation in Homogeneous Material. Philosophical Transactions of the Royal Society A, 186, 343-414.",
+          "note": "L'article de Pearson, qui a formellement introduit le terme \"mode\" en statistique, dans le cadre de son travail plus large de formalisation des mesures statistiques descriptives.",
+          "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
+          "readOriginal": "Lire l'article original de Pearson"
+        }
+      }
     }
   },
   "toolPage": {

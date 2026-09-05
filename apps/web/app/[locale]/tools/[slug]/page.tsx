@@ -105,6 +105,8 @@ import TriangleCalculator from "@/components/tools/triangle-calculator/TriangleC
 import TriangleEducation from "@/components/tools/triangle-calculator/TriangleEducation";
 import ProbabilityCalculator from "@/components/tools/probability-calculator/ProbabilityCalculator";
 import ProbabilityEducation from "@/components/tools/probability-calculator/ProbabilityEducation";
+import MeanMedianModeRangeCalculator from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeCalculator";
+import MeanMedianModeRangeEducation from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -476,6 +478,9 @@ export default async function ToolPage({
     case "probability-calculator":
       component = <ProbabilityCalculator education={<ProbabilityEducation />} />;
       break;
+    case "mean-median-mode-range-calculator":
+      component = <MeanMedianModeRangeCalculator education={<MeanMedianModeRangeEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -603,6 +608,7 @@ export default async function ToolPage({
     slug === "gcf-lcm-calculator" ||
     slug === "triangle-calculator" ||
     slug === "probability-calculator" ||
+    slug === "mean-median-mode-range-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||
