@@ -12,16 +12,16 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import type { TocItem } from "@/components/docs/TableOfContents";
 import CalculationFlowchart from "@/components/docs/CalculationFlowchart";
 import BreakdownBarDiagram from "@/components/docs/BreakdownBarDiagram";
-import GrowthComparisonDiagram from "./GrowthComparisonDiagram";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
 
-export const RELATED_TOOLS = ["mortgage-calculator", "loan-calculator", "retirement-calculator", "affordable-loan-calculator", "debt-to-income-calculator"];
+export const RELATED_TOOLS = ["mortgage-calculator", "debt-to-income-calculator", "loan-calculator", "affordable-loan-calculator", "retirement-calculator"];
 
-export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+export async function getHouseAffordabilityCalculatorTocItems(): Promise<TocItem[]> {
+  const t = await getTranslations("docs.tools.house-affordability-calculator");
   return [
     { id: "formula", label: t("sectionFormula") },
     { id: "flowchart", label: t("sectionFlowchart") },
-    { id: "growth-comparison", label: t("sectionGrowthComparison") },
+    { id: "ratio", label: t("sectionRatio") },
     { id: "anatomy", label: t("sectionAnatomy") },
     { id: "variables", label: t("sectionVariables") },
     { id: "edge-cases", label: t("sectionEdgeCases") },
@@ -30,8 +30,8 @@ export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
   ];
 }
 
-export default async function CompoundInterestDocsPage() {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+export default async function HouseAffordabilityCalculatorDocsPage() {
+  const t = await getTranslations("docs.tools.house-affordability-calculator");
   const tNav = await getTranslations("docsNav");
   const tTools = await getTranslations("tools");
 
@@ -42,15 +42,8 @@ export default async function CompoundInterestDocsPage() {
 
   return (
     <>
-      <DocsBreadcrumb
-        items={[
-          { label: tNav("overview"), href: "/docs" },
-          { label: tNav("toolsGuide"), href: "/docs" },
-          { label: tTools("compound-interest-calculator.title") },
-        ]}
-      />
-
-      <DocsHero title={tTools("compound-interest-calculator.title")} version={t("version")} description={t("description")} />
+      <DocsBreadcrumb items={[{ label: tNav("overview"), href: "/docs" }, { label: tNav("toolsGuide"), href: "/docs" }, { label: tTools("house-affordability-calculator.title") }]} />
+      <DocsHero title={tTools("house-affordability-calculator.title")} version={t("version")} description={t("description")} />
 
       <QuickFacts
         facts={[
@@ -70,18 +63,34 @@ export default async function CompoundInterestDocsPage() {
         <CalculationFlowchart steps={flowchartSteps} caption={t("flowchart.caption")} />
       </DocsSection>
 
-      <DocsSection id="growth-comparison" title={t("sectionGrowthComparison")}>
-        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("growthComparison.intro")}</p>
-        <GrowthComparisonDiagram labelCompound={t("growthComparison.labelCompound")} labelSimple={t("growthComparison.labelSimple")} caption={t("growthComparison.caption")} />
+      <DocsSection id="ratio" title={t("sectionRatio")}>
+        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("ratio.intro")}</p>
+        <div className="flex justify-center">
+          <RatioGauge
+            value={28}
+            domainMin={0}
+            domainMax={45}
+            zones={[
+              { key: "within", from: 0, to: 28, colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+              { key: "backend", from: 28, to: 36, colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+              { key: "over", from: 36, to: 45, colorClass: "stroke-rose-500 dark:stroke-rose-400" },
+            ]}
+            valueLabel="28%"
+            caption={t("ratio.gaugeCaption")}
+            ticks={[0, 28, 36, 45]}
+            tickFormatter={(t2) => `${t2}%`}
+          />
+        </div>
+        <p className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("ratio.caption")}</p>
       </DocsSection>
 
       <DocsSection id="anatomy" title={t("sectionAnatomy")}>
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("anatomy.intro")}</p>
         <BreakdownBarDiagram
           segments={[
-            { label: t("anatomy.labelPrincipal"), value: 10000, colorClass: "fill-blue-600 dark:fill-blue-400" },
-            { label: t("anatomy.labelContributions"), value: 12000, colorClass: "fill-orange-400 dark:fill-orange-500" },
-            { label: t("anatomy.labelInterest"), value: 8100, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
+            { label: t("anatomy.labelPrincipalInterest"), value: 1450, colorClass: "fill-blue-600 dark:fill-blue-400" },
+            { label: t("anatomy.labelTax"), value: 350, colorClass: "fill-orange-400 dark:fill-orange-500" },
+            { label: t("anatomy.labelInsurance"), value: 120, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
           ]}
           totalLabel={t("anatomy.labelTotal")}
           caption={t("anatomy.caption")}

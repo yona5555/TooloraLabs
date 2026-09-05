@@ -20,6 +20,7 @@ import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import HouseAffordabilityModeTabs from "./HouseAffordabilityModeTabs";
 import HouseAffordabilityInputPanel from "./HouseAffordabilityInputPanel";
 import HouseAffordabilityResult from "./HouseAffordabilityResult";
@@ -559,6 +560,7 @@ export default function HouseAffordabilityCalculator({ education }: { education:
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />
+              <ViewDocsLink slug="house-affordability-calculator" />
             </div>
           }
         />

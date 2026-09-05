@@ -12,16 +12,23 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import type { TocItem } from "@/components/docs/TableOfContents";
 import CalculationFlowchart from "@/components/docs/CalculationFlowchart";
 import BreakdownBarDiagram from "@/components/docs/BreakdownBarDiagram";
-import GrowthComparisonDiagram from "./GrowthComparisonDiagram";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
 
-export const RELATED_TOOLS = ["mortgage-calculator", "loan-calculator", "retirement-calculator", "affordable-loan-calculator", "debt-to-income-calculator"];
+export const RELATED_TOOLS = ["house-affordability-calculator", "mortgage-calculator", "loan-calculator", "affordable-loan-calculator", "retirement-calculator"];
 
-export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+const ZONE_STROKE_COLORS: Record<string, string> = {
+  healthy: "stroke-green-500 dark:stroke-green-400",
+  manageable: "stroke-amber-500 dark:stroke-amber-400",
+  high: "stroke-orange-500 dark:stroke-orange-400",
+  veryHigh: "stroke-red-500 dark:stroke-red-400",
+};
+
+export async function getDebtToIncomeCalculatorTocItems(): Promise<TocItem[]> {
+  const t = await getTranslations("docs.tools.debt-to-income-calculator");
   return [
     { id: "formula", label: t("sectionFormula") },
     { id: "flowchart", label: t("sectionFlowchart") },
-    { id: "growth-comparison", label: t("sectionGrowthComparison") },
+    { id: "ratio", label: t("sectionRatio") },
     { id: "anatomy", label: t("sectionAnatomy") },
     { id: "variables", label: t("sectionVariables") },
     { id: "edge-cases", label: t("sectionEdgeCases") },
@@ -30,8 +37,8 @@ export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
   ];
 }
 
-export default async function CompoundInterestDocsPage() {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+export default async function DebtToIncomeCalculatorDocsPage() {
+  const t = await getTranslations("docs.tools.debt-to-income-calculator");
   const tNav = await getTranslations("docsNav");
   const tTools = await getTranslations("tools");
 
@@ -42,15 +49,8 @@ export default async function CompoundInterestDocsPage() {
 
   return (
     <>
-      <DocsBreadcrumb
-        items={[
-          { label: tNav("overview"), href: "/docs" },
-          { label: tNav("toolsGuide"), href: "/docs" },
-          { label: tTools("compound-interest-calculator.title") },
-        ]}
-      />
-
-      <DocsHero title={tTools("compound-interest-calculator.title")} version={t("version")} description={t("description")} />
+      <DocsBreadcrumb items={[{ label: tNav("overview"), href: "/docs" }, { label: tNav("toolsGuide"), href: "/docs" }, { label: tTools("debt-to-income-calculator.title") }]} />
+      <DocsHero title={tTools("debt-to-income-calculator.title")} version={t("version")} description={t("description")} />
 
       <QuickFacts
         facts={[
@@ -70,18 +70,37 @@ export default async function CompoundInterestDocsPage() {
         <CalculationFlowchart steps={flowchartSteps} caption={t("flowchart.caption")} />
       </DocsSection>
 
-      <DocsSection id="growth-comparison" title={t("sectionGrowthComparison")}>
-        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("growthComparison.intro")}</p>
-        <GrowthComparisonDiagram labelCompound={t("growthComparison.labelCompound")} labelSimple={t("growthComparison.labelSimple")} caption={t("growthComparison.caption")} />
+      <DocsSection id="ratio" title={t("sectionRatio")}>
+        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("ratio.intro")}</p>
+        <div className="flex justify-center">
+          <RatioGauge
+            value={38}
+            domainMin={0}
+            domainMax={60}
+            zones={[
+              { key: "healthy", from: 0, to: 36, colorClass: ZONE_STROKE_COLORS.healthy },
+              { key: "manageable", from: 36, to: 43, colorClass: ZONE_STROKE_COLORS.manageable },
+              { key: "high", from: 43, to: 50, colorClass: ZONE_STROKE_COLORS.high },
+              { key: "veryHigh", from: 50, to: 60, colorClass: ZONE_STROKE_COLORS.veryHigh },
+            ]}
+            valueLabel="38%"
+            caption={t("ratio.gaugeCaption")}
+            ticks={[0, 36, 43, 50, 60]}
+            tickFormatter={(t2) => `${t2}%`}
+          />
+        </div>
+        <p className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("ratio.caption")}</p>
       </DocsSection>
 
       <DocsSection id="anatomy" title={t("sectionAnatomy")}>
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("anatomy.intro")}</p>
         <BreakdownBarDiagram
           segments={[
-            { label: t("anatomy.labelPrincipal"), value: 10000, colorClass: "fill-blue-600 dark:fill-blue-400" },
-            { label: t("anatomy.labelContributions"), value: 12000, colorClass: "fill-orange-400 dark:fill-orange-500" },
-            { label: t("anatomy.labelInterest"), value: 8100, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
+            { label: t("anatomy.labelHousing"), value: 1500, colorClass: "fill-blue-600 dark:fill-blue-400" },
+            { label: t("anatomy.labelCar"), value: 400, colorClass: "fill-teal-500 dark:fill-teal-400" },
+            { label: t("anatomy.labelStudent"), value: 300, colorClass: "fill-violet-500 dark:fill-violet-400" },
+            { label: t("anatomy.labelCreditCard"), value: 200, colorClass: "fill-rose-500 dark:fill-rose-400" },
+            { label: t("anatomy.labelOther"), value: 100, colorClass: "fill-zinc-400 dark:fill-zinc-500" },
           ]}
           totalLabel={t("anatomy.labelTotal")}
           caption={t("anatomy.caption")}

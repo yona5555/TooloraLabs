@@ -20,6 +20,7 @@ import MortgageAmortizationTable from "./MortgageAmortizationTable";
 import MortgageScenarioComparison from "./MortgageScenarioComparison";
 import MortgageBiweeklyPayment from "./MortgageBiweeklyPayment";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import type { DownPaymentMode, MortgageExtendedResult, MortgageMode } from "./types";
 
 const tool = new MortgageCalculatorTool();
@@ -444,6 +445,7 @@ export default function MortgageCalculator({ education }: { education: ReactNode
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} showJumpToBottom visible={navBarVisible} />
+              <ViewDocsLink slug="mortgage-calculator" />
               <MortgagePayoffChart result={result} digitStyle={digitStyle} />
               <MortgageScenarioComparison result={result} digitStyle={digitStyle} />
               <MortgageAmortizationTable result={result} digitStyle={digitStyle} />

@@ -18232,7 +18232,8 @@
     "feedbackThanksYes": "¡Gracias por tu opinión!",
     "feedbackThanksNo": "Gracias — lo usaremos para mejorar la página.",
     "indexIntro": "Documentación de referencia para las calculadoras de TooloraLabs: las fórmulas, la lógica de cálculo paso a paso y los casos límite que gestiona cada herramienta. Disponible actualmente para una herramienta como prueba piloto, con más por venir.",
-    "indexCta": "Ver documentación de la Calculadora de Interés Compuesto"
+    "indexCta": "Ver documentación de la Calculadora de Interés Compuesto",
+    "indexAvailableNow": "Disponible ahora"
   },
   "docs": {
     "tools": {
@@ -18373,6 +18374,743 @@
           {
             "question": "¿Puede esta herramienta resolver hacia atrás, por ejemplo, hallar la tasa de interés necesaria para alcanzar una meta?",
             "answer": "Sí — eso es lo que hacen los cuatro modos alternativos (Duración de la inversión, Tasa de rendimiento, Monto inicial, Aportación adicional). Cada uno mantiene fijas todas las demás variables y busca la única incógnita que alcanza el valor futuro objetivo que proporcionaste, usando una búsqueda numérica (bisección) en lugar de una inversa de forma cerrada, ya que la simulación mes a mes subyacente no tiene una inversa algebraica sencilla."
+          }
+        ]
+      },
+      "loan-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Préstamos: la fórmula de amortización detrás de sus tres modos (amortizado, pago diferido y bono), las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAmortization": "Amortización en el tiempo",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "M = L[c(1+c)ⁿ] / [(1+c)ⁿ − 1]",
+          "note": "La fórmula estándar de cuota amortizante para el modo Amortizado, donde L es el monto del préstamo, c la tasa de interés periódica y n el número de pagos. Los modos Diferido y Bono usan en cambio un crecimiento compuesto directo hasta un único pago final, sin fórmula periódica que resolver."
+        },
+        "flowchart": {
+          "intro": "El modo Amortizado convierte la tasa anual nominal en una tasa real por período de pago (a través de la tasa anual efectiva), lo que permite que la frecuencia de capitalización y la de pago difieran — una tasa mensual estilo hipoteca puede pagarse igualmente cada semana.",
+          "steps": [
+            "Convertir la tasa anual nominal en la tasa anual efectiva, usando la frecuencia de capitalización elegida",
+            "Convertir la tasa anual efectiva en una tasa real por período de pago, usando la frecuencia de pago elegida",
+            "Resolver la fórmula de anualidad estándar para la cuota fija que amortiza completamente el préstamo",
+            "Cada período: dividir esa cuota en interés (saldo × tasa del período) y capital (el resto)",
+            "Repetir hasta que el saldo llegue a cero"
+          ],
+          "caption": "La conversión de tasa y el bucle de amortización que ejecuta realmente el modo Amortizado."
+        },
+        "amortization": {
+          "intro": "Un préstamo representativo de $10,000 a 5 años al 8% — la parte de interés de la cuota fija empieza alta y se reduce cada período a medida que el saldo de capital también se reduce.",
+          "labelPrincipal": "Capital",
+          "labelInterest": "Interés",
+          "caption": "Parte de capital frente a la de interés de cada cuota a lo largo del plazo del préstamo."
+        },
+        "anatomy": {
+          "intro": "El reembolso total de todo préstamo amortizado se descompone en exactamente dos partes.",
+          "labelPrincipal": "Capital",
+          "labelInterest": "Interés",
+          "labelTotal": "Total reembolsado",
+          "caption": "Un préstamo representativo de $10,000 al 8% durante 5 años."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "L",
+            "meaning": "Monto del préstamo (modos Amortizado/Diferido) — la cantidad prestada hoy.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Tasa de interés anual nominal.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Plazo del préstamo.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "nc",
+            "meaning": "Frecuencia de capitalización — cuántas veces al año se capitaliza el interés.",
+            "unit": "Veces/año"
+          },
+          {
+            "symbol": "np",
+            "meaning": "Frecuencia de pago — cuántas veces al año se realizan pagos (solo modo Amortizado).",
+            "unit": "Veces/año"
+          },
+          {
+            "symbol": "Vencido",
+            "meaning": "Monto adeudado al vencimiento (solo modo Bono) — la calculadora resuelve hacia atrás el monto presente recibido hoy.",
+            "unit": "Moneda"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Monto de préstamo o plazo cero o negativo",
+            "description": "Protegido a nivel del motor: un monto de préstamo o plazo no finito, cero o negativo devuelve un resultado vacío en lugar de un error de división."
+          },
+          {
+            "title": "Tasa de interés cero",
+            "description": "Se calcula correctamente en todos los modos: con una tasa del 0%, la cuota amortizada es simplemente el monto del préstamo dividido uniformemente entre todas las cuotas, y los saldos diferido/bono no crecen en absoluto."
+          },
+          {
+            "title": "Plazo limitado a 50 años",
+            "description": "Las opciones de frecuencia de pago del modo Amortizado (hasta semanal, 52 pagos al año) están limitadas a un plazo máximo de 50 años, acotando el peor caso del cronograma a 2,600 filas en lugar de un arreglo ilimitado."
+          },
+          {
+            "title": "Frecuencia de capitalización independiente de la de pago",
+            "description": "El motor convierte específicamente a través de la tasa anual efectiva para que ambas puedan diferir de forma segura — por ejemplo, interés capitalizado mensualmente con pagos quincenales — sin ninguna deriva de redondeo en la tasa periódica."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la Calculadora de Préstamos tiene tres modos separados?",
+            "answer": "Amortizado, Pago Diferido y Bono representan tres estructuras de reembolso genuinamente distintas — cuotas regulares, una suma única reembolsada después, y una suma recibida hoy a cambio de una suma mayor debida después — por lo que cada una necesita su propia fórmula en vez de un cálculo genérico de \"préstamo\"."
+          },
+          {
+            "question": "¿Cómo se diferencia esto de la Calculadora de Interés Compuesto?",
+            "answer": "La Calculadora de Interés Compuesto proyecta un saldo de ahorro que crece hacia adelante a partir de aportaciones; los modos Diferido y Bono aquí usan la misma matemática de crecimiento pero la enmarcan como deuda — dinero adeudado que crece hasta un único reembolso, en lugar de dinero ahorrado que crece para tu propio beneficio futuro."
+          },
+          {
+            "question": "¿Por qué pueden diferir la frecuencia de capitalización y la de pago?",
+            "answer": "Los préstamos a plazos reales a menudo cotizan una tasa que capitaliza mensualmente (como la mayoría de las hipotecas) mientras permiten pagos semanales o quincenales. Convertir a través de la tasa anual efectiva mantiene la matemática correcta sin importar cómo se relacionen esas dos frecuencias."
+          },
+          {
+            "question": "¿Qué calcula realmente el modo Bono?",
+            "answer": "Es la imagen especular del Pago Diferido: en lugar de preguntar \"¿a cuánto crecerá este monto de préstamo?\", pregunta \"¿cuánto necesitaría prestar hoy para recibir una cantidad específica al vencimiento?\" — el valor presente de ese monto futuro adeudado, descontado a la tasa dada."
+          }
+        ]
+      },
+      "affordable-loan-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Préstamo Asequible: la fórmula de amortización inversa que resuelve, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "1",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "L = M[1 − (1+c)⁻ⁿ] / c",
+          "note": "El valor presente de una anualidad — la misma fórmula de amortización que la Calculadora de Préstamos resuelve para la cuota M, reorganizada para resolver en cambio el monto del préstamo L que una cuota fija puede sostener."
+        },
+        "flowchart": {
+          "intro": "Esta es una reorganización algebraica directa, no una búsqueda o simulación — el monto máximo del préstamo se calcula en un solo paso a partir de la cuota que puedes pagar.",
+          "steps": [
+            "Convertir la tasa anual nominal en una tasa mensual",
+            "Calcular el número total de cuotas mensuales durante el plazo",
+            "Resolver la fórmula de anualidad directamente para el monto del préstamo que produce exactamente tu cuota mensual objetivo",
+            "Pago total = cuota mensual × número de pagos; interés total = pago total − monto del préstamo"
+          ],
+          "caption": "El cálculo de anualidad inversa en un solo paso que ejecuta esta herramienta."
+        },
+        "anatomy": {
+          "intro": "El préstamo máximo que sostiene una cuota dada se descompone en exactamente dos partes, igual que cualquier préstamo amortizado.",
+          "labelLoanAmount": "Monto del Préstamo",
+          "labelInterest": "Interés",
+          "labelTotal": "Total reembolsado",
+          "caption": "Un préstamo representativo sostenido por una cuota mensual fija durante su plazo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "M",
+            "meaning": "Cuota mensual que puedes pagar — la entrada conocida de la que parte esta herramienta.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Tasa de interés anual.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Plazo del préstamo.",
+            "unit": "Años"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Cuota mensual cero o negativa",
+            "description": "Protegido a nivel del motor: una cuota no finita, cero o negativa devuelve un resultado vacío en lugar de un monto de préstamo indefinido."
+          },
+          {
+            "title": "Tasa de interés negativa",
+            "description": "También se rechaza — una tasa de interés por debajo de cero no tiene una tasa periódica válida a la que convertirse, por lo que el motor devuelve un resultado vacío en lugar de calcular con una tasa negativa sin sentido."
+          },
+          {
+            "title": "Tasa de interés cero",
+            "description": "Aún se calcula correctamente: con una tasa del 0%, el monto máximo del préstamo es simplemente la cuota mensual multiplicada por el número de pagos, sin necesidad de fórmula de interés."
+          },
+          {
+            "title": "Plazo cero o negativo",
+            "description": "Protegido igual que el monto del préstamo y la tasa — un plazo no positivo devuelve un resultado vacío en lugar de una división entre cero pagos."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cómo se diferencia esto del modo Amortizado de la Calculadora de Préstamos?",
+            "answer": "Son imágenes especulares exactas de la misma fórmula: la Calculadora de Préstamos parte de un monto de préstamo y resuelve la cuota que requiere; esta herramienta parte de una cuota que puedes pagar y resuelve el monto del préstamo que sostiene — la misma ecuación de anualidad, reorganizada para una incógnita distinta."
+          },
+          {
+            "question": "¿Por qué la calculadora necesita mi cuota mensual objetivo en vez de mi ingreso?",
+            "answer": "Esta herramienta responde una pregunta más acotada y directa — \"¿qué préstamo sostiene esta cuota específica?\" — en lugar de una evaluación completa de capacidad de pago. Para un presupuesto de cuota derivado del ingreso y otras deudas, la Calculadora de Capacidad de Compra de Vivienda y la Calculadora de Relación Deuda-Ingreso son puntos de partida más adecuados."
+          },
+          {
+            "question": "¿Un pago inicial mayor cambia lo que calcula esta calculadora?",
+            "answer": "No directamente — esta herramienta resuelve el monto del préstamo en sí, no el precio de compra. Si estás comprando algo con un pago inicial, suma el monto del préstamo que devuelve esta herramienta a tu pago inicial para obtener el precio total que podrías pagar."
+          },
+          {
+            "question": "¿Por qué el resultado es un solo número en vez de un cronograma?",
+            "answer": "La pregunta central que responde esta herramienta — el monto máximo del préstamo — es un solo valor por diseño. Para el cronograma completo de pago mes a mes o año a año de un préstamo por ese monto, el modo Amortizado de la Calculadora de Préstamos continúa exactamente donde esta herramienta se detiene."
+          }
+        ]
+      },
+      "retirement-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Jubilación: la fórmula del valor futuro de una anualidad más una suma global detrás de su proyección, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionGrowth": "Crecimiento del saldo hasta la jubilación",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "FV = S(1+i)ᵐ + C[((1+i)ᵐ − 1) / i]",
+          "note": "El saldo proyectado es una suma global S (ahorros actuales) que se capitaliza mensualmente, más el valor futuro de una anualidad de aportación mensual C — exactamente la misma matemática que la Calculadora de Interés Compuesto simula mes a mes, aplicada aquí a un horizonte de ahorro hasta la edad de jubilación."
+        },
+        "flowchart": {
+          "intro": "En lugar de un segundo motor de simulación, esta herramienta es un envoltorio ligero alrededor de la propia simulación mes a mes de la Calculadora de Interés Compuesto, siempre ejecutada con capitalización mensual y sin ajuste de impuestos o inflación (ninguno se expone como entrada aquí).",
+          "steps": [
+            "Calcular los años hasta la jubilación como la edad de jubilación menos la edad actual",
+            "Convertir la tasa de retorno anual en una tasa mensual",
+            "Cada mes: aplicar el crecimiento de ese mes al saldo actual",
+            "Cada mes: añadir la aportación mensual al saldo",
+            "Repetir para cada mes hasta alcanzar la edad de jubilación"
+          ],
+          "caption": "La simulación de crecimiento mes a mes que esta herramienta reutiliza de la Calculadora de Interés Compuesto."
+        },
+        "growth": {
+          "intro": "Un ejemplo representativo — comenzando a los 30 años con $20,000 ahorrados, aportando $300/mes con un retorno anual del 7% hasta los 65 años.",
+          "label": "Saldo Proyectado",
+          "caption": "Crecimiento del saldo proyectado desde los 30 años hasta una edad de jubilación de 65."
+        },
+        "anatomy": {
+          "intro": "Todo saldo proyectado se descompone en exactamente tres componentes.",
+          "labelStarting": "Crecimiento del Saldo Inicial",
+          "labelContributions": "Aportaciones",
+          "labelGrowth": "Crecimiento sobre Aportaciones",
+          "labelTotal": "Saldo Proyectado",
+          "caption": "El mismo ejemplo de 35 años: cuánto del saldo final proviene del crecimiento propio de los ahorros iniciales, frente a las aportaciones y el crecimiento que estas a su vez generaron."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Edad",
+            "meaning": "Edad actual.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "EdadJub",
+            "meaning": "Edad de jubilación objetivo — los años hasta la jubilación son la diferencia entre ambas edades.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "S",
+            "meaning": "Saldo actual de ahorros para la jubilación.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Aportación mensual añadida al saldo cada mes.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Tasa de retorno anual, asumida constante durante toda la proyección.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Meta",
+            "meaning": "Un saldo objetivo — usado solo por los modos inversos que resuelven la aportación mensual requerida o los años necesarios para alcanzarlo.",
+            "unit": "Moneda"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Edad de jubilación no posterior a la edad actual",
+            "description": "Protegido a nivel del motor: una edad de jubilación igual o anterior a la edad actual devuelve un resultado vacío en lugar de un horizonte de proyección negativo o nulo."
+          },
+          {
+            "title": "Edad, ahorros o aportación negativos",
+            "description": "Cada uno se verifica de forma independiente — un valor negativo en cualquiera de ellos devuelve un resultado vacío, ya que ninguno puede ser negativo de forma significativa en esta proyección."
+          },
+          {
+            "title": "Tasa de retorno negativa",
+            "description": "También rechazada: un retorno anual negativo no está modelado por esta herramienta, que asume que los ahorros crecen (o al menos se mantienen al 0%) en lugar de reducirse con el tiempo."
+          },
+          {
+            "title": "Modos inversos con una meta no positiva",
+            "description": "Tanto el modo \"aportación requerida\" como \"años necesarios\" se protegen contra un saldo objetivo de cero o menos, ya que no hay aportación o duración significativa que \"alcance\" una meta ya cumplida o inválida."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta herramienta no considera impuestos o inflación?",
+            "answer": "Las cuentas de jubilación varían demasiado en su tratamiento fiscal (401(k), IRA, cuenta de corretaje gravable y otras) para asumir una regla universal, así que esta herramienta deja intencionalmente fuera impuestos e inflación — el modo de Monto Final de la Calculadora de Interés Compuesto expone ambos como entradas opcionales si deseas una proyección que los considere."
+          },
+          {
+            "question": "¿Cómo se diferencia esto de la Calculadora de Interés Compuesto?",
+            "answer": "Comparten el mismo motor de crecimiento subyacente, pero esta herramienta enmarca cada entrada específicamente en torno a una línea de tiempo de jubilación (edad actual y edad de jubilación, en lugar de un número bruto de años) y siempre asume capitalización mensual, sacrificando algo de generalidad por una interfaz más directa para la planificación de la jubilación."
+          },
+          {
+            "question": "¿Puede esta herramienta decirme cuánto necesito ahorrar?",
+            "answer": "Sí — sus modos inversos hacen exactamente eso: dado un saldo objetivo, uno resuelve la aportación mensual requerida para alcanzarlo antes de tu edad de jubilación, y el otro resuelve en cambio cuántos años adicionales de ahorro a tu tasa de aportación actual serían necesarios."
+          },
+          {
+            "question": "¿Por qué se asume que la tasa de crecimiento es constante durante toda la proyección?",
+            "answer": "Una única tasa constante mantiene exacta la matemática de la proyección y transparentes sus supuestos, en lugar de implicar una falsa precisión al adivinar cómo podrían variar los retornos año a año — los mercados reales fluctúan, así que esta proyección se lee mejor como una estimación ilustrativa, no una garantía."
+          }
+        ]
+      },
+      "house-affordability-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Capacidad de Compra de Vivienda: la regla 28/36 detrás de su modo principal, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionRatio": "La regla 28/36",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Presupuesto de Vivienda = mín(0.28 × Ingreso, 0.36 × Ingreso − Otras Deudas)",
+          "note": "La regla estándar de capacidad de compra 28/36: costos mensuales de vivienda limitados al 28% del ingreso bruto (la proporción front-end), y la deuda mensual total — vivienda más todo lo demás — limitada al 36% (la proporción back-end). El menor de los dos límites establece el presupuesto real de vivienda, que luego se resuelve hacia atrás en un precio máximo de vivienda."
+        },
+        "flowchart": {
+          "intro": "Resolver hacia atrás desde un presupuesto de cuota hasta un precio de vivienda es más complejo que una sola fórmula, porque el impuesto predial en sí es un porcentaje del precio que se busca — el cálculo debe aislar primero los costos independientes del precio.",
+          "steps": [
+            "Calcular el límite front-end (28% del ingreso mensual) y el límite back-end (36% del ingreso mensual menos deudas existentes)",
+            "Tomar el menor de los dos como el pago máximo total de vivienda",
+            "Restar seguro y cuotas de HOA (montos fijos, independientes del precio de la vivienda) de ese presupuesto",
+            "Resolver el precio de vivienda donde el presupuesto restante cubra exactamente capital, interés e impuesto predial a ese precio",
+            "Monto del préstamo = precio de vivienda − pago inicial"
+          ],
+          "caption": "El cálculo de capacidad de compra inversa que ejecuta el modo principal (Precio de Vivienda) de esta herramienta."
+        },
+        "ratio": {
+          "intro": "Un ejemplo representativo en el límite front-end del 28% — el mismo umbral contra el que presupuesta el modo principal de esta herramienta antes de verificar el límite back-end del 36% frente a deudas existentes.",
+          "gaugeCaption": "Proporción front-end",
+          "caption": "28% es el tope front-end estándar; 36% es el tope back-end una vez incluidas las deudas existentes."
+        },
+        "anatomy": {
+          "intro": "El pago mensual máximo de vivienda que resuelve esta herramienta se descompone en tres partes (el HOA, cuando se indica, agrega una cuarta).",
+          "labelPrincipalInterest": "Capital e Interés",
+          "labelTax": "Impuesto Predial",
+          "labelInsurance": "Seguro",
+          "labelTotal": "Pago Mensual de Vivienda",
+          "caption": "Un pago de vivienda representativo en el límite front-end del 28%."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Ingreso",
+            "meaning": "Ingreso bruto anual.",
+            "unit": "Moneda/año"
+          },
+          {
+            "symbol": "Deuda",
+            "meaning": "Pagos de deuda mensuales existentes (auto, préstamos estudiantiles, tarjetas de crédito, etc.), excluyendo vivienda.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Inicial",
+            "meaning": "Pago inicial disponible.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Tasa de interés hipotecaria anual.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Plazo del préstamo.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "TasaImp",
+            "meaning": "Tasa anual de impuesto predial, como porcentaje del precio de la vivienda.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Seguro",
+            "meaning": "Seguro de vivienda anual.",
+            "unit": "Moneda/año"
+          },
+          {
+            "symbol": "HOA",
+            "meaning": "Cuotas mensuales de la asociación de propietarios, si aplica.",
+            "unit": "Moneda/mes"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Cualquier entrada negativa o no finita",
+            "description": "Cada entrada se verifica de forma independiente a nivel del motor — ingreso, deudas, pago inicial, tasa, plazo, tasa de impuesto, seguro y HOA se protegen todos contra valores negativos o no finitos, devolviendo un resultado vacío en lugar de un precio sin sentido."
+          },
+          {
+            "title": "Presupuesto demasiado ajustado tras seguro y HOA",
+            "description": "Si el seguro y el HOA por sí solos ya superan el presupuesto de vivienda que permite la regla 28/36, no queda espacio para capital, interés o impuesto — la calculadora devuelve un resultado vacío en lugar de un precio de vivienda negativo."
+          },
+          {
+            "title": "Límite back-end reducido por deuda existente",
+            "description": "El límite back-end del 36% no es un tope plano solo para vivienda — se reduce directamente por cualquier deuda no relacionada con vivienda que se ingrese, por lo que pagos de deuda existentes más altos reducen correctamente el precio máximo de vivienda asequible."
+          },
+          {
+            "title": "El impuesto predial escala con el precio desconocido",
+            "description": "Como el impuesto predial es un porcentaje del precio de la vivienda en lugar de un monto fijo, la calculadora resuelve precio e impuesto juntos, en lugar de asumir una cifra de impuesto de antemano y calcular el precio a partir de ella por separado."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué específicamente 28% y 36%?",
+            "answer": "Estos son los umbrales clásicos de capacidad de compra de hipoteca convencional usados desde hace mucho en la suscripción hipotecaria: 28% limita solo los costos de vivienda (proporción front-end), y 36% limita vivienda más todos los demás pagos de deuda combinados (proporción back-end) — ambos expresados como porcentaje del ingreso bruto, no neto."
+          },
+          {
+            "question": "¿Por qué esta herramienta tiene cinco modos?",
+            "answer": "Precio de Vivienda e Ingreso Requerido son dos direcciones a través de la misma matemática de capacidad de compra de vivienda; Auto, Préstamo Personal y Préstamo Empresarial aplican la misma lógica de presupuesto por porcentaje de ingreso a otras compras importantes, ya que la pregunta subyacente — \"¿qué puede sostener este ingreso?\" — es la misma en los cinco casos."
+          },
+          {
+            "question": "¿Cómo se diferencia esto de la Calculadora de Relación Deuda-Ingreso?",
+            "answer": "La Calculadora de Relación Deuda-Ingreso reporta tus proporciones actuales dadas deudas que ya tienes; el modo Precio de Vivienda de esta herramienta trabaja en dirección opuesta — partiendo de los umbrales 28/36 y resolviendo el precio máximo de vivienda que te mantiene dentro de ellos."
+          },
+          {
+            "question": "¿Por qué un pago inicial más grande aumenta el precio máximo de vivienda en más que el propio pago inicial?",
+            "answer": "Un pago inicial más grande reduce el monto de préstamo necesario, lo que reduce el pago de capital e interés requerido — liberando más del presupuesto fijo de vivienda para un precio más alto, además de la propia contribución directa del pago inicial a ese precio."
+          }
+        ]
+      },
+      "debt-to-income-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Relación Deuda-Ingreso: las fórmulas de las proporciones front-end y back-end, los umbrales de suscripción contra los que categoriza los resultados, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionRatio": "Categorías de proporción",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Proporción Back-End = (Vivienda + Auto + Estudiantil + TarjetaCrédito + Otro) / Ingreso × 100",
+          "note": "La proporción back-end (comúnmente llamada solo \"DTI\") suma cada pago de deuda mensual y lo divide entre el ingreso bruto mensual; la proporción front-end usa la misma fórmula con solo el pago de vivienda en el numerador."
+        },
+        "flowchart": {
+          "intro": "Ambas proporciones se calculan directamente de las mismas entradas — sin iteración ni búsqueda, solo dos divisiones y una consulta de umbral.",
+          "steps": [
+            "Sumar cada pago de deuda mensual (vivienda, auto, préstamos estudiantiles, tarjetas de crédito, otro) en un total",
+            "Proporción front-end = pago de vivienda ÷ ingreso bruto mensual × 100",
+            "Proporción back-end = deuda mensual total ÷ ingreso bruto mensual × 100",
+            "Categorizar la proporción back-end: saludable (<36%), manejable (36–43%), alta (43–50%), o muy alta (50%+)"
+          ],
+          "caption": "Los dos cálculos de proporción y la categorización que ejecuta esta herramienta."
+        },
+        "ratio": {
+          "intro": "Una proporción back-end representativa del 38%, en la zona \"manejable\" entre los umbrales de suscripción del 36% y 43%.",
+          "gaugeCaption": "Proporción back-end (DTI)",
+          "caption": "Por debajo del 36% generalmente se considera saludable; 36–43% es el rango en el que aún trabajan muchos prestamistas convencionales; por encima del 50% se trata ampliamente como una carga de deuda de alto riesgo."
+        },
+        "anatomy": {
+          "intro": "La deuda mensual total se descompone en hasta cinco categorías, cada una ingresada por separado.",
+          "labelHousing": "Vivienda",
+          "labelCar": "Auto",
+          "labelStudent": "Préstamos Estudiantiles",
+          "labelCreditCard": "Tarjetas de Crédito",
+          "labelOther": "Otro",
+          "labelTotal": "Deuda Mensual Total",
+          "caption": "Un desglose de deuda representativo que suma el total usado en ambas proporciones."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Ingreso",
+            "meaning": "Ingreso bruto mensual.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Vivienda",
+            "meaning": "Pago mensual de vivienda (renta o hipoteca).",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Auto",
+            "meaning": "Pagos mensuales de préstamo o arrendamiento de auto.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Estudiantil",
+            "meaning": "Pagos mensuales de préstamos estudiantiles.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "TC",
+            "meaning": "Pagos mínimos mensuales de tarjetas de crédito.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Otro",
+            "meaning": "Cualquier otro pago de deuda mensual recurrente.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Meta",
+            "meaning": "Una proporción back-end objetivo — usada solo por el modo inverso que resuelve el pago máximo de deuda que esa proporción permite.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ingreso cero o negativo",
+            "description": "Protegido a nivel del motor: un ingreso bruto no finito, cero o negativo devuelve un resultado vacío en lugar de dividir entre cero o un denominador negativo."
+          },
+          {
+            "title": "Pago de deuda negativo en alguna categoría",
+            "description": "Cada uno de los cinco campos de deuda se verifica de forma independiente — un valor negativo en cualquiera devuelve un resultado vacío, ya que ningún pago de deuda individual puede ser significativamente negativo."
+          },
+          {
+            "title": "Los umbrales de categoría son solo de la proporción back-end",
+            "description": "La categorización saludable/manejable/alta/muy alta siempre usa la proporción back-end (deuda total), nunca la front-end (solo vivienda) — un pago de vivienda alto compensado por ninguna otra deuda aún se categoriza correctamente por la cifra combinada."
+          },
+          {
+            "title": "Piso del modo inverso por deuda existente",
+            "description": "El modo \"deuda máxima permitida\" limita el espacio de deuda adicional a cero — si la deuda no relacionada con vivienda ya existente supera lo que permite la proporción objetivo, reporta que no hay espacio adicional en lugar de un margen negativo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cuál es la diferencia entre la proporción front-end y back-end?",
+            "answer": "La proporción front-end cuenta solo los costos de vivienda; la proporción back-end (a la que normalmente se refiere \"DTI\") cuenta cada pago de deuda mensual — vivienda, auto, préstamos estudiantiles, tarjetas de crédito y cualquier otra cosa recurrente. Los prestamistas típicamente consideran ambas, pero la proporción back-end es la cifra más comúnmente citada."
+          },
+          {
+            "question": "¿Por qué los umbrales de categoría son 36%, 43% y 50%?",
+            "answer": "Estos reflejan umbrales comúnmente citados en la suscripción hipotecaria: por debajo del 36% generalmente se considera saludable, 36–43% es el rango en el que aún trabajan muchos prestamistas convencionales, 43% es el umbral back-end de hipoteca calificada que usan muchos prestamistas, y 50%+ se trata ampliamente como una carga de deuda de alto riesgo."
+          },
+          {
+            "question": "¿Esta calculadora incluye deuda nueva potencial que estoy considerando?",
+            "answer": "Solo si la ingresas como una de las cinco categorías existentes — esta herramienta reporta tu proporción según están las cosas actualmente. Para saber cuánta deuda adicional permitiría una proporción objetivo en su lugar, usa el otro modo de la calculadora, que resuelve en esa dirección."
+          },
+          {
+            "question": "¿Por qué una proporción más baja se muestra como \"saludable\" en lugar de un único resultado de aprobado/reprobado?",
+            "answer": "La relación deuda-ingreso es un espectro que los prestamistas ponderan de manera diferente según el tipo de préstamo y otros factores, no un único corte estricto — cuatro categorías comunican aproximadamente dónde te encuentras de forma más útil que un veredicto de todo o nada."
+          }
+        ]
+      },
+      "mortgage-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Hipoteca: la fórmula completa del pago PITI, los umbrales de cancelación de PMI que rastrea, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAmortization": "Amortización en el tiempo",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "1",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "7 min"
+        },
+        "formula": {
+          "expression": "PITI = Capital e Interés + Impuesto + Seguro + HOA + PMI",
+          "note": "El pago mensual completo de vivienda, donde Capital e Interés es el pago amortizante estándar sobre el monto del préstamo (precio de vivienda menos pago inicial), y los cuatro términos restantes se suman directamente de sus propias entradas."
+        },
+        "flowchart": {
+          "intro": "Más allá del cronograma base de capital e interés, esta herramienta también simula un escenario opcional de pago extra y un escenario independiente de pago quincenal, para que los tres puedan compararse lado a lado.",
+          "steps": [
+            "Monto del préstamo = precio de vivienda − pago inicial",
+            "Resolver la fórmula de anualidad estándar para el pago mensual base de capital e interés",
+            "Simular la amortización estándar mes a mes, rastreando cuándo el saldo cruza el 80% y el 78% del precio original de la vivienda (los umbrales de cancelación de PMI y terminación automática)",
+            "Si se ingresó un pago mensual extra, simular un segundo cronograma con él añadido a cada pago y comparar el tiempo de pago y el interés total",
+            "De forma independiente, simular el plan quincenal acelerado (la mitad del pago de capital e interés cada 14 días) y compararlo también con el cronograma estándar"
+          ],
+          "caption": "La amortización base, el seguimiento de PMI y las dos simulaciones alternativas de pago que ejecuta esta herramienta."
+        },
+        "amortization": {
+          "intro": "Un préstamo representativo a 30 años de $320,000 al 6.5% — el mismo cambio entre capital e interés que cualquier préstamo amortizado, solo que extendido sobre un plazo mucho más largo que un préstamo personal típico.",
+          "labelPrincipal": "Capital",
+          "labelInterest": "Interés",
+          "caption": "Parte de capital frente a la de interés de cada pago a lo largo de un plazo hipotecario de 30 años."
+        },
+        "anatomy": {
+          "intro": "El pago mensual completo PITI se descompone en hasta cinco partes (HOA y PMI solo aplican cuando se ingresan).",
+          "labelPrincipalInterest": "Capital e Interés",
+          "labelTax": "Impuesto Predial",
+          "labelInsurance": "Seguro",
+          "labelHoa": "HOA",
+          "labelPmi": "PMI",
+          "labelTotal": "Pago Mensual",
+          "caption": "Un pago PITI completo representativo, incluyendo cuotas de HOA y PMI."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Precio",
+            "meaning": "Precio de la vivienda.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Inicial",
+            "meaning": "Pago inicial.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Tasa de interés hipotecaria anual.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Plazo del préstamo.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "Impuesto",
+            "meaning": "Impuesto predial anual.",
+            "unit": "Moneda/año"
+          },
+          {
+            "symbol": "Seguro",
+            "meaning": "Seguro de vivienda anual.",
+            "unit": "Moneda/año"
+          },
+          {
+            "symbol": "HOA",
+            "meaning": "Cuotas mensuales de la asociación de propietarios, si aplica.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "PMI",
+            "meaning": "Seguro hipotecario privado mensual, si aplica — típicamente requerido cuando el pago inicial es inferior al 20%.",
+            "unit": "Moneda/mes"
+          },
+          {
+            "symbol": "Extra",
+            "meaning": "Monto extra opcional pagado hacia el capital cada mes, más allá del pago requerido de capital e interés.",
+            "unit": "Moneda/mes"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Pago inicial igual o mayor al precio de vivienda",
+            "description": "El monto del préstamo se limita a cero como mínimo — un pago inicial igual o mayor al precio de vivienda significa ningún préstamo en absoluto, en lugar de un saldo de capital negativo."
+          },
+          {
+            "title": "Pago mensual extra negativo",
+            "description": "Limitado a cero como mínimo — un valor negativo ingresado para el pago extra opcional se trata como ningún pago extra, en lugar de reducir el propio pago requerido de capital e interés."
+          },
+          {
+            "title": "Umbrales de cancelación de PMI (80%/78% LTV)",
+            "description": "Cuando se ingresa PMI mensual, el cronograma rastrea el primer mes en que el saldo alcanza el 80% del precio original de la vivienda (cuando un prestatario puede solicitar la cancelación bajo la Ley de Protección al Propietario de 1998) y el 78% (cuando el PMI debe terminarse automáticamente por ley) — ambos nulos cuando el préstamo no lleva PMI."
+          },
+          {
+            "title": "Plan quincenal calculado de forma independiente",
+            "description": "El cronograma quincenal acelerado se simula por sí solo, no apilado sobre ningún pago mensual extra — ambas son estrategias alternativas de pago para comparar, no efectos destinados a combinarse."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Qué significa realmente PITI?",
+            "answer": "Principal (capital), Interest (interés), Taxes (impuestos) e Insurance (seguro) — los cuatro componentes que los prestamistas típicamente agrupan en un único pago mensual de vivienda. Esta calculadora añade cuotas de HOA y PMI como dos componentes opcionales adicionales, ya que ambos son costos reales comunes que no encajan perfectamente en el acrónimo clásico de cuatro letras."
+          },
+          {
+            "question": "¿Cuándo desaparece el PMI?",
+            "answer": "Bajo la Ley de Protección al Propietario de 1998, un prestatario generalmente puede solicitar la cancelación del PMI una vez que el saldo del préstamo alcanza el 80% del valor original de la vivienda, y los prestamistas deben terminarlo automáticamente al 78% — esta calculadora reporta el mes específico en que se alcanza cada umbral, dado el monto de PMI que ingresaste."
+          },
+          {
+            "question": "¿Cómo se diferencia el escenario de pago extra del plan quincenal?",
+            "answer": "Un pago mensual extra añade un monto fijo a cada pago regular; el plan quincenal en cambio recauda la mitad del pago de capital e interés cada 14 días, lo que resulta en 26 períodos al año — 13 pagos equivalentes mensuales en vez de 12. Ambos aceleran el pago, pero mediante cronogramas de pago distintos, por lo que esta herramienta los simula y reporta de forma independiente en vez de asumir que usarías ambos a la vez."
+          },
+          {
+            "question": "¿Por qué el impuesto predial y el seguro se ingresan como cifra anual pero se muestran mensualmente?",
+            "answer": "Las facturas de impuesto predial y las primas de seguro típicamente se calculan anualmente, que es la forma más natural de ingresarlas; la calculadora simplemente divide cada una entre 12 para incorporarlas al pago mensual PITI junto con el monto mensual de capital e interés."
           }
         ]
       }

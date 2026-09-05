@@ -18228,7 +18228,8 @@
     "feedbackThanksYes": "Thanks for the feedback!",
     "feedbackThanksNo": "Thanks — we'll use this to improve the page.",
     "indexIntro": "Reference documentation for TooloraLabs' calculators: the formulas, the step-by-step calculation logic, and the edge cases each tool handles. Currently available for one tool as a pilot, with more being added.",
-    "indexCta": "View Compound Interest Calculator Docs"
+    "indexCta": "View Compound Interest Calculator Docs",
+    "indexAvailableNow": "Available Now"
   },
   "docs": {
     "tools": {
@@ -18369,6 +18370,743 @@
           {
             "question": "Can this tool solve backward — for example, find the interest rate needed to reach a target?",
             "answer": "Yes — that's what the four alternate modes (Investment Length, Return Rate, Starting Amount, Additional Contribution) do. Each one holds every other variable fixed and searches for the one unknown that reaches your supplied target future value, using a numerical search (bisection) rather than a closed-form inverse, since the underlying month-by-month simulation has no simple algebraic inverse."
+          }
+        ]
+      },
+      "loan-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Loan Calculator: the amortization formula behind its three modes (amortized, deferred payment, and bond), the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAmortization": "Amortization Over Time",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "M = L[c(1+c)ⁿ] / [(1+c)ⁿ − 1]",
+          "note": "The standard amortizing-payment formula for the Amortized mode, where L is the loan amount, c is the periodic interest rate, and n is the number of payments. The Deferred and Bond modes instead use straightforward compound growth to a single balloon payment, with no periodic formula to solve."
+        },
+        "flowchart": {
+          "intro": "Amortized mode converts the nominal annual rate to a true per-payment-period rate (through the effective annual rate), which lets compounding frequency and payment frequency differ — a mortgage-style monthly rate can still be paid off weekly, for instance.",
+          "steps": [
+            "Convert the nominal annual rate to the effective annual rate, using the chosen compounding frequency",
+            "Convert the effective annual rate to a true rate per payment period, using the chosen payment frequency",
+            "Solve the standard annuity formula for the fixed payment that fully amortizes the loan",
+            "Each period: split that payment into interest (balance × period rate) and principal (the remainder)",
+            "Repeat until the balance reaches zero"
+          ],
+          "caption": "The rate-conversion and amortization loop the Amortized mode actually runs."
+        },
+        "amortization": {
+          "intro": "A representative 5-year, $10,000 loan at 8% — interest's share of the flat payment starts high and shrinks every period as the principal balance itself shrinks.",
+          "labelPrincipal": "Principal",
+          "labelInterest": "Interest",
+          "caption": "Principal vs. interest portion of each payment across the loan's term."
+        },
+        "anatomy": {
+          "intro": "Every amortized loan's total repayment breaks down into exactly two parts.",
+          "labelPrincipal": "Principal",
+          "labelInterest": "Interest",
+          "labelTotal": "Total Repaid",
+          "caption": "A representative $10,000 loan at 8% over 5 years."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "L",
+            "meaning": "Loan amount (Amortized/Deferred modes) — the amount borrowed today.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Nominal annual interest rate.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Loan term.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "nc",
+            "meaning": "Compounding frequency — how often interest compounds per year.",
+            "unit": "Times/year"
+          },
+          {
+            "symbol": "np",
+            "meaning": "Payment frequency — how often payments are made per year (Amortized mode only).",
+            "unit": "Times/year"
+          },
+          {
+            "symbol": "Due",
+            "meaning": "Amount due at maturity (Bond mode only) — the calculator solves backward for the present amount received today.",
+            "unit": "Currency"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero or negative loan amount/term",
+            "description": "Guarded at the engine level: a non-finite, zero, or negative loan amount or term returns an empty result rather than a division error."
+          },
+          {
+            "title": "Zero interest rate",
+            "description": "Computes correctly in every mode: with a 0% rate, the amortized payment is simply the loan amount divided evenly across all payments, and deferred/bond balances don't grow at all."
+          },
+          {
+            "title": "Term capped at 50 years",
+            "description": "The Amortized mode's payment-frequency options (up to weekly, 52 payments a year) are capped at a 50-year maximum term, bounding the worst-case schedule to 2,600 rows rather than an unbounded array."
+          },
+          {
+            "title": "Compounding frequency independent of payment frequency",
+            "description": "The engine converts through the effective annual rate specifically so these two can differ safely — for example, interest compounding monthly while payments are collected biweekly — without any rounding drift in the periodic rate."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does Loan Calculator have three separate modes?",
+            "answer": "Amortized, Deferred Payment, and Bond represent three genuinely different repayment structures — regular installments, a single lump sum repaid later, and a lump sum received today in exchange for a larger lump sum due later — so each needs its own formula rather than one generic \"loan\" calculation."
+          },
+          {
+            "question": "How is this different from Compound Interest Calculator?",
+            "answer": "Compound Interest Calculator projects a savings balance growing forward from contributions; the Deferred and Bond modes here use the same growth math but frame it as debt — money owed that grows until a single repayment, rather than money saved that grows for your own future benefit."
+          },
+          {
+            "question": "Why can compounding frequency and payment frequency differ?",
+            "answer": "Real installment loans often quote a rate that compounds monthly (like most mortgages) while allowing weekly or biweekly payments. Converting through the effective annual rate keeps the math correct regardless of how those two frequencies relate to each other."
+          },
+          {
+            "question": "What does the Bond mode actually compute?",
+            "answer": "It's the mirror image of Deferred Payment: instead of asking \"how much will this loan amount grow to,\" it asks \"how much would I need to lend today to receive a specific amount at maturity\" — the present value of that future due amount, discounted at the given rate."
+          }
+        ]
+      },
+      "affordable-loan-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Affordable Loan Calculator: the reverse-amortization formula it solves, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "1",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "L = M[1 − (1+c)⁻ⁿ] / c",
+          "note": "The present value of an annuity — the same amortization formula Loan Calculator solves for the payment M, rearranged to solve for the loan amount L a fixed payment can support instead."
+        },
+        "flowchart": {
+          "intro": "This is a direct algebraic rearrangement, not a search or simulation — the maximum loan amount is computed in a single step from the payment you can afford.",
+          "steps": [
+            "Convert the nominal annual rate to a monthly rate",
+            "Compute the total number of monthly payments over the term",
+            "Solve the annuity formula directly for the loan amount that produces exactly your target monthly payment",
+            "Total payment = monthly payment × number of payments; total interest = total payment − loan amount"
+          ],
+          "caption": "The single-step reverse-annuity calculation this tool runs."
+        },
+        "anatomy": {
+          "intro": "The maximum loan a given payment supports breaks down into exactly two parts, same as any amortized loan.",
+          "labelLoanAmount": "Loan Amount",
+          "labelInterest": "Interest",
+          "labelTotal": "Total Repaid",
+          "caption": "A representative loan supported by a fixed monthly payment over its term."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "M",
+            "meaning": "Monthly payment you can afford — the known input this tool solves from.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Annual interest rate.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Loan term.",
+            "unit": "Years"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero or negative monthly payment",
+            "description": "Guarded at the engine level: a non-finite, zero, or negative payment returns an empty result rather than an undefined loan amount."
+          },
+          {
+            "title": "Negative interest rate",
+            "description": "Rejected the same way — an interest rate below zero has no valid periodic rate to convert, so the engine returns an empty result instead of computing with a nonsensical negative rate."
+          },
+          {
+            "title": "Zero interest rate",
+            "description": "Still computes correctly: with a 0% rate, the maximum loan amount is simply the monthly payment multiplied by the number of payments, with no interest formula needed."
+          },
+          {
+            "title": "Zero or negative term",
+            "description": "Guarded the same way as loan amount and rate — a non-positive term returns an empty result rather than a division by zero payments."
+          }
+        ],
+        "faq": [
+          {
+            "question": "How is this different from Loan Calculator's Amortized mode?",
+            "answer": "They're exact mirror images of the same formula: Loan Calculator starts from a loan amount and solves for the payment it requires; this tool starts from a payment you can afford and solves for the loan amount it supports — the same annuity equation, rearranged for a different unknown."
+          },
+          {
+            "question": "Why does the calculator need my target monthly payment instead of my income?",
+            "answer": "This tool answers a narrower, more direct question — \"what loan does this specific payment support?\" — rather than a full affordability assessment. For a payment budget derived from income and other debts, House Affordability Calculator and Debt-to-Income Ratio Calculator are the more appropriate starting points."
+          },
+          {
+            "question": "Does a larger down payment change what this calculator computes?",
+            "answer": "Not directly — this tool solves for the loan amount itself, not the purchase price. If you're buying something with a down payment, add the loan amount this tool returns to your down payment to get the total price you could afford."
+          },
+          {
+            "question": "Why is the result a single number instead of a schedule?",
+            "answer": "The core question this tool answers — the maximum loan amount — is a single value by design. For the full month-by-month or year-by-year payoff schedule of a loan at that amount, Loan Calculator's Amortized mode picks up exactly where this tool leaves off."
+          }
+        ]
+      },
+      "retirement-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Retirement Calculator: the future-value-of-an-annuity-plus-lump-sum formula behind its projection, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionGrowth": "Balance Growth to Retirement",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "FV = S(1+i)ᵐ + C[((1+i)ᵐ − 1) / i]",
+          "note": "The projected balance is a lump sum S (current savings) compounding monthly, plus the future value of a monthly contribution annuity C — the exact same math Compound Interest Calculator simulates month by month, applied here to a savings-to-retirement-age horizon."
+        },
+        "flowchart": {
+          "intro": "Rather than a second simulation engine, this tool is a thin wrapper around Compound Interest Calculator's own month-by-month simulation, always run with monthly compounding and no tax or inflation adjustment (neither is exposed as an input here).",
+          "steps": [
+            "Compute years to retirement as retirement age minus current age",
+            "Convert the annual return rate to a monthly rate",
+            "Each month: apply that month's growth to the current balance",
+            "Each month: add the monthly contribution to the balance",
+            "Repeat for every month until retirement age is reached"
+          ],
+          "caption": "The month-by-month growth simulation this tool reuses from Compound Interest Calculator."
+        },
+        "growth": {
+          "intro": "A representative example — starting at age 30 with $20,000 saved, contributing $300/month at a 7% annual return until age 65.",
+          "label": "Projected Balance",
+          "caption": "Projected balance growth from age 30 to a retirement age of 65."
+        },
+        "anatomy": {
+          "intro": "Every projected balance breaks down into exactly three components.",
+          "labelStarting": "Starting Balance Growth",
+          "labelContributions": "Contributions",
+          "labelGrowth": "Growth on Contributions",
+          "labelTotal": "Projected Balance",
+          "caption": "The same 35-year example: how much of the final balance came from the starting savings growing on its own, versus contributions and the growth they in turn earned."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Age",
+            "meaning": "Current age.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "RetAge",
+            "meaning": "Target retirement age — years to retirement is the difference between the two ages.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "S",
+            "meaning": "Current retirement savings balance.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Monthly contribution added to the balance every month.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "i",
+            "meaning": "Annual return rate, assumed constant for the entire projection.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Target",
+            "meaning": "A target balance — used only by the reverse modes that solve for the required monthly contribution or the years needed to reach it.",
+            "unit": "Currency"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Retirement age not after current age",
+            "description": "Guarded at the engine level: a retirement age at or before the current age returns an empty result rather than a negative or zero projection horizon."
+          },
+          {
+            "title": "Negative current age, savings, or contribution",
+            "description": "Each is checked independently — a negative value for any of these returns an empty result, since none of them can meaningfully be negative in this projection."
+          },
+          {
+            "title": "Negative return rate",
+            "description": "Also rejected: a negative annual return isn't modeled by this tool, which assumes savings grow (or at minimum tread water at 0%) rather than shrink over time."
+          },
+          {
+            "title": "Reverse modes with a non-positive target",
+            "description": "The \"required contribution\" and \"years needed\" modes both guard against a target balance of zero or less, since there's no meaningful contribution or duration that \"reaches\" a target that's already met or invalid."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why doesn't this tool account for taxes or inflation?",
+            "answer": "Retirement accounts vary too widely in tax treatment (401(k), IRA, taxable brokerage, and others) to assume one universal rule, so this tool intentionally leaves tax and inflation out — Compound Interest Calculator's End Amount mode exposes both as optional inputs if you want a projection that accounts for them."
+          },
+          {
+            "question": "How is this different from Compound Interest Calculator?",
+            "answer": "They share the same underlying growth engine, but this tool frames every input around a retirement timeline specifically (current age and retirement age, rather than a raw number of years) and always assumes monthly compounding, trading some generality for a more direct retirement-planning interface."
+          },
+          {
+            "question": "Can this tool tell me how much I need to save?",
+            "answer": "Yes — its reverse modes do exactly that: given a target balance, one solves for the monthly contribution required to reach it by your retirement age, and the other solves for how many additional years of saving at your current contribution rate would be needed instead."
+          },
+          {
+            "question": "Why is the growth rate assumed constant for the whole projection?",
+            "answer": "A single constant rate keeps the projection's math exact and its assumptions transparent, rather than implying a false precision from guessing at how returns might vary year to year — real markets fluctuate, so this projection is best read as an illustrative estimate, not a guarantee."
+          }
+        ]
+      },
+      "house-affordability-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the House Affordability Calculator: the 28/36 rule behind its main mode, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionRatio": "The 28/36 Rule",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Housing Budget = min(0.28 × Income, 0.36 × Income − OtherDebt)",
+          "note": "The standard 28/36 affordability rule: monthly housing costs capped at 28% of gross income (the front-end ratio), and total monthly debt — housing plus everything else — capped at 36% (the back-end ratio). The lower of the two limits sets the actual housing budget, which is then solved backward into a maximum home price."
+        },
+        "flowchart": {
+          "intro": "Solving backward from a payment budget to a home price is more involved than a single formula, because property tax itself is a percentage of the price being solved for — the calculation has to isolate the price-independent costs first.",
+          "steps": [
+            "Compute the front-end limit (28% of monthly income) and the back-end limit (36% of monthly income minus existing debts)",
+            "Take the smaller of the two as the maximum total housing payment",
+            "Subtract insurance and HOA (fixed amounts, independent of home price) from that budget",
+            "Solve for the home price where the remaining budget exactly covers principal, interest, and property tax at that price",
+            "Loan amount = home price − down payment"
+          ],
+          "caption": "The reverse-affordability calculation this tool's main (Home Price) mode runs."
+        },
+        "ratio": {
+          "intro": "A representative example at the 28% front-end limit — the same threshold this tool's main mode budgets against before checking the 36% back-end limit against existing debts.",
+          "gaugeCaption": "Front-end ratio",
+          "caption": "28% is the standard front-end cap; 36% is the back-end cap once existing debts are included."
+        },
+        "anatomy": {
+          "intro": "The maximum monthly housing payment this tool solves for breaks down into three parts (HOA, when entered, adds a fourth).",
+          "labelPrincipalInterest": "Principal & Interest",
+          "labelTax": "Property Tax",
+          "labelInsurance": "Insurance",
+          "labelTotal": "Monthly Housing Payment",
+          "caption": "A representative housing payment at the 28% front-end limit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Income",
+            "meaning": "Gross annual income.",
+            "unit": "Currency/year"
+          },
+          {
+            "symbol": "Debt",
+            "meaning": "Existing monthly debt payments (car, student loans, credit cards, etc.), excluding housing.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Down",
+            "meaning": "Down payment available.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Annual mortgage interest rate.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Loan term.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "TaxRate",
+            "meaning": "Annual property tax rate, as a percentage of home price.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Ins",
+            "meaning": "Annual homeowners insurance.",
+            "unit": "Currency/year"
+          },
+          {
+            "symbol": "HOA",
+            "meaning": "Monthly homeowners association dues, if any.",
+            "unit": "Currency/month"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Any negative or non-finite input",
+            "description": "Every input is checked independently at the engine level — income, debts, down payment, rate, term, tax rate, insurance, and HOA all guard against negative or non-finite values, returning an empty result rather than a nonsensical price."
+          },
+          {
+            "title": "Budget too tight after insurance and HOA",
+            "description": "If insurance and HOA alone already exceed the housing budget the 28/36 rule allows, there's no room left for principal, interest, or tax — the calculator returns an empty result rather than a negative home price."
+          },
+          {
+            "title": "Back-end limit reduced by existing debt",
+            "description": "The 36% back-end limit isn't a flat cap on housing alone — it's reduced directly by whatever non-housing debt is entered, so higher existing debt payments correctly shrink the maximum affordable home price."
+          },
+          {
+            "title": "Property tax scales with the unknown price",
+            "description": "Because property tax is a percentage of home price rather than a fixed amount, the calculator solves for price and tax together rather than assuming a tax figure up front and computing price from it separately."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why 28% and 36% specifically?",
+            "answer": "These are the classic conventional-mortgage affordability thresholds long used in mortgage underwriting: 28% caps housing costs alone (the front-end ratio), and 36% caps housing plus every other debt payment combined (the back-end ratio) — both expressed as a share of gross, not take-home, income."
+          },
+          {
+            "question": "Why does this tool have five modes?",
+            "answer": "Home Price and Required Income are two directions through the same housing-affordability math; Car, Personal Loan, and Business Loan apply the identical income-percentage-budgeting logic to other major purchases, since the underlying question — \"what can this income support?\" — is the same across all five."
+          },
+          {
+            "question": "How is this different from Debt-to-Income Ratio Calculator?",
+            "answer": "Debt-to-Income Ratio Calculator reports your current ratios given debts you already have; this tool's Home Price mode works in the opposite direction — starting from the 28/36 thresholds and solving for the maximum home price that keeps you within them."
+          },
+          {
+            "question": "Why does a larger down payment increase the maximum home price by more than the down payment itself?",
+            "answer": "A larger down payment reduces the loan amount needed, which reduces the required principal-and-interest payment — freeing up more of the fixed housing budget for a higher price, on top of the down payment's own direct contribution to that price."
+          }
+        ]
+      },
+      "debt-to-income-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Debt-to-Income Ratio Calculator: the front-end and back-end ratio formulas, the underwriting thresholds it categorizes results against, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionRatio": "Ratio Categories",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Back-End Ratio = (Housing + Car + Student + CreditCard + Other) / Income × 100",
+          "note": "The back-end ratio (commonly just called \"DTI\") sums every monthly debt payment and divides by gross monthly income; the front-end ratio uses the same formula with only the housing payment in the numerator."
+        },
+        "flowchart": {
+          "intro": "Both ratios are computed directly from the same inputs — no iteration or search involved, just two divisions and a threshold lookup.",
+          "steps": [
+            "Sum every monthly debt payment (housing, car, student loans, credit cards, other) into a total",
+            "Front-end ratio = housing payment ÷ gross monthly income × 100",
+            "Back-end ratio = total monthly debt ÷ gross monthly income × 100",
+            "Categorize the back-end ratio: healthy (<36%), manageable (36–43%), high (43–50%), or very high (50%+)"
+          ],
+          "caption": "The two ratio calculations and the categorization this tool runs."
+        },
+        "ratio": {
+          "intro": "A representative 38% back-end ratio, falling in the \"manageable\" zone between the 36% and 43% underwriting thresholds.",
+          "gaugeCaption": "Back-end ratio (DTI)",
+          "caption": "Below 36% is generally considered healthy; 36–43% is the range many conventional lenders still work with; above 50% is widely treated as a high-risk debt load."
+        },
+        "anatomy": {
+          "intro": "Total monthly debt breaks down into up to five categories, each entered separately.",
+          "labelHousing": "Housing",
+          "labelCar": "Car",
+          "labelStudent": "Student Loans",
+          "labelCreditCard": "Credit Cards",
+          "labelOther": "Other",
+          "labelTotal": "Total Monthly Debt",
+          "caption": "A representative debt breakdown summing to the total used in both ratios."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Income",
+            "meaning": "Gross monthly income.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Housing",
+            "meaning": "Monthly housing payment (rent or mortgage).",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Car",
+            "meaning": "Monthly car loan or lease payments.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Student",
+            "meaning": "Monthly student loan payments.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "CC",
+            "meaning": "Monthly credit card minimum payments.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Other",
+            "meaning": "Any other recurring monthly debt payment.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Target",
+            "meaning": "A target back-end ratio — used only by the reverse mode that solves for the maximum debt payment that ratio allows.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero or negative income",
+            "description": "Guarded at the engine level: a non-finite, zero, or negative gross income returns an empty result rather than dividing by zero or a negative denominator."
+          },
+          {
+            "title": "Negative debt payment in any category",
+            "description": "Each of the five debt fields is checked independently — a negative value in any one returns an empty result, since no individual debt payment can meaningfully be negative."
+          },
+          {
+            "title": "Category thresholds are back-end-ratio-only",
+            "description": "The healthy/manageable/high/very-high categorization always uses the back-end ratio (total debt), never the front-end ratio (housing alone) — a high housing payment offset by no other debt still categorizes correctly by the combined figure."
+          },
+          {
+            "title": "Reverse mode's existing-debt floor",
+            "description": "The \"maximum allowed debt\" mode floors the additional debt room at zero — if existing non-housing debt already exceeds what the target ratio allows, it reports no additional room rather than a negative allowance."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What's the difference between the front-end and back-end ratio?",
+            "answer": "The front-end ratio counts housing costs only; the back-end ratio (the one usually meant by \"DTI\") counts every monthly debt payment — housing, car, student loans, credit cards, and anything else recurring. Lenders typically look at both, but the back-end ratio is the more commonly cited figure."
+          },
+          {
+            "question": "Why are the category thresholds 36%, 43%, and 50%?",
+            "answer": "These mirror thresholds commonly cited in mortgage underwriting: below 36% is generally considered healthy, 36–43% is the range many conventional lenders still work with, 43% is the qualified-mortgage back-end threshold used by many lenders, and 50%+ is widely treated as a high-risk debt load."
+          },
+          {
+            "question": "Does this calculator include potential new debt I'm considering?",
+            "answer": "Only if you enter it as one of the five existing categories — this tool reports your ratio as things currently stand. To find out how much additional debt a target ratio would allow instead, use the calculator's other mode, which solves in that direction."
+          },
+          {
+            "question": "Why does a lower ratio still show as \"healthy\" instead of a single pass/fail result?",
+            "answer": "Debt-to-income is a spectrum lenders weigh differently depending on the loan type and other factors, not a single hard cutoff — four categories communicate roughly where you stand more usefully than an all-or-nothing verdict would."
+          }
+        ]
+      },
+      "mortgage-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Mortgage Calculator: the full PITI payment formula, the PMI cancellation thresholds it tracks, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAmortization": "Amortization Over Time",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "1",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "7 min"
+        },
+        "formula": {
+          "expression": "PITI = P&I + Tax + Insurance + HOA + PMI",
+          "note": "The full monthly housing payment, where P&I is the standard amortizing principal-and-interest payment on the loan amount (home price minus down payment), and the remaining four terms are added directly from their own inputs."
+        },
+        "flowchart": {
+          "intro": "Beyond the base P&I schedule, this tool also simulates an optional extra-payment scenario and an independent biweekly-payment scenario, so all three can be compared side by side.",
+          "steps": [
+            "Loan amount = home price − down payment",
+            "Solve the standard annuity formula for the base monthly principal-and-interest payment",
+            "Simulate the standard month-by-month amortization, tracking when the balance crosses 80% and 78% of the original home price (the PMI cancellation and automatic-termination thresholds)",
+            "If an extra monthly payment was entered, simulate a second schedule with it added to every payment and compare payoff time and total interest",
+            "Independently, simulate the accelerated biweekly plan (half the P&I payment every 14 days) and compare it to the standard schedule as well"
+          ],
+          "caption": "The base amortization, PMI tracking, and two alternative-payoff simulations this tool runs."
+        },
+        "amortization": {
+          "intro": "A representative 30-year, $320,000 loan at 6.5% — the same principal-vs-interest shift as any amortizing loan, just stretched across a much longer term than a typical personal loan.",
+          "labelPrincipal": "Principal",
+          "labelInterest": "Interest",
+          "caption": "Principal vs. interest portion of each payment across a 30-year mortgage term."
+        },
+        "anatomy": {
+          "intro": "The full monthly PITI payment breaks down into up to five parts (HOA and PMI only apply when entered).",
+          "labelPrincipalInterest": "Principal & Interest",
+          "labelTax": "Property Tax",
+          "labelInsurance": "Insurance",
+          "labelHoa": "HOA",
+          "labelPmi": "PMI",
+          "labelTotal": "Monthly Payment",
+          "caption": "A representative full PITI payment, including HOA dues and PMI."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Price",
+            "meaning": "Home price.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Down",
+            "meaning": "Down payment.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "r",
+            "meaning": "Annual mortgage interest rate.",
+            "unit": "%"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Loan term.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "Tax",
+            "meaning": "Annual property tax.",
+            "unit": "Currency/year"
+          },
+          {
+            "symbol": "Ins",
+            "meaning": "Annual homeowners insurance.",
+            "unit": "Currency/year"
+          },
+          {
+            "symbol": "HOA",
+            "meaning": "Monthly homeowners association dues, if any.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "PMI",
+            "meaning": "Monthly private mortgage insurance, if any — typically required when the down payment is below 20%.",
+            "unit": "Currency/month"
+          },
+          {
+            "symbol": "Extra",
+            "meaning": "Optional extra amount paid toward principal every month, beyond the required P&I payment.",
+            "unit": "Currency/month"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Down payment at or above home price",
+            "description": "The loan amount is floored at zero — a down payment equal to or greater than the home price means no loan at all, rather than a negative principal balance."
+          },
+          {
+            "title": "Negative extra monthly payment",
+            "description": "Floored at zero — a negative value entered for the optional extra payment is treated as no extra payment, rather than reducing the required P&I payment itself."
+          },
+          {
+            "title": "PMI cancellation thresholds (80%/78% LTV)",
+            "description": "When monthly PMI is entered, the schedule tracks the first month the balance reaches 80% of the original home price (when a borrower may request cancellation under the Homeowners Protection Act of 1998) and 78% (when PMI must be automatically terminated by law) — both null when the loan carries no PMI."
+          },
+          {
+            "title": "Biweekly plan computed independently",
+            "description": "The accelerated biweekly schedule is simulated on its own, not stacked on top of any extra monthly payment — the two are alternative payoff strategies to compare, not effects meant to combine."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What does PITI actually stand for?",
+            "answer": "Principal, Interest, Taxes, and Insurance — the four components lenders typically bundle into a single monthly housing payment. This calculator adds HOA dues and PMI as two further optional components, since both are common real-world costs that don't fit neatly into the classic four-letter acronym."
+          },
+          {
+            "question": "When does PMI go away?",
+            "answer": "Under the Homeowners Protection Act of 1998, a borrower can generally request PMI cancellation once the loan balance reaches 80% of the original home value, and lenders must automatically terminate it at 78% — this calculator reports the specific month each threshold is reached, given your entered PMI amount."
+          },
+          {
+            "question": "How is the extra-payment scenario different from the biweekly plan?",
+            "answer": "An extra monthly payment adds a fixed amount to every regular payment; the biweekly plan instead collects half the P&I payment every 14 days, which works out to 26 periods a year — 13 monthly-equivalent payments instead of 12. Both accelerate payoff, but through different payment schedules, so this tool simulates and reports them independently rather than assuming you'd use both at once."
+          },
+          {
+            "question": "Why is property tax and insurance entered as an annual figure but shown monthly?",
+            "answer": "Property tax bills and insurance premiums are typically assessed annually, which is the more natural way to enter them; the calculator simply divides each by 12 to fold them into the monthly PITI payment alongside the monthly principal-and-interest amount."
           }
         ]
       }

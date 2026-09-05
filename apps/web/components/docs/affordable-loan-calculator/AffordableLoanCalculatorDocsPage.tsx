@@ -12,16 +12,14 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import type { TocItem } from "@/components/docs/TableOfContents";
 import CalculationFlowchart from "@/components/docs/CalculationFlowchart";
 import BreakdownBarDiagram from "@/components/docs/BreakdownBarDiagram";
-import GrowthComparisonDiagram from "./GrowthComparisonDiagram";
 
-export const RELATED_TOOLS = ["mortgage-calculator", "loan-calculator", "retirement-calculator", "affordable-loan-calculator", "debt-to-income-calculator"];
+export const RELATED_TOOLS = ["loan-calculator", "mortgage-calculator", "compound-interest-calculator", "debt-to-income-calculator", "house-affordability-calculator"];
 
-export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+export async function getAffordableLoanCalculatorTocItems(): Promise<TocItem[]> {
+  const t = await getTranslations("docs.tools.affordable-loan-calculator");
   return [
     { id: "formula", label: t("sectionFormula") },
     { id: "flowchart", label: t("sectionFlowchart") },
-    { id: "growth-comparison", label: t("sectionGrowthComparison") },
     { id: "anatomy", label: t("sectionAnatomy") },
     { id: "variables", label: t("sectionVariables") },
     { id: "edge-cases", label: t("sectionEdgeCases") },
@@ -30,8 +28,8 @@ export async function getCompoundInterestTocItems(): Promise<TocItem[]> {
   ];
 }
 
-export default async function CompoundInterestDocsPage() {
-  const t = await getTranslations("docs.tools.compound-interest-calculator");
+export default async function AffordableLoanCalculatorDocsPage() {
+  const t = await getTranslations("docs.tools.affordable-loan-calculator");
   const tNav = await getTranslations("docsNav");
   const tTools = await getTranslations("tools");
 
@@ -42,15 +40,8 @@ export default async function CompoundInterestDocsPage() {
 
   return (
     <>
-      <DocsBreadcrumb
-        items={[
-          { label: tNav("overview"), href: "/docs" },
-          { label: tNav("toolsGuide"), href: "/docs" },
-          { label: tTools("compound-interest-calculator.title") },
-        ]}
-      />
-
-      <DocsHero title={tTools("compound-interest-calculator.title")} version={t("version")} description={t("description")} />
+      <DocsBreadcrumb items={[{ label: tNav("overview"), href: "/docs" }, { label: tNav("toolsGuide"), href: "/docs" }, { label: tTools("affordable-loan-calculator.title") }]} />
+      <DocsHero title={tTools("affordable-loan-calculator.title")} version={t("version")} description={t("description")} />
 
       <QuickFacts
         facts={[
@@ -70,18 +61,12 @@ export default async function CompoundInterestDocsPage() {
         <CalculationFlowchart steps={flowchartSteps} caption={t("flowchart.caption")} />
       </DocsSection>
 
-      <DocsSection id="growth-comparison" title={t("sectionGrowthComparison")}>
-        <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("growthComparison.intro")}</p>
-        <GrowthComparisonDiagram labelCompound={t("growthComparison.labelCompound")} labelSimple={t("growthComparison.labelSimple")} caption={t("growthComparison.caption")} />
-      </DocsSection>
-
       <DocsSection id="anatomy" title={t("sectionAnatomy")}>
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("anatomy.intro")}</p>
         <BreakdownBarDiagram
           segments={[
-            { label: t("anatomy.labelPrincipal"), value: 10000, colorClass: "fill-blue-600 dark:fill-blue-400" },
-            { label: t("anatomy.labelContributions"), value: 12000, colorClass: "fill-orange-400 dark:fill-orange-500" },
-            { label: t("anatomy.labelInterest"), value: 8100, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
+            { label: t("anatomy.labelLoanAmount"), value: 20000, colorClass: "fill-blue-600 dark:fill-blue-400" },
+            { label: t("anatomy.labelInterest"), value: 4300, colorClass: "fill-orange-400 dark:fill-orange-500" },
           ]}
           totalLabel={t("anatomy.labelTotal")}
           caption={t("anatomy.caption")}

@@ -14,6 +14,7 @@ import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import AffordableLoanModeTabs from "./AffordableLoanModeTabs";
 import AffordableLoanInputPanel from "./AffordableLoanInputPanel";
 import AffordableLoanResult from "./AffordableLoanResult";
@@ -274,6 +275,7 @@ export default function AffordableLoanCalculator({ education }: { education: Rea
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />
+              <ViewDocsLink slug="affordable-loan-calculator" />
               <div id="term-comparison" className="scroll-mt-32">
                 <AffordableLoanTermChart hasCalculated={true} rows={termComparisonRows} digitStyle={digitStyle} currency={currency} />
               </div>

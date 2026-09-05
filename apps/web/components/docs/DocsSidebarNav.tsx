@@ -7,6 +7,7 @@ import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import { getCategoryIcon } from "@/lib/category-icons";
 import { getToolIcon } from "@/lib/tool-icons";
+import { isToolDocumented } from "@/lib/docs-tools";
 
 const categoriesWithTools = categories
   .map((category) => ({ ...category, tools: tools.filter((tool) => tool.category === category.slug) }))
@@ -91,7 +92,7 @@ export default function DocsSidebarNav() {
                   <div className="ms-4 mt-0.5 flex flex-col gap-0.5 border-s border-zinc-200 ps-3 dark:border-zinc-800">
                     {category.tools.map((tool) => {
                       const ToolIcon = getToolIcon(tool.slug);
-                      const isPilotReady = tool.slug === "compound-interest-calculator";
+                      const isPilotReady = isToolDocumented(tool.slug);
                       const isActive = currentSlug === tool.slug;
                       return (
                         <Link
