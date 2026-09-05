@@ -17642,6 +17642,189 @@
           "readOriginal": "Consulter l'étude originale de Mifflin-St Jeor"
         }
       }
+    },
+    "date-calculator": {
+      "title": "Calculatrice de Dates",
+      "description": "Trouvez la différence entre deux dates en jours, semaines, mois et années, ou ajoutez/soustrayez une durée à une date.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "modes": {
+        "groupLabel": "Mode",
+        "labels": {
+          "difference": "Différence de Dates",
+          "addSubtract": "Ajouter/Soustraire"
+        }
+      },
+      "form": {
+        "inputTitle": "Vos dates",
+        "startDate": "Date de Début",
+        "endDate": "Date de Fin",
+        "baseDate": "Date de Base",
+        "operations": {
+          "add": "Ajouter",
+          "subtract": "Soustraire"
+        },
+        "amount": "Quantité",
+        "unit": "Unité",
+        "units": {
+          "days": "Jours",
+          "weeks": "Semaines",
+          "months": "Mois",
+          "years": "Années"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Une chronologie montrant l'intervalle entre la date de début et de fin",
+        "start": "Début",
+        "end": "Fin"
+      },
+      "result": {
+        "heading": "Résultat",
+        "totalDays": "Jours Totaux",
+        "totalWeeks": "Semaines Totales",
+        "years": "Années",
+        "months": "Mois",
+        "days": "Jours",
+        "endBeforeStart": "la date de fin précède la date de début",
+        "resultDate": "Date Résultante",
+        "errors": {
+          "invalid-date": "Saisissez des dates valides pour voir un résultat.",
+          "invalid-amount": "Saisissez une quantité non négative pour voir un résultat."
+        }
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Chaque calcul ici est soit une soustraction calendaire, soit une addition calendaire."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'arithmétique des dates",
+          "paragraph1": "Calculer avec des dates de calendrier est plus complexe qu'une simple arithmétique car les mois ont des longueurs inégales (28 à 31 jours), les années peuvent être bissextiles (366 jours au lieu de 365), et \"un mois plus tard\" ne signifie pas un nombre fixe de jours — ajouter un mois au 31 janvier, par exemple, ne peut pas littéralement produire le 31 février, puisque février n'a jamais autant de jours. Cette calculatrice gère ces irrégularités automatiquement pour que vous obteniez à chaque fois une date de calendrier réelle et valide ou un décompte de jours précis.",
+          "paragraph2": "Les deux questions de date les plus courantes — \"quel est l'écart entre ces deux dates ?\" et \"quelle date correspond à une certaine durée à partir de maintenant ?\" — reviennent constamment dans la planification quotidienne : suivre un anniversaire ou une échéance, calculer l'âge exact de quelqu'un, déterminer la date de fin d'un projet à partir de son début et de sa durée, ou calculer quand une garantie ou un abonnement expirera."
+        },
+        "modes": {
+          "title": "Les deux modes",
+          "intro": "Chaque mode répond à l'une des deux questions calendaires les plus courantes.",
+          "items": [
+            {
+              "title": "Différence de Dates",
+              "description": "Étant donné deux dates, ce mode indique le nombre total de jours et de semaines entre elles, plus un chiffre détaillé en années/mois/jours (la façon dont une personne décrirait naturellement un âge ou une durée, plutôt qu'un seul grand nombre de jours)."
+            },
+            {
+              "title": "Ajouter/Soustraire",
+              "description": "Étant donné une date de départ et une durée en jours, semaines, mois ou années, ce mode calcule la date résultante — gérant automatiquement les cas limites de longueur de mois et d'années bissextiles, y compris le plafonnement d'un jour hors plage (comme le 31 janvier plus un mois) au dernier jour valide du mois cible."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques questions de date courantes, calculées de la même manière que cet outil les calcule.",
+          "columnCalculation": "Question",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "Jours entre le 1er janv. 2020 et le 15 juin 2025",
+              "result": "1 992 jours (5 ans, 5 mois, 14 jours)"
+            },
+            {
+              "calculation": "30 jours après le 1er mars",
+              "result": "31 mars"
+            },
+            {
+              "calculation": "1 mois après le 31 janvier",
+              "result": "28 février (ou 29 lors d'une année bissextile)"
+            },
+            {
+              "calculation": "1 an après le 29 février 2020 (bissextile)",
+              "result": "28 février 2021"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi ajouter un mois au 31 janvier donne-t-il le 28 février plutôt que le 3 mars ?",
+              "answer": "Cette calculatrice utilise un comportement de \"plafonnement\" : ajouter un mois conserve le même numéro de jour lorsque c'est possible, et si le mois cible n'a pas autant de jours, elle tombe sur le dernier jour réel du mois cible plutôt que de déborder sur le mois suivant. Cela correspond à ce que la plupart des gens entendent intuitivement par \"un mois plus tard\" et c'est la même convention utilisée par la plupart des logiciels de calendrier."
+            },
+            {
+              "question": "Comment les années bissextiles sont-elles gérées ?",
+              "answer": "Cette calculatrice détermine les années bissextiles selon la règle standard du calendrier grégorien (une année est bissextile si elle est divisible par 4, sauf les années séculaires, qui doivent être divisibles par 400), de sorte que le 29 février est correctement inclus dans les décomptes de jours et l'arithmétique des dates uniquement les années où il existe réellement."
+            },
+            {
+              "question": "Pourquoi la répartition années/mois/jours diffère-t-elle d'une simple division du total des jours ?",
+              "answer": "Une répartition tenant compte du calendrier prend en compte les longueurs réellement variables des mois et années couverts, c'est pourquoi elle ne peut pas être produite en divisant simplement le nombre total de jours par 30 ou 365 — cela donnerait une réponse approximative mais souvent nettement inexacte, en particulier sur des plages de dates couvrant des années bissextiles ou des mois de longueurs différentes."
+            },
+            {
+              "question": "Est-ce important quelle date je saisis en premier dans le mode Différence de Dates ?",
+              "answer": "Non — cet outil indique toujours l'écart absolu entre les deux dates, quelle que soit celle que vous saisissez comme début ou fin, bien qu'il indiquera si la date que vous avez étiquetée \"fin\" précède en fait chronologiquement celle que vous avez étiquetée \"début\"."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "Le calendrier utilisé par cette calculatrice — le calendrier grégorien — a été introduit par le pape Grégoire XIII en 1582 comme un raffinement du calendrier julien antérieur, corrigeant une dérive petite mais cumulative entre l'année calendaire et l'année solaire réelle. Sa règle caractéristique des années bissextiles (sauter le jour bissextile les années séculaires non divisibles par 400) a été spécifiquement conçue pour maintenir le calendrier aligné avec les saisons sur de longues échelles de temps, et reste le calendrier civil internationalement accepté utilisé par presque tous les pays aujourd'hui."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Les systèmes informatiques modernes représentent les dates et les heures à l'aide de normes comme ISO 8601 (le format de date AAAA-MM-JJ) et le temps Unix (un décompte des secondes depuis le 1er janvier 1970), qui rendent l'arithmétique des dates cohérente et sans ambiguïté à travers les fuseaux horaires, les calendriers et les systèmes logiciels. Les bibliothèques de programmation construites sur ces normes — comme celle qui alimente cette calculatrice — gèrent les nombreux cas limites du calendrier (années bissextiles, longueurs de mois variables, transitions d'heure d'été) afin que les applications n'aient pas besoin de réimplémenter la logique du calendrier à partir de zéro."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les systèmes calendaires et leurs mathématiques sont étudiés en histoire des mathématiques et, sur le plan informatique, en informatique. Voici cinq programmes reconnus touchant ce domaine, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "Université de Cambridge — Faculté de Mathématiques",
+                "note": "Un centre de premier plan pour l'histoire et les mathématiques des systèmes calendaires.",
+                "url": "https://www.maths.cam.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Département de Mathématiques",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université d'Oxford — Faculté d'Histoire",
+                "note": "Un centre de premier plan pour l'histoire des sciences, y compris les systèmes calendaires historiques.",
+                "url": "https://www.history.ox.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Carnegie Mellon University — School of Computer Science",
+                "note": "Un programme américain d'informatique de premier plan avec une expertise en systèmes logiciels et normes.",
+                "url": "https://www.cs.cmu.edu/",
+                "online": "Certains programmes proposent des options en ligne ; le doctorat de recherche principal est en présentiel."
+              },
+              {
+                "name": "ETH Zurich — Département d'Informatique",
+                "note": "Un programme européen d'informatique de premier plan.",
+                "url": "https://inf.ethz.ch/",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondée en 1866 ; non classée séparément dans les tableaux mondiaux par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "International Organization for Standardization. (2019). ISO 8601-1:2019 — Date and time — Representations for information interchange.",
+          "note": "La norme internationale définissant une représentation sans ambiguïté de la date et de l'heure, y compris les règles du calendrier grégorien que suit l'arithmétique des dates de cette calculatrice.",
+          "url": "https://www.iso.org/iso-8601-date-and-time-format.html",
+          "readOriginal": "Consulter la norme ISO 8601"
+        }
+      }
     }
   },
   "toolPage": {

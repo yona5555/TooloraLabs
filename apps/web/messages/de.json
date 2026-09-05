@@ -17642,6 +17642,189 @@
           "readOriginal": "Mifflin-St-Jeor-Originalstudie ansehen"
         }
       }
+    },
+    "date-calculator": {
+      "title": "Datumsrechner",
+      "description": "Finde den Unterschied zwischen zwei Daten in Tagen, Wochen, Monaten und Jahren, oder addiere/subtrahiere eine Dauer von einem Datum.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "modes": {
+        "groupLabel": "Modus",
+        "labels": {
+          "difference": "Datumsdifferenz",
+          "addSubtract": "Addieren/Subtrahieren"
+        }
+      },
+      "form": {
+        "inputTitle": "Deine Daten",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum",
+        "baseDate": "Basisdatum",
+        "operations": {
+          "add": "Addieren",
+          "subtract": "Subtrahieren"
+        },
+        "amount": "Menge",
+        "unit": "Einheit",
+        "units": {
+          "days": "Tage",
+          "weeks": "Wochen",
+          "months": "Monate",
+          "years": "Jahre"
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Eine Zeitleiste, die die Spanne zwischen Start- und Enddatum zeigt",
+        "start": "Start",
+        "end": "Ende"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "totalDays": "Gesamttage",
+        "totalWeeks": "Gesamtwochen",
+        "years": "Jahre",
+        "months": "Monate",
+        "days": "Tage",
+        "endBeforeStart": "Enddatum liegt vor dem Startdatum",
+        "resultDate": "Ergebnisdatum",
+        "errors": {
+          "invalid-date": "Gib gültige Daten ein, um ein Ergebnis zu sehen.",
+          "invalid-amount": "Gib eine nicht-negative Menge ein, um ein Ergebnis zu sehen."
+        }
+      },
+      "quickReference": {
+        "title": "Die Rechnung",
+        "intro": "Jede Berechnung hier ist entweder eine Kalendersubtraktion oder eine Kalenderaddition."
+      },
+      "education": {
+        "intro": {
+          "title": "Datumsarithmetik verstehen",
+          "paragraph1": "Das Rechnen mit Kalenderdaten ist komplexer als einfache Arithmetik, da Monate unterschiedlich lang sind (28 bis 31 Tage), Jahre Schaltjahre sein können (366 statt 365 Tage) und \"einen Monat später\" nicht eine feste Anzahl von Tagen bedeutet — das Hinzufügen eines Monats zum 31. Januar kann beispielsweise nicht buchstäblich den 31. Februar ergeben, da der Februar nie so viele Tage hat. Dieser Rechner behandelt diese Unregelmäßigkeiten automatisch, sodass du jedes Mal ein echtes, gültiges Kalenderdatum oder eine genaue Tageszahl erhältst.",
+          "paragraph2": "Die beiden häufigsten Datumsfragen — \"wie weit liegen diese beiden Daten auseinander?\" und \"welches Datum ist eine bestimmte Dauer von jetzt entfernt?\" — kommen in der alltäglichen Planung ständig vor: das Verfolgen eines Jahrestags oder einer Frist, die Berechnung des genauen Alters einer Person, die Ermittlung des Enddatums eines Projekts aus Beginn und Dauer, oder die Berechnung, wann eine Garantie- oder Abonnementlaufzeit abläuft."
+        },
+        "modes": {
+          "title": "Die zwei Modi",
+          "intro": "Jeder Modus beantwortet eine der beiden häufigsten Kalenderfragen.",
+          "items": [
+            {
+              "title": "Datumsdifferenz",
+              "description": "Bei gegebenen zwei Daten meldet dieser Modus die Gesamtzahl der Tage und Wochen zwischen ihnen, plus eine aufgeschlüsselte Jahre-/Monate-/Tage-Zahl (so, wie eine Person natürlicherweise ein Alter oder eine Zeitspanne beschreiben würde, statt einer großen Tageszahl)."
+            },
+            {
+              "title": "Addieren/Subtrahieren",
+              "description": "Bei einem Startdatum und einer Dauer in Tagen, Wochen, Monaten oder Jahren berechnet dieser Modus das resultierende Datum — wobei Monatslängen- und Schaltjahr-Sonderfälle automatisch behandelt werden, einschließlich der Begrenzung eines außerhalb des Bereichs liegenden Tages (wie der 31. Januar plus ein Monat) auf den letzten gültigen Tag des Zielmonats."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar häufige Datumsfragen, berechnet genau so, wie dieses Tool sie berechnet.",
+          "columnCalculation": "Frage",
+          "columnResult": "Ergebnis",
+          "rows": [
+            {
+              "calculation": "Tage zwischen 1. Jan 2020 und 15. Jun 2025",
+              "result": "1.992 Tage (5 Jahre, 5 Monate, 14 Tage)"
+            },
+            {
+              "calculation": "30 Tage nach dem 1. März",
+              "result": "31. März"
+            },
+            {
+              "calculation": "1 Monat nach dem 31. Januar",
+              "result": "28. Februar (oder 29. in einem Schaltjahr)"
+            },
+            {
+              "calculation": "1 Jahr nach dem 29. Februar 2020 (Schaltjahr)",
+              "result": "28. Februar 2021"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum ergibt das Hinzufügen eines Monats zum 31. Januar den 28. Februar statt dem 3. März?",
+              "answer": "Dieser Rechner verwendet ein \"Clamping\"-Verhalten: Das Hinzufügen eines Monats behält die Tageszahl bei, wenn möglich, und wenn der Zielmonat nicht so viele Tage hat, landet er auf dem tatsächlichen letzten Tag des Zielmonats, statt in den nächsten Monat überzulaufen. Dies entspricht dem, was die meisten Menschen intuitiv mit \"einen Monat später\" meinen, und ist dieselbe Konvention, die von den meisten Kalenderprogrammen verwendet wird."
+            },
+            {
+              "question": "Wie werden Schaltjahre behandelt?",
+              "answer": "Dieser Rechner bestimmt Schaltjahre nach der Standard-Gregorianischen Kalenderregel (ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist, außer Jahrhundertjahren, die durch 400 teilbar sein müssen), sodass der 29. Februar korrekt nur in Jahren, in denen er tatsächlich existiert, in Tageszählungen und Datumsarithmetik einbezogen wird."
+            },
+            {
+              "question": "Warum unterscheidet sich die Jahre-/Monate-/Tage-Aufschlüsselung von der einfachen Division der Gesamttage?",
+              "answer": "Eine kalenderbewusste Aufschlüsselung berücksichtigt die tatsächlich unterschiedlichen Längen der überspannten Monate und Jahre, weshalb sie nicht einfach durch Division der Gesamttageszahl durch 30 oder 365 erzeugt werden kann — das würde eine ungefähre, aber oft deutlich ungenaue Antwort liefern, besonders über Datumsbereiche, die Schaltjahre oder unterschiedlich lange Monate umfassen."
+            },
+            {
+              "question": "Spielt es eine Rolle, welches Datum ich im Modus Datumsdifferenz zuerst eingebe?",
+              "answer": "Nein — dieses Tool meldet immer die absolute Spanne zwischen den beiden Daten, unabhängig davon, welches du als Start oder Ende eingibst, obwohl es vermerkt, wenn das als \"Ende\" bezeichnete Datum tatsächlich zeitlich vor dem als \"Start\" bezeichneten liegt."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Der von diesem Rechner verwendete Kalender — der Gregorianische Kalender — wurde 1582 von Papst Gregor XIII. als Verfeinerung des früheren Julianischen Kalenders eingeführt und korrigierte eine kleine, aber sich summierende Abweichung zwischen dem Kalenderjahr und dem tatsächlichen Sonnenjahr. Seine charakteristische Schaltjahrregel (Auslassen des Schalttags in Jahrhundertjahren, die nicht durch 400 teilbar sind) wurde speziell entwickelt, um den Kalender über lange Zeiträume mit den Jahreszeiten in Einklang zu halten, und bleibt der international anerkannte bürgerliche Kalender, der heute von fast jedem Land verwendet wird."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Moderne Computersysteme repräsentieren Daten und Zeiten mit Standards wie ISO 8601 (dem Datumsformat JJJJ-MM-TT) und Unix-Zeit (einer Zählung der Sekunden seit dem 1. Januar 1970), die Datumsarithmetik über Zeitzonen, Kalender und Softwaresysteme hinweg konsistent und eindeutig machen. Programmierbibliotheken, die auf diesen Standards aufbauen — wie die, die diesen Rechner antreibt — behandeln die vielen Kalender-Sonderfälle (Schaltjahre, unterschiedliche Monatslängen, Sommerzeitübergänge), sodass Anwendungen die Kalenderlogik nicht von Grund auf neu implementieren müssen."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Kalendersysteme und ihre Mathematik werden in der Geschichte der Mathematik und, rechnerisch, in der Informatik studiert. Hier sind fünf angesehene Programme in diesem Bereich, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Ein führendes Zentrum für die Geschichte und Mathematik von Kalendersystemen.",
+                "url": "https://www.maths.cam.ac.uk/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Weltweit Rang 1 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Oxford — Faculty of History",
+                "note": "Ein führendes Zentrum für Wissenschaftsgeschichte, einschließlich historischer Kalendersysteme.",
+                "url": "https://www.history.ox.ac.uk/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Carnegie Mellon University — School of Computer Science",
+                "note": "Ein führendes US-Informatikprogramm mit Stärke in Softwaresystemen und Standards.",
+                "url": "https://www.cs.cmu.edu/",
+                "online": "Ausgewählte Programme bieten Online-Optionen; die zentrale Forschungspromotion ist Präsenz."
+              },
+              {
+                "name": "ETH Zürich — Department of Computer Science",
+                "note": "Ein führendes europäisches Informatikprogramm.",
+                "url": "https://inf.ethz.ch/",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Gegründet 1866; in globalen Fachranglisten nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "International Organization for Standardization. (2019). ISO 8601-1:2019 — Date and time — Representations for information interchange.",
+          "note": "Der internationale Standard, der eine eindeutige Datums- und Zeitdarstellung definiert, einschließlich der Gregorianischen Kalenderregeln, denen die Datumsarithmetik dieses Rechners folgt.",
+          "url": "https://www.iso.org/iso-8601-date-and-time-format.html",
+          "readOriginal": "ISO-8601-Standard ansehen"
+        }
+      }
     }
   },
   "toolPage": {

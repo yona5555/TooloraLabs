@@ -876,6 +876,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "date-calculator",
+    title: "Date Calculator",
+    category: "date-time",
+    description:
+      "Find the difference between two dates in days, weeks, months, and years, or add/subtract a duration from a date.",
+    featured: false,
+    keywords: [
+      "date calculator",
+      "days between dates",
+      "add days to date",
+      "date difference calculator",
+      "subtract dates",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
