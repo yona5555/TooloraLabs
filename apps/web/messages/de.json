@@ -13881,7 +13881,9 @@
             "Den angewendeten Steuersatz und den Steuerbetrag, separat vom Zwischenbetrag ausgewiesen.",
             "Die Währung, in der die Beträge angegeben sind, besonders bei grenzüberschreitenden Rechnungen."
           ]
-        }
+        },
+        "emptyStateMessage": "Fügen Sie Ihre Rechnungsdetails und mindestens einen Posten hinzu und klicken Sie auf Berechnen, um die Vorschau zu sehen.",
+        "sentence": "Rechnung über insgesamt {total} mit {count} Positionen."
       },
       "form": {
         "inputTitle": "Rechnungsdetails",
@@ -13902,7 +13904,9 @@
         "removeItem": "Artikel entfernen",
         "taxRate": "Steuersatz (%)",
         "discountPercent": "Rabatt (%)",
-        "generate": "Rechnung erstellen"
+        "generate": "Rechnung erstellen",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "title": "Rechnung",
@@ -13913,7 +13917,8 @@
         "subtotal": "Zwischensumme",
         "discount": "Rabatt",
         "tax": "Steuer",
-        "grandTotal": "Gesamtsumme"
+        "grandTotal": "Gesamtsumme",
+        "taxableAmount": "Steuerpflichtiger Betrag"
       },
       "errors": {
         "required": "Bitte geben Sie gültige Steuer- und Rabattwerte ein.",
@@ -14039,7 +14044,86 @@
           "note": "Der internationale Standard, der ein strukturiertes, maschinenlesbares XML-Format für Rechnungen und verwandte Geschäftsdokumente definiert – die Grundlage der meisten heute in der EU und mehreren anderen Ländern geltenden verpflichtenden E-Rechnungsregelungen.",
           "url": "https://www.iso.org/standard/66370.html",
           "readOriginal": "Offiziellen Standard ansehen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Rechnungssumme in diesem Tool basiert auf vier Eingaben, die in fester Reihenfolge angewendet werden.",
+          "items": [
+            {
+              "name": "Rechnungsposten",
+              "description": "Beschreibung, Menge und Stückpreis jedes Postens — Menge mal Stückpreis ergibt die Summe dieses Postens, und alle Postensummen ergeben die Zwischensumme."
+            },
+            {
+              "name": "Rabattprozentsatz",
+              "description": "Ein optionaler Prozentsatz, der vor der Steuerberechnung von der Zwischensumme abgezogen wird — Rabatte gelten für den Betrag vor Steuern, nicht für die Endsumme."
+            },
+            {
+              "name": "Steuersatz",
+              "description": "Der auf den steuerpflichtigen Betrag (Zwischensumme abzüglich Rabatt) angewendete Prozentsatz, um die geschuldete Steuer zu ermitteln."
+            },
+            {
+              "name": "Steuerpflichtiger Betrag",
+              "description": "Die Zwischensumme nach Abzug des Rabatts — hierauf, nicht auf die ursprüngliche Zwischensumme, wird der Steuersatz angewendet."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Dieselbe Berechnung der Einzelposten-Summe gilt überall dort, wo ein Unternehmen einen Kunden für Waren oder Dienstleistungen abrechnet.",
+          "items": [
+            {
+              "title": "Freiberufliche und Beratungsarbeit",
+              "description": "Abrechnung eines Kunden für Stunden oder Leistungen mit einer klaren Aufschlüsselung, was und warum berechnet wurde."
+            },
+            {
+              "title": "Kleinunternehmensverkäufe",
+              "description": "Ein Einzelhändler oder Dienstleistungsunternehmen stellt eine formelle, aufgeschlüsselte Rechnung für die Unterlagen oder Erstattung eines Kunden aus."
+            },
+            {
+              "title": "Wiederkehrende Kundenabrechnung",
+              "description": "Erstellung eines konsistenten Rechnungsformats für Stammkunden, mit derselben Steuer- und Rabattstruktur bei jeder Anwendung."
+            },
+            {
+              "title": "Angebote und Kostenvoranschläge",
+              "description": "Dieselbe aufgeschlüsselte Struktur dient auch als Vorverkaufsangebot und zeigt einem potenziellen Kunden genau, wie sich ein Preis zusammensetzt."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@example.com",
+        "contactPhonePlaceholder": "z. B. +49 151 12345678",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Stadt"
+      },
+      "lineItemsDiagram": {
+        "title": "Aufschlüsselung der Posten",
+        "caption": "Der Beitrag jedes Postens zum Zwischensumme der Rechnung."
+      },
+      "waterfallDiagram": {
+        "title": "Laufende Summe",
+        "caption": "Wie sich die Zwischensumme über Rabatt und Steuer zur Endsumme bewegt.",
+        "subtotal": "Zwischensumme",
+        "afterDiscount": "Nach Rabatt",
+        "total": "Gesamt"
+      },
+      "discountCompareDiagram": {
+        "title": "Mit vs. Ohne Rabatt",
+        "caption": "Wie viel der Rabatt Ihrem Kunden bei dieser Rechnung spart.",
+        "beforeLabel": "Ohne Rabatt",
+        "afterLabel": "Mit Rabatt"
       }
     },
     "inventory-valuation-calculator": {

@@ -3,7 +3,8 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { InvoiceGeneratorOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import PrintButton from "@/components/tool-ui/PrintButton";
+import InvoiceCompositionDonut from "./InvoiceCompositionDonut";
+import InvoiceShareExportModal from "./InvoiceShareExportModal";
 
 type InvoicePreviewProps = {
   result: InvoiceGeneratorOutput | null;
@@ -39,8 +40,29 @@ export default function InvoicePreview({
       maximumFractionDigits: 2,
     });
 
+  const shareModal = result ? (
+    <InvoiceShareExportModal
+      onPrint={onPrint}
+      inputRows={[
+        { label: t("form.fromLabel"), value: fromName || "—" },
+        { label: t("form.toLabel"), value: toName || "—" },
+        { label: t("form.invoiceNumberLabel"), value: invoiceNumber || "—" },
+        { label: t("form.issueDateLabel"), value: issueDate || "—" },
+        { label: t("form.dueDateLabel"), value: dueDate || "—" },
+      ]}
+      resultRows={[
+        { label: t("result.subtotal"), value: money(result.subtotal) },
+        { label: t("result.discount"), value: `-${money(result.discountAmount)}` },
+        { label: t("result.tax"), value: money(result.taxAmount) },
+      ]}
+      heroLabel={t("result.grandTotal")}
+      heroValue={money(result.total)}
+      sentence={t("aboveFold.sentence", { total: money(result.total), count: result.lines.length })}
+    />
+  ) : undefined;
+
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard title={t("aboveFold.resultTitle")} action={shareModal}>
       {errorMessage ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
@@ -51,7 +73,6 @@ export default function InvoicePreview({
             <span className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
               {invoiceNumber || t("aboveFold.noNumber")}
             </span>
-            <PrintButton onPrint={onPrint} />
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-sm">
@@ -113,6 +134,17 @@ export default function InvoicePreview({
               <span>{t("result.grandTotal")}</span>
               <span>{money(result.total)}</span>
             </div>
+          </div>
+
+          <div className="border-t border-zinc-200 pt-5 print:hidden dark:border-zinc-800">
+            <InvoiceCompositionDonut
+              centerValue={money(result.total)}
+              centerLabel={t("result.grandTotal")}
+              segments={[
+                { key: "taxable", value: result.taxableAmount, label: t("result.taxableAmount"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+                { key: "tax", value: result.taxAmount, label: t("result.tax"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
+              ]}
+            />
           </div>
         </div>
       ) : (

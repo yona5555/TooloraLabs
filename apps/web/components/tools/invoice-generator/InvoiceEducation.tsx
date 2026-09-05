@@ -7,11 +7,15 @@ import AdSpace from "@/components/tool-ui/AdSpace";
 import InvoiceFlowDiagram from "./InvoiceFlowDiagram";
 
 type ExampleRow = { scenario: string; result: string };
+type VariableItem = { name: string; description: string };
+type ApplicationItem = { title: string; description: string };
 
 export default async function InvoiceEducation() {
   const t = await getTranslations("tools.invoice-generator.education");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
+  const variableItems = t.raw("variables.items") as VariableItem[];
+  const applicationItems = t.raw("applications.items") as ApplicationItem[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
@@ -27,6 +31,18 @@ export default async function InvoiceEducation() {
           totalLabel={t("intro.diagram.totalLabel")}
           caption={t("intro.diagram.caption")}
         />
+      </InfoSection>
+
+      <InfoSection title={t("variables.title")}>
+        <p>{t("variables.intro")}</p>
+        <dl className="space-y-4">
+          {variableItems.map((item) => (
+            <div key={item.name}>
+              <dt className="font-semibold">{item.name}</dt>
+              <dd className="mt-1">{item.description}</dd>
+            </div>
+          ))}
+        </dl>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -48,6 +64,18 @@ export default async function InvoiceEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("applications.title")}>
+        <p>{t("applications.intro")}</p>
+        <div className="space-y-4">
+          {applicationItems.map((item) => (
+            <div key={item.title}>
+              <h3 className="font-semibold">{item.title}</h3>
+              <p className="mt-1">{item.description}</p>
+            </div>
+          ))}
         </div>
       </InfoSection>
 

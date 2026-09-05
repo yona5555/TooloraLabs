@@ -13877,7 +13877,9 @@
             "The tax rate applied and the tax amount shown separately from the subtotal.",
             "The currency the amounts are stated in, especially for cross-border invoices."
           ]
-        }
+        },
+        "emptyStateMessage": "Add your invoice details and at least one item, then press Calculate to see the preview.",
+        "sentence": "Invoice totaling {total} across {count} line items."
       },
       "form": {
         "inputTitle": "Invoice Details",
@@ -13898,7 +13900,9 @@
         "removeItem": "Remove item",
         "taxRate": "Tax Rate (%)",
         "discountPercent": "Discount (%)",
-        "generate": "Generate Invoice"
+        "generate": "Generate Invoice",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "title": "Invoice",
@@ -13909,7 +13913,8 @@
         "subtotal": "Subtotal",
         "discount": "Discount",
         "tax": "Tax",
-        "grandTotal": "Grand Total"
+        "grandTotal": "Grand Total",
+        "taxableAmount": "Taxable Amount"
       },
       "errors": {
         "required": "Please enter valid tax and discount values.",
@@ -14035,7 +14040,86 @@
           "note": "The international standard defining a structured, machine-readable XML format for invoices and related business documents — the basis for most mandatory e-invoicing regimes now in force across the EU and several other countries.",
           "url": "https://www.iso.org/standard/66370.html",
           "readOriginal": "View the Official Standard"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Every invoice total in this tool comes from four inputs, applied in a fixed order.",
+          "items": [
+            {
+              "name": "Line Items",
+              "description": "Each item's description, quantity, and unit price — quantity times unit price gives that line's total, and all line totals sum to the subtotal."
+            },
+            {
+              "name": "Discount Percentage",
+              "description": "An optional percentage subtracted from the subtotal before tax is calculated — discounts apply to the pre-tax amount, not the final total."
+            },
+            {
+              "name": "Tax Rate",
+              "description": "The percentage applied to the taxable amount (subtotal minus discount) to produce the tax owed."
+            },
+            {
+              "name": "Taxable Amount",
+              "description": "The subtotal after the discount is subtracted — this, not the original subtotal, is what the tax rate is applied to."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "This same itemized-total math applies anywhere a business bills a client for goods or services.",
+          "items": [
+            {
+              "title": "Freelance and Consulting Work",
+              "description": "Billing a client for hours or deliverables with a clear breakdown of what was charged and why."
+            },
+            {
+              "title": "Small Business Sales",
+              "description": "A retailer or service business issuing a formal, itemized bill for a customer's records or reimbursement."
+            },
+            {
+              "title": "Recurring Client Billing",
+              "description": "Generating a consistent invoice format for repeat clients, with the same tax and discount structure applied each time."
+            },
+            {
+              "title": "Quotes and Estimates",
+              "description": "The same itemized structure doubles as a pre-sale quote, showing a prospective client exactly how a price breaks down."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "lineItemsDiagram": {
+        "title": "Line Item Breakdown",
+        "caption": "Each item's contribution to the invoice subtotal."
+      },
+      "waterfallDiagram": {
+        "title": "Running Total",
+        "caption": "How the subtotal moves to the final total through discount and tax.",
+        "subtotal": "Subtotal",
+        "afterDiscount": "After Discount",
+        "total": "Total"
+      },
+      "discountCompareDiagram": {
+        "title": "With vs. Without Discount",
+        "caption": "How much the discount saves your client on this invoice.",
+        "beforeLabel": "Without Discount",
+        "afterLabel": "With Discount"
       }
     },
     "inventory-valuation-calculator": {

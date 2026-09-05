@@ -13881,7 +13881,9 @@
             "Le taux de taxe appliqué et le montant de la taxe indiqué séparément du sous-total.",
             "La devise dans laquelle les montants sont exprimés, en particulier pour les factures transfrontalières."
           ]
-        }
+        },
+        "emptyStateMessage": "Ajoutez les détails de votre facture et au moins un article, puis appuyez sur Calculer pour voir l'aperçu.",
+        "sentence": "Facture d'un total de {total} sur {count} lignes."
       },
       "form": {
         "inputTitle": "Détails de la facture",
@@ -13902,7 +13904,9 @@
         "removeItem": "Supprimer l'article",
         "taxRate": "Taux de taxe (%)",
         "discountPercent": "Remise (%)",
-        "generate": "Générer la facture"
+        "generate": "Générer la facture",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "title": "Facture",
@@ -13913,7 +13917,8 @@
         "subtotal": "Sous-total",
         "discount": "Remise",
         "tax": "Taxe",
-        "grandTotal": "Total général"
+        "grandTotal": "Total général",
+        "taxableAmount": "Montant Imposable"
       },
       "errors": {
         "required": "Veuillez saisir des valeurs de taxe et de remise valides.",
@@ -14039,7 +14044,86 @@
           "note": "La norme internationale définissant un format XML structuré et lisible par machine pour les factures et documents commerciaux associés — le socle de la plupart des régimes de facturation électronique obligatoire aujourd'hui en vigueur dans l'Union européenne et plusieurs autres pays.",
           "url": "https://www.iso.org/standard/66370.html",
           "readOriginal": "Consulter la norme officielle"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Chaque total de facture dans cet outil provient de quatre données, appliquées dans un ordre fixe.",
+          "items": [
+            {
+              "name": "Lignes de Facture",
+              "description": "La description, la quantité et le prix unitaire de chaque article — quantité multipliée par prix unitaire donne le total de cette ligne, et tous les totaux de lignes s'additionnent en sous-total."
+            },
+            {
+              "name": "Pourcentage de Remise",
+              "description": "Un pourcentage facultatif soustrait du sous-total avant le calcul de la taxe — les remises s'appliquent au montant hors taxe, pas au total final."
+            },
+            {
+              "name": "Taux de Taxe",
+              "description": "Le pourcentage appliqué au montant imposable (sous-total moins remise) pour produire la taxe due."
+            },
+            {
+              "name": "Montant Imposable",
+              "description": "Le sous-total après déduction de la remise — c'est sur celui-ci, et non le sous-total d'origine, que le taux de taxe est appliqué."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Ce même calcul de total détaillé s'applique partout où une entreprise facture un client pour des biens ou services.",
+          "items": [
+            {
+              "title": "Travail en Freelance et Conseil",
+              "description": "Facturer un client pour des heures ou des livrables avec une ventilation claire de ce qui a été facturé et pourquoi."
+            },
+            {
+              "title": "Ventes de Petites Entreprises",
+              "description": "Un détaillant ou une entreprise de services émettant une facture formelle et détaillée pour les dossiers ou le remboursement d'un client."
+            },
+            {
+              "title": "Facturation Récurrente des Clients",
+              "description": "Générer un format de facture cohérent pour les clients réguliers, avec la même structure de taxe et de remise appliquée à chaque fois."
+            },
+            {
+              "title": "Devis et Estimations",
+              "description": "La même structure détaillée sert aussi de devis avant-vente, montrant à un client potentiel exactement comment un prix se décompose."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les Réseaux Sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé Pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@example.com",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Acme SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Ville"
+      },
+      "lineItemsDiagram": {
+        "title": "Répartition des Lignes",
+        "caption": "La contribution de chaque article au sous-total de la facture."
+      },
+      "waterfallDiagram": {
+        "title": "Total Cumulé",
+        "caption": "Comment le sous-total évolue vers le total final via la remise et la taxe.",
+        "subtotal": "Sous-total",
+        "afterDiscount": "Après Remise",
+        "total": "Total"
+      },
+      "discountCompareDiagram": {
+        "title": "Avec vs. Sans Remise",
+        "caption": "Combien la remise fait économiser à votre client sur cette facture.",
+        "beforeLabel": "Sans Remise",
+        "afterLabel": "Avec Remise"
       }
     },
     "inventory-valuation-calculator": {

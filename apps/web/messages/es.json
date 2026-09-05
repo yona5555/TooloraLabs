@@ -13881,7 +13881,9 @@
             "El tipo impositivo aplicado y el importe del impuesto mostrado por separado del subtotal.",
             "La divisa en la que se expresan los importes, especialmente en facturas transfronterizas."
           ]
-        }
+        },
+        "emptyStateMessage": "Añade los detalles de tu factura y al menos un artículo, luego presiona Calcular para ver la vista previa.",
+        "sentence": "Factura por un total de {total} con {count} partidas."
       },
       "form": {
         "inputTitle": "Datos de la factura",
@@ -13902,7 +13904,9 @@
         "removeItem": "Eliminar artículo",
         "taxRate": "Tipo impositivo (%)",
         "discountPercent": "Descuento (%)",
-        "generate": "Generar factura"
+        "generate": "Generar factura",
+        "calculate": "Calcular",
+        "clear": "Borrar"
       },
       "result": {
         "title": "Factura",
@@ -13913,7 +13917,8 @@
         "subtotal": "Subtotal",
         "discount": "Descuento",
         "tax": "Impuesto",
-        "grandTotal": "Total general"
+        "grandTotal": "Total general",
+        "taxableAmount": "Monto Gravable"
       },
       "errors": {
         "required": "Introduce valores válidos de impuesto y descuento.",
@@ -14039,7 +14044,86 @@
           "note": "El estándar internacional que define un formato XML estructurado y legible por máquina para facturas y documentos comerciales relacionados — la base de la mayoría de los regímenes de facturación electrónica obligatoria vigentes hoy en la UE y en varios otros países.",
           "url": "https://www.iso.org/standard/66370.html",
           "readOriginal": "Ver el estándar oficial"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Cada total de factura en esta herramienta proviene de cuatro datos, aplicados en un orden fijo.",
+          "items": [
+            {
+              "name": "Partidas de la Factura",
+              "description": "La descripción, cantidad y precio unitario de cada artículo — cantidad por precio unitario da el total de esa partida, y todos los totales de partidas suman el subtotal."
+            },
+            {
+              "name": "Porcentaje de Descuento",
+              "description": "Un porcentaje opcional restado del subtotal antes de calcular el impuesto — los descuentos se aplican al monto antes de impuestos, no al total final."
+            },
+            {
+              "name": "Tasa de Impuesto",
+              "description": "El porcentaje aplicado al monto gravable (subtotal menos descuento) para producir el impuesto adeudado."
+            },
+            {
+              "name": "Monto Gravable",
+              "description": "El subtotal después de restar el descuento — esto, no el subtotal original, es sobre lo que se aplica la tasa de impuesto."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Aplicaciones",
+          "intro": "Esta misma matemática de total detallado se aplica en cualquier lugar donde una empresa facture a un cliente por bienes o servicios.",
+          "items": [
+            {
+              "title": "Trabajo Freelance y de Consultoría",
+              "description": "Facturar a un cliente por horas o entregables con un desglose claro de lo que se cobró y por qué."
+            },
+            {
+              "title": "Ventas de Pequeñas Empresas",
+              "description": "Un minorista o negocio de servicios que emite una factura formal y detallada para los registros o reembolso de un cliente."
+            },
+            {
+              "title": "Facturación Recurrente de Clientes",
+              "description": "Generar un formato de factura consistente para clientes recurrentes, con la misma estructura de impuesto y descuento aplicada cada vez."
+            },
+            {
+              "title": "Cotizaciones y Presupuestos",
+              "description": "La misma estructura detallada sirve también como cotización previa a la venta, mostrando a un cliente potencial exactamente cómo se desglosa un precio."
+            }
+          ]
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir y Exportar",
+        "shareToSocial": "Compartir en Redes Sociales",
+        "generatedOn": "Generado el",
+        "contactSectionTitle": "Información de Contacto (opcional)",
+        "preparedForTitle": "Preparado Para",
+        "contactName": "Nombre",
+        "contactEmail": "Correo Electrónico",
+        "contactPhone": "Teléfono",
+        "contactOrganization": "Organización",
+        "contactAddress": "Dirección",
+        "contactNamePlaceholder": "p. ej. Juan Pérez",
+        "contactEmailPlaceholder": "p. ej. juan@example.com",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganizationPlaceholder": "p. ej. Empresa S.A.",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Ciudad"
+      },
+      "lineItemsDiagram": {
+        "title": "Desglose de Partidas",
+        "caption": "La contribución de cada artículo al subtotal de la factura."
+      },
+      "waterfallDiagram": {
+        "title": "Total Acumulado",
+        "caption": "Cómo el subtotal se convierte en el total final a través del descuento y el impuesto.",
+        "subtotal": "Subtotal",
+        "afterDiscount": "Después del Descuento",
+        "total": "Total"
+      },
+      "discountCompareDiagram": {
+        "title": "Con vs. Sin Descuento",
+        "caption": "Cuánto ahorra el descuento a tu cliente en esta factura.",
+        "beforeLabel": "Sin Descuento",
+        "afterLabel": "Con Descuento"
       }
     },
     "inventory-valuation-calculator": {
