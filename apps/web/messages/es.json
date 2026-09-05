@@ -10637,7 +10637,10 @@
               "effective": "42,4 % de descuento"
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Ingresa un precio y uno o más descuentos, luego presiona Calcular para ver tus resultados.",
+        "sentenceApply": "{original} descontado a {final} — un descuento efectivo del {percent}%.",
+        "sentenceReverse": "Un precio de venta de {final} implica un precio original de {original} — un descuento del {percent}%."
       },
       "form": {
         "inputTitle": "Tu precio",
@@ -10650,7 +10653,9 @@
         "discountLabel": "Porcentaje de descuento (%)",
         "discountPlaceholder": "Etapa {stage} %",
         "addStage": "Añadir otro descuento",
-        "removeStage": "Eliminar este descuento"
+        "removeStage": "Eliminar este descuento",
+        "calculate": "Calcular",
+        "clear": "Borrar"
       },
       "result": {
         "originalPrice": "Precio original",
@@ -10658,7 +10663,13 @@
         "saved": "Ahorras",
         "discountLabel": "Descuento",
         "effectiveDiscountLabel": "Descuento efectivo",
-        "stackedNote": "{stages} aplicados de forma secuencial — no simplemente sumados."
+        "stackedNote": "{stages} aplicados de forma secuencial — no simplemente sumados.",
+        "gaugeZones": {
+          "small": "Pequeño",
+          "moderate": "Moderado",
+          "big": "Grande",
+          "huge": "Enorme"
+        }
       },
       "education": {
         "intro": {
@@ -10784,7 +10795,83 @@
           "note": "Un estudio que descubrió que los consumidores perciben un descuento como más valioso cuando se presenta en porcentaje en artículos de precio bajo, pero como una cantidad fija en artículos de precio alto — incluso cuando ambas presentaciones representan exactamente la misma rebaja.",
           "url": "https://doi.org/10.1016/j.jbusres.2015.08.014",
           "readOriginal": "Leer el artículo original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Cada cálculo de descuento en esta herramienta proviene de dos tipos de datos.",
+          "items": [
+            {
+              "name": "Precio Original",
+              "description": "El precio inicial antes de cualquier descuento, usado en el modo Aplicar como la base sobre la que se resta cada porcentaje."
+            },
+            {
+              "name": "Precio de Venta",
+              "description": "El precio final conocido después de un descuento, usado en el modo Inverso para retroceder al precio original."
+            },
+            {
+              "name": "Porcentaje de Descuento",
+              "description": "La parte del precio eliminada en cada etapa — hasta tres etapas pueden acumularse en el modo Aplicar."
+            },
+            {
+              "name": "Descuento Efectivo",
+              "description": "El porcentaje total de descuento del precio original al final — siempre menor que la suma de las tasas acumuladas."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Aplicaciones",
+          "intro": "La matemática de descuentos aparece donde sea que un precio se reduzca por un porcentaje, secuencialmente o de una vez.",
+          "items": [
+            {
+              "title": "Ventas Minoristas y Liquidación",
+              "description": "Las ventas de toda la tienda combinadas con rebajas de liquidación o códigos de cupón son el uso más común del descuento en varias etapas."
+            },
+            {
+              "title": "Deducir un Precio de Lista",
+              "description": "Dado un precio de venta y un descuento anunciado, el modo Inverso recupera el precio original — útil para comparar ofertas o verificar un descuento declarado."
+            },
+            {
+              "title": "Descuentos Mayoristas y Comerciales",
+              "description": "Las empresas suelen aplicar un descuento comercial sobre un precio por volumen ya descontado, siguiendo la misma matemática de acumulación."
+            },
+            {
+              "title": "Acumulación de Cupones",
+              "description": "Combinar un cupón de porcentaje de descuento con una venta de toda la tienda es exactamente el escenario de descuento acumulado que modela esta herramienta."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Ingresa números válidos y no negativos para el precio y cada descuento."
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir y Exportar",
+        "shareToSocial": "Compartir en Redes Sociales",
+        "generatedOn": "Generado el",
+        "contactSectionTitle": "Información de Contacto (opcional)",
+        "preparedForTitle": "Preparado Para",
+        "contactName": "Nombre",
+        "contactEmail": "Correo Electrónico",
+        "contactPhone": "Teléfono",
+        "contactOrganization": "Organización",
+        "contactAddress": "Dirección",
+        "contactNamePlaceholder": "p. ej. Juan Pérez",
+        "contactEmailPlaceholder": "p. ej. juan@example.com",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganizationPlaceholder": "p. ej. Empresa S.A.",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Ciudad"
+      },
+      "waterfallDiagram": {
+        "title": "Precio Después de Cada Etapa",
+        "caption": "Cómo baja el precio a medida que se aplica cada descuento en secuencia.",
+        "start": "Inicio",
+        "afterStage": "Después de la etapa {stage}"
+      },
+      "scalingDiagram": {
+        "title": "Ahorro en Diferentes Puntos de Precio",
+        "caption": "Cuánto ahorrarías con esta tasa de descuento en un rango de precios.",
+        "xLabel": "Precio Original"
       }
     },
     "sales-tax-calculator": {

@@ -10637,7 +10637,10 @@
               "effective": "42,4% Rabatt"
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Geben Sie einen Preis und einen oder mehrere Rabatte ein und klicken Sie auf Berechnen, um Ihre Ergebnisse zu sehen.",
+        "sentenceApply": "{original} rabattiert auf {final} — ein effektiver Rabatt von {percent}%.",
+        "sentenceReverse": "Ein Verkaufspreis von {final} impliziert einen Originalpreis von {original} — ein Rabatt von {percent}%."
       },
       "form": {
         "inputTitle": "Ihr Preis",
@@ -10650,7 +10653,9 @@
         "discountLabel": "Rabattsatz (%)",
         "discountPlaceholder": "Stufe {stage} %",
         "addStage": "Weiteren Rabatt hinzufügen",
-        "removeStage": "Diesen Rabatt entfernen"
+        "removeStage": "Diesen Rabatt entfernen",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "originalPrice": "Ursprungspreis",
@@ -10658,7 +10663,13 @@
         "saved": "Sie sparen",
         "discountLabel": "Rabatt",
         "effectiveDiscountLabel": "Effektiver Rabatt",
-        "stackedNote": "{stages} nacheinander gestaffelt – nicht einfach addiert."
+        "stackedNote": "{stages} nacheinander gestaffelt – nicht einfach addiert.",
+        "gaugeZones": {
+          "small": "Klein",
+          "moderate": "Moderat",
+          "big": "Groß",
+          "huge": "Enorm"
+        }
       },
       "education": {
         "intro": {
@@ -10784,7 +10795,83 @@
           "note": "Eine Studie, die zeigt, dass Verbraucher einen Rabatt als wertvoller wahrnehmen, wenn er bei günstigeren Artikeln als prozentualer Rabatt dargestellt wird, bei teureren Artikeln hingegen als Dollarbetrag – selbst wenn beide Darstellungen dieselbe Preissenkung bedeuten.",
           "url": "https://doi.org/10.1016/j.jbusres.2015.08.014",
           "readOriginal": "Originalartikel lesen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Rabattberechnung in diesem Tool basiert auf zwei Arten von Eingaben.",
+          "items": [
+            {
+              "name": "Originalpreis",
+              "description": "Der Ausgangspreis vor jedem Rabatt, im Anwenden-Modus die Basis, von der jeder Prozentsatz abgezogen wird."
+            },
+            {
+              "name": "Verkaufspreis",
+              "description": "Der bekannte Endpreis nach einem Rabatt, im Umkehr-Modus verwendet, um rückwärts zum Originalpreis zu gelangen."
+            },
+            {
+              "name": "Rabattprozentsatz",
+              "description": "Der bei jeder Stufe abgezogene Anteil des Preises — im Anwenden-Modus können bis zu drei Stufen gestapelt werden."
+            },
+            {
+              "name": "Effektiver Rabatt",
+              "description": "Der Gesamtprozentsatz vom Original- zum Endpreis — immer kleiner als die Summe der gestapelten Sätze."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Rabattmathematik kommt überall vor, wo ein Preis prozentual reduziert wird, nacheinander oder auf einmal.",
+          "items": [
+            {
+              "title": "Einzelhandelsverkäufe und Räumung",
+              "description": "Filialweite Verkäufe kombiniert mit Räumungsabschlägen oder Gutscheincodes sind die häufigste Anwendung mehrstufiger Rabattierung."
+            },
+            {
+              "title": "Rückrechnung eines Listenpreises",
+              "description": "Bei bekanntem Verkaufspreis und beworbenem Rabatt gewinnt der Umkehr-Modus den Originalpreis zurück — nützlich zum Vergleichen von Angeboten oder zur Überprüfung eines behaupteten Rabatts."
+            },
+            {
+              "title": "Großhandels- und Handelsrabatte",
+              "description": "Unternehmen wenden oft einen Handelsrabatt auf einen bereits rabattierten Mengenpreis an, nach derselben Stapelmathematik."
+            },
+            {
+              "title": "Gutschein-Stapelung",
+              "description": "Die Kombination eines Prozent-Rabatt-Gutscheins mit einem filialweiten Verkauf ist genau das gestapelte Rabatt-Szenario, das dieses Tool modelliert."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Bitte geben Sie gültige, nicht negative Zahlen für den Preis und jeden Rabatt ein."
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@example.com",
+        "contactPhonePlaceholder": "z. B. +49 151 12345678",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Stadt"
+      },
+      "waterfallDiagram": {
+        "title": "Preis nach jeder Stufe",
+        "caption": "Wie der Preis sinkt, während jeder Rabatt nacheinander angewendet wird.",
+        "start": "Start",
+        "afterStage": "Nach Stufe {stage}"
+      },
+      "scalingDiagram": {
+        "title": "Ersparnis bei unterschiedlichen Preispunkten",
+        "caption": "Wie viel Sie bei diesem Rabattsatz über eine Preisspanne hinweg sparen würden.",
+        "xLabel": "Originalpreis"
       }
     },
     "sales-tax-calculator": {

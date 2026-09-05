@@ -1,8 +1,12 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Plus, X } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { DiscountMode } from "./types";
 
 const MAX_STAGES = 3;
@@ -10,19 +14,27 @@ const MAX_STAGES = 3;
 type DiscountInputPanelProps = {
   mode: DiscountMode;
   onModeChange: (mode: DiscountMode) => void;
+  currency: CurrencyCode;
+  onCurrencyChange: (currency: CurrencyCode) => void;
   price: string;
   onPriceChange: (value: string) => void;
   discounts: string[];
   onDiscountsChange: (discounts: string[]) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function DiscountInputPanel({
   mode,
   onModeChange,
+  currency,
+  onCurrencyChange,
   price,
   onPriceChange,
   discounts,
   onDiscountsChange,
+  onCalculate,
+  onClear,
 }: DiscountInputPanelProps) {
   const t = useTranslations("tools.discount-calculator.form");
 
@@ -60,7 +72,9 @@ export default function DiscountInputPanel({
         ))}
       </div>
 
-      <div className="mt-5 space-y-5">
+      <form onSubmit={onCalculate} className="mt-5 space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         <ToolInput
           label={mode === "apply" ? t("priceLabel") : t("finalPriceLabel")}
           type="text"
@@ -109,7 +123,18 @@ export default function DiscountInputPanel({
             </button>
           )}
         </div>
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

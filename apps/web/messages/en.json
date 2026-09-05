@@ -10633,7 +10633,10 @@
               "effective": "42.4% off"
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Enter a price and one or more discounts, then press Calculate to see your results.",
+        "sentenceApply": "{original} discounted to {final} — an effective {percent}% off.",
+        "sentenceReverse": "A sale price of {final} implies an original price of {original} — a {percent}% discount."
       },
       "form": {
         "inputTitle": "Your Price",
@@ -10646,7 +10649,9 @@
         "discountLabel": "Discount Percentage (%)",
         "discountPlaceholder": "Stage {stage} %",
         "addStage": "Add Another Discount",
-        "removeStage": "Remove this discount"
+        "removeStage": "Remove this discount",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "originalPrice": "Original Price",
@@ -10654,7 +10659,13 @@
         "saved": "You Save",
         "discountLabel": "Discount",
         "effectiveDiscountLabel": "Effective Discount",
-        "stackedNote": "{stages} stacked sequentially — not simply added together."
+        "stackedNote": "{stages} stacked sequentially — not simply added together.",
+        "gaugeZones": {
+          "small": "Small",
+          "moderate": "Moderate",
+          "big": "Big",
+          "huge": "Huge"
+        }
       },
       "education": {
         "intro": {
@@ -10780,7 +10791,83 @@
           "note": "A study finding that consumers perceive a discount as more valuable when it's framed as a percentage off for lower-priced items, but as a dollar amount off for higher-priced items — even when the two framings represent an identical price cut.",
           "url": "https://doi.org/10.1016/j.jbusres.2015.08.014",
           "readOriginal": "Read the Original Article"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Every discount calculation in this tool comes from two kinds of input.",
+          "items": [
+            {
+              "name": "Original Price",
+              "description": "The starting price before any discount, used in Apply mode as the base every percentage is taken off of."
+            },
+            {
+              "name": "Sale Price",
+              "description": "The known final price after a discount, used in Reverse mode to work backward to the original price."
+            },
+            {
+              "name": "Discount Percentage",
+              "description": "The share of the price removed at each stage — up to three stages can stack in Apply mode."
+            },
+            {
+              "name": "Effective Discount",
+              "description": "The overall percentage off from original to final price — always smaller than the sum of stacked rates."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Discount math shows up anywhere a price is reduced by a percentage, sequentially or all at once.",
+          "items": [
+            {
+              "title": "Retail Sales and Clearance",
+              "description": "Storewide sales stacked with clearance markdowns or coupon codes are the most common use of multi-stage discounting."
+            },
+            {
+              "title": "Reverse-Engineering a List Price",
+              "description": "Given a sale price and an advertised discount, Reverse mode recovers the original price — useful for comparing deals or verifying a claimed discount."
+            },
+            {
+              "title": "Wholesale and Trade Discounts",
+              "description": "Businesses often apply a trade discount on top of an already-discounted volume price, following the same stacking math."
+            },
+            {
+              "title": "Coupon Stacking",
+              "description": "Combining a percentage-off coupon with a storewide sale is exactly the stacked-discount scenario this tool models."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Please enter valid, non-negative numbers for the price and every discount."
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "waterfallDiagram": {
+        "title": "Price After Each Stage",
+        "caption": "How the price drops as each discount is applied in sequence.",
+        "start": "Start",
+        "afterStage": "After stage {stage}"
+      },
+      "scalingDiagram": {
+        "title": "Savings at Different Price Points",
+        "caption": "How much you'd save at this discount rate across a range of prices.",
+        "xLabel": "Original Price"
       }
     },
     "sales-tax-calculator": {

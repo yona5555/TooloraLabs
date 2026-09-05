@@ -10637,7 +10637,10 @@
               "effective": "42,4 % de réduction"
             }
           ]
-        }
+        },
+        "emptyStateMessage": "Saisissez un prix et une ou plusieurs remises, puis appuyez sur Calculer pour voir vos résultats.",
+        "sentenceApply": "{original} remisé à {final} — une remise effective de {percent}%.",
+        "sentenceReverse": "Un prix de vente de {final} implique un prix d'origine de {original} — une remise de {percent}%."
       },
       "form": {
         "inputTitle": "Votre prix",
@@ -10650,7 +10653,9 @@
         "discountLabel": "Pourcentage de remise (%)",
         "discountPlaceholder": "Étape {stage} %",
         "addStage": "Ajouter une autre remise",
-        "removeStage": "Supprimer cette remise"
+        "removeStage": "Supprimer cette remise",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "originalPrice": "Prix d'origine",
@@ -10658,7 +10663,13 @@
         "saved": "Vous économisez",
         "discountLabel": "Remise",
         "effectiveDiscountLabel": "Remise effective",
-        "stackedNote": "{stages} cumulées successivement — et non simplement additionnées."
+        "stackedNote": "{stages} cumulées successivement — et non simplement additionnées.",
+        "gaugeZones": {
+          "small": "Faible",
+          "moderate": "Modérée",
+          "big": "Importante",
+          "huge": "Énorme"
+        }
       },
       "education": {
         "intro": {
@@ -10784,7 +10795,83 @@
           "note": "Une étude montrant que les consommateurs perçoivent une remise comme plus intéressante lorsqu'elle est présentée en pourcentage pour les articles peu coûteux, mais en montant fixe pour les articles plus chers — même lorsque les deux présentations correspondent à une baisse de prix identique.",
           "url": "https://doi.org/10.1016/j.jbusres.2015.08.014",
           "readOriginal": "Lire l'article original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Chaque calcul de remise dans cet outil provient de deux types de données.",
+          "items": [
+            {
+              "name": "Prix d'Origine",
+              "description": "Le prix de départ avant toute remise, utilisé en mode Appliquer comme base sur laquelle chaque pourcentage est déduit."
+            },
+            {
+              "name": "Prix de Vente",
+              "description": "Le prix final connu après une remise, utilisé en mode Inverse pour remonter au prix d'origine."
+            },
+            {
+              "name": "Pourcentage de Remise",
+              "description": "La part du prix retirée à chaque étape — jusqu'à trois étapes peuvent s'empiler en mode Appliquer."
+            },
+            {
+              "name": "Remise Effective",
+              "description": "Le pourcentage global de remise du prix d'origine au prix final — toujours inférieur à la somme des taux empilés."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Les calculs de remise interviennent partout où un prix est réduit d'un pourcentage, séquentiellement ou en une fois.",
+          "items": [
+            {
+              "title": "Soldes et Liquidation en Magasin",
+              "description": "Les soldes à l'échelle du magasin combinées aux démarques de liquidation ou aux codes promo sont l'usage le plus courant de la remise multi-étapes."
+            },
+            {
+              "title": "Retrouver un Prix Catalogue",
+              "description": "Étant donné un prix de vente et une remise annoncée, le mode Inverse retrouve le prix d'origine — utile pour comparer des offres ou vérifier une remise annoncée."
+            },
+            {
+              "title": "Remises de Gros et Commerciales",
+              "description": "Les entreprises appliquent souvent une remise commerciale sur un prix de volume déjà remisé, selon le même calcul d'empilement."
+            },
+            {
+              "title": "Cumul de Coupons",
+              "description": "Combiner un coupon de pourcentage de remise avec une vente à l'échelle du magasin correspond exactement au scénario de remise empilée que cet outil modélise."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Veuillez saisir des nombres valides et non négatifs pour le prix et chaque remise."
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les Réseaux Sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé Pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@example.com",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Acme SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Ville"
+      },
+      "waterfallDiagram": {
+        "title": "Prix Après Chaque Étape",
+        "caption": "Comment le prix baisse à mesure que chaque remise est appliquée en séquence.",
+        "start": "Départ",
+        "afterStage": "Après l'étape {stage}"
+      },
+      "scalingDiagram": {
+        "title": "Économies à Différents Points de Prix",
+        "caption": "Combien vous économiseriez à ce taux de remise sur une gamme de prix.",
+        "xLabel": "Prix d'Origine"
       }
     },
     "sales-tax-calculator": {
