@@ -17196,6 +17196,185 @@
           "readOriginal": "View the Original Committee Opinion"
         }
       }
+    },
+    "macro-calculator": {
+      "title": "Macro Calculator",
+      "description": "Calculate your daily protein, carbohydrate, and fat targets in grams and calories from your total daily calories and goal.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "goals": {
+        "groupLabel": "Goal",
+        "labels": {
+          "lose": "Lose Weight",
+          "maintain": "Maintain Weight",
+          "gain": "Gain Weight",
+          "buildMuscle": "Build Muscle"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Calories & Goal",
+        "totalCalories": "Total Daily Calories",
+        "useTdeeCalories": "Use my {calories} calories from the TDEE Calculator",
+        "goalLabel": "Goal",
+        "hints": {
+          "lose": "Higher protein (30%) helps preserve lean muscle while in a calorie deficit.",
+          "maintain": "A balanced split suited to sustaining your current weight and activity level.",
+          "gain": "More carbohydrate (55%) to fuel a calorie surplus for weight gain.",
+          "buildMuscle": "Higher protein (30%) supports muscle protein synthesis alongside resistance training."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "A pie chart showing the percentage of total calories from protein, carbohydrate, and fat"
+      },
+      "result": {
+        "heading": "Result",
+        "protein": "Protein",
+        "carbs": "Carbohydrate",
+        "fat": "Fat",
+        "invalidCalories": "Enter a total daily calorie amount between 1 and 20,000 to see a result."
+      },
+      "disclaimer": "This tool provides general, educational estimates only and is not a substitute for personalized advice from a registered dietitian or other qualified healthcare provider — especially if you have a medical condition, are pregnant, or are training for a specific athletic goal.",
+      "quickReference": {
+        "title": "The Formulas",
+        "intro": "Every macro is a percentage of total calories, converted to grams by its calorie density."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Macronutrient Splits",
+          "paragraph1": "\"Macros\" is short for macronutrients — the three categories of nutrients that supply the body with calories: protein, carbohydrate, and fat (alcohol is sometimes counted as a fourth, but it isn't part of a typical dietary plan). Each gram of protein and carbohydrate supplies about 4 kilocalories, while each gram of fat supplies about 9 — figures known as the Atwater general factors, established in the late 19th and early 20th centuries and still the basis of nutrition labeling today.",
+          "paragraph2": "This calculator distributes your total daily calories across the three macronutrients as percentages chosen from within the Dietary Reference Intakes' Acceptable Macronutrient Distribution Range (AMDR) — the range of intake for each macronutrient associated with reduced risk of chronic disease while still providing adequate essential nutrients, as established by the U.S. National Academies of Sciences (protein 10-35%, carbohydrate 45-65%, fat 20-35% of total calories). The exact split shifts within that range depending on your selected goal, favoring more protein for fat loss or muscle building and more carbohydrate for a general weight-gain surplus."
+        },
+        "goals": {
+          "title": "How Each Goal Changes the Split",
+          "intro": "The same total calorie number can be divided differently depending on what you're training or eating for.",
+          "items": [
+            {
+              "title": "Lose Weight — 30% Protein / 45% Carbs / 25% Fat",
+              "description": "During a calorie deficit, higher relative protein intake is associated with better preservation of lean muscle mass, which is why this split leans toward the upper end of the AMDR protein range compared to a maintenance split."
+            },
+            {
+              "title": "Maintain Weight — 20% Protein / 50% Carbs / 30% Fat",
+              "description": "A balanced distribution suited to sustaining current body weight and typical daily activity, comfortably within the middle of the AMDR for all three macronutrients."
+            },
+            {
+              "title": "Gain Weight — 20% Protein / 55% Carbs / 25% Fat",
+              "description": "A general calorie surplus for weight gain leans on additional carbohydrate to fuel the surplus, since protein needs don't necessarily scale up as much as total calorie needs do for non-training-focused weight gain."
+            },
+            {
+              "title": "Build Muscle — 30% Protein / 50% Carbs / 20% Fat",
+              "description": "Supporting muscle protein synthesis alongside resistance training benefits from higher protein intake, consistent with sports-nutrition research on protein needs during a training-driven surplus (often expressed elsewhere as 1.6-2.2 g per kg of body weight)."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A couple of calorie totals and what this calculator returns for each goal.",
+          "columnCalculation": "Input",
+          "columnResult": "Protein / Carbs / Fat",
+          "rows": [
+            {
+              "calculation": "2000 kcal, Maintain",
+              "result": "100g / 250g / 67g"
+            },
+            {
+              "calculation": "1800 kcal, Lose Weight",
+              "result": "135g / 203g / 50g"
+            },
+            {
+              "calculation": "2800 kcal, Gain Weight",
+              "result": "140g / 385g / 78g"
+            },
+            {
+              "calculation": "2500 kcal, Build Muscle",
+              "result": "188g / 313g / 56g"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Where do these calorie totals come from?",
+              "answer": "You provide your total daily calorie target directly, or optionally import it from this site's TDEE Calculator (which estimates it from your BMR, activity level, and weight goal). This tool focuses purely on how to split a calorie total you already know into macronutrients — it doesn't estimate your calorie needs itself."
+            },
+            {
+              "question": "Why do the percentages differ by goal instead of using one fixed split?",
+              "answer": "Protein needs in particular respond to context: research on body composition consistently shows that higher relative protein intake helps preserve muscle during a calorie deficit and supports muscle growth during a training-driven surplus, while a simple maintenance diet doesn't need to push toward either extreme. All four splits still stay within the nationally recognized AMDR, so none of them is an extreme or fad-diet ratio."
+            },
+            {
+              "question": "What if I know my ideal protein intake in grams per kilogram instead of a percentage?",
+              "answer": "You can still use this tool as a starting point and then manually adjust: multiply your body weight in kilograms by your target g/kg protein figure to get grams of protein directly, convert that to calories (× 4), and treat the remaining calories as the total to split between carbohydrate and fat using whichever ratio suits your preference."
+            },
+            {
+              "question": "Are these macronutrient splits appropriate for everyone?",
+              "answer": "They're general, population-level estimates within accepted scientific ranges, not personalized medical or athletic nutrition advice. People with specific medical conditions (kidney disease, diabetes), pregnant or breastfeeding people, and competitive athletes with specialized needs should work with a registered dietitian or physician to set macronutrient targets appropriate to their specific situation."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The idea of counting food in terms of its energy-yielding components traces back to 19th-century chemist Wilbur Olin Atwater, whose extensive combustion and metabolism experiments at Wesleyan University established the \"Atwater general factors\" (4 kcal/g for protein and carbohydrate, 9 kcal/g for fat) still printed on nutrition labels worldwide today. \"Macro counting\" as a popular dieting framework — deliberately hitting daily gram targets for each macronutrient rather than just a single calorie number — became widespread within bodybuilding and fitness communities starting in the 1990s and 2000s, building directly on Atwater's century-old energy conversion factors."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "The scientific consensus on macronutrient ranges was formalized by the U.S. National Academies of Sciences (then the Institute of Medicine) in its 2005 Dietary Reference Intakes report, which established the Acceptable Macronutrient Distribution Ranges this calculator's splits are built from. More recent sports-nutrition research, particularly position stands from the International Society of Sports Nutrition, has further refined protein recommendations specifically for people engaged in resistance training or caloric restriction, generally supporting a higher relative protein intake than the population-wide average — the basis for this calculator's goal-specific adjustments within the broader accepted range."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Macronutrient science is studied within nutritional science and dietetics, part of the broader field of health sciences. Here are five respected programs in this area, plus one regional institution:",
+            "universities": [
+              {
+                "name": "Tufts University — Friedman School of Nutrition Science and Policy",
+                "note": "A leading US graduate school focused exclusively on nutrition science.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Select graduate programs offer online options; the core research PhD is in-residence."
+              },
+              {
+                "name": "Harvard T.H. Chan School of Public Health — Department of Nutrition",
+                "note": "A leading center for nutritional epidemiology and public health nutrition research.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "No — the core doctoral program is in-residence."
+              },
+              {
+                "name": "University of Illinois Urbana-Champaign — Division of Nutritional Sciences",
+                "note": "One of the largest and most established nutritional science programs in the US.",
+                "url": "https://dns.illinois.edu/",
+                "online": "No — the graduate research program is in-residence."
+              },
+              {
+                "name": "King's College London — Department of Nutritional Sciences",
+                "note": "A leading European center for nutritional science research.",
+                "url": "https://www.kcl.ac.uk/lsm/research/divisions/dns",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Deakin University — Institute for Physical Activity and Nutrition (IPAN)",
+                "note": "A leading research institute for nutrition and exercise science in Australia.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "No — research and clinical training are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Nutrition and Food Sciences",
+                "note": "Founded in 1866; a leading regional program in nutrition science.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Institute of Medicine. (2005). Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. National Academies Press.",
+          "note": "The official U.S. National Academies report establishing the Acceptable Macronutrient Distribution Ranges (AMDR) this calculator's goal-specific splits are chosen from.",
+          "url": "https://doi.org/10.17226/10490",
+          "readOriginal": "View the Original Report"
+        }
+      }
     }
   },
   "toolPage": {

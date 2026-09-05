@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import {
@@ -57,6 +57,19 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
 
     return { bmr: computedBmr, tdee: computedTdee, goal: computedGoal };
   }, [unitSystem, heightCm, weightKg, heightFt, heightIn, weightLb, age, gender, activityLevel, useBodyFat, bodyFatPercent, goalDirection, weeklyRateKg]);
+
+  useEffect(() => {
+    if (!Number.isFinite(goal.dailyCalorieTarget) || goal.dailyCalorieTarget <= 0) return;
+    try {
+      window.localStorage.setItem(
+        "toolora:tdee-result",
+        JSON.stringify({ dailyCalorieTarget: Math.round(goal.dailyCalorieTarget), tdee: Math.round(tdee) }),
+      );
+    } catch {
+      // localStorage unavailable (private browsing, etc.) — the Macro Calculator's
+      // "use my TDEE calories" link simply won't have anything to read, which it handles.
+    }
+  }, [goal.dailyCalorieTarget, tdee]);
 
   const navItems = [
     { id: "tool", label: tNav("tool") },

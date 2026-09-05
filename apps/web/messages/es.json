@@ -17200,6 +17200,185 @@
           "readOriginal": "Ver la opinión original del comité"
         }
       }
+    },
+    "macro-calculator": {
+      "title": "Calculadora de Macros",
+      "description": "Calcula tus objetivos diarios de proteínas, carbohidratos y grasas en gramos y calorías a partir de tus calorías diarias totales y tu objetivo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "goals": {
+        "groupLabel": "Objetivo",
+        "labels": {
+          "lose": "Perder Peso",
+          "maintain": "Mantener Peso",
+          "gain": "Ganar Peso",
+          "buildMuscle": "Ganar Músculo"
+        }
+      },
+      "form": {
+        "inputTitle": "Tus calorías y objetivo",
+        "totalCalories": "Calorías Diarias Totales",
+        "useTdeeCalories": "Usar mis {calories} calorías de la Calculadora de TDEE",
+        "goalLabel": "Objetivo",
+        "hints": {
+          "lose": "Más proteína (30%) ayuda a preservar la masa muscular magra durante un déficit calórico.",
+          "maintain": "Una distribución equilibrada adecuada para mantener tu peso y nivel de actividad actuales.",
+          "gain": "Más carbohidratos (55%) para alimentar un superávit calórico destinado a ganar peso.",
+          "buildMuscle": "Más proteína (30%) favorece la síntesis de proteína muscular junto con el entrenamiento de resistencia."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Un gráfico circular que muestra el porcentaje de calorías totales provenientes de proteínas, carbohidratos y grasas"
+      },
+      "result": {
+        "heading": "Resultado",
+        "protein": "Proteína",
+        "carbs": "Carbohidratos",
+        "fat": "Grasa",
+        "invalidCalories": "Introduce un total de calorías diarias entre 1 y 20.000 para ver un resultado."
+      },
+      "disclaimer": "Esta herramienta ofrece únicamente estimaciones generales y educativas, y no sustituye el asesoramiento personalizado de un dietista-nutricionista registrado u otro profesional de la salud cualificado —especialmente si tienes una condición médica, estás embarazada, o entrenas para un objetivo deportivo específico.",
+      "quickReference": {
+        "title": "Las fórmulas",
+        "intro": "Cada macro es un porcentaje de las calorías totales, convertido a gramos según su densidad calórica."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender las distribuciones de macronutrientes",
+          "paragraph1": "\"Macros\" es la abreviatura de macronutrientes —las tres categorías de nutrientes que aportan calorías al cuerpo: proteínas, carbohidratos y grasas (el alcohol a veces se cuenta como una cuarta categoría, pero no forma parte de un plan dietético típico). Cada gramo de proteína y carbohidrato aporta unas 4 kilocalorías, mientras que cada gramo de grasa aporta unas 9 —cifras conocidas como los factores generales de Atwater, establecidos a finales del siglo XIX y principios del XX, y que aún hoy son la base del etiquetado nutricional.",
+          "paragraph2": "Esta calculadora distribuye tus calorías diarias totales entre los tres macronutrientes como porcentajes elegidos dentro del Rango Aceptable de Distribución de Macronutrientes (AMDR) de las Ingestas Dietéticas de Referencia —el rango de ingesta para cada macronutriente asociado con un menor riesgo de enfermedad crónica mientras se siguen proporcionando nutrientes esenciales adecuados, según lo establecido por las Academias Nacionales de Ciencias de EE. UU. (proteína 10-35%, carbohidratos 45-65%, grasa 20-35% del total de calorías). La distribución exacta varía dentro de ese rango según tu objetivo seleccionado, favoreciendo más proteína para la pérdida de grasa o la ganancia muscular y más carbohidratos para un superávit general de ganancia de peso."
+        },
+        "goals": {
+          "title": "Cómo cada objetivo cambia la distribución",
+          "intro": "El mismo número total de calorías puede dividirse de forma diferente según para qué estés entrenando o comiendo.",
+          "items": [
+            {
+              "title": "Perder Peso — 30% Proteína / 45% Carbohidratos / 25% Grasa",
+              "description": "Durante un déficit calórico, una mayor ingesta relativa de proteína se asocia con una mejor preservación de la masa muscular magra, por lo que esta distribución se inclina hacia el extremo superior del rango de proteína del AMDR en comparación con una distribución de mantenimiento."
+            },
+            {
+              "title": "Mantener Peso — 20% Proteína / 50% Carbohidratos / 30% Grasa",
+              "description": "Una distribución equilibrada adecuada para mantener el peso corporal actual y la actividad diaria típica, cómodamente en el medio del AMDR para los tres macronutrientes."
+            },
+            {
+              "title": "Ganar Peso — 20% Proteína / 55% Carbohidratos / 25% Grasa",
+              "description": "Un superávit calórico general para ganar peso se apoya en carbohidratos adicionales para alimentar el superávit, ya que las necesidades de proteína no necesariamente aumentan tanto como las necesidades totales de calorías para una ganancia de peso no enfocada en el entrenamiento."
+            },
+            {
+              "title": "Ganar Músculo — 30% Proteína / 50% Carbohidratos / 20% Grasa",
+              "description": "Apoyar la síntesis de proteína muscular junto con el entrenamiento de resistencia se beneficia de una mayor ingesta de proteína, en consonancia con la investigación en nutrición deportiva sobre las necesidades de proteína durante un superávit impulsado por el entrenamiento (a menudo expresado en otros lugares como 1,6-2,2 g por kg de peso corporal)."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos totales de calorías y lo que devuelve esta calculadora para cada objetivo.",
+          "columnCalculation": "Entrada",
+          "columnResult": "Proteína / Carbohidratos / Grasa",
+          "rows": [
+            {
+              "calculation": "2000 kcal, Mantener Peso",
+              "result": "100g / 250g / 67g"
+            },
+            {
+              "calculation": "1800 kcal, Perder Peso",
+              "result": "135g / 203g / 50g"
+            },
+            {
+              "calculation": "2800 kcal, Ganar Peso",
+              "result": "140g / 385g / 78g"
+            },
+            {
+              "calculation": "2500 kcal, Ganar Músculo",
+              "result": "188g / 313g / 56g"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿De dónde vienen estos totales de calorías?",
+              "answer": "Proporcionas tu objetivo total de calorías diarias directamente, o puedes importarlo opcionalmente desde la Calculadora de TDEE de este sitio (que lo estima a partir de tu TMB, nivel de actividad y objetivo de peso). Esta herramienta se centra únicamente en cómo dividir un total de calorías que ya conoces en macronutrientes —no estima tus necesidades calóricas por sí misma."
+            },
+            {
+              "question": "¿Por qué los porcentajes difieren según el objetivo en lugar de usar una distribución fija?",
+              "answer": "Las necesidades de proteína en particular responden al contexto: la investigación sobre composición corporal muestra consistentemente que una mayor ingesta relativa de proteína ayuda a preservar el músculo durante un déficit calórico y apoya el crecimiento muscular durante un superávit impulsado por el entrenamiento, mientras que una dieta simple de mantenimiento no necesita inclinarse hacia ningún extremo. Las cuatro distribuciones siguen estando dentro del AMDR reconocido a nivel nacional, por lo que ninguna es una proporción extrema o de dieta de moda."
+            },
+            {
+              "question": "¿Qué pasa si conozco mi ingesta ideal de proteína en gramos por kilogramo en lugar de un porcentaje?",
+              "answer": "Aún puedes usar esta herramienta como punto de partida y luego ajustar manualmente: multiplica tu peso corporal en kilogramos por tu cifra objetivo de g/kg de proteína para obtener gramos de proteína directamente, convierte eso a calorías (× 4), y trata las calorías restantes como el total a dividir entre carbohidratos y grasa según la proporción que prefieras."
+            },
+            {
+              "question": "¿Son estas distribuciones de macronutrientes apropiadas para todos?",
+              "answer": "Son estimaciones generales a nivel poblacional dentro de rangos científicos aceptados, no asesoramiento nutricional médico o deportivo personalizado. Las personas con condiciones médicas específicas (enfermedad renal, diabetes), personas embarazadas o en periodo de lactancia, y atletas competitivos con necesidades especializadas deben trabajar con un dietista-nutricionista registrado o un médico para establecer objetivos de macronutrientes apropiados para su situación específica."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La idea de contar los alimentos en términos de sus componentes generadores de energía se remonta al químico del siglo XIX Wilbur Olin Atwater, cuyos extensos experimentos de combustión y metabolismo en la Universidad Wesleyan establecieron los \"factores generales de Atwater\" (4 kcal/g para proteínas y carbohidratos, 9 kcal/g para grasas) que aún hoy se imprimen en las etiquetas nutricionales de todo el mundo. El \"conteo de macros\" como marco de dieta popular —alcanzar deliberadamente objetivos diarios en gramos para cada macronutriente en lugar de solo una cifra de calorías— se generalizó dentro de las comunidades de culturismo y fitness a partir de los años 90 y 2000, construyendo directamente sobre los factores de conversión de energía de Atwater de un siglo de antigüedad."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "El consenso científico sobre los rangos de macronutrientes fue formalizado por las Academias Nacionales de Ciencias de EE. UU. (entonces el Institute of Medicine) en su informe de Ingestas Dietéticas de Referencia de 2005, que estableció los Rangos Aceptables de Distribución de Macronutrientes de los que se construyen las distribuciones de esta calculadora. La investigación más reciente en nutrición deportiva, particularmente las declaraciones de posición de la Sociedad Internacional de Nutrición Deportiva, ha refinado aún más las recomendaciones de proteína específicamente para personas que realizan entrenamiento de resistencia o restricción calórica, apoyando generalmente una ingesta relativa de proteína más alta que el promedio poblacional —la base de los ajustes específicos por objetivo de esta calculadora dentro del rango más amplio aceptado."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La ciencia de los macronutrientes se estudia dentro de la ciencia nutricional y la dietética, parte del campo más amplio de las ciencias de la salud. Estos son cinco programas respetados en esta área, más una institución regional:",
+            "universities": [
+              {
+                "name": "Universidad de Tufts — Escuela Friedman de Ciencia y Política de la Nutrición",
+                "note": "Una escuela de posgrado estadounidense líder enfocada exclusivamente en la ciencia de la nutrición.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Algunos programas de posgrado ofrecen opciones en línea; el doctorado de investigación principal es presencial."
+              },
+              {
+                "name": "Escuela de Salud Pública Harvard T.H. Chan — Departamento de Nutrición",
+                "note": "Un centro líder en epidemiología nutricional e investigación de nutrición en salud pública.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "No — el programa doctoral principal es presencial."
+              },
+              {
+                "name": "Universidad de Illinois Urbana-Champaign — División de Ciencias Nutricionales",
+                "note": "Uno de los programas de ciencias nutricionales más grandes y consolidados de EE. UU.",
+                "url": "https://dns.illinois.edu/",
+                "online": "No — el programa de investigación de posgrado es presencial."
+              },
+              {
+                "name": "King's College de Londres — Departamento de Ciencias Nutricionales",
+                "note": "Un centro europeo líder en investigación de ciencias nutricionales.",
+                "url": "https://www.kcl.ac.uk/lsm/research/divisions/dns",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de Deakin — Instituto de Actividad Física y Nutrición (IPAN)",
+                "note": "Un instituto de investigación líder en nutrición y ciencias del ejercicio en Australia.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "No — la formación de investigación y clínica es presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Nutrición y Ciencias de los Alimentos",
+                "note": "Fundada en 1866; un programa regional líder en ciencia de la nutrición.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Institute of Medicine. (2005). Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. National Academies Press.",
+          "note": "El informe oficial de las Academias Nacionales de EE. UU. que establece los Rangos Aceptables de Distribución de Macronutrientes (AMDR) de los que se eligen las distribuciones específicas por objetivo de esta calculadora.",
+          "url": "https://doi.org/10.17226/10490",
+          "readOriginal": "Ver el informe original"
+        }
+      }
     }
   },
   "toolPage": {

@@ -846,6 +846,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "macro-calculator",
+    title: "Macro Calculator",
+    category: "health-fitness",
+    description:
+      "Calculate your daily protein, carbohydrate, and fat targets in grams and calories from your total daily calories and goal.",
+    featured: false,
+    keywords: [
+      "macro calculator",
+      "macronutrient calculator",
+      "protein carbs fat calculator",
+      "diet macros",
+      "iifym calculator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

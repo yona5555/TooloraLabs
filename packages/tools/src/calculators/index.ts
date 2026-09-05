@@ -67,3 +67,4 @@ export * from "./BodyFatCalculator";
 export * from "./DueDateCalculator";
 export * from "./OvulationCalculator";
 export * from "./PregnancyCalculator";
+export * from "./MacroCalculator";

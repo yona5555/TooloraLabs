@@ -17200,6 +17200,185 @@
           "readOriginal": "Originalstellungnahme des Ausschusses ansehen"
         }
       }
+    },
+    "macro-calculator": {
+      "title": "Makro-Rechner",
+      "description": "Berechne deine täglichen Protein-, Kohlenhydrat- und Fettziele in Gramm und Kalorien aus deinen gesamten Tageskalorien und deinem Ziel.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "goals": {
+        "groupLabel": "Ziel",
+        "labels": {
+          "lose": "Abnehmen",
+          "maintain": "Gewicht halten",
+          "gain": "Zunehmen",
+          "buildMuscle": "Muskeln aufbauen"
+        }
+      },
+      "form": {
+        "inputTitle": "Deine Kalorien & dein Ziel",
+        "totalCalories": "Gesamte Tageskalorien",
+        "useTdeeCalories": "Meine {calories} Kalorien aus dem TDEE-Rechner verwenden",
+        "goalLabel": "Ziel",
+        "hints": {
+          "lose": "Höheres Protein (30%) hilft, die Muskelmasse während eines Kaloriendefizits zu erhalten.",
+          "maintain": "Eine ausgewogene Aufteilung, geeignet, um dein aktuelles Gewicht und Aktivitätsniveau zu halten.",
+          "gain": "Mehr Kohlenhydrate (55%) zur Versorgung eines Kalorienüberschusses für Gewichtszunahme.",
+          "buildMuscle": "Höheres Protein (30%) unterstützt die Muskelproteinsynthese neben Krafttraining."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Ein Kreisdiagramm, das den Prozentsatz der Gesamtkalorien aus Protein, Kohlenhydraten und Fett zeigt"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "protein": "Protein",
+        "carbs": "Kohlenhydrate",
+        "fat": "Fett",
+        "invalidCalories": "Gib eine Gesamtkalorienzahl zwischen 1 und 20.000 ein, um ein Ergebnis zu sehen."
+      },
+      "disclaimer": "Dieses Tool bietet nur allgemeine, informative Schätzungen und ersetzt keine persönliche Beratung durch eine zugelassene Ernährungsfachkraft oder eine andere qualifizierte medizinische Fachkraft — besonders bei einer Erkrankung, während einer Schwangerschaft oder beim Training für ein spezifisches sportliches Ziel.",
+      "quickReference": {
+        "title": "Die Formeln",
+        "intro": "Jedes Makro ist ein Prozentsatz der Gesamtkalorien, umgerechnet in Gramm anhand seiner Kaloriendichte."
+      },
+      "education": {
+        "intro": {
+          "title": "Makronährstoffverteilungen verstehen",
+          "paragraph1": "\"Makros\" ist die Kurzform für Makronährstoffe — die drei Nährstoffkategorien, die den Körper mit Kalorien versorgen: Protein, Kohlenhydrate und Fett (Alkohol wird manchmal als vierte Kategorie gezählt, ist aber nicht Teil eines typischen Ernährungsplans). Jedes Gramm Protein und Kohlenhydrat liefert etwa 4 Kilokalorien, während jedes Gramm Fett etwa 9 liefert — Werte, die als Atwater-Faktoren bekannt sind, im späten 19. und frühen 20. Jahrhundert festgelegt und noch heute die Grundlage der Nährwertkennzeichnung.",
+          "paragraph2": "Dieser Rechner verteilt deine gesamten Tageskalorien auf die drei Makronährstoffe als Prozentsätze, die innerhalb der Acceptable Macronutrient Distribution Range (AMDR) der Dietary Reference Intakes gewählt werden — der Aufnahmebereich für jeden Makronährstoff, der mit einem verringerten Risiko für chronische Krankheiten verbunden ist, während dennoch ausreichende essenzielle Nährstoffe bereitgestellt werden, wie von den U.S. National Academies of Sciences festgelegt (Protein 10-35%, Kohlenhydrate 45-65%, Fett 20-35% der Gesamtkalorien). Die genaue Aufteilung verschiebt sich innerhalb dieses Bereichs je nach gewähltem Ziel, mit mehr Protein für Fettabbau oder Muskelaufbau und mehr Kohlenhydraten für einen allgemeinen Gewichtszunahme-Überschuss."
+        },
+        "goals": {
+          "title": "Wie jedes Ziel die Aufteilung verändert",
+          "intro": "Dieselbe Gesamtkalorienzahl kann je nach Trainings- oder Ernährungsziel unterschiedlich aufgeteilt werden.",
+          "items": [
+            {
+              "title": "Abnehmen — 30% Protein / 45% Kohlenhydrate / 25% Fett",
+              "description": "Während eines Kaloriendefizits ist eine höhere relative Proteinzufuhr mit besserem Erhalt der fettfreien Muskelmasse verbunden, weshalb diese Aufteilung im Vergleich zur Erhaltungsaufteilung eher zum oberen Ende des AMDR-Proteinbereichs tendiert."
+            },
+            {
+              "title": "Gewicht halten — 20% Protein / 50% Kohlenhydrate / 30% Fett",
+              "description": "Eine ausgewogene Verteilung, geeignet, um das aktuelle Körpergewicht und die typische tägliche Aktivität zu halten, komfortabel in der Mitte des AMDR für alle drei Makronährstoffe."
+            },
+            {
+              "title": "Zunehmen — 20% Protein / 55% Kohlenhydrate / 25% Fett",
+              "description": "Ein allgemeiner Kalorienüberschuss für Gewichtszunahme stützt sich auf zusätzliche Kohlenhydrate zur Versorgung des Überschusses, da der Proteinbedarf bei nicht trainingsfokussierter Gewichtszunahme nicht unbedingt im gleichen Maß steigt wie der Gesamtkalorienbedarf."
+            },
+            {
+              "title": "Muskeln aufbauen — 30% Protein / 50% Kohlenhydrate / 20% Fett",
+              "description": "Die Unterstützung der Muskelproteinsynthese neben Krafttraining profitiert von höherer Proteinzufuhr, im Einklang mit sportwissenschaftlicher Forschung zum Proteinbedarf während eines trainingsbedingten Überschusses (anderswo oft als 1,6-2,2 g pro kg Körpergewicht ausgedrückt)."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Kalorienzahlen und die Ergebnisse, die dieser Rechner für jedes Ziel liefert.",
+          "columnCalculation": "Eingabe",
+          "columnResult": "Protein / Kohlenhydrate / Fett",
+          "rows": [
+            {
+              "calculation": "2000 kcal, Gewicht halten",
+              "result": "100g / 250g / 67g"
+            },
+            {
+              "calculation": "1800 kcal, Abnehmen",
+              "result": "135g / 203g / 50g"
+            },
+            {
+              "calculation": "2800 kcal, Zunehmen",
+              "result": "140g / 385g / 78g"
+            },
+            {
+              "calculation": "2500 kcal, Muskeln aufbauen",
+              "result": "188g / 313g / 56g"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Woher kommen diese Kalorienzahlen?",
+              "answer": "Du gibst dein tägliches Kalorienziel direkt an oder importierst es optional aus dem TDEE-Rechner dieser Website (der es aus deinem BMR, Aktivitätsniveau und Gewichtsziel schätzt). Dieses Tool konzentriert sich rein darauf, wie eine bereits bekannte Kalorienzahl in Makronährstoffe aufgeteilt wird — es schätzt deinen Kalorienbedarf nicht selbst."
+            },
+            {
+              "question": "Warum unterscheiden sich die Prozentsätze je nach Ziel, statt eine feste Aufteilung zu verwenden?",
+              "answer": "Besonders der Proteinbedarf reagiert auf den Kontext: Forschung zur Körperzusammensetzung zeigt durchweg, dass höhere relative Proteinzufuhr hilft, Muskeln während eines Kaloriendefizits zu erhalten, und das Muskelwachstum während eines trainingsbedingten Überschusses unterstützt, während eine einfache Erhaltungsdiät nicht zu einem der Extreme tendieren muss. Alle vier Aufteilungen bleiben innerhalb des national anerkannten AMDR, sodass keine davon ein extremes oder Modediät-Verhältnis ist."
+            },
+            {
+              "question": "Was, wenn ich meine ideale Proteinzufuhr in Gramm pro Kilogramm statt als Prozentsatz kenne?",
+              "answer": "Du kannst dieses Tool trotzdem als Ausgangspunkt nutzen und dann manuell anpassen: Multipliziere dein Körpergewicht in Kilogramm mit deinem Ziel-g/kg-Proteinwert, um Gramm Protein direkt zu erhalten, rechne das in Kalorien um (× 4) und behandle die restlichen Kalorien als Gesamtsumme, die zwischen Kohlenhydraten und Fett nach deiner bevorzugten Ration aufgeteilt wird."
+            },
+            {
+              "question": "Sind diese Makronährstoffaufteilungen für jeden geeignet?",
+              "answer": "Es handelt sich um allgemeine Schätzungen auf Bevölkerungsebene innerhalb akzeptierter wissenschaftlicher Bereiche, nicht um personalisierte medizinische oder sportliche Ernährungsberatung. Menschen mit bestimmten Erkrankungen (Nierenerkrankung, Diabetes), Schwangere oder Stillende sowie Wettkampfsportler mit speziellen Bedürfnissen sollten mit einer zugelassenen Ernährungsfachkraft oder einem Arzt zusammenarbeiten, um für ihre spezifische Situation geeignete Makronährstoffziele festzulegen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Idee, Lebensmittel anhand ihrer energieliefernden Bestandteile zu zählen, geht auf den Chemiker Wilbur Olin Atwater im 19. Jahrhundert zurück, dessen umfangreiche Verbrennungs- und Stoffwechselexperimente an der Wesleyan University die \"Atwater-Faktoren\" (4 kcal/g für Protein und Kohlenhydrate, 9 kcal/g für Fett) etablierten, die noch heute weltweit auf Nährwertkennzeichnungen gedruckt sind. \"Makro-Zählen\" als populäres Diätkonzept — bewusstes Erreichen täglicher Gramm-Ziele für jeden Makronährstoff statt nur einer einzelnen Kalorienzahl — verbreitete sich ab den 1990er- und 2000er-Jahren in Bodybuilding- und Fitness-Communities und baut direkt auf Atwaters jahrhundertealten Energieumrechnungsfaktoren auf."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Der wissenschaftliche Konsens zu Makronährstoffbereichen wurde von den U.S. National Academies of Sciences (damals Institute of Medicine) in ihrem Dietary-Reference-Intakes-Bericht von 2005 formalisiert, der die Acceptable Macronutrient Distribution Ranges festlegte, aus denen die Aufteilungen dieses Rechners aufgebaut sind. Neuere sportwissenschaftliche Forschung, insbesondere Positionspapiere der International Society of Sports Nutrition, hat Proteinempfehlungen speziell für Menschen mit Krafttraining oder Kalorienrestriktion weiter verfeinert und unterstützt im Allgemeinen eine höhere relative Proteinzufuhr als den Bevölkerungsdurchschnitt — die Grundlage für die zielspezifischen Anpassungen dieses Rechners innerhalb des breiteren akzeptierten Bereichs."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Makronährstoffwissenschaft wird in der Ernährungswissenschaft und Diätetik studiert, einem Teilgebiet der Gesundheitswissenschaften. Hier sind fünf angesehene Programme in diesem Bereich, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "Tufts University — Friedman School of Nutrition Science and Policy",
+                "note": "Eine führende US-Graduiertenschule, die sich ausschließlich auf Ernährungswissenschaft konzentriert.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Ausgewählte Graduiertenprogramme bieten Online-Optionen; die zentrale Forschungspromotion ist Präsenz."
+              },
+              {
+                "name": "Harvard T.H. Chan School of Public Health — Department of Nutrition",
+                "note": "Ein führendes Zentrum für Ernährungsepidemiologie und Public-Health-Ernährungsforschung.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "Nein — das zentrale Doktorandenprogramm ist Präsenz."
+              },
+              {
+                "name": "University of Illinois Urbana-Champaign — Division of Nutritional Sciences",
+                "note": "Eines der größten und etabliertesten Ernährungswissenschaftsprogramme in den USA.",
+                "url": "https://dns.illinois.edu/",
+                "online": "Nein — das Graduierten-Forschungsprogramm ist Präsenz."
+              },
+              {
+                "name": "King's College London — Department of Nutritional Sciences",
+                "note": "Ein führendes europäisches Zentrum für ernährungswissenschaftliche Forschung.",
+                "url": "https://www.kcl.ac.uk/lsm/research/divisions/dns",
+                "online": "Nein — Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Deakin University — Institute for Physical Activity and Nutrition (IPAN)",
+                "note": "Ein führendes Forschungsinstitut für Ernährung und Sportwissenschaft in Australien.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "Nein — Forschungs- und klinische Ausbildung erfolgt in Präsenz."
+              },
+              {
+                "name": "American University of Beirut — Department of Nutrition and Food Sciences",
+                "note": "Gegründet 1866; ein führendes regionales Programm in Ernährungswissenschaft.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Institute of Medicine. (2005). Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. National Academies Press.",
+          "note": "Der offizielle Bericht der U.S. National Academies, der die Acceptable Macronutrient Distribution Ranges (AMDR) festlegt, aus denen die zielspezifischen Aufteilungen dieses Rechners gewählt werden.",
+          "url": "https://doi.org/10.17226/10490",
+          "readOriginal": "Originalbericht ansehen"
+        }
+      }
     }
   },
   "toolPage": {

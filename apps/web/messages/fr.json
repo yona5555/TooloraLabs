@@ -17200,6 +17200,185 @@
           "readOriginal": "Consulter l'avis original du comité"
         }
       }
+    },
+    "macro-calculator": {
+      "title": "Calculatrice de Macros",
+      "description": "Calculez vos objectifs quotidiens de protéines, glucides et lipides en grammes et en calories à partir de vos calories quotidiennes totales et de votre objectif.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "goals": {
+        "groupLabel": "Objectif",
+        "labels": {
+          "lose": "Perdre du Poids",
+          "maintain": "Maintenir le Poids",
+          "gain": "Prendre du Poids",
+          "buildMuscle": "Prendre du Muscle"
+        }
+      },
+      "form": {
+        "inputTitle": "Vos calories et votre objectif",
+        "totalCalories": "Calories Quotidiennes Totales",
+        "useTdeeCalories": "Utiliser mes {calories} calories de la Calculatrice TDEE",
+        "goalLabel": "Objectif",
+        "hints": {
+          "lose": "Un apport plus élevé en protéines (30 %) aide à préserver la masse musculaire maigre pendant un déficit calorique.",
+          "maintain": "Une répartition équilibrée adaptée pour maintenir votre poids et votre niveau d'activité actuels.",
+          "gain": "Plus de glucides (55 %) pour alimenter un surplus calorique destiné à la prise de poids.",
+          "buildMuscle": "Un apport plus élevé en protéines (30 %) soutient la synthèse des protéines musculaires en complément de l'entraînement en résistance."
+        }
+      },
+      "diagram": {
+        "ariaLabel": "Un graphique circulaire montrant le pourcentage des calories totales provenant des protéines, glucides et lipides"
+      },
+      "result": {
+        "heading": "Résultat",
+        "protein": "Protéines",
+        "carbs": "Glucides",
+        "fat": "Lipides",
+        "invalidCalories": "Saisissez un total de calories quotidiennes entre 1 et 20 000 pour voir un résultat."
+      },
+      "disclaimer": "Cet outil fournit uniquement des estimations générales et éducatives et ne remplace pas les conseils personnalisés d'un(e) diététicien(ne) nutritionniste agréé(e) ou d'un autre professionnel de santé qualifié — surtout en cas de condition médicale, de grossesse, ou d'entraînement pour un objectif sportif spécifique.",
+      "quickReference": {
+        "title": "Les formules",
+        "intro": "Chaque macro est un pourcentage des calories totales, converti en grammes selon sa densité calorique."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les répartitions de macronutriments",
+          "paragraph1": "\"Macros\" est l'abréviation de macronutriments — les trois catégories de nutriments qui fournissent des calories à l'organisme : protéines, glucides et lipides (l'alcool est parfois compté comme une quatrième catégorie, mais il ne fait pas partie d'un plan alimentaire typique). Chaque gramme de protéines et de glucides fournit environ 4 kilocalories, tandis que chaque gramme de lipides en fournit environ 9 — des chiffres connus sous le nom de facteurs généraux d'Atwater, établis à la fin du XIXe et au début du XXe siècle et qui restent la base de l'étiquetage nutritionnel aujourd'hui.",
+          "paragraph2": "Cette calculatrice répartit vos calories quotidiennes totales entre les trois macronutriments sous forme de pourcentages choisis dans la fourchette de distribution acceptable des macronutriments (AMDR) des apports nutritionnels de référence — la plage d'apport pour chaque macronutriment associée à un risque réduit de maladie chronique tout en fournissant des nutriments essentiels adéquats, telle qu'établie par les Académies nationales des sciences des États-Unis (protéines 10-35 %, glucides 45-65 %, lipides 20-35 % des calories totales). La répartition exacte varie dans cette fourchette selon l'objectif sélectionné, favorisant plus de protéines pour la perte de graisse ou la prise de muscle et plus de glucides pour un surplus général de prise de poids."
+        },
+        "goals": {
+          "title": "Comment chaque objectif modifie la répartition",
+          "intro": "Le même total de calories peut être réparti différemment selon ce pour quoi vous vous entraînez ou vous alimentez.",
+          "items": [
+            {
+              "title": "Perdre du Poids — 30 % Protéines / 45 % Glucides / 25 % Lipides",
+              "description": "Pendant un déficit calorique, un apport relatif plus élevé en protéines est associé à une meilleure préservation de la masse musculaire maigre, c'est pourquoi cette répartition penche vers l'extrémité supérieure de la fourchette de protéines de l'AMDR par rapport à une répartition de maintien."
+            },
+            {
+              "title": "Maintenir le Poids — 20 % Protéines / 50 % Glucides / 30 % Lipides",
+              "description": "Une répartition équilibrée adaptée pour maintenir le poids corporel actuel et l'activité quotidienne typique, confortablement au milieu de l'AMDR pour les trois macronutriments."
+            },
+            {
+              "title": "Prendre du Poids — 20 % Protéines / 55 % Glucides / 25 % Lipides",
+              "description": "Un surplus calorique général pour la prise de poids s'appuie sur des glucides supplémentaires pour alimenter le surplus, car les besoins en protéines n'augmentent pas nécessairement autant que les besoins caloriques totaux pour une prise de poids non axée sur l'entraînement."
+            },
+            {
+              "title": "Prendre du Muscle — 30 % Protéines / 50 % Glucides / 20 % Lipides",
+              "description": "Soutenir la synthèse des protéines musculaires en complément de l'entraînement en résistance bénéficie d'un apport plus élevé en protéines, conformément à la recherche en nutrition sportive sur les besoins en protéines pendant un surplus lié à l'entraînement (souvent exprimé ailleurs comme 1,6 à 2,2 g par kg de poids corporel)."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques totaux de calories et ce que cette calculatrice renvoie pour chaque objectif.",
+          "columnCalculation": "Saisie",
+          "columnResult": "Protéines / Glucides / Lipides",
+          "rows": [
+            {
+              "calculation": "2000 kcal, Maintenir le Poids",
+              "result": "100g / 250g / 67g"
+            },
+            {
+              "calculation": "1800 kcal, Perdre du Poids",
+              "result": "135g / 203g / 50g"
+            },
+            {
+              "calculation": "2800 kcal, Prendre du Poids",
+              "result": "140g / 385g / 78g"
+            },
+            {
+              "calculation": "2500 kcal, Prendre du Muscle",
+              "result": "188g / 313g / 56g"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "D'où viennent ces totaux de calories ?",
+              "answer": "Vous indiquez directement votre objectif total de calories quotidiennes, ou vous pouvez l'importer optionnellement depuis la Calculatrice TDEE de ce site (qui l'estime à partir de votre MB, niveau d'activité et objectif de poids). Cet outil se concentre uniquement sur la façon de répartir un total de calories que vous connaissez déjà en macronutriments — il n'estime pas lui-même vos besoins caloriques."
+            },
+            {
+              "question": "Pourquoi les pourcentages diffèrent-ils selon l'objectif plutôt que d'utiliser une répartition fixe ?",
+              "answer": "Les besoins en protéines en particulier réagissent au contexte : la recherche sur la composition corporelle montre systématiquement qu'un apport relatif plus élevé en protéines aide à préserver le muscle pendant un déficit calorique et soutient la croissance musculaire pendant un surplus lié à l'entraînement, tandis qu'un régime de maintien simple n'a pas besoin de pencher vers l'un ou l'autre extrême. Les quatre répartitions restent toutes dans l'AMDR reconnu au niveau national, donc aucune n'est un ratio extrême ou de régime à la mode."
+            },
+            {
+              "question": "Que faire si je connais mon apport idéal en protéines en grammes par kilogramme plutôt qu'en pourcentage ?",
+              "answer": "Vous pouvez toujours utiliser cet outil comme point de départ puis ajuster manuellement : multipliez votre poids corporel en kilogrammes par votre objectif en g/kg de protéines pour obtenir directement les grammes de protéines, convertissez cela en calories (× 4), et traitez les calories restantes comme le total à répartir entre glucides et lipides selon le ratio qui vous convient."
+            },
+            {
+              "question": "Ces répartitions de macronutriments conviennent-elles à tout le monde ?",
+              "answer": "Ce sont des estimations générales au niveau de la population dans des fourchettes scientifiques acceptées, et non des conseils nutritionnels médicaux ou sportifs personnalisés. Les personnes ayant des conditions médicales spécifiques (maladie rénale, diabète), les personnes enceintes ou allaitantes, et les athlètes de compétition ayant des besoins spécialisés devraient travailler avec un(e) diététicien(ne) nutritionniste agréé(e) ou un médecin pour fixer des objectifs de macronutriments adaptés à leur situation spécifique."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "L'idée de compter les aliments en termes de leurs composants générateurs d'énergie remonte au chimiste du XIXe siècle Wilbur Olin Atwater, dont les expériences approfondies de combustion et de métabolisme à l'Université Wesleyan ont établi les \"facteurs généraux d'Atwater\" (4 kcal/g pour les protéines et les glucides, 9 kcal/g pour les lipides) encore imprimés sur les étiquettes nutritionnelles du monde entier aujourd'hui. Le \"comptage des macros\" en tant que cadre diététique populaire — viser délibérément des objectifs quotidiens en grammes pour chaque macronutriment plutôt qu'un simple chiffre calorique — s'est répandu dans les communautés de musculation et de fitness à partir des années 1990 et 2000, s'appuyant directement sur les facteurs de conversion énergétique centenaires d'Atwater."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Le consensus scientifique sur les fourchettes de macronutriments a été formalisé par les Académies nationales des sciences des États-Unis (alors l'Institute of Medicine) dans son rapport sur les apports nutritionnels de référence de 2005, qui a établi les fourchettes de distribution acceptable des macronutriments à partir desquelles sont construites les répartitions de cette calculatrice. Des recherches plus récentes en nutrition sportive, en particulier les prises de position de la Société internationale de nutrition sportive, ont encore affiné les recommandations en protéines spécifiquement pour les personnes pratiquant l'entraînement en résistance ou la restriction calorique, soutenant généralement un apport relatif en protéines plus élevé que la moyenne de la population — la base des ajustements spécifiques à l'objectif de cette calculatrice au sein de la fourchette plus large acceptée."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La science des macronutriments est étudiée en science nutritionnelle et diététique, au sein du domaine plus large des sciences de la santé. Voici cinq programmes reconnus dans ce domaine, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "Université Tufts — Friedman School of Nutrition Science and Policy",
+                "note": "Une école supérieure américaine de premier plan consacrée exclusivement à la science de la nutrition.",
+                "url": "https://nutrition.tufts.edu/",
+                "online": "Certains programmes de troisième cycle proposent des options en ligne ; le doctorat de recherche principal est en présentiel."
+              },
+              {
+                "name": "Harvard T.H. Chan School of Public Health — Department of Nutrition",
+                "note": "Un centre de premier plan pour l'épidémiologie nutritionnelle et la recherche en nutrition de santé publique.",
+                "url": "https://www.hsph.harvard.edu/nutrition/",
+                "online": "Non — le programme doctoral principal est en présentiel."
+              },
+              {
+                "name": "University of Illinois Urbana-Champaign — Division of Nutritional Sciences",
+                "note": "L'un des programmes de sciences nutritionnelles les plus grands et les plus établis aux États-Unis.",
+                "url": "https://dns.illinois.edu/",
+                "online": "Non — le programme de recherche de troisième cycle est en présentiel."
+              },
+              {
+                "name": "King's College de Londres — Department of Nutritional Sciences",
+                "note": "Un centre européen de premier plan pour la recherche en sciences nutritionnelles.",
+                "url": "https://www.kcl.ac.uk/lsm/research/divisions/dns",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Université Deakin — Institute for Physical Activity and Nutrition (IPAN)",
+                "note": "Un institut de recherche de premier plan pour la nutrition et les sciences de l'exercice en Australie.",
+                "url": "https://www.deakin.edu.au/ipan",
+                "online": "Non — la formation de recherche et clinique est en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de nutrition et sciences alimentaires",
+                "note": "Fondée en 1866 ; un programme régional de premier plan en science de la nutrition.",
+                "url": "https://www.aub.edu.lb/fafs/nfsc/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Institute of Medicine. (2005). Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. National Academies Press.",
+          "note": "Le rapport officiel des Académies nationales des États-Unis établissant les fourchettes de distribution acceptable des macronutriments (AMDR) à partir desquelles sont choisies les répartitions spécifiques à l'objectif de cette calculatrice.",
+          "url": "https://doi.org/10.17226/10490",
+          "readOriginal": "Consulter le rapport original"
+        }
+      }
     }
   },
   "toolPage": {
