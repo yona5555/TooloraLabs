@@ -18294,6 +18294,174 @@
           "readOriginal": "Forschung ansehen"
         }
       }
+    },
+    "fuel-cost-calculator": {
+      "title": "Kraftstoffkostenrechner",
+      "description": "Schätze die Kraftstoffkosten einer Fahrt anhand von Entfernung, Verbrauchsrate und Kraftstoffpreis.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Fahrtdetails",
+        "distanceLabel": "Fahrtstrecke",
+        "rateModeLabel": "Angabetyp",
+        "rateModes": {
+          "consumption": "Kraftstoff pro Strecke (z.B. L/100km)",
+          "efficiency": "Strecke pro Kraftstoff (z.B. km/L, mpg)"
+        },
+        "rateValueLabelConsumption": "Kraftstoffverbrauchsrate",
+        "rateValueLabelEfficiency": "Kraftstoffeffizienzrate",
+        "rateValueHintConsumption": "Wie viel Kraftstoff dein Fahrzeug pro 100 Streckeneinheiten verbraucht (z.B. 8 L pro 100 km).",
+        "rateValueHintEfficiency": "Wie weit dein Fahrzeug pro Kraftstoffeinheit fährt (z.B. 12,5 km pro Liter oder 30 Meilen pro Gallone).",
+        "priceLabel": "Kraftstoffpreis (pro Einheit)",
+        "priceHint": "Preis pro Liter oder Gallone, passend zur oben verwendeten Kraftstoffeinheit."
+      },
+      "diagram": {
+        "ariaLabel": "Flussdiagramm von Fahrtstrecke über verbrauchten Kraftstoff zu Gesamtkosten",
+        "distance": "Strecke",
+        "fuelUsed": "Verbrauchter Kraftstoff",
+        "totalCost": "Gesamtkosten"
+      },
+      "result": {
+        "heading": "Geschätzte Kosten",
+        "invalidDistance": "Gib eine Fahrtstrecke größer als null ein.",
+        "invalidRate": "Gib eine Verbrauchs- oder Effizienzrate größer als null ein.",
+        "invalidPrice": "Gib einen Kraftstoffpreis größer als null ein.",
+        "fuelUsedLabel": "Verbrauchter Kraftstoff",
+        "costPerDistanceLabel": "Kosten pro Streckeneinheit"
+      },
+      "quickReference": {
+        "title": "Die Rechnung",
+        "intro": "Die Berechnung hängt vom gewählten Angabetyp ab, aber beide enden mit Kosten = verbrauchter Kraftstoff × Preis."
+      },
+      "education": {
+        "intro": {
+          "title": "Kraftstoffkostenschätzung verstehen",
+          "paragraph1": "Die Schätzung der Kraftstoffkosten einer Fahrt läuft darauf hinaus, herauszufinden, wie viel Kraftstoff die Fahrt verbrauchen wird, und diese Menge dann mit dem Kraftstoffpreis zu multiplizieren. Der Kraftstoffverbrauch selbst kann auf zwei mathematisch gleichwertige, aber unterschiedlich formulierte Arten beschrieben werden: als Verbrauchsrate (wie viel Kraftstoff pro fester Strecke verbraucht wird, wie Liter pro 100 Kilometer, in den meisten Teilen der Welt üblich) oder als Effizienzrate (wie weit ein Fahrzeug pro Kraftstoffeinheit fährt, wie Kilometer pro Liter oder Meilen pro Gallone, in den USA und Großbritannien üblich).",
+          "paragraph2": "Die beiden Angabetypen sind lediglich zur Vereinfachung umgestellte Kehrwerte voneinander: Ein Auto, das 8 Liter pro 100 km verbraucht, ist genauso effizient wie eines, das 12,5 km pro Liter fährt (da 100 ÷ 8 = 12,5). Dieser Rechner akzeptiert beide Formate direkt, sodass du die Verbrauchswerte deines Fahrzeugs nicht in ein anderes Format umrechnen musst, bevor du die Kosten einer Fahrt schätzt — du musst nur sicherstellen, dass die Streckeneinheit und die Streckeneinheit der Verbrauchsrate übereinstimmen (beide in Kilometern oder beide in Meilen)."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Die Kraftstoffkostenschätzung ist überall dort nützlich, wo die Kosten einer Fahrt im Voraus geplant oder verglichen werden müssen.",
+          "items": [
+            {
+              "title": "Budgetierung von Roadtrips",
+              "description": "Das Schätzen der gesamten Kraftstoffkosten für eine lange Fahrt vor dem Aufbruch, um ein Reisebudget zusammen mit Unterkunfts- und Verpflegungskosten zu planen."
+            },
+            {
+              "title": "Fahrzeuge vergleichen",
+              "description": "Das Vergleichen der Betriebskosten zweier verschiedener Fahrzeuge mit unterschiedlichen Kraftstoffeffizienzwerten auf derselben regelmäßigen Pendelstrecke oder Route."
+            },
+            {
+              "title": "Kostenaufteilung bei Fahrgemeinschaften und Lieferungen",
+              "description": "Das Schätzen eines fairen Kraftstoffkostenbeitrags pro Person oder pro Lieferung basierend auf der gefahrenen Strecke und der Kraftstoffeffizienz des Fahrzeugs."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Kraftstoffkostenberechnungen, berechnet genau so, wie dieses Tool sie berechnet.",
+          "columnScenario": "Szenario",
+          "columnResult": "Ergebnis",
+          "rows": [
+            {
+              "scenario": "500 km Fahrt, 8 L/100km, 1,50$/L",
+              "result": "40 L verbraucht, 60,00$ gesamt"
+            },
+            {
+              "scenario": "500 km Fahrt, 12,5 km/L, 1,50$/L",
+              "result": "40 L verbraucht, 60,00$ gesamt"
+            },
+            {
+              "scenario": "300 Meilen Fahrt, 30 mpg, 3,50$/gal",
+              "result": "10 gal verbraucht, 35,00$ gesamt"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Welchen Angabetyp sollte ich verwenden?",
+              "answer": "Verwende die Angabe, die bereits im Handbuch oder auf dem Display deines Fahrzeugs angezeigt wird. Die meisten Teile der Welt (Europa, der Großteil Asiens) geben den Kraftstoffverbrauch in Liter pro 100 km an, während die USA und Großbritannien typischerweise die Kraftstoffeffizienz in Meilen pro Gallone angeben."
+            },
+            {
+              "question": "Muss ich Kilometer in Meilen oder Liter in Gallonen umrechnen?",
+              "answer": "Nein — dieser Rechner führt keine Einheitenumrechnungen zwischen Maßsystemen durch. Stelle nur sicher, dass die eingegebene Strecke und die durch deine Verbrauchsrate implizierte Streckeneinheit übereinstimmen (beide Kilometer oder beide Meilen), und dass dein Preis pro derselben Kraftstoffeinheit (Liter oder Gallone) wie deine Verbrauchsrate angegeben ist."
+            },
+            {
+              "question": "Berücksichtigt dies Verkehr, Gelände oder Fahrstil?",
+              "answer": "Nein. Dieser Rechner verwendet eine einzige, feste Kraftstoffverbrauchsrate, die du angibst, und geht davon aus, dass sie gleichmäßig für die gesamte Fahrt gilt. Der reale Kraftstoffverbrauch variiert mit Verkehr, Straßensteigung, Geschwindigkeit, Ladungsgewicht und Fahrgewohnheiten, also behandle das Ergebnis als Schätzung und nicht als exakte Vorhersage."
+            },
+            {
+              "question": "Was bedeutet \"Kosten pro Streckeneinheit\"?",
+              "answer": "Das sind die gesamten Fahrtkosten geteilt durch die Gesamtstrecke, was dir einen Kosten-pro-Kilometer- oder Kosten-pro-Meile-Wert gibt, der nützlich ist, um Fahrten unterschiedlicher Länge zu vergleichen oder mit einem Erstattungssatz pro Meile zu vergleichen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Messung des Kraftstoffverbrauchs wurde nach der Ölkrise von 1973 zu einer Angelegenheit von öffentlichem und regulatorischem Interesse, als Kraftstoffknappheit und Preisspitzen Regierungen dazu veranlassten, eine standardisierte Kraftstoffverbrauchskennzeichnung für neue Fahrzeuge vorzuschreiben. Die USA führten 1975 die Corporate Average Fuel Economy (CAFE)-Standards ein, angegeben in Meilen pro Gallone, während der Großteil der übrigen Welt die Liter-pro-100-Kilometer-Konvention übernahm, die den praktischen Vorteil hat, dass eine niedrigere Zahl immer eine bessere Effizienz bedeutet (im Gegensatz zu Meilen pro Gallone, wo eine höhere Zahl besser ist, was direkte Vergleiche weniger intuitiv macht)."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Moderne Fahrzeuge verfügen über eingebaute Bordcomputer, die den Echtzeit- und Durchschnittskraftstoffverbrauch anhand von Daten des Motorsteuergeräts schätzen, obwohl offizielle Kraftstoffverbrauchsbewertungen (wie die der EPA in den USA oder das WLTP-Testverfahren in der Europäischen Union) unter standardisierten Laborbedingungen gemessen werden, die möglicherweise nicht genau dem realen Fahren entsprechen, weshalb reale Kraftstoffkosten oft etwas höher ausfallen, als die offizielle Bewertung vermuten lässt."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Kraftstoffeffizienz und Energieverbrauch von Fahrzeugen werden im Maschinenbau und in der Fahrzeugtechnik untersucht. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mechanical Engineering",
+                "note": "Eine der weltweit führenden Abteilungen für Maschinenbau mit starker Automobil- und Energiesystemforschung.",
+                "url": "https://meche.mit.edu/degree-programs",
+                "online": "Nein — die zentralen Forschungsstudiengänge der Abteilung sind Präsenzstudiengänge."
+              },
+              {
+                "name": "Stanford University — Department of Mechanical Engineering",
+                "note": "Ein führendes Zentrum für Automobil- und Energietechnikforschung.",
+                "url": "https://me.stanford.edu/academics/graduate",
+                "online": "Nein — das Programm ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Michigan — Department of Mechanical Engineering",
+                "note": "Beheimatet eines der größten Automobiltechnik-Forschungsprogramme in den USA, eng mit der Automobilindustrie verbunden.",
+                "url": "https://me.engin.umich.edu/academics/graduate/",
+                "online": "Nein — die Forschungsstudiengänge der Abteilung sind Präsenzstudiengänge."
+              },
+              {
+                "name": "University of Cambridge — Department of Engineering",
+                "note": "Eine führende Ingenieurabteilung mit starken Forschungsgruppen für Energie und Verkehr.",
+                "url": "https://www.eng.cam.ac.uk/postgraduate",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Ingenieurabteilung statt."
+              },
+              {
+                "name": "Technische Universität München — Department of Mechanical Engineering",
+                "note": "Eine der führenden Automobiltechnik-Abteilungen Europas, eng mit der deutschen Automobilindustrie verbunden.",
+                "url": "https://www.mw.tum.de/en/mw/for-prospective-students/doctorate/",
+                "online": "Nein — die Forschungsstudiengänge sind Präsenzstudiengänge."
+              },
+              {
+                "name": "American University of Beirut — Department of Mechanical Engineering",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/msfea/mech/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "U.S. Environmental Protection Agency & U.S. Department of Energy. (2024). Fuel Economy Guide.",
+          "note": "Die offizielle Referenz der US-Regierung, die erklärt, wie Kraftstoffverbrauch getestet und bewertet wird und wie sich reales Fahren auf den Kraftstoffverbrauch auswirkt.",
+          "url": "https://www.fueleconomy.gov/",
+          "readOriginal": "Referenz ansehen"
+        }
+      }
     }
   },
   "toolPage": {

@@ -18290,6 +18290,174 @@
           "readOriginal": "View the Research"
         }
       }
+    },
+    "fuel-cost-calculator": {
+      "title": "Fuel Cost Calculator",
+      "description": "Estimate the fuel cost of a trip from distance, fuel consumption rate, and fuel price.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Trip Details",
+        "distanceLabel": "Trip Distance",
+        "rateModeLabel": "Rate Type",
+        "rateModes": {
+          "consumption": "Fuel per Distance (e.g. L/100km)",
+          "efficiency": "Distance per Fuel (e.g. km/L, mpg)"
+        },
+        "rateValueLabelConsumption": "Fuel Consumption Rate",
+        "rateValueLabelEfficiency": "Fuel Efficiency Rate",
+        "rateValueHintConsumption": "How much fuel your vehicle uses per 100 distance units (e.g. 8 L per 100 km).",
+        "rateValueHintEfficiency": "How far your vehicle travels per unit of fuel (e.g. 12.5 km per liter, or 30 miles per gallon).",
+        "priceLabel": "Fuel Price (per Unit)",
+        "priceHint": "Price per liter or per gallon, matching the fuel unit used above."
+      },
+      "diagram": {
+        "ariaLabel": "Flow diagram from trip distance to fuel used to total cost",
+        "distance": "Distance",
+        "fuelUsed": "Fuel Used",
+        "totalCost": "Total Cost"
+      },
+      "result": {
+        "heading": "Estimated Cost",
+        "invalidDistance": "Enter a trip distance greater than zero.",
+        "invalidRate": "Enter a fuel consumption or efficiency rate greater than zero.",
+        "invalidPrice": "Enter a fuel price greater than zero.",
+        "fuelUsedLabel": "Fuel Used",
+        "costPerDistanceLabel": "Cost per Distance Unit"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "The calculation depends on which rate type you choose, but both end with cost = fuel used × price."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Fuel Cost Estimation",
+          "paragraph1": "Estimating the fuel cost of a trip comes down to figuring out how much fuel the trip will consume, then multiplying that amount by the price of fuel. Fuel usage itself can be described in two mathematically equivalent but differently worded ways: as a consumption rate (how much fuel is used per fixed distance, like liters per 100 kilometers, common in most of the world) or as an efficiency rate (how far a vehicle travels per unit of fuel, like kilometers per liter or miles per gallon, common in the United States and United Kingdom).",
+          "paragraph2": "The two rate types are just inverses of each other rearranged for convenience: a car using 8 liters per 100 km is exactly as efficient as one traveling 12.5 km per liter (since 100 ÷ 8 = 12.5). This calculator accepts either style directly, so you don't need to convert your vehicle's fuel economy figures into a different format before estimating a trip's cost — you just need to keep the distance unit and the fuel-rate's distance unit consistent (both in kilometers, or both in miles)."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Fuel cost estimation is useful anywhere a trip's cost needs to be planned or compared in advance.",
+          "items": [
+            {
+              "title": "Road Trip Budgeting",
+              "description": "Estimating the total fuel cost for a long drive before setting out, to plan a travel budget alongside accommodation and food costs."
+            },
+            {
+              "title": "Comparing Vehicles",
+              "description": "Comparing the running cost of two different vehicles with different fuel efficiency ratings over the same regular commute or route."
+            },
+            {
+              "title": "Ride-Sharing and Delivery Cost Splitting",
+              "description": "Estimating a fair per-person or per-delivery fuel cost contribution based on the distance driven and the vehicle's fuel efficiency."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few fuel cost calculations, computed the same way this tool computes them.",
+          "columnScenario": "Scenario",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "scenario": "500 km trip, 8 L/100km, $1.50/L",
+              "result": "40 L used, $60.00 total"
+            },
+            {
+              "scenario": "500 km trip, 12.5 km/L, $1.50/L",
+              "result": "40 L used, $60.00 total"
+            },
+            {
+              "scenario": "300 mi trip, 30 mpg, $3.50/gal",
+              "result": "10 gal used, $35.00 total"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Which rate type should I use?",
+              "answer": "Use whichever figure your vehicle's manual or dashboard already shows. Most of the world (Europe, most of Asia) reports fuel consumption in liters per 100 km, while the United States and United Kingdom typically report fuel efficiency in miles per gallon."
+            },
+            {
+              "question": "Do I need to convert kilometers to miles or liters to gallons?",
+              "answer": "No — this calculator does not perform unit conversions between measurement systems. Just make sure the distance you enter and the distance unit implied by your rate figure match (both kilometers, or both miles), and that your price is per the same fuel unit (liter or gallon) as your rate figure."
+            },
+            {
+              "question": "Does this account for traffic, terrain, or driving style?",
+              "answer": "No. This calculator uses a single, fixed fuel-consumption rate that you provide, and assumes it applies uniformly across the whole trip. Real-world fuel economy varies with traffic, road grade, speed, cargo weight, and driving habits, so treat the result as an estimate rather than an exact prediction."
+            },
+            {
+              "question": "What does \"cost per distance unit\" mean?",
+              "answer": "It's the total trip cost divided by the total distance, giving you a per-kilometer or per-mile cost figure that's useful for comparing trips of different lengths or comparing against a per-mile reimbursement rate."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Fuel economy measurement became a matter of public and regulatory interest following the 1973 oil crisis, when fuel shortages and price spikes pushed governments to require standardized fuel economy labeling on new vehicles. The United States introduced Corporate Average Fuel Economy (CAFE) standards in 1975, reported in miles per gallon, while most of the rest of the world adopted the liters-per-100-kilometers convention, which has the practical advantage that a lower number always means better efficiency (unlike miles per gallon, where a higher number is better, making direct differences less intuitive to compare)."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern vehicles include onboard trip computers that estimate real-time and average fuel consumption using data from the engine control unit, though official fuel economy ratings (like those from the EPA in the United States or the WLTP test procedure in the European Union) are measured under standardized laboratory conditions that may not exactly match real-world driving, which is why real-world fuel costs often run somewhat higher than the official rating would suggest."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Vehicle fuel efficiency and energy consumption are studied within mechanical and automotive engineering. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mechanical Engineering",
+                "note": "One of the world's leading mechanical engineering departments, with strong automotive and energy systems research.",
+                "url": "https://meche.mit.edu/degree-programs",
+                "online": "No — the department's core research degrees are in-residence."
+              },
+              {
+                "name": "Stanford University — Department of Mechanical Engineering",
+                "note": "A leading center for automotive and energy engineering research.",
+                "url": "https://me.stanford.edu/academics/graduate",
+                "online": "No — the program is an in-residence research degree."
+              },
+              {
+                "name": "University of Michigan — Department of Mechanical Engineering",
+                "note": "Home to one of the largest automotive engineering research programs in the United States, closely tied to the auto industry.",
+                "url": "https://me.engin.umich.edu/academics/graduate/",
+                "online": "No — the department's research degrees are in-residence."
+              },
+              {
+                "name": "University of Cambridge — Department of Engineering",
+                "note": "A leading engineering department with strong energy and transport research groups.",
+                "url": "https://www.eng.cam.ac.uk/postgraduate",
+                "online": "No — research degrees are in-residence at the Department of Engineering."
+              },
+              {
+                "name": "Technical University of Munich — Department of Mechanical Engineering",
+                "note": "One of Europe's leading automotive engineering departments, closely tied to Germany's automotive industry.",
+                "url": "https://www.mw.tum.de/en/mw/for-prospective-students/doctorate/",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "American University of Beirut — Department of Mechanical Engineering",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/mech/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "U.S. Environmental Protection Agency & U.S. Department of Energy. (2024). Fuel Economy Guide.",
+          "note": "The official U.S. government reference explaining how fuel economy is tested and rated, and how real-world driving affects fuel consumption.",
+          "url": "https://www.fueleconomy.gov/",
+          "readOriginal": "View the Reference"
+        }
+      }
     }
   },
   "toolPage": {
