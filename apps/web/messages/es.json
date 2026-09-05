@@ -8101,7 +8101,9 @@
       "form": {
         "inputTitle": "Entradas de la Matriz",
         "matrixALabel": "Matriz A",
-        "matrixBLabel": "Matriz B"
+        "matrixBLabel": "Matriz B",
+        "calculate": "Calcular",
+        "clear": "Borrar"
       },
       "result": {
         "heading": "Resultado",
@@ -8112,7 +8114,14 @@
         "transposeA": "Transpuesta de A",
         "inverseA": "Inversa de A",
         "determinantA": "Determinante de A",
-        "determinantB": "Determinante de B"
+        "determinantB": "Determinante de B",
+        "emptyStateMessage": "Introduce ambas matrices y pulsa \"Calcular\" para ver el conjunto completo de resultados.",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramTransformCaption": "El cuadrado unitario (punteado) y el paralelogramo al que la matriz A lo transforma — las columnas de A son exactamente el punto donde caen los dos lados del cuadrado.",
+        "diagramBTitle": "Qué hace la matriz B",
+        "diagramBIntro": "La misma imagen, para la matriz B: el cuadrado unitario transformado a través de las columnas de B.",
+        "diagramBCaption": "El cuadrado unitario (punteado) y el paralelogramo al que la matriz B lo transforma."
       },
       "education": {
         "intro": {
@@ -8167,6 +8176,14 @@
             {
               "question": "¿Por qué la suma de matrices es mucho más simple que la multiplicación de matrices?",
               "answer": "La suma combina dos matrices de la misma forma en que sumarías dos cuadrículas ordinarias de números — posición por posición, sin ninguna interacción entre filas o columnas distintas. La multiplicación, por diseño, busca representar la composición de dos transformaciones (aplicar una después de la otra), y esa composición mezcla inherentemente cada fila de una matriz con cada columna de la otra, razón por la cual necesita el cálculo más elaborado de fila por columna."
+            },
+            {
+              "question": "¿Qué significa realmente que una matriz sea singular?",
+              "answer": "Una matriz singular — con determinante cero — aplasta cada punto del plano sobre una sola línea o incluso un solo punto, tal como la matriz [[2,4],[1,2]] aplasta todo el plano sobre la línea y = x/2. Como varios puntos de partida distintos terminan en el mismo lugar, no hay forma de revertir ese aplastamiento y recuperar la entrada original, que es precisamente por qué una matriz singular no tiene inversa."
+            },
+            {
+              "question": "¿Por qué componer dos transformaciones corresponde a la multiplicación de matrices?",
+              "answer": "Aplicar la transformación B y luego la transformación A a un vector v significa calcular A(Bv). Al desarrollarlo algebraicamente — sustituyendo el efecto de B sobre cada coordenada en la fórmula de A — se obtiene exactamente la aritmética de fila por columna que define la multiplicación de matrices, así que (AB)v siempre es igual a A(Bv) por construcción, no por coincidencia."
             }
           ]
         },
@@ -8221,6 +8238,10 @@
                 "online": "No — el programa de 60 créditos se imparte en el campus de la Universidad Khalifa en Abu Dabi."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "De las tarjetas perforadas a los píxeles: las matrices en la computación moderna",
+            "paragraph": "La aritmética matricial es el sustrato literal de los gráficos por computadora modernos: cada GPU está construida arquitectónicamente para multiplicar millones de matrices pequeñas por segundo, ya que cada rotación, escalado y proyección de cámara en una escena 3D es una operación matricial aplicada a un vértice. Esa misma aritmética, escalada a matrices con millones de filas y columnas, es también lo que impulsa las redes neuronales modernas — el \"paso hacia adelante\" de una red es, mecánicamente, una larga secuencia de multiplicaciones de matrices, por lo que el hardware especializado en multiplicación de matrices (núcleos tensoriales) se ha vuelto central en la infraestructura moderna de IA."
           }
         },
         "references": {
@@ -8229,7 +8250,74 @@
           "note": "El artículo del analista numérico Nicholas J. Higham, escrito para el 150.º aniversario del memorándum de Cayley de 1858, traza los papeles que Cayley y Sylvester desempeñaron cada uno en la fundación de la teoría de matrices como materia matemática propia.",
           "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
           "readOriginal": "Leer el Artículo Original"
+        },
+        "variables": {
+          "title": "Entendiendo cada operación",
+          "intro": "Cuatro relaciones matriciales más que merecen verse por separado, cada una con su propia imagen en vez de solo una fórmula.",
+          "determinant": {
+            "title": "El determinante como área",
+            "description": "El determinante no es solo una fórmula para memorizar — es literalmente el área del paralelogramo al que una matriz transforma el cuadrado unitario (con signo: positivo cuando se conserva la orientación, negativo cuando la matriz voltea el plano). Una matriz que estira el espacio tiene un determinante mayor que 1 en valor absoluto; una que lo comprime tiene un determinante entre 0 y 1; y una matriz singular (determinante 0) aplasta todo el plano hasta una línea, por lo que destruye información de forma irreversible.",
+            "diagramCaption": "La imagen del cuadrado unitario bajo la matriz A, con su área — igual a |det(A)| — sombreada y etiquetada."
+          },
+          "composition": {
+            "title": "La multiplicación de matrices como composición de transformaciones",
+            "description": "A×B significa \"aplica primero B, luego aplica A al resultado\" — multiplicar dos matrices es la misma operación que encadenar sus transformaciones una tras otra. Esta es también la razón geométrica por la que A×B normalmente no es igual a B×A: transformar una figura primero con B y luego con A generalmente no llega al mismo lugar que hacerlo en el orden opuesto, tal como girar un libro y luego aplanarlo da un resultado distinto que aplanarlo y luego girarlo.",
+            "diagramCaption": "El cuadrado unitario transformado solo por B (naranja), y el mismo cuadrado transformado por A×B — la transformación de B seguida de la de A (morado)."
+          },
+          "inverse": {
+            "title": "La inversa como transformación \"deshacer\"",
+            "description": "Si A estira el cuadrado unitario hasta convertirlo en un paralelogramo, A⁻¹ es la transformación específica que toma ese mismo paralelogramo y lo pliega de vuelta al cuadrado unitario — geométricamente, aplicar A y luego A⁻¹ (o al revés) siempre te devuelve al punto de partida, que es lo que realmente significa la ecuación A×A⁻¹ = I. Una matriz singular (determinante 0) no tiene inversa porque ya ha descartado información al aplastar el plano sobre una línea, y ninguna transformación puede recuperar una dimensión ya colapsada.",
+            "diagramCaption": "La imagen del cuadrado unitario bajo la matriz A (azul) junto a la imagen del cuadrado unitario bajo A⁻¹ (turquesa) — cada una deshace a la otra."
+          },
+          "transpose": {
+            "title": "La transpuesta como un giro diagonal",
+            "description": "A diferencia de las otras tres operaciones, la transpuesta en realidad no trata de transformar el espacio — es una reordenación puramente mecánica de las entradas de la matriz. Las dos entradas diagonales (a₁₁ y a₂₂) permanecen exactamente donde están; las dos entradas fuera de la diagonal (a₁₂ y a₂₁) simplemente intercambian sus lugares. Esa es toda la operación, por lo que siempre está definida, para cualquier matriz, sin importar el determinante.",
+            "diagramCaption": "Las cuatro entradas de la matriz A: el par diagonal permanece fijo, mientras que el par fuera de la diagonal intercambia lugares para formar Aᵀ."
+          }
+        },
+        "applications": {
+          "title": "Aplicaciones en el mundo real",
+          "intro": "Las operaciones matriciales no se limitan a un curso de álgebra lineal — son la maquinaria que opera detrás de varios campos que tocan la vida cotidiana.",
+          "items": [
+            {
+              "title": "Gráficos por computadora: rotar, escalar e inclinar",
+              "description": "Todo motor de gráficos 2D o 3D representa la rotación, el escalado y la inclinación como matrices, y mueve un objeto multiplicando sus vectores de coordenadas por esa matriz — exactamente la transformación que esta calculadora visualiza para el cuadrado unitario. Combinar varios efectos (rotar, luego escalar, luego trasladar) se hace multiplicando primero las matrices individuales entre sí, la misma composición que ilustra la sección de multiplicación de matrices de esta página."
+            },
+            {
+              "title": "Economía: modelos insumo-producto",
+              "description": "El modelo insumo-producto de Wassily Leontief, galardonado con el Nobel, representa toda una economía como una matriz, donde cada entrada capta cuánto de la producción de una industria consume otra como insumo. Averiguar cómo un cambio en la demanda de un producto repercute en todas las demás industrias se reduce a invertir una matriz — la misma operación que esta calculadora computa para un caso 2x2."
+            },
+            {
+              "title": "Criptografía: cifrado de Hill",
+              "description": "El cifrado de Hill, uno de los primeros en usar álgebra lineal, cifra un mensaje multiplicando bloques de letras (convertidas en números) por una matriz de cifrado fija, y los descifra multiplicando por la inversa de esa matriz — precisamente por eso la matriz de cifrado debe ser invertible (determinante distinto de cero) para que el cifrado sea reversible."
+            },
+            {
+              "title": "Ciencia de datos: resolver sistemas de ecuaciones",
+              "description": "Muchas técnicas de aprendizaje automático y estadística — desde la regresión lineal hasta resolver sistemas de ecuaciones simultáneas — se reducen internamente a operaciones matriciales. Encontrar los coeficientes de mejor ajuste en una regresión lineal, por ejemplo, implica multiplicar e invertir matrices construidas a partir de los datos de entrada, generalizando la misma aritmética de determinante e inversa que esta calculadora realiza en un ejemplo 2x2."
+            }
+          ]
         }
+      },
+      "relatedTools": {
+        "title": "Herramientas matemáticas relacionadas"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir y exportar",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "contactSectionTitle": "Información de contacto (opcional)",
+        "preparedForTitle": "Preparado para",
+        "contactName": "Nombre",
+        "contactEmail": "Correo electrónico",
+        "contactPhone": "Teléfono",
+        "contactOrganization": "Organización",
+        "contactAddress": "Dirección",
+        "contactNamePlaceholder": "p. ej. Juan Pérez",
+        "contactEmailPlaceholder": "p. ej. juan@ejemplo.com",
+        "contactPhonePlaceholder": "p. ej. +34 612 345 678",
+        "contactOrganizationPlaceholder": "p. ej. Empresa S.L.",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Madrid"
       }
     },
     "molar-mass-calculator": {

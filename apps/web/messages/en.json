@@ -8097,7 +8097,9 @@
       "form": {
         "inputTitle": "Matrix Entries",
         "matrixALabel": "Matrix A",
-        "matrixBLabel": "Matrix B"
+        "matrixBLabel": "Matrix B",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Result",
@@ -8108,7 +8110,14 @@
         "transposeA": "Transpose of A",
         "inverseA": "Inverse of A",
         "determinantA": "Determinant of A",
-        "determinantB": "Determinant of B"
+        "determinantB": "Determinant of B",
+        "emptyStateMessage": "Enter both matrices and press Calculate to see the full set of results.",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramTransformCaption": "The unit square (dashed) and the parallelogram matrix A maps it to — the columns of A are exactly where the square's two edges land.",
+        "diagramBTitle": "What Matrix B Does",
+        "diagramBIntro": "The same picture, for matrix B: the unit square mapped through B's columns.",
+        "diagramBCaption": "The unit square (dashed) and the parallelogram matrix B maps it to."
       },
       "education": {
         "intro": {
@@ -8163,6 +8172,14 @@
             {
               "question": "Why is matrix addition so much simpler than matrix multiplication?",
               "answer": "Addition combines two matrices the same way you'd add two ordinary grids of numbers — position by position, with no interaction between different rows or columns. Multiplication, by design, is meant to represent composing two transformations (applying one after another), and that composition inherently mixes each row of one matrix with each column of the other, which is why it needs the more involved row-times-column calculation."
+            },
+            {
+              "question": "What does it actually mean for a matrix to be singular?",
+              "answer": "A singular matrix — one with a determinant of zero — collapses every point in the plane onto a single line or even a single point, the way matrix [[2,4],[1,2]] squashes the entire plane onto the line y = x/2. Because multiple different starting points end up at the same place, there's no way to reverse that collapse and recover the original input, which is exactly why a singular matrix has no inverse."
+            },
+            {
+              "question": "Why does composing two transformations correspond to matrix multiplication?",
+              "answer": "Applying transformation B and then transformation A to a vector v means computing A(Bv). Working through that algebraically — substituting B's effect on each coordinate into A's formula — produces exactly the row-times-column arithmetic that defines matrix multiplication, so (AB)v always equals A(Bv) by construction, not by coincidence."
             }
           ]
         },
@@ -8217,6 +8234,10 @@
                 "online": "No — the 60-credit-hour program is delivered on Khalifa University's campus in Abu Dhabi."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "From Punch Cards to Pixels: Matrices in Modern Computing",
+            "paragraph": "Matrix arithmetic is the literal substrate of modern computer graphics: every GPU is architecturally built to multiply millions of small matrices per second, since every rotation, scaling, and camera projection in a 3D scene is a matrix operation applied to a vertex. The same arithmetic, scaled up to matrices with millions of rows and columns, is also what powers modern neural networks — a network's \"forward pass\" is, mechanically, a long sequence of matrix multiplications, which is why specialized matrix-multiplication hardware (tensor cores) has become central to modern AI infrastructure."
           }
         },
         "references": {
@@ -8225,7 +8246,74 @@
           "note": "Numerical analyst Nicholas J. Higham's paper, written for the 150th anniversary of Cayley's 1858 memoir, traces the roles Cayley and Sylvester each played in founding matrix theory as a distinct mathematical subject.",
           "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
           "readOriginal": "Read the Original Paper"
+        },
+        "variables": {
+          "title": "Understanding Each Operation",
+          "intro": "Four more matrix relationships worth seeing on their own, each with its own picture instead of just a formula.",
+          "determinant": {
+            "title": "Determinant as Area",
+            "description": "The determinant isn't just a formula to memorize — it's literally the area of the parallelogram a matrix maps the unit square onto (with a sign: positive when orientation is preserved, negative when the matrix flips the plane over). A matrix that stretches space out has a determinant greater than 1 in absolute value; one that compresses space has a determinant between 0 and 1; and a singular matrix (determinant 0) squashes the entire plane down to a line, which is why it destroys information and can't be undone.",
+            "diagramCaption": "Matrix A's image of the unit square, with its area — equal to |det(A)| — shaded and labeled."
+          },
+          "composition": {
+            "title": "Matrix Multiplication as Composing Transformations",
+            "description": "A×B means \"first apply B, then apply A to the result\" — multiplying two matrices is the same operation as chaining their transformations one after another. That's also the geometric reason A×B usually isn't the same as B×A: transforming a shape with B first and then A doesn't generally land in the same place as doing it in the opposite order, just as rotating a book and then flattening it gives a different result than flattening it and then rotating it.",
+            "diagramCaption": "The unit square mapped by B alone (orange), and the same square mapped by A×B — B's transformation followed by A's (purple)."
+          },
+          "inverse": {
+            "title": "The Inverse as an \"Undo\" Transformation",
+            "description": "If A stretches the unit square into a parallelogram, A⁻¹ is the specific transformation that takes that exact parallelogram and folds it back into the unit square — geometrically, applying A and then A⁻¹ (or the reverse) always lands you back where you started, which is what the equation A×A⁻¹ = I actually means. A singular matrix (determinant 0) has no inverse because it has already thrown away information by squashing the plane onto a line, and no transformation can recover a dimension that's already been collapsed.",
+            "diagramCaption": "Matrix A's image of the unit square (blue) alongside A⁻¹'s own image of the unit square (teal) — each one undoes the other."
+          },
+          "transpose": {
+            "title": "Transpose as a Diagonal Flip",
+            "description": "Unlike the other three operations, the transpose isn't really about transforming space at all — it's a purely mechanical rearrangement of the matrix's entries. The two diagonal entries (a₁₁ and a₂₂) stay exactly where they are; the two off-diagonal entries (a₁₂ and a₂₁) simply swap places. That's the entire operation, which is why it's always defined, for any matrix, regardless of the determinant.",
+            "diagramCaption": "Matrix A's four entries: the diagonal pair stays fixed, while the off-diagonal pair swaps places to form Aᵀ."
+          }
+        },
+        "applications": {
+          "title": "Real-World Applications",
+          "intro": "Matrix operations aren't confined to a linear algebra course — they're the working machinery behind several fields that touch everyday life.",
+          "items": [
+            {
+              "title": "Computer Graphics: Rotating, Scaling, and Skewing",
+              "description": "Every 2D or 3D graphics engine represents rotation, scaling, and skewing as matrices, and moves an object by multiplying its coordinate vectors by that matrix — exactly the transformation this calculator visualizes for the unit square. Combining several effects (rotate, then scale, then translate) is done by multiplying the individual matrices together first, which is the same composition this page's Matrix Multiplication section illustrates."
+            },
+            {
+              "title": "Economics: Input-Output Models",
+              "description": "Wassily Leontief's Nobel Prize-winning input-output model represents an entire economy as a matrix, where each entry captures how much of one industry's output another industry consumes as input. Finding how a change in demand for one product ripples through every other industry comes down to matrix inversion — the same operation this calculator computes for a 2x2 case."
+            },
+            {
+              "title": "Cryptography: Hill Ciphers",
+              "description": "The Hill cipher, one of the earliest ciphers to use linear algebra, encrypts a message by multiplying blocks of letters (converted to numbers) by a fixed encryption matrix, and decrypts them by multiplying by that matrix's inverse — which is exactly why the encryption matrix must be invertible (a non-zero determinant) for the cipher to be reversible at all."
+            },
+            {
+              "title": "Data Science: Solving Systems of Equations",
+              "description": "Many machine learning and statistics techniques — from linear regression to solving systems of simultaneous equations — reduce to matrix operations under the hood. Finding the best-fit coefficients in a linear regression, for instance, involves multiplying and inverting matrices built from the input data, generalizing the same determinant-and-inverse arithmetic this calculator performs on a 2x2 example."
+            }
+          ]
         }
+      },
+      "relatedTools": {
+        "title": "Related Math Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Prepared For (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. Jane Doe",
+        "contactEmailPlaceholder": "e.g. jane@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Financial",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
       }
     },
     "molar-mass-calculator": {

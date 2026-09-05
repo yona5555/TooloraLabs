@@ -8101,7 +8101,9 @@
       "form": {
         "inputTitle": "Matrixeinträge",
         "matrixALabel": "Matrix A",
-        "matrixBLabel": "Matrix B"
+        "matrixBLabel": "Matrix B",
+        "calculate": "Berechnen",
+        "clear": "Löschen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -8112,7 +8114,14 @@
         "transposeA": "Transponierte von A",
         "inverseA": "Inverse von A",
         "determinantA": "Determinante von A",
-        "determinantB": "Determinante von B"
+        "determinantB": "Determinante von B",
+        "emptyStateMessage": "Geben Sie beide Matrizen ein und klicken Sie auf „Berechnen“, um alle Ergebnisse zu sehen.",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramTransformCaption": "Das Einheitsquadrat (gestrichelt) und das Parallelogramm, auf das Matrix A es abbildet — die Spalten von A sind genau die Punkte, an denen die beiden Kanten des Quadrats landen.",
+        "diagramBTitle": "Was Matrix B bewirkt",
+        "diagramBIntro": "Dasselbe Bild für Matrix B: das Einheitsquadrat, abgebildet durch die Spalten von B.",
+        "diagramBCaption": "Das Einheitsquadrat (gestrichelt) und das Parallelogramm, auf das Matrix B es abbildet."
       },
       "education": {
         "intro": {
@@ -8167,6 +8176,14 @@
             {
               "question": "Warum ist die Matrixaddition so viel einfacher als die Matrixmultiplikation?",
               "answer": "Die Addition kombiniert zwei Matrizen genauso, wie man zwei gewöhnliche Zahlenraster addieren würde — Position für Position, ohne jede Wechselwirkung zwischen verschiedenen Zeilen oder Spalten. Die Multiplikation soll dagegen die Verkettung zweier Transformationen darstellen (eine nach der anderen anwenden), und diese Verkettung vermischt zwangsläufig jede Zeile der einen Matrix mit jeder Spalte der anderen, weshalb sie die aufwendigere Zeile-mal-Spalte-Berechnung benötigt."
+            },
+            {
+              "question": "Was bedeutet es eigentlich, wenn eine Matrix singulär ist?",
+              "answer": "Eine singuläre Matrix — eine mit Determinante null — drückt jeden Punkt der Ebene auf eine einzige Linie oder sogar einen einzigen Punkt zusammen, so wie die Matrix [[2,4],[1,2]] die gesamte Ebene auf die Linie y = x/2 zusammenstaucht. Da mehrere unterschiedliche Ausgangspunkte am selben Ort landen, gibt es keine Möglichkeit, diese Zusammenstauchung rückgängig zu machen und den ursprünglichen Input wiederherzustellen — genau deshalb hat eine singuläre Matrix keine Inverse."
+            },
+            {
+              "question": "Warum entspricht die Verkettung zweier Transformationen der Matrixmultiplikation?",
+              "answer": "Transformation B und dann Transformation A auf einen Vektor v anzuwenden bedeutet, A(Bv) zu berechnen. Rechnet man das algebraisch durch — indem man Bs Wirkung auf jede Koordinate in As Formel einsetzt —, ergibt sich genau die Zeile-mal-Spalte-Arithmetik, die die Matrixmultiplikation definiert, sodass (AB)v konstruktionsbedingt stets A(Bv) entspricht, nicht zufällig."
             }
           ]
         },
@@ -8221,6 +8238,10 @@
                 "online": "Nein — das Programm mit 60 Credit-Stunden wird auf dem Campus der Khalifa University in Abu Dhabi durchgeführt."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "Von Lochkarten zu Pixeln: Matrizen in der modernen Datenverarbeitung",
+            "paragraph": "Matrixarithmetik ist das eigentliche Fundament moderner Computergrafik: Jede GPU ist architektonisch darauf ausgelegt, Millionen kleiner Matrizen pro Sekunde zu multiplizieren, da jede Drehung, Skalierung und Kameraprojektion in einer 3D-Szene eine auf einen Vertex angewendete Matrixoperation ist. Dieselbe Arithmetik, hochskaliert auf Matrizen mit Millionen von Zeilen und Spalten, treibt auch moderne neuronale Netze an — der „Vorwärtsdurchlauf“ eines Netzes ist mechanisch eine lange Folge von Matrixmultiplikationen, weshalb spezialisierte Matrixmultiplikations-Hardware (Tensor-Kerne) zentral für moderne KI-Infrastruktur geworden ist."
           }
         },
         "references": {
@@ -8229,7 +8250,74 @@
           "note": "Der Aufsatz des Numerikers Nicholas J. Higham, verfasst zum 150. Jahrestag von Cayleys Memoir von 1858, zeichnet nach, welche Rollen Cayley und Sylvester jeweils bei der Begründung der Matrizentheorie als eigenständiges mathematisches Fachgebiet spielten.",
           "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
           "readOriginal": "Originalarbeit lesen"
+        },
+        "variables": {
+          "title": "Jede Operation im Detail",
+          "intro": "Vier weitere Matrixbeziehungen, die eine eigene Betrachtung verdienen — jede mit ihrer eigenen Abbildung statt nur einer Formel.",
+          "determinant": {
+            "title": "Determinante als Fläche",
+            "description": "Die Determinante ist keine bloß auswendig zu lernende Formel — sie ist buchstäblich die Fläche des Parallelogramms, auf das eine Matrix das Einheitsquadrat abbildet (mit Vorzeichen: positiv, wenn die Orientierung erhalten bleibt, negativ, wenn die Matrix die Ebene umklappt). Eine Matrix, die den Raum streckt, hat eine Determinante mit Betrag größer als 1; eine, die den Raum staucht, hat eine Determinante zwischen 0 und 1; und eine singuläre Matrix (Determinante 0) drückt die gesamte Ebene auf eine Linie zusammen, weshalb sie Information zerstört, die sich nicht wiederherstellen lässt.",
+            "diagramCaption": "Das Bild des Einheitsquadrats unter Matrix A, mit seiner Fläche — gleich |det(A)| — schattiert und beschriftet."
+          },
+          "composition": {
+            "title": "Matrixmultiplikation als Verkettung von Transformationen",
+            "description": "A×B bedeutet „zuerst B anwenden, dann A auf das Ergebnis“ — zwei Matrizen zu multiplizieren ist dieselbe Operation wie ihre Transformationen nacheinander zu verketten. Das ist auch der geometrische Grund, warum A×B in der Regel nicht dasselbe ist wie B×A: eine Form zuerst mit B und dann mit A zu transformieren landet im Allgemeinen nicht an derselben Stelle wie in umgekehrter Reihenfolge — genauso wie ein Buch zu drehen und dann flach zu legen ein anderes Ergebnis liefert als es flach zu legen und dann zu drehen.",
+            "diagramCaption": "Das Einheitsquadrat, abgebildet allein durch B (orange), und dasselbe Quadrat, abgebildet durch A×B — Bs Transformation gefolgt von A (violett)."
+          },
+          "inverse": {
+            "title": "Die Inverse als „Rückgängig“-Transformation",
+            "description": "Wenn A das Einheitsquadrat zu einem Parallelogramm streckt, ist A⁻¹ genau die Transformation, die dieses Parallelogramm wieder zum Einheitsquadrat zusammenfaltet — geometrisch führt die Anwendung von A und dann A⁻¹ (oder umgekehrt) immer zum Ausgangspunkt zurück, was die Gleichung A×A⁻¹ = I eigentlich bedeutet. Eine singuläre Matrix (Determinante 0) hat keine Inverse, weil sie bereits Information verworfen hat, indem sie die Ebene auf eine Linie zusammengedrückt hat, und keine Transformation eine bereits kollabierte Dimension wiederherstellen kann.",
+            "diagramCaption": "Das Bild des Einheitsquadrats unter Matrix A (blau) neben dem Bild des Einheitsquadrats unter A⁻¹ (türkis) — jedes macht das andere rückgängig."
+          },
+          "transpose": {
+            "title": "Transponierte als Diagonalspiegelung",
+            "description": "Anders als die drei übrigen Operationen geht es bei der Transponierten eigentlich gar nicht um eine Raumtransformation — sie ist eine rein mechanische Neuanordnung der Matrixeinträge. Die beiden Diagonaleinträge (a₁₁ und a₂₂) bleiben genau dort, wo sie sind; die beiden Nebendiagonaleinträge (a₁₂ und a₂₁) tauschen einfach die Plätze. Das ist die gesamte Operation, weshalb sie für jede Matrix immer definiert ist, unabhängig von der Determinante.",
+            "diagramCaption": "Die vier Einträge von Matrix A: das Diagonalpaar bleibt fest, während das Nebendiagonalpaar die Plätze tauscht und Aᵀ bildet."
+          }
+        },
+        "applications": {
+          "title": "Anwendungen aus der Praxis",
+          "intro": "Matrixoperationen bleiben nicht auf einen Kurs in linearer Algebra beschränkt — sie sind der eigentliche Mechanismus hinter mehreren Bereichen, die den Alltag berühren.",
+          "items": [
+            {
+              "title": "Computergrafik: Drehen, Skalieren und Scheren",
+              "description": "Jede 2D- oder 3D-Grafik-Engine stellt Drehung, Skalierung und Scherung als Matrizen dar und bewegt ein Objekt, indem sie dessen Koordinatenvektoren mit dieser Matrix multipliziert — genau die Transformation, die dieser Rechner für das Einheitsquadrat visualisiert. Mehrere Effekte zu kombinieren (drehen, dann skalieren, dann verschieben) geschieht, indem man zunächst die einzelnen Matrizen miteinander multipliziert — dieselbe Verkettung, die der Abschnitt Matrixmultiplikation dieser Seite veranschaulicht."
+            },
+            {
+              "title": "Wirtschaft: Input-Output-Modelle",
+              "description": "Wassily Leontiefs mit dem Nobelpreis ausgezeichnetes Input-Output-Modell stellt eine ganze Volkswirtschaft als Matrix dar, wobei jeder Eintrag erfasst, wie viel Output einer Branche eine andere als Input verbraucht. Herauszufinden, wie sich eine Nachfrageänderung bei einem Produkt durch alle anderen Branchen fortpflanzt, läuft auf eine Matrixinversion hinaus — dieselbe Operation, die dieser Rechner für den 2x2-Fall berechnet."
+            },
+            {
+              "title": "Kryptografie: Hill-Chiffren",
+              "description": "Die Hill-Chiffre, eine der frühesten Chiffren, die lineare Algebra nutzt, verschlüsselt eine Nachricht, indem sie Buchstabenblöcke (in Zahlen umgewandelt) mit einer festen Verschlüsselungsmatrix multipliziert, und entschlüsselt sie durch Multiplikation mit der Inversen dieser Matrix — genau deshalb muss die Verschlüsselungsmatrix invertierbar sein (eine Determinante ungleich null), damit die Chiffre überhaupt umkehrbar ist."
+            },
+            {
+              "title": "Data Science: Lösen von Gleichungssystemen",
+              "description": "Viele Machine-Learning- und Statistikverfahren — von der linearen Regression bis zum Lösen simultaner Gleichungssysteme — reduzieren sich im Hintergrund auf Matrixoperationen. Die bestpassenden Koeffizienten einer linearen Regression zu finden, erfordert beispielsweise das Multiplizieren und Invertieren von Matrizen, die aus den Eingabedaten aufgebaut sind — eine Verallgemeinerung derselben Determinanten- und Inversenarithmetik, die dieser Rechner an einem 2x2-Beispiel ausführt."
+            }
+          ]
         }
+      },
+      "relatedTools": {
+        "title": "Verwandte Mathe-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Unternehmen",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@beispiel.de",
+        "contactPhonePlaceholder": "z. B. +49 30 123456",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
       }
     },
     "molar-mass-calculator": {

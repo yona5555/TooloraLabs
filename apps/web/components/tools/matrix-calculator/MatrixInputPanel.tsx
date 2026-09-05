@@ -1,6 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
+import type { FormEvent } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 
 type MatrixInputPanelProps = {
@@ -20,6 +22,8 @@ type MatrixInputPanelProps = {
   onB21Change: (value: string) => void;
   b22: string;
   onB22Change: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function MatrixInputPanel({
@@ -39,12 +43,14 @@ export default function MatrixInputPanel({
   onB21Change,
   b22,
   onB22Change,
+  onCalculate,
+  onClear,
 }: MatrixInputPanelProps) {
   const t = useTranslations("tools.matrix-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
         <div>
           <p className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("matrixALabel")}</p>
           <div dir="ltr" className="grid grid-cols-2 gap-3">
@@ -63,7 +69,18 @@ export default function MatrixInputPanel({
             <ToolInput label="b₂₂" type="text" inputMode="decimal" value={b22} onChange={(e) => onB22Change(e.target.value)} />
           </div>
         </div>
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

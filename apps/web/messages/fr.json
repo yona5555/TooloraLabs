@@ -8101,7 +8101,9 @@
       "form": {
         "inputTitle": "Éléments de la Matrice",
         "matrixALabel": "Matrice A",
-        "matrixBLabel": "Matrice B"
+        "matrixBLabel": "Matrice B",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "heading": "Résultat",
@@ -8112,7 +8114,14 @@
         "transposeA": "Transposée de A",
         "inverseA": "Inverse de A",
         "determinantA": "Déterminant de A",
-        "determinantB": "Déterminant de B"
+        "determinantB": "Déterminant de B",
+        "emptyStateMessage": "Saisissez les deux matrices et cliquez sur « Calculer » pour voir l'ensemble complet des résultats.",
+        "diagramA": "A",
+        "diagramB": "B",
+        "diagramTransformCaption": "Le carré unité (en pointillés) et le parallélogramme sur lequel la matrice A l'envoie — les colonnes de A sont exactement l'endroit où atterrissent les deux côtés du carré.",
+        "diagramBTitle": "Ce que fait la matrice B",
+        "diagramBIntro": "La même image, pour la matrice B : le carré unité transformé par les colonnes de B.",
+        "diagramBCaption": "Le carré unité (en pointillés) et le parallélogramme sur lequel la matrice B l'envoie."
       },
       "education": {
         "intro": {
@@ -8167,6 +8176,14 @@
             {
               "question": "Pourquoi l'addition matricielle est-elle tellement plus simple que la multiplication matricielle ?",
               "answer": "L'addition combine deux matrices de la même manière que l'on additionnerait deux grilles ordinaires de nombres — position par position, sans aucune interaction entre lignes ou colonnes différentes. La multiplication, elle, est conçue pour représenter la composition de deux transformations (en appliquer une après l'autre), et cette composition mélange intrinsèquement chaque ligne d'une matrice avec chaque colonne de l'autre, ce qui explique pourquoi elle nécessite le calcul plus élaboré ligne-fois-colonne."
+            },
+            {
+              "question": "Que signifie réellement le fait qu'une matrice soit singulière ?",
+              "answer": "Une matrice singulière — dont le déterminant est nul — écrase chaque point du plan sur une seule droite, voire un seul point, comme la matrice [[2,4],[1,2]] qui écrase tout le plan sur la droite y = x/2. Comme plusieurs points de départ différents finissent au même endroit, il n'y a aucun moyen d'inverser cet écrasement et de retrouver l'entrée d'origine, ce qui explique précisément pourquoi une matrice singulière n'a pas d'inverse."
+            },
+            {
+              "question": "Pourquoi la composition de deux transformations correspond-elle à la multiplication matricielle ?",
+              "answer": "Appliquer la transformation B puis la transformation A à un vecteur v revient à calculer A(Bv). En développant cela algébriquement — en substituant l'effet de B sur chaque coordonnée dans la formule de A — on obtient exactement l'arithmétique ligne-par-colonne qui définit la multiplication matricielle, si bien que (AB)v est toujours égal à A(Bv) par construction, et non par coïncidence."
             }
           ]
         },
@@ -8221,6 +8238,10 @@
                 "online": "Non — le programme de 60 crédits est dispensé sur le campus de l'Université Khalifa à Abou Dabi."
               }
             ]
+          },
+          "computationalEra": {
+            "title": "Des cartes perforées aux pixels : les matrices dans l'informatique moderne",
+            "paragraph": "L'arithmétique matricielle est le substrat littéral de l'infographie moderne : chaque GPU est architecturalement conçu pour multiplier des millions de petites matrices par seconde, puisque chaque rotation, mise à l'échelle et projection de caméra dans une scène 3D est une opération matricielle appliquée à un sommet. Cette même arithmétique, mise à l'échelle pour des matrices comportant des millions de lignes et de colonnes, alimente aussi les réseaux de neurones modernes — la « propagation avant » d'un réseau est, mécaniquement, une longue séquence de multiplications matricielles, ce qui explique pourquoi le matériel spécialisé dans la multiplication matricielle (cœurs tensoriels) est devenu central dans l'infrastructure de l'IA moderne."
           }
         },
         "references": {
@@ -8229,7 +8250,74 @@
           "note": "L'article du spécialiste en analyse numérique Nicholas J. Higham, écrit pour le 150e anniversaire du mémoire de Cayley de 1858, retrace les rôles respectifs de Cayley et Sylvester dans la fondation de la théorie des matrices comme discipline mathématique à part entière.",
           "url": "https://eprints.maths.manchester.ac.uk/954/1/cay_syl_07.pdf",
           "readOriginal": "Lire l'Article Original"
+        },
+        "variables": {
+          "title": "Comprendre chaque opération",
+          "intro": "Quatre autres relations matricielles qui méritent d'être vues séparément, chacune avec sa propre illustration plutôt qu'une simple formule.",
+          "determinant": {
+            "title": "Le déterminant comme aire",
+            "description": "Le déterminant n'est pas qu'une formule à mémoriser — c'est littéralement l'aire du parallélogramme sur lequel une matrice envoie le carré unité (avec un signe : positif quand l'orientation est préservée, négatif quand la matrice retourne le plan). Une matrice qui étire l'espace a un déterminant de valeur absolue supérieure à 1 ; une qui le comprime a un déterminant entre 0 et 1 ; et une matrice singulière (déterminant 0) écrase tout le plan sur une droite, ce qui détruit l'information de façon irréversible.",
+            "diagramCaption": "L'image du carré unité par la matrice A, avec son aire — égale à |det(A)| — ombrée et étiquetée."
+          },
+          "composition": {
+            "title": "La multiplication matricielle comme composition de transformations",
+            "description": "A×B signifie « appliquer d'abord B, puis appliquer A au résultat » — multiplier deux matrices revient à enchaîner leurs transformations l'une après l'autre. C'est aussi la raison géométrique pour laquelle A×B n'est généralement pas égal à B×A : transformer une forme d'abord avec B puis avec A n'aboutit généralement pas au même endroit que dans l'ordre inverse, tout comme faire pivoter un livre puis l'aplatir donne un résultat différent de l'aplatir puis le faire pivoter.",
+            "diagramCaption": "Le carré unité transformé par B seul (orange), et le même carré transformé par A×B — la transformation de B suivie de celle de A (violet)."
+          },
+          "inverse": {
+            "title": "L'inverse comme transformation « annuler »",
+            "description": "Si A étire le carré unité en un parallélogramme, A⁻¹ est exactement la transformation qui reprend ce parallélogramme et le replie pour retrouver le carré unité — géométriquement, appliquer A puis A⁻¹ (ou l'inverse) vous ramène toujours au point de départ, ce qui est précisément ce que signifie l'équation A×A⁻¹ = I. Une matrice singulière (déterminant 0) n'a pas d'inverse car elle a déjà perdu de l'information en écrasant le plan sur une droite, et aucune transformation ne peut récupérer une dimension déjà effondrée.",
+            "diagramCaption": "L'image du carré unité par la matrice A (bleu) à côté de l'image du carré unité par A⁻¹ (turquoise) — chacune annule l'autre."
+          },
+          "transpose": {
+            "title": "La transposée comme un retournement diagonal",
+            "description": "Contrairement aux trois autres opérations, la transposée ne concerne pas vraiment une transformation de l'espace — c'est un réarrangement purement mécanique des entrées de la matrice. Les deux entrées diagonales (a₁₁ et a₂₂) restent exactement à leur place ; les deux entrées hors diagonale (a₁₂ et a₂₁) échangent simplement leurs places. C'est toute l'opération, ce qui explique qu'elle soit toujours définie, pour toute matrice, quel que soit le déterminant.",
+            "diagramCaption": "Les quatre entrées de la matrice A : la paire diagonale reste fixe, tandis que la paire hors diagonale échange ses places pour former Aᵀ."
+          }
+        },
+        "applications": {
+          "title": "Applications concrètes",
+          "intro": "Les opérations matricielles ne se limitent pas à un cours d'algèbre linéaire — elles sont le mécanisme réel derrière plusieurs domaines qui touchent la vie quotidienne.",
+          "items": [
+            {
+              "title": "Infographie : rotation, mise à l'échelle et inclinaison",
+              "description": "Tout moteur graphique 2D ou 3D représente la rotation, la mise à l'échelle et l'inclinaison sous forme de matrices, et déplace un objet en multipliant ses vecteurs de coordonnées par cette matrice — exactement la transformation que cette calculatrice visualise pour le carré unité. Combiner plusieurs effets (rotation, puis mise à l'échelle, puis translation) se fait en multipliant d'abord les matrices individuelles entre elles, la même composition qu'illustre la section Multiplication matricielle de cette page."
+            },
+            {
+              "title": "Économie : modèles entrées-sorties",
+              "description": "Le modèle entrées-sorties de Wassily Leontief, primé par le prix Nobel, représente une économie entière sous forme de matrice, où chaque entrée capture combien de la production d'une industrie une autre consomme comme intrant. Déterminer comment un changement de demande pour un produit se répercute sur toutes les autres industries revient à inverser une matrice — la même opération que cette calculatrice effectue pour un cas 2x2."
+            },
+            {
+              "title": "Cryptographie : chiffrement de Hill",
+              "description": "Le chiffrement de Hill, l'un des premiers à utiliser l'algèbre linéaire, chiffre un message en multipliant des blocs de lettres (converties en nombres) par une matrice de chiffrement fixe, et les déchiffre en multipliant par l'inverse de cette matrice — c'est précisément pourquoi la matrice de chiffrement doit être inversible (déterminant non nul) pour que le chiffrement soit réversible."
+            },
+            {
+              "title": "Science des données : résoudre des systèmes d'équations",
+              "description": "De nombreuses techniques d'apprentissage automatique et de statistique — de la régression linéaire à la résolution de systèmes d'équations simultanées — se réduisent en coulisses à des opérations matricielles. Trouver les coefficients d'ajustement optimal dans une régression linéaire, par exemple, implique de multiplier et d'inverser des matrices construites à partir des données d'entrée, généralisant la même arithmétique de déterminant et d'inverse que cette calculatrice effectue sur un exemple 2x2."
+            }
+          ]
         }
+      },
+      "relatedTools": {
+        "title": "Outils mathématiques associés"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et exporter",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@exemple.fr",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Société SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
       }
     },
     "molar-mass-calculator": {
