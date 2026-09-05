@@ -99,6 +99,8 @@ import GraphingCalculator from "@/components/tools/graphing-calculator/GraphingC
 import GraphingEducation from "@/components/tools/graphing-calculator/GraphingEducation";
 import NotepadCalculator from "@/components/tools/notepad-calculator/NotepadCalculator";
 import NotepadEducation from "@/components/tools/notepad-calculator/NotepadEducation";
+import GcfLcmCalculator from "@/components/tools/gcf-lcm-calculator/GcfLcmCalculator";
+import GcfLcmEducation from "@/components/tools/gcf-lcm-calculator/GcfLcmEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -461,6 +463,9 @@ export default async function ToolPage({
     case "notepad-calculator":
       component = <NotepadCalculator education={<NotepadEducation />} />;
       break;
+    case "gcf-lcm-calculator":
+      component = <GcfLcmCalculator education={<GcfLcmEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -585,6 +590,7 @@ export default async function ToolPage({
     slug === "step-by-step-math-solver" ||
     slug === "graphing-calculator" ||
     slug === "notepad-calculator" ||
+    slug === "gcf-lcm-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

@@ -22,7 +22,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "roman-numeral-converter", icon: "Hash" },
     { id: "quadratic-equation-calculator", icon: "Sigma" },
     { id: "trigonometry-calculator", icon: "Triangle" },
-    { id: "gcf-lcm-calculator", icon: "Divide" },
     { id: "qr-generator-extended", icon: "QrCode" },
     { id: "countdown-to-event-calculator", icon: "CalendarClock" },
     { id: "historical-currency-converter", icon: "History" },

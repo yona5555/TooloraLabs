@@ -694,6 +694,22 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "gcf-lcm-calculator",
+    title: "GCF & LCM Calculator",
+    category: "math",
+    description:
+      "Find the greatest common factor and least common multiple of two or more numbers, with prime factorizations shown.",
+    featured: false,
+    keywords: [
+      "gcf calculator",
+      "lcm calculator",
+      "greatest common factor",
+      "least common multiple",
+      "prime factorization",
+      "gcd calculator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

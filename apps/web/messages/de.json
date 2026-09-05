@@ -15361,6 +15361,198 @@
           "readOriginal": "Originalübersetzung lesen"
         }
       }
+    },
+    "gcf-lcm-calculator": {
+      "title": "GGT- & KGV-Rechner",
+      "description": "Finde den größten gemeinsamen Teiler und das kleinste gemeinsame Vielfache von zwei oder mehr Zahlen, mit angezeigter Primfaktorzerlegung.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "GGT & KGV auf einen Blick",
+          "intro": "Ein kurzes Rechenbeispiel und die Identität, die beide miteinander verbindet."
+        },
+        "conceptDiagram": {
+          "title": "Gemeinsame und kombinierte Primfaktoren",
+          "intro": "Der GGT ist das, was die Primfaktorzerlegungen zweier Zahlen gemeinsam haben; das KGV ist alles, was beide benötigen, wobei gemeinsame Faktoren nur einmal gezählt werden.",
+          "ariaLabel": "Venn-Diagramm der Primfaktoren von 12 und 18, wobei der Überschneidungsbereich als gemeinsame Faktoren gekennzeichnet ist, die den GGT bilden, mit einer Beschriftung, die das KGV als Kombination beider Kreise zeigt",
+          "sharedLabel": "Gemeinsam (GGT)"
+        }
+      },
+      "form": {
+        "inputTitle": "Zahlen",
+        "hint": "Gib zwei oder mehr positive ganze Zahlen ein.",
+        "numberLabel": "Zahl {position}",
+        "addNumber": "Weitere Zahl hinzufügen",
+        "removeNumber": "Diese Zahl entfernen"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "tooFewNumbers": "Gib mindestens zwei Zahlen ein.",
+        "invalidNumber": "Jede Zahl muss eine positive ganze Zahl (1 oder größer) sein.",
+        "gcfLabel": "GGT",
+        "lcmLabel": "KGV",
+        "factorizationsTitle": "Primfaktorzerlegungen"
+      },
+      "education": {
+        "intro": {
+          "title": "GGT und KGV verstehen",
+          "paragraph1": "Der größte gemeinsame Teiler (GGT) einer Zahlenmenge ist die größte ganze Zahl, die alle diese Zahlen ohne Rest teilt — das größte Stück, in das sie sich alle gleichmäßig aufteilen lassen. Das kleinste gemeinsame Vielfache (KGV) ist die kleinste ganze Zahl, die durch alle diese Zahlen ohne Rest teilbar ist — der erste Punkt, an dem sich ihre Vielfachen treffen. Beide beantworten entgegengesetzte Fragen: Der GGT sucht den größten gemeinsamen Teiler, das KGV das kleinste gemeinsame Vielfache.",
+          "paragraph2": "Dieser Rechner findet beide durch Primfaktorzerlegung: Jede Zahl wird in die Primzahlen zerlegt, aus deren Produkt sie besteht, und diese Zerlegungen werden anschließend verglichen. Der GGT übernimmt jeden gemeinsamen Primfaktor mit der niedrigsten Potenz, in der er in irgendeiner der Zahlen vorkommt; das KGV übernimmt jeden Primfaktor, der in irgendeiner der Zahlen vorkommt, mit der höchsten verwendeten Potenz. Bei genau zwei Zahlen gilt immer: GGT × KGV entspricht dem Produkt der beiden Zahlen — eine nützliche Kontrolle des Ergebnisses."
+        },
+        "variables": {
+          "title": "Beteiligte Größen",
+          "intro": "Jede GGT/KGV-Berechnung baut auf denselben wenigen zahlentheoretischen Konzepten auf.",
+          "items": [
+            {
+              "name": "Zahlen",
+              "description": "Die Menge von zwei oder mehr positiven ganzen Zahlen, die verglichen werden — dieses Tool unterstützt bis zu fünf gleichzeitig."
+            },
+            {
+              "name": "Primfaktorzerlegung",
+              "description": "Eine Zahl, geschrieben als Produkt von Primzahlen (2, 3, 5, 7, 11, ...) — der einzigartige \"Fingerabdruck\" jeder ganzen Zahl und die Grundlage zur Berechnung von GGT und KGV."
+            },
+            {
+              "name": "Größter gemeinsamer Teiler (GGT)",
+              "description": "Auch größter gemeinsamer Divisor (ggT) genannt — die größte Zahl, die jede Zahl der Menge ohne Rest teilt."
+            },
+            {
+              "name": "Kleinstes gemeinsames Vielfaches (KGV)",
+              "description": "Die kleinste Zahl, die durch jede Zahl der Menge ohne Rest teilbar ist."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Einige Zahlenmengen und die Ergebnisse, die dieser Rechner für sie liefert.",
+          "columnCalculation": "Zahlen",
+          "columnResult": "Ergebnis",
+          "rows": [
+            {
+              "calculation": "GGT(12, 18)",
+              "result": "6"
+            },
+            {
+              "calculation": "KGV(12, 18)",
+              "result": "36"
+            },
+            {
+              "calculation": "GGT(8, 32)",
+              "result": "8"
+            },
+            {
+              "calculation": "KGV(4, 6, 9)",
+              "result": "36"
+            }
+          ]
+        },
+        "applications": {
+          "title": "GGT & KGV in der Praxis",
+          "intro": "Diese beiden Zahlen tauchen immer dann auf, wenn gleich große Gruppen oder wiederkehrende Zyklen exakt zueinander passen müssen.",
+          "items": [
+            {
+              "title": "Brüche addieren und kürzen",
+              "description": "Das Addieren von Brüchen mit unterschiedlichen Nennern erfordert einen gemeinsamen Nenner — der kleinste ist das KGV der Nenner —, während das Kürzen eines Bruchs auf die einfachste Form bedeutet, Zähler und Nenner durch ihren GGT zu teilen."
+            },
+            {
+              "title": "Gegenstände in gleiche Gruppen aufteilen",
+              "description": "Das Aufteilen mehrerer unterschiedlich großer Sammlungen in die größtmögliche Anzahl identischer, gleichmäßig gefüllter Gruppen (ohne Rest) nutzt den GGT der Sammlungsgrößen."
+            },
+            {
+              "title": "Wiederkehrende Ereignisse planen",
+              "description": "Wiederholt sich ein Ereignis alle m Tage und ein anderes alle n Tage, gibt das KGV von m und n den ersten Tag an, an dem beide wieder zusammenfallen — die Grundlage für die Planung gemeinsamer Zeitpläne, Schichtrotationen oder Wartungszyklen."
+            },
+            {
+              "title": "Kryptografie und Informatik",
+              "description": "Der euklidische Algorithmus zur Berechnung des GGT ist ein zentraler Baustein der RSA-Schlüsselerzeugung und anderer kryptografischer Algorithmen, und GGT/KGV-Logik findet sich in jeder Software, die Brüche, Verhältnisse oder Zeitintervalle vereinfacht."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Was ist der eigentliche Unterschied zwischen GGT und KGV?",
+              "answer": "Der GGT ist die größte Zahl, die jede Zahl der Menge ohne Rest teilt — er ist immer kleiner oder gleich der kleinsten eingegebenen Zahl. Das KGV ist die kleinste Zahl, die durch jede Zahl der Menge ohne Rest teilbar ist — es ist immer größer oder gleich der größten eingegebenen Zahl. Beide sind entgegengesetzte Extreme derselben Beziehung gemeinsamer Faktoren."
+            },
+            {
+              "question": "Wie funktioniert das bei mehr als zwei Zahlen?",
+              "answer": "GGT und KGV von drei oder mehr Zahlen lassen sich paarweise bestimmen: berechne GGT(a, b), dann den GGT dieses Ergebnisses mit c, und so weiter — dasselbe gilt für das KGV. Dieser Rechner wendet diese paarweise Reduktion automatisch an, unabhängig davon, wie viele Zahlen eingegeben werden."
+            },
+            {
+              "question": "Verwendet dieses Tool den euklidischen Algorithmus?",
+              "answer": "Dieses Tool ermittelt GGT und KGV per Primfaktorzerlegung, da sich damit der Rechenweg am leichtesten nachvollziehen und darstellen lässt. Der euklidische Algorithmus (wiederholte Division mit Rest) berechnet denselben GGT effizienter für sehr große Zahlen, ganz ohne Faktorisierung — beide Methoden liefern immer dasselbe Ergebnis."
+            },
+            {
+              "question": "Kann der GGT zweier Zahlen 1 sein?",
+              "answer": "Ja — wenn zwei Zahlen überhaupt keine gemeinsamen Primfaktoren haben (wie 8 und 15), ist ihr GGT 1, und sie werden teilerfremd genannt. In diesem Fall ist ihr KGV einfach das Produkt der beiden Zahlen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Der älteste noch alltäglich genutzte Algorithmus",
+            "paragraph": "Die Methode zur Bestimmung des größten gemeinsamen Teilers zweier Zahlen durch wiederholte Division — heute euklidischer Algorithmus genannt — erscheint in Buch VII von Euklids \"Elementen\", zusammengestellt um 300 v. Chr., was ihn zu einem der ältesten Algorithmen macht, die noch heute im Wesentlichen unverändert gelehrt und genutzt werden. Euklid stellte ihn als geometrisches Verfahren zur Bestimmung der größten Länge dar, die zwei gegebene Längen gleichmäßig misst, doch dieselbe wiederholte Subtraktionslogik gilt genauso für ganze Zahlen, wie sie heute verwendet wird."
+          },
+          "modernDevelopments": {
+            "title": "Von der antiken Geometrie zur modernen Kryptografie",
+            "paragraph": "Euklids Algorithmus entfaltete eine Wirkung weit über die Arithmetik hinaus: Eine erweiterte Version davon berechnet modulare Inverse — ein Schritt, der im Zentrum des RSA-Public-Key-Kryptosystems steht, das große Teile des modernen Internets absichert. Computeralgebra-Systeme und alltägliche Software verlassen sich zudem auf schnelle GGT-Berechnung, um Brüche und Verhältnisse automatisch in ihrer einfachsten Form zu halten — ein 2300 Jahre altes Verfahren gehört damit zu den am häufigsten ausgeführten Algorithmen der heutigen Informatik."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "GGT, KGV und der euklidische Algorithmus gehören zur Zahlentheorie, einem Teilgebiet der Mathematik. Hier sind die weltweit fünf besten Fakultäten für Mathematik im QS World University Ranking by Subject 2025, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Weltweit Rang 1 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm der Fakultät für Mathematik."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Weltweit Rang 2 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Weltweit Rang 3 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Weltweit Rang 4 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Weltweit Rang 5 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Heath, T. L. (Übers.). (1908). The Thirteen Books of Euclid's Elements, Bd. 2, Buch VII (2. Aufl.). Cambridge University Press.",
+          "note": "Euklids ursprüngliche Beschreibung des Verfahrens der wiederholten Division zur Bestimmung des größten gemeinsamen Maßes zweier Längen — derselbe Algorithmus, angewandt auf ganze Zahlen, der der Primfaktorzerlegungsmethode dieses Rechners zugrunde liegt.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
+          "readOriginal": "Euklids Elemente, Buch VII lesen"
+        }
+      }
     }
   },
   "toolPage": {

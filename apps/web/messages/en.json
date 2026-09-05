@@ -14548,6 +14548,198 @@
         "resultColumn": "Result"
       }
     },
+    "gcf-lcm-calculator": {
+      "title": "GCF & LCM Calculator",
+      "description": "Find the greatest common factor and least common multiple of two or more numbers, with prime factorizations shown.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "GCF & LCM at a Glance",
+          "intro": "A quick worked example and the identity that ties the two together."
+        },
+        "conceptDiagram": {
+          "title": "Shared and Combined Prime Factors",
+          "intro": "The GCF is what two numbers' prime factorizations have in common; the LCM is everything either one needs, with shared factors counted only once.",
+          "ariaLabel": "Venn diagram of the prime factors of 12 and 18, with the overlapping region labeled as the shared factors that make up the GCF, and a caption showing the LCM as the combination of both circles",
+          "sharedLabel": "Shared (GCF)"
+        }
+      },
+      "form": {
+        "inputTitle": "Numbers",
+        "hint": "Enter two or more positive whole numbers.",
+        "numberLabel": "Number {position}",
+        "addNumber": "Add Another Number",
+        "removeNumber": "Remove this number"
+      },
+      "result": {
+        "heading": "Result",
+        "tooFewNumbers": "Enter at least two numbers.",
+        "invalidNumber": "Every number must be a positive whole number (1 or greater).",
+        "gcfLabel": "GCF",
+        "lcmLabel": "LCM",
+        "factorizationsTitle": "Prime Factorizations"
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding GCF and LCM",
+          "paragraph1": "The greatest common factor (GCF) of a set of numbers is the largest whole number that divides all of them evenly — the biggest piece they can all be evenly split into. The least common multiple (LCM) is the smallest whole number that all of them divide into evenly — the first point where their multiples line up. They answer opposite questions: GCF looks for the largest shared divisor, LCM looks for the smallest shared multiple.",
+          "paragraph2": "This calculator finds both by prime factorization: breaking each number down into the primes that multiply together to make it, then comparing those factorizations. The GCF takes every prime factor the numbers share, at the lowest power any of them uses it; the LCM takes every prime factor that appears in any of them, at the highest power it's used. For exactly two numbers, GCF × LCM always equals the product of the two numbers — a useful check on the result."
+        },
+        "variables": {
+          "title": "Variables Involved",
+          "intro": "Every GCF/LCM calculation is built from the same handful of number-theory concepts.",
+          "items": [
+            {
+              "name": "Numbers",
+              "description": "The set of two or more positive whole numbers being compared — this tool supports up to five at once."
+            },
+            {
+              "name": "Prime Factorization",
+              "description": "A number written as a product of primes (2, 3, 5, 7, 11, ...) — the unique \"fingerprint\" every whole number has, and the basis for computing both GCF and LCM."
+            },
+            {
+              "name": "Greatest Common Factor (GCF)",
+              "description": "Also called the greatest common divisor (GCD) — the largest number that divides every number in the set with no remainder."
+            },
+            {
+              "name": "Least Common Multiple (LCM)",
+              "description": "The smallest number that every number in the set divides into with no remainder."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few number sets and what this calculator returns for each.",
+          "columnCalculation": "Numbers",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "GCF(12, 18)",
+              "result": "6"
+            },
+            {
+              "calculation": "LCM(12, 18)",
+              "result": "36"
+            },
+            {
+              "calculation": "GCF(8, 32)",
+              "result": "8"
+            },
+            {
+              "calculation": "LCM(4, 6, 9)",
+              "result": "36"
+            }
+          ]
+        },
+        "applications": {
+          "title": "GCF & LCM in Practice",
+          "intro": "These two numbers show up any time equal-sized groups or recurring cycles need to line up exactly.",
+          "items": [
+            {
+              "title": "Adding and Simplifying Fractions",
+              "description": "Adding fractions with different denominators requires a common denominator — the smallest one is the LCM of the denominators — and simplifying a fraction to lowest terms means dividing both numerator and denominator by their GCF."
+            },
+            {
+              "title": "Dividing Items into Equal Groups",
+              "description": "Splitting several different-sized collections into the largest possible number of identical, evenly-filled groups (with nothing left over) uses the GCF of the collection sizes."
+            },
+            {
+              "title": "Scheduling Recurring Events",
+              "description": "If one event repeats every m days and another every n days, the LCM of m and n gives the first day both happen again on the same day — the basis for planning shared schedules, shift rotations, or maintenance cycles."
+            },
+            {
+              "title": "Cryptography and Computer Science",
+              "description": "The Euclidean algorithm for computing GCF is a core building block of RSA key generation and other cryptographic algorithms, and GCF/LCM logic appears throughout software that simplifies fractions, ratios, or timing intervals."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What's the actual difference between GCF and LCM?",
+              "answer": "GCF is the largest number that divides evenly into every number in the set — it's always less than or equal to the smallest number given. LCM is the smallest number that every number in the set divides evenly into — it's always greater than or equal to the largest number given. They're opposite extremes of the same shared-factor relationship."
+            },
+            {
+              "question": "How does this work for more than two numbers?",
+              "answer": "The GCF and LCM of three or more numbers can be found two at a time: compute GCF(a, b), then GCF of that result with c, and so on — the same works for LCM. This calculator applies that pairwise reduction automatically for however many numbers you enter."
+            },
+            {
+              "question": "Does this use the Euclidean algorithm?",
+              "answer": "This tool finds GCF and LCM via prime factorization, which is easiest to follow and to show the work for. The Euclidean algorithm (repeated division with remainder) computes the same GCF more efficiently for very large numbers, without needing to factor them at all — both methods always agree."
+            },
+            {
+              "question": "Can the GCF of two numbers be 1?",
+              "answer": "Yes — when two numbers share no prime factors at all (like 8 and 15), their GCF is 1 and they're called coprime or relatively prime. In that case their LCM is simply the two numbers multiplied together."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind This Tool",
+          "history": {
+            "title": "The Oldest Algorithm Still in Everyday Use",
+            "paragraph": "The method for finding the greatest common factor of two numbers by repeated division — now called the Euclidean algorithm — appears in Book VII of Euclid's Elements, compiled around 300 BCE, making it one of the oldest algorithms still taught and used essentially unchanged today. Euclid presented it as a geometric procedure for finding the largest length that measures two given lengths evenly, but the same repeated-subtraction logic applies identically to whole numbers, which is how it's used now."
+          },
+          "modernDevelopments": {
+            "title": "From Ancient Geometry to Modern Cryptography",
+            "paragraph": "Euclid's algorithm turned out to have a life far beyond arithmetic: an extended version of it computes modular inverses, a step at the heart of the RSA public-key cryptosystem that secures much of the modern internet. Computer algebra systems and everyday software also lean on fast GCF computation to keep fractions and ratios in lowest terms automatically, making a 2,300-year-old procedure one of the most-executed algorithms in computing today."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "GCF, LCM, and the Euclidean algorithm sit within number theory, a branch of mathematics. Here are the top 5 globally for Mathematics in the QS World University Rankings by Subject 2025, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Heath, T. L. (Trans.). (1908). The Thirteen Books of Euclid's Elements, Vol. 2, Book VII (2nd ed.). Cambridge University Press.",
+          "note": "Euclid's original description of the repeated-division procedure for finding the greatest common measure of two lengths — the same algorithm, applied to whole numbers, that underlies this calculator's prime-factorization method.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
+          "readOriginal": "Read Euclid's Elements, Book VII"
+        }
+      }
+    },
     "pace-calculator": {
       "title": "Pace Calculator",
       "description": "Calculate running, walking, or cycling pace, time, or distance, log splits across multiple checkpoints, convert pace between kilometers and miles, and predict a finish time for any race distance using the Riegel endurance formula.",

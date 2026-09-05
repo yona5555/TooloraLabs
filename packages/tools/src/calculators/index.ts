@@ -53,6 +53,7 @@ export * from "./VolumeCalculator";
 export * from "./StepByStepMathSolver";
 export * from "./GraphingCalculator";
 export * from "./NotepadCalculator";
+export * from "./GcfLcmCalculator";
 export * from "./PaceCalculator";
 export * from "./RandomNumberGenerator";
 export * from "./StandardDeviationCalculator";

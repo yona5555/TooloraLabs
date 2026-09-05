@@ -15361,6 +15361,198 @@
           "readOriginal": "Leer la Traducción Original"
         }
       }
+    },
+    "gcf-lcm-calculator": {
+      "title": "Calculadora de MCD y MCM",
+      "description": "Encuentra el máximo común divisor y el mínimo común múltiplo de dos o más números, con las factorizaciones primas mostradas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "MCD y MCM de un vistazo",
+          "intro": "Un ejemplo resuelto rápido y la identidad que une a ambos."
+        },
+        "conceptDiagram": {
+          "title": "Factores primos compartidos y combinados",
+          "intro": "El MCD es lo que las factorizaciones primas de dos números tienen en común; el MCM es todo lo que cualquiera de los dos necesita, contando los factores compartidos una sola vez.",
+          "ariaLabel": "Diagrama de Venn de los factores primos de 12 y 18, con la región superpuesta marcada como los factores compartidos que forman el MCD, y una leyenda que muestra el MCM como la combinación de ambos círculos",
+          "sharedLabel": "Compartido (MCD)"
+        }
+      },
+      "form": {
+        "inputTitle": "Números",
+        "hint": "Introduce dos o más números enteros positivos.",
+        "numberLabel": "Número {position}",
+        "addNumber": "Añadir otro número",
+        "removeNumber": "Eliminar este número"
+      },
+      "result": {
+        "heading": "Resultado",
+        "tooFewNumbers": "Introduce al menos dos números.",
+        "invalidNumber": "Cada número debe ser un entero positivo (1 o mayor).",
+        "gcfLabel": "MCD",
+        "lcmLabel": "MCM",
+        "factorizationsTitle": "Factorizaciones primas"
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el MCD y el MCM",
+          "paragraph1": "El máximo común divisor (MCD) de un conjunto de números es el mayor número entero que divide a todos ellos exactamente — la mayor parte en la que todos pueden dividirse por igual. El mínimo común múltiplo (MCM) es el menor número entero que es divisible exactamente por todos ellos — el primer punto en el que sus múltiplos coinciden. Responden a preguntas opuestas: el MCD busca el mayor divisor compartido, el MCM busca el menor múltiplo compartido.",
+          "paragraph2": "Esta calculadora encuentra ambos mediante factorización prima: descompone cada número en los primos cuyo producto lo forma y luego compara esas factorizaciones. El MCD toma cada factor primo que los números comparten, a la menor potencia en que aparece en cualquiera de ellos; el MCM toma cada factor primo que aparece en cualquiera de ellos, a la mayor potencia en que se usa. Para exactamente dos números, MCD × MCM siempre es igual al producto de ambos números — una comprobación útil del resultado."
+        },
+        "variables": {
+          "title": "Variables implicadas",
+          "intro": "Todo cálculo de MCD/MCM se construye a partir de los mismos conceptos básicos de teoría de números.",
+          "items": [
+            {
+              "name": "Números",
+              "description": "El conjunto de dos o más números enteros positivos que se comparan — esta herramienta admite hasta cinco a la vez."
+            },
+            {
+              "name": "Factorización prima",
+              "description": "Un número escrito como producto de números primos (2, 3, 5, 7, 11, ...) — la \"huella\" única de todo número entero, y la base para calcular tanto el MCD como el MCM."
+            },
+            {
+              "name": "Máximo común divisor (MCD)",
+              "description": "También llamado máximo común denominador — el mayor número que divide a cada número del conjunto sin dejar resto."
+            },
+            {
+              "name": "Mínimo común múltiplo (MCM)",
+              "description": "El menor número que es divisible exactamente por cada número del conjunto."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos conjuntos de números y lo que devuelve esta calculadora para cada uno.",
+          "columnCalculation": "Números",
+          "columnResult": "Resultado",
+          "rows": [
+            {
+              "calculation": "MCD(12, 18)",
+              "result": "6"
+            },
+            {
+              "calculation": "MCM(12, 18)",
+              "result": "36"
+            },
+            {
+              "calculation": "MCD(8, 32)",
+              "result": "8"
+            },
+            {
+              "calculation": "MCM(4, 6, 9)",
+              "result": "36"
+            }
+          ]
+        },
+        "applications": {
+          "title": "El MCD y el MCM en la práctica",
+          "intro": "Estos dos números aparecen siempre que grupos de igual tamaño o ciclos recurrentes necesitan coincidir exactamente.",
+          "items": [
+            {
+              "title": "Sumar y simplificar fracciones",
+              "description": "Sumar fracciones con distinto denominador requiere un denominador común — el menor es el MCM de los denominadores —, y simplificar una fracción a su forma más simple significa dividir numerador y denominador entre su MCD."
+            },
+            {
+              "title": "Dividir elementos en grupos iguales",
+              "description": "Dividir varias colecciones de distinto tamaño en el mayor número posible de grupos idénticos y completos (sin que sobre nada) utiliza el MCD de los tamaños de esas colecciones."
+            },
+            {
+              "title": "Programar eventos recurrentes",
+              "description": "Si un evento se repite cada m días y otro cada n días, el MCM de m y n da el primer día en que ambos vuelven a coincidir — la base para planificar horarios compartidos, rotaciones de turnos o ciclos de mantenimiento."
+            },
+            {
+              "title": "Criptografía e informática",
+              "description": "El algoritmo de Euclides para calcular el MCD es un pilar fundamental de la generación de claves RSA y otros algoritmos criptográficos, y la lógica de MCD/MCM aparece en todo el software que simplifica fracciones, razones o intervalos de tiempo."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Cuál es la diferencia real entre el MCD y el MCM?",
+              "answer": "El MCD es el mayor número que divide exactamente a todos los números del conjunto — siempre es menor o igual que el número más pequeño dado. El MCM es el menor número que es divisible exactamente por todos los números del conjunto — siempre es mayor o igual que el número más grande dado. Son los extremos opuestos de la misma relación de factor compartido."
+            },
+            {
+              "question": "¿Cómo funciona esto con más de dos números?",
+              "answer": "El MCD y el MCM de tres o más números pueden hallarse de dos en dos: calcula MCD(a, b), luego el MCD de ese resultado con c, y así sucesivamente — lo mismo aplica al MCM. Esta calculadora aplica automáticamente esa reducción por pares sin importar cuántos números introduzcas."
+            },
+            {
+              "question": "¿Usa esta herramienta el algoritmo de Euclides?",
+              "answer": "Esta herramienta halla el MCD y el MCM mediante factorización prima, que es la forma más fácil de seguir y de mostrar el proceso. El algoritmo de Euclides (división repetida con resto) calcula el mismo MCD de forma más eficiente para números muy grandes, sin necesidad de factorizarlos en absoluto — ambos métodos siempre coinciden."
+            },
+            {
+              "question": "¿Puede el MCD de dos números ser 1?",
+              "answer": "Sí — cuando dos números no comparten ningún factor primo (como 8 y 15), su MCD es 1 y se llaman primos entre sí (coprimos). En ese caso, su MCM es simplemente el producto de ambos números."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "El algoritmo más antiguo aún en uso cotidiano",
+            "paragraph": "El método para hallar el máximo común divisor de dos números mediante división repetida — hoy llamado algoritmo de Euclides — aparece en el Libro VII de los \"Elementos\" de Euclides, compilado hacia el año 300 a. C., lo que lo convierte en uno de los algoritmos más antiguos que aún se enseñan y usan prácticamente sin cambios. Euclides lo presentó como un procedimiento geométrico para hallar la mayor longitud que mide exactamente a dos longitudes dadas, pero la misma lógica de resta repetida se aplica de forma idéntica a los números enteros, que es como se usa ahora."
+          },
+          "modernDevelopments": {
+            "title": "De la geometría antigua a la criptografía moderna",
+            "paragraph": "El algoritmo de Euclides resultó tener una vida mucho más allá de la aritmética: una versión extendida calcula inversos modulares, un paso central del criptosistema de clave pública RSA que protege gran parte de internet hoy. Los sistemas de álgebra computacional y el software cotidiano también dependen del cálculo rápido del MCD para mantener automáticamente fracciones y razones en su forma más simple, convirtiendo un procedimiento de 2300 años en uno de los algoritmos más ejecutados en la informática actual."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "El MCD, el MCM y el algoritmo de Euclides se enmarcan en la teoría de números, una rama de las matemáticas. Estas son las 5 mejores universidades del mundo en Matemáticas según el QS World University Rankings by Subject 2025, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT)",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Harvard",
+                "note": "Nº 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Stanford",
+                "note": "Nº 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Heath, T. L. (Trad.). (1908). The Thirteen Books of Euclid's Elements, Vol. 2, Libro VII (2ª ed.). Cambridge University Press.",
+          "note": "La descripción original de Euclides del procedimiento de división repetida para hallar la mayor medida común de dos longitudes — el mismo algoritmo, aplicado a números enteros, en el que se basa el método de factorización prima de esta calculadora.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
+          "readOriginal": "Leer los Elementos de Euclides, Libro VII"
+        }
+      }
     }
   },
   "toolPage": {

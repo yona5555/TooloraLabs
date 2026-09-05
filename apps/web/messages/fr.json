@@ -15361,6 +15361,198 @@
           "readOriginal": "Lire la Traduction Originale"
         }
       }
+    },
+    "gcf-lcm-calculator": {
+      "title": "Calculatrice de PGCD et PPCM",
+      "description": "Trouvez le plus grand commun diviseur et le plus petit commun multiple de deux nombres ou plus, avec les décompositions en facteurs premiers affichées.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "PGCD et PPCM en un coup d'œil",
+          "intro": "Un exemple résolu rapide et l'identité qui relie les deux."
+        },
+        "conceptDiagram": {
+          "title": "Facteurs premiers communs et combinés",
+          "intro": "Le PGCD est ce que les décompositions en facteurs premiers de deux nombres ont en commun ; le PPCM est tout ce dont l'un ou l'autre a besoin, les facteurs communs n'étant comptés qu'une seule fois.",
+          "ariaLabel": "Diagramme de Venn des facteurs premiers de 12 et 18, la zone de chevauchement étant étiquetée comme les facteurs communs formant le PGCD, avec une légende montrant le PPCM comme la combinaison des deux cercles",
+          "sharedLabel": "Commun (PGCD)"
+        }
+      },
+      "form": {
+        "inputTitle": "Nombres",
+        "hint": "Saisissez deux nombres entiers positifs ou plus.",
+        "numberLabel": "Nombre {position}",
+        "addNumber": "Ajouter un autre nombre",
+        "removeNumber": "Supprimer ce nombre"
+      },
+      "result": {
+        "heading": "Résultat",
+        "tooFewNumbers": "Saisissez au moins deux nombres.",
+        "invalidNumber": "Chaque nombre doit être un entier positif (1 ou plus).",
+        "gcfLabel": "PGCD",
+        "lcmLabel": "PPCM",
+        "factorizationsTitle": "Décompositions en facteurs premiers"
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le PGCD et le PPCM",
+          "paragraph1": "Le plus grand commun diviseur (PGCD) d'un ensemble de nombres est le plus grand entier qui les divise tous exactement — la plus grande part en laquelle ils peuvent tous être divisés également. Le plus petit commun multiple (PPCM) est le plus petit entier que chacun d'eux divise exactement — le premier point où leurs multiples coïncident. Ils répondent à des questions opposées : le PGCD cherche le plus grand diviseur commun, le PPCM cherche le plus petit multiple commun.",
+          "paragraph2": "Cette calculatrice trouve les deux par décomposition en facteurs premiers : chaque nombre est décomposé en nombres premiers dont le produit le compose, puis ces décompositions sont comparées. Le PGCD prend chaque facteur premier commun à la puissance la plus basse à laquelle il apparaît dans l'un d'eux ; le PPCM prend chaque facteur premier apparaissant dans l'un d'eux, à la puissance la plus élevée utilisée. Pour exactement deux nombres, PGCD × PPCM est toujours égal au produit des deux nombres — une vérification utile du résultat."
+        },
+        "variables": {
+          "title": "Variables concernées",
+          "intro": "Chaque calcul de PGCD/PPCM repose sur les mêmes concepts de théorie des nombres.",
+          "items": [
+            {
+              "name": "Nombres",
+              "description": "L'ensemble de deux entiers positifs ou plus à comparer — cet outil en accepte jusqu'à cinq à la fois."
+            },
+            {
+              "name": "Décomposition en facteurs premiers",
+              "description": "Un nombre écrit comme un produit de nombres premiers (2, 3, 5, 7, 11, ...) — l'\"empreinte\" unique de chaque entier, et la base du calcul du PGCD comme du PPCM."
+            },
+            {
+              "name": "Plus grand commun diviseur (PGCD)",
+              "description": "Aussi appelé plus grand commun dénominateur — le plus grand nombre qui divise chaque nombre de l'ensemble sans reste."
+            },
+            {
+              "name": "Plus petit commun multiple (PPCM)",
+              "description": "Le plus petit nombre que chaque nombre de l'ensemble divise sans reste."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques ensembles de nombres et ce que cette calculatrice renvoie pour chacun.",
+          "columnCalculation": "Nombres",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "PGCD(12, 18)",
+              "result": "6"
+            },
+            {
+              "calculation": "PPCM(12, 18)",
+              "result": "36"
+            },
+            {
+              "calculation": "PGCD(8, 32)",
+              "result": "8"
+            },
+            {
+              "calculation": "PPCM(4, 6, 9)",
+              "result": "36"
+            }
+          ]
+        },
+        "applications": {
+          "title": "Le PGCD et le PPCM en pratique",
+          "intro": "Ces deux nombres apparaissent chaque fois que des groupes de taille égale ou des cycles récurrents doivent s'aligner exactement.",
+          "items": [
+            {
+              "title": "Additionner et simplifier des fractions",
+              "description": "Additionner des fractions de dénominateurs différents nécessite un dénominateur commun — le plus petit étant le PPCM des dénominateurs —, et simplifier une fraction à sa forme la plus simple revient à diviser numérateur et dénominateur par leur PGCD."
+            },
+            {
+              "title": "Répartir des éléments en groupes égaux",
+              "description": "Diviser plusieurs collections de tailles différentes en le plus grand nombre possible de groupes identiques et complets (sans rien laisser de côté) utilise le PGCD des tailles de ces collections."
+            },
+            {
+              "title": "Planifier des événements récurrents",
+              "description": "Si un événement se répète tous les m jours et un autre tous les n jours, le PPCM de m et n donne le premier jour où les deux coïncident à nouveau — la base pour planifier des horaires partagés, des rotations d'équipes ou des cycles de maintenance."
+            },
+            {
+              "title": "Cryptographie et informatique",
+              "description": "L'algorithme d'Euclide pour calculer le PGCD est un élément fondamental de la génération de clés RSA et d'autres algorithmes cryptographiques, et la logique PGCD/PPCM apparaît dans tous les logiciels qui simplifient des fractions, des rapports ou des intervalles de temps."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la différence réelle entre le PGCD et le PPCM ?",
+              "answer": "Le PGCD est le plus grand nombre qui divise exactement chaque nombre de l'ensemble — il est toujours inférieur ou égal au plus petit nombre donné. Le PPCM est le plus petit nombre que chaque nombre de l'ensemble divise exactement — il est toujours supérieur ou égal au plus grand nombre donné. Ce sont les deux extrêmes opposés de la même relation de facteur commun."
+            },
+            {
+              "question": "Comment cela fonctionne-t-il avec plus de deux nombres ?",
+              "answer": "Le PGCD et le PPCM de trois nombres ou plus peuvent être trouvés deux par deux : calculez PGCD(a, b), puis le PGCD de ce résultat avec c, et ainsi de suite — le même principe s'applique au PPCM. Cette calculatrice applique automatiquement cette réduction par paires, quel que soit le nombre de valeurs saisies."
+            },
+            {
+              "question": "Cet outil utilise-t-il l'algorithme d'Euclide ?",
+              "answer": "Cet outil trouve le PGCD et le PPCM par décomposition en facteurs premiers, la méthode la plus facile à suivre et à détailler. L'algorithme d'Euclide (division répétée avec reste) calcule le même PGCD plus efficacement pour de très grands nombres, sans avoir à les factoriser du tout — les deux méthodes s'accordent toujours."
+            },
+            {
+              "question": "Le PGCD de deux nombres peut-il valoir 1 ?",
+              "answer": "Oui — lorsque deux nombres ne partagent aucun facteur premier (comme 8 et 15), leur PGCD est 1 et ils sont dits premiers entre eux. Dans ce cas, leur PPCM est simplement le produit des deux nombres."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Le plus ancien algorithme encore utilisé au quotidien",
+            "paragraph": "La méthode pour trouver le plus grand commun diviseur de deux nombres par divisions successives — aujourd'hui appelée algorithme d'Euclide — apparaît dans le Livre VII des \"Éléments\" d'Euclide, compilés vers 300 av. J.-C., ce qui en fait l'un des plus anciens algorithmes encore enseignés et utilisés pratiquement sans changement aujourd'hui. Euclide le présentait comme une procédure géométrique pour trouver la plus grande longueur mesurant exactement deux longueurs données, mais la même logique de soustraction répétée s'applique identiquement aux nombres entiers, comme on l'utilise aujourd'hui."
+          },
+          "modernDevelopments": {
+            "title": "De la géométrie antique à la cryptographie moderne",
+            "paragraph": "L'algorithme d'Euclide s'est révélé avoir une portée bien au-delà de l'arithmétique : une version étendue calcule des inverses modulaires, une étape centrale du cryptosystème à clé publique RSA qui sécurise une grande partie d'Internet aujourd'hui. Les systèmes de calcul formel et les logiciels courants s'appuient également sur un calcul rapide du PGCD pour maintenir automatiquement fractions et rapports sous leur forme la plus simple, faisant d'une procédure vieille de 2300 ans l'un des algorithmes les plus exécutés en informatique aujourd'hui."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Le PGCD, le PPCM et l'algorithme d'Euclide relèvent de la théorie des nombres, une branche des mathématiques. Voici les 5 meilleures universités mondiales en mathématiques selon le classement QS World University Rankings by Subject 2025, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Heath, T. L. (Trad.). (1908). The Thirteen Books of Euclid's Elements, Vol. 2, Livre VII (2e éd.). Cambridge University Press.",
+          "note": "La description originale d'Euclide de la procédure de division répétée pour trouver la plus grande mesure commune de deux longueurs — le même algorithme, appliqué aux nombres entiers, sur lequel repose la méthode de décomposition en facteurs premiers de cette calculatrice.",
+          "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
+          "readOriginal": "Lire les Éléments d'Euclide, Livre VII"
+        }
+      }
     }
   },
   "toolPage": {
