@@ -47,6 +47,12 @@ export default function Navbar() {
           </Link>
           <ToolsDropdown />
           <Link
+            href="/docs"
+            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+          >
+            {t("docs")}
+          </Link>
+          <Link
             href="/coming-soon"
             className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
           >
