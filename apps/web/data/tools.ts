@@ -786,6 +786,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "body-fat-calculator",
+    title: "Body Fat Calculator",
+    category: "health-fitness",
+    description:
+      "Estimate body fat percentage from neck, waist, and (for women) hip circumference using the US Navy method, with a category scale showing where your result falls.",
+    featured: false,
+    keywords: [
+      "body fat calculator",
+      "body fat percentage",
+      "us navy body fat formula",
+      "body composition calculator",
+      "navy method",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

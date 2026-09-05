@@ -16457,6 +16457,180 @@
           "readOriginal": "Consulter l'article original"
         }
       }
+    },
+    "body-fat-calculator": {
+      "title": "Calculatrice de Graisse Corporelle",
+      "description": "Estimez le pourcentage de graisse corporelle à partir du tour de cou, de taille et (pour les femmes) de hanches selon la méthode de la marine américaine, avec une échelle de catégories montrant où se situe votre résultat.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Vos mesures",
+        "genderLabel": "Sexe",
+        "genderMale": "Homme",
+        "genderFemale": "Femme",
+        "height": "Taille (cm)",
+        "neck": "Tour de cou (cm)",
+        "waist": "Tour de taille (cm)",
+        "hip": "Tour de hanches (cm)",
+        "hint": "Mesurez la taille au niveau du nombril, le cou juste sous le larynx, et la hanche (femmes) au point le plus large, avec le ruban ajusté sans comprimer la peau."
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidMeasurements": "Saisissez des mesures valides pour voir un résultat. Le tour de taille (plus les hanches, pour les femmes) doit dépasser le tour de cou."
+      },
+      "categories": {
+        "essential": "Graisse essentielle",
+        "athletes": "Athlètes",
+        "fitness": "Forme",
+        "average": "Moyenne",
+        "obese": "Obésité",
+        "scaleAriaLabel": "Une échelle horizontale des catégories de pourcentage de graisse corporelle, avec un marqueur indiquant où se situe le résultat calculé"
+      },
+      "quickReference": {
+        "title": "La formule",
+        "intro": "La méthode de la marine américaine estime la graisse corporelle uniquement à partir de mesures de circonférence."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la méthode de graisse corporelle de la marine américaine",
+          "paragraph1": "Le pourcentage de graisse corporelle — la proportion du poids corporel total constituée de tissu adipeux, par opposition aux muscles, aux os, aux organes et à l'eau — est une mesure plus directe de la composition corporelle que l'IMC, qui ne peut pas distinguer un corps musclé d'un corps gras à la même taille et au même poids. La méthode de la marine américaine l'estime à partir d'un petit ensemble de mesures de circonférence au ruban (cou, taille et, pour les femmes, hanches) plutôt qu'avec des pinces à plis cutanés, des scanners DEXA ou une pesée hydrostatique, échangeant une certaine précision contre une mesure que presque tout le monde peut prendre chez soi avec un simple ruban à mesurer.",
+          "paragraph2": "La formule, développée par Hodgdon et Beckett en 1984 pour les normes de composition corporelle de la marine américaine, utilise le logarithme de ces mesures de circonférence car la relation entre la graisse corporelle et la circonférence n'est pas linéaire — de petits changements de taille comptent plus pour certaines corpulences que pour d'autres, et la forme logarithmique capture mieux cette courbe qu'un simple rapport. Les formules pour hommes et femmes diffèrent car les schémas de répartition de la graisse diffèrent significativement selon le sexe, en moyenne, ce qui explique aussi pourquoi la méthode nécessite une mesure de hanche pour les femmes mais pas pour les hommes."
+        },
+        "categoriesSection": {
+          "title": "Les cinq catégories de graisse corporelle",
+          "intro": "Cet outil classe les résultats selon les catégories de l'American Council on Exercise (ACE), qui diffèrent selon le sexe car les femmes ont naturellement un pourcentage de graisse essentielle plus élevé.",
+          "items": [
+            {
+              "title": "Graisse essentielle",
+              "description": "La graisse corporelle minimale nécessaire au fonctionnement physiologique de base — production hormonale, protection des organes et stockage des vitamines. Des niveaux soutenus à ou en dessous de ce seuil sont associés à des risques pour la santé, pas à des gains de forme physique."
+            },
+            {
+              "title": "Athlètes",
+              "description": "La fourchette typiquement observée chez les athlètes de compétition, reflétant une faible masse grasse maintenue grâce à un volume d'entraînement élevé, sans être nécessairement un objectif approprié ou durable pour la population générale."
+            },
+            {
+              "title": "Forme",
+              "description": "Une fourchette mince et en forme, atteignable et maintenable grâce à un exercice régulier et des habitudes alimentaires saines typiques, sans le volume d'entraînement extrême associé à la catégorie des athlètes."
+            },
+            {
+              "title": "Moyenne",
+              "description": "La fourchette dans laquelle se situent la plupart des adultes de la population générale — associée à un risque de santé typique et modéré, ni particulièrement mince ni à un niveau de risque élevé."
+            },
+            {
+              "title": "Obésité",
+              "description": "Des niveaux de graisse corporelle associés à un risque significativement accru de maladie cardiovasculaire, de diabète de type 2 et d'autres troubles métaboliques, indépendamment des informations supplémentaires que l'IMC ou le poids seul fourniraient."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques ensembles de mesures et ce que cette calculatrice renvoie pour chacun.",
+          "columnCalculation": "Mesures",
+          "columnResult": "% de graisse corporelle",
+          "rows": [
+            {
+              "calculation": "Homme : taille 180cm, cou 38cm, tour de taille 85cm",
+              "result": "≈16,6% (Forme)"
+            },
+            {
+              "calculation": "Homme : taille 175cm, cou 42cm, tour de taille 100cm",
+              "result": "≈27,5% (Obésité)"
+            },
+            {
+              "calculation": "Femme : taille 165cm, cou 32cm, tour de taille 70cm, hanches 95cm",
+              "result": "≈24,6% (Moyenne)"
+            },
+            {
+              "calculation": "Femme : taille 170cm, cou 30cm, tour de taille 65cm, hanches 90cm",
+              "result": "≈20,5% (Forme)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Quelle est la précision de la formule de circonférence de la marine américaine ?",
+              "answer": "Comparée aux méthodes de référence comme les scanners DEXA ou la pesée hydrostatique, la méthode de la marine américaine a généralement une marge d'erreur d'environ 3 à 4 points de pourcentage, ce qui est généralement considéré acceptable pour suivre des tendances dans le temps, même si elle n'est pas aussi précise qu'une mesure en laboratoire. Une technique de mesure cohérente (même tension de ruban, mêmes positions corporelles, même heure de la journée) compte plus pour suivre un changement que la précision absolue de la méthode."
+            },
+            {
+              "question": "Pourquoi la formule nécessite-t-elle une mesure de hanche pour les femmes mais pas pour les hommes ?",
+              "answer": "En moyenne, les femmes portent proportionnellement plus de graisse dans la zone des hanches et des cuisses (un schéma de répartition \"gynoïde\"), tandis que les hommes ont tendance à en porter davantage autour de l'abdomen (un schéma \"androïde\"). La recherche originale de la marine américaine a révélé que l'inclusion du tour de hanches améliorait considérablement la précision de la formule spécifiquement pour les femmes, sans ajouter de précision significative pour les hommes."
+            },
+            {
+              "question": "Où exactement dois-je mesurer ma taille et mon cou ?",
+              "answer": "Mesurez le tour de cou juste sous le larynx (pomme d'Adam), le ruban inclinant légèrement vers le bas à l'avant. Mesurez la taille au niveau du nombril en position debout détendue (sans rentrer le ventre), et pour les femmes, mesurez les hanches à leur point le plus large. Gardez le ruban à mesurer bien ajusté contre la peau sans la comprimer pour une lecture précise."
+            },
+            {
+              "question": "Pourquoi le pourcentage de graisse corporelle est-il plus utile que l'IMC pour certains usages ?",
+              "answer": "L'IMC est calculé uniquement à partir de la taille et du poids, il ne peut donc pas distinguer une personne très musclée d'une personne portant un excès de graisse avec la même valeur d'IMC — une limitation bien connue, notamment pour les athlètes. Le pourcentage de graisse corporelle mesure la composition corporelle plus directement, c'est pourquoi il est souvent utilisé aux côtés de l'IMC plutôt que pour le remplacer entièrement."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "La méthode de circonférence de la marine américaine a été développée en 1984 par les chercheurs James Hodgdon et Michael Beckett au Naval Health Research Center, chargés de trouver une norme de composition corporelle pour l'évaluation de la condition physique militaire, plus précise que les tableaux taille-poids mais bien plus pratique sur le terrain que les pinces à plis cutanés ou les méthodes de laboratoire. Leur recherche a validé la formule par rapport à la pesée hydrostatique (sous l'eau), la référence de l'époque pour la mesure de la composition corporelle, sur un large échantillon de personnel de la marine."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "La méthode reste activement utilisée dans toutes les branches de l'armée américaine aujourd'hui pour l'évaluation périodique de la composition corporelle, appréciée précisément parce qu'elle ne nécessite aucun équipement spécial hormis un ruban à mesurer. Dans les contextes civils de fitness et de recherche, elle a depuis été largement comparée à des méthodes de référence plus récentes comme les scanners DEXA (absorptiométrie à rayons X à double énergie), qui confirment sa précision raisonnable pour le suivi au niveau de la population et des tendances, tandis que les méthodes d'imagerie plus précises restent privilégiées pour les applications cliniques ou de recherche nécessitant une plus grande précision."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "L'évaluation de la composition corporelle est étudiée en physiologie de l'exercice et en kinésiologie, au sein du domaine plus large des sciences de la santé. Voici cinq programmes reconnus dans ce domaine, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "University of Oregon — Department of Human Physiology",
+                "note": "Un programme américain de premier plan en physiologie humaine et recherche sur la composition corporelle.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "Non — les programmes de troisième cycle sont des programmes de recherche en présentiel."
+              },
+              {
+                "name": "University of Texas at Austin — Department of Kinesiology and Health Education",
+                "note": "L'un des départements de kinésiologie les plus grands et les plus établis des États-Unis, avec une recherche active sur la composition corporelle.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Certains programmes de troisième cycle proposent des options en ligne ; le doctorat de recherche principal est en présentiel."
+              },
+              {
+                "name": "Loughborough University — School of Sport, Exercise and Health Sciences",
+                "note": "Constamment classée parmi les meilleures universités mondiales pour les disciplines liées au sport (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "Non — les diplômes de recherche de troisième cycle sont en présentiel."
+              },
+              {
+                "name": "Naval Health Research Center (NHRC)",
+                "note": "L'institution de recherche de la marine américaine où la méthode originale de mesure de la graisse corporelle par circonférence a été développée en 1984.",
+                "url": "https://www.med.navy.mil/nhrc/",
+                "online": "Non — c'est une institution de recherche militaire, pas une université délivrant des diplômes."
+              },
+              {
+                "name": "Institut australien du sport",
+                "note": "L'institut national australien des sciences du sport de haute performance, avec une recherche active sur l'évaluation de la composition corporelle.",
+                "url": "https://www.ais.gov.au/",
+                "online": "Non — c'est un institut national de formation et de recherche, pas une université délivrant des diplômes."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'éducation physique",
+                "note": "Fondée en 1866 ; propose des programmes d'éducation physique et de sciences du sport à l'échelle régionale.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Hodgdon, J. A., & Beckett, M. B. (1984). Prediction of Percent Body Fat for U.S. Navy Men from Body Circumferences and Height. Naval Health Research Center, Report No. 84-11.",
+          "note": "Le rapport technique original de la marine américaine établissant les formules de prédiction de la graisse corporelle basées sur la circonférence que cette calculatrice utilise, validées par rapport à la pesée hydrostatique.",
+          "url": "https://apps.dtic.mil/sti/citations/ADA143890",
+          "readOriginal": "Consulter le rapport technique original de la marine"
+        }
+      }
     }
   },
   "toolPage": {

@@ -16,7 +16,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "cagr-calculator", icon: "TrendingUp" },
     { id: "personal-budget-calculator", icon: "Wallet" },
     { id: "present-future-value-calculator", icon: "LineChart" },
-    { id: "body-fat-calculator", icon: "Activity" },
     { id: "calories-burned-calculator", icon: "Flame" },
     { id: "passphrase-generator", icon: "KeyRound" },
     { id: "roman-numeral-converter", icon: "Hash" },

@@ -16453,6 +16453,180 @@
           "readOriginal": "View the Original Paper"
         }
       }
+    },
+    "body-fat-calculator": {
+      "title": "Body Fat Calculator",
+      "description": "Estimate body fat percentage from neck, waist, and (for women) hip circumference using the US Navy method, with a category scale showing where your result falls.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Measurements",
+        "genderLabel": "Gender",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "height": "Height (cm)",
+        "neck": "Neck Circumference (cm)",
+        "waist": "Waist Circumference (cm)",
+        "hip": "Hip Circumference (cm)",
+        "hint": "Measure waist at the navel, neck just below the larynx, and hip (women) at the widest point, with the tape snug but not compressing the skin."
+      },
+      "result": {
+        "heading": "Result",
+        "invalidMeasurements": "Enter valid measurements to see a result. Waist (plus hip, for women) must exceed neck."
+      },
+      "categories": {
+        "essential": "Essential Fat",
+        "athletes": "Athletes",
+        "fitness": "Fitness",
+        "average": "Average",
+        "obese": "Obese",
+        "scaleAriaLabel": "A horizontal scale of body fat percentage categories, with a marker showing where the calculated result falls"
+      },
+      "quickReference": {
+        "title": "The Formula",
+        "intro": "The US Navy method estimates body fat from circumference measurements alone."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding the US Navy Body Fat Method",
+          "paragraph1": "Body fat percentage — the proportion of total body weight that is fat tissue, as opposed to muscle, bone, organs, and water — is a more direct measure of body composition than BMI, which cannot distinguish a muscular body from a fat one at the same height and weight. The US Navy method estimates it from a small set of tape-measure circumferences (neck, waist, and for women, hip) rather than skinfold calipers, DEXA scans, or underwater weighing, trading some precision for a measurement almost anyone can take at home with just a tape measure.",
+          "paragraph2": "The formula, developed by Hodgdon and Beckett in 1984 for the US Navy's body composition standards, uses the logarithm of these circumference measurements because body fat's relationship to circumference isn't linear — small waist changes matter more at some body sizes than others, and the logarithmic form captures that curve better than a simple ratio would. Men's and women's formulas differ because fat distribution patterns differ meaningfully by sex, on average, which is also why the method requires a hip measurement for women but not for men."
+        },
+        "categoriesSection": {
+          "title": "The Five Body Fat Categories",
+          "intro": "This tool classifies results using the American Council on Exercise (ACE) categories, which differ by gender because women naturally carry a higher essential-fat percentage.",
+          "items": [
+            {
+              "title": "Essential Fat",
+              "description": "The minimum body fat needed for basic physiological function — hormone production, organ protection, and vitamin storage. Sustained levels at or below this floor are associated with health risks, not fitness gains."
+            },
+            {
+              "title": "Athletes",
+              "description": "The range typically seen in competitive athletes, reflecting low body fat maintained through high training volume, though not necessarily a target appropriate or sustainable for the general population."
+            },
+            {
+              "title": "Fitness",
+              "description": "A lean, fit range achievable and maintainable through regular exercise and typical healthy-eating habits, without the extreme training volume associated with the athletes category."
+            },
+            {
+              "title": "Average",
+              "description": "The range most adults in the general population fall into — associated with typical, moderate health risk, neither notably lean nor at an elevated-risk level."
+            },
+            {
+              "title": "Obese",
+              "description": "Body fat levels associated with meaningfully elevated risk for cardiovascular disease, type 2 diabetes, and other metabolic conditions, independent of the additional information BMI or weight alone would provide."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A couple of measurement sets and what this calculator returns for each.",
+          "columnCalculation": "Measurements",
+          "columnResult": "Body Fat %",
+          "rows": [
+            {
+              "calculation": "Male: height 180cm, neck 38cm, waist 85cm",
+              "result": "≈16.6% (Fitness)"
+            },
+            {
+              "calculation": "Male: height 175cm, neck 42cm, waist 100cm",
+              "result": "≈27.5% (Obese)"
+            },
+            {
+              "calculation": "Female: height 165cm, neck 32cm, waist 70cm, hip 95cm",
+              "result": "≈24.6% (Average)"
+            },
+            {
+              "calculation": "Female: height 170cm, neck 30cm, waist 65cm, hip 90cm",
+              "result": "≈20.5% (Fitness)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "How accurate is the US Navy circumference method?",
+              "answer": "Compared to gold-standard methods like DEXA scans or hydrostatic weighing, the US Navy method typically has an error margin of around 3-4 percentage points, which is generally considered acceptable for tracking trends over time even though it isn't as precise as lab-based measurement. Consistent measurement technique (same tape tension, same body positions, same time of day) matters more for tracking change than the method's absolute accuracy."
+            },
+            {
+              "question": "Why does the formula need a hip measurement for women but not for men?",
+              "answer": "On average, women carry proportionally more fat in the hip and thigh area (a \"gynoid\" distribution pattern) while men tend to carry more around the abdomen (an \"android\" pattern). The original US Navy research found that including hip circumference substantially improved the formula's accuracy for women specifically, while it added no meaningful accuracy for men."
+            },
+            {
+              "question": "Where exactly should I measure my waist and neck?",
+              "answer": "Measure the neck circumference just below the larynx (Adam's apple), with the tape sloping slightly downward toward the front. Measure the waist at the level of the navel while standing relaxed (not sucking in), and for women, measure the hip at its widest point. Keep the tape measure snug against the skin without compressing it for an accurate reading."
+            },
+            {
+              "question": "Why is body fat percentage more useful than BMI for some purposes?",
+              "answer": "BMI is calculated purely from height and weight, so it can't distinguish between a heavily muscled person and a person carrying excess fat at the same BMI value — a well-known limitation, especially for athletes. Body fat percentage measures body composition more directly, which is why it's often used alongside BMI rather than as a full replacement for it."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The US Navy circumference method was developed in 1984 by researchers James Hodgdon and Michael Beckett at the Naval Health Research Center, tasked with finding a body composition standard for military fitness assessment that was more accurate than height-weight tables but far more practical in the field than skinfold calipers or laboratory methods. Their research validated the formula against hydrostatic (underwater) weighing, the reference standard for body composition measurement at the time, across a large sample of Navy personnel."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "The method remains in active use across the US military services today for periodic body composition assessment, valued precisely because it requires no special equipment beyond a tape measure. In civilian fitness and research contexts, it has since been compared extensively against newer reference methods like DEXA (dual-energy X-ray absorptiometry) scans, which confirm its reasonable accuracy for population-level and trend tracking, while more precise imaging-based methods remain preferred for clinical or research applications requiring higher precision."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Body composition assessment is studied within exercise physiology and kinesiology, part of the broader field of health sciences. Here are five respected programs in this area, plus one regional institution:",
+            "universities": [
+              {
+                "name": "University of Oregon — Department of Human Physiology",
+                "note": "A leading US program in human physiology and body composition research.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "No — the graduate programs are in-residence research programs."
+              },
+              {
+                "name": "University of Texas at Austin — Department of Kinesiology and Health Education",
+                "note": "One of the largest and most established kinesiology departments in the US, with active body composition research.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Select graduate programs offer online options; the core research PhD is in-residence."
+              },
+              {
+                "name": "Loughborough University — School of Sport, Exercise and Health Sciences",
+                "note": "Consistently ranked among the world's top universities for sports-related subjects (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "No — postgraduate research degrees are in-residence."
+              },
+              {
+                "name": "Naval Health Research Center (NHRC)",
+                "note": "The US Navy research institution where the original circumference-based body fat method was developed in 1984.",
+                "url": "https://www.med.navy.mil/nhrc/",
+                "online": "No — it is a military research institution rather than a degree-granting university."
+              },
+              {
+                "name": "Australian Institute of Sport",
+                "note": "Australia's national high-performance sports science institute, with active body composition assessment research.",
+                "url": "https://www.ais.gov.au/",
+                "online": "No — it is a national training and research institute rather than a degree-granting university."
+              },
+              {
+                "name": "American University of Beirut — Department of Physical Education",
+                "note": "Founded in 1866; offers physical education and sport science programs regionally.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Hodgdon, J. A., & Beckett, M. B. (1984). Prediction of Percent Body Fat for U.S. Navy Men from Body Circumferences and Height. Naval Health Research Center, Report No. 84-11.",
+          "note": "The original US Navy technical report establishing the circumference-based body fat prediction formulas this calculator uses, validated against hydrostatic weighing.",
+          "url": "https://apps.dtic.mil/sti/citations/ADA143890",
+          "readOriginal": "View the Original Navy Technical Report"
+        }
+      }
     }
   },
   "toolPage": {

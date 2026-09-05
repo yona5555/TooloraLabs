@@ -16457,6 +16457,180 @@
           "readOriginal": "Ver el artículo original"
         }
       }
+    },
+    "body-fat-calculator": {
+      "title": "Calculadora de Grasa Corporal",
+      "description": "Estima el porcentaje de grasa corporal a partir de la circunferencia del cuello, la cintura y (para mujeres) la cadera usando el método de la Marina de EE. UU., con una escala de categorías que muestra dónde se ubica tu resultado.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tus medidas",
+        "genderLabel": "Sexo",
+        "genderMale": "Hombre",
+        "genderFemale": "Mujer",
+        "height": "Altura (cm)",
+        "neck": "Circunferencia del cuello (cm)",
+        "waist": "Circunferencia de la cintura (cm)",
+        "hip": "Circunferencia de la cadera (cm)",
+        "hint": "Mide la cintura a la altura del ombligo, el cuello justo debajo de la laringe, y la cadera (mujeres) en el punto más ancho, con la cinta ajustada pero sin comprimir la piel."
+      },
+      "result": {
+        "heading": "Resultado",
+        "invalidMeasurements": "Introduce medidas válidas para ver un resultado. La cintura (más la cadera, en mujeres) debe superar al cuello."
+      },
+      "categories": {
+        "essential": "Grasa esencial",
+        "athletes": "Atletas",
+        "fitness": "Buena forma",
+        "average": "Promedio",
+        "obese": "Obesidad",
+        "scaleAriaLabel": "Una escala horizontal de categorías de porcentaje de grasa corporal, con un marcador que muestra dónde se ubica el resultado calculado"
+      },
+      "quickReference": {
+        "title": "La fórmula",
+        "intro": "El método de la Marina de EE. UU. estima la grasa corporal solo a partir de medidas de circunferencia."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el método de grasa corporal de la Marina de EE. UU.",
+          "paragraph1": "El porcentaje de grasa corporal — la proporción del peso corporal total que es tejido graso, a diferencia de músculo, hueso, órganos y agua — es una medida más directa de la composición corporal que el IMC, que no puede distinguir un cuerpo musculoso de uno graso con la misma altura y peso. El método de la Marina de EE. UU. lo estima a partir de un pequeño conjunto de medidas de circunferencia con cinta métrica (cuello, cintura y, para mujeres, cadera) en lugar de calibradores de pliegues cutáneos, escáneres DEXA o pesaje hidrostático, sacrificando algo de precisión por una medición que casi cualquiera puede tomar en casa con solo una cinta métrica.",
+          "paragraph2": "La fórmula, desarrollada por Hodgdon y Beckett en 1984 para los estándares de composición corporal de la Marina de EE. UU., usa el logaritmo de estas medidas de circunferencia porque la relación de la grasa corporal con la circunferencia no es lineal — pequeños cambios en la cintura importan más en algunos tamaños corporales que en otros, y la forma logarítmica captura esa curva mejor que una simple razón. Las fórmulas de hombres y mujeres difieren porque los patrones de distribución de grasa difieren significativamente por sexo, en promedio, lo cual también explica por qué el método requiere una medida de cadera para las mujeres pero no para los hombres."
+        },
+        "categoriesSection": {
+          "title": "Las cinco categorías de grasa corporal",
+          "intro": "Esta herramienta clasifica los resultados usando las categorías del American Council on Exercise (ACE), que difieren por sexo porque las mujeres naturalmente tienen un mayor porcentaje de grasa esencial.",
+          "items": [
+            {
+              "title": "Grasa esencial",
+              "description": "La grasa corporal mínima necesaria para el funcionamiento fisiológico básico — producción hormonal, protección de órganos y almacenamiento de vitaminas. Niveles sostenidos en o por debajo de este mínimo se asocian con riesgos para la salud, no con ganancias de forma física."
+            },
+            {
+              "title": "Atletas",
+              "description": "El rango típicamente observado en atletas de competición, que refleja baja grasa corporal mantenida mediante alto volumen de entrenamiento, aunque no necesariamente un objetivo apropiado o sostenible para la población general."
+            },
+            {
+              "title": "Buena forma",
+              "description": "Un rango delgado y en forma alcanzable y mantenible mediante ejercicio regular y hábitos alimenticios saludables típicos, sin el volumen de entrenamiento extremo asociado con la categoría de atletas."
+            },
+            {
+              "title": "Promedio",
+              "description": "El rango en el que se encuentran la mayoría de los adultos de la población general — asociado con un riesgo de salud típico y moderado, ni notablemente delgado ni en un nivel de riesgo elevado."
+            },
+            {
+              "title": "Obesidad",
+              "description": "Niveles de grasa corporal asociados con un riesgo significativamente elevado de enfermedad cardiovascular, diabetes tipo 2 y otras condiciones metabólicas, independientemente de la información adicional que proporcionarían el IMC o el peso por sí solos."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Un par de conjuntos de medidas y lo que devuelve esta calculadora para cada uno.",
+          "columnCalculation": "Medidas",
+          "columnResult": "% de grasa corporal",
+          "rows": [
+            {
+              "calculation": "Hombre: altura 180cm, cuello 38cm, cintura 85cm",
+              "result": "≈16,6% (Buena forma)"
+            },
+            {
+              "calculation": "Hombre: altura 175cm, cuello 42cm, cintura 100cm",
+              "result": "≈27,5% (Obesidad)"
+            },
+            {
+              "calculation": "Mujer: altura 165cm, cuello 32cm, cintura 70cm, cadera 95cm",
+              "result": "≈24,6% (Promedio)"
+            },
+            {
+              "calculation": "Mujer: altura 170cm, cuello 30cm, cintura 65cm, cadera 90cm",
+              "result": "≈20,5% (Buena forma)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Qué tan precisa es la fórmula de circunferencia de la Marina de EE. UU.?",
+              "answer": "Comparado con métodos de referencia como los escáneres DEXA o el pesaje hidrostático, el método de la Marina de EE. UU. típicamente tiene un margen de error de alrededor de 3-4 puntos porcentuales, lo cual generalmente se considera aceptable para seguir tendencias a lo largo del tiempo, aunque no es tan preciso como la medición en laboratorio. La técnica de medición consistente (misma tensión de cinta, misma postura corporal, misma hora del día) importa más para seguir cambios que la precisión absoluta del método."
+            },
+            {
+              "question": "¿Por qué la fórmula necesita una medida de cadera para mujeres pero no para hombres?",
+              "answer": "En promedio, las mujeres llevan proporcionalmente más grasa en la zona de cadera y muslo (un patrón de distribución \"ginoide\"), mientras que los hombres tienden a llevar más alrededor del abdomen (un patrón \"androide\"). La investigación original de la Marina de EE. UU. encontró que incluir la circunferencia de la cadera mejoraba sustancialmente la precisión de la fórmula específicamente para las mujeres, mientras que no añadía precisión significativa para los hombres."
+            },
+            {
+              "question": "¿Dónde exactamente debo medir mi cintura y cuello?",
+              "answer": "Mide la circunferencia del cuello justo debajo de la laringe (nuez de Adán), con la cinta inclinada ligeramente hacia abajo por delante. Mide la cintura a la altura del ombligo de pie y relajado (sin meter el vientre), y para mujeres, mide la cadera en su punto más ancho. Mantén la cinta métrica ajustada contra la piel sin comprimirla para una lectura precisa."
+            },
+            {
+              "question": "¿Por qué el porcentaje de grasa corporal es más útil que el IMC para algunos propósitos?",
+              "answer": "El IMC se calcula únicamente a partir de la altura y el peso, por lo que no puede distinguir entre una persona muy musculosa y una persona con exceso de grasa con el mismo valor de IMC — una limitación bien conocida, especialmente para atletas. El porcentaje de grasa corporal mide la composición corporal más directamente, por lo que a menudo se usa junto con el IMC en lugar de reemplazarlo por completo."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "El método de circunferencia de la Marina de EE. UU. fue desarrollado en 1984 por los investigadores James Hodgdon y Michael Beckett en el Naval Health Research Center, encargados de encontrar un estándar de composición corporal para la evaluación de la aptitud militar que fuera más preciso que las tablas de altura-peso pero mucho más práctico en el campo que los calibradores de pliegues cutáneos o los métodos de laboratorio. Su investigación validó la fórmula frente al pesaje hidrostático (bajo el agua), el estándar de referencia para la medición de la composición corporal en ese momento, en una gran muestra de personal de la Marina."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "El método sigue en uso activo en todas las ramas militares de EE. UU. hoy en día para la evaluación periódica de la composición corporal, valorado precisamente porque no requiere ningún equipo especial más allá de una cinta métrica. En contextos civiles de fitness e investigación, desde entonces se ha comparado ampliamente con métodos de referencia más nuevos como los escáneres DEXA (absorciometría de rayos X de doble energía), que confirman su precisión razonable para el seguimiento a nivel poblacional y de tendencias, mientras que los métodos de imagen más precisos siguen siendo preferidos para aplicaciones clínicas o de investigación que requieren mayor precisión."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La evaluación de la composición corporal se estudia dentro de la fisiología del ejercicio y la kinesiología, parte del campo más amplio de las ciencias de la salud. Estos son cinco programas respetados en esta área, más una institución regional:",
+            "universities": [
+              {
+                "name": "Universidad de Oregón — Departamento de Fisiología Humana",
+                "note": "Un programa estadounidense líder en fisiología humana e investigación de la composición corporal.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "No — los programas de posgrado son programas de investigación presenciales."
+              },
+              {
+                "name": "Universidad de Texas en Austin — Departamento de Kinesiología y Educación para la Salud",
+                "note": "Uno de los departamentos de kinesiología más grandes y consolidados de EE. UU., con investigación activa en composición corporal.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Algunos programas de posgrado ofrecen opciones en línea; el doctorado de investigación principal es presencial."
+              },
+              {
+                "name": "Universidad de Loughborough — Escuela de Ciencias del Deporte, Ejercicio y Salud",
+                "note": "Clasificada de forma constante entre las mejores universidades del mundo en materias relacionadas con el deporte (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "No — los títulos de investigación de posgrado son presenciales."
+              },
+              {
+                "name": "Naval Health Research Center (NHRC)",
+                "note": "La institución de investigación de la Marina de EE. UU. donde se desarrolló el método original de grasa corporal basado en circunferencias en 1984.",
+                "url": "https://www.med.navy.mil/nhrc/",
+                "online": "No — es una institución de investigación militar y no una universidad que otorgue títulos."
+              },
+              {
+                "name": "Instituto Australiano del Deporte",
+                "note": "El instituto nacional australiano de ciencias del deporte de alto rendimiento, con investigación activa en evaluación de la composición corporal.",
+                "url": "https://www.ais.gov.au/",
+                "online": "No — es un instituto nacional de formación e investigación, no una universidad que otorgue títulos."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Educación Física",
+                "note": "Fundada en 1866; ofrece programas de educación física y ciencias del deporte a nivel regional.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Hodgdon, J. A., & Beckett, M. B. (1984). Prediction of Percent Body Fat for U.S. Navy Men from Body Circumferences and Height. Naval Health Research Center, Report No. 84-11.",
+          "note": "El informe técnico original de la Marina de EE. UU. que estableció las fórmulas de predicción de grasa corporal basadas en circunferencia que usa esta calculadora, validadas frente al pesaje hidrostático.",
+          "url": "https://apps.dtic.mil/sti/citations/ADA143890",
+          "readOriginal": "Ver el informe técnico original de la Marina"
+        }
+      }
     }
   },
   "toolPage": {

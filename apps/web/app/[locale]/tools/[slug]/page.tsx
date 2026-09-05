@@ -111,6 +111,8 @@ import TargetHeartRateCalculator from "@/components/tools/target-heart-rate-calc
 import TargetHeartRateEducation from "@/components/tools/target-heart-rate-calculator/TargetHeartRateEducation";
 import SleepCalculator from "@/components/tools/sleep-calculator/SleepCalculator";
 import SleepEducation from "@/components/tools/sleep-calculator/SleepEducation";
+import BodyFatCalculator from "@/components/tools/body-fat-calculator/BodyFatCalculator";
+import BodyFatEducation from "@/components/tools/body-fat-calculator/BodyFatEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -491,6 +493,9 @@ export default async function ToolPage({
     case "sleep-calculator":
       component = <SleepCalculator education={<SleepEducation />} />;
       break;
+    case "body-fat-calculator":
+      component = <BodyFatCalculator education={<BodyFatEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -621,6 +626,7 @@ export default async function ToolPage({
     slug === "mean-median-mode-range-calculator" ||
     slug === "target-heart-rate-calculator" ||
     slug === "sleep-calculator" ||
+    slug === "body-fat-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

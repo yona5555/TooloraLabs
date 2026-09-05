@@ -16457,6 +16457,180 @@
           "readOriginal": "Originalarbeit ansehen"
         }
       }
+    },
+    "body-fat-calculator": {
+      "title": "Körperfett-Rechner",
+      "description": "Schätze den Körperfettanteil aus Hals-, Taillen- und (bei Frauen) Hüftumfang mit der US-Navy-Methode, mit einer Kategorienskala, die zeigt, wo dein Ergebnis liegt.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Deine Maße",
+        "genderLabel": "Geschlecht",
+        "genderMale": "Männlich",
+        "genderFemale": "Weiblich",
+        "height": "Größe (cm)",
+        "neck": "Halsumfang (cm)",
+        "waist": "Taillenumfang (cm)",
+        "hip": "Hüftumfang (cm)",
+        "hint": "Miss die Taille am Bauchnabel, den Hals direkt unter dem Kehlkopf und die Hüfte (bei Frauen) an der breitesten Stelle, das Maßband eng anliegend, aber ohne die Haut einzudrücken."
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "invalidMeasurements": "Gib gültige Maße ein, um ein Ergebnis zu sehen. Taille (plus Hüfte bei Frauen) muss größer als der Hals sein."
+      },
+      "categories": {
+        "essential": "Essenzielles Fett",
+        "athletes": "Athleten",
+        "fitness": "Fitness",
+        "average": "Durchschnitt",
+        "obese": "Adipös",
+        "scaleAriaLabel": "Eine horizontale Skala der Körperfettkategorien, mit einem Marker, der zeigt, wo das berechnete Ergebnis liegt"
+      },
+      "quickReference": {
+        "title": "Die Formel",
+        "intro": "Die US-Navy-Methode schätzt den Körperfettanteil allein aus Umfangsmessungen."
+      },
+      "education": {
+        "intro": {
+          "title": "Die US-Navy-Körperfettmethode verstehen",
+          "paragraph1": "Der Körperfettanteil — der Anteil des Gesamtkörpergewichts, der aus Fettgewebe besteht, im Gegensatz zu Muskeln, Knochen, Organen und Wasser — ist ein direkteres Maß für die Körperzusammensetzung als der BMI, der einen muskulösen Körper nicht von einem fettreichen bei gleicher Größe und gleichem Gewicht unterscheiden kann. Die US-Navy-Methode schätzt ihn aus einer kleinen Reihe von Maßband-Umfangsmessungen (Hals, Taille und bei Frauen Hüfte) statt aus Hautfaltenmessungen, DEXA-Scans oder Unterwasserwiegen, wobei etwas Präzision gegen eine Messung eingetauscht wird, die fast jeder zu Hause mit nur einem Maßband durchführen kann.",
+          "paragraph2": "Die 1984 von Hodgdon und Beckett für die Körperzusammensetzungsstandards der US-Marine entwickelte Formel nutzt den Logarithmus dieser Umfangsmessungen, weil der Zusammenhang zwischen Körperfett und Umfang nicht linear ist — kleine Taillenänderungen zählen bei manchen Körpergrößen mehr als bei anderen, und die logarithmische Form erfasst diese Kurve besser als ein einfaches Verhältnis. Die Formeln für Männer und Frauen unterscheiden sich, weil sich Fettverteilungsmuster im Durchschnitt geschlechtsspezifisch deutlich unterscheiden — deshalb benötigt die Methode auch bei Frauen, nicht aber bei Männern, eine Hüftmessung."
+        },
+        "categoriesSection": {
+          "title": "Die fünf Körperfettkategorien",
+          "intro": "Dieses Tool klassifiziert Ergebnisse anhand der Kategorien des American Council on Exercise (ACE), die sich nach Geschlecht unterscheiden, da Frauen natürlicherweise einen höheren essenziellen Fettanteil aufweisen.",
+          "items": [
+            {
+              "title": "Essenzielles Fett",
+              "description": "Das für grundlegende physiologische Funktionen benötigte Mindestkörperfett — Hormonproduktion, Organschutz und Vitaminspeicherung. Anhaltende Werte an oder unter dieser Untergrenze sind mit Gesundheitsrisiken verbunden, nicht mit Fitnessgewinnen."
+            },
+            {
+              "title": "Athleten",
+              "description": "Der bei Wettkampfsportlern typische Bereich, der niedriges Körperfett widerspiegelt, das durch hohes Trainingsvolumen aufrechterhalten wird — nicht unbedingt ein für die Allgemeinbevölkerung geeignetes oder nachhaltiges Ziel."
+            },
+            {
+              "title": "Fitness",
+              "description": "Ein schlanker, fitter Bereich, der durch regelmäßiges Training und übliche gesunde Ernährungsgewohnheiten erreichbar und erhaltbar ist, ohne das extreme Trainingsvolumen der Athletenkategorie."
+            },
+            {
+              "title": "Durchschnitt",
+              "description": "Der Bereich, in den die meisten Erwachsenen der Allgemeinbevölkerung fallen — verbunden mit typischem, moderatem Gesundheitsrisiko, weder besonders schlank noch auf erhöhtem Risikoniveau."
+            },
+            {
+              "title": "Adipös",
+              "description": "Körperfettwerte, die mit deutlich erhöhtem Risiko für Herz-Kreislauf-Erkrankungen, Typ-2-Diabetes und andere Stoffwechselerkrankungen verbunden sind, unabhängig von den zusätzlichen Informationen, die BMI oder Gewicht allein liefern würden."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Messwertsätze und die Ergebnisse, die dieser Rechner für sie liefert.",
+          "columnCalculation": "Maße",
+          "columnResult": "Körperfett %",
+          "rows": [
+            {
+              "calculation": "Mann: Größe 180cm, Hals 38cm, Taille 85cm",
+              "result": "≈16,6% (Fitness)"
+            },
+            {
+              "calculation": "Mann: Größe 175cm, Hals 42cm, Taille 100cm",
+              "result": "≈27,5% (Adipös)"
+            },
+            {
+              "calculation": "Frau: Größe 165cm, Hals 32cm, Taille 70cm, Hüfte 95cm",
+              "result": "≈24,6% (Durchschnitt)"
+            },
+            {
+              "calculation": "Frau: Größe 170cm, Hals 30cm, Taille 65cm, Hüfte 90cm",
+              "result": "≈20,5% (Fitness)"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wie genau ist die US-Navy-Umfangsmethode?",
+              "answer": "Im Vergleich zu Goldstandard-Methoden wie DEXA-Scans oder hydrostatischem Wiegen hat die US-Navy-Methode typischerweise eine Fehlermarge von etwa 3-4 Prozentpunkten, was für die Verfolgung von Trends über die Zeit im Allgemeinen als akzeptabel gilt, auch wenn sie nicht so präzise wie labor-basierte Messungen ist. Eine konsistente Messtechnik (gleiche Bandspannung, gleiche Körperhaltungen, gleiche Tageszeit) ist für die Verfolgung von Veränderungen wichtiger als die absolute Genauigkeit der Methode."
+            },
+            {
+              "question": "Warum braucht die Formel bei Frauen, aber nicht bei Männern, eine Hüftmessung?",
+              "answer": "Im Durchschnitt tragen Frauen proportional mehr Fett im Hüft- und Oberschenkelbereich (ein \"gynoides\" Verteilungsmuster), während Männer tendenziell mehr um den Bauch herum tragen (ein \"androides\" Muster). Die ursprüngliche US-Navy-Forschung fand heraus, dass die Einbeziehung des Hüftumfangs die Genauigkeit der Formel speziell für Frauen erheblich verbesserte, während sie für Männer keine nennenswerte Genauigkeit hinzufügte."
+            },
+            {
+              "question": "Wo genau sollte ich meine Taille und meinen Hals messen?",
+              "answer": "Miss den Halsumfang direkt unter dem Kehlkopf (Adamsapfel), wobei das Maßband leicht nach vorne unten geneigt ist. Miss die Taille auf Höhe des Bauchnabels im entspannten Stehen (ohne den Bauch einzuziehen), und bei Frauen miss die Hüfte an ihrer breitesten Stelle. Halte das Maßband eng an der Haut anliegend, ohne sie einzudrücken, für eine genaue Ablesung."
+            },
+            {
+              "question": "Warum ist der Körperfettanteil für manche Zwecke nützlicher als der BMI?",
+              "answer": "Der BMI wird ausschließlich aus Größe und Gewicht berechnet, daher kann er nicht zwischen einer stark muskulösen Person und einer Person mit überschüssigem Fett beim gleichen BMI-Wert unterscheiden — eine bekannte Einschränkung, besonders bei Athleten. Der Körperfettanteil misst die Körperzusammensetzung direkter, weshalb er oft zusammen mit dem BMI verwendet wird, statt ihn vollständig zu ersetzen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die US-Navy-Umfangsmethode wurde 1984 von den Forschern James Hodgdon und Michael Beckett am Naval Health Research Center entwickelt, die beauftragt waren, einen Körperzusammensetzungsstandard für die militärische Fitnessbeurteilung zu finden, der genauer als Größe-Gewicht-Tabellen, aber weitaus praktikabler im Feld als Hautfaltenmessungen oder Labormethoden war. Ihre Forschung validierte die Formel gegen hydrostatisches (Unterwasser-)Wiegen, den damaligen Referenzstandard für Körperzusammensetzungsmessungen, an einer großen Stichprobe von Marineangehörigen."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Die Methode wird bis heute aktiv in allen US-Militärzweigen zur regelmäßigen Körperzusammensetzungsbeurteilung eingesetzt, geschätzt gerade weil sie außer einem Maßband keine spezielle Ausrüstung erfordert. In zivilen Fitness- und Forschungskontexten wurde sie seitdem umfassend mit neueren Referenzmethoden wie DEXA-Scans (Dual-Energy-Röntgenabsorptiometrie) verglichen, die ihre angemessene Genauigkeit für Bevölkerungs- und Trendverfolgung bestätigen, während präzisere bildgebende Methoden für klinische oder Forschungsanwendungen mit höherem Präzisionsbedarf bevorzugt bleiben."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Körperzusammensetzungsbewertung wird in der Sportphysiologie und Kinesiologie studiert, einem Teilgebiet der Gesundheitswissenschaften. Hier sind fünf angesehene Programme in diesem Bereich, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "University of Oregon — Department of Human Physiology",
+                "note": "Ein führendes US-Programm für Humanphysiologie und Körperzusammensetzungsforschung.",
+                "url": "https://hphy.uoregon.edu/",
+                "online": "Nein — die Graduiertenprogramme sind Präsenz-Forschungsprogramme."
+              },
+              {
+                "name": "University of Texas at Austin — Department of Kinesiology and Health Education",
+                "note": "Eine der größten und etabliertesten Fakultäten für Bewegungswissenschaft in den USA, mit aktiver Körperzusammensetzungsforschung.",
+                "url": "https://education.utexas.edu/departments/kinesiology-health-education",
+                "online": "Ausgewählte Graduiertenprogramme bieten Online-Optionen; die zentrale Forschungspromotion ist Präsenz."
+              },
+              {
+                "name": "Loughborough University — School of Sport, Exercise and Health Sciences",
+                "note": "Zählt beständig zu den weltweit besten Universitäten für sportbezogene Fächer (QS World University Rankings by Subject).",
+                "url": "https://www.lboro.ac.uk/subjects/sport-exercise-health-sciences/",
+                "online": "Nein — postgraduale Forschungsabschlüsse sind Präsenzprogramme."
+              },
+              {
+                "name": "Naval Health Research Center (NHRC)",
+                "note": "Die Forschungseinrichtung der US-Marine, an der 1984 die ursprüngliche umfangsbasierte Körperfettmethode entwickelt wurde.",
+                "url": "https://www.med.navy.mil/nhrc/",
+                "online": "Nein — es ist eine militärische Forschungseinrichtung und keine gradverleihende Universität."
+              },
+              {
+                "name": "Australian Institute of Sport",
+                "note": "Australiens nationales Institut für Spitzensportwissenschaft, mit aktiver Forschung zur Körperzusammensetzungsbewertung.",
+                "url": "https://www.ais.gov.au/",
+                "online": "Nein — es ist ein nationales Trainings- und Forschungsinstitut, keine gradverleihende Universität."
+              },
+              {
+                "name": "American University of Beirut — Department of Physical Education",
+                "note": "Gegründet 1866; bietet regional Programme in Sportpädagogik und Sportwissenschaft an.",
+                "url": "https://www.aub.edu.lb/fas/pe/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Hodgdon, J. A., & Beckett, M. B. (1984). Prediction of Percent Body Fat for U.S. Navy Men from Body Circumferences and Height. Naval Health Research Center, Report No. 84-11.",
+          "note": "Der ursprüngliche technische Bericht der US-Marine, der die umfangsbasierten Körperfett-Vorhersageformeln festlegte, die dieser Rechner verwendet, validiert gegen hydrostatisches Wiegen.",
+          "url": "https://apps.dtic.mil/sti/citations/ADA143890",
+          "readOriginal": "Originalen Navy-Bericht ansehen"
+        }
+      }
     }
   },
   "toolPage": {
