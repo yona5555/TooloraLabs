@@ -10346,7 +10346,9 @@
             }
           ],
           "disclaimer": "General guidance only — local customs vary by venue and change over time; when in doubt, check the bill for a service charge that may already be included."
-        }
+        },
+        "emptyStateMessage": "Enter your bill, tip percentage, and party size, then press Calculate to see your results.",
+        "sentence": "Splitting {total} per person among {people} {people, plural, one {person} other {people}} at a {tip} tip."
       },
       "form": {
         "inputTitle": "Your Bill",
@@ -10357,7 +10359,9 @@
         "peopleLabel": "Number of People",
         "peoplePlaceholder": "e.g. 2",
         "roundUpLabel": "Round up per person",
-        "roundUpHint": "Rounds each person's total up to a whole number so nobody needs to carry change — the extra is added to the tip."
+        "roundUpHint": "Rounds each person's total up to a whole number so nobody needs to carry change — the extra is added to the tip.",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "billAmount": "Bill Amount",
@@ -10365,7 +10369,13 @@
         "tipAmount": "Tip Amount",
         "totalAmount": "Total Amount",
         "tipPerPerson": "Tip / Person",
-        "totalPerPerson": "Total / Person"
+        "totalPerPerson": "Total / Person",
+        "gaugeZones": {
+          "belowStandard": "Below Standard",
+          "standard": "Standard",
+          "generous": "Generous",
+          "veryGenerous": "Very Generous"
+        }
       },
       "education": {
         "intro": {
@@ -10511,7 +10521,81 @@
           "note": "A field study comparing online customer-satisfaction ratings for the same restaurant chain under a standard tipping system versus a no-tipping, service-included pricing model.",
           "url": "https://doi.org/10.1111/joca.12171",
           "readOriginal": "Read the Original Article"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Every tip calculation in this tool comes from just four inputs.",
+          "items": [
+            {
+              "name": "Bill Amount",
+              "description": "The pre-tip total on the check — the base the tip percentage is applied to."
+            },
+            {
+              "name": "Tip Percentage",
+              "description": "The share of the bill added as a tip, chosen by custom, service quality, or local norm."
+            },
+            {
+              "name": "Number of People",
+              "description": "How many people are splitting the total — the bill and tip are divided evenly across this count."
+            },
+            {
+              "name": "Round Up Per Person",
+              "description": "An optional toggle that rounds each person's share up to a whole currency unit, so no one owes odd change."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Splitting a tip evenly comes up in more situations than just restaurant dining.",
+          "items": [
+            {
+              "title": "Group Restaurant Dining",
+              "description": "The most common use case — a group shares a bill and wants an even, fair split that still adds up to a sensible total tip."
+            },
+            {
+              "title": "Salons and Personal Services",
+              "description": "Tipping norms for haircuts, massages, and similar services often follow the same percentage-of-bill convention as dining."
+            },
+            {
+              "title": "Delivery and Rideshare",
+              "description": "Many delivery and rideshare apps suggest a tip as a percentage of the fare, following the exact same math this tool automates."
+            },
+            {
+              "title": "Event and Catering Staff",
+              "description": "Group events with a shared catering or service bill benefit from the same even-split logic when tipping staff collectively."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Please enter valid, non-negative numbers for the bill, tip percentage, and number of people."
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share & Export",
+        "shareToSocial": "Share to Social",
+        "generatedOn": "Generated on",
+        "contactSectionTitle": "Contact Information (optional)",
+        "preparedForTitle": "Prepared For",
+        "contactName": "Name",
+        "contactEmail": "Email",
+        "contactPhone": "Phone",
+        "contactOrganization": "Organization",
+        "contactAddress": "Address",
+        "contactNamePlaceholder": "e.g. John Smith",
+        "contactEmailPlaceholder": "e.g. john@example.com",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganizationPlaceholder": "e.g. Acme Inc.",
+        "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "splitDiagram": {
+        "title": "Split Among the Group",
+        "caption": "Each of the {count} people owes the same amount."
+      },
+      "sensitivityDiagram": {
+        "title": "Tip Sensitivity",
+        "caption": "How much each person pays per person at different tip percentages, for your bill.",
+        "xLabel": "Tip %"
       }
     },
     "discount-calculator": {

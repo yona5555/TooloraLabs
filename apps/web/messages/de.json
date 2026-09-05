@@ -10350,7 +10350,9 @@
             }
           ],
           "disclaimer": "Nur allgemeine Orientierung – örtliche Gepflogenheiten variieren je nach Lokal und ändern sich mit der Zeit; prüfen Sie im Zweifel die Rechnung auf eine bereits enthaltene Servicegebühr."
-        }
+        },
+        "emptyStateMessage": "Geben Sie Rechnungsbetrag, Trinkgeldprozentsatz und Personenzahl ein und klicken Sie auf Berechnen, um Ihre Ergebnisse zu sehen.",
+        "sentence": "Aufteilung von {total} pro Person auf {people} Personen bei {tip} Trinkgeld."
       },
       "form": {
         "inputTitle": "Ihre Rechnung",
@@ -10361,7 +10363,9 @@
         "peopleLabel": "Anzahl der Personen",
         "peoplePlaceholder": "z. B. 2",
         "roundUpLabel": "Pro Person aufrunden",
-        "roundUpHint": "Rundet den Gesamtbetrag jeder Person auf eine ganze Zahl auf, damit niemand Kleingeld braucht – die Differenz wird dem Trinkgeld hinzugefügt."
+        "roundUpHint": "Rundet den Gesamtbetrag jeder Person auf eine ganze Zahl auf, damit niemand Kleingeld braucht – die Differenz wird dem Trinkgeld hinzugefügt.",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "billAmount": "Rechnungsbetrag",
@@ -10369,7 +10373,13 @@
         "tipAmount": "Trinkgeldbetrag",
         "totalAmount": "Gesamtbetrag",
         "tipPerPerson": "Trinkgeld / Person",
-        "totalPerPerson": "Gesamt / Person"
+        "totalPerPerson": "Gesamt / Person",
+        "gaugeZones": {
+          "belowStandard": "Unter dem Üblichen",
+          "standard": "Üblich",
+          "generous": "Großzügig",
+          "veryGenerous": "Sehr Großzügig"
+        }
       },
       "education": {
         "intro": {
@@ -10515,7 +10525,81 @@
           "note": "Eine Feldstudie, die Online-Kundenzufriedenheitsbewertungen für dieselbe Restaurantkette unter einem Standard-Trinkgeldsystem mit einem trinkgeldfreien, servicepauschalierten Preismodell vergleicht.",
           "url": "https://doi.org/10.1111/joca.12171",
           "readOriginal": "Originalartikel lesen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Trinkgeldberechnung in diesem Tool basiert auf nur vier Eingaben.",
+          "items": [
+            {
+              "name": "Rechnungsbetrag",
+              "description": "Die Summe auf der Rechnung vor dem Trinkgeld — die Basis, auf die der Trinkgeldprozentsatz angewendet wird."
+            },
+            {
+              "name": "Trinkgeldprozentsatz",
+              "description": "Der als Trinkgeld hinzugefügte Anteil der Rechnung, gewählt nach Brauch, Servicequalität oder örtlicher Norm."
+            },
+            {
+              "name": "Personenzahl",
+              "description": "Wie viele Personen sich die Summe teilen — Rechnung und Trinkgeld werden gleichmäßig auf diese Anzahl aufgeteilt."
+            },
+            {
+              "name": "Pro Person Aufrunden",
+              "description": "Eine optionale Einstellung, die den Anteil jeder Person auf eine ganze Währungseinheit aufrundet, sodass niemand krummes Wechselgeld schuldet."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Ein Trinkgeld gleichmäßig aufzuteilen kommt in mehr Situationen vor als nur beim Restaurantbesuch.",
+          "items": [
+            {
+              "title": "Gemeinsames Restaurantessen",
+              "description": "Der häufigste Anwendungsfall — eine Gruppe teilt sich eine Rechnung und möchte eine gerechte, gleichmäßige Aufteilung, die dennoch zu einem sinnvollen Gesamttrinkgeld führt."
+            },
+            {
+              "title": "Salons und persönliche Dienstleistungen",
+              "description": "Trinkgeldnormen für Haarschnitte, Massagen und Ähnliches folgen oft derselben Prozentsatz-der-Rechnung-Konvention wie beim Essen."
+            },
+            {
+              "title": "Lieferung und Fahrdienste",
+              "description": "Viele Liefer- und Fahrdienst-Apps schlagen ein Trinkgeld als Prozentsatz des Fahrpreises vor und folgen damit genau der Mathematik, die dieses Tool automatisiert."
+            },
+            {
+              "title": "Veranstaltungs- und Cateringpersonal",
+              "description": "Gruppenveranstaltungen mit gemeinsamer Catering- oder Servicerechnung profitieren von derselben gleichmäßigen Aufteilungslogik, wenn dem Personal gemeinsam Trinkgeld gegeben wird."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Bitte geben Sie gültige, nicht negative Zahlen für Rechnungsbetrag, Trinkgeldprozentsatz und Personenzahl ein."
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Teilen & Exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "contactSectionTitle": "Kontaktinformationen (optional)",
+        "preparedForTitle": "Erstellt für",
+        "contactName": "Name",
+        "contactEmail": "E-Mail",
+        "contactPhone": "Telefon",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "z. B. Max Mustermann",
+        "contactEmailPlaceholder": "z. B. max@example.com",
+        "contactPhonePlaceholder": "z. B. +49 151 12345678",
+        "contactOrganizationPlaceholder": "z. B. Muster GmbH",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, Stadt"
+      },
+      "splitDiagram": {
+        "title": "Aufteilung in der Gruppe",
+        "caption": "Jede der {count} Personen zahlt denselben Betrag."
+      },
+      "sensitivityDiagram": {
+        "title": "Trinkgeld-Sensitivität",
+        "caption": "Wie viel jede Person bei unterschiedlichen Trinkgeldprozentsätzen für Ihre Rechnung zahlt.",
+        "xLabel": "Trinkgeld %"
       }
     },
     "discount-calculator": {

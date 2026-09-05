@@ -10350,7 +10350,9 @@
             }
           ],
           "disclaimer": "Indication générale uniquement — les usages locaux varient selon l'établissement et évoluent avec le temps ; en cas de doute, vérifiez si des frais de service sont déjà inclus dans l'addition."
-        }
+        },
+        "emptyStateMessage": "Saisissez le montant de l'addition, le pourcentage de pourboire et le nombre de personnes, puis appuyez sur Calculer pour voir vos résultats.",
+        "sentence": "Répartition de {total} par personne entre {people} personnes avec un pourboire de {tip}."
       },
       "form": {
         "inputTitle": "Votre addition",
@@ -10361,7 +10363,9 @@
         "peopleLabel": "Nombre de personnes",
         "peoplePlaceholder": "ex. 2",
         "roundUpLabel": "Arrondir par personne",
-        "roundUpHint": "Arrondit le total de chaque personne au chiffre entier supérieur pour que personne n'ait besoin de faire l'appoint — la différence est ajoutée au pourboire."
+        "roundUpHint": "Arrondit le total de chaque personne au chiffre entier supérieur pour que personne n'ait besoin de faire l'appoint — la différence est ajoutée au pourboire.",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "billAmount": "Montant de l'addition",
@@ -10369,7 +10373,13 @@
         "tipAmount": "Montant du pourboire",
         "totalAmount": "Montant total",
         "tipPerPerson": "Pourboire / personne",
-        "totalPerPerson": "Total / personne"
+        "totalPerPerson": "Total / personne",
+        "gaugeZones": {
+          "belowStandard": "En Dessous de la Norme",
+          "standard": "Standard",
+          "generous": "Généreux",
+          "veryGenerous": "Très Généreux"
+        }
       },
       "education": {
         "intro": {
@@ -10515,7 +10525,81 @@
           "note": "Une étude de terrain comparant les évaluations de satisfaction client en ligne pour une même chaîne de restaurants, sous un système de pourboire classique par rapport à un modèle de tarification sans pourboire, service inclus.",
           "url": "https://doi.org/10.1111/joca.12171",
           "readOriginal": "Lire l'article original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Chaque calcul de pourboire dans cet outil provient de seulement quatre données.",
+          "items": [
+            {
+              "name": "Montant de l'Addition",
+              "description": "Le total avant pourboire sur l'addition — la base sur laquelle le pourcentage de pourboire est appliqué."
+            },
+            {
+              "name": "Pourcentage de Pourboire",
+              "description": "La part de l'addition ajoutée en pourboire, choisie selon la coutume, la qualité du service ou la norme locale."
+            },
+            {
+              "name": "Nombre de Personnes",
+              "description": "Combien de personnes partagent le total — l'addition et le pourboire sont divisés également entre ce nombre."
+            },
+            {
+              "name": "Arrondir par Personne",
+              "description": "Une option facultative qui arrondit la part de chaque personne à l'unité monétaire supérieure, afin que personne ne doive de monnaie impaire."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Applications",
+          "intro": "Répartir un pourboire équitablement se produit dans plus de situations que le simple repas au restaurant.",
+          "items": [
+            {
+              "title": "Repas de Groupe au Restaurant",
+              "description": "Le cas d'usage le plus courant — un groupe partage une addition et souhaite une répartition juste et égale qui aboutit tout de même à un pourboire total raisonnable."
+            },
+            {
+              "title": "Salons et Services Personnels",
+              "description": "Les normes de pourboire pour les coupes de cheveux, massages et services similaires suivent souvent la même convention de pourcentage de l'addition qu'au restaurant."
+            },
+            {
+              "title": "Livraison et Covoiturage",
+              "description": "De nombreuses applications de livraison et de covoiturage suggèrent un pourboire en pourcentage du tarif, suivant exactement le même calcul que cet outil automatise."
+            },
+            {
+              "title": "Personnel d'Événements et de Restauration",
+              "description": "Les événements de groupe avec une facture de restauration ou de service partagée bénéficient de la même logique de répartition égale lors du pourboire collectif au personnel."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Veuillez saisir des nombres valides et non négatifs pour l'addition, le pourcentage de pourboire et le nombre de personnes."
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager et Exporter",
+        "shareToSocial": "Partager sur les Réseaux Sociaux",
+        "generatedOn": "Généré le",
+        "contactSectionTitle": "Coordonnées (facultatif)",
+        "preparedForTitle": "Préparé Pour",
+        "contactName": "Nom",
+        "contactEmail": "E-mail",
+        "contactPhone": "Téléphone",
+        "contactOrganization": "Organisation",
+        "contactAddress": "Adresse",
+        "contactNamePlaceholder": "ex. Jean Dupont",
+        "contactEmailPlaceholder": "ex. jean@example.com",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganizationPlaceholder": "ex. Acme SARL",
+        "contactAddressPlaceholder": "ex. 1 rue de la Paix, Ville"
+      },
+      "splitDiagram": {
+        "title": "Répartition dans le Groupe",
+        "caption": "Chacune des {count} personnes doit le même montant."
+      },
+      "sensitivityDiagram": {
+        "title": "Sensibilité au Pourboire",
+        "caption": "Combien chaque personne paie par personne selon différents pourcentages de pourboire, pour votre addition.",
+        "xLabel": "Pourboire %"
       }
     },
     "discount-calculator": {

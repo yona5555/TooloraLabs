@@ -10350,7 +10350,9 @@
             }
           ],
           "disclaimer": "Orientación general únicamente — las costumbres locales varían según el establecimiento y cambian con el tiempo; ante la duda, revisa si la cuenta ya incluye un cargo por servicio."
-        }
+        },
+        "emptyStateMessage": "Ingresa el monto de la cuenta, el porcentaje de propina y el número de personas, luego presiona Calcular para ver tus resultados.",
+        "sentence": "Dividiendo {total} por persona entre {people} personas con una propina del {tip}."
       },
       "form": {
         "inputTitle": "Tu cuenta",
@@ -10361,7 +10363,9 @@
         "peopleLabel": "Número de personas",
         "peoplePlaceholder": "p. ej., 2",
         "roundUpLabel": "Redondear por persona",
-        "roundUpHint": "Redondea el total de cada persona hacia arriba hasta un número entero para que nadie tenga que llevar cambio — la diferencia se suma a la propina."
+        "roundUpHint": "Redondea el total de cada persona hacia arriba hasta un número entero para que nadie tenga que llevar cambio — la diferencia se suma a la propina.",
+        "calculate": "Calcular",
+        "clear": "Borrar"
       },
       "result": {
         "billAmount": "Importe de la cuenta",
@@ -10369,7 +10373,13 @@
         "tipAmount": "Importe de la propina",
         "totalAmount": "Importe total",
         "tipPerPerson": "Propina / persona",
-        "totalPerPerson": "Total / persona"
+        "totalPerPerson": "Total / persona",
+        "gaugeZones": {
+          "belowStandard": "Por Debajo de lo Habitual",
+          "standard": "Habitual",
+          "generous": "Generosa",
+          "veryGenerous": "Muy Generosa"
+        }
       },
       "education": {
         "intro": {
@@ -10515,7 +10525,81 @@
           "note": "Un estudio de campo que compara las valoraciones de satisfacción de clientes en línea para la misma cadena de restaurantes bajo un sistema de propina estándar frente a un modelo de precio con servicio incluido y sin propina.",
           "url": "https://doi.org/10.1111/joca.12171",
           "readOriginal": "Leer el artículo original"
+        },
+        "variables": {
+          "title": "Variables",
+          "intro": "Cada cálculo de propina en esta herramienta proviene de solo cuatro datos.",
+          "items": [
+            {
+              "name": "Monto de la Cuenta",
+              "description": "El total antes de la propina en la cuenta — la base sobre la que se aplica el porcentaje de propina."
+            },
+            {
+              "name": "Porcentaje de Propina",
+              "description": "La parte de la cuenta añadida como propina, elegida según la costumbre, la calidad del servicio o la norma local."
+            },
+            {
+              "name": "Número de Personas",
+              "description": "Cuántas personas dividen el total — la cuenta y la propina se dividen equitativamente entre este número."
+            },
+            {
+              "name": "Redondear por Persona",
+              "description": "Una opción para redondear hacia arriba la parte de cada persona a una unidad de moneda completa, para que nadie deba un vuelto exacto."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Aplicaciones",
+          "intro": "Dividir una propina equitativamente surge en más situaciones que solo comer en un restaurante.",
+          "items": [
+            {
+              "title": "Comidas Grupales en Restaurantes",
+              "description": "El uso más común — un grupo comparte una cuenta y quiere una división justa y equitativa que aun así sume una propina total razonable."
+            },
+            {
+              "title": "Salones y Servicios Personales",
+              "description": "Las normas de propina para cortes de cabello, masajes y similares suelen seguir la misma convención de porcentaje de la cuenta que en los restaurantes."
+            },
+            {
+              "title": "Entregas y Viajes Compartidos",
+              "description": "Muchas apps de entrega y viajes compartidos sugieren una propina como porcentaje de la tarifa, siguiendo exactamente la misma matemática que esta herramienta automatiza."
+            },
+            {
+              "title": "Personal de Eventos y Catering",
+              "description": "Los eventos grupales con una cuenta de catering o servicio compartida se benefician de la misma lógica de división equitativa al dar propina al personal de forma colectiva."
+            }
+          ]
         }
+      },
+      "errors": {
+        "required": "Ingresa números válidos y no negativos para la cuenta, el porcentaje de propina y el número de personas."
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir y Exportar",
+        "shareToSocial": "Compartir en Redes Sociales",
+        "generatedOn": "Generado el",
+        "contactSectionTitle": "Información de Contacto (opcional)",
+        "preparedForTitle": "Preparado Para",
+        "contactName": "Nombre",
+        "contactEmail": "Correo Electrónico",
+        "contactPhone": "Teléfono",
+        "contactOrganization": "Organización",
+        "contactAddress": "Dirección",
+        "contactNamePlaceholder": "p. ej. Juan Pérez",
+        "contactEmailPlaceholder": "p. ej. juan@example.com",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganizationPlaceholder": "p. ej. Empresa S.A.",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Ciudad"
+      },
+      "splitDiagram": {
+        "title": "División Entre el Grupo",
+        "caption": "Cada una de las {count} personas debe la misma cantidad."
+      },
+      "sensitivityDiagram": {
+        "title": "Sensibilidad de la Propina",
+        "caption": "Cuánto paga cada persona por persona con distintos porcentajes de propina, para tu cuenta.",
+        "xLabel": "Propina %"
       }
     },
     "discount-calculator": {
