@@ -16283,6 +16283,180 @@
           "readOriginal": "Ver el estudio original"
         }
       }
+    },
+    "sleep-calculator": {
+      "title": "Calculadora de Sueño",
+      "description": "Encuentra las mejores horas para dormir o despertar basadas en ciclos de sueño de 90 minutos, para que te despiertes entre ciclos en lugar de en mitad de uno.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "modes": {
+        "groupLabel": "Calcular a partir de",
+        "labels": {
+          "wakeUp": "Necesito despertarme a las",
+          "bedtime": "Voy a acostarme a las"
+        }
+      },
+      "form": {
+        "inputTitle": "Tu horario",
+        "wakeUpTime": "Hora de despertar",
+        "bedtime": "Hora de acostarse",
+        "fallAsleepMinutes": "Minutos para quedarse dormido",
+        "hintWakeUp": "Calcularemos hacia atrás en ciclos de sueño completos de 90 minutos para sugerir horas de acostarse.",
+        "hintBedtime": "Calcularemos hacia adelante en ciclos de sueño completos de 90 minutos para sugerir horas de despertar."
+      },
+      "diagram": {
+        "ariaLabel": "Una fila de bloques, cada uno representando un ciclo de sueño de 90 minutos, para la opción con más ciclos",
+        "caption": "{count} ciclos de sueño ≈ {count} × 90 minutos"
+      },
+      "result": {
+        "heading": "Resultado",
+        "headingBedtimes": "Horas de acostarse sugeridas",
+        "headingWakeUpTimes": "Horas de despertar sugeridas",
+        "cycles": "ciclos",
+        "cyclesCount": "{count} ciclos",
+        "sleepDuration": "{hours}h de sueño",
+        "errors": {
+          "invalid-time": "Introduce una hora válida para ver un resultado.",
+          "invalid-fall-asleep-minutes": "Introduce un número de minutos entre 0 y 120."
+        }
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "Cada hora sugerida se construye a partir de ciclos de sueño completos de 90 minutos."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender los ciclos de sueño",
+          "paragraph1": "El sueño no es un estado uniforme único — pasa por un ciclo recurrente de etapas distintas aproximadamente cada 90 minutos durante toda la noche, y despertar en mitad de un ciclo (particularmente durante el sueño profundo) tiende a producir la sensación de aturdimiento y desorientación conocida como inercia del sueño. Despertar en el límite entre dos ciclos, cuando el sueño es naturalmente más ligero, es la heurística popular detrás de calculadoras de ciclos de sueño como esta.",
+          "paragraph2": "Esta calculadora trabaja en ciclos completos de 90 minutos, añadiendo un breve margen (ajustable, 15 minutos por defecto) para el tiempo que normalmente se tarda en quedarse realmente dormido después de acostarse. Dada una hora de despertar objetivo, cuenta hacia atrás en ciclos completos para sugerir horas de acostarse; dada una hora de acostarse, cuenta hacia adelante para sugerir horas de despertar. En cualquier caso, ofrece un rango desde 6 ciclos (9 horas de sueño) hasta 3 ciclos (4,5 horas), ya que las necesidades y horarios varían — 6 ciclos es la opción más alineada con las recomendaciones estándar de sueño para adultos."
+        },
+        "stages": {
+          "title": "Las etapas dentro de cada ciclo",
+          "intro": "Un único ciclo de sueño de 90 minutos pasa por varias etapas distintas.",
+          "items": [
+            {
+              "title": "Sueño ligero (Etapas 1-2)",
+              "description": "La transición al sueño y la mayor proporción del tiempo total de sueño. El ritmo cardíaco y la respiración se ralentizan, la temperatura corporal baja, y es la etapa desde la que la mayoría de las personas despiertan sintiéndose relativamente alerta."
+            },
+            {
+              "title": "Sueño profundo (Etapa 3)",
+              "description": "También llamado sueño de ondas lentas, concentrado en los ciclos más tempranos de la noche. Es cuando el cuerpo realiza la mayor parte de su trabajo de reparación física — crecimiento de tejidos, reparación muscular y refuerzo del sistema inmunitario — y despertar de él produce el aturdimiento más severo."
+            },
+            {
+              "title": "Sueño REM",
+              "description": "La etapa más asociada con los sueños vívidos, donde la actividad cerebral se asemeja a la vigilia aunque el cuerpo esté brevemente paralizado. Los periodos REM se alargan con cada ciclo sucesivo a lo largo de la noche, haciendo que los ciclos posteriores sean cada vez más dominados por el REM."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos resueltos",
+          "intro": "Algunos horarios y lo que devuelve esta calculadora para cada uno.",
+          "columnCalculation": "Entrada",
+          "columnResult": "Sugerencia de 6 ciclos (9 horas)",
+          "rows": [
+            {
+              "calculation": "Despertar a las 6:00 AM",
+              "result": "Hora de acostarse ≈ 8:45 PM"
+            },
+            {
+              "calculation": "Despertar a las 7:30 AM",
+              "result": "Hora de acostarse ≈ 10:15 PM"
+            },
+            {
+              "calculation": "Acostarse a las 11:00 PM",
+              "result": "Despertar ≈ 8:15 AM"
+            },
+            {
+              "calculation": "Acostarse a las 10:30 PM",
+              "result": "Despertar ≈ 7:45 AM"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": [
+            {
+              "question": "¿Son 90 minutos una duración de ciclo de sueño exacta y universal?",
+              "answer": "No — 90 minutos es un promedio comúnmente citado, pero la duración real del ciclo de sueño varía según el individuo e incluso de una noche a otra para la misma persona, generalmente entre unos 70 y 120 minutos. Esta calculadora usa el promedio de 90 minutos ampliamente adoptado como una estimación práctica, no un valor personalizado y medido."
+            },
+            {
+              "question": "¿Por qué la calculadora sugiere varias opciones en lugar de una sola hora?",
+              "answer": "Diferentes números de ciclos completados se adaptan a diferentes situaciones — 6 ciclos (9 horas) se alinean con las recomendaciones estándar de sueño para adultos, mientras que menos ciclos podrían ajustarse a una noche con un compromiso temprano por la mañana. Mostrar varias opciones alineadas con los ciclos te permite elegir la que mejor se adapte a tu horario, en lugar de una única respuesta rígida."
+            },
+            {
+              "question": "¿Por qué añade minutos extra para quedarse dormido?",
+              "answer": "El cálculo del ciclo comienza a contar desde el momento en que realmente te quedas dormido, no desde el momento en que te acuestas — la mayoría de las personas tardan cierto número de minutos en dormirse después de acostarse. Tener en cuenta este margen mantiene las horas sugeridas realistas en lugar de asumir un inicio instantáneo del sueño."
+            },
+            {
+              "question": "¿Despertar entre ciclos garantiza que me sienta descansado?",
+              "answer": "Puede ayudar a reducir la inercia del sueño (aturdimiento por despertar en mitad de un ciclo), pero la duración total del sueño, la calidad del sueño, la consistencia del horario y factores individuales como el estrés y la salud importan al menos tanto. Los despertares sincronizados con los ciclos son una heurística útil, no una garantía de sentirse totalmente descansado."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de esta herramienta",
+          "history": {
+            "title": "Historia y origen",
+            "paragraph": "La estructura cíclica y por etapas del sueño se identificó por primera vez mediante grabaciones nocturnas de ondas cerebrales realizadas por el fisiólogo Nathaniel Kleitman y su estudiante Eugene Aserinsky en la Universidad de Chicago, cuyo descubrimiento en 1953 del sueño de movimiento ocular rápido (REM) reveló que el sueño no era un estado uniforme único sino un ciclo recurrente de etapas distintas. La investigación posterior de Kleitman estableció el período de aproximadamente 90 minutos de este ciclo, ahora conocido como el ciclo básico de reposo-actividad, como un concepto fundamental en la ciencia del sueño."
+          },
+          "modernDevelopments": {
+            "title": "Desarrollos modernos",
+            "paragraph": "El seguimiento moderno del sueño, desde la polisomnografía clínica (que mide directamente las ondas cerebrales, el movimiento ocular y la actividad muscular) hasta los dispositivos portátiles de consumo (que infieren las etapas del sueño indirectamente a partir del movimiento y la frecuencia cardíaca), ha refinado la comprensión de la variación individual en la duración del ciclo y las proporciones de las etapas mucho más allá del promedio original de 90 minutos. Las calculadoras de ciclos de sueño como esta siguen siendo una heurística popular y accesible precisamente porque no requieren equipo especial —solo una hora objetivo y la duración media del ciclo bien establecida—, aunque un estudio de sueño en laboratorio sigue siendo la única forma de medir con precisión la estructura real del ciclo de una persona."
+          },
+          "academicPath": {
+            "title": "Trayectoria académica",
+            "intro": "La ciencia del sueño se estudia dentro de la neurociencia y la fisiología, parte del campo más amplio de las ciencias de la salud. Estos son cinco programas de investigación respetados en sueño y cronobiología, más una institución regional:",
+            "universities": [
+              {
+                "name": "Universidad de Stanford — Centro de Medicina del Sueño de Stanford",
+                "note": "Uno de los centros de medicina e investigación del sueño líderes en el mundo, con raíces en el trabajo pionero de laboratorios de sueño de los años 70.",
+                "url": "https://sleep.stanford.edu/",
+                "online": "No — los programas clínicos y de investigación son presenciales."
+              },
+              {
+                "name": "Facultad de Medicina de Harvard — División de Medicina del Sueño",
+                "note": "Un centro líder en investigación del sueño y los ritmos circadianos.",
+                "url": "https://sleep.hms.harvard.edu/",
+                "online": "No — las becas de investigación y clínicas son presenciales."
+              },
+              {
+                "name": "Universidad de Oxford — Instituto de Neurociencia del Sueño y Circadiana (SCNi)",
+                "note": "Un centro europeo líder dedicado a la investigación del sueño y los ritmos circadianos.",
+                "url": "https://www.ndcn.ox.ac.uk/research/scni",
+                "online": "No — los programas de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de Chicago — Departamento de Fisiología",
+                "note": "Hogar histórico de la investigación fundacional de Nathaniel Kleitman sobre el ciclo del sueño y el descubrimiento del sueño REM en 1953.",
+                "url": "https://physiology.uchicago.edu/",
+                "online": "No — los programas de investigación de posgrado son presenciales."
+              },
+              {
+                "name": "Universidad de Sídney — Instituto Woolcock de Investigación Médica",
+                "note": "Un instituto líder en investigación del sueño y respiratoria en la región de Asia-Pacífico.",
+                "url": "https://www.woolcock.org.au/",
+                "online": "No — es un instituto de investigación y no una entidad que otorgue títulos por sí misma."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Fisiología",
+                "note": "Fundada en 1866; ofrece programas de fisiología a nivel regional, incluyendo temas de sueño y biología circadiana.",
+                "url": "https://www.aub.edu.lb/fm/physio/Pages/default.aspx",
+                "online": "No — los programas se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias científicas",
+          "citation": "Aserinsky, E., & Kleitman, N. (1953). Regularly Occurring Periods of Eye Motility, and Concomitant Phenomena, During Sleep. Science, 118(3062), 273-274.",
+          "note": "El artículo histórico que reportó el descubrimiento del sueño REM, estableciendo que el sueño progresa a través de un ciclo recurrente de etapas distintas en lugar de un estado uniforme único.",
+          "url": "https://www.science.org/doi/10.1126/science.118.3062.273",
+          "readOriginal": "Ver el artículo original"
+        }
+      }
     }
   },
   "toolPage": {

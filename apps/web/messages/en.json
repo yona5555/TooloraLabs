@@ -16279,6 +16279,180 @@
           "readOriginal": "View the Original Study"
         }
       }
+    },
+    "sleep-calculator": {
+      "title": "Sleep Calculator",
+      "description": "Find the best bedtimes or wake-up times based on 90-minute sleep cycles, so you wake up between cycles instead of mid-cycle.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "modes": {
+        "groupLabel": "Calculate from",
+        "labels": {
+          "wakeUp": "I need to wake up at",
+          "bedtime": "I'm going to bed at"
+        }
+      },
+      "form": {
+        "inputTitle": "Your Schedule",
+        "wakeUpTime": "Wake-Up Time",
+        "bedtime": "Bedtime",
+        "fallAsleepMinutes": "Minutes to Fall Asleep",
+        "hintWakeUp": "We'll work backward in full 90-minute sleep cycles to suggest bedtimes.",
+        "hintBedtime": "We'll work forward in full 90-minute sleep cycles to suggest wake-up times."
+      },
+      "diagram": {
+        "ariaLabel": "A row of blocks, each representing one 90-minute sleep cycle, for the option with the most cycles",
+        "caption": "{count} sleep cycles ≈ {count} × 90 minutes"
+      },
+      "result": {
+        "heading": "Result",
+        "headingBedtimes": "Suggested Bedtimes",
+        "headingWakeUpTimes": "Suggested Wake-Up Times",
+        "cycles": "cycles",
+        "cyclesCount": "{count} cycles",
+        "sleepDuration": "{hours}h sleep",
+        "errors": {
+          "invalid-time": "Enter a valid time to see a result.",
+          "invalid-fall-asleep-minutes": "Enter a number of minutes between 0 and 120."
+        }
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Every suggested time is built from whole 90-minute sleep cycles."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Sleep Cycles",
+          "paragraph1": "Sleep isn't a single uniform state — it moves through a repeating cycle of distinct stages roughly every 90 minutes throughout the night, and waking up in the middle of a cycle (particularly during deep sleep) tends to produce the groggy, disoriented feeling known as sleep inertia. Waking up at the boundary between two cycles, when sleep is naturally lighter, is the popular heuristic behind sleep-cycle calculators like this one.",
+          "paragraph2": "This calculator works in whole 90-minute cycles, adding a short buffer (adjustable, defaulting to 15 minutes) for the time it typically takes to actually fall asleep after getting into bed. Given a target wake-up time, it counts backward in full cycles to suggest bedtimes; given a bedtime, it counts forward to suggest wake-up times. Either way, it offers a range from 6 cycles (9 hours of sleep) down to 3 cycles (4.5 hours), since needs and schedules vary — 6 cycles is the option most aligned with standard sleep recommendations for adults."
+        },
+        "stages": {
+          "title": "The Stages Within Each Cycle",
+          "intro": "A single 90-minute sleep cycle moves through several distinct stages.",
+          "items": [
+            {
+              "title": "Light Sleep (Stages 1-2)",
+              "description": "The transition into sleep and the largest share of total sleep time. Heart rate and breathing slow, body temperature drops, and it's the stage most people wake from feeling relatively alert."
+            },
+            {
+              "title": "Deep Sleep (Stage 3)",
+              "description": "Also called slow-wave sleep, concentrated in the earlier cycles of the night. This is when the body does most of its physical repair work — tissue growth, muscle repair, and immune system reinforcement — and waking from it produces the most severe grogginess."
+            },
+            {
+              "title": "REM Sleep",
+              "description": "The stage most associated with vivid dreaming, where brain activity resembles wakefulness even though the body is briefly paralyzed. REM periods lengthen with each successive cycle through the night, making the later cycles increasingly REM-dominant."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few schedules and what this calculator returns for each.",
+          "columnCalculation": "Input",
+          "columnResult": "6-Cycle Suggestion (9 hours)",
+          "rows": [
+            {
+              "calculation": "Wake up at 6:00 AM",
+              "result": "Bedtime ≈ 8:45 PM"
+            },
+            {
+              "calculation": "Wake up at 7:30 AM",
+              "result": "Bedtime ≈ 10:15 PM"
+            },
+            {
+              "calculation": "Bedtime at 11:00 PM",
+              "result": "Wake up ≈ 8:15 AM"
+            },
+            {
+              "calculation": "Bedtime at 10:30 PM",
+              "result": "Wake up ≈ 7:45 AM"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is 90 minutes an exact, universal sleep cycle length?",
+              "answer": "No — 90 minutes is a commonly cited average, but actual sleep cycle length varies by individual and even from night to night for the same person, typically ranging from about 70 to 120 minutes. This calculator uses the widely adopted 90-minute average as a practical estimate, not a personalized, measured value."
+            },
+            {
+              "question": "Why does the calculator suggest a range of options instead of one time?",
+              "answer": "Different numbers of completed cycles suit different situations — 6 cycles (9 hours) aligns with standard adult sleep recommendations, while fewer cycles might fit a night with an early morning commitment. Showing several cycle-aligned options lets you pick the one that best fits your schedule, rather than a single rigid answer."
+            },
+            {
+              "question": "Why does it add extra minutes for falling asleep?",
+              "answer": "The cycle math starts counting from the moment you actually fall asleep, not the moment you get into bed — most people take a certain number of minutes to drift off after lying down. Accounting for this buffer keeps the suggested clock times realistic rather than assuming instant sleep onset."
+            },
+            {
+              "question": "Does waking up between cycles guarantee I'll feel rested?",
+              "answer": "It can help reduce sleep inertia (grogginess from waking mid-cycle), but total sleep duration, sleep quality, consistency of schedule, and individual factors like stress and health all matter at least as much. Cycle-timed wake-ups are a helpful heuristic, not a guarantee of feeling fully rested."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The cyclical, stage-based structure of sleep was first identified through overnight brain-wave recordings by physiologist Nathaniel Kleitman and his student Eugene Aserinsky at the University of Chicago, whose 1953 discovery of rapid eye movement (REM) sleep revealed that sleep was not a single uniform state but a recurring cycle of distinct stages. Kleitman's subsequent research established the roughly 90-minute period of this cycle, now known as the basic rest-activity cycle, as a foundational concept in sleep science."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "Modern sleep tracking, from clinical polysomnography (which measures brain waves, eye movement, and muscle activity directly) to consumer wearables (which infer sleep stages indirectly from movement and heart rate), has refined understanding of individual variation in cycle length and stage proportions well beyond the original 90-minute average. Sleep-cycle calculators like this one remain a popular, accessible heuristic precisely because they require no special equipment — just a target time and the well-established average cycle length — even though a lab sleep study remains the only way to measure an individual's actual cycle structure precisely."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Sleep science is studied within neuroscience and physiology, part of the broader field of health sciences. Here are five respected sleep and chronobiology research programs, plus one regional institution:",
+            "universities": [
+              {
+                "name": "Stanford University — Stanford Sleep Medicine Center",
+                "note": "One of the world's leading sleep medicine and research centers, tracing back to pioneering sleep laboratory work in the 1970s.",
+                "url": "https://sleep.stanford.edu/",
+                "online": "No — clinical and research programs are in-residence."
+              },
+              {
+                "name": "Harvard Medical School — Division of Sleep Medicine",
+                "note": "A leading center for sleep and circadian rhythm research.",
+                "url": "https://sleep.hms.harvard.edu/",
+                "online": "No — research and clinical fellowships are in-residence."
+              },
+              {
+                "name": "University of Oxford — Sleep and Circadian Neuroscience Institute (SCNi)",
+                "note": "A leading European center dedicated to sleep and circadian rhythm research.",
+                "url": "https://www.ndcn.ox.ac.uk/research/scni",
+                "online": "No — research programs are in-residence."
+              },
+              {
+                "name": "University of Chicago — Department of Physiology",
+                "note": "Historic home of Nathaniel Kleitman's foundational sleep-cycle research and the 1953 discovery of REM sleep.",
+                "url": "https://physiology.uchicago.edu/",
+                "online": "No — graduate research programs are in-residence."
+              },
+              {
+                "name": "University of Sydney — Woolcock Institute of Medical Research",
+                "note": "A leading sleep and respiratory research institute in the Asia-Pacific region.",
+                "url": "https://www.woolcock.org.au/",
+                "online": "No — it is a research institute rather than a degree-granting body on its own."
+              },
+              {
+                "name": "American University of Beirut — Department of Physiology",
+                "note": "Founded in 1866; offers physiology programs regionally, including topics in sleep and circadian biology.",
+                "url": "https://www.aub.edu.lb/fm/physio/Pages/default.aspx",
+                "online": "No — programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Aserinsky, E., & Kleitman, N. (1953). Regularly Occurring Periods of Eye Motility, and Concomitant Phenomena, During Sleep. Science, 118(3062), 273-274.",
+          "note": "The landmark paper reporting the discovery of REM sleep, establishing that sleep progresses through a recurring cycle of distinct stages rather than one uniform state.",
+          "url": "https://www.science.org/doi/10.1126/science.118.3062.273",
+          "readOriginal": "View the Original Paper"
+        }
+      }
     }
   },
   "toolPage": {

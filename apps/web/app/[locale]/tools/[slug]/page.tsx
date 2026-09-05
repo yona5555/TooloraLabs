@@ -109,6 +109,8 @@ import MeanMedianModeRangeCalculator from "@/components/tools/mean-median-mode-r
 import MeanMedianModeRangeEducation from "@/components/tools/mean-median-mode-range-calculator/MeanMedianModeRangeEducation";
 import TargetHeartRateCalculator from "@/components/tools/target-heart-rate-calculator/TargetHeartRateCalculator";
 import TargetHeartRateEducation from "@/components/tools/target-heart-rate-calculator/TargetHeartRateEducation";
+import SleepCalculator from "@/components/tools/sleep-calculator/SleepCalculator";
+import SleepEducation from "@/components/tools/sleep-calculator/SleepEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -486,6 +488,9 @@ export default async function ToolPage({
     case "target-heart-rate-calculator":
       component = <TargetHeartRateCalculator education={<TargetHeartRateEducation />} />;
       break;
+    case "sleep-calculator":
+      component = <SleepCalculator education={<SleepEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -615,6 +620,7 @@ export default async function ToolPage({
     slug === "probability-calculator" ||
     slug === "mean-median-mode-range-calculator" ||
     slug === "target-heart-rate-calculator" ||
+    slug === "sleep-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

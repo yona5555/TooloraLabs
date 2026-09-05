@@ -16283,6 +16283,180 @@
           "readOriginal": "Consulter l'étude originale"
         }
       }
+    },
+    "sleep-calculator": {
+      "title": "Calculatrice de Sommeil",
+      "description": "Trouvez les meilleures heures de coucher ou de réveil selon des cycles de sommeil de 90 minutes, afin de vous réveiller entre les cycles plutôt qu'au milieu de l'un d'eux.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "modes": {
+        "groupLabel": "Calculer à partir de",
+        "labels": {
+          "wakeUp": "Je dois me réveiller à",
+          "bedtime": "Je me couche à"
+        }
+      },
+      "form": {
+        "inputTitle": "Votre emploi du temps",
+        "wakeUpTime": "Heure de réveil",
+        "bedtime": "Heure de coucher",
+        "fallAsleepMinutes": "Minutes pour s'endormir",
+        "hintWakeUp": "Nous calculerons en arrière par cycles de sommeil complets de 90 minutes pour suggérer des heures de coucher.",
+        "hintBedtime": "Nous calculerons en avant par cycles de sommeil complets de 90 minutes pour suggérer des heures de réveil."
+      },
+      "diagram": {
+        "ariaLabel": "Une rangée de blocs, chacun représentant un cycle de sommeil de 90 minutes, pour l'option avec le plus de cycles",
+        "caption": "{count} cycles de sommeil ≈ {count} × 90 minutes"
+      },
+      "result": {
+        "heading": "Résultat",
+        "headingBedtimes": "Heures de coucher suggérées",
+        "headingWakeUpTimes": "Heures de réveil suggérées",
+        "cycles": "cycles",
+        "cyclesCount": "{count} cycles",
+        "sleepDuration": "{hours} h de sommeil",
+        "errors": {
+          "invalid-time": "Saisissez une heure valide pour voir un résultat.",
+          "invalid-fall-asleep-minutes": "Saisissez un nombre de minutes entre 0 et 120."
+        }
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Chaque heure suggérée est construite à partir de cycles de sommeil complets de 90 minutes."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les cycles de sommeil",
+          "paragraph1": "Le sommeil n'est pas un état uniforme unique — il traverse un cycle récurrent d'étapes distinctes environ toutes les 90 minutes tout au long de la nuit, et se réveiller au milieu d'un cycle (particulièrement pendant le sommeil profond) tend à produire la sensation de groggy et de désorientation connue sous le nom d'inertie du sommeil. Se réveiller à la limite entre deux cycles, lorsque le sommeil est naturellement plus léger, est l'heuristique populaire derrière les calculatrices de cycles de sommeil comme celle-ci.",
+          "paragraph2": "Cette calculatrice fonctionne par cycles complets de 90 minutes, en ajoutant une courte marge (ajustable, 15 minutes par défaut) pour le temps qu'il faut généralement pour réellement s'endormir après s'être couché. Étant donné une heure de réveil cible, elle compte en arrière par cycles complets pour suggérer des heures de coucher ; étant donné une heure de coucher, elle compte en avant pour suggérer des heures de réveil. Dans les deux cas, elle propose une plage allant de 6 cycles (9 heures de sommeil) à 3 cycles (4,5 heures), car les besoins et les emplois du temps varient — 6 cycles est l'option la plus alignée avec les recommandations standard de sommeil pour les adultes."
+        },
+        "stages": {
+          "title": "Les étapes au sein de chaque cycle",
+          "intro": "Un seul cycle de sommeil de 90 minutes traverse plusieurs étapes distinctes.",
+          "items": [
+            {
+              "title": "Sommeil léger (Étapes 1-2)",
+              "description": "La transition vers le sommeil et la plus grande part du temps de sommeil total. Le rythme cardiaque et la respiration ralentissent, la température corporelle baisse, et c'est l'étape dont la plupart des gens se réveillent en se sentant relativement alertes."
+            },
+            {
+              "title": "Sommeil profond (Étape 3)",
+              "description": "Aussi appelé sommeil à ondes lentes, concentré dans les cycles plus précoces de la nuit. C'est à ce moment que le corps effectue l'essentiel de son travail de réparation physique — croissance des tissus, réparation musculaire et renforcement du système immunitaire — et s'en réveiller produit la somnolence la plus sévère."
+            },
+            {
+              "title": "Sommeil paradoxal (REM)",
+              "description": "L'étape la plus associée aux rêves vivaces, où l'activité cérébrale ressemble à l'éveil bien que le corps soit brièvement paralysé. Les périodes de sommeil paradoxal s'allongent à chaque cycle successif au cours de la nuit, rendant les cycles ultérieurs de plus en plus dominés par le sommeil paradoxal."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques horaires et ce que cette calculatrice renvoie pour chacun.",
+          "columnCalculation": "Saisie",
+          "columnResult": "Suggestion à 6 cycles (9 heures)",
+          "rows": [
+            {
+              "calculation": "Réveil à 6h00",
+              "result": "Coucher ≈ 20h45"
+            },
+            {
+              "calculation": "Réveil à 7h30",
+              "result": "Coucher ≈ 22h15"
+            },
+            {
+              "calculation": "Coucher à 23h00",
+              "result": "Réveil ≈ 8h15"
+            },
+            {
+              "calculation": "Coucher à 22h30",
+              "result": "Réveil ≈ 7h45"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "90 minutes est-elle une durée de cycle de sommeil exacte et universelle ?",
+              "answer": "Non — 90 minutes est une moyenne communément citée, mais la durée réelle du cycle de sommeil varie selon les individus et même d'une nuit à l'autre pour une même personne, généralement entre environ 70 et 120 minutes. Cette calculatrice utilise la moyenne de 90 minutes largement adoptée comme estimation pratique, pas comme une valeur personnalisée et mesurée."
+            },
+            {
+              "question": "Pourquoi la calculatrice suggère-t-elle plusieurs options plutôt qu'une seule heure ?",
+              "answer": "Différents nombres de cycles complets conviennent à différentes situations — 6 cycles (9 heures) correspondent aux recommandations standard de sommeil pour adultes, tandis que moins de cycles pourraient convenir à une nuit avec un engagement matinal précoce. Afficher plusieurs options alignées sur les cycles vous permet de choisir celle qui convient le mieux à votre emploi du temps, plutôt qu'une seule réponse rigide."
+            },
+            {
+              "question": "Pourquoi ajoute-t-elle des minutes supplémentaires pour s'endormir ?",
+              "answer": "Le calcul du cycle commence à compter à partir du moment où vous vous endormez réellement, pas du moment où vous vous couchez — la plupart des gens mettent un certain nombre de minutes à s'endormir après s'être allongés. Tenir compte de cette marge garde les heures suggérées réalistes plutôt que de supposer un endormissement instantané."
+            },
+            {
+              "question": "Se réveiller entre les cycles garantit-il de se sentir reposé ?",
+              "answer": "Cela peut aider à réduire l'inertie du sommeil (somnolence due au réveil en milieu de cycle), mais la durée totale du sommeil, la qualité du sommeil, la régularité de l'emploi du temps et des facteurs individuels comme le stress et la santé comptent au moins autant. Les réveils synchronisés sur les cycles sont une heuristique utile, pas une garantie de se sentir pleinement reposé."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "La structure cyclique et par étapes du sommeil a été identifiée pour la première fois grâce à des enregistrements nocturnes des ondes cérébrales par le physiologiste Nathaniel Kleitman et son étudiant Eugene Aserinsky à l'Université de Chicago, dont la découverte en 1953 du sommeil paradoxal (mouvements oculaires rapides) a révélé que le sommeil n'était pas un état uniforme unique mais un cycle récurrent d'étapes distinctes. Les recherches ultérieures de Kleitman ont établi la période d'environ 90 minutes de ce cycle, aujourd'hui connue sous le nom de cycle fondamental repos-activité, comme un concept fondateur de la science du sommeil."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Le suivi moderne du sommeil, de la polysomnographie clinique (qui mesure directement les ondes cérébrales, les mouvements oculaires et l'activité musculaire) aux objets connectés grand public (qui déduisent indirectement les étapes du sommeil à partir du mouvement et de la fréquence cardiaque), a affiné la compréhension de la variation individuelle de la durée des cycles et des proportions d'étapes bien au-delà de la moyenne originale de 90 minutes. Les calculatrices de cycles de sommeil comme celle-ci restent une heuristique populaire et accessible précisément parce qu'elles ne nécessitent aucun équipement particulier — juste une heure cible et la durée moyenne de cycle bien établie —, même si une étude du sommeil en laboratoire reste le seul moyen de mesurer précisément la structure réelle du cycle d'un individu."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "La science du sommeil est étudiée en neurosciences et en physiologie, au sein du domaine plus large des sciences de la santé. Voici cinq programmes de recherche reconnus en sommeil et chronobiologie, plus une institution régionale :",
+            "universities": [
+              {
+                "name": "Université de Stanford — Stanford Sleep Medicine Center",
+                "note": "L'un des centres de médecine et de recherche sur le sommeil les plus réputés au monde, issu des travaux pionniers des laboratoires du sommeil des années 1970.",
+                "url": "https://sleep.stanford.edu/",
+                "online": "Non — les programmes cliniques et de recherche sont en présentiel."
+              },
+              {
+                "name": "Harvard Medical School — Division of Sleep Medicine",
+                "note": "Un centre de premier plan pour la recherche sur le sommeil et les rythmes circadiens.",
+                "url": "https://sleep.hms.harvard.edu/",
+                "online": "Non — les bourses de recherche et cliniques sont en présentiel."
+              },
+              {
+                "name": "Université d'Oxford — Sleep and Circadian Neuroscience Institute (SCNi)",
+                "note": "Un centre européen de premier plan dédié à la recherche sur le sommeil et les rythmes circadiens.",
+                "url": "https://www.ndcn.ox.ac.uk/research/scni",
+                "online": "Non — les programmes de recherche sont en présentiel."
+              },
+              {
+                "name": "Université de Chicago — Department of Physiology",
+                "note": "Lieu historique des recherches fondatrices de Nathaniel Kleitman sur le cycle du sommeil et de la découverte du sommeil paradoxal (REM) en 1953.",
+                "url": "https://physiology.uchicago.edu/",
+                "online": "Non — les programmes de recherche de troisième cycle sont en présentiel."
+              },
+              {
+                "name": "Université de Sydney — Woolcock Institute of Medical Research",
+                "note": "Un institut de recherche de premier plan sur le sommeil et les voies respiratoires dans la région Asie-Pacifique.",
+                "url": "https://www.woolcock.org.au/",
+                "online": "Non — c'est un institut de recherche et non un établissement délivrant des diplômes en soi."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de physiologie",
+                "note": "Fondée en 1866 ; propose des programmes de physiologie à l'échelle régionale, y compris des sujets sur le sommeil et la biologie circadienne.",
+                "url": "https://www.aub.edu.lb/fm/physio/Pages/default.aspx",
+                "online": "Non — les programmes sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Aserinsky, E., & Kleitman, N. (1953). Regularly Occurring Periods of Eye Motility, and Concomitant Phenomena, During Sleep. Science, 118(3062), 273-274.",
+          "note": "L'article fondateur rapportant la découverte du sommeil paradoxal, établissant que le sommeil progresse à travers un cycle récurrent d'étapes distinctes plutôt qu'un état uniforme unique.",
+          "url": "https://www.science.org/doi/10.1126/science.118.3062.273",
+          "readOriginal": "Consulter l'article original"
+        }
+      }
     }
   },
   "toolPage": {

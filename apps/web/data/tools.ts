@@ -771,6 +771,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "sleep-calculator",
+    title: "Sleep Calculator",
+    category: "health-fitness",
+    description:
+      "Find the best bedtimes or wake-up times based on 90-minute sleep cycles, so you wake up between cycles instead of mid-cycle.",
+    featured: false,
+    keywords: [
+      "sleep calculator",
+      "sleep cycle calculator",
+      "bedtime calculator",
+      "wake up time calculator",
+      "90 minute sleep cycle",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

@@ -16283,6 +16283,180 @@
           "readOriginal": "Originalstudie ansehen"
         }
       }
+    },
+    "sleep-calculator": {
+      "title": "Schlafrechner",
+      "description": "Finde die besten Schlafenszeiten oder Weckzeiten basierend auf 90-minütigen Schlafzyklen, damit du zwischen den Zyklen statt mitten in einem aufwachst.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "modes": {
+        "groupLabel": "Berechnen ausgehend von",
+        "labels": {
+          "wakeUp": "Ich muss aufwachen um",
+          "bedtime": "Ich gehe ins Bett um"
+        }
+      },
+      "form": {
+        "inputTitle": "Dein Zeitplan",
+        "wakeUpTime": "Weckzeit",
+        "bedtime": "Schlafenszeit",
+        "fallAsleepMinutes": "Minuten zum Einschlafen",
+        "hintWakeUp": "Wir rechnen in vollen 90-Minuten-Schlafzyklen zurück, um Schlafenszeiten vorzuschlagen.",
+        "hintBedtime": "Wir rechnen in vollen 90-Minuten-Schlafzyklen vorwärts, um Weckzeiten vorzuschlagen."
+      },
+      "diagram": {
+        "ariaLabel": "Eine Reihe von Blöcken, von denen jeder einen 90-minütigen Schlafzyklus darstellt, für die Option mit den meisten Zyklen",
+        "caption": "{count} Schlafzyklen ≈ {count} × 90 Minuten"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "headingBedtimes": "Vorgeschlagene Schlafenszeiten",
+        "headingWakeUpTimes": "Vorgeschlagene Weckzeiten",
+        "cycles": "Zyklen",
+        "cyclesCount": "{count} Zyklen",
+        "sleepDuration": "{hours} Std. Schlaf",
+        "errors": {
+          "invalid-time": "Gib eine gültige Uhrzeit ein, um ein Ergebnis zu sehen.",
+          "invalid-fall-asleep-minutes": "Gib eine Minutenzahl zwischen 0 und 120 ein."
+        }
+      },
+      "quickReference": {
+        "title": "Die Rechnung",
+        "intro": "Jede vorgeschlagene Zeit basiert auf vollständigen 90-Minuten-Schlafzyklen."
+      },
+      "education": {
+        "intro": {
+          "title": "Schlafzyklen verstehen",
+          "paragraph1": "Schlaf ist kein einheitlicher Zustand — er durchläuft während der Nacht etwa alle 90 Minuten einen sich wiederholenden Zyklus unterschiedlicher Stadien, und das Aufwachen mitten in einem Zyklus (besonders während des Tiefschlafs) führt tendenziell zu dem benommenen, desorientierten Gefühl, das als Schlafträgheit bekannt ist. Das Aufwachen an der Grenze zwischen zwei Zyklen, wenn der Schlaf naturgemäß leichter ist, ist die verbreitete Heuristik hinter Schlafzyklus-Rechnern wie diesem.",
+          "paragraph2": "Dieser Rechner arbeitet in vollen 90-Minuten-Zyklen und fügt einen kurzen Puffer hinzu (anpassbar, standardmäßig 15 Minuten) für die Zeit, die man normalerweise zum tatsächlichen Einschlafen nach dem Zubettgehen braucht. Bei einer angestrebten Weckzeit zählt er in vollen Zyklen zurück, um Schlafenszeiten vorzuschlagen; bei einer Schlafenszeit zählt er vorwärts, um Weckzeiten vorzuschlagen. So oder so bietet er einen Bereich von 6 Zyklen (9 Stunden Schlaf) bis hinunter zu 3 Zyklen (4,5 Stunden), da Bedürfnisse und Zeitpläne variieren — 6 Zyklen entsprechen am ehesten den Standard-Schlafempfehlungen für Erwachsene."
+        },
+        "stages": {
+          "title": "Die Stadien innerhalb jedes Zyklus",
+          "intro": "Ein einzelner 90-minütiger Schlafzyklus durchläuft mehrere unterschiedliche Stadien.",
+          "items": [
+            {
+              "title": "Leichter Schlaf (Stadien 1-2)",
+              "description": "Der Übergang in den Schlaf und der größte Anteil der gesamten Schlafzeit. Herzfrequenz und Atmung verlangsamen sich, die Körpertemperatur sinkt, und aus diesem Stadium wachen die meisten Menschen relativ wach auf."
+            },
+            {
+              "title": "Tiefschlaf (Stadium 3)",
+              "description": "Auch Slow-Wave-Schlaf genannt, konzentriert sich auf die früheren Zyklen der Nacht. In diesem Stadium leistet der Körper den Großteil seiner körperlichen Reparaturarbeit — Gewebewachstum, Muskelreparatur und Stärkung des Immunsystems — und das Aufwachen daraus verursacht die stärkste Benommenheit."
+            },
+            {
+              "title": "REM-Schlaf",
+              "description": "Das Stadium, das am stärksten mit lebhaftem Träumen verbunden ist, in dem die Gehirnaktivität dem Wachzustand ähnelt, obwohl der Körper kurzzeitig gelähmt ist. REM-Phasen verlängern sich mit jedem aufeinanderfolgenden Zyklus im Laufe der Nacht, sodass die späteren Zyklen zunehmend REM-dominiert sind."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Zeitpläne und die Ergebnisse, die dieser Rechner für sie liefert.",
+          "columnCalculation": "Eingabe",
+          "columnResult": "6-Zyklen-Vorschlag (9 Stunden)",
+          "rows": [
+            {
+              "calculation": "Aufwachen um 6:00 Uhr",
+              "result": "Schlafenszeit ≈ 20:45 Uhr"
+            },
+            {
+              "calculation": "Aufwachen um 7:30 Uhr",
+              "result": "Schlafenszeit ≈ 22:15 Uhr"
+            },
+            {
+              "calculation": "Schlafenszeit um 23:00 Uhr",
+              "result": "Aufwachen ≈ 8:15 Uhr"
+            },
+            {
+              "calculation": "Schlafenszeit um 22:30 Uhr",
+              "result": "Aufwachen ≈ 7:45 Uhr"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Sind 90 Minuten eine exakte, universelle Schlafzykluslänge?",
+              "answer": "Nein — 90 Minuten ist ein häufig zitierter Durchschnittswert, aber die tatsächliche Schlafzykluslänge variiert individuell und sogar von Nacht zu Nacht bei derselben Person, typischerweise zwischen etwa 70 und 120 Minuten. Dieser Rechner verwendet den weit verbreiteten 90-Minuten-Durchschnitt als praktische Schätzung, nicht als personalisierten, gemessenen Wert."
+            },
+            {
+              "question": "Warum schlägt der Rechner mehrere Optionen statt einer Zeit vor?",
+              "answer": "Unterschiedliche Anzahlen abgeschlossener Zyklen passen zu unterschiedlichen Situationen — 6 Zyklen (9 Stunden) entsprechen den Standard-Schlafempfehlungen für Erwachsene, während weniger Zyklen zu einer Nacht mit einem frühen morgendlichen Termin passen könnten. Mehrere zyklusgerechte Optionen zu zeigen, lässt dich diejenige wählen, die am besten zu deinem Zeitplan passt, statt eine einzige starre Antwort zu geben."
+            },
+            {
+              "question": "Warum werden zusätzliche Minuten für das Einschlafen hinzugefügt?",
+              "answer": "Die Zyklusrechnung beginnt in dem Moment, in dem du tatsächlich einschläfst, nicht in dem Moment, in dem du ins Bett gehst — die meisten Menschen brauchen eine gewisse Anzahl von Minuten zum Einschlafen, nachdem sie sich hingelegt haben. Die Berücksichtigung dieses Puffers hält die vorgeschlagenen Uhrzeiten realistisch, statt sofortiges Einschlafen anzunehmen."
+            },
+            {
+              "question": "Garantiert das Aufwachen zwischen den Zyklen, dass ich mich erholt fühle?",
+              "answer": "Es kann helfen, Schlafträgheit (Benommenheit vom Aufwachen mitten im Zyklus) zu reduzieren, aber die gesamte Schlafdauer, Schlafqualität, Regelmäßigkeit des Zeitplans und individuelle Faktoren wie Stress und Gesundheit spielen mindestens ebenso eine Rolle. Zyklusgerechtes Aufwachen ist eine hilfreiche Heuristik, keine Garantie für vollständige Erholung."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die zyklische, stadienbasierte Struktur des Schlafs wurde erstmals durch nächtliche Hirnwellenaufzeichnungen des Physiologen Nathaniel Kleitman und seines Studenten Eugene Aserinsky an der University of Chicago identifiziert, deren Entdeckung des REM-Schlafs (schnelle Augenbewegung) im Jahr 1953 zeigte, dass Schlaf kein einheitlicher Zustand, sondern ein sich wiederholender Zyklus unterschiedlicher Stadien ist. Kleitmans anschließende Forschung etablierte die etwa 90-minütige Periode dieses Zyklus, heute als grundlegender Ruhe-Aktivitäts-Zyklus bekannt, als grundlegendes Konzept der Schlafwissenschaft."
+          },
+          "modernDevelopments": {
+            "title": "Moderne Entwicklungen",
+            "paragraph": "Moderne Schlafüberwachung, von klinischer Polysomnographie (die Hirnwellen, Augenbewegungen und Muskelaktivität direkt misst) bis zu Consumer-Wearables (die Schlafstadien indirekt aus Bewegung und Herzfrequenz ableiten), hat das Verständnis individueller Unterschiede in Zykluslänge und Stadienanteilen weit über den ursprünglichen 90-Minuten-Durchschnitt hinaus verfeinert. Schlafzyklus-Rechner wie dieser bleiben eine beliebte, zugängliche Heuristik gerade weil sie keine besondere Ausrüstung erfordern — nur eine Zielzeit und die gut etablierte durchschnittliche Zykluslänge —, auch wenn eine Schlaflaborstudie die einzige Möglichkeit bleibt, die tatsächliche Zyklusstruktur einer Person präzise zu messen."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Schlafwissenschaft wird in der Neurowissenschaft und Physiologie studiert, einem Teilgebiet der Gesundheitswissenschaften. Hier sind fünf angesehene Schlaf- und Chronobiologie-Forschungsprogramme, plus eine regionale Institution:",
+            "universities": [
+              {
+                "name": "Stanford University — Stanford Sleep Medicine Center",
+                "note": "Eines der weltweit führenden Zentren für Schlafmedizin und -forschung, das auf Pionierarbeit im Schlaflabor der 1970er-Jahre zurückgeht.",
+                "url": "https://sleep.stanford.edu/",
+                "online": "Nein — klinische und Forschungsprogramme sind Präsenzprogramme."
+              },
+              {
+                "name": "Harvard Medical School — Division of Sleep Medicine",
+                "note": "Ein führendes Zentrum für Schlaf- und Chronobiologieforschung.",
+                "url": "https://sleep.hms.harvard.edu/",
+                "online": "Nein — Forschungs- und klinische Fellowships sind Präsenzprogramme."
+              },
+              {
+                "name": "University of Oxford — Sleep and Circadian Neuroscience Institute (SCNi)",
+                "note": "Ein führendes europäisches Zentrum für Schlaf- und Chronobiologieforschung.",
+                "url": "https://www.ndcn.ox.ac.uk/research/scni",
+                "online": "Nein — Forschungsprogramme sind Präsenzprogramme."
+              },
+              {
+                "name": "University of Chicago — Department of Physiology",
+                "note": "Historischer Ort von Nathaniel Kleitmans grundlegender Schlafzyklusforschung und der Entdeckung des REM-Schlafs 1953.",
+                "url": "https://physiology.uchicago.edu/",
+                "online": "Nein — Graduierten-Forschungsprogramme sind Präsenzprogramme."
+              },
+              {
+                "name": "University of Sydney — Woolcock Institute of Medical Research",
+                "note": "Ein führendes Schlaf- und Atemwegsforschungsinstitut im asiatisch-pazifischen Raum.",
+                "url": "https://www.woolcock.org.au/",
+                "online": "Nein — es ist ein Forschungsinstitut und keine eigenständig gradverleihende Einrichtung."
+              },
+              {
+                "name": "American University of Beirut — Department of Physiology",
+                "note": "Gegründet 1866; bietet regional Physiologieprogramme an, einschließlich Themen zu Schlaf und zirkadianer Biologie.",
+                "url": "https://www.aub.edu.lb/fm/physio/Pages/default.aspx",
+                "online": "Nein — die Programme finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Aserinsky, E., & Kleitman, N. (1953). Regularly Occurring Periods of Eye Motility, and Concomitant Phenomena, During Sleep. Science, 118(3062), 273-274.",
+          "note": "Die wegweisende Arbeit, die die Entdeckung des REM-Schlafs berichtete und feststellte, dass Schlaf einen sich wiederholenden Zyklus unterschiedlicher Stadien durchläuft, statt eines einheitlichen Zustands.",
+          "url": "https://www.science.org/doi/10.1126/science.118.3062.273",
+          "readOriginal": "Originalarbeit ansehen"
+        }
+      }
     }
   },
   "toolPage": {
