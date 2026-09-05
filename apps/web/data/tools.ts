@@ -891,6 +891,21 @@ export const tools: Tool[] = [
     ],
   },
   {
+    slug: "time-calculator",
+    title: "Time Calculator",
+    category: "date-time",
+    description:
+      "Add or subtract hours, minutes, and seconds between two durations.",
+    featured: false,
+    keywords: [
+      "time calculator",
+      "add time",
+      "subtract time",
+      "time duration calculator",
+      "hours minutes seconds calculator",
+    ],
+  },
+  {
     slug: "study-time-calculator",
     title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",

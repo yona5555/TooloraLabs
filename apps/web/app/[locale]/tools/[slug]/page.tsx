@@ -125,6 +125,8 @@ import BMRCalculator from "@/components/tools/bmr-calculator/BMRCalculator";
 import BMREducation from "@/components/tools/bmr-calculator/BMREducation";
 import DateCalculator from "@/components/tools/date-calculator/DateCalculator";
 import DateEducation from "@/components/tools/date-calculator/DateEducation";
+import TimeCalculator from "@/components/tools/time-calculator/TimeCalculator";
+import TimeEducation from "@/components/tools/time-calculator/TimeEducation";
 import PaceCalculator from "@/components/tools/pace-calculator/PaceCalculator";
 import PaceEducation from "@/components/tools/pace-calculator/PaceEducation";
 import RandomNumberGenerator from "@/components/tools/random-number-generator/RandomNumberGenerator";
@@ -526,6 +528,9 @@ export default async function ToolPage({
     case "date-calculator":
       component = <DateCalculator education={<DateEducation />} />;
       break;
+    case "time-calculator":
+      component = <TimeCalculator education={<TimeEducation />} />;
+      break;
     case "pace-calculator":
       component = <PaceCalculator education={<PaceEducation />} />;
       break;
@@ -663,6 +668,7 @@ export default async function ToolPage({
     slug === "macro-calculator" ||
     slug === "bmr-calculator" ||
     slug === "date-calculator" ||
+    slug === "time-calculator" ||
     slug === "pace-calculator" ||
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||

@@ -17822,6 +17822,171 @@
           "readOriginal": "View the ISO 8601 Standard"
         }
       }
+    },
+    "time-calculator": {
+      "title": "Time Calculator",
+      "description": "Add or subtract hours, minutes, and seconds between two durations.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Durations",
+        "time1": "Duration 1",
+        "time2": "Duration 2",
+        "operations": {
+          "add": "Add",
+          "subtract": "Subtract"
+        },
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
+      },
+      "diagram": {
+        "ariaLabel": "A clock face pointing to the result's hours and minutes"
+      },
+      "result": {
+        "heading": "Result",
+        "invalidTime": "Enter valid times (minutes and seconds between 0 and 59) to see a result.",
+        "negativeNote": "Duration 2 was larger than Duration 1, so the result is negative.",
+        "totalSeconds": "Total Seconds",
+        "totalSecondsUnit": "seconds"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Every duration is converted to total seconds, combined, and converted back."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Duration Arithmetic",
+          "paragraph1": "Adding or subtracting durations expressed in hours, minutes, and seconds requires carrying values between units, much like adding numbers in a non-decimal base: 60 seconds carry into 1 minute, and 60 minutes carry into 1 hour, rather than the base-10 carrying used in ordinary arithmetic. This calculator converts both durations to a single total-seconds value, performs the addition or subtraction on that single number, then converts the result back into hours, minutes, and seconds for display.",
+          "paragraph2": "It's worth distinguishing duration arithmetic (the kind this tool performs) from clock-time arithmetic. Duration arithmetic answers \"how long is 1 hour 45 minutes plus 30 minutes?\" as a pure elapsed-time question, while clock-time arithmetic answers \"what time will it be 3 hours after 11:00 PM?\", which wraps around a 24-hour cycle and depends on a specific starting point on the clock. This tool handles the former; subtracting a larger duration from a smaller one correctly produces a negative result rather than wrapping around."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Duration arithmetic comes up whenever total elapsed time needs to be tracked or combined.",
+          "items": [
+            {
+              "title": "Tracking Work or Study Time",
+              "description": "Adding up several timed sessions (like a stopwatch-tracked work sprint or study block) to find a total elapsed duration for the day or week."
+            },
+            {
+              "title": "Cooking and Recipe Timing",
+              "description": "Combining multiple sequential cooking steps (prep time plus cook time plus resting time) into a single total duration for planning when a dish needs to go in the oven."
+            },
+            {
+              "title": "Video and Audio Editing",
+              "description": "Adding up clip lengths to find a total runtime, or finding the difference between two timestamps to determine a clip's exact duration."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few duration calculations, computed the same way this tool computes them.",
+          "columnCalculation": "Calculation",
+          "columnResult": "Result",
+          "rows": [
+            {
+              "calculation": "1:45:30 + 0:30:40",
+              "result": "2:16:10"
+            },
+            {
+              "calculation": "3:00:00 − 1:15:00",
+              "result": "1:45:00"
+            },
+            {
+              "calculation": "1:00:00 − 2:30:00",
+              "result": "-1:30:00"
+            },
+            {
+              "calculation": "0:45:00 + 0:45:00",
+              "result": "1:30:00"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why is the result sometimes negative?",
+              "answer": "When subtracting, if the second duration is longer than the first, the result represents a deficit rather than a remaining amount — the calculator reports this as a negative duration rather than silently reporting an incorrect positive number or wrapping around a clock."
+            },
+            {
+              "question": "Is this the same as adding two clock times, like 3:00 PM plus 2:15?",
+              "answer": "Not quite — this tool adds and subtracts elapsed durations (like \"1 hour 30 minutes of work\"), not points on a 24-hour clock. Adding a duration to a specific clock time to find a new clock time is a related but distinct calculation, since it involves wrapping around midnight and knowing AM/PM, which this tool doesn't handle."
+            },
+            {
+              "question": "What's the maximum number of hours I can enter?",
+              "answer": "There's no fixed upper limit built into the duration format — you can enter any number of hours (for example, 100 hours for a multi-day total), since hours aren't constrained to the 0-23 range the way minutes and seconds are constrained to 0-59."
+            },
+            {
+              "question": "Why do minutes and seconds have to be less than 60?",
+              "answer": "A time value like \"1 hour, 75 minutes\" is not in its simplest, standard form — 75 minutes should be expressed as 1 hour 15 minutes. Requiring minutes and seconds to stay under 60 keeps each input in the normalized format that duration arithmetic expects, avoiding ambiguity about how a non-standard value should be interpreted."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The base-60 (sexagesimal) system used for dividing hours into minutes and minutes into seconds originates from ancient Babylonian mathematics, dating back over 4,000 years. Babylonian scribes favored base 60 in part because 60 has many divisors (1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30), making fractions like a third or a quarter of an hour land on whole numbers of minutes — a practical convenience that a base-10 system for time would lack."
+          },
+          "modernDevelopments": {
+            "title": "Modern Developments",
+            "paragraph": "While the sexagesimal hour/minute/second structure has remained essentially unchanged since antiquity, modern computing represents durations internally using standardized formats — commonly a single count of seconds or milliseconds — precisely so that duration arithmetic (the kind this calculator performs) can be done with simple numeric operations before being converted back into the human-readable hours/minutes/seconds format for display, exactly as this tool does internally."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Numeral systems and their history are studied within the history of mathematics. Here are five respected mathematics programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford — Mathematical Institute",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University — Department of Mathematics",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University — Department of Mathematics",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Neugebauer, O. (1969). The Exact Sciences in Antiquity (2nd ed.). Dover Publications.",
+          "note": "A standard historical reference on Babylonian sexagesimal (base-60) mathematics, the origin of dividing hours into 60 minutes and minutes into 60 seconds.",
+          "url": "https://archive.org/details/exactsciencesina0000neug",
+          "readOriginal": "View the Reference Work"
+        }
+      }
     }
   },
   "toolPage": {

@@ -17826,6 +17826,171 @@
           "readOriginal": "Consulter la norme ISO 8601"
         }
       }
+    },
+    "time-calculator": {
+      "title": "Calculatrice de Temps",
+      "description": "Additionnez ou soustrayez des heures, minutes et secondes entre deux durées.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Vos durées",
+        "time1": "Durée 1",
+        "time2": "Durée 2",
+        "operations": {
+          "add": "Additionner",
+          "subtract": "Soustraire"
+        },
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes"
+      },
+      "diagram": {
+        "ariaLabel": "Un cadran d'horloge pointant vers les heures et minutes du résultat"
+      },
+      "result": {
+        "heading": "Résultat",
+        "invalidTime": "Saisissez des temps valides (minutes et secondes entre 0 et 59) pour voir un résultat.",
+        "negativeNote": "La Durée 2 était plus grande que la Durée 1, donc le résultat est négatif.",
+        "totalSeconds": "Secondes Totales",
+        "totalSecondsUnit": "secondes"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Chaque durée est convertie en secondes totales, combinée, puis reconvertie."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre l'arithmétique des durées",
+          "paragraph1": "Additionner ou soustraire des durées exprimées en heures, minutes et secondes nécessite de reporter des valeurs entre unités, un peu comme additionner des nombres dans une base non décimale : 60 secondes sont reportées en 1 minute, et 60 minutes sont reportées en 1 heure, plutôt que la retenue en base 10 utilisée en arithmétique ordinaire. Cette calculatrice convertit les deux durées en une seule valeur de secondes totales, effectue l'addition ou la soustraction sur ce nombre unique, puis reconvertit le résultat en heures, minutes et secondes pour l'affichage.",
+          "paragraph2": "Il convient de distinguer l'arithmétique des durées (le type que cet outil effectue) de l'arithmétique de l'heure de l'horloge. L'arithmétique des durées répond à \"combien font 1 heure 45 minutes plus 30 minutes ?\" comme une pure question de temps écoulé, tandis que l'arithmétique de l'heure de l'horloge répond à \"quelle heure sera-t-il 3 heures après 23h00 ?\", qui boucle sur un cycle de 24 heures et dépend d'un point de départ précis sur l'horloge. Cet outil traite le premier cas ; soustraire une durée plus grande d'une plus petite produit correctement un résultat négatif plutôt que de boucler."
+        },
+        "useCases": {
+          "title": "Utilisations courantes",
+          "intro": "L'arithmétique des durées intervient chaque fois qu'il faut suivre ou combiner le temps total écoulé.",
+          "items": [
+            {
+              "title": "Suivi du temps de travail ou d'étude",
+              "description": "Additionner plusieurs sessions chronométrées (comme un sprint de travail ou un bloc d'étude chronométré) pour trouver une durée totale écoulée pour la journée ou la semaine."
+            },
+            {
+              "title": "Cuisine et minutage des recettes",
+              "description": "Combiner plusieurs étapes de cuisson séquentielles (temps de préparation plus temps de cuisson plus temps de repos) en une seule durée totale pour planifier quand un plat doit aller au four."
+            },
+            {
+              "title": "Montage vidéo et audio",
+              "description": "Additionner les longueurs de clips pour trouver une durée totale, ou trouver la différence entre deux horodatages pour déterminer la durée exacte d'un clip."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples résolus",
+          "intro": "Quelques calculs de durée, effectués de la même manière que cet outil les calcule.",
+          "columnCalculation": "Calcul",
+          "columnResult": "Résultat",
+          "rows": [
+            {
+              "calculation": "1:45:30 + 0:30:40",
+              "result": "2:16:10"
+            },
+            {
+              "calculation": "3:00:00 − 1:15:00",
+              "result": "1:45:00"
+            },
+            {
+              "calculation": "1:00:00 − 2:30:00",
+              "result": "-1:30:00"
+            },
+            {
+              "calculation": "0:45:00 + 0:45:00",
+              "result": "1:30:00"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi le résultat est-il parfois négatif ?",
+              "answer": "Lors d'une soustraction, si la deuxième durée est plus longue que la première, le résultat représente un déficit plutôt qu'un montant restant — la calculatrice signale cela comme une durée négative plutôt que de signaler silencieusement un nombre positif incorrect ou de boucler autour d'une horloge."
+            },
+            {
+              "question": "Est-ce la même chose qu'additionner deux heures d'horloge, comme 15h00 plus 2h15 ?",
+              "answer": "Pas tout à fait — cet outil additionne et soustrait des durées écoulées (comme \"1 heure 30 minutes de travail\"), pas des points sur une horloge de 24 heures. Ajouter une durée à une heure d'horloge précise pour trouver une nouvelle heure d'horloge est un calcul apparenté mais distinct, car il implique de boucler autour de minuit et de connaître AM/PM, ce que cet outil ne gère pas."
+            },
+            {
+              "question": "Quel est le nombre maximum d'heures que je peux saisir ?",
+              "answer": "Il n'y a pas de limite supérieure fixe intégrée dans le format de durée — vous pouvez saisir n'importe quel nombre d'heures (par exemple, 100 heures pour un total sur plusieurs jours), car les heures ne sont pas limitées à la plage 0-23 comme le sont les minutes et secondes limitées à 0-59."
+            },
+            {
+              "question": "Pourquoi les minutes et secondes doivent-elles être inférieures à 60 ?",
+              "answer": "Une valeur de temps comme \"1 heure, 75 minutes\" n'est pas sous sa forme la plus simple et standard — 75 minutes devraient être exprimées comme 1 heure 15 minutes. Exiger que les minutes et secondes restent en dessous de 60 maintient chaque saisie dans le format normalisé attendu par l'arithmétique des durées, évitant toute ambiguïté sur la façon dont une valeur non standard doit être interprétée."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les coulisses de cet outil",
+          "history": {
+            "title": "Histoire et origine",
+            "paragraph": "Le système en base 60 (sexagésimal) utilisé pour diviser les heures en minutes et les minutes en secondes trouve son origine dans les mathématiques babyloniennes antiques, remontant à plus de 4 000 ans. Les scribes babyloniens privilégiaient la base 60 en partie parce que 60 possède de nombreux diviseurs (1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30), ce qui fait que des fractions comme un tiers ou un quart d'heure tombent sur des nombres entiers de minutes — une commodité pratique qu'un système en base 10 pour le temps n'aurait pas."
+          },
+          "modernDevelopments": {
+            "title": "Développements modernes",
+            "paragraph": "Bien que la structure sexagésimale heure/minute/seconde soit restée essentiellement inchangée depuis l'Antiquité, l'informatique moderne représente les durées en interne à l'aide de formats standardisés — généralement un simple décompte de secondes ou de millisecondes — précisément pour que l'arithmétique des durées (le type que cette calculatrice effectue) puisse être réalisée avec de simples opérations numériques avant d'être reconvertie dans le format heures/minutes/secondes lisible par l'humain pour l'affichage, exactement comme le fait cet outil en interne."
+          },
+          "academicPath": {
+            "title": "Parcours académique",
+            "intro": "Les systèmes numériques et leur histoire sont étudiés au sein de l'histoire des mathématiques. Voici cinq programmes de mathématiques reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford — Mathematical Institute",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Mathematics",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard — Department of Mathematics",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford — Department of Mathematics",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références scientifiques",
+          "citation": "Neugebauer, O. (1969). The Exact Sciences in Antiquity (2nd ed.). Dover Publications.",
+          "note": "Une référence historique standard sur les mathématiques sexagésimales (base 60) babyloniennes, à l'origine de la division des heures en 60 minutes et des minutes en 60 secondes.",
+          "url": "https://archive.org/details/exactsciencesina0000neug",
+          "readOriginal": "Consulter l'ouvrage de référence"
+        }
+      }
     }
   },
   "toolPage": {
