@@ -19532,6 +19532,163 @@
           "readOriginal": "Consulter l'Article"
         }
       }
+    },
+    "roman-numeral-converter": {
+      "title": "Convertisseur de Chiffres Romains",
+      "description": "Convertissez entre les chiffres arabes et les chiffres romains dans les deux sens.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Convertir un Nombre",
+        "toRoman": "En Romain",
+        "toArabic": "En Arabe",
+        "arabicLabel": "Nombre (1-3999)",
+        "arabicHint": "Les chiffres romains standards ne représentent que des nombres entiers de 1 à 3999.",
+        "romanLabel": "Chiffre Romain"
+      },
+      "result": {
+        "heading": "Résultat",
+        "emptyInput": "Saisissez une valeur à convertir.",
+        "outOfRange": "Saisissez un nombre entier entre 1 et 3999.",
+        "invalidRoman": "Ce n'est pas un chiffre romain standard valide."
+      },
+      "quickReference": {
+        "title": "Symboles Romains",
+        "intro": "Les sept symboles de base et leurs valeurs."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Chiffres Romains",
+          "paragraph1": "Les chiffres romains représentent des nombres en utilisant des combinaisons de sept lettres : I (1), V (5), X (10), L (50), C (100), D (500), et M (1000). Les nombres sont construits en combinant ces symboles et en additionnant leurs valeurs, généralement du plus grand au plus petit, en lisant de gauche à droite — ainsi VII vaut 5 + 1 + 1 = 7.",
+          "paragraph2": "Une règle « soustractive » spéciale raccourcit certaines combinaisons : au lieu d'écrire quatre fois le même symbole d'affilée (comme IIII pour 4), un symbole plus petit est placé avant un plus grand pour signifier une soustraction — IV signifie 5 − 1 = 4, et IX signifie 10 − 1 = 9. Cette notation soustractive n'est utilisée que pour des paires spécifiques (IV, IX, XL, XC, CD, CM), ce qui permet à cet outil de rejeter des chiffres invalides comme IIII ou VX qui ne suivent pas les règles standards."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Les chiffres romains apparaissent encore aujourd'hui dans des contextes spécifiques, principalement traditionnels ou stylistiques.",
+          "items": [
+            {
+              "title": "Cadrans d'Horloge et Dates",
+              "description": "De nombreux cadrans d'horloge, pierres angulaires de bâtiments, et dates de droits d'auteur de films utilisent encore des chiffres romains pour une apparence traditionnelle ou formelle."
+            },
+            {
+              "title": "Suites, Volumes, et Plans",
+              "description": "Les suites de films (Rocky IV), les volumes de livres, et les sous-titres de plans utilisent couramment des chiffres romains pour indiquer une séquence."
+            },
+            {
+              "title": "Noms et Titres",
+              "description": "Les monarques, papes, et noms de famille transmis à travers les générations (le roi Henri VIII, John Smith III) utilisent des chiffres romains pour distinguer des individus successifs partageant un même nom."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Quelques conversions, effectuées de la même manière que cet outil les calcule.",
+          "columnArabic": "Arabe",
+          "columnRoman": "Romain",
+          "rows": [
+            {
+              "arabic": "4",
+              "roman": "IV"
+            },
+            {
+              "arabic": "49",
+              "roman": "XLIX"
+            },
+            {
+              "arabic": "1994",
+              "roman": "MCMXCIV"
+            },
+            {
+              "arabic": "3999",
+              "roman": "MMMCMXCIX"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi ne puis-je pas convertir des nombres supérieurs à 3999 ?",
+              "answer": "Les chiffres romains standards n'ont pas de symbole pour 5000 ou plus, donc 3999 (MMMCMXCIX) est le plus grand nombre exprimable avec les sept lettres traditionnelles. Historiquement, des nombres plus grands étaient parfois écrits avec une barre horizontale au-dessus d'un symbole pour multiplier sa valeur par 1000, mais cette notation étendue ne fait pas partie du système standard pris en charge par cet outil."
+            },
+            {
+              "question": "Pourquoi voit-on parfois IIII sur les horloges au lieu de IV ?",
+              "answer": "Bien que IV soit la forme soustractive standard pour 4, de nombreux cadrans d'horloge utilisent traditionnellement IIII à la place, en grande partie pour une symétrie visuelle avec le VIII du côté opposé du cadran et pour des raisons historiques/esthétiques. Cet outil suit la convention mathématique standard (IV), pas la convention des cadrans d'horloge."
+            },
+            {
+              "question": "Existe-t-il un chiffre romain pour zéro ?",
+              "answer": "Non. Le système de chiffres romains n'a pas de symbole pour zéro — il a été conçu pour compter et enregistrer des quantités, pas pour le type d'arithmétique positionnelle qui nécessite un espace réservé zéro, c'est pourquoi la plage de cet outil commence à 1."
+            },
+            {
+              "question": "Pourquoi le convertisseur rejette-t-il certains chiffres romains que je saisis ?",
+              "answer": "Cet outil n'accepte que les chiffres romains standards, formés de manière canonique. Il rejette les chiffres qui ne suivent pas les règles soustractives standards (comme IIII, VX, ou IC), car ceux-ci ne sont pas considérés comme valides dans le système traditionnel, même si une simple somme lettre par lettre pourrait autrement produire un nombre d'apparence plausible."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Les chiffres romains sont nés dans la Rome antique, évoluant à partir de symboles numériques étrusques à partir d'environ le 8e siècle av. J.-C. Le système a été conçu pour le comptage pratique et la tenue de registres à l'aide de marques semblables à des bâtons de comptage — I, II, III pour les petits comptes, avec des symboles supplémentaires ajoutés pour les nombres ronds plus grands. Il est resté le système numérique dominant à travers l'Europe pendant plus de mille ans, bien avant dans le Moyen Âge, même après que le système de numération indo-arabe, plus pratique sur le plan calculatoire (les chiffres 0-9 utilisés aujourd'hui), ait commencé à se répandre depuis l'Inde à travers le monde islamique à partir du 9e siècle."
+          },
+          "modernUse": {
+            "title": "Pourquoi Nous les Utilisons Encore Aujourd'hui",
+            "paragraph": "Les chiffres romains ont persisté longtemps après que les chiffres indo-arabes soient devenus la norme pour le calcul, car ils servent un objectif différent : formalité, tradition, et marquage de séquence plutôt qu'arithmétique. Puisque les chiffres romains sont encombrants pour l'addition, la soustraction, et surtout la multiplication par rapport au système positionnel indo-arabe, ils sont devenus progressivement réservés aux contextes où la tradition ou la distinction visuelle importent plus que le calcul — les usages modernes spécifiques couverts ci-dessus."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'histoire des systèmes numériques est étudiée au sein de l'histoire des mathématiques. Voici cinq programmes de mathématiques reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford — Mathematical Institute",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Mathematics",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard — Department of Mathematics",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford — Department of Mathematics",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Ifrah, G. (2000). The Universal History of Numbers: From Prehistory to the Invention of the Computer. Wiley.",
+          "note": "Une histoire savante complète des systèmes numériques à travers les civilisations, y compris le développement et la diffusion des chiffres romains.",
+          "url": "https://archive.org/details/universalhistory0000ifra",
+          "readOriginal": "Consulter la Référence"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19682,7 +19839,6 @@
     "body-fat-calculator": "Calculatrice de taux de graisse corporelle",
     "calories-burned-calculator": "Calculatrice de calories brûlées",
     "passphrase-generator": "Générateur de phrases de passe",
-    "roman-numeral-converter": "Convertisseur de chiffres romains",
     "quadratic-equation-calculator": "Calculatrice d'équation quadratique",
     "trigonometry-calculator": "Calculatrice de trigonométrie",
     "gcf-lcm-calculator": "Calculatrice PGCD/PPCM",

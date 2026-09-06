@@ -78,3 +78,4 @@ export * from "./BatchInvoiceCalculator";
 export * from "./TextToSpeechCalculator";
 export * from "./SpeechToTextCalculator";
 export * from "./SpellingGrammarCalculator";
+export * from "./RomanNumeralCalculator";

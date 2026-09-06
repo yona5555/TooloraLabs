@@ -19532,6 +19532,163 @@
           "readOriginal": "Artikel ansehen"
         }
       }
+    },
+    "roman-numeral-converter": {
+      "title": "Römische-Zahlen-Umrechner",
+      "description": "Wandle in beide Richtungen zwischen arabischen Ziffern und römischen Zahlen um.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Eine Zahl umwandeln",
+        "toRoman": "In Römisch",
+        "toArabic": "In Arabisch",
+        "arabicLabel": "Zahl (1-3999)",
+        "arabicHint": "Standard-römische Zahlen stellen nur ganze Zahlen von 1 bis 3999 dar.",
+        "romanLabel": "Römische Zahl"
+      },
+      "result": {
+        "heading": "Ergebnis",
+        "emptyInput": "Gib einen Wert zum Umwandeln ein.",
+        "outOfRange": "Gib eine ganze Zahl zwischen 1 und 3999 ein.",
+        "invalidRoman": "Das ist keine gültige Standard-Römerzahl."
+      },
+      "quickReference": {
+        "title": "Römische Symbole",
+        "intro": "Die sieben Grundsymbole und ihre Werte."
+      },
+      "education": {
+        "intro": {
+          "title": "Römische Zahlen verstehen",
+          "paragraph1": "Römische Zahlen stellen Zahlen mittels Kombinationen von sieben Buchstaben dar: I (1), V (5), X (10), L (50), C (100), D (500) und M (1000). Zahlen werden gebildet, indem diese Symbole kombiniert und ihre Werte addiert werden, im Allgemeinen von der größten zur kleinsten, von links nach rechts gelesen — so bedeutet VII 5 + 1 + 1 = 7.",
+          "paragraph2": "Eine besondere \"subtraktive\" Regel verkürzt manche Kombinationen: Statt viermal dasselbe Symbol hintereinander zu schreiben (wie IIII für 4), wird ein kleineres Symbol vor ein größeres gesetzt, um Subtraktion zu bedeuten — IV bedeutet 5 − 1 = 4, und IX bedeutet 10 − 1 = 9. Diese subtraktive Notation wird nur für bestimmte Paare verwendet (IV, IX, XL, XC, CD, CM), was es diesem Tool ermöglicht, ungültige Zahlen wie IIII oder VX abzulehnen, die nicht den Standardregeln folgen."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Römische Zahlen tauchen heute noch in bestimmten, meist traditionellen oder stilistischen Kontexten auf.",
+          "items": [
+            {
+              "title": "Zifferblätter und Datumsangaben",
+              "description": "Viele Zifferblätter, Grundsteine von Gebäuden und Urheberrechtsdaten von Filmen verwenden noch immer römische Zahlen für ein traditionelles oder formelles Erscheinungsbild."
+            },
+            {
+              "title": "Fortsetzungen, Bände und Gliederungen",
+              "description": "Filmfortsetzungen (Rocky IV), Buchbände und Gliederungsunterüberschriften verwenden üblicherweise römische Zahlen, um eine Reihenfolge anzuzeigen."
+            },
+            {
+              "title": "Namen und Titel",
+              "description": "Monarchen, Päpste und über Generationen weitergegebene Familiennamen (König Heinrich VIII., John Smith III.) verwenden römische Zahlen, um aufeinanderfolgende Personen mit demselben Namen zu unterscheiden."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Beispielrechnungen",
+          "intro": "Ein paar Umwandlungen, berechnet genau so, wie dieses Tool sie berechnet.",
+          "columnArabic": "Arabisch",
+          "columnRoman": "Römisch",
+          "rows": [
+            {
+              "arabic": "4",
+              "roman": "IV"
+            },
+            {
+              "arabic": "49",
+              "roman": "XLIX"
+            },
+            {
+              "arabic": "1994",
+              "roman": "MCMXCIV"
+            },
+            {
+              "arabic": "3999",
+              "roman": "MMMCMXCIX"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Warum kann ich keine Zahlen größer als 3999 umwandeln?",
+              "answer": "Standard-römische Zahlen haben kein Symbol für 5000 oder mehr, daher ist 3999 (MMMCMXCIX) die größte Zahl, die mit den traditionellen sieben Buchstaben ausdrückbar ist. Historisch wurden größere Zahlen manchmal mit einem horizontalen Balken über einem Symbol geschrieben, um seinen Wert mit 1000 zu multiplizieren, aber diese erweiterte Notation ist nicht Teil des Standardsystems, das dieses Tool unterstützt."
+            },
+            {
+              "question": "Warum sieht man auf Uhren manchmal IIII statt IV?",
+              "answer": "Während IV die standardmäßige subtraktive Form für 4 ist, verwenden viele Zifferblätter traditionell stattdessen IIII, größtenteils aus Gründen der visuellen Symmetrie mit dem VIII auf der gegenüberliegenden Seite des Zifferblatts und aus historischen/ästhetischen Gründen. Dieses Tool folgt der mathematischen Standardkonvention (IV), nicht der Zifferblatt-Konvention."
+            },
+            {
+              "question": "Gibt es eine römische Zahl für Null?",
+              "answer": "Nein. Das römische Zahlensystem hat kein Symbol für Null — es wurde für das Zählen und Aufzeichnen von Mengen entwickelt, nicht für die Art von Stellenwertarithmetik, die einen Nullplatzhalter erfordert, weshalb der Bereich dieses Tools bei 1 beginnt."
+            },
+            {
+              "question": "Warum lehnt der Umrechner manche römischen Zahlen ab, die ich eingebe?",
+              "answer": "Dieses Tool akzeptiert nur standardmäßige, kanonisch geformte römische Zahlen. Es lehnt Zahlen ab, die nicht den standardmäßigen subtraktiven Regeln folgen (wie IIII, VX oder IC), da diese im traditionellen System nicht als gültig gelten, auch wenn eine naive buchstabenweise Summe sonst eine plausibel aussehende Zahl ergeben könnte."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Römische Zahlen entstanden im antiken Rom und entwickelten sich ab etwa dem 8. Jahrhundert v. Chr. aus etruskischen Zahlensymbolen. Das System wurde für praktisches Zählen und Aufzeichnen mittels strichlisten-ähnlicher Markierungen entwickelt — I, II, III für kleine Mengen, mit zusätzlichen Symbolen für größere runde Zahlen. Es blieb über tausend Jahre lang das vorherrschende Zahlensystem in Europa, bis weit ins Mittelalter hinein, selbst nachdem sich das rechnerisch praktischere indisch-arabische Zahlensystem (die heute verwendeten Ziffern 0-9) ab dem 9. Jahrhundert von Indien aus über die islamische Welt zu verbreiten begann."
+          },
+          "modernUse": {
+            "title": "Warum wir sie heute noch verwenden",
+            "paragraph": "Römische Zahlen hielten sich lange, nachdem indisch-arabische Zahlen zum Standard für Berechnungen geworden waren, weil sie einem anderen Zweck dienen: Formalität, Tradition und Sequenzmarkierung statt Arithmetik. Da römische Zahlen für Addition, Subtraktion und besonders Multiplikation im Vergleich zum positionalen indisch-arabischen System umständlich sind, wurden sie allmählich für Kontexte reserviert, in denen Tradition oder visuelle Unterscheidbarkeit wichtiger sind als Berechnung — die oben genannten spezifischen modernen Anwendungen."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Geschichte der Zahlensysteme wird innerhalb der Geschichte der Mathematik studiert. Hier sind fünf angesehene Mathematikprogramme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Weltweit Rang 1 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm der Fakultät für Mathematik."
+              },
+              {
+                "name": "University of Oxford — Mathematical Institute",
+                "note": "Weltweit Rang 2 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Weltweit Rang 3 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Fakultät für Mathematik statt."
+              },
+              {
+                "name": "Harvard University — Department of Mathematics",
+                "note": "Weltweit Rang 4 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Stanford University — Department of Mathematics",
+                "note": "Weltweit Rang 5 in Mathematik (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Nein — das Programm ist eine Präsenz-Forschungspromotion."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Ifrah, G. (2000). The Universal History of Numbers: From Prehistory to the Invention of the Computer. Wiley.",
+          "note": "Eine umfassende wissenschaftliche Geschichte der Zahlensysteme über Zivilisationen hinweg, einschließlich der Entwicklung und Verbreitung römischer Zahlen.",
+          "url": "https://archive.org/details/universalhistory0000ifra",
+          "readOriginal": "Referenz ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19682,7 +19839,6 @@
     "body-fat-calculator": "Körperfettanteil-Rechner",
     "calories-burned-calculator": "Kalorienverbrauch-Rechner",
     "passphrase-generator": "Passphrasen-Generator",
-    "roman-numeral-converter": "Umrechner für römische Zahlen",
     "quadratic-equation-calculator": "Rechner für quadratische Gleichungen",
     "trigonometry-calculator": "Trigonometrie-Rechner",
     "gcf-lcm-calculator": "ggT/kgV-Rechner",

@@ -1304,4 +1304,19 @@ export const tools: Tool[] = [
       "free grammar checker",
     ],
   },
+  {
+    slug: "roman-numeral-converter",
+    title: "Roman Numeral Converter",
+    category: "converters",
+    description:
+      "Convert between Arabic numerals and Roman numerals in both directions.",
+    featured: false,
+    keywords: [
+      "roman numeral converter",
+      "roman numerals",
+      "convert to roman numerals",
+      "roman numeral to number",
+      "roman numeral chart",
+    ],
+  },
 ];

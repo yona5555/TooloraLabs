@@ -19532,6 +19532,163 @@
           "readOriginal": "Ver el Artículo"
         }
       }
+    },
+    "roman-numeral-converter": {
+      "title": "Convertidor de Números Romanos",
+      "description": "Convierte entre números arábigos y números romanos en ambas direcciones.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Convertir un Número",
+        "toRoman": "A Romano",
+        "toArabic": "A Arábigo",
+        "arabicLabel": "Número (1-3999)",
+        "arabicHint": "Los números romanos estándar solo representan números enteros del 1 al 3999.",
+        "romanLabel": "Número Romano"
+      },
+      "result": {
+        "heading": "Resultado",
+        "emptyInput": "Introduce un valor para convertir.",
+        "outOfRange": "Introduce un número entero entre 1 y 3999.",
+        "invalidRoman": "Eso no es un número romano estándar válido."
+      },
+      "quickReference": {
+        "title": "Símbolos Romanos",
+        "intro": "Los siete símbolos básicos y sus valores."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender los Números Romanos",
+          "paragraph1": "Los números romanos representan cantidades usando combinaciones de siete letras: I (1), V (5), X (10), L (50), C (100), D (500), y M (1000). Los números se construyen combinando estos símbolos y sumando sus valores, generalmente de mayor a menor, leyendo de izquierda a derecha —así que VII es 5 + 1 + 1 = 7.",
+          "paragraph2": "Una regla especial \"sustractiva\" acorta algunas combinaciones: en lugar de escribir cuatro veces el mismo símbolo seguido (como IIII para 4), se coloca un símbolo más pequeño antes de uno más grande para indicar resta —IV significa 5 − 1 = 4, y IX significa 10 − 1 = 9. Esta notación sustractiva solo se usa para pares específicos (IV, IX, XL, XC, CD, CM), lo que permite que esta herramienta rechace números inválidos como IIII o VX que no siguen las reglas estándar."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Los números romanos todavía aparecen en contextos específicos, en su mayoría tradicionales o estilísticos hoy en día.",
+          "items": [
+            {
+              "title": "Esferas de Reloj y Fechas",
+              "description": "Muchas esferas de reloj, piedras angulares de edificios, y fechas de derechos de autor en películas todavía usan números romanos para una apariencia tradicional o formal."
+            },
+            {
+              "title": "Secuelas, Volúmenes, y Esquemas",
+              "description": "Las secuelas de películas (Rocky IV), los volúmenes de libros, y los subtítulos de esquemas comúnmente usan números romanos para indicar secuencia."
+            },
+            {
+              "title": "Nombres y Títulos",
+              "description": "Los monarcas, papas, y nombres de familia transmitidos a través de generaciones (Rey Enrique VIII, John Smith III) usan números romanos para distinguir individuos sucesivos que comparten un nombre."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Algunas conversiones, calculadas de la misma forma en que esta herramienta las calcula.",
+          "columnArabic": "Arábigo",
+          "columnRoman": "Romano",
+          "rows": [
+            {
+              "arabic": "4",
+              "roman": "IV"
+            },
+            {
+              "arabic": "49",
+              "roman": "XLIX"
+            },
+            {
+              "arabic": "1994",
+              "roman": "MCMXCIV"
+            },
+            {
+              "arabic": "3999",
+              "roman": "MMMCMXCIX"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué no puedo convertir números mayores que 3999?",
+              "answer": "Los números romanos estándar no tienen símbolo para 5000 o más, por lo que 3999 (MMMCMXCIX) es el número más grande expresable con las siete letras tradicionales. Históricamente, los números más grandes a veces se escribían con una barra horizontal sobre un símbolo para multiplicar su valor por 1000, pero esa notación extendida no es parte del sistema estándar que admite esta herramienta."
+            },
+            {
+              "question": "¿Por qué a veces se ve IIII en los relojes en lugar de IV?",
+              "answer": "Aunque IV es la forma sustractiva estándar para 4, muchas esferas de reloj tradicionalmente usan IIII en su lugar, en gran parte por simetría visual con el VIII en el lado opuesto de la esfera y por razones históricas/estéticas. Esta herramienta sigue la convención matemática estándar (IV), no la convención de las esferas de reloj."
+            },
+            {
+              "question": "¿Existe un número romano para el cero?",
+              "answer": "No. El sistema de numeración romana no tiene símbolo para el cero —fue diseñado para contar y registrar cantidades, no para el tipo de aritmética posicional que requiere un marcador de posición cero, razón por la cual el rango de esta herramienta comienza en 1."
+            },
+            {
+              "question": "¿Por qué el convertidor rechaza algunos números romanos que escribo?",
+              "answer": "Esta herramienta solo acepta números romanos estándar y formados canónicamente. Rechaza números que no siguen las reglas sustractivas estándar (como IIII, VX, o IC), ya que esos no se consideran válidos en el sistema tradicional, aunque una suma ingenua letra por letra pudiera producir un número que parezca plausible."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "Los números romanos se originaron en la antigua Roma, evolucionando a partir de símbolos numéricos etruscos comenzando alrededor del siglo VIII a.C. El sistema fue diseñado para el conteo práctico y el registro usando marcas similares a marcas de conteo —I, II, III para cantidades pequeñas, con símbolos adicionales añadidos para números redondos más grandes. Siguió siendo el sistema numérico dominante en toda Europa durante más de mil años, hasta bien entrada la Edad Media, incluso después de que el sistema de numeración indo-arábigo, computacionalmente más conveniente (los dígitos 0-9 usados hoy), comenzara a extenderse desde la India a través del mundo islámico a partir del siglo IX."
+          },
+          "modernUse": {
+            "title": "Por Qué Todavía los Usamos Hoy",
+            "paragraph": "Los números romanos persistieron mucho después de que los números indo-arábigos se convirtieran en el estándar para el cálculo porque sirven a un propósito diferente: formalidad, tradición, y marcado de secuencia en lugar de aritmética. Dado que los números romanos son engorrosos para la suma, resta, y especialmente la multiplicación en comparación con el sistema posicional indo-arábigo, se fueron reservando gradualmente para contextos donde la tradición o la distinción visual importan más que el cálculo —los usos modernos específicos cubiertos anteriormente."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La historia de los sistemas numéricos se estudia dentro de la historia de las matemáticas. Estos son cinco programas de matemáticas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Matemáticas",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford — Instituto Matemático",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Facultad de Matemáticas",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Harvard — Departamento de Matemáticas",
+                "note": "Nº 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Matemáticas",
+                "note": "Nº 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Ifrah, G. (2000). The Universal History of Numbers: From Prehistory to the Invention of the Computer. Wiley.",
+          "note": "Una historia académica integral de los sistemas numéricos a través de las civilizaciones, incluyendo el desarrollo y la difusión de los números romanos.",
+          "url": "https://archive.org/details/universalhistory0000ifra",
+          "readOriginal": "Ver la Referencia"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19682,7 +19839,6 @@
     "body-fat-calculator": "Calculadora de porcentaje de grasa corporal",
     "calories-burned-calculator": "Calculadora de calorías quemadas",
     "passphrase-generator": "Generador de frases de contraseña",
-    "roman-numeral-converter": "Convertidor de números romanos",
     "quadratic-equation-calculator": "Calculadora de ecuación cuadrática",
     "trigonometry-calculator": "Calculadora de trigonometría",
     "gcf-lcm-calculator": "Calculadora de MCD/MCM",
