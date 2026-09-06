@@ -20517,6 +20517,143 @@
           "readOriginal": "Referenz ansehen"
         }
       }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Ereignis-Countdown-Rechner",
+      "description": "Ein Live-Countdown zu einem von dir gewählten Datum und einer Uhrzeit, der automatisch in Tagen, Stunden, Minuten und Sekunden aktualisiert wird.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Dein Ereignis",
+        "eventNameLabel": "Ereignisname (Optional)",
+        "eventNamePlaceholder": "z.B. Silvester",
+        "dateLabel": "Datum",
+        "timeLabel": "Uhrzeit"
+      },
+      "result": {
+        "heading": "Countdown",
+        "noTarget": "Wähle ein Datum, um den Countdown zu starten.",
+        "invalidDate": "Gib ein gültiges Datum und eine gültige Uhrzeit ein.",
+        "countingDownTo": "Countdown zu deinem Ereignis",
+        "elapsedSince": "Verstrichene Zeit seit deinem Ereignis",
+        "days": "Tage",
+        "hours": "Stunden",
+        "minutes": "Minuten",
+        "seconds": "Sekunden"
+      },
+      "quickReference": {
+        "title": "Gut zu wissen",
+        "intro": "Der Countdown aktualisiert sich automatisch jede Sekunde, direkt in deinem Browser — kein Neuladen der Seite nötig."
+      },
+      "education": {
+        "intro": {
+          "title": "Diesen Countdown verstehen",
+          "paragraph1": "Dieses Tool berechnet fortlaufend die Differenz zwischen der aktuellen Zeit und einem von dir gewählten Zieldatum und einer Zieluhrzeit, unterteilt diese Differenz in Tage, Stunden, Minuten und Sekunden, und aktualisiert die Anzeige jede Sekunde, sodass der Countdown live aktualisiert wird, ohne jemals die Seite neu laden zu müssen.",
+          "paragraph2": "Sobald der Zielzeitpunkt erreicht ist, wechselt der Countdown automatisch zum Aufwärtszählen, wobei angezeigt wird, wie viel Zeit seit dem Ereignis verstrichen ist — nützlich, um Jahrestage, Meilensteine zu verfolgen oder einfach zu bestätigen, dass ein Moment, auf den du hingezählt hast, tatsächlich vergangen ist."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Countdowns sind überall dort nützlich, wo die Vorfreude auf ein bestimmtes bevorstehendes Datum oder eine Uhrzeit Teil des Erlebnisses ist.",
+          "items": [
+            {
+              "title": "Hochzeiten, Produkteinführungen und Fristen",
+              "description": "Verfolgen der verbleibenden Zeit bis zu einem Hochzeitstermin, einer Produkteinführung, oder einer wichtigen Frist, wodurch Vorfreude oder Dringlichkeit aufgebaut wird, je näher das Datum rückt."
+            },
+            {
+              "title": "Veranstaltungsseiten und Einladungen",
+              "description": "Hinzufügen eines Live-Countdowns zu einer Veranstaltungsankündigung oder Einladung, damit Empfänger auf einen Blick genau sehen können, wie viel Zeit noch bleibt."
+            },
+            {
+              "title": "Persönliche Meilensteine",
+              "description": "Countdown zu einem Geburtstag, Jahrestag, Abschluss, oder einer Reise, oder Aufwärtszählen von einem bereits vergangenen Meilenstein, wie einem Nüchternheitsdatum oder einem Beziehungsjubiläum."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Läuft der Countdown weiter, wenn ich die Seite geöffnet lasse?",
+              "answer": "Ja — solange die Seite in deinem Browser geöffnet bleibt, aktualisiert sich der Countdown automatisch jede Sekunde, ohne dass du etwas tun musst, da er live anhand der Uhr deines Geräts berechnet wird."
+            },
+            {
+              "question": "Was passiert, wenn der Countdown null erreicht?",
+              "answer": "Das Tool wechselt automatisch zum Aufwärtszählen und zeigt die seit dem Zielzeitpunkt verstrichene Zeit anstelle der verbleibenden Zeit an, sodass die Anzeige auch nach Ablauf des Ereignisses aussagekräftig bleibt."
+            },
+            {
+              "question": "Welche Zeitzone verwendet dieses Tool?",
+              "answer": "Der Countdown verwendet die lokale Zeitzone deines Geräts sowohl für das von dir eingegebene Zieldatum/die Zieluhrzeit als auch für die aktuelle Zeit, mit der er verglichen wird, sodass der Countdown immer genau ist, egal wo du dich persönlich befindest, und nicht auf eine feste Referenzzeitzone bezogen ist."
+            },
+            {
+              "question": "Warum zeigt der Countdown beim ersten Laden der Seite kurz null an?",
+              "answer": "Die allererste Darstellung erfolgt, bevor die Uhr deines Browsers gelesen wurde, um eine Diskrepanz zwischen der ersten Erzeugung der Seite und dem, was dein Browser tatsächlich anzeigt, zu vermeiden. Dies löst sich innerhalb einer Sekunde auf, sobald die Live-Uhr übernimmt, was eine Standardtechnik für alles ist, was die aktuelle Zeit im Web anzeigt."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die dramatische Countdown-Konvention — rückwärts auf null zählen vor einem bedeutenden Moment — wird oft Fritz Langs Stummfilm-Science-Fiction-Film „Frau im Mond“ von 1929 zugeschrieben, einer der frühesten bekannten Verwendungen eines nummerierten Countdowns, um Spannung vor einem Raketenstart aufzubauen. Die Konvention erwies sich als dramatisch so wirkungsvoll, dass echte Raketeningenieure und Missionsplaner sie später für tatsächliche Starts übernahmen, und sie ist seitdem zu einem universellen Symbol der Vorfreude auf jeden bedeutenden bevorstehenden Moment geworden, weit über ihre Ursprünge in der Raumfahrt hinaus."
+          },
+          "howItWorks": {
+            "title": "Wie der Countdown berechnet wird",
+            "paragraph": "Hinter den Kulissen wandelt dieses Tool sowohl den aktuellen Moment als auch dein gewähltes Zieldatum in eine einzige Zahl um: Millisekunden, die seit einem festen Referenzpunkt namens Unix-Epoche (Mitternacht, 1. Januar 1970, UTC) vergangen sind, was die Art ist, wie Computer Daten und Uhrzeiten intern darstellen. Das Subtrahieren einer Zahl von der anderen ergibt die genaue Zeitdifferenz in Millisekunden, die dann in Tage, Stunden, Minuten und Sekunden für eine menschenlesbare Anzeige heruntergerechnet wird."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Die Geschichte der Zeitmessung und ihrer kulturellen Konventionen wird innerhalb der Wissenschaftsgeschichte und Medienwissenschaften studiert. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Harvard University — Department of the History of Science",
+                "note": "Eines der weltweit führenden Programme für die Geschichte der Wissenschaft und Technik.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Cambridge — Department of History and Philosophy of Science",
+                "note": "Ein führendes Zentrum für die Geschichte und Philosophie der Wissenschaft.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "Nein — die Forschungsstudiengänge sind am Department of History and Philosophy of Science Präsenzstudiengänge."
+              },
+              {
+                "name": "Princeton University — Program in History of Science",
+                "note": "Ein führendes Programm für das Studium der Geschichte der Wissenschaft und Technik.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Southern California — School of Cinematic Arts",
+                "note": "Eine der weltweit führenden Filmschulen mit starker Filmgeschichts- und Theorieforschung.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "New York University — Department of Cinema Studies",
+                "note": "Ein führendes Programm für das akademische Studium der Filmgeschichte.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "American University of Beirut — Department of History and Archaeology",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referenzen",
+          "citation": "Lang, F. (Regisseur). (1929). Frau im Mond [Film]. Universum Film AG (UFA).",
+          "note": "Der Stummfilm von 1929, dem Raumfahrthistoriker weithin zuschreiben, die dramatische nummerierte Countdown-Konvention vor einem Start populär gemacht zu haben, eine Konvention, die später von der echten Raketenkultur und Missionskontrolle übernommen wurde.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "Forschung des Museums ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20670,7 +20807,6 @@
     "trigonometry-calculator": "Trigonometrie-Rechner",
     "gcf-lcm-calculator": "ggT/kgV-Rechner",
     "qr-generator-extended": "Erweiterter QR-Code-Generator",
-    "countdown-to-event-calculator": "Countdown bis zu einem Ereignis",
     "historical-currency-converter": "Historischer Währungsumrechner",
     "typing-speed-calculator": "Tippgeschwindigkeits-Rechner",
     "energy-conversion-calculator": "Energieumrechner",

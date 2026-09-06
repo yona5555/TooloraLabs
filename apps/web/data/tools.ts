@@ -1409,4 +1409,19 @@ export const tools: Tool[] = [
       "speaking pace calculator",
     ],
   },
+  {
+    slug: "countdown-to-event-calculator",
+    title: "Countdown to Event Calculator",
+    category: "date-time",
+    description:
+      "A live countdown to a date and time you choose, updating automatically in days, hours, minutes, and seconds.",
+    featured: false,
+    keywords: [
+      "countdown to event calculator",
+      "countdown timer",
+      "days until date",
+      "event countdown",
+      "live countdown clock",
+    ],
+  },
 ];

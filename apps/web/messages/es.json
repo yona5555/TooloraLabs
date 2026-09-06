@@ -20517,6 +20517,143 @@
           "readOriginal": "Ver la Referencia"
         }
       }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Calculadora de Cuenta Regresiva para Eventos",
+      "description": "Una cuenta regresiva en vivo hasta una fecha y hora que elijas, actualizándose automáticamente en días, horas, minutos, y segundos.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Evento",
+        "eventNameLabel": "Nombre del Evento (Opcional)",
+        "eventNamePlaceholder": "p. ej. Nochevieja",
+        "dateLabel": "Fecha",
+        "timeLabel": "Hora"
+      },
+      "result": {
+        "heading": "Cuenta Regresiva",
+        "noTarget": "Elige una fecha para comenzar la cuenta regresiva.",
+        "invalidDate": "Introduce una fecha y hora válidas.",
+        "countingDownTo": "Cuenta regresiva para tu evento",
+        "elapsedSince": "Tiempo transcurrido desde tu evento",
+        "days": "Días",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "La cuenta regresiva se actualiza automáticamente cada segundo, directamente en tu navegador —sin necesidad de actualizar la página."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender Esta Cuenta Regresiva",
+          "paragraph1": "Esta herramienta calcula continuamente la diferencia entre la hora actual y una fecha y hora objetivo que elijas, desglosando esa diferencia en días, horas, minutos, y segundos, y actualizando la pantalla cada segundo para que la cuenta regresiva se actualice en vivo sin necesidad de recargar la página.",
+          "paragraph2": "Una vez que llega el momento objetivo, la cuenta regresiva cambia automáticamente a contar hacia adelante en su lugar, mostrando cuánto tiempo ha transcurrido desde el evento —útil para rastrear aniversarios, hitos, o simplemente confirmar que un momento que estabas contando ya ha pasado."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Las cuentas regresivas son útiles en cualquier lugar donde la anticipación de una fecha u hora futura específica sea parte de la experiencia.",
+          "items": [
+            {
+              "title": "Bodas, Lanzamientos, y Fechas Límite",
+              "description": "Rastrear el tiempo restante hasta una fecha de boda, un lanzamiento de producto, o una fecha límite importante, generando anticipación o urgencia a medida que se acerca la fecha."
+            },
+            {
+              "title": "Páginas de Eventos e Invitaciones",
+              "description": "Añadir una cuenta regresiva en vivo a un anuncio de evento o invitación para que los destinatarios puedan ver exactamente cuánto tiempo queda de un vistazo."
+            },
+            {
+              "title": "Hitos Personales",
+              "description": "Contar regresivamente hasta un cumpleaños, aniversario, graduación, o viaje, o contar hacia adelante desde un hito ya pasado, como una fecha de sobriedad o un aniversario de relación."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿La cuenta regresiva sigue funcionando si dejo la página abierta?",
+              "answer": "Sí —mientras la página permanezca abierta en tu navegador, la cuenta regresiva se actualiza automáticamente cada segundo sin necesidad de ninguna acción de tu parte, ya que se calcula en vivo usando el reloj de tu dispositivo."
+            },
+            {
+              "question": "¿Qué sucede cuando la cuenta regresiva llega a cero?",
+              "answer": "La herramienta cambia automáticamente a contar hacia adelante, mostrando el tiempo transcurrido desde el momento objetivo en lugar del tiempo restante, para que la pantalla siga siendo significativa incluso después de que el evento haya pasado."
+            },
+            {
+              "question": "¿Qué zona horaria usa esto?",
+              "answer": "La cuenta regresiva usa la zona horaria local de tu dispositivo tanto para la fecha/hora objetivo que introduces como para la hora actual con la que se compara, por lo que la cuenta regresiva siempre es precisa para donde tú personalmente estés, no una zona horaria de referencia fija."
+            },
+            {
+              "question": "¿Por qué la cuenta regresiva muestra brevemente 0 cuando la página se carga por primera vez?",
+              "answer": "La primerísima renderización ocurre antes de que se haya leído el reloj de tu navegador, para evitar una discrepancia entre cómo se genera inicialmente la página y lo que tu navegador realmente muestra. Esto se resuelve en un segundo cuando el reloj en vivo toma el control, lo cual es una técnica estándar para cualquier cosa que muestre la hora actual en la web."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La convención dramática de la cuenta regresiva —contar hacia atrás hasta cero antes de un momento significativo— a menudo se atribuye a la película de ciencia ficción muda de Fritz Lang de 1929 \"Frau im Mond\" (\"Mujer en la Luna\"), uno de los primeros usos conocidos de una cuenta regresiva numerada para generar suspenso antes del lanzamiento de un cohete. La convención demostró ser tan efectiva dramáticamente que los ingenieros de cohetes reales y planificadores de misiones la adoptaron más tarde para lanzamientos reales, y desde entonces se ha convertido en un símbolo universal de anticipación para cualquier momento futuro significativo, mucho más allá de sus orígenes en los vuelos espaciales."
+          },
+          "howItWorks": {
+            "title": "Cómo se Calcula la Cuenta Regresiva",
+            "paragraph": "Detrás de escena, esta herramienta convierte tanto el momento actual como tu fecha objetivo elegida en un solo número: milisegundos transcurridos desde un punto de referencia fijo llamado época Unix (medianoche, 1 de enero de 1970, UTC), que es cómo las computadoras representan fechas y horas internamente. Restar un número del otro da la diferencia de tiempo exacta en milisegundos, que luego se divide en días, horas, minutos, y segundos para una visualización legible por humanos."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La historia de la cronometría y sus convenciones culturales se estudia dentro de la historia de la ciencia y los estudios de medios. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Harvard — Departamento de Historia de la Ciencia",
+                "note": "Uno de los programas líderes en el mundo para la historia de la ciencia y la tecnología.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Historia y Filosofía de la Ciencia",
+                "note": "Un centro líder en historia y filosofía de la ciencia.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Historia y Filosofía de la Ciencia."
+              },
+              {
+                "name": "Universidad de Princeton — Programa de Historia de la Ciencia",
+                "note": "Un programa líder para el estudio de la historia de la ciencia y la tecnología.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad del Sur de California — School of Cinematic Arts",
+                "note": "Una de las escuelas de cine líderes en el mundo, con sólida erudición en historia y teoría del cine.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Nueva York — Departamento de Estudios Cinematográficos",
+                "note": "Un programa líder para el estudio académico de la historia del cine.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Historia y Arqueología",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias",
+          "citation": "Lang, F. (Director). (1929). Frau im Mond [Película]. Universum Film AG (UFA).",
+          "note": "La película muda de 1929 ampliamente reconocida por los historiadores del espacio por popularizar la dramática cuenta regresiva numerada antes de un lanzamiento, una convención adoptada más tarde por la cultura real de la cohetería y el control de misión.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "Ver la Investigación del Museo"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20670,7 +20807,6 @@
     "trigonometry-calculator": "Calculadora de trigonometría",
     "gcf-lcm-calculator": "Calculadora de MCD/MCM",
     "qr-generator-extended": "Generador avanzado de códigos QR",
-    "countdown-to-event-calculator": "Cuenta regresiva para un evento",
     "historical-currency-converter": "Convertidor de divisas históricas",
     "typing-speed-calculator": "Calculadora de velocidad de escritura",
     "energy-conversion-calculator": "Calculadora de conversión de energía",

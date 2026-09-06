@@ -20517,6 +20517,143 @@
           "readOriginal": "View the Reference"
         }
       }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Countdown to Event Calculator",
+      "description": "A live countdown to a date and time you choose, updating automatically in days, hours, minutes, and seconds.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Event",
+        "eventNameLabel": "Event Name (Optional)",
+        "eventNamePlaceholder": "e.g. New Year's Eve",
+        "dateLabel": "Date",
+        "timeLabel": "Time"
+      },
+      "result": {
+        "heading": "Countdown",
+        "noTarget": "Choose a date to start the countdown.",
+        "invalidDate": "Enter a valid date and time.",
+        "countingDownTo": "Counting down to your event",
+        "elapsedSince": "Time elapsed since your event",
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "The countdown updates automatically every second, right in your browser — no need to refresh the page."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding This Countdown",
+          "paragraph1": "This tool continuously computes the difference between the current time and a target date and time you choose, breaking that difference down into days, hours, minutes, and seconds, and refreshing the display every second so the countdown updates live without ever needing to reload the page.",
+          "paragraph2": "Once the target moment arrives, the countdown automatically switches to counting up instead, showing how much time has elapsed since the event — useful for tracking anniversaries, milestones, or simply confirming that a moment you were counting down to has indeed passed."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Countdowns are useful anywhere anticipation for a specific upcoming date or time is part of the experience.",
+          "items": [
+            {
+              "title": "Weddings, Launches, and Deadlines",
+              "description": "Tracking the time remaining until a wedding date, a product launch, or an important deadline, building anticipation or urgency as the date approaches."
+            },
+            {
+              "title": "Event Pages and Invitations",
+              "description": "Adding a live countdown to an event announcement or invitation so recipients can see exactly how much time is left at a glance."
+            },
+            {
+              "title": "Personal Milestones",
+              "description": "Counting down to a birthday, anniversary, graduation, or trip, or counting up from a milestone already passed, like a sobriety date or a relationship anniversary."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Does the countdown keep running if I leave the page open?",
+              "answer": "Yes — as long as the page stays open in your browser, the countdown updates automatically every second without any action needed from you, since it's calculated live using your device's clock."
+            },
+            {
+              "question": "What happens when the countdown reaches zero?",
+              "answer": "The tool automatically switches to counting upward, showing the elapsed time since the target moment instead of the remaining time, so the display remains meaningful even after the event has passed."
+            },
+            {
+              "question": "What time zone does this use?",
+              "answer": "The countdown uses your device's local time zone for both the target date/time you enter and the current time it compares against, so the countdown is always accurate to wherever you personally are, not a fixed reference time zone."
+            },
+            {
+              "question": "Why does the countdown briefly show 0 when the page first loads?",
+              "answer": "The very first render happens before your browser's clock has been read, to avoid a mismatch between how the page is initially generated and what your browser actually displays. This resolves itself within a second as the live clock takes over, which is a standard technique for anything showing the current time on the web."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The dramatic countdown convention — counting backward toward zero before a significant moment — is often credited to Fritz Lang's 1929 silent science-fiction film \"Frau im Mond\" (\"Woman in the Moon\"), one of the earliest known uses of a numbered countdown to build suspense before a rocket launch. The convention proved so effective dramatically that real rocket engineers and mission planners later adopted it for actual launches, and it has since become a universal symbol of anticipation for any significant upcoming moment, well beyond its origins in spaceflight."
+          },
+          "howItWorks": {
+            "title": "How the Countdown Is Calculated",
+            "paragraph": "Behind the scenes, this tool converts both the current moment and your chosen target date into a single number: milliseconds elapsed since a fixed reference point called the Unix epoch (midnight, January 1, 1970, UTC), which is how computers represent dates and times internally. Subtracting one number from the other gives the exact time difference in milliseconds, which is then divided down into days, hours, minutes, and seconds for a human-readable display."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The history of timekeeping and its cultural conventions is studied within the history of science and media studies. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Harvard University — Department of the History of Science",
+                "note": "One of the world's leading programs for the history of science and technology.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of History and Philosophy of Science",
+                "note": "A leading center for the history and philosophy of science.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "No — research degrees are in-residence at the Department of History and Philosophy of Science."
+              },
+              {
+                "name": "Princeton University — Program in History of Science",
+                "note": "A leading program for the study of the history of science and technology.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Southern California — School of Cinematic Arts",
+                "note": "One of the world's leading film schools, with strong film history and theory scholarship.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "New York University — Department of Cinema Studies",
+                "note": "A leading program for the academic study of film history.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of History and Archaeology",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "References",
+          "citation": "Lang, F. (Director). (1929). Frau im Mond [Motion picture]. Universum Film AG (UFA).",
+          "note": "The 1929 silent film widely credited by space historians with popularizing the dramatic numbered countdown before a launch, a convention later adopted by real rocketry and mission control culture.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "View the Museum's Research"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20670,7 +20807,6 @@
     "trigonometry-calculator": "Trigonometry Calculator",
     "gcf-lcm-calculator": "GCF/LCM Calculator",
     "qr-generator-extended": "Advanced QR Code Generator",
-    "countdown-to-event-calculator": "Countdown to Event Calculator",
     "historical-currency-converter": "Historical Currency Converter",
     "typing-speed-calculator": "Typing Speed Calculator",
     "energy-conversion-calculator": "Energy Conversion Calculator",

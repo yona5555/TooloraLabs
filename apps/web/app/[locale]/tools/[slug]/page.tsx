@@ -163,6 +163,8 @@ import MultiplicationTableGenerator from "@/components/tools/multiplication-tabl
 import MTEducation from "@/components/tools/multiplication-table-generator/MTEducation";
 import SpeechWordCountCalculator from "@/components/tools/speech-word-count-calculator/SpeechWordCountCalculator";
 import SWEducation from "@/components/tools/speech-word-count-calculator/SWEducation";
+import CountdownToEventCalculator from "@/components/tools/countdown-to-event-calculator/CountdownToEventCalculator";
+import CountdownEducation from "@/components/tools/countdown-to-event-calculator/CountdownEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -613,6 +615,9 @@ export default async function ToolPage({
     case "speech-word-count-calculator":
       component = <SpeechWordCountCalculator education={<SWEducation />} />;
       break;
+    case "countdown-to-event-calculator":
+      component = <CountdownToEventCalculator education={<CountdownEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -757,6 +762,7 @@ export default async function ToolPage({
     slug === "random-quote-generator" ||
     slug === "multiplication-table-generator" ||
     slug === "speech-word-count-calculator" ||
+    slug === "countdown-to-event-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

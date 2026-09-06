@@ -20517,6 +20517,143 @@
           "readOriginal": "Consulter la Référence"
         }
       }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Calculatrice de Compte à Rebours d'Événement",
+      "description": "Un compte à rebours en direct jusqu'à une date et une heure de votre choix, se mettant à jour automatiquement en jours, heures, minutes, et secondes.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Événement",
+        "eventNameLabel": "Nom de l'Événement (Facultatif)",
+        "eventNamePlaceholder": "ex. Réveillon du Nouvel An",
+        "dateLabel": "Date",
+        "timeLabel": "Heure"
+      },
+      "result": {
+        "heading": "Compte à Rebours",
+        "noTarget": "Choisissez une date pour démarrer le compte à rebours.",
+        "invalidDate": "Saisissez une date et une heure valides.",
+        "countingDownTo": "Compte à rebours jusqu'à votre événement",
+        "elapsedSince": "Temps écoulé depuis votre événement",
+        "days": "Jours",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Le compte à rebours se met à jour automatiquement chaque seconde, directement dans votre navigateur — pas besoin de rafraîchir la page."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre Ce Compte à Rebours",
+          "paragraph1": "Cet outil calcule en continu la différence entre l'heure actuelle et une date et heure cible que vous choisissez, décomposant cette différence en jours, heures, minutes, et secondes, et actualisant l'affichage chaque seconde afin que le compte à rebours se mette à jour en direct sans jamais avoir besoin de recharger la page.",
+          "paragraph2": "Une fois le moment cible arrivé, le compte à rebours passe automatiquement au comptage vers le haut à la place, affichant le temps écoulé depuis l'événement — utile pour suivre les anniversaires, les jalons, ou simplement confirmer qu'un moment que vous attendiez avec impatience est effectivement passé."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Les comptes à rebours sont utiles partout où l'anticipation d'une date ou heure future spécifique fait partie de l'expérience.",
+          "items": [
+            {
+              "title": "Mariages, Lancements, et Échéances",
+              "description": "Suivre le temps restant jusqu'à une date de mariage, un lancement de produit, ou une échéance importante, créant de l'anticipation ou de l'urgence à mesure que la date approche."
+            },
+            {
+              "title": "Pages d'Événements et Invitations",
+              "description": "Ajouter un compte à rebours en direct à une annonce d'événement ou une invitation afin que les destinataires puissent voir exactement combien de temps il reste d'un coup d'œil."
+            },
+            {
+              "title": "Jalons Personnels",
+              "description": "Compter à rebours jusqu'à un anniversaire, un jubilé, une remise de diplôme, ou un voyage, ou compter vers le haut depuis un jalon déjà passé, comme une date de sobriété ou un anniversaire de relation."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Le compte à rebours continue-t-il de fonctionner si je laisse la page ouverte ?",
+              "answer": "Oui — tant que la page reste ouverte dans votre navigateur, le compte à rebours se met à jour automatiquement chaque seconde sans aucune action de votre part, puisqu'il est calculé en direct à l'aide de l'horloge de votre appareil."
+            },
+            {
+              "question": "Que se passe-t-il lorsque le compte à rebours atteint zéro ?",
+              "answer": "L'outil passe automatiquement au comptage vers le haut, affichant le temps écoulé depuis le moment cible au lieu du temps restant, afin que l'affichage reste significatif même après que l'événement soit passé."
+            },
+            {
+              "question": "Quel fuseau horaire cet outil utilise-t-il ?",
+              "answer": "Le compte à rebours utilise le fuseau horaire local de votre appareil à la fois pour la date/heure cible que vous saisissez et pour l'heure actuelle à laquelle il se compare, de sorte que le compte à rebours soit toujours précis où que vous soyez personnellement, et non un fuseau horaire de référence fixe."
+            },
+            {
+              "question": "Pourquoi le compte à rebours affiche-t-il brièvement 0 au premier chargement de la page ?",
+              "answer": "Le tout premier rendu se produit avant que l'horloge de votre navigateur n'ait été lue, afin d'éviter une incohérence entre la façon dont la page est initialement générée et ce que votre navigateur affiche réellement. Cela se résout en une seconde lorsque l'horloge en direct prend le relais, ce qui est une technique standard pour tout ce qui affiche l'heure actuelle sur le web."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La convention dramatique du compte à rebours — compter à rebours vers zéro avant un moment significatif — est souvent attribuée au film de science-fiction muet de Fritz Lang de 1929 « Frau im Mond » (« La Femme sur la Lune »), l'une des premières utilisations connues d'un compte à rebours numéroté pour créer du suspense avant le lancement d'une fusée. La convention s'est avérée si efficace dramatiquement que de véritables ingénieurs de fusées et planificateurs de mission l'ont ensuite adoptée pour de vrais lancements, et elle est depuis devenue un symbole universel d'anticipation pour tout moment futur significatif, bien au-delà de ses origines dans le vol spatial."
+          },
+          "howItWorks": {
+            "title": "Comment le Compte à Rebours Est Calculé",
+            "paragraph": "En coulisses, cet outil convertit à la fois le moment actuel et votre date cible choisie en un seul nombre : les millisecondes écoulées depuis un point de référence fixe appelé l'époque Unix (minuit, le 1er janvier 1970, UTC), qui est la façon dont les ordinateurs représentent les dates et heures en interne. Soustraire un nombre de l'autre donne la différence de temps exacte en millisecondes, qui est ensuite divisée en jours, heures, minutes, et secondes pour un affichage lisible par l'humain."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'histoire de la mesure du temps et de ses conventions culturelles est étudiée au sein de l'histoire des sciences et des études médiatiques. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université de Harvard — Department of the History of Science",
+                "note": "L'un des programmes les plus reconnus au monde pour l'histoire des sciences et de la technologie.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of History and Philosophy of Science",
+                "note": "Un centre de premier plan pour l'histoire et la philosophie des sciences.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "Non — les diplômes de recherche sont en présentiel au Department of History and Philosophy of Science."
+              },
+              {
+                "name": "Université de Princeton — Program in History of Science",
+                "note": "Un programme de premier plan pour l'étude de l'histoire des sciences et de la technologie.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Californie du Sud — School of Cinematic Arts",
+                "note": "L'une des écoles de cinéma les plus reconnues au monde, avec une solide érudition en histoire et théorie du cinéma.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de New York — Department of Cinema Studies",
+                "note": "Un programme de premier plan pour l'étude académique de l'histoire du cinéma.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'histoire et d'archéologie",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références",
+          "citation": "Lang, F. (Réalisateur). (1929). Frau im Mond [Film]. Universum Film AG (UFA).",
+          "note": "Le film muet de 1929 largement crédité par les historiens de l'espace d'avoir popularisé le compte à rebours numéroté dramatique avant un lancement, une convention adoptée plus tard par la véritable culture de la fusée et du contrôle de mission.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "Consulter la Recherche du Musée"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20670,7 +20807,6 @@
     "trigonometry-calculator": "Calculatrice de trigonométrie",
     "gcf-lcm-calculator": "Calculatrice PGCD/PPCM",
     "qr-generator-extended": "Générateur de QR code avancé",
-    "countdown-to-event-calculator": "Compte à rebours vers un événement",
     "historical-currency-converter": "Convertisseur de devises historiques",
     "typing-speed-calculator": "Calculatrice de vitesse de frappe",
     "energy-conversion-calculator": "Calculatrice de conversion d'énergie",
