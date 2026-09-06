@@ -32,11 +32,11 @@ export default function CountdownToEventCalculator({ education }: { education: R
   const hasTarget = Boolean(date);
 
   const result = useMemo<CountdownOutput>(() => {
-    if (!hasTarget) {
+    if (!hasTarget || !now) {
       return { error: null, isPast: false, totalSeconds: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
     const targetDateTimeISO = `${date}T${time || "00:00"}:00`;
-    const output = tool.execute({ targetDateTimeISO, nowMs: now || Date.now() }, { locale: "en-US" });
+    const output = tool.execute({ targetDateTimeISO, nowMs: now }, { locale: "en-US" });
     return output.data;
   }, [date, time, now, hasTarget]);
 
