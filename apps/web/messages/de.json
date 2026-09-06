@@ -19254,6 +19254,145 @@
           "readOriginal": "Spezifikation ansehen"
         }
       }
+    },
+    "speech-to-text": {
+      "title": "Sprache zu Text",
+      "description": "Wandle gesprochenes Audio von deinem Mikrofon mit der in deinen Browser integrierten Spracherkennung in geschriebenen Text um. Kein Konto, kein Server, keine Kosten.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Spracheingabe",
+        "unsupported": "Dein Browser unterstützt keine Spracherkennung. Probiere eine aktuelle Version von Chrome oder Edge.",
+        "privacyNotice": "Diese Funktion benötigt Mikrofonzugriff, um den dein Browser bitten wird. Alle Audiodaten werden lokal in deinem Browser verarbeitet — nichts wird jemals aufgezeichnet oder an einen Server gesendet.",
+        "micDenied": "Mikrofonzugriff wurde verweigert. Überprüfe die Website-Einstellungen deines Browsers, um den Mikrofonzugriff für diese Seite zu erlauben.",
+        "languageLabel": "Sprache",
+        "startListening": "Zuhören starten",
+        "stopListening": "Zuhören stoppen",
+        "clear": "Löschen"
+      },
+      "result": {
+        "heading": "Abschrift",
+        "status": {
+          "idle": "Drücke Zuhören starten und beginne zu sprechen.",
+          "listening": "Hört zu...",
+          "denied": "Mikrofonzugriff verweigert."
+        },
+        "emptyTranscript": "Dein transkribierter Text erscheint hier.",
+        "wordCountLabel": "Wörter"
+      },
+      "quickReference": {
+        "title": "Gut zu wissen",
+        "intro": "Erkennungsgenauigkeit und verfügbare Sprachen hängen vollständig von deinem Browser und Betriebssystem ab."
+      },
+      "education": {
+        "intro": {
+          "title": "Browserbasierte Spracherkennung verstehen",
+          "paragraph1": "Dieses Tool verwendet die SpeechRecognition-Schnittstelle der Web Speech API, eine Funktion, die direkt in einige moderne Webbrowser integriert ist und gesprochenes Audio von deinem Mikrofon in Text umwandelt. Wenn du auf Zuhören starten drückst, fordert dein Browser die Mikrofonberechtigung an und überträgt dann deine Sprache an seine eigene Spracherkennungs-Engine, um eine Abschrift zu erstellen — dieses Tool zeichnet deine Audiodaten niemals auf, speichert sie nicht und überträgt sie nicht an einen Server.",
+          "paragraph2": "Spracherkennungsergebnisse kommen in zwei Formen: vorläufige Ergebnisse, die sich kontinuierlich aktualisieren, während du sprichst, und sich noch ändern können, und endgültige Ergebnisse, die feststehen, sobald die Erkennung sicher ist, dass eine Phrase abgeschlossen ist. Dieses Tool zeigt vorläufigen Text schwach an, während zugehört wird, und übernimmt jeden endgültigen Abschnitt in die dauerhafte Abschrift, fügt Abschnitte zusammen und großschreibt automatisch den Anfang jedes Satzes zur besseren Lesbarkeit."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Sprache-zu-Text ist überall nützlich, wo Tippen langsamer oder unpraktischer ist als Sprechen.",
+          "items": [
+            {
+              "title": "Sprachnotizen",
+              "description": "Schnelles Erfassen von Ideen oder Notizen durch lautes Aussprechen statt Tippen, besonders nützlich, wenn deine Hände beschäftigt sind."
+            },
+            {
+              "title": "Barrierefreiheit",
+              "description": "Texteingabe für Menschen zugänglich machen, die aufgrund motorischer Beeinträchtigungen oder anderer Erkrankungen Schwierigkeiten beim Tippen haben."
+            },
+            {
+              "title": "Schnelleres Verfassen von Text",
+              "description": "Einen groben Entwurf einer E-Mail oder Nachricht laut aussprechen, um Wörter schnell festzuhalten, und den transkribierten Text danach bearbeiten."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Wird meine Stimme aufgezeichnet oder irgendwohin gesendet?",
+              "answer": "Nein. Dieses Tool zeichnet deine Audiodaten niemals auf und lädt sie nicht hoch. Dein Browser verarbeitet deine Sprache lokal (oder über seinen eigenen integrierten Erkennungsdienst) rein, um den Text zu erzeugen, den du siehst — diese Seite speichert oder überträgt die Audiodaten selbst niemals."
+            },
+            {
+              "question": "Warum fragt mein Browser nach Mikrofonberechtigung?",
+              "answer": "Spracherkennung benötigt Zugriff auf dein Mikrofon, um zu hören, was du sagst. Dein Browser handhabt diese Berechtigungsanfrage direkt, und du kannst sie jederzeit in den Website-Einstellungen deines Browsers widerrufen."
+            },
+            {
+              "question": "Warum heißt es, Spracherkennung wird nicht unterstützt?",
+              "answer": "Die SpeechRecognition-Schnittstelle hat eine begrenztere Browserunterstützung als Text-zu-Sprache. Sie funktioniert gut in Chrome und Edge, aber Firefox und Safari hatten historisch nur teilweise oder keine Unterstützung. Probiere eine aktuelle Version von Chrome oder Edge."
+            },
+            {
+              "question": "Warum erkennt die Abschrift manche Wörter falsch?",
+              "answer": "Die Genauigkeit der Spracherkennung hängt von deiner Mikrofonqualität, Hintergrundgeräuschen, deinem Akzent und der Erkennungs-Engine selbst ab — nichts davon kontrolliert dieses Tool, da die eigentliche Erkennung in deinem Browser oder Betriebssystem stattfindet."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die Forschung zur automatischen Spracherkennung reicht zurück bis zum \"Audrey\"-System der Bell Labs von 1952, das gesprochene Ziffern von einem einzelnen Sprecher erkennen konnte. Der Fortschritt beschleunigte sich in den folgenden Jahrzehnten durch statistische Modellierungstechniken, und in den 2010er-Jahren war cloudbasierte Spracherkennung auf Smartphones üblich geworden. Die Web Speech API des W3C, erstmals 2012 als Community-Entwurfsbericht veröffentlicht, standardisierte einen Weg für Webseiten, mikrofonbasierte Spracherkennung direkt über JavaScript anzufordern, zusammen mit der begleitenden SpeechSynthesis-Schnittstelle für Text-zu-Sprache."
+          },
+          "privacy": {
+            "title": "Datenschutz und Berechtigungen",
+            "paragraph": "Da Spracherkennung Mikrofonzugriff erfordert, behandeln Browser dies als sensible Berechtigung, die vom Nutzer für jede Website ausdrücklich erteilt werden muss und jederzeit widerrufen werden kann. Dieses Tool fordert diese Berechtigung nur an, wenn du auf Zuhören starten drückst, und zeichnet deine Audiodaten niemals auf oder speichert sie — die Audiodaten werden nur verarbeitet, um eine Textabschrift zu erzeugen, genau wie bei jeder anderen Browserfunktion, die Spracherkennung nutzt, wie Sprachsuche oder Sprachassistenten."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Spracherkennung wird innerhalb der Informatik studiert, speziell in der Sprach- und Sprachverarbeitung. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "Eines der weltweit führenden Zentren für Sprach- und Sprachverarbeitungsforschung.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Ein führendes Zentrum für Sprach-, Sprachverarbeitungs- und KI-Forschung.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm innerhalb von EECS."
+              },
+              {
+                "name": "University of Edinburgh — Centre for Speech Technology Research",
+                "note": "Eines der führenden europäischen Zentren, die sich speziell der Sprachtechnologieforschung widmen.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Nein — die Forschungsstudiengänge sind an der University of Edinburgh Präsenzstudiengänge."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "Eine führende Informatikabteilung mit starker Forschung in der Verarbeitung natürlicher Sprache.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Cambridge — Machine Intelligence Laboratory",
+                "note": "Ein führendes Zentrum für Sprach- und Sprachtechnologieforschung.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Ingenieurabteilung statt."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technische Referenzen",
+          "citation": "W3C Community Group. (2012-heute). Web Speech API Specification.",
+          "note": "Die offizielle technische Spezifikation, die die SpeechRecognition- und SpeechSynthesis-Schnittstellen definiert, auf denen dieses Tool basiert.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Spezifikation ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19455,7 +19594,6 @@
     "image-to-base64-converter": "Bild-zu-Base64-Konverter",
     "certificate-generator": "Urkunden-Generator",
     "smart-video-compressor": "Intelligenter Videokomprimierer",
-    "speech-to-text": "Sprache-zu-Text",
     "smart-image-compression": "Intelligente Bildkomprimierung",
     "background-remover": "Bildhintergrund-Entferner",
     "spelling-grammar-checker": "Rechtschreib- und Grammatikprüfung",

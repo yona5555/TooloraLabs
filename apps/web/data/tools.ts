@@ -1274,4 +1274,19 @@ export const tools: Tool[] = [
       "free text to speech",
     ],
   },
+  {
+    slug: "speech-to-text",
+    title: "Speech to Text",
+    category: "ai-tools",
+    description:
+      "Convert spoken audio from your microphone into written text using your browser's built-in speech recognition. No account, no server, no cost.",
+    featured: false,
+    keywords: [
+      "speech to text",
+      "voice to text",
+      "speech recognition online",
+      "dictation tool",
+      "free speech to text",
+    ],
+  },
 ];

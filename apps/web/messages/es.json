@@ -19254,6 +19254,145 @@
           "readOriginal": "Ver la Especificación"
         }
       }
+    },
+    "speech-to-text": {
+      "title": "Voz a Texto",
+      "description": "Convierte audio hablado desde tu micrófono en texto escrito usando el reconocimiento de voz integrado en tu navegador. Sin cuenta, sin servidor, sin costo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Entrada de Voz",
+        "unsupported": "Tu navegador no admite reconocimiento de voz. Prueba una versión reciente de Chrome o Edge.",
+        "privacyNotice": "Esta función necesita acceso al micrófono, que tu navegador solicitará. Todo el audio se procesa localmente en tu navegador — nada se graba ni se envía jamás a un servidor.",
+        "micDenied": "Se denegó el acceso al micrófono. Revisa la configuración del sitio en tu navegador para permitir el acceso al micrófono en esta página.",
+        "languageLabel": "Idioma",
+        "startListening": "Empezar a Escuchar",
+        "stopListening": "Dejar de Escuchar",
+        "clear": "Borrar"
+      },
+      "result": {
+        "heading": "Transcripción",
+        "status": {
+          "idle": "Presiona Empezar a Escuchar y comienza a hablar.",
+          "listening": "Escuchando...",
+          "denied": "Acceso al micrófono denegado."
+        },
+        "emptyTranscript": "Tu texto transcrito aparecerá aquí.",
+        "wordCountLabel": "Palabras"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "La precisión del reconocimiento y los idiomas disponibles dependen completamente de tu navegador y sistema operativo."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Reconocimiento de Voz Basado en el Navegador",
+          "paragraph1": "Esta herramienta usa la interfaz SpeechRecognition de la Web Speech API, una función integrada directamente en algunos navegadores web modernos que convierte el audio hablado de tu micrófono en texto. Cuando presionas Empezar a Escuchar, tu navegador solicita permiso de micrófono, luego transmite tu voz a su propio motor de reconocimiento de voz para producir una transcripción —esta herramienta nunca graba, almacena, ni transmite tu audio a ningún servidor.",
+          "paragraph2": "Los resultados del reconocimiento de voz llegan en dos formas: resultados provisionales, que se actualizan continuamente mientras hablas y pueden cambiar, y resultados finales, que quedan fijos una vez que el reconocedor tiene la confianza de que una frase está completa. Esta herramienta muestra el texto provisional tenuemente mientras escucha y confirma cada segmento final en la transcripción permanente, uniendo segmentos y capitalizando automáticamente el inicio de cada oración para mejorar la legibilidad."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "La voz a texto es útil en cualquier lugar donde escribir sea más lento o menos conveniente que hablar.",
+          "items": [
+            {
+              "title": "Toma de Notas por Voz",
+              "description": "Capturar rápidamente ideas o notas hablándolas en voz alta en lugar de escribirlas, especialmente útil cuando tienes las manos ocupadas."
+            },
+            {
+              "title": "Accesibilidad",
+              "description": "Hacer que la entrada de texto sea accesible para personas que tienen dificultad para escribir debido a discapacidades motoras u otras condiciones."
+            },
+            {
+              "title": "Redactar Texto Más Rápido",
+              "description": "Hablar un borrador aproximado de un correo electrónico o mensaje en voz alta para poner las palabras rápidamente, y luego editar el texto transcrito después."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Se graba mi voz o se envía a algún lugar?",
+              "answer": "No. Esta herramienta nunca graba ni sube tu audio. Tu navegador procesa tu voz localmente (o a través de su propio servicio de reconocimiento integrado) puramente para producir el texto que ves —esta página nunca almacena ni transmite el audio en sí."
+            },
+            {
+              "question": "¿Por qué mi navegador pide permiso de micrófono?",
+              "answer": "El reconocimiento de voz requiere acceso a tu micrófono para escuchar lo que dices. Tu navegador maneja esta solicitud de permiso directamente, y puedes revocarla en cualquier momento en la configuración del sitio de tu navegador."
+            },
+            {
+              "question": "¿Por qué dice que el reconocimiento de voz no es compatible?",
+              "answer": "La interfaz SpeechRecognition tiene una compatibilidad de navegadores más limitada que el texto a voz. Funciona bien en Chrome y Edge, pero Firefox y Safari históricamente han tenido soporte parcial o nulo. Prueba una versión reciente de Chrome o Edge."
+            },
+            {
+              "question": "¿Por qué la transcripción se equivoca con algunas palabras?",
+              "answer": "La precisión del reconocimiento de voz depende de la calidad de tu micrófono, el ruido de fondo, tu acento, y el propio motor de reconocimiento —nada de lo cual controla esta herramienta, ya que el reconocimiento real ocurre dentro de tu navegador o sistema operativo."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La investigación en reconocimiento automático de voz se remonta al sistema \"Audrey\" de los Laboratorios Bell de 1952, que podía reconocer dígitos hablados de un solo interlocutor. El progreso se aceleró en las décadas siguientes con técnicas de modelado estadístico, y para la década de 2010, el reconocimiento de voz conectado a la nube se había vuelto común en los teléfonos inteligentes. La Web Speech API del W3C, publicada por primera vez como un informe comunitario preliminar en 2012, estandarizó una forma para que las páginas web solicitaran reconocimiento de voz basado en micrófono directamente a través de JavaScript, junto con su interfaz complementaria SpeechSynthesis para texto a voz."
+          },
+          "privacy": {
+            "title": "Privacidad y Permisos",
+            "paragraph": "Debido a que el reconocimiento de voz requiere acceso al micrófono, los navegadores lo tratan como un permiso sensible que debe ser otorgado explícitamente por el usuario para cada sitio, y puede revocarse en cualquier momento. Esta herramienta solicita ese permiso solo cuando presionas Empezar a Escuchar, y nunca graba ni almacena tu audio —el audio se procesa solo para generar una transcripción de texto, exactamente como sucedería con cualquier otra función del navegador que use reconocimiento de voz, como la búsqueda por voz o los asistentes de voz."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El reconocimiento de voz se estudia dentro de las ciencias de la computación, específicamente en el procesamiento del habla y el lenguaje. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad Carnegie Mellon — Language Technologies Institute",
+                "note": "Uno de los centros líderes en el mundo en investigación de procesamiento del habla y el lenguaje.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centro líder en investigación de habla, lenguaje e IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — el doctorado es un programa de investigación presencial dentro de EECS."
+              },
+              {
+                "name": "Universidad de Edimburgo — Centre for Speech Technology Research",
+                "note": "Uno de los centros europeos líderes dedicados específicamente a la investigación de tecnología del habla.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en procesamiento del lenguaje natural.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centro líder en investigación de tecnología del habla y el lenguaje.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ingeniería."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "W3C Community Group. (2012-presente). Web Speech API Specification.",
+          "note": "La especificación técnica oficial que define las interfaces SpeechRecognition y SpeechSynthesis en las que se basa esta herramienta.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Ver la Especificación"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19455,7 +19594,6 @@
     "image-to-base64-converter": "Convertidor de imagen a Base64",
     "certificate-generator": "Generador de certificados",
     "smart-video-compressor": "Compresor de video inteligente",
-    "speech-to-text": "Voz a texto",
     "smart-image-compression": "Compresión inteligente de imágenes",
     "background-remover": "Eliminador de fondo de imagen",
     "spelling-grammar-checker": "Corrector ortográfico y gramatical",

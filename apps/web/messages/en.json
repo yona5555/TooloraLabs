@@ -19254,6 +19254,145 @@
           "readOriginal": "View the Specification"
         }
       }
+    },
+    "speech-to-text": {
+      "title": "Speech to Text",
+      "description": "Convert spoken audio from your microphone into written text using your browser's built-in speech recognition. No account, no server, no cost.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Voice Input",
+        "unsupported": "Your browser doesn't support speech recognition. Try a recent version of Chrome or Edge.",
+        "privacyNotice": "This feature needs microphone access, which your browser will ask for. All audio is processed locally in your browser — nothing is ever recorded or sent to a server.",
+        "micDenied": "Microphone access was denied. Check your browser's site settings to allow microphone access for this page.",
+        "languageLabel": "Language",
+        "startListening": "Start Listening",
+        "stopListening": "Stop Listening",
+        "clear": "Clear"
+      },
+      "result": {
+        "heading": "Transcript",
+        "status": {
+          "idle": "Press Start Listening and begin speaking.",
+          "listening": "Listening...",
+          "denied": "Microphone access denied."
+        },
+        "emptyTranscript": "Your transcribed text will appear here.",
+        "wordCountLabel": "Words"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "Recognition accuracy and available languages depend entirely on your browser and operating system."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Browser-Based Speech Recognition",
+          "paragraph1": "This tool uses the Web Speech API's SpeechRecognition interface, a feature built directly into some modern web browsers that converts spoken audio from your microphone into text. When you press Start Listening, your browser requests microphone permission, then streams your speech to its own speech recognition engine to produce a transcript — this tool never records, stores, or transmits your audio to any server.",
+          "paragraph2": "Speech recognition results arrive in two forms: interim results, which update continuously as you speak and may still change, and final results, which are locked in once the recognizer is confident a phrase is complete. This tool displays interim text faintly while listening and commits each final segment to the permanent transcript, joining segments together and automatically capitalizing the start of each sentence for readability."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Speech-to-text is useful anywhere typing is slower or less convenient than speaking.",
+          "items": [
+            {
+              "title": "Voice Note-Taking",
+              "description": "Quickly capturing ideas or notes by speaking them aloud instead of typing, especially useful when your hands are busy."
+            },
+            {
+              "title": "Accessibility",
+              "description": "Making text input accessible to people who have difficulty typing due to motor impairments or other conditions."
+            },
+            {
+              "title": "Drafting Text Faster",
+              "description": "Speaking a rough draft of an email or message aloud to get words down quickly, then editing the transcribed text afterward."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is my voice recorded or sent anywhere?",
+              "answer": "No. This tool never records or uploads your audio. Your browser processes your speech locally (or via its own built-in recognition service) purely to produce the text you see — this page never stores or transmits the audio itself."
+            },
+            {
+              "question": "Why does my browser ask for microphone permission?",
+              "answer": "Speech recognition requires access to your microphone to hear what you say. Your browser handles this permission request directly, and you can revoke it at any time in your browser's site settings."
+            },
+            {
+              "question": "Why does it say speech recognition isn't supported?",
+              "answer": "The SpeechRecognition interface has more limited browser support than text-to-speech. It works well in Chrome and Edge, but Firefox and Safari have historically had partial or no support. Try a recent version of Chrome or Edge."
+            },
+            {
+              "question": "Why does the transcript get some words wrong?",
+              "answer": "Speech recognition accuracy depends on your microphone quality, background noise, accent, and the recognition engine itself — none of which this tool controls, since the actual recognition happens inside your browser or operating system."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Automatic speech recognition research dates back to Bell Labs' 1952 \"Audrey\" system, which could recognize spoken digits from a single speaker. Progress accelerated through the following decades with statistical modeling techniques, and by the 2010s, cloud-connected speech recognition had become common on smartphones. The W3C's Web Speech API, first published as a draft community report in 2012, standardized a way for web pages to request microphone-based speech recognition directly through JavaScript, alongside its companion SpeechSynthesis interface for text-to-speech."
+          },
+          "privacy": {
+            "title": "Privacy and Permissions",
+            "paragraph": "Because speech recognition requires microphone access, browsers treat it as a sensitive permission that must be explicitly granted by the user for each site, and can be revoked at any time. This tool requests that permission only when you press Start Listening, and never records or stores your audio — the audio is processed only to generate a text transcript, exactly as it would be for any other browser feature that uses speech recognition, like voice search or voice assistants."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Speech recognition is studied within computer science, specifically in speech and language processing. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "One of the world's leading centers for speech and language processing research.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "A leading center for speech, language, and AI research.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — the PhD is an in-residence research program within EECS."
+              },
+              {
+                "name": "University of Edinburgh — Centre for Speech Technology Research",
+                "note": "One of Europe's leading centers dedicated specifically to speech technology research.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong natural language processing research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Machine Intelligence Laboratory",
+                "note": "A leading center for speech and language technology research.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — research degrees are in-residence at the Department of Engineering."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "W3C Community Group. (2012-present). Web Speech API Specification.",
+          "note": "The official technical specification defining the SpeechRecognition and SpeechSynthesis interfaces this tool is built on.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "View the Specification"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19455,7 +19594,6 @@
     "image-to-base64-converter": "Image to Base64 Converter",
     "certificate-generator": "Certificate Generator",
     "smart-video-compressor": "Smart Video Compressor",
-    "speech-to-text": "Speech to Text",
     "smart-image-compression": "Smart Image Compression",
     "background-remover": "Image Background Remover",
     "spelling-grammar-checker": "Spelling & Grammar Checker",

@@ -145,6 +145,8 @@ import CircleCalculator from "@/components/tools/circle-calculator/CircleCalcula
 import CircleEducation from "@/components/tools/circle-calculator/CircleEducation";
 import TextToSpeech from "@/components/tools/text-to-speech/TextToSpeech";
 import TTSEducation from "@/components/tools/text-to-speech/TTSEducation";
+import SpeechToText from "@/components/tools/speech-to-text/SpeechToText";
+import STTEducation from "@/components/tools/speech-to-text/STTEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -568,6 +570,9 @@ export default async function ToolPage({
     case "text-to-speech":
       component = <TextToSpeech education={<TTSEducation />} />;
       break;
+    case "speech-to-text":
+      component = <SpeechToText education={<STTEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -703,6 +708,7 @@ export default async function ToolPage({
     slug === "standard-deviation-calculator" ||
     slug === "circle-calculator" ||
     slug === "text-to-speech" ||
+    slug === "speech-to-text" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

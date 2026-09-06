@@ -19254,6 +19254,145 @@
           "readOriginal": "Consulter la Spécification"
         }
       }
+    },
+    "speech-to-text": {
+      "title": "Voix vers Texte",
+      "description": "Convertissez l'audio parlé de votre microphone en texte écrit grâce à la reconnaissance vocale intégrée à votre navigateur. Sans compte, sans serveur, sans coût.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Entrée Vocale",
+        "unsupported": "Votre navigateur ne prend pas en charge la reconnaissance vocale. Essayez une version récente de Chrome ou Edge.",
+        "privacyNotice": "Cette fonctionnalité nécessite l'accès au microphone, que votre navigateur demandera. Tout l'audio est traité localement dans votre navigateur — rien n'est jamais enregistré ni envoyé à un serveur.",
+        "micDenied": "L'accès au microphone a été refusé. Vérifiez les paramètres du site dans votre navigateur pour autoriser l'accès au microphone pour cette page.",
+        "languageLabel": "Langue",
+        "startListening": "Commencer l'Écoute",
+        "stopListening": "Arrêter l'Écoute",
+        "clear": "Effacer"
+      },
+      "result": {
+        "heading": "Transcription",
+        "status": {
+          "idle": "Appuyez sur Commencer l'Écoute et commencez à parler.",
+          "listening": "Écoute en cours...",
+          "denied": "Accès au microphone refusé."
+        },
+        "emptyTranscript": "Votre texte transcrit apparaîtra ici.",
+        "wordCountLabel": "Mots"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "La précision de la reconnaissance et les langues disponibles dépendent entièrement de votre navigateur et de votre système d'exploitation."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Reconnaissance Vocale dans le Navigateur",
+          "paragraph1": "Cet outil utilise l'interface SpeechRecognition de la Web Speech API, une fonctionnalité intégrée directement à certains navigateurs web modernes qui convertit l'audio parlé de votre microphone en texte. Lorsque vous appuyez sur Commencer l'Écoute, votre navigateur demande la permission du microphone, puis transmet votre voix à son propre moteur de reconnaissance vocale pour produire une transcription — cet outil n'enregistre, ne stocke, ni ne transmet jamais votre audio à un serveur.",
+          "paragraph2": "Les résultats de la reconnaissance vocale arrivent sous deux formes : les résultats provisoires, qui se mettent à jour en continu pendant que vous parlez et peuvent encore changer, et les résultats finaux, qui sont figés une fois que le moteur de reconnaissance est confiant qu'une phrase est complète. Cet outil affiche le texte provisoire de manière atténuée pendant l'écoute et valide chaque segment final dans la transcription permanente, joignant les segments et mettant automatiquement en majuscule le début de chaque phrase pour une meilleure lisibilité."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "La voix vers texte est utile partout où taper est plus lent ou moins pratique que parler.",
+          "items": [
+            {
+              "title": "Prise de Notes Vocales",
+              "description": "Capturer rapidement des idées ou des notes en les prononçant à voix haute plutôt qu'en les tapant, particulièrement utile lorsque vos mains sont occupées."
+            },
+            {
+              "title": "Accessibilité",
+              "description": "Rendre la saisie de texte accessible aux personnes ayant des difficultés à taper en raison de troubles moteurs ou d'autres conditions."
+            },
+            {
+              "title": "Rédiger du Texte Plus Rapidement",
+              "description": "Prononcer à voix haute un brouillon approximatif d'un e-mail ou d'un message pour poser les mots rapidement, puis modifier le texte transcrit par la suite."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Ma voix est-elle enregistrée ou envoyée quelque part ?",
+              "answer": "Non. Cet outil n'enregistre ni ne télécharge jamais votre audio. Votre navigateur traite votre voix localement (ou via son propre service de reconnaissance intégré) uniquement pour produire le texte que vous voyez — cette page ne stocke ni ne transmet jamais l'audio lui-même."
+            },
+            {
+              "question": "Pourquoi mon navigateur demande-t-il la permission du microphone ?",
+              "answer": "La reconnaissance vocale nécessite l'accès à votre microphone pour entendre ce que vous dites. Votre navigateur gère directement cette demande de permission, et vous pouvez la révoquer à tout moment dans les paramètres du site de votre navigateur."
+            },
+            {
+              "question": "Pourquoi dit-il que la reconnaissance vocale n'est pas prise en charge ?",
+              "answer": "L'interface SpeechRecognition a une prise en charge navigateur plus limitée que la synthèse vocale. Elle fonctionne bien dans Chrome et Edge, mais Firefox et Safari ont historiquement eu un support partiel ou inexistant. Essayez une version récente de Chrome ou Edge."
+            },
+            {
+              "question": "Pourquoi la transcription se trompe-t-elle sur certains mots ?",
+              "answer": "La précision de la reconnaissance vocale dépend de la qualité de votre microphone, du bruit ambiant, de votre accent, et du moteur de reconnaissance lui-même — rien de tout cela n'est contrôlé par cet outil, puisque la reconnaissance réelle se produit dans votre navigateur ou système d'exploitation."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La recherche en reconnaissance vocale automatique remonte au système \"Audrey\" des Bell Labs en 1952, capable de reconnaître des chiffres prononcés par un seul locuteur. Les progrès se sont accélérés au cours des décennies suivantes grâce aux techniques de modélisation statistique, et dans les années 2010, la reconnaissance vocale connectée au cloud était devenue courante sur les smartphones. La Web Speech API du W3C, publiée pour la première fois comme rapport communautaire préliminaire en 2012, a normalisé un moyen pour les pages web de demander une reconnaissance vocale basée sur le microphone directement via JavaScript, aux côtés de son interface complémentaire SpeechSynthesis pour la synthèse vocale."
+          },
+          "privacy": {
+            "title": "Confidentialité et Autorisations",
+            "paragraph": "Comme la reconnaissance vocale nécessite l'accès au microphone, les navigateurs la traitent comme une autorisation sensible qui doit être explicitement accordée par l'utilisateur pour chaque site, et peut être révoquée à tout moment. Cet outil ne demande cette autorisation que lorsque vous appuyez sur Commencer l'Écoute, et n'enregistre ni ne stocke jamais votre audio — l'audio est traité uniquement pour générer une transcription textuelle, exactement comme ce serait le cas pour toute autre fonctionnalité de navigateur utilisant la reconnaissance vocale, comme la recherche vocale ou les assistants vocaux."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La reconnaissance vocale est étudiée en informatique, spécifiquement dans le traitement de la parole et du langage. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université Carnegie Mellon — Language Technologies Institute",
+                "note": "L'un des centres les plus reconnus au monde pour la recherche en traitement de la parole et du langage.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en parole, langage et IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS."
+              },
+              {
+                "name": "Université d'Édimbourg — Centre for Speech Technology Research",
+                "note": "L'un des centres européens de premier plan dédiés spécifiquement à la recherche en technologie de la parole.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en traitement du langage naturel.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en technologie de la parole et du langage.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'ingénierie."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "W3C Community Group. (2012-présent). Web Speech API Specification.",
+          "note": "La spécification technique officielle définissant les interfaces SpeechRecognition et SpeechSynthesis sur lesquelles cet outil est construit.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Consulter la Spécification"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19455,7 +19594,6 @@
     "image-to-base64-converter": "Convertisseur d'image en Base64",
     "certificate-generator": "Générateur de certificats",
     "smart-video-compressor": "Compresseur vidéo intelligent",
-    "speech-to-text": "Reconnaissance vocale (parole vers texte)",
     "smart-image-compression": "Compression d'image intelligente",
     "background-remover": "Suppresseur d'arrière-plan d'image",
     "spelling-grammar-checker": "Correcteur d'orthographe et de grammaire",
