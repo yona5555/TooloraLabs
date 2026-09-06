@@ -4,6 +4,11 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import BalancerEquationStructureDiagram from "./BalancerEquationStructureDiagram";
+import BalancerAtomBalanceDiagram from "./BalancerAtomBalanceDiagram";
+import BalancerConservationScaleDiagram from "./BalancerConservationScaleDiagram";
+import BalancerCoefficientMoleculeDiagram from "./BalancerCoefficientMoleculeDiagram";
+import BalancerMatrixDiagram from "./BalancerMatrixDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -18,8 +23,21 @@ export default async function BalancerEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <BalancerEquationStructureDiagram
+          reactantCount={1}
+          productCount={1}
+          reactantsLabel={t("intro.structure.reactants")}
+          productsLabel={t("intro.structure.products")}
+          caption={t("intro.structure.caption")}
+        />
         <p>{t("intro.paragraph2")}</p>
+        <BalancerConservationScaleDiagram
+          reactantsLabel={t("intro.conservation.reactants")}
+          productsLabel={t("intro.conservation.products")}
+          caption={t("intro.conservation.caption")}
+        />
         <p>{t("intro.paragraph3")}</p>
+        <BalancerCoefficientMoleculeDiagram formula="H₂O" count={2} caption={t("intro.coefficient.caption")} />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -58,6 +76,22 @@ export default async function BalancerEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.atomBalanceSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.atomBalanceSection.paragraph")}</p>
+          <BalancerAtomBalanceDiagram
+            rows={[
+              { element: "Fe", reactantCount: 4, productCount: 4 },
+              { element: "O", reactantCount: 6, productCount: 6 },
+            ]}
+            caption={t("behindTheTool.atomBalanceSection.caption")}
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.matrixSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.matrixSection.paragraph")}</p>
+          <BalancerMatrixDiagram cornerLabel={t("behindTheTool.matrixSection.cornerLabel")} caption={t("behindTheTool.matrixSection.caption")} />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

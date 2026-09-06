@@ -9133,7 +9133,12 @@
         "inputTitle": "Unausgeglichene Gleichung",
         "equationLabel": "Gleichung",
         "equationHint": "Verwenden Sie die Standard-Formelsyntax, z. B. Fe2O3, und trennen Sie Edukte/Produkte mit -> oder =.",
-        "equationPlaceholder": "z. B. Fe + O2 -> Fe2O3"
+        "equationPlaceholder": "z. B. Fe + O2 -> Fe2O3",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "structureReactants": "{count, plural, one {# Edukt} other {# Edukte}}",
+        "structureProducts": "{count, plural, one {# Produkt} other {# Produkte}}",
+        "structureCaption": "Live-Anzahl der Terme während der Eingabe — aktualisiert sich schon vor dem Ausgleich der Gleichung."
       },
       "result": {
         "heading": "Ausgeglichene Gleichung",
@@ -9143,14 +9148,29 @@
         "cannotBalance": "Diese Gleichung kann nicht mit ganzzahligen Koeffizienten ausgeglichen werden — überprüfen Sie die Formeln auf Tippfehler.",
         "balancedCaption": "Kleinste ganzzahlige Koeffizienten, die jedes Element erhalten",
         "reactants": "Edukte",
-        "products": "Produkte"
+        "products": "Produkte",
+        "emptyStateMessage": "Gleichung eingeben und auf Berechnen klicken, um sie auszugleichen.",
+        "atomBalanceCaption": "Atomanzahl pro Element — gleich lange Balken auf beiden Seiten bedeutet \"ausgeglichen\"."
       },
       "education": {
         "intro": {
           "title": "Gleichungsausgleich verstehen",
           "paragraph1": "Eine chemische Gleichung auszugleichen bedeutet, Koeffizienten zu finden — ganze Zahlen, die vor jede Formel gesetzt werden —, sodass auf beiden Seiten die gleiche Anzahl von Atomen jedes Elements erscheint. Dies spiegelt das Gesetz der Erhaltung der Masse wider: Atome werden in einer chemischen Reaktion umgeordnet, aber keine werden erzeugt oder vernichtet, daher muss alles, was als Edukte an Elementen und Mengen hineingeht, insgesamt als Produkte wieder herauskommen.",
           "paragraph2": "Dieser Rechner verwendet die „Matrixmethode“: Er behandelt die Atomanzahl jedes Elements über alle Formeln hinweg als eine lineare Gleichung, baut eine Matrix aus all diesen Gleichungen zusammen und löst nach den Koeffizienten mittels Gauß-Elimination mit exakten Brüchen (wodurch die Rundungsfehler vermieden werden, die Gleitkommaarithmetik einführen würde). Das Ergebnis ist ein Vektor von Verhältnissen, den der Rechner dann auf die kleinste Menge positiver ganzer Zahlen skaliert — dieselbe Antwort, zu der ein Chemiker letztlich durch Ausprobieren gelangen würde, hier jedoch systematisch gefunden.",
-          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich."
+          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich.",
+          "structure": {
+            "reactants": "Edukte",
+            "products": "Produkte",
+            "caption": "Jede Gleichung hat eine Edukt- und eine Produktseite, verbunden durch einen Reaktionspfeil."
+          },
+          "conservation": {
+            "reactants": "Edukte",
+            "products": "Produkte",
+            "caption": "Eine ausgeglichene Gleichung hält die Waage im Gleichgewicht — dieselben Atome existieren auf beiden Seiten, nur umgeordnet."
+          },
+          "coefficient": {
+            "caption": "„2 H₂O“ bedeutet zwei separate, identische Wassermoleküle, nicht ein doppelt so großes Molekül."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -9252,6 +9272,17 @@
                 "online": "Nein — die Programme des Fachbereichs werden auf dem Campus der Universität Katar durchgeführt."
               }
             ]
+          },
+          "atomBalanceSection": {
+            "title": "Den Ausgleich prüfen",
+            "paragraph": "Für jedes Element in der Gleichung muss die Gesamtatomanzahl auf der Eduktseite genau der Gesamtanzahl auf der Produktseite entsprechen — das ist der eigentliche Test, den ein gültiger Ausgleich bestehen muss.",
+            "caption": "Eisen- und Sauerstoffatomanzahlen stimmen auf beiden Seiten einer ausgeglichenen Gleichung genau überein."
+          },
+          "matrixSection": {
+            "title": "Die Matrixmethode",
+            "cornerLabel": "Element",
+            "paragraph": "Über einfache, durch bloße Betrachtung lösbare Gleichungen hinaus baut dieses Tool eine Matrix auf, wie viele Atome jedes Elements in jedem Term vorkommen, und löst dann nach den Koeffizienten, die jede Zeile auf null summieren lassen — dieselbe lineare Algebra-Technik, die für weit komplexere Reaktionen verwendet wird.",
+            "caption": "Eduktspalten sind positiv, Produktspalten negativ — ein gültiger Ausgleich ist genau eine Lösung, bei der jede Zeile auf null summiert."
           }
         },
         "references": {
@@ -9261,6 +9292,27 @@
           "url": "https://doi.org/10.1021/ed074p538",
           "readOriginal": "Originalarbeit lesen"
         }
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "class-schedule-builder": {

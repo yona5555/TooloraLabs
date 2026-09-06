@@ -9133,7 +9133,12 @@
         "inputTitle": "Équation Non Équilibrée",
         "equationLabel": "Équation",
         "equationHint": "Utilisez la syntaxe standard des formules, par ex. Fe2O3, et séparez réactifs/produits par -> ou =.",
-        "equationPlaceholder": "ex. Fe + O2 -> Fe2O3"
+        "equationPlaceholder": "ex. Fe + O2 -> Fe2O3",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "structureReactants": "{count, plural, one {# réactif} other {# réactifs}}",
+        "structureProducts": "{count, plural, one {# produit} other {# produits}}",
+        "structureCaption": "Comptage des termes en direct pendant la saisie — se met à jour même avant que l'équation ne soit équilibrée."
       },
       "result": {
         "heading": "Équation Équilibrée",
@@ -9143,14 +9148,29 @@
         "cannotBalance": "Cette équation ne peut pas être équilibrée avec des coefficients entiers — vérifiez les formules à la recherche de fautes de frappe.",
         "balancedCaption": "Les plus petits coefficients entiers qui conservent chaque élément",
         "reactants": "Réactifs",
-        "products": "Produits"
+        "products": "Produits",
+        "emptyStateMessage": "Saisissez une équation et appuyez sur Calculer pour l'équilibrer.",
+        "atomBalanceCaption": "Nombre d'atomes par élément — des barres égales des deux côtés, c'est ce que signifie \"équilibrée\"."
       },
       "education": {
         "intro": {
           "title": "Comprendre l'Équilibrage des Équations",
           "paragraph1": "Équilibrer une équation chimique signifie trouver des coefficients — des nombres entiers placés devant chaque formule — de sorte que le même nombre d'atomes de chaque élément apparaisse des deux côtés. Cela reflète la loi de conservation de la masse : les atomes sont réarrangés lors d'une réaction chimique, mais aucun n'est créé ni détruit, donc tout ce qui entre en tant que réactifs, en éléments et en quantités, doit ressortir, au total, en tant que produits.",
           "paragraph2": "Ce calculateur utilise la « méthode matricielle » : il traite le nombre d'atomes de chaque élément à travers toutes les formules comme une équation linéaire, construit une matrice à partir de toutes ces équations réunies, et résout les coefficients par élimination de Gauss avec des fractions exactes (évitant les erreurs d'arrondi que l'arithmétique à virgule flottante introduirait). Le résultat est un vecteur de proportions, que le calculateur met ensuite à l'échelle jusqu'au plus petit ensemble de nombres entiers positifs — la même réponse qu'un chimiste finirait par trouver par essais et erreurs, mais obtenue ici de façon systématique.",
-          "paragraph3": "Une équation correctement équilibrée devrait également conserver la charge électrique totale, pas seulement le nombre d'atomes, ce qui importe pour les réactions entre ions plutôt qu'entre molécules neutres. Ce calculateur équilibre les équations à formules neutres uniquement par le nombre d'atomes ; pour les réactions écrites avec des charges ioniques explicites, une méthode complète d'équilibrage redox (suivant les degrés d'oxydation et les électrons transférés) est nécessaire en plus de ce que cet outil calcule."
+          "paragraph3": "Une équation correctement équilibrée devrait également conserver la charge électrique totale, pas seulement le nombre d'atomes, ce qui importe pour les réactions entre ions plutôt qu'entre molécules neutres. Ce calculateur équilibre les équations à formules neutres uniquement par le nombre d'atomes ; pour les réactions écrites avec des charges ioniques explicites, une méthode complète d'équilibrage redox (suivant les degrés d'oxydation et les électrons transférés) est nécessaire en plus de ce que cet outil calcule.",
+          "structure": {
+            "reactants": "Réactifs",
+            "products": "Produits",
+            "caption": "Chaque équation a un côté réactifs et un côté produits, reliés par une flèche de réaction."
+          },
+          "conservation": {
+            "reactants": "Réactifs",
+            "products": "Produits",
+            "caption": "Une équation équilibrée maintient la balance à niveau — les mêmes atomes existent des deux côtés, simplement réarrangés."
+          },
+          "coefficient": {
+            "caption": "« 2 H₂O » signifie deux molécules d'eau identiques et séparées, pas une molécule doublée en taille."
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -9252,6 +9272,17 @@
                 "online": "Non — les programmes du département sont dispensés sur le campus de l'Université du Qatar."
               }
             ]
+          },
+          "atomBalanceSection": {
+            "title": "Vérifier l'Équilibre",
+            "paragraph": "Pour chaque élément de l'équation, le nombre total d'atomes du côté des réactifs doit exactement égaler le total du côté des produits — c'est le véritable test qu'un équilibre valide doit réussir.",
+            "caption": "Les nombres d'atomes de fer et d'oxygène correspondent exactement des deux côtés d'une équation équilibrée."
+          },
+          "matrixSection": {
+            "title": "La Méthode Matricielle",
+            "cornerLabel": "Élément",
+            "paragraph": "Au-delà des équations simples résolubles par inspection, cet outil construit une matrice du nombre d'atomes de chaque élément apparaissant dans chaque terme, puis résout les coefficients qui font que chaque ligne somme à zéro — la même technique d'algèbre linéaire utilisée pour des réactions bien plus complexes.",
+            "caption": "Les colonnes des réactifs sont positives, celles des produits négatives — un équilibre valide est exactement une solution où chaque ligne somme à zéro."
           }
         },
         "references": {
@@ -9261,6 +9292,27 @@
           "url": "https://doi.org/10.1021/ed074p538",
           "readOriginal": "Lire l'Article Original"
         }
+      },
+      "relatedTools": {
+        "title": "Outils de Chimie Connexes"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "class-schedule-builder": {

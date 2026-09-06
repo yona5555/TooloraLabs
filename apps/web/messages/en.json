@@ -9133,7 +9133,12 @@
         "inputTitle": "Unbalanced Equation",
         "equationLabel": "Equation",
         "equationHint": "Use standard formula syntax, e.g. Fe2O3, and separate reactants/products with -> or =.",
-        "equationPlaceholder": "e.g. Fe + O2 -> Fe2O3"
+        "equationPlaceholder": "e.g. Fe + O2 -> Fe2O3",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "structureReactants": "{count, plural, one {# reactant} other {# reactants}}",
+        "structureProducts": "{count, plural, one {# product} other {# products}}",
+        "structureCaption": "Live term count as you type — updates before the equation is even balanced."
       },
       "result": {
         "heading": "Balanced Equation",
@@ -9143,14 +9148,29 @@
         "cannotBalance": "This equation can't be balanced with whole-number coefficients — check the formulas for typos.",
         "balancedCaption": "Smallest whole-number coefficients that conserve every element",
         "reactants": "Reactants",
-        "products": "Products"
+        "products": "Products",
+        "emptyStateMessage": "Enter an equation and press Calculate to balance it.",
+        "atomBalanceCaption": "Atom count per element — equal bars on both sides is what \"balanced\" means."
       },
       "education": {
         "intro": {
           "title": "Understanding Equation Balancing",
           "paragraph1": "Balancing a chemical equation means finding coefficients — whole numbers placed in front of each formula — so that the same number of atoms of every element appears on both sides. This reflects the law of conservation of mass: atoms are rearranged in a chemical reaction, but none are created or destroyed, so whatever elements and quantities go in as reactants must come out, in total, as products.",
           "paragraph2": "This calculator uses the \"matrix method\": it treats each element's atom count across every formula as one linear equation, builds a matrix of all those equations together, and solves for the coefficients using Gaussian elimination with exact fractions (avoiding the rounding errors floating-point arithmetic would introduce). The result is a vector of ratios, which the calculator then scales up to the smallest set of positive whole numbers — the same answer a chemist would eventually reach by trial and error, found systematically instead.",
-          "paragraph3": "A properly balanced equation should also conserve overall electric charge, not just atom counts, which matters for reactions between ions rather than neutral molecules. This calculator balances neutral-formula equations by atom count alone; for reactions written with explicit ionic charges, a full redox-balancing method (tracking oxidation states and electrons transferred) is needed in addition to what this tool computes."
+          "paragraph3": "A properly balanced equation should also conserve overall electric charge, not just atom counts, which matters for reactions between ions rather than neutral molecules. This calculator balances neutral-formula equations by atom count alone; for reactions written with explicit ionic charges, a full redox-balancing method (tracking oxidation states and electrons transferred) is needed in addition to what this tool computes.",
+          "structure": {
+            "reactants": "Reactants",
+            "products": "Products",
+            "caption": "Every equation has a reactant side and a product side, joined by a reaction arrow."
+          },
+          "conservation": {
+            "reactants": "Reactants",
+            "products": "Products",
+            "caption": "A balanced equation keeps the scale level — the same atoms exist on both sides, just rearranged."
+          },
+          "coefficient": {
+            "caption": "\"2 H₂O\" means two separate, identical water molecules, not one molecule doubled in size."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -9252,6 +9272,17 @@
                 "online": "No — the department's programs are delivered on Qatar University's campus."
               }
             ]
+          },
+          "atomBalanceSection": {
+            "title": "Checking the Balance",
+            "paragraph": "For every element in the equation, the total atom count on the reactant side must exactly equal the total on the product side — this is the actual test a valid balance must pass.",
+            "caption": "Iron and oxygen atom counts matching exactly on both sides of a balanced equation."
+          },
+          "matrixSection": {
+            "title": "The Matrix Method",
+            "cornerLabel": "Element",
+            "paragraph": "Beyond simple equations solvable by inspection, this tool builds a matrix of how many atoms of each element appear in each term, then solves for the coefficients that make every row sum to zero — the same linear algebra technique used for far more complex reactions.",
+            "caption": "Reactant columns are positive, product columns negative — a valid balance is exactly a solution where every row sums to zero."
           }
         },
         "references": {
@@ -9261,6 +9292,27 @@
           "url": "https://doi.org/10.1021/ed074p538",
           "readOriginal": "Read the Original Paper"
         }
+      },
+      "relatedTools": {
+        "title": "Related Chemistry Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "class-schedule-builder": {

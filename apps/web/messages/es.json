@@ -9133,7 +9133,12 @@
         "inputTitle": "Ecuación Sin Balancear",
         "equationLabel": "Ecuación",
         "equationHint": "Usa la sintaxis estándar de fórmulas, p. ej. Fe2O3, y separa reactivos/productos con -> o =.",
-        "equationPlaceholder": "p. ej. Fe + O2 -> Fe2O3"
+        "equationPlaceholder": "p. ej. Fe + O2 -> Fe2O3",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "structureReactants": "{count, plural, one {# reactivo} other {# reactivos}}",
+        "structureProducts": "{count, plural, one {# producto} other {# productos}}",
+        "structureCaption": "Recuento de términos en vivo mientras escribes — se actualiza incluso antes de que la ecuación esté balanceada."
       },
       "result": {
         "heading": "Ecuación Balanceada",
@@ -9143,14 +9148,29 @@
         "cannotBalance": "Esta ecuación no se puede balancear con coeficientes enteros — revisa las fórmulas en busca de errores tipográficos.",
         "balancedCaption": "Los coeficientes enteros más pequeños que conservan cada elemento",
         "reactants": "Reactivos",
-        "products": "Productos"
+        "products": "Productos",
+        "emptyStateMessage": "Introduce una ecuación y pulsa Calcular para balancearla.",
+        "atomBalanceCaption": "Recuento de átomos por elemento: barras iguales en ambos lados es lo que significa \"balanceada\"."
       },
       "education": {
         "intro": {
           "title": "Entender el Balanceo de Ecuaciones",
           "paragraph1": "Balancear una ecuación química significa encontrar coeficientes — números enteros colocados delante de cada fórmula — de modo que aparezca el mismo número de átomos de cada elemento en ambos lados. Esto refleja la ley de conservación de la masa: los átomos se reorganizan en una reacción química, pero ninguno se crea ni se destruye, así que cualquier elemento y cantidad que entre como reactivo debe salir, en total, como producto.",
           "paragraph2": "Esta calculadora utiliza el «método matricial»: trata el recuento de átomos de cada elemento en todas las fórmulas como una ecuación lineal, construye una matriz con todas esas ecuaciones juntas, y resuelve los coeficientes mediante eliminación gaussiana con fracciones exactas (evitando los errores de redondeo que introduciría la aritmética de punto flotante). El resultado es un vector de proporciones, que la calculadora luego escala hasta el conjunto más pequeño de números enteros positivos — la misma respuesta a la que un químico llegaría eventualmente por prueba y error, pero encontrada de forma sistemática.",
-          "paragraph3": "Una ecuación correctamente balanceada también debería conservar la carga eléctrica total, no solo el recuento de átomos, lo cual importa en reacciones entre iones en lugar de moléculas neutras. Esta calculadora balancea ecuaciones de fórmulas neutras solo por recuento de átomos; para reacciones escritas con cargas iónicas explícitas, se necesita además un método completo de balanceo redox (que siga los estados de oxidación y los electrones transferidos) además de lo que calcula esta herramienta."
+          "paragraph3": "Una ecuación correctamente balanceada también debería conservar la carga eléctrica total, no solo el recuento de átomos, lo cual importa en reacciones entre iones en lugar de moléculas neutras. Esta calculadora balancea ecuaciones de fórmulas neutras solo por recuento de átomos; para reacciones escritas con cargas iónicas explícitas, se necesita además un método completo de balanceo redox (que siga los estados de oxidación y los electrones transferidos) además de lo que calcula esta herramienta.",
+          "structure": {
+            "reactants": "Reactivos",
+            "products": "Productos",
+            "caption": "Cada ecuación tiene un lado de reactivos y un lado de productos, unidos por una flecha de reacción."
+          },
+          "conservation": {
+            "reactants": "Reactivos",
+            "products": "Productos",
+            "caption": "Una ecuación balanceada mantiene la balanza nivelada: los mismos átomos existen en ambos lados, solo reorganizados."
+          },
+          "coefficient": {
+            "caption": "\"2 H₂O\" significa dos moléculas de agua idénticas y separadas, no una molécula duplicada en tamaño."
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -9252,6 +9272,17 @@
                 "online": "No — los programas del departamento se imparten en el campus de la Universidad de Catar."
               }
             ]
+          },
+          "atomBalanceSection": {
+            "title": "Comprobando el Balance",
+            "paragraph": "Para cada elemento en la ecuación, el recuento total de átomos en el lado de los reactivos debe ser exactamente igual al total del lado de los productos: esta es la prueba real que debe superar un balance válido.",
+            "caption": "Los recuentos de átomos de hierro y oxígeno coinciden exactamente en ambos lados de una ecuación balanceada."
+          },
+          "matrixSection": {
+            "title": "El Método de la Matriz",
+            "cornerLabel": "Elemento",
+            "paragraph": "Más allá de ecuaciones simples resolubles por inspección, esta herramienta construye una matriz de cuántos átomos de cada elemento aparecen en cada término, y luego resuelve los coeficientes que hacen que cada fila sume cero: la misma técnica de álgebra lineal utilizada para reacciones mucho más complejas.",
+            "caption": "Las columnas de reactivos son positivas, las de productos negativas: un balance válido es exactamente una solución donde cada fila suma cero."
           }
         },
         "references": {
@@ -9261,6 +9292,27 @@
           "url": "https://doi.org/10.1021/ed074p538",
           "readOriginal": "Leer el Artículo Original"
         }
+      },
+      "relatedTools": {
+        "title": "Herramientas de Química Relacionadas"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "class-schedule-builder": {
