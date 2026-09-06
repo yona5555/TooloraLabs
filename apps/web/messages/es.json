@@ -6491,7 +6491,10 @@
         "c2Label": "C₂ (mol/L)",
         "c2Placeholder": "p. ej. 1",
         "v2Label": "V₂ (L)",
-        "v2Placeholder": "p. ej. 1"
+        "v2Placeholder": "p. ej. 1",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "variablesCaption": "La cantidad que estás calculando está resaltada."
       },
       "result": {
         "heading": "Resultado",
@@ -6505,7 +6508,17 @@
         "v2": "V₂",
         "diagramStock": "Inicial",
         "diagramDiluted": "Diluida",
-        "diagramCaption": "La altura del líquido refleja el volumen; la intensidad del color refleja la concentración."
+        "diagramCaption": "La altura del líquido refleja el volumen; la intensidad del color refleja la concentración.",
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado.",
+        "molarity": "Molaridad",
+        "beakerCaption": "El número de puntos escala con la molaridad: más puntos significa una solución más concentrada.",
+        "scaleTrace": "traza",
+        "scaleDilute": "diluido",
+        "scaleTypical": "típico",
+        "scaleStock": "madre",
+        "scaleConcentrated": "conc.",
+        "scaleCaption": "{value} mol/L en una escala logarítmica frente a concentraciones de referencia de laboratorio comunes.",
+        "dilutionFactor": "Factor de Dilución"
       },
       "education": {
         "intro": {
@@ -6517,7 +6530,8 @@
             "caption": "Diluir 0.5 L de una solución inicial de 2 mol/L a 1 L produce una solución diluida de 1 mol/L: los mismos moles totales, repartidos en más líquido."
           },
           "paragraph2": "La dilución sigue un principio simple de conservación: agregar disolvente a una solución cambia su volumen y concentración, pero no los moles totales de soluto presentes. Esto da la ecuación de dilución C₁V₁ = C₂V₂, donde C₁ y V₁ son la concentración y el volumen antes de diluir (la solución «inicial»), y C₂ y V₂ son la concentración y el volumen después de agregar disolvente. Como los moles se conservan, esta ecuación puede reordenarse para calcular cualquiera de las cuatro cantidades conociendo las otras tres.",
-          "paragraph3": "Diluir una solución siempre reduce su concentración en proporción exacta a cuánto aumenta su volumen: duplicar el volumen reduce la concentración exactamente a la mitad, triplicarlo la reduce a un tercio, y así sucesivamente. Esta relación proporcional es la razón por la que los cálculos de dilución nunca requieren saber qué es realmente el soluto: la misma ecuación C₁V₁ = C₂V₂ se aplica sin importar la sustancia química específica involucrada."
+          "paragraph3": "Diluir una solución siempre reduce su concentración en proporción exacta a cuánto aumenta su volumen: duplicar el volumen reduce la concentración exactamente a la mitad, triplicarlo la reduce a un tercio, y así sucesivamente. Esta relación proporcional es la razón por la que los cálculos de dilución nunca requieren saber qué es realmente el soluto: la misma ecuación C₁V₁ = C₂V₂ se aplica sin importar la sustancia química específica involucrada.",
+          "dilutionRatioCaption": "Cada paso adicional de dilución 1:2 reduce la concentración a la mitad, desvaneciendo el color proporcionalmente."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -6628,6 +6642,32 @@
           "url": "https://doi.org/10.1021/ed081p1409",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "gauge": {
+        "dilute": "Diluido",
+        "typical": "Concentración típica de laboratorio",
+        "concentrated": "Concentrado",
+        "mild": "Dilución leve",
+        "moderate": "Dilución moderada",
+        "high": "Dilución alta"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "ideal-gas-law-calculator": {

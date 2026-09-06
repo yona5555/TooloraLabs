@@ -6491,7 +6491,10 @@
         "c2Label": "C₂ (mol/l)",
         "c2Placeholder": "z. B. 1",
         "v2Label": "V₂ (l)",
-        "v2Placeholder": "z. B. 1"
+        "v2Placeholder": "z. B. 1",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -6505,7 +6508,17 @@
         "v2": "V₂",
         "diagramStock": "Stammlösung",
         "diagramDiluted": "Verdünnt",
-        "diagramCaption": "Die Flüssigkeitshöhe spiegelt das Volumen wider; die Farbintensität spiegelt die Konzentration wider."
+        "diagramCaption": "Die Flüssigkeitshöhe spiegelt das Volumen wider; die Farbintensität spiegelt die Konzentration wider.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
+        "molarity": "Molarität",
+        "beakerCaption": "Die Punktanzahl skaliert mit der Molarität — mehr Punkte bedeuten eine konzentriertere Lösung.",
+        "scaleTrace": "Spur",
+        "scaleDilute": "verdünnt",
+        "scaleTypical": "typisch",
+        "scaleStock": "Stammlösung",
+        "scaleConcentrated": "konz.",
+        "scaleCaption": "{value} mol/L auf einer logarithmischen Skala gegenüber gängigen Laborreferenzkonzentrationen.",
+        "dilutionFactor": "Verdünnungsfaktor"
       },
       "education": {
         "intro": {
@@ -6517,7 +6530,8 @@
             "caption": "Das Verdünnen von 0,5 l einer 2-mol/l-Stammlösung auf 1 l ergibt eine verdünnte Lösung mit 1 mol/l — dieselbe Gesamtstoffmenge, verteilt auf mehr Flüssigkeit."
           },
           "paragraph2": "Verdünnung folgt einem einfachen Erhaltungsprinzip: Das Hinzufügen von Lösungsmittel zu einer Lösung ändert deren Volumen und Konzentration, nicht aber die gesamte Stoffmenge des vorhandenen gelösten Stoffs. Daraus ergibt sich die Verdünnungsgleichung C₁V₁ = C₂V₂, wobei C₁ und V₁ Konzentration und Volumen vor der Verdünnung (die „Stammlösung“) sind und C₂ und V₂ Konzentration und Volumen nach Zugabe des Lösungsmittels. Da die Stoffmenge erhalten bleibt, lässt sich diese Gleichung nach jeder der vier Größen umstellen, sofern die anderen drei bekannt sind.",
-          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie."
+          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie.",
+          "dilutionRatioCaption": "Jeder weitere 1:2-Verdünnungsschritt halbiert die Konzentration und lässt die Farbe entsprechend verblassen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -6628,6 +6642,32 @@
           "url": "https://doi.org/10.1021/ed081p1409",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "gauge": {
+        "dilute": "Verdünnt",
+        "typical": "Typische Laborkonzentration",
+        "concentrated": "Konzentriert",
+        "mild": "Geringe Verdünnung",
+        "moderate": "Mittlere Verdünnung",
+        "high": "Hohe Verdünnung"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "ideal-gas-law-calculator": {

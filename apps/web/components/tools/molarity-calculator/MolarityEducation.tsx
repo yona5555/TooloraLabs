@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import DilutionFlasksDiagram from "./DilutionFlasksDiagram";
+import MolarityDilutionRatioDiagram from "./MolarityDilutionRatioDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -29,6 +30,7 @@ export default async function MolarityEducation() {
           caption={t("intro.diagram.caption")}
         />
         <p>{t("intro.paragraph2")}</p>
+        <MolarityDilutionRatioDiagram caption={t("intro.dilutionRatioCaption")} />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 

@@ -6491,7 +6491,10 @@
         "c2Label": "C₂ (mol/L)",
         "c2Placeholder": "e.g. 1",
         "v2Label": "V₂ (L)",
-        "v2Placeholder": "e.g. 1"
+        "v2Placeholder": "e.g. 1",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "variablesCaption": "The quantity you're solving for is highlighted."
       },
       "result": {
         "heading": "Result",
@@ -6505,7 +6508,17 @@
         "v2": "V₂",
         "diagramStock": "Stock",
         "diagramDiluted": "Diluted",
-        "diagramCaption": "Liquid height reflects volume; color intensity reflects concentration."
+        "diagramCaption": "Liquid height reflects volume; color intensity reflects concentration.",
+        "emptyStateMessage": "Enter values and press Calculate to see your result.",
+        "molarity": "Molarity",
+        "beakerCaption": "Dots scale with molarity — more dots means a more concentrated solution.",
+        "scaleTrace": "trace",
+        "scaleDilute": "dilute",
+        "scaleTypical": "typical",
+        "scaleStock": "stock",
+        "scaleConcentrated": "conc.",
+        "scaleCaption": "{value} mol/L on a log scale against common lab reference concentrations.",
+        "dilutionFactor": "Dilution Factor"
       },
       "education": {
         "intro": {
@@ -6517,7 +6530,8 @@
             "caption": "Diluting 0.5 L of a 2 mol/L stock solution to 1 L yields a 1 mol/L diluted solution — the same total moles, spread through more liquid."
           },
           "paragraph2": "Dilution follows a simple conservation principle: adding solvent to a solution changes its volume and concentration, but not the total moles of solute present. That gives the dilution equation C₁V₁ = C₂V₂, where C₁ and V₁ are the concentration and volume before dilution (the \"stock\" solution) and C₂ and V₂ are the concentration and volume after adding solvent. Because moles are conserved, this equation can be rearranged to solve for any one of the four quantities given the other three.",
-          "paragraph3": "Diluting a solution always lowers its concentration in exact proportion to how much its volume increases — doubling the volume exactly halves the concentration, tripling it cuts concentration to a third, and so on. This proportional relationship is why dilution calculations never require knowing what the solute actually is: the same C₁V₁ = C₂V₂ equation applies regardless of the specific chemical involved."
+          "paragraph3": "Diluting a solution always lowers its concentration in exact proportion to how much its volume increases — doubling the volume exactly halves the concentration, tripling it cuts concentration to a third, and so on. This proportional relationship is why dilution calculations never require knowing what the solute actually is: the same C₁V₁ = C₂V₂ equation applies regardless of the specific chemical involved.",
+          "dilutionRatioCaption": "Each further 1:2 dilution step halves the concentration, fading the color proportionally."
         },
         "examples": {
           "title": "Worked Examples",
@@ -6628,6 +6642,32 @@
           "url": "https://doi.org/10.1021/ed081p1409",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "gauge": {
+        "dilute": "Dilute",
+        "typical": "Typical lab concentration",
+        "concentrated": "Concentrated",
+        "mild": "Mild dilution",
+        "moderate": "Moderate dilution",
+        "high": "High dilution"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "ideal-gas-law-calculator": {
