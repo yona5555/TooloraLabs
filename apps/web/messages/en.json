@@ -7526,7 +7526,20 @@
         "heightPlaceholder": "e.g. 0",
         "gravityLabel": "Gravitational Acceleration (g) (m/s²)",
         "gravityHint": "Defaults to Earth's surface gravity (9.81 m/s²) — change it to model the Moon, Mars, or another world.",
-        "gravityPlaceholder": "e.g. 9.81"
+        "gravityPlaceholder": "e.g. 9.81",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "gravityPresetLabel": "World",
+        "gravityPreset": {
+          "earth": "Earth (9.8 m/s²)",
+          "moon": "Moon (1.62 m/s²)",
+          "mars": "Mars (3.71 m/s²)",
+          "custom": "Custom"
+        },
+        "vxLabel": "vₓ",
+        "vyLabel": "vy",
+        "vLabel": "v₀",
+        "componentsCaption": "Launch velocity decomposed into horizontal (vₓ) and vertical (vy) components."
       },
       "result": {
         "heading": "Result",
@@ -7542,7 +7555,12 @@
         "diagramLaunch": "Launch",
         "diagramPeak": "Peak ({value} m)",
         "diagramLanding": "Landing",
-        "diagramCaption": "The parabolic trajectory computed from your launch speed, angle, height, and gravity — the peak and landing points are scaled to their actual computed values."
+        "diagramCaption": "The parabolic trajectory computed from your launch speed, angle, height, and gravity — the peak and landing points are scaled to their actual computed values.",
+        "emptyStateMessage": "Enter values and press Calculate to see your projectile's trajectory.",
+        "angleField": "Launch Angle",
+        "heightField": "Launch Height",
+        "gravityField": "Gravity",
+        "impactDiagramCaption": "The impact velocity vector, angled below horizontal at the computed impact angle."
       },
       "education": {
         "intro": {
@@ -7555,7 +7573,13 @@
             "caption": "The trajectory of a 20 m/s launch at 45° from level ground — a parabola formed by constant horizontal velocity and uniformly accelerated vertical velocity."
           },
           "paragraph2": "Four quantities fully describe this idealized flight: time of flight (how long the object stays airborne), maximum height (the peak of the parabola), range (the horizontal distance traveled), and impact velocity (the speed and angle at landing). When launched from ground level (h₀ = 0), the trajectory is symmetric — the object returns to the height it started from, its impact speed equals its launch speed, and its impact angle equals its launch angle. Launching from an elevation (h₀ > 0) breaks that symmetry: the object falls farther than it rose, so it lands faster and at a steeper angle than it was launched.",
-          "paragraph3": "Because launching from a height breaks the simple ground-level symmetry, time of flight can no longer be found from a single division — it requires solving the quadratic equation h₀ + v₀sinθ·t − ½gt² = 0 for its positive root. This calculator always applies that general quadratic solution, which reduces automatically to the familiar t = 2v₀sinθ/g whenever h₀ = 0."
+          "paragraph3": "Because launching from a height breaks the simple ground-level symmetry, time of flight can no longer be found from a single division — it requires solving the quadratic equation h₀ + v₀sinθ·t − ½gt² = 0 for its positive root. This calculator always applies that general quadratic solution, which reduces automatically to the familiar t = 2v₀sinθ/g whenever h₀ = 0.",
+          "rangeVsAngle": {
+            "xLabel": "Launch angle (0°-90°)",
+            "yLabel": "Range",
+            "peakLabel": "45° — max range",
+            "caption": "For a level launch, range is proportional to sin(2×angle), which peaks at a 45° launch angle."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -7666,6 +7690,29 @@
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "gauge": {
+        "low": "Flatter trajectory",
+        "optimal": "Near maximum range",
+        "steep": "High arc"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "readability-score-calculator": {

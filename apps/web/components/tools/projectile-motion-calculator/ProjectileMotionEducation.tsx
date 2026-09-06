@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import TrajectoryDiagram from "./TrajectoryDiagram";
+import ProjectileRangeVsAngleDiagram from "./ProjectileRangeVsAngleDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -33,6 +34,12 @@ export default async function ProjectileMotionEducation() {
           caption={t("intro.diagram.caption")}
         />
         <p>{t("intro.paragraph2")}</p>
+        <ProjectileRangeVsAngleDiagram
+          xLabel={t("intro.rangeVsAngle.xLabel")}
+          yLabel={t("intro.rangeVsAngle.yLabel")}
+          peakLabel={t("intro.rangeVsAngle.peakLabel")}
+          caption={t("intro.rangeVsAngle.caption")}
+        />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 

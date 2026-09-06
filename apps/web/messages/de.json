@@ -7526,7 +7526,20 @@
         "heightPlaceholder": "z. B. 0",
         "gravityLabel": "Erdbeschleunigung (g) (m/s²)",
         "gravityHint": "Standardmäßig die Erdbeschleunigung an der Erdoberfläche (9,81 m/s²) — ändern Sie den Wert, um den Mond, den Mars oder eine andere Welt zu modellieren.",
-        "gravityPlaceholder": "z. B. 9,81"
+        "gravityPlaceholder": "z. B. 9,81",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "gravityPresetLabel": "Welt",
+        "gravityPreset": {
+          "earth": "Erde (9,8 m/s²)",
+          "moon": "Mond (1,62 m/s²)",
+          "mars": "Mars (3,71 m/s²)",
+          "custom": "Benutzerdefiniert"
+        },
+        "vxLabel": "vₓ",
+        "vyLabel": "vy",
+        "vLabel": "v₀",
+        "componentsCaption": "Startgeschwindigkeit zerlegt in horizontale (vₓ) und vertikale (vy) Komponenten."
       },
       "result": {
         "heading": "Ergebnis",
@@ -7542,7 +7555,12 @@
         "diagramLaunch": "Abwurf",
         "diagramPeak": "Scheitelpunkt ({value} m)",
         "diagramLanding": "Landung",
-        "diagramCaption": "Die aus Ihrer Abwurfgeschwindigkeit, Ihrem Winkel, Ihrer Höhe und der Erdbeschleunigung berechnete parabolische Flugbahn — Scheitelpunkt und Landepunkt sind auf ihre tatsächlich berechneten Werte skaliert."
+        "diagramCaption": "Die aus Ihrer Abwurfgeschwindigkeit, Ihrem Winkel, Ihrer Höhe und der Erdbeschleunigung berechnete parabolische Flugbahn — Scheitelpunkt und Landepunkt sind auf ihre tatsächlich berechneten Werte skaliert.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um die Flugbahn zu sehen.",
+        "angleField": "Abschusswinkel",
+        "heightField": "Abschusshöhe",
+        "gravityField": "Schwerkraft",
+        "impactDiagramCaption": "Der Aufprallgeschwindigkeitsvektor, im berechneten Aufprallwinkel unter der Horizontalen."
       },
       "education": {
         "intro": {
@@ -7555,7 +7573,13 @@
             "caption": "Die Flugbahn eines Abwurfs mit 20 m/s bei 45° von ebenem Boden aus — eine Parabel, gebildet durch konstante horizontale Geschwindigkeit und gleichmäßig beschleunigte vertikale Geschwindigkeit."
           },
           "paragraph2": "Vier Größen beschreiben diesen idealisierten Flug vollständig: die Flugzeit (wie lange der Körper in der Luft bleibt), die maximale Höhe (der Scheitelpunkt der Parabel), die Reichweite (die zurückgelegte horizontale Strecke) und die Aufprallgeschwindigkeit (Geschwindigkeit und Winkel bei der Landung). Bei einem Abwurf vom Boden aus (h₀ = 0) ist die Flugbahn symmetrisch — der Körper kehrt zu der Höhe zurück, von der er gestartet ist, seine Aufprallgeschwindigkeit entspricht seiner Abwurfgeschwindigkeit, und sein Aufprallwinkel entspricht seinem Abwurfwinkel. Ein Abwurf aus einer Höhe (h₀ > 0) durchbricht diese Symmetrie: Der Körper fällt weiter, als er gestiegen ist, und landet deshalb schneller und in einem steileren Winkel, als er abgeworfen wurde.",
-          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist."
+          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist.",
+          "rangeVsAngle": {
+            "xLabel": "Abschusswinkel (0°-90°)",
+            "yLabel": "Reichweite",
+            "peakLabel": "45° — max. Reichweite",
+            "caption": "Bei einem ebenen Abschuss ist die Reichweite proportional zu sin(2×Winkel), was bei einem Abschusswinkel von 45° sein Maximum erreicht."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -7666,6 +7690,29 @@
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "gauge": {
+        "low": "Flachere Flugbahn",
+        "optimal": "Nahe maximaler Reichweite",
+        "steep": "Hoher Bogen"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "readability-score-calculator": {

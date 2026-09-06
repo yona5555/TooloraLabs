@@ -7526,7 +7526,20 @@
         "heightPlaceholder": "p. ej. 0",
         "gravityLabel": "Aceleración Gravitacional (g) (m/s²)",
         "gravityHint": "Por defecto usa la gravedad superficial de la Tierra (9.81 m/s²) — cámbiala para modelar la Luna, Marte u otro mundo.",
-        "gravityPlaceholder": "p. ej. 9.81"
+        "gravityPlaceholder": "p. ej. 9.81",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "gravityPresetLabel": "Mundo",
+        "gravityPreset": {
+          "earth": "Tierra (9.8 m/s²)",
+          "moon": "Luna (1.62 m/s²)",
+          "mars": "Marte (3.71 m/s²)",
+          "custom": "Personalizado"
+        },
+        "vxLabel": "vₓ",
+        "vyLabel": "vy",
+        "vLabel": "v₀",
+        "componentsCaption": "Velocidad de lanzamiento descompuesta en componentes horizontal (vₓ) y vertical (vy)."
       },
       "result": {
         "heading": "Resultado",
@@ -7542,7 +7555,12 @@
         "diagramLaunch": "Lanzamiento",
         "diagramPeak": "Punto máximo ({value} m)",
         "diagramLanding": "Aterrizaje",
-        "diagramCaption": "La trayectoria parabólica calculada a partir de tu velocidad de lanzamiento, ángulo, altura y gravedad — el punto máximo y el punto de aterrizaje están escalados a sus valores calculados reales."
+        "diagramCaption": "La trayectoria parabólica calculada a partir de tu velocidad de lanzamiento, ángulo, altura y gravedad — el punto máximo y el punto de aterrizaje están escalados a sus valores calculados reales.",
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver la trayectoria.",
+        "angleField": "Ángulo de Lanzamiento",
+        "heightField": "Altura de Lanzamiento",
+        "gravityField": "Gravedad",
+        "impactDiagramCaption": "El vector de velocidad de impacto, en ángulo bajo la horizontal según el ángulo de impacto calculado."
       },
       "education": {
         "intro": {
@@ -7555,7 +7573,13 @@
             "caption": "La trayectoria de un lanzamiento a 20 m/s con un ángulo de 45° desde el suelo — una parábola formada por una velocidad horizontal constante y una velocidad vertical uniformemente acelerada."
           },
           "paragraph2": "Cuatro magnitudes describen por completo este vuelo idealizado: el tiempo de vuelo (cuánto tiempo permanece el objeto en el aire), la altura máxima (el punto más alto de la parábola), el alcance (la distancia horizontal recorrida) y la velocidad de impacto (la rapidez y el ángulo al aterrizar). Cuando se lanza desde el nivel del suelo (h₀ = 0), la trayectoria es simétrica: el objeto vuelve a la altura desde la que partió, su velocidad de impacto es igual a su velocidad de lanzamiento, y su ángulo de impacto es igual a su ángulo de lanzamiento. Lanzar desde una elevación (h₀ > 0) rompe esa simetría: el objeto cae más de lo que subió, así que aterriza más rápido y con un ángulo más pronunciado que el de lanzamiento.",
-          "paragraph3": "Como lanzar desde una altura rompe la simetría simple del nivel del suelo, el tiempo de vuelo ya no puede obtenerse con una sola división: requiere resolver la ecuación cuadrática h₀ + v₀sinθ·t − ½gt² = 0 para su raíz positiva. Esta calculadora siempre aplica esa solución cuadrática general, que se reduce automáticamente a la conocida t = 2v₀sinθ/g cuando h₀ = 0."
+          "paragraph3": "Como lanzar desde una altura rompe la simetría simple del nivel del suelo, el tiempo de vuelo ya no puede obtenerse con una sola división: requiere resolver la ecuación cuadrática h₀ + v₀sinθ·t − ½gt² = 0 para su raíz positiva. Esta calculadora siempre aplica esa solución cuadrática general, que se reduce automáticamente a la conocida t = 2v₀sinθ/g cuando h₀ = 0.",
+          "rangeVsAngle": {
+            "xLabel": "Ángulo de lanzamiento (0°-90°)",
+            "yLabel": "Alcance",
+            "peakLabel": "45° — alcance máximo",
+            "caption": "Para un lanzamiento a nivel, el alcance es proporcional a sin(2×ángulo), que alcanza su máximo en un ángulo de lanzamiento de 45°."
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -7666,6 +7690,29 @@
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "gauge": {
+        "low": "Trayectoria más plana",
+        "optimal": "Cerca del alcance máximo",
+        "steep": "Arco alto"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "readability-score-calculator": {

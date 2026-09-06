@@ -7526,7 +7526,20 @@
         "heightPlaceholder": "p. ex. 0",
         "gravityLabel": "Accélération Gravitationnelle (g) (m/s²)",
         "gravityHint": "Par défaut, la gravité à la surface de la Terre (9,81 m/s²) — modifiez-la pour la Lune, Mars ou un autre monde.",
-        "gravityPlaceholder": "p. ex. 9.81"
+        "gravityPlaceholder": "p. ex. 9.81",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "gravityPresetLabel": "Monde",
+        "gravityPreset": {
+          "earth": "Terre (9,8 m/s²)",
+          "moon": "Lune (1,62 m/s²)",
+          "mars": "Mars (3,71 m/s²)",
+          "custom": "Personnalisé"
+        },
+        "vxLabel": "vₓ",
+        "vyLabel": "vy",
+        "vLabel": "v₀",
+        "componentsCaption": "Vitesse de lancement décomposée en composantes horizontale (vₓ) et verticale (vy)."
       },
       "result": {
         "heading": "Résultat",
@@ -7542,7 +7555,12 @@
         "diagramLaunch": "Lancement",
         "diagramPeak": "Sommet ({value} m)",
         "diagramLanding": "Atterrissage",
-        "diagramCaption": "La trajectoire parabolique calculée à partir de votre vitesse de lancement, de l'angle, de la hauteur et de la gravité — le sommet et le point d'atterrissage sont à l'échelle de leurs valeurs réellement calculées."
+        "diagramCaption": "La trajectoire parabolique calculée à partir de votre vitesse de lancement, de l'angle, de la hauteur et de la gravité — le sommet et le point d'atterrissage sont à l'échelle de leurs valeurs réellement calculées.",
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir la trajectoire.",
+        "angleField": "Angle de Lancement",
+        "heightField": "Hauteur de Lancement",
+        "gravityField": "Gravité",
+        "impactDiagramCaption": "Le vecteur de vitesse d'impact, incliné sous l'horizontale selon l'angle d'impact calculé."
       },
       "education": {
         "intro": {
@@ -7555,7 +7573,13 @@
             "caption": "La trajectoire d'un lancement à 20 m/s et 45° depuis un sol plat — une parabole formée par une vitesse horizontale constante et une vitesse verticale uniformément accélérée."
           },
           "paragraph2": "Quatre grandeurs décrivent entièrement ce vol idéalisé : le temps de vol (la durée pendant laquelle l'objet reste en l'air), la hauteur maximale (le sommet de la parabole), la portée (la distance horizontale parcourue) et la vitesse d'impact (la vitesse et l'angle à l'atterrissage). Lorsque le lancement se fait au niveau du sol (h₀ = 0), la trajectoire est symétrique — l'objet retombe à la hauteur d'où il est parti, sa vitesse d'impact égale sa vitesse de lancement, et son angle d'impact égale son angle de lancement. Lancer depuis une élévation (h₀ > 0) rompt cette symétrie : l'objet chute plus qu'il ne s'est élevé, il atterrit donc plus vite et selon un angle plus prononcé qu'au lancement.",
-          "paragraph3": "Comme le lancement depuis une hauteur rompt la simple symétrie au niveau du sol, le temps de vol ne peut plus être trouvé par une simple division — il faut résoudre l'équation quadratique h₀ + v₀sinθ·t − ½gt² = 0 pour sa racine positive. Ce calculateur applique toujours cette solution quadratique générale, qui se réduit automatiquement à la formule familière t = 2v₀sinθ/g dès que h₀ = 0."
+          "paragraph3": "Comme le lancement depuis une hauteur rompt la simple symétrie au niveau du sol, le temps de vol ne peut plus être trouvé par une simple division — il faut résoudre l'équation quadratique h₀ + v₀sinθ·t − ½gt² = 0 pour sa racine positive. Ce calculateur applique toujours cette solution quadratique générale, qui se réduit automatiquement à la formule familière t = 2v₀sinθ/g dès que h₀ = 0.",
+          "rangeVsAngle": {
+            "xLabel": "Angle de lancement (0°-90°)",
+            "yLabel": "Portée",
+            "peakLabel": "45° — portée max",
+            "caption": "Pour un lancement à niveau, la portée est proportionnelle à sin(2×angle), qui culmine à un angle de lancement de 45°."
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -7666,6 +7690,29 @@
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Lire le Texte Original"
         }
+      },
+      "gauge": {
+        "low": "Trajectoire plus plate",
+        "optimal": "Proche de la portée maximale",
+        "steep": "Arc élevé"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "readability-score-calculator": {
