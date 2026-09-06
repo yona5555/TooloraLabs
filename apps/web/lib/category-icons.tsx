@@ -1,5 +1,6 @@
 import {
   Atom,
+  BrainCircuit,
   Calculator,
   CalendarClock,
   CloudSun,
@@ -10,6 +11,7 @@ import {
   GraduationCap,
   Globe,
   HeartPulse,
+  PartyPopper,
   PiggyBank,
   Receipt,
   RefreshCw,
@@ -20,6 +22,7 @@ import {
 
 export const categoryIcons: Record<string, LucideIcon> = {
   calculator: Calculator,
+  "brain-circuit": BrainCircuit,
   refresh: RefreshCw,
   code: Code2,
   text: FileText,
@@ -35,6 +38,7 @@ export const categoryIcons: Record<string, LucideIcon> = {
   "graduation-cap": GraduationCap,
   "calendar-clock": CalendarClock,
   "cloud-sun": CloudSun,
+  "party-popper": PartyPopper,
 };
 
 export function getCategoryIcon(icon: string): LucideIcon {

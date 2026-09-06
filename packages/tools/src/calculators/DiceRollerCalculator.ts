@@ -28,7 +28,7 @@ export class DiceRollerCalculator extends BaseCalculator<DiceRollerInput, DiceRo
     id: "dice-roller",
     slug: "dice-roller",
     name: "Dice Roller",
-    category: "date-time",
+    category: "fun-entertainment",
     description: "Roll one or more virtual dice with customizable face counts.",
     version: "1.0.0",
   };

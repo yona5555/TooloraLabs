@@ -259,6 +259,10 @@
     "website-tools": {
       "title": "Sites Web",
       "description": "Widgets intégrables et outils pour propriétaires et créateurs de sites web."
+    },
+    "fun-entertainment": {
+      "title": "Divertissement",
+      "description": "Dés, jeux et calculatrices ludiques à des fins de divertissement uniquement."
     }
   },
   "tools": {
@@ -19108,6 +19112,1548 @@
           "readOriginal": "Voir les Lectures Complémentaires"
         }
       }
+    },
+    "text-to-speech": {
+      "title": "Synthèse Vocale",
+      "description": "Convertissez du texte écrit en audio parlé grâce à la synthèse vocale intégrée à votre navigateur. Sans compte, sans serveur, sans coût.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "unsupported": "Votre navigateur ne prend pas en charge la synthèse vocale. Essayez une version récente de Chrome, Edge ou Safari.",
+        "textLabel": "Texte à prononcer",
+        "textPlaceholder": "Saisissez ou collez du texte ici, puis appuyez sur Parler.",
+        "voiceLabel": "Voix",
+        "rateLabel": "Vitesse",
+        "pitchLabel": "Tonalité",
+        "speak": "Parler",
+        "pause": "Pause",
+        "resume": "Reprendre",
+        "stop": "Arrêter"
+      },
+      "result": {
+        "heading": "Lecture",
+        "status": {
+          "idle": "Prêt à lire votre texte.",
+          "speaking": "En train de parler...",
+          "paused": "En pause."
+        },
+        "characterCountLabel": "Caractères",
+        "chunkCountLabel": "Segments de Parole"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Les voix disponibles et leur qualité dépendent entièrement de votre navigateur et de votre système d'exploitation."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Synthèse Vocale dans le Navigateur",
+          "paragraph1": "Cet outil utilise l'interface SpeechSynthesis de la Web Speech API, une fonctionnalité intégrée directement aux navigateurs web modernes qui convertit du texte en audio parlé sans rien envoyer à un serveur. Lorsque vous appuyez sur Parler, le propre moteur de synthèse vocale de votre navigateur — le même que celui utilisé par les fonctionnalités d'accessibilité de votre système d'exploitation — lit le texte à voix haute en utilisant l'une des voix installées sur votre appareil. Comme tout se passe localement, il n'y a aucun coût par caractère, aucun compte, et aucune requête réseau impliquée dans la génération de la parole.",
+          "paragraph2": "Le texte long est automatiquement divisé en segments plus courts aux limites des phrases avant d'être mis en file d'attente pour la parole, car certains navigateurs gèrent de manière peu fiable les énoncés uniques très longs. Le contrôle de vitesse ajuste la rapidité avec laquelle la voix parle (un multiplicateur de la vitesse normale de la voix), tandis que la tonalité ajuste la hauteur du son de la voix, indépendamment de la vitesse — les deux correspondent directement aux propriétés `rate` et `pitch` définies par la spécification sous-jacente de la Web Speech API."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "La synthèse vocale est utile partout où lire du texte à voix haute permet de gagner du temps ou d'améliorer l'accessibilité.",
+          "items": [
+            {
+              "title": "Relecture à l'Oreille",
+              "description": "Écouter un brouillon lu à voix haute permet souvent de repérer des formulations maladroites ou des mots manquants faciles à manquer en lisant seulement en silence."
+            },
+            {
+              "title": "Accessibilité",
+              "description": "Rendre le contenu écrit accessible aux personnes malvoyantes, ayant des difficultés de lecture, ou à quiconque préfère écouter plutôt que lire."
+            },
+            {
+              "title": "Multitâche",
+              "description": "Faire lire un article, un e-mail ou un document à voix haute pendant que l'on fait autre chose, comme se déplacer ou cuisiner."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Cela envoie-t-il mon texte à un serveur ?",
+              "answer": "Non. Toute la synthèse vocale se produit localement dans votre navigateur grâce à la Web Speech API intégrée — votre texte ne quitte jamais votre appareil et n'est envoyé nulle part."
+            },
+            {
+              "question": "Pourquoi ne vois-je pas beaucoup d'options de voix ?",
+              "answer": "Les voix disponibles proviennent entièrement de votre système d'exploitation et de votre navigateur, pas de cet outil. L'installation de voix système supplémentaires (dans les paramètres de langue ou d'accessibilité de votre système) fera apparaître plus d'options ici."
+            },
+            {
+              "question": "Pourquoi mon navigateur dit-il que la synthèse vocale n'est pas prise en charge ?",
+              "answer": "Un petit nombre de navigateurs plus anciens ou moins courants n'implémentent pas du tout l'interface SpeechSynthesis de la Web Speech API. Essayez une version récente de Chrome, Edge, Safari ou Firefox."
+            },
+            {
+              "question": "Quelle est la différence entre vitesse et tonalité ?",
+              "answer": "La vitesse (rate) contrôle la rapidité avec laquelle les mots sont prononcés — des valeurs plus élevées parlent plus vite. La tonalité contrôle la hauteur du son de la voix, similaire à monter ou baisser votre propre voix, indépendamment de la vitesse à laquelle vous parlez."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La recherche en synthèse vocale remonte aux années 1930 avec le Voder des Bell Labs, un synthétiseur vocal électronique précoce actionné manuellement par un technicien formé. La synthèse vocale logicielle a mûri au cours des décennies suivantes, et dans les années 2010, elle était suffisamment répandue sur les systèmes d'exploitation de bureau et mobiles pour que le W3C standardise un moyen pour les pages web d'y accéder directement : la Web Speech API, publiée pour la première fois comme rapport communautaire préliminaire en 2012. Cela a permis aux sites web de déclencher le moteur vocal existant d'un appareil via JavaScript, plutôt que d'exiger que chaque site embarque sa propre technologie vocale."
+          },
+          "browserSupport": {
+            "title": "Prise en Charge par les Navigateurs",
+            "paragraph": "La prise en charge de l'interface SpeechSynthesis varie selon le navigateur et le système d'exploitation, car chaque navigateur appelle en fin de compte le moteur vocal déjà installé sur l'appareil plutôt que d'embarquer le sien. Cela signifie que la liste exacte des voix disponibles, et leur qualité, diffère entre un PC Windows, un Mac et un téléphone mobile, même au sein du même navigateur — cet outil expose simplement les voix déjà installées sur votre appareil spécifique."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La synthèse vocale est étudiée en informatique, spécifiquement dans le traitement de la parole et du langage. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université Carnegie Mellon — Language Technologies Institute",
+                "note": "L'un des centres les plus reconnus au monde pour la recherche en traitement de la parole et du langage.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en parole, langage et IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS."
+              },
+              {
+                "name": "Université d'Édimbourg — Centre for Speech Technology Research",
+                "note": "L'un des centres européens de premier plan dédiés spécifiquement à la recherche en technologie de la parole.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en traitement du langage naturel.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en technologie de la parole et du langage.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'ingénierie."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "W3C Community Group. (2012-présent). Web Speech API Specification.",
+          "note": "La spécification technique officielle définissant les interfaces SpeechSynthesis et SpeechRecognition sur lesquelles cet outil est construit.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Consulter la Spécification"
+        }
+      }
+    },
+    "speech-to-text": {
+      "title": "Voix vers Texte",
+      "description": "Convertissez l'audio parlé de votre microphone en texte écrit grâce à la reconnaissance vocale intégrée à votre navigateur. Sans compte, sans serveur, sans coût.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Entrée Vocale",
+        "unsupported": "Votre navigateur ne prend pas en charge la reconnaissance vocale. Essayez une version récente de Chrome ou Edge.",
+        "privacyNotice": "Cette fonctionnalité nécessite l'accès au microphone, que votre navigateur demandera. Tout l'audio est traité localement dans votre navigateur — rien n'est jamais enregistré ni envoyé à un serveur.",
+        "micDenied": "L'accès au microphone a été refusé. Vérifiez les paramètres du site dans votre navigateur pour autoriser l'accès au microphone pour cette page.",
+        "languageLabel": "Langue",
+        "startListening": "Commencer l'Écoute",
+        "stopListening": "Arrêter l'Écoute",
+        "clear": "Effacer"
+      },
+      "result": {
+        "heading": "Transcription",
+        "status": {
+          "idle": "Appuyez sur Commencer l'Écoute et commencez à parler.",
+          "listening": "Écoute en cours...",
+          "denied": "Accès au microphone refusé."
+        },
+        "emptyTranscript": "Votre texte transcrit apparaîtra ici.",
+        "wordCountLabel": "Mots"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "La précision de la reconnaissance et les langues disponibles dépendent entièrement de votre navigateur et de votre système d'exploitation."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Reconnaissance Vocale dans le Navigateur",
+          "paragraph1": "Cet outil utilise l'interface SpeechRecognition de la Web Speech API, une fonctionnalité intégrée directement à certains navigateurs web modernes qui convertit l'audio parlé de votre microphone en texte. Lorsque vous appuyez sur Commencer l'Écoute, votre navigateur demande la permission du microphone, puis transmet votre voix à son propre moteur de reconnaissance vocale pour produire une transcription — cet outil n'enregistre, ne stocke, ni ne transmet jamais votre audio à un serveur.",
+          "paragraph2": "Les résultats de la reconnaissance vocale arrivent sous deux formes : les résultats provisoires, qui se mettent à jour en continu pendant que vous parlez et peuvent encore changer, et les résultats finaux, qui sont figés une fois que le moteur de reconnaissance est confiant qu'une phrase est complète. Cet outil affiche le texte provisoire de manière atténuée pendant l'écoute et valide chaque segment final dans la transcription permanente, joignant les segments et mettant automatiquement en majuscule le début de chaque phrase pour une meilleure lisibilité."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "La voix vers texte est utile partout où taper est plus lent ou moins pratique que parler.",
+          "items": [
+            {
+              "title": "Prise de Notes Vocales",
+              "description": "Capturer rapidement des idées ou des notes en les prononçant à voix haute plutôt qu'en les tapant, particulièrement utile lorsque vos mains sont occupées."
+            },
+            {
+              "title": "Accessibilité",
+              "description": "Rendre la saisie de texte accessible aux personnes ayant des difficultés à taper en raison de troubles moteurs ou d'autres conditions."
+            },
+            {
+              "title": "Rédiger du Texte Plus Rapidement",
+              "description": "Prononcer à voix haute un brouillon approximatif d'un e-mail ou d'un message pour poser les mots rapidement, puis modifier le texte transcrit par la suite."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Ma voix est-elle enregistrée ou envoyée quelque part ?",
+              "answer": "Non. Cet outil n'enregistre ni ne télécharge jamais votre audio. Votre navigateur traite votre voix localement (ou via son propre service de reconnaissance intégré) uniquement pour produire le texte que vous voyez — cette page ne stocke ni ne transmet jamais l'audio lui-même."
+            },
+            {
+              "question": "Pourquoi mon navigateur demande-t-il la permission du microphone ?",
+              "answer": "La reconnaissance vocale nécessite l'accès à votre microphone pour entendre ce que vous dites. Votre navigateur gère directement cette demande de permission, et vous pouvez la révoquer à tout moment dans les paramètres du site de votre navigateur."
+            },
+            {
+              "question": "Pourquoi dit-il que la reconnaissance vocale n'est pas prise en charge ?",
+              "answer": "L'interface SpeechRecognition a une prise en charge navigateur plus limitée que la synthèse vocale. Elle fonctionne bien dans Chrome et Edge, mais Firefox et Safari ont historiquement eu un support partiel ou inexistant. Essayez une version récente de Chrome ou Edge."
+            },
+            {
+              "question": "Pourquoi la transcription se trompe-t-elle sur certains mots ?",
+              "answer": "La précision de la reconnaissance vocale dépend de la qualité de votre microphone, du bruit ambiant, de votre accent, et du moteur de reconnaissance lui-même — rien de tout cela n'est contrôlé par cet outil, puisque la reconnaissance réelle se produit dans votre navigateur ou système d'exploitation."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La recherche en reconnaissance vocale automatique remonte au système \"Audrey\" des Bell Labs en 1952, capable de reconnaître des chiffres prononcés par un seul locuteur. Les progrès se sont accélérés au cours des décennies suivantes grâce aux techniques de modélisation statistique, et dans les années 2010, la reconnaissance vocale connectée au cloud était devenue courante sur les smartphones. La Web Speech API du W3C, publiée pour la première fois comme rapport communautaire préliminaire en 2012, a normalisé un moyen pour les pages web de demander une reconnaissance vocale basée sur le microphone directement via JavaScript, aux côtés de son interface complémentaire SpeechSynthesis pour la synthèse vocale."
+          },
+          "privacy": {
+            "title": "Confidentialité et Autorisations",
+            "paragraph": "Comme la reconnaissance vocale nécessite l'accès au microphone, les navigateurs la traitent comme une autorisation sensible qui doit être explicitement accordée par l'utilisateur pour chaque site, et peut être révoquée à tout moment. Cet outil ne demande cette autorisation que lorsque vous appuyez sur Commencer l'Écoute, et n'enregistre ni ne stocke jamais votre audio — l'audio est traité uniquement pour générer une transcription textuelle, exactement comme ce serait le cas pour toute autre fonctionnalité de navigateur utilisant la reconnaissance vocale, comme la recherche vocale ou les assistants vocaux."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La reconnaissance vocale est étudiée en informatique, spécifiquement dans le traitement de la parole et du langage. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université Carnegie Mellon — Language Technologies Institute",
+                "note": "L'un des centres les plus reconnus au monde pour la recherche en traitement de la parole et du langage.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en parole, langage et IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS."
+              },
+              {
+                "name": "Université d'Édimbourg — Centre for Speech Technology Research",
+                "note": "L'un des centres européens de premier plan dédiés spécifiquement à la recherche en technologie de la parole.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en traitement du langage naturel.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en technologie de la parole et du langage.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'ingénierie."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "W3C Community Group. (2012-présent). Web Speech API Specification.",
+          "note": "La spécification technique officielle définissant les interfaces SpeechRecognition et SpeechSynthesis sur lesquelles cet outil est construit.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Consulter la Spécification"
+        }
+      }
+    },
+    "spelling-grammar-checker": {
+      "title": "Correcteur d'Orthographe et de Grammaire",
+      "description": "Vérifiez le texte à la recherche de fautes d'orthographe courantes et de problèmes grammaticaux de base, entièrement dans votre navigateur. Sans compte, sans serveur, sans coût.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "textLabel": "Texte à vérifier",
+        "textPlaceholder": "Tapez ou collez votre texte ici pour le vérifier au fur et à mesure.",
+        "disclaimer": "Il s'agit d'un correcteur basique basé sur des règles, pas d'un assistant d'écriture IA complet — il détecte les erreurs courantes mais ne détectera pas tout.",
+        "clear": "Effacer"
+      },
+      "result": {
+        "heading": "Résultats",
+        "emptyText": "Commencez à taper pour voir les suggestions d'orthographe et de grammaire.",
+        "wordCountLabel": "Mots",
+        "issueCountLabel": "Problèmes Trouvés",
+        "suggestion": "Suggéré :"
+      },
+      "quickReference": {
+        "title": "Légende des Couleurs",
+        "intro": "Chaque couleur de soulignement marque un type de problème différent.",
+        "legend": {
+          "spelling": "Orthographe",
+          "grammar": "Grammaire",
+          "capitalization": "Majuscules",
+          "punctuation": "Ponctuation et Espacement"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre Ce Correcteur",
+          "paragraph1": "Cet outil analyse votre texte à l'aide d'un ensemble de règles intégrées directement dans le JavaScript de votre navigateur : une liste de mots couramment mal orthographiés, et des vérifications de correspondance de motifs pour des éléments comme l'absence de majuscule au début d'une phrase, les mots répétés, les espaces doubles, les espaces manquants après la ponctuation, et quelques confusions grammaticales courantes comme \"a\" contre \"an\" en anglais. Tout s'exécute localement pendant que vous tapez — rien n'est jamais envoyé à un serveur.",
+          "limitation": "Important : il s'agit d'un correcteur basique basé sur des règles, pas d'un assistant d'écriture complet alimenté par l'IA. Il est conçu pour détecter un ensemble spécifique d'erreurs courantes et non ambiguës, pas pour comprendre le contexte, le ton, ou le style comme le font des outils avancés tels que Grammarly. Relisez toujours votre texte vous-même à la fin."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Un correcteur grammatical basique est utile partout où une vérification rapide des erreurs évidentes aide avant d'envoyer ou de publier du texte.",
+          "items": [
+            {
+              "title": "E-mails et Messages Rapides",
+              "description": "Repérer une faute de frappe évidente ou une majuscule manquante avant d'envoyer un e-mail ou un message rapide."
+            },
+            {
+              "title": "Rédaction de Premier Jet",
+              "description": "Effectuer un premier passage sur un brouillon pour détecter les erreurs mécaniques avant de faire une révision plus approfondie du contenu et du style."
+            },
+            {
+              "title": "Apprendre les Erreurs Courantes",
+              "description": "Voir les mots fréquemment confondus et les erreurs mécaniques signalées peut aider à renforcer un usage correct au fil du temps."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Est-ce aussi bon que Grammarly ou d'autres outils d'écriture IA ?",
+              "answer": "Non, et ce n'est pas son objectif. Cet outil utilise un petit ensemble de règles de correspondance de motifs simples, tandis que des outils comme Grammarly utilisent de grands modèles de langage entraînés à comprendre le contexte, le ton, et le style. Ce correcteur détecte des erreurs mécaniques spécifiques et courantes — considérez-le comme un premier passage utile, pas un éditeur complet."
+            },
+            {
+              "question": "Cela envoie-t-il mon texte quelque part ?",
+              "answer": "Non. Toute la vérification se produit localement dans votre navigateur grâce au JavaScript exécuté sur cette page — votre texte n'est jamais envoyé à un serveur ni stocké nulle part."
+            },
+            {
+              "question": "Pourquoi n'a-t-il pas détecté une erreur que je sais présente ?",
+              "answer": "Ce correcteur ne recherche qu'un ensemble spécifique et limité de motifs : une liste fixe de mots couramment mal orthographiés et une poignée de règles grammaticales. Il n'a pas de dictionnaire complet ni de compréhension du sens, il manquera donc les erreurs de mots réels (comme \"their\" utilisé à la place de \"there\") et les erreurs en dehors de son ensemble de règles."
+            },
+            {
+              "question": "Pourquoi a-t-il signalé quelque chose qui est en fait correct ?",
+              "answer": "Les règles sont intentionnellement de simples correspondances de motifs, elles peuvent donc occasionnellement produire un faux positif — par exemple, la vérification \"a\" contre \"an\" est basée sur la première lettre du mot suivant, ce qui correspond généralement mais pas toujours à la façon dont le mot sonne réellement. Utilisez votre propre jugement en complément des suggestions."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La correction orthographique automatisée remonte à 1971, lorsque Ralph Gorin a créé l'un des premiers programmes de correction orthographique à Stanford. À la fin des années 1970, des outils comme la commande Unix \"spell\" et le projet Epistle d'IBM comparaient les mots des documents à des listes de mots du dictionnaire pour signaler les fautes de frappe probables, la même idée fondamentale derrière la vérification orthographique de cet outil. La correction grammaticale a suivi une voie similaire à partir des années 1980 (Writer's Workbench et Grammatik parmi les premiers), utilisant des règles de correspondance de motifs très similaires à celles que cet outil utilise aujourd'hui, avant que des outils modernes basés sur l'IA n'apportent une compréhension contextuelle profonde à cette tâche des décennies plus tard."
+          },
+          "howItWorks": {
+            "title": "Comment Fonctionne la Vérification Basée sur des Règles",
+            "paragraph": "Les correcteurs basés sur des règles comme celui-ci fonctionnent en analysant le texte à la recherche de motifs spécifiques et bien définis à l'aide d'expressions régulières et de tables de correspondance, plutôt qu'en comprenant le sens. Une vérification orthographique compare simplement chaque mot à une liste d'orthographes incorrectes connues ; une vérification des majuscules recherche une lettre minuscule immédiatement après un point terminant une phrase ; et ainsi de suite. Cette approche est rapide, entièrement prévisible, et ne nécessite aucun service externe, mais elle est intrinsèquement limitée aux motifs spécifiques qu'elle a été programmée pour reconnaître — contrairement aux correcteurs statistiques ou basés sur l'IA, qui peuvent détecter des erreurs que personne n'avait explicitement anticipées."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La vérification automatisée de texte est étudiée en informatique, spécifiquement dans le traitement du langage naturel. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en traitement du langage naturel.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université Carnegie Mellon — Language Technologies Institute",
+                "note": "L'un des centres les plus reconnus au monde pour la recherche en traitement du langage naturel.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Abrite un groupe de recherche de premier plan en traitement du langage naturel.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centre de premier plan pour la recherche en linguistique computationnelle et technologie du langage.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'informatique et technologie."
+              },
+              {
+                "name": "Université d'Édimbourg — School of Informatics",
+                "note": "L'un des centres européens de premier plan pour la recherche en traitement du langage naturel.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "Une explication technique largement citée et disponible gratuitement sur le fonctionnement des algorithmes de correction orthographique, des simples recherches dans un dictionnaire aux modèles de correction statistiques.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "Consulter l'Article"
+        }
+      }
+    },
+    "roman-numeral-converter": {
+      "title": "Convertisseur de Chiffres Romains",
+      "description": "Convertissez entre les chiffres arabes et les chiffres romains dans les deux sens.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Convertir un Nombre",
+        "toRoman": "En Romain",
+        "toArabic": "En Arabe",
+        "arabicLabel": "Nombre (1-3999)",
+        "arabicHint": "Les chiffres romains standards ne représentent que des nombres entiers de 1 à 3999.",
+        "romanLabel": "Chiffre Romain"
+      },
+      "result": {
+        "heading": "Résultat",
+        "emptyInput": "Saisissez une valeur à convertir.",
+        "outOfRange": "Saisissez un nombre entier entre 1 et 3999.",
+        "invalidRoman": "Ce n'est pas un chiffre romain standard valide."
+      },
+      "quickReference": {
+        "title": "Symboles Romains",
+        "intro": "Les sept symboles de base et leurs valeurs."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Chiffres Romains",
+          "paragraph1": "Les chiffres romains représentent des nombres en utilisant des combinaisons de sept lettres : I (1), V (5), X (10), L (50), C (100), D (500), et M (1000). Les nombres sont construits en combinant ces symboles et en additionnant leurs valeurs, généralement du plus grand au plus petit, en lisant de gauche à droite — ainsi VII vaut 5 + 1 + 1 = 7.",
+          "paragraph2": "Une règle « soustractive » spéciale raccourcit certaines combinaisons : au lieu d'écrire quatre fois le même symbole d'affilée (comme IIII pour 4), un symbole plus petit est placé avant un plus grand pour signifier une soustraction — IV signifie 5 − 1 = 4, et IX signifie 10 − 1 = 9. Cette notation soustractive n'est utilisée que pour des paires spécifiques (IV, IX, XL, XC, CD, CM), ce qui permet à cet outil de rejeter des chiffres invalides comme IIII ou VX qui ne suivent pas les règles standards."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Les chiffres romains apparaissent encore aujourd'hui dans des contextes spécifiques, principalement traditionnels ou stylistiques.",
+          "items": [
+            {
+              "title": "Cadrans d'Horloge et Dates",
+              "description": "De nombreux cadrans d'horloge, pierres angulaires de bâtiments, et dates de droits d'auteur de films utilisent encore des chiffres romains pour une apparence traditionnelle ou formelle."
+            },
+            {
+              "title": "Suites, Volumes, et Plans",
+              "description": "Les suites de films (Rocky IV), les volumes de livres, et les sous-titres de plans utilisent couramment des chiffres romains pour indiquer une séquence."
+            },
+            {
+              "title": "Noms et Titres",
+              "description": "Les monarques, papes, et noms de famille transmis à travers les générations (le roi Henri VIII, John Smith III) utilisent des chiffres romains pour distinguer des individus successifs partageant un même nom."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Exemples Résolus",
+          "intro": "Quelques conversions, effectuées de la même manière que cet outil les calcule.",
+          "columnArabic": "Arabe",
+          "columnRoman": "Romain",
+          "rows": [
+            {
+              "arabic": "4",
+              "roman": "IV"
+            },
+            {
+              "arabic": "49",
+              "roman": "XLIX"
+            },
+            {
+              "arabic": "1994",
+              "roman": "MCMXCIV"
+            },
+            {
+              "arabic": "3999",
+              "roman": "MMMCMXCIX"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi ne puis-je pas convertir des nombres supérieurs à 3999 ?",
+              "answer": "Les chiffres romains standards n'ont pas de symbole pour 5000 ou plus, donc 3999 (MMMCMXCIX) est le plus grand nombre exprimable avec les sept lettres traditionnelles. Historiquement, des nombres plus grands étaient parfois écrits avec une barre horizontale au-dessus d'un symbole pour multiplier sa valeur par 1000, mais cette notation étendue ne fait pas partie du système standard pris en charge par cet outil."
+            },
+            {
+              "question": "Pourquoi voit-on parfois IIII sur les horloges au lieu de IV ?",
+              "answer": "Bien que IV soit la forme soustractive standard pour 4, de nombreux cadrans d'horloge utilisent traditionnellement IIII à la place, en grande partie pour une symétrie visuelle avec le VIII du côté opposé du cadran et pour des raisons historiques/esthétiques. Cet outil suit la convention mathématique standard (IV), pas la convention des cadrans d'horloge."
+            },
+            {
+              "question": "Existe-t-il un chiffre romain pour zéro ?",
+              "answer": "Non. Le système de chiffres romains n'a pas de symbole pour zéro — il a été conçu pour compter et enregistrer des quantités, pas pour le type d'arithmétique positionnelle qui nécessite un espace réservé zéro, c'est pourquoi la plage de cet outil commence à 1."
+            },
+            {
+              "question": "Pourquoi le convertisseur rejette-t-il certains chiffres romains que je saisis ?",
+              "answer": "Cet outil n'accepte que les chiffres romains standards, formés de manière canonique. Il rejette les chiffres qui ne suivent pas les règles soustractives standards (comme IIII, VX, ou IC), car ceux-ci ne sont pas considérés comme valides dans le système traditionnel, même si une simple somme lettre par lettre pourrait autrement produire un nombre d'apparence plausible."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Les chiffres romains sont nés dans la Rome antique, évoluant à partir de symboles numériques étrusques à partir d'environ le 8e siècle av. J.-C. Le système a été conçu pour le comptage pratique et la tenue de registres à l'aide de marques semblables à des bâtons de comptage — I, II, III pour les petits comptes, avec des symboles supplémentaires ajoutés pour les nombres ronds plus grands. Il est resté le système numérique dominant à travers l'Europe pendant plus de mille ans, bien avant dans le Moyen Âge, même après que le système de numération indo-arabe, plus pratique sur le plan calculatoire (les chiffres 0-9 utilisés aujourd'hui), ait commencé à se répandre depuis l'Inde à travers le monde islamique à partir du 9e siècle."
+          },
+          "modernUse": {
+            "title": "Pourquoi Nous les Utilisons Encore Aujourd'hui",
+            "paragraph": "Les chiffres romains ont persisté longtemps après que les chiffres indo-arabes soient devenus la norme pour le calcul, car ils servent un objectif différent : formalité, tradition, et marquage de séquence plutôt qu'arithmétique. Puisque les chiffres romains sont encombrants pour l'addition, la soustraction, et surtout la multiplication par rapport au système positionnel indo-arabe, ils sont devenus progressivement réservés aux contextes où la tradition ou la distinction visuelle importent plus que le calcul — les usages modernes spécifiques couverts ci-dessus."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'histoire des systèmes numériques est étudiée au sein de l'histoire des mathématiques. Voici cinq programmes de mathématiques reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford — Mathematical Institute",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Mathematics",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université de Harvard — Department of Mathematics",
+                "note": "4e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Stanford — Department of Mathematics",
+                "note": "5e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "Non — le programme est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Ifrah, G. (2000). The Universal History of Numbers: From Prehistory to the Invention of the Computer. Wiley.",
+          "note": "Une histoire savante complète des systèmes numériques à travers les civilisations, y compris le développement et la diffusion des chiffres romains.",
+          "url": "https://archive.org/details/universalhistory0000ifra",
+          "readOriginal": "Consulter la Référence"
+        }
+      }
+    },
+    "reading-time-calculator": {
+      "title": "Calculatrice de Temps de Lecture",
+      "description": "Estimez combien de temps il faudra pour lire un texte à une vitesse de lecture donnée.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "textLabel": "Texte à estimer",
+        "textPlaceholder": "Collez ou tapez votre texte ici.",
+        "speedLabel": "Vitesse de Lecture",
+        "presets": {
+          "slow": "Lente",
+          "average": "Moyenne",
+          "fast": "Rapide",
+          "custom": "Personnalisée"
+        },
+        "customWpmLabel": "Mots par Minute"
+      },
+      "result": {
+        "heading": "Temps de Lecture Estimé",
+        "emptyText": "Saisissez du texte pour estimer son temps de lecture.",
+        "invalidRate": "Saisissez une vitesse de lecture entre 1 et 1000 mots par minute.",
+        "timeMinutesSeconds": "{minutes} min {seconds} sec",
+        "timeSecondsOnly": "{seconds} sec",
+        "wordCountLabel": "Nombre de Mots"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Le temps de lecture est simplement le nombre de mots divisé par le nombre de mots que vous lisez par minute."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Estimations de Temps de Lecture",
+          "paragraph1": "Estimer le temps de lecture revient à une simple division : le nombre total de mots dans un texte divisé par une vitesse de lecture exprimée en mots par minute (MPM). Cet outil propose trois préréglages de vitesse courants — lent (150 MPM), moyen (230 MPM), et rapide (300 MPM) — basés sur des plages typiques trouvées dans la recherche sur la vitesse de lecture pour la lecture silencieuse de prose anglaise chez les adultes, plus une option personnalisée pour votre propre vitesse mesurée.",
+          "paragraph2": "La vitesse de lecture varie énormément d'un individu à l'autre et dépend fortement du type de matériel : un article technique plein de termes inconnus se lit beaucoup plus lentement qu'un roman ordinaire, et le survol est beaucoup plus rapide que la lecture pour une compréhension complète ou la lecture à voix haute. L'estimation de cet outil est donc une approximation raisonnable pour une prose simple à une vitesse donnée, pas une prédiction précise pour un lecteur spécifique ou un écrit spécifique."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Les estimations de temps de lecture sont utiles partout où les lecteurs bénéficient de savoir combien de temps prévoir.",
+          "items": [
+            {
+              "title": "Articles de Blog et Articles",
+              "description": "Afficher une étiquette estimée « 5 min de lecture » aide les lecteurs à décider s'ils doivent plonger maintenant ou enregistrer un article pour plus tard."
+            },
+            {
+              "title": "Préparation de Réunions et Présentations",
+              "description": "Estimer combien de temps il faudra à un public pour lire un document ou une diapositive de texte avant de continuer."
+            },
+            {
+              "title": "Planification d'Études",
+              "description": "Budgétiser approximativement le temps d'étude pour un devoir de lecture en fonction de son nombre de mots et de votre vitesse de lecture habituelle."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Quelle vitesse de lecture dois-je utiliser ?",
+              "answer": "La vitesse moyenne de lecture silencieuse des adultes pour la prose anglaise est généralement citée autour de 200-250 mots par minute, ce qui explique pourquoi le préréglage « Moyenne » de cet outil utilise 230 MPM. Si vous connaissez votre propre vitesse grâce à un test de lecture, utilisez plutôt l'option Personnalisée pour une estimation plus personnalisée."
+            },
+            {
+              "question": "Pourquoi mon temps de lecture réel diffère-t-il de l'estimation ?",
+              "answer": "Cet outil suppose une vitesse de lecture constante appliquée uniformément sur tout le texte, mais la vitesse de lecture réelle varie selon la difficulté, la familiarité avec le sujet, la fatigue, et si vous survolez ou lisez attentivement. Considérez le résultat comme une estimation utile, pas une prédiction exacte."
+            },
+            {
+              "question": "Cela compte-t-il les nombres ou la ponctuation comme des mots ?",
+              "answer": "Le nombre de mots est basé sur des segments de texte séparés par des espaces, donc un nombre ou un terme avec trait d'union compte généralement comme un mot, similaire à la façon dont les traitements de texte comptent les mots. Cela correspond à la façon dont la plupart des estimations de temps de lecture sur les blogs et les articles sont calculées."
+            },
+            {
+              "question": "Le temps de lecture est-il le même que le temps de parole ?",
+              "answer": "Non — la lecture silencieuse est généralement plus rapide que parler à voix haute, car l'élocution parlée est rythmée par la respiration, la prononciation, et la compréhension du public plutôt que par le seul mouvement des yeux sur le texte. Si vous devez estimer combien de temps prendra un discours ou une présentation, une estimation dédiée du débit de parole est plus appropriée qu'une vitesse de lecture silencieuse."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Recherche",
+            "paragraph": "La vitesse de lecture est étudiée par les psychologues depuis la fin du 19e siècle, lorsque les premiers pionniers du suivi oculaire comme Émile Javal ont découvert que les yeux se déplacent par sauts rapides (saccades) avec de brèves pauses (fixations) plutôt que de balayer une ligne de texte en douceur. La recherche moderne sur la vitesse de lecture, s'appuyant sur des centaines d'études, a systématiquement constaté que la vitesse de lecture silencieuse des adultes dans des langues familières se situe généralement quelque part entre environ 175 et 300 mots par minute pour la prose grand public, plage dont sont issus les trois préréglages de cet outil."
+          },
+          "limitations": {
+            "title": "Limites de Cette Estimation",
+            "paragraph": "Une estimation en mots par minute simplifie nécessairement un processus beaucoup plus complexe. La vitesse de lecture réelle est affectée par la difficulté du texte et la complexité des phrases, la familiarité du lecteur avec le sujet et le vocabulaire, la taille de la police et la mise en page, et même le niveau de fatigue actuel du lecteur — rien de tout cela que cette calculatrice ne peut mesurer à partir du seul texte. Elle est mieux utilisée comme une estimation rapide et générale plutôt qu'une mesure précise."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La vitesse de lecture et la compréhension sont étudiées en psychologie cognitive et psycholinguistique. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université de Gand — Department of Experimental Psychology",
+                "note": "Abrite des chercheurs de premier plan en vitesse de lecture et psycholinguistique, y compris des études à grande échelle sur les taux de lecture.",
+                "url": "https://www.ugent.be/pp/experimentele-psychologie/en",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université de Gand."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "Un centre de premier plan pour la science cognitive de la lecture et du traitement du langage.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université d'Oxford — Department of Experimental Psychology",
+                "note": "Un centre de premier plan pour la psychologie expérimentale, y compris la recherche sur la lecture et le langage.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Psychology",
+                "note": "Un centre de premier plan pour la science psychologique au Royaume-Uni.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "Non — les diplômes de recherche sont en présentiel."
+              },
+              {
+                "name": "Université de Stanford — Department of Psychology",
+                "note": "Un département de psychologie de premier plan avec une solide recherche en sciences cognitives.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de psychologie",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
+          "note": "Une méta-analyse complète de la recherche sur le taux de lecture à travers des centaines d'études, qui est la base des plages de vitesse générales dont sont issus les préréglages de cet outil.",
+          "url": "https://doi.org/10.1016/j.jml.2019.104047",
+          "readOriginal": "Consulter l'Étude"
+        }
+      }
+    },
+    "lorem-ipsum-generator": {
+      "title": "Générateur de Lorem Ipsum",
+      "description": "Générez du texte de remplissage en paragraphes, phrases, ou mots, en style classique ou moderne.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Paramètres du Générateur",
+        "styleLabel": "Style",
+        "styles": {
+          "classic": "Latin Classique",
+          "modern": "Moderne (Jargon d'Entreprise)"
+        },
+        "unitLabel": "Générer Par",
+        "units": {
+          "paragraphs": "Paragraphes",
+          "sentences": "Phrases",
+          "words": "Mots"
+        },
+        "countLabel": "Combien",
+        "startWithLorem": "Commencer par « Lorem ipsum dolor sit amet... »",
+        "generate": "Générer"
+      },
+      "result": {
+        "heading": "Texte Généré",
+        "invalidCount": "Saisissez un nombre entier entre 1 et 50.",
+        "wordCountLabel": "Nombre de Mots"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Le Lorem Ipsum est un texte de remplissage délibérément dénué de sens — ses mots à consonance latine ne forment pas de vraies phrases avec un vrai sens."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le Lorem Ipsum",
+          "paragraph1": "Le Lorem Ipsum est un texte de remplissage (aussi appelé « faux texte » ou « greeking ») utilisé par les designers et développeurs pour remplir une mise en page avec un texte d'apparence réaliste avant que le contenu réel ne soit prêt. Parce qu'il ressemble au langage naturel en longueur de mots et fréquence de lettres sans être lisible ou distrayant, il permet d'évaluer la mise en page visuelle, la typographie, et l'espacement d'un design sans que le contenu lui-même n'attire l'attention.",
+          "paragraph2": "Cet outil propose également une banque de mots alternative « moderne » construite à partir de jargon d'entreprise et technologique courant (« synergy », « leverage », « scalable », et termes similaires) au lieu du vocabulaire classique dérivé du latin, générée en utilisant exactement la même structure de phrases et paragraphes. Les deux styles servent le même objectif identique — remplir l'espace avec un texte d'apparence plausible mais finalement dénué de sens — la seule différence est le vocabulaire."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Le texte de remplissage apparaît partout où une mise en page doit être construite ou révisée avant que le contenu final n'existe.",
+          "items": [
+            {
+              "title": "Maquettes de Sites Web et d'Applications",
+              "description": "Remplir les zones de texte, titres, et paragraphes dans une maquette de design afin que les parties prenantes puissent évaluer la mise en page visuelle indépendamment du texte final."
+            },
+            {
+              "title": "Mise en Page pour l'Impression et l'Édition",
+              "description": "Tester à quoi ressemble une mise en page de page, un choix de police, et une largeur de colonne avec une quantité réaliste de texte avant que le manuscrit final ne soit prêt."
+            },
+            {
+              "title": "Développement et Test de Logiciels",
+              "description": "Peupler une interface utilisateur avec du texte d'exemple pendant le développement pour vérifier comment les composants gèrent des quantités variables de contenu, comme des paragraphes longs par rapport à courts."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Que signifie réellement le Lorem Ipsum ?",
+              "answer": "Rien de cohérent. Il est dérivé d'un texte latin authentique, mais mélangé, abrégé, et altéré si fortement au cours de sa longue histoire d'utilisation qu'il ne forme plus de phrases latines grammaticalement correctes ou significatives — ce qui est exactement le but, puisqu'un texte dénué de sens ne détourne pas l'attention de l'évaluation d'une mise en page."
+            },
+            {
+              "question": "D'où vient le Lorem Ipsum ?",
+              "answer": "Il remonte à un passage du texte philosophique de Cicéron de 45 av. J.-C. « De Finibus Bonorum et Malorum » (« Des limites du bien et du mal »). Un extrait mélangé de ce texte — commençant au milieu d'un mot par « ...orem ipsum... » issu de « dolorem ipsum » — est utilisé comme texte de remplissage depuis au moins les années 1960, probablement même plus tôt dans l'imprimerie."
+            },
+            {
+              "question": "Pourquoi utiliser le Lorem Ipsum plutôt que de vraies phrases en anglais ?",
+              "answer": "Utiliser de l'anglais reconnaissable (ou toute langue que les lecteurs comprennent) comme texte de remplissage tend à distraire les relecteurs, qui commencent à lire et évaluer les mots eux-mêmes plutôt que la mise en page, la typographie, et le design visuel que le texte de remplissage est censé mettre en valeur. Le charabia dérivé du latin ressemble à du vrai texte au premier coup d'œil sans inviter à ce type de lecture."
+            },
+            {
+              "question": "Le style « moderne » est-il aussi du latin historiquement exact ?",
+              "answer": "Non — le style moderne est une banque de mots intentionnellement différente, non latine, composée de jargon d'entreprise et technologique courant, proposée comme alternative stylistique pour des contextes (comme des maquettes de produits technologiques) où un texte de remplissage ressemblant au jargon d'entreprise pourrait sembler plus approprié ou amusant que le latin."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Le texte remonte aux sections 1.10.32 et 1.10.33 du « De Finibus Bonorum et Malorum » de Cicéron, écrit en 45 av. J.-C. comme une exploration philosophique de l'éthique. Une forme d'extraits mélangés et déformés de ce texte est utilisée comme remplissage typographique depuis au moins les années 1960 (lorsqu'elle est apparue sur des planches Letraset et dans les premiers logiciels de PAO), et l'on pense largement qu'elle a été utilisée par les imprimeurs encore plus tôt, peut-être dès le 16e siècle, bien qu'une documentation solide n'existe que pour son usage moderne."
+          },
+          "rediscovery": {
+            "title": "Comment son Origine a été Redécouverte",
+            "paragraph": "Pendant des décennies, la source originale du texte était essentiellement inconnue des designers qui l'utilisaient quotidiennement. En 1982, Richard McClintock, un latiniste du Hampden-Sydney College, recherchait l'origine du mot « consectetur » et a retracé les fragments jusqu'au texte classique de Cicéron — une découverte qui constitue aujourd'hui le récit standard et bien documenté de l'origine du Lorem Ipsum, cité dans toute l'industrie du design et de l'édition."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les textes latins classiques comme ceux de Cicéron sont étudiés au sein des départements d'études classiques et de philologie classique. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université d'Oxford — Faculty of Classics",
+                "note": "L'un des centres les plus reconnus au monde pour les études classiques et la philologie latine.",
+                "url": "https://www.classics.ox.ac.uk/graduate-study",
+                "online": "Non — les diplômes de recherche sont en présentiel à la Faculty of Classics."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Classics",
+                "note": "Un centre de premier plan pour les études classiques, y compris l'érudition cicéronienne.",
+                "url": "https://www.classics.cam.ac.uk/prospective/graduate",
+                "online": "Non — les diplômes de recherche sont en présentiel à la Faculty of Classics."
+              },
+              {
+                "name": "Université de Harvard — Department of the Classics",
+                "note": "L'un des départements d'études classiques les plus reconnus aux États-Unis.",
+                "url": "https://classics.fas.harvard.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Princeton — Department of Classics",
+                "note": "Un centre de premier plan pour l'étude du latin et de la littérature romaine.",
+                "url": "https://classics.princeton.edu/graduate",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université du Michigan — Department of Classical Studies",
+                "note": "Un département d'études classiques de premier plan avec une solide recherche en philologie latine.",
+                "url": "https://lsa.umich.edu/classics/graduate-students/prospective-students.html",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'études classiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/classics/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Savantes",
+          "citation": "Cicéron, M. T. (45 av. J.-C.). De Finibus Bonorum et Malorum, 1.10.32-33.",
+          "note": "Le texte latin classique original dont les passages mélangés et déformés du Lorem Ipsum sont finalement dérivés, tel que retracé par la recherche de Richard McClintock en 1982.",
+          "url": "https://www.lipsum.com/",
+          "readOriginal": "Consulter l'Histoire"
+        }
+      }
+    },
+    "text-logo-generator": {
+      "title": "Générateur de Logo Texte",
+      "description": "Transformez du texte en designs de texte Unicode stylisés utilisant le gras, l'italique, le double barré, et d'autres styles semblables à des polices.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "textLabel": "Texte à styliser",
+        "textPlaceholder": "Tapez quelque chose...",
+        "hint": "Chaque style ci-dessous se met à jour instantanément et peut être copié en un clic."
+      },
+      "result": {
+        "heading": "Texte Stylisé",
+        "emptyText": "Tapez du texte pour le voir dans tous les styles.",
+        "styles": {
+          "bold": "Gras",
+          "italic": "Italique",
+          "boldItalic": "Gras Italique",
+          "doubleStruck": "Double Barré",
+          "monospace": "Monospace",
+          "fullwidth": "Pleine Largeur",
+          "circled": "Encerclé"
+        }
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Ces styles sont de vrais caractères Unicode, pas des polices — ils s'afficheront de la même manière (en tant que ces symboles spécifiques) presque partout où vous les collez, y compris dans des endroits qui ne permettent pas de changer de police, comme les bios des réseaux sociaux et les noms d'utilisateur."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Styles de Texte Unicode",
+          "paragraph1": "Cet outil n'applique pas de police à votre texte — il remplace chaque lettre et chiffre par un caractère Unicode différent qui semble en gras, italique, double barré, ou stylisé autrement. Comme il s'agit de caractères distincts (pas un style appliqué à la même lettre sous-jacente), le résultat est du texte brut qui conserve son apparence « stylisée » partout où il va, y compris dans des endroits comme les bios de réseaux sociaux, les noms d'utilisateur, ou les applications de chat qui ne prennent pas autrement en charge le formatage de texte en gras ou en italique.",
+          "paragraph2": "Les caractères spécifiques que cet outil utilise proviennent du bloc Symboles Alphanumériques Mathématiques d'Unicode, un ensemble de points de code initialement ajoutés à la norme Unicode afin que la notation mathématique et scientifique puisse distinguer, disons, une variable en italique « x » d'une lettre normale « x » en texte brut — une distinction typographique authentique sur laquelle s'appuient les mathématiciens. Cet outil réutilise ce même jeu de caractères pour le style de texte décoratif, ce qui est un usage courant mais non officiel de caractères conçus pour un but différent, plus technique."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Le texte Unicode stylisé apparaît partout où quelqu'un souhaite un texte brut visuellement distinctif.",
+          "items": [
+            {
+              "title": "Bios et Noms d'Utilisateur sur les Réseaux Sociaux",
+              "description": "Ajouter une touche visuelle à un nom de profil ou une bio sur des plateformes qui ne prennent pas en charge le formatage de texte enrichi, puisqu'il s'agit simplement de caractères Unicode bruts."
+            },
+            {
+              "title": "Titres dans des Contextes de Texte Brut",
+              "description": "Faire ressortir un titre ou une étiquette dans des endroits comme les e-mails en texte brut, les messages de chat, ou les publications de forum où le formatage markdown ou HTML n'est pas rendu."
+            },
+            {
+              "title": "Logos Rapides par Copier-Coller",
+              "description": "Créer une marque de mot simple et distinctive pour un usage informel sans avoir besoin de logiciel de design, en copiant directement l'une des variantes stylisées."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Est-ce vraiment une police différente ?",
+              "answer": "Non — aucune police n'est appliquée. Chaque caractère que vous voyez est un point de code Unicode distinct qui se trouve avoir l'air gras, italique, ou stylisé autrement. C'est pourquoi le texte stylisé conserve son apparence même dans des endroits qui ne prennent pas en charge les polices personnalisées ou le texte enrichi."
+            },
+            {
+              "question": "Ce texte s'affichera-t-il correctement partout ?",
+              "answer": "Presque partout, puisqu'il s'agit de caractères Unicode standard, mais l'affichage dépend du fait que l'appareil du lecteur ait une police installée incluant des glyphes pour ces points de code spécifiques. Presque tous les appareils et navigateurs modernes les prennent en charge, bien que les systèmes extrêmement anciens ou limités affichent parfois des cases vides pour les plages moins courantes."
+            },
+            {
+              "question": "Pourquoi l'italique et le double barré ne couvrent-ils pas chaque lettre et chiffre de la même manière ?",
+              "answer": "Une poignée de lettres spécifiques dans le bloc Symboles Alphanumériques Mathématiques réutilisent des caractères Unicode plus anciens et déjà existants au lieu d'obtenir de nouveaux points de code — par exemple, le « h » minuscule italique réutilise le symbole existant de la constante de Planck (ℎ), et les C, H, N, P, Q, R et Z en double barré réutilisent des symboles mathématiques « tableau noir gras » existants (comme ℝ pour les nombres réels). Cet outil prend automatiquement en compte ces exceptions spécifiques."
+            },
+            {
+              "question": "Les moteurs de recherche ou les lecteurs d'écran peuvent-ils lire ce texte stylisé normalement ?",
+              "answer": "Pas de manière fiable. Comme chaque caractère est un symbole Unicode distinct plutôt que la lettre normale à laquelle il ressemble, les lecteurs d'écran peuvent ne pas le prononcer correctement, et les moteurs de recherche peuvent ne pas le faire correspondre à des recherches de texte normal. Utilisez ces styles pour un éclat visuel dans des contextes informels, pas pour du texte principal devant être entièrement accessible ou consultable."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "howItWorks": {
+            "title": "Comment Ça Marche",
+            "paragraph": "Le bloc Symboles Alphanumériques Mathématiques d'Unicode (points de code U+1D400 à U+1D7FF) a été ajouté à la norme Unicode dans la version 3.1, publiée en 2001, spécifiquement pour prendre en charge la composition mathématique où la même lettre nécessite des formes distinctes — un « x » normal, un « x » en italique pour une variable, et un « x » en gras pour un vecteur, par exemple, doivent tous rester distinguables même lorsqu'ils sont copiés en texte brut sans aucun style de police appliqué. Cet outil fonctionne en recherchant le point de code stylisé équivalent pour chaque lettre ou chiffre que vous tapez, caractère par caractère, et en le substituant."
+          },
+          "limitations": {
+            "title": "Limites de Cet Outil",
+            "paragraph": "La couverture Unicode de ces styles n'est pas parfaitement uniforme : certains styles (comme l'italique) n'ont aucune variante de chiffres, car la notation mathématique n'avait pas besoin de chiffres en italique de la même manière qu'elle avait besoin de variables en italique, et une poignée de lettres individuelles dans certains styles réutilisent des symboles Unicode plus anciens et déjà existants au lieu de caractères nouveaux dédiés. Cet outil inclut les exceptions spécifiques et documentées pour les styles qu'il propose, de sorte que le résultat soit fidèle à la norme Unicode réelle plutôt que de deviner un motif qui ne s'applique pas tout à fait à chaque caractère."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les normes de codage de caractères comme Unicode sont étudiées en informatique, en particulier dans les domaines de l'internationalisation et du traitement de texte. Voici cinq programmes d'informatique reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Electrical Engineering and Computer Science",
+                "note": "L'un des départements d'informatique les plus reconnus au monde.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS."
+              },
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en systèmes et internationalisation.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centre de premier plan pour la recherche en informatique au Royaume-Uni.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'informatique et technologie."
+              },
+              {
+                "name": "Université Carnegie Mellon — School of Computer Science",
+                "note": "L'une des écoles d'informatique les plus reconnues au monde.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "EPF Zurich (ETH Zurich) — Department of Computer Science",
+                "note": "Un département d'informatique européen de premier plan.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "Non — le programme doctoral est un diplôme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "La table de caractères Unicode officielle définissant les caractères exacts, points de code, et exceptions documentées sur lesquels sont basées les correspondances de texte stylisé de cet outil.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "Consulter la Table de Caractères Officielle"
+        }
+      }
+    },
+    "random-quote-generator": {
+      "title": "Générateur de Citations Aléatoires",
+      "description": "Affiche une citation aléatoire d'une collection organisée aux sources documentées couvrant des catégories motivationnelles, littéraires, et philosophiques.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Choisir une Catégorie",
+        "categoryLabel": "Catégorie",
+        "newQuote": "Nouvelle Citation"
+      },
+      "categories": {
+        "all": "Toutes",
+        "motivational": "Motivationnelle",
+        "literary": "Littéraire",
+        "philosophical": "Philosophique"
+      },
+      "result": {
+        "heading": "Citation"
+      },
+      "quickReference": {
+        "title": "À Propos de Cette Collection",
+        "intro": "Chaque citation ici cite une source primaire vérifiable — un discours, un livre, ou un texte publié — plutôt qu'une « citation internet » sans source."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre Cette Collection de Citations",
+          "paragraph1": "Cet outil puise dans une petite collection de citations organisée à la main plutôt que dans une grande base de données collectée, spécifiquement pour que chaque citation puisse être vérifiée par rapport à une source réelle et citable : la transcription d'un discours historique, un livre publié, ou le texte original d'un philosophe. Chaque citation affichée ici inclut sa source, pas seulement son auteur, afin que vous puissiez voir exactement d'où elle vient.",
+          "paragraph2": "La collection couvre trois catégories : des citations motivationnelles tirées de discours historiques et de déclarations publiques documentées, des citations littéraires tirées du texte réel de romans et pièces de théâtre bien connus, et des citations philosophiques traduites d'œuvres philosophiques primaires. Cliquer sur « Nouvelle Citation » choisit une citation différente au hasard dans la catégorie sélectionnée, évitant une répétition immédiate de celle que vous venez de voir."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Un générateur de citations aléatoires est utile partout où un moment d'inspiration, de réflexion, ou d'appréciation littéraire est bienvenu.",
+          "items": [
+            {
+              "title": "Inspiration Quotidienne",
+              "description": "Commencer la journée avec une citation motivationnelle tirée des propres paroles documentées d'une figure historique."
+            },
+            {
+              "title": "Rédaction et Présentations",
+              "description": "Trouver une citation bien documentée pour ouvrir un essai, une présentation, ou une publication sur les réseaux sociaux, avec une source que vous pouvez réellement citer."
+            },
+            {
+              "title": "Exploration Littéraire et Philosophique",
+              "description": "Découvrir une phrase d'un roman classique ou d'un texte philosophique qui pourrait donner envie de lire l'œuvre complète."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Ces citations sont-elles vraiment exactes ?",
+              "answer": "Chaque citation de cette collection provient d'une source documentée et vérifiable — la transcription d'un discours historique, un roman ou une pièce de théâtre publiés, ou un texte philosophique traduit — plutôt que d'une base de données de citations internet générale, où l'attribution erronée est extrêmement courante."
+            },
+            {
+              "question": "Pourquoi certaines citations célèbres n'apparaissent-elles pas ici ?",
+              "answer": "Beaucoup de « citations célèbres » largement diffusées (souvent attribuées à des figures comme Einstein, Twain, ou Lincoln) sont en fait mal attribuées, paraphrasées, ou entièrement inventées, malgré leur extrême fréquence en ligne. Cette collection privilégie délibérément un nombre plus restreint de citations vérifiables plutôt qu'une collection plus large truffée de citations invérifiables."
+            },
+            {
+              "question": "Pourquoi cliquer sur « Nouvelle Citation » donne-t-il parfois l'impression de tourner dans un petit ensemble ?",
+              "answer": "Il s'agit d'une petite collection organisée plutôt que d'une base de données massive, car chaque citation nécessite une vérification manuelle de la source. Au sein d'une seule catégorie, vous pourriez voir réapparaître la même poignée de citations après suffisamment de clics, bien que l'outil évite de montrer exactement la même citation deux fois de suite."
+            },
+            {
+              "question": "Puis-je faire confiance à la source indiquée pour chaque citation ?",
+              "answer": "Chaque source indique où la citation peut réellement être trouvée — un discours et une date précis, un livre et une année de publication précis, ou un texte philosophique précis — afin que vous puissiez le vérifier vous-même plutôt que d'accepter l'attribution sur la foi."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "sourcing": {
+            "title": "Comment les Citations Sont Sourcées",
+            "paragraph": "Chaque citation de cette collection a été sélectionnée spécifiquement parce qu'elle remonte à une source primaire et vérifiable : la transcription d'un discours historique, le texte imprimé réel d'un roman ou d'une pièce de théâtre, ou une traduction standard d'une œuvre philosophique. C'est une approche délibérément plus prudente que celle adoptée par de nombreux sites de citations, qui privilégient souvent un grand volume de citations plutôt que de vérifier d'où chacune provient réellement."
+          },
+          "misattribution": {
+            "title": "Le Problème de la Mauvaise Attribution des Citations",
+            "paragraph": "La mauvaise attribution des citations est un phénomène bien documenté : une phrase frappante ou astucieuse se retrouve attachée à un nom célèbre au fil du temps, souvent parce que le nom d'une personne célèbre rend une citation plus crédible ou partageable, qu'elle l'ait réellement dite ou non. Des chercheurs qui enquêtent sur les origines des citations, comme le projet Quote Investigator, ont retracé de nombreuses « citations célèbres » extrêmement populaires jusqu'à des sources originales obscures ou complètement différentes de la personne à qui elles sont communément attribuées, ce qui explique pourquoi cette collection s'en tient à un ensemble plus restreint de citations aux origines vérifiables."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'étude des sources textuelles, des citations, et de leurs origines relève de la philologie et de l'érudition littéraire/historique. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université d'Oxford — Faculty of English Language and Literature",
+                "note": "L'un des centres les plus reconnus au monde pour l'érudition littéraire et textuelle.",
+                "url": "https://www.english.ox.ac.uk/graduate-study",
+                "online": "Non — les diplômes de recherche sont en présentiel à la Faculty of English."
+              },
+              {
+                "name": "Université de Harvard — Department of English",
+                "note": "Un département de premier plan pour les études littéraires et l'histoire des textes.",
+                "url": "https://english.fas.harvard.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Classics",
+                "note": "Un centre de premier plan pour l'étude des textes primaires classiques et philosophiques.",
+                "url": "https://www.classics.cam.ac.uk/prospective/graduate",
+                "online": "Non — les diplômes de recherche sont en présentiel à la Faculty of Classics."
+              },
+              {
+                "name": "Université de Princeton — Department of History",
+                "note": "Un département d'histoire de premier plan avec une solide recherche archivistique et sur les sources primaires.",
+                "url": "https://history.princeton.edu/graduate",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Yale — Department of Philosophy",
+                "note": "Un département de philosophie de premier plan avec une solide érudition en histoire de la philosophie.",
+                "url": "https://philosophy.yale.edu/graduate",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'anglais",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/enlt/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Savantes",
+          "citation": "O'Toole, G. Quote Investigator: Tracing Quotations. QuoteInvestigator.com.",
+          "note": "Un projet largement respecté et méticuleusement documenté dédié à retracer les origines réelles de citations célèbres, et à documenter combien de « citations » populaires sont en fait mal attribuées.",
+          "url": "https://quoteinvestigator.com/",
+          "readOriginal": "Visiter Quote Investigator"
+        }
+      }
+    },
+    "multiplication-table-generator": {
+      "title": "Générateur de Table de Multiplication",
+      "description": "Générez une table de multiplication pour un seul nombre ou une grille imprimable pour une plage de nombres.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Paramètres de la Table",
+        "modeSingle": "Nombre Unique",
+        "modeRange": "Grille",
+        "numberLabel": "Nombre",
+        "maxMultiplierLabel": "Jusqu'à",
+        "rangeStartLabel": "De",
+        "rangeEndLabel": "À"
+      },
+      "result": {
+        "heading": "Table de Multiplication",
+        "invalidNumber": "Saisissez un nombre entier entre 1 et 1000.",
+        "invalidMultiplier": "Saisissez un nombre entier entre 1 et 100.",
+        "invalidRange": "Saisissez une plage valide, le nombre de départ ne devant pas être supérieur au nombre de fin.",
+        "rangeTooLarge": "Choisissez une plage de 30 nombres ou moins pour une grille lisible.",
+        "print": "Imprimer"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Chaque cellule est simplement le numéro de ligne multiplié par le numéro de colonne."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Tables de Multiplication",
+          "paragraph1": "Une table de multiplication répertorie les produits d'un nombre multiplié par une séquence d'autres nombres, généralement de 1 à 12 pour une table à nombre unique, vous permettant de rechercher un fait de multiplication au lieu de le calculer à chaque fois. Le mode « Nombre Unique » de cet outil génère exactement cela : la table de multiplication complète d'un nombre, avec une limite supérieure personnalisable pour le multiplicateur.",
+          "paragraph2": "Le mode « Grille » génère la table de multiplication carrée classique que l'on trouve au dos des cahiers scolaires : une grille complète où chaque nombre d'une plage choisie est multiplié par chaque autre nombre de cette même plage, afin que vous puissiez rechercher n'importe quel produit dans la plage d'un coup d'œil, dans les deux sens, puisque la table est symétrique (3×7 donne le même résultat que 7×3)."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Les tables de multiplication restent un outil fondamental partout où l'aisance arithmétique de base est développée ou vérifiée.",
+          "items": [
+            {
+              "title": "Enseignement Mathématique Élémentaire",
+              "description": "Aider les élèves à mémoriser les faits de multiplication grâce à une exposition répétée à une table complète et organisée, un élément standard de l'enseignement arithmétique précoce."
+            },
+            {
+              "title": "Aides aux Devoirs et à l'Étude",
+              "description": "Imprimer une table pour une référence rapide en effectuant des devoirs d'arithmétique ou en se préparant pour un contrôle de multiplication chronométré."
+            },
+            {
+              "title": "Vérifications Rapides de Calcul Mental",
+              "description": "Vérifier rapidement un résultat de multiplication sans recourir à une calculatrice, particulièrement pour des nombres juste en dehors de ce qui est facilement mémorisé."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi les tables de multiplication vont-elles généralement jusqu'à 12 ?",
+              "answer": "S'arrêter à 12 est une convention de longue date plutôt qu'une nécessité mathématique, probablement liée aux traditions de comptage en base 12 (duodécimale) qui ont persisté dans des systèmes de mesure comme 12 pouces par pied et 12 mois dans une année, faisant de 12×12 un point d'arrêt pratique et mémorable pour l'aisance arithmétique de base."
+            },
+            {
+              "question": "Pourquoi la grille de multiplication est-elle symétrique ?",
+              "answer": "Cela reflète la propriété commutative de la multiplication : pour deux nombres quelconques a et b, a × b est toujours égal à b × a. À cause de cela, la grille se reflète parfaitement le long de sa diagonale, et vous n'avez techniquement besoin de mémoriser qu'environ la moitié des entrées d'une table de multiplication complète pour toutes les connaître."
+            },
+            {
+              "question": "Quelle est la différence entre les deux modes ?",
+              "answer": "Le mode Nombre Unique affiche la table de multiplication complète d'un nombre sous forme de liste simple (utile pour la mémorisation ciblée d'un nombre, comme la table de 7). Le mode Grille affiche une table carrée complète pour une plage de nombres, utile pour rechercher n'importe quel produit dans cette plage, ou pour imprimer un tableau de référence classique."
+            },
+            {
+              "question": "Pourquoi y a-t-il une limite à la taille de la plage que je peux générer ?",
+              "answer": "Une grille pour une très grande plage de nombres devient impraticablement grande à afficher ou imprimer lisiblement sur une seule page, donc cet outil limite la plage à 30 nombres (une grille 30×30), ce qui couvre confortablement les plages généralement utilisées pour les tableaux de référence et le matériel de classe."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "Les tables de multiplication comptent parmi les plus anciens documents mathématiques survivants : des tablettes cunéiformes de la Babylone antique, datant d'environ 4 000 ans, enregistrent des tables de multiplication systématiques utilisées par les scribes pour des calculs commerciaux et administratifs, basées sur le système numérique babylonien en base 60 (sexagésimal). Les tables de multiplication sous leur forme moderne approximativement décimale sont apparues plus tard dans des textes mathématiques chinois anciens et sont devenues un élément standard de l'enseignement arithmétique dans de nombreuses cultures dès l'époque médiévale."
+          },
+          "pedagogy": {
+            "title": "Les Tables de Multiplication dans l'Éducation",
+            "paragraph": "Mémoriser les tables de multiplication reste un élément quasi universel de l'enseignement mathématique élémentaire, car le rappel fluide des faits de multiplication de base libère de l'effort mental pour une arithmétique et une algèbre plus complexes plus tard, plutôt que d'exiger qu'un élève recalcule des produits simples à partir de zéro à chaque fois. La recherche en éducation soutient généralement une combinaison de compréhension du pourquoi la multiplication fonctionne (comme une addition répétée ou une aire, par exemple) associée à la mémorisation, plutôt que la mémorisation seule."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'histoire de l'arithmétique et de la didactique des mathématiques est étudiée au sein de l'histoire des mathématiques et des départements de didactique des mathématiques. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "1er mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département de mathématiques."
+              },
+              {
+                "name": "Université d'Oxford — Mathematical Institute",
+                "note": "2e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "Non — le DPhil est un doctorat de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Faculty of Mathematics",
+                "note": "3e mondial en mathématiques (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "Non — les diplômes de recherche se déroulent en présentiel à la faculté de mathématiques."
+              },
+              {
+                "name": "Université Columbia — Department of Mathematics Education",
+                "note": "Un centre de premier plan pour la recherche en didactique et pédagogie des mathématiques.",
+                "url": "https://www.tc.columbia.edu/mathematics/",
+                "online": "Non — les programmes doctoraux sont en présentiel."
+              },
+              {
+                "name": "Université de Stanford — Graduate School of Education",
+                "note": "Un centre de premier plan pour la recherche en didactique des mathématiques.",
+                "url": "https://ed.stanford.edu/academics/graduate-degrees",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département de mathématiques",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+          "note": "Une histoire savante des mathématiques babyloniennes, y compris le système numérique en base 60 et les anciennes tables de multiplication cunéiformes qu'il a produites.",
+          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
+          "readOriginal": "Consulter la Référence"
+        }
+      }
+    },
+    "speech-word-count-calculator": {
+      "title": "Calculatrice de Mots du Discours",
+      "description": "Estimez combien de temps prendra la prononciation d'un discours ou d'une présentation, selon le nombre de mots et le débit de parole.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Discours ou Script",
+        "textLabel": "Texte à estimer",
+        "textPlaceholder": "Collez ou tapez votre discours, script, ou texte de présentation ici.",
+        "paceLabel": "Débit de Parole",
+        "presets": {
+          "formal": "Formel",
+          "normal": "Normal",
+          "fast": "Rapide",
+          "custom": "Personnalisé"
+        },
+        "customWpmLabel": "Mots par Minute"
+      },
+      "result": {
+        "heading": "Temps de Présentation Estimé",
+        "emptyText": "Saisissez le texte de votre discours ou présentation pour estimer son temps de présentation.",
+        "invalidRate": "Saisissez un débit de parole entre 1 et 400 mots par minute.",
+        "timeMinutesSeconds": "{minutes} min {seconds} sec",
+        "timeSecondsOnly": "{seconds} sec",
+        "wordCountLabel": "Nombre de Mots"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Le temps de présentation est le nombre de mots divisé par votre débit de parole choisi."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le Temps de Présentation d'un Discours",
+          "paragraph1": "Estimer combien de temps prendra la prononciation d'un discours revient à diviser le nombre total de mots par un débit de parole, mesuré en mots par minute (MPM). Cet outil propose trois préréglages courants : formel (110 MPM, un rythme délibéré et mesuré typique des présentations et discours formels destinés à être facilement suivis), normal (140 MPM, un débit de parole conversationnel typique), et rapide (170 MPM, une présentation énergique et rapide), plus une option personnalisée pour votre propre débit mesuré.",
+          "paragraph2": "Le débit de parole est nettement plus lent que le rythme de lecture silencieuse, car l'élocution parlée est rythmée par la respiration, l'articulation, les pauses pour l'emphase, et la compréhension du public, rien de tout cela ne s'appliquant à la lecture silencieuse pour soi-même. C'est pourquoi un discours prend généralement sensiblement plus de temps à prononcer à voix haute que le même texte ne prendrait à lire silencieusement — une distinction à garder à l'esprit si vous chronométrez une allocution en fonction du temps que le script prend à lire mentalement."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Estimer le temps de présentation d'un discours est essentiel partout où une allocution doit tenir dans un créneau horaire défini.",
+          "items": [
+            {
+              "title": "Conférences et Présentations",
+              "description": "Vérifier qu'une allocution préparée tient dans le créneau horaire alloué avant de monter sur scène, évitant le problème courant de dépasser ou de ne pas atteindre significativement le temps imparti."
+            },
+            {
+              "title": "Discours de Mariage et Toasts",
+              "description": "Estimer si un discours sincère a une longueur appropriée, car un toast qui dure trop longtemps peut perdre l'attention du public, peu importe la qualité de sa rédaction."
+            },
+            {
+              "title": "Écriture de Scripts Vidéo et Podcast",
+              "description": "Planifier la longueur d'un script par rapport à une durée cible de vidéo ou d'épisode avant l'enregistrement, pour éviter un remontage ou un réenregistrement conséquent par la suite."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi le débit de parole est-il plus lent que le rythme de lecture ?",
+              "answer": "Parler implique des contraintes physiques qui ne s'appliquent pas à la lecture silencieuse : vous devez respirer, articuler chaque son assez clairement pour être compris, et souvent faire une brève pause pour l'emphase ou pour laisser un point s'installer auprès du public. Rien de tout cela ne s'applique à la lecture silencieuse, ce qui explique pourquoi les débits de parole typiques (environ 110-170 MPM) sont bien inférieurs aux rythmes de lecture silencieuse typiques (environ 200-300 MPM)."
+            },
+            {
+              "question": "Quel préréglage devrais-je utiliser pour mon discours ?",
+              "answer": "Utilisez « Formel » pour une présentation mesurée et délibérée où la clarté compte plus que l'énergie (comme un discours d'ouverture formel), « Normal » pour une allocution conversationnelle typique, et « Rapide » pour une présentation énergique et rapide. Si vous avez une vidéo ou un enregistrement de vous-même en train de parler, chronométrer un nombre de mots connu par rapport à celui-ci vous donnera le débit le plus personnalisé à utiliser avec l'option Personnalisé."
+            },
+            {
+              "question": "Pourquoi mon temps de présentation réel diffère-t-il de l'estimation ?",
+              "answer": "Cet outil suppose un débit constant tout au long du discours, mais la présentation réelle varie naturellement : vous pourriez parler plus vite sur du matériel familier et plus lentement sur des points complexes, faire une pause pour les réactions du public ou les rires, ou prendre des pauses dramatiques délibérées. Considérez l'estimation comme une base de planification utile, pas une prédiction exacte."
+            },
+            {
+              "question": "Dois-je inclure les indications scéniques ou les notes dans le nombre de mots ?",
+              "answer": "Non — n'incluez que les mots que vous direz réellement à voix haute. Les indications scéniques, les repères de diapositives, ou les notes pour vous-même (comme « [pause pour les rires] ») ne sont pas prononcés, donc les inclure dans le texte gonflerait le nombre de mots et produirait une estimation de temps inexacte et trop longue."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "speakingVsReading": {
+            "title": "Débit de Parole vs. Rythme de Lecture",
+            "paragraph": "La recherche sur la parole spontanée et préparée a longtemps montré que le débit de parole est régi par des contraintes différentes de celles de la lecture silencieuse : le taux d'articulation (à quelle vitesse les sons sont physiquement produits), la fréquence et la durée des pauses (pour respirer, réfléchir, et souligner), et le besoin de rester intelligible pour un public qui écoute en temps réel et ne peut pas relire une phrase confuse comme le peut un lecteur. Ces facteurs combinés expliquent pourquoi les coachs en prise de parole et les guides de présentation recommandent systématiquement un débit dans la plage d'environ 100-170 mots par minute, bien en dessous des vitesses de lecture silencieuse typiques."
+          },
+          "limitations": {
+            "title": "Limites de Cette Estimation",
+            "paragraph": "Cet outil applique un débit fixe uniformément sur tout un texte, alors que la présentation réelle d'un discours varie naturellement avec l'emphase, les réactions du public, et la complexité du sujet abordé. Il ne tient pas non plus compte des pauses planifiées (comme une pause dramatique ou du temps pour que les diapositives soient assimilées) à moins que vous n'intégriez ce temps séparément, alors considérez le résultat comme une estimation de planification solide plutôt qu'une prédiction exacte au chronomètre."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'étude de la production et du débit de la parole est examinée en linguistique et en orthophonie. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "University College London — Division of Psychology and Language Sciences",
+                "note": "Un centre de premier plan pour la recherche sur la parole et le langage au Royaume-Uni.",
+                "url": "https://www.ucl.ac.uk/pals/research/speech-hearing-and-phonetic-sciences/postgraduate-study",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'UCL."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "Un centre de premier plan pour la science cognitive du traitement de la parole et du langage.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université d'Édimbourg — Centre for Speech Technology Research",
+                "note": "L'un des centres européens de premier plan dédiés spécifiquement à la recherche sur la parole.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université Northwestern — Roxelyn and Richard Pepper Department of Communication Sciences and Disorders",
+                "note": "Un programme de premier plan en orthophonie et sciences de la communication.",
+                "url": "https://communication.northwestern.edu/programs/phd-communication-sciences-disorders/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Theoretical and Applied Linguistics",
+                "note": "Un centre de premier plan pour la recherche en linguistique, y compris la production de la parole.",
+                "url": "https://www.mml.cam.ac.uk/dtal/research/graduate",
+                "online": "Non — les diplômes de recherche sont en présentiel au Department of Theoretical and Applied Linguistics."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'orthophonie",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fm/slp/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Goldman-Eisler, F. (1968). Psycholinguistics: Experiments in Spontaneous Speech. Academic Press.",
+          "note": "Une étude fondatrice en psycholinguistique de la production de la parole, y compris les schémas de timing, de pause, et de débit du langage parlé qui le distinguent de la lecture silencieuse.",
+          "url": "https://www.worldcat.org/title/psycholinguistics-experiments-in-spontaneous-speech/oclc/440680",
+          "readOriginal": "Consulter la Référence"
+        }
+      }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Calculatrice de Compte à Rebours d'Événement",
+      "description": "Un compte à rebours en direct jusqu'à une date et une heure de votre choix, se mettant à jour automatiquement en jours, heures, minutes, et secondes.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Événement",
+        "eventNameLabel": "Nom de l'Événement (Facultatif)",
+        "eventNamePlaceholder": "ex. Réveillon du Nouvel An",
+        "dateLabel": "Date",
+        "timeLabel": "Heure"
+      },
+      "result": {
+        "heading": "Compte à Rebours",
+        "noTarget": "Choisissez une date pour démarrer le compte à rebours.",
+        "invalidDate": "Saisissez une date et une heure valides.",
+        "countingDownTo": "Compte à rebours jusqu'à votre événement",
+        "elapsedSince": "Temps écoulé depuis votre événement",
+        "days": "Jours",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Le compte à rebours se met à jour automatiquement chaque seconde, directement dans votre navigateur — pas besoin de rafraîchir la page."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre Ce Compte à Rebours",
+          "paragraph1": "Cet outil calcule en continu la différence entre l'heure actuelle et une date et heure cible que vous choisissez, décomposant cette différence en jours, heures, minutes, et secondes, et actualisant l'affichage chaque seconde afin que le compte à rebours se mette à jour en direct sans jamais avoir besoin de recharger la page.",
+          "paragraph2": "Une fois le moment cible arrivé, le compte à rebours passe automatiquement au comptage vers le haut à la place, affichant le temps écoulé depuis l'événement — utile pour suivre les anniversaires, les jalons, ou simplement confirmer qu'un moment que vous attendiez avec impatience est effectivement passé."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Les comptes à rebours sont utiles partout où l'anticipation d'une date ou heure future spécifique fait partie de l'expérience.",
+          "items": [
+            {
+              "title": "Mariages, Lancements, et Échéances",
+              "description": "Suivre le temps restant jusqu'à une date de mariage, un lancement de produit, ou une échéance importante, créant de l'anticipation ou de l'urgence à mesure que la date approche."
+            },
+            {
+              "title": "Pages d'Événements et Invitations",
+              "description": "Ajouter un compte à rebours en direct à une annonce d'événement ou une invitation afin que les destinataires puissent voir exactement combien de temps il reste d'un coup d'œil."
+            },
+            {
+              "title": "Jalons Personnels",
+              "description": "Compter à rebours jusqu'à un anniversaire, un jubilé, une remise de diplôme, ou un voyage, ou compter vers le haut depuis un jalon déjà passé, comme une date de sobriété ou un anniversaire de relation."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Le compte à rebours continue-t-il de fonctionner si je laisse la page ouverte ?",
+              "answer": "Oui — tant que la page reste ouverte dans votre navigateur, le compte à rebours se met à jour automatiquement chaque seconde sans aucune action de votre part, puisqu'il est calculé en direct à l'aide de l'horloge de votre appareil."
+            },
+            {
+              "question": "Que se passe-t-il lorsque le compte à rebours atteint zéro ?",
+              "answer": "L'outil passe automatiquement au comptage vers le haut, affichant le temps écoulé depuis le moment cible au lieu du temps restant, afin que l'affichage reste significatif même après que l'événement soit passé."
+            },
+            {
+              "question": "Quel fuseau horaire cet outil utilise-t-il ?",
+              "answer": "Le compte à rebours utilise le fuseau horaire local de votre appareil à la fois pour la date/heure cible que vous saisissez et pour l'heure actuelle à laquelle il se compare, de sorte que le compte à rebours soit toujours précis où que vous soyez personnellement, et non un fuseau horaire de référence fixe."
+            },
+            {
+              "question": "Pourquoi le compte à rebours affiche-t-il brièvement 0 au premier chargement de la page ?",
+              "answer": "Le tout premier rendu se produit avant que l'horloge de votre navigateur n'ait été lue, afin d'éviter une incohérence entre la façon dont la page est initialement générée et ce que votre navigateur affiche réellement. Cela se résout en une seconde lorsque l'horloge en direct prend le relais, ce qui est une technique standard pour tout ce qui affiche l'heure actuelle sur le web."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La convention dramatique du compte à rebours — compter à rebours vers zéro avant un moment significatif — est souvent attribuée au film de science-fiction muet de Fritz Lang de 1929 « Frau im Mond » (« La Femme sur la Lune »), l'une des premières utilisations connues d'un compte à rebours numéroté pour créer du suspense avant le lancement d'une fusée. La convention s'est avérée si efficace dramatiquement que de véritables ingénieurs de fusées et planificateurs de mission l'ont ensuite adoptée pour de vrais lancements, et elle est depuis devenue un symbole universel d'anticipation pour tout moment futur significatif, bien au-delà de ses origines dans le vol spatial."
+          },
+          "howItWorks": {
+            "title": "Comment le Compte à Rebours Est Calculé",
+            "paragraph": "En coulisses, cet outil convertit à la fois le moment actuel et votre date cible choisie en un seul nombre : les millisecondes écoulées depuis un point de référence fixe appelé l'époque Unix (minuit, le 1er janvier 1970, UTC), qui est la façon dont les ordinateurs représentent les dates et heures en interne. Soustraire un nombre de l'autre donne la différence de temps exacte en millisecondes, qui est ensuite divisée en jours, heures, minutes, et secondes pour un affichage lisible par l'humain."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'histoire de la mesure du temps et de ses conventions culturelles est étudiée au sein de l'histoire des sciences et des études médiatiques. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université de Harvard — Department of the History of Science",
+                "note": "L'un des programmes les plus reconnus au monde pour l'histoire des sciences et de la technologie.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of History and Philosophy of Science",
+                "note": "Un centre de premier plan pour l'histoire et la philosophie des sciences.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "Non — les diplômes de recherche sont en présentiel au Department of History and Philosophy of Science."
+              },
+              {
+                "name": "Université de Princeton — Program in History of Science",
+                "note": "Un programme de premier plan pour l'étude de l'histoire des sciences et de la technologie.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Californie du Sud — School of Cinematic Arts",
+                "note": "L'une des écoles de cinéma les plus reconnues au monde, avec une solide érudition en histoire et théorie du cinéma.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de New York — Department of Cinema Studies",
+                "note": "Un programme de premier plan pour l'étude académique de l'histoire du cinéma.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'histoire et d'archéologie",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références",
+          "citation": "Lang, F. (Réalisateur). (1929). Frau im Mond [Film]. Universum Film AG (UFA).",
+          "note": "Le film muet de 1929 largement crédité par les historiens de l'espace d'avoir popularisé le compte à rebours numéroté dramatique avant un lancement, une convention adoptée plus tard par la véritable culture de la fusée et du contrôle de mission.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "Consulter la Recherche du Musée"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19251,38 +20797,30 @@
     "pregnancy-calendar": "Calculatrice de grossesse semaine par semaine",
     "random-name-generator": "Générateur de noms aléatoires",
     "golden-ratio-calculator": "Calculatrice du nombre d'or",
-    "reading-time-calculator": "Calculatrice de temps de lecture",
     "cagr-calculator": "Calculatrice de TCAC",
     "personal-budget-calculator": "Calculatrice de budget personnel",
     "present-future-value-calculator": "Calculatrice de valeur actuelle/future",
     "body-fat-calculator": "Calculatrice de taux de graisse corporelle",
     "calories-burned-calculator": "Calculatrice de calories brûlées",
     "passphrase-generator": "Générateur de phrases de passe",
-    "roman-numeral-converter": "Convertisseur de chiffres romains",
     "quadratic-equation-calculator": "Calculatrice d'équation quadratique",
     "trigonometry-calculator": "Calculatrice de trigonométrie",
     "gcf-lcm-calculator": "Calculatrice PGCD/PPCM",
     "qr-generator-extended": "Générateur de QR code avancé",
-    "countdown-to-event-calculator": "Compte à rebours vers un événement",
     "historical-currency-converter": "Convertisseur de devises historiques",
-    "lorem-ipsum-generator": "Générateur de Lorem Ipsum",
     "typing-speed-calculator": "Calculatrice de vitesse de frappe",
     "energy-conversion-calculator": "Calculatrice de conversion d'énergie",
     "pressure-conversion-calculator": "Calculatrice de conversion de pression",
     "aspect-ratio-calculator": "Calculatrice de ratio d'aspect",
-    "multiplication-table-generator": "Générateur de table de multiplication",
     "bill-split-calculator": "Calculatrice de partage de facture",
     "zakat-calculator": "Calculatrice de zakat",
     "advanced-temperature-converter": "Convertisseur de température avancé",
     "triangle-angle-calculator": "Calculatrice d'angle de triangle",
     "stacked-discount-calculator": "Calculatrice de remises cumulées",
-    "text-logo-generator": "Générateur de logo texte",
-    "speech-word-count-calculator": "Calculatrice de mots pour discours",
     "chinese-zodiac-age-calculator": "Calculatrice d'âge du zodiaque chinois",
     "zodiac-sign-calculator": "Calculatrice de signe du zodiaque",
     "steps-to-calories-calculator": "Calculatrice de pas en calories",
     "heat-index-calculator": "Calculatrice d'indice de chaleur",
-    "random-quote-generator": "Générateur de citations aléatoires",
     "tree-age-calculator": "Calculatrice d'âge d'un arbre",
     "hijri-gregorian-quick-converter": "Convertisseur rapide hégirien/grégorien",
     "iq-estimate-calculator": "Estimation de QI",
@@ -19309,11 +20847,8 @@
     "image-to-base64-converter": "Convertisseur d'image en Base64",
     "certificate-generator": "Générateur de certificats",
     "smart-video-compressor": "Compresseur vidéo intelligent",
-    "text-to-speech": "Synthèse vocale (texte vers parole)",
-    "speech-to-text": "Reconnaissance vocale (parole vers texte)",
     "smart-image-compression": "Compression d'image intelligente",
     "background-remover": "Suppresseur d'arrière-plan d'image",
-    "spelling-grammar-checker": "Correcteur d'orthographe et de grammaire",
     "text-summarizer": "Résumeur de texte",
     "image-upscaler": "Amélioration de résolution d'image",
     "plagiarism-checker": "Détecteur de plagiat",

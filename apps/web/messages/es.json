@@ -259,6 +259,10 @@
     "website-tools": {
       "title": "Sitios Web",
       "description": "Widgets integrables y utilidades para propietarios y creadores de sitios web."
+    },
+    "fun-entertainment": {
+      "title": "Diversión y Entretenimiento",
+      "description": "Dados, juegos y calculadoras divertidas solo para fines de entretenimiento."
     }
   },
   "tools": {
@@ -19108,6 +19112,1548 @@
           "readOriginal": "Ver Lecturas Adicionales"
         }
       }
+    },
+    "text-to-speech": {
+      "title": "Texto a Voz",
+      "description": "Convierte texto escrito en audio hablado usando la síntesis de voz integrada en tu navegador. Sin cuenta, sin servidor, sin costo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "unsupported": "Tu navegador no admite síntesis de voz. Prueba una versión reciente de Chrome, Edge o Safari.",
+        "textLabel": "Texto a leer",
+        "textPlaceholder": "Escribe o pega texto aquí, luego presiona Hablar.",
+        "voiceLabel": "Voz",
+        "rateLabel": "Velocidad",
+        "pitchLabel": "Tono",
+        "speak": "Hablar",
+        "pause": "Pausar",
+        "resume": "Reanudar",
+        "stop": "Detener"
+      },
+      "result": {
+        "heading": "Reproducción",
+        "status": {
+          "idle": "Listo para leer tu texto.",
+          "speaking": "Hablando...",
+          "paused": "Pausado."
+        },
+        "characterCountLabel": "Caracteres",
+        "chunkCountLabel": "Fragmentos de Voz"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "Las voces disponibles y su calidad dependen completamente de tu navegador y sistema operativo."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Texto a Voz Basado en el Navegador",
+          "paragraph1": "Esta herramienta usa la interfaz SpeechSynthesis de la Web Speech API, una función integrada directamente en los navegadores web modernos que convierte texto en audio hablado sin enviar nada a un servidor. Cuando presionas Hablar, el propio motor de texto a voz de tu navegador —el mismo que usan las funciones de accesibilidad de tu sistema operativo— lee el texto en voz alta usando una de las voces instaladas en tu dispositivo. Como todo sucede localmente, no hay costo por carácter, ni cuenta, ni solicitud de red involucrada en la generación del habla.",
+          "paragraph2": "El texto largo se divide automáticamente en fragmentos más cortos en los límites de las oraciones antes de ponerse en cola para el habla, ya que algunos navegadores manejan de forma poco fiable enunciados individuales muy largos. El control de velocidad ajusta qué tan rápido habla la voz (un multiplicador de la velocidad normal de la voz), mientras que el tono ajusta qué tan alta o baja suena la voz, independientemente de la velocidad —ambos corresponden directamente a las propiedades `rate` y `pitch` definidas por la especificación subyacente de la Web Speech API."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "El texto a voz es útil en cualquier lugar donde leer texto en voz alta ahorre tiempo o mejore la accesibilidad.",
+          "items": [
+            {
+              "title": "Corrección de Pruebas de Oído",
+              "description": "Escuchar un borrador leído en voz alta a menudo detecta frases incómodas o palabras faltantes que son fáciles de pasar por alto al leer solo en silencio."
+            },
+            {
+              "title": "Accesibilidad",
+              "description": "Hacer que el contenido escrito sea accesible para personas con discapacidad visual, dificultades de lectura, o cualquiera que prefiera escuchar en lugar de leer."
+            },
+            {
+              "title": "Multitarea",
+              "description": "Hacer que se lea un artículo, correo electrónico o documento en voz alta mientras se hace otra cosa, como conducir o cocinar."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Esto envía mi texto a un servidor?",
+              "answer": "No. Toda la síntesis de voz ocurre localmente en tu navegador usando la Web Speech API integrada —tu texto nunca sale de tu dispositivo ni se envía a ningún lugar."
+            },
+            {
+              "question": "¿Por qué no veo muchas opciones de voz?",
+              "answer": "Las voces disponibles provienen completamente de tu sistema operativo y navegador, no de esta herramienta. Instalar voces de sistema adicionales (en la configuración de idioma o accesibilidad de tu SO) hará que aparezcan más opciones aquí."
+            },
+            {
+              "question": "¿Por qué mi navegador dice que la síntesis de voz no es compatible?",
+              "answer": "Un pequeño número de navegadores más antiguos o menos comunes no implementan en absoluto la interfaz SpeechSynthesis de la Web Speech API. Prueba una versión reciente de Chrome, Edge, Safari o Firefox."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre velocidad y tono?",
+              "answer": "La velocidad (rate) controla qué tan rápido se pronuncian las palabras —valores más altos hablan más rápido. El tono controla qué tan alta o baja suena la voz, similar a subir o bajar tu propia voz, independientemente de qué tan rápido estés hablando."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La investigación en síntesis de voz se remonta a la década de 1930 con el Voder de los Laboratorios Bell, un sintetizador de voz electrónico temprano operado manualmente por un técnico capacitado. El texto a voz basado en software maduró a lo largo de las décadas siguientes, y para la década de 2010 era lo suficientemente común en los sistemas operativos de escritorio y móviles que el W3C estandarizó una forma para que las páginas web accedieran a él directamente: la Web Speech API, publicada por primera vez como un informe comunitario preliminar en 2012. Esto permitió a los sitios web activar el motor de voz existente de un dispositivo a través de JavaScript, en lugar de requerir que cada sitio incluyera su propia tecnología de voz."
+          },
+          "browserSupport": {
+            "title": "Compatibilidad con Navegadores",
+            "paragraph": "La compatibilidad con la interfaz SpeechSynthesis varía según el navegador y el sistema operativo, ya que cada navegador finalmente llama al motor de voz ya instalado en el dispositivo en lugar de incluir el suyo propio. Esto significa que la lista exacta de voces disponibles, y su calidad, difiere entre una PC con Windows, una Mac y un teléfono móvil, incluso dentro del mismo navegador —esta herramienta simplemente expone las voces que tu dispositivo específico ya tiene instaladas."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La síntesis de voz se estudia dentro de las ciencias de la computación, específicamente en el procesamiento del habla y el lenguaje. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad Carnegie Mellon — Language Technologies Institute",
+                "note": "Uno de los centros líderes en el mundo en investigación de procesamiento del habla y el lenguaje.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centro líder en investigación de habla, lenguaje e IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — el doctorado es un programa de investigación presencial dentro de EECS."
+              },
+              {
+                "name": "Universidad de Edimburgo — Centre for Speech Technology Research",
+                "note": "Uno de los centros europeos líderes dedicados específicamente a la investigación de tecnología del habla.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en procesamiento del lenguaje natural.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centro líder en investigación de tecnología del habla y el lenguaje.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ingeniería."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "W3C Community Group. (2012-presente). Web Speech API Specification.",
+          "note": "La especificación técnica oficial que define las interfaces SpeechSynthesis y SpeechRecognition en las que se basa esta herramienta.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Ver la Especificación"
+        }
+      }
+    },
+    "speech-to-text": {
+      "title": "Voz a Texto",
+      "description": "Convierte audio hablado desde tu micrófono en texto escrito usando el reconocimiento de voz integrado en tu navegador. Sin cuenta, sin servidor, sin costo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Entrada de Voz",
+        "unsupported": "Tu navegador no admite reconocimiento de voz. Prueba una versión reciente de Chrome o Edge.",
+        "privacyNotice": "Esta función necesita acceso al micrófono, que tu navegador solicitará. Todo el audio se procesa localmente en tu navegador — nada se graba ni se envía jamás a un servidor.",
+        "micDenied": "Se denegó el acceso al micrófono. Revisa la configuración del sitio en tu navegador para permitir el acceso al micrófono en esta página.",
+        "languageLabel": "Idioma",
+        "startListening": "Empezar a Escuchar",
+        "stopListening": "Dejar de Escuchar",
+        "clear": "Borrar"
+      },
+      "result": {
+        "heading": "Transcripción",
+        "status": {
+          "idle": "Presiona Empezar a Escuchar y comienza a hablar.",
+          "listening": "Escuchando...",
+          "denied": "Acceso al micrófono denegado."
+        },
+        "emptyTranscript": "Tu texto transcrito aparecerá aquí.",
+        "wordCountLabel": "Palabras"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "La precisión del reconocimiento y los idiomas disponibles dependen completamente de tu navegador y sistema operativo."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Reconocimiento de Voz Basado en el Navegador",
+          "paragraph1": "Esta herramienta usa la interfaz SpeechRecognition de la Web Speech API, una función integrada directamente en algunos navegadores web modernos que convierte el audio hablado de tu micrófono en texto. Cuando presionas Empezar a Escuchar, tu navegador solicita permiso de micrófono, luego transmite tu voz a su propio motor de reconocimiento de voz para producir una transcripción —esta herramienta nunca graba, almacena, ni transmite tu audio a ningún servidor.",
+          "paragraph2": "Los resultados del reconocimiento de voz llegan en dos formas: resultados provisionales, que se actualizan continuamente mientras hablas y pueden cambiar, y resultados finales, que quedan fijos una vez que el reconocedor tiene la confianza de que una frase está completa. Esta herramienta muestra el texto provisional tenuemente mientras escucha y confirma cada segmento final en la transcripción permanente, uniendo segmentos y capitalizando automáticamente el inicio de cada oración para mejorar la legibilidad."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "La voz a texto es útil en cualquier lugar donde escribir sea más lento o menos conveniente que hablar.",
+          "items": [
+            {
+              "title": "Toma de Notas por Voz",
+              "description": "Capturar rápidamente ideas o notas hablándolas en voz alta en lugar de escribirlas, especialmente útil cuando tienes las manos ocupadas."
+            },
+            {
+              "title": "Accesibilidad",
+              "description": "Hacer que la entrada de texto sea accesible para personas que tienen dificultad para escribir debido a discapacidades motoras u otras condiciones."
+            },
+            {
+              "title": "Redactar Texto Más Rápido",
+              "description": "Hablar un borrador aproximado de un correo electrónico o mensaje en voz alta para poner las palabras rápidamente, y luego editar el texto transcrito después."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Se graba mi voz o se envía a algún lugar?",
+              "answer": "No. Esta herramienta nunca graba ni sube tu audio. Tu navegador procesa tu voz localmente (o a través de su propio servicio de reconocimiento integrado) puramente para producir el texto que ves —esta página nunca almacena ni transmite el audio en sí."
+            },
+            {
+              "question": "¿Por qué mi navegador pide permiso de micrófono?",
+              "answer": "El reconocimiento de voz requiere acceso a tu micrófono para escuchar lo que dices. Tu navegador maneja esta solicitud de permiso directamente, y puedes revocarla en cualquier momento en la configuración del sitio de tu navegador."
+            },
+            {
+              "question": "¿Por qué dice que el reconocimiento de voz no es compatible?",
+              "answer": "La interfaz SpeechRecognition tiene una compatibilidad de navegadores más limitada que el texto a voz. Funciona bien en Chrome y Edge, pero Firefox y Safari históricamente han tenido soporte parcial o nulo. Prueba una versión reciente de Chrome o Edge."
+            },
+            {
+              "question": "¿Por qué la transcripción se equivoca con algunas palabras?",
+              "answer": "La precisión del reconocimiento de voz depende de la calidad de tu micrófono, el ruido de fondo, tu acento, y el propio motor de reconocimiento —nada de lo cual controla esta herramienta, ya que el reconocimiento real ocurre dentro de tu navegador o sistema operativo."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La investigación en reconocimiento automático de voz se remonta al sistema \"Audrey\" de los Laboratorios Bell de 1952, que podía reconocer dígitos hablados de un solo interlocutor. El progreso se aceleró en las décadas siguientes con técnicas de modelado estadístico, y para la década de 2010, el reconocimiento de voz conectado a la nube se había vuelto común en los teléfonos inteligentes. La Web Speech API del W3C, publicada por primera vez como un informe comunitario preliminar en 2012, estandarizó una forma para que las páginas web solicitaran reconocimiento de voz basado en micrófono directamente a través de JavaScript, junto con su interfaz complementaria SpeechSynthesis para texto a voz."
+          },
+          "privacy": {
+            "title": "Privacidad y Permisos",
+            "paragraph": "Debido a que el reconocimiento de voz requiere acceso al micrófono, los navegadores lo tratan como un permiso sensible que debe ser otorgado explícitamente por el usuario para cada sitio, y puede revocarse en cualquier momento. Esta herramienta solicita ese permiso solo cuando presionas Empezar a Escuchar, y nunca graba ni almacena tu audio —el audio se procesa solo para generar una transcripción de texto, exactamente como sucedería con cualquier otra función del navegador que use reconocimiento de voz, como la búsqueda por voz o los asistentes de voz."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El reconocimiento de voz se estudia dentro de las ciencias de la computación, específicamente en el procesamiento del habla y el lenguaje. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad Carnegie Mellon — Language Technologies Institute",
+                "note": "Uno de los centros líderes en el mundo en investigación de procesamiento del habla y el lenguaje.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centro líder en investigación de habla, lenguaje e IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — el doctorado es un programa de investigación presencial dentro de EECS."
+              },
+              {
+                "name": "Universidad de Edimburgo — Centre for Speech Technology Research",
+                "note": "Uno de los centros europeos líderes dedicados específicamente a la investigación de tecnología del habla.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en procesamiento del lenguaje natural.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centro líder en investigación de tecnología del habla y el lenguaje.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ingeniería."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "W3C Community Group. (2012-presente). Web Speech API Specification.",
+          "note": "La especificación técnica oficial que define las interfaces SpeechRecognition y SpeechSynthesis en las que se basa esta herramienta.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Ver la Especificación"
+        }
+      }
+    },
+    "spelling-grammar-checker": {
+      "title": "Corrector Ortográfico y Gramatical",
+      "description": "Verifica el texto en busca de errores ortográficos comunes y problemas gramaticales básicos, completamente en tu navegador. Sin cuenta, sin servidor, sin costo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "textLabel": "Texto a verificar",
+        "textPlaceholder": "Escribe o pega tu texto aquí para verificarlo mientras avanzas.",
+        "disclaimer": "Este es un corrector básico basado en reglas, no un asistente de escritura de IA completo — detecta errores comunes pero no lo detectará todo.",
+        "clear": "Borrar"
+      },
+      "result": {
+        "heading": "Resultados",
+        "emptyText": "Empieza a escribir para ver sugerencias ortográficas y gramaticales.",
+        "wordCountLabel": "Palabras",
+        "issueCountLabel": "Problemas Encontrados",
+        "suggestion": "Sugerido:"
+      },
+      "quickReference": {
+        "title": "Leyenda de Colores",
+        "intro": "Cada color de subrayado marca un tipo diferente de problema.",
+        "legend": {
+          "spelling": "Ortografía",
+          "grammar": "Gramática",
+          "capitalization": "Mayúsculas",
+          "punctuation": "Puntuación y Espaciado"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Entender Este Corrector",
+          "paragraph1": "Esta herramienta escanea tu texto usando un conjunto de reglas integradas directamente en el JavaScript de tu navegador: una lista de palabras comúnmente mal escritas, y comprobaciones de coincidencia de patrones para cosas como falta de mayúscula al inicio de una oración, palabras repetidas, espacios dobles, espacios faltantes después de la puntuación, y algunas confusiones gramaticales comunes como \"a\" versus \"an\" en inglés. Todo se ejecuta localmente mientras escribes —nada se envía jamás a un servidor.",
+          "limitation": "Importante: este es un corrector básico basado en reglas, no un asistente de escritura completo impulsado por IA. Está diseñado para detectar un conjunto específico de errores comunes e inequívocos, no para entender el contexto, el tono, o el estilo como lo hacen herramientas avanzadas como Grammarly. Siempre haz tu propia revisión final del texto."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Un corrector gramatical básico es útil en cualquier lugar donde un repaso rápido de errores obvios ayude antes de enviar o publicar texto.",
+          "items": [
+            {
+              "title": "Correos y Mensajes Rápidos",
+              "description": "Detectar un error tipográfico obvio o una mayúscula faltante antes de enviar un correo electrónico o mensaje rápido."
+            },
+            {
+              "title": "Redacción de Primer Borrador",
+              "description": "Hacer un primer repaso de un borrador para detectar errores mecánicos antes de hacer una revisión más completa de contenido y estilo."
+            },
+            {
+              "title": "Aprender Errores Comunes",
+              "description": "Ver palabras frecuentemente confundidas y errores mecánicos marcados puede ayudar a reforzar el uso correcto con el tiempo."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Es esto tan bueno como Grammarly u otras herramientas de escritura con IA?",
+              "answer": "No, y no pretende serlo. Esta herramienta usa un pequeño conjunto de reglas de coincidencia de patrones directas, mientras que herramientas como Grammarly usan grandes modelos de lenguaje entrenados para entender contexto, tono, y estilo. Este corrector detecta errores mecánicos específicos y comunes —piénsalo como un útil primer repaso, no un editor completo."
+            },
+            {
+              "question": "¿Esto envía mi texto a algún lugar?",
+              "answer": "No. Toda la verificación ocurre localmente en tu navegador usando JavaScript que se ejecuta en esta página —tu texto nunca se envía a un servidor ni se almacena en ningún lugar."
+            },
+            {
+              "question": "¿Por qué no detectó un error que sé que está ahí?",
+              "answer": "Este corrector solo busca un conjunto específico y limitado de patrones: una lista fija de palabras comúnmente mal escritas y un puñado de reglas gramaticales. No tiene un diccionario completo ni ninguna comprensión del significado, por lo que pasará por alto errores de palabras reales (como usar \"their\" en lugar de \"there\") y errores fuera de su conjunto de reglas."
+            },
+            {
+              "question": "¿Por qué marcó algo que en realidad es correcto?",
+              "answer": "Las reglas son coincidencias de patrones intencionalmente simples, por lo que ocasionalmente pueden producir un falso positivo —por ejemplo, la comprobación de \"a\" versus \"an\" se basa en la primera letra de la siguiente palabra, que generalmente pero no siempre coincide con cómo suena realmente la palabra. Usa tu propio criterio junto con las sugerencias."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La corrección ortográfica automatizada se remonta a 1971, cuando Ralph Gorin creó uno de los primeros programas de corrección ortográfica en Stanford. A finales de la década de 1970, herramientas como el comando \"spell\" de Unix y el proyecto Epistle de IBM comparaban las palabras de los documentos con listas de palabras de diccionario para señalar posibles errores tipográficos, la misma idea fundamental detrás de la comprobación ortográfica de esta herramienta. La corrección gramatical siguió un camino similar a partir de la década de 1980 (Writer's Workbench y Grammatik entre los primeros), usando reglas de coincidencia de patrones muy similares a las que esta herramienta usa hoy, antes de que las herramientas modernas basadas en IA trajeran una comprensión contextual profunda a la tarea décadas después."
+          },
+          "howItWorks": {
+            "title": "Cómo Funciona la Verificación Basada en Reglas",
+            "paragraph": "Los correctores basados en reglas como este funcionan escaneando el texto en busca de patrones específicos y bien definidos usando expresiones regulares y tablas de búsqueda, en lugar de entender el significado. Una comprobación ortográfica simplemente compara cada palabra con una lista de ortografías incorrectas conocidas; una comprobación de mayúsculas busca una letra minúscula inmediatamente después de un punto que termina una oración; y así sucesivamente. Este enfoque es rápido, completamente predecible, y no requiere ningún servicio externo, pero está inherentemente limitado a los patrones específicos que ha sido programado para reconocer —a diferencia de los correctores estadísticos o basados en IA, que pueden detectar errores que nadie anticipó explícitamente."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La verificación automatizada de texto se estudia dentro de las ciencias de la computación, específicamente en el procesamiento del lenguaje natural. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en procesamiento del lenguaje natural.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Carnegie Mellon — Language Technologies Institute",
+                "note": "Uno de los centros líderes en el mundo en investigación de procesamiento del lenguaje natural.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Sede de un grupo de investigación líder en procesamiento del lenguaje natural.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centro líder en investigación de lingüística computacional y tecnología del lenguaje.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ciencias de la Computación y Tecnología."
+              },
+              {
+                "name": "Universidad de Edimburgo — School of Informatics",
+                "note": "Uno de los centros europeos líderes en investigación de procesamiento del lenguaje natural.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "Una explicación técnica ampliamente citada y disponible gratuitamente de cómo funcionan los algoritmos de corrección ortográfica, desde búsquedas simples en diccionarios hasta modelos de corrección estadísticos.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "Ver el Artículo"
+        }
+      }
+    },
+    "roman-numeral-converter": {
+      "title": "Convertidor de Números Romanos",
+      "description": "Convierte entre números arábigos y números romanos en ambas direcciones.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Convertir un Número",
+        "toRoman": "A Romano",
+        "toArabic": "A Arábigo",
+        "arabicLabel": "Número (1-3999)",
+        "arabicHint": "Los números romanos estándar solo representan números enteros del 1 al 3999.",
+        "romanLabel": "Número Romano"
+      },
+      "result": {
+        "heading": "Resultado",
+        "emptyInput": "Introduce un valor para convertir.",
+        "outOfRange": "Introduce un número entero entre 1 y 3999.",
+        "invalidRoman": "Eso no es un número romano estándar válido."
+      },
+      "quickReference": {
+        "title": "Símbolos Romanos",
+        "intro": "Los siete símbolos básicos y sus valores."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender los Números Romanos",
+          "paragraph1": "Los números romanos representan cantidades usando combinaciones de siete letras: I (1), V (5), X (10), L (50), C (100), D (500), y M (1000). Los números se construyen combinando estos símbolos y sumando sus valores, generalmente de mayor a menor, leyendo de izquierda a derecha —así que VII es 5 + 1 + 1 = 7.",
+          "paragraph2": "Una regla especial \"sustractiva\" acorta algunas combinaciones: en lugar de escribir cuatro veces el mismo símbolo seguido (como IIII para 4), se coloca un símbolo más pequeño antes de uno más grande para indicar resta —IV significa 5 − 1 = 4, y IX significa 10 − 1 = 9. Esta notación sustractiva solo se usa para pares específicos (IV, IX, XL, XC, CD, CM), lo que permite que esta herramienta rechace números inválidos como IIII o VX que no siguen las reglas estándar."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Los números romanos todavía aparecen en contextos específicos, en su mayoría tradicionales o estilísticos hoy en día.",
+          "items": [
+            {
+              "title": "Esferas de Reloj y Fechas",
+              "description": "Muchas esferas de reloj, piedras angulares de edificios, y fechas de derechos de autor en películas todavía usan números romanos para una apariencia tradicional o formal."
+            },
+            {
+              "title": "Secuelas, Volúmenes, y Esquemas",
+              "description": "Las secuelas de películas (Rocky IV), los volúmenes de libros, y los subtítulos de esquemas comúnmente usan números romanos para indicar secuencia."
+            },
+            {
+              "title": "Nombres y Títulos",
+              "description": "Los monarcas, papas, y nombres de familia transmitidos a través de generaciones (Rey Enrique VIII, John Smith III) usan números romanos para distinguir individuos sucesivos que comparten un nombre."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Ejemplos Resueltos",
+          "intro": "Algunas conversiones, calculadas de la misma forma en que esta herramienta las calcula.",
+          "columnArabic": "Arábigo",
+          "columnRoman": "Romano",
+          "rows": [
+            {
+              "arabic": "4",
+              "roman": "IV"
+            },
+            {
+              "arabic": "49",
+              "roman": "XLIX"
+            },
+            {
+              "arabic": "1994",
+              "roman": "MCMXCIV"
+            },
+            {
+              "arabic": "3999",
+              "roman": "MMMCMXCIX"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué no puedo convertir números mayores que 3999?",
+              "answer": "Los números romanos estándar no tienen símbolo para 5000 o más, por lo que 3999 (MMMCMXCIX) es el número más grande expresable con las siete letras tradicionales. Históricamente, los números más grandes a veces se escribían con una barra horizontal sobre un símbolo para multiplicar su valor por 1000, pero esa notación extendida no es parte del sistema estándar que admite esta herramienta."
+            },
+            {
+              "question": "¿Por qué a veces se ve IIII en los relojes en lugar de IV?",
+              "answer": "Aunque IV es la forma sustractiva estándar para 4, muchas esferas de reloj tradicionalmente usan IIII en su lugar, en gran parte por simetría visual con el VIII en el lado opuesto de la esfera y por razones históricas/estéticas. Esta herramienta sigue la convención matemática estándar (IV), no la convención de las esferas de reloj."
+            },
+            {
+              "question": "¿Existe un número romano para el cero?",
+              "answer": "No. El sistema de numeración romana no tiene símbolo para el cero —fue diseñado para contar y registrar cantidades, no para el tipo de aritmética posicional que requiere un marcador de posición cero, razón por la cual el rango de esta herramienta comienza en 1."
+            },
+            {
+              "question": "¿Por qué el convertidor rechaza algunos números romanos que escribo?",
+              "answer": "Esta herramienta solo acepta números romanos estándar y formados canónicamente. Rechaza números que no siguen las reglas sustractivas estándar (como IIII, VX, o IC), ya que esos no se consideran válidos en el sistema tradicional, aunque una suma ingenua letra por letra pudiera producir un número que parezca plausible."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "Los números romanos se originaron en la antigua Roma, evolucionando a partir de símbolos numéricos etruscos comenzando alrededor del siglo VIII a.C. El sistema fue diseñado para el conteo práctico y el registro usando marcas similares a marcas de conteo —I, II, III para cantidades pequeñas, con símbolos adicionales añadidos para números redondos más grandes. Siguió siendo el sistema numérico dominante en toda Europa durante más de mil años, hasta bien entrada la Edad Media, incluso después de que el sistema de numeración indo-arábigo, computacionalmente más conveniente (los dígitos 0-9 usados hoy), comenzara a extenderse desde la India a través del mundo islámico a partir del siglo IX."
+          },
+          "modernUse": {
+            "title": "Por Qué Todavía los Usamos Hoy",
+            "paragraph": "Los números romanos persistieron mucho después de que los números indo-arábigos se convirtieran en el estándar para el cálculo porque sirven a un propósito diferente: formalidad, tradición, y marcado de secuencia en lugar de aritmética. Dado que los números romanos son engorrosos para la suma, resta, y especialmente la multiplicación en comparación con el sistema posicional indo-arábigo, se fueron reservando gradualmente para contextos donde la tradición o la distinción visual importan más que el cálculo —los usos modernos específicos cubiertos anteriormente."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La historia de los sistemas numéricos se estudia dentro de la historia de las matemáticas. Estos son cinco programas de matemáticas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Matemáticas",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford — Instituto Matemático",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Facultad de Matemáticas",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Harvard — Departamento de Matemáticas",
+                "note": "Nº 4 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Matemáticas",
+                "note": "Nº 5 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — el programa es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Ifrah, G. (2000). The Universal History of Numbers: From Prehistory to the Invention of the Computer. Wiley.",
+          "note": "Una historia académica integral de los sistemas numéricos a través de las civilizaciones, incluyendo el desarrollo y la difusión de los números romanos.",
+          "url": "https://archive.org/details/universalhistory0000ifra",
+          "readOriginal": "Ver la Referencia"
+        }
+      }
+    },
+    "reading-time-calculator": {
+      "title": "Calculadora de Tiempo de Lectura",
+      "description": "Estima cuánto tiempo llevará leer un texto a una velocidad de lectura determinada.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "textLabel": "Texto a estimar",
+        "textPlaceholder": "Pega o escribe tu texto aquí.",
+        "speedLabel": "Velocidad de Lectura",
+        "presets": {
+          "slow": "Lenta",
+          "average": "Promedio",
+          "fast": "Rápida",
+          "custom": "Personalizada"
+        },
+        "customWpmLabel": "Palabras por Minuto"
+      },
+      "result": {
+        "heading": "Tiempo de Lectura Estimado",
+        "emptyText": "Introduce algún texto para estimar su tiempo de lectura.",
+        "invalidRate": "Introduce una velocidad de lectura entre 1 y 1000 palabras por minuto.",
+        "timeMinutesSeconds": "{minutes} min {seconds} seg",
+        "timeSecondsOnly": "{seconds} seg",
+        "wordCountLabel": "Recuento de Palabras"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "El tiempo de lectura es simplemente el recuento de palabras dividido por cuántas palabras lees por minuto."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender las Estimaciones de Tiempo de Lectura",
+          "paragraph1": "Estimar el tiempo de lectura se reduce a una simple división: el número total de palabras en un texto dividido por una velocidad de lectura expresada en palabras por minuto (PPM). Esta herramienta ofrece tres ajustes de velocidad comunes —lenta (150 PPM), promedio (230 PPM), y rápida (300 PPM)— basados en rangos típicos encontrados en la investigación de velocidad de lectura para la lectura silenciosa de adultos de prosa en inglés, además de una opción personalizada para tu propia velocidad medida.",
+          "paragraph2": "La velocidad de lectura varía enormemente entre individuos y depende en gran medida del tipo de material: un artículo técnico lleno de términos desconocidos se lee mucho más lentamente que una novela casual, y hojear es mucho más rápido que leer para comprensión completa o leer en voz alta. Por lo tanto, la estimación de esta herramienta es una aproximación razonable para prosa sencilla a una velocidad dada, no una predicción precisa para ningún lector específico o ninguna pieza de escritura específica."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Las estimaciones de tiempo de lectura son útiles en cualquier lugar donde los lectores se beneficien de saber cuánto tiempo reservar.",
+          "items": [
+            {
+              "title": "Publicaciones de Blog y Artículos",
+              "description": "Mostrar una etiqueta estimada de \"5 min de lectura\" ayuda a los lectores a decidir si sumergirse ahora o guardar un artículo para más tarde."
+            },
+            {
+              "title": "Preparación de Reuniones y Presentaciones",
+              "description": "Estimar cuánto tiempo le tomará a una audiencia leer un folleto o una diapositiva de texto antes de continuar."
+            },
+            {
+              "title": "Planificación de Estudio",
+              "description": "Presupuestar aproximadamente el tiempo de estudio para una tarea de lectura según su recuento de palabras y tu velocidad de lectura típica."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Qué velocidad de lectura debo usar?",
+              "answer": "La velocidad promedio de lectura silenciosa de adultos para prosa en inglés se cita comúnmente en torno a 200-250 palabras por minuto, razón por la cual el ajuste \"Promedio\" de esta herramienta usa 230 PPM. Si conoces tu propia velocidad por una prueba de lectura, usa la opción Personalizada en su lugar para una estimación más personalizada."
+            },
+            {
+              "question": "¿Por qué mi tiempo de lectura real es diferente de la estimación?",
+              "answer": "Esta herramienta asume una velocidad de lectura constante aplicada uniformemente en todo el texto, pero la velocidad de lectura real varía con la dificultad, la familiaridad con el tema, el cansancio, y si estás hojeando o leyendo detenidamente. Trata el resultado como una estimación útil, no una predicción exacta."
+            },
+            {
+              "question": "¿Esto cuenta los números o la puntuación como palabras?",
+              "answer": "El recuento de palabras se basa en fragmentos de texto separados por espacios en blanco, por lo que un número o un término con guion generalmente cuenta como una palabra, similar a cómo los procesadores de texto cuentan palabras. Esto coincide con la forma en que se calculan la mayoría de las estimaciones de tiempo de lectura en blogs y artículos."
+            },
+            {
+              "question": "¿El tiempo de lectura es lo mismo que el tiempo de habla?",
+              "answer": "No —la lectura silenciosa es típicamente más rápida que hablar en voz alta, ya que la entrega hablada está marcada por la respiración, la pronunciación, y la comprensión de la audiencia en lugar de solo el movimiento ocular a través del texto. Si necesitas estimar cuánto tiempo tomará dar un discurso o presentación, una estimación de tasa de habla dedicada es más apropiada que una velocidad de lectura silenciosa."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia e Investigación",
+            "paragraph": "La velocidad de lectura ha sido estudiada por psicólogos desde finales del siglo XIX, cuando pioneros del seguimiento ocular como Émile Javal descubrieron que los ojos se mueven en saltos rápidos (sacadas) con breves pausas (fijaciones) en lugar de escanear suavemente una línea de texto. La investigación moderna sobre la velocidad de lectura, basada en cientos de estudios, ha encontrado consistentemente que la velocidad de lectura silenciosa para adultos en idiomas familiares generalmente cae en algún lugar del rango de aproximadamente 175 a 300 palabras por minuto para prosa de audiencia general, que es el rango del que se derivan los tres ajustes de esta herramienta."
+          },
+          "limitations": {
+            "title": "Limitaciones de Esta Estimación",
+            "paragraph": "Una estimación de palabras por minuto necesariamente simplifica un proceso mucho más complejo. La velocidad de lectura real se ve afectada por la dificultad del texto y la complejidad de las oraciones, la familiaridad del lector con el tema y el vocabulario, el tamaño de fuente y el diseño, e incluso el nivel actual de fatiga del lector —nada de lo cual esta calculadora puede medir solo a partir del texto. Se usa mejor como una estimación rápida y de propósito general en lugar de una medición precisa."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La velocidad de lectura y la comprensión se estudian dentro de la psicología cognitiva y la psicolingüística. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Gante — Departamento de Psicología Experimental",
+                "note": "Sede de investigadores líderes en velocidad de lectura y psicolingüística, incluidos estudios a gran escala sobre tasas de lectura.",
+                "url": "https://www.ugent.be/pp/experimentele-psychologie/en",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Gante."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ciencias del Cerebro y Cognitivas",
+                "note": "Un centro líder en la ciencia cognitiva de la lectura y el procesamiento del lenguaje.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Oxford — Departamento de Psicología Experimental",
+                "note": "Un centro líder en psicología experimental, incluida la investigación de lectura y lenguaje.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Psicología",
+                "note": "Un centro líder en ciencia psicológica en el Reino Unido.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Psicología",
+                "note": "Un departamento de psicología líder con sólida investigación en ciencia cognitiva.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Psicología",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
+          "note": "Un metaanálisis exhaustivo de la investigación sobre la tasa de lectura a través de cientos de estudios, que es la base de los rangos de velocidad generales de los que se derivan los ajustes de esta herramienta.",
+          "url": "https://doi.org/10.1016/j.jml.2019.104047",
+          "readOriginal": "Ver el Estudio"
+        }
+      }
+    },
+    "lorem-ipsum-generator": {
+      "title": "Generador de Lorem Ipsum",
+      "description": "Genera texto de relleno en párrafos, oraciones, o palabras, en estilo clásico o moderno.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Ajustes del Generador",
+        "styleLabel": "Estilo",
+        "styles": {
+          "classic": "Latín Clásico",
+          "modern": "Moderno (Jerga Empresarial)"
+        },
+        "unitLabel": "Generar Por",
+        "units": {
+          "paragraphs": "Párrafos",
+          "sentences": "Oraciones",
+          "words": "Palabras"
+        },
+        "countLabel": "Cuántos",
+        "startWithLorem": "Empezar con \"Lorem ipsum dolor sit amet...\"",
+        "generate": "Generar"
+      },
+      "result": {
+        "heading": "Texto Generado",
+        "invalidCount": "Introduce un número entero entre 1 y 50.",
+        "wordCountLabel": "Recuento de Palabras"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "Lorem Ipsum es texto de relleno deliberadamente sin sentido —sus palabras similares al latín no forman oraciones reales con significado real."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender Lorem Ipsum",
+          "paragraph1": "Lorem Ipsum es texto de relleno (también llamado \"texto ficticio\" o \"greeking\") usado por diseñadores y desarrolladores para llenar un diseño con texto de apariencia realista antes de que el contenido real esté listo. Debido a que se asemeja al lenguaje natural en longitud de palabras y frecuencia de letras sin ser legible o distraer, permite a las personas evaluar el diseño visual, la tipografía, y el espaciado de un diseño sin que el contenido en sí atraiga su atención.",
+          "paragraph2": "Esta herramienta también ofrece un banco de palabras alternativo \"moderno\" construido a partir de jerga empresarial y tecnológica común (\"synergy\", \"leverage\", \"scalable\", y términos similares) en lugar del vocabulario clásico derivado del latín, generado usando exactamente la misma estructura de oraciones y párrafos. Ambos estilos sirven el propósito idéntico —llenar espacio con texto de apariencia plausible pero en última instancia sin sentido— la única diferencia es el vocabulario."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "El texto de relleno aparece en cualquier lugar donde se necesite construir o revisar un diseño antes de que exista el contenido final.",
+          "items": [
+            {
+              "title": "Maquetas de Sitios Web y Apps",
+              "description": "Llenar áreas de texto, titulares, y párrafos en una maqueta de diseño para que las partes interesadas puedan evaluar el diseño visual independientemente del texto final."
+            },
+            {
+              "title": "Diseño de Impresión y Publicación",
+              "description": "Probar cómo se ve un diseño de página, elección de fuente, y ancho de columna con una cantidad realista de texto antes de que el manuscrito final esté listo."
+            },
+            {
+              "title": "Desarrollo y Pruebas de Software",
+              "description": "Poblar una interfaz de usuario con texto de muestra durante el desarrollo para verificar cómo manejan los componentes cantidades variables de contenido, como párrafos largos versus cortos."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Qué significa realmente Lorem Ipsum?",
+              "answer": "Nada coherente. Se deriva de un texto latino genuino, pero se ha mezclado, abreviado, y alterado tan intensamente a lo largo de su larga historia de uso que ya no forma oraciones latinas gramaticalmente correctas o con sentido —que es exactamente el punto, ya que el texto sin sentido no distrae de la evaluación de un diseño."
+            },
+            {
+              "question": "¿De dónde viene Lorem Ipsum?",
+              "answer": "Se remonta a un pasaje del texto filosófico de Cicerón del 45 a.C. \"De Finibus Bonorum et Malorum\" (\"Sobre los Límites del Bien y del Mal\"). Un extracto mezclado de ese texto —comenzando a mitad de palabra con \"...orem ipsum...\" de \"dolorem ipsum\"— se ha usado como texto de relleno desde al menos la década de 1960, probablemente originándose incluso antes en la impresión."
+            },
+            {
+              "question": "¿Por qué usar Lorem Ipsum en lugar de oraciones reales en inglés?",
+              "answer": "Usar inglés reconocible (o cualquier idioma que los lectores entiendan) como texto de relleno tiende a distraer a los revisores, quienes empiezan a leer y evaluar las palabras mismas en lugar del diseño, la tipografía, y el diseño visual que el texto de relleno pretende mostrar. La jerigonza derivada del latín parece texto real a primera vista sin invitar a ese tipo de lectura."
+            },
+            {
+              "question": "¿Es el estilo \"moderno\" también latín históricamente preciso?",
+              "answer": "No —el estilo moderno es un banco de palabras intencionalmente diferente, no latino, hecho de jerga empresarial y tecnológica común, ofrecido como alternativa estilística para contextos (como maquetas de productos tecnológicos) donde un texto de relleno que se asemeje a la jerga corporativa podría parecer más apropiado o divertido que el latín."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "El texto se remonta a las secciones 1.10.32 y 1.10.33 de \"De Finibus Bonorum et Malorum\" de Cicerón, escrito en el 45 a.C. como una exploración filosófica de la ética. Alguna forma de extractos mezclados y confusos de este texto se ha usado como relleno tipográfico desde al menos la década de 1960 (cuando apareció en hojas Letraset y software temprano de autoedición), y se cree ampliamente que fue usado por impresores incluso antes, posiblemente desde el siglo XVI, aunque solo existe documentación sólida para su uso moderno."
+          },
+          "rediscovery": {
+            "title": "Cómo se Redescubrió su Origen",
+            "paragraph": "Durante décadas, la fuente original del texto era esencialmente desconocida para los diseñadores que lo usaban a diario. En 1982, Richard McClintock, un erudito latino del Hampden-Sydney College, buscaba el origen de la palabra \"consectetur\" y rastreó los fragmentos hasta el texto clásico de Cicerón —un descubrimiento que ahora es el relato estándar y bien documentado del origen de Lorem Ipsum, citado en toda la industria del diseño y la publicación."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Los textos clásicos latinos como los de Cicerón se estudian dentro de los departamentos de estudios clásicos y filología clásica. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Oxford — Facultad de Estudios Clásicos",
+                "note": "Uno de los centros líderes en el mundo en estudios clásicos y filología latina.",
+                "url": "https://www.classics.ox.ac.uk/graduate-study",
+                "online": "No — los títulos de investigación son presenciales en la Facultad de Estudios Clásicos."
+              },
+              {
+                "name": "Universidad de Cambridge — Facultad de Estudios Clásicos",
+                "note": "Un centro líder en estudios clásicos, incluida la erudición ciceroniana.",
+                "url": "https://www.classics.cam.ac.uk/prospective/graduate",
+                "online": "No — los títulos de investigación son presenciales en la Facultad de Estudios Clásicos."
+              },
+              {
+                "name": "Universidad de Harvard — Departamento de Estudios Clásicos",
+                "note": "Uno de los departamentos de estudios clásicos líderes en Estados Unidos.",
+                "url": "https://classics.fas.harvard.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Princeton — Departamento de Estudios Clásicos",
+                "note": "Un centro líder para el estudio del latín y la literatura romana.",
+                "url": "https://classics.princeton.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Michigan — Departamento de Estudios Clásicos",
+                "note": "Un departamento de estudios clásicos líder con sólida investigación en filología latina.",
+                "url": "https://lsa.umich.edu/classics/graduate-students/prospective-students.html",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Estudios Clásicos",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/classics/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Académicas",
+          "citation": "Cicero, M. T. (45 a.C.). De Finibus Bonorum et Malorum, 1.10.32-33.",
+          "note": "El texto latino clásico original del que en última instancia se derivan los pasajes mezclados y confusos de Lorem Ipsum, según lo rastreado por la investigación de Richard McClintock de 1982.",
+          "url": "https://www.lipsum.com/",
+          "readOriginal": "Ver la Historia"
+        }
+      }
+    },
+    "text-logo-generator": {
+      "title": "Generador de Logotipos de Texto",
+      "description": "Transforma texto en diseños de texto Unicode estilizados usando negrita, cursiva, doble tachado, y otros estilos similares a fuentes.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "textLabel": "Texto a estilizar",
+        "textPlaceholder": "Escribe algo...",
+        "hint": "Cada estilo a continuación se actualiza al instante y se puede copiar con un clic."
+      },
+      "result": {
+        "heading": "Texto Estilizado",
+        "emptyText": "Escribe algún texto para verlo en todos los estilos.",
+        "styles": {
+          "bold": "Negrita",
+          "italic": "Cursiva",
+          "boldItalic": "Negrita Cursiva",
+          "doubleStruck": "Doble Tachado",
+          "monospace": "Monoespaciado",
+          "fullwidth": "Ancho Completo",
+          "circled": "Encerrado en Círculo"
+        }
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "Estos estilos son caracteres Unicode reales, no fuentes —se mostrarán de la misma manera (como estos símbolos específicos) casi en cualquier lugar donde los pegues, incluidos lugares que no te permiten cambiar fuentes, como biografías de redes sociales y nombres de usuario."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender los Estilos de Texto Unicode",
+          "paragraph1": "Esta herramienta no aplica una fuente a tu texto —reemplaza cada letra y dígito con un carácter Unicode diferente que se ve en negrita, cursiva, doble tachado, o estilizado de otra manera. Debido a que estos son caracteres distintos (no un estilo aplicado a la misma letra subyacente), el resultado es texto plano que lleva su apariencia \"estilizada\" a donde vaya, incluyendo lugares como biografías de redes sociales, nombres de usuario, o aplicaciones de chat que de otro modo no admiten formato de texto en negrita o cursiva.",
+          "paragraph2": "Los caracteres específicos que usa esta herramienta provienen del bloque de Símbolos Alfanuméricos Matemáticos de Unicode, un conjunto de puntos de código originalmente añadidos al Estándar Unicode para que la notación matemática y científica pudiera distinguir, digamos, una variable en cursiva \"x\" de una letra regular \"x\" en texto plano —una distinción tipográfica genuina en la que confían los matemáticos. Esta herramienta reutiliza ese mismo conjunto de caracteres para el estilo de texto decorativo, que es un uso común pero no oficial de caracteres que fueron diseñados para un propósito diferente, más técnico."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "El texto Unicode estilizado aparece en cualquier lugar donde alguien quiera texto plano visualmente distintivo.",
+          "items": [
+            {
+              "title": "Biografías y Nombres de Usuario en Redes Sociales",
+              "description": "Añadir estilo visual a un nombre de perfil o biografía en plataformas que no admiten formato de texto enriquecido, ya que estos son solo caracteres Unicode planos."
+            },
+            {
+              "title": "Encabezados en Contextos de Texto Plano",
+              "description": "Hacer que un encabezado o etiqueta destaque en lugares como correos electrónicos de texto plano, mensajes de chat, o publicaciones de foro donde no se renderiza el formato markdown o HTML."
+            },
+            {
+              "title": "Logotipos Rápidos de Copiar y Pegar",
+              "description": "Crear una marca de palabra simple y distintiva para uso informal sin necesidad de software de diseño, copiando directamente una de las variantes estilizadas."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Es esto realmente una fuente diferente?",
+              "answer": "No —no se está aplicando ninguna fuente. Cada carácter que ves es un punto de código Unicode distinto que resulta que se ve en negrita, cursiva, o estilizado de otra manera. Esta es la razón por la que el texto estilizado mantiene su apariencia incluso en lugares que no admiten fuentes personalizadas o texto enriquecido."
+            },
+            {
+              "question": "¿Se mostrará este texto correctamente en todas partes?",
+              "answer": "Casi en todas partes, ya que estos son caracteres Unicode estándar, pero la visualización depende de que el dispositivo del lector tenga instalada una fuente que incluya glifos para estos puntos de código específicos. Casi todos los dispositivos y navegadores modernos los admiten, aunque los sistemas extremadamente antiguos o limitados ocasionalmente muestran cuadros vacíos para rangos menos comunes."
+            },
+            {
+              "question": "¿Por qué la cursiva y el doble tachado no cubren cada letra y dígito de la misma manera?",
+              "answer": "Un puñado de letras específicas en el bloque de Símbolos Alfanuméricos Matemáticos reutiliza caracteres Unicode más antiguos y ya existentes en lugar de obtener nuevos puntos de código —por ejemplo, la \"h\" minúscula cursiva reutiliza el símbolo existente de la constante de Planck (ℎ), y las C, H, N, P, Q, R, y Z de doble tachado reutilizan símbolos matemáticos de pizarra existentes (como ℝ para números reales). Esta herramienta tiene en cuenta esas excepciones específicas automáticamente."
+            },
+            {
+              "question": "¿Pueden los motores de búsqueda o los lectores de pantalla leer este texto estilizado normalmente?",
+              "answer": "No de manera confiable. Debido a que cada carácter es un símbolo Unicode distinto en lugar de la letra normal a la que se asemeja, los lectores de pantalla pueden no pronunciarlo correctamente, y los motores de búsqueda pueden no coincidirlo con búsquedas de texto normal. Usa estos estilos para darle estilo visual en contextos informales, no para texto principal que necesite ser completamente accesible o buscable."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "howItWorks": {
+            "title": "Cómo Funciona",
+            "paragraph": "El bloque de Símbolos Alfanuméricos Matemáticos de Unicode (puntos de código U+1D400 a U+1D7FF) se añadió al Estándar Unicode en la versión 3.1, publicada en 2001, específicamente para admitir la composición tipográfica matemática donde la misma letra necesita formas distintas —una \"x\" regular, una \"x\" cursiva para una variable, y una \"x\" en negrita para un vector, por ejemplo, todas necesitan permanecer distinguibles incluso cuando se copian como texto plano sin ningún estilo de fuente aplicado. Esta herramienta funciona buscando el punto de código estilizado equivalente para cada letra o dígito que escribes, carácter por carácter, y sustituyéndolo."
+          },
+          "limitations": {
+            "title": "Limitaciones de Esta Herramienta",
+            "paragraph": "La cobertura de Unicode de estos estilos no es perfectamente uniforme: algunos estilos (como la cursiva) no tienen variantes de dígitos en absoluto, ya que la notación matemática no necesitaba dígitos en cursiva de la misma manera que necesitaba variables en cursiva, y un puñado de letras individuales en ciertos estilos reutiliza símbolos Unicode más antiguos y ya existentes en lugar de caracteres nuevos dedicados. Esta herramienta incluye las excepciones específicas y documentadas para los estilos que ofrece, por lo que la salida es precisa al Estándar Unicode real en lugar de adivinar un patrón que no se cumple del todo para cada carácter."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Los estándares de codificación de caracteres como Unicode se estudian dentro de las ciencias de la computación, particularmente en las áreas de internacionalización y procesamiento de texto. Estos son cinco programas de informática respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ingeniería Eléctrica y Ciencias de la Computación",
+                "note": "Uno de los departamentos de informática líderes del mundo.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — el doctorado es un programa de investigación presencial dentro de EECS."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en sistemas e internacionalización.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centro líder en investigación de informática en el Reino Unido.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ciencias de la Computación y Tecnología."
+              },
+              {
+                "name": "Universidad Carnegie Mellon — School of Computer Science",
+                "note": "Una de las escuelas de informática líderes del mundo.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "ETH Zúrich — Department of Computer Science",
+                "note": "Un departamento de informática europeo líder.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "No — el programa doctoral es un título de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "La tabla de códigos Unicode oficial que define los caracteres exactos, puntos de código, y excepciones documentadas en las que se basan las asignaciones de texto estilizado de esta herramienta.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "Ver la Tabla de Códigos Oficial"
+        }
+      }
+    },
+    "random-quote-generator": {
+      "title": "Generador de Citas Aleatorias",
+      "description": "Muestra una cita aleatoria de una colección curada y con fuentes documentadas que abarca categorías motivacionales, literarias, y filosóficas.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Elige una Categoría",
+        "categoryLabel": "Categoría",
+        "newQuote": "Nueva Cita"
+      },
+      "categories": {
+        "all": "Todas",
+        "motivational": "Motivacional",
+        "literary": "Literaria",
+        "philosophical": "Filosófica"
+      },
+      "result": {
+        "heading": "Cita"
+      },
+      "quickReference": {
+        "title": "Sobre Esta Colección",
+        "intro": "Cada cita aquí cita una fuente primaria verificable —un discurso, libro, o texto publicado— en lugar de una \"cita de internet\" sin fuente."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender Esta Colección de Citas",
+          "paragraph1": "Esta herramienta se basa en una pequeña colección curada a mano de citas en lugar de una gran base de datos recopilada, específicamente para que cada cita pueda verificarse contra una fuente real y citable: la transcripción de un discurso histórico, un libro publicado, o el texto original de un filósofo. Cada cita mostrada aquí incluye su fuente, no solo su autor, para que puedas ver exactamente de dónde proviene.",
+          "paragraph2": "La colección abarca tres categorías: citas motivacionales extraídas de discursos históricos y declaraciones públicas documentadas, citas literarias tomadas del texto real de novelas y obras de teatro conocidas, y citas filosóficas traducidas de obras filosóficas primarias. Hacer clic en \"Nueva Cita\" elige una cita diferente al azar de la categoría seleccionada, evitando una repetición inmediata de la que acabas de ver."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Un generador de citas aleatorias es útil en cualquier lugar donde un momento de inspiración, reflexión, o apreciación literaria sea bienvenido.",
+          "items": [
+            {
+              "title": "Inspiración Diaria",
+              "description": "Comenzar el día con una cita motivacional de las propias palabras documentadas de una figura histórica."
+            },
+            {
+              "title": "Escritura y Presentaciones",
+              "description": "Encontrar una cita bien documentada para abrir un ensayo, presentación, o publicación en redes sociales, con una fuente que realmente puedes citar."
+            },
+            {
+              "title": "Exploración Literaria y Filosófica",
+              "description": "Descubrir una línea de una novela clásica o texto filosófico que podría motivar a leer la obra completa."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Son realmente precisas estas citas?",
+              "answer": "Cada cita en esta colección proviene de una fuente documentada y verificable —la transcripción de un discurso histórico, una novela u obra de teatro publicada, o un texto filosófico traducido— en lugar de una base de datos general de citas de internet, donde la atribución incorrecta es extremadamente común."
+            },
+            {
+              "question": "¿Por qué algunas citas famosas no aparecen aquí?",
+              "answer": "Muchas \"citas famosas\" ampliamente difundidas (a menudo atribuidas a figuras como Einstein, Twain, o Lincoln) en realidad están mal atribuidas, parafraseadas, o completamente inventadas, a pesar de ser extremadamente comunes en internet. Esta colección favorece deliberadamente un número menor de citas verificables sobre una colección más grande rellenada con citas no verificables."
+            },
+            {
+              "question": "¿Por qué hacer clic en \"Nueva Cita\" a veces se siente como si saltara dentro de un conjunto pequeño?",
+              "answer": "Esta es una colección pequeña y curada en lugar de una base de datos masiva, ya que cada cita requiere verificación manual de la fuente. Dentro de una sola categoría, puedes ver reaparecer el mismo puñado de citas después de suficientes clics, aunque la herramienta evita mostrar exactamente la misma cita dos veces seguidas."
+            },
+            {
+              "question": "¿Puedo confiar en la fuente listada para cada cita?",
+              "answer": "Cada fuente señala dónde se puede encontrar realmente la cita —un discurso y fecha específicos, un libro y año de publicación específicos, o un texto filosófico específico— para que puedas buscarlo tú mismo en lugar de aceptar la atribución por fe."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "sourcing": {
+            "title": "Cómo se Documentan las Fuentes de las Citas",
+            "paragraph": "Cada cita en esta colección fue seleccionada específicamente porque se remonta a una fuente primaria y verificable: la transcripción de un discurso histórico, el texto impreso real de una novela u obra de teatro, o una traducción estándar de una obra filosófica. Este es un enfoque deliberadamente más conservador que el que adoptan muchos sitios web de citas, que a menudo priorizan un gran volumen de citas sobre verificar de dónde proviene realmente cada una."
+          },
+          "misattribution": {
+            "title": "El Problema de la Atribución Incorrecta de Citas",
+            "paragraph": "La atribución incorrecta de citas es un fenómeno bien documentado: una línea llamativa o ingeniosa se adjunta a un nombre famoso con el tiempo, a menudo porque el nombre de una persona famosa hace que una cita se sienta más creíble o compartible, independientemente de si realmente la dijo. Investigadores que investigan los orígenes de las citas, como el proyecto Quote Investigator, han rastreado muchas \"citas famosas\" extremadamente populares hasta fuentes originales oscuras o completamente diferentes a la persona a la que se les atribuye comúnmente, razón por la cual esta colección se limita a un conjunto más pequeño de citas con orígenes verificables."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El estudio de las fuentes textuales, las citas, y sus orígenes se encuadra dentro de la filología y la erudición literaria/histórica. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Oxford — Facultad de Lengua y Literatura Inglesa",
+                "note": "Uno de los centros líderes en el mundo en erudición literaria y textual.",
+                "url": "https://www.english.ox.ac.uk/graduate-study",
+                "online": "No — los títulos de investigación son presenciales en la Facultad de Inglés."
+              },
+              {
+                "name": "Universidad de Harvard — Departamento de Inglés",
+                "note": "Un departamento líder en estudios literarios e historia textual.",
+                "url": "https://english.fas.harvard.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Facultad de Estudios Clásicos",
+                "note": "Un centro líder en el estudio de textos primarios clásicos y filosóficos.",
+                "url": "https://www.classics.cam.ac.uk/prospective/graduate",
+                "online": "No — los títulos de investigación son presenciales en la Facultad de Estudios Clásicos."
+              },
+              {
+                "name": "Universidad de Princeton — Departamento de Historia",
+                "note": "Un departamento de historia líder con sólida investigación archivística y de fuentes primarias.",
+                "url": "https://history.princeton.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Yale — Departamento de Filosofía",
+                "note": "Un departamento de filosofía líder con sólida erudición en historia de la filosofía.",
+                "url": "https://philosophy.yale.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Inglés",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/enlt/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Académicas",
+          "citation": "O'Toole, G. Quote Investigator: Tracing Quotations. QuoteInvestigator.com.",
+          "note": "Un proyecto ampliamente respetado y meticulosamente investigado dedicado a rastrear los orígenes reales de citas famosas, y documentar cuántas \"citas\" populares están realmente mal atribuidas.",
+          "url": "https://quoteinvestigator.com/",
+          "readOriginal": "Visitar Quote Investigator"
+        }
+      }
+    },
+    "multiplication-table-generator": {
+      "title": "Generador de Tablas de Multiplicar",
+      "description": "Genera una tabla de multiplicar para un solo número o una cuadrícula imprimible para un rango de números.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Ajustes de la Tabla",
+        "modeSingle": "Número Único",
+        "modeRange": "Cuadrícula",
+        "numberLabel": "Número",
+        "maxMultiplierLabel": "Hasta",
+        "rangeStartLabel": "Desde",
+        "rangeEndLabel": "Hasta"
+      },
+      "result": {
+        "heading": "Tabla de Multiplicar",
+        "invalidNumber": "Introduce un número entero entre 1 y 1000.",
+        "invalidMultiplier": "Introduce un número entero entre 1 y 100.",
+        "invalidRange": "Introduce un rango válido, con el número inicial no mayor que el número final.",
+        "rangeTooLarge": "Elige un rango de 30 números o menos para una cuadrícula legible.",
+        "print": "Imprimir"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "Cada celda es simplemente el número de fila multiplicado por el número de columna."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender las Tablas de Multiplicar",
+          "paragraph1": "Una tabla de multiplicar enumera los productos de un número multiplicado por una secuencia de otros números, típicamente del 1 al 12 para una tabla de un solo número, permitiéndote buscar un hecho de multiplicación en lugar de calcularlo cada vez. El modo \"Número Único\" de esta herramienta genera exactamente eso: la tabla de multiplicar completa de un número, con un límite superior personalizable para el multiplicador.",
+          "paragraph2": "El modo \"Cuadrícula\" genera la clásica tabla de multiplicar cuadrada que se encuentra en la parte de atrás de los cuadernos escolares: una cuadrícula completa donde cada número en un rango elegido se multiplica por cada otro número en ese mismo rango, para que puedas buscar cualquier producto dentro del rango de un vistazo, en cualquier dirección, ya que la tabla es simétrica (3×7 da el mismo resultado que 7×3)."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Las tablas de multiplicar siguen siendo una herramienta fundamental en cualquier lugar donde se esté construyendo o comprobando la fluidez aritmética básica.",
+          "items": [
+            {
+              "title": "Educación Matemática Elemental",
+              "description": "Ayudar a los estudiantes a memorizar hechos de multiplicación a través de la exposición repetida a una tabla completa y organizada, una parte estándar de la instrucción aritmética temprana."
+            },
+            {
+              "title": "Ayudas para Tareas y Estudio",
+              "description": "Imprimir una tabla para referencia rápida mientras se completan tareas de aritmética o se prepara para un examen de multiplicación cronometrado."
+            },
+            {
+              "title": "Verificaciones Rápidas de Cálculo Mental",
+              "description": "Verificar un resultado de multiplicación rápidamente sin recurrir a una calculadora, especialmente para números justo fuera de lo que se memoriza fácilmente."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué las tablas de multiplicar suelen llegar hasta 12?",
+              "answer": "Detenerse en 12 es una convención de larga data en lugar de una necesidad matemática, probablemente ligada a tradiciones de conteo en base 12 (duodecimal) que persistieron en sistemas de medida como 12 pulgadas por pie y 12 meses en un año, haciendo de 12×12 un punto de parada práctico y memorable para la fluidez aritmética básica."
+            },
+            {
+              "question": "¿Por qué la cuadrícula de multiplicación es simétrica?",
+              "answer": "Esto refleja la propiedad conmutativa de la multiplicación: para dos números cualesquiera a y b, a × b siempre es igual a b × a. Debido a esto, la cuadrícula se refleja perfectamente a través de su diagonal, y técnicamente solo necesitas memorizar aproximadamente la mitad de las entradas de una tabla de multiplicar completa para conocerlas todas."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre los dos modos?",
+              "answer": "El modo Número Único muestra la tabla de multiplicar completa de un número como una lista simple (útil para la memorización enfocada de un número, como la tabla del 7). El modo Cuadrícula muestra una tabla cuadrada completa para un rango de números, útil para buscar cualquier producto dentro de ese rango, o para imprimir un gráfico de referencia clásico."
+            },
+            {
+              "question": "¿Por qué hay un límite en el tamaño del rango que puedo generar?",
+              "answer": "Una cuadrícula para un rango muy grande de números se vuelve poco práctica para mostrar o imprimir legiblemente en una sola página, por lo que esta herramienta limita el rango a 30 números (una cuadrícula de 30×30), que cubre cómodamente los rangos típicamente usados para gráficos de referencia y materiales de clase."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "Las tablas de multiplicar se encuentran entre los documentos matemáticos más antiguos que se conservan: tablillas cuneiformes de la antigua Babilonia, que datan de hace aproximadamente 4.000 años, registran tablas de multiplicar sistemáticas usadas por escribas para cálculos comerciales y administrativos, basadas en el sistema numérico babilónico de base 60 (sexagesimal). Las tablas de multiplicar en su forma aproximadamente decimal moderna aparecieron más tarde en textos matemáticos chinos antiguos y se convirtieron en una parte estándar de la educación aritmética en muchas culturas para la época medieval."
+          },
+          "pedagogy": {
+            "title": "Tablas de Multiplicar en la Educación",
+            "paragraph": "Memorizar tablas de multiplicar sigue siendo una parte casi universal de la educación matemática elemental, ya que el recuerdo fluido de los hechos básicos de multiplicación libera esfuerzo mental para aritmética y álgebra más complejas más adelante, en lugar de requerir que un estudiante recalcule productos simples desde cero cada vez. La investigación educativa generalmente apoya una combinación de entender por qué funciona la multiplicación (como suma repetida o área, por ejemplo) junto con la memorización, en lugar de la memorización sola."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La historia de la aritmética y la educación matemática se estudia dentro de los departamentos de historia de las matemáticas y educación matemática. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Matemáticas",
+                "note": "Nº 1 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — el doctorado es un programa de investigación presencial dentro del Departamento de Matemáticas."
+              },
+              {
+                "name": "Universidad de Oxford — Instituto Matemático",
+                "note": "Nº 2 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Facultad de Matemáticas",
+                "note": "Nº 3 mundial en Matemáticas (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — los doctorados de investigación son presenciales en la Facultad de Matemáticas."
+              },
+              {
+                "name": "Universidad de Columbia — Departamento de Educación Matemática",
+                "note": "Un centro líder en investigación de educación matemática y pedagogía.",
+                "url": "https://www.tc.columbia.edu/mathematics/",
+                "online": "No — los programas doctorales son presenciales."
+              },
+              {
+                "name": "Universidad de Stanford — Escuela de Posgrado en Educación",
+                "note": "Un centro líder en investigación de educación matemática.",
+                "url": "https://ed.stanford.edu/academics/graduate-degrees",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Matemáticas",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+          "note": "Una historia académica de las matemáticas babilónicas, incluido el sistema numérico de base 60 y las antiguas tablas de multiplicar cuneiformes que produjo.",
+          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
+          "readOriginal": "Ver la Referencia"
+        }
+      }
+    },
+    "speech-word-count-calculator": {
+      "title": "Calculadora de Palabras del Discurso",
+      "description": "Estima cuánto tiempo tomará dar un discurso o presentación, según el recuento de palabras y el ritmo de habla.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Discurso o Guión",
+        "textLabel": "Texto a estimar",
+        "textPlaceholder": "Pega o escribe tu discurso, guión, o texto de presentación aquí.",
+        "paceLabel": "Ritmo de Habla",
+        "presets": {
+          "formal": "Formal",
+          "normal": "Normal",
+          "fast": "Rápido",
+          "custom": "Personalizado"
+        },
+        "customWpmLabel": "Palabras por Minuto"
+      },
+      "result": {
+        "heading": "Tiempo de Entrega Estimado",
+        "emptyText": "Introduce el texto de tu discurso o presentación para estimar su tiempo de entrega.",
+        "invalidRate": "Introduce un ritmo de habla entre 1 y 400 palabras por minuto.",
+        "timeMinutesSeconds": "{minutes} min {seconds} seg",
+        "timeSecondsOnly": "{seconds} seg",
+        "wordCountLabel": "Recuento de Palabras"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "El tiempo de entrega es el recuento de palabras dividido por tu ritmo de habla elegido."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Tiempo de Entrega del Discurso",
+          "paragraph1": "Estimar cuánto tiempo tomará dar un discurso se reduce a dividir el recuento total de palabras por un ritmo de habla, medido en palabras por minuto (PPM). Esta herramienta ofrece tres ajustes comunes: formal (110 PPM, un ritmo deliberado y medido típico de presentaciones y discursos formales destinados a seguirse fácilmente), normal (140 PPM, un ritmo de habla conversacional típico), y rápido (170 PPM, una entrega enérgica y de ritmo rápido), además de una opción personalizada para tu propio ritmo medido.",
+          "paragraph2": "El ritmo de habla es notablemente más lento que el ritmo de lectura silenciosa, ya que la entrega hablada está marcada por la respiración, la articulación, las pausas para énfasis, y la comprensión de la audiencia, nada de lo cual aplica al leer en silencio para uno mismo. Es por esto que un discurso típicamente toma notablemente más tiempo en darse en voz alta que el mismo texto tomaría en leerse en silencio —una distinción que vale la pena tener en cuenta si estás cronometrando una charla basándote en cuánto tiempo te toma leer el guión mentalmente."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Estimar el tiempo de entrega de un discurso es esencial en cualquier lugar donde una charla necesite ajustarse a un espacio de tiempo establecido.",
+          "items": [
+            {
+              "title": "Charlas de Conferencias y Presentaciones",
+              "description": "Verificar que una charla preparada se ajuste al espacio de tiempo asignado antes de subir al escenario, evitando el problema común de excederse o quedarse corto significativamente en el tiempo."
+            },
+            {
+              "title": "Discursos de Boda y Brindis",
+              "description": "Estimar si un discurso sincero tiene una longitud apropiada, ya que un brindis que se extiende demasiado puede perder la atención de la audiencia sin importar qué tan bien esté escrito."
+            },
+            {
+              "title": "Guionización de Video y Podcast",
+              "description": "Planificar la longitud de un guión contra una duración objetivo de video o episodio antes de grabar, para evitar una extensa reedición o regrabación después."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué el ritmo de habla es más lento que el ritmo de lectura?",
+              "answer": "Hablar implica restricciones físicas que la lectura silenciosa no tiene: necesitas respirar, articular cada sonido con suficiente claridad para ser entendido, y a menudo pausar brevemente para dar énfasis o dejar que un punto cale en la audiencia. Nada de esto aplica a la lectura silenciosa, razón por la cual los ritmos de habla típicos (alrededor de 110-170 PPM) están muy por debajo de los ritmos de lectura silenciosa típicos (alrededor de 200-300 PPM)."
+            },
+            {
+              "question": "¿Qué ajuste debo usar para mi discurso?",
+              "answer": "Usa \"Formal\" para una presentación medida y deliberada donde la claridad importa más que la energía (como un discurso de apertura formal), \"Normal\" para una charla conversacional típica, y \"Rápido\" para una entrega enérgica y de ritmo rápido. Si tienes un video o grabación de ti mismo hablando, cronometrar un recuento de palabras conocido contra ella te dará el ritmo más personalizado para usar con la opción Personalizada."
+            },
+            {
+              "question": "¿Por qué mi tiempo de entrega real difiere de la estimación?",
+              "answer": "Esta herramienta asume un ritmo constante durante todo el discurso, pero la entrega real varía naturalmente: podrías hablar más rápido en material familiar y más lento en puntos complejos, pausar para reacciones de la audiencia o risas, o tomar pausas dramáticas deliberadas. Trata la estimación como una línea base de planificación útil, no una predicción exacta."
+            },
+            {
+              "question": "¿Debo incluir direcciones de escena o notas en el recuento de palabras?",
+              "answer": "No —incluye solo las palabras que realmente dirás en voz alta. Las direcciones de escena, indicaciones de diapositivas, o notas para ti mismo (como \"[pausa para risas]\") no se hablan, por lo que incluirlas en el texto inflaría el recuento de palabras y produciría una estimación de tiempo inexacta y demasiado larga."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "speakingVsReading": {
+            "title": "Ritmo de Habla vs. Ritmo de Lectura",
+            "paragraph": "La investigación sobre el habla espontánea y preparada ha demostrado durante mucho tiempo que el ritmo de habla está gobernado por restricciones diferentes a las de la lectura silenciosa: la tasa de articulación (qué tan rápido se producen físicamente los sonidos), la frecuencia y duración de las pausas (para respirar, pensar, y enfatizar), y la necesidad de permanecer inteligible para una audiencia que escucha en tiempo real, que no puede releer una oración confusa como puede hacerlo un lector. Estos factores combinados son la razón por la cual los entrenadores de oratoria y las guías de presentación recomiendan consistentemente un ritmo en el rango de aproximadamente 100-170 palabras por minuto, muy por debajo de las velocidades de lectura silenciosa típicas."
+          },
+          "limitations": {
+            "title": "Limitaciones de Esta Estimación",
+            "paragraph": "Esta herramienta aplica un ritmo fijo uniformemente a través de todo un texto, mientras que la entrega real del discurso varía naturalmente con el énfasis, las reacciones de la audiencia, y la complejidad del material discutido. Tampoco tiene en cuenta las pausas planificadas (como una pausa dramática o tiempo para que se asimilen las diapositivas) a menos que incluyas ese tiempo por separado, así que trata el resultado como una estimación de planificación sólida en lugar de una predicción exacta de cronómetro."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El estudio de la producción y el ritmo del habla se examina dentro de la lingüística y la patología del habla-lenguaje. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "University College London — División de Psicología y Ciencias del Lenguaje",
+                "note": "Un centro líder en investigación del habla y el lenguaje en el Reino Unido.",
+                "url": "https://www.ucl.ac.uk/pals/research/speech-hearing-and-phonetic-sciences/postgraduate-study",
+                "online": "No — los títulos de investigación son presenciales en UCL."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ciencias del Cerebro y Cognitivas",
+                "note": "Un centro líder en la ciencia cognitiva del procesamiento del habla y el lenguaje.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Edimburgo — Centre for Speech Technology Research",
+                "note": "Uno de los centros europeos líderes dedicados específicamente a la investigación del habla.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad Northwestern — Departamento Roxelyn y Richard Pepper de Ciencias y Trastornos de la Comunicación",
+                "note": "Un programa líder en patología del habla-lenguaje y ciencias de la comunicación.",
+                "url": "https://communication.northwestern.edu/programs/phd-communication-sciences-disorders/",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Lingüística Teórica y Aplicada",
+                "note": "Un centro líder en investigación lingüística, incluida la producción del habla.",
+                "url": "https://www.mml.cam.ac.uk/dtal/research/graduate",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Lingüística Teórica y Aplicada."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Patología del Habla-Lenguaje",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fm/slp/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Goldman-Eisler, F. (1968). Psycholinguistics: Experiments in Spontaneous Speech. Academic Press.",
+          "note": "Un estudio fundamental en la psicolingüística de la producción del habla, incluyendo los patrones de tiempo, pausa, y ritmo del lenguaje hablado que lo distinguen de la lectura silenciosa.",
+          "url": "https://www.worldcat.org/title/psycholinguistics-experiments-in-spontaneous-speech/oclc/440680",
+          "readOriginal": "Ver la Referencia"
+        }
+      }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Calculadora de Cuenta Regresiva para Eventos",
+      "description": "Una cuenta regresiva en vivo hasta una fecha y hora que elijas, actualizándose automáticamente en días, horas, minutos, y segundos.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Evento",
+        "eventNameLabel": "Nombre del Evento (Opcional)",
+        "eventNamePlaceholder": "p. ej. Nochevieja",
+        "dateLabel": "Fecha",
+        "timeLabel": "Hora"
+      },
+      "result": {
+        "heading": "Cuenta Regresiva",
+        "noTarget": "Elige una fecha para comenzar la cuenta regresiva.",
+        "invalidDate": "Introduce una fecha y hora válidas.",
+        "countingDownTo": "Cuenta regresiva para tu evento",
+        "elapsedSince": "Tiempo transcurrido desde tu evento",
+        "days": "Días",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "La cuenta regresiva se actualiza automáticamente cada segundo, directamente en tu navegador —sin necesidad de actualizar la página."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender Esta Cuenta Regresiva",
+          "paragraph1": "Esta herramienta calcula continuamente la diferencia entre la hora actual y una fecha y hora objetivo que elijas, desglosando esa diferencia en días, horas, minutos, y segundos, y actualizando la pantalla cada segundo para que la cuenta regresiva se actualice en vivo sin necesidad de recargar la página.",
+          "paragraph2": "Una vez que llega el momento objetivo, la cuenta regresiva cambia automáticamente a contar hacia adelante en su lugar, mostrando cuánto tiempo ha transcurrido desde el evento —útil para rastrear aniversarios, hitos, o simplemente confirmar que un momento que estabas contando ya ha pasado."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Las cuentas regresivas son útiles en cualquier lugar donde la anticipación de una fecha u hora futura específica sea parte de la experiencia.",
+          "items": [
+            {
+              "title": "Bodas, Lanzamientos, y Fechas Límite",
+              "description": "Rastrear el tiempo restante hasta una fecha de boda, un lanzamiento de producto, o una fecha límite importante, generando anticipación o urgencia a medida que se acerca la fecha."
+            },
+            {
+              "title": "Páginas de Eventos e Invitaciones",
+              "description": "Añadir una cuenta regresiva en vivo a un anuncio de evento o invitación para que los destinatarios puedan ver exactamente cuánto tiempo queda de un vistazo."
+            },
+            {
+              "title": "Hitos Personales",
+              "description": "Contar regresivamente hasta un cumpleaños, aniversario, graduación, o viaje, o contar hacia adelante desde un hito ya pasado, como una fecha de sobriedad o un aniversario de relación."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿La cuenta regresiva sigue funcionando si dejo la página abierta?",
+              "answer": "Sí —mientras la página permanezca abierta en tu navegador, la cuenta regresiva se actualiza automáticamente cada segundo sin necesidad de ninguna acción de tu parte, ya que se calcula en vivo usando el reloj de tu dispositivo."
+            },
+            {
+              "question": "¿Qué sucede cuando la cuenta regresiva llega a cero?",
+              "answer": "La herramienta cambia automáticamente a contar hacia adelante, mostrando el tiempo transcurrido desde el momento objetivo en lugar del tiempo restante, para que la pantalla siga siendo significativa incluso después de que el evento haya pasado."
+            },
+            {
+              "question": "¿Qué zona horaria usa esto?",
+              "answer": "La cuenta regresiva usa la zona horaria local de tu dispositivo tanto para la fecha/hora objetivo que introduces como para la hora actual con la que se compara, por lo que la cuenta regresiva siempre es precisa para donde tú personalmente estés, no una zona horaria de referencia fija."
+            },
+            {
+              "question": "¿Por qué la cuenta regresiva muestra brevemente 0 cuando la página se carga por primera vez?",
+              "answer": "La primerísima renderización ocurre antes de que se haya leído el reloj de tu navegador, para evitar una discrepancia entre cómo se genera inicialmente la página y lo que tu navegador realmente muestra. Esto se resuelve en un segundo cuando el reloj en vivo toma el control, lo cual es una técnica estándar para cualquier cosa que muestre la hora actual en la web."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La convención dramática de la cuenta regresiva —contar hacia atrás hasta cero antes de un momento significativo— a menudo se atribuye a la película de ciencia ficción muda de Fritz Lang de 1929 \"Frau im Mond\" (\"Mujer en la Luna\"), uno de los primeros usos conocidos de una cuenta regresiva numerada para generar suspenso antes del lanzamiento de un cohete. La convención demostró ser tan efectiva dramáticamente que los ingenieros de cohetes reales y planificadores de misiones la adoptaron más tarde para lanzamientos reales, y desde entonces se ha convertido en un símbolo universal de anticipación para cualquier momento futuro significativo, mucho más allá de sus orígenes en los vuelos espaciales."
+          },
+          "howItWorks": {
+            "title": "Cómo se Calcula la Cuenta Regresiva",
+            "paragraph": "Detrás de escena, esta herramienta convierte tanto el momento actual como tu fecha objetivo elegida en un solo número: milisegundos transcurridos desde un punto de referencia fijo llamado época Unix (medianoche, 1 de enero de 1970, UTC), que es cómo las computadoras representan fechas y horas internamente. Restar un número del otro da la diferencia de tiempo exacta en milisegundos, que luego se divide en días, horas, minutos, y segundos para una visualización legible por humanos."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La historia de la cronometría y sus convenciones culturales se estudia dentro de la historia de la ciencia y los estudios de medios. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Harvard — Departamento de Historia de la Ciencia",
+                "note": "Uno de los programas líderes en el mundo para la historia de la ciencia y la tecnología.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Historia y Filosofía de la Ciencia",
+                "note": "Un centro líder en historia y filosofía de la ciencia.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Historia y Filosofía de la Ciencia."
+              },
+              {
+                "name": "Universidad de Princeton — Programa de Historia de la Ciencia",
+                "note": "Un programa líder para el estudio de la historia de la ciencia y la tecnología.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad del Sur de California — School of Cinematic Arts",
+                "note": "Una de las escuelas de cine líderes en el mundo, con sólida erudición en historia y teoría del cine.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Nueva York — Departamento de Estudios Cinematográficos",
+                "note": "Un programa líder para el estudio académico de la historia del cine.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Historia y Arqueología",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias",
+          "citation": "Lang, F. (Director). (1929). Frau im Mond [Película]. Universum Film AG (UFA).",
+          "note": "La película muda de 1929 ampliamente reconocida por los historiadores del espacio por popularizar la dramática cuenta regresiva numerada antes de un lanzamiento, una convención adoptada más tarde por la cultura real de la cohetería y el control de misión.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "Ver la Investigación del Museo"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19251,38 +20797,30 @@
     "pregnancy-calendar": "Calculadora de embarazo semana a semana",
     "random-name-generator": "Generador de nombres aleatorios",
     "golden-ratio-calculator": "Calculadora de proporción áurea",
-    "reading-time-calculator": "Calculadora de tiempo de lectura",
     "cagr-calculator": "Calculadora de CAGR",
     "personal-budget-calculator": "Calculadora de presupuesto personal",
     "present-future-value-calculator": "Calculadora de valor presente/futuro",
     "body-fat-calculator": "Calculadora de porcentaje de grasa corporal",
     "calories-burned-calculator": "Calculadora de calorías quemadas",
     "passphrase-generator": "Generador de frases de contraseña",
-    "roman-numeral-converter": "Convertidor de números romanos",
     "quadratic-equation-calculator": "Calculadora de ecuación cuadrática",
     "trigonometry-calculator": "Calculadora de trigonometría",
     "gcf-lcm-calculator": "Calculadora de MCD/MCM",
     "qr-generator-extended": "Generador avanzado de códigos QR",
-    "countdown-to-event-calculator": "Cuenta regresiva para un evento",
     "historical-currency-converter": "Convertidor de divisas históricas",
-    "lorem-ipsum-generator": "Generador de Lorem Ipsum",
     "typing-speed-calculator": "Calculadora de velocidad de escritura",
     "energy-conversion-calculator": "Calculadora de conversión de energía",
     "pressure-conversion-calculator": "Calculadora de conversión de presión",
     "aspect-ratio-calculator": "Calculadora de relación de aspecto",
-    "multiplication-table-generator": "Generador de tabla de multiplicar",
     "bill-split-calculator": "Calculadora para dividir la cuenta",
     "zakat-calculator": "Calculadora de zakat",
     "advanced-temperature-converter": "Convertidor de temperatura avanzado",
     "triangle-angle-calculator": "Calculadora de ángulo de triángulo",
     "stacked-discount-calculator": "Calculadora de descuentos acumulados",
-    "text-logo-generator": "Generador de logotipos de texto",
-    "speech-word-count-calculator": "Calculadora de palabras para discursos",
     "chinese-zodiac-age-calculator": "Calculadora de edad del zodíaco chino",
     "zodiac-sign-calculator": "Calculadora de signo zodiacal",
     "steps-to-calories-calculator": "Calculadora de pasos a calorías",
     "heat-index-calculator": "Calculadora de índice de calor",
-    "random-quote-generator": "Generador de citas aleatorias",
     "tree-age-calculator": "Calculadora de edad de un árbol",
     "hijri-gregorian-quick-converter": "Convertidor rápido hégira/gregoriano",
     "iq-estimate-calculator": "Estimación de CI",
@@ -19309,11 +20847,8 @@
     "image-to-base64-converter": "Convertidor de imagen a Base64",
     "certificate-generator": "Generador de certificados",
     "smart-video-compressor": "Compresor de video inteligente",
-    "text-to-speech": "Texto a voz",
-    "speech-to-text": "Voz a texto",
     "smart-image-compression": "Compresión inteligente de imágenes",
     "background-remover": "Eliminador de fondo de imagen",
-    "spelling-grammar-checker": "Corrector ortográfico y gramatical",
     "text-summarizer": "Resumidor de texto",
     "image-upscaler": "Mejorador de resolución de imagen",
     "plagiarism-checker": "Detector de plagio",

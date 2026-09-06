@@ -143,6 +143,28 @@ import StandardDeviationCalculator from "@/components/tools/standard-deviation-c
 import StandardDeviationEducation from "@/components/tools/standard-deviation-calculator/StandardDeviationEducation";
 import CircleCalculator from "@/components/tools/circle-calculator/CircleCalculator";
 import CircleEducation from "@/components/tools/circle-calculator/CircleEducation";
+import TextToSpeech from "@/components/tools/text-to-speech/TextToSpeech";
+import TTSEducation from "@/components/tools/text-to-speech/TTSEducation";
+import SpeechToText from "@/components/tools/speech-to-text/SpeechToText";
+import STTEducation from "@/components/tools/speech-to-text/STTEducation";
+import SpellingGrammarChecker from "@/components/tools/spelling-grammar-checker/SpellingGrammarChecker";
+import SGEducation from "@/components/tools/spelling-grammar-checker/SGEducation";
+import RomanNumeralConverter from "@/components/tools/roman-numeral-converter/RomanNumeralConverter";
+import RomanEducation from "@/components/tools/roman-numeral-converter/RomanEducation";
+import ReadingTimeCalculator from "@/components/tools/reading-time-calculator/ReadingTimeCalculator";
+import RTEducation from "@/components/tools/reading-time-calculator/RTEducation";
+import LoremIpsumGenerator from "@/components/tools/lorem-ipsum-generator/LoremIpsumGenerator";
+import LoremEducation from "@/components/tools/lorem-ipsum-generator/LoremEducation";
+import TextLogoGenerator from "@/components/tools/text-logo-generator/TextLogoGenerator";
+import LogoEducation from "@/components/tools/text-logo-generator/LogoEducation";
+import RandomQuoteGenerator from "@/components/tools/random-quote-generator/RandomQuoteGenerator";
+import QuoteEducation from "@/components/tools/random-quote-generator/QuoteEducation";
+import MultiplicationTableGenerator from "@/components/tools/multiplication-table-generator/MultiplicationTableGenerator";
+import MTEducation from "@/components/tools/multiplication-table-generator/MTEducation";
+import SpeechWordCountCalculator from "@/components/tools/speech-word-count-calculator/SpeechWordCountCalculator";
+import SWEducation from "@/components/tools/speech-word-count-calculator/SWEducation";
+import CountdownToEventCalculator from "@/components/tools/countdown-to-event-calculator/CountdownToEventCalculator";
+import CountdownEducation from "@/components/tools/countdown-to-event-calculator/CountdownEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -563,6 +585,39 @@ export default async function ToolPage({
     case "circle-calculator":
       component = <CircleCalculator education={<CircleEducation />} />;
       break;
+    case "text-to-speech":
+      component = <TextToSpeech education={<TTSEducation />} />;
+      break;
+    case "speech-to-text":
+      component = <SpeechToText education={<STTEducation />} />;
+      break;
+    case "spelling-grammar-checker":
+      component = <SpellingGrammarChecker education={<SGEducation />} />;
+      break;
+    case "roman-numeral-converter":
+      component = <RomanNumeralConverter education={<RomanEducation />} />;
+      break;
+    case "reading-time-calculator":
+      component = <ReadingTimeCalculator education={<RTEducation />} />;
+      break;
+    case "lorem-ipsum-generator":
+      component = <LoremIpsumGenerator education={<LoremEducation />} />;
+      break;
+    case "text-logo-generator":
+      component = <TextLogoGenerator education={<LogoEducation />} />;
+      break;
+    case "random-quote-generator":
+      component = <RandomQuoteGenerator education={<QuoteEducation />} />;
+      break;
+    case "multiplication-table-generator":
+      component = <MultiplicationTableGenerator education={<MTEducation />} />;
+      break;
+    case "speech-word-count-calculator":
+      component = <SpeechWordCountCalculator education={<SWEducation />} />;
+      break;
+    case "countdown-to-event-calculator":
+      component = <CountdownToEventCalculator education={<CountdownEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -697,6 +752,17 @@ export default async function ToolPage({
     slug === "random-number-generator" ||
     slug === "standard-deviation-calculator" ||
     slug === "circle-calculator" ||
+    slug === "text-to-speech" ||
+    slug === "speech-to-text" ||
+    slug === "spelling-grammar-checker" ||
+    slug === "roman-numeral-converter" ||
+    slug === "reading-time-calculator" ||
+    slug === "lorem-ipsum-generator" ||
+    slug === "text-logo-generator" ||
+    slug === "random-quote-generator" ||
+    slug === "multiplication-table-generator" ||
+    slug === "speech-word-count-calculator" ||
+    slug === "countdown-to-event-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

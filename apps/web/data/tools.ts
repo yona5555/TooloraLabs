@@ -908,7 +908,7 @@ export const tools: Tool[] = [
   {
     slug: "dice-roller",
     title: "Dice Roller",
-    category: "date-time",
+    category: "fun-entertainment",
     description:
       "Roll customizable virtual dice (d4, d6, d8, d10, d12, d20) with a roll history log.",
     featured: false,
@@ -923,7 +923,7 @@ export const tools: Tool[] = [
   {
     slug: "love-calculator",
     title: "Love Calculator",
-    category: "date-time",
+    category: "fun-entertainment",
     description:
       "A fun, name-based compatibility percentage calculator. For entertainment purposes only.",
     featured: false,
@@ -1257,6 +1257,171 @@ export const tools: Tool[] = [
       "circumference calculator",
       "area of a circle",
       "diameter calculator",
+    ],
+  },
+  {
+    slug: "text-to-speech",
+    title: "Text to Speech",
+    category: "ai-tools",
+    description:
+      "Convert written text into spoken audio using your browser's built-in speech synthesis. No account, no server, no cost.",
+    featured: false,
+    keywords: [
+      "text to speech",
+      "tts",
+      "text to speech online",
+      "read text aloud",
+      "free text to speech",
+    ],
+  },
+  {
+    slug: "speech-to-text",
+    title: "Speech to Text",
+    category: "ai-tools",
+    description:
+      "Convert spoken audio from your microphone into written text using your browser's built-in speech recognition. No account, no server, no cost.",
+    featured: false,
+    keywords: [
+      "speech to text",
+      "voice to text",
+      "speech recognition online",
+      "dictation tool",
+      "free speech to text",
+    ],
+  },
+  {
+    slug: "spelling-grammar-checker",
+    title: "Spelling & Grammar Checker",
+    category: "ai-tools",
+    description:
+      "Check text for common spelling mistakes and basic grammar issues, entirely in your browser. No account, no server, no cost.",
+    featured: false,
+    keywords: [
+      "spelling checker",
+      "grammar checker",
+      "grammar check online",
+      "spell check online",
+      "free grammar checker",
+    ],
+  },
+  {
+    slug: "roman-numeral-converter",
+    title: "Roman Numeral Converter",
+    category: "converters",
+    description:
+      "Convert between Arabic numerals and Roman numerals in both directions.",
+    featured: false,
+    keywords: [
+      "roman numeral converter",
+      "roman numerals",
+      "convert to roman numerals",
+      "roman numeral to number",
+      "roman numeral chart",
+    ],
+  },
+  {
+    slug: "reading-time-calculator",
+    title: "Reading Time Calculator",
+    category: "text-tools",
+    description:
+      "Estimate how long it will take to read a piece of text at a given reading speed.",
+    featured: false,
+    keywords: [
+      "reading time calculator",
+      "words per minute calculator",
+      "how long to read",
+      "reading speed calculator",
+      "read time estimator",
+    ],
+  },
+  {
+    slug: "lorem-ipsum-generator",
+    title: "Lorem Ipsum Generator",
+    category: "text-tools",
+    description:
+      "Generate placeholder text in paragraphs, sentences, or words, in classic or modern style.",
+    featured: false,
+    keywords: [
+      "lorem ipsum generator",
+      "placeholder text generator",
+      "dummy text generator",
+      "filler text generator",
+      "lorem ipsum",
+    ],
+  },
+  {
+    slug: "text-logo-generator",
+    title: "Text Logo Generator",
+    category: "text-tools",
+    description:
+      "Transform text into stylized Unicode text designs using bold, italic, double-struck, and other font-like styles.",
+    featured: false,
+    keywords: [
+      "text logo generator",
+      "fancy text generator",
+      "font generator",
+      "stylish text generator",
+      "unicode text generator",
+    ],
+  },
+  {
+    slug: "random-quote-generator",
+    title: "Random Quote Generator",
+    category: "fun-entertainment",
+    description:
+      "Displays a random quote from a curated, documented-source collection spanning motivational, literary, and philosophical categories.",
+    featured: false,
+    keywords: [
+      "random quote generator",
+      "quote of the day",
+      "inspirational quotes",
+      "famous quotes generator",
+      "motivational quote generator",
+    ],
+  },
+  {
+    slug: "multiplication-table-generator",
+    title: "Multiplication Table Generator",
+    category: "math",
+    description:
+      "Generate a multiplication table for a single number or a printable grid for a range of numbers.",
+    featured: false,
+    keywords: [
+      "multiplication table generator",
+      "times table generator",
+      "multiplication chart",
+      "printable times table",
+      "times table grid",
+    ],
+  },
+  {
+    slug: "speech-word-count-calculator",
+    title: "Speech Word Count Calculator",
+    category: "text-tools",
+    description:
+      "Estimate how long a speech or presentation will take to deliver, based on word count and speaking pace.",
+    featured: false,
+    keywords: [
+      "speech word count calculator",
+      "speech timer",
+      "presentation length calculator",
+      "how long is my speech",
+      "speaking pace calculator",
+    ],
+  },
+  {
+    slug: "countdown-to-event-calculator",
+    title: "Countdown to Event Calculator",
+    category: "date-time",
+    description:
+      "A live countdown to a date and time you choose, updating automatically in days, hours, minutes, and seconds.",
+    featured: false,
+    keywords: [
+      "countdown to event calculator",
+      "countdown timer",
+      "days until date",
+      "event countdown",
+      "live countdown clock",
     ],
   },
 ];

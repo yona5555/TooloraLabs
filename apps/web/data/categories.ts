@@ -49,6 +49,12 @@ export const categories: Category[] = [
     icon: "refresh",
   },
   {
+    slug: "ai-tools",
+    title: "AI Tools",
+    description: "AI-powered productivity tools.",
+    icon: "brain-circuit",
+  },
+  {
     slug: "developer-tools",
     title: "Dev Tools",
     description: "Utilities for developers.",
@@ -83,6 +89,12 @@ export const categories: Category[] = [
     title: "Date & Time",
     description: "Ages, dates, and time zones across the world.",
     icon: "calendar-clock",
+  },
+  {
+    slug: "fun-entertainment",
+    title: "Fun & Entertainment",
+    description: "Dice, games, and playful calculators for entertainment purposes only.",
+    icon: "party-popper",
   },
   {
     slug: "weather",

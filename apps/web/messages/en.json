@@ -208,6 +208,10 @@
       "title": "Converters",
       "description": "Convert units, currencies, files and measurements."
     },
+    "ai-tools": {
+      "title": "AI Tools",
+      "description": "AI-powered productivity tools."
+    },
     "developer-tools": {
       "title": "Dev Tools",
       "description": "Utilities for developers."
@@ -255,6 +259,10 @@
     "website-tools": {
       "title": "Website Tools",
       "description": "Embeddable widgets and utilities for website owners and creators."
+    },
+    "fun-entertainment": {
+      "title": "Fun & Entertainment",
+      "description": "Dice, games, and playful calculators for entertainment purposes only."
     }
   },
   "tools": {
@@ -19104,6 +19112,1548 @@
           "readOriginal": "View Further Reading"
         }
       }
+    },
+    "text-to-speech": {
+      "title": "Text to Speech",
+      "description": "Convert written text into spoken audio using your browser's built-in speech synthesis. No account, no server, no cost.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "unsupported": "Your browser doesn't support speech synthesis. Try a recent version of Chrome, Edge, or Safari.",
+        "textLabel": "Text to speak",
+        "textPlaceholder": "Type or paste text here, then press Speak.",
+        "voiceLabel": "Voice",
+        "rateLabel": "Speed",
+        "pitchLabel": "Pitch",
+        "speak": "Speak",
+        "pause": "Pause",
+        "resume": "Resume",
+        "stop": "Stop"
+      },
+      "result": {
+        "heading": "Playback",
+        "status": {
+          "idle": "Ready to speak your text.",
+          "speaking": "Speaking...",
+          "paused": "Paused."
+        },
+        "characterCountLabel": "Characters",
+        "chunkCountLabel": "Speech Chunks"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "Available voices and quality depend entirely on your browser and operating system."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Browser-Based Text to Speech",
+          "paragraph1": "This tool uses the Web Speech API's SpeechSynthesis interface, a feature built directly into modern web browsers that converts text into spoken audio without sending anything to a server. When you press Speak, your browser's own text-to-speech engine — the same one used by your operating system's accessibility features — reads the text aloud using one of the voices installed on your device. Because everything happens locally, there is no per-character cost, no account, and no network request involved in generating the speech.",
+          "paragraph2": "Long text is automatically split into shorter chunks at sentence boundaries before being queued for speech, since some browsers handle very long single utterances unreliably. The rate control adjusts how fast the voice speaks (a multiplier of the voice's normal speed), while pitch adjusts how high or low the voice sounds, independent of speed — both map directly to the `rate` and `pitch` properties defined by the underlying Web Speech API specification."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Text-to-speech is useful anywhere reading text aloud saves time or improves accessibility.",
+          "items": [
+            {
+              "title": "Proofreading by Ear",
+              "description": "Listening to a draft read aloud often catches awkward phrasing or missing words that are easy to miss when only reading silently."
+            },
+            {
+              "title": "Accessibility",
+              "description": "Making written content accessible to people with visual impairments, reading difficulties, or anyone who prefers listening over reading."
+            },
+            {
+              "title": "Multitasking",
+              "description": "Having an article, email, or document read aloud while doing something else, like commuting or cooking."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Does this send my text to a server?",
+              "answer": "No. All speech synthesis happens locally in your browser using the built-in Web Speech API — your text never leaves your device or gets sent anywhere."
+            },
+            {
+              "question": "Why don't I see very many voice options?",
+              "answer": "The available voices come entirely from your operating system and browser, not from this tool. Installing additional system voices (in your OS's language or accessibility settings) will make more options appear here."
+            },
+            {
+              "question": "Why does my browser say speech synthesis isn't supported?",
+              "answer": "A small number of older or less common browsers don't implement the Web Speech API's SpeechSynthesis interface at all. Try a recent version of Chrome, Edge, Safari, or Firefox."
+            },
+            {
+              "question": "What's the difference between speed and pitch?",
+              "answer": "Speed (rate) controls how quickly the words are spoken — higher values speak faster. Pitch controls how high or low the voice sounds, similar to raising or lowering your own voice, independent of how fast you're talking."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Speech synthesis research dates back to the 1930s with Bell Labs' Voder, an early electronic speech synthesizer operated manually by a trained technician. Software-based text-to-speech matured through the following decades, and by the 2010s it was common enough on desktop and mobile operating systems that the W3C standardized a way for web pages to access it directly: the Web Speech API, first published as a draft community report in 2012. This let websites trigger a device's existing speech engine through JavaScript, rather than requiring every site to ship its own speech technology."
+          },
+          "browserSupport": {
+            "title": "Browser Support",
+            "paragraph": "Support for the SpeechSynthesis interface varies by browser and operating system, since each browser ultimately calls into the speech engine already installed on the device rather than shipping its own. This means the exact list of available voices, and their quality, differs between a Windows PC, a Mac, and a mobile phone, even within the same browser — this tool simply exposes whatever voices your specific device already has installed."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Speech synthesis is studied within computer science, specifically in speech and language processing. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "One of the world's leading centers for speech and language processing research.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "A leading center for speech, language, and AI research.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — the PhD is an in-residence research program within EECS."
+              },
+              {
+                "name": "University of Edinburgh — Centre for Speech Technology Research",
+                "note": "One of Europe's leading centers dedicated specifically to speech technology research.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong natural language processing research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Machine Intelligence Laboratory",
+                "note": "A leading center for speech and language technology research.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — research degrees are in-residence at the Department of Engineering."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "W3C Community Group. (2012-present). Web Speech API Specification.",
+          "note": "The official technical specification defining the SpeechSynthesis and SpeechRecognition interfaces this tool is built on.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "View the Specification"
+        }
+      }
+    },
+    "speech-to-text": {
+      "title": "Speech to Text",
+      "description": "Convert spoken audio from your microphone into written text using your browser's built-in speech recognition. No account, no server, no cost.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Voice Input",
+        "unsupported": "Your browser doesn't support speech recognition. Try a recent version of Chrome or Edge.",
+        "privacyNotice": "This feature needs microphone access, which your browser will ask for. All audio is processed locally in your browser — nothing is ever recorded or sent to a server.",
+        "micDenied": "Microphone access was denied. Check your browser's site settings to allow microphone access for this page.",
+        "languageLabel": "Language",
+        "startListening": "Start Listening",
+        "stopListening": "Stop Listening",
+        "clear": "Clear"
+      },
+      "result": {
+        "heading": "Transcript",
+        "status": {
+          "idle": "Press Start Listening and begin speaking.",
+          "listening": "Listening...",
+          "denied": "Microphone access denied."
+        },
+        "emptyTranscript": "Your transcribed text will appear here.",
+        "wordCountLabel": "Words"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "Recognition accuracy and available languages depend entirely on your browser and operating system."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Browser-Based Speech Recognition",
+          "paragraph1": "This tool uses the Web Speech API's SpeechRecognition interface, a feature built directly into some modern web browsers that converts spoken audio from your microphone into text. When you press Start Listening, your browser requests microphone permission, then streams your speech to its own speech recognition engine to produce a transcript — this tool never records, stores, or transmits your audio to any server.",
+          "paragraph2": "Speech recognition results arrive in two forms: interim results, which update continuously as you speak and may still change, and final results, which are locked in once the recognizer is confident a phrase is complete. This tool displays interim text faintly while listening and commits each final segment to the permanent transcript, joining segments together and automatically capitalizing the start of each sentence for readability."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Speech-to-text is useful anywhere typing is slower or less convenient than speaking.",
+          "items": [
+            {
+              "title": "Voice Note-Taking",
+              "description": "Quickly capturing ideas or notes by speaking them aloud instead of typing, especially useful when your hands are busy."
+            },
+            {
+              "title": "Accessibility",
+              "description": "Making text input accessible to people who have difficulty typing due to motor impairments or other conditions."
+            },
+            {
+              "title": "Drafting Text Faster",
+              "description": "Speaking a rough draft of an email or message aloud to get words down quickly, then editing the transcribed text afterward."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is my voice recorded or sent anywhere?",
+              "answer": "No. This tool never records or uploads your audio. Your browser processes your speech locally (or via its own built-in recognition service) purely to produce the text you see — this page never stores or transmits the audio itself."
+            },
+            {
+              "question": "Why does my browser ask for microphone permission?",
+              "answer": "Speech recognition requires access to your microphone to hear what you say. Your browser handles this permission request directly, and you can revoke it at any time in your browser's site settings."
+            },
+            {
+              "question": "Why does it say speech recognition isn't supported?",
+              "answer": "The SpeechRecognition interface has more limited browser support than text-to-speech. It works well in Chrome and Edge, but Firefox and Safari have historically had partial or no support. Try a recent version of Chrome or Edge."
+            },
+            {
+              "question": "Why does the transcript get some words wrong?",
+              "answer": "Speech recognition accuracy depends on your microphone quality, background noise, accent, and the recognition engine itself — none of which this tool controls, since the actual recognition happens inside your browser or operating system."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Automatic speech recognition research dates back to Bell Labs' 1952 \"Audrey\" system, which could recognize spoken digits from a single speaker. Progress accelerated through the following decades with statistical modeling techniques, and by the 2010s, cloud-connected speech recognition had become common on smartphones. The W3C's Web Speech API, first published as a draft community report in 2012, standardized a way for web pages to request microphone-based speech recognition directly through JavaScript, alongside its companion SpeechSynthesis interface for text-to-speech."
+          },
+          "privacy": {
+            "title": "Privacy and Permissions",
+            "paragraph": "Because speech recognition requires microphone access, browsers treat it as a sensitive permission that must be explicitly granted by the user for each site, and can be revoked at any time. This tool requests that permission only when you press Start Listening, and never records or stores your audio — the audio is processed only to generate a text transcript, exactly as it would be for any other browser feature that uses speech recognition, like voice search or voice assistants."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Speech recognition is studied within computer science, specifically in speech and language processing. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "One of the world's leading centers for speech and language processing research.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "A leading center for speech, language, and AI research.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — the PhD is an in-residence research program within EECS."
+              },
+              {
+                "name": "University of Edinburgh — Centre for Speech Technology Research",
+                "note": "One of Europe's leading centers dedicated specifically to speech technology research.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong natural language processing research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Machine Intelligence Laboratory",
+                "note": "A leading center for speech and language technology research.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — research degrees are in-residence at the Department of Engineering."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "W3C Community Group. (2012-present). Web Speech API Specification.",
+          "note": "The official technical specification defining the SpeechRecognition and SpeechSynthesis interfaces this tool is built on.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "View the Specification"
+        }
+      }
+    },
+    "spelling-grammar-checker": {
+      "title": "Spelling & Grammar Checker",
+      "description": "Check text for common spelling mistakes and basic grammar issues, entirely in your browser. No account, no server, no cost.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "textLabel": "Text to check",
+        "textPlaceholder": "Type or paste your text here to check it as you go.",
+        "disclaimer": "This is a basic rule-based checker, not a full AI writing assistant — it catches common mistakes but won't catch everything.",
+        "clear": "Clear"
+      },
+      "result": {
+        "heading": "Results",
+        "emptyText": "Start typing to see spelling and grammar suggestions.",
+        "wordCountLabel": "Words",
+        "issueCountLabel": "Issues Found",
+        "suggestion": "Suggested:"
+      },
+      "quickReference": {
+        "title": "Highlight Legend",
+        "intro": "Each underline color marks a different type of issue.",
+        "legend": {
+          "spelling": "Spelling",
+          "grammar": "Grammar",
+          "capitalization": "Capitalization",
+          "punctuation": "Punctuation & Spacing"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding This Checker",
+          "paragraph1": "This tool scans your text using a set of rules built directly into your browser's JavaScript: a list of commonly misspelled words, and pattern-matching checks for things like missing capitalization at the start of a sentence, repeated words, double spaces, missing spaces after punctuation, and a few common grammar mix-ups like \"a\" versus \"an\". Everything runs locally as you type — nothing is ever sent to a server.",
+          "limitation": "Important: this is a basic, rule-based checker, not a full AI-powered writing assistant. It's built to catch a specific set of common, unambiguous mistakes, not to understand context, tone, or style the way advanced tools like Grammarly do. Always give your text a final read-through yourself."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "A basic grammar checker is useful anywhere a quick pass for obvious mistakes helps before sending or publishing text.",
+          "items": [
+            {
+              "title": "Quick Emails and Messages",
+              "description": "Catching an obvious typo or missed capital letter before sending a quick email or message."
+            },
+            {
+              "title": "First-Pass Drafting",
+              "description": "Running a first pass over a draft to catch mechanical errors before doing a more thorough content and style review."
+            },
+            {
+              "title": "Learning Common Mistakes",
+              "description": "Seeing frequently confused words and mechanical errors flagged can help reinforce correct usage over time."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is this as good as Grammarly or other AI writing tools?",
+              "answer": "No, and it's not trying to be. This tool uses a small set of straightforward pattern-matching rules, while tools like Grammarly use large language models trained to understand context, tone, and style. This checker catches specific, common mechanical mistakes — think of it as a helpful first pass, not a full editor."
+            },
+            {
+              "question": "Does this send my text anywhere?",
+              "answer": "No. All checking happens locally in your browser using JavaScript running on this page — your text is never sent to a server or stored anywhere."
+            },
+            {
+              "question": "Why didn't it catch a mistake I know is there?",
+              "answer": "This checker only looks for a specific, limited set of patterns: a fixed list of commonly misspelled words and a handful of grammar rules. It doesn't have a full dictionary or any understanding of meaning, so it will miss real-word errors (like \"their\" used instead of \"there\") and mistakes outside its rule set."
+            },
+            {
+              "question": "Why did it flag something that's actually correct?",
+              "answer": "The rules are intentionally simple pattern matches, so they can occasionally produce a false positive — for example, the \"a\" versus \"an\" check is based on the first letter of the next word, which usually but not always matches how the word actually sounds. Use your own judgment alongside the suggestions."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Automated spell checking dates back to 1971, when Ralph Gorin created one of the first spell-checking programs at Stanford. By the late 1970s, tools like the Unix \"spell\" command and IBM's Epistle project were comparing document words against dictionary word lists to flag likely typos, the same fundamental idea behind this tool's misspelling check. Grammar checking followed a similar path starting in the 1980s (Writer's Workbench and Grammatik among the earliest), using pattern-matching rules very similar to the ones this tool uses today, before modern AI-based tools brought deep contextual understanding to the task decades later."
+          },
+          "howItWorks": {
+            "title": "How Rule-Based Checking Works",
+            "paragraph": "Rule-based checkers like this one work by scanning text for specific, well-defined patterns using regular expressions and lookup tables, rather than by understanding meaning. A misspelling check simply compares each word against a list of known incorrect spellings; a capitalization check looks for a lowercase letter immediately following a sentence-ending period; and so on. This approach is fast, fully predictable, and requires no external service, but it's inherently limited to the specific patterns it's been programmed to recognize — unlike statistical or AI-based checkers, which can catch errors no one explicitly anticipated."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Automated text checking is studied within computer science, specifically in natural language processing. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong natural language processing research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "One of the world's leading centers for natural language processing research.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Home to a leading natural language processing research group.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of Computer Science and Technology",
+                "note": "A leading center for computational linguistics and language technology research.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — research degrees are in-residence at the Department of Computer Science and Technology."
+              },
+              {
+                "name": "University of Edinburgh — School of Informatics",
+                "note": "One of Europe's leading centers for natural language processing research.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "A widely cited, freely available technical explanation of how spell-checking algorithms work, from simple dictionary lookups to statistical correction models.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "View the Article"
+        }
+      }
+    },
+    "roman-numeral-converter": {
+      "title": "Roman Numeral Converter",
+      "description": "Convert between Arabic numerals and Roman numerals in both directions.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Convert a Number",
+        "toRoman": "To Roman",
+        "toArabic": "To Arabic",
+        "arabicLabel": "Number (1-3999)",
+        "arabicHint": "Standard Roman numerals only represent whole numbers from 1 to 3999.",
+        "romanLabel": "Roman Numeral"
+      },
+      "result": {
+        "heading": "Result",
+        "emptyInput": "Enter a value to convert.",
+        "outOfRange": "Enter a whole number between 1 and 3999.",
+        "invalidRoman": "That's not a valid standard Roman numeral."
+      },
+      "quickReference": {
+        "title": "Roman Symbols",
+        "intro": "The seven basic symbols and their values."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Roman Numerals",
+          "paragraph1": "Roman numerals represent numbers using combinations of seven letters: I (1), V (5), X (10), L (50), C (100), D (500), and M (1000). Numbers are built by combining these symbols and adding their values together, generally from largest to smallest, reading left to right — so VII is 5 + 1 + 1 = 7.",
+          "paragraph2": "A special \"subtractive\" rule shortens some combinations: instead of writing four of the same symbol in a row (like IIII for 4), a smaller symbol is placed before a larger one to mean subtraction — IV means 5 − 1 = 4, and IX means 10 − 1 = 9. This subtractive notation is only used for specific pairs (IV, IX, XL, XC, CD, CM), which is what lets this tool reject invalid numerals like IIII or VX that don't follow the standard rules."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Roman numerals still show up in specific, mostly traditional or stylistic contexts today.",
+          "items": [
+            {
+              "title": "Clock Faces and Dates",
+              "description": "Many clock faces, building cornerstones, and copyright dates on films still use Roman numerals for a traditional or formal appearance."
+            },
+            {
+              "title": "Sequels, Volumes, and Outlines",
+              "description": "Movie sequels (Rocky IV), book volumes, and outline sub-headings commonly use Roman numerals to indicate sequence."
+            },
+            {
+              "title": "Names and Titles",
+              "description": "Monarchs, popes, and family names passed down through generations (King Henry VIII, John Smith III) use Roman numerals to distinguish successive individuals sharing a name."
+            }
+          ]
+        },
+        "examples": {
+          "title": "Worked Examples",
+          "intro": "A few conversions, computed the same way this tool computes them.",
+          "columnArabic": "Arabic",
+          "columnRoman": "Roman",
+          "rows": [
+            {
+              "arabic": "4",
+              "roman": "IV"
+            },
+            {
+              "arabic": "49",
+              "roman": "XLIX"
+            },
+            {
+              "arabic": "1994",
+              "roman": "MCMXCIV"
+            },
+            {
+              "arabic": "3999",
+              "roman": "MMMCMXCIX"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why can't I convert numbers larger than 3999?",
+              "answer": "Standard Roman numerals have no symbol for 5000 or higher, so 3999 (MMMCMXCIX) is the largest number expressible with the traditional seven letters. Historically, larger numbers were sometimes written with a horizontal bar over a symbol to multiply its value by 1000, but that extended notation isn't part of the standard system this tool supports."
+            },
+            {
+              "question": "Why is IIII sometimes seen on clocks instead of IV?",
+              "answer": "While IV is the standard subtractive form for 4, many clock faces traditionally use IIII instead, largely for visual symmetry with the VIII on the opposite side of the dial and for historical/aesthetic reasons. This tool follows the standard mathematical convention (IV), not the clock-face convention."
+            },
+            {
+              "question": "Is there a Roman numeral for zero?",
+              "answer": "No. The Roman numeral system has no symbol for zero — it was designed for counting and recording quantities, not for the kind of positional arithmetic that requires a zero placeholder, which is why this tool's range starts at 1."
+            },
+            {
+              "question": "Why does the converter reject some Roman numerals I type?",
+              "answer": "This tool only accepts standard, canonically-formed Roman numerals. It rejects numerals that don't follow the standard subtractive rules (like IIII, VX, or IC), since those aren't considered valid in the traditional system, even though a naive letter-by-letter sum might otherwise produce a plausible-looking number."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Roman numerals originated in ancient Rome, evolving from Etruscan numeral symbols starting around the 8th century BCE. The system was designed for practical counting and record-keeping using tally-like marks — I, II, III for small counts, with additional symbols added for larger round numbers. It remained the dominant number system across Europe for over a thousand years, well into the Middle Ages, even after the more computationally convenient Hindu-Arabic numeral system (the 0-9 digits used today) began spreading from India through the Islamic world starting in the 9th century."
+          },
+          "modernUse": {
+            "title": "Why We Still Use Them Today",
+            "paragraph": "Roman numerals persisted long after Hindu-Arabic numerals became standard for calculation because they serve a different purpose: formality, tradition, and sequence-marking rather than arithmetic. Since Roman numerals are cumbersome for addition, subtraction, and especially multiplication compared to the positional Hindu-Arabic system, they gradually became reserved for contexts where tradition or visual distinctiveness matters more than calculation — the specific modern uses covered above."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The history of numeral systems is studied within the history of mathematics. Here are five respected mathematics programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford — Mathematical Institute",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Harvard University — Department of Mathematics",
+                "note": "Ranked #4 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.math.harvard.edu/graduate/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Stanford University — Department of Mathematics",
+                "note": "Ranked #5 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://mathematics.stanford.edu/academics/graduate/graduate-admissions/",
+                "online": "No — the program is an in-residence research PhD."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Ifrah, G. (2000). The Universal History of Numbers: From Prehistory to the Invention of the Computer. Wiley.",
+          "note": "A comprehensive scholarly history of numeral systems across civilizations, including the development and spread of Roman numerals.",
+          "url": "https://archive.org/details/universalhistory0000ifra",
+          "readOriginal": "View the Reference"
+        }
+      }
+    },
+    "reading-time-calculator": {
+      "title": "Reading Time Calculator",
+      "description": "Estimate how long it will take to read a piece of text at a given reading speed.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "textLabel": "Text to estimate",
+        "textPlaceholder": "Paste or type your text here.",
+        "speedLabel": "Reading Speed",
+        "presets": {
+          "slow": "Slow",
+          "average": "Average",
+          "fast": "Fast",
+          "custom": "Custom"
+        },
+        "customWpmLabel": "Words per Minute"
+      },
+      "result": {
+        "heading": "Estimated Reading Time",
+        "emptyText": "Enter some text to estimate its reading time.",
+        "invalidRate": "Enter a reading speed between 1 and 1000 words per minute.",
+        "timeMinutesSeconds": "{minutes} min {seconds} sec",
+        "timeSecondsOnly": "{seconds} sec",
+        "wordCountLabel": "Word Count"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Reading time is simply the word count divided by how many words you read per minute."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Reading Time Estimates",
+          "paragraph1": "Estimating reading time comes down to a simple division: the total number of words in a piece of text divided by a reading speed expressed in words per minute (WPM). This tool offers three common speed presets — slow (150 WPM), average (230 WPM), and fast (300 WPM) — based on typical ranges found in reading-speed research for adult silent reading of English prose, plus a custom option for your own measured speed.",
+          "paragraph2": "Reading speed varies enormously between individuals and depends heavily on the type of material: a technical paper full of unfamiliar terms is read far more slowly than a casual novel, and skimming is much faster than reading for full comprehension or reading aloud. This tool's estimate is therefore a reasonable ballpark for straightforward prose at a given speed, not a precise prediction for any specific reader or any specific piece of writing."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Reading time estimates are useful anywhere readers benefit from knowing how much time to set aside.",
+          "items": [
+            {
+              "title": "Blog Posts and Articles",
+              "description": "Displaying an estimated \"5 min read\" label helps readers decide whether to dive in now or save an article for later."
+            },
+            {
+              "title": "Meeting and Presentation Prep",
+              "description": "Estimating how long it will take an audience to read a handout or slide of text before moving on."
+            },
+            {
+              "title": "Study Planning",
+              "description": "Roughly budgeting study time for a reading assignment based on its word count and your typical reading speed."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What reading speed should I use?",
+              "answer": "Average adult silent reading speed for English prose is commonly cited around 200-250 words per minute, which is why this tool's \"Average\" preset uses 230 WPM. If you know your own speed from a reading test, use the Custom option instead for a more personalized estimate."
+            },
+            {
+              "question": "Why is my actual reading time different from the estimate?",
+              "answer": "This tool assumes a constant reading speed applied uniformly across the whole text, but real reading speed varies with difficulty, familiarity with the topic, tiredness, and whether you're skimming or reading closely. Treat the result as a useful estimate, not an exact prediction."
+            },
+            {
+              "question": "Does this count numbers or punctuation as words?",
+              "answer": "Word count is based on whitespace-separated chunks of text, so a number or a hyphenated term generally counts as one word, similar to how word processors count words. This matches how most reading-time estimates on blogs and articles are calculated."
+            },
+            {
+              "question": "Is reading time the same as speaking time?",
+              "answer": "No — silent reading is typically faster than speaking aloud, since spoken delivery is paced by breath, pronunciation, and audience comprehension rather than just eye movement across text. If you need to estimate how long a speech or presentation will take to deliver, a dedicated speaking-rate estimate is more appropriate than a silent reading speed."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Research",
+            "paragraph": "Reading speed has been studied by psychologists since the late 19th century, when early eye-tracking pioneers like Émile Javal discovered that the eyes move in quick jumps (saccades) with brief pauses (fixations) rather than smoothly scanning a line of text. Modern research on reading speed, drawing on hundreds of studies, has consistently found that silent reading speed for adults in familiar languages typically falls somewhere in the range of roughly 175 to 300 words per minute for general-audience prose, which is the range this tool's three presets are drawn from."
+          },
+          "limitations": {
+            "title": "Limitations of This Estimate",
+            "paragraph": "A words-per-minute estimate necessarily simplifies a much more complex process. Actual reading speed is affected by text difficulty and sentence complexity, the reader's familiarity with the subject and vocabulary, font size and layout, and even the reader's current level of fatigue — none of which this calculator can measure from the text alone. It is best used as a quick, general-purpose estimate rather than a precise measurement."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Reading speed and comprehension are studied within cognitive psychology and psycholinguistics. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Ghent University — Department of Experimental Psychology",
+                "note": "Home to leading reading-speed and psycholinguistics researchers, including large-scale studies on reading rates.",
+                "url": "https://www.ugent.be/pp/experimentele-psychologie/en",
+                "online": "No — research degrees are in-residence at Ghent University."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "A leading center for the cognitive science of reading and language processing.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Oxford — Department of Experimental Psychology",
+                "note": "A leading center for experimental psychology, including reading and language research.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge — Department of Psychology",
+                "note": "A leading center for psychological science in the UK.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Stanford University — Department of Psychology",
+                "note": "A leading psychology department with strong cognitive science research.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of Psychology",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
+          "note": "A comprehensive meta-analysis of reading-rate research across hundreds of studies, which is the basis for the general speed ranges this tool's presets are drawn from.",
+          "url": "https://doi.org/10.1016/j.jml.2019.104047",
+          "readOriginal": "View the Study"
+        }
+      }
+    },
+    "lorem-ipsum-generator": {
+      "title": "Lorem Ipsum Generator",
+      "description": "Generate placeholder text in paragraphs, sentences, or words, in classic or modern style.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Generator Settings",
+        "styleLabel": "Style",
+        "styles": {
+          "classic": "Classic Latin",
+          "modern": "Modern (Business Buzzwords)"
+        },
+        "unitLabel": "Generate By",
+        "units": {
+          "paragraphs": "Paragraphs",
+          "sentences": "Sentences",
+          "words": "Words"
+        },
+        "countLabel": "How Many",
+        "startWithLorem": "Start with \"Lorem ipsum dolor sit amet...\"",
+        "generate": "Generate"
+      },
+      "result": {
+        "heading": "Generated Text",
+        "invalidCount": "Enter a whole number between 1 and 50.",
+        "wordCountLabel": "Word Count"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "Lorem Ipsum is deliberately meaningless placeholder text — its Latin-like words don't form real sentences with real meaning."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Lorem Ipsum",
+          "paragraph1": "Lorem Ipsum is placeholder text (also called \"dummy text\" or \"greeking\") used by designers and developers to fill a layout with realistic-looking text before real content is ready. Because it resembles natural language in word length and letter frequency without being readable or distracting, it lets people evaluate a design's visual layout, typography, and spacing without the content itself pulling their attention.",
+          "paragraph2": "This tool also offers a \"modern\" alternative word bank built from common business and tech buzzwords (\"synergy,\" \"leverage,\" \"scalable,\" and similar terms) instead of the classic Latin-derived vocabulary, generated using the exact same sentence and paragraph structure. Both styles serve the identical purpose — filling space with plausible-looking but ultimately meaningless text — the only difference is the vocabulary."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Placeholder text shows up anywhere a layout needs to be built or reviewed before final content exists.",
+          "items": [
+            {
+              "title": "Website and App Mockups",
+              "description": "Filling text areas, headlines, and paragraphs in a design mockup so stakeholders can evaluate the visual layout independent of the final copy."
+            },
+            {
+              "title": "Print and Publishing Layout",
+              "description": "Testing how a page layout, font choice, and column width look with a realistic amount of text before the final manuscript is ready."
+            },
+            {
+              "title": "Software Development and Testing",
+              "description": "Populating a user interface with sample text during development to check how components handle varying amounts of content, like long versus short paragraphs."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What does Lorem Ipsum actually mean?",
+              "answer": "Nothing coherent. It's derived from a genuine Latin text, but scrambled, abbreviated, and altered so heavily over its long history of use that it no longer forms grammatically correct or meaningful Latin sentences — which is exactly the point, since meaningless text doesn't distract from evaluating a layout."
+            },
+            {
+              "question": "Where does Lorem Ipsum come from?",
+              "answer": "It traces back to a passage from Cicero's 45 BC philosophical text \"De Finibus Bonorum et Malorum\" (\"On the Ends of Good and Evil\"). A scrambled excerpt from that text — starting mid-word with \"...orem ipsum...\" from \"dolorem ipsum\" — has been used as filler text since at least the 1960s, likely originating even earlier in printing."
+            },
+            {
+              "question": "Why use Lorem Ipsum instead of real sentences in English?",
+              "answer": "Using recognizable English (or any language readers understand) as filler text tends to distract reviewers, who start reading and evaluating the words themselves rather than the layout, typography, and visual design the placeholder text is meant to showcase. Latin-derived gibberish looks like real text at a glance without inviting that kind of reading."
+            },
+            {
+              "question": "Is the \"modern\" style historically accurate Latin too?",
+              "answer": "No — the modern style is an intentionally different, non-Latin word bank made of common business and technology buzzwords, offered as a stylistic alternative for contexts (like tech product mockups) where filler text resembling corporate jargon might feel more appropriate or amusing than Latin."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The text traces back to sections 1.10.32 and 1.10.33 of Cicero's \"De Finibus Bonorum et Malorum,\" written in 45 BC as a philosophical exploration of ethics. Some form of scrambled, garbled excerpts from this text has been used as typesetting filler since at least the 1960s (when it appeared in Letraset sheets and early desktop publishing software), and it's widely believed to have been used by printers even earlier, possibly since the 16th century, though solid documentation only exists for its modern use."
+          },
+          "rediscovery": {
+            "title": "How Its Origin Was Rediscovered",
+            "paragraph": "For decades, the text's original source was essentially unknown to the designers who used it daily. In 1982, Richard McClintock, a Latin scholar at Hampden-Sydney College, was searching for the origin of the word \"consectetur\" and traced the fragments back to Cicero's classical text — a discovery that is now the standard, well-documented account of Lorem Ipsum's origin cited across the design and publishing industry."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Classical Latin texts like Cicero's are studied within classics and classical philology departments. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "University of Oxford — Faculty of Classics",
+                "note": "One of the world's leading centers for classical studies and Latin philology.",
+                "url": "https://www.classics.ox.ac.uk/graduate-study",
+                "online": "No — research degrees are in-residence at the Faculty of Classics."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Classics",
+                "note": "A leading center for classical studies, including Ciceronian scholarship.",
+                "url": "https://www.classics.cam.ac.uk/prospective/graduate",
+                "online": "No — research degrees are in-residence at the Faculty of Classics."
+              },
+              {
+                "name": "Harvard University — Department of the Classics",
+                "note": "One of the leading classics departments in the United States.",
+                "url": "https://classics.fas.harvard.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Princeton University — Department of Classics",
+                "note": "A leading center for the study of Latin and Roman literature.",
+                "url": "https://classics.princeton.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Michigan — Department of Classical Studies",
+                "note": "A leading classics department with strong Latin philology research.",
+                "url": "https://lsa.umich.edu/classics/graduate-students/prospective-students.html",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of Classics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/classics/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scholarly References",
+          "citation": "Cicero, M. T. (45 BC). De Finibus Bonorum et Malorum, 1.10.32-33.",
+          "note": "The original classical Latin text that Lorem Ipsum's scrambled, garbled passages are ultimately derived from, as traced by Richard McClintock's 1982 research.",
+          "url": "https://www.lipsum.com/",
+          "readOriginal": "View the History"
+        }
+      }
+    },
+    "text-logo-generator": {
+      "title": "Text Logo Generator",
+      "description": "Transform text into stylized Unicode text designs using bold, italic, double-struck, and other font-like styles.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "textLabel": "Text to style",
+        "textPlaceholder": "Type something...",
+        "hint": "Every style below updates instantly and can be copied with one click."
+      },
+      "result": {
+        "heading": "Styled Text",
+        "emptyText": "Type some text to see it in every style.",
+        "styles": {
+          "bold": "Bold",
+          "italic": "Italic",
+          "boldItalic": "Bold Italic",
+          "doubleStruck": "Double-Struck",
+          "monospace": "Monospace",
+          "fullwidth": "Fullwidth",
+          "circled": "Circled"
+        }
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "These styles are real Unicode characters, not fonts — they'll display the same way (as these specific symbols) almost anywhere you paste them, including places that don't let you change fonts, like social media bios and usernames."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Unicode Text Styles",
+          "paragraph1": "This tool doesn't apply a font to your text — it replaces each letter and digit with a different Unicode character that looks bold, italic, double-struck, or otherwise stylized. Because these are distinct characters (not styling applied to the same underlying letter), the result is plain text that carries its \"styled\" appearance wherever it goes, including into places like social media bios, usernames, or chat apps that don't otherwise support bold or italic text formatting.",
+          "paragraph2": "The specific characters this tool uses come from the Unicode Mathematical Alphanumeric Symbols block, a set of code points originally added to the Unicode Standard so that mathematical and scientific notation could distinguish, say, an italic variable \"x\" from a regular letter \"x\" in plain text — a genuine typographic distinction mathematicians rely on. This tool repurposes that same character set for decorative text styling, which is a common but unofficial use of characters that were designed for a different, more technical purpose."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Stylized Unicode text shows up anywhere someone wants visually distinctive plain text.",
+          "items": [
+            {
+              "title": "Social Media Bios and Usernames",
+              "description": "Adding visual flair to a profile name or bio on platforms that don't support rich text formatting, since these are just plain Unicode characters."
+            },
+            {
+              "title": "Headers in Plain-Text Contexts",
+              "description": "Making a heading or label stand out in places like plain-text emails, chat messages, or forum posts where markdown or HTML formatting isn't rendered."
+            },
+            {
+              "title": "Quick, Copy-Paste Logos",
+              "description": "Creating a simple, distinctive-looking wordmark for informal use without needing design software, by copying one of the styled variants directly."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is this actually a different font?",
+              "answer": "No — no font is being applied. Each character you see is a distinct Unicode code point that happens to look bold, italic, or otherwise stylized. This is why the styled text keeps its appearance even in places that don't support custom fonts or rich text."
+            },
+            {
+              "question": "Will this text display correctly everywhere?",
+              "answer": "Almost everywhere, since these are standard Unicode characters, but display depends on the reader's device having a font installed that includes glyphs for these specific code points. Nearly all modern devices and browsers support them, though extremely old or limited systems occasionally show empty boxes for less common ranges."
+            },
+            {
+              "question": "Why don't italic and double-struck cover every letter and digit the same way?",
+              "answer": "A handful of specific letters in the Mathematical Alphanumeric Symbols block reuse older, pre-existing Unicode characters instead of getting new code points — for example, italic lowercase \"h\" reuses the existing Planck constant symbol (ℎ), and double-struck C, H, N, P, Q, R, and Z reuse existing blackboard-bold symbols from mathematics (like ℝ for real numbers). This tool accounts for those specific exceptions automatically."
+            },
+            {
+              "question": "Can search engines or screen readers read this styled text normally?",
+              "answer": "Not reliably. Because each character is a distinct Unicode symbol rather than the plain letter it resembles, screen readers may not pronounce it correctly, and search engines may not match it to normal-text searches. Use these styles for visual flair in casual contexts, not for body text that needs to be fully accessible or searchable."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "howItWorks": {
+            "title": "How It Works",
+            "paragraph": "The Unicode Mathematical Alphanumeric Symbols block (code points U+1D400 through U+1D7FF) was added to the Unicode Standard in version 3.1, published in 2001, specifically to support mathematical typesetting where the same letter needs distinct forms — a regular \"x\", an italic \"x\" for a variable, and a bold \"x\" for a vector, for instance, all need to remain distinguishable even when copied as plain text without any font styling applied. This tool works by looking up the equivalent styled code point for each letter or digit you type, character by character, and substituting it in."
+          },
+          "limitations": {
+            "title": "Limitations of This Tool",
+            "paragraph": "Unicode's coverage of these styles isn't perfectly uniform: some styles (like italic) have no digit variants at all, since mathematical notation didn't need italic digits the way it needed italic variables, and a handful of individual letters in certain styles reuse older, already-existing Unicode symbols instead of dedicated new characters. This tool includes the specific, documented exceptions for the styles it offers, so the output is accurate to the actual Unicode Standard rather than guessing at a pattern that doesn't quite hold for every character."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Character encoding standards like Unicode are studied within computer science, particularly in the areas of internationalization and text processing. Here are five respected computer science programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Electrical Engineering and Computer Science",
+                "note": "One of the world's leading computer science departments.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — the PhD is an in-residence research program within EECS."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong systems and internationalization research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of Computer Science and Technology",
+                "note": "A leading center for computer science research in the UK.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — research degrees are in-residence at the Department of Computer Science and Technology."
+              },
+              {
+                "name": "Carnegie Mellon University — School of Computer Science",
+                "note": "One of the world's leading computer science schools.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "ETH Zurich — Department of Computer Science",
+                "note": "A leading European computer science department.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "No — the doctoral program is an in-residence research degree."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "The official Unicode code chart defining the exact characters, code points, and documented exceptions this tool's styled-text mappings are based on.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "View the Official Code Chart"
+        }
+      }
+    },
+    "random-quote-generator": {
+      "title": "Random Quote Generator",
+      "description": "Displays a random quote from a curated, documented-source collection spanning motivational, literary, and philosophical categories.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Choose a Category",
+        "categoryLabel": "Category",
+        "newQuote": "New Quote"
+      },
+      "categories": {
+        "all": "All",
+        "motivational": "Motivational",
+        "literary": "Literary",
+        "philosophical": "Philosophical"
+      },
+      "result": {
+        "heading": "Quote"
+      },
+      "quickReference": {
+        "title": "About This Collection",
+        "intro": "Every quote here cites a verifiable primary source — a speech, book, or published text — rather than an unsourced \"internet quote.\""
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding This Quote Collection",
+          "paragraph1": "This tool draws from a small, hand-curated collection of quotes rather than a large scraped database, specifically so that every single quote can be checked against a real, citable source: a historical speech transcript, a published book, or a philosopher's original text. Each quote displayed here includes its source, not just its author, so you can see exactly where it comes from.",
+          "paragraph2": "The collection spans three categories: motivational quotes drawn from historical speeches and documented public statements, literary quotes taken from the actual text of well-known novels and plays, and philosophical quotes translated from primary philosophical works. Clicking \"New Quote\" picks a different quote at random from the selected category, avoiding an immediate repeat of the one you just saw."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "A random quote generator is useful anywhere a moment of inspiration, reflection, or literary appreciation is welcome.",
+          "items": [
+            {
+              "title": "Daily Inspiration",
+              "description": "Starting the day with a motivational quote from a historical figure's own documented words."
+            },
+            {
+              "title": "Writing and Presentations",
+              "description": "Finding a well-sourced quote to open an essay, presentation, or social media post, with a source you can actually cite."
+            },
+            {
+              "title": "Literary and Philosophical Exploration",
+              "description": "Discovering a line from a classic novel or philosophical text that might prompt reading the full work."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Are these quotes really accurate?",
+              "answer": "Every quote in this collection is drawn from a documented, checkable source — a historical speech transcript, a published novel or play, or a translated philosophical text — rather than from a general internet quote database, where misattribution is extremely common."
+            },
+            {
+              "question": "Why do some famous quotes not appear here?",
+              "answer": "Many widely circulated \"famous quotes\" (often attributed to figures like Einstein, Twain, or Lincoln) are actually misattributed, paraphrased, or entirely fabricated, despite being extremely common online. This collection deliberately favors a smaller number of quotes that can be verified over a larger collection padded with unverifiable ones."
+            },
+            {
+              "question": "Why does clicking \"New Quote\" sometimes feel like it skips around a small set?",
+              "answer": "This is a small, curated collection rather than a massive database, since every quote requires manual source verification. Within a single category, you may see the same handful of quotes reappear after enough clicks, though the tool avoids showing the exact same quote twice in a row."
+            },
+            {
+              "question": "Can I trust the source listed for each quote?",
+              "answer": "Each source points to where the quote can actually be found — a specific speech and date, a specific book and publication year, or a specific philosophical text — so you can look it up yourself rather than taking the attribution on faith."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "sourcing": {
+            "title": "How Quotes Are Sourced",
+            "paragraph": "Each quote in this collection was selected specifically because it traces to a primary, checkable source: the transcript of a historical speech, the actual printed text of a novel or play, or a standard translation of a philosophical work. This is a deliberately more conservative approach than many quote websites take, which often prioritize a large volume of quotes over verifying where each one actually came from."
+          },
+          "misattribution": {
+            "title": "The Problem of Quote Misattribution",
+            "paragraph": "Quote misattribution is a well-documented phenomenon: a striking or clever line gets attached to a famous name over time, often because a famous person's name makes a quote feel more credible or shareable, regardless of whether they actually said it. Researchers who investigate quote origins, such as the Quote Investigator project, have traced many extremely popular \"famous quotes\" back to obscure or entirely different original sources than the person they're commonly credited to, which is why this collection sticks to a smaller set of quotes with verifiable origins."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The study of textual sources, quotations, and their origins falls within philology and literary/historical scholarship. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "University of Oxford — Faculty of English Language and Literature",
+                "note": "One of the world's leading centers for literary and textual scholarship.",
+                "url": "https://www.english.ox.ac.uk/graduate-study",
+                "online": "No — research degrees are in-residence at the Faculty of English."
+              },
+              {
+                "name": "Harvard University — Department of English",
+                "note": "A leading department for literary studies and textual history.",
+                "url": "https://english.fas.harvard.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Classics",
+                "note": "A leading center for the study of classical and philosophical primary texts.",
+                "url": "https://www.classics.cam.ac.uk/prospective/graduate",
+                "online": "No — research degrees are in-residence at the Faculty of Classics."
+              },
+              {
+                "name": "Princeton University — Department of History",
+                "note": "A leading history department with strong archival and primary-source research.",
+                "url": "https://history.princeton.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Yale University — Department of Philosophy",
+                "note": "A leading philosophy department with strong history of philosophy scholarship.",
+                "url": "https://philosophy.yale.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of English",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/enlt/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scholarly References",
+          "citation": "O'Toole, G. Quote Investigator: Tracing Quotations. QuoteInvestigator.com.",
+          "note": "A widely respected, meticulously researched project dedicated to tracing the real origins of famous quotations, and documenting how many popular \"quotes\" are actually misattributed.",
+          "url": "https://quoteinvestigator.com/",
+          "readOriginal": "Visit Quote Investigator"
+        }
+      }
+    },
+    "multiplication-table-generator": {
+      "title": "Multiplication Table Generator",
+      "description": "Generate a multiplication table for a single number or a printable grid for a range of numbers.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Table Settings",
+        "modeSingle": "Single Number",
+        "modeRange": "Grid",
+        "numberLabel": "Number",
+        "maxMultiplierLabel": "Up To",
+        "rangeStartLabel": "From",
+        "rangeEndLabel": "To"
+      },
+      "result": {
+        "heading": "Multiplication Table",
+        "invalidNumber": "Enter a whole number between 1 and 1000.",
+        "invalidMultiplier": "Enter a whole number between 1 and 100.",
+        "invalidRange": "Enter a valid range, with the starting number no greater than the ending number.",
+        "rangeTooLarge": "Choose a range of 30 numbers or fewer for a readable grid.",
+        "print": "Print"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Each cell is simply the row number multiplied by the column number."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Multiplication Tables",
+          "paragraph1": "A multiplication table lists the products of a number multiplied by a sequence of other numbers, typically 1 through 12 for a single-number table, letting you look up a multiplication fact instead of calculating it each time. This tool's \"Single Number\" mode generates exactly that: one number's full times-table, with a customizable upper limit for the multiplier.",
+          "paragraph2": "The \"Grid\" mode generates the classic square multiplication table found on the back of school notebooks: a full grid where every number in a chosen range is multiplied by every other number in that same range, so you can look up any product within the range at a glance, in either direction, since the table is symmetric (3×7 gives the same result as 7×3)."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Multiplication tables remain a foundational tool wherever basic arithmetic fluency is being built or checked.",
+          "items": [
+            {
+              "title": "Elementary Math Education",
+              "description": "Helping students memorize multiplication facts through repeated exposure to a complete, organized table, a standard part of early arithmetic instruction."
+            },
+            {
+              "title": "Homework and Study Aids",
+              "description": "Printing a table for quick reference while completing arithmetic homework or preparing for a timed multiplication quiz."
+            },
+            {
+              "title": "Quick Mental Math Checks",
+              "description": "Verifying a multiplication result quickly without reaching for a calculator, especially for numbers just outside what's easily memorized."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why do multiplication tables usually go up to 12?",
+              "answer": "Stopping at 12 is a long-standing convention rather than a mathematical necessity, likely tied to base-12 (duodecimal) counting traditions that persisted in measurement systems like 12 inches to a foot and 12 months in a year, making 12×12 a practical, memorable stopping point for basic arithmetic fluency."
+            },
+            {
+              "question": "Why is the multiplication grid symmetric?",
+              "answer": "This reflects the commutative property of multiplication: for any two numbers a and b, a × b always equals b × a. Because of this, the grid mirrors perfectly across its diagonal, and you only technically need to memorize about half of the entries in a full times-table to know all of them."
+            },
+            {
+              "question": "What's the difference between the two modes?",
+              "answer": "Single Number mode shows one number's complete times-table as a simple list (useful for focused memorization of one number, like the 7 times table). Grid mode shows a full square table for a range of numbers, useful for looking up any product within that range, or for printing a classic reference chart."
+            },
+            {
+              "question": "Why is there a limit on how large a range I can generate?",
+              "answer": "A grid for a very large range of numbers becomes impractically large to display or print legibly on a single page, so this tool caps the range at 30 numbers (a 30×30 grid), which comfortably covers the ranges typically used for reference charts and classroom materials."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Multiplication tables are among the oldest surviving mathematical documents: cuneiform tablets from ancient Babylon, dating back roughly 4,000 years, record systematic multiplication tables used by scribes for commercial and administrative calculations, based on the Babylonian base-60 (sexagesimal) number system. Multiplication tables in roughly their modern base-10 form later appeared in ancient Chinese mathematical texts and became a standard part of arithmetic education across many cultures by the medieval period."
+          },
+          "pedagogy": {
+            "title": "Multiplication Tables in Education",
+            "paragraph": "Memorizing multiplication tables remains a near-universal part of elementary mathematics education, since fluent recall of basic multiplication facts frees up mental effort for more complex arithmetic and algebra later on, rather than requiring a student to recalculate simple products from scratch every time. Educational research generally supports a combination of understanding why multiplication works (as repeated addition or area, for instance) alongside memorization, rather than memorization alone."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The history of arithmetic and mathematics education is studied within the history of mathematics and mathematics education departments. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Mathematics",
+                "note": "Ranked #1 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://math.mit.edu/academics/grad/admission",
+                "online": "No — the PhD is an in-residence research program within the Department of Mathematics."
+              },
+              {
+                "name": "University of Oxford — Mathematical Institute",
+                "note": "Ranked #2 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.ox.ac.uk/admissions/graduate/courses/dphil-mathematics",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge — Faculty of Mathematics",
+                "note": "Ranked #3 worldwide for Mathematics (QS World University Rankings by Subject 2025).",
+                "url": "https://www.maths.cam.ac.uk/postgrad/research-degrees",
+                "online": "No — research degrees are in-residence at the Faculty of Mathematics."
+              },
+              {
+                "name": "Columbia University — Department of Mathematics Education",
+                "note": "A leading center for research in mathematics education and pedagogy.",
+                "url": "https://www.tc.columbia.edu/mathematics/",
+                "online": "No — the doctoral programs are in-residence."
+              },
+              {
+                "name": "Stanford University — Graduate School of Education",
+                "note": "A leading center for mathematics education research.",
+                "url": "https://ed.stanford.edu/academics/graduate-degrees",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of Mathematics",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/math/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+          "note": "A scholarly history of Babylonian mathematics, including the base-60 numeral system and the ancient cuneiform multiplication tables it produced.",
+          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
+          "readOriginal": "View the Reference"
+        }
+      }
+    },
+    "speech-word-count-calculator": {
+      "title": "Speech Word Count Calculator",
+      "description": "Estimate how long a speech or presentation will take to deliver, based on word count and speaking pace.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Speech or Script",
+        "textLabel": "Text to estimate",
+        "textPlaceholder": "Paste or type your speech, script, or presentation text here.",
+        "paceLabel": "Speaking Pace",
+        "presets": {
+          "formal": "Formal",
+          "normal": "Normal",
+          "fast": "Fast",
+          "custom": "Custom"
+        },
+        "customWpmLabel": "Words per Minute"
+      },
+      "result": {
+        "heading": "Estimated Delivery Time",
+        "emptyText": "Enter your speech or presentation text to estimate its delivery time.",
+        "invalidRate": "Enter a speaking pace between 1 and 400 words per minute.",
+        "timeMinutesSeconds": "{minutes} min {seconds} sec",
+        "timeSecondsOnly": "{seconds} sec",
+        "wordCountLabel": "Word Count"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Delivery time is the word count divided by your chosen speaking pace."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Speech Delivery Time",
+          "paragraph1": "Estimating how long a speech will take to deliver comes down to dividing the total word count by a speaking pace, measured in words per minute (WPM). This tool offers three common presets: formal (110 WPM, a deliberate, measured pace typical of formal presentations and speeches meant to be easily followed), normal (140 WPM, a typical conversational speaking pace), and fast (170 WPM, an energetic, quick-paced delivery), plus a custom option for your own measured pace.",
+          "paragraph2": "Speaking pace is meaningfully slower than silent reading pace, since spoken delivery is paced by breathing, articulation, pauses for emphasis, and audience comprehension, none of which apply when reading silently to yourself. This is why a speech typically takes noticeably longer to deliver aloud than the same text would take to read silently — a distinction worth keeping in mind if you're timing a talk based on how long the script takes you to read in your head."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Estimating speech delivery time is essential wherever a talk needs to fit within a set time slot.",
+          "items": [
+            {
+              "title": "Conference Talks and Presentations",
+              "description": "Checking that a prepared talk fits within an allotted time slot before stepping on stage, avoiding the common problem of running significantly over or under time."
+            },
+            {
+              "title": "Wedding Speeches and Toasts",
+              "description": "Estimating whether a heartfelt speech is an appropriate length, since a toast that runs too long can lose an audience's attention regardless of how well-written it is."
+            },
+            {
+              "title": "Video and Podcast Scripting",
+              "description": "Planning a script's length against a target video or episode duration before recording, to avoid extensive re-editing or re-recording later."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Why is speaking pace slower than reading pace?",
+              "answer": "Speaking involves physical constraints that silent reading doesn't: you need to breathe, articulate each sound clearly enough to be understood, and often pause briefly for emphasis or to let a point land with the audience. None of these apply to reading silently, which is why typical speaking paces (around 110-170 WPM) run well below typical silent reading paces (around 200-300 WPM)."
+            },
+            {
+              "question": "Which preset should I use for my speech?",
+              "answer": "Use \"Formal\" for a measured, deliberate presentation where clarity matters more than energy (like a formal keynote), \"Normal\" for a typical conversational talk, and \"Fast\" for an energetic, quickly-paced delivery. If you have a video or recording of yourself speaking, timing a known word count against it will give you the most personalized rate to use with the Custom option."
+            },
+            {
+              "question": "Why does my actual delivery time differ from the estimate?",
+              "answer": "This tool assumes a constant pace throughout the entire speech, but real delivery naturally varies: you might speak faster through familiar material and slower through complex points, pause for audience reactions or laughter, or take deliberate dramatic pauses. Treat the estimate as a useful planning baseline, not an exact prediction."
+            },
+            {
+              "question": "Should I include stage directions or notes in the word count?",
+              "answer": "No — only include the words you'll actually say aloud. Stage directions, slide cues, or notes to yourself (like \"[pause for laughter]\") aren't spoken, so including them in the text would inflate the word count and produce an inaccurate, too-long time estimate."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "speakingVsReading": {
+            "title": "Speaking Rate vs. Reading Rate",
+            "paragraph": "Research into spontaneous and prepared speech has long shown that speaking rate is governed by different constraints than silent reading: articulation rate (how fast sounds are physically produced), pause frequency and length (for breath, thought, and emphasis), and the need to remain intelligible to a listening audience in real time, who can't re-read a confusing sentence the way a reader can. These combined factors are why public speaking coaches and presentation guides consistently recommend a pace in the roughly 100-170 words-per-minute range, well below typical silent reading speeds."
+          },
+          "limitations": {
+            "title": "Limitations of This Estimate",
+            "paragraph": "This tool applies one fixed pace uniformly across an entire text, while real speech delivery naturally varies with emphasis, audience reactions, and the complexity of the material being discussed. It also doesn't account for planned pauses (like a dramatic pause or time for slides to be absorbed) unless you build that time in separately, so treat the result as a solid planning estimate rather than an exact stopwatch prediction."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The study of speech production and rate is examined within linguistics and speech-language pathology. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "University College London — Division of Psychology and Language Sciences",
+                "note": "A leading center for speech and language research in the UK.",
+                "url": "https://www.ucl.ac.uk/pals/research/speech-hearing-and-phonetic-sciences/postgraduate-study",
+                "online": "No — research degrees are in-residence at UCL."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "A leading center for the cognitive science of speech and language processing.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Edinburgh — Centre for Speech Technology Research",
+                "note": "One of Europe's leading centers dedicated specifically to speech research.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "Northwestern University — Roxelyn and Richard Pepper Department of Communication Sciences and Disorders",
+                "note": "A leading program in speech-language pathology and communication sciences.",
+                "url": "https://communication.northwestern.edu/programs/phd-communication-sciences-disorders/",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of Theoretical and Applied Linguistics",
+                "note": "A leading center for linguistics research, including speech production.",
+                "url": "https://www.mml.cam.ac.uk/dtal/research/graduate",
+                "online": "No — research degrees are in-residence at the Department of Theoretical and Applied Linguistics."
+              },
+              {
+                "name": "American University of Beirut — Department of Speech-Language Pathology",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fm/slp/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Goldman-Eisler, F. (1968). Psycholinguistics: Experiments in Spontaneous Speech. Academic Press.",
+          "note": "A foundational study in the psycholinguistics of speech production, including the timing, pausing, and rate patterns of spoken language that distinguish it from silent reading.",
+          "url": "https://www.worldcat.org/title/psycholinguistics-experiments-in-spontaneous-speech/oclc/440680",
+          "readOriginal": "View the Reference"
+        }
+      }
+    },
+    "countdown-to-event-calculator": {
+      "title": "Countdown to Event Calculator",
+      "description": "A live countdown to a date and time you choose, updating automatically in days, hours, minutes, and seconds.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Event",
+        "eventNameLabel": "Event Name (Optional)",
+        "eventNamePlaceholder": "e.g. New Year's Eve",
+        "dateLabel": "Date",
+        "timeLabel": "Time"
+      },
+      "result": {
+        "heading": "Countdown",
+        "noTarget": "Choose a date to start the countdown.",
+        "invalidDate": "Enter a valid date and time.",
+        "countingDownTo": "Counting down to your event",
+        "elapsedSince": "Time elapsed since your event",
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "The countdown updates automatically every second, right in your browser — no need to refresh the page."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding This Countdown",
+          "paragraph1": "This tool continuously computes the difference between the current time and a target date and time you choose, breaking that difference down into days, hours, minutes, and seconds, and refreshing the display every second so the countdown updates live without ever needing to reload the page.",
+          "paragraph2": "Once the target moment arrives, the countdown automatically switches to counting up instead, showing how much time has elapsed since the event — useful for tracking anniversaries, milestones, or simply confirming that a moment you were counting down to has indeed passed."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Countdowns are useful anywhere anticipation for a specific upcoming date or time is part of the experience.",
+          "items": [
+            {
+              "title": "Weddings, Launches, and Deadlines",
+              "description": "Tracking the time remaining until a wedding date, a product launch, or an important deadline, building anticipation or urgency as the date approaches."
+            },
+            {
+              "title": "Event Pages and Invitations",
+              "description": "Adding a live countdown to an event announcement or invitation so recipients can see exactly how much time is left at a glance."
+            },
+            {
+              "title": "Personal Milestones",
+              "description": "Counting down to a birthday, anniversary, graduation, or trip, or counting up from a milestone already passed, like a sobriety date or a relationship anniversary."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Does the countdown keep running if I leave the page open?",
+              "answer": "Yes — as long as the page stays open in your browser, the countdown updates automatically every second without any action needed from you, since it's calculated live using your device's clock."
+            },
+            {
+              "question": "What happens when the countdown reaches zero?",
+              "answer": "The tool automatically switches to counting upward, showing the elapsed time since the target moment instead of the remaining time, so the display remains meaningful even after the event has passed."
+            },
+            {
+              "question": "What time zone does this use?",
+              "answer": "The countdown uses your device's local time zone for both the target date/time you enter and the current time it compares against, so the countdown is always accurate to wherever you personally are, not a fixed reference time zone."
+            },
+            {
+              "question": "Why does the countdown briefly show 0 when the page first loads?",
+              "answer": "The very first render happens before your browser's clock has been read, to avoid a mismatch between how the page is initially generated and what your browser actually displays. This resolves itself within a second as the live clock takes over, which is a standard technique for anything showing the current time on the web."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "The dramatic countdown convention — counting backward toward zero before a significant moment — is often credited to Fritz Lang's 1929 silent science-fiction film \"Frau im Mond\" (\"Woman in the Moon\"), one of the earliest known uses of a numbered countdown to build suspense before a rocket launch. The convention proved so effective dramatically that real rocket engineers and mission planners later adopted it for actual launches, and it has since become a universal symbol of anticipation for any significant upcoming moment, well beyond its origins in spaceflight."
+          },
+          "howItWorks": {
+            "title": "How the Countdown Is Calculated",
+            "paragraph": "Behind the scenes, this tool converts both the current moment and your chosen target date into a single number: milliseconds elapsed since a fixed reference point called the Unix epoch (midnight, January 1, 1970, UTC), which is how computers represent dates and times internally. Subtracting one number from the other gives the exact time difference in milliseconds, which is then divided down into days, hours, minutes, and seconds for a human-readable display."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "The history of timekeeping and its cultural conventions is studied within the history of science and media studies. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Harvard University — Department of the History of Science",
+                "note": "One of the world's leading programs for the history of science and technology.",
+                "url": "https://histsci.fas.harvard.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of History and Philosophy of Science",
+                "note": "A leading center for the history and philosophy of science.",
+                "url": "https://www.hps.cam.ac.uk/prospective/postgraduate",
+                "online": "No — research degrees are in-residence at the Department of History and Philosophy of Science."
+              },
+              {
+                "name": "Princeton University — Program in History of Science",
+                "note": "A leading program for the study of the history of science and technology.",
+                "url": "https://hos.princeton.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Southern California — School of Cinematic Arts",
+                "note": "One of the world's leading film schools, with strong film history and theory scholarship.",
+                "url": "https://cinema.usc.edu/programs/phd/",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "New York University — Department of Cinema Studies",
+                "note": "A leading program for the academic study of film history.",
+                "url": "https://tisch.nyu.edu/cinema-studies/phd",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of History and Archaeology",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/hist_arch/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "References",
+          "citation": "Lang, F. (Director). (1929). Frau im Mond [Motion picture]. Universum Film AG (UFA).",
+          "note": "The 1929 silent film widely credited by space historians with popularizing the dramatic numbered countdown before a launch, a convention later adopted by real rocketry and mission control culture.",
+          "url": "https://airandspace.si.edu",
+          "readOriginal": "View the Museum's Research"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19247,38 +20797,30 @@
     "pregnancy-calendar": "Pregnancy Week-by-Week Calculator",
     "random-name-generator": "Random Name Generator",
     "golden-ratio-calculator": "Golden Ratio Calculator",
-    "reading-time-calculator": "Reading Time Calculator",
     "cagr-calculator": "CAGR Calculator",
     "personal-budget-calculator": "Personal Budget Calculator",
     "present-future-value-calculator": "Present/Future Value Calculator",
     "body-fat-calculator": "Body Fat Percentage Calculator",
     "calories-burned-calculator": "Calories Burned Calculator",
     "passphrase-generator": "Passphrase Generator",
-    "roman-numeral-converter": "Roman Numeral Converter",
     "quadratic-equation-calculator": "Quadratic Equation Calculator",
     "trigonometry-calculator": "Trigonometry Calculator",
     "gcf-lcm-calculator": "GCF/LCM Calculator",
     "qr-generator-extended": "Advanced QR Code Generator",
-    "countdown-to-event-calculator": "Countdown to Event Calculator",
     "historical-currency-converter": "Historical Currency Converter",
-    "lorem-ipsum-generator": "Lorem Ipsum Generator",
     "typing-speed-calculator": "Typing Speed Calculator",
     "energy-conversion-calculator": "Energy Conversion Calculator",
     "pressure-conversion-calculator": "Pressure Conversion Calculator",
     "aspect-ratio-calculator": "Aspect Ratio Calculator",
-    "multiplication-table-generator": "Multiplication Table Generator",
     "bill-split-calculator": "Bill Split Calculator",
     "zakat-calculator": "Zakat Calculator",
     "advanced-temperature-converter": "Advanced Temperature Converter",
     "triangle-angle-calculator": "Triangle Angle Calculator",
     "stacked-discount-calculator": "Stacked Discount Calculator",
-    "text-logo-generator": "Text Logo Generator",
-    "speech-word-count-calculator": "Speech Word Count Calculator",
     "chinese-zodiac-age-calculator": "Chinese Zodiac Age Calculator",
     "zodiac-sign-calculator": "Zodiac Sign Calculator",
     "steps-to-calories-calculator": "Steps to Calories Calculator",
     "heat-index-calculator": "Heat Index Calculator",
-    "random-quote-generator": "Random Quote Generator",
     "tree-age-calculator": "Tree Age Calculator",
     "hijri-gregorian-quick-converter": "Hijri/Gregorian Quick Converter",
     "iq-estimate-calculator": "IQ Estimate Calculator",
@@ -19305,11 +20847,8 @@
     "image-to-base64-converter": "Image to Base64 Converter",
     "certificate-generator": "Certificate Generator",
     "smart-video-compressor": "Smart Video Compressor",
-    "text-to-speech": "Text to Speech",
-    "speech-to-text": "Speech to Text",
     "smart-image-compression": "Smart Image Compression",
     "background-remover": "Image Background Remover",
-    "spelling-grammar-checker": "Spelling & Grammar Checker",
     "text-summarizer": "Text Summarizer",
     "image-upscaler": "Image Upscaler",
     "plagiarism-checker": "Plagiarism Checker",
