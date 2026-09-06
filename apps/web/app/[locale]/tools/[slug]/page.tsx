@@ -155,6 +155,8 @@ import ReadingTimeCalculator from "@/components/tools/reading-time-calculator/Re
 import RTEducation from "@/components/tools/reading-time-calculator/RTEducation";
 import LoremIpsumGenerator from "@/components/tools/lorem-ipsum-generator/LoremIpsumGenerator";
 import LoremEducation from "@/components/tools/lorem-ipsum-generator/LoremEducation";
+import TextLogoGenerator from "@/components/tools/text-logo-generator/TextLogoGenerator";
+import LogoEducation from "@/components/tools/text-logo-generator/LogoEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -593,6 +595,9 @@ export default async function ToolPage({
     case "lorem-ipsum-generator":
       component = <LoremIpsumGenerator education={<LoremEducation />} />;
       break;
+    case "text-logo-generator":
+      component = <TextLogoGenerator education={<LogoEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -733,6 +738,7 @@ export default async function ToolPage({
     slug === "roman-numeral-converter" ||
     slug === "reading-time-calculator" ||
     slug === "lorem-ipsum-generator" ||
+    slug === "text-logo-generator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

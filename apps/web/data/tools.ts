@@ -1349,4 +1349,19 @@ export const tools: Tool[] = [
       "lorem ipsum",
     ],
   },
+  {
+    slug: "text-logo-generator",
+    title: "Text Logo Generator",
+    category: "text-tools",
+    description:
+      "Transform text into stylized Unicode text designs using bold, italic, double-struck, and other font-like styles.",
+    featured: false,
+    keywords: [
+      "text logo generator",
+      "fancy text generator",
+      "font generator",
+      "stylish text generator",
+      "unicode text generator",
+    ],
+  },
 ];

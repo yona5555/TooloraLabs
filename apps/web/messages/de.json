@@ -19970,6 +19970,144 @@
           "readOriginal": "Geschichte ansehen"
         }
       }
+    },
+    "text-logo-generator": {
+      "title": "Text-Logo-Generator",
+      "description": "Verwandle Text in stilisierte Unicode-Textdesigns mit fett, kursiv, Doppelstrich und anderen schriftartähnlichen Stilen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Dein Text",
+        "textLabel": "Zu stylender Text",
+        "textPlaceholder": "Schreib etwas...",
+        "hint": "Jeder Stil unten aktualisiert sich sofort und kann mit einem Klick kopiert werden."
+      },
+      "result": {
+        "heading": "Gestylter Text",
+        "emptyText": "Tippe etwas Text, um ihn in jedem Stil zu sehen.",
+        "styles": {
+          "bold": "Fett",
+          "italic": "Kursiv",
+          "boldItalic": "Fett Kursiv",
+          "doubleStruck": "Doppelstrich",
+          "monospace": "Monospace",
+          "fullwidth": "Vollbreite",
+          "circled": "Umkreist"
+        }
+      },
+      "quickReference": {
+        "title": "Gut zu wissen",
+        "intro": "Diese Stile sind echte Unicode-Zeichen, keine Schriftarten — sie werden fast überall, wo du sie einfügst, gleich angezeigt (als diese spezifischen Symbole), auch an Orten, an denen du keine Schriftart ändern kannst, wie Social-Media-Bios und Benutzernamen."
+      },
+      "education": {
+        "intro": {
+          "title": "Unicode-Textstile verstehen",
+          "paragraph1": "Dieses Tool wendet keine Schriftart auf deinen Text an — es ersetzt jeden Buchstaben und jede Ziffer durch ein anderes Unicode-Zeichen, das fett, kursiv, doppelt gestrichen oder anderweitig stilisiert aussieht. Da dies unterschiedliche Zeichen sind (keine auf denselben zugrunde liegenden Buchstaben angewendete Formatierung), ist das Ergebnis reiner Text, der sein \"gestyltes\" Aussehen überallhin mitnimmt, auch an Orte wie Social-Media-Bios, Benutzernamen oder Chat-Apps, die sonst keine Fett- oder Kursivformatierung unterstützen.",
+          "paragraph2": "Die spezifischen Zeichen, die dieses Tool verwendet, stammen aus dem Unicode-Block „Mathematical Alphanumeric Symbols“, einer Reihe von Codepunkten, die ursprünglich dem Unicode-Standard hinzugefügt wurden, damit mathematische und wissenschaftliche Notation zum Beispiel eine kursive Variable „x“ von einem regulären Buchstaben „x“ in reinem Text unterscheiden kann — eine echte typografische Unterscheidung, auf die sich Mathematiker verlassen. Dieses Tool nutzt denselben Zeichensatz für dekorative Textgestaltung um, was eine übliche, aber inoffizielle Verwendung von Zeichen ist, die für einen anderen, technischeren Zweck entworfen wurden."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Stilisierter Unicode-Text taucht überall dort auf, wo jemand visuell auffälligen reinen Text möchte.",
+          "items": [
+            {
+              "title": "Social-Media-Bios und Benutzernamen",
+              "description": "Das Hinzufügen von visuellem Flair zu einem Profilnamen oder einer Bio auf Plattformen, die keine Rich-Text-Formatierung unterstützen, da dies nur reine Unicode-Zeichen sind."
+            },
+            {
+              "title": "Überschriften in reinen Textkontexten",
+              "description": "Das Hervorheben einer Überschrift oder Bezeichnung an Orten wie Klartext-E-Mails, Chatnachrichten oder Forenbeiträgen, wo Markdown- oder HTML-Formatierung nicht gerendert wird."
+            },
+            {
+              "title": "Schnelle Copy-Paste-Logos",
+              "description": "Das Erstellen eines einfachen, markanten Wortzeichens für informelle Zwecke ohne Designsoftware, indem eine der gestylten Varianten direkt kopiert wird."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Ist das tatsächlich eine andere Schriftart?",
+              "answer": "Nein — es wird keine Schriftart angewendet. Jedes Zeichen, das du siehst, ist ein eigenständiger Unicode-Codepunkt, der zufällig fett, kursiv oder anderweitig stilisiert aussieht. Deshalb behält der gestylte Text sein Aussehen auch an Orten bei, die keine benutzerdefinierten Schriftarten oder Rich Text unterstützen."
+            },
+            {
+              "question": "Wird dieser Text überall korrekt angezeigt?",
+              "answer": "Fast überall, da dies Standard-Unicode-Zeichen sind, aber die Anzeige hängt davon ab, ob das Gerät des Lesers eine Schriftart installiert hat, die Glyphen für diese spezifischen Codepunkte enthält. Nahezu alle modernen Geräte und Browser unterstützen sie, obwohl extrem alte oder eingeschränkte Systeme gelegentlich leere Kästchen für weniger gängige Bereiche anzeigen."
+            },
+            {
+              "question": "Warum decken Kursiv und Doppelstrich nicht jeden Buchstaben und jede Ziffer auf die gleiche Weise ab?",
+              "answer": "Eine Handvoll spezifischer Buchstaben im Mathematical-Alphanumeric-Symbols-Block verwendet ältere, bereits vorhandene Unicode-Zeichen wieder, anstatt neue Codepunkte zu erhalten — zum Beispiel verwendet das kursive Kleinbuchstaben-„h“ das vorhandene Planck-Konstanten-Symbol (ℎ) wieder, und Doppelstrich-C, H, N, P, Q, R und Z verwenden vorhandene mathematische Tafelfett-Symbole wieder (wie ℝ für reelle Zahlen). Dieses Tool berücksichtigt diese spezifischen Ausnahmen automatisch."
+            },
+            {
+              "question": "Können Suchmaschinen oder Screenreader diesen gestylten Text normal lesen?",
+              "answer": "Nicht zuverlässig. Da jedes Zeichen ein eigenständiges Unicode-Symbol ist und nicht der normale Buchstabe, dem es ähnelt, sprechen Screenreader es möglicherweise nicht korrekt aus, und Suchmaschinen ordnen es möglicherweise nicht normalen Textsuchen zu. Verwende diese Stile für visuellen Schwung in lockeren Kontexten, nicht für Fließtext, der vollständig barrierefrei oder durchsuchbar sein muss."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "howItWorks": {
+            "title": "Wie es funktioniert",
+            "paragraph": "Der Unicode-Block „Mathematical Alphanumeric Symbols“ (Codepunkte U+1D400 bis U+1D7FF) wurde dem Unicode-Standard in Version 3.1 hinzugefügt, veröffentlicht 2001, speziell um mathematischen Schriftsatz zu unterstützen, bei dem derselbe Buchstabe unterschiedliche Formen benötigt — ein reguläres „x“, ein kursives „x“ für eine Variable und ein fettes „x“ für einen Vektor müssen beispielsweise alle unterscheidbar bleiben, auch wenn sie als reiner Text ohne angewendete Schriftformatierung kopiert werden. Dieses Tool funktioniert, indem es für jeden Buchstaben oder jede Ziffer, die du eingibst, Zeichen für Zeichen den entsprechenden gestylten Codepunkt nachschlägt und ihn einsetzt."
+          },
+          "limitations": {
+            "title": "Einschränkungen dieses Tools",
+            "paragraph": "Die Unicode-Abdeckung dieser Stile ist nicht perfekt einheitlich: Einige Stile (wie Kursiv) haben überhaupt keine Ziffernvarianten, da die mathematische Notation keine kursiven Ziffern benötigte, so wie sie kursive Variablen benötigte, und eine Handvoll einzelner Buchstaben in bestimmten Stilen verwendet ältere, bereits vorhandene Unicode-Symbole wieder, anstatt eigene neue Zeichen zu erhalten. Dieses Tool enthält die spezifischen, dokumentierten Ausnahmen für die von ihm angebotenen Stile, sodass die Ausgabe dem tatsächlichen Unicode-Standard entspricht, anstatt ein Muster zu erraten, das nicht ganz für jedes Zeichen gilt."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Zeichenkodierungsstandards wie Unicode werden innerhalb der Informatik studiert, insbesondere in den Bereichen Internationalisierung und Textverarbeitung. Hier sind fünf angesehene Informatikprogramme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Electrical Engineering and Computer Science",
+                "note": "Eine der weltweit führenden Informatikabteilungen.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm innerhalb von EECS."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "Eine führende Informatikabteilung mit starker Systeme- und Internationalisierungsforschung.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Cambridge — Department of Computer Science and Technology",
+                "note": "Ein führendes Zentrum für Informatikforschung im Vereinigten Königreich.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Abteilung für Informatik und Technologie statt."
+              },
+              {
+                "name": "Carnegie Mellon University — School of Computer Science",
+                "note": "Eine der weltweit führenden Informatik-Schulen.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "ETH Zürich — Department of Computer Science",
+                "note": "Eine führende europäische Informatikabteilung.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "Nein — das Doktoratsprogramm ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technische Referenzen",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "Die offizielle Unicode-Codetabelle, die die genauen Zeichen, Codepunkte und dokumentierten Ausnahmen definiert, auf denen die gestylten Textzuordnungen dieses Tools basieren.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "Offizielle Codetabelle ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20135,7 +20273,6 @@
     "advanced-temperature-converter": "Erweiterter Temperaturumrechner",
     "triangle-angle-calculator": "Dreieckswinkel-Rechner",
     "stacked-discount-calculator": "Rechner für gestaffelte Rabatte",
-    "text-logo-generator": "Text-Logo-Generator",
     "speech-word-count-calculator": "Wortzähler für Reden",
     "chinese-zodiac-age-calculator": "Rechner für chinesisches Tierkreisalter",
     "zodiac-sign-calculator": "Sternzeichen-Rechner",

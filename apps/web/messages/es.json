@@ -19970,6 +19970,144 @@
           "readOriginal": "Ver la Historia"
         }
       }
+    },
+    "text-logo-generator": {
+      "title": "Generador de Logotipos de Texto",
+      "description": "Transforma texto en diseños de texto Unicode estilizados usando negrita, cursiva, doble tachado, y otros estilos similares a fuentes.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "textLabel": "Texto a estilizar",
+        "textPlaceholder": "Escribe algo...",
+        "hint": "Cada estilo a continuación se actualiza al instante y se puede copiar con un clic."
+      },
+      "result": {
+        "heading": "Texto Estilizado",
+        "emptyText": "Escribe algún texto para verlo en todos los estilos.",
+        "styles": {
+          "bold": "Negrita",
+          "italic": "Cursiva",
+          "boldItalic": "Negrita Cursiva",
+          "doubleStruck": "Doble Tachado",
+          "monospace": "Monoespaciado",
+          "fullwidth": "Ancho Completo",
+          "circled": "Encerrado en Círculo"
+        }
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "Estos estilos son caracteres Unicode reales, no fuentes —se mostrarán de la misma manera (como estos símbolos específicos) casi en cualquier lugar donde los pegues, incluidos lugares que no te permiten cambiar fuentes, como biografías de redes sociales y nombres de usuario."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender los Estilos de Texto Unicode",
+          "paragraph1": "Esta herramienta no aplica una fuente a tu texto —reemplaza cada letra y dígito con un carácter Unicode diferente que se ve en negrita, cursiva, doble tachado, o estilizado de otra manera. Debido a que estos son caracteres distintos (no un estilo aplicado a la misma letra subyacente), el resultado es texto plano que lleva su apariencia \"estilizada\" a donde vaya, incluyendo lugares como biografías de redes sociales, nombres de usuario, o aplicaciones de chat que de otro modo no admiten formato de texto en negrita o cursiva.",
+          "paragraph2": "Los caracteres específicos que usa esta herramienta provienen del bloque de Símbolos Alfanuméricos Matemáticos de Unicode, un conjunto de puntos de código originalmente añadidos al Estándar Unicode para que la notación matemática y científica pudiera distinguir, digamos, una variable en cursiva \"x\" de una letra regular \"x\" en texto plano —una distinción tipográfica genuina en la que confían los matemáticos. Esta herramienta reutiliza ese mismo conjunto de caracteres para el estilo de texto decorativo, que es un uso común pero no oficial de caracteres que fueron diseñados para un propósito diferente, más técnico."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "El texto Unicode estilizado aparece en cualquier lugar donde alguien quiera texto plano visualmente distintivo.",
+          "items": [
+            {
+              "title": "Biografías y Nombres de Usuario en Redes Sociales",
+              "description": "Añadir estilo visual a un nombre de perfil o biografía en plataformas que no admiten formato de texto enriquecido, ya que estos son solo caracteres Unicode planos."
+            },
+            {
+              "title": "Encabezados en Contextos de Texto Plano",
+              "description": "Hacer que un encabezado o etiqueta destaque en lugares como correos electrónicos de texto plano, mensajes de chat, o publicaciones de foro donde no se renderiza el formato markdown o HTML."
+            },
+            {
+              "title": "Logotipos Rápidos de Copiar y Pegar",
+              "description": "Crear una marca de palabra simple y distintiva para uso informal sin necesidad de software de diseño, copiando directamente una de las variantes estilizadas."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Es esto realmente una fuente diferente?",
+              "answer": "No —no se está aplicando ninguna fuente. Cada carácter que ves es un punto de código Unicode distinto que resulta que se ve en negrita, cursiva, o estilizado de otra manera. Esta es la razón por la que el texto estilizado mantiene su apariencia incluso en lugares que no admiten fuentes personalizadas o texto enriquecido."
+            },
+            {
+              "question": "¿Se mostrará este texto correctamente en todas partes?",
+              "answer": "Casi en todas partes, ya que estos son caracteres Unicode estándar, pero la visualización depende de que el dispositivo del lector tenga instalada una fuente que incluya glifos para estos puntos de código específicos. Casi todos los dispositivos y navegadores modernos los admiten, aunque los sistemas extremadamente antiguos o limitados ocasionalmente muestran cuadros vacíos para rangos menos comunes."
+            },
+            {
+              "question": "¿Por qué la cursiva y el doble tachado no cubren cada letra y dígito de la misma manera?",
+              "answer": "Un puñado de letras específicas en el bloque de Símbolos Alfanuméricos Matemáticos reutiliza caracteres Unicode más antiguos y ya existentes en lugar de obtener nuevos puntos de código —por ejemplo, la \"h\" minúscula cursiva reutiliza el símbolo existente de la constante de Planck (ℎ), y las C, H, N, P, Q, R, y Z de doble tachado reutilizan símbolos matemáticos de pizarra existentes (como ℝ para números reales). Esta herramienta tiene en cuenta esas excepciones específicas automáticamente."
+            },
+            {
+              "question": "¿Pueden los motores de búsqueda o los lectores de pantalla leer este texto estilizado normalmente?",
+              "answer": "No de manera confiable. Debido a que cada carácter es un símbolo Unicode distinto en lugar de la letra normal a la que se asemeja, los lectores de pantalla pueden no pronunciarlo correctamente, y los motores de búsqueda pueden no coincidirlo con búsquedas de texto normal. Usa estos estilos para darle estilo visual en contextos informales, no para texto principal que necesite ser completamente accesible o buscable."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "howItWorks": {
+            "title": "Cómo Funciona",
+            "paragraph": "El bloque de Símbolos Alfanuméricos Matemáticos de Unicode (puntos de código U+1D400 a U+1D7FF) se añadió al Estándar Unicode en la versión 3.1, publicada en 2001, específicamente para admitir la composición tipográfica matemática donde la misma letra necesita formas distintas —una \"x\" regular, una \"x\" cursiva para una variable, y una \"x\" en negrita para un vector, por ejemplo, todas necesitan permanecer distinguibles incluso cuando se copian como texto plano sin ningún estilo de fuente aplicado. Esta herramienta funciona buscando el punto de código estilizado equivalente para cada letra o dígito que escribes, carácter por carácter, y sustituyéndolo."
+          },
+          "limitations": {
+            "title": "Limitaciones de Esta Herramienta",
+            "paragraph": "La cobertura de Unicode de estos estilos no es perfectamente uniforme: algunos estilos (como la cursiva) no tienen variantes de dígitos en absoluto, ya que la notación matemática no necesitaba dígitos en cursiva de la misma manera que necesitaba variables en cursiva, y un puñado de letras individuales en ciertos estilos reutiliza símbolos Unicode más antiguos y ya existentes en lugar de caracteres nuevos dedicados. Esta herramienta incluye las excepciones específicas y documentadas para los estilos que ofrece, por lo que la salida es precisa al Estándar Unicode real en lugar de adivinar un patrón que no se cumple del todo para cada carácter."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "Los estándares de codificación de caracteres como Unicode se estudian dentro de las ciencias de la computación, particularmente en las áreas de internacionalización y procesamiento de texto. Estos son cinco programas de informática respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ingeniería Eléctrica y Ciencias de la Computación",
+                "note": "Uno de los departamentos de informática líderes del mundo.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — el doctorado es un programa de investigación presencial dentro de EECS."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en sistemas e internacionalización.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centro líder en investigación de informática en el Reino Unido.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ciencias de la Computación y Tecnología."
+              },
+              {
+                "name": "Universidad Carnegie Mellon — School of Computer Science",
+                "note": "Una de las escuelas de informática líderes del mundo.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "ETH Zúrich — Department of Computer Science",
+                "note": "Un departamento de informática europeo líder.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "No — el programa doctoral es un título de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "La tabla de códigos Unicode oficial que define los caracteres exactos, puntos de código, y excepciones documentadas en las que se basan las asignaciones de texto estilizado de esta herramienta.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "Ver la Tabla de Códigos Oficial"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20135,7 +20273,6 @@
     "advanced-temperature-converter": "Convertidor de temperatura avanzado",
     "triangle-angle-calculator": "Calculadora de ángulo de triángulo",
     "stacked-discount-calculator": "Calculadora de descuentos acumulados",
-    "text-logo-generator": "Generador de logotipos de texto",
     "speech-word-count-calculator": "Calculadora de palabras para discursos",
     "chinese-zodiac-age-calculator": "Calculadora de edad del zodíaco chino",
     "zodiac-sign-calculator": "Calculadora de signo zodiacal",

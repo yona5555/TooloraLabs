@@ -19970,6 +19970,144 @@
           "readOriginal": "Consulter l'Histoire"
         }
       }
+    },
+    "text-logo-generator": {
+      "title": "Générateur de Logo Texte",
+      "description": "Transformez du texte en designs de texte Unicode stylisés utilisant le gras, l'italique, le double barré, et d'autres styles semblables à des polices.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "textLabel": "Texte à styliser",
+        "textPlaceholder": "Tapez quelque chose...",
+        "hint": "Chaque style ci-dessous se met à jour instantanément et peut être copié en un clic."
+      },
+      "result": {
+        "heading": "Texte Stylisé",
+        "emptyText": "Tapez du texte pour le voir dans tous les styles.",
+        "styles": {
+          "bold": "Gras",
+          "italic": "Italique",
+          "boldItalic": "Gras Italique",
+          "doubleStruck": "Double Barré",
+          "monospace": "Monospace",
+          "fullwidth": "Pleine Largeur",
+          "circled": "Encerclé"
+        }
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Ces styles sont de vrais caractères Unicode, pas des polices — ils s'afficheront de la même manière (en tant que ces symboles spécifiques) presque partout où vous les collez, y compris dans des endroits qui ne permettent pas de changer de police, comme les bios des réseaux sociaux et les noms d'utilisateur."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre les Styles de Texte Unicode",
+          "paragraph1": "Cet outil n'applique pas de police à votre texte — il remplace chaque lettre et chiffre par un caractère Unicode différent qui semble en gras, italique, double barré, ou stylisé autrement. Comme il s'agit de caractères distincts (pas un style appliqué à la même lettre sous-jacente), le résultat est du texte brut qui conserve son apparence « stylisée » partout où il va, y compris dans des endroits comme les bios de réseaux sociaux, les noms d'utilisateur, ou les applications de chat qui ne prennent pas autrement en charge le formatage de texte en gras ou en italique.",
+          "paragraph2": "Les caractères spécifiques que cet outil utilise proviennent du bloc Symboles Alphanumériques Mathématiques d'Unicode, un ensemble de points de code initialement ajoutés à la norme Unicode afin que la notation mathématique et scientifique puisse distinguer, disons, une variable en italique « x » d'une lettre normale « x » en texte brut — une distinction typographique authentique sur laquelle s'appuient les mathématiciens. Cet outil réutilise ce même jeu de caractères pour le style de texte décoratif, ce qui est un usage courant mais non officiel de caractères conçus pour un but différent, plus technique."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Le texte Unicode stylisé apparaît partout où quelqu'un souhaite un texte brut visuellement distinctif.",
+          "items": [
+            {
+              "title": "Bios et Noms d'Utilisateur sur les Réseaux Sociaux",
+              "description": "Ajouter une touche visuelle à un nom de profil ou une bio sur des plateformes qui ne prennent pas en charge le formatage de texte enrichi, puisqu'il s'agit simplement de caractères Unicode bruts."
+            },
+            {
+              "title": "Titres dans des Contextes de Texte Brut",
+              "description": "Faire ressortir un titre ou une étiquette dans des endroits comme les e-mails en texte brut, les messages de chat, ou les publications de forum où le formatage markdown ou HTML n'est pas rendu."
+            },
+            {
+              "title": "Logos Rapides par Copier-Coller",
+              "description": "Créer une marque de mot simple et distinctive pour un usage informel sans avoir besoin de logiciel de design, en copiant directement l'une des variantes stylisées."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Est-ce vraiment une police différente ?",
+              "answer": "Non — aucune police n'est appliquée. Chaque caractère que vous voyez est un point de code Unicode distinct qui se trouve avoir l'air gras, italique, ou stylisé autrement. C'est pourquoi le texte stylisé conserve son apparence même dans des endroits qui ne prennent pas en charge les polices personnalisées ou le texte enrichi."
+            },
+            {
+              "question": "Ce texte s'affichera-t-il correctement partout ?",
+              "answer": "Presque partout, puisqu'il s'agit de caractères Unicode standard, mais l'affichage dépend du fait que l'appareil du lecteur ait une police installée incluant des glyphes pour ces points de code spécifiques. Presque tous les appareils et navigateurs modernes les prennent en charge, bien que les systèmes extrêmement anciens ou limités affichent parfois des cases vides pour les plages moins courantes."
+            },
+            {
+              "question": "Pourquoi l'italique et le double barré ne couvrent-ils pas chaque lettre et chiffre de la même manière ?",
+              "answer": "Une poignée de lettres spécifiques dans le bloc Symboles Alphanumériques Mathématiques réutilisent des caractères Unicode plus anciens et déjà existants au lieu d'obtenir de nouveaux points de code — par exemple, le « h » minuscule italique réutilise le symbole existant de la constante de Planck (ℎ), et les C, H, N, P, Q, R et Z en double barré réutilisent des symboles mathématiques « tableau noir gras » existants (comme ℝ pour les nombres réels). Cet outil prend automatiquement en compte ces exceptions spécifiques."
+            },
+            {
+              "question": "Les moteurs de recherche ou les lecteurs d'écran peuvent-ils lire ce texte stylisé normalement ?",
+              "answer": "Pas de manière fiable. Comme chaque caractère est un symbole Unicode distinct plutôt que la lettre normale à laquelle il ressemble, les lecteurs d'écran peuvent ne pas le prononcer correctement, et les moteurs de recherche peuvent ne pas le faire correspondre à des recherches de texte normal. Utilisez ces styles pour un éclat visuel dans des contextes informels, pas pour du texte principal devant être entièrement accessible ou consultable."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "howItWorks": {
+            "title": "Comment Ça Marche",
+            "paragraph": "Le bloc Symboles Alphanumériques Mathématiques d'Unicode (points de code U+1D400 à U+1D7FF) a été ajouté à la norme Unicode dans la version 3.1, publiée en 2001, spécifiquement pour prendre en charge la composition mathématique où la même lettre nécessite des formes distinctes — un « x » normal, un « x » en italique pour une variable, et un « x » en gras pour un vecteur, par exemple, doivent tous rester distinguables même lorsqu'ils sont copiés en texte brut sans aucun style de police appliqué. Cet outil fonctionne en recherchant le point de code stylisé équivalent pour chaque lettre ou chiffre que vous tapez, caractère par caractère, et en le substituant."
+          },
+          "limitations": {
+            "title": "Limites de Cet Outil",
+            "paragraph": "La couverture Unicode de ces styles n'est pas parfaitement uniforme : certains styles (comme l'italique) n'ont aucune variante de chiffres, car la notation mathématique n'avait pas besoin de chiffres en italique de la même manière qu'elle avait besoin de variables en italique, et une poignée de lettres individuelles dans certains styles réutilisent des symboles Unicode plus anciens et déjà existants au lieu de caractères nouveaux dédiés. Cet outil inclut les exceptions spécifiques et documentées pour les styles qu'il propose, de sorte que le résultat soit fidèle à la norme Unicode réelle plutôt que de deviner un motif qui ne s'applique pas tout à fait à chaque caractère."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "Les normes de codage de caractères comme Unicode sont étudiées en informatique, en particulier dans les domaines de l'internationalisation et du traitement de texte. Voici cinq programmes d'informatique reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Electrical Engineering and Computer Science",
+                "note": "L'un des départements d'informatique les plus reconnus au monde.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS."
+              },
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en systèmes et internationalisation.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centre de premier plan pour la recherche en informatique au Royaume-Uni.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'informatique et technologie."
+              },
+              {
+                "name": "Université Carnegie Mellon — School of Computer Science",
+                "note": "L'une des écoles d'informatique les plus reconnues au monde.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "EPF Zurich (ETH Zurich) — Department of Computer Science",
+                "note": "Un département d'informatique européen de premier plan.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "Non — le programme doctoral est un diplôme de recherche en présentiel."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "La table de caractères Unicode officielle définissant les caractères exacts, points de code, et exceptions documentées sur lesquels sont basées les correspondances de texte stylisé de cet outil.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "Consulter la Table de Caractères Officielle"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20135,7 +20273,6 @@
     "advanced-temperature-converter": "Convertisseur de température avancé",
     "triangle-angle-calculator": "Calculatrice d'angle de triangle",
     "stacked-discount-calculator": "Calculatrice de remises cumulées",
-    "text-logo-generator": "Générateur de logo texte",
     "speech-word-count-calculator": "Calculatrice de mots pour discours",
     "chinese-zodiac-age-calculator": "Calculatrice d'âge du zodiaque chinois",
     "zodiac-sign-calculator": "Calculatrice de signe du zodiaque",

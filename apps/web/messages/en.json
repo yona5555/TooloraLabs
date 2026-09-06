@@ -19970,6 +19970,144 @@
           "readOriginal": "View the History"
         }
       }
+    },
+    "text-logo-generator": {
+      "title": "Text Logo Generator",
+      "description": "Transform text into stylized Unicode text designs using bold, italic, double-struck, and other font-like styles.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "textLabel": "Text to style",
+        "textPlaceholder": "Type something...",
+        "hint": "Every style below updates instantly and can be copied with one click."
+      },
+      "result": {
+        "heading": "Styled Text",
+        "emptyText": "Type some text to see it in every style.",
+        "styles": {
+          "bold": "Bold",
+          "italic": "Italic",
+          "boldItalic": "Bold Italic",
+          "doubleStruck": "Double-Struck",
+          "monospace": "Monospace",
+          "fullwidth": "Fullwidth",
+          "circled": "Circled"
+        }
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "These styles are real Unicode characters, not fonts — they'll display the same way (as these specific symbols) almost anywhere you paste them, including places that don't let you change fonts, like social media bios and usernames."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Unicode Text Styles",
+          "paragraph1": "This tool doesn't apply a font to your text — it replaces each letter and digit with a different Unicode character that looks bold, italic, double-struck, or otherwise stylized. Because these are distinct characters (not styling applied to the same underlying letter), the result is plain text that carries its \"styled\" appearance wherever it goes, including into places like social media bios, usernames, or chat apps that don't otherwise support bold or italic text formatting.",
+          "paragraph2": "The specific characters this tool uses come from the Unicode Mathematical Alphanumeric Symbols block, a set of code points originally added to the Unicode Standard so that mathematical and scientific notation could distinguish, say, an italic variable \"x\" from a regular letter \"x\" in plain text — a genuine typographic distinction mathematicians rely on. This tool repurposes that same character set for decorative text styling, which is a common but unofficial use of characters that were designed for a different, more technical purpose."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Stylized Unicode text shows up anywhere someone wants visually distinctive plain text.",
+          "items": [
+            {
+              "title": "Social Media Bios and Usernames",
+              "description": "Adding visual flair to a profile name or bio on platforms that don't support rich text formatting, since these are just plain Unicode characters."
+            },
+            {
+              "title": "Headers in Plain-Text Contexts",
+              "description": "Making a heading or label stand out in places like plain-text emails, chat messages, or forum posts where markdown or HTML formatting isn't rendered."
+            },
+            {
+              "title": "Quick, Copy-Paste Logos",
+              "description": "Creating a simple, distinctive-looking wordmark for informal use without needing design software, by copying one of the styled variants directly."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is this actually a different font?",
+              "answer": "No — no font is being applied. Each character you see is a distinct Unicode code point that happens to look bold, italic, or otherwise stylized. This is why the styled text keeps its appearance even in places that don't support custom fonts or rich text."
+            },
+            {
+              "question": "Will this text display correctly everywhere?",
+              "answer": "Almost everywhere, since these are standard Unicode characters, but display depends on the reader's device having a font installed that includes glyphs for these specific code points. Nearly all modern devices and browsers support them, though extremely old or limited systems occasionally show empty boxes for less common ranges."
+            },
+            {
+              "question": "Why don't italic and double-struck cover every letter and digit the same way?",
+              "answer": "A handful of specific letters in the Mathematical Alphanumeric Symbols block reuse older, pre-existing Unicode characters instead of getting new code points — for example, italic lowercase \"h\" reuses the existing Planck constant symbol (ℎ), and double-struck C, H, N, P, Q, R, and Z reuse existing blackboard-bold symbols from mathematics (like ℝ for real numbers). This tool accounts for those specific exceptions automatically."
+            },
+            {
+              "question": "Can search engines or screen readers read this styled text normally?",
+              "answer": "Not reliably. Because each character is a distinct Unicode symbol rather than the plain letter it resembles, screen readers may not pronounce it correctly, and search engines may not match it to normal-text searches. Use these styles for visual flair in casual contexts, not for body text that needs to be fully accessible or searchable."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "howItWorks": {
+            "title": "How It Works",
+            "paragraph": "The Unicode Mathematical Alphanumeric Symbols block (code points U+1D400 through U+1D7FF) was added to the Unicode Standard in version 3.1, published in 2001, specifically to support mathematical typesetting where the same letter needs distinct forms — a regular \"x\", an italic \"x\" for a variable, and a bold \"x\" for a vector, for instance, all need to remain distinguishable even when copied as plain text without any font styling applied. This tool works by looking up the equivalent styled code point for each letter or digit you type, character by character, and substituting it in."
+          },
+          "limitations": {
+            "title": "Limitations of This Tool",
+            "paragraph": "Unicode's coverage of these styles isn't perfectly uniform: some styles (like italic) have no digit variants at all, since mathematical notation didn't need italic digits the way it needed italic variables, and a handful of individual letters in certain styles reuse older, already-existing Unicode symbols instead of dedicated new characters. This tool includes the specific, documented exceptions for the styles it offers, so the output is accurate to the actual Unicode Standard rather than guessing at a pattern that doesn't quite hold for every character."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Character encoding standards like Unicode are studied within computer science, particularly in the areas of internationalization and text processing. Here are five respected computer science programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Electrical Engineering and Computer Science",
+                "note": "One of the world's leading computer science departments.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — the PhD is an in-residence research program within EECS."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong systems and internationalization research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of Computer Science and Technology",
+                "note": "A leading center for computer science research in the UK.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — research degrees are in-residence at the Department of Computer Science and Technology."
+              },
+              {
+                "name": "Carnegie Mellon University — School of Computer Science",
+                "note": "One of the world's leading computer science schools.",
+                "url": "https://www.cs.cmu.edu/academics/doctoral",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "ETH Zurich — Department of Computer Science",
+                "note": "A leading European computer science department.",
+                "url": "https://www.inf.ethz.ch/studies/promotion.html",
+                "online": "No — the doctoral program is an in-residence research degree."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "The Unicode Consortium. Mathematical Alphanumeric Symbols, Unicode Standard Range: U+1D400-U+1D7FF.",
+          "note": "The official Unicode code chart defining the exact characters, code points, and documented exceptions this tool's styled-text mappings are based on.",
+          "url": "https://www.unicode.org/charts/PDF/U1D400.pdf",
+          "readOriginal": "View the Official Code Chart"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20135,7 +20273,6 @@
     "advanced-temperature-converter": "Advanced Temperature Converter",
     "triangle-angle-calculator": "Triangle Angle Calculator",
     "stacked-discount-calculator": "Stacked Discount Calculator",
-    "text-logo-generator": "Text Logo Generator",
     "speech-word-count-calculator": "Speech Word Count Calculator",
     "chinese-zodiac-age-calculator": "Chinese Zodiac Age Calculator",
     "zodiac-sign-calculator": "Zodiac Sign Calculator",
