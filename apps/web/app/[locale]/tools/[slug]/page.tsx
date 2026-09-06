@@ -161,6 +161,8 @@ import RandomQuoteGenerator from "@/components/tools/random-quote-generator/Rand
 import QuoteEducation from "@/components/tools/random-quote-generator/QuoteEducation";
 import MultiplicationTableGenerator from "@/components/tools/multiplication-table-generator/MultiplicationTableGenerator";
 import MTEducation from "@/components/tools/multiplication-table-generator/MTEducation";
+import SpeechWordCountCalculator from "@/components/tools/speech-word-count-calculator/SpeechWordCountCalculator";
+import SWEducation from "@/components/tools/speech-word-count-calculator/SWEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -608,6 +610,9 @@ export default async function ToolPage({
     case "multiplication-table-generator":
       component = <MultiplicationTableGenerator education={<MTEducation />} />;
       break;
+    case "speech-word-count-calculator":
+      component = <SpeechWordCountCalculator education={<SWEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -751,6 +756,7 @@ export default async function ToolPage({
     slug === "text-logo-generator" ||
     slug === "random-quote-generator" ||
     slug === "multiplication-table-generator" ||
+    slug === "speech-word-count-calculator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

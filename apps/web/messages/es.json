@@ -20377,6 +20377,146 @@
           "readOriginal": "Ver la Referencia"
         }
       }
+    },
+    "speech-word-count-calculator": {
+      "title": "Calculadora de Palabras del Discurso",
+      "description": "Estima cuánto tiempo tomará dar un discurso o presentación, según el recuento de palabras y el ritmo de habla.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Discurso o Guión",
+        "textLabel": "Texto a estimar",
+        "textPlaceholder": "Pega o escribe tu discurso, guión, o texto de presentación aquí.",
+        "paceLabel": "Ritmo de Habla",
+        "presets": {
+          "formal": "Formal",
+          "normal": "Normal",
+          "fast": "Rápido",
+          "custom": "Personalizado"
+        },
+        "customWpmLabel": "Palabras por Minuto"
+      },
+      "result": {
+        "heading": "Tiempo de Entrega Estimado",
+        "emptyText": "Introduce el texto de tu discurso o presentación para estimar su tiempo de entrega.",
+        "invalidRate": "Introduce un ritmo de habla entre 1 y 400 palabras por minuto.",
+        "timeMinutesSeconds": "{minutes} min {seconds} seg",
+        "timeSecondsOnly": "{seconds} seg",
+        "wordCountLabel": "Recuento de Palabras"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "El tiempo de entrega es el recuento de palabras dividido por tu ritmo de habla elegido."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Tiempo de Entrega del Discurso",
+          "paragraph1": "Estimar cuánto tiempo tomará dar un discurso se reduce a dividir el recuento total de palabras por un ritmo de habla, medido en palabras por minuto (PPM). Esta herramienta ofrece tres ajustes comunes: formal (110 PPM, un ritmo deliberado y medido típico de presentaciones y discursos formales destinados a seguirse fácilmente), normal (140 PPM, un ritmo de habla conversacional típico), y rápido (170 PPM, una entrega enérgica y de ritmo rápido), además de una opción personalizada para tu propio ritmo medido.",
+          "paragraph2": "El ritmo de habla es notablemente más lento que el ritmo de lectura silenciosa, ya que la entrega hablada está marcada por la respiración, la articulación, las pausas para énfasis, y la comprensión de la audiencia, nada de lo cual aplica al leer en silencio para uno mismo. Es por esto que un discurso típicamente toma notablemente más tiempo en darse en voz alta que el mismo texto tomaría en leerse en silencio —una distinción que vale la pena tener en cuenta si estás cronometrando una charla basándote en cuánto tiempo te toma leer el guión mentalmente."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Estimar el tiempo de entrega de un discurso es esencial en cualquier lugar donde una charla necesite ajustarse a un espacio de tiempo establecido.",
+          "items": [
+            {
+              "title": "Charlas de Conferencias y Presentaciones",
+              "description": "Verificar que una charla preparada se ajuste al espacio de tiempo asignado antes de subir al escenario, evitando el problema común de excederse o quedarse corto significativamente en el tiempo."
+            },
+            {
+              "title": "Discursos de Boda y Brindis",
+              "description": "Estimar si un discurso sincero tiene una longitud apropiada, ya que un brindis que se extiende demasiado puede perder la atención de la audiencia sin importar qué tan bien esté escrito."
+            },
+            {
+              "title": "Guionización de Video y Podcast",
+              "description": "Planificar la longitud de un guión contra una duración objetivo de video o episodio antes de grabar, para evitar una extensa reedición o regrabación después."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Por qué el ritmo de habla es más lento que el ritmo de lectura?",
+              "answer": "Hablar implica restricciones físicas que la lectura silenciosa no tiene: necesitas respirar, articular cada sonido con suficiente claridad para ser entendido, y a menudo pausar brevemente para dar énfasis o dejar que un punto cale en la audiencia. Nada de esto aplica a la lectura silenciosa, razón por la cual los ritmos de habla típicos (alrededor de 110-170 PPM) están muy por debajo de los ritmos de lectura silenciosa típicos (alrededor de 200-300 PPM)."
+            },
+            {
+              "question": "¿Qué ajuste debo usar para mi discurso?",
+              "answer": "Usa \"Formal\" para una presentación medida y deliberada donde la claridad importa más que la energía (como un discurso de apertura formal), \"Normal\" para una charla conversacional típica, y \"Rápido\" para una entrega enérgica y de ritmo rápido. Si tienes un video o grabación de ti mismo hablando, cronometrar un recuento de palabras conocido contra ella te dará el ritmo más personalizado para usar con la opción Personalizada."
+            },
+            {
+              "question": "¿Por qué mi tiempo de entrega real difiere de la estimación?",
+              "answer": "Esta herramienta asume un ritmo constante durante todo el discurso, pero la entrega real varía naturalmente: podrías hablar más rápido en material familiar y más lento en puntos complejos, pausar para reacciones de la audiencia o risas, o tomar pausas dramáticas deliberadas. Trata la estimación como una línea base de planificación útil, no una predicción exacta."
+            },
+            {
+              "question": "¿Debo incluir direcciones de escena o notas en el recuento de palabras?",
+              "answer": "No —incluye solo las palabras que realmente dirás en voz alta. Las direcciones de escena, indicaciones de diapositivas, o notas para ti mismo (como \"[pausa para risas]\") no se hablan, por lo que incluirlas en el texto inflaría el recuento de palabras y produciría una estimación de tiempo inexacta y demasiado larga."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "speakingVsReading": {
+            "title": "Ritmo de Habla vs. Ritmo de Lectura",
+            "paragraph": "La investigación sobre el habla espontánea y preparada ha demostrado durante mucho tiempo que el ritmo de habla está gobernado por restricciones diferentes a las de la lectura silenciosa: la tasa de articulación (qué tan rápido se producen físicamente los sonidos), la frecuencia y duración de las pausas (para respirar, pensar, y enfatizar), y la necesidad de permanecer inteligible para una audiencia que escucha en tiempo real, que no puede releer una oración confusa como puede hacerlo un lector. Estos factores combinados son la razón por la cual los entrenadores de oratoria y las guías de presentación recomiendan consistentemente un ritmo en el rango de aproximadamente 100-170 palabras por minuto, muy por debajo de las velocidades de lectura silenciosa típicas."
+          },
+          "limitations": {
+            "title": "Limitaciones de Esta Estimación",
+            "paragraph": "Esta herramienta aplica un ritmo fijo uniformemente a través de todo un texto, mientras que la entrega real del discurso varía naturalmente con el énfasis, las reacciones de la audiencia, y la complejidad del material discutido. Tampoco tiene en cuenta las pausas planificadas (como una pausa dramática o tiempo para que se asimilen las diapositivas) a menos que incluyas ese tiempo por separado, así que trata el resultado como una estimación de planificación sólida en lugar de una predicción exacta de cronómetro."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "El estudio de la producción y el ritmo del habla se examina dentro de la lingüística y la patología del habla-lenguaje. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "University College London — División de Psicología y Ciencias del Lenguaje",
+                "note": "Un centro líder en investigación del habla y el lenguaje en el Reino Unido.",
+                "url": "https://www.ucl.ac.uk/pals/research/speech-hearing-and-phonetic-sciences/postgraduate-study",
+                "online": "No — los títulos de investigación son presenciales en UCL."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ciencias del Cerebro y Cognitivas",
+                "note": "Un centro líder en la ciencia cognitiva del procesamiento del habla y el lenguaje.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Edimburgo — Centre for Speech Technology Research",
+                "note": "Uno de los centros europeos líderes dedicados específicamente a la investigación del habla.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad Northwestern — Departamento Roxelyn y Richard Pepper de Ciencias y Trastornos de la Comunicación",
+                "note": "Un programa líder en patología del habla-lenguaje y ciencias de la comunicación.",
+                "url": "https://communication.northwestern.edu/programs/phd-communication-sciences-disorders/",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Lingüística Teórica y Aplicada",
+                "note": "Un centro líder en investigación lingüística, incluida la producción del habla.",
+                "url": "https://www.mml.cam.ac.uk/dtal/research/graduate",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Lingüística Teórica y Aplicada."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Patología del Habla-Lenguaje",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fm/slp/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Goldman-Eisler, F. (1968). Psycholinguistics: Experiments in Spontaneous Speech. Academic Press.",
+          "note": "Un estudio fundamental en la psicolingüística de la producción del habla, incluyendo los patrones de tiempo, pausa, y ritmo del lenguaje hablado que lo distinguen de la lectura silenciosa.",
+          "url": "https://www.worldcat.org/title/psycholinguistics-experiments-in-spontaneous-speech/oclc/440680",
+          "readOriginal": "Ver la Referencia"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20541,7 +20681,6 @@
     "advanced-temperature-converter": "Convertidor de temperatura avanzado",
     "triangle-angle-calculator": "Calculadora de ángulo de triángulo",
     "stacked-discount-calculator": "Calculadora de descuentos acumulados",
-    "speech-word-count-calculator": "Calculadora de palabras para discursos",
     "chinese-zodiac-age-calculator": "Calculadora de edad del zodíaco chino",
     "zodiac-sign-calculator": "Calculadora de signo zodiacal",
     "steps-to-calories-calculator": "Calculadora de pasos a calorías",

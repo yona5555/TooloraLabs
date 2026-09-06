@@ -20377,6 +20377,146 @@
           "readOriginal": "Consulter la Référence"
         }
       }
+    },
+    "speech-word-count-calculator": {
+      "title": "Calculatrice de Mots du Discours",
+      "description": "Estimez combien de temps prendra la prononciation d'un discours ou d'une présentation, selon le nombre de mots et le débit de parole.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Discours ou Script",
+        "textLabel": "Texte à estimer",
+        "textPlaceholder": "Collez ou tapez votre discours, script, ou texte de présentation ici.",
+        "paceLabel": "Débit de Parole",
+        "presets": {
+          "formal": "Formel",
+          "normal": "Normal",
+          "fast": "Rapide",
+          "custom": "Personnalisé"
+        },
+        "customWpmLabel": "Mots par Minute"
+      },
+      "result": {
+        "heading": "Temps de Présentation Estimé",
+        "emptyText": "Saisissez le texte de votre discours ou présentation pour estimer son temps de présentation.",
+        "invalidRate": "Saisissez un débit de parole entre 1 et 400 mots par minute.",
+        "timeMinutesSeconds": "{minutes} min {seconds} sec",
+        "timeSecondsOnly": "{seconds} sec",
+        "wordCountLabel": "Nombre de Mots"
+      },
+      "quickReference": {
+        "title": "Le calcul",
+        "intro": "Le temps de présentation est le nombre de mots divisé par votre débit de parole choisi."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre le Temps de Présentation d'un Discours",
+          "paragraph1": "Estimer combien de temps prendra la prononciation d'un discours revient à diviser le nombre total de mots par un débit de parole, mesuré en mots par minute (MPM). Cet outil propose trois préréglages courants : formel (110 MPM, un rythme délibéré et mesuré typique des présentations et discours formels destinés à être facilement suivis), normal (140 MPM, un débit de parole conversationnel typique), et rapide (170 MPM, une présentation énergique et rapide), plus une option personnalisée pour votre propre débit mesuré.",
+          "paragraph2": "Le débit de parole est nettement plus lent que le rythme de lecture silencieuse, car l'élocution parlée est rythmée par la respiration, l'articulation, les pauses pour l'emphase, et la compréhension du public, rien de tout cela ne s'appliquant à la lecture silencieuse pour soi-même. C'est pourquoi un discours prend généralement sensiblement plus de temps à prononcer à voix haute que le même texte ne prendrait à lire silencieusement — une distinction à garder à l'esprit si vous chronométrez une allocution en fonction du temps que le script prend à lire mentalement."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Estimer le temps de présentation d'un discours est essentiel partout où une allocution doit tenir dans un créneau horaire défini.",
+          "items": [
+            {
+              "title": "Conférences et Présentations",
+              "description": "Vérifier qu'une allocution préparée tient dans le créneau horaire alloué avant de monter sur scène, évitant le problème courant de dépasser ou de ne pas atteindre significativement le temps imparti."
+            },
+            {
+              "title": "Discours de Mariage et Toasts",
+              "description": "Estimer si un discours sincère a une longueur appropriée, car un toast qui dure trop longtemps peut perdre l'attention du public, peu importe la qualité de sa rédaction."
+            },
+            {
+              "title": "Écriture de Scripts Vidéo et Podcast",
+              "description": "Planifier la longueur d'un script par rapport à une durée cible de vidéo ou d'épisode avant l'enregistrement, pour éviter un remontage ou un réenregistrement conséquent par la suite."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Pourquoi le débit de parole est-il plus lent que le rythme de lecture ?",
+              "answer": "Parler implique des contraintes physiques qui ne s'appliquent pas à la lecture silencieuse : vous devez respirer, articuler chaque son assez clairement pour être compris, et souvent faire une brève pause pour l'emphase ou pour laisser un point s'installer auprès du public. Rien de tout cela ne s'applique à la lecture silencieuse, ce qui explique pourquoi les débits de parole typiques (environ 110-170 MPM) sont bien inférieurs aux rythmes de lecture silencieuse typiques (environ 200-300 MPM)."
+            },
+            {
+              "question": "Quel préréglage devrais-je utiliser pour mon discours ?",
+              "answer": "Utilisez « Formel » pour une présentation mesurée et délibérée où la clarté compte plus que l'énergie (comme un discours d'ouverture formel), « Normal » pour une allocution conversationnelle typique, et « Rapide » pour une présentation énergique et rapide. Si vous avez une vidéo ou un enregistrement de vous-même en train de parler, chronométrer un nombre de mots connu par rapport à celui-ci vous donnera le débit le plus personnalisé à utiliser avec l'option Personnalisé."
+            },
+            {
+              "question": "Pourquoi mon temps de présentation réel diffère-t-il de l'estimation ?",
+              "answer": "Cet outil suppose un débit constant tout au long du discours, mais la présentation réelle varie naturellement : vous pourriez parler plus vite sur du matériel familier et plus lentement sur des points complexes, faire une pause pour les réactions du public ou les rires, ou prendre des pauses dramatiques délibérées. Considérez l'estimation comme une base de planification utile, pas une prédiction exacte."
+            },
+            {
+              "question": "Dois-je inclure les indications scéniques ou les notes dans le nombre de mots ?",
+              "answer": "Non — n'incluez que les mots que vous direz réellement à voix haute. Les indications scéniques, les repères de diapositives, ou les notes pour vous-même (comme « [pause pour les rires] ») ne sont pas prononcés, donc les inclure dans le texte gonflerait le nombre de mots et produirait une estimation de temps inexacte et trop longue."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "speakingVsReading": {
+            "title": "Débit de Parole vs. Rythme de Lecture",
+            "paragraph": "La recherche sur la parole spontanée et préparée a longtemps montré que le débit de parole est régi par des contraintes différentes de celles de la lecture silencieuse : le taux d'articulation (à quelle vitesse les sons sont physiquement produits), la fréquence et la durée des pauses (pour respirer, réfléchir, et souligner), et le besoin de rester intelligible pour un public qui écoute en temps réel et ne peut pas relire une phrase confuse comme le peut un lecteur. Ces facteurs combinés expliquent pourquoi les coachs en prise de parole et les guides de présentation recommandent systématiquement un débit dans la plage d'environ 100-170 mots par minute, bien en dessous des vitesses de lecture silencieuse typiques."
+          },
+          "limitations": {
+            "title": "Limites de Cette Estimation",
+            "paragraph": "Cet outil applique un débit fixe uniformément sur tout un texte, alors que la présentation réelle d'un discours varie naturellement avec l'emphase, les réactions du public, et la complexité du sujet abordé. Il ne tient pas non plus compte des pauses planifiées (comme une pause dramatique ou du temps pour que les diapositives soient assimilées) à moins que vous n'intégriez ce temps séparément, alors considérez le résultat comme une estimation de planification solide plutôt qu'une prédiction exacte au chronomètre."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "L'étude de la production et du débit de la parole est examinée en linguistique et en orthophonie. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "University College London — Division of Psychology and Language Sciences",
+                "note": "Un centre de premier plan pour la recherche sur la parole et le langage au Royaume-Uni.",
+                "url": "https://www.ucl.ac.uk/pals/research/speech-hearing-and-phonetic-sciences/postgraduate-study",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'UCL."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "Un centre de premier plan pour la science cognitive du traitement de la parole et du langage.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université d'Édimbourg — Centre for Speech Technology Research",
+                "note": "L'un des centres européens de premier plan dédiés spécifiquement à la recherche sur la parole.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université Northwestern — Roxelyn and Richard Pepper Department of Communication Sciences and Disorders",
+                "note": "Un programme de premier plan en orthophonie et sciences de la communication.",
+                "url": "https://communication.northwestern.edu/programs/phd-communication-sciences-disorders/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Theoretical and Applied Linguistics",
+                "note": "Un centre de premier plan pour la recherche en linguistique, y compris la production de la parole.",
+                "url": "https://www.mml.cam.ac.uk/dtal/research/graduate",
+                "online": "Non — les diplômes de recherche sont en présentiel au Department of Theoretical and Applied Linguistics."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'orthophonie",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/fm/slp/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Scientifiques",
+          "citation": "Goldman-Eisler, F. (1968). Psycholinguistics: Experiments in Spontaneous Speech. Academic Press.",
+          "note": "Une étude fondatrice en psycholinguistique de la production de la parole, y compris les schémas de timing, de pause, et de débit du langage parlé qui le distinguent de la lecture silencieuse.",
+          "url": "https://www.worldcat.org/title/psycholinguistics-experiments-in-spontaneous-speech/oclc/440680",
+          "readOriginal": "Consulter la Référence"
+        }
+      }
     }
   },
   "toolPage": {
@@ -20541,7 +20681,6 @@
     "advanced-temperature-converter": "Convertisseur de température avancé",
     "triangle-angle-calculator": "Calculatrice d'angle de triangle",
     "stacked-discount-calculator": "Calculatrice de remises cumulées",
-    "speech-word-count-calculator": "Calculatrice de mots pour discours",
     "chinese-zodiac-age-calculator": "Calculatrice d'âge du zodiaque chinois",
     "zodiac-sign-calculator": "Calculatrice de signe du zodiaque",
     "steps-to-calories-calculator": "Calculatrice de pas en calories",

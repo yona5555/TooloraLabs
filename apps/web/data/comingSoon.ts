@@ -29,7 +29,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "zakat-calculator", icon: "HandCoins" },
     { id: "advanced-temperature-converter", icon: "Thermometer" },
     { id: "stacked-discount-calculator", icon: "Layers" },
-    { id: "speech-word-count-calculator", icon: "Mic" },
     { id: "chinese-zodiac-age-calculator", icon: "CalendarDays" },
     { id: "zodiac-sign-calculator", icon: "Star" },
     { id: "steps-to-calories-calculator", icon: "Footprints" },

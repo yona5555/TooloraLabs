@@ -84,3 +84,4 @@ export * from "./LoremIpsumCalculator";
 export * from "./TextLogoCalculator";
 export * from "./RandomQuoteCalculator";
 export * from "./MultiplicationTableCalculator";
+export * from "./SpeechWordCountCalculator";

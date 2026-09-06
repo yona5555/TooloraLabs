@@ -1394,4 +1394,19 @@ export const tools: Tool[] = [
       "times table grid",
     ],
   },
+  {
+    slug: "speech-word-count-calculator",
+    title: "Speech Word Count Calculator",
+    category: "text-tools",
+    description:
+      "Estimate how long a speech or presentation will take to deliver, based on word count and speaking pace.",
+    featured: false,
+    keywords: [
+      "speech word count calculator",
+      "speech timer",
+      "presentation length calculator",
+      "how long is my speech",
+      "speaking pace calculator",
+    ],
+  },
 ];
