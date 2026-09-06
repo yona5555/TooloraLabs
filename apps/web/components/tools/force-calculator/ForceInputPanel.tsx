@@ -1,7 +1,13 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import ForceModeTabs from "./ForceModeTabs";
+import ForceSolveForTabs from "./ForceSolveForTabs";
+import ForceVariablesDiagram from "./ForceVariablesDiagram";
+import { SECOND_LAW_SOLVE_FOR, GRAVITATION_SOLVE_FOR } from "./types";
 import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types";
 
 type ForceInputPanelProps = {
@@ -23,6 +29,8 @@ type ForceInputPanelProps = {
   onMass2Change: (value: string) => void;
   distance: string;
   onDistanceChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function ForceInputPanel({
@@ -44,76 +52,74 @@ export default function ForceInputPanel({
   onMass2Change,
   distance,
   onDistanceChange,
+  onCalculate,
+  onClear,
 }: ForceInputPanelProps) {
   const t = useTranslations("tools.force-calculator.form");
 
+  const solved = mode === "secondLaw" ? secondLawSolveFor : gravitationSolveFor;
+  const variableOrder = mode === "secondLaw" ? ["force", "mass", "acceleration"] : ["force", "mass1", "mass2", "distance"];
+  const variableLabels: Record<string, string> = { force: "F", mass: "m", acceleration: "a", mass1: "m₁", mass2: "m₂", distance: "d" };
+
   return (
     <SectionCard title={t("inputTitle")}>
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
-        <select
-          value={mode}
-          onChange={(e) => onModeChange(e.target.value as ForceMode)}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-        >
-          <option value="secondLaw">{t("mode.secondLaw")}</option>
-          <option value="gravitation">{t("mode.gravitation")}</option>
-        </select>
-      </label>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
+        <ForceModeTabs mode={mode} onModeChange={onModeChange} />
+      </div>
 
-      {mode === "secondLaw" ? (
-        <div className="mt-5 space-y-5">
-          <label className="block space-y-2">
-            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
-            <select
-              value={secondLawSolveFor}
-              onChange={(e) => onSecondLawSolveForChange(e.target.value as SecondLawSolveFor)}
-              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-            >
-              <option value="force">{t("secondLawSolveFor.force")}</option>
-              <option value="mass">{t("secondLawSolveFor.mass")}</option>
-              <option value="acceleration">{t("secondLawSolveFor.acceleration")}</option>
-            </select>
-          </label>
-          {secondLawSolveFor !== "force" && (
-            <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
-          )}
-          {secondLawSolveFor !== "mass" && (
-            <ToolInput label={t("massLabel")} type="text" inputMode="decimal" placeholder={t("massPlaceholder")} value={mass} onChange={(e) => onMassChange(e.target.value)} />
-          )}
-          {secondLawSolveFor !== "acceleration" && (
-            <ToolInput label={t("accelerationLabel")} type="text" inputMode="decimal" placeholder={t("accelerationPlaceholder")} value={acceleration} onChange={(e) => onAccelerationChange(e.target.value)} />
-          )}
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
+        {mode === "secondLaw" ? (
+          <ForceSolveForTabs values={SECOND_LAW_SOLVE_FOR} active={secondLawSolveFor} onChange={onSecondLawSolveForChange} translationKey="secondLawSolveFor" />
+        ) : (
+          <ForceSolveForTabs values={GRAVITATION_SOLVE_FOR} active={gravitationSolveFor} onChange={onGravitationSolveForChange} translationKey="gravitationSolveFor" />
+        )}
+      </div>
+
+      <ForceVariablesDiagram solved={solved} order={variableOrder} labels={variableLabels} caption={t("variablesCaption")} />
+
+      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+        {mode === "secondLaw" ? (
+          <>
+            {secondLawSolveFor !== "force" && (
+              <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
+            )}
+            {secondLawSolveFor !== "mass" && (
+              <ToolInput label={t("massLabel")} type="text" inputMode="decimal" placeholder={t("massPlaceholder")} value={mass} onChange={(e) => onMassChange(e.target.value)} />
+            )}
+            {secondLawSolveFor !== "acceleration" && (
+              <ToolInput label={t("accelerationLabel")} type="text" inputMode="decimal" placeholder={t("accelerationPlaceholder")} value={acceleration} onChange={(e) => onAccelerationChange(e.target.value)} />
+            )}
+          </>
+        ) : (
+          <>
+            {gravitationSolveFor !== "force" && (
+              <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
+            )}
+            {gravitationSolveFor !== "mass1" && (
+              <ToolInput label={t("mass1Label")} type="text" inputMode="decimal" placeholder={t("mass1Placeholder")} value={mass1} onChange={(e) => onMass1Change(e.target.value)} />
+            )}
+            {gravitationSolveFor !== "mass2" && (
+              <ToolInput label={t("mass2Label")} type="text" inputMode="decimal" placeholder={t("mass2Placeholder")} value={mass2} onChange={(e) => onMass2Change(e.target.value)} />
+            )}
+            {gravitationSolveFor !== "distance" && (
+              <ToolInput label={t("distanceLabel")} type="text" inputMode="decimal" placeholder={t("distancePlaceholder")} value={distance} onChange={(e) => onDistanceChange(e.target.value)} />
+            )}
+          </>
+        )}
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
         </div>
-      ) : (
-        <div className="mt-5 space-y-5">
-          <label className="block space-y-2">
-            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
-            <select
-              value={gravitationSolveFor}
-              onChange={(e) => onGravitationSolveForChange(e.target.value as GravitationSolveFor)}
-              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-            >
-              <option value="force">{t("gravitationSolveFor.force")}</option>
-              <option value="mass1">{t("gravitationSolveFor.mass1")}</option>
-              <option value="mass2">{t("gravitationSolveFor.mass2")}</option>
-              <option value="distance">{t("gravitationSolveFor.distance")}</option>
-            </select>
-          </label>
-          {gravitationSolveFor !== "force" && (
-            <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
-          )}
-          {gravitationSolveFor !== "mass1" && (
-            <ToolInput label={t("mass1Label")} type="text" inputMode="decimal" placeholder={t("mass1Placeholder")} value={mass1} onChange={(e) => onMass1Change(e.target.value)} />
-          )}
-          {gravitationSolveFor !== "mass2" && (
-            <ToolInput label={t("mass2Label")} type="text" inputMode="decimal" placeholder={t("mass2Placeholder")} value={mass2} onChange={(e) => onMass2Change(e.target.value)} />
-          )}
-          {gravitationSolveFor !== "distance" && (
-            <ToolInput label={t("distanceLabel")} type="text" inputMode="decimal" placeholder={t("distancePlaceholder")} value={distance} onChange={(e) => onDistanceChange(e.target.value)} />
-          )}
-        </div>
-      )}
+      </form>
     </SectionCard>
   );
 }

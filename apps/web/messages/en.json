@@ -7304,7 +7304,10 @@
         "mass2Label": "Mass 2 (kg)",
         "mass2Placeholder": "e.g. 1",
         "distanceLabel": "Distance Between Centers (m)",
-        "distancePlaceholder": "e.g. 6.371e6"
+        "distancePlaceholder": "e.g. 6.371e6",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "variablesCaption": "The quantity you're solving for is highlighted."
       },
       "result": {
         "heading": "Result",
@@ -7325,7 +7328,12 @@
         "diagramCaptionSecondLaw": "Force and acceleration arrows scaled to their computed magnitudes, in the same direction.",
         "diagramMass1": "m₁={value} kg",
         "diagramMass2": "m₂={value} kg",
-        "diagramCaptionGravitation": "Circle sizes scaled to relative mass; arrows show mutual gravitational attraction."
+        "diagramCaptionGravitation": "Circle sizes scaled to relative mass; arrows show mutual gravitational attraction.",
+        "emptyStateMessage": "Enter values and press Calculate to see your force result.",
+        "sentence": "The resulting force is {value} N.",
+        "inverseSquareXLabel": "Distance (r)",
+        "inverseSquareYLabel": "Force (F)",
+        "inverseSquareCaption": "Gravitational force falls off with the square of distance — doubling r cuts F to a quarter."
       },
       "education": {
         "intro": {
@@ -7335,7 +7343,12 @@
             "caption": "A 2 kg mass accelerating at 3 m/s² under a 6 N net force — force and acceleration arrows point the same direction and scale with magnitude."
           },
           "paragraph2": "The law of universal gravitation, F = Gm₁m₂/r², describes a different kind of force: the mutual attraction between any two masses, proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The gravitational constant G (about 6.674 × 10⁻¹¹ N·m²/kg²) is extremely small, which is why gravitational attraction between everyday objects is imperceptible — it only becomes significant when at least one mass is astronomically large, like a planet or star.",
-          "paragraph3": "Both equations describe force, but they answer different questions: F = ma relates a single object's mass and acceleration under any net force, while F = Gm₁m₂/r² specifically calculates the gravitational force between two masses based on their separation. A falling object on Earth's surface experiences both — gravity (from F = Gm₁m₂/r², simplified to F = mg near Earth's surface) is the specific force, and F = ma describes how that force translates into its acceleration."
+          "paragraph3": "Both equations describe force, but they answer different questions: F = ma relates a single object's mass and acceleration under any net force, while F = Gm₁m₂/r² specifically calculates the gravitational force between two masses based on their separation. A falling object on Earth's surface experiences both — gravity (from F = Gm₁m₂/r², simplified to F = mg near Earth's surface) is the specific force, and F = ma describes how that force translates into its acceleration.",
+          "freeBody": {
+            "applied": "Applied force (F)",
+            "net": "Net force = ma",
+            "caption": "A free-body diagram: one applied force produces one net force, per F = ma."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -7446,6 +7459,29 @@
           "url": "https://doi.org/10.1098/rsnr.1951.0003",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "gauge": {
+        "tiny": "Astronomically small",
+        "everyday": "Everyday scale",
+        "massive": "Very large"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "projectile-motion-calculator": {

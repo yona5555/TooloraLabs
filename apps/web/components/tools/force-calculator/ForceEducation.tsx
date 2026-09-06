@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import ForceBlockDiagram from "./ForceBlockDiagram";
+import ForceFreeBodyDiagram from "./ForceFreeBodyDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -27,6 +28,7 @@ export default async function ForceEducation() {
           caption={t("intro.diagram.caption")}
         />
         <p>{t("intro.paragraph2")}</p>
+        <ForceFreeBodyDiagram appliedLabel={t("intro.freeBody.applied")} netLabel={t("intro.freeBody.net")} caption={t("intro.freeBody.caption")} />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 
