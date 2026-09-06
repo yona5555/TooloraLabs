@@ -70,7 +70,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
   ],
   "phase-3": [
     { id: "smart-video-compressor", icon: "FileVideo" },
-    { id: "text-to-speech", icon: "Volume2" },
     { id: "speech-to-text", icon: "Mic2" },
     { id: "smart-image-compression", icon: "ImageDown" },
     { id: "background-remover", icon: "Eraser" },

@@ -1259,4 +1259,19 @@ export const tools: Tool[] = [
       "diameter calculator",
     ],
   },
+  {
+    slug: "text-to-speech",
+    title: "Text to Speech",
+    category: "ai-tools",
+    description:
+      "Convert written text into spoken audio using your browser's built-in speech synthesis. No account, no server, no cost.",
+    featured: false,
+    keywords: [
+      "text to speech",
+      "tts",
+      "text to speech online",
+      "read text aloud",
+      "free text to speech",
+    ],
+  },
 ];

@@ -19112,6 +19112,148 @@
           "readOriginal": "View Further Reading"
         }
       }
+    },
+    "text-to-speech": {
+      "title": "Text to Speech",
+      "description": "Convert written text into spoken audio using your browser's built-in speech synthesis. No account, no server, no cost.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "unsupported": "Your browser doesn't support speech synthesis. Try a recent version of Chrome, Edge, or Safari.",
+        "textLabel": "Text to speak",
+        "textPlaceholder": "Type or paste text here, then press Speak.",
+        "voiceLabel": "Voice",
+        "rateLabel": "Speed",
+        "pitchLabel": "Pitch",
+        "speak": "Speak",
+        "pause": "Pause",
+        "resume": "Resume",
+        "stop": "Stop"
+      },
+      "result": {
+        "heading": "Playback",
+        "status": {
+          "idle": "Ready to speak your text.",
+          "speaking": "Speaking...",
+          "paused": "Paused."
+        },
+        "characterCountLabel": "Characters",
+        "chunkCountLabel": "Speech Chunks"
+      },
+      "quickReference": {
+        "title": "Good to Know",
+        "intro": "Available voices and quality depend entirely on your browser and operating system."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Browser-Based Text to Speech",
+          "paragraph1": "This tool uses the Web Speech API's SpeechSynthesis interface, a feature built directly into modern web browsers that converts text into spoken audio without sending anything to a server. When you press Speak, your browser's own text-to-speech engine — the same one used by your operating system's accessibility features — reads the text aloud using one of the voices installed on your device. Because everything happens locally, there is no per-character cost, no account, and no network request involved in generating the speech.",
+          "paragraph2": "Long text is automatically split into shorter chunks at sentence boundaries before being queued for speech, since some browsers handle very long single utterances unreliably. The rate control adjusts how fast the voice speaks (a multiplier of the voice's normal speed), while pitch adjusts how high or low the voice sounds, independent of speed — both map directly to the `rate` and `pitch` properties defined by the underlying Web Speech API specification."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Text-to-speech is useful anywhere reading text aloud saves time or improves accessibility.",
+          "items": [
+            {
+              "title": "Proofreading by Ear",
+              "description": "Listening to a draft read aloud often catches awkward phrasing or missing words that are easy to miss when only reading silently."
+            },
+            {
+              "title": "Accessibility",
+              "description": "Making written content accessible to people with visual impairments, reading difficulties, or anyone who prefers listening over reading."
+            },
+            {
+              "title": "Multitasking",
+              "description": "Having an article, email, or document read aloud while doing something else, like commuting or cooking."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Does this send my text to a server?",
+              "answer": "No. All speech synthesis happens locally in your browser using the built-in Web Speech API — your text never leaves your device or gets sent anywhere."
+            },
+            {
+              "question": "Why don't I see very many voice options?",
+              "answer": "The available voices come entirely from your operating system and browser, not from this tool. Installing additional system voices (in your OS's language or accessibility settings) will make more options appear here."
+            },
+            {
+              "question": "Why does my browser say speech synthesis isn't supported?",
+              "answer": "A small number of older or less common browsers don't implement the Web Speech API's SpeechSynthesis interface at all. Try a recent version of Chrome, Edge, Safari, or Firefox."
+            },
+            {
+              "question": "What's the difference between speed and pitch?",
+              "answer": "Speed (rate) controls how quickly the words are spoken — higher values speak faster. Pitch controls how high or low the voice sounds, similar to raising or lowering your own voice, independent of how fast you're talking."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Speech synthesis research dates back to the 1930s with Bell Labs' Voder, an early electronic speech synthesizer operated manually by a trained technician. Software-based text-to-speech matured through the following decades, and by the 2010s it was common enough on desktop and mobile operating systems that the W3C standardized a way for web pages to access it directly: the Web Speech API, first published as a draft community report in 2012. This let websites trigger a device's existing speech engine through JavaScript, rather than requiring every site to ship its own speech technology."
+          },
+          "browserSupport": {
+            "title": "Browser Support",
+            "paragraph": "Support for the SpeechSynthesis interface varies by browser and operating system, since each browser ultimately calls into the speech engine already installed on the device rather than shipping its own. This means the exact list of available voices, and their quality, differs between a Windows PC, a Mac, and a mobile phone, even within the same browser — this tool simply exposes whatever voices your specific device already has installed."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Speech synthesis is studied within computer science, specifically in speech and language processing. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "One of the world's leading centers for speech and language processing research.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "A leading center for speech, language, and AI research.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — the PhD is an in-residence research program within EECS."
+              },
+              {
+                "name": "University of Edinburgh — Centre for Speech Technology Research",
+                "note": "One of Europe's leading centers dedicated specifically to speech technology research.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong natural language processing research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Machine Intelligence Laboratory",
+                "note": "A leading center for speech and language technology research.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — research degrees are in-residence at the Department of Engineering."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "W3C Community Group. (2012-present). Web Speech API Specification.",
+          "note": "The official technical specification defining the SpeechSynthesis and SpeechRecognition interfaces this tool is built on.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "View the Specification"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19313,7 +19455,6 @@
     "image-to-base64-converter": "Image to Base64 Converter",
     "certificate-generator": "Certificate Generator",
     "smart-video-compressor": "Smart Video Compressor",
-    "text-to-speech": "Text to Speech",
     "speech-to-text": "Speech to Text",
     "smart-image-compression": "Smart Image Compression",
     "background-remover": "Image Background Remover",

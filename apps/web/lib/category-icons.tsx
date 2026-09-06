@@ -1,5 +1,6 @@
 import {
   Atom,
+  BrainCircuit,
   Calculator,
   CalendarClock,
   CloudSun,
@@ -21,6 +22,7 @@ import {
 
 export const categoryIcons: Record<string, LucideIcon> = {
   calculator: Calculator,
+  "brain-circuit": BrainCircuit,
   refresh: RefreshCw,
   code: Code2,
   text: FileText,

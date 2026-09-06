@@ -19112,6 +19112,148 @@
           "readOriginal": "Voir les Lectures Complémentaires"
         }
       }
+    },
+    "text-to-speech": {
+      "title": "Synthèse Vocale",
+      "description": "Convertissez du texte écrit en audio parlé grâce à la synthèse vocale intégrée à votre navigateur. Sans compte, sans serveur, sans coût.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "unsupported": "Votre navigateur ne prend pas en charge la synthèse vocale. Essayez une version récente de Chrome, Edge ou Safari.",
+        "textLabel": "Texte à prononcer",
+        "textPlaceholder": "Saisissez ou collez du texte ici, puis appuyez sur Parler.",
+        "voiceLabel": "Voix",
+        "rateLabel": "Vitesse",
+        "pitchLabel": "Tonalité",
+        "speak": "Parler",
+        "pause": "Pause",
+        "resume": "Reprendre",
+        "stop": "Arrêter"
+      },
+      "result": {
+        "heading": "Lecture",
+        "status": {
+          "idle": "Prêt à lire votre texte.",
+          "speaking": "En train de parler...",
+          "paused": "En pause."
+        },
+        "characterCountLabel": "Caractères",
+        "chunkCountLabel": "Segments de Parole"
+      },
+      "quickReference": {
+        "title": "Bon à Savoir",
+        "intro": "Les voix disponibles et leur qualité dépendent entièrement de votre navigateur et de votre système d'exploitation."
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre la Synthèse Vocale dans le Navigateur",
+          "paragraph1": "Cet outil utilise l'interface SpeechSynthesis de la Web Speech API, une fonctionnalité intégrée directement aux navigateurs web modernes qui convertit du texte en audio parlé sans rien envoyer à un serveur. Lorsque vous appuyez sur Parler, le propre moteur de synthèse vocale de votre navigateur — le même que celui utilisé par les fonctionnalités d'accessibilité de votre système d'exploitation — lit le texte à voix haute en utilisant l'une des voix installées sur votre appareil. Comme tout se passe localement, il n'y a aucun coût par caractère, aucun compte, et aucune requête réseau impliquée dans la génération de la parole.",
+          "paragraph2": "Le texte long est automatiquement divisé en segments plus courts aux limites des phrases avant d'être mis en file d'attente pour la parole, car certains navigateurs gèrent de manière peu fiable les énoncés uniques très longs. Le contrôle de vitesse ajuste la rapidité avec laquelle la voix parle (un multiplicateur de la vitesse normale de la voix), tandis que la tonalité ajuste la hauteur du son de la voix, indépendamment de la vitesse — les deux correspondent directement aux propriétés `rate` et `pitch` définies par la spécification sous-jacente de la Web Speech API."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "La synthèse vocale est utile partout où lire du texte à voix haute permet de gagner du temps ou d'améliorer l'accessibilité.",
+          "items": [
+            {
+              "title": "Relecture à l'Oreille",
+              "description": "Écouter un brouillon lu à voix haute permet souvent de repérer des formulations maladroites ou des mots manquants faciles à manquer en lisant seulement en silence."
+            },
+            {
+              "title": "Accessibilité",
+              "description": "Rendre le contenu écrit accessible aux personnes malvoyantes, ayant des difficultés de lecture, ou à quiconque préfère écouter plutôt que lire."
+            },
+            {
+              "title": "Multitâche",
+              "description": "Faire lire un article, un e-mail ou un document à voix haute pendant que l'on fait autre chose, comme se déplacer ou cuisiner."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Cela envoie-t-il mon texte à un serveur ?",
+              "answer": "Non. Toute la synthèse vocale se produit localement dans votre navigateur grâce à la Web Speech API intégrée — votre texte ne quitte jamais votre appareil et n'est envoyé nulle part."
+            },
+            {
+              "question": "Pourquoi ne vois-je pas beaucoup d'options de voix ?",
+              "answer": "Les voix disponibles proviennent entièrement de votre système d'exploitation et de votre navigateur, pas de cet outil. L'installation de voix système supplémentaires (dans les paramètres de langue ou d'accessibilité de votre système) fera apparaître plus d'options ici."
+            },
+            {
+              "question": "Pourquoi mon navigateur dit-il que la synthèse vocale n'est pas prise en charge ?",
+              "answer": "Un petit nombre de navigateurs plus anciens ou moins courants n'implémentent pas du tout l'interface SpeechSynthesis de la Web Speech API. Essayez une version récente de Chrome, Edge, Safari ou Firefox."
+            },
+            {
+              "question": "Quelle est la différence entre vitesse et tonalité ?",
+              "answer": "La vitesse (rate) contrôle la rapidité avec laquelle les mots sont prononcés — des valeurs plus élevées parlent plus vite. La tonalité contrôle la hauteur du son de la voix, similaire à monter ou baisser votre propre voix, indépendamment de la vitesse à laquelle vous parlez."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La recherche en synthèse vocale remonte aux années 1930 avec le Voder des Bell Labs, un synthétiseur vocal électronique précoce actionné manuellement par un technicien formé. La synthèse vocale logicielle a mûri au cours des décennies suivantes, et dans les années 2010, elle était suffisamment répandue sur les systèmes d'exploitation de bureau et mobiles pour que le W3C standardise un moyen pour les pages web d'y accéder directement : la Web Speech API, publiée pour la première fois comme rapport communautaire préliminaire en 2012. Cela a permis aux sites web de déclencher le moteur vocal existant d'un appareil via JavaScript, plutôt que d'exiger que chaque site embarque sa propre technologie vocale."
+          },
+          "browserSupport": {
+            "title": "Prise en Charge par les Navigateurs",
+            "paragraph": "La prise en charge de l'interface SpeechSynthesis varie selon le navigateur et le système d'exploitation, car chaque navigateur appelle en fin de compte le moteur vocal déjà installé sur l'appareil plutôt que d'embarquer le sien. Cela signifie que la liste exacte des voix disponibles, et leur qualité, diffère entre un PC Windows, un Mac et un téléphone mobile, même au sein du même navigateur — cet outil expose simplement les voix déjà installées sur votre appareil spécifique."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La synthèse vocale est étudiée en informatique, spécifiquement dans le traitement de la parole et du langage. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université Carnegie Mellon — Language Technologies Institute",
+                "note": "L'un des centres les plus reconnus au monde pour la recherche en traitement de la parole et du langage.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en parole, langage et IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "Non — le doctorat est un programme de recherche en présentiel au sein du département EECS."
+              },
+              {
+                "name": "Université d'Édimbourg — Centre for Speech Technology Research",
+                "note": "L'un des centres européens de premier plan dédiés spécifiquement à la recherche en technologie de la parole.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en traitement du langage naturel.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centre de premier plan pour la recherche en technologie de la parole et du langage.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'ingénierie."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "W3C Community Group. (2012-présent). Web Speech API Specification.",
+          "note": "La spécification technique officielle définissant les interfaces SpeechSynthesis et SpeechRecognition sur lesquelles cet outil est construit.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Consulter la Spécification"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19313,7 +19455,6 @@
     "image-to-base64-converter": "Convertisseur d'image en Base64",
     "certificate-generator": "Générateur de certificats",
     "smart-video-compressor": "Compresseur vidéo intelligent",
-    "text-to-speech": "Synthèse vocale (texte vers parole)",
     "speech-to-text": "Reconnaissance vocale (parole vers texte)",
     "smart-image-compression": "Compression d'image intelligente",
     "background-remover": "Suppresseur d'arrière-plan d'image",

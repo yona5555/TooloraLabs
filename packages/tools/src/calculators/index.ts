@@ -75,3 +75,4 @@ export * from "./DiceRollerCalculator";
 export * from "./LoveCalculator";
 export * from "./FuelCostCalculator";
 export * from "./BatchInvoiceCalculator";
+export * from "./TextToSpeechCalculator";

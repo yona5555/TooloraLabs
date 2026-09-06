@@ -19112,6 +19112,148 @@
           "readOriginal": "Ver Lecturas Adicionales"
         }
       }
+    },
+    "text-to-speech": {
+      "title": "Texto a Voz",
+      "description": "Convierte texto escrito en audio hablado usando la síntesis de voz integrada en tu navegador. Sin cuenta, sin servidor, sin costo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "unsupported": "Tu navegador no admite síntesis de voz. Prueba una versión reciente de Chrome, Edge o Safari.",
+        "textLabel": "Texto a leer",
+        "textPlaceholder": "Escribe o pega texto aquí, luego presiona Hablar.",
+        "voiceLabel": "Voz",
+        "rateLabel": "Velocidad",
+        "pitchLabel": "Tono",
+        "speak": "Hablar",
+        "pause": "Pausar",
+        "resume": "Reanudar",
+        "stop": "Detener"
+      },
+      "result": {
+        "heading": "Reproducción",
+        "status": {
+          "idle": "Listo para leer tu texto.",
+          "speaking": "Hablando...",
+          "paused": "Pausado."
+        },
+        "characterCountLabel": "Caracteres",
+        "chunkCountLabel": "Fragmentos de Voz"
+      },
+      "quickReference": {
+        "title": "Bueno Saber",
+        "intro": "Las voces disponibles y su calidad dependen completamente de tu navegador y sistema operativo."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender el Texto a Voz Basado en el Navegador",
+          "paragraph1": "Esta herramienta usa la interfaz SpeechSynthesis de la Web Speech API, una función integrada directamente en los navegadores web modernos que convierte texto en audio hablado sin enviar nada a un servidor. Cuando presionas Hablar, el propio motor de texto a voz de tu navegador —el mismo que usan las funciones de accesibilidad de tu sistema operativo— lee el texto en voz alta usando una de las voces instaladas en tu dispositivo. Como todo sucede localmente, no hay costo por carácter, ni cuenta, ni solicitud de red involucrada en la generación del habla.",
+          "paragraph2": "El texto largo se divide automáticamente en fragmentos más cortos en los límites de las oraciones antes de ponerse en cola para el habla, ya que algunos navegadores manejan de forma poco fiable enunciados individuales muy largos. El control de velocidad ajusta qué tan rápido habla la voz (un multiplicador de la velocidad normal de la voz), mientras que el tono ajusta qué tan alta o baja suena la voz, independientemente de la velocidad —ambos corresponden directamente a las propiedades `rate` y `pitch` definidas por la especificación subyacente de la Web Speech API."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "El texto a voz es útil en cualquier lugar donde leer texto en voz alta ahorre tiempo o mejore la accesibilidad.",
+          "items": [
+            {
+              "title": "Corrección de Pruebas de Oído",
+              "description": "Escuchar un borrador leído en voz alta a menudo detecta frases incómodas o palabras faltantes que son fáciles de pasar por alto al leer solo en silencio."
+            },
+            {
+              "title": "Accesibilidad",
+              "description": "Hacer que el contenido escrito sea accesible para personas con discapacidad visual, dificultades de lectura, o cualquiera que prefiera escuchar en lugar de leer."
+            },
+            {
+              "title": "Multitarea",
+              "description": "Hacer que se lea un artículo, correo electrónico o documento en voz alta mientras se hace otra cosa, como conducir o cocinar."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Esto envía mi texto a un servidor?",
+              "answer": "No. Toda la síntesis de voz ocurre localmente en tu navegador usando la Web Speech API integrada —tu texto nunca sale de tu dispositivo ni se envía a ningún lugar."
+            },
+            {
+              "question": "¿Por qué no veo muchas opciones de voz?",
+              "answer": "Las voces disponibles provienen completamente de tu sistema operativo y navegador, no de esta herramienta. Instalar voces de sistema adicionales (en la configuración de idioma o accesibilidad de tu SO) hará que aparezcan más opciones aquí."
+            },
+            {
+              "question": "¿Por qué mi navegador dice que la síntesis de voz no es compatible?",
+              "answer": "Un pequeño número de navegadores más antiguos o menos comunes no implementan en absoluto la interfaz SpeechSynthesis de la Web Speech API. Prueba una versión reciente de Chrome, Edge, Safari o Firefox."
+            },
+            {
+              "question": "¿Cuál es la diferencia entre velocidad y tono?",
+              "answer": "La velocidad (rate) controla qué tan rápido se pronuncian las palabras —valores más altos hablan más rápido. El tono controla qué tan alta o baja suena la voz, similar a subir o bajar tu propia voz, independientemente de qué tan rápido estés hablando."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La investigación en síntesis de voz se remonta a la década de 1930 con el Voder de los Laboratorios Bell, un sintetizador de voz electrónico temprano operado manualmente por un técnico capacitado. El texto a voz basado en software maduró a lo largo de las décadas siguientes, y para la década de 2010 era lo suficientemente común en los sistemas operativos de escritorio y móviles que el W3C estandarizó una forma para que las páginas web accedieran a él directamente: la Web Speech API, publicada por primera vez como un informe comunitario preliminar en 2012. Esto permitió a los sitios web activar el motor de voz existente de un dispositivo a través de JavaScript, en lugar de requerir que cada sitio incluyera su propia tecnología de voz."
+          },
+          "browserSupport": {
+            "title": "Compatibilidad con Navegadores",
+            "paragraph": "La compatibilidad con la interfaz SpeechSynthesis varía según el navegador y el sistema operativo, ya que cada navegador finalmente llama al motor de voz ya instalado en el dispositivo en lugar de incluir el suyo propio. Esto significa que la lista exacta de voces disponibles, y su calidad, difiere entre una PC con Windows, una Mac y un teléfono móvil, incluso dentro del mismo navegador —esta herramienta simplemente expone las voces que tu dispositivo específico ya tiene instaladas."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La síntesis de voz se estudia dentro de las ciencias de la computación, específicamente en el procesamiento del habla y el lenguaje. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad Carnegie Mellon — Language Technologies Institute",
+                "note": "Uno de los centros líderes en el mundo en investigación de procesamiento del habla y el lenguaje.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Computer Science and Artificial Intelligence Laboratory",
+                "note": "Un centro líder en investigación de habla, lenguaje e IA.",
+                "url": "https://www.eecs.mit.edu/academics/graduate-programs/",
+                "online": "No — el doctorado es un programa de investigación presencial dentro de EECS."
+              },
+              {
+                "name": "Universidad de Edimburgo — Centre for Speech Technology Research",
+                "note": "Uno de los centros europeos líderes dedicados específicamente a la investigación de tecnología del habla.",
+                "url": "https://www.cstr.ed.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en procesamiento del lenguaje natural.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Machine Intelligence Laboratory",
+                "note": "Un centro líder en investigación de tecnología del habla y el lenguaje.",
+                "url": "https://mi.eng.cam.ac.uk/",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ingeniería."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "W3C Community Group. (2012-presente). Web Speech API Specification.",
+          "note": "La especificación técnica oficial que define las interfaces SpeechSynthesis y SpeechRecognition en las que se basa esta herramienta.",
+          "url": "https://wicg.github.io/speech-api/",
+          "readOriginal": "Ver la Especificación"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19313,7 +19455,6 @@
     "image-to-base64-converter": "Convertidor de imagen a Base64",
     "certificate-generator": "Generador de certificados",
     "smart-video-compressor": "Compresor de video inteligente",
-    "text-to-speech": "Texto a voz",
     "speech-to-text": "Voz a texto",
     "smart-image-compression": "Compresión inteligente de imágenes",
     "background-remover": "Eliminador de fondo de imagen",
