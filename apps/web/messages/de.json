@@ -5619,7 +5619,13 @@
         "volumeLabel": "Volumen (cm³)",
         "volumePlaceholder": "z. B. 50",
         "densityLabel": "Dichte (g/cm³)",
-        "densityPlaceholder": "z. B. 2.7"
+        "densityPlaceholder": "z. B. 2.7",
+        "massShort": "M",
+        "densityShort": "D",
+        "volumeShort": "V",
+        "triangleCaption": "Verdecke den Wert, den du berechnen möchtest.",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -5632,7 +5638,17 @@
         "diagramCaption": "{value} g/cm³ auf einer logarithmischen Dichteskala, neben gängigen Materialien.",
         "stepDensity": "{mass} g geteilt durch {volume} cm³.",
         "stepMass": "{density} g/cm³ multipliziert mit {volume} cm³.",
-        "stepVolume": "{mass} g geteilt durch {density} g/cm³."
+        "stepVolume": "{mass} g geteilt durch {density} g/cm³.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Dichteergebnis zu sehen.",
+        "siLabel": "SI-Äquivalent",
+        "specificGravityLabel": "Spezifisches Gewicht",
+        "massShortLabel": "Masse",
+        "volumeShortLabel": "Volumen",
+        "densityShortLabel": "Dichte",
+        "blockCaption": "Ein Live-Blockmodell: Breite folgt dem Volumen, Höhe folgt der Dichte, die schattierte Fläche steht für die Masse.",
+        "siStepLabel": "× 1.000",
+        "sgStepLabel": "÷ Wasser (1,0)",
+        "unitConversionCaption": "Wie sich der Hauptdichtewert in seinen SI-Wert und sein spezifisches Gewicht umrechnet."
       },
       "education": {
         "intro": {
@@ -5642,7 +5658,13 @@
             "caption": "Die Dichte von Eisen, 7,87 g/cm³, dargestellt auf einer logarithmischen Skala neben Luft, Wasser und anderen gängigen Materialien."
           },
           "paragraph2": "Die relative Dichte formuliert die Dichte als Verhältnis zu Wasser (1,0 g/cm³ bei 4 °C, dem Punkt maximaler Dichte von Wasser); eine relative Dichte von 2,7, wie bei Aluminium, bedeutet also, dass das Material 2,7-mal dichter ist als Wasser — deshalb sagt eine relative Dichte unter 1 voraus, dass ein Objekt in Wasser schwimmt, und über 1, dass es sinkt, sofern andere Faktoren wie Oberflächenspannung und eingeschlossene Luft gleich bleiben.",
-          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen."
+          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen.",
+          "buoyancy": {
+            "floats": "Schwimmt (SG < 1)",
+            "sinks": "Sinkt (SG > 1)",
+            "water": "Wasser",
+            "caption": "Ein Objekt geringerer Dichte ruht über der Wasserlinie; ein Objekt höherer Dichte sinkt auf den Boden."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -5753,6 +5775,34 @@
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "tabs": {
+        "groupLabel": "Wähle, wonach aufgelöst werden soll",
+        "solveDensity": "Dichte berechnen",
+        "solveMass": "Masse berechnen",
+        "solveVolume": "Volumen berechnen"
+      },
+      "gauge": {
+        "floats": "Schwimmt im Wasser",
+        "sinks": "Sinkt im Wasser"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "ohms-law-calculator": {

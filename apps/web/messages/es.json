@@ -5619,7 +5619,13 @@
         "volumeLabel": "Volumen (cm³)",
         "volumePlaceholder": "p. ej. 50",
         "densityLabel": "Densidad (g/cm³)",
-        "densityPlaceholder": "p. ej. 2.7"
+        "densityPlaceholder": "p. ej. 2.7",
+        "massShort": "M",
+        "densityShort": "D",
+        "volumeShort": "V",
+        "triangleCaption": "Cubre el valor que quieres calcular.",
+        "calculate": "Calcular",
+        "clear": "Limpiar"
       },
       "result": {
         "heading": "Resultado",
@@ -5632,7 +5638,17 @@
         "diagramCaption": "{value} g/cm³ en una escala de densidad logarítmica, junto a materiales comunes.",
         "stepDensity": "{mass} g divididos entre {volume} cm³.",
         "stepMass": "{density} g/cm³ multiplicados por {volume} cm³.",
-        "stepVolume": "{mass} g divididos entre {density} g/cm³."
+        "stepVolume": "{mass} g divididos entre {density} g/cm³.",
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de densidad.",
+        "siLabel": "Equivalente en SI",
+        "specificGravityLabel": "Gravedad Específica",
+        "massShortLabel": "Masa",
+        "volumeShortLabel": "Volumen",
+        "densityShortLabel": "Densidad",
+        "blockCaption": "Un modelo de bloque en vivo: el ancho sigue el volumen, la altura sigue la densidad, y el área sombreada representa la masa.",
+        "siStepLabel": "× 1000",
+        "sgStepLabel": "÷ agua (1.0)",
+        "unitConversionCaption": "Cómo se convierte la densidad principal en su valor SI y gravedad específica."
       },
       "education": {
         "intro": {
@@ -5642,7 +5658,13 @@
             "caption": "La densidad del hierro, 7.87 g/cm³, ubicada en una escala logarítmica junto al aire, el agua y otros materiales comunes."
           },
           "paragraph2": "La gravedad específica expresa la densidad como una razón respecto al agua (1.0 g/cm³ a 4 °C, el punto de máxima densidad del agua), de modo que una gravedad específica de 2.7, como la del aluminio, significa que el material es 2.7 veces más denso que el agua; por eso una gravedad específica menor que 1 predice que un objeto flotará en el agua, y mayor que 1 predice que se hundirá, manteniendo iguales los demás factores, como la tensión superficial y el aire atrapado.",
-          "paragraph3": "La unidad de densidad del SI es el kilogramo por metro cúbico (kg/m³), que equivale exactamente a 1000 veces el valor, más comúnmente citado, en gramos por centímetro cúbico (g/cm³), ya que un metro cúbico contiene un millón de centímetros cúbicos, pero solo mil gramos forman un kilogramo; el factor de conversión de 1000 surge directamente de esos dos hechos."
+          "paragraph3": "La unidad de densidad del SI es el kilogramo por metro cúbico (kg/m³), que equivale exactamente a 1000 veces el valor, más comúnmente citado, en gramos por centímetro cúbico (g/cm³), ya que un metro cúbico contiene un millón de centímetros cúbicos, pero solo mil gramos forman un kilogramo; el factor de conversión de 1000 surge directamente de esos dos hechos.",
+          "buoyancy": {
+            "floats": "Flota (GE < 1)",
+            "sinks": "Se hunde (GE > 1)",
+            "water": "Agua",
+            "caption": "Un objeto de menor densidad se posa sobre la línea de flotación; uno de mayor densidad se asienta en el fondo."
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -5753,6 +5775,34 @@
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "tabs": {
+        "groupLabel": "Elige qué calcular",
+        "solveDensity": "Calcular Densidad",
+        "solveMass": "Calcular Masa",
+        "solveVolume": "Calcular Volumen"
+      },
+      "gauge": {
+        "floats": "Flota en el agua",
+        "sinks": "Se hunde en el agua"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "ohms-law-calculator": {

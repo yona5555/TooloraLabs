@@ -1,7 +1,11 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import DensityModeTabs from "./DensityModeTabs";
+import DensityFormulaTriangleDiagram from "./DensityFormulaTriangleDiagram";
 import type { DensityOperation } from "./types";
 
 type DensityInputPanelProps = {
@@ -13,6 +17,8 @@ type DensityInputPanelProps = {
   onVolumeChange: (value: string) => void;
   density: string;
   onDensityChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function DensityInputPanel({
@@ -24,25 +30,27 @@ export default function DensityInputPanel({
   onVolumeChange,
   density,
   onDensityChange,
+  onCalculate,
+  onClear,
 }: DensityInputPanelProps) {
   const t = useTranslations("tools.density-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
-        <select
-          value={operation}
-          onChange={(e) => onOperationChange(e.target.value as DensityOperation)}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-        >
-          <option value="solveDensity">{t("operation.solveDensity")}</option>
-          <option value="solveMass">{t("operation.solveMass")}</option>
-          <option value="solveVolume">{t("operation.solveVolume")}</option>
-        </select>
-      </label>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
+        <DensityModeTabs operation={operation} onOperationChange={onOperationChange} />
+      </div>
 
-      <div className="mt-5 space-y-5">
+      <DensityFormulaTriangleDiagram
+        operation={operation}
+        massLabel={t("massShort")}
+        densityLabel={t("densityShort")}
+        volumeLabel={t("volumeShort")}
+        caption={t("triangleCaption")}
+      />
+
+      <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {operation !== "solveMass" && (
           <ToolInput
             label={t("massLabel")}
@@ -73,7 +81,18 @@ export default function DensityInputPanel({
             onChange={(e) => onDensityChange(e.target.value)}
           />
         )}
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

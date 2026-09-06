@@ -5619,7 +5619,13 @@
         "volumeLabel": "Volume (cm³)",
         "volumePlaceholder": "p. ex. 50",
         "densityLabel": "Densité (g/cm³)",
-        "densityPlaceholder": "p. ex. 2.7"
+        "densityPlaceholder": "p. ex. 2.7",
+        "massShort": "M",
+        "densityShort": "D",
+        "volumeShort": "V",
+        "triangleCaption": "Cachez la valeur que vous cherchez à calculer.",
+        "calculate": "Calculer",
+        "clear": "Effacer"
       },
       "result": {
         "heading": "Résultat",
@@ -5632,7 +5638,17 @@
         "diagramCaption": "{value} g/cm³ sur une échelle de densité logarithmique, aux côtés de matériaux courants.",
         "stepDensity": "{mass} g divisés par {volume} cm³.",
         "stepMass": "{density} g/cm³ multipliés par {volume} cm³.",
-        "stepVolume": "{mass} g divisés par {density} g/cm³."
+        "stepVolume": "{mass} g divisés par {density} g/cm³.",
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de densité.",
+        "siLabel": "Équivalent SI",
+        "specificGravityLabel": "Densité Relative",
+        "massShortLabel": "Masse",
+        "volumeShortLabel": "Volume",
+        "densityShortLabel": "Densité",
+        "blockCaption": "Un modèle de bloc en direct : la largeur suit le volume, la hauteur suit la densité, et la zone ombrée représente la masse.",
+        "siStepLabel": "× 1 000",
+        "sgStepLabel": "÷ eau (1,0)",
+        "unitConversionCaption": "Comment la densité principale se convertit en sa valeur SI et sa densité relative."
       },
       "education": {
         "intro": {
@@ -5642,7 +5658,13 @@
             "caption": "La densité du fer, 7,87 g/cm³, placée sur une échelle logarithmique aux côtés de l'air, de l'eau et d'autres matériaux courants."
           },
           "paragraph2": "La densité relative reformule la densité comme un rapport à l'eau (1,0 g/cm³ à 4 °C, le point de densité maximale de l'eau), de sorte qu'une densité relative de 2,7, comme pour l'aluminium, signifie que le matériau est 2,7 fois plus dense que l'eau ; c'est pourquoi une densité relative inférieure à 1 prédit qu'un objet flottera dans l'eau, et supérieure à 1 qu'il coulera, toutes choses égales par ailleurs (tension superficielle, air emprisonné).",
-          "paragraph3": "L'unité SI de densité est le kilogramme par mètre cube (kg/m³), soit exactement 1000 fois la valeur en grammes par centimètre cube (g/cm³) plus couramment citée, car un mètre cube contient un million de centimètres cubes alors qu'un kilogramme ne représente que mille grammes ; le facteur de conversion de 1000 découle directement de ces deux faits."
+          "paragraph3": "L'unité SI de densité est le kilogramme par mètre cube (kg/m³), soit exactement 1000 fois la valeur en grammes par centimètre cube (g/cm³) plus couramment citée, car un mètre cube contient un million de centimètres cubes alors qu'un kilogramme ne représente que mille grammes ; le facteur de conversion de 1000 découle directement de ces deux faits.",
+          "buoyancy": {
+            "floats": "Flotte (DR < 1)",
+            "sinks": "Coule (DR > 1)",
+            "water": "Eau",
+            "caption": "Un objet moins dense repose au-dessus de la ligne de flottaison ; un objet plus dense se dépose au fond."
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -5753,6 +5775,34 @@
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Lire le Texte Original"
         }
+      },
+      "tabs": {
+        "groupLabel": "Choisissez ce qu'il faut calculer",
+        "solveDensity": "Calculer la Densité",
+        "solveMass": "Calculer la Masse",
+        "solveVolume": "Calculer le Volume"
+      },
+      "gauge": {
+        "floats": "Flotte dans l'eau",
+        "sinks": "Coule dans l'eau"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "ohms-law-calculator": {

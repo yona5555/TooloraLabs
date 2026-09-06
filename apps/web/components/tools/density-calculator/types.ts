@@ -1,4 +1,7 @@
 export type { DensityOperation, DensityCalculatorOutput as DensityResult } from "@tooloralabs/tools";
+import type { DensityOperation } from "@tooloralabs/tools";
+
+export const DENSITY_OPERATIONS: DensityOperation[] = ["solveDensity", "solveMass", "solveVolume"];
 
 export type MaterialKey = "air" | "ice" | "water" | "aluminum" | "iron" | "gold";
 

@@ -5619,7 +5619,13 @@
         "volumeLabel": "Volume (cm³)",
         "volumePlaceholder": "e.g. 50",
         "densityLabel": "Density (g/cm³)",
-        "densityPlaceholder": "e.g. 2.7"
+        "densityPlaceholder": "e.g. 2.7",
+        "massShort": "M",
+        "densityShort": "D",
+        "volumeShort": "V",
+        "triangleCaption": "Cover the value you're solving for.",
+        "calculate": "Calculate",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Result",
@@ -5632,7 +5638,17 @@
         "diagramCaption": "{value} g/cm³ on a logarithmic density scale, alongside common materials.",
         "stepDensity": "{mass} g divided by {volume} cm³.",
         "stepMass": "{density} g/cm³ multiplied by {volume} cm³.",
-        "stepVolume": "{mass} g divided by {density} g/cm³."
+        "stepVolume": "{mass} g divided by {density} g/cm³.",
+        "emptyStateMessage": "Enter values and press Calculate to see your density result.",
+        "siLabel": "SI Equivalent",
+        "specificGravityLabel": "Specific Gravity",
+        "massShortLabel": "Mass",
+        "volumeShortLabel": "Volume",
+        "densityShortLabel": "Density",
+        "blockCaption": "A live block model: width tracks volume, height tracks density, and the shaded area stands for mass.",
+        "siStepLabel": "× 1,000",
+        "sgStepLabel": "÷ water (1.0)",
+        "unitConversionCaption": "How the headline density converts into its SI value and specific gravity."
       },
       "education": {
         "intro": {
@@ -5642,7 +5658,13 @@
             "caption": "Iron's density, 7.87 g/cm³, plotted on a logarithmic scale against air, water, and other common materials."
           },
           "paragraph2": "Specific gravity restates density as a ratio to water (1.0 g/cm³ at 4°C, water's point of maximum density), so a specific gravity of 2.7, as with aluminum, means the material is 2.7 times as dense as water — this is why a specific gravity below 1 predicts that an object will float in water, and above 1 predicts that it will sink, all else (like surface tension and trapped air) being equal.",
-          "paragraph3": "The SI unit of density is kilograms per cubic meter (kg/m³), which is exactly 1,000 times the more commonly quoted grams per cubic centimeter (g/cm³) value, since one cubic meter contains one million cubic centimeters but only a thousand grams make a kilogram — the conversion factor of 1,000 falls directly out of those two facts."
+          "paragraph3": "The SI unit of density is kilograms per cubic meter (kg/m³), which is exactly 1,000 times the more commonly quoted grams per cubic centimeter (g/cm³) value, since one cubic meter contains one million cubic centimeters but only a thousand grams make a kilogram — the conversion factor of 1,000 falls directly out of those two facts.",
+          "buoyancy": {
+            "floats": "Floats (SG < 1)",
+            "sinks": "Sinks (SG > 1)",
+            "water": "Water",
+            "caption": "A lower-density object rests above the waterline; a higher-density object settles to the bottom."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -5753,6 +5775,34 @@
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "tabs": {
+        "groupLabel": "Choose what to solve for",
+        "solveDensity": "Solve Density",
+        "solveMass": "Solve Mass",
+        "solveVolume": "Solve Volume"
+      },
+      "gauge": {
+        "floats": "Floats in water",
+        "sinks": "Sinks in water"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "ohms-law-calculator": {
