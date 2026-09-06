@@ -18,6 +18,11 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "fraction-calculator",
   "scientific-notation-converter",
   "significant-figures-calculator",
+  "area-calculator",
+  "surface-area-calculator",
+  "volume-calculator",
+  "circle-calculator",
+  "triangle-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

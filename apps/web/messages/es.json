@@ -22312,6 +22312,569 @@
             "answer": "Esto refleja una ambigüedad real en la notación estándar: \"1200\" podría significar una medición precisa al 1 más cercano (con dos dígitos coincidentemente cero) o al 100 más cercano — no hay forma de saberlo sin más contexto. Agregar un punto decimal (\"1200.\") es la señal convencional de que los cuatro dígitos realmente se midieron, por eso la herramienta trata las dos formas de manera diferente."
           }
         ]
+      },
+      "area-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Área: las fórmulas detrás de sus ocho figuras, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionScaling": "Por qué el área escala cuadráticamente",
+        "sectionAnatomy": "Comparando Figuras",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Figuras",
+          "modesValue": "8",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Área = f(figura, dimensiones) — p. ej. Cuadrado: l², Círculo: πr², Triángulo: ½bh",
+          "note": "Cada una de las ocho figuras usa su propia fórmula estándar de geometría euclidiana en forma cerrada — no existe una única fórmula universal de área; la calculadora selecciona la correcta según la figura elegida."
+        },
+        "flowchart": {
+          "intro": "Seleccionar una figura determina qué campos de dimensiones se muestran y qué fórmula se ejecuta — el cálculo en sí es una única evaluación directa de fórmula sin iteración.",
+          "steps": [
+            "Leer cuál de las ocho figuras está seleccionada",
+            "Verificar que se ingresó cada campo de dimensión que esa figura requiere",
+            "Validar que cada dimensión ingresada sea un número estrictamente positivo y finito",
+            "Solo para la figura de sector, verificar adicionalmente que el ángulo no exceda 360 grados",
+            "Aplicar la fórmula de área en forma cerrada de esa figura y redondear el resultado"
+          ],
+          "caption": "La validación dependiente de la figura y la selección de fórmula que esta herramienta ejecuta en cada cálculo."
+        },
+        "scaling": {
+          "intro": "El área crece con el cuadrado de las dimensiones lineales de una figura, no en proporción directa — duplicar el lado de un cuadrado cuadruplica su área, no la duplica.",
+          "xLabel": "Longitud del Lado",
+          "yLabel": "Área",
+          "caption": "El área de un cuadrado a medida que su lado crece de 1 a 5 — la curva se dobla hacia arriba porque el área es proporcional al lado al cuadrado."
+        },
+        "anatomy": {
+          "intro": "Diferentes figuras encierran distintas cantidades de área incluso cuando se construyen con la misma dimensión característica (aquí, 10 unidades) — por eso la calculadora pide dimensiones específicas de cada figura en lugar de un tamaño genérico.",
+          "labelSquare": "Cuadrado (lado 10)",
+          "labelCircle": "Círculo (radio 10)",
+          "labelTriangle": "Triángulo Rectángulo (base/altura 10)",
+          "caption": "Área encerrada por tres figuras que comparten una dimensión característica de 10 unidades — un círculo encierra la mayor área por unidad de esa dimensión."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Figura",
+            "meaning": "Cuál de las ocho figuras soportadas calcular — determina qué campos de dimensiones se muestran.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Lado",
+            "meaning": "La longitud del lado de un cuadrado.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Ancho / Altura",
+            "meaning": "Las dos dimensiones de un rectángulo, o la base y la altura perpendicular de un triángulo/paralelogramo.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Radio",
+            "meaning": "El radio de un círculo, o de un sector circular.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Semieje Mayor / Semieje Menor",
+            "meaning": "Los dos semiejes de una elipse — la mitad de sus diámetros más largo y más corto.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Base 1 / Base 2",
+            "meaning": "Los dos lados paralelos de un trapecio.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Ángulo",
+            "meaning": "El ángulo central de un sector circular, en grados — determina qué fracción del área del círculo completo cubre el sector.",
+            "unit": "Grados"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Falta una dimensión requerida",
+            "description": "Cada figura requiere un conjunto específico de campos (p. ej. un rectángulo necesita tanto ancho como altura); si algún campo requerido para la figura seleccionada queda vacío, la herramienta devuelve un error de \"dimensión faltante\" nombrando exactamente los campos necesarios, en lugar de calcular con un valor predeterminado de cero."
+          },
+          {
+            "title": "Dimensión no positiva o no finita",
+            "description": "Cada dimensión ingresada se verifica como un número estrictamente positivo y finito — una entrada cero, negativa o no numérica devuelve un error de \"dimensión inválida\", ya que ninguna figura real puede tener una longitud de lado cero o negativa."
+          },
+          {
+            "title": "Ángulo del sector que excede 360 grados",
+            "description": "El ángulo de un sector circular está limitado a 360 grados (un círculo completo) — un ángulo ingresado por encima de eso devuelve un error explícito en lugar de dar la vuelta silenciosamente o calcular un área mayor que el círculo completo."
+          },
+          {
+            "title": "La elipse usa semiejes, no ejes completos",
+            "description": "La fórmula de la elipse toma el semieje mayor y el semieje menor (la mitad de los diámetros más largo y más corto) en lugar de los diámetros completos — ingresar medidas de eje completo por error produciría un área cuatro veces mayor de lo debido, por lo que las etiquetas de entrada son explícitas al respecto."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta calculadora admite ocho figuras diferentes en lugar de una fórmula general?",
+            "answer": "El área no tiene una única fórmula universal — el límite de cada figura es geométricamente diferente, así que cada una requiere su propia solución en forma cerrada. La calculadora agrupa ocho figuras comunes bajo una sola interfaz en lugar de requerir ocho herramientas separadas."
+          },
+          {
+            "question": "¿Por qué el sector necesita un ángulo además de un radio?",
+            "answer": "Un sector circular es una \"porción\" de un círculo, y su área es una fracción del área del círculo completo igual a la fracción de 360 grados que abarca la porción — sin el ángulo, la herramienta solo conocería el área del círculo completo, no la de la porción."
+          },
+          {
+            "question": "¿Por qué la elipse pide semiejes en lugar del ancho y alto completos?",
+            "answer": "La fórmula estándar del área de la elipse (π × semieje mayor × semieje menor) se define en términos de los semiejes, coincidiendo con la forma convencional en que se describe matemáticamente la forma de una elipse — usar los semiejes directamente evita un paso de división adicional y mantiene la fórmula en su forma estándar."
+          },
+          {
+            "question": "¿En qué se diferencia el área de un trapecio de la de un rectángulo?",
+            "answer": "Un trapecio tiene dos lados paralelos de diferente longitud en lugar de cuatro pares de igual longitud como un rectángulo, así que su fórmula de área promedia los dos lados paralelos antes de multiplicar por la altura — esto se reduce exactamente a la fórmula del rectángulo cuando ambos lados paralelos son iguales."
+          }
+        ]
+      },
+      "surface-area-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Área Superficial: las fórmulas detrás de sus seis sólidos, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionScaling": "Por qué el área superficial escala cuadráticamente",
+        "sectionAnatomy": "Comparando Sólidos",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Sólidos",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Área Superficial = f(sólido, dimensiones) — p. ej. Cubo: 6l², Esfera: 4πr², Cilindro: 2πr(r+h)",
+          "note": "Cada uno de los seis sólidos 3D usa su propia fórmula de área superficial en forma cerrada que cubre cada cara del sólido — para el cono y la pirámide cuadrada, la altura inclinada se deriva internamente de la altura perpendicular mediante el teorema de Pitágoras en lugar de pedirse directamente."
+        },
+        "flowchart": {
+          "intro": "Seleccionar un sólido determina qué campos de dimensiones se muestran; para el cono y la pirámide, un paso interno adicional deriva la altura inclinada antes de ejecutar la fórmula de área.",
+          "steps": [
+            "Leer cuál de los seis sólidos está seleccionado",
+            "Verificar que se ingresó cada campo de dimensión que ese sólido requiere",
+            "Validar que cada dimensión ingresada sea un número estrictamente positivo y finito",
+            "Para un cono o pirámide cuadrada, derivar la altura inclinada a partir de la altura perpendicular y el radio/base usando el teorema de Pitágoras",
+            "Aplicar la fórmula de área superficial en forma cerrada de ese sólido, sumando cada cara, y redondear el resultado"
+          ],
+          "caption": "La validación dependiente de la figura, la derivación de la altura inclinada y la selección de fórmula que esta herramienta ejecuta en cada cálculo."
+        },
+        "scaling": {
+          "intro": "Al igual que el área plana, el área superficial de un sólido crece con el cuadrado de sus dimensiones lineales — duplicar el lado de un cubo cuadruplica su área superficial aunque su volumen crezca ocho veces.",
+          "xLabel": "Longitud del Lado",
+          "yLabel": "Área Superficial",
+          "caption": "El área superficial de un cubo a medida que su lado crece de 1 a 5 — la curva se dobla hacia arriba porque el área superficial es proporcional al lado al cuadrado."
+        },
+        "anatomy": {
+          "intro": "Diferentes sólidos encierran distintas cantidades de área superficial incluso construidos con la misma dimensión característica (aquí, 10 unidades) — una esfera tiene la mayor área superficial relativa comparada con un cubo o cilindro del mismo tamaño característico.",
+          "labelCube": "Cubo (lado 10)",
+          "labelSphere": "Esfera (radio 10)",
+          "labelCylinder": "Cilindro (r=10, h=10)",
+          "caption": "Área superficial de tres sólidos que comparten una dimensión característica de 10 unidades."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Figura",
+            "meaning": "Cuál de los seis sólidos soportados calcular — determina qué campos de dimensiones se muestran.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Lado",
+            "meaning": "La longitud de la arista de un cubo.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Largo / Ancho / Alto",
+            "meaning": "Las tres longitudes de arista de un prisma rectangular.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Radio",
+            "meaning": "El radio de una esfera, cilindro, o de la base circular de un cono.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Altura",
+            "meaning": "La altura perpendicular de un cilindro, cono, o pirámide cuadrada — no la altura inclinada, que se deriva automáticamente.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Lado de la Base",
+            "meaning": "La longitud del lado de la base cuadrada de una pirámide cuadrada.",
+            "unit": "Longitud"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Falta una dimensión requerida",
+            "description": "Cada sólido requiere un conjunto específico de campos (p. ej. un prisma rectangular necesita largo, ancho y alto); si algún campo requerido queda vacío, la herramienta devuelve un error de \"dimensión faltante\" nombrando exactamente los campos necesarios."
+          },
+          {
+            "title": "Dimensión no positiva o no finita",
+            "description": "Cada dimensión ingresada se verifica como un número estrictamente positivo y finito — una longitud cero o negativa devuelve un error de \"dimensión inválida\", ya que ningún sólido real puede tener una arista o radio no positivo."
+          },
+          {
+            "title": "Altura inclinada derivada, no solicitada",
+            "description": "Para el cono y la pirámide cuadrada, la herramienta solo pide la altura perpendicular (la medida que un usuario típicamente tiene a mano) y deriva la altura inclinada internamente mediante el teorema de Pitágoras, en lugar de requerir que el usuario proporcione una altura inclinada ya calculada."
+          },
+          {
+            "title": "La fórmula del cilindro combina dos superficies distintas correctamente",
+            "description": "La fórmula del área superficial de un cilindro (2πr(r+h)) combina las dos tapas circulares (2πr²) y la superficie lateral curva (2πrh) en una sola expresión — la herramienta calcula esto como una fórmula combinada única en lugar de sumar partes calculadas por separado, evitando cualquier desajuste de redondeo entre ellas."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta calculadora admite seis sólidos diferentes en lugar de una fórmula general?",
+            "answer": "El área superficial no tiene una única fórmula universal — el conjunto de caras de cada sólido es geométricamente diferente, así que cada uno requiere sumar sus caras específicas. La calculadora agrupa seis sólidos comunes bajo una sola interfaz en lugar de requerir seis herramientas separadas."
+          },
+          {
+            "question": "¿Por qué el cono y la pirámide solo piden la altura perpendicular, no la inclinada?",
+            "answer": "Una altura perpendicular (recta desde la base hasta el ápice) es lo que típicamente se mide o especifica para un cono o pirámide real; la altura inclinada (a lo largo de la cara inclinada) es una cantidad derivada calculada automáticamente mediante el teorema de Pitágoras, así que la herramienta no requiere que el usuario la calcule primero por sí mismo."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la Calculadora de Volumen?",
+            "answer": "El área superficial mide el área total que cubre el exterior de un sólido (relevante para el material necesario para envolverlo o pintarlo), mientras que el volumen mide el espacio encerrado en su interior (relevante para la capacidad) — las dos calculadoras comparten los mismos seis sólidos y campos de dimensiones, pero aplican fórmulas completamente diferentes."
+          },
+          {
+            "question": "¿Por qué una esfera tiene una fórmula más simple que un cubo?",
+            "answer": "Una esfera tiene solo un grado de libertad (su radio) y una única superficie continuamente curvada, así que su fórmula (4πr²) es una función directa de esa única variable; un cubo tiene seis caras cuadradas planas que deben contabilizarse cada una, aunque como las seis son idénticas (6l²) su fórmula también permanece simple."
+          }
+        ]
+      },
+      "volume-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Volumen: las fórmulas detrás de sus seis sólidos, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionScaling": "Por qué el volumen escala cúbicamente",
+        "sectionAnatomy": "Comparando Sólidos",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Sólidos",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Volumen = f(sólido, dimensiones) — p. ej. Cubo: l³, Esfera: ⁴⁄₃πr³, Cilindro: πr²h",
+          "note": "Cada uno de los seis sólidos 3D usa su propia fórmula de volumen en forma cerrada. Esta herramienta acepta exactamente los mismos campos de dimensiones que la Calculadora de Área Superficial para figuras idénticas, así ambas herramientas pueden usarse juntas en el mismo sólido sin volver a ingresar medidas de forma distinta."
+        },
+        "flowchart": {
+          "intro": "Seleccionar un sólido determina qué campos de dimensiones se muestran — a diferencia del área superficial, ninguna fórmula de volumen necesita una cantidad intermedia derivada (como la altura inclinada).",
+          "steps": [
+            "Leer cuál de los seis sólidos está seleccionado",
+            "Verificar que se ingresó cada campo de dimensión que ese sólido requiere",
+            "Validar que cada dimensión ingresada sea un número estrictamente positivo y finito",
+            "Aplicar la fórmula de volumen en forma cerrada de ese sólido y redondear el resultado"
+          ],
+          "caption": "La validación dependiente de la figura y la selección de fórmula que esta herramienta ejecuta en cada cálculo."
+        },
+        "scaling": {
+          "intro": "El volumen crece con el cubo de las dimensiones lineales de un sólido — duplicar el lado de un cubo multiplica su volumen por ocho, mucho más rápido que el crecimiento cuádruple de su área superficial.",
+          "xLabel": "Longitud del Lado",
+          "yLabel": "Volumen",
+          "caption": "El volumen de un cubo a medida que su lado crece de 1 a 5 — la curva se dobla hacia arriba más pronunciadamente que una curva de área porque el volumen es proporcional al lado al cubo."
+        },
+        "anatomy": {
+          "intro": "Diferentes sólidos encierran distintas cantidades de volumen incluso construidos con la misma dimensión característica (aquí, 10 unidades) — una esfera encierra más de cuatro veces el volumen de un cubo del mismo tamaño característico.",
+          "labelCube": "Cubo (lado 10)",
+          "labelSphere": "Esfera (radio 10)",
+          "labelCone": "Cono (r=10, h=10)",
+          "caption": "Volumen encerrado por tres sólidos que comparten una dimensión característica de 10 unidades."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Figura",
+            "meaning": "Cuál de los seis sólidos soportados calcular — determina qué campos de dimensiones se muestran.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Lado",
+            "meaning": "La longitud de la arista de un cubo.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Largo / Ancho / Alto",
+            "meaning": "Las tres longitudes de arista de un prisma rectangular.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Radio",
+            "meaning": "El radio de una esfera, cilindro, o de la base circular de un cono.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Altura",
+            "meaning": "La altura perpendicular de un cilindro, cono, o pirámide cuadrada.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "Lado de la Base",
+            "meaning": "La longitud del lado de la base cuadrada de una pirámide cuadrada.",
+            "unit": "Longitud"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Falta una dimensión requerida",
+            "description": "Cada sólido requiere un conjunto específico de campos; si algún campo requerido queda vacío, la herramienta devuelve un error de \"dimensión faltante\" nombrando exactamente los campos necesarios, en lugar de calcular con un valor predeterminado de cero."
+          },
+          {
+            "title": "Dimensión no positiva o no finita",
+            "description": "Cada dimensión ingresada se verifica como un número estrictamente positivo y finito — una longitud cero o negativa devuelve un error de \"dimensión inválida\", ya que ningún sólido real puede tener una arista o radio no positivo."
+          },
+          {
+            "title": "El volumen del cono y la pirámide no necesita altura inclinada",
+            "description": "A diferencia de la Calculadora de Área Superficial, las fórmulas de volumen para el cono y la pirámide cuadrada dependen solo de la altura perpendicular, nunca de la altura inclinada — así que aquí no se necesita ningún paso de derivación pitagórica, aunque las mismas dos figuras sí lo requieren para el área superficial."
+          },
+          {
+            "title": "Campos de dimensiones idénticos a la Calculadora de Área Superficial",
+            "description": "Esta herramienta refleja deliberadamente el conjunto exacto de campos por figura de la Calculadora de Área Superficial (las mismas entradas de radio, altura, y lado de base) para que una medida ingresada una vez aplique conceptualmente a ambas herramientas sin reetiquetar ni convertir unidades."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta calculadora admite seis sólidos diferentes en lugar de una fórmula general?",
+            "answer": "El volumen no tiene una única fórmula universal — la forma de cada sólido encierra espacio de manera diferente, así que cada uno requiere su propia solución en forma cerrada. La calculadora agrupa seis sólidos comunes bajo una sola interfaz en lugar de requerir seis herramientas separadas."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la Calculadora de Área Superficial?",
+            "answer": "El volumen mide el espacio encerrado dentro de un sólido (relevante para la capacidad, como cuánto contiene un recipiente), mientras que el área superficial mide el área total que cubre su exterior (relevante para el material necesario para envolverlo o pintarlo) — las dos calculadoras comparten los mismos seis sólidos y campos de dimensiones, pero aplican fórmulas completamente diferentes."
+          },
+          {
+            "question": "¿Por qué el volumen de un cono usa ⅓ mientras que el de un cilindro no?",
+            "answer": "Un cono se estrecha hasta un punto mientras que un cilindro mantiene su radio completo a lo largo de toda su altura — el volumen de un cono resulta ser exactamente un tercio del de un cilindro con el mismo radio de base y altura, un resultado clásico del cálculo integral aplicado a una sección transversal que se estrecha linealmente."
+          },
+          {
+            "question": "¿Por qué duplicar el lado de un cubo aumenta su volumen 8 veces pero su área superficial solo 4 veces?",
+            "answer": "El volumen es proporcional al cubo de una dimensión lineal (2³ = 8) mientras que el área superficial es proporcional a su cuadrado (2² = 4) — este es un hecho geométrico general, no específico de los cubos, y es la razón por la que los objetos muy grandes tienden a tener proporcionalmente menos área superficial en relación con su volumen que los pequeños."
+          }
+        ]
+      },
+      "circle-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Círculo: las relaciones de una sola variable detrás de sus cuatro campos intercambiables, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de un Círculo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Campos Conocidos",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "d = 2r, C = 2πr, A = πr²",
+          "note": "Cada propiedad de un círculo es una función fija únicamente de su radio — así que dado cualquiera de los cuatro (radio, diámetro, circunferencia, o área), la herramienta primero resuelve el radio, luego deriva las otras tres directamente de estas fórmulas."
+        },
+        "flowchart": {
+          "intro": "A diferencia de un triángulo, un círculo tiene solo un grado de libertad, así que exactamente una medida conocida siempre es suficiente — no hay un caso subdeterminado del cual protegerse.",
+          "steps": [
+            "Leer cuál de los cuatro campos (radio, diámetro, circunferencia, o área) se ingresó, y su valor",
+            "Validar que el valor ingresado sea un número positivo y finito",
+            "Resolver el radio usando el inverso de la fórmula de ese campo (p. ej. para el área, radio = √(A/π))",
+            "Derivar las tres propiedades restantes directamente del radio"
+          ],
+          "caption": "El enfoque de resolución radio-primero que usa esta herramienta sin importar qué campo se haya ingresado."
+        },
+        "anatomy": {
+          "intro": "Las propiedades definitorias de un círculo se relacionan directamente con su radio: el diámetro es exactamente el doble del radio, y la circunferencia es el radio escalado por 2π.",
+          "labelRadius": "Radio (r)",
+          "labelDiameter": "Diámetro (2r)",
+          "labelCircumference": "Circunferencia (2πr)",
+          "caption": "El radio, diámetro, y circunferencia de un solo círculo, cada uno derivado del mismo radio."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Campo Conocido",
+            "meaning": "Cuál de las cuatro propiedades (radio, diámetro, circunferencia, o área) representa el valor ingresado.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Valor",
+            "meaning": "El valor numérico del campo conocido — la única entrada de la que se derivan las otras tres propiedades.",
+            "unit": "Longitud o Área"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Valor cero o negativo",
+            "description": "Un valor de cero o menor se rechaza con un error de \"valor inválido\" antes de cualquier cálculo — un círculo no puede tener un radio, diámetro, circunferencia, o área no positivo."
+          },
+          {
+            "title": "Entrada no finita",
+            "description": "La entrada no numérica o infinita se verifica y rechaza explícitamente junto con los valores no positivos, en lugar de permitir que se propague en resultados NaN para las otras tres propiedades."
+          },
+          {
+            "title": "No existe caso subdeterminado",
+            "description": "Debido a que cada propiedad del círculo es una función directa únicamente del radio, a diferencia de un triángulo (que puede necesitar múltiples datos según lo que se conozca), esta herramienta nunca necesita más de un valor conocido — cualquiera de los cuatro siempre es matemáticamente suficiente."
+          },
+          {
+            "title": "El área al radio requiere una raíz cuadrada",
+            "description": "Cuando el área es el campo conocido, resolver el radio requiere invertir una relación al cuadrado (r = √(A/π)) en lugar de una división simple — la herramienta realiza esta inversión correctamente en lugar de tratar los cuatro casos de campo conocido con la misma fórmula simple."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué cualquiera de cuatro valores diferentes puede determinar un círculo completo?",
+            "answer": "Un círculo tiene exactamente un grado de libertad — su radio — y cada otra propiedad (diámetro, circunferencia, área) es una función matemática fija únicamente de ese radio. Una vez que se conoce cualquiera de los cuatro, el radio se puede recuperar y el resto sigue directamente."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la opción de círculo en la Calculadora de Área?",
+            "answer": "La forma de círculo en la Calculadora de Área solo acepta un radio y devuelve solo el área; esta herramienta acepta cualquiera de cuatro propiedades (incluyendo el área misma) y devuelve las cuatro simultáneamente — útil cuando conoces la circunferencia o el área de un círculo pero necesitas su radio o diámetro en su lugar."
+          },
+          {
+            "question": "¿Por qué ingresar la circunferencia requiere dividir entre 2π en lugar de 2?",
+            "answer": "La circunferencia se relaciona con el radio mediante la fórmula C = 2πr, así que recuperar el radio requiere dividir entre el factor completo 2π, no solo 2 — dividir solo entre 2 daría un valor sin significado geométrico directo."
+          },
+          {
+            "question": "¿Por qué ingresar el área requiere una raíz cuadrada?",
+            "answer": "El área se relaciona con el radio mediante la relación al cuadrado A = πr², así que recuperar el radio a partir de un área conocida requiere la operación inversa de elevar al cuadrado — tomar la raíz cuadrada de A/π — en lugar de una división simple."
+          }
+        ]
+      },
+      "triangle-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Triángulos: la Ley de los Senos y la Ley de los Cosenos detrás de sus cuatro modos de resolución, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de un Triángulo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos de Resolución",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Ley de los Cosenos: c² = a² + b² − 2ab·cos(C)  |  Ley de los Senos: a/sen(A) = b/sen(B) = c/sen(C)",
+          "note": "Qué ley se aplica depende de qué tres datos se conocen (LLL, LAL, ALA, o AAL) — la Ley de los Cosenos resuelve un lado o ángulo faltante cuando se conocen dos lados y su ángulo incluido, mientras que la Ley de los Senos resuelve cuando se conoce al menos un par completo ángulo-lado."
+        },
+        "flowchart": {
+          "intro": "Cada uno de los cuatro modos de resolución usa una identidad trigonométrica clásica diferente para encontrar las piezas faltantes, pero los cuatro luego comparten los mismos pasos finales de validación y construcción geométrica.",
+          "steps": [
+            "Leer cuál de los cuatro modos (LLL, LAL, ALA, o AAL) está seleccionado, según qué tres medidas se dan",
+            "Para LLL: derivar los tres ángulos de los tres lados usando la Ley de los Cosenos",
+            "Para LAL: derivar el tercer lado usando la Ley de los Cosenos, luego los ángulos restantes",
+            "Para ALA o AAL: derivar los lados restantes usando la Ley de los Senos",
+            "Validar que los tres ángulos sumen 180° y que los tres lados satisfagan la desigualdad triangular",
+            "Calcular el área (mediante la fórmula de Herón) y el perímetro, y construir coordenadas (x, y) de vértices para el diagrama en vivo"
+          ],
+          "caption": "La ruta de resolución trigonométrica dependiente del modo, seguida de validación compartida y construcción geométrica."
+        },
+        "anatomy": {
+          "intro": "Todo triángulo se describe completamente con seis valores: tres lados y tres ángulos, con los vértices colocados en coordenadas fijas una vez que estos se conocen.",
+          "labelSideA": "a",
+          "labelSideB": "b",
+          "labelSideC": "c",
+          "labelAngleA": "A",
+          "labelAngleB": "B",
+          "labelAngleC": "C",
+          "caption": "La convención estándar de etiquetado de triángulos: el lado a es opuesto al ángulo A, el lado b opuesto al ángulo B, y el lado c opuesto al ángulo C."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "a, b, c",
+            "meaning": "Las tres longitudes de lado, cada una opuesta al ángulo de letra similar — cuáles de estas son entradas frente a salidas derivadas depende del modo de resolución.",
+            "unit": "Longitud"
+          },
+          {
+            "symbol": "A, B, C",
+            "meaning": "Los tres ángulos interiores, cada uno opuesto al lado de letra similar — siempre suman 180 grados en un triángulo válido.",
+            "unit": "Grados"
+          },
+          {
+            "symbol": "Modo",
+            "meaning": "Qué tres medidas se conocen: Lado-Lado-Lado (LLL), Lado-Ángulo-Lado (LAL), Ángulo-Lado-Ángulo (ALA), o Ángulo-Ángulo-Lado (AAL).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Desigualdad triangular violada",
+            "description": "Tres longitudes de lado solo forman un triángulo válido si cada lado es más corto que la suma de los otros dos (a+b>c, a+c>b, b+c>a) — la herramienta verifica las tres desigualdades y devuelve un error de \"desigualdad triangular violada\" si alguna falla, en lugar de calcular una forma geométricamente imposible."
+          },
+          {
+            "title": "Suma de ángulos no igual a 180 grados",
+            "description": "Después de resolver, se verifica que los tres ángulos sumen 180 grados (dentro de una pequeña tolerancia de punto flotante) — una discrepancia devuelve un error de \"suma de ángulos inválida\", detectando casos donde las entradas dadas eran geométricamente inconsistentes."
+          },
+          {
+            "title": "Ángulo incluido de 180 grados o más (LAL)",
+            "description": "En el modo LAL, el ángulo incluido dado debe ser estrictamente menor a 180 grados — un ángulo igual o mayor a eso describe una configuración degenerada o imposible, así que la herramienta lo rechaza antes de intentar el cálculo de la Ley de los Cosenos."
+          },
+          {
+            "title": "Dos ángulos dados que suman 180 grados o más (ALA/AAL)",
+            "description": "En los modos ALA y AAL, los dos ángulos dados deben sumar estrictamente menos de 180 grados, ya que el tercer ángulo (180 menos su suma) debe ser positivo en sí mismo para que el triángulo exista — la herramienta valida esto antes de resolver."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta calculadora tiene cuatro modos de resolución diferentes?",
+            "answer": "Un triángulo tiene seis medidas totales (tres lados, tres ángulos), pero está completamente determinado por cualquiera tres de ellas en combinaciones específicas — LLL, LAL, ALA, y AAL son las cuatro combinaciones que siempre producen un triángulo único, así que cada una necesita su propio método de resolución adecuado a qué tres valores se conocen realmente."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre la Ley de los Cosenos y la Ley de los Senos?",
+            "answer": "La Ley de los Cosenos relaciona los tres lados con un ángulo y se usa cuando se conocen dos lados y su ángulo incluido (LAL) o cuando se conocen los tres lados (LLL); la Ley de los Senos relaciona cada lado con el seno de su ángulo opuesto y se usa siempre que ya se conoce un par completo ángulo-lado (ALA, AAL)."
+          },
+          {
+            "question": "¿Por qué ALA y AAL se ven similares pero necesitan fórmulas diferentes?",
+            "answer": "Ambos dan dos ángulos y un lado, pero el lado de ALA está entre los dos ángulos dados (incluido) mientras que el lado de AAL es opuesto a uno de ellos (no incluido) — esto cambia qué ángulo se usa para comenzar el cálculo de la Ley de los Senos, aunque ambos finalmente resuelven los mismos valores faltantes."
+          },
+          {
+            "question": "¿Cómo se calcula el área del triángulo una vez que se conocen sus lados?",
+            "answer": "La herramienta usa la fórmula de Herón, que calcula el área directamente a partir de las tres longitudes de lado mediante el semiperímetro (la mitad del perímetro) sin necesidad de conocer explícitamente ningún ángulo o altura perpendicular — esto funciona para cualquier triángulo válido sin importar qué modo de resolución encontró los lados."
+          }
+        ]
       }
     }
   }
