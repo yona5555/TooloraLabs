@@ -1,4 +1,7 @@
 export type { PhOperation, PhCalculatorOutput as PhResult, PhClassification } from "@tooloralabs/tools";
+import type { PhOperation } from "@tooloralabs/tools";
+
+export const PH_OPERATIONS: PhOperation[] = ["fromPH", "fromH", "fromPOH", "fromOH"];
 
 export const COMMON_SUBSTANCES: { key: string; pH: number }[] = [
   { key: "batteryAcid", pH: 0.5 },

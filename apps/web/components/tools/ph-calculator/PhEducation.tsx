@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import PhScaleDiagram from "./PhScaleDiagram";
+import PhIndicatorColorDiagram from "./PhIndicatorColorDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,7 @@ export default async function PhEducation() {
         <p>{t("intro.paragraph1")}</p>
         <PhScaleDiagram pH={5.5} caption={t("intro.diagram.caption")} />
         <p>{t("intro.paragraph2")}</p>
+        <PhIndicatorColorDiagram caption={t("intro.indicatorCaption")} />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 
