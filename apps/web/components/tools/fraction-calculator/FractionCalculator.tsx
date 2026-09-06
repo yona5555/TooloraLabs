@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FractionInputPanel from "./FractionInputPanel";
 import FractionResult from "./FractionResult";
 import FractionQuickReference from "./FractionQuickReference";
@@ -86,6 +87,7 @@ export default function FractionCalculator({ education }: { education: ReactNode
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="fraction-calculator" />
               <FractionQuickReference />
             </div>
           }

@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PercentageInputPanel from "./PercentageInputPanel";
 import PercentageResult from "./PercentageResult";
 import PercentageQuickReference from "./PercentageQuickReference";
@@ -74,6 +75,7 @@ export default function PercentageCalculator({ education }: { education: ReactNo
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="percentage-calculator" />
               <PercentageQuickReference />
             </div>
           }

@@ -13,6 +13,11 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "house-affordability-calculator",
   "debt-to-income-calculator",
   "mortgage-calculator",
+  "percentage-calculator",
+  "gcf-lcm-calculator",
+  "fraction-calculator",
+  "scientific-notation-converter",
+  "significant-figures-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

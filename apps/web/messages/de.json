@@ -20230,6 +20230,553 @@
             "answer": "Grundsteuerbescheide und Versicherungsprämien werden typischerweise jährlich veranlagt, was die natürlichere Eingabeform ist; der Rechner teilt beide einfach durch 12, um sie neben dem monatlichen Tilgungs-und-Zins-Betrag in die monatliche PITI-Zahlung einzubeziehen."
           }
         ]
+      },
+      "percentage-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Prozentrechner: die fünf Formeln hinter seinen Modi, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionGrid": "Einen Prozentsatz visualisieren",
+        "sectionAnatomy": "Anatomie des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "% von Zahl = (Prozent / 100) × Zahl",
+          "note": "Die Kernformel des Standardmodus. Die anderen vier Modi — Welcher Prozentsatz, Prozentuale Veränderung, Umgekehrter Prozentsatz und Prozentualer Unterschied — ordnen dieselbe Beziehung um, um nach einer anderen Unbekannten aufzulösen."
+        },
+        "flowchart": {
+          "intro": "Jeder der fünf Modi ist eine direkte algebraische Umformung derselben Prozentbeziehung, keine separate Berechnung — keine Iteration oder Suche, nur die Wahl, welche Größe unbekannt ist.",
+          "steps": [
+            "Erkennen, welcher der fünf Modi ausgewählt ist",
+            "Die zwei eingegebenen Zahlen in die umgeformte Formel dieses Modus einsetzen",
+            "Vor dem einen Eingabewert schützen, der die Formel dieses Modus durch Null teilen ließe",
+            "Das Ergebnis berechnen und auf zwei Dezimalstellen runden"
+          ],
+          "caption": "Die modusabhängige Formelauswahl, die dieses Tool bei jeder Berechnung ausführt."
+        },
+        "grid": {
+          "intro": "Ein Prozentsatz ist im Grunde eine Anzahl von 100 — dieses 10×10-Raster macht das konkret, indem genau diese Anzahl der 100 Zellen schattiert wird.",
+          "caption": "25 % dargestellt als 25 schattierte Zellen von 100 Zellen in einem Raster."
+        },
+        "anatomy": {
+          "intro": "Ein Prozent-von-Zahl-Ergebnis teilt ein Ganzes in genau zwei Teile: den Anteil, den der Prozentsatz darstellt, und alles Übrige.",
+          "labelPart": "Anteil des Prozentsatzes",
+          "labelRemainder": "Rest",
+          "labelTotal": "Ganzes",
+          "caption": "20 % von 80 sind 16 — die schattierten 20 % des Ganzen, mit den verbleibenden 80 % übrig."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Erste",
+            "meaning": "Der erste eingegebene Wert — seine Bedeutung ändert sich je nach Modus: der Prozentsatz in „% von Zahl“, der Teil in „Welcher Prozentsatz“, der Ausgangswert in „Prozentuale Veränderung“, der bekannte Prozentsatz in „Umgekehrter Prozentsatz“.",
+            "unit": "Zahl oder %"
+          },
+          {
+            "symbol": "Zweite",
+            "meaning": "Der zweite eingegebene Wert — seine Bedeutung hängt ebenfalls vom Modus ab: die Basiszahl, das Ganze, der neue Wert oder das bekannte Ergebnis.",
+            "unit": "Zahl"
+          },
+          {
+            "symbol": "Modus",
+            "meaning": "Welche der fünf Prozentbeziehungen gelöst werden soll — bestimmt, in welche Formel die beiden Eingaben eingesetzt werden.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Division durch Null bei „Welcher Prozentsatz“",
+            "description": "Ist die Basis (zweiter Wert) null, gibt das Tool die explizite Meldung „Division durch Null ist nicht erlaubt“ zurück, statt ein undefiniertes Ergebnis zu berechnen."
+          },
+          {
+            "title": "Nullwertiger Ausgangswert bei „Prozentuale Veränderung“",
+            "description": "Ein Startwert von null macht die prozentuale Veränderung undefiniert (jede Veränderung von null wäre ein unendlicher Prozentsatz) — das Tool erkennt dies und gibt „Ausgangswert darf nicht null sein“ zurück, statt Infinity oder NaN."
+          },
+          {
+            "title": "Nullwertiger Prozentsatz bei „Umgekehrter Prozentsatz“",
+            "description": "Die Auflösung von „X sind P % von welcher Zahl“ mit P=0 hat keine gültige Antwort — das Tool schützt diesen Fall explizit, statt durch null zu teilen."
+          },
+          {
+            "title": "Beide Werte null bei „Prozentualer Unterschied“",
+            "description": "Der prozentuale Unterschied teilt durch den Durchschnitt der beiden Werte; sind beide null, ist auch dieser Durchschnitt null — das Tool prüft dies und gibt „Beide Werte dürfen nicht null sein“ zurück, statt einen Divisionsfehler zu erzeugen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum hat dieser Rechner fünf separate Modi statt einer Formel?",
+            "answer": "Prozent-von-Zahl, Welcher-Prozentsatz, Prozentuale Veränderung, Umgekehrter Prozentsatz und Prozentualer Unterschied sind fünf tatsächlich unterschiedliche Fragen, die alle Prozentsätze betreffen, aber jede hat eine andere Unbekannte — sie als eine Formel zu behandeln, würde Nutzer zwingen, die Algebra selbst manuell umzustellen."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen „prozentualer Veränderung“ und „prozentualem Unterschied“?",
+            "answer": "Die prozentuale Veränderung ist gerichtet und fragt, wie stark ein Wert relativ zu seinem Ausgangswert gewachsen oder geschrumpft ist; der prozentuale Unterschied ist symmetrisch und misst die Lücke zwischen zwei Werten relativ zu ihrem Durchschnitt, ohne einen der beiden als „Vorher“-Wert zu behandeln."
+          },
+          {
+            "question": "Warum gibt es „Umgekehrter Prozentsatz“ als eigenen Modus statt einfacher Division?",
+            "answer": "Er beantwortet eine spezifisch häufige reale Frage — „wenn 30 % eines Betrags 12 sind, wie hoch war der volle Betrag?“ — was das Teilen durch einen als Bruch ausgedrückten Prozentsatz erfordert, ein Schritt, der von Hand leicht falsch herum gemacht wird."
+          },
+          {
+            "question": "Warum werden Ergebnisse auf zwei Dezimalstellen gerundet?",
+            "answer": "Zwei Dezimalstellen entsprechen der Präzision, mit der die meisten Prozentfragen in der Praxis gestellt werden (Geld, Noten, Statistik), ohne lange Fließkomma-Nachkommastellen anzuzeigen, die keine echten Informationen hinzufügen."
+          }
+        ]
+      },
+      "gcf-lcm-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den ggT- & kgV-Rechner: den paarweisen Reduktionsalgorithmus, den er verwendet, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionVenn": "ggT vs. kgV, visuell",
+        "sectionAnatomy": "Anatomie des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "1",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "kgV(a, b) = |a × b| / ggT(a, b)",
+          "note": "Der größte gemeinsame Teiler wird zuerst über den euklidischen Algorithmus gefunden; das kleinste gemeinsame Vielfache wird dann direkt daraus über diese Identität abgeleitet, statt unabhängig gesucht zu werden."
+        },
+        "flowchart": {
+          "intro": "Bei mehr als zwei Zahlen werden ggT und kgV jeweils durch paarweise Reduktion über die gesamte Liste berechnet — ggT(a, b, c) = ggT(ggT(a, b), c), und entsprechend für kgV — statt einer Formel, die eine beliebige Listenlänge direkt handhabt.",
+          "steps": [
+            "Prüfen, dass jede eingegebene Zahl eine positive ganze Zahl ist",
+            "Den ggT aller Zahlen paarweise mit dem euklidischen Algorithmus reduzieren (wiederholte Restbildung)",
+            "Das kgV aller Zahlen paarweise mit kgV(a,b) = |a×b| / ggT(a,b) reduzieren",
+            "Die Primfaktorzerlegung jeder einzelnen Zahl zur Anzeige neben dem Ergebnis berechnen"
+          ],
+          "caption": "Die paarweise Reduktion, die dieses Tool über die gesamte Zahlenliste ausführt."
+        },
+        "venn": {
+          "intro": "Die Beziehung zwischen den Faktoren zweier Zahlen bildet sich natürlich auf ein Venn-Diagramm ab — gemeinsame Primfaktoren liegen in der Überschneidung.",
+          "leftLabel": "12 = 2² × 3",
+          "rightLabel": "18 = 2 × 3²",
+          "overlapLabel": "ggT",
+          "leftOnlyItems": "2",
+          "overlapItems": "2 × 3 = 6",
+          "rightOnlyItems": "3",
+          "caption": "Die Primfaktoren, die 12 und 18 gemeinsam haben (die Überschneidung), bilden ihren ggT; die Kombination jedes Faktors beider Zahlen ergibt ihr kgV."
+        },
+        "anatomy": {
+          "intro": "Jede Berechnung liefert genau zwei Hauptzahlen, berechnet aus derselben Eingabeliste.",
+          "labelGcf": "ggT",
+          "labelLcm": "kgV",
+          "caption": "Für 12 und 18: ein ggT von 6 und ein kgV von 36."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Zahlen",
+            "meaning": "Eine Liste von zwei oder mehr positiven ganzen Zahlen, deren größter gemeinsamer Teiler und kleinstes gemeinsames Vielfaches gefunden werden soll.",
+            "unit": "Positive ganze Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Weniger als zwei eingegebene Zahlen",
+            "description": "ggT und kgV sind nur für zwei oder mehr Zahlen sinnvoll — das Tool gibt einen „Zu wenige Zahlen“-Fehler zurück, statt eines entarteten Einzahlergebnisses."
+          },
+          {
+            "title": "Nicht-ganzzahlige oder nicht-positive Eingabe",
+            "description": "Jeder eingegebene Wert wird als positive ganze Zahl geprüft; eine Dezimal-, Null- oder negative Eingabe gibt einen „Ungültige Zahl“-Fehler zurück, statt stillschweigend abzuschneiden oder den Absolutwert zu bilden."
+          },
+          {
+            "title": "Primfaktorzerlegung stoppt korrekt bei √n",
+            "description": "Die Probedivisionsschleife testet Teiler nur bis zur Quadratwurzel des verbleibenden Werts und erfasst, was auch immer an Primzahl darüber verbleibt — korrekt und effizient auch für größere Eingaben, nicht nur für kleine Lehrbuchbeispiele."
+          },
+          {
+            "title": "Paarweise Reduktion verallgemeinert über zwei Zahlen hinaus",
+            "description": "Da ggT und kgV jeweils paarweise über die gesamte Liste reduziert werden, statt durch eine Nur-zwei-Zahlen-Formel berechnet zu werden, handhabt das Tool jede Listenlänge — drei, vier oder mehr Zahlen — ohne Sonderfallbehandlung."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird der ggT mit dem euklidischen Algorithmus berechnet statt Faktorenlisten zu vergleichen?",
+            "answer": "Der euklidische Algorithmus (wiederholtes Ersetzen der größeren Zahl durch den Rest der Division durch die kleinere, bis der Rest null ist) findet den ggT in wenigen Schritten unabhängig davon, wie groß die Zahlen sind, während das Auflisten und Vergleichen jedes Faktors bei großen Zahlen langsam wird."
+          },
+          {
+            "question": "Warum wird das kgV aus dem ggT abgeleitet statt separat berechnet?",
+            "answer": "kgV(a,b) = |a×b| / ggT(a,b) ist eine direkte mathematische Identität — sobald der ggT bekannt ist, folgt das kgV aus einer Multiplikation und einer Division, sodass kein zweiter, unabhängiger Suchalgorithmus nötig ist."
+          },
+          {
+            "question": "Warum zeigt das Tool Primfaktorzerlegungen, wenn ich nur ggT und kgV wollte?",
+            "answer": "Die Primfaktorzerlegung ist das „Warum“ hinter den beiden Zahlen, nicht nur die Zahlen selbst — zu sehen, welche Primfaktoren jede Zahl teilt, macht sichtbar, welche Primzahlen genau zum ggT beitragen, statt ggT und kgV als undurchsichtige Ergebnisse zu präsentieren."
+          },
+          {
+            "question": "Kann dieses Tool den ggT oder das kgV von mehr als zwei Zahlen finden?",
+            "answer": "Ja — da beide paarweise über die gesamte Eingabeliste reduziert werden (ggT(a,b,c) = ggT(ggT(a,b),c), und dasselbe Muster für kgV), funktioniert jede Anzahl von Eingaben, nicht nur genau zwei."
+          }
+        ]
+      },
+      "fraction-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Bruchrechner: die Rechenregeln hinter seinen vier Operationen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionBarModel": "Brüche als Balkenmodelle",
+        "sectionAnatomy": "Anatomie des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "a/b + c/d = (a×d + c×b) / (b×d), gekürzt",
+          "note": "Addition und Subtraktion wandeln beide Brüche zunächst auf einen gemeinsamen Nenner um (das kleinste gemeinsame Vielfache der beiden Nenner), bevor die Zähler kombiniert werden; Multiplikation und Division verwenden ganz andere Regeln — direkt multiplizieren oder mit dem Kehrwert multiplizieren."
+        },
+        "flowchart": {
+          "intro": "Welche Regel gilt, hängt vollständig von der gewählten Operation ab — Addition/Subtraktion finden zuerst einen gemeinsamen Nenner, während Multiplikation/Division nie einen benötigen.",
+          "steps": [
+            "Beide Eingabebrüche einzeln vereinfachen, indem durch ihren ggT geteilt wird",
+            "Bei Addition oder Subtraktion: den kleinsten gemeinsamen Nenner finden, beide Zähler darauf skalieren, dann kombinieren",
+            "Bei Multiplikation: die beiden Zähler direkt miteinander und die beiden Nenner direkt miteinander multiplizieren",
+            "Bei Division: den ersten Bruch mit dem Kehrwert des zweiten multiplizieren",
+            "Das Endergebnis vereinfachen und in eine Dezimalzahl sowie, falls unecht, in eine gemischte Zahl umwandeln"
+          ],
+          "caption": "Der operationsabhängige Rechenweg, den dieses Tool bei jeder Berechnung ausführt."
+        },
+        "barModel": {
+          "intro": "Ein Bruch stellt gleich große Teile eines Ganzen dar — dieser Balken teilt sich in gleiche Segmente und schattiert die Anzahl des Zählers davon.",
+          "caption": "3/4 dargestellt als 3 schattierte Segmente von 4 gleichen Teilen eines Balkens."
+        },
+        "anatomy": {
+          "intro": "Ein Ergebnis größer als ein Ganzes (ein unechter Bruch) kann äquivalent als ganze Einheiten plus verbleibenden Bruch dargestellt werden.",
+          "caption": "7/4 dargestellt als 7 schattierte Viertelsegmente — ein voller Balken (4/4) plus 3/4 eines zweiten, entsprechend der gemischten Zahl 1¾."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Zähler A / Nenner A",
+            "meaning": "Der erste Bruch, eingegeben als zwei ganze Zahlen.",
+            "unit": "Ganze Zahl"
+          },
+          {
+            "symbol": "Zähler B / Nenner B",
+            "meaning": "Der zweite Bruch, eingegeben als zwei ganze Zahlen.",
+            "unit": "Ganze Zahl"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Welche Rechenoperation auf die beiden Brüche angewendet werden soll — Addition, Subtraktion, Multiplikation oder Division.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Nullnenner bei einem der Brüche",
+            "description": "Ein Nenner von null macht einen Bruch undefiniert — das Tool prüft beide Nenner vor jeder Rechenoperation und gibt einen „Nullnenner“-Fehler zurück, statt mit einem undefinierten Wert zu rechnen."
+          },
+          {
+            "title": "Division durch einen Nullbruch",
+            "description": "Division dreht den zweiten Bruch um und multipliziert — das Umdrehen von 0/n erzeugt einen Nenner von null, sodass das Tool speziell einen Nullzähler im Divisionsmodus erkennt und „Division durch Null“ zurückgibt, bevor dieses Umdrehen versucht wird."
+          },
+          {
+            "title": "Negative Nenner werden normalisiert",
+            "description": "Der Vereinfachungsschritt verschiebt jedes negative Vorzeichen zum Zähler, sodass der Nenner immer positiv angezeigt wird, was Ergebnisse in konventioneller Form hält statt technisch korrekter, aber unüblicher Brüche mit negativem Nenner."
+          },
+          {
+            "title": "Ganzzahlige und unechte Ergebnisse werden explizit ausgewiesen",
+            "description": "Das Ergebnis kennzeichnet, ob es sich zu einer exakten ganzen Zahl vereinfacht hat (Nenner 1) und separat, ob es unecht ist (Zähler ≥ Nenner), und liefert nur dann eine gemischte Zahl als Äquivalent, wenn das Ergebnis tatsächlich unecht ist."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum benötigen Addition und Subtraktion einen gemeinsamen Nenner, Multiplikation aber nicht?",
+            "answer": "Das Addieren oder Subtrahieren von Brüchen erfordert den Vergleich gleich großer Teile — man kann „Drittel“ nicht direkt zu „Vierteln“ addieren, ohne sie zuerst als gleich große Teile (einen gemeinsamen Nenner) neu auszudrücken. Bei der Multiplikation gibt es diese Anforderung nicht: Zähler und Nenner direkt zu multiplizieren, ist mathematisch unabhängig von den Ausgangsnennern gültig."
+          },
+          {
+            "question": "Warum zeigt das Tool vereinfachte Versionen meiner Eingabebrüche vor dem Ergebnis?",
+            "answer": "Das Anzeigen jedes bereits auf kleinste Werte gekürzten Eingabebruchs bestätigt, dass das Tool die Eingabe korrekt verstanden hat, und macht den späteren Schritt mit gemeinsamem Nenner oder Kreuzmultiplikation leichter nachvollziehbar, da mit der einfachsten statt einer ungekürzten Form gearbeitet wird."
+          },
+          {
+            "question": "Wie funktioniert die Division von Brüchen mathematisch?",
+            "answer": "Die Division durch einen Bruch entspricht der Multiplikation mit seinem Kehrwert (Zähler und Nenner vertauschen) — dieses Tool führt intern genau dieses Umdrehen-und-Multiplizieren aus, statt einer direkten Divisionsregel."
+          },
+          {
+            "question": "Warum wird der kleinste gemeinsame Nenner verwendet statt einfach die beiden Nenner miteinander zu multiplizieren?",
+            "answer": "Das Multiplizieren der Nenner ergibt immer einen gültigen gemeinsamen Nenner, oft aber einen größeren als nötig, was anschließend zusätzliche Vereinfachung erfordert — das kleinste gemeinsame Vielfache hält die Zwischenzahlen kleiner und bleibt dabei mathematisch korrekt."
+          }
+        ]
+      },
+      "scientific-notation-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Umrechner für wissenschaftliche Notation: die Normalisierungsregeln hinter seinen vier Operationen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionMagnitude": "Größenordnung auf einer Zahlengeraden",
+        "sectionAnatomy": "Anatomie des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Wert = Koeffizient × 10^Exponent, wobei 1 ≤ |Koeffizient| < 10",
+          "note": "Korrekte wissenschaftliche Notation erfordert, dass der Koeffizient betragsmäßig zwischen 1 und 10 liegt — der Normalisierungsschritt des Tools multipliziert oder dividiert wiederholt mit 10 (und passt den Exponenten entgegengesetzt an), bis dies gilt."
+        },
+        "flowchart": {
+          "intro": "Dieselbe Normalisierungsroutine liegt allen vier Operationen zugrunde — die Umwandlung in wissenschaftliche Notation, die Rückumwandlung in Standardform sowie das Multiplizieren oder Dividieren zweier bereits wissenschaftlicher Werte.",
+          "steps": [
+            "Bei „In wissenschaftliche Notation“: den Standardwert als Koeffizient mit Exponent 0 behandeln, dann normalisieren",
+            "Bei Multiplikation: die beiden Koeffizienten multiplizieren und die beiden Exponenten addieren, dann normalisieren",
+            "Bei Division: die beiden Koeffizienten dividieren und die Exponenten subtrahieren, dann normalisieren",
+            "Normalisieren durch Verschieben des Dezimalpunkts, bis der Betrag des Koeffizienten zwischen 1 und 10 liegt, wobei der Exponent bei jeder Verschiebung entgegengesetzt angepasst wird",
+            "Separat die Ingenieurnotation berechnen, deren Exponent stets ein Vielfaches von 3 ist"
+          ],
+          "caption": "Der gemeinsame Normalisierungsschritt, durch den jede Operation in diesem Tool läuft."
+        },
+        "magnitude": {
+          "intro": "Die wissenschaftliche Notation existiert, weil alltägliche Zahlen einen enormen Bereich an Größenordnungen umfassen — diese Linie platziert gängige Referenzpunkte nach ihrer Zehnerpotenz.",
+          "caption": "Gängige Größenordnungen von Tausendsteln bis Milliarden, positioniert nach Exponent auf einer einzigen Linie.",
+          "markers": [
+            {
+              "label": "0,001 (Tausendstel)",
+              "exponent": -3
+            },
+            {
+              "label": "1",
+              "exponent": 0
+            },
+            {
+              "label": "1.000 (Tausend)",
+              "exponent": 3
+            },
+            {
+              "label": "1.000.000 (Million)",
+              "exponent": 6
+            },
+            {
+              "label": "1.000.000.000 (Milliarde)",
+              "exponent": 9
+            },
+            {
+              "label": "1.000.000.000.000 (Billion)",
+              "exponent": 12
+            }
+          ]
+        },
+        "anatomy": {
+          "intro": "Jeder Wert in wissenschaftlicher Notation zerfällt in genau zwei Teile: einen Koeffizienten zwischen 1 und 10 und einen Zehnerpotenz-Exponenten.",
+          "labelCoefficient": "Koeffizient",
+          "labelExponent": "Exponent",
+          "caption": "4,2 × 10⁹ — ein Koeffizient von 4,2 und ein Exponent von 9."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Standardwert",
+            "meaning": "Eine Zahl in gewöhnlicher Dezimalform, nur im Modus „In wissenschaftliche Notation“ als umzuwandelnder Startwert verwendet.",
+            "unit": "Zahl"
+          },
+          {
+            "symbol": "Koeffizient A / Exponent A",
+            "meaning": "Der erste Wert bereits in wissenschaftlicher Notation, eingegeben als separater Koeffizient und Exponent — verwendet in den Modi „In Standardform“, Multiplikation und Division.",
+            "unit": "Zahl / Ganze Zahl"
+          },
+          {
+            "symbol": "Koeffizient B / Exponent B",
+            "meaning": "Der zweite Wert in wissenschaftlicher Notation, nur in den Modi Multiplikation und Division verwendet.",
+            "unit": "Zahl / Ganze Zahl"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Welche der vier Umwandlungen oder Operationen durchgeführt werden soll.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Nullkoeffizient",
+            "description": "Ein Koeffizient von genau null ist ein Sonderfall, den die Normalisierungsroutine direkt erkennt — null hat keinen sinnvollen Exponenten, zu dem hin verschoben werden könnte, sodass er als Koeffizient 0, Exponent 0 zurückgegeben wird, statt endlos zu iterieren."
+          },
+          {
+            "title": "Division durch Null",
+            "description": "Ist der Koeffizient des zweiten Werts im Divisionsmodus null, gibt das Tool einen „Division durch Null“-Fehler und ein genulltes Ergebnis zurück, statt einen unendlichen oder undefinierten Quotienten zu berechnen."
+          },
+          {
+            "title": "Koeffizient genau bei 10 oder darüber",
+            "description": "Die Normalisierungsschleife verwendet eine while-Bedingung (keine einzelne Prüfung), sodass ein Koeffizient, der z. B. bei 100 beginnt, korrekt über mehrere Zehnerfaktoren nach unten verschoben wird, bis er streng unter 10 liegt, statt nur eine einstellige Verschiebung zu handhaben."
+          },
+          {
+            "title": "Exponentenausrichtung der Ingenieurnotation",
+            "description": "Die Ingenieurnotation beschränkt Exponenten auf Vielfache von 3 (passend zu SI-Präfixen wie Kilo, Mega, Giga) — das Tool berechnet dies als separate, korrekt modulo-angepasste Größe gegenüber dem Standard-Exponenten der wissenschaftlichen Notation, nicht einfach durch Runden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was ist hier der Unterschied zwischen wissenschaftlicher und Ingenieurnotation?",
+            "answer": "Wissenschaftliche Notation erfordert nur, dass der Koeffizient zwischen 1 und 10 liegt, was jeden ganzzahligen Exponenten erlaubt; Ingenieurnotation beschränkt den Exponenten zusätzlich auf ein Vielfaches von 3, wodurch er mit gängigen Einheitenpräfixen wie Kilo (10³), Mega (10⁶) und Giga (10⁹) übereinstimmt — dieses Tool berechnet beide Formen aus derselben Eingabe."
+          },
+          {
+            "question": "Warum werden beim Multiplizieren zweier Werte in wissenschaftlicher Notation einfach die Exponenten addiert?",
+            "answer": "Das Multiplizieren von Potenzen derselben Basis addiert ihre Exponenten (10^a × 10^b = 10^(a+b)) — dies ist eine direkte Folge der Exponentenregeln, weshalb das Tool die Koeffizienten miteinander multipliziert und die Exponenten addiert und dann erneut normalisiert, da diese rohe Kombination möglicherweise noch keinen Koeffizienten zwischen 1 und 10 hat."
+          },
+          {
+            "question": "Woher kennt das Tool den Namen für eine bestimmte Größenordnung wie „Milliarde“?",
+            "answer": "Es schlägt den Exponenten der Ingenieurnotation (stets ein Vielfaches von 3) in einer festen Tabelle mit Standardnamen nach — Tausend, Million, Milliarde, Billion und ihre Bruchteile-Entsprechungen — und liefert keinen Namen, wenn die Größenordnung außerhalb dieses zugeordneten Bereichs liegt."
+          },
+          {
+            "question": "Warum ist nach jeder Operation eine Normalisierung nötig, statt einfach das Rohergebnis zu formatieren?",
+            "answer": "Das Multiplizieren oder Dividieren zweier bereits normalisierter Koeffizienten kann leicht ein Ergebnis außerhalb des Bereichs 1–10 erzeugen (z. B. 5 × 4 = 20) — die Normalisierung ist das, was garantiert, dass die endgültige Antwort tatsächlich gültige wissenschaftliche Notation ist, nicht nur eine mathematisch korrekte, aber falsch formatierte Zahl."
+          }
+        ]
+      },
+      "significant-figures-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Rechner für signifikante Stellen: die Regeln zum Zählen von Ziffern hinter seinen sechs Operationen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionDigits": "Welche Ziffern zählen",
+        "sectionAnatomy": "Anatomie des Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "6 Min."
+        },
+        "formula": {
+          "expression": "Ergebnispräzision = min(signifikante Stellen oder Dezimalstellen jeder Eingabe)",
+          "note": "Die Kernregel der Fortpflanzung signifikanter Stellen: Ein berechnetes Ergebnis kann nie präziser sein als seine am wenigsten präzise Eingabe. Multiplikation und Division begrenzen das Ergebnis durch signifikante Stellen; Addition und Subtraktion begrenzen es stattdessen durch Dezimalstellen."
+        },
+        "flowchart": {
+          "intro": "Signifikante Stellen sind eine Eigenschaft davon, wie eine Zahl geschrieben wurde, nicht nur ihres Zahlenwerts — dieses Tool arbeitet mit der eingegebenen rohen Ziffernfolge, niemals mit einer Zahl, die diese Formatierungsinformation bereits verloren hat.",
+          "steps": [
+            "Die signifikanten Stellen jeder Eingabe direkt aus ihrer Ziffernfolge zählen (führende Nullen zählen nie; nachgestellte Nullen nach einem Dezimalpunkt zählen)",
+            "Die Dezimalstellen jeder Eingabe separat zählen",
+            "Bei Addition/Subtraktion: das Ergebnis auf die wenigsten Dezimalstellen unter den Eingaben runden",
+            "Bei Multiplikation/Division: das Ergebnis auf die wenigsten signifikanten Stellen unter den Eingaben runden",
+            "Bei den Modi Zählen/Runden: signifikante Stellen direkt für eine einzelne Eingabe melden oder anwenden"
+          ],
+          "caption": "Die Regel zur Fortpflanzung der Präzision, die dieses Tool anwendet und die sich zwischen Addition/Subtraktion und Multiplikation/Division unterscheidet."
+        },
+        "digits": {
+          "intro": "Nicht jede Ziffer in einer geschriebenen Zahl zählt als signifikant — führende Nullen sind Platzhalter, während nachgestellte Nullen nach einem Dezimalpunkt gemessene Präzision sind.",
+          "significantLabel": "Signifikant",
+          "notSignificantLabel": "Nicht gezählt (Dezimalpunkt)",
+          "caption": "„100,20“ hat 5 signifikante Stellen — jede Ziffer hier zählt, einschließlich beider nachgestellter Nullen, da ein Dezimalpunkt vorhanden ist."
+        },
+        "anatomy": {
+          "intro": "Die signifikanten Stellen eines Multiplikations-/Divisionsergebnisses werden durch die Eingabe mit weniger Stellen festgelegt — nicht gemittelt, nicht die präzisere.",
+          "labelInputA": "Eingabe A (4 sig. Stellen)",
+          "labelInputB": "Eingabe B (2 sig. Stellen)",
+          "labelResult": "Ergebnis (2 sig. Stellen)",
+          "caption": "Die Multiplikation einer Zahl mit 4 signifikanten Stellen mit einer Zahl mit 2 signifikanten Stellen ergibt ein Ergebnis mit auf 2 signifikante Stellen begrenzt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Wert A",
+            "meaning": "Die erste Zahl, eingegeben und verarbeitet als rohe Textzeichenkette, sodass ihre exakt geschriebenen Ziffern (einschließlich nachgestellter Nullen) erhalten bleiben.",
+            "unit": "Ziffernfolge"
+          },
+          {
+            "symbol": "Wert B",
+            "meaning": "Die zweite Zahl, verwendet von den Modi Addition/Subtraktion/Multiplikation/Division — nicht benötigt für Zählen oder Runden.",
+            "unit": "Ziffernfolge"
+          },
+          {
+            "symbol": "Runden auf Stellen",
+            "meaning": "Die Zielzahl signifikanter Stellen, auf die gerundet werden soll, nur im Rundungsmodus verwendet.",
+            "unit": "Ganze Zahl"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Welche der sechs Operationen durchgeführt werden soll: Zählen, Runden, Addieren, Subtrahieren, Multiplizieren oder Dividieren.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Führende Nullen zählen nie",
+            "description": "Bei einer Zahl wie „0,0042“ schließt das Tool korrekt beide Nullen vor der ersten von null verschiedenen Ziffer aus — sie existieren nur, um den Dezimalpunkt zu positionieren, nicht um gemessene Präzision anzuzeigen."
+          },
+          {
+            "title": "Nachgestellte Nullen ohne Dezimalpunkt sind mehrdeutig",
+            "description": "Bei einer ganzen Zahl wie „1200“ ohne Dezimalpunkt sind nachgestellte Nullen in der Standardnotation tatsächlich mehrdeutig — das Tool folgt der üblichen Konvention, sie nicht als signifikant zu zählen, im Gegensatz zu „1200.“ (mit explizitem Dezimalpunkt), wo sie zählen würden."
+          },
+          {
+            "title": "Division durch Null",
+            "description": "Die Divisionsoperation prüft explizit auf einen zweiten Wert von null und gibt einen „Division durch Null“-Fehler zurück, statt Infinity zu berechnen, wodurch der Ergebnistyp konsistent mit jeder anderen Operation bleibt."
+          },
+          {
+            "title": "Nicht-numerische Eingabe",
+            "description": "Beide Werte werden vor jeder Berechnung mit Number() geprüft; ein Wert, der sich nicht zu einer endlichen Zahl parsen lässt, gibt einen „Ungültige Zahl“-Fehler zurück, statt NaN durch die restliche Berechnung zu verbreiten."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum verwenden Addition und Multiplikation unterschiedliche Präzisionsregeln?",
+            "answer": "Multiplikation und Division begrenzen das Ergebnis durch signifikante Stellen, weil sich die relative Präzision multiplikativ zusammensetzt; Addition und Subtraktion begrenzen das Ergebnis stattdessen durch Dezimalstellen, weil absolute Präzision (nicht relative) das ist, was beim Addieren oder Subtrahieren von Größen erhalten bleibt — dies sind zwei tatsächlich unterschiedliche Fortpflanzungsregeln aus der Messwissenschaft, nicht eine Regel, die auf zwei Arten angewendet wird."
+          },
+          {
+            "question": "Warum braucht dieses Tool die Zahl als Text statt einfach als Zahl?",
+            "answer": "JavaScripts nativer Zahlentyp verwirft, wie ein Wert geschrieben wurde — 100 und 100,00 sind numerisch identisch, stellen aber unterschiedliche Mengen gemessener Präzision dar (1 vs. 5 signifikante Stellen). Das Beibehalten der rohen Ziffernfolge ist der einzige Weg, diese Präzisionsinformation wiederherzustellen."
+          },
+          {
+            "question": "Wie unterscheidet sich das Runden auf signifikante Stellen vom Runden auf Dezimalstellen?",
+            "answer": "Das Runden auf Dezimalstellen behält immer die gleiche Anzahl an Ziffern nach dem Dezimalpunkt, unabhängig von der Größe der Zahl; das Runden auf signifikante Stellen zählt stattdessen bedeutungsvolle Ziffern beginnend bei der ersten von null verschiedenen Ziffer, sodass es sich korrekt anpasst, ob die Zahl 0,0031 oder 3.100.000 ist."
+          },
+          {
+            "question": "Warum unterscheidet sich die Signifikanz nachgestellter Nullen je nachdem, ob ein Dezimalpunkt vorhanden ist?",
+            "answer": "Dies spiegelt eine reale Mehrdeutigkeit in der Standardnotation wider: „1200“ könnte eine Messung bedeuten, die auf die nächste 1 genau ist (mit zwei zufällig nullwertigen Ziffern), oder auf die nächste 100 — ohne weiteren Kontext lässt sich das nicht unterscheiden. Das Hinzufügen eines Dezimalpunkts („1200.“) ist das konventionelle Signal, dass alle vier Ziffern tatsächlich gemessen wurden, weshalb das Tool die beiden Formen unterschiedlich behandelt."
+          }
+        ]
       }
     }
   }

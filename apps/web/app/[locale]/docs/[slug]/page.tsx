@@ -13,6 +13,11 @@ import RetirementCalculatorDocsPage, { getRetirementCalculatorTocItems } from "@
 import HouseAffordabilityCalculatorDocsPage, { getHouseAffordabilityCalculatorTocItems } from "@/components/docs/house-affordability-calculator/HouseAffordabilityCalculatorDocsPage";
 import DebtToIncomeCalculatorDocsPage, { getDebtToIncomeCalculatorTocItems } from "@/components/docs/debt-to-income-calculator/DebtToIncomeCalculatorDocsPage";
 import MortgageCalculatorDocsPage, { getMortgageCalculatorTocItems } from "@/components/docs/mortgage-calculator/MortgageCalculatorDocsPage";
+import PercentageCalculatorDocsPage, { getPercentageCalculatorTocItems } from "@/components/docs/percentage-calculator/PercentageCalculatorDocsPage";
+import GcfLcmCalculatorDocsPage, { getGcfLcmCalculatorTocItems } from "@/components/docs/gcf-lcm-calculator/GcfLcmCalculatorDocsPage";
+import FractionCalculatorDocsPage, { getFractionCalculatorTocItems } from "@/components/docs/fraction-calculator/FractionCalculatorDocsPage";
+import ScientificNotationConverterDocsPage, { getScientificNotationConverterTocItems } from "@/components/docs/scientific-notation-converter/ScientificNotationConverterDocsPage";
+import SignificantFiguresCalculatorDocsPage, { getSignificantFiguresCalculatorTocItems } from "@/components/docs/significant-figures-calculator/SignificantFiguresCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -90,6 +95,26 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "mortgage-calculator":
       content = <MortgageCalculatorDocsPage />;
       tocItems = await getMortgageCalculatorTocItems();
+      break;
+    case "percentage-calculator":
+      content = <PercentageCalculatorDocsPage />;
+      tocItems = await getPercentageCalculatorTocItems();
+      break;
+    case "gcf-lcm-calculator":
+      content = <GcfLcmCalculatorDocsPage />;
+      tocItems = await getGcfLcmCalculatorTocItems();
+      break;
+    case "fraction-calculator":
+      content = <FractionCalculatorDocsPage />;
+      tocItems = await getFractionCalculatorTocItems();
+      break;
+    case "scientific-notation-converter":
+      content = <ScientificNotationConverterDocsPage />;
+      tocItems = await getScientificNotationConverterTocItems();
+      break;
+    case "significant-figures-calculator":
+      content = <SignificantFiguresCalculatorDocsPage />;
+      tocItems = await getSignificantFiguresCalculatorTocItems();
       break;
   }
 

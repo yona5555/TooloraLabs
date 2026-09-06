@@ -6,6 +6,7 @@ import { SignificantFiguresCalculator as SignificantFiguresCalculatorTool } from
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SignificantFiguresInputPanel from "./SignificantFiguresInputPanel";
 import SignificantFiguresResult from "./SignificantFiguresResult";
 import SignificantFiguresQuickReference from "./SignificantFiguresQuickReference";
@@ -77,6 +78,7 @@ export default function SignificantFiguresCalculator({ education }: { education:
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="significant-figures-calculator" />
               <SignificantFiguresQuickReference />
             </div>
           }

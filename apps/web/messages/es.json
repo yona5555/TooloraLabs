@@ -20230,6 +20230,553 @@
             "answer": "Las facturas de impuesto predial y las primas de seguro típicamente se calculan anualmente, que es la forma más natural de ingresarlas; la calculadora simplemente divide cada una entre 12 para incorporarlas al pago mensual PITI junto con el monto mensual de capital e interés."
           }
         ]
+      },
+      "percentage-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Porcentajes: las cinco fórmulas detrás de sus modos, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionGrid": "Visualizar un porcentaje",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "% de Número = (Porcentaje / 100) × Número",
+          "note": "La fórmula principal usada en el modo predeterminado. Los otros cuatro modos — Qué Porcentaje, Cambio Porcentual, Porcentaje Inverso, y Diferencia Porcentual — reorganizan esta misma relación para resolver una incógnita distinta."
+        },
+        "flowchart": {
+          "intro": "Cada uno de los cinco modos es un reordenamiento algebraico directo de la misma relación de porcentaje, no un cálculo separado — sin iteración ni búsqueda, solo eligiendo qué cantidad es la incógnita.",
+          "steps": [
+            "Leer cuál de los cinco modos está seleccionado",
+            "Sustituir los dos números ingresados en la fórmula reordenada de ese modo",
+            "Proteger contra el único valor de entrada que haría que la fórmula de ese modo dividiera entre cero",
+            "Calcular el resultado y redondearlo a dos decimales"
+          ],
+          "caption": "La selección de fórmula dependiente del modo que esta herramienta ejecuta en cada cálculo."
+        },
+        "grid": {
+          "intro": "Un porcentaje es fundamentalmente un conteo de 100 — esta cuadrícula de 10×10 hace eso concreto sombreando exactamente esa cantidad de las 100 celdas.",
+          "caption": "25% mostrado como 25 celdas sombreadas de una cuadrícula de 100 celdas."
+        },
+        "anatomy": {
+          "intro": "Un resultado de porcentaje de número divide un todo en exactamente dos partes: la porción que representa el porcentaje, y todo lo demás.",
+          "labelPart": "Parte del Porcentaje",
+          "labelRemainder": "Resto",
+          "labelTotal": "Todo",
+          "caption": "20% de 80 es 16 — el 20% sombreado del todo, con el 80% restante sobrante."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Primero",
+            "meaning": "El primer valor ingresado — su significado cambia según el modo: la tasa de porcentaje en \"% de Número,\" la parte en \"Qué Porcentaje,\" el valor original en \"Cambio Porcentual,\" el porcentaje conocido en \"Porcentaje Inverso.\"",
+            "unit": "Número o %"
+          },
+          {
+            "symbol": "Segundo",
+            "meaning": "El segundo valor ingresado — su significado también depende del modo: el número base, el todo, el nuevo valor, o el resultado conocido.",
+            "unit": "Número"
+          },
+          {
+            "symbol": "Modo",
+            "meaning": "Cuál de las cinco relaciones de porcentaje resolver — determina en qué fórmula se sustituyen los dos datos.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "División entre cero en \"Qué Porcentaje\"",
+            "description": "Si la base (segundo valor) es cero, la herramienta devuelve un mensaje explícito \"No se permite dividir entre cero\" en lugar de calcular un resultado indefinido."
+          },
+          {
+            "title": "Valor original cero en \"Cambio Porcentual\"",
+            "description": "Un valor inicial de cero hace que el cambio porcentual sea indefinido (cualquier cambio desde cero sería un porcentaje infinito) — la herramienta detecta esto y devuelve \"El valor original no puede ser cero\" en lugar de Infinity o NaN."
+          },
+          {
+            "title": "Porcentaje cero en \"Porcentaje Inverso\"",
+            "description": "Resolver \"X es P% de qué número\" con P=0 no tiene una respuesta válida — la herramienta protege este caso explícitamente en lugar de dividir entre cero."
+          },
+          {
+            "title": "Ambos valores cero en \"Diferencia Porcentual\"",
+            "description": "La diferencia porcentual divide entre el promedio de los dos valores; cuando ambos son cero, ese promedio también es cero, así que la herramienta verifica esto y devuelve \"Ambos valores no pueden ser cero\" en lugar de un error de división."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta calculadora tiene cinco modos separados en lugar de una fórmula?",
+            "answer": "Porcentaje-de-número, qué-porcentaje, cambio porcentual, porcentaje inverso, y diferencia porcentual son cinco preguntas genuinamente distintas que involucran porcentajes, pero cada una tiene una incógnita diferente — tratarlas como una sola fórmula obligaría a los usuarios a reordenar el álgebra manualmente."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre \"cambio porcentual\" y \"diferencia porcentual\"?",
+            "answer": "El cambio porcentual es direccional y pregunta cuánto creció o se redujo un valor respecto a su valor original; la diferencia porcentual es simétrica y mide la brecha entre dos valores respecto a su promedio, sin tratar a ninguno como el valor \"antes\"."
+          },
+          {
+            "question": "¿Por qué existe \"Porcentaje Inverso\" como modo propio en lugar de simplemente dividir?",
+            "answer": "Responde a una pregunta específicamente común en el mundo real — \"si el 30% de cierta cantidad es 12, ¿cuál era la cantidad total?\" — que requiere dividir entre un porcentaje expresado como fracción, un paso fácil de hacer al revés si se hace a mano."
+          },
+          {
+            "question": "¿Por qué los resultados se redondean a dos decimales?",
+            "answer": "Dos decimales coinciden con la precisión con la que se plantean la mayoría de las preguntas de porcentaje en la práctica (dinero, calificaciones, estadísticas) sin mostrar largas colas de punto flotante que no añaden información real."
+          }
+        ]
+      },
+      "gcf-lcm-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de MCD y MCM: el algoritmo de reducción por pares que utiliza, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionVenn": "MCD vs. MCM, visualmente",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "1",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "MCM(a, b) = |a × b| / MCD(a, b)",
+          "note": "El máximo común divisor se encuentra primero mediante el algoritmo de Euclides; el mínimo común múltiplo se deriva directamente de él usando esta identidad, en lugar de buscarse de forma independiente."
+        },
+        "flowchart": {
+          "intro": "Para más de dos números, tanto el MCD como el MCM se calculan reduciendo por pares a lo largo de toda la lista — MCD(a, b, c) = MCD(MCD(a, b), c), y lo mismo para el MCM — en lugar de una fórmula que maneje directamente una longitud de lista arbitraria.",
+          "steps": [
+            "Validar que cada número ingresado sea un entero positivo",
+            "Reducir el MCD de todos los números por pares usando el algoritmo de Euclides (toma repetida de residuos)",
+            "Reducir el MCM de todos los números por pares usando MCM(a,b) = |a×b| / MCD(a,b)",
+            "Calcular la factorización prima de cada número individual para mostrarla junto al resultado"
+          ],
+          "caption": "La reducción por pares que esta herramienta ejecuta a través de la lista completa de números."
+        },
+        "venn": {
+          "intro": "La relación entre los factores de dos números se traza naturalmente en un diagrama de Venn — los factores primos compartidos se ubican en la superposición.",
+          "leftLabel": "12 = 2² × 3",
+          "rightLabel": "18 = 2 × 3²",
+          "overlapLabel": "MCD",
+          "leftOnlyItems": "2",
+          "overlapItems": "2 × 3 = 6",
+          "rightOnlyItems": "3",
+          "caption": "Los factores primos que 12 y 18 comparten (la superposición) forman su MCD; combinar cada factor de ambos números da su MCM."
+        },
+        "anatomy": {
+          "intro": "Cada cálculo devuelve exactamente dos números principales, calculados a partir de la misma lista de entrada.",
+          "labelGcf": "MCD",
+          "labelLcm": "MCM",
+          "caption": "Para 12 y 18: un MCD de 6 y un MCM de 36."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Números",
+            "meaning": "Una lista de dos o más enteros positivos para encontrar su máximo común divisor y mínimo común múltiplo.",
+            "unit": "Enteros positivos"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Menos de dos números ingresados",
+            "description": "El MCD y el MCM solo tienen sentido para dos o más números — la herramienta devuelve un error de \"muy pocos números\" en lugar de un resultado degenerado de un solo número."
+          },
+          {
+            "title": "Entrada no entera o no positiva",
+            "description": "Cada valor ingresado se valida como un entero positivo; una entrada decimal, cero o negativa devuelve un error de \"número inválido\" en lugar de truncar silenciosamente o tomar el valor absoluto."
+          },
+          {
+            "title": "La factorización prima se detiene correctamente en √n",
+            "description": "El bucle de factorización por división de prueba solo prueba divisores hasta la raíz cuadrada del valor restante, y captura cualquier primo que quede por encima de eso — correcto y eficiente incluso para entradas más grandes, no solo para ejemplos pequeños de libro de texto."
+          },
+          {
+            "title": "La reducción por pares se generaliza más allá de dos números",
+            "description": "Como tanto el MCD como el MCM se reducen por pares a través de toda la lista en lugar de calcularse con una fórmula solo para dos números, la herramienta maneja cualquier longitud de lista — tres, cuatro o más números — sin casos especiales."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el MCD se calcula con el algoritmo de Euclides en lugar de comparar listas de factores?",
+            "answer": "El algoritmo de Euclides (reemplazar repetidamente el número mayor con el residuo de dividirlo entre el menor, hasta que el residuo sea cero) encuentra el MCD en pocos pasos sin importar qué tan grandes sean los números, mientras que listar y comparar cada factor se vuelve lento para números grandes."
+          },
+          {
+            "question": "¿Por qué el MCM se deriva del MCD en lugar de calcularse por separado?",
+            "answer": "MCM(a,b) = |a×b| / MCD(a,b) es una identidad matemática directa — una vez conocido el MCD, el MCM se obtiene con una multiplicación y una división, así que no se necesita un segundo algoritmo de búsqueda independiente."
+          },
+          {
+            "question": "¿Por qué la herramienta muestra factorizaciones primas si solo pedí MCD y MCM?",
+            "answer": "La factorización prima es el \"por qué\" detrás de los dos números, no solo los números en sí — ver qué factores primos comparte cada número hace visible exactamente qué primos contribuyen al MCD, en lugar de presentar el MCD y el MCM como resultados opacos."
+          },
+          {
+            "question": "¿Puede esta herramienta encontrar el MCD o el MCM de más de dos números?",
+            "answer": "Sí — porque ambos se reducen por pares a través de toda la lista de entrada (MCD(a,b,c) = MCD(MCD(a,b),c), y el mismo patrón para el MCM), funciona con cualquier cantidad de entradas, no solo exactamente dos."
+          }
+        ]
+      },
+      "fraction-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Fracciones: las reglas aritméticas detrás de sus cuatro operaciones, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionBarModel": "Fracciones como modelos de barras",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "a/b + c/d = (a×d + c×b) / (b×d), simplificado",
+          "note": "La suma y la resta convierten ambas fracciones a un denominador común (el mínimo común múltiplo de los dos denominadores) antes de combinar los numeradores; la multiplicación y la división usan reglas completamente distintas — multiplicar directamente, o multiplicar por el recíproco."
+        },
+        "flowchart": {
+          "intro": "Qué regla se aplica depende completamente de la operación seleccionada — sumar/restar encuentran primero un denominador común, mientras que multiplicar/dividir nunca lo necesitan.",
+          "steps": [
+            "Simplificar ambas fracciones de entrada individualmente dividiendo entre su MCD",
+            "Para sumar o restar: encontrar el mínimo común denominador, escalar ambos numeradores para igualarlo, luego combinar",
+            "Para multiplicar: multiplicar los dos numeradores entre sí y los dos denominadores entre sí directamente",
+            "Para dividir: multiplicar la primera fracción por el recíproco de la segunda",
+            "Simplificar el resultado final y convertirlo a decimal y, si es impropia, a un número mixto"
+          ],
+          "caption": "La ruta aritmética dependiente de la operación que esta herramienta ejecuta en cada cálculo."
+        },
+        "barModel": {
+          "intro": "Una fracción representa partes de igual tamaño de un todo — esta barra se divide en segmentos iguales y sombrea la cantidad indicada por el numerador.",
+          "caption": "3/4 mostrado como 3 segmentos sombreados de 4 partes iguales de una barra."
+        },
+        "anatomy": {
+          "intro": "Un resultado mayor que un entero completo (una fracción impropia) puede mostrarse equivalentemente como unidades enteras más una fracción restante.",
+          "caption": "7/4 mostrado como 7 segmentos de cuarto sombreados — una barra completa (4/4) más 3/4 de una segunda, correspondiendo al número mixto 1¾."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Numerador A / Denominador A",
+            "meaning": "La primera fracción, ingresada como dos números enteros.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Numerador B / Denominador B",
+            "meaning": "La segunda fracción, ingresada como dos números enteros.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Operación",
+            "meaning": "Qué operación aritmética realizar sobre las dos fracciones — sumar, restar, multiplicar, o dividir.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Denominador cero en cualquiera de las fracciones",
+            "description": "Un denominador de cero hace que una fracción sea indefinida — la herramienta verifica ambos denominadores antes de cualquier cálculo y devuelve un error de \"denominador cero\" en lugar de calcular con un valor indefinido."
+          },
+          {
+            "title": "Dividir entre una fracción cero",
+            "description": "La división invierte la segunda fracción y multiplica — invertir 0/n produce un denominador de cero, así que la herramienta detecta específicamente un numerador cero en el modo de división y devuelve \"división entre cero\" antes de intentar esa inversión."
+          },
+          {
+            "title": "Los denominadores negativos se normalizan",
+            "description": "El paso de simplificación mueve cualquier signo negativo al numerador para que el denominador siempre se muestre como positivo, manteniendo los resultados en la forma convencional en lugar de fracciones técnicamente correctas pero inusuales con denominador negativo."
+          },
+          {
+            "title": "Los resultados enteros e impropios se señalan explícitamente",
+            "description": "El resultado indica si se simplificó a un número entero exacto (denominador de 1) y, por separado, si es impropio (numerador ≥ denominador), proporcionando un equivalente en número mixto solo cuando el resultado es realmente impropio."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la suma y la resta necesitan un denominador común pero la multiplicación no?",
+            "answer": "Sumar o restar fracciones requiere comparar piezas de igual tamaño — no se pueden sumar \"tercios\" directamente a \"cuartos\" sin reexpresarlos primero como la misma pieza de tamaño (un denominador común). La multiplicación no tiene ese requisito: multiplicar numeradores y denominadores directamente es matemáticamente válido sin importar los denominadores iniciales."
+          },
+          {
+            "question": "¿Por qué la herramienta muestra versiones simplificadas de mis fracciones de entrada antes del resultado?",
+            "answer": "Mostrar cada fracción de entrada ya reducida a su mínima expresión confirma que la herramienta entendió correctamente lo ingresado y facilita seguir el paso posterior de denominador común o multiplicación cruzada, ya que trabaja con la forma más simple en lugar de una no reducida."
+          },
+          {
+            "question": "¿Cómo funciona matemáticamente la división de fracciones?",
+            "answer": "Dividir entre una fracción es lo mismo que multiplicar por su recíproco (invertir el numerador y el denominador) — esta herramienta realiza exactamente esa inversión y multiplicación internamente en lugar de cualquier regla de división directa."
+          },
+          {
+            "question": "¿Por qué se usa el mínimo común denominador en lugar de simplemente multiplicar los dos denominadores?",
+            "answer": "Multiplicar los denominadores siempre produce un denominador común válido, pero a menudo más grande de lo necesario, requiriendo simplificación adicional después — el mínimo común múltiplo mantiene los números intermedios más pequeños mientras sigue siendo matemáticamente correcto."
+          }
+        ]
+      },
+      "scientific-notation-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Convertidor de Notación Científica: las reglas de normalización detrás de sus cuatro operaciones, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionMagnitude": "Magnitud en una recta numérica",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "valor = coeficiente × 10^exponente, donde 1 ≤ |coeficiente| < 10",
+          "note": "La notación científica correcta requiere que el coeficiente esté entre 1 y 10 en valor absoluto — el paso de normalización de la herramienta multiplica o divide repetidamente entre 10 (ajustando el exponente de forma opuesta) hasta que esto se cumple."
+        },
+        "flowchart": {
+          "intro": "La misma rutina de normalización subyace a las cuatro operaciones — convertir a notación científica, convertir de vuelta a forma estándar, y multiplicar o dividir dos valores ya en notación científica.",
+          "steps": [
+            "Para \"a científica\": tratar el valor estándar como coeficiente con exponente 0, luego normalizar",
+            "Para multiplicar: multiplicar los dos coeficientes y sumar los dos exponentes, luego normalizar",
+            "Para dividir: dividir los dos coeficientes y restar los exponentes, luego normalizar",
+            "Normalizar desplazando el punto decimal hasta que el valor absoluto del coeficiente esté entre 1 y 10, ajustando el exponente de forma opuesta en cada desplazamiento",
+            "Calcular por separado la forma de notación de ingeniería, cuyo exponente siempre es múltiplo de 3"
+          ],
+          "caption": "El paso de normalización compartido por el que pasa cada operación en esta herramienta."
+        },
+        "magnitude": {
+          "intro": "La notación científica existe porque los números cotidianos abarcan un rango enorme de magnitudes — esta línea ubica puntos de referencia comunes según su potencia de diez.",
+          "caption": "Magnitudes comunes desde milésimas hasta miles de millones, posicionadas por exponente a lo largo de una sola línea.",
+          "markers": [
+            {
+              "label": "0.001 (milésima)",
+              "exponent": -3
+            },
+            {
+              "label": "1",
+              "exponent": 0
+            },
+            {
+              "label": "1,000 (mil)",
+              "exponent": 3
+            },
+            {
+              "label": "1,000,000 (millón)",
+              "exponent": 6
+            },
+            {
+              "label": "1,000,000,000 (mil millones)",
+              "exponent": 9
+            },
+            {
+              "label": "1,000,000,000,000 (billón)",
+              "exponent": 12
+            }
+          ]
+        },
+        "anatomy": {
+          "intro": "Todo valor en notación científica se descompone en exactamente dos partes: un coeficiente entre 1 y 10, y un exponente de potencia de diez.",
+          "labelCoefficient": "Coeficiente",
+          "labelExponent": "Exponente",
+          "caption": "4.2 × 10⁹ — un coeficiente de 4.2 y un exponente de 9."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Valor Estándar",
+            "meaning": "Un número en forma decimal ordinaria, usado solo en el modo \"a científica\" como el valor inicial a convertir.",
+            "unit": "Número"
+          },
+          {
+            "symbol": "Coeficiente A / Exponente A",
+            "meaning": "El primer valor ya en notación científica, ingresado como su coeficiente y exponente por separado — usado en los modos \"a estándar,\" multiplicar, y dividir.",
+            "unit": "Número / Entero"
+          },
+          {
+            "symbol": "Coeficiente B / Exponente B",
+            "meaning": "El segundo valor en notación científica, usado solo en los modos multiplicar y dividir.",
+            "unit": "Número / Entero"
+          },
+          {
+            "symbol": "Operación",
+            "meaning": "Cuál de las cuatro conversiones u operaciones realizar.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Coeficiente cero",
+            "description": "Un coeficiente exactamente cero es un caso especial que la rutina de normalización detecta directamente — el cero no tiene un exponente significativo hacia el cual desplazarse, así que se devuelve como coeficiente 0, exponente 0 en lugar de repetir indefinidamente."
+          },
+          {
+            "title": "División entre cero",
+            "description": "Si el coeficiente del segundo valor es cero en el modo dividir, la herramienta devuelve un error de \"división entre cero\" y un resultado en cero en lugar de calcular un cociente infinito o indefinido."
+          },
+          {
+            "title": "Coeficiente exactamente en 10 o que lo cruza",
+            "description": "El bucle de normalización usa una condición while (no una única verificación), así que un coeficiente que comienza, por ejemplo, en 100 se desplaza correctamente hacia abajo a través de múltiples factores de 10 hasta situarse estrictamente por debajo de 10, en lugar de manejar solo un desplazamiento de un dígito."
+          },
+          {
+            "title": "Alineación del exponente en notación de ingeniería",
+            "description": "La notación de ingeniería restringe los exponentes a múltiplos de 3 (coincidiendo con prefijos SI como kilo, mega, giga) — la herramienta calcula esto como un ajuste separado y correctamente modulado a partir del exponente estándar de notación científica, no simplemente redondeándolo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cuál es la diferencia entre notación científica y de ingeniería aquí?",
+            "answer": "La notación científica solo requiere que el coeficiente esté entre 1 y 10, permitiendo cualquier exponente entero; la notación de ingeniería además restringe el exponente a un múltiplo de 3, alineándolo con prefijos de unidad comunes como kilo (10³), mega (10⁶), y giga (10⁹) — esta herramienta calcula ambas formas a partir de la misma entrada."
+          },
+          {
+            "question": "¿Por qué multiplicar dos números en notación científica simplemente suma los exponentes?",
+            "answer": "Multiplicar potencias de la misma base suma sus exponentes (10^a × 10^b = 10^(a+b)) — esto es una consecuencia directa de las reglas de exponentes, así que la herramienta multiplica los coeficientes entre sí y suma los exponentes, luego renormaliza ya que esa combinación bruta puede no tener aún un coeficiente entre 1 y 10."
+          },
+          {
+            "question": "¿Cómo sabe la herramienta el nombre de una magnitud dada, como \"mil millones\"?",
+            "answer": "Busca el exponente de notación de ingeniería (siempre múltiplo de 3) en una tabla fija de nombres estándar — mil, millón, mil millones, billón, y sus contrapartes fraccionarias — sin devolver ningún nombre si la magnitud cae fuera de ese rango mapeado."
+          },
+          {
+            "question": "¿Por qué se necesita normalización después de cada operación en lugar de simplemente formatear el resultado bruto?",
+            "answer": "Multiplicar o dividir dos coeficientes ya normalizados puede fácilmente producir un resultado fuera del rango 1–10 (por ejemplo, 5 × 4 = 20) — la normalización es lo que garantiza que la respuesta final sea realmente notación científica válida, no solo un número matemáticamente correcto pero mal formateado."
+          }
+        ]
+      },
+      "significant-figures-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Cifras Significativas: las reglas de conteo de dígitos detrás de sus seis operaciones, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionDigits": "Qué dígitos cuentan",
+        "sectionAnatomy": "Anatomía del resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Precisión del resultado = mín(cifras significativas o decimales de cada entrada)",
+          "note": "La regla central de la propagación de cifras significativas: un resultado calculado nunca puede ser más preciso que su entrada menos precisa. La multiplicación y la división limitan el resultado por cifras significativas; la suma y la resta lo limitan por decimales en su lugar."
+        },
+        "flowchart": {
+          "intro": "Las cifras significativas son una propiedad de cómo se escribió un número, no solo de su valor numérico — esta herramienta opera sobre la cadena de dígitos bruta ingresada, nunca sobre un número que ya haya descartado esa información de formato.",
+          "steps": [
+            "Contar las cifras significativas de cada entrada directamente de su cadena de dígitos (los ceros a la izquierda nunca cuentan; los ceros finales después de un punto decimal sí cuentan)",
+            "Contar los decimales de cada entrada por separado",
+            "Para sumar/restar: redondear el resultado a los decimales menos numerosos entre las entradas",
+            "Para multiplicar/dividir: redondear el resultado a las cifras significativas menos numerosas entre las entradas",
+            "Para los modos contar/redondear: reportar o aplicar cifras significativas directamente a una sola entrada"
+          ],
+          "caption": "La regla de propagación de precisión que aplica esta herramienta, que difiere entre suma/resta y multiplicación/división."
+        },
+        "digits": {
+          "intro": "No todos los dígitos en un número escrito cuentan como significativos — los ceros a la izquierda son marcadores de posición, mientras que los ceros finales después de un punto decimal son precisión medida.",
+          "significantLabel": "Significativo",
+          "notSignificantLabel": "No cuenta (punto decimal)",
+          "caption": "\"100.20\" tiene 5 cifras significativas — cada dígito aquí cuenta, incluyendo ambos ceros finales, porque hay un punto decimal presente."
+        },
+        "anatomy": {
+          "intro": "Las cifras significativas de un resultado de multiplicación/división se establecen según la entrada que tuvo menos — no promediadas, ni la más precisa.",
+          "labelInputA": "Entrada A (4 cifras sig.)",
+          "labelInputB": "Entrada B (2 cifras sig.)",
+          "labelResult": "Resultado (2 cifras sig.)",
+          "caption": "Multiplicar un número de 4 cifras significativas por un número de 2 cifras significativas produce un resultado limitado a 2 cifras significativas."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Valor A",
+            "meaning": "El primer número, ingresado y procesado como una cadena de texto bruta para que sus dígitos escritos exactos (incluyendo ceros finales) se conserven.",
+            "unit": "Cadena de dígitos"
+          },
+          {
+            "symbol": "Valor B",
+            "meaning": "El segundo número, usado por los modos sumar/restar/multiplicar/dividir — no necesario para contar o redondear.",
+            "unit": "Cadena de dígitos"
+          },
+          {
+            "symbol": "Redondear a Dígitos",
+            "meaning": "El número objetivo de cifras significativas al que redondear, usado solo en el modo redondear.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Operación",
+            "meaning": "Cuál de las seis operaciones realizar: contar, redondear, sumar, restar, multiplicar, o dividir.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los ceros a la izquierda nunca cuentan",
+            "description": "En un número como \"0.0042,\" la herramienta excluye correctamente ambos ceros antes del primer dígito distinto de cero — existen solo para ubicar el punto decimal, no para indicar precisión medida."
+          },
+          {
+            "title": "Los ceros finales sin punto decimal son ambiguos",
+            "description": "Para un número entero como \"1200\" sin punto decimal, los ceros finales son genuinamente ambiguos en la notación estándar — la herramienta sigue la convención común de no contarlos como significativos, a diferencia de \"1200.\" (con un punto decimal explícito) donde sí contarían."
+          },
+          {
+            "title": "División entre cero",
+            "description": "La operación de división verifica explícitamente un segundo valor de cero y devuelve un error de \"división entre cero\" en lugar de calcular Infinity, manteniendo el tipo de resultado consistente con cualquier otra operación."
+          },
+          {
+            "title": "Entrada no numérica",
+            "description": "Ambos valores se validan con Number() antes de cualquier cálculo; un valor que no se analiza como un número finito devuelve un error de \"número inválido\" en lugar de propagar NaN por el resto del cálculo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la suma y la multiplicación usan reglas de precisión diferentes?",
+            "answer": "La multiplicación y la división limitan el resultado por cifras significativas porque la precisión relativa se compone multiplicativamente; la suma y la resta limitan el resultado por decimales en su lugar, porque la precisión absoluta (no relativa) es lo que se conserva al combinar cantidades sumando o restando — estas son dos reglas de propagación genuinamente distintas de la ciencia de la medición, no una regla aplicada de dos formas."
+          },
+          {
+            "question": "¿Por qué esta herramienta necesita el número como texto en lugar de simplemente un número?",
+            "answer": "El tipo de número nativo de JavaScript descarta cómo se escribió un valor — 100 y 100.00 son numéricamente idénticos pero representan cantidades diferentes de precisión medida (1 vs. 5 cifras significativas). Conservar la cadena de dígitos bruta es la única forma de recuperar esa información de precisión."
+          },
+          {
+            "question": "¿Cómo se diferencia redondear a cifras significativas de redondear a decimales?",
+            "answer": "Redondear a decimales siempre mantiene el mismo número de dígitos después del punto decimal sin importar el tamaño del número; redondear a cifras significativas en cambio cuenta dígitos con significado comenzando desde el primer dígito distinto de cero, así que se adapta correctamente ya sea que el número sea 0.0031 o 3,100,000."
+          },
+          {
+            "question": "¿Por qué la significancia de los ceros finales difiere según si hay un punto decimal?",
+            "answer": "Esto refleja una ambigüedad real en la notación estándar: \"1200\" podría significar una medición precisa al 1 más cercano (con dos dígitos coincidentemente cero) o al 100 más cercano — no hay forma de saberlo sin más contexto. Agregar un punto decimal (\"1200.\") es la señal convencional de que los cuatro dígitos realmente se midieron, por eso la herramienta trata las dos formas de manera diferente."
+          }
+        ]
       }
     }
   }

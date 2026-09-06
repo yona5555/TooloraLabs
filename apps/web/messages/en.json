@@ -20226,6 +20226,553 @@
             "answer": "Property tax bills and insurance premiums are typically assessed annually, which is the more natural way to enter them; the calculator simply divides each by 12 to fold them into the monthly PITI payment alongside the monthly principal-and-interest amount."
           }
         ]
+      },
+      "percentage-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Percentage Calculator: the five formulas behind its modes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionGrid": "Visualizing a Percentage",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "% of Number = (Percent / 100) × Number",
+          "note": "The core formula used by the default mode. The other four modes — What Percent, Percentage Change, Reverse Percentage, and Percentage Difference — rearrange this same relationship to solve for a different unknown."
+        },
+        "flowchart": {
+          "intro": "Each of the five modes is a direct algebraic rearrangement of the same percent relationship, not a separate calculation — no iteration or search, just picking which quantity is unknown.",
+          "steps": [
+            "Read which of the five modes is selected",
+            "Substitute the two entered numbers into that mode's rearranged formula",
+            "Guard against the one input value that would make that mode's formula divide by zero",
+            "Compute the result and round it to two decimal places"
+          ],
+          "caption": "The mode-dependent formula selection this tool runs on every calculation."
+        },
+        "grid": {
+          "intro": "A percentage is fundamentally a count out of 100 — this 10×10 grid makes that concrete by shading exactly that many of the 100 cells.",
+          "caption": "25% shown as 25 shaded cells out of a 100-cell grid."
+        },
+        "anatomy": {
+          "intro": "A percent-of-number result splits a whole into exactly two parts: the portion the percentage represents, and everything else.",
+          "labelPart": "The Percentage's Share",
+          "labelRemainder": "Remainder",
+          "labelTotal": "Whole",
+          "caption": "20% of 80 is 16 — the shaded 20% of the whole, with the remaining 80% left over."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "First",
+            "meaning": "The first entered value — its meaning changes per mode: the percentage rate in \"% of Number,\" the part in \"What Percent,\" the original value in \"Percentage Change,\" the known percentage in \"Reverse Percentage.\"",
+            "unit": "Number or %"
+          },
+          {
+            "symbol": "Second",
+            "meaning": "The second entered value — its meaning likewise depends on mode: the base number, the whole, the new value, or the known result.",
+            "unit": "Number"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "Which of the five percent relationships to solve — determines which formula the two inputs are substituted into.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Division by zero in \"What Percent\"",
+            "description": "If the base (second value) is zero, the tool returns an explicit \"Division by zero is not allowed\" message instead of computing an undefined result."
+          },
+          {
+            "title": "Zero original value in \"Percentage Change\"",
+            "description": "A zero starting value makes percentage change undefined (any change from zero is an infinite percentage) — the tool detects this and returns \"Original value cannot be zero\" instead of Infinity or NaN."
+          },
+          {
+            "title": "Zero percentage in \"Reverse Percentage\"",
+            "description": "Solving \"X is P% of what number\" with P=0 has no valid answer — the tool guards this case explicitly rather than dividing by zero."
+          },
+          {
+            "title": "Both values zero in \"Percentage Difference\"",
+            "description": "Percentage difference divides by the average of the two values; when both are zero, that average is also zero, so the tool checks for this and returns \"Both values cannot be zero\" instead of a division error."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this calculator have five separate modes instead of one formula?",
+            "answer": "Percent-of-number, what-percent, percentage change, reverse percentage, and percentage difference are five genuinely different questions that all involve percentages, but each has a different unknown — treating them as one formula would force users to manually rearrange algebra themselves."
+          },
+          {
+            "question": "What's the difference between \"percentage change\" and \"percentage difference\"?",
+            "answer": "Percentage change is directional and asks how much a value grew or shrank relative to its original value; percentage difference is symmetric and measures the gap between two values relative to their average, without treating either one as the \"before\" value."
+          },
+          {
+            "question": "Why does \"Reverse Percentage\" exist as its own mode instead of just dividing?",
+            "answer": "It answers a specifically common real-world question — \"if 30% of some amount is 12, what was the full amount?\" — that requires dividing by a percentage expressed as a fraction, a step easy to get backward if done by hand."
+          },
+          {
+            "question": "Why are results rounded to two decimal places?",
+            "answer": "Two decimal places matches the precision most percentage questions are asked at in practice (money, grades, statistics) without displaying long floating-point tails that don't add real information."
+          }
+        ]
+      },
+      "gcf-lcm-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the GCF & LCM Calculator: the pairwise reduction algorithm it uses, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionVenn": "GCF vs. LCM, Visually",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "1",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "LCM(a, b) = |a × b| / GCF(a, b)",
+          "note": "The greatest common factor is found first via the Euclidean algorithm; the least common multiple is then derived directly from it using this identity, rather than being searched for independently."
+        },
+        "flowchart": {
+          "intro": "For more than two numbers, GCF and LCM are each computed by reducing pairwise across the whole list — GCF(a, b, c) = GCF(GCF(a, b), c), and the same for LCM — rather than a formula that handles an arbitrary list length directly.",
+          "steps": [
+            "Validate every entered number is a positive integer",
+            "Reduce the GCF of all numbers pairwise using the Euclidean algorithm (repeated remainder-taking)",
+            "Reduce the LCM of all numbers pairwise using LCM(a,b) = |a×b| / GCF(a,b)",
+            "Compute the prime factorization of each individual number for display alongside the result"
+          ],
+          "caption": "The pairwise reduction this tool runs across the full list of numbers."
+        },
+        "venn": {
+          "intro": "The relationship between two numbers' factors maps naturally onto a Venn diagram — shared prime factors sit in the overlap.",
+          "leftLabel": "12 = 2² × 3",
+          "rightLabel": "18 = 2 × 3²",
+          "overlapLabel": "GCF",
+          "leftOnlyItems": "2",
+          "overlapItems": "2 × 3 = 6",
+          "rightOnlyItems": "3",
+          "caption": "The prime factors 12 and 18 share (the overlap) form their GCF; combining every factor from both numbers gives their LCM."
+        },
+        "anatomy": {
+          "intro": "Every calculation returns exactly two headline numbers, computed from the same input list.",
+          "labelGcf": "GCF",
+          "labelLcm": "LCM",
+          "caption": "For 12 and 18: a GCF of 6 and an LCM of 36."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Numbers",
+            "meaning": "A list of two or more positive integers to find the greatest common factor and least common multiple of.",
+            "unit": "Positive integers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fewer than two numbers entered",
+            "description": "GCF and LCM are only meaningful for two or more numbers — the tool returns a \"too-few-numbers\" error rather than a degenerate single-number result."
+          },
+          {
+            "title": "Non-integer or non-positive input",
+            "description": "Every entered value is validated to be a positive integer; a decimal, zero, or negative entry returns an \"invalid-number\" error instead of silently truncating or taking an absolute value."
+          },
+          {
+            "title": "Prime factorization stops correctly at √n",
+            "description": "The trial-division factorization loop only tests divisors up to the square root of the remaining value, and captures whatever prime remains above that — correct and efficient even for larger inputs, not just small textbook examples."
+          },
+          {
+            "title": "Pairwise reduction generalizes beyond two numbers",
+            "description": "Because GCF and LCM are each reduced pairwise across the whole list rather than computed by a two-number-only formula, the tool handles any list length — three, four, or more numbers — with no special-casing."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is GCF calculated with the Euclidean algorithm instead of comparing factor lists?",
+            "answer": "The Euclidean algorithm (repeatedly replacing the larger number with the remainder of dividing it by the smaller, until the remainder is zero) finds the GCF in a handful of steps regardless of how large the numbers are, while listing and comparing every factor becomes slow for large numbers."
+          },
+          {
+            "question": "Why is LCM derived from GCF instead of computed separately?",
+            "answer": "LCM(a,b) = |a×b| / GCF(a,b) is a direct mathematical identity — once GCF is known, LCM follows from one multiplication and one division, so there's no need for a second, independent search algorithm."
+          },
+          {
+            "question": "Why does the tool show prime factorizations if I only asked for GCF and LCM?",
+            "answer": "The prime factorization is the \"why\" behind the two numbers, not just the numbers themselves — seeing which prime factors each number shares makes it visible exactly which primes contribute to the GCF, rather than presenting GCF and LCM as opaque results."
+          },
+          {
+            "question": "Can this tool find the GCF or LCM of more than two numbers?",
+            "answer": "Yes — because both are reduced pairwise across the entire input list (GCF(a,b,c) = GCF(GCF(a,b),c), and the same pattern for LCM), any number of inputs works, not just exactly two."
+          }
+        ]
+      },
+      "fraction-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Fraction Calculator: the arithmetic rules behind its four operations, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionBarModel": "Fractions as Bar Models",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "a/b + c/d = (a×d + c×b) / (b×d), simplified",
+          "note": "Addition and subtraction convert both fractions to a common denominator (the least common multiple of the two denominators) before combining numerators; multiplication and division use entirely different rules — multiply straight across, or multiply by the reciprocal."
+        },
+        "flowchart": {
+          "intro": "Which rule applies depends entirely on the selected operation — add/subtract find a common denominator first, while multiply/divide never need one.",
+          "steps": [
+            "Simplify both input fractions individually by dividing by their GCD",
+            "For add or subtract: find the least common denominator, scale both numerators to match it, then combine",
+            "For multiply: multiply the two numerators together and the two denominators together directly",
+            "For divide: multiply the first fraction by the reciprocal of the second",
+            "Simplify the final result and convert it to a decimal and, if improper, a mixed number"
+          ],
+          "caption": "The operation-dependent arithmetic path this tool runs on every calculation."
+        },
+        "barModel": {
+          "intro": "A fraction represents equal-sized parts of a whole — this bar splits into equal segments and shades the numerator's count of them.",
+          "caption": "3/4 shown as 3 shaded segments out of 4 equal parts of a bar."
+        },
+        "anatomy": {
+          "intro": "A result greater than one whole (an improper fraction) can equivalently be shown as whole units plus a remaining fraction.",
+          "caption": "7/4 shown as 7 shaded quarter-segments — one full bar (4/4) plus 3/4 of a second, matching the mixed number 1¾."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Numerator A / Denominator A",
+            "meaning": "The first fraction, entered as two whole numbers.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Numerator B / Denominator B",
+            "meaning": "The second fraction, entered as two whole numbers.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Which arithmetic operation to perform on the two fractions — add, subtract, multiply, or divide.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero denominator on either fraction",
+            "description": "A denominator of zero makes a fraction undefined — the tool checks both denominators before any arithmetic and returns a \"zero-denominator\" error rather than computing with an undefined value."
+          },
+          {
+            "title": "Dividing by a zero fraction",
+            "description": "Division flips the second fraction and multiplies — flipping 0/n produces a denominator of zero, so the tool specifically detects a zero numerator in division mode and returns \"divide-by-zero\" before attempting that flip."
+          },
+          {
+            "title": "Negative denominators are normalized",
+            "description": "The simplification step moves any negative sign to the numerator so the denominator is always shown as positive, keeping results in the conventional form rather than technically-correct-but-unusual negative-denominator fractions."
+          },
+          {
+            "title": "Whole-number and improper results are surfaced explicitly",
+            "description": "The result flags whether it simplified to an exact whole number (denominator of 1) and separately whether it's improper (numerator ≥ denominator), providing a mixed-number equivalent only when the result is actually improper."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do addition and subtraction need a common denominator but multiplication doesn't?",
+            "answer": "Adding or subtracting fractions requires comparing like-sized pieces — you can't directly add \"thirds\" to \"quarters\" without first re-expressing them as the same-sized piece (a common denominator). Multiplication has no such requirement: multiplying numerators and denominators straight across is mathematically valid regardless of the starting denominators."
+          },
+          {
+            "question": "Why does the tool show simplified versions of my input fractions before the result?",
+            "answer": "Showing each input fraction already reduced to lowest terms confirms the tool correctly understood what was entered and makes the later common-denominator or cross-multiplication step easier to follow, since it's working with the simplest form rather than an unreduced one."
+          },
+          {
+            "question": "How does dividing fractions work mathematically?",
+            "answer": "Dividing by a fraction is the same as multiplying by its reciprocal (flip the numerator and denominator) — this tool performs exactly that flip-and-multiply internally rather than any direct division rule."
+          },
+          {
+            "question": "Why is the least common denominator used instead of just multiplying the two denominators together?",
+            "answer": "Multiplying the denominators together always produces a valid common denominator, but often a larger one than necessary, requiring extra simplification afterward — the least common multiple keeps the intermediate numbers smaller while still being mathematically correct."
+          }
+        ]
+      },
+      "scientific-notation-converter": {
+        "version": "v1",
+        "description": "Technical reference for the Scientific Notation Converter: the normalization rules behind its four operations, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionMagnitude": "Magnitude on a Number Line",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "value = coefficient × 10^exponent, where 1 ≤ |coefficient| < 10",
+          "note": "Proper scientific notation requires the coefficient to fall between 1 and 10 in absolute value — the tool's normalize step repeatedly multiplies or divides by 10 (adjusting the exponent oppositely) until this holds."
+        },
+        "flowchart": {
+          "intro": "The same normalization routine underlies all four operations — converting to scientific notation, converting back to standard form, and multiplying or dividing two already-scientific values.",
+          "steps": [
+            "For \"to scientific\": treat the standard value as coefficient with exponent 0, then normalize",
+            "For multiply: multiply the two coefficients and add the two exponents, then normalize",
+            "For divide: divide the two coefficients and subtract the exponents, then normalize",
+            "Normalize by shifting the decimal point until the coefficient's absolute value is between 1 and 10, adjusting the exponent oppositely each shift",
+            "Separately compute the engineering-notation form, whose exponent is always a multiple of 3"
+          ],
+          "caption": "The shared normalization step every operation in this tool funnels through."
+        },
+        "magnitude": {
+          "intro": "Scientific notation exists because everyday numbers span an enormous range of magnitudes — this line places common reference points by their power of ten.",
+          "caption": "Common magnitudes from thousandths to billions, positioned by exponent along a single line.",
+          "markers": [
+            {
+              "label": "0.001 (thousandth)",
+              "exponent": -3
+            },
+            {
+              "label": "1",
+              "exponent": 0
+            },
+            {
+              "label": "1,000 (thousand)",
+              "exponent": 3
+            },
+            {
+              "label": "1,000,000 (million)",
+              "exponent": 6
+            },
+            {
+              "label": "1,000,000,000 (billion)",
+              "exponent": 9
+            },
+            {
+              "label": "1,000,000,000,000 (trillion)",
+              "exponent": 12
+            }
+          ]
+        },
+        "anatomy": {
+          "intro": "Every scientific-notation value breaks down into exactly two parts: a coefficient between 1 and 10, and a power-of-ten exponent.",
+          "labelCoefficient": "Coefficient",
+          "labelExponent": "Exponent",
+          "caption": "4.2 × 10⁹ — a coefficient of 4.2 and an exponent of 9."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Standard Value",
+            "meaning": "A number in ordinary decimal form, used only in \"to scientific\" mode as the starting value to convert.",
+            "unit": "Number"
+          },
+          {
+            "symbol": "Coefficient A / Exponent A",
+            "meaning": "The first value already in scientific notation, entered as its coefficient and exponent separately — used in \"to standard,\" multiply, and divide modes.",
+            "unit": "Number / Integer"
+          },
+          {
+            "symbol": "Coefficient B / Exponent B",
+            "meaning": "The second value in scientific notation, used only in multiply and divide modes.",
+            "unit": "Number / Integer"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Which of the four conversions or operations to perform.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero coefficient",
+            "description": "A coefficient of exactly zero is a special case the normalize routine detects directly — zero has no meaningful exponent to shift toward, so it's returned as coefficient 0, exponent 0 rather than looping indefinitely."
+          },
+          {
+            "title": "Dividing by zero",
+            "description": "If the second value's coefficient is zero in divide mode, the tool returns a \"divide-by-zero\" error and a zeroed result instead of computing an infinite or undefined quotient."
+          },
+          {
+            "title": "Coefficient exactly at or crossing 10",
+            "description": "The normalize loop uses a while condition (not a single check), so a coefficient that starts at, say, 100 correctly shifts down through multiple factors of 10 until it lands strictly below 10, rather than only handling a single-digit shift."
+          },
+          {
+            "title": "Engineering notation exponent alignment",
+            "description": "Engineering notation restricts exponents to multiples of 3 (matching SI prefixes like kilo, mega, giga) — the tool computes this as a separate, correctly-moduloed adjustment from the standard scientific-notation exponent, not simply by rounding it."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What's the difference between scientific and engineering notation here?",
+            "answer": "Scientific notation only requires the coefficient to be between 1 and 10, giving any integer exponent; engineering notation additionally restricts the exponent to a multiple of 3, aligning it with common unit prefixes like kilo (10³), mega (10⁶), and giga (10⁹) — this tool computes both forms from the same input."
+          },
+          {
+            "question": "Why does multiplying two scientific-notation numbers just add the exponents?",
+            "answer": "Multiplying powers of the same base adds their exponents (10^a × 10^b = 10^(a+b)) — this is a direct consequence of exponent rules, so the tool multiplies the coefficients together and adds the exponents, then re-normalizes since that raw combination may not already have a coefficient between 1 and 10."
+          },
+          {
+            "question": "How does the tool know the name for a given magnitude, like \"billion\"?",
+            "answer": "It looks up the engineering-notation exponent (always a multiple of 3) against a fixed table of standard short-scale names — thousand, million, billion, trillion, and their fractional counterparts — returning no name if the magnitude falls outside that mapped range."
+          },
+          {
+            "question": "Why is normalization needed after every operation instead of just formatting the raw result?",
+            "answer": "Multiplying or dividing two already-normalized coefficients can easily produce a result outside the 1–10 range (e.g. 5 × 4 = 20) — normalization is what guarantees the final answer is actually valid scientific notation, not just a mathematically correct but improperly formatted number."
+          }
+        ]
+      },
+      "significant-figures-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Significant Figures Calculator: the digit-counting rules behind its six operations, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionDigits": "Which Digits Count",
+        "sectionAnatomy": "Anatomy of the Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Result precision = min(sig figs or decimal places of every input)",
+          "note": "The core rule of significant-figures propagation: a calculated result can never be more precise than its least precise input. Multiplication and division limit the result by significant figures; addition and subtraction limit it by decimal places instead."
+        },
+        "flowchart": {
+          "intro": "Significant figures are a property of how a number was written, not just its numeric value — this tool operates on the raw digit string entered, never on a number that has already discarded that formatting information.",
+          "steps": [
+            "Count each input's significant figures directly from its digit string (leading zeros never count; trailing zeros after a decimal point do)",
+            "Separately count each input's decimal places",
+            "For add/subtract: round the result to the fewest decimal places among the inputs",
+            "For multiply/divide: round the result to the fewest significant figures among the inputs",
+            "For count/round modes: report or apply significant figures to a single input directly"
+          ],
+          "caption": "The precision-propagation rule this tool applies, which differs for addition/subtraction versus multiplication/division."
+        },
+        "digits": {
+          "intro": "Not every digit in a written number counts as significant — leading zeros are placeholders, while trailing zeros after a decimal point are measured precision.",
+          "significantLabel": "Significant",
+          "notSignificantLabel": "Not counted (decimal point)",
+          "caption": "\"100.20\" has 5 significant figures — every digit here counts, including both trailing zeros, because a decimal point is present."
+        },
+        "anatomy": {
+          "intro": "A multiply/divide result's significant figures are set by whichever input had fewer — not averaged, not the more precise one.",
+          "labelInputA": "Input A (4 sig figs)",
+          "labelInputB": "Input B (2 sig figs)",
+          "labelResult": "Result (2 sig figs)",
+          "caption": "Multiplying a 4-significant-figure number by a 2-significant-figure number yields a result limited to 2 significant figures."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Value A",
+            "meaning": "The first number, entered and processed as a raw text string so its exact written digits (including trailing zeros) are preserved.",
+            "unit": "Digit string"
+          },
+          {
+            "symbol": "Value B",
+            "meaning": "The second number, used by add/subtract/multiply/divide modes — not needed for count or round.",
+            "unit": "Digit string"
+          },
+          {
+            "symbol": "Round To Digits",
+            "meaning": "The target number of significant figures to round to, used only in round mode.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Which of the six operations to perform: count, round, add, subtract, multiply, or divide.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leading zeros never count",
+            "description": "In a number like \"0.0042,\" the tool correctly excludes both zeros before the first nonzero digit — they exist only to place the decimal point, not to indicate measured precision."
+          },
+          {
+            "title": "Trailing zeros without a decimal point are ambiguous",
+            "description": "For a whole number like \"1200\" with no decimal point, trailing zeros are genuinely ambiguous in standard notation — the tool follows the common convention of not counting them as significant, distinct from \"1200.\" (with an explicit decimal point) where they would count."
+          },
+          {
+            "title": "Division by zero",
+            "description": "The divide operation explicitly checks for a zero second value and returns a \"divide-by-zero\" error rather than computing Infinity, keeping the result type consistent with every other operation."
+          },
+          {
+            "title": "Non-numeric input",
+            "description": "Both values are validated with Number() before any calculation; a value that doesn't parse to a finite number returns an \"invalid-number\" error instead of propagating NaN through the rest of the computation."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do addition and multiplication use different precision rules?",
+            "answer": "Multiplication and division limit the result by significant figures because relative precision compounds multiplicatively; addition and subtraction limit the result by decimal places instead, because absolute precision (not relative) is what's preserved when quantities are combined by adding or subtracting — these are two genuinely different propagation rules from measurement science, not one rule applied two ways."
+          },
+          {
+            "question": "Why does this tool need the number as text instead of just a number?",
+            "answer": "JavaScript's native number type discards how a value was written — 100 and 100.00 are numerically identical but represent different amounts of measured precision (1 vs. 5 significant figures). Keeping the raw digit string is the only way to recover that precision information."
+          },
+          {
+            "question": "How does rounding to significant figures differ from rounding to decimal places?",
+            "answer": "Rounding to decimal places always keeps the same number of digits after the decimal point regardless of the number's size; rounding to significant figures instead counts meaningful digits starting from the first nonzero digit, so it adapts correctly whether the number is 0.0031 or 3,100,000."
+          },
+          {
+            "question": "Why is trailing-zero significance different depending on whether there's a decimal point?",
+            "answer": "This reflects a real ambiguity in standard notation: \"1200\" could mean a measurement precise to the nearest 1 (with two coincidentally-zero digits) or to the nearest 100 — there's no way to tell without more context. Adding a decimal point (\"1200.\") is the conventional signal that all four digits were actually measured, which is why the tool treats the two forms differently."
+          }
+        ]
       }
     }
   }

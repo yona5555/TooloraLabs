@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import GcfLcmInputPanel from "./GcfLcmInputPanel";
 import GcfLcmResult from "./GcfLcmResult";
 import GcfLcmQuickReference from "./GcfLcmQuickReference";
@@ -49,6 +50,7 @@ export default function GcfLcmCalculator({ education }: { education: ReactNode }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="gcf-lcm-calculator" />
               <GcfLcmQuickReference />
             </div>
           }
