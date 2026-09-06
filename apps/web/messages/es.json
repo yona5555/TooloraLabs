@@ -5863,7 +5863,10 @@
         "resistanceLabel": "Resistencia (Ω)",
         "resistancePlaceholder": "p. ej. 6",
         "powerLabel": "Potencia (W)",
-        "powerPlaceholder": "p. ej. 24"
+        "powerPlaceholder": "p. ej. 24",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "triangleCaption": "El valor que calcula la pestaña actual está resaltado."
       },
       "result": {
         "heading": "Resultado",
@@ -5875,7 +5878,11 @@
         "current": "Corriente",
         "resistance": "Resistencia",
         "power": "Potencia",
-        "diagramCaption": "El triángulo de la Ley de Ohm — los valores resaltados fueron calculados, no introducidos directamente."
+        "diagramCaption": "El triángulo de la Ley de Ohm — los valores resaltados fueron calculados, no introducidos directamente.",
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de la Ley de Ohm.",
+        "sentence": "A {voltage} V y {current} A, la resistencia del circuito es {resistance} Ω.",
+        "circuitCaption": "Un circuito de un solo bucle etiquetado con el voltaje, la corriente y la resistencia de este resultado.",
+        "powerFormulasCaption": "El mismo valor de potencia, alcanzado de tres formas algebraicamente equivalentes."
       },
       "education": {
         "intro": {
@@ -5885,7 +5892,21 @@
             "caption": "El triángulo de la Ley de Ohm para 12 V sobre una resistencia de 6 Ω, que da una corriente de 2 A — con la resistencia resaltada como el valor calculado."
           },
           "paragraph2": "La potencia eléctrica, medida en vatios (W), se combina con la Ley de Ohm mediante P = V × I. Sustituyendo V = I × R o I = V ÷ R en esa fórmula se obtienen dos expresiones de potencia equivalentes, P = I² × R y P = V² ÷ R, razón por la cual dos cualesquiera de voltaje, corriente, resistencia y potencia bastan para determinar las otras dos.",
-          "paragraph3": "Esta calculadora admite las seis combinaciones posibles de cantidades conocidas: voltaje y corriente, voltaje y resistencia, corriente y resistencia, y las tres combinaciones que incluyen la potencia, calculando el conjunto completo de V, I, R y P para cada una."
+          "paragraph3": "Esta calculadora admite las seis combinaciones posibles de cantidades conocidas: voltaje y corriente, voltaje y resistencia, corriente y resistencia, y las tres combinaciones que incluyen la potencia, calculando el conjunto completo de V, I, R y P para cada una.",
+          "viRelation": {
+            "xLabel": "Corriente (I)",
+            "yLabel": "Voltaje (V)",
+            "slopeLabel": "pendiente = R",
+            "caption": "El voltaje graficado contra la corriente a una resistencia fija es una línea recta que pasa por el origen: la Ley de Ohm es lineal."
+          },
+          "powerRating": {
+            "caption": "Dónde cae un resultado típico frente a las potencias nominales comunes de resistencias fijas.",
+            "r1": "1/8W",
+            "r2": "1/4W",
+            "r3": "1/2W",
+            "r4": "1W",
+            "r5": "2W"
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -5996,6 +6017,29 @@
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "gauge": {
+        "low": "Potencia baja",
+        "moderate": "Potencia moderada",
+        "high": "Potencia alta"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "ph-calculator": {

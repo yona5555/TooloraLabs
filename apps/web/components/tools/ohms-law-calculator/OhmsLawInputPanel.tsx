@@ -1,7 +1,11 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import OhmsLawModeTabs from "./OhmsLawModeTabs";
+import OhmsLawTriangleDiagram from "./OhmsLawTriangleDiagram";
 import type { OhmsLawKnownPair } from "./types";
 
 type OhmsLawInputPanelProps = {
@@ -15,6 +19,8 @@ type OhmsLawInputPanelProps = {
   onResistanceChange: (value: string) => void;
   power: string;
   onPowerChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 const FIELDS_BY_PAIR: Record<OhmsLawKnownPair, ("voltage" | "current" | "resistance" | "power")[]> = {
@@ -24,6 +30,15 @@ const FIELDS_BY_PAIR: Record<OhmsLawKnownPair, ("voltage" | "current" | "resista
   VP: ["voltage", "power"],
   IP: ["current", "power"],
   RP: ["resistance", "power"],
+};
+
+const UNKNOWN_BY_PAIR: Record<OhmsLawKnownPair, ("voltage" | "current" | "resistance")[]> = {
+  VI: ["resistance"],
+  VR: ["current"],
+  IR: ["voltage"],
+  VP: ["current", "resistance"],
+  IP: ["voltage", "resistance"],
+  RP: ["voltage", "current"],
 };
 
 export default function OhmsLawInputPanel({
@@ -37,29 +52,22 @@ export default function OhmsLawInputPanel({
   onResistanceChange,
   power,
   onPowerChange,
+  onCalculate,
+  onClear,
 }: OhmsLawInputPanelProps) {
   const t = useTranslations("tools.ohms-law-calculator.form");
   const activeFields = FIELDS_BY_PAIR[knownPair];
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownPairLabel")}</span>
-        <select
-          value={knownPair}
-          onChange={(e) => onKnownPairChange(e.target.value as OhmsLawKnownPair)}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-        >
-          <option value="VI">{t("pair.VI")}</option>
-          <option value="VR">{t("pair.VR")}</option>
-          <option value="IR">{t("pair.IR")}</option>
-          <option value="VP">{t("pair.VP")}</option>
-          <option value="IP">{t("pair.IP")}</option>
-          <option value="RP">{t("pair.RP")}</option>
-        </select>
-      </label>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownPairLabel")}</span>
+        <OhmsLawModeTabs knownPair={knownPair} onKnownPairChange={onKnownPairChange} />
+      </div>
 
-      <div className="mt-5 space-y-5">
+      <OhmsLawTriangleDiagram voltageText="V" currentText="I" resistanceText="R" highlighted={UNKNOWN_BY_PAIR[knownPair]} caption={t("triangleCaption")} />
+
+      <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {activeFields.includes("voltage") && (
           <ToolInput
             label={t("voltageLabel")}
@@ -100,7 +108,18 @@ export default function OhmsLawInputPanel({
             onChange={(e) => onPowerChange(e.target.value)}
           />
         )}
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

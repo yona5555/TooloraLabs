@@ -5863,7 +5863,10 @@
         "resistanceLabel": "Widerstand (Ω)",
         "resistancePlaceholder": "z. B. 6",
         "powerLabel": "Leistung (W)",
-        "powerPlaceholder": "z. B. 24"
+        "powerPlaceholder": "z. B. 24",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "triangleCaption": "Der vom aktuellen Tab berechnete Wert ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -5875,7 +5878,11 @@
         "current": "Stromstärke",
         "resistance": "Widerstand",
         "power": "Leistung",
-        "diagramCaption": "Das Ohmsche Dreieck — die hervorgehobenen Werte wurden berechnet, nicht direkt eingegeben."
+        "diagramCaption": "Das Ohmsche Dreieck — die hervorgehobenen Werte wurden berechnet, nicht direkt eingegeben.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ohmsches-Gesetz-Ergebnis zu sehen.",
+        "sentence": "Bei {voltage} V und {current} A beträgt der Widerstand des Stromkreises {resistance} Ω.",
+        "circuitCaption": "Ein einschleifiger Stromkreis, beschriftet mit Spannung, Strom und Widerstand dieses Ergebnisses.",
+        "powerFormulasCaption": "Derselbe Leistungswert, auf drei algebraisch äquivalente Arten erreicht."
       },
       "education": {
         "intro": {
@@ -5885,7 +5892,21 @@
             "caption": "Das Ohmsche Dreieck für 12 V an einem Widerstand von 6 Ω, was eine Stromstärke von 2 A ergibt — der Widerstand ist als berechneter Wert hervorgehoben."
           },
           "paragraph2": "Elektrische Leistung, gemessen in Watt (W), verbindet sich über P = V × I mit dem Ohmschen Gesetz. Setzt man V = I × R oder I = V ÷ R in diese Formel ein, ergeben sich zwei gleichwertige Leistungsausdrücke, P = I² × R und P = V² ÷ R, weshalb zwei beliebige der Größen Spannung, Stromstärke, Widerstand und Leistung genügen, um die anderen beiden zu bestimmen.",
-          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P."
+          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P.",
+          "viRelation": {
+            "xLabel": "Strom (I)",
+            "yLabel": "Spannung (V)",
+            "slopeLabel": "Steigung = R",
+            "caption": "Spannung gegen Strom bei festem Widerstand aufgetragen ergibt eine Gerade durch den Ursprung — das Ohmsche Gesetz ist linear."
+          },
+          "powerRating": {
+            "caption": "Wo ein typisches Ergebnis im Vergleich zu gängigen Festwiderstand-Leistungsklassen liegt.",
+            "r1": "1/8W",
+            "r2": "1/4W",
+            "r3": "1/2W",
+            "r4": "1W",
+            "r5": "2W"
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -5996,6 +6017,29 @@
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "gauge": {
+        "low": "Geringe Leistung",
+        "moderate": "Mittlere Leistung",
+        "high": "Hohe Leistung"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "ph-calculator": {

@@ -5863,7 +5863,10 @@
         "resistanceLabel": "Résistance (Ω)",
         "resistancePlaceholder": "p. ex. 6",
         "powerLabel": "Puissance (W)",
-        "powerPlaceholder": "p. ex. 24"
+        "powerPlaceholder": "p. ex. 24",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "triangleCaption": "La valeur calculée par l'onglet actif est mise en évidence."
       },
       "result": {
         "heading": "Résultat",
@@ -5875,7 +5878,11 @@
         "current": "Courant",
         "resistance": "Résistance",
         "power": "Puissance",
-        "diagramCaption": "Le triangle de la Loi d'Ohm — les valeurs mises en évidence ont été calculées, et non saisies directement."
+        "diagramCaption": "Le triangle de la Loi d'Ohm — les valeurs mises en évidence ont été calculées, et non saisies directement.",
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de la loi d'Ohm.",
+        "sentence": "À {voltage} V et {current} A, la résistance du circuit est de {resistance} Ω.",
+        "circuitCaption": "Un circuit à boucle unique étiqueté avec la tension, le courant et la résistance de ce résultat.",
+        "powerFormulasCaption": "La même valeur de puissance, obtenue de trois façons algébriquement équivalentes."
       },
       "education": {
         "intro": {
@@ -5885,7 +5892,21 @@
             "caption": "Le triangle de la Loi d'Ohm pour 12 V aux bornes d'une résistance de 6 Ω, donnant un courant de 2 A — la résistance étant mise en évidence comme la valeur calculée."
           },
           "paragraph2": "La puissance électrique, mesurée en watts (W), se combine à la Loi d'Ohm par P = V × I. En substituant V = I × R ou I = V ÷ R dans cette formule, on obtient deux expressions de puissance équivalentes, P = I² × R et P = V² ÷ R, ce qui explique pourquoi deux grandeurs quelconques parmi la tension, le courant, la résistance et la puissance suffisent à déterminer les deux autres.",
-          "paragraph3": "Ce calculateur prend en charge les six combinaisons possibles de grandeurs connues — tension et courant, tension et résistance, courant et résistance, ainsi que les trois combinaisons incluant la puissance — en calculant l'ensemble complet V, I, R, P pour chacune."
+          "paragraph3": "Ce calculateur prend en charge les six combinaisons possibles de grandeurs connues — tension et courant, tension et résistance, courant et résistance, ainsi que les trois combinaisons incluant la puissance — en calculant l'ensemble complet V, I, R, P pour chacune.",
+          "viRelation": {
+            "xLabel": "Courant (I)",
+            "yLabel": "Tension (V)",
+            "slopeLabel": "pente = R",
+            "caption": "La tension tracée en fonction du courant à résistance fixe est une droite passant par l'origine — la loi d'Ohm est linéaire."
+          },
+          "powerRating": {
+            "caption": "Où se situe un résultat typique par rapport aux puissances nominales courantes des résistances fixes.",
+            "r1": "1/8W",
+            "r2": "1/4W",
+            "r3": "1/2W",
+            "r4": "1W",
+            "r5": "2W"
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -5996,6 +6017,29 @@
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Lire le Texte Original"
         }
+      },
+      "gauge": {
+        "low": "Faible puissance",
+        "moderate": "Puissance modérée",
+        "high": "Puissance élevée"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "ph-calculator": {

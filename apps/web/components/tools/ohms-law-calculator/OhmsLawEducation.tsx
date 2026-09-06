@@ -5,6 +5,8 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import OhmsLawTriangleDiagram from "./OhmsLawTriangleDiagram";
+import OhmsLawVIRelationDiagram from "./OhmsLawVIRelationDiagram";
+import OhmsLawPowerRatingDiagram from "./OhmsLawPowerRatingDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -27,7 +29,18 @@ export default async function OhmsLawEducation() {
           caption={t("intro.diagram.caption")}
         />
         <p>{t("intro.paragraph2")}</p>
+        <OhmsLawVIRelationDiagram
+          xLabel={t("intro.viRelation.xLabel")}
+          yLabel={t("intro.viRelation.yLabel")}
+          slopeLabel={t("intro.viRelation.slopeLabel")}
+          caption={t("intro.viRelation.caption")}
+        />
         <p>{t("intro.paragraph3")}</p>
+        <OhmsLawPowerRatingDiagram
+          powerWatts={0.5}
+          caption={t("intro.powerRating.caption")}
+          ratingLabels={[t("intro.powerRating.r1"), t("intro.powerRating.r2"), t("intro.powerRating.r3"), t("intro.powerRating.r4"), t("intro.powerRating.r5")]}
+        />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

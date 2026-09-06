@@ -5863,7 +5863,10 @@
         "resistanceLabel": "Resistance (Ω)",
         "resistancePlaceholder": "e.g. 6",
         "powerLabel": "Power (W)",
-        "powerPlaceholder": "e.g. 24"
+        "powerPlaceholder": "e.g. 24",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "triangleCaption": "The value the current tab solves for is highlighted."
       },
       "result": {
         "heading": "Result",
@@ -5875,7 +5878,11 @@
         "current": "Current",
         "resistance": "Resistance",
         "power": "Power",
-        "diagramCaption": "The Ohm's Law triangle — the highlighted values were solved for, not entered directly."
+        "diagramCaption": "The Ohm's Law triangle — the highlighted values were solved for, not entered directly.",
+        "emptyStateMessage": "Enter values and press Calculate to see your Ohm's Law result.",
+        "sentence": "At {voltage} V and {current} A, the circuit's resistance is {resistance} Ω.",
+        "circuitCaption": "A single-loop circuit labeled with this result's voltage, current, and resistance.",
+        "powerFormulasCaption": "The same power value, reached three algebraically equivalent ways."
       },
       "education": {
         "intro": {
@@ -5885,7 +5892,21 @@
             "caption": "The Ohm's Law triangle for 12 V across a 6 Ω resistance, giving 2 A of current — resistance highlighted as the solved value."
           },
           "paragraph2": "Electrical power, measured in watts (W), combines with Ohm's Law through P = V × I. Substituting V = I × R or I = V ÷ R into that formula produces two equivalent power expressions, P = I² × R and P = V² ÷ R, which is why any two of voltage, current, resistance, and power are enough to determine the other two.",
-          "paragraph3": "This calculator supports all six possible pairs of known quantities — voltage & current, voltage & resistance, current & resistance, and the three pairings that include power — computing the full V, I, R, P set for each one."
+          "paragraph3": "This calculator supports all six possible pairs of known quantities — voltage & current, voltage & resistance, current & resistance, and the three pairings that include power — computing the full V, I, R, P set for each one.",
+          "viRelation": {
+            "xLabel": "Current (I)",
+            "yLabel": "Voltage (V)",
+            "slopeLabel": "slope = R",
+            "caption": "Voltage plotted against current at a fixed resistance is a straight line through the origin — Ohm's Law is linear."
+          },
+          "powerRating": {
+            "caption": "Where a typical result falls against common fixed-resistor wattage ratings.",
+            "r1": "1/8W",
+            "r2": "1/4W",
+            "r3": "1/2W",
+            "r4": "1W",
+            "r5": "2W"
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -5996,6 +6017,29 @@
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "gauge": {
+        "low": "Low power",
+        "moderate": "Moderate power",
+        "high": "High power"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "ph-calculator": {
