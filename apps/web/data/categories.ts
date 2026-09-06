@@ -85,6 +85,12 @@ export const categories: Category[] = [
     icon: "calendar-clock",
   },
   {
+    slug: "fun-entertainment",
+    title: "Fun & Entertainment",
+    description: "Dice, games, and playful calculators for entertainment purposes only.",
+    icon: "party-popper",
+  },
+  {
     slug: "weather",
     title: "Weather",
     description: "Current conditions and forecasts for cities around the world.",

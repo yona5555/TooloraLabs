@@ -88,7 +88,7 @@ export default function DiceRoller({ education }: { education: ReactNode }) {
               onClearHistory={handleClearHistory}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="dice-roller" category="date-time" />}
+          sidebar={<RelatedToolsSidebar currentSlug="dice-roller" category="fun-entertainment" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

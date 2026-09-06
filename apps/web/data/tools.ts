@@ -908,7 +908,7 @@ export const tools: Tool[] = [
   {
     slug: "dice-roller",
     title: "Dice Roller",
-    category: "date-time",
+    category: "fun-entertainment",
     description:
       "Roll customizable virtual dice (d4, d6, d8, d10, d12, d20) with a roll history log.",
     featured: false,
@@ -923,7 +923,7 @@ export const tools: Tool[] = [
   {
     slug: "love-calculator",
     title: "Love Calculator",
-    category: "date-time",
+    category: "fun-entertainment",
     description:
       "A fun, name-based compatibility percentage calculator. For entertainment purposes only.",
     featured: false,

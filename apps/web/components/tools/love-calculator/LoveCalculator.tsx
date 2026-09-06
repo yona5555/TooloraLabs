@@ -55,7 +55,7 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
               <LoveResult result={{ error: "empty-name", percentage: 0 }} />
             )
           }
-          sidebar={<RelatedToolsSidebar currentSlug="love-calculator" category="date-time" />}
+          sidebar={<RelatedToolsSidebar currentSlug="love-calculator" category="fun-entertainment" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

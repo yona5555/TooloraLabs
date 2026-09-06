@@ -10,6 +10,7 @@ import {
   GraduationCap,
   Globe,
   HeartPulse,
+  PartyPopper,
   PiggyBank,
   Receipt,
   RefreshCw,
@@ -35,6 +36,7 @@ export const categoryIcons: Record<string, LucideIcon> = {
   "graduation-cap": GraduationCap,
   "calendar-clock": CalendarClock,
   "cloud-sun": CloudSun,
+  "party-popper": PartyPopper,
 };
 
 export function getCategoryIcon(icon: string): LucideIcon {

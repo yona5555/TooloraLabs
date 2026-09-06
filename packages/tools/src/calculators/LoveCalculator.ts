@@ -36,7 +36,7 @@ export class LoveCalculator extends BaseCalculator<LoveCalculatorInput, LoveCalc
     id: "love-calculator",
     slug: "love-calculator",
     name: "Love Calculator",
-    category: "date-time",
+    category: "fun-entertainment",
     description: "A fun, name-based compatibility percentage calculator for entertainment purposes only.",
     version: "1.0.0",
   };
