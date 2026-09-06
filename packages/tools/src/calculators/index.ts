@@ -82,3 +82,4 @@ export * from "./RomanNumeralCalculator";
 export * from "./ReadingTimeCalculator";
 export * from "./LoremIpsumCalculator";
 export * from "./TextLogoCalculator";
+export * from "./RandomQuoteCalculator";

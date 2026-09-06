@@ -1364,4 +1364,19 @@ export const tools: Tool[] = [
       "unicode text generator",
     ],
   },
+  {
+    slug: "random-quote-generator",
+    title: "Random Quote Generator",
+    category: "fun-entertainment",
+    description:
+      "Displays a random quote from a curated, documented-source collection spanning motivational, literary, and philosophical categories.",
+    featured: false,
+    keywords: [
+      "random quote generator",
+      "quote of the day",
+      "inspirational quotes",
+      "famous quotes generator",
+      "motivational quote generator",
+    ],
+  },
 ];

@@ -35,7 +35,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "zodiac-sign-calculator", icon: "Star" },
     { id: "steps-to-calories-calculator", icon: "Footprints" },
     { id: "heat-index-calculator", icon: "CloudRain" },
-    { id: "random-quote-generator", icon: "Quote" },
     { id: "tree-age-calculator", icon: "TreePine" },
     { id: "hijri-gregorian-quick-converter", icon: "Moon" },
     { id: "iq-estimate-calculator", icon: "Brain" },
