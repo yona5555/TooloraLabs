@@ -14613,7 +14613,61 @@
           "note": "Eine grundlegende wissenschaftliche Abhandlung zur Kosten-Umsatz-Gewinn-Analyse innerhalb des breiteren Fachs Controlling, die dieselbe Deckungsbeitragslogik behandelt, die dieses Tool berechnet.",
           "url": "https://doi.org/10.1007/978-1-349-18054-7_5",
           "readOriginal": "Originalkapitel lesen"
+        },
+        "variables": {
+          "title": "Variablen",
+          "intro": "Jede Break-Even-Berechnung in diesem Tool basiert auf nur drei Kosten, plus einem optionalen Gewinnziel.",
+          "items": [
+            {
+              "name": "Fixkosten",
+              "description": "Kosten, die unabhängig von der Anzahl verkaufter Einheiten gleich bleiben — Miete, Gehälter, Versicherung und ähnliche wiederkehrende Ausgaben."
+            },
+            {
+              "name": "Variable Kosten pro Einheit",
+              "description": "Die Kosten, die direkt mit jeder verkauften Einheit skalieren — Materialien, Verpackung oder eine Provision pro Verkauf."
+            },
+            {
+              "name": "Preis pro Einheit",
+              "description": "Der pro Einheit berechnete Preis — muss die variablen Kosten pro Einheit übersteigen, sonst kann kein Verkaufsvolumen jemals die Fixkosten decken."
+            },
+            {
+              "name": "Deckungsbeitrag",
+              "description": "Preis minus variable Kosten pro Einheit — der Betrag, den jeder Verkauf zur Deckung der Fixkosten beiträgt, bevor ein Gewinn beginnt."
+            }
+          ]
+        },
+        "applications": {
+          "title": "Anwendungen",
+          "intro": "Die Break-Even-Analyse gilt überall dort, wo ein Unternehmen das minimale Verkaufsvolumen kennen muss, um einen Verlust zu vermeiden.",
+          "items": [
+            {
+              "title": "Neuproduktstarts",
+              "description": "Abschätzung, wie viele Einheiten ein neues Produkt verkaufen muss, bevor es aufhört, ein Nettoaufwand für das Unternehmen zu sein."
+            },
+            {
+              "title": "Preisentscheidungen",
+              "description": "Testen, wie eine Preisänderung den Break-Even-Punkt verschiebt — eine kleine Preiserhöhung kann die benötigten Einheiten drastisch senken."
+            },
+            {
+              "title": "Planung für Kleinunternehmen",
+              "description": "Festlegen eines konkreten monatlichen Verkaufsziels, das Miete, Löhne und andere Fixkosten deckt, bevor ein Gewinn realisiert wird."
+            },
+            {
+              "title": "Investitions- und Expansionsentscheidungen",
+              "description": "Bewertung, ob zusätzliche Fixkosten (neue Ausrüstung, eine Neueinstellung) durch das zusätzliche Verkaufsvolumen gerechtfertigt sind, das sie erfordern würden."
+            }
+          ]
         }
+      },
+      "costStructureDiagram": {
+        "title": "Kostenstruktur am Break-Even",
+        "variableCosts": "Variable Kosten",
+        "caption": "Fixkosten gegenüber den gesamten variablen Kosten beim Break-Even-Volumen."
+      },
+      "sensitivityDiagram": {
+        "title": "Break-Even-Sensitivität gegenüber dem Preis",
+        "caption": "Wie viele Einheiten Sie bei unterschiedlichen Preisen verkaufen müssten, bei gleichbleibenden Kosten.",
+        "xLabel": "Preis pro Einheit"
       }
     },
     "graphing-calculator": {

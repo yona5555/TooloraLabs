@@ -5,13 +5,16 @@ import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { BreakEvenCalculator, type BreakEvenOutput } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BreakEvenModeTabs from "./BreakEvenModeTabs";
 import BreakEvenInputPanel from "./BreakEvenInputPanel";
 import BreakEvenResult from "./BreakEvenResult";
 import BreakEvenReference from "./BreakEvenReference";
+import BreakEvenSensitivityDiagram from "./BreakEvenSensitivityDiagram";
 import type { BreakEvenMode } from "./types";
 
 const tool = new BreakEvenCalculator();
@@ -54,6 +57,7 @@ function computeResult(targetMode: BreakEvenMode, inputs: Inputs): ComputeOutcom
 
 export default function BreakEvenCalculatorTool({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.break-even-calculator.errors");
+  const t2 = useTranslations("tools.break-even-calculator");
   const tNav = useTranslations("tools.break-even-calculator.nav");
 
   const [mode, setMode] = useState<BreakEvenMode>("breakEven");
@@ -64,6 +68,7 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
   const [targetProfit, setTargetProfit] = useState(DEFAULTS.targetProfit);
 
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
 
   const [breakEvenOutcome, setBreakEvenOutcome] = useState<ComputeOutcome>(() => computeResult("breakEven", DEFAULTS));
   const [targetProfitOutcome, setTargetProfitOutcome] = useState<ComputeOutcome>({ result: null, errorKey: "" });
@@ -152,12 +157,52 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
     setPricePerUnit(DEFAULTS.pricePerUnit);
     setTargetProfit(DEFAULTS.targetProfit);
     setDigitStyle("western");
+    setCurrency(DEFAULT_CURRENCY);
     setHasCalculated((prev) => ({ ...prev, [mode]: false }));
     window.history.replaceState(null, "", window.location.pathname);
   }
 
+  // Currency is a pure unit conversion on already-entered amounts, not a new calculation — so it
+  // takes effect immediately and recomputes every mode visited so far, matching the pattern used
+  // by every other currency-aware tool on the site.
+  function handleCurrencyChange(next: CurrencyCode) {
+    if (next === currency) return;
+    const convert = (value: string) => convertAmountString(value, currency, next, (raw) => parseLocalizedNumber(raw) || 0);
+    const convertedFixedCosts = convert(fixedCosts);
+    const convertedVariableCost = convert(variableCostPerUnit);
+    const convertedPrice = convert(pricePerUnit);
+    const convertedTargetProfit = convert(targetProfit);
+
+    setFixedCosts(convertedFixedCosts);
+    setVariableCostPerUnit(convertedVariableCost);
+    setPricePerUnit(convertedPrice);
+    setTargetProfit(convertedTargetProfit);
+    setCurrency(next);
+
+    const convertedInputs: Inputs = {
+      fixedCosts: convertedFixedCosts,
+      variableCostPerUnit: convertedVariableCost,
+      pricePerUnit: convertedPrice,
+      targetProfit: convertedTargetProfit,
+    };
+    if (initializedModes.breakEven) setBreakEvenOutcome(computeResult("breakEven", convertedInputs));
+    if (initializedModes.targetProfit) setTargetProfitOutcome(computeResult("targetProfit", convertedInputs));
+  }
+
   const activeOutcome = mode === "breakEven" ? breakEvenOutcome : targetProfitOutcome;
   const errorMessage = activeOutcome.errorKey ? t(activeOutcome.errorKey) : "";
+
+  const activePricePerUnit = parseLocalizedNumber(pricePerUnit) || 0;
+  const activeVariableCost = parseLocalizedNumber(variableCostPerUnit) || 0;
+  const activeFixedCosts = parseLocalizedNumber(fixedCosts) || 0;
+  const sensitivityPoints =
+    activeOutcome.result && activePricePerUnit > activeVariableCost
+      ? [0.7, 0.85, 1, 1.15, 1.3, 1.5].map((factor) => {
+          const testPrice = activePricePerUnit * factor;
+          const margin = testPrice - activeVariableCost;
+          return { price: testPrice, units: margin > 0 ? Math.ceil(activeFixedCosts / margin) : 0 };
+        })
+      : null;
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -173,6 +218,8 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
           input={
             <BreakEvenInputPanel
               mode={mode}
+              currency={currency}
+              onCurrencyChange={handleCurrencyChange}
               fixedCosts={fixedCosts}
               onFixedCostsChange={setFixedCosts}
               variableCostPerUnit={variableCostPerUnit}
@@ -193,9 +240,10 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
                 result={activeOutcome.result}
                 errorMessage={errorMessage}
                 digitStyle={digitStyle}
-                fixedCosts={parseLocalizedNumber(fixedCosts) || 0}
-                variableCostPerUnit={parseLocalizedNumber(variableCostPerUnit) || 0}
-                pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
+                currency={currency}
+                fixedCosts={activeFixedCosts}
+                variableCostPerUnit={activeVariableCost}
+                pricePerUnit={activePricePerUnit}
                 targetProfit={parseLocalizedNumber(targetProfit) || 0}
               />
               <BreakEvenModeTabs mode={mode} onModeChange={handleModeChange} />
@@ -205,6 +253,20 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />
+              <ViewDocsLink slug="break-even-calculator" />
+
+              {hasCalculated[mode] && sensitivityPoints && (
+                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
+                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t2("sensitivityDiagram.title")}</h3>
+                  <BreakEvenSensitivityDiagram
+                    points={sensitivityPoints}
+                    currentPrice={activePricePerUnit}
+                    caption={t2("sensitivityDiagram.caption")}
+                    xLabel={t2("sensitivityDiagram.xLabel")}
+                  />
+                </div>
+              )}
+
               <BreakEvenReference />
             </div>
           }

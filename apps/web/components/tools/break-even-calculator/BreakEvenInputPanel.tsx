@@ -4,10 +4,14 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { BreakEvenMode } from "./types";
 
 type BreakEvenInputPanelProps = {
   mode: BreakEvenMode;
+  currency: CurrencyCode;
+  onCurrencyChange: (currency: CurrencyCode) => void;
   fixedCosts: string;
   onFixedCostsChange: (value: string) => void;
   variableCostPerUnit: string;
@@ -22,6 +26,8 @@ type BreakEvenInputPanelProps = {
 
 export default function BreakEvenInputPanel({
   mode,
+  currency,
+  onCurrencyChange,
   fixedCosts,
   onFixedCostsChange,
   variableCostPerUnit,
@@ -38,6 +44,8 @@ export default function BreakEvenInputPanel({
   return (
     <SectionCard title={t("inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         <ToolInput
           label={t("fixedCosts")}
           hint={t("fixedCostsHint")}

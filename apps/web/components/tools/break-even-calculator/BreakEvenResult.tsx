@@ -3,8 +3,11 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { BreakEvenOutput } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
 import BreakEvenChart from "./BreakEvenChart";
+import BreakEvenCostStructureBar from "./BreakEvenCostStructureBar";
 import BreakEvenShareExportModal from "./BreakEvenShareExportModal";
 import type { BreakEvenMode } from "./types";
 
@@ -14,11 +17,14 @@ type BreakEvenResultProps = {
   result: BreakEvenOutput | null;
   errorMessage: string;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
   fixedCosts: number;
   variableCostPerUnit: number;
   pricePerUnit: number;
   targetProfit: number;
 };
+
+const GAUGE_DOMAIN_MAX = 80;
 
 function Stat({ title, value }: { title: string; value: string }) {
   return (
@@ -31,10 +37,10 @@ function Stat({ title, value }: { title: string; value: string }) {
   );
 }
 
-export default function BreakEvenResult({ mode, hasCalculated, result, errorMessage, digitStyle, fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit }: BreakEvenResultProps) {
+export default function BreakEvenResult({ mode, hasCalculated, result, errorMessage, digitStyle, currency, fixedCosts, variableCostPerUnit, pricePerUnit, targetProfit }: BreakEvenResultProps) {
   const t = useTranslations("tools.break-even-calculator");
 
-  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   if (!hasCalculated) {
     return (
@@ -109,6 +115,37 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
           tooltipUnitsLabel={t("aboveFold.tooltipUnits")}
           tooltipProfitLabel={t("aboveFold.tooltipProfit")}
           chartAriaLabel={t("aboveFold.chartAriaLabel")}
+        />
+      </div>
+
+      <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <RatioGauge
+          value={result.contributionMarginRatio}
+          domainMin={0}
+          domainMax={GAUGE_DOMAIN_MAX}
+          zones={[
+            { key: "low", from: 0, to: 20, colorClass: "stroke-red-500 dark:stroke-red-400" },
+            { key: "moderate", from: 20, to: 40, colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+            { key: "healthy", from: 40, to: 60, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
+            { key: "excellent", from: 60, to: GAUGE_DOMAIN_MAX, colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+          ]}
+          valueLabel={`${formatLocalizedNumber(result.contributionMarginRatio, digitStyle)}%`}
+          caption={t("result.contributionMarginRatio")}
+          ticks={[0, 20, 40, 60, GAUGE_DOMAIN_MAX]}
+          tickFormatter={(tick) => `${tick}%`}
+        />
+      </div>
+
+      <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <p className="mb-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("costStructureDiagram.title")}</p>
+        <BreakEvenCostStructureBar
+          fixedCosts={fixedCosts}
+          variableCosts={result.breakEvenUnits * variableCostPerUnit}
+          fixedLabel={t("form.fixedCosts")}
+          variableLabel={t("costStructureDiagram.variableCosts")}
+          fixedFormatted={money(fixedCosts)}
+          variableFormatted={money(result.breakEvenUnits * variableCostPerUnit)}
+          caption={t("costStructureDiagram.caption")}
         />
       </div>
 
