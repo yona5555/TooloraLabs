@@ -6714,7 +6714,10 @@
         "molesLabel": "Moles (mol)",
         "molesPlaceholder": "e.g. 1",
         "temperatureLabel": "Temperature (K)",
-        "temperaturePlaceholder": "e.g. 273.15"
+        "temperaturePlaceholder": "e.g. 273.15",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "variablesCaption": "The quantity you're solving for is highlighted."
       },
       "result": {
         "heading": "Result",
@@ -6726,7 +6729,9 @@
         "volume": "Volume",
         "moles": "Moles",
         "temperature": "Temperature",
-        "diagramCaption": "Piston height reflects volume, particle count reflects moles, and color reflects temperature."
+        "diagramCaption": "Piston height reflects volume, particle count reflects moles, and color reflects temperature.",
+        "emptyStateMessage": "Enter values and press Calculate to see your gas law result.",
+        "pressureGaugeCaption": "Pressure shown against a dial referenced to 1 atm (marked), standard atmospheric pressure."
       },
       "education": {
         "intro": {
@@ -6736,7 +6741,16 @@
             "caption": "One mole of an ideal gas at standard temperature and pressure (0°C, 1 atm) occupies 22.414 liters."
           },
           "paragraph2": "The equation is a combination of three simpler, independently discovered relationships: Boyle's law (pressure and volume are inversely proportional at constant temperature), Charles's law (volume and temperature are directly proportional at constant pressure), and Avogadro's law (volume and moles are directly proportional at constant pressure and temperature). Combined, these three proportionalities produce the single unified equation PV = nRT.",
-          "paragraph3": "The \"ideal\" in ideal gas law describes a simplifying model: it assumes gas particles have no volume of their own and no attractive or repulsive forces between them. Real gases only approximate this behavior, deviating most under high pressure or low temperature, where molecular size and intermolecular forces become significant — but at ordinary pressures and temperatures, most gases follow the ideal gas law closely enough for practical calculations."
+          "paragraph3": "The \"ideal\" in ideal gas law describes a simplifying model: it assumes gas particles have no volume of their own and no attractive or repulsive forces between them. Real gases only approximate this behavior, deviating most under high pressure or low temperature, where molecular size and intermolecular forces become significant — but at ordinary pressures and temperatures, most gases follow the ideal gas law closely enough for practical calculations.",
+          "pvCurve": {
+            "xLabel": "Volume (V)",
+            "yLabel": "Pressure (P)",
+            "caption": "At constant temperature and moles, pressure and volume trace an inverse (Boyle's Law) curve, not a straight line."
+          },
+          "stpReference": {
+            "label": "22.4 L",
+            "caption": "One mole of ideal gas at STP occupies 22.4 liters — over 22 times the volume of a 1-liter box."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -6838,6 +6852,16 @@
                 "online": "No — the program follows an on-campus, laboratory-based research model centered on the university's catalysis and materials research centers."
               }
             ]
+          },
+          "pressureGaugeSection": {
+            "title": "Pressure on a Dial",
+            "paragraph": "A dial gauge makes an abstract pressure number tangible by placing it against the everyday reference of 1 atmosphere, the pressure of the air around us at sea level.",
+            "caption": "1 atm shown on a dial referenced against standard atmospheric pressure."
+          },
+          "variablesSection": {
+            "title": "Four Quantities, One Equation",
+            "paragraph": "The ideal gas law ties pressure, volume, moles, and temperature together in a single equation — knowing any three always determines the fourth.",
+            "caption": "The quantity being solved for is highlighted; the rest are known."
           }
         },
         "references": {
@@ -6847,6 +6871,32 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "gauge": {
+        "low": "Below atmospheric",
+        "atmospheric": "Near atmospheric",
+        "high": "Above atmospheric"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
+      },
+      "relatedTools": {
+        "title": "Related Chemistry Tools"
       }
     },
     "energy-work-power-calculator": {

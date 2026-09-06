@@ -6714,7 +6714,10 @@
         "molesLabel": "Moles (mol)",
         "molesPlaceholder": "p. ex. 1",
         "temperatureLabel": "Température (K)",
-        "temperaturePlaceholder": "p. ex. 273.15"
+        "temperaturePlaceholder": "p. ex. 273.15",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "variablesCaption": "La grandeur que vous calculez est mise en évidence."
       },
       "result": {
         "heading": "Résultat",
@@ -6726,7 +6729,9 @@
         "volume": "Volume",
         "moles": "Moles",
         "temperature": "Température",
-        "diagramCaption": "La hauteur du piston reflète le volume, le nombre de particules reflète les moles, et la couleur reflète la température."
+        "diagramCaption": "La hauteur du piston reflète le volume, le nombre de particules reflète les moles, et la couleur reflète la température.",
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de la loi des gaz.",
+        "pressureGaugeCaption": "Pression affichée sur un cadran référencé à 1 atm (marqué), pression atmosphérique standard."
       },
       "education": {
         "intro": {
@@ -6736,7 +6741,16 @@
             "caption": "Une mole d'un gaz parfait dans les conditions normales de température et de pression (0 °C, 1 atm) occupe 22,414 litres."
           },
           "paragraph2": "L'équation combine trois relations plus simples, découvertes indépendamment : la loi de Boyle (pression et volume sont inversement proportionnels à température constante), la loi de Charles (volume et température sont directement proportionnels à pression constante) et la loi d'Avogadro (volume et moles sont directement proportionnels à pression et température constantes). Combinées, ces trois proportionnalités produisent l'équation unifiée unique PV = nRT.",
-          "paragraph3": "Le terme « parfait » dans loi des gaz parfaits décrit un modèle simplificateur : il suppose que les particules de gaz n'ont pas de volume propre et qu'il n'existe entre elles aucune force d'attraction ou de répulsion. Les gaz réels ne font qu'approcher ce comportement, s'en écartant le plus sous forte pression ou basse température, où la taille moléculaire et les forces intermoléculaires deviennent significatives — mais à pressions et températures ordinaires, la plupart des gaz suivent la loi des gaz parfaits avec une précision suffisante pour des calculs pratiques."
+          "paragraph3": "Le terme « parfait » dans loi des gaz parfaits décrit un modèle simplificateur : il suppose que les particules de gaz n'ont pas de volume propre et qu'il n'existe entre elles aucune force d'attraction ou de répulsion. Les gaz réels ne font qu'approcher ce comportement, s'en écartant le plus sous forte pression ou basse température, où la taille moléculaire et les forces intermoléculaires deviennent significatives — mais à pressions et températures ordinaires, la plupart des gaz suivent la loi des gaz parfaits avec une précision suffisante pour des calculs pratiques.",
+          "pvCurve": {
+            "xLabel": "Volume (V)",
+            "yLabel": "Pression (P)",
+            "caption": "À température et nombre de moles constants, la pression et le volume tracent une courbe inverse (loi de Boyle), pas une ligne droite."
+          },
+          "stpReference": {
+            "label": "22,4 L",
+            "caption": "Une mole de gaz parfait dans les conditions normales occupe 22,4 litres, soit plus de 22 fois le volume d'une boîte d'1 litre."
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -6838,6 +6852,16 @@
                 "online": "Non — le programme met l'accent sur les laboratoires sur le campus et la recherche pratique en résidence."
               }
             ]
+          },
+          "pressureGaugeSection": {
+            "title": "La Pression sur un Cadran",
+            "paragraph": "Un cadran rend un nombre de pression abstrait tangible en le plaçant par rapport à la référence quotidienne d'1 atmosphère, la pression de l'air autour de nous au niveau de la mer.",
+            "caption": "1 atm affiché sur un cadran référencé à la pression atmosphérique standard."
+          },
+          "variablesSection": {
+            "title": "Quatre Grandeurs, Une Équation",
+            "paragraph": "La loi des gaz parfaits relie pression, volume, nombre de moles et température en une seule équation — en connaître trois détermine toujours la quatrième.",
+            "caption": "La grandeur calculée est mise en évidence ; les autres sont connues."
           }
         },
         "references": {
@@ -6847,6 +6871,32 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Lire le Texte Original"
         }
+      },
+      "gauge": {
+        "low": "Sous l'atmosphérique",
+        "atmospheric": "Proche de l'atmosphérique",
+        "high": "Au-dessus de l'atmosphérique"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
+      },
+      "relatedTools": {
+        "title": "Outils de Chimie Connexes"
       }
     },
     "energy-work-power-calculator": {

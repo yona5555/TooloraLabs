@@ -6714,7 +6714,10 @@
         "molesLabel": "Stoffmenge (mol)",
         "molesPlaceholder": "z. B. 1",
         "temperatureLabel": "Temperatur (K)",
-        "temperaturePlaceholder": "z. B. 273.15"
+        "temperaturePlaceholder": "z. B. 273.15",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -6726,7 +6729,9 @@
         "volume": "Volumen",
         "moles": "Stoffmenge",
         "temperature": "Temperatur",
-        "diagramCaption": "Die Kolbenhöhe spiegelt das Volumen wider, die Teilchenzahl die Stoffmenge und die Farbe die Temperatur."
+        "diagramCaption": "Die Kolbenhöhe spiegelt das Volumen wider, die Teilchenzahl die Stoffmenge und die Farbe die Temperatur.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Gasgesetz-Ergebnis zu sehen.",
+        "pressureGaugeCaption": "Druck angezeigt auf einem Zifferblatt, referenziert auf 1 atm (markiert), Standardatmosphärendruck."
       },
       "education": {
         "intro": {
@@ -6736,7 +6741,16 @@
             "caption": "Ein Mol eines idealen Gases bei Standardtemperatur und -druck (0 °C, 1 atm) nimmt 22,414 Liter ein."
           },
           "paragraph2": "Die Gleichung ist eine Kombination dreier einfacherer, unabhängig voneinander entdeckter Beziehungen: das Boyle-Mariotte-Gesetz (Druck und Volumen sind bei konstanter Temperatur umgekehrt proportional), das Gesetz von Charles (Volumen und Temperatur sind bei konstantem Druck direkt proportional) und das Gesetz von Avogadro (Volumen und Stoffmenge sind bei konstantem Druck und konstanter Temperatur direkt proportional). Zusammen ergeben diese drei Proportionalitäten die eine vereinheitlichte Gleichung PV = nRT.",
-          "paragraph3": "Das „ideal“ im idealen Gasgesetz beschreibt ein vereinfachendes Modell: Es nimmt an, dass Gasteilchen kein eigenes Volumen besitzen und keine Anziehungs- oder Abstoßungskräfte zwischen ihnen wirken. Reale Gase nähern sich diesem Verhalten nur an und weichen am stärksten unter hohem Druck oder bei niedriger Temperatur ab, wo Molekülgröße und zwischenmolekulare Kräfte bedeutsam werden — bei üblichen Drücken und Temperaturen folgen die meisten Gase dem idealen Gasgesetz jedoch genau genug für praktische Berechnungen."
+          "paragraph3": "Das „ideal“ im idealen Gasgesetz beschreibt ein vereinfachendes Modell: Es nimmt an, dass Gasteilchen kein eigenes Volumen besitzen und keine Anziehungs- oder Abstoßungskräfte zwischen ihnen wirken. Reale Gase nähern sich diesem Verhalten nur an und weichen am stärksten unter hohem Druck oder bei niedriger Temperatur ab, wo Molekülgröße und zwischenmolekulare Kräfte bedeutsam werden — bei üblichen Drücken und Temperaturen folgen die meisten Gase dem idealen Gasgesetz jedoch genau genug für praktische Berechnungen.",
+          "pvCurve": {
+            "xLabel": "Volumen (V)",
+            "yLabel": "Druck (P)",
+            "caption": "Bei konstanter Temperatur und Molzahl zeichnen Druck und Volumen eine inverse Kurve (Boyle'sches Gesetz), keine Gerade."
+          },
+          "stpReference": {
+            "label": "22,4 L",
+            "caption": "Ein Mol idealen Gases nimmt bei Normbedingungen 22,4 Liter ein — über das 22-fache Volumen einer 1-Liter-Box."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -6838,6 +6852,16 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "pressureGaugeSection": {
+            "title": "Druck auf einem Zifferblatt",
+            "paragraph": "Ein Zifferblatt macht eine abstrakte Druckzahl greifbar, indem es sie gegen die alltägliche Referenz von 1 Atmosphäre stellt, dem Luftdruck um uns herum auf Meereshöhe.",
+            "caption": "1 atm auf einem Zifferblatt, referenziert gegen den Standardatmosphärendruck."
+          },
+          "variablesSection": {
+            "title": "Vier Größen, eine Gleichung",
+            "paragraph": "Das ideale Gasgesetz verbindet Druck, Volumen, Molzahl und Temperatur in einer einzigen Gleichung — die Kenntnis von drei bestimmt immer die vierte.",
+            "caption": "Die gesuchte Größe ist hervorgehoben; die übrigen sind bekannt."
           }
         },
         "references": {
@@ -6847,6 +6871,32 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "gauge": {
+        "low": "Unter atmosphärisch",
+        "atmospheric": "Nahe atmosphärisch",
+        "high": "Über atmosphärisch"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
       }
     },
     "energy-work-power-calculator": {

@@ -6714,7 +6714,10 @@
         "molesLabel": "Moles (mol)",
         "molesPlaceholder": "p. ej. 1",
         "temperatureLabel": "Temperatura (K)",
-        "temperaturePlaceholder": "p. ej. 273.15"
+        "temperaturePlaceholder": "p. ej. 273.15",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "variablesCaption": "La cantidad que estás calculando está resaltada."
       },
       "result": {
         "heading": "Resultado",
@@ -6726,7 +6729,9 @@
         "volume": "Volumen",
         "moles": "Moles",
         "temperature": "Temperatura",
-        "diagramCaption": "La altura del pistón refleja el volumen, el número de partículas refleja los moles, y el color refleja la temperatura."
+        "diagramCaption": "La altura del pistón refleja el volumen, el número de partículas refleja los moles, y el color refleja la temperatura.",
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de la ley de los gases.",
+        "pressureGaugeCaption": "Presión mostrada en un dial referenciado a 1 atm (marcada), presión atmosférica estándar."
       },
       "education": {
         "intro": {
@@ -6736,7 +6741,16 @@
             "caption": "Un mol de un gas ideal en condiciones estándar de temperatura y presión (0 °C, 1 atm) ocupa 22.414 litros."
           },
           "paragraph2": "La ecuación combina tres relaciones más simples descubiertas de forma independiente: la ley de Boyle (presión y volumen son inversamente proporcionales a temperatura constante), la ley de Charles (volumen y temperatura son directamente proporcionales a presión constante) y la ley de Avogadro (volumen y moles son directamente proporcionales a presión y temperatura constantes). Combinadas, estas tres proporcionalidades producen la única ecuación unificada PV = nRT.",
-          "paragraph3": "Lo «ideal» en la ley de los gases ideales describe un modelo simplificador: supone que las partículas de gas no tienen volumen propio ni fuerzas de atracción o repulsión entre ellas. Los gases reales solo se aproximan a este comportamiento, desviándose más bajo alta presión o baja temperatura, donde el tamaño molecular y las fuerzas intermoleculares se vuelven significativos; pero a presiones y temperaturas ordinarias, la mayoría de los gases siguen la ley de los gases ideales con suficiente precisión para cálculos prácticos."
+          "paragraph3": "Lo «ideal» en la ley de los gases ideales describe un modelo simplificador: supone que las partículas de gas no tienen volumen propio ni fuerzas de atracción o repulsión entre ellas. Los gases reales solo se aproximan a este comportamiento, desviándose más bajo alta presión o baja temperatura, donde el tamaño molecular y las fuerzas intermoleculares se vuelven significativos; pero a presiones y temperaturas ordinarias, la mayoría de los gases siguen la ley de los gases ideales con suficiente precisión para cálculos prácticos.",
+          "pvCurve": {
+            "xLabel": "Volumen (V)",
+            "yLabel": "Presión (P)",
+            "caption": "A temperatura y moles constantes, la presión y el volumen trazan una curva inversa (Ley de Boyle), no una línea recta."
+          },
+          "stpReference": {
+            "label": "22.4 L",
+            "caption": "Un mol de gas ideal en condiciones estándar ocupa 22.4 litros, más de 22 veces el volumen de una caja de 1 litro."
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -6838,6 +6852,16 @@
                 "online": "No — el programa hace hincapié en los laboratorios dentro del campus y la investigación práctica y residencial."
               }
             ]
+          },
+          "pressureGaugeSection": {
+            "title": "Presión en un Dial",
+            "paragraph": "Un dial hace tangible un número de presión abstracto al colocarlo frente a la referencia cotidiana de 1 atmósfera, la presión del aire a nuestro alrededor al nivel del mar.",
+            "caption": "1 atm mostrada en un dial referenciado a la presión atmosférica estándar."
+          },
+          "variablesSection": {
+            "title": "Cuatro Cantidades, Una Ecuación",
+            "paragraph": "La ley de los gases ideales vincula presión, volumen, moles y temperatura en una sola ecuación: conocer tres siempre determina la cuarta.",
+            "caption": "La cantidad que se está calculando está resaltada; el resto son conocidas."
           }
         },
         "references": {
@@ -6847,6 +6871,32 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "gauge": {
+        "low": "Por debajo de la atmosférica",
+        "atmospheric": "Cerca de la atmosférica",
+        "high": "Por encima de la atmosférica"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
+      },
+      "relatedTools": {
+        "title": "Herramientas de Química Relacionadas"
       }
     },
     "energy-work-power-calculator": {
