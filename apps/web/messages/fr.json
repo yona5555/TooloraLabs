@@ -7068,7 +7068,10 @@
         "tLabel": "Temps t (s)",
         "tPlaceholder": "p. ex. 5",
         "dxLabel": "Déplacement Δx (m)",
-        "dxPlaceholder": "p. ex. 25"
+        "dxPlaceholder": "p. ex. 25",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "variablesCaption": "La grandeur que vous calculez est mise en évidence."
       },
       "result": {
         "heading": "Résultat",
@@ -7084,7 +7087,13 @@
         "undefined": "indéfini",
         "diagramStart": "Départ",
         "diagramEnd": "Arrivée",
-        "diagramCaption": "Flèches de vitesse à l'échelle de v₀ (départ) et v (arrivée) ; la direction s'inverse pour les valeurs négatives."
+        "diagramCaption": "Flèches de vitesse à l'échelle de v₀ (départ) et v (arrivée) ; la direction s'inverse pour les valeurs négatives.",
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de cinématique.",
+        "sentence": "La vitesse passe de {v0} m/s à {v} m/s au cours de ce mouvement.",
+        "vtXLabel": "Temps (t)",
+        "vtYLabel": "Vitesse (v)",
+        "vtAreaLabel": "Δx = {dx} m",
+        "vtCaption": "Vitesse en fonction du temps — l'aire ombrée sous la ligne équivaut au déplacement."
       },
       "education": {
         "intro": {
@@ -7096,7 +7105,12 @@
             "caption": "Un objet accélérant depuis le repos (v₀ = 0) jusqu'à 10 m/s — la flèche finale est plus longue car la vitesse finale est plus grande."
           },
           "paragraph2": "Ce calculateur couvre deux types de problèmes courants. Lorsque la vitesse, l'accélération et le temps sont connus (mais pas le déplacement), il utilise v = v₀ + at et ses réarrangements — une algèbre linéaire pure, sans ambiguïté. Lorsque la vitesse, l'accélération et le déplacement sont connus (mais pas le temps) — le classique problème de « distance de freinage » ou « à quelle vitesse après cette distance » — il utilise v² = v₀² + 2aΔx, qui implique une racine carrée lors du calcul d'une vitesse.",
-          "paragraph3": "Le déplacement (Δx) diffère de la distance parcourue : le déplacement est le changement net de position et peut être négatif si un objet se retrouve en arrière de son point de départ, tandis que la distance est toujours positive et tient compte de la longueur totale du trajet, y compris tout retour en arrière. Ces équations à accélération constante utilisent le déplacement, et donnent la même réponse pour un mouvement rectiligne dans une seule direction, où les deux coïncident."
+          "paragraph3": "Le déplacement (Δx) diffère de la distance parcourue : le déplacement est le changement net de position et peut être négatif si un objet se retrouve en arrière de son point de départ, tandis que la distance est toujours positive et tient compte de la longueur totale du trajet, y compris tout retour en arrière. Ces équations à accélération constante utilisent le déplacement, et donnent la même réponse pour un mouvement rectiligne dans une seule direction, où les deux coïncident.",
+          "positionTime": {
+            "xLabel": "Temps (t)",
+            "yLabel": "Position (x)",
+            "caption": "La position en fonction du temps sous accélération constante est une parabole, car la position est l'intégrale d'une fonction de vitesse linéaire."
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -7207,6 +7221,29 @@
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Lire le Texte Original"
         }
+      },
+      "gauge": {
+        "gentle": "Doux (sous g)",
+        "strong": "Fort",
+        "extreme": "Extrême"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "force-calculator": {

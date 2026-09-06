@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import MotionDiagram from "./MotionDiagram";
+import KinematicsPositionTimeDiagram from "./KinematicsPositionTimeDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,7 @@ export default async function KinematicsEducation() {
         <p>{t("intro.paragraph1")}</p>
         <MotionDiagram v0={0} v={10} startLabel={t("intro.diagram.startLabel")} endLabel={t("intro.diagram.endLabel")} caption={t("intro.diagram.caption")} />
         <p>{t("intro.paragraph2")}</p>
+        <KinematicsPositionTimeDiagram xLabel={t("intro.positionTime.xLabel")} yLabel={t("intro.positionTime.yLabel")} caption={t("intro.positionTime.caption")} />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 

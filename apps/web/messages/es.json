@@ -7068,7 +7068,10 @@
         "tLabel": "Tiempo t (s)",
         "tPlaceholder": "p. ej. 5",
         "dxLabel": "Desplazamiento Δx (m)",
-        "dxPlaceholder": "p. ej. 25"
+        "dxPlaceholder": "p. ej. 25",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "variablesCaption": "La cantidad que estás calculando está resaltada."
       },
       "result": {
         "heading": "Resultado",
@@ -7084,7 +7087,13 @@
         "undefined": "indefinido",
         "diagramStart": "Inicio",
         "diagramEnd": "Fin",
-        "diagramCaption": "Flechas de velocidad escaladas a v₀ (inicio) y v (fin); la dirección se invierte para valores negativos."
+        "diagramCaption": "Flechas de velocidad escaladas a v₀ (inicio) y v (fin); la dirección se invierte para valores negativos.",
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de cinemática.",
+        "sentence": "La velocidad cambia de {v0} m/s a {v} m/s durante este movimiento.",
+        "vtXLabel": "Tiempo (t)",
+        "vtYLabel": "Velocidad (v)",
+        "vtAreaLabel": "Δx = {dx} m",
+        "vtCaption": "Velocidad vs. tiempo: el área sombreada bajo la línea equivale al desplazamiento."
       },
       "education": {
         "intro": {
@@ -7096,7 +7105,12 @@
             "caption": "Un objeto que acelera desde el reposo (v₀ = 0) hasta 10 m/s: la flecha final es más larga porque la velocidad final es mayor."
           },
           "paragraph2": "Esta calculadora cubre dos tipos de problemas comunes. Cuando se conocen la velocidad, la aceleración y el tiempo (pero no el desplazamiento), usa v = v₀ + at y sus reordenamientos: álgebra lineal pura sin ambigüedad. Cuando se conocen la velocidad, la aceleración y el desplazamiento (pero no el tiempo) —el clásico problema de «distancia de frenado» o «qué tan rápido tras esta distancia»— usa v² = v₀² + 2aΔx, que involucra una raíz cuadrada al calcular una velocidad.",
-          "paragraph3": "El desplazamiento (Δx) es distinto de la distancia recorrida: el desplazamiento es el cambio neto de posición y puede ser negativo si un objeto termina detrás de donde comenzó, mientras que la distancia siempre es positiva y contabiliza la longitud total del recorrido, incluyendo cualquier retroceso. Estas ecuaciones de aceleración constante usan el desplazamiento, y dan la misma respuesta para un movimiento rectilíneo en una sola dirección, donde ambos coinciden."
+          "paragraph3": "El desplazamiento (Δx) es distinto de la distancia recorrida: el desplazamiento es el cambio neto de posición y puede ser negativo si un objeto termina detrás de donde comenzó, mientras que la distancia siempre es positiva y contabiliza la longitud total del recorrido, incluyendo cualquier retroceso. Estas ecuaciones de aceleración constante usan el desplazamiento, y dan la misma respuesta para un movimiento rectilíneo en una sola dirección, donde ambos coinciden.",
+          "positionTime": {
+            "xLabel": "Tiempo (t)",
+            "yLabel": "Posición (x)",
+            "caption": "La posición frente al tiempo bajo aceleración constante es una parábola, ya que la posición es la integral de una función de velocidad lineal."
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -7207,6 +7221,29 @@
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "gauge": {
+        "gentle": "Suave (menos de g)",
+        "strong": "Fuerte",
+        "extreme": "Extremo"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "force-calculator": {

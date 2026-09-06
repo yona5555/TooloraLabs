@@ -1,7 +1,13 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import KinematicsModeTabs from "./KinematicsModeTabs";
+import KinematicsSolveForTabs from "./KinematicsSolveForTabs";
+import KinematicsVariablesDiagram from "./KinematicsVariablesDiagram";
+import { KINEMATICS_SOLVE_FOR_TIME, KINEMATICS_SOLVE_FOR_DISTANCE } from "./types";
 import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime } from "./types";
 
 type KinematicsInputPanelProps = {
@@ -21,6 +27,8 @@ type KinematicsInputPanelProps = {
   onTChange: (value: string) => void;
   dx: string;
   onDxChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function KinematicsInputPanel({
@@ -40,6 +48,8 @@ export default function KinematicsInputPanel({
   onTChange,
   dx,
   onDxChange,
+  onCalculate,
+  onClear,
 }: KinematicsInputPanelProps) {
   const t_ = useTranslations("tools.kinematics-calculator.form");
 
@@ -59,61 +69,60 @@ export default function KinematicsInputPanel({
     <ToolInput label={t_("dxLabel")} type="text" inputMode="decimal" placeholder={t_("dxPlaceholder")} value={dx} onChange={(e) => onDxChange(e.target.value)} />
   );
 
+  const solved = mode === "timeBased" ? solveForTime : solveForDistance;
+  const variableOrder = mode === "timeBased" ? ["v0", "v", "a", "t"] : ["v0", "v", "a", "dx"];
+
   return (
     <SectionCard title={t_("inputTitle")}>
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("modeLabel")}</span>
-        <select
-          value={mode}
-          onChange={(e) => onModeChange(e.target.value as KinematicsMode)}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-        >
-          <option value="timeBased">{t_("mode.timeBased")}</option>
-          <option value="distanceBased">{t_("mode.distanceBased")}</option>
-        </select>
-      </label>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("modeLabel")}</span>
+        <KinematicsModeTabs mode={mode} onModeChange={onModeChange} />
+      </div>
 
-      {mode === "timeBased" ? (
-        <div className="mt-5 space-y-5">
-          <label className="block space-y-2">
-            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("solveForLabel")}</span>
-            <select
-              value={solveForTime}
-              onChange={(e) => onSolveForTimeChange(e.target.value as KinematicsSolveForTime)}
-              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-            >
-              <option value="v">{t_("solveForTime.v")}</option>
-              <option value="v0">{t_("solveForTime.v0")}</option>
-              <option value="a">{t_("solveForTime.a")}</option>
-              <option value="t">{t_("solveForTime.t")}</option>
-            </select>
-          </label>
-          {solveForTime !== "v0" && v0Field}
-          {solveForTime !== "v" && vField}
-          {solveForTime !== "a" && aField}
-          {solveForTime !== "t" && tField}
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("solveForLabel")}</span>
+        {mode === "timeBased" ? (
+          <KinematicsSolveForTabs values={KINEMATICS_SOLVE_FOR_TIME} active={solveForTime} onChange={onSolveForTimeChange} translationKey="solveForTime" />
+        ) : (
+          <KinematicsSolveForTabs values={KINEMATICS_SOLVE_FOR_DISTANCE} active={solveForDistance} onChange={onSolveForDistanceChange} translationKey="solveForDistance" />
+        )}
+      </div>
+
+      <KinematicsVariablesDiagram
+        solved={solved}
+        order={variableOrder}
+        labels={{ v0: "v₀", v: "v", a: "a", t: "t", dx: "Δx" }}
+        caption={t_("variablesCaption")}
+      />
+
+      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+        {mode === "timeBased" ? (
+          <>
+            {solveForTime !== "v0" && v0Field}
+            {solveForTime !== "v" && vField}
+            {solveForTime !== "a" && aField}
+            {solveForTime !== "t" && tField}
+          </>
+        ) : (
+          <>
+            {solveForDistance !== "v0" && v0Field}
+            {solveForDistance !== "v" && vField}
+            {solveForDistance !== "a" && aField}
+            {solveForDistance !== "dx" && dxField}
+          </>
+        )}
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t_("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t_("clear")}
+          </button>
         </div>
-      ) : (
-        <div className="mt-5 space-y-5">
-          <label className="block space-y-2">
-            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("solveForLabel")}</span>
-            <select
-              value={solveForDistance}
-              onChange={(e) => onSolveForDistanceChange(e.target.value as KinematicsSolveForDistance)}
-              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-            >
-              <option value="v">{t_("solveForDistance.v")}</option>
-              <option value="v0">{t_("solveForDistance.v0")}</option>
-              <option value="a">{t_("solveForDistance.a")}</option>
-              <option value="dx">{t_("solveForDistance.dx")}</option>
-            </select>
-          </label>
-          {solveForDistance !== "v0" && v0Field}
-          {solveForDistance !== "v" && vField}
-          {solveForDistance !== "a" && aField}
-          {solveForDistance !== "dx" && dxField}
-        </div>
-      )}
+      </form>
     </SectionCard>
   );
 }

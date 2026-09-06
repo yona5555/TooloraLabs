@@ -7068,7 +7068,10 @@
         "tLabel": "Time t (s)",
         "tPlaceholder": "e.g. 5",
         "dxLabel": "Displacement Δx (m)",
-        "dxPlaceholder": "e.g. 25"
+        "dxPlaceholder": "e.g. 25",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "variablesCaption": "The quantity you're solving for is highlighted."
       },
       "result": {
         "heading": "Result",
@@ -7084,7 +7087,13 @@
         "undefined": "undefined",
         "diagramStart": "Start",
         "diagramEnd": "End",
-        "diagramCaption": "Velocity arrows scaled to v₀ (start) and v (end); direction flips for negative values."
+        "diagramCaption": "Velocity arrows scaled to v₀ (start) and v (end); direction flips for negative values.",
+        "emptyStateMessage": "Enter values and press Calculate to see your kinematics result.",
+        "sentence": "Velocity changes from {v0} m/s to {v} m/s over this motion.",
+        "vtXLabel": "Time (t)",
+        "vtYLabel": "Velocity (v)",
+        "vtAreaLabel": "Δx = {dx} m",
+        "vtCaption": "Velocity vs. time — the shaded area under the line equals the displacement."
       },
       "education": {
         "intro": {
@@ -7096,7 +7105,12 @@
             "caption": "An object accelerating from rest (v₀ = 0) to 10 m/s — the end arrow is longer because the final velocity is greater."
           },
           "paragraph2": "This calculator covers two common problem types. When velocity, acceleration, and time are known (but not displacement), it uses v = v₀ + at and its rearrangements — pure linear algebra with no ambiguity. When velocity, acceleration, and displacement are known (but not time) — the classic \"stopping distance\" or \"how fast after this distance\" problem — it uses v² = v₀² + 2aΔx, which involves a square root when solving for a velocity.",
-          "paragraph3": "Displacement (Δx) is different from distance traveled: displacement is the net change in position and can be negative if an object ends up behind where it started, while distance is always positive and accounts for the full path length, including any backtracking. These constant-acceleration equations use displacement, and give the same answer for straight-line motion in one direction, where the two coincide."
+          "paragraph3": "Displacement (Δx) is different from distance traveled: displacement is the net change in position and can be negative if an object ends up behind where it started, while distance is always positive and accounts for the full path length, including any backtracking. These constant-acceleration equations use displacement, and give the same answer for straight-line motion in one direction, where the two coincide.",
+          "positionTime": {
+            "xLabel": "Time (t)",
+            "yLabel": "Position (x)",
+            "caption": "Position vs. time under constant acceleration is a parabola, since position is the integral of a linear velocity function."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -7207,6 +7221,29 @@
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "gauge": {
+        "gentle": "Gentle (below g)",
+        "strong": "Strong",
+        "extreme": "Extreme"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "force-calculator": {

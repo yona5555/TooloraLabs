@@ -7068,7 +7068,10 @@
         "tLabel": "Zeit t (s)",
         "tPlaceholder": "z. B. 5",
         "dxLabel": "Verschiebung Δx (m)",
-        "dxPlaceholder": "z. B. 25"
+        "dxPlaceholder": "z. B. 25",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -7084,7 +7087,13 @@
         "undefined": "undefiniert",
         "diagramStart": "Start",
         "diagramEnd": "Ende",
-        "diagramCaption": "Geschwindigkeitspfeile skaliert auf v₀ (Start) und v (Ende); die Richtung kehrt sich bei negativen Werten um."
+        "diagramCaption": "Geschwindigkeitspfeile skaliert auf v₀ (Start) und v (Ende); die Richtung kehrt sich bei negativen Werten um.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Kinematik-Ergebnis zu sehen.",
+        "sentence": "Die Geschwindigkeit ändert sich bei dieser Bewegung von {v0} m/s auf {v} m/s.",
+        "vtXLabel": "Zeit (t)",
+        "vtYLabel": "Geschwindigkeit (v)",
+        "vtAreaLabel": "Δx = {dx} m",
+        "vtCaption": "Geschwindigkeit vs. Zeit — die schattierte Fläche unter der Linie entspricht der Verschiebung."
       },
       "education": {
         "intro": {
@@ -7096,7 +7105,12 @@
             "caption": "Ein Objekt, das aus dem Stillstand (v₀ = 0) auf 10 m/s beschleunigt — der Endpfeil ist länger, da die Endgeschwindigkeit größer ist."
           },
           "paragraph2": "Dieser Rechner deckt zwei häufige Aufgabentypen ab. Wenn Geschwindigkeit, Beschleunigung und Zeit bekannt sind (aber nicht die Verschiebung), verwendet er v = v₀ + at und dessen Umstellungen — reine lineare Algebra ohne Mehrdeutigkeit. Wenn Geschwindigkeit, Beschleunigung und Verschiebung bekannt sind (aber nicht die Zeit) — die klassische Aufgabe „Bremsweg“ oder „wie schnell nach dieser Strecke“ —, verwendet er v² = v₀² + 2aΔx, was beim Berechnen einer Geschwindigkeit eine Quadratwurzel erfordert.",
-          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis."
+          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis.",
+          "positionTime": {
+            "xLabel": "Zeit (t)",
+            "yLabel": "Position (x)",
+            "caption": "Position vs. Zeit bei konstanter Beschleunigung ist eine Parabel, da die Position das Integral einer linearen Geschwindigkeitsfunktion ist."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -7207,6 +7221,29 @@
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "gauge": {
+        "gentle": "Sanft (unter g)",
+        "strong": "Stark",
+        "extreme": "Extrem"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "force-calculator": {
