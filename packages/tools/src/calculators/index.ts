@@ -80,3 +80,4 @@ export * from "./SpeechToTextCalculator";
 export * from "./SpellingGrammarCalculator";
 export * from "./RomanNumeralCalculator";
 export * from "./ReadingTimeCalculator";
+export * from "./LoremIpsumCalculator";

@@ -21,7 +21,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "qr-generator-extended", icon: "QrCode" },
     { id: "countdown-to-event-calculator", icon: "CalendarClock" },
     { id: "historical-currency-converter", icon: "History" },
-    { id: "lorem-ipsum-generator", icon: "Type" },
     { id: "typing-speed-calculator", icon: "Keyboard" },
     { id: "energy-conversion-calculator", icon: "Zap" },
     { id: "pressure-conversion-calculator", icon: "Gauge" },

@@ -1334,4 +1334,19 @@ export const tools: Tool[] = [
       "read time estimator",
     ],
   },
+  {
+    slug: "lorem-ipsum-generator",
+    title: "Lorem Ipsum Generator",
+    category: "text-tools",
+    description:
+      "Generate placeholder text in paragraphs, sentences, or words, in classic or modern style.",
+    featured: false,
+    keywords: [
+      "lorem ipsum generator",
+      "placeholder text generator",
+      "dummy text generator",
+      "filler text generator",
+      "lorem ipsum",
+    ],
+  },
 ];
