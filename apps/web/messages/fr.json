@@ -19393,6 +19393,145 @@
           "readOriginal": "Consulter la Spécification"
         }
       }
+    },
+    "spelling-grammar-checker": {
+      "title": "Correcteur d'Orthographe et de Grammaire",
+      "description": "Vérifiez le texte à la recherche de fautes d'orthographe courantes et de problèmes grammaticaux de base, entièrement dans votre navigateur. Sans compte, sans serveur, sans coût.",
+      "nav": {
+        "tool": "Calculatrice",
+        "faq": "FAQ",
+        "behindTheTool": "Dans les coulisses"
+      },
+      "form": {
+        "inputTitle": "Votre Texte",
+        "textLabel": "Texte à vérifier",
+        "textPlaceholder": "Tapez ou collez votre texte ici pour le vérifier au fur et à mesure.",
+        "disclaimer": "Il s'agit d'un correcteur basique basé sur des règles, pas d'un assistant d'écriture IA complet — il détecte les erreurs courantes mais ne détectera pas tout.",
+        "clear": "Effacer"
+      },
+      "result": {
+        "heading": "Résultats",
+        "emptyText": "Commencez à taper pour voir les suggestions d'orthographe et de grammaire.",
+        "wordCountLabel": "Mots",
+        "issueCountLabel": "Problèmes Trouvés",
+        "suggestion": "Suggéré :"
+      },
+      "quickReference": {
+        "title": "Légende des Couleurs",
+        "intro": "Chaque couleur de soulignement marque un type de problème différent.",
+        "legend": {
+          "spelling": "Orthographe",
+          "grammar": "Grammaire",
+          "capitalization": "Majuscules",
+          "punctuation": "Ponctuation et Espacement"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Comprendre Ce Correcteur",
+          "paragraph1": "Cet outil analyse votre texte à l'aide d'un ensemble de règles intégrées directement dans le JavaScript de votre navigateur : une liste de mots couramment mal orthographiés, et des vérifications de correspondance de motifs pour des éléments comme l'absence de majuscule au début d'une phrase, les mots répétés, les espaces doubles, les espaces manquants après la ponctuation, et quelques confusions grammaticales courantes comme \"a\" contre \"an\" en anglais. Tout s'exécute localement pendant que vous tapez — rien n'est jamais envoyé à un serveur.",
+          "limitation": "Important : il s'agit d'un correcteur basique basé sur des règles, pas d'un assistant d'écriture complet alimenté par l'IA. Il est conçu pour détecter un ensemble spécifique d'erreurs courantes et non ambiguës, pas pour comprendre le contexte, le ton, ou le style comme le font des outils avancés tels que Grammarly. Relisez toujours votre texte vous-même à la fin."
+        },
+        "useCases": {
+          "title": "Utilisations Courantes",
+          "intro": "Un correcteur grammatical basique est utile partout où une vérification rapide des erreurs évidentes aide avant d'envoyer ou de publier du texte.",
+          "items": [
+            {
+              "title": "E-mails et Messages Rapides",
+              "description": "Repérer une faute de frappe évidente ou une majuscule manquante avant d'envoyer un e-mail ou un message rapide."
+            },
+            {
+              "title": "Rédaction de Premier Jet",
+              "description": "Effectuer un premier passage sur un brouillon pour détecter les erreurs mécaniques avant de faire une révision plus approfondie du contenu et du style."
+            },
+            {
+              "title": "Apprendre les Erreurs Courantes",
+              "description": "Voir les mots fréquemment confondus et les erreurs mécaniques signalées peut aider à renforcer un usage correct au fil du temps."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Questions Fréquentes",
+          "items": [
+            {
+              "question": "Est-ce aussi bon que Grammarly ou d'autres outils d'écriture IA ?",
+              "answer": "Non, et ce n'est pas son objectif. Cet outil utilise un petit ensemble de règles de correspondance de motifs simples, tandis que des outils comme Grammarly utilisent de grands modèles de langage entraînés à comprendre le contexte, le ton, et le style. Ce correcteur détecte des erreurs mécaniques spécifiques et courantes — considérez-le comme un premier passage utile, pas un éditeur complet."
+            },
+            {
+              "question": "Cela envoie-t-il mon texte quelque part ?",
+              "answer": "Non. Toute la vérification se produit localement dans votre navigateur grâce au JavaScript exécuté sur cette page — votre texte n'est jamais envoyé à un serveur ni stocké nulle part."
+            },
+            {
+              "question": "Pourquoi n'a-t-il pas détecté une erreur que je sais présente ?",
+              "answer": "Ce correcteur ne recherche qu'un ensemble spécifique et limité de motifs : une liste fixe de mots couramment mal orthographiés et une poignée de règles grammaticales. Il n'a pas de dictionnaire complet ni de compréhension du sens, il manquera donc les erreurs de mots réels (comme \"their\" utilisé à la place de \"there\") et les erreurs en dehors de son ensemble de règles."
+            },
+            {
+              "question": "Pourquoi a-t-il signalé quelque chose qui est en fait correct ?",
+              "answer": "Les règles sont intentionnellement de simples correspondances de motifs, elles peuvent donc occasionnellement produire un faux positif — par exemple, la vérification \"a\" contre \"an\" est basée sur la première lettre du mot suivant, ce qui correspond généralement mais pas toujours à la façon dont le mot sonne réellement. Utilisez votre propre jugement en complément des suggestions."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Dans les Coulisses de Cet Outil",
+          "history": {
+            "title": "Histoire et Origine",
+            "paragraph": "La correction orthographique automatisée remonte à 1971, lorsque Ralph Gorin a créé l'un des premiers programmes de correction orthographique à Stanford. À la fin des années 1970, des outils comme la commande Unix \"spell\" et le projet Epistle d'IBM comparaient les mots des documents à des listes de mots du dictionnaire pour signaler les fautes de frappe probables, la même idée fondamentale derrière la vérification orthographique de cet outil. La correction grammaticale a suivi une voie similaire à partir des années 1980 (Writer's Workbench et Grammatik parmi les premiers), utilisant des règles de correspondance de motifs très similaires à celles que cet outil utilise aujourd'hui, avant que des outils modernes basés sur l'IA n'apportent une compréhension contextuelle profonde à cette tâche des décennies plus tard."
+          },
+          "howItWorks": {
+            "title": "Comment Fonctionne la Vérification Basée sur des Règles",
+            "paragraph": "Les correcteurs basés sur des règles comme celui-ci fonctionnent en analysant le texte à la recherche de motifs spécifiques et bien définis à l'aide d'expressions régulières et de tables de correspondance, plutôt qu'en comprenant le sens. Une vérification orthographique compare simplement chaque mot à une liste d'orthographes incorrectes connues ; une vérification des majuscules recherche une lettre minuscule immédiatement après un point terminant une phrase ; et ainsi de suite. Cette approche est rapide, entièrement prévisible, et ne nécessite aucun service externe, mais elle est intrinsèquement limitée aux motifs spécifiques qu'elle a été programmée pour reconnaître — contrairement aux correcteurs statistiques ou basés sur l'IA, qui peuvent détecter des erreurs que personne n'avait explicitement anticipées."
+          },
+          "academicPath": {
+            "title": "Parcours Académique",
+            "intro": "La vérification automatisée de texte est étudiée en informatique, spécifiquement dans le traitement du langage naturel. Voici cinq programmes reconnus, plus un département régional :",
+            "universities": [
+              {
+                "name": "Université de Stanford — Department of Computer Science",
+                "note": "Un département d'informatique de premier plan avec une solide recherche en traitement du langage naturel.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université Carnegie Mellon — Language Technologies Institute",
+                "note": "L'un des centres les plus reconnus au monde pour la recherche en traitement du langage naturel.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Abrite un groupe de recherche de premier plan en traitement du langage naturel.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "Non — le doctorat est un programme de recherche en présentiel."
+              },
+              {
+                "name": "Université de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centre de premier plan pour la recherche en linguistique computationnelle et technologie du langage.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "Non — les diplômes de recherche sont en présentiel au département d'informatique et technologie."
+              },
+              {
+                "name": "Université d'Édimbourg — School of Informatics",
+                "note": "L'un des centres européens de premier plan pour la recherche en traitement du langage naturel.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "Non — les diplômes de recherche sont en présentiel à l'Université d'Édimbourg."
+              },
+              {
+                "name": "Université américaine de Beyrouth — département d'informatique",
+                "note": "Fondé en 1866 ; non classé séparément dans ce tableau mondial par discipline.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Références Techniques",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "Une explication technique largement citée et disponible gratuitement sur le fonctionnement des algorithmes de correction orthographique, des simples recherches dans un dictionnaire aux modèles de correction statistiques.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "Consulter l'Article"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19596,7 +19735,6 @@
     "smart-video-compressor": "Compresseur vidéo intelligent",
     "smart-image-compression": "Compression d'image intelligente",
     "background-remover": "Suppresseur d'arrière-plan d'image",
-    "spelling-grammar-checker": "Correcteur d'orthographe et de grammaire",
     "text-summarizer": "Résumeur de texte",
     "image-upscaler": "Amélioration de résolution d'image",
     "plagiarism-checker": "Détecteur de plagiat",

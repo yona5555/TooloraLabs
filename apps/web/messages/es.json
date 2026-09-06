@@ -19393,6 +19393,145 @@
           "readOriginal": "Ver la Especificación"
         }
       }
+    },
+    "spelling-grammar-checker": {
+      "title": "Corrector Ortográfico y Gramatical",
+      "description": "Verifica el texto en busca de errores ortográficos comunes y problemas gramaticales básicos, completamente en tu navegador. Sin cuenta, sin servidor, sin costo.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "textLabel": "Texto a verificar",
+        "textPlaceholder": "Escribe o pega tu texto aquí para verificarlo mientras avanzas.",
+        "disclaimer": "Este es un corrector básico basado en reglas, no un asistente de escritura de IA completo — detecta errores comunes pero no lo detectará todo.",
+        "clear": "Borrar"
+      },
+      "result": {
+        "heading": "Resultados",
+        "emptyText": "Empieza a escribir para ver sugerencias ortográficas y gramaticales.",
+        "wordCountLabel": "Palabras",
+        "issueCountLabel": "Problemas Encontrados",
+        "suggestion": "Sugerido:"
+      },
+      "quickReference": {
+        "title": "Leyenda de Colores",
+        "intro": "Cada color de subrayado marca un tipo diferente de problema.",
+        "legend": {
+          "spelling": "Ortografía",
+          "grammar": "Gramática",
+          "capitalization": "Mayúsculas",
+          "punctuation": "Puntuación y Espaciado"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Entender Este Corrector",
+          "paragraph1": "Esta herramienta escanea tu texto usando un conjunto de reglas integradas directamente en el JavaScript de tu navegador: una lista de palabras comúnmente mal escritas, y comprobaciones de coincidencia de patrones para cosas como falta de mayúscula al inicio de una oración, palabras repetidas, espacios dobles, espacios faltantes después de la puntuación, y algunas confusiones gramaticales comunes como \"a\" versus \"an\" en inglés. Todo se ejecuta localmente mientras escribes —nada se envía jamás a un servidor.",
+          "limitation": "Importante: este es un corrector básico basado en reglas, no un asistente de escritura completo impulsado por IA. Está diseñado para detectar un conjunto específico de errores comunes e inequívocos, no para entender el contexto, el tono, o el estilo como lo hacen herramientas avanzadas como Grammarly. Siempre haz tu propia revisión final del texto."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Un corrector gramatical básico es útil en cualquier lugar donde un repaso rápido de errores obvios ayude antes de enviar o publicar texto.",
+          "items": [
+            {
+              "title": "Correos y Mensajes Rápidos",
+              "description": "Detectar un error tipográfico obvio o una mayúscula faltante antes de enviar un correo electrónico o mensaje rápido."
+            },
+            {
+              "title": "Redacción de Primer Borrador",
+              "description": "Hacer un primer repaso de un borrador para detectar errores mecánicos antes de hacer una revisión más completa de contenido y estilo."
+            },
+            {
+              "title": "Aprender Errores Comunes",
+              "description": "Ver palabras frecuentemente confundidas y errores mecánicos marcados puede ayudar a reforzar el uso correcto con el tiempo."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Es esto tan bueno como Grammarly u otras herramientas de escritura con IA?",
+              "answer": "No, y no pretende serlo. Esta herramienta usa un pequeño conjunto de reglas de coincidencia de patrones directas, mientras que herramientas como Grammarly usan grandes modelos de lenguaje entrenados para entender contexto, tono, y estilo. Este corrector detecta errores mecánicos específicos y comunes —piénsalo como un útil primer repaso, no un editor completo."
+            },
+            {
+              "question": "¿Esto envía mi texto a algún lugar?",
+              "answer": "No. Toda la verificación ocurre localmente en tu navegador usando JavaScript que se ejecuta en esta página —tu texto nunca se envía a un servidor ni se almacena en ningún lugar."
+            },
+            {
+              "question": "¿Por qué no detectó un error que sé que está ahí?",
+              "answer": "Este corrector solo busca un conjunto específico y limitado de patrones: una lista fija de palabras comúnmente mal escritas y un puñado de reglas gramaticales. No tiene un diccionario completo ni ninguna comprensión del significado, por lo que pasará por alto errores de palabras reales (como usar \"their\" en lugar de \"there\") y errores fuera de su conjunto de reglas."
+            },
+            {
+              "question": "¿Por qué marcó algo que en realidad es correcto?",
+              "answer": "Las reglas son coincidencias de patrones intencionalmente simples, por lo que ocasionalmente pueden producir un falso positivo —por ejemplo, la comprobación de \"a\" versus \"an\" se basa en la primera letra de la siguiente palabra, que generalmente pero no siempre coincide con cómo suena realmente la palabra. Usa tu propio criterio junto con las sugerencias."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia y Origen",
+            "paragraph": "La corrección ortográfica automatizada se remonta a 1971, cuando Ralph Gorin creó uno de los primeros programas de corrección ortográfica en Stanford. A finales de la década de 1970, herramientas como el comando \"spell\" de Unix y el proyecto Epistle de IBM comparaban las palabras de los documentos con listas de palabras de diccionario para señalar posibles errores tipográficos, la misma idea fundamental detrás de la comprobación ortográfica de esta herramienta. La corrección gramatical siguió un camino similar a partir de la década de 1980 (Writer's Workbench y Grammatik entre los primeros), usando reglas de coincidencia de patrones muy similares a las que esta herramienta usa hoy, antes de que las herramientas modernas basadas en IA trajeran una comprensión contextual profunda a la tarea décadas después."
+          },
+          "howItWorks": {
+            "title": "Cómo Funciona la Verificación Basada en Reglas",
+            "paragraph": "Los correctores basados en reglas como este funcionan escaneando el texto en busca de patrones específicos y bien definidos usando expresiones regulares y tablas de búsqueda, en lugar de entender el significado. Una comprobación ortográfica simplemente compara cada palabra con una lista de ortografías incorrectas conocidas; una comprobación de mayúsculas busca una letra minúscula inmediatamente después de un punto que termina una oración; y así sucesivamente. Este enfoque es rápido, completamente predecible, y no requiere ningún servicio externo, pero está inherentemente limitado a los patrones específicos que ha sido programado para reconocer —a diferencia de los correctores estadísticos o basados en IA, que pueden detectar errores que nadie anticipó explícitamente."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La verificación automatizada de texto se estudia dentro de las ciencias de la computación, específicamente en el procesamiento del lenguaje natural. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Stanford — Departamento de Ciencias de la Computación",
+                "note": "Un departamento de informática líder con sólida investigación en procesamiento del lenguaje natural.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Carnegie Mellon — Language Technologies Institute",
+                "note": "Uno de los centros líderes en el mundo en investigación de procesamiento del lenguaje natural.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Sede de un grupo de investigación líder en procesamiento del lenguaje natural.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Department of Computer Science and Technology",
+                "note": "Un centro líder en investigación de lingüística computacional y tecnología del lenguaje.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — los títulos de investigación son presenciales en el Departamento de Ciencias de la Computación y Tecnología."
+              },
+              {
+                "name": "Universidad de Edimburgo — School of Informatics",
+                "note": "Uno de los centros europeos líderes en investigación de procesamiento del lenguaje natural.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Edimburgo."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Ciencias de la Computación",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Técnicas",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "Una explicación técnica ampliamente citada y disponible gratuitamente de cómo funcionan los algoritmos de corrección ortográfica, desde búsquedas simples en diccionarios hasta modelos de corrección estadísticos.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "Ver el Artículo"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19596,7 +19735,6 @@
     "smart-video-compressor": "Compresor de video inteligente",
     "smart-image-compression": "Compresión inteligente de imágenes",
     "background-remover": "Eliminador de fondo de imagen",
-    "spelling-grammar-checker": "Corrector ortográfico y gramatical",
     "text-summarizer": "Resumidor de texto",
     "image-upscaler": "Mejorador de resolución de imagen",
     "plagiarism-checker": "Detector de plagio",

@@ -1289,4 +1289,19 @@ export const tools: Tool[] = [
       "free speech to text",
     ],
   },
+  {
+    slug: "spelling-grammar-checker",
+    title: "Spelling & Grammar Checker",
+    category: "ai-tools",
+    description:
+      "Check text for common spelling mistakes and basic grammar issues, entirely in your browser. No account, no server, no cost.",
+    featured: false,
+    keywords: [
+      "spelling checker",
+      "grammar checker",
+      "grammar check online",
+      "spell check online",
+      "free grammar checker",
+    ],
+  },
 ];

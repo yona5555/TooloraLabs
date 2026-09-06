@@ -77,3 +77,4 @@ export * from "./FuelCostCalculator";
 export * from "./BatchInvoiceCalculator";
 export * from "./TextToSpeechCalculator";
 export * from "./SpeechToTextCalculator";
+export * from "./SpellingGrammarCalculator";

@@ -19393,6 +19393,145 @@
           "readOriginal": "Spezifikation ansehen"
         }
       }
+    },
+    "spelling-grammar-checker": {
+      "title": "Rechtschreib- und Grammatikprüfung",
+      "description": "Überprüfe Text auf häufige Rechtschreibfehler und grundlegende Grammatikprobleme, komplett in deinem Browser. Kein Konto, kein Server, keine Kosten.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Dein Text",
+        "textLabel": "Zu prüfender Text",
+        "textPlaceholder": "Tippe oder füge deinen Text hier ein, um ihn während der Eingabe zu prüfen.",
+        "disclaimer": "Dies ist eine einfache regelbasierte Prüfung, kein vollständiger KI-Schreibassistent — sie erkennt häufige Fehler, aber nicht alles.",
+        "clear": "Löschen"
+      },
+      "result": {
+        "heading": "Ergebnisse",
+        "emptyText": "Beginne zu tippen, um Rechtschreib- und Grammatikvorschläge zu sehen.",
+        "wordCountLabel": "Wörter",
+        "issueCountLabel": "Gefundene Probleme",
+        "suggestion": "Vorschlag:"
+      },
+      "quickReference": {
+        "title": "Farblegende",
+        "intro": "Jede Unterstreichungsfarbe markiert eine andere Art von Problem.",
+        "legend": {
+          "spelling": "Rechtschreibung",
+          "grammar": "Grammatik",
+          "capitalization": "Großschreibung",
+          "punctuation": "Zeichensetzung & Abstände"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Diese Prüfung verstehen",
+          "paragraph1": "Dieses Tool scannt deinen Text mit einer Reihe von Regeln, die direkt in das JavaScript deines Browsers integriert sind: eine Liste häufig falsch geschriebener Wörter und Musterabgleichsprüfungen für Dinge wie fehlende Großschreibung am Satzanfang, wiederholte Wörter, doppelte Leerzeichen, fehlende Leerzeichen nach Satzzeichen und ein paar häufige grammatikalische Verwechslungen wie \"a\" versus \"an\" im Englischen. Alles läuft lokal ab, während du tippst — nichts wird jemals an einen Server gesendet.",
+          "limitation": "Wichtig: Dies ist eine einfache, regelbasierte Prüfung, kein vollständiger KI-gestützter Schreibassistent. Sie ist darauf ausgelegt, eine bestimmte Menge häufiger, eindeutiger Fehler zu erkennen, nicht um Kontext, Ton oder Stil zu verstehen, wie es fortgeschrittene Tools wie Grammarly tun. Lies deinen Text immer selbst noch einmal durch."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Eine einfache Grammatikprüfung ist überall nützlich, wo ein schneller Durchgang auf offensichtliche Fehler vor dem Senden oder Veröffentlichen von Text hilft.",
+          "items": [
+            {
+              "title": "Schnelle E-Mails und Nachrichten",
+              "description": "Einen offensichtlichen Tippfehler oder einen fehlenden Großbuchstaben erkennen, bevor man eine schnelle E-Mail oder Nachricht sendet."
+            },
+            {
+              "title": "Erster Entwurfsdurchgang",
+              "description": "Einen ersten Durchgang über einen Entwurf machen, um mechanische Fehler zu erkennen, bevor eine gründlichere Inhalts- und Stilüberprüfung erfolgt."
+            },
+            {
+              "title": "Häufige Fehler lernen",
+              "description": "Häufig verwechselte Wörter und mechanische Fehler markiert zu sehen, kann helfen, die richtige Verwendung im Laufe der Zeit zu festigen."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Ist das so gut wie Grammarly oder andere KI-Schreibtools?",
+              "answer": "Nein, und das will es auch nicht sein. Dieses Tool verwendet eine kleine Menge einfacher Musterabgleichsregeln, während Tools wie Grammarly große Sprachmodelle verwenden, die darauf trainiert sind, Kontext, Ton und Stil zu verstehen. Diese Prüfung erkennt spezifische, häufige mechanische Fehler — betrachte sie als hilfreichen ersten Durchgang, nicht als vollständigen Lektor."
+            },
+            {
+              "question": "Wird mein Text irgendwohin gesendet?",
+              "answer": "Nein. Die gesamte Prüfung erfolgt lokal in deinem Browser mit JavaScript, das auf dieser Seite läuft — dein Text wird niemals an einen Server gesendet oder irgendwo gespeichert."
+            },
+            {
+              "question": "Warum hat es einen Fehler nicht erkannt, von dem ich weiß, dass er da ist?",
+              "answer": "Diese Prüfung sucht nur nach einer bestimmten, begrenzten Menge von Mustern: einer festen Liste häufig falsch geschriebener Wörter und einer Handvoll Grammatikregeln. Sie hat kein vollständiges Wörterbuch oder ein Verständnis der Bedeutung, sodass sie echte Wortfehler (wie \"their\" statt \"there\") und Fehler außerhalb ihres Regelwerks übersieht."
+            },
+            {
+              "question": "Warum wurde etwas markiert, das eigentlich korrekt ist?",
+              "answer": "Die Regeln sind absichtlich einfache Musterabgleiche, daher können sie gelegentlich einen Fehlalarm erzeugen — zum Beispiel basiert die \"a\" versus \"an\"-Prüfung auf dem ersten Buchstaben des nächsten Wortes, was meistens, aber nicht immer damit übereinstimmt, wie das Wort tatsächlich klingt. Nutze dein eigenes Urteilsvermögen zusammen mit den Vorschlägen."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Ursprung",
+            "paragraph": "Die automatisierte Rechtschreibprüfung geht auf das Jahr 1971 zurück, als Ralph Gorin an der Stanford University eines der ersten Rechtschreibprüfungsprogramme entwickelte. Bis Ende der 1970er-Jahre verglichen Tools wie der Unix-Befehl \"spell\" und IBMs Epistle-Projekt Dokumentwörter mit Wörterbuchlisten, um wahrscheinliche Tippfehler zu erkennen — dieselbe grundlegende Idee hinter der Rechtschreibprüfung dieses Tools. Die Grammatikprüfung folgte ab den 1980er-Jahren einem ähnlichen Weg (Writer's Workbench und Grammatik gehörten zu den frühesten), unter Verwendung von Musterabgleichsregeln, die den heute von diesem Tool verwendeten sehr ähnlich sind, bevor moderne KI-basierte Tools Jahrzehnte später ein tiefes kontextuelles Verständnis in diese Aufgabe brachten."
+          },
+          "howItWorks": {
+            "title": "Wie regelbasierte Prüfung funktioniert",
+            "paragraph": "Regelbasierte Prüfungen wie diese funktionieren, indem sie Text mit regulären Ausdrücken und Nachschlagetabellen nach spezifischen, klar definierten Mustern durchsuchen, anstatt die Bedeutung zu verstehen. Eine Rechtschreibprüfung vergleicht einfach jedes Wort mit einer Liste bekannter falscher Schreibweisen; eine Großschreibungsprüfung sucht nach einem Kleinbuchstaben unmittelbar nach einem satzbeendenden Punkt; und so weiter. Dieser Ansatz ist schnell, vollständig vorhersehbar und benötigt keinen externen Dienst, ist aber inhärent auf die spezifischen Muster beschränkt, für deren Erkennung er programmiert wurde — im Gegensatz zu statistischen oder KI-basierten Prüfungen, die Fehler erkennen können, die niemand ausdrücklich vorhergesehen hat."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Automatisierte Textprüfung wird innerhalb der Informatik studiert, speziell in der Verarbeitung natürlicher Sprache. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "Eine führende Informatikabteilung mit starker Forschung in der Verarbeitung natürlicher Sprache.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "Eines der weltweit führenden Zentren für Forschung zur Verarbeitung natürlicher Sprache.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Beheimatet eine führende Forschungsgruppe zur Verarbeitung natürlicher Sprache.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Cambridge — Department of Computer Science and Technology",
+                "note": "Ein führendes Zentrum für Computerlinguistik und Sprachtechnologieforschung.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort an der Abteilung für Informatik und Technologie statt."
+              },
+              {
+                "name": "University of Edinburgh — School of Informatics",
+                "note": "Eines der führenden europäischen Zentren für Forschung zur Verarbeitung natürlicher Sprache.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "Nein — die Forschungsstudiengänge sind an der University of Edinburgh Präsenzstudiengänge."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technische Referenzen",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "Eine weithin zitierte, frei verfügbare technische Erklärung, wie Rechtschreibprüfungsalgorithmen funktionieren, von einfachen Wörterbuchnachschlagen bis zu statistischen Korrekturmodellen.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "Artikel ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19596,7 +19735,6 @@
     "smart-video-compressor": "Intelligenter Videokomprimierer",
     "smart-image-compression": "Intelligente Bildkomprimierung",
     "background-remover": "Bildhintergrund-Entferner",
-    "spelling-grammar-checker": "Rechtschreib- und Grammatikprüfung",
     "text-summarizer": "Textzusammenfasser",
     "image-upscaler": "Bildauflösungs-Verbesserer",
     "plagiarism-checker": "Plagiatsprüfer",

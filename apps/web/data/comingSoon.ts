@@ -72,7 +72,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "smart-video-compressor", icon: "FileVideo" },
     { id: "smart-image-compression", icon: "ImageDown" },
     { id: "background-remover", icon: "Eraser" },
-    { id: "spelling-grammar-checker", icon: "SpellCheck" },
     { id: "text-summarizer", icon: "AlignLeft" },
     { id: "image-upscaler", icon: "ZoomIn" },
     { id: "plagiarism-checker", icon: "ShieldAlert" },

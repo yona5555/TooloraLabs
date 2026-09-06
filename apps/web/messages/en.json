@@ -19393,6 +19393,145 @@
           "readOriginal": "View the Specification"
         }
       }
+    },
+    "spelling-grammar-checker": {
+      "title": "Spelling & Grammar Checker",
+      "description": "Check text for common spelling mistakes and basic grammar issues, entirely in your browser. No account, no server, no cost.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "textLabel": "Text to check",
+        "textPlaceholder": "Type or paste your text here to check it as you go.",
+        "disclaimer": "This is a basic rule-based checker, not a full AI writing assistant — it catches common mistakes but won't catch everything.",
+        "clear": "Clear"
+      },
+      "result": {
+        "heading": "Results",
+        "emptyText": "Start typing to see spelling and grammar suggestions.",
+        "wordCountLabel": "Words",
+        "issueCountLabel": "Issues Found",
+        "suggestion": "Suggested:"
+      },
+      "quickReference": {
+        "title": "Highlight Legend",
+        "intro": "Each underline color marks a different type of issue.",
+        "legend": {
+          "spelling": "Spelling",
+          "grammar": "Grammar",
+          "capitalization": "Capitalization",
+          "punctuation": "Punctuation & Spacing"
+        }
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding This Checker",
+          "paragraph1": "This tool scans your text using a set of rules built directly into your browser's JavaScript: a list of commonly misspelled words, and pattern-matching checks for things like missing capitalization at the start of a sentence, repeated words, double spaces, missing spaces after punctuation, and a few common grammar mix-ups like \"a\" versus \"an\". Everything runs locally as you type — nothing is ever sent to a server.",
+          "limitation": "Important: this is a basic, rule-based checker, not a full AI-powered writing assistant. It's built to catch a specific set of common, unambiguous mistakes, not to understand context, tone, or style the way advanced tools like Grammarly do. Always give your text a final read-through yourself."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "A basic grammar checker is useful anywhere a quick pass for obvious mistakes helps before sending or publishing text.",
+          "items": [
+            {
+              "title": "Quick Emails and Messages",
+              "description": "Catching an obvious typo or missed capital letter before sending a quick email or message."
+            },
+            {
+              "title": "First-Pass Drafting",
+              "description": "Running a first pass over a draft to catch mechanical errors before doing a more thorough content and style review."
+            },
+            {
+              "title": "Learning Common Mistakes",
+              "description": "Seeing frequently confused words and mechanical errors flagged can help reinforce correct usage over time."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is this as good as Grammarly or other AI writing tools?",
+              "answer": "No, and it's not trying to be. This tool uses a small set of straightforward pattern-matching rules, while tools like Grammarly use large language models trained to understand context, tone, and style. This checker catches specific, common mechanical mistakes — think of it as a helpful first pass, not a full editor."
+            },
+            {
+              "question": "Does this send my text anywhere?",
+              "answer": "No. All checking happens locally in your browser using JavaScript running on this page — your text is never sent to a server or stored anywhere."
+            },
+            {
+              "question": "Why didn't it catch a mistake I know is there?",
+              "answer": "This checker only looks for a specific, limited set of patterns: a fixed list of commonly misspelled words and a handful of grammar rules. It doesn't have a full dictionary or any understanding of meaning, so it will miss real-word errors (like \"their\" used instead of \"there\") and mistakes outside its rule set."
+            },
+            {
+              "question": "Why did it flag something that's actually correct?",
+              "answer": "The rules are intentionally simple pattern matches, so they can occasionally produce a false positive — for example, the \"a\" versus \"an\" check is based on the first letter of the next word, which usually but not always matches how the word actually sounds. Use your own judgment alongside the suggestions."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Origin",
+            "paragraph": "Automated spell checking dates back to 1971, when Ralph Gorin created one of the first spell-checking programs at Stanford. By the late 1970s, tools like the Unix \"spell\" command and IBM's Epistle project were comparing document words against dictionary word lists to flag likely typos, the same fundamental idea behind this tool's misspelling check. Grammar checking followed a similar path starting in the 1980s (Writer's Workbench and Grammatik among the earliest), using pattern-matching rules very similar to the ones this tool uses today, before modern AI-based tools brought deep contextual understanding to the task decades later."
+          },
+          "howItWorks": {
+            "title": "How Rule-Based Checking Works",
+            "paragraph": "Rule-based checkers like this one work by scanning text for specific, well-defined patterns using regular expressions and lookup tables, rather than by understanding meaning. A misspelling check simply compares each word against a list of known incorrect spellings; a capitalization check looks for a lowercase letter immediately following a sentence-ending period; and so on. This approach is fast, fully predictable, and requires no external service, but it's inherently limited to the specific patterns it's been programmed to recognize — unlike statistical or AI-based checkers, which can catch errors no one explicitly anticipated."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Automated text checking is studied within computer science, specifically in natural language processing. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Stanford University — Department of Computer Science",
+                "note": "A leading computer science department with strong natural language processing research.",
+                "url": "https://cs.stanford.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "Carnegie Mellon University — Language Technologies Institute",
+                "note": "One of the world's leading centers for natural language processing research.",
+                "url": "https://www.lti.cs.cmu.edu/admissions",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Washington — Paul G. Allen School of Computer Science & Engineering",
+                "note": "Home to a leading natural language processing research group.",
+                "url": "https://www.cs.washington.edu/academics/phd",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Cambridge — Department of Computer Science and Technology",
+                "note": "A leading center for computational linguistics and language technology research.",
+                "url": "https://www.cst.cam.ac.uk/admissions/phd",
+                "online": "No — research degrees are in-residence at the Department of Computer Science and Technology."
+              },
+              {
+                "name": "University of Edinburgh — School of Informatics",
+                "note": "One of Europe's leading centers for natural language processing research.",
+                "url": "https://www.ed.ac.uk/informatics/postgraduate/research",
+                "online": "No — research degrees are in-residence at the University of Edinburgh."
+              },
+              {
+                "name": "American University of Beirut — Department of Computer Science",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/msfea/cs/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Technical References",
+          "citation": "Norvig, P. (2007). How to Write a Spelling Corrector.",
+          "note": "A widely cited, freely available technical explanation of how spell-checking algorithms work, from simple dictionary lookups to statistical correction models.",
+          "url": "https://norvig.com/spell-correct.html",
+          "readOriginal": "View the Article"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19596,7 +19735,6 @@
     "smart-video-compressor": "Smart Video Compressor",
     "smart-image-compression": "Smart Image Compression",
     "background-remover": "Image Background Remover",
-    "spelling-grammar-checker": "Spelling & Grammar Checker",
     "text-summarizer": "Text Summarizer",
     "image-upscaler": "Image Upscaler",
     "plagiarism-checker": "Plagiarism Checker",

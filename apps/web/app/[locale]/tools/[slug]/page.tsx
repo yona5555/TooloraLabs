@@ -147,6 +147,8 @@ import TextToSpeech from "@/components/tools/text-to-speech/TextToSpeech";
 import TTSEducation from "@/components/tools/text-to-speech/TTSEducation";
 import SpeechToText from "@/components/tools/speech-to-text/SpeechToText";
 import STTEducation from "@/components/tools/speech-to-text/STTEducation";
+import SpellingGrammarChecker from "@/components/tools/spelling-grammar-checker/SpellingGrammarChecker";
+import SGEducation from "@/components/tools/spelling-grammar-checker/SGEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -573,6 +575,9 @@ export default async function ToolPage({
     case "speech-to-text":
       component = <SpeechToText education={<STTEducation />} />;
       break;
+    case "spelling-grammar-checker":
+      component = <SpellingGrammarChecker education={<SGEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -709,6 +714,7 @@ export default async function ToolPage({
     slug === "circle-calculator" ||
     slug === "text-to-speech" ||
     slug === "speech-to-text" ||
+    slug === "spelling-grammar-checker" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||
