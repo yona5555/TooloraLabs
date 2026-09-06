@@ -22362,6 +22362,569 @@
             "answer": "This reflects a real ambiguity in standard notation: \"1200\" could mean a measurement precise to the nearest 1 (with two coincidentally-zero digits) or to the nearest 100 — there's no way to tell without more context. Adding a decimal point (\"1200.\") is the conventional signal that all four digits were actually measured, which is why the tool treats the two forms differently."
           }
         ]
+      },
+      "area-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Area Calculator: the formulas behind its eight shapes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionScaling": "Why Area Scales Quadratically",
+        "sectionAnatomy": "Comparing Shapes",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Shapes",
+          "modesValue": "8",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Area = f(shape, dimensions) — e.g. Square: s², Circle: πr², Triangle: ½bh",
+          "note": "Each of the eight shapes uses its own standard closed-form Euclidean-geometry formula — there is no single universal area formula; the calculator selects the correct one based on the shape chosen."
+        },
+        "flowchart": {
+          "intro": "Selecting a shape determines which dimension fields are shown and which formula runs — the calculation itself is a single direct formula evaluation with no iteration.",
+          "steps": [
+            "Read which of the eight shapes is selected",
+            "Check that every dimension field that shape requires was entered",
+            "Validate every entered dimension is a strictly positive, finite number",
+            "For the sector shape only, additionally check the angle does not exceed 360 degrees",
+            "Apply that shape's closed-form area formula and round the result"
+          ],
+          "caption": "The shape-dependent validation and formula selection this tool runs on every calculation."
+        },
+        "scaling": {
+          "intro": "Area grows with the square of a shape's linear dimensions, not in direct proportion — doubling a square's side quadruples its area, not doubles it.",
+          "xLabel": "Side Length",
+          "yLabel": "Area",
+          "caption": "A square's area as its side length grows from 1 to 5 — the curve bends upward because area is proportional to the side squared."
+        },
+        "anatomy": {
+          "intro": "Different shapes enclose different amounts of area even when built from the same characteristic dimension (here, 10 units) — this is why the calculator asks for shape-specific dimensions rather than one generic size.",
+          "labelSquare": "Square (side 10)",
+          "labelCircle": "Circle (radius 10)",
+          "labelTriangle": "Right Triangle (base/height 10)",
+          "caption": "Area enclosed by three shapes sharing a characteristic dimension of 10 units — a circle encloses the most area per unit of that dimension."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Shape",
+            "meaning": "Which of the eight supported shapes to calculate — determines which dimension fields are shown.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Side",
+            "meaning": "The side length of a square.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Width / Height",
+            "meaning": "The two dimensions of a rectangle, or the base and perpendicular height of a triangle/parallelogram.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Radius",
+            "meaning": "The radius of a circle, or of a circular sector.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Semi-Major / Semi-Minor Axis",
+            "meaning": "The two half-axes of an ellipse — half its longest and shortest diameters.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Base 1 / Base 2",
+            "meaning": "The two parallel sides of a trapezoid.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Angle",
+            "meaning": "The central angle of a circular sector, in degrees — determines what fraction of the full circle's area the sector covers.",
+            "unit": "Degrees"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Missing a required dimension",
+            "description": "Each shape requires a specific set of fields (e.g. a rectangle needs both width and height); if any required field for the selected shape is left empty, the tool returns a \"missing-dimension\" error naming exactly which fields are needed, rather than computing with a default of zero."
+          },
+          {
+            "title": "Non-positive or non-finite dimension",
+            "description": "Every entered dimension is checked to be a strictly positive, finite number — zero, negative, or non-numeric input returns an \"invalid-dimension\" error, since no real shape can have a zero or negative side length."
+          },
+          {
+            "title": "Sector angle exceeding 360 degrees",
+            "description": "A circular sector's angle is capped at 360 degrees (a full circle) — an angle entered above that returns an explicit error rather than silently wrapping around or computing an area larger than the full circle."
+          },
+          {
+            "title": "Ellipse uses half-axes, not full axes",
+            "description": "The ellipse formula takes the semi-major and semi-minor axes (half the longest and shortest diameters) rather than the full diameters — entering full-axis measurements by mistake would produce an area four times too large, so the input labels are explicit about this."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this calculator support eight different shapes instead of a general formula?",
+            "answer": "Area has no single universal formula — each shape's boundary is geometrically different, so each requires its own closed-form solution. The calculator groups eight common shapes together under one interface rather than requiring eight separate tools."
+          },
+          {
+            "question": "Why does the sector need an angle in addition to a radius?",
+            "answer": "A circular sector is a \"slice\" of a circle, and its area is a fraction of the full circle's area equal to the fraction of 360 degrees the slice spans — without the angle, the tool would only know the full circle's area, not the slice's."
+          },
+          {
+            "question": "Why does the ellipse ask for semi-axes instead of the full width and height?",
+            "answer": "The standard ellipse area formula (π × semi-major × semi-minor) is defined in terms of the half-axes, matching how an ellipse's shape is conventionally described mathematically — using the half-axes directly avoids an extra division step and keeps the formula in its standard form."
+          },
+          {
+            "question": "How is a trapezoid's area different from a rectangle's?",
+            "answer": "A trapezoid has two parallel sides of different lengths rather than four equal-length pairs like a rectangle, so its area formula averages the two parallel sides before multiplying by the height — this reduces to the rectangle formula exactly when both parallel sides are equal."
+          }
+        ]
+      },
+      "surface-area-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Surface Area Calculator: the formulas behind its six solids, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionScaling": "Why Surface Area Scales Quadratically",
+        "sectionAnatomy": "Comparing Solids",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solids",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Surface Area = f(solid, dimensions) — e.g. Cube: 6s², Sphere: 4πr², Cylinder: 2πr(r+h)",
+          "note": "Each of the six 3D solids uses its own closed-form surface-area formula covering every face of the solid — for the cone and square pyramid, the slant height is derived internally from the perpendicular height via the Pythagorean theorem rather than asked for directly."
+        },
+        "flowchart": {
+          "intro": "Selecting a solid determines which dimension fields are shown; for the cone and pyramid, an extra internal step derives the slant height before the area formula runs.",
+          "steps": [
+            "Read which of the six solids is selected",
+            "Check that every dimension field that solid requires was entered",
+            "Validate every entered dimension is a strictly positive, finite number",
+            "For a cone or square pyramid, derive the slant height from the perpendicular height and radius/base using the Pythagorean theorem",
+            "Apply that solid's closed-form surface-area formula, summing every face, and round the result"
+          ],
+          "caption": "The shape-dependent validation, slant-height derivation, and formula selection this tool runs on every calculation."
+        },
+        "scaling": {
+          "intro": "Like flat area, a solid's surface area grows with the square of its linear dimensions — doubling a cube's side quadruples its surface area even though its volume grows eightfold.",
+          "xLabel": "Side Length",
+          "yLabel": "Surface Area",
+          "caption": "A cube's surface area as its side length grows from 1 to 5 — the curve bends upward because surface area is proportional to the side squared."
+        },
+        "anatomy": {
+          "intro": "Different solids enclose different amounts of surface area even when built from the same characteristic dimension (here, 10 units) — a sphere has the most surface area relative to a cube or cylinder of the same characteristic size.",
+          "labelCube": "Cube (side 10)",
+          "labelSphere": "Sphere (radius 10)",
+          "labelCylinder": "Cylinder (r=10, h=10)",
+          "caption": "Surface area of three solids sharing a characteristic dimension of 10 units."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Shape",
+            "meaning": "Which of the six supported solids to calculate — determines which dimension fields are shown.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Side",
+            "meaning": "The edge length of a cube.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Length / Width / Height",
+            "meaning": "The three edge lengths of a rectangular prism.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Radius",
+            "meaning": "The radius of a sphere, cylinder, or cone's circular base.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "The perpendicular height of a cylinder, cone, or square pyramid — not the slant height, which is derived automatically.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Base Side",
+            "meaning": "The side length of a square pyramid's square base.",
+            "unit": "Length"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Missing a required dimension",
+            "description": "Each solid requires a specific set of fields (e.g. a rectangular prism needs length, width, and height); if any required field is left empty, the tool returns a \"missing-dimension\" error naming exactly which fields are needed."
+          },
+          {
+            "title": "Non-positive or non-finite dimension",
+            "description": "Every entered dimension is checked to be a strictly positive, finite number — a zero or negative length returns an \"invalid-dimension\" error, since no real solid can have a non-positive edge or radius."
+          },
+          {
+            "title": "Slant height derived, not requested",
+            "description": "For the cone and square pyramid, the tool asks only for the perpendicular height (the measurement a user typically has on hand) and derives the slant height internally via the Pythagorean theorem, rather than requiring the user to supply an already-computed slant height."
+          },
+          {
+            "title": "Cylinder formula combines two distinct surfaces correctly",
+            "description": "A cylinder's surface area formula (2πr(r+h)) combines the two circular end caps (2πr²) and the curved lateral surface (2πrh) into one expression — the tool computes this as a single combined formula rather than summing separately-computed pieces, avoiding any rounding mismatch between them."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this calculator support six different solids instead of a general formula?",
+            "answer": "Surface area has no single universal formula — each solid's set of faces is geometrically different, so each requires summing its own specific faces. The calculator groups six common solids under one interface rather than requiring six separate tools."
+          },
+          {
+            "question": "Why do the cone and pyramid only ask for perpendicular height, not slant height?",
+            "answer": "A perpendicular height (straight up from the base to the apex) is what's typically measured or specified for a real cone or pyramid; the slant height (along the sloped face) is a derived quantity computed automatically via the Pythagorean theorem, so the tool doesn't require the user to calculate it themselves first."
+          },
+          {
+            "question": "How does this differ from the Volume Calculator?",
+            "answer": "Surface area measures the total area covering the outside of a solid (relevant for material needed to wrap or paint it), while volume measures the space enclosed inside it (relevant for capacity) — the two calculators share the same six solids and dimension fields, but apply entirely different formulas."
+          },
+          {
+            "question": "Why does a sphere have a simpler formula than a cube?",
+            "answer": "A sphere has only one degree of freedom (its radius) and a single continuously curved surface, so its formula (4πr²) is a direct function of that one variable; a cube has six flat square faces that must each be accounted for, though because all six are identical (6s²) its formula stays simple too."
+          }
+        ]
+      },
+      "volume-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Volume Calculator: the formulas behind its six solids, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionScaling": "Why Volume Scales Cubically",
+        "sectionAnatomy": "Comparing Solids",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solids",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Volume = f(solid, dimensions) — e.g. Cube: s³, Sphere: ⁴⁄₃πr³, Cylinder: πr²h",
+          "note": "Each of the six 3D solids uses its own closed-form volume formula. This tool accepts exactly the same dimension fields as the Surface Area Calculator for identical shapes, so the two tools can be used together on the same solid without re-entering measurements differently."
+        },
+        "flowchart": {
+          "intro": "Selecting a solid determines which dimension fields are shown — unlike surface area, no derived intermediate quantity (like slant height) is needed for any volume formula.",
+          "steps": [
+            "Read which of the six solids is selected",
+            "Check that every dimension field that solid requires was entered",
+            "Validate every entered dimension is a strictly positive, finite number",
+            "Apply that solid's closed-form volume formula and round the result"
+          ],
+          "caption": "The shape-dependent validation and formula selection this tool runs on every calculation."
+        },
+        "scaling": {
+          "intro": "Volume grows with the cube of a solid's linear dimensions — doubling a cube's side multiplies its volume by eight, far faster than the fourfold growth of its surface area.",
+          "xLabel": "Side Length",
+          "yLabel": "Volume",
+          "caption": "A cube's volume as its side length grows from 1 to 5 — the curve bends upward more sharply than an area curve because volume is proportional to the side cubed."
+        },
+        "anatomy": {
+          "intro": "Different solids enclose different amounts of volume even when built from the same characteristic dimension (here, 10 units) — a sphere encloses over four times the volume of a cube of the same characteristic size.",
+          "labelCube": "Cube (side 10)",
+          "labelSphere": "Sphere (radius 10)",
+          "labelCone": "Cone (r=10, h=10)",
+          "caption": "Volume enclosed by three solids sharing a characteristic dimension of 10 units."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Shape",
+            "meaning": "Which of the six supported solids to calculate — determines which dimension fields are shown.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Side",
+            "meaning": "The edge length of a cube.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Length / Width / Height",
+            "meaning": "The three edge lengths of a rectangular prism.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Radius",
+            "meaning": "The radius of a sphere, cylinder, or cone's circular base.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "The perpendicular height of a cylinder, cone, or square pyramid.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "Base Side",
+            "meaning": "The side length of a square pyramid's square base.",
+            "unit": "Length"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Missing a required dimension",
+            "description": "Each solid requires a specific set of fields; if any required field is left empty, the tool returns a \"missing-dimension\" error naming exactly which fields are needed, rather than computing with a default of zero."
+          },
+          {
+            "title": "Non-positive or non-finite dimension",
+            "description": "Every entered dimension is checked to be a strictly positive, finite number — a zero or negative length returns an \"invalid-dimension\" error, since no real solid can have a non-positive edge or radius."
+          },
+          {
+            "title": "Cone and pyramid volume need no slant height",
+            "description": "Unlike the Surface Area Calculator, volume formulas for the cone and square pyramid depend only on the perpendicular height, never the slant height — so no Pythagorean derivation step is needed here even though the same two shapes require one for surface area."
+          },
+          {
+            "title": "Identical dimension fields to Surface Area Calculator",
+            "description": "This tool deliberately mirrors the Surface Area Calculator's exact field set per shape (same radius, height, and base-side inputs) so a measurement entered once conceptually applies to both tools without relabeling or unit conversion."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this calculator support six different solids instead of a general formula?",
+            "answer": "Volume has no single universal formula — each solid's shape encloses space differently, so each requires its own closed-form solution. The calculator groups six common solids under one interface rather than requiring six separate tools."
+          },
+          {
+            "question": "How does this differ from the Surface Area Calculator?",
+            "answer": "Volume measures the space enclosed inside a solid (relevant for capacity, like how much a container holds), while surface area measures the total area covering its outside (relevant for material needed to wrap or paint it) — the two calculators share the same six solids and dimension fields, but apply entirely different formulas."
+          },
+          {
+            "question": "Why does a cone's volume use ⅓ while a cylinder's doesn't?",
+            "answer": "A cone tapers to a point while a cylinder maintains its full radius along its entire height — a cone's volume works out to exactly one-third of a cylinder with the same base radius and height, a classical result of integral calculus applied to a linearly tapering cross-section."
+          },
+          {
+            "question": "Why does doubling a cube's side increase its volume by 8× but its surface area by only 4×?",
+            "answer": "Volume is proportional to the cube of a linear dimension (2³ = 8) while surface area is proportional to its square (2² = 4) — this is a general geometric fact, not specific to cubes, and it's why very large objects tend to have proportionally less surface area relative to their volume than small ones."
+          }
+        ]
+      },
+      "circle-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Circle Calculator: the single-variable relationships behind its four interchangeable fields, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Circle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Known Fields",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "d = 2r, C = 2πr, A = πr²",
+          "note": "Every property of a circle is a fixed function of its radius alone — so given any one of the four (radius, diameter, circumference, or area), the tool first solves for the radius, then derives the other three directly from these formulas."
+        },
+        "flowchart": {
+          "intro": "Unlike a triangle, a circle has only one degree of freedom, so exactly one known measurement is always enough — there's no under-determined case to guard against.",
+          "steps": [
+            "Read which of the four fields (radius, diameter, circumference, or area) was entered, and its value",
+            "Validate the entered value is a positive, finite number",
+            "Solve for the radius using the inverse of that field's formula (e.g. for area, radius = √(A/π))",
+            "Derive the remaining three properties directly from the radius"
+          ],
+          "caption": "The single-radius-first solving approach this tool uses regardless of which field was entered."
+        },
+        "anatomy": {
+          "intro": "A circle's defining properties relate directly to its radius: the diameter is exactly twice the radius, and the circumference is the radius scaled by 2π.",
+          "labelRadius": "Radius (r)",
+          "labelDiameter": "Diameter (2r)",
+          "labelCircumference": "Circumference (2πr)",
+          "caption": "The radius, diameter, and circumference of a single circle, each derived from the same radius."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Known Field",
+            "meaning": "Which of the four properties (radius, diameter, circumference, or area) the entered value represents.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Value",
+            "meaning": "The numeric value of the known field — the single input the other three properties are derived from.",
+            "unit": "Length or Area"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zero or negative value",
+            "description": "A value of zero or less is rejected with an \"invalid-value\" error before any calculation — a circle cannot have a non-positive radius, diameter, circumference, or area."
+          },
+          {
+            "title": "Non-finite input",
+            "description": "Non-numeric or infinite input is explicitly checked and rejected alongside non-positive values, rather than allowing it to propagate into NaN results for the other three properties."
+          },
+          {
+            "title": "No under-determined case exists",
+            "description": "Because every circle property is a direct function of the radius alone, unlike a triangle (which can need multiple pieces of information depending on what's known), this tool never needs more than one known value — any one of the four is always mathematically sufficient."
+          },
+          {
+            "title": "Area-to-radius requires a square root",
+            "description": "When area is the known field, solving for radius requires inverting a squared relationship (r = √(A/π)) rather than simple division — the tool performs this inversion correctly rather than treating all four known-field cases with the same simple formula."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why can any one of four different values determine an entire circle?",
+            "answer": "A circle has exactly one degree of freedom — its radius — and every other property (diameter, circumference, area) is a fixed mathematical function of that radius alone. Once any one of the four is known, the radius can be recovered and the rest follow directly."
+          },
+          {
+            "question": "How is this different from the circle option in the Area Calculator?",
+            "answer": "The Area Calculator's circle shape only accepts a radius and returns only the area; this tool accepts any of four properties (including area itself) and returns all four simultaneously — useful when you know a circle's circumference or area but need its radius or diameter instead."
+          },
+          {
+            "question": "Why does entering circumference require dividing by 2π instead of 2?",
+            "answer": "Circumference relates to radius through the formula C = 2πr, so recovering the radius requires dividing by the full factor 2π, not just 2 — dividing by 2 alone would give a value with no direct geometric meaning."
+          },
+          {
+            "question": "Why does entering area require a square root?",
+            "answer": "Area relates to radius through the squared relationship A = πr², so recovering the radius from a known area requires the inverse operation of squaring — taking the square root of A/π — rather than simple division."
+          }
+        ]
+      },
+      "triangle-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Triangle Calculator: the Law of Sines and Law of Cosines behind its four solving modes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Triangle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solving Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Law of Cosines: c² = a² + b² − 2ab·cos(C)  |  Law of Sines: a/sin(A) = b/sin(B) = c/sin(C)",
+          "note": "Which law applies depends on which three pieces of information are known (SSS, SAS, ASA, or AAS) — the Law of Cosines solves for a missing side or angle when two sides and their included angle are known, while the Law of Sines solves when at least one full angle-side pair is known."
+        },
+        "flowchart": {
+          "intro": "Each of the four solving modes uses a different classical trigonometric identity to find the missing pieces, but all four then share the same final validation and geometry-building steps.",
+          "steps": [
+            "Read which of the four modes (SSS, SAS, ASA, or AAS) is selected, based on which three measurements are given",
+            "For SSS: derive all three angles from the three sides using the Law of Cosines",
+            "For SAS: derive the third side using the Law of Cosines, then the remaining angles",
+            "For ASA or AAS: derive the remaining sides using the Law of Sines",
+            "Validate the three angles sum to 180° and the three sides satisfy the triangle inequality",
+            "Compute the area (via Heron's formula) and perimeter, and build (x, y) vertex coordinates for the live diagram"
+          ],
+          "caption": "The mode-dependent trigonometric solving path, followed by shared validation and geometry construction."
+        },
+        "anatomy": {
+          "intro": "Every triangle is fully described by six values: three sides and three angles, with vertices placed at fixed coordinates once these are known.",
+          "labelSideA": "a",
+          "labelSideB": "b",
+          "labelSideC": "c",
+          "labelAngleA": "A",
+          "labelAngleB": "B",
+          "labelAngleC": "C",
+          "caption": "The standard triangle labeling convention: side a is opposite angle A, side b opposite angle B, and side c opposite angle C."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "a, b, c",
+            "meaning": "The three side lengths, each opposite the similarly-lettered angle — which of these are inputs versus derived outputs depends on the solving mode.",
+            "unit": "Length"
+          },
+          {
+            "symbol": "A, B, C",
+            "meaning": "The three interior angles, each opposite the similarly-lettered side — always sum to 180 degrees in a valid triangle.",
+            "unit": "Degrees"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "Which three measurements are known: Side-Side-Side (SSS), Side-Angle-Side (SAS), Angle-Side-Angle (ASA), or Angle-Angle-Side (AAS).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Triangle inequality violated",
+            "description": "Three side lengths only form a valid triangle if each side is shorter than the sum of the other two (a+b>c, a+c>b, b+c>a) — the tool checks all three inequalities and returns a \"triangle-inequality-violated\" error if any fails, rather than computing a geometrically impossible shape."
+          },
+          {
+            "title": "Angle sum not equal to 180 degrees",
+            "description": "After solving, the three angles are checked to sum to 180 degrees (within a small floating-point tolerance) — a mismatch returns an \"angle-sum-invalid\" error, catching cases where the given inputs were geometrically inconsistent."
+          },
+          {
+            "title": "Included angle of 180 degrees or more (SAS)",
+            "description": "In SAS mode, the given included angle must be strictly less than 180 degrees — an angle at or above that describes a degenerate or impossible configuration, so the tool rejects it before attempting the Law of Cosines calculation."
+          },
+          {
+            "title": "Two given angles summing to 180 degrees or more (ASA/AAS)",
+            "description": "In ASA and AAS modes, the two given angles must sum to strictly less than 180 degrees, since the third angle (180 minus their sum) must itself be positive for the triangle to exist — the tool validates this before solving."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this calculator have four different solving modes?",
+            "answer": "A triangle has six total measurements (three sides, three angles), but is fully determined by any three of them in specific combinations — SSS, SAS, ASA, and AAS are the four combinations that always yield a unique triangle, so each needs its own solving method matched to which three values are actually known."
+          },
+          {
+            "question": "What's the difference between the Law of Cosines and the Law of Sines?",
+            "answer": "The Law of Cosines relates all three sides to one angle and is used when two sides and their included angle are known (SAS) or when all three sides are known (SSS); the Law of Sines relates each side to the sine of its opposite angle and is used whenever a complete angle-side pair is already known (ASA, AAS)."
+          },
+          {
+            "question": "Why do ASA and AAS look similar but need different formulas?",
+            "answer": "Both give two angles and one side, but ASA's side is between the two given angles (included) while AAS's side is opposite one of them (non-included) — this changes which angle is used to start the Law of Sines calculation, even though both ultimately solve for the same missing values."
+          },
+          {
+            "question": "How is the triangle's area calculated once its sides are known?",
+            "answer": "The tool uses Heron's formula, which computes area directly from the three side lengths via the semi-perimeter (half the perimeter) without needing to know any angle or perpendicular height explicitly — this works for any valid triangle regardless of which solving mode found the sides."
+          }
+        ]
       }
     }
   }

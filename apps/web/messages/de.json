@@ -22362,6 +22362,569 @@
             "answer": "Dies spiegelt eine reale Mehrdeutigkeit in der Standardnotation wider: „1200“ könnte eine Messung bedeuten, die auf die nächste 1 genau ist (mit zwei zufällig nullwertigen Ziffern), oder auf die nächste 100 — ohne weiteren Kontext lässt sich das nicht unterscheiden. Das Hinzufügen eines Dezimalpunkts („1200.“) ist das konventionelle Signal, dass alle vier Ziffern tatsächlich gemessen wurden, weshalb das Tool die beiden Formen unterschiedlich behandelt."
           }
         ]
+      },
+      "area-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Flächenrechner: die Formeln hinter seinen acht Formen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionScaling": "Warum die Fläche quadratisch skaliert",
+        "sectionAnatomy": "Formen im Vergleich",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Formen",
+          "modesValue": "8",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Fläche = f(Form, Abmessungen) — z. B. Quadrat: s², Kreis: πr², Dreieck: ½bh",
+          "note": "Jede der acht Formen verwendet ihre eigene geschlossene Standardformel der euklidischen Geometrie — es gibt keine einzige universelle Flächenformel; der Rechner wählt die richtige basierend auf der gewählten Form."
+        },
+        "flowchart": {
+          "intro": "Die Wahl einer Form bestimmt, welche Abmessungsfelder angezeigt werden und welche Formel läuft — die Berechnung selbst ist eine einzige direkte Formelauswertung ohne Iteration.",
+          "steps": [
+            "Erkennen, welche der acht Formen ausgewählt ist",
+            "Prüfen, dass jedes von dieser Form benötigte Abmessungsfeld eingegeben wurde",
+            "Jede eingegebene Abmessung als streng positive, endliche Zahl validieren",
+            "Nur für den Kreissektor zusätzlich prüfen, dass der Winkel 360 Grad nicht überschreitet",
+            "Die geschlossene Flächenformel dieser Form anwenden und das Ergebnis runden"
+          ],
+          "caption": "Die formabhängige Validierung und Formelauswahl, die dieses Tool bei jeder Berechnung ausführt."
+        },
+        "scaling": {
+          "intro": "Die Fläche wächst mit dem Quadrat der linearen Abmessungen einer Form, nicht direkt proportional — das Verdoppeln der Seite eines Quadrats vervierfacht seine Fläche, nicht verdoppelt sie.",
+          "xLabel": "Seitenlänge",
+          "yLabel": "Fläche",
+          "caption": "Die Fläche eines Quadrats, während seine Seitenlänge von 1 auf 5 wächst — die Kurve krümmt sich nach oben, weil die Fläche proportional zum Quadrat der Seite ist."
+        },
+        "anatomy": {
+          "intro": "Verschiedene Formen umschließen unterschiedliche Flächenmengen, selbst wenn sie aus derselben charakteristischen Abmessung (hier 10 Einheiten) gebaut sind — deshalb fragt der Rechner nach formspezifischen Abmessungen statt nach einer allgemeinen Größe.",
+          "labelSquare": "Quadrat (Seite 10)",
+          "labelCircle": "Kreis (Radius 10)",
+          "labelTriangle": "Rechtwinkliges Dreieck (Basis/Höhe 10)",
+          "caption": "Von drei Formen umschlossene Fläche mit einer gemeinsamen charakteristischen Abmessung von 10 Einheiten — ein Kreis umschließt die meiste Fläche pro Einheit dieser Abmessung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Form",
+            "meaning": "Welche der acht unterstützten Formen berechnet werden soll — bestimmt, welche Abmessungsfelder angezeigt werden.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Seite",
+            "meaning": "Die Seitenlänge eines Quadrats.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Breite / Höhe",
+            "meaning": "Die beiden Abmessungen eines Rechtecks oder die Basis und senkrechte Höhe eines Dreiecks/Parallelogramms.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Radius",
+            "meaning": "Der Radius eines Kreises oder eines Kreissektors.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Große / Kleine Halbachse",
+            "meaning": "Die beiden Halbachsen einer Ellipse — die Hälfte ihres längsten und kürzesten Durchmessers.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Basis 1 / Basis 2",
+            "meaning": "Die beiden parallelen Seiten eines Trapezes.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Winkel",
+            "meaning": "Der Mittelpunktswinkel eines Kreissektors in Grad — bestimmt, welchen Anteil der Fläche des Vollkreises der Sektor abdeckt.",
+            "unit": "Grad"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fehlende erforderliche Abmessung",
+            "description": "Jede Form erfordert einen bestimmten Satz an Feldern (z. B. benötigt ein Rechteck sowohl Breite als auch Höhe); bleibt ein für die gewählte Form erforderliches Feld leer, gibt das Tool einen „Fehlende Abmessung“-Fehler zurück, der genau die benötigten Felder nennt, statt mit einem Standardwert von null zu rechnen."
+          },
+          {
+            "title": "Nicht-positive oder nicht-endliche Abmessung",
+            "description": "Jede eingegebene Abmessung wird als streng positive, endliche Zahl geprüft — null, negativ oder nicht-numerisch gibt einen „Ungültige Abmessung“-Fehler zurück, da keine reale Form eine null- oder negative Seitenlänge haben kann."
+          },
+          {
+            "title": "Sektorwinkel über 360 Grad",
+            "description": "Der Winkel eines Kreissektors ist auf 360 Grad (ein Vollkreis) begrenzt — ein darüber eingegebener Winkel gibt einen expliziten Fehler zurück, statt still umzulaufen oder eine größere Fläche als den Vollkreis zu berechnen."
+          },
+          {
+            "title": "Ellipse verwendet Halbachsen, nicht volle Achsen",
+            "description": "Die Ellipsenformel nimmt die große und kleine Halbachse (die Hälfte des längsten und kürzesten Durchmessers) statt der vollen Durchmesser — versehentlich eingegebene volle Achsenmaße würden eine viermal zu große Fläche ergeben, weshalb die Eingabebeschriftungen dies ausdrücklich klarstellen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum unterstützt dieser Rechner acht verschiedene Formen statt einer allgemeinen Formel?",
+            "answer": "Fläche hat keine einzige universelle Formel — die Begrenzung jeder Form ist geometrisch unterschiedlich, sodass jede ihre eigene geschlossene Lösung erfordert. Der Rechner fasst acht gängige Formen unter einer Oberfläche zusammen, statt acht separate Tools zu erfordern."
+          },
+          {
+            "question": "Warum benötigt der Sektor zusätzlich zum Radius einen Winkel?",
+            "answer": "Ein Kreissektor ist ein „Ausschnitt“ eines Kreises, und seine Fläche ist ein Anteil der Fläche des Vollkreises, der dem Anteil von 360 Grad entspricht, den der Ausschnitt umfasst — ohne den Winkel würde das Tool nur die Fläche des Vollkreises kennen, nicht die des Ausschnitts."
+          },
+          {
+            "question": "Warum fragt die Ellipse nach Halbachsen statt nach voller Breite und Höhe?",
+            "answer": "Die Standardformel für die Ellipsenfläche (π × große Halbachse × kleine Halbachse) ist in Bezug auf die Halbachsen definiert, passend zur konventionellen mathematischen Beschreibung einer Ellipse — die direkte Verwendung der Halbachsen vermeidet einen zusätzlichen Divisionsschritt und hält die Formel in ihrer Standardform."
+          },
+          {
+            "question": "Wie unterscheidet sich die Fläche eines Trapezes von der eines Rechtecks?",
+            "answer": "Ein Trapez hat zwei parallele Seiten unterschiedlicher Länge statt vier gleich langer Paare wie ein Rechteck, sodass seine Flächenformel die beiden parallelen Seiten mittelt, bevor mit der Höhe multipliziert wird — dies reduziert sich exakt auf die Rechteckformel, wenn beide parallelen Seiten gleich lang sind."
+          }
+        ]
+      },
+      "surface-area-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Oberflächenrechner: die Formeln hinter seinen sechs Körpern, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionScaling": "Warum die Oberfläche quadratisch skaliert",
+        "sectionAnatomy": "Körper im Vergleich",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Körper",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Oberfläche = f(Körper, Abmessungen) — z. B. Würfel: 6s², Kugel: 4πr², Zylinder: 2πr(r+h)",
+          "note": "Jeder der sechs 3D-Körper verwendet seine eigene geschlossene Oberflächenformel, die jede Fläche des Körpers abdeckt — für Kegel und quadratische Pyramide wird die Mantellinie intern aus der senkrechten Höhe über den Satz des Pythagoras abgeleitet, statt direkt abgefragt zu werden."
+        },
+        "flowchart": {
+          "intro": "Die Wahl eines Körpers bestimmt, welche Abmessungsfelder angezeigt werden; für Kegel und Pyramide leitet ein zusätzlicher interner Schritt die Mantellinie ab, bevor die Flächenformel läuft.",
+          "steps": [
+            "Erkennen, welcher der sechs Körper ausgewählt ist",
+            "Prüfen, dass jedes von diesem Körper benötigte Abmessungsfeld eingegeben wurde",
+            "Jede eingegebene Abmessung als streng positive, endliche Zahl validieren",
+            "Für einen Kegel oder eine quadratische Pyramide die Mantellinie aus der senkrechten Höhe und dem Radius/der Basis mit dem Satz des Pythagoras ableiten",
+            "Die geschlossene Oberflächenformel dieses Körpers anwenden, jede Fläche summieren, und das Ergebnis runden"
+          ],
+          "caption": "Die formabhängige Validierung, Mantellinien-Ableitung und Formelauswahl, die dieses Tool bei jeder Berechnung ausführt."
+        },
+        "scaling": {
+          "intro": "Wie die ebene Fläche wächst auch die Oberfläche eines Körpers mit dem Quadrat seiner linearen Abmessungen — das Verdoppeln der Seite eines Würfels vervierfacht seine Oberfläche, obwohl sein Volumen um das Achtfache wächst.",
+          "xLabel": "Seitenlänge",
+          "yLabel": "Oberfläche",
+          "caption": "Die Oberfläche eines Würfels, während seine Seitenlänge von 1 auf 5 wächst — die Kurve krümmt sich nach oben, weil die Oberfläche proportional zum Quadrat der Seite ist."
+        },
+        "anatomy": {
+          "intro": "Verschiedene Körper umschließen unterschiedliche Oberflächenmengen, selbst wenn sie aus derselben charakteristischen Abmessung (hier 10 Einheiten) gebaut sind — eine Kugel hat relativ die meiste Oberfläche im Vergleich zu einem Würfel oder Zylinder gleicher charakteristischer Größe.",
+          "labelCube": "Würfel (Seite 10)",
+          "labelSphere": "Kugel (Radius 10)",
+          "labelCylinder": "Zylinder (r=10, h=10)",
+          "caption": "Oberfläche von drei Körpern mit einer gemeinsamen charakteristischen Abmessung von 10 Einheiten."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Form",
+            "meaning": "Welcher der sechs unterstützten Körper berechnet werden soll — bestimmt, welche Abmessungsfelder angezeigt werden.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Seite",
+            "meaning": "Die Kantenlänge eines Würfels.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Länge / Breite / Höhe",
+            "meaning": "Die drei Kantenlängen eines Quaders.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Radius",
+            "meaning": "Der Radius einer Kugel, eines Zylinders oder der kreisförmigen Grundfläche eines Kegels.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Höhe",
+            "meaning": "Die senkrechte Höhe eines Zylinders, Kegels oder einer quadratischen Pyramide — nicht die Mantellinie, die automatisch abgeleitet wird.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Basisseite",
+            "meaning": "Die Seitenlänge der quadratischen Grundfläche einer quadratischen Pyramide.",
+            "unit": "Länge"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fehlende erforderliche Abmessung",
+            "description": "Jeder Körper erfordert einen bestimmten Satz an Feldern (z. B. benötigt ein Quader Länge, Breite und Höhe); bleibt ein erforderliches Feld leer, gibt das Tool einen „Fehlende Abmessung“-Fehler zurück, der genau die benötigten Felder nennt."
+          },
+          {
+            "title": "Nicht-positive oder nicht-endliche Abmessung",
+            "description": "Jede eingegebene Abmessung wird als streng positive, endliche Zahl geprüft — eine null- oder negative Länge gibt einen „Ungültige Abmessung“-Fehler zurück, da kein reeller Körper eine nicht-positive Kante oder einen nicht-positiven Radius haben kann."
+          },
+          {
+            "title": "Mantellinie abgeleitet, nicht abgefragt",
+            "description": "Für Kegel und quadratische Pyramide fragt das Tool nur nach der senkrechten Höhe (das Maß, das ein Nutzer typischerweise zur Hand hat) und leitet die Mantellinie intern über den Satz des Pythagoras ab, statt zu verlangen, dass der Nutzer eine bereits berechnete Mantellinie angibt."
+          },
+          {
+            "title": "Zylinderformel kombiniert zwei unterschiedliche Flächen korrekt",
+            "description": "Die Oberflächenformel eines Zylinders (2πr(r+h)) kombiniert die beiden kreisförmigen Endkappen (2πr²) und die gekrümmte Mantelfläche (2πrh) zu einem Ausdruck — das Tool berechnet dies als eine einzige kombinierte Formel, statt separat berechnete Teile zu summieren, wodurch Rundungsabweichungen zwischen ihnen vermieden werden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum unterstützt dieser Rechner sechs verschiedene Körper statt einer allgemeinen Formel?",
+            "answer": "Oberfläche hat keine einzige universelle Formel — der Satz an Flächen jedes Körpers ist geometrisch unterschiedlich, sodass jeder das Summieren seiner spezifischen Flächen erfordert. Der Rechner fasst sechs gängige Körper unter einer Oberfläche zusammen, statt sechs separate Tools zu erfordern."
+          },
+          {
+            "question": "Warum fragen Kegel und Pyramide nur nach der senkrechten Höhe, nicht nach der Mantellinie?",
+            "answer": "Eine senkrechte Höhe (gerade nach oben von der Basis zur Spitze) ist das, was typischerweise für einen realen Kegel oder eine Pyramide gemessen oder angegeben wird; die Mantellinie (entlang der geneigten Fläche) ist eine abgeleitete Größe, die automatisch über den Satz des Pythagoras berechnet wird, sodass das Tool nicht verlangt, dass der Nutzer sie selbst zuerst berechnet."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom Volumenrechner?",
+            "answer": "Die Oberfläche misst die Gesamtfläche, die die Außenseite eines Körpers bedeckt (relevant für Material, um ihn einzuwickeln oder zu streichen), während das Volumen den darin eingeschlossenen Raum misst (relevant für die Kapazität) — die beiden Rechner teilen sich dieselben sechs Körper und Abmessungsfelder, wenden aber völlig unterschiedliche Formeln an."
+          },
+          {
+            "question": "Warum hat eine Kugel eine einfachere Formel als ein Würfel?",
+            "answer": "Eine Kugel hat nur einen Freiheitsgrad (ihren Radius) und eine einzige durchgehend gekrümmte Oberfläche, sodass ihre Formel (4πr²) eine direkte Funktion dieser einen Variable ist; ein Würfel hat sechs flache quadratische Flächen, die jeweils berücksichtigt werden müssen, doch da alle sechs identisch sind (6s²), bleibt auch seine Formel einfach."
+          }
+        ]
+      },
+      "volume-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Volumenrechner: die Formeln hinter seinen sechs Körpern, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionScaling": "Warum das Volumen kubisch skaliert",
+        "sectionAnatomy": "Körper im Vergleich",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Körper",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Volumen = f(Körper, Abmessungen) — z. B. Würfel: s³, Kugel: ⁴⁄₃πr³, Zylinder: πr²h",
+          "note": "Jeder der sechs 3D-Körper verwendet seine eigene geschlossene Volumenformel. Dieses Tool akzeptiert exakt dieselben Abmessungsfelder wie der Oberflächenrechner für identische Formen, sodass beide Tools bei demselben Körper zusammen verwendet werden können, ohne Maße unterschiedlich neu einzugeben."
+        },
+        "flowchart": {
+          "intro": "Die Wahl eines Körpers bestimmt, welche Abmessungsfelder angezeigt werden — anders als bei der Oberfläche wird für keine Volumenformel eine abgeleitete Zwischengröße (wie die Mantellinie) benötigt.",
+          "steps": [
+            "Erkennen, welcher der sechs Körper ausgewählt ist",
+            "Prüfen, dass jedes von diesem Körper benötigte Abmessungsfeld eingegeben wurde",
+            "Jede eingegebene Abmessung als streng positive, endliche Zahl validieren",
+            "Die geschlossene Volumenformel dieses Körpers anwenden und das Ergebnis runden"
+          ],
+          "caption": "Die formabhängige Validierung und Formelauswahl, die dieses Tool bei jeder Berechnung ausführt."
+        },
+        "scaling": {
+          "intro": "Das Volumen wächst mit der dritten Potenz der linearen Abmessungen eines Körpers — das Verdoppeln der Seite eines Würfels verachtfacht sein Volumen, weit schneller als das vierfache Wachstum seiner Oberfläche.",
+          "xLabel": "Seitenlänge",
+          "yLabel": "Volumen",
+          "caption": "Das Volumen eines Würfels, während seine Seitenlänge von 1 auf 5 wächst — die Kurve krümmt sich schärfer nach oben als eine Flächenkurve, weil das Volumen proportional zur dritten Potenz der Seite ist."
+        },
+        "anatomy": {
+          "intro": "Verschiedene Körper umschließen unterschiedliche Volumina, selbst wenn sie aus derselben charakteristischen Abmessung (hier 10 Einheiten) gebaut sind — eine Kugel umschließt mehr als das Vierfache des Volumens eines Würfels gleicher charakteristischer Größe.",
+          "labelCube": "Würfel (Seite 10)",
+          "labelSphere": "Kugel (Radius 10)",
+          "labelCone": "Kegel (r=10, h=10)",
+          "caption": "Von drei Körpern umschlossenes Volumen mit einer gemeinsamen charakteristischen Abmessung von 10 Einheiten."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Form",
+            "meaning": "Welcher der sechs unterstützten Körper berechnet werden soll — bestimmt, welche Abmessungsfelder angezeigt werden.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Seite",
+            "meaning": "Die Kantenlänge eines Würfels.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Länge / Breite / Höhe",
+            "meaning": "Die drei Kantenlängen eines Quaders.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Radius",
+            "meaning": "Der Radius einer Kugel, eines Zylinders oder der kreisförmigen Grundfläche eines Kegels.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Höhe",
+            "meaning": "Die senkrechte Höhe eines Zylinders, Kegels oder einer quadratischen Pyramide.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "Basisseite",
+            "meaning": "Die Seitenlänge der quadratischen Grundfläche einer quadratischen Pyramide.",
+            "unit": "Länge"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fehlende erforderliche Abmessung",
+            "description": "Jeder Körper erfordert einen bestimmten Satz an Feldern; bleibt ein erforderliches Feld leer, gibt das Tool einen „Fehlende Abmessung“-Fehler zurück, der genau die benötigten Felder nennt, statt mit einem Standardwert von null zu rechnen."
+          },
+          {
+            "title": "Nicht-positive oder nicht-endliche Abmessung",
+            "description": "Jede eingegebene Abmessung wird als streng positive, endliche Zahl geprüft — eine null- oder negative Länge gibt einen „Ungültige Abmessung“-Fehler zurück, da kein reeller Körper eine nicht-positive Kante oder einen nicht-positiven Radius haben kann."
+          },
+          {
+            "title": "Kegel- und Pyramidenvolumen benötigen keine Mantellinie",
+            "description": "Anders als beim Oberflächenrechner hängen die Volumenformeln für Kegel und quadratische Pyramide nur von der senkrechten Höhe ab, niemals von der Mantellinie — hier ist also kein Pythagoras-Ableitungsschritt nötig, obwohl dieselben beiden Formen ihn für die Oberfläche benötigen."
+          },
+          {
+            "title": "Identische Abmessungsfelder wie beim Oberflächenrechner",
+            "description": "Dieses Tool spiegelt bewusst den exakten Feldsatz des Oberflächenrechners pro Form wider (dieselben Radius-, Höhen- und Basisseiten-Eingaben), sodass ein einmal eingegebenes Maß konzeptionell für beide Tools gilt, ohne Umbenennung oder Einheitenumrechnung."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum unterstützt dieser Rechner sechs verschiedene Körper statt einer allgemeinen Formel?",
+            "answer": "Volumen hat keine einzige universelle Formel — die Form jedes Körpers umschließt Raum unterschiedlich, sodass jeder seine eigene geschlossene Lösung erfordert. Der Rechner fasst sechs gängige Körper unter einer Oberfläche zusammen, statt sechs separate Tools zu erfordern."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom Oberflächenrechner?",
+            "answer": "Volumen misst den im Inneren eines Körpers eingeschlossenen Raum (relevant für die Kapazität, wie viel ein Behälter fasst), während Oberfläche die Gesamtfläche misst, die seine Außenseite bedeckt (relevant für Material, um ihn einzuwickeln oder zu streichen) — die beiden Rechner teilen sich dieselben sechs Körper und Abmessungsfelder, wenden aber völlig unterschiedliche Formeln an."
+          },
+          {
+            "question": "Warum verwendet das Volumen eines Kegels ⅓, das eines Zylinders aber nicht?",
+            "answer": "Ein Kegel läuft zu einer Spitze zu, während ein Zylinder seinen vollen Radius über seine gesamte Höhe beibehält — das Volumen eines Kegels beträgt genau ein Drittel des Volumens eines Zylinders mit demselben Grundradius und derselben Höhe, ein klassisches Ergebnis der Integralrechnung angewendet auf einen linear zulaufenden Querschnitt."
+          },
+          {
+            "question": "Warum erhöht das Verdoppeln der Seite eines Würfels sein Volumen um das 8-Fache, aber seine Oberfläche nur um das 4-Fache?",
+            "answer": "Volumen ist proportional zur dritten Potenz einer linearen Abmessung (2³ = 8), während Oberfläche proportional zu ihrem Quadrat ist (2² = 4) — dies ist eine allgemeine geometrische Tatsache, nicht spezifisch für Würfel, und der Grund, warum sehr große Objekte tendenziell proportional weniger Oberfläche im Verhältnis zu ihrem Volumen haben als kleine."
+          }
+        ]
+      },
+      "circle-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Kreisrechner: die Ein-Variablen-Beziehungen hinter seinen vier austauschbaren Feldern, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionAnatomy": "Anatomie eines Kreises",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Bekannte Felder",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "d = 2r, U = 2πr, A = πr²",
+          "note": "Jede Eigenschaft eines Kreises ist eine feste Funktion allein seines Radius — bei Kenntnis eines der vier Werte (Radius, Durchmesser, Umfang oder Fläche) löst das Tool zunächst nach dem Radius auf und leitet dann die anderen drei direkt aus diesen Formeln ab."
+        },
+        "flowchart": {
+          "intro": "Anders als ein Dreieck hat ein Kreis nur einen Freiheitsgrad, sodass genau eine bekannte Messung immer ausreicht — es gibt keinen unterbestimmten Fall, vor dem man sich schützen müsste.",
+          "steps": [
+            "Erkennen, welches der vier Felder (Radius, Durchmesser, Umfang oder Fläche) eingegeben wurde, und dessen Wert",
+            "Prüfen, dass der eingegebene Wert eine positive, endliche Zahl ist",
+            "Nach dem Radius auflösen, mit der Umkehrung der Formel dieses Feldes (z. B. für die Fläche: Radius = √(A/π))",
+            "Die verbleibenden drei Eigenschaften direkt aus dem Radius ableiten"
+          ],
+          "caption": "Der Radius-zuerst-Lösungsansatz, den dieses Tool unabhängig davon verwendet, welches Feld eingegeben wurde."
+        },
+        "anatomy": {
+          "intro": "Die definierenden Eigenschaften eines Kreises beziehen sich direkt auf seinen Radius: Der Durchmesser ist genau doppelt so groß wie der Radius, und der Umfang ist der Radius skaliert mit 2π.",
+          "labelRadius": "Radius (r)",
+          "labelDiameter": "Durchmesser (2r)",
+          "labelCircumference": "Umfang (2πr)",
+          "caption": "Radius, Durchmesser und Umfang eines einzelnen Kreises, jeweils aus demselben Radius abgeleitet."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Bekanntes Feld",
+            "meaning": "Welche der vier Eigenschaften (Radius, Durchmesser, Umfang oder Fläche) der eingegebene Wert darstellt.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Wert",
+            "meaning": "Der Zahlenwert des bekannten Feldes — die einzige Eingabe, aus der die anderen drei Eigenschaften abgeleitet werden.",
+            "unit": "Länge oder Fläche"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Null oder negativer Wert",
+            "description": "Ein Wert von null oder darunter wird vor jeder Berechnung mit einem „Ungültiger Wert“-Fehler abgelehnt — ein Kreis kann keinen nicht-positiven Radius, Durchmesser, Umfang oder keine nicht-positive Fläche haben."
+          },
+          {
+            "title": "Nicht-endliche Eingabe",
+            "description": "Nicht-numerische oder unendliche Eingaben werden explizit geprüft und zusammen mit nicht-positiven Werten abgelehnt, statt sie in NaN-Ergebnisse für die anderen drei Eigenschaften fortzupflanzen."
+          },
+          {
+            "title": "Es gibt keinen unterbestimmten Fall",
+            "description": "Da jede Kreiseigenschaft eine direkte Funktion allein des Radius ist, anders als bei einem Dreieck (das je nach Bekanntem mehrere Informationen benötigen kann), benötigt dieses Tool nie mehr als einen bekannten Wert — jeder der vier ist immer mathematisch ausreichend."
+          },
+          {
+            "title": "Fläche zu Radius erfordert eine Quadratwurzel",
+            "description": "Wenn die Fläche das bekannte Feld ist, erfordert das Auflösen nach dem Radius die Umkehrung einer quadrierten Beziehung (r = √(A/π)) statt einfacher Division — das Tool führt diese Umkehrung korrekt aus, statt alle vier Fälle des bekannten Feldes mit derselben einfachen Formel zu behandeln."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum kann einer von vier verschiedenen Werten einen ganzen Kreis bestimmen?",
+            "answer": "Ein Kreis hat genau einen Freiheitsgrad — seinen Radius — und jede andere Eigenschaft (Durchmesser, Umfang, Fläche) ist eine feste mathematische Funktion allein dieses Radius. Sobald einer der vier bekannt ist, kann der Radius wiederhergestellt werden, und der Rest folgt direkt."
+          },
+          {
+            "question": "Wie unterscheidet sich dies von der Kreisoption im Flächenrechner?",
+            "answer": "Die Kreisform im Flächenrechner akzeptiert nur einen Radius und gibt nur die Fläche zurück; dieses Tool akzeptiert jede der vier Eigenschaften (einschließlich der Fläche selbst) und gibt alle vier gleichzeitig zurück — nützlich, wenn Sie den Umfang oder die Fläche eines Kreises kennen, aber stattdessen seinen Radius oder Durchmesser benötigen."
+          },
+          {
+            "question": "Warum erfordert die Eingabe des Umfangs eine Division durch 2π statt durch 2?",
+            "answer": "Der Umfang bezieht sich über die Formel U = 2πr auf den Radius, sodass die Wiederherstellung des Radius die Division durch den vollen Faktor 2π erfordert, nicht nur durch 2 — eine Division nur durch 2 würde einen Wert ohne direkte geometrische Bedeutung ergeben."
+          },
+          {
+            "question": "Warum erfordert die Eingabe der Fläche eine Quadratwurzel?",
+            "answer": "Die Fläche bezieht sich über die quadrierte Beziehung A = πr² auf den Radius, sodass die Wiederherstellung des Radius aus einer bekannten Fläche die Umkehroperation des Quadrierens erfordert — die Quadratwurzel aus A/π zu ziehen — statt einfacher Division."
+          }
+        ]
+      },
+      "triangle-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Dreiecksrechner: der Sinussatz und der Kosinussatz hinter seinen vier Lösungsmodi, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "Wie es berechnet wird",
+        "sectionAnatomy": "Anatomie eines Dreiecks",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Lösungsmodi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "6 Min."
+        },
+        "formula": {
+          "expression": "Kosinussatz: c² = a² + b² − 2ab·cos(C)  |  Sinussatz: a/sin(A) = b/sin(B) = c/sin(C)",
+          "note": "Welches Gesetz gilt, hängt davon ab, welche drei Informationen bekannt sind (SSS, SWS, WSW oder WWS) — der Kosinussatz löst nach einer fehlenden Seite oder einem fehlenden Winkel auf, wenn zwei Seiten und ihr eingeschlossener Winkel bekannt sind, während der Sinussatz löst, wenn mindestens ein vollständiges Winkel-Seiten-Paar bekannt ist."
+        },
+        "flowchart": {
+          "intro": "Jeder der vier Lösungsmodi verwendet eine andere klassische trigonometrische Identität, um die fehlenden Teile zu finden, aber alle vier teilen sich dann dieselben abschließenden Validierungs- und Geometrieerstellungsschritte.",
+          "steps": [
+            "Erkennen, welcher der vier Modi (SSS, SWS, WSW oder WWS) ausgewählt ist, basierend darauf, welche drei Maße gegeben sind",
+            "Für SSS: alle drei Winkel aus den drei Seiten mit dem Kosinussatz ableiten",
+            "Für SWS: die dritte Seite mit dem Kosinussatz ableiten, dann die verbleibenden Winkel",
+            "Für WSW oder WWS: die verbleibenden Seiten mit dem Sinussatz ableiten",
+            "Prüfen, dass die drei Winkel 180° ergeben und die drei Seiten die Dreiecksungleichung erfüllen",
+            "Die Fläche (über die Heronsche Formel) und den Umfang berechnen und (x, y)-Eckpunktkoordinaten für die Live-Zeichnung erstellen"
+          ],
+          "caption": "Der modusabhängige trigonometrische Lösungsweg, gefolgt von gemeinsamer Validierung und Geometrieerstellung."
+        },
+        "anatomy": {
+          "intro": "Jedes Dreieck wird vollständig durch sechs Werte beschrieben: drei Seiten und drei Winkel, wobei die Eckpunkte an festen Koordinaten platziert werden, sobald diese bekannt sind.",
+          "labelSideA": "a",
+          "labelSideB": "b",
+          "labelSideC": "c",
+          "labelAngleA": "A",
+          "labelAngleB": "B",
+          "labelAngleC": "C",
+          "caption": "Die Standard-Beschriftungskonvention für Dreiecke: Seite a liegt Winkel A gegenüber, Seite b Winkel B, und Seite c Winkel C."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "a, b, c",
+            "meaning": "Die drei Seitenlängen, jeweils gegenüber dem gleich benannten Winkel — ob diese Eingaben oder abgeleitete Ausgaben sind, hängt vom Lösungsmodus ab.",
+            "unit": "Länge"
+          },
+          {
+            "symbol": "A, B, C",
+            "meaning": "Die drei Innenwinkel, jeweils gegenüber der gleich benannten Seite — ergeben in einem gültigen Dreieck immer 180 Grad.",
+            "unit": "Grad"
+          },
+          {
+            "symbol": "Modus",
+            "meaning": "Welche drei Maße bekannt sind: Seite-Seite-Seite (SSS), Seite-Winkel-Seite (SWS), Winkel-Seite-Winkel (WSW) oder Winkel-Winkel-Seite (WWS).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Dreiecksungleichung verletzt",
+            "description": "Drei Seitenlängen bilden nur dann ein gültiges Dreieck, wenn jede Seite kürzer ist als die Summe der anderen beiden (a+b>c, a+c>b, b+c>a) — das Tool prüft alle drei Ungleichungen und gibt einen „Dreiecksungleichung verletzt“-Fehler zurück, wenn eine fehlschlägt, statt eine geometrisch unmögliche Form zu berechnen."
+          },
+          {
+            "title": "Winkelsumme nicht gleich 180 Grad",
+            "description": "Nach dem Lösen wird geprüft, ob die drei Winkel 180 Grad ergeben (innerhalb einer kleinen Gleitkomma-Toleranz) — eine Abweichung gibt einen „Winkelsumme ungültig“-Fehler zurück und erfasst Fälle, in denen die gegebenen Eingaben geometrisch inkonsistent waren."
+          },
+          {
+            "title": "Eingeschlossener Winkel von 180 Grad oder mehr (SWS)",
+            "description": "Im SWS-Modus muss der gegebene eingeschlossene Winkel streng kleiner als 180 Grad sein — ein Winkel bei oder über diesem Wert beschreibt eine entartete oder unmögliche Konfiguration, sodass das Tool ihn ablehnt, bevor es die Kosinussatz-Berechnung versucht."
+          },
+          {
+            "title": "Zwei gegebene Winkel ergeben 180 Grad oder mehr (WSW/WWS)",
+            "description": "In den Modi WSW und WWS müssen die beiden gegebenen Winkel streng weniger als 180 Grad ergeben, da der dritte Winkel (180 minus ihrer Summe) selbst positiv sein muss, damit das Dreieck existiert — das Tool validiert dies vor der Lösung."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum hat dieser Rechner vier verschiedene Lösungsmodi?",
+            "answer": "Ein Dreieck hat insgesamt sechs Maße (drei Seiten, drei Winkel), ist aber durch beliebige drei davon in bestimmten Kombinationen vollständig bestimmt — SSS, SWS, WSW und WWS sind die vier Kombinationen, die immer ein eindeutiges Dreieck ergeben, sodass jede ihre eigene Lösungsmethode benötigt, passend dazu, welche drei Werte tatsächlich bekannt sind."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen dem Kosinussatz und dem Sinussatz?",
+            "answer": "Der Kosinussatz bezieht alle drei Seiten auf einen Winkel und wird verwendet, wenn zwei Seiten und ihr eingeschlossener Winkel bekannt sind (SWS) oder wenn alle drei Seiten bekannt sind (SSS); der Sinussatz bezieht jede Seite auf den Sinus ihres gegenüberliegenden Winkels und wird verwendet, wann immer bereits ein vollständiges Winkel-Seiten-Paar bekannt ist (WSW, WWS)."
+          },
+          {
+            "question": "Warum sehen WSW und WWS ähnlich aus, benötigen aber unterschiedliche Formeln?",
+            "answer": "Beide geben zwei Winkel und eine Seite an, aber die Seite bei WSW liegt zwischen den beiden gegebenen Winkeln (eingeschlossen), während die Seite bei WWS einem von ihnen gegenüberliegt (nicht eingeschlossen) — dies ändert, welcher Winkel zum Start der Sinussatz-Berechnung verwendet wird, obwohl beide letztlich nach denselben fehlenden Werten auflösen."
+          },
+          {
+            "question": "Wie wird die Fläche des Dreiecks berechnet, sobald seine Seiten bekannt sind?",
+            "answer": "Das Tool verwendet die Heronsche Formel, die die Fläche direkt aus den drei Seitenlängen über den halben Umfang berechnet, ohne dass ein Winkel oder eine senkrechte Höhe explizit bekannt sein muss — dies funktioniert für jedes gültige Dreieck, unabhängig davon, welcher Lösungsmodus die Seiten gefunden hat."
+          }
+        ]
       }
     }
   }

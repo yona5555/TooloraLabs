@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SurfaceAreaInputPanel from "./SurfaceAreaInputPanel";
 import SurfaceAreaResult from "./SurfaceAreaResult";
 import SurfaceAreaQuickReference from "./SurfaceAreaQuickReference";
@@ -85,6 +86,7 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="surface-area-calculator" />
               <SurfaceAreaQuickReference />
             </div>
           }

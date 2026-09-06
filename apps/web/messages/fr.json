@@ -22362,6 +22362,569 @@
             "answer": "Cela reflète une réelle ambiguïté de la notation standard : « 1200 » pourrait signifier une mesure précise au 1 près (avec deux chiffres accidentellement nuls) ou au 100 près — impossible à savoir sans plus de contexte. Ajouter une virgule décimale (« 1200. ») est le signal conventionnel que les quatre chiffres ont effectivement été mesurés, c'est pourquoi l'outil traite les deux formes différemment."
           }
         ]
+      },
+      "area-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice d'Aire : les formules derrière ses huit formes, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionScaling": "Pourquoi l'aire évolue de façon quadratique",
+        "sectionAnatomy": "Comparaison des Formes",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Formes",
+          "modesValue": "8",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Aire = f(forme, dimensions) — p. ex. Carré : c², Cercle : πr², Triangle : ½bh",
+          "note": "Chacune des huit formes utilise sa propre formule standard fermée de géométrie euclidienne — il n'existe pas de formule d'aire universelle unique ; la calculatrice sélectionne la bonne selon la forme choisie."
+        },
+        "flowchart": {
+          "intro": "Sélectionner une forme détermine quels champs de dimensions sont affichés et quelle formule s'exécute — le calcul lui-même est une seule évaluation directe de formule sans itération.",
+          "steps": [
+            "Lire laquelle des huit formes est sélectionnée",
+            "Vérifier que chaque champ de dimension requis par cette forme a été saisi",
+            "Valider que chaque dimension saisie est un nombre strictement positif et fini",
+            "Pour la forme secteur uniquement, vérifier en plus que l'angle ne dépasse pas 360 degrés",
+            "Appliquer la formule d'aire fermée de cette forme et arrondir le résultat"
+          ],
+          "caption": "La validation dépendante de la forme et la sélection de formule que cet outil exécute à chaque calcul."
+        },
+        "scaling": {
+          "intro": "L'aire croît avec le carré des dimensions linéaires d'une forme, pas en proportion directe — doubler le côté d'un carré quadruple son aire, ne la double pas.",
+          "xLabel": "Longueur du Côté",
+          "yLabel": "Aire",
+          "caption": "L'aire d'un carré à mesure que son côté croît de 1 à 5 — la courbe se courbe vers le haut car l'aire est proportionnelle au carré du côté."
+        },
+        "anatomy": {
+          "intro": "Différentes formes renferment des quantités d'aire différentes même construites à partir de la même dimension caractéristique (ici, 10 unités) — c'est pourquoi la calculatrice demande des dimensions spécifiques à chaque forme plutôt qu'une taille générique.",
+          "labelSquare": "Carré (côté 10)",
+          "labelCircle": "Cercle (rayon 10)",
+          "labelTriangle": "Triangle Rectangle (base/hauteur 10)",
+          "caption": "Aire renfermée par trois formes partageant une dimension caractéristique de 10 unités — un cercle renferme le plus d'aire par unité de cette dimension."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Forme",
+            "meaning": "Laquelle des huit formes prises en charge calculer — détermine quels champs de dimensions sont affichés.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Côté",
+            "meaning": "La longueur du côté d'un carré.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Largeur / Hauteur",
+            "meaning": "Les deux dimensions d'un rectangle, ou la base et la hauteur perpendiculaire d'un triangle/parallélogramme.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Rayon",
+            "meaning": "Le rayon d'un cercle, ou d'un secteur circulaire.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Demi-Grand Axe / Demi-Petit Axe",
+            "meaning": "Les deux demi-axes d'une ellipse — la moitié de ses diamètres le plus long et le plus court.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Base 1 / Base 2",
+            "meaning": "Les deux côtés parallèles d'un trapèze.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Angle",
+            "meaning": "L'angle central d'un secteur circulaire, en degrés — détermine quelle fraction de l'aire du cercle complet le secteur couvre.",
+            "unit": "Degrés"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Dimension requise manquante",
+            "description": "Chaque forme requiert un ensemble spécifique de champs (p. ex. un rectangle a besoin à la fois de la largeur et de la hauteur) ; si un champ requis pour la forme sélectionnée est laissé vide, l'outil renvoie une erreur « dimension manquante » nommant exactement les champs nécessaires, plutôt que de calculer avec une valeur par défaut de zéro."
+          },
+          {
+            "title": "Dimension non positive ou non finie",
+            "description": "Chaque dimension saisie est vérifiée comme étant un nombre strictement positif et fini — une saisie nulle, négative ou non numérique renvoie une erreur « dimension invalide », car aucune forme réelle ne peut avoir une longueur de côté nulle ou négative."
+          },
+          {
+            "title": "Angle du secteur dépassant 360 degrés",
+            "description": "L'angle d'un secteur circulaire est plafonné à 360 degrés (un cercle complet) — un angle saisi au-delà renvoie une erreur explicite plutôt que de boucler silencieusement ou de calculer une aire plus grande que le cercle complet."
+          },
+          {
+            "title": "L'ellipse utilise des demi-axes, pas des axes complets",
+            "description": "La formule de l'ellipse prend le demi-grand axe et le demi-petit axe (la moitié des diamètres le plus long et le plus court) plutôt que les diamètres complets — saisir des mesures d'axe complet par erreur produirait une aire quatre fois trop grande, donc les libellés de saisie sont explicites à ce sujet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cette calculatrice prend-elle en charge huit formes différentes plutôt qu'une formule générale ?",
+            "answer": "L'aire n'a pas de formule universelle unique — le contour de chaque forme est géométriquement différent, donc chacune nécessite sa propre solution fermée. La calculatrice regroupe huit formes courantes sous une seule interface plutôt que de nécessiter huit outils distincts."
+          },
+          {
+            "question": "Pourquoi le secteur a-t-il besoin d'un angle en plus d'un rayon ?",
+            "answer": "Un secteur circulaire est une « tranche » d'un cercle, et son aire est une fraction de l'aire du cercle complet égale à la fraction de 360 degrés que la tranche couvre — sans l'angle, l'outil ne connaîtrait que l'aire du cercle complet, pas celle de la tranche."
+          },
+          {
+            "question": "Pourquoi l'ellipse demande-t-elle des demi-axes plutôt que la largeur et la hauteur complètes ?",
+            "answer": "La formule standard de l'aire de l'ellipse (π × demi-grand axe × demi-petit axe) est définie en termes de demi-axes, correspondant à la façon conventionnelle dont la forme d'une ellipse est décrite mathématiquement — utiliser directement les demi-axes évite une étape de division supplémentaire et garde la formule sous sa forme standard."
+          },
+          {
+            "question": "En quoi l'aire d'un trapèze diffère-t-elle de celle d'un rectangle ?",
+            "answer": "Un trapèze a deux côtés parallèles de longueurs différentes plutôt que quatre paires de longueur égale comme un rectangle, donc sa formule d'aire fait la moyenne des deux côtés parallèles avant de multiplier par la hauteur — cela se réduit exactement à la formule du rectangle lorsque les deux côtés parallèles sont égaux."
+          }
+        ]
+      },
+      "surface-area-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice d'Aire de Surface : les formules derrière ses six solides, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionScaling": "Pourquoi l'aire de surface évolue de façon quadratique",
+        "sectionAnatomy": "Comparaison des Solides",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solides",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Aire de Surface = f(solide, dimensions) — p. ex. Cube : 6c², Sphère : 4πr², Cylindre : 2πr(r+h)",
+          "note": "Chacun des six solides 3D utilise sa propre formule fermée d'aire de surface couvrant chaque face du solide — pour le cône et la pyramide carrée, la hauteur oblique est dérivée en interne de la hauteur perpendiculaire via le théorème de Pythagore plutôt que demandée directement."
+        },
+        "flowchart": {
+          "intro": "Sélectionner un solide détermine quels champs de dimensions sont affichés ; pour le cône et la pyramide, une étape interne supplémentaire dérive la hauteur oblique avant l'exécution de la formule d'aire.",
+          "steps": [
+            "Lire lequel des six solides est sélectionné",
+            "Vérifier que chaque champ de dimension requis par ce solide a été saisi",
+            "Valider que chaque dimension saisie est un nombre strictement positif et fini",
+            "Pour un cône ou une pyramide carrée, dériver la hauteur oblique à partir de la hauteur perpendiculaire et du rayon/de la base en utilisant le théorème de Pythagore",
+            "Appliquer la formule fermée d'aire de surface de ce solide, en sommant chaque face, et arrondir le résultat"
+          ],
+          "caption": "La validation dépendante de la forme, la dérivation de la hauteur oblique, et la sélection de formule que cet outil exécute à chaque calcul."
+        },
+        "scaling": {
+          "intro": "Comme l'aire plane, l'aire de surface d'un solide croît avec le carré de ses dimensions linéaires — doubler le côté d'un cube quadruple son aire de surface même si son volume croît d'un facteur huit.",
+          "xLabel": "Longueur du Côté",
+          "yLabel": "Aire de Surface",
+          "caption": "L'aire de surface d'un cube à mesure que son côté croît de 1 à 5 — la courbe se courbe vers le haut car l'aire de surface est proportionnelle au carré du côté."
+        },
+        "anatomy": {
+          "intro": "Différents solides renferment des quantités d'aire de surface différentes même construits à partir de la même dimension caractéristique (ici, 10 unités) — une sphère a le plus d'aire de surface relative comparée à un cube ou un cylindre de même taille caractéristique.",
+          "labelCube": "Cube (côté 10)",
+          "labelSphere": "Sphère (rayon 10)",
+          "labelCylinder": "Cylindre (r=10, h=10)",
+          "caption": "Aire de surface de trois solides partageant une dimension caractéristique de 10 unités."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Forme",
+            "meaning": "Lequel des six solides pris en charge calculer — détermine quels champs de dimensions sont affichés.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Côté",
+            "meaning": "La longueur de l'arête d'un cube.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Longueur / Largeur / Hauteur",
+            "meaning": "Les trois longueurs d'arête d'un prisme rectangulaire.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Rayon",
+            "meaning": "Le rayon d'une sphère, d'un cylindre, ou de la base circulaire d'un cône.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Hauteur",
+            "meaning": "La hauteur perpendiculaire d'un cylindre, cône, ou pyramide carrée — pas la hauteur oblique, qui est dérivée automatiquement.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Côté de Base",
+            "meaning": "La longueur du côté de la base carrée d'une pyramide carrée.",
+            "unit": "Longueur"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Dimension requise manquante",
+            "description": "Chaque solide requiert un ensemble spécifique de champs (p. ex. un prisme rectangulaire a besoin de la longueur, largeur et hauteur) ; si un champ requis est laissé vide, l'outil renvoie une erreur « dimension manquante » nommant exactement les champs nécessaires."
+          },
+          {
+            "title": "Dimension non positive ou non finie",
+            "description": "Chaque dimension saisie est vérifiée comme étant un nombre strictement positif et fini — une longueur nulle ou négative renvoie une erreur « dimension invalide », car aucun solide réel ne peut avoir une arête ou un rayon non positif."
+          },
+          {
+            "title": "Hauteur oblique dérivée, pas demandée",
+            "description": "Pour le cône et la pyramide carrée, l'outil demande seulement la hauteur perpendiculaire (la mesure qu'un utilisateur a généralement sous la main) et dérive la hauteur oblique en interne via le théorème de Pythagore, plutôt que d'exiger que l'utilisateur fournisse une hauteur oblique déjà calculée."
+          },
+          {
+            "title": "La formule du cylindre combine correctement deux surfaces distinctes",
+            "description": "La formule d'aire de surface d'un cylindre (2πr(r+h)) combine les deux calottes circulaires (2πr²) et la surface latérale courbe (2πrh) en une seule expression — l'outil calcule ceci comme une formule combinée unique plutôt que de sommer des parties calculées séparément, évitant tout décalage d'arrondi entre elles."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cette calculatrice prend-elle en charge six solides différents plutôt qu'une formule générale ?",
+            "answer": "L'aire de surface n'a pas de formule universelle unique — l'ensemble des faces de chaque solide est géométriquement différent, donc chacun nécessite de sommer ses faces spécifiques. La calculatrice regroupe six solides courants sous une seule interface plutôt que de nécessiter six outils distincts."
+          },
+          {
+            "question": "Pourquoi le cône et la pyramide ne demandent-ils que la hauteur perpendiculaire, pas la hauteur oblique ?",
+            "answer": "Une hauteur perpendiculaire (droite depuis la base jusqu'au sommet) est ce qui est généralement mesuré ou spécifié pour un cône ou une pyramide réels ; la hauteur oblique (le long de la face inclinée) est une quantité dérivée calculée automatiquement via le théorème de Pythagore, donc l'outil n'exige pas que l'utilisateur la calcule lui-même d'abord."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la Calculatrice de Volume ?",
+            "answer": "L'aire de surface mesure l'aire totale couvrant l'extérieur d'un solide (pertinent pour le matériau nécessaire pour l'emballer ou le peindre), tandis que le volume mesure l'espace enfermé à l'intérieur (pertinent pour la capacité) — les deux calculatrices partagent les mêmes six solides et champs de dimensions, mais appliquent des formules entièrement différentes."
+          },
+          {
+            "question": "Pourquoi une sphère a-t-elle une formule plus simple qu'un cube ?",
+            "answer": "Une sphère n'a qu'un seul degré de liberté (son rayon) et une seule surface continuellement courbée, donc sa formule (4πr²) est une fonction directe de cette variable unique ; un cube a six faces carrées planes qui doivent chacune être prises en compte, mais comme les six sont identiques (6c²), sa formule reste également simple."
+          }
+        ]
+      },
+      "volume-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Volume : les formules derrière ses six solides, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionScaling": "Pourquoi le volume évolue de façon cubique",
+        "sectionAnatomy": "Comparaison des Solides",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solides",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Volume = f(solide, dimensions) — p. ex. Cube : c³, Sphère : ⁴⁄₃πr³, Cylindre : πr²h",
+          "note": "Chacun des six solides 3D utilise sa propre formule fermée de volume. Cet outil accepte exactement les mêmes champs de dimensions que la Calculatrice d'Aire de Surface pour des formes identiques, afin que les deux outils puissent être utilisés ensemble sur le même solide sans ressaisir les mesures différemment."
+        },
+        "flowchart": {
+          "intro": "Sélectionner un solide détermine quels champs de dimensions sont affichés — contrairement à l'aire de surface, aucune quantité intermédiaire dérivée (comme la hauteur oblique) n'est nécessaire pour une formule de volume.",
+          "steps": [
+            "Lire lequel des six solides est sélectionné",
+            "Vérifier que chaque champ de dimension requis par ce solide a été saisi",
+            "Valider que chaque dimension saisie est un nombre strictement positif et fini",
+            "Appliquer la formule fermée de volume de ce solide et arrondir le résultat"
+          ],
+          "caption": "La validation dépendante de la forme et la sélection de formule que cet outil exécute à chaque calcul."
+        },
+        "scaling": {
+          "intro": "Le volume croît avec le cube des dimensions linéaires d'un solide — doubler le côté d'un cube multiplie son volume par huit, bien plus vite que la croissance quadruple de son aire de surface.",
+          "xLabel": "Longueur du Côté",
+          "yLabel": "Volume",
+          "caption": "Le volume d'un cube à mesure que son côté croît de 1 à 5 — la courbe se courbe vers le haut plus fortement qu'une courbe d'aire car le volume est proportionnel au cube du côté."
+        },
+        "anatomy": {
+          "intro": "Différents solides renferment des volumes différents même construits à partir de la même dimension caractéristique (ici, 10 unités) — une sphère renferme plus de quatre fois le volume d'un cube de même taille caractéristique.",
+          "labelCube": "Cube (côté 10)",
+          "labelSphere": "Sphère (rayon 10)",
+          "labelCone": "Cône (r=10, h=10)",
+          "caption": "Volume renfermé par trois solides partageant une dimension caractéristique de 10 unités."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Forme",
+            "meaning": "Lequel des six solides pris en charge calculer — détermine quels champs de dimensions sont affichés.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Côté",
+            "meaning": "La longueur de l'arête d'un cube.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Longueur / Largeur / Hauteur",
+            "meaning": "Les trois longueurs d'arête d'un prisme rectangulaire.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Rayon",
+            "meaning": "Le rayon d'une sphère, d'un cylindre, ou de la base circulaire d'un cône.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Hauteur",
+            "meaning": "La hauteur perpendiculaire d'un cylindre, cône, ou pyramide carrée.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "Côté de Base",
+            "meaning": "La longueur du côté de la base carrée d'une pyramide carrée.",
+            "unit": "Longueur"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Dimension requise manquante",
+            "description": "Chaque solide requiert un ensemble spécifique de champs ; si un champ requis est laissé vide, l'outil renvoie une erreur « dimension manquante » nommant exactement les champs nécessaires, plutôt que de calculer avec une valeur par défaut de zéro."
+          },
+          {
+            "title": "Dimension non positive ou non finie",
+            "description": "Chaque dimension saisie est vérifiée comme étant un nombre strictement positif et fini — une longueur nulle ou négative renvoie une erreur « dimension invalide », car aucun solide réel ne peut avoir une arête ou un rayon non positif."
+          },
+          {
+            "title": "Le volume du cône et de la pyramide n'a pas besoin de hauteur oblique",
+            "description": "Contrairement à la Calculatrice d'Aire de Surface, les formules de volume pour le cône et la pyramide carrée dépendent uniquement de la hauteur perpendiculaire, jamais de la hauteur oblique — aucune étape de dérivation pythagoricienne n'est donc nécessaire ici, même si les deux mêmes formes en requièrent une pour l'aire de surface."
+          },
+          {
+            "title": "Champs de dimensions identiques à la Calculatrice d'Aire de Surface",
+            "description": "Cet outil reflète délibérément l'ensemble exact de champs par forme de la Calculatrice d'Aire de Surface (mêmes entrées de rayon, hauteur, et côté de base) afin qu'une mesure saisie une fois s'applique conceptuellement aux deux outils sans réétiquetage ni conversion d'unités."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cette calculatrice prend-elle en charge six solides différents plutôt qu'une formule générale ?",
+            "answer": "Le volume n'a pas de formule universelle unique — la forme de chaque solide enferme l'espace différemment, donc chacun nécessite sa propre solution fermée. La calculatrice regroupe six solides courants sous une seule interface plutôt que de nécessiter six outils distincts."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la Calculatrice d'Aire de Surface ?",
+            "answer": "Le volume mesure l'espace enfermé à l'intérieur d'un solide (pertinent pour la capacité, comme la quantité qu'un contenant peut contenir), tandis que l'aire de surface mesure l'aire totale couvrant son extérieur (pertinent pour le matériau nécessaire pour l'emballer ou le peindre) — les deux calculatrices partagent les mêmes six solides et champs de dimensions, mais appliquent des formules entièrement différentes."
+          },
+          {
+            "question": "Pourquoi le volume d'un cône utilise-t-il ⅓ alors que celui d'un cylindre ne l'utilise pas ?",
+            "answer": "Un cône se rétrécit jusqu'à un point tandis qu'un cylindre maintient son rayon complet sur toute sa hauteur — le volume d'un cône s'avère être exactement un tiers de celui d'un cylindre avec le même rayon de base et la même hauteur, un résultat classique du calcul intégral appliqué à une section transversale se rétrécissant linéairement."
+          },
+          {
+            "question": "Pourquoi doubler le côté d'un cube augmente-t-il son volume par 8 mais son aire de surface seulement par 4 ?",
+            "answer": "Le volume est proportionnel au cube d'une dimension linéaire (2³ = 8) tandis que l'aire de surface est proportionnelle à son carré (2² = 4) — c'est un fait géométrique général, pas spécifique aux cubes, et c'est pourquoi les très grands objets ont tendance à avoir proportionnellement moins d'aire de surface par rapport à leur volume que les petits."
+          }
+        ]
+      },
+      "circle-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Cercle : les relations à une seule variable derrière ses quatre champs interchangeables, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Anatomie d'un Cercle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Champs Connus",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "d = 2r, C = 2πr, A = πr²",
+          "note": "Chaque propriété d'un cercle est une fonction fixe de son seul rayon — donc étant donné n'importe lequel des quatre (rayon, diamètre, circonférence, ou aire), l'outil résout d'abord le rayon, puis dérive les trois autres directement de ces formules."
+        },
+        "flowchart": {
+          "intro": "Contrairement à un triangle, un cercle n'a qu'un seul degré de liberté, donc exactement une mesure connue suffit toujours — il n'y a pas de cas sous-déterminé contre lequel se prémunir.",
+          "steps": [
+            "Lire lequel des quatre champs (rayon, diamètre, circonférence, ou aire) a été saisi, et sa valeur",
+            "Valider que la valeur saisie est un nombre positif et fini",
+            "Résoudre le rayon en utilisant l'inverse de la formule de ce champ (p. ex. pour l'aire, rayon = √(A/π))",
+            "Dériver les trois propriétés restantes directement à partir du rayon"
+          ],
+          "caption": "L'approche de résolution rayon-d'abord que cet outil utilise quel que soit le champ saisi."
+        },
+        "anatomy": {
+          "intro": "Les propriétés définissantes d'un cercle sont directement liées à son rayon : le diamètre vaut exactement le double du rayon, et la circonférence est le rayon mis à l'échelle par 2π.",
+          "labelRadius": "Rayon (r)",
+          "labelDiameter": "Diamètre (2r)",
+          "labelCircumference": "Circonférence (2πr)",
+          "caption": "Le rayon, le diamètre, et la circonférence d'un seul cercle, chacun dérivé du même rayon."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Champ Connu",
+            "meaning": "Laquelle des quatre propriétés (rayon, diamètre, circonférence, ou aire) la valeur saisie représente.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Valeur",
+            "meaning": "La valeur numérique du champ connu — la seule entrée à partir de laquelle les trois autres propriétés sont dérivées.",
+            "unit": "Longueur ou Aire"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Valeur nulle ou négative",
+            "description": "Une valeur de zéro ou moins est rejetée avec une erreur « valeur invalide » avant tout calcul — un cercle ne peut avoir un rayon, diamètre, circonférence, ou aire non positif."
+          },
+          {
+            "title": "Saisie non finie",
+            "description": "Les saisies non numériques ou infinies sont explicitement vérifiées et rejetées aux côtés des valeurs non positives, plutôt que de les laisser se propager en résultats NaN pour les trois autres propriétés."
+          },
+          {
+            "title": "Aucun cas sous-déterminé n'existe",
+            "description": "Parce que chaque propriété du cercle est une fonction directe du seul rayon, contrairement à un triangle (qui peut nécessiter plusieurs informations selon ce qui est connu), cet outil n'a jamais besoin de plus d'une valeur connue — n'importe laquelle des quatre est toujours mathématiquement suffisante."
+          },
+          {
+            "title": "L'aire vers le rayon nécessite une racine carrée",
+            "description": "Lorsque l'aire est le champ connu, résoudre le rayon nécessite d'inverser une relation au carré (r = √(A/π)) plutôt qu'une simple division — l'outil effectue correctement cette inversion plutôt que de traiter les quatre cas de champ connu avec la même formule simple."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'une quelconque de quatre valeurs différentes peut-elle déterminer un cercle entier ?",
+            "answer": "Un cercle a exactement un degré de liberté — son rayon — et chaque autre propriété (diamètre, circonférence, aire) est une fonction mathématique fixe de ce seul rayon. Une fois que l'une des quatre est connue, le rayon peut être récupéré et le reste suit directement."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de l'option cercle dans la Calculatrice d'Aire ?",
+            "answer": "La forme cercle de la Calculatrice d'Aire n'accepte qu'un rayon et ne renvoie que l'aire ; cet outil accepte n'importe laquelle des quatre propriétés (y compris l'aire elle-même) et renvoie les quatre simultanément — utile lorsque vous connaissez la circonférence ou l'aire d'un cercle mais avez besoin de son rayon ou diamètre à la place."
+          },
+          {
+            "question": "Pourquoi saisir la circonférence nécessite-t-il de diviser par 2π plutôt que par 2 ?",
+            "answer": "La circonférence est liée au rayon par la formule C = 2πr, donc récupérer le rayon nécessite de diviser par le facteur complet 2π, pas seulement par 2 — diviser seulement par 2 donnerait une valeur sans signification géométrique directe."
+          },
+          {
+            "question": "Pourquoi saisir l'aire nécessite-t-il une racine carrée ?",
+            "answer": "L'aire est liée au rayon par la relation au carré A = πr², donc récupérer le rayon à partir d'une aire connue nécessite l'opération inverse de la mise au carré — prendre la racine carrée de A/π — plutôt qu'une simple division."
+          }
+        ]
+      },
+      "triangle-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Triangle : la Loi des Sinus et la Loi des Cosinus derrière ses quatre modes de résolution, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Anatomie d'un Triangle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes de Résolution",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Loi des Cosinus : c² = a² + b² − 2ab·cos(C)  |  Loi des Sinus : a/sin(A) = b/sin(B) = c/sin(C)",
+          "note": "Quelle loi s'applique dépend de quelles trois informations sont connues (CCC, CAC, ACA, ou AAC) — la Loi des Cosinus résout un côté ou angle manquant lorsque deux côtés et leur angle inclus sont connus, tandis que la Loi des Sinus résout lorsqu'au moins une paire complète angle-côté est connue."
+        },
+        "flowchart": {
+          "intro": "Chacun des quatre modes de résolution utilise une identité trigonométrique classique différente pour trouver les pièces manquantes, mais les quatre partagent ensuite les mêmes étapes finales de validation et de construction géométrique.",
+          "steps": [
+            "Lire lequel des quatre modes (CCC, CAC, ACA, ou AAC) est sélectionné, selon quelles trois mesures sont données",
+            "Pour CCC : dériver les trois angles à partir des trois côtés en utilisant la Loi des Cosinus",
+            "Pour CAC : dériver le troisième côté en utilisant la Loi des Cosinus, puis les angles restants",
+            "Pour ACA ou AAC : dériver les côtés restants en utilisant la Loi des Sinus",
+            "Valider que les trois angles totalisent 180° et que les trois côtés satisfont l'inégalité triangulaire",
+            "Calculer l'aire (via la formule de Héron) et le périmètre, et construire les coordonnées (x, y) des sommets pour le diagramme en direct"
+          ],
+          "caption": "Le chemin de résolution trigonométrique dépendant du mode, suivi de la validation partagée et de la construction géométrique."
+        },
+        "anatomy": {
+          "intro": "Chaque triangle est entièrement décrit par six valeurs : trois côtés et trois angles, avec des sommets placés à des coordonnées fixes une fois ceux-ci connus.",
+          "labelSideA": "a",
+          "labelSideB": "b",
+          "labelSideC": "c",
+          "labelAngleA": "A",
+          "labelAngleB": "B",
+          "labelAngleC": "C",
+          "caption": "La convention standard d'étiquetage des triangles : le côté a est opposé à l'angle A, le côté b opposé à l'angle B, et le côté c opposé à l'angle C."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "a, b, c",
+            "meaning": "Les trois longueurs de côté, chacune opposée à l'angle de lettre similaire — lesquelles sont des entrées par rapport à des sorties dérivées dépend du mode de résolution.",
+            "unit": "Longueur"
+          },
+          {
+            "symbol": "A, B, C",
+            "meaning": "Les trois angles intérieurs, chacun opposé au côté de lettre similaire — totalisent toujours 180 degrés dans un triangle valide.",
+            "unit": "Degrés"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "Quelles trois mesures sont connues : Côté-Côté-Côté (CCC), Côté-Angle-Côté (CAC), Angle-Côté-Angle (ACA), ou Angle-Angle-Côté (AAC).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Inégalité triangulaire violée",
+            "description": "Trois longueurs de côté ne forment un triangle valide que si chaque côté est plus court que la somme des deux autres (a+b>c, a+c>b, b+c>a) — l'outil vérifie les trois inégalités et renvoie une erreur « inégalité triangulaire violée » si l'une échoue, plutôt que de calculer une forme géométriquement impossible."
+          },
+          {
+            "title": "Somme des angles non égale à 180 degrés",
+            "description": "Après résolution, il est vérifié que les trois angles totalisent 180 degrés (dans une petite tolérance de virgule flottante) — un écart renvoie une erreur « somme d'angles invalide », détectant les cas où les entrées données étaient géométriquement incohérentes."
+          },
+          {
+            "title": "Angle inclus de 180 degrés ou plus (CAC)",
+            "description": "En mode CAC, l'angle inclus donné doit être strictement inférieur à 180 degrés — un angle à ce niveau ou au-delà décrit une configuration dégénérée ou impossible, donc l'outil le rejette avant de tenter le calcul de la Loi des Cosinus."
+          },
+          {
+            "title": "Deux angles donnés totalisant 180 degrés ou plus (ACA/AAC)",
+            "description": "Dans les modes ACA et AAC, les deux angles donnés doivent totaliser strictement moins de 180 degrés, car le troisième angle (180 moins leur somme) doit lui-même être positif pour que le triangle existe — l'outil valide cela avant de résoudre."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cette calculatrice a-t-elle quatre modes de résolution différents ?",
+            "answer": "Un triangle a six mesures totales (trois côtés, trois angles), mais est entièrement déterminé par trois quelconques d'entre elles dans des combinaisons spécifiques — CCC, CAC, ACA, et AAC sont les quatre combinaisons qui donnent toujours un triangle unique, donc chacune nécessite sa propre méthode de résolution adaptée à quelles trois valeurs sont réellement connues."
+          },
+          {
+            "question": "Quelle est la différence entre la Loi des Cosinus et la Loi des Sinus ?",
+            "answer": "La Loi des Cosinus relie les trois côtés à un angle et est utilisée lorsque deux côtés et leur angle inclus sont connus (CAC) ou lorsque les trois côtés sont connus (CCC) ; la Loi des Sinus relie chaque côté au sinus de son angle opposé et est utilisée chaque fois qu'une paire complète angle-côté est déjà connue (ACA, AAC)."
+          },
+          {
+            "question": "Pourquoi ACA et AAC se ressemblent-ils mais nécessitent des formules différentes ?",
+            "answer": "Les deux donnent deux angles et un côté, mais le côté d'ACA est entre les deux angles donnés (inclus) tandis que le côté d'AAC est opposé à l'un d'eux (non inclus) — cela change quel angle est utilisé pour commencer le calcul de la Loi des Sinus, même si les deux résolvent finalement les mêmes valeurs manquantes."
+          },
+          {
+            "question": "Comment l'aire du triangle est-elle calculée une fois ses côtés connus ?",
+            "answer": "L'outil utilise la formule de Héron, qui calcule l'aire directement à partir des trois longueurs de côté via le demi-périmètre (la moitié du périmètre) sans avoir besoin de connaître explicitement un angle ou une hauteur perpendiculaire — cela fonctionne pour tout triangle valide, quel que soit le mode de résolution ayant trouvé les côtés."
+          }
+        ]
       }
     }
   }

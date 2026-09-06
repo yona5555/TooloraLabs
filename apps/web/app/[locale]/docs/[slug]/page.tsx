@@ -18,6 +18,11 @@ import GcfLcmCalculatorDocsPage, { getGcfLcmCalculatorTocItems } from "@/compone
 import FractionCalculatorDocsPage, { getFractionCalculatorTocItems } from "@/components/docs/fraction-calculator/FractionCalculatorDocsPage";
 import ScientificNotationConverterDocsPage, { getScientificNotationConverterTocItems } from "@/components/docs/scientific-notation-converter/ScientificNotationConverterDocsPage";
 import SignificantFiguresCalculatorDocsPage, { getSignificantFiguresCalculatorTocItems } from "@/components/docs/significant-figures-calculator/SignificantFiguresCalculatorDocsPage";
+import AreaCalculatorDocsPage, { getAreaCalculatorTocItems } from "@/components/docs/area-calculator/AreaCalculatorDocsPage";
+import SurfaceAreaCalculatorDocsPage, { getSurfaceAreaCalculatorTocItems } from "@/components/docs/surface-area-calculator/SurfaceAreaCalculatorDocsPage";
+import VolumeCalculatorDocsPage, { getVolumeCalculatorTocItems } from "@/components/docs/volume-calculator/VolumeCalculatorDocsPage";
+import CircleCalculatorDocsPage, { getCircleCalculatorTocItems } from "@/components/docs/circle-calculator/CircleCalculatorDocsPage";
+import TriangleCalculatorDocsPage, { getTriangleCalculatorTocItems } from "@/components/docs/triangle-calculator/TriangleCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -115,6 +120,26 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "significant-figures-calculator":
       content = <SignificantFiguresCalculatorDocsPage />;
       tocItems = await getSignificantFiguresCalculatorTocItems();
+      break;
+    case "area-calculator":
+      content = <AreaCalculatorDocsPage />;
+      tocItems = await getAreaCalculatorTocItems();
+      break;
+    case "surface-area-calculator":
+      content = <SurfaceAreaCalculatorDocsPage />;
+      tocItems = await getSurfaceAreaCalculatorTocItems();
+      break;
+    case "volume-calculator":
+      content = <VolumeCalculatorDocsPage />;
+      tocItems = await getVolumeCalculatorTocItems();
+      break;
+    case "circle-calculator":
+      content = <CircleCalculatorDocsPage />;
+      tocItems = await getCircleCalculatorTocItems();
+      break;
+    case "triangle-calculator":
+      content = <TriangleCalculatorDocsPage />;
+      tocItems = await getTriangleCalculatorTocItems();
       break;
   }
 
