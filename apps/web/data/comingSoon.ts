@@ -25,7 +25,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "energy-conversion-calculator", icon: "Zap" },
     { id: "pressure-conversion-calculator", icon: "Gauge" },
     { id: "aspect-ratio-calculator", icon: "RectangleHorizontal" },
-    { id: "multiplication-table-generator", icon: "Grid3x3" },
     { id: "bill-split-calculator", icon: "Receipt" },
     { id: "zakat-calculator", icon: "HandCoins" },
     { id: "advanced-temperature-converter", icon: "Thermometer" },

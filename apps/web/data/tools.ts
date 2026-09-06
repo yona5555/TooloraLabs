@@ -1379,4 +1379,19 @@ export const tools: Tool[] = [
       "motivational quote generator",
     ],
   },
+  {
+    slug: "multiplication-table-generator",
+    title: "Multiplication Table Generator",
+    category: "math",
+    description:
+      "Generate a multiplication table for a single number or a printable grid for a range of numbers.",
+    featured: false,
+    keywords: [
+      "multiplication table generator",
+      "times table generator",
+      "multiplication chart",
+      "printable times table",
+      "times table grid",
+    ],
+  },
 ];

@@ -159,6 +159,8 @@ import TextLogoGenerator from "@/components/tools/text-logo-generator/TextLogoGe
 import LogoEducation from "@/components/tools/text-logo-generator/LogoEducation";
 import RandomQuoteGenerator from "@/components/tools/random-quote-generator/RandomQuoteGenerator";
 import QuoteEducation from "@/components/tools/random-quote-generator/QuoteEducation";
+import MultiplicationTableGenerator from "@/components/tools/multiplication-table-generator/MultiplicationTableGenerator";
+import MTEducation from "@/components/tools/multiplication-table-generator/MTEducation";
 import PercentageCalculator from "@/components/tools/percentage-calculator/PercentageCalculator";
 import PercentageEducation from "@/components/tools/percentage-calculator/PercentageEducation";
 import TipCalculator from "@/components/tools/tip-calculator/TipCalculator";
@@ -603,6 +605,9 @@ export default async function ToolPage({
     case "random-quote-generator":
       component = <RandomQuoteGenerator education={<QuoteEducation />} />;
       break;
+    case "multiplication-table-generator":
+      component = <MultiplicationTableGenerator education={<MTEducation />} />;
+      break;
     case "percentage-calculator":
       component = <PercentageCalculator education={<PercentageEducation />} />;
       break;
@@ -745,6 +750,7 @@ export default async function ToolPage({
     slug === "lorem-ipsum-generator" ||
     slug === "text-logo-generator" ||
     slug === "random-quote-generator" ||
+    slug === "multiplication-table-generator" ||
     slug === "percentage-calculator" ||
     slug === "tip-calculator" ||
     slug === "discount-calculator" ||

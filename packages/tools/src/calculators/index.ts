@@ -83,3 +83,4 @@ export * from "./ReadingTimeCalculator";
 export * from "./LoremIpsumCalculator";
 export * from "./TextLogoCalculator";
 export * from "./RandomQuoteCalculator";
+export * from "./MultiplicationTableCalculator";
