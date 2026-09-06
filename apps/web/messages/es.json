@@ -19689,6 +19689,146 @@
           "readOriginal": "Ver la Referencia"
         }
       }
+    },
+    "reading-time-calculator": {
+      "title": "Calculadora de Tiempo de Lectura",
+      "description": "Estima cuánto tiempo llevará leer un texto a una velocidad de lectura determinada.",
+      "nav": {
+        "tool": "Calculadora",
+        "faq": "Preguntas frecuentes",
+        "behindTheTool": "Detrás de la herramienta"
+      },
+      "form": {
+        "inputTitle": "Tu Texto",
+        "textLabel": "Texto a estimar",
+        "textPlaceholder": "Pega o escribe tu texto aquí.",
+        "speedLabel": "Velocidad de Lectura",
+        "presets": {
+          "slow": "Lenta",
+          "average": "Promedio",
+          "fast": "Rápida",
+          "custom": "Personalizada"
+        },
+        "customWpmLabel": "Palabras por Minuto"
+      },
+      "result": {
+        "heading": "Tiempo de Lectura Estimado",
+        "emptyText": "Introduce algún texto para estimar su tiempo de lectura.",
+        "invalidRate": "Introduce una velocidad de lectura entre 1 y 1000 palabras por minuto.",
+        "timeMinutesSeconds": "{minutes} min {seconds} seg",
+        "timeSecondsOnly": "{seconds} seg",
+        "wordCountLabel": "Recuento de Palabras"
+      },
+      "quickReference": {
+        "title": "El cálculo",
+        "intro": "El tiempo de lectura es simplemente el recuento de palabras dividido por cuántas palabras lees por minuto."
+      },
+      "education": {
+        "intro": {
+          "title": "Entender las Estimaciones de Tiempo de Lectura",
+          "paragraph1": "Estimar el tiempo de lectura se reduce a una simple división: el número total de palabras en un texto dividido por una velocidad de lectura expresada en palabras por minuto (PPM). Esta herramienta ofrece tres ajustes de velocidad comunes —lenta (150 PPM), promedio (230 PPM), y rápida (300 PPM)— basados en rangos típicos encontrados en la investigación de velocidad de lectura para la lectura silenciosa de adultos de prosa en inglés, además de una opción personalizada para tu propia velocidad medida.",
+          "paragraph2": "La velocidad de lectura varía enormemente entre individuos y depende en gran medida del tipo de material: un artículo técnico lleno de términos desconocidos se lee mucho más lentamente que una novela casual, y hojear es mucho más rápido que leer para comprensión completa o leer en voz alta. Por lo tanto, la estimación de esta herramienta es una aproximación razonable para prosa sencilla a una velocidad dada, no una predicción precisa para ningún lector específico o ninguna pieza de escritura específica."
+        },
+        "useCases": {
+          "title": "Usos Comunes",
+          "intro": "Las estimaciones de tiempo de lectura son útiles en cualquier lugar donde los lectores se beneficien de saber cuánto tiempo reservar.",
+          "items": [
+            {
+              "title": "Publicaciones de Blog y Artículos",
+              "description": "Mostrar una etiqueta estimada de \"5 min de lectura\" ayuda a los lectores a decidir si sumergirse ahora o guardar un artículo para más tarde."
+            },
+            {
+              "title": "Preparación de Reuniones y Presentaciones",
+              "description": "Estimar cuánto tiempo le tomará a una audiencia leer un folleto o una diapositiva de texto antes de continuar."
+            },
+            {
+              "title": "Planificación de Estudio",
+              "description": "Presupuestar aproximadamente el tiempo de estudio para una tarea de lectura según su recuento de palabras y tu velocidad de lectura típica."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Preguntas Frecuentes",
+          "items": [
+            {
+              "question": "¿Qué velocidad de lectura debo usar?",
+              "answer": "La velocidad promedio de lectura silenciosa de adultos para prosa en inglés se cita comúnmente en torno a 200-250 palabras por minuto, razón por la cual el ajuste \"Promedio\" de esta herramienta usa 230 PPM. Si conoces tu propia velocidad por una prueba de lectura, usa la opción Personalizada en su lugar para una estimación más personalizada."
+            },
+            {
+              "question": "¿Por qué mi tiempo de lectura real es diferente de la estimación?",
+              "answer": "Esta herramienta asume una velocidad de lectura constante aplicada uniformemente en todo el texto, pero la velocidad de lectura real varía con la dificultad, la familiaridad con el tema, el cansancio, y si estás hojeando o leyendo detenidamente. Trata el resultado como una estimación útil, no una predicción exacta."
+            },
+            {
+              "question": "¿Esto cuenta los números o la puntuación como palabras?",
+              "answer": "El recuento de palabras se basa en fragmentos de texto separados por espacios en blanco, por lo que un número o un término con guion generalmente cuenta como una palabra, similar a cómo los procesadores de texto cuentan palabras. Esto coincide con la forma en que se calculan la mayoría de las estimaciones de tiempo de lectura en blogs y artículos."
+            },
+            {
+              "question": "¿El tiempo de lectura es lo mismo que el tiempo de habla?",
+              "answer": "No —la lectura silenciosa es típicamente más rápida que hablar en voz alta, ya que la entrega hablada está marcada por la respiración, la pronunciación, y la comprensión de la audiencia en lugar de solo el movimiento ocular a través del texto. Si necesitas estimar cuánto tiempo tomará dar un discurso o presentación, una estimación de tasa de habla dedicada es más apropiada que una velocidad de lectura silenciosa."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Detrás de Esta Herramienta",
+          "history": {
+            "title": "Historia e Investigación",
+            "paragraph": "La velocidad de lectura ha sido estudiada por psicólogos desde finales del siglo XIX, cuando pioneros del seguimiento ocular como Émile Javal descubrieron que los ojos se mueven en saltos rápidos (sacadas) con breves pausas (fijaciones) en lugar de escanear suavemente una línea de texto. La investigación moderna sobre la velocidad de lectura, basada en cientos de estudios, ha encontrado consistentemente que la velocidad de lectura silenciosa para adultos en idiomas familiares generalmente cae en algún lugar del rango de aproximadamente 175 a 300 palabras por minuto para prosa de audiencia general, que es el rango del que se derivan los tres ajustes de esta herramienta."
+          },
+          "limitations": {
+            "title": "Limitaciones de Esta Estimación",
+            "paragraph": "Una estimación de palabras por minuto necesariamente simplifica un proceso mucho más complejo. La velocidad de lectura real se ve afectada por la dificultad del texto y la complejidad de las oraciones, la familiaridad del lector con el tema y el vocabulario, el tamaño de fuente y el diseño, e incluso el nivel actual de fatiga del lector —nada de lo cual esta calculadora puede medir solo a partir del texto. Se usa mejor como una estimación rápida y de propósito general en lugar de una medición precisa."
+          },
+          "academicPath": {
+            "title": "Trayectoria Académica",
+            "intro": "La velocidad de lectura y la comprensión se estudian dentro de la psicología cognitiva y la psicolingüística. Estos son cinco programas respetados, más un departamento regional:",
+            "universities": [
+              {
+                "name": "Universidad de Gante — Departamento de Psicología Experimental",
+                "note": "Sede de investigadores líderes en velocidad de lectura y psicolingüística, incluidos estudios a gran escala sobre tasas de lectura.",
+                "url": "https://www.ugent.be/pp/experimentele-psychologie/en",
+                "online": "No — los títulos de investigación son presenciales en la Universidad de Gante."
+              },
+              {
+                "name": "Instituto Tecnológico de Massachusetts (MIT) — Departamento de Ciencias del Cerebro y Cognitivas",
+                "note": "Un centro líder en la ciencia cognitiva de la lectura y el procesamiento del lenguaje.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad de Oxford — Departamento de Psicología Experimental",
+                "note": "Un centro líder en psicología experimental, incluida la investigación de lectura y lenguaje.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "No — el DPhil es un doctorado de investigación presencial."
+              },
+              {
+                "name": "Universidad de Cambridge — Departamento de Psicología",
+                "note": "Un centro líder en ciencia psicológica en el Reino Unido.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "No — los títulos de investigación son presenciales."
+              },
+              {
+                "name": "Universidad de Stanford — Departamento de Psicología",
+                "note": "Un departamento de psicología líder con sólida investigación en ciencia cognitiva.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "No — el doctorado es un programa de investigación presencial."
+              },
+              {
+                "name": "Universidad Americana de Beirut — Departamento de Psicología",
+                "note": "Fundado en 1866; no aparece clasificado por separado en esta tabla global.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Referencias Científicas",
+          "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
+          "note": "Un metaanálisis exhaustivo de la investigación sobre la tasa de lectura a través de cientos de estudios, que es la base de los rangos de velocidad generales de los que se derivan los ajustes de esta herramienta.",
+          "url": "https://doi.org/10.1016/j.jml.2019.104047",
+          "readOriginal": "Ver el Estudio"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19832,7 +19972,6 @@
     "pregnancy-calendar": "Calculadora de embarazo semana a semana",
     "random-name-generator": "Generador de nombres aleatorios",
     "golden-ratio-calculator": "Calculadora de proporción áurea",
-    "reading-time-calculator": "Calculadora de tiempo de lectura",
     "cagr-calculator": "Calculadora de CAGR",
     "personal-budget-calculator": "Calculadora de presupuesto personal",
     "present-future-value-calculator": "Calculadora de valor presente/futuro",

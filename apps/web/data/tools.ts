@@ -1319,4 +1319,19 @@ export const tools: Tool[] = [
       "roman numeral chart",
     ],
   },
+  {
+    slug: "reading-time-calculator",
+    title: "Reading Time Calculator",
+    category: "text-tools",
+    description:
+      "Estimate how long it will take to read a piece of text at a given reading speed.",
+    featured: false,
+    keywords: [
+      "reading time calculator",
+      "words per minute calculator",
+      "how long to read",
+      "reading speed calculator",
+      "read time estimator",
+    ],
+  },
 ];

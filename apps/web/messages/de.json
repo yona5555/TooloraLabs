@@ -19689,6 +19689,146 @@
           "readOriginal": "Referenz ansehen"
         }
       }
+    },
+    "reading-time-calculator": {
+      "title": "Lesezeit-Rechner",
+      "description": "Schätze, wie lange es dauern wird, einen Text bei einer bestimmten Lesegeschwindigkeit zu lesen.",
+      "nav": {
+        "tool": "Rechner",
+        "faq": "FAQ",
+        "behindTheTool": "Hintergrund"
+      },
+      "form": {
+        "inputTitle": "Dein Text",
+        "textLabel": "Zu schätzender Text",
+        "textPlaceholder": "Füge deinen Text hier ein oder tippe ihn.",
+        "speedLabel": "Lesegeschwindigkeit",
+        "presets": {
+          "slow": "Langsam",
+          "average": "Durchschnitt",
+          "fast": "Schnell",
+          "custom": "Benutzerdefiniert"
+        },
+        "customWpmLabel": "Wörter pro Minute"
+      },
+      "result": {
+        "heading": "Geschätzte Lesezeit",
+        "emptyText": "Gib etwas Text ein, um die Lesezeit zu schätzen.",
+        "invalidRate": "Gib eine Lesegeschwindigkeit zwischen 1 und 1000 Wörtern pro Minute ein.",
+        "timeMinutesSeconds": "{minutes} Min {seconds} Sek",
+        "timeSecondsOnly": "{seconds} Sek",
+        "wordCountLabel": "Wortanzahl"
+      },
+      "quickReference": {
+        "title": "Die Rechnung",
+        "intro": "Die Lesezeit ist einfach die Wortanzahl geteilt durch die Anzahl der Wörter, die du pro Minute liest."
+      },
+      "education": {
+        "intro": {
+          "title": "Lesezeitschätzungen verstehen",
+          "paragraph1": "Die Schätzung der Lesezeit läuft auf eine einfache Division hinaus: die Gesamtzahl der Wörter in einem Text geteilt durch eine Lesegeschwindigkeit in Wörtern pro Minute (WPM). Dieses Tool bietet drei gängige Geschwindigkeitsvoreinstellungen — langsam (150 WPM), durchschnittlich (230 WPM) und schnell (300 WPM) — basierend auf typischen Bereichen aus der Lesegeschwindigkeitsforschung für stilles Lesen von englischer Prosa bei Erwachsenen, plus eine benutzerdefinierte Option für deine eigene gemessene Geschwindigkeit.",
+          "paragraph2": "Die Lesegeschwindigkeit variiert enorm zwischen Individuen und hängt stark von der Art des Materials ab: Ein Fachartikel voller unbekannter Begriffe wird weit langsamer gelesen als ein lockerer Roman, und Überfliegen ist viel schneller als Lesen zum vollständigen Verständnis oder lautes Vorlesen. Die Schätzung dieses Tools ist daher ein vernünftiger Anhaltspunkt für einfache Prosa bei einer gegebenen Geschwindigkeit, keine präzise Vorhersage für einen bestimmten Leser oder ein bestimmtes Schriftstück."
+        },
+        "useCases": {
+          "title": "Häufige Anwendungen",
+          "intro": "Lesezeitschätzungen sind überall nützlich, wo Leser davon profitieren zu wissen, wie viel Zeit sie einplanen sollten.",
+          "items": [
+            {
+              "title": "Blogbeiträge und Artikel",
+              "description": "Das Anzeigen einer geschätzten \"5 Min Lesezeit\"-Angabe hilft Lesern zu entscheiden, ob sie jetzt einsteigen oder einen Artikel für später speichern sollen."
+            },
+            {
+              "title": "Vorbereitung von Besprechungen und Präsentationen",
+              "description": "Das Abschätzen, wie lange ein Publikum brauchen wird, um ein Handout oder eine Textfolie zu lesen, bevor man weitermacht."
+            },
+            {
+              "title": "Lernplanung",
+              "description": "Das grobe Einplanen von Lernzeit für eine Leseaufgabe basierend auf ihrer Wortanzahl und deiner typischen Lesegeschwindigkeit."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Häufig gestellte Fragen",
+          "items": [
+            {
+              "question": "Welche Lesegeschwindigkeit sollte ich verwenden?",
+              "answer": "Die durchschnittliche stille Lesegeschwindigkeit von Erwachsenen für englische Prosa wird üblicherweise mit etwa 200-250 Wörtern pro Minute angegeben, weshalb die \"Durchschnitt\"-Voreinstellung dieses Tools 230 WPM verwendet. Wenn du deine eigene Geschwindigkeit aus einem Lesetest kennst, verwende stattdessen die Option Benutzerdefiniert für eine persönlichere Schätzung."
+            },
+            {
+              "question": "Warum unterscheidet sich meine tatsächliche Lesezeit von der Schätzung?",
+              "answer": "Dieses Tool geht von einer konstanten Lesegeschwindigkeit aus, die einheitlich über den gesamten Text angewendet wird, aber die tatsächliche Lesegeschwindigkeit variiert mit Schwierigkeit, Vertrautheit mit dem Thema, Müdigkeit und ob du überfliegst oder genau liest. Betrachte das Ergebnis als nützliche Schätzung, nicht als exakte Vorhersage."
+            },
+            {
+              "question": "Zählt dies Zahlen oder Satzzeichen als Wörter?",
+              "answer": "Die Wortanzahl basiert auf durch Leerzeichen getrennten Textabschnitten, sodass eine Zahl oder ein mit Bindestrich verbundener Begriff im Allgemeinen als ein Wort zählt, ähnlich wie Textverarbeitungsprogramme Wörter zählen. Dies entspricht der Art, wie die meisten Lesezeitschätzungen auf Blogs und in Artikeln berechnet werden."
+            },
+            {
+              "question": "Ist die Lesezeit dasselbe wie die Sprechzeit?",
+              "answer": "Nein — stilles Lesen ist typischerweise schneller als lautes Sprechen, da der gesprochene Vortrag durch Atmung, Aussprache und Publikumsverständnis getaktet wird, nicht nur durch Augenbewegung über den Text. Wenn du abschätzen musst, wie lange eine Rede oder Präsentation dauern wird, ist eine spezielle Sprechgeschwindigkeitsschätzung angemessener als eine stille Lesegeschwindigkeit."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Hintergrund dieses Tools",
+          "history": {
+            "title": "Geschichte und Forschung",
+            "paragraph": "Die Lesegeschwindigkeit wird seit dem späten 19. Jahrhundert von Psychologen untersucht, als frühe Blickbewegungspioniere wie Émile Javal entdeckten, dass sich die Augen in schnellen Sprüngen (Sakkaden) mit kurzen Pausen (Fixationen) bewegen, statt eine Textzeile gleichmäßig abzutasten. Die moderne Forschung zur Lesegeschwindigkeit, die auf Hunderten von Studien basiert, hat durchweg festgestellt, dass die stille Lesegeschwindigkeit von Erwachsenen in vertrauten Sprachen typischerweise irgendwo im Bereich von etwa 175 bis 300 Wörtern pro Minute für allgemeine Prosa liegt, aus dem die drei Voreinstellungen dieses Tools abgeleitet sind."
+          },
+          "limitations": {
+            "title": "Grenzen dieser Schätzung",
+            "paragraph": "Eine Wörter-pro-Minute-Schätzung vereinfacht notwendigerweise einen viel komplexeren Prozess. Die tatsächliche Lesegeschwindigkeit wird durch Textschwierigkeit und Satzkomplexität, die Vertrautheit des Lesers mit Thema und Vokabular, Schriftgröße und Layout und sogar den aktuellen Ermüdungsgrad des Lesers beeinflusst — nichts davon kann dieser Rechner allein aus dem Text messen. Es wird am besten als schnelle, allgemeine Schätzung verwendet, nicht als präzise Messung."
+          },
+          "academicPath": {
+            "title": "Akademischer Werdegang",
+            "intro": "Lesegeschwindigkeit und -verständnis werden innerhalb der kognitiven Psychologie und Psycholinguistik studiert. Hier sind fünf angesehene Programme, plus eine regionale Fakultät:",
+            "universities": [
+              {
+                "name": "Universität Gent — Department of Experimental Psychology",
+                "note": "Beheimatet führende Lesegeschwindigkeits- und Psycholinguistikforscher, einschließlich groß angelegter Studien zu Lesegeschwindigkeiten.",
+                "url": "https://www.ugent.be/pp/experimentele-psychologie/en",
+                "online": "Nein — die Forschungsstudiengänge sind an der Universität Gent Präsenzstudiengänge."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "Ein führendes Zentrum für die Kognitionswissenschaft des Lesens und der Sprachverarbeitung.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "University of Oxford — Department of Experimental Psychology",
+                "note": "Ein führendes Zentrum für experimentelle Psychologie, einschließlich Lese- und Sprachforschung.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "Nein — der DPhil ist ein Präsenz-Forschungsstudiengang."
+              },
+              {
+                "name": "University of Cambridge — Department of Psychology",
+                "note": "Ein führendes Zentrum für psychologische Wissenschaft im Vereinigten Königreich.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "Nein — die Forschungsstudiengänge finden vor Ort statt."
+              },
+              {
+                "name": "Stanford University — Department of Psychology",
+                "note": "Eine führende Psychologieabteilung mit starker Kognitionswissenschaftsforschung.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "Nein — die Promotion ist ein Präsenz-Forschungsprogramm."
+              },
+              {
+                "name": "American University of Beirut — Department of Psychology",
+                "note": "Gegründet 1866; in dieser globalen Fachrangliste nicht separat geführt.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Wissenschaftliche Referenzen",
+          "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
+          "note": "Eine umfassende Metaanalyse der Leseratenforschung über Hunderte von Studien, die Grundlage für die allgemeinen Geschwindigkeitsbereiche ist, aus denen die Voreinstellungen dieses Tools abgeleitet sind.",
+          "url": "https://doi.org/10.1016/j.jml.2019.104047",
+          "readOriginal": "Studie ansehen"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19832,7 +19972,6 @@
     "pregnancy-calendar": "Schwangerschaftskalender Woche für Woche",
     "random-name-generator": "Zufälliger Namensgenerator",
     "golden-ratio-calculator": "Goldener-Schnitt-Rechner",
-    "reading-time-calculator": "Lesezeit-Rechner",
     "cagr-calculator": "CAGR-Rechner",
     "personal-budget-calculator": "Persönlicher Budgetrechner",
     "present-future-value-calculator": "Barwert-/Endwert-Rechner",

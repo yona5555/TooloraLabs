@@ -19689,6 +19689,146 @@
           "readOriginal": "View the Reference"
         }
       }
+    },
+    "reading-time-calculator": {
+      "title": "Reading Time Calculator",
+      "description": "Estimate how long it will take to read a piece of text at a given reading speed.",
+      "nav": {
+        "tool": "Calculator",
+        "faq": "FAQ",
+        "behindTheTool": "Behind the Tool"
+      },
+      "form": {
+        "inputTitle": "Your Text",
+        "textLabel": "Text to estimate",
+        "textPlaceholder": "Paste or type your text here.",
+        "speedLabel": "Reading Speed",
+        "presets": {
+          "slow": "Slow",
+          "average": "Average",
+          "fast": "Fast",
+          "custom": "Custom"
+        },
+        "customWpmLabel": "Words per Minute"
+      },
+      "result": {
+        "heading": "Estimated Reading Time",
+        "emptyText": "Enter some text to estimate its reading time.",
+        "invalidRate": "Enter a reading speed between 1 and 1000 words per minute.",
+        "timeMinutesSeconds": "{minutes} min {seconds} sec",
+        "timeSecondsOnly": "{seconds} sec",
+        "wordCountLabel": "Word Count"
+      },
+      "quickReference": {
+        "title": "The Math",
+        "intro": "Reading time is simply the word count divided by how many words you read per minute."
+      },
+      "education": {
+        "intro": {
+          "title": "Understanding Reading Time Estimates",
+          "paragraph1": "Estimating reading time comes down to a simple division: the total number of words in a piece of text divided by a reading speed expressed in words per minute (WPM). This tool offers three common speed presets — slow (150 WPM), average (230 WPM), and fast (300 WPM) — based on typical ranges found in reading-speed research for adult silent reading of English prose, plus a custom option for your own measured speed.",
+          "paragraph2": "Reading speed varies enormously between individuals and depends heavily on the type of material: a technical paper full of unfamiliar terms is read far more slowly than a casual novel, and skimming is much faster than reading for full comprehension or reading aloud. This tool's estimate is therefore a reasonable ballpark for straightforward prose at a given speed, not a precise prediction for any specific reader or any specific piece of writing."
+        },
+        "useCases": {
+          "title": "Common Uses",
+          "intro": "Reading time estimates are useful anywhere readers benefit from knowing how much time to set aside.",
+          "items": [
+            {
+              "title": "Blog Posts and Articles",
+              "description": "Displaying an estimated \"5 min read\" label helps readers decide whether to dive in now or save an article for later."
+            },
+            {
+              "title": "Meeting and Presentation Prep",
+              "description": "Estimating how long it will take an audience to read a handout or slide of text before moving on."
+            },
+            {
+              "title": "Study Planning",
+              "description": "Roughly budgeting study time for a reading assignment based on its word count and your typical reading speed."
+            }
+          ]
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What reading speed should I use?",
+              "answer": "Average adult silent reading speed for English prose is commonly cited around 200-250 words per minute, which is why this tool's \"Average\" preset uses 230 WPM. If you know your own speed from a reading test, use the Custom option instead for a more personalized estimate."
+            },
+            {
+              "question": "Why is my actual reading time different from the estimate?",
+              "answer": "This tool assumes a constant reading speed applied uniformly across the whole text, but real reading speed varies with difficulty, familiarity with the topic, tiredness, and whether you're skimming or reading closely. Treat the result as a useful estimate, not an exact prediction."
+            },
+            {
+              "question": "Does this count numbers or punctuation as words?",
+              "answer": "Word count is based on whitespace-separated chunks of text, so a number or a hyphenated term generally counts as one word, similar to how word processors count words. This matches how most reading-time estimates on blogs and articles are calculated."
+            },
+            {
+              "question": "Is reading time the same as speaking time?",
+              "answer": "No — silent reading is typically faster than speaking aloud, since spoken delivery is paced by breath, pronunciation, and audience comprehension rather than just eye movement across text. If you need to estimate how long a speech or presentation will take to deliver, a dedicated speaking-rate estimate is more appropriate than a silent reading speed."
+            }
+          ]
+        },
+        "behindTheTool": {
+          "title": "Behind the Tool",
+          "history": {
+            "title": "History and Research",
+            "paragraph": "Reading speed has been studied by psychologists since the late 19th century, when early eye-tracking pioneers like Émile Javal discovered that the eyes move in quick jumps (saccades) with brief pauses (fixations) rather than smoothly scanning a line of text. Modern research on reading speed, drawing on hundreds of studies, has consistently found that silent reading speed for adults in familiar languages typically falls somewhere in the range of roughly 175 to 300 words per minute for general-audience prose, which is the range this tool's three presets are drawn from."
+          },
+          "limitations": {
+            "title": "Limitations of This Estimate",
+            "paragraph": "A words-per-minute estimate necessarily simplifies a much more complex process. Actual reading speed is affected by text difficulty and sentence complexity, the reader's familiarity with the subject and vocabulary, font size and layout, and even the reader's current level of fatigue — none of which this calculator can measure from the text alone. It is best used as a quick, general-purpose estimate rather than a precise measurement."
+          },
+          "academicPath": {
+            "title": "Academic Path",
+            "intro": "Reading speed and comprehension are studied within cognitive psychology and psycholinguistics. Here are five respected programs, plus one regional department:",
+            "universities": [
+              {
+                "name": "Ghent University — Department of Experimental Psychology",
+                "note": "Home to leading reading-speed and psycholinguistics researchers, including large-scale studies on reading rates.",
+                "url": "https://www.ugent.be/pp/experimentele-psychologie/en",
+                "online": "No — research degrees are in-residence at Ghent University."
+              },
+              {
+                "name": "Massachusetts Institute of Technology (MIT) — Department of Brain and Cognitive Sciences",
+                "note": "A leading center for the cognitive science of reading and language processing.",
+                "url": "https://bcs.mit.edu/graduate-program",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "University of Oxford — Department of Experimental Psychology",
+                "note": "A leading center for experimental psychology, including reading and language research.",
+                "url": "https://www.psy.ox.ac.uk/study-with-us/graduate-study",
+                "online": "No — the DPhil is an on-campus research degree."
+              },
+              {
+                "name": "University of Cambridge — Department of Psychology",
+                "note": "A leading center for psychological science in the UK.",
+                "url": "https://www.psychol.cam.ac.uk/study/postgrad",
+                "online": "No — research degrees are in-residence."
+              },
+              {
+                "name": "Stanford University — Department of Psychology",
+                "note": "A leading psychology department with strong cognitive science research.",
+                "url": "https://psychology.stanford.edu/graduate",
+                "online": "No — the PhD is an in-residence research program."
+              },
+              {
+                "name": "American University of Beirut — Department of Psychology",
+                "note": "Founded in 1866; not separately ranked on this global subject table.",
+                "url": "https://www.aub.edu.lb/fas/psyc/Pages/default.aspx",
+                "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
+              }
+            ]
+          }
+        },
+        "references": {
+          "title": "Scientific References",
+          "citation": "Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. Journal of Memory and Language, 109, 104047.",
+          "note": "A comprehensive meta-analysis of reading-rate research across hundreds of studies, which is the basis for the general speed ranges this tool's presets are drawn from.",
+          "url": "https://doi.org/10.1016/j.jml.2019.104047",
+          "readOriginal": "View the Study"
+        }
+      }
     }
   },
   "toolPage": {
@@ -19832,7 +19972,6 @@
     "pregnancy-calendar": "Pregnancy Week-by-Week Calculator",
     "random-name-generator": "Random Name Generator",
     "golden-ratio-calculator": "Golden Ratio Calculator",
-    "reading-time-calculator": "Reading Time Calculator",
     "cagr-calculator": "CAGR Calculator",
     "personal-budget-calculator": "Personal Budget Calculator",
     "present-future-value-calculator": "Present/Future Value Calculator",

@@ -11,7 +11,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
   "phase-1": [
     { id: "random-name-generator", icon: "Wand2" },
     { id: "golden-ratio-calculator", icon: "Infinity" },
-    { id: "reading-time-calculator", icon: "BookOpen" },
     { id: "cagr-calculator", icon: "TrendingUp" },
     { id: "personal-budget-calculator", icon: "Wallet" },
     { id: "present-future-value-calculator", icon: "LineChart" },
