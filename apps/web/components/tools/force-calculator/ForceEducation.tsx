@@ -6,6 +6,9 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import ForceBlockDiagram from "./ForceBlockDiagram";
 import ForceFreeBodyDiagram from "./ForceFreeBodyDiagram";
+import GravitationDiagram from "./GravitationDiagram";
+import ForceInverseSquareDiagram from "./ForceInverseSquareDiagram";
+import ForceVariablesDiagram from "./ForceVariablesDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -68,6 +71,31 @@ export default async function ForceEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.gravitationSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.gravitationSection.paragraph")}</p>
+          <GravitationDiagram mass1={5.972e24} mass2={1} label1="m₁" label2="m₂" caption={t("behindTheTool.gravitationSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.inverseSquareSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.inverseSquareSection.paragraph")}</p>
+          <ForceInverseSquareDiagram
+            xLabel={t("behindTheTool.inverseSquareSection.xLabel")}
+            yLabel={t("behindTheTool.inverseSquareSection.yLabel")}
+            caption={t("behindTheTool.inverseSquareSection.caption")}
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.variablesSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.variablesSection.paragraph")}</p>
+          <ForceVariablesDiagram
+            solved="acceleration"
+            order={["force", "mass", "acceleration"]}
+            labels={{ force: "F", mass: "m", acceleration: "a" }}
+            values={{ force: "10", mass: "2", acceleration: "?" }}
+            caption={t("behindTheTool.variablesSection.caption")}
+          />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

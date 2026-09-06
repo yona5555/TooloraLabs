@@ -15,6 +15,8 @@ import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime
 
 const tool = new KinematicsCalculatorTool();
 
+const RELATED_TOOLS = ["force-calculator", "projectile-motion-calculator", "energy-work-power-calculator", "pace-calculator"];
+
 const DEFAULTS = { v0: "0", v: "10", a: "2", t: "5", dx: "25" };
 
 const EMPTY_RESULT: KinematicsCalculatorOutput = { error: null, v0: 0, v: 0, a: 0, t: 0, dx: 0, dxAvailable: false, tAvailable: false };
@@ -39,6 +41,7 @@ function computeResult(mode: KinematicsMode, solveForTime: KinematicsSolveForTim
 }
 
 export default function KinematicsCalculator({ education }: { education: ReactNode }) {
+  const tRoot = useTranslations("tools.kinematics-calculator");
   const tNav = useTranslations("tools.kinematics-calculator.nav");
 
   const [mode, setMode] = useState<KinematicsMode>("timeBased");
@@ -166,7 +169,9 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
           result={
             <KinematicsResult hasCalculated={hasCalculated} result={result} mode={mode} solveForTime={solveForTime} solveForDistance={solveForDistance} digitStyle={digitStyle} />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="kinematics-calculator" category="physics" />}
+          sidebar={
+            <RelatedToolsSidebar currentSlug="kinematics-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={tRoot("relatedTools.title")} />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

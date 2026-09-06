@@ -92,6 +92,13 @@ export default function KinematicsInputPanel({
         solved={solved}
         order={variableOrder}
         labels={{ v0: "v₀", v: "v", a: "a", t: "t", dx: "Δx" }}
+        values={{
+          v0: solved === "v0" ? "?" : v0 || "–",
+          v: solved === "v" ? "?" : v || "–",
+          a: solved === "a" ? "?" : a || "–",
+          t: solved === "t" ? "?" : t || "–",
+          dx: solved === "dx" ? "?" : dx || "–",
+        }}
         caption={t_("variablesCaption")}
       />
 

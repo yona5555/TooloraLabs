@@ -15,6 +15,8 @@ import { GRAVITY_PRESET_VALUES, type GravityPreset } from "./types";
 
 const tool = new ProjectileMotionCalculatorTool();
 
+const RELATED_TOOLS = ["kinematics-calculator", "force-calculator", "energy-work-power-calculator"];
+
 const DEFAULTS = { speed: "20", angle: "45", height: "0", gravity: "9.8" };
 
 const EMPTY_RESULT: ProjectileMotionCalculatorOutput = { error: null, timeOfFlight: 0, maxHeight: 0, range: 0, impactSpeed: 0, impactAngle: 0 };
@@ -36,6 +38,7 @@ function computeResult(i: Inputs): ProjectileMotionCalculatorOutput {
 
 export default function ProjectileMotionCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.projectile-motion-calculator.nav");
+  const t = useTranslations("tools.projectile-motion-calculator");
   const tForm = useTranslations("tools.projectile-motion-calculator.form");
 
   const [speed, setSpeed] = useState(DEFAULTS.speed);
@@ -154,7 +157,9 @@ export default function ProjectileMotionCalculator({ education }: { education: R
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="projectile-motion-calculator" category="physics" />}
+          sidebar={
+            <RelatedToolsSidebar currentSlug="projectile-motion-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

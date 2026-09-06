@@ -40,14 +40,18 @@ export default function ProjectileMotionInputPanel({
 }: ProjectileMotionInputPanelProps) {
   const t = useTranslations("tools.projectile-motion-calculator.form");
   const angleValue = parseLocalizedNumber(angle) || 0;
+  const speedValue = parseLocalizedNumber(speed) || 0;
+  const angleRad = (angleValue * Math.PI) / 180;
+  const vx = speedValue * Math.cos(angleRad);
+  const vy = speedValue * Math.sin(angleRad);
 
   return (
     <SectionCard title={t("inputTitle")}>
       <ProjectileVelocityComponentsDiagram
         angleDegrees={angleValue}
-        vxLabel={t("vxLabel")}
-        vyLabel={t("vyLabel")}
-        vLabel={t("vLabel")}
+        vxLabel={`${t("vxLabel")} = ${vx.toFixed(1)}`}
+        vyLabel={`${t("vyLabel")} = ${vy.toFixed(1)}`}
+        vLabel={`${t("vLabel")} = ${speedValue.toFixed(1)}`}
         caption={t("componentsCaption")}
       />
 

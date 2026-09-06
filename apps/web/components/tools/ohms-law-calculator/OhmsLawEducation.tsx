@@ -7,6 +7,8 @@ import AdSpace from "@/components/tool-ui/AdSpace";
 import OhmsLawTriangleDiagram from "./OhmsLawTriangleDiagram";
 import OhmsLawVIRelationDiagram from "./OhmsLawVIRelationDiagram";
 import OhmsLawPowerRatingDiagram from "./OhmsLawPowerRatingDiagram";
+import OhmsLawCircuitDiagram from "./OhmsLawCircuitDiagram";
+import OhmsLawPowerFormulasDiagram from "./OhmsLawPowerFormulasDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -79,6 +81,16 @@ export default async function OhmsLawEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.circuitSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.circuitSection.paragraph")}</p>
+          <OhmsLawCircuitDiagram voltageText="V=12" currentText="I=2" resistanceText="R=6" caption={t("behindTheTool.circuitSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.powerFormulasSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.powerFormulasSection.paragraph")}</p>
+          <OhmsLawPowerFormulasDiagram viText="V×I = 12×2" i2rText="I²R = 2²×6" v2rText="V²/R = 12²/6" powerText="P = 24 W" caption={t("behindTheTool.powerFormulasSection.caption")} />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

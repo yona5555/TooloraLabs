@@ -15,6 +15,8 @@ import type { OhmsLawKnownPair } from "./types";
 
 const tool = new OhmsLawCalculatorTool();
 
+const RELATED_TOOLS = ["energy-work-power-calculator", "force-calculator", "density-calculator", "ideal-gas-law-calculator"];
+
 const DEFAULTS = { voltage: "12", current: "2", resistance: "6", power: "24" };
 
 const EMPTY_RESULT: OhmsLawCalculatorOutput = { error: null, voltage: 0, current: 0, resistance: 0, power: 0 };
@@ -34,6 +36,7 @@ function computeResult(knownPair: OhmsLawKnownPair, voltage: string, current: st
 }
 
 export default function OhmsLawCalculator({ education }: { education: ReactNode }) {
+  const t = useTranslations("tools.ohms-law-calculator");
   const tNav = useTranslations("tools.ohms-law-calculator.nav");
 
   const [knownPair, setKnownPair] = useState<OhmsLawKnownPair>("VI");
@@ -135,7 +138,9 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
             />
           }
           result={<OhmsLawResult hasCalculated={hasCalculated} result={result} knownPair={knownPair} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="ohms-law-calculator" category="physics" />}
+          sidebar={
+            <RelatedToolsSidebar currentSlug="ohms-law-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

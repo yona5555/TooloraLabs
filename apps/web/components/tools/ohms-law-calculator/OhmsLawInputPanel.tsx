@@ -65,7 +65,13 @@ export default function OhmsLawInputPanel({
         <OhmsLawModeTabs knownPair={knownPair} onKnownPairChange={onKnownPairChange} />
       </div>
 
-      <OhmsLawTriangleDiagram voltageText="V" currentText="I" resistanceText="R" highlighted={UNKNOWN_BY_PAIR[knownPair]} caption={t("triangleCaption")} />
+      <OhmsLawTriangleDiagram
+        voltageText={activeFields.includes("voltage") ? `V=${voltage || "?"}` : "V=?"}
+        currentText={activeFields.includes("current") ? `I=${current || "?"}` : "I=?"}
+        resistanceText={activeFields.includes("resistance") ? `R=${resistance || "?"}` : "R=?"}
+        highlighted={UNKNOWN_BY_PAIR[knownPair]}
+        caption={t("triangleCaption")}
+      />
 
       <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {activeFields.includes("voltage") && (

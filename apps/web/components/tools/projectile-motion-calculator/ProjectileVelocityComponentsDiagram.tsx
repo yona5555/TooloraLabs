@@ -7,8 +7,8 @@ type ProjectileVelocityComponentsDiagramProps = {
 };
 
 const ORIGIN_X = 20;
-const ORIGIN_Y = 90;
-const LENGTH = 90;
+const ORIGIN_Y = 100;
+const LENGTH = 78;
 
 /**
  * A live vector-decomposition diagram: the launch velocity arrow is drawn
@@ -25,7 +25,7 @@ export default function ProjectileVelocityComponentsDiagram({ angleDegrees, vxLa
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox="0 0 220 110" role="img" aria-label={caption} className="h-auto w-full max-w-[240px] text-current">
+        <svg viewBox="0 0 220 130" role="img" aria-label={caption} className="h-auto w-full max-w-[240px] text-current">
           <defs>
             <marker id="pvc-arrow" markerWidth={8} markerHeight={8} refX={6} refY={4} orient="auto">
               <path d="M0,0 L8,4 L0,8 Z" className="fill-blue-600 dark:fill-blue-400" />
@@ -45,7 +45,7 @@ export default function ProjectileVelocityComponentsDiagram({ angleDegrees, vxLa
           <text x={ORIGIN_X - 6} y={(ORIGIN_Y + endY) / 2} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
             {vyLabel}
           </text>
-          <text x={endX + 6} y={endY - 4} textAnchor="start" fontSize={9} fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
+          <text x={endX + 6} y={Math.max(endY - 4, 12)} textAnchor="start" fontSize={9} fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
             {vLabel}
           </text>
         </svg>

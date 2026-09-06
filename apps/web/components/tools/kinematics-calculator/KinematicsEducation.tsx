@@ -6,6 +6,9 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import MotionDiagram from "./MotionDiagram";
 import KinematicsPositionTimeDiagram from "./KinematicsPositionTimeDiagram";
+import KinematicsVelocityTimeDiagram from "./KinematicsVelocityTimeDiagram";
+import KinematicsVariablesDiagram from "./KinematicsVariablesDiagram";
+import KinematicsReferenceAccelerationsDiagram from "./KinematicsReferenceAccelerationsDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -62,6 +65,43 @@ export default async function KinematicsEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.velocityTimeSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.velocityTimeSection.paragraph")}</p>
+          <KinematicsVelocityTimeDiagram
+            v0={0}
+            v={10}
+            xLabel={t("behindTheTool.velocityTimeSection.xLabel")}
+            yLabel={t("behindTheTool.velocityTimeSection.yLabel")}
+            areaLabel="Δx = 25 m"
+            caption={t("behindTheTool.velocityTimeSection.caption")}
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.variablesSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.variablesSection.paragraph")}</p>
+          <KinematicsVariablesDiagram
+            solved="a"
+            order={["v0", "v", "a", "t", "dx"]}
+            labels={{ v0: "v₀", v: "v", a: "a", t: "t", dx: "Δx" }}
+            values={{ v0: "0", v: "10", a: "?", t: "5", dx: "25" }}
+            caption={t("behindTheTool.variablesSection.caption")}
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.referenceSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.referenceSection.paragraph")}</p>
+          <KinematicsReferenceAccelerationsDiagram
+            labels={[
+              t("behindTheTool.referenceSection.r1"),
+              t("behindTheTool.referenceSection.r2"),
+              t("behindTheTool.referenceSection.r3"),
+              t("behindTheTool.referenceSection.r4"),
+              t("behindTheTool.referenceSection.r5"),
+            ]}
+            caption={t("behindTheTool.referenceSection.caption")}
+          />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

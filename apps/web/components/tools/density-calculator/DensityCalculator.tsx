@@ -15,6 +15,8 @@ import type { DensityOperation } from "./types";
 
 const tool = new DensityCalculatorTool();
 
+const RELATED_TOOLS = ["molarity-calculator", "ideal-gas-law-calculator", "ohms-law-calculator", "volume-calculator"];
+
 const DEFAULTS = { mass: "100", volume: "50", density: "2.7" };
 
 const EMPTY_RESULT: DensityCalculatorOutput = { error: null, mass: 0, volume: 0, density: 0, densitySI: 0, specificGravity: 0 };
@@ -33,6 +35,7 @@ function computeResult(operation: DensityOperation, mass: string, volume: string
 }
 
 export default function DensityCalculator({ education }: { education: ReactNode }) {
+  const t = useTranslations("tools.density-calculator");
   const tNav = useTranslations("tools.density-calculator.nav");
 
   const [operation, setOperation] = useState<DensityOperation>("solveDensity");
@@ -128,7 +131,9 @@ export default function DensityCalculator({ education }: { education: ReactNode 
             />
           }
           result={<DensityResult hasCalculated={hasCalculated} result={result} operation={operation} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="density-calculator" category="physics" />}
+          sidebar={
+            <RelatedToolsSidebar currentSlug="density-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

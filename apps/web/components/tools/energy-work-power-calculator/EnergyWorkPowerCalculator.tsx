@@ -15,6 +15,8 @@ import type { EnergyWorkPowerMode } from "./types";
 
 const tool = new EnergyWorkPowerCalculatorTool();
 
+const RELATED_TOOLS = ["ohms-law-calculator", "force-calculator", "kinematics-calculator", "projectile-motion-calculator"];
+
 const DEFAULTS = { force: "20", distance: "5", angleDegrees: "0", mass: "10", velocity: "4", height: "3", workValue: "100", time: "5" };
 
 const EMPTY_RESULT: EnergyWorkPowerCalculatorOutput = { error: null, work: 0, kineticEnergy: 0, potentialEnergy: 0, power: 0 };
@@ -40,6 +42,7 @@ function computeResult(mode: EnergyWorkPowerMode, i: Inputs): EnergyWorkPowerCal
 }
 
 export default function EnergyWorkPowerCalculator({ education }: { education: ReactNode }) {
+  const t = useTranslations("tools.energy-work-power-calculator");
   const tNav = useTranslations("tools.energy-work-power-calculator.nav");
 
   const [mode, setMode] = useState<EnergyWorkPowerMode>("work");
@@ -174,7 +177,9 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="energy-work-power-calculator" category="physics" />}
+          sidebar={
+            <RelatedToolsSidebar currentSlug="energy-work-power-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

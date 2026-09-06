@@ -15,6 +15,8 @@ import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types"
 
 const tool = new ForceCalculatorTool();
 
+const RELATED_TOOLS = ["kinematics-calculator", "energy-work-power-calculator", "projectile-motion-calculator", "ohms-law-calculator"];
+
 const DEFAULTS = { force: "10", mass: "2", acceleration: "5", mass1: "5.972e24", mass2: "1", distance: "6.371e6" };
 
 const EMPTY_RESULT: ForceCalculatorOutput = { error: null, force: 0, mass: 0, acceleration: 0, mass1: 0, mass2: 0, distance: 0 };
@@ -40,6 +42,7 @@ function computeResult(mode: ForceMode, secondLawSolveFor: SecondLawSolveFor, gr
 }
 
 export default function ForceCalculator({ education }: { education: ReactNode }) {
+  const t = useTranslations("tools.force-calculator");
   const tNav = useTranslations("tools.force-calculator.nav");
 
   const [mode, setMode] = useState<ForceMode>("secondLaw");
@@ -178,7 +181,9 @@ export default function ForceCalculator({ education }: { education: ReactNode })
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="force-calculator" category="physics" />}
+          sidebar={
+            <RelatedToolsSidebar currentSlug="force-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

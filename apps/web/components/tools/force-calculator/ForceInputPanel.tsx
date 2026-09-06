@@ -77,7 +77,20 @@ export default function ForceInputPanel({
         )}
       </div>
 
-      <ForceVariablesDiagram solved={solved} order={variableOrder} labels={variableLabels} caption={t("variablesCaption")} />
+      <ForceVariablesDiagram
+        solved={solved}
+        order={variableOrder}
+        labels={variableLabels}
+        values={{
+          force: solved === "force" ? "?" : force || "–",
+          mass: solved === "mass" ? "?" : mass || "–",
+          acceleration: solved === "acceleration" ? "?" : acceleration || "–",
+          mass1: solved === "mass1" ? "?" : mass1 || "–",
+          mass2: solved === "mass2" ? "?" : mass2 || "–",
+          distance: solved === "distance" ? "?" : distance || "–",
+        }}
+        caption={t("variablesCaption")}
+      />
 
       <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {mode === "secondLaw" ? (

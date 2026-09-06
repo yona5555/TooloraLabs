@@ -44,9 +44,9 @@ export default function DensityInputPanel({
 
       <DensityFormulaTriangleDiagram
         operation={operation}
-        massLabel={t("massShort")}
-        densityLabel={t("densityShort")}
-        volumeLabel={t("volumeShort")}
+        massLabel={operation === "solveMass" ? "?" : mass || "–"}
+        densityLabel={operation === "solveDensity" ? "?" : density || "–"}
+        volumeLabel={operation === "solveVolume" ? "?" : volume || "–"}
         caption={t("triangleCaption")}
       />
 
