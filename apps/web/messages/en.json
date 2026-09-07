@@ -22875,6 +22875,523 @@
             "answer": "The tool uses Heron's formula, which computes area directly from the three side lengths via the semi-perimeter (half the perimeter) without needing to know any angle or perpendicular height explicitly — this works for any valid triangle regardless of which solving mode found the sides."
           }
         ]
+      },
+      "statistics-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Statistics Calculator: the full set of descriptive statistics it computes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionDotplot": "Data Points on a Number Line",
+        "sectionAnatomy": "Population vs. Sample",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Statistics",
+          "modesValue": "12",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Mean = Σx / n  |  Population Variance = Σ(x − mean)² / n  |  Sample Variance = Σ(x − mean)² / (n − 1)",
+          "note": "A single data set feeds twelve separate statistics at once — central tendency (mean, median, mode), spread (range, variance, standard deviation), and summary values (count, sum, min, max) — each computed from the same underlying formulas."
+        },
+        "flowchart": {
+          "intro": "All twelve statistics are computed in one pass over the data, reusing intermediate results (like the mean and sorted list) rather than scanning the data set repeatedly.",
+          "steps": [
+            "Sort the values to find the minimum, maximum, and median",
+            "Sum the values and divide by the count to get the mean",
+            "Count how often each value appears to find the mode (values tied for the highest frequency)",
+            "Subtract the mean from each value, square the differences, and sum them",
+            "Divide that sum by the count (population) and by the count minus one (sample) to get both variances, then take the square root of each for the two standard deviations"
+          ],
+          "caption": "The single pass over the data set this tool uses to compute all twelve statistics."
+        },
+        "dotplot": {
+          "intro": "Plotting every value on a single number line makes the shape of a data set visible — where values cluster, and how the mean and median relate to that shape.",
+          "labelMean": "Mean",
+          "labelMedian": "Median",
+          "caption": "Eight sample values plotted on a number line, with the mean and median marked — the two coincide closely here since the data is fairly symmetric."
+        },
+        "anatomy": {
+          "intro": "Variance and standard deviation are each reported two ways: as a population statistic (dividing by the full count) and as a sample statistic (dividing by count minus one, Bessel's correction) — the sample version is always slightly larger.",
+          "labelPopulation": "Population Std. Dev.",
+          "labelSample": "Sample Std. Dev.",
+          "caption": "For the same eight-value data set, the sample standard deviation is consistently larger than the population standard deviation."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Values",
+            "meaning": "The list of numbers making up the data set — every other statistic is derived from this single input.",
+            "unit": "Numbers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Empty data set",
+            "description": "If no values are entered, the tool returns an \"empty-dataset\" error rather than computing statistics like mean or standard deviation on zero numbers, which would be mathematically undefined (division by zero)."
+          },
+          {
+            "title": "No repeated values (no mode)",
+            "description": "The mode is only reported when some value appears more than once; if every value in the data set is unique (maximum frequency of 1), the tool returns an empty mode list rather than incorrectly treating every value as \"the\" mode."
+          },
+          {
+            "title": "Multiple modes (multimodal data)",
+            "description": "When two or more values are tied for the highest frequency, all of them are returned as the mode, sorted numerically — the tool doesn't arbitrarily pick just one when a data set is genuinely multimodal."
+          },
+          {
+            "title": "Sample variance undefined for a single value",
+            "description": "Sample variance divides by (count − 1), which is zero for a single-value data set — the tool returns 0 for sample variance and sample standard deviation in that case rather than dividing by zero, while the population statistics remain valid down to a single value."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this tool compute twelve statistics instead of just a few?",
+            "answer": "A single data set can be summarized from several different angles — where its center is (mean, median, mode), how spread out it is (range, variance, standard deviation), and its basic extent (count, sum, min, max) — computing all of them together gives a complete picture in one pass rather than requiring the same data to be re-entered into separate tools."
+          },
+          {
+            "question": "Why are there two different standard deviations?",
+            "answer": "Population standard deviation assumes the data set is the entire population being studied; sample standard deviation assumes the data set is a sample drawn from a larger population, and applies Bessel's correction (dividing by n−1 instead of n) to correct for the sample tending to slightly underestimate the true population spread."
+          },
+          {
+            "question": "What's the difference between this tool and the Standard Deviation Calculator?",
+            "answer": "This tool computes the full set of twelve descriptive statistics in one place; the Standard Deviation Calculator focuses specifically on variance and standard deviation, additionally showing the per-value deviation table (value minus mean, squared) that this tool computes internally but doesn't display row by row."
+          },
+          {
+            "question": "Why can a data set have more than one mode, or none at all?",
+            "answer": "The mode is defined as whichever value (or values) occur most frequently — if two values are tied for the most repeats, both are legitimately the mode; if no value repeats at all, there's no meaningful \"most common\" value, so the mode is reported as empty rather than forced to a single arbitrary answer."
+          }
+        ]
+      },
+      "mean-median-mode-range-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Mean, Median, Mode, Range Calculator: the four central-tendency and spread formulas it computes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionDotplot": "Data Points on a Number Line",
+        "sectionAnatomy": "Mean vs. Median",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Measures",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Mean = Σx / n  |  Median = middle value of sorted data  |  Range = max − min",
+          "note": "The four measures answer different questions about the same data set: mean and median both describe a \"typical\" value but respond differently to outliers, mode identifies the most frequent value, and range measures the total spread."
+        },
+        "flowchart": {
+          "intro": "Each of the four measures is computed independently from the same input list, sharing only the initial sort step needed for median, min, and max.",
+          "steps": [
+            "Sort the values to find the minimum and maximum, and locate the middle for the median",
+            "Sum all values and divide by the count to get the mean",
+            "Count how often each value appears; if any value repeats more than once, the most frequent value(s) become the mode",
+            "Subtract the minimum from the maximum to get the range"
+          ],
+          "caption": "The four independent calculations this tool runs over the same data set."
+        },
+        "dotplot": {
+          "intro": "Plotting the values on a number line shows exactly where the median (the physical middle of the sorted data) sits relative to the mean (the balance point).",
+          "labelMean": "Mean",
+          "labelMedian": "Median",
+          "caption": "A skewed sample data set — one large outlier pulls the mean well above the median, which stays anchored to the middle of the sorted values."
+        },
+        "anatomy": {
+          "intro": "For skewed data (data with outliers or a long tail), the mean and median can differ substantially — the mean is pulled toward the outlier, while the median stays resistant to it.",
+          "labelMean": "Mean",
+          "labelMedian": "Median",
+          "caption": "For the data set [2, 3, 3, 5, 20], one large outlier (20) pulls the mean noticeably above the median."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Values",
+            "meaning": "The list of numbers making up the data set — all four measures are derived from this single input.",
+            "unit": "Numbers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Empty data set",
+            "description": "If no values are entered, the tool returns an \"empty-dataset\" error rather than computing a mean or range on zero numbers, which would be mathematically undefined."
+          },
+          {
+            "title": "No repeated values (no mode)",
+            "description": "The mode is only reported, and a \"hasMode\" flag set to true, when some value appears more than once; if every value is unique, the tool explicitly reports no mode exists rather than defaulting to an arbitrary value."
+          },
+          {
+            "title": "Multiple modes (multimodal data)",
+            "description": "When two or more values are tied for the highest frequency, all of them are returned as the mode, sorted numerically, rather than the tool picking just the first one encountered."
+          },
+          {
+            "title": "Even-count data sets need averaged medians",
+            "description": "For a data set with an even number of values, there is no single middle value — the tool correctly averages the two middle values of the sorted list, rather than picking one of them (which would be incorrect for an even count)."
+          }
+        ],
+        "faq": [
+          {
+            "question": "When should I use the mean versus the median?",
+            "answer": "The mean uses every value and is the standard choice for symmetric data without extreme outliers; the median only depends on the middle value's position and stays stable even when a data set has extreme outliers or a skewed distribution, making it the better \"typical value\" for data like household incomes or home prices."
+          },
+          {
+            "question": "Why does a data set sometimes have no mode?",
+            "answer": "The mode requires a value to repeat more often than every other value — if every value in the data set appears exactly once, nothing is more frequent than anything else, so there's no meaningful mode to report, and the tool says so explicitly rather than guessing."
+          },
+          {
+            "question": "How does this tool differ from the Statistics Calculator?",
+            "answer": "This tool focuses specifically on the four classic central-tendency and spread measures (mean, median, mode, range) with a breakdown of how each is derived; the Statistics Calculator additionally computes variance and both population and sample standard deviation for a fuller statistical summary."
+          },
+          {
+            "question": "Why is the range just two numbers subtracted, when variance and standard deviation are more complex?",
+            "answer": "Range only uses the two most extreme values and ignores everything in between, giving a quick but crude measure of spread; variance and standard deviation instead account for every value's distance from the mean, giving a more complete (but more computationally involved) picture of how spread out the whole data set is."
+          }
+        ]
+      },
+      "standard-deviation-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Standard Deviation Calculator: the deviation-based formula it computes step by step, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionDeviations": "Deviations From the Mean",
+        "sectionAnatomy": "Population vs. Sample",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Statistics",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "σ (population) = √(Σ(x − mean)² / n)  |  s (sample) = √(Σ(x − mean)² / (n − 1))",
+          "note": "Both formulas share the same core steps — subtract the mean from each value, square the difference, sum the squares — and differ only in the final division, by the full count (population) or by count minus one (sample, Bessel's correction)."
+        },
+        "flowchart": {
+          "intro": "Rather than computing standard deviation as a single opaque formula, this tool builds and exposes the full per-value deviation table as an intermediate result, so the calculation stays traceable.",
+          "steps": [
+            "Compute the mean of all entered values",
+            "For each value, subtract the mean to get its deviation, and square that deviation",
+            "Sum all the squared deviations",
+            "Divide that sum by the count to get population variance, and separately by the count minus one to get sample variance",
+            "Take the square root of each variance to get the population and sample standard deviations"
+          ],
+          "caption": "The shared deviation-table computation that both the population and sample formulas branch from at the final division step."
+        },
+        "deviations": {
+          "intro": "Each value's deviation from the mean (its distance, with sign) is the building block for variance and standard deviation — values below the mean have negative deviations, values above have positive ones.",
+          "meanLabel": "Mean",
+          "caption": "Deviations from the mean for the values [2, 4, 6, 8, 10] (mean = 6) — symmetric values above and below the mean produce equal-magnitude, opposite-sign deviations."
+        },
+        "anatomy": {
+          "intro": "Population and sample standard deviation differ only in their final division step, but that difference means the sample version is always slightly larger for the same data.",
+          "labelPopulation": "Population Std. Dev.",
+          "labelSample": "Sample Std. Dev.",
+          "caption": "For the values [2, 4, 6, 8, 10], dividing by count (population) versus count minus one (sample) produces two different standard deviations from the same underlying deviations."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Values",
+            "meaning": "The list of numbers making up the data set — every deviation, variance, and standard deviation value is derived from this single input.",
+            "unit": "Numbers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Empty data set",
+            "description": "If no values are entered, the tool returns an \"empty-dataset\" error rather than computing a mean or deviations on zero numbers, which would be mathematically undefined."
+          },
+          {
+            "title": "Sample statistics undefined for a single value",
+            "description": "Sample variance and sample standard deviation divide by (count − 1), which is zero for a single-value data set — the tool returns 0 for both in that case rather than dividing by zero, while population variance and standard deviation remain mathematically valid (and equal to zero) for a single value."
+          },
+          {
+            "title": "Full deviation table exposed, not just the final numbers",
+            "description": "Rather than only returning the two final standard deviation numbers, the tool exposes every individual value's deviation and squared deviation — this makes the intermediate work checkable and is what the deviation diagram on this page visualizes directly."
+          },
+          {
+            "title": "Deviations always sum to (approximately) zero",
+            "description": "By definition of the mean as the balance point of the data, the raw (unsquared) deviations always sum to zero or a value effectively zero after floating-point rounding — this isn't treated as an error, since it's a guaranteed mathematical property of the mean, not a data quality issue."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool show every value's deviation instead of just the final standard deviation?",
+            "answer": "Standard deviation is a single summary number, but understanding what it means requires seeing the underlying per-value deviations it's built from — showing the full table (value, deviation, squared deviation) makes visible exactly which values contribute most to the spread, rather than presenting the final number as an opaque result."
+          },
+          {
+            "question": "Why are the deviations squared before being summed?",
+            "answer": "Deviations above and below the mean have opposite signs and would cancel out if summed directly (always yielding zero, regardless of how spread out the data is) — squaring makes every deviation positive before summing, so the total actually reflects total spread rather than canceling to nothing."
+          },
+          {
+            "question": "When should I use sample standard deviation instead of population?",
+            "answer": "Use population standard deviation when your data set is the entire group you care about (e.g., every student's score on one specific test); use sample standard deviation when your data set is a subset drawn from a larger population you're trying to draw conclusions about (e.g., a survey sample representing a larger population) — Bessel's correction compensates for the sample tending to underestimate the true population spread."
+          },
+          {
+            "question": "How does this differ from the Statistics Calculator?",
+            "answer": "This tool focuses specifically on standard deviation and variance, showing the full per-value deviation table as its centerpiece; the Statistics Calculator computes the same variance and standard deviation values alongside ten other statistics (mean, median, mode, range, and more) without showing the row-by-row deviation breakdown."
+          }
+        ]
+      },
+      "probability-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Probability Calculator: the classical probability formulas behind its four modes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionVenn": "Visualizing AND vs. OR",
+        "sectionAnatomy": "Comparing the Four Modes",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "P(event) = favorable / total  |  P(A∩B) = P(A)×P(B)  |  P(A∪B) = P(A)+P(B)−P(A∩B)  |  P(A|B) = P(A∩B)/P(B)",
+          "note": "Each of the four modes answers a genuinely different probability question, using a distinct classical formula — a single event's likelihood, two independent events both happening, either of two events happening, or one event's likelihood given another already happened."
+        },
+        "flowchart": {
+          "intro": "Which formula runs depends entirely on the selected mode — each mode also independently validates that every probability supplied is a valid value between 0 and 1 (or, for the Single mode, that favorable outcomes don't exceed total outcomes).",
+          "steps": [
+            "Read which of the four modes is selected: Single Event, AND (independent), OR, or Conditional",
+            "For Single Event: divide favorable outcomes by total outcomes to get the probability, and derive the equivalent odds notation",
+            "For AND: multiply the two independent probabilities together",
+            "For OR: add the two probabilities and subtract their overlap (the probability both happen) to avoid double-counting",
+            "For Conditional: divide the joint probability by the probability of the condition already having occurred"
+          ],
+          "caption": "The mode-dependent formula this tool applies, each with its own validation rules."
+        },
+        "venn": {
+          "intro": "AND and OR probabilities correspond directly to a Venn diagram: AND is the overlap between two events, while OR is everything covered by either circle.",
+          "leftLabel": "Event A",
+          "rightLabel": "Event B",
+          "overlapLabel": "A∩B",
+          "leftOnlyItems": "A only",
+          "overlapItems": "AND",
+          "rightOnlyItems": "B only",
+          "caption": "The overlap region is the AND probability; the entire shaded area (both circles combined, without double-counting the overlap) is the OR probability."
+        },
+        "anatomy": {
+          "intro": "The four modes produce structurally different results from the same underlying concept of probability — a single value, a smaller combined value, a larger combined value, or a rescaled value.",
+          "labelSingle": "Single Event",
+          "labelAnd": "AND (typically smaller)",
+          "labelOr": "OR (typically larger)",
+          "caption": "For two events each with 50% probability, AND (both happening) is smaller than either alone, while OR (either happening) is larger."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Favorable",
+            "meaning": "The number of outcomes that count as a \"success\" — used only in Single Event mode.",
+            "unit": "Count"
+          },
+          {
+            "symbol": "Total",
+            "meaning": "The total number of possible outcomes — used only in Single Event mode.",
+            "unit": "Count"
+          },
+          {
+            "symbol": "P(A)",
+            "meaning": "The probability of event A, expressed as a decimal between 0 and 1 — used in AND and OR modes.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(B)",
+            "meaning": "The probability of event B, expressed as a decimal between 0 and 1 — used in AND, OR, and Conditional modes.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(A∩B)",
+            "meaning": "The known joint probability of both A and B occurring — used only in OR mode (to avoid double-counting) and Conditional mode.",
+            "unit": "0–1"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Favorable outcomes exceeding total outcomes",
+            "description": "In Single Event mode, if the number of favorable outcomes is greater than the total possible outcomes, the tool marks the result invalid rather than returning a probability above 100%, which is not mathematically meaningful."
+          },
+          {
+            "title": "Probability values outside 0 to 1",
+            "description": "Every probability input (P(A), P(B), P(A∩B)) is validated to be a finite number between 0 and 1 inclusive — a value outside that range is rejected before any calculation, since probabilities are defined only within that bound."
+          },
+          {
+            "title": "Overlap greater than either individual probability (OR mode)",
+            "description": "In OR mode, the known joint probability P(A∩B) can never exceed the smaller of P(A) and P(B) — two events can't overlap more than the less-likely one occurs at all — so the tool rejects inputs that violate this before computing the union."
+          },
+          {
+            "title": "Dividing by a zero-probability condition (Conditional mode)",
+            "description": "Conditional probability divides by P(B); if P(B) is exactly zero, the tool rejects the input rather than computing an undefined division, since conditioning on an event that never happens has no meaningful probability."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this calculator have four separate modes?",
+            "answer": "Single-event, AND, OR, and conditional probability are four genuinely different questions in probability theory, each with its own formula — a single calculator that only handled one of them would leave the others unanswered, so this tool groups all four common cases under one interface."
+          },
+          {
+            "question": "What's the difference between AND and OR probability?",
+            "answer": "AND asks for the probability that both of two events happen (their overlap, which is always smaller than either event alone for independent events); OR asks for the probability that at least one of them happens (their combined coverage, which is always at least as large as the larger individual probability)."
+          },
+          {
+            "question": "Why does OR mode need the joint probability P(A∩B) as an input?",
+            "answer": "Simply adding P(A) and P(B) would double-count any outcomes where both events happen — subtracting the known overlap corrects for this. For mutually exclusive events (which can never both happen), entering 0 for the overlap gives the simple sum, since there's nothing to double-count."
+          },
+          {
+            "question": "How is conditional probability different from AND probability?",
+            "answer": "AND probability asks for the chance both events happen, viewed from before either is known; conditional probability asks for the chance of one event, given that the other has already definitely happened — it rescales the joint probability against the smaller \"known\" sample space where the condition is already true."
+          }
+        ]
+      },
+      "random-number-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Random Number Generator: the uniform sampling algorithm behind it, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionDistribution": "Uniform Distribution",
+        "sectionAnatomy": "A Generated Set",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Sort Orders",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "value = min + ⌊random() × (max − min + 1)⌋",
+          "note": "Every integer in the range [min, max] has an equal chance of being generated — this formula maps a uniform random fraction between 0 and 1 onto the full integer range, inclusive of both endpoints."
+        },
+        "flowchart": {
+          "intro": "How numbers are generated depends on whether duplicates are allowed — with duplicates disallowed, the tool shuffles the entire range rather than repeatedly re-rolling until it happens to avoid a repeat.",
+          "steps": [
+            "Validate that min and max are integers, and normalize so the smaller is treated as the range's floor",
+            "Validate the requested count is a positive integer within the tool's maximum limit",
+            "If duplicates aren't allowed, check the requested count doesn't exceed the number of integers actually available in the range",
+            "If duplicates are allowed: generate each number independently using the uniform formula",
+            "If duplicates aren't allowed: build the full list of possible integers, shuffle it (Fisher-Yates algorithm), and take the first \"count\" values",
+            "Apply the requested sort order (none, ascending, or descending) to the final list"
+          ],
+          "caption": "The two distinct generation paths this tool takes depending on whether duplicate values are allowed."
+        },
+        "distribution": {
+          "intro": "\"Random\" here specifically means uniformly random — every integer in the chosen range is equally likely to appear, with no bias toward the middle, edges, or any particular value.",
+          "bandLabel": "equal chance across the range",
+          "caption": "Every integer from the minimum to the maximum has exactly the same probability of being selected."
+        },
+        "anatomy": {
+          "intro": "A generated set of numbers, plotted on a number line, should show no obvious pattern or clustering — values scattered roughly evenly across the requested range is the expected signature of correct uniform sampling.",
+          "labelMax": "Range Max",
+          "caption": "Eight numbers generated within a 1–100 range, showing no particular clustering — consistent with uniform random selection."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Min",
+            "meaning": "The lower bound of the range (inclusive) — automatically swapped with Max if entered larger than it.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Max",
+            "meaning": "The upper bound of the range (inclusive).",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Count",
+            "meaning": "How many random numbers to generate.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Allow Duplicates",
+            "meaning": "Whether the same number can be generated more than once — disabling this samples without replacement.",
+            "unit": "Boolean"
+          },
+          {
+            "symbol": "Sort Order",
+            "meaning": "Whether to leave the generated numbers in generation order, or sort them ascending or descending.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Non-integer min or max",
+            "description": "Both range bounds must be whole numbers — a decimal value for either returns an \"invalid-range\" error, since the tool generates integers exclusively, not fractional random values."
+          },
+          {
+            "title": "Min entered larger than max",
+            "description": "If the entered minimum is numerically larger than the entered maximum, the tool doesn't error — it automatically treats the smaller of the two as the floor and the larger as the ceiling, so the range is always interpreted correctly regardless of entry order."
+          },
+          {
+            "title": "Invalid or excessive count",
+            "description": "The requested count must be a positive integer and cannot exceed the tool's built-in maximum of 10,000 — a count outside that returns an \"invalid-count\" error, protecting against generating an unreasonably large result set."
+          },
+          {
+            "title": "Requesting more unique numbers than the range contains",
+            "description": "When duplicates are disallowed, the range [min, max] contains a fixed, finite number of possible values — requesting more unique numbers than exist in that range returns a \"range-too-small\" error rather than silently returning fewer numbers than asked for."
+          }
+        ],
+        "faq": [
+          {
+            "question": "How does the tool guarantee every number has an equal chance when duplicates are disallowed?",
+            "answer": "Rather than repeatedly generating single random numbers and discarding repeats (which gets progressively slower and can loop excessively as the requested count approaches the range size), the tool builds the complete list of possible values, shuffles it using the Fisher-Yates algorithm (which produces a uniformly random permutation), and takes the first \"count\" values — this samples without replacement in one efficient pass."
+          },
+          {
+            "question": "Why does the count have a maximum limit of 10,000?",
+            "answer": "This caps the computational work and the size of the result displayed in a single request, preventing an accidental or malicious request for an impractically large number of values from freezing the browser or overwhelming the results display."
+          },
+          {
+            "question": "What does \"uniformly random\" actually mean here?",
+            "answer": "It means every integer within the chosen range has exactly the same probability of being selected — not that the numbers look scattered or unpredictable to a human eye, but a precise mathematical property: over many generations, each value in the range would appear approximately equally often."
+          },
+          {
+            "question": "Why does entering min larger than max still work correctly?",
+            "answer": "The tool explicitly takes the minimum of the two entered values as the range floor and the maximum as the ceiling before generating anything — this means the range is always interpreted correctly regardless of which field a user happens to type the smaller or larger number into."
+          }
+        ]
       }
     }
   }

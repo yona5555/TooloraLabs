@@ -22875,6 +22875,523 @@
             "answer": "La herramienta usa la fórmula de Herón, que calcula el área directamente a partir de las tres longitudes de lado mediante el semiperímetro (la mitad del perímetro) sin necesidad de conocer explícitamente ningún ángulo o altura perpendicular — esto funciona para cualquier triángulo válido sin importar qué modo de resolución encontró los lados."
           }
         ]
+      },
+      "statistics-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Estadísticas: el conjunto completo de estadísticas descriptivas que calcula, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionDotplot": "Puntos de datos en una recta numérica",
+        "sectionAnatomy": "Población vs. muestra",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Estadísticas",
+          "modesValue": "12",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Media = Σx / n  |  Varianza poblacional = Σ(x − media)² / n  |  Varianza muestral = Σ(x − media)² / (n − 1)",
+          "note": "Un solo conjunto de datos alimenta doce estadísticas distintas a la vez: tendencia central (media, mediana, moda), dispersión (rango, varianza, desviación estándar) y valores resumen (recuento, suma, mínimo, máximo), cada una calculada a partir de las mismas fórmulas subyacentes."
+        },
+        "flowchart": {
+          "intro": "Las doce estadísticas se calculan en un solo recorrido sobre los datos, reutilizando resultados intermedios (como la media y la lista ordenada) en lugar de recorrer el conjunto de datos repetidamente.",
+          "steps": [
+            "Ordenar los valores para encontrar el mínimo, el máximo y la mediana",
+            "Sumar los valores y dividir entre el recuento para obtener la media",
+            "Contar cuántas veces aparece cada valor para hallar la moda (los valores empatados con la mayor frecuencia)",
+            "Restar la media a cada valor, elevar al cuadrado las diferencias y sumarlas",
+            "Dividir esa suma entre el recuento (población) y entre el recuento menos uno (muestra) para obtener ambas varianzas, y luego sacar la raíz cuadrada de cada una para las dos desviaciones estándar"
+          ],
+          "caption": "El único recorrido sobre el conjunto de datos que usa esta herramienta para calcular las doce estadísticas."
+        },
+        "dotplot": {
+          "intro": "Trazar cada valor en una sola recta numérica hace visible la forma de un conjunto de datos: dónde se agrupan los valores y cómo se relacionan la media y la mediana con esa forma.",
+          "labelMean": "Media",
+          "labelMedian": "Mediana",
+          "caption": "Ocho valores de ejemplo trazados en una recta numérica, con la media y la mediana marcadas; aquí ambas coinciden de cerca porque los datos son bastante simétricos."
+        },
+        "anatomy": {
+          "intro": "La varianza y la desviación estándar se reportan de dos formas: como estadística poblacional (dividiendo entre el recuento total) y como estadística muestral (dividiendo entre el recuento menos uno, corrección de Bessel); la versión muestral siempre es ligeramente mayor.",
+          "labelPopulation": "Desv. estándar poblacional",
+          "labelSample": "Desv. estándar muestral",
+          "caption": "Para el mismo conjunto de ocho valores, la desviación estándar muestral es sistemáticamente mayor que la poblacional."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Valores",
+            "meaning": "La lista de números que forman el conjunto de datos; el resto de estadísticas se derivan de esta única entrada.",
+            "unit": "Números"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Conjunto de datos vacío",
+            "description": "Si no se ingresan valores, la herramienta devuelve un error de \"conjunto de datos vacío\" en lugar de calcular estadísticas como la media o la desviación estándar sobre cero números, lo cual sería matemáticamente indefinido (división entre cero)."
+          },
+          {
+            "title": "Sin valores repetidos (sin moda)",
+            "description": "La moda solo se reporta cuando algún valor aparece más de una vez; si cada valor del conjunto de datos es único (frecuencia máxima de 1), la herramienta devuelve una lista de moda vacía en lugar de tratar incorrectamente cada valor como \"la\" moda."
+          },
+          {
+            "title": "Varias modas (datos multimodales)",
+            "description": "Cuando dos o más valores empatan con la mayor frecuencia, todos se devuelven como moda, ordenados numéricamente; la herramienta no elige arbitrariamente uno solo cuando un conjunto de datos es realmente multimodal."
+          },
+          {
+            "title": "Varianza muestral indefinida para un solo valor",
+            "description": "La varianza muestral divide entre (recuento − 1), que es cero para un conjunto de datos de un solo valor; la herramienta devuelve 0 para la varianza y la desviación estándar muestrales en ese caso en lugar de dividir entre cero, mientras que las estadísticas poblacionales siguen siendo válidas incluso con un solo valor."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta herramienta calcula doce estadísticas en lugar de solo unas pocas?",
+            "answer": "Un conjunto de datos puede resumirse desde varios ángulos distintos: dónde está su centro (media, mediana, moda), cuán disperso está (rango, varianza, desviación estándar) y su extensión básica (recuento, suma, mínimo, máximo); calcularlas todas juntas da una imagen completa en un solo recorrido en lugar de tener que reintroducir los mismos datos en herramientas separadas."
+          },
+          {
+            "question": "¿Por qué hay dos desviaciones estándar distintas?",
+            "answer": "La desviación estándar poblacional asume que el conjunto de datos es toda la población estudiada; la desviación estándar muestral asume que el conjunto de datos es una muestra extraída de una población mayor, y aplica la corrección de Bessel (dividiendo entre n−1 en lugar de n) para corregir la tendencia de la muestra a subestimar ligeramente la dispersión real de la población."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre esta herramienta y la Calculadora de Desviación Estándar?",
+            "answer": "Esta herramienta calcula el conjunto completo de doce estadísticas descriptivas en un solo lugar; la Calculadora de Desviación Estándar se centra específicamente en la varianza y la desviación estándar, mostrando además la tabla de desviación por valor (valor menos media, al cuadrado) que esta herramienta calcula internamente pero no muestra fila por fila."
+          },
+          {
+            "question": "¿Por qué un conjunto de datos puede tener más de una moda, o ninguna?",
+            "answer": "La moda se define como el valor (o valores) que ocurre con más frecuencia; si dos valores empatan con más repeticiones, ambos son legítimamente la moda; si ningún valor se repite en absoluto, no existe un valor \"más común\" con sentido, por lo que la moda se reporta vacía en lugar de forzarla a una única respuesta arbitraria."
+          }
+        ]
+      },
+      "mean-median-mode-range-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Media, Mediana, Moda y Rango: las cuatro fórmulas de tendencia central y dispersión que calcula, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionDotplot": "Puntos de datos en una recta numérica",
+        "sectionAnatomy": "Media vs. mediana",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Medidas",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Media = Σx / n  |  Mediana = valor central de los datos ordenados  |  Rango = máximo − mínimo",
+          "note": "Las cuatro medidas responden preguntas diferentes sobre el mismo conjunto de datos: la media y la mediana describen un valor \"típico\" pero responden de forma distinta a los valores atípicos, la moda identifica el valor más frecuente y el rango mide la dispersión total."
+        },
+        "flowchart": {
+          "intro": "Cada una de las cuatro medidas se calcula de forma independiente a partir de la misma lista de entrada, compartiendo solo el paso inicial de ordenación necesario para la mediana, el mínimo y el máximo.",
+          "steps": [
+            "Ordenar los valores para encontrar el mínimo y el máximo, y localizar el centro para la mediana",
+            "Sumar todos los valores y dividir entre el recuento para obtener la media",
+            "Contar cuántas veces aparece cada valor; si algún valor se repite más de una vez, el valor (o valores) más frecuente se convierte en la moda",
+            "Restar el mínimo al máximo para obtener el rango"
+          ],
+          "caption": "Los cuatro cálculos independientes que esta herramienta ejecuta sobre el mismo conjunto de datos."
+        },
+        "dotplot": {
+          "intro": "Trazar los valores en una recta numérica muestra exactamente dónde se ubica la mediana (el centro físico de los datos ordenados) respecto a la media (el punto de equilibrio).",
+          "labelMean": "Media",
+          "labelMedian": "Mediana",
+          "caption": "Un conjunto de datos de ejemplo sesgado: un valor atípico grande arrastra la media muy por encima de la mediana, que permanece anclada al centro de los valores ordenados."
+        },
+        "anatomy": {
+          "intro": "Para datos sesgados (con valores atípicos o una cola larga), la media y la mediana pueden diferir sustancialmente: la media se ve arrastrada hacia el valor atípico, mientras que la mediana permanece resistente a él.",
+          "labelMean": "Media",
+          "labelMedian": "Mediana",
+          "caption": "Para el conjunto de datos [2, 3, 3, 5, 20], un valor atípico grande (20) arrastra la media notablemente por encima de la mediana."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Valores",
+            "meaning": "La lista de números que forman el conjunto de datos; las cuatro medidas se derivan de esta única entrada.",
+            "unit": "Números"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Conjunto de datos vacío",
+            "description": "Si no se ingresan valores, la herramienta devuelve un error de \"conjunto de datos vacío\" en lugar de calcular una media o un rango sobre cero números, lo cual sería matemáticamente indefinido."
+          },
+          {
+            "title": "Sin valores repetidos (sin moda)",
+            "description": "La moda solo se reporta, y una marca \"hasMode\" solo se establece en verdadero, cuando algún valor aparece más de una vez; si cada valor es único, la herramienta reporta explícitamente que no existe moda en lugar de recurrir a un valor arbitrario."
+          },
+          {
+            "title": "Varias modas (datos multimodales)",
+            "description": "Cuando dos o más valores empatan con la mayor frecuencia, todos se devuelven como moda, ordenados numéricamente, en lugar de que la herramienta elija solo el primero encontrado."
+          },
+          {
+            "title": "Los conjuntos de datos con cantidad par necesitan medianas promediadas",
+            "description": "Para un conjunto de datos con un número par de valores, no existe un único valor central; la herramienta promedia correctamente los dos valores centrales de la lista ordenada, en lugar de elegir uno de ellos (lo cual sería incorrecto para una cantidad par)."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cuándo debo usar la media en lugar de la mediana?",
+            "answer": "La media usa todos los valores y es la opción estándar para datos simétricos sin valores atípicos extremos; la mediana solo depende de la posición del valor central y permanece estable incluso cuando un conjunto de datos tiene valores atípicos extremos o una distribución sesgada, lo que la convierte en el mejor \"valor típico\" para datos como ingresos familiares o precios de vivienda."
+          },
+          {
+            "question": "¿Por qué a veces un conjunto de datos no tiene moda?",
+            "answer": "La moda requiere que un valor se repita más que todos los demás; si cada valor del conjunto de datos aparece exactamente una vez, nada es más frecuente que otra cosa, por lo que no hay una moda con sentido que reportar, y la herramienta lo indica explícitamente en lugar de adivinar."
+          },
+          {
+            "question": "¿En qué se diferencia esta herramienta de la Calculadora de Estadísticas?",
+            "answer": "Esta herramienta se centra específicamente en las cuatro medidas clásicas de tendencia central y dispersión (media, mediana, moda, rango) con un desglose de cómo se deriva cada una; la Calculadora de Estadísticas además calcula la varianza y tanto la desviación estándar poblacional como la muestral para un resumen estadístico más completo."
+          },
+          {
+            "question": "¿Por qué el rango es solo una resta de dos números, mientras que la varianza y la desviación estándar son más complejas?",
+            "answer": "El rango solo usa los dos valores más extremos e ignora todo lo intermedio, dando una medida rápida pero tosca de la dispersión; la varianza y la desviación estándar, en cambio, tienen en cuenta la distancia de cada valor respecto a la media, dando una imagen más completa (pero más laboriosa computacionalmente) de cuán disperso está todo el conjunto de datos."
+          }
+        ]
+      },
+      "standard-deviation-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Desviación Estándar: la fórmula basada en desviaciones que calcula paso a paso, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionDeviations": "Desviaciones respecto a la media",
+        "sectionAnatomy": "Población vs. muestra",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Estadísticas",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "σ (población) = √(Σ(x − media)² / n)  |  s (muestra) = √(Σ(x − media)² / (n − 1))",
+          "note": "Ambas fórmulas comparten los mismos pasos principales: restar la media a cada valor, elevar al cuadrado la diferencia, sumar los cuadrados; y difieren solo en la división final, entre el recuento total (población) o entre el recuento menos uno (muestra, corrección de Bessel)."
+        },
+        "flowchart": {
+          "intro": "En lugar de calcular la desviación estándar como una fórmula única y opaca, esta herramienta construye y muestra la tabla completa de desviaciones por valor como resultado intermedio, de modo que el cálculo se mantenga trazable.",
+          "steps": [
+            "Calcular la media de todos los valores ingresados",
+            "Para cada valor, restar la media para obtener su desviación, y elevar al cuadrado esa desviación",
+            "Sumar todas las desviaciones al cuadrado",
+            "Dividir esa suma entre el recuento para obtener la varianza poblacional, y por separado entre el recuento menos uno para obtener la varianza muestral",
+            "Sacar la raíz cuadrada de cada varianza para obtener las desviaciones estándar poblacional y muestral"
+          ],
+          "caption": "El cálculo compartido de la tabla de desviaciones del que se ramifican tanto la fórmula poblacional como la muestral en el paso final de división."
+        },
+        "deviations": {
+          "intro": "La desviación de cada valor respecto a la media (su distancia, con signo) es el bloque constructivo de la varianza y la desviación estándar; los valores por debajo de la media tienen desviaciones negativas, y los valores por encima, positivas.",
+          "meanLabel": "Media",
+          "caption": "Desviaciones respecto a la media para los valores [2, 4, 6, 8, 10] (media = 6): los valores simétricos por encima y por debajo de la media producen desviaciones de igual magnitud y signo opuesto."
+        },
+        "anatomy": {
+          "intro": "La desviación estándar poblacional y la muestral difieren solo en su paso final de división, pero esa diferencia hace que la versión muestral siempre sea ligeramente mayor para los mismos datos.",
+          "labelPopulation": "Desv. estándar poblacional",
+          "labelSample": "Desv. estándar muestral",
+          "caption": "Para los valores [2, 4, 6, 8, 10], dividir entre el recuento (población) frente a dividir entre el recuento menos uno (muestra) produce dos desviaciones estándar distintas a partir de las mismas desviaciones subyacentes."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Valores",
+            "meaning": "La lista de números que forman el conjunto de datos; cada desviación, varianza y desviación estándar se derivan de esta única entrada.",
+            "unit": "Números"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Conjunto de datos vacío",
+            "description": "Si no se ingresan valores, la herramienta devuelve un error de \"conjunto de datos vacío\" en lugar de calcular una media o desviaciones sobre cero números, lo cual sería matemáticamente indefinido."
+          },
+          {
+            "title": "Estadísticas muestrales indefinidas para un solo valor",
+            "description": "La varianza muestral y la desviación estándar muestral dividen entre (recuento − 1), que es cero para un conjunto de datos de un solo valor; la herramienta devuelve 0 para ambas en ese caso en lugar de dividir entre cero, mientras que la varianza y la desviación estándar poblacionales siguen siendo matemáticamente válidas (e iguales a cero) para un solo valor."
+          },
+          {
+            "title": "Tabla completa de desviaciones expuesta, no solo los números finales",
+            "description": "En lugar de devolver únicamente los dos números finales de desviación estándar, la herramienta expone la desviación y la desviación al cuadrado de cada valor individual; esto hace verificable el trabajo intermedio y es exactamente lo que visualiza directamente el diagrama de desviaciones de esta página."
+          },
+          {
+            "title": "Las desviaciones siempre suman (aproximadamente) cero",
+            "description": "Por definición, la media es el punto de equilibrio de los datos, así que las desviaciones sin elevar al cuadrado siempre suman cero, o un valor prácticamente cero tras el redondeo de punto flotante; esto no se trata como un error, ya que es una propiedad matemática garantizada de la media, no un problema de calidad de los datos."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta muestra la desviación de cada valor en lugar de solo la desviación estándar final?",
+            "answer": "La desviación estándar es un único número resumen, pero entender su significado requiere ver las desviaciones individuales de las que se construye; mostrar la tabla completa (valor, desviación, desviación al cuadrado) hace visible exactamente qué valores contribuyen más a la dispersión, en lugar de presentar el número final como un resultado opaco."
+          },
+          {
+            "question": "¿Por qué se elevan al cuadrado las desviaciones antes de sumarlas?",
+            "answer": "Las desviaciones por encima y por debajo de la media tienen signos opuestos y se cancelarían si se sumaran directamente (dando siempre cero, sin importar cuán dispersos estén los datos); elevar al cuadrado hace positiva cada desviación antes de sumar, de modo que el total realmente refleje la dispersión total en lugar de cancelarse a nada."
+          },
+          {
+            "question": "¿Cuándo debo usar la desviación estándar muestral en lugar de la poblacional?",
+            "answer": "Use la desviación estándar poblacional cuando su conjunto de datos sea todo el grupo que le interesa (por ejemplo, la calificación de cada estudiante en un examen específico); use la desviación estándar muestral cuando su conjunto de datos sea un subconjunto extraído de una población más grande sobre la que intenta sacar conclusiones (por ejemplo, una muestra de encuesta que representa a una población más amplia); la corrección de Bessel compensa la tendencia de la muestra a subestimar la dispersión real de la población."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la Calculadora de Estadísticas?",
+            "answer": "Esta herramienta se centra específicamente en la desviación estándar y la varianza, mostrando la tabla completa de desviaciones por valor como su pieza central; la Calculadora de Estadísticas calcula los mismos valores de varianza y desviación estándar junto con otras diez estadísticas (media, mediana, moda, rango y más) sin mostrar el desglose fila por fila."
+          }
+        ]
+      },
+      "probability-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Probabilidad: las fórmulas clásicas de probabilidad detrás de sus cuatro modos, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionVenn": "Visualizando AND frente a OR",
+        "sectionAnatomy": "Comparando los cuatro modos",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "P(evento) = favorables / totales  |  P(A∩B) = P(A)×P(B)  |  P(A∪B) = P(A)+P(B)−P(A∩B)  |  P(A|B) = P(A∩B)/P(B)",
+          "note": "Cada uno de los cuatro modos responde una pregunta de probabilidad genuinamente distinta, usando una fórmula clásica diferente: la probabilidad de un solo evento, que dos eventos independientes ocurran ambos, que ocurra alguno de dos eventos, o la probabilidad de un evento dado que otro ya ocurrió."
+        },
+        "flowchart": {
+          "intro": "Qué fórmula se ejecuta depende por completo del modo seleccionado; cada modo también valida de forma independiente que cada probabilidad ingresada sea un valor válido entre 0 y 1 (o, en el modo de evento único, que los resultados favorables no excedan los totales).",
+          "steps": [
+            "Leer cuál de los cuatro modos está seleccionado: Evento único, AND (independiente), OR o Condicional",
+            "Para Evento único: dividir los resultados favorables entre los totales para obtener la probabilidad, y derivar la notación de probabilidades equivalente",
+            "Para AND: multiplicar las dos probabilidades independientes entre sí",
+            "Para OR: sumar las dos probabilidades y restar su solapamiento (la probabilidad de que ambas ocurran) para evitar el doble conteo",
+            "Para Condicional: dividir la probabilidad conjunta entre la probabilidad de que la condición ya haya ocurrido"
+          ],
+          "caption": "La fórmula dependiente del modo que aplica esta herramienta, cada una con sus propias reglas de validación."
+        },
+        "venn": {
+          "intro": "Las probabilidades AND y OR corresponden directamente a un diagrama de Venn: AND es el solapamiento entre dos eventos, mientras que OR es todo lo cubierto por cualquiera de los dos círculos.",
+          "leftLabel": "Evento A",
+          "rightLabel": "Evento B",
+          "overlapLabel": "A∩B",
+          "leftOnlyItems": "Solo A",
+          "overlapItems": "AND",
+          "rightOnlyItems": "Solo B",
+          "caption": "La región de solapamiento es la probabilidad AND; toda el área sombreada (ambos círculos combinados, sin contar dos veces el solapamiento) es la probabilidad OR."
+        },
+        "anatomy": {
+          "intro": "Los cuatro modos producen resultados estructuralmente distintos a partir del mismo concepto subyacente de probabilidad: un valor único, un valor combinado menor, un valor combinado mayor, o un valor reescalado.",
+          "labelSingle": "Evento único",
+          "labelAnd": "AND (típicamente menor)",
+          "labelOr": "OR (típicamente mayor)",
+          "caption": "Para dos eventos con 50 % de probabilidad cada uno, AND (que ambos ocurran) es menor que cualquiera por separado, mientras que OR (que ocurra alguno) es mayor."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Favorables",
+            "meaning": "El número de resultados que cuentan como \"éxito\"; se usa solo en el modo Evento único.",
+            "unit": "Recuento"
+          },
+          {
+            "symbol": "Totales",
+            "meaning": "El número total de resultados posibles; se usa solo en el modo Evento único.",
+            "unit": "Recuento"
+          },
+          {
+            "symbol": "P(A)",
+            "meaning": "La probabilidad del evento A, expresada como decimal entre 0 y 1; se usa en los modos AND y OR.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(B)",
+            "meaning": "La probabilidad del evento B, expresada como decimal entre 0 y 1; se usa en los modos AND, OR y Condicional.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(A∩B)",
+            "meaning": "La probabilidad conjunta conocida de que ocurran A y B; se usa solo en el modo OR (para evitar el doble conteo) y en el modo Condicional.",
+            "unit": "0–1"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Resultados favorables que exceden los totales",
+            "description": "En el modo Evento único, si el número de resultados favorables es mayor que los resultados totales posibles, la herramienta marca el resultado como inválido en lugar de devolver una probabilidad superior al 100 %, lo cual no tiene sentido matemático."
+          },
+          {
+            "title": "Valores de probabilidad fuera de 0 a 1",
+            "description": "Cada probabilidad ingresada (P(A), P(B), P(A∩B)) se valida como un número finito entre 0 y 1 inclusive; un valor fuera de ese rango se rechaza antes de cualquier cálculo, ya que las probabilidades solo están definidas dentro de ese límite."
+          },
+          {
+            "title": "Solapamiento mayor que cualquiera de las probabilidades individuales (modo OR)",
+            "description": "En el modo OR, la probabilidad conjunta conocida P(A∩B) nunca puede exceder la menor entre P(A) y P(B); dos eventos no pueden solaparse más de lo que ocurre siquiera el menos probable de ellos, así que la herramienta rechaza entradas que violen esto antes de calcular la unión."
+          },
+          {
+            "title": "División entre una condición de probabilidad cero (modo Condicional)",
+            "description": "La probabilidad condicional divide entre P(B); si P(B) es exactamente cero, la herramienta rechaza la entrada en lugar de calcular una división indefinida, ya que condicionar sobre un evento que nunca ocurre no tiene una probabilidad con sentido."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta calculadora tiene cuatro modos separados?",
+            "answer": "La probabilidad de evento único, AND, OR y condicional son cuatro preguntas genuinamente distintas dentro de la teoría de la probabilidad, cada una con su propia fórmula; una calculadora que solo cubriera una dejaría las demás sin responder, así que esta herramienta agrupa los cuatro casos comunes bajo una sola interfaz."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre la probabilidad AND y la OR?",
+            "answer": "AND pregunta por la probabilidad de que ambos de dos eventos ocurran (su solapamiento, que siempre es menor que cualquiera de los eventos por separado en eventos independientes); OR pregunta por la probabilidad de que ocurra al menos uno de ellos (su cobertura combinada, que siempre es al menos tan grande como la probabilidad individual mayor)."
+          },
+          {
+            "question": "¿Por qué el modo OR necesita la probabilidad conjunta P(A∩B) como entrada?",
+            "answer": "Simplemente sumar P(A) y P(B) contaría dos veces cualquier resultado donde ambos eventos ocurran; restar el solapamiento conocido corrige esto. Para eventos mutuamente excluyentes (que nunca pueden ocurrir ambos), ingresar 0 para el solapamiento da la suma simple, ya que no hay nada que contar dos veces."
+          },
+          {
+            "question": "¿En qué se diferencia la probabilidad condicional de la probabilidad AND?",
+            "answer": "La probabilidad AND pregunta por la posibilidad de que ambos eventos ocurran, vista desde antes de que se conozca ninguno de los dos; la probabilidad condicional pregunta por la posibilidad de un evento, dado que el otro ya ocurrió con certeza; reescala la probabilidad conjunta frente al espacio muestral \"conocido\" más pequeño donde la condición ya es verdadera."
+          }
+        ]
+      },
+      "random-number-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Números Aleatorios: el algoritmo de muestreo uniforme que lo sustenta, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionDistribution": "Distribución uniforme",
+        "sectionAnatomy": "Un conjunto generado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Órdenes de clasificación",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "valor = mín + ⌊aleatorio() × (máx − mín + 1)⌋",
+          "note": "Todo entero en el rango [mín, máx] tiene la misma probabilidad de ser generado; esta fórmula asigna una fracción aleatoria uniforme entre 0 y 1 al rango entero completo, incluyendo ambos extremos."
+        },
+        "flowchart": {
+          "intro": "Cómo se generan los números depende de si se permiten duplicados; con duplicados no permitidos, la herramienta baraja todo el rango en lugar de volver a intentar repetidamente hasta evitar por casualidad una repetición.",
+          "steps": [
+            "Validar que mín y máx sean enteros, y normalizar para que el menor se trate como el piso del rango",
+            "Validar que la cantidad solicitada sea un entero positivo dentro del límite máximo de la herramienta",
+            "Si no se permiten duplicados, verificar que la cantidad solicitada no exceda el número de enteros realmente disponibles en el rango",
+            "Si se permiten duplicados: generar cada número de forma independiente usando la fórmula uniforme",
+            "Si no se permiten duplicados: construir la lista completa de enteros posibles, barajarla (algoritmo Fisher-Yates) y tomar los primeros \"cantidad\" valores",
+            "Aplicar el orden de clasificación solicitado (ninguno, ascendente o descendente) a la lista final"
+          ],
+          "caption": "Las dos rutas de generación distintas que sigue esta herramienta según se permitan o no valores duplicados."
+        },
+        "distribution": {
+          "intro": "\"Aleatorio\" aquí significa específicamente aleatorio uniforme: todo entero en el rango elegido tiene la misma probabilidad de aparecer, sin sesgo hacia el centro, los extremos o algún valor en particular.",
+          "bandLabel": "misma probabilidad en todo el rango",
+          "caption": "Todo entero desde el mínimo hasta el máximo tiene exactamente la misma probabilidad de ser seleccionado."
+        },
+        "anatomy": {
+          "intro": "Un conjunto generado de números, trazado en una recta numérica, no debería mostrar ningún patrón o agrupamiento evidente; valores dispersos de forma aproximadamente uniforme por todo el rango solicitado es la señal esperada de un muestreo aleatorio uniforme correcto.",
+          "labelMax": "Máximo del rango",
+          "caption": "Ocho números generados dentro de un rango de 1 a 100, sin mostrar ningún agrupamiento particular, coherente con una selección aleatoria uniforme."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Mín",
+            "meaning": "El límite inferior del rango (inclusive); se intercambia automáticamente con Máx si se ingresa mayor que este.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Máx",
+            "meaning": "El límite superior del rango (inclusive).",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Cantidad",
+            "meaning": "Cuántos números aleatorios generar.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Permitir duplicados",
+            "meaning": "Si el mismo número puede generarse más de una vez; desactivarlo muestrea sin reemplazo.",
+            "unit": "Booleano"
+          },
+          {
+            "symbol": "Orden de clasificación",
+            "meaning": "Si dejar los números generados en el orden de generación, u ordenarlos ascendente o descendentemente.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Mín o máx no enteros",
+            "description": "Ambos límites del rango deben ser números enteros; un valor decimal en cualquiera de ellos devuelve un error de \"rango inválido\", ya que la herramienta genera exclusivamente enteros, no valores aleatorios fraccionarios."
+          },
+          {
+            "title": "Mín ingresado mayor que máx",
+            "description": "Si el mínimo ingresado es numéricamente mayor que el máximo ingresado, la herramienta no genera un error: trata automáticamente el menor de los dos como el piso y el mayor como el techo, de modo que el rango siempre se interpreta correctamente sin importar el orden de entrada."
+          },
+          {
+            "title": "Cantidad inválida o excesiva",
+            "description": "La cantidad solicitada debe ser un entero positivo y no puede superar el límite máximo incorporado de la herramienta de 10.000; una cantidad fuera de ese rango devuelve un error de \"cantidad inválida\", protegiendo contra la generación de un conjunto de resultados irrazonablemente grande."
+          },
+          {
+            "title": "Solicitar más números únicos de los que contiene el rango",
+            "description": "Cuando los duplicados no están permitidos, el rango [mín, máx] contiene una cantidad fija y finita de valores posibles; solicitar más números únicos de los que existen en ese rango devuelve un error de \"rango demasiado pequeño\" en lugar de devolver silenciosamente menos números de los solicitados."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cómo garantiza la herramienta que cada número tenga la misma probabilidad cuando los duplicados no están permitidos?",
+            "answer": "En lugar de generar repetidamente números aleatorios individuales y descartar las repeticiones (lo cual se vuelve progresivamente más lento y puede repetirse en exceso a medida que la cantidad solicitada se acerca al tamaño del rango), la herramienta construye la lista completa de valores posibles, la baraja usando el algoritmo Fisher-Yates (que produce una permutación aleatoria uniforme) y toma los primeros \"cantidad\" valores; esto muestrea sin reemplazo en un solo paso eficiente."
+          },
+          {
+            "question": "¿Por qué la cantidad tiene un límite máximo de 10.000?",
+            "answer": "Esto limita el trabajo computacional y el tamaño del resultado mostrado en una sola solicitud, evitando que una solicitud accidental o maliciosa de una cantidad de valores poco práctica congele el navegador o sature la visualización de resultados."
+          },
+          {
+            "question": "¿Qué significa realmente \"aleatorio uniforme\" aquí?",
+            "answer": "Significa que todo entero dentro del rango elegido tiene exactamente la misma probabilidad de ser seleccionado, no que los números parezcan dispersos o impredecibles a simple vista, sino una propiedad matemática precisa: a lo largo de muchas generaciones, cada valor del rango aparecería aproximadamente con la misma frecuencia."
+          },
+          {
+            "question": "¿Por qué funciona correctamente igualmente si se ingresa un mínimo mayor que el máximo?",
+            "answer": "La herramienta toma explícitamente el menor de los dos valores ingresados como el piso del rango y el mayor como el techo antes de generar nada; esto significa que el rango siempre se interpreta correctamente sin importar en qué campo escriba un usuario el número menor o el mayor."
+          }
+        ]
       }
     }
   }

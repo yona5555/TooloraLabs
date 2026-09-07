@@ -23,6 +23,11 @@ import SurfaceAreaCalculatorDocsPage, { getSurfaceAreaCalculatorTocItems } from 
 import VolumeCalculatorDocsPage, { getVolumeCalculatorTocItems } from "@/components/docs/volume-calculator/VolumeCalculatorDocsPage";
 import CircleCalculatorDocsPage, { getCircleCalculatorTocItems } from "@/components/docs/circle-calculator/CircleCalculatorDocsPage";
 import TriangleCalculatorDocsPage, { getTriangleCalculatorTocItems } from "@/components/docs/triangle-calculator/TriangleCalculatorDocsPage";
+import StatisticsCalculatorDocsPage, { getStatisticsCalculatorTocItems } from "@/components/docs/statistics-calculator/StatisticsCalculatorDocsPage";
+import MeanMedianModeRangeCalculatorDocsPage, { getMeanMedianModeRangeCalculatorTocItems } from "@/components/docs/mean-median-mode-range-calculator/MeanMedianModeRangeCalculatorDocsPage";
+import StandardDeviationCalculatorDocsPage, { getStandardDeviationCalculatorTocItems } from "@/components/docs/standard-deviation-calculator/StandardDeviationCalculatorDocsPage";
+import ProbabilityCalculatorDocsPage, { getProbabilityCalculatorTocItems } from "@/components/docs/probability-calculator/ProbabilityCalculatorDocsPage";
+import RandomNumberGeneratorDocsPage, { getRandomNumberGeneratorTocItems } from "@/components/docs/random-number-generator/RandomNumberGeneratorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -140,6 +145,26 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "triangle-calculator":
       content = <TriangleCalculatorDocsPage />;
       tocItems = await getTriangleCalculatorTocItems();
+      break;
+    case "statistics-calculator":
+      content = <StatisticsCalculatorDocsPage />;
+      tocItems = await getStatisticsCalculatorTocItems();
+      break;
+    case "mean-median-mode-range-calculator":
+      content = <MeanMedianModeRangeCalculatorDocsPage />;
+      tocItems = await getMeanMedianModeRangeCalculatorTocItems();
+      break;
+    case "standard-deviation-calculator":
+      content = <StandardDeviationCalculatorDocsPage />;
+      tocItems = await getStandardDeviationCalculatorTocItems();
+      break;
+    case "probability-calculator":
+      content = <ProbabilityCalculatorDocsPage />;
+      tocItems = await getProbabilityCalculatorTocItems();
+      break;
+    case "random-number-generator":
+      content = <RandomNumberGeneratorDocsPage />;
+      tocItems = await getRandomNumberGeneratorTocItems();
       break;
   }
 

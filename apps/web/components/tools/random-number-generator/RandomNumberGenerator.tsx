@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import RandomNumberInputPanel from "./RandomNumberInputPanel";
 import RandomNumberResult from "./RandomNumberResult";
 import RandomNumberQuickReference from "./RandomNumberQuickReference";
@@ -77,6 +78,7 @@ export default function RandomNumberGenerator({ education }: { education: ReactN
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="random-number-generator" />
               <RandomNumberQuickReference />
             </div>
           }

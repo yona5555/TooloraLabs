@@ -22875,6 +22875,523 @@
             "answer": "Das Tool verwendet die Heronsche Formel, die die Fläche direkt aus den drei Seitenlängen über den halben Umfang berechnet, ohne dass ein Winkel oder eine senkrechte Höhe explizit bekannt sein muss — dies funktioniert für jedes gültige Dreieck, unabhängig davon, welcher Lösungsmodus die Seiten gefunden hat."
           }
         ]
+      },
+      "statistics-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Statistikrechner: die vollständigen deskriptiven Statistiken, die er berechnet, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDotplot": "Datenpunkte auf einer Zahlengeraden",
+        "sectionAnatomy": "Grundgesamtheit vs. Stichprobe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Statistiken",
+          "modesValue": "12",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "6 Min."
+        },
+        "formula": {
+          "expression": "Mittelwert = Σx / n  |  Populationsvarianz = Σ(x − Mittelwert)² / n  |  Stichprobenvarianz = Σ(x − Mittelwert)² / (n − 1)",
+          "note": "Ein einzelner Datensatz liefert zwölf verschiedene Statistiken gleichzeitig — zentrale Tendenz (Mittelwert, Median, Modus), Streuung (Spannweite, Varianz, Standardabweichung) und Summenwerte (Anzahl, Summe, Minimum, Maximum) —, jede aus denselben zugrunde liegenden Formeln berechnet."
+        },
+        "flowchart": {
+          "intro": "Alle zwölf Statistiken werden in einem einzigen Durchlauf über die Daten berechnet, wobei Zwischenergebnisse (wie der Mittelwert und die sortierte Liste) wiederverwendet werden, statt den Datensatz wiederholt zu durchsuchen.",
+          "steps": [
+            "Die Werte sortieren, um Minimum, Maximum und Median zu finden",
+            "Die Werte summieren und durch die Anzahl teilen, um den Mittelwert zu erhalten",
+            "Zählen, wie oft jeder Wert vorkommt, um den Modus zu finden (die Werte mit der höchsten Häufigkeit)",
+            "Den Mittelwert von jedem Wert subtrahieren, die Differenzen quadrieren und aufsummieren",
+            "Diese Summe durch die Anzahl (Population) und durch die Anzahl minus eins (Stichprobe) teilen, um beide Varianzen zu erhalten, dann von jeder die Quadratwurzel ziehen für die beiden Standardabweichungen"
+          ],
+          "caption": "Der einzelne Durchlauf über den Datensatz, mit dem dieses Tool alle zwölf Statistiken berechnet."
+        },
+        "dotplot": {
+          "intro": "Das Auftragen jedes Werts auf einer einzigen Zahlengeraden macht die Form eines Datensatzes sichtbar — wo sich Werte häufen und wie Mittelwert und Median zu dieser Form stehen.",
+          "labelMean": "Mittelwert",
+          "labelMedian": "Median",
+          "caption": "Acht Beispielwerte auf einer Zahlengeraden mit markiertem Mittelwert und Median — beide liegen hier eng beieinander, da die Daten recht symmetrisch sind."
+        },
+        "anatomy": {
+          "intro": "Varianz und Standardabweichung werden jeweils auf zwei Arten angegeben: als Populationsstatistik (Division durch die volle Anzahl) und als Stichprobenstatistik (Division durch Anzahl minus eins, Bessel-Korrektur) — die Stichprobenversion ist stets etwas größer.",
+          "labelPopulation": "Populations-Std.-Abw.",
+          "labelSample": "Stichproben-Std.-Abw.",
+          "caption": "Für denselben Datensatz mit acht Werten ist die Stichproben-Standardabweichung durchgängig größer als die Populations-Standardabweichung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Werte",
+            "meaning": "Die Liste der Zahlen, aus denen der Datensatz besteht — jede andere Statistik wird aus dieser einzigen Eingabe abgeleitet.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer Datensatz",
+            "description": "Werden keine Werte eingegeben, gibt das Tool einen \"Leerer-Datensatz\"-Fehler zurück, anstatt Statistiken wie Mittelwert oder Standardabweichung für null Zahlen zu berechnen, was mathematisch undefiniert wäre (Division durch null)."
+          },
+          {
+            "title": "Keine Wiederholungswerte (kein Modus)",
+            "description": "Der Modus wird nur gemeldet, wenn ein Wert mehr als einmal vorkommt; ist jeder Wert im Datensatz eindeutig (maximale Häufigkeit von 1), gibt das Tool eine leere Modus-Liste zurück, statt fälschlich jeden Wert als \"den\" Modus zu behandeln."
+          },
+          {
+            "title": "Mehrere Modi (multimodale Daten)",
+            "description": "Wenn zwei oder mehr Werte in der höchsten Häufigkeit gleichauf liegen, werden alle als Modus zurückgegeben, numerisch sortiert — das Tool wählt nicht willkürlich nur einen aus, wenn ein Datensatz tatsächlich multimodal ist."
+          },
+          {
+            "title": "Stichprobenvarianz für einen einzelnen Wert undefiniert",
+            "description": "Die Stichprobenvarianz teilt durch (Anzahl − 1), was für einen Datensatz mit nur einem Wert null ist — das Tool gibt in diesem Fall 0 für Stichprobenvarianz und Stichproben-Standardabweichung zurück, statt durch null zu teilen, während die Populationsstatistiken bis hinunter zu einem einzelnen Wert gültig bleiben."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum berechnet dieses Tool zwölf Statistiken statt nur einiger weniger?",
+            "answer": "Ein Datensatz lässt sich aus mehreren verschiedenen Blickwinkeln zusammenfassen — wo sein Zentrum liegt (Mittelwert, Median, Modus), wie stark er streut (Spannweite, Varianz, Standardabweichung) und sein grundlegender Umfang (Anzahl, Summe, Minimum, Maximum) — alle zusammen zu berechnen ergibt in einem Durchlauf ein vollständiges Bild, statt dieselben Daten erneut in separate Tools eingeben zu müssen."
+          },
+          {
+            "question": "Warum gibt es zwei verschiedene Standardabweichungen?",
+            "answer": "Die Populations-Standardabweichung geht davon aus, dass der Datensatz die gesamte untersuchte Population ist; die Stichproben-Standardabweichung geht davon aus, dass der Datensatz eine aus einer größeren Population gezogene Stichprobe ist, und wendet die Bessel-Korrektur an (Division durch n−1 statt n), um zu korrigieren, dass eine Stichprobe die wahre Populationsstreuung tendenziell leicht unterschätzt."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen diesem Tool und dem Standardabweichungsrechner?",
+            "answer": "Dieses Tool berechnet den vollständigen Satz von zwölf deskriptiven Statistiken an einem Ort; der Standardabweichungsrechner konzentriert sich speziell auf Varianz und Standardabweichung und zeigt zusätzlich die Abweichungstabelle pro Wert (Wert minus Mittelwert, quadriert), die dieses Tool intern berechnet, aber nicht Zeile für Zeile anzeigt."
+          },
+          {
+            "question": "Warum kann ein Datensatz mehr als einen Modus haben, oder gar keinen?",
+            "answer": "Der Modus ist definiert als der Wert (oder die Werte), der am häufigsten vorkommt — sind zwei Werte bei der höchsten Häufigkeit gleichauf, sind beide legitim der Modus; wiederholt sich kein Wert überhaupt, gibt es keinen sinnvollen \"häufigsten\" Wert, sodass der Modus als leer gemeldet wird, statt auf eine willkürliche einzelne Antwort erzwungen zu werden."
+          }
+        ]
+      },
+      "mean-median-mode-range-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Mittelwert-, Median-, Modus- und Spannweitenrechner: die vier Formeln für zentrale Tendenz und Streuung, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDotplot": "Datenpunkte auf einer Zahlengeraden",
+        "sectionAnatomy": "Mittelwert vs. Median",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kennzahlen",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Mittelwert = Σx / n  |  Median = mittlerer Wert der sortierten Daten  |  Spannweite = Max − Min",
+          "note": "Die vier Kennzahlen beantworten unterschiedliche Fragen zum selben Datensatz: Mittelwert und Median beschreiben beide einen \"typischen\" Wert, reagieren aber unterschiedlich auf Ausreißer, der Modus identifiziert den häufigsten Wert, und die Spannweite misst die Gesamtstreuung."
+        },
+        "flowchart": {
+          "intro": "Jede der vier Kennzahlen wird unabhängig aus derselben Eingabeliste berechnet, wobei nur der anfängliche Sortierschritt geteilt wird, der für Median, Minimum und Maximum benötigt wird.",
+          "steps": [
+            "Die Werte sortieren, um Minimum und Maximum zu finden und die Mitte für den Median zu bestimmen",
+            "Alle Werte summieren und durch die Anzahl teilen, um den Mittelwert zu erhalten",
+            "Zählen, wie oft jeder Wert vorkommt; wiederholt sich ein Wert mehr als einmal, wird der häufigste Wert (bzw. die häufigsten Werte) zum Modus",
+            "Das Minimum vom Maximum subtrahieren, um die Spannweite zu erhalten"
+          ],
+          "caption": "Die vier unabhängigen Berechnungen, die dieses Tool über denselben Datensatz durchführt."
+        },
+        "dotplot": {
+          "intro": "Das Auftragen der Werte auf einer Zahlengeraden zeigt genau, wo der Median (die tatsächliche Mitte der sortierten Daten) im Verhältnis zum Mittelwert (dem Gleichgewichtspunkt) liegt.",
+          "labelMean": "Mittelwert",
+          "labelMedian": "Median",
+          "caption": "Ein schiefer Beispieldatensatz — ein großer Ausreißer zieht den Mittelwert weit über den Median, der an der Mitte der sortierten Werte verankert bleibt."
+        },
+        "anatomy": {
+          "intro": "Bei schiefen Daten (Daten mit Ausreißern oder einem langen Ausläufer) können Mittelwert und Median erheblich voneinander abweichen — der Mittelwert wird zum Ausreißer hin gezogen, während der Median dagegen resistent bleibt.",
+          "labelMean": "Mittelwert",
+          "labelMedian": "Median",
+          "caption": "Für den Datensatz [2, 3, 3, 5, 20] zieht ein großer Ausreißer (20) den Mittelwert deutlich über den Median."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Werte",
+            "meaning": "Die Liste der Zahlen, aus denen der Datensatz besteht — alle vier Kennzahlen werden aus dieser einzigen Eingabe abgeleitet.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer Datensatz",
+            "description": "Werden keine Werte eingegeben, gibt das Tool einen \"Leerer-Datensatz\"-Fehler zurück, anstatt einen Mittelwert oder eine Spannweite für null Zahlen zu berechnen, was mathematisch undefiniert wäre."
+          },
+          {
+            "title": "Keine Wiederholungswerte (kein Modus)",
+            "description": "Der Modus wird nur gemeldet, und ein \"hasMode\"-Flag nur auf wahr gesetzt, wenn ein Wert mehr als einmal vorkommt; ist jeder Wert eindeutig, meldet das Tool explizit, dass kein Modus existiert, statt auf einen willkürlichen Wert zurückzufallen."
+          },
+          {
+            "title": "Mehrere Modi (multimodale Daten)",
+            "description": "Wenn zwei oder mehr Werte in der höchsten Häufigkeit gleichauf liegen, werden alle als Modus zurückgegeben, numerisch sortiert, statt dass das Tool nur den zuerst gefundenen auswählt."
+          },
+          {
+            "title": "Datensätze mit gerader Anzahl benötigen gemittelte Mediane",
+            "description": "Bei einem Datensatz mit einer geraden Anzahl von Werten gibt es keinen einzelnen mittleren Wert — das Tool mittelt korrekt die beiden mittleren Werte der sortierten Liste, statt einen von ihnen auszuwählen (was bei einer geraden Anzahl falsch wäre)."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wann sollte ich den Mittelwert statt den Median verwenden?",
+            "answer": "Der Mittelwert nutzt jeden Wert und ist die Standardwahl für symmetrische Daten ohne extreme Ausreißer; der Median hängt nur von der Position des mittleren Werts ab und bleibt stabil, auch wenn ein Datensatz extreme Ausreißer oder eine schiefe Verteilung aufweist, was ihn zum besseren \"typischen Wert\" für Daten wie Haushaltseinkommen oder Immobilienpreise macht."
+          },
+          {
+            "question": "Warum hat ein Datensatz manchmal keinen Modus?",
+            "answer": "Der Modus erfordert, dass ein Wert häufiger vorkommt als jeder andere — kommt jeder Wert im Datensatz genau einmal vor, ist nichts häufiger als etwas anderes, sodass es keinen sinnvollen Modus zu melden gibt, und das Tool sagt dies explizit, statt zu raten."
+          },
+          {
+            "question": "Wie unterscheidet sich dieses Tool vom Statistikrechner?",
+            "answer": "Dieses Tool konzentriert sich speziell auf die vier klassischen Kennzahlen für zentrale Tendenz und Streuung (Mittelwert, Median, Modus, Spannweite) mit einer Aufschlüsselung, wie jede abgeleitet wird; der Statistikrechner berechnet zusätzlich Varianz sowie sowohl Populations- als auch Stichproben-Standardabweichung für eine umfassendere statistische Zusammenfassung."
+          },
+          {
+            "question": "Warum ist die Spannweite nur eine Subtraktion zweier Zahlen, während Varianz und Standardabweichung komplexer sind?",
+            "answer": "Die Spannweite nutzt nur die beiden extremsten Werte und ignoriert alles dazwischen, was ein schnelles, aber grobes Streuungsmaß liefert; Varianz und Standardabweichung berücksichtigen stattdessen den Abstand jedes Werts vom Mittelwert und liefern so ein vollständigeres (aber rechnerisch aufwendigeres) Bild davon, wie stark der gesamte Datensatz streut."
+          }
+        ]
+      },
+      "standard-deviation-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Standardabweichungsrechner: die abweichungsbasierte Formel, die er Schritt für Schritt berechnet, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDeviations": "Abweichungen vom Mittelwert",
+        "sectionAnatomy": "Grundgesamtheit vs. Stichprobe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Statistiken",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "σ (Population) = √(Σ(x − Mittelwert)² / n)  |  s (Stichprobe) = √(Σ(x − Mittelwert)² / (n − 1))",
+          "note": "Beide Formeln teilen sich dieselben Kernschritte — vom jedem Wert den Mittelwert subtrahieren, die Differenz quadrieren, die Quadrate summieren — und unterscheiden sich nur in der finalen Division, durch die volle Anzahl (Population) oder durch die Anzahl minus eins (Stichprobe, Bessel-Korrektur)."
+        },
+        "flowchart": {
+          "intro": "Statt die Standardabweichung als einzelne undurchsichtige Formel zu berechnen, erstellt und zeigt dieses Tool die vollständige Abweichungstabelle pro Wert als Zwischenergebnis, sodass die Berechnung nachvollziehbar bleibt.",
+          "steps": [
+            "Den Mittelwert aller eingegebenen Werte berechnen",
+            "Für jeden Wert den Mittelwert subtrahieren, um seine Abweichung zu erhalten, und diese Abweichung quadrieren",
+            "Alle quadrierten Abweichungen summieren",
+            "Diese Summe durch die Anzahl teilen, um die Populationsvarianz zu erhalten, und separat durch die Anzahl minus eins, um die Stichprobenvarianz zu erhalten",
+            "Von jeder Varianz die Quadratwurzel ziehen, um die Populations- und Stichproben-Standardabweichungen zu erhalten"
+          ],
+          "caption": "Die gemeinsame Abweichungstabellen-Berechnung, von der sich sowohl die Populations- als auch die Stichprobenformel im letzten Divisionsschritt verzweigen."
+        },
+        "deviations": {
+          "intro": "Die Abweichung jedes Werts vom Mittelwert (sein vorzeichenbehafteter Abstand) ist der Baustein für Varianz und Standardabweichung — Werte unter dem Mittelwert haben negative Abweichungen, Werte darüber positive.",
+          "meanLabel": "Mittelwert",
+          "caption": "Abweichungen vom Mittelwert für die Werte [2, 4, 6, 8, 10] (Mittelwert = 6) — symmetrische Werte über und unter dem Mittelwert erzeugen betragsgleiche, vorzeichenverschiedene Abweichungen."
+        },
+        "anatomy": {
+          "intro": "Populations- und Stichproben-Standardabweichung unterscheiden sich nur im letzten Divisionsschritt, aber dieser Unterschied bedeutet, dass die Stichprobenversion bei denselben Daten stets etwas größer ist.",
+          "labelPopulation": "Populations-Std.-Abw.",
+          "labelSample": "Stichproben-Std.-Abw.",
+          "caption": "Für die Werte [2, 4, 6, 8, 10] ergibt die Division durch die Anzahl (Population) im Vergleich zur Division durch die Anzahl minus eins (Stichprobe) zwei unterschiedliche Standardabweichungen aus denselben zugrunde liegenden Abweichungen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Werte",
+            "meaning": "Die Liste der Zahlen, aus denen der Datensatz besteht — jede Abweichung, Varianz und Standardabweichung wird aus dieser einzigen Eingabe abgeleitet.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer Datensatz",
+            "description": "Werden keine Werte eingegeben, gibt das Tool einen \"Leerer-Datensatz\"-Fehler zurück, anstatt einen Mittelwert oder Abweichungen für null Zahlen zu berechnen, was mathematisch undefiniert wäre."
+          },
+          {
+            "title": "Stichprobenstatistiken für einen einzelnen Wert undefiniert",
+            "description": "Stichprobenvarianz und Stichproben-Standardabweichung teilen durch (Anzahl − 1), was für einen Datensatz mit nur einem Wert null ist — das Tool gibt in diesem Fall für beide 0 zurück, statt durch null zu teilen, während Populationsvarianz und -Standardabweichung für einen einzelnen Wert mathematisch gültig (und gleich null) bleiben."
+          },
+          {
+            "title": "Vollständige Abweichungstabelle sichtbar, nicht nur die Endzahlen",
+            "description": "Statt nur die beiden finalen Standardabweichungszahlen zurückzugeben, zeigt das Tool die Abweichung und quadrierte Abweichung jedes einzelnen Werts — das macht die Zwischenarbeit überprüfbar und ist genau das, was das Abweichungsdiagramm auf dieser Seite direkt visualisiert."
+          },
+          {
+            "title": "Abweichungen summieren sich immer auf (annähernd) null",
+            "description": "Per Definition des Mittelwerts als Gleichgewichtspunkt der Daten summieren sich die rohen (nicht quadrierten) Abweichungen immer zu null oder einem nach Fließkomma-Rundung effektiv null Wert — das wird nicht als Fehler behandelt, da es eine garantierte mathematische Eigenschaft des Mittelwerts ist, kein Datenqualitätsproblem."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum zeigt das Tool die Abweichung jedes Werts statt nur die finale Standardabweichung?",
+            "answer": "Die Standardabweichung ist eine einzelne zusammenfassende Zahl, aber um ihre Bedeutung zu verstehen, muss man die zugrunde liegenden Abweichungen pro Wert sehen, aus denen sie gebildet wird — die vollständige Tabelle (Wert, Abweichung, quadrierte Abweichung) zu zeigen, macht sichtbar, welche Werte am meisten zur Streuung beitragen, statt die Endzahl als undurchsichtiges Ergebnis zu präsentieren."
+          },
+          {
+            "question": "Warum werden die Abweichungen vor der Summierung quadriert?",
+            "answer": "Abweichungen über und unter dem Mittelwert haben entgegengesetzte Vorzeichen und würden sich bei direkter Summierung gegenseitig aufheben (immer null ergebend, unabhängig davon, wie stark die Daten streuen) — das Quadrieren macht jede Abweichung vor der Summierung positiv, sodass die Summe tatsächlich die Gesamtstreuung widerspiegelt, statt sich zu nichts aufzuheben."
+          },
+          {
+            "question": "Wann sollte ich die Stichproben- statt die Populations-Standardabweichung verwenden?",
+            "answer": "Verwenden Sie die Populations-Standardabweichung, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert (z. B. die Note jedes Schülers bei einem bestimmten Test); verwenden Sie die Stichproben-Standardabweichung, wenn Ihr Datensatz eine Teilmenge aus einer größeren Population ist, über die Sie Schlussfolgerungen ziehen möchten (z. B. eine Umfragestichprobe, die eine größere Population repräsentiert) — die Bessel-Korrektur kompensiert die Tendenz der Stichprobe, die wahre Populationsstreuung zu unterschätzen."
+          },
+          {
+            "question": "Wie unterscheidet sich das vom Statistikrechner?",
+            "answer": "Dieses Tool konzentriert sich speziell auf Standardabweichung und Varianz und zeigt die vollständige Abweichungstabelle pro Wert als Kernstück; der Statistikrechner berechnet dieselben Varianz- und Standardabweichungswerte zusammen mit zehn weiteren Statistiken (Mittelwert, Median, Modus, Spannweite und mehr), ohne die zeilenweise Abweichungsaufschlüsselung anzuzeigen."
+          }
+        ]
+      },
+      "probability-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Wahrscheinlichkeitsrechner: die klassischen Wahrscheinlichkeitsformeln hinter seinen vier Modi, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionVenn": "AND vs. OR veranschaulicht",
+        "sectionAnatomy": "Vergleich der vier Modi",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "P(Ereignis) = günstig / gesamt  |  P(A∩B) = P(A)×P(B)  |  P(A∪B) = P(A)+P(B)−P(A∩B)  |  P(A|B) = P(A∩B)/P(B)",
+          "note": "Jeder der vier Modi beantwortet eine wirklich andere Wahrscheinlichkeitsfrage mit einer eigenen klassischen Formel — die Wahrscheinlichkeit eines einzelnen Ereignisses, dass zwei unabhängige Ereignisse beide eintreten, dass eines von zwei Ereignissen eintritt, oder die Wahrscheinlichkeit eines Ereignisses gegeben, dass ein anderes bereits eingetreten ist."
+        },
+        "flowchart": {
+          "intro": "Welche Formel ausgeführt wird, hängt vollständig vom gewählten Modus ab — jeder Modus prüft zudem unabhängig, ob jede eingegebene Wahrscheinlichkeit ein gültiger Wert zwischen 0 und 1 ist (oder, im Einzelereignis-Modus, dass günstige Ausgänge die Gesamtausgänge nicht übersteigen).",
+          "steps": [
+            "Lesen, welcher der vier Modi gewählt ist: Einzelereignis, AND (unabhängig), OR oder bedingt",
+            "Für Einzelereignis: günstige Ausgänge durch Gesamtausgänge teilen, um die Wahrscheinlichkeit zu erhalten, und die entsprechende Odds-Notation ableiten",
+            "Für AND: die beiden unabhängigen Wahrscheinlichkeiten miteinander multiplizieren",
+            "Für OR: die beiden Wahrscheinlichkeiten addieren und ihre Überschneidung (die Wahrscheinlichkeit, dass beide eintreten) subtrahieren, um Doppelzählung zu vermeiden",
+            "Für bedingt: die gemeinsame Wahrscheinlichkeit durch die Wahrscheinlichkeit teilen, dass die Bedingung bereits eingetreten ist"
+          ],
+          "caption": "Die modusabhängige Formel, die dieses Tool anwendet, jede mit ihren eigenen Validierungsregeln."
+        },
+        "venn": {
+          "intro": "AND- und OR-Wahrscheinlichkeiten entsprechen direkt einem Venn-Diagramm: AND ist die Überschneidung zweier Ereignisse, während OR alles ist, was von einem der beiden Kreise abgedeckt wird.",
+          "leftLabel": "Ereignis A",
+          "rightLabel": "Ereignis B",
+          "overlapLabel": "A∩B",
+          "leftOnlyItems": "Nur A",
+          "overlapItems": "AND",
+          "rightOnlyItems": "Nur B",
+          "caption": "Der Überschneidungsbereich ist die AND-Wahrscheinlichkeit; die gesamte schattierte Fläche (beide Kreise zusammen, ohne die Überschneidung doppelt zu zählen) ist die OR-Wahrscheinlichkeit."
+        },
+        "anatomy": {
+          "intro": "Die vier Modi erzeugen strukturell unterschiedliche Ergebnisse aus demselben zugrunde liegenden Wahrscheinlichkeitskonzept — ein einzelner Wert, ein kleinerer kombinierter Wert, ein größerer kombinierter Wert oder ein neu skalierter Wert.",
+          "labelSingle": "Einzelereignis",
+          "labelAnd": "AND (typischerweise kleiner)",
+          "labelOr": "OR (typischerweise größer)",
+          "caption": "Für zwei Ereignisse mit je 50 % Wahrscheinlichkeit ist AND (beide treten ein) kleiner als jedes einzelne, während OR (eines von beiden tritt ein) größer ist."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Günstig",
+            "meaning": "Die Anzahl der Ausgänge, die als \"Erfolg\" zählen — wird nur im Einzelereignis-Modus verwendet.",
+            "unit": "Anzahl"
+          },
+          {
+            "symbol": "Gesamt",
+            "meaning": "Die Gesamtzahl der möglichen Ausgänge — wird nur im Einzelereignis-Modus verwendet.",
+            "unit": "Anzahl"
+          },
+          {
+            "symbol": "P(A)",
+            "meaning": "Die Wahrscheinlichkeit von Ereignis A, ausgedrückt als Dezimalzahl zwischen 0 und 1 — wird in den Modi AND und OR verwendet.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(B)",
+            "meaning": "Die Wahrscheinlichkeit von Ereignis B, ausgedrückt als Dezimalzahl zwischen 0 und 1 — wird in den Modi AND, OR und bedingt verwendet.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(A∩B)",
+            "meaning": "Die bekannte gemeinsame Wahrscheinlichkeit, dass sowohl A als auch B eintreten — wird nur im OR-Modus (zur Vermeidung von Doppelzählung) und im bedingten Modus verwendet.",
+            "unit": "0–1"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Günstige Ausgänge übersteigen Gesamtausgänge",
+            "description": "Im Einzelereignis-Modus markiert das Tool das Ergebnis als ungültig, wenn die Anzahl der günstigen Ausgänge größer ist als die möglichen Gesamtausgänge, statt eine Wahrscheinlichkeit über 100 % zurückzugeben, was mathematisch nicht sinnvoll ist."
+          },
+          {
+            "title": "Wahrscheinlichkeitswerte außerhalb von 0 bis 1",
+            "description": "Jede Wahrscheinlichkeitseingabe (P(A), P(B), P(A∩B)) wird geprüft, eine endliche Zahl zwischen 0 und 1 einschließlich zu sein — ein Wert außerhalb dieses Bereichs wird vor jeder Berechnung abgelehnt, da Wahrscheinlichkeiten nur innerhalb dieser Grenze definiert sind."
+          },
+          {
+            "title": "Überschneidung größer als jede einzelne Wahrscheinlichkeit (OR-Modus)",
+            "description": "Im OR-Modus kann die bekannte gemeinsame Wahrscheinlichkeit P(A∩B) niemals das Kleinere von P(A) und P(B) übersteigen — zwei Ereignisse können sich nicht stärker überschneiden, als das weniger wahrscheinliche überhaupt eintritt — daher lehnt das Tool Eingaben ab, die dies verletzen, bevor die Vereinigung berechnet wird."
+          },
+          {
+            "title": "Division durch eine Bedingung mit Wahrscheinlichkeit null (bedingter Modus)",
+            "description": "Die bedingte Wahrscheinlichkeit teilt durch P(B); ist P(B) exakt null, lehnt das Tool die Eingabe ab, statt eine undefinierte Division zu berechnen, da das Bedingen auf ein Ereignis, das nie eintritt, keine sinnvolle Wahrscheinlichkeit hat."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum hat dieser Rechner vier separate Modi?",
+            "answer": "Einzelereignis-, AND-, OR- und bedingte Wahrscheinlichkeit sind vier wirklich unterschiedliche Fragen der Wahrscheinlichkeitstheorie, jede mit ihrer eigenen Formel — ein Rechner, der nur eine davon abdeckt, würde die anderen unbeantwortet lassen, daher fasst dieses Tool alle vier gängigen Fälle in einer Oberfläche zusammen."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen AND- und OR-Wahrscheinlichkeit?",
+            "answer": "AND fragt nach der Wahrscheinlichkeit, dass beide von zwei Ereignissen eintreten (ihre Überschneidung, die bei unabhängigen Ereignissen immer kleiner ist als jedes einzelne); OR fragt nach der Wahrscheinlichkeit, dass mindestens eines von beiden eintritt (ihre kombinierte Abdeckung, die immer mindestens so groß ist wie die größere Einzelwahrscheinlichkeit)."
+          },
+          {
+            "question": "Warum benötigt der OR-Modus die gemeinsame Wahrscheinlichkeit P(A∩B) als Eingabe?",
+            "answer": "Das einfache Addieren von P(A) und P(B) würde alle Ausgänge, bei denen beide Ereignisse eintreten, doppelt zählen — das Subtrahieren der bekannten Überschneidung korrigiert dies. Bei sich gegenseitig ausschließenden Ereignissen (die niemals beide eintreten können) ergibt die Eingabe von 0 für die Überschneidung die einfache Summe, da es nichts doppelt zu zählen gibt."
+          },
+          {
+            "question": "Wie unterscheidet sich bedingte Wahrscheinlichkeit von AND-Wahrscheinlichkeit?",
+            "answer": "AND-Wahrscheinlichkeit fragt nach der Chance, dass beide Ereignisse eintreten, betrachtet von einem Standpunkt, bevor eines von beiden bekannt ist; bedingte Wahrscheinlichkeit fragt nach der Chance eines Ereignisses, gegeben, dass das andere bereits definitiv eingetreten ist — sie skaliert die gemeinsame Wahrscheinlichkeit gegen den kleineren \"bekannten\" Stichprobenraum, in dem die Bedingung bereits wahr ist, neu."
+          }
+        ]
+      },
+      "random-number-generator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Zufallszahlengenerator: der dahinterliegende gleichverteilte Stichprobenalgorithmus, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDistribution": "Gleichverteilung",
+        "sectionAnatomy": "Eine generierte Menge",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Sortierreihenfolgen",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Wert = Min + ⌊zufall() × (Max − Min + 1)⌋",
+          "note": "Jede ganze Zahl im Bereich [Min, Max] hat die gleiche Chance, generiert zu werden — diese Formel bildet einen gleichverteilten Zufallsbruchteil zwischen 0 und 1 auf den gesamten ganzzahligen Bereich ab, einschließlich beider Endpunkte."
+        },
+        "flowchart": {
+          "intro": "Wie Zahlen generiert werden, hängt davon ab, ob Duplikate erlaubt sind — sind Duplikate nicht erlaubt, mischt das Tool den gesamten Bereich, statt wiederholt neu zu würfeln, bis zufällig eine Wiederholung vermieden wird.",
+          "steps": [
+            "Prüfen, dass Min und Max ganze Zahlen sind, und normalisieren, sodass die kleinere als Bereichsuntergrenze behandelt wird",
+            "Prüfen, dass die angeforderte Anzahl eine positive ganze Zahl innerhalb des Höchstlimits des Tools ist",
+            "Wenn Duplikate nicht erlaubt sind, prüfen, dass die angeforderte Anzahl die Zahl der im Bereich tatsächlich verfügbaren ganzen Zahlen nicht übersteigt",
+            "Wenn Duplikate erlaubt sind: jede Zahl unabhängig mit der Gleichverteilungsformel generieren",
+            "Wenn Duplikate nicht erlaubt sind: die vollständige Liste der möglichen ganzen Zahlen erstellen, mischen (Fisher-Yates-Algorithmus) und die ersten \"Anzahl\" Werte nehmen",
+            "Die angeforderte Sortierreihenfolge (keine, aufsteigend oder absteigend) auf die endgültige Liste anwenden"
+          ],
+          "caption": "Die beiden unterschiedlichen Generierungspfade, die dieses Tool je nachdem einschlägt, ob doppelte Werte erlaubt sind."
+        },
+        "distribution": {
+          "intro": "\"Zufällig\" bedeutet hier speziell gleichverteilt zufällig — jede ganze Zahl im gewählten Bereich hat die gleiche Wahrscheinlichkeit, aufzutreten, ohne Verzerrung zur Mitte, den Rändern oder einem bestimmten Wert hin.",
+          "bandLabel": "gleiche Chance über den gesamten Bereich",
+          "caption": "Jede ganze Zahl vom Minimum bis zum Maximum hat exakt die gleiche Auswahlwahrscheinlichkeit."
+        },
+        "anatomy": {
+          "intro": "Eine generierte Zahlenmenge, auf einer Zahlengeraden aufgetragen, sollte kein offensichtliches Muster oder keine Häufung zeigen — über den angeforderten Bereich in etwa gleichmäßig verteilte Werte sind das erwartete Kennzeichen korrekter gleichverteilter Stichprobenziehung.",
+          "labelMax": "Bereichsmaximum",
+          "caption": "Acht innerhalb eines Bereichs von 1–100 generierte Zahlen, ohne erkennbare Häufung — im Einklang mit gleichverteilter Zufallsauswahl."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Min",
+            "meaning": "Die Untergrenze des Bereichs (einschließlich) — wird automatisch mit Max vertauscht, wenn größer als dieses eingegeben.",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Max",
+            "meaning": "Die Obergrenze des Bereichs (einschließlich).",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Anzahl",
+            "meaning": "Wie viele Zufallszahlen generiert werden sollen.",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Duplikate erlauben",
+            "meaning": "Ob dieselbe Zahl mehr als einmal generiert werden kann — deaktiviert man dies, wird ohne Zurücklegen gezogen.",
+            "unit": "Boolesch"
+          },
+          {
+            "symbol": "Sortierreihenfolge",
+            "meaning": "Ob die generierten Zahlen in Generierungsreihenfolge belassen oder aufsteigend bzw. absteigend sortiert werden sollen.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Nicht-ganzzahliges Min oder Max",
+            "description": "Beide Bereichsgrenzen müssen ganze Zahlen sein — ein Dezimalwert für eines von beiden gibt einen \"Ungültiger-Bereich\"-Fehler zurück, da das Tool ausschließlich ganze Zahlen generiert, keine gebrochenen Zufallswerte."
+          },
+          {
+            "title": "Min größer als Max eingegeben",
+            "description": "Ist das eingegebene Minimum numerisch größer als das eingegebene Maximum, meldet das Tool keinen Fehler — es behandelt automatisch das Kleinere der beiden als Untergrenze und das Größere als Obergrenze, sodass der Bereich unabhängig von der Eingabereihenfolge stets korrekt interpretiert wird."
+          },
+          {
+            "title": "Ungültige oder übermäßige Anzahl",
+            "description": "Die angeforderte Anzahl muss eine positive ganze Zahl sein und darf das eingebaute Höchstlimit des Tools von 10.000 nicht überschreiten — eine Anzahl außerhalb dieses Bereichs gibt einen \"Ungültige-Anzahl\"-Fehler zurück, was vor der Generierung einer unangemessen großen Ergebnismenge schützt."
+          },
+          {
+            "title": "Anforderung von mehr eindeutigen Zahlen als der Bereich enthält",
+            "description": "Sind Duplikate nicht erlaubt, enthält der Bereich [Min, Max] eine feste, endliche Anzahl möglicher Werte — die Anforderung von mehr eindeutigen Zahlen, als in diesem Bereich existieren, gibt einen \"Bereich-zu-klein\"-Fehler zurück, statt stillschweigend weniger Zahlen als angefordert zurückzugeben."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wie garantiert das Tool, dass jede Zahl die gleiche Chance hat, wenn Duplikate nicht erlaubt sind?",
+            "answer": "Statt wiederholt einzelne Zufallszahlen zu generieren und Wiederholungen zu verwerfen (was zunehmend langsamer wird und sich übermäßig oft wiederholen kann, je näher die angeforderte Anzahl an die Bereichsgröße heranreicht), erstellt das Tool die vollständige Liste möglicher Werte, mischt sie mit dem Fisher-Yates-Algorithmus (der eine gleichverteilte Zufallspermutation erzeugt) und nimmt die ersten \"Anzahl\" Werte — dies zieht in einem effizienten Durchgang ohne Zurücklegen."
+          },
+          {
+            "question": "Warum hat die Anzahl ein Höchstlimit von 10.000?",
+            "answer": "Dies begrenzt den Rechenaufwand und die Größe des in einer einzelnen Anfrage angezeigten Ergebnisses und verhindert, dass eine versehentliche oder böswillige Anfrage nach einer unpraktisch großen Anzahl von Werten den Browser einfrieren oder die Ergebnisanzeige überlasten lässt."
+          },
+          {
+            "question": "Was bedeutet \"gleichverteilt zufällig\" hier eigentlich?",
+            "answer": "Es bedeutet, dass jede ganze Zahl innerhalb des gewählten Bereichs exakt die gleiche Auswahlwahrscheinlichkeit hat — nicht, dass die Zahlen für ein menschliches Auge verstreut oder unvorhersehbar wirken, sondern eine präzise mathematische Eigenschaft: über viele Generierungen hinweg würde jeder Wert im Bereich ungefähr gleich oft erscheinen."
+          },
+          {
+            "question": "Warum funktioniert es trotzdem korrekt, wenn Min größer als Max eingegeben wird?",
+            "answer": "Das Tool nimmt explizit das Kleinere der beiden eingegebenen Werte als Bereichsuntergrenze und das Größere als Obergrenze, bevor überhaupt etwas generiert wird — das bedeutet, der Bereich wird immer korrekt interpretiert, unabhängig davon, in welches Feld ein Nutzer die kleinere oder größere Zahl eingibt."
+          }
+        ]
       }
     }
   }

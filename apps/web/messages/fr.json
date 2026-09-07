@@ -22875,6 +22875,523 @@
             "answer": "L'outil utilise la formule de Héron, qui calcule l'aire directement à partir des trois longueurs de côté via le demi-périmètre (la moitié du périmètre) sans avoir besoin de connaître explicitement un angle ou une hauteur perpendiculaire — cela fonctionne pour tout triangle valide, quel que soit le mode de résolution ayant trouvé les côtés."
           }
         ]
+      },
+      "statistics-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de statistiques : l'ensemble complet des statistiques descriptives qu'elle calcule, les variables qu'elle accepte et les cas limites qu'elle gère.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionDotplot": "Points de données sur une droite numérique",
+        "sectionAnatomy": "Population vs échantillon",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Statistiques",
+          "modesValue": "12",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Moyenne = Σx / n  |  Variance de population = Σ(x − moyenne)² / n  |  Variance d'échantillon = Σ(x − moyenne)² / (n − 1)",
+          "note": "Un seul jeu de données alimente douze statistiques distinctes à la fois : tendance centrale (moyenne, médiane, mode), dispersion (étendue, variance, écart-type) et valeurs récapitulatives (nombre, somme, minimum, maximum), chacune calculée à partir des mêmes formules sous-jacentes."
+        },
+        "flowchart": {
+          "intro": "Les douze statistiques sont calculées en un seul passage sur les données, en réutilisant les résultats intermédiaires (comme la moyenne et la liste triée) plutôt qu'en parcourant le jeu de données à plusieurs reprises.",
+          "steps": [
+            "Trier les valeurs pour trouver le minimum, le maximum et la médiane",
+            "Additionner les valeurs et diviser par le nombre pour obtenir la moyenne",
+            "Compter la fréquence de chaque valeur pour trouver le mode (les valeurs à égalité avec la fréquence la plus élevée)",
+            "Soustraire la moyenne de chaque valeur, élever les différences au carré et les additionner",
+            "Diviser cette somme par le nombre (population) et par le nombre moins un (échantillon) pour obtenir les deux variances, puis prendre la racine carrée de chacune pour les deux écarts-types"
+          ],
+          "caption": "Le passage unique sur le jeu de données que cet outil utilise pour calculer les douze statistiques."
+        },
+        "dotplot": {
+          "intro": "Tracer chaque valeur sur une seule droite numérique rend visible la forme d'un jeu de données : où les valeurs se regroupent, et comment la moyenne et la médiane se situent par rapport à cette forme.",
+          "labelMean": "Moyenne",
+          "labelMedian": "Médiane",
+          "caption": "Huit valeurs d'exemple tracées sur une droite numérique, avec la moyenne et la médiane indiquées ; elles coïncident étroitement ici car les données sont assez symétriques."
+        },
+        "anatomy": {
+          "intro": "La variance et l'écart-type sont chacun présentés de deux façons : comme statistique de population (division par le nombre total) et comme statistique d'échantillon (division par le nombre moins un, correction de Bessel) ; la version échantillon est toujours légèrement plus grande.",
+          "labelPopulation": "Écart-type de population",
+          "labelSample": "Écart-type d'échantillon",
+          "caption": "Pour le même jeu de huit valeurs, l'écart-type d'échantillon est systématiquement plus grand que l'écart-type de population."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Valeurs",
+            "meaning": "La liste des nombres composant le jeu de données ; chaque autre statistique est dérivée de cette seule entrée.",
+            "unit": "Nombres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Jeu de données vide",
+            "description": "Si aucune valeur n'est saisie, l'outil renvoie une erreur « jeu de données vide » plutôt que de calculer des statistiques comme la moyenne ou l'écart-type sur zéro nombre, ce qui serait mathématiquement indéfini (division par zéro)."
+          },
+          {
+            "title": "Aucune valeur répétée (pas de mode)",
+            "description": "Le mode n'est signalé que lorsqu'une valeur apparaît plus d'une fois ; si chaque valeur du jeu de données est unique (fréquence maximale de 1), l'outil renvoie une liste de modes vide plutôt que de traiter incorrectement chaque valeur comme « le » mode."
+          },
+          {
+            "title": "Plusieurs modes (données multimodales)",
+            "description": "Lorsque deux valeurs ou plus sont à égalité avec la fréquence la plus élevée, elles sont toutes renvoyées comme mode, triées numériquement ; l'outil ne choisit pas arbitrairement une seule valeur lorsqu'un jeu de données est réellement multimodal."
+          },
+          {
+            "title": "Variance d'échantillon indéfinie pour une seule valeur",
+            "description": "La variance d'échantillon divise par (nombre − 1), ce qui vaut zéro pour un jeu de données à une seule valeur ; l'outil renvoie 0 pour la variance et l'écart-type d'échantillon dans ce cas plutôt que de diviser par zéro, tandis que les statistiques de population restent valides même pour une seule valeur."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cet outil calcule-t-il douze statistiques au lieu de quelques-unes seulement ?",
+            "answer": "Un jeu de données peut être résumé selon plusieurs angles différents : où se situe son centre (moyenne, médiane, mode), à quel point il est dispersé (étendue, variance, écart-type), et son étendue de base (nombre, somme, minimum, maximum) ; les calculer toutes ensemble donne une image complète en un seul passage plutôt que de devoir ressaisir les mêmes données dans des outils séparés."
+          },
+          {
+            "question": "Pourquoi y a-t-il deux écarts-types différents ?",
+            "answer": "L'écart-type de population suppose que le jeu de données représente la population entière étudiée ; l'écart-type d'échantillon suppose que le jeu de données est un échantillon prélevé dans une population plus large, et applique la correction de Bessel (division par n−1 au lieu de n) pour corriger la tendance de l'échantillon à sous-estimer légèrement la dispersion réelle de la population."
+          },
+          {
+            "question": "Quelle est la différence entre cet outil et la Calculatrice d'écart-type ?",
+            "answer": "Cet outil calcule l'ensemble complet des douze statistiques descriptives en un seul endroit ; la Calculatrice d'écart-type se concentre spécifiquement sur la variance et l'écart-type, en montrant en plus le tableau des écarts par valeur (valeur moins moyenne, au carré) que cet outil calcule en interne mais n'affiche pas ligne par ligne."
+          },
+          {
+            "question": "Pourquoi un jeu de données peut-il avoir plus d'un mode, ou aucun ?",
+            "answer": "Le mode est défini comme la valeur (ou les valeurs) qui se produit le plus fréquemment ; si deux valeurs sont à égalité pour le plus grand nombre de répétitions, elles sont toutes deux légitimement le mode ; si aucune valeur ne se répète, il n'existe pas de valeur « la plus courante » significative, donc le mode est signalé comme vide plutôt que forcé vers une réponse unique arbitraire."
+          }
+        ]
+      },
+      "mean-median-mode-range-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de moyenne, médiane, mode et étendue : les quatre formules de tendance centrale et de dispersion qu'elle calcule, les variables qu'elle accepte et les cas limites qu'elle gère.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionDotplot": "Points de données sur une droite numérique",
+        "sectionAnatomy": "Moyenne vs médiane",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Mesures",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Moyenne = Σx / n  |  Médiane = valeur centrale des données triées  |  Étendue = max − min",
+          "note": "Les quatre mesures répondent à des questions différentes sur le même jeu de données : la moyenne et la médiane décrivent toutes deux une valeur « typique » mais réagissent différemment aux valeurs aberrantes, le mode identifie la valeur la plus fréquente, et l'étendue mesure la dispersion totale."
+        },
+        "flowchart": {
+          "intro": "Chacune des quatre mesures est calculée indépendamment à partir de la même liste d'entrée, ne partageant que l'étape de tri initiale nécessaire pour la médiane, le minimum et le maximum.",
+          "steps": [
+            "Trier les valeurs pour trouver le minimum et le maximum, et localiser le centre pour la médiane",
+            "Additionner toutes les valeurs et diviser par le nombre pour obtenir la moyenne",
+            "Compter la fréquence de chaque valeur ; si une valeur se répète plus d'une fois, la valeur (ou les valeurs) la plus fréquente devient le mode",
+            "Soustraire le minimum du maximum pour obtenir l'étendue"
+          ],
+          "caption": "Les quatre calculs indépendants que cet outil exécute sur le même jeu de données."
+        },
+        "dotplot": {
+          "intro": "Tracer les valeurs sur une droite numérique montre exactement où se situe la médiane (le centre physique des données triées) par rapport à la moyenne (le point d'équilibre).",
+          "labelMean": "Moyenne",
+          "labelMedian": "Médiane",
+          "caption": "Un jeu de données d'exemple asymétrique : une valeur aberrante importante tire la moyenne bien au-dessus de la médiane, qui reste ancrée au centre des valeurs triées."
+        },
+        "anatomy": {
+          "intro": "Pour des données asymétriques (avec des valeurs aberrantes ou une longue traîne), la moyenne et la médiane peuvent différer considérablement : la moyenne est attirée vers la valeur aberrante, tandis que la médiane y reste résistante.",
+          "labelMean": "Moyenne",
+          "labelMedian": "Médiane",
+          "caption": "Pour le jeu de données [2, 3, 3, 5, 20], une valeur aberrante importante (20) tire la moyenne nettement au-dessus de la médiane."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Valeurs",
+            "meaning": "La liste des nombres composant le jeu de données ; les quatre mesures sont dérivées de cette seule entrée.",
+            "unit": "Nombres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Jeu de données vide",
+            "description": "Si aucune valeur n'est saisie, l'outil renvoie une erreur « jeu de données vide » plutôt que de calculer une moyenne ou une étendue sur zéro nombre, ce qui serait mathématiquement indéfini."
+          },
+          {
+            "title": "Aucune valeur répétée (pas de mode)",
+            "description": "Le mode n'est signalé, et un indicateur « hasMode » réglé sur vrai, que lorsqu'une valeur apparaît plus d'une fois ; si chaque valeur est unique, l'outil signale explicitement qu'il n'existe aucun mode plutôt que de revenir à une valeur arbitraire."
+          },
+          {
+            "title": "Plusieurs modes (données multimodales)",
+            "description": "Lorsque deux valeurs ou plus sont à égalité avec la fréquence la plus élevée, elles sont toutes renvoyées comme mode, triées numériquement, plutôt que l'outil ne choisisse que la première rencontrée."
+          },
+          {
+            "title": "Les jeux de données à effectif pair nécessitent des médianes moyennées",
+            "description": "Pour un jeu de données comptant un nombre pair de valeurs, il n'existe pas de valeur centrale unique ; l'outil calcule correctement la moyenne des deux valeurs centrales de la liste triée, plutôt que de choisir l'une d'elles (ce qui serait incorrect pour un effectif pair)."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Quand dois-je utiliser la moyenne plutôt que la médiane ?",
+            "answer": "La moyenne utilise chaque valeur et constitue le choix standard pour des données symétriques sans valeurs aberrantes extrêmes ; la médiane ne dépend que de la position de la valeur centrale et reste stable même lorsqu'un jeu de données comporte des valeurs aberrantes extrêmes ou une distribution asymétrique, ce qui en fait la meilleure « valeur typique » pour des données comme les revenus des ménages ou les prix des logements."
+          },
+          {
+            "question": "Pourquoi un jeu de données n'a-t-il parfois aucun mode ?",
+            "answer": "Le mode exige qu'une valeur se répète plus souvent que toutes les autres ; si chaque valeur du jeu de données apparaît exactement une fois, rien n'est plus fréquent qu'autre chose, donc il n'y a pas de mode significatif à signaler, et l'outil le déclare explicitement plutôt que de deviner."
+          },
+          {
+            "question": "En quoi cet outil diffère-t-il de la Calculatrice de statistiques ?",
+            "answer": "Cet outil se concentre spécifiquement sur les quatre mesures classiques de tendance centrale et de dispersion (moyenne, médiane, mode, étendue) avec une explication de la façon dont chacune est dérivée ; la Calculatrice de statistiques calcule en plus la variance ainsi que les écarts-types de population et d'échantillon pour un résumé statistique plus complet."
+          },
+          {
+            "question": "Pourquoi l'étendue n'est-elle qu'une soustraction de deux nombres, alors que la variance et l'écart-type sont plus complexes ?",
+            "answer": "L'étendue n'utilise que les deux valeurs les plus extrêmes et ignore tout ce qui se trouve entre les deux, donnant une mesure rapide mais grossière de la dispersion ; la variance et l'écart-type tiennent en revanche compte de la distance de chaque valeur par rapport à la moyenne, donnant une image plus complète (mais plus complexe sur le plan calculatoire) de la dispersion de l'ensemble du jeu de données."
+          }
+        ]
+      },
+      "standard-deviation-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice d'écart-type : la formule basée sur les écarts qu'elle calcule étape par étape, les variables qu'elle accepte et les cas limites qu'elle gère.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionDeviations": "Écarts par rapport à la moyenne",
+        "sectionAnatomy": "Population vs échantillon",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Statistiques",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "σ (population) = √(Σ(x − moyenne)² / n)  |  s (échantillon) = √(Σ(x − moyenne)² / (n − 1))",
+          "note": "Les deux formules partagent les mêmes étapes principales — soustraire la moyenne de chaque valeur, élever la différence au carré, additionner les carrés — et ne diffèrent que par la division finale, par le nombre total (population) ou par le nombre moins un (échantillon, correction de Bessel)."
+        },
+        "flowchart": {
+          "intro": "Plutôt que de calculer l'écart-type comme une formule unique et opaque, cet outil construit et affiche le tableau complet des écarts par valeur comme résultat intermédiaire, afin que le calcul reste traçable.",
+          "steps": [
+            "Calculer la moyenne de toutes les valeurs saisies",
+            "Pour chaque valeur, soustraire la moyenne pour obtenir son écart, et élever cet écart au carré",
+            "Additionner tous les écarts au carré",
+            "Diviser cette somme par le nombre pour obtenir la variance de population, et séparément par le nombre moins un pour obtenir la variance d'échantillon",
+            "Prendre la racine carrée de chaque variance pour obtenir les écarts-types de population et d'échantillon"
+          ],
+          "caption": "Le calcul commun du tableau des écarts dont se ramifient les formules de population et d'échantillon à l'étape finale de division."
+        },
+        "deviations": {
+          "intro": "L'écart de chaque valeur par rapport à la moyenne (sa distance, avec signe) est l'élément de base de la variance et de l'écart-type ; les valeurs inférieures à la moyenne ont des écarts négatifs, les valeurs supérieures des écarts positifs.",
+          "meanLabel": "Moyenne",
+          "caption": "Écarts par rapport à la moyenne pour les valeurs [2, 4, 6, 8, 10] (moyenne = 6) : des valeurs symétriques au-dessus et en dessous de la moyenne produisent des écarts de même ampleur et de signe opposé."
+        },
+        "anatomy": {
+          "intro": "Les écarts-types de population et d'échantillon ne diffèrent que par leur étape finale de division, mais cette différence signifie que la version échantillon est toujours légèrement plus grande pour les mêmes données.",
+          "labelPopulation": "Écart-type de population",
+          "labelSample": "Écart-type d'échantillon",
+          "caption": "Pour les valeurs [2, 4, 6, 8, 10], diviser par le nombre (population) plutôt que par le nombre moins un (échantillon) produit deux écarts-types différents à partir des mêmes écarts sous-jacents."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Valeurs",
+            "meaning": "La liste des nombres composant le jeu de données ; chaque écart, variance et écart-type est dérivé de cette seule entrée.",
+            "unit": "Nombres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Jeu de données vide",
+            "description": "Si aucune valeur n'est saisie, l'outil renvoie une erreur « jeu de données vide » plutôt que de calculer une moyenne ou des écarts sur zéro nombre, ce qui serait mathématiquement indéfini."
+          },
+          {
+            "title": "Statistiques d'échantillon indéfinies pour une seule valeur",
+            "description": "La variance d'échantillon et l'écart-type d'échantillon divisent par (nombre − 1), ce qui vaut zéro pour un jeu de données à une seule valeur ; l'outil renvoie 0 pour les deux dans ce cas plutôt que de diviser par zéro, tandis que la variance et l'écart-type de population restent mathématiquement valides (et égaux à zéro) pour une seule valeur."
+          },
+          {
+            "title": "Tableau complet des écarts exposé, pas seulement les chiffres finaux",
+            "description": "Plutôt que de ne renvoyer que les deux chiffres finaux d'écart-type, l'outil expose l'écart et l'écart au carré de chaque valeur individuelle ; cela rend le travail intermédiaire vérifiable et c'est exactement ce que le diagramme des écarts de cette page visualise directement."
+          },
+          {
+            "title": "Les écarts totalisent toujours (approximativement) zéro",
+            "description": "Par définition, la moyenne est le point d'équilibre des données, donc les écarts bruts (non élevés au carré) totalisent toujours zéro, ou une valeur effectivement nulle après arrondi en virgule flottante ; ce n'est pas traité comme une erreur, car il s'agit d'une propriété mathématique garantie de la moyenne, et non d'un problème de qualité des données."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil affiche-t-il l'écart de chaque valeur plutôt que seulement l'écart-type final ?",
+            "answer": "L'écart-type est un chiffre récapitulatif unique, mais comprendre sa signification nécessite de voir les écarts sous-jacents de chaque valeur à partir desquels il est construit ; afficher le tableau complet (valeur, écart, écart au carré) rend visible exactement quelles valeurs contribuent le plus à la dispersion, plutôt que de présenter le chiffre final comme un résultat opaque."
+          },
+          {
+            "question": "Pourquoi les écarts sont-ils élevés au carré avant d'être additionnés ?",
+            "answer": "Les écarts au-dessus et en dessous de la moyenne ont des signes opposés et s'annuleraient s'ils étaient additionnés directement (donnant toujours zéro, quelle que soit la dispersion des données) ; élever au carré rend chaque écart positif avant l'addition, de sorte que le total reflète réellement la dispersion totale plutôt que de s'annuler à rien."
+          },
+          {
+            "question": "Quand dois-je utiliser l'écart-type d'échantillon plutôt que celui de population ?",
+            "answer": "Utilisez l'écart-type de population lorsque votre jeu de données représente l'ensemble du groupe qui vous intéresse (par exemple, la note de chaque élève à un test spécifique) ; utilisez l'écart-type d'échantillon lorsque votre jeu de données est un sous-ensemble prélevé dans une population plus large sur laquelle vous essayez de tirer des conclusions (par exemple, un échantillon d'enquête représentant une population plus large) — la correction de Bessel compense la tendance de l'échantillon à sous-estimer la dispersion réelle de la population."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la Calculatrice de statistiques ?",
+            "answer": "Cet outil se concentre spécifiquement sur l'écart-type et la variance, en affichant le tableau complet des écarts par valeur comme pièce centrale ; la Calculatrice de statistiques calcule les mêmes valeurs de variance et d'écart-type ainsi que dix autres statistiques (moyenne, médiane, mode, étendue, et plus) sans afficher le détail ligne par ligne."
+          }
+        ]
+      },
+      "probability-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de probabilité : les formules de probabilité classiques derrière ses quatre modes, les variables qu'elle accepte et les cas limites qu'elle gère.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionVenn": "Visualiser ET vs OU",
+        "sectionAnatomy": "Comparer les quatre modes",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "P(événement) = favorables / totaux  |  P(A∩B) = P(A)×P(B)  |  P(A∪B) = P(A)+P(B)−P(A∩B)  |  P(A|B) = P(A∩B)/P(B)",
+          "note": "Chacun des quatre modes répond à une question de probabilité véritablement différente, en utilisant une formule classique distincte : la probabilité d'un seul événement, que deux événements indépendants se produisent tous les deux, que l'un ou l'autre de deux événements se produise, ou la probabilité d'un événement sachant qu'un autre s'est déjà produit."
+        },
+        "flowchart": {
+          "intro": "La formule exécutée dépend entièrement du mode sélectionné ; chaque mode vérifie également de façon indépendante que chaque probabilité fournie est une valeur valide entre 0 et 1 (ou, pour le mode Événement unique, que les résultats favorables ne dépassent pas les résultats totaux).",
+          "steps": [
+            "Lire lequel des quatre modes est sélectionné : Événement unique, ET (indépendant), OU, ou Conditionnel",
+            "Pour Événement unique : diviser les résultats favorables par les résultats totaux pour obtenir la probabilité, et en déduire la notation de cote équivalente",
+            "Pour ET : multiplier les deux probabilités indépendantes entre elles",
+            "Pour OU : additionner les deux probabilités et soustraire leur chevauchement (la probabilité que les deux se produisent) pour éviter le double comptage",
+            "Pour Conditionnel : diviser la probabilité conjointe par la probabilité que la condition se soit déjà produite"
+          ],
+          "caption": "La formule dépendante du mode que cet outil applique, chacune avec ses propres règles de validation."
+        },
+        "venn": {
+          "intro": "Les probabilités ET et OU correspondent directement à un diagramme de Venn : ET est le chevauchement entre deux événements, tandis que OU est tout ce que couvre l'un ou l'autre des deux cercles.",
+          "leftLabel": "Événement A",
+          "rightLabel": "Événement B",
+          "overlapLabel": "A∩B",
+          "leftOnlyItems": "A seulement",
+          "overlapItems": "ET",
+          "rightOnlyItems": "B seulement",
+          "caption": "La région de chevauchement est la probabilité ET ; toute la zone ombrée (les deux cercles combinés, sans compter deux fois le chevauchement) est la probabilité OU."
+        },
+        "anatomy": {
+          "intro": "Les quatre modes produisent des résultats structurellement différents à partir du même concept sous-jacent de probabilité : une valeur unique, une valeur combinée plus petite, une valeur combinée plus grande, ou une valeur remise à l'échelle.",
+          "labelSingle": "Événement unique",
+          "labelAnd": "ET (généralement plus petit)",
+          "labelOr": "OU (généralement plus grand)",
+          "caption": "Pour deux événements ayant chacun 50 % de probabilité, ET (les deux se produisent) est plus petit que chacun pris isolément, tandis que OU (l'un ou l'autre se produit) est plus grand."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Favorables",
+            "meaning": "Le nombre de résultats qui comptent comme un « succès » ; utilisé uniquement dans le mode Événement unique.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "Totaux",
+            "meaning": "Le nombre total de résultats possibles ; utilisé uniquement dans le mode Événement unique.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "P(A)",
+            "meaning": "La probabilité de l'événement A, exprimée sous forme décimale entre 0 et 1 ; utilisée dans les modes ET et OU.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(B)",
+            "meaning": "La probabilité de l'événement B, exprimée sous forme décimale entre 0 et 1 ; utilisée dans les modes ET, OU et Conditionnel.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(A∩B)",
+            "meaning": "La probabilité conjointe connue que A et B se produisent tous les deux ; utilisée uniquement dans le mode OU (pour éviter le double comptage) et dans le mode Conditionnel.",
+            "unit": "0–1"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Résultats favorables dépassant les résultats totaux",
+            "description": "Dans le mode Événement unique, si le nombre de résultats favorables est supérieur aux résultats totaux possibles, l'outil marque le résultat comme invalide plutôt que de renvoyer une probabilité supérieure à 100 %, ce qui n'a pas de sens mathématique."
+          },
+          {
+            "title": "Valeurs de probabilité hors de l'intervalle 0 à 1",
+            "description": "Chaque probabilité saisie (P(A), P(B), P(A∩B)) est vérifiée pour être un nombre fini compris entre 0 et 1 inclus ; une valeur hors de cette plage est rejetée avant tout calcul, car les probabilités ne sont définies que dans cette limite."
+          },
+          {
+            "title": "Chevauchement supérieur à l'une des probabilités individuelles (mode OU)",
+            "description": "Dans le mode OU, la probabilité conjointe connue P(A∩B) ne peut jamais dépasser la plus petite de P(A) et P(B) ; deux événements ne peuvent pas se chevaucher davantage que ne se produit ne serait-ce que le moins probable des deux, donc l'outil rejette les saisies qui violent cela avant de calculer l'union."
+          },
+          {
+            "title": "Division par une condition de probabilité nulle (mode Conditionnel)",
+            "description": "La probabilité conditionnelle divise par P(B) ; si P(B) est exactement zéro, l'outil rejette la saisie plutôt que de calculer une division indéfinie, car conditionner sur un événement qui ne se produit jamais n'a pas de probabilité significative."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cette calculatrice a-t-elle quatre modes distincts ?",
+            "answer": "La probabilité d'un événement unique, ET, OU et conditionnelle sont quatre questions véritablement distinctes en théorie des probabilités, chacune avec sa propre formule ; une calculatrice qui ne traiterait qu'une seule d'entre elles laisserait les autres sans réponse, donc cet outil regroupe les quatre cas courants sous une seule interface."
+          },
+          {
+            "question": "Quelle est la différence entre la probabilité ET et la probabilité OU ?",
+            "answer": "ET demande la probabilité que les deux événements se produisent (leur chevauchement, toujours plus petit que chaque événement pris isolément pour des événements indépendants) ; OU demande la probabilité qu'au moins l'un des deux se produise (leur couverture combinée, toujours au moins aussi grande que la probabilité individuelle la plus élevée)."
+          },
+          {
+            "question": "Pourquoi le mode OU a-t-il besoin de la probabilité conjointe P(A∩B) en entrée ?",
+            "answer": "Additionner simplement P(A) et P(B) compterait deux fois tous les résultats où les deux événements se produisent ; soustraire le chevauchement connu corrige cela. Pour des événements mutuellement exclusifs (qui ne peuvent jamais se produire tous les deux), saisir 0 pour le chevauchement donne la simple somme, puisqu'il n'y a rien à compter deux fois."
+          },
+          {
+            "question": "En quoi la probabilité conditionnelle diffère-t-elle de la probabilité ET ?",
+            "answer": "La probabilité ET demande la chance que les deux événements se produisent, vue avant que l'un ou l'autre ne soit connu ; la probabilité conditionnelle demande la chance d'un événement, sachant que l'autre s'est déjà définitivement produit ; elle remet à l'échelle la probabilité conjointe par rapport à l'espace d'échantillonnage « connu » plus petit où la condition est déjà vraie."
+          }
+        ]
+      },
+      "random-number-generator": {
+        "version": "v1",
+        "description": "Référence technique du Générateur de nombres aléatoires : l'algorithme d'échantillonnage uniforme qui le sous-tend, les variables qu'il accepte et les cas limites qu'il gère.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionDistribution": "Distribution uniforme",
+        "sectionAnatomy": "Un ensemble généré",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Ordres de tri",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "valeur = min + ⌊aléatoire() × (max − min + 1)⌋",
+          "note": "Chaque entier de la plage [min, max] a une chance égale d'être généré ; cette formule fait correspondre une fraction aléatoire uniforme entre 0 et 1 à la plage entière complète, bornes incluses."
+        },
+        "flowchart": {
+          "intro": "La façon dont les nombres sont générés dépend du fait que les doublons soient autorisés ou non ; lorsque les doublons sont interdits, l'outil mélange la plage entière plutôt que de retirer de façon répétée jusqu'à éviter par hasard une répétition.",
+          "steps": [
+            "Vérifier que min et max sont des entiers, et normaliser de sorte que le plus petit soit traité comme le plancher de la plage",
+            "Vérifier que le nombre demandé est un entier positif dans la limite maximale de l'outil",
+            "Si les doublons ne sont pas autorisés, vérifier que le nombre demandé ne dépasse pas le nombre d'entiers réellement disponibles dans la plage",
+            "Si les doublons sont autorisés : générer chaque nombre indépendamment à l'aide de la formule uniforme",
+            "Si les doublons ne sont pas autorisés : construire la liste complète des entiers possibles, la mélanger (algorithme de Fisher-Yates) et prendre les premières « nombre » valeurs",
+            "Appliquer l'ordre de tri demandé (aucun, croissant ou décroissant) à la liste finale"
+          ],
+          "caption": "Les deux chemins de génération distincts que suit cet outil selon que les valeurs en double sont autorisées ou non."
+        },
+        "distribution": {
+          "intro": "« Aléatoire » signifie ici spécifiquement aléatoire uniforme : chaque entier de la plage choisie a la même probabilité d'apparaître, sans biais vers le centre, les bords ou une valeur particulière.",
+          "bandLabel": "chance égale sur toute la plage",
+          "caption": "Chaque entier du minimum au maximum a exactement la même probabilité d'être sélectionné."
+        },
+        "anatomy": {
+          "intro": "Un ensemble généré de nombres, tracé sur une droite numérique, ne devrait montrer aucun motif ou regroupement évident ; des valeurs dispersées de façon à peu près uniforme sur la plage demandée est la signature attendue d'un échantillonnage aléatoire uniforme correct.",
+          "labelMax": "Maximum de la plage",
+          "caption": "Huit nombres générés dans une plage de 1 à 100, ne montrant aucun regroupement particulier, ce qui est cohérent avec une sélection aléatoire uniforme."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Min",
+            "meaning": "La borne inférieure de la plage (incluse) ; automatiquement échangée avec Max si saisie plus grande que celui-ci.",
+            "unit": "Entier"
+          },
+          {
+            "symbol": "Max",
+            "meaning": "La borne supérieure de la plage (incluse).",
+            "unit": "Entier"
+          },
+          {
+            "symbol": "Nombre",
+            "meaning": "Combien de nombres aléatoires générer.",
+            "unit": "Entier"
+          },
+          {
+            "symbol": "Autoriser les doublons",
+            "meaning": "Si le même nombre peut être généré plus d'une fois ; désactiver cette option échantillonne sans remise.",
+            "unit": "Booléen"
+          },
+          {
+            "symbol": "Ordre de tri",
+            "meaning": "S'il faut laisser les nombres générés dans l'ordre de génération, ou les trier par ordre croissant ou décroissant.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Min ou max non entiers",
+            "description": "Les deux bornes de la plage doivent être des nombres entiers ; une valeur décimale pour l'une ou l'autre renvoie une erreur « plage invalide », car l'outil génère exclusivement des entiers, pas des valeurs aléatoires fractionnaires."
+          },
+          {
+            "title": "Min saisi plus grand que max",
+            "description": "Si le minimum saisi est numériquement plus grand que le maximum saisi, l'outil ne renvoie pas d'erreur : il traite automatiquement le plus petit des deux comme plancher et le plus grand comme plafond, de sorte que la plage est toujours interprétée correctement quel que soit l'ordre de saisie."
+          },
+          {
+            "title": "Nombre invalide ou excessif",
+            "description": "Le nombre demandé doit être un entier positif et ne peut pas dépasser la limite maximale intégrée de l'outil de 10 000 ; un nombre hors de cette plage renvoie une erreur « nombre invalide », protégeant contre la génération d'un ensemble de résultats déraisonnablement grand."
+          },
+          {
+            "title": "Demander plus de nombres uniques que la plage n'en contient",
+            "description": "Lorsque les doublons ne sont pas autorisés, la plage [min, max] contient un nombre fixe et fini de valeurs possibles ; demander plus de nombres uniques qu'il n'en existe dans cette plage renvoie une erreur « plage trop petite » plutôt que de renvoyer silencieusement moins de nombres que demandé."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Comment l'outil garantit-il que chaque nombre a une chance égale lorsque les doublons ne sont pas autorisés ?",
+            "answer": "Plutôt que de générer de façon répétée des nombres aléatoires uniques et de rejeter les répétitions (ce qui devient progressivement plus lent et peut boucler excessivement à mesure que le nombre demandé approche la taille de la plage), l'outil construit la liste complète des valeurs possibles, la mélange à l'aide de l'algorithme de Fisher-Yates (qui produit une permutation aléatoire uniforme) et prend les premières « nombre » valeurs ; cela échantillonne sans remise en un seul passage efficace."
+          },
+          {
+            "question": "Pourquoi le nombre a-t-il une limite maximale de 10 000 ?",
+            "answer": "Cela plafonne le travail de calcul et la taille du résultat affiché en une seule requête, empêchant une demande accidentelle ou malveillante d'un nombre de valeurs peu pratique de bloquer le navigateur ou de surcharger l'affichage des résultats."
+          },
+          {
+            "question": "Que signifie réellement « aléatoire uniforme » ici ?",
+            "answer": "Cela signifie que chaque entier dans la plage choisie a exactement la même probabilité d'être sélectionné, non pas que les nombres semblent dispersés ou imprévisibles à l'œil humain, mais une propriété mathématique précise : sur de nombreuses générations, chaque valeur de la plage apparaîtrait approximativement aussi souvent."
+          },
+          {
+            "question": "Pourquoi saisir un min plus grand qu'un max fonctionne-t-il quand même correctement ?",
+            "answer": "L'outil prend explicitement le plus petit des deux valeurs saisies comme plancher de la plage et le plus grand comme plafond avant de générer quoi que ce soit ; cela signifie que la plage est toujours interprétée correctement, quel que soit le champ dans lequel un utilisateur saisit le nombre le plus petit ou le plus grand."
+          }
+        ]
       }
     }
   }
