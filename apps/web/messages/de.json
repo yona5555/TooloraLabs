@@ -8985,7 +8985,10 @@
           "grams": "Gramm",
           "moles": "Mol"
         },
-        "coefficientHint": "Die Koeffizienten stammen aus der ausgeglichenen Gleichung selbst, z. B. sind bei 2H2 + O2 → 2H2O die Koeffizienten 2 (H2), 1 (O2) und 2 (H2O)."
+        "coefficientHint": "Die Koeffizienten stammen aus der ausgeglichenen Gleichung selbst, z. B. sind bei 2H2 + O2 → 2H2O die Koeffizienten 2 (H2), 1 (O2) und 2 (H2O).",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "equationDiagramCaption": "Die Molverhältnis-Brücke zwischen den beiden Substanzen, live während der Eingabe."
       },
       "result": {
         "heading": "Ergebnis",
@@ -8998,14 +9001,29 @@
         "knownMoles": "Mol des Bekannten",
         "targetMoles": "Mol des Ziels",
         "knownMolarMass": "Molmasse Bekannt",
-        "targetMolarMass": "Molmasse Ziel"
+        "targetMolarMass": "Molmasse Ziel",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
+        "conversionPathCaption": "Der Stöchiometrie-Fahrplan: bekannte Menge → bekannte Mol → Ziel-Mol → Zielmenge."
       },
       "education": {
         "intro": {
           "title": "Stöchiometrie verstehen",
           "paragraph1": "Stöchiometrie ist die Berechnung, wie viel von jedem Stoff an einer chemischen Reaktion beteiligt ist, basierend auf den Koeffizienten der ausgeglichenen Gleichung. Diese Koeffizienten — die Zahlen vor jeder Formel, wie die 2 in 2H₂ + O₂ → 2H₂O — beschreiben ein festes Stoffmengenverhältnis: genau 2 Mol H₂ reagieren mit genau 1 Mol O₂ zu genau 2 Mol H₂O, unabhängig davon, wie groß oder klein die tatsächliche Reaktion ist. Dieser Rechner nutzt dieses Verhältnis direkt: Mol des Zielstoffs entsprechen Mol des bekannten Stoffs multipliziert mit (Zielkoeffizient ÷ bekanntem Koeffizient).",
           "paragraph2": "Da Chemikalien im Labor nach Masse gemessen werden, nicht durch Zählen einzelner Moleküle, erfordert die Umrechnung von und zu Mol die Molmasse — dieselbe Berechnung, die der Molmassenrechner dieser Seite durchführt. Bei einer bekannten Menge in Gramm teilt dieser Rechner zunächst durch die Molmasse des bekannten Stoffes, um Mol zu erhalten; nach Anwendung des Stoffmengenverhältnisses multipliziert er, falls die Zielmenge in Gramm gewünscht wird, die Zielmol mit der Molmasse des Zielstoffs. Wird auf beiden Seiten Mol angefordert, entfällt die entsprechende Umrechnung.",
-          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt)."
+          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt).",
+          "equation": {
+            "caption": "Zwei beliebige Substanzen in einer ausgeglichenen Gleichung sind durch ihre Koeffizienten verbunden."
+          },
+          "roadmap": {
+            "knownGrams": "bekannt (g)",
+            "knownMoles": "bekannt (mol)",
+            "targetMoles": "Ziel (mol)",
+            "targetGrams": "Ziel (g)",
+            "caption": "Jedes Stöchiometrie-Problem folgt demselben vierstufigen Weg."
+          },
+          "moleRatio": {
+            "caption": "Dasselbe 1:2-Molverhältnis skaliert jede Startmenge der bekannten Substanz."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -9103,6 +9121,23 @@
                 "online": "Nein — der 54-Credit-Stunden-PhD wird in Vollzeit und Präsenzform durchgeführt."
               }
             ]
+          },
+          "bridgeSection": {
+            "title": "Molare Masse: Die Einheitenbrücke",
+            "grams": "Gramm",
+            "moles": "Mol",
+            "bridgeLabel": "molare Masse",
+            "paragraph": "Gramm ist, was eine Waage misst; Mol ist, was eine chemische Gleichung tatsächlich zählt. Die molare Masse ist der Umrechnungsfaktor, der es einer Messung erlaubt, zwischen beiden zu wechseln.",
+            "caption": "Die molare Masse rechnet frei zwischen einer gemessenen Masse und einer Molzahl um."
+          },
+          "unitsCompareSection": {
+            "title": "Warum molare Masse keine Konstante ist",
+            "h2": "H₂",
+            "h2o": "H₂O",
+            "nacl": "NaCl",
+            "glucose": "C₆H₁₂O₆",
+            "paragraph": "Ein Mol ist immer dieselbe Anzahl an Teilchen, aber die Masse dieses Mols variiert je nach Substanz enorm — von 2 Gramm für Wasserstoffgas bis 180 Gramm für Glukose — weshalb jede Substanz ihre eigene molare Masse braucht.",
+            "caption": "Die Masse eines Mols von vier gängigen Substanzen, auf einer logarithmischen Skala."
           }
         },
         "references": {
@@ -9112,6 +9147,27 @@
           "url": "https://doi.org/10.1080/00033795100202321",
           "readOriginal": "Originalarbeit lesen"
         }
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "chemical-equation-balancer": {

@@ -8985,7 +8985,10 @@
           "grams": "Grams",
           "moles": "Moles"
         },
-        "coefficientHint": "Coefficients come from the balanced equation itself, e.g. for 2H2 + O2 → 2H2O, the coefficients are 2 (H2), 1 (O2), and 2 (H2O)."
+        "coefficientHint": "Coefficients come from the balanced equation itself, e.g. for 2H2 + O2 → 2H2O, the coefficients are 2 (H2), 1 (O2), and 2 (H2O).",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "equationDiagramCaption": "The mole-ratio bridge between the two substances, live as you type."
       },
       "result": {
         "heading": "Result",
@@ -8998,14 +9001,29 @@
         "knownMoles": "Moles of Known",
         "targetMoles": "Moles of Target",
         "knownMolarMass": "Known Molar Mass",
-        "targetMolarMass": "Target Molar Mass"
+        "targetMolarMass": "Target Molar Mass",
+        "emptyStateMessage": "Enter values and press Calculate to see your result.",
+        "conversionPathCaption": "The stoichiometry roadmap: known amount → known moles → target moles → target amount."
       },
       "education": {
         "intro": {
           "title": "Understanding Stoichiometry",
           "paragraph1": "Stoichiometry is the calculation of how much of each substance participates in a chemical reaction, based on the balanced equation's coefficients. Those coefficients — the numbers in front of each formula, like the 2 in 2H₂ + O₂ → 2H₂O — describe a fixed mole ratio: exactly 2 moles of H₂ react with exactly 1 mole of O₂ to produce exactly 2 moles of H₂O, no matter how large or small the actual reaction is. This calculator uses that ratio directly: moles of the target substance equal moles of the known substance multiplied by (target coefficient ÷ known coefficient).",
           "paragraph2": "Because chemicals are measured by mass in a lab, not by counting individual molecules, converting to and from moles requires molar mass — the same calculation this site's Molar Mass Calculator performs. Given a known amount in grams, this calculator first divides by the known substance's molar mass to get moles; after applying the mole ratio, if the target amount is wanted in grams, it multiplies the target moles by the target substance's molar mass. Requesting moles on either side skips the corresponding conversion.",
-          "paragraph3": "This calculator assumes the equation you're working from is already balanced and that the reaction goes to completion with no leftover limiting reagent to account for — it performs the ratio-and-mass arithmetic once the coefficients are known, rather than balancing an unbalanced equation itself (a separate, more involved task that this site's Chemical Equation Balancer handles)."
+          "paragraph3": "This calculator assumes the equation you're working from is already balanced and that the reaction goes to completion with no leftover limiting reagent to account for — it performs the ratio-and-mass arithmetic once the coefficients are known, rather than balancing an unbalanced equation itself (a separate, more involved task that this site's Chemical Equation Balancer handles).",
+          "equation": {
+            "caption": "Any two substances in a balanced equation are linked by their coefficients."
+          },
+          "roadmap": {
+            "knownGrams": "known (g)",
+            "knownMoles": "known (mol)",
+            "targetMoles": "target (mol)",
+            "targetGrams": "target (g)",
+            "caption": "Every stoichiometry problem follows this same four-step path."
+          },
+          "moleRatio": {
+            "caption": "The same 1:2 mole ratio scales any starting amount of the known substance."
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -9103,6 +9121,23 @@
                 "online": "No — the 54-credit-hour PhD is delivered on a full-time, in-residence basis."
               }
             ]
+          },
+          "bridgeSection": {
+            "title": "Molar Mass: The Unit Bridge",
+            "grams": "Grams",
+            "moles": "Moles",
+            "bridgeLabel": "molar mass",
+            "paragraph": "Grams are what a scale measures; moles are what a chemical equation actually counts. Molar mass is the conversion factor that lets a measurement move between the two.",
+            "caption": "Molar mass converts freely between a measured mass and a mole count."
+          },
+          "unitsCompareSection": {
+            "title": "Why Molar Mass Isn't a Constant",
+            "h2": "H₂",
+            "h2o": "H₂O",
+            "nacl": "NaCl",
+            "glucose": "C₆H₁₂O₆",
+            "paragraph": "A mole is always the same number of particles, but the mass of that mole varies enormously by substance — from 2 grams for hydrogen gas to 180 grams for glucose — which is exactly why each substance needs its own molar mass.",
+            "caption": "The mass of one mole of four common substances, on a log scale."
           }
         },
         "references": {
@@ -9112,6 +9147,27 @@
           "url": "https://doi.org/10.1080/00033795100202321",
           "readOriginal": "Read the Original Paper"
         }
+      },
+      "relatedTools": {
+        "title": "Related Chemistry Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "chemical-equation-balancer": {

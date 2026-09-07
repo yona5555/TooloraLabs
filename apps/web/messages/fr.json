@@ -8985,7 +8985,10 @@
           "grams": "Grammes",
           "moles": "Moles"
         },
-        "coefficientHint": "Les coefficients proviennent de l'équation équilibrée elle-même, par ex. pour 2H2 + O2 → 2H2O, les coefficients sont 2 (H2), 1 (O2) et 2 (H2O)."
+        "coefficientHint": "Les coefficients proviennent de l'équation équilibrée elle-même, par ex. pour 2H2 + O2 → 2H2O, les coefficients sont 2 (H2), 1 (O2) et 2 (H2O).",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "equationDiagramCaption": "Le pont de rapport molaire entre les deux substances, en direct pendant la saisie."
       },
       "result": {
         "heading": "Résultat",
@@ -8998,14 +9001,29 @@
         "knownMoles": "Moles du Connu",
         "targetMoles": "Moles de la Cible",
         "knownMolarMass": "Masse Molaire Connue",
-        "targetMolarMass": "Masse Molaire Cible"
+        "targetMolarMass": "Masse Molaire Cible",
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat.",
+        "conversionPathCaption": "La feuille de route stœchiométrique : quantité connue → moles connues → moles cibles → quantité cible."
       },
       "education": {
         "intro": {
           "title": "Comprendre la Stœchiométrie",
           "paragraph1": "La stœchiométrie est le calcul de la quantité de chaque substance participant à une réaction chimique, à partir des coefficients de l'équation équilibrée. Ces coefficients — les nombres devant chaque formule, comme le 2 dans 2H₂ + O₂ → 2H₂O — décrivent un rapport molaire fixe : exactement 2 moles de H₂ réagissent avec exactement 1 mole de O₂ pour produire exactement 2 moles de H₂O, quelle que soit l'ampleur réelle de la réaction. Ce calculateur utilise directement ce rapport : les moles de la substance cible équivalent aux moles de la substance connue multipliées par (coefficient cible ÷ coefficient connu).",
           "paragraph2": "Comme les produits chimiques sont mesurés en masse en laboratoire, et non en comptant les molécules individuelles, la conversion vers et depuis les moles nécessite la masse molaire — le même calcul qu'effectue le Calculateur de Masse Molaire de ce site. Pour une quantité connue en grammes, ce calculateur divise d'abord par la masse molaire de la substance connue pour obtenir des moles ; après application du rapport molaire, si la quantité cible est souhaitée en grammes, il multiplie les moles cibles par la masse molaire de la substance cible. Demander des moles d'un côté ou de l'autre saute la conversion correspondante.",
-          "paragraph3": "Ce calculateur suppose que l'équation avec laquelle vous travaillez est déjà équilibrée et que la réaction va jusqu'à son terme sans réactif limitant restant à prendre en compte — il effectue le calcul de rapport et de masse une fois les coefficients connus, plutôt que d'équilibrer lui-même une équation non équilibrée (une tâche distincte et plus complexe que prend en charge l'Équilibreur d'Équations Chimiques de ce site)."
+          "paragraph3": "Ce calculateur suppose que l'équation avec laquelle vous travaillez est déjà équilibrée et que la réaction va jusqu'à son terme sans réactif limitant restant à prendre en compte — il effectue le calcul de rapport et de masse une fois les coefficients connus, plutôt que d'équilibrer lui-même une équation non équilibrée (une tâche distincte et plus complexe que prend en charge l'Équilibreur d'Équations Chimiques de ce site).",
+          "equation": {
+            "caption": "Deux substances quelconques dans une équation équilibrée sont liées par leurs coefficients."
+          },
+          "roadmap": {
+            "knownGrams": "connu (g)",
+            "knownMoles": "connu (mol)",
+            "targetMoles": "cible (mol)",
+            "targetGrams": "cible (g)",
+            "caption": "Chaque problème de stœchiométrie suit ce même chemin en quatre étapes."
+          },
+          "moleRatio": {
+            "caption": "Le même rapport molaire 1:2 met à l'échelle n'importe quelle quantité de départ de la substance connue."
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -9103,6 +9121,23 @@
                 "online": "Non — le doctorat de 54 crédits est dispensé à temps plein et en présentiel."
               }
             ]
+          },
+          "bridgeSection": {
+            "title": "Masse Molaire : Le Pont des Unités",
+            "grams": "Grammes",
+            "moles": "Moles",
+            "bridgeLabel": "masse molaire",
+            "paragraph": "Les grammes sont ce qu'une balance mesure ; les moles sont ce qu'une équation chimique compte réellement. La masse molaire est le facteur de conversion qui permet à une mesure de passer de l'un à l'autre.",
+            "caption": "La masse molaire convertit librement entre une masse mesurée et un nombre de moles."
+          },
+          "unitsCompareSection": {
+            "title": "Pourquoi la Masse Molaire N'est Pas une Constante",
+            "h2": "H₂",
+            "h2o": "H₂O",
+            "nacl": "NaCl",
+            "glucose": "C₆H₁₂O₆",
+            "paragraph": "Une mole représente toujours le même nombre de particules, mais la masse de cette mole varie énormément selon la substance — de 2 grammes pour l'hydrogène gazeux à 180 grammes pour le glucose — ce qui explique pourquoi chaque substance a besoin de sa propre masse molaire.",
+            "caption": "La masse d'une mole de quatre substances courantes, sur une échelle logarithmique."
           }
         },
         "references": {
@@ -9112,6 +9147,27 @@
           "url": "https://doi.org/10.1080/00033795100202321",
           "readOriginal": "Lire l'Article Original"
         }
+      },
+      "relatedTools": {
+        "title": "Outils de Chimie Connexes"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "chemical-equation-balancer": {
