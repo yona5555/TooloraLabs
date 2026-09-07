@@ -93,6 +93,8 @@ export default function DensityResult({ hasCalculated, result, operation, digitS
               domainMax: GAUGE_DOMAIN_MAX,
               value: result.specificGravity,
               ticks: [0, 1, 5, 10, GAUGE_DOMAIN_MAX],
+              valueLabel: fmt(result.specificGravity),
+              caption: result.specificGravity < 1 ? tGauge("floats") : tGauge("sinks"),
             }}
           />
         }

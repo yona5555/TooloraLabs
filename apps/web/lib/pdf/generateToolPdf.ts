@@ -10,6 +10,16 @@ export type GenerateToolPdfOptions = {
   inputs: PdfRow[];
   results: PdfRow[];
   gauge?: GaugeSpec;
+  /**
+   * A short, already-computed explanation of how the headline result was
+   * derived (e.g. "100 g divided by 50 cm³") — every tool's ShareExportModal
+   * already builds this exact sentence for its on-page result card, so this
+   * is pure reuse, not new authoring. Rendered as a highlighted callout
+   * between the results table and the gauge.
+   */
+  sentence?: string;
+  /** Section title for `sentence`; ignored if `sentence` is empty. */
+  sentenceTitle?: string;
   /** Optional wide multi-column table (e.g. a full year-by-year schedule) rendered after results. Paginated row-aware: a row is never split across two pages, and its header repeats on every page it continues onto. */
   table?: PdfTable;
   /** Optional "prepared for" rows (already-translated label/value pairs) — callers filter out empty fields themselves. Rendered near the top, right after the title, only when non-empty. */
@@ -36,6 +46,7 @@ const COPY = {
     inputsTitle: "Your Inputs",
     resultsTitle: "Results",
     preparedForTitle: "Prepared For",
+    sentenceTitle: "How This Was Calculated",
     field: "Field",
     value: "Value",
     footer: `© ${new Date().getFullYear()} TooloraLabs. All rights reserved.`,
@@ -45,6 +56,7 @@ const COPY = {
     preparedForTitle: "معدّ لـ",
     inputsTitle: "بياناتك المدخلة",
     resultsTitle: "النتائج",
+    sentenceTitle: "طريقة الحساب",
     field: "الحقل",
     value: "القيمة",
     footer: `© ${new Date().getFullYear()} TooloraLabs. جميع الحقوق محفوظة`,
@@ -60,19 +72,36 @@ function escapeHtml(str: string): string {
 function buildSectionTitle(text: string): HTMLElement {
   const el = document.createElement("h2");
   el.textContent = text;
-  el.style.cssText = "font-size:14px; font-weight:700; color:#2563eb; margin:22px 0 8px 0;";
+  el.style.cssText = "font-size:18px; font-weight:700; color:#2563eb; margin:26px 0 10px 0;";
   return el;
+}
+
+/** Marks a self-contained block (a gauge, a callout) that must never be sliced across a page boundary. */
+const AVOID_BREAK_SELECTOR = '[data-avoid-break="true"]';
+
+function buildSentenceCallout(sentence: string, title: string): HTMLElement {
+  const wrap = document.createElement("div");
+  wrap.setAttribute("data-avoid-break", "true");
+  wrap.style.cssText = "margin:26px 0 0 0;";
+  const heading = buildSectionTitle(title);
+  wrap.appendChild(heading);
+  const box = document.createElement("div");
+  box.style.cssText =
+    "background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:16px 18px; font-size:16px; line-height:1.6; color:#1e3a8a;";
+  box.textContent = sentence;
+  wrap.appendChild(box);
+  return wrap;
 }
 
 function buildTable(rows: PdfRow[], copy: { field: string; value: string }): HTMLTableElement {
   const table = document.createElement("table");
-  table.style.cssText = "width:100%; border-collapse:collapse; font-size:13px;";
+  table.style.cssText = "width:100%; border-collapse:collapse; font-size:16px;";
 
   const thead = document.createElement("thead");
   thead.innerHTML = `
     <tr>
-      <th style="text-align:start; padding:8px 12px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(copy.field)}</th>
-      <th style="text-align:start; padding:8px 12px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(copy.value)}</th>
+      <th style="text-align:start; padding:10px 14px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(copy.field)}</th>
+      <th style="text-align:start; padding:10px 14px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(copy.value)}</th>
     </tr>`;
   table.appendChild(thead);
 
@@ -81,8 +110,8 @@ function buildTable(rows: PdfRow[], copy: { field: string; value: string }): HTM
     const tr = document.createElement("tr");
     tr.style.background = i % 2 === 0 ? "#ffffff" : "#fafafa";
     tr.innerHTML = `
-      <td style="padding:8px 12px; border:1px solid #e4e4e7; color:#3f3f46;">${escapeHtml(row.label)}</td>
-      <td style="padding:8px 12px; border:1px solid #e4e4e7; font-weight:600; color:#18181b;">${escapeHtml(row.value)}</td>
+      <td style="padding:10px 14px; border:1px solid #e4e4e7; color:#3f3f46;">${escapeHtml(row.label)}</td>
+      <td style="padding:10px 14px; border:1px solid #e4e4e7; font-weight:600; color:#18181b;">${escapeHtml(row.value)}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -97,13 +126,13 @@ const SCHEDULE_TABLE_SELECTOR = '[data-schedule-table="true"]';
 function buildWideTable(spec: PdfTable): HTMLTableElement {
   const table = document.createElement("table");
   table.setAttribute("data-schedule-table", "true");
-  table.style.cssText = "width:100%; border-collapse:collapse; font-size:11px;";
+  table.style.cssText = "width:100%; border-collapse:collapse; font-size:13px;";
 
   const thead = document.createElement("thead");
   const headerCells = spec.columns
     .map(
       (col) =>
-        `<th style="text-align:start; padding:6px 8px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(col)}</th>`
+        `<th style="text-align:start; padding:8px 10px; background:#eff6ff; border:1px solid #dbeafe; font-weight:600; color:#1e3a8a;">${escapeHtml(col)}</th>`
     )
     .join("");
   thead.innerHTML = `<tr>${headerCells}</tr>`;
@@ -116,7 +145,7 @@ function buildWideTable(spec: PdfTable): HTMLTableElement {
     tr.innerHTML = row
       .map(
         (cell) =>
-          `<td style="padding:6px 8px; border:1px solid #e4e4e7; color:#3f3f46;">${escapeHtml(cell)}</td>`
+          `<td style="padding:8px 10px; border:1px solid #e4e4e7; color:#3f3f46;">${escapeHtml(cell)}</td>`
       )
       .join("");
     tbody.appendChild(tr);
@@ -155,7 +184,7 @@ function buildWideTable(spec: PdfTable): HTMLTableElement {
  * to end.
  */
 export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<void> {
-  const { locale, toolName, inputs, results, gauge, table, preparedFor, preparedForTitle, brandingEnhancements, filename } =
+  const { locale, toolName, inputs, results, gauge, sentence, sentenceTitle, table, preparedFor, preparedForTitle, brandingEnhancements, filename } =
     options;
   const dir = locale === "ar" ? "rtl" : "ltr";
   const copy = locale === "ar" ? COPY.ar : COPY.en;
@@ -182,12 +211,12 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     "display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #2563eb; padding-bottom:16px; margin-bottom:24px;";
   header.innerHTML = `
     <div>
-      <div style="font-size:22px; font-weight:700;">
+      <div style="font-size:26px; font-weight:700;">
         <span style="color:#18181b;">Toolora</span><span style="color:#2563eb;">Labs</span>
       </div>
-      ${brandingEnhancements ? "" : `<div style="font-size:12px; color:#71717a; margin-top:4px;">${BRAND.siteUrl} · ${BRAND.email}</div>`}
+      ${brandingEnhancements ? "" : `<div style="font-size:13px; color:#71717a; margin-top:4px;">${BRAND.siteUrl} · ${BRAND.email}</div>`}
     </div>
-    <div style="font-size:12px; color:#71717a; text-align:${dir === "rtl" ? "left" : "right"};">
+    <div style="font-size:13px; color:#71717a; text-align:${dir === "rtl" ? "left" : "right"};">
       ${escapeHtml(copy.generatedOn)}<br/>
       <span style="font-weight:600; color:#18181b;">${escapeHtml(new Date().toLocaleString(locale === "ar" ? "ar" : "en-US"))}</span>
     </div>
@@ -196,7 +225,7 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
 
   const title = document.createElement("h1");
   title.textContent = toolName;
-  title.style.cssText = "font-size:22px; font-weight:700; margin:0 0 8px 0; color:#18181b;";
+  title.style.cssText = "font-size:26px; font-weight:700; margin:0 0 10px 0; color:#18181b;";
   container.appendChild(title);
 
   if (preparedFor && preparedFor.length > 0) {
@@ -214,10 +243,15 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     container.appendChild(buildTable(results, copy));
   }
 
+  if (sentence) {
+    container.appendChild(buildSentenceCallout(sentence, sentenceTitle ?? copy.sentenceTitle));
+  }
+
   if (gauge) {
     const gaugeWrap = document.createElement("div");
-    gaugeWrap.style.cssText = "margin:24px 0 0 0; display:flex; justify-content:center;";
-    gaugeWrap.appendChild(drawGaugeCanvas(gauge, 640));
+    gaugeWrap.setAttribute("data-avoid-break", "true");
+    gaugeWrap.style.cssText = "margin:30px 0 0 0; display:flex; justify-content:center;";
+    gaugeWrap.appendChild(drawGaugeCanvas(gauge, 700));
     container.appendChild(gaugeWrap);
   }
 
@@ -243,8 +277,8 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
   footer.style.cssText = "padding:16px 0; border-top:1px solid #e4e4e7; text-align:center;";
   footer.innerHTML = brandingEnhancements
     ? `
-      <div style="font-size:8px; color:#a1a1aa;">${escapeHtml(BRAND.siteUrl)} &middot; ${escapeHtml(BRAND.email)}</div>
-      <div style="font-size:11px; color:#a1a1aa; margin-top:4px;">${escapeHtml(copy.footer)}</div>
+      <div style="font-size:10px; color:#a1a1aa;">${escapeHtml(BRAND.siteUrl)} &middot; ${escapeHtml(BRAND.email)}</div>
+      <div style="font-size:13px; color:#a1a1aa; margin-top:4px;">${escapeHtml(copy.footer)}</div>
     `
     : escapeHtml(copy.footer);
   footerWrap.appendChild(footer);
@@ -286,6 +320,18 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
 
       scheduleHeaderCanvas = await html2canvas(theadEl, { scale, backgroundColor: "#ffffff" });
     }
+
+    // Measure every self-contained block (gauge, callout) the same way, before rasterizing,
+    // so a page break can be steered to fall before one instead of slicing through its
+    // middle — this is exactly what happened to the gauge before this measurement existed:
+    // a page boundary landed mid-arc, splitting it in half across two pages.
+    const avoidBreakRanges: { top: number; bottom: number }[] = (() => {
+      const containerRect = container.getBoundingClientRect();
+      return Array.from(container.querySelectorAll<HTMLElement>(AVOID_BREAK_SELECTOR)).map((el) => {
+        const r = el.getBoundingClientRect();
+        return { top: (r.top - containerRect.top) * scale, bottom: (r.bottom - containerRect.top) * scale };
+      });
+    })();
 
     const canvas = await html2canvas(container, { scale, backgroundColor: "#ffffff" });
     const footerCanvas = await html2canvas(footerWrap, { scale, backgroundColor: "#ffffff" });
@@ -333,6 +379,22 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
           } else {
             const nextBoundary = scheduleRowBottomsPx.find((b) => b > renderedHeight);
             if (nextBoundary !== undefined) sliceHeight = nextBoundary - renderedHeight;
+          }
+        }
+
+        // Steer the page break before any atomic block (gauge, callout) that
+        // would otherwise be sliced through its middle — same idea as the
+        // schedule-row snap above, but for a whole element rather than a
+        // table row. Only pushes the block to a fresh page when it's short
+        // enough to fully fit there; an oversized block is left to spill
+        // across pages rather than looping forever trying to protect it.
+        const pageEnd = renderedHeight + sliceHeight;
+        for (const range of avoidBreakRanges) {
+          const startsOnThisPage = range.top > renderedHeight && range.top < pageEnd;
+          const wouldBeSplit = startsOnThisPage && range.bottom > pageEnd;
+          const fitsOnFreshPage = range.bottom - range.top <= availablePagePx;
+          if (wouldBeSplit && fitsOnFreshPage) {
+            sliceHeight = range.top - renderedHeight;
           }
         }
       }
