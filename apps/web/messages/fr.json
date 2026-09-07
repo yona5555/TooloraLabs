@@ -8824,7 +8824,10 @@
         "inputTitle": "Formule Chimique",
         "formulaLabel": "Formule",
         "formulaHint": "Les symboles des éléments sont sensibles à la casse : Co (cobalt) n'est pas la même chose que CO (monoxyde de carbone).",
-        "formulaPlaceholder": "ex. C6H12O6"
+        "formulaPlaceholder": "ex. C6H12O6",
+        "calculate": "Calculer",
+        "clear": "Effacer",
+        "breakdownDiagramCaption": "Comptage des éléments en direct pendant la saisie — se met à jour même avant que la formule ne soit valide."
       },
       "result": {
         "heading": "Masse Molaire",
@@ -8836,14 +8839,30 @@
         "columnElement": "Élément",
         "columnCount": "Nombre",
         "columnAtomicMass": "Masse Atomique",
-        "columnSubtotal": "Sous-total"
+        "columnSubtotal": "Sous-total",
+        "emptyStateMessage": "Saisissez une formule et appuyez sur Calculer pour voir sa masse molaire.",
+        "compositionCaption": "Pourcentage de la masse totale apporté par chaque élément."
       },
       "education": {
         "intro": {
           "title": "Comprendre la Masse Molaire",
           "paragraph1": "La masse molaire est la masse d'une mole (6,022 × 10²³ particules) d'une substance, exprimée en grammes par mole (g/mol). Pour un composé, on l'obtient en additionnant la masse atomique de chaque atome de sa formule — l'eau, H₂O, a une masse molaire de 2×(1,008) + 15,999 = 18,015 g/mol, car une molécule d'eau contient deux atomes d'hydrogène et un atome d'oxygène. Ce calculateur analyse la formule que vous saisissez, compte chaque élément (y compris à l'intérieur des parenthèses ou crochets, comme les deux groupes hydroxyde dans Ca(OH)₂), et recherche la masse atomique standard de chaque élément pour calculer le total.",
           "paragraph2": "Les masses atomiques utilisées par ce calculateur sont les masses atomiques standards conventionnelles de l'IUPAC — essentiellement une moyenne pondérée des isotopes naturels d'un élément, ce qui explique pourquoi ce ne sont pas des nombres entiers (le 35,45 du chlore reflète un mélange naturel majoritairement composé de chlore-35 avec un peu de chlore-37). Une poignée des éléments les plus lourds (technétium, prométhium et tout à partir du polonium) n'a pas d'isotopes stables et donc pas de mélange naturel à moyenner — pour ceux-ci, la valeur entre crochets correspond plutôt au nombre de masse de leur isotope connu le plus stable.",
-          "paragraph3": "Les formules comportant un point médian, une puce ou un point suivi d'un nombre représentent des hydrates — des composés qui incorporent des molécules d'eau dans leur structure cristalline, comme CuSO₄·5H₂O (sulfate de cuivre(II) pentahydraté). Le nombre avant l'eau indique combien de molécules d'eau sont liées par unité formulaire du composé, et ce calculateur ajoute la masse de cette eau à la masse du composé anhydre pour obtenir la masse molaire totale de l'hydrate."
+          "paragraph3": "Les formules comportant un point médian, une puce ou un point suivi d'un nombre représentent des hydrates — des composés qui incorporent des molécules d'eau dans leur structure cristalline, comme CuSO₄·5H₂O (sulfate de cuivre(II) pentahydraté). Le nombre avant l'eau indique combien de molécules d'eau sont liées par unité formulaire du composé, et ce calculateur ajoute la masse de cette eau à la masse du composé anhydre pour obtenir la masse molaire totale de l'hydrate.",
+          "composition": {
+            "caption": "Glucose (C₆H₁₂O₆) : l'oxygène représente plus de la moitié de la masse totale malgré le plus petit nombre d'atomes."
+          },
+          "atomicMass": {
+            "caption": "La masse atomique du chlore, 35,45, est une moyenne pondérée des masses et abondances naturelles de ses deux isotopes stables.",
+            "isotope1": "Cl-35 (76%)",
+            "isotope2": "Cl-37 (24%)",
+            "isotope3": "moy."
+          },
+          "avogadro": {
+            "caption": "Une mole est un nombre fixe de particules, quelle que soit la petitesse ou la grandeur des particules elles-mêmes.",
+            "mole": "1 mole",
+            "particles": "particules"
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -8945,6 +8964,16 @@
                 "online": "Non — les programmes de licence, master et doctorat sont dispensés sur le campus de la KFUPM."
               }
             ]
+          },
+          "groupSection": {
+            "title": "Groupes Entre Parenthèses",
+            "paragraph": "Un indice après une parenthèse fermante multiplie chaque atome à l'intérieur de ce groupe, pas seulement une seule unité de celui-ci — c'est pourquoi Ca(OH)2 contient deux atomes d'oxygène et deux d'hydrogène, pas un de chaque.",
+            "caption": "Le multiplicateur du groupe se distribue sur chaque atome à l'intérieur des parenthèses."
+          },
+          "parsingSection": {
+            "title": "Lire une Formule de Gauche à Droite",
+            "paragraph": "L'analyseur lit une formule caractère par caractère, reconnaissant les symboles d'éléments et leurs comptes optionnels, et traite récursivement tout groupe imbriqué — la même technique réutilisée par l'équilibreur d'équations et la calculatrice de stœchiométrie ailleurs sur ce site.",
+            "caption": "Le glucose, C₆H₁₂O₆, se décompose en trois éléments avec leurs comptes d'atomes respectifs."
           }
         },
         "references": {
@@ -8954,6 +8983,27 @@
           "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
           "readOriginal": "Lire l'Article Original"
         }
+      },
+      "relatedTools": {
+        "title": "Outils de Chimie Connexes"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "stoichiometry-calculator": {

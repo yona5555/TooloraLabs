@@ -8824,7 +8824,10 @@
         "inputTitle": "Chemical Formula",
         "formulaLabel": "Formula",
         "formulaHint": "Element symbols are case-sensitive: Co (cobalt) is not the same as CO (carbon monoxide).",
-        "formulaPlaceholder": "e.g. C6H12O6"
+        "formulaPlaceholder": "e.g. C6H12O6",
+        "calculate": "Calculate",
+        "clear": "Clear",
+        "breakdownDiagramCaption": "Live element count as you type — updates before the formula is even valid."
       },
       "result": {
         "heading": "Molar Mass",
@@ -8836,14 +8839,30 @@
         "columnElement": "Element",
         "columnCount": "Count",
         "columnAtomicMass": "Atomic Mass",
-        "columnSubtotal": "Subtotal"
+        "columnSubtotal": "Subtotal",
+        "emptyStateMessage": "Enter a formula and press Calculate to see its molar mass.",
+        "compositionCaption": "Percent of the total mass contributed by each element."
       },
       "education": {
         "intro": {
           "title": "Understanding Molar Mass",
           "paragraph1": "Molar mass is the mass of one mole (6.022 × 10²³ particles) of a substance, expressed in grams per mole (g/mol). For a compound, it's found by adding up the atomic mass of every atom in its formula — water, H₂O, has a molar mass of 2×(1.008) + 15.999 = 18.015 g/mol, because a water molecule contains two hydrogen atoms and one oxygen atom. This calculator parses the formula you enter, counts every element (including inside parentheses or brackets, like the two hydroxide groups in Ca(OH)₂), and looks up each element's standard atomic weight to compute the total.",
           "paragraph2": "The atomic weights this calculator uses are the IUPAC conventional standard atomic weights — essentially a weighted average of an element's naturally occurring isotopes, which is why they aren't whole numbers (chlorine's 35.45 reflects a natural mix of mostly chlorine-35 and some chlorine-37). A handful of the heaviest elements (technetium, promethium, and everything from polonium onward) have no stable isotopes and thus no natural mixture to average — for these, the value in brackets is the mass number of their most stable known isotope instead.",
-          "paragraph3": "Formulas with a middle dot, bullet, or period followed by a number represent hydrates — compounds that incorporate water molecules into their crystal structure, like CuSO₄·5H₂O (copper(II) sulfate pentahydrate). The number before the water tells you how many water molecules are bound per formula unit of the compound, and this calculator adds that water's mass on top of the anhydrous compound's mass to get the hydrate's total molar mass."
+          "paragraph3": "Formulas with a middle dot, bullet, or period followed by a number represent hydrates — compounds that incorporate water molecules into their crystal structure, like CuSO₄·5H₂O (copper(II) sulfate pentahydrate). The number before the water tells you how many water molecules are bound per formula unit of the compound, and this calculator adds that water's mass on top of the anhydrous compound's mass to get the hydrate's total molar mass.",
+          "composition": {
+            "caption": "Glucose (C₆H₁₂O₆): oxygen contributes over half the total mass despite having the fewest atoms."
+          },
+          "atomicMass": {
+            "caption": "Chlorine's atomic mass, 35.45, is a weighted average of its two stable isotopes' masses and natural abundances.",
+            "isotope1": "Cl-35 (76%)",
+            "isotope2": "Cl-37 (24%)",
+            "isotope3": "avg"
+          },
+          "avogadro": {
+            "caption": "A mole is a fixed count of particles, however small or large the particles themselves are.",
+            "mole": "1 mole",
+            "particles": "particles"
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -8945,6 +8964,16 @@
                 "online": "No — the B.S./M.S./Ph.D. programs are delivered on KFUPM's campus."
               }
             ]
+          },
+          "groupSection": {
+            "title": "Parenthesized Groups",
+            "paragraph": "A subscript after a closing parenthesis multiplies every atom inside that group, not just a single unit of it — this is why Ca(OH)2 contains two oxygen and two hydrogen atoms, not one of each.",
+            "caption": "The group multiplier distributes across every atom inside the parentheses."
+          },
+          "parsingSection": {
+            "title": "Reading a Formula Left to Right",
+            "paragraph": "The parser reads a formula character by character, recognizing element symbols and their optional counts, and recursively handling any nested groups — the same technique reused by the equation balancer and stoichiometry calculator elsewhere on this site.",
+            "caption": "Glucose, C₆H₁₂O₆, parses into three elements with their respective atom counts."
           }
         },
         "references": {
@@ -8954,6 +8983,27 @@
           "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
           "readOriginal": "Read the Original Paper"
         }
+      },
+      "relatedTools": {
+        "title": "Related Chemistry Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "stoichiometry-calculator": {

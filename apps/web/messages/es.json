@@ -8824,7 +8824,10 @@
         "inputTitle": "Fórmula Química",
         "formulaLabel": "Fórmula",
         "formulaHint": "Los símbolos de los elementos distinguen mayúsculas de minúsculas: Co (cobalto) no es lo mismo que CO (monóxido de carbono).",
-        "formulaPlaceholder": "p. ej. C6H12O6"
+        "formulaPlaceholder": "p. ej. C6H12O6",
+        "calculate": "Calcular",
+        "clear": "Limpiar",
+        "breakdownDiagramCaption": "Recuento de elementos en vivo mientras escribes — se actualiza incluso antes de que la fórmula sea válida."
       },
       "result": {
         "heading": "Masa Molar",
@@ -8836,14 +8839,30 @@
         "columnElement": "Elemento",
         "columnCount": "Cantidad",
         "columnAtomicMass": "Masa Atómica",
-        "columnSubtotal": "Subtotal"
+        "columnSubtotal": "Subtotal",
+        "emptyStateMessage": "Introduce una fórmula y pulsa Calcular para ver su masa molar.",
+        "compositionCaption": "Porcentaje de la masa total que aporta cada elemento."
       },
       "education": {
         "intro": {
           "title": "Entender la Masa Molar",
           "paragraph1": "La masa molar es la masa de un mol (6,022 × 10²³ partículas) de una sustancia, expresada en gramos por mol (g/mol). Para un compuesto, se calcula sumando la masa atómica de cada átomo de su fórmula — el agua, H₂O, tiene una masa molar de 2×(1,008) + 15,999 = 18,015 g/mol, porque una molécula de agua contiene dos átomos de hidrógeno y uno de oxígeno. Esta calculadora analiza la fórmula que introduces, cuenta cada elemento (incluso dentro de paréntesis o corchetes, como los dos grupos hidróxido en Ca(OH)₂), y busca el peso atómico estándar de cada elemento para calcular el total.",
           "paragraph2": "Los pesos atómicos que usa esta calculadora son los pesos atómicos estándar convencionales de la IUPAC — esencialmente un promedio ponderado de los isótopos naturales de un elemento, por lo que no son números enteros (el 35,45 del cloro refleja una mezcla natural mayoritariamente de cloro-35 con algo de cloro-37). Un puñado de los elementos más pesados (tecnecio, prometio y todo a partir del polonio) no tiene isótopos estables y, por tanto, no hay mezcla natural que promediar — para estos, el valor entre corchetes es en su lugar el número másico de su isótopo más estable conocido.",
-          "paragraph3": "Las fórmulas con un punto medio, viñeta o punto seguido de un número representan hidratos — compuestos que incorporan moléculas de agua en su estructura cristalina, como CuSO₄·5H₂O (sulfato de cobre(II) pentahidratado). El número antes del agua indica cuántas moléculas de agua están unidas por unidad fórmula del compuesto, y esta calculadora añade la masa de esa agua a la masa del compuesto anhidro para obtener la masa molar total del hidrato."
+          "paragraph3": "Las fórmulas con un punto medio, viñeta o punto seguido de un número representan hidratos — compuestos que incorporan moléculas de agua en su estructura cristalina, como CuSO₄·5H₂O (sulfato de cobre(II) pentahidratado). El número antes del agua indica cuántas moléculas de agua están unidas por unidad fórmula del compuesto, y esta calculadora añade la masa de esa agua a la masa del compuesto anhidro para obtener la masa molar total del hidrato.",
+          "composition": {
+            "caption": "Glucosa (C₆H₁₂O₆): el oxígeno aporta más de la mitad de la masa total a pesar de tener el menor número de átomos."
+          },
+          "atomicMass": {
+            "caption": "La masa atómica del cloro, 35.45, es un promedio ponderado de las masas y abundancias naturales de sus dos isótopos estables.",
+            "isotope1": "Cl-35 (76%)",
+            "isotope2": "Cl-37 (24%)",
+            "isotope3": "prom."
+          },
+          "avogadro": {
+            "caption": "Un mol es un número fijo de partículas, sin importar cuán pequeñas o grandes sean las partículas mismas.",
+            "mole": "1 mol",
+            "particles": "partículas"
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -8945,6 +8964,16 @@
                 "online": "No — los programas de licenciatura, maestría y doctorado se imparten en el campus de la KFUPM."
               }
             ]
+          },
+          "groupSection": {
+            "title": "Grupos entre Paréntesis",
+            "paragraph": "Un subíndice después de un paréntesis de cierre multiplica cada átomo dentro de ese grupo, no solo una unidad de él: por eso Ca(OH)2 contiene dos átomos de oxígeno y dos de hidrógeno, no uno de cada uno.",
+            "caption": "El multiplicador del grupo se distribuye entre cada átomo dentro de los paréntesis."
+          },
+          "parsingSection": {
+            "title": "Leer una Fórmula de Izquierda a Derecha",
+            "paragraph": "El analizador lee una fórmula carácter por carácter, reconociendo símbolos de elementos y sus recuentos opcionales, y maneja recursivamente cualquier grupo anidado: la misma técnica reutilizada por el balanceador de ecuaciones y la calculadora de estequiometría en otras partes de este sitio.",
+            "caption": "La glucosa, C₆H₁₂O₆, se analiza en tres elementos con sus respectivos recuentos de átomos."
           }
         },
         "references": {
@@ -8954,6 +8983,27 @@
           "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
           "readOriginal": "Leer el Artículo Original"
         }
+      },
+      "relatedTools": {
+        "title": "Herramientas de Química Relacionadas"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "stoichiometry-calculator": {

@@ -8824,7 +8824,10 @@
         "inputTitle": "Chemische Formel",
         "formulaLabel": "Formel",
         "formulaHint": "Elementsymbole sind großschreibungsabhängig: Co (Kobalt) ist nicht dasselbe wie CO (Kohlenmonoxid).",
-        "formulaPlaceholder": "z. B. C6H12O6"
+        "formulaPlaceholder": "z. B. C6H12O6",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "breakdownDiagramCaption": "Live-Elementanzahl während der Eingabe — aktualisiert sich schon vor der Gültigkeit der Formel."
       },
       "result": {
         "heading": "Molmasse",
@@ -8836,14 +8839,30 @@
         "columnElement": "Element",
         "columnCount": "Anzahl",
         "columnAtomicMass": "Atommasse",
-        "columnSubtotal": "Zwischensumme"
+        "columnSubtotal": "Zwischensumme",
+        "emptyStateMessage": "Formel eingeben und auf Berechnen klicken, um ihre molare Masse zu sehen.",
+        "compositionCaption": "Prozentanteil der Gesamtmasse, den jedes Element beiträgt."
       },
       "education": {
         "intro": {
           "title": "Molmasse verstehen",
           "paragraph1": "Die Molmasse ist die Masse eines Mols (6,022 × 10²³ Teilchen) eines Stoffes, ausgedrückt in Gramm pro Mol (g/mol). Bei einer Verbindung ermittelt man sie, indem man die Atommasse jedes Atoms in ihrer Formel addiert — Wasser, H₂O, hat eine Molmasse von 2×(1,008) + 15,999 = 18,015 g/mol, weil ein Wassermolekül zwei Wasserstoffatome und ein Sauerstoffatom enthält. Dieser Rechner analysiert die eingegebene Formel, zählt jedes Element (auch innerhalb von runden oder eckigen Klammern, wie die beiden Hydroxidgruppen in Ca(OH)₂), und schlägt für jedes Element sein Standardatomgewicht nach, um die Summe zu berechnen.",
           "paragraph2": "Die von diesem Rechner verwendeten Atomgewichte sind die IUPAC-konventionellen Standardatomgewichte — im Wesentlichen ein gewichteter Durchschnitt der natürlich vorkommenden Isotope eines Elements, weshalb sie keine ganzen Zahlen sind (Chlors 35,45 spiegelt eine natürliche Mischung wider, überwiegend aus Chlor-35 mit etwas Chlor-37). Eine Handvoll der schwersten Elemente (Technetium, Promethium und alles ab Polonium) hat keine stabilen Isotope und somit keine natürliche Mischung zum Mitteln — für diese steht in eckigen Klammern stattdessen die Massenzahl ihres stabilsten bekannten Isotops.",
-          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten."
+          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten.",
+          "composition": {
+            "caption": "Glukose (C₆H₁₂O₆): Sauerstoff trägt über die Hälfte der Gesamtmasse bei, obwohl er die wenigsten Atome hat."
+          },
+          "atomicMass": {
+            "caption": "Die Atommasse von Chlor, 35,45, ist ein gewichteter Durchschnitt der Massen und natürlichen Häufigkeiten seiner beiden stabilen Isotope.",
+            "isotope1": "Cl-35 (76%)",
+            "isotope2": "Cl-37 (24%)",
+            "isotope3": "Durchschn."
+          },
+          "avogadro": {
+            "caption": "Ein Mol ist eine feste Anzahl von Teilchen, egal wie klein oder groß die Teilchen selbst sind.",
+            "mole": "1 Mol",
+            "particles": "Teilchen"
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8945,6 +8964,16 @@
                 "online": "Nein — die B.S.-/M.S.-/Ph.D.-Programme werden auf dem Campus der KFUPM durchgeführt."
               }
             ]
+          },
+          "groupSection": {
+            "title": "Geklammerte Gruppen",
+            "paragraph": "Ein Index nach einer schließenden Klammer multipliziert jedes Atom innerhalb dieser Gruppe, nicht nur eine einzelne Einheit davon — deshalb enthält Ca(OH)2 zwei Sauerstoff- und zwei Wasserstoffatome, nicht je eines.",
+            "caption": "Der Gruppenmultiplikator verteilt sich auf jedes Atom innerhalb der Klammern."
+          },
+          "parsingSection": {
+            "title": "Eine Formel von links nach rechts lesen",
+            "paragraph": "Der Parser liest eine Formel Zeichen für Zeichen, erkennt Elementsymbole und ihre optionalen Anzahlen und behandelt verschachtelte Gruppen rekursiv — dieselbe Technik, die auch vom Gleichungsausgleicher und dem Stöchiometrie-Rechner an anderer Stelle auf dieser Website verwendet wird.",
+            "caption": "Glukose, C₆H₁₂O₆, wird in drei Elemente mit ihren jeweiligen Atomanzahlen zerlegt."
           }
         },
         "references": {
@@ -8954,6 +8983,27 @@
           "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
           "readOriginal": "Originalarbeit lesen"
         }
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "stoichiometry-calculator": {
