@@ -24928,6 +24928,113 @@
             "answer": "The tool tries to evaluate every non-blank line, but if the parser can't make sense of it — an unmatched parenthesis, an unknown function name, a stray symbol — that attempt fails silently and the line simply shows no result, the same as if it were a plain note. There's no error message shown inline, since a typo and an intentional note look the same to the parser."
           }
         ]
+      },
+      "multiplication-table-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Multiplication Table Generator: how single-number tables and range grids are built, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionCurve": "A Single-Number Table Grows Linearly",
+        "sectionAnatomy": "Anatomy of a Range Grid",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Single mode: result = number × multiplier  |  Range mode: cell(row, col) = row × col",
+          "note": "Both modes compute the exact same operation, plain multiplication — they differ only in how many multiplications are performed and how the results are laid out: a single column of results for one number, or a full grid of results for a range of numbers."
+        },
+        "flowchart": {
+          "intro": "Which layout gets built depends on the selected mode, but the underlying arithmetic in both cases is nothing more than repeated multiplication.",
+          "steps": [
+            "Read which mode is selected: single number or range",
+            "For single mode: validate the number (1 to 1000) and the maximum multiplier (1 to 100, default 12)",
+            "For single mode: multiply the number by every integer from 1 up to the maximum multiplier, producing one row per result",
+            "For range mode: validate the start and end of the range (1 to 1000, start no greater than end, span no more than 30 numbers)",
+            "For range mode: multiply every number in the range by every other number in the range, producing a full grid of results"
+          ],
+          "caption": "The mode-dependent path this tool takes, both built from the same underlying multiplication."
+        },
+        "curve": {
+          "intro": "A single-number table is really just the multiples of one number, one after another — plotted against the multiplier, the results always form a straight line, since multiplication by a fixed number is a linear operation.",
+          "label": "7 × multiplier",
+          "caption": "The multiples of 7 from 7×1 to 7×12 plotted against the multiplier — a perfectly straight line, since each step adds another 7."
+        },
+        "anatomy": {
+          "intro": "A range grid is a table where both the row headers and the column headers are the same sequence of numbers, and every cell holds the product of its row and column header — the shaded diagonal is where a number is multiplied by itself.",
+          "caption": "A 4×4 range grid for the numbers 1 to 4 — the diagonal cells (1×1, 2×2, 3×3, 4×4) are each number's square."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to generate a table for a single number or a grid for a range of numbers.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Number",
+            "meaning": "The number to build a table for, used only in single mode. Must be between 1 and 1000.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Max Multiplier",
+            "meaning": "How far the single-number table extends (1 × number through Max Multiplier × number). Defaults to 12 if left blank.",
+            "unit": "Integer"
+          },
+          {
+            "symbol": "Range Start / Range End",
+            "meaning": "The first and last numbers to include in the range grid, used only in range mode. The span between them can't exceed 30 numbers.",
+            "unit": "Integers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Number outside 1 to 1000 (single mode)",
+            "description": "The base number must be a whole number between 1 and 1000 — a value outside that range, or a non-integer, returns an \"invalid-number\" error rather than building a table for it."
+          },
+          {
+            "title": "Max multiplier outside 1 to 100 (single mode)",
+            "description": "The table's maximum multiplier must be a whole number between 1 and 100 — a value outside that range returns an \"invalid-multiplier\" error, protecting against building an impractically long single-number table."
+          },
+          {
+            "title": "Range start after range end (range mode)",
+            "description": "If the range's starting number is greater than its ending number, or either falls outside 1 to 1000, the tool returns an \"invalid-range\" error rather than trying to build a grid with a backwards or out-of-bounds range."
+          },
+          {
+            "title": "Range span exceeding 30 numbers (range mode)",
+            "description": "A range grid's size grows with the square of how many numbers it spans — the tool caps the span at 30 numbers (producing at most a 30×30 grid) and returns a \"range-too-large\" error beyond that, to keep the grid a reasonable size to display."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What's the difference between single mode and range mode?",
+            "answer": "Single mode builds a simple list — one number multiplied by every integer up to a chosen maximum, like the classic \"times table\" you'd memorize in school. Range mode instead builds a full grid, showing every product between two numbers within a chosen span, like a complete multiplication chart for numbers 1 through 12."
+          },
+          {
+            "question": "Why is the range grid limited to a span of 30 numbers?",
+            "answer": "A range grid's cell count grows with the square of its span — a 30-number range already produces 900 cells, and a much larger range would produce a grid too large to usefully display or print. The 30-number cap keeps every generated grid a practical size."
+          },
+          {
+            "question": "Why does the maximum multiplier default to 12 in single mode?",
+            "answer": "The 1-to-12 times table is the traditional standard taught in most school curricula, so it's a sensible starting point — you can raise the maximum multiplier up to 100 if you need a longer table for a specific number."
+          },
+          {
+            "question": "What do the shaded diagonal cells in a range grid represent?",
+            "answer": "Every cell in the grid is the product of its row number and column number — along the diagonal, the row and column numbers are identical, so each of those cells is simply that number multiplied by itself, i.e. its square (1×1, 2×2, 3×3, and so on)."
+          }
+        ]
       }
     }
   }
