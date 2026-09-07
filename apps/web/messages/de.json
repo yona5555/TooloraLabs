@@ -5625,7 +5625,8 @@
         "volumeShort": "V",
         "triangleCaption": "Verdecke den Wert, den du berechnen möchtest.",
         "calculate": "Berechnen",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "materialPresetsLabel": "Echtes Material ausprobieren:"
       },
       "result": {
         "heading": "Ergebnis",
@@ -5671,7 +5672,21 @@
             "floatsVerdict": "{material} schwimmt im Wasser — Wasser ist etwa {ratio}-mal dichter.",
             "sinksVerdict": "{material} sinkt im Wasser — es ist etwa {ratio}-mal dichter als Wasser.",
             "neutralCaption": "Neutral (SG = 1)",
-            "neutralVerdict": "{material} ist Wasser selbst, daher schwimmt es weder noch sinkt es — neutraler Auftrieb."
+            "neutralVerdict": "{material} ist Wasser selbst, daher schwimmt es weder noch sinkt es — neutraler Auftrieb.",
+            "literMass": "Ein Liter {material} würde etwa {mass} kg wiegen.",
+            "materials": {
+              "air": "Luft",
+              "oak": "Eichenholz",
+              "ice": "Eis",
+              "water": "Wasser",
+              "concrete": "Beton",
+              "aluminum": "Aluminium",
+              "iron": "Eisen",
+              "lead": "Blei",
+              "mercury": "Quecksilber",
+              "gold": "Gold",
+              "osmium": "Osmium"
+            }
           }
         },
         "examples": {
@@ -5726,7 +5741,10 @@
             "title": "Ausprobieren: Wasserdichte vs. Temperatur",
             "intro": "Ziehen Sie den Schieberegler, um zu sehen, wie sich die tatsächliche Dichte von Wasser mit der Temperatur ändert — sie erreicht ihren Höhepunkt bei 4°C, dem Punkt maximaler Dichte von Wasser.",
             "sliderLabel": "Temperatur",
-            "result": "Bei {temp}°C beträgt die Dichte von Wasser etwa {density} g/cm³."
+            "result": "Bei {temp}°C beträgt die Dichte von Wasser etwa {density} g/cm³.",
+            "percentBelowPeak": "Das ist etwa {percent}% weniger dicht als der Höchstwert des Wassers bei 4°C.",
+            "atPeak": "Dies ist die maximale Dichte von Wasser — die höchste Dichte, die flüssiges Wasser je erreicht.",
+            "iceComparison": "Festes Eis ist noch weniger dicht — etwa {iceDensity} g/cm³ — weshalb Eis auf flüssigem Wasser schwimmt."
           }
         },
         "behindTheTool": {
@@ -5801,7 +5819,9 @@
               "inputLabel": "Dichte (g/cm³)",
               "waterMarker": "Wasser",
               "scaleLow": "0.001",
-              "scaleHigh": "32"
+              "scaleHigh": "32",
+              "literMass": "Ein Liter dieser Substanz würde etwa {mass} kg wiegen.",
+              "nearestMaterial": "Das liegt am nächsten bei {material}, mit {materialDensity} g/cm³."
             }
           }
         },

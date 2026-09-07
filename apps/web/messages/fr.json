@@ -5625,7 +5625,8 @@
         "volumeShort": "V",
         "triangleCaption": "Cachez la valeur que vous cherchez à calculer.",
         "calculate": "Calculer",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "materialPresetsLabel": "Essayez un matériau réel :"
       },
       "result": {
         "heading": "Résultat",
@@ -5634,7 +5635,7 @@
         "unitGrams": "g",
         "unitCm3": "cm³",
         "unitGPerCm3": "g/cm³",
-        "siSummary": "Équivaut à {si} kg/m³ en unités SI ; densité relative de {sg} par rapport à l'eau.",
+        "siSummary": "Équivaut à {si} kg/m³ en unités SI ; densité relative de {sg} par rapport à l’eau.",
         "diagramCaption": "{value} g/cm³ sur une échelle de densité logarithmique, aux côtés de matériaux courants.",
         "stepDensity": "{mass} g divisés par {volume} cm³.",
         "stepMass": "{density} g/cm³ multipliés par {volume} cm³.",
@@ -5668,10 +5669,24 @@
           "sgGauge": {
             "title": "Essayez : Flotte ou Coule ?",
             "intro": "Choisissez un matériau pour voir sa densité relative sur le cadran et découvrir s'il flotte ou coule dans l'eau.",
-            "floatsVerdict": "{material} flotte dans l'eau — l'eau est environ {ratio} fois plus dense.",
-            "sinksVerdict": "{material} coule dans l'eau — il est environ {ratio} fois plus dense que l'eau.",
+            "floatsVerdict": "{material} flotte dans l’eau — l’eau est environ {ratio} fois plus dense.",
+            "sinksVerdict": "{material} coule dans l’eau — il est environ {ratio} fois plus dense que l’eau.",
             "neutralCaption": "Neutre (SG = 1)",
-            "neutralVerdict": "{material} est l'eau elle-même, elle ne flotte donc ni ne coule — flottabilité neutre."
+            "neutralVerdict": "{material} est l’eau elle-même, elle ne flotte donc ni ne coule — flottabilité neutre.",
+            "literMass": "Un litre de {material} pèserait environ {mass} kg.",
+            "materials": {
+              "air": "Air",
+              "oak": "Bois de Chêne",
+              "ice": "Glace",
+              "water": "Eau",
+              "concrete": "Béton",
+              "aluminum": "Aluminium",
+              "iron": "Fer",
+              "lead": "Plomb",
+              "mercury": "Mercure",
+              "gold": "Or",
+              "osmium": "Osmium"
+            }
           }
         },
         "examples": {
@@ -5726,7 +5741,10 @@
             "title": "Essayez : Densité de l'Eau vs. Température",
             "intro": "Faites glisser le curseur pour voir comment la densité réelle de l'eau change avec la température — elle culmine à 4°C, le point de densité maximale de l'eau.",
             "sliderLabel": "Température",
-            "result": "À {temp}°C, la densité de l'eau est d'environ {density} g/cm³."
+            "result": "À {temp}°C, la densité de l’eau est d’environ {density} g/cm³.",
+            "percentBelowPeak": "Soit environ {percent}% moins dense que le pic de l’eau à 4°C.",
+            "atPeak": "C’est la densité maximale de l’eau — la plus élevée que l’eau liquide atteigne jamais.",
+            "iceComparison": "La glace solide est encore moins dense — environ {iceDensity} g/cm³ — c’est pourquoi la glace flotte sur l’eau liquide."
           }
         },
         "behindTheTool": {
@@ -5801,7 +5819,9 @@
               "inputLabel": "Densité (g/cm³)",
               "waterMarker": "Eau",
               "scaleLow": "0.001",
-              "scaleHigh": "32"
+              "scaleHigh": "32",
+              "literMass": "Un litre de cette substance pèserait environ {mass} kg.",
+              "nearestMaterial": "C’est le plus proche de {material}, à {materialDensity} g/cm³."
             }
           }
         },
@@ -5847,8 +5867,8 @@
       "buoyancyCard": {
         "title": "Flotte ou coule ?",
         "intro": "Comparer la densité relative de ce matériau à l'eau (1,0) prédit s'il flottera ou coulera.",
-        "floatsResult": "Avec une densité relative de {sg}, ce matériau flotterait dans l'eau.",
-        "sinksResult": "Avec une densité relative de {sg}, ce matériau coulerait dans l'eau."
+        "floatsResult": "Avec une densité relative de {sg}, ce matériau flotterait dans l’eau.",
+        "sinksResult": "Avec une densité relative de {sg}, ce matériau coulerait dans l’eau."
       },
       "referenceTable": {
         "title": "Densités de Matériaux Courants",

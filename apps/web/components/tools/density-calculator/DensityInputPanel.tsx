@@ -5,7 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import DensityFormulaTriangleDiagram from "./DensityFormulaTriangleDiagram";
-import type { DensityOperation } from "./types";
+import { MATERIAL_KEYS, type DensityOperation, type MaterialKey } from "./types";
 
 type DensityInputPanelProps = {
   operation: DensityOperation;
@@ -15,6 +15,7 @@ type DensityInputPanelProps = {
   onVolumeChange: (value: string) => void;
   density: string;
   onDensityChange: (value: string) => void;
+  onMaterialPreset: (key: MaterialKey) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
@@ -27,10 +28,12 @@ export default function DensityInputPanel({
   onVolumeChange,
   density,
   onDensityChange,
+  onMaterialPreset,
   onCalculate,
   onClear,
 }: DensityInputPanelProps) {
   const t = useTranslations("tools.density-calculator.form");
+  const tMaterials = useTranslations("tools.density-calculator.materials");
 
   return (
     <SectionCard title={t("inputTitle")}>
@@ -41,6 +44,22 @@ export default function DensityInputPanel({
         volumeLabel={operation === "solveVolume" ? "?" : volume || "–"}
         caption={t("triangleCaption")}
       />
+
+      <div className="mt-4">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("materialPresetsLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {MATERIAL_KEYS.map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onMaterialPreset(key)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+            >
+              {tMaterials(key)}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {operation !== "solveMass" && (

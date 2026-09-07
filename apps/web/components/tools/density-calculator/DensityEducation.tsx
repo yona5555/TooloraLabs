@@ -27,6 +27,8 @@ export default async function DensityEducation() {
 
   return (
     <EncyclopediaPaper>
+      <DensitySpecificGravityGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <DensityMaterialScaleDiagram densityGPerCm3={7.87} caption={t("intro.diagram.caption")} materials={materials} />
@@ -37,7 +39,6 @@ export default async function DensityEducation() {
           waterLabel={t("intro.buoyancy.water")}
           caption={t("intro.buoyancy.caption")}
         />
-        <DensitySpecificGravityGauge />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 

@@ -5625,7 +5625,8 @@
         "volumeShort": "ح",
         "triangleCaption": "غطِّ القيمة التي تريد إيجادها.",
         "calculate": "احسب",
-        "clear": "مسح"
+        "clear": "مسح",
+        "materialPresetsLabel": "جرّب مادة حقيقية:"
       },
       "result": {
         "heading": "النتيجة",
@@ -5671,7 +5672,21 @@
             "floatsVerdict": "{material} تطفو في الماء — الماء أكثف منها بحوالي {ratio} مرة.",
             "sinksVerdict": "{material} تغرق في الماء — هي أكثف من الماء بحوالي {ratio} مرة.",
             "neutralCaption": "متعادل (SG = 1)",
-            "neutralVerdict": "{material} هي الماء نفسه، لذا لا تطفو ولا تغرق — طفو متعادل."
+            "neutralVerdict": "{material} هي الماء نفسه، لذا لا تطفو ولا تغرق — طفو متعادل.",
+            "literMass": "لتر واحد من {material} يزن حوالي {mass} كجم.",
+            "materials": {
+              "air": "الهواء",
+              "oak": "خشب البلوط",
+              "ice": "الجليد",
+              "water": "الماء",
+              "concrete": "الخرسانة",
+              "aluminum": "الألومنيوم",
+              "iron": "الحديد",
+              "lead": "الرصاص",
+              "mercury": "الزئبق",
+              "gold": "الذهب",
+              "osmium": "الأوزميوم"
+            }
           }
         },
         "examples": {
@@ -5726,7 +5741,10 @@
             "title": "جرّبها: كثافة الماء مقابل الحرارة",
             "intro": "اسحب الشريط لترى كيف تتغير كثافة الماء الفعلية مع الحرارة — تبلغ ذروتها عند 4°م، نقطة الكثافة القصوى للماء.",
             "sliderLabel": "الحرارة",
-            "result": "عند {temp}°م، كثافة الماء تقارب {density} g/cm³."
+            "result": "عند {temp}°م، كثافة الماء تقارب {density} g/cm³.",
+            "percentBelowPeak": "هذا أقل كثافة بحوالي {percent}% من ذروة الماء عند 4°م.",
+            "atPeak": "هذه أقصى كثافة للماء — أعلى كثافة يصلها الماء السائل إطلاقًا.",
+            "iceComparison": "الجليد الصلب أقل كثافة حتى من ذلك — حوالي {iceDensity} g/cm³ — ولهذا يطفو الجليد على الماء السائل."
           }
         },
         "behindTheTool": {
@@ -5801,7 +5819,9 @@
               "inputLabel": "الكثافة (g/cm³)",
               "waterMarker": "الماء",
               "scaleLow": "0.001",
-              "scaleHigh": "32"
+              "scaleHigh": "32",
+              "literMass": "لتر واحد من هذه المادة يزن حوالي {mass} كجم.",
+              "nearestMaterial": "هذا أقرب إلى {material}، بكثافة {materialDensity} g/cm³."
             }
           }
         },

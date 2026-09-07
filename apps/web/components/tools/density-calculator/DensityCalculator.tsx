@@ -14,13 +14,14 @@ import DensityQuickReference from "./DensityQuickReference";
 import DensityModeTabs from "./DensityModeTabs";
 import DensityBuoyancyCard from "./DensityBuoyancyCard";
 import DensityReferenceTable from "./DensityReferenceTable";
-import type { DensityOperation } from "./types";
+import { MATERIAL_DENSITIES, type DensityOperation, type MaterialKey } from "./types";
 
 const tool = new DensityCalculatorTool();
 
 const RELATED_TOOLS = ["molarity-calculator", "ideal-gas-law-calculator", "ohms-law-calculator", "volume-calculator"];
 
 const DEFAULTS = { mass: "100", volume: "50", density: "2.7" };
+const PRESET_VOLUME = 100;
 
 const EMPTY_RESULT: DensityCalculatorOutput = { error: null, mass: 0, volume: 0, density: 0, densitySI: 0, specificGravity: 0 };
 
@@ -99,6 +100,24 @@ export default function DensityCalculator({ education }: { education: ReactNode 
     setHasCalculated(true);
   }
 
+  function handleMaterialPreset(key: MaterialKey) {
+    const materialDensity = MATERIAL_DENSITIES[key];
+    const presetMass = String(Math.round(materialDensity * PRESET_VOLUME * 100) / 100);
+    const presetVolume = String(PRESET_VOLUME);
+    const presetDensity = String(materialDensity);
+
+    const nextMass = operation === "solveVolume" ? presetMass : operation === "solveDensity" ? presetMass : mass;
+    const nextVolume = operation === "solveMass" || operation === "solveDensity" ? presetVolume : volume;
+    const nextDensity = operation === "solveMass" || operation === "solveVolume" ? presetDensity : density;
+
+    setMass(nextMass);
+    setVolume(nextVolume);
+    setDensity(nextDensity);
+    setResult(computeResult(operation, nextMass, nextVolume, nextDensity));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(nextMass, nextVolume, nextDensity));
+  }
+
   function handleClear() {
     setMass(DEFAULTS.mass);
     setVolume(DEFAULTS.volume);
@@ -129,6 +148,7 @@ export default function DensityCalculator({ education }: { education: ReactNode 
                 onVolumeChange={setVolume}
                 density={density}
                 onDensityChange={setDensity}
+                onMaterialPreset={handleMaterialPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />

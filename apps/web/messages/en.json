@@ -5625,7 +5625,8 @@
         "volumeShort": "V",
         "triangleCaption": "Cover the value you're solving for.",
         "calculate": "Calculate",
-        "clear": "Clear"
+        "clear": "Clear",
+        "materialPresetsLabel": "Try a real material:"
       },
       "result": {
         "heading": "Result",
@@ -5671,7 +5672,21 @@
             "floatsVerdict": "{material} floats in water — water is about {ratio}x denser.",
             "sinksVerdict": "{material} sinks in water — it is about {ratio}x denser than water.",
             "neutralCaption": "Neutral (SG = 1)",
-            "neutralVerdict": "{material} is water itself, so it neither floats nor sinks — it is neutrally buoyant."
+            "neutralVerdict": "{material} is water itself, so it neither floats nor sinks — it is neutrally buoyant.",
+            "literMass": "One liter of {material} would weigh about {mass} kg.",
+            "materials": {
+              "air": "Air",
+              "oak": "Oak Wood",
+              "ice": "Ice",
+              "water": "Water",
+              "concrete": "Concrete",
+              "aluminum": "Aluminum",
+              "iron": "Iron",
+              "lead": "Lead",
+              "mercury": "Mercury",
+              "gold": "Gold",
+              "osmium": "Osmium"
+            }
           }
         },
         "examples": {
@@ -5726,7 +5741,10 @@
             "title": "Try It: Water's Density vs. Temperature",
             "intro": "Drag the slider to see how water's real density changes with temperature — it peaks at 4°C, water's point of maximum density.",
             "sliderLabel": "Temperature",
-            "result": "At {temp}°C, water's density is about {density} g/cm³."
+            "result": "At {temp}°C, water’s density is about {density} g/cm³.",
+            "percentBelowPeak": "That’s about {percent}% less dense than water’s peak at 4°C.",
+            "atPeak": "This is water’s maximum density — the densest liquid water ever gets.",
+            "iceComparison": "Solid ice is even less dense — about {iceDensity} g/cm³ — which is why ice floats on liquid water."
           }
         },
         "behindTheTool": {
@@ -5801,7 +5819,9 @@
               "inputLabel": "Density (g/cm³)",
               "waterMarker": "Water",
               "scaleLow": "0.001",
-              "scaleHigh": "32"
+              "scaleHigh": "32",
+              "literMass": "One liter of this substance would weigh about {mass} kg.",
+              "nearestMaterial": "This is closest to {material}, at {materialDensity} g/cm³."
             }
           }
         },

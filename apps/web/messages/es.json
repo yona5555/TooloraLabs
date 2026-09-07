@@ -5625,7 +5625,8 @@
         "volumeShort": "V",
         "triangleCaption": "Cubre el valor que quieres calcular.",
         "calculate": "Calcular",
-        "clear": "Limpiar"
+        "clear": "Limpiar",
+        "materialPresetsLabel": "Prueba un material real:"
       },
       "result": {
         "heading": "Resultado",
@@ -5671,7 +5672,21 @@
             "floatsVerdict": "{material} flota en el agua — el agua es unas {ratio} veces más densa.",
             "sinksVerdict": "{material} se hunde en el agua — es unas {ratio} veces más denso que el agua.",
             "neutralCaption": "Neutro (SG = 1)",
-            "neutralVerdict": "{material} es el agua misma, por lo que no flota ni se hunde — flotabilidad neutra."
+            "neutralVerdict": "{material} es el agua misma, por lo que no flota ni se hunde — flotabilidad neutra.",
+            "literMass": "Un litro de {material} pesaría unos {mass} kg.",
+            "materials": {
+              "air": "Aire",
+              "oak": "Madera de Roble",
+              "ice": "Hielo",
+              "water": "Agua",
+              "concrete": "Concreto",
+              "aluminum": "Aluminio",
+              "iron": "Hierro",
+              "lead": "Plomo",
+              "mercury": "Mercurio",
+              "gold": "Oro",
+              "osmium": "Osmio"
+            }
           }
         },
         "examples": {
@@ -5726,7 +5741,10 @@
             "title": "Pruébalo: Densidad del Agua vs. Temperatura",
             "intro": "Arrastra el control deslizante para ver cómo cambia la densidad real del agua con la temperatura — alcanza su máximo a 4°C, el punto de densidad máxima del agua.",
             "sliderLabel": "Temperatura",
-            "result": "A {temp}°C, la densidad del agua es de aproximadamente {density} g/cm³."
+            "result": "A {temp}°C, la densidad del agua es de aproximadamente {density} g/cm³.",
+            "percentBelowPeak": "Eso es un {percent}% menos denso que el máximo del agua a 4°C.",
+            "atPeak": "Esta es la densidad máxima del agua — la más alta que el agua líquida alcanza jamás.",
+            "iceComparison": "El hielo sólido es incluso menos denso — unos {iceDensity} g/cm³ — por eso el hielo flota en el agua líquida."
           }
         },
         "behindTheTool": {
@@ -5801,7 +5819,9 @@
               "inputLabel": "Densidad (g/cm³)",
               "waterMarker": "Agua",
               "scaleLow": "0.001",
-              "scaleHigh": "32"
+              "scaleHigh": "32",
+              "literMass": "Un litro de esta sustancia pesaría unos {mass} kg.",
+              "nearestMaterial": "Esto es más cercano a {material}, con {materialDensity} g/cm³."
             }
           }
         },

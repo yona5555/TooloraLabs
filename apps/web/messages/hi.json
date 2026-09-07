@@ -5625,7 +5625,8 @@
         "volumeShort": "V",
         "triangleCaption": "जिस मान की गणना करनी है उसे ढक दें।",
         "calculate": "गणना करें",
-        "clear": "साफ़ करें"
+        "clear": "साफ़ करें",
+        "materialPresetsLabel": "एक वास्तविक पदार्थ आज़माएँ:"
       },
       "result": {
         "heading": "परिणाम",
@@ -5671,7 +5672,21 @@
             "floatsVerdict": "{material} पानी में तैरता है — पानी लगभग {ratio} गुना सघन है।",
             "sinksVerdict": "{material} पानी में डूबता है — यह पानी से लगभग {ratio} गुना सघन है।",
             "neutralCaption": "उदासीन (SG = 1)",
-            "neutralVerdict": "{material} स्वयं पानी है, इसलिए यह न तो तैरता है न डूबता है — उदासीन उत्प्लावकता।"
+            "neutralVerdict": "{material} स्वयं पानी है, इसलिए यह न तो तैरता है न डूबता है — उदासीन उत्प्लावकता।",
+            "literMass": "{material} के एक लीटर का वज़न लगभग {mass} किग्रा होगा।",
+            "materials": {
+              "air": "हवा",
+              "oak": "ओक की लकड़ी",
+              "ice": "बर्फ़",
+              "water": "पानी",
+              "concrete": "कंक्रीट",
+              "aluminum": "एल्युमिनियम",
+              "iron": "लोहा",
+              "lead": "सीसा",
+              "mercury": "पारा",
+              "gold": "सोना",
+              "osmium": "ऑस्मियम"
+            }
           }
         },
         "examples": {
@@ -5726,7 +5741,10 @@
             "title": "आज़माएँ: पानी का घनत्व बनाम तापमान",
             "intro": "यह देखने के लिए स्लाइडर खींचें कि पानी का वास्तविक घनत्व तापमान के साथ कैसे बदलता है — यह 4°से पर चरम पर होता है, पानी के अधिकतम घनत्व का बिंदु।",
             "sliderLabel": "तापमान",
-            "result": "{temp}°से पर, पानी का घनत्व लगभग {density} g/cm³ है।"
+            "result": "{temp}°से पर, पानी का घनत्व लगभग {density} g/cm³ है।",
+            "percentBelowPeak": "यह 4°से पर पानी के अधिकतम घनत्व से लगभग {percent}% कम सघन है।",
+            "atPeak": "यह पानी का अधिकतम घनत्व है — तरल पानी जितना सघन कभी होता है।",
+            "iceComparison": "ठोस बर्फ़ इससे भी कम सघन है — लगभग {iceDensity} g/cm³ — यही कारण है कि बर्फ़ तरल पानी पर तैरती है।"
           }
         },
         "behindTheTool": {
@@ -5801,7 +5819,9 @@
               "inputLabel": "घनत्व (g/cm³)",
               "waterMarker": "पानी",
               "scaleLow": "0.001",
-              "scaleHigh": "32"
+              "scaleHigh": "32",
+              "literMass": "इस पदार्थ के एक लीटर का वज़न लगभग {mass} किग्रा होगा।",
+              "nearestMaterial": "यह {material} के सबसे नज़दीक है, {materialDensity} g/cm³ पर।"
             }
           }
         },
