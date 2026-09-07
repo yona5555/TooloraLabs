@@ -35,6 +35,14 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "graphing-calculator",
   "notepad-calculator",
   "multiplication-table-generator",
+  "tip-calculator",
+  "discount-calculator",
+  "sales-tax-calculator",
+  "invoice-generator",
+  "inventory-valuation-calculator",
+  "break-even-calculator",
+  "fuel-cost-calculator",
+  "batch-invoice-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

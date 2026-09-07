@@ -25035,6 +25035,832 @@
             "answer": "Chaque cellule de la grille est le produit de son numéro de ligne et de son numéro de colonne — le long de la diagonale, les numéros de ligne et de colonne sont identiques, donc chacune de ces cellules est simplement ce nombre multiplié par lui-même, c'est-à-dire son carré (1×1, 2×2, 3×3, et ainsi de suite)."
           }
         ]
+      },
+      "tip-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de pourboire : comment le pourboire et la répartition par personne sont calculés, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Anatomie du total",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes d'arrondi",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Pourboire = Addition × (% de pourboire / 100)  |  Total = Addition + Pourboire  |  Par personne = Total / Personnes",
+          "note": "L'ensemble du calcul se résume à trois étapes simples enchaînées : un pourcentage de l'addition, rajouté à l'addition, puis réparti également, avec une étape d'arrondi optionnelle qui change où la répartition finale tombe sur un nombre entier."
+        },
+        "flowchart": {
+          "intro": "Le calcul de base ne change jamais, mais une étape d'arrondi optionnelle à la fin peut déplacer où le montant du pourboire finit réellement.",
+          "steps": [
+            "Multiplier le montant de l'addition par le pourcentage de pourboire pour obtenir le montant brut du pourboire",
+            "Ajouter le pourboire à l'addition pour obtenir le montant total",
+            "Diviser le total par le nombre de personnes pour obtenir la part brute par personne",
+            "Si l'arrondi par personne est désactivé, arrondir la part par personne au centime le plus proche",
+            "Si l'arrondi par personne est activé, arrondir la part de chaque personne à l'unité monétaire entière supérieure, et recalculer le total et le montant du pourboire à partir de cette part arrondie pour que tout reste cohérent"
+          ],
+          "caption": "Le pipeline commun addition-vers-pourboire-vers-répartition, avec l'étape d'arrondi optionnelle se ramifiant à la fin."
+        },
+        "anatomy": {
+          "intro": "Le total qu'un groupe paie est simplement l'addition d'origine plus le pourboire ajouté par-dessus — le pourboire est toujours une fraction de l'addition, jamais calculé d'une autre manière.",
+          "labelBill": "Addition",
+          "labelTip": "Pourboire",
+          "totalLabel": "Total (addition + 20 % de pourboire)",
+          "caption": "Une addition de 80 $ avec un pourboire de 20 % ajoute 16 $, pour un total de 96 $ — le pourboire est toujours un pourcentage direct de l'addition."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Montant de l'Addition",
+            "meaning": "Le total avant pourboire à répartir.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Pourcentage de Pourboire",
+            "meaning": "Quel pourcentage de l'addition ajouter comme pourboire.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Personnes",
+            "meaning": "Combien de personnes se répartissent le total. Automatiquement traité comme au moins 1.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "Arrondir par Personne",
+            "meaning": "Une fois activé, arrondit la part de chaque personne à l'unité monétaire entière supérieure plutôt qu'au centime le plus proche, pour que personne ne doive une fraction gênante.",
+            "unit": "Booléen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Moins d'une personne",
+            "description": "Le nombre de personnes se répartissant l'addition est toujours traité comme au moins 1 — une valeur nulle ou négative ne peut pas diviser un total de façon significative, donc l'outil le plafonne silencieusement à 1 plutôt que de produire une erreur ou une division par zéro."
+          },
+          {
+            "title": "L'arrondi par personne change le pourboire, pas seulement la répartition",
+            "description": "Lorsque l'arrondi est activé, la part de chaque personne est d'abord arrondie, puis le total et le montant du pourboire sont recalculés à partir de cette part arrondie — cela signifie que le montant de pourboire affiché peut être légèrement supérieur à un calcul de pourcentage direct, puisque l'arrondi est absorbé dans le pourboire plutôt que laissé comme monnaie non comptabilisée."
+          },
+          {
+            "title": "Un pourcentage de pourboire de zéro est valide",
+            "description": "Saisir 0 pour le pourcentage de pourboire ne provoque pas d'erreur — cela renvoie simplement un montant de pourboire nul et un total égal à l'addition, ce qui est une entrée légitime (bien qu'inhabituelle) pour cet outil."
+          },
+          {
+            "title": "Les valeurs sont arrondies au centime le plus proche",
+            "description": "Chaque valeur monétaire du résultat — addition, pourboire, total et montants par personne — est arrondie à deux décimales, évitant que des artefacts en virgule flottante comme 15,000000000000002 apparaissent dans le résultat affiché."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi arrondirais-je par personne plutôt que de répartir également au centime près ?",
+            "answer": "Répartir une addition également peut produire un montant gênant comme 19,97 $ par personne, ce qui est peu pratique à payer en espèces ou avec une carte qui ne gère pas bien les fractions de centime — arrondir la part de chaque personne à l'unité entière supérieure simplifie le paiement, la petite différence d'arrondi étant absorbée dans le pourboire total plutôt que laissée comme monnaie que quelqu'un doit suivre."
+          },
+          {
+            "question": "L'outil prend-il en charge une répartition inégale du pourboire, selon ce que chaque personne a commandé ?",
+            "answer": "Non — cet outil suppose une répartition égale du total (addition plus pourboire) entre tous, ce qui est l'approche standard pour une addition partagée. Pour une répartition détaillée selon ce que chaque personne a commandé, il faudrait calculer le sous-total de chaque personne séparément avant d'appliquer un pourcentage de pourboire."
+          },
+          {
+            "question": "Que se passe-t-il si je laisse le pourcentage de pourboire à 0 % ?",
+            "answer": "Le calcul fonctionne toujours normalement — le montant du pourboire ressort à zéro, et le total est simplement le montant de l'addition réparti également entre les personnes, ce qui peut être utile si vous voulez juste diviser une addition sans ajouter de pourboire du tout."
+          },
+          {
+            "question": "Pourquoi le total par personne ne se divise-t-il parfois pas également à partir du total affiché ?",
+            "answer": "Chaque valeur monétaire est arrondie indépendamment au centime le plus proche, donc dans de rares cas, la somme de tous les montants par personne arrondis peut différer du total arrondi d'un ou deux centimes — c'est un comportement d'arrondi standard pour partager de l'argent et non une erreur de calcul."
+          }
+        ]
+      },
+      "discount-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de remise : comment fonctionnent les remises cumulées et le mode inverse (trouver le prix d'origine), les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Anatomie du prix final",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Mode appliquer : Final = Original × (1 − r₁/100) × (1 − r₂/100) × ...  |  Mode inverse : Original = Final / (1 − taux/100)",
+          "note": "Le mode appliquer multiplie le prix d'origine par un facteur décroissant pour chaque remise en séquence — les remises cumulées se combinent multiplicativement plutôt que de simplement s'additionner. Le mode inverse exécute la version à remise unique de cette formule à l'envers pour récupérer le prix d'origine à partir d'un prix de vente connu."
+        },
+        "flowchart": {
+          "intro": "La direction dans laquelle le calcul s'exécute dépend du mode — le mode appliquer avance à partir d'un prix d'origine connu à travers une ou plusieurs remises, tandis que le mode inverse recule à partir d'un prix final connu à travers un seul taux de remise.",
+          "steps": [
+            "Vérifier quel mode est sélectionné : appliquer (partant d'un prix d'origine) ou inverse (partant d'un prix final connu)",
+            "En mode appliquer : limiter chaque pourcentage de remise entre 0 et 100, puis multiplier le prix courant par (1 − taux/100) une fois par remise, en séquence",
+            "En mode inverse : limiter le taux de remise à 99,99 % maximum (pour éviter une division par zéro), puis diviser le prix final par (1 − taux/100) pour récupérer le prix d'origine",
+            "Calculer le montant économisé comme la différence entre le prix d'origine et le prix final",
+            "Calculer le pourcentage de remise effectif comme le montant total économisé divisé par le prix d'origine — c'est le taux unique qui produirait la même économie que toutes les remises cumulées combinées"
+          ],
+          "caption": "Les deux chemins en miroir que suit cet outil, tous deux construits à partir de la même formule sous-jacente de réduction de pourcentage."
+        },
+        "anatomy": {
+          "intro": "Un prix remisé et le montant économisé s'additionnent toujours pour redonner le prix d'origine — le prix final et l'économie ne sont que deux façons de diviser le même montant d'origine.",
+          "labelFinal": "Prix Final",
+          "labelSaved": "Économisé",
+          "totalLabel": "Prix d'Origine (100 $, 30 % de remise)",
+          "caption": "Un article à 100 $ avec une remise de 30 % se divise en un prix final de 70 $ et 30 $ d'économies — les deux s'additionnent toujours pour redonner le prix d'origine."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut appliquer des remises à un prix d'origine connu, ou déduire le prix d'origine à partir d'un prix final connu.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Prix d'Origine",
+            "meaning": "Le prix de départ avant toute remise, utilisé uniquement en mode appliquer.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Prix Final",
+            "meaning": "Le prix de vente connu après remise, utilisé uniquement en mode inverse.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Remises",
+            "meaning": "Un ou plusieurs pourcentages de remise. En mode appliquer, tous sont appliqués en séquence (cumulés) ; en mode inverse, seul le premier est utilisé.",
+            "unit": "% (liste)"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les remises cumulées se combinent multiplicativement, pas additivement",
+            "description": "Deux remises de 20 % appliquées en mode appliquer ne se combinent pas en une remise de 40 % — les seconds 20 % sont retirés du prix déjà réduit, donc l'effet combiné est plus proche de 36 % de remise, puisque chaque remise multiplie le prix restant plutôt que de s'ajouter à un pourcentage courant."
+          },
+          {
+            "title": "Le mode inverse plafonne le taux de remise en dessous de 100 %",
+            "description": "Une remise de 100 % signifierait que l'article était gratuit, rendant mathématiquement impossible de récupérer un prix d'origine non nul par division — l'outil plafonne le taux de remise du mode inverse à 99,99 % maximum pour éviter une division par zéro ou par un nombre négatif."
+          },
+          {
+            "title": "Les pourcentages de remise sont plafonnés entre 0 et 100 en mode appliquer",
+            "description": "Une remise négative ou une remise supérieure à 100 % n'a pas de sens comme réduction de prix — chaque remise en mode appliquer est plafonnée dans la plage 0–100 avant d'être appliquée, protégeant contre une augmentation de prix ou un prix résultant négatif."
+          },
+          {
+            "title": "Les entrées de remise non numériques sont silencieusement écartées",
+            "description": "Si la liste des remises contient une valeur qui n'est pas un nombre fini, elle est filtrée avant tout calcul, plutôt que de faire échouer tout le calcul — seules les entrées de remise numériques valides sont appliquées."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi deux remises de 20 % ne totalisent-elles pas 40 % de remise ?",
+            "answer": "Chaque remise en mode appliquer est appliquée au prix tel qu'il est après la remise précédente, pas au prix d'origine — les seconds 20 % sont calculés sur un prix déjà réduit, donc ils retirent un montant absolu plus petit que les premiers 20 %. L'effet combiné de deux remises de 20 % cumulées équivaut à 36 % de remise sur le prix d'origine, pas 40 %."
+          },
+          {
+            "question": "Quelle est la différence entre le pourcentage de remise effectif et la somme des remises cumulées ?",
+            "answer": "Le pourcentage de remise effectif est le taux global unique qui décrit à quel point le prix final est moins cher que l'original — il tient compte de l'effet cumulatif des remises empilées, donc il sera toujours un peu inférieur à la simple addition des pourcentages de remise individuels."
+          },
+          {
+            "question": "Comment le mode inverse détermine-t-il le prix d'origine à partir du seul prix de vente ?",
+            "answer": "Il exécute la formule de remise à l'envers : si le prix final est l'original multiplié par (1 − taux), alors diviser le prix final par (1 − taux) annule cette multiplication et récupère le prix d'origine — cela ne fonctionne qu'avec un seul taux de remise, car inverser plusieurs remises cumulées à partir du seul prix final n'est pas mathématiquement possible sans connaître chaque taux individuel."
+          },
+          {
+            "question": "Pourquoi le mode inverse est-il limité à un taux de remise maximum de 99,99 % ?",
+            "answer": "La formule du mode inverse divise par (1 − taux/100) — à exactement 100 %, ce dénominateur devient zéro, ce qui est indéfini, et le calcul tenterait d'impliquer un prix d'origine infiniment grand pour un prix de vente de 0 $. Plafonner le taux juste en dessous de 100 % garde la division mathématiquement valide."
+          }
+        ]
+      },
+      "sales-tax-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de taxe de vente : comment la taxe est ajoutée à un prix ou déduite d'un total taxes incluses, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Anatomie d'un total taxes incluses",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Mode ajouter : Total = Prix × (1 + Taux/100)  |  Mode inverse : Prix = Total / (1 + Taux/100)",
+          "note": "Les deux modes utilisent la même relation sous-jacente entre un prix avant taxe et un total taxes incluses — le mode ajouter multiplie vers l'avant à partir d'un prix connu, tandis que le mode inverse divise vers l'arrière à partir d'un total connu pour récupérer le prix dont il a été construit."
+        },
+        "flowchart": {
+          "intro": "La direction du calcul dépend entièrement de la valeur que vous connaissez déjà — un prix avant taxe, ou un total taxes incluses comme un montant de reçu.",
+          "steps": [
+            "Plafonner le taux de taxe à zéro ou plus, car un taux de taxe négatif n'a pas de sens",
+            "Vérifier quel mode est sélectionné : ajouter (partant d'un prix avant taxe) ou inverse (partant d'un total connu taxes incluses)",
+            "En mode ajouter : multiplier le prix par le taux de taxe pour obtenir le montant de la taxe, puis l'ajouter au prix pour obtenir le total",
+            "En mode inverse : diviser le total connu par (1 + taux/100) pour récupérer le prix avant taxe",
+            "En mode inverse : soustraire le prix récupéré du total pour obtenir le montant de taxe qui y était intégré"
+          ],
+          "caption": "Les deux directions dans lesquelles cet outil peut fonctionner, toutes deux construites à partir de la même relation prix-vers-total."
+        },
+        "anatomy": {
+          "intro": "Un total taxes incluses est toujours simplement le prix avant taxe plus le montant de taxe ajouté par-dessus — les deux parties s'additionnent toujours pour redonner le total affiché sur un reçu.",
+          "labelPrice": "Prix Avant Taxe",
+          "labelTax": "Taxe",
+          "totalLabel": "Total Taxes Incluses (taux de 8,5 %)",
+          "caption": "Un prix de 100 $ avant taxe avec un taux de taxe de 8,5 % ajoute 8,50 $ de taxe, pour un total de 108,50 $ — les deux parties s'additionnent toujours pour redonner le total du reçu."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut ajouter la taxe à un prix connu avant taxe, ou déduire le prix avant taxe d'un total connu taxes incluses.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Prix",
+            "meaning": "Le prix avant taxe, utilisé uniquement en mode ajouter.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Prix Total",
+            "meaning": "Le total connu taxes incluses (par exemple, un montant de reçu), utilisé uniquement en mode inverse.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Taux de Taxe",
+            "meaning": "Le taux de taxe de vente à appliquer ou à déduire.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le taux de taxe négatif est plafonné à zéro",
+            "description": "Un taux de taxe inférieur à zéro ne correspond à aucun scénario fiscal réel — l'outil plafonne toute entrée négative à 0 avant de calculer, plutôt que de produire un total inférieur au prix avant taxe."
+          },
+          {
+            "title": "Un taux de taxe de zéro est valide",
+            "description": "Saisir 0 % ne provoque pas d'erreur — le mode ajouter renvoie simplement un montant de taxe nul et un total égal au prix, et le mode inverse renvoie le total inchangé comme prix, ce qui reflète correctement un scénario sans taxe."
+          },
+          {
+            "title": "Le mode inverse divise plutôt que de soustraire un pourcentage",
+            "description": "Une erreur courante est de soustraire directement le taux de taxe du total (par exemple, retirer 8,5 % de 108,50 $), ce qui donne une réponse incorrecte — comme le taux de taxe s'applique au prix avant taxe, pas au total, le mode inverse divise correctement le total par (1 + taux/100) à la place."
+          },
+          {
+            "title": "Les valeurs sont arrondies au centime le plus proche",
+            "description": "Chaque valeur monétaire du résultat — prix, montant de taxe et total — est arrondie à deux décimales, évitant que des artefacts en virgule flottante apparaissent dans le résultat affiché."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi ne puis-je pas simplement soustraire le pourcentage de taxe du total pour obtenir le prix avant taxe ?",
+            "answer": "Parce que le taux de taxe est un pourcentage du prix avant taxe, pas du total — soustraire directement 8,5 % de 108,50 $ retirerait trop, car ces 8,5 % devraient être calculés sur une base plus petite (le prix avant taxe lui-même). Diviser le total par (1 + taux/100) annule correctement la multiplication d'origine et récupère le prix exact avant taxe."
+          },
+          {
+            "question": "Quand utiliserais-je le mode inverse plutôt que le mode ajouter ?",
+            "answer": "Le mode inverse est utile lorsque vous n'avez que le chiffre final, taxes incluses — comme un total sur un reçu ou un prix affiché qui inclut déjà la taxe — et que vous devez savoir quelle part était le prix avant taxe par rapport à la taxe elle-même, par exemple lors de la ventilation d'une dépense professionnelle."
+          },
+          {
+            "question": "Que se passe-t-il si je saisis un taux de taxe négatif ?",
+            "answer": "L'outil ne le rejette pas d'emblée, mais il plafonne le taux à zéro avant de calculer, car une taxe de vente négative n'est pas un scénario du monde réel que cet outil est conçu pour modéliser — le résultat sera identique à la saisie d'un taux de taxe de 0 %."
+          },
+          {
+            "question": "Cet outil gère-t-il les taux de taxe d'État et locaux combinés ?",
+            "answer": "Oui, tant que vous les combinez en un seul taux avant de le saisir — par exemple, si votre taux d'État est de 6 % et votre taux local de 2,5 %, vous saisiriez 8,5 % comme taux de taxe, car l'outil applique le pourcentage unique que vous fournissez."
+          }
+        ]
+      },
+      "invoice-generator": {
+        "version": "v1",
+        "description": "Référence technique du Générateur de factures : comment les lignes d'articles, une remise et la taxe se combinent en un total final, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Anatomie d'un total de facture",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Étapes de Calcul",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Sous-total = Σ(quantité × prix unitaire)  |  Imposable = Sous-total − Remise  |  Total = Imposable + Taxe",
+          "note": "Un total de facture est construit selon une séquence fixe de quatre étapes — les lignes d'articles s'additionnent en un sous-total, une remise est déduite de ce sous-total, la taxe est calculée sur ce qui reste, et la taxe est rajoutée par-dessus — la remise étant appliquée avant la taxe, pas après."
+        },
+        "flowchart": {
+          "intro": "Les quatre étapes s'exécutent toujours dans le même ordre, et chacune dépend du résultat de l'étape précédente.",
+          "steps": [
+            "Valider chaque ligne d'article : une description non vide, une quantité positive et un prix unitaire non négatif",
+            "Multiplier la quantité de chaque ligne d'article par son prix unitaire pour obtenir le total de cette ligne, puis additionner toutes les lignes pour obtenir le sous-total",
+            "Appliquer le pourcentage de remise au sous-total pour obtenir le montant de la remise, puis le soustraire pour obtenir le montant imposable",
+            "Appliquer le taux de taxe au montant imposable (pas au sous-total d'origine) pour obtenir le montant de la taxe",
+            "Ajouter le montant de la taxe au montant imposable pour obtenir le total final de la facture"
+          ],
+          "caption": "Le pipeline fixe en quatre étapes que traverse chaque facture, la remise d'abord et la taxe calculée sur le montant déjà remisé."
+        },
+        "anatomy": {
+          "intro": "Le total final qu'affiche une facture est toujours le montant imposable (sous-total après remise) plus la taxe calculée sur ce montant déjà remisé — jamais la taxe sur le sous-total original avant remise.",
+          "labelTaxable": "Montant Imposable",
+          "labelTax": "Taxe",
+          "totalLabel": "Total de Facture (après 10 % de remise, 10 % de taxe)",
+          "caption": "Un sous-total de 100 $ avec une remise de 10 % laisse un montant imposable de 90 $ ; 10 % de taxe sur ces 90 $ ajoute 9 $, pour un total de 99 $ — la taxe est calculée après la remise, pas avant."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Articles",
+            "meaning": "Les lignes d'articles de la facture, chacune avec une description, une quantité et un prix unitaire.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Taux de Taxe",
+            "meaning": "Le pourcentage de taxe appliqué au montant imposable (sous-total après remise).",
+            "unit": "%"
+          },
+          {
+            "symbol": "Pourcentage de Remise",
+            "meaning": "Un pourcentage optionnel déduit du sous-total avant le calcul de la taxe. Par défaut 0 si omis.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Devise",
+            "meaning": "Le code de devise affiché sur la facture. Par défaut USD si omis.",
+            "unit": "Code devise"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Aucune ligne d'article",
+            "description": "Une facture a besoin d'au moins une ligne d'article pour avoir quelque chose à totaliser — une liste d'articles vide renvoie une erreur « EMPTY_ITEMS » plutôt qu'une facture à valeur nulle."
+          },
+          {
+            "title": "Ligne d'article invalide",
+            "description": "Chaque ligne d'article a besoin d'une description non vide, d'une quantité supérieure à zéro et d'un prix unitaire de zéro ou plus — une ligne d'article à laquelle il manque l'un de ces éléments renvoie une erreur « INVALID_ITEM », car une description vide ou un prix ou une quantité négatifs ne produiraient pas une ligne de facture significative."
+          },
+          {
+            "title": "Remise appliquée avant la taxe, pas après",
+            "description": "La taxe est calculée sur le montant imposable (sous-total moins remise), pas sur le sous-total original — cela correspond à la pratique standard de facturation, où un client est taxé sur ce qu'il paie réellement après toute remise, pas sur le prix catalogue avant remise."
+          },
+          {
+            "title": "Le pourcentage de remise doit être compris entre 0 et 100",
+            "description": "Un pourcentage de remise en dehors de la plage 0–100 ne correspond pas à une remise valide — une remise négative augmenterait le prix, et une supérieure à 100 % rendrait le montant imposable négatif, donc l'outil renvoie une erreur « INVALID_DISCOUNT » dans les deux cas."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la remise est-elle appliquée avant la taxe plutôt qu'après ?",
+            "answer": "Cela correspond à la façon dont la facturation fonctionne normalement : un client paie la taxe sur le montant qui lui est réellement facturé après toute remise, pas sur le prix catalogue d'origine avant la remise. Calculer la taxe sur le sous-total avant remise facturerait au client une taxe excessive sur de l'argent qu'il n'a jamais réellement payé."
+          },
+          {
+            "question": "Que se passe-t-il si je ne spécifie pas de remise ?",
+            "answer": "Le pourcentage de remise est par défaut 0 si vous l'omettez, ce qui signifie que le montant imposable équivaut simplement au sous-total — la facture se calcule toujours correctement, simplement sans que l'étape de remise n'ait d'effet."
+          },
+          {
+            "question": "Pourquoi une facture a-t-elle besoin d'au moins une ligne d'article ?",
+            "answer": "Une facture avec zéro ligne d'article n'a rien à totaliser — il n'y a pas de sous-total, pas de montant imposable, et pas de facture significative à générer, donc l'outil traite une liste d'articles vide comme une condition d'erreur plutôt que de produire silencieusement une facture de 0 $."
+          },
+          {
+            "question": "Une ligne d'article peut-elle avoir un prix unitaire de 0 $ ?",
+            "answer": "Oui — un prix unitaire de exactement zéro est valide (utile pour un article gratuit ou une inclusion promotionnelle), car seul un prix unitaire négatif est rejeté. Une quantité négative ou une quantité nulle est également rejetée, car une ligne d'article doit représenter au moins une unité de quelque chose."
+          }
+        ]
+      },
+      "inventory-valuation-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice d'évaluation des stocks : comment les coûts FIFO, LIFO et moyenne pondérée sont calculés à partir des lots d'achat, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Trois méthodes de coût, une vente",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Méthodes de Coût",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "FIFO : vendre d'abord les lots les plus anciens  |  LIFO : vendre d'abord les lots les plus récents  |  Moyenne Pondérée : coût = coût total acheté / unités totales achetées",
+          "note": "Les trois méthodes répondent à la même question — parmi les unités vendues, quel coût d'achat spécifique représentent-elles ? — mais elles épuisent les lots d'achat dans un ordre différent, ce qui change à la fois le coût des marchandises vendues et la valeur de ce qui reste en stock."
+        },
+        "flowchart": {
+          "intro": "Les trois méthodes de coût partent de la même liste de lots d'achat et du même nombre d'unités vendues ; elles diffèrent seulement par l'ordre dans lequel les lots sont épuisés (ou s'ils sont regroupés du tout).",
+          "steps": [
+            "Additionner la quantité et le coût de chaque lot pour obtenir les unités totales et le coût total acheté de l'article",
+            "Pour FIFO : épuiser les unités vendues d'abord du lot le plus ancien, passant aux lots plus récents seulement une fois qu'un plus ancien est épuisé",
+            "Pour LIFO : épuiser les unités vendues d'abord du lot le plus récent, passant aux lots plus anciens seulement une fois qu'un plus récent est épuisé",
+            "Pour la moyenne pondérée : calculer un coût mélangé par unité (coût total ÷ unités totales), et appliquer ce même coût aux unités vendues comme aux unités restantes",
+            "Pour chaque méthode, les unités qui n'ont pas été épuisées restent comme stock final, valorisées au coût unitaire de cette méthode"
+          ],
+          "caption": "Les mêmes lots d'achat et le même nombre d'unités vendues, traités selon trois ordres d'épuisement différents pour produire trois valorisations différentes."
+        },
+        "anatomy": {
+          "intro": "Pour un article acheté en deux lots à des prix croissants (100 unités à 5 $, puis 100 unités à 8 $) avec 120 unités vendues, chaque méthode de coût laisse un montant de valeur différent dans les 80 unités restantes.",
+          "labelFifo": "Valeur Finale FIFO",
+          "labelLifo": "Valeur Finale LIFO",
+          "labelWac": "Valeur Finale Moyenne Pondérée",
+          "caption": "FIFO laisse le stock plus récent et plus cher en inventaire (640 $) ; LIFO laisse le stock plus ancien et moins cher (400 $) ; la moyenne pondérée mélange les deux (520 $) — même vente, trois valorisations différentes."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Articles",
+            "meaning": "Les articles de stock à valoriser, chacun avec ses propres lots d'achat.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Lots",
+            "meaning": "Les lots d'achat d'un article, ordonnés du plus ancien au plus récent — chacun avec une quantité et un coût unitaire. C'est l'historique en couches à partir duquel FIFO et LIFO épuisent.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Unités Vendues",
+            "meaning": "Combien d'unités de l'article ont été vendues cette période, épuisées contre les lots ci-dessus. Optionnel ; par défaut 0.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "Seuil de Réapprovisionnement",
+            "meaning": "Un niveau de stock optionnel en dessous duquel l'article est signalé comme stock faible.",
+            "unit": "Nombre"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Aucun article ou lots manquants",
+            "description": "Chaque article a besoin d'au moins un lot d'achat pour avoir une base de coût à valoriser — une liste d'articles vide, ou un article sans lots, renvoie une erreur « EMPTY_ITEMS » ou « INVALID_ITEM » plutôt qu'une valorisation nulle."
+          },
+          {
+            "title": "Unités vendues dépassant les unités achetées",
+            "description": "Vous ne pouvez pas vendre plus d'unités que celles jamais achetées — si le chiffre d'unités vendues saisi est supérieur au total des unités achetées sur tous les lots, il est silencieusement plafonné au total acheté, plutôt que de produire un stock final négatif."
+          },
+          {
+            "title": "FIFO et LIFO produisent des résultats identiques à coût unitaire constant",
+            "description": "Lorsque chaque lot d'un article a le même coût unitaire, l'ordre d'épuisement n'a pas d'importance — FIFO, LIFO et la moyenne pondérée produisent tous le même coût des marchandises vendues et la même valeur finale, puisqu'il n'y a pas de variation de prix entre les lots que l'ordre pourrait affecter."
+          },
+          {
+            "title": "L'indicateur de stock faible ne s'applique que lorsqu'un seuil est défini",
+            "description": "Un article n'est signalé comme sous son seuil de réapprovisionnement que si un seuil a réellement été fourni — un article sans seuil de réapprovisionnement défini n'est jamais signalé comme stock faible, quel que soit le nombre d'unités restantes."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi FIFO et LIFO donnent-ils des valeurs de stock différentes pour exactement les mêmes achats et ventes ?",
+            "answer": "Ils diffèrent seulement par le coût de quel lot est attribué aux unités vendues par rapport aux unités restantes. FIFO suppose que les unités les plus anciennes (achetées en premier) sont vendues en premier, laissant les achats les plus récents dans le stock final ; LIFO suppose l'inverse. Lorsque les coûts d'achat changent avec le temps, cette hypothèse change quel coût — ancien ou nouveau — finit par être attaché à ce qui reste sur l'étagère."
+          },
+          {
+            "question": "Quelle méthode de coût devrais-je utiliser ?",
+            "answer": "Cela dépend de vos normes comptables et de votre juridiction — FIFO est largement exigée ou préférée (et c'est la seule option autorisée par les IFRS), tandis que LIFO est autorisée dans certaines juridictions comme les États-Unis et peut réduire le revenu imposable déclaré pendant les périodes de hausse des prix. La moyenne pondérée est souvent utilisée lorsque les lots individuels ne sont pas pratiquement traçables. Ceci est un outil de calcul, pas un conseil comptable — confirmez quelle méthode s'applique à votre situation."
+          },
+          {
+            "question": "Pourquoi la méthode de la moyenne pondérée ignore-t-elle l'ordre des lots ?",
+            "answer": "La moyenne pondérée traite délibérément toutes les unités achetées comme indistinguables — elle mélange le coût de chaque lot en un seul coût moyen par unité (coût total divisé par unités totales), et applique ce même coût mélangé quel que soit le lot spécifique d'où provient conceptuellement une unité vendue. C'est pourquoi c'est la seule des trois méthodes où l'ordre des lots n'a aucun effet sur le résultat."
+          },
+          {
+            "question": "Que se passe-t-il si je ne saisis pas de seuil de réapprovisionnement ?",
+            "answer": "L'article n'est simplement pas vérifié pour le statut de stock faible — le seuil de réapprovisionnement est entièrement optionnel, et un article sans seuil défini n'apparaîtra jamais dans le décompte de stock faible, quel que soit le nombre d'unités restant dans le stock final."
+          }
+        ]
+      },
+      "break-even-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice du seuil de rentabilité : comment le nombre d'unités au seuil de rentabilité et le chiffre d'affaires sont dérivés des coûts et du prix, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Où le chiffre d'affaires croise le coût",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Sorties",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Marge sur Coûts Variables = Prix − Coût Variable  |  Unités au Seuil = Coûts Fixes / Marge sur Coûts Variables",
+          "note": "Chaque unité vendue contribue son prix de vente moins son coût variable à la couverture des coûts fixes — une fois que suffisamment d'unités ont été vendues pour que cette contribution atteigne les coûts fixes, chaque unité supplémentaire vendue est du pur profit."
+        },
+        "flowchart": {
+          "intro": "Le seuil de rentabilité et les unités nécessaires pour un profit cible proviennent tous deux de la même marge sur coûts variables — un profit cible n'est en réalité qu'un calcul de seuil de rentabilité avec des coûts supplémentaires à couvrir.",
+          "steps": [
+            "Soustraire le coût variable par unité du prix par unité pour obtenir la marge sur coûts variables par unité — combien chaque vente contribue réellement à couvrir les coûts fixes",
+            "Diviser les coûts fixes par la marge sur coûts variables par unité, en arrondissant à l'entier supérieur, pour obtenir le nombre d'unités au seuil de rentabilité",
+            "Multiplier le nombre d'unités au seuil par le prix par unité pour obtenir le chiffre d'affaires au seuil de rentabilité",
+            "Diviser la marge sur coûts variables par le prix pour obtenir le taux de marge sur coûts variables, exprimé en pourcentage",
+            "Si un profit cible a été fourni, l'ajouter aux coûts fixes et diviser par la marge sur coûts variables (en arrondissant à l'entier supérieur) pour obtenir les unités nécessaires pour atteindre ce niveau de profit spécifique, pas seulement le seuil de rentabilité"
+          ],
+          "caption": "Le calcul unique de marge sur coûts variables qui pilote à la fois le seuil de rentabilité et le calcul optionnel de profit cible."
+        },
+        "anatomy": {
+          "intro": "À mesure que davantage d'unités sont vendues, le chiffre d'affaires total croît plus vite que le coût total (puisque le coût comprend une partie fixe qui ne s'échelonne pas avec le volume) — les deux lignes commencent séparées et se croisent exactement au seuil de rentabilité.",
+          "labelRevenue": "Chiffre d'Affaires",
+          "labelCost": "Coût Total",
+          "labelBreakEven": "Seuil de rentabilité (30 unités)",
+          "caption": "Avec 900 $ de coûts fixes, un coût variable de 20 $ et un prix de 50 $, le chiffre d'affaires et le coût total se croisent exactement à 30 unités — vendre moins signifie une perte, vendre plus signifie un profit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Coûts Fixes",
+            "meaning": "Coûts qui restent les mêmes quel que soit le nombre d'unités vendues (par ex. loyer, salaires) pour la période analysée.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Coût Variable par Unité",
+            "meaning": "Le coût qui s'échelonne avec chaque unité supplémentaire vendue (par ex. matériaux, expédition par unité).",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Prix par Unité",
+            "meaning": "Le prix de vente d'une unité. Doit être supérieur au coût variable par unité pour qu'un seuil de rentabilité existe.",
+            "unit": "Devise"
+          },
+          {
+            "symbol": "Profit Cible",
+            "meaning": "Un objectif de profit optionnel au-delà du simple seuil de rentabilité. Lorsqu'il est fourni, l'outil rapporte aussi les unités et le chiffre d'affaires nécessaires pour l'atteindre.",
+            "unit": "Devise"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Prix égal ou inférieur au coût variable",
+            "description": "Si le prix par unité ne dépasse pas le coût variable par unité, chaque unité vendue perd de l'argent au lieu de contribuer aux coûts fixes — il n'existe aucun volume de ventes qui atteindrait jamais le seuil de rentabilité, donc l'outil renvoie une erreur « NO_BREAK_EVEN » plutôt qu'un nombre d'unités impossible ou infini."
+          },
+          {
+            "title": "Coûts fixes ou coût variable négatifs",
+            "description": "Les coûts fixes et le coût variable par unité doivent tous deux être nuls ou supérieurs — une valeur négative pour l'un ou l'autre ne correspond à aucune structure de coûts réelle, donc l'outil la rejette avec une erreur « INVALID_FIXED_COSTS » ou « INVALID_COST » avant de calculer."
+          },
+          {
+            "title": "Les unités au seuil de rentabilité sont toujours arrondies à l'entier supérieur",
+            "description": "Si le seuil de rentabilité exact tombe sur un nombre fractionnaire d'unités (comme 33,3), l'outil arrondit à 34 plutôt qu'à 33 — puisque 33 unités entières ne couvriraient pas tout à fait les coûts fixes, l'entreprise n'atteint véritablement le seuil de rentabilité qu'une fois qu'elle atteint l'unité entière suivante."
+          },
+          {
+            "title": "Le profit cible est optionnel et par défaut n'entraîne aucun calcul supplémentaire",
+            "description": "Si aucun profit cible n'est fourni (ou s'il est nul ou négatif), les champs d'unités et de chiffre d'affaires du profit cible sont simplement renvoyés à 0 — l'outil n'effectue le calcul supplémentaire du profit cible que lorsqu'un objectif de profit véritablement positif est donné."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Qu'est-ce que la marge sur coûts variables exactement, et pourquoi est-elle si importante ici ?",
+            "answer": "La marge sur coûts variables est ce qui reste du prix de vente de chaque unité après avoir couvert le coût variable propre de cette unité — c'est le montant que chaque vente « contribue » au remboursement des coûts fixes qui ne dépendent pas du volume. Chaque calcul de seuil de rentabilité et de profit cible dans cet outil ne fait en réalité que diviser un chiffre de coût par ce seul nombre."
+          },
+          {
+            "question": "Pourquoi n'y a-t-il pas de seuil de rentabilité si le prix est inférieur au coût variable ?",
+            "answer": "Si chaque unité coûte plus cher à produire ou à livrer qu'elle ne se vend, chaque vente supplémentaire perd de l'argent au lieu d'aider à couvrir les coûts fixes — augmenter le volume dans cette situation rend les pertes totales plus importantes, pas plus petites, donc il n'existe aucun nombre d'unités qui atteindrait jamais le seuil de rentabilité."
+          },
+          {
+            "question": "Pourquoi le nombre d'unités au seuil de rentabilité est-il arrondi à l'entier supérieur plutôt qu'au plus proche ?",
+            "answer": "Une unité fractionnaire ne peut pas réellement être vendue — si le calcul indique que vous avez besoin de 33,3 unités pour couvrir exactement les coûts fixes, vendre seulement 33 unités entières vous laisse juste en dessous de les couvrir. Arrondir à 34 garantit que l'entreprise a véritablement couvert ses coûts fixes, même si cela résulte en un peu plus de profit qu'un seuil de rentabilité littéral à 33,3 unités."
+          },
+          {
+            "question": "En quoi le calcul du profit cible diffère-t-il du calcul simple du seuil de rentabilité ?",
+            "answer": "C'est la même formule avec un changement : au lieu de diviser seulement les coûts fixes par la marge sur coûts variables, elle divise les coûts fixes plus le profit cible par la marge sur coûts variables. Conceptuellement, atteindre un objectif de profit spécifique revient à avoir des « coûts fixes » supplémentaires à couvrir — l'objectif de profit — en plus des coûts réels."
+          }
+        ]
+      },
+      "fuel-cost-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de coût de carburant : comment les modes de taux de consommation et d'efficacité calculent tous deux le carburant utilisé et le coût du trajet, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Deux modes de taux, un résultat",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes de Taux",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Mode consommation : Carburant Utilisé = (Distance / 100) × Taux  |  Mode efficacité : Carburant Utilisé = Distance / Taux  |  Coût Total = Carburant Utilisé × Prix par Unité",
+          "note": "L'efficacité énergétique est décrite de deux façons différentes à travers le monde — comme consommation (combien de carburant pour 100 unités de distance, comme L/100km) ou comme efficacité (combien de distance par unité de carburant, comme mi/gal) — et cet outil accepte les deux, utilisant la formule correspondant au mode que vous sélectionnez."
+        },
+        "flowchart": {
+          "intro": "La seule différence réelle entre les deux modes de taux est la formule qui convertit le taux en carburant utilisé — tout ce qui suit ce point est identique.",
+          "steps": [
+            "Valider que la distance, le taux et le prix par unité sont tous des nombres finis supérieurs à zéro",
+            "Si le mode de taux est consommation : diviser la distance par 100 et multiplier par le taux, puisque la consommation est définie par 100 unités de distance",
+            "Si le mode de taux est efficacité : diviser directement la distance par le taux, puisque l'efficacité est définie comme la distance parcourue par unité de carburant",
+            "Multiplier le carburant utilisé par le prix par unité pour obtenir le coût total du trajet",
+            "Diviser le coût total par la distance pour obtenir le coût par unité de distance, un chiffre utile pour comparer des trajets de longueurs différentes"
+          ],
+          "caption": "L'unique étape de ramification (quelle formule convertit le taux en carburant utilisé) suivie du calcul de coût commun."
+        },
+        "anatomy": {
+          "intro": "Consommation et efficacité ne sont que deux façons différentes de décrire exactement le même taux — une voiture utilisant 8 L pour 100 km est mathématiquement identique à une parcourant 12,5 km par L, et les deux modes s'accordent exactement sur le carburant utilisé pour le même trajet.",
+          "labelConsumption": "Mode Consommation (8 L/100km)",
+          "labelEfficiency": "Mode Efficacité (12,5 km/L)",
+          "caption": "Pour un trajet de 300 km, saisir le taux comme 8 L/100km (consommation) ou comme l'équivalent 12,5 km/L (efficacité) produisent tous deux exactement 24 L de carburant utilisé."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Distance",
+            "meaning": "La longueur du trajet.",
+            "unit": "Unités de distance"
+          },
+          {
+            "symbol": "Mode de Taux",
+            "meaning": "Si le taux de carburant est donné comme consommation (carburant par 100 unités de distance) ou efficacité (distance par unité de carburant).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Valeur du Taux",
+            "meaning": "Le taux de carburant du véhicule, interprété selon le mode de taux sélectionné.",
+            "unit": "Selon le mode"
+          },
+          {
+            "symbol": "Prix par Unité",
+            "meaning": "Le prix d'une unité de carburant.",
+            "unit": "Devise"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Distance, taux ou prix nul ou négatif",
+            "description": "Un trajet a besoin d'une distance positive, d'un taux de carburant positif et d'un prix de carburant positif pour que le calcul ait un sens — une valeur nulle ou négative pour l'un des trois renvoie une erreur correspondante « invalid-distance », « invalid-rate » ou « invalid-price » plutôt qu'un coût nul ou négatif."
+          },
+          {
+            "title": "Les deux modes de taux utilisent des formules inversées",
+            "description": "Consommation et efficacité décrivent l'économie de carburant dans des directions opposées (carburant-par-distance versus distance-par-carburant), donc elles nécessitent des formules véritablement différentes — le mode consommation multiplie par le taux, tandis que le mode efficacité divise par celui-ci. Saisir le même chiffre de taux dans le mauvais mode produira un résultat très différent et incorrect."
+          },
+          {
+            "title": "Valeurs d'entrée non finies",
+            "description": "Si l'une des trois entrées numériques n'est pas un nombre fini (par exemple, à cause d'un champ de saisie non analysable), elle est traitée de la même manière qu'une valeur invalide pour ce champ, renvoyant l'erreur correspondante plutôt que de propager NaN dans les résultats."
+          },
+          {
+            "title": "Le coût par unité de distance est dérivé, pas saisi",
+            "description": "Le chiffre de coût par distance n'est pas une entrée séparée — il est toujours calculé en divisant le coût total du trajet par la distance, le rendant directement comparable entre des trajets de longueurs différentes utilisant le même véhicule et le même prix de carburant."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Quelle est la différence entre le mode consommation et le mode efficacité ?",
+            "answer": "Ce sont deux conventions pour décrire la même économie de carburant sous-jacente. Le mode consommation (courant dans la majeure partie du monde) demande combien de carburant est utilisé par 100 unités de distance — un chiffre plus bas est meilleur. Le mode efficacité (courant aux États-Unis) demande combien de distance est parcourue par unité de carburant — un chiffre plus élevé est meilleur. Choisissez celui qui correspond à la façon dont l'économie de carburant de votre véhicule est indiquée."
+          },
+          {
+            "question": "Comment convertir entre consommation et efficacité si l'évaluation de mon véhicule est dans l'autre format ?",
+            "answer": "Les deux sont des réciproques mathématiques mis à l'échelle par 100 : efficacité = 100 / consommation, et consommation = 100 / efficacité. Par exemple, 8 L/100km se convertit en 100/8 = 12,5 km/L, et cet outil produira le chiffre de carburant utilisé identique quel que soit le mode dans lequel vous le saisissez, tant que vous convertissez correctement d'abord."
+          },
+          {
+            "question": "Pourquoi l'outil rapporte-t-il le coût par unité de distance en plus du coût total ?",
+            "answer": "Le coût total vous indique seulement ce qu'un trajet spécifique a coûté — le coût par unité de distance est un chiffre normalisé qui vous permet de comparer la dépense en carburant de trajets de longueurs différentes, ou de comparer comment un changement du prix du carburant ou de l'efficacité du véhicule affecte votre coût de conduite typique, indépendamment de la distance d'un trajet particulier."
+          },
+          {
+            "question": "Puis-je utiliser cela pour autre chose qu'une voiture, comme un bateau ou un générateur ?",
+            "answer": "Oui — le calcul ne dépend que d'une distance (ou d'une mesure d'utilisation équivalente), d'un taux de carburant et d'un prix de carburant, donc il fonctionne pour tout ce qui a une évaluation de consommation ou d'efficacité comparable, tant que vous interprétez « distance » comme l'unité d'utilisation par rapport à laquelle votre taux est défini."
+          }
+        ]
+      },
+      "batch-invoice-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de factures par lot : comment les lignes d'articles et la taxe de chaque facture sont totalisées, et comment plusieurs factures enregistrées sont agrégées dans un résumé courant, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Anatomie d'une facture",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Étapes de Calcul",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Sous-total = Σ(quantité × prix unitaire)  |  Total = Sous-total × (1 + % Taxe / 100)  |  Total du Lot = Σ(totaux des factures enregistrées)",
+          "note": "Chaque facture individuelle est totalisée de la même manière simple — les lignes d'articles s'additionnent en un sous-total, puis la taxe est appliquée par-dessus — et une fois qu'une facture est enregistrée, ses totaux déjà calculés sont intégrés dans un résumé de lot courant aux côtés de chaque autre facture enregistrée."
+        },
+        "flowchart": {
+          "intro": "Il y a deux calculs distincts en jeu : totaliser les lignes d'articles d'une facture, et agréger plusieurs factures déjà totalisées dans un résumé courant.",
+          "steps": [
+            "Pour une seule facture : valider qu'au moins une ligne d'article existe, et que chaque article a une quantité positive et un prix unitaire non négatif",
+            "Pour une seule facture : multiplier la quantité de chaque article par son prix unitaire pour obtenir le total de cette ligne, puis additionner toutes les lignes pour obtenir le sous-total",
+            "Pour une seule facture : appliquer le pourcentage de taxe au sous-total pour obtenir le montant de la taxe, puis l'ajouter pour obtenir le total de cette facture",
+            "Une fois qu'une facture est enregistrée, son sous-total, son montant de taxe et son total sont ajoutés à un résumé de lot courant plutôt que d'être recalculés à partir de zéro",
+            "Le résumé du lot suit le nombre de factures et les totaux courants pour le net avant taxe, la taxe et le total général à travers toutes les factures enregistrées"
+          ],
+          "caption": "La totalisation par facture alimente une agrégation de résumé courant séparée une fois chaque facture enregistrée."
+        },
+        "anatomy": {
+          "intro": "Tout comme une seule facture, chaque facture enregistrée dans le lot est simplement son sous-total de lignes d'articles plus la taxe calculée sur ce sous-total — le résumé du lot n'est rien de plus que ces deux parties, additionnées à travers chaque facture enregistrée.",
+          "labelSubtotal": "Sous-total",
+          "labelTax": "Taxe (10 %)",
+          "totalLabel": "Total d'Une Facture",
+          "caption": "Un sous-total de lignes d'articles de 250 $ avec 10 % de taxe ajoute 25 $, pour un total de facture de 275 $ — le résumé du lot additionne simplement ce modèle à travers chaque facture enregistrée."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Lignes d'Articles",
+            "meaning": "Les articles de la facture actuelle, chacun avec un nom, une quantité et un prix unitaire.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Pourcentage de Taxe",
+            "meaning": "Le taux de taxe appliqué au sous-total de la facture actuelle.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Factures Enregistrées",
+            "meaning": "Les factures précédemment complétées dont les totaux alimentent le résumé de lot courant.",
+            "unit": "Liste"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Aucune ligne d'article sur la facture actuelle",
+            "description": "Une facture a besoin d'au moins une ligne d'article pour calculer un sous-total — une liste de lignes d'articles vide renvoie une erreur « no-line-items » plutôt qu'une facture à valeur nulle."
+          },
+          {
+            "title": "Quantité ou prix unitaire invalide",
+            "description": "Chaque ligne d'article a besoin d'une quantité supérieure à zéro et d'un prix unitaire de zéro ou plus — une ligne d'article violant l'une ou l'autre règle renvoie une erreur « invalid-line-item », car une quantité nulle ou négative, ou un prix négatif, ne produirait pas une ligne de facture significative."
+          },
+          {
+            "title": "Pourcentage de taxe négatif",
+            "description": "Un taux de taxe inférieur à zéro ne correspond pas à un scénario fiscal réel — l'outil renvoie une erreur « invalid-tax » pour un pourcentage de taxe négatif plutôt que de calculer un total inférieur au sous-total."
+          },
+          {
+            "title": "Le résumé du lot n'inclut que les factures enregistrées",
+            "description": "Le total courant, le total de taxe et le total général ne reflètent que les factures qui ont réellement été enregistrées — la facture actuellement en cours de rédaction ne compte pas dans le résumé du lot tant qu'elle n'est pas explicitement enregistrée, donc le résumé reflète toujours un ensemble cohérent et finalisé de factures."
+          }
+        ],
+        "faq": [
+          {
+            "question": "En quoi cela diffère-t-il du simple Générateur de factures ?",
+            "answer": "Le Générateur de factures produit une facture complète et détaillée avec une étape de remise optionnelle. Cet outil est conçu pour créer plusieurs factures d'affilée et suivre leurs totaux combinés — chaque facture se totalise toujours de la même manière de base (sous-total plus taxe), mais l'accent est mis ici sur le résumé de lot courant à travers de nombreuses factures enregistrées plutôt que sur un seul document détaillé."
+          },
+          {
+            "question": "Modifier une facture déjà enregistrée met-il automatiquement à jour le résumé du lot ?",
+            "answer": "Le résumé du lot est construit directement à partir de la liste des factures enregistrées, donc toute facture enregistrée reflète ses totaux au moment où elle a été enregistrée — le résumé est recalculé à partir de cette liste enregistrée, ce qui signifie qu'il reste toujours cohérent avec les factures actuellement marquées comme enregistrées."
+          },
+          {
+            "question": "Une ligne d'article peut-elle avoir un prix unitaire de 0 $ ?",
+            "answer": "Oui — un prix unitaire de exactement zéro est accepté (utile pour un article gratuit ou une ligne promotionnelle), car seul un prix unitaire négatif est rejeté. La quantité, cependant, doit être strictement supérieure à zéro, car une ligne d'article doit représenter la vente d'au moins une unité de quelque chose."
+          },
+          {
+            "question": "Pourquoi le résumé du lot suit-il le « net avant taxe » séparément du total général ?",
+            "answer": "Séparer le total avant taxe du total général (qui inclut la taxe) permet de voir combien du revenu combiné à travers toutes les factures est une valeur de vente réelle par rapport à combien est une taxe collectée pour le compte d'une autorité fiscale — une distinction qui compte pour la comptabilité et les déclarations fiscales."
+          }
+        ]
       }
     }
   }

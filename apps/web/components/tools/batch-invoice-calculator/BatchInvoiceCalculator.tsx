@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import InvoiceDraftPanel from "./InvoiceDraftPanel";
 import DraftPreview from "./DraftPreview";
 import InvoiceTable from "./InvoiceTable";
@@ -171,6 +172,7 @@ export default function BatchInvoiceCalculator({ education }: { education: React
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="batch-invoice-calculator" />
               <BatchInvoiceQuickReference />
             </div>
           }

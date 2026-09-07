@@ -25035,6 +25035,832 @@
             "answer": "Jede Zelle im Raster ist das Produkt ihrer Zeilennummer und Spaltennummer — entlang der Diagonale sind Zeilen- und Spaltennummer identisch, sodass jede dieser Zellen einfach diese Zahl mit sich selbst multipliziert ist, also ihr Quadrat (1×1, 2×2, 3×3 und so weiter)."
           }
         ]
+      },
+      "tip-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Trinkgeldrechner: wie Trinkgeld und die Aufteilung pro Person berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie des Gesamtbetrags",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Rundungsmodi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Trinkgeld = Rechnung × (Trinkgeld % / 100)  |  Gesamt = Rechnung + Trinkgeld  |  Pro Person = Gesamt / Personen",
+          "note": "Die gesamte Berechnung sind drei einfache, verkettete Schritte — ein Prozentsatz der Rechnung, zur Rechnung addiert, dann gleichmäßig aufgeteilt — mit einem optionalen Rundungsschritt, der verändert, wie die endgültige Aufteilung auf eine ganze Zahl fällt."
+        },
+        "flowchart": {
+          "intro": "Die Kernrechnung ändert sich nie, aber ein optionaler Rundungsschritt am Ende kann verschieben, wo der Trinkgeldbetrag tatsächlich landet.",
+          "steps": [
+            "Den Rechnungsbetrag mit dem Trinkgeldprozentsatz multiplizieren, um den rohen Trinkgeldbetrag zu erhalten",
+            "Das Trinkgeld zur Rechnung addieren, um den Gesamtbetrag zu erhalten",
+            "Den Gesamtbetrag durch die Personenzahl teilen, um den rohen Anteil pro Person zu erhalten",
+            "Ist Aufrunden-pro-Person deaktiviert, den Anteil pro Person auf den nächsten Cent runden",
+            "Ist Aufrunden-pro-Person aktiviert, den Anteil jeder Person auf die nächste ganze Währungseinheit aufrunden und Gesamtbetrag sowie Trinkgeldbetrag aus diesem gerundeten Anteil neu berechnen, damit alles konsistent bleibt"
+          ],
+          "caption": "Die gemeinsame Pipeline von Rechnung zu Trinkgeld zu Aufteilung, mit dem optionalen Rundungsschritt, der sich am Ende verzweigt."
+        },
+        "anatomy": {
+          "intro": "Der Gesamtbetrag, den eine Gruppe zahlt, ist einfach die ursprüngliche Rechnung plus das Trinkgeld obendrauf — das Trinkgeld ist immer ein Bruchteil der Rechnung, nie anders berechnet.",
+          "labelBill": "Rechnung",
+          "labelTip": "Trinkgeld",
+          "totalLabel": "Gesamt (Rechnung + 20 % Trinkgeld)",
+          "caption": "Eine Rechnung über 80 $ mit 20 % Trinkgeld fügt 16 $ hinzu, macht 96 $ insgesamt — das Trinkgeld ist immer ein einfacher Prozentsatz der Rechnung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Rechnungsbetrag",
+            "meaning": "Der Betrag vor Trinkgeld, der aufgeteilt wird.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Trinkgeldprozentsatz",
+            "meaning": "Welcher Prozentsatz der Rechnung als Trinkgeld hinzugefügt wird.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Personen",
+            "meaning": "Wie viele Personen den Gesamtbetrag aufteilen. Wird automatisch als mindestens 1 behandelt.",
+            "unit": "Anzahl"
+          },
+          {
+            "symbol": "Pro Person aufrunden",
+            "meaning": "Wenn aktiviert, wird der Anteil jeder Person auf die nächste ganze Währungseinheit statt auf den nächsten Cent aufgerundet, sodass niemand einen unbequemen Bruchteil schuldet.",
+            "unit": "Boolesch"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Weniger als eine Person",
+            "description": "Die Anzahl der Personen, die die Rechnung aufteilen, wird immer als mindestens 1 behandelt — ein Wert von null oder negativ kann keinen Gesamtbetrag sinnvoll teilen, daher rundet das Tool ihn stillschweigend auf 1 auf, statt einen Fehler oder eine Division durch null zu erzeugen."
+          },
+          {
+            "title": "Pro-Person-Aufrundung ändert das Trinkgeld, nicht nur die Aufteilung",
+            "description": "Bei aktivierter Aufrundung wird zuerst der Anteil jeder Person aufgerundet, dann werden Gesamtbetrag und Trinkgeldbetrag aus diesem gerundeten Anteil neu berechnet — das bedeutet, der angezeigte Trinkgeldbetrag kann etwas größer sein als eine direkte Prozentrechnung, da die Rundung ins Trinkgeld einfließt, statt als nicht berücksichtigtes Wechselgeld übrig zu bleiben."
+          },
+          {
+            "title": "Ein Trinkgeldprozentsatz von null ist gültig",
+            "description": "Die Eingabe von 0 für den Trinkgeldprozentsatz verursacht keinen Fehler — es wird einfach ein Trinkgeldbetrag von null und ein Gesamtbetrag gleich der Rechnung zurückgegeben, was eine legitime (wenn auch ungewöhnliche) Eingabe für dieses Tool ist."
+          },
+          {
+            "title": "Werte werden auf den nächsten Cent gerundet",
+            "description": "Jeder Währungswert im Ergebnis — Rechnung, Trinkgeld, Gesamtbetrag und Pro-Person-Beträge — wird auf zwei Dezimalstellen gerundet, was verhindert, dass Fließkomma-Artefakte wie 15,000000000000002 im angezeigten Ergebnis erscheinen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum sollte ich pro Person aufrunden, statt gleichmäßig auf den Cent aufzuteilen?",
+            "answer": "Eine gleichmäßige Aufteilung kann einen unbequemen Betrag wie 19,97 $ pro Person ergeben, was umständlich in bar oder mit einer Karte zu zahlen ist, die Bruchteile von Cent nicht sauber handhabt — das Aufrunden des Anteils jeder Person auf die nächste ganze Einheit vereinfacht die Zahlung, wobei die kleine Rundungsdifferenz in das Gesamttrinkgeld einfließt, statt als Wechselgeld übrig zu bleiben, das jemand nachverfolgen muss."
+          },
+          {
+            "question": "Unterstützt das Tool eine ungleiche Aufteilung des Trinkgelds, etwa nach dem, was jede Person bestellt hat?",
+            "answer": "Nein — dieses Tool geht von einer gleichmäßigen Aufteilung des Gesamtbetrags (Rechnung plus Trinkgeld) auf alle aus, was der Standardansatz für eine gemeinsame Rechnung ist. Für eine detaillierte Aufteilung nach dem, was jede Person bestellt hat, müssten Sie den Zwischensumme jeder Person separat berechnen, bevor Sie einen Trinkgeldprozentsatz anwenden."
+          },
+          {
+            "question": "Was passiert, wenn ich den Trinkgeldprozentsatz bei 0 % belasse?",
+            "answer": "Die Berechnung läuft weiterhin normal ab — der Trinkgeldbetrag kommt auf null heraus, und der Gesamtbetrag ist einfach der Rechnungsbetrag, gleichmäßig auf die Personen aufgeteilt, was nützlich sein kann, wenn Sie nur eine Rechnung aufteilen möchten, ohne überhaupt ein Trinkgeld hinzuzufügen."
+          },
+          {
+            "question": "Warum lässt sich der Pro-Person-Gesamtbetrag manchmal nicht gleichmäßig aus dem angezeigten Gesamtbetrag ableiten?",
+            "answer": "Jeder Währungswert wird unabhängig auf den nächsten Cent gerundet, sodass die Summe aller gerundeten Pro-Person-Beträge in seltenen Fällen um ein oder zwei Cent vom gerundeten Gesamtbetrag abweichen kann — dies ist Standard-Rundungsverhalten beim Teilen von Geld und kein Berechnungsfehler."
+          }
+        ]
+      },
+      "discount-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Rabattrechner: wie gestapelte Rabatte und der umgekehrte Modus (Ursprungspreis finden) funktionieren, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie des Endpreises",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Anwenden-Modus: Endpreis = Original × (1 − r₁/100) × (1 − r₂/100) × ...  |  Umkehr-Modus: Original = Endpreis / (1 − Satz/100)",
+          "note": "Der Anwenden-Modus multipliziert den Originalpreis mit einem schrumpfenden Faktor für jeden Rabatt nacheinander — gestapelte Rabatte kombinieren sich multiplikativ statt sich einfach zu addieren. Der Umkehr-Modus führt die Einzelrabatt-Version dieser Formel rückwärts aus, um den Originalpreis aus einem bekannten Verkaufspreis wiederherzustellen."
+        },
+        "flowchart": {
+          "intro": "In welche Richtung die Berechnung läuft, hängt vom Modus ab — der Anwenden-Modus geht vorwärts von einem bekannten Originalpreis durch einen oder mehrere Rabatte, während der Umkehr-Modus rückwärts von einem bekannten Endpreis durch einen einzelnen Rabattsatz geht.",
+          "steps": [
+            "Prüfen, welcher Modus gewählt ist: Anwenden (ausgehend von einem Originalpreis) oder Umkehr (ausgehend von einem bekannten Endpreis)",
+            "Im Anwenden-Modus: jeden Rabattprozentsatz auf 0 bis 100 begrenzen, dann den laufenden Preis einmal pro Rabatt nacheinander mit (1 − Satz/100) multiplizieren",
+            "Im Umkehr-Modus: den Rabattsatz auf höchstens 99,99 % begrenzen (um Division durch null zu vermeiden), dann den Endpreis durch (1 − Satz/100) teilen, um den Originalpreis wiederherzustellen",
+            "Den gesparten Betrag als Differenz zwischen Original- und Endpreis berechnen",
+            "Den effektiven Rabattprozentsatz als gesamten gesparten Betrag geteilt durch den Originalpreis berechnen — dies ist der einzelne Satz, der dieselbe Ersparnis wie alle gestapelten Rabatte zusammen ergeben würde"
+          ],
+          "caption": "Die beiden spiegelbildlichen Pfade dieses Tools, beide aus derselben zugrunde liegenden Prozentreduktionsformel aufgebaut."
+        },
+        "anatomy": {
+          "intro": "Ein rabattierter Preis und der gesparte Betrag ergeben zusammen immer wieder den Originalpreis — Endpreis und Ersparnis sind nur zwei Arten, denselben Originalbetrag aufzuteilen.",
+          "labelFinal": "Endpreis",
+          "labelSaved": "Gespart",
+          "totalLabel": "Originalpreis (100 $, 30 % Rabatt)",
+          "caption": "Ein Artikel für 100 $ mit 30 % Rabatt teilt sich in einen Endpreis von 70 $ und 30 $ Ersparnis auf — beide ergeben zusammen immer wieder den Originalpreis."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob Rabatte auf einen bekannten Originalpreis angewendet werden, oder der Originalpreis aus einem bekannten Endpreis rückgerechnet wird.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Originalpreis",
+            "meaning": "Der Ausgangspreis vor jedem Rabatt, nur im Anwenden-Modus verwendet.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Endpreis",
+            "meaning": "Der bekannte Verkaufspreis nach dem Rabatt, nur im Umkehr-Modus verwendet.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Rabatte",
+            "meaning": "Ein oder mehrere Rabattprozentsätze. Im Anwenden-Modus werden alle nacheinander angewendet (gestapelt); im Umkehr-Modus wird nur der erste verwendet.",
+            "unit": "% (Liste)"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Gestapelte Rabatte kombinieren sich multiplikativ, nicht additiv",
+            "description": "Zwei 20 %-Rabatte im Anwenden-Modus ergeben nicht zusammen 40 % Rabatt — die zweiten 20 % werden vom bereits rabattierten Preis abgezogen, sodass der kombinierte Effekt näher bei 36 % Rabatt liegt, da jeder Rabatt den verbleibenden Preis multipliziert, statt zu einem laufenden Prozentsatz zu addieren."
+          },
+          {
+            "title": "Der Umkehr-Modus begrenzt den Rabattsatz unter 100 %",
+            "description": "Ein 100 %-Rabatt würde bedeuten, dass der Artikel kostenlos war, was es mathematisch unmöglich macht, durch Division einen von null verschiedenen Originalpreis wiederherzustellen — das Tool begrenzt den Rabattsatz im Umkehr-Modus auf höchstens 99,99 %, um eine Division durch null oder eine negative Zahl zu vermeiden."
+          },
+          {
+            "title": "Rabattprozentsätze werden im Anwenden-Modus auf 0–100 begrenzt",
+            "description": "Ein negativer Rabatt oder einer über 100 % ergibt als Preisreduktion keinen Sinn — jeder Rabatt im Anwenden-Modus wird vor der Anwendung auf den Bereich 0–100 begrenzt, was vor einer Preiserhöhung oder einem negativen resultierenden Preis schützt."
+          },
+          {
+            "title": "Nicht-numerische Rabatteinträge werden stillschweigend verworfen",
+            "description": "Enthält die Rabattliste einen Wert, der keine endliche Zahl ist, wird er vor jeder Berechnung herausgefiltert, statt die gesamte Berechnung fehlschlagen zu lassen — nur gültige numerische Rabatteinträge werden angewendet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ergeben zwei 20 %-Rabatte nicht zusammen 40 % Rabatt?",
+            "answer": "Jeder Rabatt im Anwenden-Modus wird auf den Preis angewendet, wie er nach dem vorherigen Rabatt steht, nicht auf den Originalpreis — die zweiten 20 % werden auf einen bereits reduzierten Preis berechnet, sodass sie einen kleineren absoluten Betrag entfernen als die ersten 20 %. Der kombinierte Effekt zweier gestapelter 20 %-Rabatte ergibt 36 % Rabatt auf den Originalpreis, nicht 40 %."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen dem effektiven Rabattprozentsatz und der Summe der gestapelten Rabatte?",
+            "answer": "Der effektive Rabattprozentsatz ist der einzelne Gesamtsatz, der beschreibt, wie viel günstiger der Endpreis im Vergleich zum Original ist — er berücksichtigt den multiplikativen Effekt gestapelter Rabatte, daher wird er immer etwas geringer sein als die einfache Addition der einzelnen Rabattprozentsätze."
+          },
+          {
+            "question": "Wie ermittelt der Umkehr-Modus den Originalpreis nur aus dem Verkaufspreis?",
+            "answer": "Er führt die Rabattformel rückwärts aus: Wenn der Endpreis das Original multipliziert mit (1 − Satz) ist, dann macht die Division des Endpreises durch (1 − Satz) diese Multiplikation rückgängig und stellt den Originalpreis wieder her — das funktioniert nur mit einem einzelnen Rabattsatz, da das Umkehren mehrerer gestapelter Rabatte allein aus dem Endpreis mathematisch nicht möglich ist, ohne jeden einzelnen Satz zu kennen."
+          },
+          {
+            "question": "Warum ist der Umkehr-Modus auf einen maximalen Rabattsatz von 99,99 % begrenzt?",
+            "answer": "Die Umkehr-Modus-Formel teilt durch (1 − Satz/100) — bei genau 100 % wird dieser Nenner null, was undefiniert ist, und die Berechnung würde einen unendlich großen Originalpreis für einen Verkaufspreis von 0 $ implizieren. Die Begrenzung des Satzes knapp unter 100 % hält die Division mathematisch gültig."
+          }
+        ]
+      },
+      "sales-tax-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Umsatzsteuerrechner: wie Steuer zu einem Preis hinzugefügt oder aus einem steuerinklusiven Gesamtbetrag herausgerechnet wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie eines steuerinklusiven Gesamtbetrags",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Hinzufügen-Modus: Gesamt = Preis × (1 + Satz/100)  |  Umkehr-Modus: Preis = Gesamt / (1 + Satz/100)",
+          "note": "Beide Modi verwenden dieselbe zugrunde liegende Beziehung zwischen einem Preis vor Steuern und einem steuerinklusiven Gesamtbetrag — der Hinzufügen-Modus multipliziert vorwärts von einem bekannten Preis, während der Umkehr-Modus rückwärts von einem bekannten Gesamtbetrag dividiert, um den Preis wiederherzustellen, aus dem er gebildet wurde."
+        },
+        "flowchart": {
+          "intro": "Die Richtung der Berechnung hängt vollständig davon ab, welchen Wert Sie bereits kennen — einen Preis vor Steuern oder einen steuerinklusiven Gesamtbetrag wie einen Kassenbonbetrag.",
+          "steps": [
+            "Den Steuersatz auf null oder darüber begrenzen, da ein negativer Steuersatz nicht sinnvoll ist",
+            "Prüfen, welcher Modus gewählt ist: Hinzufügen (ausgehend von einem Preis vor Steuern) oder Umkehr (ausgehend von einem bekannten steuerinklusiven Gesamtbetrag)",
+            "Im Hinzufügen-Modus: den Preis mit dem Steuersatz multiplizieren, um den Steuerbetrag zu erhalten, dann zum Preis addieren, um den Gesamtbetrag zu erhalten",
+            "Im Umkehr-Modus: den bekannten Gesamtbetrag durch (1 + Satz/100) teilen, um den Preis vor Steuern wiederherzustellen",
+            "Im Umkehr-Modus: den wiederhergestellten Preis vom Gesamtbetrag subtrahieren, um den darin enthaltenen Steuerbetrag zu erhalten"
+          ],
+          "caption": "Die beiden Richtungen, in denen dieses Tool arbeiten kann, beide aus derselben Preis-zu-Gesamt-Beziehung aufgebaut."
+        },
+        "anatomy": {
+          "intro": "Ein steuerinklusiver Gesamtbetrag ist immer einfach der Preis vor Steuern plus der Steuerbetrag obendrauf — die beiden Teile ergeben immer wieder den auf einem Kassenbon angezeigten Gesamtbetrag.",
+          "labelPrice": "Preis vor Steuern",
+          "labelTax": "Steuer",
+          "totalLabel": "Steuerinklusiver Gesamtbetrag (8,5 % Satz)",
+          "caption": "Ein Preis von 100 $ vor Steuern mit einem Steuersatz von 8,5 % fügt 8,50 $ Steuer hinzu, macht 108,50 $ insgesamt — die beiden Teile ergeben immer wieder den Kassenbonbetrag."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob Steuer zu einem bekannten Preis vor Steuern hinzugefügt wird, oder der Preis vor Steuern aus einem bekannten steuerinklusiven Gesamtbetrag herausgerechnet wird.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Preis",
+            "meaning": "Der Preis vor Steuern, nur im Hinzufügen-Modus verwendet.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Gesamtpreis",
+            "meaning": "Der bekannte steuerinklusive Gesamtbetrag (z. B. ein Kassenbonbetrag), nur im Umkehr-Modus verwendet.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Steuersatz",
+            "meaning": "Der anzuwendende oder herauszurechnende Umsatzsteuersatz.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Negativer Steuersatz wird auf null begrenzt",
+            "description": "Ein Steuersatz unter null entspricht keinem realen Steuerszenario — das Tool begrenzt jede negative Eingabe vor der Berechnung auf 0, statt einen Gesamtbetrag zu erzeugen, der niedriger ist als der Preis vor Steuern."
+          },
+          {
+            "title": "Ein Steuersatz von null ist gültig",
+            "description": "Die Eingabe von 0 % verursacht keinen Fehler — der Hinzufügen-Modus gibt einfach einen Steuerbetrag von null und einen Gesamtbetrag gleich dem Preis zurück, und der Umkehr-Modus gibt den unveränderten Gesamtbetrag als Preis zurück, was ein steuerfreies Szenario korrekt widerspiegelt."
+          },
+          {
+            "title": "Der Umkehr-Modus dividiert statt einen Prozentsatz zu subtrahieren",
+            "description": "Ein häufiger Fehler ist, den Steuersatz direkt vom Gesamtbetrag zu subtrahieren (z. B. 8,5 % von 108,50 $ abzuziehen), was ein falsches Ergebnis liefert — da der Steuersatz auf den Preis vor Steuern angewendet wird, nicht auf den Gesamtbetrag, teilt der Umkehr-Modus den Gesamtbetrag korrekt durch (1 + Satz/100)."
+          },
+          {
+            "title": "Werte werden auf den nächsten Cent gerundet",
+            "description": "Jeder Währungswert im Ergebnis — Preis, Steuerbetrag und Gesamtbetrag — wird auf zwei Dezimalstellen gerundet, was verhindert, dass Fließkomma-Artefakte im angezeigten Ergebnis erscheinen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum kann ich nicht einfach den Steuerprozentsatz vom Gesamtbetrag subtrahieren, um den Preis vor Steuern zu erhalten?",
+            "answer": "Weil der Steuersatz ein Prozentsatz des Preises vor Steuern ist, nicht des Gesamtbetrags — direkt 8,5 % von 108,50 $ zu subtrahieren würde zu viel entfernen, da diese 8,5 % gegen eine kleinere Basis (den Preis vor Steuern selbst) berechnet werden sollten. Die Division des Gesamtbetrags durch (1 + Satz/100) macht die ursprüngliche Multiplikation korrekt rückgängig und stellt den exakten Preis vor Steuern wieder her."
+          },
+          {
+            "question": "Wann würde ich den Umkehr-Modus statt des Hinzufügen-Modus verwenden?",
+            "answer": "Der Umkehr-Modus ist nützlich, wenn Sie nur die endgültige, steuerinklusive Zahl haben — wie einen Gesamtbetrag auf einem Kassenbon oder einen aufgeführten Preis, der bereits Steuer enthält — und wissen müssen, wie viel davon der Preis vor Steuern gegenüber der Steuer selbst war, zum Beispiel beim Auflisten einer Geschäftsausgabe."
+          },
+          {
+            "question": "Was passiert, wenn ich einen negativen Steuersatz eingebe?",
+            "answer": "Das Tool lehnt ihn nicht rundweg ab, begrenzt aber den Satz vor der Berechnung auf null, da eine negative Umsatzsteuer kein reales Szenario ist, das dieses Tool modellieren soll — das Ergebnis ist identisch mit der Eingabe eines Steuersatzes von 0 %."
+          },
+          {
+            "question": "Behandelt dieses Tool kombinierte staatliche und lokale Steuersätze?",
+            "answer": "Ja, solange Sie sie vor der Eingabe zu einem einzigen Satz kombinieren — wenn Ihr Landessatz beispielsweise 6 % und Ihr lokaler Satz 2,5 % beträgt, würden Sie 8,5 % als Steuersatz eingeben, da das Tool den einzelnen Prozentsatz anwendet, den Sie angeben."
+          }
+        ]
+      },
+      "invoice-generator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Rechnungsgenerator: wie sich Positionen, ein Rabatt und Steuer zu einem Endbetrag kombinieren, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie eines Rechnungsbetrags",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Berechnungsstufen",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Zwischensumme = Σ(Menge × Einzelpreis)  |  Steuerpflichtig = Zwischensumme − Rabatt  |  Gesamt = Steuerpflichtig + Steuer",
+          "note": "Ein Rechnungsbetrag wird in einer festen Abfolge von vier Stufen aufgebaut — Positionen summieren sich zu einer Zwischensumme, ein Rabatt wird von dieser Zwischensumme abgezogen, Steuer wird auf das Verbleibende berechnet, und die Steuer wird obendrauf addiert — wobei der Rabatt vor der Steuer angewendet wird, nicht danach."
+        },
+        "flowchart": {
+          "intro": "Die vier Stufen laufen immer in derselben Reihenfolge ab, und jede hängt vom Ergebnis der vorherigen Stufe ab.",
+          "steps": [
+            "Jede Position validieren: eine nicht leere Beschreibung, eine positive Menge und ein nicht-negativer Einzelpreis",
+            "Die Menge jeder Position mit ihrem Einzelpreis multiplizieren, um den Zeilenbetrag zu erhalten, dann alle Zeilen summieren, um die Zwischensumme zu erhalten",
+            "Den Rabattprozentsatz auf die Zwischensumme anwenden, um den Rabattbetrag zu erhalten, dann abziehen, um den steuerpflichtigen Betrag zu erhalten",
+            "Den Steuersatz auf den steuerpflichtigen Betrag (nicht die ursprüngliche Zwischensumme) anwenden, um den Steuerbetrag zu erhalten",
+            "Den Steuerbetrag zum steuerpflichtigen Betrag addieren, um den endgültigen Rechnungsbetrag zu erhalten"
+          ],
+          "caption": "Die feste vierstufige Pipeline, die jede Rechnung durchläuft, Rabatt zuerst und Steuer auf den bereits rabattierten Betrag berechnet."
+        },
+        "anatomy": {
+          "intro": "Der Endbetrag, den eine Rechnung zeigt, ist immer der steuerpflichtige Betrag (Zwischensumme nach Rabatt) plus die auf diesen bereits rabattierten Betrag berechnete Steuer — niemals Steuer auf die ursprüngliche Zwischensumme vor dem Rabatt.",
+          "labelTaxable": "Steuerpflichtiger Betrag",
+          "labelTax": "Steuer",
+          "totalLabel": "Rechnungsbetrag (nach 10 % Rabatt, 10 % Steuer)",
+          "caption": "Eine Zwischensumme von 100 $ mit 10 % Rabatt lässt einen steuerpflichtigen Betrag von 90 $ übrig; 10 % Steuer auf diese 90 $ fügt 9 $ hinzu, macht 99 $ insgesamt — Steuer wird nach dem Rabatt berechnet, nicht davor."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Positionen",
+            "meaning": "Die Rechnungspositionen, jede mit Beschreibung, Menge und Einzelpreis.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Steuersatz",
+            "meaning": "Der Steuerprozentsatz, der auf den steuerpflichtigen Betrag (Zwischensumme nach Rabatt) angewendet wird.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Rabattprozentsatz",
+            "meaning": "Ein optionaler Prozentsatz, der vor der Steuerberechnung von der Zwischensumme abgezogen wird. Standardmäßig 0, wenn weggelassen.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Währung",
+            "meaning": "Der auf der Rechnung angezeigte Währungscode. Standardmäßig USD, wenn weggelassen.",
+            "unit": "Währungscode"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Keine Positionen",
+            "description": "Eine Rechnung braucht mindestens eine Position, damit es etwas zu summieren gibt — eine leere Positionsliste gibt einen \"EMPTY_ITEMS\"-Fehler zurück, statt eine Rechnung mit Nullwert."
+          },
+          {
+            "title": "Ungültige Position",
+            "description": "Jede Position braucht eine nicht leere Beschreibung, eine Menge größer als null und einen Einzelpreis von null oder mehr — eine Position, der eines davon fehlt, gibt einen \"INVALID_ITEM\"-Fehler zurück, da eine leere Beschreibung oder ein negativer Preis oder eine negative Menge keine sinnvolle Rechnungszeile ergeben würde."
+          },
+          {
+            "title": "Rabatt wird vor der Steuer angewendet, nicht danach",
+            "description": "Steuer wird auf den steuerpflichtigen Betrag (Zwischensumme minus Rabatt) berechnet, nicht auf die ursprüngliche Zwischensumme — dies entspricht der Standard-Rechnungspraxis, bei der ein Kunde Steuer auf den Betrag zahlt, den er nach einem Rabatt tatsächlich zahlt, nicht auf den ursprünglichen Listenpreis vor dem Rabatt."
+          },
+          {
+            "title": "Rabattprozentsatz muss zwischen 0 und 100 liegen",
+            "description": "Ein Rabattprozentsatz außerhalb des Bereichs 0–100 entspricht keinem gültigen Rabatt — ein negativer Rabatt würde den Preis erhöhen, und einer über 100 % würde den steuerpflichtigen Betrag negativ machen, daher gibt das Tool in beiden Fällen einen \"INVALID_DISCOUNT\"-Fehler zurück."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird der Rabatt vor der Steuer angewendet statt danach?",
+            "answer": "Dies entspricht der normalen Funktionsweise der Rechnungsstellung: Ein Kunde zahlt Steuer auf den Betrag, der ihm nach einem Rabatt tatsächlich berechnet wird, nicht auf den ursprünglichen Listenpreis vor dem Rabatt. Die Berechnung der Steuer auf die Zwischensumme vor dem Rabatt würde dem Kunden Steuer auf Geld berechnen, das er nie tatsächlich gezahlt hat."
+          },
+          {
+            "question": "Was passiert, wenn ich keinen Rabatt angebe?",
+            "answer": "Der Rabattprozentsatz ist standardmäßig 0, wenn Sie ihn weglassen, was bedeutet, dass der steuerpflichtige Betrag einfach der Zwischensumme entspricht — die Rechnung wird trotzdem korrekt berechnet, nur ohne dass die Rabattstufe eine Auswirkung hat."
+          },
+          {
+            "question": "Warum braucht eine Rechnung mindestens eine Position?",
+            "answer": "Eine Rechnung mit null Positionen hat nichts zu summieren — es gibt keine Zwischensumme, keinen steuerpflichtigen Betrag und keine sinnvolle Rechnung zu erstellen, daher behandelt das Tool eine leere Positionsliste als Fehlerbedingung, statt stillschweigend eine Rechnung über 0 $ zu erstellen."
+          },
+          {
+            "question": "Kann eine Position einen Einzelpreis von 0 $ haben?",
+            "answer": "Ja — ein Einzelpreis von genau null ist gültig (nützlich für eine kostenlose Position oder eine Werbebeigabe), da nur ein negativer Einzelpreis abgelehnt wird. Eine negative Menge oder eine Menge von null wird ebenfalls abgelehnt, da eine Position mindestens eine Einheit von etwas darstellen muss."
+          }
+        ]
+      },
+      "inventory-valuation-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Bestandsbewertungsrechner: wie FIFO-, LIFO- und gewichtete Durchschnittskostenrechnung aus Einkaufschargen berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Drei Kostenmethoden, ein Verkauf",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kostenmethoden",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "FIFO: älteste Chargen zuerst verkaufen  |  LIFO: neueste Chargen zuerst verkaufen  |  Gewichteter Durchschnitt: Kosten = Gesamteinkaufskosten / Gesamteinkaufsmenge",
+          "note": "Alle drei Methoden beantworten dieselbe Frage — welche konkreten Einkaufskosten repräsentieren die verkauften Einheiten? —, aber sie bauen die Einkaufschargen in unterschiedlicher Reihenfolge ab, was sowohl die Wareneinsatzkosten als auch den Wert des verbleibenden Bestands verändert."
+        },
+        "flowchart": {
+          "intro": "Alle drei Kostenmethoden starten von derselben Liste von Einkaufschargen und derselben Anzahl verkaufter Einheiten; sie unterscheiden sich nur in der Reihenfolge, in der Chargen abgebaut werden (oder ob sie überhaupt zusammengefasst werden).",
+          "steps": [
+            "Die Menge und Kosten jeder Charge summieren, um die Gesamtmenge und Gesamteinkaufskosten für den Artikel zu erhalten",
+            "Für FIFO: verkaufte Einheiten zuerst aus der ältesten Charge abbauen, erst zu neueren Chargen übergehen, wenn eine ältere erschöpft ist",
+            "Für LIFO: verkaufte Einheiten zuerst aus der neuesten Charge abbauen, erst zu älteren Chargen übergehen, wenn eine neuere erschöpft ist",
+            "Für gewichteten Durchschnitt: einen gemischten Kostenwert pro Einheit berechnen (Gesamtkosten ÷ Gesamtmenge) und denselben Kostenwert sowohl auf verkaufte als auch auf verbleibende Einheiten anwenden",
+            "Für jede Methode verbleiben nicht abgebaute Einheiten als Endbestand, bewertet zu den Stückkosten dieser Methode"
+          ],
+          "caption": "Dieselben Einkaufschargen und dieselbe Anzahl verkaufter Einheiten, durch drei verschiedene Abbaureihenfolgen geführt, um drei verschiedene Bewertungen zu erzeugen."
+        },
+        "anatomy": {
+          "intro": "Für einen Artikel, der in zwei Chargen zu steigenden Preisen gekauft wurde (100 Einheiten zu 5 $, dann 100 Einheiten zu 8 $) mit 120 verkauften Einheiten, hinterlässt jede Kostenmethode einen anderen Wert in den verbleibenden 80 Einheiten.",
+          "labelFifo": "FIFO-Endwert",
+          "labelLifo": "LIFO-Endwert",
+          "labelWac": "Endwert (gewichteter Durchschnitt)",
+          "caption": "FIFO belässt den neueren, teureren Bestand im Lager (640 $); LIFO belässt den älteren, günstigeren Bestand (400 $); der gewichtete Durchschnitt mischt beide (520 $) — derselbe Verkauf, drei verschiedene Bewertungen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Artikel",
+            "meaning": "Die zu bewertenden Lagerartikel, jeder mit seinen eigenen Einkaufschargen.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Chargen",
+            "meaning": "Die Einkaufslose eines Artikels, geordnet nach ältesten zuerst — jedes mit einer Menge und Stückkosten. Dies ist die geschichtete Historie, aus der FIFO und LIFO abbauen.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Verkaufte Einheiten",
+            "meaning": "Wie viele Einheiten des Artikels in diesem Zeitraum verkauft wurden, abgebaut gegen die obigen Chargen. Optional; Standardwert 0.",
+            "unit": "Anzahl"
+          },
+          {
+            "symbol": "Nachbestellschwelle",
+            "meaning": "Ein optionaler Bestandsniveau, unter dem der Artikel als niedriger Bestand markiert wird.",
+            "unit": "Anzahl"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Keine Artikel oder fehlende Chargen",
+            "description": "Jeder Artikel braucht mindestens eine Einkaufscharge, um eine Kostenbasis zur Bewertung zu haben — eine leere Artikelliste oder ein Artikel ohne Chargen gibt einen \"EMPTY_ITEMS\"- oder \"INVALID_ITEM\"-Fehler zurück, statt einer Bewertung von null."
+          },
+          {
+            "title": "Verkaufte Einheiten übersteigen eingekaufte Einheiten",
+            "description": "Sie können nicht mehr Einheiten verkaufen, als jemals eingekauft wurden — wenn die eingegebene Verkaufsmenge größer ist als die Gesamtmenge über alle Chargen, wird sie stillschweigend auf die Gesamteinkaufsmenge begrenzt, statt einen negativen Endbestand zu erzeugen."
+          },
+          {
+            "title": "FIFO und LIFO liefern identische Ergebnisse bei gleichbleibenden Stückkosten",
+            "description": "Wenn jede Charge eines Artikels dieselben Stückkosten hat, spielt die Abbaureihenfolge keine Rolle — FIFO, LIFO und gewichteter Durchschnitt liefern alle dieselben Wareneinsatzkosten und Endwerte, da es keine Preisvariation zwischen den Chargen gibt, die die Reihenfolge beeinflussen könnte."
+          },
+          {
+            "title": "Niedrigbestand-Markierung gilt nur, wenn eine Schwelle gesetzt ist",
+            "description": "Ein Artikel wird nur dann als unter seiner Nachbestellschwelle markiert, wenn tatsächlich eine Schwelle angegeben wurde — ein Artikel ohne gesetzte Nachbestellschwelle wird nie als niedriger Bestand markiert, unabhängig davon, wie wenige Einheiten verbleiben."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ergeben FIFO und LIFO unterschiedliche Bestandswerte für genau dieselben Einkäufe und Verkäufe?",
+            "answer": "Sie unterscheiden sich nur darin, welche Chargenkosten den verkauften gegenüber den verbleibenden Einheiten zugeordnet werden. FIFO geht davon aus, dass die ältesten (zuerst gekauften) Einheiten zuerst verkauft werden, wobei die neuesten Käufe im Endbestand verbleiben; LIFO geht vom Gegenteil aus. Wenn sich die Einkaufskosten im Laufe der Zeit ändern, ändert diese Annahme, welche Kosten — alt oder neu — letztlich an dem verbleiben, was noch im Regal steht."
+          },
+          {
+            "question": "Welche Kostenmethode sollte ich verwenden?",
+            "answer": "Dies hängt von Ihren Rechnungslegungsstandards und Ihrer Rechtsprechung ab — FIFO ist weithin vorgeschrieben oder bevorzugt (und ist die einzige nach IFRS zulässige Option), während LIFO in einigen Rechtsordnungen wie den USA erlaubt ist und das ausgewiesene zu versteuernde Einkommen in Zeiten steigender Preise senken kann. Der gewichtete Durchschnitt wird oft verwendet, wenn einzelne Chargen praktisch nicht nachverfolgbar sind. Dies ist ein Berechnungstool, keine Steuerberatung — bestätigen Sie, welche Methode auf Ihre Situation zutrifft."
+          },
+          {
+            "question": "Warum ignoriert die Methode des gewichteten Durchschnitts die Reihenfolge der Chargen?",
+            "answer": "Der gewichtete Durchschnitt behandelt bewusst alle eingekauften Einheiten als ununterscheidbar — er mischt die Kosten jeder Charge zu einem einzigen Durchschnittskostenwert pro Einheit (Gesamtkosten geteilt durch Gesamtmenge) und wendet diesen gleichen gemischten Kostenwert an, unabhängig davon, aus welcher konkreten Charge eine verkaufte Einheit konzeptionell stammte. Deshalb ist es die einzige der drei Methoden, bei der die Chargenreihenfolge keinen Einfluss auf das Ergebnis hat."
+          },
+          {
+            "question": "Was passiert, wenn ich keine Nachbestellschwelle eingebe?",
+            "answer": "Der Artikel wird einfach nicht auf Niedrigbestandsstatus geprüft — die Nachbestellschwelle ist völlig optional, und ein Artikel ohne gesetzte Schwelle erscheint nie in der Niedrigbestandszählung, unabhängig davon, wie viele oder wie wenige Einheiten im Endbestand verbleiben."
+          }
+        ]
+      },
+      "break-even-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Gewinnschwellenrechner: wie die Break-Even-Stückzahl und der Umsatz aus Kosten und Preis abgeleitet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Wo Umsatz die Kosten kreuzt",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ausgaben",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Deckungsbeitrag = Preis − variable Kosten  |  Break-Even-Einheiten = Fixkosten / Deckungsbeitrag",
+          "note": "Jede verkaufte Einheit trägt ihren Verkaufspreis minus ihre variablen Kosten zur Deckung der Fixkosten bei — sobald genug Einheiten verkauft wurden, damit dieser Beitrag die Fixkosten deckt, ist jede zusätzlich verkaufte Einheit reiner Gewinn."
+        },
+        "flowchart": {
+          "intro": "Der Break-Even-Punkt und die für einen Zielgewinn benötigten Einheiten stammen beide aus demselben Deckungsbeitrag — ein Zielgewinn ist im Grunde nur eine Break-Even-Berechnung mit zusätzlichen zu deckenden Kosten.",
+          "steps": [
+            "Die variablen Kosten pro Einheit vom Preis pro Einheit subtrahieren, um den Deckungsbeitrag pro Einheit zu erhalten — wie viel jeder Verkauf tatsächlich zur Deckung der Fixkosten beiträgt",
+            "Die Fixkosten durch den Deckungsbeitrag pro Einheit teilen, aufgerundet auf eine ganze Zahl, um die Break-Even-Stückzahl zu erhalten",
+            "Die Break-Even-Stückzahl mit dem Preis pro Einheit multiplizieren, um den Break-Even-Umsatz zu erhalten",
+            "Den Deckungsbeitrag durch den Preis teilen, um die Deckungsbeitragsquote als Prozentsatz zu erhalten",
+            "Wurde ein Zielgewinn angegeben, ihn zu den Fixkosten addieren und durch den Deckungsbeitrag teilen (aufgerundet), um die für dieses spezifische Gewinnniveau benötigten Einheiten zu erhalten, nicht nur den Break-Even"
+          ],
+          "caption": "Die einzelne Deckungsbeitragsberechnung, die sowohl den Break-Even-Punkt als auch die optionale Zielgewinnberechnung antreibt."
+        },
+        "anatomy": {
+          "intro": "Mit mehr verkauften Einheiten wächst der Gesamtumsatz schneller als die Gesamtkosten (da die Kosten einen fixen Anteil enthalten, der nicht mit dem Volumen skaliert) — die beiden Linien beginnen getrennt und kreuzen sich genau am Break-Even-Punkt.",
+          "labelRevenue": "Umsatz",
+          "labelCost": "Gesamtkosten",
+          "labelBreakEven": "Break-Even (30 Einheiten)",
+          "caption": "Bei 900 $ Fixkosten, 20 $ variablen Kosten und einem Preis von 50 $ kreuzen sich Umsatz und Gesamtkosten bei genau 30 Einheiten — weniger verkaufen bedeutet Verlust, mehr verkaufen bedeutet Gewinn."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Fixkosten",
+            "meaning": "Kosten, die unabhängig davon gleich bleiben, wie viele Einheiten verkauft werden (z. B. Miete, Gehälter) für den analysierten Zeitraum.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Variable Kosten pro Einheit",
+            "meaning": "Die Kosten, die mit jeder zusätzlich verkauften Einheit skalieren (z. B. Material, Versand pro Einheit).",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Preis pro Einheit",
+            "meaning": "Der Verkaufspreis einer Einheit. Muss größer sein als die variablen Kosten pro Einheit, damit ein Break-Even-Punkt existiert.",
+            "unit": "Währung"
+          },
+          {
+            "symbol": "Zielgewinn",
+            "meaning": "Ein optionales Gewinnziel über das reine Break-Even hinaus. Wenn angegeben, meldet das Tool auch die dafür benötigten Einheiten und den Umsatz.",
+            "unit": "Währung"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Preis auf oder unter den variablen Kosten",
+            "description": "Wenn der Preis pro Einheit die variablen Kosten pro Einheit nicht übersteigt, verliert jede verkaufte Einheit Geld, statt zu den Fixkosten beizutragen — es gibt kein Verkaufsvolumen, das jemals die Gewinnschwelle erreichen würde, daher gibt das Tool einen \"NO_BREAK_EVEN\"-Fehler zurück statt einer unmöglichen oder unendlichen Stückzahl."
+          },
+          {
+            "title": "Negative Fixkosten oder variable Kosten",
+            "description": "Fixkosten und variable Kosten pro Einheit müssen beide null oder größer sein — ein negativer Wert für eines von beiden entspricht keiner realen Kostenstruktur, daher lehnt das Tool ihn mit einem \"INVALID_FIXED_COSTS\"- oder \"INVALID_COST\"-Fehler vor der Berechnung ab."
+          },
+          {
+            "title": "Break-Even-Einheiten werden immer aufgerundet",
+            "description": "Fällt der genaue Break-Even-Punkt auf eine gebrochene Stückzahl (wie 33,3), rundet das Tool auf 34 auf statt auf 33 ab — da 33 volle Einheiten die Fixkosten nicht ganz decken würden, erreicht das Unternehmen erst bei der nächsten ganzen Einheit tatsächlich die Gewinnschwelle."
+          },
+          {
+            "title": "Zielgewinn ist optional und führt standardmäßig zu keiner zusätzlichen Berechnung",
+            "description": "Wird kein Zielgewinn angegeben (oder ist er null oder negativ), werden die Felder für Zielgewinn-Einheiten und -Umsatz einfach als 0 zurückgegeben — das Tool führt die zusätzliche Zielgewinnberechnung nur durch, wenn ein tatsächlich positives Gewinnziel angegeben wird."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was genau ist der Deckungsbeitrag, und warum ist er hier so wichtig?",
+            "answer": "Der Deckungsbeitrag ist das, was vom Verkaufspreis jeder Einheit übrig bleibt, nachdem die eigenen variablen Kosten dieser Einheit gedeckt sind — es ist der Betrag, den jeder Verkauf zur Tilgung der volumenunabhängigen Fixkosten \"beiträgt\". Jede Break-Even- und Zielgewinnberechnung in diesem Tool teilt im Grunde nur eine Kostenzahl durch diese eine Zahl."
+          },
+          {
+            "question": "Warum gibt es keinen Break-Even-Punkt, wenn der Preis unter den variablen Kosten liegt?",
+            "answer": "Wenn jede Einheit mehr kostet, sie herzustellen oder zu liefern, als sie einbringt, verliert jeder zusätzliche Verkauf Geld, statt zur Deckung der Fixkosten beizutragen — eine Erhöhung des Volumens macht die Gesamtverluste in dieser Situation größer, nicht kleiner, daher gibt es keine Stückzahl, die jemals die Gewinnschwelle erreichen würde."
+          },
+          {
+            "question": "Warum wird die Break-Even-Stückzahl aufgerundet statt auf die nächste ganze Zahl gerundet?",
+            "answer": "Eine gebrochene Einheit kann tatsächlich nicht verkauft werden — wenn die Berechnung sagt, dass Sie 33,3 Einheiten brauchen, um die Fixkosten genau zu decken, lässt der Verkauf von nur 33 vollen Einheiten Sie knapp unter der Deckung. Das Aufrunden auf 34 garantiert, dass das Unternehmen seine Fixkosten tatsächlich gedeckt hat, auch wenn dies zu etwas mehr Gewinn führt als ein wörtlicher Break-Even bei 33,3 Einheiten."
+          },
+          {
+            "question": "Wie unterscheidet sich die Zielgewinnberechnung von der einfachen Break-Even-Berechnung?",
+            "answer": "Es ist dieselbe Formel mit einer Änderung: Statt nur die Fixkosten durch den Deckungsbeitrag zu teilen, werden die Fixkosten plus der Zielgewinn durch den Deckungsbeitrag geteilt. Konzeptionell ist das Erreichen eines bestimmten Gewinnziels genau wie zusätzliche \"Fixkosten\" zu decken — das Gewinnziel — zusätzlich zu den echten Kosten."
+          }
+        ]
+      },
+      "fuel-cost-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Kraftstoffkostenrechner: wie Verbrauchs- und Effizienz-Ratenmodi beide den Kraftstoffverbrauch und die Fahrtkosten berechnen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Zwei Ratenmodi, ein Ergebnis",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ratenmodi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Verbrauchsmodus: Kraftstoffverbrauch = (Strecke / 100) × Rate  |  Effizienzmodus: Kraftstoffverbrauch = Strecke / Rate  |  Gesamtkosten = Kraftstoffverbrauch × Preis pro Einheit",
+          "note": "Kraftstoffeffizienz wird weltweit auf zwei verschiedene Arten beschrieben — als Verbrauch (wie viel Kraftstoff pro 100 Streckeneinheiten, wie L/100km) oder als Effizienz (wie viel Strecke pro Kraftstoffeinheit, wie mi/gal) — und dieses Tool akzeptiert beides, wobei je nach gewähltem Modus die passende Formel verwendet wird."
+        },
+        "flowchart": {
+          "intro": "Der einzige wirkliche Unterschied zwischen den beiden Ratenmodi ist, welche Formel die Rate in Kraftstoffverbrauch umwandelt — alles danach ist identisch.",
+          "steps": [
+            "Prüfen, dass Strecke, Rate und Preis pro Einheit alle endliche Zahlen größer als null sind",
+            "Wenn der Ratenmodus Verbrauch ist: die Strecke durch 100 teilen und mit der Rate multiplizieren, da Verbrauch pro 100 Streckeneinheiten definiert ist",
+            "Wenn der Ratenmodus Effizienz ist: die Strecke direkt durch die Rate teilen, da Effizienz als zurückgelegte Strecke pro Kraftstoffeinheit definiert ist",
+            "Den Kraftstoffverbrauch mit dem Preis pro Einheit multiplizieren, um die Gesamtfahrtkosten zu erhalten",
+            "Die Gesamtkosten durch die Strecke teilen, um die Kosten pro Streckeneinheit zu erhalten, eine Zahl, die nützlich ist, um Fahrten unterschiedlicher Länge zu vergleichen"
+          ],
+          "caption": "Der einzige Verzweigungsschritt (welche Formel die Rate in Kraftstoffverbrauch umwandelt), gefolgt von der gemeinsamen Kostenberechnung."
+        },
+        "anatomy": {
+          "intro": "Verbrauch und Effizienz sind nur zwei verschiedene Arten, dieselbe Rate zu beschreiben — ein Auto, das 8 L pro 100 km verbraucht, ist mathematisch identisch mit einem, das 12,5 km pro L zurücklegt, und beide Modi stimmen exakt im Kraftstoffverbrauch für dieselbe Fahrt überein.",
+          "labelConsumption": "Verbrauchsmodus (8 L/100km)",
+          "labelEfficiency": "Effizienzmodus (12,5 km/L)",
+          "caption": "Für eine 300-km-Fahrt liefern die Eingabe der Rate als 8 L/100km (Verbrauch) oder als äquivalente 12,5 km/L (Effizienz) beide exakt 24 L Kraftstoffverbrauch."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Strecke",
+            "meaning": "Die Länge der Fahrt.",
+            "unit": "Streckeneinheiten"
+          },
+          {
+            "symbol": "Ratenmodus",
+            "meaning": "Ob die Kraftstoffrate als Verbrauch (Kraftstoff pro 100 Streckeneinheiten) oder Effizienz (Strecke pro Kraftstoffeinheit) angegeben wird.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Ratenwert",
+            "meaning": "Die Kraftstoffrate des Fahrzeugs, interpretiert gemäß dem gewählten Ratenmodus.",
+            "unit": "Abhängig vom Modus"
+          },
+          {
+            "symbol": "Preis pro Einheit",
+            "meaning": "Der Preis einer Kraftstoffeinheit.",
+            "unit": "Währung"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Strecke, Rate oder Preis von null oder weniger",
+            "description": "Eine Fahrt braucht eine positive Strecke, eine positive Kraftstoffrate und einen positiven Kraftstoffpreis, damit die Berechnung sinnvoll ist — ein Wert von null oder negativ für eines der drei gibt einen entsprechenden \"invalid-distance\"-, \"invalid-rate\"- oder \"invalid-price\"-Fehler zurück, statt Kosten von null oder negativ."
+          },
+          {
+            "title": "Die beiden Ratenmodi verwenden invertierte Formeln",
+            "description": "Verbrauch und Effizienz beschreiben Kraftstoffwirtschaftlichkeit in entgegengesetzten Richtungen (Kraftstoff-pro-Strecke gegenüber Strecke-pro-Kraftstoff), daher benötigen sie wirklich unterschiedliche Formeln — der Verbrauchsmodus multipliziert mit der Rate, während der Effizienzmodus durch sie dividiert. Die Eingabe derselben Ratenzahl im falschen Modus führt zu einem sehr unterschiedlichen, falschen Ergebnis."
+          },
+          {
+            "title": "Nicht endliche Eingabewerte",
+            "description": "Wenn eine der drei numerischen Eingaben keine endliche Zahl ist (zum Beispiel durch ein nicht parsbares Eingabefeld), wird dies wie ein ungültiger Wert für dieses Feld behandelt und der entsprechende Fehler zurückgegeben, statt NaN in die Ergebnisse zu übertragen."
+          },
+          {
+            "title": "Kosten pro Streckeneinheit sind abgeleitet, nicht eingegeben",
+            "description": "Die Kosten-pro-Strecke-Zahl ist keine separate Eingabe — sie wird immer berechnet, indem die Gesamtfahrtkosten durch die Strecke geteilt werden, was sie direkt vergleichbar macht über Fahrten unterschiedlicher Länge mit demselben Fahrzeug und Kraftstoffpreis."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was ist der Unterschied zwischen Verbrauchsmodus und Effizienzmodus?",
+            "answer": "Es sind zwei Konventionen zur Beschreibung derselben zugrunde liegenden Kraftstoffwirtschaftlichkeit. Der Verbrauchsmodus (üblich in den meisten Teilen der Welt) fragt, wie viel Kraftstoff pro 100 Streckeneinheiten verbraucht wird — eine niedrigere Zahl ist besser. Der Effizienzmodus (üblich in den USA) fragt, wie viel Strecke pro Kraftstoffeinheit zurückgelegt wird — eine höhere Zahl ist besser. Wählen Sie, was zur Angabe der Kraftstoffwirtschaftlichkeit Ihres Fahrzeugs passt."
+          },
+          {
+            "question": "Wie rechne ich zwischen Verbrauch und Effizienz um, wenn die Angabe meines Fahrzeugs im jeweils anderen Format ist?",
+            "answer": "Die beiden sind mathematische Kehrwerte, skaliert um 100: Effizienz = 100 / Verbrauch, und Verbrauch = 100 / Effizienz. Zum Beispiel entspricht 8 L/100km 100/8 = 12,5 km/L, und dieses Tool liefert den identischen Kraftstoffverbrauchswert, in welchem Modus Sie ihn auch eingeben, solange Sie zuerst korrekt umrechnen."
+          },
+          {
+            "question": "Warum meldet das Tool Kosten pro Streckeneinheit zusätzlich zu den Gesamtkosten?",
+            "answer": "Die Gesamtkosten sagen Ihnen nur, was eine bestimmte Fahrt gekostet hat — die Kosten pro Streckeneinheit sind eine normalisierte Zahl, mit der Sie die Kraftstoffkosten von Fahrten unterschiedlicher Länge vergleichen können, oder vergleichen können, wie sich eine Änderung des Kraftstoffpreises oder der Fahrzeugeffizienz auf Ihre typischen Fahrkosten auswirkt, unabhängig davon, wie weit eine einzelne Fahrt zufällig ist."
+          },
+          {
+            "question": "Kann ich dies für etwas anderes als ein Auto verwenden, wie ein Boot oder einen Generator?",
+            "answer": "Ja — die Berechnung hängt nur von einer Strecke (oder einem äquivalenten Nutzungsmaß), einer Kraftstoffrate und einem Kraftstoffpreis ab, daher funktioniert sie für alles mit einer vergleichbaren Verbrauchs- oder Effizienzangabe, solange Sie \"Strecke\" als die Nutzungseinheit interpretieren, gegen die Ihre Rate definiert ist."
+          }
+        ]
+      },
+      "batch-invoice-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Sammelrechnungsrechner: wie die Positionen und Steuer jeder Rechnung summiert werden und wie mehrere gespeicherte Rechnungen zu einer laufenden Zusammenfassung aggregiert werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie einer Rechnung",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Berechnungsstufen",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Zwischensumme = Σ(Menge × Einzelpreis)  |  Gesamt = Zwischensumme × (1 + Steuer % / 100)  |  Sammelsumme = Σ(gespeicherte Rechnungsbeträge)",
+          "note": "Jede einzelne Rechnung wird auf dieselbe einfache Weise summiert — Positionen addieren sich zu einer Zwischensumme, dann wird Steuer obendrauf angewendet — und sobald eine Rechnung gespeichert ist, werden ihre bereits berechneten Summen zusammen mit jeder anderen gespeicherten Rechnung in eine laufende Sammelzusammenfassung eingerechnet."
+        },
+        "flowchart": {
+          "intro": "Es gibt zwei unterschiedliche Berechnungen: das Summieren der Positionen einer Rechnung und das Aggregieren mehrerer bereits summierter Rechnungen in eine laufende Zusammenfassung.",
+          "steps": [
+            "Für eine einzelne Rechnung: prüfen, dass mindestens eine Position existiert und jede Position eine positive Menge und einen nicht-negativen Einzelpreis hat",
+            "Für eine einzelne Rechnung: die Menge jeder Position mit ihrem Einzelpreis multiplizieren, um den Zeilenbetrag zu erhalten, dann alle Zeilen summieren, um die Zwischensumme zu erhalten",
+            "Für eine einzelne Rechnung: den Steuerprozentsatz auf die Zwischensumme anwenden, um den Steuerbetrag zu erhalten, dann addieren, um den Rechnungsbetrag zu erhalten",
+            "Sobald eine Rechnung gespeichert ist, werden ihre Zwischensumme, ihr Steuerbetrag und ihr Gesamtbetrag in eine laufende Sammelzusammenfassung addiert, statt von Grund auf neu berechnet zu werden",
+            "Die Sammelzusammenfassung verfolgt die Rechnungsanzahl und laufende Summen für Netto-vor-Steuer, Steuer und Gesamtsumme über alle gespeicherten Rechnungen"
+          ],
+          "caption": "Das Summieren pro Rechnung speist eine separate Aggregation der laufenden Zusammenfassung, sobald jede Rechnung gespeichert ist."
+        },
+        "anatomy": {
+          "intro": "Genau wie eine einzelne Rechnung ist jede gespeicherte Rechnung im Sammelvorgang einfach ihre Positions-Zwischensumme plus die auf diese Zwischensumme berechnete Steuer — die Sammelzusammenfassung ist nichts weiter als diese beiden Teile, summiert über jede gespeicherte Rechnung.",
+          "labelSubtotal": "Zwischensumme",
+          "labelTax": "Steuer (10 %)",
+          "totalLabel": "Gesamtbetrag einer Rechnung",
+          "caption": "Eine Positions-Zwischensumme von 250 $ mit 10 % Steuer fügt 25 $ hinzu, macht 275 $ Rechnungsbetrag — die Sammelzusammenfassung addiert dieses Muster einfach über jede gespeicherte Rechnung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Positionen",
+            "meaning": "Die Positionen der aktuellen Rechnung, jede mit Name, Menge und Einzelpreis.",
+            "unit": "Liste"
+          },
+          {
+            "symbol": "Steuerprozentsatz",
+            "meaning": "Der auf die Zwischensumme der aktuellen Rechnung angewendete Steuersatz.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Gespeicherte Rechnungen",
+            "meaning": "Zuvor abgeschlossene Rechnungen, deren Summen in die laufende Sammelzusammenfassung einfließen.",
+            "unit": "Liste"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Keine Positionen auf der aktuellen Rechnung",
+            "description": "Eine Rechnung braucht mindestens eine Position, um eine Zwischensumme zu berechnen — eine leere Positionsliste gibt einen \"no-line-items\"-Fehler zurück, statt eine Rechnung mit Nullwert."
+          },
+          {
+            "title": "Ungültige Menge oder Einzelpreis",
+            "description": "Jede Position braucht eine Menge größer als null und einen Einzelpreis von null oder mehr — eine Position, die eine dieser Regeln verletzt, gibt einen \"invalid-line-item\"-Fehler zurück, da eine Menge von null oder negativ oder ein negativer Preis keine sinnvolle Rechnungszeile ergeben würde."
+          },
+          {
+            "title": "Negativer Steuerprozentsatz",
+            "description": "Ein Steuersatz unter null entspricht keinem realen Steuerszenario — das Tool gibt einen \"invalid-tax\"-Fehler für einen negativen Steuerprozentsatz zurück, statt einen Gesamtbetrag zu berechnen, der niedriger ist als die Zwischensumme."
+          },
+          {
+            "title": "Die Sammelzusammenfassung enthält nur gespeicherte Rechnungen",
+            "description": "Die laufende Summe, Steuersumme und Gesamtsumme spiegeln nur tatsächlich gespeicherte Rechnungen wider — die aktuell entworfene Rechnung zählt nicht zur Sammelzusammenfassung, bis sie explizit gespeichert wird, sodass die Zusammenfassung immer eine konsistente, abgeschlossene Menge von Rechnungen widerspiegelt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wie unterscheidet sich das vom einfachen Rechnungsgenerator?",
+            "answer": "Der Rechnungsgenerator erstellt eine vollständige, detaillierte Rechnung mit einem optionalen Rabattschritt. Dieses Tool ist für die Erstellung mehrerer Rechnungen hintereinander und die Verfolgung ihrer kombinierten Summen konzipiert — jede Rechnung wird immer noch auf dieselbe grundlegende Weise summiert (Zwischensumme plus Steuer), aber der Fokus liegt hier auf der laufenden Sammelzusammenfassung über viele gespeicherte Rechnungen statt auf einem einzelnen detaillierten Dokument."
+          },
+          {
+            "question": "Aktualisiert die Bearbeitung einer bereits gespeicherten Rechnung automatisch die Sammelzusammenfassung?",
+            "answer": "Die Sammelzusammenfassung wird direkt aus der Liste der gespeicherten Rechnungen erstellt, sodass jede gespeicherte Rechnung ihre Summen zum Zeitpunkt der Speicherung widerspiegelt — die Zusammenfassung wird aus dieser gespeicherten Liste neu berechnet, was bedeutet, dass sie immer konsistent mit den aktuell als gespeichert markierten Rechnungen bleibt."
+          },
+          {
+            "question": "Kann eine Position einen Einzelpreis von 0 $ haben?",
+            "answer": "Ja — ein Einzelpreis von genau null wird akzeptiert (nützlich für einen kostenlosen Artikel oder eine Werbezeile), da nur ein negativer Einzelpreis abgelehnt wird. Die Menge muss jedoch strikt größer als null sein, da eine Position mindestens den Verkauf einer Einheit von etwas darstellen muss."
+          },
+          {
+            "question": "Warum verfolgt die Sammelzusammenfassung \"Netto vor Steuer\" getrennt von der Gesamtsumme?",
+            "answer": "Die Trennung der Vorsteuersumme von der Gesamtsumme (die Steuer einschließt) macht es möglich zu sehen, wie viel des kombinierten Umsatzes über alle Rechnungen hinweg tatsächlicher Verkaufswert ist gegenüber wie viel im Namen einer Steuerbehörde eingezogene Steuer ist — eine Unterscheidung, die für die Buchhaltung und Steuerberichterstattung wichtig ist."
+          }
+        ]
       }
     }
   }

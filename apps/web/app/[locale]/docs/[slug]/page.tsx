@@ -35,6 +35,14 @@ import VectorCalculatorDocsPage, { getVectorCalculatorTocItems } from "@/compone
 import GraphingCalculatorDocsPage, { getGraphingCalculatorTocItems } from "@/components/docs/graphing-calculator/GraphingCalculatorDocsPage";
 import NotepadCalculatorDocsPage, { getNotepadCalculatorTocItems } from "@/components/docs/notepad-calculator/NotepadCalculatorDocsPage";
 import MultiplicationTableGeneratorDocsPage, { getMultiplicationTableGeneratorTocItems } from "@/components/docs/multiplication-table-generator/MultiplicationTableGeneratorDocsPage";
+import TipCalculatorDocsPage, { getTipCalculatorTocItems } from "@/components/docs/tip-calculator/TipCalculatorDocsPage";
+import DiscountCalculatorDocsPage, { getDiscountCalculatorTocItems } from "@/components/docs/discount-calculator/DiscountCalculatorDocsPage";
+import SalesTaxCalculatorDocsPage, { getSalesTaxCalculatorTocItems } from "@/components/docs/sales-tax-calculator/SalesTaxCalculatorDocsPage";
+import InvoiceGeneratorDocsPage, { getInvoiceGeneratorTocItems } from "@/components/docs/invoice-generator/InvoiceGeneratorDocsPage";
+import InventoryValuationCalculatorDocsPage, { getInventoryValuationCalculatorTocItems } from "@/components/docs/inventory-valuation-calculator/InventoryValuationCalculatorDocsPage";
+import BreakEvenCalculatorDocsPage, { getBreakEvenCalculatorTocItems } from "@/components/docs/break-even-calculator/BreakEvenCalculatorDocsPage";
+import FuelCostCalculatorDocsPage, { getFuelCostCalculatorTocItems } from "@/components/docs/fuel-cost-calculator/FuelCostCalculatorDocsPage";
+import BatchInvoiceCalculatorDocsPage, { getBatchInvoiceCalculatorTocItems } from "@/components/docs/batch-invoice-calculator/BatchInvoiceCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -200,6 +208,38 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "multiplication-table-generator":
       content = <MultiplicationTableGeneratorDocsPage />;
       tocItems = await getMultiplicationTableGeneratorTocItems();
+      break;
+    case "tip-calculator":
+      content = <TipCalculatorDocsPage />;
+      tocItems = await getTipCalculatorTocItems();
+      break;
+    case "discount-calculator":
+      content = <DiscountCalculatorDocsPage />;
+      tocItems = await getDiscountCalculatorTocItems();
+      break;
+    case "sales-tax-calculator":
+      content = <SalesTaxCalculatorDocsPage />;
+      tocItems = await getSalesTaxCalculatorTocItems();
+      break;
+    case "invoice-generator":
+      content = <InvoiceGeneratorDocsPage />;
+      tocItems = await getInvoiceGeneratorTocItems();
+      break;
+    case "inventory-valuation-calculator":
+      content = <InventoryValuationCalculatorDocsPage />;
+      tocItems = await getInventoryValuationCalculatorTocItems();
+      break;
+    case "break-even-calculator":
+      content = <BreakEvenCalculatorDocsPage />;
+      tocItems = await getBreakEvenCalculatorTocItems();
+      break;
+    case "fuel-cost-calculator":
+      content = <FuelCostCalculatorDocsPage />;
+      tocItems = await getFuelCostCalculatorTocItems();
+      break;
+    case "batch-invoice-calculator":
+      content = <BatchInvoiceCalculatorDocsPage />;
+      tocItems = await getBatchInvoiceCalculatorTocItems();
       break;
   }
 

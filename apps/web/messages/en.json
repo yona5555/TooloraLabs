@@ -25035,6 +25035,832 @@
             "answer": "Every cell in the grid is the product of its row number and column number — along the diagonal, the row and column numbers are identical, so each of those cells is simply that number multiplied by itself, i.e. its square (1×1, 2×2, 3×3, and so on)."
           }
         ]
+      },
+      "tip-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Tip Calculator: how the tip and per-person split are computed, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of the Total",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rounding Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Tip = Bill × (Tip % / 100)  |  Total = Bill + Tip  |  Per Person = Total / People",
+          "note": "The whole calculation is three simple steps chained together — a percentage of the bill, added back to the bill, then split evenly — with an optional rounding step that changes how the final split lands on a whole number."
+        },
+        "flowchart": {
+          "intro": "The core math never changes, but an optional rounding step at the end can shift where the tip amount actually ends up.",
+          "steps": [
+            "Multiply the bill amount by the tip percentage to get the raw tip amount",
+            "Add the tip to the bill to get the total amount",
+            "Divide the total by the number of people to get the raw per-person share",
+            "If round-up-per-person is off, round the per-person share to the nearest cent",
+            "If round-up-per-person is on, round each person's share up to the next whole currency unit, and recompute the total and tip amount from that rounded share so everything stays consistent"
+          ],
+          "caption": "The shared bill-to-tip-to-split pipeline, with the optional rounding step branching at the end."
+        },
+        "anatomy": {
+          "intro": "The total a group pays is simply the original bill plus the tip on top of it — the tip is always a fraction of the bill, never calculated any other way.",
+          "labelBill": "Bill",
+          "labelTip": "Tip",
+          "totalLabel": "Total (bill + 20% tip)",
+          "caption": "An $80 bill with a 20% tip adds $16, for a $96 total — the tip is always a straightforward percentage of the bill."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Bill Amount",
+            "meaning": "The pre-tip total being split.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Tip Percent",
+            "meaning": "What percentage of the bill to add as a tip.",
+            "unit": "%"
+          },
+          {
+            "symbol": "People",
+            "meaning": "How many people are splitting the total. Automatically treated as at least 1.",
+            "unit": "Count"
+          },
+          {
+            "symbol": "Round Up Per Person",
+            "meaning": "When enabled, rounds each person's share up to the next whole currency unit instead of the nearest cent, so no one owes an awkward fraction.",
+            "unit": "Boolean"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fewer than one person",
+            "description": "The number of people splitting the bill is always treated as at least 1 — a zero or negative value can't meaningfully divide a total, so the tool silently floors it at 1 rather than producing an error or a division by zero."
+          },
+          {
+            "title": "Round-up-per-person changes the tip, not just the split",
+            "description": "When rounding up is enabled, each person's share is rounded up first, then the total and tip amount are recalculated from that rounded share — this means the displayed tip amount can be slightly larger than a straight percentage calculation, since the rounding is absorbed into the tip rather than left as unaccounted change."
+          },
+          {
+            "title": "A tip percentage of zero is valid",
+            "description": "Entering 0 for the tip percentage doesn't error — it simply returns a tip amount of zero and a total equal to the bill, which is a legitimate (if unusual) input for this tool."
+          },
+          {
+            "title": "Values are rounded to the nearest cent",
+            "description": "Every currency value in the result — bill, tip, total, and per-person amounts — is rounded to two decimal places, preventing floating-point artifacts like 15.000000000000002 from appearing in the displayed result."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why would I round up per person instead of splitting evenly to the cent?",
+            "answer": "Splitting a bill evenly can produce an awkward amount like $19.97 per person, which is inconvenient to pay in cash or with a card that doesn't handle fractional cents cleanly — rounding each person's share up to the next whole unit makes the payment simpler, with the small rounding difference absorbed into the total tip rather than left as change someone has to track."
+          },
+          {
+            "question": "Does the tool support splitting a tip unevenly, like by what each person ordered?",
+            "answer": "No — this tool assumes an even split of the total (bill plus tip) across everyone, which is the standard approach for a shared bill. For itemized splitting by what each person ordered, you'd need to calculate each person's subtotal separately before applying a tip percentage."
+          },
+          {
+            "question": "What happens if I leave the tip percentage at 0%?",
+            "answer": "The calculation still runs normally — the tip amount comes out to zero, and the total is simply the bill amount split evenly across the people, which can be useful if you just want to divide a bill without adding a tip at all."
+          },
+          {
+            "question": "Why does the per-person total sometimes not divide evenly from the total shown?",
+            "answer": "Each currency value is independently rounded to the nearest cent, so on rare occasions the sum of all the rounded per-person amounts can differ from the rounded total by a cent or two — this is standard rounding behavior for splitting money and isn't a calculation error."
+          }
+        ]
+      },
+      "discount-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Discount Calculator: how stacked discounts and reverse (find-the-original-price) mode work, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of the Final Price",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Apply mode: Final = Original × (1 − d₁/100) × (1 − d₂/100) × ...  |  Reverse mode: Original = Final / (1 − rate/100)",
+          "note": "Apply mode multiplies the original price by a shrinking factor for each discount in sequence — stacked discounts compound rather than simply add together. Reverse mode runs the single-discount version of that formula backward to recover the original price from a known sale price."
+        },
+        "flowchart": {
+          "intro": "Which direction the calculation runs depends on the mode — apply mode walks forward from a known original price through one or more discounts, while reverse mode walks backward from a known final price through a single discount rate.",
+          "steps": [
+            "Check which mode is selected: apply (starting from an original price) or reverse (starting from a known final price)",
+            "In apply mode: clamp each discount percentage to between 0 and 100, then multiply the running price by (1 − rate/100) once per discount, in sequence",
+            "In reverse mode: clamp the discount rate to at most 99.99% (to avoid dividing by zero), then divide the final price by (1 − rate/100) to recover the original price",
+            "Compute the amount saved as the difference between the original and final price",
+            "Compute the effective discount percentage as the total amount saved divided by the original price — this is the single rate that would produce the same saving as all the stacked discounts combined"
+          ],
+          "caption": "The two mirror-image paths this tool takes, both built from the same underlying percentage-reduction formula."
+        },
+        "anatomy": {
+          "intro": "A discounted price and the amount saved always add back up to the original price — the final price and the savings are just two ways of splitting the same original amount.",
+          "labelFinal": "Final Price",
+          "labelSaved": "Saved",
+          "totalLabel": "Original Price ($100, 30% off)",
+          "caption": "A $100 item with a 30% discount splits into a $70 final price and $30 in savings — the two always sum back to the original price."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to apply discounts to a known original price, or reverse-engineer the original price from a known final price.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Original Price",
+            "meaning": "The starting price before any discount, used only in apply mode.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Final Price",
+            "meaning": "The known sale price after the discount, used only in reverse mode.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Discounts",
+            "meaning": "One or more discount percentages. In apply mode, all of them are applied in sequence (stacked); in reverse mode, only the first is used.",
+            "unit": "% (list)"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Stacked discounts compound, not add",
+            "description": "Two 20% discounts applied in apply mode don't combine into a 40% discount — the second 20% is taken off the already-discounted price, so the combined effect is closer to 36% off, since each discount multiplies the remaining price rather than adding to a running percentage."
+          },
+          {
+            "title": "Reverse mode caps the discount rate below 100%",
+            "description": "A 100% discount would mean the item was free, making it mathematically impossible to recover a non-zero original price by dividing — the tool clamps the reverse-mode discount rate to at most 99.99% to avoid dividing by zero or a negative number."
+          },
+          {
+            "title": "Discount percentages are clamped to 0–100 in apply mode",
+            "description": "A negative discount or one above 100% doesn't make sense as a price reduction — each discount in apply mode is clamped into the 0–100 range before being applied, protecting against a price increase or a negative resulting price."
+          },
+          {
+            "title": "Non-numeric discount entries are silently dropped",
+            "description": "If the discounts list contains a value that isn't a finite number, it's filtered out before any calculation runs, rather than causing the whole calculation to fail — only valid numeric discount entries are applied."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why don't two 20% discounts add up to 40% off?",
+            "answer": "Each discount in apply mode is applied to the price as it stands after the previous discount, not to the original price — the second 20% is calculated on an already-reduced price, so it removes a smaller absolute amount than the first 20% did. The combined effect of two stacked 20% discounts works out to 36% off the original price, not 40%."
+          },
+          {
+            "question": "What's the difference between the effective discount percentage and the sum of the stacked discounts?",
+            "answer": "The effective discount percentage is the single overall rate that describes how much cheaper the final price is compared to the original — it accounts for the compounding effect of stacked discounts, so it will always be somewhat less than simply adding the individual discount percentages together."
+          },
+          {
+            "question": "How does reverse mode figure out the original price from just the sale price?",
+            "answer": "It runs the discount formula backward: if the final price is the original multiplied by (1 − rate), then dividing the final price by (1 − rate) undoes that multiplication and recovers the original price — this only works with a single discount rate, since reversing multiple stacked discounts from just the final price alone isn't mathematically possible without knowing each individual rate."
+          },
+          {
+            "question": "Why is reverse mode limited to a maximum discount rate of 99.99%?",
+            "answer": "The reverse-mode formula divides by (1 − rate/100) — at exactly 100%, that denominator becomes zero, which is undefined, and the calculation would try to imply an original price that was infinitely large for a $0 sale price. Capping the rate just below 100% keeps the division mathematically valid."
+          }
+        ]
+      },
+      "sales-tax-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Sales Tax Calculator: how tax is added to a price or backed out of a tax-inclusive total, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Tax-Inclusive Total",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Add mode: Total = Price × (1 + Rate/100)  |  Reverse mode: Price = Total / (1 + Rate/100)",
+          "note": "Both modes use the same underlying relationship between a pre-tax price and a tax-inclusive total — add mode multiplies forward from a known price, while reverse mode divides backward from a known total to recover the price it was built from."
+        },
+        "flowchart": {
+          "intro": "The direction of the calculation depends entirely on which value you already know — a pre-tax price, or a tax-inclusive total like a receipt amount.",
+          "steps": [
+            "Clamp the tax rate to zero or above, since a negative tax rate isn't meaningful",
+            "Check which mode is selected: add (starting from a pre-tax price) or reverse (starting from a known tax-inclusive total)",
+            "In add mode: multiply the price by the tax rate to get the tax amount, then add it to the price to get the total",
+            "In reverse mode: divide the known total by (1 + rate/100) to recover the pre-tax price",
+            "In reverse mode: subtract the recovered price from the total to get the tax amount that was embedded in it"
+          ],
+          "caption": "The two directions this tool can run in, both built from the same price-to-total relationship."
+        },
+        "anatomy": {
+          "intro": "A tax-inclusive total is always just the pre-tax price plus the tax amount sitting on top of it — the two pieces always add back up to the total shown on a receipt.",
+          "labelPrice": "Pre-Tax Price",
+          "labelTax": "Tax",
+          "totalLabel": "Tax-Inclusive Total (8.5% rate)",
+          "caption": "A $100 pre-tax price with an 8.5% tax rate adds $8.50 in tax, for a $108.50 total — the two pieces always sum back to the receipt total."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to add tax to a known pre-tax price, or back the pre-tax price out of a known tax-inclusive total.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Price",
+            "meaning": "The pre-tax price, used only in add mode.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Total Price",
+            "meaning": "The known tax-inclusive total (e.g. a receipt amount), used only in reverse mode.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Tax Rate",
+            "meaning": "The sales tax rate to apply or back out.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Negative tax rate is clamped to zero",
+            "description": "A tax rate below zero doesn't correspond to any real tax scenario — the tool clamps any negative input to 0 before calculating, rather than producing a total lower than the pre-tax price."
+          },
+          {
+            "title": "A tax rate of zero is valid",
+            "description": "Entering 0% doesn't cause an error — add mode simply returns a tax amount of zero and a total equal to the price, and reverse mode returns the total unchanged as the price, which correctly reflects a tax-free scenario."
+          },
+          {
+            "title": "Reverse mode divides rather than subtracts a percentage",
+            "description": "A common mistake is subtracting the tax rate directly from the total (e.g. taking 8.5% off $108.50), which gives the wrong answer — because the tax rate applies to the pre-tax price, not the total, reverse mode correctly divides the total by (1 + rate/100) instead."
+          },
+          {
+            "title": "Values are rounded to the nearest cent",
+            "description": "Every currency value in the result — price, tax amount, and total — is rounded to two decimal places, preventing floating-point artifacts from appearing in the displayed result."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why can't I just subtract the tax percentage from the total to get the pre-tax price?",
+            "answer": "Because the tax rate is a percentage of the pre-tax price, not of the total — subtracting 8.5% of $108.50 directly would remove too much, since that 8.5% should be calculated against a smaller base (the pre-tax price itself). Dividing the total by (1 + rate/100) correctly undoes the original multiplication and recovers the exact pre-tax price."
+          },
+          {
+            "question": "When would I use reverse mode instead of add mode?",
+            "answer": "Reverse mode is useful when you only have the final, tax-inclusive number — like a total on a receipt or a listed price that already includes tax — and you need to know how much of that was the pre-tax price versus the tax itself, for example when itemizing a business expense."
+          },
+          {
+            "question": "What happens if I enter a negative tax rate?",
+            "answer": "The tool doesn't reject it outright, but it clamps the rate to zero before calculating, since a negative sales tax isn't a real-world scenario this tool is designed to model — the result will be identical to entering a 0% tax rate."
+          },
+          {
+            "question": "Does this tool handle combined state and local tax rates?",
+            "answer": "Yes, as long as you combine them into a single rate before entering it — for example, if your state rate is 6% and your local rate is 2.5%, you'd enter 8.5% as the tax rate, since the tool applies whatever single percentage you provide."
+          }
+        ]
+      },
+      "invoice-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Invoice Generator: how line items, a discount, and tax combine into a final total, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of an Invoice Total",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Calculation Stages",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Subtotal = Σ(quantity × unit price)  |  Taxable = Subtotal − Discount  |  Total = Taxable + Tax",
+          "note": "An invoice total is built in a fixed sequence of four stages — line items sum to a subtotal, a discount is taken off that subtotal, tax is calculated on what's left, and the tax is added back on top — with the discount applied before tax, not after."
+        },
+        "flowchart": {
+          "intro": "The four stages always run in the same order, and each one depends on the result of the stage before it.",
+          "steps": [
+            "Validate every line item: a non-empty description, a positive quantity, and a non-negative unit price",
+            "Multiply each line item's quantity by its unit price to get that line's total, then sum every line to get the subtotal",
+            "Apply the discount percentage to the subtotal to get the discount amount, then subtract it to get the taxable amount",
+            "Apply the tax rate to the taxable amount (not the original subtotal) to get the tax amount",
+            "Add the tax amount to the taxable amount to get the final invoice total"
+          ],
+          "caption": "The fixed four-stage pipeline every invoice passes through, discount first and tax calculated on the discounted amount."
+        },
+        "anatomy": {
+          "intro": "The final total an invoice shows is always the taxable amount (subtotal after discount) plus the tax calculated on that already-discounted amount — never tax on the original, pre-discount subtotal.",
+          "labelTaxable": "Taxable Amount",
+          "labelTax": "Tax",
+          "totalLabel": "Invoice Total (after 10% discount, 10% tax)",
+          "caption": "A $100 subtotal with a 10% discount leaves a $90 taxable amount; 10% tax on that $90 adds $9, for a $99 total — tax is calculated after the discount, not before."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Items",
+            "meaning": "The invoice's line items, each with a description, quantity, and unit price.",
+            "unit": "List"
+          },
+          {
+            "symbol": "Tax Rate",
+            "meaning": "The tax percentage applied to the taxable amount (subtotal after discount).",
+            "unit": "%"
+          },
+          {
+            "symbol": "Discount Percent",
+            "meaning": "An optional percentage taken off the subtotal before tax is calculated. Defaults to 0 if omitted.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Currency",
+            "meaning": "The currency code shown on the invoice. Defaults to USD if omitted.",
+            "unit": "Currency code"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "No line items",
+            "description": "An invoice needs at least one line item to have anything to total — an empty items list returns an \"EMPTY_ITEMS\" error rather than a zero-value invoice."
+          },
+          {
+            "title": "Invalid line item",
+            "description": "Every line item needs a non-empty description, a quantity greater than zero, and a unit price of zero or more — a line item missing any of these returns an \"INVALID_ITEM\" error, since a blank description or a negative price or quantity wouldn't produce a meaningful invoice line."
+          },
+          {
+            "title": "Discount applied before tax, not after",
+            "description": "Tax is calculated on the taxable amount (subtotal minus discount), not on the original subtotal — this matches standard invoicing practice, where a customer is taxed on what they actually end up paying before tax, not on the pre-discount list price."
+          },
+          {
+            "title": "Discount percent must be between 0 and 100",
+            "description": "A discount percentage outside the 0–100 range doesn't correspond to a valid discount — a negative discount would increase the price, and one above 100% would make the taxable amount negative, so the tool returns an \"INVALID_DISCOUNT\" error for either case."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the discount applied before tax instead of after?",
+            "answer": "This matches how invoicing normally works: a customer pays tax on the amount they're actually being charged after any discount, not on the original list price before the discount. Calculating tax on the pre-discount subtotal would overcharge the customer for tax on money they never actually paid."
+          },
+          {
+            "question": "What happens if I don't specify a discount?",
+            "answer": "The discount percentage defaults to 0 if you leave it out, which means the taxable amount simply equals the subtotal — the invoice still calculates correctly, just without a discount stage having any effect."
+          },
+          {
+            "question": "Why does an invoice need at least one line item?",
+            "answer": "An invoice with zero line items has nothing to total — there's no subtotal, no taxable amount, and no meaningful invoice to generate, so the tool treats an empty item list as an error condition rather than silently producing a $0 invoice."
+          },
+          {
+            "question": "Can a line item have a unit price of $0?",
+            "answer": "Yes — a unit price of exactly zero is valid (useful for a free line item or a promotional inclusion), since only a negative unit price is rejected. A negative quantity or a zero quantity is rejected too, since a line item needs to represent at least one unit of something."
+          }
+        ]
+      },
+      "inventory-valuation-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Inventory Valuation Calculator: how FIFO, LIFO, and weighted-average costing are computed from purchase batches, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Three Costing Methods, One Sale",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Costing Methods",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "FIFO: sell the oldest batches first  |  LIFO: sell the newest batches first  |  Weighted Average: cost = total cost purchased / total units purchased",
+          "note": "All three methods answer the same question — of the units sold, which specific purchase cost do they represent? — but they draw down the purchase batches in a different order, which changes both the cost of goods sold and the value of what's left in inventory."
+        },
+        "flowchart": {
+          "intro": "All three costing methods start from the same list of purchase batches and the same units-sold count; they differ only in the order batches are drawn down (or whether they're pooled together at all).",
+          "steps": [
+            "Sum every batch's quantity and cost to get the total units and total cost purchased for the item",
+            "For FIFO: draw down units sold from the oldest batch first, moving to newer batches only once an older one is exhausted",
+            "For LIFO: draw down units sold from the newest batch first, moving to older batches only once a newer one is exhausted",
+            "For weighted average: compute one blended cost per unit (total cost ÷ total units), and apply that same cost to both the units sold and the units remaining",
+            "For each method, whatever units weren't drawn down remain as the ending inventory, valued at that method's per-unit cost"
+          ],
+          "caption": "The same purchase batches and units-sold count, run through three different drawdown orders to produce three different valuations."
+        },
+        "anatomy": {
+          "intro": "For an item bought in two batches at rising prices (100 units at $5, then 100 units at $8) with 120 units sold, each costing method leaves a different amount of value in the remaining 80 units.",
+          "labelFifo": "FIFO Ending Value",
+          "labelLifo": "LIFO Ending Value",
+          "labelWac": "Weighted-Avg Ending Value",
+          "caption": "FIFO leaves the newer, pricier stock in inventory ($640); LIFO leaves the older, cheaper stock ($400); weighted average blends the two ($520) — same sale, three different valuations."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Items",
+            "meaning": "The inventory items to value, each with its own purchase batches.",
+            "unit": "List"
+          },
+          {
+            "symbol": "Batches",
+            "meaning": "An item's purchase lots, ordered oldest first — each with a quantity and a unit cost. This is the layered history FIFO and LIFO draw down from.",
+            "unit": "List"
+          },
+          {
+            "symbol": "Units Sold",
+            "meaning": "How many units of the item were sold this period, drawn down against the batches above. Optional; defaults to 0.",
+            "unit": "Count"
+          },
+          {
+            "symbol": "Reorder Threshold",
+            "meaning": "An optional stock level below which the item is flagged as low stock.",
+            "unit": "Count"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "No items or missing batches",
+            "description": "Every item needs at least one purchase batch to have any cost basis to value — an empty item list, or an item with no batches, returns an \"EMPTY_ITEMS\" or \"INVALID_ITEM\" error rather than a valuation of zero."
+          },
+          {
+            "title": "Units sold exceeding units purchased",
+            "description": "You can't sell more units than were ever purchased — if the entered units-sold figure is greater than the total units purchased across all batches, it's silently capped at the total purchased, rather than producing negative ending inventory."
+          },
+          {
+            "title": "FIFO and LIFO produce identical results at a flat unit cost",
+            "description": "When every batch of an item has the same unit cost, the drawdown order doesn't matter — FIFO, LIFO, and weighted average all produce the same cost of goods sold and ending value, since there's no price variation between batches for the order to affect."
+          },
+          {
+            "title": "Low-stock flag only applies when a threshold is set",
+            "description": "An item is only flagged as below its reorder threshold if a threshold was actually provided — an item with no reorder threshold set is never flagged as low stock, regardless of how few units remain."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do FIFO and LIFO give different inventory values for the exact same purchases and sales?",
+            "answer": "They differ only in which batch's cost gets assigned to the units sold versus the units remaining. FIFO assumes the oldest (first-purchased) units are sold first, leaving the newest purchases in ending inventory; LIFO assumes the opposite. When purchase costs change over time, this assumption changes which cost — old or new — ends up attached to what's left on the shelf."
+          },
+          {
+            "question": "Which costing method should I use?",
+            "answer": "This depends on your accounting standards and jurisdiction — FIFO is widely required or preferred (and is the only option permitted under IFRS), while LIFO is allowed in some jurisdictions like the US and can reduce reported taxable income during periods of rising prices. Weighted average is often used when individual batches aren't practically trackable. This is a calculation tool, not accounting advice — confirm which method applies to your situation."
+          },
+          {
+            "question": "Why does the weighted-average method ignore the order of the batches?",
+            "answer": "Weighted average deliberately treats all purchased units as indistinguishable — it blends every batch's cost into a single average cost per unit (total cost divided by total units), and applies that same blended cost regardless of which specific batch a sold unit conceptually came from. This is why it's the only one of the three methods where batch order has no effect on the result."
+          },
+          {
+            "question": "What happens if I don't enter a reorder threshold?",
+            "answer": "The item simply isn't checked for low-stock status — the reorder threshold is entirely optional, and an item without one set will never appear in the low-stock count, regardless of how many or how few units remain in ending inventory."
+          }
+        ]
+      },
+      "break-even-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Break-Even Point Calculator: how the break-even unit count and revenue are derived from costs and price, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Where Revenue Crosses Cost",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Outputs",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Contribution Margin = Price − Variable Cost  |  Break-Even Units = Fixed Costs / Contribution Margin",
+          "note": "Every unit sold contributes its selling price minus its variable cost toward covering the fixed costs — once enough units have been sold for that contribution to add up to the fixed costs, every additional unit sold is pure profit."
+        },
+        "flowchart": {
+          "intro": "The break-even point and the units needed for a target profit both come from the same contribution margin — a target profit is really just a break-even calculation with extra costs to cover.",
+          "steps": [
+            "Subtract the variable cost per unit from the price per unit to get the contribution margin per unit — how much each sale actually contributes toward covering fixed costs",
+            "Divide the fixed costs by the contribution margin per unit, rounding up to a whole number, to get the break-even unit count",
+            "Multiply the break-even unit count by the price per unit to get the break-even revenue",
+            "Divide the contribution margin by the price to get the contribution margin ratio, expressed as a percentage",
+            "If a target profit was given, add it to the fixed costs and divide by the contribution margin (rounding up) to get the units needed to reach that specific profit level, not just break even"
+          ],
+          "caption": "The single contribution-margin calculation that drives both the break-even point and the optional target-profit calculation."
+        },
+        "anatomy": {
+          "intro": "As more units are sold, total revenue grows faster than total cost (since cost includes a fixed portion that doesn't scale with volume) — the two lines start apart and cross exactly at the break-even point.",
+          "labelRevenue": "Revenue",
+          "labelCost": "Total Cost",
+          "labelBreakEven": "Break-even (30 units)",
+          "caption": "With $900 in fixed costs, a $20 variable cost, and a $50 price, revenue and total cost cross at exactly 30 units — selling fewer means a loss, selling more means a profit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Fixed Costs",
+            "meaning": "Costs that stay the same regardless of how many units are sold (e.g. rent, salaries) for the period being analyzed.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Variable Cost Per Unit",
+            "meaning": "The cost that scales with each additional unit sold (e.g. materials, per-unit shipping).",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Price Per Unit",
+            "meaning": "The selling price of one unit. Must be greater than the variable cost per unit for a break-even point to exist.",
+            "unit": "Currency"
+          },
+          {
+            "symbol": "Target Profit",
+            "meaning": "An optional profit goal beyond simply breaking even. When provided, the tool also reports the units and revenue needed to reach it.",
+            "unit": "Currency"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Price at or below variable cost",
+            "description": "If the price per unit doesn't exceed the variable cost per unit, every unit sold loses money rather than contributing toward fixed costs — there's no volume of sales that would ever break even, so the tool returns a \"NO_BREAK_EVEN\" error instead of an impossible or infinite unit count."
+          },
+          {
+            "title": "Negative fixed costs or variable cost",
+            "description": "Fixed costs and variable cost per unit must both be zero or greater — a negative value for either doesn't correspond to a real cost structure, so the tool rejects it with an \"INVALID_FIXED_COSTS\" or \"INVALID_COST\" error before calculating."
+          },
+          {
+            "title": "Break-even units always rounds up",
+            "description": "If the exact break-even point falls at a fractional number of units (like 33.3), the tool rounds up to 34 rather than down to 33 — since 33 full units wouldn't quite cover the fixed costs, the business only truly breaks even once it reaches the next whole unit."
+          },
+          {
+            "title": "Target profit is optional and defaults to no extra calculation",
+            "description": "If no target profit is provided (or it's zero or negative), the target-profit units and revenue fields are simply returned as 0 — the tool only performs the extra target-profit calculation when a genuinely positive profit goal is given."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What exactly is the contribution margin, and why does it matter so much here?",
+            "answer": "The contribution margin is what's left from each unit's selling price after covering that unit's own variable cost — it's the amount each sale \"contributes\" toward paying off the fixed costs that don't depend on volume. Every break-even and target-profit calculation in this tool is really just dividing a cost figure by this one number."
+          },
+          {
+            "question": "Why is there no break-even point if the price is below the variable cost?",
+            "answer": "If each unit costs more to produce or deliver than it sells for, every additional sale loses money rather than helping cover fixed costs — increasing volume in that situation makes total losses larger, not smaller, so there's no number of units that would ever reach break-even."
+          },
+          {
+            "question": "Why does the break-even unit count round up instead of to the nearest whole number?",
+            "answer": "A fractional unit can't actually be sold — if the math says you need 33.3 units to exactly cover fixed costs, selling only 33 whole units leaves you just short of covering them. Rounding up to 34 guarantees the business has genuinely covered its fixed costs, even though it results in slightly more profit than a literal break-even at 33.3 units would."
+          },
+          {
+            "question": "How is the target-profit calculation different from the plain break-even calculation?",
+            "answer": "It's the same formula with one change: instead of dividing just the fixed costs by the contribution margin, it divides the fixed costs plus the target profit by the contribution margin. Conceptually, reaching a specific profit goal is just like having extra \"fixed costs\" to cover — the profit target — on top of the real ones."
+          }
+        ]
+      },
+      "fuel-cost-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Fuel Cost Calculator: how consumption and efficiency rate modes both compute fuel used and trip cost, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Two Rate Modes, One Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rate Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Consumption mode: Fuel Used = (Distance / 100) × Rate  |  Efficiency mode: Fuel Used = Distance / Rate  |  Total Cost = Fuel Used × Price Per Unit",
+          "note": "Fuel efficiency is described two different ways around the world — as consumption (how much fuel per 100 distance units, like L/100km) or as efficiency (how much distance per unit of fuel, like mi/gal) — and this tool accepts either, using whichever formula matches the mode you select."
+        },
+        "flowchart": {
+          "intro": "The only real difference between the two rate modes is which formula converts the rate into fuel used — everything after that point is identical.",
+          "steps": [
+            "Validate that distance, rate, and price per unit are all finite numbers greater than zero",
+            "If rate mode is consumption: divide the distance by 100 and multiply by the rate, since consumption is defined per 100 distance units",
+            "If rate mode is efficiency: divide the distance directly by the rate, since efficiency is defined as distance covered per unit of fuel",
+            "Multiply the fuel used by the price per unit to get the total trip cost",
+            "Divide the total cost by the distance to get the cost per distance unit, a figure useful for comparing trips of different lengths"
+          ],
+          "caption": "The one branching step (which formula converts rate to fuel used) followed by the shared cost calculation."
+        },
+        "anatomy": {
+          "intro": "Consumption and efficiency are just two different ways of describing the exact same rate — a car using 8 L per 100 km is mathematically identical to one traveling 12.5 km per L, and both modes agree exactly on the fuel used for the same trip.",
+          "labelConsumption": "Consumption Mode (8 L/100km)",
+          "labelEfficiency": "Efficiency Mode (12.5 km/L)",
+          "caption": "For a 300 km trip, entering the rate as 8 L/100km (consumption) or as the equivalent 12.5 km/L (efficiency) both produce exactly 24 L of fuel used."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Distance",
+            "meaning": "The length of the trip.",
+            "unit": "Distance units"
+          },
+          {
+            "symbol": "Rate Mode",
+            "meaning": "Whether the fuel rate is given as consumption (fuel per 100 distance units) or efficiency (distance per unit of fuel).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Rate Value",
+            "meaning": "The vehicle's fuel rate, interpreted according to the selected rate mode.",
+            "unit": "Depends on mode"
+          },
+          {
+            "symbol": "Price Per Unit",
+            "meaning": "The price of one unit of fuel.",
+            "unit": "Currency"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Distance, rate, or price of zero or less",
+            "description": "A trip needs a positive distance, a positive fuel rate, and a positive fuel price for the calculation to mean anything — a zero or negative value for any of the three returns a corresponding \"invalid-distance\", \"invalid-rate\", or \"invalid-price\" error rather than a zero or negative cost."
+          },
+          {
+            "title": "The two rate modes use inverted formulas",
+            "description": "Consumption and efficiency describe fuel economy in opposite directions (fuel-per-distance versus distance-per-fuel), so they require genuinely different formulas — consumption mode multiplies by the rate, while efficiency mode divides by it. Entering the same rate number in the wrong mode will produce a very different, incorrect result."
+          },
+          {
+            "title": "Non-finite input values",
+            "description": "Any of the three numeric inputs failing to be a finite number (for example, from an unparseable input field) is treated the same as an invalid value for that field, returning the corresponding error rather than propagating NaN into the results."
+          },
+          {
+            "title": "Cost per distance unit is derived, not entered",
+            "description": "The cost-per-distance figure isn't a separate input — it's always calculated by dividing the total trip cost by the distance, making it directly comparable across trips of different lengths using the same vehicle and fuel price."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What's the difference between consumption mode and efficiency mode?",
+            "answer": "They're two conventions for describing the same underlying fuel economy. Consumption mode (common in most of the world) asks how much fuel is used per 100 units of distance — a lower number is better. Efficiency mode (common in the US) asks how much distance is covered per unit of fuel — a higher number is better. Pick whichever matches how your vehicle's fuel economy is listed."
+          },
+          {
+            "question": "How do I convert between consumption and efficiency if my vehicle's rating is in the other format?",
+            "answer": "The two are mathematical reciprocals scaled by 100: efficiency = 100 / consumption, and consumption = 100 / efficiency. For example, 8 L/100km converts to 100/8 = 12.5 km/L, and this tool will produce the identical fuel-used figure whichever mode you enter it in, as long as you convert correctly first."
+          },
+          {
+            "question": "Why does the tool report cost per distance unit in addition to total cost?",
+            "answer": "Total cost only tells you what one specific trip cost — cost per distance unit is a normalized figure that lets you compare the fuel expense of trips with different lengths, or compare how a change in fuel price or vehicle efficiency affects your typical cost of driving, independent of how far any single trip happens to be."
+          },
+          {
+            "question": "Can I use this for something other than a car, like a boat or a generator?",
+            "answer": "Yes — the calculation only depends on a distance (or equivalent usage measure), a fuel rate, and a fuel price, so it works for anything with a comparable consumption or efficiency rating, as long as you interpret \"distance\" as whatever unit of usage your rate is defined against."
+          }
+        ]
+      },
+      "batch-invoice-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Batch Invoice Calculator: how each invoice's line items and tax are totaled, and how multiple saved invoices are aggregated into a running summary, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of One Invoice",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Calculation Stages",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Subtotal = Σ(quantity × unit price)  |  Total = Subtotal × (1 + Tax % / 100)  |  Batch Total = Σ(saved invoice totals)",
+          "note": "Each individual invoice is totaled the same simple way — line items summed to a subtotal, then tax applied on top — and once an invoice is saved, its already-computed totals are folded into a running batch summary alongside every other saved invoice."
+        },
+        "flowchart": {
+          "intro": "There are two distinct calculations at play: totaling one invoice's line items, and aggregating multiple already-totaled invoices into a running summary.",
+          "steps": [
+            "For a single invoice: validate that at least one line item exists, and that every item has a positive quantity and a non-negative unit price",
+            "For a single invoice: multiply each item's quantity by its unit price to get that line's total, then sum all lines to get the subtotal",
+            "For a single invoice: apply the tax percentage to the subtotal to get the tax amount, then add it to get that invoice's total",
+            "Once an invoice is saved, its subtotal, tax amount, and total are added into a running batch summary rather than being recalculated from scratch",
+            "The batch summary tracks the invoice count and running totals for net-before-tax, tax, and grand total across every saved invoice"
+          ],
+          "caption": "Per-invoice totaling feeds into a separate running-summary aggregation once each invoice is saved."
+        },
+        "anatomy": {
+          "intro": "Just like a single invoice, each saved invoice in the batch is simply its line-item subtotal plus the tax calculated on that subtotal — the batch summary is nothing more than these two pieces, summed across every saved invoice.",
+          "labelSubtotal": "Subtotal",
+          "labelTax": "Tax (10%)",
+          "totalLabel": "One Invoice's Total",
+          "caption": "A $250 line-item subtotal with 10% tax adds $25, for a $275 invoice total — the batch summary simply adds this pattern up across every saved invoice."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Line Items",
+            "meaning": "The current invoice's items, each with a name, quantity, and unit price.",
+            "unit": "List"
+          },
+          {
+            "symbol": "Tax Percent",
+            "meaning": "The tax rate applied to the current invoice's subtotal.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Saved Invoices",
+            "meaning": "Previously completed invoices whose totals feed into the running batch summary.",
+            "unit": "List"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "No line items on the current invoice",
+            "description": "An invoice needs at least one line item to calculate a subtotal — an empty line-item list returns a \"no-line-items\" error rather than a zero-value invoice."
+          },
+          {
+            "title": "Invalid quantity or unit price",
+            "description": "Every line item needs a quantity greater than zero and a unit price of zero or more — a line item violating either rule returns an \"invalid-line-item\" error, since a zero or negative quantity, or a negative price, wouldn't produce a meaningful invoice line."
+          },
+          {
+            "title": "Negative tax percentage",
+            "description": "A tax rate below zero doesn't correspond to a real tax scenario — the tool returns an \"invalid-tax\" error for a negative tax percentage rather than calculating a total lower than the subtotal."
+          },
+          {
+            "title": "The batch summary only includes saved invoices",
+            "description": "The running total, tax total, and grand total only reflect invoices that have actually been saved — the invoice currently being drafted doesn't count toward the batch summary until it's explicitly saved, so the summary always reflects a consistent, finalized set of invoices."
+          }
+        ],
+        "faq": [
+          {
+            "question": "How is this different from the plain Invoice Generator?",
+            "answer": "The Invoice Generator produces one complete, itemized invoice with an optional discount step. This tool is built for creating several invoices in a row and tracking their combined totals — each invoice still totals the same basic way (subtotal plus tax), but the focus here is on the running batch summary across many saved invoices rather than a single detailed document."
+          },
+          {
+            "question": "Does editing an already-saved invoice update the batch summary automatically?",
+            "answer": "The batch summary is built directly from the list of saved invoices, so any saved invoice reflects its totals at the moment it was saved — the summary recalculates from that saved list, meaning it always stays consistent with whatever invoices are currently marked as saved."
+          },
+          {
+            "question": "Can a line item have a $0 unit price?",
+            "answer": "Yes — a unit price of exactly zero is accepted (useful for a free item or a promotional line), since only a negative unit price is rejected. The quantity, however, must be strictly greater than zero, since a line item needs to represent selling at least one unit of something."
+          },
+          {
+            "question": "Why does the batch summary track \"net before tax\" separately from the grand total?",
+            "answer": "Separating the pre-tax total from the grand total (which includes tax) makes it possible to see how much of the combined revenue across all invoices is actual sales value versus how much is tax collected on behalf of a tax authority — a distinction that matters for bookkeeping and tax reporting."
+          }
+        ]
       }
     }
   }

@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FuelInputPanel from "./FuelInputPanel";
 import FuelResult from "./FuelResult";
 import FuelQuickReference from "./FuelQuickReference";
@@ -71,6 +72,7 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="fuel-cost-calculator" />
               <FuelQuickReference />
             </div>
           }

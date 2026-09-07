@@ -25035,6 +25035,832 @@
             "answer": "Cada celda de la cuadrícula es el producto de su número de fila y su número de columna; a lo largo de la diagonal, el número de fila y columna son idénticos, así que cada una de esas celdas es simplemente ese número multiplicado por sí mismo, es decir, su cuadrado (1×1, 2×2, 3×3, y así sucesivamente)."
           }
         ]
+      },
+      "tip-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Propinas: cómo se calculan la propina y el reparto por persona, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía del total",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos de redondeo",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Propina = Cuenta × (% de propina / 100)  |  Total = Cuenta + Propina  |  Por persona = Total / Personas",
+          "note": "Todo el cálculo son tres pasos simples encadenados: un porcentaje de la cuenta, sumado de nuevo a la cuenta, y luego repartido equitativamente, con un paso de redondeo opcional que cambia dónde termina cayendo el reparto final sobre un número entero."
+        },
+        "flowchart": {
+          "intro": "La aritmética principal nunca cambia, pero un paso de redondeo opcional al final puede desplazar dónde termina exactamente el monto de la propina.",
+          "steps": [
+            "Multiplicar el monto de la cuenta por el porcentaje de propina para obtener el monto bruto de la propina",
+            "Sumar la propina a la cuenta para obtener el monto total",
+            "Dividir el total entre el número de personas para obtener la parte bruta por persona",
+            "Si el redondeo por persona está desactivado, redondear la parte por persona al centavo más cercano",
+            "Si el redondeo por persona está activado, redondear la parte de cada persona hacia arriba a la siguiente unidad de moneda entera, y recalcular el total y el monto de la propina a partir de esa parte redondeada para que todo permanezca consistente"
+          ],
+          "caption": "El proceso compartido de cuenta a propina a reparto, con el paso de redondeo opcional ramificándose al final."
+        },
+        "anatomy": {
+          "intro": "El total que paga un grupo es simplemente la cuenta original más la propina añadida encima; la propina siempre es una fracción de la cuenta, nunca calculada de otra manera.",
+          "labelBill": "Cuenta",
+          "labelTip": "Propina",
+          "totalLabel": "Total (cuenta + 20% de propina)",
+          "caption": "Una cuenta de $80 con una propina del 20% añade $16, para un total de $96; la propina siempre es un porcentaje directo de la cuenta."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Monto de la Cuenta",
+            "meaning": "El total antes de propina que se va a repartir.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Porcentaje de Propina",
+            "meaning": "Qué porcentaje de la cuenta añadir como propina.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Personas",
+            "meaning": "Cuántas personas están repartiendo el total. Se trata automáticamente como al menos 1.",
+            "unit": "Cantidad"
+          },
+          {
+            "symbol": "Redondear por Persona",
+            "meaning": "Cuando está activado, redondea la parte de cada persona hacia arriba a la siguiente unidad de moneda entera en lugar del centavo más cercano, para que nadie deba una fracción incómoda.",
+            "unit": "Booleano"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Menos de una persona",
+            "description": "El número de personas que reparten la cuenta siempre se trata como al menos 1; un valor cero o negativo no puede dividir un total de forma significativa, así que la herramienta lo fija silenciosamente en 1 en lugar de producir un error o una división entre cero."
+          },
+          {
+            "title": "El redondeo por persona cambia la propina, no solo el reparto",
+            "description": "Cuando el redondeo hacia arriba está activado, la parte de cada persona se redondea primero, luego el total y el monto de la propina se recalculan a partir de esa parte redondeada; esto significa que el monto de propina mostrado puede ser ligeramente mayor que un cálculo de porcentaje directo, ya que el redondeo se absorbe en la propina en lugar de quedar como cambio sin contabilizar."
+          },
+          {
+            "title": "Un porcentaje de propina de cero es válido",
+            "description": "Ingresar 0 para el porcentaje de propina no genera error; simplemente devuelve un monto de propina de cero y un total igual a la cuenta, lo cual es una entrada legítima (aunque inusual) para esta herramienta."
+          },
+          {
+            "title": "Los valores se redondean al centavo más cercano",
+            "description": "Cada valor monetario en el resultado —cuenta, propina, total y montos por persona— se redondea a dos decimales, evitando que artefactos de punto flotante como 15.000000000000002 aparezcan en el resultado mostrado."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué redondearía hacia arriba por persona en lugar de repartir equitativamente al centavo?",
+            "answer": "Repartir una cuenta equitativamente puede producir un monto incómodo como $19.97 por persona, lo cual es inconveniente de pagar en efectivo o con una tarjeta que no maneja bien fracciones de centavo; redondear la parte de cada persona hacia arriba a la siguiente unidad entera hace que el pago sea más simple, con la pequeña diferencia de redondeo absorbida en la propina total en lugar de quedar como cambio que alguien debe llevar cuenta."
+          },
+          {
+            "question": "¿La herramienta admite repartir una propina de forma desigual, según lo que pidió cada persona?",
+            "answer": "No; esta herramienta asume un reparto equitativo del total (cuenta más propina) entre todos, que es el enfoque estándar para una cuenta compartida. Para un reparto detallado según lo que pidió cada persona, tendría que calcular el subtotal de cada persona por separado antes de aplicar un porcentaje de propina."
+          },
+          {
+            "question": "¿Qué ocurre si dejo el porcentaje de propina en 0%?",
+            "answer": "El cálculo sigue funcionando con normalidad; el monto de propina resulta en cero, y el total es simplemente el monto de la cuenta repartido equitativamente entre las personas, lo cual puede ser útil si solo quiere dividir una cuenta sin añadir ninguna propina."
+          },
+          {
+            "question": "¿Por qué a veces el total por persona no se divide exactamente del total mostrado?",
+            "answer": "Cada valor monetario se redondea de forma independiente al centavo más cercano, así que en raras ocasiones la suma de todos los montos por persona redondeados puede diferir del total redondeado por uno o dos centavos; este es un comportamiento de redondeo estándar al repartir dinero y no un error de cálculo."
+          }
+        ]
+      },
+      "discount-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Descuentos: cómo funcionan los descuentos apilados y el modo inverso (encontrar el precio original), las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía del precio final",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Modo aplicar: Final = Original × (1 − d₁/100) × (1 − d₂/100) × ...  |  Modo inverso: Original = Final / (1 − tasa/100)",
+          "note": "El modo aplicar multiplica el precio original por un factor decreciente para cada descuento en secuencia; los descuentos apilados se combinan multiplicativamente en lugar de simplemente sumarse. El modo inverso ejecuta la versión de un solo descuento de esa fórmula hacia atrás para recuperar el precio original a partir de un precio de venta conocido."
+        },
+        "flowchart": {
+          "intro": "La dirección en la que se ejecuta el cálculo depende del modo: el modo aplicar avanza desde un precio original conocido a través de uno o más descuentos, mientras que el modo inverso retrocede desde un precio final conocido a través de una sola tasa de descuento.",
+          "steps": [
+            "Comprobar qué modo está seleccionado: aplicar (partiendo de un precio original) o inverso (partiendo de un precio final conocido)",
+            "En modo aplicar: acotar cada porcentaje de descuento entre 0 y 100, luego multiplicar el precio en curso por (1 − tasa/100) una vez por cada descuento, en secuencia",
+            "En modo inverso: acotar la tasa de descuento a un máximo de 99.99% (para evitar dividir entre cero), luego dividir el precio final entre (1 − tasa/100) para recuperar el precio original",
+            "Calcular el monto ahorrado como la diferencia entre el precio original y el final",
+            "Calcular el porcentaje de descuento efectivo como el monto total ahorrado dividido entre el precio original; esta es la tasa única que produciría el mismo ahorro que todos los descuentos apilados combinados"
+          ],
+          "caption": "Las dos rutas especulares que sigue esta herramienta, ambas construidas a partir de la misma fórmula subyacente de reducción porcentual."
+        },
+        "anatomy": {
+          "intro": "Un precio descontado y el monto ahorrado siempre vuelven a sumar el precio original; el precio final y el ahorro son solo dos formas de dividir el mismo monto original.",
+          "labelFinal": "Precio Final",
+          "labelSaved": "Ahorrado",
+          "totalLabel": "Precio Original ($100, 30% de descuento)",
+          "caption": "Un artículo de $100 con un 30% de descuento se divide en un precio final de $70 y $30 de ahorro; ambos siempre vuelven a sumar el precio original."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Modo",
+            "meaning": "Si se aplican descuentos a un precio original conocido, o se calcula el precio original a partir de un precio final conocido.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Precio Original",
+            "meaning": "El precio inicial antes de cualquier descuento, usado solo en modo aplicar.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Precio Final",
+            "meaning": "El precio de venta conocido después del descuento, usado solo en modo inverso.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Descuentos",
+            "meaning": "Uno o más porcentajes de descuento. En modo aplicar, todos se aplican en secuencia (apilados); en modo inverso, solo se usa el primero.",
+            "unit": "% (lista)"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los descuentos apilados se combinan multiplicativamente, no se suman",
+            "description": "Dos descuentos del 20% aplicados en modo aplicar no se combinan en un descuento del 40%; el segundo 20% se resta del precio ya descontado, así que el efecto combinado es más cercano al 36% de descuento, ya que cada descuento multiplica el precio restante en lugar de sumarse a un porcentaje acumulado."
+          },
+          {
+            "title": "El modo inverso limita la tasa de descuento por debajo del 100%",
+            "description": "Un descuento del 100% significaría que el artículo era gratis, haciendo matemáticamente imposible recuperar un precio original distinto de cero al dividir; la herramienta acota la tasa de descuento del modo inverso a un máximo de 99.99% para evitar dividir entre cero o un número negativo."
+          },
+          {
+            "title": "Los porcentajes de descuento se acotan entre 0 y 100 en modo aplicar",
+            "description": "Un descuento negativo o uno superior al 100% no tiene sentido como reducción de precio; cada descuento en modo aplicar se acota al rango 0–100 antes de aplicarse, protegiendo contra un aumento de precio o un precio resultante negativo."
+          },
+          {
+            "title": "Las entradas de descuento no numéricas se descartan silenciosamente",
+            "description": "Si la lista de descuentos contiene un valor que no es un número finito, se filtra antes de que se ejecute cualquier cálculo, en lugar de hacer fallar todo el cálculo; solo se aplican las entradas de descuento numéricas válidas."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué dos descuentos del 20% no suman un 40% de descuento?",
+            "answer": "Cada descuento en modo aplicar se aplica al precio tal como está después del descuento anterior, no al precio original; el segundo 20% se calcula sobre un precio ya reducido, así que elimina un monto absoluto menor que el primer 20%. El efecto combinado de dos descuentos del 20% apilados resulta en un 36% de descuento sobre el precio original, no un 40%."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre el porcentaje de descuento efectivo y la suma de los descuentos apilados?",
+            "answer": "El porcentaje de descuento efectivo es la tasa única general que describe cuánto más barato es el precio final comparado con el original; tiene en cuenta el efecto de composición de los descuentos apilados, así que siempre será algo menor que simplemente sumar los porcentajes de descuento individuales."
+          },
+          {
+            "question": "¿Cómo averigua el modo inverso el precio original solo a partir del precio de venta?",
+            "answer": "Ejecuta la fórmula de descuento hacia atrás: si el precio final es el original multiplicado por (1 − tasa), entonces dividir el precio final entre (1 − tasa) deshace esa multiplicación y recupera el precio original; esto solo funciona con una sola tasa de descuento, ya que revertir varios descuentos apilados solo a partir del precio final no es matemáticamente posible sin conocer cada tasa individual."
+          },
+          {
+            "question": "¿Por qué el modo inverso está limitado a una tasa de descuento máxima del 99.99%?",
+            "answer": "La fórmula del modo inverso divide entre (1 − tasa/100); exactamente al 100%, ese denominador se vuelve cero, lo cual es indefinido, y el cálculo intentaría implicar un precio original infinitamente grande para un precio de venta de $0. Limitar la tasa justo por debajo del 100% mantiene la división matemáticamente válida."
+          }
+        ]
+      },
+      "sales-tax-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Impuesto sobre Ventas: cómo se añade el impuesto a un precio o se extrae de un total con impuesto incluido, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de un total con impuesto incluido",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Modo añadir: Total = Precio × (1 + Tasa/100)  |  Modo inverso: Precio = Total / (1 + Tasa/100)",
+          "note": "Ambos modos usan la misma relación subyacente entre un precio antes de impuesto y un total con impuesto incluido; el modo añadir multiplica hacia adelante desde un precio conocido, mientras que el modo inverso divide hacia atrás desde un total conocido para recuperar el precio del que se construyó."
+        },
+        "flowchart": {
+          "intro": "La dirección del cálculo depende completamente de qué valor ya conoce: un precio antes de impuesto, o un total con impuesto incluido como el monto de un recibo.",
+          "steps": [
+            "Acotar la tasa de impuesto a cero o más, ya que una tasa de impuesto negativa no tiene sentido",
+            "Comprobar qué modo está seleccionado: añadir (partiendo de un precio antes de impuesto) o inverso (partiendo de un total conocido con impuesto incluido)",
+            "En modo añadir: multiplicar el precio por la tasa de impuesto para obtener el monto del impuesto, luego sumarlo al precio para obtener el total",
+            "En modo inverso: dividir el total conocido entre (1 + tasa/100) para recuperar el precio antes de impuesto",
+            "En modo inverso: restar el precio recuperado del total para obtener el monto de impuesto que estaba incorporado en él"
+          ],
+          "caption": "Las dos direcciones en las que puede ejecutarse esta herramienta, ambas construidas a partir de la misma relación precio-a-total."
+        },
+        "anatomy": {
+          "intro": "Un total con impuesto incluido es siempre simplemente el precio antes de impuesto más el monto de impuesto añadido encima; las dos partes siempre vuelven a sumar el total mostrado en un recibo.",
+          "labelPrice": "Precio Antes de Impuesto",
+          "labelTax": "Impuesto",
+          "totalLabel": "Total con Impuesto Incluido (tasa 8.5%)",
+          "caption": "Un precio de $100 antes de impuesto con una tasa de impuesto del 8.5% añade $8.50 de impuesto, para un total de $108.50; las dos partes siempre vuelven a sumar el total del recibo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Modo",
+            "meaning": "Si se añade impuesto a un precio conocido antes de impuesto, o se calcula el precio antes de impuesto a partir de un total conocido con impuesto incluido.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Precio",
+            "meaning": "El precio antes de impuesto, usado solo en modo añadir.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Precio Total",
+            "meaning": "El total conocido con impuesto incluido (por ejemplo, un monto de recibo), usado solo en modo inverso.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Tasa de Impuesto",
+            "meaning": "La tasa de impuesto sobre ventas a aplicar o extraer.",
+            "unit": "%"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La tasa de impuesto negativa se acota a cero",
+            "description": "Una tasa de impuesto por debajo de cero no corresponde a ningún escenario fiscal real; la herramienta acota cualquier entrada negativa a 0 antes de calcular, en lugar de producir un total menor que el precio antes de impuesto."
+          },
+          {
+            "title": "Una tasa de impuesto de cero es válida",
+            "description": "Ingresar 0% no causa error; el modo añadir simplemente devuelve un monto de impuesto de cero y un total igual al precio, y el modo inverso devuelve el total sin cambios como el precio, lo cual refleja correctamente un escenario libre de impuestos."
+          },
+          {
+            "title": "El modo inverso divide en lugar de restar un porcentaje",
+            "description": "Un error común es restar la tasa de impuesto directamente del total (por ejemplo, quitar el 8.5% de $108.50), lo cual da una respuesta incorrecta; dado que la tasa de impuesto se aplica al precio antes de impuesto, no al total, el modo inverso divide correctamente el total entre (1 + tasa/100) en su lugar."
+          },
+          {
+            "title": "Los valores se redondean al centavo más cercano",
+            "description": "Cada valor monetario en el resultado —precio, monto de impuesto y total— se redondea a dos decimales, evitando que aparezcan artefactos de punto flotante en el resultado mostrado."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué no puedo simplemente restar el porcentaje de impuesto del total para obtener el precio antes de impuesto?",
+            "answer": "Porque la tasa de impuesto es un porcentaje del precio antes de impuesto, no del total; restar directamente el 8.5% de $108.50 eliminaría demasiado, ya que ese 8.5% debería calcularse contra una base menor (el propio precio antes de impuesto). Dividir el total entre (1 + tasa/100) deshace correctamente la multiplicación original y recupera el precio exacto antes de impuesto."
+          },
+          {
+            "question": "¿Cuándo usaría el modo inverso en lugar del modo añadir?",
+            "answer": "El modo inverso es útil cuando solo tiene el número final con impuesto incluido —como un total en un recibo o un precio listado que ya incluye impuesto— y necesita saber cuánto de eso era el precio antes de impuesto frente al impuesto mismo, por ejemplo al desglosar un gasto de negocio."
+          },
+          {
+            "question": "¿Qué ocurre si ingreso una tasa de impuesto negativa?",
+            "answer": "La herramienta no la rechaza directamente, pero acota la tasa a cero antes de calcular, ya que un impuesto sobre ventas negativo no es un escenario del mundo real que esta herramienta esté diseñada para modelar; el resultado será idéntico a ingresar una tasa de impuesto del 0%."
+          },
+          {
+            "question": "¿Esta herramienta maneja tasas de impuesto estatales y locales combinadas?",
+            "answer": "Sí, siempre que las combine en una sola tasa antes de ingresarla; por ejemplo, si su tasa estatal es del 6% y su tasa local es del 2.5%, ingresaría 8.5% como la tasa de impuesto, ya que la herramienta aplica cualquier porcentaje único que usted proporcione."
+          }
+        ]
+      },
+      "invoice-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Facturas: cómo se combinan las líneas de artículos, un descuento e impuesto en un total final, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía del total de una factura",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Etapas de Cálculo",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Subtotal = Σ(cantidad × precio unitario)  |  Gravable = Subtotal − Descuento  |  Total = Gravable + Impuesto",
+          "note": "El total de una factura se construye en una secuencia fija de cuatro etapas: las líneas de artículos se suman a un subtotal, se resta un descuento de ese subtotal, se calcula el impuesto sobre lo que queda, y el impuesto se añade encima; el descuento se aplica antes del impuesto, no después."
+        },
+        "flowchart": {
+          "intro": "Las cuatro etapas siempre se ejecutan en el mismo orden, y cada una depende del resultado de la etapa anterior.",
+          "steps": [
+            "Validar cada línea de artículo: una descripción no vacía, una cantidad positiva y un precio unitario no negativo",
+            "Multiplicar la cantidad de cada línea de artículo por su precio unitario para obtener el total de esa línea, luego sumar todas las líneas para obtener el subtotal",
+            "Aplicar el porcentaje de descuento al subtotal para obtener el monto del descuento, luego restarlo para obtener el monto gravable",
+            "Aplicar la tasa de impuesto al monto gravable (no al subtotal original) para obtener el monto del impuesto",
+            "Sumar el monto del impuesto al monto gravable para obtener el total final de la factura"
+          ],
+          "caption": "El proceso fijo de cuatro etapas por el que pasa cada factura, descuento primero e impuesto calculado sobre el monto ya descontado."
+        },
+        "anatomy": {
+          "intro": "El total final que muestra una factura es siempre el monto gravable (subtotal después del descuento) más el impuesto calculado sobre ese monto ya descontado; nunca impuesto sobre el subtotal original antes del descuento.",
+          "labelTaxable": "Monto Gravable",
+          "labelTax": "Impuesto",
+          "totalLabel": "Total de Factura (tras 10% de descuento, 10% de impuesto)",
+          "caption": "Un subtotal de $100 con un 10% de descuento deja un monto gravable de $90; el 10% de impuesto sobre esos $90 añade $9, para un total de $99; el impuesto se calcula después del descuento, no antes."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Artículos",
+            "meaning": "Las líneas de artículos de la factura, cada una con una descripción, cantidad y precio unitario.",
+            "unit": "Lista"
+          },
+          {
+            "symbol": "Tasa de Impuesto",
+            "meaning": "El porcentaje de impuesto aplicado al monto gravable (subtotal tras el descuento).",
+            "unit": "%"
+          },
+          {
+            "symbol": "Porcentaje de Descuento",
+            "meaning": "Un porcentaje opcional que se resta del subtotal antes de calcular el impuesto. Por defecto es 0 si se omite.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Moneda",
+            "meaning": "El código de moneda mostrado en la factura. Por defecto es USD si se omite.",
+            "unit": "Código de moneda"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Sin líneas de artículos",
+            "description": "Una factura necesita al menos una línea de artículo para tener algo que totalizar; una lista de artículos vacía devuelve un error \"EMPTY_ITEMS\" en lugar de una factura con valor cero."
+          },
+          {
+            "title": "Línea de artículo inválida",
+            "description": "Cada línea de artículo necesita una descripción no vacía, una cantidad mayor que cero y un precio unitario de cero o más; una línea de artículo a la que le falte alguno de estos devuelve un error \"INVALID_ITEM\", ya que una descripción en blanco o un precio o cantidad negativos no producirían una línea de factura significativa."
+          },
+          {
+            "title": "Descuento aplicado antes del impuesto, no después",
+            "description": "El impuesto se calcula sobre el monto gravable (subtotal menos descuento), no sobre el subtotal original; esto coincide con la práctica estándar de facturación, donde a un cliente se le cobra impuesto sobre lo que realmente termina pagando después de cualquier descuento, no sobre el precio de lista antes del descuento."
+          },
+          {
+            "title": "El porcentaje de descuento debe estar entre 0 y 100",
+            "description": "Un porcentaje de descuento fuera del rango 0–100 no corresponde a un descuento válido; un descuento negativo aumentaría el precio, y uno superior al 100% haría negativo el monto gravable, así que la herramienta devuelve un error \"INVALID_DISCOUNT\" en cualquiera de los dos casos."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué se aplica el descuento antes del impuesto en lugar de después?",
+            "answer": "Esto coincide con cómo funciona normalmente la facturación: un cliente paga impuesto sobre el monto que realmente se le está cobrando después de cualquier descuento, no sobre el precio de lista original antes del descuento. Calcular el impuesto sobre el subtotal antes del descuento cobraría de más al cliente por impuesto sobre dinero que nunca pagó realmente."
+          },
+          {
+            "question": "¿Qué ocurre si no especifico un descuento?",
+            "answer": "El porcentaje de descuento por defecto es 0 si lo omite, lo que significa que el monto gravable simplemente equivale al subtotal; la factura sigue calculándose correctamente, solo sin que la etapa de descuento tenga ningún efecto."
+          },
+          {
+            "question": "¿Por qué una factura necesita al menos una línea de artículo?",
+            "answer": "Una factura con cero líneas de artículos no tiene nada que totalizar; no hay subtotal, ni monto gravable, ni una factura significativa que generar, así que la herramienta trata una lista de artículos vacía como una condición de error en lugar de producir silenciosamente una factura de $0."
+          },
+          {
+            "question": "¿Puede una línea de artículo tener un precio unitario de $0?",
+            "answer": "Sí; un precio unitario de exactamente cero es válido (útil para un artículo gratuito o una inclusión promocional), ya que solo se rechaza un precio unitario negativo. Una cantidad negativa o una cantidad de cero también se rechaza, ya que una línea de artículo necesita representar al menos una unidad de algo."
+          }
+        ]
+      },
+      "inventory-valuation-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Valoración de Inventario: cómo se calculan los costos FIFO, LIFO y promedio ponderado a partir de lotes de compra, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Tres métodos de costeo, una venta",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Métodos de Costeo",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "FIFO: vender primero los lotes más antiguos  |  LIFO: vender primero los lotes más nuevos  |  Promedio Ponderado: costo = costo total comprado / unidades totales compradas",
+          "note": "Los tres métodos responden a la misma pregunta —de las unidades vendidas, ¿qué costo de compra específico representan?— pero agotan los lotes de compra en un orden diferente, lo que cambia tanto el costo de mercancías vendidas como el valor de lo que queda en inventario."
+        },
+        "flowchart": {
+          "intro": "Los tres métodos de costeo parten de la misma lista de lotes de compra y el mismo número de unidades vendidas; solo difieren en el orden en que se agotan los lotes (o si se agrupan en absoluto).",
+          "steps": [
+            "Sumar la cantidad y el costo de cada lote para obtener las unidades totales y el costo total comprado del artículo",
+            "Para FIFO: agotar las unidades vendidas primero del lote más antiguo, pasando a lotes más nuevos solo una vez que uno más antiguo se agota",
+            "Para LIFO: agotar las unidades vendidas primero del lote más nuevo, pasando a lotes más antiguos solo una vez que uno más nuevo se agota",
+            "Para promedio ponderado: calcular un costo mezclado por unidad (costo total ÷ unidades totales), y aplicar ese mismo costo tanto a las unidades vendidas como a las restantes",
+            "Para cada método, las unidades que no se agotaron permanecen como inventario final, valoradas al costo por unidad de ese método"
+          ],
+          "caption": "Los mismos lotes de compra y número de unidades vendidas, procesados a través de tres órdenes de agotamiento diferentes para producir tres valoraciones distintas."
+        },
+        "anatomy": {
+          "intro": "Para un artículo comprado en dos lotes a precios crecientes (100 unidades a $5, luego 100 unidades a $8) con 120 unidades vendidas, cada método de costeo deja una cantidad diferente de valor en las 80 unidades restantes.",
+          "labelFifo": "Valor Final FIFO",
+          "labelLifo": "Valor Final LIFO",
+          "labelWac": "Valor Final Promedio Ponderado",
+          "caption": "FIFO deja el stock más nuevo y caro en inventario ($640); LIFO deja el stock más antiguo y barato ($400); el promedio ponderado mezcla ambos ($520); la misma venta, tres valoraciones distintas."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Artículos",
+            "meaning": "Los artículos de inventario a valorar, cada uno con sus propios lotes de compra.",
+            "unit": "Lista"
+          },
+          {
+            "symbol": "Lotes",
+            "meaning": "Los lotes de compra de un artículo, ordenados del más antiguo primero; cada uno con una cantidad y un costo unitario. Este es el historial en capas del que agotan FIFO y LIFO.",
+            "unit": "Lista"
+          },
+          {
+            "symbol": "Unidades Vendidas",
+            "meaning": "Cuántas unidades del artículo se vendieron este período, agotadas contra los lotes anteriores. Opcional; por defecto 0.",
+            "unit": "Cantidad"
+          },
+          {
+            "symbol": "Umbral de Reorden",
+            "meaning": "Un nivel de stock opcional por debajo del cual el artículo se marca como bajo stock.",
+            "unit": "Cantidad"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Sin artículos o lotes faltantes",
+            "description": "Cada artículo necesita al menos un lote de compra para tener una base de costo que valorar; una lista de artículos vacía, o un artículo sin lotes, devuelve un error \"EMPTY_ITEMS\" o \"INVALID_ITEM\" en lugar de una valoración de cero."
+          },
+          {
+            "title": "Unidades vendidas superan a las unidades compradas",
+            "description": "No se pueden vender más unidades de las que se compraron alguna vez; si la cifra de unidades vendidas ingresada es mayor que el total de unidades compradas en todos los lotes, se limita silenciosamente al total comprado, en lugar de producir un inventario final negativo."
+          },
+          {
+            "title": "FIFO y LIFO producen resultados idénticos con un costo unitario plano",
+            "description": "Cuando cada lote de un artículo tiene el mismo costo unitario, el orden de agotamiento no importa; FIFO, LIFO y el promedio ponderado producen todos el mismo costo de mercancías vendidas y valor final, ya que no hay variación de precio entre lotes que el orden pueda afectar."
+          },
+          {
+            "title": "La marca de bajo stock solo aplica cuando se establece un umbral",
+            "description": "Un artículo solo se marca como por debajo de su umbral de reorden si se proporcionó realmente un umbral; un artículo sin umbral de reorden establecido nunca se marca como bajo stock, sin importar cuán pocas unidades queden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué FIFO y LIFO dan valores de inventario diferentes para exactamente las mismas compras y ventas?",
+            "answer": "Solo difieren en qué costo de lote se asigna a las unidades vendidas frente a las restantes. FIFO asume que las unidades más antiguas (compradas primero) se venden primero, dejando las compras más recientes en el inventario final; LIFO asume lo contrario. Cuando los costos de compra cambian con el tiempo, esta suposición cambia qué costo —viejo o nuevo— termina asociado a lo que queda en el estante."
+          },
+          {
+            "question": "¿Qué método de costeo debería usar?",
+            "answer": "Esto depende de sus estándares contables y jurisdicción; FIFO es ampliamente requerido o preferido (y es la única opción permitida bajo NIIF), mientras que LIFO está permitido en algunas jurisdicciones como EE. UU. y puede reducir el ingreso imponible reportado durante períodos de precios crecientes. El promedio ponderado se usa a menudo cuando los lotes individuales no son prácticamente rastreables. Esta es una herramienta de cálculo, no asesoría contable; confirme qué método aplica a su situación."
+          },
+          {
+            "question": "¿Por qué el método de promedio ponderado ignora el orden de los lotes?",
+            "answer": "El promedio ponderado trata deliberadamente todas las unidades compradas como indistinguibles; mezcla el costo de cada lote en un solo costo promedio por unidad (costo total dividido entre unidades totales), y aplica ese mismo costo mezclado sin importar de qué lote específico provino conceptualmente una unidad vendida. Por eso es el único de los tres métodos donde el orden de los lotes no tiene efecto en el resultado."
+          },
+          {
+            "question": "¿Qué ocurre si no ingreso un umbral de reorden?",
+            "answer": "El artículo simplemente no se verifica para el estado de bajo stock; el umbral de reorden es completamente opcional, y un artículo sin uno establecido nunca aparecerá en el conteo de bajo stock, sin importar cuántas o cuán pocas unidades queden en el inventario final."
+          }
+        ]
+      },
+      "break-even-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora del Punto de Equilibrio: cómo se derivan el número de unidades de equilibrio y el ingreso a partir de costos y precio, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Dónde el ingreso cruza el costo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Salidas",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Margen de Contribución = Precio − Costo Variable  |  Unidades de Equilibrio = Costos Fijos / Margen de Contribución",
+          "note": "Cada unidad vendida contribuye su precio de venta menos su costo variable hacia cubrir los costos fijos; una vez que se han vendido suficientes unidades para que esa contribución sume los costos fijos, cada unidad adicional vendida es ganancia pura."
+        },
+        "flowchart": {
+          "intro": "El punto de equilibrio y las unidades necesarias para una ganancia objetivo provienen ambos del mismo margen de contribución; una ganancia objetivo es en realidad solo un cálculo de equilibrio con costos adicionales que cubrir.",
+          "steps": [
+            "Restar el costo variable por unidad del precio por unidad para obtener el margen de contribución por unidad: cuánto contribuye realmente cada venta a cubrir los costos fijos",
+            "Dividir los costos fijos entre el margen de contribución por unidad, redondeando hacia arriba a un número entero, para obtener el número de unidades de equilibrio",
+            "Multiplicar el número de unidades de equilibrio por el precio por unidad para obtener el ingreso de equilibrio",
+            "Dividir el margen de contribución entre el precio para obtener la razón de margen de contribución, expresada como porcentaje",
+            "Si se proporcionó una ganancia objetivo, sumarla a los costos fijos y dividir entre el margen de contribución (redondeando hacia arriba) para obtener las unidades necesarias para alcanzar ese nivel de ganancia específico, no solo el equilibrio"
+          ],
+          "caption": "El único cálculo de margen de contribución que impulsa tanto el punto de equilibrio como el cálculo opcional de ganancia objetivo."
+        },
+        "anatomy": {
+          "intro": "A medida que se venden más unidades, el ingreso total crece más rápido que el costo total (ya que el costo incluye una porción fija que no escala con el volumen); las dos líneas comienzan separadas y se cruzan exactamente en el punto de equilibrio.",
+          "labelRevenue": "Ingreso",
+          "labelCost": "Costo Total",
+          "labelBreakEven": "Equilibrio (30 unidades)",
+          "caption": "Con $900 de costos fijos, un costo variable de $20 y un precio de $50, el ingreso y el costo total se cruzan exactamente en 30 unidades; vender menos significa pérdida, vender más significa ganancia."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Costos Fijos",
+            "meaning": "Costos que permanecen iguales sin importar cuántas unidades se vendan (por ejemplo, alquiler, salarios) para el período analizado.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Costo Variable por Unidad",
+            "meaning": "El costo que escala con cada unidad adicional vendida (por ejemplo, materiales, envío por unidad).",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Precio por Unidad",
+            "meaning": "El precio de venta de una unidad. Debe ser mayor que el costo variable por unidad para que exista un punto de equilibrio.",
+            "unit": "Moneda"
+          },
+          {
+            "symbol": "Ganancia Objetivo",
+            "meaning": "Una meta de ganancia opcional más allá de simplemente alcanzar el equilibrio. Cuando se proporciona, la herramienta también reporta las unidades y el ingreso necesarios para alcanzarla.",
+            "unit": "Moneda"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Precio igual o por debajo del costo variable",
+            "description": "Si el precio por unidad no supera el costo variable por unidad, cada unidad vendida pierde dinero en lugar de contribuir a los costos fijos; no existe ningún volumen de ventas que alguna vez alcance el equilibrio, así que la herramienta devuelve un error \"NO_BREAK_EVEN\" en lugar de un número de unidades imposible o infinito."
+          },
+          {
+            "title": "Costos fijos o costo variable negativos",
+            "description": "Los costos fijos y el costo variable por unidad deben ser ambos cero o mayores; un valor negativo para cualquiera de los dos no corresponde a una estructura de costos real, así que la herramienta lo rechaza con un error \"INVALID_FIXED_COSTS\" o \"INVALID_COST\" antes de calcular."
+          },
+          {
+            "title": "Las unidades de equilibrio siempre se redondean hacia arriba",
+            "description": "Si el punto de equilibrio exacto cae en un número fraccionario de unidades (como 33.3), la herramienta redondea hacia arriba a 34 en lugar de hacia abajo a 33; ya que 33 unidades completas no cubrirían del todo los costos fijos, el negocio solo alcanza verdaderamente el equilibrio una vez que llega a la siguiente unidad completa."
+          },
+          {
+            "title": "La ganancia objetivo es opcional y por defecto no implica cálculo adicional",
+            "description": "Si no se proporciona una ganancia objetivo (o es cero o negativa), los campos de unidades e ingreso de ganancia objetivo simplemente se devuelven como 0; la herramienta solo realiza el cálculo adicional de ganancia objetivo cuando se proporciona una meta de ganancia genuinamente positiva."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Qué es exactamente el margen de contribución, y por qué importa tanto aquí?",
+            "answer": "El margen de contribución es lo que queda del precio de venta de cada unidad después de cubrir el costo variable propio de esa unidad; es el monto que cada venta \"contribuye\" hacia pagar los costos fijos que no dependen del volumen. Cada cálculo de equilibrio y de ganancia objetivo en esta herramienta en realidad solo divide una cifra de costo entre este único número."
+          },
+          {
+            "question": "¿Por qué no hay punto de equilibrio si el precio está por debajo del costo variable?",
+            "answer": "Si cada unidad cuesta más producir o entregar de lo que se vende, cada venta adicional pierde dinero en lugar de ayudar a cubrir los costos fijos; aumentar el volumen en esa situación hace que las pérdidas totales sean mayores, no menores, así que no existe ningún número de unidades que alguna vez alcance el equilibrio."
+          },
+          {
+            "question": "¿Por qué el número de unidades de equilibrio se redondea hacia arriba en lugar de al número entero más cercano?",
+            "answer": "Una unidad fraccionaria no se puede vender realmente; si la matemática dice que necesita 33.3 unidades para cubrir exactamente los costos fijos, vender solo 33 unidades completas lo deja justo por debajo de cubrirlos. Redondear hacia arriba a 34 garantiza que el negocio realmente haya cubierto sus costos fijos, aunque resulte en algo más de ganancia que un equilibrio literal en 33.3 unidades."
+          },
+          {
+            "question": "¿En qué se diferencia el cálculo de ganancia objetivo del cálculo de equilibrio simple?",
+            "answer": "Es la misma fórmula con un cambio: en lugar de dividir solo los costos fijos entre el margen de contribución, divide los costos fijos más la ganancia objetivo entre el margen de contribución. Conceptualmente, alcanzar una meta de ganancia específica es como tener \"costos fijos\" adicionales que cubrir —la meta de ganancia— encima de los reales."
+          }
+        ]
+      },
+      "fuel-cost-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Costo de Combustible: cómo los modos de tasa de consumo y eficiencia calculan tanto el combustible usado como el costo del viaje, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Dos modos de tasa, un resultado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos de Tasa",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Modo consumo: Combustible Usado = (Distancia / 100) × Tasa  |  Modo eficiencia: Combustible Usado = Distancia / Tasa  |  Costo Total = Combustible Usado × Precio por Unidad",
+          "note": "La eficiencia de combustible se describe de dos formas distintas alrededor del mundo: como consumo (cuánto combustible por cada 100 unidades de distancia, como L/100km) o como eficiencia (cuánta distancia por unidad de combustible, como mi/gal); esta herramienta acepta cualquiera, usando la fórmula que coincide con el modo que seleccione."
+        },
+        "flowchart": {
+          "intro": "La única diferencia real entre los dos modos de tasa es qué fórmula convierte la tasa en combustible usado; todo lo que sigue después es idéntico.",
+          "steps": [
+            "Validar que la distancia, la tasa y el precio por unidad sean todos números finitos mayores que cero",
+            "Si el modo de tasa es consumo: dividir la distancia entre 100 y multiplicar por la tasa, ya que el consumo se define por cada 100 unidades de distancia",
+            "Si el modo de tasa es eficiencia: dividir la distancia directamente entre la tasa, ya que la eficiencia se define como distancia cubierta por unidad de combustible",
+            "Multiplicar el combustible usado por el precio por unidad para obtener el costo total del viaje",
+            "Dividir el costo total entre la distancia para obtener el costo por unidad de distancia, una cifra útil para comparar viajes de diferentes longitudes"
+          ],
+          "caption": "El único paso de ramificación (qué fórmula convierte la tasa en combustible usado) seguido del cálculo de costo compartido."
+        },
+        "anatomy": {
+          "intro": "Consumo y eficiencia son solo dos formas distintas de describir exactamente la misma tasa; un auto que usa 8 L por 100 km es matemáticamente idéntico a uno que recorre 12.5 km por L, y ambos modos coinciden exactamente en el combustible usado para el mismo viaje.",
+          "labelConsumption": "Modo Consumo (8 L/100km)",
+          "labelEfficiency": "Modo Eficiencia (12.5 km/L)",
+          "caption": "Para un viaje de 300 km, ingresar la tasa como 8 L/100km (consumo) o como el equivalente 12.5 km/L (eficiencia) producen ambos exactamente 24 L de combustible usado."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Distancia",
+            "meaning": "La longitud del viaje.",
+            "unit": "Unidades de distancia"
+          },
+          {
+            "symbol": "Modo de Tasa",
+            "meaning": "Si la tasa de combustible se da como consumo (combustible por 100 unidades de distancia) o eficiencia (distancia por unidad de combustible).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Valor de la Tasa",
+            "meaning": "La tasa de combustible del vehículo, interpretada según el modo de tasa seleccionado.",
+            "unit": "Depende del modo"
+          },
+          {
+            "symbol": "Precio por Unidad",
+            "meaning": "El precio de una unidad de combustible.",
+            "unit": "Moneda"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Distancia, tasa o precio de cero o menos",
+            "description": "Un viaje necesita una distancia positiva, una tasa de combustible positiva y un precio de combustible positivo para que el cálculo tenga sentido; un valor de cero o negativo para cualquiera de los tres devuelve un error \"invalid-distance\", \"invalid-rate\" o \"invalid-price\" correspondiente en lugar de un costo cero o negativo."
+          },
+          {
+            "title": "Los dos modos de tasa usan fórmulas invertidas",
+            "description": "Consumo y eficiencia describen la economía de combustible en direcciones opuestas (combustible-por-distancia versus distancia-por-combustible), así que requieren fórmulas genuinamente diferentes; el modo consumo multiplica por la tasa, mientras que el modo eficiencia divide entre ella. Ingresar el mismo número de tasa en el modo equivocado producirá un resultado muy diferente e incorrecto."
+          },
+          {
+            "title": "Valores de entrada no finitos",
+            "description": "Si alguna de las tres entradas numéricas no es un número finito (por ejemplo, por un campo de entrada no analizable), se trata igual que un valor inválido para ese campo, devolviendo el error correspondiente en lugar de propagar NaN a los resultados."
+          },
+          {
+            "title": "El costo por unidad de distancia se deriva, no se ingresa",
+            "description": "La cifra de costo por distancia no es una entrada separada; siempre se calcula dividiendo el costo total del viaje entre la distancia, haciéndola directamente comparable entre viajes de diferentes longitudes que usan el mismo vehículo y precio de combustible."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cuál es la diferencia entre el modo consumo y el modo eficiencia?",
+            "answer": "Son dos convenciones para describir la misma economía de combustible subyacente. El modo consumo (común en la mayor parte del mundo) pregunta cuánto combustible se usa por cada 100 unidades de distancia; un número menor es mejor. El modo eficiencia (común en EE. UU.) pregunta cuánta distancia se recorre por unidad de combustible; un número mayor es mejor. Elija el que coincida con cómo está listada la economía de combustible de su vehículo."
+          },
+          {
+            "question": "¿Cómo convierto entre consumo y eficiencia si la calificación de mi vehículo está en el otro formato?",
+            "answer": "Los dos son recíprocos matemáticos escalados por 100: eficiencia = 100 / consumo, y consumo = 100 / eficiencia. Por ejemplo, 8 L/100km se convierte a 100/8 = 12.5 km/L, y esta herramienta producirá la cifra idéntica de combustible usado en cualquier modo que la ingrese, siempre que convierta correctamente primero."
+          },
+          {
+            "question": "¿Por qué la herramienta reporta el costo por unidad de distancia además del costo total?",
+            "answer": "El costo total solo le dice lo que costó un viaje específico; el costo por unidad de distancia es una cifra normalizada que le permite comparar el gasto de combustible de viajes con diferentes longitudes, o comparar cómo un cambio en el precio del combustible o la eficiencia del vehículo afecta su costo típico de conducción, independientemente de qué tan largo sea un viaje en particular."
+          },
+          {
+            "question": "¿Puedo usar esto para algo distinto de un auto, como un bote o un generador?",
+            "answer": "Sí; el cálculo solo depende de una distancia (o medida de uso equivalente), una tasa de combustible y un precio de combustible, así que funciona para cualquier cosa con una calificación de consumo o eficiencia comparable, siempre que interprete \"distancia\" como cualquier unidad de uso contra la que se defina su tasa."
+          }
+        ]
+      },
+      "batch-invoice-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Facturas por Lote: cómo se totalizan las líneas de artículos e impuesto de cada factura, y cómo se agregan varias facturas guardadas en un resumen acumulado, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de una factura",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Etapas de Cálculo",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Subtotal = Σ(cantidad × precio unitario)  |  Total = Subtotal × (1 + % Impuesto / 100)  |  Total del Lote = Σ(totales de facturas guardadas)",
+          "note": "Cada factura individual se totaliza de la misma forma simple: las líneas de artículos se suman a un subtotal, luego se aplica el impuesto encima; y una vez que una factura se guarda, sus totales ya calculados se incorporan a un resumen de lote acumulado junto con cada otra factura guardada."
+        },
+        "flowchart": {
+          "intro": "Hay dos cálculos distintos en juego: totalizar las líneas de artículos de una factura, y agregar varias facturas ya totalizadas en un resumen acumulado.",
+          "steps": [
+            "Para una sola factura: validar que existe al menos una línea de artículo, y que cada artículo tiene una cantidad positiva y un precio unitario no negativo",
+            "Para una sola factura: multiplicar la cantidad de cada artículo por su precio unitario para obtener el total de esa línea, luego sumar todas las líneas para obtener el subtotal",
+            "Para una sola factura: aplicar el porcentaje de impuesto al subtotal para obtener el monto del impuesto, luego sumarlo para obtener el total de esa factura",
+            "Una vez que una factura se guarda, su subtotal, monto de impuesto y total se suman a un resumen de lote acumulado en lugar de recalcularse desde cero",
+            "El resumen del lote rastrea el conteo de facturas y los totales acumulados de neto-antes-de-impuesto, impuesto y total general a través de todas las facturas guardadas"
+          ],
+          "caption": "La totalización por factura alimenta una agregación de resumen acumulado separada una vez que cada factura se guarda."
+        },
+        "anatomy": {
+          "intro": "Igual que una sola factura, cada factura guardada en el lote es simplemente su subtotal de líneas de artículos más el impuesto calculado sobre ese subtotal; el resumen del lote no es más que estas dos partes, sumadas a través de cada factura guardada.",
+          "labelSubtotal": "Subtotal",
+          "labelTax": "Impuesto (10%)",
+          "totalLabel": "Total de Una Factura",
+          "caption": "Un subtotal de líneas de artículos de $250 con 10% de impuesto añade $25, para un total de factura de $275; el resumen del lote simplemente suma este patrón a través de cada factura guardada."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Líneas de Artículos",
+            "meaning": "Los artículos de la factura actual, cada uno con un nombre, cantidad y precio unitario.",
+            "unit": "Lista"
+          },
+          {
+            "symbol": "Porcentaje de Impuesto",
+            "meaning": "La tasa de impuesto aplicada al subtotal de la factura actual.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Facturas Guardadas",
+            "meaning": "Facturas completadas previamente cuyos totales alimentan el resumen de lote acumulado.",
+            "unit": "Lista"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Sin líneas de artículos en la factura actual",
+            "description": "Una factura necesita al menos una línea de artículo para calcular un subtotal; una lista de líneas de artículos vacía devuelve un error \"no-line-items\" en lugar de una factura con valor cero."
+          },
+          {
+            "title": "Cantidad o precio unitario inválido",
+            "description": "Cada línea de artículo necesita una cantidad mayor que cero y un precio unitario de cero o más; una línea de artículo que viole cualquiera de las reglas devuelve un error \"invalid-line-item\", ya que una cantidad cero o negativa, o un precio negativo, no producirían una línea de factura significativa."
+          },
+          {
+            "title": "Porcentaje de impuesto negativo",
+            "description": "Una tasa de impuesto por debajo de cero no corresponde a un escenario fiscal real; la herramienta devuelve un error \"invalid-tax\" para un porcentaje de impuesto negativo en lugar de calcular un total menor que el subtotal."
+          },
+          {
+            "title": "El resumen del lote solo incluye facturas guardadas",
+            "description": "El total acumulado, el total de impuesto y el total general solo reflejan facturas que realmente se han guardado; la factura que se está redactando actualmente no cuenta para el resumen del lote hasta que se guarda explícitamente, así que el resumen siempre refleja un conjunto consistente y finalizado de facturas."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿En qué se diferencia esto del Generador de Facturas simple?",
+            "answer": "El Generador de Facturas produce una factura completa y detallada con un paso de descuento opcional. Esta herramienta está construida para crear varias facturas seguidas y rastrear sus totales combinados; cada factura sigue totalizándose de la misma forma básica (subtotal más impuesto), pero el enfoque aquí está en el resumen de lote acumulado a través de muchas facturas guardadas en lugar de en un solo documento detallado."
+          },
+          {
+            "question": "¿Editar una factura ya guardada actualiza automáticamente el resumen del lote?",
+            "answer": "El resumen del lote se construye directamente a partir de la lista de facturas guardadas, así que cualquier factura guardada refleja sus totales en el momento en que se guardó; el resumen se recalcula a partir de esa lista guardada, lo que significa que siempre permanece consistente con las facturas actualmente marcadas como guardadas."
+          },
+          {
+            "question": "¿Puede una línea de artículo tener un precio unitario de $0?",
+            "answer": "Sí; un precio unitario de exactamente cero se acepta (útil para un artículo gratuito o una línea promocional), ya que solo se rechaza un precio unitario negativo. La cantidad, sin embargo, debe ser estrictamente mayor que cero, ya que una línea de artículo necesita representar la venta de al menos una unidad de algo."
+          },
+          {
+            "question": "¿Por qué el resumen del lote rastrea el \"neto antes de impuesto\" por separado del total general?",
+            "answer": "Separar el total antes de impuesto del total general (que incluye impuesto) hace posible ver cuánto del ingreso combinado a través de todas las facturas es valor de venta real frente a cuánto es impuesto recaudado en nombre de una autoridad fiscal; una distinción que importa para la contabilidad y los reportes fiscales."
+          }
+        ]
       }
     }
   }
