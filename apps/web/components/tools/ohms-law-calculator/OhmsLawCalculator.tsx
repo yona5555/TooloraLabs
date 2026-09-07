@@ -22,6 +22,15 @@ const RELATED_TOOLS = ["energy-work-power-calculator", "force-calculator", "dens
 
 const DEFAULTS = { voltage: "12", current: "2", resistance: "6", power: "24" };
 
+// Real, self-consistent (V = IR, P = VI) everyday circuit scenarios.
+const SCENARIOS: Record<string, { voltage: string; current: string; resistance: string; power: string }> = {
+  aaMotor: { voltage: "1.5", current: "0.5", resistance: "3", power: "0.75" },
+  usbCharger: { voltage: "5", current: "1", resistance: "5", power: "5" },
+  carHeadlight: { voltage: "12", current: "5", resistance: "2.4", power: "60" },
+  usToaster: { voltage: "120", current: "8.33", resistance: "14.4", power: "1000" },
+  euKettle: { voltage: "230", current: "8.7", resistance: "26.45", power: "2000" },
+};
+
 const EMPTY_RESULT: OhmsLawCalculatorOutput = { error: null, voltage: 0, current: 0, resistance: 0, power: 0 };
 
 function computeResult(knownPair: OhmsLawKnownPair, voltage: string, current: string, resistance: string, power: string): OhmsLawCalculatorOutput {
@@ -103,6 +112,17 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const scenario = SCENARIOS[key];
+    setVoltage(scenario.voltage);
+    setCurrent(scenario.current);
+    setResistance(scenario.resistance);
+    setPower(scenario.power);
+    setResult(computeResult(knownPair, scenario.voltage, scenario.current, scenario.resistance, scenario.power));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(scenario.voltage, scenario.current, scenario.resistance, scenario.power));
+  }
+
   function handleClear() {
     setVoltage(DEFAULTS.voltage);
     setCurrent(DEFAULTS.current);
@@ -136,6 +156,7 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
                 onResistanceChange={setResistance}
                 power={power}
                 onPowerChange={setPower}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
