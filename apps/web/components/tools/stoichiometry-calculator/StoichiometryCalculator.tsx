@@ -11,6 +11,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import StoichiometryInputPanel from "./StoichiometryInputPanel";
 import StoichiometryResult from "./StoichiometryResult";
 import StoichiometryQuickReference from "./StoichiometryQuickReference";
+import StoichiometryMillimolesCard from "./StoichiometryMillimolesCard";
 import type { AmountUnit } from "./types";
 
 const tool = new StoichiometryCalculatorTool();
@@ -159,15 +160,18 @@ export default function StoichiometryCalculator({ education }: { education: Reac
             />
           }
           result={
-            <StoichiometryResult
-              hasCalculated={hasCalculated}
-              result={result}
-              knownFormula={knownFormula}
-              knownUnit={knownUnit}
-              targetFormula={targetFormula}
-              targetUnit={targetUnit}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-3">
+              <StoichiometryResult
+                hasCalculated={hasCalculated}
+                result={result}
+                knownFormula={knownFormula}
+                knownUnit={knownUnit}
+                targetFormula={targetFormula}
+                targetUnit={targetUnit}
+                digitStyle={digitStyle}
+              />
+              <StoichiometryMillimolesCard targetMoles={result.targetMoles} digitStyle={digitStyle} />
+            </div>
           }
           sidebar={
             <RelatedToolsSidebar currentSlug="stoichiometry-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />

@@ -4,12 +4,10 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import EnergyModeTabs from "./EnergyModeTabs";
 import type { EnergyWorkPowerMode } from "./types";
 
 type EnergyInputPanelProps = {
   mode: EnergyWorkPowerMode;
-  onModeChange: (mode: EnergyWorkPowerMode) => void;
   force: string;
   onForceChange: (value: string) => void;
   distance: string;
@@ -32,7 +30,6 @@ type EnergyInputPanelProps = {
 
 export default function EnergyInputPanel({
   mode,
-  onModeChange,
   force,
   onForceChange,
   distance,
@@ -56,11 +53,6 @@ export default function EnergyInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
-        <EnergyModeTabs mode={mode} onModeChange={onModeChange} />
-      </div>
-
       <form onSubmit={onCalculate} className="space-y-5">
         {mode === "work" && (
           <>

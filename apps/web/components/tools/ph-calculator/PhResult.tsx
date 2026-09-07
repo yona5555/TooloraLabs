@@ -64,7 +64,7 @@ export default function PhResult({ hasCalculated, result, operation, digitStyle 
 
   const inputRows = [{ label: t("operationUsed"), value: operationLabel }];
   const resultRows = [
-    { label: t("pH"), value: fmt(result.pH) },
+    { label: tForm("pHLabel"), value: fmt(result.pH) },
     { label: t("pOH"), value: fmt(result.pOH) },
     { label: t("hConcentration"), value: formatConcentration(result.hConcentration) },
     { label: t("ohConcentration"), value: formatConcentration(result.ohConcentration) },
@@ -79,7 +79,7 @@ export default function PhResult({ hasCalculated, result, operation, digitStyle 
             operationLabel={operationLabel}
             inputRows={inputRows}
             resultRows={resultRows}
-            heroLabel={t("pH")}
+            heroLabel={tForm("pHLabel")}
             heroValue={heroValue}
             sentence={t(`classification.${result.classification}`)}
             gauge={{

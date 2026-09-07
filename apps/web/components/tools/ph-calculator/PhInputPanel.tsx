@@ -4,13 +4,11 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import PhModeTabs from "./PhModeTabs";
 import PhVariablesDiagram from "./PhVariablesDiagram";
 import type { PhOperation } from "./types";
 
 type PhInputPanelProps = {
   operation: PhOperation;
-  onOperationChange: (operation: PhOperation) => void;
   hConcentration: string;
   onHConcentrationChange: (value: string) => void;
   pH: string;
@@ -25,7 +23,6 @@ type PhInputPanelProps = {
 
 export default function PhInputPanel({
   operation,
-  onOperationChange,
   hConcentration,
   onHConcentrationChange,
   pH,
@@ -41,11 +38,6 @@ export default function PhInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
-        <PhModeTabs operation={operation} onOperationChange={onOperationChange} />
-      </div>
-
       <PhVariablesDiagram
         solved={operation}
         labels={{ fromPH: "pH", fromH: "[H⁺]", fromPOH: "pOH", fromOH: "[OH⁻]" }}

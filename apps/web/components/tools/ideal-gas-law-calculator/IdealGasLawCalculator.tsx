@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import GasLawInputPanel from "./GasLawInputPanel";
 import GasLawResult from "./GasLawResult";
 import GasLawQuickReference from "./GasLawQuickReference";
+import GasLawModeTabs from "./GasLawModeTabs";
+import GasLawStpCard from "./GasLawStpCard";
 import type { GasLawSolveFor } from "./types";
 
 const tool = new IdealGasLawCalculatorTool();
@@ -128,7 +130,6 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
           input={
             <GasLawInputPanel
               solveFor={solveFor}
-              onSolveForChange={handleSolveForChange}
               pressureAtm={pressureAtm}
               onPressureAtmChange={setPressureAtm}
               volumeLiters={volumeLiters}
@@ -141,7 +142,13 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
               onClear={handleClear}
             />
           }
-          result={<GasLawResult hasCalculated={hasCalculated} result={result} solveFor={solveFor} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-3">
+              <GasLawResult hasCalculated={hasCalculated} result={result} solveFor={solveFor} digitStyle={digitStyle} />
+              <GasLawModeTabs solveFor={solveFor} onSolveForChange={handleSolveForChange} />
+              <GasLawStpCard volumeLiters={result.volumeLiters} moles={result.moles} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar currentSlug="ideal-gas-law-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }

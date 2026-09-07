@@ -10,6 +10,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import MolarMassInputPanel from "./MolarMassInputPanel";
 import MolarMassResult from "./MolarMassResult";
 import MolarMassQuickReference from "./MolarMassQuickReference";
+import MolarMassGramCard from "./MolarMassGramCard";
 
 const tool = new MolarMassCalculatorTool();
 
@@ -94,7 +95,12 @@ export default function MolarMassCalculator({ education }: { education: ReactNod
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<MolarMassInputPanel formula={formula} onFormulaChange={setFormula} onCalculate={handleCalculate} onClear={handleClear} />}
-          result={<MolarMassResult hasCalculated={hasCalculated} result={result} formula={formula} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-3">
+              <MolarMassResult hasCalculated={hasCalculated} result={result} formula={formula} digitStyle={digitStyle} />
+              <MolarMassGramCard totalMass={result.totalMass} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar currentSlug="molar-mass-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }

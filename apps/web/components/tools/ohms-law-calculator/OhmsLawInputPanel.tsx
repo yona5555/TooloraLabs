@@ -4,13 +4,11 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import OhmsLawModeTabs from "./OhmsLawModeTabs";
 import OhmsLawTriangleDiagram from "./OhmsLawTriangleDiagram";
 import type { OhmsLawKnownPair } from "./types";
 
 type OhmsLawInputPanelProps = {
   knownPair: OhmsLawKnownPair;
-  onKnownPairChange: (pair: OhmsLawKnownPair) => void;
   voltage: string;
   onVoltageChange: (value: string) => void;
   current: string;
@@ -43,7 +41,6 @@ const UNKNOWN_BY_PAIR: Record<OhmsLawKnownPair, ("voltage" | "current" | "resist
 
 export default function OhmsLawInputPanel({
   knownPair,
-  onKnownPairChange,
   voltage,
   onVoltageChange,
   current,
@@ -60,11 +57,6 @@ export default function OhmsLawInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownPairLabel")}</span>
-        <OhmsLawModeTabs knownPair={knownPair} onKnownPairChange={onKnownPairChange} />
-      </div>
-
       <OhmsLawTriangleDiagram
         voltageText={activeFields.includes("voltage") ? `V=${voltage || "?"}` : "V=?"}
         currentText={activeFields.includes("current") ? `I=${current || "?"}` : "I=?"}

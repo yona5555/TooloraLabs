@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import DensityInputPanel from "./DensityInputPanel";
 import DensityResult from "./DensityResult";
 import DensityQuickReference from "./DensityQuickReference";
+import DensityModeTabs from "./DensityModeTabs";
+import DensityBuoyancyCard from "./DensityBuoyancyCard";
 import type { DensityOperation } from "./types";
 
 const tool = new DensityCalculatorTool();
@@ -119,7 +121,6 @@ export default function DensityCalculator({ education }: { education: ReactNode 
           input={
             <DensityInputPanel
               operation={operation}
-              onOperationChange={handleOperationChange}
               mass={mass}
               onMassChange={setMass}
               volume={volume}
@@ -130,7 +131,13 @@ export default function DensityCalculator({ education }: { education: ReactNode 
               onClear={handleClear}
             />
           }
-          result={<DensityResult hasCalculated={hasCalculated} result={result} operation={operation} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-3">
+              <DensityResult hasCalculated={hasCalculated} result={result} operation={operation} digitStyle={digitStyle} />
+              <DensityModeTabs operation={operation} onOperationChange={handleOperationChange} />
+              <DensityBuoyancyCard specificGravity={result.specificGravity} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar currentSlug="density-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }

@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ForceInputPanel from "./ForceInputPanel";
 import ForceResult from "./ForceResult";
 import ForceQuickReference from "./ForceQuickReference";
+import ForceModeTabs from "./ForceModeTabs";
+import ForceWeightCard from "./ForceWeightCard";
 import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types";
 
 const tool = new ForceCalculatorTool();
@@ -150,7 +152,6 @@ export default function ForceCalculator({ education }: { education: ReactNode })
           input={
             <ForceInputPanel
               mode={mode}
-              onModeChange={handleModeChange}
               secondLawSolveFor={secondLawSolveFor}
               onSecondLawSolveForChange={handleSecondLawSolveForChange}
               gravitationSolveFor={gravitationSolveFor}
@@ -172,14 +173,18 @@ export default function ForceCalculator({ education }: { education: ReactNode })
             />
           }
           result={
-            <ForceResult
-              hasCalculated={hasCalculated}
-              result={result}
-              mode={mode}
-              secondLawSolveFor={secondLawSolveFor}
-              gravitationSolveFor={gravitationSolveFor}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-3">
+              <ForceResult
+                hasCalculated={hasCalculated}
+                result={result}
+                mode={mode}
+                secondLawSolveFor={secondLawSolveFor}
+                gravitationSolveFor={gravitationSolveFor}
+                digitStyle={digitStyle}
+              />
+              <ForceModeTabs mode={mode} onModeChange={handleModeChange} />
+              <ForceWeightCard force={result.force} digitStyle={digitStyle} />
+            </div>
           }
           sidebar={
             <RelatedToolsSidebar currentSlug="force-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />

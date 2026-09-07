@@ -4,13 +4,11 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import GasLawModeTabs from "./GasLawModeTabs";
 import GasVariablesDiagram from "./GasVariablesDiagram";
 import type { GasLawSolveFor } from "./types";
 
 type GasLawInputPanelProps = {
   solveFor: GasLawSolveFor;
-  onSolveForChange: (value: GasLawSolveFor) => void;
   pressureAtm: string;
   onPressureAtmChange: (value: string) => void;
   volumeLiters: string;
@@ -25,7 +23,6 @@ type GasLawInputPanelProps = {
 
 export default function GasLawInputPanel({
   solveFor,
-  onSolveForChange,
   pressureAtm,
   onPressureAtmChange,
   volumeLiters,
@@ -41,11 +38,6 @@ export default function GasLawInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
-        <GasLawModeTabs solveFor={solveFor} onSolveForChange={onSolveForChange} />
-      </div>
-
       <GasVariablesDiagram
         solved={solveFor}
         labels={{ pressure: "P", volume: "V", moles: "n", temperature: "T" }}

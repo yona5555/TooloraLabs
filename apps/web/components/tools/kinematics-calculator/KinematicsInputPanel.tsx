@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import KinematicsModeTabs from "./KinematicsModeTabs";
 import KinematicsSolveForTabs from "./KinematicsSolveForTabs";
 import KinematicsVariablesDiagram from "./KinematicsVariablesDiagram";
 import { KINEMATICS_SOLVE_FOR_TIME, KINEMATICS_SOLVE_FOR_DISTANCE } from "./types";
@@ -12,7 +11,6 @@ import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime
 
 type KinematicsInputPanelProps = {
   mode: KinematicsMode;
-  onModeChange: (mode: KinematicsMode) => void;
   solveForTime: KinematicsSolveForTime;
   onSolveForTimeChange: (value: KinematicsSolveForTime) => void;
   solveForDistance: KinematicsSolveForDistance;
@@ -33,7 +31,6 @@ type KinematicsInputPanelProps = {
 
 export default function KinematicsInputPanel({
   mode,
-  onModeChange,
   solveForTime,
   onSolveForTimeChange,
   solveForDistance,
@@ -74,11 +71,6 @@ export default function KinematicsInputPanel({
 
   return (
     <SectionCard title={t_("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("modeLabel")}</span>
-        <KinematicsModeTabs mode={mode} onModeChange={onModeChange} />
-      </div>
-
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("solveForLabel")}</span>
         {mode === "timeBased" ? (

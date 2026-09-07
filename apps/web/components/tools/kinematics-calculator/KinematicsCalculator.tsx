@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import KinematicsInputPanel from "./KinematicsInputPanel";
 import KinematicsResult from "./KinematicsResult";
 import KinematicsQuickReference from "./KinematicsQuickReference";
+import KinematicsModeTabs from "./KinematicsModeTabs";
+import KinematicsGForceCard from "./KinematicsGForceCard";
 import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime } from "./types";
 
 const tool = new KinematicsCalculatorTool();
@@ -147,7 +149,6 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
           input={
             <KinematicsInputPanel
               mode={mode}
-              onModeChange={handleModeChange}
               solveForTime={solveForTime}
               onSolveForTimeChange={handleSolveForTimeChange}
               solveForDistance={solveForDistance}
@@ -167,7 +168,11 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
             />
           }
           result={
-            <KinematicsResult hasCalculated={hasCalculated} result={result} mode={mode} solveForTime={solveForTime} solveForDistance={solveForDistance} digitStyle={digitStyle} />
+            <div className="flex flex-col gap-3">
+              <KinematicsResult hasCalculated={hasCalculated} result={result} mode={mode} solveForTime={solveForTime} solveForDistance={solveForDistance} digitStyle={digitStyle} />
+              <KinematicsModeTabs mode={mode} onModeChange={handleModeChange} />
+              <KinematicsGForceCard acceleration={result.a} digitStyle={digitStyle} />
+            </div>
           }
           sidebar={
             <RelatedToolsSidebar currentSlug="kinematics-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={tRoot("relatedTools.title")} />

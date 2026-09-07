@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import MolarityInputPanel from "./MolarityInputPanel";
 import MolarityResult from "./MolarityResult";
 import MolarityQuickReference from "./MolarityQuickReference";
+import MolarityModeTabs from "./MolarityModeTabs";
+import MolarityConcentrationCard from "./MolarityConcentrationCard";
 import type { ConcentrationBasis, DilutionSolveFor, MolarityMode } from "./types";
 
 const tool = new MolarityCalculatorTool();
@@ -153,7 +155,6 @@ export default function MolarityCalculator({ education }: { education: ReactNode
           input={
             <MolarityInputPanel
               mode={mode}
-              onModeChange={handleModeChange}
               concentrationBasis={concentrationBasis}
               onConcentrationBasisChange={handleBasisChange}
               moles={moles}
@@ -178,7 +179,13 @@ export default function MolarityCalculator({ education }: { education: ReactNode
               onClear={handleClear}
             />
           }
-          result={<MolarityResult hasCalculated={hasCalculated} result={result} mode={mode} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-3">
+              <MolarityResult hasCalculated={hasCalculated} result={result} mode={mode} digitStyle={digitStyle} />
+              <MolarityModeTabs mode={mode} onModeChange={handleModeChange} />
+              <MolarityConcentrationCard mode={mode} molarity={result.molarity} c1={result.c1} c2={result.c2} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="molarity-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">

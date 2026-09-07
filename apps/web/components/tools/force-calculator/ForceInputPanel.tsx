@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import ForceModeTabs from "./ForceModeTabs";
 import ForceSolveForTabs from "./ForceSolveForTabs";
 import ForceVariablesDiagram from "./ForceVariablesDiagram";
 import { SECOND_LAW_SOLVE_FOR, GRAVITATION_SOLVE_FOR } from "./types";
@@ -12,7 +11,6 @@ import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types"
 
 type ForceInputPanelProps = {
   mode: ForceMode;
-  onModeChange: (mode: ForceMode) => void;
   secondLawSolveFor: SecondLawSolveFor;
   onSecondLawSolveForChange: (value: SecondLawSolveFor) => void;
   gravitationSolveFor: GravitationSolveFor;
@@ -35,7 +33,6 @@ type ForceInputPanelProps = {
 
 export default function ForceInputPanel({
   mode,
-  onModeChange,
   secondLawSolveFor,
   onSecondLawSolveForChange,
   gravitationSolveFor,
@@ -63,11 +60,6 @@ export default function ForceInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
-        <ForceModeTabs mode={mode} onModeChange={onModeChange} />
-      </div>
-
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
         {mode === "secondLaw" ? (

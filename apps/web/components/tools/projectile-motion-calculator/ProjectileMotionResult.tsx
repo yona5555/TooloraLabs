@@ -46,7 +46,7 @@ export default function ProjectileMotionResult({ hasCalculated, result, speed, a
   const sentence = t("rangeCaption");
 
   const inputRows = [
-    { label: t("speed"), value: `${fmt(speed)} m/s` },
+    { label: t("speedField"), value: `${fmt(speed)} m/s` },
     { label: t("angleField"), value: `${fmt(angle)}°` },
     { label: t("heightField"), value: `${fmt(height)} m` },
     { label: t("gravityField"), value: `${fmt(gravity)} m/s²` },

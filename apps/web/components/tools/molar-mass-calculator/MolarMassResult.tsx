@@ -3,7 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import MolarMassCompositionBarDiagram from "./MolarMassCompositionBarDiagram";
+import MolarMassCompositionDonut from "./MolarMassCompositionDonut";
 import MolarMassShareExportModal from "./MolarMassShareExportModal";
 import type { MolarMassResult as Result } from "./types";
 
@@ -16,6 +16,7 @@ type Props = {
 
 export default function MolarMassResult({ hasCalculated, result, formula, digitStyle }: Props) {
   const t = useTranslations("tools.molar-mass-calculator.result");
+  const tForm = useTranslations("tools.molar-mass-calculator.form");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 3 });
   const fmtInt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
 
@@ -53,7 +54,7 @@ export default function MolarMassResult({ hasCalculated, result, formula, digitS
   }
 
   const heroValue = `${fmt(result.totalMass)} g/mol`;
-  const segments = result.breakdown.map((row) => ({ symbol: row.symbol, percent: (row.subtotal / result.totalMass) * 100 }));
+  const segments = result.breakdown.map((row) => ({ symbol: row.symbol, value: row.subtotal }));
 
   const resultRows = result.breakdown.map((row) => ({ label: row.symbol, value: `${fmtInt(row.count)} × ${fmt(row.atomicMass)} = ${fmt(row.subtotal)}` }));
 
@@ -64,7 +65,7 @@ export default function MolarMassResult({ hasCalculated, result, formula, digitS
         action={
           <MolarMassShareExportModal
             operationLabel={formula}
-            inputRows={[{ label: t("formulaLabel"), value: formula }]}
+            inputRows={[{ label: tForm("formulaLabel"), value: formula }]}
             resultRows={resultRows}
             heroLabel={t("totalMass")}
             heroValue={heroValue}
@@ -78,7 +79,8 @@ export default function MolarMassResult({ hasCalculated, result, formula, digitS
         <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("totalMass")}</p>
 
         <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          <MolarMassCompositionBarDiagram segments={segments} caption={t("compositionCaption")} />
+          <MolarMassCompositionDonut segments={segments} centerValue={heroValue} centerLabel={t("totalMass")} />
+          <p className="mt-2 text-center text-sm opacity-70">{t("compositionCaption")}</p>
         </div>
 
         <div dir="ltr" className="mt-4 overflow-x-auto border-t border-zinc-200 pt-4 dark:border-zinc-800">

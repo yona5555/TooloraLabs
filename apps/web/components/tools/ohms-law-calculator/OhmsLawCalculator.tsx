@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import OhmsLawInputPanel from "./OhmsLawInputPanel";
 import OhmsLawResult from "./OhmsLawResult";
 import OhmsLawQuickReference from "./OhmsLawQuickReference";
+import OhmsLawModeTabs from "./OhmsLawModeTabs";
+import OhmsLawFuseCard from "./OhmsLawFuseCard";
 import type { OhmsLawKnownPair } from "./types";
 
 const tool = new OhmsLawCalculatorTool();
@@ -124,7 +126,6 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
           input={
             <OhmsLawInputPanel
               knownPair={knownPair}
-              onKnownPairChange={handleKnownPairChange}
               voltage={voltage}
               onVoltageChange={setVoltage}
               current={current}
@@ -137,7 +138,13 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
               onClear={handleClear}
             />
           }
-          result={<OhmsLawResult hasCalculated={hasCalculated} result={result} knownPair={knownPair} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-3">
+              <OhmsLawResult hasCalculated={hasCalculated} result={result} knownPair={knownPair} digitStyle={digitStyle} />
+              <OhmsLawModeTabs knownPair={knownPair} onKnownPairChange={handleKnownPairChange} />
+              <OhmsLawFuseCard current={result.current} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar currentSlug="ohms-law-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }

@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import PhInputPanel from "./PhInputPanel";
 import PhResult from "./PhResult";
 import PhQuickReference from "./PhQuickReference";
+import PhModeTabs from "./PhModeTabs";
+import PhSubstanceCard from "./PhSubstanceCard";
 import type { PhOperation } from "./types";
 
 const tool = new PhCalculatorTool();
@@ -125,7 +127,6 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
           input={
             <PhInputPanel
               operation={operation}
-              onOperationChange={handleOperationChange}
               hConcentration={hConcentration}
               onHConcentrationChange={setHConcentration}
               pH={pH}
@@ -138,7 +139,13 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
               onClear={handleClear}
             />
           }
-          result={<PhResult hasCalculated={hasCalculated} result={result} operation={operation} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-3">
+              <PhResult hasCalculated={hasCalculated} result={result} operation={operation} digitStyle={digitStyle} />
+              <PhModeTabs operation={operation} onOperationChange={handleOperationChange} />
+              <PhSubstanceCard pH={result.pH} />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="ph-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">

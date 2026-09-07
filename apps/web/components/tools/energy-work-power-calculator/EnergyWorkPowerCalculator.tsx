@@ -11,6 +11,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import EnergyInputPanel from "./EnergyInputPanel";
 import EnergyResult from "./EnergyResult";
 import EnergyQuickReference from "./EnergyQuickReference";
+import EnergyModeTabs from "./EnergyModeTabs";
+import EnergyLightbulbCard from "./EnergyLightbulbCard";
 import type { EnergyWorkPowerMode } from "./types";
 
 const tool = new EnergyWorkPowerCalculatorTool();
@@ -140,7 +142,6 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
           input={
             <EnergyInputPanel
               mode={mode}
-              onModeChange={handleModeChange}
               force={force}
               onForceChange={setForce}
               distance={distance}
@@ -162,20 +163,28 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
             />
           }
           result={
-            <EnergyResult
-              hasCalculated={hasCalculated}
-              result={result}
-              mode={mode}
-              force={parseLocalizedNumber(force) || 0}
-              distance={parseLocalizedNumber(distance) || 0}
-              angleDegrees={parseLocalizedNumber(angleDegrees) || 0}
-              mass={parseLocalizedNumber(mass) || 0}
-              velocity={parseLocalizedNumber(velocity) || 0}
-              height={parseLocalizedNumber(height) || 0}
-              workValue={parseLocalizedNumber(workValue) || 0}
-              time={parseLocalizedNumber(time) || 0}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-3">
+              <EnergyResult
+                hasCalculated={hasCalculated}
+                result={result}
+                mode={mode}
+                force={parseLocalizedNumber(force) || 0}
+                distance={parseLocalizedNumber(distance) || 0}
+                angleDegrees={parseLocalizedNumber(angleDegrees) || 0}
+                mass={parseLocalizedNumber(mass) || 0}
+                velocity={parseLocalizedNumber(velocity) || 0}
+                height={parseLocalizedNumber(height) || 0}
+                workValue={parseLocalizedNumber(workValue) || 0}
+                time={parseLocalizedNumber(time) || 0}
+                digitStyle={digitStyle}
+              />
+              <EnergyModeTabs mode={mode} onModeChange={handleModeChange} />
+              <EnergyLightbulbCard
+                mode={mode}
+                headline={mode === "work" ? result.work : mode === "kineticEnergy" ? result.kineticEnergy : mode === "potentialEnergy" ? result.potentialEnergy : result.power}
+                digitStyle={digitStyle}
+              />
+            </div>
           }
           sidebar={
             <RelatedToolsSidebar currentSlug="energy-work-power-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />

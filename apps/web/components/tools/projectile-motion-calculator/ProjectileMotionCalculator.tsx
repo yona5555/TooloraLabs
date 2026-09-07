@@ -11,6 +11,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ProjectileMotionInputPanel from "./ProjectileMotionInputPanel";
 import ProjectileMotionResult from "./ProjectileMotionResult";
 import ProjectileMotionQuickReference from "./ProjectileMotionQuickReference";
+import ProjectileMotionHeightCard from "./ProjectileMotionHeightCard";
 import { GRAVITY_PRESET_VALUES, type GravityPreset } from "./types";
 
 const tool = new ProjectileMotionCalculatorTool();
@@ -146,16 +147,19 @@ export default function ProjectileMotionCalculator({ education }: { education: R
             />
           }
           result={
-            <ProjectileMotionResult
-              hasCalculated={hasCalculated}
-              result={result}
-              speed={speedValue}
-              angle={angleValue}
-              height={heightValue}
-              gravity={gravityValue}
-              gravityPresetLabel={tForm(`gravityPreset.${gravityPreset}`)}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-3">
+              <ProjectileMotionResult
+                hasCalculated={hasCalculated}
+                result={result}
+                speed={speedValue}
+                angle={angleValue}
+                height={heightValue}
+                gravity={gravityValue}
+                gravityPresetLabel={tForm(`gravityPreset.${gravityPreset}`)}
+                digitStyle={digitStyle}
+              />
+              <ProjectileMotionHeightCard maxHeight={result.maxHeight} digitStyle={digitStyle} />
+            </div>
           }
           sidebar={
             <RelatedToolsSidebar currentSlug="projectile-motion-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />

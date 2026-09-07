@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import MolarityModeTabs from "./MolarityModeTabs";
 import MolarityBasisTabs from "./MolarityBasisTabs";
 import MolarityDilutionSolveForTabs from "./MolarityDilutionSolveForTabs";
 import MolarityVariablesDiagram from "./MolarityVariablesDiagram";
@@ -12,7 +11,6 @@ import type { ConcentrationBasis, DilutionSolveFor, MolarityMode } from "./types
 
 type MolarityInputPanelProps = {
   mode: MolarityMode;
-  onModeChange: (mode: MolarityMode) => void;
   concentrationBasis: ConcentrationBasis;
   onConcentrationBasisChange: (basis: ConcentrationBasis) => void;
   moles: string;
@@ -39,7 +37,6 @@ type MolarityInputPanelProps = {
 
 export default function MolarityInputPanel({
   mode,
-  onModeChange,
   concentrationBasis,
   onConcentrationBasisChange,
   moles,
@@ -67,11 +64,6 @@ export default function MolarityInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
-        <MolarityModeTabs mode={mode} onModeChange={onModeChange} />
-      </div>
-
       {mode === "concentration" ? (
         <>
           <div className="mb-5">

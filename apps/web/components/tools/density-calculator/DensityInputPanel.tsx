@@ -4,13 +4,11 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import DensityModeTabs from "./DensityModeTabs";
 import DensityFormulaTriangleDiagram from "./DensityFormulaTriangleDiagram";
 import type { DensityOperation } from "./types";
 
 type DensityInputPanelProps = {
   operation: DensityOperation;
-  onOperationChange: (operation: DensityOperation) => void;
   mass: string;
   onMassChange: (value: string) => void;
   volume: string;
@@ -23,7 +21,6 @@ type DensityInputPanelProps = {
 
 export default function DensityInputPanel({
   operation,
-  onOperationChange,
   mass,
   onMassChange,
   volume,
@@ -37,11 +34,6 @@ export default function DensityInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
-        <DensityModeTabs operation={operation} onOperationChange={onOperationChange} />
-      </div>
-
       <DensityFormulaTriangleDiagram
         operation={operation}
         massLabel={operation === "solveMass" ? "?" : mass || "–"}

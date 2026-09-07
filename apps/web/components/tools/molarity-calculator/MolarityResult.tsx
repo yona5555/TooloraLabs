@@ -56,7 +56,7 @@ export default function MolarityResult({ hasCalculated, result, mode, digitStyle
           action={
             <MolarityShareExportModal
               operationLabel={operationLabel}
-              inputRows={[{ label: t("moles"), value: `${fmt(result.moles)} mol` }]}
+              inputRows={[{ label: tForm("molesLabel"), value: `${fmt(result.moles)} mol` }]}
               resultRows={[{ label: t("molarity"), value: heroValue }]}
               heroLabel={t("molarity")}
               heroValue={heroValue}
@@ -84,7 +84,7 @@ export default function MolarityResult({ hasCalculated, result, mode, digitStyle
             <MolarityBeakerDiagram
               dotCount={Math.max(1, Math.min(24, result.molarity * 8))}
               molesLabel={`n = ${fmt(result.moles)} mol`}
-              volumeLabel={t("volumeLabel")}
+              volumeLabel={tForm("volumeLabel")}
               caption={t("beakerCaption")}
             />
           </div>
