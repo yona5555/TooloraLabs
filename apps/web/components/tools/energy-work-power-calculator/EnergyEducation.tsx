@@ -9,6 +9,7 @@ import EnergyMagnitudeDiagram from "./EnergyMagnitudeDiagram";
 import EnergyKineticDiagram from "./EnergyKineticDiagram";
 import EnergyPotentialDiagram from "./EnergyPotentialDiagram";
 import EnergyPowerRateDiagram from "./EnergyPowerRateDiagram";
+import EnergyPowerLevelGauge from "./EnergyPowerLevelGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function EnergyEducation() {
 
   return (
     <EncyclopediaPaper>
+      <EnergyPowerLevelGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <WorkVectorDiagram angleDegrees={30} caption={t("intro.diagram.caption")} />

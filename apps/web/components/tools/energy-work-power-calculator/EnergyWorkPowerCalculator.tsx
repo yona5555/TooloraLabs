@@ -22,6 +22,32 @@ const RELATED_TOOLS = ["ohms-law-calculator", "force-calculator", "kinematics-ca
 
 const DEFAULTS = { force: "20", distance: "5", angleDegrees: "0", mass: "10", velocity: "4", height: "3", workValue: "100", time: "5" };
 
+// Real, mode-specific everyday scenarios. Each key's fields only apply
+// within the mode that owns it (values for the other three modes are left
+// untouched when a preset from a different mode is later selected).
+const SCENARIOS_BY_MODE: Record<EnergyWorkPowerMode, Record<string, Partial<Inputs>>> = {
+  work: {
+    shoppingCart: { force: "50", distance: "10", angleDegrees: "0" },
+    liftBox: { force: "100", distance: "1.5", angleDegrees: "0" },
+    pullSledAngle: { force: "80", distance: "5", angleDegrees: "30" },
+  },
+  kineticEnergy: {
+    walkingHuman: { mass: "70", velocity: "1.4" },
+    runningHuman: { mass: "70", velocity: "5" },
+    carHighway: { mass: "1500", velocity: "30" },
+  },
+  potentialEnergy: {
+    bookOnShelf: { mass: "1", height: "1.5" },
+    diver: { mass: "70", height: "3" },
+    waterBehindDam: { mass: "1000", height: "50" },
+  },
+  power: {
+    climbingStairs: { workValue: "1000", time: "10" },
+    carAccelerating: { workValue: "500000", time: "5" },
+    lightbulbRunning: { workValue: "3600", time: "60" },
+  },
+};
+
 const EMPTY_RESULT: EnergyWorkPowerCalculatorOutput = { error: null, work: 0, kineticEnergy: 0, potentialEnergy: 0, power: 0 };
 
 type Inputs = typeof DEFAULTS;
@@ -115,6 +141,23 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS_BY_MODE[mode][key];
+    if (!preset) return;
+    const next = { ...currentInputs(), ...preset };
+    if (preset.force !== undefined) setForce(preset.force);
+    if (preset.distance !== undefined) setDistance(preset.distance);
+    if (preset.angleDegrees !== undefined) setAngleDegrees(preset.angleDegrees);
+    if (preset.mass !== undefined) setMass(preset.mass);
+    if (preset.velocity !== undefined) setVelocity(preset.velocity);
+    if (preset.height !== undefined) setHeight(preset.height);
+    if (preset.workValue !== undefined) setWorkValue(preset.workValue);
+    if (preset.time !== undefined) setTime(preset.time);
+    setResult(computeResult(mode, next));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(...Object.values(next)));
+  }
+
   function handleClear() {
     setForce(DEFAULTS.force);
     setDistance(DEFAULTS.distance);
@@ -160,6 +203,8 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
                 onWorkValueChange={setWorkValue}
                 time={time}
                 onTimeChange={setTime}
+                scenarioKeys={Object.keys(SCENARIOS_BY_MODE[mode])}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
