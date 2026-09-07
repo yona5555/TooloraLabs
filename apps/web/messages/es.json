@@ -24306,6 +24306,628 @@
             "answer": "La herramienta toma explícitamente el menor de los dos valores ingresados como el piso del rango y el mayor como el techo antes de generar nada; esto significa que el rango siempre se interpreta correctamente sin importar en qué campo escriba un usuario el número menor o el mayor."
           }
         ]
+      },
+      "scientific-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora Científica: cada operación que admite, cómo funcionan el modo de ángulo y las comprobaciones de dominio, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionCurve": "Qué calcula una función trigonométrica",
+        "sectionAnatomy": "Tres funciones, un ángulo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operaciones",
+          "modesValue": "20",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "sin/cos/tan(θ) convierten primero los grados a radianes  |  √x, ln(x), log₁₀(x) requieren que x esté en un dominio válido  |  aⁿ, ⁿ√a usan Math.pow",
+          "note": "La calculadora despacha a una de veinte operaciones según el botón pulsado: aritmética, potencias y raíces, trigonometría y logaritmos, cada una con su propia fórmula y sus propias restricciones de dominio."
+        },
+        "flowchart": {
+          "intro": "Cada operación pasa por el mismo proceso de validación antes de calcular un resultado, de modo que una entrada inválida (como dividir entre cero) siempre produce un error tipado en lugar de que NaN o Infinity aparezcan silenciosamente en pantalla.",
+          "steps": [
+            "Comprobar si la operación necesita un segundo operando (suma, resta, multiplicación, división, potencia, raíz) y exigirlo",
+            "Para funciones trigonométricas, convertir primero la entrada de grados a radianes, a menos que esté seleccionado el modo radianes",
+            "Aplicar la comprobación de dominio propia de la operación (la raíz cuadrada y los logaritmos rechazan entradas negativas o cero, la trigonometría inversa rechaza valores fuera de [-1, 1])",
+            "Calcular el resultado usando la función Math correspondiente de JavaScript",
+            "Rechazar resultados que resulten no finitos (desbordamiento por potencias muy grandes, o tan() cerca de sus puntos indefinidos) como un error fuera de rango"
+          ],
+          "caption": "El proceso compartido de validar y luego calcular por el que pasa cada una de las veinte operaciones."
+        },
+        "curve": {
+          "intro": "Una función trigonométrica como el seno no es un único número: es un valor que cambia continuamente conforme cambia el ángulo, trazando una onda repetitiva a lo largo de una vuelta completa.",
+          "xLabel": "Ángulo (grados)",
+          "yLabel": "sin(θ)",
+          "caption": "sin(θ) muestreado cada 60° a lo largo de una vuelta completa, mostrando la onda subir a 1, bajar pasando por 0 hasta -1, y regresar."
+        },
+        "anatomy": {
+          "intro": "El seno, el coseno y la tangente describen todos el mismo ángulo desde tres razones distintas; evaluar los tres a la vez muestra cómo se relacionan entre sí para un ángulo específico.",
+          "labelSin": "sin(30°)",
+          "labelCos": "cos(30°)",
+          "labelTan": "tan(30°)",
+          "caption": "En un ángulo de 30°, el seno, el coseno y la tangente devuelven cada uno un valor distinto, ya que miden tres razones de lados diferentes del mismo triángulo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Operación",
+            "meaning": "Cuál de las veinte operaciones admitidas se aplica: aritmética, potencia/raíz, trigonométrica o logarítmica.",
+            "unit": "—"
+          },
+          {
+            "symbol": "A",
+            "meaning": "El operando principal que usa cada operación.",
+            "unit": "Número"
+          },
+          {
+            "symbol": "B",
+            "meaning": "El segundo operando, requerido solo para operaciones binarias (suma, resta, multiplicación, división, potencia, raíz).",
+            "unit": "Número"
+          },
+          {
+            "symbol": "Modo de ángulo",
+            "meaning": "Si las entradas y salidas trigonométricas se interpretan en grados o en radianes.",
+            "unit": "grados / radianes"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Segundo operando faltante",
+            "description": "Las operaciones binarias (suma, resta, multiplicación, división, potencia, raíz) requieren un segundo operando B; si falta, la herramienta devuelve un error \"MISSING_OPERAND\" en lugar de sustituir silenciosamente un valor predeterminado como cero."
+          },
+          {
+            "title": "División y recíproco entre cero",
+            "description": "Dividir entre cero, tomar el recíproco de cero o tomar una raíz de índice cero devuelven todos un error \"DIVISION_BY_ZERO\", ya que cada una de estas operaciones es matemáticamente indefinida en esa entrada."
+          },
+          {
+            "title": "Errores de dominio para raíces, logaritmos y trigonometría inversa",
+            "description": "La raíz cuadrada y los logaritmos de un número negativo o cero, una raíz de índice par de un número negativo, y el seno/coseno inverso de un valor fuera de [-1, 1] devuelven todos un error \"DOMAIN_ERROR\" en lugar de un resultado NaN."
+          },
+          {
+            "title": "tan() cerca de sus puntos indefinidos",
+            "description": "La imprecisión de punto flotante hace que tan(90°) no devuelva exactamente Infinity, sino un número finito extremadamente grande. La herramienta trata cualquier resultado de tangente que supere un umbral de magnitud razonable como un error \"OUT_OF_RANGE\", coincidiendo con lo que un usuario de calculadora esperaría realmente en ese ángulo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la calculadora necesita saber si uso grados o radianes?",
+            "answer": "Las funciones trigonométricas están definidas matemáticamente en radianes, pero la mayoría de las medidas de ángulo cotidianas (como un giro de 90°) se expresan en grados; el ajuste de modo de ángulo le indica a la calculadora en qué unidad está su entrada, para poder convertir a radianes internamente antes de calcular sin, cos o tan, y reconvertir para las funciones inversas."
+          },
+          {
+            "question": "¿Por qué tan(90°) muestra un error en lugar de un número muy grande?",
+            "answer": "La tangente es matemáticamente indefinida en 90° (y en cada múltiplo impar de 90°), ya que se define como sin/cos y el coseno es cero allí; la aritmética de punto flotante no puede representar 90° exactamente como una fracción de π, por lo que Math.tan() devuelve un número finito enorme en lugar del infinito verdadero, y la herramienta detecta esto y lo reporta como indefinido en lugar de mostrar un número enorme engañosamente preciso."
+          },
+          {
+            "question": "¿Por qué la raíz cuadrada de un número negativo es un error, pero la raíz cúbica no lo es?",
+            "answer": "Una raíz cuadrada (o cualquier raíz de índice par) de un número negativo no tiene respuesta en números reales; la solución real más cercana sería un número imaginario, que esta calculadora no admite, por lo que se reporta como un error de dominio. Una raíz cúbica (o cualquier raíz de índice impar) de un número negativo sí tiene una respuesta real (la raíz cúbica de -8 es -2), así que se calcula normalmente."
+          },
+          {
+            "question": "¿Qué ocurre si intento dividir entre cero o tomar el recíproco de cero?",
+            "answer": "Ambas operaciones son matemáticamente indefinidas: no existe ningún número que, multiplicado por cero, devuelva el valor original, así que la calculadora devuelve un error de división entre cero en lugar de Infinity o NaN, lo cual sería confuso de ver en la pantalla de una calculadora."
+          }
+        ]
+      },
+      "step-by-step-math-solver": {
+        "version": "v1",
+        "description": "Referencia técnica del Solucionador de Matemáticas Paso a Paso: los cuatro problemas de álgebra y cálculo que resuelve, cómo se deriva cada solución, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmulas principales",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionRoots": "Visualizando las raíces",
+        "sectionAnatomy": "La parábola detrás de las raíces",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos del solucionador",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Lineal: ax + b = cx + d  |  Cuadrática: x = (-b ± √(b²-4ac)) / 2a  |  Fracción: a/b operación c/d  |  Derivada: d/dx[xⁿ] = n·xⁿ⁻¹",
+          "note": "Cada uno de los cuatro modos resuelve un tipo de problema genuinamente distinto, pero los cuatro comparten el mismo diseño: en lugar de saltar directamente a una respuesta final, el solucionador construye y devuelve una lista de pasos intermedios legibles para humanos."
+        },
+        "flowchart": {
+          "intro": "Qué fórmula se ejecuta depende completamente del modo seleccionado; la ramificación más rica ocurre en el modo cuadrático, donde el signo del discriminante determina si la solución es dos raíces reales, una raíz repetida, o un par de raíces complejas.",
+          "steps": [
+            "Leer cuál de los cuatro modos está seleccionado: ecuación lineal, ecuación cuadrática, operación con fracciones, o derivada",
+            "Para una ecuación cuadrática, calcular el discriminante D = b² - 4ac",
+            "Si D > 0: calcular dos raíces reales distintas usando x = (-b ± √D) / 2a",
+            "Si D = 0: calcular una raíz real repetida usando x = -b / 2a",
+            "Si D < 0: calcular un par de raíces complejas, ya que la raíz cuadrada de un discriminante negativo no tiene valor real"
+          ],
+          "caption": "La ramificación impulsada por el discriminante que determina cuántas raíces tiene una ecuación cuadrática, y si son reales o complejas."
+        },
+        "roots": {
+          "intro": "Para una ecuación cuadrática con discriminante positivo, las dos raíces son exactamente los valores de x donde la parábola cruza el eje x; trazarlas en una recta numérica muestra qué tan separadas están.",
+          "labelX1": "x₁ = 2",
+          "labelX2": "x₂ = 3",
+          "caption": "Las dos raíces reales de x² - 5x + 6 = 0, halladas a partir de un discriminante de 1 (5² - 4×1×6 = 1)."
+        },
+        "anatomy": {
+          "intro": "Las raíces que reporta un solucionador cuadrático no son un resultado algebraico abstracto: son exactamente los valores de x donde la gráfica de la ecuación toca y = 0.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 5x + 6",
+          "caption": "La parábola y = x² - 5x + 6 desciende por debajo del eje x entre x = 2 y x = 3, cruzando cero exactamente en las dos raíces que calculó el solucionador."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Modo",
+            "meaning": "Cuál de los cuatro solucionadores ejecutar: ecuación lineal, ecuación cuadrática, operación con fracciones, o derivada.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Lineal a, b, c, d",
+            "meaning": "Los coeficientes de la ecuación ax + b = cx + d, usados solo en modo lineal.",
+            "unit": "Números"
+          },
+          {
+            "symbol": "Cuadrática a, b, c",
+            "meaning": "Los coeficientes de ax² + bx + c = 0, usados solo en modo cuadrático. 'a' no puede ser cero.",
+            "unit": "Números"
+          },
+          {
+            "symbol": "Fracción a/b, operador, c/d",
+            "meaning": "Dos fracciones y una operación (suma, resta, multiplicación, división) para combinarlas, usadas solo en modo fracción.",
+            "unit": "Números"
+          },
+          {
+            "symbol": "Términos del polinomio",
+            "meaning": "Una lista de pares coeficiente-potencia que describen un polinomio f(x), usada solo en modo derivada.",
+            "unit": "Coeficiente, Potencia"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ecuación lineal sin solución única",
+            "description": "Si el coeficiente de x se cancela en ambos lados (a = c), la ecuación es válida para todo valor de x (infinitas soluciones, cuando las constantes también coinciden) o para ningún valor de x (cuando no coinciden); en cualquier caso, el solucionador reporta \"no-unique-solution\" en lugar de un único valor de x."
+          },
+          {
+            "title": "Coeficiente cuadrático 'a' igual a cero",
+            "description": "Si el coeficiente principal a es cero, la ecuación ax² + bx + c = 0 colapsa a una ecuación lineal, no cuadrática; el solucionador rechaza esto como \"invalid-quadratic-equation\" en lugar de intentar dividir entre cero en la fórmula cuadrática."
+          },
+          {
+            "title": "Discriminante negativo da raíces complejas",
+            "description": "Cuando el discriminante es negativo, el solucionador no devuelve un error: reporta ambas raíces en forma de número complejo a + bi, ya que una ecuación cuadrática con coeficientes reales y discriminante negativo tiene genuinamente dos soluciones complejas conjugadas."
+          },
+          {
+            "title": "Dividir una fracción entre una fracción de numerador cero",
+            "description": "Dividir entre una fracción equivale a multiplicar por su recíproco, lo que requiere invertir el numerador y el denominador de la segunda fracción; si ese numerador es cero, el recíproco tendría cero en su denominador, así que el solucionador rechaza esto como un error \"division-by-zero\" antes de que ocurra."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué una ecuación cuadrática a veces da respuestas con números complejos?",
+            "answer": "La fórmula cuadrática requiere tomar la raíz cuadrada del discriminante (b² - 4ac); cuando el discriminante es negativo, no hay ningún número real cuyo cuadrado sea negativo, pero sí hay un número complejo (que involucra i, la unidad imaginaria) que lo satisface, así que el solucionador reporta las dos raíces complejas conjugadas en lugar de afirmar que no hay solución."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre \"sin solución única\" y \"sin solución\" para una ecuación lineal?",
+            "answer": "Ambas ocurren cuando los términos de x se cancelan en ambos lados de la ecuación, sin dejar x que resolver; pero si las constantes restantes resultan ser iguales, la ecuación original es verdadera para todo x (infinitas soluciones); si no son iguales, la ecuación nunca es verdadera para ningún x (ninguna solución en absoluto). La herramienta distingue entre estos dos casos en su mensaje de error."
+          },
+          {
+            "question": "¿Por qué se resuelve la división de fracciones multiplicando por el recíproco?",
+            "answer": "Dividir entre un número es lo mismo que multiplicar por el recíproco de ese número (su \"inverso\"); esto es cierto para números enteros (dividir entre 2 es lo mismo que multiplicar por 1/2) y es igualmente cierto para fracciones, así que a/b ÷ c/d se calcula como a/b × d/c, lo que convierte un problema de división en uno de multiplicación usando la misma regla de multiplicación de fracciones."
+          },
+          {
+            "question": "¿Por qué la derivada de un término constante siempre es cero?",
+            "answer": "Una derivada mide qué tan rápido cambia el resultado de una función conforme cambia x; un término constante como 7 no depende de x en absoluto, así que su valor nunca cambia sin importar el valor de x, lo que significa que su tasa de cambio siempre es cero. Por eso el paso de la regla de la potencia para un término constante (potencia 0) simplemente reporta 0 en lugar de aplicar la fórmula n·xⁿ⁻¹."
+          }
+        ]
+      },
+      "matrix-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Matrices: las seis operaciones de matriz 2x2 que calcula, cómo se relacionan la inversa y el determinante, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "De la matriz a la inversa",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operaciones",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "det(A) = a₁₁a₂₂ - a₁₂a₂₁  |  A⁻¹ = (1/det A) × [a₂₂, -a₁₂; -a₂₁, a₁₁]",
+          "note": "Cada operación de matriz 2x2 que calcula esta herramienta —suma, diferencia, producto, determinante, transpuesta e inversa— se reduce a aritmética simple sobre las cuatro celdas individuales, siendo la inversa la única operación que puede fallar (cuando el determinante es cero)."
+        },
+        "flowchart": {
+          "intro": "Se calculan seis operaciones a partir de las mismas dos matrices de entrada; cinco de ellas siempre tienen éxito, y la sexta (la inversa) depende de si el determinante de la matriz A es cero.",
+          "steps": [
+            "Sumar y restar A y B celda por celda para obtener la suma y la diferencia",
+            "Multiplicar A y B usando la regla del producto matricial (cada celda de salida es una suma de dos productos) para obtener A×B",
+            "Calcular el determinante de A y de B de forma independiente: a₁₁a₂₂ - a₁₂a₂₁",
+            "Calcular la transpuesta de A intercambiando sus celdas fuera de la diagonal (a₁₂ y a₂₁)",
+            "Si el determinante de A es distinto de cero, calcular la inversa de A dividiendo las celdas intercambiadas y negadas entre el determinante; en caso contrario, marcar A como singular y dejar la inversa indefinida"
+          ],
+          "caption": "Las seis operaciones que esta herramienta calcula a partir de las mismas dos matrices 2x2; solo el paso de la inversa se ramifica según si A es singular."
+        },
+        "anatomy": {
+          "intro": "La inversa de una matriz se construye enteramente a partir de sus propias cuatro celdas y su determinante: intercambia las celdas de la diagonal, invierte el signo de las celdas fuera de la diagonal, y luego divide todo entre el determinante.",
+          "labelMatrix": "Matriz A",
+          "labelDeterminant": "det(A)",
+          "labelInverse": "A⁻¹",
+          "caption": "Para A = [[4, 7], [2, 6]], el determinante es 4×6 - 7×2 = 10, y la inversa divide las celdas reordenadas entre ese determinante."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "a₁₁, a₁₂, a₂₁, a₂₂",
+            "meaning": "Las cuatro celdas de la matriz A, leídas de izquierda a derecha, de arriba abajo.",
+            "unit": "Números"
+          },
+          {
+            "symbol": "b₁₁, b₁₂, b₂₁, b₂₂",
+            "meaning": "Las cuatro celdas de la matriz B, leídas de izquierda a derecha, de arriba abajo.",
+            "unit": "Números"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Matriz A singular (determinante cero)",
+            "description": "Cuando el determinante de A es cero, dividir entre él para calcular la inversa es indefinido; la herramienta devuelve null para las cuatro celdas de la inversa y marca un error \"singular-matrix-a\", mientras que cualquier otra operación (suma, diferencia, producto, ambos determinantes, transpuesta) sigue calculándose normalmente."
+          },
+          {
+            "title": "Una matriz B singular no genera ningún error",
+            "description": "La herramienta solo comprueba y reporta la invertibilidad de la matriz A, ya que es la única matriz cuya inversa calcula; si el determinante de B es cero, determinantB simplemente reporta 0 sin ningún error, ya que la inversa de B nunca fue solicitada."
+          },
+          {
+            "title": "Resultados redondeados a 10 dígitos significativos",
+            "description": "Cada valor de salida pasa por toPrecision(10) antes de devolverse, lo que evita que artefactos de punto flotante (como una suma que debería ser exactamente 0.3 mostrándose como 0.30000000000000004) aparezcan en los resultados."
+          },
+          {
+            "title": "La transpuesta solo se calcula para A",
+            "description": "La herramienta expone la transpuesta de A (intercambiando a₁₂ y a₂₁) pero no la de B, ya que ninguna de las seis operaciones que ofrece —suma, diferencia, producto (específicamente A×B), ambos determinantes, y la inversa de A— requiere la transpuesta de B para calcularse."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta calcula solo la inversa de la matriz A, no de la matriz B?",
+            "answer": "La herramienta está construida alrededor de un conjunto fijo de seis operaciones —suma, diferencia, el producto A×B, ambos determinantes, la transpuesta de A y la inversa de A—, y la inversa de B simplemente no es una de las operaciones que fue diseñada para mostrar. Si necesita la inversa de B, puede intercambiar qué matriz introduce como A."
+          },
+          {
+            "question": "¿Qué ocurre si la matriz A no puede invertirse?",
+            "answer": "Una matriz solo puede invertirse si su determinante es distinto de cero; cuando el determinante de A es exactamente cero (una matriz \"singular\"), no existe ninguna matriz que, multiplicada por A, dé la matriz identidad, así que la herramienta reporta un error de matriz singular y deja las cuatro celdas de la inversa vacías en lugar de dividir entre cero."
+          },
+          {
+            "question": "¿Por qué la multiplicación de matrices no es simplemente multiplicar las celdas correspondientes?",
+            "answer": "La multiplicación de matrices está definida para representar la composición de dos transformaciones lineales, no un escalado elemento por elemento; cada celda del producto A×B es una suma de productos a lo largo de una fila de A y una columna de B, por lo que la celda del producto (1,1) es a₁₁b₁₁ + a₁₂b₂₁ y no simplemente a₁₁×b₁₁."
+          },
+          {
+            "question": "¿Por qué la transpuesta de A nunca puede fallar, a diferencia de la inversa?",
+            "answer": "La transpuesta es solo una reorganización: intercambia las dos celdas fuera de la diagonal y deja intactas las celdas de la diagonal, lo cual funciona para cualquier matriz posible sin ninguna división involucrada. La inversa, en cambio, requiere dividir entre el determinante, lo cual falla siempre que el determinante resulta ser cero."
+          }
+        ]
+      },
+      "vector-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Vectores: las operaciones que calcula sobre dos vectores 2D o 3D, cómo se derivan la proyección y el ángulo entre vectores, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Sumando dos vectores",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operaciones",
+          "modesValue": "9",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "|A| = √(ax² + ay² + az²)  |  A·B = axbx + ayby + azbz  |  A×B = (aybz - azby, azbx - axbz, axby - aybx)  |  θ = cos⁻¹(A·B / |A||B|)",
+          "note": "Las nueve operaciones trabajan sobre dos vectores 3D A y B (un vector 2D es simplemente el caso en que el componente z es cero); la suma, la diferencia, el producto punto y el producto cruzado siempre están definidos, mientras que los resultados que dependen de la magnitud, como el ángulo entre los vectores, el vector unitario de A y la proyección de A sobre B, requieren que el vector correspondiente sea distinto de cero."
+        },
+        "flowchart": {
+          "intro": "Las operaciones que solo involucran componentes (suma, diferencia, producto punto, producto cruzado) siempre se calculan primero; las operaciones que dividen entre la longitud de un vector se calculan después, solo cuando ese vector no es el vector cero.",
+          "steps": [
+            "Calcular la magnitud de cada vector: |A| = √(ax² + ay² + az²), y lo mismo para B",
+            "Calcular la suma, la diferencia, el producto punto y el producto cruzado componente por componente; estos nunca fallan",
+            "Si A no es cero, calcular el vector unitario de A dividiendo cada componente entre |A|; en caso contrario, marcar un error zero-vector-a",
+            "Si B no es cero, calcular la proyección de A sobre B usando el producto punto y |B|; en caso contrario, marcar un error zero-vector-b",
+            "Si tanto A como B no son cero, calcular el ángulo entre ellos usando la fórmula del producto punto, acotando el coseno a [-1, 1] para protegerse contra desbordamientos de punto flotante"
+          ],
+          "caption": "Las operaciones de componentes, siempre seguras, seguidas de las operaciones dependientes de la magnitud que requieren un vector distinto de cero."
+        },
+        "anatomy": {
+          "intro": "Sumar dos vectores los coloca punta con cola: la suma es la diagonal del paralelogramo formado por A y B, que va desde el punto de inicio compartido hasta la esquina opuesta.",
+          "labelA": "A = (3, 4)",
+          "labelB": "B = (4, 0)",
+          "labelSum": "A + B = (7, 4)",
+          "caption": "El vector A = (3, 4) y el vector B = (4, 0) sumados punta con cola producen el vector suma (7, 4), mostrado como la diagonal del paralelogramo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "ax, ay, az",
+            "meaning": "Los componentes x, y y z del vector A. Establezca az en 0 para un vector 2D.",
+            "unit": "Números"
+          },
+          {
+            "symbol": "bx, by, bz",
+            "meaning": "Los componentes x, y y z del vector B. Establezca bz en 0 para un vector 2D.",
+            "unit": "Números"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "El vector A es el vector cero",
+            "description": "El vector unitario de A requiere dividir cada componente entre |A|, lo cual es indefinido cuando |A| es cero; la herramienta devuelve null para los componentes del vector unitario y marca un error \"zero-vector-a\", mientras que la suma, la diferencia, el producto punto y el producto cruzado siguen calculándose normalmente."
+          },
+          {
+            "title": "El vector B es el vector cero",
+            "description": "La proyección de A sobre B requiere dividir entre |B|, lo cual es indefinido cuando B es el vector cero; la herramienta devuelve null para los componentes escalar y vectorial de la proyección y marca un error \"zero-vector-b\", pero solo si A no fue ya marcado como el vector cero (el campo de error contiene un único código)."
+          },
+          {
+            "title": "El ángulo entre vectores necesita que ambos sean distintos de cero",
+            "description": "La fórmula del ángulo divide entre |A| × |B|; si cualquiera de los vectores tiene magnitud cero, el ángulo es matemáticamente indefinido, así que la herramienta solo lo calcula cuando se confirma que tanto A como B son distintos de cero, dejándolo en null en caso contrario."
+          },
+          {
+            "title": "Coseno acotado a un rango válido antes de arccos",
+            "description": "El redondeo de punto flotante puede ocasionalmente empujar el valor de coseno calculado ligeramente por encima de 1 o por debajo de -1, lo que haría que Math.acos() devolviera NaN; la herramienta acota primero el valor al rango matemáticamente válido [-1, 1], de modo que el cálculo del ángulo se mantenga fiable incluso en los límites de punto flotante."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el ángulo entre dos vectores a veces se muestra vacío aunque se listen ambas magnitudes?",
+            "answer": "El ángulo solo se deja en blanco cuando al menos uno de los dos vectores tiene magnitud cero; dado que la fórmula del ángulo divide entre el producto de ambas magnitudes, un vector de longitud cero no tiene una dirección definida desde la cual medir un ángulo, así que no hay nada significativo que reportar."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre el producto punto y el producto cruzado?",
+            "answer": "El producto punto devuelve un único número que describe cuán alineados están dos vectores (grande y positivo cuando apuntan en la misma dirección, cero cuando son perpendiculares, negativo cuando son opuestos); el producto cruzado devuelve un nuevo vector perpendicular a ambas entradas, cuya longitud refleja el área del paralelogramo que forman; el producto punto funciona en cualquier dimensión, mientras que la fórmula específica del producto cruzado usada aquí está definida para vectores 3D (o 2D tratados como 3D)."
+          },
+          {
+            "question": "¿Por qué la herramienta solo reporta un error incluso cuando ambos vectores son cero?",
+            "answer": "El campo de error contiene un único código, y la comprobación de A se ejecuta primero; si A es el vector cero, ese error tiene prioridad y se reporta, y la comprobación del error de B solo se aplica si la comprobación de A no estableció ya uno. Independientemente de qué error se muestre, el problema subyacente (un vector de longitud cero) está presente en ambos casos."
+          },
+          {
+            "question": "¿Qué es la proyección de un vector, y por qué requiere que el vector B sea distinto de cero?",
+            "answer": "La proyección de A sobre B es la \"sombra\" que A proyectaría sobre la línea de B si la luz incidiera perpendicular a B; describe cuánto de A apunta en la dirección de B. Dado que esta sombra se mide a lo largo de la dirección de B, B debe tener una dirección definida, que un vector de longitud cero no tiene, así que la proyección queda indefinida cuando B es el vector cero."
+          }
+        ]
+      },
+      "graphing-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora Gráfica: cómo analiza y muestrea una expresión de función, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionCurve": "Muestreando una función",
+        "sectionAnatomy": "La cuadrícula de muestreo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Funciones incorporadas",
+          "modesValue": "12",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "y = f(x), evaluada en x = xMin + i × (xMax - xMin) / (muestras - 1), para i = 0 a muestras - 1",
+          "note": "La herramienta no reconoce una lista fija de fórmulas: analiza cualquier expresión que escriba y la convierte en un árbol de sintaxis abstracta mediante un pequeño analizador de descenso recursivo, y luego evalúa ese árbol en una serie de valores de x uniformemente espaciados para construir la curva trazada."
+        },
+        "flowchart": {
+          "intro": "Antes de que ocurra cualquier trazado, la expresión se analiza exactamente una vez en una estructura de árbol reutilizable; evaluar ese árbol muchas veces (una por punto de muestra) es mucho más económico que volver a analizar el texto para cada valor de x.",
+          "steps": [
+            "Validar que xMax sea mayor que xMin y que el número de muestras esté entre 2 y 2000",
+            "Tokenizar la expresión en números, identificadores, operadores y paréntesis",
+            "Analizar los tokens en un árbol de expresión, respetando la precedencia estándar de operadores (paréntesis, luego potencias, luego menos unario, luego multiplicación/división, luego suma/resta)",
+            "Evaluar el árbol una vez en cada valor de x uniformemente espaciado entre xMin y xMax",
+            "Donde la evaluación produzca un resultado no finito (como dividir entre cero), registrar el valor de y de ese punto como null en lugar de fallar toda la gráfica"
+          ],
+          "caption": "El proceso de analizar una vez y evaluar muchas veces que usa esta herramienta para convertir una expresión escrita en una curva trazada."
+        },
+        "curve": {
+          "intro": "Trazar una función significa calcular su salida en muchos valores de x muy próximos entre sí y conectar los puntos resultantes; cuantas más muestras se usen, más suave parecerá la curva resultante.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 2",
+          "caption": "La expresión \"x^2 - 2\" muestreada en siete valores de x uniformemente espaciados de -3 a 3, produciendo los puntos que trazan la parábola."
+        },
+        "anatomy": {
+          "intro": "Detrás de cada curva trazada hay una cuadrícula simple de valores de x, uniformemente espaciados entre el mínimo y el máximo elegidos, en la que la expresión se evalúa un punto a la vez.",
+          "labelMin": "xMin",
+          "labelMax": "xMax",
+          "caption": "Siete puntos de muestra uniformemente espaciados entre xMin = -3 y xMax = 3; la herramienta real usa hasta 2000 puntos así por defecto para una curva suave."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Expresión",
+            "meaning": "La función de x a trazar, usando aritmética estándar, potencias y funciones incorporadas como sin, cos, sqrt, ln y abs.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "xMin",
+            "meaning": "El valor de x más pequeño en el que evaluar la expresión.",
+            "unit": "Número"
+          },
+          {
+            "symbol": "xMax",
+            "meaning": "El valor de x más grande en el que evaluar la expresión. Debe ser mayor que xMin.",
+            "unit": "Número"
+          },
+          {
+            "symbol": "Muestras",
+            "meaning": "Cuántos valores de x uniformemente espaciados evaluar entre xMin y xMax. Debe estar entre 2 y 2000.",
+            "unit": "Entero"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "xMax no mayor que xMin",
+            "description": "Si el valor máximo de x no es estrictamente mayor que el mínimo, no hay un rango válido para muestrear; la herramienta devuelve un error \"invalid-range\" y no produce puntos en lugar de intentar trazar un rango de anchura cero o negativa."
+          },
+          {
+            "title": "Número de muestras fuera de 2 a 2000",
+            "description": "Menos de 2 muestras no pueden formar una línea, y más de 2000 supondrían un trabajo computacional excesivo para un solo trazado; un número de muestras fuera de ese rango también devuelve un error \"invalid-range\"."
+          },
+          {
+            "title": "Expresión que no se puede analizar",
+            "description": "Una expresión con un carácter inesperado, un nombre de función desconocido o un paréntesis de cierre faltante falla durante el análisis; la herramienta detecta esto y devuelve un error \"invalid-expression\" junto con el mensaje específico del analizador (como \"Missing closing parenthesis\"), en lugar de no trazar nada sin explicación."
+          },
+          {
+            "title": "Puntos individuales que se evalúan a un valor no finito",
+            "description": "Una función como 1/x es indefinida en x = 0, y sqrt(x) es indefinida para x negativa; en lugar de fallar todo el trazado cuando un punto de muestra encuentra un caso indefinido, la herramienta registra el valor de y de ese único punto como null, de modo que la curva simplemente tiene un hueco allí en lugar de desaparecer por completo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué algunas gráficas tienen huecos visibles en lugar de una línea continua?",
+            "answer": "Aparece un hueco en cualquier valor de x donde la expresión se evalúa a algo no finito; por ejemplo, 1/x es indefinida en x = 0, y sqrt(x) es indefinida para x negativa. En lugar de conectar a través de estos puntos indefinidos con una línea engañosa, la herramienta omite ese punto de muestra, creando una interrupción visible exactamente donde la función es genuinamente indefinida."
+          },
+          {
+            "question": "¿Qué funciones y constantes puedo usar en una expresión?",
+            "answer": "Las funciones incorporadas son sin, cos, tan, asin, acos, atan, sqrt, abs, ln (logaritmo natural), log (logaritmo en base 10), exp, max y min, además de las constantes pi y e; los nombres de función no distinguen mayúsculas de minúsculas, así que tanto SIN(x) como sin(x) funcionan."
+          },
+          {
+            "question": "¿Por qué hay un máximo de 2000 puntos de muestra?",
+            "answer": "Cada punto de muestra requiere volver a evaluar el árbol de expresión una vez, así que el trabajo total escala directamente con el número de muestras; limitarlo a 2000 mantiene incluso una expresión compleja rápida de trazar en el navegador mientras sigue produciendo una curva visualmente suave, ya que 2000 puntos en un rango típico son muchos más de los que el ojo puede distinguir de una línea continua."
+          },
+          {
+            "question": "¿Por qué \"-2^2\" se evalúa como -4 en lugar de 4?",
+            "answer": "El analizador trata el menos unario como si se uniera de forma más laxa que el operador de potencia pero más estrecha que la multiplicación, coincidiendo con la convención estándar de calculadoras y matemáticas; esto significa que \"-2^2\" se analiza como \"-(2^2)\" = -4, no como \"(-2)^2\" = 4. Para elevar al cuadrado un número negativo, enciérrelo explícitamente entre paréntesis: \"(-2)^2\"."
+          }
+        ]
+      },
+      "notepad-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Bloc de Notas: cómo evalúa texto libre línea por línea, cómo las variables pasan de una línea a la siguiente, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Patrón principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionWorkedExample": "Un ejemplo resuelto",
+        "sectionAnatomy": "Antes y después de un cálculo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Tipos de línea",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "nombre = expresión  →  scope[nombre] = evaluate(expresión, scope)",
+          "note": "Aquí no hay una única fórmula: en cambio, cada línea se compara con un patrón de asignación (\"nombre = expresión\"), y si coincide, el resultado evaluado se almacena bajo ese nombre en un ámbito continuo que cada línea posterior puede leer."
+        },
+        "flowchart": {
+          "intro": "La herramienta procesa el texto del bloc de notas una línea a la vez, de arriba abajo, arrastrando un único ámbito continuo de valores con nombre a medida que avanza.",
+          "steps": [
+            "Dividir el texto del bloc de notas en líneas individuales",
+            "Para una línea en blanco, no registrar resultado y continuar; esto es esperado, no un error",
+            "Para una línea que coincide con \"nombre = expresión\" (donde nombre no es una palabra reservada como pi o e), evaluar la expresión usando el ámbito actual, almacenar el resultado bajo ese nombre y mostrarlo",
+            "Para cualquier otra línea no vacía, intentar evaluarla como una expresión independiente usando el ámbito actual y mostrar el resultado si se puede analizar",
+            "Para una línea que no se analiza ni como asignación ni como expresión (texto simple, un encabezado), no mostrar resultado; esto permite mezclar libremente notas y cálculos en el mismo documento"
+          ],
+          "caption": "El recorrido de arriba abajo, línea por línea, que construye el ámbito de variables del bloc de notas a medida que evalúa."
+        },
+        "workedExample": {
+          "intro": "Un breve ejemplo de tres líneas muestra cómo un valor definido en una línea queda disponible para cada línea que le sigue.",
+          "steps": [
+            "Línea 1: \"tax = 8.5\" — coincide con el patrón de asignación, se evalúa a 8.5, y almacena tax = 8.5 en el ámbito",
+            "Línea 2: \"100 + tax\" — se evalúa como expresión simple, busca tax en el ámbito, y muestra el resultado 108.5",
+            "Línea 3: \"subtotal * 2\" — dado que subtotal nunca se definió en una línea anterior, esta expresión falla al evaluarse y no muestra resultado"
+          ],
+          "caption": "Una variable definida en una línea está disponible para cada línea debajo de ella, pero referenciar un nombre no definido simplemente no produce resultado."
+        },
+        "anatomy": {
+          "intro": "Todo el sentido de arrastrar una variable hacia adelante es que el resultado de una línea posterior refleje cada valor definido antes de ella: el mismo número base produce un resultado final diferente una vez que se incorpora una variable.",
+          "labelBefore": "100 (antes del impuesto)",
+          "labelAfter": "108.5 (100 + tax)",
+          "caption": "La línea \"100 + tax\" se evalúa a 108.5 una vez que tax = 8.5 se ha definido en una línea anterior y se ha incorporado al ámbito."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Texto",
+            "meaning": "El contenido completo del bloc de notas de varias líneas; cada línea se evalúa de forma independiente, en orden, contra el ámbito de variables continuo.",
+            "unit": "Texto"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los nombres reservados no pueden reasignarse",
+            "description": "Una línea como \"pi = 3\" no se trata como una asignación, ya que \"pi\" y \"e\" están reservados para las constantes matemáticas incorporadas (π y e); en cambio, la línea se evalúa como una expresión simple, que típicamente fallará al analizarse como sintaxis válida y no mostrará resultado."
+          },
+          {
+            "title": "Las líneas en blanco siempre muestran ningún resultado",
+            "description": "Una línea vacía se registra con un resultado null por diseño, no se evalúa como un error; este es el comportamiento esperado para un documento de forma libre donde las líneas en blanco son solo espaciado visual."
+          },
+          {
+            "title": "El texto simple y los encabezados no muestran resultado, silenciosamente",
+            "description": "Una línea como \"Presupuesto Mensual\" o \"--- Totales ---\" no coincide con el patrón de asignación ni se analiza como una expresión válida, así que no muestra resultado sin ningún mensaje de error; esto es lo que hace posible mezclar notas y cálculos libremente en el mismo documento."
+          },
+          {
+            "title": "Una línea no puede usar una variable definida más abajo",
+            "description": "El ámbito se construye estrictamente de arriba abajo; una línea que referencia un nombre de variable que solo se define en una línea posterior fallará al evaluarse y no mostrará resultado, ya que ese nombre aún no existe en el ámbito en el punto en que se procesa esa línea."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Puedo definir una variable llamada \"pi\" o \"e\"?",
+            "answer": "No: ambos nombres están reservados para las constantes matemáticas incorporadas (π ≈ 3.14159 y e ≈ 2.71828), así que una línea como \"pi = 10\" no se trata como una asignación. Si la escribe, la herramienta en cambio intenta evaluarla como una expresión simple, que típicamente no se analizará y no mostrará resultado."
+          },
+          {
+            "question": "¿Por qué una línea con solo un encabezado o una nota no muestra resultado?",
+            "answer": "Una línea solo muestra un resultado si coincide con el patrón de asignación \"nombre = expresión\" o se analiza correctamente como una expresión matemática independiente; el texto simple como un encabezado o una oración no coincide con ninguno de los dos patrones, así que simplemente se queda sin resultado en lugar de mostrar un error, que es exactamente lo que permite mezclar notas y matemáticas libremente."
+          },
+          {
+            "question": "¿Puede una línea usar una variable definida más abajo en el bloc de notas?",
+            "answer": "No: el bloc de notas se evalúa estrictamente de arriba abajo, construyendo su ámbito de variables una línea a la vez. Una línea que referencia una variable antes de que se haya asignado en una línea anterior encontrará que ese nombre falta en el ámbito y simplemente mostrará ningún resultado, así que las variables siempre deben definirse antes de las líneas que las usan."
+          },
+          {
+            "question": "¿Qué ocurre si una línea tiene un error tipográfico o una expresión inválida?",
+            "answer": "La herramienta intenta evaluar cada línea no vacía, pero si el analizador no puede darle sentido —un paréntesis sin par, un nombre de función desconocido, un símbolo suelto—, ese intento falla silenciosamente y la línea simplemente no muestra resultado, igual que si fuera una nota simple. No se muestra ningún mensaje de error en línea, ya que un error tipográfico y una nota intencional se ven iguales para el analizador."
+          }
+        ]
       }
     }
   }

@@ -24306,6 +24306,628 @@
             "answer": "The tool explicitly takes the minimum of the two entered values as the range floor and the maximum as the ceiling before generating anything — this means the range is always interpreted correctly regardless of which field a user happens to type the smaller or larger number into."
           }
         ]
+      },
+      "scientific-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Scientific Calculator: every operation it supports, how angle mode and domain checks work, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionCurve": "What a Trig Function Computes",
+        "sectionAnatomy": "Three Functions, One Angle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operations",
+          "modesValue": "20",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "sin/cos/tan(θ) convert degrees to radians first  |  √x, ln(x), log₁₀(x) require x in a valid domain  |  aⁿ, ⁿ√a use Math.pow",
+          "note": "The calculator dispatches to one of twenty operations based on which button is pressed — arithmetic, powers and roots, trigonometry, and logarithms each have their own formula and their own domain restrictions."
+        },
+        "flowchart": {
+          "intro": "Every operation runs the same validation pipeline before computing a result, so an invalid input (like dividing by zero) always produces a typed error instead of NaN or Infinity silently appearing on screen.",
+          "steps": [
+            "Check whether the operation needs a second operand (add, subtract, multiply, divide, power, root) and require it",
+            "For trigonometric functions, convert the input from degrees to radians first, unless radian mode is selected",
+            "Apply the operation's own domain check (square root and logarithms reject negative or zero inputs, inverse trig rejects values outside [-1, 1])",
+            "Compute the result using the corresponding JavaScript Math function",
+            "Reject results that come back non-finite (overflow from very large powers, or tan() near its undefined points) as an out-of-range error"
+          ],
+          "caption": "The shared validate-then-compute pipeline every one of the twenty operations passes through."
+        },
+        "curve": {
+          "intro": "A trigonometric function like sine isn't a single number — it's a value that changes continuously as the angle changes, tracing out a repeating wave over one full rotation.",
+          "xLabel": "Angle (degrees)",
+          "yLabel": "sin(θ)",
+          "caption": "sin(θ) sampled every 60° across one full rotation, showing the wave rise to 1, fall through 0 to -1, and return."
+        },
+        "anatomy": {
+          "intro": "Sine, cosine, and tangent all describe the same angle from three different ratios — evaluating all three at once shows how they relate to each other for one specific angle.",
+          "labelSin": "sin(30°)",
+          "labelCos": "cos(30°)",
+          "labelTan": "tan(30°)",
+          "caption": "At a 30° angle, sine, cosine, and tangent each return a different value, since they measure three different side-length ratios of the same triangle."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Which of the twenty supported operations to apply — arithmetic, power/root, trigonometric, or logarithmic.",
+            "unit": "—"
+          },
+          {
+            "symbol": "A",
+            "meaning": "The primary operand every operation uses.",
+            "unit": "Number"
+          },
+          {
+            "symbol": "B",
+            "meaning": "The second operand, required only for binary operations (add, subtract, multiply, divide, power, root).",
+            "unit": "Number"
+          },
+          {
+            "symbol": "Angle Mode",
+            "meaning": "Whether trigonometric inputs and outputs are interpreted in degrees or radians.",
+            "unit": "deg / rad"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Missing second operand",
+            "description": "Binary operations (add, subtract, multiply, divide, power, root) require a second operand B — if it's missing, the tool returns a \"MISSING_OPERAND\" error rather than silently substituting a default value like zero."
+          },
+          {
+            "title": "Division and reciprocal by zero",
+            "description": "Dividing by zero, taking the reciprocal of zero, or taking a zero-th root all return a \"DIVISION_BY_ZERO\" error, since each of these operations is mathematically undefined at that input."
+          },
+          {
+            "title": "Domain errors for roots, logs, and inverse trig",
+            "description": "Square root and logarithms of a negative or zero number, an even-numbered root of a negative number, and inverse sine/cosine of a value outside [-1, 1] all return a \"DOMAIN_ERROR\" rather than a NaN result."
+          },
+          {
+            "title": "tan() near its undefined points",
+            "description": "Floating-point imprecision means tan(90°) doesn't return exactly Infinity — it returns an extremely large finite number instead. The tool treats any tangent result beyond a sane magnitude threshold as an \"OUT_OF_RANGE\" error, matching what a calculator user would actually expect at that angle."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the calculator need to know whether I'm using degrees or radians?",
+            "answer": "Trigonometric functions are mathematically defined in radians, but most everyday angle measurements (like a 90° turn) are expressed in degrees — the angle mode setting tells the calculator which unit your input is in, so it can convert to radians internally before computing sin, cos, or tan, and convert back for the inverse functions."
+          },
+          {
+            "question": "Why does tan(90°) show an error instead of a very large number?",
+            "answer": "Tangent is mathematically undefined at 90° (and every odd multiple of 90°), since it's defined as sin/cos and cosine is zero there — floating-point arithmetic can't represent 90° exactly as a fraction of π, so Math.tan() returns a huge finite number instead of true infinity, and the tool catches this and reports it as undefined rather than showing a misleadingly precise huge number."
+          },
+          {
+            "question": "Why is the square root of a negative number an error, but the cube root isn't?",
+            "answer": "A square root (or any even-numbered root) of a negative number has no real-number answer — the closest real solution would be an imaginary number, which this calculator doesn't support, so it's reported as a domain error. A cube root (or any odd-numbered root) of a negative number does have a real answer (the cube root of -8 is -2), so it computes normally."
+          },
+          {
+            "question": "What happens if I try to divide by zero or take the reciprocal of zero?",
+            "answer": "Both operations are mathematically undefined — there's no number that, multiplied by zero, gives back the original value — so the calculator returns a division-by-zero error instead of Infinity or NaN, which would be confusing to see on a calculator display."
+          }
+        ]
+      },
+      "step-by-step-math-solver": {
+        "version": "v1",
+        "description": "Technical reference for the Step-by-Step Math Solver: the four algebra and calculus problems it solves, how each solution is derived, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formulas",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionRoots": "Visualizing the Roots",
+        "sectionAnatomy": "The Parabola Behind the Roots",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solver Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Linear: ax + b = cx + d  |  Quadratic: x = (-b ± √(b²-4ac)) / 2a  |  Fraction: a/b op c/d  |  Derivative: d/dx[xⁿ] = n·xⁿ⁻¹",
+          "note": "Each of the four modes solves a genuinely different kind of problem, but all four share the same design: rather than jumping straight to a final answer, the solver builds and returns a list of human-readable intermediate steps."
+        },
+        "flowchart": {
+          "intro": "Which formula runs depends entirely on the selected mode — the richest branching happens in quadratic mode, where the sign of the discriminant determines whether the solution is two real roots, one repeated root, or a pair of complex roots.",
+          "steps": [
+            "Read which of the four modes is selected: linear equation, quadratic equation, fraction operation, or derivative",
+            "For a quadratic equation, compute the discriminant D = b² - 4ac",
+            "If D > 0: compute two distinct real roots using x = (-b ± √D) / 2a",
+            "If D = 0: compute one repeated real root using x = -b / 2a",
+            "If D < 0: compute a pair of complex roots, since the square root of a negative discriminant has no real value"
+          ],
+          "caption": "The discriminant-driven branch that determines how many roots a quadratic equation has, and whether they're real or complex."
+        },
+        "roots": {
+          "intro": "For a quadratic equation with a positive discriminant, the two roots are the two x-values where the parabola crosses the x-axis — plotting them on a number line shows how far apart they are.",
+          "labelX1": "x₁ = 2",
+          "labelX2": "x₂ = 3",
+          "caption": "The two real roots of x² - 5x + 6 = 0, found from a discriminant of 1 (5² - 4×1×6 = 1)."
+        },
+        "anatomy": {
+          "intro": "The roots a quadratic solver reports aren't an abstract algebraic result — they're exactly the x-values where the equation's graph touches y = 0.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 5x + 6",
+          "caption": "The parabola y = x² - 5x + 6 dips below the x-axis between x = 2 and x = 3, crossing zero at exactly the two roots the solver computed."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Which of the four solvers to run: linear equation, quadratic equation, fraction operation, or derivative.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Linear a, b, c, d",
+            "meaning": "The coefficients of the equation ax + b = cx + d, used only in linear mode.",
+            "unit": "Numbers"
+          },
+          {
+            "symbol": "Quadratic a, b, c",
+            "meaning": "The coefficients of ax² + bx + c = 0, used only in quadratic mode. 'a' can't be zero.",
+            "unit": "Numbers"
+          },
+          {
+            "symbol": "Fraction a/b, operator, c/d",
+            "meaning": "Two fractions and an operation (add, subtract, multiply, divide) to combine them, used only in fraction mode.",
+            "unit": "Numbers"
+          },
+          {
+            "symbol": "Polynomial Terms",
+            "meaning": "A list of coefficient-and-power pairs describing a polynomial f(x), used only in derivative mode.",
+            "unit": "Coefficient, Power"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Linear equation with no unique solution",
+            "description": "If the x-coefficient cancels out on both sides (a = c), the equation either holds for every value of x (infinitely many solutions, when the constants also match) or for no value of x at all (when they don't) — either way, the solver reports \"no-unique-solution\" instead of a single x value."
+          },
+          {
+            "title": "Quadratic 'a' coefficient of zero",
+            "description": "If the leading coefficient a is zero, the equation ax² + bx + c = 0 collapses to a linear equation, not a quadratic one — the solver rejects this as an \"invalid-quadratic-equation\" rather than trying to divide by zero in the quadratic formula."
+          },
+          {
+            "title": "Negative discriminant gives complex roots",
+            "description": "When the discriminant is negative, the solver doesn't return an error — it reports both roots in a + bi complex-number form, since a quadratic with real coefficients and a negative discriminant genuinely has two complex conjugate solutions."
+          },
+          {
+            "title": "Dividing a fraction by a zero-numerator fraction",
+            "description": "Dividing by a fraction multiplies by its reciprocal, which requires flipping the second fraction's numerator and denominator — if that numerator is zero, the reciprocal would have zero in its denominator, so the solver rejects this as a \"division-by-zero\" error before it happens."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does a quadratic equation sometimes give complex-number answers?",
+            "answer": "The quadratic formula requires taking the square root of the discriminant (b² - 4ac) — when the discriminant is negative, there's no real number whose square is negative, but there is a complex number (involving i, the imaginary unit) that satisfies this, so the solver reports the two complex conjugate roots instead of claiming there's no solution."
+          },
+          {
+            "question": "What's the difference between \"no unique solution\" and \"no solution\" for a linear equation?",
+            "answer": "Both happen when the x-terms cancel out on both sides of the equation, leaving no x to solve for — but if the remaining constants happen to be equal, the original equation is true for every x (infinitely many solutions); if they're not equal, the equation is never true for any x (no solution at all). The tool distinguishes between these two cases in its error message."
+          },
+          {
+            "question": "Why is dividing fractions solved by multiplying by the reciprocal?",
+            "answer": "Dividing by a number is the same as multiplying by that number's reciprocal (its \"flip\") — this is true for whole numbers (dividing by 2 is the same as multiplying by 1/2) and it's equally true for fractions, so a/b ÷ c/d is computed as a/b × d/c, which turns a division problem into a multiplication problem using the same fraction-multiplication rule."
+          },
+          {
+            "question": "Why is the derivative of a constant term always zero?",
+            "answer": "A derivative measures how fast a function's output changes as x changes — a constant term like 7 doesn't depend on x at all, so its value never changes no matter what x is, meaning its rate of change is always zero. This is why the power-rule step for a constant term (power 0) simply reports 0 rather than applying the n·xⁿ⁻¹ formula."
+          }
+        ]
+      },
+      "matrix-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Matrix Calculator: the six 2x2 matrix operations it computes, how the inverse and determinant relate, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "From Matrix to Inverse",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operations",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "det(A) = a₁₁a₂₂ - a₁₂a₂₁  |  A⁻¹ = (1/det A) × [a₂₂, -a₁₂; -a₂₁, a₁₁]",
+          "note": "Every 2x2 matrix operation this tool computes — sum, difference, product, determinant, transpose, and inverse — reduces to simple arithmetic on the four individual cells, with the inverse being the only operation that can fail (when the determinant is zero)."
+        },
+        "flowchart": {
+          "intro": "Six operations are computed from the same two input matrices; five of them always succeed, and the sixth (the inverse) depends on whether matrix A's determinant is zero.",
+          "steps": [
+            "Add and subtract A and B cell-by-cell to get the sum and difference",
+            "Multiply A and B using the matrix product rule (each output cell is a sum of two products) to get A×B",
+            "Compute the determinant of A and of B independently: a₁₁a₂₂ - a₁₂a₂₁",
+            "Compute the transpose of A by swapping its off-diagonal cells (a₁₂ and a₂₁)",
+            "If A's determinant is non-zero, compute A's inverse by dividing the swapped-and-negated cells by the determinant; otherwise, flag A as singular and leave the inverse undefined"
+          ],
+          "caption": "The six operations this tool computes from the same two 2x2 matrices — only the inverse step branches on whether A is singular."
+        },
+        "anatomy": {
+          "intro": "The inverse of a matrix is built entirely from its own four cells and its determinant — swap the diagonal cells, negate the off-diagonal cells, then divide everything by the determinant.",
+          "labelMatrix": "Matrix A",
+          "labelDeterminant": "det(A)",
+          "labelInverse": "A⁻¹",
+          "caption": "For A = [[4, 7], [2, 6]], the determinant is 4×6 - 7×2 = 10, and the inverse divides the rearranged cells by that determinant."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "a₁₁, a₁₂, a₂₁, a₂₂",
+            "meaning": "The four cells of matrix A, read left-to-right, top-to-bottom.",
+            "unit": "Numbers"
+          },
+          {
+            "symbol": "b₁₁, b₁₂, b₂₁, b₂₂",
+            "meaning": "The four cells of matrix B, read left-to-right, top-to-bottom.",
+            "unit": "Numbers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Singular matrix A (determinant of zero)",
+            "description": "When A's determinant is zero, dividing by it to compute the inverse is undefined — the tool returns null for all four inverse cells and flags a \"singular-matrix-a\" error, while every other operation (sum, difference, product, both determinants, transpose) still computes normally."
+          },
+          {
+            "title": "Singular matrix B raises no error",
+            "description": "The tool only checks and reports on matrix A's invertibility, since it's the only matrix whose inverse it computes — if B's determinant is zero, determinantB simply reports 0 with no error, since B's inverse was never requested."
+          },
+          {
+            "title": "Results rounded to 10 significant digits",
+            "description": "Every output value is passed through toPrecision(10) before being returned, which prevents floating-point artifacts (like a sum that should be exactly 0.3 displaying as 0.30000000000000004) from appearing in the results."
+          },
+          {
+            "title": "Transpose is computed for A only",
+            "description": "The tool exposes A's transpose (swapping a₁₂ and a₂₁) but not B's, since none of the six operations it offers — sum, difference, product (specifically A×B), the two determinants, and A's inverse — require B's transpose to compute."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool only compute the inverse of matrix A, not matrix B?",
+            "answer": "The tool is built around a fixed set of six operations — sum, difference, the product A×B, both determinants, A's transpose, and A's inverse — and B's inverse simply isn't one of the operations it was designed to expose. If you need B's inverse, you can swap which matrix you enter as A."
+          },
+          {
+            "question": "What happens if matrix A can't be inverted?",
+            "answer": "A matrix can only be inverted if its determinant is non-zero — when A's determinant is exactly zero (a \"singular\" matrix), there's no matrix that, multiplied by A, gives the identity matrix, so the tool reports a singular-matrix error and leaves all four inverse cells empty rather than dividing by zero."
+          },
+          {
+            "question": "Why isn't matrix multiplication just multiplying the matching cells together?",
+            "answer": "Matrix multiplication is defined to represent the composition of two linear transformations, not element-by-element scaling — each cell of the product A×B is a sum of products across a row of A and a column of B, which is why product cell (1,1) is a₁₁b₁₁ + a₁₂b₂₁ rather than simply a₁₁×b₁₁."
+          },
+          {
+            "question": "Why can the transpose of A never fail, unlike the inverse?",
+            "answer": "The transpose is just a rearrangement — it swaps the two off-diagonal cells and leaves the diagonal cells untouched, which works for every possible matrix with no division involved. The inverse, by contrast, requires dividing by the determinant, which fails whenever the determinant happens to be zero."
+          }
+        ]
+      },
+      "vector-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Vector Calculator: the operations it computes on two 2D or 3D vectors, how projection and the angle between vectors are derived, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Adding Two Vectors",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operations",
+          "modesValue": "9",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "|A| = √(ax² + ay² + az²)  |  A·B = axbx + ayby + azbz  |  A×B = (aybz - azby, azbx - axbz, axby - aybx)  |  θ = cos⁻¹(A·B / |A||B|)",
+          "note": "All nine operations work on two 3D vectors A and B (a 2D vector is simply the case where the z-component is zero) — sum, difference, dot product, and cross product are always defined, while magnitude-dependent results like the angle between the vectors, A's unit vector, and the projection of A onto B require the relevant vector to be non-zero."
+        },
+        "flowchart": {
+          "intro": "The operations that only involve components (sum, difference, dot product, cross product) are always computed first; the operations that divide by a vector's length are computed afterward, only when that vector isn't the zero vector.",
+          "steps": [
+            "Compute each vector's magnitude: |A| = √(ax² + ay² + az²), and the same for B",
+            "Compute the sum, difference, dot product, and cross product component-by-component — these never fail",
+            "If A is non-zero, compute A's unit vector by dividing each component by |A|; otherwise flag a zero-vector-a error",
+            "If B is non-zero, compute the projection of A onto B using the dot product and |B|; otherwise flag a zero-vector-b error",
+            "If both A and B are non-zero, compute the angle between them using the dot product formula, clamping the cosine to [-1, 1] to guard against floating-point overshoot"
+          ],
+          "caption": "The always-safe component operations, followed by the magnitude-dependent operations that require a non-zero vector."
+        },
+        "anatomy": {
+          "intro": "Adding two vectors places them tip-to-tail: the sum is the diagonal of the parallelogram formed by A and B, reaching from the shared starting point to the opposite corner.",
+          "labelA": "A = (3, 4)",
+          "labelB": "B = (4, 0)",
+          "labelSum": "A + B = (7, 4)",
+          "caption": "Vector A = (3, 4) and vector B = (4, 0) added tip-to-tail produce the sum vector (7, 4), shown as the parallelogram's diagonal."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "ax, ay, az",
+            "meaning": "The x, y, and z components of vector A. Set az to 0 for a 2D vector.",
+            "unit": "Numbers"
+          },
+          {
+            "symbol": "bx, by, bz",
+            "meaning": "The x, y, and z components of vector B. Set bz to 0 for a 2D vector.",
+            "unit": "Numbers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Vector A is the zero vector",
+            "description": "A's unit vector requires dividing each component by |A|, which is undefined when |A| is zero — the tool returns null for the unit vector's components and flags a \"zero-vector-a\" error, while the sum, difference, dot product, and cross product still compute normally."
+          },
+          {
+            "title": "Vector B is the zero vector",
+            "description": "The projection of A onto B requires dividing by |B|, which is undefined when B is the zero vector — the tool returns null for the projection's scalar and vector components and flags a \"zero-vector-b\" error, but only if A wasn't already flagged as the zero vector (the error field holds a single code)."
+          },
+          {
+            "title": "Angle between vectors needs both to be non-zero",
+            "description": "The angle formula divides by |A| × |B| — if either vector has zero magnitude, the angle is mathematically undefined, so the tool only computes it when both A and B are confirmed non-zero, leaving it null otherwise."
+          },
+          {
+            "title": "Cosine clamped to a valid range before arccos",
+            "description": "Floating-point rounding can occasionally push the computed cosine value very slightly above 1 or below -1, which would make Math.acos() return NaN — the tool clamps the value into the mathematically valid [-1, 1] range first, so the angle calculation stays reliable even at floating-point boundaries."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the angle between two vectors sometimes shown as empty even though both magnitudes are listed?",
+            "answer": "The angle is only left blank when at least one of the two vectors has zero magnitude — since the angle formula divides by the product of both magnitudes, a zero-length vector has no defined direction to measure an angle from, so there's nothing meaningful to report."
+          },
+          {
+            "question": "What's the difference between the dot product and the cross product?",
+            "answer": "The dot product returns a single number describing how aligned two vectors are (large and positive when they point the same way, zero when perpendicular, negative when opposite); the cross product returns a new vector perpendicular to both inputs, whose length reflects the area of the parallelogram they form — dot product works in any dimension, while the specific cross-product formula used here is defined for 3D (or 2D-as-3D) vectors."
+          },
+          {
+            "question": "Why does the tool only report one error even when both vectors are zero?",
+            "answer": "The error field holds a single code, and the check for A runs first — if A is the zero vector, that error takes priority and is reported, and the check for B's error is only applied if A's check didn't already set one. Regardless of which error is shown, the underlying issue (a zero-length vector) is present either way."
+          },
+          {
+            "question": "What is vector projection, and why does it require vector B to be non-zero?",
+            "answer": "The projection of A onto B is the \"shadow\" A would cast onto B's line if light shone perpendicular to B — it describes how much of A points in B's direction. Since this shadow is measured along B's direction, B must have a defined direction, which a zero-length vector doesn't have — so the projection is left undefined when B is the zero vector."
+          }
+        ]
+      },
+      "graphing-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Graphing Calculator: how it parses and samples a function expression, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionCurve": "Sampling a Function",
+        "sectionAnatomy": "The Sampling Grid",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Built-in Functions",
+          "modesValue": "12",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "y = f(x), evaluated at x = xMin + i × (xMax - xMin) / (samples - 1), for i = 0 to samples - 1",
+          "note": "The tool doesn't recognize a fixed list of formulas — it parses whatever expression you type into an abstract syntax tree using a small recursive-descent parser, then evaluates that tree at a series of evenly spaced x-values to build the plotted curve."
+        },
+        "flowchart": {
+          "intro": "Before any plotting happens, the expression is parsed exactly once into a reusable tree structure; evaluating that tree many times (once per sample point) is far cheaper than re-parsing the text for every x-value.",
+          "steps": [
+            "Validate that xMax is greater than xMin and the sample count is between 2 and 2000",
+            "Tokenize the expression into numbers, identifiers, operators, and parentheses",
+            "Parse the tokens into an expression tree, respecting standard operator precedence (parentheses, then powers, then unary minus, then multiplication/division, then addition/subtraction)",
+            "Evaluate the tree once at each evenly spaced x-value between xMin and xMax",
+            "Where evaluation produces a non-finite result (like dividing by zero), record that point's y-value as null instead of failing the whole graph"
+          ],
+          "caption": "The parse-once, evaluate-many-times pipeline this tool uses to turn a typed expression into a plotted curve."
+        },
+        "curve": {
+          "intro": "Plotting a function means computing its output at many closely spaced x-values and connecting the resulting points — the more samples used, the smoother the resulting curve appears.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 2",
+          "caption": "The expression \"x^2 - 2\" sampled at seven evenly spaced x-values from -3 to 3, producing the points that trace out the parabola."
+        },
+        "anatomy": {
+          "intro": "Behind every plotted curve is a simple grid of x-values, evenly spaced between the chosen minimum and maximum, at which the expression gets evaluated one point at a time.",
+          "labelMin": "xMin",
+          "labelMax": "xMax",
+          "caption": "Seven evenly spaced sample points between xMin = -3 and xMax = 3 — the actual tool uses up to 2000 such points by default for a smooth curve."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Expression",
+            "meaning": "The function of x to plot, using standard arithmetic, powers, and built-in functions like sin, cos, sqrt, ln, and abs.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "xMin",
+            "meaning": "The smallest x-value to evaluate the expression at.",
+            "unit": "Number"
+          },
+          {
+            "symbol": "xMax",
+            "meaning": "The largest x-value to evaluate the expression at. Must be greater than xMin.",
+            "unit": "Number"
+          },
+          {
+            "symbol": "Samples",
+            "meaning": "How many evenly spaced x-values to evaluate between xMin and xMax. Must be between 2 and 2000.",
+            "unit": "Integer"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "xMax not greater than xMin",
+            "description": "If the maximum x-value isn't strictly greater than the minimum, there's no valid range to sample across — the tool returns an \"invalid-range\" error and produces no points rather than trying to plot a zero-or-negative-width range."
+          },
+          {
+            "title": "Sample count outside 2 to 2000",
+            "description": "Fewer than 2 samples can't form a line, and more than 2000 would be excessive computational work for a single plot — a sample count outside that range also returns an \"invalid-range\" error."
+          },
+          {
+            "title": "Expression that fails to parse",
+            "description": "An expression with an unexpected character, an unknown function name, or a missing closing parenthesis fails during parsing — the tool catches this and returns an \"invalid-expression\" error along with the parser's specific message (like \"Missing closing parenthesis\"), rather than plotting nothing with no explanation."
+          },
+          {
+            "title": "Individual points that evaluate to a non-finite value",
+            "description": "A function like 1/x is undefined at x = 0, and sqrt(x) is undefined for negative x — rather than failing the entire plot when one sample point hits an undefined case, the tool records that single point's y-value as null, so the curve simply has a gap there instead of disappearing entirely."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do some graphs have visible gaps instead of a continuous line?",
+            "answer": "A gap appears at any x-value where the expression evaluates to something non-finite — for example, 1/x is undefined at x = 0, and sqrt(x) is undefined for negative x. Rather than connecting across these undefined points with a misleading line, the tool leaves that sample point out, creating a visible break exactly where the function is genuinely undefined."
+          },
+          {
+            "question": "What functions and constants can I use in an expression?",
+            "answer": "The built-in functions are sin, cos, tan, asin, acos, atan, sqrt, abs, ln (natural log), log (base-10 log), exp, max, and min, plus the constants pi and e — function names are case-insensitive, so SIN(x) and sin(x) both work."
+          },
+          {
+            "question": "Why is there a maximum of 2000 sample points?",
+            "answer": "Each sample point requires re-evaluating the expression tree once, so the total work scales directly with the sample count — capping it at 2000 keeps even a complex expression fast to plot in the browser while still producing a visually smooth curve, since 2000 points across a typical range is far more than the eye can distinguish from a continuous line."
+          },
+          {
+            "question": "Why does \"-2^2\" evaluate to -4 instead of 4?",
+            "answer": "The parser treats unary minus as binding more loosely than the power operator but more tightly than multiplication, matching standard calculator and mathematical convention — this means \"-2^2\" parses as \"-(2^2)\" = -4, not \"(-2)^2\" = 4. To square a negative number, wrap it in parentheses explicitly: \"(-2)^2\"."
+          }
+        ]
+      },
+      "notepad-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Notepad Calculator: how it evaluates free-form text line by line, how variables carry from one line to the next, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Pattern",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionWorkedExample": "A Worked Example",
+        "sectionAnatomy": "Before and After a Calculation",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Line Types",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "name = expression  →  scope[name] = evaluate(expression, scope)",
+          "note": "There's no single formula here — instead, each line is checked against an assignment pattern (\"name = expression\"), and if it matches, the evaluated result is stored under that name in a running scope that every later line can read from."
+        },
+        "flowchart": {
+          "intro": "The tool processes the notepad's text one line at a time, from top to bottom, carrying a single running scope of named values forward as it goes.",
+          "steps": [
+            "Split the notepad's text into individual lines",
+            "For a blank line, record no result and move on — this is expected, not an error",
+            "For a line matching \"name = expression\" (where name isn't a reserved word like pi or e), evaluate the expression using the current scope, store the result under that name, and show it",
+            "For any other non-blank line, try evaluating it as a standalone expression using the current scope and show the result if it parses",
+            "For a line that doesn't parse as either an assignment or an expression (plain prose, a heading), show no result — this lets notes and calculations mix freely in the same document"
+          ],
+          "caption": "The top-to-bottom, line-by-line pass that builds up the notepad's variable scope as it evaluates."
+        },
+        "workedExample": {
+          "intro": "A short three-line example shows how a value defined on one line becomes available to every line that follows it.",
+          "steps": [
+            "Line 1: \"tax = 8.5\" — matches the assignment pattern, evaluates to 8.5, and stores tax = 8.5 in the scope",
+            "Line 2: \"100 + tax\" — evaluates as a plain expression, looks up tax in the scope, and shows the result 108.5",
+            "Line 3: \"subtotal * 2\" — since subtotal was never defined on an earlier line, this expression fails to evaluate and shows no result"
+          ],
+          "caption": "A variable defined on one line is available to every line below it, but referencing an undefined name simply produces no result."
+        },
+        "anatomy": {
+          "intro": "The whole point of carrying a variable forward is that a later line's result reflects every value defined before it — the same base number produces a different final result once a variable is folded in.",
+          "labelBefore": "100 (before tax)",
+          "labelAfter": "108.5 (100 + tax)",
+          "caption": "The line \"100 + tax\" evaluates to 108.5 once tax = 8.5 has been defined on an earlier line and carried into the scope."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "The full multi-line notepad content — every line is evaluated independently, in order, against the running variable scope.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Reserved names can't be reassigned",
+            "description": "A line like \"pi = 3\" is not treated as an assignment, since \"pi\" and \"e\" are reserved for the built-in mathematical constants (π and e) — the line is instead evaluated as a plain expression, which will typically fail to parse as valid syntax and show no result."
+          },
+          {
+            "title": "Blank lines always show no result",
+            "description": "An empty line is recorded with a null result by design, not evaluated as an error — this is expected behavior for a free-form document where blank lines are just visual spacing."
+          },
+          {
+            "title": "Prose and headings show no result, silently",
+            "description": "A line like \"Monthly Budget\" or \"--- Totals ---\" doesn't match the assignment pattern and doesn't parse as a valid expression, so it shows no result without any error message — this is what makes it possible to mix notes and calculations freely in the same document."
+          },
+          {
+            "title": "A line can't use a variable defined further down",
+            "description": "The scope is built strictly top to bottom — a line that references a variable name which is only defined on a later line will fail to evaluate and show no result, since that name doesn't exist in the scope yet at the point that line is processed."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Can I define a variable named \"pi\" or \"e\"?",
+            "answer": "No — both names are reserved for the built-in mathematical constants (π ≈ 3.14159 and e ≈ 2.71828), so a line like \"pi = 10\" isn't treated as an assignment. If you type it, the tool instead tries to evaluate it as a plain expression, which typically won't parse and will show no result."
+          },
+          {
+            "question": "Why does a line with just a heading or a note show no result?",
+            "answer": "A line only shows a result if it either matches the \"name = expression\" assignment pattern or successfully parses as a standalone mathematical expression — plain text like a heading or a sentence doesn't match either pattern, so it's simply left with no result rather than showing an error, which is exactly what lets you mix notes and math freely."
+          },
+          {
+            "question": "Can a line use a variable that's defined further down in the notepad?",
+            "answer": "No — the notepad is evaluated strictly from top to bottom, building up its variable scope one line at a time. A line that references a variable before it's been assigned on an earlier line will find that name missing from the scope and simply show no result, so variables always need to be defined before the lines that use them."
+          },
+          {
+            "question": "What happens if a line has a typo or an invalid expression?",
+            "answer": "The tool tries to evaluate every non-blank line, but if the parser can't make sense of it — an unmatched parenthesis, an unknown function name, a stray symbol — that attempt fails silently and the line simply shows no result, the same as if it were a plain note. There's no error message shown inline, since a typo and an intentional note look the same to the parser."
+          }
+        ]
       }
     }
   }

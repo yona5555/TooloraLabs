@@ -7,6 +7,7 @@ import { parseLocalizedNumber } from "@tooloralabs/core";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import GraphInputPanel from "./GraphInputPanel";
 import GraphResult from "./GraphResult";
 import GraphQuickReference from "./GraphQuickReference";
@@ -75,6 +76,7 @@ export default function GraphingCalculator({ education }: { education: ReactNode
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="graphing-calculator" />
               <GraphQuickReference />
             </div>
           }

@@ -6,6 +6,7 @@ import { NotepadCalculator as NotepadCalculatorTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import NotepadInputPanel from "./NotepadInputPanel";
 import NotepadResult from "./NotepadResult";
 import NotepadQuickReference from "./NotepadQuickReference";
@@ -48,6 +49,7 @@ export default function NotepadCalculator({ education }: { education: ReactNode 
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="notepad-calculator" />
               <NotepadQuickReference />
             </div>
           }

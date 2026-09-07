@@ -7,6 +7,7 @@ import { parseLocalizedNumber } from "@tooloralabs/core";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import MathSolverInputPanel from "./MathSolverInputPanel";
 import MathSolverResult from "./MathSolverResult";
 import MathSolverQuickReference from "./MathSolverQuickReference";
@@ -92,6 +93,7 @@ export default function MathSolver({ education }: { education: ReactNode }) {
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="step-by-step-math-solver" />
               <MathSolverQuickReference />
             </div>
           }

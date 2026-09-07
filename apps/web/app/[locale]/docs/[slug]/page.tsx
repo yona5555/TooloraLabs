@@ -28,6 +28,12 @@ import MeanMedianModeRangeCalculatorDocsPage, { getMeanMedianModeRangeCalculator
 import StandardDeviationCalculatorDocsPage, { getStandardDeviationCalculatorTocItems } from "@/components/docs/standard-deviation-calculator/StandardDeviationCalculatorDocsPage";
 import ProbabilityCalculatorDocsPage, { getProbabilityCalculatorTocItems } from "@/components/docs/probability-calculator/ProbabilityCalculatorDocsPage";
 import RandomNumberGeneratorDocsPage, { getRandomNumberGeneratorTocItems } from "@/components/docs/random-number-generator/RandomNumberGeneratorDocsPage";
+import ScientificCalculatorDocsPage, { getScientificCalculatorTocItems } from "@/components/docs/scientific-calculator/ScientificCalculatorDocsPage";
+import StepByStepMathSolverDocsPage, { getStepByStepMathSolverTocItems } from "@/components/docs/step-by-step-math-solver/StepByStepMathSolverDocsPage";
+import MatrixCalculatorDocsPage, { getMatrixCalculatorTocItems } from "@/components/docs/matrix-calculator/MatrixCalculatorDocsPage";
+import VectorCalculatorDocsPage, { getVectorCalculatorTocItems } from "@/components/docs/vector-calculator/VectorCalculatorDocsPage";
+import GraphingCalculatorDocsPage, { getGraphingCalculatorTocItems } from "@/components/docs/graphing-calculator/GraphingCalculatorDocsPage";
+import NotepadCalculatorDocsPage, { getNotepadCalculatorTocItems } from "@/components/docs/notepad-calculator/NotepadCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -165,6 +171,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "random-number-generator":
       content = <RandomNumberGeneratorDocsPage />;
       tocItems = await getRandomNumberGeneratorTocItems();
+      break;
+    case "scientific-calculator":
+      content = <ScientificCalculatorDocsPage />;
+      tocItems = await getScientificCalculatorTocItems();
+      break;
+    case "step-by-step-math-solver":
+      content = <StepByStepMathSolverDocsPage />;
+      tocItems = await getStepByStepMathSolverTocItems();
+      break;
+    case "matrix-calculator":
+      content = <MatrixCalculatorDocsPage />;
+      tocItems = await getMatrixCalculatorTocItems();
+      break;
+    case "vector-calculator":
+      content = <VectorCalculatorDocsPage />;
+      tocItems = await getVectorCalculatorTocItems();
+      break;
+    case "graphing-calculator":
+      content = <GraphingCalculatorDocsPage />;
+      tocItems = await getGraphingCalculatorTocItems();
+      break;
+    case "notepad-calculator":
+      content = <NotepadCalculatorDocsPage />;
+      tocItems = await getNotepadCalculatorTocItems();
       break;
   }
 

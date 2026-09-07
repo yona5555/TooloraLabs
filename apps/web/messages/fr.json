@@ -24306,6 +24306,628 @@
             "answer": "L'outil prend explicitement le plus petit des deux valeurs saisies comme plancher de la plage et le plus grand comme plafond avant de générer quoi que ce soit ; cela signifie que la plage est toujours interprétée correctement, quel que soit le champ dans lequel un utilisateur saisit le nombre le plus petit ou le plus grand."
           }
         ]
+      },
+      "scientific-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice scientifique : chaque opération prise en charge, le fonctionnement du mode angle et des vérifications de domaine, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionCurve": "Ce que calcule une fonction trigonométrique",
+        "sectionAnatomy": "Trois fonctions, un angle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Opérations",
+          "modesValue": "20",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "sin/cos/tan(θ) convertissent d'abord les degrés en radians  |  √x, ln(x), log₁₀(x) exigent que x soit dans un domaine valide  |  aⁿ, ⁿ√a utilisent Math.pow",
+          "note": "La calculatrice envoie le calcul vers l'une de vingt opérations selon le bouton pressé — arithmétique, puissances et racines, trigonométrie et logarithmes ont chacune leur propre formule et leurs propres restrictions de domaine."
+        },
+        "flowchart": {
+          "intro": "Chaque opération suit le même pipeline de validation avant de calculer un résultat, de sorte qu'une entrée invalide (comme diviser par zéro) produit toujours une erreur typée plutôt que NaN ou Infinity apparaissant silencieusement à l'écran.",
+          "steps": [
+            "Vérifier si l'opération nécessite un second opérande (addition, soustraction, multiplication, division, puissance, racine) et l'exiger",
+            "Pour les fonctions trigonométriques, convertir d'abord l'entrée des degrés en radians, sauf si le mode radians est sélectionné",
+            "Appliquer la vérification de domaine propre à l'opération (la racine carrée et les logarithmes rejettent les entrées négatives ou nulles, la trigonométrie inverse rejette les valeurs hors de [-1, 1])",
+            "Calculer le résultat à l'aide de la fonction Math JavaScript correspondante",
+            "Rejeter les résultats non finis (dépassement dû à des puissances très grandes, ou tan() près de ses points indéfinis) comme une erreur hors plage"
+          ],
+          "caption": "Le pipeline commun de validation puis de calcul que chacune des vingt opérations traverse."
+        },
+        "curve": {
+          "intro": "Une fonction trigonométrique comme le sinus n'est pas un nombre unique — c'est une valeur qui change continuellement à mesure que l'angle change, traçant une onde répétitive sur un tour complet.",
+          "xLabel": "Angle (degrés)",
+          "yLabel": "sin(θ)",
+          "caption": "sin(θ) échantillonné tous les 60° sur un tour complet, montrant l'onde monter à 1, descendre en passant par 0 jusqu'à -1, puis revenir."
+        },
+        "anatomy": {
+          "intro": "Le sinus, le cosinus et la tangente décrivent tous le même angle à partir de trois rapports différents — les évaluer tous les trois en même temps montre comment ils se rapportent les uns aux autres pour un angle spécifique.",
+          "labelSin": "sin(30°)",
+          "labelCos": "cos(30°)",
+          "labelTan": "tan(30°)",
+          "caption": "À un angle de 30°, le sinus, le cosinus et la tangente renvoient chacun une valeur différente, car ils mesurent trois rapports de côtés différents du même triangle."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Opération",
+            "meaning": "Laquelle des vingt opérations prises en charge appliquer — arithmétique, puissance/racine, trigonométrique ou logarithmique.",
+            "unit": "—"
+          },
+          {
+            "symbol": "A",
+            "meaning": "L'opérande principal utilisé par chaque opération.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "B",
+            "meaning": "Le second opérande, requis uniquement pour les opérations binaires (addition, soustraction, multiplication, division, puissance, racine).",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "Mode d'angle",
+            "meaning": "Si les entrées et sorties trigonométriques sont interprétées en degrés ou en radians.",
+            "unit": "degrés / radians"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Second opérande manquant",
+            "description": "Les opérations binaires (addition, soustraction, multiplication, division, puissance, racine) nécessitent un second opérande B — s'il est manquant, l'outil renvoie une erreur « MISSING_OPERAND » plutôt que de substituer silencieusement une valeur par défaut comme zéro."
+          },
+          {
+            "title": "Division et inverse par zéro",
+            "description": "Diviser par zéro, prendre l'inverse de zéro, ou prendre une racine d'indice zéro renvoient tous une erreur « DIVISION_BY_ZERO », car chacune de ces opérations est mathématiquement indéfinie pour cette entrée."
+          },
+          {
+            "title": "Erreurs de domaine pour les racines, logarithmes et trigonométrie inverse",
+            "description": "La racine carrée et les logarithmes d'un nombre négatif ou nul, une racine d'indice pair d'un nombre négatif, et le sinus/cosinus inverse d'une valeur hors de [-1, 1] renvoient tous une erreur « DOMAIN_ERROR » plutôt qu'un résultat NaN."
+          },
+          {
+            "title": "tan() près de ses points indéfinis",
+            "description": "L'imprécision en virgule flottante fait que tan(90°) ne renvoie pas exactement Infinity — elle renvoie plutôt un nombre fini extrêmement grand. L'outil traite tout résultat de tangente dépassant un seuil de magnitude raisonnable comme une erreur « OUT_OF_RANGE », correspondant à ce qu'un utilisateur de calculatrice attendrait réellement à cet angle."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la calculatrice a-t-elle besoin de savoir si j'utilise des degrés ou des radians ?",
+            "answer": "Les fonctions trigonométriques sont mathématiquement définies en radians, mais la plupart des mesures d'angle courantes (comme un virage à 90°) sont exprimées en degrés — le réglage du mode d'angle indique à la calculatrice dans quelle unité se trouve votre entrée, afin qu'elle puisse convertir en radians en interne avant de calculer sin, cos ou tan, et reconvertir pour les fonctions inverses."
+          },
+          {
+            "question": "Pourquoi tan(90°) affiche-t-elle une erreur plutôt qu'un très grand nombre ?",
+            "answer": "La tangente est mathématiquement indéfinie à 90° (et à chaque multiple impair de 90°), car elle est définie comme sin/cos et le cosinus y est nul — l'arithmétique en virgule flottante ne peut pas représenter 90° exactement comme une fraction de π, donc Math.tan() renvoie un nombre fini énorme plutôt que l'infini véritable, et l'outil détecte cela et le signale comme indéfini plutôt que d'afficher un nombre énorme faussement précis."
+          },
+          {
+            "question": "Pourquoi la racine carrée d'un nombre négatif est-elle une erreur, mais pas la racine cubique ?",
+            "answer": "Une racine carrée (ou toute racine d'indice pair) d'un nombre négatif n'a pas de réponse en nombre réel — la solution réelle la plus proche serait un nombre imaginaire, que cette calculatrice ne prend pas en charge, donc elle est signalée comme une erreur de domaine. Une racine cubique (ou toute racine d'indice impair) d'un nombre négatif a bien une réponse réelle (la racine cubique de -8 est -2), donc elle se calcule normalement."
+          },
+          {
+            "question": "Que se passe-t-il si j'essaie de diviser par zéro ou de prendre l'inverse de zéro ?",
+            "answer": "Les deux opérations sont mathématiquement indéfinies — il n'existe aucun nombre qui, multiplié par zéro, redonne la valeur d'origine — donc la calculatrice renvoie une erreur de division par zéro plutôt qu'Infinity ou NaN, ce qui serait déroutant à voir sur l'écran d'une calculatrice."
+          }
+        ]
+      },
+      "step-by-step-math-solver": {
+        "version": "v1",
+        "description": "Référence technique du Solveur de mathématiques pas à pas : les quatre problèmes d'algèbre et d'analyse qu'il résout, comment chaque solution est dérivée, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formules principales",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionRoots": "Visualiser les racines",
+        "sectionAnatomy": "La parabole derrière les racines",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes du solveur",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "6 min"
+        },
+        "formula": {
+          "expression": "Linéaire : ax + b = cx + d  |  Quadratique : x = (-b ± √(b²-4ac)) / 2a  |  Fraction : a/b opération c/d  |  Dérivée : d/dx[xⁿ] = n·xⁿ⁻¹",
+          "note": "Chacun des quatre modes résout un type de problème véritablement différent, mais tous les quatre partagent la même conception : plutôt que de sauter directement à une réponse finale, le solveur construit et renvoie une liste d'étapes intermédiaires lisibles par un humain."
+        },
+        "flowchart": {
+          "intro": "La formule exécutée dépend entièrement du mode sélectionné — la ramification la plus riche se produit en mode quadratique, où le signe du discriminant détermine si la solution est deux racines réelles, une racine répétée, ou une paire de racines complexes.",
+          "steps": [
+            "Lire lequel des quatre modes est sélectionné : équation linéaire, équation quadratique, opération sur fractions, ou dérivée",
+            "Pour une équation quadratique, calculer le discriminant D = b² - 4ac",
+            "Si D > 0 : calculer deux racines réelles distinctes avec x = (-b ± √D) / 2a",
+            "Si D = 0 : calculer une racine réelle répétée avec x = -b / 2a",
+            "Si D < 0 : calculer une paire de racines complexes, car la racine carrée d'un discriminant négatif n'a pas de valeur réelle"
+          ],
+          "caption": "La ramification pilotée par le discriminant qui détermine combien de racines a une équation quadratique, et si elles sont réelles ou complexes."
+        },
+        "roots": {
+          "intro": "Pour une équation quadratique à discriminant positif, les deux racines sont exactement les valeurs de x où la parabole croise l'axe des x — les tracer sur une droite numérique montre à quel point elles sont éloignées.",
+          "labelX1": "x₁ = 2",
+          "labelX2": "x₂ = 3",
+          "caption": "Les deux racines réelles de x² - 5x + 6 = 0, trouvées à partir d'un discriminant de 1 (5² - 4×1×6 = 1)."
+        },
+        "anatomy": {
+          "intro": "Les racines rapportées par un solveur quadratique ne sont pas un résultat algébrique abstrait — ce sont exactement les valeurs de x où le graphe de l'équation touche y = 0.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 5x + 6",
+          "caption": "La parabole y = x² - 5x + 6 passe sous l'axe des x entre x = 2 et x = 3, croisant zéro exactement aux deux racines calculées par le solveur."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Lequel des quatre solveurs exécuter : équation linéaire, équation quadratique, opération sur fractions, ou dérivée.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Linéaire a, b, c, d",
+            "meaning": "Les coefficients de l'équation ax + b = cx + d, utilisés uniquement en mode linéaire.",
+            "unit": "Nombres"
+          },
+          {
+            "symbol": "Quadratique a, b, c",
+            "meaning": "Les coefficients de ax² + bx + c = 0, utilisés uniquement en mode quadratique. 'a' ne peut pas être nul.",
+            "unit": "Nombres"
+          },
+          {
+            "symbol": "Fraction a/b, opérateur, c/d",
+            "meaning": "Deux fractions et une opération (addition, soustraction, multiplication, division) pour les combiner, utilisées uniquement en mode fraction.",
+            "unit": "Nombres"
+          },
+          {
+            "symbol": "Termes du polynôme",
+            "meaning": "Une liste de paires coefficient-puissance décrivant un polynôme f(x), utilisée uniquement en mode dérivée.",
+            "unit": "Coefficient, Puissance"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Équation linéaire sans solution unique",
+            "description": "Si le coefficient de x s'annule des deux côtés (a = c), l'équation est vraie pour toute valeur de x (une infinité de solutions, lorsque les constantes correspondent aussi) ou pour aucune valeur de x du tout (lorsqu'elles ne correspondent pas) — dans les deux cas, le solveur rapporte « no-unique-solution » plutôt qu'une seule valeur de x."
+          },
+          {
+            "title": "Coefficient quadratique 'a' égal à zéro",
+            "description": "Si le coefficient dominant a est nul, l'équation ax² + bx + c = 0 s'effondre en une équation linéaire, pas quadratique — le solveur rejette cela comme « invalid-quadratic-equation » plutôt que d'essayer de diviser par zéro dans la formule quadratique."
+          },
+          {
+            "title": "Un discriminant négatif donne des racines complexes",
+            "description": "Lorsque le discriminant est négatif, le solveur ne renvoie pas d'erreur — il rapporte les deux racines sous forme de nombre complexe a + bi, car une équation quadratique à coefficients réels et à discriminant négatif a effectivement deux solutions complexes conjuguées."
+          },
+          {
+            "title": "Diviser une fraction par une fraction de numérateur nul",
+            "description": "Diviser par une fraction revient à multiplier par son inverse, ce qui nécessite d'inverser le numérateur et le dénominateur de la seconde fraction — si ce numérateur est nul, l'inverse aurait zéro à son dénominateur, donc le solveur rejette cela comme une erreur « division-by-zero » avant que cela ne se produise."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi une équation quadratique donne-t-elle parfois des réponses en nombres complexes ?",
+            "answer": "La formule quadratique nécessite de prendre la racine carrée du discriminant (b² - 4ac) — lorsque le discriminant est négatif, il n'existe aucun nombre réel dont le carré est négatif, mais il existe un nombre complexe (impliquant i, l'unité imaginaire) qui satisfait cela, donc le solveur rapporte les deux racines complexes conjuguées plutôt que d'affirmer qu'il n'y a pas de solution."
+          },
+          {
+            "question": "Quelle est la différence entre « pas de solution unique » et « pas de solution » pour une équation linéaire ?",
+            "answer": "Les deux se produisent lorsque les termes en x s'annulent des deux côtés de l'équation, ne laissant aucun x à résoudre — mais si les constantes restantes se trouvent être égales, l'équation d'origine est vraie pour tout x (une infinité de solutions) ; si elles ne sont pas égales, l'équation n'est jamais vraie pour aucun x (aucune solution du tout). L'outil distingue ces deux cas dans son message d'erreur."
+          },
+          {
+            "question": "Pourquoi la division de fractions est-elle résolue en multipliant par l'inverse ?",
+            "answer": "Diviser par un nombre équivaut à multiplier par l'inverse de ce nombre (son « retournement ») — cela est vrai pour les nombres entiers (diviser par 2 équivaut à multiplier par 1/2) et c'est également vrai pour les fractions, donc a/b ÷ c/d est calculé comme a/b × d/c, ce qui transforme un problème de division en un problème de multiplication utilisant la même règle de multiplication de fractions."
+          },
+          {
+            "question": "Pourquoi la dérivée d'un terme constant est-elle toujours nulle ?",
+            "answer": "Une dérivée mesure à quelle vitesse la sortie d'une fonction change lorsque x change — un terme constant comme 7 ne dépend pas du tout de x, donc sa valeur ne change jamais quelle que soit la valeur de x, ce qui signifie que son taux de changement est toujours nul. C'est pourquoi l'étape de la règle de puissance pour un terme constant (puissance 0) rapporte simplement 0 plutôt que d'appliquer la formule n·xⁿ⁻¹."
+          }
+        ]
+      },
+      "matrix-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de matrices : les six opérations sur matrices 2x2 qu'elle calcule, comment l'inverse et le déterminant sont liés, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "De la matrice à l'inverse",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Opérations",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "det(A) = a₁₁a₂₂ - a₁₂a₂₁  |  A⁻¹ = (1/det A) × [a₂₂, -a₁₂; -a₂₁, a₁₁]",
+          "note": "Chaque opération sur matrice 2x2 calculée par cet outil — somme, différence, produit, déterminant, transposée et inverse — se réduit à de l'arithmétique simple sur les quatre cellules individuelles, l'inverse étant la seule opération pouvant échouer (lorsque le déterminant est nul)."
+        },
+        "flowchart": {
+          "intro": "Six opérations sont calculées à partir des deux mêmes matrices d'entrée ; cinq d'entre elles réussissent toujours, et la sixième (l'inverse) dépend du fait que le déterminant de la matrice A soit nul ou non.",
+          "steps": [
+            "Additionner et soustraire A et B cellule par cellule pour obtenir la somme et la différence",
+            "Multiplier A et B selon la règle du produit matriciel (chaque cellule de sortie est une somme de deux produits) pour obtenir A×B",
+            "Calculer le déterminant de A et de B indépendamment : a₁₁a₂₂ - a₁₂a₂₁",
+            "Calculer la transposée de A en échangeant ses cellules hors diagonale (a₁₂ et a₂₁)",
+            "Si le déterminant de A est non nul, calculer l'inverse de A en divisant les cellules échangées et négées par le déterminant ; sinon, marquer A comme singulière et laisser l'inverse indéfinie"
+          ],
+          "caption": "Les six opérations que cet outil calcule à partir des deux mêmes matrices 2x2 — seule l'étape de l'inverse se ramifie selon que A est singulière."
+        },
+        "anatomy": {
+          "intro": "L'inverse d'une matrice est entièrement construite à partir de ses propres quatre cellules et de son déterminant — échangez les cellules diagonales, négez les cellules hors diagonale, puis divisez le tout par le déterminant.",
+          "labelMatrix": "Matrice A",
+          "labelDeterminant": "det(A)",
+          "labelInverse": "A⁻¹",
+          "caption": "Pour A = [[4, 7], [2, 6]], le déterminant est 4×6 - 7×2 = 10, et l'inverse divise les cellules réarrangées par ce déterminant."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "a₁₁, a₁₂, a₂₁, a₂₂",
+            "meaning": "Les quatre cellules de la matrice A, lues de gauche à droite, de haut en bas.",
+            "unit": "Nombres"
+          },
+          {
+            "symbol": "b₁₁, b₁₂, b₂₁, b₂₂",
+            "meaning": "Les quatre cellules de la matrice B, lues de gauche à droite, de haut en bas.",
+            "unit": "Nombres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Matrice A singulière (déterminant nul)",
+            "description": "Lorsque le déterminant de A est nul, diviser par celui-ci pour calculer l'inverse est indéfini — l'outil renvoie null pour les quatre cellules de l'inverse et marque une erreur « singular-matrix-a », tandis que toute autre opération (somme, différence, produit, les deux déterminants, transposée) continue de se calculer normalement."
+          },
+          {
+            "title": "Une matrice B singulière ne génère aucune erreur",
+            "description": "L'outil ne vérifie et ne rapporte que l'inversibilité de la matrice A, puisque c'est la seule matrice dont il calcule l'inverse — si le déterminant de B est nul, determinantB rapporte simplement 0 sans erreur, car l'inverse de B n'a jamais été demandée."
+          },
+          {
+            "title": "Résultats arrondis à 10 chiffres significatifs",
+            "description": "Chaque valeur de sortie passe par toPrecision(10) avant d'être renvoyée, ce qui empêche les artefacts de virgule flottante (comme une somme qui devrait être exactement 0,3 s'affichant comme 0,30000000000000004) d'apparaître dans les résultats."
+          },
+          {
+            "title": "La transposée n'est calculée que pour A",
+            "description": "L'outil expose la transposée de A (en échangeant a₁₂ et a₂₁) mais pas celle de B, car aucune des six opérations qu'il propose — somme, différence, produit (spécifiquement A×B), les deux déterminants, et l'inverse de A — ne nécessite la transposée de B pour être calculée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil ne calcule-t-il que l'inverse de la matrice A, pas de la matrice B ?",
+            "answer": "L'outil est construit autour d'un ensemble fixe de six opérations — somme, différence, le produit A×B, les deux déterminants, la transposée de A et l'inverse de A — et l'inverse de B n'est tout simplement pas l'une des opérations qu'il a été conçu pour exposer. Si vous avez besoin de l'inverse de B, vous pouvez échanger la matrice que vous saisissez comme A."
+          },
+          {
+            "question": "Que se passe-t-il si la matrice A ne peut pas être inversée ?",
+            "answer": "Une matrice ne peut être inversée que si son déterminant est non nul — lorsque le déterminant de A est exactement nul (une matrice « singulière »), il n'existe aucune matrice qui, multipliée par A, donne la matrice identité, donc l'outil rapporte une erreur de matrice singulière et laisse les quatre cellules de l'inverse vides plutôt que de diviser par zéro."
+          },
+          {
+            "question": "Pourquoi la multiplication matricielle n'est-elle pas simplement la multiplication des cellules correspondantes ?",
+            "answer": "La multiplication matricielle est définie pour représenter la composition de deux transformations linéaires, pas une mise à l'échelle élément par élément — chaque cellule du produit A×B est une somme de produits le long d'une ligne de A et d'une colonne de B, c'est pourquoi la cellule du produit (1,1) est a₁₁b₁₁ + a₁₂b₂₁ et non simplement a₁₁×b₁₁."
+          },
+          {
+            "question": "Pourquoi la transposée de A ne peut-elle jamais échouer, contrairement à l'inverse ?",
+            "answer": "La transposée n'est qu'un réarrangement — elle échange les deux cellules hors diagonale et laisse les cellules diagonales intactes, ce qui fonctionne pour toute matrice possible sans aucune division impliquée. L'inverse, en revanche, nécessite de diviser par le déterminant, ce qui échoue chaque fois que le déterminant se trouve être nul."
+          }
+        ]
+      },
+      "vector-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de vecteurs : les opérations qu'elle calcule sur deux vecteurs 2D ou 3D, comment la projection et l'angle entre vecteurs sont dérivés, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionAnatomy": "Additionner deux vecteurs",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Opérations",
+          "modesValue": "9",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "|A| = √(ax² + ay² + az²)  |  A·B = axbx + ayby + azbz  |  A×B = (aybz - azby, azbx - axbz, axby - aybx)  |  θ = cos⁻¹(A·B / |A||B|)",
+          "note": "Les neuf opérations agissent sur deux vecteurs 3D A et B (un vecteur 2D est simplement le cas où la composante z est nulle) — la somme, la différence, le produit scalaire et le produit vectoriel sont toujours définis, tandis que les résultats dépendant de la magnitude comme l'angle entre les vecteurs, le vecteur unitaire de A et la projection de A sur B nécessitent que le vecteur concerné soit non nul."
+        },
+        "flowchart": {
+          "intro": "Les opérations qui n'impliquent que des composantes (somme, différence, produit scalaire, produit vectoriel) sont toujours calculées en premier ; les opérations qui divisent par la longueur d'un vecteur sont calculées ensuite, uniquement lorsque ce vecteur n'est pas le vecteur nul.",
+          "steps": [
+            "Calculer la magnitude de chaque vecteur : |A| = √(ax² + ay² + az²), et de même pour B",
+            "Calculer la somme, la différence, le produit scalaire et le produit vectoriel composante par composante — ceux-ci n'échouent jamais",
+            "Si A est non nul, calculer le vecteur unitaire de A en divisant chaque composante par |A| ; sinon marquer une erreur zero-vector-a",
+            "Si B est non nul, calculer la projection de A sur B à l'aide du produit scalaire et de |B| ; sinon marquer une erreur zero-vector-b",
+            "Si A et B sont tous deux non nuls, calculer l'angle entre eux à l'aide de la formule du produit scalaire, en limitant le cosinus à [-1, 1] pour se prémunir contre les dépassements en virgule flottante"
+          ],
+          "caption": "Les opérations sur composantes, toujours sûres, suivies des opérations dépendant de la magnitude qui nécessitent un vecteur non nul."
+        },
+        "anatomy": {
+          "intro": "Additionner deux vecteurs les place bout à bout : la somme est la diagonale du parallélogramme formé par A et B, allant du point de départ commun au coin opposé.",
+          "labelA": "A = (3, 4)",
+          "labelB": "B = (4, 0)",
+          "labelSum": "A + B = (7, 4)",
+          "caption": "Le vecteur A = (3, 4) et le vecteur B = (4, 0) additionnés bout à bout produisent le vecteur somme (7, 4), représenté comme la diagonale du parallélogramme."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "ax, ay, az",
+            "meaning": "Les composantes x, y et z du vecteur A. Réglez az sur 0 pour un vecteur 2D.",
+            "unit": "Nombres"
+          },
+          {
+            "symbol": "bx, by, bz",
+            "meaning": "Les composantes x, y et z du vecteur B. Réglez bz sur 0 pour un vecteur 2D.",
+            "unit": "Nombres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le vecteur A est le vecteur nul",
+            "description": "Le vecteur unitaire de A nécessite de diviser chaque composante par |A|, ce qui est indéfini lorsque |A| est nul — l'outil renvoie null pour les composantes du vecteur unitaire et marque une erreur « zero-vector-a », tandis que la somme, la différence, le produit scalaire et le produit vectoriel continuent de se calculer normalement."
+          },
+          {
+            "title": "Le vecteur B est le vecteur nul",
+            "description": "La projection de A sur B nécessite de diviser par |B|, ce qui est indéfini lorsque B est le vecteur nul — l'outil renvoie null pour les composantes scalaire et vectorielle de la projection et marque une erreur « zero-vector-b », mais seulement si A n'était pas déjà marqué comme le vecteur nul (le champ d'erreur contient un seul code)."
+          },
+          {
+            "title": "L'angle entre vecteurs nécessite que les deux soient non nuls",
+            "description": "La formule de l'angle divise par |A| × |B| — si l'un des vecteurs a une magnitude nulle, l'angle est mathématiquement indéfini, donc l'outil ne le calcule que lorsque A et B sont tous deux confirmés non nuls, le laissant null dans le cas contraire."
+          },
+          {
+            "title": "Cosinus limité à une plage valide avant arccos",
+            "description": "L'arrondi en virgule flottante peut occasionnellement pousser la valeur de cosinus calculée très légèrement au-dessus de 1 ou en dessous de -1, ce qui ferait renvoyer NaN par Math.acos() — l'outil limite d'abord la valeur à la plage mathématiquement valide [-1, 1], afin que le calcul de l'angle reste fiable même aux limites de la virgule flottante."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'angle entre deux vecteurs est-il parfois affiché vide alors que les deux magnitudes sont listées ?",
+            "answer": "L'angle n'est laissé vide que lorsqu'au moins l'un des deux vecteurs a une magnitude nulle — puisque la formule de l'angle divise par le produit des deux magnitudes, un vecteur de longueur nulle n'a pas de direction définie à partir de laquelle mesurer un angle, donc il n'y a rien de significatif à rapporter."
+          },
+          {
+            "question": "Quelle est la différence entre le produit scalaire et le produit vectoriel ?",
+            "answer": "Le produit scalaire renvoie un nombre unique décrivant à quel point deux vecteurs sont alignés (grand et positif lorsqu'ils pointent dans la même direction, nul lorsqu'ils sont perpendiculaires, négatif lorsqu'ils sont opposés) ; le produit vectoriel renvoie un nouveau vecteur perpendiculaire aux deux entrées, dont la longueur reflète l'aire du parallélogramme qu'ils forment — le produit scalaire fonctionne dans toute dimension, tandis que la formule spécifique du produit vectoriel utilisée ici est définie pour les vecteurs 3D (ou 2D traités comme 3D)."
+          },
+          {
+            "question": "Pourquoi l'outil ne rapporte-t-il qu'une seule erreur même lorsque les deux vecteurs sont nuls ?",
+            "answer": "Le champ d'erreur contient un seul code, et la vérification pour A s'exécute en premier — si A est le vecteur nul, cette erreur a priorité et est rapportée, et la vérification de l'erreur de B n'est appliquée que si la vérification de A n'en a pas déjà défini une. Quelle que soit l'erreur affichée, le problème sous-jacent (un vecteur de longueur nulle) est présent dans les deux cas."
+          },
+          {
+            "question": "Qu'est-ce que la projection d'un vecteur, et pourquoi nécessite-t-elle que le vecteur B soit non nul ?",
+            "answer": "La projection de A sur B est « l'ombre » que A projetterait sur la ligne de B si la lumière brillait perpendiculairement à B — elle décrit combien de A pointe dans la direction de B. Puisque cette ombre est mesurée le long de la direction de B, B doit avoir une direction définie, ce qu'un vecteur de longueur nulle n'a pas — donc la projection reste indéfinie lorsque B est le vecteur nul."
+          }
+        ]
+      },
+      "graphing-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice graphique : comment elle analyse et échantillonne une expression de fonction, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionCurve": "Échantillonner une fonction",
+        "sectionAnatomy": "La grille d'échantillonnage",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Fonctions intégrées",
+          "modesValue": "12",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "y = f(x), évaluée en x = xMin + i × (xMax - xMin) / (échantillons - 1), pour i = 0 à échantillons - 1",
+          "note": "L'outil ne reconnaît pas une liste fixe de formules — il analyse l'expression que vous saisissez en un arbre syntaxique abstrait à l'aide d'un petit analyseur à descente récursive, puis évalue cet arbre à une série de valeurs de x régulièrement espacées pour construire la courbe tracée."
+        },
+        "flowchart": {
+          "intro": "Avant tout traçage, l'expression est analysée exactement une fois en une structure arborescente réutilisable ; évaluer cet arbre plusieurs fois (une fois par point d'échantillon) est bien moins coûteux que de ré-analyser le texte pour chaque valeur de x.",
+          "steps": [
+            "Vérifier que xMax est supérieur à xMin et que le nombre d'échantillons est compris entre 2 et 2000",
+            "Tokeniser l'expression en nombres, identifiants, opérateurs et parenthèses",
+            "Analyser les tokens en un arbre d'expression, en respectant la priorité standard des opérateurs (parenthèses, puis puissances, puis moins unaire, puis multiplication/division, puis addition/soustraction)",
+            "Évaluer l'arbre une fois à chaque valeur de x régulièrement espacée entre xMin et xMax",
+            "Lorsque l'évaluation produit un résultat non fini (comme diviser par zéro), enregistrer la valeur y de ce point comme null plutôt que de faire échouer tout le graphique"
+          ],
+          "caption": "Le pipeline analyser-une-fois-évaluer-plusieurs-fois utilisé par cet outil pour transformer une expression saisie en une courbe tracée."
+        },
+        "curve": {
+          "intro": "Tracer une fonction signifie calculer sa sortie à de nombreuses valeurs de x rapprochées et relier les points résultants — plus le nombre d'échantillons utilisés est élevé, plus la courbe résultante paraît lisse.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 2",
+          "caption": "L'expression « x^2 - 2 » échantillonnée à sept valeurs de x régulièrement espacées de -3 à 3, produisant les points qui tracent la parabole."
+        },
+        "anatomy": {
+          "intro": "Derrière chaque courbe tracée se trouve une grille simple de valeurs de x, régulièrement espacées entre le minimum et le maximum choisis, auxquelles l'expression est évaluée point par point.",
+          "labelMin": "xMin",
+          "labelMax": "xMax",
+          "caption": "Sept points d'échantillon régulièrement espacés entre xMin = -3 et xMax = 3 — l'outil réel utilise par défaut jusqu'à 2000 points de ce type pour une courbe lisse."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Expression",
+            "meaning": "La fonction de x à tracer, utilisant l'arithmétique standard, les puissances et des fonctions intégrées comme sin, cos, sqrt, ln et abs.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "xMin",
+            "meaning": "La plus petite valeur de x à laquelle évaluer l'expression.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "xMax",
+            "meaning": "La plus grande valeur de x à laquelle évaluer l'expression. Doit être supérieure à xMin.",
+            "unit": "Nombre"
+          },
+          {
+            "symbol": "Échantillons",
+            "meaning": "Combien de valeurs de x régulièrement espacées évaluer entre xMin et xMax. Doit être compris entre 2 et 2000.",
+            "unit": "Entier"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "xMax non supérieur à xMin",
+            "description": "Si la valeur maximale de x n'est pas strictement supérieure à la valeur minimale, il n'y a pas de plage valide à échantillonner — l'outil renvoie une erreur « invalid-range » et ne produit aucun point plutôt que d'essayer de tracer une plage de largeur nulle ou négative."
+          },
+          {
+            "title": "Nombre d'échantillons hors de 2 à 2000",
+            "description": "Moins de 2 échantillons ne peuvent pas former une ligne, et plus de 2000 représenterait un travail de calcul excessif pour un seul tracé — un nombre d'échantillons hors de cette plage renvoie également une erreur « invalid-range »."
+          },
+          {
+            "title": "Expression qui échoue à l'analyse",
+            "description": "Une expression avec un caractère inattendu, un nom de fonction inconnu, ou une parenthèse fermante manquante échoue lors de l'analyse — l'outil capture cela et renvoie une erreur « invalid-expression » accompagnée du message spécifique de l'analyseur (comme « Missing closing parenthesis »), plutôt que de ne rien tracer sans explication."
+          },
+          {
+            "title": "Points individuels s'évaluant à une valeur non finie",
+            "description": "Une fonction comme 1/x est indéfinie en x = 0, et sqrt(x) est indéfinie pour x négatif — plutôt que de faire échouer tout le tracé lorsqu'un point d'échantillon rencontre un cas indéfini, l'outil enregistre la valeur y de ce seul point comme null, de sorte que la courbe a simplement un trou à cet endroit plutôt que de disparaître entièrement."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi certains graphiques ont-ils des trous visibles plutôt qu'une ligne continue ?",
+            "answer": "Un trou apparaît à toute valeur de x où l'expression s'évalue à quelque chose de non fini — par exemple, 1/x est indéfinie en x = 0, et sqrt(x) est indéfinie pour x négatif. Plutôt que de relier ces points indéfinis par une ligne trompeuse, l'outil omet ce point d'échantillon, créant une rupture visible exactement là où la fonction est véritablement indéfinie."
+          },
+          {
+            "question": "Quelles fonctions et constantes puis-je utiliser dans une expression ?",
+            "answer": "Les fonctions intégrées sont sin, cos, tan, asin, acos, atan, sqrt, abs, ln (logarithme naturel), log (logarithme base 10), exp, max et min, plus les constantes pi et e — les noms de fonctions ne sont pas sensibles à la casse, donc SIN(x) et sin(x) fonctionnent tous deux."
+          },
+          {
+            "question": "Pourquoi y a-t-il un maximum de 2000 points d'échantillon ?",
+            "answer": "Chaque point d'échantillon nécessite de réévaluer l'arbre d'expression une fois, donc le travail total évolue directement avec le nombre d'échantillons — le plafonner à 2000 garde même une expression complexe rapide à tracer dans le navigateur tout en produisant une courbe visuellement lisse, puisque 2000 points sur une plage typique sont bien plus que ce que l'œil peut distinguer d'une ligne continue."
+          },
+          {
+            "question": "Pourquoi « -2^2 » s'évalue-t-il à -4 plutôt qu'à 4 ?",
+            "answer": "L'analyseur traite le moins unaire comme se liant plus lâchement que l'opérateur de puissance mais plus étroitement que la multiplication, correspondant à la convention standard des calculatrices et des mathématiques — cela signifie que « -2^2 » s'analyse comme « -(2^2) » = -4, pas « (-2)^2 » = 4. Pour élever au carré un nombre négatif, entourez-le explicitement de parenthèses : « (-2)^2 »."
+          }
+        ]
+      },
+      "notepad-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice bloc-notes : comment elle évalue du texte libre ligne par ligne, comment les variables se transmettent d'une ligne à l'autre, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Motif principal",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionWorkedExample": "Un exemple détaillé",
+        "sectionAnatomy": "Avant et après un calcul",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Types de ligne",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "nom = expression  →  scope[nom] = evaluate(expression, scope)",
+          "note": "Il n'y a pas de formule unique ici — au lieu de cela, chaque ligne est comparée à un motif d'affectation (« nom = expression »), et si elle correspond, le résultat évalué est stocké sous ce nom dans une portée courante que chaque ligne ultérieure peut lire."
+        },
+        "flowchart": {
+          "intro": "L'outil traite le texte du bloc-notes une ligne à la fois, de haut en bas, en transportant une seule portée courante de valeurs nommées au fur et à mesure.",
+          "steps": [
+            "Diviser le texte du bloc-notes en lignes individuelles",
+            "Pour une ligne vide, n'enregistrer aucun résultat et continuer — c'est attendu, pas une erreur",
+            "Pour une ligne correspondant à « nom = expression » (où nom n'est pas un mot réservé comme pi ou e), évaluer l'expression en utilisant la portée actuelle, stocker le résultat sous ce nom, et l'afficher",
+            "Pour toute autre ligne non vide, essayer de l'évaluer comme une expression autonome en utilisant la portée actuelle et afficher le résultat si elle s'analyse correctement",
+            "Pour une ligne qui ne s'analyse ni comme une affectation ni comme une expression (texte simple, un titre), n'afficher aucun résultat — cela permet de mélanger librement notes et calculs dans le même document"
+          ],
+          "caption": "Le passage de haut en bas, ligne par ligne, qui construit la portée de variables du bloc-notes au fur et à mesure de l'évaluation."
+        },
+        "workedExample": {
+          "intro": "Un court exemple de trois lignes montre comment une valeur définie sur une ligne devient disponible pour chaque ligne qui la suit.",
+          "steps": [
+            "Ligne 1 : « tax = 8.5 » — correspond au motif d'affectation, s'évalue à 8,5, et stocke tax = 8,5 dans la portée",
+            "Ligne 2 : « 100 + tax » — s'évalue comme une expression simple, recherche tax dans la portée, et affiche le résultat 108,5",
+            "Ligne 3 : « subtotal * 2 » — puisque subtotal n'a jamais été défini dans une ligne précédente, cette expression échoue à s'évaluer et n'affiche aucun résultat"
+          ],
+          "caption": "Une variable définie sur une ligne est disponible pour chaque ligne en dessous d'elle, mais référencer un nom non défini ne produit simplement aucun résultat."
+        },
+        "anatomy": {
+          "intro": "Tout l'intérêt de transporter une variable vers l'avant est que le résultat d'une ligne ultérieure reflète chaque valeur définie avant elle — le même nombre de base produit un résultat final différent une fois qu'une variable y est intégrée.",
+          "labelBefore": "100 (avant taxe)",
+          "labelAfter": "108,5 (100 + tax)",
+          "caption": "La ligne « 100 + tax » s'évalue à 108,5 une fois que tax = 8,5 a été défini dans une ligne précédente et transporté dans la portée."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Texte",
+            "meaning": "Le contenu complet du bloc-notes sur plusieurs lignes — chaque ligne est évaluée indépendamment, dans l'ordre, par rapport à la portée de variables courante.",
+            "unit": "Texte"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les noms réservés ne peuvent pas être réaffectés",
+            "description": "Une ligne comme « pi = 3 » n'est pas traitée comme une affectation, car « pi » et « e » sont réservés aux constantes mathématiques intégrées (π et e) — la ligne est plutôt évaluée comme une expression simple, qui échouera typiquement à s'analyser comme une syntaxe valide et n'affichera aucun résultat."
+          },
+          {
+            "title": "Les lignes vides affichent toujours aucun résultat",
+            "description": "Une ligne vide est enregistrée avec un résultat null par conception, non évaluée comme une erreur — c'est le comportement attendu pour un document libre où les lignes vides ne sont qu'un espacement visuel."
+          },
+          {
+            "title": "Le texte simple et les titres affichent silencieusement aucun résultat",
+            "description": "Une ligne comme « Budget mensuel » ou « --- Totaux --- » ne correspond pas au motif d'affectation et ne s'analyse pas comme une expression valide, donc elle n'affiche aucun résultat sans aucun message d'erreur — c'est ce qui rend possible de mélanger librement notes et calculs dans le même document."
+          },
+          {
+            "title": "Une ligne ne peut pas utiliser une variable définie plus bas",
+            "description": "La portée est construite strictement de haut en bas — une ligne référençant un nom de variable qui n'est défini que sur une ligne ultérieure échouera à s'évaluer et n'affichera aucun résultat, puisque ce nom n'existe pas encore dans la portée au moment où cette ligne est traitée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Puis-je définir une variable nommée « pi » ou « e » ?",
+            "answer": "Non — les deux noms sont réservés aux constantes mathématiques intégrées (π ≈ 3,14159 et e ≈ 2,71828), donc une ligne comme « pi = 10 » n'est pas traitée comme une affectation. Si vous la saisissez, l'outil essaie plutôt de l'évaluer comme une expression simple, qui typiquement ne s'analysera pas et n'affichera aucun résultat."
+          },
+          {
+            "question": "Pourquoi une ligne avec seulement un titre ou une note n'affiche-t-elle aucun résultat ?",
+            "answer": "Une ligne n'affiche un résultat que si elle correspond au motif d'affectation « nom = expression » ou s'analyse avec succès comme une expression mathématique autonome — le texte simple comme un titre ou une phrase ne correspond à aucun des deux motifs, donc elle reste simplement sans résultat plutôt que d'afficher une erreur, ce qui est exactement ce qui permet de mélanger librement notes et mathématiques."
+          },
+          {
+            "question": "Une ligne peut-elle utiliser une variable définie plus bas dans le bloc-notes ?",
+            "answer": "Non — le bloc-notes est évalué strictement de haut en bas, construisant sa portée de variables une ligne à la fois. Une ligne référençant une variable avant qu'elle n'ait été affectée dans une ligne précédente trouvera ce nom manquant dans la portée et affichera simplement aucun résultat, donc les variables doivent toujours être définies avant les lignes qui les utilisent."
+          },
+          {
+            "question": "Que se passe-t-il si une ligne contient une faute de frappe ou une expression invalide ?",
+            "answer": "L'outil essaie d'évaluer chaque ligne non vide, mais si l'analyseur ne peut pas lui donner sens — une parenthèse non appariée, un nom de fonction inconnu, un symbole égaré — cette tentative échoue silencieusement et la ligne n'affiche simplement aucun résultat, comme s'il s'agissait d'une simple note. Aucun message d'erreur n'est affiché en ligne, car une faute de frappe et une note intentionnelle se ressemblent pour l'analyseur."
+          }
+        ]
       }
     }
   }
