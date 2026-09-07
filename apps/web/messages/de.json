@@ -24929,6 +24929,113 @@
             "answer": "Das Tool versucht, jede nicht leere Zeile auszuwerten, aber wenn der Parser sie nicht verstehen kann — eine unpassende Klammer, ein unbekannter Funktionsname, ein verirrtes Symbol — schlägt dieser Versuch stillschweigend fehl und die Zeile zeigt einfach kein Ergebnis, genau wie bei einer einfachen Notiz. Es wird keine Fehlermeldung inline angezeigt, da ein Tippfehler und eine beabsichtigte Notiz für den Parser gleich aussehen."
           }
         ]
+      },
+      "multiplication-table-generator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Einmaleins-Generator: wie Einzelzahl-Tabellen und Bereichsraster erstellt werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionCurve": "Eine Einzelzahl-Tabelle wächst linear",
+        "sectionAnatomy": "Anatomie eines Bereichsrasters",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Einzelmodus: Ergebnis = Zahl × Multiplikator  |  Bereichsmodus: Zelle(Zeile, Spalte) = Zeile × Spalte",
+          "note": "Beide Modi berechnen genau dieselbe Operation, einfache Multiplikation — sie unterscheiden sich nur darin, wie viele Multiplikationen durchgeführt werden und wie die Ergebnisse angeordnet sind: eine einzelne Spalte von Ergebnissen für eine Zahl, oder ein vollständiges Raster von Ergebnissen für einen Zahlenbereich."
+        },
+        "flowchart": {
+          "intro": "Welches Layout erstellt wird, hängt vom gewählten Modus ab, aber die zugrunde liegende Arithmetik ist in beiden Fällen nichts weiter als wiederholte Multiplikation.",
+          "steps": [
+            "Lesen, welcher Modus gewählt ist: Einzelzahl oder Bereich",
+            "Für Einzelmodus: die Zahl (1 bis 1000) und den maximalen Multiplikator (1 bis 100, Standard 12) validieren",
+            "Für Einzelmodus: die Zahl mit jeder ganzen Zahl von 1 bis zum maximalen Multiplikator multiplizieren, wobei eine Zeile pro Ergebnis entsteht",
+            "Für Bereichsmodus: Anfang und Ende des Bereichs validieren (1 bis 1000, Anfang nicht größer als Ende, Spanne höchstens 30 Zahlen)",
+            "Für Bereichsmodus: jede Zahl im Bereich mit jeder anderen Zahl im Bereich multiplizieren, wodurch ein vollständiges Ergebnisraster entsteht"
+          ],
+          "caption": "Der modusabhängige Pfad dieses Tools, beide aus derselben zugrunde liegenden Multiplikation aufgebaut."
+        },
+        "curve": {
+          "intro": "Eine Einzelzahl-Tabelle sind eigentlich nur die Vielfachen einer Zahl, eines nach dem anderen — gegen den Multiplikator aufgetragen, bilden die Ergebnisse immer eine gerade Linie, da die Multiplikation mit einer festen Zahl eine lineare Operation ist.",
+          "label": "7 × Multiplikator",
+          "caption": "Die Vielfachen von 7 von 7×1 bis 7×12, gegen den Multiplikator aufgetragen — eine perfekt gerade Linie, da jeder Schritt weitere 7 hinzufügt."
+        },
+        "anatomy": {
+          "intro": "Ein Bereichsraster ist eine Tabelle, bei der sowohl die Zeilen- als auch die Spaltenüberschriften dieselbe Zahlenfolge sind, und jede Zelle das Produkt ihrer Zeilen- und Spaltenüberschrift enthält — die schattierte Diagonale ist dort, wo eine Zahl mit sich selbst multipliziert wird.",
+          "caption": "Ein 4×4-Bereichsraster für die Zahlen 1 bis 4 — die Diagonalzellen (1×1, 2×2, 3×3, 4×4) sind jeweils das Quadrat der Zahl."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob eine Tabelle für eine einzelne Zahl oder ein Raster für einen Zahlenbereich erstellt wird.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Zahl",
+            "meaning": "Die Zahl, für die eine Tabelle erstellt wird, nur im Einzelmodus verwendet. Muss zwischen 1 und 1000 liegen.",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Maximaler Multiplikator",
+            "meaning": "Wie weit sich die Einzelzahl-Tabelle erstreckt (1 × Zahl bis Maximaler Multiplikator × Zahl). Standardmäßig 12, wenn leer gelassen.",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Bereichsanfang / Bereichsende",
+            "meaning": "Die erste und letzte Zahl, die im Bereichsraster enthalten sein soll, nur im Bereichsmodus verwendet. Die Spanne zwischen ihnen darf 30 Zahlen nicht überschreiten.",
+            "unit": "Ganzzahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zahl außerhalb von 1 bis 1000 (Einzelmodus)",
+            "description": "Die Basiszahl muss eine ganze Zahl zwischen 1 und 1000 sein — ein Wert außerhalb dieses Bereichs oder keine ganze Zahl gibt einen \"invalid-number\"-Fehler zurück, statt eine Tabelle dafür zu erstellen."
+          },
+          {
+            "title": "Maximaler Multiplikator außerhalb von 1 bis 100 (Einzelmodus)",
+            "description": "Der maximale Multiplikator der Tabelle muss eine ganze Zahl zwischen 1 und 100 sein — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-multiplier\"-Fehler zurück, was vor dem Erstellen einer unpraktisch langen Einzelzahl-Tabelle schützt."
+          },
+          {
+            "title": "Bereichsanfang nach Bereichsende (Bereichsmodus)",
+            "description": "Ist die Startzahl des Bereichs größer als seine Endzahl, oder liegt eine von beiden außerhalb von 1 bis 1000, gibt das Tool einen \"invalid-range\"-Fehler zurück, statt zu versuchen, ein Raster mit einem rückwärtigen oder außerhalb der Grenzen liegenden Bereich zu erstellen."
+          },
+          {
+            "title": "Bereichsspanne über 30 Zahlen (Bereichsmodus)",
+            "description": "Die Größe eines Bereichsrasters wächst mit dem Quadrat der Anzahl der umfassten Zahlen — das Tool begrenzt die Spanne auf 30 Zahlen (was höchstens ein 30×30-Raster ergibt) und gibt darüber hinaus einen \"range-too-large\"-Fehler zurück, um das Raster in einer angemessenen Anzeigegröße zu halten."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was ist der Unterschied zwischen Einzelmodus und Bereichsmodus?",
+            "answer": "Der Einzelmodus erstellt eine einfache Liste — eine Zahl multipliziert mit jeder ganzen Zahl bis zu einem gewählten Maximum, wie das klassische \"Einmaleins\", das man in der Schule auswendig lernt. Der Bereichsmodus erstellt stattdessen ein vollständiges Raster, das jedes Produkt zwischen zwei Zahlen innerhalb einer gewählten Spanne zeigt, wie eine vollständige Multiplikationstabelle für die Zahlen 1 bis 12."
+          },
+          {
+            "question": "Warum ist das Bereichsraster auf eine Spanne von 30 Zahlen begrenzt?",
+            "answer": "Die Zellenzahl eines Bereichsrasters wächst mit dem Quadrat seiner Spanne — ein Bereich von 30 Zahlen ergibt bereits 900 Zellen, und ein viel größerer Bereich würde ein Raster ergeben, das zu groß wäre, um es sinnvoll anzuzeigen oder zu drucken. Die 30-Zahlen-Grenze hält jedes erstellte Raster in einer praktischen Größe."
+          },
+          {
+            "question": "Warum ist der maximale Multiplikator im Einzelmodus standardmäßig 12?",
+            "answer": "Das Einmaleins von 1 bis 12 ist der traditionelle Standard, der in den meisten Lehrplänen unterrichtet wird, daher ist es ein sinnvoller Ausgangspunkt — Sie können den maximalen Multiplikator auf bis zu 100 erhöhen, wenn Sie eine längere Tabelle für eine bestimmte Zahl benötigen."
+          },
+          {
+            "question": "Wofür stehen die schattierten Diagonalzellen in einem Bereichsraster?",
+            "answer": "Jede Zelle im Raster ist das Produkt ihrer Zeilennummer und Spaltennummer — entlang der Diagonale sind Zeilen- und Spaltennummer identisch, sodass jede dieser Zellen einfach diese Zahl mit sich selbst multipliziert ist, also ihr Quadrat (1×1, 2×2, 3×3 und so weiter)."
+          }
+        ]
       }
     }
   }

@@ -34,6 +34,7 @@ import MatrixCalculatorDocsPage, { getMatrixCalculatorTocItems } from "@/compone
 import VectorCalculatorDocsPage, { getVectorCalculatorTocItems } from "@/components/docs/vector-calculator/VectorCalculatorDocsPage";
 import GraphingCalculatorDocsPage, { getGraphingCalculatorTocItems } from "@/components/docs/graphing-calculator/GraphingCalculatorDocsPage";
 import NotepadCalculatorDocsPage, { getNotepadCalculatorTocItems } from "@/components/docs/notepad-calculator/NotepadCalculatorDocsPage";
+import MultiplicationTableGeneratorDocsPage, { getMultiplicationTableGeneratorTocItems } from "@/components/docs/multiplication-table-generator/MultiplicationTableGeneratorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -195,6 +196,10 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "notepad-calculator":
       content = <NotepadCalculatorDocsPage />;
       tocItems = await getNotepadCalculatorTocItems();
+      break;
+    case "multiplication-table-generator":
+      content = <MultiplicationTableGeneratorDocsPage />;
+      tocItems = await getMultiplicationTableGeneratorTocItems();
       break;
   }
 

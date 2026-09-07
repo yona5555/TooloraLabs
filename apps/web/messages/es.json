@@ -24929,6 +24929,113 @@
             "answer": "La herramienta intenta evaluar cada línea no vacía, pero si el analizador no puede darle sentido —un paréntesis sin par, un nombre de función desconocido, un símbolo suelto—, ese intento falla silenciosamente y la línea simplemente no muestra resultado, igual que si fuera una nota simple. No se muestra ningún mensaje de error en línea, ya que un error tipográfico y una nota intencional se ven iguales para el analizador."
           }
         ]
+      },
+      "multiplication-table-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Tablas de Multiplicar: cómo se construyen las tablas de un solo número y las cuadrículas de rango, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionCurve": "Una tabla de un solo número crece linealmente",
+        "sectionAnatomy": "Anatomía de una cuadrícula de rango",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Modo individual: resultado = número × multiplicador  |  Modo rango: celda(fila, columna) = fila × columna",
+          "note": "Ambos modos calculan exactamente la misma operación, una multiplicación simple; solo difieren en cuántas multiplicaciones se realizan y cómo se disponen los resultados: una sola columna de resultados para un número, o una cuadrícula completa de resultados para un rango de números."
+        },
+        "flowchart": {
+          "intro": "Qué diseño se construye depende del modo seleccionado, pero la aritmética subyacente en ambos casos no es más que multiplicación repetida.",
+          "steps": [
+            "Leer qué modo está seleccionado: número individual o rango",
+            "Para el modo individual: validar el número (1 a 1000) y el multiplicador máximo (1 a 100, por defecto 12)",
+            "Para el modo individual: multiplicar el número por cada entero desde 1 hasta el multiplicador máximo, produciendo una fila por resultado",
+            "Para el modo rango: validar el inicio y el final del rango (1 a 1000, el inicio no mayor que el final, con un tramo de no más de 30 números)",
+            "Para el modo rango: multiplicar cada número del rango por cada otro número del rango, produciendo una cuadrícula completa de resultados"
+          ],
+          "caption": "La ruta dependiente del modo que sigue esta herramienta, ambas construidas a partir de la misma multiplicación subyacente."
+        },
+        "curve": {
+          "intro": "Una tabla de un solo número es en realidad solo los múltiplos de un número, uno tras otro; trazados contra el multiplicador, los resultados siempre forman una línea recta, ya que multiplicar por un número fijo es una operación lineal.",
+          "label": "7 × multiplicador",
+          "caption": "Los múltiplos de 7 desde 7×1 hasta 7×12 trazados contra el multiplicador: una línea perfectamente recta, ya que cada paso añade otro 7."
+        },
+        "anatomy": {
+          "intro": "Una cuadrícula de rango es una tabla donde tanto los encabezados de fila como los de columna son la misma secuencia de números, y cada celda contiene el producto de su encabezado de fila y columna; la diagonal sombreada es donde un número se multiplica por sí mismo.",
+          "caption": "Una cuadrícula de rango 4×4 para los números del 1 al 4; las celdas diagonales (1×1, 2×2, 3×3, 4×4) son el cuadrado de cada número."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Modo",
+            "meaning": "Si se genera una tabla para un solo número o una cuadrícula para un rango de números.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Número",
+            "meaning": "El número para el que construir una tabla, usado solo en el modo individual. Debe estar entre 1 y 1000.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Multiplicador máximo",
+            "meaning": "Hasta dónde se extiende la tabla de un solo número (de 1 × número hasta Multiplicador máximo × número). Por defecto es 12 si se deja en blanco.",
+            "unit": "Entero"
+          },
+          {
+            "symbol": "Inicio del rango / Fin del rango",
+            "meaning": "El primer y último número a incluir en la cuadrícula de rango, usado solo en el modo rango. El tramo entre ellos no puede superar los 30 números.",
+            "unit": "Enteros"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Número fuera de 1 a 1000 (modo individual)",
+            "description": "El número base debe ser un número entero entre 1 y 1000; un valor fuera de ese rango, o que no sea entero, devuelve un error \"invalid-number\" en lugar de construir una tabla para él."
+          },
+          {
+            "title": "Multiplicador máximo fuera de 1 a 100 (modo individual)",
+            "description": "El multiplicador máximo de la tabla debe ser un número entero entre 1 y 100; un valor fuera de ese rango devuelve un error \"invalid-multiplier\", protegiendo contra la construcción de una tabla de un solo número poco práctica de larga."
+          },
+          {
+            "title": "Inicio del rango posterior al fin del rango (modo rango)",
+            "description": "Si el número inicial del rango es mayor que su número final, o cualquiera de los dos cae fuera de 1 a 1000, la herramienta devuelve un error \"invalid-range\" en lugar de intentar construir una cuadrícula con un rango invertido o fuera de límites."
+          },
+          {
+            "title": "Tramo del rango que supera los 30 números (modo rango)",
+            "description": "El tamaño de una cuadrícula de rango crece con el cuadrado de cuántos números abarca; la herramienta limita el tramo a 30 números (produciendo como máximo una cuadrícula de 30×30) y devuelve un error \"range-too-large\" más allá de eso, para mantener la cuadrícula en un tamaño razonable para mostrar."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Cuál es la diferencia entre el modo individual y el modo rango?",
+            "answer": "El modo individual construye una lista simple: un número multiplicado por cada entero hasta un máximo elegido, como la clásica \"tabla de multiplicar\" que se memoriza en la escuela. El modo rango, en cambio, construye una cuadrícula completa, mostrando cada producto entre dos números dentro de un tramo elegido, como una tabla de multiplicar completa para los números del 1 al 12."
+          },
+          {
+            "question": "¿Por qué la cuadrícula de rango está limitada a un tramo de 30 números?",
+            "answer": "El número de celdas de una cuadrícula de rango crece con el cuadrado de su tramo; un rango de 30 números ya produce 900 celdas, y un rango mucho mayor produciría una cuadrícula demasiado grande para mostrarla o imprimirla de forma útil. El límite de 30 números mantiene cada cuadrícula generada en un tamaño práctico."
+          },
+          {
+            "question": "¿Por qué el multiplicador máximo es 12 por defecto en el modo individual?",
+            "answer": "La tabla de multiplicar del 1 al 12 es el estándar tradicional enseñado en la mayoría de los planes de estudio escolares, por lo que es un punto de partida razonable; puede aumentar el multiplicador máximo hasta 100 si necesita una tabla más larga para un número específico."
+          },
+          {
+            "question": "¿Qué representan las celdas diagonales sombreadas en una cuadrícula de rango?",
+            "answer": "Cada celda de la cuadrícula es el producto de su número de fila y su número de columna; a lo largo de la diagonal, el número de fila y columna son idénticos, así que cada una de esas celdas es simplemente ese número multiplicado por sí mismo, es decir, su cuadrado (1×1, 2×2, 3×3, y así sucesivamente)."
+          }
+        ]
       }
     }
   }

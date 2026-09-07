@@ -24929,6 +24929,113 @@
             "answer": "L'outil essaie d'évaluer chaque ligne non vide, mais si l'analyseur ne peut pas lui donner sens — une parenthèse non appariée, un nom de fonction inconnu, un symbole égaré — cette tentative échoue silencieusement et la ligne n'affiche simplement aucun résultat, comme s'il s'agissait d'une simple note. Aucun message d'erreur n'est affiché en ligne, car une faute de frappe et une note intentionnelle se ressemblent pour l'analyseur."
           }
         ]
+      },
+      "multiplication-table-generator": {
+        "version": "v1",
+        "description": "Référence technique du Générateur de table de multiplication : comment sont construites les tables d'un seul nombre et les grilles de plage, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul se fait",
+        "sectionCurve": "Une table d'un seul nombre croît linéairement",
+        "sectionAnatomy": "Anatomie d'une grille de plage",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Mode simple : résultat = nombre × multiplicateur  |  Mode plage : cellule(ligne, colonne) = ligne × colonne",
+          "note": "Les deux modes calculent exactement la même opération, une simple multiplication — ils diffèrent seulement par le nombre de multiplications effectuées et la disposition des résultats : une seule colonne de résultats pour un nombre, ou une grille complète de résultats pour une plage de nombres."
+        },
+        "flowchart": {
+          "intro": "La disposition construite dépend du mode sélectionné, mais l'arithmétique sous-jacente dans les deux cas n'est rien de plus qu'une multiplication répétée.",
+          "steps": [
+            "Lire quel mode est sélectionné : nombre unique ou plage",
+            "Pour le mode simple : valider le nombre (1 à 1000) et le multiplicateur maximum (1 à 100, par défaut 12)",
+            "Pour le mode simple : multiplier le nombre par chaque entier de 1 jusqu'au multiplicateur maximum, produisant une ligne par résultat",
+            "Pour le mode plage : valider le début et la fin de la plage (1 à 1000, début non supérieur à la fin, étendue d'au plus 30 nombres)",
+            "Pour le mode plage : multiplier chaque nombre de la plage par chaque autre nombre de la plage, produisant une grille complète de résultats"
+          ],
+          "caption": "Le chemin dépendant du mode que suit cet outil, tous deux construits à partir de la même multiplication sous-jacente."
+        },
+        "curve": {
+          "intro": "Une table d'un seul nombre n'est en réalité que les multiples d'un nombre, l'un après l'autre — tracés en fonction du multiplicateur, les résultats forment toujours une ligne droite, car multiplier par un nombre fixe est une opération linéaire.",
+          "label": "7 × multiplicateur",
+          "caption": "Les multiples de 7 de 7×1 à 7×12 tracés en fonction du multiplicateur — une ligne parfaitement droite, puisque chaque étape ajoute 7 de plus."
+        },
+        "anatomy": {
+          "intro": "Une grille de plage est un tableau où les en-têtes de ligne et de colonne sont la même séquence de nombres, et chaque cellule contient le produit de son en-tête de ligne et de colonne — la diagonale ombrée est l'endroit où un nombre est multiplié par lui-même.",
+          "caption": "Une grille de plage 4×4 pour les nombres de 1 à 4 — les cellules diagonales (1×1, 2×2, 3×3, 4×4) sont chacune le carré du nombre."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut générer une table pour un seul nombre ou une grille pour une plage de nombres.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Nombre",
+            "meaning": "Le nombre pour lequel construire une table, utilisé uniquement en mode simple. Doit être compris entre 1 et 1000.",
+            "unit": "Entier"
+          },
+          {
+            "symbol": "Multiplicateur maximum",
+            "meaning": "Jusqu'où s'étend la table d'un seul nombre (de 1 × nombre à Multiplicateur maximum × nombre). Par défaut 12 si laissé vide.",
+            "unit": "Entier"
+          },
+          {
+            "symbol": "Début de plage / Fin de plage",
+            "meaning": "Le premier et le dernier nombre à inclure dans la grille de plage, utilisés uniquement en mode plage. L'étendue entre eux ne peut pas dépasser 30 nombres.",
+            "unit": "Entiers"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Nombre hors de 1 à 1000 (mode simple)",
+            "description": "Le nombre de base doit être un nombre entier compris entre 1 et 1000 — une valeur hors de cette plage, ou non entière, renvoie une erreur « invalid-number » plutôt que de construire une table pour celui-ci."
+          },
+          {
+            "title": "Multiplicateur maximum hors de 1 à 100 (mode simple)",
+            "description": "Le multiplicateur maximum de la table doit être un nombre entier compris entre 1 et 100 — une valeur hors de cette plage renvoie une erreur « invalid-multiplier », protégeant contre la construction d'une table d'un seul nombre d'une longueur peu pratique."
+          },
+          {
+            "title": "Début de plage après fin de plage (mode plage)",
+            "description": "Si le nombre de début de la plage est supérieur à son nombre de fin, ou si l'un des deux se situe hors de 1 à 1000, l'outil renvoie une erreur « invalid-range » plutôt que d'essayer de construire une grille avec une plage inversée ou hors limites."
+          },
+          {
+            "title": "Étendue de plage dépassant 30 nombres (mode plage)",
+            "description": "La taille d'une grille de plage croît avec le carré du nombre de nombres qu'elle couvre — l'outil plafonne l'étendue à 30 nombres (produisant au plus une grille 30×30) et renvoie une erreur « range-too-large » au-delà, pour garder la grille à une taille raisonnable à afficher."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Quelle est la différence entre le mode simple et le mode plage ?",
+            "answer": "Le mode simple construit une liste simple — un nombre multiplié par chaque entier jusqu'à un maximum choisi, comme la classique « table de multiplication » que l'on mémorise à l'école. Le mode plage construit à la place une grille complète, montrant chaque produit entre deux nombres dans une étendue choisie, comme un tableau de multiplication complet pour les nombres de 1 à 12."
+          },
+          {
+            "question": "Pourquoi la grille de plage est-elle limitée à une étendue de 30 nombres ?",
+            "answer": "Le nombre de cellules d'une grille de plage croît avec le carré de son étendue — une plage de 30 nombres produit déjà 900 cellules, et une plage beaucoup plus grande produirait une grille trop grande pour être affichée ou imprimée utilement. La limite de 30 nombres maintient chaque grille générée à une taille pratique."
+          },
+          {
+            "question": "Pourquoi le multiplicateur maximum est-il par défaut de 12 en mode simple ?",
+            "answer": "La table de multiplication de 1 à 12 est la norme traditionnelle enseignée dans la plupart des programmes scolaires, c'est donc un point de départ raisonnable — vous pouvez augmenter le multiplicateur maximum jusqu'à 100 si vous avez besoin d'une table plus longue pour un nombre spécifique."
+          },
+          {
+            "question": "Que représentent les cellules diagonales ombrées dans une grille de plage ?",
+            "answer": "Chaque cellule de la grille est le produit de son numéro de ligne et de son numéro de colonne — le long de la diagonale, les numéros de ligne et de colonne sont identiques, donc chacune de ces cellules est simplement ce nombre multiplié par lui-même, c'est-à-dire son carré (1×1, 2×2, 3×3, et ainsi de suite)."
+          }
+        ]
       }
     }
   }

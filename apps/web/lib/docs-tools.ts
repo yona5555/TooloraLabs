@@ -34,6 +34,7 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "vector-calculator",
   "graphing-calculator",
   "notepad-calculator",
+  "multiplication-table-generator",
 ];
 
 export function isToolDocumented(slug: string): boolean {
