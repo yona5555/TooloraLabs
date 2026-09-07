@@ -5664,6 +5664,14 @@
             "sinks": "Se hunde (GE > 1)",
             "water": "Agua",
             "caption": "Un objeto de menor densidad se posa sobre la línea de flotación; uno de mayor densidad se asienta en el fondo."
+          },
+          "sgGauge": {
+            "title": "Pruébalo: ¿Flota o se hunde?",
+            "intro": "Elige un material para ver su densidad relativa en el medidor y descubrir si flota o se hunde en el agua.",
+            "floatsVerdict": "{material} flota en el agua — el agua es unas {ratio} veces más densa.",
+            "sinksVerdict": "{material} se hunde en el agua — es unas {ratio} veces más denso que el agua.",
+            "neutralCaption": "Neutro (SG = 1)",
+            "neutralVerdict": "{material} es el agua misma, por lo que no flota ni se hunde — flotabilidad neutra."
           }
         },
         "examples": {
@@ -5713,7 +5721,13 @@
               "question": "¿Por qué la densidad de algunos materiales se da en g/cm³ y la de otros en kg/m³?",
               "answer": "Ambas son unidades coherentes con el SI, pero g/cm³ produce números más cómodos y a escala humana para sólidos y líquidos cotidianos (la del agua es un limpio 1.0), mientras que kg/m³ es la unidad estricta del SI típicamente usada en ingeniería y fórmulas de física. Esta calculadora muestra ambas, ya que la conversión es simplemente un factor de 1000."
             }
-          ]
+          ],
+          "temperatureSlider": {
+            "title": "Pruébalo: Densidad del Agua vs. Temperatura",
+            "intro": "Arrastra el control deslizante para ver cómo cambia la densidad real del agua con la temperatura — alcanza su máximo a 4°C, el punto de densidad máxima del agua.",
+            "sliderLabel": "Temperatura",
+            "result": "A {temp}°C, la densidad del agua es de aproximadamente {density} g/cm³."
+          }
         },
         "behindTheTool": {
           "title": "Detrás de esta Herramienta",
@@ -5780,7 +5794,15 @@
           "unitsSection": {
             "title": "Conversión Entre Unidades",
             "paragraph": "La cifra comúnmente citada en g/cm³ y la cifra estricta del SI en kg/m³ difieren exactamente por un factor de 1000, y la gravedad específica expresa la misma densidad como una razón respecto al agua.",
-            "caption": "Cómo se convierte la densidad del hierro en su valor SI y su gravedad específica."
+            "caption": "Cómo se convierte la densidad del hierro en su valor SI y su gravedad específica.",
+            "liveConverter": {
+              "title": "Pruébalo: Convierte Cualquier Densidad",
+              "intro": "Escribe cualquier densidad en g/cm³ para verla convertida en tiempo real a kg/m³ y densidad relativa.",
+              "inputLabel": "Densidad (g/cm³)",
+              "waterMarker": "Agua",
+              "scaleLow": "0.001",
+              "scaleHigh": "32"
+            }
           }
         },
         "references": {

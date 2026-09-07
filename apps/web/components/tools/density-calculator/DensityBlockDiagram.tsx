@@ -14,26 +14,37 @@ const MAX_BLOCK_WIDTH = 190;
 const MAX_BLOCK_HEIGHT = 78;
 const MIN_BLOCK = 18;
 
+// log10 of the volume/density values these two axes are actually meant to
+// span: roughly 1 cm3 to 1000 cm3 for volume, and air's ~0.0012 g/cm3 to
+// osmium's ~22.6 g/cm3 (the densest naturally occurring element) for
+// density. The previous 0-to-999 scale needed a density near 999 g/cm3 —
+// physically unreachable for any real material — to ever fill the block,
+// so every realistic example rendered as a sliver hugging the baseline
+// with a large blank area above it.
+const VOLUME_LOG_MIN = 0;
+const VOLUME_LOG_MAX = 3;
+const DENSITY_LOG_MIN = -3;
+const DENSITY_LOG_MAX = Math.log10(23);
+
 /**
  * A live rectangle model of the current inputs: width scales with volume,
  * height scales with density, so the block's area is a direct visual analog
  * of mass = density x volume. Both dimensions are normalized independently
- * (log-ish clamp) purely for legibility across wildly different magnitudes
- * (a gas's density vs. a metal's), not to preserve a literal area-to-mass
- * ratio in pixels.
+ * on a log scale calibrated to the real range of each quantity, purely for
+ * legibility across wildly different magnitudes (a gas's density vs. a
+ * metal's), not to preserve a literal area-to-mass ratio in pixels.
  */
 export default function DensityBlockDiagram({ volume, density, massLabel, volumeLabel, densityLabel, caption }: DensityBlockDiagramProps) {
   const safeVolume = Number.isFinite(volume) && volume > 0 ? volume : 1;
   const safeDensity = Number.isFinite(density) && density > 0 ? density : 1;
 
-  const scale = (v: number) => {
-    const logV = Math.log10(v + 1);
-    const t = Math.min(1, logV / 3);
-    return t;
+  const scale = (v: number, logMin: number, logMax: number) => {
+    const log = Math.log10(v);
+    return Math.min(1, Math.max(0, (log - logMin) / (logMax - logMin)));
   };
 
-  const blockWidth = MIN_BLOCK + scale(safeVolume) * (MAX_BLOCK_WIDTH - MIN_BLOCK);
-  const blockHeight = MIN_BLOCK + scale(safeDensity) * (MAX_BLOCK_HEIGHT - MIN_BLOCK);
+  const blockWidth = MIN_BLOCK + scale(safeVolume, VOLUME_LOG_MIN, VOLUME_LOG_MAX) * (MAX_BLOCK_WIDTH - MIN_BLOCK);
+  const blockHeight = MIN_BLOCK + scale(safeDensity, DENSITY_LOG_MIN, DENSITY_LOG_MAX) * (MAX_BLOCK_HEIGHT - MIN_BLOCK);
   const blockX = (WIDTH - blockWidth) / 2;
   const blockY = BASE_Y - blockHeight;
 

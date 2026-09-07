@@ -5664,6 +5664,14 @@
             "sinks": "Coule (DR > 1)",
             "water": "Eau",
             "caption": "Un objet moins dense repose au-dessus de la ligne de flottaison ; un objet plus dense se dépose au fond."
+          },
+          "sgGauge": {
+            "title": "Essayez : Flotte ou Coule ?",
+            "intro": "Choisissez un matériau pour voir sa densité relative sur le cadran et découvrir s'il flotte ou coule dans l'eau.",
+            "floatsVerdict": "{material} flotte dans l'eau — l'eau est environ {ratio} fois plus dense.",
+            "sinksVerdict": "{material} coule dans l'eau — il est environ {ratio} fois plus dense que l'eau.",
+            "neutralCaption": "Neutre (SG = 1)",
+            "neutralVerdict": "{material} est l'eau elle-même, elle ne flotte donc ni ne coule — flottabilité neutre."
           }
         },
         "examples": {
@@ -5713,7 +5721,13 @@
               "question": "Pourquoi la densité de certains matériaux est-elle donnée en g/cm³ et celle d'autres en kg/m³ ?",
               "answer": "Les deux unités sont cohérentes avec le SI, mais g/cm³ produit des nombres plus pratiques et à échelle humaine pour les solides et liquides courants (l'eau donne un 1,0 très net), tandis que kg/m³ est l'unité SI stricte typiquement utilisée en ingénierie et dans les formules de physique. Ce calculateur affiche les deux, la conversion n'étant qu'un simple facteur de 1000."
             }
-          ]
+          ],
+          "temperatureSlider": {
+            "title": "Essayez : Densité de l'Eau vs. Température",
+            "intro": "Faites glisser le curseur pour voir comment la densité réelle de l'eau change avec la température — elle culmine à 4°C, le point de densité maximale de l'eau.",
+            "sliderLabel": "Température",
+            "result": "À {temp}°C, la densité de l'eau est d'environ {density} g/cm³."
+          }
         },
         "behindTheTool": {
           "title": "Les Coulisses de l'Outil",
@@ -5780,7 +5794,15 @@
           "unitsSection": {
             "title": "Convertir Entre les Unités",
             "paragraph": "Le chiffre couramment cité en g/cm³ et le chiffre strict du SI en kg/m³ diffèrent exactement d'un facteur de 1 000, et la densité relative exprime la même densité sous forme de rapport à l'eau.",
-            "caption": "Comment la densité du fer se convertit en sa valeur SI et sa densité relative."
+            "caption": "Comment la densité du fer se convertit en sa valeur SI et sa densité relative.",
+            "liveConverter": {
+              "title": "Essayez : Convertir N'importe Quelle Densité",
+              "intro": "Saisissez n'importe quelle densité en g/cm³ pour la voir convertie en direct en kg/m³ et en densité relative.",
+              "inputLabel": "Densité (g/cm³)",
+              "waterMarker": "Eau",
+              "scaleLow": "0.001",
+              "scaleHigh": "32"
+            }
           }
         },
         "references": {

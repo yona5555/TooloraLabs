@@ -9,6 +9,9 @@ import DensityBuoyancyIllustration from "./DensityBuoyancyIllustration";
 import DensityFormulaTriangleDiagram from "./DensityFormulaTriangleDiagram";
 import DensityBlockDiagram from "./DensityBlockDiagram";
 import DensityUnitConversionDiagram from "./DensityUnitConversionDiagram";
+import DensitySpecificGravityGauge from "./DensitySpecificGravityGauge";
+import DensityUnitConverterWidget from "./DensityUnitConverterWidget";
+import DensityWaterTemperatureSlider from "./DensityWaterTemperatureSlider";
 import { DIAGRAM_MATERIAL_KEYS, MATERIAL_DENSITIES } from "./types";
 
 type ExampleRow = { calculation: string; result: string };
@@ -34,6 +37,7 @@ export default async function DensityEducation() {
           waterLabel={t("intro.buoyancy.water")}
           caption={t("intro.buoyancy.caption")}
         />
+        <DensitySpecificGravityGauge />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 
@@ -63,6 +67,7 @@ export default async function DensityEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <DensityWaterTemperatureSlider />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -95,6 +100,7 @@ export default async function DensityEducation() {
             sgStepLabel="÷ 1.0"
             caption={t("behindTheTool.unitsSection.caption")}
           />
+          <DensityUnitConverterWidget />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

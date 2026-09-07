@@ -5664,6 +5664,14 @@
             "sinks": "Sinkt (SG > 1)",
             "water": "Wasser",
             "caption": "Ein Objekt geringerer Dichte ruht über der Wasserlinie; ein Objekt höherer Dichte sinkt auf den Boden."
+          },
+          "sgGauge": {
+            "title": "Ausprobieren: Schwimmt es oder sinkt es?",
+            "intro": "Wählen Sie ein Material, um seine Dichte auf der Anzeige zu sehen und herauszufinden, ob es im Wasser schwimmt oder sinkt.",
+            "floatsVerdict": "{material} schwimmt im Wasser — Wasser ist etwa {ratio}-mal dichter.",
+            "sinksVerdict": "{material} sinkt im Wasser — es ist etwa {ratio}-mal dichter als Wasser.",
+            "neutralCaption": "Neutral (SG = 1)",
+            "neutralVerdict": "{material} ist Wasser selbst, daher schwimmt es weder noch sinkt es — neutraler Auftrieb."
           }
         },
         "examples": {
@@ -5713,7 +5721,13 @@
               "question": "Warum wird die Dichte mancher Materialien in g/cm³ und die anderer in kg/m³ angegeben?",
               "answer": "Beide sind SI-konforme Einheiten, aber g/cm³ liefert für alltägliche Feststoffe und Flüssigkeiten handlichere, menschengerechte Zahlen (Wasser ergibt einen klaren Wert von 1,0), während kg/m³ die strenge SI-Einheit ist, die typischerweise in Technik und physikalischen Formeln verwendet wird. Dieser Rechner zeigt beide, da die Umrechnung lediglich ein Faktor von 1000 ist."
             }
-          ]
+          ],
+          "temperatureSlider": {
+            "title": "Ausprobieren: Wasserdichte vs. Temperatur",
+            "intro": "Ziehen Sie den Schieberegler, um zu sehen, wie sich die tatsächliche Dichte von Wasser mit der Temperatur ändert — sie erreicht ihren Höhepunkt bei 4°C, dem Punkt maximaler Dichte von Wasser.",
+            "sliderLabel": "Temperatur",
+            "result": "Bei {temp}°C beträgt die Dichte von Wasser etwa {density} g/cm³."
+          }
         },
         "behindTheTool": {
           "title": "Hintergrund des Tools",
@@ -5780,7 +5794,15 @@
           "unitsSection": {
             "title": "Umrechnung zwischen Einheiten",
             "paragraph": "Der häufig zitierte g/cm³-Wert und der strenge SI-Wert kg/m³ unterscheiden sich um genau den Faktor 1.000, und das spezifische Gewicht drückt dieselbe Dichte als Verhältnis zu Wasser aus.",
-            "caption": "Wie sich die Dichte von Eisen in ihren SI-Wert und ihr spezifisches Gewicht umrechnet."
+            "caption": "Wie sich die Dichte von Eisen in ihren SI-Wert und ihr spezifisches Gewicht umrechnet.",
+            "liveConverter": {
+              "title": "Ausprobieren: Beliebige Dichte umrechnen",
+              "intro": "Geben Sie eine beliebige Dichte in g/cm³ ein, um sie live in kg/m³ und relative Dichte umgerechnet zu sehen.",
+              "inputLabel": "Dichte (g/cm³)",
+              "waterMarker": "Wasser",
+              "scaleLow": "0.001",
+              "scaleHigh": "32"
+            }
           }
         },
         "references": {

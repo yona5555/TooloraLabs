@@ -5664,6 +5664,14 @@
             "sinks": "Sinks (SG > 1)",
             "water": "Water",
             "caption": "A lower-density object rests above the waterline; a higher-density object settles to the bottom."
+          },
+          "sgGauge": {
+            "title": "Try It: Floats or Sinks?",
+            "intro": "Pick a material to see its specific gravity on the gauge and find out whether it floats or sinks in water.",
+            "floatsVerdict": "{material} floats in water — water is about {ratio}x denser.",
+            "sinksVerdict": "{material} sinks in water — it is about {ratio}x denser than water.",
+            "neutralCaption": "Neutral (SG = 1)",
+            "neutralVerdict": "{material} is water itself, so it neither floats nor sinks — it is neutrally buoyant."
           }
         },
         "examples": {
@@ -5713,7 +5721,13 @@
               "question": "Why is density given in g/cm³ for some materials and kg/m³ for others?",
               "answer": "Both are SI-consistent units, but g/cm³ produces more convenient, human-scale numbers for everyday solids and liquids (water is a clean 1.0), while kg/m³ is the strict SI unit typically used in engineering and physics formulas. This calculator reports both, since the conversion is a simple factor of 1,000."
             }
-          ]
+          ],
+          "temperatureSlider": {
+            "title": "Try It: Water's Density vs. Temperature",
+            "intro": "Drag the slider to see how water's real density changes with temperature — it peaks at 4°C, water's point of maximum density.",
+            "sliderLabel": "Temperature",
+            "result": "At {temp}°C, water's density is about {density} g/cm³."
+          }
         },
         "behindTheTool": {
           "title": "Behind This Tool",
@@ -5780,7 +5794,15 @@
           "unitsSection": {
             "title": "Converting Between Units",
             "paragraph": "The commonly quoted g/cm³ figure and the strict SI kg/m³ figure differ by exactly a factor of 1,000, and specific gravity restates the same density as a ratio to water.",
-            "caption": "How iron's density converts into its SI value and specific gravity."
+            "caption": "How iron's density converts into its SI value and specific gravity.",
+            "liveConverter": {
+              "title": "Try It: Convert Any Density",
+              "intro": "Type any density in g/cm³ to see it converted live to kg/m³ and specific gravity.",
+              "inputLabel": "Density (g/cm³)",
+              "waterMarker": "Water",
+              "scaleLow": "0.001",
+              "scaleHigh": "32"
+            }
           }
         },
         "references": {
