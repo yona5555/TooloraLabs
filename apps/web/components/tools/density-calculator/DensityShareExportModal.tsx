@@ -245,12 +245,14 @@ export default function DensityShareExportModal({ operationLabel, inputRows, res
               <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{heroLabel}</td>
               <td className="border border-zinc-200 px-3 py-2 font-semibold">{heroValue}</td>
             </tr>
-            {resultRows.slice(1).map((row) => (
-              <tr key={row.label}>
-                <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{row.label}</td>
-                <td className="border border-zinc-200 px-3 py-2">{row.value}</td>
-              </tr>
-            ))}
+            {resultRows
+              .filter((row) => !(row.label === heroLabel && row.value === heroValue))
+              .map((row) => (
+                <tr key={row.label}>
+                  <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{row.label}</td>
+                  <td className="border border-zinc-200 px-3 py-2">{row.value}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
