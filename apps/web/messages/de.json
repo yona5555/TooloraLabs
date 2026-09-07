@@ -23790,6 +23790,1145 @@
             "answer": "Das Tool verwendet die Heronsche Formel, die die Fläche direkt aus den drei Seitenlängen über den halben Umfang berechnet, ohne dass ein Winkel oder eine senkrechte Höhe explizit bekannt sein muss — dies funktioniert für jedes gültige Dreieck, unabhängig davon, welcher Lösungsmodus die Seiten gefunden hat."
           }
         ]
+      },
+      "statistics-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Statistikrechner: die vollständigen deskriptiven Statistiken, die er berechnet, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDotplot": "Datenpunkte auf einer Zahlengeraden",
+        "sectionAnatomy": "Grundgesamtheit vs. Stichprobe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Statistiken",
+          "modesValue": "12",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "6 Min."
+        },
+        "formula": {
+          "expression": "Mittelwert = Σx / n  |  Populationsvarianz = Σ(x − Mittelwert)² / n  |  Stichprobenvarianz = Σ(x − Mittelwert)² / (n − 1)",
+          "note": "Ein einzelner Datensatz liefert zwölf verschiedene Statistiken gleichzeitig — zentrale Tendenz (Mittelwert, Median, Modus), Streuung (Spannweite, Varianz, Standardabweichung) und Summenwerte (Anzahl, Summe, Minimum, Maximum) —, jede aus denselben zugrunde liegenden Formeln berechnet."
+        },
+        "flowchart": {
+          "intro": "Alle zwölf Statistiken werden in einem einzigen Durchlauf über die Daten berechnet, wobei Zwischenergebnisse (wie der Mittelwert und die sortierte Liste) wiederverwendet werden, statt den Datensatz wiederholt zu durchsuchen.",
+          "steps": [
+            "Die Werte sortieren, um Minimum, Maximum und Median zu finden",
+            "Die Werte summieren und durch die Anzahl teilen, um den Mittelwert zu erhalten",
+            "Zählen, wie oft jeder Wert vorkommt, um den Modus zu finden (die Werte mit der höchsten Häufigkeit)",
+            "Den Mittelwert von jedem Wert subtrahieren, die Differenzen quadrieren und aufsummieren",
+            "Diese Summe durch die Anzahl (Population) und durch die Anzahl minus eins (Stichprobe) teilen, um beide Varianzen zu erhalten, dann von jeder die Quadratwurzel ziehen für die beiden Standardabweichungen"
+          ],
+          "caption": "Der einzelne Durchlauf über den Datensatz, mit dem dieses Tool alle zwölf Statistiken berechnet."
+        },
+        "dotplot": {
+          "intro": "Das Auftragen jedes Werts auf einer einzigen Zahlengeraden macht die Form eines Datensatzes sichtbar — wo sich Werte häufen und wie Mittelwert und Median zu dieser Form stehen.",
+          "labelMean": "Mittelwert",
+          "labelMedian": "Median",
+          "caption": "Acht Beispielwerte auf einer Zahlengeraden mit markiertem Mittelwert und Median — beide liegen hier eng beieinander, da die Daten recht symmetrisch sind."
+        },
+        "anatomy": {
+          "intro": "Varianz und Standardabweichung werden jeweils auf zwei Arten angegeben: als Populationsstatistik (Division durch die volle Anzahl) und als Stichprobenstatistik (Division durch Anzahl minus eins, Bessel-Korrektur) — die Stichprobenversion ist stets etwas größer.",
+          "labelPopulation": "Populations-Std.-Abw.",
+          "labelSample": "Stichproben-Std.-Abw.",
+          "caption": "Für denselben Datensatz mit acht Werten ist die Stichproben-Standardabweichung durchgängig größer als die Populations-Standardabweichung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Werte",
+            "meaning": "Die Liste der Zahlen, aus denen der Datensatz besteht — jede andere Statistik wird aus dieser einzigen Eingabe abgeleitet.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer Datensatz",
+            "description": "Werden keine Werte eingegeben, gibt das Tool einen \"Leerer-Datensatz\"-Fehler zurück, anstatt Statistiken wie Mittelwert oder Standardabweichung für null Zahlen zu berechnen, was mathematisch undefiniert wäre (Division durch null)."
+          },
+          {
+            "title": "Keine Wiederholungswerte (kein Modus)",
+            "description": "Der Modus wird nur gemeldet, wenn ein Wert mehr als einmal vorkommt; ist jeder Wert im Datensatz eindeutig (maximale Häufigkeit von 1), gibt das Tool eine leere Modus-Liste zurück, statt fälschlich jeden Wert als \"den\" Modus zu behandeln."
+          },
+          {
+            "title": "Mehrere Modi (multimodale Daten)",
+            "description": "Wenn zwei oder mehr Werte in der höchsten Häufigkeit gleichauf liegen, werden alle als Modus zurückgegeben, numerisch sortiert — das Tool wählt nicht willkürlich nur einen aus, wenn ein Datensatz tatsächlich multimodal ist."
+          },
+          {
+            "title": "Stichprobenvarianz für einen einzelnen Wert undefiniert",
+            "description": "Die Stichprobenvarianz teilt durch (Anzahl − 1), was für einen Datensatz mit nur einem Wert null ist — das Tool gibt in diesem Fall 0 für Stichprobenvarianz und Stichproben-Standardabweichung zurück, statt durch null zu teilen, während die Populationsstatistiken bis hinunter zu einem einzelnen Wert gültig bleiben."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum berechnet dieses Tool zwölf Statistiken statt nur einiger weniger?",
+            "answer": "Ein Datensatz lässt sich aus mehreren verschiedenen Blickwinkeln zusammenfassen — wo sein Zentrum liegt (Mittelwert, Median, Modus), wie stark er streut (Spannweite, Varianz, Standardabweichung) und sein grundlegender Umfang (Anzahl, Summe, Minimum, Maximum) — alle zusammen zu berechnen ergibt in einem Durchlauf ein vollständiges Bild, statt dieselben Daten erneut in separate Tools eingeben zu müssen."
+          },
+          {
+            "question": "Warum gibt es zwei verschiedene Standardabweichungen?",
+            "answer": "Die Populations-Standardabweichung geht davon aus, dass der Datensatz die gesamte untersuchte Population ist; die Stichproben-Standardabweichung geht davon aus, dass der Datensatz eine aus einer größeren Population gezogene Stichprobe ist, und wendet die Bessel-Korrektur an (Division durch n−1 statt n), um zu korrigieren, dass eine Stichprobe die wahre Populationsstreuung tendenziell leicht unterschätzt."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen diesem Tool und dem Standardabweichungsrechner?",
+            "answer": "Dieses Tool berechnet den vollständigen Satz von zwölf deskriptiven Statistiken an einem Ort; der Standardabweichungsrechner konzentriert sich speziell auf Varianz und Standardabweichung und zeigt zusätzlich die Abweichungstabelle pro Wert (Wert minus Mittelwert, quadriert), die dieses Tool intern berechnet, aber nicht Zeile für Zeile anzeigt."
+          },
+          {
+            "question": "Warum kann ein Datensatz mehr als einen Modus haben, oder gar keinen?",
+            "answer": "Der Modus ist definiert als der Wert (oder die Werte), der am häufigsten vorkommt — sind zwei Werte bei der höchsten Häufigkeit gleichauf, sind beide legitim der Modus; wiederholt sich kein Wert überhaupt, gibt es keinen sinnvollen \"häufigsten\" Wert, sodass der Modus als leer gemeldet wird, statt auf eine willkürliche einzelne Antwort erzwungen zu werden."
+          }
+        ]
+      },
+      "mean-median-mode-range-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Mittelwert-, Median-, Modus- und Spannweitenrechner: die vier Formeln für zentrale Tendenz und Streuung, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDotplot": "Datenpunkte auf einer Zahlengeraden",
+        "sectionAnatomy": "Mittelwert vs. Median",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kennzahlen",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Mittelwert = Σx / n  |  Median = mittlerer Wert der sortierten Daten  |  Spannweite = Max − Min",
+          "note": "Die vier Kennzahlen beantworten unterschiedliche Fragen zum selben Datensatz: Mittelwert und Median beschreiben beide einen \"typischen\" Wert, reagieren aber unterschiedlich auf Ausreißer, der Modus identifiziert den häufigsten Wert, und die Spannweite misst die Gesamtstreuung."
+        },
+        "flowchart": {
+          "intro": "Jede der vier Kennzahlen wird unabhängig aus derselben Eingabeliste berechnet, wobei nur der anfängliche Sortierschritt geteilt wird, der für Median, Minimum und Maximum benötigt wird.",
+          "steps": [
+            "Die Werte sortieren, um Minimum und Maximum zu finden und die Mitte für den Median zu bestimmen",
+            "Alle Werte summieren und durch die Anzahl teilen, um den Mittelwert zu erhalten",
+            "Zählen, wie oft jeder Wert vorkommt; wiederholt sich ein Wert mehr als einmal, wird der häufigste Wert (bzw. die häufigsten Werte) zum Modus",
+            "Das Minimum vom Maximum subtrahieren, um die Spannweite zu erhalten"
+          ],
+          "caption": "Die vier unabhängigen Berechnungen, die dieses Tool über denselben Datensatz durchführt."
+        },
+        "dotplot": {
+          "intro": "Das Auftragen der Werte auf einer Zahlengeraden zeigt genau, wo der Median (die tatsächliche Mitte der sortierten Daten) im Verhältnis zum Mittelwert (dem Gleichgewichtspunkt) liegt.",
+          "labelMean": "Mittelwert",
+          "labelMedian": "Median",
+          "caption": "Ein schiefer Beispieldatensatz — ein großer Ausreißer zieht den Mittelwert weit über den Median, der an der Mitte der sortierten Werte verankert bleibt."
+        },
+        "anatomy": {
+          "intro": "Bei schiefen Daten (Daten mit Ausreißern oder einem langen Ausläufer) können Mittelwert und Median erheblich voneinander abweichen — der Mittelwert wird zum Ausreißer hin gezogen, während der Median dagegen resistent bleibt.",
+          "labelMean": "Mittelwert",
+          "labelMedian": "Median",
+          "caption": "Für den Datensatz [2, 3, 3, 5, 20] zieht ein großer Ausreißer (20) den Mittelwert deutlich über den Median."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Werte",
+            "meaning": "Die Liste der Zahlen, aus denen der Datensatz besteht — alle vier Kennzahlen werden aus dieser einzigen Eingabe abgeleitet.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer Datensatz",
+            "description": "Werden keine Werte eingegeben, gibt das Tool einen \"Leerer-Datensatz\"-Fehler zurück, anstatt einen Mittelwert oder eine Spannweite für null Zahlen zu berechnen, was mathematisch undefiniert wäre."
+          },
+          {
+            "title": "Keine Wiederholungswerte (kein Modus)",
+            "description": "Der Modus wird nur gemeldet, und ein \"hasMode\"-Flag nur auf wahr gesetzt, wenn ein Wert mehr als einmal vorkommt; ist jeder Wert eindeutig, meldet das Tool explizit, dass kein Modus existiert, statt auf einen willkürlichen Wert zurückzufallen."
+          },
+          {
+            "title": "Mehrere Modi (multimodale Daten)",
+            "description": "Wenn zwei oder mehr Werte in der höchsten Häufigkeit gleichauf liegen, werden alle als Modus zurückgegeben, numerisch sortiert, statt dass das Tool nur den zuerst gefundenen auswählt."
+          },
+          {
+            "title": "Datensätze mit gerader Anzahl benötigen gemittelte Mediane",
+            "description": "Bei einem Datensatz mit einer geraden Anzahl von Werten gibt es keinen einzelnen mittleren Wert — das Tool mittelt korrekt die beiden mittleren Werte der sortierten Liste, statt einen von ihnen auszuwählen (was bei einer geraden Anzahl falsch wäre)."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wann sollte ich den Mittelwert statt den Median verwenden?",
+            "answer": "Der Mittelwert nutzt jeden Wert und ist die Standardwahl für symmetrische Daten ohne extreme Ausreißer; der Median hängt nur von der Position des mittleren Werts ab und bleibt stabil, auch wenn ein Datensatz extreme Ausreißer oder eine schiefe Verteilung aufweist, was ihn zum besseren \"typischen Wert\" für Daten wie Haushaltseinkommen oder Immobilienpreise macht."
+          },
+          {
+            "question": "Warum hat ein Datensatz manchmal keinen Modus?",
+            "answer": "Der Modus erfordert, dass ein Wert häufiger vorkommt als jeder andere — kommt jeder Wert im Datensatz genau einmal vor, ist nichts häufiger als etwas anderes, sodass es keinen sinnvollen Modus zu melden gibt, und das Tool sagt dies explizit, statt zu raten."
+          },
+          {
+            "question": "Wie unterscheidet sich dieses Tool vom Statistikrechner?",
+            "answer": "Dieses Tool konzentriert sich speziell auf die vier klassischen Kennzahlen für zentrale Tendenz und Streuung (Mittelwert, Median, Modus, Spannweite) mit einer Aufschlüsselung, wie jede abgeleitet wird; der Statistikrechner berechnet zusätzlich Varianz sowie sowohl Populations- als auch Stichproben-Standardabweichung für eine umfassendere statistische Zusammenfassung."
+          },
+          {
+            "question": "Warum ist die Spannweite nur eine Subtraktion zweier Zahlen, während Varianz und Standardabweichung komplexer sind?",
+            "answer": "Die Spannweite nutzt nur die beiden extremsten Werte und ignoriert alles dazwischen, was ein schnelles, aber grobes Streuungsmaß liefert; Varianz und Standardabweichung berücksichtigen stattdessen den Abstand jedes Werts vom Mittelwert und liefern so ein vollständigeres (aber rechnerisch aufwendigeres) Bild davon, wie stark der gesamte Datensatz streut."
+          }
+        ]
+      },
+      "standard-deviation-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Standardabweichungsrechner: die abweichungsbasierte Formel, die er Schritt für Schritt berechnet, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDeviations": "Abweichungen vom Mittelwert",
+        "sectionAnatomy": "Grundgesamtheit vs. Stichprobe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Statistiken",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "σ (Population) = √(Σ(x − Mittelwert)² / n)  |  s (Stichprobe) = √(Σ(x − Mittelwert)² / (n − 1))",
+          "note": "Beide Formeln teilen sich dieselben Kernschritte — vom jedem Wert den Mittelwert subtrahieren, die Differenz quadrieren, die Quadrate summieren — und unterscheiden sich nur in der finalen Division, durch die volle Anzahl (Population) oder durch die Anzahl minus eins (Stichprobe, Bessel-Korrektur)."
+        },
+        "flowchart": {
+          "intro": "Statt die Standardabweichung als einzelne undurchsichtige Formel zu berechnen, erstellt und zeigt dieses Tool die vollständige Abweichungstabelle pro Wert als Zwischenergebnis, sodass die Berechnung nachvollziehbar bleibt.",
+          "steps": [
+            "Den Mittelwert aller eingegebenen Werte berechnen",
+            "Für jeden Wert den Mittelwert subtrahieren, um seine Abweichung zu erhalten, und diese Abweichung quadrieren",
+            "Alle quadrierten Abweichungen summieren",
+            "Diese Summe durch die Anzahl teilen, um die Populationsvarianz zu erhalten, und separat durch die Anzahl minus eins, um die Stichprobenvarianz zu erhalten",
+            "Von jeder Varianz die Quadratwurzel ziehen, um die Populations- und Stichproben-Standardabweichungen zu erhalten"
+          ],
+          "caption": "Die gemeinsame Abweichungstabellen-Berechnung, von der sich sowohl die Populations- als auch die Stichprobenformel im letzten Divisionsschritt verzweigen."
+        },
+        "deviations": {
+          "intro": "Die Abweichung jedes Werts vom Mittelwert (sein vorzeichenbehafteter Abstand) ist der Baustein für Varianz und Standardabweichung — Werte unter dem Mittelwert haben negative Abweichungen, Werte darüber positive.",
+          "meanLabel": "Mittelwert",
+          "caption": "Abweichungen vom Mittelwert für die Werte [2, 4, 6, 8, 10] (Mittelwert = 6) — symmetrische Werte über und unter dem Mittelwert erzeugen betragsgleiche, vorzeichenverschiedene Abweichungen."
+        },
+        "anatomy": {
+          "intro": "Populations- und Stichproben-Standardabweichung unterscheiden sich nur im letzten Divisionsschritt, aber dieser Unterschied bedeutet, dass die Stichprobenversion bei denselben Daten stets etwas größer ist.",
+          "labelPopulation": "Populations-Std.-Abw.",
+          "labelSample": "Stichproben-Std.-Abw.",
+          "caption": "Für die Werte [2, 4, 6, 8, 10] ergibt die Division durch die Anzahl (Population) im Vergleich zur Division durch die Anzahl minus eins (Stichprobe) zwei unterschiedliche Standardabweichungen aus denselben zugrunde liegenden Abweichungen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Werte",
+            "meaning": "Die Liste der Zahlen, aus denen der Datensatz besteht — jede Abweichung, Varianz und Standardabweichung wird aus dieser einzigen Eingabe abgeleitet.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer Datensatz",
+            "description": "Werden keine Werte eingegeben, gibt das Tool einen \"Leerer-Datensatz\"-Fehler zurück, anstatt einen Mittelwert oder Abweichungen für null Zahlen zu berechnen, was mathematisch undefiniert wäre."
+          },
+          {
+            "title": "Stichprobenstatistiken für einen einzelnen Wert undefiniert",
+            "description": "Stichprobenvarianz und Stichproben-Standardabweichung teilen durch (Anzahl − 1), was für einen Datensatz mit nur einem Wert null ist — das Tool gibt in diesem Fall für beide 0 zurück, statt durch null zu teilen, während Populationsvarianz und -Standardabweichung für einen einzelnen Wert mathematisch gültig (und gleich null) bleiben."
+          },
+          {
+            "title": "Vollständige Abweichungstabelle sichtbar, nicht nur die Endzahlen",
+            "description": "Statt nur die beiden finalen Standardabweichungszahlen zurückzugeben, zeigt das Tool die Abweichung und quadrierte Abweichung jedes einzelnen Werts — das macht die Zwischenarbeit überprüfbar und ist genau das, was das Abweichungsdiagramm auf dieser Seite direkt visualisiert."
+          },
+          {
+            "title": "Abweichungen summieren sich immer auf (annähernd) null",
+            "description": "Per Definition des Mittelwerts als Gleichgewichtspunkt der Daten summieren sich die rohen (nicht quadrierten) Abweichungen immer zu null oder einem nach Fließkomma-Rundung effektiv null Wert — das wird nicht als Fehler behandelt, da es eine garantierte mathematische Eigenschaft des Mittelwerts ist, kein Datenqualitätsproblem."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum zeigt das Tool die Abweichung jedes Werts statt nur die finale Standardabweichung?",
+            "answer": "Die Standardabweichung ist eine einzelne zusammenfassende Zahl, aber um ihre Bedeutung zu verstehen, muss man die zugrunde liegenden Abweichungen pro Wert sehen, aus denen sie gebildet wird — die vollständige Tabelle (Wert, Abweichung, quadrierte Abweichung) zu zeigen, macht sichtbar, welche Werte am meisten zur Streuung beitragen, statt die Endzahl als undurchsichtiges Ergebnis zu präsentieren."
+          },
+          {
+            "question": "Warum werden die Abweichungen vor der Summierung quadriert?",
+            "answer": "Abweichungen über und unter dem Mittelwert haben entgegengesetzte Vorzeichen und würden sich bei direkter Summierung gegenseitig aufheben (immer null ergebend, unabhängig davon, wie stark die Daten streuen) — das Quadrieren macht jede Abweichung vor der Summierung positiv, sodass die Summe tatsächlich die Gesamtstreuung widerspiegelt, statt sich zu nichts aufzuheben."
+          },
+          {
+            "question": "Wann sollte ich die Stichproben- statt die Populations-Standardabweichung verwenden?",
+            "answer": "Verwenden Sie die Populations-Standardabweichung, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert (z. B. die Note jedes Schülers bei einem bestimmten Test); verwenden Sie die Stichproben-Standardabweichung, wenn Ihr Datensatz eine Teilmenge aus einer größeren Population ist, über die Sie Schlussfolgerungen ziehen möchten (z. B. eine Umfragestichprobe, die eine größere Population repräsentiert) — die Bessel-Korrektur kompensiert die Tendenz der Stichprobe, die wahre Populationsstreuung zu unterschätzen."
+          },
+          {
+            "question": "Wie unterscheidet sich das vom Statistikrechner?",
+            "answer": "Dieses Tool konzentriert sich speziell auf Standardabweichung und Varianz und zeigt die vollständige Abweichungstabelle pro Wert als Kernstück; der Statistikrechner berechnet dieselben Varianz- und Standardabweichungswerte zusammen mit zehn weiteren Statistiken (Mittelwert, Median, Modus, Spannweite und mehr), ohne die zeilenweise Abweichungsaufschlüsselung anzuzeigen."
+          }
+        ]
+      },
+      "probability-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Wahrscheinlichkeitsrechner: die klassischen Wahrscheinlichkeitsformeln hinter seinen vier Modi, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionVenn": "AND vs. OR veranschaulicht",
+        "sectionAnatomy": "Vergleich der vier Modi",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "P(Ereignis) = günstig / gesamt  |  P(A∩B) = P(A)×P(B)  |  P(A∪B) = P(A)+P(B)−P(A∩B)  |  P(A|B) = P(A∩B)/P(B)",
+          "note": "Jeder der vier Modi beantwortet eine wirklich andere Wahrscheinlichkeitsfrage mit einer eigenen klassischen Formel — die Wahrscheinlichkeit eines einzelnen Ereignisses, dass zwei unabhängige Ereignisse beide eintreten, dass eines von zwei Ereignissen eintritt, oder die Wahrscheinlichkeit eines Ereignisses gegeben, dass ein anderes bereits eingetreten ist."
+        },
+        "flowchart": {
+          "intro": "Welche Formel ausgeführt wird, hängt vollständig vom gewählten Modus ab — jeder Modus prüft zudem unabhängig, ob jede eingegebene Wahrscheinlichkeit ein gültiger Wert zwischen 0 und 1 ist (oder, im Einzelereignis-Modus, dass günstige Ausgänge die Gesamtausgänge nicht übersteigen).",
+          "steps": [
+            "Lesen, welcher der vier Modi gewählt ist: Einzelereignis, AND (unabhängig), OR oder bedingt",
+            "Für Einzelereignis: günstige Ausgänge durch Gesamtausgänge teilen, um die Wahrscheinlichkeit zu erhalten, und die entsprechende Odds-Notation ableiten",
+            "Für AND: die beiden unabhängigen Wahrscheinlichkeiten miteinander multiplizieren",
+            "Für OR: die beiden Wahrscheinlichkeiten addieren und ihre Überschneidung (die Wahrscheinlichkeit, dass beide eintreten) subtrahieren, um Doppelzählung zu vermeiden",
+            "Für bedingt: die gemeinsame Wahrscheinlichkeit durch die Wahrscheinlichkeit teilen, dass die Bedingung bereits eingetreten ist"
+          ],
+          "caption": "Die modusabhängige Formel, die dieses Tool anwendet, jede mit ihren eigenen Validierungsregeln."
+        },
+        "venn": {
+          "intro": "AND- und OR-Wahrscheinlichkeiten entsprechen direkt einem Venn-Diagramm: AND ist die Überschneidung zweier Ereignisse, während OR alles ist, was von einem der beiden Kreise abgedeckt wird.",
+          "leftLabel": "Ereignis A",
+          "rightLabel": "Ereignis B",
+          "overlapLabel": "A∩B",
+          "leftOnlyItems": "Nur A",
+          "overlapItems": "AND",
+          "rightOnlyItems": "Nur B",
+          "caption": "Der Überschneidungsbereich ist die AND-Wahrscheinlichkeit; die gesamte schattierte Fläche (beide Kreise zusammen, ohne die Überschneidung doppelt zu zählen) ist die OR-Wahrscheinlichkeit."
+        },
+        "anatomy": {
+          "intro": "Die vier Modi erzeugen strukturell unterschiedliche Ergebnisse aus demselben zugrunde liegenden Wahrscheinlichkeitskonzept — ein einzelner Wert, ein kleinerer kombinierter Wert, ein größerer kombinierter Wert oder ein neu skalierter Wert.",
+          "labelSingle": "Einzelereignis",
+          "labelAnd": "AND (typischerweise kleiner)",
+          "labelOr": "OR (typischerweise größer)",
+          "caption": "Für zwei Ereignisse mit je 50 % Wahrscheinlichkeit ist AND (beide treten ein) kleiner als jedes einzelne, während OR (eines von beiden tritt ein) größer ist."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Günstig",
+            "meaning": "Die Anzahl der Ausgänge, die als \"Erfolg\" zählen — wird nur im Einzelereignis-Modus verwendet.",
+            "unit": "Anzahl"
+          },
+          {
+            "symbol": "Gesamt",
+            "meaning": "Die Gesamtzahl der möglichen Ausgänge — wird nur im Einzelereignis-Modus verwendet.",
+            "unit": "Anzahl"
+          },
+          {
+            "symbol": "P(A)",
+            "meaning": "Die Wahrscheinlichkeit von Ereignis A, ausgedrückt als Dezimalzahl zwischen 0 und 1 — wird in den Modi AND und OR verwendet.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(B)",
+            "meaning": "Die Wahrscheinlichkeit von Ereignis B, ausgedrückt als Dezimalzahl zwischen 0 und 1 — wird in den Modi AND, OR und bedingt verwendet.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "P(A∩B)",
+            "meaning": "Die bekannte gemeinsame Wahrscheinlichkeit, dass sowohl A als auch B eintreten — wird nur im OR-Modus (zur Vermeidung von Doppelzählung) und im bedingten Modus verwendet.",
+            "unit": "0–1"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Günstige Ausgänge übersteigen Gesamtausgänge",
+            "description": "Im Einzelereignis-Modus markiert das Tool das Ergebnis als ungültig, wenn die Anzahl der günstigen Ausgänge größer ist als die möglichen Gesamtausgänge, statt eine Wahrscheinlichkeit über 100 % zurückzugeben, was mathematisch nicht sinnvoll ist."
+          },
+          {
+            "title": "Wahrscheinlichkeitswerte außerhalb von 0 bis 1",
+            "description": "Jede Wahrscheinlichkeitseingabe (P(A), P(B), P(A∩B)) wird geprüft, eine endliche Zahl zwischen 0 und 1 einschließlich zu sein — ein Wert außerhalb dieses Bereichs wird vor jeder Berechnung abgelehnt, da Wahrscheinlichkeiten nur innerhalb dieser Grenze definiert sind."
+          },
+          {
+            "title": "Überschneidung größer als jede einzelne Wahrscheinlichkeit (OR-Modus)",
+            "description": "Im OR-Modus kann die bekannte gemeinsame Wahrscheinlichkeit P(A∩B) niemals das Kleinere von P(A) und P(B) übersteigen — zwei Ereignisse können sich nicht stärker überschneiden, als das weniger wahrscheinliche überhaupt eintritt — daher lehnt das Tool Eingaben ab, die dies verletzen, bevor die Vereinigung berechnet wird."
+          },
+          {
+            "title": "Division durch eine Bedingung mit Wahrscheinlichkeit null (bedingter Modus)",
+            "description": "Die bedingte Wahrscheinlichkeit teilt durch P(B); ist P(B) exakt null, lehnt das Tool die Eingabe ab, statt eine undefinierte Division zu berechnen, da das Bedingen auf ein Ereignis, das nie eintritt, keine sinnvolle Wahrscheinlichkeit hat."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum hat dieser Rechner vier separate Modi?",
+            "answer": "Einzelereignis-, AND-, OR- und bedingte Wahrscheinlichkeit sind vier wirklich unterschiedliche Fragen der Wahrscheinlichkeitstheorie, jede mit ihrer eigenen Formel — ein Rechner, der nur eine davon abdeckt, würde die anderen unbeantwortet lassen, daher fasst dieses Tool alle vier gängigen Fälle in einer Oberfläche zusammen."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen AND- und OR-Wahrscheinlichkeit?",
+            "answer": "AND fragt nach der Wahrscheinlichkeit, dass beide von zwei Ereignissen eintreten (ihre Überschneidung, die bei unabhängigen Ereignissen immer kleiner ist als jedes einzelne); OR fragt nach der Wahrscheinlichkeit, dass mindestens eines von beiden eintritt (ihre kombinierte Abdeckung, die immer mindestens so groß ist wie die größere Einzelwahrscheinlichkeit)."
+          },
+          {
+            "question": "Warum benötigt der OR-Modus die gemeinsame Wahrscheinlichkeit P(A∩B) als Eingabe?",
+            "answer": "Das einfache Addieren von P(A) und P(B) würde alle Ausgänge, bei denen beide Ereignisse eintreten, doppelt zählen — das Subtrahieren der bekannten Überschneidung korrigiert dies. Bei sich gegenseitig ausschließenden Ereignissen (die niemals beide eintreten können) ergibt die Eingabe von 0 für die Überschneidung die einfache Summe, da es nichts doppelt zu zählen gibt."
+          },
+          {
+            "question": "Wie unterscheidet sich bedingte Wahrscheinlichkeit von AND-Wahrscheinlichkeit?",
+            "answer": "AND-Wahrscheinlichkeit fragt nach der Chance, dass beide Ereignisse eintreten, betrachtet von einem Standpunkt, bevor eines von beiden bekannt ist; bedingte Wahrscheinlichkeit fragt nach der Chance eines Ereignisses, gegeben, dass das andere bereits definitiv eingetreten ist — sie skaliert die gemeinsame Wahrscheinlichkeit gegen den kleineren \"bekannten\" Stichprobenraum, in dem die Bedingung bereits wahr ist, neu."
+          }
+        ]
+      },
+      "random-number-generator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Zufallszahlengenerator: der dahinterliegende gleichverteilte Stichprobenalgorithmus, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDistribution": "Gleichverteilung",
+        "sectionAnatomy": "Eine generierte Menge",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Sortierreihenfolgen",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Wert = Min + ⌊zufall() × (Max − Min + 1)⌋",
+          "note": "Jede ganze Zahl im Bereich [Min, Max] hat die gleiche Chance, generiert zu werden — diese Formel bildet einen gleichverteilten Zufallsbruchteil zwischen 0 und 1 auf den gesamten ganzzahligen Bereich ab, einschließlich beider Endpunkte."
+        },
+        "flowchart": {
+          "intro": "Wie Zahlen generiert werden, hängt davon ab, ob Duplikate erlaubt sind — sind Duplikate nicht erlaubt, mischt das Tool den gesamten Bereich, statt wiederholt neu zu würfeln, bis zufällig eine Wiederholung vermieden wird.",
+          "steps": [
+            "Prüfen, dass Min und Max ganze Zahlen sind, und normalisieren, sodass die kleinere als Bereichsuntergrenze behandelt wird",
+            "Prüfen, dass die angeforderte Anzahl eine positive ganze Zahl innerhalb des Höchstlimits des Tools ist",
+            "Wenn Duplikate nicht erlaubt sind, prüfen, dass die angeforderte Anzahl die Zahl der im Bereich tatsächlich verfügbaren ganzen Zahlen nicht übersteigt",
+            "Wenn Duplikate erlaubt sind: jede Zahl unabhängig mit der Gleichverteilungsformel generieren",
+            "Wenn Duplikate nicht erlaubt sind: die vollständige Liste der möglichen ganzen Zahlen erstellen, mischen (Fisher-Yates-Algorithmus) und die ersten \"Anzahl\" Werte nehmen",
+            "Die angeforderte Sortierreihenfolge (keine, aufsteigend oder absteigend) auf die endgültige Liste anwenden"
+          ],
+          "caption": "Die beiden unterschiedlichen Generierungspfade, die dieses Tool je nachdem einschlägt, ob doppelte Werte erlaubt sind."
+        },
+        "distribution": {
+          "intro": "\"Zufällig\" bedeutet hier speziell gleichverteilt zufällig — jede ganze Zahl im gewählten Bereich hat die gleiche Wahrscheinlichkeit, aufzutreten, ohne Verzerrung zur Mitte, den Rändern oder einem bestimmten Wert hin.",
+          "bandLabel": "gleiche Chance über den gesamten Bereich",
+          "caption": "Jede ganze Zahl vom Minimum bis zum Maximum hat exakt die gleiche Auswahlwahrscheinlichkeit."
+        },
+        "anatomy": {
+          "intro": "Eine generierte Zahlenmenge, auf einer Zahlengeraden aufgetragen, sollte kein offensichtliches Muster oder keine Häufung zeigen — über den angeforderten Bereich in etwa gleichmäßig verteilte Werte sind das erwartete Kennzeichen korrekter gleichverteilter Stichprobenziehung.",
+          "labelMax": "Bereichsmaximum",
+          "caption": "Acht innerhalb eines Bereichs von 1–100 generierte Zahlen, ohne erkennbare Häufung — im Einklang mit gleichverteilter Zufallsauswahl."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Min",
+            "meaning": "Die Untergrenze des Bereichs (einschließlich) — wird automatisch mit Max vertauscht, wenn größer als dieses eingegeben.",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Max",
+            "meaning": "Die Obergrenze des Bereichs (einschließlich).",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Anzahl",
+            "meaning": "Wie viele Zufallszahlen generiert werden sollen.",
+            "unit": "Ganzzahl"
+          },
+          {
+            "symbol": "Duplikate erlauben",
+            "meaning": "Ob dieselbe Zahl mehr als einmal generiert werden kann — deaktiviert man dies, wird ohne Zurücklegen gezogen.",
+            "unit": "Boolesch"
+          },
+          {
+            "symbol": "Sortierreihenfolge",
+            "meaning": "Ob die generierten Zahlen in Generierungsreihenfolge belassen oder aufsteigend bzw. absteigend sortiert werden sollen.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Nicht-ganzzahliges Min oder Max",
+            "description": "Beide Bereichsgrenzen müssen ganze Zahlen sein — ein Dezimalwert für eines von beiden gibt einen \"Ungültiger-Bereich\"-Fehler zurück, da das Tool ausschließlich ganze Zahlen generiert, keine gebrochenen Zufallswerte."
+          },
+          {
+            "title": "Min größer als Max eingegeben",
+            "description": "Ist das eingegebene Minimum numerisch größer als das eingegebene Maximum, meldet das Tool keinen Fehler — es behandelt automatisch das Kleinere der beiden als Untergrenze und das Größere als Obergrenze, sodass der Bereich unabhängig von der Eingabereihenfolge stets korrekt interpretiert wird."
+          },
+          {
+            "title": "Ungültige oder übermäßige Anzahl",
+            "description": "Die angeforderte Anzahl muss eine positive ganze Zahl sein und darf das eingebaute Höchstlimit des Tools von 10.000 nicht überschreiten — eine Anzahl außerhalb dieses Bereichs gibt einen \"Ungültige-Anzahl\"-Fehler zurück, was vor der Generierung einer unangemessen großen Ergebnismenge schützt."
+          },
+          {
+            "title": "Anforderung von mehr eindeutigen Zahlen als der Bereich enthält",
+            "description": "Sind Duplikate nicht erlaubt, enthält der Bereich [Min, Max] eine feste, endliche Anzahl möglicher Werte — die Anforderung von mehr eindeutigen Zahlen, als in diesem Bereich existieren, gibt einen \"Bereich-zu-klein\"-Fehler zurück, statt stillschweigend weniger Zahlen als angefordert zurückzugeben."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wie garantiert das Tool, dass jede Zahl die gleiche Chance hat, wenn Duplikate nicht erlaubt sind?",
+            "answer": "Statt wiederholt einzelne Zufallszahlen zu generieren und Wiederholungen zu verwerfen (was zunehmend langsamer wird und sich übermäßig oft wiederholen kann, je näher die angeforderte Anzahl an die Bereichsgröße heranreicht), erstellt das Tool die vollständige Liste möglicher Werte, mischt sie mit dem Fisher-Yates-Algorithmus (der eine gleichverteilte Zufallspermutation erzeugt) und nimmt die ersten \"Anzahl\" Werte — dies zieht in einem effizienten Durchgang ohne Zurücklegen."
+          },
+          {
+            "question": "Warum hat die Anzahl ein Höchstlimit von 10.000?",
+            "answer": "Dies begrenzt den Rechenaufwand und die Größe des in einer einzelnen Anfrage angezeigten Ergebnisses und verhindert, dass eine versehentliche oder böswillige Anfrage nach einer unpraktisch großen Anzahl von Werten den Browser einfrieren oder die Ergebnisanzeige überlasten lässt."
+          },
+          {
+            "question": "Was bedeutet \"gleichverteilt zufällig\" hier eigentlich?",
+            "answer": "Es bedeutet, dass jede ganze Zahl innerhalb des gewählten Bereichs exakt die gleiche Auswahlwahrscheinlichkeit hat — nicht, dass die Zahlen für ein menschliches Auge verstreut oder unvorhersehbar wirken, sondern eine präzise mathematische Eigenschaft: über viele Generierungen hinweg würde jeder Wert im Bereich ungefähr gleich oft erscheinen."
+          },
+          {
+            "question": "Warum funktioniert es trotzdem korrekt, wenn Min größer als Max eingegeben wird?",
+            "answer": "Das Tool nimmt explizit das Kleinere der beiden eingegebenen Werte als Bereichsuntergrenze und das Größere als Obergrenze, bevor überhaupt etwas generiert wird — das bedeutet, der Bereich wird immer korrekt interpretiert, unabhängig davon, in welches Feld ein Nutzer die kleinere oder größere Zahl eingibt."
+          }
+        ]
+      },
+      "scientific-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den wissenschaftlichen Rechner: jede unterstützte Operation, wie Winkelmodus und Bereichsprüfungen funktionieren, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionCurve": "Was eine trigonometrische Funktion berechnet",
+        "sectionAnatomy": "Drei Funktionen, ein Winkel",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Operationen",
+          "modesValue": "20",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "sin/cos/tan(θ) wandeln zuerst Grad in Radiant um  |  √x, ln(x), log₁₀(x) benötigen x in einem gültigen Bereich  |  aⁿ, ⁿ√a verwenden Math.pow",
+          "note": "Der Rechner leitet je nach gedrückter Taste zu einer von zwanzig Operationen weiter — Arithmetik, Potenzen und Wurzeln, Trigonometrie und Logarithmen haben jeweils ihre eigene Formel und eigene Bereichseinschränkungen."
+        },
+        "flowchart": {
+          "intro": "Jede Operation durchläuft vor der Berechnung dieselbe Validierungspipeline, sodass eine ungültige Eingabe (wie Division durch null) immer einen typisierten Fehler erzeugt, statt dass NaN oder Infinity stillschweigend auf dem Bildschirm erscheint.",
+          "steps": [
+            "Prüfen, ob die Operation einen zweiten Operanden benötigt (Addition, Subtraktion, Multiplikation, Division, Potenz, Wurzel), und ihn verlangen",
+            "Bei trigonometrischen Funktionen zunächst die Eingabe von Grad in Radiant umwandeln, sofern nicht der Radiant-Modus gewählt ist",
+            "Die eigene Bereichsprüfung der Operation anwenden (Quadratwurzel und Logarithmen lehnen negative oder null Eingaben ab, inverse Trigonometrie lehnt Werte außerhalb [-1, 1] ab)",
+            "Das Ergebnis mit der entsprechenden JavaScript-Math-Funktion berechnen",
+            "Nicht endliche Ergebnisse (Überlauf durch sehr große Potenzen, oder tan() nahe seinen undefinierten Punkten) als Außerhalb-des-Bereichs-Fehler ablehnen"
+          ],
+          "caption": "Die gemeinsame Validieren-dann-Berechnen-Pipeline, die jede der zwanzig Operationen durchläuft."
+        },
+        "curve": {
+          "intro": "Eine trigonometrische Funktion wie der Sinus ist keine einzelne Zahl — es ist ein Wert, der sich kontinuierlich mit dem Winkel ändert und über eine volle Umdrehung eine sich wiederholende Welle beschreibt.",
+          "xLabel": "Winkel (Grad)",
+          "yLabel": "sin(θ)",
+          "caption": "sin(θ) alle 60° über eine volle Umdrehung abgetastet, zeigt die Welle, die auf 1 ansteigt, durch 0 auf -1 abfällt und zurückkehrt."
+        },
+        "anatomy": {
+          "intro": "Sinus, Kosinus und Tangens beschreiben alle denselben Winkel anhand dreier verschiedener Verhältnisse — alle drei gleichzeitig auszuwerten zeigt, wie sie für einen bestimmten Winkel zueinander stehen.",
+          "labelSin": "sin(30°)",
+          "labelCos": "cos(30°)",
+          "labelTan": "tan(30°)",
+          "caption": "Bei einem Winkel von 30° geben Sinus, Kosinus und Tangens jeweils einen anderen Wert zurück, da sie drei verschiedene Seitenverhältnisse desselben Dreiecks messen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Welche der zwanzig unterstützten Operationen angewendet wird — arithmetisch, Potenz/Wurzel, trigonometrisch oder logarithmisch.",
+            "unit": "—"
+          },
+          {
+            "symbol": "A",
+            "meaning": "Der primäre Operand, den jede Operation verwendet.",
+            "unit": "Zahl"
+          },
+          {
+            "symbol": "B",
+            "meaning": "Der zweite Operand, nur für binäre Operationen erforderlich (Addition, Subtraktion, Multiplikation, Division, Potenz, Wurzel).",
+            "unit": "Zahl"
+          },
+          {
+            "symbol": "Winkelmodus",
+            "meaning": "Ob trigonometrische Ein- und Ausgaben in Grad oder Radiant interpretiert werden.",
+            "unit": "Grad / Radiant"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fehlender zweiter Operand",
+            "description": "Binäre Operationen (Addition, Subtraktion, Multiplikation, Division, Potenz, Wurzel) erfordern einen zweiten Operanden B — fehlt er, gibt das Tool einen \"MISSING_OPERAND\"-Fehler zurück, statt stillschweigend einen Standardwert wie null einzusetzen."
+          },
+          {
+            "title": "Division und Kehrwert von null",
+            "description": "Division durch null, der Kehrwert von null oder eine nullte Wurzel geben alle einen \"DIVISION_BY_ZERO\"-Fehler zurück, da jede dieser Operationen bei dieser Eingabe mathematisch undefiniert ist."
+          },
+          {
+            "title": "Bereichsfehler für Wurzeln, Logarithmen und inverse Trigonometrie",
+            "description": "Quadratwurzel und Logarithmen einer negativen oder null Zahl, eine geradzahlige Wurzel einer negativen Zahl sowie inverser Sinus/Kosinus eines Werts außerhalb von [-1, 1] geben alle einen \"DOMAIN_ERROR\" statt eines NaN-Ergebnisses zurück."
+          },
+          {
+            "title": "tan() nahe seinen undefinierten Punkten",
+            "description": "Aufgrund von Fließkomma-Ungenauigkeit gibt tan(90°) nicht exakt Infinity zurück — stattdessen eine extrem große endliche Zahl. Das Tool behandelt jedes Tangens-Ergebnis jenseits einer sinnvollen Größenordnungsschwelle als \"OUT_OF_RANGE\"-Fehler, entsprechend dem, was ein Rechner-Nutzer bei diesem Winkel tatsächlich erwarten würde."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum muss der Rechner wissen, ob ich Grad oder Radiant verwende?",
+            "answer": "Trigonometrische Funktionen sind mathematisch in Radiant definiert, aber die meisten alltäglichen Winkelmessungen (wie eine 90°-Drehung) werden in Grad ausgedrückt — die Winkelmodus-Einstellung teilt dem Rechner mit, in welcher Einheit Ihre Eingabe vorliegt, damit er intern in Radiant umrechnen kann, bevor er sin, cos oder tan berechnet, und für die Umkehrfunktionen zurückrechnet."
+          },
+          {
+            "question": "Warum zeigt tan(90°) einen Fehler statt einer sehr großen Zahl?",
+            "answer": "Der Tangens ist bei 90° (und jedem ungeraden Vielfachen von 90°) mathematisch undefiniert, da er als sin/cos definiert ist und der Kosinus dort null ist — Fließkomma-Arithmetik kann 90° nicht exakt als Bruchteil von π darstellen, daher gibt Math.tan() eine riesige endliche Zahl statt echter Unendlichkeit zurück, und das Tool fängt dies ab und meldet es als undefiniert, statt eine irreführend präzise riesige Zahl anzuzeigen."
+          },
+          {
+            "question": "Warum ist die Quadratwurzel einer negativen Zahl ein Fehler, die Kubikwurzel aber nicht?",
+            "answer": "Eine Quadratwurzel (oder jede geradzahlige Wurzel) einer negativen Zahl hat keine reelle Lösung — die nächstliegende reelle Lösung wäre eine imaginäre Zahl, die dieser Rechner nicht unterstützt, daher wird sie als Bereichsfehler gemeldet. Eine Kubikwurzel (oder jede ungeradzahlige Wurzel) einer negativen Zahl hat tatsächlich eine reelle Lösung (die Kubikwurzel von -8 ist -2), daher wird sie normal berechnet."
+          },
+          {
+            "question": "Was passiert, wenn ich versuche, durch null zu teilen oder den Kehrwert von null zu bilden?",
+            "answer": "Beide Operationen sind mathematisch undefiniert — es gibt keine Zahl, die mit null multipliziert den ursprünglichen Wert ergibt — daher gibt der Rechner einen Division-durch-null-Fehler zurück statt Infinity oder NaN, was auf einer Taschenrechneranzeige verwirrend wäre."
+          }
+        ]
+      },
+      "step-by-step-math-solver": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Schritt-für-Schritt-Mathe-Löser: die vier Algebra- und Analysisprobleme, die er löst, wie jede Lösung hergeleitet wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformeln",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionRoots": "Die Nullstellen visualisieren",
+        "sectionAnatomy": "Die Parabel hinter den Nullstellen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Löser-Modi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "6 Min."
+        },
+        "formula": {
+          "expression": "Linear: ax + b = cx + d  |  Quadratisch: x = (-b ± √(b²-4ac)) / 2a  |  Bruch: a/b Operation c/d  |  Ableitung: d/dx[xⁿ] = n·xⁿ⁻¹",
+          "note": "Jeder der vier Modi löst eine wirklich andere Art von Problem, aber alle vier teilen dasselbe Design: Statt direkt zu einer Endantwort zu springen, erstellt und liefert der Löser eine Liste menschenlesbarer Zwischenschritte."
+        },
+        "flowchart": {
+          "intro": "Welche Formel ausgeführt wird, hängt vollständig vom gewählten Modus ab — die reichhaltigste Verzweigung geschieht im quadratischen Modus, wo das Vorzeichen der Diskriminante bestimmt, ob die Lösung zwei reelle Nullstellen, eine wiederholte Nullstelle oder ein Paar komplexer Nullstellen ist.",
+          "steps": [
+            "Lesen, welcher der vier Modi gewählt ist: lineare Gleichung, quadratische Gleichung, Bruchoperation oder Ableitung",
+            "Für eine quadratische Gleichung die Diskriminante D = b² - 4ac berechnen",
+            "Wenn D > 0: zwei unterschiedliche reelle Nullstellen mit x = (-b ± √D) / 2a berechnen",
+            "Wenn D = 0: eine wiederholte reelle Nullstelle mit x = -b / 2a berechnen",
+            "Wenn D < 0: ein Paar komplexer Nullstellen berechnen, da die Quadratwurzel einer negativen Diskriminante keinen reellen Wert hat"
+          ],
+          "caption": "Die diskriminantengesteuerte Verzweigung, die bestimmt, wie viele Nullstellen eine quadratische Gleichung hat und ob sie reell oder komplex sind."
+        },
+        "roots": {
+          "intro": "Bei einer quadratischen Gleichung mit positiver Diskriminante sind die beiden Nullstellen genau die x-Werte, an denen die Parabel die x-Achse kreuzt — sie auf einer Zahlengeraden darzustellen zeigt, wie weit sie auseinanderliegen.",
+          "labelX1": "x₁ = 2",
+          "labelX2": "x₂ = 3",
+          "caption": "Die beiden reellen Nullstellen von x² - 5x + 6 = 0, gefunden aus einer Diskriminante von 1 (5² - 4×1×6 = 1)."
+        },
+        "anatomy": {
+          "intro": "Die Nullstellen, die ein quadratischer Löser meldet, sind kein abstraktes algebraisches Ergebnis — es sind genau die x-Werte, an denen der Graph der Gleichung y = 0 berührt.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 5x + 6",
+          "caption": "Die Parabel y = x² - 5x + 6 fällt zwischen x = 2 und x = 3 unter die x-Achse und kreuzt null genau bei den beiden vom Löser berechneten Nullstellen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Welcher der vier Löser ausgeführt wird: lineare Gleichung, quadratische Gleichung, Bruchoperation oder Ableitung.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Lineare a, b, c, d",
+            "meaning": "Die Koeffizienten der Gleichung ax + b = cx + d, nur im linearen Modus verwendet.",
+            "unit": "Zahlen"
+          },
+          {
+            "symbol": "Quadratische a, b, c",
+            "meaning": "Die Koeffizienten von ax² + bx + c = 0, nur im quadratischen Modus verwendet. 'a' darf nicht null sein.",
+            "unit": "Zahlen"
+          },
+          {
+            "symbol": "Bruch a/b, Operator, c/d",
+            "meaning": "Zwei Brüche und eine Operation (Addition, Subtraktion, Multiplikation, Division) zu deren Verknüpfung, nur im Bruch-Modus verwendet.",
+            "unit": "Zahlen"
+          },
+          {
+            "symbol": "Polynomterme",
+            "meaning": "Eine Liste von Koeffizient-Potenz-Paaren, die ein Polynom f(x) beschreiben, nur im Ableitungsmodus verwendet.",
+            "unit": "Koeffizient, Potenz"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Lineare Gleichung ohne eindeutige Lösung",
+            "description": "Hebt sich der x-Koeffizient auf beiden Seiten auf (a = c), gilt die Gleichung entweder für jeden Wert von x (unendlich viele Lösungen, wenn auch die Konstanten übereinstimmen) oder für keinen Wert von x (wenn nicht) — in beiden Fällen meldet der Löser \"no-unique-solution\" statt eines einzelnen x-Werts."
+          },
+          {
+            "title": "Quadratischer Koeffizient 'a' gleich null",
+            "description": "Ist der führende Koeffizient a null, kollabiert die Gleichung ax² + bx + c = 0 zu einer linearen Gleichung, keiner quadratischen — der Löser lehnt dies als \"invalid-quadratic-equation\" ab, statt zu versuchen, in der quadratischen Formel durch null zu teilen."
+          },
+          {
+            "title": "Negative Diskriminante ergibt komplexe Nullstellen",
+            "description": "Bei negativer Diskriminante gibt der Löser keinen Fehler zurück — er meldet beide Nullstellen in der komplexen Zahlenform a + bi, da eine quadratische Gleichung mit reellen Koeffizienten und negativer Diskriminante tatsächlich zwei komplex-konjugierte Lösungen hat."
+          },
+          {
+            "title": "Division eines Bruchs durch einen Bruch mit Zähler null",
+            "description": "Division durch einen Bruch bedeutet Multiplikation mit seinem Kehrwert, was das Umdrehen von Zähler und Nenner des zweiten Bruchs erfordert — ist dieser Zähler null, hätte der Kehrwert null im Nenner, daher lehnt der Löser dies als \"division-by-zero\"-Fehler ab, bevor es passiert."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum liefert eine quadratische Gleichung manchmal Antworten mit komplexen Zahlen?",
+            "answer": "Die quadratische Formel erfordert das Ziehen der Quadratwurzel der Diskriminante (b² - 4ac) — ist die Diskriminante negativ, gibt es keine reelle Zahl, deren Quadrat negativ ist, aber es gibt eine komplexe Zahl (mit i, der imaginären Einheit), die dies erfüllt, daher meldet der Löser die beiden komplex-konjugierten Nullstellen, statt zu behaupten, es gebe keine Lösung."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen \"keine eindeutige Lösung\" und \"keine Lösung\" bei einer linearen Gleichung?",
+            "answer": "Beides passiert, wenn sich die x-Terme auf beiden Seiten der Gleichung aufheben und kein x zum Lösen übrig bleibt — sind die verbleibenden Konstanten jedoch gleich, ist die ursprüngliche Gleichung für jedes x wahr (unendlich viele Lösungen); sind sie ungleich, ist die Gleichung für kein x jemals wahr (überhaupt keine Lösung). Das Tool unterscheidet diese beiden Fälle in seiner Fehlermeldung."
+          },
+          {
+            "question": "Warum wird die Division von Brüchen durch Multiplikation mit dem Kehrwert gelöst?",
+            "answer": "Division durch eine Zahl ist dasselbe wie Multiplikation mit dem Kehrwert dieser Zahl (ihrer \"Umkehrung\") — das gilt für ganze Zahlen (Division durch 2 ist dasselbe wie Multiplikation mit 1/2) und ebenso für Brüche, daher wird a/b ÷ c/d als a/b × d/c berechnet, was ein Divisionsproblem mit derselben Bruchmultiplikationsregel in ein Multiplikationsproblem verwandelt."
+          },
+          {
+            "question": "Warum ist die Ableitung eines konstanten Terms immer null?",
+            "answer": "Eine Ableitung misst, wie schnell sich der Ausgabewert einer Funktion ändert, wenn sich x ändert — ein konstanter Term wie 7 hängt überhaupt nicht von x ab, daher ändert sich sein Wert nie, egal welchen Wert x hat, was bedeutet, dass seine Änderungsrate immer null ist. Deshalb meldet der Potenzregel-Schritt für einen konstanten Term (Potenz 0) einfach 0, statt die Formel n·xⁿ⁻¹ anzuwenden."
+          }
+        ]
+      },
+      "matrix-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Matrizenrechner: die sechs berechneten 2x2-Matrixoperationen, wie Inverse und Determinante zusammenhängen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Von der Matrix zur Inversen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Operationen",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "det(A) = a₁₁a₂₂ - a₁₂a₂₁  |  A⁻¹ = (1/det A) × [a₂₂, -a₁₂; -a₂₁, a₁₁]",
+          "note": "Jede von diesem Tool berechnete 2x2-Matrixoperation — Summe, Differenz, Produkt, Determinante, Transponierte und Inverse — reduziert sich auf einfache Arithmetik der vier einzelnen Zellen, wobei die Inverse die einzige Operation ist, die fehlschlagen kann (wenn die Determinante null ist)."
+        },
+        "flowchart": {
+          "intro": "Sechs Operationen werden aus denselben zwei Eingabematrizen berechnet; fünf davon gelingen immer, und die sechste (die Inverse) hängt davon ab, ob die Determinante von Matrix A null ist.",
+          "steps": [
+            "A und B zellenweise addieren und subtrahieren, um Summe und Differenz zu erhalten",
+            "A und B nach der Matrixmultiplikationsregel multiplizieren (jede Ausgabezelle ist eine Summe zweier Produkte), um A×B zu erhalten",
+            "Die Determinante von A und von B unabhängig berechnen: a₁₁a₂₂ - a₁₂a₂₁",
+            "Die Transponierte von A berechnen, indem ihre Nebendiagonalzellen (a₁₂ und a₂₁) vertauscht werden",
+            "Ist die Determinante von A ungleich null, die Inverse von A berechnen, indem die vertauschten und negierten Zellen durch die Determinante geteilt werden; andernfalls A als singulär markieren und die Inverse undefiniert lassen"
+          ],
+          "caption": "Die sechs Operationen, die dieses Tool aus denselben zwei 2x2-Matrizen berechnet — nur der Inversenschritt verzweigt sich danach, ob A singulär ist."
+        },
+        "anatomy": {
+          "intro": "Die Inverse einer Matrix wird vollständig aus ihren eigenen vier Zellen und ihrer Determinante aufgebaut — die Diagonalzellen vertauschen, die Nebendiagonalzellen negieren, dann alles durch die Determinante teilen.",
+          "labelMatrix": "Matrix A",
+          "labelDeterminant": "det(A)",
+          "labelInverse": "A⁻¹",
+          "caption": "Für A = [[4, 7], [2, 6]] ist die Determinante 4×6 - 7×2 = 10, und die Inverse teilt die umgeordneten Zellen durch diese Determinante."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "a₁₁, a₁₂, a₂₁, a₂₂",
+            "meaning": "Die vier Zellen von Matrix A, von links nach rechts, von oben nach unten gelesen.",
+            "unit": "Zahlen"
+          },
+          {
+            "symbol": "b₁₁, b₁₂, b₂₁, b₂₂",
+            "meaning": "Die vier Zellen von Matrix B, von links nach rechts, von oben nach unten gelesen.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Singuläre Matrix A (Determinante null)",
+            "description": "Ist die Determinante von A null, ist die Division dadurch zur Berechnung der Inversen undefiniert — das Tool gibt für alle vier Inversenzellen null zurück und markiert einen \"singular-matrix-a\"-Fehler, während jede andere Operation (Summe, Differenz, Produkt, beide Determinanten, Transponierte) weiterhin normal berechnet wird."
+          },
+          {
+            "title": "Singuläre Matrix B löst keinen Fehler aus",
+            "description": "Das Tool prüft und meldet nur die Invertierbarkeit von Matrix A, da dies die einzige Matrix ist, deren Inverse es berechnet — ist die Determinante von B null, meldet determinantB einfach 0 ohne Fehler, da die Inverse von B nie angefordert wurde."
+          },
+          {
+            "title": "Ergebnisse auf 10 signifikante Stellen gerundet",
+            "description": "Jeder Ausgabewert durchläuft toPrecision(10), bevor er zurückgegeben wird, was verhindert, dass Fließkomma-Artefakte (wie eine Summe, die exakt 0,3 sein sollte, aber als 0,30000000000000004 angezeigt wird) in den Ergebnissen erscheinen."
+          },
+          {
+            "title": "Transponierte wird nur für A berechnet",
+            "description": "Das Tool zeigt die Transponierte von A (durch Vertauschen von a₁₂ und a₂₁), aber nicht die von B, da keine der sechs angebotenen Operationen — Summe, Differenz, Produkt (speziell A×B), die beiden Determinanten und die Inverse von A — die Transponierte von B zur Berechnung benötigt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum berechnet das Tool nur die Inverse von Matrix A, nicht von Matrix B?",
+            "answer": "Das Tool ist um einen festen Satz von sechs Operationen herum aufgebaut — Summe, Differenz, das Produkt A×B, beide Determinanten, die Transponierte von A und die Inverse von A — und die Inverse von B ist einfach nicht eine der Operationen, für deren Anzeige es entwickelt wurde. Benötigen Sie die Inverse von B, können Sie vertauschen, welche Matrix Sie als A eingeben."
+          },
+          {
+            "question": "Was passiert, wenn Matrix A nicht invertiert werden kann?",
+            "answer": "Eine Matrix kann nur invertiert werden, wenn ihre Determinante ungleich null ist — ist die Determinante von A exakt null (eine \"singuläre\" Matrix), gibt es keine Matrix, die mit A multipliziert die Einheitsmatrix ergibt, daher meldet das Tool einen Singuläre-Matrix-Fehler und lässt alle vier Inversenzellen leer, statt durch null zu teilen."
+          },
+          {
+            "question": "Warum ist Matrixmultiplikation nicht einfach das Multiplizieren der entsprechenden Zellen?",
+            "answer": "Matrixmultiplikation ist definiert, um die Komposition zweier linearer Transformationen darzustellen, nicht eine elementweise Skalierung — jede Zelle des Produkts A×B ist eine Summe von Produkten über eine Zeile von A und eine Spalte von B, weshalb Produktzelle (1,1) a₁₁b₁₁ + a₁₂b₂₁ ist und nicht einfach a₁₁×b₁₁."
+          },
+          {
+            "question": "Warum kann die Transponierte von A anders als die Inverse nie fehlschlagen?",
+            "answer": "Die Transponierte ist nur eine Umordnung — sie vertauscht die beiden Nebendiagonalzellen und lässt die Diagonalzellen unberührt, was für jede mögliche Matrix ohne Division funktioniert. Die Inverse hingegen erfordert die Division durch die Determinante, was immer fehlschlägt, wenn die Determinante zufällig null ist."
+          }
+        ]
+      },
+      "vector-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Vektorrechner: die berechneten Operationen an zwei 2D- oder 3D-Vektoren, wie Projektion und der Winkel zwischen Vektoren hergeleitet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Zwei Vektoren addieren",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Operationen",
+          "modesValue": "9",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "|A| = √(ax² + ay² + az²)  |  A·B = axbx + ayby + azbz  |  A×B = (aybz - azby, azbx - axbz, axby - aybx)  |  θ = cos⁻¹(A·B / |A||B|)",
+          "note": "Alle neun Operationen arbeiten mit zwei 3D-Vektoren A und B (ein 2D-Vektor ist einfach der Fall, in dem die z-Komponente null ist) — Summe, Differenz, Skalarprodukt und Kreuzprodukt sind immer definiert, während größenabhängige Ergebnisse wie der Winkel zwischen den Vektoren, der Einheitsvektor von A und die Projektion von A auf B erfordern, dass der jeweilige Vektor ungleich null ist."
+        },
+        "flowchart": {
+          "intro": "Die Operationen, die nur Komponenten betreffen (Summe, Differenz, Skalarprodukt, Kreuzprodukt), werden immer zuerst berechnet; die Operationen, die durch die Länge eines Vektors teilen, werden erst danach berechnet, nur wenn dieser Vektor nicht der Nullvektor ist.",
+          "steps": [
+            "Den Betrag jedes Vektors berechnen: |A| = √(ax² + ay² + az²), und dasselbe für B",
+            "Summe, Differenz, Skalarprodukt und Kreuzprodukt komponentenweise berechnen — diese schlagen nie fehl",
+            "Ist A ungleich null, den Einheitsvektor von A berechnen, indem jede Komponente durch |A| geteilt wird; andernfalls einen zero-vector-a-Fehler markieren",
+            "Ist B ungleich null, die Projektion von A auf B mithilfe des Skalarprodukts und |B| berechnen; andernfalls einen zero-vector-b-Fehler markieren",
+            "Sind sowohl A als auch B ungleich null, den Winkel zwischen ihnen mit der Skalarproduktformel berechnen, wobei der Kosinus auf [-1, 1] begrenzt wird, um Fließkomma-Überschreitungen abzufangen"
+          ],
+          "caption": "Die immer sicheren Komponentenoperationen, gefolgt von den größenabhängigen Operationen, die einen Vektor ungleich null erfordern."
+        },
+        "anatomy": {
+          "intro": "Das Addieren zweier Vektoren fügt sie Spitze an Schwanz zusammen: die Summe ist die Diagonale des von A und B gebildeten Parallelogramms, vom gemeinsamen Startpunkt bis zur gegenüberliegenden Ecke.",
+          "labelA": "A = (3, 4)",
+          "labelB": "B = (4, 0)",
+          "labelSum": "A + B = (7, 4)",
+          "caption": "Vektor A = (3, 4) und Vektor B = (4, 0), Spitze an Schwanz addiert, ergeben den Summenvektor (7, 4), dargestellt als Diagonale des Parallelogramms."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "ax, ay, az",
+            "meaning": "Die x-, y- und z-Komponenten von Vektor A. Für einen 2D-Vektor az auf 0 setzen.",
+            "unit": "Zahlen"
+          },
+          {
+            "symbol": "bx, by, bz",
+            "meaning": "Die x-, y- und z-Komponenten von Vektor B. Für einen 2D-Vektor bz auf 0 setzen.",
+            "unit": "Zahlen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Vektor A ist der Nullvektor",
+            "description": "Der Einheitsvektor von A erfordert die Division jeder Komponente durch |A|, was undefiniert ist, wenn |A| null ist — das Tool gibt für die Komponenten des Einheitsvektors null zurück und markiert einen \"zero-vector-a\"-Fehler, während Summe, Differenz, Skalarprodukt und Kreuzprodukt weiterhin normal berechnet werden."
+          },
+          {
+            "title": "Vektor B ist der Nullvektor",
+            "description": "Die Projektion von A auf B erfordert die Division durch |B|, was undefiniert ist, wenn B der Nullvektor ist — das Tool gibt für die skalaren und vektoriellen Komponenten der Projektion null zurück und markiert einen \"zero-vector-b\"-Fehler, aber nur, wenn A nicht bereits als Nullvektor markiert wurde (das Fehlerfeld hält einen einzigen Code)."
+          },
+          {
+            "title": "Winkel zwischen Vektoren erfordert beide ungleich null",
+            "description": "Die Winkelformel teilt durch |A| × |B| — hat einer der Vektoren eine Länge von null, ist der Winkel mathematisch undefiniert, daher berechnet das Tool ihn nur, wenn sowohl A als auch B bestätigt ungleich null sind, und lässt ihn andernfalls null."
+          },
+          {
+            "title": "Kosinus vor arccos auf gültigen Bereich begrenzt",
+            "description": "Fließkomma-Rundung kann den berechneten Kosinuswert gelegentlich sehr leicht über 1 oder unter -1 drücken, was Math.acos() NaN zurückgeben lassen würde — das Tool begrenzt den Wert zunächst auf den mathematisch gültigen Bereich [-1, 1], sodass die Winkelberechnung auch an Fließkomma-Grenzen zuverlässig bleibt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird der Winkel zwischen zwei Vektoren manchmal leer angezeigt, obwohl beide Beträge aufgeführt sind?",
+            "answer": "Der Winkel bleibt nur leer, wenn mindestens einer der beiden Vektoren eine Länge von null hat — da die Winkelformel durch das Produkt beider Beträge teilt, hat ein Vektor der Länge null keine definierte Richtung, von der aus ein Winkel gemessen werden könnte, daher gibt es nichts Sinnvolles zu melden."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen Skalarprodukt und Kreuzprodukt?",
+            "answer": "Das Skalarprodukt gibt eine einzelne Zahl zurück, die beschreibt, wie ausgerichtet zwei Vektoren sind (groß und positiv, wenn sie in dieselbe Richtung zeigen, null bei Rechtwinkligkeit, negativ bei entgegengesetzter Richtung); das Kreuzprodukt gibt einen neuen Vektor senkrecht zu beiden Eingaben zurück, dessen Länge die Fläche des von ihnen gebildeten Parallelogramms widerspiegelt — das Skalarprodukt funktioniert in jeder Dimension, während die hier verwendete spezifische Kreuzproduktformel für 3D- (oder 2D-als-3D-) Vektoren definiert ist."
+          },
+          {
+            "question": "Warum meldet das Tool nur einen Fehler, selbst wenn beide Vektoren null sind?",
+            "answer": "Das Fehlerfeld hält einen einzigen Code, und die Prüfung für A läuft zuerst — ist A der Nullvektor, hat dieser Fehler Vorrang und wird gemeldet, und die Prüfung für den B-Fehler wird nur angewendet, wenn die A-Prüfung noch keinen gesetzt hat. Unabhängig davon, welcher Fehler angezeigt wird, liegt das zugrunde liegende Problem (ein Vektor der Länge null) in beiden Fällen vor."
+          },
+          {
+            "question": "Was ist eine Vektorprojektion, und warum erfordert sie, dass Vektor B ungleich null ist?",
+            "answer": "Die Projektion von A auf B ist der \"Schatten\", den A auf die Linie von B werfen würde, wenn Licht senkrecht zu B schiene — sie beschreibt, wie viel von A in Richtung von B zeigt. Da dieser Schatten entlang der Richtung von B gemessen wird, muss B eine definierte Richtung haben, die ein Vektor der Länge null nicht hat — daher bleibt die Projektion undefiniert, wenn B der Nullvektor ist."
+          }
+        ]
+      },
+      "graphing-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den grafischen Rechner: wie er einen Funktionsausdruck parst und abtastet, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionCurve": "Eine Funktion abtasten",
+        "sectionAnatomy": "Das Abtastraster",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Eingebaute Funktionen",
+          "modesValue": "12",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "y = f(x), ausgewertet bei x = xMin + i × (xMax - xMin) / (Abtastpunkte - 1), für i = 0 bis Abtastpunkte - 1",
+          "note": "Das Tool erkennt keine feste Liste von Formeln — es parst, was auch immer Sie eingeben, mithilfe eines kleinen rekursiven Abstiegsparsers in einen abstrakten Syntaxbaum und wertet diesen Baum dann bei einer Reihe gleichmäßig verteilter x-Werte aus, um die geplottete Kurve zu erstellen."
+        },
+        "flowchart": {
+          "intro": "Bevor überhaupt geplottet wird, wird der Ausdruck genau einmal in eine wiederverwendbare Baumstruktur geparst; diesen Baum viele Male auszuwerten (einmal pro Abtastpunkt) ist weit günstiger, als den Text für jeden x-Wert erneut zu parsen.",
+          "steps": [
+            "Prüfen, dass xMax größer als xMin ist und die Abtastpunktanzahl zwischen 2 und 2000 liegt",
+            "Den Ausdruck in Zahlen, Bezeichner, Operatoren und Klammern zerlegen",
+            "Die Token unter Einhaltung der Standard-Operatorrangfolge in einen Ausdrucksbaum parsen (Klammern, dann Potenzen, dann unäres Minus, dann Multiplikation/Division, dann Addition/Subtraktion)",
+            "Den Baum einmal bei jedem gleichmäßig verteilten x-Wert zwischen xMin und xMax auswerten",
+            "Wo die Auswertung ein nicht endliches Ergebnis liefert (wie Division durch null), den y-Wert dieses Punkts als null vermerken, statt den gesamten Graphen fehlschlagen zu lassen"
+          ],
+          "caption": "Die Einmal-parsen-mehrfach-auswerten-Pipeline, mit der dieses Tool einen eingegebenen Ausdruck in eine geplottete Kurve umwandelt."
+        },
+        "curve": {
+          "intro": "Eine Funktion zu plotten bedeutet, ihren Ausgabewert bei vielen eng beieinanderliegenden x-Werten zu berechnen und die resultierenden Punkte zu verbinden — je mehr Abtastpunkte verwendet werden, desto glatter erscheint die resultierende Kurve.",
+          "xLabel": "x",
+          "yLabel": "y = x² - 2",
+          "caption": "Der Ausdruck \"x^2 - 2\" abgetastet bei sieben gleichmäßig verteilten x-Werten von -3 bis 3, was die Punkte ergibt, die die Parabel nachzeichnen."
+        },
+        "anatomy": {
+          "intro": "Hinter jeder geplotteten Kurve steckt ein einfaches Raster von x-Werten, gleichmäßig verteilt zwischen dem gewählten Minimum und Maximum, an denen der Ausdruck Punkt für Punkt ausgewertet wird.",
+          "labelMin": "xMin",
+          "labelMax": "xMax",
+          "caption": "Sieben gleichmäßig verteilte Abtastpunkte zwischen xMin = -3 und xMax = 3 — das eigentliche Tool verwendet standardmäßig bis zu 2000 solcher Punkte für eine glatte Kurve."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Ausdruck",
+            "meaning": "Die zu plottende Funktion von x, unter Verwendung von Standardarithmetik, Potenzen und eingebauten Funktionen wie sin, cos, sqrt, ln und abs.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "xMin",
+            "meaning": "Der kleinste x-Wert, bei dem der Ausdruck ausgewertet wird.",
+            "unit": "Zahl"
+          },
+          {
+            "symbol": "xMax",
+            "meaning": "Der größte x-Wert, bei dem der Ausdruck ausgewertet wird. Muss größer als xMin sein.",
+            "unit": "Zahl"
+          },
+          {
+            "symbol": "Abtastpunkte",
+            "meaning": "Wie viele gleichmäßig verteilte x-Werte zwischen xMin und xMax ausgewertet werden. Muss zwischen 2 und 2000 liegen.",
+            "unit": "Ganzzahl"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "xMax nicht größer als xMin",
+            "description": "Ist der maximale x-Wert nicht strikt größer als der minimale, gibt es keinen gültigen Bereich zum Abtasten — das Tool gibt einen \"invalid-range\"-Fehler zurück und erzeugt keine Punkte, statt zu versuchen, einen Bereich mit null oder negativer Breite zu plotten."
+          },
+          {
+            "title": "Abtastpunktanzahl außerhalb von 2 bis 2000",
+            "description": "Weniger als 2 Abtastpunkte können keine Linie bilden, und mehr als 2000 wären übermäßiger Rechenaufwand für einen einzigen Plot — eine Abtastpunktanzahl außerhalb dieses Bereichs gibt ebenfalls einen \"invalid-range\"-Fehler zurück."
+          },
+          {
+            "title": "Ausdruck, der nicht geparst werden kann",
+            "description": "Ein Ausdruck mit einem unerwarteten Zeichen, einem unbekannten Funktionsnamen oder einer fehlenden schließenden Klammer schlägt beim Parsen fehl — das Tool fängt dies ab und gibt einen \"invalid-expression\"-Fehler zusammen mit der spezifischen Meldung des Parsers zurück (wie \"Missing closing parenthesis\"), statt ohne Erklärung nichts zu plotten."
+          },
+          {
+            "title": "Einzelne Punkte, die zu einem nicht endlichen Wert ausgewertet werden",
+            "description": "Eine Funktion wie 1/x ist bei x = 0 undefiniert, und sqrt(x) ist für negative x undefiniert — statt den gesamten Plot fehlschlagen zu lassen, wenn ein Abtastpunkt einen undefinierten Fall trifft, vermerkt das Tool den y-Wert dieses einzelnen Punkts als null, sodass die Kurve dort einfach eine Lücke hat, statt vollständig zu verschwinden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum haben manche Graphen sichtbare Lücken statt einer durchgehenden Linie?",
+            "answer": "Eine Lücke erscheint bei jedem x-Wert, bei dem der Ausdruck zu etwas nicht Endlichem ausgewertet wird — zum Beispiel ist 1/x bei x = 0 undefiniert, und sqrt(x) ist für negative x undefiniert. Statt über diese undefinierten Punkte mit einer irreführenden Linie hinwegzugehen, lässt das Tool diesen Abtastpunkt aus, wodurch genau dort ein sichtbarer Bruch entsteht, wo die Funktion tatsächlich undefiniert ist."
+          },
+          {
+            "question": "Welche Funktionen und Konstanten kann ich in einem Ausdruck verwenden?",
+            "answer": "Die eingebauten Funktionen sind sin, cos, tan, asin, acos, atan, sqrt, abs, ln (natürlicher Logarithmus), log (Logarithmus zur Basis 10), exp, max und min, sowie die Konstanten pi und e — Funktionsnamen unterscheiden nicht zwischen Groß- und Kleinschreibung, sodass sowohl SIN(x) als auch sin(x) funktionieren."
+          },
+          {
+            "question": "Warum gibt es ein Maximum von 2000 Abtastpunkten?",
+            "answer": "Jeder Abtastpunkt erfordert eine erneute Auswertung des Ausdrucksbaums, daher skaliert der Gesamtaufwand direkt mit der Abtastpunktanzahl — die Begrenzung auf 2000 hält auch einen komplexen Ausdruck im Browser schnell plottbar und erzeugt dennoch eine visuell glatte Kurve, da 2000 Punkte über einen typischen Bereich weit mehr sind, als das Auge von einer durchgehenden Linie unterscheiden kann."
+          },
+          {
+            "question": "Warum wird \"-2^2\" zu -4 statt zu 4 ausgewertet?",
+            "answer": "Der Parser behandelt das unäre Minus als loser bindend als den Potenzoperator, aber fester als die Multiplikation, entsprechend der Standardkonvention von Taschenrechnern und der Mathematik — das bedeutet, \"-2^2\" wird als \"-(2^2)\" = -4 geparst, nicht als \"(-2)^2\" = 4. Um eine negative Zahl zu quadrieren, setzen Sie sie explizit in Klammern: \"(-2)^2\"."
+          }
+        ]
+      },
+      "notepad-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Notizblock-Rechner: wie er freien Text zeilenweise auswertet, wie Variablen von einer Zeile zur nächsten übertragen werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernmuster",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionWorkedExample": "Ein durchgerechnetes Beispiel",
+        "sectionAnatomy": "Vorher und nachher einer Berechnung",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Zeilentypen",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Name = Ausdruck  →  scope[Name] = evaluate(Ausdruck, scope)",
+          "note": "Es gibt hier keine einzelne Formel — stattdessen wird jede Zeile gegen ein Zuweisungsmuster (\"Name = Ausdruck\") geprüft, und wenn sie passt, wird das ausgewertete Ergebnis unter diesem Namen in einem laufenden Gültigkeitsbereich gespeichert, aus dem jede spätere Zeile lesen kann."
+        },
+        "flowchart": {
+          "intro": "Das Tool verarbeitet den Text des Notizblocks Zeile für Zeile, von oben nach unten, und trägt dabei einen einzigen laufenden Gültigkeitsbereich benannter Werte weiter.",
+          "steps": [
+            "Den Text des Notizblocks in einzelne Zeilen aufteilen",
+            "Bei einer leeren Zeile kein Ergebnis vermerken und weitermachen — das ist erwartet, kein Fehler",
+            "Bei einer Zeile, die \"Name = Ausdruck\" entspricht (wobei Name kein reserviertes Wort wie pi oder e ist), den Ausdruck mit dem aktuellen Gültigkeitsbereich auswerten, das Ergebnis unter diesem Namen speichern und anzeigen",
+            "Bei jeder anderen nicht leeren Zeile versuchen, sie als eigenständigen Ausdruck mit dem aktuellen Gültigkeitsbereich auszuwerten und das Ergebnis anzeigen, falls es geparst werden kann",
+            "Bei einer Zeile, die weder als Zuweisung noch als Ausdruck geparst werden kann (einfacher Text, eine Überschrift), kein Ergebnis anzeigen — dies ermöglicht es, Notizen und Berechnungen frei im selben Dokument zu mischen"
+          ],
+          "caption": "Der Von-oben-nach-unten-Durchlauf Zeile für Zeile, der den Variablen-Gültigkeitsbereich des Notizblocks während der Auswertung aufbaut."
+        },
+        "workedExample": {
+          "intro": "Ein kurzes dreizeiliges Beispiel zeigt, wie ein in einer Zeile definierter Wert für jede folgende Zeile verfügbar wird.",
+          "steps": [
+            "Zeile 1: \"tax = 8.5\" — entspricht dem Zuweisungsmuster, wird zu 8,5 ausgewertet und speichert tax = 8,5 im Gültigkeitsbereich",
+            "Zeile 2: \"100 + tax\" — wird als einfacher Ausdruck ausgewertet, sucht tax im Gültigkeitsbereich nach und zeigt das Ergebnis 108,5",
+            "Zeile 3: \"subtotal * 2\" — da subtotal in keiner früheren Zeile definiert wurde, schlägt die Auswertung dieses Ausdrucks fehl und zeigt kein Ergebnis"
+          ],
+          "caption": "Eine in einer Zeile definierte Variable ist für jede Zeile darunter verfügbar, aber das Referenzieren eines undefinierten Namens ergibt einfach kein Ergebnis."
+        },
+        "anatomy": {
+          "intro": "Der ganze Sinn, eine Variable weiterzutragen, besteht darin, dass das Ergebnis einer späteren Zeile jeden zuvor definierten Wert widerspiegelt — dieselbe Grundzahl erzeugt ein anderes Endergebnis, sobald eine Variable eingerechnet wird.",
+          "labelBefore": "100 (vor Steuer)",
+          "labelAfter": "108,5 (100 + tax)",
+          "caption": "Die Zeile \"100 + tax\" wird zu 108,5 ausgewertet, sobald tax = 8,5 in einer früheren Zeile definiert und in den Gültigkeitsbereich übernommen wurde."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der gesamte mehrzeilige Notizblock-Inhalt — jede Zeile wird unabhängig, der Reihe nach, gegen den laufenden Variablen-Gültigkeitsbereich ausgewertet.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Reservierte Namen können nicht neu zugewiesen werden",
+            "description": "Eine Zeile wie \"pi = 3\" wird nicht als Zuweisung behandelt, da \"pi\" und \"e\" für die eingebauten mathematischen Konstanten (π und e) reserviert sind — die Zeile wird stattdessen als einfacher Ausdruck ausgewertet, der typischerweise nicht als gültige Syntax geparst werden kann und kein Ergebnis zeigt."
+          },
+          {
+            "title": "Leere Zeilen zeigen immer kein Ergebnis",
+            "description": "Eine leere Zeile wird per Design mit einem Null-Ergebnis vermerkt, nicht als Fehler ausgewertet — dies ist erwartetes Verhalten für ein freiformatiges Dokument, in dem leere Zeilen nur visueller Abstand sind."
+          },
+          {
+            "title": "Text und Überschriften zeigen stillschweigend kein Ergebnis",
+            "description": "Eine Zeile wie \"Monatsbudget\" oder \"--- Summen ---\" entspricht nicht dem Zuweisungsmuster und wird nicht als gültiger Ausdruck geparst, daher zeigt sie kein Ergebnis ohne jede Fehlermeldung — genau das macht es möglich, Notizen und Berechnungen frei im selben Dokument zu mischen."
+          },
+          {
+            "title": "Eine Zeile kann keine weiter unten definierte Variable verwenden",
+            "description": "Der Gültigkeitsbereich wird strikt von oben nach unten aufgebaut — eine Zeile, die einen Variablennamen referenziert, der erst in einer späteren Zeile definiert wird, schlägt bei der Auswertung fehl und zeigt kein Ergebnis, da dieser Name zum Zeitpunkt der Verarbeitung dieser Zeile noch nicht im Gültigkeitsbereich existiert."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Kann ich eine Variable namens \"pi\" oder \"e\" definieren?",
+            "answer": "Nein — beide Namen sind für die eingebauten mathematischen Konstanten reserviert (π ≈ 3,14159 und e ≈ 2,71828), daher wird eine Zeile wie \"pi = 10\" nicht als Zuweisung behandelt. Geben Sie sie ein, versucht das Tool stattdessen, sie als einfachen Ausdruck auszuwerten, was typischerweise nicht geparst werden kann und kein Ergebnis zeigt."
+          },
+          {
+            "question": "Warum zeigt eine Zeile mit nur einer Überschrift oder Notiz kein Ergebnis?",
+            "answer": "Eine Zeile zeigt nur dann ein Ergebnis, wenn sie entweder dem Zuweisungsmuster \"Name = Ausdruck\" entspricht oder erfolgreich als eigenständiger mathematischer Ausdruck geparst wird — einfacher Text wie eine Überschrift oder ein Satz entspricht keinem der beiden Muster, daher bleibt sie einfach ohne Ergebnis, statt einen Fehler anzuzeigen, was genau das ist, was das freie Mischen von Notizen und Mathematik ermöglicht."
+          },
+          {
+            "question": "Kann eine Zeile eine Variable verwenden, die weiter unten im Notizblock definiert ist?",
+            "answer": "Nein — der Notizblock wird strikt von oben nach unten ausgewertet und baut seinen Variablen-Gültigkeitsbereich Zeile für Zeile auf. Eine Zeile, die eine Variable referenziert, bevor sie in einer früheren Zeile zugewiesen wurde, findet diesen Namen im Gültigkeitsbereich fehlend und zeigt einfach kein Ergebnis, daher müssen Variablen immer vor den Zeilen definiert werden, die sie verwenden."
+          },
+          {
+            "question": "Was passiert, wenn eine Zeile einen Tippfehler oder einen ungültigen Ausdruck enthält?",
+            "answer": "Das Tool versucht, jede nicht leere Zeile auszuwerten, aber wenn der Parser sie nicht verstehen kann — eine unpassende Klammer, ein unbekannter Funktionsname, ein verirrtes Symbol — schlägt dieser Versuch stillschweigend fehl und die Zeile zeigt einfach kein Ergebnis, genau wie bei einer einfachen Notiz. Es wird keine Fehlermeldung inline angezeigt, da ein Tippfehler und eine beabsichtigte Notiz für den Parser gleich aussehen."
+          }
+        ]
       }
     }
   }

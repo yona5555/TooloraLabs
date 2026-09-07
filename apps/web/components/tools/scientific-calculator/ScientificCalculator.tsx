@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import { calculatorReducer, initialState } from "./reducer";
 import ScientificKeypad from "./ScientificKeypad";
 import ScientificHistoryPanel from "./ScientificHistoryPanel";
@@ -91,6 +92,7 @@ export default function ScientificCalculator({ education }: { education: ReactNo
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="scientific-calculator" />
               <FunctionReferenceCard />
             </div>
           }

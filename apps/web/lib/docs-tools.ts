@@ -23,6 +23,17 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "volume-calculator",
   "circle-calculator",
   "triangle-calculator",
+  "statistics-calculator",
+  "mean-median-mode-range-calculator",
+  "standard-deviation-calculator",
+  "probability-calculator",
+  "random-number-generator",
+  "scientific-calculator",
+  "step-by-step-math-solver",
+  "matrix-calculator",
+  "vector-calculator",
+  "graphing-calculator",
+  "notepad-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import MeanMedianModeRangeInputPanel from "./MeanMedianModeRangeInputPanel";
 import MeanMedianModeRangeResult from "./MeanMedianModeRangeResult";
 import MeanMedianModeRangeQuickReference from "./MeanMedianModeRangeQuickReference";
@@ -49,6 +50,7 @@ export default function MeanMedianModeRangeCalculator({ education }: { education
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="mean-median-mode-range-calculator" />
               <MeanMedianModeRangeQuickReference />
             </div>
           }

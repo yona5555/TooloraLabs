@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ProbabilityInputPanel, { type ProbabilityFields } from "./ProbabilityInputPanel";
 import ProbabilityResult from "./ProbabilityResult";
 import ProbabilityQuickReference from "./ProbabilityQuickReference";
@@ -70,6 +71,7 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="probability-calculator" />
               <ProbabilityQuickReference />
             </div>
           }
