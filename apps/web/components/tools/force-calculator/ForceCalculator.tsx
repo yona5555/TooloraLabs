@@ -13,6 +13,7 @@ import ForceResult from "./ForceResult";
 import ForceQuickReference from "./ForceQuickReference";
 import ForceModeTabs from "./ForceModeTabs";
 import ForceWeightCard from "./ForceWeightCard";
+import ForceReferenceTable from "./ForceReferenceTable";
 import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types";
 
 const tool = new ForceCalculatorTool();
@@ -150,27 +151,30 @@ export default function ForceCalculator({ education }: { education: ReactNode })
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <ForceInputPanel
-              mode={mode}
-              secondLawSolveFor={secondLawSolveFor}
-              onSecondLawSolveForChange={handleSecondLawSolveForChange}
-              gravitationSolveFor={gravitationSolveFor}
-              onGravitationSolveForChange={handleGravitationSolveForChange}
-              force={force}
-              onForceChange={setForce}
-              mass={mass}
-              onMassChange={setMass}
-              acceleration={acceleration}
-              onAccelerationChange={setAcceleration}
-              mass1={mass1}
-              onMass1Change={setMass1}
-              mass2={mass2}
-              onMass2Change={setMass2}
-              distance={distance}
-              onDistanceChange={setDistance}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <ForceInputPanel
+                mode={mode}
+                secondLawSolveFor={secondLawSolveFor}
+                onSecondLawSolveForChange={handleSecondLawSolveForChange}
+                gravitationSolveFor={gravitationSolveFor}
+                onGravitationSolveForChange={handleGravitationSolveForChange}
+                force={force}
+                onForceChange={setForce}
+                mass={mass}
+                onMassChange={setMass}
+                acceleration={acceleration}
+                onAccelerationChange={setAcceleration}
+                mass1={mass1}
+                onMass1Change={setMass1}
+                mass2={mass2}
+                onMass2Change={setMass2}
+                distance={distance}
+                onDistanceChange={setDistance}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <ForceReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

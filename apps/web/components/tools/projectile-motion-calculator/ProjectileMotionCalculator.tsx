@@ -12,6 +12,7 @@ import ProjectileMotionInputPanel from "./ProjectileMotionInputPanel";
 import ProjectileMotionResult from "./ProjectileMotionResult";
 import ProjectileMotionQuickReference from "./ProjectileMotionQuickReference";
 import ProjectileMotionHeightCard from "./ProjectileMotionHeightCard";
+import ProjectileMotionReferenceTable from "./ProjectileMotionReferenceTable";
 import { GRAVITY_PRESET_VALUES, type GravityPreset } from "./types";
 
 const tool = new ProjectileMotionCalculatorTool();
@@ -131,20 +132,23 @@ export default function ProjectileMotionCalculator({ education }: { education: R
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <ProjectileMotionInputPanel
-              speed={speed}
-              onSpeedChange={setSpeed}
-              angle={angle}
-              onAngleChange={setAngle}
-              height={height}
-              onHeightChange={setHeight}
-              gravity={gravity}
-              onGravityChange={setGravity}
-              gravityPreset={gravityPreset}
-              onGravityPresetChange={handleGravityPresetChange}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <ProjectileMotionInputPanel
+                speed={speed}
+                onSpeedChange={setSpeed}
+                angle={angle}
+                onAngleChange={setAngle}
+                height={height}
+                onHeightChange={setHeight}
+                gravity={gravity}
+                onGravityChange={setGravity}
+                gravityPreset={gravityPreset}
+                onGravityPresetChange={handleGravityPresetChange}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <ProjectileMotionReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

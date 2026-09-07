@@ -13,6 +13,7 @@ import PhResult from "./PhResult";
 import PhQuickReference from "./PhQuickReference";
 import PhModeTabs from "./PhModeTabs";
 import PhSubstanceCard from "./PhSubstanceCard";
+import PhReferenceTable from "./PhReferenceTable";
 import type { PhOperation } from "./types";
 
 const tool = new PhCalculatorTool();
@@ -125,19 +126,22 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <PhInputPanel
-              operation={operation}
-              hConcentration={hConcentration}
-              onHConcentrationChange={setHConcentration}
-              pH={pH}
-              onPHChange={setPH}
-              ohConcentration={ohConcentration}
-              onOhConcentrationChange={setOhConcentration}
-              pOH={pOH}
-              onPOHChange={setPOH}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <PhInputPanel
+                operation={operation}
+                hConcentration={hConcentration}
+                onHConcentrationChange={setHConcentration}
+                pH={pH}
+                onPHChange={setPH}
+                ohConcentration={ohConcentration}
+                onOhConcentrationChange={setOhConcentration}
+                pOH={pOH}
+                onPOHChange={setPOH}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <PhReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

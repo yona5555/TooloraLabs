@@ -13,6 +13,7 @@ import KinematicsResult from "./KinematicsResult";
 import KinematicsQuickReference from "./KinematicsQuickReference";
 import KinematicsModeTabs from "./KinematicsModeTabs";
 import KinematicsGForceCard from "./KinematicsGForceCard";
+import KinematicsReferenceTable from "./KinematicsReferenceTable";
 import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime } from "./types";
 
 const tool = new KinematicsCalculatorTool();
@@ -147,25 +148,28 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <KinematicsInputPanel
-              mode={mode}
-              solveForTime={solveForTime}
-              onSolveForTimeChange={handleSolveForTimeChange}
-              solveForDistance={solveForDistance}
-              onSolveForDistanceChange={handleSolveForDistanceChange}
-              v0={v0}
-              onV0Change={setV0}
-              v={v}
-              onVChange={setV}
-              a={a}
-              onAChange={setA}
-              t={t}
-              onTChange={setT}
-              dx={dx}
-              onDxChange={setDx}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <KinematicsInputPanel
+                mode={mode}
+                solveForTime={solveForTime}
+                onSolveForTimeChange={handleSolveForTimeChange}
+                solveForDistance={solveForDistance}
+                onSolveForDistanceChange={handleSolveForDistanceChange}
+                v0={v0}
+                onV0Change={setV0}
+                v={v}
+                onVChange={setV}
+                a={a}
+                onAChange={setA}
+                t={t}
+                onTChange={setT}
+                dx={dx}
+                onDxChange={setDx}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <KinematicsReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

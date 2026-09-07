@@ -11,6 +11,7 @@ import BalancerInputPanel from "./BalancerInputPanel";
 import BalancerResult from "./BalancerResult";
 import BalancerQuickReference from "./BalancerQuickReference";
 import BalancerCoefficientSumCard from "./BalancerCoefficientSumCard";
+import BalancerReferenceTable from "./BalancerReferenceTable";
 
 const tool = new ChemicalEquationBalancerTool();
 
@@ -94,7 +95,12 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<BalancerInputPanel equation={equation} onEquationChange={setEquation} onCalculate={handleCalculate} onClear={handleClear} />}
+          input={
+            <div className="flex flex-col gap-3">
+              <BalancerInputPanel equation={equation} onEquationChange={setEquation} onCalculate={handleCalculate} onClear={handleClear} />
+              <BalancerReferenceTable />
+            </div>
+          }
           result={
             <div className="flex flex-col gap-3">
               <BalancerResult hasCalculated={hasCalculated} result={result} digitStyle={digitStyle} />

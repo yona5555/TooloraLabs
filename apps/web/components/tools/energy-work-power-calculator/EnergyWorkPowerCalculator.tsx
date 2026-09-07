@@ -13,6 +13,7 @@ import EnergyResult from "./EnergyResult";
 import EnergyQuickReference from "./EnergyQuickReference";
 import EnergyModeTabs from "./EnergyModeTabs";
 import EnergyLightbulbCard from "./EnergyLightbulbCard";
+import EnergyReferenceTable from "./EnergyReferenceTable";
 import type { EnergyWorkPowerMode } from "./types";
 
 const tool = new EnergyWorkPowerCalculatorTool();
@@ -140,27 +141,30 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <EnergyInputPanel
-              mode={mode}
-              force={force}
-              onForceChange={setForce}
-              distance={distance}
-              onDistanceChange={setDistance}
-              angleDegrees={angleDegrees}
-              onAngleDegreesChange={setAngleDegrees}
-              mass={mass}
-              onMassChange={setMass}
-              velocity={velocity}
-              onVelocityChange={setVelocity}
-              height={height}
-              onHeightChange={setHeight}
-              workValue={workValue}
-              onWorkValueChange={setWorkValue}
-              time={time}
-              onTimeChange={setTime}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <EnergyInputPanel
+                mode={mode}
+                force={force}
+                onForceChange={setForce}
+                distance={distance}
+                onDistanceChange={setDistance}
+                angleDegrees={angleDegrees}
+                onAngleDegreesChange={setAngleDegrees}
+                mass={mass}
+                onMassChange={setMass}
+                velocity={velocity}
+                onVelocityChange={setVelocity}
+                height={height}
+                onHeightChange={setHeight}
+                workValue={workValue}
+                onWorkValueChange={setWorkValue}
+                time={time}
+                onTimeChange={setTime}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <EnergyReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

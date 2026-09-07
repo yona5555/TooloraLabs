@@ -13,6 +13,7 @@ import GasLawResult from "./GasLawResult";
 import GasLawQuickReference from "./GasLawQuickReference";
 import GasLawModeTabs from "./GasLawModeTabs";
 import GasLawStpCard from "./GasLawStpCard";
+import GasLawReferenceTable from "./GasLawReferenceTable";
 import type { GasLawSolveFor } from "./types";
 
 const tool = new IdealGasLawCalculatorTool();
@@ -128,19 +129,22 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <GasLawInputPanel
-              solveFor={solveFor}
-              pressureAtm={pressureAtm}
-              onPressureAtmChange={setPressureAtm}
-              volumeLiters={volumeLiters}
-              onVolumeLitersChange={setVolumeLiters}
-              moles={moles}
-              onMolesChange={setMoles}
-              temperatureKelvin={temperatureKelvin}
-              onTemperatureKelvinChange={setTemperatureKelvin}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <GasLawInputPanel
+                solveFor={solveFor}
+                pressureAtm={pressureAtm}
+                onPressureAtmChange={setPressureAtm}
+                volumeLiters={volumeLiters}
+                onVolumeLitersChange={setVolumeLiters}
+                moles={moles}
+                onMolesChange={setMoles}
+                temperatureKelvin={temperatureKelvin}
+                onTemperatureKelvinChange={setTemperatureKelvin}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <GasLawReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

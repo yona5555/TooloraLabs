@@ -13,6 +13,7 @@ import OhmsLawResult from "./OhmsLawResult";
 import OhmsLawQuickReference from "./OhmsLawQuickReference";
 import OhmsLawModeTabs from "./OhmsLawModeTabs";
 import OhmsLawFuseCard from "./OhmsLawFuseCard";
+import OhmsLawReferenceTable from "./OhmsLawReferenceTable";
 import type { OhmsLawKnownPair } from "./types";
 
 const tool = new OhmsLawCalculatorTool();
@@ -124,19 +125,22 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <OhmsLawInputPanel
-              knownPair={knownPair}
-              voltage={voltage}
-              onVoltageChange={setVoltage}
-              current={current}
-              onCurrentChange={setCurrent}
-              resistance={resistance}
-              onResistanceChange={setResistance}
-              power={power}
-              onPowerChange={setPower}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <OhmsLawInputPanel
+                knownPair={knownPair}
+                voltage={voltage}
+                onVoltageChange={setVoltage}
+                current={current}
+                onCurrentChange={setCurrent}
+                resistance={resistance}
+                onResistanceChange={setResistance}
+                power={power}
+                onPowerChange={setPower}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <OhmsLawReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

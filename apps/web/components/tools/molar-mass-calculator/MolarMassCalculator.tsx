@@ -11,6 +11,7 @@ import MolarMassInputPanel from "./MolarMassInputPanel";
 import MolarMassResult from "./MolarMassResult";
 import MolarMassQuickReference from "./MolarMassQuickReference";
 import MolarMassGramCard from "./MolarMassGramCard";
+import MolarMassReferenceTable from "./MolarMassReferenceTable";
 
 const tool = new MolarMassCalculatorTool();
 
@@ -94,7 +95,12 @@ export default function MolarMassCalculator({ education }: { education: ReactNod
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<MolarMassInputPanel formula={formula} onFormulaChange={setFormula} onCalculate={handleCalculate} onClear={handleClear} />}
+          input={
+            <div className="flex flex-col gap-3">
+              <MolarMassInputPanel formula={formula} onFormulaChange={setFormula} onCalculate={handleCalculate} onClear={handleClear} />
+              <MolarMassReferenceTable />
+            </div>
+          }
           result={
             <div className="flex flex-col gap-3">
               <MolarMassResult hasCalculated={hasCalculated} result={result} formula={formula} digitStyle={digitStyle} />

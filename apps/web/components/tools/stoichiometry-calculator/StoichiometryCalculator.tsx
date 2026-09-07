@@ -12,6 +12,7 @@ import StoichiometryInputPanel from "./StoichiometryInputPanel";
 import StoichiometryResult from "./StoichiometryResult";
 import StoichiometryQuickReference from "./StoichiometryQuickReference";
 import StoichiometryMillimolesCard from "./StoichiometryMillimolesCard";
+import StoichiometryReferenceTable from "./StoichiometryReferenceTable";
 import type { AmountUnit } from "./types";
 
 const tool = new StoichiometryCalculatorTool();
@@ -140,24 +141,27 @@ export default function StoichiometryCalculator({ education }: { education: Reac
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <StoichiometryInputPanel
-              knownFormula={knownFormula}
-              onKnownFormulaChange={setKnownFormula}
-              knownCoefficient={knownCoefficient}
-              onKnownCoefficientChange={setKnownCoefficient}
-              knownAmount={knownAmount}
-              onKnownAmountChange={setKnownAmount}
-              knownUnit={knownUnit}
-              onKnownUnitChange={setKnownUnit}
-              targetFormula={targetFormula}
-              onTargetFormulaChange={setTargetFormula}
-              targetCoefficient={targetCoefficient}
-              onTargetCoefficientChange={setTargetCoefficient}
-              targetUnit={targetUnit}
-              onTargetUnitChange={setTargetUnit}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <StoichiometryInputPanel
+                knownFormula={knownFormula}
+                onKnownFormulaChange={setKnownFormula}
+                knownCoefficient={knownCoefficient}
+                onKnownCoefficientChange={setKnownCoefficient}
+                knownAmount={knownAmount}
+                onKnownAmountChange={setKnownAmount}
+                knownUnit={knownUnit}
+                onKnownUnitChange={setKnownUnit}
+                targetFormula={targetFormula}
+                onTargetFormulaChange={setTargetFormula}
+                targetCoefficient={targetCoefficient}
+                onTargetCoefficientChange={setTargetCoefficient}
+                targetUnit={targetUnit}
+                onTargetUnitChange={setTargetUnit}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <StoichiometryReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

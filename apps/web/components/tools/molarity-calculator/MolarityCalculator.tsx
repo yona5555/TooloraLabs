@@ -13,6 +13,7 @@ import MolarityResult from "./MolarityResult";
 import MolarityQuickReference from "./MolarityQuickReference";
 import MolarityModeTabs from "./MolarityModeTabs";
 import MolarityConcentrationCard from "./MolarityConcentrationCard";
+import MolarityReferenceTable from "./MolarityReferenceTable";
 import type { ConcentrationBasis, DilutionSolveFor, MolarityMode } from "./types";
 
 const tool = new MolarityCalculatorTool();
@@ -153,31 +154,34 @@ export default function MolarityCalculator({ education }: { education: ReactNode
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <MolarityInputPanel
-              mode={mode}
-              concentrationBasis={concentrationBasis}
-              onConcentrationBasisChange={handleBasisChange}
-              moles={moles}
-              onMolesChange={setMoles}
-              massGrams={massGrams}
-              onMassGramsChange={setMassGrams}
-              molarMass={molarMass}
-              onMolarMassChange={setMolarMass}
-              volumeLiters={volumeLiters}
-              onVolumeLitersChange={setVolumeLiters}
-              dilutionSolveFor={dilutionSolveFor}
-              onDilutionSolveForChange={handleDilutionSolveForChange}
-              c1={c1}
-              onC1Change={setC1}
-              v1={v1}
-              onV1Change={setV1}
-              c2={c2}
-              onC2Change={setC2}
-              v2={v2}
-              onV2Change={setV2}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <MolarityInputPanel
+                mode={mode}
+                concentrationBasis={concentrationBasis}
+                onConcentrationBasisChange={handleBasisChange}
+                moles={moles}
+                onMolesChange={setMoles}
+                massGrams={massGrams}
+                onMassGramsChange={setMassGrams}
+                molarMass={molarMass}
+                onMolarMassChange={setMolarMass}
+                volumeLiters={volumeLiters}
+                onVolumeLitersChange={setVolumeLiters}
+                dilutionSolveFor={dilutionSolveFor}
+                onDilutionSolveForChange={handleDilutionSolveForChange}
+                c1={c1}
+                onC1Change={setC1}
+                v1={v1}
+                onV1Change={setV1}
+                c2={c2}
+                onC2Change={setC2}
+                v2={v2}
+                onV2Change={setV2}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <MolarityReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">

@@ -13,6 +13,7 @@ import DensityResult from "./DensityResult";
 import DensityQuickReference from "./DensityQuickReference";
 import DensityModeTabs from "./DensityModeTabs";
 import DensityBuoyancyCard from "./DensityBuoyancyCard";
+import DensityReferenceTable from "./DensityReferenceTable";
 import type { DensityOperation } from "./types";
 
 const tool = new DensityCalculatorTool();
@@ -119,17 +120,20 @@ export default function DensityCalculator({ education }: { education: ReactNode 
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <DensityInputPanel
-              operation={operation}
-              mass={mass}
-              onMassChange={setMass}
-              volume={volume}
-              onVolumeChange={setVolume}
-              density={density}
-              onDensityChange={setDensity}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <DensityInputPanel
+                operation={operation}
+                mass={mass}
+                onMassChange={setMass}
+                volume={volume}
+                onVolumeChange={setVolume}
+                density={density}
+                onDensityChange={setDensity}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <DensityReferenceTable />
+            </div>
           }
           result={
             <div className="flex flex-col gap-3">
