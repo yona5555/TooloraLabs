@@ -7,19 +7,52 @@ body {
 }
 
 @media print {
-  body * {
-    visibility: hidden;
+  /*
+   * `visibility: hidden` alone (the previous approach) hides content
+   * visually but doesn't collapse its box height, so the rest of the page
+   * — the full above-the-fold layout plus the entire encyclopedic section —
+   * still counted toward the document's total height that print pagination
+   * measures. [data-print-area] itself was absolutely positioned to float
+   * over page 1 regardless, so the result was the real content correctly
+   * on page 1, followed by many blank pages sized to the hidden content's
+   * height. `display: none` actually removes an element from layout, but
+   * naively applying it to "everything except [data-print-area]" would
+   * also hide the print area's own ancestor chain (a `display: none`
+   * parent hides its children regardless of their own display value) —
+   * `:has()` is what lets the ancestor chain be excluded correctly: an
+   * ancestor "has" a [data-print-area] descendant, so it's kept.
+   */
+  body *:not(:has([data-print-area])):not([data-print-area]):not([data-print-area] *) {
+    display: none !important;
   }
 
-  [data-print-area],
-  [data-print-area] * {
-    visibility: visible;
+  /*
+   * The elements between <body> and [data-print-area] stay in the tree
+   * (the rule above spares them precisely because they "have" a print-area
+   * descendant) so the print area still has somewhere to render — but
+   * they're usually real on-page UI chrome themselves (e.g. the blue
+   * card header the export button lives in), and that chrome's own
+   * background/border/padding would otherwise print as a colored box
+   * wrapped around the actual print content. Stripped to bare containers.
+   */
+  body *:has([data-print-area]):not([data-print-area]):not([data-print-area] *) {
+    display: block !important;
+    width: 100% !important;
+    background: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
 
   [data-print-area] {
-    position: absolute;
-    inset: 0;
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
     padding: 2rem;
+    box-sizing: border-box;
   }
 
   [data-print-area] table {

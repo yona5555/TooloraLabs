@@ -70,6 +70,7 @@ export default function DensityShareExportModal({ operationLabel, inputRows, res
         inputs: inputRows,
         results: resultRows,
         gauge,
+        sentence,
         preparedFor: preparedForRows,
         preparedForTitle: t("shareExport.preparedForTitle"),
         brandingEnhancements: true,
@@ -213,45 +214,48 @@ export default function DensityShareExportModal({ operationLabel, inputRows, res
       <div data-print-area className="hidden bg-white p-8 text-black print:block">
         <div className="mb-6 flex items-center justify-between border-b-2 border-blue-600 pb-4">
           <div>
-            <span className="text-xl font-bold text-zinc-900">Toolora</span>
-            <span className="text-xl font-bold text-blue-600">Labs</span>
+            <span className="text-2xl font-bold text-zinc-900">Toolora</span>
+            <span className="text-2xl font-bold text-blue-600">Labs</span>
           </div>
-          <p className="text-xs text-zinc-500">
+          <p className="text-sm text-zinc-500">
             {t("shareExport.generatedOn")}: {new Date().toLocaleDateString(locale)}
           </p>
         </div>
 
-        <h1 className="mb-4 text-xl font-bold text-zinc-900">
+        <h1 className="mb-4 text-2xl font-bold text-zinc-900">
           {t("title")} — {operationLabel}
         </h1>
 
-        <h2 className="mb-2 mt-6 text-sm font-bold text-blue-600">{t("form.inputTitle")}</h2>
-        <table className="w-full border-collapse text-sm">
+        <h2 className="mb-2 mt-6 text-base font-bold text-blue-600">{t("form.inputTitle")}</h2>
+        <table className="w-full border-collapse text-base">
           <tbody>
             {inputRows.map((row) => (
               <tr key={row.label}>
-                <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{row.label}</td>
-                <td className="border border-zinc-200 px-3 py-1.5">{row.value}</td>
+                <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{row.label}</td>
+                <td className="border border-zinc-200 px-3 py-2">{row.value}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        <h2 className="mb-2 mt-6 text-sm font-bold text-blue-600">{t("result.heading")}</h2>
-        <table className="w-full border-collapse text-sm">
+        <h2 className="mb-2 mt-6 text-base font-bold text-blue-600">{t("result.heading")}</h2>
+        <table className="w-full border-collapse text-base">
           <tbody>
             <tr>
-              <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{heroLabel}</td>
-              <td className="border border-zinc-200 px-3 py-1.5 font-semibold">{heroValue}</td>
+              <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{heroLabel}</td>
+              <td className="border border-zinc-200 px-3 py-2 font-semibold">{heroValue}</td>
             </tr>
-            {resultRows.map((row) => (
+            {resultRows.slice(1).map((row) => (
               <tr key={row.label}>
-                <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{row.label}</td>
-                <td className="border border-zinc-200 px-3 py-1.5">{row.value}</td>
+                <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{row.label}</td>
+                <td className="border border-zinc-200 px-3 py-2">{row.value}</td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        <h2 className="mb-2 mt-6 text-base font-bold text-blue-600">{t("shareExport.howCalculatedTitle")}</h2>
+        <p className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-base leading-relaxed text-blue-900">{sentence}</p>
       </div>
     </>
   );
