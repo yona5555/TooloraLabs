@@ -5,6 +5,10 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import TrajectoryDiagram from "./TrajectoryDiagram";
+import ProjectileRangeVsAngleDiagram from "./ProjectileRangeVsAngleDiagram";
+import ProjectileVelocityComponentsDiagram from "./ProjectileVelocityComponentsDiagram";
+import ProjectileImpactVelocityDiagram from "./ProjectileImpactVelocityDiagram";
+import ProjectileGravityComparisonDiagram from "./ProjectileGravityComparisonDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -33,6 +37,12 @@ export default async function ProjectileMotionEducation() {
           caption={t("intro.diagram.caption")}
         />
         <p>{t("intro.paragraph2")}</p>
+        <ProjectileRangeVsAngleDiagram
+          xLabel={t("intro.rangeVsAngle.xLabel")}
+          yLabel={t("intro.rangeVsAngle.yLabel")}
+          peakLabel={t("intro.rangeVsAngle.peakLabel")}
+          caption={t("intro.rangeVsAngle.caption")}
+        />
         <p>{t("intro.paragraph3")}</p>
       </InfoSection>
 
@@ -72,6 +82,30 @@ export default async function ProjectileMotionEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.componentsSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.componentsSection.paragraph")}</p>
+          <ProjectileVelocityComponentsDiagram
+            angleDegrees={45}
+            vxLabel="vₓ = 14.1"
+            vyLabel="vy = 14.1"
+            vLabel="v₀ = 20"
+            caption={t("behindTheTool.componentsSection.caption")}
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.impactSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.impactSection.paragraph")}</p>
+          <ProjectileImpactVelocityDiagram impactAngleDegrees={45} speedLabel="v = 20 m/s" angleLabel="45°" caption={t("behindTheTool.impactSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.gravityComparisonSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.gravityComparisonSection.paragraph")}</p>
+          <ProjectileGravityComparisonDiagram
+            labels={[t("behindTheTool.gravityComparisonSection.earth"), t("behindTheTool.gravityComparisonSection.moon"), t("behindTheTool.gravityComparisonSection.mars")]}
+            caption={t("behindTheTool.gravityComparisonSection.caption")}
+          />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

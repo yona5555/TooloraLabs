@@ -1,7 +1,10 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import StoichiometryEquationDiagram from "./StoichiometryEquationDiagram";
 import type { AmountUnit } from "./types";
 
 const selectClassName =
@@ -22,6 +25,8 @@ type StoichiometryInputPanelProps = {
   onTargetCoefficientChange: (value: string) => void;
   targetUnit: AmountUnit;
   onTargetUnitChange: (value: AmountUnit) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function StoichiometryInputPanel({
@@ -39,12 +44,22 @@ export default function StoichiometryInputPanel({
   onTargetCoefficientChange,
   targetUnit,
   onTargetUnitChange,
+  onCalculate,
+  onClear,
 }: StoichiometryInputPanelProps) {
   const t = useTranslations("tools.stoichiometry-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="space-y-6">
+      <StoichiometryEquationDiagram
+        knownCoefficient={knownCoefficient}
+        knownFormula={knownFormula}
+        targetCoefficient={targetCoefficient}
+        targetFormula={targetFormula}
+        caption={t("equationDiagramCaption")}
+      />
+
+      <form onSubmit={onCalculate} className="mt-4 space-y-6">
         <div>
           <p className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownLabel")}</p>
           <div className="space-y-3">
@@ -79,7 +94,18 @@ export default function StoichiometryInputPanel({
         </div>
 
         <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("coefficientHint")}</p>
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

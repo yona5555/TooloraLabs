@@ -4,6 +4,11 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import StoichiometryEquationDiagram from "./StoichiometryEquationDiagram";
+import StoichiometryConversionPathDiagram from "./StoichiometryConversionPathDiagram";
+import StoichiometryMoleRatioDiagram from "./StoichiometryMoleRatioDiagram";
+import StoichiometryMolarMassBridgeDiagram from "./StoichiometryMolarMassBridgeDiagram";
+import StoichiometryUnitsCompareDiagram from "./StoichiometryUnitsCompareDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -18,8 +23,19 @@ export default async function StoichiometryEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <StoichiometryEquationDiagram knownCoefficient="2" knownFormula="H₂" targetCoefficient="2" targetFormula="H₂O" caption={t("intro.equation.caption")} />
         <p>{t("intro.paragraph2")}</p>
+        <StoichiometryConversionPathDiagram
+          steps={[
+            { label: t("intro.roadmap.knownGrams"), value: "4 g" },
+            { label: t("intro.roadmap.knownMoles"), value: "2 mol" },
+            { label: t("intro.roadmap.targetMoles"), value: "2 mol" },
+            { label: t("intro.roadmap.targetGrams"), value: "36 g" },
+          ]}
+          caption={t("intro.roadmap.caption")}
+        />
         <p>{t("intro.paragraph3")}</p>
+        <StoichiometryMoleRatioDiagram caption={t("intro.moleRatio.caption")} />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -58,6 +74,29 @@ export default async function StoichiometryEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.bridgeSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.bridgeSection.paragraph")}</p>
+          <StoichiometryMolarMassBridgeDiagram
+            gramsLabel={t("behindTheTool.bridgeSection.grams")}
+            molesLabel={t("behindTheTool.bridgeSection.moles")}
+            bridgeLabel={t("behindTheTool.bridgeSection.bridgeLabel")}
+            caption={t("behindTheTool.bridgeSection.caption")}
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.unitsCompareSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.unitsCompareSection.paragraph")}</p>
+          <StoichiometryUnitsCompareDiagram
+            labels={[
+              t("behindTheTool.unitsCompareSection.h2"),
+              t("behindTheTool.unitsCompareSection.h2o"),
+              t("behindTheTool.unitsCompareSection.nacl"),
+              t("behindTheTool.unitsCompareSection.glucose"),
+            ]}
+            caption={t("behindTheTool.unitsCompareSection.caption")}
+          />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

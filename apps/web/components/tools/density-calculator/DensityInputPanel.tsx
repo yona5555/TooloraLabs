@@ -1,48 +1,67 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import type { DensityOperation } from "./types";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import DensityFormulaTriangleDiagram from "./DensityFormulaTriangleDiagram";
+import { MATERIAL_KEYS, type DensityOperation, type MaterialKey } from "./types";
 
 type DensityInputPanelProps = {
   operation: DensityOperation;
-  onOperationChange: (operation: DensityOperation) => void;
   mass: string;
   onMassChange: (value: string) => void;
   volume: string;
   onVolumeChange: (value: string) => void;
   density: string;
   onDensityChange: (value: string) => void;
+  onMaterialPreset: (key: MaterialKey) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function DensityInputPanel({
   operation,
-  onOperationChange,
   mass,
   onMassChange,
   volume,
   onVolumeChange,
   density,
   onDensityChange,
+  onMaterialPreset,
+  onCalculate,
+  onClear,
 }: DensityInputPanelProps) {
   const t = useTranslations("tools.density-calculator.form");
+  const tMaterials = useTranslations("tools.density-calculator.materials");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
-        <select
-          value={operation}
-          onChange={(e) => onOperationChange(e.target.value as DensityOperation)}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-        >
-          <option value="solveDensity">{t("operation.solveDensity")}</option>
-          <option value="solveMass">{t("operation.solveMass")}</option>
-          <option value="solveVolume">{t("operation.solveVolume")}</option>
-        </select>
-      </label>
+      <DensityFormulaTriangleDiagram
+        operation={operation}
+        massLabel={operation === "solveMass" ? "?" : mass || "–"}
+        densityLabel={operation === "solveDensity" ? "?" : density || "–"}
+        volumeLabel={operation === "solveVolume" ? "?" : volume || "–"}
+        caption={t("triangleCaption")}
+      />
 
-      <div className="mt-5 space-y-5">
+      <div className="mt-4">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("materialPresetsLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {MATERIAL_KEYS.map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onMaterialPreset(key)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+            >
+              {tMaterials(key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {operation !== "solveMass" && (
           <ToolInput
             label={t("massLabel")}
@@ -73,7 +92,18 @@ export default function DensityInputPanel({
             onChange={(e) => onDensityChange(e.target.value)}
           />
         )}
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }

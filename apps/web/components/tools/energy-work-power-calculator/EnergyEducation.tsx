@@ -5,6 +5,10 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import WorkVectorDiagram from "./WorkVectorDiagram";
+import EnergyMagnitudeDiagram from "./EnergyMagnitudeDiagram";
+import EnergyKineticDiagram from "./EnergyKineticDiagram";
+import EnergyPotentialDiagram from "./EnergyPotentialDiagram";
+import EnergyPowerRateDiagram from "./EnergyPowerRateDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -60,6 +64,26 @@ export default async function EnergyEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.magnitudeSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.magnitudeSection.paragraph")}</p>
+          <EnergyMagnitudeDiagram value={1000} unit="J" caption={t("behindTheTool.magnitudeSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.kineticSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.kineticSection.paragraph")}</p>
+          <EnergyKineticDiagram massLabel="m = 10 kg" velocityLabel="v = 4 m/s" caption={t("behindTheTool.kineticSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.potentialSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.potentialSection.paragraph")}</p>
+          <EnergyPotentialDiagram heightFraction={0.6} massLabel="m = 10 kg" heightLabel="h = 3 m" caption={t("behindTheTool.potentialSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.powerRateSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.powerRateSection.paragraph")}</p>
+          <EnergyPowerRateDiagram workLabel="W = 100 J" timeLabel="t = 5 s" caption={t("behindTheTool.powerRateSection.caption")} />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

@@ -5619,7 +5619,14 @@
         "volumeLabel": "Volumen (cm³)",
         "volumePlaceholder": "z. B. 50",
         "densityLabel": "Dichte (g/cm³)",
-        "densityPlaceholder": "z. B. 2.7"
+        "densityPlaceholder": "z. B. 2.7",
+        "massShort": "M",
+        "densityShort": "D",
+        "volumeShort": "V",
+        "triangleCaption": "Verdecke den Wert, den du berechnen möchtest.",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "materialPresetsLabel": "Echtes Material ausprobieren:"
       },
       "result": {
         "heading": "Ergebnis",
@@ -5632,7 +5639,17 @@
         "diagramCaption": "{value} g/cm³ auf einer logarithmischen Dichteskala, neben gängigen Materialien.",
         "stepDensity": "{mass} g geteilt durch {volume} cm³.",
         "stepMass": "{density} g/cm³ multipliziert mit {volume} cm³.",
-        "stepVolume": "{mass} g geteilt durch {density} g/cm³."
+        "stepVolume": "{mass} g geteilt durch {density} g/cm³.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Dichteergebnis zu sehen.",
+        "siLabel": "SI-Äquivalent",
+        "specificGravityLabel": "Spezifisches Gewicht",
+        "massShortLabel": "Masse",
+        "volumeShortLabel": "Volumen",
+        "densityShortLabel": "Dichte",
+        "blockCaption": "Ein Live-Blockmodell: Breite folgt dem Volumen, Höhe folgt der Dichte, die schattierte Fläche steht für die Masse.",
+        "siStepLabel": "× 1.000",
+        "sgStepLabel": "÷ Wasser (1,0)",
+        "unitConversionCaption": "Wie sich der Hauptdichtewert in seinen SI-Wert und sein spezifisches Gewicht umrechnet."
       },
       "education": {
         "intro": {
@@ -5642,7 +5659,35 @@
             "caption": "Die Dichte von Eisen, 7,87 g/cm³, dargestellt auf einer logarithmischen Skala neben Luft, Wasser und anderen gängigen Materialien."
           },
           "paragraph2": "Die relative Dichte formuliert die Dichte als Verhältnis zu Wasser (1,0 g/cm³ bei 4 °C, dem Punkt maximaler Dichte von Wasser); eine relative Dichte von 2,7, wie bei Aluminium, bedeutet also, dass das Material 2,7-mal dichter ist als Wasser — deshalb sagt eine relative Dichte unter 1 voraus, dass ein Objekt in Wasser schwimmt, und über 1, dass es sinkt, sofern andere Faktoren wie Oberflächenspannung und eingeschlossene Luft gleich bleiben.",
-          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen."
+          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen.",
+          "buoyancy": {
+            "floats": "Schwimmt (SG < 1)",
+            "sinks": "Sinkt (SG > 1)",
+            "water": "Wasser",
+            "caption": "Ein Objekt geringerer Dichte ruht über der Wasserlinie; ein Objekt höherer Dichte sinkt auf den Boden."
+          },
+          "sgGauge": {
+            "title": "Ausprobieren: Schwimmt es oder sinkt es?",
+            "intro": "Wählen Sie ein Material, um seine Dichte auf der Anzeige zu sehen und herauszufinden, ob es im Wasser schwimmt oder sinkt.",
+            "floatsVerdict": "{material} schwimmt im Wasser — Wasser ist etwa {ratio}-mal dichter.",
+            "sinksVerdict": "{material} sinkt im Wasser — es ist etwa {ratio}-mal dichter als Wasser.",
+            "neutralCaption": "Neutral (SG = 1)",
+            "neutralVerdict": "{material} ist Wasser selbst, daher schwimmt es weder noch sinkt es — neutraler Auftrieb.",
+            "literMass": "Ein Liter {material} würde etwa {mass} kg wiegen.",
+            "materials": {
+              "air": "Luft",
+              "oak": "Eichenholz",
+              "ice": "Eis",
+              "water": "Wasser",
+              "concrete": "Beton",
+              "aluminum": "Aluminium",
+              "iron": "Eisen",
+              "lead": "Blei",
+              "mercury": "Quecksilber",
+              "gold": "Gold",
+              "osmium": "Osmium"
+            }
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -5691,7 +5736,16 @@
               "question": "Warum wird die Dichte mancher Materialien in g/cm³ und die anderer in kg/m³ angegeben?",
               "answer": "Beide sind SI-konforme Einheiten, aber g/cm³ liefert für alltägliche Feststoffe und Flüssigkeiten handlichere, menschengerechte Zahlen (Wasser ergibt einen klaren Wert von 1,0), während kg/m³ die strenge SI-Einheit ist, die typischerweise in Technik und physikalischen Formeln verwendet wird. Dieser Rechner zeigt beide, da die Umrechnung lediglich ein Faktor von 1000 ist."
             }
-          ]
+          ],
+          "temperatureSlider": {
+            "title": "Ausprobieren: Wasserdichte vs. Temperatur",
+            "intro": "Ziehen Sie den Schieberegler, um zu sehen, wie sich die tatsächliche Dichte von Wasser mit der Temperatur ändert — sie erreicht ihren Höhepunkt bei 4°C, dem Punkt maximaler Dichte von Wasser.",
+            "sliderLabel": "Temperatur",
+            "result": "Bei {temp}°C beträgt die Dichte von Wasser etwa {density} g/cm³.",
+            "percentBelowPeak": "Das ist etwa {percent}% weniger dicht als der Höchstwert des Wassers bei 4°C.",
+            "atPeak": "Dies ist die maximale Dichte von Wasser — die höchste Dichte, die flüssiges Wasser je erreicht.",
+            "iceComparison": "Festes Eis ist noch weniger dicht — etwa {iceDensity} g/cm³ — weshalb Eis auf flüssigem Wasser schwimmt."
+          }
         },
         "behindTheTool": {
           "title": "Hintergrund des Tools",
@@ -5744,6 +5798,31 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "formulaSection": {
+            "title": "Der Formelzusammenhang",
+            "paragraph": "Dichte, Masse und Volumen sind durch Dichte = Masse ÷ Volumen miteinander verbunden — die Kenntnis zweier Größen bestimmt immer die dritte. Dieses Mnemonik-Dreieck zeigt, welche der drei dieses Beispiel berechnet.",
+            "caption": "Das Abdecken der unbekannten Zelle zeigt die richtige Anordnung der anderen beiden."
+          },
+          "blockSection": {
+            "title": "Dichte als Blockmodell",
+            "paragraph": "Sich die Masse als Fläche eines Rechtecks vorzustellen, dessen Breite das Volumen und dessen Höhe die Dichte ist, macht die Beziehung anschaulich: ein höherer, dichterer Block packt dieselbe Masse in eine schmalere Grundfläche.",
+            "caption": "Breite folgt dem Volumen, Höhe folgt der Dichte, die schattierte Fläche steht für die Masse."
+          },
+          "unitsSection": {
+            "title": "Umrechnung zwischen Einheiten",
+            "paragraph": "Der häufig zitierte g/cm³-Wert und der strenge SI-Wert kg/m³ unterscheiden sich um genau den Faktor 1.000, und das spezifische Gewicht drückt dieselbe Dichte als Verhältnis zu Wasser aus.",
+            "caption": "Wie sich die Dichte von Eisen in ihren SI-Wert und ihr spezifisches Gewicht umrechnet.",
+            "liveConverter": {
+              "title": "Ausprobieren: Beliebige Dichte umrechnen",
+              "intro": "Geben Sie eine beliebige Dichte in g/cm³ ein, um sie live in kg/m³ und relative Dichte umgerechnet zu sehen.",
+              "inputLabel": "Dichte (g/cm³)",
+              "waterMarker": "Wasser",
+              "scaleLow": "0.001",
+              "scaleHigh": "32",
+              "literMass": "Ein Liter dieser Substanz würde etwa {mass} kg wiegen.",
+              "nearestMaterial": "Das liegt am nächsten bei {material}, mit {materialDensity} g/cm³."
+            }
           }
         },
         "references": {
@@ -5752,6 +5831,57 @@
           "note": "Rorres' Studie rekonstruiert und analysiert das mathematische Argument von Archimedes' Originalabhandlung über schwimmende Körper, die echte antike Quelle des Auftriebs- und Dichteprinzips, das dieser Rechner anwendet — im Unterschied zur späteren, unbestätigten Badewannen-Anekdote.",
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "tabs": {
+        "groupLabel": "Wähle, wonach aufgelöst werden soll",
+        "solveDensity": "Dichte berechnen",
+        "solveMass": "Masse berechnen",
+        "solveVolume": "Volumen berechnen"
+      },
+      "gauge": {
+        "floats": "Schwimmt im Wasser",
+        "sinks": "Sinkt im Wasser"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Physik- und Chemie-Tools"
+      },
+      "buoyancyCard": {
+        "title": "Schwimmt oder sinkt?",
+        "intro": "Der Vergleich des spezifischen Gewichts dieses Materials mit Wasser (1,0) sagt voraus, ob es schwimmt oder sinkt.",
+        "floatsResult": "Mit einem spezifischen Gewicht von {sg} würde dieses Material im Wasser schwimmen.",
+        "sinksResult": "Mit einem spezifischen Gewicht von {sg} würde dieses Material im Wasser sinken."
+      },
+      "referenceTable": {
+        "title": "Dichten Gängiger Materialien",
+        "caption": "Typische Dichten bei Raumtemperatur und Standardluftdruck.",
+        "columnMaterial": "Material",
+        "columnDensity": "Dichte",
+        "materials": {
+          "air": "Luft",
+          "ice": "Eis",
+          "water": "Wasser",
+          "aluminum": "Aluminium",
+          "iron": "Eisen",
+          "gold": "Gold"
         }
       }
     },
@@ -5813,7 +5943,10 @@
         "resistanceLabel": "Widerstand (Ω)",
         "resistancePlaceholder": "z. B. 6",
         "powerLabel": "Leistung (W)",
-        "powerPlaceholder": "z. B. 24"
+        "powerPlaceholder": "z. B. 24",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "triangleCaption": "Der vom aktuellen Tab berechnete Wert ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -5825,7 +5958,11 @@
         "current": "Stromstärke",
         "resistance": "Widerstand",
         "power": "Leistung",
-        "diagramCaption": "Das Ohmsche Dreieck — die hervorgehobenen Werte wurden berechnet, nicht direkt eingegeben."
+        "diagramCaption": "Das Ohmsche Dreieck — die hervorgehobenen Werte wurden berechnet, nicht direkt eingegeben.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ohmsches-Gesetz-Ergebnis zu sehen.",
+        "sentence": "Bei {voltage} V und {current} A beträgt der Widerstand des Stromkreises {resistance} Ω.",
+        "circuitCaption": "Ein einschleifiger Stromkreis, beschriftet mit Spannung, Strom und Widerstand dieses Ergebnisses.",
+        "powerFormulasCaption": "Derselbe Leistungswert, auf drei algebraisch äquivalente Arten erreicht."
       },
       "education": {
         "intro": {
@@ -5835,7 +5972,21 @@
             "caption": "Das Ohmsche Dreieck für 12 V an einem Widerstand von 6 Ω, was eine Stromstärke von 2 A ergibt — der Widerstand ist als berechneter Wert hervorgehoben."
           },
           "paragraph2": "Elektrische Leistung, gemessen in Watt (W), verbindet sich über P = V × I mit dem Ohmschen Gesetz. Setzt man V = I × R oder I = V ÷ R in diese Formel ein, ergeben sich zwei gleichwertige Leistungsausdrücke, P = I² × R und P = V² ÷ R, weshalb zwei beliebige der Größen Spannung, Stromstärke, Widerstand und Leistung genügen, um die anderen beiden zu bestimmen.",
-          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P."
+          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P.",
+          "viRelation": {
+            "xLabel": "Strom (I)",
+            "yLabel": "Spannung (V)",
+            "slopeLabel": "Steigung = R",
+            "caption": "Spannung gegen Strom bei festem Widerstand aufgetragen ergibt eine Gerade durch den Ursprung — das Ohmsche Gesetz ist linear."
+          },
+          "powerRating": {
+            "caption": "Wo ein typisches Ergebnis im Vergleich zu gängigen Festwiderstand-Leistungsklassen liegt.",
+            "r1": "1/8W",
+            "r2": "1/4W",
+            "r3": "1/2W",
+            "r4": "1W",
+            "r5": "2W"
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -5937,6 +6088,16 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "circuitSection": {
+            "title": "Der physische Stromkreis",
+            "paragraph": "Das Mnemonik-Dreieck ist eine Abstraktion eines echten Stromkreises: eine Batterie liefert Spannung, ein Widerstand setzt dem Fluss Widerstand entgegen, und Strom ist die Rate, mit der sich Ladung durch die einzelne Schleife bewegt.",
+            "caption": "Ein einschleifiger Stromkreis, beschriftet mit Spannung, Strom und Widerstand dieses Beispiels."
+          },
+          "powerFormulasSection": {
+            "title": "Drei Wege zur gleichen Leistung",
+            "paragraph": "Da das Ohmsche Gesetz V, I und R verbindet, kann die abgegebene Leistung auf drei verschiedene Arten aus den jeweils bekannten zwei Größen berechnet werden — sie stimmen immer exakt überein.",
+            "caption": "Derselbe Leistungswert, auf drei algebraisch äquivalente Arten erreicht."
           }
         },
         "references": {
@@ -5945,6 +6106,51 @@
           "note": "Schagrins historische Studie dokumentiert die überraschend kühle Aufnahme, die das heute grundlegende Ohmsche Gesetz bei seinen deutschen Zeitgenossen erfuhr, und zeichnet den konzeptuellen Wandel nach, der schließlich zu seiner Anerkennung führte.",
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "gauge": {
+        "low": "Geringe Leistung",
+        "moderate": "Mittlere Leistung",
+        "high": "Hohe Leistung"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Physik-Tools"
+      },
+      "fuseCard": {
+        "title": "Nächstgelegene Standardsicherung",
+        "intro": "Sicherungen gibt es in Standard-Stromstärken, nicht in beliebigen Werten — hier ist die kleinste Standardstärke, die diesen Strom sicher tragen würde.",
+        "result": "Bei {current} A ist die nächste Standardsicherung darüber {rating} A."
+      },
+      "referenceTable": {
+        "title": "Gängige Spannungsquellen",
+        "caption": "Typische Spannungen alltäglicher Stromquellen.",
+        "columnSource": "Quelle",
+        "columnVoltage": "Spannung",
+        "sources": {
+          "aaBattery": "AA-Batterie",
+          "nineVoltBattery": "9V-Batterie",
+          "usbPort": "USB-Anschluss",
+          "carBattery": "Autobatterie",
+          "usOutlet": "US-Steckdose",
+          "euOutlet": "EU/UK-Steckdose"
         }
       }
     },
@@ -5992,7 +6198,10 @@
         "pOHLabel": "pOH",
         "pOHPlaceholder": "z. B. 7",
         "ohLabel": "[OH⁻] (mol/l)",
-        "ohPlaceholder": "z. B. 0.0000001"
+        "ohPlaceholder": "z. B. 0.0000001",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die vom aktiven Tab gelieferte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -6005,7 +6214,11 @@
         "pOH": "pOH",
         "hConcentration": "[H⁺]",
         "ohConcentration": "[OH⁻]",
-        "diagramCaption": "pH {value} auf der Skala von 0 bis 14, von sauer (rot) bis basisch (blau)."
+        "diagramCaption": "pH {value} auf der Skala von 0 bis 14, von sauer (rot) bis basisch (blau).",
+        "emptyStateMessage": "Wert eingeben und auf Berechnen klicken, um dein pH-Ergebnis zu sehen.",
+        "operationUsed": "Umgerechnet von",
+        "barCaption": "[H⁺] und [OH⁻] auf einer logarithmischen Skala — sie bewegen sich immer in entgegengesetzte Richtungen, da ihr Produkt bei 25°C konstant ist.",
+        "seesawCaption": "pH + pOH ergibt bei 25°C immer 14 — die Waage ist nur bei pH 7 im Gleichgewicht."
       },
       "education": {
         "intro": {
@@ -6015,7 +6228,8 @@
             "caption": "Ein pH-Wert von 5,5 (leicht sauer, wie schwarzer Kaffee) auf der Skala von 0 bis 14."
           },
           "paragraph2": "Der pOH-Wert ist das entsprechende Maß für die Hydroxidionenkonzentration, pOH = -log₁₀[OH⁻]. In Wasser bei 25 °C gilt stets das Ionenprodukt Kw = [H⁺][OH⁻] = 10⁻¹⁴, weshalb bei dieser Temperatur genau pH + pOH = 14 gilt: Die Kenntnis eines beliebigen Werts von pH, pOH, [H⁺] oder [OH⁻] genügt daher, um die anderen drei zu berechnen.",
-          "paragraph3": "Eine Lösung gilt als sauer, wenn der pH-Wert unter 7 liegt, als basisch (oder alkalisch), wenn er über 7 liegt, und nur bei genau pH 7 als neutral — dem pH-Wert von reinem Wasser bei 25 °C, bei dem [H⁺] und [OH⁻] gleich groß sind. Dieser Bereich von 0 bis 14 ist die übliche Skala für wässrige Lösungen bei dieser Temperatur, wobei pH-Werte außerhalb dieses Bereichs für sehr konzentrierte Säuren oder Basen mathematisch durchaus möglich sind."
+          "paragraph3": "Eine Lösung gilt als sauer, wenn der pH-Wert unter 7 liegt, als basisch (oder alkalisch), wenn er über 7 liegt, und nur bei genau pH 7 als neutral — dem pH-Wert von reinem Wasser bei 25 °C, bei dem [H⁺] und [OH⁻] gleich groß sind. Dieser Bereich von 0 bis 14 ist die übliche Skala für wässrige Lösungen bei dieser Temperatur, wobei pH-Werte außerhalb dieses Bereichs für sehr konzentrierte Säuren oder Basen mathematisch durchaus möglich sind.",
+          "indicatorCaption": "Die ungefähre Farbe, in die sich eine Universalindikatorlösung bei jedem pH-Bereich verfärbt."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -6125,6 +6339,48 @@
           "note": "Veröffentlicht zum 100. Jahrestag von Sørensens ursprünglicher Definition von 1909, zeichnet dieser Rückblick nach, wie sich die pH-Messung von frühen Farbindikator- und Elektrodenmethoden zur heutigen international standardisierten, rückführbaren Messpraxis entwickelte.",
           "url": "https://doi.org/10.1007/s00769-009-0573-0",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "substanceCard": {
+        "title": "Nächstgelegener Alltagsstoff",
+        "intro": "Der Vergleich dieses pH-Werts mit gängigen Haushalts- und Naturstoffen vermittelt ein intuitives Gefühl dafür, wie sauer oder basisch er ist.",
+        "result": "Dieser pH-Wert liegt am nächsten bei {substance} (pH {substancePH})."
+      },
+      "referenceTable": {
+        "title": "Gängige pH-Werte",
+        "caption": "Alltägliche Substanzen und ihre Position auf der pH-Skala.",
+        "columnSubstance": "Substanz",
+        "columnPh": "pH",
+        "substances": {
+          "lemonJuice": "Zitronensaft",
+          "vinegar": "Essig",
+          "blackCoffee": "Schwarzer Kaffee",
+          "pureWater": "Reines Wasser",
+          "humanBlood": "Menschliches Blut",
+          "handSoap": "Handseife"
+        },
+        "tags": {
+          "acidic": "Sauer",
+          "neutral": "Neutral",
+          "basic": "Basisch"
         }
       }
     },
@@ -6371,7 +6627,10 @@
         "c2Label": "C₂ (mol/l)",
         "c2Placeholder": "z. B. 1",
         "v2Label": "V₂ (l)",
-        "v2Placeholder": "z. B. 1"
+        "v2Placeholder": "z. B. 1",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -6385,7 +6644,17 @@
         "v2": "V₂",
         "diagramStock": "Stammlösung",
         "diagramDiluted": "Verdünnt",
-        "diagramCaption": "Die Flüssigkeitshöhe spiegelt das Volumen wider; die Farbintensität spiegelt die Konzentration wider."
+        "diagramCaption": "Die Flüssigkeitshöhe spiegelt das Volumen wider; die Farbintensität spiegelt die Konzentration wider.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
+        "molarity": "Molarität",
+        "beakerCaption": "Die Punktanzahl skaliert mit der Molarität — mehr Punkte bedeuten eine konzentriertere Lösung.",
+        "scaleTrace": "Spur",
+        "scaleDilute": "verdünnt",
+        "scaleTypical": "typisch",
+        "scaleStock": "Stammlösung",
+        "scaleConcentrated": "konz.",
+        "scaleCaption": "{value} mol/L auf einer logarithmischen Skala gegenüber gängigen Laborreferenzkonzentrationen.",
+        "dilutionFactor": "Verdünnungsfaktor"
       },
       "education": {
         "intro": {
@@ -6397,7 +6666,8 @@
             "caption": "Das Verdünnen von 0,5 l einer 2-mol/l-Stammlösung auf 1 l ergibt eine verdünnte Lösung mit 1 mol/l — dieselbe Gesamtstoffmenge, verteilt auf mehr Flüssigkeit."
           },
           "paragraph2": "Verdünnung folgt einem einfachen Erhaltungsprinzip: Das Hinzufügen von Lösungsmittel zu einer Lösung ändert deren Volumen und Konzentration, nicht aber die gesamte Stoffmenge des vorhandenen gelösten Stoffs. Daraus ergibt sich die Verdünnungsgleichung C₁V₁ = C₂V₂, wobei C₁ und V₁ Konzentration und Volumen vor der Verdünnung (die „Stammlösung“) sind und C₂ und V₂ Konzentration und Volumen nach Zugabe des Lösungsmittels. Da die Stoffmenge erhalten bleibt, lässt sich diese Gleichung nach jeder der vier Größen umstellen, sofern die anderen drei bekannt sind.",
-          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie."
+          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie.",
+          "dilutionRatioCaption": "Jeder weitere 1:2-Verdünnungsschritt halbiert die Konzentration und lässt die Farbe entsprechend verblassen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -6508,6 +6778,53 @@
           "url": "https://doi.org/10.1021/ed081p1409",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "gauge": {
+        "dilute": "Verdünnt",
+        "typical": "Typische Laborkonzentration",
+        "concentrated": "Konzentriert",
+        "mild": "Geringe Verdünnung",
+        "moderate": "Mittlere Verdünnung",
+        "high": "Hohe Verdünnung"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "concentrationCard": {
+        "title": "Alltagsvergleich",
+        "concentrationIntro": "Der Vergleich dieser Konzentration mit isotonischer Kochsalzlösung (0,154 M), wie sie bei Infusionen verwendet wird, vermittelt ein intuitives Gefühl für ihre Stärke.",
+        "concentrationResult": "Diese Lösung ist etwa {ratio}-mal so konzentriert wie isotonische Kochsalzlösung.",
+        "dilutionIntro": "Der Verdünnungsfaktor gibt an, um wie viel konzentrierter die Ausgangslösung im Vergleich zur verdünnten Lösung war.",
+        "dilutionResult": "Diese Verdünnung reduziert die Konzentration um etwa das {factor}-fache."
+      },
+      "referenceTable": {
+        "title": "Gängige Laborlösungskonzentrationen",
+        "caption": "Typische Molaritäten von Lösungen aus dem Labor und dem Alltag.",
+        "columnSolution": "Lösung",
+        "columnMolarity": "Molarität",
+        "solutions": {
+          "physiologicalSaline": "Physiologische Kochsalzlösung (0,9 % NaCl)",
+          "seawater": "Meerwasser (NaCl)",
+          "stockNaOH": "Natriumhydroxid-Stammlösung",
+          "concentratedHCl": "Konzentrierte Salzsäure",
+          "concentratedAmmonia": "Konzentrierte Ammoniaklösung",
+          "concentratedH2SO4": "Konzentrierte Schwefelsäure"
+        }
       }
     },
     "ideal-gas-law-calculator": {
@@ -6554,7 +6871,10 @@
         "molesLabel": "Stoffmenge (mol)",
         "molesPlaceholder": "z. B. 1",
         "temperatureLabel": "Temperatur (K)",
-        "temperaturePlaceholder": "z. B. 273.15"
+        "temperaturePlaceholder": "z. B. 273.15",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -6566,7 +6886,9 @@
         "volume": "Volumen",
         "moles": "Stoffmenge",
         "temperature": "Temperatur",
-        "diagramCaption": "Die Kolbenhöhe spiegelt das Volumen wider, die Teilchenzahl die Stoffmenge und die Farbe die Temperatur."
+        "diagramCaption": "Die Kolbenhöhe spiegelt das Volumen wider, die Teilchenzahl die Stoffmenge und die Farbe die Temperatur.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Gasgesetz-Ergebnis zu sehen.",
+        "pressureGaugeCaption": "Druck angezeigt auf einem Zifferblatt, referenziert auf 1 atm (markiert), Standardatmosphärendruck."
       },
       "education": {
         "intro": {
@@ -6576,7 +6898,16 @@
             "caption": "Ein Mol eines idealen Gases bei Standardtemperatur und -druck (0 °C, 1 atm) nimmt 22,414 Liter ein."
           },
           "paragraph2": "Die Gleichung ist eine Kombination dreier einfacherer, unabhängig voneinander entdeckter Beziehungen: das Boyle-Mariotte-Gesetz (Druck und Volumen sind bei konstanter Temperatur umgekehrt proportional), das Gesetz von Charles (Volumen und Temperatur sind bei konstantem Druck direkt proportional) und das Gesetz von Avogadro (Volumen und Stoffmenge sind bei konstantem Druck und konstanter Temperatur direkt proportional). Zusammen ergeben diese drei Proportionalitäten die eine vereinheitlichte Gleichung PV = nRT.",
-          "paragraph3": "Das „ideal“ im idealen Gasgesetz beschreibt ein vereinfachendes Modell: Es nimmt an, dass Gasteilchen kein eigenes Volumen besitzen und keine Anziehungs- oder Abstoßungskräfte zwischen ihnen wirken. Reale Gase nähern sich diesem Verhalten nur an und weichen am stärksten unter hohem Druck oder bei niedriger Temperatur ab, wo Molekülgröße und zwischenmolekulare Kräfte bedeutsam werden — bei üblichen Drücken und Temperaturen folgen die meisten Gase dem idealen Gasgesetz jedoch genau genug für praktische Berechnungen."
+          "paragraph3": "Das „ideal“ im idealen Gasgesetz beschreibt ein vereinfachendes Modell: Es nimmt an, dass Gasteilchen kein eigenes Volumen besitzen und keine Anziehungs- oder Abstoßungskräfte zwischen ihnen wirken. Reale Gase nähern sich diesem Verhalten nur an und weichen am stärksten unter hohem Druck oder bei niedriger Temperatur ab, wo Molekülgröße und zwischenmolekulare Kräfte bedeutsam werden — bei üblichen Drücken und Temperaturen folgen die meisten Gase dem idealen Gasgesetz jedoch genau genug für praktische Berechnungen.",
+          "pvCurve": {
+            "xLabel": "Volumen (V)",
+            "yLabel": "Druck (P)",
+            "caption": "Bei konstanter Temperatur und Molzahl zeichnen Druck und Volumen eine inverse Kurve (Boyle'sches Gesetz), keine Gerade."
+          },
+          "stpReference": {
+            "label": "22,4 L",
+            "caption": "Ein Mol idealen Gases nimmt bei Normbedingungen 22,4 Liter ein — über das 22-fache Volumen einer 1-Liter-Box."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -6678,6 +7009,16 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "pressureGaugeSection": {
+            "title": "Druck auf einem Zifferblatt",
+            "paragraph": "Ein Zifferblatt macht eine abstrakte Druckzahl greifbar, indem es sie gegen die alltägliche Referenz von 1 Atmosphäre stellt, dem Luftdruck um uns herum auf Meereshöhe.",
+            "caption": "1 atm auf einem Zifferblatt, referenziert gegen den Standardatmosphärendruck."
+          },
+          "variablesSection": {
+            "title": "Vier Größen, eine Gleichung",
+            "paragraph": "Das ideale Gasgesetz verbindet Druck, Volumen, Molzahl und Temperatur in einer einzigen Gleichung — die Kenntnis von drei bestimmt immer die vierte.",
+            "caption": "Die gesuchte Größe ist hervorgehoben; die übrigen sind bekannt."
           }
         },
         "references": {
@@ -6686,6 +7027,50 @@
           "note": "Der Chemiehistoriker William Jensen zeichnet das ideale Gasgesetz von Clapeyrons kombinierter Gleichung von 1834 bis zu Regnaults molarer Neuformulierung von 1845 nach und untersucht den ungewissen Ursprung des Buchstabens R selbst.",
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "gauge": {
+        "low": "Unter atmosphärisch",
+        "atmospheric": "Nahe atmosphärisch",
+        "high": "Über atmosphärisch"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "stpCard": {
+        "title": "Im Vergleich zu STP",
+        "intro": "Der Vergleich des molaren Volumens dieses Gases mit dem molaren Standardvolumen bei STP (22,414 L/mol) vermittelt ein intuitives Gefühl für sein Verhalten.",
+        "result": "Dieses Gas nimmt etwa das {ratio}-fache des molaren Standardvolumens bei STP ein."
+      },
+      "referenceTable": {
+        "title": "Die Gaskonstante (R)",
+        "caption": "Die universelle Gaskonstante in verschiedenen Einheitensystemen.",
+        "columnUnit": "Einheitensystem",
+        "columnValue": "Wert",
+        "units": {
+          "litersAtm": "Liter · Atmosphären",
+          "joules": "Joule (SI)",
+          "kilopascals": "Liter · Kilopascal",
+          "torr": "Liter · Torr",
+          "calories": "Kalorien"
         }
       }
     },
@@ -6745,7 +7130,9 @@
         "workValueLabel": "Verrichtete Arbeit (J)",
         "workValuePlaceholder": "z. B. 100",
         "timeLabel": "Zeit (s)",
-        "timePlaceholder": "z. B. 10"
+        "timePlaceholder": "z. B. 10",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -6757,7 +7144,11 @@
           "power": "Rate, mit der über die Zeit Arbeit verrichtet wird."
         },
         "diagramCaptionWork": "Kraftvektor bei {angle}° zur Verschiebungsrichtung.",
-        "diagramCaptionMagnitude": "{value} {unit} auf einer logarithmischen Größenordnungsskala."
+        "diagramCaptionMagnitude": "{value} {unit} auf einer logarithmischen Größenordnungsskala.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
+        "diagramCaptionKinetic": "Eine Masse in Bewegung — kinetische Energie hängt von der Masse und dem Quadrat der Geschwindigkeit ab.",
+        "diagramCaptionPotential": "Höhe über einer Bodenreferenz — die gravitative potenzielle Energie skaliert linear mit der Höhe.",
+        "diagramCaptionPower": "Verrichtete Arbeit über einen Zeitraum — Leistung ist diese Rate."
       },
       "education": {
         "intro": {
@@ -6873,6 +7264,26 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "magnitudeSection": {
+            "title": "Gefühl für die Größenordnung",
+            "paragraph": "Energiewerte in Joule umfassen einen enormen Bereich, von einem Herzschlag bis zu einem Blitzschlag — ein Ergebnis auf einer logarithmischen Skala einzuordnen macht seine Größenordnung auf einen Blick erkennbar.",
+            "caption": "1.000 J auf einer logarithmischen Größenordnungsskala."
+          },
+          "kineticSection": {
+            "title": "Energie der Bewegung",
+            "paragraph": "Kinetische Energie hängt linear von der Masse, aber quadratisch von der Geschwindigkeit ab, sodass eine Verdopplung der Geschwindigkeit die Bewegungsenergie vervierfacht — weitaus folgenreicher als eine Verdopplung der Masse.",
+            "caption": "Eine sich mit gegebener Geschwindigkeit bewegende Masse trägt kinetische Energie proportional zu v²."
+          },
+          "potentialSection": {
+            "title": "Energie der Position",
+            "paragraph": "Die gravitative potenzielle Energie wächst direkt proportional zur Höhe über einem Referenzniveau und speichert die Energie, die beim Herabfallen freigesetzt würde.",
+            "caption": "Höhe über einer Bodenreferenz — potenzielle Energie skaliert linear mit der Höhe."
+          },
+          "powerRateSection": {
+            "title": "Leistung als Rate",
+            "paragraph": "Leistung ist keine eigene Energieart — sie beschreibt lediglich, wie schnell Arbeit verrichtet wird, sodass dieselbe Gesamtarbeit schneller verrichtet eine höhere Leistung bedeutet.",
+            "caption": "Dieselbe Arbeit schneller oder langsamer verrichtet ändert die Leistung, nicht die Arbeit selbst."
           }
         },
         "references": {
@@ -6881,6 +7292,52 @@
           "note": "Mendelson zeichnet die physikalische Definition von Arbeit bis zu Coriolis' präziser Formulierung von 1829 nach und stellt sie der alltäglichen, nichttechnischen Bedeutung des Begriffs gegenüber, um eine häufige Quelle studentischer Verwirrung zu klären.",
           "url": "https://doi.org/10.1119/1.1522707",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "gauge": {
+        "small": "Klein",
+        "moderate": "Mittel",
+        "large": "Groß"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Physik-Tools"
+      },
+      "lightbulbCard": {
+        "title": "Alltagsvergleich",
+        "intro": "Der Vergleich mit einer Standard-60-W-Glühbirne vermittelt ein intuitives Gefühl für die Größenordnung dieses Ergebnisses.",
+        "secondsResult": "Diese Energiemenge könnte eine 60-W-Glühbirne etwa {seconds} Sekunden lang betreiben.",
+        "ratioResult": "Diese Leistung entspricht etwa dem {ratio}-fachen einer Standard-60-W-Glühbirne."
+      },
+      "referenceTable": {
+        "title": "Gängige Leistungswerte",
+        "caption": "Typischer Leistungsverbrauch alltäglicher Geräte und des menschlichen Körpers in Ruhe.",
+        "columnDevice": "Gerät",
+        "columnPower": "Leistung",
+        "devices": {
+          "ledBulb": "LED-Lampe",
+          "humanResting": "Menschlicher Körper (Ruhe)",
+          "laptop": "Laptop",
+          "incandescentBulb": "Glühlampe",
+          "microwave": "Mikrowellenherd",
+          "hairDryer": "Haartrockner"
         }
       }
     },
@@ -6945,7 +7402,10 @@
         "tLabel": "Zeit t (s)",
         "tPlaceholder": "z. B. 5",
         "dxLabel": "Verschiebung Δx (m)",
-        "dxPlaceholder": "z. B. 25"
+        "dxPlaceholder": "z. B. 25",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -6961,7 +7421,13 @@
         "undefined": "undefiniert",
         "diagramStart": "Start",
         "diagramEnd": "Ende",
-        "diagramCaption": "Geschwindigkeitspfeile skaliert auf v₀ (Start) und v (Ende); die Richtung kehrt sich bei negativen Werten um."
+        "diagramCaption": "Geschwindigkeitspfeile skaliert auf v₀ (Start) und v (Ende); die Richtung kehrt sich bei negativen Werten um.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Kinematik-Ergebnis zu sehen.",
+        "sentence": "Die Geschwindigkeit ändert sich bei dieser Bewegung von {v0} m/s auf {v} m/s.",
+        "vtXLabel": "Zeit (t)",
+        "vtYLabel": "Geschwindigkeit (v)",
+        "vtAreaLabel": "Δx = {dx} m",
+        "vtCaption": "Geschwindigkeit vs. Zeit — die schattierte Fläche unter der Linie entspricht der Verschiebung."
       },
       "education": {
         "intro": {
@@ -6973,7 +7439,12 @@
             "caption": "Ein Objekt, das aus dem Stillstand (v₀ = 0) auf 10 m/s beschleunigt — der Endpfeil ist länger, da die Endgeschwindigkeit größer ist."
           },
           "paragraph2": "Dieser Rechner deckt zwei häufige Aufgabentypen ab. Wenn Geschwindigkeit, Beschleunigung und Zeit bekannt sind (aber nicht die Verschiebung), verwendet er v = v₀ + at und dessen Umstellungen — reine lineare Algebra ohne Mehrdeutigkeit. Wenn Geschwindigkeit, Beschleunigung und Verschiebung bekannt sind (aber nicht die Zeit) — die klassische Aufgabe „Bremsweg“ oder „wie schnell nach dieser Strecke“ —, verwendet er v² = v₀² + 2aΔx, was beim Berechnen einer Geschwindigkeit eine Quadratwurzel erfordert.",
-          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis."
+          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis.",
+          "positionTime": {
+            "xLabel": "Zeit (t)",
+            "yLabel": "Position (x)",
+            "caption": "Position vs. Zeit bei konstanter Beschleunigung ist eine Parabel, da die Position das Integral einer linearen Geschwindigkeitsfunktion ist."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -7075,6 +7546,28 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "velocityTimeSection": {
+            "title": "Geschwindigkeit über die Zeit",
+            "xLabel": "Zeit (t)",
+            "yLabel": "Geschwindigkeit (v)",
+            "paragraph": "Geschwindigkeit gegen Zeit bei konstanter Beschleunigung aufgetragen ergibt immer eine Gerade, und die Fläche zwischen dieser Linie und der Zeitachse entspricht genau der zurückgelegten Verschiebung.",
+            "caption": "Geschwindigkeit vs. Zeit — die schattierte Fläche unter der Linie entspricht der Verschiebung."
+          },
+          "variablesSection": {
+            "title": "Fünf Größen, zwei Gleichungen",
+            "paragraph": "Bewegung mit konstanter Beschleunigung umfasst immer fünf zusammenhängende Größen — Anfangsgeschwindigkeit, Endgeschwindigkeit, Beschleunigung, Zeit und Verschiebung —, und die Kenntnis von drei davon ermöglicht die Berechnung der anderen beiden.",
+            "caption": "Die gesuchte Größe ist hervorgehoben; die übrigen sind bekannt."
+          },
+          "referenceSection": {
+            "title": "Beschleunigung im Alltag",
+            "paragraph": "Eine bloße Zahl in m/s² bedeutet ohne Kontext wenig — diese Skala ordnet gängige Beschleunigungen, von sanftem Bremsen bis zum Raketenstart, neben Erdanziehungskraft selbst ein.",
+            "caption": "Gängige Beschleunigungen im Vergleich, mit markierter Erdanziehungskraft (9,8 m/s²).",
+            "r1": "Autobremsung",
+            "r2": "Vollbremsung",
+            "r3": "Achterbahnabfahrt",
+            "r4": "Schwerkraft (g)",
+            "r5": "Raketenstart"
           }
         },
         "references": {
@@ -7083,6 +7576,51 @@
           "note": "Der Wissenschaftshistoriker Stillman Drake untersucht Galileis Entwicklung der Kinematik beschleunigter Bewegung und zeichnet die Argumentation hinter den Gleichungen nach, die dieser Rechner fast vier Jahrhunderte später noch anwendet.",
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "gauge": {
+        "gentle": "Sanft (unter g)",
+        "strong": "Stark",
+        "extreme": "Extrem"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Physik-Tools"
+      },
+      "gForceCard": {
+        "title": "In G-Kräften",
+        "intro": "Die Beschleunigung als Vielfaches der Erdanziehungskraft (g) auszudrücken vermittelt ein intuitives Gefühl für ihre Stärke.",
+        "result": "Diese Beschleunigung entspricht etwa dem {g}-fachen der Erdanziehungskraft (1 g)."
+      },
+      "referenceTable": {
+        "title": "Gängige Geschwindigkeiten",
+        "caption": "Reale Geschwindigkeiten zur Einordnung Ihres Ergebnisses.",
+        "columnItem": "Element",
+        "columnSpeed": "Geschwindigkeit",
+        "speeds": {
+          "walking": "Gehender Mensch",
+          "usainBolt": "Usain Bolt (Höchstgeschwindigkeit)",
+          "highwayCar": "Auto auf der Autobahn (100 km/h)",
+          "commercialJet": "Verkehrsflugzeug (Reisegeschwindigkeit)",
+          "speedOfSound": "Schallgeschwindigkeit",
+          "speedOfLight": "Lichtgeschwindigkeit"
         }
       }
     },
@@ -7144,7 +7682,10 @@
         "mass2Label": "Masse 2 (kg)",
         "mass2Placeholder": "z. B. 1",
         "distanceLabel": "Entfernung zwischen den Mittelpunkten (m)",
-        "distancePlaceholder": "z. B. 6.371e6"
+        "distancePlaceholder": "z. B. 6.371e6",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
       },
       "result": {
         "heading": "Ergebnis",
@@ -7165,7 +7706,12 @@
         "diagramCaptionSecondLaw": "Kraft- und Beschleunigungspfeile skaliert auf ihre berechneten Beträge, in derselben Richtung.",
         "diagramMass1": "m₁={value} kg",
         "diagramMass2": "m₂={value} kg",
-        "diagramCaptionGravitation": "Kreisgrößen skaliert auf die relative Masse; Pfeile zeigen die gegenseitige Gravitationsanziehung."
+        "diagramCaptionGravitation": "Kreisgrößen skaliert auf die relative Masse; Pfeile zeigen die gegenseitige Gravitationsanziehung.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Kraftergebnis zu sehen.",
+        "sentence": "Die resultierende Kraft beträgt {value} N.",
+        "inverseSquareXLabel": "Entfernung (r)",
+        "inverseSquareYLabel": "Kraft (F)",
+        "inverseSquareCaption": "Die Gravitationskraft nimmt mit dem Quadrat der Entfernung ab — eine Verdopplung von r verringert F auf ein Viertel."
       },
       "education": {
         "intro": {
@@ -7175,7 +7721,12 @@
             "caption": "Eine Masse von 2 kg beschleunigt mit 3 m/s² unter einer Nettokraft von 6 N — Kraft- und Beschleunigungspfeile zeigen in dieselbe Richtung und skalieren mit dem Betrag."
           },
           "paragraph2": "Das Gravitationsgesetz, F = Gm₁m₂/r², beschreibt eine andere Art von Kraft: die gegenseitige Anziehung zwischen zwei beliebigen Massen, proportional zum Produkt ihrer Massen und umgekehrt proportional zum Quadrat des Abstands zwischen ihren Mittelpunkten. Die Gravitationskonstante G (etwa 6,674 × 10⁻¹¹ N·m²/kg²) ist extrem klein, weshalb die Gravitationsanziehung zwischen Alltagsobjekten nicht wahrnehmbar ist — sie wird erst bedeutsam, wenn mindestens eine Masse astronomisch groß ist, wie ein Planet oder ein Stern.",
-          "paragraph3": "Beide Gleichungen beschreiben Kraft, beantworten aber unterschiedliche Fragen: F = ma verknüpft die Masse und Beschleunigung eines einzelnen Objekts unter einer beliebigen Nettokraft, während F = Gm₁m₂/r² speziell die Gravitationskraft zwischen zwei Massen anhand ihres Abstands berechnet. Ein fallendes Objekt an der Erdoberfläche erfährt beides — die Schwerkraft (aus F = Gm₁m₂/r², nahe der Erdoberfläche vereinfacht zu F = mg) ist die spezifische Kraft, und F = ma beschreibt, wie sich diese Kraft in seine Beschleunigung übersetzt."
+          "paragraph3": "Beide Gleichungen beschreiben Kraft, beantworten aber unterschiedliche Fragen: F = ma verknüpft die Masse und Beschleunigung eines einzelnen Objekts unter einer beliebigen Nettokraft, während F = Gm₁m₂/r² speziell die Gravitationskraft zwischen zwei Massen anhand ihres Abstands berechnet. Ein fallendes Objekt an der Erdoberfläche erfährt beides — die Schwerkraft (aus F = Gm₁m₂/r², nahe der Erdoberfläche vereinfacht zu F = mg) ist die spezifische Kraft, und F = ma beschreibt, wie sich diese Kraft in seine Beschleunigung übersetzt.",
+          "freeBody": {
+            "applied": "Angewandte Kraft (F)",
+            "net": "Nettokraft = ma",
+            "caption": "Ein Freikörperdiagramm: eine angewandte Kraft erzeugt eine Nettokraft, gemäß F = ma."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -7277,6 +7828,23 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "gravitationSection": {
+            "title": "Anziehung zwischen Massen",
+            "paragraph": "Jedes Massenpaar zieht sich gegenseitig an, aber die Kraft wird im Alltag nur spürbar, wenn mindestens eine Masse — wie ein Planet — enorm ist.",
+            "caption": "Kreisgrößen skaliert nach relativer Masse; Pfeile zeigen gegenseitige gravitative Anziehung."
+          },
+          "inverseSquareSection": {
+            "title": "Warum Entfernung so wichtig ist",
+            "xLabel": "Entfernung (r)",
+            "yLabel": "Kraft (F)",
+            "paragraph": "Die Gravitationskraft nimmt mit dem Quadrat der Entfernung ab, nicht mit der Entfernung selbst, weshalb eine doppelte Entfernung die Anziehung auf ein Viertel statt auf die Hälfte reduziert.",
+            "caption": "Die Gravitationskraft nimmt mit dem Quadrat der Entfernung ab."
+          },
+          "variablesSection": {
+            "title": "Kraft, Masse und Beschleunigung",
+            "paragraph": "Newtons zweites Gesetz verbindet genau drei Größen — die Kenntnis zweier bestimmt immer die dritte, unabhängig davon, welche gerade unbekannt ist.",
+            "caption": "Die gesuchte Größe ist hervorgehoben."
           }
         },
         "references": {
@@ -7285,6 +7853,51 @@
           "note": "Die Historiker McKie und de Beer verfolgen die dokumentarischen Belege hinter der Anekdote von Newtons Apfel und unterscheiden, was Newton selbst nachweislich gesagt hat, von den Ausschmückungen, die die Geschichte später erhielt.",
           "url": "https://doi.org/10.1098/rsnr.1951.0003",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "gauge": {
+        "tiny": "Astronomisch klein",
+        "everyday": "Alltäglicher Maßstab",
+        "massive": "Sehr groß"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Physik-Tools"
+      },
+      "weightCard": {
+        "title": "Alltagsvergleich",
+        "intro": "Der Vergleich einer Kraft mit dem Gewicht eines Objekts auf der Erde vermittelt ein intuitives Gefühl für ihre Stärke.",
+        "result": "Diese Kraft entspricht etwa dem Gewicht eines {mass} kg schweren Objekts auf der Erde."
+      },
+      "referenceTable": {
+        "title": "Alltägliche Kräfte",
+        "caption": "Reale Kräfte über einen enormen Bereich, um Ihr Ergebnis einzuordnen.",
+        "columnItem": "Element",
+        "columnForce": "Kraft",
+        "forces": {
+          "apple": "Gewicht eines Apfels",
+          "oneKilogram": "Gewicht von 1 kg auf der Erde",
+          "adultWeight": "Gewicht eines durchschnittlichen Erwachsenen",
+          "humanBite": "Menschliche Bisskraft (Backenzähne)",
+          "smallCarWeight": "Gewicht eines Kleinwagens",
+          "saturnVThrust": "Saturn-V-Raketenschub (Start)"
         }
       }
     },
@@ -7330,7 +7943,20 @@
         "heightPlaceholder": "z. B. 0",
         "gravityLabel": "Erdbeschleunigung (g) (m/s²)",
         "gravityHint": "Standardmäßig die Erdbeschleunigung an der Erdoberfläche (9,81 m/s²) — ändern Sie den Wert, um den Mond, den Mars oder eine andere Welt zu modellieren.",
-        "gravityPlaceholder": "z. B. 9,81"
+        "gravityPlaceholder": "z. B. 9,81",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "gravityPresetLabel": "Welt",
+        "gravityPreset": {
+          "earth": "Erde (9,8 m/s²)",
+          "moon": "Mond (1,62 m/s²)",
+          "mars": "Mars (3,71 m/s²)",
+          "custom": "Benutzerdefiniert"
+        },
+        "vxLabel": "vₓ",
+        "vyLabel": "vy",
+        "vLabel": "v₀",
+        "componentsCaption": "Startgeschwindigkeit zerlegt in horizontale (vₓ) und vertikale (vy) Komponenten."
       },
       "result": {
         "heading": "Ergebnis",
@@ -7346,7 +7972,13 @@
         "diagramLaunch": "Abwurf",
         "diagramPeak": "Scheitelpunkt ({value} m)",
         "diagramLanding": "Landung",
-        "diagramCaption": "Die aus Ihrer Abwurfgeschwindigkeit, Ihrem Winkel, Ihrer Höhe und der Erdbeschleunigung berechnete parabolische Flugbahn — Scheitelpunkt und Landepunkt sind auf ihre tatsächlich berechneten Werte skaliert."
+        "diagramCaption": "Die aus Ihrer Abwurfgeschwindigkeit, Ihrem Winkel, Ihrer Höhe und der Erdbeschleunigung berechnete parabolische Flugbahn — Scheitelpunkt und Landepunkt sind auf ihre tatsächlich berechneten Werte skaliert.",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um die Flugbahn zu sehen.",
+        "angleField": "Abschusswinkel",
+        "heightField": "Abschusshöhe",
+        "gravityField": "Schwerkraft",
+        "impactDiagramCaption": "Der Aufprallgeschwindigkeitsvektor, im berechneten Aufprallwinkel unter der Horizontalen.",
+        "speedField": "Abschussgeschwindigkeit"
       },
       "education": {
         "intro": {
@@ -7359,7 +7991,13 @@
             "caption": "Die Flugbahn eines Abwurfs mit 20 m/s bei 45° von ebenem Boden aus — eine Parabel, gebildet durch konstante horizontale Geschwindigkeit und gleichmäßig beschleunigte vertikale Geschwindigkeit."
           },
           "paragraph2": "Vier Größen beschreiben diesen idealisierten Flug vollständig: die Flugzeit (wie lange der Körper in der Luft bleibt), die maximale Höhe (der Scheitelpunkt der Parabel), die Reichweite (die zurückgelegte horizontale Strecke) und die Aufprallgeschwindigkeit (Geschwindigkeit und Winkel bei der Landung). Bei einem Abwurf vom Boden aus (h₀ = 0) ist die Flugbahn symmetrisch — der Körper kehrt zu der Höhe zurück, von der er gestartet ist, seine Aufprallgeschwindigkeit entspricht seiner Abwurfgeschwindigkeit, und sein Aufprallwinkel entspricht seinem Abwurfwinkel. Ein Abwurf aus einer Höhe (h₀ > 0) durchbricht diese Symmetrie: Der Körper fällt weiter, als er gestiegen ist, und landet deshalb schneller und in einem steileren Winkel, als er abgeworfen wurde.",
-          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist."
+          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist.",
+          "rangeVsAngle": {
+            "xLabel": "Abschusswinkel (0°-90°)",
+            "yLabel": "Reichweite",
+            "peakLabel": "45° — max. Reichweite",
+            "caption": "Bei einem ebenen Abschuss ist die Reichweite proportional zu sin(2×Winkel), was bei einem Abschusswinkel von 45° sein Maximum erreicht."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -7461,6 +8099,24 @@
                 "online": "Nein — das Programm legt den Schwerpunkt auf Labore auf dem Campus und praxisnahe, residenzpflichtige Forschung."
               }
             ]
+          },
+          "componentsSection": {
+            "title": "Geschwindigkeit in zwei Teile zerlegt",
+            "paragraph": "Die Startgeschwindigkeit wird in einen horizontalen Teil, der während des gesamten Flugs konstant bleibt, und einen vertikalen Teil zerlegt, den die Schwerkraft stetig verringert — beide unabhängig zu behandeln macht die gesamte Berechnung erst möglich.",
+            "caption": "Startgeschwindigkeit zerlegt in horizontale und vertikale Komponenten."
+          },
+          "impactSection": {
+            "title": "Die Geschwindigkeit bei der Landung",
+            "paragraph": "Das Projektil kehrt mit einem Winkel unter der Horizontalen zum Boden zurück, der davon abhängt, wie stark sich die vertikale Komponente während des Flugs geändert hat — bei gleichem Start- und Landeniveau entspricht er genau dem Startwinkel.",
+            "caption": "Der Aufprallgeschwindigkeitsvektor, unter der Horizontalen geneigt."
+          },
+          "gravityComparisonSection": {
+            "title": "Derselbe Schuss, andere Welten",
+            "paragraph": "Da die Reichweite umgekehrt proportional zur Schwerkraft ist, fliegt derselbe Schuss auf dem Mond oder Mars statt auf der Erde deutlich weiter, ohne dass sich Startgeschwindigkeit oder -winkel überhaupt ändern.",
+            "caption": "Reichweite für denselben Start auf Erde, Mond und Mars.",
+            "earth": "Erde",
+            "moon": "Mond",
+            "mars": "Mars"
           }
         },
         "references": {
@@ -7469,6 +8125,51 @@
           "note": "Der Wissenschaftshistoriker R. H. Naylor verfolgt Galileis Manuskriptnotizen zur Wurfbewegung und rekonstruiert die experimentellen und theoretischen Schritte, die 1638 zum fertigen Beweis führten, dass die Bahn eines Geschosses eine Parabel ist.",
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Originaltext lesen"
+        }
+      },
+      "gauge": {
+        "low": "Flachere Flugbahn",
+        "optimal": "Nahe maximaler Reichweite",
+        "steep": "Hoher Bogen"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "relatedTools": {
+        "title": "Verwandte Physik-Tools"
+      },
+      "heightCard": {
+        "title": "In Gebäudeetagen",
+        "intro": "Der Vergleich der maximalen Höhe mit einem typischen Gebäudestockwerk (etwa 3 m) vermittelt ein intuitives Gefühl dafür, wie hoch das Geschoss steigt.",
+        "result": "Diese Flugbahn erreicht einen Höhepunkt von etwa {floors} Stockwerken eines typischen Gebäudes."
+      },
+      "referenceTable": {
+        "title": "Typische Abschussgeschwindigkeiten",
+        "caption": "Reale Abschussgeschwindigkeiten zum Vergleich mit Ihren eigenen Eingaben.",
+        "columnItem": "Element",
+        "columnSpeed": "Geschwindigkeit",
+        "launchSpeeds": {
+          "basketballFreeThrow": "Basketball-Freiwurf",
+          "soccerKick": "Fußballschuss",
+          "javelinThrow": "Speerwurf (Elite)",
+          "baseballPitch": "Baseball-Fastball",
+          "tennisServe": "Tennisaufschlag (Profi)",
+          "handgunBullet": "Pistolenkugel"
         }
       }
     },
@@ -8345,7 +9046,10 @@
         "inputTitle": "Chemische Formel",
         "formulaLabel": "Formel",
         "formulaHint": "Elementsymbole sind großschreibungsabhängig: Co (Kobalt) ist nicht dasselbe wie CO (Kohlenmonoxid).",
-        "formulaPlaceholder": "z. B. C6H12O6"
+        "formulaPlaceholder": "z. B. C6H12O6",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "breakdownDiagramCaption": "Live-Elementanzahl während der Eingabe — aktualisiert sich schon vor der Gültigkeit der Formel."
       },
       "result": {
         "heading": "Molmasse",
@@ -8357,14 +9061,30 @@
         "columnElement": "Element",
         "columnCount": "Anzahl",
         "columnAtomicMass": "Atommasse",
-        "columnSubtotal": "Zwischensumme"
+        "columnSubtotal": "Zwischensumme",
+        "emptyStateMessage": "Formel eingeben und auf Berechnen klicken, um ihre molare Masse zu sehen.",
+        "compositionCaption": "Prozentanteil der Gesamtmasse, den jedes Element beiträgt."
       },
       "education": {
         "intro": {
           "title": "Molmasse verstehen",
           "paragraph1": "Die Molmasse ist die Masse eines Mols (6,022 × 10²³ Teilchen) eines Stoffes, ausgedrückt in Gramm pro Mol (g/mol). Bei einer Verbindung ermittelt man sie, indem man die Atommasse jedes Atoms in ihrer Formel addiert — Wasser, H₂O, hat eine Molmasse von 2×(1,008) + 15,999 = 18,015 g/mol, weil ein Wassermolekül zwei Wasserstoffatome und ein Sauerstoffatom enthält. Dieser Rechner analysiert die eingegebene Formel, zählt jedes Element (auch innerhalb von runden oder eckigen Klammern, wie die beiden Hydroxidgruppen in Ca(OH)₂), und schlägt für jedes Element sein Standardatomgewicht nach, um die Summe zu berechnen.",
           "paragraph2": "Die von diesem Rechner verwendeten Atomgewichte sind die IUPAC-konventionellen Standardatomgewichte — im Wesentlichen ein gewichteter Durchschnitt der natürlich vorkommenden Isotope eines Elements, weshalb sie keine ganzen Zahlen sind (Chlors 35,45 spiegelt eine natürliche Mischung wider, überwiegend aus Chlor-35 mit etwas Chlor-37). Eine Handvoll der schwersten Elemente (Technetium, Promethium und alles ab Polonium) hat keine stabilen Isotope und somit keine natürliche Mischung zum Mitteln — für diese steht in eckigen Klammern stattdessen die Massenzahl ihres stabilsten bekannten Isotops.",
-          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten."
+          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten.",
+          "composition": {
+            "caption": "Glukose (C₆H₁₂O₆): Sauerstoff trägt über die Hälfte der Gesamtmasse bei, obwohl er die wenigsten Atome hat."
+          },
+          "atomicMass": {
+            "caption": "Die Atommasse von Chlor, 35,45, ist ein gewichteter Durchschnitt der Massen und natürlichen Häufigkeiten seiner beiden stabilen Isotope.",
+            "isotope1": "Cl-35 (76%)",
+            "isotope2": "Cl-37 (24%)",
+            "isotope3": "Durchschn."
+          },
+          "avogadro": {
+            "caption": "Ein Mol ist eine feste Anzahl von Teilchen, egal wie klein oder groß die Teilchen selbst sind.",
+            "mole": "1 Mol",
+            "particles": "Teilchen"
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8466,6 +9186,16 @@
                 "online": "Nein — die B.S.-/M.S.-/Ph.D.-Programme werden auf dem Campus der KFUPM durchgeführt."
               }
             ]
+          },
+          "groupSection": {
+            "title": "Geklammerte Gruppen",
+            "paragraph": "Ein Index nach einer schließenden Klammer multipliziert jedes Atom innerhalb dieser Gruppe, nicht nur eine einzelne Einheit davon — deshalb enthält Ca(OH)2 zwei Sauerstoff- und zwei Wasserstoffatome, nicht je eines.",
+            "caption": "Der Gruppenmultiplikator verteilt sich auf jedes Atom innerhalb der Klammern."
+          },
+          "parsingSection": {
+            "title": "Eine Formel von links nach rechts lesen",
+            "paragraph": "Der Parser liest eine Formel Zeichen für Zeichen, erkennt Elementsymbole und ihre optionalen Anzahlen und behandelt verschachtelte Gruppen rekursiv — dieselbe Technik, die auch vom Gleichungsausgleicher und dem Stöchiometrie-Rechner an anderer Stelle auf dieser Website verwendet wird.",
+            "caption": "Glukose, C₆H₁₂O₆, wird in drei Elemente mit ihren jeweiligen Atomanzahlen zerlegt."
           }
         },
         "references": {
@@ -8474,6 +9204,46 @@
           "note": "Schuberts Aufsatz zeichnet nach, wie Jean Perrins Messungen der Brownschen Bewegung Wilhelm Ostwald 1908 eine benannte, numerische „Avogadro-Konstante“ lieferten — Jahrzehnte bevor diese Zahl formal an die Definition des Mols selbst gebunden wurde.",
           "url": "https://doi.org/10.1021/acs.jchemed.0c00421",
           "readOriginal": "Originalarbeit lesen"
+        }
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "gramCard": {
+        "title": "Mol pro Gramm",
+        "intro": "Die molare Masse umgekehrt betrachtet zeigt, wie viele Mol in nur einem Gramm dieser Substanz stecken.",
+        "result": "Ein Gramm dieser Substanz enthält etwa {moles} mol."
+      },
+      "referenceTable": {
+        "title": "Gängige Atommassen",
+        "caption": "Standard-Atomgewichte von Elementen, die in den meisten alltäglichen Formeln vorkommen.",
+        "columnElement": "Element",
+        "columnMass": "Atommasse",
+        "elements": {
+          "hydrogen": "Wasserstoff",
+          "carbon": "Kohlenstoff",
+          "nitrogen": "Stickstoff",
+          "oxygen": "Sauerstoff",
+          "sodium": "Natrium",
+          "chlorine": "Chlor"
         }
       }
     },
@@ -8506,7 +9276,10 @@
           "grams": "Gramm",
           "moles": "Mol"
         },
-        "coefficientHint": "Die Koeffizienten stammen aus der ausgeglichenen Gleichung selbst, z. B. sind bei 2H2 + O2 → 2H2O die Koeffizienten 2 (H2), 1 (O2) und 2 (H2O)."
+        "coefficientHint": "Die Koeffizienten stammen aus der ausgeglichenen Gleichung selbst, z. B. sind bei 2H2 + O2 → 2H2O die Koeffizienten 2 (H2), 1 (O2) und 2 (H2O).",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "equationDiagramCaption": "Die Molverhältnis-Brücke zwischen den beiden Substanzen, live während der Eingabe."
       },
       "result": {
         "heading": "Ergebnis",
@@ -8519,14 +9292,29 @@
         "knownMoles": "Mol des Bekannten",
         "targetMoles": "Mol des Ziels",
         "knownMolarMass": "Molmasse Bekannt",
-        "targetMolarMass": "Molmasse Ziel"
+        "targetMolarMass": "Molmasse Ziel",
+        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
+        "conversionPathCaption": "Der Stöchiometrie-Fahrplan: bekannte Menge → bekannte Mol → Ziel-Mol → Zielmenge."
       },
       "education": {
         "intro": {
           "title": "Stöchiometrie verstehen",
           "paragraph1": "Stöchiometrie ist die Berechnung, wie viel von jedem Stoff an einer chemischen Reaktion beteiligt ist, basierend auf den Koeffizienten der ausgeglichenen Gleichung. Diese Koeffizienten — die Zahlen vor jeder Formel, wie die 2 in 2H₂ + O₂ → 2H₂O — beschreiben ein festes Stoffmengenverhältnis: genau 2 Mol H₂ reagieren mit genau 1 Mol O₂ zu genau 2 Mol H₂O, unabhängig davon, wie groß oder klein die tatsächliche Reaktion ist. Dieser Rechner nutzt dieses Verhältnis direkt: Mol des Zielstoffs entsprechen Mol des bekannten Stoffs multipliziert mit (Zielkoeffizient ÷ bekanntem Koeffizient).",
           "paragraph2": "Da Chemikalien im Labor nach Masse gemessen werden, nicht durch Zählen einzelner Moleküle, erfordert die Umrechnung von und zu Mol die Molmasse — dieselbe Berechnung, die der Molmassenrechner dieser Seite durchführt. Bei einer bekannten Menge in Gramm teilt dieser Rechner zunächst durch die Molmasse des bekannten Stoffes, um Mol zu erhalten; nach Anwendung des Stoffmengenverhältnisses multipliziert er, falls die Zielmenge in Gramm gewünscht wird, die Zielmol mit der Molmasse des Zielstoffs. Wird auf beiden Seiten Mol angefordert, entfällt die entsprechende Umrechnung.",
-          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt)."
+          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt).",
+          "equation": {
+            "caption": "Zwei beliebige Substanzen in einer ausgeglichenen Gleichung sind durch ihre Koeffizienten verbunden."
+          },
+          "roadmap": {
+            "knownGrams": "bekannt (g)",
+            "knownMoles": "bekannt (mol)",
+            "targetMoles": "Ziel (mol)",
+            "targetGrams": "Ziel (g)",
+            "caption": "Jedes Stöchiometrie-Problem folgt demselben vierstufigen Weg."
+          },
+          "moleRatio": {
+            "caption": "Dasselbe 1:2-Molverhältnis skaliert jede Startmenge der bekannten Substanz."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8624,6 +9412,23 @@
                 "online": "Nein — der 54-Credit-Stunden-PhD wird in Vollzeit und Präsenzform durchgeführt."
               }
             ]
+          },
+          "bridgeSection": {
+            "title": "Molare Masse: Die Einheitenbrücke",
+            "grams": "Gramm",
+            "moles": "Mol",
+            "bridgeLabel": "molare Masse",
+            "paragraph": "Gramm ist, was eine Waage misst; Mol ist, was eine chemische Gleichung tatsächlich zählt. Die molare Masse ist der Umrechnungsfaktor, der es einer Messung erlaubt, zwischen beiden zu wechseln.",
+            "caption": "Die molare Masse rechnet frei zwischen einer gemessenen Masse und einer Molzahl um."
+          },
+          "unitsCompareSection": {
+            "title": "Warum molare Masse keine Konstante ist",
+            "h2": "H₂",
+            "h2o": "H₂O",
+            "nacl": "NaCl",
+            "glucose": "C₆H₁₂O₆",
+            "paragraph": "Ein Mol ist immer dieselbe Anzahl an Teilchen, aber die Masse dieses Mols variiert je nach Substanz enorm — von 2 Gramm für Wasserstoffgas bis 180 Gramm für Glukose — weshalb jede Substanz ihre eigene molare Masse braucht.",
+            "caption": "Die Masse eines Mols von vier gängigen Substanzen, auf einer logarithmischen Skala."
           }
         },
         "references": {
@@ -8632,6 +9437,45 @@
           "note": "Die zweiteilige Studie des Chemiehistorikers J. R. Partington rekonstruiert Richters ursprüngliche Messungen und die Überlegungen hinter dem Gesetz der reziproken Proportionen, der quantitativen Grundlage, auf der die Stöchiometrie aufbaute.",
           "url": "https://doi.org/10.1080/00033795100202321",
           "readOriginal": "Originalarbeit lesen"
+        }
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "millimolesCard": {
+        "title": "In Millimol",
+        "intro": "Reaktionen im Labormaßstab werden oft in Millimol statt in Mol gemessen — hier ist die Zielmenge in diesem Maßstab.",
+        "result": "Die Zielmenge beträgt etwa {millimoles} mmol."
+      },
+      "referenceTable": {
+        "title": "Wichtige Stöchiometrie-Konstanten",
+        "caption": "Standardkonstanten, die in stöchiometrischen Berechnungen verwendet werden.",
+        "columnConstant": "Konstante",
+        "columnValue": "Wert",
+        "constants": {
+          "avogadro": "Avogadro-Konstante",
+          "stpMolarVolume": "Molvolumen bei Standardbedingungen",
+          "standardPressure": "Standardatmosphärendruck",
+          "gasConstant": "Universelle Gaskonstante",
+          "waterMolarMass": "Molare Masse von Wasser"
         }
       }
     },
@@ -8654,7 +9498,12 @@
         "inputTitle": "Unausgeglichene Gleichung",
         "equationLabel": "Gleichung",
         "equationHint": "Verwenden Sie die Standard-Formelsyntax, z. B. Fe2O3, und trennen Sie Edukte/Produkte mit -> oder =.",
-        "equationPlaceholder": "z. B. Fe + O2 -> Fe2O3"
+        "equationPlaceholder": "z. B. Fe + O2 -> Fe2O3",
+        "calculate": "Berechnen",
+        "clear": "Zurücksetzen",
+        "structureReactants": "{count, plural, one {# Edukt} other {# Edukte}}",
+        "structureProducts": "{count, plural, one {# Produkt} other {# Produkte}}",
+        "structureCaption": "Live-Anzahl der Terme während der Eingabe — aktualisiert sich schon vor dem Ausgleich der Gleichung."
       },
       "result": {
         "heading": "Ausgeglichene Gleichung",
@@ -8664,14 +9513,29 @@
         "cannotBalance": "Diese Gleichung kann nicht mit ganzzahligen Koeffizienten ausgeglichen werden — überprüfen Sie die Formeln auf Tippfehler.",
         "balancedCaption": "Kleinste ganzzahlige Koeffizienten, die jedes Element erhalten",
         "reactants": "Edukte",
-        "products": "Produkte"
+        "products": "Produkte",
+        "emptyStateMessage": "Gleichung eingeben und auf Berechnen klicken, um sie auszugleichen.",
+        "atomBalanceCaption": "Atomanzahl pro Element — gleich lange Balken auf beiden Seiten bedeutet \"ausgeglichen\"."
       },
       "education": {
         "intro": {
           "title": "Gleichungsausgleich verstehen",
           "paragraph1": "Eine chemische Gleichung auszugleichen bedeutet, Koeffizienten zu finden — ganze Zahlen, die vor jede Formel gesetzt werden —, sodass auf beiden Seiten die gleiche Anzahl von Atomen jedes Elements erscheint. Dies spiegelt das Gesetz der Erhaltung der Masse wider: Atome werden in einer chemischen Reaktion umgeordnet, aber keine werden erzeugt oder vernichtet, daher muss alles, was als Edukte an Elementen und Mengen hineingeht, insgesamt als Produkte wieder herauskommen.",
           "paragraph2": "Dieser Rechner verwendet die „Matrixmethode“: Er behandelt die Atomanzahl jedes Elements über alle Formeln hinweg als eine lineare Gleichung, baut eine Matrix aus all diesen Gleichungen zusammen und löst nach den Koeffizienten mittels Gauß-Elimination mit exakten Brüchen (wodurch die Rundungsfehler vermieden werden, die Gleitkommaarithmetik einführen würde). Das Ergebnis ist ein Vektor von Verhältnissen, den der Rechner dann auf die kleinste Menge positiver ganzer Zahlen skaliert — dieselbe Antwort, zu der ein Chemiker letztlich durch Ausprobieren gelangen würde, hier jedoch systematisch gefunden.",
-          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich."
+          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich.",
+          "structure": {
+            "reactants": "Edukte",
+            "products": "Produkte",
+            "caption": "Jede Gleichung hat eine Edukt- und eine Produktseite, verbunden durch einen Reaktionspfeil."
+          },
+          "conservation": {
+            "reactants": "Edukte",
+            "products": "Produkte",
+            "caption": "Eine ausgeglichene Gleichung hält die Waage im Gleichgewicht — dieselben Atome existieren auf beiden Seiten, nur umgeordnet."
+          },
+          "coefficient": {
+            "caption": "„2 H₂O“ bedeutet zwei separate, identische Wassermoleküle, nicht ein doppelt so großes Molekül."
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8773,6 +9637,17 @@
                 "online": "Nein — die Programme des Fachbereichs werden auf dem Campus der Universität Katar durchgeführt."
               }
             ]
+          },
+          "atomBalanceSection": {
+            "title": "Den Ausgleich prüfen",
+            "paragraph": "Für jedes Element in der Gleichung muss die Gesamtatomanzahl auf der Eduktseite genau der Gesamtanzahl auf der Produktseite entsprechen — das ist der eigentliche Test, den ein gültiger Ausgleich bestehen muss.",
+            "caption": "Eisen- und Sauerstoffatomanzahlen stimmen auf beiden Seiten einer ausgeglichenen Gleichung genau überein."
+          },
+          "matrixSection": {
+            "title": "Die Matrixmethode",
+            "cornerLabel": "Element",
+            "paragraph": "Über einfache, durch bloße Betrachtung lösbare Gleichungen hinaus baut dieses Tool eine Matrix auf, wie viele Atome jedes Elements in jedem Term vorkommen, und löst dann nach den Koeffizienten, die jede Zeile auf null summieren lassen — dieselbe lineare Algebra-Technik, die für weit komplexere Reaktionen verwendet wird.",
+            "caption": "Eduktspalten sind positiv, Produktspalten negativ — ein gültiger Ausgleich ist genau eine Lösung, bei der jede Zeile auf null summiert."
           }
         },
         "references": {
@@ -8781,6 +9656,45 @@
           "note": "Olsons Aufsatz formalisiert die algebraische (Matrix-)Methode zum Ausgleich chemischer Gleichungen, die dieser Rechner implementiert, einschließlich der allgemeinen Bedingungen, die ein gültiger Ausgleich erfüllen muss.",
           "url": "https://doi.org/10.1021/ed074p538",
           "readOriginal": "Originalarbeit lesen"
+        }
+      },
+      "relatedTools": {
+        "title": "Verwandte Chemie-Tools"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
+      },
+      "coefficientSumCard": {
+        "title": "Beteiligte Moleküle Insgesamt",
+        "intro": "Die Summe aller Koeffizienten in der ausgeglichenen Gleichung zeigt, wie viele Moleküle insgesamt an der Reaktion beteiligt sind.",
+        "result": "Diese ausgeglichene Gleichung umfasst insgesamt {sum} Moleküle über alle Terme."
+      },
+      "referenceTable": {
+        "title": "Gängige Reaktionstypen",
+        "caption": "Unausgeglichene Beispiele der wichtigsten Reaktionsklassifikationen — probieren Sie eines im obigen Gleichungsfeld aus.",
+        "columnType": "Typ",
+        "columnExample": "Beispiel",
+        "reactionTypes": {
+          "combustion": "Verbrennung",
+          "synthesis": "Synthese",
+          "decomposition": "Zersetzung",
+          "singleDisplacement": "Einfache Verdrängung",
+          "doubleDisplacement": "Doppelte Verdrängung"
         }
       }
     },

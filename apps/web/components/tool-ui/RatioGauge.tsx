@@ -18,7 +18,13 @@ type RatioGaugeProps = {
 };
 
 const SIZE_W = 240;
-const SIZE_H = 152;
+// Extra 24px of vertical room below the arc, beyond what a plain
+// semicircle needs, so the caption text (which can run to a full phrase
+// like "Sinks (SG > 1)" or "Basic / Alkaline (pH > 7)" in some tools) gets
+// real breathing room instead of nearly touching the arc's bottom edge —
+// and so descenders on that text don't get clipped by the viewBox's own
+// bottom edge, which SVG does by default for anything outside it.
+const SIZE_H = 176;
 const CX = 120;
 const CY = 128;
 const R = 92;
@@ -101,7 +107,7 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
           {valueLabel}
         </text>
         {caption && (
-          <text x={CX} y={CY + 16} textAnchor="middle" fontSize={12} fontWeight={600} className={captionColorClass ?? "fill-zinc-500 dark:fill-zinc-400"}>
+          <text x={CX} y={CY + 26} textAnchor="middle" fontSize={12} fontWeight={600} className={captionColorClass ?? "fill-zinc-500 dark:fill-zinc-400"}>
             {caption}
           </text>
         )}

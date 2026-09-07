@@ -4,6 +4,11 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import MolarMassCompositionBarDiagram from "./MolarMassCompositionBarDiagram";
+import MolarMassAtomicMassDiagram from "./MolarMassAtomicMassDiagram";
+import MolarMassAvogadroDiagram from "./MolarMassAvogadroDiagram";
+import MolarMassGroupNotationDiagram from "./MolarMassGroupNotationDiagram";
+import MolarMassFormulaBreakdownDiagram from "./MolarMassFormulaBreakdownDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -18,8 +23,21 @@ export default async function MolarMassEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <MolarMassCompositionBarDiagram
+          segments={[
+            { symbol: "C", percent: 40 },
+            { symbol: "H", percent: 6.7 },
+            { symbol: "O", percent: 53.3 },
+          ]}
+          caption={t("intro.composition.caption")}
+        />
         <p>{t("intro.paragraph2")}</p>
+        <MolarMassAtomicMassDiagram
+          caption={t("intro.atomicMass.caption")}
+          isotopeLabels={[t("intro.atomicMass.isotope1"), t("intro.atomicMass.isotope2"), t("intro.atomicMass.isotope3")]}
+        />
         <p>{t("intro.paragraph3")}</p>
+        <MolarMassAvogadroDiagram caption={t("intro.avogadro.caption")} moleLabel={t("intro.avogadro.mole")} particleLabel={t("intro.avogadro.particles")} />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -58,6 +76,23 @@ export default async function MolarMassEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.groupSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.groupSection.paragraph")}</p>
+          <MolarMassGroupNotationDiagram caption={t("behindTheTool.groupSection.caption")} />
+        </div>
+        <div>
+          <h3 className="font-semibold">{t("behindTheTool.parsingSection.title")}</h3>
+          <p className="mt-2">{t("behindTheTool.parsingSection.paragraph")}</p>
+          <MolarMassFormulaBreakdownDiagram
+            elements={[
+              { symbol: "C", count: 6 },
+              { symbol: "H", count: 12 },
+              { symbol: "O", count: 6 },
+            ]}
+            caption={t("behindTheTool.parsingSection.caption")}
+          />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

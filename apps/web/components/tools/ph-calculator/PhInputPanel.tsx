@@ -1,12 +1,14 @@
 "use client";
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import ToolButton from "@/components/tool-ui/ToolButton";
+import PhVariablesDiagram from "./PhVariablesDiagram";
 import type { PhOperation } from "./types";
 
 type PhInputPanelProps = {
   operation: PhOperation;
-  onOperationChange: (operation: PhOperation) => void;
   hConcentration: string;
   onHConcentrationChange: (value: string) => void;
   pH: string;
@@ -15,11 +17,12 @@ type PhInputPanelProps = {
   onOhConcentrationChange: (value: string) => void;
   pOH: string;
   onPOHChange: (value: string) => void;
+  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  onClear: () => void;
 };
 
 export default function PhInputPanel({
   operation,
-  onOperationChange,
   hConcentration,
   onHConcentrationChange,
   pH,
@@ -28,35 +31,22 @@ export default function PhInputPanel({
   onOhConcentrationChange,
   pOH,
   onPOHChange,
+  onCalculate,
+  onClear,
 }: PhInputPanelProps) {
   const t = useTranslations("tools.ph-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <label className="block space-y-2">
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
-        <select
-          value={operation}
-          onChange={(e) => onOperationChange(e.target.value as PhOperation)}
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
-        >
-          <option value="fromPH">{t("operation.fromPH")}</option>
-          <option value="fromH">{t("operation.fromH")}</option>
-          <option value="fromPOH">{t("operation.fromPOH")}</option>
-          <option value="fromOH">{t("operation.fromOH")}</option>
-        </select>
-      </label>
+      <PhVariablesDiagram
+        solved={operation}
+        labels={{ fromPH: "pH", fromH: "[H⁺]", fromPOH: "pOH", fromOH: "[OH⁻]" }}
+        caption={t("variablesCaption")}
+      />
 
-      <div className="mt-5 space-y-5">
+      <form onSubmit={onCalculate} className="mt-4 space-y-5">
         {operation === "fromPH" && (
-          <ToolInput
-            label={t("pHLabel")}
-            type="text"
-            inputMode="decimal"
-            placeholder={t("pHPlaceholder")}
-            value={pH}
-            onChange={(e) => onPHChange(e.target.value)}
-          />
+          <ToolInput label={t("pHLabel")} type="text" inputMode="decimal" placeholder={t("pHPlaceholder")} value={pH} onChange={(e) => onPHChange(e.target.value)} />
         )}
         {operation === "fromH" && (
           <ToolInput
@@ -69,14 +59,7 @@ export default function PhInputPanel({
           />
         )}
         {operation === "fromPOH" && (
-          <ToolInput
-            label={t("pOHLabel")}
-            type="text"
-            inputMode="decimal"
-            placeholder={t("pOHPlaceholder")}
-            value={pOH}
-            onChange={(e) => onPOHChange(e.target.value)}
-          />
+          <ToolInput label={t("pOHLabel")} type="text" inputMode="decimal" placeholder={t("pOHPlaceholder")} value={pOH} onChange={(e) => onPOHChange(e.target.value)} />
         )}
         {operation === "fromOH" && (
           <ToolInput
@@ -88,7 +71,18 @@ export default function PhInputPanel({
             onChange={(e) => onOhConcentrationChange(e.target.value)}
           />
         )}
-      </div>
+
+        <div className="flex flex-wrap gap-4">
+          <ToolButton type="submit">{t("calculate")}</ToolButton>
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            {t("clear")}
+          </button>
+        </div>
+      </form>
     </SectionCard>
   );
 }
