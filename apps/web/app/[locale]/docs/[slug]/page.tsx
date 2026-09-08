@@ -61,6 +61,12 @@ import EnergyWorkPowerCalculatorDocsPage, { getEnergyWorkPowerCalculatorTocItems
 import KinematicsCalculatorDocsPage, { getKinematicsCalculatorTocItems } from "@/components/docs/kinematics-calculator/KinematicsCalculatorDocsPage";
 import ForceCalculatorDocsPage, { getForceCalculatorTocItems } from "@/components/docs/force-calculator/ForceCalculatorDocsPage";
 import ProjectileMotionCalculatorDocsPage, { getProjectileMotionCalculatorTocItems } from "@/components/docs/projectile-motion-calculator/ProjectileMotionCalculatorDocsPage";
+import PhCalculatorDocsPage, { getPhCalculatorTocItems } from "@/components/docs/ph-calculator/PhCalculatorDocsPage";
+import MolarityCalculatorDocsPage, { getMolarityCalculatorTocItems } from "@/components/docs/molarity-calculator/MolarityCalculatorDocsPage";
+import IdealGasLawCalculatorDocsPage, { getIdealGasLawCalculatorTocItems } from "@/components/docs/ideal-gas-law-calculator/IdealGasLawCalculatorDocsPage";
+import ChemicalEquationBalancerDocsPage, { getChemicalEquationBalancerTocItems } from "@/components/docs/chemical-equation-balancer/ChemicalEquationBalancerDocsPage";
+import StoichiometryCalculatorDocsPage, { getStoichiometryCalculatorTocItems } from "@/components/docs/stoichiometry-calculator/StoichiometryCalculatorDocsPage";
+import MolarMassCalculatorDocsPage, { getMolarMassCalculatorTocItems } from "@/components/docs/molar-mass-calculator/MolarMassCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -330,6 +336,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "projectile-motion-calculator":
       content = <ProjectileMotionCalculatorDocsPage />;
       tocItems = await getProjectileMotionCalculatorTocItems();
+      break;
+    case "ph-calculator":
+      content = <PhCalculatorDocsPage />;
+      tocItems = await getPhCalculatorTocItems();
+      break;
+    case "molarity-calculator":
+      content = <MolarityCalculatorDocsPage />;
+      tocItems = await getMolarityCalculatorTocItems();
+      break;
+    case "ideal-gas-law-calculator":
+      content = <IdealGasLawCalculatorDocsPage />;
+      tocItems = await getIdealGasLawCalculatorTocItems();
+      break;
+    case "chemical-equation-balancer":
+      content = <ChemicalEquationBalancerDocsPage />;
+      tocItems = await getChemicalEquationBalancerTocItems();
+      break;
+    case "stoichiometry-calculator":
+      content = <StoichiometryCalculatorDocsPage />;
+      tocItems = await getStoichiometryCalculatorTocItems();
+      break;
+    case "molar-mass-calculator":
+      content = <MolarMassCalculatorDocsPage />;
+      tocItems = await getMolarMassCalculatorTocItems();
       break;
   }
 

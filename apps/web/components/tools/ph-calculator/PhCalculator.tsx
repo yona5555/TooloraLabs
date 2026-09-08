@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PhInputPanel from "./PhInputPanel";
 import PhResult from "./PhResult";
 import PhQuickReference from "./PhQuickReference";
@@ -153,6 +154,7 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
           sidebar={<RelatedToolsSidebar currentSlug="ph-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="ph-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <PhQuickReference />
             </div>

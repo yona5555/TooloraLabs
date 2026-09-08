@@ -61,6 +61,12 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "kinematics-calculator",
   "force-calculator",
   "projectile-motion-calculator",
+  "ph-calculator",
+  "molarity-calculator",
+  "ideal-gas-law-calculator",
+  "chemical-equation-balancer",
+  "stoichiometry-calculator",
+  "molar-mass-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

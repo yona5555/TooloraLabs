@@ -27803,6 +27803,646 @@
             "answer": "Ändern Sie die Schwerkraft-Eingabe auf die Oberflächenschwerkraft des Zielkörpers — zum Beispiel etwa 1,62 m/s² für den Mond oder 3,71 m/s² für den Mars, gegenüber dem Erdstandard von 9,8 m/s² — und jede andere Eingabe (Geschwindigkeit, Winkel, Höhe) behält ihre gleiche Bedeutung; geringere Schwerkraft erzeugt bei denselben Abschussbedingungen eine längere Flugzeit, größere maximale Höhe und größere Reichweite."
           }
         ]
+      },
+      "ph-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den pH-Rechner: wie pH, pOH, Wasserstoffionenkonzentration und Hydroxidionenkonzentration ineinander umgerechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die pH-Skala",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Einstiegspunkte",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "pH = −log₁₀[H⁺]  |  pOH = −log₁₀[OH⁻]  |  pH + pOH = 14",
+          "note": "Alle vier Größen — pH, pOH, Wasserstoffionenkonzentration und Hydroxidionenkonzentration — sind durch zwei logarithmische Definitionen und eine konstante Beziehung miteinander verknüpft, sodass die Kenntnis einer der vier bei 25 °C ausreicht, um die anderen drei abzuleiten."
+        },
+        "flowchart": {
+          "intro": "Welchen der vier Werte Sie auch angeben, der Rechner bringt ihn zunächst in pH um, und leitet dann alles andere aus dieser einen Zahl ab.",
+          "steps": [
+            "Lies, welcher der vier Einstiegspunkte gewählt ist: Wasserstoffionenkonzentration, pH direkt, Hydroxidionenkonzentration oder pOH direkt",
+            "Bei Start von der Wasserstoffionenkonzentration: pH = −log₁₀[H⁺] nehmen, was eine streng positive Konzentration erfordert",
+            "Bei Start von der Hydroxidionenkonzentration: zuerst pOH = −log₁₀[OH⁻] berechnen, dann pH = 14 − pOH, was wiederum eine streng positive Konzentration erfordert",
+            "Bei direktem Start von pH oder pOH: den eingegebenen Wert unverändert verwenden, oder mit pH = 14 − pOH umrechnen, ohne Bereichsprüfung",
+            "Aus dem resultierenden pH-Wert pOH (14 − pH), Wasserstoffionenkonzentration (10^−pH) und Hydroxidionenkonzentration (10^−pOH) ableiten und die Lösung als sauer, neutral oder basisch klassifizieren"
+          ],
+          "caption": "Vier mögliche Startpunkte, die alle in einem einzigen pH-Wert zusammenlaufen, der dann jede weitere Ausgabe steuert."
+        },
+        "anatomy": {
+          "intro": "Die Standard-pH-Skala reicht bei 25 °C von 0 bis 14, mit 7 als neutralem Mittelpunkt — Lösungen darunter sind sauer, Lösungen darüber basisch.",
+          "labelAcidic": "Sauer (0)",
+          "labelNeutral": "Neutral (7)",
+          "labelBasic": "Basisch (14)",
+          "caption": "Ein pH-Wert von 4 (markiert) liegt auf der sauren Seite von neutral — näher an 0 (stark sauer) als an 14 (stark basisch)."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Von welcher der vier Größen Sie ausgehen: Wasserstoffionenkonzentration, pH, Hydroxidionenkonzentration oder pOH.",
+            "unit": "—"
+          },
+          {
+            "symbol": "[H⁺]",
+            "meaning": "Wasserstoffionen(Hydronium)-Konzentration — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "mol/L"
+          },
+          {
+            "symbol": "pH",
+            "meaning": "Negativer dekadischer Logarithmus der Wasserstoffionenkonzentration — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "[OH⁻]",
+            "meaning": "Hydroxidionenkonzentration — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "mol/L"
+          },
+          {
+            "symbol": "pOH",
+            "meaning": "Negativer dekadischer Logarithmus der Hydroxidionenkonzentration — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Konzentrationsbasierte Eingabe erfordert einen streng positiven Wert",
+            "description": "Beim Start von der Wasserstoffionen- oder Hydroxidionenkonzentration gibt ein Wert von null oder darunter einen \"non-positive-concentration\"-Fehler zurück statt eines undefinierten Logarithmus — eine Konzentration kann in diesem Kontext physikalisch nicht null oder negativ sein."
+          },
+          {
+            "title": "Direkte pH- und pOH-Eingabe wird nicht bereichsgeprüft",
+            "description": "Beim direkten Start von pH oder pOH akzeptiert das Tool den eingegebenen Wert ohne Prüfung gegen den typischen Bereich von 0–14 — dies erlaubt die Untersuchung konzentrierter oder ungewöhnlicher Lösungen, bei denen der pH-Wert technisch außerhalb dieses Bereichs liegen kann, auf Kosten des Nicht-Erkennens eines offensichtlich falsch eingegebenen Werts."
+          },
+          {
+            "title": "Die Klassifizierung wird immer aus dem pH-Wert abgeleitet, nie aus der ursprünglichen Eingabe",
+            "description": "Unabhängig davon, von welcher der vier Größen Sie ausgegangen sind, wird die Klassifizierung sauer/neutral/basisch immer aus dem endgültigen resultierenden pH-Wert berechnet — was eine konsistente Klassifizierung unabhängig vom verwendeten Einstiegspunkt sicherstellt."
+          },
+          {
+            "title": "Die Beziehung pH + pOH = 14 ist an 25 °C gebunden",
+            "description": "Die Konstante 14 stammt aus dem Ionenprodukt des Wassers (Kw) bei 25 °C (Raumtemperatur) — bei einer anderen Temperatur verschiebt sich Kw, und diese Beziehung gilt nicht mehr exakt, obwohl das Tool keine Temperaturanpassung anbietet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum bietet der Rechner vier verschiedene Startpunkte an, statt einfach nach dem pH-Wert zu fragen?",
+            "answer": "Je nach Kontext kennen Sie den pH-Wert einer Lösung vielleicht direkt aus einer Messgerätanzeige, oder Sie kennen stattdessen eine Konzentration aus einer Titration oder einer angegebenen Molarität — alle vier gleichwertigen Einstiegspunkte (H⁺, pH, OH⁻, pOH) anzubieten lässt Sie von dem Wert ausgehen, den Sie tatsächlich zur Hand haben, ohne die Umrechnung vorher von Hand durchzuführen."
+          },
+          {
+            "question": "Warum gilt 7 als neutral?",
+            "answer": "Bei 25 °C dissoziiert reines Wasser teilweise in gleiche Konzentrationen von H⁺- und OH⁻-Ionen, jeweils bei 10⁻⁷ mol/L, was pH = −log₁₀(10⁻⁷) = 7 ergibt. Da Wasserstoff- und Hydroxidkonzentration an diesem Punkt exakt gleich sind, ist 7 als neutraler Mittelpunkt der Skala definiert, mit sauren Lösungen darunter und basischen Lösungen darüber."
+          },
+          {
+            "question": "Warum lehnt der Rechner keinen pH-Wert unter 0 oder über 14 ab, wenn er direkt eingegeben wird?",
+            "answer": "Während 0–14 die überwiegende Mehrheit alltäglicher wässriger Lösungen abdeckt, können ausreichend konzentrierte starke Säuren oder Basen technisch einen pH-Wert leicht außerhalb dieses Bereichs erzeugen — statt anzunehmen, dass jede Eingabe außerhalb des Bereichs ein Tippfehler ist, lässt der Rechner Sie damit rechnen und meldet einfach die resultierende Klassifizierung und abgeleiteten Werte."
+          },
+          {
+            "question": "Warum ist die pH-Skala logarithmisch statt einer direkten Konzentrationsablesung?",
+            "answer": "Wasserstoffionenkonzentrationen in realen Lösungen umfassen einen enormen Bereich — von etwa 1 mol/L in einer starken Säure bis hinunter zu 10⁻¹⁴ mol/L in einer starken Base — eine Spanne über 14 Größenordnungen, die direkt schwer zu handhaben ist. Das Nehmen des negativen dekadischen Logarithmus komprimiert diesen riesigen Bereich auf die überschaubare Skala von 0–14, wo jeder ganzzahlige Schritt eine zehnfache Änderung der Konzentration darstellt."
+          }
+        ]
+      },
+      "molarity-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Molaritäts- und Verdünnungsrechner: wie die molare Konzentration aus Mol oder Masse berechnet wird, und wie die Verdünnungsgleichung C₁V₁ = C₂V₂ nach ihren vier Variablen gelöst wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Verdünnung hält die Gesamtstoffmenge konstant",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Molarität = Mol ÷ Volumen(L)  |  Mol = Masse(g) ÷ molare Masse  |  Verdünnung: C₁V₁ = C₂V₂",
+          "note": "Der Konzentrationsmodus berechnet die Molarität direkt als Mol pro Liter (zuerst von Masse umgerechnet, falls dies bekannt ist), während der separate Verdünnungsmodus die klassische Beziehung C₁V₁ = C₂V₂ nach der jeweils unbekannten ihrer vier Variablen löst."
+        },
+        "flowchart": {
+          "intro": "Die beiden Modi sind unabhängige Berechnungen; welcher läuft, hängt vollständig vom gewählten Modus ab.",
+          "steps": [
+            "Lies, welcher Modus gewählt ist: Konzentration oder Verdünnung",
+            "Im Konzentrationsmodus: wenn die Basis Masse ist, zuerst durch Division der Masse durch die molare Masse in Mol umrechnen (was eine positive molare Masse erfordert); wenn die Basis Mol ist, die eingegebene Molzahl direkt verwenden",
+            "Im Konzentrationsmodus danach: die resultierende Molzahl durch das eingegebene Volumen teilen (was ein positives Volumen erfordert), um die Molarität zu erhalten",
+            "Im Verdünnungsmodus: C₁V₁ = C₂V₂ algebraisch nach der unbekannten Größe C₁, V₁, C₂ oder V₂ auflösen, wobei durch den jeweils im Nenner stehenden der drei bekannten Werte geteilt wird",
+            "Nur die für den gewählten Modus relevanten Felder zurückgeben — der Konzentrationsmodus füllt Mol und Molarität aus, der Verdünnungsmodus füllt C₁, V₁, C₂ und V₂ aus"
+          ],
+          "caption": "Zwei unabhängige Berechnungen in einem Tool: eine direkte Konzentrationsformel und die umgestellte Verdünnungsgleichung."
+        },
+        "anatomy": {
+          "intro": "Verdünnung ändert nicht die Gesamtmenge des gelösten Stoffs — sie verteilt nur dieselbe Anzahl Mol auf mehr Volumen, sodass Konzentration und Volumen sich in genau entgegengesetzte Richtungen bewegen, um ihr Produkt konstant zu halten.",
+          "xLabel": "Volumen (L)",
+          "yLabel": "Konzentration (mol/L)",
+          "caption": "Bei einem festen Produkt C×V von 10 mol·L entspricht ein Volumen von 1, 2, 5 oder 10 Litern einer Konzentration von 10, 5, 2 oder 1 mol/L — eine Verdopplung des Volumens halbiert immer die Konzentration."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob eine Konzentration direkt berechnet oder ein Verdünnungsproblem gelöst werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Konzentrationsbasis",
+            "meaning": "Im Konzentrationsmodus, ob die bekannte Menge in Mol oder in Gramm angegeben ist.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Mol",
+            "meaning": "Stoffmenge des gelösten Stoffs, direkt im Konzentrationsmodus verwendet, wenn die Basis Mol ist.",
+            "unit": "mol"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Masse des gelösten Stoffs, im Konzentrationsmodus verwendet, wenn die Basis Masse ist.",
+            "unit": "g"
+          },
+          {
+            "symbol": "Molare Masse",
+            "meaning": "Molare Masse des gelösten Stoffs, verwendet, um Masse in Mol umzurechnen, wenn die Basis Masse ist.",
+            "unit": "g/mol"
+          },
+          {
+            "symbol": "Volumen",
+            "meaning": "Gesamtes Lösungsvolumen, im Konzentrationsmodus verwendet. Muss größer als null sein.",
+            "unit": "L"
+          },
+          {
+            "symbol": "Verdünnung lösen nach",
+            "meaning": "Im Verdünnungsmodus, welche der Größen C₁, V₁, C₂ oder V₂ gelöst werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "C₁, V₁, C₂, V₂",
+            "meaning": "Anfangskonzentration und -volumen sowie Endkonzentration und -volumen — drei eingegeben, eine im Verdünnungsmodus gelöst.",
+            "unit": "mol/L, L"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Der Konzentrationsmodus erfordert ein positives Volumen",
+            "description": "Mol durch Volumen zu teilen ist bei einem Volumen von null oder negativ nicht definiert — das Tool gibt einen \"zero-volume\"-Fehler zurück statt einer unendlichen oder unsinnigen Molarität."
+          },
+          {
+            "title": "Massenbasierte Konzentration erfordert eine positive molare Masse",
+            "description": "Die Umrechnung von Masse in Mol teilt durch die molare Masse — ist die molare Masse null oder negativ, gibt das Tool einen \"zero-molar-mass\"-Fehler zurück statt einer unendlichen oder unsinnigen Molzahl."
+          },
+          {
+            "title": "Jede Verdünnungslösung teilt durch einen anderen bekannten Wert",
+            "description": "Die Berechnung von C₁ oder V₁ teilt durch V₁ bzw. C₁; die Berechnung von C₂ oder V₂ teilt durch V₂ bzw. C₂ — welcher der drei bekannten Verdünnungswerte auch immer als Divisor endet, muss ungleich null sein, sonst gibt das Tool einen \"zero-denominator\"-Fehler zurück."
+          },
+          {
+            "title": "Konzentrations- und Verdünnungsmodus teilen sich keine Ergebnisfelder",
+            "description": "Der Konzentrationsmodus gibt immer C₁, V₁, C₂ und V₂ als null zurück, während der Verdünnungsmodus immer Mol und Molarität als null zurückgibt — da die beiden Modi völlig unterschiedliche Probleme lösen, werden nur die für den gewählten Modus relevanten Felder jemals befüllt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum bietet der Konzentrationsmodus zwei verschiedene Basen (Mol oder Masse)?",
+            "answer": "Chemiker haben nicht immer die Stoffmenge einer Substanz bereits in Mol vorgemessen — eine Laborwaage misst direkt die Masse, in Gramm. Eine Massenbasis anzubieten lässt das Tool diesen häufigen Ausgangspunkt handhaben, indem intern in Mol umgerechnet wird (Masse ÷ molare Masse), bevor die Molarität berechnet wird, statt diese Umrechnung separat vorher durchführen zu müssen."
+          },
+          {
+            "question": "Warum hält Verdünnung C×V konstant?",
+            "answer": "Eine Lösung zu verdünnen bedeutet, mehr Lösungsmittel hinzuzufügen, ohne gelösten Stoff hinzuzufügen oder zu entfernen — die Gesamtzahl der Mol des gelösten Stoffs bleibt vor und nach der Verdünnung exakt gleich. Da Konzentration Mol geteilt durch Volumen ist und Mol unverändert bleibt, muss C₁V₁ (Mol vorher) gleich C₂V₂ (Mol nachher) sein, was genau die Verdünnungsgleichung ist."
+          },
+          {
+            "question": "Kann ich beliebige konsistente Einheiten für die Verdünnungsgleichung verwenden, oder müssen es mol/L und Liter sein?",
+            "answer": "Die Beziehung C₁V₁ = C₂V₂ ist ein reines Verhältnis und gilt für beliebige Konzentrations- und Volumeneinheiten, solange Sie dieselben Einheiten konsistent über alle vier Werte hinweg verwenden — die Felder dieses Tools sind in mol/L und Litern beschriftet, der chemischen Standardkonvention, aber die zugrunde liegende Algebra würde in jedem passenden Einheitenpaar genauso funktionieren."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen diesem Tool und dem Stöchiometrie-Rechner?",
+            "answer": "Dieses Tool arbeitet jeweils mit einer einzelnen Substanz — es berechnet deren Konzentration oder verdünnt eine Lösung davon. Der Stöchiometrie-Rechner rechnet stattdessen zwischen zwei verschiedenen Substanzen in einer ausgeglichenen chemischen Reaktion um, unter Verwendung des durch ihre Reaktionskoeffizienten gegebenen Molverhältnisses — eine grundlegend andere Art der Umrechnung, obwohl beide Tools mit Mol und Gramm arbeiten."
+          }
+        ]
+      },
+      "ideal-gas-law-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Rechner zum idealen Gasgesetz: wie Druck, Volumen, Stoffmenge und Temperatur aus der Beziehung PV = nRT gelöst werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Druck und Volumen bewegen sich gegenläufig",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Lösungsmodi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "PV = nRT  (R = 0,0820574 L·atm/(mol·K))",
+          "note": "Das ideale Gasgesetz setzt alle vier Zustandsgrößen eines Gases — Druck, Volumen, Stoffmenge und Temperatur — durch eine einzige Gleichung und eine universelle Konstante in Beziehung, sodass die Kenntnis beliebiger drei stets erlaubt, die vierte durch einfache algebraische Umstellung zu berechnen."
+        },
+        "flowchart": {
+          "intro": "Jede Lösung ist dieselbe Gleichung, PV = nRT, umgestellt, um eine andere Variable zu isolieren.",
+          "steps": [
+            "Lies, welche der vier Variablen gesucht ist: Druck, Volumen, Stoffmenge oder Temperatur",
+            "Zur Berechnung des Drucks: umstellen zu P = nRT/V, was ein positives Volumen erfordert",
+            "Zur Berechnung des Volumens: umstellen zu V = nRT/P, was einen positiven Druck erfordert",
+            "Zur Berechnung der Stoffmenge: umstellen zu n = PV/(RT), was eine positive Temperatur erfordert",
+            "Zur Berechnung der Temperatur: umstellen zu T = PV/(nR), was eine positive Stoffmenge erfordert"
+          ],
+          "caption": "Eine Gleichung, algebraisch auf vier Arten umgestellt, je nachdem welche Zustandsgröße unbekannt ist."
+        },
+        "anatomy": {
+          "intro": "Bei fester Gasmenge und fester Temperatur bewegen sich Druck und Volumen in entgegengesetzte Richtungen — steigt eines, sinkt das andere, entlang der klassischen Hyperbel des Boyle-Mariotte-Gesetzes.",
+          "xLabel": "Druck (atm)",
+          "yLabel": "Volumen (L)",
+          "caption": "Für 1 Mol Gas bei 273,15 K (0 °C) entspricht ein Druck von 0,5, 1, 2 oder 4 atm einem Volumen von 44,83, 22,41, 11,21 oder 5,60 Litern — der 1-atm-Punkt ist das bekannte molare Volumen von 22,4 L/mol unter Standardbedingungen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Lösen nach",
+            "meaning": "Welche der vier Zustandsgrößen gelöst werden soll: Druck, Volumen, Stoffmenge oder Temperatur.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Druck",
+            "meaning": "Gasdruck — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "atm"
+          },
+          {
+            "symbol": "Volumen",
+            "meaning": "Gasvolumen — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "L"
+          },
+          {
+            "symbol": "Stoffmenge",
+            "meaning": "Gasmenge — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "mol"
+          },
+          {
+            "symbol": "Temperatur",
+            "meaning": "Gastemperatur — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "K"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Berechnung des Drucks erfordert ein positives Volumen",
+            "description": "Die Umstellung von PV = nRT zu P = nRT/V teilt durch das Volumen — ein Volumen von null oder negativ gibt einen \"zero-volume\"-Fehler zurück statt eines unendlichen oder unsinnigen Drucks."
+          },
+          {
+            "title": "Die Berechnung des Volumens erfordert einen positiven Druck",
+            "description": "Die Umstellung zu V = nRT/P teilt durch den Druck — ein Druck von null oder negativ gibt einen \"zero-pressure\"-Fehler zurück statt eines unendlichen oder unsinnigen Volumens."
+          },
+          {
+            "title": "Die Berechnung der Stoffmenge erfordert eine positive Temperatur",
+            "description": "Die Umstellung zu n = PV/(RT) teilt durch die Temperatur — eine Temperatur von null oder negativ (die auf der Kelvin-Skala ohnehin physikalisch nicht sinnvoll ist) gibt einen \"zero-temperature\"-Fehler zurück."
+          },
+          {
+            "title": "Die Berechnung der Temperatur erfordert eine positive Stoffmenge",
+            "description": "Die Umstellung zu T = PV/(nR) teilt durch die Stoffmenge — eine Stoffmenge von null oder negativ gibt einen \"zero-moles\"-Fehler zurück statt einer unendlichen oder unsinnigen Temperatur."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist die Gaskonstante R hier gleich 0,0820574 statt des häufiger genannten Werts 8,314?",
+            "answer": "8,314 J/(mol·K) ist R in SI-Einheiten ausgedrückt (Joule, Pascal, Kubikmeter) — dieser Rechner verwendet stattdessen die im Chemielabor gebräuchlichen Einheiten Atmosphären und Liter, wobei R sich zu 0,0820574 L·atm/(mol·K) ergibt. Beide sind dieselbe physikalische Konstante, nur in unterschiedlichen, gleichermaßen gültigen Einheitensystemen ausgedrückt."
+          },
+          {
+            "question": "Warum ergeben ein Druck von 1 atm und 273,15 K ein Volumen von genau 22,4 L pro Mol?",
+            "answer": "Dies ist das Standard-Molvolumen eines idealen Gases bei STP (Standardtemperatur und -druck), ein in der Chemie weit verbreiteter Referenzpunkt — es ist kein Zufall, sondern eine direkte Konsequenz aus dem Einsetzen von n = 1 mol, T = 273,15 K und P = 1 atm in PV = nRT und dem Auflösen nach V, was genau das Beispiel dieses Tools tut."
+          },
+          {
+            "question": "Warum verlangt der Rechner die Temperatur in Kelvin statt in Celsius?",
+            "answer": "Das ideale Gasgesetz gilt nur mit einer absoluten Temperaturskala, bei der null das wahre Fehlen thermischer Energie darstellt — Celsius hat einen willkürlichen Nullpunkt (den Gefrierpunkt von Wasser), der die Beziehung PV = nRT mathematisch zusammenbrechen lassen würde, da ein Gas bei 0 °C weder null Volumen noch null Druck hat. Kelvin beginnt beim absoluten Nullpunkt, wodurch die Proportionalität im Gesetz korrekt gilt."
+          },
+          {
+            "question": "Wie gut stimmt das ideale Gasgesetz mit dem Verhalten realer Gase überein?",
+            "answer": "Es ist eine gute Näherung für viele Gase bei normalen Drücken und Temperaturen, geht aber davon aus, dass Gasteilchen kein Volumen und keine zwischenmolekulare Anziehung haben — Annahmen, die bei hohem Druck oder niedriger Temperatur zusammenbrechen, wo reale Gase merklich abweichen. Für alltägliche Chemieberechnungen unter typischen Laborbedingungen ist das ideale Gasgesetz jedoch genau genug, um der Standardausgangspunkt zu sein."
+          }
+        ]
+      },
+      "chemical-equation-balancer": {
+        "version": "v1",
+        "description": "Technische Referenz für den Ausgleicher für chemische Gleichungen: wie die Matrixmethode die kleinsten ganzzahligen Koeffizienten findet, die jedes Element erhalten, die akzeptierte Eingabe und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Atome gleichen sich auf beiden Seiten aus",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Methode",
+          "modesValue": "Matrix",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "Für jedes Element: (Atome in Edukten) = (Atome in Produkten)  |  Gelöst als M·x = 0 per exakter Bruch-Gauß-Elimination",
+          "note": "Ausgleichen bedeutet, eine Menge von Koeffizienten zu finden — einer pro Edukt und Produkt — sodass die Gesamtzahl jedes Elements auf beiden Seiten identisch ist; dieses Tool findet diese Menge, indem es sie als lineares Algebra-Problem behandelt: die Koeffizienten, die eine vorzeichenbehaftete Element-Zähl-Matrix zu null multiplizieren lassen."
+        },
+        "flowchart": {
+          "intro": "Statt durch Ausprobieren zu raten, baut und löst das Tool ein System linearer Gleichungen, eines pro beteiligtem chemischem Element.",
+          "steps": [
+            "Die Gleichung an ihrem Pfeil (->, -->, =, oder →) in Edukt- und Produktterme aufteilen, getrennt durch + auf jeder Seite",
+            "Die chemische Formel jedes Terms in Elementzahlen zerlegen, einschließlich geklammerter Gruppen und Hydratnotation",
+            "Eine Matrix aufbauen, bei der jede Zeile ein Element und jede Spalte ein Term ist, wobei Eduktzahlen positiv und Produktzahlen negativ sind — sodass jeder Koeffizientenvektor, der Matrix × Koeffizienten = 0 erfüllt, jedes Element erhält",
+            "Die Matrix mittels exakter Bruchrechnung (nicht Gleitkomma) durch Gauß-Elimination auf Zeilenstufenform reduzieren, dann den Lösungsraum finden, indem eine freie Variable auf 1 gesetzt wird",
+            "Jeden Koeffizienten mit dem kleinsten gemeinsamen Vielfachen ihrer Nenner skalieren, einen gemeinsamen Faktor herausdividieren und bestätigen, dass jeder resultierende Koeffizient eine positive ganze Zahl ist"
+          ],
+          "caption": "Ausgleichen umformuliert als Lösen eines Systems linearer Gleichungen — eine Gleichung pro Element, exakt statt näherungsweise."
+        },
+        "anatomy": {
+          "intro": "Für die Verbrennung von Methan, CH₄ + 2O₂ → CO₂ + 2H₂O, stimmt die Atomzahl jedes Elements exakt zwischen Edukt- und Produktseite überein.",
+          "labelC": "C",
+          "labelH": "H",
+          "labelO": "O",
+          "reactantsLabel": "Edukte: CH₄ + 2O₂ (9 Atome)",
+          "reactantsCaption": "Die Eduktseite: 1 Kohlenstoff-, 4 Wasserstoff- und 4 Sauerstoffatome (2 aus jedem der zwei O₂-Moleküle).",
+          "productsLabel": "Produkte: CO₂ + 2H₂O (9 Atome)",
+          "caption": "Die Produktseite: dieselben 1 Kohlenstoff-, 4 Wasserstoff- und 4 Sauerstoffatome (2 aus CO₂, 2 aus den zwei H₂O-Molekülen) — nichts erschaffen oder vernichtet, nur umgeordnet."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Gleichung",
+            "meaning": "Die unausgeglichene chemische Gleichung, mit Edukten und Produkten getrennt durch einen Pfeil (->, -->, =, oder →) und Termen auf jeder Seite getrennt durch +.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine leere Gleichung wird sofort abgelehnt",
+            "description": "Das Absenden leerer oder nur aus Leerzeichen bestehender Eingabe gibt einen \"empty-equation\"-Fehler zurück, bevor irgendein Parsen versucht wird, statt eines verwirrenden nachgelagerten Fehlschlags."
+          },
+          {
+            "title": "Ein fehlender Pfeil oder fehlende Terme auf beiden Seiten sind ungültig",
+            "description": "Die Gleichung muss eines von ->, -->, =, oder → enthalten, um Edukte von Produkten zu trennen, und jede Seite muss mindestens einen Term enthalten — alles andere gibt einen \"invalid-equation\"-Fehler zurück, der das erforderliche Format erklärt."
+          },
+          {
+            "title": "Ein nicht erkanntes Elementsymbol wird namentlich abgelehnt",
+            "description": "Wenn eine Formel ein Symbol enthält, das nicht im Periodensystem des Tools vorkommt (häufig ein Tippfehler wie \"Xx\"), wird ein \"unknown-element\"-Fehler zurückgegeben, der das spezifische nicht erkannte Symbol benennt, statt eines generischen Parse-Fehlers."
+          },
+          {
+            "title": "Eine Gleichung ohne gültigen ganzzahligen Ausgleich wird markiert, nicht stillschweigend angenähert",
+            "description": "Wenn das lineare System keine freie Variable hat (bereits vollständig eingeschränkt ohne Lösung) oder die kleinste Lösung einen Koeffizienten von null oder negativ enthält, gibt das Tool einen \"cannot-balance\"-Fehler zurück — dies kann passieren, wenn eine Formel auf eine Weise falsch eingegeben wurde, die chemisch noch parsbar ist, aber tatsächlich keine gültige Reaktion darstellt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum exakte Brüche statt Dezimalzahlen für die Berechnung verwenden?",
+            "answer": "Koeffizienten chemischer Gleichungen müssen exakte ganze Zahlen sein — ein Koeffizient wie 2,0000000001 durch akkumulierten Gleitkomma-Rundungsfehler wäre falsch, selbst wenn visuell nicht von 2 zu unterscheiden. Die durchgängige Verwendung exakter Brüche (aus beliebig präzisen Ganzzahlen aufgebaut) während des gesamten Eliminationsprozesses garantiert, dass die endgültigen Koeffizienten präzise korrekt sind, nicht nur numerisch nahe dran."
+          },
+          {
+            "question": "Was bedeutet \"die Matrixmethode\", und wie unterscheidet sie sich vom Ausgleichen durch Ausprobieren?",
+            "answer": "Ausprobieren funktioniert durch Raten von Koeffizienten und deren Anpassung, bis die Atomzahlen übereinstimmen — machbar für einfache Gleichungen, aber langsam und fehleranfällig für komplexe. Die Matrixmethode behandelt das Ausgleichen stattdessen als formales lineares Algebra-Problem (das Finden des Nullraums der Element-Zähl-Matrix), das jede ausgleichbare Gleichung systematisch und korrekt beim ersten Versuch löst, unabhängig von der Komplexität."
+          },
+          {
+            "question": "Warum unterstützt das Tool Hydratnotation wie CuSO₄·5H₂O?",
+            "answer": "Viele reale Verbindungen sind Hydrate — Kristalle, die eine feste Anzahl Wassermoleküle in ihre Struktur einbinden — und Gleichungen mit ihnen sind in der Chemie häufig. Der Formel-Parser erkennt die Mittelpunkt-(oder Bullet- oder Punkt-)Hydratnotation und multipliziert korrekt die Elementzahlen des Wassermoleküls mit der Hydratzahl, bevor sie in die Gesamt-Atomzahl der Verbindung eingemischt werden."
+          },
+          {
+            "question": "Was bedeutet es, wenn das Tool sagt, eine Gleichung \"kann nicht ausgeglichen werden\"?",
+            "answer": "Dies bedeutet, dass das lineare System, das die Gleichung beschreibt, keine gültige ganzzahlige Lösung mit ausschließlich positiven Koeffizienten hat — in der Praxis deutet dies fast immer auf einen Tippfehler in einer der chemischen Formeln hin (ein falscher Index, ein fehlendes Element, oder eine Formel, die keiner echten, gültigen Verbindung entspricht), nicht auf eine Einschränkung der Ausgleichsmethode selbst, die eine Lösung findet, wann immer eine mathematisch existiert."
+          }
+        ]
+      },
+      "stoichiometry-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Stöchiometrie-Rechner: wie die Molverhältnis-Stöchiometrie eine bekannte Menge einer Substanz in eine äquivalente Menge einer anderen umrechnet, unter Verwendung der Koeffizienten einer ausgeglichenen Gleichung, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Mol skalieren mit dem Koeffizientenverhältnis",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Mengeneinheiten",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Mol(Ziel) = Mol(bekannt) × (Zielkoeffizient ÷ bekannter Koeffizient)  |  Gramm = Mol × molare Masse",
+          "note": "Der Kern der Stöchiometrie ist ein einziges Molverhältnis, das aus den Koeffizienten einer ausgeglichenen Gleichung stammt — alles andere ist Einheitenumrechnung an beiden Enden, die eine bekannte Menge in Gramm zunächst in Mol umwandelt, bevor das Verhältnis angewendet wird, und die resultierenden Zielmol zurück in Gramm umwandelt, falls das gewünscht ist."
+        },
+        "flowchart": {
+          "intro": "Die bekannte Menge durchläuft Mol als gemeinsame Währung, unabhängig davon, in welchen Einheiten sie startete oder endete.",
+          "steps": [
+            "Prüfen, dass beide stöchiometrischen Koeffizienten größer als null und die bekannte Menge null oder mehr ist",
+            "Die molare Masse sowohl der bekannten als auch der Zielsubstanz durch Parsen ihrer chemischen Formeln nachschlagen",
+            "Die bekannte Menge in Mol umrechnen: direkt verwenden, wenn bereits in Mol, oder durch die molare Masse der bekannten Substanz teilen, wenn in Gramm angegeben",
+            "Das Molverhältnis aus der ausgeglichenen Gleichung anwenden: bekannte Mol mit (Zielkoeffizient ÷ bekannter Koeffizient) multiplizieren, um Zielmol zu erhalten",
+            "Zielmol in die gewünschte Ausgabeeinheit umrechnen: als Mol belassen, oder mit der molaren Masse der Zielsubstanz multiplizieren, um Gramm zu erhalten"
+          ],
+          "caption": "Bekannte Menge zu Mol, Mol skaliert mit dem Koeffizientenverhältnis, Zielmol zur gewünschten Einheit — drei Umrechnungen, die zwei Substanzen verbinden."
+        },
+        "anatomy": {
+          "intro": "Für die Ammoniaksynthese N₂ + 3H₂ → 2NH₃ ist das Molverhältnis zwischen Wasserstoff (Koeffizient 3) und Ammoniak (Koeffizient 2) fest bei 2:3 — jedes verbrauchte Mol Wasserstoff erzeugt zwei Drittel eines Mols Ammoniak.",
+          "xLabel": "Mol H₂ (bekannt)",
+          "yLabel": "Mol NH₃ (Ziel)",
+          "caption": "3, 6, 9 oder 12 Mol H₂ erzeugen 2, 4, 6 oder 8 Mol NH₃ — eine gerade Linie, deren Steigung genau dem Koeffizientenverhältnis 2:3 entspricht."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Bekannte Formel",
+            "meaning": "Chemische Formel der Substanz, deren Menge bereits bekannt ist.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Bekannter Koeffizient",
+            "meaning": "Der Koeffizient der bekannten Substanz in der ausgeglichenen Gleichung. Muss größer als null sein.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Bekannte Menge",
+            "meaning": "Die bekannte Menge der bekannten Substanz. Muss null oder mehr sein.",
+            "unit": "g oder mol"
+          },
+          {
+            "symbol": "Bekannte Einheit",
+            "meaning": "Ob die bekannte Menge in Gramm oder Mol angegeben ist.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Zielformel",
+            "meaning": "Chemische Formel der Substanz, deren Menge gesucht wird.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Zielkoeffizient",
+            "meaning": "Der Koeffizient der Zielsubstanz in der ausgeglichenen Gleichung. Muss größer als null sein.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Zieleinheit",
+            "meaning": "Ob die Zielmenge in Gramm oder Mol zurückgegeben werden soll.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Beide Koeffizienten müssen streng positiv sein",
+            "description": "Ein Koeffizient von null oder darunter gibt einen \"invalid-coefficient\"-Fehler zurück — ein stöchiometrischer Koeffizient von null würde bedeuten, dass diese Substanz nicht tatsächlich Teil der Reaktion ist, was nicht zur Molverhältnisberechnung passt."
+          },
+          {
+            "title": "Die bekannte Menge kann nicht negativ sein",
+            "description": "Eine negative bekannte Menge gibt einen \"invalid-amount\"-Fehler zurück — eine negative Menge einer Substanz ist keine sinnvolle Chemie-Eingabe, obwohl null explizit erlaubt ist (was korrekt null der Zielsubstanz ergibt)."
+          },
+          {
+            "title": "Beide Formeln werden unabhängig validiert, bevor irgendeine Umrechnung stattfindet",
+            "description": "Die bekannte und die Zielformel werden jeweils separat geparst und geprüft, wobei \"invalid-known-formula\" oder \"invalid-target-formula\" mit einem spezifischen Fehlerdetail zurückgegeben wird, das identifiziert, welche fehlgeschlagen ist und warum, statt eines einzigen generischen Fehlers, der nicht sagt, auf welcher Seite der Reaktion das Problem liegt."
+          },
+          {
+            "title": "Die molare Masse wird nur berechnet, nie vom Nutzer verlangt",
+            "description": "Im Gegensatz zu manchen Stöchiometrie-Tools, die verlangen, die molare Masse separat nachzuschlagen und einzugeben, leitet dieser Rechner die molaren Massen beider Substanzen automatisch aus ihren Formeln ab — was die Chance verringert, dass sich ein manueller Nachschlagefehler in das Endergebnis fortpflanzt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum benötigt der Rechner Koeffizienten aus einer ausgeglichenen Gleichung, statt sie selbst herauszufinden?",
+            "answer": "Stöchiometrische Koeffizienten hängen von der spezifischen beschriebenen Reaktion ab, die dieses Tool nicht von sich aus kennt — es benötigt von Ihnen die bereits ausgeglichenen Koeffizienten (zum Beispiel aus dem Ausgleicher für chemische Gleichungen) für die bekannte und die Zielsubstanz, damit es deren Verhältnis berechnen kann. Das Ausgleichen der Gleichung und das Umrechnen zwischen Substanzen werden als zwei separate, kombinierbare Schritte behandelt."
+          },
+          {
+            "question": "Warum zuerst in Mol umrechnen, statt Gramm direkt in Gramm umzurechnen?",
+            "answer": "Das stöchiometrische Verhältnis zwischen zwei Substanzen in einer Reaktion ist grundsätzlich ein Molverhältnis (aus den Koeffizienten der ausgeglichenen Gleichung), kein Massenverhältnis — verschiedene Substanzen haben unterschiedliche molare Massen, sodass eine direkte Gramm-zu-Gramm-Umrechnung beide molaren Massen und das Molverhältnis gleichzeitig einbeziehen müsste. Zuerst in Mol umzurechnen hält jeden Schritt einfach und spiegelt wider, wie die Berechnung tatsächlich gelehrt wird."
+          },
+          {
+            "question": "Was passiert, wenn ich eine bekannte Menge von null eingebe?",
+            "answer": "Die Berechnung läuft normal weiter und gibt korrekt null für die Zielmenge zurück — null Mol einer bekannten Substanz rechnet mathematisch in null Mol (und damit null Gramm) der Zielsubstanz um, da das Molverhältnis nur ein Multiplikator ist."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom Molaritäts-Rechner?",
+            "answer": "Der Molaritäts-Rechner arbeitet mit einer einzelnen Substanz in einer einzelnen Lösung und berechnet die Konzentration oder handhabt die Verdünnung. Dieser Rechner rechnet zwischen zwei verschiedenen Substanzen um, die an derselben ausgeglichenen Reaktion beteiligt sind, unter Verwendung ihrer stöchiometrischen Koeffizienten — eine Molaritätsfrage fragt \"wie konzentriert ist diese Lösung\", während eine Stöchiometriefrage fragt \"wie viel dieser anderen Substanz erzeugt oder erfordert diese Menge\"."
+          }
+        ]
+      },
+      "molar-mass-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Molmassen-Rechner: wie eine chemische Formel geparst und zu einer molaren Gesamtmasse mit einer Aufschlüsselung pro Element summiert wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Elementbeiträge zur Gesamtmasse",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Notationstypen",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Molare Masse = Σ (Atomgewicht des Elements × Anzahl dieses Elements in der Formel)",
+          "note": "Die molare Masse jeder Verbindung ist einfach die Summe der Standard-Atomgewichte ihrer Bestandteilsatome, jeweils multipliziert mit der Häufigkeit, mit der dieses Element in der Formel vorkommt — die gesamte Berechnung hängt davon ab, die Formel zunächst korrekt in eine Element-zu-Anzahl-Zuordnung zu zerlegen."
+        },
+        "flowchart": {
+          "intro": "Das Parsen der Formel leistet hier die eigentliche Arbeit; sobald die Elementzahlen bekannt sind, ist die Berechnung der Gesamtsumme eine einfache Addition.",
+          "steps": [
+            "Die Formel Zeichen für Zeichen rekursiv parsen: Elementsymbole (mit optionaler nachgestellter Anzahl) sowie geklammerte oder in eckigen Klammern stehende Gruppen (mit optionalem nachgestelltem Multiplikator, der auf alles darin angewendet wird)",
+            "Wenn die Formel Hydratnotation enthält (ein Mittelpunkt, Bullet oder Punkt, gefolgt von einer Zahl und mehr Formel, wie CuSO₄·5H₂O), beide Segmente separat parsen und die Zahlen des zweiten Segments mit seinem Multiplikator skalieren, bevor zusammengeführt wird",
+            "Das Standard-Atomgewicht jedes geparsten Elements aus einer Tabelle konventioneller IUPAC-Werte nachschlagen",
+            "Die Anzahl jedes Elements mit seinem Atomgewicht multiplizieren, um den Massenbeitrag dieses Elements (Zwischensumme) zu erhalten",
+            "Die Zwischensumme jedes Elements addieren, um die molare Gesamtmasse der Verbindung zu erhalten"
+          ],
+          "caption": "Ein rekursiver Parser wandelt den Formeltext in Elementzahlen um, dann ergibt eine einfache gewichtete Summe die Gesamtmasse."
+        },
+        "anatomy": {
+          "intro": "Bei Glukose, C₆H₁₂O₆, verteilt sich die molare Gesamtmasse ungleichmäßig auf ihre drei Elemente — Sauerstoff trägt am meisten bei, obwohl er die wenigsten Atome hat, weil er pro Atom das schwerste der drei ist.",
+          "labelC": "Kohlenstoff",
+          "labelH": "Wasserstoff",
+          "labelO": "Sauerstoff",
+          "totalLabel": "Glukose (C₆H₁₂O₆): 180,156 g/mol",
+          "caption": "Kohlenstoff trägt 72,066 g/mol bei (6 × 12,011), Wasserstoff 12,096 g/mol (12 × 1,008), und Sauerstoff 95,994 g/mol (6 × 15,999) — die sechs Sauerstoffatome überwiegen die zwölf Wasserstoffatome gewichtsmäßig."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Formel",
+            "meaning": "Die zu parsende chemische Formel, mit Unterstützung für Elementzahlen, geklammerte/eckig geklammerte Gruppen und Hydratnotation.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine leere Formel wird sofort abgelehnt",
+            "description": "Leere oder nur aus Leerzeichen bestehende Eingabe gibt einen \"empty-formula\"-Fehler zurück, bevor das Parsen beginnt, statt eines verwirrenden nachgelagerten Fehlschlags oder eines stillen Nullergebnisses."
+          },
+          {
+            "title": "Ein nicht erkanntes Elementsymbol wird namentlich abgelehnt",
+            "description": "Wenn ein Kandidatensymbol (wie \"Xx\" oder ein echter Tippfehler) keinem Eintrag in der Atomgewichtstabelle entspricht, gibt das Tool einen \"unknown-element\"-Fehler zurück, der den spezifischen nicht erkannten Text identifiziert, wobei zunehmend kürzere Teilzeichenketten geprüft werden (z. B. zuerst \"Co\" ausprobiert, bevor auf \"C\" zurückgefallen wird), sodass echte zweibuchstabige Symbole weiterhin korrekt erkannt werden."
+          },
+          {
+            "title": "Unausgeglichene Klammern oder eckige Klammern werden explizit erfasst",
+            "description": "Eine schließende \")\" oder \"]\", die nicht zur zuletzt geöffneten Gruppe passt, oder eine Gruppe, die geöffnet, aber nie geschlossen wird, gibt einen \"unbalanced-parentheses\"-Fehler zurück, der genau identifiziert, wo die Nichtübereinstimmung auftrat, statt das nicht übereinstimmende Zeichen stillschweigend zu ignorieren."
+          },
+          {
+            "title": "Hydratnotation skaliert nur das Segment nach dem Punkt",
+            "description": "In einer Formel wie CuSO₄·5H₂O gilt der führende Multiplikator (5) nur für die Elementzahlen des Wassermoleküls, nicht für die gesamte Formel vor dem Punkt — die beiden Segmente werden unabhängig geparst und zusammengeführt, wobei der Multiplikator nur das zweite Segment skaliert."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum haben manche Elemente ein in Klammern stehendes oder ungefähr wirkendes Atomgewicht?",
+            "answer": "Elemente ohne stabile Isotope (meist schwere, radioaktive Elemente) haben kein einzelnes, gut definiertes natürliches Atomgewicht, wie stabile Elemente es haben — für diese verwendet das Tool die Massenzahl des bekannten stabilsten Isotops als Standardreferenzwert, gemäß IUPAC-Konvention, da es keine natürliche Isotopenmischung zum Mitteln gibt."
+          },
+          {
+            "question": "Warum unterstützt der Formel-Parser sowohl runde als auch eckige Klammern?",
+            "answer": "Beide werden in der echten chemischen Notation zur Gruppierung verwendet — eckige Klammern sind besonders häufig bei Koordinationsverbindungen und komplexen Ionen (wie [Cu(NH₃)₄]²⁺), die manchmal innerhalb geklammerter Gruppen verschachtelt sind oder umgekehrt. Beide zu unterstützen und sie korrekt ineinander verschachteln zu lassen, ermöglicht dem Parser, Formeln so zu handhaben, wie sie in der Chemie tatsächlich geschrieben werden, statt eine vereinfachte Teilmenge zu verlangen."
+          },
+          {
+            "question": "Was ist Hydratnotation, und warum braucht sie besondere Behandlung?",
+            "answer": "Ein Hydrat ist eine kristalline Verbindung, die eine feste, ganzzahlige Anzahl von Wassermolekülen in ihre Struktur einbindet, üblicherweise geschrieben mit einem Mittelpunkt vor der Wasserzahl, wie CuSO₄·5H₂O (Kupfersulfat-Pentahydrat). Da die Wassermoleküle ein separater Teil der Formel mit ihrem eigenen Multiplikator sind, müssen sie unabhängig von der Hauptverbindung geparst und skaliert werden, bevor ihre Atomzahlen eingemischt werden, statt als eine durchgehende Formel gelesen zu werden."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom Stöchiometrie-Rechner?",
+            "answer": "Dieses Tool berechnet die molare Masse einer einzelnen Formel isoliert, mit einer vollständigen Aufschlüsselung pro Element, woher diese Masse stammt. Der Stöchiometrie-Rechner verwendet die Molmassenberechnung als einen internen Schritt (über denselben Formel-Parser), während er ein größeres Problem löst — die Umrechnung einer bekannten Menge einer Substanz in eine äquivalente Menge einer anderen Substanz in einer ausgeglichenen Reaktion."
+          }
+        ]
       }
     }
   }

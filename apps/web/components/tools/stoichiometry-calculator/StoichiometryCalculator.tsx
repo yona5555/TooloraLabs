@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import StoichiometryInputPanel from "./StoichiometryInputPanel";
 import StoichiometryResult from "./StoichiometryResult";
 import StoichiometryQuickReference from "./StoichiometryQuickReference";
@@ -182,6 +183,7 @@ export default function StoichiometryCalculator({ education }: { education: Reac
           }
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="stoichiometry-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <StoichiometryQuickReference />
             </div>

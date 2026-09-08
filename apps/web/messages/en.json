@@ -27803,6 +27803,646 @@
             "answer": "Change the gravity input to the target body's surface gravity — for example, roughly 1.62 m/s² for the Moon or 3.71 m/s² for Mars, versus Earth's default of 9.8 m/s² — and every other input (speed, angle, height) keeps its same meaning; lower gravity produces a longer time of flight, greater maximum height, and longer range for the same launch conditions."
           }
         ]
+      },
+      "ph-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the pH Calculator: how pH, pOH, hydrogen ion concentration, and hydroxide ion concentration convert into each other, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The pH Scale",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Entry Points",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "pH = −log₁₀[H⁺]  |  pOH = −log₁₀[OH⁻]  |  pH + pOH = 14",
+          "note": "All four quantities — pH, pOH, hydrogen ion concentration, and hydroxide ion concentration — are tied together by two logarithmic definitions and one constant relationship, so knowing any one of the four at 25°C is enough to derive the other three."
+        },
+        "flowchart": {
+          "intro": "Whichever one of the four values you provide, the calculator first gets it into pH, then derives everything else from that single number.",
+          "steps": [
+            "Read which of the four entry points is selected: hydrogen ion concentration, pH directly, hydroxide ion concentration, or pOH directly",
+            "If starting from hydrogen ion concentration: take pH = −log₁₀[H⁺], requiring a strictly positive concentration",
+            "If starting from hydroxide ion concentration: first compute pOH = −log₁₀[OH⁻], then pH = 14 − pOH, again requiring a strictly positive concentration",
+            "If starting from pH or pOH directly: use the entered value as-is, or convert with pH = 14 − pOH, with no range validation",
+            "From the resulting pH, derive pOH (14 − pH), hydrogen ion concentration (10^−pH), hydroxide ion concentration (10^−pOH), and classify the solution as acidic, neutral, or basic"
+          ],
+          "caption": "Four possible starting points, all converging on a single pH value that then drives every other output."
+        },
+        "anatomy": {
+          "intro": "The standard pH scale runs from 0 to 14 at 25°C, with 7 as the neutral midpoint — solutions below it are acidic, and solutions above it are basic.",
+          "labelAcidic": "Acidic (0)",
+          "labelNeutral": "Neutral (7)",
+          "labelBasic": "Basic (14)",
+          "caption": "A pH of 4 (marked) falls on the acidic side of neutral — closer to 0 (strongly acidic) than to 14 (strongly basic)."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Which of the four quantities you're starting from: hydrogen ion concentration, pH, hydroxide ion concentration, or pOH.",
+            "unit": "—"
+          },
+          {
+            "symbol": "[H⁺]",
+            "meaning": "Hydrogen ion (hydronium) concentration — entered directly, or computed as an output.",
+            "unit": "mol/L"
+          },
+          {
+            "symbol": "pH",
+            "meaning": "Negative base-10 logarithm of hydrogen ion concentration — entered directly, or computed as an output.",
+            "unit": "—"
+          },
+          {
+            "symbol": "[OH⁻]",
+            "meaning": "Hydroxide ion concentration — entered directly, or computed as an output.",
+            "unit": "mol/L"
+          },
+          {
+            "symbol": "pOH",
+            "meaning": "Negative base-10 logarithm of hydroxide ion concentration — entered directly, or computed as an output.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Concentration-based entry requires a strictly positive value",
+            "description": "Starting from hydrogen ion or hydroxide ion concentration, a value of zero or less returns a \"non-positive-concentration\" error rather than an undefined logarithm — a concentration can't physically be zero or negative in this context."
+          },
+          {
+            "title": "Direct pH and pOH entry aren't range-validated",
+            "description": "Starting from pH or pOH directly, the tool accepts the value as entered with no check against the typical 0–14 range — this allows exploring concentrated or unusual solutions where pH can technically fall outside that range, at the cost of not catching an obviously mistyped value."
+          },
+          {
+            "title": "The classification is always derived from pH, never from the original input",
+            "description": "Regardless of which of the four values you started from, acidic/neutral/basic classification is always computed from the final resulting pH — ensuring consistent classification no matter which entry point was used."
+          },
+          {
+            "title": "The pH + pOH = 14 relationship is fixed to 25°C",
+            "description": "The constant 14 comes from water's ion-product constant (Kw) at 25°C (room temperature) — at a different temperature, Kw shifts and this relationship no longer holds exactly, though the tool doesn't offer a temperature adjustment."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the calculator offer four different starting points instead of just asking for pH?",
+            "answer": "Depending on the context, you might directly know a solution's pH from a meter reading, or you might instead know a concentration from a titration or a stated molarity — offering all four equivalent entry points (H⁺, pH, OH⁻, pOH) lets you start from whichever value you actually have on hand, without doing the conversion by hand first."
+          },
+          {
+            "question": "Why is 7 considered neutral?",
+            "answer": "At 25°C, pure water partially dissociates into equal concentrations of H⁺ and OH⁻ ions, each at 10⁻⁷ mol/L, giving pH = −log₁₀(10⁻⁷) = 7. Because hydrogen and hydroxide concentrations are exactly equal at that point, 7 is defined as the neutral midpoint of the scale, with acidic solutions below it and basic solutions above."
+          },
+          {
+            "question": "Why doesn't the calculator reject a pH below 0 or above 14 when entered directly?",
+            "answer": "While 0–14 covers the vast majority of everyday aqueous solutions, sufficiently concentrated strong acids or bases can technically produce a pH slightly outside that range — rather than assuming any out-of-range entry is a typo, the calculator lets you compute with it and simply reports the resulting classification and derived values."
+          },
+          {
+            "question": "Why is the pH scale logarithmic instead of a direct concentration reading?",
+            "answer": "Hydrogen ion concentrations in real solutions span an enormous range — from about 1 mol/L in a strong acid down to 10⁻¹⁴ mol/L in a strong base — a 14-order-of-magnitude spread that's unwieldy to work with directly. Taking the negative base-10 logarithm compresses that huge range into the manageable 0–14 scale, where each whole-number step represents a tenfold change in concentration."
+          }
+        ]
+      },
+      "molarity-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Molarity & Dilution Calculator: how molar concentration is computed from moles or mass, and how the dilution equation C₁V₁ = C₂V₂ is solved for its four variables, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Dilution Keeps the Total Moles Constant",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Molarity = moles ÷ volume(L)  |  moles = mass(g) ÷ molar mass  |  Dilution: C₁V₁ = C₂V₂",
+          "note": "The concentration mode computes molarity directly as moles per liter (converting from mass first, if that's what's known), while the separate dilution mode solves the classic C₁V₁ = C₂V₂ relationship for whichever one of its four variables is unknown."
+        },
+        "flowchart": {
+          "intro": "The two modes are independent calculations; which one runs depends entirely on the selected mode.",
+          "steps": [
+            "Read which mode is selected: concentration, or dilution",
+            "In concentration mode: if the basis is mass, first convert to moles by dividing mass by molar mass (requiring a positive molar mass); if the basis is moles, use the entered mole count directly",
+            "In concentration mode, then: divide the resulting mole count by the entered volume (requiring a positive volume) to get molarity",
+            "In dilution mode: solve C₁V₁ = C₂V₂ algebraically for whichever of C₁, V₁, C₂, or V₂ is unknown, dividing by whichever of the three known values sits in the denominator",
+            "Return only the fields relevant to the selected mode — concentration mode fills in moles and molarity, dilution mode fills in C₁, V₁, C₂, and V₂"
+          ],
+          "caption": "Two independent calculations sharing one tool: a direct concentration formula, and the rearranged dilution equation."
+        },
+        "anatomy": {
+          "intro": "Dilution doesn't change the total amount of solute — it only spreads the same number of moles across more volume, so concentration and volume move in exactly opposite directions to keep their product constant.",
+          "xLabel": "Volume (L)",
+          "yLabel": "Concentration (mol/L)",
+          "caption": "With a fixed 10 mol·L product (C×V), a volume of 1, 2, 5, or 10 liters corresponds to a concentration of 10, 5, 2, or 1 mol/L — doubling the volume always halves the concentration."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to compute a concentration directly, or solve a dilution problem.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Concentration Basis",
+            "meaning": "In concentration mode, whether the known amount is given in moles or in grams.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Moles",
+            "meaning": "Amount of solute, used directly in concentration mode when the basis is moles.",
+            "unit": "mol"
+          },
+          {
+            "symbol": "Mass",
+            "meaning": "Mass of solute, used in concentration mode when the basis is mass.",
+            "unit": "g"
+          },
+          {
+            "symbol": "Molar Mass",
+            "meaning": "Molar mass of the solute, used to convert mass to moles when the basis is mass.",
+            "unit": "g/mol"
+          },
+          {
+            "symbol": "Volume",
+            "meaning": "Total solution volume, used in concentration mode. Must be greater than zero.",
+            "unit": "L"
+          },
+          {
+            "symbol": "Dilution Solve For",
+            "meaning": "In dilution mode, which of C₁, V₁, C₂, or V₂ to solve for.",
+            "unit": "—"
+          },
+          {
+            "symbol": "C₁, V₁, C₂, V₂",
+            "meaning": "Initial concentration and volume, and final concentration and volume — three entered, one solved for in dilution mode.",
+            "unit": "mol/L, L"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Concentration mode requires a positive volume",
+            "description": "Dividing moles by volume is undefined when volume is zero or negative — the tool returns a \"zero-volume\" error rather than an infinite or nonsensical molarity."
+          },
+          {
+            "title": "Mass-basis concentration requires a positive molar mass",
+            "description": "Converting mass to moles divides by molar mass — if molar mass is zero or negative, the tool returns a \"zero-molar-mass\" error rather than an infinite or nonsensical mole count."
+          },
+          {
+            "title": "Each dilution solve-for divides by a different known value",
+            "description": "Solving for C₁ or V₁ divides by V₁ or C₁ respectively; solving for C₂ or V₂ divides by V₂ or C₂ respectively — whichever of the three known dilution values would end up as the divisor must be nonzero, or the tool returns a \"zero-denominator\" error."
+          },
+          {
+            "title": "Concentration and dilution modes don't share result fields",
+            "description": "Concentration mode always returns C₁, V₁, C₂, and V₂ as zero, while dilution mode always returns moles and molarity as zero — since the two modes solve entirely different problems, only the fields relevant to the selected mode are ever populated."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the concentration mode offer two different bases (moles or mass)?",
+            "answer": "Chemists don't always have a substance's amount pre-measured in moles — a lab balance measures mass directly, in grams. Offering a mass basis lets the tool handle that common starting point by converting to moles internally (mass ÷ molar mass) before computing molarity, rather than requiring you to do that conversion separately first."
+          },
+          {
+            "question": "Why does dilution keep C×V constant?",
+            "answer": "Diluting a solution means adding more solvent without adding or removing any solute — the total number of moles of dissolved substance stays exactly the same before and after. Since concentration is moles divided by volume, and moles is unchanged, C₁V₁ (moles before) must equal C₂V₂ (moles after), which is exactly the dilution equation."
+          },
+          {
+            "question": "Can I use any consistent units for the dilution equation, or does it have to be mol/L and liters?",
+            "answer": "The C₁V₁ = C₂V₂ relationship is a pure ratio and holds for any concentration and volume units, as long as you use the same units consistently across all four values — this tool's fields are labeled in mol/L and liters, the standard chemistry convention, but the underlying algebra would work the same way in any matching unit pair."
+          },
+          {
+            "question": "What's the difference between this tool and the Stoichiometry Calculator?",
+            "answer": "This tool works with a single substance at a time — computing its concentration, or diluting a solution of it. The Stoichiometry Calculator instead converts between two different substances in a balanced chemical reaction, using the mole ratio given by their reaction coefficients — a fundamentally different kind of conversion, even though both tools deal in moles and grams."
+          }
+        ]
+      },
+      "ideal-gas-law-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Ideal Gas Law Calculator: how pressure, volume, moles, and temperature are solved from the PV = nRT relationship, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Pressure and Volume Move Inversely",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solve Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "PV = nRT  (R = 0.0820574 L·atm/(mol·K))",
+          "note": "The ideal gas law relates all four state variables of a gas — pressure, volume, moles, and temperature — through a single equation and one universal constant, so knowing any three always lets you solve for the fourth by simple algebraic rearrangement."
+        },
+        "flowchart": {
+          "intro": "Every solve-for is the same equation, PV = nRT, rearranged to isolate a different variable.",
+          "steps": [
+            "Read which of the four variables is being solved for: pressure, volume, moles, or temperature",
+            "To solve for pressure: rearrange to P = nRT/V, requiring a positive volume",
+            "To solve for volume: rearrange to V = nRT/P, requiring a positive pressure",
+            "To solve for moles: rearrange to n = PV/(RT), requiring a positive temperature",
+            "To solve for temperature: rearrange to T = PV/(nR), requiring a positive mole count"
+          ],
+          "caption": "One equation, algebraically rearranged four ways depending on which state variable is unknown."
+        },
+        "anatomy": {
+          "intro": "At a fixed amount of gas and fixed temperature, pressure and volume move in opposite directions — as one goes up, the other comes down, tracing the classic hyperbola of Boyle's law.",
+          "xLabel": "Pressure (atm)",
+          "yLabel": "Volume (L)",
+          "caption": "For 1 mole of gas at 273.15 K (0°C), a pressure of 0.5, 1, 2, or 4 atm corresponds to a volume of 44.83, 22.41, 11.21, or 5.60 liters — the 1 atm point is the familiar 22.4 L/mol molar volume at standard conditions."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Solve For",
+            "meaning": "Which of the four state variables to solve for: pressure, volume, moles, or temperature.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Pressure",
+            "meaning": "Gas pressure — entered directly, or computed as an output.",
+            "unit": "atm"
+          },
+          {
+            "symbol": "Volume",
+            "meaning": "Gas volume — entered directly, or computed as an output.",
+            "unit": "L"
+          },
+          {
+            "symbol": "Moles",
+            "meaning": "Amount of gas — entered directly, or computed as an output.",
+            "unit": "mol"
+          },
+          {
+            "symbol": "Temperature",
+            "meaning": "Gas temperature — entered directly, or computed as an output.",
+            "unit": "K"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Solving for pressure requires a positive volume",
+            "description": "Rearranging PV = nRT to P = nRT/V divides by volume — a zero or negative volume returns a \"zero-volume\" error rather than an infinite or nonsensical pressure."
+          },
+          {
+            "title": "Solving for volume requires a positive pressure",
+            "description": "Rearranging to V = nRT/P divides by pressure — a zero or negative pressure returns a \"zero-pressure\" error rather than an infinite or nonsensical volume."
+          },
+          {
+            "title": "Solving for moles requires a positive temperature",
+            "description": "Rearranging to n = PV/(RT) divides by temperature — a zero or negative temperature (which isn't physically meaningful on the Kelvin scale anyway) returns a \"zero-temperature\" error."
+          },
+          {
+            "title": "Solving for temperature requires a positive mole count",
+            "description": "Rearranging to T = PV/(nR) divides by moles — a zero or negative mole count returns a \"zero-moles\" error rather than an infinite or nonsensical temperature."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the gas constant R equal 0.0820574 here instead of the more commonly cited 8.314?",
+            "answer": "8.314 J/(mol·K) is R expressed in SI units (joules, pascals, cubic meters) — this calculator instead uses the chemistry-lab-friendly units of atmospheres and liters, where R works out to 0.0820574 L·atm/(mol·K). Both are the same physical constant, just expressed in different, equally valid unit systems."
+          },
+          {
+            "question": "Why do a pressure of 1 atm and 273.15 K give a volume of exactly 22.4 L per mole?",
+            "answer": "This is the standard molar volume of an ideal gas at STP (standard temperature and pressure), a widely memorized reference point in chemistry — it's not a coincidence, but a direct consequence of plugging n = 1 mol, T = 273.15 K, and P = 1 atm into PV = nRT and solving for V, which is exactly what this tool's example does."
+          },
+          {
+            "question": "Why does the calculator require temperature in Kelvin instead of Celsius?",
+            "answer": "The ideal gas law is only valid with an absolute temperature scale, where zero represents the true absence of thermal energy — Celsius has an arbitrary zero point (the freezing point of water) that would make the PV = nRT relationship mathematically break down, since a gas at 0°C doesn't have zero volume or pressure. Kelvin starts at absolute zero, making the proportionality in the law hold correctly."
+          },
+          {
+            "question": "How closely does the ideal gas law match real gas behavior?",
+            "answer": "It's a good approximation for many gases at ordinary pressures and temperatures, but it assumes gas particles have no volume and no intermolecular attraction — assumptions that break down at high pressure or low temperature, where real gases deviate noticeably. For everyday chemistry calculations at typical lab conditions, though, the ideal gas law is accurate enough to be the standard starting point."
+          }
+        ]
+      },
+      "chemical-equation-balancer": {
+        "version": "v1",
+        "description": "Technical reference for the Chemical Equation Balancer: how the matrix method finds the smallest whole-number coefficients that conserve every element, the input it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Atoms Balance on Both Sides",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Method",
+          "modesValue": "Matrix",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "For every element: (atoms in reactants) = (atoms in products)  |  Solved as M·x = 0 via exact-fraction Gaussian elimination",
+          "note": "Balancing means finding a set of coefficients — one per reactant and product — such that the total count of every element is identical on both sides; this tool finds that set by treating it as a linear algebra problem: the coefficients that make a signed element-count matrix multiply out to zero."
+        },
+        "flowchart": {
+          "intro": "Rather than trial-and-error guessing, the tool builds and solves a system of linear equations, one per chemical element involved.",
+          "steps": [
+            "Split the equation on its arrow (->, -->, =, or →) into reactant and product terms, separated by + on each side",
+            "Parse every term's chemical formula into element counts, including parenthesized groups and hydrate notation",
+            "Build a matrix where each row is an element and each column is a term, with reactant counts positive and product counts negative — so any coefficient vector satisfying matrix × coefficients = 0 conserves every element",
+            "Reduce the matrix to row-echelon form using exact fraction arithmetic (not floating-point) via Gaussian elimination, then find the solution space by setting one free variable to 1",
+            "Scale every coefficient by the least common multiple of their denominators, divide out any common factor, and confirm every resulting coefficient is a positive whole number"
+          ],
+          "caption": "Balancing recast as solving a system of linear equations — one equation per element, exactly instead of approximately."
+        },
+        "anatomy": {
+          "intro": "For the combustion of methane, CH₄ + 2O₂ → CO₂ + 2H₂O, every element's atom count matches exactly between the reactant side and the product side.",
+          "labelC": "C",
+          "labelH": "H",
+          "labelO": "O",
+          "reactantsLabel": "Reactants: CH₄ + 2O₂ (9 atoms)",
+          "reactantsCaption": "The reactant side: 1 carbon, 4 hydrogen, and 4 oxygen atoms (2 from each of the two O₂ molecules).",
+          "productsLabel": "Products: CO₂ + 2H₂O (9 atoms)",
+          "caption": "The product side: the same 1 carbon, 4 hydrogen, and 4 oxygen atoms (2 from CO₂, 2 from the two H₂O molecules) — nothing created or destroyed, just rearranged."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Equation",
+            "meaning": "The unbalanced chemical equation, with reactants and products separated by an arrow (->, -->, =, or →) and terms on each side separated by +.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An empty equation is rejected immediately",
+            "description": "Submitting blank or whitespace-only input returns an \"empty-equation\" error before any parsing is attempted, rather than a confusing downstream failure."
+          },
+          {
+            "title": "A missing arrow or missing terms on either side is invalid",
+            "description": "The equation must contain one of ->, -->, =, or → to separate reactants from products, and each side must contain at least one term — anything else returns an \"invalid-equation\" error explaining the required format."
+          },
+          {
+            "title": "An unrecognized element symbol is rejected by name",
+            "description": "If any formula contains a symbol that isn't in the tool's periodic table (commonly a typo, like \"Xx\"), it returns an \"unknown-element\" error naming the specific unrecognized symbol, rather than a generic parse failure."
+          },
+          {
+            "title": "An equation with no valid whole-number balance is flagged, not silently approximated",
+            "description": "If the linear system has no free variable (already fully constrained with no solution) or the smallest solution includes a zero or negative coefficient, the tool returns a \"cannot-balance\" error — this can happen when a formula is mistyped in a way that's still chemically parseable but doesn't actually represent a valid reaction."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why use exact fractions instead of decimal numbers for the calculation?",
+            "answer": "Chemical equation coefficients must be exact whole numbers — a coefficient like 2.0000000001 from accumulated floating-point rounding error would be wrong, even if visually indistinguishable from 2. Using exact fractions (built from arbitrary-precision integers) throughout the elimination process guarantees the final coefficients are precisely correct, not just numerically close."
+          },
+          {
+            "question": "What does \"the matrix method\" mean, and how is it different from balancing by trial and error?",
+            "answer": "Trial and error works by guessing coefficients and adjusting them until the atom counts match — feasible for simple equations but slow and error-prone for complex ones. The matrix method instead treats balancing as a formal linear algebra problem (finding the null space of the element-count matrix), which solves any balanceable equation systematically and correctly on the first attempt, regardless of complexity."
+          },
+          {
+            "question": "Why does the tool support hydrate notation like CuSO₄·5H₂O?",
+            "answer": "Many real compounds are hydrates — crystals that incorporate a fixed number of water molecules into their structure — and equations involving them are common in chemistry. The formula parser recognizes the middle-dot (or bullet or period) hydrate notation and correctly multiplies the water molecule's element counts by the hydrate number before merging them into the compound's total atom count."
+          },
+          {
+            "question": "What does it mean if the tool says an equation \"cannot be balanced\"?",
+            "answer": "This means the linear system describing the equation has no valid whole-number solution with only positive coefficients — in practice, this almost always indicates a typo in one of the chemical formulas (a wrong subscript, a missing element, or a formula that doesn't correspond to a real, valid compound) rather than a limitation of the balancing method itself, which will find a solution whenever one mathematically exists."
+          }
+        ]
+      },
+      "stoichiometry-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Stoichiometry Calculator: how mole-ratio stoichiometry converts a known amount of one substance into an equivalent amount of another using a balanced equation's coefficients, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Moles Scale by the Coefficient Ratio",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Amount Units",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "moles(target) = moles(known) × (target coefficient ÷ known coefficient)  |  grams = moles × molar mass",
+          "note": "The core of stoichiometry is a single mole ratio taken from a balanced equation's coefficients — everything else is unit conversion on either end, turning a known amount in grams into moles before applying the ratio, and turning the resulting target moles back into grams if that's what's wanted."
+        },
+        "flowchart": {
+          "intro": "The known amount travels through moles as a common currency, regardless of which units it started or ends in.",
+          "steps": [
+            "Validate that both stoichiometric coefficients are greater than zero, and the known amount is zero or more",
+            "Look up the molar mass of both the known and target substances by parsing their chemical formulas",
+            "Convert the known amount to moles: use it directly if already in moles, or divide by the known substance's molar mass if given in grams",
+            "Apply the mole ratio from the balanced equation: multiply known moles by (target coefficient ÷ known coefficient) to get target moles",
+            "Convert target moles to the requested output unit: leave as moles, or multiply by the target substance's molar mass to get grams"
+          ],
+          "caption": "Known amount to moles, moles scaled by the coefficient ratio, target moles to the requested unit — three conversions bridging two substances."
+        },
+        "anatomy": {
+          "intro": "For the ammonia synthesis reaction N₂ + 3H₂ → 2NH₃, the mole ratio between hydrogen (coefficient 3) and ammonia (coefficient 2) is a fixed 2:3 — every mole of hydrogen consumed produces two-thirds of a mole of ammonia.",
+          "xLabel": "Moles of H₂ (known)",
+          "yLabel": "Moles of NH₃ (target)",
+          "caption": "3, 6, 9, or 12 moles of H₂ produce 2, 4, 6, or 8 moles of NH₃ — a straight line whose slope is exactly the 2:3 coefficient ratio."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Known Formula",
+            "meaning": "Chemical formula of the substance whose amount is already known.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Known Coefficient",
+            "meaning": "The known substance's coefficient in the balanced equation. Must be greater than zero.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Known Amount",
+            "meaning": "The known quantity of the known substance. Must be zero or more.",
+            "unit": "g or mol"
+          },
+          {
+            "symbol": "Known Unit",
+            "meaning": "Whether the known amount is given in grams or moles.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Target Formula",
+            "meaning": "Chemical formula of the substance whose amount is being solved for.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Target Coefficient",
+            "meaning": "The target substance's coefficient in the balanced equation. Must be greater than zero.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Target Unit",
+            "meaning": "Whether the target amount should be returned in grams or moles.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Both coefficients must be strictly positive",
+            "description": "A coefficient of zero or less returns an \"invalid-coefficient\" error — a stoichiometric coefficient of zero would mean that substance isn't actually part of the reaction, which doesn't fit the mole-ratio calculation."
+          },
+          {
+            "title": "The known amount can't be negative",
+            "description": "A negative known amount returns an \"invalid-amount\" error — a negative quantity of a substance isn't a meaningful chemistry input, though zero is explicitly allowed (correctly producing zero of the target substance)."
+          },
+          {
+            "title": "Both formulas are independently validated before any conversion happens",
+            "description": "The known and target formulas are each parsed and checked separately, returning \"invalid-known-formula\" or \"invalid-target-formula\" with a specific error detail identifying which one failed and why, rather than a single generic error that doesn't say which side of the reaction has the problem."
+          },
+          {
+            "title": "Molar mass is only computed, never required from the user",
+            "description": "Unlike some stoichiometry tools that ask you to look up and enter molar mass separately, this calculator derives both substances' molar masses automatically from their formulas — reducing the chance of a manual lookup error propagating into the final answer."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the calculator need coefficients from a balanced equation instead of figuring them out itself?",
+            "answer": "Stoichiometric coefficients depend on the specific reaction being described, which this tool doesn't know on its own — it needs you to supply the already-balanced coefficients (for example, from the Chemical Equation Balancer) for the known and target substances so it can compute their ratio. Balancing the equation and converting between substances are treated as two separate, composable steps."
+          },
+          {
+            "question": "Why convert to moles first instead of converting grams directly to grams?",
+            "answer": "The stoichiometric ratio between two substances in a reaction is fundamentally a mole ratio (from the balanced equation's coefficients), not a mass ratio — different substances have different molar masses, so a direct gram-to-gram conversion would need to bake in both molar masses and the mole ratio at once. Converting to moles first keeps each step simple and mirrors how the calculation is actually taught."
+          },
+          {
+            "question": "What happens if I enter a known amount of zero?",
+            "answer": "The calculation proceeds normally and correctly returns zero for the target amount — zero moles of a known substance mathematically converts to zero moles (and therefore zero grams) of the target substance, since the mole ratio is just a multiplier."
+          },
+          {
+            "question": "How is this different from the Molarity Calculator?",
+            "answer": "The Molarity Calculator works with a single substance in a single solution, computing concentration or handling dilution. This calculator converts between two different substances that participate in the same balanced reaction, using their stoichiometric coefficients — a molarity problem asks \"how concentrated is this solution,\" while a stoichiometry problem asks \"how much of this other substance does this amount produce or require.\""
+          }
+        ]
+      },
+      "molar-mass-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Molar Mass Calculator: how a chemical formula is parsed and summed into a total molar mass with a per-element breakdown, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Element Contributions to Total Mass",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Notation Types",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Molar mass = Σ (atomic weight of element × count of that element in the formula)",
+          "note": "Every compound's molar mass is simply the sum of its constituent atoms' standard atomic weights, each multiplied by how many times that element appears in the formula — the entire calculation hinges on correctly parsing the formula into an element-to-count mapping first."
+        },
+        "flowchart": {
+          "intro": "Formula parsing does the real work here; once element counts are known, computing the total is a simple sum.",
+          "steps": [
+            "Recursively parse the formula character by character: element symbols (with an optional trailing count), and parenthesized or bracketed groups (with an optional trailing multiplier applied to everything inside)",
+            "If the formula contains hydrate notation (a middle dot, bullet, or period followed by a number and more formula, like CuSO₄·5H₂O), parse both segments separately and scale the second segment's counts by its multiplier before merging",
+            "Look up each parsed element's standard atomic weight from a table of IUPAC conventional values",
+            "Multiply each element's count by its atomic weight to get that element's mass contribution (subtotal)",
+            "Sum every element's subtotal to get the compound's total molar mass"
+          ],
+          "caption": "A recursive-descent parser converts the formula text into element counts, then a simple weighted sum produces the total."
+        },
+        "anatomy": {
+          "intro": "For glucose, C₆H₁₂O₆, the total molar mass splits unevenly across its three elements — oxygen contributes the most despite having the fewest atoms, because it's the heaviest of the three per atom.",
+          "labelC": "Carbon",
+          "labelH": "Hydrogen",
+          "labelO": "Oxygen",
+          "totalLabel": "Glucose (C₆H₁₂O₆): 180.156 g/mol",
+          "caption": "Carbon contributes 72.066 g/mol (6 × 12.011), hydrogen 12.096 g/mol (12 × 1.008), and oxygen 95.994 g/mol (6 × 15.999) — oxygen's six atoms outweigh hydrogen's twelve."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Formula",
+            "meaning": "The chemical formula to parse, supporting element counts, parenthesized/bracketed groups, and hydrate notation.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An empty formula is rejected immediately",
+            "description": "Blank or whitespace-only input returns an \"empty-formula\" error before parsing begins, rather than a confusing downstream failure or a silent zero result."
+          },
+          {
+            "title": "An unrecognized element symbol is rejected by name",
+            "description": "If a candidate symbol (like \"Xx\" or a genuine typo) doesn't match any entry in the atomic weight table, the tool returns an \"unknown-element\" error identifying the specific unrecognized text, checking progressively shorter substrings (e.g., trying \"Co\" before falling back to \"C\") so real two-letter symbols are still matched correctly."
+          },
+          {
+            "title": "Unbalanced parentheses or brackets are caught explicitly",
+            "description": "A closing \")\" or \"]\" that doesn't match the most recently opened group, or a group that's opened but never closed, returns an \"unbalanced-parentheses\" error identifying exactly where the mismatch occurred, rather than silently ignoring the unmatched character."
+          },
+          {
+            "title": "Hydrate notation scales only the segment after the dot",
+            "description": "In a formula like CuSO₄·5H₂O, the leading multiplier (5) applies only to the water molecule's element counts, not to the entire formula before the dot — the two segments are parsed independently and merged, with the multiplier scaling only the second segment."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do some elements have a bracketed or approximate-looking atomic weight?",
+            "answer": "Elements with no stable isotopes (mostly heavy, radioactive elements) don't have a single well-defined natural atomic weight the way stable elements do — for those, the tool uses the mass number of the most stable known isotope as a standard reference value, following IUPAC convention, since there's no natural isotopic mixture to average."
+          },
+          {
+            "question": "Why does the formula parser support both parentheses and brackets?",
+            "answer": "Both are used in real chemical notation for grouping — square brackets are especially common in coordination compounds and complex ions (like [Cu(NH₃)₄]²⁺) that sometimes nest inside parenthesized groups or vice versa. Supporting both, and letting them nest inside each other correctly, lets the parser handle formulas as they're actually written in chemistry rather than requiring a simplified subset."
+          },
+          {
+            "question": "What is hydrate notation, and why does it need special handling?",
+            "answer": "A hydrate is a crystalline compound that incorporates a fixed, whole number of water molecules into its structure, conventionally written with a middle dot before the water count, like CuSO₄·5H₂O (copper sulfate pentahydrate). Since the water molecules are a separate part of the formula with their own multiplier, they need to be parsed and scaled independently from the main compound before their atom counts are merged in, rather than being read as one continuous formula."
+          },
+          {
+            "question": "How is this different from the Stoichiometry Calculator?",
+            "answer": "This tool computes the molar mass of a single formula in isolation, with a full per-element breakdown of where that mass comes from. The Stoichiometry Calculator uses molar mass computation as one internal step (via the same formula parser) while solving a larger problem — converting a known amount of one substance into an equivalent amount of a different substance in a balanced reaction."
+          }
+        ]
       }
     }
   }

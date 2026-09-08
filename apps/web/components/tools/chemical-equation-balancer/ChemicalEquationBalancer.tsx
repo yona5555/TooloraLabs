@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BalancerInputPanel from "./BalancerInputPanel";
 import BalancerResult from "./BalancerResult";
 import BalancerQuickReference from "./BalancerQuickReference";
@@ -112,6 +113,7 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
           }
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="chemical-equation-balancer" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <BalancerQuickReference />
             </div>
