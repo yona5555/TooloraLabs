@@ -25862,6 +25862,1215 @@
             "answer": "Separar el total antes de impuesto del total general (que incluye impuesto) hace posible ver cuánto del ingreso combinado a través de todas las facturas es valor de venta real frente a cuánto es impuesto recaudado en nombre de una autoridad fiscal; una distinción que importa para la contabilidad y los reportes fiscales."
           }
         ]
+      },
+      "tdee-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de TDEE: cómo se combinan el metabolismo basal y el nivel de actividad para formar la necesidad calórica diaria, y cómo un objetivo de peso se convierte en un objetivo calórico, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "El nivel de actividad lo cambia todo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Niveles de actividad",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "TMB (Mifflin-St Jeor) = 10×peso(kg) + 6.25×altura(cm) − 5×edad ± 5  |  TDEE = TMB × multiplicador de actividad",
+          "note": "El TDEE se construye en dos etapas: primero se estima el gasto energético en reposo (TMB) a partir de medidas corporales, luego se escala con un multiplicador de actividad que tiene en cuenta las calorías quemadas por el movimiento y el ejercicio además del metabolismo en reposo."
+        },
+        "flowchart": {
+          "intro": "Se admiten dos fórmulas de TMB distintas, pero a partir de ese punto todo cálculo funciona igual.",
+          "steps": [
+            "Calcular la TMB usando Mifflin-St Jeor (peso, altura, edad, sexo) o, si se conoce el porcentaje de grasa corporal, Katch-McArdle (que usa la masa magra en lugar del peso total)",
+            "Multiplicar la TMB por el multiplicador del nivel de actividad seleccionado (1.2 para sedentario hasta 1.9 para muy activo) para obtener el TDEE",
+            "Si se dio un objetivo de cambio de peso semanal, convertirlo en un ajuste calórico diario usando 7,700 kcal por kilogramo de grasa corporal, dividido entre 7 días",
+            "Sumar ese ajuste diario al TDEE (negativo para un objetivo de pérdida, positivo para uno de ganancia) para obtener el objetivo calórico diario, sin dejarlo nunca bajar de cero",
+            "Marcar el ajuste como \"agresivo\" si supera el 35% del TDEE, un techo de sostenibilidad común para un déficit o superávit calórico"
+          ],
+          "caption": "El proceso de dos etapas desde medidas corporales hasta un objetivo calórico diario ajustado por un objetivo de peso."
+        },
+        "anatomy": {
+          "intro": "El mismo metabolismo en reposo produce necesidades energéticas diarias totales muy distintas según cuán activa sea una persona; el nivel de actividad no es un ajuste menor, suele ser el factor individual más grande en la cifra final.",
+          "labelSedentary": "Sedentario (×1.2)",
+          "labelModerate": "Moderado (×1.55)",
+          "labelVeryActive": "Muy activo (×1.9)",
+          "caption": "Para una TMB de 1,500 kcal, el TDEE va de 1,800 kcal sedentario a 2,850 kcal muy activo: el mismo cuerpo, una diferencia diaria de 1,050 kcal."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Peso",
+            "meaning": "Peso corporal, usado por ambas fórmulas de TMB.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Altura",
+            "meaning": "Altura, usada por la fórmula de Mifflin-St Jeor.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Edad",
+            "meaning": "Edad en años, usada por la fórmula de Mifflin-St Jeor.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "Sexo",
+            "meaning": "Usado para aplicar el ajuste correcto en la fórmula de Mifflin-St Jeor (+5 para hombres, −161 para mujeres).",
+            "unit": "hombre / mujer"
+          },
+          {
+            "symbol": "% de Grasa Corporal",
+            "meaning": "Opcional: cuando se proporciona, cambia el cálculo de TMB a Katch-McArdle, que usa la masa magra en lugar del peso total.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Nivel de Actividad",
+            "meaning": "Cuánto movimiento y ejercicio ocurre más allá del reposo, de sedentario a muy activo.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Cambio de Peso Semanal",
+            "meaning": "Un objetivo opcional con signo: negativo para perder peso, positivo para ganar, cero para mantener.",
+            "unit": "kg/semana"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Medidas corporales inválidas o no positivas",
+            "description": "Si el peso, la altura o la edad no son un número positivo finito, el cálculo de TMB correspondiente devuelve 0 en lugar de un resultado negativo o NaN, una señal clara de que las entradas no eran utilizables, en lugar de un número incorrecto engañosamente específico."
+          },
+          {
+            "title": "Katch-McArdle requiere un porcentaje de grasa corporal válido",
+            "description": "La fórmula de Katch-McArdle (TMB basada en masa magra) solo se ejecuta cuando el porcentaje de grasa corporal es un valor válido entre 0 y 100; fuera de ese rango, o si se omite, la herramienta recurre a Mifflin-St Jeor, que solo necesita peso, altura, edad y sexo."
+          },
+          {
+            "title": "El objetivo calórico nunca es negativo",
+            "description": "Para un objetivo agresivo de pérdida de peso que matemáticamente implicaría un objetivo calórico diario negativo, la herramienta limita el resultado a cero en lugar de mostrar un número negativo sin sentido."
+          },
+          {
+            "title": "La marca \"agresivo\" es un porcentaje del TDEE, no un número absoluto",
+            "description": "El mismo déficit de 500 kcal/día es leve para alguien con un TDEE de 3,000 kcal pero agresivo para alguien con un TDEE de 1,600 kcal; la herramienta compara el ajuste con el propio TDEE del individuo (marcando cualquier cosa por encima del 35%) en lugar de usar un umbral calórico fijo único para todos."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta ofrece dos fórmulas de TMB diferentes?",
+            "answer": "Mifflin-St Jeor solo necesita peso, altura, edad y sexo, y es precisa para la mayoría de las personas, pero puede errar en personas visiblemente musculosas o muy delgadas porque solo ve el peso corporal total, no cuánto de ese peso es músculo frente a grasa. Katch-McArdle resuelve esto usando la masa magra directamente, pero solo es utilizable cuando realmente conoce su porcentaje de grasa corporal."
+          },
+          {
+            "question": "¿Por qué el nivel de actividad importa tanto para la cifra final?",
+            "answer": "La TMB solo mide la energía que su cuerpo quema en reposo total, esencialmente acostado. Todo lo demás que hace en un día (caminar, trabajar, hacer ejercicio) quema calorías adicionales además de eso, y el multiplicador de actividad es cómo la herramienta lo tiene en cuenta. Para una persona activa, la actividad puede fácilmente representar más calorías diarias que el metabolismo en reposo."
+          },
+          {
+            "question": "¿Qué significa la marca \"agresivo\", y por qué 35%?",
+            "answer": "Un déficit o superávit calórico demasiado grande en relación con sus calorías de mantenimiento se vuelve difícil de sostener y aumenta el riesgo de perder masa muscular magra (durante un corte) o ganar exceso de grasa (durante un volumen) en lugar del resultado deseado. El 35% del TDEE es un techo de regla general ampliamente usado en la guía de nutrición deportiva, más allá del cual un objetivo se considera agresivo en lugar de un ritmo constante y sostenible."
+          },
+          {
+            "question": "¿Cómo se convierte un objetivo de cambio de peso semanal en una cifra calórica diaria?",
+            "answer": "La herramienta usa la aproximación común de que aproximadamente 7,700 kilocalorías corresponden a 1 kilogramo de grasa corporal. Un objetivo semanal se convierte en un ajuste calórico diario multiplicando los kilogramos semanales por 7,700 y dividiendo entre 7 días; ese ajuste diario se suma (o se resta) al TDEE para obtener el objetivo calórico diario."
+          }
+        ]
+      },
+      "bmi-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de IMC: cómo se calculan el Índice de Masa Corporal y el rango de peso saludable, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Las cuatro categorías de IMC",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categorías",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "IMC = peso(kg) / altura(m)²  |  Rango de peso saludable = 18.5 × altura(m)² a 24.9 × altura(m)²",
+          "note": "El IMC es simplemente el peso dividido entre la altura al cuadrado, un único número que no distingue entre músculo y grasa, por lo que aquí se combina con un rango de peso saludable calculado ejecutando la misma fórmula a la inversa en los dos límites de categoría estándar."
+        },
+        "flowchart": {
+          "intro": "La misma fórmula principal produce tanto el valor de IMC en sí como el rango de peso saludable, solo aplicada en direcciones opuestas.",
+          "steps": [
+            "Convertir la altura de centímetros a metros",
+            "Dividir el peso entre la altura al cuadrado para obtener el valor de IMC, redondeado a un decimal",
+            "Comparar el valor de IMC con los umbrales de categoría estándar (18.5, 25, 30) para asignar bajo peso, peso normal, sobrepeso u obesidad",
+            "Ejecutar la fórmula de IMC a la inversa en 18.5 y 24.9 (los límites estándar del rango \"normal\") usando la altura ingresada para calcular el rango de peso saludable en las mismas unidades que la entrada"
+          ],
+          "caption": "Una fórmula, aplicada hacia adelante para obtener el IMC y a la inversa para obtener el rango de peso saludable."
+        },
+        "anatomy": {
+          "intro": "El IMC se sitúa en una única recta numérica, y es la posición relativa a tres límites fijos, no el número bruto por sí solo, lo que determina la categoría.",
+          "labelUnderweight": "Bajo peso",
+          "labelNormal": "Normal",
+          "labelOverweight": "Sobrepeso",
+          "labelObesity": "Obesidad",
+          "caption": "Los tres límites que dividen la escala de IMC en cuatro categorías; un IMC de 22 (marcado) cae sólidamente en el rango de peso normal."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Altura",
+            "meaning": "Altura, convertida internamente a metros para el cálculo.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Peso",
+            "meaning": "Peso corporal.",
+            "unit": "kg"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los límites de categoría son estrictos, no redondeados",
+            "description": "Un IMC de exactamente 25.0 cae en Sobrepeso, no en peso Normal, ya que la comprobación de categoría usa \"menor que 25\" para Normal; el IMC mostrado se redondea a un decimal para facilitar la lectura, pero la categoría se asigna a partir del valor sin redondear."
+          },
+          {
+            "title": "El rango de peso saludable usa 24.9, no 25.0, como límite superior",
+            "description": "El límite superior del rango de peso saludable se calcula en un IMC de 24.9 en lugar de exactamente 25, un pequeño margen deliberado para que el peso \"saludable\" mostrado no caiga exactamente en el límite de sobrepeso."
+          },
+          {
+            "title": "Sin límite inferior en altura o peso",
+            "description": "La calculadora no rechaza un valor de altura o peso inusualmente pequeño; una altura cercana a cero produciría un IMC extremadamente grande (y sin sentido), ya que la fórmula divide entre la altura al cuadrado, así que los resultados deben verificarse contra medidas humanas realistas."
+          },
+          {
+            "title": "El IMC no distingue el músculo de la grasa",
+            "description": "Dos personas con IMC idéntico pueden tener composiciones corporales muy diferentes; un atleta musculoso y una persona con poca masa muscular pueden caer en la misma categoría de IMC a pesar de perfiles de salud muy distintos, por lo que esta herramienta existe junto a (no en lugar de) la Calculadora de Grasa Corporal."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el límite superior del rango de peso saludable es 24.9 en lugar de 25?",
+            "answer": "Un IMC de exactamente 25.0 se categoriza como Sobrepeso, no como peso Normal, así que el límite superior del rango de peso saludable se calcula deliberadamente en 24.9, justo debajo del umbral de sobrepeso, para que la cifra de peso saludable mostrada no caiga exactamente en esa línea límite."
+          },
+          {
+            "question": "¿Por qué el IMC no tiene en cuenta la masa muscular?",
+            "answer": "El IMC fue diseñado como una herramienta de detección simple a nivel poblacional que usa solo la altura y el peso; no tiene forma de distinguir un kilogramo de músculo de un kilogramo de grasa, ya que ambos pesan lo mismo. Esta es una limitación bien conocida, por lo que una persona muy musculosa puede registrarse como \"con sobrepeso\" según el IMC a pesar de tener poca grasa corporal."
+          },
+          {
+            "question": "¿Por qué la herramienta muestra un rango de peso saludable en lugar de un único peso ideal?",
+            "answer": "La categoría estándar de IMC de peso Normal abarca un rango (18.5 a 24.9), no un único punto; dado que un IMC saludable realmente cubre un rango de tamaños corporales para cualquier altura dada, la herramienta muestra el rango de peso completo correspondiente a esa banda de IMC en lugar de elegir un número \"ideal\" arbitrario dentro de él."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre el rango de peso saludable de esta herramienta y la Calculadora de Peso Ideal?",
+            "answer": "El rango de esta herramienta proviene directamente de la fórmula de IMC aplicada en límites de IMC fijos (18.5 y 24.9), mientras que la Calculadora de Peso Ideal usa cuatro fórmulas clínicas separadas (Devine, Robinson, Miller, Hamwi) desarrolladas independientemente para estimar el peso corporal magro/ideal a partir de la altura y el sexo; son enfoques metodológicamente distintos que resultan producir números ampliamente similares."
+          }
+        ]
+      },
+      "ideal-weight-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Peso Ideal: las cuatro fórmulas clínicas clásicas que promedia, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Cuatro fórmulas, una altura",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Fórmulas",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Cada fórmula: peso base + (tasa × pulgadas sobre 60)  |  Devine, Robinson, Miller y Hamwi usan cada una su propia base y tasa",
+          "note": "Las cuatro fórmulas comparten la misma forma: un peso inicial fijo para exactamente 5 pies (60 pulgadas) de altura, más una cantidad fija añadida por cada pulgada adicional; difieren solo en qué peso base y tasa por pulgada eligió cada autor original."
+        },
+        "flowchart": {
+          "intro": "La misma altura alimenta cuatro fórmulas independientes, cada una desarrollada históricamente para un propósito clínico específico (principalmente dosificación de medicamentos), luego promediadas en una cifra resumen.",
+          "steps": [
+            "Convertir la altura de centímetros a pulgadas",
+            "Restar 60 de la altura en pulgadas para obtener cuánto por encima (o por debajo) de 5 pies está la persona",
+            "Aplicar cada una de las cuatro fórmulas: Devine (1974), Robinson (1983), Miller (1983) y Hamwi (1964), usando su propio peso base y tasa por pulgada para el sexo dado",
+            "Promediar los cuatro resultados para producir una única cifra resumen de peso ideal"
+          ],
+          "caption": "Cuatro fórmulas derivadas independientemente aplicadas a la misma altura, luego promediadas."
+        },
+        "anatomy": {
+          "intro": "Debido a que cada fórmula usa un peso base y una tasa por pulgada diferentes, no coinciden exactamente; incluso para la misma altura y sexo, cada una da una respuesta ligeramente distinta.",
+          "labelDevine": "Devine",
+          "labelRobinson": "Robinson",
+          "labelMiller": "Miller",
+          "labelHamwi": "Hamwi",
+          "caption": "Para un hombre de 180 cm (aproximadamente 5'11\"), las cuatro fórmulas abarcan aproximadamente de 71.5 a 77.3 kg: estimaciones cercanas, pero no idénticas, de la misma altura."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Sexo",
+            "meaning": "Cada una de las cuatro fórmulas usa un peso base y una tasa diferentes para hombre versus mujer.",
+            "unit": "hombre / mujer"
+          },
+          {
+            "symbol": "Altura",
+            "meaning": "Altura, convertida internamente a pulgadas para el cálculo.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Una altura menor a 5 pies produce un peso base reducido",
+            "description": "Para una altura menor a 60 pulgadas (unos 152 cm), el término \"pulgadas sobre 60\" se vuelve negativo, lo que resta del peso base de cada fórmula en lugar de sumar; las fórmulas se diseñaron en torno a alturas de adultos y no están limitadas para evitar un resultado poco realista o incluso negativo en alturas muy bajas."
+          },
+          {
+            "title": "Una altura o sexo inválidos devuelven todo en cero",
+            "description": "Si la altura no es un número positivo finito, o el sexo no se reconoce como hombre o mujer, los cuatro resultados de fórmula (y su promedio) vuelven en cero en lugar de un cálculo parcial o engañoso."
+          },
+          {
+            "title": "Son fórmulas clínicas históricas, no investigación moderna",
+            "description": "Las cuatro fórmulas datan de 1964 a 1983 y se desarrollaron principalmente para estimar el peso corporal con fines de dosificación de medicamentos en entornos clínicos, no como un objetivo de bienestar general; son estimaciones puntuales de investigación de décadas de antigüedad, no una recomendación personalizada."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta usa cuatro fórmulas diferentes en lugar de solo una?",
+            "answer": "Devine, Robinson, Miller y Hamwi son cuatro fórmulas desarrolladas independientemente, cada una usada históricamente en distintos contextos clínicos, y ninguna se considera universalmente \"la\" correcta; mostrar las cuatro junto con su promedio da una imagen más completa que presentar la salida de una sola fórmula como si fuera definitiva."
+          },
+          {
+            "question": "¿Cómo se diferencia esto del rango de peso saludable mostrado por la Calculadora de IMC?",
+            "answer": "El rango de la Calculadora de IMC proviene de aplicar la fórmula de IMC a la inversa en límites de IMC fijos (18.5 a 24.9), un rango de detección a nivel poblacional. Las cuatro fórmulas de esta herramienta se desarrollaron independientemente, específicamente para estimar el peso corporal ideal o magro a partir de la altura y el sexo con fines clínicos como la dosificación de medicamentos, usando un enfoque matemático completamente distinto (lineal en la altura, no basado en el IMC en absoluto)."
+          },
+          {
+            "question": "¿Por qué las cuatro fórmulas dan respuestas diferentes para la misma altura?",
+            "answer": "Cada fórmula fue derivada por un investigador diferente a partir de datos de referencia distintos, así que cada una llegó a su propio peso base (el peso estimado a exactamente 5 pies) y su propia tasa de aumento por pulgada adicional; pequeñas diferencias en estos dos números se acumulan en estimaciones finales moderadamente diferentes, aunque las cuatro sigan la misma estructura lineal básica."
+          },
+          {
+            "question": "¿Debería apuntar al peso promedio exacto que muestra esta herramienta?",
+            "answer": "Son fórmulas clínicas de décadas de antigüedad originalmente destinadas a estimar el peso para dosificación de medicamentos, no un objetivo personal de fitness o salud; un peso saludable depende de muchos factores (constitución, masa muscular, edad, condiciones de salud) que ninguna de estas fórmulas tiene en cuenta. Trate el resultado como un punto de referencia histórico aproximado, no como un objetivo específico a alcanzar."
+          }
+        ]
+      },
+      "target-heart-rate-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Frecuencia Cardíaca Objetivo: cómo se derivan la frecuencia cardíaca máxima y las cinco zonas de entrenamiento, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Cinco zonas de entrenamiento",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Zonas de Entrenamiento",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Frecuencia Cardíaca Máxima = 220 − edad  |  Con FC en reposo (Karvonen): objetivo = (máx − reposo) × intensidad% + reposo  |  Sin ella: objetivo = máx × intensidad%",
+          "note": "La frecuencia cardíaca máxima se estima una vez solo a partir de la edad, luego se derivan de ella cinco zonas de entrenamiento, usando el método Karvonen más individualizado (reserva de frecuencia cardíaca) cuando hay una frecuencia cardíaca en reposo disponible, o un simple porcentaje directo del máximo en caso contrario."
+        },
+        "flowchart": {
+          "intro": "Que se proporcione o no una frecuencia cardíaca en reposo cambia cuál de dos fórmulas calcula los límites de cada zona, pero ambas parten de la misma frecuencia cardíaca máxima estimada.",
+          "steps": [
+            "Estimar la frecuencia cardíaca máxima usando la fórmula clásica \"220 menos la edad\"",
+            "Si se proporcionó una frecuencia cardíaca en reposo, calcular la reserva de frecuencia cardíaca (máx menos reposo)",
+            "Para cada una de las cinco bandas de intensidad (50-60% hasta 90-100%), calcular los límites de la zona: con una frecuencia cardíaca en reposo, aplicar el porcentaje a la reserva de frecuencia cardíaca y sumar de nuevo la frecuencia de reposo (método Karvonen); sin ella, aplicar el porcentaje directamente a la frecuencia cardíaca máxima",
+            "Devolver las cinco zonas con su rango de porcentaje y su rango de pulsaciones por minuto"
+          ],
+          "caption": "La única estimación de frecuencia cardíaca máxima alimentando cinco zonas, calculadas con o sin el ajuste Karvonen."
+        },
+        "anatomy": {
+          "intro": "Las cinco zonas dividen el rango completo desde actividad muy ligera hasta el esfuerzo máximo en bandas iguales de 10 puntos porcentuales, cada una con un techo de frecuencia cardíaca progresivamente más alto.",
+          "labelVeryLight": "Muy Ligera",
+          "labelLight": "Ligera",
+          "labelModerate": "Moderada",
+          "labelHard": "Intensa",
+          "labelMaximum": "Máxima",
+          "caption": "Para una persona de 30 años (frecuencia cardíaca máxima 190 lpm) sin frecuencia cardíaca en reposo dada, los techos de las cinco zonas suben de 114 a 190 lpm."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Edad",
+            "meaning": "Usada para estimar la frecuencia cardíaca máxima mediante 220 menos la edad. Debe estar entre 1 y 120.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "Frecuencia Cardíaca en Reposo",
+            "meaning": "Opcional: cuando se proporciona, cambia las cinco zonas al método Karvonen más individualizado (reserva de frecuencia cardíaca).",
+            "unit": "lpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Edad fuera de un rango realista",
+            "description": "La edad debe ser un número finito mayor que 0 y no más de 120; un valor fuera de ese rango devuelve un error \"invalid-age\", ya que la fórmula 220-menos-edad no tiene sentido fuera de las expectativas de vida humanas realistas."
+          },
+          {
+            "title": "Frecuencia cardíaca en reposo fuera de un rango realista",
+            "description": "Si se proporciona, la frecuencia cardíaca en reposo debe ser un número finito mayor que 0 y no más de 220; un valor poco realista devuelve un error \"invalid-resting-heart-rate\" en lugar de producir zonas basadas en un cálculo de reserva sin sentido."
+          },
+          {
+            "title": "Las zonas cambian por completo al añadir la frecuencia cardíaca en reposo",
+            "description": "Añadir una frecuencia cardíaca en reposo no solo ajusta ligeramente las zonas; cambia la fórmula subyacente de un porcentaje de la frecuencia cardíaca máxima a un porcentaje de la reserva de frecuencia cardíaca (método Karvonen), lo que típicamente produce límites de zona notablemente diferentes y más personalizados, especialmente para personas con una frecuencia cardíaca en reposo inusualmente baja o alta."
+          },
+          {
+            "title": "La reserva de frecuencia cardíaca solo se reporta cuando se conoce la frecuencia en reposo",
+            "description": "La cifra de reserva de frecuencia cardíaca (máx menos reposo) solo tiene sentido, y solo se devuelve, cuando realmente se proporcionó una frecuencia cardíaca en reposo; sin ella, se devuelve como nulo en lugar de un valor predeterminado engañoso."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la frecuencia cardíaca máxima se estima solo a partir de la edad?",
+            "answer": "La fórmula \"220 menos la edad\" (Fox et al., 1971) sigue siendo la estimación más citada de la frecuencia cardíaca máxima, a pesar de su conocida imprecisión para cualquier individuo específico; no requiere equipo ni pruebas, solo la edad, por lo que es el punto de partida estándar que usan la mayoría de las calculadoras de zonas de frecuencia cardíaca, incluida esta."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre los dos métodos de cálculo de zonas?",
+            "answer": "Sin una frecuencia cardíaca en reposo, cada zona es simplemente un porcentaje directo de su máximo estimado (por ejemplo, 70% de 190 lpm). Con una frecuencia cardíaca en reposo, el método Karvonen en cambio toma un porcentaje de su reserva de frecuencia cardíaca (máx menos reposo) y suma de nuevo su frecuencia de reposo; esto tiene en cuenta el nivel de forma física individual, ya que dos personas con la misma frecuencia cardíaca máxima pero frecuencias en reposo muy diferentes obtendrán límites de zona distintos y más personalizados."
+          },
+          {
+            "question": "¿Por qué me molestaría en ingresar mi frecuencia cardíaca en reposo?",
+            "answer": "Una frecuencia cardíaca en reposo más baja generalmente indica una mejor forma física cardiovascular, y el método Karvonen usa esa información para ajustar sus zonas de entrenamiento en consecuencia; dos personas de la misma edad obtienen zonas de porcentaje directo idénticas, pero zonas de Karvonen genuinamente diferentes si sus frecuencias cardíacas en reposo difieren, lo que refleja mejor la reserva cardiovascular real de cada persona."
+          },
+          {
+            "question": "¿Por qué hay exactamente cinco zonas?",
+            "answer": "Las cinco zonas (muy ligera, ligera, moderada, intensa, máxima) en bandas de 10 puntos porcentuales del 50% al 100% de intensidad son una convención estándar en fisiología del ejercicio y seguimiento de fitness, correspondiendo a objetivos de entrenamiento reconocibles, desde recuperación activa en el extremo inferior hasta esfuerzo máximo absoluto en la cima."
+          }
+        ]
+      },
+      "sleep-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Sueño: cómo se construyen las sugerencias de hora de acostarse y de despertar a partir de ciclos de sueño de 90 minutos, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Cuánto sueño da cada opción",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Opciones de Ciclo",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Modo despertar: hora de acostarse = hora de despertar − (ciclos × 90 min) − tiempo para dormirse  |  Modo acostarse: hora de despertar = hora de acostarse + tiempo para dormirse + (ciclos × 90 min)",
+          "note": "Cada hora sugerida se construye a partir de la misma unidad, un ciclo de sueño completo de 90 minutos, repetido un número entero de veces (de 6 a 3), bajo la teoría de que despertar entre ciclos en lugar de a mitad de uno se siente con menos aturdimiento."
+        },
+        "flowchart": {
+          "intro": "La misma matemática de ciclos funciona en una de dos direcciones según si conoce su hora de despertar o su hora de acostarse.",
+          "steps": [
+            "Leer qué modo está seleccionado: trabajar hacia atrás desde una hora de despertar conocida, o hacia adelante desde una hora de acostarse conocida",
+            "Para cada una de las cuatro opciones (6, 5, 4 y 3 ciclos completos), multiplicar el número de ciclos por 90 minutos para obtener el tiempo total de sueño",
+            "En modo despertar: restar el tiempo de sueño y el margen para dormirse de la hora de despertar para obtener una hora de acostarse sugerida",
+            "En modo acostarse: sumar el margen para dormirse y el tiempo de sueño a la hora de acostarse para obtener una hora de despertar sugerida",
+            "Envolver el resultado alrededor de la medianoche si cae antes de las 00:00 o después de las 24:00, para que siempre se muestre como una hora de reloj válida"
+          ],
+          "caption": "La misma aritmética del ciclo de 90 minutos ejecutada hacia atrás desde una hora de despertar o hacia adelante desde una hora de acostarse."
+        },
+        "anatomy": {
+          "intro": "Cada opción es simplemente un número diferente de ciclos completos de 90 minutos; más ciclos significa más sueño total, en incrementos fijos de 90 minutos en lugar de un número arbitrario de horas.",
+          "label6": "6 Ciclos",
+          "label5": "5 Ciclos",
+          "label4": "4 Ciclos",
+          "label3": "3 Ciclos",
+          "caption": "Las cuatro opciones sugeridas abarcan de 4.5 a 9 horas de sueño, cada una un número entero de ciclos completos de 90 minutos."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Modo",
+            "meaning": "Si conoce su hora de despertar objetivo (calcular horas de acostarse) o su hora de acostarse (calcular horas de despertar).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Hora",
+            "meaning": "La hora de referencia conocida: la hora de despertar o la hora de acostarse, según el modo.",
+            "unit": "Hora del reloj"
+          },
+          {
+            "symbol": "Tiempo para Dormirse",
+            "meaning": "Cuánto tiempo suele tardar en dormirse después de acostarse. Por defecto 15 minutos.",
+            "unit": "Minutos"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Hora fuera de un rango válido de 24 horas",
+            "description": "La hora de referencia debe ser un número entero de minutos entre 0 y 1439 (es decir, una hora válida dentro de un día); un valor fuera de ese rango devuelve un error \"invalid-time\" en lugar de una hora fuera de límites."
+          },
+          {
+            "title": "Tiempo para dormirse fuera de un rango razonable",
+            "description": "El margen para dormirse debe estar entre 0 y 120 minutos; un valor negativo o uno superior a dos horas devuelve un error \"invalid-fall-asleep-minutes\", ya que cualquiera de los dos produciría una hora sugerida poco realista."
+          },
+          {
+            "title": "Las horas sugeridas envuelven alrededor de la medianoche",
+            "description": "Trabajar hacia atrás desde una hora de despertar temprana, o hacia adelante desde una hora de acostarse tardía, puede empujar una hora sugerida más allá de la medianoche en cualquier dirección; la herramienta lo envuelve correctamente usando aritmética modular para que cada sugerencia sea siempre una hora del día válida, incluso cuando técnicamente cae en el día calendario anterior o siguiente."
+          },
+          {
+            "title": "La longitud del ciclo es un supuesto fijo, no medido",
+            "description": "La longitud del ciclo de 90 minutos es un promedio ampliamente citado, no una medición personalizada; la longitud real del ciclo de sueño varía según la persona y la noche, así que estas sugerencias son un punto de partida heurístico, no una garantía de despertar entre ciclos en una noche cualquiera."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la calculadora trabaja en incrementos de 90 minutos en lugar de solo horas?",
+            "answer": "Un ciclo de sueño completo, pasando por las diferentes etapas de sueño ligero, sueño profundo y REM, tarda aproximadamente 90 minutos en promedio. La idea detrás de las calculadoras de sueño basadas en ciclos es que despertar entre ciclos completos (en lugar de en medio de uno) tiende a sentirse con menos aturdimiento, así que cada hora sugerida se construye a partir de ciclos completos de 90 minutos en lugar de números de horas redondos."
+          },
+          {
+            "question": "¿Por qué la herramienta sugiere 4 horas diferentes en lugar de solo una?",
+            "answer": "No hay una única cantidad \"correcta\" de sueño que le convenga a todos cada noche; las cuatro opciones (6, 5, 4 y 3 ciclos completos, o aproximadamente 9, 7.5, 6 y 4.5 horas) dan un rango de opciones según qué tan temprano necesite despertar o qué tan tarde vaya a acostarse, permitiéndole elegir la mejor opción disponible para esa noche específica."
+          },
+          {
+            "question": "¿Para qué sirve el margen para dormirse, y por qué es por defecto 15 minutos?",
+            "answer": "Acostarse y realmente quedarse dormido no son el mismo momento; la mayoría de las personas tardan algo de tiempo en conciliar el sueño. El margen predeterminado de 15 minutos es un tiempo promedio comúnmente citado para quedarse dormido, añadido al cálculo para que la hora de acostarse sugerida tenga en cuenta estar despierto brevemente antes de que el sueño realmente comience, no solo el momento en que se mete bajo las sábanas."
+          },
+          {
+            "question": "¿Son 90 minutos la duración exacta de mis ciclos de sueño?",
+            "answer": "No necesariamente; 90 minutos es un promedio comúnmente citado, pero la duración real del ciclo de sueño varía de persona a persona e incluso de noche a noche, generalmente en algún lugar entre 70 y 120 minutos. Esta herramienta usa el supuesto estándar de 90 minutos como una heurística práctica, no como una medición de sus ciclos de sueño específicos."
+          }
+        ]
+      },
+      "body-fat-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Grasa Corporal: cómo el método de circunferencia de la Marina de EE. UU. estima el porcentaje de grasa corporal, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Cinco categorías de grasa corporal",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categorías",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Hombres: 86.01×log₁₀(cintura−cuello) − 70.041×log₁₀(altura) + 36.76  |  Mujeres: 163.205×log₁₀(cintura+cadera−cuello) − 97.684×log₁₀(altura) − 78.387",
+          "note": "El método de la Marina de EE. UU. estima la grasa corporal a partir de un pequeño conjunto de circunferencias tomadas con cinta métrica (en pulgadas) en lugar de calibradores de pliegues cutáneos o imágenes, cambiando algo de precisión por una medición que cualquiera puede tomar en casa con solo una cinta métrica."
+        },
+        "flowchart": {
+          "intro": "La fórmula difiere según el sexo (la versión femenina también usa la circunferencia de la cadera), pero ambas siguen la misma estructura basada en logaritmos.",
+          "steps": [
+            "Validar las medidas de circunferencia: la cintura debe superar al cuello (hombres), o la cintura más la cadera debe superar al cuello (mujeres)",
+            "Convertir todas las medidas de centímetros a pulgadas, ya que la fórmula publicada original usa pulgadas",
+            "Para hombres: aplicar la fórmula de dos medidas usando la circunferencia de cintura y cuello más la altura",
+            "Para mujeres: aplicar la fórmula de tres medidas usando la circunferencia de cintura, cadera y cuello más la altura",
+            "Limitar el resultado a un mínimo de 0% (un resultado de fórmula no puede ser negativo de forma significativa), luego categorizarlo usando los umbrales del Consejo Americano del Ejercicio (ACE)"
+          ],
+          "caption": "Fórmulas de circunferencia específicas por sexo, ambas construidas a partir de logaritmos de diferencias de medidas."
+        },
+        "anatomy": {
+          "intro": "El porcentaje de grasa corporal se sitúa en una única escala con límites de categoría que difieren según el sexo; estos son los umbrales masculinos, ya que los niveles de grasa esencial de las mujeres son naturalmente más altos.",
+          "labelEssential": "Esencial",
+          "labelAthletes": "Atletas",
+          "labelFitness": "Buena Forma",
+          "labelAverage": "Promedio",
+          "caption": "Los cuatro límites que dividen la escala de grasa corporal masculina en cinco categorías ACE; 15% (marcado) cae en el rango de Buena Forma."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Sexo",
+            "meaning": "Determina qué fórmula (de dos o tres medidas) y qué umbrales de categoría aplican.",
+            "unit": "hombre / mujer"
+          },
+          {
+            "symbol": "Altura",
+            "meaning": "Altura, usada en ambas fórmulas.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Cuello",
+            "meaning": "Circunferencia del cuello, medida justo debajo de la laringe.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Cintura",
+            "meaning": "Circunferencia de la cintura, en su punto más estrecho (hombres) o en el ombligo (mujeres).",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Cadera",
+            "meaning": "Circunferencia de la cadera en su punto más ancho; requerida para mujeres, ignorada para hombres.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La cintura debe superar al cuello (hombres)",
+            "description": "La fórmula masculina toma log₁₀(cintura − cuello); si la cintura no supera la circunferencia del cuello, esa diferencia sería cero o negativa, lo cual no tiene un logaritmo válido, así que la herramienta rechaza la entrada como \"invalid-measurements\" antes de intentar el cálculo."
+          },
+          {
+            "title": "La cintura más la cadera deben superar al cuello (mujeres)",
+            "description": "De manera similar, la fórmula femenina toma log₁₀(cintura + cadera − cuello); si la medida combinada de cintura y cadera no supera la circunferencia del cuello, la herramienta rechaza la entrada por la misma razón: un valor cero o negativo no tiene un logaritmo válido."
+          },
+          {
+            "title": "Resultado limitado a un mínimo de cero",
+            "description": "Para combinaciones de medidas en el borde del rango válido de la fórmula, el cálculo bruto puede ocasionalmente producir un pequeño número negativo; la herramienta limita el resultado final a 0% en lugar de mostrar un porcentaje de grasa corporal por debajo de cero, lo cual no tendría sentido físico."
+          },
+          {
+            "title": "La medida de cadera es requerida para mujeres, ignorada para hombres",
+            "description": "La fórmula masculina solo usa cintura y cuello; una medida de cadera, si se ingresa, simplemente no forma parte del cálculo. La fórmula femenina requiere la circunferencia de cadera como tercera medida, reflejando dónde tienden a almacenar grasa de forma diferente ambos sexos."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la fórmula usa cintura menos cuello en lugar de solo la cintura?",
+            "answer": "El método de la Marina está diseñado para aislar la acumulación de grasa específicamente alrededor de la zona media en relación con el tamaño de constitución general de una persona; la circunferencia del cuello sirve como un indicador aproximado del tamaño de constitución, así que restarlo de la circunferencia de cintura da una mejor medida relativa de grasa abdominal que la circunferencia de cintura sola."
+          },
+          {
+            "question": "¿Qué tan preciso es el método de la Marina de EE. UU. comparado con otras técnicas de medición de grasa corporal?",
+            "answer": "Cambia algo de precisión por practicidad; los calibradores de pliegues cutáneos, las exploraciones DEXA y el pesaje hidrostático son generalmente más precisos, pero requieren equipo especializado o un técnico capacitado. El método de circunferencia de la Marina solo necesita una cinta métrica flexible, lo que lo hace accesible para el seguimiento repetido en casa, a costa de ser una estimación más aproximada que los métodos de laboratorio."
+          },
+          {
+            "question": "¿Por qué la fórmula femenina necesita una medida de cadera pero la masculina no?",
+            "answer": "El método original de la Marina se desarrolló y validó por separado para cada sexo usando las medidas de circunferencia que mejor predecían la grasa corporal en cada población; para las mujeres, la circunferencia de cadera mejoró significativamente la precisión de la fórmula, mientras que para los hombres no añadió valor predictivo significativo más allá de la cintura y el cuello."
+          },
+          {
+            "question": "¿Por qué los umbrales de categoría de grasa corporal son diferentes para hombres y mujeres?",
+            "answer": "Las mujeres naturalmente tienen un porcentaje más alto de grasa corporal esencial que los hombres, grasa necesaria para la función fisiológica básica, incluida la salud reproductiva, así que el mismo porcentaje de grasa corporal no representa la misma delgadez relativa para ambos sexos, y los umbrales de categoría del Consejo Americano del Ejercicio se establecen por separado para reflejar esa diferencia biológica."
+          }
+        ]
+      },
+      "due-date-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Fecha de Parto: cómo cada uno de los cuatro métodos de datación estima la concepción y la fecha de parto, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "De la fecha de referencia a la fecha de parto",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Métodos de Datación",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Fecha de parto = fecha de concepción estimada + 266 días  |  Estimación de concepción FUM = fecha FUM + (duración del ciclo − 14) días",
+          "note": "Los cuatro métodos de datación funcionan de la misma manera por debajo: estimar una fecha de concepción a partir de la fecha de referencia que conozca, luego sumar el intervalo estándar de 266 días (38 semanas) de concepción a nacimiento para obtener la fecha de parto."
+        },
+        "flowchart": {
+          "intro": "La única diferencia real entre los cuatro métodos es cómo cada uno llega a una fecha de concepción estimada; todo lo que sigue después es idéntico.",
+          "steps": [
+            "Leer cuál de los cuatro métodos está seleccionado: última menstruación (FUM), fecha de concepción conocida, transferencia de FIV de 3 días o transferencia de FIV de 5 días",
+            "Para FUM: estimar la ovulación (y concepción) en la duración del ciclo menos 14 días después del inicio del periodo, ajustando para una duración de ciclo distinta al promedio de 28 días",
+            "Para una fecha de concepción conocida: usar esa fecha directamente como la estimación de concepción",
+            "Para transferencias de FIV: restar 3 o 5 días de la fecha de transferencia, ya que la edad de un embrión transferido en el momento de la transferencia ya se conoce con precisión",
+            "Sumar 266 días a la fecha de concepción estimada para obtener la fecha de parto, y llevar un seguimiento por separado de la edad gestacional, el trimestre y el porcentaje completado en relación con hoy"
+          ],
+          "caption": "Cuatro caminos diferentes hacia la misma fecha de concepción estimada, luego una cuenta regresiva compartida de 266 días hasta la fecha de parto."
+        },
+        "anatomy": {
+          "intro": "Para el método de FUM con un ciclo estándar de 28 días, la última menstruación, la concepción estimada y la fecha de parto caen en puntos fijos a lo largo de la línea de tiempo del embarazo.",
+          "labelLmp": "Última Menstruación",
+          "labelConception": "Concepción (Día 14)",
+          "labelDue": "Fecha de Parto (Día 280)",
+          "caption": "Con un ciclo de 28 días, la concepción se estima 14 días después de la última menstruación, y la fecha de parto sigue 266 días después de eso: 280 días después de la última menstruación en total."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Método",
+            "meaning": "Qué fecha de referencia está proporcionando: última menstruación, fecha de concepción conocida, o transferencia de FIV (3 días o 5 días).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Fecha",
+            "meaning": "La fecha de referencia en sí, interpretada según el método seleccionado.",
+            "unit": "Fecha"
+          },
+          {
+            "symbol": "Duración del Ciclo",
+            "meaning": "Duración promedio del ciclo menstrual. Solo se usa (y solo tiene sentido) para el método FUM. Por defecto 28 días.",
+            "unit": "Días"
+          },
+          {
+            "symbol": "Fecha de Referencia",
+            "meaning": "Opcional: la fecha para la que calcular la edad gestacional y el progreso. Por defecto hoy.",
+            "unit": "Fecha"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Duración del ciclo fuera de rango (solo método FUM)",
+            "description": "Para el método FUM, la duración del ciclo debe estar entre 20 y 45 días; un valor fuera de ese rango devuelve un error \"invalid-cycle-length\", ya que solo se usa (y solo se valida) cuando se selecciona el método FUM."
+          },
+          {
+            "title": "Fecha de referencia en el futuro",
+            "description": "Si la fecha ingresada cae después de la fecha de referencia (normalmente hoy), la herramienta devuelve un error \"date-in-future\" en lugar de calcular una fecha de parto y edad gestacional a partir de un evento que, hasta donde la calculadora puede determinar, aún no ha ocurrido."
+          },
+          {
+            "title": "Los métodos de FIV usan un desplazamiento de días fijo, no un ajuste de duración de ciclo",
+            "description": "A diferencia del método FUM, los dos métodos de FIV no usan la duración del ciclo en absoluto; una transferencia de embrión de 3 o 5 días ya tiene una edad de embrión conocida con precisión, así que la concepción simplemente se estima como 3 o 5 días antes de la fecha de transferencia, sin incertidumbre de duración de ciclo que ajustar."
+          },
+          {
+            "title": "La edad gestacional se mide desde un punto de concepción ajustado, no la fecha de referencia bruta",
+            "description": "La edad gestacional se cuenta convencionalmente desde la última menstruación, no desde la concepción real; así que la herramienta suma de nuevo 14 días a la cifra de días-desde-la-concepción al calcular la edad gestacional, manteniéndola consistente con cómo se expresa estándarmente la datación del embarazo sin importar qué método se usó."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué los cuatro métodos suman exactamente 266 días a la concepción, pero el embarazo total suele describirse como 280 días?",
+            "answer": "266 días (38 semanas) es el intervalo estándar de la concepción real al nacimiento. 280 días (40 semanas) es el intervalo de la última menstruación al nacimiento; los 14 días adicionales son la brecha típica entre el inicio de un periodo y la ovulación/concepción en un ciclo estándar de 28 días. Ambas cifras describen la misma fecha de parto; solo se miden desde dos puntos de partida diferentes."
+          },
+          {
+            "question": "¿Por qué la duración del ciclo solo importa para el método FUM?",
+            "answer": "La duración del ciclo afecta cuántos días después del inicio del periodo se estima que ocurre la ovulación; un ciclo más largo o más corto desplaza esa estimación. Los otros tres métodos (concepción conocida o transferencia de FIV) ya especifican una fecha mucho más cercana a la concepción real, así que no queda ningún tiempo de ovulación por estimar a partir de la duración del ciclo."
+          },
+          {
+            "question": "¿Por qué los dos métodos de FIV restan un número fijo de días en lugar de ajustar según la duración del ciclo?",
+            "answer": "Con la FIV, la edad exacta del embrión en el momento de la transferencia se conoce con precisión gracias al proceso de laboratorio; una transferencia de \"día 3\" o \"día 5\" significa que el embrión tiene exactamente esa cantidad de días desde la fertilización. Esto hace que la datación de la concepción sea exacta en lugar de estimada, por lo que los métodos de FIV usan un desplazamiento fijo en lugar de la estimación dependiente de la duración del ciclo que necesita el método FUM."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la Calculadora de Embarazo?",
+            "answer": "Esta herramienta admite cuatro métodos de datación diferentes (FUM, concepción conocida y dos opciones de transferencia de FIV) y calcula la concepción antes de sumar el intervalo de 266 días. La Calculadora de Embarazo solo acepta una fecha de última menstruación y suma 280 días directamente, sin un paso separado de fecha de concepción ni ajuste de duración de ciclo; un cálculo más simple orientado al seguimiento semanal continuo en lugar de una estimación inicial de fecha de parto a partir de múltiples puntos de partida posibles."
+          }
+        ]
+      },
+      "ovulation-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Ovulación: cómo se estiman la ovulación y la ventana fértil contando hacia atrás desde el siguiente periodo, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Un ciclo, cuatro fechas clave",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Ciclos Proyectados",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Siguiente periodo = último periodo + duración del ciclo  |  Ovulación = siguiente periodo − duración de la fase lútea  |  Ventana fértil = ovulación − 5 días a ovulación + 1 día",
+          "note": "La ovulación se estima trabajando hacia atrás desde el siguiente periodo previsto en lugar de hacia adelante desde el último; la fase lútea (los días después de la ovulación) es mucho más consistente en duración entre ciclos que los días antes de la ovulación, por lo que contar hacia atrás es el enfoque más confiable."
+        },
+        "flowchart": {
+          "intro": "El mismo cálculo de tres pasos se repite una vez para cada uno de los siguientes tres ciclos proyectados.",
+          "steps": [
+            "Predecir la fecha del siguiente periodo sumando la duración del ciclo a la fecha de inicio del último periodo",
+            "Estimar la ovulación restando la duración de la fase lútea de esa fecha del siguiente periodo previsto",
+            "Calcular la ventana fértil como los 5 días antes de la ovulación hasta 1 día después de ella, reflejando cuánto pueden sobrevivir los espermatozoides frente a cuánto tiempo sigue siendo viable el óvulo",
+            "Repetir el mismo cálculo para el segundo y tercer ciclo proyectados, cada uno una duración de ciclo más adelante"
+          ],
+          "caption": "Trabajar hacia atrás desde una fecha de periodo prevista hasta la ovulación y la ventana fértil, repetido a lo largo de tres ciclos."
+        },
+        "anatomy": {
+          "intro": "Dentro de un ciclo de 28 días con una fase lútea de 14 días, la ventana fértil, la ovulación y el siguiente periodo caen todos en puntos fijos contados hacia adelante desde el inicio del último periodo.",
+          "labelFertileStart": "Inicio de la Ventana Fértil",
+          "labelOvulation": "Ovulación",
+          "labelNextPeriod": "Siguiente Periodo",
+          "caption": "La ventana fértil se abre 5 días antes de la fecha de ovulación estimada y se cierra 1 día después de ella, todo contado hacia atrás desde el siguiente periodo previsto."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Fecha del Último Periodo",
+            "meaning": "El primer día de la menstruación más reciente.",
+            "unit": "Fecha"
+          },
+          {
+            "symbol": "Duración del Ciclo",
+            "meaning": "Número promedio de días desde el inicio de un periodo hasta el inicio del siguiente. Por defecto 28 días.",
+            "unit": "Días"
+          },
+          {
+            "symbol": "Duración de la Fase Lútea",
+            "meaning": "Número promedio de días desde la ovulación hasta el siguiente periodo. Por defecto 14 días.",
+            "unit": "Días"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Duración del ciclo fuera de rango",
+            "description": "La duración del ciclo debe estar entre 20 y 45 días; un valor fuera de ese rango devuelve un error \"invalid-cycle-length\", ya que ciclos tan cortos o tan largos caen fuera de lo que este modelo simple de conteo hacia atrás está diseñado para manejar de forma confiable."
+          },
+          {
+            "title": "Duración de la fase lútea fuera de rango",
+            "description": "La duración de la fase lútea debe estar entre 10 y 17 días; un valor fuera de ese rango devuelve un error \"invalid-luteal-phase\", reflejando el rango fisiológico típico de la fase posterior a la ovulación."
+          },
+          {
+            "title": "La ventana fértil es asimétrica alrededor de la ovulación",
+            "description": "La ventana abarca 5 días antes de la ovulación pero solo 1 día después de ella, no un rango simétrico, porque los espermatozoides pueden sobrevivir en el tracto reproductivo hasta unos 5 días, mientras que el óvulo mismo solo es viable durante aproximadamente 24 horas después de la liberación."
+          },
+          {
+            "title": "Los tres ciclos proyectados acumulan la misma estimación",
+            "description": "Cada uno de los tres ciclos proyectados se calcula de la misma manera, solo una duración de ciclo más adelante del último periodo; así que cualquier incertidumbre en la duración del ciclo o la duración de la fase lútea ingresadas se acumula un poco más para las proyecciones del segundo y tercer ciclo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta cuenta hacia atrás desde el siguiente periodo en lugar de hacia adelante desde el último?",
+            "answer": "La fase lútea (el tiempo desde la ovulación hasta el siguiente periodo) es mucho más consistente en duración entre ciclos que la fase folicular (el tiempo desde el último periodo hasta la ovulación), que puede variar considerablemente. Dado que la fecha del siguiente periodo es predecible a partir de la duración del ciclo, contar hacia atrás desde ella usando la duración de fase lútea más estable da una estimación de ovulación más confiable que contar hacia adelante un número fijo de días desde el último periodo."
+          },
+          {
+            "question": "¿Por qué la ventana fértil es de 5 días antes de la ovulación pero solo 1 día después?",
+            "answer": "Esto refleja las vidas biológicas del espermatozoide y el óvulo en lugar de una ventana simétrica arbitraria; los espermatozoides pueden sobrevivir en el tracto reproductivo hasta unos 5 días esperando la ovulación, mientras que un óvulo liberado solo es viable durante unas 24 horas. Las relaciones sexuales en cualquier momento dentro de esa ventana de 6 días pueden potencialmente resultar en concepción."
+          },
+          {
+            "question": "¿Por qué la herramienta proyecta tres ciclos en lugar de solo el siguiente?",
+            "answer": "Mostrar tres ciclos consecutivos a la vez le permite ver el patrón a lo largo de unos meses en lugar de recalcular un ciclo a la vez; útil para planificar con anticipación, ya que las fechas previstas naturalmente cambian según cuándo se espera que comience cada ciclo en relación con el anterior."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la información de fertilidad en las calculadoras de Embarazo o Fecha de Parto?",
+            "answer": "Esta herramienta mira hacia adelante: predice la ovulación próxima y las ventanas fértiles para ciclos que aún no han ocurrido, útil para la planificación de la concepción. Las calculadoras de Embarazo y Fecha de Parto miran hacia atrás desde una última menstruación o fecha de concepción ya conocida, usadas una vez que ya se sospecha o confirma un embarazo, para estimar qué tan avanzado está y cuándo está previsto el parto."
+          }
+        ]
+      },
+      "pregnancy-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Embarazo: cómo se rastrean la edad gestacional, el trimestre y el hito de comparación de tamaño semanal desde la última menstruación, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Los tres trimestres",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Trimestres",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Fecha de parto = fecha de última menstruación + 280 días  |  Edad gestacional (días) = hoy − fecha de última menstruación  |  Trimestre: semanas < 13 → 1.º, semanas < 27 → 2.º, si no 3.º",
+          "note": "Cada cifra que reporta esta herramienta (edad gestacional, trimestre, fecha de parto y porcentaje de progreso) se deriva de un único conteo de días transcurridos desde la última menstruación, usando el supuesto estándar de la regla de Naegele de un embarazo de 280 días (40 semanas)."
+        },
+        "flowchart": {
+          "intro": "Un conteo de días transcurridos alimenta cada otro valor que reporta la herramienta.",
+          "steps": [
+            "Calcular el número de días transcurridos entre la última menstruación y hoy (o una fecha de referencia especificada)",
+            "Convertir ese conteo de días en semanas completadas y días restantes para la cifra de edad gestacional",
+            "Asignar el trimestre según las semanas completadas: menos de 13 semanas es el 1.º trimestre, de 13 a 26 es el 2.º, 27 y más es el 3.º",
+            "Sumar 280 días a la fecha de última menstruación para obtener la fecha de parto, luego calcular cuántos días faltan para ella",
+            "Calcular el porcentaje completado como los días transcurridos divididos entre 280, limitado al 100%, y buscar el hito de comparación de tamaño de esta semana en una tabla semanal fija"
+          ],
+          "caption": "Un único conteo de días transcurridos impulsa la edad gestacional, el trimestre, la fecha de parto y la búsqueda del hito semanal."
+        },
+        "anatomy": {
+          "intro": "El embarazo estándar de 40 semanas se divide en tres trimestres de duración aproximadamente igual, cada uno abarcando una fase de desarrollo distinta.",
+          "labelTrimester1": "1.º Trimestre",
+          "labelTrimester2": "2.º Trimestre",
+          "labelTrimester3": "3.º Trimestre",
+          "totalLabel": "40 Semanas en Total",
+          "caption": "Los tres trimestres abarcan las semanas 0-13, 13-27 y 27-40; no tercios perfectamente iguales, pero cercanos, con el 2.º trimestre durando una semana más que los otros dos."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Fecha de Última Menstruación",
+            "meaning": "El primer día de la última menstruación; la única fecha de referencia de la que se construyen los cálculos de esta herramienta.",
+            "unit": "Fecha"
+          },
+          {
+            "symbol": "Fecha de Referencia",
+            "meaning": "Opcional: la fecha para la que calcular el progreso actual. Por defecto hoy.",
+            "unit": "Fecha"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Fecha de última menstruación en el futuro",
+            "description": "Si la fecha ingresada cae después de la fecha de referencia, la herramienta devuelve un error \"date-in-future\", ya que la edad gestacional no puede calcularse a partir de un punto de partida que, hasta donde la calculadora puede determinar, aún no ha ocurrido."
+          },
+          {
+            "title": "Edad gestacional muy más allá del término completo",
+            "description": "Si el tiempo transcurrido supera los 301 días (280 días más un margen de 3 semanas), la herramienta devuelve un error \"beyond-full-term\": mucho más allá de la duración esperada de un embarazo típico, señalando que la fecha ingresada probablemente ya no sea un punto de referencia preciso para el seguimiento de un embarazo en curso."
+          },
+          {
+            "title": "Los hitos de comparación de tamaño solo están disponibles de la semana 4 a la semana 40",
+            "description": "La tabla semanal de comparación de tamaño comienza en la semana 4 (antes de la cual no hay una comparación significativa que mostrar) y tiene un límite en la semana 40; una edad gestacional más allá de las 40 semanas simplemente continúa mostrando el hito de la semana 40 en lugar de extrapolar más allá de la tabla."
+          },
+          {
+            "title": "Sin ajuste de duración de ciclo, a diferencia del método FUM de la Calculadora de Fecha de Parto",
+            "description": "Esta herramienta siempre suma exactamente 280 días a la fecha de última menstruación, asumiendo un ciclo estándar de 28 días; no pregunta ni ajusta según la duración real del ciclo como lo hace el método FUM de la Calculadora de Fecha de Parto, lo que hace su cálculo más simple pero algo menos personalizado para quienes tienen un ciclo promedio notablemente más corto o más largo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué esta herramienta usa 280 días fijos en lugar de ajustar según la duración del ciclo como la Calculadora de Fecha de Parto?",
+            "answer": "Esta herramienta está construida para un seguimiento semanal ligero y continuo en lugar de una estimación precisa de una sola vez de la fecha de parto; usar el supuesto estándar de 280 días (regla de Naegele) mantiene el cálculo simple. Si desea una fecha de parto ajustada para una duración de ciclo distinta a 28 días, o estimada a partir de una fecha de concepción conocida o transferencia de FIV, la Calculadora de Fecha de Parto admite esos métodos adicionales."
+          },
+          {
+            "question": "¿En qué se basan los hitos de comparación de tamaño semanales?",
+            "answer": "Son medidas medianas aproximadas: longitud cráneo-rabadilla hasta la semana 19, luego longitud cráneo-talón desde la semana 20 en adelante, más peso fetal estimado, extraídas de curvas de crecimiento fetal publicadas estándar. Son promedios ilustrativos para la popular tradición de \"tu bebé tiene el tamaño de un ___\", no mediciones diagnósticas; el tamaño fetal real varía y se evalúa adecuadamente mediante ecografía."
+          },
+          {
+            "question": "¿Por qué los tres trimestres no son exactamente iguales en duración?",
+            "answer": "Los límites de trimestre (13 semanas y 27 semanas) son una convención clínica estándar basada en etapas de desarrollo, no una división matemática de 40 semanas en tercios; esto hace que el 2.º trimestre (semanas 13 a 27) abarque 14 semanas, una semana más que el 1.º y 3.º trimestres, que abarcan cada uno 13 semanas."
+          },
+          {
+            "question": "¿Qué ocurre si ingreso una fecha de última menstruación de hace más de 10 meses?",
+            "answer": "La herramienta devuelve un error \"beyond-full-term\" en cuanto la edad gestacional superaría los 301 días (280 días más un margen de 3 semanas más allá de la fecha de parto típica); en ese punto, la fecha ingresada se trata como un punto de referencia ya no confiable para el seguimiento de lo que sería un embarazo en curso, ya que un embarazo tan lejos de su fecha de parto está muy fuera del rango de seguimiento previsto de esta herramienta."
+          }
+        ]
+      },
+      "macro-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Macros: cómo se dividen los objetivos diarios de proteínas, carbohidratos y grasas a partir de las calorías totales según el objetivo, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Dividiendo 2,000 calorías",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Objetivos",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Calorías por macro = calorías totales × porcentaje del objetivo  |  Gramos = calorías ÷ (4 para proteína/carbohidratos, 9 para grasa)",
+          "note": "El objetivo en gramos de cada macronutriente proviene del mismo proceso de dos pasos: tomar su porción porcentual de las calorías totales, luego convertir esa cantidad de calorías en gramos usando cuántas calorías proporciona cada macronutriente por gramo (4 para proteína y carbohidratos, 9 para grasa, ya que la grasa es más densa en calorías)."
+        },
+        "flowchart": {
+          "intro": "La división porcentual depende del objetivo seleccionado, pero la conversión de calorías a gramos posterior es idéntica para cada objetivo.",
+          "steps": [
+            "Validar las calorías totales como un número positivo no mayor a 20,000",
+            "Buscar la división porcentual para proteína, carbohidratos y grasa según el objetivo seleccionado (perder, mantener, ganar o desarrollar músculo)",
+            "Multiplicar las calorías totales por el porcentaje de cada macronutriente para obtener su asignación calórica",
+            "Dividir las calorías de cada macronutriente entre su valor de calorías por gramo (4 para proteína y carbohidratos, 9 para grasa) para obtener el objetivo en gramos"
+          ],
+          "caption": "Una división porcentual por objetivo, luego la misma conversión de calorías a gramos aplicada a los tres macronutrientes."
+        },
+        "anatomy": {
+          "intro": "Para la división 20/50/30 del objetivo \"mantener\", las mismas 2,000 calorías se dividen de forma desigual por macronutriente, ya que la mayor densidad calórica de la grasa significa que su porción de calorías se convierte en menos gramos de lo que lo haría una porción calórica igual de proteína o carbohidratos.",
+          "labelProtein": "Proteína",
+          "labelCarbs": "Carbohidratos",
+          "labelFat": "Grasa",
+          "totalLabel": "2,000 Calorías Totales",
+          "caption": "En la división del objetivo mantener, 2,000 calorías se convierten en 400 calorías (100g) de proteína, 1,000 calorías (250g) de carbohidratos y 600 calorías (67g) de grasa."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Calorías Totales",
+            "meaning": "Objetivo calórico diario total a dividir entre los tres macronutrientes. Debe estar entre 1 y 20,000.",
+            "unit": "kcal"
+          },
+          {
+            "symbol": "Objetivo",
+            "meaning": "Qué división porcentual aplicar: perder, mantener, ganar o desarrollar músculo.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Calorías fuera de un rango realista",
+            "description": "Las calorías totales deben ser un número finito mayor que 0 y no más de 20,000; un valor fuera de ese rango devuelve un error \"invalid-calories\" en lugar de producir una división de macros técnicamente calculada pero fisiológicamente sin sentido."
+          },
+          {
+            "title": "Cada división se mantiene dentro de los rangos nutricionales recomendados",
+            "description": "La división porcentual de cada objetivo (proteína 20-30%, carbohidratos 45-55%, grasa 20-30% según el objetivo) se elige dentro del Rango Aceptable de Distribución de Macronutrientes del Instituto de Medicina, en lugar de una regla informal general; cada combinación que puede producir esta herramienta es defendible frente a ese estándar de referencia dietética publicado."
+          },
+          {
+            "title": "La proteína se pondera más alta para los objetivos \"perder\" y \"desarrollar músculo\"",
+            "description": "Tanto el objetivo de perder como el de desarrollar músculo usan una porción de proteína del 30% (frente al 20% para mantener y ganar); una ingesta de proteína relativa más alta durante un déficit calórico o un superávit impulsado por entrenamiento de resistencia es consistente con la guía de nutrición deportiva para preservar o desarrollar masa muscular magra."
+          },
+          {
+            "title": "Los porcentajes siempre suman exactamente 100% dentro de cada objetivo",
+            "description": "Para cualquier objetivo dado, los porcentajes de proteína, carbohidratos y grasa son valores fijos que suman exactamente 100%; las cifras de gramos y calorías mostradas siempre contabilizan la totalidad de las calorías sin que nada sobre o se cuente dos veces."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la grasa se convierte en menos gramos que la proteína o los carbohidratos para la misma cantidad de calorías?",
+            "answer": "La grasa proporciona 9 calorías por gramo, más del doble de las 4 calorías por gramo que proporcionan cada uno la proteína y los carbohidratos, así que la misma asignación calórica se convierte en notablemente menos gramos de grasa de lo que lo haría de proteína o carbohidratos. Este es un hecho fisiológico fijo sobre los macronutrientes, no una elección que hace esta herramienta."
+          },
+          {
+            "question": "¿Por qué cambian las divisiones porcentuales según mi objetivo?",
+            "answer": "Diferentes objetivos se benefician de diferente énfasis en macronutrientes; tanto un objetivo de pérdida de grasa como uno de desarrollo muscular se benefician de una ingesta de proteína relativa más alta para ayudar a preservar o desarrollar masa muscular magra, mientras que un objetivo simple de mantenimiento o ganancia no necesita ese mismo énfasis. Cada división se elige dentro de pautas nutricionales establecidas (el Rango Aceptable de Distribución de Macronutrientes del Instituto de Medicina) en lugar de una proporción arbitraria."
+          },
+          {
+            "question": "¿Qué es el Rango Aceptable de Distribución de Macronutrientes (AMDR)?",
+            "answer": "Es un conjunto de rangos de referencia nutricional publicados: aproximadamente 10-35% de las calorías de proteína, 45-65% de carbohidratos y 20-35% de grasa, representando el rango asociado con un menor riesgo de enfermedad crónica mientras se proporciona una ingesta adecuada de nutrientes. Cada división específica del objetivo que usa esta calculadora cae dentro de estos límites establecidos, en lugar de usar una proporción arbitraria o de moda."
+          },
+          {
+            "question": "¿Por qué hay un límite máximo de calorías de 20,000?",
+            "answer": "Este es un techo de verificación de cordura muy por encima de cualquier ingesta calórica diaria humana realista; su propósito es detectar una entrada claramente errónea (como un dígito extra escrito por accidente) en lugar de reflejar algún límite nutricional real, ya que 20,000 calorías está muy más allá de lo que sería relevante la guía de división de macros de esta herramienta."
+          }
+        ]
+      },
+      "bmr-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de TMB: cómo las ecuaciones de Harris-Benedict y Mifflin-St Jeor estiman la tasa metabólica en reposo, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Dos ecuaciones, un cuerpo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Ecuaciones",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Harris-Benedict (hombres): 66.473 + 13.7516×peso + 5.0033×altura − 6.755×edad  |  Mifflin-St Jeor (hombres): 10×peso + 6.25×altura − 5×edad + 5",
+          "note": "Ambas ecuaciones estiman lo mismo, el gasto energético diario en reposo, a partir de las mismas cuatro entradas (peso, altura, edad, sexo), pero se ajustaron a poblaciones de referencia diferentes con más de 70 años de diferencia, así que no producen resultados idénticos para la misma persona."
+        },
+        "flowchart": {
+          "intro": "Qué ecuación (o ambas) se calcula depende de la opción de fórmula seleccionada, pero cada una es un único cálculo directo sin ramificación.",
+          "steps": [
+            "Validar que el peso, la altura y la edad sean todos finitos, positivos y estén dentro de rangos humanos realistas",
+            "Si la opción de fórmula incluye Harris-Benedict, calcularla usando la ecuación original de 1919 con una estructura específica por sexo",
+            "Si la opción de fórmula incluye Mifflin-St Jeor, calcularla usando su propio ajuste específico por sexo (+5 para hombres, −161 para mujeres)",
+            "Si se calcularon ambas (la opción \"comparar\"), calcular la diferencia entre ellas en kilocalorías"
+          ],
+          "caption": "Dos ecuaciones independientes específicas por sexo calculadas a partir de las mismas entradas, opcionalmente comparadas lado a lado."
+        },
+        "anatomy": {
+          "intro": "Para medidas corporales idénticas, las dos ecuaciones no coinciden exactamente; se derivaron de poblaciones de referencia diferentes con décadas de diferencia, así que una brecha entre ellas es normal y esperada, no un error.",
+          "labelHarrisBenedict": "Harris-Benedict (1919)",
+          "labelMifflinStJeor": "Mifflin-St Jeor (1990)",
+          "caption": "Para un hombre de 80 kg, 180 cm, 30 años, Harris-Benedict estima unas 1,865 kcal frente a las 1,780 kcal de Mifflin-St Jeor; una brecha de 85 kcal a partir de las mismas medidas."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Sexo",
+            "meaning": "Ambas ecuaciones aplican una estructura/ajuste diferente para hombre versus mujer.",
+            "unit": "hombre / mujer"
+          },
+          {
+            "symbol": "Peso",
+            "meaning": "Peso corporal, usado por ambas ecuaciones.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Altura",
+            "meaning": "Altura, usada por ambas ecuaciones.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Edad",
+            "meaning": "Edad en años, usada por ambas ecuaciones.",
+            "unit": "Años"
+          },
+          {
+            "symbol": "Fórmula",
+            "meaning": "Qué ecuación calcular: solo Harris-Benedict, solo Mifflin-St Jeor, o ambas lado a lado.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Medidas fuera de rangos humanos realistas",
+            "description": "El peso debe ser un número positivo menor a 500 kg, la altura menor a 300 cm, y la edad entre 1 y 120; valores fuera de estos rangos devuelven un error \"invalid-measurements\", ya que ninguna ecuación se derivó de (ni tiene sentido para) datos fuera de medidas corporales humanas realistas."
+          },
+          {
+            "title": "Las dos ecuaciones pueden calcularse independientemente o juntas",
+            "description": "Seleccionar solo \"Harris-Benedict\" o \"Mifflin-St Jeor\" deja el resultado de la otra ecuación como nulo en lugar de calcularlo innecesariamente; seleccionar \"comparar\" calcula ambas y además reporta la diferencia entre ellas en kilocalorías."
+          },
+          {
+            "title": "Esta es la ecuación original de Harris-Benedict de 1919, no la revisión de 1984",
+            "description": "Algunas calculadoras modernas usan una revisión de Roza y Shizgal de 1984 de la ecuación de Harris-Benedict en lugar del original; esta herramienta usa deliberadamente el original de 1919 específicamente para que pueda servir como un punto de comparación directo e históricamente preciso frente a Mifflin-St Jeor, la ecuación que la reemplazó más tarde en la preferencia clínica."
+          },
+          {
+            "title": "Ninguna ecuación tiene en cuenta la composición corporal",
+            "description": "Tanto Harris-Benedict como Mifflin-St Jeor usan solo el peso corporal total, sin forma de distinguir músculo de grasa; una persona visiblemente musculosa o muy delgada puede encontrar que ambas ecuaciones subestiman o sobreestiman su metabolismo en reposo real, una limitación que la fórmula de Katch-McArdle (usada en la Calculadora de TDEE) está específicamente diseñada para abordar."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿En qué ecuación debería confiar más, Harris-Benedict o Mifflin-St Jeor?",
+            "answer": "La Academia de Nutrición y Dietética recomienda Mifflin-St Jeor (1990) como la ecuación más precisa para la población adulta general hoy en día; se desarrolló y validó en una población más contemporánea y representativa que la ecuación original de Harris-Benedict de 1919. Harris-Benedict se incluye aquí principalmente para comparación histórica, como la ecuación que popularizó por primera vez la estimación del metabolismo en reposo."
+          },
+          {
+            "question": "¿Por qué las dos ecuaciones dan resultados diferentes para la misma persona?",
+            "answer": "Cada una se ajustó a poblaciones de referencia distintas usando métodos estadísticos diferentes, con más de 70 años de diferencia; pequeñas diferencias en cómo cada ecuación pondera el peso, la altura y la edad se acumulan en una brecha real y esperada en sus estimaciones finales, aunque ambas intenten estimar la misma cantidad subyacente."
+          },
+          {
+            "question": "¿Por qué la herramienta usa la ecuación original de Harris-Benedict de 1919 en lugar de la revisión de 1984 más común?",
+            "answer": "La forma original de 1919 se mantiene aquí deliberadamente para que pueda servir como una comparación histórica directa y citable frente a Mifflin-St Jeor, mostrando \"la ecuación que inició la estimación del metabolismo en reposo\" junto a \"la que la reemplazó más tarde en la preferencia clínica\", en lugar de mezclar una revisión posterior que enturbiaría esa comparación."
+          },
+          {
+            "question": "¿En qué se diferencia esto de la Calculadora de TDEE?",
+            "answer": "Esta herramienta solo estima la TMB (gasto energético en reposo) usando dos ecuaciones clásicas mostradas lado a lado para comparación. La Calculadora de TDEE usa la TMB como entrada, luego la multiplica por un factor de nivel de actividad para estimar la necesidad calórica diaria total, y además ofrece una tercera opción de TMB (Katch-McArdle) para cuando se conoce el porcentaje de grasa corporal, algo que esta herramienta no incluye."
+          }
+        ]
+      },
+      "pace-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Ritmo: cómo se calculan el ritmo, la velocidad, las divisiones y las predicciones de tiempo de llegada, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Cómo crece el tiempo de carrera con la distancia",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos de Resolución",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Ritmo = tiempo ÷ distancia  |  Velocidad = distancia ÷ tiempo  |  Predicción de Riegel: T₂ = T₁ × (D₂/D₁)^1.06",
+          "note": "La matemática básica de ritmo/velocidad es división simple, resoluble para cualquiera de ritmo, tiempo o distancia que sea desconocido dados los otros dos; la fórmula de Riegel añade un refinamiento adicional: predecir un tiempo de llegada a una nueva distancia no es una escala lineal directa, porque la fatiga hace que el ritmo se vuelva predeciblemente más lento a medida que aumenta la distancia."
+        },
+        "flowchart": {
+          "intro": "Cuál de tres valores se resuelve depende de cuáles dos ya conoce; un cálculo separado maneja la predicción de una nueva distancia a partir de un resultado conocido.",
+          "steps": [
+            "Dadas distancia y tiempo: dividir el tiempo entre la distancia para obtener el ritmo, o la distancia entre el tiempo para obtener la velocidad",
+            "Dadas distancia y ritmo: multiplicar la distancia por el ritmo para obtener el tiempo total",
+            "Dados tiempo y ritmo: dividir el tiempo entre el ritmo para obtener la distancia",
+            "Para una tabla de ritmo multipunto: calcular cada par consecutivo de divisiones acumulativas como un segmento, saltando cualquier par donde la distancia o el tiempo no aumenten realmente, para que una fila mal formada no rompa segmentos en otras partes de la tabla",
+            "Para una predicción de tiempo de llegada: elevar la razón de la distancia objetivo a la distancia conocida a la potencia 1.06 (el exponente de fatiga de Riegel), luego multiplicar por el tiempo conocido"
+          ],
+          "caption": "Tres formas intercambiables de resolver la misma relación ritmo/tiempo/distancia, más la fórmula de predicción de Riegel separada."
+        },
+        "anatomy": {
+          "intro": "Debido a que el exponente de la fórmula de Riegel (1.06) es mayor que 1, el tiempo de carrera predicho crece más rápido que la distancia; duplicar la distancia toma notablemente más del doble del tiempo, reflejando la fatiga de resistencia real.",
+          "xLabel": "Distancia (km)",
+          "yLabel": "Tiempo Predicho (min)",
+          "caption": "Partiendo de un 5K en 25 minutos, la fórmula de Riegel predice aproximadamente 52 minutos para 10K (no un plano 50) y unas 4 horas para un maratón; cada aumento de distancia cuesta más de lo que costaría una escala lineal simple."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Distancia",
+            "meaning": "Distancia de carrera o corrida, en la unidad de distancia seleccionada.",
+            "unit": "km / mi"
+          },
+          {
+            "symbol": "Tiempo",
+            "meaning": "Tiempo total para la distancia, ingresado o resuelto en horas, minutos y segundos.",
+            "unit": "h:mm:ss"
+          },
+          {
+            "symbol": "Ritmo",
+            "meaning": "Tiempo por unidad de distancia; ingresado o resuelto, y siempre disponible tanto en equivalentes de km como de millas.",
+            "unit": "min/km, min/mi"
+          },
+          {
+            "symbol": "Divisiones Multipunto",
+            "meaning": "Una serie de marcadores acumulativos de distancia/tiempo (por ejemplo, marcas de milla durante una corrida), usados para calcular el ritmo por segmento.",
+            "unit": "Lista"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Cualquiera de los tres modos de resolución requiere entradas estrictamente positivas",
+            "description": "Resolver para ritmo, tiempo o distancia requiere todos que los valores conocidos sean finitos y estrictamente mayores que cero; una distancia, tiempo o ritmo de cero o negativo devuelve un resultado inválido en lugar de un error de división entre cero o un ritmo negativo sin sentido."
+          },
+          {
+            "title": "Las divisiones multipunto saltan filas mal formadas sin romper toda la tabla",
+            "description": "Cada segmento entre dos puntos de división consecutivos solo se calcula si ambos puntos tienen distancia y tiempo válidos y no negativos, y la distancia y el tiempo del punto posterior realmente aumentan respecto al anterior; una fila incorrecta o fuera de orden simplemente se salta, así que los segmentos válidos en otras partes de la tabla se siguen calculando correctamente."
+          },
+          {
+            "title": "Las divisiones multipunto son acumulativas, no por vuelta",
+            "description": "Cada punto ingresado se trata como un total acumulado desde el inicio (como marcas de milla durante una corrida continua), no como un tiempo de vuelta independiente; la herramienta calcula la distancia y el tiempo de cada segmento restando valores acumulativos consecutivos, no usando cada entrada como una medición independiente."
+          },
+          {
+            "title": "Las distancias de carreras preestablecidas usan valores exactos, no redondeados",
+            "description": "Las distancias de carrera integradas usan sus valores precisos; un medio maratón son 21.0975 km y un maratón completo 42.195 km, no redondeados a 21.1 o 42.2, así que los cálculos de ritmo y predicción usando estos preestablecidos se mantienen precisos en lugar de acumular un pequeño error de redondeo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el exponente de Riegel es 1.06 en lugar de simplemente escalar el tiempo linealmente con la distancia?",
+            "answer": "Una escala puramente lineal (exponente de exactamente 1.0) asumiría que podría mantener exactamente el mismo ritmo sin importar cuán lejos corriera, lo cual no es realista; la fatiga de resistencia significa que el ritmo naturalmente se ralentiza a medida que aumenta la distancia. La fórmula de Peter Riegel, desarrollada a partir del análisis de grandes cantidades de datos reales de tiempos de carrera, encontró que un exponente de 1.06 modelaba consistentemente esta ralentización a través de una amplia gama de distancias y habilidades."
+          },
+          {
+            "question": "¿Por qué las divisiones multipunto saltan algunas filas en lugar de mostrar un error?",
+            "answer": "Una sola división mal escrita (como una distancia fuera de orden o tiempo duplicado) no debería invalidar cada otra división que haya ingresado correctamente; al simplemente saltar cualquier par donde los datos no tengan sentido (distancia o tiempo no aumenta) en lugar de detenerse en el primer problema, la herramienta sigue calculando cada segmento válido en otras partes de la tabla."
+          },
+          {
+            "question": "¿Por qué un medio maratón se muestra como 21.0975 km en lugar de un número más redondo?",
+            "answer": "Esa es la distancia oficial exacta del medio maratón (13.1 millas convertidas con precisión a kilómetros) en lugar de un redondeo conveniente; usar la cifra precisa mantiene precisos los cálculos de ritmo por km y tiempo de llegada, ya que incluso un pequeño error de redondeo en la distancia base se acumularía a través de los cálculos de ritmo y predicción."
+          },
+          {
+            "question": "¿Qué tan confiable es una predicción de Riegel para una distancia mucho más larga o corta que mi resultado conocido?",
+            "answer": "La fórmula generalmente es más confiable al predecir una distancia razonablemente cercana a la conocida; por ejemplo, un tiempo de 5K prediciendo un 10K tiende a ser bastante preciso, ya que se deriva de patrones estadísticos a través de los resultados de carrera de muchos corredores. Predecir un tiempo de maratón a partir de una distancia conocida muy corta (como una prueba de tiempo de 1 milla) estira la fórmula más allá de los datos con los que se validó, así que trate las extrapolaciones distantes como una estimación más aproximada."
+          }
+        ]
       }
     }
   }

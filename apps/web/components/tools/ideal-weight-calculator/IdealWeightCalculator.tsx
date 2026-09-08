@@ -9,6 +9,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import IdealWeightInputPanel from "./IdealWeightInputPanel";
 import IdealWeightResult from "./IdealWeightResult";
 
@@ -53,7 +54,12 @@ export default function IdealWeightCalculator({ education }: { education: ReactN
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="ideal-weight-calculator" category="health-fitness" />}
-          secondary={<SectionNav items={navItems} />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} />
+              <ViewDocsLink slug="ideal-weight-calculator" />
+            </div>
+          }
         />
       </div>
 

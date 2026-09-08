@@ -25862,6 +25862,1215 @@
             "answer": "Séparer le total avant taxe du total général (qui inclut la taxe) permet de voir combien du revenu combiné à travers toutes les factures est une valeur de vente réelle par rapport à combien est une taxe collectée pour le compte d'une autorité fiscale — une distinction qui compte pour la comptabilité et les déclarations fiscales."
           }
         ]
+      },
+      "tdee-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de DET : comment le MB et le niveau d'activité se combinent pour donner les besoins caloriques quotidiens, comment un objectif de poids se traduit en objectif calorique, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Le niveau d'activité change tout",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Niveaux d'activité",
+          "modesValue": "5",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "MB (Mifflin-St Jeor) = 10×poids(kg) + 6,25×taille(cm) − 5×âge ± 5  |  DET = MB × facteur d'activité",
+          "note": "Le DET se construit en deux étapes : d'abord estimer la dépense énergétique au repos (MB) à partir des mesures corporelles, puis la multiplier par un facteur d'activité qui tient compte des calories brûlées par le mouvement et l'exercice en plus du métabolisme au repos."
+        },
+        "flowchart": {
+          "intro": "Deux formules de MB différentes sont proposées, mais à partir de ce point, le calcul se déroule toujours de la même façon.",
+          "steps": [
+            "Calculer le MB avec Mifflin-St Jeor (poids, taille, âge, sexe) ou, si le pourcentage de masse grasse est connu, avec Katch-McArdle (qui utilise la masse maigre au lieu du poids total)",
+            "Multiplier le MB par le facteur du niveau d'activité choisi (1,2 pour sédentaire jusqu'à 1,9 pour très actif) pour obtenir le DET",
+            "Si un objectif de variation de poids hebdomadaire a été indiqué, le convertir en ajustement calorique quotidien à raison de 7 700 kcal par kilogramme de graisse corporelle, divisé par 7 jours",
+            "Ajouter cet ajustement quotidien au DET (négatif pour un objectif de perte, positif pour un objectif de prise) afin d'obtenir l'objectif calorique quotidien, sans jamais descendre en dessous de zéro",
+            "Signaler l'ajustement comme « agressif » s'il dépasse 35 % du DET, un plafond de durabilité courant pour un déficit ou un surplus calorique"
+          ],
+          "caption": "Le pipeline en deux étapes, des mesures corporelles à un objectif calorique quotidien ajusté selon un objectif de poids."
+        },
+        "anatomy": {
+          "intro": "Le même métabolisme au repos produit des besoins énergétiques quotidiens totaux très différents selon le niveau d'activité d'une personne — le niveau d'activité n'est pas un ajustement mineur, c'est souvent le plus grand facteur du chiffre final.",
+          "labelSedentary": "Sédentaire (×1,2)",
+          "labelModerate": "Modéré (×1,55)",
+          "labelVeryActive": "Très actif (×1,9)",
+          "caption": "Pour un MB de 1 500 kcal, le DET va de 1 800 kcal en sédentaire à 2 850 kcal en très actif — le même corps, un écart quotidien de 1 050 kcal."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Poids",
+            "meaning": "Poids corporel, utilisé par les deux formules de MB.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Taille",
+            "meaning": "Taille, utilisée par la formule de Mifflin-St Jeor.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Âge",
+            "meaning": "Âge en années, utilisé par la formule de Mifflin-St Jeor.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "Sexe",
+            "meaning": "Utilisé pour appliquer le bon décalage dans la formule de Mifflin-St Jeor (+5 pour homme, −161 pour femme).",
+            "unit": "homme / femme"
+          },
+          {
+            "symbol": "% Masse grasse",
+            "meaning": "Facultatif — si renseigné, bascule le calcul du MB vers Katch-McArdle, qui utilise la masse maigre au lieu du poids total.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Niveau d'activité",
+            "meaning": "Quantité de mouvement et d'exercice au-delà du repos, de sédentaire à très actif.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Variation de poids hebdomadaire",
+            "meaning": "Objectif signé facultatif : négatif pour perdre du poids, positif pour en prendre, zéro pour maintenir.",
+            "unit": "kg/semaine"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Mesures corporelles invalides ou non positives",
+            "description": "Si le poids, la taille ou l'âge n'est pas un nombre positif fini, le calcul du MB correspondant renvoie 0 plutôt qu'un résultat négatif ou NaN — un signal clair que les entrées n'étaient pas utilisables, plutôt qu'un nombre erroné trompeusement précis."
+          },
+          {
+            "title": "Katch-McArdle exige un pourcentage de masse grasse valide",
+            "description": "La formule de Katch-McArdle (MB basé sur la masse maigre) ne s'applique que si le pourcentage de masse grasse est une valeur valide entre 0 et 100 — en dehors de cette plage, ou si elle est omise, l'outil revient à Mifflin-St Jeor, qui ne nécessite que le poids, la taille, l'âge et le sexe."
+          },
+          {
+            "title": "L'objectif calorique ne devient jamais négatif",
+            "description": "Pour un objectif de perte de poids agressif qui impliquerait mathématiquement un objectif calorique quotidien négatif, l'outil plafonne le résultat à zéro plutôt que d'afficher un nombre négatif absurde."
+          },
+          {
+            "title": "L'indicateur « agressif » est un pourcentage du DET, pas un nombre absolu",
+            "description": "Le même déficit de 500 kcal/jour est modéré pour une personne avec un DET de 3 000 kcal mais agressif pour une personne avec un DET de 1 600 kcal — l'outil compare l'ajustement au propre DET de l'individu (en signalant tout ce qui dépasse 35 %) plutôt que d'utiliser un seuil calorique fixe unique pour tous."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil propose-t-il deux formules de MB différentes ?",
+            "answer": "Mifflin-St Jeor ne nécessite que le poids, la taille, l'âge et le sexe, et est précise pour la plupart des gens — mais elle peut mal évaluer les personnes visiblement musclées ou très minces car elle ne voit que le poids corporel total, pas la part de muscle par rapport à la graisse. Katch-McArdle résout ce problème en utilisant directement la masse maigre, mais n'est utilisable que si vous connaissez réellement votre pourcentage de masse grasse."
+          },
+          {
+            "question": "Pourquoi le niveau d'activité compte-t-il autant dans le résultat final ?",
+            "answer": "Le MB ne mesure que l'énergie brûlée par le corps au repos complet — allongé au lit, essentiellement. Tout le reste de la journée — marcher, travailler, faire de l'exercice — brûle des calories supplémentaires, et le facteur d'activité est la façon dont l'outil en tient compte. Pour une personne active, l'activité peut facilement représenter plus de calories quotidiennes que le métabolisme au repos."
+          },
+          {
+            "question": "Que signifie l'indicateur « agressif », et pourquoi 35 % ?",
+            "answer": "Un déficit ou surplus calorique trop important par rapport aux calories de maintien devient difficile à maintenir et augmente le risque de perdre du muscle maigre (pendant une sèche) ou de prendre un excès de graisse (pendant une prise de masse) plutôt que le résultat visé. 35 % du DET est un plafond empirique largement utilisé en nutrition sportive au-delà duquel un objectif est considéré comme agressif plutôt que comme un rythme stable et durable."
+          },
+          {
+            "question": "Comment un objectif de variation de poids hebdomadaire se transforme-t-il en chiffre calorique quotidien ?",
+            "answer": "L'outil utilise l'approximation courante selon laquelle environ 7 700 kilocalories correspondent à 1 kilogramme de graisse corporelle. Un objectif hebdomadaire est converti en ajustement calorique quotidien en multipliant les kilogrammes hebdomadaires par 7 700 et en divisant par 7 jours — cet ajustement quotidien est ensuite ajouté au (ou soustrait du) DET pour obtenir l'objectif calorique quotidien."
+          }
+        ]
+      },
+      "bmi-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur d'IMC : comment l'indice de masse corporelle et la fourchette de poids santé sont calculés, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Les quatre catégories d'IMC",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Catégories",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "IMC = poids(kg) / taille(m)²  |  Fourchette de poids santé = 18,5 × taille(m)² à 24,9 × taille(m)²",
+          "note": "L'IMC est simplement le poids divisé par la taille au carré — un seul chiffre qui ne distingue pas le muscle de la graisse, c'est pourquoi il est associé ici à une fourchette de poids santé calculée en appliquant la même formule à l'envers aux deux limites de catégorie standard."
+        },
+        "flowchart": {
+          "intro": "La même formule de base produit à la fois la valeur d'IMC elle-même et la fourchette de poids santé, simplement appliquée dans des directions opposées.",
+          "steps": [
+            "Convertir la taille de centimètres en mètres",
+            "Diviser le poids par la taille au carré pour obtenir la valeur d'IMC, arrondie à une décimale",
+            "Comparer la valeur d'IMC aux seuils de catégorie standard (18,5, 25, 30) pour attribuer Insuffisance pondérale, Poids normal, Surpoids ou Obésité",
+            "Appliquer la formule de l'IMC à l'envers à 18,5 et 24,9 (les limites standard de la fourchette « normale ») en utilisant la taille saisie pour calculer la fourchette de poids santé dans les mêmes unités que l'entrée"
+          ],
+          "caption": "Une seule formule, appliquée dans un sens pour obtenir l'IMC et dans l'autre pour obtenir la fourchette de poids santé."
+        },
+        "anatomy": {
+          "intro": "L'IMC se place sur une seule ligne numérique, et c'est la position relative à trois limites fixes — pas le chiffre brut seul — qui détermine la catégorie.",
+          "labelUnderweight": "Insuffisance pondérale",
+          "labelNormal": "Normal",
+          "labelOverweight": "Surpoids",
+          "labelObesity": "Obésité",
+          "caption": "Les trois limites qui divisent l'échelle de l'IMC en quatre catégories — un IMC de 22 (marqué) se situe clairement dans la fourchette de poids normal."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Taille",
+            "meaning": "Taille, convertie en interne en mètres pour le calcul.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Poids",
+            "meaning": "Poids corporel.",
+            "unit": "kg"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les limites de catégorie sont strictes, pas arrondies",
+            "description": "Un IMC de exactement 25,0 tombe dans Surpoids, pas Poids normal, car le test de catégorie utilise « inférieur à 25 » pour Normal — l'IMC affiché est arrondi à une décimale pour la lisibilité, mais la catégorie est attribuée à partir de la valeur non arrondie."
+          },
+          {
+            "title": "La fourchette de poids santé utilise 24,9, pas 25,0, comme limite supérieure",
+            "description": "La limite supérieure de la fourchette de poids santé est calculée pour un IMC de 24,9 plutôt que exactement 25 — une petite marge délibérée pour que le poids « santé » affiché ne se situe pas exactement sur la limite de Surpoids."
+          },
+          {
+            "title": "Aucune limite inférieure sur la taille ou le poids",
+            "description": "Le calculateur ne rejette pas une taille ou un poids anormalement petit — une taille proche de zéro produirait un IMC extrêmement élevé (et non significatif), puisque la formule divise par la taille au carré, donc les résultats doivent être vérifiés par rapport à des mesures humaines réalistes."
+          },
+          {
+            "title": "L'IMC ne distingue pas le muscle de la graisse",
+            "description": "Deux personnes avec un IMC identique peuvent avoir des compositions corporelles très différentes — un athlète musclé et une personne à faible masse musculaire peuvent se retrouver dans la même catégorie d'IMC malgré des profils de santé très différents, c'est pourquoi cet outil existe en complément (et non à la place) du calculateur de masse grasse."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la limite supérieure de la fourchette de poids santé est-elle 24,9 plutôt que 25 ?",
+            "answer": "Un IMC de exactement 25,0 est classé comme Surpoids, pas Poids normal, donc la limite supérieure de la fourchette de poids santé est délibérément calculée à 24,9 — juste en dessous du seuil de Surpoids — afin que le chiffre de poids santé affiché ne se situe pas exactement sur cette ligne de démarcation."
+          },
+          {
+            "question": "Pourquoi l'IMC ne tient-il pas compte de la masse musculaire ?",
+            "answer": "L'IMC a été conçu comme un outil de dépistage simple au niveau de la population, utilisant uniquement la taille et le poids — il n'a aucun moyen de distinguer un kilogramme de muscle d'un kilogramme de graisse, puisque les deux pèsent la même chose. C'est une limite bien connue, ce qui explique pourquoi une personne très musclée peut être classée « en surpoids » selon l'IMC malgré un faible taux de graisse corporelle."
+          },
+          {
+            "question": "Pourquoi l'outil affiche-t-il une fourchette de poids santé plutôt qu'un seul poids idéal ?",
+            "answer": "La catégorie standard d'IMC « Poids normal » couvre une fourchette (18,5 à 24,9), pas un seul point — car un IMC sain couvre réellement une gamme de tailles corporelles pour une taille donnée, l'outil affiche donc la fourchette de poids complète correspondant à cette bande d'IMC plutôt que de choisir un chiffre « idéal » arbitraire à l'intérieur."
+          },
+          {
+            "question": "Quelle est la différence entre la fourchette de poids santé de cet outil et le calculateur de poids idéal ?",
+            "answer": "La fourchette de cet outil provient directement de la formule de l'IMC appliquée à des limites d'IMC fixes (18,5 et 24,9), tandis que le calculateur de poids idéal utilise quatre formules cliniques distinctes (Devine, Robinson, Miller, Hamwi) développées indépendamment pour estimer la masse corporelle maigre/idéale à partir de la taille et du sexe — ce sont des approches méthodologiquement distinctes qui produisent des chiffres globalement similaires."
+          }
+        ]
+      },
+      "ideal-weight-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de poids idéal : les quatre formules cliniques classiques qu'il moyenne, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Quatre formules, une taille",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Formules",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Chaque formule : poids de base + (taux × pouces au-dessus de 60)  |  Devine, Robinson, Miller et Hamwi utilisent chacune leur propre base et taux",
+          "note": "Les quatre formules partagent la même structure — un poids de départ fixe pour exactement 5 pieds (60 pouces) de taille, plus un montant fixe ajouté par pouce au-delà — elles ne diffèrent que par le poids de base et le taux par pouce choisis par chaque auteur original."
+        },
+        "flowchart": {
+          "intro": "La même taille alimente quatre formules indépendantes, chacune historiquement développée à des fins cliniques spécifiques (principalement le dosage de médicaments), puis moyennées en un seul chiffre récapitulatif.",
+          "steps": [
+            "Convertir la taille de centimètres en pouces",
+            "Soustraire 60 de la taille en pouces pour obtenir de combien la personne dépasse (ou est en dessous de) 5 pieds",
+            "Appliquer chacune des quatre formules — Devine (1974), Robinson (1983), Miller (1983) et Hamwi (1964) — en utilisant leur propre poids de base et taux par pouce pour le sexe donné",
+            "Moyenner les quatre résultats pour produire un seul chiffre récapitulatif de poids idéal"
+          ],
+          "caption": "Quatre formules dérivées indépendamment, appliquées à la même taille, puis moyennées."
+        },
+        "anatomy": {
+          "intro": "Comme chaque formule utilise un poids de base et un taux par pouce différents, elles ne concordent pas exactement — même pour la même taille et le même sexe, chacune donne une réponse légèrement différente.",
+          "labelDevine": "Devine",
+          "labelRobinson": "Robinson",
+          "labelMiller": "Miller",
+          "labelHamwi": "Hamwi",
+          "caption": "Pour un homme de 180 cm (environ 5'11\"), les quatre formules s'étendent d'environ 71,5 à 77,3 kg — des estimations proches mais non identiques à partir de la même taille."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Sexe",
+            "meaning": "Chacune des quatre formules utilise un poids de base et un taux différents pour homme et femme.",
+            "unit": "homme / femme"
+          },
+          {
+            "symbol": "Taille",
+            "meaning": "Taille, convertie en interne en pouces pour le calcul.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Une taille inférieure à 5 pieds produit un poids de base réduit",
+            "description": "Pour une taille inférieure à 60 pouces (environ 152 cm), le terme « pouces au-dessus de 60 » devient négatif, ce qui soustrait du poids de base de chaque formule plutôt que d'y ajouter — les formules ont été conçues pour des tailles adultes et ne sont pas plafonnées pour empêcher un résultat irréaliste, voire négatif, pour de très petites tailles."
+          },
+          {
+            "title": "Une taille ou un sexe invalide renvoie tous les zéros",
+            "description": "Si la taille n'est pas un nombre positif fini, ou si le sexe n'est pas reconnu comme homme ou femme, les quatre résultats de formule (et leur moyenne) reviennent à zéro plutôt qu'un calcul partiel ou trompeur."
+          },
+          {
+            "title": "Ce sont des formules cliniques historiques, pas de la recherche moderne",
+            "description": "Les quatre formules datent de 1964 à 1983 et ont été développées principalement pour estimer le poids corporel à des fins de dosage médicamenteux en milieu clinique, pas comme objectif général de bien-être — ce sont des estimations ponctuelles issues de recherches vieilles de plusieurs décennies, pas une recommandation personnalisée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil utilise-t-il quatre formules différentes au lieu d'une seule ?",
+            "answer": "Devine, Robinson, Miller et Hamwi sont quatre formules développées indépendamment, chacune historiquement utilisée dans des contextes cliniques différents, et aucune n'est universellement reconnue comme « la » bonne — afficher les quatre avec leur moyenne donne une image plus complète que présenter le résultat d'une seule formule comme s'il était définitif."
+          },
+          {
+            "question": "En quoi cela diffère-t-il de la fourchette de poids santé affichée par le calculateur d'IMC ?",
+            "answer": "La fourchette du calculateur d'IMC provient de l'application de la formule de l'IMC à l'envers à des limites d'IMC fixes (18,5 à 24,9) — une fourchette de dépistage au niveau de la population. Les quatre formules de cet outil ont été développées indépendamment, spécifiquement pour estimer le poids corporel idéal ou maigre à partir de la taille et du sexe à des fins cliniques comme le dosage de médicaments, en utilisant une approche mathématique entièrement différente (linéaire en fonction de la taille, sans lien avec l'IMC)."
+          },
+          {
+            "question": "Pourquoi les quatre formules donnent-elles des réponses différentes pour la même taille ?",
+            "answer": "Chaque formule a été dérivée par un chercheur différent à partir de données de référence différentes, chacune aboutissant à son propre poids de base (le poids estimé à exactement 5 pieds) et son propre taux d'augmentation par pouce au-delà — de petites différences dans ces deux chiffres se combinent pour donner des estimations finales modestement différentes, même si les quatre suivent la même structure linéaire de base."
+          },
+          {
+            "question": "Dois-je viser exactement le poids moyen affiché par cet outil ?",
+            "answer": "Ce sont des formules cliniques vieilles de plusieurs décennies, initialement destinées à estimer le poids pour le dosage médicamenteux, pas un objectif de fitness ou de santé personnalisé — un poids sain dépend de nombreux facteurs (morphologie, masse musculaire, âge, état de santé) dont aucune de ces formules ne tient compte. Considérez le résultat comme un point de référence historique approximatif, pas un objectif précis à atteindre."
+          }
+        ]
+      },
+      "target-heart-rate-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de fréquence cardiaque cible : comment la fréquence cardiaque maximale et les cinq zones d'entraînement sont dérivées, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Cinq zones d'entraînement",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Zones d'entraînement",
+          "modesValue": "5",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "FC max = 220 − âge  |  Avec FC repos (Karvonen) : cible = (max − repos) × intensité% + repos  |  Sans : cible = max × intensité%",
+          "note": "La fréquence cardiaque maximale est estimée une seule fois à partir de l'âge seul, puis cinq zones d'entraînement en sont dérivées — en utilisant la méthode plus individualisée de Karvonen (réserve de fréquence cardiaque) quand une FC de repos est disponible, ou un simple pourcentage direct du max sinon."
+        },
+        "flowchart": {
+          "intro": "Le fait qu'une fréquence cardiaque de repos soit fournie ou non change laquelle des deux formules calcule les limites de chaque zone, mais les deux partent de la même fréquence cardiaque maximale estimée.",
+          "steps": [
+            "Estimer la fréquence cardiaque maximale à l'aide de la formule classique « 220 moins l'âge »",
+            "Si une fréquence cardiaque de repos a été fournie, calculer la réserve de fréquence cardiaque (max moins repos)",
+            "Pour chacune des cinq bandes d'intensité (50-60 % jusqu'à 90-100 %), calculer les limites de la zone : avec une FC de repos, appliquer le pourcentage à la réserve de fréquence cardiaque et rajouter la fréquence de repos (méthode de Karvonen) ; sans, appliquer le pourcentage directement à la fréquence cardiaque maximale",
+            "Retourner les cinq zones avec à la fois leur fourchette de pourcentage et leur fourchette en battements par minute"
+          ],
+          "caption": "L'estimation unique de la fréquence cardiaque maximale alimentant cinq zones, calculées avec ou sans l'ajustement de Karvonen."
+        },
+        "anatomy": {
+          "intro": "Les cinq zones divisent la plage complète, de l'activité très légère jusqu'à l'effort maximal, en bandes égales de 10 points de pourcentage, chacune avec un plafond de fréquence cardiaque progressivement plus élevé.",
+          "labelVeryLight": "Très légère",
+          "labelLight": "Légère",
+          "labelModerate": "Modérée",
+          "labelHard": "Intense",
+          "labelMaximum": "Maximale",
+          "caption": "Pour une personne de 30 ans (fréquence cardiaque maximale 190 bpm) sans fréquence de repos indiquée, les plafonds des cinq zones montent de 114 bpm à 190 bpm."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Âge",
+            "meaning": "Utilisé pour estimer la fréquence cardiaque maximale via 220 moins l'âge. Doit être compris entre 1 et 120.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "Fréquence cardiaque de repos",
+            "meaning": "Facultatif — si fourni, bascule les cinq zones vers la méthode plus individualisée de Karvonen (réserve de fréquence cardiaque).",
+            "unit": "bpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Âge hors d'une plage réaliste",
+            "description": "L'âge doit être un nombre fini supérieur à 0 et ne dépassant pas 120 — une valeur en dehors de cette plage renvoie une erreur « invalid-age », car la formule 220-moins-âge n'a pas de sens en dehors des durées de vie humaines réalistes."
+          },
+          {
+            "title": "Fréquence cardiaque de repos hors d'une plage réaliste",
+            "description": "Si fournie, la fréquence cardiaque de repos doit être un nombre fini supérieur à 0 et ne dépassant pas 220 — une valeur irréaliste renvoie une erreur « invalid-resting-heart-rate » plutôt que de produire des zones basées sur un calcul de réserve absurde."
+          },
+          {
+            "title": "Les zones changent entièrement quand une fréquence de repos est ajoutée",
+            "description": "Ajouter une fréquence cardiaque de repos ne modifie pas légèrement les zones — cela bascule la formule sous-jacente d'un pourcentage de la fréquence cardiaque maximale vers un pourcentage de la réserve de fréquence cardiaque (méthode de Karvonen), ce qui produit généralement des limites de zone sensiblement différentes et plus personnalisées, en particulier pour les personnes ayant une fréquence de repos inhabituellement basse ou élevée."
+          },
+          {
+            "title": "La réserve de fréquence cardiaque n'est indiquée que si la fréquence de repos est connue",
+            "description": "Le chiffre de réserve de fréquence cardiaque (max moins repos) n'est significatif, et n'est renvoyé, que lorsqu'une fréquence cardiaque de repos a réellement été fournie — sans cela, il est renvoyé comme null plutôt qu'une valeur par défaut trompeuse."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la fréquence cardiaque maximale est-elle estimée uniquement à partir de l'âge ?",
+            "answer": "La formule « 220 moins l'âge » (Fox et al., 1971) reste l'estimation la plus largement citée de la fréquence cardiaque maximale, malgré une imprécision connue pour tout individu donné — elle ne nécessite aucun équipement ni test, juste l'âge, c'est pourquoi c'est le point de départ standard utilisé par la plupart des calculateurs de zone de fréquence cardiaque, celui-ci y compris."
+          },
+          {
+            "question": "Quelle est la différence entre les deux méthodes de calcul de zone ?",
+            "answer": "Sans fréquence cardiaque de repos, chaque zone est simplement un pourcentage direct de votre maximum estimé (par exemple, 70 % de 190 bpm). Avec une fréquence cardiaque de repos, la méthode de Karvonen prend plutôt un pourcentage de votre réserve de fréquence cardiaque (max moins repos) et rajoute votre fréquence de repos — cela tient compte du niveau de forme physique individuel, car deux personnes ayant la même fréquence cardiaque maximale mais des fréquences de repos très différentes obtiendront des limites de zone différentes et plus personnalisées."
+          },
+          {
+            "question": "Pourquoi devrais-je saisir ma fréquence cardiaque de repos ?",
+            "answer": "Une fréquence cardiaque de repos plus basse indique généralement une meilleure condition cardiovasculaire, et la méthode de Karvonen utilise cette information pour ajuster vos zones d'entraînement en conséquence — deux personnes du même âge obtiennent des zones en pourcentage direct identiques, mais des zones de Karvonen réellement différentes si leurs fréquences de repos diffèrent, ce qui reflète mieux la réserve cardiovasculaire réelle de chaque personne."
+          },
+          {
+            "question": "Pourquoi y a-t-il exactement cinq zones ?",
+            "answer": "Les cinq zones (très légère, légère, modérée, intense, maximale) en bandes de 10 points de pourcentage de 50 % à 100 % d'intensité sont une convention standard en physiologie de l'exercice et en suivi de la forme physique, correspondant à des objectifs d'entraînement reconnaissables — de la récupération active au bas de l'échelle jusqu'à l'effort maximal absolu en haut."
+          }
+        ]
+      },
+      "sleep-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de sommeil : comment les suggestions d'heure de coucher et de réveil sont construites à partir de cycles de sommeil de 90 minutes, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Combien de sommeil donne chaque option",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Options de cycles",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Mode réveil : coucher = heure de réveil − (cycles × 90 min) − temps d'endormissement  |  Mode coucher : réveil = coucher + temps d'endormissement + (cycles × 90 min)",
+          "note": "Chaque heure suggérée est construite à partir de la même unité — un cycle de sommeil complet de 90 minutes — répété un nombre entier de fois (de 6 à 3), sur le principe que se réveiller entre les cycles plutôt qu'au milieu d'un cycle procure moins de sensation de grogginess."
+        },
+        "flowchart": {
+          "intro": "Le même calcul de cycle s'exécute dans l'une de deux directions selon que vous connaissez votre heure de réveil ou votre heure de coucher.",
+          "steps": [
+            "Lire le mode sélectionné : à rebours à partir d'une heure de réveil connue, ou en avant à partir d'une heure de coucher connue",
+            "Pour chacune des quatre options (6, 5, 4 et 3 cycles complets), multiplier le nombre de cycles par 90 minutes pour obtenir la durée totale de sommeil",
+            "En mode réveil : soustraire la durée de sommeil et la marge d'endormissement de l'heure de réveil pour obtenir une heure de coucher suggérée",
+            "En mode coucher : ajouter la marge d'endormissement et la durée de sommeil à l'heure de coucher pour obtenir une heure de réveil suggérée",
+            "Faire passer le résultat de l'autre côté de minuit s'il tombe avant 00:00 ou après 24:00, afin qu'il s'affiche toujours comme une heure valide"
+          ],
+          "caption": "La même arithmétique de cycle de 90 minutes exécutée à rebours à partir d'une heure de réveil ou en avant à partir d'une heure de coucher."
+        },
+        "anatomy": {
+          "intro": "Chaque option est simplement un nombre différent de cycles complets de 90 minutes — plus de cycles signifie plus de sommeil total, par incréments fixes de 90 minutes plutôt qu'un nombre d'heures arbitraire.",
+          "label6": "6 cycles",
+          "label5": "5 cycles",
+          "label4": "4 cycles",
+          "label3": "3 cycles",
+          "caption": "Les quatre options suggérées couvrent de 4,5 à 9 heures de sommeil, chacune un nombre entier de cycles complets de 90 minutes."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Selon que vous connaissez votre heure de réveil cible (calculer les heures de coucher) ou votre heure de coucher (calculer les heures de réveil).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Heure",
+            "meaning": "L'heure de référence connue — soit l'heure de réveil, soit l'heure de coucher, selon le mode.",
+            "unit": "Heure"
+          },
+          {
+            "symbol": "Temps d'endormissement",
+            "meaning": "Le temps qu'il faut typiquement pour s'endormir après s'être couché. Par défaut 15 minutes.",
+            "unit": "Minutes"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Heure hors d'une plage de 24 heures valide",
+            "description": "L'heure de référence doit être un nombre entier de minutes entre 0 et 1439 (c'est-à-dire une heure valide dans une journée) — une valeur en dehors de cette plage renvoie une erreur « invalid-time » plutôt qu'une heure hors limites."
+          },
+          {
+            "title": "Temps d'endormissement hors d'une plage raisonnable",
+            "description": "La marge d'endormissement doit être comprise entre 0 et 120 minutes — une valeur négative ou supérieure à deux heures renvoie une erreur « invalid-fall-asleep-minutes », car l'une ou l'autre produirait une heure suggérée irréaliste."
+          },
+          {
+            "title": "Les heures suggérées passent de l'autre côté de minuit",
+            "description": "Compter à rebours à partir d'une heure de réveil matinale, ou en avant à partir d'une heure de coucher tardive, peut faire passer une heure suggérée après minuit dans un sens ou dans l'autre — l'outil gère correctement ces cas avec de l'arithmétique modulaire afin que chaque suggestion soit toujours une heure valide de la journée, même si elle tombe techniquement le jour calendaire précédent ou suivant."
+          },
+          {
+            "title": "La durée de cycle est une hypothèse fixe, pas une mesure",
+            "description": "La durée de cycle de 90 minutes est une moyenne largement citée, pas une mesure personnalisée — la durée réelle du cycle de sommeil varie selon la personne et la nuit, donc ces suggestions sont un point de départ heuristique, pas une garantie de se réveiller entre les cycles une nuit donnée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le calculateur fonctionne-t-il par incréments de 90 minutes plutôt que simplement en heures ?",
+            "answer": "Un cycle de sommeil complet — passant par les différentes étapes de sommeil léger, sommeil profond et sommeil paradoxal — prend environ 90 minutes en moyenne. L'idée derrière les calculateurs de sommeil basés sur les cycles est que se réveiller entre des cycles complets (plutôt qu'au milieu d'un) a tendance à donner moins de sensation de fatigue, donc chaque heure suggérée est construite à partir de cycles complets de 90 minutes plutôt que de nombres d'heures ronds."
+          },
+          {
+            "question": "Pourquoi l'outil suggère-t-il 4 heures différentes au lieu d'une seule ?",
+            "answer": "Il n'existe pas une seule quantité de sommeil « correcte » qui convienne à tout le monde chaque nuit — les quatre options (6, 5, 4 et 3 cycles complets, soit environ 9, 7,5, 6 et 4,5 heures) offrent une gamme de choix selon l'heure à laquelle vous devez vous réveiller ou l'heure tardive à laquelle vous vous couchez, vous permettant de choisir la meilleure option disponible pour cette nuit particulière."
+          },
+          {
+            "question": "À quoi sert la marge d'endormissement, et pourquoi est-elle par défaut de 15 minutes ?",
+            "answer": "Se coucher et s'endormir réellement ne sont pas le même moment — la plupart des gens mettent un certain temps à s'assoupir. La marge par défaut de 15 minutes est un temps moyen couramment cité pour s'endormir, ajoutée au calcul afin que l'heure de coucher suggérée tienne compte du temps passé éveillé brièvement avant que le sommeil ne commence réellement, pas seulement le moment où vous vous mettez sous la couette."
+          },
+          {
+            "question": "90 minutes est-ce la durée exacte de mes cycles de sommeil ?",
+            "answer": "Pas nécessairement — 90 minutes est une moyenne couramment citée, mais la durée réelle du cycle de sommeil varie d'une personne à l'autre et même d'une nuit à l'autre, généralement dans une fourchette de 70 à 120 minutes. Cet outil utilise l'hypothèse standard de 90 minutes comme heuristique pratique, pas comme mesure de vos cycles de sommeil spécifiques."
+          }
+        ]
+      },
+      "body-fat-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de masse grasse : comment la méthode des circonférences de la Marine américaine estime le pourcentage de graisse corporelle, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Cinq catégories de masse grasse",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Catégories",
+          "modesValue": "5",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Hommes : 86,01×log₁₀(taille−cou) − 70,041×log₁₀(hauteur) + 36,76  |  Femmes : 163,205×log₁₀(taille+hanche−cou) − 97,684×log₁₀(hauteur) − 78,387",
+          "note": "La méthode de la Marine américaine estime la graisse corporelle à partir d'un petit ensemble de circonférences au mètre ruban (en pouces) plutôt que d'un adipomètre ou d'une imagerie — sacrifiant une certaine précision au profit d'une mesure que n'importe qui peut prendre chez soi avec un simple mètre ruban."
+        },
+        "flowchart": {
+          "intro": "La formule diffère selon le sexe (la version féminine utilise aussi la circonférence des hanches), mais les deux suivent la même structure basée sur des logarithmes.",
+          "steps": [
+            "Valider les mesures de circonférence : la taille doit dépasser le cou (hommes), ou la taille plus les hanches doivent dépasser le cou (femmes)",
+            "Convertir toutes les mesures de centimètres en pouces, car la formule publiée d'origine utilise des pouces",
+            "Pour les hommes : appliquer la formule à deux mesures utilisant la circonférence de taille et de cou plus la hauteur",
+            "Pour les femmes : appliquer la formule à trois mesures utilisant la circonférence de taille, de hanche et de cou plus la hauteur",
+            "Plafonner le résultat à 0 % (un résultat de formule ne peut pas être significativement négatif), puis le catégoriser selon les seuils de l'American Council on Exercise (ACE)"
+          ],
+          "caption": "Des formules de circonférence spécifiques au sexe, toutes deux construites à partir de logarithmes de différences de mesures."
+        },
+        "anatomy": {
+          "intro": "Le pourcentage de graisse corporelle se place sur une seule échelle avec des limites de catégorie qui diffèrent selon le sexe — ce sont les seuils masculins, car les niveaux de graisse essentielle des femmes sont naturellement plus élevés.",
+          "labelEssential": "Essentielle",
+          "labelAthletes": "Athlètes",
+          "labelFitness": "Forme",
+          "labelAverage": "Moyenne",
+          "caption": "Les quatre limites divisant l'échelle masculine de graisse corporelle en cinq catégories ACE — 15 % (marqué) se situe dans la fourchette Forme."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Sexe",
+            "meaning": "Détermine quelle formule (à deux ou trois mesures) et quels seuils de catégorie s'appliquent.",
+            "unit": "homme / femme"
+          },
+          {
+            "symbol": "Hauteur",
+            "meaning": "Taille, utilisée dans les deux formules.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Cou",
+            "meaning": "Circonférence du cou, mesurée juste sous le larynx.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Taille",
+            "meaning": "Circonférence de taille, à son point le plus étroit (hommes) ou au nombril (femmes).",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Hanche",
+            "meaning": "Circonférence des hanches à son point le plus large — requise pour les femmes, ignorée pour les hommes.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La taille doit dépasser le cou (hommes)",
+            "description": "La formule masculine utilise log₁₀(taille − cou) — si la taille ne dépasse pas la circonférence du cou, cette différence serait nulle ou négative, ce qui n'a pas de logarithme valide, donc l'outil rejette l'entrée comme « invalid-measurements » avant de tenter le calcul."
+          },
+          {
+            "title": "La taille plus la hanche doit dépasser le cou (femmes)",
+            "description": "De même, la formule féminine utilise log₁₀(taille + hanche − cou) — si la mesure combinée de taille et hanche ne dépasse pas la circonférence du cou, l'outil rejette l'entrée pour la même raison : une valeur nulle ou négative n'a pas de logarithme valide."
+          },
+          {
+            "title": "Résultat plafonné à zéro",
+            "description": "Pour des combinaisons de mesures à la limite de la plage valide de la formule, le calcul brut peut occasionnellement produire un petit nombre négatif — l'outil plafonne le résultat final à 0 % plutôt que d'afficher un pourcentage de graisse corporelle inférieur à zéro, ce qui ne serait pas physiquement significatif."
+          },
+          {
+            "title": "La mesure des hanches est requise pour les femmes, ignorée pour les hommes",
+            "description": "La formule masculine n'utilise que la taille et le cou ; une mesure de hanche, si saisie, ne fait simplement pas partie du calcul. La formule féminine exige la circonférence des hanches comme troisième mesure, reflétant les différences de stockage de graisse entre les sexes."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la formule utilise-t-elle la taille moins le cou plutôt que la taille seule ?",
+            "answer": "La méthode de la Marine est conçue pour isoler l'accumulation de graisse spécifiquement autour de la taille par rapport à la carrure générale d'une personne — la circonférence du cou sert d'indicateur approximatif de la carrure, donc soustraire cette valeur de la circonférence de taille donne une meilleure mesure relative de la graisse abdominale que la circonférence de taille seule."
+          },
+          {
+            "question": "Quelle est la précision de la méthode de la Marine américaine par rapport à d'autres techniques de mesure de la graisse corporelle ?",
+            "answer": "Elle sacrifie une certaine précision au profit de la praticité — les adipomètres, les scans DEXA et la pesée hydrostatique sont généralement plus précis, mais nécessitent un équipement spécialisé ou un technicien formé. La méthode des circonférences de la Marine ne nécessite qu'un mètre ruban souple, ce qui la rend accessible pour un suivi répété à domicile, au prix d'une estimation plus grossière que les méthodes en laboratoire."
+          },
+          {
+            "question": "Pourquoi la formule féminine nécessite-t-elle une mesure de hanche mais pas la formule masculine ?",
+            "answer": "La méthode originale de la Marine a été développée et validée séparément pour chaque sexe en utilisant les mesures de circonférence qui prédisaient le mieux la graisse corporelle dans chaque population — pour les femmes, la circonférence des hanches améliorait significativement la précision de la formule, tandis que pour les hommes elle n'apportait pas de valeur prédictive significative au-delà de la taille et du cou."
+          },
+          {
+            "question": "Pourquoi les seuils de catégorie de graisse corporelle sont-ils différents pour les hommes et les femmes ?",
+            "answer": "Les femmes portent naturellement un pourcentage plus élevé de graisse corporelle essentielle que les hommes — de la graisse nécessaire au fonctionnement physiologique de base, y compris la santé reproductive — donc le même pourcentage de graisse corporelle ne représente pas la même minceur relative pour les deux sexes, et les seuils de catégorie de l'American Council on Exercise sont définis séparément pour refléter cette différence biologique."
+          }
+        ]
+      },
+      "due-date-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de date d'accouchement : comment chacune des quatre méthodes de datation estime la conception et la date d'accouchement, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "De la date de référence à la date d'accouchement",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Méthodes de datation",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Date d'accouchement = date de conception estimée + 266 jours  |  Estimation de conception DDR = date DDR + (durée du cycle − 14) jours",
+          "note": "Les quatre méthodes de datation fonctionnent de la même manière sous le capot : estimer une date de conception à partir de la date de référence connue, puis ajouter l'intervalle standard de 266 jours (38 semaines) entre conception et naissance pour obtenir la date d'accouchement."
+        },
+        "flowchart": {
+          "intro": "La seule vraie différence entre les quatre méthodes est la façon dont chacune arrive à une date de conception estimée — tout ce qui suit ce point est identique.",
+          "steps": [
+            "Lire laquelle des quatre méthodes est sélectionnée : dernières règles (DDR), date de conception connue, transfert FIV à 3 jours, ou transfert FIV à 5 jours",
+            "Pour DDR : estimer l'ovulation (et la conception) à durée du cycle moins 14 jours après le début des règles, en ajustant pour une durée de cycle autre que la moyenne de 28 jours",
+            "Pour une date de conception connue : utiliser directement cette date comme estimation de conception",
+            "Pour les transferts FIV : soustraire 3 ou 5 jours de la date de transfert, car l'âge d'un embryon transféré au moment du transfert est déjà connu précisément",
+            "Ajouter 266 jours à la date de conception estimée pour obtenir la date d'accouchement, et suivre séparément l'âge gestationnel, le trimestre et le pourcentage d'avancement par rapport à aujourd'hui"
+          ],
+          "caption": "Quatre chemins différents vers la même date de conception estimée, puis un compte à rebours partagé de 266 jours jusqu'à la date d'accouchement."
+        },
+        "anatomy": {
+          "intro": "Pour la méthode DDR avec un cycle standard de 28 jours, les dernières règles, la conception estimée et la date d'accouchement tombent à des points fixes le long de la chronologie de la grossesse.",
+          "labelLmp": "Dernières règles",
+          "labelConception": "Conception (jour 14)",
+          "labelDue": "Date d'accouchement (jour 280)",
+          "caption": "Avec un cycle de 28 jours, la conception est estimée 14 jours après les dernières règles, et la date d'accouchement suit 266 jours après cela — 280 jours après les dernières règles au total."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Méthode",
+            "meaning": "Quelle date de référence vous fournissez : dernières règles, date de conception connue, ou transfert FIV (3 ou 5 jours).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Date",
+            "meaning": "La date de référence elle-même, interprétée selon la méthode sélectionnée.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "Durée du cycle",
+            "meaning": "Durée moyenne du cycle menstruel. Utilisée uniquement (et significative uniquement) pour la méthode DDR. Par défaut 28 jours.",
+            "unit": "Jours"
+          },
+          {
+            "symbol": "Date de référence",
+            "meaning": "Facultatif — la date à laquelle calculer l'âge gestationnel et l'avancement. Par défaut aujourd'hui.",
+            "unit": "Date"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Durée de cycle hors plage (méthode DDR uniquement)",
+            "description": "Pour la méthode DDR, la durée du cycle doit être comprise entre 20 et 45 jours — une valeur en dehors de cette plage renvoie une erreur « invalid-cycle-length », car elle n'est utilisée (et validée) que lorsque la méthode DDR est sélectionnée."
+          },
+          {
+            "title": "Date de référence dans le futur",
+            "description": "Si la date saisie tombe après la date de référence (normalement aujourd'hui), l'outil renvoie une erreur « date-in-future » plutôt que de calculer une date d'accouchement et un âge gestationnel à partir d'un événement qui, autant que le calculateur puisse le dire, ne s'est pas encore produit."
+          },
+          {
+            "title": "Les méthodes FIV utilisent un décalage de jours fixe, pas un ajustement de durée de cycle",
+            "description": "Contrairement à la méthode DDR, les deux méthodes FIV n'utilisent pas du tout la durée du cycle — un transfert d'embryon à 3 ou 5 jours a un âge d'embryon connu précisément, donc la conception est simplement estimée à 3 ou 5 jours avant la date de transfert, sans incertitude de durée de cycle à ajuster."
+          },
+          {
+            "title": "L'âge gestationnel est mesuré à partir d'un point de conception ajusté, pas de la date de référence brute",
+            "description": "L'âge gestationnel est conventionnellement compté à partir des dernières règles, pas de la conception réelle — donc l'outil rajoute 14 jours au chiffre de jours écoulés depuis la conception lors du calcul de l'âge gestationnel, restant cohérent avec la façon dont la datation de grossesse est standardement exprimée, quelle que soit la méthode utilisée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi les quatre méthodes ajoutent-elles exactement 266 jours à la conception, mais la grossesse totale est généralement décrite comme 280 jours ?",
+            "answer": "266 jours (38 semaines) est l'intervalle standard de la conception réelle à la naissance. 280 jours (40 semaines) est l'intervalle des dernières règles à la naissance — les 14 jours supplémentaires sont l'écart typique entre le début des règles et l'ovulation/conception dans un cycle standard de 28 jours. Les deux chiffres décrivent la même date d'accouchement ; ils sont simplement mesurés à partir de deux points de départ différents."
+          },
+          {
+            "question": "Pourquoi la durée du cycle n'a-t-elle d'importance que pour la méthode DDR ?",
+            "answer": "La durée du cycle affecte le nombre de jours après le début des règles où l'ovulation est estimée se produire — un cycle plus long ou plus court décale cette estimation. Les trois autres méthodes (conception connue, ou transfert FIV) spécifient déjà une date beaucoup plus proche de la conception réelle, il n'y a donc pas de synchronisation d'ovulation à estimer à partir de la durée du cycle."
+          },
+          {
+            "question": "Pourquoi les deux méthodes FIV soustraient-elles un nombre fixe de jours au lieu de s'ajuster à la durée du cycle ?",
+            "answer": "Avec la FIV, l'âge exact de l'embryon au moment du transfert est connu précisément grâce au processus de laboratoire — un transfert « jour 3 » ou « jour 5 » signifie que l'embryon a exactement ce nombre de jours après la fécondation. Cela rend la datation de la conception exacte plutôt qu'estimée, c'est pourquoi les méthodes FIV utilisent un décalage fixe au lieu de l'estimation dépendante de la durée du cycle dont la méthode DDR a besoin."
+          },
+          {
+            "question": "En quoi cela diffère-t-il du calculateur de grossesse ?",
+            "answer": "Cet outil prend en charge quatre méthodes de datation différentes (DDR, conception connue, et deux options de transfert FIV) et calcule la conception avant d'ajouter l'intervalle de 266 jours. Le calculateur de grossesse n'accepte qu'une date de dernières règles et ajoute directement 280 jours, sans étape séparée de date de conception ni ajustement de durée de cycle — un calcul plus simple destiné au suivi continu semaine par semaine plutôt qu'à l'estimation initiale de la date d'accouchement à partir de plusieurs points de départ possibles."
+          }
+        ]
+      },
+      "ovulation-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur d'ovulation : comment l'ovulation et la fenêtre de fertilité sont estimées en comptant à rebours à partir des prochaines règles, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Un cycle, quatre dates clés",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Cycles projetés",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Prochaines règles = dernières règles + durée du cycle  |  Ovulation = prochaines règles − durée de la phase lutéale  |  Fenêtre de fertilité = ovulation − 5 jours à ovulation + 1 jour",
+          "note": "L'ovulation est estimée en remontant à partir des prochaines règles prédites plutôt qu'en avançant à partir des dernières — la phase lutéale (les jours après l'ovulation) est beaucoup plus constante en durée d'un cycle à l'autre que les jours avant l'ovulation, c'est pourquoi compter à rebours est l'approche la plus fiable."
+        },
+        "flowchart": {
+          "intro": "Le même calcul en trois étapes se répète une fois pour chacun des trois prochains cycles projetés.",
+          "steps": [
+            "Prédire la date des prochaines règles en ajoutant la durée du cycle à la date de début des dernières règles",
+            "Estimer l'ovulation en soustrayant la durée de la phase lutéale de cette date prédite des prochaines règles",
+            "Calculer la fenêtre de fertilité comme les 5 jours avant l'ovulation jusqu'à 1 jour après, reflétant combien de temps le sperme peut survivre par rapport à la durée de viabilité de l'ovule",
+            "Répéter le même calcul pour les deuxième et troisième cycles projetés, chacun une durée de cycle plus loin"
+          ],
+          "caption": "Remonter à partir d'une date de règles prédite jusqu'à l'ovulation et la fenêtre de fertilité, répété sur trois cycles."
+        },
+        "anatomy": {
+          "intro": "Au sein d'un cycle de 28 jours avec une phase lutéale de 14 jours, la fenêtre de fertilité, l'ovulation et les prochaines règles tombent toutes à des points fixes en comptant à partir du début des dernières règles.",
+          "labelFertileStart": "Début de la fenêtre de fertilité",
+          "labelOvulation": "Ovulation",
+          "labelNextPeriod": "Prochaines règles",
+          "caption": "La fenêtre de fertilité s'ouvre 5 jours avant la date d'ovulation estimée et se ferme 1 jour après, le tout compté à rebours à partir des prochaines règles prédites."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Date des dernières règles",
+            "meaning": "Le premier jour des dernières règles.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "Durée du cycle",
+            "meaning": "Nombre moyen de jours entre le début d'une période et le début de la suivante. Par défaut 28 jours.",
+            "unit": "Jours"
+          },
+          {
+            "symbol": "Durée de la phase lutéale",
+            "meaning": "Nombre moyen de jours entre l'ovulation et les prochaines règles. Par défaut 14 jours.",
+            "unit": "Jours"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Durée du cycle hors plage",
+            "description": "La durée du cycle doit être comprise entre 20 et 45 jours — une valeur en dehors de cette plage renvoie une erreur « invalid-cycle-length », car des cycles aussi courts ou aussi longs sortent de ce que ce modèle simple de comptage à rebours est conçu pour gérer de manière fiable."
+          },
+          {
+            "title": "Durée de la phase lutéale hors plage",
+            "description": "La durée de la phase lutéale doit être comprise entre 10 et 17 jours — une valeur en dehors de cette plage renvoie une erreur « invalid-luteal-phase », reflétant la plage physiologique typique pour la phase post-ovulation."
+          },
+          {
+            "title": "La fenêtre de fertilité est asymétrique autour de l'ovulation",
+            "description": "La fenêtre s'étend sur 5 jours avant l'ovulation mais seulement 1 jour après — pas une plage symétrique — car le sperme peut survivre dans les voies reproductives jusqu'à environ 5 jours, tandis que l'ovule lui-même n'est viable que pendant environ 24 heures après sa libération."
+          },
+          {
+            "title": "Les trois cycles projetés cumulent la même estimation",
+            "description": "Chacun des trois cycles projetés est calculé de la même manière, simplement une durée de cycle plus loin des dernières règles — donc toute incertitude dans la durée de cycle ou la durée de phase lutéale saisie s'accumule légèrement plus loin pour les projections des deuxième et troisième cycles."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil compte-t-il à rebours à partir des prochaines règles plutôt qu'en avant à partir des dernières ?",
+            "answer": "La phase lutéale (le temps entre l'ovulation et les prochaines règles) est beaucoup plus constante en durée d'un cycle à l'autre que la phase folliculaire (le temps entre les dernières règles et l'ovulation), qui peut varier considérablement. Puisque la date des prochaines règles est prévisible à partir de la durée du cycle, compter à rebours à partir de celle-ci en utilisant la durée de phase lutéale plus stable donne une estimation d'ovulation plus fiable que compter en avant un nombre fixe de jours depuis les dernières règles."
+          },
+          {
+            "question": "Pourquoi la fenêtre de fertilité est-elle de 5 jours avant l'ovulation mais seulement 1 jour après ?",
+            "answer": "Cela reflète les durées de vie biologiques du sperme et de l'ovule plutôt qu'une fenêtre symétrique arbitraire — le sperme peut survivre dans les voies reproductives jusqu'à environ 5 jours en attendant l'ovulation, tandis qu'un ovule libéré n'est viable que pendant environ 24 heures. Un rapport sexuel à tout moment dans cette fenêtre de 6 jours peut potentiellement entraîner une conception."
+          },
+          {
+            "question": "Pourquoi l'outil projette-t-il trois cycles au lieu de seulement le suivant ?",
+            "answer": "Afficher trois cycles consécutifs en même temps permet de voir la tendance sur quelques mois plutôt que de recalculer un cycle à la fois — utile pour planifier à l'avance, car les dates prédites se décalent naturellement selon le moment où chaque cycle est censé commencer par rapport au précédent."
+          },
+          {
+            "question": "En quoi cela diffère-t-il des informations de fertilité dans les calculateurs de grossesse ou de date d'accouchement ?",
+            "answer": "Cet outil est prospectif — il prédit l'ovulation et les fenêtres de fertilité à venir pour des cycles qui ne se sont pas encore produits, utile pour la planification de la conception. Les calculateurs de grossesse et de date d'accouchement sont rétrospectifs à partir d'une date de dernières règles ou de conception déjà connue, utilisés une fois qu'une grossesse est déjà suspectée ou confirmée, pour estimer à quel stade elle en est et quand elle est due."
+          }
+        ]
+      },
+      "pregnancy-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de grossesse : comment l'âge gestationnel, le trimestre et le jalon de comparaison de taille hebdomadaire sont suivis à partir des dernières règles, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Les trois trimestres",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Trimestres",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Date d'accouchement = date des dernières règles + 280 jours  |  Âge gestationnel (jours) = aujourd'hui − date des dernières règles  |  Trimestre : semaines < 13 → 1er, semaines < 27 → 2e, sinon 3e",
+          "note": "Chaque chiffre que cet outil rapporte — âge gestationnel, trimestre, date d'accouchement et pourcentage d'avancement — est dérivé d'un seul comptage de jours écoulés depuis les dernières règles, en utilisant l'hypothèse standard de la règle de Naegele d'une grossesse de 280 jours (40 semaines)."
+        },
+        "flowchart": {
+          "intro": "Un seul comptage de jours écoulés alimente toutes les autres valeurs rapportées par l'outil.",
+          "steps": [
+            "Calculer le nombre de jours écoulés entre les dernières règles et aujourd'hui (ou une date de référence spécifiée)",
+            "Convertir ce nombre de jours en semaines complètes et jours restants pour le chiffre d'âge gestationnel",
+            "Attribuer le trimestre selon les semaines complètes : moins de 13 semaines est le 1er trimestre, 13 à 26 est le 2e, 27 et plus est le 3e",
+            "Ajouter 280 jours à la date des dernières règles pour obtenir la date d'accouchement, puis calculer combien de jours restent jusque-là",
+            "Calculer le pourcentage d'avancement comme les jours écoulés divisés par 280, plafonné à 100 %, et rechercher le jalon de comparaison de taille de cette semaine dans un tableau semaine par semaine fixe"
+          ],
+          "caption": "Un seul comptage de jours écoulés pilotant l'âge gestationnel, le trimestre, la date d'accouchement et la recherche du jalon hebdomadaire."
+        },
+        "anatomy": {
+          "intro": "La grossesse standard de 40 semaines se divise en trois trimestres de longueur à peu près égale, chacun couvrant une phase distincte de développement.",
+          "labelTrimester1": "1er trimestre",
+          "labelTrimester2": "2e trimestre",
+          "labelTrimester3": "3e trimestre",
+          "totalLabel": "40 semaines au total",
+          "caption": "Les trois trimestres couvrent les semaines 0-13, 13-27 et 27-40 — pas des tiers parfaitement égaux, mais proches, le 2e trimestre durant une semaine de plus que les deux autres."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Date des dernières règles",
+            "meaning": "Le premier jour des dernières règles — la seule date de référence sur laquelle repose le calcul de cet outil.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "Date de référence",
+            "meaning": "Facultatif — la date à laquelle calculer l'avancement actuel. Par défaut aujourd'hui.",
+            "unit": "Date"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Date des dernières règles dans le futur",
+            "description": "Si la date saisie tombe après la date de référence, l'outil renvoie une erreur « date-in-future », car l'âge gestationnel ne peut pas être calculé à partir d'un point de départ qui, autant que le calculateur puisse le dire, ne s'est pas encore produit."
+          },
+          {
+            "title": "Âge gestationnel bien au-delà du terme complet",
+            "description": "Si le temps écoulé dépasse 301 jours (280 jours plus une marge de 3 semaines), l'outil renvoie une erreur « beyond-full-term » — bien au-delà de la durée attendue typique d'une grossesse, signalant que la date saisie n'est probablement plus une référence précise pour suivre une grossesse en cours."
+          },
+          {
+            "title": "Les jalons de comparaison de taille ne sont disponibles que de la semaine 4 à la semaine 40",
+            "description": "Le tableau de comparaison de taille semaine par semaine commence à la semaine 4 (avant laquelle il n'y a pas de comparaison significative à montrer) et est plafonné à la semaine 40 — un âge gestationnel au-delà de 40 semaines continue simplement d'afficher le jalon de la semaine 40 plutôt que d'extrapoler au-delà du tableau."
+          },
+          {
+            "title": "Pas d'ajustement de durée de cycle, contrairement à la méthode DDR du calculateur de date d'accouchement",
+            "description": "Cet outil ajoute toujours exactement 280 jours à la date des dernières règles, en supposant un cycle standard de 28 jours — il ne demande ni n'ajuste selon la durée de cycle réelle comme le fait la méthode DDR du calculateur de date d'accouchement, ce qui rend son calcul plus simple mais légèrement moins adapté pour celles ayant un cycle moyen notablement plus court ou plus long."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi cet outil utilise-t-il un fixe de 280 jours au lieu de s'ajuster à la durée du cycle comme le calculateur de date d'accouchement ?",
+            "answer": "Cet outil est conçu pour un suivi léger et continu semaine par semaine plutôt qu'une estimation précise unique de la date d'accouchement — utiliser l'hypothèse standard de 280 jours (règle de Naegele) garde le calcul simple. Si vous souhaitez une date d'accouchement ajustée pour une durée de cycle autre que 28 jours, ou estimée à partir d'une date de conception connue ou de transfert FIV, le calculateur de date d'accouchement prend en charge ces méthodes supplémentaires."
+          },
+          {
+            "question": "Sur quoi sont basés les jalons de comparaison de taille hebdomadaires ?",
+            "answer": "Ce sont des mesures médianes approximatives — longueur crânio-caudale jusqu'à la semaine 19, puis longueur crânio-talon à partir de la semaine 20, plus le poids fœtal estimé — tirées de courbes de croissance fœtale publiées standard. Ce sont des moyennes illustratives pour la tradition populaire « votre bébé a la taille d'un ___ », pas des mesures diagnostiques ; la taille fœtale réelle varie et est correctement évaluée par échographie."
+          },
+          {
+            "question": "Pourquoi les trois trimestres ne sont-ils pas exactement égaux en longueur ?",
+            "answer": "Les limites des trimestres (13 semaines et 27 semaines) sont une convention clinique standard basée sur les étapes de développement, pas une division mathématique de 40 semaines en tiers — cela fait que le 2e trimestre (semaines 13 à 27) dure 14 semaines, une semaine de plus que les 1er et 3e trimestres, qui durent chacun 13 semaines."
+          },
+          {
+            "question": "Que se passe-t-il si je saisis une date de dernières règles remontant à plus de 10 mois ?",
+            "answer": "L'outil renvoie une erreur « beyond-full-term » une fois que l'âge gestationnel dépasserait 301 jours (280 jours plus une marge de 3 semaines au-delà de la date d'accouchement typique) — à ce stade, la date saisie est considérée comme n'étant plus une référence fiable pour suivre ce qui serait une grossesse en cours, car une grossesse aussi loin après sa date prévue sort largement de la plage de suivi prévue par cet outil."
+          }
+        ]
+      },
+      "macro-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de macros : comment les objectifs quotidiens de protéines, glucides et lipides sont répartis à partir des calories totales selon l'objectif, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Répartir 2 000 calories",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Objectifs",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Calories par macro = calories totales × pourcentage de l'objectif  |  Grammes = calories ÷ (4 pour protéines/glucides, 9 pour lipides)",
+          "note": "L'objectif en grammes de chaque macronutriment provient du même processus en deux étapes : prendre sa part en pourcentage des calories totales, puis convertir ce montant calorique en grammes en utilisant le nombre de calories que chaque macronutriment fournit par gramme (4 pour protéines et glucides, 9 pour lipides, car les lipides sont plus denses en calories)."
+        },
+        "flowchart": {
+          "intro": "La répartition en pourcentage dépend de l'objectif sélectionné, mais la conversion calories-en-grammes qui suit est identique pour chaque objectif.",
+          "steps": [
+            "Valider les calories totales comme un nombre positif ne dépassant pas 20 000",
+            "Rechercher la répartition en pourcentage pour protéines, glucides et lipides selon l'objectif sélectionné (perdre, maintenir, prendre, ou prise de muscle)",
+            "Multiplier les calories totales par le pourcentage de chaque macronutriment pour obtenir son allocation calorique",
+            "Diviser les calories de chaque macronutriment par sa valeur calories-par-gramme (4 pour protéines et glucides, 9 pour lipides) pour obtenir l'objectif en grammes"
+          ],
+          "caption": "Une répartition en pourcentage par objectif, puis la même conversion calories-en-grammes appliquée aux trois macronutriments."
+        },
+        "anatomy": {
+          "intro": "Pour la répartition 20/50/30 de l'objectif « maintenir », les mêmes 2 000 calories se répartissent inégalement par macronutriment, car la densité calorique plus élevée des lipides signifie que leur part calorique se convertit en moins de grammes qu'une part calorique égale de protéines ou de glucides.",
+          "labelProtein": "Protéines",
+          "labelCarbs": "Glucides",
+          "labelFat": "Lipides",
+          "totalLabel": "2 000 calories au total",
+          "caption": "Avec la répartition de l'objectif maintien, 2 000 calories deviennent 400 calories (100 g) de protéines, 1 000 calories (250 g) de glucides et 600 calories (67 g) de lipides."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Calories totales",
+            "meaning": "Objectif calorique quotidien total à répartir entre les trois macronutriments. Doit être compris entre 1 et 20 000.",
+            "unit": "kcal"
+          },
+          {
+            "symbol": "Objectif",
+            "meaning": "Quelle répartition en pourcentage appliquer : perdre, maintenir, prendre, ou prise de muscle.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Calories hors d'une plage réaliste",
+            "description": "Les calories totales doivent être un nombre fini supérieur à 0 et ne dépassant pas 20 000 — une valeur en dehors de cette plage renvoie une erreur « invalid-calories » plutôt que de produire une répartition de macros techniquement calculée mais physiologiquement absurde."
+          },
+          {
+            "title": "Chaque répartition reste dans les plages nutritionnelles recommandées",
+            "description": "La répartition en pourcentage de chaque objectif (protéines 20-30 %, glucides 45-55 %, lipides 20-30 % selon l'objectif) est choisie dans la plage de distribution acceptable des macronutriments de l'Institute of Medicine, plutôt qu'une règle empirique informelle — chaque combinaison que cet outil peut produire est défendable par rapport à cette norme de référence diététique publiée."
+          },
+          {
+            "title": "Les protéines sont pondérées plus fortement pour les objectifs « perdre » et « prise de muscle »",
+            "description": "Les objectifs perte et prise de muscle utilisent tous deux une part de 30 % de protéines (contre 20 % pour maintenir et prendre) — un apport relatif en protéines plus élevé pendant un déficit calorique ou un surplus axé sur la musculation est cohérent avec les recommandations nutritionnelles sportives pour préserver ou construire la masse musculaire maigre."
+          },
+          {
+            "title": "Les pourcentages totalisent toujours exactement 100 % pour chaque objectif",
+            "description": "Pour tout objectif donné, les pourcentages de protéines, glucides et lipides sont des valeurs fixes totalisant exactement 100 % — les chiffres de grammes et de calories affichés tiennent toujours compte de la totalité du total calorique sans rien de laissé de côté ni de compté deux fois."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi les lipides se convertissent-ils en moins de grammes que les protéines ou les glucides pour le même nombre de calories ?",
+            "answer": "Les lipides fournissent 9 calories par gramme, plus du double des 4 calories par gramme que fournissent respectivement les protéines et les glucides — donc la même allocation calorique se convertit en nettement moins de grammes de lipides qu'elle ne le ferait de protéines ou de glucides. C'est un fait physiologique fixe concernant les macronutriments, pas un choix que fait cet outil."
+          },
+          {
+            "question": "Pourquoi les répartitions en pourcentage changent-elles selon mon objectif ?",
+            "answer": "Différents objectifs bénéficient d'un accent différent sur les macronutriments — un objectif de perte de graisse ou un objectif de prise de muscle bénéficient tous deux d'un apport relatif en protéines plus élevé pour aider à préserver ou construire la masse musculaire maigre, tandis qu'un simple objectif de maintien ou de prise n'a pas besoin du même accent. Chaque répartition est choisie dans le cadre de directives nutritionnelles établies (la plage de distribution acceptable des macronutriments de l'Institute of Medicine) plutôt qu'un ratio arbitraire."
+          },
+          {
+            "question": "Qu'est-ce que la plage de distribution acceptable des macronutriments (AMDR) ?",
+            "answer": "C'est un ensemble de plages de référence nutritionnelles publiées — environ 10-35 % des calories provenant des protéines, 45-65 % des glucides et 20-35 % des lipides — représentant la plage associée à un risque réduit de maladie chronique tout en fournissant un apport nutritif adéquat. Chaque répartition spécifique à un objectif utilisée par ce calculateur se situe dans ces limites établies, plutôt que d'utiliser un ratio arbitraire ou à la mode."
+          },
+          {
+            "question": "Pourquoi y a-t-il une limite maximale de calories de 20 000 ?",
+            "answer": "C'est un plafond de vérification de bon sens bien au-dessus de tout apport calorique quotidien humain réaliste — son but est de détecter une entrée clairement erronée (comme un chiffre supplémentaire tapé par accident) plutôt que de refléter une limite nutritionnelle réelle, car 20 000 calories dépasse largement ce pour quoi les conseils de répartition de macros de cet outil seraient pertinents."
+          }
+        ]
+      },
+      "bmr-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de MB : comment les équations de Harris-Benedict et de Mifflin-St Jeor estiment le métabolisme au repos, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Deux équations, un corps",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Équations",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Harris-Benedict (hommes) : 66,473 + 13,7516×poids + 5,0033×taille − 6,755×âge  |  Mifflin-St Jeor (hommes) : 10×poids + 6,25×taille − 5×âge + 5",
+          "note": "Les deux équations estiment la même chose — la dépense énergétique quotidienne au repos — à partir des mêmes quatre entrées (poids, taille, âge, sexe), mais ont été ajustées sur des populations de référence différentes à plus de 70 ans d'écart, donc elles ne produisent pas des résultats identiques pour la même personne."
+        },
+        "flowchart": {
+          "intro": "Quelle équation (ou les deux) est calculée dépend de l'option de formule sélectionnée, mais chacune est un calcul direct unique sans branchement.",
+          "steps": [
+            "Valider que le poids, la taille et l'âge sont tous finis, positifs et dans des plages humaines réalistes",
+            "Si l'option de formule inclut Harris-Benedict, la calculer avec l'équation originale de 1919 à structure spécifique au sexe",
+            "Si l'option de formule inclut Mifflin-St Jeor, la calculer avec son propre décalage spécifique au sexe (+5 pour hommes, −161 pour femmes)",
+            "Si les deux ont été calculées (l'option « comparer »), calculer la différence entre elles en kilocalories"
+          ],
+          "caption": "Deux équations indépendantes spécifiques au sexe calculées à partir des mêmes entrées, comparées optionnellement côte à côte."
+        },
+        "anatomy": {
+          "intro": "Pour des mesures corporelles identiques, les deux équations ne concordent pas exactement — elles ont été dérivées de populations de référence différentes à des décennies d'écart, donc un écart entre elles est normal et attendu, pas une erreur.",
+          "labelHarrisBenedict": "Harris-Benedict (1919)",
+          "labelMifflinStJeor": "Mifflin-St Jeor (1990)",
+          "caption": "Pour un homme de 80 kg, 180 cm, 30 ans, Harris-Benedict estime environ 1 865 kcal contre 1 780 kcal pour Mifflin-St Jeor — un écart de 85 kcal à partir des mêmes mesures."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Sexe",
+            "meaning": "Les deux équations appliquent une structure/un décalage différent pour homme et femme.",
+            "unit": "homme / femme"
+          },
+          {
+            "symbol": "Poids",
+            "meaning": "Poids corporel, utilisé par les deux équations.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Taille",
+            "meaning": "Taille, utilisée par les deux équations.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Âge",
+            "meaning": "Âge en années, utilisé par les deux équations.",
+            "unit": "Années"
+          },
+          {
+            "symbol": "Formule",
+            "meaning": "Quelle équation calculer : Harris-Benedict seule, Mifflin-St Jeor seule, ou les deux côte à côte.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Mesures hors des plages humaines réalistes",
+            "description": "Le poids doit être un nombre positif inférieur à 500 kg, la taille inférieure à 300 cm, et l'âge entre 1 et 120 — des valeurs en dehors de ces plages renvoient une erreur « invalid-measurements », car aucune des deux équations n'a été dérivée de (ou n'est significative pour) des données en dehors de mesures corporelles humaines réalistes."
+          },
+          {
+            "title": "Les deux équations peuvent être calculées indépendamment ou ensemble",
+            "description": "Sélectionner « Harris-Benedict » ou « Mifflin-St Jeor » seule laisse le résultat de l'autre équation à null plutôt que de le calculer inutilement ; sélectionner « comparer » calcule les deux et rapporte en plus la différence entre elles en kilocalories."
+          },
+          {
+            "title": "C'est l'équation originale de Harris-Benedict de 1919, pas la révision de 1984",
+            "description": "Certains calculateurs modernes utilisent une révision de 1984 par Roza & Shizgal de l'équation de Harris-Benedict au lieu de l'originale — cet outil utilise délibérément l'originale de 1919 spécifiquement pour servir de point de comparaison direct et historiquement précis avec Mifflin-St Jeor, l'équation qui l'a remplacée plus tard dans la préférence clinique."
+          },
+          {
+            "title": "Aucune des deux équations ne tient compte de la composition corporelle",
+            "description": "Harris-Benedict et Mifflin-St Jeor utilisent toutes deux uniquement le poids corporel total, sans moyen de distinguer le muscle de la graisse — une personne visiblement musclée ou très mince peut constater que les deux équations sous-estiment ou surestiment son métabolisme au repos réel, une limite que la formule de Katch-McArdle (utilisée dans le calculateur de DET) est spécifiquement conçue pour résoudre."
+          }
+        ],
+        "faq": [
+          {
+            "question": "À quelle équation devrais-je faire le plus confiance, Harris-Benedict ou Mifflin-St Jeor ?",
+            "answer": "L'Academy of Nutrition and Dietetics recommande Mifflin-St Jeor (1990) comme l'équation la plus précise pour la population adulte générale aujourd'hui — elle a été développée et validée sur une population plus contemporaine et plus représentative que l'équation originale de Harris-Benedict de 1919. Harris-Benedict est incluse ici principalement pour comparaison historique, en tant qu'équation qui a d'abord popularisé l'estimation du métabolisme au repos."
+          },
+          {
+            "question": "Pourquoi les deux équations donnent-elles des résultats différents pour la même personne ?",
+            "answer": "Elles ont chacune été ajustées à des populations de référence différentes en utilisant des méthodes statistiques différentes, à plus de 70 ans d'écart — de petites différences dans la façon dont chaque équation pondère le poids, la taille et l'âge se combinent pour donner un écart réel et attendu dans leurs estimations finales, même si les deux essaient d'estimer la même quantité sous-jacente."
+          },
+          {
+            "question": "Pourquoi l'outil utilise-t-il l'équation originale de Harris-Benedict de 1919 au lieu de la révision de 1984 plus courante ?",
+            "answer": "La forme originale de 1919 est conservée ici délibérément pour servir de comparaison historique directe et citable avec Mifflin-St Jeor — montrant « l'équation qui a lancé l'estimation du métabolisme au repos » côte à côte avec « celle qui l'a remplacée plus tard dans la préférence clinique », plutôt que de mélanger une révision ultérieure qui brouillerait cette comparaison."
+          },
+          {
+            "question": "En quoi cela diffère-t-il du calculateur de DET ?",
+            "answer": "Cet outil estime uniquement le MB (dépense énergétique au repos) à l'aide de deux équations classiques affichées côte à côte pour comparaison. Le calculateur de DET utilise le MB comme entrée, puis le multiplie par un facteur de niveau d'activité pour estimer les besoins caloriques quotidiens totaux — et il offre en plus une troisième option de MB (Katch-McArdle) pour quand le pourcentage de masse grasse est connu, ce que cet outil n'inclut pas."
+          }
+        ]
+      },
+      "pace-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur d'allure : comment l'allure, la vitesse, les fractionnés et les prédictions de temps final sont calculés, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Comment le temps de course augmente avec la distance",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes de résolution",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Allure = temps ÷ distance  |  Vitesse = distance ÷ temps  |  Prédiction de Riegel : T₂ = T₁ × (D₂/D₁)^1,06",
+          "note": "Le calcul de base allure/vitesse est une simple division, résoluble pour celle des trois valeurs (allure, temps ou distance) qui est inconnue étant donné les deux autres — la formule de Riegel ajoute un raffinement supplémentaire : prédire un temps final à une nouvelle distance n'est pas une simple mise à l'échelle linéaire, car la fatigue ralentit prévisiblement l'allure à mesure que la distance augmente."
+        },
+        "flowchart": {
+          "intro": "Laquelle des trois valeurs est résolue dépend de celles des deux que vous connaissez déjà ; un calcul séparé gère la prédiction d'une nouvelle distance à partir d'un résultat connu.",
+          "steps": [
+            "Avec distance et temps : diviser le temps par la distance pour obtenir l'allure, ou la distance par le temps pour obtenir la vitesse",
+            "Avec distance et allure : multiplier la distance par l'allure pour obtenir le temps total",
+            "Avec temps et allure : diviser le temps par l'allure pour obtenir la distance",
+            "Pour un tableau d'allure multi-points : calculer chaque paire consécutive de fractionnés cumulés comme un segment, en ignorant toute paire où la distance ou le temps n'augmente pas réellement, afin qu'une ligne mal formée ne casse pas les segments ailleurs dans le tableau",
+            "Pour une prédiction de temps final : élever le rapport de la distance cible à la distance connue à la puissance 1,06 (l'exposant de fatigue de Riegel), puis multiplier par le temps connu"
+          ],
+          "caption": "Trois façons interchangeables de résoudre la même relation allure/temps/distance, plus la formule de prédiction de Riegel séparée."
+        },
+        "anatomy": {
+          "intro": "Comme l'exposant de la formule de Riegel (1,06) est supérieur à 1, le temps de course prédit augmente plus vite que la distance — doubler la distance prend sensiblement plus du double du temps, reflétant la fatigue d'endurance réelle.",
+          "xLabel": "Distance (km)",
+          "yLabel": "Temps prédit (min)",
+          "caption": "En partant d'un 5 km en 25 minutes, la formule de Riegel prédit environ 52 minutes pour un 10 km (pas un plat 50) et environ 4 heures pour un marathon — chaque palier coûte plus qu'une simple mise à l'échelle linéaire ne le ferait."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Distance",
+            "meaning": "Distance de course ou de sortie, dans l'unité de distance sélectionnée.",
+            "unit": "km / mi"
+          },
+          {
+            "symbol": "Temps",
+            "meaning": "Temps total pour la distance, saisi ou résolu en heures, minutes et secondes.",
+            "unit": "h:mm:ss"
+          },
+          {
+            "symbol": "Allure",
+            "meaning": "Temps par unité de distance — saisie ou résolue, et toujours disponible en équivalents km et mile.",
+            "unit": "min/km, min/mi"
+          },
+          {
+            "symbol": "Fractionnés multi-points",
+            "meaning": "Une série de marqueurs de distance/temps cumulés (par ex., fractionnés au mile pendant une sortie), utilisés pour calculer l'allure par segment.",
+            "unit": "Liste"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Chacun des trois modes de résolution exige des entrées strictement positives",
+            "description": "Résoudre pour l'allure, le temps ou la distance exige toutes des valeurs connues finies et strictement supérieures à zéro — une distance, un temps ou une allure nulle ou négative renvoie un résultat invalide plutôt qu'une erreur de division par zéro ou une allure négative absurde."
+          },
+          {
+            "title": "Les fractionnés multi-points ignorent les lignes mal formées sans casser tout le tableau",
+            "description": "Chaque segment entre deux points de fractionné consécutifs n'est calculé que si les deux points ont une distance et un temps valides et non négatifs, et que la distance et le temps du point ultérieur augmentent réellement par rapport au précédent — une seule ligne mauvaise ou hors ordre est simplement ignorée, afin que les segments valides ailleurs dans le tableau soient toujours calculés correctement."
+          },
+          {
+            "title": "Les fractionnés multi-points sont cumulatifs, pas par tour",
+            "description": "Chaque point saisi est traité comme un total cumulé depuis le tout début (comme des marqueurs de mile pendant une sortie continue), pas comme un temps de tour indépendant — l'outil calcule la distance et le temps de chaque segment en soustrayant des valeurs cumulées consécutives, pas en utilisant chaque entrée comme une mesure autonome."
+          },
+          {
+            "title": "Les distances de course prédéfinies utilisent des valeurs exactes, pas arrondies",
+            "description": "Les distances de course intégrées utilisent leurs valeurs précises — un semi-marathon fait 21,0975 km et un marathon complet 42,195 km, pas arrondis à 21,1 ou 42,2 — donc les calculs d'allure et de prédiction utilisant ces préréglages restent précis plutôt que d'accumuler une petite erreur d'arrondi."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'exposant de Riegel est-il 1,06 au lieu de simplement mettre le temps à l'échelle linéairement avec la distance ?",
+            "answer": "Une mise à l'échelle purement linéaire (exposant exactement 1,0) supposerait que vous pouvez maintenir exactement la même allure peu importe la distance parcourue, ce qui n'est pas réaliste — la fatigue d'endurance signifie que l'allure ralentit naturellement à mesure que la distance augmente. La formule de Peter Riegel, développée à partir de l'analyse d'une grande quantité de données réelles de temps de course, a trouvé qu'un exposant de 1,06 modélisait systématiquement ce ralentissement sur une large gamme de distances et de niveaux."
+          },
+          {
+            "question": "Pourquoi les fractionnés multi-points ignorent-ils certaines lignes au lieu d'afficher une erreur ?",
+            "answer": "Un seul fractionné mal saisi (comme une distance hors ordre ou un temps dupliqué) ne devrait pas invalider tous les autres fractionnés que vous avez correctement saisis — en ignorant simplement toute paire où les données n'ont pas de sens (distance ou temps qui n'augmente pas) plutôt que de s'arrêter au premier problème, l'outil calcule quand même tous les segments valides ailleurs dans le tableau."
+          },
+          {
+            "question": "Pourquoi un semi-marathon s'affiche-t-il à 21,0975 km au lieu d'un chiffre plus rond ?",
+            "answer": "C'est la distance officielle exacte du semi-marathon (13,1 miles convertis précisément en kilomètres) plutôt qu'un arrondi pratique — utiliser le chiffre précis garde les calculs d'allure par km et de prédiction de temps précis, car même une petite erreur d'arrondi dans la distance de base se répercuterait sur les calculs d'allure et de prédiction."
+          },
+          {
+            "question": "Quelle est la fiabilité d'une prédiction de Riegel pour une distance beaucoup plus longue ou plus courte que mon résultat connu ?",
+            "answer": "La formule est généralement plus fiable pour prédire une distance raisonnablement proche de celle connue — par exemple, un temps de 5 km prédisant un 10 km a tendance à être assez précis, car il est dérivé de modèles statistiques sur les résultats de course de nombreux coureurs. Prédire un temps de marathon à partir d'une très courte distance connue (comme un chrono sur 1 mile) étire la formule plus loin des données sur lesquelles elle a été validée, donc traitez les extrapolations lointaines comme une estimation plus grossière."
+          }
+        ]
       }
     }
   }

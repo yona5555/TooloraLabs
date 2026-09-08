@@ -22,6 +22,7 @@ import BMIMiniConverter from "./BMIMiniConverter";
 import BMIRecommendations from "./BMIRecommendations";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import type { BMIExtendedResult, UnitSystem } from "./types";
 
 const tool = new BMICalculatorTool();
@@ -224,6 +225,7 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
         secondary={
           <div className="flex flex-col gap-6">
             <SectionNav items={navItems} />
+            <ViewDocsLink slug="bmi-calculator" />
             <BMIRecommendations category={result.category} />
           </div>
         }

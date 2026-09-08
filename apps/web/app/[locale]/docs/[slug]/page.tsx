@@ -43,6 +43,18 @@ import InventoryValuationCalculatorDocsPage, { getInventoryValuationCalculatorTo
 import BreakEvenCalculatorDocsPage, { getBreakEvenCalculatorTocItems } from "@/components/docs/break-even-calculator/BreakEvenCalculatorDocsPage";
 import FuelCostCalculatorDocsPage, { getFuelCostCalculatorTocItems } from "@/components/docs/fuel-cost-calculator/FuelCostCalculatorDocsPage";
 import BatchInvoiceCalculatorDocsPage, { getBatchInvoiceCalculatorTocItems } from "@/components/docs/batch-invoice-calculator/BatchInvoiceCalculatorDocsPage";
+import TDEECalculatorDocsPage, { getTDEECalculatorTocItems } from "@/components/docs/tdee-calculator/TDEECalculatorDocsPage";
+import BMICalculatorDocsPage, { getBMICalculatorTocItems } from "@/components/docs/bmi-calculator/BMICalculatorDocsPage";
+import IdealWeightCalculatorDocsPage, { getIdealWeightCalculatorTocItems } from "@/components/docs/ideal-weight-calculator/IdealWeightCalculatorDocsPage";
+import TargetHeartRateCalculatorDocsPage, { getTargetHeartRateCalculatorTocItems } from "@/components/docs/target-heart-rate-calculator/TargetHeartRateCalculatorDocsPage";
+import SleepCalculatorDocsPage, { getSleepCalculatorTocItems } from "@/components/docs/sleep-calculator/SleepCalculatorDocsPage";
+import BodyFatCalculatorDocsPage, { getBodyFatCalculatorTocItems } from "@/components/docs/body-fat-calculator/BodyFatCalculatorDocsPage";
+import DueDateCalculatorDocsPage, { getDueDateCalculatorTocItems } from "@/components/docs/due-date-calculator/DueDateCalculatorDocsPage";
+import OvulationCalculatorDocsPage, { getOvulationCalculatorTocItems } from "@/components/docs/ovulation-calculator/OvulationCalculatorDocsPage";
+import PregnancyCalculatorDocsPage, { getPregnancyCalculatorTocItems } from "@/components/docs/pregnancy-calculator/PregnancyCalculatorDocsPage";
+import MacroCalculatorDocsPage, { getMacroCalculatorTocItems } from "@/components/docs/macro-calculator/MacroCalculatorDocsPage";
+import BMRCalculatorDocsPage, { getBMRCalculatorTocItems } from "@/components/docs/bmr-calculator/BMRCalculatorDocsPage";
+import PaceCalculatorDocsPage, { getPaceCalculatorTocItems } from "@/components/docs/pace-calculator/PaceCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -240,6 +252,54 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "batch-invoice-calculator":
       content = <BatchInvoiceCalculatorDocsPage />;
       tocItems = await getBatchInvoiceCalculatorTocItems();
+      break;
+    case "tdee-calculator":
+      content = <TDEECalculatorDocsPage />;
+      tocItems = await getTDEECalculatorTocItems();
+      break;
+    case "bmi-calculator":
+      content = <BMICalculatorDocsPage />;
+      tocItems = await getBMICalculatorTocItems();
+      break;
+    case "ideal-weight-calculator":
+      content = <IdealWeightCalculatorDocsPage />;
+      tocItems = await getIdealWeightCalculatorTocItems();
+      break;
+    case "target-heart-rate-calculator":
+      content = <TargetHeartRateCalculatorDocsPage />;
+      tocItems = await getTargetHeartRateCalculatorTocItems();
+      break;
+    case "sleep-calculator":
+      content = <SleepCalculatorDocsPage />;
+      tocItems = await getSleepCalculatorTocItems();
+      break;
+    case "body-fat-calculator":
+      content = <BodyFatCalculatorDocsPage />;
+      tocItems = await getBodyFatCalculatorTocItems();
+      break;
+    case "due-date-calculator":
+      content = <DueDateCalculatorDocsPage />;
+      tocItems = await getDueDateCalculatorTocItems();
+      break;
+    case "ovulation-calculator":
+      content = <OvulationCalculatorDocsPage />;
+      tocItems = await getOvulationCalculatorTocItems();
+      break;
+    case "pregnancy-calculator":
+      content = <PregnancyCalculatorDocsPage />;
+      tocItems = await getPregnancyCalculatorTocItems();
+      break;
+    case "macro-calculator":
+      content = <MacroCalculatorDocsPage />;
+      tocItems = await getMacroCalculatorTocItems();
+      break;
+    case "bmr-calculator":
+      content = <BMRCalculatorDocsPage />;
+      tocItems = await getBMRCalculatorTocItems();
+      break;
+    case "pace-calculator":
+      content = <PaceCalculatorDocsPage />;
+      tocItems = await getPaceCalculatorTocItems();
       break;
   }
 

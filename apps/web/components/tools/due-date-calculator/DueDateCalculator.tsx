@@ -6,6 +6,7 @@ import { DueDateCalculator as DueDateTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DueDateInputPanel from "./DueDateInputPanel";
 import DueDateResult from "./DueDateResult";
 import DueDateQuickReference from "./DueDateQuickReference";
@@ -58,6 +59,7 @@ export default function DueDateCalculator({ education }: { education: ReactNode 
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="due-date-calculator" />
               <DueDateQuickReference />
             </div>
           }

@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PregnancyInputPanel from "./PregnancyInputPanel";
 import PregnancyResult from "./PregnancyResult";
 import PregnancyQuickReference from "./PregnancyQuickReference";
@@ -51,6 +52,7 @@ export default function PregnancyCalculator({ education }: { education: ReactNod
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="pregnancy-calculator" />
               <PregnancyQuickReference />
             </div>
           }

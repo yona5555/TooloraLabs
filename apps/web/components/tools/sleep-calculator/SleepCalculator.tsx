@@ -6,6 +6,7 @@ import { SleepCalculator as SleepTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SleepInputPanel from "./SleepInputPanel";
 import SleepResult from "./SleepResult";
 import SleepQuickReference from "./SleepQuickReference";
@@ -54,6 +55,7 @@ export default function SleepCalculator({ education }: { education: ReactNode })
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="sleep-calculator" />
               <SleepQuickReference />
             </div>
           }

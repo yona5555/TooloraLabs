@@ -6,6 +6,7 @@ import { OvulationCalculator as OvulationTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import OvulationInputPanel from "./OvulationInputPanel";
 import OvulationResult from "./OvulationResult";
 import OvulationQuickReference from "./OvulationQuickReference";
@@ -62,6 +63,7 @@ export default function OvulationCalculator({ education }: { education: ReactNod
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="ovulation-calculator" />
               <OvulationQuickReference />
             </div>
           }

@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BMRInputPanel from "./BMRInputPanel";
 import BMRResult from "./BMRResult";
 import BMRQuickReference from "./BMRQuickReference";
@@ -68,6 +69,7 @@ export default function BMRCalculator({ education }: { education: ReactNode }) {
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="bmr-calculator" />
               <BMRQuickReference />
               <BMRDisclaimer />
             </div>

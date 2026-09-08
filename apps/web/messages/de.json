@@ -25862,6 +25862,1215 @@
             "answer": "Die Trennung der Vorsteuersumme von der Gesamtsumme (die Steuer einschließt) macht es möglich zu sehen, wie viel des kombinierten Umsatzes über alle Rechnungen hinweg tatsächlicher Verkaufswert ist gegenüber wie viel im Namen einer Steuerbehörde eingezogene Steuer ist — eine Unterscheidung, die für die Buchhaltung und Steuerberichterstattung wichtig ist."
           }
         ]
+      },
+      "tdee-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den TDEE-Rechner: wie sich Grundumsatz und Aktivitätsniveau zum täglichen Kalorienbedarf kombinieren und wie sich ein Gewichtsziel in ein Kalorienziel umwandelt, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Das Aktivitätsniveau verändert alles",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Aktivitätsniveaus",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "BMR (Mifflin-St Jeor) = 10×Gewicht(kg) + 6,25×Größe(cm) − 5×Alter ± 5  |  TDEE = BMR × Aktivitätsfaktor",
+          "note": "Der TDEE wird in zwei Stufen aufgebaut: zuerst wird der Ruheenergieverbrauch (BMR) aus Körpermaßen geschätzt, dann mit einem Aktivitätsfaktor hochskaliert, der Kalorien berücksichtigt, die durch Bewegung und Training zusätzlich zum Ruhestoffwechsel verbrannt werden."
+        },
+        "flowchart": {
+          "intro": "Zwei verschiedene BMR-Formeln werden unterstützt, aber ab diesem Punkt läuft jede Berechnung gleich ab.",
+          "steps": [
+            "BMR mit Mifflin-St Jeor (Gewicht, Größe, Alter, Geschlecht) berechnen oder, falls der Körperfettanteil bekannt ist, mit Katch-McArdle (das die fettfreie Masse statt des Gesamtgewichts verwendet)",
+            "BMR mit dem Faktor des gewählten Aktivitätsniveaus multiplizieren (1,2 für sitzend bis 1,9 für sehr aktiv), um den TDEE zu erhalten",
+            "Falls ein wöchentliches Gewichtsänderungsziel angegeben wurde, dieses mit 7.700 kcal pro Kilogramm Körperfett, geteilt durch 7 Tage, in eine tägliche Kalorienanpassung umrechnen",
+            "Diese tägliche Anpassung zum TDEE addieren (negativ für ein Abnahmeziel, positiv für ein Zunahmeziel), um das tägliche Kalorienziel zu erhalten, das nie unter null fallen darf",
+            "Die Anpassung als \"aggressiv\" markieren, wenn sie 35 % des TDEE übersteigt — eine gängige Nachhaltigkeitsobergrenze für ein Kaloriendefizit oder -überschuss"
+          ],
+          "caption": "Die zweistufige Pipeline von Körpermaßen zu einem an ein Gewichtsziel angepassten täglichen Kalorienziel."
+        },
+        "anatomy": {
+          "intro": "Derselbe Ruhestoffwechsel führt je nach Aktivität einer Person zu sehr unterschiedlichem Gesamtenergiebedarf — das Aktivitätsniveau ist keine kleine Anpassung, sondern oft der einzelne größte Faktor in der Endzahl.",
+          "labelSedentary": "Sitzend (×1,2)",
+          "labelModerate": "Moderat (×1,55)",
+          "labelVeryActive": "Sehr aktiv (×1,9)",
+          "caption": "Bei einem BMR von 1.500 kcal reicht der TDEE von 1.800 kcal (sitzend) bis 2.850 kcal (sehr aktiv) — derselbe Körper, ein täglicher Unterschied von 1.050 kcal."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Gewicht",
+            "meaning": "Körpergewicht, von beiden BMR-Formeln verwendet.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Größe",
+            "meaning": "Körpergröße, von der Mifflin-St-Jeor-Formel verwendet.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Alter",
+            "meaning": "Alter in Jahren, von der Mifflin-St-Jeor-Formel verwendet.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "Geschlecht",
+            "meaning": "Bestimmt den korrekten Offset in der Mifflin-St-Jeor-Formel (+5 für männlich, −161 für weiblich).",
+            "unit": "männlich / weiblich"
+          },
+          {
+            "symbol": "Körperfettanteil %",
+            "meaning": "Optional — bei Angabe wechselt die BMR-Berechnung zu Katch-McArdle, das die fettfreie Masse statt des Gesamtgewichts verwendet.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Aktivitätsniveau",
+            "meaning": "Wie viel Bewegung und Training über die Ruhephase hinaus stattfindet, von sitzend bis sehr aktiv.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Wöchentliche Gewichtsänderung",
+            "meaning": "Ein optionales vorzeichenbehaftetes Ziel: negativ zum Abnehmen, positiv zum Zunehmen, null zum Halten.",
+            "unit": "kg/Woche"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ungültige oder nicht-positive Körpermaße",
+            "description": "Sind Gewicht, Größe oder Alter keine endliche positive Zahl, gibt die entsprechende BMR-Berechnung 0 zurück statt eines negativen oder NaN-Ergebnisses — ein klares Signal, dass die Eingaben nicht verwendbar waren, statt einer irreführend spezifischen falschen Zahl."
+          },
+          {
+            "title": "Katch-McArdle erfordert einen gültigen Körperfettanteil",
+            "description": "Die Katch-McArdle-Formel (BMR basierend auf fettfreier Masse) läuft nur, wenn der Körperfettanteil ein gültiger Wert zwischen 0 und 100 ist — außerhalb dieses Bereichs, oder wenn er weggelassen wird, greift das Tool auf Mifflin-St Jeor zurück, das nur Gewicht, Größe, Alter und Geschlecht benötigt."
+          },
+          {
+            "title": "Das Kalorienziel wird nie negativ",
+            "description": "Für ein aggressives Abnahmeziel, das mathematisch ein negatives tägliches Kalorienziel implizieren würde, begrenzt das Tool das Ergebnis auf null, statt eine unsinnige negative Zahl anzuzeigen."
+          },
+          {
+            "title": "Die \"aggressiv\"-Markierung ist ein Prozentsatz des TDEE, keine absolute Zahl",
+            "description": "Dasselbe Defizit von 500 kcal/Tag ist mild für jemanden mit 3.000 kcal TDEE, aber aggressiv für jemanden mit 1.600 kcal TDEE — das Tool vergleicht die Anpassung mit dem eigenen TDEE der Person (markiert alles über 35 %), statt einen festen Kalorien-Schwellenwert für alle zu verwenden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum bietet das Tool zwei verschiedene BMR-Formeln an?",
+            "answer": "Mifflin-St Jeor benötigt nur Gewicht, Größe, Alter und Geschlecht und ist für die meisten Menschen genau — kann aber sichtbar muskulöse oder sehr schlanke Personen falsch einschätzen, da es nur das Gesamtkörpergewicht sieht, nicht wie viel davon Muskeln gegenüber Fett sind. Katch-McArdle löst dies, indem es die fettfreie Masse direkt verwendet, ist aber nur nutzbar, wenn Sie Ihren Körperfettanteil tatsächlich kennen."
+          },
+          {
+            "question": "Warum ist das Aktivitätsniveau so wichtig für die Endzahl?",
+            "answer": "Der BMR misst nur die Energie, die Ihr Körper in völliger Ruhe verbrennt — im Grunde im Bett liegend. Alles andere, was Sie tagsüber tun — Gehen, Arbeiten, Trainieren — verbrennt zusätzliche Kalorien darüber hinaus, und der Aktivitätsfaktor ist, wie das Tool all das berücksichtigt. Bei einer aktiven Person kann Aktivität leicht mehr tägliche Kalorien ausmachen als der Ruhestoffwechsel."
+          },
+          {
+            "question": "Was bedeutet die \"aggressiv\"-Markierung, und warum 35 %?",
+            "answer": "Ein Kaloriendefizit oder -überschuss, der im Verhältnis zu Ihren Erhaltungskalorien zu groß ist, wird schwer durchzuhalten und erhöht das Risiko, magere Muskelmasse zu verlieren (bei einer Diät) oder übermäßig Fett zuzunehmen (beim Muskelaufbau), statt des beabsichtigten Ergebnisses. 35 % des TDEE ist eine weit verbreitete Faustregel-Obergrenze in der Sporternährung, jenseits derer ein Ziel als aggressiv statt als stetiges, nachhaltiges Tempo gilt."
+          },
+          {
+            "question": "Wie wird aus einem wöchentlichen Gewichtsänderungsziel eine tägliche Kalorienzahl?",
+            "answer": "Das Tool verwendet die gängige Näherung, dass etwa 7.700 Kilokalorien 1 Kilogramm Körperfett entsprechen. Ein wöchentliches Ziel wird in eine tägliche Kalorienanpassung umgerechnet, indem die wöchentlichen Kilogramm mit 7.700 multipliziert und durch 7 Tage geteilt werden — diese tägliche Anpassung wird dann zum TDEE addiert (oder davon subtrahiert), um das tägliche Kalorienziel zu erhalten."
+          }
+        ]
+      },
+      "bmi-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den BMI-Rechner: wie Body-Mass-Index und der gesunde Gewichtsbereich berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die vier BMI-Kategorien",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kategorien",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "BMI = Gewicht(kg) / Größe(m)²  |  Gesunder Gewichtsbereich = 18,5 × Größe(m)² bis 24,9 × Größe(m)²",
+          "note": "Der BMI ist einfach das Gewicht geteilt durch die Größe im Quadrat — eine einzelne Zahl, die nicht zwischen Muskeln und Fett unterscheidet, weshalb sie hier mit einem gesunden Gewichtsbereich gepaart wird, der durch Rückwärtsanwendung derselben Formel an den beiden Standard-Kategoriegrenzen berechnet wird."
+        },
+        "flowchart": {
+          "intro": "Dieselbe Kernformel erzeugt sowohl den BMI-Wert selbst als auch den gesunden Gewichtsbereich, nur in entgegengesetzten Richtungen angewendet.",
+          "steps": [
+            "Größe von Zentimetern in Meter umrechnen",
+            "Gewicht durch die Größe im Quadrat teilen, um den BMI-Wert zu erhalten, gerundet auf eine Dezimalstelle",
+            "Den BMI-Wert mit den Standard-Kategorieschwellen (18,5, 25, 30) vergleichen, um Untergewicht, Normalgewicht, Übergewicht oder Adipositas zuzuordnen",
+            "Die BMI-Formel rückwärts bei 18,5 und 24,9 (den Standard-\"normal\"-Bereichsgrenzen) mit der eingegebenen Größe anwenden, um den gesunden Gewichtsbereich in denselben Einheiten wie die Eingabe zu berechnen"
+          ],
+          "caption": "Eine Formel, vorwärts angewendet für den BMI und rückwärts für den gesunden Gewichtsbereich."
+        },
+        "anatomy": {
+          "intro": "Der BMI liegt auf einer einzigen Zahlengeraden, und die Position relativ zu drei festen Grenzen — nicht die rohe Zahl allein — bestimmt die Kategorie.",
+          "labelUnderweight": "Untergewicht",
+          "labelNormal": "Normal",
+          "labelOverweight": "Übergewicht",
+          "labelObesity": "Adipositas",
+          "caption": "Die drei Grenzen, die die BMI-Skala in vier Kategorien unterteilen — ein BMI von 22 (markiert) fällt solide in den Normalgewichtsbereich."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Größe",
+            "meaning": "Körpergröße, intern für die Berechnung in Meter umgerechnet.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Gewicht",
+            "meaning": "Körpergewicht.",
+            "unit": "kg"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Kategoriegrenzen sind strikt, nicht gerundet",
+            "description": "Ein BMI von exakt 25,0 fällt in Übergewicht, nicht Normalgewicht, da die Kategorieprüfung \"kleiner als 25\" für Normal verwendet — der angezeigte BMI wird zur Lesbarkeit auf eine Dezimalstelle gerundet, aber die Kategorie wird aus dem ungerundeten Wert zugewiesen."
+          },
+          {
+            "title": "Der gesunde Gewichtsbereich verwendet 24,9, nicht 25,0, als Obergrenze",
+            "description": "Die Obergrenze des gesunden Gewichtsbereichs wird bei einem BMI von 24,9 statt genau 25 berechnet — ein bewusst kleiner Spielraum, damit das angezeigte \"gesunde\" Gewicht nicht exakt auf der Übergewichtsgrenze liegt."
+          },
+          {
+            "title": "Keine Untergrenze für Größe oder Gewicht",
+            "description": "Der Rechner lehnt keinen ungewöhnlich kleinen Größen- oder Gewichtswert ab — eine Größe nahe null würde einen extrem großen (und nicht sinnvollen) BMI ergeben, da die Formel durch die Größe im Quadrat teilt, daher sollten Ergebnisse gegen realistische menschliche Maße geprüft werden."
+          },
+          {
+            "title": "BMI unterscheidet nicht zwischen Muskeln und Fett",
+            "description": "Zwei Personen mit identischem BMI können sehr unterschiedliche Körperzusammensetzungen haben — ein muskulöser Athlet und eine Person mit geringer Muskelmasse können trotz sehr unterschiedlicher Gesundheitsprofile in derselben BMI-Kategorie landen, weshalb dieses Tool neben (nicht anstelle) dem Körperfettrechner existiert."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist die Obergrenze des gesunden Gewichtsbereichs 24,9 statt 25?",
+            "answer": "Ein BMI von exakt 25,0 wird als Übergewicht kategorisiert, nicht als Normalgewicht, daher wird die Obergrenze des gesunden Gewichtsbereichs bewusst bei 24,9 berechnet — knapp unter der Übergewichtsschwelle — damit das angezeigte gesunde Gewicht nicht exakt auf dieser Grenzlinie liegt."
+          },
+          {
+            "question": "Warum berücksichtigt der BMI keine Muskelmasse?",
+            "answer": "Der BMI wurde als einfaches Screening-Tool auf Bevölkerungsebene entwickelt, das nur Größe und Gewicht verwendet — er kann nicht zwischen einem Kilogramm Muskeln und einem Kilogramm Fett unterscheiden, da beide gleich schwer wiegen. Dies ist eine bekannte Einschränkung, weshalb eine sehr muskulöse Person laut BMI trotz niedrigem Körperfett als \"übergewichtig\" eingestuft werden kann."
+          },
+          {
+            "question": "Warum zeigt das Tool einen gesunden Gewichtsbereich statt nur eines einzelnen Idealgewichts?",
+            "answer": "Die Standard-Normalgewicht-BMI-Kategorie umfasst einen Bereich (18,5 bis 24,9), keinen einzelnen Punkt — da ein gesunder BMI für jede gegebene Größe tatsächlich eine Reihe von Körpergrößen abdeckt, zeigt das Tool den vollständigen Gewichtsbereich, der diesem BMI-Band entspricht, statt eine willkürliche \"ideale\" Zahl darin auszuwählen."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen dem gesunden Gewichtsbereich dieses Tools und dem Idealgewichtsrechner?",
+            "answer": "Der Bereich dieses Tools kommt direkt aus der BMI-Formel, angewendet bei festen BMI-Grenzen (18,5 und 24,9), während der Idealgewichtsrechner vier separate klinische Formeln (Devine, Robinson, Miller, Hamwi) verwendet, die unabhängig zur Schätzung des fettfreien/idealen Körpergewichts aus Größe und Geschlecht entwickelt wurden — methodisch unterschiedliche Ansätze, die zufällig ähnliche Zahlen ergeben."
+          }
+        ]
+      },
+      "ideal-weight-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Idealgewichtsrechner: die vier klassischen klinischen Formeln, die er mittelt, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Vier Formeln, eine Größe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Formeln",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Jede Formel: Basisgewicht + (Rate × Zoll über 60)  |  Devine, Robinson, Miller und Hamwi verwenden jeweils ihre eigene Basis und Rate",
+          "note": "Alle vier Formeln teilen dieselbe Form — ein festes Startgewicht für genau 5 Fuß (60 Zoll) Körpergröße, plus ein fester Betrag pro Zoll darüber hinaus — sie unterscheiden sich nur darin, welches Basisgewicht und welche Rate pro Zoll jeder ursprüngliche Autor gewählt hat."
+        },
+        "flowchart": {
+          "intro": "Dieselbe Größe fließt in vier unabhängige Formeln ein, jede historisch für einen bestimmten klinischen Zweck entwickelt (hauptsächlich Medikamentendosierung), dann zu einer zusammenfassenden Zahl gemittelt.",
+          "steps": [
+            "Größe von Zentimetern in Zoll umrechnen",
+            "60 von der Größe in Zoll subtrahieren, um zu erhalten, wie weit über (oder unter) 5 Fuß die Person ist",
+            "Jede der vier Formeln anwenden — Devine (1974), Robinson (1983), Miller (1983) und Hamwi (1964) — mit ihrem eigenen Basisgewicht und ihrer eigenen Rate pro Zoll für das gegebene Geschlecht",
+            "Alle vier Ergebnisse mitteln, um eine einzelne zusammenfassende Idealgewichtszahl zu erhalten"
+          ],
+          "caption": "Vier unabhängig abgeleitete Formeln, angewendet auf dieselbe Größe, dann gemittelt."
+        },
+        "anatomy": {
+          "intro": "Da jede Formel ein anderes Basisgewicht und eine andere Rate pro Zoll verwendet, stimmen sie nicht exakt überein — selbst bei gleicher Größe und gleichem Geschlecht gibt jede eine leicht andere Antwort.",
+          "labelDevine": "Devine",
+          "labelRobinson": "Robinson",
+          "labelMiller": "Miller",
+          "labelHamwi": "Hamwi",
+          "caption": "Für einen 180 cm großen (etwa 5'11\") Mann liegen die vier Formeln zwischen etwa 71,5 und 77,3 kg — nahe beieinander, aber keine identischen Schätzungen derselben Größe."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Geschlecht",
+            "meaning": "Jede der vier Formeln verwendet ein anderes Basisgewicht und eine andere Rate für männlich versus weiblich.",
+            "unit": "männlich / weiblich"
+          },
+          {
+            "symbol": "Größe",
+            "meaning": "Körpergröße, intern für die Berechnung in Zoll umgerechnet.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Größe unter 5 Fuß ergibt ein reduziertes Basisgewicht",
+            "description": "Für eine Größe unter 60 Zoll (etwa 152 cm) wird der Term \"Zoll über 60\" negativ, was vom Basisgewicht jeder Formel subtrahiert statt addiert wird — die Formeln wurden für Erwachsenengrößen entwickelt und sind nicht begrenzt, um ein unrealistisch niedriges oder sogar negatives Ergebnis für sehr geringe Körpergrößen zu verhindern."
+          },
+          {
+            "title": "Ungültige Größe oder Geschlecht gibt alle Nullen zurück",
+            "description": "Ist die Größe keine endliche positive Zahl, oder wird das Geschlecht nicht als männlich oder weiblich erkannt, kommen alle vier Formelergebnisse (und ihr Durchschnitt) als null zurück, statt einer teilweisen oder irreführenden Berechnung."
+          },
+          {
+            "title": "Dies sind historische klinische Formeln, keine moderne Forschung",
+            "description": "Alle vier Formeln stammen aus den Jahren 1964 bis 1983 und wurden hauptsächlich zur Schätzung des Körpergewichts für Medikamentendosierungszwecke in klinischen Umgebungen entwickelt, nicht als allgemeines Wellness-Ziel — es sind Punktschätzungen aus jahrzehntealter Forschung, keine personalisierte Empfehlung."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum verwendet das Tool vier verschiedene Formeln statt nur einer?",
+            "answer": "Devine, Robinson, Miller und Hamwi sind vier unabhängig entwickelte Formeln, jede historisch in unterschiedlichen klinischen Kontexten verwendet, und keine gilt allgemein als \"die\" korrekte — alle vier zusammen mit ihrem Durchschnitt zu zeigen, gibt ein vollständigeres Bild als die Ausgabe einer einzelnen Formel als definitiv darzustellen."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom gesunden Gewichtsbereich des BMI-Rechners?",
+            "answer": "Der Bereich des BMI-Rechners kommt aus der Rückwärtsanwendung der BMI-Formel bei festen BMI-Grenzen (18,5 bis 24,9) — ein Screening-Bereich auf Bevölkerungsebene. Die vier Formeln dieses Tools wurden unabhängig entwickelt, speziell um Ideal- oder fettfreies Körpergewicht aus Größe und Geschlecht für klinische Zwecke wie Medikamentendosierung zu schätzen, mit einem völlig anderen mathematischen Ansatz (linear in der Größe, überhaupt nicht auf BMI basierend)."
+          },
+          {
+            "question": "Warum geben die vier Formeln unterschiedliche Antworten für dieselbe Größe?",
+            "answer": "Jede Formel wurde von einem anderen Forscher aus unterschiedlichen Referenzdaten abgeleitet, sodass jede zu ihrem eigenen Basisgewicht (dem geschätzten Gewicht bei genau 5 Fuß) und ihrer eigenen Zunahmerate pro Zoll darüber hinaus kam — kleine Unterschiede in diesen beiden Zahlen summieren sich zu moderat unterschiedlichen Endschätzungen, obwohl alle vier derselben grundlegenden linearen Struktur folgen."
+          },
+          {
+            "question": "Sollte ich das exakte Durchschnittsgewicht anstreben, das dieses Tool zeigt?",
+            "answer": "Dies sind jahrzehntealte klinische Formeln, ursprünglich zur Schätzung des Medikamentendosierungsgewichts gedacht, kein persönliches Fitness- oder Gesundheitsziel — ein gesundes Gewicht hängt von vielen Faktoren ab (Statur, Muskelmasse, Alter, Gesundheitszustand), die keine dieser Formeln berücksichtigt. Behandeln Sie das Ergebnis als groben historischen Referenzpunkt, nicht als konkretes Ziel."
+          }
+        ]
+      },
+      "target-heart-rate-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Zielherzfrequenz-Rechner: wie die maximale Herzfrequenz und die fünf Trainingszonen abgeleitet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Fünf Trainingszonen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Trainingszonen",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Maximale Herzfrequenz = 220 − Alter  |  Mit Ruheherzfrequenz (Karvonen): Ziel = (Max − Ruhe) × Intensität% + Ruhe  |  Ohne: Ziel = Max × Intensität%",
+          "note": "Die maximale Herzfrequenz wird einmal allein aus dem Alter geschätzt, dann werden fünf Trainingszonen daraus abgeleitet — unter Verwendung der individuelleren Karvonen-Methode (Herzfrequenzreserve), wenn eine Ruheherzfrequenz verfügbar ist, oder eines einfacheren direkten Prozentsatzes des Maximums andernfalls."
+        },
+        "flowchart": {
+          "intro": "Ob eine Ruheherzfrequenz angegeben wird, ändert, welche von zwei Formeln die Grenzen jeder Zone berechnet, aber beide starten von derselben geschätzten maximalen Herzfrequenz.",
+          "steps": [
+            "Die maximale Herzfrequenz mit der klassischen \"220 minus Alter\"-Formel schätzen",
+            "Falls eine Ruheherzfrequenz angegeben wurde, die Herzfrequenzreserve berechnen (Max minus Ruhe)",
+            "Für jedes der fünf Intensitätsbänder (50-60 % bis 90-100 %) die Zonengrenzen berechnen: mit Ruheherzfrequenz den Prozentsatz auf die Herzfrequenzreserve anwenden und die Ruherate wieder addieren (Karvonen-Methode); ohne den Prozentsatz direkt auf die maximale Herzfrequenz anwenden",
+            "Alle fünf Zonen mit sowohl ihrem Prozentbereich als auch ihrem Schläge-pro-Minute-Bereich zurückgeben"
+          ],
+          "caption": "Die einzelne Schätzung der maximalen Herzfrequenz speist fünf Zonen, berechnet mit oder ohne Karvonen-Anpassung."
+        },
+        "anatomy": {
+          "intro": "Die fünf Zonen teilen den gesamten Bereich von sehr leichter Aktivität bis zur Maximalanstrengung in gleiche 10-Prozentpunkt-Bänder, jede mit einer schrittweise höheren Herzfrequenzobergrenze.",
+          "labelVeryLight": "Sehr leicht",
+          "labelLight": "Leicht",
+          "labelModerate": "Moderat",
+          "labelHard": "Hart",
+          "labelMaximum": "Maximum",
+          "caption": "Für einen 30-Jährigen (maximale Herzfrequenz 190 bpm) ohne angegebene Ruheherzfrequenz steigen die fünf Zonenobergrenzen von 114 bpm auf 190 bpm."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Alter",
+            "meaning": "Wird verwendet, um die maximale Herzfrequenz über 220 minus Alter zu schätzen. Muss zwischen 1 und 120 liegen.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "Ruheherzfrequenz",
+            "meaning": "Optional — bei Angabe wechseln alle fünf Zonen zur individuelleren Karvonen-Methode (Herzfrequenzreserve).",
+            "unit": "bpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Alter außerhalb eines realistischen Bereichs",
+            "description": "Das Alter muss eine endliche Zahl größer als 0 und höchstens 120 sein — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-age\"-Fehler zurück, da die Formel 220-minus-Alter außerhalb realistischer menschlicher Lebensspannen nicht sinnvoll ist."
+          },
+          {
+            "title": "Ruheherzfrequenz außerhalb eines realistischen Bereichs",
+            "description": "Falls angegeben, muss die Ruheherzfrequenz eine endliche Zahl größer als 0 und höchstens 220 sein — ein unrealistischer Wert gibt einen \"invalid-resting-heart-rate\"-Fehler zurück, statt Zonen zu erzeugen, die auf einer unsinnigen Reserveberechnung basieren."
+          },
+          {
+            "title": "Zonen verschieben sich vollständig, wenn die Ruheherzfrequenz hinzugefügt wird",
+            "description": "Das Hinzufügen einer Ruheherzfrequenz passt die Zonen nicht nur geringfügig an — es wechselt die zugrunde liegende Formel von einem Prozentsatz der maximalen Herzfrequenz zu einem Prozentsatz der Herzfrequenzreserve (Karvonen-Methode), was typischerweise deutlich andere, individuellere Zonengrenzen erzeugt, besonders für Personen mit ungewöhnlich niedriger oder hoher Ruheherzfrequenz."
+          },
+          {
+            "title": "Die Herzfrequenzreserve wird nur gemeldet, wenn die Ruheherzfrequenz bekannt ist",
+            "description": "Die Herzfrequenzreserve-Zahl (Max minus Ruhe) ist nur sinnvoll und wird nur zurückgegeben, wenn tatsächlich eine Ruheherzfrequenz angegeben wurde — ohne sie wird sie als null zurückgegeben, statt eines irreführenden Standardwerts."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird die maximale Herzfrequenz allein aus dem Alter geschätzt?",
+            "answer": "Die Formel \"220 minus Alter\" (Fox et al., 1971) bleibt die am häufigsten zitierte Schätzung der maximalen Herzfrequenz, trotz bekannter Ungenauigkeit für jeden einzelnen Menschen — sie erfordert keine Ausrüstung oder Tests, nur das Alter, weshalb sie der Standardausgangspunkt ist, den die meisten Herzfrequenzzonen-Rechner verwenden, dieser eingeschlossen."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen den beiden Zonenberechnungsmethoden?",
+            "answer": "Ohne Ruheherzfrequenz ist jede Zone einfach ein direkter Prozentsatz Ihres geschätzten Maximums (z. B. 70 % von 190 bpm). Mit Ruheherzfrequenz nimmt die Karvonen-Methode stattdessen einen Prozentsatz Ihrer Herzfrequenzreserve (Max minus Ruhe) und addiert Ihre Ruherate zurück — dies berücksichtigt das individuelle Fitnessniveau, da zwei Personen mit derselben maximalen Herzfrequenz, aber sehr unterschiedlichen Ruheherzfrequenzen, unterschiedliche, individuellere Zonengrenzen erhalten."
+          },
+          {
+            "question": "Warum sollte ich meine Ruheherzfrequenz eingeben?",
+            "answer": "Eine niedrigere Ruheherzfrequenz deutet allgemein auf bessere kardiovaskuläre Fitness hin, und die Karvonen-Methode nutzt diese Information, um Ihre Trainingszonen entsprechend anzupassen — zwei Personen gleichen Alters erhalten identische direkte Prozentzonen, aber echt unterschiedliche Karvonen-Zonen, wenn ihre Ruheherzfrequenzen abweichen, was die tatsächliche kardiovaskuläre Reserve jeder Person besser widerspiegelt."
+          },
+          {
+            "question": "Warum gibt es genau fünf Zonen?",
+            "answer": "Die fünf Zonen (sehr leicht, leicht, moderat, hart, Maximum) in 10-Prozentpunkt-Bändern von 50 % bis 100 % der Intensität sind eine Standardkonvention in der Sportphysiologie und im Fitness-Tracking, die erkennbaren Trainingszielen entsprechen — von aktiver Erholung am unteren Ende bis zur vollen Maximalanstrengung an der Spitze."
+          }
+        ]
+      },
+      "sleep-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Schlafrechner: wie Schlafenszeit- und Aufwachzeitvorschläge aus 90-Minuten-Schlafzyklen aufgebaut werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Wie viel Schlaf jede Option gibt",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Zyklusoptionen",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Aufwachmodus: Schlafenszeit = Aufwachzeit − (Zyklen × 90 Min.) − Einschlafzeit  |  Schlafenszeitmodus: Aufwachzeit = Schlafenszeit + Einschlafzeit + (Zyklen × 90 Min.)",
+          "note": "Jede vorgeschlagene Zeit wird aus derselben Einheit aufgebaut — einem vollständigen 90-Minuten-Schlafzyklus — eine ganze Zahl von Malen wiederholt (6 bis 3), basierend auf der Theorie, dass das Aufwachen zwischen Zyklen statt mitten in einem sich weniger benommen anfühlt."
+        },
+        "flowchart": {
+          "intro": "Dieselbe Zyklusmathematik läuft in eine von zwei Richtungen, je nachdem, ob Sie Ihre Aufwachzeit oder Ihre Schlafenszeit kennen.",
+          "steps": [
+            "Lesen, welcher Modus gewählt ist: rückwärts von einer bekannten Aufwachzeit oder vorwärts von einer bekannten Schlafenszeit arbeiten",
+            "Für jede der vier Optionen (6, 5, 4 und 3 vollständige Zyklen) die Zyklusanzahl mit 90 Minuten multiplizieren, um die Gesamtschlafzeit zu erhalten",
+            "Im Aufwachmodus: die Schlafzeit und den Einschlafpuffer von der Aufwachzeit subtrahieren, um eine vorgeschlagene Schlafenszeit zu erhalten",
+            "Im Schlafenszeitmodus: den Einschlafpuffer und die Schlafzeit zur Schlafenszeit addieren, um eine vorgeschlagene Aufwachzeit zu erhalten",
+            "Das Ergebnis um Mitternacht umbrechen, falls es vor 00:00 oder nach 24:00 fällt, damit es immer als gültige Uhrzeit angezeigt wird"
+          ],
+          "caption": "Dieselbe 90-Minuten-Zyklus-Arithmetik, rückwärts von einer Aufwachzeit oder vorwärts von einer Schlafenszeit ausgeführt."
+        },
+        "anatomy": {
+          "intro": "Jede Option ist einfach eine andere Anzahl vollständiger 90-Minuten-Zyklen — mehr Zyklen bedeutet mehr Gesamtschlaf, in festen 90-Minuten-Schritten statt einer willkürlichen Anzahl von Stunden.",
+          "label6": "6 Zyklen",
+          "label5": "5 Zyklen",
+          "label4": "4 Zyklen",
+          "label3": "3 Zyklen",
+          "caption": "Die vier vorgeschlagenen Optionen reichen von 4,5 bis 9 Stunden Schlaf, jede eine ganze Zahl vollständiger 90-Minuten-Zyklen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob Sie Ihre gewünschte Aufwachzeit kennen (Schlafenszeiten berechnen) oder Ihre Schlafenszeit (Aufwachzeiten berechnen).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Zeit",
+            "meaning": "Die bekannte Ankerzeit — je nach Modus entweder die Aufwachzeit oder die Schlafenszeit.",
+            "unit": "Uhrzeit"
+          },
+          {
+            "symbol": "Einschlafzeit",
+            "meaning": "Wie lange es typischerweise dauert, nach dem Zubettgehen einzuschlafen. Standardmäßig 15 Minuten.",
+            "unit": "Minuten"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zeit außerhalb eines gültigen 24-Stunden-Bereichs",
+            "description": "Die Ankerzeit muss eine ganze Zahl von Minuten zwischen 0 und 1439 sein (d. h. eine gültige Zeit innerhalb eines Tages) — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-time\"-Fehler zurück statt einer außerhalb der Grenzen liegenden Uhrzeit."
+          },
+          {
+            "title": "Einschlafzeit außerhalb eines angemessenen Bereichs",
+            "description": "Der Einschlafpuffer muss zwischen 0 und 120 Minuten liegen — ein negativer Wert oder einer über zwei Stunden gibt einen \"invalid-fall-asleep-minutes\"-Fehler zurück, da beides eine unrealistische vorgeschlagene Zeit erzeugen würde."
+          },
+          {
+            "title": "Vorgeschlagene Zeiten umlaufen Mitternacht",
+            "description": "Das Rückwärtsarbeiten von einer frühen Aufwachzeit oder das Vorwärtsarbeiten von einer späten Schlafenszeit kann eine vorgeschlagene Zeit in beide Richtungen über Mitternacht hinausschieben — das Tool wickelt dies mit modularer Arithmetik korrekt ab, sodass jeder Vorschlag immer eine gültige Tageszeit ist, auch wenn er technisch auf den vorherigen oder nächsten Kalendertag fällt."
+          },
+          {
+            "title": "Die Zykluslänge ist eine feste Annahme, keine Messung",
+            "description": "Die 90-Minuten-Zykluslänge ist ein weit verbreiteter Durchschnitt, keine personalisierte Messung — die tatsächliche Schlafzykluslänge variiert von Person zu Person und von Nacht zu Nacht, daher sind diese Vorschläge ein heuristischer Ausgangspunkt, keine Garantie, in einer bestimmten Nacht zwischen den Zyklen aufzuwachen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum arbeitet der Rechner in 90-Minuten-Schritten statt einfach in Stunden?",
+            "answer": "Ein vollständiger Schlafzyklus — der Durchlauf der verschiedenen Phasen von leichtem Schlaf, Tiefschlaf und REM — dauert im Durchschnitt etwa 90 Minuten. Die Idee hinter zyklusbasierten Schlafrechnern ist, dass das Aufwachen zwischen vollständigen Zyklen (statt mitten in einem) sich tendenziell weniger benommen anfühlt, daher wird jede vorgeschlagene Zeit aus ganzen 90-Minuten-Zyklen statt runden Stundenzahlen aufgebaut."
+          },
+          {
+            "question": "Warum schlägt das Tool 4 verschiedene Zeiten vor statt nur eine?",
+            "answer": "Es gibt keine einzige \"richtige\" Schlafmenge, die für jeden jede Nacht passt — die vier Optionen (6, 5, 4 und 3 vollständige Zyklen, oder etwa 9, 7,5, 6 und 4,5 Stunden) geben eine Reihe von Möglichkeiten, je nachdem, wie früh Sie aufwachen müssen oder wie spät Sie zu Bett gehen, sodass Sie die beste verfügbare Option für diese bestimmte Nacht wählen können."
+          },
+          {
+            "question": "Wofür ist der Einschlafpuffer, und warum sind standardmäßig 15 Minuten voreingestellt?",
+            "answer": "Ins Bett zu gehen und tatsächlich einzuschlafen sind nicht derselbe Moment — die meisten Menschen brauchen etwas Zeit zum Einschlafen. Der standardmäßige 15-Minuten-Puffer ist eine häufig zitierte durchschnittliche Einschlafzeit, die in die Berechnung einfließt, sodass die vorgeschlagene Schlafenszeit berücksichtigt, kurz wach zu liegen, bevor der Schlaf tatsächlich beginnt, nicht nur den Moment, in dem Sie unter die Decke schlüpfen."
+          },
+          {
+            "question": "Sind 90 Minuten die exakte Länge meiner Schlafzyklen?",
+            "answer": "Nicht unbedingt — 90 Minuten ist ein häufig zitierter Durchschnitt, aber die tatsächliche Schlafzykluslänge variiert von Person zu Person und sogar von Nacht zu Nacht, im Allgemeinen im Bereich von 70-120 Minuten. Dieses Tool verwendet die standardmäßige 90-Minuten-Annahme als praktische Heuristik, nicht als Messung Ihrer spezifischen Schlafzyklen."
+          }
+        ]
+      },
+      "body-fat-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Körperfettrechner: wie die US-Navy-Umfangsmethode den Körperfettanteil schätzt, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Fünf Körperfettkategorien",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kategorien",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Männer: 86,01×log₁₀(Taille−Hals) − 70,041×log₁₀(Größe) + 36,76  |  Frauen: 163,205×log₁₀(Taille+Hüfte−Hals) − 97,684×log₁₀(Größe) − 78,387",
+          "note": "Die US-Navy-Methode schätzt Körperfett aus einer kleinen Anzahl von Maßband-Umfängen (in Zoll) statt Hautfaltenmessern oder Bildgebung — sie tauscht etwas Präzision gegen ein Maß, das jeder zu Hause nur mit einem Maßband nehmen kann."
+        },
+        "flowchart": {
+          "intro": "Die Formel unterscheidet sich nach Geschlecht (die Frauenversion verwendet auch den Hüftumfang), aber beide folgen derselben logarithmusbasierten Struktur.",
+          "steps": [
+            "Die Umfangsmessungen validieren: Taille muss den Hals übersteigen (Männer), oder Taille plus Hüfte muss den Hals übersteigen (Frauen)",
+            "Alle Messungen von Zentimetern in Zoll umrechnen, da die ursprünglich veröffentlichte Formel Zoll verwendet",
+            "Für Männer: die Zwei-Maß-Formel mit Taillen- und Halsumfang plus Größe anwenden",
+            "Für Frauen: die Drei-Maß-Formel mit Taillen-, Hüft- und Halsumfang plus Größe anwenden",
+            "Das Ergebnis auf 0 % begrenzen (ein Formelergebnis kann nicht sinnvoll negativ sein), dann mit den Schwellenwerten des American Council on Exercise (ACE) kategorisieren"
+          ],
+          "caption": "Geschlechtsspezifische Umfangsformeln, beide aus Logarithmen von Messungsdifferenzen aufgebaut."
+        },
+        "anatomy": {
+          "intro": "Der Körperfettanteil liegt auf einer einzigen Skala mit geschlechtsspezifischen Kategoriegrenzen — dies sind die männlichen Schwellenwerte, da der essenzielle Fettanteil bei Frauen natürlich höher ist.",
+          "labelEssential": "Essenziell",
+          "labelAthletes": "Athleten",
+          "labelFitness": "Fitness",
+          "labelAverage": "Durchschnitt",
+          "caption": "Die vier Grenzen, die die männliche Körperfettskala in fünf ACE-Kategorien unterteilen — 15 % (markiert) fällt in den Fitness-Bereich."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Geschlecht",
+            "meaning": "Bestimmt, welche Formel (Zwei-Maß oder Drei-Maß) und welche Kategorieschwellen gelten.",
+            "unit": "männlich / weiblich"
+          },
+          {
+            "symbol": "Größe",
+            "meaning": "Körpergröße, in beiden Formeln verwendet.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Hals",
+            "meaning": "Halsumfang, direkt unterhalb des Kehlkopfs gemessen.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Taille",
+            "meaning": "Taillenumfang, an der schmalsten Stelle (Männer) oder am Nabel (Frauen).",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Hüfte",
+            "meaning": "Hüftumfang an der breitesten Stelle — erforderlich für Frauen, für Männer ignoriert.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Taille muss den Hals übersteigen (Männer)",
+            "description": "Die Männerformel nimmt log₁₀(Taille − Hals) — übersteigt die Taille den Halsumfang nicht, wäre diese Differenz null oder negativ, was keinen gültigen Logarithmus hat, daher lehnt das Tool die Eingabe als \"invalid-measurements\" ab, bevor die Berechnung versucht wird."
+          },
+          {
+            "title": "Taille plus Hüfte muss den Hals übersteigen (Frauen)",
+            "description": "Ebenso nimmt die Frauenformel log₁₀(Taille + Hüfte − Hals) — übersteigt das kombinierte Taillen- und Hüftmaß den Halsumfang nicht, lehnt das Tool die Eingabe aus demselben Grund ab: ein Null- oder negativer Wert hat keinen gültigen Logarithmus."
+          },
+          {
+            "title": "Ergebnis auf null begrenzt",
+            "description": "Für Messkombinationen am Rand des gültigen Formelbereichs kann die rohe Berechnung gelegentlich eine kleine negative Zahl ergeben — das Tool begrenzt das Endergebnis auf 0 %, statt einen Körperfettanteil unter null anzuzeigen, was physikalisch nicht sinnvoll wäre."
+          },
+          {
+            "title": "Hüftmessung ist für Frauen erforderlich, für Männer ignoriert",
+            "description": "Die Männerformel verwendet nur Taille und Hals; eine Hüftmessung, falls eingegeben, ist einfach nicht Teil der Berechnung. Die Frauenformel erfordert den Hüftumfang als drittes Maß, was widerspiegelt, wo die Geschlechter tendenziell unterschiedlich Fett speichern."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum verwendet die Formel Taille minus Hals statt nur der Taille allein?",
+            "answer": "Die Navy-Methode ist darauf ausgelegt, die Fettansammlung speziell um die Körpermitte relativ zur allgemeinen Statur einer Person zu isolieren — der Halsumfang dient als grober Näherungswert für die Statur, sodass das Subtrahieren vom Taillenumfang ein besseres relatives Maß für Bauchfett ergibt als der Taillenumfang allein."
+          },
+          {
+            "question": "Wie genau ist die US-Navy-Methode im Vergleich zu anderen Körperfettmesstechniken?",
+            "answer": "Sie tauscht etwas Präzision gegen Praktikabilität — Hautfaltenmesser, DEXA-Scans und hydrostatisches Wiegen sind im Allgemeinen genauer, erfordern aber spezielle Ausrüstung oder einen geschulten Techniker. Die Navy-Umfangsmethode benötigt nur ein flexibles Maßband, was sie für wiederholtes Tracking zu Hause zugänglich macht, auf Kosten einer gröberen Schätzung als laborbasierte Methoden."
+          },
+          {
+            "question": "Warum benötigt die Frauenformel eine Hüftmessung, die Männerformel aber nicht?",
+            "answer": "Die ursprüngliche Navy-Methode wurde für jedes Geschlecht separat entwickelt und validiert, unter Verwendung der Umfangsmessungen, die Körperfett in jeder Population am besten vorhersagten — bei Frauen verbesserte der Hüftumfang die Formelgenauigkeit erheblich, während er bei Männern über Taille und Hals hinaus keinen bedeutsamen Vorhersagewert hinzufügte."
+          },
+          {
+            "question": "Warum sind die Körperfettkategorie-Schwellenwerte für Männer und Frauen unterschiedlich?",
+            "answer": "Frauen tragen natürlicherweise einen höheren Anteil an essenziellem Körperfett als Männer — Fett, das für grundlegende physiologische Funktionen notwendig ist, einschließlich der reproduktiven Gesundheit — daher stellt derselbe Körperfettanteil nicht dieselbe relative Schlankheit für beide Geschlechter dar, und die Kategorieschwellenwerte des American Council on Exercise sind separat festgelegt, um diesen biologischen Unterschied widerzuspiegeln."
+          }
+        ]
+      },
+      "due-date-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Entbindungstermin-Rechner: wie jede der vier Datierungsmethoden Empfängnis und Entbindungstermin schätzt, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Vom Ankerdatum zum Entbindungstermin",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Datierungsmethoden",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Entbindungstermin = geschätztes Empfängnisdatum + 266 Tage  |  LMP-Empfängnisschätzung = Datum der letzten Periode + (Zykluslänge − 14) Tage",
+          "note": "Alle vier Datierungsmethoden funktionieren im Kern gleich: ein Empfängnisdatum aus dem bekannten Ankerdatum schätzen, dann das standardmäßige 266-Tage-Intervall (38 Wochen) von der Empfängnis bis zur Geburt addieren, um den Entbindungstermin zu erhalten."
+        },
+        "flowchart": {
+          "intro": "Der einzige wirkliche Unterschied zwischen den vier Methoden ist, wie jede zu einem geschätzten Empfängnisdatum gelangt — alles danach ist identisch.",
+          "steps": [
+            "Lesen, welche der vier Methoden gewählt ist: letzte Periode (LMP), bekanntes Empfängnisdatum, 3-Tage-IVF-Transfer oder 5-Tage-IVF-Transfer",
+            "Für LMP: die Empfängnis (und den Eisprung) bei Zykluslänge minus 14 Tage nach Periodenbeginn schätzen, angepasst für eine von 28 Tagen abweichende Zykluslänge",
+            "Für ein bekanntes Empfängnisdatum: dieses Datum direkt als Empfängnisschätzung verwenden",
+            "Für IVF-Transfers: 3 oder 5 Tage vom Transferdatum subtrahieren, da das Alter eines transferierten Embryos beim Transfer bereits präzise bekannt ist",
+            "266 Tage zum geschätzten Empfängnisdatum addieren, um den Entbindungstermin zu erhalten, und separat Schwangerschaftsalter, Trimester und Fortschrittsprozentsatz relativ zu heute verfolgen"
+          ],
+          "caption": "Vier verschiedene Wege zum selben geschätzten Empfängnisdatum, dann ein gemeinsamer 266-Tage-Countdown zum Entbindungstermin."
+        },
+        "anatomy": {
+          "intro": "Für die LMP-Methode mit einem standardmäßigen 28-Tage-Zyklus fallen letzte Periode, geschätzte Empfängnis und Entbindungstermin auf feste Punkte entlang des Schwangerschaftszeitplans.",
+          "labelLmp": "Letzte Periode",
+          "labelConception": "Empfängnis (Tag 14)",
+          "labelDue": "Entbindungstermin (Tag 280)",
+          "caption": "Bei einem 28-Tage-Zyklus wird die Empfängnis 14 Tage nach der letzten Periode geschätzt, und der Entbindungstermin folgt 266 Tage danach — 280 Tage nach der letzten Periode insgesamt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Methode",
+            "meaning": "Welches Ankerdatum Sie angeben: letzte Periode, bekanntes Empfängnisdatum, oder IVF-Transfer (3-Tage oder 5-Tage).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Datum",
+            "meaning": "Das Ankerdatum selbst, interpretiert gemäß der gewählten Methode.",
+            "unit": "Datum"
+          },
+          {
+            "symbol": "Zykluslänge",
+            "meaning": "Durchschnittliche Menstruationszykluslänge. Nur für die LMP-Methode verwendet (und sinnvoll). Standardmäßig 28 Tage.",
+            "unit": "Tage"
+          },
+          {
+            "symbol": "Referenzdatum",
+            "meaning": "Optional — das Datum, für das Schwangerschaftsalter und Fortschritt berechnet werden. Standardmäßig heute.",
+            "unit": "Datum"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zykluslänge außerhalb des Bereichs (nur LMP-Methode)",
+            "description": "Für die LMP-Methode muss die Zykluslänge zwischen 20 und 45 Tagen liegen — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-cycle-length\"-Fehler zurück, da er nur verwendet (und nur validiert) wird, wenn die LMP-Methode gewählt ist."
+          },
+          {
+            "title": "Ankerdatum in der Zukunft",
+            "description": "Fällt das eingegebene Datum nach dem Referenzdatum (normalerweise heute), gibt das Tool einen \"date-in-future\"-Fehler zurück, statt einen Entbindungstermin und ein Schwangerschaftsalter aus einem Ereignis zu berechnen, das, soweit der Rechner erkennen kann, noch nicht eingetreten ist."
+          },
+          {
+            "title": "IVF-Methoden verwenden einen festen Tagesoffset, keine Zykluslängenanpassung",
+            "description": "Anders als die LMP-Methode verwenden die beiden IVF-Methoden überhaupt keine Zykluslänge — ein 3-Tage- oder 5-Tage-Embryotransfer hat bereits ein präzise bekanntes Embryoalter, daher wird die Empfängnis einfach als 3 oder 5 Tage vor dem Transferdatum geschätzt, ohne Zykluslängen-Unsicherheit zum Anpassen."
+          },
+          {
+            "title": "Schwangerschaftsalter wird ab einem angepassten Empfängnispunkt gemessen, nicht dem rohen Ankerdatum",
+            "description": "Das Schwangerschaftsalter wird konventionell ab der letzten Periode gezählt, nicht ab der tatsächlichen Empfängnis — daher addiert das Tool 14 Tage zurück zur Tage-seit-Empfängnis-Zahl bei der Berechnung des Schwangerschaftsalters, um es konsistent damit zu halten, wie Schwangerschaftsdatierung standardmäßig ausgedrückt wird, unabhängig davon, welche Methode verwendet wurde."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum addieren alle vier Methoden genau 266 Tage zur Empfängnis, aber die gesamte Schwangerschaft wird üblicherweise als 280 Tage beschrieben?",
+            "answer": "266 Tage (38 Wochen) ist das Standardintervall von der tatsächlichen Empfängnis bis zur Geburt. 280 Tage (40 Wochen) ist das Intervall von der letzten Periode bis zur Geburt — die zusätzlichen 14 Tage sind die typische Lücke zwischen Periodenbeginn und Eisprung/Empfängnis in einem standardmäßigen 28-Tage-Zyklus. Beide Zahlen beschreiben denselben Entbindungstermin; sie werden nur ab zwei verschiedenen Startpunkten gemessen."
+          },
+          {
+            "question": "Warum ist die Zykluslänge nur für die LMP-Methode wichtig?",
+            "answer": "Die Zykluslänge beeinflusst, wie viele Tage nach Periodenbeginn der Eisprung geschätzt wird — ein längerer oder kürzerer Zyklus verschiebt diese Schätzung. Die anderen drei Methoden (bekannte Empfängnis oder IVF-Transfer) geben bereits ein Datum an, das viel näher an der tatsächlichen Empfängnis liegt, daher gibt es kein Eisprungtiming mehr, das aus der Zykluslänge geschätzt werden müsste."
+          },
+          {
+            "question": "Warum subtrahieren die beiden IVF-Methoden eine feste Anzahl von Tagen statt für die Zykluslänge anzupassen?",
+            "answer": "Bei IVF ist das genaue Alter des Embryos zum Zeitpunkt des Transfers aus dem Laborprozess präzise bekannt — ein \"Tag 3\"- oder \"Tag 5\"-Transfer bedeutet, dass der Embryo genau diese Anzahl von Tagen nach der Befruchtung ist. Dies macht die Empfängnisdatierung exakt statt geschätzt, weshalb die IVF-Methoden einen festen Offset verwenden statt der zykluslängenabhängigen Schätzung, die die LMP-Methode benötigt."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom Schwangerschaftsrechner?",
+            "answer": "Dieses Tool unterstützt vier verschiedene Datierungsmethoden (LMP, bekannte Empfängnis und zwei IVF-Transfer-Optionen) und berechnet die Empfängnis, bevor das 266-Tage-Intervall addiert wird. Der Schwangerschaftsrechner akzeptiert nur ein Datum der letzten Periode und addiert 280 Tage direkt, ohne separaten Empfängnisdatum-Schritt oder Zykluslängenanpassung — eine einfachere Berechnung, die auf laufendes wöchentliches Tracking abzielt statt auf eine anfängliche Entbindungstermin-Schätzung aus mehreren möglichen Startpunkten."
+          }
+        ]
+      },
+      "ovulation-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Eisprung-Rechner: wie Eisprung und fruchtbares Fenster durch Rückwärtszählen von der nächsten Periode geschätzt werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Ein Zyklus, vier Schlüsseldaten",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Prognostizierte Zyklen",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Nächste Periode = letzte Periode + Zykluslänge  |  Eisprung = nächste Periode − Lutealphasenlänge  |  Fruchtbares Fenster = Eisprung − 5 Tage bis Eisprung + 1 Tag",
+          "note": "Der Eisprung wird geschätzt, indem rückwärts von der nächsten vorhergesagten Periode gearbeitet wird, statt vorwärts von der letzten — die Lutealphase (die Tage nach dem Eisprung) ist über Zyklen hinweg viel konsistenter in der Länge als die Tage vor dem Eisprung, weshalb das Rückwärtszählen der zuverlässigere Ansatz ist."
+        },
+        "flowchart": {
+          "intro": "Dieselbe dreistufige Berechnung wiederholt sich einmal für jeden der nächsten drei prognostizierten Zyklen.",
+          "steps": [
+            "Das nächste Periodendatum vorhersagen, indem die Zykluslänge zum Startdatum der letzten Periode addiert wird",
+            "Den Eisprung schätzen, indem die Lutealphasenlänge von diesem vorhergesagten nächsten Periodendatum subtrahiert wird",
+            "Das fruchtbare Fenster als die 5 Tage vor dem Eisprung bis 1 Tag danach berechnen, was widerspiegelt, wie lange Spermien überleben können versus wie lange die Eizelle lebensfähig bleibt",
+            "Dieselbe Berechnung für den zweiten und dritten prognostizierten Zyklus wiederholen, jeweils eine Zykluslänge weiter entfernt"
+          ],
+          "caption": "Rückwärtsarbeiten von einem vorhergesagten Periodendatum zum Eisprung und fruchtbaren Fenster, über drei Zyklen wiederholt."
+        },
+        "anatomy": {
+          "intro": "Innerhalb eines 28-Tage-Zyklus mit einer 14-tägigen Lutealphase fallen fruchtbares Fenster, Eisprung und die nächste Periode alle auf feste Punkte, vorwärts vom Beginn der letzten Periode gezählt.",
+          "labelFertileStart": "Fruchtbares Fenster beginnt",
+          "labelOvulation": "Eisprung",
+          "labelNextPeriod": "Nächste Periode",
+          "caption": "Das fruchtbare Fenster öffnet sich 5 Tage vor dem geschätzten Eisprungdatum und schließt 1 Tag danach, alles rückwärts von der vorhergesagten nächsten Periode gezählt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Datum der letzten Periode",
+            "meaning": "Der erste Tag der letzten Menstruationsperiode.",
+            "unit": "Datum"
+          },
+          {
+            "symbol": "Zykluslänge",
+            "meaning": "Durchschnittliche Anzahl von Tagen vom Beginn einer Periode bis zum Beginn der nächsten. Standardmäßig 28 Tage.",
+            "unit": "Tage"
+          },
+          {
+            "symbol": "Lutealphasenlänge",
+            "meaning": "Durchschnittliche Anzahl von Tagen vom Eisprung bis zur nächsten Periode. Standardmäßig 14 Tage.",
+            "unit": "Tage"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zykluslänge außerhalb des Bereichs",
+            "description": "Die Zykluslänge muss zwischen 20 und 45 Tagen liegen — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-cycle-length\"-Fehler zurück, da so kurze oder lange Zyklen außerhalb dessen liegen, was dieses einfache Rückwärtszählmodell zuverlässig handhaben soll."
+          },
+          {
+            "title": "Lutealphasenlänge außerhalb des Bereichs",
+            "description": "Die Lutealphasenlänge muss zwischen 10 und 17 Tagen liegen — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-luteal-phase\"-Fehler zurück, was den typischen physiologischen Bereich für die Phase nach dem Eisprung widerspiegelt."
+          },
+          {
+            "title": "Das fruchtbare Fenster ist asymmetrisch um den Eisprung",
+            "description": "Das Fenster erstreckt sich 5 Tage vor dem Eisprung, aber nur 1 Tag danach — kein symmetrischer Bereich — da Spermien bis zu etwa 5 Tage im Reproduktionstrakt überleben können, während die Eizelle selbst nur etwa 24 Stunden nach der Freisetzung lebensfähig ist."
+          },
+          {
+            "title": "Alle drei prognostizierten Zyklen kumulieren dieselbe Schätzung",
+            "description": "Jeder der drei prognostizierten Zyklen wird auf dieselbe Weise berechnet, nur jeweils eine Zykluslänge weiter von der letzten Periode entfernt — daher kumuliert sich jede Unsicherheit in der eingegebenen Zykluslänge oder Lutealphasenlänge etwas weiter für die zweite und dritte Zyklusprognose."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum zählt das Tool rückwärts von der nächsten Periode statt vorwärts von der letzten?",
+            "answer": "Die Lutealphase (die Zeit vom Eisprung bis zur nächsten Periode) ist über Zyklen hinweg viel konsistenter in der Länge als die Follikelphase (die Zeit von der letzten Periode bis zum Eisprung), die erheblich variieren kann. Da das nächste Periodendatum aus der Zykluslänge vorhersagbar ist, gibt das Rückwärtszählen davon unter Verwendung der stabileren Lutealphasenlänge eine zuverlässigere Eisprungschätzung als das Vorwärtszählen einer festen Anzahl von Tagen ab der letzten Periode."
+          },
+          {
+            "question": "Warum ist das fruchtbare Fenster 5 Tage vor dem Eisprung, aber nur 1 Tag danach?",
+            "answer": "Dies spiegelt die biologischen Lebensspannen von Spermium und Eizelle wider, statt eines willkürlichen symmetrischen Fensters — Spermien können bis zu etwa 5 Tage im Reproduktionstrakt überleben und auf den Eisprung warten, während eine freigesetzte Eizelle nur etwa 24 Stunden lebensfähig ist. Geschlechtsverkehr zu jedem Zeitpunkt in diesem 6-Tage-Fenster kann potenziell zur Empfängnis führen."
+          },
+          {
+            "question": "Warum prognostiziert das Tool drei Zyklen statt nur den nächsten?",
+            "answer": "Die gleichzeitige Anzeige von drei aufeinanderfolgenden Zyklen lässt Sie das Muster über ein paar Monate sehen, statt jeweils einen Zyklus neu zu berechnen — nützlich für die Vorausplanung, da sich vorhergesagte Daten natürlich verschieben, je nachdem, wann jeder Zyklus relativ zum vorherigen beginnen soll."
+          },
+          {
+            "question": "Wie unterscheidet sich dies von den Fruchtbarkeitsinformationen in den Schwangerschafts- oder Entbindungstermin-Rechnern?",
+            "answer": "Dieses Tool ist vorausschauend — es sagt bevorstehenden Eisprung und fruchtbare Fenster für Zyklen voraus, die noch nicht stattgefunden haben, nützlich für die Empfängnisplanung. Die Schwangerschafts- und Entbindungstermin-Rechner sind rückblickend von einer bereits bekannten letzten Periode oder einem Empfängnisdatum, verwendet, sobald eine Schwangerschaft bereits vermutet oder bestätigt wird, um zu schätzen, wie weit sie fortgeschritten ist und wann sie fällig ist."
+          }
+        ]
+      },
+      "pregnancy-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Schwangerschaftsrechner: wie Schwangerschaftsalter, Trimester und der wöchentliche Größenvergleichs-Meilenstein ab der letzten Periode verfolgt werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die drei Trimester",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Trimester",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Entbindungstermin = Datum letzte Periode + 280 Tage  |  Schwangerschaftsalter (Tage) = heute − Datum letzte Periode  |  Trimester: Wochen < 13 → 1., Wochen < 27 → 2., sonst 3.",
+          "note": "Jede von diesem Tool gemeldete Zahl — Schwangerschaftsalter, Trimester, Entbindungstermin und Fortschrittsprozentsatz — wird aus einer einzigen Zählung der seit der letzten Periode verstrichenen Tage abgeleitet, unter Verwendung der Standard-Naegele-Regel-Annahme einer 280-Tage-Schwangerschaft (40 Wochen)."
+        },
+        "flowchart": {
+          "intro": "Eine Zählung der verstrichenen Tage speist jeden anderen vom Tool gemeldeten Wert.",
+          "steps": [
+            "Die Anzahl der zwischen der letzten Periode und heute (oder einem angegebenen Referenzdatum) verstrichenen Tage berechnen",
+            "Diese Tageszahl in vollendete Wochen und verbleibende Tage für die Schwangerschaftsalterzahl umrechnen",
+            "Das Trimester basierend auf vollendeten Wochen zuweisen: unter 13 Wochen ist das 1. Trimester, 13 bis 26 ist das 2., 27 und darüber ist das 3.",
+            "280 Tage zum Datum der letzten Periode addieren, um den Entbindungstermin zu erhalten, dann berechnen, wie viele Tage bis dahin verbleiben",
+            "Den Fortschrittsprozentsatz als verstrichene Tage geteilt durch 280 berechnen, auf 100 % begrenzt, und den Größenvergleichs-Meilenstein dieser Woche aus einer festen Wochentabelle nachschlagen"
+          ],
+          "caption": "Eine einzige Zählung verstrichener Tage steuert Schwangerschaftsalter, Trimester, Entbindungstermin und den wöchentlichen Meilenstein-Nachschlag."
+        },
+        "anatomy": {
+          "intro": "Die standardmäßige 40-Wochen-Schwangerschaft teilt sich in drei Trimester von etwa gleicher Länge, jedes mit einer eigenen Entwicklungsphase.",
+          "labelTrimester1": "1. Trimester",
+          "labelTrimester2": "2. Trimester",
+          "labelTrimester3": "3. Trimester",
+          "totalLabel": "Insgesamt 40 Wochen",
+          "caption": "Die drei Trimester erstrecken sich über die Wochen 0-13, 13-27 und 27-40 — nicht perfekt gleiche Drittel, aber nahe dran, wobei das 2. Trimester eine Woche länger läuft als die anderen beiden."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Datum der letzten Periode",
+            "meaning": "Der erste Tag der letzten Menstruationsperiode — das einzige Ankerdatum, aus dem die Mathematik dieses Tools aufgebaut ist.",
+            "unit": "Datum"
+          },
+          {
+            "symbol": "Referenzdatum",
+            "meaning": "Optional — das Datum, für das der aktuelle Fortschritt berechnet wird. Standardmäßig heute.",
+            "unit": "Datum"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Datum der letzten Periode in der Zukunft",
+            "description": "Fällt das eingegebene Datum nach dem Referenzdatum, gibt das Tool einen \"date-in-future\"-Fehler zurück, da das Schwangerschaftsalter nicht aus einem Startpunkt berechnet werden kann, der, soweit der Rechner erkennen kann, noch nicht eingetreten ist."
+          },
+          {
+            "title": "Schwangerschaftsalter weit über dem vollen Termin",
+            "description": "Übersteigt die verstrichene Zeit 301 Tage (280 Tage plus 3-Wochen-Marge), gibt das Tool einen \"beyond-full-term\"-Fehler zurück — weit über der erwarteten Dauer einer typischen Schwangerschaft, was signalisiert, dass das eingegebene Datum wahrscheinlich kein genauer Anker mehr für die Verfolgung einer laufenden Schwangerschaft ist."
+          },
+          {
+            "title": "Größenvergleichs-Meilensteine sind nur von Woche 4 bis Woche 40 verfügbar",
+            "description": "Die wöchentliche Größenvergleichstabelle beginnt bei Woche 4 (davor gibt es keinen sinnvollen Vergleich zu zeigen) und ist bei Woche 40 gedeckelt — ein Schwangerschaftsalter über 40 Wochen zeigt einfach weiterhin den Woche-40-Meilenstein, statt über die Tabelle hinaus zu extrapolieren."
+          },
+          {
+            "title": "Keine Zykluslängenanpassung, anders als bei der LMP-Methode des Entbindungstermin-Rechners",
+            "description": "Dieses Tool addiert immer genau 280 Tage zum Datum der letzten Periode, unter Annahme eines standardmäßigen 28-Tage-Zyklus — es fragt nicht nach der tatsächlichen Zykluslänge oder passt sich basierend darauf an, wie es die LMP-Methode des Entbindungstermin-Rechners tut, was seine Mathematik einfacher, aber etwas weniger zugeschnitten für Personen mit einem deutlich kürzeren oder längeren Durchschnittszyklus macht."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum verwendet dieses Tool feste 280 Tage statt sich wie der Entbindungstermin-Rechner an die Zykluslänge anzupassen?",
+            "answer": "Dieses Tool ist für leichtgewichtiges, laufendes wöchentliches Tracking gebaut, nicht für eine einmalige präzise Entbindungstermin-Schätzung — die Verwendung der standardmäßigen 280-Tage-Annahme (Naegele-Regel) hält die Berechnung einfach. Wenn Sie einen an eine andere Zykluslänge als 28 Tage angepassten Entbindungstermin wünschen, oder einen aus einem bekannten Empfängnis- oder IVF-Transferdatum geschätzten, unterstützt der Entbindungstermin-Rechner diese zusätzlichen Methoden."
+          },
+          {
+            "question": "Worauf basieren die wöchentlichen Größenvergleichs-Meilensteine?",
+            "answer": "Es sind ungefähre Median-Messungen — Scheitel-Steiß-Länge bis Woche 19, dann Scheitel-Fersen-Länge ab Woche 20, plus geschätztes fetales Gewicht — aus standardmäßig veröffentlichten fetalen Wachstumskurven gezogen. Sie sind illustrative Durchschnittswerte für die populäre \"Ihr Baby ist so groß wie ein ___\"-Tradition, keine diagnostischen Messungen; die tatsächliche fetale Größe variiert und wird ordnungsgemäß per Ultraschall beurteilt."
+          },
+          {
+            "question": "Warum sind die drei Trimester nicht genau gleich lang?",
+            "answer": "Die Trimestergrenzen (13 Wochen und 27 Wochen) sind eine klinische Standardkonvention basierend auf Entwicklungsstadien, keine mathematische Teilung von 40 Wochen in Drittel — dies macht das 2. Trimester (Wochen 13 bis 27) 14 Wochen lang, eine Woche länger als das 1. und 3. Trimester, die jeweils 13 Wochen umfassen."
+          },
+          {
+            "question": "Was passiert, wenn ich ein Datum der letzten Periode von vor mehr als 10 Monaten eingebe?",
+            "answer": "Das Tool gibt einen \"beyond-full-term\"-Fehler zurück, sobald das Schwangerschaftsalter 301 Tage überschreiten würde (280 Tage plus eine 3-Wochen-Marge über den typischen Entbindungstermin hinaus) — an diesem Punkt wird das eingegebene Datum als nicht mehr zuverlässiger Anker für die Verfolgung einer wäre-laufenden Schwangerschaft behandelt, da eine Schwangerschaft so weit über ihrem Termin weit außerhalb des beabsichtigten Tracking-Bereichs dieses Tools liegt."
+          }
+        ]
+      },
+      "macro-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Makro-Rechner: wie tägliche Protein-, Kohlenhydrat- und Fettziele nach Ziel aus den Gesamtkalorien aufgeteilt werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Aufteilung von 2.000 Kalorien",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ziele",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Kalorien pro Makro = Gesamtkalorien × Zielprozentsatz  |  Gramm = Kalorien ÷ (4 für Protein/Kohlenhydrate, 9 für Fett)",
+          "note": "Das Grammziel jedes Makronährstoffs kommt aus demselben zweistufigen Prozess: seinen prozentualen Anteil an den Gesamtkalorien nehmen, dann diese Kalorienmenge unter Verwendung dessen, wie viele Kalorien jeder Makronährstoff pro Gramm liefert (4 für Protein und Kohlenhydrate, 9 für Fett, da Fett kalorienreicher ist), in Gramm umrechnen."
+        },
+        "flowchart": {
+          "intro": "Die prozentuale Aufteilung hängt vom gewählten Ziel ab, aber die anschließende Kalorien-zu-Gramm-Umrechnung ist für jedes Ziel identisch.",
+          "steps": [
+            "Gesamtkalorien als positive Zahl nicht größer als 20.000 validieren",
+            "Die prozentuale Aufteilung für Protein, Kohlenhydrate und Fett basierend auf dem gewählten Ziel nachschlagen (Abnehmen, Halten, Zunehmen oder Muskelaufbau)",
+            "Die Gesamtkalorien mit dem Prozentsatz jedes Makronährstoffs multiplizieren, um seine Kalorienzuteilung zu erhalten",
+            "Die Kalorien jedes Makronährstoffs durch seinen Kalorien-pro-Gramm-Wert teilen (4 für Protein und Kohlenhydrate, 9 für Fett), um das Grammziel zu erhalten"
+          ],
+          "caption": "Eine prozentuale Aufteilung pro Ziel, dann dieselbe Kalorien-zu-Gramm-Umrechnung auf alle drei Makronährstoffe angewendet."
+        },
+        "anatomy": {
+          "intro": "Bei der 20/50/30-Aufteilung des \"Halten\"-Ziels teilen sich dieselben 2.000 Kalorien ungleichmäßig nach Makronährstoff auf, da die höhere Kaloriendichte von Fett bedeutet, dass sein Kalorienanteil in weniger Gramm umgerechnet wird als ein gleicher Kalorienanteil von Protein oder Kohlenhydraten.",
+          "labelProtein": "Protein",
+          "labelCarbs": "Kohlenhydrate",
+          "labelFat": "Fett",
+          "totalLabel": "2.000 Kalorien insgesamt",
+          "caption": "Bei der Halten-Ziel-Aufteilung werden 2.000 Kalorien zu 400 Kalorien (100 g) Protein, 1.000 Kalorien (250 g) Kohlenhydraten und 600 Kalorien (67 g) Fett."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Gesamtkalorien",
+            "meaning": "Tägliches Gesamtkalorienziel, das auf die drei Makronährstoffe aufgeteilt werden soll. Muss zwischen 1 und 20.000 liegen.",
+            "unit": "kcal"
+          },
+          {
+            "symbol": "Ziel",
+            "meaning": "Welche prozentuale Aufteilung angewendet wird: Abnehmen, Halten, Zunehmen oder Muskelaufbau.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Kalorien außerhalb eines realistischen Bereichs",
+            "description": "Die Gesamtkalorien müssen eine endliche Zahl größer als 0 und höchstens 20.000 sein — ein Wert außerhalb dieses Bereichs gibt einen \"invalid-calories\"-Fehler zurück, statt eine technisch berechnete, aber physiologisch bedeutungslose Makroaufteilung zu erzeugen."
+          },
+          {
+            "title": "Jede Aufteilung bleibt innerhalb empfohlener Ernährungsbereiche",
+            "description": "Die prozentuale Aufteilung jedes Ziels (Protein 20-30 %, Kohlenhydrate 45-55 %, Fett 20-30 % je nach Ziel) wird aus dem akzeptablen Makronährstoff-Verteilungsbereich des Institute of Medicine gewählt, statt einer informellen Faustregel — jede Kombination, die dieses Tool erzeugen kann, ist gegen diesen veröffentlichten Ernährungsreferenzstandard vertretbar."
+          },
+          {
+            "title": "Protein ist für die Ziele \"Abnehmen\" und \"Muskelaufbau\" höher gewichtet",
+            "description": "Sowohl das Abnehm- als auch das Muskelaufbau-Ziel verwenden einen 30 %-Proteinanteil (gegenüber 20 % für Halten und Zunehmen) — eine höhere relative Proteinaufnahme während eines Kaloriendefizits oder eines krafttrainingsgetriebenen Überschusses entspricht Sporternährungsrichtlinien zum Erhalt oder Aufbau magerer Muskelmasse."
+          },
+          {
+            "title": "Prozentsätze summieren sich innerhalb jedes Ziels immer auf genau 100 %",
+            "description": "Für jedes gegebene Ziel sind die Protein-, Kohlenhydrat- und Fettprozentsätze feste Werte, die sich auf genau 100 % summieren — die angezeigten Gramm- und Kalorienzahlen berücksichtigen immer die gesamten Kalorien, ohne dass etwas übrig bleibt oder doppelt gezählt wird."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum rechnet Fett bei gleicher Kalorienzahl in weniger Gramm um als Protein oder Kohlenhydrate?",
+            "answer": "Fett liefert 9 Kalorien pro Gramm, mehr als das Doppelte der 4 Kalorien pro Gramm, die Protein und Kohlenhydrate jeweils liefern — daher rechnet dieselbe Kalorienzuteilung in deutlich weniger Gramm Fett um, als sie es bei Protein oder Kohlenhydraten würde. Dies ist eine feste physiologische Tatsache über Makronährstoffe, keine Entscheidung, die dieses Tool trifft."
+          },
+          {
+            "question": "Warum ändern sich die prozentualen Aufteilungen basierend auf meinem Ziel?",
+            "answer": "Verschiedene Ziele profitieren von unterschiedlicher Makronährstoff-Betonung — sowohl ein Fettabbau- als auch ein Muskelaufbau-Ziel profitieren von einer höheren relativen Proteinaufnahme, um magere Muskelmasse zu erhalten oder aufzubauen, während ein einfaches Halte- oder Zunahmeziel diese gleiche Betonung nicht benötigt. Jede Aufteilung wird aus etablierten Ernährungsrichtlinien gewählt (dem akzeptablen Makronährstoff-Verteilungsbereich des Institute of Medicine), statt eines willkürlichen Verhältnisses."
+          },
+          {
+            "question": "Was ist der akzeptable Makronährstoff-Verteilungsbereich (AMDR)?",
+            "answer": "Es ist eine Reihe veröffentlichter Ernährungsreferenzbereiche — etwa 10-35 % der Kalorien aus Protein, 45-65 % aus Kohlenhydraten und 20-35 % aus Fett — die den Bereich darstellen, der mit reduziertem Risiko für chronische Krankheiten bei gleichzeitig angemessener Nährstoffzufuhr verbunden ist. Jede zielspezifische Aufteilung, die dieser Rechner verwendet, fällt innerhalb dieser etablierten Grenzen, statt ein willkürliches oder trendiges Verhältnis zu verwenden."
+          },
+          {
+            "question": "Warum gibt es eine maximale Kaloriengrenze von 20.000?",
+            "answer": "Dies ist eine Plausibilitätsprüfungs-Obergrenze weit über jeder realistischen menschlichen täglichen Kalorienaufnahme — ihr Zweck ist es, eindeutig fehlerhafte Eingaben abzufangen (wie eine versehentlich eingegebene zusätzliche Ziffer), nicht ein tatsächliches Ernährungslimit widerzuspiegeln, da 20.000 Kalorien weit über dem liegen, wofür die Makroaufteilungs-Anleitung dieses Tools relevant wäre."
+          }
+        ]
+      },
+      "bmr-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den BMR-Rechner: wie die Harris-Benedict- und Mifflin-St-Jeor-Gleichungen die Ruhestoffwechselrate schätzen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Zwei Gleichungen, ein Körper",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Gleichungen",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Harris-Benedict (Männer): 66,473 + 13,7516×Gewicht + 5,0033×Größe − 6,755×Alter  |  Mifflin-St Jeor (Männer): 10×Gewicht + 6,25×Größe − 5×Alter + 5",
+          "note": "Beide Gleichungen schätzen dasselbe — den täglichen Ruheenergieverbrauch — aus denselben vier Eingaben (Gewicht, Größe, Alter, Geschlecht), wurden aber an unterschiedliche Referenzpopulationen mehr als 70 Jahre auseinander angepasst, sodass sie für dieselbe Person keine identischen Ergebnisse liefern."
+        },
+        "flowchart": {
+          "intro": "Welche Gleichung (oder beide) berechnet wird, hängt von der gewählten Formeloption ab, aber jede ist eine einzelne direkte Berechnung ohne Verzweigung.",
+          "steps": [
+            "Validieren, dass Gewicht, Größe und Alter alle endlich, positiv und innerhalb realistischer menschlicher Bereiche sind",
+            "Falls die Formeloption Harris-Benedict enthält, mit der ursprünglichen Gleichung von 1919 mit geschlechtsspezifischer Struktur berechnen",
+            "Falls die Formeloption Mifflin-St Jeor enthält, mit ihrem eigenen geschlechtsspezifischen Offset berechnen (+5 für Männer, −161 für Frauen)",
+            "Falls beide berechnet wurden (die \"Vergleichs\"-Option), die Differenz zwischen ihnen in Kilokalorien berechnen"
+          ],
+          "caption": "Zwei unabhängige, geschlechtsspezifische Gleichungen, aus denselben Eingaben berechnet, optional nebeneinander verglichen."
+        },
+        "anatomy": {
+          "intro": "Bei identischen Körpermaßen stimmen die beiden Gleichungen nicht exakt überein — sie wurden aus verschiedenen Referenzpopulationen Jahrzehnte auseinander abgeleitet, sodass eine Lücke zwischen ihnen normal und erwartet ist, kein Fehler.",
+          "labelHarrisBenedict": "Harris-Benedict (1919)",
+          "labelMifflinStJeor": "Mifflin-St Jeor (1990)",
+          "caption": "Für einen 80 kg schweren, 180 cm großen, 30-jährigen Mann schätzt Harris-Benedict etwa 1.865 kcal gegenüber 1.780 kcal bei Mifflin-St Jeor — eine Lücke von 85 kcal bei denselben Maßen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Geschlecht",
+            "meaning": "Beide Gleichungen wenden eine unterschiedliche Struktur/einen unterschiedlichen Offset für männlich versus weiblich an.",
+            "unit": "männlich / weiblich"
+          },
+          {
+            "symbol": "Gewicht",
+            "meaning": "Körpergewicht, von beiden Gleichungen verwendet.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Größe",
+            "meaning": "Körpergröße, von beiden Gleichungen verwendet.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Alter",
+            "meaning": "Alter in Jahren, von beiden Gleichungen verwendet.",
+            "unit": "Jahre"
+          },
+          {
+            "symbol": "Formel",
+            "meaning": "Welche Gleichung berechnet wird: nur Harris-Benedict, nur Mifflin-St Jeor, oder beide nebeneinander.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Maße außerhalb realistischer menschlicher Bereiche",
+            "description": "Das Gewicht muss eine positive Zahl unter 500 kg sein, die Größe unter 300 cm und das Alter zwischen 1 und 120 — Werte außerhalb dieser Bereiche geben einen \"invalid-measurements\"-Fehler zurück, da keine der Gleichungen aus Daten außerhalb realistischer menschlicher Körpermaße abgeleitet wurde (oder für sie sinnvoll ist)."
+          },
+          {
+            "title": "Die beiden Gleichungen können unabhängig oder zusammen berechnet werden",
+            "description": "Die alleinige Auswahl von \"Harris-Benedict\" oder \"Mifflin-St Jeor\" lässt das Ergebnis der anderen Gleichung als null, statt es unnötig zu berechnen; die Auswahl von \"Vergleich\" berechnet beide und meldet zusätzlich die Differenz zwischen ihnen in Kilokalorien."
+          },
+          {
+            "title": "Dies ist die ursprüngliche Harris-Benedict-Gleichung von 1919, nicht die Revision von 1984",
+            "description": "Manche moderne Rechner verwenden eine Roza-&-Shizgal-Revision der Harris-Benedict-Gleichung von 1984 statt des Originals — dieses Tool verwendet bewusst das Original von 1919, speziell damit es als direkter, historisch genauer Vergleichspunkt gegen Mifflin-St Jeor dienen kann, die Gleichung, die es später in der klinischen Präferenz ablöste."
+          },
+          {
+            "title": "Keine der Gleichungen berücksichtigt die Körperzusammensetzung",
+            "description": "Sowohl Harris-Benedict als auch Mifflin-St Jeor verwenden nur das Gesamtkörpergewicht, ohne Möglichkeit, Muskeln von Fett zu unterscheiden — eine sichtbar muskulöse oder sehr schlanke Person könnte feststellen, dass beide Gleichungen ihren tatsächlichen Ruhestoffwechsel unter- oder überschätzen, eine Einschränkung, die die Katch-McArdle-Formel (im TDEE-Rechner verwendet) speziell adressieren soll."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Welcher Gleichung sollte ich mehr vertrauen, Harris-Benedict oder Mifflin-St Jeor?",
+            "answer": "Die Academy of Nutrition and Dietetics empfiehlt Mifflin-St Jeor (1990) als die heute genauere Gleichung für die allgemeine erwachsene Bevölkerung — sie wurde an einer zeitgemäßeren, repräsentativeren Population entwickelt und validiert als die ursprüngliche Harris-Benedict-Gleichung von 1919. Harris-Benedict ist hier hauptsächlich zum historischen Vergleich enthalten, als die Gleichung, die die Schätzung des Ruhestoffwechsels erstmals populär machte."
+          },
+          {
+            "question": "Warum liefern die beiden Gleichungen unterschiedliche Ergebnisse für dieselbe Person?",
+            "answer": "Sie wurden jeweils an unterschiedliche Referenzpopulationen mit unterschiedlichen statistischen Methoden angepasst, mehr als 70 Jahre auseinander — kleine Unterschiede darin, wie jede Gleichung Gewicht, Größe und Alter gewichtet, summieren sich zu einer echten, erwarteten Lücke in ihren Endschätzungen, obwohl beide versuchen, dieselbe zugrunde liegende Größe zu schätzen."
+          },
+          {
+            "question": "Warum verwendet das Tool die ursprüngliche Harris-Benedict-Gleichung von 1919 statt der gängigeren Revision von 1984?",
+            "answer": "Die ursprüngliche Form von 1919 wird hier bewusst beibehalten, damit sie als direkter, zitierbarer historischer Vergleich gegen Mifflin-St Jeor dienen kann — \"die Gleichung, die die Schätzung des Ruhestoffwechsels begründete\" neben \"der, die sie später in der klinischen Präferenz ablöste\" zu zeigen, statt eine spätere Revision einzumischen, die diesen Vergleich trüben würde."
+          },
+          {
+            "question": "Wie unterscheidet sich dies vom TDEE-Rechner?",
+            "answer": "Dieses Tool schätzt nur den BMR (Ruheenergieverbrauch) mit zwei klassischen, nebeneinander zum Vergleich gezeigten Gleichungen. Der TDEE-Rechner verwendet den BMR als Eingabe und multipliziert ihn dann mit einem Aktivitätsniveau-Faktor, um den täglichen Gesamtkalorienbedarf zu schätzen — und bietet zusätzlich eine dritte BMR-Option (Katch-McArdle) an, wenn der Körperfettanteil bekannt ist, was dieses Tool nicht einschließt."
+          }
+        ]
+      },
+      "pace-calculator": {
+        "version": "v1",
+        "description": "Technisches Referenzhandbuch für den Tempo-Rechner: wie Tempo, Geschwindigkeit, Zwischenzeiten und Zielzeit-Vorhersagen berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Wie die Rennzeit mit der Distanz wächst",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Lösungsmodi",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Tempo = Zeit ÷ Distanz  |  Geschwindigkeit = Distanz ÷ Zeit  |  Riegel-Vorhersage: T₂ = T₁ × (D₂/D₁)^1,06",
+          "note": "Die grundlegende Tempo-/Geschwindigkeitsmathematik ist einfache Division, lösbar nach welchem von Tempo, Zeit oder Distanz unbekannt ist, gegeben die anderen beiden — die Riegel-Formel fügt eine Verfeinerung hinzu: die Vorhersage einer Zielzeit bei einer neuen Distanz ist keine lineare Hochskalierung, da Ermüdung das Tempo vorhersehbar verlangsamt, wenn die Distanz wächst."
+        },
+        "flowchart": {
+          "intro": "Welcher von drei Werten gelöst wird, hängt davon ab, welche zwei Sie bereits kennen; eine separate Berechnung übernimmt die Vorhersage einer neuen Distanz aus einem bekannten Ergebnis.",
+          "steps": [
+            "Bei bekannter Distanz und Zeit: Zeit durch Distanz teilen, um das Tempo zu erhalten, oder Distanz durch Zeit für die Geschwindigkeit",
+            "Bei bekannter Distanz und Tempo: Distanz mit Tempo multiplizieren, um die Gesamtzeit zu erhalten",
+            "Bei bekannter Zeit und Tempo: Zeit durch Tempo teilen, um die Distanz zu erhalten",
+            "Für eine Mehrpunkt-Tempotabelle: jedes aufeinanderfolgende Paar kumulativer Zwischenzeiten als Segment berechnen, wobei jedes Paar übersprungen wird, bei dem Distanz oder Zeit nicht tatsächlich zunimmt, sodass eine fehlerhafte Zeile andere Segmente in der Tabelle nicht unterbricht",
+            "Für eine Zielzeit-Vorhersage: das Verhältnis der Zieldistanz zur bekannten Distanz mit der Potenz 1,06 (der Riegel-Ermüdungsexponent) potenzieren, dann mit der bekannten Zeit multiplizieren"
+          ],
+          "caption": "Drei austauschbare Wege, dieselbe Tempo-/Zeit-/Distanz-Beziehung zu lösen, plus die separate Riegel-Vorhersageformel."
+        },
+        "anatomy": {
+          "intro": "Da der Exponent der Riegel-Formel (1,06) größer als 1 ist, wächst die vorhergesagte Rennzeit schneller als die Distanz — eine Verdopplung der Distanz kostet deutlich mehr als das Doppelte der Zeit, was echte Ausdauerermüdung widerspiegelt.",
+          "xLabel": "Distanz (km)",
+          "yLabel": "Vorhergesagte Zeit (Min.)",
+          "caption": "Ausgehend von einem 25-Minuten-5K sagt die Riegel-Formel etwa 52 Minuten für 10K voraus (nicht flach 50) und etwa 4 Stunden für einen Marathon — jeder Distanzschritt kostet mehr, als eine einfache lineare Hochskalierung würde."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Distanz",
+            "meaning": "Renn- oder Laufdistanz, in der gewählten Distanzeinheit.",
+            "unit": "km / mi"
+          },
+          {
+            "symbol": "Zeit",
+            "meaning": "Gesamtzeit für die Distanz, eingegeben oder gelöst in Stunden, Minuten und Sekunden.",
+            "unit": "h:mm:ss"
+          },
+          {
+            "symbol": "Tempo",
+            "meaning": "Zeit pro Distanzeinheit — eingegeben oder gelöst, und immer sowohl in km- als auch in Meilen-Äquivalenten verfügbar.",
+            "unit": "min/km, min/mi"
+          },
+          {
+            "symbol": "Mehrpunkt-Zwischenzeiten",
+            "meaning": "Eine Reihe kumulativer Distanz-/Zeit-Markierungen (z. B. Meilenmarkierungen während eines Laufs), verwendet zur Berechnung des Tempos pro Segment.",
+            "unit": "Liste"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Jeder der drei Lösungsmodi erfordert strikt positive Eingaben",
+            "description": "Das Lösen nach Tempo, Zeit oder Distanz erfordert jeweils, dass die bekannten Werte endlich und strikt größer als null sind — eine Distanz, Zeit oder ein Tempo von null oder negativ gibt ein ungültiges Ergebnis zurück, statt eines Division-durch-null-Fehlers oder eines unsinnigen negativen Tempos."
+          },
+          {
+            "title": "Mehrpunkt-Zwischenzeiten überspringen fehlerhafte Zeilen, ohne die ganze Tabelle zu unterbrechen",
+            "description": "Jedes Segment zwischen zwei aufeinanderfolgenden Zwischenzeitpunkten wird nur berechnet, wenn beide Punkte gültige, nicht-negative Distanz und Zeit haben und Distanz und Zeit des späteren Punkts beide tatsächlich gegenüber dem früheren zunehmen — eine einzelne fehlerhafte oder falsch geordnete Zeile wird einfach übersprungen, sodass gültige Segmente anderswo in der Tabelle weiterhin korrekt berechnet werden."
+          },
+          {
+            "title": "Mehrpunkt-Zwischenzeiten sind kumulativ, nicht pro Runde",
+            "description": "Jeder eingegebene Punkt wird als laufende Summe vom Start behandelt (wie Meilenmarkierungen während eines durchgehenden Laufs), nicht als unabhängige Rundenzeit — das Tool berechnet Distanz und Zeit jedes Segments durch Subtraktion aufeinanderfolgender kumulativer Werte, nicht durch Verwendung jedes Eintrags als eigenständige Messung."
+          },
+          {
+            "title": "Renn-Voreinstellungsdistanzen verwenden exakte, nicht gerundete Werte",
+            "description": "Die eingebauten Rennentfernungen verwenden ihre präzisen Werte — ein Halbmarathon ist 21,0975 km und ein voller Marathon ist 42,195 km, nicht auf 21,1 oder 42,2 gerundet — sodass Tempo- und Vorhersageberechnungen mit diesen Voreinstellungen genau bleiben, statt einen kleinen Rundungsfehler zu kumulieren."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist der Riegel-Exponent 1,06 statt die Zeit einfach linear mit der Distanz zu skalieren?",
+            "answer": "Eine rein lineare Hochskalierung (Exponent genau 1,0) würde annehmen, dass Sie egal wie weit Sie laufen genau dasselbe Tempo halten könnten, was unrealistisch ist — Ausdauerermüdung bedeutet, dass das Tempo mit zunehmender Distanz natürlich langsamer wird. Peter Riegels Formel, entwickelt aus der Analyse großer Mengen echter Rennzeit-Daten, fand, dass ein Exponent von 1,06 diese Verlangsamung über ein breites Spektrum von Distanzen und Fähigkeiten konsistent modellierte."
+          },
+          {
+            "question": "Warum überspringen die Mehrpunkt-Zwischenzeiten manche Zeilen statt einen Fehler anzuzeigen?",
+            "answer": "Eine einzelne falsch eingegebene Zwischenzeit (wie eine unsortierte Distanz oder doppelte Zeit) sollte nicht jede andere korrekt eingegebene Zwischenzeit ungültig machen — indem einfach jedes Paar übersprungen wird, bei dem die Daten keinen Sinn ergeben (Distanz oder Zeit nimmt nicht zu), statt beim ersten Problem zu stoppen, berechnet das Tool weiterhin jedes gültige Segment anderswo in der Tabelle."
+          },
+          {
+            "question": "Warum wird ein Halbmarathon als 21,0975 km statt einer runderen Zahl angezeigt?",
+            "answer": "Das ist die exakte, offizielle Halbmarathon-Distanz (13,1 Meilen präzise in Kilometer umgerechnet) statt einer bequemen Rundung — die Verwendung der präzisen Zahl hält Tempo-pro-km- und Zielzeit-Berechnungen genau, da selbst ein kleiner Rundungsfehler in der Basisdistanz sich über Tempo- und Vorhersageberechnungen kumulieren würde."
+          },
+          {
+            "question": "Wie zuverlässig ist eine Riegel-Vorhersage für eine viel längere oder kürzere Distanz als mein bekanntes Ergebnis?",
+            "answer": "Die Formel ist im Allgemeinen am zuverlässigsten, wenn eine Distanz vorhergesagt wird, die der bekannten angemessen nahe ist — zum Beispiel ist eine 5K-Zeit, die ein 10K vorhersagt, tendenziell ziemlich genau, da sie aus statistischen Mustern über viele Läufer-Rennergebnisse abgeleitet ist. Die Vorhersage einer Marathonzeit aus einer sehr kurzen bekannten Distanz (wie einem 1-Meilen-Zeitfahren) dehnt die Formel weiter von den Daten weg, auf denen sie validiert wurde, daher behandeln Sie entfernte Extrapolationen als grobere Schätzung."
+          }
+        ]
       }
     }
   }

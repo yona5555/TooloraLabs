@@ -25862,6 +25862,1215 @@
             "answer": "Separating the pre-tax total from the grand total (which includes tax) makes it possible to see how much of the combined revenue across all invoices is actual sales value versus how much is tax collected on behalf of a tax authority — a distinction that matters for bookkeeping and tax reporting."
           }
         ]
+      },
+      "tdee-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the TDEE Calculator: how BMR and activity level combine into daily calorie needs, and how a weight goal converts into a calorie target, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Activity Level Changes Everything",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Activity Levels",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "BMR (Mifflin-St Jeor) = 10×weight(kg) + 6.25×height(cm) − 5×age ± 5  |  TDEE = BMR × activity multiplier",
+          "note": "TDEE is built in two stages: first estimate resting energy burn (BMR) from body measurements, then scale it up by an activity multiplier that accounts for calories burned through movement and exercise on top of resting metabolism."
+        },
+        "flowchart": {
+          "intro": "Two different BMR formulas are supported, but from that point on every calculation runs the same way.",
+          "steps": [
+            "Compute BMR using Mifflin-St Jeor (weight, height, age, gender) or, if body fat percentage is known, Katch-McArdle (which uses lean body mass instead of total weight)",
+            "Multiply BMR by the selected activity level's multiplier (1.2 for sedentary up to 1.9 for very active) to get TDEE",
+            "If a weekly weight-change goal was given, convert it to a daily calorie adjustment using 7,700 kcal per kilogram of body fat, divided by 7 days",
+            "Add that daily adjustment to TDEE (negative for a loss goal, positive for a gain goal) to get the daily calorie target, never letting it go below zero",
+            "Flag the adjustment as \"aggressive\" if it exceeds 35% of TDEE, a common sustainability ceiling for a calorie deficit or surplus"
+          ],
+          "caption": "The two-stage pipeline from body measurements to a daily calorie target adjusted for a weight goal."
+        },
+        "anatomy": {
+          "intro": "The same resting metabolism produces very different total daily energy needs depending on how active a person is — activity level isn't a minor adjustment, it's often the single biggest factor in the final number.",
+          "labelSedentary": "Sedentary (×1.2)",
+          "labelModerate": "Moderate (×1.55)",
+          "labelVeryActive": "Very Active (×1.9)",
+          "caption": "For a BMR of 1,500 kcal, TDEE ranges from 1,800 kcal sedentary to 2,850 kcal very active — the same body, a 1,050 kcal daily swing."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Weight",
+            "meaning": "Body weight, used by both BMR formulas.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "Height, used by the Mifflin-St Jeor formula.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Age",
+            "meaning": "Age in years, used by the Mifflin-St Jeor formula.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "Gender",
+            "meaning": "Used to apply the correct offset in the Mifflin-St Jeor formula (+5 for male, −161 for female).",
+            "unit": "male / female"
+          },
+          {
+            "symbol": "Body Fat %",
+            "meaning": "Optional — when provided, switches the BMR calculation to Katch-McArdle, which uses lean body mass instead of total weight.",
+            "unit": "%"
+          },
+          {
+            "symbol": "Activity Level",
+            "meaning": "How much movement and exercise happens beyond resting, from sedentary to very active.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Weekly Weight Change",
+            "meaning": "An optional signed goal: negative to lose weight, positive to gain, zero to maintain.",
+            "unit": "kg/week"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Invalid or non-positive body measurements",
+            "description": "If weight, height, or age is not a finite positive number, the corresponding BMR calculation returns 0 rather than a negative or NaN result — a clear signal that the inputs weren't usable, instead of a misleadingly specific wrong number."
+          },
+          {
+            "title": "Katch-McArdle requires a valid body fat percentage",
+            "description": "The Katch-McArdle formula (lean-mass-based BMR) only runs when body fat percentage is a valid value between 0 and 100 — outside that range, or if it's omitted, the tool falls back to Mifflin-St Jeor, which only needs weight, height, age, and gender."
+          },
+          {
+            "title": "The calorie target never goes negative",
+            "description": "For an aggressive weight-loss goal that would mathematically imply a negative daily calorie target, the tool floors the result at zero rather than displaying a nonsensical negative number."
+          },
+          {
+            "title": "The \"aggressive\" flag is a percentage of TDEE, not an absolute number",
+            "description": "The same 500 kcal/day deficit is mild for someone with a 3,000 kcal TDEE but aggressive for someone with a 1,600 kcal TDEE — the tool compares the adjustment against the individual's own TDEE (flagging anything over 35%) rather than using one fixed calorie threshold for everyone."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool offer two different BMR formulas?",
+            "answer": "Mifflin-St Jeor only needs weight, height, age, and gender, and is accurate for most people — but it can misjudge visibly muscular or very lean individuals because it only sees total body weight, not how much of that weight is muscle versus fat. Katch-McArdle solves this by using lean body mass directly, but it's only usable when you actually know your body fat percentage."
+          },
+          {
+            "question": "Why does activity level matter so much for the final number?",
+            "answer": "BMR only measures the energy your body burns at complete rest — lying in bed, essentially. Everything else you do in a day — walking, working, exercising — burns additional calories on top of that, and the activity multiplier is how the tool accounts for all of it. For an active person, activity can easily account for more daily calories than resting metabolism does."
+          },
+          {
+            "question": "What does the \"aggressive\" flag mean, and why 35%?",
+            "answer": "A calorie deficit or surplus that's too large relative to your maintenance calories becomes hard to sustain and increases the risk of losing lean muscle (during a cut) or gaining excess fat (during a bulk) rather than the intended outcome. 35% of TDEE is a widely used rule-of-thumb ceiling in sports nutrition guidance beyond which a goal is considered aggressive rather than a steady, sustainable pace."
+          },
+          {
+            "question": "How does a weekly weight-change goal turn into a daily calorie number?",
+            "answer": "The tool uses the common approximation that roughly 7,700 kilocalories correspond to 1 kilogram of body fat. A weekly goal is converted to a daily calorie adjustment by multiplying the weekly kilograms by 7,700 and dividing by 7 days — that daily adjustment is then added to (or subtracted from) TDEE to get the daily calorie target."
+          }
+        ]
+      },
+      "bmi-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the BMI Calculator: how Body Mass Index and the healthy weight range are computed, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The Four BMI Categories",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categories",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "BMI = weight(kg) / height(m)²  |  Healthy weight range = 18.5 × height(m)² to 24.9 × height(m)²",
+          "note": "BMI is simply weight divided by height squared — a single number that doesn't distinguish between muscle and fat, which is why it's paired here with a healthy weight range computed by running the same formula backward at the two standard category boundaries."
+        },
+        "flowchart": {
+          "intro": "The same core formula produces both the BMI value itself and the healthy weight range, just applied in opposite directions.",
+          "steps": [
+            "Convert height from centimeters to meters",
+            "Divide weight by height squared to get the BMI value, rounded to one decimal place",
+            "Compare the BMI value against the standard category thresholds (18.5, 25, 30) to assign Underweight, Normal weight, Overweight, or Obesity",
+            "Run the BMI formula backward at 18.5 and 24.9 (the standard \"normal\" range bounds) using the entered height to compute the healthy weight range in the same units as the input"
+          ],
+          "caption": "One formula, applied forward to get BMI and backward to get the healthy weight range."
+        },
+        "anatomy": {
+          "intro": "BMI sits on a single number line, and it's the position relative to three fixed boundaries — not the raw number alone — that determines the category.",
+          "labelUnderweight": "Underweight",
+          "labelNormal": "Normal",
+          "labelOverweight": "Overweight",
+          "labelObesity": "Obesity",
+          "caption": "The three boundaries that split the BMI scale into four categories — a BMI of 22 (marked) falls solidly in the Normal weight range."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Height",
+            "meaning": "Height, converted internally to meters for the calculation.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Weight",
+            "meaning": "Body weight.",
+            "unit": "kg"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Category boundaries are strict, not rounded",
+            "description": "A BMI of exactly 25.0 falls into Overweight, not Normal weight, since the category check uses \"less than 25\" for Normal — the displayed BMI is rounded to one decimal for readability, but the category is assigned from the unrounded value."
+          },
+          {
+            "title": "The healthy weight range uses 24.9, not 25.0, as its upper bound",
+            "description": "The healthy weight range's upper bound is computed at a BMI of 24.9 rather than exactly 25 — a deliberate small margin so the displayed \"healthy\" weight doesn't sit exactly on the Overweight boundary."
+          },
+          {
+            "title": "No lower bound on height or weight",
+            "description": "The calculator doesn't reject an unusually small height or weight value — height near zero would produce an extremely large (and not meaningful) BMI, since the formula divides by height squared, so results should be sanity-checked against realistic human measurements."
+          },
+          {
+            "title": "BMI doesn't distinguish muscle from fat",
+            "description": "Two people with identical BMI can have very different body compositions — a muscular athlete and a person with low muscle mass can land in the same BMI category despite very different health profiles, which is why this tool exists alongside (not instead of) the Body Fat Calculator."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the healthy weight range's upper bound 24.9 instead of 25?",
+            "answer": "A BMI of exactly 25.0 is categorized as Overweight, not Normal weight, so the healthy weight range's upper bound is deliberately computed at 24.9 — just below the Overweight threshold — so the displayed healthy weight figure doesn't sit exactly on that boundary line."
+          },
+          {
+            "question": "Why doesn't BMI account for muscle mass?",
+            "answer": "BMI was designed as a simple population-level screening tool using only height and weight — it has no way to distinguish a kilogram of muscle from a kilogram of fat, since both weigh the same. This is a well-known limitation, which is why a very muscular person can register as \"overweight\" by BMI despite having low body fat."
+          },
+          {
+            "question": "Why does the tool show a healthy weight range instead of just a single ideal weight?",
+            "answer": "The standard Normal weight BMI category spans a range (18.5 to 24.9), not a single point — because a healthy BMI genuinely covers a range of body sizes for any given height, the tool shows the full weight range corresponding to that BMI band rather than picking one arbitrary \"ideal\" number within it."
+          },
+          {
+            "question": "What's the difference between this tool's healthy weight range and the Ideal Weight Calculator?",
+            "answer": "This tool's range comes directly from the BMI formula applied at fixed BMI boundaries (18.5 and 24.9), while the Ideal Weight Calculator uses four separate clinical formulas (Devine, Robinson, Miller, Hamwi) developed independently for estimating lean/ideal body mass from height and sex — they're methodologically distinct approaches that happen to produce broadly similar numbers."
+          }
+        ]
+      },
+      "ideal-weight-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Ideal Weight Calculator: the four classic clinical formulas it averages, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Four Formulas, One Height",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Formulas",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Each formula: base weight + (rate × inches over 60)  |  Devine, Robinson, Miller, and Hamwi each use their own base and rate",
+          "note": "All four formulas share the same shape — a fixed starting weight for exactly 5 feet (60 inches) of height, plus a fixed amount added per inch beyond that — they differ only in which base weight and per-inch rate each original author chose."
+        },
+        "flowchart": {
+          "intro": "The same height feeds into four independent formulas, each historically developed for a specific clinical purpose (mainly medication dosing), then averaged into one summary figure.",
+          "steps": [
+            "Convert height from centimeters to inches",
+            "Subtract 60 from the height in inches to get how far above (or below) 5 feet the person is",
+            "Apply each of the four formulas — Devine (1974), Robinson (1983), Miller (1983), and Hamwi (1964) — using their own base weight and per-inch rate for the given gender",
+            "Average all four results to produce a single summary ideal weight figure"
+          ],
+          "caption": "Four independently derived formulas run on the same height, then averaged."
+        },
+        "anatomy": {
+          "intro": "Because each formula uses a different base weight and per-inch rate, they don't agree exactly — even for the same height and gender, each one gives a slightly different answer.",
+          "labelDevine": "Devine",
+          "labelRobinson": "Robinson",
+          "labelMiller": "Miller",
+          "labelHamwi": "Hamwi",
+          "caption": "For a 180 cm (about 5'11\") male, the four formulas span roughly 71.5 to 77.3 kg — close, but not identical, estimates from the same height."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Gender",
+            "meaning": "Each of the four formulas uses a different base weight and rate for male versus female.",
+            "unit": "male / female"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "Height, converted internally to inches for the calculation.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Height below 5 feet produces a reduced base weight",
+            "description": "For a height under 60 inches (about 152 cm), the \"inches over 60\" term becomes negative, which subtracts from each formula's base weight rather than adding to it — the formulas were designed around adult heights and aren't clamped to prevent an unrealistically low or even negative result for very short heights."
+          },
+          {
+            "title": "Invalid height or gender returns all zeros",
+            "description": "If height isn't a finite positive number, or gender isn't recognized as male or female, all four formula results (and their average) come back as zero rather than a partial or misleading calculation."
+          },
+          {
+            "title": "These are historical clinical formulas, not modern research",
+            "description": "All four formulas date from 1964 to 1983 and were developed primarily for estimating body weight for medication dosing purposes in clinical settings, not as a general wellness target — they're point estimates from decades-old research, not a personalized recommendation."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool use four different formulas instead of just one?",
+            "answer": "Devine, Robinson, Miller, and Hamwi are four independently developed formulas, each historically used in different clinical contexts, and none is universally agreed to be \"the\" correct one — showing all four alongside their average gives a fuller picture than presenting a single formula's output as if it were definitive."
+          },
+          {
+            "question": "How is this different from the healthy weight range shown by the BMI Calculator?",
+            "answer": "The BMI Calculator's range comes from applying the BMI formula backward at fixed BMI boundaries (18.5 to 24.9) — a population-level screening range. This tool's four formulas were developed independently, specifically to estimate ideal or lean body weight from height and sex for clinical purposes like medication dosing, using an entirely different mathematical approach (linear in height, not based on BMI at all)."
+          },
+          {
+            "question": "Why do the four formulas give different answers for the same height?",
+            "answer": "Each formula was derived by a different researcher from different reference data, so each landed on its own base weight (the estimated weight at exactly 5 feet) and its own rate of increase per inch beyond that — small differences in these two numbers compound into modestly different final estimates, even though all four follow the same basic linear structure."
+          },
+          {
+            "question": "Should I aim for the exact average weight this tool shows?",
+            "answer": "These are decades-old clinical formulas originally intended for estimating drug dosing weight, not a personalized fitness or health target — a healthy weight depends on many factors (build, muscle mass, age, health conditions) that none of these formulas account for. Treat the result as a rough historical reference point, not a specific goal to hit."
+          }
+        ]
+      },
+      "target-heart-rate-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Target Heart Rate Calculator: how maximum heart rate and the five training zones are derived, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Five Training Zones",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Training Zones",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Max Heart Rate = 220 − age  |  With resting HR (Karvonen): target = (max − resting) × intensity% + resting  |  Without: target = max × intensity%",
+          "note": "Maximum heart rate is estimated once from age alone, then five training zones are derived from it — using the more individualized Karvonen (heart rate reserve) method when a resting heart rate is available, or a simpler straight percentage of max otherwise."
+        },
+        "flowchart": {
+          "intro": "Whether a resting heart rate is supplied changes which of two formulas computes each zone's boundaries, but both start from the same estimated maximum heart rate.",
+          "steps": [
+            "Estimate maximum heart rate using the classic \"220 minus age\" formula",
+            "If a resting heart rate was provided, compute the heart rate reserve (max minus resting)",
+            "For each of five intensity bands (50-60% up to 90-100%), compute the zone's boundaries: with a resting heart rate, apply the percentage to the heart rate reserve and add back the resting rate (Karvonen method); without one, apply the percentage directly to the maximum heart rate",
+            "Return all five zones with both their percentage range and their beats-per-minute range"
+          ],
+          "caption": "The single max-heart-rate estimate feeding into five zones, computed with or without the Karvonen adjustment."
+        },
+        "anatomy": {
+          "intro": "The five zones divide the full range from very light activity up to maximum effort into equal 10-percentage-point bands, each with a progressively higher heart rate ceiling.",
+          "labelVeryLight": "Very Light",
+          "labelLight": "Light",
+          "labelModerate": "Moderate",
+          "labelHard": "Hard",
+          "labelMaximum": "Maximum",
+          "caption": "For a 30-year-old (max heart rate 190 bpm) with no resting heart rate given, the five zone ceilings rise from 114 bpm to 190 bpm."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Age",
+            "meaning": "Used to estimate maximum heart rate via 220 minus age. Must be between 1 and 120.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "Resting Heart Rate",
+            "meaning": "Optional — when provided, switches all five zones to the more individualized Karvonen (heart rate reserve) method.",
+            "unit": "bpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Age outside a realistic range",
+            "description": "Age must be a finite number greater than 0 and no more than 120 — a value outside that range returns an \"invalid-age\" error, since the 220-minus-age formula isn't meaningful outside realistic human lifespans."
+          },
+          {
+            "title": "Resting heart rate outside a realistic range",
+            "description": "If provided, resting heart rate must be a finite number greater than 0 and no more than 220 — an unrealistic value returns an \"invalid-resting-heart-rate\" error rather than producing zones built on a nonsensical reserve calculation."
+          },
+          {
+            "title": "Zones shift entirely when resting heart rate is added",
+            "description": "Adding a resting heart rate doesn't just tweak the zones slightly — it switches the underlying formula from a percentage of maximum heart rate to a percentage of heart rate reserve (Karvonen method), which typically produces noticeably different, more personalized zone boundaries, especially for people with an unusually low or high resting heart rate."
+          },
+          {
+            "title": "Heart rate reserve is only reported when resting heart rate is known",
+            "description": "The heart rate reserve figure (max minus resting) is only meaningful, and only returned, when a resting heart rate was actually supplied — without one, it's returned as null rather than a misleading default value."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is maximum heart rate estimated from age alone?",
+            "answer": "The \"220 minus age\" formula (Fox et al., 1971) remains the most widely cited estimate of maximum heart rate, despite known imprecision for any single individual — it requires no equipment or testing, just age, which is why it's the standard starting point most heart-rate-zone calculators use, this one included."
+          },
+          {
+            "question": "What's the difference between the two zone calculation methods?",
+            "answer": "Without a resting heart rate, each zone is simply a straight percentage of your estimated maximum (e.g., 70% of 190 bpm). With a resting heart rate, the Karvonen method instead takes a percentage of your heart rate reserve (max minus resting) and adds your resting rate back — this accounts for individual fitness level, since two people with the same maximum heart rate but very different resting heart rates will get different, more personalized zone boundaries."
+          },
+          {
+            "question": "Why would I bother entering my resting heart rate?",
+            "answer": "A lower resting heart rate generally indicates better cardiovascular fitness, and the Karvonen method uses that information to adjust your training zones accordingly — two people of the same age get identical straight-percentage zones, but genuinely different Karvonen zones if their resting heart rates differ, which better reflects each person's actual cardiovascular reserve."
+          },
+          {
+            "question": "Why are there exactly five zones?",
+            "answer": "The five zones (very light, light, moderate, hard, maximum) in 10-percentage-point bands from 50% to 100% of intensity are a standard convention in exercise physiology and fitness tracking, corresponding to recognizable training goals — from active recovery at the low end to all-out maximum effort at the top."
+          }
+        ]
+      },
+      "sleep-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Sleep Calculator: how bedtime and wake-up suggestions are built from 90-minute sleep cycles, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "How Much Sleep Each Option Gives",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Cycle Options",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Wake-up mode: bedtime = wake time − (cycles × 90 min) − fall-asleep time  |  Bedtime mode: wake time = bedtime + fall-asleep time + (cycles × 90 min)",
+          "note": "Every suggested time is built from the same unit — a complete 90-minute sleep cycle — repeated a whole number of times (6 down to 3), on the theory that waking up between cycles rather than mid-cycle feels less groggy."
+        },
+        "flowchart": {
+          "intro": "The same cycle math runs in one of two directions depending on whether you know your wake-up time or your bedtime.",
+          "steps": [
+            "Read which mode is selected: working backward from a known wake-up time, or forward from a known bedtime",
+            "For each of four options (6, 5, 4, and 3 complete cycles), multiply the cycle count by 90 minutes to get total sleep time",
+            "In wake-up mode: subtract the sleep time and the fall-asleep buffer from the wake-up time to get a suggested bedtime",
+            "In bedtime mode: add the fall-asleep buffer and the sleep time to the bedtime to get a suggested wake-up time",
+            "Wrap the result around midnight if it falls before 00:00 or past 24:00, so it always displays as a valid clock time"
+          ],
+          "caption": "The same 90-minute-cycle arithmetic run backward from a wake-up time or forward from a bedtime."
+        },
+        "anatomy": {
+          "intro": "Each option is simply a different number of complete 90-minute cycles — more cycles means more total sleep, in fixed 90-minute increments rather than an arbitrary number of hours.",
+          "label6": "6 Cycles",
+          "label5": "5 Cycles",
+          "label4": "4 Cycles",
+          "label3": "3 Cycles",
+          "caption": "The four suggested options span 4.5 to 9 hours of sleep, each a whole number of complete 90-minute cycles."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether you know your target wake-up time (calculate bedtimes) or your bedtime (calculate wake-up times).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Time",
+            "meaning": "The known anchor time — either the wake-up time or the bedtime, depending on mode.",
+            "unit": "Clock time"
+          },
+          {
+            "symbol": "Fall-Asleep Time",
+            "meaning": "How long it typically takes to fall asleep after getting into bed. Defaults to 15 minutes.",
+            "unit": "Minutes"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Time outside a valid 24-hour range",
+            "description": "The anchor time must be a whole number of minutes between 0 and 1439 (i.e., a valid time within one day) — a value outside that range returns an \"invalid-time\" error rather than an out-of-bounds clock time."
+          },
+          {
+            "title": "Fall-asleep time outside a reasonable range",
+            "description": "The fall-asleep buffer must be between 0 and 120 minutes — a negative value or one over two hours returns an \"invalid-fall-asleep-minutes\" error, since either would produce an unrealistic suggested time."
+          },
+          {
+            "title": "Suggested times wrap around midnight",
+            "description": "Working backward from an early wake-up time, or forward from a late bedtime, can push a suggested time past midnight in either direction — the tool wraps these correctly using modular arithmetic so every suggestion is always a valid time of day, even when it technically falls on the previous or next calendar day."
+          },
+          {
+            "title": "Cycle length is a fixed assumption, not measured",
+            "description": "The 90-minute cycle length is a widely cited average, not a personalized measurement — actual sleep cycle length varies by person and by night, so these suggestions are a heuristic starting point, not a guarantee of waking up between cycles on any given night."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the calculator work in 90-minute increments instead of just hours?",
+            "answer": "A full sleep cycle — moving through the different stages of light sleep, deep sleep, and REM — takes roughly 90 minutes on average. The idea behind cycle-based sleep calculators is that waking up between complete cycles (rather than in the middle of one) tends to feel less groggy, so every suggested time is built from whole 90-minute cycles rather than round hour numbers."
+          },
+          {
+            "question": "Why does the tool suggest 4 different times instead of just one?",
+            "answer": "There's no single \"correct\" amount of sleep that fits everyone every night — the four options (6, 5, 4, and 3 complete cycles, or roughly 9, 7.5, 6, and 4.5 hours) give a range of choices depending on how early you need to wake up or how late you're going to bed, letting you pick the best available option for that specific night."
+          },
+          {
+            "question": "What is the fall-asleep buffer for, and why does it default to 15 minutes?",
+            "answer": "Getting into bed and actually falling asleep aren't the same moment — most people take some amount of time to drift off. The default 15-minute buffer is a commonly cited average time to fall asleep, added into the calculation so the suggested bedtime accounts for lying awake briefly before sleep actually begins, not just the moment you get under the covers."
+          },
+          {
+            "question": "Is 90 minutes the exact length of my sleep cycles?",
+            "answer": "Not necessarily — 90 minutes is a commonly cited average, but actual sleep cycle length varies from person to person and even night to night, generally somewhere in the 70-120 minute range. This tool uses the standard 90-minute assumption as a practical heuristic, not a measurement of your specific sleep cycles."
+          }
+        ]
+      },
+      "body-fat-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Body Fat Calculator: how the US Navy circumference method estimates body fat percentage, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Five Body Fat Categories",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categories",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Men: 86.01×log₁₀(waist−neck) − 70.041×log₁₀(height) + 36.76  |  Women: 163.205×log₁₀(waist+hip−neck) − 97.684×log₁₀(height) − 78.387",
+          "note": "The US Navy method estimates body fat from a small set of tape-measure circumferences (in inches) rather than skinfold calipers or imaging — trading some precision for a measurement anyone can take at home with just a tape measure."
+        },
+        "flowchart": {
+          "intro": "The formula differs by gender (women's version also uses hip circumference), but both follow the same log-based structure.",
+          "steps": [
+            "Validate the circumference measurements: waist must exceed neck (men), or waist plus hip must exceed neck (women)",
+            "Convert all measurements from centimeters to inches, since the original published formula uses inches",
+            "For men: apply the two-measurement formula using waist and neck circumference plus height",
+            "For women: apply the three-measurement formula using waist, hip, and neck circumference plus height",
+            "Floor the result at 0% (a formula result can't be meaningfully negative), then categorize it using the American Council on Exercise (ACE) thresholds"
+          ],
+          "caption": "Gender-specific circumference formulas, both built from logarithms of measurement differences."
+        },
+        "anatomy": {
+          "intro": "Body fat percentage sits on a single scale with category boundaries that differ by gender — these are the male thresholds, since women's essential fat levels are naturally higher.",
+          "labelEssential": "Essential",
+          "labelAthletes": "Athletes",
+          "labelFitness": "Fitness",
+          "labelAverage": "Average",
+          "caption": "The four boundaries splitting the male body fat scale into five ACE categories — 15% (marked) falls in the Fitness range."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Gender",
+            "meaning": "Determines which formula (two-measurement or three-measurement) and which category thresholds apply.",
+            "unit": "male / female"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "Height, used in both formulas.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Neck",
+            "meaning": "Neck circumference, measured just below the larynx.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Waist",
+            "meaning": "Waist circumference, at its narrowest point (men) or at the navel (women).",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Hip",
+            "meaning": "Hip circumference at its widest point — required for women, ignored for men.",
+            "unit": "cm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Waist must exceed neck (men)",
+            "description": "The men's formula takes log₁₀(waist − neck) — if waist doesn't exceed neck circumference, that difference would be zero or negative, which has no valid logarithm, so the tool rejects the input as \"invalid-measurements\" before attempting the calculation."
+          },
+          {
+            "title": "Waist plus hip must exceed neck (women)",
+            "description": "Similarly, the women's formula takes log₁₀(waist + hip − neck) — if the combined waist and hip measurement doesn't exceed neck circumference, the tool rejects the input for the same reason: a zero or negative value has no valid logarithm."
+          },
+          {
+            "title": "Result floored at zero",
+            "description": "For measurement combinations at the edge of the formula's valid range, the raw calculation can occasionally produce a small negative number — the tool floors the final result at 0% rather than displaying a body fat percentage below zero, which wouldn't be physically meaningful."
+          },
+          {
+            "title": "Hip measurement is required for women, ignored for men",
+            "description": "The men's formula only uses waist and neck; a hip measurement, if entered, is simply not part of the calculation. The women's formula requires hip circumference as a third measurement, reflecting where the sexes tend to store fat differently."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the formula use waist minus neck instead of just waist alone?",
+            "answer": "The Navy method is designed to isolate fat accumulation specifically around the midsection relative to a person's overall frame size — neck circumference serves as a rough proxy for frame size, so subtracting it from waist circumference gives a better relative measure of abdominal fat than waist circumference alone would."
+          },
+          {
+            "question": "How accurate is the US Navy method compared to other body fat measurement techniques?",
+            "answer": "It trades some precision for practicality — skinfold calipers, DEXA scans, and hydrostatic weighing are generally more accurate, but they require specialized equipment or a trained technician. The Navy circumference method only needs a flexible tape measure, making it accessible for repeated at-home tracking, at the cost of being a rougher estimate than lab-based methods."
+          },
+          {
+            "question": "Why does the women's formula need a hip measurement but the men's formula doesn't?",
+            "answer": "The original Navy method was developed and validated separately for each sex using the circumference measurements that best predicted body fat in each population — for women, hip circumference significantly improved the formula's accuracy, while for men it didn't add meaningful predictive value beyond waist and neck."
+          },
+          {
+            "question": "Why are the body fat category thresholds different for men and women?",
+            "answer": "Women naturally carry a higher percentage of essential body fat than men do — fat that's necessary for basic physiological function, including reproductive health — so the same body fat percentage doesn't represent the same relative leanness for both sexes, and the American Council on Exercise's category thresholds are set separately to reflect that biological difference."
+          }
+        ]
+      },
+      "due-date-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Due Date Calculator: how each of the four dating methods estimates conception and due date, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "From Anchor Date to Due Date",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Dating Methods",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Due date = estimated conception date + 266 days  |  LMP conception estimate = LMP date + (cycle length − 14) days",
+          "note": "All four dating methods work the same way underneath: estimate a conception date from whichever anchor date you know, then add the standard 266-day (38-week) conception-to-birth interval to get the due date."
+        },
+        "flowchart": {
+          "intro": "The only real difference between the four methods is how each one arrives at an estimated conception date — everything after that point is identical.",
+          "steps": [
+            "Read which of the four methods is selected: last menstrual period (LMP), known conception date, 3-day IVF transfer, or 5-day IVF transfer",
+            "For LMP: estimate ovulation (and conception) at cycle length minus 14 days after the period start, adjusting for a cycle length other than the 28-day average",
+            "For a known conception date: use that date directly as the conception estimate",
+            "For IVF transfers: subtract 3 or 5 days from the transfer date, since a transferred embryo's age at transfer is already known precisely",
+            "Add 266 days to the estimated conception date to get the due date, and separately track gestational age, trimester, and percent-complete relative to today"
+          ],
+          "caption": "Four different paths to the same estimated conception date, then one shared 266-day countdown to the due date."
+        },
+        "anatomy": {
+          "intro": "For the LMP method with a standard 28-day cycle, the last menstrual period, estimated conception, and due date fall at fixed points along the pregnancy timeline.",
+          "labelLmp": "Last Period",
+          "labelConception": "Conception (Day 14)",
+          "labelDue": "Due Date (Day 280)",
+          "caption": "With a 28-day cycle, conception is estimated 14 days after the last period, and the due date follows 266 days after that — 280 days after the last period overall."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Method",
+            "meaning": "Which anchor date you're providing: last menstrual period, known conception date, or IVF transfer (3-day or 5-day).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Date",
+            "meaning": "The anchor date itself, interpreted according to the selected method.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "Cycle Length",
+            "meaning": "Average menstrual cycle length. Only used (and only meaningful) for the LMP method. Defaults to 28 days.",
+            "unit": "Days"
+          },
+          {
+            "symbol": "Reference Date",
+            "meaning": "Optional — the date to calculate gestational age and progress as of. Defaults to today.",
+            "unit": "Date"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Cycle length out of range (LMP method only)",
+            "description": "For the LMP method, cycle length must be between 20 and 45 days — a value outside that range returns an \"invalid-cycle-length\" error, since it's only used (and only validated) when the LMP method is selected."
+          },
+          {
+            "title": "Anchor date in the future",
+            "description": "If the entered date falls after the reference date (normally today), the tool returns a \"date-in-future\" error rather than computing a due date and gestational age from an event that, as far as the calculator can tell, hasn't happened yet."
+          },
+          {
+            "title": "IVF methods use a fixed day offset, not a cycle-length adjustment",
+            "description": "Unlike the LMP method, the two IVF methods don't use cycle length at all — a 3-day or 5-day embryo transfer already has a precisely known embryo age, so conception is simply estimated as 3 or 5 days before the transfer date, with no cycle-length uncertainty to adjust for."
+          },
+          {
+            "title": "Gestational age is measured from an adjusted conception point, not the raw anchor date",
+            "description": "Gestational age is conventionally counted from the last menstrual period, not from actual conception — so the tool adds 14 days back onto the days-since-conception figure when computing gestational age, keeping it consistent with how pregnancy dating is standardly expressed regardless of which method was used."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do all four methods add exactly 266 days to conception, but the total pregnancy is usually described as 280 days?",
+            "answer": "266 days (38 weeks) is the standard interval from actual conception to birth. 280 days (40 weeks) is the interval from the last menstrual period to birth — the extra 14 days is the typical gap between the start of a period and ovulation/conception in a standard 28-day cycle. Both figures describe the same due date; they're just measured from two different starting points."
+          },
+          {
+            "question": "Why does cycle length only matter for the LMP method?",
+            "answer": "Cycle length affects how many days after the period start ovulation is estimated to occur — a longer or shorter cycle shifts that estimate. The other three methods (known conception, or IVF transfer) already specify a date that's much closer to actual conception, so there's no ovulation timing left to estimate from cycle length."
+          },
+          {
+            "question": "Why do the two IVF methods subtract a fixed number of days instead of adjusting for cycle length?",
+            "answer": "With IVF, the embryo's exact age at the moment of transfer is precisely known from the lab process — a \"day 3\" or \"day 5\" transfer means the embryo is exactly that many days past fertilization. This makes conception dating exact rather than estimated, which is why the IVF methods use a fixed offset instead of the cycle-length-dependent estimate the LMP method needs."
+          },
+          {
+            "question": "How is this different from the Pregnancy Calculator?",
+            "answer": "This tool supports four different dating methods (LMP, known conception, and two IVF transfer options) and computes conception before adding the 266-day interval. The Pregnancy Calculator only accepts a last menstrual period date and adds 280 days directly, without a separate conception-date step or cycle-length adjustment — a simpler calculation aimed at ongoing week-by-week tracking rather than initial due-date estimation from multiple possible starting points."
+          }
+        ]
+      },
+      "ovulation-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Ovulation Calculator: how ovulation and the fertile window are estimated by counting backward from the next period, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "One Cycle, Four Key Dates",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Cycles Projected",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Next period = last period + cycle length  |  Ovulation = next period − luteal phase length  |  Fertile window = ovulation − 5 days to ovulation + 1 day",
+          "note": "Ovulation is estimated by working backward from the next predicted period rather than forward from the last one — the luteal phase (the days after ovulation) is far more consistent in length across cycles than the days before ovulation, which is why counting backward is the more reliable approach."
+        },
+        "flowchart": {
+          "intro": "The same three-step calculation repeats once for each of the next three projected cycles.",
+          "steps": [
+            "Predict the next period date by adding the cycle length to the last period's start date",
+            "Estimate ovulation by subtracting the luteal phase length from that predicted next period date",
+            "Compute the fertile window as the 5 days before ovulation through 1 day after it, reflecting how long sperm can survive versus how long the egg remains viable",
+            "Repeat the same calculation for the second and third projected cycles, each one cycle length further out"
+          ],
+          "caption": "Working backward from a predicted period date to ovulation and the fertile window, repeated across three cycles."
+        },
+        "anatomy": {
+          "intro": "Within one 28-day cycle with a 14-day luteal phase, the fertile window, ovulation, and the next period all fall at fixed points counting forward from the last period's start.",
+          "labelFertileStart": "Fertile Window Starts",
+          "labelOvulation": "Ovulation",
+          "labelNextPeriod": "Next Period",
+          "caption": "The fertile window opens 5 days before the estimated ovulation date and closes 1 day after it, all counted backward from the predicted next period."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Last Period Date",
+            "meaning": "The first day of the most recent menstrual period.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "Cycle Length",
+            "meaning": "Average number of days from the start of one period to the start of the next. Defaults to 28 days.",
+            "unit": "Days"
+          },
+          {
+            "symbol": "Luteal Phase Length",
+            "meaning": "Average number of days from ovulation to the next period. Defaults to 14 days.",
+            "unit": "Days"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Cycle length out of range",
+            "description": "Cycle length must be between 20 and 45 days — a value outside that range returns an \"invalid-cycle-length\" error, since cycles that short or that long fall outside what this simple backward-counting model is designed to handle reliably."
+          },
+          {
+            "title": "Luteal phase length out of range",
+            "description": "Luteal phase length must be between 10 and 17 days — a value outside that range returns an \"invalid-luteal-phase\" error, reflecting the typical physiological range for the post-ovulation phase."
+          },
+          {
+            "title": "The fertile window is asymmetric around ovulation",
+            "description": "The window spans 5 days before ovulation but only 1 day after it — not a symmetric range — because sperm can survive in the reproductive tract for up to about 5 days, while the egg itself is only viable for roughly 24 hours after release."
+          },
+          {
+            "title": "All three projected cycles compound the same estimate",
+            "description": "Each of the three projected cycles is calculated the same way, just one cycle length further from the last period — so any uncertainty in the entered cycle length or luteal phase length compounds slightly further out for the second and third cycle projections."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool count backward from the next period instead of forward from the last one?",
+            "answer": "The luteal phase (the time from ovulation to the next period) is much more consistent in length across cycles than the follicular phase (the time from the last period to ovulation), which can vary considerably. Since the next period date is predictable from cycle length, counting backward from it using the more stable luteal phase length gives a more reliable ovulation estimate than counting forward a fixed number of days from the last period."
+          },
+          {
+            "question": "Why is the fertile window 5 days before ovulation but only 1 day after?",
+            "answer": "This reflects the biological lifespans of sperm and egg rather than an arbitrary symmetric window — sperm can survive in the reproductive tract for up to roughly 5 days waiting for ovulation, while a released egg is only viable for about 24 hours. Intercourse any time in that 6-day window can potentially result in conception."
+          },
+          {
+            "question": "Why does the tool project three cycles instead of just the next one?",
+            "answer": "Showing three consecutive cycles at once lets you see the pattern across a few months rather than recalculating one cycle at a time — useful for planning ahead, since predicted dates naturally shift depending on when each cycle is expected to start relative to the one before it."
+          },
+          {
+            "question": "How is this different from the fertility information in the Pregnancy or Due Date calculators?",
+            "answer": "This tool is forward-looking — it predicts upcoming ovulation and fertile windows for cycles that haven't happened yet, useful for conception planning. The Pregnancy and Due Date calculators are backward-looking from an already-known last period or conception date, used once a pregnancy is already suspected or confirmed, to estimate how far along it is and when it's due."
+          }
+        ]
+      },
+      "pregnancy-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Pregnancy Calculator: how gestational age, trimester, and the weekly size-comparison milestone are tracked from the last menstrual period, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The Three Trimesters",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Trimesters",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Due date = last period date + 280 days  |  Gestational age (days) = today − last period date  |  Trimester: weeks < 13 → 1st, weeks < 27 → 2nd, else 3rd",
+          "note": "Every figure this tool reports — gestational age, trimester, due date, and progress percentage — is derived from a single count of days elapsed since the last menstrual period, using the standard Naegele's-rule assumption of a 280-day (40-week) pregnancy."
+        },
+        "flowchart": {
+          "intro": "One elapsed-days count feeds every other value the tool reports.",
+          "steps": [
+            "Compute the number of days elapsed between the last menstrual period and today (or a specified reference date)",
+            "Convert that day count into completed weeks and remaining days for the gestational age figure",
+            "Assign the trimester based on completed weeks: under 13 weeks is the 1st trimester, 13 to 26 is the 2nd, 27 and beyond is the 3rd",
+            "Add 280 days to the last period date to get the due date, then compute how many days remain until it",
+            "Compute percent complete as elapsed days divided by 280, capped at 100%, and look up this week's size-comparison milestone from a fixed week-by-week table"
+          ],
+          "caption": "A single days-elapsed count driving gestational age, trimester, due date, and the weekly milestone lookup."
+        },
+        "anatomy": {
+          "intro": "The standard 40-week pregnancy divides into three trimesters of roughly equal length, each spanning a distinct phase of development.",
+          "labelTrimester1": "1st Trimester",
+          "labelTrimester2": "2nd Trimester",
+          "labelTrimester3": "3rd Trimester",
+          "totalLabel": "40 Weeks Total",
+          "caption": "The three trimesters span weeks 0-13, 13-27, and 27-40 — not perfectly equal thirds, but close, with the 2nd trimester running one week longer than the other two."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Last Period Date",
+            "meaning": "The first day of the last menstrual period — the sole anchor date this tool's math is built from.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "Reference Date",
+            "meaning": "Optional — the date to calculate current progress as of. Defaults to today.",
+            "unit": "Date"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Last period date in the future",
+            "description": "If the entered date falls after the reference date, the tool returns a \"date-in-future\" error, since gestational age can't be computed from a starting point that (as far as the calculator can tell) hasn't occurred yet."
+          },
+          {
+            "title": "Gestational age far beyond full term",
+            "description": "If the elapsed time exceeds 301 days (280 days plus a 3-week margin), the tool returns a \"beyond-full-term\" error — well past a typical pregnancy's expected duration, signaling the entered date is likely no longer an accurate anchor for tracking an ongoing pregnancy."
+          },
+          {
+            "title": "Size-comparison milestones are only available from week 4 to week 40",
+            "description": "The week-by-week size-comparison table starts at week 4 (before which there's no meaningful comparison to show) and is capped at week 40 — a gestational age beyond 40 weeks simply continues showing the week-40 milestone rather than extrapolating beyond the table."
+          },
+          {
+            "title": "No cycle-length adjustment, unlike the Due Date Calculator's LMP method",
+            "description": "This tool always adds exactly 280 days to the last period date, assuming a standard 28-day cycle — it doesn't ask for or adjust based on actual cycle length the way the Due Date Calculator's LMP method does, making its math simpler but slightly less tailored for those with a notably shorter or longer average cycle."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does this tool use a flat 280 days instead of adjusting for cycle length like the Due Date Calculator?",
+            "answer": "This tool is built for lightweight, ongoing week-by-week tracking rather than a one-time precise due-date estimate — using the standard 280-day (Naegele's rule) assumption keeps the calculation simple. If you want a due date adjusted for a cycle length other than 28 days, or estimated from a known conception or IVF transfer date, the Due Date Calculator supports those additional methods."
+          },
+          {
+            "question": "What are the weekly size-comparison milestones based on?",
+            "answer": "They're approximate median measurements — crown-rump length through week 19, then crown-heel length from week 20 onward, plus estimated fetal weight — drawn from standard published fetal growth curves. They're illustrative averages for the popular \"your baby is the size of a ___\" tradition, not diagnostic measurements; actual fetal size varies and is properly assessed via ultrasound."
+          },
+          {
+            "question": "Why are the three trimesters not exactly equal in length?",
+            "answer": "The trimester boundaries (13 weeks and 27 weeks) are standard clinical convention based on developmental stages, not a mathematical division of 40 weeks into thirds — this makes the 2nd trimester (weeks 13 to 27) span 14 weeks, one week longer than the 1st and 3rd trimesters, which each span 13 weeks."
+          },
+          {
+            "question": "What happens if I enter a last period date from more than 10 months ago?",
+            "answer": "The tool returns a \"beyond-full-term\" error once the gestational age would exceed 301 days (280 days plus a 3-week margin past the typical due date) — at that point, the entered date is treated as no longer a reliable anchor for tracking what would be an ongoing pregnancy, since a pregnancy that far past its due date is well outside this tool's intended tracking range."
+          }
+        ]
+      },
+      "macro-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Macro Calculator: how daily protein, carbohydrate, and fat targets are split from total calories by goal, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Splitting 2,000 Calories",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Goals",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Calories per macro = total calories × goal percentage  |  Grams = calories ÷ (4 for protein/carbs, 9 for fat)",
+          "note": "Each macronutrient's gram target comes from the same two-step process: take its percentage share of total calories, then convert that calorie amount into grams using how many calories each macronutrient provides per gram (4 for protein and carbs, 9 for fat, since fat is more calorie-dense)."
+        },
+        "flowchart": {
+          "intro": "The percentage split depends on the selected goal, but the calorie-to-gram conversion afterward is identical for every goal.",
+          "steps": [
+            "Validate total calories as a positive number no greater than 20,000",
+            "Look up the percentage split for protein, carbs, and fat based on the selected goal (lose, maintain, gain, or build muscle)",
+            "Multiply total calories by each macronutrient's percentage to get its calorie allocation",
+            "Divide each macronutrient's calories by its calories-per-gram value (4 for protein and carbs, 9 for fat) to get the gram target"
+          ],
+          "caption": "One percentage split per goal, then the same calories-to-grams conversion applied to all three macronutrients."
+        },
+        "anatomy": {
+          "intro": "For the \"maintain\" goal's 20/50/30 split, the same 2,000 calories divide unevenly by macronutrient, since fat's higher calorie density means its calorie share converts to fewer grams than an equal calorie share of protein or carbs would.",
+          "labelProtein": "Protein",
+          "labelCarbs": "Carbs",
+          "labelFat": "Fat",
+          "totalLabel": "2,000 Total Calories",
+          "caption": "At the maintain-goal split, 2,000 calories become 400 calories (100g) of protein, 1,000 calories (250g) of carbs, and 600 calories (67g) of fat."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Total Calories",
+            "meaning": "Total daily calorie target to split across the three macronutrients. Must be between 1 and 20,000.",
+            "unit": "kcal"
+          },
+          {
+            "symbol": "Goal",
+            "meaning": "Which percentage split to apply: lose, maintain, gain, or build muscle.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Calories outside a realistic range",
+            "description": "Total calories must be a finite number greater than 0 and no more than 20,000 — a value outside that range returns an \"invalid-calories\" error rather than producing a technically-computed but physiologically meaningless macro split."
+          },
+          {
+            "title": "Every split stays within recommended nutritional ranges",
+            "description": "Each goal's percentage split (protein 20-30%, carbs 45-55%, fat 20-30% depending on goal) is chosen from within the Institute of Medicine's Acceptable Macronutrient Distribution Range, rather than an informal rule of thumb — every combination this tool can produce is defensible against that published dietary reference standard."
+          },
+          {
+            "title": "Protein is weighted higher for \"lose\" and \"build muscle\" goals",
+            "description": "Both the lose and build-muscle goals use a 30% protein share (versus 20% for maintain and gain) — a higher relative protein intake during a calorie deficit or a resistance-training-driven surplus is consistent with sports-nutrition guidance for preserving or building lean muscle mass."
+          },
+          {
+            "title": "Percentages always sum to exactly 100% within each goal",
+            "description": "For any given goal, the protein, carbs, and fat percentages are fixed values that add up to exactly 100% — the gram and calorie figures shown always account for the entire calorie total with nothing left over or double-counted."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does fat convert to fewer grams than protein or carbs for the same number of calories?",
+            "answer": "Fat provides 9 calories per gram, more than double the 4 calories per gram that protein and carbohydrates each provide — so the same calorie allocation converts to noticeably fewer grams of fat than it would of protein or carbs. This is a fixed physiological fact about macronutrients, not a choice this tool makes."
+          },
+          {
+            "question": "Why do the percentage splits change based on my goal?",
+            "answer": "Different goals benefit from different macronutrient emphasis — a fat-loss goal or a muscle-building goal both benefit from a higher relative protein intake to help preserve or build lean muscle mass, while a simple maintenance or gaining goal doesn't need that same emphasis. Each split is chosen from within established nutritional guidelines (the Institute of Medicine's Acceptable Macronutrient Distribution Range) rather than an arbitrary ratio."
+          },
+          {
+            "question": "What is the Acceptable Macronutrient Distribution Range (AMDR)?",
+            "answer": "It's a set of published nutritional reference ranges — roughly 10-35% of calories from protein, 45-65% from carbohydrates, and 20-35% from fat — representing the range associated with reduced risk of chronic disease while providing adequate nutrient intake. Every goal-specific split this calculator uses falls within these established bounds, rather than using an arbitrary or trendy ratio."
+          },
+          {
+            "question": "Why is there a maximum calorie limit of 20,000?",
+            "answer": "This is a sanity-check ceiling well above any realistic human daily calorie intake — its purpose is to catch clearly mistaken input (like an extra digit typed by accident) rather than to reflect any actual nutritional limit, since 20,000 calories is far beyond what this tool's macro-split guidance would be relevant for."
+          }
+        ]
+      },
+      "bmr-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the BMR Calculator: how the Harris-Benedict and Mifflin-St Jeor equations estimate resting metabolic rate, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Two Equations, One Body",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Equations",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Harris-Benedict (men): 66.473 + 13.7516×weight + 5.0033×height − 6.755×age  |  Mifflin-St Jeor (men): 10×weight + 6.25×height − 5×age + 5",
+          "note": "Both equations estimate the same thing — resting daily energy expenditure — from the same four inputs (weight, height, age, gender), but were fitted to different reference populations more than 70 years apart, so they don't produce identical results for the same person."
+        },
+        "flowchart": {
+          "intro": "Which equation (or both) gets computed depends on the selected formula option, but each one is a single direct calculation with no branching.",
+          "steps": [
+            "Validate that weight, height, and age are all finite, positive, and within realistic human ranges",
+            "If the formula option includes Harris-Benedict, compute it using the original 1919 equation with a gender-specific structure",
+            "If the formula option includes Mifflin-St Jeor, compute it using its own gender-specific offset (+5 for men, −161 for women)",
+            "If both were computed (the \"compare\" option), calculate the difference between them in kilocalories"
+          ],
+          "caption": "Two independent, gender-specific equations computed from the same inputs, optionally compared side by side."
+        },
+        "anatomy": {
+          "intro": "For identical body measurements, the two equations don't agree exactly — they were derived from different reference populations decades apart, so a gap between them is normal and expected, not an error.",
+          "labelHarrisBenedict": "Harris-Benedict (1919)",
+          "labelMifflinStJeor": "Mifflin-St Jeor (1990)",
+          "caption": "For an 80 kg, 180 cm, 30-year-old man, Harris-Benedict estimates about 1,865 kcal versus Mifflin-St Jeor's 1,780 kcal — an 85 kcal gap from the same measurements."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Gender",
+            "meaning": "Both equations apply a different structure/offset for male versus female.",
+            "unit": "male / female"
+          },
+          {
+            "symbol": "Weight",
+            "meaning": "Body weight, used by both equations.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "Height, used by both equations.",
+            "unit": "cm"
+          },
+          {
+            "symbol": "Age",
+            "meaning": "Age in years, used by both equations.",
+            "unit": "Years"
+          },
+          {
+            "symbol": "Formula",
+            "meaning": "Which equation to compute: Harris-Benedict only, Mifflin-St Jeor only, or both side by side.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Measurements outside realistic human ranges",
+            "description": "Weight must be a positive number under 500 kg, height under 300 cm, and age between 1 and 120 — values outside these ranges return an \"invalid-measurements\" error, since neither equation was derived from (or is meaningful for) data outside realistic human body measurements."
+          },
+          {
+            "title": "The two equations can be computed independently or together",
+            "description": "Selecting \"Harris-Benedict\" or \"Mifflin-St Jeor\" alone leaves the other equation's result as null rather than computing it unnecessarily; selecting \"compare\" computes both and additionally reports the difference between them in kilocalories."
+          },
+          {
+            "title": "This is the original 1919 Harris-Benedict equation, not the 1984 revision",
+            "description": "Some modern calculators use a 1984 Roza & Shizgal revision of the Harris-Benedict equation instead of the original — this tool deliberately uses the 1919 original specifically so it can serve as a direct, historically accurate comparison point against Mifflin-St Jeor, the equation that later replaced it in clinical preference."
+          },
+          {
+            "title": "Neither equation accounts for body composition",
+            "description": "Both Harris-Benedict and Mifflin-St Jeor use only total body weight, with no way to distinguish muscle from fat — a visibly muscular or very lean person may find both equations under- or over-estimate their actual resting metabolism, a limitation the Katch-McArdle formula (used in the TDEE Calculator) is specifically designed to address."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Which equation should I trust more, Harris-Benedict or Mifflin-St Jeor?",
+            "answer": "The Academy of Nutrition and Dietetics recommends Mifflin-St Jeor (1990) as the more accurate equation for the general adult population today — it was developed and validated on a more contemporary, more representative population than the original 1919 Harris-Benedict equation. Harris-Benedict is included here mainly for historical comparison, as the equation that first popularized resting-metabolism estimation."
+          },
+          {
+            "question": "Why do the two equations give different results for the same person?",
+            "answer": "They were each fitted to different reference populations using different statistical methods, more than 70 years apart — small differences in how each equation weighs weight, height, and age compound into a real, expected gap in their final estimates, even though both are trying to estimate the same underlying quantity."
+          },
+          {
+            "question": "Why does the tool use the original 1919 Harris-Benedict equation instead of the more common 1984 revision?",
+            "answer": "The original 1919 form is kept here deliberately so it can serve as a direct, citable historical comparison against Mifflin-St Jeor — showing \"the equation that started resting-metabolism estimation\" side by side with \"the one that later replaced it in clinical preference,\" rather than blending in a later revision that would muddy that comparison."
+          },
+          {
+            "question": "How is this different from the TDEE Calculator?",
+            "answer": "This tool only estimates BMR (resting energy expenditure) using two classic equations shown side by side for comparison. The TDEE Calculator uses BMR as an input, then multiplies it by an activity-level factor to estimate total daily calorie needs — and it additionally offers a third BMR option (Katch-McArdle) for when body fat percentage is known, which this tool doesn't include."
+          }
+        ]
+      },
+      "pace-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Pace Calculator: how pace, speed, splits, and finish-time predictions are computed, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "How Race Time Grows With Distance",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solve Modes",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Pace = time ÷ distance  |  Speed = distance ÷ time  |  Riegel prediction: T₂ = T₁ × (D₂/D₁)^1.06",
+          "note": "The core pace/speed math is simple division, solvable for whichever of pace, time, or distance is unknown given the other two — the Riegel formula adds one refinement on top: predicting a finish time at a new distance isn't a straight-line scale-up, because fatigue makes pace predictably slow as distance grows."
+        },
+        "flowchart": {
+          "intro": "Which of three values gets solved for depends on which two you already know; a separate calculation handles predicting a new distance from a known result.",
+          "steps": [
+            "Given distance and time: divide time by distance to get pace, or distance by time to get speed",
+            "Given distance and pace: multiply distance by pace to get total time",
+            "Given time and pace: divide time by pace to get distance",
+            "For a multi-point pace table: compute each consecutive pair of cumulative splits as a segment, skipping any pair where distance or time doesn't actually increase, so one malformed row doesn't break segments elsewhere in the table",
+            "For a finish-time prediction: raise the ratio of target distance to known distance to the power 1.06 (the Riegel fatigue exponent), then multiply by the known time"
+          ],
+          "caption": "Three interchangeable ways to solve the same pace/time/distance relationship, plus the separate Riegel prediction formula."
+        },
+        "anatomy": {
+          "intro": "Because the Riegel formula's exponent (1.06) is greater than 1, predicted race time grows faster than distance does — doubling the distance takes noticeably more than double the time, reflecting real endurance fatigue.",
+          "xLabel": "Distance (km)",
+          "yLabel": "Predicted Time (min)",
+          "caption": "Starting from a 25-minute 5K, the Riegel formula predicts roughly 52 minutes for 10K (not a flat 50) and about 4 hours for a marathon — each step up costs more than a simple linear scale-up would."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Distance",
+            "meaning": "Race or run distance, in the selected distance unit.",
+            "unit": "km / mi"
+          },
+          {
+            "symbol": "Time",
+            "meaning": "Total time for the distance, entered or solved for in hours, minutes, and seconds.",
+            "unit": "h:mm:ss"
+          },
+          {
+            "symbol": "Pace",
+            "meaning": "Time per unit distance — entered or solved for, and always available in both km and mile equivalents.",
+            "unit": "min/km, min/mi"
+          },
+          {
+            "symbol": "Multi-Point Splits",
+            "meaning": "A series of cumulative distance/time markers (e.g., mile splits during one run), used to compute per-segment pace.",
+            "unit": "List"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Any of the three solve modes requires strictly positive inputs",
+            "description": "Solving for pace, time, or distance all require the known values to be finite and strictly greater than zero — a zero or negative distance, time, or pace returns an invalid result rather than a division-by-zero error or a nonsensical negative pace."
+          },
+          {
+            "title": "Multi-point splits skip malformed rows without breaking the whole table",
+            "description": "Each segment between two consecutive split points is only computed if both points have valid, non-negative distance and time, and the later point's distance and time both genuinely increase from the earlier one — a single bad or out-of-order row is simply skipped, so valid segments elsewhere in the table are still calculated correctly."
+          },
+          {
+            "title": "Multi-point splits are cumulative, not per-lap",
+            "description": "Each entered point is treated as a running total from the very start (like mile markers during one continuous run), not as an independent lap time — the tool computes each segment's distance and time by subtracting consecutive cumulative values, not by using each entry as a standalone measurement."
+          },
+          {
+            "title": "Race preset distances use exact, not rounded, values",
+            "description": "The built-in race distances use their precise values — a half marathon is 21.0975 km and a full marathon is 42.195 km, not rounded to 21.1 or 42.2 — so pace and prediction calculations using these presets stay accurate rather than compounding a small rounding error."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the Riegel exponent 1.06 instead of just scaling time linearly with distance?",
+            "answer": "A purely linear scale-up (exponent of exactly 1.0) would assume you could hold the exact same pace no matter how far you ran, which isn't realistic — endurance fatigue means pace naturally slows as distance increases. Peter Riegel's formula, developed from analyzing large amounts of real race-time data, found that a 1.06 exponent consistently modeled this slowdown across a wide range of distances and abilities."
+          },
+          {
+            "question": "Why do the multi-point splits skip some rows instead of showing an error?",
+            "answer": "A single mistyped split (like an out-of-order distance or duplicate time) shouldn't invalidate every other split you've entered correctly — by simply skipping any pair where the data doesn't make sense (distance or time not increasing) rather than stopping at the first problem, the tool still computes every valid segment elsewhere in the table."
+          },
+          {
+            "question": "Why does a half marathon show as 21.0975 km instead of a rounder number?",
+            "answer": "That's the exact, official half-marathon distance (13.1 miles converted precisely to kilometers) rather than a convenient rounding — using the precise figure keeps pace-per-km and finish-time calculations accurate, since even a small rounding error in the base distance would compound across pace and prediction calculations."
+          },
+          {
+            "question": "How reliable is a Riegel prediction for a much longer or shorter distance than my known result?",
+            "answer": "The formula is generally most reliable when predicting a distance reasonably close to the known one — for example, a 5K time predicting a 10K tends to be fairly accurate, since it's derived from statistical patterns across many runners' race results. Predicting a marathon time from a very short known distance (like a 1-mile time trial) stretches the formula further from the data it was validated on, so treat distant extrapolations as a rougher estimate."
+          }
+        ]
       }
     }
   }

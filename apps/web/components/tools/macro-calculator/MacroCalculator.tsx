@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import MacroInputPanel from "./MacroInputPanel";
 import MacroResult from "./MacroResult";
 import MacroQuickReference from "./MacroQuickReference";
@@ -45,6 +46,7 @@ export default function MacroCalculator({ education }: { education: ReactNode })
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="macro-calculator" />
               <MacroQuickReference />
               <MacroDisclaimer />
             </div>

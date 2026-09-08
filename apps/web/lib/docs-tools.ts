@@ -43,6 +43,18 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "break-even-calculator",
   "fuel-cost-calculator",
   "batch-invoice-calculator",
+  "tdee-calculator",
+  "bmi-calculator",
+  "ideal-weight-calculator",
+  "target-heart-rate-calculator",
+  "sleep-calculator",
+  "body-fat-calculator",
+  "due-date-calculator",
+  "ovulation-calculator",
+  "pregnancy-calculator",
+  "macro-calculator",
+  "bmr-calculator",
+  "pace-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {
