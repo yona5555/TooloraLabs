@@ -9,6 +9,7 @@ import OhmsLawVIRelationDiagram from "./OhmsLawVIRelationDiagram";
 import OhmsLawPowerRatingDiagram from "./OhmsLawPowerRatingDiagram";
 import OhmsLawCircuitDiagram from "./OhmsLawCircuitDiagram";
 import OhmsLawPowerFormulasDiagram from "./OhmsLawPowerFormulasDiagram";
+import OhmsLawConductivityGauge from "./OhmsLawConductivityGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function OhmsLawEducation() {
 
   return (
     <EncyclopediaPaper>
+      <OhmsLawConductivityGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <OhmsLawTriangleDiagram
