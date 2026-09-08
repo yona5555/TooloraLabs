@@ -27128,6 +27128,681 @@
             "answer": "La formule est généralement plus fiable pour prédire une distance raisonnablement proche de celle connue — par exemple, un temps de 5 km prédisant un 10 km a tendance à être assez précis, car il est dérivé de modèles statistiques sur les résultats de course de nombreux coureurs. Prédire un temps de marathon à partir d'une très courte distance connue (comme un chrono sur 1 mile) étire la formule plus loin des données sur lesquelles elle a été validée, donc traitez les extrapolations lointaines comme une estimation plus grossière."
           }
         ]
+      },
+      "density-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de densité : comment la densité, la masse et le volume se résolvent l'un pour l'autre, comment la densité relative et la conversion en unité SI sont dérivées, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Densités de matériaux courants",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes de résolution",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Densité = masse ÷ volume  |  Masse = densité × volume  |  Volume = masse ÷ densité",
+          "note": "Les trois grandeurs proviennent d'une seule relation — la densité est égale à la masse divisée par le volume — réarrangée algébriquement selon celle des trois que l'on résout, la masse et le volume étant saisis en grammes et centimètres cubes."
+        },
+        "flowchart": {
+          "intro": "Laquelle des trois grandeurs est calculée dépend de l'opération sélectionnée ; les deux autres sont simplement les valeurs saisies.",
+          "steps": [
+            "Lire quelle opération est sélectionnée : résoudre la densité, résoudre la masse, ou résoudre le volume",
+            "Pour résoudre la densité : diviser la masse saisie par le volume saisi",
+            "Pour résoudre la masse : multiplier la densité saisie par le volume saisi",
+            "Pour résoudre le volume : diviser la masse saisie par la densité saisie",
+            "Convertir la densité résultante en son équivalent SI (kg/m³) en multipliant par 1 000, et calculer la densité relative en divisant par la densité de référence de l'eau de 1,0 g/cm³"
+          ],
+          "caption": "Une relation, réarrangée de trois façons selon la grandeur inconnue, plus deux chiffres dérivés."
+        },
+        "anatomy": {
+          "intro": "La densité varie énormément selon les matériaux du quotidien — de la valeur de référence de l'eau jusqu'à des métaux près de vingt fois plus denses, tous exprimés dans la même unité g/cm³.",
+          "labelWater": "Eau",
+          "labelAluminum": "Aluminium",
+          "labelIron": "Fer",
+          "labelGold": "Or",
+          "caption": "Eau (1,0 g/cm³) contre aluminium (2,7), fer (7,87) et or (19,3) — l'or est plus de dix-neuf fois plus dense que l'eau."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Opération",
+            "meaning": "Quelle grandeur résoudre : densité, masse ou volume.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Masse de l'objet — saisie directement, ou calculée en sortie.",
+            "unit": "g"
+          },
+          {
+            "symbol": "Volume",
+            "meaning": "Volume de l'objet — saisi directement, ou calculé en sortie.",
+            "unit": "cm³"
+          },
+          {
+            "symbol": "Densité",
+            "meaning": "Masse par unité de volume — saisie directement, ou calculée en sortie.",
+            "unit": "g/cm³"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Résoudre la densité exige un volume non nul",
+            "description": "Diviser la masse par le volume n'est pas défini lorsque le volume est nul — le calculateur renvoie une erreur « zero-volume » plutôt qu'une densité infinie ou NaN."
+          },
+          {
+            "title": "Résoudre le volume exige une densité non nulle",
+            "description": "Diviser la masse par la densité n'est pas défini lorsque la densité est nulle — le calculateur renvoie une erreur « zero-density » plutôt qu'un volume infini ou NaN."
+          },
+          {
+            "title": "Résoudre la masse ne produit jamais d'erreur",
+            "description": "Masse = densité × volume est une multiplication directe sans aucune division — même si la densité ou le volume est saisi comme zéro, le calcul s'exécute quand même et renvoie simplement une masse nulle, sans besoin d'erreur."
+          },
+          {
+            "title": "La densité relative et la conversion SI sont toujours calculées, quelle que soit l'opération",
+            "description": "Quelle que soit l'opération exécutée, l'outil indique toujours en plus la densité en unités SI (kg/m³, en multipliant par 1 000) et sous forme de densité relative (un rapport sans unité par rapport à la densité de référence de l'eau de 1,0 g/cm³) — deux vues supplémentaires du même chiffre de densité."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le calculateur fonctionne-t-il en g/cm³ plutôt qu'en unité SI kg/m³ ?",
+            "answer": "Le gramme par centimètre cube est l'unité la plus couramment utilisée pour les comparaisons de densité quotidiennes (un millilitre d'eau pèse commodément presque exactement 1 gramme), donc le calcul principal reste dans cette unité — l'équivalent SI (kg/m³) est ensuite fourni à côté, calculé simplement en multipliant par 1 000, puisque les deux unités diffèrent exactement de ce facteur."
+          },
+          {
+            "question": "Qu'est-ce que la densité relative, et pourquoi est-elle toujours affichée ?",
+            "answer": "La densité relative est la densité d'un matériau divisée par la densité de l'eau (1,0 g/cm³) — un rapport sans unité qui indique en un coup d'œil combien de fois quelque chose est plus dense (ou plus léger) que l'eau, c'est pourquoi elle est automatiquement calculée et affichée avec chaque résultat, quelle que soit l'opération exécutée."
+          },
+          {
+            "question": "Pourquoi résoudre la masse ne renvoie-t-il jamais d'erreur, contrairement aux deux autres opérations ?",
+            "answer": "Résoudre la densité ou le volume implique chacun une division (masse ÷ volume, ou masse ÷ densité), qui n'est pas définie lorsque le diviseur est nul. Résoudre la masse consiste en masse = densité × volume, une simple multiplication sans aucune division — il n'y a aucun cas de dénominateur nul contre lequel se prémunir, donc cela produit toujours un résultat valide, même si ce résultat est zéro."
+          },
+          {
+            "question": "Puis-je utiliser ce calculateur pour les gaz aussi bien que pour les solides et les liquides ?",
+            "answer": "Oui — la relation densité = masse ÷ volume vaut pour n'importe quel état de la matière. Les densités des gaz sont simplement des nombres bien plus petits que ceux des solides ou des liquides (typiquement une petite fraction de g/cm³ à pression et température ambiantes), donc vous voudrez peut-être passer au chiffre SI (kg/m³) affiché à côté du résultat pour des nombres plus lisibles."
+          }
+        ]
+      },
+      "ohms-law-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de loi d'Ohm : comment la tension, le courant, la résistance et la puissance sont résolus à partir de deux grandeurs électriques connues, les six paires de valeurs connues prises en charge, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "La tension évolue linéairement avec le courant",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Paires connues",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "V = I × R  |  P = V × I  |  P = I² × R  |  P = V² ÷ R",
+          "note": "La loi d'Ohm (V = IR) et la formule de puissance (P = VI) relient ensemble les quatre grandeurs électriques — tension, courant, résistance et puissance — donc connaître deux quelconques des quatre suffit toujours à dériver les deux autres, c'est pourquoi le calculateur propose six paires différentes de valeurs connues."
+        },
+        "flowchart": {
+          "intro": "Quelle paire de formules s'exécute dépend entièrement de quelles deux grandeurs sont déjà connues ; chaque paire dérive directement les deux inconnues restantes, sans itération.",
+          "steps": [
+            "Lire laquelle des six paires connues est sélectionnée : tension et courant, tension et résistance, courant et résistance, tension et puissance, courant et puissance, ou résistance et puissance",
+            "Pour une paire incluant la résistance et le courant (ou la tension et la résistance) : appliquer V = IR directement pour obtenir la tension, ou diviser la tension par la résistance pour obtenir le courant",
+            "Pour une paire incluant la puissance : résoudre algébriquement en utilisant P = VI, P = I²R ou P = V²/R, selon celle qui relie les deux grandeurs connues à celles manquantes",
+            "Pour la paire résistance-et-puissance spécifiquement : prendre la racine carrée de puissance × résistance pour la tension, et la racine carrée de puissance ÷ résistance pour le courant",
+            "Renvoyer les quatre grandeurs — tension, courant, résistance et puissance — complétées, les deux valeurs initialement connues étant transmises sans changement"
+          ],
+          "caption": "Six points d'entrée dans la même relation tension-courant-résistance-puissance, chacun dérivant les deux inconnues à partir des deux connues."
+        },
+        "anatomy": {
+          "intro": "À résistance fixe, la loi d'Ohm est une pure proportionnalité — doubler le courant double la tension, le tripler la triple, sans aucune courbure dans la relation.",
+          "xLabel": "Courant (A)",
+          "yLabel": "Tension (V)",
+          "caption": "À une résistance fixe de 10 ohms, des courants de 0,5, 1, 2 et 3 ampères produisent des tensions de 5, 10, 20 et 30 volts — une ligne droite passant par l'origine."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Paire connue",
+            "meaning": "Lesquelles des quatre grandeurs électriques vous fournissez : tension et courant, tension et résistance, courant et résistance, tension et puissance, courant et puissance, ou résistance et puissance.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Tension",
+            "meaning": "Différence de potentiel électrique — saisie directement, ou calculée en sortie.",
+            "unit": "V"
+          },
+          {
+            "symbol": "Courant",
+            "meaning": "Taux de flux de charge électrique — saisi directement, ou calculé en sortie.",
+            "unit": "A"
+          },
+          {
+            "symbol": "Résistance",
+            "meaning": "Opposition au flux de courant — saisie directement, ou calculée en sortie.",
+            "unit": "Ω"
+          },
+          {
+            "symbol": "Puissance",
+            "meaning": "Taux de transfert d'énergie — saisi directement, ou calculé en sortie.",
+            "unit": "W"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La paire tension-et-courant exige un courant non nul",
+            "description": "La résistance est calculée comme la tension divisée par le courant — si le courant est nul, cette division n'est pas définie, et le calculateur renvoie une erreur « zero-current » plutôt qu'une résistance infinie."
+          },
+          {
+            "title": "La paire courant-et-résistance ne renvoie jamais d'erreur",
+            "description": "Étant donné le courant et la résistance, la tension (V = IR) et la puissance (P = I²R) sont toutes deux de simples multiplications sans aucune division — même une résistance exactement nulle (un court-circuit) se calcule sans problème, renvoyant correctement une tension nulle et une puissance nulle."
+          },
+          {
+            "title": "Les paires basées sur la puissance valident deux entrées, pas une",
+            "description": "Les paires tension-et-puissance et courant-et-puissance divisent chacune par leurs deux grandeurs connues à des étapes différentes (par exemple, courant = puissance ÷ tension, puis résistance = tension² ÷ puissance) — donc les deux valeurs doivent être non nulles, vérifiées comme deux conditions d'erreur distinctes plutôt qu'une vérification combinée."
+          },
+          {
+            "title": "La paire résistance-et-puissance prend une racine carrée, en supposant une puissance non négative",
+            "description": "La tension et le courant sont chacun dérivés comme une racine carrée de la puissance multipliée ou divisée par la résistance — la puissance électrique réelle dans un circuit passif n'est jamais négative, donc la formule ne se protège pas séparément contre une valeur de puissance négative, qui produirait sinon un résultat non réel."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le calculateur propose-t-il six paires différentes de valeurs connues au lieu de simplement demander deux valeurs ?",
+            "answer": "Les quatre grandeurs électriques — tension, courant, résistance et puissance — sont liées entre elles par plus d'une formule, et quelle paire spécifique de formules s'applique dépend exactement de quelles deux grandeurs sont déjà connues. Nommer les six combinaisons explicites (plutôt qu'une entrée générique « choisissez deux quelconques ») permet au calculateur d'appliquer la formule correcte et la plus directe pour chaque situation sans deviner."
+          },
+          {
+            "question": "Pourquoi la paire courant-et-résistance ne produit-elle jamais d'erreur, contrairement à la plupart des autres ?",
+            "answer": "Tension = courant × résistance et puissance = courant² × résistance sont toutes deux de simples multiplications — il n'y a de division par aucune des deux entrées nulle part dans les mathématiques de cette paire, donc il n'y a aucun cas de dénominateur nul qui pourrait produire un résultat indéfini, même à l'extrême d'une résistance nulle."
+          },
+          {
+            "question": "Comment la puissance est-elle calculée différemment selon la paire choisie ?",
+            "answer": "La puissance peut être atteinte de trois façons différentes selon ce qui est connu : directement comme tension × courant, comme courant² × résistance (utile lorsque vous connaissez le courant et la résistance mais pas la tension), ou comme tension² ÷ résistance (utile lorsque vous connaissez la tension et la résistance mais pas le courant) — le calculateur choisit la forme qui correspond à votre paire connue sélectionnée."
+          },
+          {
+            "question": "Que faire si je ne sais pas quelles deux valeurs j'ai réellement ?",
+            "answer": "Regardez ce que vous pouvez mesurer directement ou lire sur un composant : un multimètre donne typiquement directement la tension et le courant (la paire VI), la valeur marquée d'une résistance donne la résistance, et la puissance nominale d'un composant (en watts) donne la puissance — combinez celles des quatre que vous avez réellement sous la main pour choisir la paire correspondante."
+          }
+        ]
+      },
+      "energy-work-power-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur d'énergie, travail et puissance : comment le travail mécanique, l'énergie cinétique, l'énergie potentielle gravitationnelle et la puissance sont chacun calculés, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "L'énergie cinétique croît avec le carré de la vitesse",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Travail = force × distance × cos(angle)  |  Énergie cinétique = ½ × masse × vitesse²  |  Énergie potentielle = masse × 9,8 × hauteur  |  Puissance = travail ÷ temps",
+          "note": "Chacun des quatre modes est une formule directe indépendante — le calculateur ne les enchaîne pas, il calcule simplement la seule grandeur (travail, énergie cinétique, énergie potentielle ou puissance) que demande le mode sélectionné à partir de ses propres entrées spécifiques."
+        },
+        "flowchart": {
+          "intro": "Chaque mode est un calcul autonome utilisant uniquement les entrées qui lui sont pertinentes ; il n'y a pas de pipeline partagé entre les modes.",
+          "steps": [
+            "Lire lequel des quatre modes est sélectionné : travail, énergie cinétique, énergie potentielle, ou puissance",
+            "Pour le travail : convertir l'angle entre la force et le déplacement de degrés en radians, puis multiplier la force par la distance par le cosinus de cet angle",
+            "Pour l'énergie cinétique : multiplier un demi par la masse par la vitesse au carré",
+            "Pour l'énergie potentielle : multiplier la masse par l'accélération gravitationnelle fixe (9,8 m/s²) par la hauteur",
+            "Pour la puissance : diviser la valeur de travail saisie par le temps, en renvoyant une erreur « zero-time » si le temps n'est pas strictement positif"
+          ],
+          "caption": "Quatre formules indépendantes, chaque mode calculant uniquement sa propre grandeur à partir de ses propres entrées."
+        },
+        "anatomy": {
+          "intro": "L'énergie cinétique dépend du carré de la vitesse, pas de la vitesse directement — elle croît donc bien plus vite que la vitesse elle-même, se courbant fortement vers le haut plutôt que de suivre une ligne droite.",
+          "xLabel": "Vitesse (m/s)",
+          "yLabel": "Énergie cinétique (J)",
+          "caption": "Pour une masse de 2 kg, des vitesses de 2, 4, 6, 8 et 10 m/s produisent des énergies cinétiques de 4, 16, 36, 64 et 100 joules — doubler la vitesse quadruple l'énergie, ne la double pas."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Quelle grandeur calculer : travail, énergie cinétique, énergie potentielle, ou puissance.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Force",
+            "meaning": "Force appliquée, utilisée en mode travail.",
+            "unit": "N"
+          },
+          {
+            "symbol": "Distance",
+            "meaning": "Déplacement sur lequel la force agit, utilisé en mode travail.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Angle",
+            "meaning": "Angle entre la direction de la force et la direction du déplacement, utilisé en mode travail.",
+            "unit": "Degrés"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Masse de l'objet, utilisée en modes énergie cinétique et énergie potentielle.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Vitesse",
+            "meaning": "Vitesse de l'objet, utilisée en mode énergie cinétique.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Hauteur",
+            "meaning": "Hauteur au-dessus du niveau de référence, utilisée en mode énergie potentielle.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Valeur de travail",
+            "meaning": "Une quantité connue de travail ou d'énergie transférée, utilisée en mode puissance.",
+            "unit": "J"
+          },
+          {
+            "symbol": "Temps",
+            "meaning": "Durée pendant laquelle le travail est effectué, utilisée en mode puissance. Doit être strictement positif.",
+            "unit": "s"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le travail tient compte de l'angle entre la force et le déplacement",
+            "description": "La formule du travail multiplie par le cosinus de l'angle entre la force et le mouvement — une force appliquée à 90° de la direction du déplacement contribue un travail nul (cos 90° = 0), et une appliquée à l'opposé du mouvement (180°) contribue un travail négatif, reflétant tous deux correctement la physique plutôt que de simplement multiplier la force par la distance."
+          },
+          {
+            "title": "Seul le mode puissance peut renvoyer une erreur",
+            "description": "Les modes travail, énergie cinétique et énergie potentielle calculent chacun directement à partir de leurs entrées sans division, donc aucun d'eux ne valide ses entrées ni ne renvoie d'erreur — seul le mode puissance divise par le temps, et lui seul peut échouer, renvoyant « zero-time » lorsque le temps est nul ou négatif."
+          },
+          {
+            "title": "L'énergie cinétique ne se soucie pas de la direction de la vitesse",
+            "description": "Comme la formule met la vitesse au carré, une vitesse négative (représentant un mouvement dans la direction opposée) produit exactement la même énergie cinétique positive que la même rapidité dans la direction positive — l'énergie cinétique dépend uniquement de la rapidité, pas de la direction."
+          },
+          {
+            "title": "La gravité est fixée à 9,8 m/s², non réglable",
+            "description": "L'énergie potentielle utilise toujours l'accélération gravitationnelle standard de la Terre — contrairement au calculateur de mouvement de projectile ailleurs dans cette catégorie, qui permet de saisir une valeur de gravité personnalisée, cet outil n'a aucun moyen de calculer l'énergie potentielle pour la Lune, Mars ou une autre planète."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la formule du travail inclut-elle un cosinus de l'angle ?",
+            "answer": "Le travail est techniquement défini comme la composante de la force agissant le long de la direction du mouvement — si vous poussez selon un angle par rapport à la façon dont quelque chose se déplace réellement, seule une partie de votre force contribue au travail effectué. Multiplier par cos(angle) capture exactement cela : à 0° (poussant directement le long du mouvement) toute la force compte, à 90° (poussant perpendiculairement au mouvement) rien de cela ne compte, et au-delà de 90° le travail devient négatif."
+          },
+          {
+            "question": "Pourquoi le mode puissance vérifie-t-il un temps inférieur ou égal à zéro, plutôt que juste un temps égal à zéro ?",
+            "answer": "Diviser par un temps négatif est tout aussi dénué de sens physique que diviser par zéro — le temps écoulé ne peut pas être négatif dans ce contexte — donc la vérification capture les deux cas invalides (zéro et négatif) avec une seule erreur « zero-time » plutôt que de laisser passer un temps négatif et produire une puissance négative absurde."
+          },
+          {
+            "question": "Pourquoi l'énergie cinétique ne change-t-elle pas si j'inverse la direction du mouvement ?",
+            "answer": "La formule de l'énergie cinétique utilise la vitesse au carré, et mettre au carré un nombre négatif produit le même résultat positif que mettre au carré son homologue positif — physiquement, c'est correct : un objet se déplaçant à une vitesse donnée a la même énergie cinétique quelle que soit la direction dans laquelle il se déplace, puisque l'énergie est une grandeur scalaire sans direction propre."
+          },
+          {
+            "question": "Comment cet outil se rapporte-t-il au calculateur de force ?",
+            "answer": "Le calculateur de force résout la deuxième loi de Newton (F = ma) et la gravitation universelle pour la force, la masse, l'accélération ou la distance — les valeurs de force qu'il produit sont exactement le type d'entrée que le mode travail de ce calculateur utilise. Les deux outils couvrent des parties complémentaires de la mécanique : l'un se concentre sur la force et le mouvement, l'autre sur l'énergie et la puissance que cette force produit ou nécessite."
+          }
+        ]
+      },
+      "kinematics-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de cinématique : comment les problèmes de mouvement à accélération constante sont résolus à la fois en mode basé sur le temps et en mode basé sur la distance, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "La vitesse croît linéairement sous accélération constante",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "v = v₀ + at  |  Δx = ½(v₀ + v)t  |  v² = v₀² + 2aΔx",
+          "note": "Ces trois équations décrivent le même mouvement à accélération constante sous des angles différents — le calculateur utilise les deux premières ensemble en mode basé sur le temps (lorsque le temps est connu) et la troisième en mode basé sur la distance (lorsque le déplacement est connu mais pas le temps), résolvant toujours la seule grandeur actuellement inconnue."
+        },
+        "flowchart": {
+          "intro": "Quel ensemble d'équations s'exécute dépend du mode sélectionné, et au sein de chaque mode, de quelle grandeur spécifique est résolue.",
+          "steps": [
+            "Lire quel mode est sélectionné : basé sur le temps (vous connaissez ou voulez le temps) ou basé sur la distance (vous connaissez ou voulez le déplacement, mais pas le temps)",
+            "En mode basé sur le temps : résoudre v = v₀ + at algébriquement pour celle de v, v₀, a ou t qui est inconnue, renvoyant des erreurs « zero-time » ou « zero-acceleration » pour les deux résolutions qui nécessitent de diviser par t ou a",
+            "En mode basé sur le temps, ensuite : toujours calculer en plus le déplacement comme Δx = ½(v₀ + v)t à partir de l'ensemble désormais complet des valeurs basées sur le temps",
+            "En mode basé sur la distance : résoudre v² = v₀² + 2aΔx algébriquement pour celle de v, v₀, a ou Δx qui est inconnue, renvoyant une erreur « negative-discriminant » si une racine carrée d'un nombre négatif serait requise, ou « zero-displacement »/« zero-acceleration » pour les résolutions nécessitant de diviser par Δx ou a",
+            "En mode basé sur la distance, ensuite : calculer le temps comme t = (v − v₀) ÷ a uniquement si l'accélération est non nulle, sinon laisser le temps indisponible plutôt que de diviser par zéro"
+          ],
+          "caption": "Deux modes pour la même physique d'accélération constante, sélectionnés selon que le temps ou le déplacement est la grandeur connue."
+        },
+        "anatomy": {
+          "intro": "Sous accélération constante, la vitesse augmente de la même quantité fixe chaque seconde — une ligne parfaitement droite lorsqu'elle est tracée en fonction du temps, sans aucune courbure.",
+          "xLabel": "Temps (s)",
+          "yLabel": "Vitesse (m/s)",
+          "caption": "En partant du repos avec une accélération de 5 m/s², la vitesse grimpe à 5, 10, 15 et 20 m/s à 1, 2, 3 et 4 secondes — une ligne droite dont la pente est égale à l'accélération."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Si vous connaissez (ou voulez) le temps, ou le déplacement à la place.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Vitesse initiale (v₀)",
+            "meaning": "Vitesse au début de l'intervalle — saisie directement, ou calculée en sortie.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Vitesse finale (v)",
+            "meaning": "Vitesse à la fin de l'intervalle — saisie directement, ou calculée en sortie.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Accélération (a)",
+            "meaning": "Taux constant de variation de la vitesse — saisi directement, ou calculé en sortie.",
+            "unit": "m/s²"
+          },
+          {
+            "symbol": "Temps (t)",
+            "meaning": "Durée de l'intervalle — saisie directement, ou calculée en sortie. Utilisée en mode basé sur le temps.",
+            "unit": "s"
+          },
+          {
+            "symbol": "Déplacement (Δx)",
+            "meaning": "Distance parcourue pendant l'intervalle — saisie directement, ou calculée en sortie. Utilisée en mode basé sur la distance.",
+            "unit": "m"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le mode basé sur la distance peut rencontrer un discriminant négatif",
+            "description": "Résoudre la vitesse finale ou initiale en mode basé sur la distance prend une racine carrée de v₀² + 2aΔx ou v² − 2aΔx — si la décélération est assez forte pour que l'objet s'arrête avant de parcourir le déplacement saisi, cette valeur devient négative, et le calculateur renvoie une erreur « negative-discriminant » plutôt qu'un résultat imaginaire."
+          },
+          {
+            "title": "Le mode basé sur le temps dérive toujours le déplacement ensuite",
+            "description": "Quelle que soit celle de v, v₀, a ou t que vous avez réellement résolue en mode basé sur le temps, l'outil calcule toujours en plus le déplacement comme Δx = ½(v₀ + v)t une fois l'ensemble complet des valeurs basées sur le temps connu — un résultat bonus à chaque calcul basé sur le temps."
+          },
+          {
+            "title": "Le mode basé sur la distance ne peut pas toujours récupérer le temps",
+            "description": "Le temps est dérivé ensuite comme t = (v − v₀) ÷ a, ce qui ne fonctionne que lorsque l'accélération est non nulle — si une résolution en mode basé sur la distance produit légitimement une accélération nulle (par exemple, vitesse initiale et finale égales), le temps est marqué indisponible plutôt que de diviser par zéro."
+          },
+          {
+            "title": "Les deux modes sont deux points d'entrée dans la même physique, pas deux modèles différents",
+            "description": "Le mode basé sur le temps exige de connaître le temps et en résout la vitesse, la vitesse initiale ou l'accélération ; le mode basé sur la distance exige de connaître le déplacement à la place et résout les mêmes quatre inconnues à partir de l'équation basée sur la distance — les deux décrivent un mouvement à accélération constante identique, simplement ancré à une grandeur connue différente."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Quelle est la différence pratique entre les deux modes ?",
+            "answer": "Utilisez le mode basé sur le temps lorsque vous savez (ou voulez trouver) combien de temps le mouvement a duré — par exemple, chronométrer un sprint avec un chronomètre. Utilisez le mode basé sur la distance lorsque vous savez (ou voulez trouver) sur quelle distance quelque chose a voyagé mais n'avez pas de mesure de temps — par exemple, la distance de freinage d'une voiture, où vous connaissez typiquement la distance grâce aux traces de dérapage plutôt que le temps exact que l'arrêt a pris."
+          },
+          {
+            "question": "Pourquoi résoudre la vitesse produirait-il une erreur de « discriminant négatif » ?",
+            "answer": "Cela arrive spécifiquement en mode basé sur la distance, lorsque les nombres décrivent un scénario physiquement impossible — par exemple, demander à quelle vitesse va un objet après avoir parcouru une distance plus grande que ce qu'il pourrait réellement atteindre compte tenu de sa décélération, ce qui signifie qu'il se serait déjà arrêté avant d'atteindre cette distance. Il n'existe aucune vitesse réelle qui satisfasse l'équation, donc le calculateur le signale plutôt que de renvoyer un nombre fabriqué."
+          },
+          {
+            "question": "Pourquoi le déplacement est-il toujours affiché en mode basé sur le temps, mais le temps n'est-il pas toujours disponible en mode basé sur la distance ?",
+            "answer": "En mode basé sur le temps, une fois que v₀, v, a et t sont tous connus, le déplacement découle directement de Δx = ½(v₀ + v)t sans risque de division par zéro — il est toujours calculable. En mode basé sur la distance, récupérer le temps nécessite de diviser par l'accélération, ce qui est réellement indéfini si l'accélération s'avère nulle (vitesse constante, aucun changement), donc ce cas spécifique est laissé indisponible plutôt que de deviner."
+          },
+          {
+            "question": "À quel scénario de mouvement réel correspond chaque résolution ?",
+            "answer": "Résoudre la vitesse finale répond à « à quelle vitesse ira-t-il ? » ; résoudre la vitesse initiale répond à « à quelle vitesse a-t-il commencé ? » ; résoudre l'accélération répond à « avec quelle force a-t-il accéléré ou ralenti ? » ; et résoudre le temps ou le déplacement répond à « combien de temps cela a-t-il pris ? » ou « quelle distance a-t-il parcourue ? » — chaque résolution isole une inconnue dans une question de mouvement du monde réel."
+          }
+        ]
+      },
+      "force-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de force : comment la deuxième loi de Newton et la loi de la gravitation universelle sont chacune résolues pour leurs inconnues, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "La force gravitationnelle diminue avec le carré de la distance",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Deuxième loi de Newton : F = ma  |  Gravitation universelle : F = Gm₁m₂ ÷ d²  (G = 6,674×10⁻¹¹ N·m²/kg²)",
+          "note": "Le calculateur prend en charge deux lois entièrement distinctes sous un même toit — la deuxième loi de Newton, reliant force, masse et accélération pour les objets du quotidien, et la loi de la gravitation universelle, reliant l'attraction gravitationnelle entre deux masses à la distance qui les sépare."
+        },
+        "flowchart": {
+          "intro": "Les deux modes sont des modèles physiques indépendants avec leurs propres options de résolution ; le calculateur ne les mélange pas.",
+          "steps": [
+            "Lire quel mode est sélectionné : deuxième loi de Newton ou gravitation universelle",
+            "En mode deuxième loi : résoudre F = ma algébriquement pour celle de la force, la masse ou l'accélération qui est inconnue",
+            "En mode gravitation : résoudre F = Gm₁m₂/d² algébriquement pour celle de la force, la masse 1, la masse 2 ou la distance qui est inconnue, en utilisant la constante gravitationnelle fixe G",
+            "Pour la résolution de la distance en gravitation spécifiquement : réarranger en d = √(Gm₁m₂/F), en prenant une racine carrée",
+            "Renvoyer les quatre champs pertinents pour le mode sélectionné complétés, les champs de l'autre mode restant à zéro"
+          ],
+          "caption": "Deux lois indépendantes, chacune avec ses propres options de résolution, partageant une interface de calculateur."
+        },
+        "anatomy": {
+          "intro": "La force gravitationnelle ne diminue pas de façon constante avec la distance — elle diminue avec le carré de la distance, donc doubler la distance réduit la force à un quart, pas à la moitié.",
+          "xLabel": "Distance (m)",
+          "yLabel": "Force (μN)",
+          "caption": "Pour deux masses de 1 000 kg chacune, les séparer de 1 m à 2, 3 et 4 m fait chuter la force gravitationnelle de 66,74 à 16,69, 7,42 et 4,17 micronewtons — une réduction au quart, puis un rétrécissement supplémentaire, pas un déclin constant."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Quelle loi appliquer : la deuxième loi de Newton, ou la gravitation universelle.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Force",
+            "meaning": "Force nette, utilisée dans les deux modes avec des significations différentes — force appliquée en mode deuxième loi, attraction gravitationnelle en mode gravitation.",
+            "unit": "N"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Masse de l'objet, utilisée en mode deuxième loi.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Accélération",
+            "meaning": "Taux de variation de la vitesse, utilisé en mode deuxième loi.",
+            "unit": "m/s²"
+          },
+          {
+            "symbol": "Masse 1",
+            "meaning": "Masse du premier objet, utilisée en mode gravitation.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Masse 2",
+            "meaning": "Masse du deuxième objet, utilisée en mode gravitation.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Distance",
+            "meaning": "Séparation entre les centres des deux masses, utilisée en mode gravitation.",
+            "unit": "m"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le calcul de la force en deuxième loi ne produit jamais d'erreur",
+            "description": "Résoudre la force est une multiplication directe (force = masse × accélération) sans aucune division — cela se calcule sans problème que la masse ou l'accélération soit saisie comme zéro ou non, renvoyant correctement une force nulle dans ce cas."
+          },
+          {
+            "title": "Les quatre résolutions de la gravitation divisent chacune par une variable différente",
+            "description": "Résoudre la masse 1 exige que la masse 2 soit non nulle, résoudre la masse 2 exige que la masse 1 soit non nulle, résoudre la distance exige que la force soit non nulle (car elle apparaît dans le dénominateur d'une racine carrée), et résoudre la force exige que la distance soit non nulle — quatre codes d'erreur distincts pour quatre divisions distinctes."
+          },
+          {
+            "title": "La constante gravitationnelle est fixe et extrêmement petite",
+            "description": "G = 6,674×10⁻¹¹ N·m²/kg² est un nombre minuscule, donc la force gravitationnelle entre des masses de taille quotidienne ressort correspondamment minuscule — souvent dans la plage du micronewton ou moins — ce qui est une physique attendue, pas une erreur de calcul, et c'est pourquoi la gravitation n'est perceptible qu'à l'échelle planétaire dans la vie quotidienne."
+          },
+          {
+            "title": "Les deux modes ne partagent pas de champs de résultat",
+            "description": "Le mode deuxième loi renvoie toujours la masse 1, la masse 2 et la distance à zéro, tandis que le mode gravitation renvoie toujours la masse et l'accélération à zéro — puisque les deux modèles physiques utilisent des ensembles d'inconnues entièrement différents, seuls les champs pertinents pour le mode sélectionné sont jamais remplis."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Quelle est la différence entre la deuxième loi de Newton et la gravitation universelle, et pourquoi inclure les deux ici ?",
+            "answer": "La deuxième loi de Newton (F = ma) décrit comment n'importe quelle force accélère une masse — elle s'applique à pousser une boîte, une voiture qui freine, ou une fusée qui allume ses moteurs. La gravitation universelle (F = Gm₁m₂/d²) décrit une force spécifique : l'attraction mutuelle entre deux masses quelconques due à la gravité. Les deux sont des relations de force fondamentales en mécanique classique, donc les associer dans un seul calculateur couvre les problèmes de force sous deux angles différents et complémentaires."
+          },
+          {
+            "question": "Pourquoi la force gravitationnelle entre deux objets sur une table est-elle tellement plus petite que de les pousser avec F = ma ?",
+            "answer": "La constante gravitationnelle G = 6,674×10⁻¹¹ N·m²/kg² est extraordinairement petite, donc à moins qu'au moins une des deux masses soit d'échelle planétaire, la force gravitationnelle résultante est infime comparée aux forces de poussées directes ou d'accélérations quotidiennes — c'est de la physique précise, pas une limitation du calculateur ; la gravité entre objets quotidiens est réellement négligeable."
+          },
+          {
+            "question": "Pourquoi résoudre la distance en gravitation utilise-t-il une racine carrée ?",
+            "answer": "La formule de gravitation a la distance au carré au dénominateur (F = Gm₁m₂/d²) — réarranger pour isoler la distance signifie déplacer ce terme au carré de l'autre côté puis annuler le carré avec une racine carrée, donnant d = √(Gm₁m₂/F). Mettre la distance au carré est ce qui produit la diminution en carré inverse ; reprendre la racine carrée n'est que de l'algèbre pour isoler l'inconnue."
+          },
+          {
+            "question": "Pour quel scénario quotidien utiliserais-je le mode deuxième loi par rapport au mode gravitation ?",
+            "answer": "Utilisez le mode deuxième loi pour presque toute question quotidienne de force et de mouvement — combien de force est nécessaire pour accélérer une voiture, ou à quelle vitesse quelque chose accélère sous une poussée connue. Utilisez le mode gravitation spécifiquement pour des questions sur l'attraction gravitationnelle entre deux masses à distance, comme estimer l'attraction gravitationnelle (typiquement minuscule) entre deux objets proches, ou, à l'échelle planétaire, la force qui maintient un satellite en orbite."
+          }
+        ]
+      },
+      "projectile-motion-calculator": {
+        "version": "v1",
+        "description": "Référence technique du calculateur de mouvement de projectile : comment le temps de vol, la hauteur maximale, la portée et la vitesse d'impact sont calculés pour un objet lancé selon un angle, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Formule de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "La trajectoire parabolique",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Sorties",
+          "modesValue": "5",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "vₓ = vitesse × cos(angle)  |  v_y = vitesse × sin(angle)  |  Temps de vol = [v_y + √(v_y² + 2·g·hauteur)] ÷ g  |  Portée = vₓ × temps de vol",
+          "note": "La vitesse et l'angle de lancement sont d'abord divisés en composantes horizontale et verticale de vitesse, puis traités indépendamment — la composante horizontale détermine la portée à un taux constant, tandis que la composante verticale détermine le temps de vol et la hauteur maximale sous la décélération et la réaccélération constantes de la gravité."
+        },
+        "flowchart": {
+          "intro": "Chaque sortie est dérivée de la même paire de composantes de vitesse, calculée une fois au départ.",
+          "steps": [
+            "Convertir l'angle de lancement de degrés en radians, puis diviser la vitesse de lancement en composantes horizontale (vₓ) et verticale (v_y) à l'aide du cosinus et du sinus",
+            "Résoudre le temps de vol à partir de l'équation du mouvement vertical hauteur + v_y·t − ½g·t² = 0, en prenant la racine positive : t = [v_y + √(v_y² + 2·g·hauteur)] ÷ g",
+            "Calculer la hauteur maximale comme la hauteur de lancement plus l'élévation supplémentaire due à la vitesse verticale : hauteur + v_y² ÷ (2g)",
+            "Calculer la portée en multipliant la vitesse horizontale par le temps de vol total",
+            "Calculer la vitesse d'impact à partir de la composante horizontale (inchangée pendant tout le vol) et de la composante verticale à l'atterrissage (v_y moins la gravité fois le temps de vol), puis en dériver l'angle d'impact à partir de ces deux composantes"
+          ],
+          "caption": "Une paire de composantes de vitesse au lancement, alimentant chaque autre sortie via les équations du mouvement sous gravité constante."
+        },
+        "anatomy": {
+          "intro": "Tracer la hauteur en fonction de la distance horizontale dessine une parabole symétrique — s'élevant depuis le lancement, culminant à la moitié du temps de vol, puis redescendant, l'atterrissage étant le miroir de la montée.",
+          "xLabel": "Distance horizontale (m)",
+          "yLabel": "Hauteur (m)",
+          "caption": "Lancé à 20 m/s et 45° depuis le niveau du sol, la trajectoire s'élève jusqu'à une hauteur maximale de 10,2 m au milieu de sa portée de 40,8 m, puis redescend en image miroir de la montée."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Vitesse",
+            "meaning": "Vitesse de lancement au moment du relâchement. Doit être nulle ou positive.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Angle",
+            "meaning": "Angle de lancement mesuré depuis l'horizontale.",
+            "unit": "Degrés"
+          },
+          {
+            "symbol": "Hauteur",
+            "meaning": "Hauteur de lancement au-dessus de la surface d'atterrissage. Doit être nulle ou positive.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Gravité",
+            "meaning": "Accélération gravitationnelle. Doit être strictement positive ; par défaut 9,8 m/s² pour la Terre mais peut être changée pour d'autres corps.",
+            "unit": "m/s²"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La gravité doit être strictement positive",
+            "description": "Une valeur de gravité nulle ou inférieure renvoie une erreur « invalid-gravity » — avec une gravité nulle, le projectile ne redescendrait jamais (le temps de vol serait indéfini), et une gravité négative n'a aucun sens physique ici."
+          },
+          {
+            "title": "Une vitesse ou une hauteur de lancement négative sont rejetées d'emblée",
+            "description": "Une vitesse inférieure à zéro et une hauteur inférieure à zéro renvoient chacune leur propre erreur dédiée (« invalid-speed » ou « invalid-height ») plutôt que d'être silencieusement limitées à zéro, car une vitesse de lancement négative ou un point de lancement sous la surface d'atterrissage n'est pas un scénario significatif pour cette formule."
+          },
+          {
+            "title": "Le calcul du temps de vol se protège contre de minuscules erreurs d'arrondi en virgule flottante",
+            "description": "Mathématiquement, le discriminant v_y² + 2·g·hauteur ne peut jamais être négatif lorsque la hauteur est nulle ou positive — mais le calcul le limite quand même à un minimum de zéro avant de prendre la racine carrée, protégeant contre une valeur négative microscopique que l'arrondi en virgule flottante pourrait sinon produire lorsque la hauteur est exactement nulle."
+          },
+          {
+            "title": "L'angle d'impact est mesuré sous l'horizontale",
+            "description": "L'angle d'impact est calculé à partir du négatif de la vitesse verticale à l'atterrissage, donc un projectile atterrissant sous son sommet (le cas normal) produit un angle positif représentant combien de degrés sous l'horizontale il voyage à l'impact — correspondant à la façon dont l'angle de lancement au-dessus de l'horizontale a été saisi."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi lancer à 45° depuis le niveau du sol donne-t-il une vitesse d'impact exactement égale à la vitesse de lancement ?",
+            "answer": "Lorsque la hauteur de lancement est nulle, le projectile atterrit à la même hauteur d'où il est parti — par la symétrie du mouvement de projectile sous gravité constante, la vitesse verticale à l'atterrissage a la même magnitude que la vitesse verticale au lancement (pointant simplement vers le bas plutôt que vers le haut), donc la vitesse d'impact totale s'avère égale à la vitesse de lancement. Cette symétrie se brise dès que la hauteur de lancement est non nulle."
+          },
+          {
+            "question": "Que se passe-t-il si je lance depuis une hauteur au-dessus du sol ?",
+            "answer": "Avec une hauteur de lancement positive, le projectile a plus loin à tomber qu'il n'est monté par sa propre vitesse verticale, donc il passe plus de temps dans l'air, voyage plus loin horizontalement, et atterrit avec une vitesse d'impact plus élevée que celle à laquelle il a été lancé — les formules de hauteur maximale, de temps de vol et de portée tiennent toutes directement compte de cette hauteur de départ supplémentaire."
+          },
+          {
+            "question": "Pourquoi la gravité doit-elle être strictement supérieure à zéro plutôt que simplement non négative ?",
+            "answer": "La formule du temps de vol divise par la gravité — à une gravité exactement nulle, cette division n'est pas définie, et physiquement un projectile sous gravité nulle voyagerait simplement en ligne droite pour toujours plutôt que de tracer une parabole et d'atterrir, donc le calcul n'a aucune réponse significative à donner dans ce cas."
+          },
+          {
+            "question": "Comment modéliserais-je cela sur la Lune ou une autre planète ?",
+            "answer": "Changez l'entrée de gravité pour la gravité de surface du corps cible — par exemple, environ 1,62 m/s² pour la Lune ou 3,71 m/s² pour Mars, contre la valeur par défaut de 9,8 m/s² pour la Terre — et chaque autre entrée (vitesse, angle, hauteur) conserve sa même signification ; une gravité plus faible produit un temps de vol plus long, une hauteur maximale plus grande et une portée plus grande pour les mêmes conditions de lancement."
+          }
+        ]
       }
     }
   }

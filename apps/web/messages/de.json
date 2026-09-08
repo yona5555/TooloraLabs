@@ -27128,6 +27128,681 @@
             "answer": "Die Formel ist im Allgemeinen am zuverlässigsten, wenn eine Distanz vorhergesagt wird, die der bekannten angemessen nahe ist — zum Beispiel ist eine 5K-Zeit, die ein 10K vorhersagt, tendenziell ziemlich genau, da sie aus statistischen Mustern über viele Läufer-Rennergebnisse abgeleitet ist. Die Vorhersage einer Marathonzeit aus einer sehr kurzen bekannten Distanz (wie einem 1-Meilen-Zeitfahren) dehnt die Formel weiter von den Daten weg, auf denen sie validiert wurde, daher behandeln Sie entfernte Extrapolationen als grobere Schätzung."
           }
         ]
+      },
+      "density-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Dichte-Rechner: wie Dichte, Masse und Volumen füreinander gelöst werden, wie die spezifische Dichte und die SI-Einheitsumrechnung abgeleitet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Dichten gängiger Materialien",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Lösungsmodi",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Dichte = Masse ÷ Volumen  |  Masse = Dichte × Volumen  |  Volumen = Masse ÷ Dichte",
+          "note": "Alle drei Größen ergeben sich aus einer Beziehung — Dichte ist gleich Masse geteilt durch Volumen — die algebraisch umgestellt wird, je nachdem, welche der drei gesucht wird, wobei Masse und Volumen in Gramm und Kubikzentimetern eingegeben werden."
+        },
+        "flowchart": {
+          "intro": "Welche der drei Größen berechnet wird, hängt von der gewählten Operation ab; die anderen beiden sind einfach die eingegebenen Werte.",
+          "steps": [
+            "Lies die gewählte Operation: Dichte, Masse oder Volumen berechnen",
+            "Zur Berechnung der Dichte: teile die eingegebene Masse durch das eingegebene Volumen",
+            "Zur Berechnung der Masse: multipliziere die eingegebene Dichte mit dem eingegebenen Volumen",
+            "Zur Berechnung des Volumens: teile die eingegebene Masse durch die eingegebene Dichte",
+            "Rechne die resultierende Dichte in ihr SI-Äquivalent (kg/m³) um, indem du mit 1.000 multiplizierst, und berechne die spezifische Dichte durch Division durch die Referenzdichte von Wasser von 1,0 g/cm³"
+          ],
+          "caption": "Eine Beziehung, dreifach umgestellt je nach gesuchter Größe, plus zwei abgeleitete Kennzahlen."
+        },
+        "anatomy": {
+          "intro": "Die Dichte variiert enorm zwischen alltäglichen Materialien — vom Referenzwert des Wassers bis zu Metallen, die fast zwanzigmal dichter sind, alle in derselben Einheit g/cm³ ausgedrückt.",
+          "labelWater": "Wasser",
+          "labelAluminum": "Aluminium",
+          "labelIron": "Eisen",
+          "labelGold": "Gold",
+          "caption": "Wasser (1,0 g/cm³) im Vergleich zu Aluminium (2,7), Eisen (7,87) und Gold (19,3) — Gold ist über neunzehnmal dichter als Wasser."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Welche Größe berechnet werden soll: Dichte, Masse oder Volumen.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Objektmasse — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "g"
+          },
+          {
+            "symbol": "Volumen",
+            "meaning": "Objektvolumen — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "cm³"
+          },
+          {
+            "symbol": "Dichte",
+            "meaning": "Masse pro Volumeneinheit — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "g/cm³"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Dichteberechnung erfordert ein Volumen ungleich null",
+            "description": "Masse durch Volumen zu teilen ist bei einem Volumen von null nicht definiert — der Rechner gibt einen \"zero-volume\"-Fehler zurück statt einer unendlichen oder NaN-Dichte."
+          },
+          {
+            "title": "Die Volumenberechnung erfordert eine Dichte ungleich null",
+            "description": "Masse durch Dichte zu teilen ist bei einer Dichte von null nicht definiert — der Rechner gibt einen \"zero-density\"-Fehler zurück statt eines unendlichen oder NaN-Volumens."
+          },
+          {
+            "title": "Die Massenberechnung schlägt nie fehl",
+            "description": "Masse = Dichte × Volumen ist eine einfache Multiplikation ohne Division — selbst wenn Dichte oder Volumen als null eingegeben werden, läuft die Berechnung weiter und liefert einfach eine Masse von null, ohne dass ein Fehler nötig ist."
+          },
+          {
+            "title": "Spezifische Dichte und die SI-Umrechnung werden immer berechnet, unabhängig von der Operation",
+            "description": "Unabhängig davon, welche Operation ausgeführt wurde, gibt das Tool zusätzlich immer die Dichte in SI-Einheiten (kg/m³, durch Multiplikation mit 1.000) und als spezifische Dichte (ein einheitenloses Verhältnis zur Referenzdichte von Wasser von 1,0 g/cm³) an — zwei zusätzliche Ansichten derselben Dichtezahl."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum rechnet der Rechner in g/cm³ statt in der SI-Einheit kg/m³?",
+            "answer": "Gramm pro Kubikzentimeter ist die gebräuchlichere Einheit für alltägliche Dichtevergleiche (ein Milliliter Wasser wiegt praktischerweise fast genau 1 Gramm), daher bleibt die Kernberechnung in dieser Einheit — das SI-Äquivalent (kg/m³) wird dann daneben angezeigt, einfach berechnet durch Multiplikation mit 1.000, da sich die beiden Einheiten genau um diesen Faktor unterscheiden."
+          },
+          {
+            "question": "Was ist die spezifische Dichte, und warum wird sie immer angezeigt?",
+            "answer": "Die spezifische Dichte ist die Dichte eines Materials geteilt durch die Dichte von Wasser (1,0 g/cm³) — ein einheitenloses Verhältnis, das auf einen Blick zeigt, wie viel dichter (oder leichter) etwas als Wasser ist, weshalb es automatisch berechnet und bei jedem Ergebnis angezeigt wird, unabhängig davon, welche Operation ausgeführt wurde."
+          },
+          {
+            "question": "Warum gibt die Massenberechnung im Gegensatz zu den anderen beiden Operationen nie einen Fehler zurück?",
+            "answer": "Die Berechnung von Dichte oder Volumen beinhaltet jeweils eine Division (Masse ÷ Volumen bzw. Masse ÷ Dichte), die bei einem Divisor von null nicht definiert ist. Die Massenberechnung ist Masse = Dichte × Volumen, eine reine Multiplikation ohne jegliche Division — es gibt keinen Nenner-Null-Fall, vor dem man sich schützen müsste, sodass immer ein gültiges Ergebnis entsteht, selbst wenn dieses Ergebnis null ist."
+          },
+          {
+            "question": "Kann ich diesen Rechner auch für Gase verwenden, nicht nur für Feststoffe und Flüssigkeiten?",
+            "answer": "Ja — die Beziehung Dichte = Masse ÷ Volumen gilt für jeden Aggregatzustand. Gasdichten sind einfach viel kleinere Zahlen als bei Feststoffen oder Flüssigkeiten (typischerweise ein Bruchteil eines g/cm³ bei alltäglichem Druck und alltäglicher Temperatur), sodass Sie vielleicht zur SI-Zahl (kg/m³) neben dem Ergebnis wechseln möchten, um besser lesbare Werte zu erhalten."
+          }
+        ]
+      },
+      "ohms-law-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Ohmsches-Gesetz-Rechner: wie Spannung, Strom, Widerstand und Leistung aus zwei beliebigen bekannten elektrischen Größen gelöst werden, die sechs unterstützten Wertepaare, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die Spannung skaliert linear mit dem Strom",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Bekannte Paare",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "V = I × R  |  P = V × I  |  P = I² × R  |  P = V² ÷ R",
+          "note": "Das Ohmsche Gesetz (V = IR) und die Leistungsformel (P = VI) verbinden zusammen alle vier elektrischen Größen — Spannung, Strom, Widerstand und Leistung —, sodass die Kenntnis zweier der vier immer ausreicht, um die anderen beiden abzuleiten, weshalb der Rechner sechs verschiedene Wertepaare anbietet."
+        },
+        "flowchart": {
+          "intro": "Welches Formelpaar läuft, hängt vollständig davon ab, welche zwei Größen bereits bekannt sind; jedes Paar leitet die verbleibenden zwei direkt ab, ohne Iteration.",
+          "steps": [
+            "Lies, welches der sechs bekannten Paare gewählt ist: Spannung & Strom, Spannung & Widerstand, Strom & Widerstand, Spannung & Leistung, Strom & Leistung, oder Widerstand & Leistung",
+            "Für ein Paar mit Widerstand und Strom (oder Spannung und Widerstand): wende V = IR direkt an, um die Spannung zu erhalten, oder teile die Spannung durch den Widerstand, um den Strom zu erhalten",
+            "Für ein Paar mit Leistung: löse algebraisch mit P = VI, P = I²R oder P = V²/R, je nachdem, welche die beiden bekannten Größen mit den fehlenden verbindet",
+            "Speziell für das Widerstand-und-Leistung-Paar: ziehe die Quadratwurzel aus Leistung × Widerstand für die Spannung und die Quadratwurzel aus Leistung ÷ Widerstand für den Strom",
+            "Gib alle vier Größen — Spannung, Strom, Widerstand und Leistung — ausgefüllt zurück, wobei die zwei ursprünglich bekannten Werte unverändert durchgereicht werden"
+          ],
+          "caption": "Sechs Einstiegspunkte in dieselbe Spannungs-Strom-Widerstand-Leistungs-Beziehung, jeder leitet die zwei Unbekannten aus den zwei Bekannten ab."
+        },
+        "anatomy": {
+          "intro": "Bei festem Widerstand ist das Ohmsche Gesetz reine Proportionalität — eine Verdopplung des Stroms verdoppelt die Spannung, eine Verdreifachung verdreifacht sie, ohne jede Krümmung in der Beziehung.",
+          "xLabel": "Strom (A)",
+          "yLabel": "Spannung (V)",
+          "caption": "Bei einem festen Widerstand von 10 Ohm erzeugen Ströme von 0,5, 1, 2 und 3 Ampere Spannungen von 5, 10, 20 und 30 Volt — eine gerade Linie durch den Ursprung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Bekanntes Paar",
+            "meaning": "Welche zwei der vier elektrischen Größen Sie angeben: Spannung & Strom, Spannung & Widerstand, Strom & Widerstand, Spannung & Leistung, Strom & Leistung, oder Widerstand & Leistung.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Spannung",
+            "meaning": "Elektrisches Potenzialgefälle — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "V"
+          },
+          {
+            "symbol": "Strom",
+            "meaning": "Geschwindigkeit des Ladungsflusses — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "A"
+          },
+          {
+            "symbol": "Widerstand",
+            "meaning": "Opposition gegen den Stromfluss — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "Ω"
+          },
+          {
+            "symbol": "Leistung",
+            "meaning": "Rate der Energieübertragung — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "W"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Das Spannung-und-Strom-Paar erfordert einen Strom ungleich null",
+            "description": "Der Widerstand wird als Spannung geteilt durch Strom berechnet — ist der Strom null, ist diese Division nicht definiert, und der Rechner gibt einen \"zero-current\"-Fehler zurück statt eines unendlichen Widerstands."
+          },
+          {
+            "title": "Das Strom-und-Widerstand-Paar gibt nie einen Fehler zurück",
+            "description": "Bei bekanntem Strom und Widerstand sind sowohl Spannung (V = IR) als auch Leistung (P = I²R) reine Multiplikationen ohne jegliche Division — selbst ein Widerstand von genau null (ein Kurzschluss) wird sauber berechnet und liefert korrekt null Spannung und null Leistung."
+          },
+          {
+            "title": "Leistungsbasierte Paare validieren zwei Eingaben, nicht eine",
+            "description": "Die Paare Spannung-und-Leistung sowie Strom-und-Leistung teilen jeweils in unterschiedlichen Schritten durch beide ihrer bekannten Größen (zum Beispiel Strom = Leistung ÷ Spannung, dann Widerstand = Spannung² ÷ Leistung) — daher müssen beide Werte ungleich null sein, geprüft als zwei separate Fehlerbedingungen statt einer kombinierten Prüfung."
+          },
+          {
+            "title": "Das Widerstand-und-Leistung-Paar zieht eine Quadratwurzel, unter der Annahme nicht-negativer Leistung",
+            "description": "Spannung und Strom werden jeweils als Quadratwurzel aus Leistung mal oder geteilt durch Widerstand abgeleitet — reale elektrische Leistung in einem passiven Stromkreis ist nie negativ, daher schützt sich die Formel nicht gesondert gegen einen negativen Leistungswert, der andernfalls ein nicht-reelles Ergebnis produzieren würde."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum bietet der Rechner sechs verschiedene bekannte Wertepaare an, statt einfach nach zwei Werten zu fragen?",
+            "answer": "Die vier elektrischen Größen — Spannung, Strom, Widerstand und Leistung — stehen über mehr als eine Formel miteinander in Beziehung, und welches konkrete Formelpaar zutrifft, hängt genau davon ab, welche zwei Größen bereits bekannt sind. Die sechs expliziten Kombinationen zu benennen (statt einer generischen \"wähle beliebige zwei\"-Eingabe) erlaubt es dem Rechner, für jede Situation die korrekte, direkteste Formel anzuwenden, ohne raten zu müssen."
+          },
+          {
+            "question": "Warum liefert das Strom-und-Widerstand-Paar im Gegensatz zu den meisten anderen nie einen Fehler?",
+            "answer": "Spannung = Strom × Widerstand und Leistung = Strom² × Widerstand sind beides reine Multiplikationen — nirgendwo in der Mathematik dieses Paares gibt es eine Division durch eine der Eingaben, sodass kein Nenner-Null-Fall auftreten kann, der ein undefiniertes Ergebnis produzieren könnte, selbst im Extremfall eines Widerstands von null."
+          },
+          {
+            "question": "Wie wird die Leistung je nach gewähltem Paar unterschiedlich berechnet?",
+            "answer": "Die Leistung lässt sich je nach Bekanntem auf drei verschiedenen Wegen erreichen: direkt als Spannung × Strom, als Strom² × Widerstand (nützlich, wenn Strom und Widerstand, aber nicht die Spannung bekannt sind), oder als Spannung² ÷ Widerstand (nützlich, wenn Spannung und Widerstand, aber nicht der Strom bekannt sind) — der Rechner wählt die Form, die zu dem gewählten bekannten Paar passt."
+          },
+          {
+            "question": "Was, wenn ich nicht weiß, welche zwei Werte ich eigentlich habe?",
+            "answer": "Schauen Sie, was Sie direkt messen oder an einem Bauteil ablesen können: Ein Multimeter liefert typischerweise direkt Spannung und Strom (das VI-Paar), der aufgedruckte Wert eines Widerstands liefert den Widerstand, und die Leistungsangabe eines Bauteils (in Watt) liefert die Leistung — kombinieren Sie, welche zwei dieser vier Sie tatsächlich zur Hand haben, um das passende Paar zu wählen."
+          }
+        ]
+      },
+      "energy-work-power-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Energie-, Arbeits- und Leistungsrechner: wie mechanische Arbeit, kinetische Energie, potenzielle Energie und Leistung jeweils berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Kinetische Energie wächst mit dem Quadrat der Geschwindigkeit",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Arbeit = Kraft × Strecke × cos(Winkel)  |  Kinetische Energie = ½ × Masse × Geschwindigkeit²  |  Potenzielle Energie = Masse × 9,8 × Höhe  |  Leistung = Arbeit ÷ Zeit",
+          "note": "Jeder der vier Modi ist eine eigenständige, direkte Formel — der Rechner verkettet sie nicht, sondern berechnet einfach die eine Größe (Arbeit, kinetische Energie, potenzielle Energie oder Leistung), die der gewählte Modus aus seinen eigenen spezifischen Eingaben verlangt."
+        },
+        "flowchart": {
+          "intro": "Jeder Modus ist eine in sich geschlossene Berechnung, die nur die für ihn relevanten Eingaben verwendet; es gibt keine gemeinsame Pipeline zwischen den Modi.",
+          "steps": [
+            "Lies, welcher der vier Modi gewählt ist: Arbeit, kinetische Energie, potenzielle Energie oder Leistung",
+            "Für Arbeit: rechne den Winkel zwischen Kraft und Verschiebung von Grad in Radiant um, multipliziere dann Kraft mit Strecke mit dem Kosinus dieses Winkels",
+            "Für kinetische Energie: multipliziere ein Halb mit Masse mit Geschwindigkeit zum Quadrat",
+            "Für potenzielle Energie: multipliziere Masse mit der festen Erdbeschleunigung (9,8 m/s²) mit Höhe",
+            "Für Leistung: teile den eingegebenen Arbeitswert durch die Zeit und gib einen \"zero-time\"-Fehler zurück, wenn die Zeit nicht streng positiv ist"
+          ],
+          "caption": "Vier unabhängige Formeln, jeder Modus berechnet nur seine eigene Größe aus seinen eigenen Eingaben."
+        },
+        "anatomy": {
+          "intro": "Kinetische Energie hängt vom Quadrat der Geschwindigkeit ab, nicht direkt von der Geschwindigkeit — sie wächst also weit schneller als die Geschwindigkeit selbst und krümmt sich steil nach oben statt einer geraden Linie zu folgen.",
+          "xLabel": "Geschwindigkeit (m/s)",
+          "yLabel": "Kinetische Energie (J)",
+          "caption": "Bei einer Masse von 2 kg ergeben Geschwindigkeiten von 2, 4, 6, 8 und 10 m/s kinetische Energien von 4, 16, 36, 64 und 100 Joule — eine Verdopplung der Geschwindigkeit vervierfacht die Energie, verdoppelt sie nicht nur."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Welche Größe berechnet werden soll: Arbeit, kinetische Energie, potenzielle Energie oder Leistung.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Kraft",
+            "meaning": "Angewandte Kraft, verwendet im Arbeitsmodus.",
+            "unit": "N"
+          },
+          {
+            "symbol": "Strecke",
+            "meaning": "Verschiebung, über die die Kraft wirkt, verwendet im Arbeitsmodus.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Winkel",
+            "meaning": "Winkel zwischen der Kraftrichtung und der Verschiebungsrichtung, verwendet im Arbeitsmodus.",
+            "unit": "Grad"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Objektmasse, verwendet im Modus kinetische Energie und potenzielle Energie.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Geschwindigkeit",
+            "meaning": "Objektgeschwindigkeit, verwendet im Modus kinetische Energie.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Höhe",
+            "meaning": "Höhe über dem Referenzniveau, verwendet im Modus potenzielle Energie.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Arbeitswert",
+            "meaning": "Eine bekannte Menge an übertragener Arbeit oder Energie, verwendet im Leistungsmodus.",
+            "unit": "J"
+          },
+          {
+            "symbol": "Zeit",
+            "meaning": "Dauer, über die die Arbeit verrichtet wird, verwendet im Leistungsmodus. Muss streng positiv sein.",
+            "unit": "s"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Arbeit berücksichtigt den Winkel zwischen Kraft und Verschiebung",
+            "description": "Die Arbeitsformel multipliziert mit dem Kosinus des Winkels zwischen Kraft und Bewegung — eine im 90°-Winkel zur Bewegungsrichtung angewandte Kraft trägt null Arbeit bei (cos 90° = 0), und eine der Bewegung entgegengesetzt angewandte Kraft (180°) trägt negative Arbeit bei, beides spiegelt korrekt die Physik wider statt nur Kraft mit Strecke zu multiplizieren."
+          },
+          {
+            "title": "Nur der Leistungsmodus kann einen Fehler zurückgeben",
+            "description": "Die Modi Arbeit, kinetische Energie und potenzielle Energie berechnen jeweils direkt aus ihren Eingaben ohne Division, daher validiert keiner von ihnen seine Eingaben oder gibt einen Fehler zurück — nur der Leistungsmodus teilt durch die Zeit, und nur er kann fehlschlagen und gibt \"zero-time\" zurück, wenn die Zeit null oder negativ ist."
+          },
+          {
+            "title": "Kinetische Energie kümmert sich nicht um die Richtung der Geschwindigkeit",
+            "description": "Da die Formel die Geschwindigkeit quadriert, erzeugt eine negative Geschwindigkeit (die eine Bewegung in die entgegengesetzte Richtung darstellt) genau dieselbe positive kinetische Energie wie dieselbe Geschwindigkeit in positiver Richtung — kinetische Energie hängt nur vom Betrag der Geschwindigkeit ab, nicht von der Richtung."
+          },
+          {
+            "title": "Die Schwerkraft ist fest auf 9,8 m/s² eingestellt, nicht anpassbar",
+            "description": "Die potenzielle Energie verwendet immer die Erdbeschleunigung als Standard — anders als der Rechner für Wurfbewegungen an anderer Stelle in dieser Kategorie, der einen benutzerdefinierten Schwerkraftwert erlaubt, hat dieses Tool keine Möglichkeit, potenzielle Energie für den Mond, den Mars oder einen anderen Planeten zu berechnen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum enthält die Arbeitsformel einen Kosinus des Winkels?",
+            "answer": "Arbeit ist technisch definiert als die Kraftkomponente, die entlang der Bewegungsrichtung wirkt — wenn Sie in einem Winkel zur tatsächlichen Bewegung drücken, trägt nur ein Teil Ihrer Kraft zur geleisteten Arbeit bei. Die Multiplikation mit cos(Winkel) erfasst genau das: bei 0° (Drücken genau entlang der Bewegung) zählt die volle Kraft, bei 90° (Drücken senkrecht zur Bewegung) zählt nichts davon, und über 90° hinaus wird die Arbeit negativ."
+          },
+          {
+            "question": "Warum prüft der Leistungsmodus auf Zeit kleiner oder gleich null, statt nur Zeit gleich null?",
+            "answer": "Die Division durch eine negative Zeit ist physikalisch genauso sinnlos wie die Division durch null — verstrichene Zeit kann in diesem Kontext nicht negativ sein — daher erfasst die Prüfung beide ungültigen Fälle (null und negativ) mit einem einzigen \"zero-time\"-Fehler, statt eine negative Zeit durchrutschen zu lassen und eine unsinnige negative Leistung zu erzeugen."
+          },
+          {
+            "question": "Warum ändert sich die kinetische Energie nicht, wenn ich die Bewegungsrichtung umkehre?",
+            "answer": "Die Formel für kinetische Energie verwendet die quadrierte Geschwindigkeit, und das Quadrieren einer negativen Zahl ergibt dasselbe positive Ergebnis wie das Quadrieren ihres positiven Gegenstücks — physikalisch ist das korrekt: Ein Objekt, das sich mit einer bestimmten Geschwindigkeit bewegt, hat dieselbe kinetische Energie, unabhängig davon, in welche Richtung es sich bewegt, da Energie eine skalare Größe ohne eigene Richtung ist."
+          },
+          {
+            "question": "Wie hängt dieses Tool mit dem Kraft-Rechner zusammen?",
+            "answer": "Der Kraft-Rechner löst Newtons zweites Gesetz (F = ma) und die universelle Gravitation für Kraft, Masse, Beschleunigung oder Entfernung — die Kraftwerte, die er liefert, sind genau die Art von Eingabe, die der Arbeitsmodus dieses Rechners verwendet. Die beiden Tools decken ergänzende Teile der Mechanik ab: eines konzentriert sich auf Kraft und Bewegung, das andere auf die Energie und Leistung, die diese Kraft erzeugt oder erfordert."
+          }
+        ]
+      },
+      "kinematics-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Kinematik-Rechner: wie Bewegungsprobleme mit konstanter Beschleunigung sowohl im zeitbasierten als auch im streckenbasierten Modus gelöst werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Geschwindigkeit wächst linear bei konstanter Beschleunigung",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "v = v₀ + at  |  Δx = ½(v₀ + v)t  |  v² = v₀² + 2aΔx",
+          "note": "Diese drei Gleichungen beschreiben dieselbe Bewegung mit konstanter Beschleunigung aus verschiedenen Blickwinkeln — der Rechner verwendet die ersten beiden zusammen im zeitbasierten Modus (wenn die Zeit bekannt ist) und die dritte im streckenbasierten Modus (wenn die Verschiebung bekannt ist, aber nicht die Zeit), wobei stets nach der jeweils unbekannten Größe gelöst wird."
+        },
+        "flowchart": {
+          "intro": "Welcher Satz von Gleichungen läuft, hängt vom gewählten Modus ab und innerhalb jedes Modus davon, nach welcher konkreten Größe gelöst wird.",
+          "steps": [
+            "Lies, welcher Modus gewählt ist: zeitbasiert (Zeit ist bekannt oder gesucht) oder streckenbasiert (Verschiebung ist bekannt oder gesucht, aber nicht die Zeit)",
+            "Im zeitbasierten Modus: löse v = v₀ + at algebraisch nach der unbekannten Größe v, v₀, a oder t auf und gib \"zero-time\"- oder \"zero-acceleration\"-Fehler für die zwei Lösungen zurück, die eine Division durch t oder a erfordern",
+            "Im zeitbasierten Modus danach: berechne stets zusätzlich die Verschiebung als Δx = ½(v₀ + v)t aus dem nun vollständigen Satz zeitbasierter Werte",
+            "Im streckenbasierten Modus: löse v² = v₀² + 2aΔx algebraisch nach der unbekannten Größe v, v₀, a oder Δx auf und gib einen \"negative-discriminant\"-Fehler zurück, falls eine Quadratwurzel aus einer negativen Zahl erforderlich wäre, oder \"zero-displacement\"/\"zero-acceleration\" für Lösungen, die eine Division durch Δx oder a erfordern",
+            "Im streckenbasierten Modus danach: berechne die Zeit als t = (v − v₀) ÷ a nur, wenn die Beschleunigung ungleich null ist, andernfalls bleibt die Zeit nicht verfügbar, statt durch null zu teilen"
+          ],
+          "caption": "Zwei Modi für dieselbe Physik konstanter Beschleunigung, gewählt danach, ob Zeit oder Verschiebung die bekannte Größe ist."
+        },
+        "anatomy": {
+          "intro": "Bei konstanter Beschleunigung steigt die Geschwindigkeit jede Sekunde um denselben festen Betrag — eine perfekt gerade Linie, wenn gegen die Zeit aufgetragen, ohne jede Krümmung.",
+          "xLabel": "Zeit (s)",
+          "yLabel": "Geschwindigkeit (m/s)",
+          "caption": "Ausgehend vom Stillstand mit einer Beschleunigung von 5 m/s² steigt die Geschwindigkeit auf 5, 10, 15 und 20 m/s nach 1, 2, 3 und 4 Sekunden — eine gerade Linie mit einer Steigung, die der Beschleunigung entspricht."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob die Zeit bekannt (oder gesucht) ist, oder stattdessen die Verschiebung.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Anfangsgeschwindigkeit (v₀)",
+            "meaning": "Geschwindigkeit zu Beginn des Intervalls — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Endgeschwindigkeit (v)",
+            "meaning": "Geschwindigkeit am Ende des Intervalls — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Beschleunigung (a)",
+            "meaning": "Konstante Änderungsrate der Geschwindigkeit — direkt eingegeben oder als Ergebnis berechnet.",
+            "unit": "m/s²"
+          },
+          {
+            "symbol": "Zeit (t)",
+            "meaning": "Dauer des Intervalls — direkt eingegeben oder als Ergebnis berechnet. Verwendet im zeitbasierten Modus.",
+            "unit": "s"
+          },
+          {
+            "symbol": "Verschiebung (Δx)",
+            "meaning": "Zurückgelegte Strecke während des Intervalls — direkt eingegeben oder als Ergebnis berechnet. Verwendet im streckenbasierten Modus.",
+            "unit": "m"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Der streckenbasierte Modus kann auf eine negative Diskriminante stoßen",
+            "description": "Die Berechnung der End- oder Anfangsgeschwindigkeit im streckenbasierten Modus zieht eine Quadratwurzel aus v₀² + 2aΔx oder v² − 2aΔx — wenn die Verzögerung stark genug ist, dass das Objekt anhalten würde, bevor es die eingegebene Verschiebung zurücklegt, wird dieser Wert negativ, und der Rechner gibt einen \"negative-discriminant\"-Fehler zurück statt eines imaginären Ergebnisses."
+          },
+          {
+            "title": "Der zeitbasierte Modus leitet danach immer die Verschiebung ab",
+            "description": "Unabhängig davon, welche der Größen v, v₀, a oder t im zeitbasierten Modus tatsächlich berechnet wurde, berechnet das Tool immer zusätzlich die Verschiebung als Δx = ½(v₀ + v)t, sobald der vollständige Satz zeitbasierter Werte bekannt ist — ein Zusatzergebnis bei jeder zeitbasierten Berechnung."
+          },
+          {
+            "title": "Der streckenbasierte Modus kann die Zeit nicht immer wiederherstellen",
+            "description": "Die Zeit wird anschließend als t = (v − v₀) ÷ a abgeleitet, was nur funktioniert, wenn die Beschleunigung ungleich null ist — wenn eine Lösung im streckenbasierten Modus legitim eine Beschleunigung von null ergibt (zum Beispiel gleiche Anfangs- und Endgeschwindigkeit), wird die Zeit als nicht verfügbar markiert, statt durch null zu teilen."
+          },
+          {
+            "title": "Die beiden Modi sind zwei Einstiegspunkte in dieselbe Physik, keine zwei unterschiedlichen Modelle",
+            "description": "Der zeitbasierte Modus erfordert die Kenntnis der Zeit und löst Geschwindigkeit, Anfangsgeschwindigkeit oder Beschleunigung daraus; der streckenbasierte Modus erfordert stattdessen die Kenntnis der Verschiebung und löst dieselben vier Unbekannten aus der verschiebungsbasierten Gleichung — beide beschreiben identische Bewegung mit konstanter Beschleunigung, nur an eine andere bekannte Größe angebunden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was ist der praktische Unterschied zwischen den beiden Modi?",
+            "answer": "Verwenden Sie den zeitbasierten Modus, wenn Sie wissen (oder herausfinden möchten), wie lange die Bewegung gedauert hat — zum Beispiel beim Stoppen eines Sprints mit einer Stoppuhr. Verwenden Sie den streckenbasierten Modus, wenn Sie wissen (oder herausfinden möchten), wie weit etwas gefahren ist, aber keine Zeitmessung haben — zum Beispiel der Bremsweg eines Autos, bei dem Sie die Strecke typischerweise aus Bremsspuren kennen, aber nicht die genaue Zeit, die das Anhalten gedauert hat."
+          },
+          {
+            "question": "Warum würde die Berechnung der Geschwindigkeit einen Fehler \"negative Diskriminante\" ergeben?",
+            "answer": "Dies geschieht speziell im streckenbasierten Modus, wenn die Zahlen ein physikalisch unmögliches Szenario beschreiben — zum Beispiel die Frage, wie schnell ein Objekt nach dem Zurücklegen einer Strecke unterwegs ist, die weiter ist, als es angesichts seiner Verzögerung tatsächlich erreichen könnte, was bedeutet, dass es bereits vor Erreichen dieser Strecke angehalten hätte. Es gibt keine reelle Geschwindigkeit, die die Gleichung erfüllt, daher markiert der Rechner dies, statt eine erfundene Zahl zurückzugeben."
+          },
+          {
+            "question": "Warum wird die Verschiebung im zeitbasierten Modus immer angezeigt, aber die Zeit im streckenbasierten Modus nicht immer verfügbar ist?",
+            "answer": "Im zeitbasierten Modus folgt die Verschiebung, sobald v₀, v, a und t alle bekannt sind, direkt aus Δx = ½(v₀ + v)t ohne Risiko einer Division durch null — sie ist immer berechenbar. Im streckenbasierten Modus erfordert die Wiederherstellung der Zeit eine Division durch die Beschleunigung, was tatsächlich undefiniert ist, falls sich die Beschleunigung als null herausstellt (konstante Geschwindigkeit, keine Änderung), daher bleibt dieser spezielle Fall unverfügbar, statt zu raten."
+          },
+          {
+            "question": "Welchem realen Bewegungsszenario entspricht jede Lösung?",
+            "answer": "Die Berechnung der Endgeschwindigkeit beantwortet \"wie schnell wird es sein?\"; die Berechnung der Anfangsgeschwindigkeit beantwortet \"wie schnell hat es begonnen?\"; die Berechnung der Beschleunigung beantwortet \"wie stark hat es beschleunigt oder abgebremst?\"; und die Berechnung von Zeit oder Verschiebung beantwortet \"wie lange hat es gedauert?\" oder \"wie weit ist es gefahren?\" — jede Lösung isoliert eine Unbekannte in einer realen Bewegungsfrage."
+          }
+        ]
+      },
+      "force-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Kraft-Rechner: wie Newtons zweites Gesetz und das Gravitationsgesetz jeweils nach ihren Unbekannten gelöst werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Gravitationskraft nimmt mit dem Quadrat der Entfernung ab",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Newtons zweites Gesetz: F = ma  |  Gravitationsgesetz: F = Gm₁m₂ ÷ d²  (G = 6,674×10⁻¹¹ N·m²/kg²)",
+          "note": "Der Rechner unterstützt zwei völlig getrennte Gesetze unter einem Dach — Newtons zweites Gesetz, das Kraft, Masse und Beschleunigung für alltägliche Objekte in Beziehung setzt, und das Gravitationsgesetz, das die gravitative Anziehung zwischen zwei Massen mit deren Entfernung in Beziehung setzt."
+        },
+        "flowchart": {
+          "intro": "Die beiden Modi sind unabhängige physikalische Modelle mit eigenen Lösungsoptionen; der Rechner mischt sie nicht.",
+          "steps": [
+            "Lies, welcher Modus gewählt ist: Newtons zweites Gesetz oder universelle Gravitation",
+            "Im Modus zweites Gesetz: löse F = ma algebraisch nach der unbekannten Größe Kraft, Masse oder Beschleunigung auf",
+            "Im Gravitationsmodus: löse F = Gm₁m₂/d² algebraisch nach der unbekannten Größe Kraft, Masse 1, Masse 2 oder Entfernung auf, unter Verwendung der festen Gravitationskonstante G",
+            "Speziell für die Entfernungslösung der Gravitation: forme zu d = √(Gm₁m₂/F) um, wobei eine Quadratwurzel gezogen wird",
+            "Gib die vier für den gewählten Modus relevanten Felder ausgefüllt zurück, wobei die Felder des anderen Modus bei null bleiben"
+          ],
+          "caption": "Zwei unabhängige Gesetze, jedes mit eigenen Lösungsoptionen, die sich eine Rechner-Oberfläche teilen."
+        },
+        "anatomy": {
+          "intro": "Gravitationskraft nimmt nicht gleichmäßig mit der Entfernung ab — sie nimmt mit dem Quadrat der Entfernung ab, sodass eine Verdopplung der Entfernung die Kraft auf ein Viertel reduziert, nicht auf die Hälfte.",
+          "xLabel": "Entfernung (m)",
+          "yLabel": "Kraft (μN)",
+          "caption": "Für zwei Massen von je 1.000 kg reduziert eine Vergrößerung ihres Abstands von 1 m auf 2, 3 und 4 m die Gravitationskraft von 66,74 auf 16,69, 7,42 und 4,17 Mikronewton — Vierteln, dann weitere Schrumpfung, kein gleichmäßiger Rückgang."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Welches Gesetz angewendet werden soll: Newtons zweites Gesetz oder universelle Gravitation.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Kraft",
+            "meaning": "Nettokraft, verwendet in beiden Modi mit unterschiedlicher Bedeutung — angewandte Kraft im Modus zweites Gesetz, gravitative Anziehung im Gravitationsmodus.",
+            "unit": "N"
+          },
+          {
+            "symbol": "Masse",
+            "meaning": "Objektmasse, verwendet im Modus zweites Gesetz.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Beschleunigung",
+            "meaning": "Änderungsrate der Geschwindigkeit, verwendet im Modus zweites Gesetz.",
+            "unit": "m/s²"
+          },
+          {
+            "symbol": "Masse 1",
+            "meaning": "Masse des ersten Objekts, verwendet im Gravitationsmodus.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Masse 2",
+            "meaning": "Masse des zweiten Objekts, verwendet im Gravitationsmodus.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Entfernung",
+            "meaning": "Abstand zwischen den Zentren der beiden Massen, verwendet im Gravitationsmodus.",
+            "unit": "m"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Kraftberechnung des zweiten Gesetzes schlägt nie fehl",
+            "description": "Die Berechnung der Kraft ist eine reine Multiplikation (Kraft = Masse × Beschleunigung) ohne jegliche Division — sie wird sauber berechnet, unabhängig davon, ob Masse oder Beschleunigung als null eingegeben wird, und liefert in diesem Fall korrekt eine Kraft von null."
+          },
+          {
+            "title": "Die vier Gravitationslösungen teilen jeweils durch eine andere Variable",
+            "description": "Die Berechnung von Masse 1 erfordert, dass Masse 2 ungleich null ist, die Berechnung von Masse 2 erfordert, dass Masse 1 ungleich null ist, die Berechnung der Entfernung erfordert, dass die Kraft ungleich null ist (da sie im Nenner einer Quadratwurzel erscheint), und die Berechnung der Kraft erfordert, dass die Entfernung ungleich null ist — vier unterschiedliche Fehlercodes für vier unterschiedliche Divisionen."
+          },
+          {
+            "title": "Die Gravitationskonstante ist fest und extrem klein",
+            "description": "G = 6,674×10⁻¹¹ N·m²/kg² ist eine winzige Zahl, daher fällt die Gravitationskraft zwischen alltäglich großen Massen entsprechend winzig aus — oft im Bereich von Mikronewton oder kleiner — was erwartete Physik ist, kein Rechenfehler, und deshalb ist Gravitation im täglichen Leben nur im planetaren Maßstab spürbar."
+          },
+          {
+            "title": "Die beiden Modi teilen sich keine Ergebnisfelder",
+            "description": "Der Modus zweites Gesetz gibt immer Masse 1, Masse 2 und Entfernung als null zurück, während der Gravitationsmodus immer Masse und Beschleunigung als null zurückgibt — da die beiden physikalischen Modelle völlig unterschiedliche Sätze von Unbekannten verwenden, werden nur die für den gewählten Modus relevanten Felder jemals befüllt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was ist der Unterschied zwischen Newtons zweitem Gesetz und der universellen Gravitation, und warum beide hier einschließen?",
+            "answer": "Newtons zweites Gesetz (F = ma) beschreibt, wie jede beliebige Kraft eine Masse beschleunigt — es gilt für das Schieben einer Kiste, das Bremsen eines Autos oder den Antrieb einer Rakete. Die universelle Gravitation (F = Gm₁m₂/d²) beschreibt eine spezifische Kraft: die gegenseitige Anziehung zwischen zwei beliebigen Massen aufgrund der Schwerkraft. Beide sind grundlegende Kraftbeziehungen in der klassischen Mechanik, daher deckt ihre Kombination in einem Rechner Kraftprobleme aus zwei unterschiedlichen, sich ergänzenden Blickwinkeln ab."
+          },
+          {
+            "question": "Warum ist die Gravitationskraft zwischen zwei Objekten auf einem Tisch so viel kleiner als das Schieben mit F = ma?",
+            "answer": "Die Gravitationskonstante G = 6,674×10⁻¹¹ N·m²/kg² ist außergewöhnlich klein, sodass die resultierende Gravitationskraft verschwindend gering ausfällt im Vergleich zu Kräften aus direktem Schieben oder alltäglichen Beschleunigungen, sofern nicht mindestens eine der beiden Massen planetaren Ausmaßes ist — dies ist korrekte Physik, keine Einschränkung des Rechners; Gravitation zwischen Alltagsobjekten ist wirklich vernachlässigbar."
+          },
+          {
+            "question": "Warum verwendet die Entfernungslösung bei der Gravitation eine Quadratwurzel?",
+            "answer": "Die Gravitationsformel hat die Entfernung quadriert im Nenner (F = Gm₁m₂/d²) — die Umformung zur Isolierung der Entfernung bedeutet, diesen quadrierten Term auf die andere Seite zu bringen und das Quadrieren dann mit einer Quadratwurzel rückgängig zu machen, was d = √(Gm₁m₂/F) ergibt. Das Quadrieren der Entfernung erzeugt die quadratische Abnahme; das Ziehen der Quadratwurzel ist einfach Algebra zur Isolierung der Unbekannten."
+          },
+          {
+            "question": "Für welches Alltagsszenario würde ich den Modus zweites Gesetz gegenüber dem Gravitationsmodus verwenden?",
+            "answer": "Verwenden Sie den Modus zweites Gesetz für nahezu jede alltägliche Frage zu Kraft und Bewegung — wie viel Kraft nötig ist, um ein Auto zu beschleunigen, oder wie schnell etwas unter einem bekannten Schub beschleunigt. Verwenden Sie den Gravitationsmodus speziell für Fragen zur gravitativen Anziehung zwischen zwei Massen in einer Entfernung, etwa zur Schätzung der (typischerweise winzigen) Gravitationsanziehung zwischen zwei nahen Objekten oder, im planetaren Maßstab, der Kraft, die einen Satelliten in der Umlaufbahn hält."
+          }
+        ]
+      },
+      "projectile-motion-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Wurfbewegungs-Rechner: wie Flugzeit, maximale Höhe, Reichweite und Aufprallgeschwindigkeit für ein in einem Winkel geworfenes Objekt berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die parabolische Flugbahn",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ausgaben",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "vₓ = Geschwindigkeit × cos(Winkel)  |  v_y = Geschwindigkeit × sin(Winkel)  |  Flugzeit = [v_y + √(v_y² + 2·g·Höhe)] ÷ g  |  Reichweite = vₓ × Flugzeit",
+          "note": "Abschussgeschwindigkeit und -winkel werden zunächst in horizontale und vertikale Geschwindigkeitskomponenten aufgeteilt, dann unabhängig behandelt — die horizontale Komponente bestimmt die Reichweite mit konstanter Rate, während die vertikale Komponente unter der konstanten Verzögerung und erneuten Beschleunigung der Schwerkraft die Flugzeit und maximale Höhe bestimmt."
+        },
+        "flowchart": {
+          "intro": "Jede Ausgabe wird aus demselben Paar von Geschwindigkeitskomponenten abgeleitet, das zu Beginn einmal berechnet wird.",
+          "steps": [
+            "Rechne den Abschusswinkel von Grad in Radiant um und teile dann die Abschussgeschwindigkeit mithilfe von Kosinus und Sinus in horizontale (vₓ) und vertikale (v_y) Komponenten auf",
+            "Löse die Flugzeit aus der vertikalen Bewegungsgleichung Höhe + v_y·t − ½g·t² = 0, wobei die positive Wurzel genommen wird: t = [v_y + √(v_y² + 2·g·Höhe)] ÷ g",
+            "Berechne die maximale Höhe als Abschusshöhe plus den zusätzlichen Anstieg aus der vertikalen Geschwindigkeit: Höhe + v_y² ÷ (2g)",
+            "Berechne die Reichweite durch Multiplikation der horizontalen Geschwindigkeit mit der gesamten Flugzeit",
+            "Berechne die Aufprallgeschwindigkeit aus der horizontalen Komponente (unverändert während des gesamten Flugs) und der vertikalen Komponente bei der Landung (v_y minus Schwerkraft mal Flugzeit), und leite dann daraus den Aufprallwinkel ab"
+          ],
+          "caption": "Ein Paar von Geschwindigkeitskomponenten beim Abschuss, das über die Bewegungsgleichungen unter konstanter Schwerkraft jede weitere Ausgabe speist."
+        },
+        "anatomy": {
+          "intro": "Das Auftragen der Höhe gegen die horizontale Entfernung zeichnet eine symmetrische Parabel — sie steigt vom Abschuss an, erreicht ihren Höhepunkt bei der Hälfte der Flugzeit und fällt dann wieder ab, wobei der Abstieg den Aufstieg spiegelt.",
+          "xLabel": "Horizontale Entfernung (m)",
+          "yLabel": "Höhe (m)",
+          "caption": "Mit 20 m/s und 45° vom Boden abgeschossen, steigt die Flugbahn auf eine maximale Höhe von 10,2 m in der Mitte ihrer Reichweite von 40,8 m und fällt dann als Spiegelbild des Anstiegs wieder ab."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Geschwindigkeit",
+            "meaning": "Abschussgeschwindigkeit im Moment des Abwurfs. Muss null oder positiv sein.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Winkel",
+            "meaning": "Abschusswinkel, gemessen von der Horizontalen.",
+            "unit": "Grad"
+          },
+          {
+            "symbol": "Höhe",
+            "meaning": "Abschusshöhe über der Landefläche. Muss null oder positiv sein.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Schwerkraft",
+            "meaning": "Gravitationsbeschleunigung. Muss streng positiv sein; Standard ist die Erdbeschleunigung 9,8 m/s², kann aber für andere Himmelskörper geändert werden.",
+            "unit": "m/s²"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Schwerkraft muss streng positiv sein",
+            "description": "Ein Schwerkraftwert von null oder darunter gibt einen \"invalid-gravity\"-Fehler zurück — bei Schwerkraft null würde das Projektil nie zu Boden zurückkehren (die Flugzeit wäre undefiniert), und negative Schwerkraft hat hier keine physikalische Bedeutung."
+          },
+          {
+            "title": "Negative Geschwindigkeit oder Abschusshöhe werden rundweg abgelehnt",
+            "description": "Geschwindigkeit unter null und Höhe unter null geben jeweils ihren eigenen speziellen Fehler zurück (\"invalid-speed\" bzw. \"invalid-height\"), statt stillschweigend auf null begrenzt zu werden, da eine negative Abschussgeschwindigkeit oder ein Abschusspunkt unterhalb der Landefläche für diese Formel kein sinnvolles Szenario ist."
+          },
+          {
+            "title": "Die Flugzeitberechnung schützt vor winzigen Gleitkomma-Rundungsfehlern",
+            "description": "Mathematisch kann die Diskriminante v_y² + 2·g·Höhe niemals negativ sein, wenn die Höhe null oder positiv ist — dennoch begrenzt die Berechnung sie vor dem Ziehen der Quadratwurzel weiterhin auf mindestens null, um vor einem mikroskopisch kleinen negativen Wert zu schützen, den Gleitkomma-Rundung sonst erzeugen könnte, wenn die Höhe genau null ist."
+          },
+          {
+            "title": "Der Aufprallwinkel wird unterhalb der Horizontalen gemessen",
+            "description": "Der Aufprallwinkel wird aus dem Negativen der vertikalen Geschwindigkeit bei der Landung berechnet, sodass ein Projektil, das unterhalb seines Höhepunkts landet (der Normalfall), einen positiven Winkel ergibt, der darstellt, wie viele Grad unterhalb der Horizontalen es beim Aufprall unterwegs ist — passend zu der Art, wie der Abschusswinkel oberhalb der Horizontalen eingegeben wurde."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ergibt ein Abschuss mit 45° vom Boden aus eine Aufprallgeschwindigkeit, die genau der Abschussgeschwindigkeit entspricht?",
+            "answer": "Wenn die Abschusshöhe null ist, landet das Projektil auf derselben Höhe, von der es gestartet ist — aufgrund der Symmetrie der Wurfbewegung unter konstanter Schwerkraft hat die vertikale Geschwindigkeit bei der Landung denselben Betrag wie die vertikale Geschwindigkeit beim Abschuss (nur nach unten statt nach oben gerichtet), sodass die gesamte Aufprallgeschwindigkeit gleich der Abschussgeschwindigkeit ausfällt. Diese Symmetrie bricht, sobald die Abschusshöhe ungleich null ist."
+          },
+          {
+            "question": "Was passiert, wenn ich von einer Höhe über dem Boden abschieße?",
+            "answer": "Bei einer positiven Abschusshöhe hat das Projektil weiter zu fallen, als es durch seine eigene vertikale Geschwindigkeit gestiegen ist, sodass es mehr Zeit in der Luft verbringt, horizontal weiter fliegt und mit einer höheren Aufprallgeschwindigkeit landet, als es abgeschossen wurde — die Formeln für maximale Höhe, Flugzeit und Reichweite berücksichtigen diese zusätzliche Starthöhe alle direkt."
+          },
+          {
+            "question": "Warum muss die Schwerkraft streng größer als null sein, statt nur nicht-negativ?",
+            "answer": "Die Flugzeitformel teilt durch die Schwerkraft — bei genau null Schwerkraft ist diese Division undefiniert, und physikalisch würde ein Projektil unter null Schwerkraft einfach für immer geradeaus fliegen, statt eine Parabel zu zeichnen und zu landen, sodass die Berechnung in diesem Fall keine sinnvolle Antwort geben kann."
+          },
+          {
+            "question": "Wie würde ich dies auf dem Mond oder einem anderen Planeten modellieren?",
+            "answer": "Ändern Sie die Schwerkraft-Eingabe auf die Oberflächenschwerkraft des Zielkörpers — zum Beispiel etwa 1,62 m/s² für den Mond oder 3,71 m/s² für den Mars, gegenüber dem Erdstandard von 9,8 m/s² — und jede andere Eingabe (Geschwindigkeit, Winkel, Höhe) behält ihre gleiche Bedeutung; geringere Schwerkraft erzeugt bei denselben Abschussbedingungen eine längere Flugzeit, größere maximale Höhe und größere Reichweite."
+          }
+        ]
       }
     }
   }

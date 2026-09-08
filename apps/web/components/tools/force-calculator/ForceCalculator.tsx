@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ForceInputPanel from "./ForceInputPanel";
 import ForceResult from "./ForceResult";
 import ForceQuickReference from "./ForceQuickReference";
@@ -195,6 +196,7 @@ export default function ForceCalculator({ education }: { education: ReactNode })
           }
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="force-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <ForceQuickReference />
             </div>

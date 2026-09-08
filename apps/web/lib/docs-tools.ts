@@ -55,6 +55,12 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "macro-calculator",
   "bmr-calculator",
   "pace-calculator",
+  "density-calculator",
+  "ohms-law-calculator",
+  "energy-work-power-calculator",
+  "kinematics-calculator",
+  "force-calculator",
+  "projectile-motion-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

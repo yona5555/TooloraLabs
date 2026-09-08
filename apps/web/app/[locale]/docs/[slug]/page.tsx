@@ -55,6 +55,12 @@ import PregnancyCalculatorDocsPage, { getPregnancyCalculatorTocItems } from "@/c
 import MacroCalculatorDocsPage, { getMacroCalculatorTocItems } from "@/components/docs/macro-calculator/MacroCalculatorDocsPage";
 import BMRCalculatorDocsPage, { getBMRCalculatorTocItems } from "@/components/docs/bmr-calculator/BMRCalculatorDocsPage";
 import PaceCalculatorDocsPage, { getPaceCalculatorTocItems } from "@/components/docs/pace-calculator/PaceCalculatorDocsPage";
+import DensityCalculatorDocsPage, { getDensityCalculatorTocItems } from "@/components/docs/density-calculator/DensityCalculatorDocsPage";
+import OhmsLawCalculatorDocsPage, { getOhmsLawCalculatorTocItems } from "@/components/docs/ohms-law-calculator/OhmsLawCalculatorDocsPage";
+import EnergyWorkPowerCalculatorDocsPage, { getEnergyWorkPowerCalculatorTocItems } from "@/components/docs/energy-work-power-calculator/EnergyWorkPowerCalculatorDocsPage";
+import KinematicsCalculatorDocsPage, { getKinematicsCalculatorTocItems } from "@/components/docs/kinematics-calculator/KinematicsCalculatorDocsPage";
+import ForceCalculatorDocsPage, { getForceCalculatorTocItems } from "@/components/docs/force-calculator/ForceCalculatorDocsPage";
+import ProjectileMotionCalculatorDocsPage, { getProjectileMotionCalculatorTocItems } from "@/components/docs/projectile-motion-calculator/ProjectileMotionCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -300,6 +306,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "pace-calculator":
       content = <PaceCalculatorDocsPage />;
       tocItems = await getPaceCalculatorTocItems();
+      break;
+    case "density-calculator":
+      content = <DensityCalculatorDocsPage />;
+      tocItems = await getDensityCalculatorTocItems();
+      break;
+    case "ohms-law-calculator":
+      content = <OhmsLawCalculatorDocsPage />;
+      tocItems = await getOhmsLawCalculatorTocItems();
+      break;
+    case "energy-work-power-calculator":
+      content = <EnergyWorkPowerCalculatorDocsPage />;
+      tocItems = await getEnergyWorkPowerCalculatorTocItems();
+      break;
+    case "kinematics-calculator":
+      content = <KinematicsCalculatorDocsPage />;
+      tocItems = await getKinematicsCalculatorTocItems();
+      break;
+    case "force-calculator":
+      content = <ForceCalculatorDocsPage />;
+      tocItems = await getForceCalculatorTocItems();
+      break;
+    case "projectile-motion-calculator":
+      content = <ProjectileMotionCalculatorDocsPage />;
+      tocItems = await getProjectileMotionCalculatorTocItems();
       break;
   }
 

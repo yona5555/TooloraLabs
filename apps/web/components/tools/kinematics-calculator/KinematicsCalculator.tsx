@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import KinematicsInputPanel from "./KinematicsInputPanel";
 import KinematicsResult from "./KinematicsResult";
 import KinematicsQuickReference from "./KinematicsQuickReference";
@@ -183,6 +184,7 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
           }
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="kinematics-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <KinematicsQuickReference />
             </div>

@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import EnergyInputPanel from "./EnergyInputPanel";
 import EnergyResult from "./EnergyResult";
 import EnergyQuickReference from "./EnergyQuickReference";
@@ -240,6 +241,7 @@ export default function EnergyWorkPowerCalculator({ education }: { education: Re
           }
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="energy-work-power-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <EnergyQuickReference />
             </div>

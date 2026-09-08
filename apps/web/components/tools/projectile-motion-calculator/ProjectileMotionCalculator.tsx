@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ProjectileMotionInputPanel from "./ProjectileMotionInputPanel";
 import ProjectileMotionResult from "./ProjectileMotionResult";
 import ProjectileMotionQuickReference from "./ProjectileMotionQuickReference";
@@ -170,6 +171,7 @@ export default function ProjectileMotionCalculator({ education }: { education: R
           }
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="projectile-motion-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <ProjectileMotionQuickReference />
             </div>

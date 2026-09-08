@@ -27128,6 +27128,681 @@
             "answer": "The formula is generally most reliable when predicting a distance reasonably close to the known one — for example, a 5K time predicting a 10K tends to be fairly accurate, since it's derived from statistical patterns across many runners' race results. Predicting a marathon time from a very short known distance (like a 1-mile time trial) stretches the formula further from the data it was validated on, so treat distant extrapolations as a rougher estimate."
           }
         ]
+      },
+      "density-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Density Calculator: how density, mass, and volume are solved for each other, how specific gravity and the SI unit conversion are derived, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Common Material Densities",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Solve Modes",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Density = mass ÷ volume  |  Mass = density × volume  |  Volume = mass ÷ density",
+          "note": "All three quantities come from one relationship — density equals mass divided by volume — rearranged algebraically depending on which of the three you're solving for, with mass and volume entered in grams and cubic centimeters."
+        },
+        "flowchart": {
+          "intro": "Which of the three quantities is computed depends on the selected operation; the other two are simply the values you entered.",
+          "steps": [
+            "Read which operation is selected: solve for density, solve for mass, or solve for volume",
+            "To solve for density: divide the entered mass by the entered volume",
+            "To solve for mass: multiply the entered density by the entered volume",
+            "To solve for volume: divide the entered mass by the entered density",
+            "Convert the resulting density to its SI equivalent (kg/m³) by multiplying by 1,000, and compute specific gravity by dividing by water's reference density of 1.0 g/cm³"
+          ],
+          "caption": "One relationship, rearranged three ways depending on which quantity is unknown, plus two derived figures."
+        },
+        "anatomy": {
+          "intro": "Density varies enormously across everyday materials — from water's reference value up to metals nearly twenty times denser, all expressed in the same g/cm³ unit.",
+          "labelWater": "Water",
+          "labelAluminum": "Aluminum",
+          "labelIron": "Iron",
+          "labelGold": "Gold",
+          "caption": "Water (1.0 g/cm³) versus aluminum (2.7), iron (7.87), and gold (19.3) — gold is over nineteen times denser than water."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Which quantity to solve for: density, mass, or volume.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Mass",
+            "meaning": "Object mass — entered directly, or computed as an output.",
+            "unit": "g"
+          },
+          {
+            "symbol": "Volume",
+            "meaning": "Object volume — entered directly, or computed as an output.",
+            "unit": "cm³"
+          },
+          {
+            "symbol": "Density",
+            "meaning": "Mass per unit volume — entered directly, or computed as an output.",
+            "unit": "g/cm³"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Solving for density requires a nonzero volume",
+            "description": "Dividing mass by volume is undefined when volume is zero — the calculator returns a \"zero-volume\" error rather than an infinite or NaN density."
+          },
+          {
+            "title": "Solving for volume requires a nonzero density",
+            "description": "Dividing mass by density is undefined when density is zero — the calculator returns a \"zero-density\" error rather than an infinite or NaN volume."
+          },
+          {
+            "title": "Solving for mass never errors",
+            "description": "Mass = density × volume is a straightforward multiplication with no division involved — even if density or volume is entered as zero, the calculation still runs and simply returns a mass of zero, no error needed."
+          },
+          {
+            "title": "Specific gravity and the SI conversion are always computed, regardless of operation",
+            "description": "Whichever operation you ran, the tool always additionally reports the density in SI units (kg/m³, by multiplying by 1,000) and as specific gravity (a unitless ratio against water's 1.0 g/cm³ reference density) — two extra views of the same density figure."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the calculator work in g/cm³ instead of the SI unit kg/m³?",
+            "answer": "Grams per cubic centimeter is the more commonly used unit for everyday density comparisons (a milliliter of water conveniently weighs almost exactly 1 gram), so the core calculation stays in that unit — the SI equivalent (kg/m³) is then provided alongside it, computed by simply multiplying by 1,000, since the two units differ by exactly that factor."
+          },
+          {
+            "question": "What is specific gravity, and why is it always shown?",
+            "answer": "Specific gravity is a material's density divided by the density of water (1.0 g/cm³) — a unitless ratio that tells you at a glance how many times denser (or lighter) something is than water, which is why it's automatically computed and shown alongside every result, regardless of which operation you ran."
+          },
+          {
+            "question": "Why doesn't solving for mass ever return an error, unlike the other two operations?",
+            "answer": "Solving for density or volume both involve a division (mass ÷ volume, or mass ÷ density), which is undefined when the divisor is zero. Solving for mass is mass = density × volume, a plain multiplication with no division anywhere — there's no zero-denominator case to guard against, so it always produces a valid result, even if that result is zero."
+          },
+          {
+            "question": "Can I use this calculator for gases as well as solids and liquids?",
+            "answer": "Yes — the density = mass ÷ volume relationship holds for any state of matter. Gas densities are simply much smaller numbers than solids or liquids (typically a small fraction of a g/cm³ at everyday pressure and temperature), so you may want to switch to the SI (kg/m³) figure shown alongside the result for more readable numbers."
+          }
+        ]
+      },
+      "ohms-law-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Ohm's Law Calculator: how voltage, current, resistance, and power are solved from any two known electrical quantities, the six known-value pairs it supports, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Voltage Scales Linearly With Current",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Known Pairs",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "V = I × R  |  P = V × I  |  P = I² × R  |  P = V² ÷ R",
+          "note": "Ohm's law (V = IR) and the power formula (P = VI) between them relate all four electrical quantities — voltage, current, resistance, and power — so knowing any two of the four is always enough to derive the other two, which is why the calculator offers six different known-value pairs."
+        },
+        "flowchart": {
+          "intro": "Which pair of formulas runs depends entirely on which two quantities you already know; every pair derives the remaining two directly, with no iteration.",
+          "steps": [
+            "Read which of the six known pairs is selected: voltage & current, voltage & resistance, current & resistance, voltage & power, current & power, or resistance & power",
+            "For a pair that includes resistance and current (or voltage and resistance): apply V = IR directly to get voltage, or divide voltage by resistance to get current",
+            "For a pair that includes power: solve algebraically using whichever of P = VI, P = I²R, or P = V²/R connects the two known quantities to the missing ones",
+            "For the resistance-and-power pair specifically: take the square root of power × resistance for voltage, and the square root of power ÷ resistance for current",
+            "Return all four quantities — voltage, current, resistance, and power — filled in, with the two originally-known values passed through unchanged"
+          ],
+          "caption": "Six entry points into the same voltage-current-resistance-power relationship, each deriving the two unknowns from the two knowns."
+        },
+        "anatomy": {
+          "intro": "At a fixed resistance, Ohm's law is pure proportionality — doubling the current doubles the voltage, tripling it triples the voltage, with no curve or bend in the relationship.",
+          "xLabel": "Current (A)",
+          "yLabel": "Voltage (V)",
+          "caption": "At a fixed resistance of 10 ohms, current of 0.5, 1, 2, and 3 amps produces voltages of 5, 10, 20, and 30 volts — a straight line through the origin."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Known Pair",
+            "meaning": "Which two of the four electrical quantities you're providing: voltage & current, voltage & resistance, current & resistance, voltage & power, current & power, or resistance & power.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Voltage",
+            "meaning": "Electrical potential difference — entered directly, or computed as an output.",
+            "unit": "V"
+          },
+          {
+            "symbol": "Current",
+            "meaning": "Rate of electric charge flow — entered directly, or computed as an output.",
+            "unit": "A"
+          },
+          {
+            "symbol": "Resistance",
+            "meaning": "Opposition to current flow — entered directly, or computed as an output.",
+            "unit": "Ω"
+          },
+          {
+            "symbol": "Power",
+            "meaning": "Rate of energy transfer — entered directly, or computed as an output.",
+            "unit": "W"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "The voltage-and-current pair requires a nonzero current",
+            "description": "Resistance is computed as voltage divided by current — if current is zero, that division is undefined, and the calculator returns a \"zero-current\" error rather than an infinite resistance."
+          },
+          {
+            "title": "The current-and-resistance pair never returns an error",
+            "description": "Given current and resistance, voltage (V = IR) and power (P = I²R) are both plain multiplications with no division involved — even a resistance of exactly zero (a short circuit) computes cleanly, correctly returning zero voltage and zero power."
+          },
+          {
+            "title": "Power-based pairs validate two inputs, not one",
+            "description": "The voltage-and-power and current-and-power pairs each divide by both of their known quantities in different steps (for example, current = power ÷ voltage, then resistance = voltage² ÷ power) — so both values must be nonzero, checked as two separate error conditions rather than one combined check."
+          },
+          {
+            "title": "The resistance-and-power pair takes a square root, assuming non-negative power",
+            "description": "Voltage and current are each derived as a square root of power times or divided by resistance — real electrical power in a passive circuit is never negative, so the formula doesn't separately guard against a negative power value, which would otherwise produce a non-real result."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the calculator offer six different known-value pairs instead of just asking for two values?",
+            "answer": "The four electrical quantities — voltage, current, resistance, and power — relate to each other through more than one formula, and which specific pair of formulas applies depends on exactly which two quantities you already know. Naming the six explicit combinations (rather than a generic \"pick any two\" input) lets the calculator apply the correct, most direct formula for each situation without guessing."
+          },
+          {
+            "question": "Why does the current-and-resistance pair never produce an error, unlike most of the others?",
+            "answer": "Voltage = current × resistance and power = current² × resistance are both plain multiplications — there's no division by either input anywhere in that pair's math, so there's no zero-denominator case that could produce an undefined result, even at the extreme of zero resistance."
+          },
+          {
+            "question": "How is power computed differently depending on which pair I choose?",
+            "answer": "Power can be reached three different ways depending on what's known: directly as voltage × current, as current² × resistance (useful when you know current and resistance but not voltage), or as voltage² ÷ resistance (useful when you know voltage and resistance but not current) — the calculator picks whichever form matches your selected known pair."
+          },
+          {
+            "question": "What if I don't know which two values I actually have?",
+            "answer": "Look at what you can directly measure or read off a component: a multimeter typically gives you voltage and current directly (the VI pair), a resistor's marked value gives you resistance, and a component's power rating (in watts) gives you power — combine whichever two of those four you actually have on hand to pick the matching pair."
+          }
+        ]
+      },
+      "energy-work-power-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Energy, Work & Power Calculator: how mechanical work, kinetic energy, gravitational potential energy, and power are each computed, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Kinetic Energy Grows With the Square of Velocity",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Work = force × distance × cos(angle)  |  Kinetic Energy = ½ × mass × velocity²  |  Potential Energy = mass × 9.8 × height  |  Power = work ÷ time",
+          "note": "Each of the four modes is an independent, direct formula — the calculator doesn't chain them together, it simply computes whichever single quantity (work, kinetic energy, potential energy, or power) the selected mode asks for from its own specific inputs."
+        },
+        "flowchart": {
+          "intro": "Each mode is a self-contained calculation using only the inputs relevant to it; there's no shared pipeline between modes.",
+          "steps": [
+            "Read which of the four modes is selected: work, kinetic energy, potential energy, or power",
+            "For work: convert the angle between force and displacement from degrees to radians, then multiply force by distance by the cosine of that angle",
+            "For kinetic energy: multiply one-half by mass by velocity squared",
+            "For potential energy: multiply mass by the fixed gravitational acceleration (9.8 m/s²) by height",
+            "For power: divide the entered work value by time, returning a \"zero-time\" error if time isn't strictly positive"
+          ],
+          "caption": "Four independent formulas, each mode computing only its own quantity from its own inputs."
+        },
+        "anatomy": {
+          "intro": "Kinetic energy depends on the square of velocity, not velocity directly — so it grows far faster than speed does, curving steeply upward rather than following a straight line.",
+          "xLabel": "Velocity (m/s)",
+          "yLabel": "Kinetic Energy (J)",
+          "caption": "For a 2 kg mass, velocities of 2, 4, 6, 8, and 10 m/s produce kinetic energies of 4, 16, 36, 64, and 100 joules — doubling velocity quadruples the energy, not doubles it."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Which quantity to compute: work, kinetic energy, potential energy, or power.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Force",
+            "meaning": "Applied force, used in work mode.",
+            "unit": "N"
+          },
+          {
+            "symbol": "Distance",
+            "meaning": "Displacement over which the force acts, used in work mode.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Angle",
+            "meaning": "Angle between the force direction and the displacement direction, used in work mode.",
+            "unit": "Degrees"
+          },
+          {
+            "symbol": "Mass",
+            "meaning": "Object mass, used in kinetic energy and potential energy modes.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Velocity",
+            "meaning": "Object speed, used in kinetic energy mode.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "Height above the reference level, used in potential energy mode.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Work Value",
+            "meaning": "A known amount of work or energy transferred, used in power mode.",
+            "unit": "J"
+          },
+          {
+            "symbol": "Time",
+            "meaning": "Duration over which the work is done, used in power mode. Must be strictly positive.",
+            "unit": "s"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Work accounts for the angle between force and displacement",
+            "description": "The work formula multiplies by the cosine of the angle between force and motion — a force applied at 90° to the direction of travel contributes zero work (cos 90° = 0), and one applied opposite to motion (180°) contributes negative work, both correctly reflecting the physics rather than just multiplying force by distance."
+          },
+          {
+            "title": "Only the power mode can return an error",
+            "description": "The work, kinetic energy, and potential energy modes each compute directly from their inputs with no division, so none of them validate their inputs or return an error — only the power mode divides by time, and only it can fail, returning \"zero-time\" when time is zero or negative."
+          },
+          {
+            "title": "Kinetic energy doesn't care about the direction of velocity",
+            "description": "Because the formula squares velocity, a negative velocity (representing motion in the opposite direction) produces exactly the same positive kinetic energy as the same speed in the positive direction — kinetic energy depends only on speed, not on direction."
+          },
+          {
+            "title": "Gravity is fixed at 9.8 m/s², not adjustable",
+            "description": "Potential energy always uses Earth-standard gravitational acceleration — unlike the Projectile Motion Calculator elsewhere in this category, which lets you enter a custom gravity value, this tool has no way to compute potential energy for the Moon, Mars, or another planet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the work formula include a cosine of the angle?",
+            "answer": "Work is technically defined as the component of force acting along the direction of motion — if you push at an angle to how something actually moves, only part of your force contributes to the work done. Multiplying by cos(angle) captures exactly that: at 0° (pushing straight along the motion) the full force counts, at 90° (pushing perpendicular to the motion) none of it counts, and beyond 90° the work becomes negative."
+          },
+          {
+            "question": "Why does the power mode check for time less than or equal to zero, instead of just time equal to zero?",
+            "answer": "Dividing by a negative time is just as physically meaningless as dividing by zero — time elapsed can't be negative in this context — so the check catches both invalid cases (zero and negative) with a single \"zero-time\" error rather than letting a negative time slip through and produce a nonsensical negative power."
+          },
+          {
+            "question": "Why doesn't kinetic energy change if I reverse the direction of motion?",
+            "answer": "The kinetic energy formula uses velocity squared, and squaring a negative number produces the same positive result as squaring its positive counterpart — physically, this is correct: an object moving at a given speed has the same kinetic energy regardless of which direction it's moving in, since energy is a scalar quantity with no direction of its own."
+          },
+          {
+            "question": "How does this tool relate to the Force Calculator?",
+            "answer": "The Force Calculator solves Newton's second law (F = ma) and universal gravitation for force, mass, acceleration, or distance — the force values it produces are exactly the kind of input this calculator's work mode uses. The two tools cover complementary parts of mechanics: one focuses on force and motion, the other on the energy and power that force produces or requires."
+          }
+        ]
+      },
+      "kinematics-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Kinematics Calculator: how constant-acceleration motion problems are solved in both time-based and distance-based modes, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Velocity Grows Linearly Under Constant Acceleration",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "v = v₀ + at  |  Δx = ½(v₀ + v)t  |  v² = v₀² + 2aΔx",
+          "note": "These three equations describe the same constant-acceleration motion from different angles — the calculator uses the first two together in time-based mode (when time is known) and the third in distance-based mode (when displacement is known but time isn't), always solving for whichever single quantity is currently unknown."
+        },
+        "flowchart": {
+          "intro": "Which set of equations runs depends on the selected mode, and within each mode, which specific quantity you're solving for.",
+          "steps": [
+            "Read which mode is selected: time-based (you know or want time) or distance-based (you know or want displacement, but not time)",
+            "In time-based mode: solve v = v₀ + at algebraically for whichever of v, v₀, a, or t is unknown, returning \"zero-time\" or \"zero-acceleration\" errors for the two solve-fors that require dividing by t or a",
+            "In time-based mode, afterward: always additionally compute displacement as Δx = ½(v₀ + v)t from the now-complete set of values",
+            "In distance-based mode: solve v² = v₀² + 2aΔx algebraically for whichever of v, v₀, a, or Δx is unknown, returning a \"negative-discriminant\" error if a square root of a negative number would be required, or \"zero-displacement\"/\"zero-acceleration\" for solve-fors that require dividing by Δx or a",
+            "In distance-based mode, afterward: compute time as t = (v − v₀) ÷ a only if acceleration is nonzero, otherwise leave time unavailable rather than dividing by zero"
+          ],
+          "caption": "Two modes for the same constant-acceleration physics, selected by whether time or displacement is the known quantity."
+        },
+        "anatomy": {
+          "intro": "Under constant acceleration, velocity increases by the same fixed amount every second — a perfectly straight line when plotted against time, with no curve.",
+          "xLabel": "Time (s)",
+          "yLabel": "Velocity (m/s)",
+          "caption": "Starting from rest with acceleration of 5 m/s², velocity climbs to 5, 10, 15, and 20 m/s at 1, 2, 3, and 4 seconds — a straight line with slope equal to the acceleration."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether you know (or want) time, or displacement instead.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Initial Velocity (v₀)",
+            "meaning": "Velocity at the start of the interval — entered directly, or computed as an output.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Final Velocity (v)",
+            "meaning": "Velocity at the end of the interval — entered directly, or computed as an output.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Acceleration (a)",
+            "meaning": "Constant rate of change of velocity — entered directly, or computed as an output.",
+            "unit": "m/s²"
+          },
+          {
+            "symbol": "Time (t)",
+            "meaning": "Duration of the interval — entered directly, or computed as an output. Used in time-based mode.",
+            "unit": "s"
+          },
+          {
+            "symbol": "Displacement (Δx)",
+            "meaning": "Distance covered during the interval — entered directly, or computed as an output. Used in distance-based mode.",
+            "unit": "m"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Distance-based mode can hit a negative discriminant",
+            "description": "Solving for final or initial velocity in distance-based mode takes a square root of v₀² + 2aΔx or v² − 2aΔx — if deceleration is strong enough that the object would stop before covering the entered displacement, that value goes negative, and the calculator returns a \"negative-discriminant\" error rather than an imaginary result."
+          },
+          {
+            "title": "Time-based mode always derives displacement afterward",
+            "description": "Regardless of which of v, v₀, a, or t you actually solved for in time-based mode, the tool always additionally computes displacement as Δx = ½(v₀ + v)t once the full set of time-based values is known — a bonus output on every time-based calculation."
+          },
+          {
+            "title": "Distance-based mode can't always recover time",
+            "description": "Time is derived afterward as t = (v − v₀) ÷ a, which only works when acceleration is nonzero — if a solve-for in distance-based mode legitimately produces zero acceleration (for example, equal initial and final velocity), time is marked unavailable rather than dividing by zero."
+          },
+          {
+            "title": "The two modes are two entry points into the same physics, not two different models",
+            "description": "Time-based mode requires knowing time and solves for velocity, initial velocity, or acceleration from it; distance-based mode requires knowing displacement instead and solves the same four unknowns from the displacement-based equation — both describe identical constant-acceleration motion, just anchored to a different known quantity."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What's the practical difference between the two modes?",
+            "answer": "Use time-based mode when you know (or want to find) how long the motion took — for example, timing a sprint with a stopwatch. Use distance-based mode when you know (or want to find) how far something traveled but don't have a time measurement — for example, a car's stopping distance, where you typically know the distance from skid marks rather than the exact time it took to stop."
+          },
+          {
+            "question": "Why would solving for velocity produce a \"negative discriminant\" error?",
+            "answer": "This happens specifically in distance-based mode, when the numbers describe a physically impossible scenario — for instance, asking how fast an object is going after covering a distance further than it could actually reach given its deceleration, meaning it would have already stopped before reaching that distance. There's no real velocity that satisfies the equation, so the calculator flags it rather than returning a fabricated number."
+          },
+          {
+            "question": "Why is displacement always shown in time-based mode, but time isn't always available in distance-based mode?",
+            "answer": "In time-based mode, once v₀, v, a, and t are all known, displacement follows directly from Δx = ½(v₀ + v)t with no risk of dividing by zero — it's always computable. In distance-based mode, recovering time requires dividing by acceleration, which is genuinely undefined if acceleration turns out to be zero (constant velocity, no change), so that specific case is left unavailable instead of guessing."
+          },
+          {
+            "question": "What real motion scenario does each solve-for correspond to?",
+            "answer": "Solving for final velocity answers \"how fast will it be going?\"; solving for initial velocity answers \"how fast did it start out?\"; solving for acceleration answers \"how hard did it speed up or slow down?\"; and solving for time or displacement answers \"how long did it take?\" or \"how far did it go?\" — each solve-for isolates one unknown in a real-world motion question."
+          }
+        ]
+      },
+      "force-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Force Calculator: how Newton's second law and the law of universal gravitation are each solved for their unknowns, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Gravitational Force Falls Off With the Square of Distance",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Newton's Second Law: F = ma  |  Universal Gravitation: F = Gm₁m₂ ÷ d²  (G = 6.674×10⁻¹¹ N·m²/kg²)",
+          "note": "The calculator supports two entirely separate laws under one roof — Newton's second law, relating force, mass, and acceleration for everyday objects, and the law of universal gravitation, relating the gravitational attraction between two masses to the distance between them."
+        },
+        "flowchart": {
+          "intro": "The two modes are independent physical models with their own solve-for options; the calculator doesn't mix them together.",
+          "steps": [
+            "Read which mode is selected: Newton's second law or universal gravitation",
+            "In second-law mode: solve F = ma algebraically for whichever of force, mass, or acceleration is unknown",
+            "In gravitation mode: solve F = Gm₁m₂/d² algebraically for whichever of force, mass 1, mass 2, or distance is unknown, using the fixed gravitational constant G",
+            "For gravitation's distance solve-for specifically: rearrange to d = √(Gm₁m₂/F), taking a square root",
+            "Return the four relevant fields for the selected mode filled in, with the other mode's fields left at zero"
+          ],
+          "caption": "Two independent laws, each with its own solve-for options, sharing one calculator interface."
+        },
+        "anatomy": {
+          "intro": "Gravitational force doesn't decrease steadily with distance — it falls off with the square of distance, so doubling the distance cuts the force to a quarter, not a half.",
+          "xLabel": "Distance (m)",
+          "yLabel": "Force (μN)",
+          "caption": "For two 1,000 kg masses, separating them from 1 m to 2, 3, and 4 m drops the gravitational force from 66.74 to 16.69, 7.42, and 4.17 micronewtons — quartering, then further shrinking, not a steady decline."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Which law to apply: Newton's second law, or universal gravitation.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Force",
+            "meaning": "Net force, used in both modes with different meanings — applied force in second-law mode, gravitational attraction in gravitation mode.",
+            "unit": "N"
+          },
+          {
+            "symbol": "Mass",
+            "meaning": "Object mass, used in second-law mode.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Acceleration",
+            "meaning": "Rate of change of velocity, used in second-law mode.",
+            "unit": "m/s²"
+          },
+          {
+            "symbol": "Mass 1",
+            "meaning": "First object's mass, used in gravitation mode.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Mass 2",
+            "meaning": "Second object's mass, used in gravitation mode.",
+            "unit": "kg"
+          },
+          {
+            "symbol": "Distance",
+            "meaning": "Separation between the two masses' centers, used in gravitation mode.",
+            "unit": "m"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Second law's force calculation never errors",
+            "description": "Solving for force is a plain multiplication (force = mass × acceleration) with no division involved — it computes cleanly regardless of whether mass or acceleration is entered as zero, correctly returning a force of zero in that case."
+          },
+          {
+            "title": "Gravitation's four solve-fors each divide by a different variable",
+            "description": "Solving for mass 1 requires mass 2 to be nonzero, solving for mass 2 requires mass 1 to be nonzero, solving for distance requires force to be nonzero (since it appears inside a square root's denominator), and solving for force requires distance to be nonzero — four distinct error codes for four distinct divisions."
+          },
+          {
+            "title": "The gravitational constant is fixed and extremely small",
+            "description": "G = 6.674×10⁻¹¹ N·m²/kg² is a tiny number, so the gravitational force between everyday-sized masses comes out correspondingly tiny — often in the micronewton range or smaller — which is expected physics, not a calculation error, and is why gravitation is only noticeable at planetary scale in daily life."
+          },
+          {
+            "title": "The two modes don't share result fields",
+            "description": "Second-law mode always returns mass 1, mass 2, and distance as zero, while gravitation mode always returns mass and acceleration as zero — since the two physical models use entirely different sets of unknowns, only the fields relevant to the selected mode are ever populated."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What's the difference between Newton's second law and universal gravitation, and why include both here?",
+            "answer": "Newton's second law (F = ma) describes how any force accelerates a mass — it applies to pushing a box, a car braking, or a rocket firing its engines. Universal gravitation (F = Gm₁m₂/d²) describes one specific force: the mutual attraction between any two masses due to gravity. Both are foundational force relationships in classical mechanics, so pairing them in one calculator covers force problems from two different, complementary angles."
+          },
+          {
+            "question": "Why is the gravitational force between two objects on a table so much smaller than pushing them with F = ma?",
+            "answer": "The gravitational constant G = 6.674×10⁻¹¹ N·m²/kg² is extraordinarily small, so unless at least one of the two masses is planetary in scale, the resulting gravitational force is vanishingly tiny compared to forces from direct pushes or everyday accelerations — this is accurate physics, not a limitation of the calculator; gravity between everyday objects is genuinely negligible."
+          },
+          {
+            "question": "Why does solving for distance in gravitation use a square root?",
+            "answer": "The gravitation formula has distance squared in the denominator (F = Gm₁m₂/d²) — rearranging to isolate distance means moving that squared term to the other side and then undoing the square with a square root, giving d = √(Gm₁m₂/F). Squaring distance is what produces the inverse-square falloff; taking the square root back out is just algebra to isolate the unknown."
+          },
+          {
+            "question": "Which everyday scenario would I use the second-law mode for versus the gravitation mode?",
+            "answer": "Use second-law mode for almost any everyday force-and-motion question — how much force is needed to accelerate a car, or how fast something accelerates under a known push. Use gravitation mode specifically for questions about gravitational attraction between two masses at a distance, such as estimating the (typically minuscule) gravitational pull between two nearby objects, or, at planetary scale, the force keeping a satellite in orbit."
+          }
+        ]
+      },
+      "projectile-motion-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Projectile Motion Calculator: how time of flight, maximum height, range, and impact velocity are computed for an object launched at an angle, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The Parabolic Trajectory",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Outputs",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "vₓ = speed × cos(angle)  |  v_y = speed × sin(angle)  |  Time of flight = [v_y + √(v_y² + 2·g·height)] ÷ g  |  Range = vₓ × time of flight",
+          "note": "Launch speed and angle are first split into horizontal and vertical velocity components, then treated independently — the horizontal component determines range at a constant rate, while the vertical component determines time of flight and maximum height under gravity's constant deceleration and re-acceleration."
+        },
+        "flowchart": {
+          "intro": "Every output is derived from the same pair of velocity components, computed once at the start.",
+          "steps": [
+            "Convert the launch angle from degrees to radians, then split launch speed into horizontal (vₓ) and vertical (v_y) components using cosine and sine",
+            "Solve for time of flight from the vertical motion equation height + v_y·t − ½g·t² = 0, taking the positive root: t = [v_y + √(v_y² + 2·g·height)] ÷ g",
+            "Compute maximum height as the launch height plus the additional rise from vertical velocity: height + v_y² ÷ (2g)",
+            "Compute range by multiplying the horizontal velocity by the total time of flight",
+            "Compute impact velocity from the horizontal component (unchanged throughout flight) and the vertical component at landing (v_y minus gravity times time of flight), then derive the impact angle from those two components"
+          ],
+          "caption": "One pair of velocity components at launch, feeding every other output through the equations of motion under constant gravity."
+        },
+        "anatomy": {
+          "intro": "Plotting height against horizontal distance traces out a symmetric parabola — rising from launch, peaking at half the time of flight, then falling back down, mirroring the rise on the way down.",
+          "xLabel": "Horizontal Distance (m)",
+          "yLabel": "Height (m)",
+          "caption": "Launched at 20 m/s and 45° from ground level, the trajectory rises to a peak height of 10.2 m at the midpoint of its 40.8 m range, then descends in a mirror image of the ascent."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Speed",
+            "meaning": "Launch speed at the moment of release. Must be zero or positive.",
+            "unit": "m/s"
+          },
+          {
+            "symbol": "Angle",
+            "meaning": "Launch angle measured from the horizontal.",
+            "unit": "Degrees"
+          },
+          {
+            "symbol": "Height",
+            "meaning": "Launch height above the landing surface. Must be zero or positive.",
+            "unit": "m"
+          },
+          {
+            "symbol": "Gravity",
+            "meaning": "Gravitational acceleration. Must be strictly positive; defaults to Earth's 9.8 m/s² but can be changed for other bodies.",
+            "unit": "m/s²"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Gravity must be strictly positive",
+            "description": "A gravity value of zero or less returns an \"invalid-gravity\" error — with zero gravity the projectile would never come back down (time of flight would be undefined), and negative gravity has no physical meaning here."
+          },
+          {
+            "title": "Negative speed or launch height are rejected outright",
+            "description": "Speed below zero and height below zero each return their own dedicated error (\"invalid-speed\" or \"invalid-height\") rather than being silently clamped to zero, since a negative launch speed or a launch point below the landing surface isn't a meaningful scenario for this formula."
+          },
+          {
+            "title": "The time-of-flight calculation guards against tiny floating-point rounding errors",
+            "description": "Mathematically, the discriminant v_y² + 2·g·height can never be negative when height is zero or positive — but the calculation still clamps it to a minimum of zero before taking the square root, protecting against a microscopic negative value that floating-point rounding could otherwise produce when height is exactly zero."
+          },
+          {
+            "title": "Impact angle is measured below the horizontal",
+            "description": "The impact angle is computed from the negative of the vertical velocity at landing, so a projectile landing below its peak (the normal case) produces a positive angle representing how many degrees below horizontal it's traveling at impact — matching how the launch angle above horizontal was entered."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does launching at 45° from ground level give an impact speed exactly equal to the launch speed?",
+            "answer": "When launch height is zero, the projectile lands at the same height it started from — by the symmetry of projectile motion under constant gravity, the vertical velocity at landing has the same magnitude as the vertical velocity at launch (just pointing downward instead of upward), so the total impact speed works out equal to the launch speed. This symmetry breaks as soon as launch height is nonzero."
+          },
+          {
+            "question": "What happens if I launch from a height above the ground?",
+            "answer": "With a positive launch height, the projectile has farther to fall than it rose from its own vertical velocity, so it spends more time in the air, travels farther horizontally, and lands with a higher impact speed than it launched with — the maximum height, time of flight, and range formulas all directly account for that extra starting height."
+          },
+          {
+            "question": "Why must gravity be strictly greater than zero rather than just non-negative?",
+            "answer": "The time-of-flight formula divides by gravity — at exactly zero gravity, that division is undefined, and physically a projectile under zero gravity would simply travel in a straight line forever rather than tracing a parabola and landing, so the calculation has no meaningful answer to give in that case."
+          },
+          {
+            "question": "How would I model this on the Moon or another planet?",
+            "answer": "Change the gravity input to the target body's surface gravity — for example, roughly 1.62 m/s² for the Moon or 3.71 m/s² for Mars, versus Earth's default of 9.8 m/s² — and every other input (speed, angle, height) keeps its same meaning; lower gravity produces a longer time of flight, greater maximum height, and longer range for the same launch conditions."
+          }
+        ]
       }
     }
   }
