@@ -77,7 +77,7 @@ export default async function RetirementCalculatorDocsPage() {
 
       <DocsSection id="flowchart" title={t("sectionFlowchart")}>
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("flowchart.intro")}</p>
-        <CalculationFlowchart steps={flowchartSteps} caption={t("flowchart.caption")} />
+        <CalculationFlowchart steps={flowchartSteps} caption={t("flowchart.caption")} loop={{ from: 2, to: 3, label: t("flowchart.loopLabel") }} />
       </DocsSection>
 
       <DocsSection id="growth" title={t("sectionGrowth")}>
