@@ -5,6 +5,7 @@ import { BarcodeGenerator, type BarcodeSymbology } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BarcodeInputPanel from "./BarcodeInputPanel";
 import BarcodeResult from "./BarcodeResult";
 import BarcodeTypesReference from "./BarcodeTypesReference";
@@ -96,6 +97,7 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
           sidebar={<RelatedToolsSidebar currentSlug="barcode-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="barcode-generator" />
               <SectionNav items={navItems} />
               <BarcodeDisclaimer />
               <BarcodeTypesReference />

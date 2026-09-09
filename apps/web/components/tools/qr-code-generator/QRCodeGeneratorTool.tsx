@@ -5,6 +5,7 @@ import { QRCodeGenerator, type QRErrorCorrectionLevel } from "@tooloralabs/tools
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import QRInputPanel, { type QRFormState } from "./QRInputPanel";
 import QRResult from "./QRResult";
 import QRCustomizePanel from "./QRCustomizePanel";
@@ -122,6 +123,7 @@ export default function QRCodeGeneratorTool({ education }: { education: ReactNod
           sidebar={<RelatedToolsSidebar currentSlug="qr-code-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="qr-code-generator" />
               <SectionNav items={navItems} />
               <QRLogoPanel
                 logoDataUrl={logoDataUrl}

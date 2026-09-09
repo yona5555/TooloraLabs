@@ -67,6 +67,12 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "chemical-equation-balancer",
   "stoichiometry-calculator",
   "molar-mass-calculator",
+  "json-formatter",
+  "base64-tool",
+  "password-generator",
+  "barcode-generator",
+  "color-palette-generator",
+  "qr-code-generator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

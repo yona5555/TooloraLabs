@@ -67,6 +67,12 @@ import IdealGasLawCalculatorDocsPage, { getIdealGasLawCalculatorTocItems } from 
 import ChemicalEquationBalancerDocsPage, { getChemicalEquationBalancerTocItems } from "@/components/docs/chemical-equation-balancer/ChemicalEquationBalancerDocsPage";
 import StoichiometryCalculatorDocsPage, { getStoichiometryCalculatorTocItems } from "@/components/docs/stoichiometry-calculator/StoichiometryCalculatorDocsPage";
 import MolarMassCalculatorDocsPage, { getMolarMassCalculatorTocItems } from "@/components/docs/molar-mass-calculator/MolarMassCalculatorDocsPage";
+import JsonFormatterDocsPage, { getJsonFormatterTocItems } from "@/components/docs/json-formatter/JsonFormatterDocsPage";
+import Base64ToolDocsPage, { getBase64ToolTocItems } from "@/components/docs/base64-tool/Base64ToolDocsPage";
+import PasswordGeneratorDocsPage, { getPasswordGeneratorTocItems } from "@/components/docs/password-generator/PasswordGeneratorDocsPage";
+import BarcodeGeneratorDocsPage, { getBarcodeGeneratorTocItems } from "@/components/docs/barcode-generator/BarcodeGeneratorDocsPage";
+import ColorPaletteGeneratorDocsPage, { getColorPaletteGeneratorTocItems } from "@/components/docs/color-palette-generator/ColorPaletteGeneratorDocsPage";
+import QrCodeGeneratorDocsPage, { getQrCodeGeneratorTocItems } from "@/components/docs/qr-code-generator/QrCodeGeneratorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -360,6 +366,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "molar-mass-calculator":
       content = <MolarMassCalculatorDocsPage />;
       tocItems = await getMolarMassCalculatorTocItems();
+      break;
+    case "json-formatter":
+      content = <JsonFormatterDocsPage />;
+      tocItems = await getJsonFormatterTocItems();
+      break;
+    case "base64-tool":
+      content = <Base64ToolDocsPage />;
+      tocItems = await getBase64ToolTocItems();
+      break;
+    case "password-generator":
+      content = <PasswordGeneratorDocsPage />;
+      tocItems = await getPasswordGeneratorTocItems();
+      break;
+    case "barcode-generator":
+      content = <BarcodeGeneratorDocsPage />;
+      tocItems = await getBarcodeGeneratorTocItems();
+      break;
+    case "color-palette-generator":
+      content = <ColorPaletteGeneratorDocsPage />;
+      tocItems = await getColorPaletteGeneratorTocItems();
+      break;
+    case "qr-code-generator":
+      content = <QrCodeGeneratorDocsPage />;
+      tocItems = await getQrCodeGeneratorTocItems();
       break;
   }
 

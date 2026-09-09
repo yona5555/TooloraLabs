@@ -21893,7 +21893,8 @@
             "Répéter pour chaque mois sur toute la durée de l'investissement",
             "Appliquer la déflation liée à l'inflation au solde final, si un taux d'inflation a été fourni"
           ],
-          "caption": "La boucle de simulation mois par mois que le moteur de cet outil exécute réellement, et non la formule fermée."
+          "caption": "La boucle de simulation mois par mois que le moteur de cet outil exécute réellement, et non la formule fermée.",
+          "loopLabel": "Se répète chaque mois"
         },
         "growthComparison": {
           "intro": "Un exemple fixe — 1 000 $ à 8 % sur 20 ans — montrant pourquoi la capitalisation l'emporte sur l'intérêt simple : l'avantage de la courbe composée sur la courbe linéaire de l'intérêt simple augmente chaque année, car l'intérêt composé rapporte des intérêts sur des intérêts déjà gagnés.",
@@ -22252,7 +22253,8 @@
             "Chaque mois : ajouter la contribution mensuelle au solde",
             "Répéter pour chaque mois jusqu'à atteindre l'âge de la retraite"
           ],
-          "caption": "La simulation de croissance mois par mois que cet outil réutilise de la Calculatrice d'Intérêt Composé."
+          "caption": "La simulation de croissance mois par mois que cet outil réutilise de la Calculatrice d'Intérêt Composé.",
+          "loopLabel": "Se répète chaque mois"
         },
         "growth": {
           "intro": "Un exemple représentatif — en commençant à 30 ans avec 20 000 $ épargnés, en contribuant 300 $/mois avec un rendement annuel de 7 % jusqu'à 65 ans.",
@@ -28441,6 +28443,629 @@
           {
             "question": "En quoi cela diffère-t-il du calculateur de stœchiométrie ?",
             "answer": "Cet outil calcule la masse molaire d'une seule formule isolément, avec une répartition complète par élément de l'origine de cette masse. Le calculateur de stœchiométrie utilise le calcul de masse molaire comme une étape interne (via le même analyseur de formules) tout en résolvant un problème plus vaste — convertir une quantité connue d'une substance en une quantité équivalente d'une substance différente dans une réaction équilibrée."
+          }
+        ]
+      },
+      "json-formatter": {
+        "version": "v1",
+        "description": "Référence technique du formateur JSON : comment le JSON est validé, formaté, minifié et trié par clés, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Logique de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Le formatage change la taille, pas le contenu",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Formater : JSON.stringify(value, null, indent)  |  Minifier : JSON.stringify(value)",
+          "note": "Les deux modes partent de la même valeur JSON analysée — la seule différence est de savoir si on demande au sérialiseur d'insérer une indentation et des sauts de ligne (formater) ou de tout regrouper sur une seule ligne sans espace supplémentaire (minifier)."
+        },
+        "flowchart": {
+          "intro": "La validation se produit avant tout le reste — l'outil ne tente jamais de formater ou minifier un texte dont il ne peut pas d'abord prouver qu'il s'agit de JSON syntaxiquement valide.",
+          "steps": [
+            "Analyser l'entrée à la recherche d'une erreur de syntaxe JSON avant de tenter de l'analyser, en capturant la ligne et la colonne exactes si une erreur est trouvée",
+            "Si une erreur de syntaxe a été trouvée, s'arrêter immédiatement et la renvoyer, avec la ligne et la colonne exactes",
+            "Sinon, analyser le JSON validé en une valeur JavaScript",
+            "Si le tri des clés a été demandé, parcourir récursivement la valeur et alphabétiser les clés de chaque objet, en laissant l'ordre des tableaux intact",
+            "Sérialiser la valeur en chaîne de caractères, soit avec l'indentation choisie (mode formatage), soit sans aucun espace (mode minification)"
+          ],
+          "caption": "Valider d'abord avec l'emplacement exact de l'erreur, puis analyser une fois, trier les clés optionnellement, puis sérialiser dans le style choisi."
+        },
+        "anatomy": {
+          "intro": "Le même objet JSON à trois clés occupe un nombre d'octets très différent selon le choix de formatage — l'indentation et les sauts de ligne sont de purs espaces blancs, ajoutés uniquement pour la lisibilité humaine.",
+          "labelMinified": "Minifié",
+          "labelTwoSpace": "Indentation 2 espaces",
+          "labelFourSpace": "Indentation 4 espaces",
+          "caption": "Pour un objet JSON à trois clés (name, age, active), minifié fait 37 octets, formaté à 2 espaces fait 50 octets, et formaté à 4 espaces fait 56 octets — mêmes données, quantités d'espaces blancs différentes."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "JSON",
+            "meaning": "Le texte JSON brut à valider, formater, ou minifier.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut formater avec indentation, ou minifier en une seule ligne compacte.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Indentation",
+            "meaning": "Style d'indentation pour le mode formatage : 2 espaces, 4 espaces, ou un caractère de tabulation.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Trier les clés",
+            "meaning": "S'il faut alphabétiser récursivement les clés des objets avant la sortie.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les erreurs de syntaxe sont détectées avant l'analyse, avec une position exacte",
+            "description": "Un validateur dédié recherche d'abord les problèmes de syntaxe JSON et, s'il en trouve un, renvoie immédiatement un message avec la ligne et la colonne exactes — indiquant précisément où corriger l'entrée plutôt qu'un échec générique « JSON invalide »."
+          },
+          {
+            "title": "Le mode minification ignore le paramètre d'indentation",
+            "description": "En mode minification, la valeur est sérialisée sans aucun argument d'indentation — quelle que soit l'option d'indentation sélectionnée (2 espaces, 4 espaces, ou tabulation), elle n'a aucun effet sur la sortie minifiée, puisque la minification supprime tous les espaces blancs de toute façon."
+          },
+          {
+            "title": "Le tri des clés ne réordonne jamais les éléments d'un tableau",
+            "description": "La logique de tri des clés alphabétise les clés à l'intérieur de chaque objet rencontré mais parcourt les tableaux élément par élément, préservant leur ordre d'origine — un tableau d'objets voit les clés de chaque objet triées indépendamment tandis que la séquence du tableau lui-même reste exactement telle que saisie."
+          },
+          {
+            "title": "L'indentation par tabulation est une troisième option distincte, pas une variante de largeur des espaces",
+            "description": "Le paramètre d'indentation accepte 2, 4, ou « tabulation » comme trois choix distincts — sélectionner la tabulation substitue un véritable caractère de tabulation à chaque niveau d'indentation, qui s'affiche ensuite selon la largeur configurée pour les tabulations dans l'éditeur ou le navigateur du lecteur, plutôt qu'une largeur visuelle fixe."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil vérifie-t-il une erreur de syntaxe avant d'analyser réellement le JSON ?",
+            "answer": "Un échec standard de JSON.parse() ne rapporte généralement qu'une erreur générique avec, au mieux, un décalage de caractère approximatif — pas toujours une ligne et une colonne conviviales. Exécuter d'abord un scanner de syntaxe dédié permet à l'outil de localiser précisément où se situe le problème, afin que vous puissiez sauter directement à la ligne et la colonne exactes à corriger plutôt que de fouiller dans tout le document."
+          },
+          {
+            "question": "Pourquoi le tri des clés ne trie-t-il pas aussi les éléments des tableaux ?",
+            "answer": "Les clés d'objet JSON ne sont pas ordonnées selon la spécification, donc les alphabétiser ne change pas ce que signifient les données — réordonner, par exemple, les objets à l'intérieur d'un tableau pourrait en changer le sens si ce tableau représente une liste ordonnée (comme une séquence d'étapes ou un ensemble de résultats trié). Le tri ne touche que les clés d'objet, jamais l'ordre des éléments de tableau, pour éviter d'altérer silencieusement des données qui dépendent de la séquence."
+          },
+          {
+            "question": "Quel est l'avantage pratique de minifier le JSON s'il est plus difficile à lire ?",
+            "answer": "Le JSON minifié est destiné aux machines, pas aux humains — supprimer les espaces blancs réduit le nombre d'octets à transmettre ou stocker, ce qui compte pour des choses comme les charges utiles d'API envoyées sur un réseau ou le JSON intégré dans un bundle d'application compilé. La version formatée sert à l'édition et à la relecture ; la version minifiée sert à l'expédition."
+          },
+          {
+            "question": "Pourquoi proposer à la fois l'indentation à 2 et 4 espaces plutôt qu'un seul standard ?",
+            "answer": "Différents guides de style et équipes ont des conventions différentes — l'indentation à 2 espaces est courante dans les écosystèmes JavaScript/web, tandis que 4 espaces est plus courant dans certaines autres communautés de langages et préférences personnelles. Proposer les deux (plus les tabulations) vous permet de correspondre à la convention déjà utilisée par votre projet ou équipe, plutôt que d'imposer un style unique."
+          }
+        ]
+      },
+      "base64-tool": {
+        "version": "v1",
+        "description": "Référence technique de l'encodeur/décodeur Base64 : comment le texte est converti vers et depuis Base64 dans les variantes standard et sûres pour URL, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Logique de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "L'encodage augmente la taille selon un ratio fixe",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Encoder : texte → octets UTF-8 → groupes de 3 octets → 4 caractères Base64  |  Décoder : inverser le même mappage",
+          "note": "Base64 travaille par groupes fixes de 3 octets d'entrée à la fois, réencodant les 24 bits de chaque groupe en 4 caractères de sortie tirés d'un alphabet de 64 symboles (6 bits par caractère) — le texte est d'abord converti en octets UTF-8, puisque Base64 lui-même ne sait encoder que des octets bruts, pas des caractères."
+        },
+        "flowchart": {
+          "intro": "L'encodage et le décodage sont des processus en miroir, tous deux construits autour du même regroupement de 3 octets vers 4 caractères.",
+          "steps": [
+            "Pour encoder : convertir le texte d'entrée en octets UTF-8, un à quatre octets par caractère selon la plage Unicode dans laquelle il tombe",
+            "Regrouper les octets par trois, et faire correspondre les 24 bits de chaque groupe à quatre valeurs de 6 bits, en recherchant chacune dans l'alphabet sélectionné (standard ou sûr pour URL)",
+            "Pour un dernier groupe de moins de 3 octets, compléter la sortie encodée avec des caractères « = » (variante standard uniquement) pour garder la longueur de sortie multiple de 4",
+            "Pour décoder : valider la longueur d'entrée (la variante standard exige un multiple de 4) et chaque caractère par rapport à l'alphabet sélectionné, puis inverser le regroupement pour récupérer les octets d'origine",
+            "Interpréter les octets récupérés comme UTF-8 pour reconstruire le texte d'origine, en échouant si la séquence d'octets n'est pas du UTF-8 valide"
+          ],
+          "caption": "Le même regroupement de 3 octets vers 4 caractères s'exécute en avant pour encoder et en arrière pour décoder."
+        },
+        "anatomy": {
+          "intro": "Comme 3 octets d'entrée deviennent toujours exactement 4 caractères de sortie, le texte encodé en Base64 est de manière fiable environ un tiers plus grand que l'original — un ratio fixe, pas une estimation approximative.",
+          "xLabel": "Octets d'entrée",
+          "yLabel": "Caractères de sortie",
+          "caption": "3, 6, 9, ou 12 octets d'entrée produisent toujours exactement 4, 8, 12, ou 16 caractères de sortie — une ligne droite de pente 4/3."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Texte",
+            "meaning": "Le texte à encoder, ou la chaîne Base64 à décoder.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut encoder du texte en Base64, ou décoder du Base64 en texte.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Variante",
+            "meaning": "Quel alphabet de 64 caractères utiliser : standard (avec + / et remplissage =) ou sûr pour URL (avec - _ et sans remplissage).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La variante standard exige que la longueur d'entrée soit un multiple de 4",
+            "description": "La variante standard basée sur le remplissage est rejetée d'emblée si sa longueur totale (y compris tout remplissage « = ») n'est pas divisible par 4, avant toute tentative de décodage caractère par caractère — une longueur qui n'est pas un multiple de 4 ne peut pas être du Base64 standard valide."
+          },
+          {
+            "title": "La variante sûre pour URL n'a pas d'exigence de longueur",
+            "description": "L'alphabet sûr pour URL (- et _ au lieu de + et /) est conçu pour être utilisé sans remplissage « = » final, donc la vérification du multiple de 4 qui s'applique à la variante standard est entièrement ignorée pour l'entrée sûre pour URL."
+          },
+          {
+            "title": "Le décodage valide chaque caractère par rapport à l'alphabet sélectionné",
+            "description": "Un seul caractère absent de l'ensemble de 64 caractères choisi (par exemple, un « + » apparaissant dans une entrée décodée comme sûre pour URL) fait échouer immédiatement tout le décodage, plutôt que d'être ignoré silencieusement ou substitué par autre chose."
+          },
+          {
+            "title": "Les octets décodés sont validés comme UTF-8 avant d'être affichés comme texte",
+            "description": "Même du Base64 syntaxiquement valide peut se décoder en une séquence d'octets qui n'est pas du UTF-8 valide — par exemple, du Base64 de données binaires arbitraires plutôt que du texte — et l'outil détecte ce cas et signale une erreur plutôt que d'afficher un texte corrompu ou illisible."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le texte encodé en Base64 finit-il toujours environ 33 % plus grand que l'original ?",
+            "answer": "Base64 représente chaque groupe de 3 octets d'entrée (24 bits) par 4 caractères de sortie, chaque caractère ne portant que 6 bits d'information au lieu des 8 bits que contient un octet brut — 4 caractères × 6 bits = 24 bits encodés en utilisant 4 fois le nombre de caractères de 3 octets, ce qui donne une augmentation de taille de 4/3 (environ 33 %), une conséquence mathématique du schéma d'encodage, pas une inefficacité qu'on pourrait optimiser."
+          },
+          {
+            "question": "Quelle est la différence entre les variantes standard et sûre pour URL, et quand utiliser la variante sûre pour URL ?",
+            "answer": "Le Base64 standard utilise + et / dans son alphabet et complète les groupes incomplets avec « = » — les deux ont une signification particulière dans une URL (+ peut signifier un espace, / sépare les segments de chemin, = introduit un paramètre de requête), ce qui peut casser une URL si du texte Base64 y est directement intégré. La variante sûre pour URL substitue plutôt - et _ et omet le remplissage, la rendant sûre à utiliser comme partie d'un chemin URL ou d'une chaîne de requête sans échappement supplémentaire."
+          },
+          {
+            "question": "Pourquoi l'outil convertit-il le texte en octets UTF-8 avant l'encodage Base64, plutôt que d'encoder le texte directement ?",
+            "answer": "Base64 est fondamentalement une façon de représenter des données binaires arbitraires (octets) sous forme de texte imprimable — il n'a aucune notion intégrée de caractères, d'Unicode, ou d'encodage de texte. Pour encoder une chaîne de texte en Base64, il faut d'abord décider comment ce texte correspond à des octets ; UTF-8 est le choix standard, quasi universel, donc l'outil convertit d'abord en octets UTF-8 puis encode ces octets en Base64."
+          },
+          {
+            "question": "Pourquoi le décodage peut-il échouer même quand l'entrée Base64 semble syntaxiquement correcte ?",
+            "answer": "Une chaîne de caractères Base64 valides de longueur valide se décodera toujours en *une* séquence d'octets — mais rien ne garantit que ces octets forment du texte UTF-8 valide. Si les données originales encodées n'étaient pas du texte UTF-8 au départ (une image, un fichier compressé, ou du texte dans un autre encodage), les redécoder en UTF-8 échouera, car le motif d'octets ne correspondra à aucune séquence de caractères UTF-8 valide."
+          }
+        ]
+      },
+      "password-generator": {
+        "version": "v1",
+        "description": "Référence technique du générateur de mots de passe : comment les mots de passe aléatoires par caractères et les phrases de passe basées sur des mots sont générés avec une aléatoire cryptographiquement sûre, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Logique de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "L'entropie croît linéairement avec la longueur",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Entropie mode caractères = longueur × log₂(taille du pool de caractères)  |  Entropie phrase de passe = nombre de mots × log₂(taille de la liste de mots)",
+          "note": "L'entropie mesure combien de suppositions aléatoires, en moyenne, seraient nécessaires pour trouver le mot de passe par force brute — elle ne dépend que de deux choses : combien de valeurs possibles chaque unité choisie aléatoirement (caractère ou mot) pourrait avoir, et combien d'unités composent le mot de passe."
+        },
+        "flowchart": {
+          "intro": "Les mots de passe en mode caractères et en mode phrase de passe sont construits par deux processus différents, mais tous deux tirent chaque choix aléatoire d'une source cryptographiquement sûre.",
+          "steps": [
+            "En mode caractères : construire le pool de caractères autorisés à partir des ensembles sélectionnés (majuscules, minuscules, chiffres, symboles), en retirant optionnellement les caractères visuellement ambigus comme 0/O et 1/l/I",
+            "Si la longueur demandée le permet, garantir d'abord un caractère de chaque ensemble sélectionné, puis remplir la longueur restante avec des choix aléatoires dans le pool complet, puis mélanger le résultat entier",
+            "En mode phrase de passe : choisir le nombre de mots aléatoires demandé (limité entre 3 et 10) dans une liste de mots fixe, en mettant optionnellement chacun en majuscule et en ajoutant optionnellement un nombre aléatoire à 2 chiffres",
+            "Joindre les mots de la phrase de passe (et le nombre optionnel) avec le caractère séparateur sélectionné",
+            "Calculer l'entropie à partir du résultat final : longueur multipliée par log₂(taille du pool) pour les caractères, ou nombre de mots multiplié par log₂(taille de la liste de mots) pour les phrases de passe"
+          ],
+          "caption": "Deux processus de génération différents pour les mots de passe à caractères et les phrases de passe, se terminant tous deux par le même calcul d'entropie."
+        },
+        "anatomy": {
+          "intro": "Pour un pool de caractères fixe, l'entropie augmente de la même quantité fixe à chaque caractère supplémentaire — une ligne droite, puisque chaque nouveau caractère multiplie le nombre de mots de passe possibles par le même facteur.",
+          "xLabel": "Longueur du mot de passe",
+          "yLabel": "Entropie (bits)",
+          "caption": "Avec les quatre types de caractères activés (un pool de 62 caractères, sans exclure les caractères ambigus), des longueurs de 8, 12, 16, et 20 produisent environ 47,6, 71,5, 95,3, et 119,1 bits d'entropie — chaque caractère ajouté contribue environ 5,95 bits."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut générer un mot de passe à caractères aléatoires, ou une phrase de passe basée sur des mots.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Longueur",
+            "meaning": "Nombre de caractères, utilisé en mode caractères.",
+            "unit": "Caractères"
+          },
+          {
+            "symbol": "Ensembles de caractères",
+            "meaning": "Quels types de caractères inclure : majuscules, minuscules, chiffres, symboles. Au moins un doit être sélectionné.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Exclure les ambigus",
+            "meaning": "S'il faut retirer du pool les caractères visuellement similaires (0/O, 1/l/I, |).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Nombre de mots",
+            "meaning": "Nombre de mots, utilisé en mode phrase de passe. Limité entre 3 et 10.",
+            "unit": "Mots"
+          },
+          {
+            "symbol": "Séparateur",
+            "meaning": "Caractère placé entre les mots de la phrase de passe : trait d'union, tiret bas, espace, ou aucun.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Mettre les mots en majuscule",
+            "meaning": "S'il faut mettre en majuscule la première lettre de chaque mot de la phrase de passe.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Ajouter un nombre",
+            "meaning": "S'il faut ajouter un nombre aléatoire à 2 chiffres à la fin de la phrase de passe.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Aucun ensemble de caractères sélectionné renvoie une erreur explicite",
+            "description": "Si majuscules, minuscules, chiffres, et symboles sont tous décochés — ou deviennent tous vides après l'exclusion des caractères ambigus —, l'outil échoue avec une erreur « aucun ensemble de caractères sélectionné » plutôt que de générer un mot de passe vide ou prévisible."
+          },
+          {
+            "title": "Les mots de passe à caractères garantissent au moins un caractère de chaque ensemble sélectionné",
+            "description": "Si la longueur demandée est au moins aussi grande que le nombre d'ensembles de caractères sélectionnés, un caractère de chaque ensemble est placé en premier, puis le reste est rempli aléatoirement et le tout est mélangé — donc un mot de passe avec des symboles activés est garanti de contenir réellement un symbole, pas seulement statistiquement probable."
+          },
+          {
+            "title": "Le nombre de mots pour les phrases de passe est limité silencieusement entre 3 et 10",
+            "description": "Un nombre de mots demandé hors plage est limité plutôt que rejeté, car moins de 3 mots donne une entropie très faible et plus de 10 devient peu pratique à taper ou à mémoriser de manière fiable."
+          },
+          {
+            "title": "La sélection aléatoire utilise l'échantillonnage par rejet, pas un simple modulo, pour éviter le biais",
+            "description": "Math.random() n'est jamais utilisé pour quoi que ce soit lié à la sécurité ; à la place, des valeurs aléatoires de 32 bits cryptographiquement sûres sont retirées à nouveau chaque fois qu'elles tomberaient dans un « compartiment » final incomplet de la taille du pool, garantissant que chaque caractère ou mot est également probable quelle que soit la taille du pool."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil garantit-il au moins un caractère de chaque type sélectionné plutôt que de simplement choisir aléatoirement dans le pool combiné ?",
+            "answer": "Choisir purement au hasard dans un pool combiné pourrait, par chance, produire un mot de passe sans aucun symbole même si des symboles ont été demandés — improbable pour un long mot de passe, mais possible, et certains services exigent spécifiquement au moins un caractère de chaque type activé. Placer d'abord un caractère garanti de chaque ensemble (puis mélanger) assure que chaque type de caractère demandé apparaît réellement, sans réduire l'aléatoire global du résultat."
+          },
+          {
+            "question": "Pourquoi le nombre de mots de la phrase de passe est-il limité entre 3 et 10 mots ?",
+            "answer": "En dessous de 3 mots, même avec une grande liste de mots, l'entropie totale devient trop faible pour résister à une attaque de devinette déterminée — 2 mots même issus d'une liste de 5 000 mots ne représentent qu'environ 24 bits, plus faible qu'un court mot de passe aléatoire. Au-delà de 10 mots, la phrase de passe devient longue et difficile à taper ou mémoriser de manière fiable, annulant le principal avantage des phrases de passe sur les mots de passe à caractères : être plus faciles à utiliser réellement pour un humain."
+          },
+          {
+            "question": "Pourquoi l'outil utilise-t-il getRandomValues() de Web Crypto plutôt que Math.random() ?",
+            "answer": "Math.random() est un générateur de nombres pseudo-aléatoires rapide et généraliste non conçu pour être imprévisible pour un attaquant — dans certains moteurs JavaScript, son état interne peut théoriquement être déduit à partir de suffisamment de sorties, ce qui permettrait à un attaquant de prédire de futures valeurs « aléatoires ». crypto.getRandomValues() est spécifiquement conçu pour être cryptographiquement sûr et imprévisible, ce qui est essentiel pour tout ce qui sert à générer un mot de passe ou d'autres identifiants de sécurité."
+          },
+          {
+            "question": "L'estimation du temps de craquage que cet outil pourrait afficher est-elle une véritable garantie de la durée pendant laquelle un mot de passe résisterait à une attaque ?",
+            "answer": "Non — c'est une estimation illustrative d'ordre de grandeur basée purement sur l'entropie et un taux de devinette supposé, pas une garantie. La sécurité réelle d'un mot de passe dépend fortement de la façon dont le service récepteur stocke et hache le mot de passe (un hachage lent et salé comme bcrypt rend la devinette dramatiquement plus lente qu'un hachage rapide non salé), ce que cet outil n'a aucun moyen de savoir — traitez tout chiffre de temps de craquage comme une comparaison approximative entre choix de mots de passe, pas comme un compte à rebours littéral."
+          }
+        ]
+      },
+      "barcode-generator": {
+        "version": "v1",
+        "description": "Référence technique du générateur de codes-barres : comment les codes-barres UPC-A, EAN-13, et Code 128 sont encodés, y compris leurs calculs de chiffre de contrôle, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Logique de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Longueur d'entrée maximale par symbologie",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Symbologies",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "Chiffre de contrôle UPC-A : pondération 3,1,3,1,... sur 11 chiffres  |  Chiffre de contrôle EAN-13 : pondération 1,3,1,3,... sur 12 chiffres  |  Somme de contrôle Code 128 : modulo 103",
+          "note": "Le chiffre de contrôle ou la somme de contrôle de chaque symbologie est une somme pondérée des valeurs encodées, réduite à un seul chiffre de vérification — un scanner récepteur recalcule la même somme pondérée et rejette la lecture si elle ne correspond pas, capturant ainsi la plupart des erreurs de scan et des fautes de frappe."
+        },
+        "flowchart": {
+          "intro": "Quelle logique d'encodage s'exécute dépend de la symbologie sélectionnée, mais les trois suivent la même forme : valider l'entrée, calculer une valeur de contrôle, puis faire correspondre les chiffres ou caractères à des motifs de barres.",
+          "steps": [
+            "Rejeter immédiatement une entrée vide, avant de vérifier quoi que ce soit de spécifique à la symbologie",
+            "Pour UPC-A : exiger exactement 11 chiffres, calculer le 12e chiffre de contrôle en utilisant des pondérations alternées de 3 et 1, puis faire correspondre chacun des 12 chiffres à son motif de barres",
+            "Pour EAN-13 : exiger exactement 12 chiffres, calculer le 13e chiffre de contrôle en utilisant des pondérations alternées de 1 et 3, utiliser le premier chiffre résultant pour choisir laquelle de deux tables d'encodage du côté gauche utilise chacun des six chiffres suivants, puis faire correspondre les six chiffres de droite avec la troisième table",
+            "Pour Code 128 : exiger que le texte fasse 48 caractères ou moins et soit composé d'ASCII imprimable standard, puis calculer une somme de contrôle (une somme pondérée des valeurs de caractères, modulo 103) et faire correspondre le code de départ, chaque caractère, la somme de contrôle, et le code d'arrêt à des motifs de barres",
+            "Convertir le motif binaire barre/espace résultant en une liste compacte codée par longueur de séquence de largeurs de barres pour le rendu"
+          ],
+          "caption": "Valider la longueur et les caractères d'entrée pour la symbologie choisie, calculer sa valeur de contrôle, puis encoder les chiffres ou caractères en segments de motif de barres."
+        },
+        "anatomy": {
+          "intro": "Les trois symbologies acceptent des quantités très différentes de données d'entrée — les deux codes-barres à nombre de chiffres fixe sont stricts sur la longueur, tandis que Code 128 est flexible mais reste néanmoins plafonné.",
+          "labelUpcA": "UPC-A",
+          "labelEan13": "EAN-13",
+          "labelCode128": "Code 128",
+          "caption": "UPC-A accepte exactement 11 chiffres, EAN-13 exactement 12, et Code 128 jusqu'à 48 caractères imprimables — le chiffre de contrôle ou la somme de contrôle est calculé en plus de, et non compté dans, ces limites."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Symbologie",
+            "meaning": "Quelle norme de code-barres générer : UPC-A, EAN-13, ou Code 128.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Valeur",
+            "meaning": "Les chiffres (pour UPC-A/EAN-13) ou le texte (pour Code 128) à encoder.",
+            "unit": "Texte"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "UPC-A et EAN-13 exigent un nombre exact de chiffres, pas « jusqu'à »",
+            "description": "UPC-A a besoin d'exactement 11 chiffres (le 12e chiffre de contrôle est calculé, non saisi) et EAN-13 a besoin d'exactement 12, chacun renvoyant une erreur « longueur invalide » distincte nommant quelle exigence de symbologie n'a pas été respectée."
+          },
+          {
+            "title": "Le chiffre de contrôle est toujours calculé, jamais accepté en entrée",
+            "description": "Même si vous tapez un nombre qui inclut déjà quelque chose ressemblant à un chiffre de contrôle, l'outil réduit les chiffres au nombre requis et calcule son propre chiffre de contrôle en utilisant le motif de pondération fixe de la symbologie, plutôt que de faire confiance à un chiffre de contrôle fourni par l'utilisateur qui pourrait être erroné."
+          },
+          {
+            "title": "L'encodage du côté gauche d'EAN-13 dépend du premier chiffre, celui d'UPC-A non",
+            "description": "EAN-13 utilise le tout premier chiffre du code-barres pour choisir un motif de parité L/G qui encode la valeur d'un chiffre supplémentaire dans laquelle de deux tables d'encodage utilise chacun des six chiffres suivants — un mécanisme dont UPC-A, qui a un chiffre de moins au total, n'a pas besoin."
+          },
+          {
+            "title": "Code 128 accepte tout caractère imprimable standard, mais seulement jusqu'à 48 d'entre eux",
+            "description": "Contrairement à UPC-A et EAN-13 à nombre de chiffres fixe, Code 128 accepte une chaîne de longueur variable de caractères ASCII imprimables standard (de l'espace au tilde), plafonnée à 48 pour garder le code-barres résultant à une largeur pratique à imprimer et scanner."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi UPC-A et EAN-13 ont-ils tous deux besoin d'un chiffre de contrôle, mais Code 128 a besoin d'une somme de contrôle à la place ?",
+            "answer": "Les trois servent le même objectif — permettre à un scanner de détecter une lecture erronée —, mais UPC-A et EAN-13 sont des formats numériques de longueur fixe où un seul chiffre supplémentaire, calculé avec une simple somme pondérée, suffit à capturer la grande majorité des erreurs à un seul chiffre. Code 128 encode du texte arbitraire de longueur variable, donc il utilise une somme de contrôle calculée sur la valeur de chaque caractère (pas seulement les chiffres), l'approche plus générale nécessaire pour une symbologie non numérique de longueur variable."
+          },
+          {
+            "question": "Pourquoi UPC-A a-t-il besoin de 11 chiffres mais EAN-13 de 12, si EAN-13 est censé être un sur-ensemble ?",
+            "answer": "EAN-13 est souvent décrit comme un sur-ensemble d'UPC-A car un code-barres UPC-A peut être lu comme un code-barres EAN-13 avec un zéro initial — mais tel qu'implémenté ici, chaque format calcule son propre chiffre de contrôle dédié à partir de son propre nombre de chiffres de données (11 pour UPC-A, 12 pour EAN-13), reflétant que le code final à 12 chiffres d'UPC-A et le code final à 13 chiffres d'EAN-13 sont chacun un chiffre plus long que leur exigence respective de chiffres de données."
+          },
+          {
+            "question": "Que se passe-t-il si je tape plus de chiffres qu'une symbologie n'en autorise ?",
+            "answer": "L'outil retire d'abord tout caractère non numérique, puis vérifie si le nombre de chiffres résultant correspond exactement à ce que la symbologie exige — trop ou trop peu de chiffres après ce nettoyage renvoie une erreur « longueur invalide » plutôt que de tronquer ou compléter silencieusement votre saisie, car deviner quels chiffres supprimer ou ajouter pourrait produire un code-barres qui ne représente pas ce que vous vouliez."
+          },
+          {
+            "question": "Ces codes-barres conviennent-ils à un usage commercial ou de vente au détail réel ?",
+            "answer": "Le générateur implémente les règles d'encodage standard et produit une sortie correcte selon la symbologie à des fins éducatives et de conception, mais les vrais codes-barres commerciaux UPC-A et EAN-13 nécessitent des codes fabricant et produit officiellement enregistrés (émis par GS1 ou un organisme similaire) pour être mondialement uniques et scannables en vente au détail — un nombre correctement encodé mais non enregistré se scannera techniquement bien mais ne correspondra à aucun produit réel dans une base de données commerciale."
+          }
+        ]
+      },
+      "color-palette-generator": {
+        "version": "v1",
+        "description": "Référence technique du générateur de palette de couleurs : comment les règles d'harmonie de la roue chromatique génèrent une palette à partir d'une seule couleur de base, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Logique de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Les couleurs triadiques sont espacées de 120° sur la roue des teintes",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Types d'harmonie",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Harmonies par décalage de teinte : nouvelle teinte = (teinte de base + décalage) mod 360°  |  Monochromatique : teinte fixe, luminosité variable [20 %, 35 %, 50 %, 65 %, 80 %]",
+          "note": "Cinq des six types d'harmonie génèrent de nouvelles couleurs uniquement en faisant tourner la teinte de la couleur de base autour de la roue chromatique par décalages de degrés fixes, en gardant la saturation et la luminosité inchangées ; le sixième, monochromatique, garde plutôt la teinte fixe et parcourt une plage de valeurs de luminosité."
+        },
+        "flowchart": {
+          "intro": "Chaque harmonie fonctionne dans l'espace HSL (teinte, saturation, luminosité), car faire tourner une teinte est une simple addition dans ce modèle mais une opération bien plus complexe en RVB.",
+          "steps": [
+            "Analyser la couleur hexadécimale de base en RVB, puis convertir le RVB en HSL pour obtenir une valeur de teinte, saturation, et luminosité",
+            "Rechercher l'ensemble de décalages de teinte fixes du type d'harmonie sélectionné — par exemple, complémentaire utilise [0°, 180°], triadique utilise [0°, 120°, 240°]",
+            "Pour chaque décalage, l'ajouter à la teinte de base et enrouler le résultat modulo 360° pour rester dans une plage de teinte valide, en gardant la saturation et la luminosité inchangées",
+            "Pour monochromatique spécifiquement, sauter entièrement la rotation de teinte et générer plutôt cinq couleurs à la même teinte et saturation mais cinq niveaux de luminosité fixes différents",
+            "Convertir chaque couleur HSL résultante de nouveau en RVB, puis en code hexadécimal, produisant la palette finale"
+          ],
+          "caption": "Convertir en HSL une fois, puis soit faire tourner la teinte par décalages fixes, soit parcourir des niveaux de luminosité fixes, puis reconvertir chaque résultat en hexadécimal."
+        },
+        "anatomy": {
+          "intro": "L'harmonie triadique choisit trois couleurs espacées exactement de 120° autour de la roue des teintes de 360° — divisant le cercle uniformément en tiers pour un contraste visuel maximal entre les trois couleurs.",
+          "labelBase": "Base (0°)",
+          "labelSecond": "120°",
+          "labelThird": "240°",
+          "caption": "En partant de la teinte de la couleur de base, l'harmonie triadique ajoute deux couleurs supplémentaires à +120° et +240°, divisant la roue de 360° en trois arcs égaux de 120°."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Couleur de base",
+            "meaning": "La couleur de départ, saisie sous forme de code hexadécimal à 6 chiffres (avec ou sans # initial).",
+            "unit": "Hex"
+          },
+          {
+            "symbol": "Type d'harmonie",
+            "meaning": "Quelle règle de roue chromatique appliquer : complémentaire, analogue, triadique, complémentaire divisée, tétradique, ou monochromatique.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Une entrée hexadécimale invalide renvoie une palette vide, pas un objet d'erreur",
+            "description": "Contrairement à certains outils qui renvoient une erreur typée, une couleur hexadécimale non analysable (pas exactement 6 chiffres hexadécimaux, avec ou sans # initial) produit simplement un tableau vide de couleurs, puisqu'il n'y a pas de couleur de base valide à partir de laquelle construire une harmonie."
+          },
+          {
+            "title": "Monochromatique est la seule harmonie qui ne décale pas la teinte",
+            "description": "Les cinq autres types d'harmonie calculent de nouvelles couleurs en faisant tourner la teinte de la couleur de base par décalages de degrés fixes tout en gardant la saturation et la luminosité constantes ; monochromatique garde plutôt la teinte et la saturation fixes et parcourt cinq valeurs de luminosité prédéfinies, puisque par définition il reste dans une seule teinte."
+          },
+          {
+            "title": "Les décalages de teinte s'enroulent autour de la roue chromatique de 360°",
+            "description": "Ajouter un décalage à la teinte de base et prendre le résultat modulo 360° (en gérant correctement les résultats négatifs) signifie qu'un décalage comme le -30° d'analogue s'enroule correctement à 330° plutôt que de produire une valeur de teinte négative et invalide."
+          },
+          {
+            "title": "Le bouton de couleur aléatoire n'utilise pas la même aléatoire sécurisée que les calculs d'harmonie",
+            "description": "Le générateur de couleur de base aléatoire utilise le Math.random() standard pour ses trois canaux RVB, ce qui est approprié ici puisque les couleurs de palette n'ont aucune exigence de sécurité — contrairement au générateur de mots de passe de cette catégorie, qui évite délibérément Math.random() pour cette raison."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil fonctionne-t-il en HSL plutôt que de manipuler directement les valeurs RVB ?",
+            "answer": "En HSL (teinte, saturation, luminosité), faire tourner une couleur autour de la roue chromatique est une simple addition à la valeur de teinte — simple et prévisible. L'opération équivalente en RVB nécessiterait un calcul bien plus complexe, car une rotation de teinte change les canaux rouge, vert, et bleu de montants différents dépendant de la teinte. Convertir d'abord en HSL, effectuer la rotation là, et reconvertir rend le calcul d'harmonie direct."
+          },
+          {
+            "question": "Quelle est la différence entre l'harmonie complémentaire et complémentaire divisée ?",
+            "answer": "Complémentaire utilise seulement deux couleurs : la base et la couleur directement opposée sur la roue, à 180° — un appariement à fort contraste de deux couleurs. Complémentaire divisée utilise plutôt trois couleurs : la base plus les deux couleurs adjacentes à son complément (à 150° et 210°, encadrant le point à 180°) — offrant un contraste fort similaire au complémentaire mais avec une couleur supplémentaire et une tension visuelle légèrement moindre que l'opposé direct."
+          },
+          {
+            "question": "Pourquoi monochromatique utilise-t-il des valeurs de luminosité fixes comme 20 %, 35 %, 50 %, 65 %, 80 % plutôt qu'un autre espacement ?",
+            "answer": "Ces cinq valeurs sont réparties uniformément sur la majeure partie de la plage de luminosité pratique (20 % à 80 %), évitant les extrêmes proches de 0 % (presque noir) et 100 % (presque blanc) où la teinte d'une couleur devient difficile à percevoir — donnant une palette monochromatique qui s'étend d'une teinte notablement sombre à une notablement claire tandis que chaque étape montre toujours clairement la même teinte sous-jacente."
+          },
+          {
+            "question": "Puis-je générer exactement la même palette deux fois à partir de la même couleur de base ?",
+            "answer": "Oui — contrairement au bouton de couleur aléatoire (qui choisit intentionnellement une nouvelle couleur à chaque fois), la génération d'harmonie elle-même est entièrement déterministe : la même couleur hexadécimale de base et le même type d'harmonie produiront toujours l'ensemble identique de couleurs de sortie, puisqu'il s'agit d'une transformation mathématique fixe sans aucun aléatoire impliqué."
+          }
+        ]
+      },
+      "qr-code-generator": {
+        "version": "v1",
+        "description": "Référence technique du générateur de code QR : comment différents types de contenu (URL, Wi-Fi, contacts, e-mail, SMS) sont construits en une charge utile QR, les variables acceptées et les cas particuliers gérés.",
+        "sectionFormula": "Logique de base",
+        "sectionFlowchart": "Comment c'est calculé",
+        "sectionAnatomy": "Plus de correction d'erreurs sacrifie la capacité de données",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas particuliers gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Types de contenu",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Charge utile = chaîne spécifique au type de contenu (texte brut, WIFI:..., BEGIN:VCARD..., mailto:..., ou SMSTO:...)  |  Symbole = encodage QR de la charge utile au niveau de correction d'erreurs choisi",
+          "note": "Chaque type de contenu est d'abord réduit à une seule chaîne de charge utile en texte brut utilisant un mini-format standard (ou aucun du tout, pour une URL ou du texte brut), et seule cette chaîne résultante est remise au moteur d'encodage QR — le travail propre de l'outil consiste entièrement à construire correctement cette chaîne."
+        },
+        "flowchart": {
+          "intro": "Quel format de charge utile est construit dépend du type de contenu sélectionné ; la génération réelle du symbole QR ensuite est identique quel que soit le type de contenu.",
+          "steps": [
+            "Lire lequel des six types de contenu est sélectionné : URL, texte brut, réseau Wi-Fi, carte de contact, e-mail, ou SMS",
+            "Construire la chaîne de charge utile dans le format standard de ce type — par exemple, un réseau Wi-Fi devient « WIFI:T:<chiffrement>;S:<nom du réseau>;P:<mot de passe>;H:<caché>;; », avec les caractères spéciaux échappés",
+            "Rejeter la demande si la charge utile résultante est vide ou dépasse 2 000 caractères",
+            "Transmettre la charge utile à la bibliothèque d'encodage QR avec le niveau de correction d'erreurs sélectionné et les couleurs de premier plan/arrière-plan",
+            "Recevoir en retour une image SVG représentant le symbole QR, avec la chaîne de charge utile exacte qui a été encodée"
+          ],
+          "caption": "Construire d'abord une chaîne de charge utile spécifique au type de contenu, la valider, puis la transmettre à l'encodage QR standard."
+        },
+        "anatomy": {
+          "intro": "Les codes QR peuvent reconstruire une fraction de leurs données en cas de dommage ou d'obstruction, à quatre niveaux de force sélectionnables — mais cette capacité de récupération n'est pas gratuite, car les données redondantes sur lesquelles elle repose occupent une place qui pourrait autrement contenir plus de contenu.",
+          "labelL": "Niveau L",
+          "labelM": "Niveau M",
+          "labelQ": "Niveau Q",
+          "labelH": "Niveau H",
+          "caption": "Les quatre niveaux standard de correction d'erreurs QR peuvent récupérer environ 7 % (L), 15 % (M), 25 % (Q), ou 30 % (H) de données endommagées — une capacité de récupération plus élevée laisse moins de place dans le même symbole pour votre contenu réel."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Type de contenu",
+            "meaning": "Quel type de charge utile construire : URL, texte, Wi-Fi, contact, e-mail, ou SMS.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Champs de contenu",
+            "meaning": "Les champs spécifiques pour le type sélectionné — par exemple, nom du réseau et mot de passe pour Wi-Fi, ou nom et téléphone pour un contact.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "Niveau de correction d'erreurs",
+            "meaning": "Combien de données redondantes inclure pour la récupération de dommages : L, M, Q, ou H. Par défaut M.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Couleur foncée",
+            "meaning": "La couleur de premier plan (modules foncés) du code QR, sous forme de valeur hexadécimale.",
+            "unit": "Hex"
+          },
+          {
+            "symbol": "Couleur claire",
+            "meaning": "La couleur d'arrière-plan (modules clairs) du code QR, sous forme de valeur hexadécimale.",
+            "unit": "Hex"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les caractères spéciaux dans les champs Wi-Fi et contact sont automatiquement échappés",
+            "description": "Les mini-langages WIFI: et vCard utilisent la barre oblique inverse, le point-virgule, la virgule, et les deux-points comme délimiteurs structurels, donc l'un quelconque de ces caractères tapé dans un nom de réseau ou un mot de passe est d'abord échappé avec une barre oblique inverse, l'empêchant d'être mal interprété comme séparateur de champ par une application de scan."
+          },
+          {
+            "title": "La limite de longueur de la charge utile s'applique à la chaîne entièrement construite, pas à la saisie brute du champ",
+            "description": "Le plafond de 2 000 caractères est vérifié par rapport à la charge utile complètement construite — incluant des préfixes comme « WIFI:T:...; » ou « BEGIN:VCARD... » — pas seulement ce qui a été tapé dans des champs individuels, puisque le symbole QR doit encoder toute la chaîne finale."
+          },
+          {
+            "title": "L'e-mail et le SMS utilisent des schémas d'encodage différents pour leurs champs supplémentaires",
+            "description": "Le type de contenu e-mail encode correctement en URL le sujet et le corps dans une chaîne de requête mailto: (correspondant à la syntaxe de lien mailto: standard), tandis que le SMS concatène simplement le numéro de téléphone et le message avec des deux-points au format SMSTO:, puisque ce schéma n'utilise pas d'encodage de chaîne de requête."
+          },
+          {
+            "title": "Une charge utile vide ou ne contenant que des espaces est rejetée avant toute tentative de génération",
+            "description": "Quel que soit le type de contenu, si la charge utile construite se réduit à rien — par exemple, un type « texte » avec seulement des espaces saisis —, l'outil renvoie une erreur « aucun contenu à encoder » plutôt que de générer un code QR qui n'encode rien de significatif."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil construit-il un format de chaîne spécial pour les codes Wi-Fi et contact au lieu de simplement encoder du texte brut ?",
+            "answer": "Les applications de scan reconnaissent des préfixes et mini-langages standard spécifiques pour déclencher un comportement particulier — une charge utile préfixée par WIFI: invite le téléphone à proposer de rejoindre directement ce réseau, et une charge utile BEGIN:VCARD invite une option pour l'enregistrer comme contact, plutôt que de simplement afficher le texte brut. Construire la charge utile dans ces formats reconnus est ce qui fait que le code QR fait réellement quelque chose d'utile lors du scan, plutôt que de simplement afficher du texte."
+          },
+          {
+            "question": "Contre quoi le niveau de correction d'erreurs protège-t-il réellement ?",
+            "answer": "Il protège contre un code QR partiellement endommagé, sale, ou obscurci — un logo imprimé au milieu du code, un coin déchiré, ou une tache — en encodant les données avec des informations redondantes supplémentaires qui permettent à un scanner de reconstruire les parties manquantes ou corrompues, similaire en principe à la façon dont un tableau RAID ou un CD audio peuvent tolérer une certaine perte de données. Le compromis est que des niveaux de correction d'erreurs plus élevés laissent moins de place dans le symbole QR de même taille pour votre contenu réel."
+          },
+          {
+            "question": "Pourquoi y a-t-il une limite de 2 000 caractères sur la charge utile ?",
+            "answer": "C'est un plafond pratique fixé bien en dessous de la capacité maximale théorique de la norme QR (qui varie selon le niveau de correction d'erreurs et peut atteindre quelques milliers de caractères alphanumériques) — des charges utiles très longues produisent des codes QR extrêmement denses qui deviennent difficiles à scanner de manière fiable pour des appareils photo réels, surtout aux tailles d'impression ou d'écran typiques, donc la limite vous oriente vers des charges utiles qui scanneront effectivement bien en pratique."
+          },
+          {
+            "question": "Pourquoi les types de contenu e-mail et SMS produisent-ils un lien mailto: ou SMSTO: plutôt que simplement les coordonnées brutes ?",
+            "answer": "mailto: et SMSTO: sont des schémas URI reconnus que les téléphones et ordinateurs savent déjà gérer — scanner un code QR mailto: ouvre l'application e-mail par défaut de l'appareil avec l'adresse, le sujet, et le corps pré-remplis, et SMSTO: fait de même pour une application de messagerie texte. Cela rend le code QR immédiatement actionnable dès le scan, plutôt que de simplement afficher une adresse e-mail ou un numéro de téléphone en texte brut qui devrait être copié manuellement."
           }
         ]
       }

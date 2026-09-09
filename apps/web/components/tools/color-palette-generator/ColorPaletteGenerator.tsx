@@ -7,6 +7,7 @@ import { generateColorPalette, generateRandomHex, isValidHex, type HarmonyType }
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ColorPaletteInputPanel from "./ColorPaletteInputPanel";
 import ColorPaletteResult from "./ColorPaletteResult";
 
@@ -49,7 +50,12 @@ export default function ColorPaletteGeneratorTool({ education }: { education: Re
           }
           result={<ColorPaletteResult palette={palette} />}
           sidebar={<RelatedToolsSidebar currentSlug="color-palette-generator" category="developer-tools" />}
-          secondary={<SectionNav items={navItems} />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="color-palette-generator" />
+              <SectionNav items={navItems} />
+            </div>
+          }
         />
       </div>
 

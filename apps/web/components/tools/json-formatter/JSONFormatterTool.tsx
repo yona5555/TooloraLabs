@@ -5,6 +5,7 @@ import { JSONFormatter, type JSONFormatterMode, type JSONIndent } from "@toolora
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import JSONInputPanel from "./JSONInputPanel";
 import JSONResult from "./JSONResult";
 import JSONCommonErrorsReference from "./JSONCommonErrorsReference";
@@ -66,6 +67,7 @@ export default function JSONFormatterTool({ education }: { education: ReactNode 
           sidebar={<RelatedToolsSidebar currentSlug="json-formatter" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="json-formatter" />
               <SectionNav items={navItems} />
               <JSONCommonErrorsReference />
             </div>

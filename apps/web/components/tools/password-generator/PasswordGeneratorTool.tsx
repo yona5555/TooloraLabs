@@ -5,6 +5,7 @@ import { PasswordGenerator, type PasswordGeneratorOutput } from "@tooloralabs/to
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PasswordInputPanel, { type PasswordFormState } from "./PasswordInputPanel";
 import PasswordResult from "./PasswordResult";
 import PasswordGuidanceReference from "./PasswordGuidanceReference";
@@ -69,6 +70,7 @@ export default function PasswordGeneratorTool({ education }: { education: ReactN
           sidebar={<RelatedToolsSidebar currentSlug="password-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="password-generator" />
               <SectionNav items={navItems} />
               <PasswordGuidanceReference />
             </div>

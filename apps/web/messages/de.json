@@ -21893,7 +21893,8 @@
             "Für jeden Monat der gesamten Anlagedauer wiederholen",
             "Am Ende die Inflationsbereinigung auf den Endsaldo anwenden, falls eine Inflationsrate angegeben wurde"
           ],
-          "caption": "Die monatliche Simulationsschleife, die die Engine dieses Tools tatsächlich ausführt, nicht die geschlossene Formel."
+          "caption": "Die monatliche Simulationsschleife, die die Engine dieses Tools tatsächlich ausführt, nicht die geschlossene Formel.",
+          "loopLabel": "Wiederholt sich monatlich"
         },
         "growthComparison": {
           "intro": "Ein festes Beispiel — 1.000 $ bei 8 % über 20 Jahre — zeigt, warum Zinseszins der einfachen Verzinsung überlegen ist: Der Vorsprung der Zinseszinskurve gegenüber der linearen Kurve der einfachen Verzinsung wächst jedes Jahr, weil Zinseszins Zinsen auf bereits verdiente Zinsen erwirtschaftet.",
@@ -22252,7 +22253,8 @@
             "Jeden Monat: die monatliche Einzahlung zum Saldo hinzufügen",
             "Für jeden Monat wiederholen, bis das Rentenalter erreicht ist"
           ],
-          "caption": "Die monatliche Wachstumssimulation, die dieses Tool vom Zinseszinsrechner wiederverwendet."
+          "caption": "Die monatliche Wachstumssimulation, die dieses Tool vom Zinseszinsrechner wiederverwendet.",
+          "loopLabel": "Wiederholt sich monatlich"
         },
         "growth": {
           "intro": "Ein repräsentatives Beispiel — Start mit 30 Jahren bei 20.000 $ Ersparnissen, monatlicher Einzahlung von 300 $ bei 7 % jährlicher Rendite bis zum Alter von 65.",
@@ -28441,6 +28443,629 @@
           {
             "question": "Wie unterscheidet sich dies vom Stöchiometrie-Rechner?",
             "answer": "Dieses Tool berechnet die molare Masse einer einzelnen Formel isoliert, mit einer vollständigen Aufschlüsselung pro Element, woher diese Masse stammt. Der Stöchiometrie-Rechner verwendet die Molmassenberechnung als einen internen Schritt (über denselben Formel-Parser), während er ein größeres Problem löst — die Umrechnung einer bekannten Menge einer Substanz in eine äquivalente Menge einer anderen Substanz in einer ausgeglichenen Reaktion."
+          }
+        ]
+      },
+      "json-formatter": {
+        "version": "v1",
+        "description": "Technische Referenz für den JSON-Formatierer: wie JSON validiert, formatiert, minimiert und nach Schlüsseln sortiert wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Formatierung ändert die Größe, nicht den Inhalt",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Formatieren: JSON.stringify(value, null, indent)  |  Minimieren: JSON.stringify(value)",
+          "note": "Beide Modi starten vom selben geparsten JSON-Wert — der einzige Unterschied ist, ob der Serialisierer angewiesen wird, Einrückung und Zeilenumbrüche einzufügen (formatieren) oder alles ohne zusätzliche Leerzeichen in eine Zeile zu packen (minimieren)."
+        },
+        "flowchart": {
+          "intro": "Die Validierung erfolgt vor allem anderen — das Tool versucht nie, Text zu formatieren oder zu minimieren, von dem es nicht zuerst nachweisen kann, dass er syntaktisch gültiges JSON ist.",
+          "steps": [
+            "Die Eingabe auf einen JSON-Syntaxfehler durchsuchen, bevor das Parsen versucht wird, wobei die exakte Zeile und Spalte erfasst wird, falls einer gefunden wird",
+            "Wenn ein Syntaxfehler gefunden wurde, sofort stoppen und ihn zusammen mit der exakten Zeile und Spalte zurückgeben",
+            "Andernfalls das validierte JSON in einen JavaScript-Wert parsen",
+            "Wenn Schlüsselsortierung angefordert wurde, den Wert rekursiv durchlaufen und die Schlüssel jedes Objekts alphabetisch ordnen, wobei die Array-Reihenfolge unangetastet bleibt",
+            "Den Wert zurück in einen String serialisieren, entweder mit der gewählten Einrückung (Formatiermodus) oder ganz ohne Leerzeichen (Minimierungsmodus)"
+          ],
+          "caption": "Zuerst mit exakter Fehlerposition validieren, dann einmal parsen, optional Schlüssel sortieren, dann im gewählten Stil serialisieren."
+        },
+        "anatomy": {
+          "intro": "Dasselbe JSON-Objekt mit drei Schlüsseln benötigt je nach Formatierungswahl eine sehr unterschiedliche Anzahl von Bytes — Einrückung und Zeilenumbrüche sind reine Leerzeichen, rein zur besseren menschlichen Lesbarkeit hinzugefügt.",
+          "labelMinified": "Minimiert",
+          "labelTwoSpace": "2-Leerzeichen-Einrückung",
+          "labelFourSpace": "4-Leerzeichen-Einrückung",
+          "caption": "Für ein JSON-Objekt mit drei Schlüsseln (name, age, active) sind es minimiert 37 Bytes, mit 2-Leerzeichen formatiert 50 Bytes und mit 4-Leerzeichen formatiert 56 Bytes — dieselben Daten, unterschiedliche Mengen an Leerzeichen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "JSON",
+            "meaning": "Der rohe JSON-Text, der validiert, formatiert oder minimiert werden soll.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Modus",
+            "meaning": "Ob mit Einrückung schön formatiert oder zu einer einzigen kompakten Zeile minimiert werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Einrückung",
+            "meaning": "Einrückungsstil für den Formatiermodus: 2 Leerzeichen, 4 Leerzeichen, oder ein Tabulatorzeichen.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Schlüssel sortieren",
+            "meaning": "Ob Objektschlüssel vor der Ausgabe rekursiv alphabetisch geordnet werden sollen.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Syntaxfehler werden vor dem Parsen erkannt, mit exakter Position",
+            "description": "Ein dedizierter Validator sucht zuerst nach JSON-Syntaxproblemen und gibt, falls einer gefunden wird, sofort eine Meldung mit der exakten Zeile und Spalte zurück — was genau zeigt, wo die Eingabe zu korrigieren ist, statt eines generischen \"ungültiges JSON\"-Fehlers."
+          },
+          {
+            "title": "Der Minimierungsmodus ignoriert die Einrückungseinstellung",
+            "description": "Im Minimierungsmodus wird der Wert ganz ohne Einrückungsargument serialisiert — welche Einrückungsoption (2-Leerzeichen, 4-Leerzeichen oder Tab) auch gewählt ist, hat keine Auswirkung auf die minimierte Ausgabe, da das Minimieren ohnehin alle Leerzeichen entfernt."
+          },
+          {
+            "title": "Das Sortieren von Schlüsseln ordnet Array-Elemente nie neu an",
+            "description": "Die Schlüsselsortierungslogik alphabetisiert Schlüssel innerhalb jedes angetroffenen Objekts, rekursiert aber Element für Element in Arrays und bewahrt deren ursprüngliche Reihenfolge — ein Array von Objekten bekommt die Schlüssel jedes Objekts unabhängig sortiert, während die Reihenfolge des Arrays selbst genau wie eingegeben bleibt."
+          },
+          {
+            "title": "Tab-Einrückung ist eine eigene dritte Option, keine Breitenvariante von Leerzeichen",
+            "description": "Die Einrückungseinstellung akzeptiert 2, 4 oder \"Tab\" als drei separate Wahlmöglichkeiten — die Wahl von Tab ersetzt jede Einrückungsebene durch ein tatsächliches Tabulatorzeichen, das dann in der vom Editor oder Browser des Betrachters konfigurierten Tab-Breite dargestellt wird, statt einer festen visuellen Breite."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum prüft das Tool auf einen Syntaxfehler, bevor es das JSON tatsächlich parst?",
+            "answer": "Ein Standard-JSON.parse()-Fehlschlag meldet typischerweise nur einen generischen Fehler mit bestenfalls einem ungefähren Zeichen-Offset — nicht immer eine benutzerfreundliche Zeile und Spalte. Zuerst einen dedizierten Syntax-Scanner laufen zu lassen, erlaubt dem Tool, genau festzustellen, wo das Problem liegt, sodass Sie direkt zur exakten Zeile und Spalte springen können, die korrigiert werden muss, statt das gesamte Dokument zu durchsuchen."
+          },
+          {
+            "question": "Warum sortiert die Schlüsselsortierung nicht auch Array-Elemente?",
+            "answer": "JSON-Objektschlüssel sind laut Spezifikation ungeordnet, sodass ihre Alphabetisierung nicht ändert, was die Daten bedeuten — das Neuordnen etwa der Objekte innerhalb eines Arrays könnte deren Bedeutung ändern, wenn dieses Array eine geordnete Liste darstellt (wie eine Abfolge von Schritten oder eine sortierte Ergebnismenge). Die Sortierung betrifft ausschließlich Objektschlüssel, nie die Reihenfolge von Array-Elementen, um zu vermeiden, dass Daten, die von der Reihenfolge abhängen, stillschweigend verändert werden."
+          },
+          {
+            "question": "Was ist der praktische Nutzen der JSON-Minimierung, wenn sie schwerer zu lesen ist?",
+            "answer": "Minimiertes JSON ist für Maschinen gedacht, nicht für Menschen — das Entfernen von Leerzeichen reduziert die Anzahl der zu übertragenden oder zu speichernden Bytes, was bei Dingen wie API-Nutzdaten, die über ein Netzwerk gesendet werden, oder JSON, das in ein kompiliertes Anwendungsbündel eingebettet ist, eine Rolle spielt. Die formatierte Version dient dem Bearbeiten und Überprüfen; die minimierte Version dem Ausliefern."
+          },
+          {
+            "question": "Warum werden sowohl 2-Leerzeichen- als auch 4-Leerzeichen-Einrückung angeboten statt nur eines Standards?",
+            "answer": "Unterschiedliche Styleguides und Teams haben unterschiedliche Konventionen — 2-Leerzeichen-Einrückung ist in JavaScript-/Web-Ökosystemen üblich, während 4-Leerzeichen in einigen anderen Sprachgemeinschaften und persönlichen Vorlieben verbreiteter ist. Beide (plus Tabs) anzubieten lässt Sie die Konvention treffen, die Ihr Projekt oder Team bereits verwendet, statt einen einzigen Hausstil zu erzwingen."
+          }
+        ]
+      },
+      "base64-tool": {
+        "version": "v1",
+        "description": "Technische Referenz für den Base64-Encoder/Decoder: wie Text in Base64 in Standard- und URL-sicheren Varianten umgewandelt wird und zurück, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Kodierung vergrößert die Größe um ein festes Verhältnis",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Kodieren: Text → UTF-8-Bytes → Gruppen von 3 Bytes → 4 Base64-Zeichen  |  Dekodieren: dieselbe Zuordnung umkehren",
+          "note": "Base64 arbeitet jeweils in festen Gruppen von 3 Eingabe-Bytes, wobei die 24 Bit jeder Gruppe als 4 Ausgabezeichen aus einem 64-Symbol-Alphabet neu kodiert werden (6 Bit pro Zeichen) — Text wird zuerst in UTF-8-Bytes umgewandelt, da Base64 selbst nur weiß, wie rohe Bytes zu kodieren sind, nicht Zeichen."
+        },
+        "flowchart": {
+          "intro": "Kodieren und Dekodieren sind spiegelbildliche Prozesse, beide um dieselbe 3-Bytes-zu-4-Zeichen-Gruppierung herum aufgebaut.",
+          "steps": [
+            "Zum Kodieren: den Eingabetext in UTF-8-Bytes umwandeln, ein bis vier Bytes pro Zeichen, je nachdem in welchen Unicode-Bereich es fällt",
+            "Die Bytes zu je drei gruppieren und die 24 Bit jeder Gruppe auf vier 6-Bit-Werte abbilden, jeden davon im gewählten Alphabet (Standard oder URL-sicher) nachschlagend",
+            "Für eine letzte Gruppe mit weniger als 3 Bytes die kodierte Ausgabe mit \"=\"-Zeichen auffüllen (nur Standardvariante), um die Ausgabelänge als Vielfaches von 4 zu halten",
+            "Zum Dekodieren: die Eingabelänge validieren (Standardvariante erfordert ein Vielfaches von 4) und jedes Zeichen gegen das gewählte Alphabet prüfen, dann die Gruppierung umkehren, um die ursprünglichen Bytes wiederherzustellen",
+            "Die wiederhergestellten Bytes als UTF-8 interpretieren, um den ursprünglichen Text zu rekonstruieren, wobei fehlgeschlagen wird, falls die Byte-Sequenz kein gültiges UTF-8 ist"
+          ],
+          "caption": "Dieselbe 3-Byte-zu-4-Zeichen-Gruppierung läuft vorwärts zum Kodieren und rückwärts zum Dekodieren."
+        },
+        "anatomy": {
+          "intro": "Da 3 Eingabe-Bytes immer zu genau 4 Ausgabezeichen werden, ist Base64-kodierter Text zuverlässig etwa ein Drittel größer als das Original — ein festes Verhältnis, keine grobe Schätzung.",
+          "xLabel": "Eingabe-Bytes",
+          "yLabel": "Ausgabezeichen",
+          "caption": "3, 6, 9 oder 12 Eingabe-Bytes erzeugen immer genau 4, 8, 12 oder 16 Ausgabezeichen — eine gerade Linie mit Steigung 4/3."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der zu kodierende Text, oder der zu dekodierende Base64-String.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Modus",
+            "meaning": "Ob Text zu Base64 kodiert oder Base64 zurück zu Text dekodiert werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Variante",
+            "meaning": "Welches 64-Zeichen-Alphabet verwendet werden soll: Standard (mit + / und = Padding) oder URL-sicher (mit - _ und ohne Padding).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Standardvariante erfordert, dass die Eingabelänge ein Vielfaches von 4 ist",
+            "description": "Die padding-basierte Standardvariante wird rundweg abgelehnt, wenn ihre Gesamtlänge (einschließlich etwaigen \"=\"-Paddings) nicht durch 4 teilbar ist, bevor irgendeine zeichenweise Dekodierung versucht wird — eine Länge, die kein Vielfaches von 4 ist, kann kein gültiges Standard-Base64 sein."
+          },
+          {
+            "title": "Die URL-sichere Variante hat keine Längenanforderung",
+            "description": "Das URL-sichere Alphabet (- und _ statt + und /) ist dafür ausgelegt, ohne abschließendes \"=\"-Padding verwendet zu werden, daher wird die für die Standardvariante geltende Vielfaches-von-4-Prüfung für URL-sichere Eingaben vollständig übersprungen."
+          },
+          {
+            "title": "Das Dekodieren validiert jedes Zeichen gegen das gewählte Alphabet",
+            "description": "Ein einzelnes Zeichen, das nicht im gewählten 64-Zeichen-Satz enthalten ist (zum Beispiel ein \"+\", das in als URL-sicher dekodierter Eingabe auftaucht), lässt die gesamte Dekodierung sofort fehlschlagen, statt stillschweigend übersprungen oder durch etwas anderes ersetzt zu werden."
+          },
+          {
+            "title": "Dekodierte Bytes werden als UTF-8 validiert, bevor sie als Text angezeigt werden",
+            "description": "Selbst syntaktisch gültiges Base64 kann zu einer Byte-Sequenz dekodieren, die kein gültiges UTF-8 ist — zum Beispiel Base64 beliebiger Binärdaten statt Text —, und das Tool erkennt diesen Fall und meldet einen Fehler, statt beschädigten oder unleserlichen Text anzuzeigen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird Base64-kodierter Text immer etwa 33% größer als das Original?",
+            "answer": "Base64 stellt jede Gruppe von 3 Eingabe-Bytes (24 Bit) als 4 Ausgabezeichen dar, wobei jedes Zeichen nur 6 Bit Information trägt statt der 8 Bit, die ein rohes Byte enthält — 4 Zeichen × 6 Bit = 24 Bit, kodiert mit der 4-fachen Zeichenanzahl von 3 Bytes, was einer 4/3-fachen (etwa 33%) Größenzunahme entspricht, eine mathematische Konsequenz des Kodierungsschemas, keine Ineffizienz, die wegoptimiert werden könnte."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen der Standard- und der URL-sicheren Variante, und wann sollte ich URL-sicher verwenden?",
+            "answer": "Standard-Base64 verwendet + und / in seinem Alphabet und füllt unvollständige Gruppen mit \"=\" auf — beide haben eine besondere Bedeutung innerhalb einer URL (+ kann ein Leerzeichen bedeuten, / trennt Pfadsegmente, = leitet einen Abfrageparameter ein), was eine URL beschädigen kann, wenn Base64-Text direkt darin eingebettet wird. URL-sicher tauscht stattdessen - und _ ein und lässt das Padding weg, was es sicher macht, als Teil eines URL-Pfads oder einer Abfragezeichenfolge ohne zusätzliches Escaping zu verwenden."
+          },
+          {
+            "question": "Warum wandelt das Tool Text vor der Base64-Kodierung in UTF-8-Bytes um, statt den Text direkt zu kodieren?",
+            "answer": "Base64 ist grundsätzlich eine Möglichkeit, beliebige Binärdaten (Bytes) als druckbaren Text darzustellen — es hat kein eingebautes Konzept von Zeichen, Unicode oder Textkodierung. Um einen Textstring Base64-zu-kodieren, müssen Sie zuerst festlegen, wie dieser Text auf Bytes abgebildet wird; UTF-8 ist die Standard-, nahezu universelle Wahl, daher wandelt das Tool zuerst in UTF-8-Bytes um und kodiert dann diese Bytes Base64."
+          },
+          {
+            "question": "Warum kann das Dekodieren fehlschlagen, selbst wenn die Base64-Eingabe syntaktisch korrekt aussieht?",
+            "answer": "Ein String gültiger Base64-Zeichen in gültiger Länge wird immer zu *irgendeiner* Byte-Sequenz dekodieren — aber diese Bytes sind nicht garantiert gültigen UTF-8-Text zu bilden. Wenn die ursprünglich kodierten Daten von Anfang an kein UTF-8-Text waren (ein Bild, eine komprimierte Datei oder Text in einer anderen Kodierung), schlägt das Zurückdekodieren als UTF-8 fehl, da das Bytemuster keiner gültigen UTF-8-Zeichenfolge entspricht."
+          }
+        ]
+      },
+      "password-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Passwort-Generator: wie zufällige Zeichenpasswörter und wortbasierte Passphrasen mit kryptografisch sicherer Zufälligkeit erzeugt werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Entropie wächst linear mit der Länge",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Zeichenmodus-Entropie = Länge × log₂(Zeichenpool-Größe)  |  Passphrase-Entropie = Wortanzahl × log₂(Wortlisten-Größe)",
+          "note": "Entropie misst, wie viele zufällige Rateversuche im Durchschnitt nötig wären, um das Passwort per Brute-Force zu finden — sie hängt nur von zwei Dingen ab: wie viele mögliche Werte jede zufällig gewählte Einheit (Zeichen oder Wort) sein könnte, und wie viele Einheiten das Passwort ausmachen."
+        },
+        "flowchart": {
+          "intro": "Passwörter im Zeichen- und im Passphrase-Modus werden durch zwei unterschiedliche Prozesse erstellt, aber beide ziehen jede zufällige Wahl aus einer kryptografisch sicheren Quelle.",
+          "steps": [
+            "Im Zeichenmodus: den Pool erlaubter Zeichen aus den gewählten Sätzen aufbauen (Großbuchstaben, Kleinbuchstaben, Zahlen, Symbole), optional visuell mehrdeutige Zeichen wie 0/O und 1/l/I entfernen",
+            "Wenn es die gewünschte Länge erlaubt, zuerst ein Zeichen aus jedem gewählten Satz garantieren, dann die restliche Länge mit zufälligen Ziehungen aus dem vollen Pool auffüllen, dann das gesamte Ergebnis mischen",
+            "Im Passphrase-Modus: die gewünschte Anzahl zufälliger Wörter (begrenzt auf 3-10) aus einer festen Wortliste auswählen, optional jedes großschreiben und optional eine zufällige zweistellige Zahl anhängen",
+            "Die Wörter der Passphrase (und die optionale Zahl) mit dem gewählten Trennzeichen verbinden",
+            "Die Entropie aus dem Endergebnis berechnen: Länge mal log₂(Pool-Größe) für Zeichen, oder Wortanzahl mal log₂(Wortlisten-Größe) für Passphrasen"
+          ],
+          "caption": "Zwei unterschiedliche Erzeugungsprozesse für Zeichenpasswörter und Passphrasen, beide endend in derselben Entropieberechnung."
+        },
+        "anatomy": {
+          "intro": "Bei einem festen Zeichenpool steigt die Entropie mit jedem zusätzlichen Zeichen um denselben festen Betrag — eine gerade Linie, da jedes neue Zeichen die Anzahl möglicher Passwörter um denselben Faktor multipliziert.",
+          "xLabel": "Passwortlänge",
+          "yLabel": "Entropie (Bit)",
+          "caption": "Mit allen vier Zeichentypen aktiviert (ein 62-Zeichen-Pool, mehrdeutige Zeichen nicht ausgeschlossen), erzeugen die Längen 8, 12, 16 und 20 etwa 47,6, 71,5, 95,3 und 119,1 Bit Entropie — jedes hinzugefügte Zeichen trägt etwa 5,95 Bit bei."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob ein Zufallszeichenpasswort oder eine wortbasierte Passphrase erzeugt werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Länge",
+            "meaning": "Anzahl der Zeichen, im Zeichenmodus verwendet.",
+            "unit": "Zeichen"
+          },
+          {
+            "symbol": "Zeichensätze",
+            "meaning": "Welche Zeichentypen einbezogen werden sollen: Großbuchstaben, Kleinbuchstaben, Zahlen, Symbole. Mindestens einer muss gewählt sein.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Mehrdeutige ausschließen",
+            "meaning": "Ob visuell ähnliche Zeichen (0/O, 1/l/I, |) aus dem Pool entfernt werden sollen.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Wortanzahl",
+            "meaning": "Anzahl der Wörter, im Passphrase-Modus verwendet. Begrenzt auf 3 bis 10.",
+            "unit": "Wörter"
+          },
+          {
+            "symbol": "Trennzeichen",
+            "meaning": "Zeichen zwischen Passphrase-Wörtern: Bindestrich, Unterstrich, Leerzeichen, oder keines.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Wörter großschreiben",
+            "meaning": "Ob der erste Buchstabe jedes Passphrase-Worts großgeschrieben werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Zahl anhängen",
+            "meaning": "Ob eine zufällige zweistellige Zahl an das Ende der Passphrase angehängt werden soll.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Keine gewählte Zeichengruppe gibt einen expliziten Fehler zurück",
+            "description": "Wenn Großbuchstaben, Kleinbuchstaben, Zahlen und Symbole alle nicht ausgewählt sind — oder alle nach Ausschluss mehrdeutiger Zeichen leer werden —, schlägt das Tool mit einem Fehler \"keine Zeichengruppe ausgewählt\" fehl, statt ein leeres oder vorhersehbares Passwort zu erzeugen."
+          },
+          {
+            "title": "Zeichenpasswörter garantieren mindestens ein Zeichen aus jeder gewählten Gruppe",
+            "description": "Wenn die gewünschte Länge mindestens so groß ist wie die Anzahl der gewählten Zeichengruppen, wird zuerst ein Zeichen aus jeder Gruppe platziert, dann der Rest zufällig aufgefüllt und das Ganze gemischt — sodass ein Passwort mit aktivierten Symbolen garantiert tatsächlich ein Symbol enthält, nicht nur statistisch wahrscheinlich."
+          },
+          {
+            "title": "Die Wortanzahl für Passphrasen wird stillschweigend auf 3-10 begrenzt",
+            "description": "Eine außerhalb des Bereichs angeforderte Wortanzahl wird begrenzt statt abgelehnt, da weniger als 3 Wörter eine sehr niedrige Entropie ergeben und mehr als 10 unpraktisch zum zuverlässigen Tippen oder Merken werden."
+          },
+          {
+            "title": "Die Zufallsauswahl verwendet Rejection Sampling, keinen einfachen Modulo, um Verzerrung zu vermeiden",
+            "description": "Math.random() wird für nichts Sicherheitsrelevantes verwendet; stattdessen werden kryptografisch sichere zufällige 32-Bit-Werte erneut gezogen, wann immer sie in einen unvollständigen letzten \"Bucket\" der Pool-Größe fallen würden, was sicherstellt, dass jedes Zeichen oder Wort unabhängig von der Pool-Größe gleich wahrscheinlich ist."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum garantiert das Tool mindestens ein Zeichen aus jedem gewählten Typ, statt einfach zufällig aus dem kombinierten Pool zu wählen?",
+            "answer": "Rein zufälliges Ziehen aus einem kombinierten Pool könnte zufällig ein Passwort ganz ohne Symbole erzeugen, obwohl Symbole angefordert wurden — unwahrscheinlich bei einem langen Passwort, aber möglich, und manche Dienste verlangen speziell mindestens ein Zeichen jedes aktivierten Typs. Zuerst ein garantiertes Zeichen aus jeder Gruppe zu platzieren (dann zu mischen) stellt sicher, dass jeder angeforderte Zeichentyp tatsächlich erscheint, ohne die Gesamtzufälligkeit des Ergebnisses zu verringern."
+          },
+          {
+            "question": "Warum ist die Passphrase-Wortanzahl auf 3 bis 10 Wörter begrenzt?",
+            "answer": "Unter 3 Wörtern wird die Gesamtentropie selbst bei einer großen Wortliste zu niedrig, um einem gezielten Rateangriff zu widerstehen — 2 Wörter selbst aus einer 5.000-Wörter-Liste sind nur etwa 24 Bit, schwächer als ein kurzes zufälliges Passwort. Über 10 Wörtern wird die Passphrase lang und unhandlich zum zuverlässigen Tippen oder Merken, was den Hauptvorteil von Passphrasen gegenüber Zeichenpasswörtern zunichtemacht: für einen Menschen tatsächlich einfacher zu benutzen zu sein."
+          },
+          {
+            "question": "Warum verwendet das Tool Web Crypto's getRandomValues() statt Math.random()?",
+            "answer": "Math.random() ist ein schneller, allgemeiner Pseudozufallszahlengenerator, der nicht dafür ausgelegt ist, für einen Angreifer unvorhersehbar zu sein — in manchen JavaScript-Engines kann sein interner Zustand theoretisch aus genügend Ausgabe abgeleitet werden, was einem Angreifer erlauben würde, zukünftige \"zufällige\" Werte vorherzusagen. crypto.getRandomValues() ist speziell dafür ausgelegt, kryptografisch sicher und unvorhersehbar zu sein, was für alles, was zur Erzeugung eines Passworts oder anderer Sicherheitsanmeldedaten verwendet wird, unerlässlich ist."
+          },
+          {
+            "question": "Ist die Crack-Zeit-Schätzung, die dieses Tool anzeigen könnte, eine echte Garantie dafür, wie lange ein Passwort einem Angriff standhalten würde?",
+            "answer": "Nein — es ist eine illustrative Größenordnungsschätzung, die rein auf Entropie und einer angenommenen Rate von Rateversuchen basiert, keine Garantie. Reale Passwortsicherheit hängt stark davon ab, wie der empfangende Dienst das Passwort speichert und hasht (ein langsamer, gesalzener Hash wie bcrypt macht das Raten dramatisch langsamer als ein schneller ungesalzener Hash), was dieses Tool nicht wissen kann — behandeln Sie jede Crack-Zeit-Angabe als groben Vergleich zwischen Passwortwahlen, nicht als wörtlichen Countdown."
+          }
+        ]
+      },
+      "barcode-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Barcode-Generator: wie UPC-A-, EAN-13- und Code-128-Barcodes kodiert werden, einschließlich ihrer Prüfziffer-Berechnungen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Maximale Eingabelänge nach Symbologie",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Symbologien",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "5 Min."
+        },
+        "formula": {
+          "expression": "UPC-A-Prüfziffer: Gewichtung 3,1,3,1,... über 11 Ziffern  |  EAN-13-Prüfziffer: Gewichtung 1,3,1,3,... über 12 Ziffern  |  Code-128-Prüfsumme: Modulo 103",
+          "note": "Die Prüfziffer oder Prüfsumme jeder Symbologie ist eine gewichtete Summe der kodierten Werte, reduziert auf eine einzelne Verifikationsziffer — ein empfangender Scanner berechnet dieselbe gewichtete Summe erneut und verwirft das Lesen, wenn sie nicht übereinstimmt, wodurch die meisten Scanfehler und Tippfehler erkannt werden."
+        },
+        "flowchart": {
+          "intro": "Welche Kodierungslogik läuft, hängt von der gewählten Symbologie ab, aber alle drei folgen derselben Form: Eingabe validieren, einen Prüfwert berechnen, dann Ziffern oder Zeichen auf Strichmuster abbilden.",
+          "steps": [
+            "Leere Eingabe sofort ablehnen, bevor irgendetwas Symbologie-Spezifisches geprüft wird",
+            "Für UPC-A: genau 11 Ziffern verlangen, die 12. Prüfziffer mit alternierenden Gewichtungen von 3 und 1 berechnen, dann jede der 12 Ziffern auf ihr Strichmuster abbilden",
+            "Für EAN-13: genau 12 Ziffern verlangen, die 13. Prüfziffer mit alternierenden Gewichtungen von 1 und 3 berechnen, die resultierende erste Ziffer verwenden, um zu wählen, welche von zwei linksseitigen Kodierungstabellen jede der nächsten sechs Ziffern verwendet, dann die rechten sechs Ziffern mit der dritten Tabelle abbilden",
+            "Für Code 128: verlangen, dass der Text 48 Zeichen oder weniger umfasst und aus druckbarem Standard-ASCII besteht, dann eine Prüfsumme berechnen (eine gewichtete Summe von Zeichenwerten, Modulo 103) und den Startcode, jedes Zeichen, die Prüfsumme und den Stoppcode auf Strichmuster abbilden",
+            "Das resultierende binäre Strich-/Lückenmuster in eine kompakte lauflängenkodierte Liste von Strichbreiten für die Darstellung umwandeln"
+          ],
+          "caption": "Eingabelänge und -zeichen für die gewählte Symbologie validieren, ihren Prüfwert berechnen, dann Ziffern oder Zeichen in Strichmuster-Segmente kodieren."
+        },
+        "anatomy": {
+          "intro": "Die drei Symbologien akzeptieren sehr unterschiedliche Mengen an Eingabedaten — die beiden Barcodes mit fester Ziffernzahl sind streng bei der Länge, während Code 128 flexibel, aber dennoch begrenzt ist.",
+          "labelUpcA": "UPC-A",
+          "labelEan13": "EAN-13",
+          "labelCode128": "Code 128",
+          "caption": "UPC-A akzeptiert genau 11 Ziffern, EAN-13 genau 12, und Code 128 bis zu 48 druckbare Zeichen — die Prüfziffer oder Prüfsumme wird zusätzlich zu diesen Grenzen berechnet, nicht innerhalb von ihnen mitgezählt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Symbologie",
+            "meaning": "Welcher Barcode-Standard erzeugt werden soll: UPC-A, EAN-13, oder Code 128.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Wert",
+            "meaning": "Die zu kodierenden Ziffern (für UPC-A/EAN-13) oder der Text (für Code 128).",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "UPC-A und EAN-13 erfordern eine exakte Ziffernanzahl, nicht \"bis zu\"",
+            "description": "UPC-A benötigt genau 11 Ziffern (die 12. Prüfziffer wird berechnet, nicht eingegeben) und EAN-13 benötigt genau 12, jeweils mit einem eigenen \"ungültige Länge\"-Fehler, der benennt, welche Symbologie-Anforderung nicht erfüllt wurde."
+          },
+          {
+            "title": "Die Prüfziffer wird immer berechnet, nie als Eingabe akzeptiert",
+            "description": "Selbst wenn Sie eine Zahl eingeben, die bereits etwas enthält, das wie eine Prüfziffer aussieht, kürzt das Tool die Ziffern auf die erforderliche Anzahl und berechnet seine eigene Prüfziffer mit dem festen Gewichtungsmuster der Symbologie, statt einer vom Benutzer angegebenen Prüfziffer zu vertrauen, die falsch sein könnte."
+          },
+          {
+            "title": "Die linksseitige Kodierung von EAN-13 hängt von der ersten Ziffer ab, die von UPC-A nicht",
+            "description": "EAN-13 verwendet die allererste Ziffer des Barcodes, um ein L/G-Paritätsmuster zu wählen, das den Wert einer zusätzlichen Ziffer darin kodiert, welche von zwei Kodierungstabellen jede der nächsten sechs Ziffern verwendet — ein Mechanismus, den UPC-A, das insgesamt eine Ziffer weniger hat, nicht benötigt."
+          },
+          {
+            "title": "Code 128 akzeptiert jedes druckbare Standardzeichen, aber nur bis zu 48 davon",
+            "description": "Anders als die UPC-A und EAN-13 mit fester Ziffernzahl akzeptiert Code 128 eine Zeichenkette variabler Länge aus druckbaren Standard-ASCII-Zeichen (Leerzeichen bis Tilde), begrenzt auf 48, um den resultierenden Barcode in einer praktischen Breite zum Drucken und Scannen zu halten."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum brauchen sowohl UPC-A als auch EAN-13 eine Prüfziffer, aber Code 128 stattdessen eine Prüfsumme?",
+            "answer": "Alle drei dienen demselben Zweck — einem Scanner zu erlauben, eine Fehllesung zu erkennen —, aber UPC-A und EAN-13 sind numerische Formate fester Länge, bei denen eine einzelne zusätzliche Ziffer, berechnet mit einer einfachen gewichteten Summe, ausreicht, um die überwiegende Mehrheit der Einzelziffernfehler zu erfassen. Code 128 kodiert beliebigen Text variabler Länge, daher verwendet es eine über den Wert jedes Zeichens berechnete Prüfsumme (nicht nur Ziffern), der allgemeinere Ansatz, der für eine nicht-numerische Symbologie variabler Länge benötigt wird."
+          },
+          {
+            "question": "Warum braucht UPC-A 11 Ziffern, aber EAN-13 12, wenn EAN-13 als Obermenge gedacht ist?",
+            "answer": "EAN-13 wird oft als Obermenge von UPC-A beschrieben, weil ein UPC-A-Barcode mit einer führenden Null als EAN-13-Barcode gelesen werden kann — aber wie hier implementiert, berechnet jedes Format seine eigene dedizierte Prüfziffer aus seiner eigenen Anzahl von Datenziffern (11 für UPC-A, 12 für EAN-13), was widerspiegelt, dass UPC-As 12-stelliger Endcode und EAN-13s 13-stelliger Endcode jeweils eine Ziffer länger sind als ihre jeweilige Datenziffer-Anforderung."
+          },
+          {
+            "question": "Was passiert, wenn ich mehr Ziffern eingebe, als eine Symbologie erlaubt?",
+            "answer": "Das Tool entfernt zuerst alle Nicht-Ziffern-Zeichen und prüft dann, ob die resultierende Ziffernanzahl genau dem entspricht, was die Symbologie erfordert — zu viele oder zu wenige Ziffern nach dieser Bereinigung geben einen \"ungültige Länge\"-Fehler zurück, statt Ihre Eingabe stillschweigend abzuschneiden oder aufzufüllen, da das Erraten, welche Ziffern zu entfernen oder hinzuzufügen sind, einen Barcode erzeugen könnte, der nicht darstellt, was Sie beabsichtigt hatten."
+          },
+          {
+            "question": "Sind diese Barcodes für den tatsächlichen Einzelhandels- oder kommerziellen Einsatz geeignet?",
+            "answer": "Der Generator implementiert die Standard-Kodierungsregeln und erzeugt symbologiekorrekte Ausgaben für Bildungs- und Designzwecke, aber echte kommerzielle UPC-A- und EAN-13-Barcodes erfordern offiziell registrierte Hersteller- und Produktcodes (ausgestellt von GS1 oder einer ähnlichen Stelle), um global eindeutig und im Einzelhandel scanbar zu sein — eine korrekt kodierte, aber nicht registrierte Nummer wird technisch einwandfrei scannen, aber keinem tatsächlichen Produkt in irgendeiner kommerziellen Datenbank entsprechen."
+          }
+        ]
+      },
+      "color-palette-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Farbpaletten-Generator: wie Farbrad-Harmonieregeln eine Palette aus einer einzelnen Basisfarbe erzeugen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Triadische Farben liegen 120° auf dem Farbtonrad auseinander",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Harmonietypen",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Farbtonverschiebungs-Harmonien: neuer Farbton = (Basisfarbton + Versatz) mod 360°  |  Monochromatisch: fester Farbton, variierende Helligkeit [20%, 35%, 50%, 65%, 80%]",
+          "note": "Fünf der sechs Harmonietypen erzeugen neue Farben rein durch Drehen des Farbtons der Basisfarbe um das Farbrad mit festen Gradversätzen, wobei Sättigung und Helligkeit unverändert bleiben; der sechste, monochromatisch, hält stattdessen den Farbton fest und durchläuft einen Bereich von Helligkeitswerten."
+        },
+        "flowchart": {
+          "intro": "Jede Harmonie arbeitet im HSL-Raum (Farbton, Sättigung, Helligkeit), da das Drehen eines Farbtons in diesem Modell eine einfache Addition ist, aber eine viel unübersichtlichere Operation in RGB.",
+          "steps": [
+            "Die hexadezimale Basisfarbe in RGB parsen, dann RGB in HSL umwandeln, um Farbton-, Sättigungs- und Helligkeitswert zu erhalten",
+            "Den festen Satz von Farbtonversätzen des gewählten Harmonietyps nachschlagen — zum Beispiel verwendet komplementär [0°, 180°], triadisch verwendet [0°, 120°, 240°]",
+            "Für jeden Versatz diesen zum Basisfarbton addieren und das Ergebnis modulo 360° umwickeln, um innerhalb eines gültigen Farbtonbereichs zu bleiben, wobei Sättigung und Helligkeit unverändert bleiben",
+            "Speziell für monochromatisch die Farbtondrehung ganz überspringen und stattdessen fünf Farben mit demselben Farbton und derselben Sättigung, aber fünf verschiedenen festen Helligkeitsstufen erzeugen",
+            "Jede resultierende HSL-Farbe zurück in RGB umwandeln, dann in einen Hex-Code, was die endgültige Palette ergibt"
+          ],
+          "caption": "Einmal in HSL umwandeln, dann entweder den Farbton um feste Versätze drehen oder feste Helligkeitsstufen durchlaufen, dann jedes Ergebnis zurück in Hex umwandeln."
+        },
+        "anatomy": {
+          "intro": "Triadische Harmonie wählt drei Farben, die exakt 120° auf dem 360°-Farbtonrad auseinander liegen — sie teilt den Kreis gleichmäßig in Drittel für maximalen visuellen Kontrast zwischen allen drei Farben.",
+          "labelBase": "Basis (0°)",
+          "labelSecond": "120°",
+          "labelThird": "240°",
+          "caption": "Ausgehend vom Farbton der Basisfarbe fügt triadische Harmonie zwei weitere Farben bei +120° und +240° hinzu, was das 360°-Rad in drei gleiche 120°-Bögen teilt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Basisfarbe",
+            "meaning": "Die Ausgangsfarbe, eingegeben als 6-stelliger Hex-Code (mit oder ohne führendes #).",
+            "unit": "Hex"
+          },
+          {
+            "symbol": "Harmonietyp",
+            "meaning": "Welche Farbrad-Regel angewendet werden soll: komplementär, analog, triadisch, split-komplementär, tetradisch, oder monochromatisch.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine ungültige Hex-Eingabe gibt eine leere Palette zurück, kein Fehlerobjekt",
+            "description": "Anders als manche Tools, die einen typisierten Fehler zurückgeben, erzeugt eine nicht parsbare Hex-Farbe (nicht exakt 6 Hex-Ziffern, mit oder ohne führendes #) einfach ein leeres Array von Farben, da es keine gültige Basisfarbe gibt, aus der eine Harmonie aufgebaut werden könnte."
+          },
+          {
+            "title": "Monochromatisch ist die einzige Harmonie, die den Farbton nicht verschiebt",
+            "description": "Alle fünf anderen Harmonietypen berechnen neue Farben durch Drehen des Farbtons der Basisfarbe um feste Gradversätze, während Sättigung und Helligkeit konstant bleiben; monochromatisch hält stattdessen Farbton und Sättigung fest und durchläuft fünf voreingestellte Helligkeitswerte, da es sich per Definition innerhalb eines Farbtons bewegt."
+          },
+          {
+            "title": "Farbtonversätze wickeln sich um das 360°-Farbrad",
+            "description": "Das Addieren eines Versatzes zum Basisfarbton und das Nehmen des Ergebnisses modulo 360° (wobei negative Ergebnisse korrekt behandelt werden) bedeutet, dass ein Versatz wie der -30° von analog korrekt zu 330° umwickelt, statt einen negativen, ungültigen Farbtonwert zu erzeugen."
+          },
+          {
+            "title": "Die Zufallsfarben-Schaltfläche verwendet nicht dieselbe sichere Zufälligkeit wie die Harmoniemathematik",
+            "description": "Der zufällige Basisfarbgenerator verwendet standardmäßiges Math.random() für seine drei RGB-Kanäle, was hier angemessen ist, da Palettenfarben keine Sicherheitsanforderung haben — anders als der Passwort-Generator dieser Kategorie, der Math.random() aus diesem Grund bewusst vermeidet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum arbeitet das Tool in HSL statt RGB-Werte direkt zu manipulieren?",
+            "answer": "In HSL (Farbton, Sättigung, Helligkeit) ist das Drehen einer Farbe um das Farbrad eine einzelne Addition zum Farbtonwert — einfach und vorhersehbar. Die entsprechende Operation in RGB würde eine viel komplexere Berechnung erfordern, da eine Farbtondrehung die Rot-, Grün- und Blaukanäle um unterschiedliche, farbtonabhängige Beträge ändert. Zuerst in HSL umzuwandeln, dort die Drehung durchzuführen und zurückzuwandeln macht die Harmoniemathematik unkompliziert."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen komplementärer und split-komplementärer Harmonie?",
+            "answer": "Komplementär verwendet nur zwei Farben: die Basis und die Farbe direkt gegenüber auf dem Rad, 180° entfernt — eine kontrastreiche Zweifarb-Paarung. Split-komplementär verwendet stattdessen drei Farben: die Basis plus die beiden Farben angrenzend an ihr Komplement (bei 150° und 210°, den 180°-Punkt umschließend) — bietet ähnlich starken Kontrast wie komplementär, aber mit einer zusätzlichen Farbe und etwas weniger visueller Spannung als das direkte Gegenteil."
+          },
+          {
+            "question": "Warum verwendet monochromatisch feste Helligkeitswerte wie 20%, 35%, 50%, 65%, 80% statt eines anderen Abstands?",
+            "answer": "Diese fünf Werte sind gleichmäßig über den meisten praktischen Helligkeitsbereich (20% bis 80%) verteilt und vermeiden die Extreme nahe 0% (nahezu schwarz) und 100% (nahezu weiß), wo der Farbton einer Farbe schwer wahrnehmbar wird — was eine monochromatische Palette ergibt, die von einem merklich dunklen bis zu einem merklich hellen Farbton reicht, während jeder Schritt noch deutlich denselben zugrunde liegenden Farbton zeigt."
+          },
+          {
+            "question": "Kann ich aus derselben Basisfarbe exakt dieselbe Palette zweimal erzeugen?",
+            "answer": "Ja — anders als die Zufallsfarben-Schaltfläche (die absichtlich jedes Mal eine neue Farbe wählt) ist die Harmonieerzeugung selbst vollständig deterministisch: dieselbe hexadezimale Basisfarbe und derselbe Harmonietyp erzeugen immer den identischen Satz von Ausgabefarben, da es sich um eine feste mathematische Transformation ohne jegliche Zufälligkeit handelt."
+          }
+        ]
+      },
+      "qr-code-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den QR-Code-Generator: wie verschiedene Inhaltstypen (URLs, Wi-Fi, Kontakte, E-Mail, SMS) zu einer QR-Nutzlast zusammengebaut werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Mehr Fehlerkorrektur kostet Datenkapazität",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Inhaltstypen",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Nutzlast = inhaltstyp-spezifischer String (reiner Text, WIFI:..., BEGIN:VCARD..., mailto:..., oder SMSTO:...)  |  Symbol = QR-Kodierung der Nutzlast auf der gewählten Fehlerkorrekturstufe",
+          "note": "Jeder Inhaltstyp wird zunächst auf einen einzigen Klartext-Nutzlaststring reduziert, unter Verwendung eines Standard-Mini-Formats (oder gar keines, für eine URL oder reinen Text), und nur dieser resultierende String wird an die QR-Kodierungs-Engine übergeben — die eigentliche Aufgabe des Tools dreht sich vollständig darum, diesen String korrekt aufzubauen."
+        },
+        "flowchart": {
+          "intro": "Welches Nutzlastformat aufgebaut wird, hängt vom gewählten Inhaltstyp ab; die eigentliche QR-Symbolerzeugung danach ist unabhängig vom Inhaltstyp identisch.",
+          "steps": [
+            "Lesen, welcher der sechs Inhaltstypen gewählt ist: URL, reiner Text, Wi-Fi-Netzwerk, Kontaktkarte, E-Mail, oder SMS",
+            "Den Nutzlaststring im Standardformat dieses Typs aufbauen — zum Beispiel wird ein Wi-Fi-Netzwerk zu \"WIFI:T:<Verschlüsselung>;S:<Netzwerkname>;P:<Passwort>;H:<versteckt>;;\", mit maskierten Sonderzeichen",
+            "Die Anfrage ablehnen, wenn die resultierende Nutzlast leer ist oder 2.000 Zeichen überschreitet",
+            "Die Nutzlast zusammen mit der gewählten Fehlerkorrekturstufe und den Vorder-/Hintergrundfarben an die QR-Kodierungsbibliothek übergeben",
+            "Ein SVG-Bild zurückerhalten, das das QR-Symbol darstellt, zusammen mit dem exakten Nutzlaststring, der kodiert wurde"
+          ],
+          "caption": "Zuerst einen inhaltstyp-spezifischen Nutzlaststring aufbauen, ihn validieren, dann an die Standard-QR-Symbolkodierung übergeben."
+        },
+        "anatomy": {
+          "intro": "QR-Codes können einen Bruchteil ihrer Daten aus Beschädigung oder Verdeckung rekonstruieren, auf vier wählbaren Stärkestufen — aber diese Wiederherstellungsfähigkeit ist nicht kostenlos, da die redundanten Daten, auf die sie sich stützt, Platz einnehmen, der sonst mehr Inhalt fassen könnte.",
+          "labelL": "Stufe L",
+          "labelM": "Stufe M",
+          "labelQ": "Stufe Q",
+          "labelH": "Stufe H",
+          "caption": "Die vier Standard-QR-Fehlerkorrekturstufen können etwa 7% (L), 15% (M), 25% (Q) oder 30% (H) beschädigter Daten wiederherstellen — höhere Wiederherstellungskapazität lässt weniger Platz im selben Symbol für Ihren tatsächlichen Inhalt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Inhaltstyp",
+            "meaning": "Welche Art von Nutzlast aufgebaut werden soll: URL, Text, Wi-Fi, Kontakt, E-Mail, oder SMS.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Inhaltsfelder",
+            "meaning": "Die spezifischen Felder für den gewählten Typ — zum Beispiel Netzwerkname und Passwort für Wi-Fi, oder Name und Telefon für einen Kontakt.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Fehlerkorrekturstufe",
+            "meaning": "Wie viele redundante Daten für die Schadenswiederherstellung einbezogen werden: L, M, Q, oder H. Standardmäßig M.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Dunkle Farbe",
+            "meaning": "Die Vordergrundfarbe (dunkle Module) des QR-Codes, als Hex-Wert.",
+            "unit": "Hex"
+          },
+          {
+            "symbol": "Helle Farbe",
+            "meaning": "Die Hintergrundfarbe (helle Module) des QR-Codes, als Hex-Wert.",
+            "unit": "Hex"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Sonderzeichen in Wi-Fi- und Kontaktfeldern werden automatisch maskiert",
+            "description": "Die WIFI:- und vCard-Minisprachen verwenden Backslash, Semikolon, Komma und Doppelpunkt als strukturelle Trennzeichen, daher wird jedes dieser Zeichen, das in einen Netzwerknamen oder ein Passwort eingegeben wird, zuerst mit einem Backslash maskiert, um zu verhindern, dass es von einer scannenden App fälschlich als Feldtrenner gelesen wird."
+          },
+          {
+            "title": "Die Nutzlastlängenbegrenzung gilt für den vollständig aufgebauten String, nicht die rohe Feldeingabe",
+            "description": "Die 2.000-Zeichen-Obergrenze wird gegen die vollständig konstruierte Nutzlast geprüft — einschließlich Präfixen wie \"WIFI:T:...;\" oder \"BEGIN:VCARD...\" — nicht nur was in einzelne Felder eingegeben wurde, da das QR-Symbol den gesamten fertigen String kodieren muss."
+          },
+          {
+            "title": "E-Mail und SMS verwenden unterschiedliche Kodierungsschemata für ihre Zusatzfelder",
+            "description": "Der E-Mail-Inhaltstyp kodiert Betreff und Text korrekt URL in einen mailto:-Abfragestring (passend zur Standard-mailto:-Link-Syntax), während SMS Telefonnummer und Nachricht einfach mit Doppelpunkten im SMSTO:-Format verkettet, da dieses Schema keine Abfragestring-Kodierung verwendet."
+          },
+          {
+            "title": "Eine leere oder nur aus Leerzeichen bestehende Nutzlast wird abgelehnt, bevor versucht wird, irgendetwas zu erzeugen",
+            "description": "Unabhängig vom Inhaltstyp gibt das Tool einen Fehler \"kein Inhalt zum Kodieren\" zurück, wenn sich die konstruierte Nutzlast auf nichts reduziert — zum Beispiel ein \"Text\"-Typ mit nur eingegebenen Leerzeichen —, statt einen QR-Code zu erzeugen, der nichts Sinnvolles kodiert."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum baut das Tool ein spezielles Stringformat für Wi-Fi- und Kontaktcodes auf, statt einfach reinen Text zu kodieren?",
+            "answer": "Scan-Apps erkennen bestimmte Standardpräfixe und Minisprachen, um spezielles Verhalten auszulösen — eine mit WIFI: präfixierte Nutzlast veranlasst das Telefon, direkt den Beitritt zu diesem Netzwerk anzubieten, und eine BEGIN:VCARD-Nutzlast veranlasst eine Option, sie als Kontakt zu speichern, statt nur den rohen Text anzuzeigen. Die Nutzlast in diesen erkannten Formaten aufzubauen ist es, was den QR-Code beim Scannen tatsächlich etwas Nützliches tun lässt, statt nur Text anzuzeigen."
+          },
+          {
+            "question": "Wovor schützt die Fehlerkorrekturstufe eigentlich?",
+            "answer": "Sie schützt davor, dass ein QR-Code teilweise beschädigt, verschmutzt oder verdeckt ist — ein in die Mitte des Codes gedrucktes Logo, eine abgerissene Ecke, oder ein Fleck —, indem die Daten mit zusätzlicher redundanter Information kodiert werden, die es einem Scanner erlaubt, die fehlenden oder beschädigten Teile zu rekonstruieren, ähnlich im Prinzip wie ein RAID-Array oder eine Audio-CD einen gewissen Datenverlust tolerieren kann. Der Kompromiss ist, dass höhere Fehlerkorrekturstufen weniger Platz im gleich großen QR-Symbol für Ihren tatsächlichen Inhalt lassen."
+          },
+          {
+            "question": "Warum gibt es eine 2.000-Zeichen-Grenze für die Nutzlast?",
+            "answer": "Dies ist eine praktische Obergrenze, deutlich unter der theoretischen Maximalkapazität des QR-Standards angesetzt (die mit der Fehlerkorrekturstufe variiert und bis zu einigen tausend alphanumerischen Zeichen reichen kann) — sehr lange Nutzlasten erzeugen extrem dichte QR-Codes, die für reale Kameras schwer zuverlässig zu scannen werden, besonders bei typischen Druck- oder Bildschirmgrößen, daher lenkt die Grenze Sie zu Nutzlasten, die in der Praxis tatsächlich gut scannen."
+          },
+          {
+            "question": "Warum erzeugen die Inhaltstypen E-Mail und SMS einen mailto:- oder SMSTO:-Link statt nur der rohen Kontaktdetails?",
+            "answer": "mailto: und SMSTO: sind erkannte URI-Schemata, die Telefone und Computer bereits zu handhaben wissen — das Scannen eines mailto:-QR-Codes öffnet die Standard-E-Mail-App des Geräts mit vorausgefüllter Adresse, Betreff und Text, und SMSTO: tut dasselbe für eine Textnachrichten-App. Dies macht den QR-Code beim Scannen sofort actionable, statt nur eine E-Mail-Adresse oder Telefonnummer als reinen Text anzuzeigen, der manuell kopiert werden müsste."
           }
         ]
       }

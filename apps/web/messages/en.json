@@ -21893,7 +21893,8 @@
             "Repeat for every month across the full investment term",
             "Apply inflation deflation to the final balance, if an inflation rate was supplied"
           ],
-          "caption": "The month-by-month simulation loop this tool's engine actually runs, not the closed-form formula."
+          "caption": "The month-by-month simulation loop this tool's engine actually runs, not the closed-form formula.",
+          "loopLabel": "Repeats monthly"
         },
         "growthComparison": {
           "intro": "A fixed example — $1,000 at 8% for 20 years — showing why compounding beats simple interest: the compound curve's advantage over the straight-line simple-interest curve grows every year, because compound interest earns interest on interest already earned.",
@@ -22252,7 +22253,8 @@
             "Each month: add the monthly contribution to the balance",
             "Repeat for every month until retirement age is reached"
           ],
-          "caption": "The month-by-month growth simulation this tool reuses from Compound Interest Calculator."
+          "caption": "The month-by-month growth simulation this tool reuses from Compound Interest Calculator.",
+          "loopLabel": "Repeats monthly"
         },
         "growth": {
           "intro": "A representative example — starting at age 30 with $20,000 saved, contributing $300/month at a 7% annual return until age 65.",
@@ -28441,6 +28443,629 @@
           {
             "question": "How is this different from the Stoichiometry Calculator?",
             "answer": "This tool computes the molar mass of a single formula in isolation, with a full per-element breakdown of where that mass comes from. The Stoichiometry Calculator uses molar mass computation as one internal step (via the same formula parser) while solving a larger problem — converting a known amount of one substance into an equivalent amount of a different substance in a balanced reaction."
+          }
+        ]
+      },
+      "json-formatter": {
+        "version": "v1",
+        "description": "Technical reference for the JSON Formatter: how JSON is validated, formatted, minified, and key-sorted, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Formatting Changes Size, Not Content",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Format: JSON.stringify(value, null, indent)  |  Minify: JSON.stringify(value)",
+          "note": "Both modes start from the same parsed JSON value — the only difference is whether the serializer is told to insert indentation and newlines (format) or to pack everything onto one line with no extra whitespace (minify)."
+        },
+        "flowchart": {
+          "intro": "Validation happens before anything else — the tool never attempts to format or minify text it can't first prove is syntactically valid JSON.",
+          "steps": [
+            "Scan the input for a JSON syntax error before attempting to parse it, capturing the exact line and column if one is found",
+            "If a syntax error was found, stop immediately and return it, along with the exact line and column",
+            "Otherwise, parse the validated JSON into a JavaScript value",
+            "If key-sorting was requested, recursively walk the value and alphabetize the keys of every object, leaving array order untouched",
+            "Serialize the value back to a string, either with the chosen indentation (format mode) or with no whitespace at all (minify mode)"
+          ],
+          "caption": "Validate first with exact error location, then parse once, optionally sort keys, then serialize in the chosen style."
+        },
+        "anatomy": {
+          "intro": "The same three-key JSON object takes a very different number of bytes depending on formatting choice — indentation and line breaks are pure whitespace, added purely for human readability.",
+          "labelMinified": "Minified",
+          "labelTwoSpace": "2-Space Indent",
+          "labelFourSpace": "4-Space Indent",
+          "caption": "For a three-key JSON object (name, age, active), minified is 37 bytes, 2-space formatted is 50 bytes, and 4-space formatted is 56 bytes — same data, different amounts of whitespace."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "JSON",
+            "meaning": "The raw JSON text to validate, format, or minify.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to pretty-print with indentation, or minify to a single compact line.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Indent",
+            "meaning": "Indentation style for format mode: 2 spaces, 4 spaces, or a tab character.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Sort Keys",
+            "meaning": "Whether to alphabetize object keys recursively before output.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Syntax errors are caught before parsing, with an exact position",
+            "description": "A dedicated validator scans for JSON syntax problems first and, if it finds one, returns immediately with a message plus the exact line and column — pinpointing exactly where to fix the input rather than a generic \"invalid JSON\" failure."
+          },
+          {
+            "title": "Minify mode ignores the indent setting",
+            "description": "In minify mode, the value is serialized with no indentation argument at all — whatever indent option (2-space, 4-space, or tab) is selected has no effect on minified output, since minifying removes all whitespace regardless."
+          },
+          {
+            "title": "Sorting keys never reorders array elements",
+            "description": "The key-sorting logic alphabetizes keys within each object it encounters but recurses into arrays element-by-element, preserving their original order — an array of objects gets each object's keys sorted independently while the array's own sequence stays exactly as entered."
+          },
+          {
+            "title": "Tab indentation is a distinct third option, not a width variant of spaces",
+            "description": "The indent setting accepts 2, 4, or \"tab\" as three separate choices — selecting tab substitutes an actual tab character for each indentation level, which then renders at whatever width the viewer's editor or browser has configured for tabs, rather than a fixed visual width."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool check for a syntax error before actually parsing the JSON?",
+            "answer": "A standard JSON.parse() failure typically reports only a generic error with, at best, an approximate character offset — not always a friendly line and column. Running a dedicated syntax scanner first lets the tool pinpoint precisely where the problem is, so you can jump straight to the exact line and column that needs fixing instead of hunting through the whole document."
+          },
+          {
+            "question": "Why does sorting keys not also sort array elements?",
+            "answer": "JSON object keys are unordered by the specification, so alphabetizing them doesn't change what the data means — reordering, say, the objects inside an array could change their meaning if that array represents an ordered list (like a sequence of steps or a sorted result set). Sorting only ever touches object keys, never array element order, to avoid silently altering data that depends on sequence."
+          },
+          {
+            "question": "What's the practical benefit of minifying JSON if it's harder to read?",
+            "answer": "Minified JSON is meant for machines, not people — stripping whitespace reduces the number of bytes that need to be transmitted or stored, which matters for things like API payloads sent over a network or JSON embedded in a compiled application bundle. The formatted version is for editing and reviewing; the minified version is for shipping."
+          },
+          {
+            "question": "Why offer both 2-space and 4-space indentation instead of just one standard?",
+            "answer": "Different style guides and teams have different conventions — 2-space indentation is common in JavaScript/web ecosystems, while 4-space is more common in some other language communities and personal preferences. Offering both (plus tabs) lets you match whatever convention your project or team already uses, rather than forcing a single house style."
+          }
+        ]
+      },
+      "base64-tool": {
+        "version": "v1",
+        "description": "Technical reference for the Base64 Encoder/Decoder: how text is converted to and from Base64 in standard and URL-safe variants, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Encoding Expands Size by a Fixed Ratio",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Encode: text → UTF-8 bytes → groups of 3 bytes → 4 Base64 characters  |  Decode: reverse the same mapping",
+          "note": "Base64 works in fixed groups of 3 input bytes at a time, re-encoding each group's 24 bits as 4 output characters drawn from a 64-symbol alphabet (6 bits per character) — text is first converted to UTF-8 bytes, since Base64 itself only knows how to encode raw bytes, not characters."
+        },
+        "flowchart": {
+          "intro": "Encoding and decoding are mirror-image processes, both built around the same 3-bytes-to-4-characters grouping.",
+          "steps": [
+            "To encode: convert the input text to UTF-8 bytes, one to four bytes per character depending on which Unicode range it falls in",
+            "Group the bytes three at a time, and map each group's 24 bits to four 6-bit values, looking each one up in the selected alphabet (standard or URL-safe)",
+            "For a final group with fewer than 3 bytes, pad the encoded output with \"=\" characters (standard variant only) to keep the output length a multiple of 4",
+            "To decode: validate the input length (standard variant requires a multiple of 4) and every character against the selected alphabet, then reverse the grouping to recover the original bytes",
+            "Interpret the recovered bytes as UTF-8 to reconstruct the original text, failing if the byte sequence isn't valid UTF-8"
+          ],
+          "caption": "The same 3-byte-to-4-character grouping runs forward to encode and backward to decode."
+        },
+        "anatomy": {
+          "intro": "Because 3 input bytes always become exactly 4 output characters, Base64-encoded text is reliably about a third larger than the original — a fixed ratio, not a rough estimate.",
+          "xLabel": "Input Bytes",
+          "yLabel": "Output Characters",
+          "caption": "3, 6, 9, or 12 input bytes always produce exactly 4, 8, 12, or 16 output characters — a straight line with slope 4/3."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "The text to encode, or the Base64 string to decode.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to encode text to Base64, or decode Base64 back to text.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Variant",
+            "meaning": "Which 64-character alphabet to use: standard (with + / and = padding) or URL-safe (with - _ and no padding).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Standard variant requires the input length to be a multiple of 4",
+            "description": "The padding-based standard variant is rejected outright if its total length (including any \"=\" padding) isn't divisible by 4, before any character-by-character decoding is attempted — a length that isn't a multiple of 4 can't be valid standard Base64."
+          },
+          {
+            "title": "URL-safe variant has no length requirement",
+            "description": "The URL-safe alphabet (- and _ instead of + and /) is designed to be used without trailing \"=\" padding, so the length-multiple-of-4 check that applies to the standard variant is skipped entirely for URL-safe input."
+          },
+          {
+            "title": "Decoding validates every character against the selected alphabet",
+            "description": "A single character that isn't in the chosen 64-character set (for example, a \"+\" appearing in input being decoded as URL-safe) causes the whole decode to fail immediately, rather than being silently skipped or substituted with something else."
+          },
+          {
+            "title": "Decoded bytes are validated as UTF-8 before being shown as text",
+            "description": "Even syntactically valid Base64 can decode to a byte sequence that isn't valid UTF-8 — for example, Base64 of arbitrary binary data rather than text — and the tool catches that case and reports an error rather than displaying corrupted or garbled text."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does Base64-encoded text always end up about 33% larger than the original?",
+            "answer": "Base64 represents each group of 3 input bytes (24 bits) as 4 output characters, each character carrying only 6 bits of information instead of the 8 bits a raw byte holds — 4 characters × 6 bits = 24 bits encoded using 4× the character count of 3 bytes, which works out to a 4/3 (about 33%) size increase, a mathematical consequence of the encoding scheme, not an inefficiency that could be tuned away."
+          },
+          {
+            "question": "What's the difference between the standard and URL-safe variants, and when should I use URL-safe?",
+            "answer": "Standard Base64 uses + and / in its alphabet and pads incomplete groups with \"=\" — both of which have special meaning inside a URL (+ can mean a space, / separates path segments, = introduces a query parameter), which can break a URL if Base64 text is embedded directly in one. URL-safe swaps in - and _ instead and omits padding, making it safe to use as part of a URL path or query string without additional escaping."
+          },
+          {
+            "question": "Why does the tool convert text to UTF-8 bytes before Base64-encoding, instead of encoding the text directly?",
+            "answer": "Base64 is fundamentally a way to represent arbitrary binary data (bytes) as printable text — it has no built-in concept of characters, Unicode, or text encoding. To Base64-encode a string of text, you first need to decide how that text maps to bytes; UTF-8 is the standard, near-universal choice, so the tool converts to UTF-8 bytes first and then Base64-encodes those bytes."
+          },
+          {
+            "question": "Why can decoding fail even when the Base64 input looks syntactically correct?",
+            "answer": "A string of valid Base64 characters at a valid length will always decode to *some* sequence of bytes — but those bytes aren't guaranteed to form valid UTF-8 text. If the original data that was encoded wasn't UTF-8 text to begin with (an image, a compressed file, or text in another encoding), decoding it back as UTF-8 will fail, since the byte pattern won't match any valid UTF-8 character sequence."
+          }
+        ]
+      },
+      "password-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Password Generator: how random character passwords and word-based passphrases are generated with cryptographically secure randomness, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Entropy Grows Linearly With Length",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Character mode entropy = length × log₂(character pool size)  |  Passphrase entropy = word count × log₂(word list size)",
+          "note": "Entropy measures how many random guesses, on average, it would take to find the password by brute force — it depends only on two things: how many possible values each randomly-chosen unit (character or word) could be, and how many units make up the password."
+        },
+        "flowchart": {
+          "intro": "Character-mode and passphrase-mode passwords are built by two different processes, but both draw every random choice from a cryptographically secure source.",
+          "steps": [
+            "In character mode: build the pool of allowed characters from the selected sets (uppercase, lowercase, numbers, symbols), optionally removing visually ambiguous characters like 0/O and 1/l/I",
+            "If the requested length allows it, guarantee one character from each selected set first, then fill the remaining length with random picks from the full pool, then shuffle the whole result",
+            "In passphrase mode: pick the requested number of random words (clamped to 3-10) from a fixed word list, optionally capitalizing each and optionally appending a random 2-digit number",
+            "Join the passphrase's words (and optional number) with the selected separator character",
+            "Compute entropy from the final result: length times log₂(pool size) for characters, or word count times log₂(word list size) for passphrases"
+          ],
+          "caption": "Two different generation processes for character passwords and passphrases, both ending in the same entropy calculation."
+        },
+        "anatomy": {
+          "intro": "For a fixed character pool, entropy increases by the same fixed amount with every additional character — a straight line, since each new character multiplies the number of possible passwords by the same factor.",
+          "xLabel": "Password Length",
+          "yLabel": "Entropy (bits)",
+          "caption": "With all four character types enabled (a 62-character pool, ambiguous characters not excluded), lengths of 8, 12, 16, and 20 produce roughly 47.6, 71.5, 95.3, and 119.1 bits of entropy — each added character contributes about 5.95 bits."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to generate a random-character password, or a word-based passphrase.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Length",
+            "meaning": "Number of characters, used in character mode.",
+            "unit": "Characters"
+          },
+          {
+            "symbol": "Character Sets",
+            "meaning": "Which character types to include: uppercase, lowercase, numbers, symbols. At least one must be selected.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Exclude Ambiguous",
+            "meaning": "Whether to remove visually similar characters (0/O, 1/l/I, |) from the pool.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Word Count",
+            "meaning": "Number of words, used in passphrase mode. Clamped to between 3 and 10.",
+            "unit": "Words"
+          },
+          {
+            "symbol": "Separator",
+            "meaning": "Character placed between passphrase words: hyphen, underscore, space, or none.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Capitalize Words",
+            "meaning": "Whether to capitalize the first letter of each passphrase word.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Append Number",
+            "meaning": "Whether to add a random 2-digit number to the end of the passphrase.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "No character set selected returns an explicit error",
+            "description": "If uppercase, lowercase, numbers, and symbols are all unchecked — or all become empty after excluding ambiguous characters — the tool fails with a \"no character set selected\" error rather than generating an empty or predictable password."
+          },
+          {
+            "title": "Character passwords guarantee at least one character from every selected set",
+            "description": "If the requested length is at least as large as the number of selected character sets, one character from each set is placed first, then the rest are filled randomly and the whole thing is shuffled — so a password with symbols enabled is guaranteed to actually contain a symbol, not just statistically likely to."
+          },
+          {
+            "title": "Word count for passphrases is silently clamped to 3-10",
+            "description": "An out-of-range requested word count is clamped rather than rejected, since fewer than 3 words gives very low entropy and more than 10 becomes impractical to type or remember reliably."
+          },
+          {
+            "title": "Random selection uses rejection sampling, not a plain modulo, to avoid bias",
+            "description": "Math.random() is never used for anything security-related; instead, cryptographically secure random 32-bit values are re-drawn whenever they'd fall in an incomplete final \"bucket\" of the pool size, ensuring every character or word is equally likely regardless of the pool's size."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool guarantee at least one character from each selected type instead of just picking randomly from the combined pool?",
+            "answer": "Picking purely randomly from a combined pool could, by chance, produce a password with no symbols at all even though symbols were requested — unlikely for a long password, but possible, and some services specifically require at least one character of each enabled type. Placing one guaranteed character from each set first (then shuffling) ensures every requested character type actually appears, without reducing the overall randomness of the result."
+          },
+          {
+            "question": "Why is passphrase word count limited to between 3 and 10 words?",
+            "answer": "Below 3 words, even with a large word list, the total entropy becomes too low to resist a determined guessing attack — 2 words from even a 5,000-word list is only about 24 bits, weaker than a short random password. Above 10 words, the passphrase becomes long and unwieldy to type or memorize reliably, defeating the main advantage passphrases have over character passwords: being easier for a human to actually use."
+          },
+          {
+            "question": "Why does the tool use Web Crypto's getRandomValues() instead of Math.random()?",
+            "answer": "Math.random() is a fast, general-purpose pseudo-random number generator not designed to be unpredictable to an attacker — in some JavaScript engines, its internal state can theoretically be inferred from enough output, which would let an attacker predict future \"random\" values. crypto.getRandomValues() is specifically designed to be cryptographically secure and unpredictable, which is essential for anything used to generate a password or other security credential."
+          },
+          {
+            "question": "Is the crack-time estimate this tool could show a real guarantee of how long a password would survive an attack?",
+            "answer": "No — it's an illustrative order-of-magnitude estimate based purely on entropy and an assumed guessing rate, not a guarantee. Real-world password security depends heavily on how the receiving service stores and hashes the password (a slow, salted hash like bcrypt makes guessing dramatically slower than a fast unsalted hash), which this tool has no way to know — treat any crack-time figure as a rough comparison between password choices, not a literal countdown."
+          }
+        ]
+      },
+      "barcode-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Barcode Generator: how UPC-A, EAN-13, and Code 128 barcodes are encoded, including their check-digit calculations, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Maximum Input Length by Symbology",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Symbologies",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "5 min"
+        },
+        "formula": {
+          "expression": "UPC-A check digit: weight 3,1,3,1,... over 11 digits  |  EAN-13 check digit: weight 1,3,1,3,... over 12 digits  |  Code 128 checksum: mod 103",
+          "note": "Each symbology's check digit or checksum is a weighted sum of the encoded values, reduced to a single verification digit — a receiving scanner recomputes the same weighted sum and rejects the read if it doesn't match, catching most scanning errors and typos."
+        },
+        "flowchart": {
+          "intro": "Which encoding logic runs depends on the selected symbology, but all three follow the same shape: validate the input, compute a check value, then map digits or characters to bar patterns.",
+          "steps": [
+            "Reject empty input immediately, before checking anything symbology-specific",
+            "For UPC-A: require exactly 11 digits, compute the 12th check digit using alternating weights of 3 and 1, then map each of the 12 digits to its bar pattern",
+            "For EAN-13: require exactly 12 digits, compute the 13th check digit using alternating weights of 1 and 3, use the resulting first digit to choose which of two left-side encoding tables each of the next six digits uses, then map the right six digits with the third table",
+            "For Code 128: require the text to be 48 characters or fewer and made up of standard printable ASCII, then compute a checksum (a weighted sum of character values, modulo 103) and map the start code, each character, the checksum, and the stop code to bar patterns",
+            "Convert the resulting binary bar/space pattern into a compact run-length-encoded list of bar widths for rendering"
+          ],
+          "caption": "Validate input length and characters for the chosen symbology, compute its check value, then encode digits or characters into bar-pattern segments."
+        },
+        "anatomy": {
+          "intro": "The three symbologies accept very different amounts of input data — the two fixed-digit-count barcodes are strict about length, while Code 128 is flexible but still capped.",
+          "labelUpcA": "UPC-A",
+          "labelEan13": "EAN-13",
+          "labelCode128": "Code 128",
+          "caption": "UPC-A accepts exactly 11 digits, EAN-13 exactly 12, and Code 128 up to 48 printable characters — the check digit or checksum is computed on top of, not counted within, these limits."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Symbology",
+            "meaning": "Which barcode standard to generate: UPC-A, EAN-13, or Code 128.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Value",
+            "meaning": "The digits (for UPC-A/EAN-13) or text (for Code 128) to encode.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "UPC-A and EAN-13 require an exact digit count, not \"up to\"",
+            "description": "UPC-A needs exactly 11 digits (the 12th check digit is computed, not entered) and EAN-13 needs exactly 12, each returning a distinct \"invalid length\" error naming which symbology's requirement wasn't met."
+          },
+          {
+            "title": "The check digit is always computed, never accepted as input",
+            "description": "Even if you type a number that already includes what looks like a check digit, the tool strips digits down to the required count and calculates its own check digit using the symbology's fixed weighting pattern, rather than trusting a user-supplied check digit that might be wrong."
+          },
+          {
+            "title": "EAN-13's left-side encoding depends on the first digit, UPC-A's doesn't",
+            "description": "EAN-13 uses the barcode's very first digit to choose an L/G parity pattern that encodes an extra digit's worth of information into which of two encoding tables each of the next six digits uses — a mechanism UPC-A, which has one fewer digit overall, doesn't need."
+          },
+          {
+            "title": "Code 128 accepts any standard printable character, but only up to 48 of them",
+            "description": "Unlike the fixed-digit-count UPC-A and EAN-13, Code 128 accepts a variable-length string of standard printable ASCII characters (space through tilde), capped at 48 to keep the resulting barcode a practical width to print and scan."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do UPC-A and EAN-13 both need a check digit, but Code 128 needs a checksum instead?",
+            "answer": "All three serve the same purpose — letting a scanner detect a misread — but UPC-A and EAN-13 are fixed-length numeric formats where a single extra digit, computed with a simple weighted sum, is enough to catch the vast majority of single-digit errors. Code 128 encodes arbitrary text of variable length, so it uses a checksum computed across every character's value (not just digits), which is the more general approach needed for a non-numeric, variable-length symbology."
+          },
+          {
+            "question": "Why does UPC-A need 11 digits but EAN-13 needs 12, if EAN-13 is meant to be a superset?",
+            "answer": "EAN-13 is often described as a superset of UPC-A because a UPC-A barcode can be read as an EAN-13 barcode with a leading zero — but as implemented here, each format computes its own dedicated check digit from its own number of data digits (11 for UPC-A, 12 for EAN-13), reflecting that UPC-A's 12-digit final code and EAN-13's 13-digit final code are each one digit longer than their respective data-digit requirement."
+          },
+          {
+            "question": "What happens if I type more digits than a symbology allows?",
+            "answer": "The tool strips any non-digit characters first, then checks whether the resulting digit count matches exactly what the symbology requires — too many or too few digits after that cleanup returns an \"invalid length\" error rather than silently truncating or padding your input, since guessing which digits to drop or add could produce a barcode that doesn't represent what you intended."
+          },
+          {
+            "question": "Are these barcodes suitable for actual retail or commercial use?",
+            "answer": "The generator implements the standard encoding rules and produces symbology-correct output for educational and design purposes, but real commercial UPC-A and EAN-13 barcodes require officially registered manufacturer and product codes (issued by GS1 or a similar body) to be globally unique and scannable at retail — a correctly-encoded but unregistered number will scan technically fine but won't correspond to an actual product in any commercial database."
+          }
+        ]
+      },
+      "color-palette-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Color Palette Generator: how color-wheel harmony rules generate a palette from a single base color, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Triadic Colors Sit 120° Apart on the Hue Wheel",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Harmony Types",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Hue-shift harmonies: new hue = (base hue + offset) mod 360°  |  Monochromatic: fixed hue, varying lightness [20%, 35%, 50%, 65%, 80%]",
+          "note": "Five of the six harmony types generate new colors purely by rotating the base color's hue around the color wheel by fixed degree offsets, keeping saturation and lightness unchanged; the sixth, monochromatic, instead keeps hue fixed and steps through a range of lightness values."
+        },
+        "flowchart": {
+          "intro": "Every harmony works in HSL (hue, saturation, lightness) space, since rotating a hue is a simple addition in that model but a much messier operation in RGB.",
+          "steps": [
+            "Parse the base hex color into RGB, then convert RGB to HSL to get a hue, saturation, and lightness value",
+            "Look up the selected harmony type's set of fixed hue offsets — for example, complementary uses [0°, 180°], triadic uses [0°, 120°, 240°]",
+            "For each offset, add it to the base hue and wrap the result modulo 360° to stay within a valid hue range, keeping saturation and lightness unchanged",
+            "For monochromatic specifically, skip hue rotation entirely and instead generate five colors at the same hue and saturation but five different fixed lightness levels",
+            "Convert each resulting HSL color back to RGB, then to a hex code, producing the final palette"
+          ],
+          "caption": "Convert to HSL once, then either rotate hue by fixed offsets or step through fixed lightness levels, then convert each result back to hex."
+        },
+        "anatomy": {
+          "intro": "Triadic harmony picks three colors spaced exactly 120° apart around the 360° hue wheel — evenly dividing the circle into thirds for maximum visual contrast between all three colors.",
+          "labelBase": "Base (0°)",
+          "labelSecond": "120°",
+          "labelThird": "240°",
+          "caption": "Starting from the base color's hue, triadic harmony adds two more colors at +120° and +240°, splitting the 360° wheel into three equal 120° arcs."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Base Color",
+            "meaning": "The starting color, entered as a 6-digit hex code (with or without a leading #).",
+            "unit": "Hex"
+          },
+          {
+            "symbol": "Harmony Type",
+            "meaning": "Which color-wheel rule to apply: complementary, analogous, triadic, split-complementary, tetradic, or monochromatic.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An invalid hex input returns an empty palette, not an error object",
+            "description": "Unlike some tools that return a typed error, an unparseable hex color (not exactly 6 hex digits, with or without a leading #) simply produces an empty array of colors, since there's no valid base color to build a harmony from."
+          },
+          {
+            "title": "Monochromatic is the only harmony that doesn't shift hue",
+            "description": "All five other harmony types compute new colors by rotating the base color's hue by fixed degree offsets while keeping saturation and lightness constant; monochromatic instead keeps hue and saturation fixed and steps through five preset lightness values, since by definition it stays within one hue."
+          },
+          {
+            "title": "Hue offsets wrap around the 360° color wheel",
+            "description": "Adding an offset to the base hue and taking the result modulo 360° (handling negative results correctly) means an offset like analogous's -30° correctly wraps to 330° rather than producing a negative, invalid hue value."
+          },
+          {
+            "title": "The random-color button doesn't use the same secure randomness as the harmony math",
+            "description": "The random base-color generator uses standard Math.random() for its three RGB channels, which is appropriate here since palette colors have no security requirement — unlike this category's Password Generator, which deliberately avoids Math.random() for that reason."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool work in HSL instead of directly manipulating RGB values?",
+            "answer": "In HSL (hue, saturation, lightness), rotating a color around the color wheel is a single addition to the hue value — simple and predictable. The equivalent operation in RGB would require a much more complex calculation, since a hue rotation changes the red, green, and blue channels by different, hue-dependent amounts. Converting to HSL first, doing the rotation there, and converting back makes the harmony math straightforward."
+          },
+          {
+            "question": "What's the difference between complementary and split-complementary harmony?",
+            "answer": "Complementary uses just two colors: the base and the color directly opposite it on the wheel, 180° away — a high-contrast, two-color pairing. Split-complementary instead uses three colors: the base plus the two colors adjacent to its complement (at 150° and 210°, straddling the 180° point) — offering similar strong contrast to complementary but with an extra color and slightly less visual tension than the direct opposite."
+          },
+          {
+            "question": "Why does monochromatic use fixed lightness values like 20%, 35%, 50%, 65%, 80% instead of some other spacing?",
+            "answer": "These five values are evenly spread across most of the practical lightness range (20% to 80%), avoiding the extremes near 0% (nearly black) and 100% (nearly white) where a color's hue becomes hard to perceive — giving a monochromatic palette that spans from a noticeably dark shade to a noticeably light one while every step still clearly shows the same underlying hue."
+          },
+          {
+            "question": "Can I generate the exact same palette twice from the same base color?",
+            "answer": "Yes — unlike the random-color button (which intentionally picks a new color each time), the harmony generation itself is entirely deterministic: the same base hex color and the same harmony type will always produce the identical set of output colors, since it's a fixed mathematical transformation with no randomness involved."
+          }
+        ]
+      },
+      "qr-code-generator": {
+        "version": "v1",
+        "description": "Technical reference for the QR Code Generator: how different content types (URLs, Wi-Fi, contacts, email, SMS) are built into a QR payload, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "More Error Correction Trades Away Data Capacity",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Content Types",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Payload = content-type-specific string (plain text, WIFI:..., BEGIN:VCARD..., mailto:..., or SMSTO:...)  |  Symbol = QR encoding of the payload at the chosen error-correction level",
+          "note": "Every content type is first reduced to a single plain-text payload string using a standard mini-format (or none at all, for a URL or plain text), and only that resulting string is handed to the QR encoding engine — the tool's own job is entirely about correctly building that string."
+        },
+        "flowchart": {
+          "intro": "Which payload format gets built depends on the selected content type; the actual QR symbol generation afterward is identical regardless of content type.",
+          "steps": [
+            "Read which of the six content types is selected: URL, plain text, Wi-Fi network, contact card, email, or SMS",
+            "Build the payload string in that type's standard format — for example, a Wi-Fi network becomes \"WIFI:T:<encryption>;S:<network name>;P:<password>;H:<hidden>;;\", with special characters escaped",
+            "Reject the request if the resulting payload is empty or exceeds 2,000 characters",
+            "Pass the payload to the QR encoding library along with the selected error-correction level and foreground/background colors",
+            "Receive back an SVG image representing the QR symbol, along with the exact payload string that was encoded"
+          ],
+          "caption": "Build a content-type-specific payload string first, validate it, then hand it off to standard QR symbol encoding."
+        },
+        "anatomy": {
+          "intro": "QR codes can rebuild a fraction of their data from damage or obstruction, at four selectable strength levels — but that recovery ability isn't free, since the redundant data it relies on takes up room that could otherwise hold more content.",
+          "labelL": "Level L",
+          "labelM": "Level M",
+          "labelQ": "Level Q",
+          "labelH": "Level H",
+          "caption": "The four standard QR error-correction levels can recover roughly 7% (L), 15% (M), 25% (Q), or 30% (H) of damaged data — higher recovery capacity leaves less room in the same symbol for your actual content."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Content Type",
+            "meaning": "What kind of payload to build: URL, text, Wi-Fi, contact, email, or SMS.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Content Fields",
+            "meaning": "The specific fields for the selected type — for example, network name and password for Wi-Fi, or name and phone for a contact.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Error Correction Level",
+            "meaning": "How much redundant data to include for damage recovery: L, M, Q, or H. Defaults to M.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Dark Color",
+            "meaning": "The foreground (dark module) color of the QR code, as a hex value.",
+            "unit": "Hex"
+          },
+          {
+            "symbol": "Light Color",
+            "meaning": "The background (light module) color of the QR code, as a hex value.",
+            "unit": "Hex"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Special characters in Wi-Fi and contact fields are automatically escaped",
+            "description": "The WIFI: and vCard mini-languages use backslash, semicolon, comma, and colon as structural delimiters, so any of those characters typed into a network name or password are escaped with a backslash first, preventing them from being misread as field separators by a scanning app."
+          },
+          {
+            "title": "The payload length limit applies to the fully built string, not the raw field input",
+            "description": "The 2,000-character cap is checked against the complete constructed payload — including prefixes like \"WIFI:T:...;\" or \"BEGIN:VCARD...\" — not just what was typed into individual fields, since the QR symbol has to encode the whole finished string."
+          },
+          {
+            "title": "Email and SMS use different encoding schemes for their extra fields",
+            "description": "The email content type properly URL-encodes the subject and body into a mailto: query string (matching standard mailto: link syntax), while SMS simply concatenates the phone number and message with colons in the SMSTO: format, since that scheme doesn't use query-string encoding."
+          },
+          {
+            "title": "An empty or all-whitespace payload is rejected before attempting to generate anything",
+            "description": "Regardless of content type, if the constructed payload trims down to nothing — for example, a \"text\" type with only spaces entered — the tool returns a \"no content to encode\" error rather than generating a QR code that encodes nothing meaningful."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool build a special string format for Wi-Fi and contact codes instead of just encoding plain text?",
+            "answer": "Scanning apps recognize specific standard prefixes and mini-languages to trigger special behavior — a WIFI: prefixed payload prompts the phone to offer joining that network directly, and a BEGIN:VCARD payload prompts an option to save it as a contact, rather than just displaying the raw text. Building the payload in these recognized formats is what makes the QR code actually do something useful when scanned, instead of just showing text."
+          },
+          {
+            "question": "What does the error correction level actually protect against?",
+            "answer": "It protects against a QR code being partially damaged, dirty, or obscured — a logo printed in the middle of the code, a torn corner, or a smudge — by encoding the data with extra redundant information that lets a scanner reconstruct the missing or corrupted parts, similar in principle to how a RAID array or an audio CD can tolerate some data loss. The tradeoff is that higher error-correction levels leave less room in the same-sized QR symbol for your actual content."
+          },
+          {
+            "question": "Why is there a 2,000-character limit on the payload?",
+            "answer": "This is a practical ceiling set well below the QR standard's theoretical maximum capacity (which varies with error-correction level and can reach a few thousand alphanumeric characters) — very long payloads produce extremely dense QR codes that become difficult for real-world cameras to scan reliably, especially at typical print or screen sizes, so the limit steers you toward payloads that will actually scan well in practice."
+          },
+          {
+            "question": "Why do the email and SMS content types produce a mailto: or SMSTO: link instead of just the raw contact details?",
+            "answer": "mailto: and SMSTO: are recognized URI schemes that phones and computers already know how to handle — scanning a mailto: QR code opens the device's default email app with the address, subject, and body pre-filled, and SMSTO: does the same for a text messaging app. This makes the QR code immediately actionable on scan, rather than just displaying an email address or phone number as plain text that would need to be manually copied."
           }
         ]
       }

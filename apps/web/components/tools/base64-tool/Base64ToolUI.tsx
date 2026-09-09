@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import Base64InputPanel from "./Base64InputPanel";
 import Base64Result from "./Base64Result";
 import Base64FilePanel from "./Base64FilePanel";
@@ -66,6 +67,7 @@ export default function Base64ToolUI({ education }: { education: ReactNode }) {
           sidebar={<RelatedToolsSidebar currentSlug="base64-tool" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="base64-tool" />
               <SectionNav items={navItems} />
               <Base64FilePanel />
             </div>
