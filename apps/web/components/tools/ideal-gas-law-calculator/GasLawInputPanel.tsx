@@ -17,6 +17,8 @@ type GasLawInputPanelProps = {
   onMolesChange: (value: string) => void;
   temperatureKelvin: string;
   onTemperatureKelvinChange: (value: string) => void;
+  scenarioKeys: string[];
+  onScenarioPreset: (key: string) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
@@ -31,13 +33,32 @@ export default function GasLawInputPanel({
   onMolesChange,
   temperatureKelvin,
   onTemperatureKelvinChange,
+  scenarioKeys,
+  onScenarioPreset,
   onCalculate,
   onClear,
 }: GasLawInputPanelProps) {
   const t = useTranslations("tools.ideal-gas-law-calculator.form");
+  const tScenarios = useTranslations("tools.ideal-gas-law-calculator.form.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {scenarioKeys.map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onScenarioPreset(key)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+            >
+              {tScenarios(key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <GasVariablesDiagram
         solved={solveFor}
         labels={{ pressure: "P", volume: "V", moles: "n", temperature: "T" }}

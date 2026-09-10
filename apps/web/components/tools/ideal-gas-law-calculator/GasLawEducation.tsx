@@ -9,6 +9,7 @@ import GasPVCurveDiagram from "./GasPVCurveDiagram";
 import GasStpReferenceDiagram from "./GasStpReferenceDiagram";
 import GasPressureGaugeDiagram from "./GasPressureGaugeDiagram";
 import GasVariablesDiagram from "./GasVariablesDiagram";
+import GasPressureLevelGauge from "./GasPressureLevelGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function GasLawEducation() {
 
   return (
     <EncyclopediaPaper>
+      <GasPressureLevelGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <div className="flex justify-center">

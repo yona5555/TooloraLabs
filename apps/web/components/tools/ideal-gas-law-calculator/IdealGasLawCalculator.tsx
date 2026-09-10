@@ -23,9 +23,18 @@ const RELATED_TOOLS = ["molarity-calculator", "density-calculator", "molar-mass-
 
 const DEFAULTS = { pressureAtm: "1", volumeLiters: "22.414", moles: "1", temperatureKelvin: "273.15" };
 
-const EMPTY_RESULT: IdealGasLawCalculatorOutput = { error: null, pressureAtm: 0, volumeLiters: 0, moles: 0, temperatureKelvin: 0 };
-
 type Inputs = typeof DEFAULTS;
+
+// Real everyday and industrial scenarios, each approximately consistent
+// with PV = nRT (R = 0.0821 L*atm/(mol*K)).
+const SCENARIOS: Record<string, Inputs> = {
+  carTireInflated: { pressureAtm: "2.2", volumeLiters: "22", moles: "2", temperatureKelvin: "293" },
+  heliumBalloon: { pressureAtm: "1", volumeLiters: "5", moles: "0.2", temperatureKelvin: "298" },
+  scubaTank: { pressureAtm: "200", volumeLiters: "12", moles: "98", temperatureKelvin: "293" },
+  weatherBalloonHighAltitude: { pressureAtm: "0.05", volumeLiters: "1000", moles: "2.8", temperatureKelvin: "220" },
+};
+
+const EMPTY_RESULT: IdealGasLawCalculatorOutput = { error: null, pressureAtm: 0, volumeLiters: 0, moles: 0, temperatureKelvin: 0 };
 
 function computeResult(solveFor: GasLawSolveFor, i: Inputs): IdealGasLawCalculatorOutput {
   const output = tool.execute(
@@ -108,6 +117,18 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS[key];
+    if (!preset) return;
+    setPressureAtm(preset.pressureAtm);
+    setVolumeLiters(preset.volumeLiters);
+    setMoles(preset.moles);
+    setTemperatureKelvin(preset.temperatureKelvin);
+    setResult(computeResult(solveFor, preset));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(preset.pressureAtm, preset.volumeLiters, preset.moles, preset.temperatureKelvin));
+  }
+
   function handleClear() {
     setPressureAtm(DEFAULTS.pressureAtm);
     setVolumeLiters(DEFAULTS.volumeLiters);
@@ -141,6 +162,8 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
                 onMolesChange={setMoles}
                 temperatureKelvin={temperatureKelvin}
                 onTemperatureKelvinChange={setTemperatureKelvin}
+                scenarioKeys={Object.keys(SCENARIOS)}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
