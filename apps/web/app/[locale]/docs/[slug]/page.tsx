@@ -79,6 +79,11 @@ import CsvJsonConverterDocsPage, { getCsvJsonConverterTocItems } from "@/compone
 import FileSizeConverterDocsPage, { getFileSizeConverterTocItems } from "@/components/docs/file-size-converter/FileSizeConverterDocsPage";
 import FileNameSanitizerDocsPage, { getFileNameSanitizerTocItems } from "@/components/docs/file-name-sanitizer/FileNameSanitizerDocsPage";
 import DuplicateLineRemoverDocsPage, { getDuplicateLineRemoverTocItems } from "@/components/docs/duplicate-line-remover/DuplicateLineRemoverDocsPage";
+import AgeCalculatorDocsPage, { getAgeCalculatorTocItems } from "@/components/docs/age-calculator/AgeCalculatorDocsPage";
+import DateCalculatorDocsPage, { getDateCalculatorTocItems } from "@/components/docs/date-calculator/DateCalculatorDocsPage";
+import TimeCalculatorDocsPage, { getTimeCalculatorTocItems } from "@/components/docs/time-calculator/TimeCalculatorDocsPage";
+import WorldTimeConverterDocsPage, { getWorldTimeConverterTocItems } from "@/components/docs/world-time-converter/WorldTimeConverterDocsPage";
+import CountdownToEventCalculatorDocsPage, { getCountdownToEventCalculatorTocItems } from "@/components/docs/countdown-to-event-calculator/CountdownToEventCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -420,6 +425,26 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "duplicate-line-remover":
       content = <DuplicateLineRemoverDocsPage />;
       tocItems = await getDuplicateLineRemoverTocItems();
+      break;
+    case "age-calculator":
+      content = <AgeCalculatorDocsPage />;
+      tocItems = await getAgeCalculatorTocItems();
+      break;
+    case "date-calculator":
+      content = <DateCalculatorDocsPage />;
+      tocItems = await getDateCalculatorTocItems();
+      break;
+    case "time-calculator":
+      content = <TimeCalculatorDocsPage />;
+      tocItems = await getTimeCalculatorTocItems();
+      break;
+    case "world-time-converter":
+      content = <WorldTimeConverterDocsPage />;
+      tocItems = await getWorldTimeConverterTocItems();
+      break;
+    case "countdown-to-event-calculator":
+      content = <CountdownToEventCalculatorDocsPage />;
+      tocItems = await getCountdownToEventCalculatorTocItems();
       break;
   }
 

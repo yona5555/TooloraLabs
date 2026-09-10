@@ -79,6 +79,11 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "file-size-converter",
   "file-name-sanitizer",
   "duplicate-line-remover",
+  "age-calculator",
+  "date-calculator",
+  "time-calculator",
+  "world-time-converter",
+  "countdown-to-event-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

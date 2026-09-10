@@ -6,6 +6,7 @@ import { TimeCalculator as TimeTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TimeInputPanel from "./TimeInputPanel";
 import TimeResult from "./TimeResult";
 import TimeQuickReference from "./TimeQuickReference";
@@ -62,6 +63,7 @@ export default function TimeCalculator({ education }: { education: ReactNode }) 
           sidebar={<RelatedToolsSidebar currentSlug="time-calculator" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="time-calculator" />
               <SectionNav items={navItems} />
               <TimeQuickReference />
             </div>

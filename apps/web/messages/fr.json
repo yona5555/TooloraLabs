@@ -29733,6 +29733,516 @@
             "answer": "Avec une correspondance sensible à la casse (le paramètre par défaut), \"Apple\" et \"apple\" sont traités comme deux lignes distinctes et survivent tous deux à la déduplication ; avec la correspondance insensible à la casse activée, ils sont traités comme la même ligne et un seul survit — quelle casse spécifique survit dépend alors du paramètre de conservation première-ou-dernière."
           }
         ]
+      },
+      "age-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice d'âge : comment un âge tenant compte du calendrier, la progression annuelle, les signes du zodiaque, la génération et l'âge hégirien sont calculés à partir d'une date de naissance, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Lire le pourcentage de progression annuelle",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Calendriers",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Âge = dateRéférence − dateNaissance → années, mois, jours (tenant compte du calendrier) | progressionAnnée% = (dateRéférence − dernierAnniversaire) ÷ (prochainAnniversaire − dernierAnniversaire) × 100",
+          "note": "La décomposition en années/mois/jours reporte exactement comme le font les vrais anniversaires — par exemple, 11 mois 30 jours deviennent 1 an, 0 mois, 0 jour, pas deux grands nombres séparés. Toute autre durée (jours totaux, semaines, heures, minutes, secondes) est une différence plate entre les deux dates, non affectée par le report du calendrier."
+        },
+        "flowchart": {
+          "intro": "Chaque chiffre affiché est dérivé de seulement deux dates du calendrier — la date de naissance et la date de référence (aujourd'hui, sauf si une date personnalisée est fournie).",
+          "steps": [
+            "Analyser la date de naissance et la date de référence comme des dates de calendrier locales, sans composante de fuseau horaire ni d'heure de la journée à prendre en compte",
+            "Calculer la durée tenant compte du calendrier entre elles — années, mois et jours qui reportent exactement comme le font les anniversaires, de sorte que 11 mois 30 jours deviennent 1 an, pas deux grands nombres séparés",
+            "Trouver le prochain anniversaire en plaçant le mois et le jour de naissance de cette année sur l'année de référence, puis en le faisant avancer d'un an si cette date est déjà passée ; les jours restants sont l'écart en jours calendaires jusqu'à celui-ci",
+            "Localiser l'anniversaire le plus récent de la même manière, puis exprimer à quel point la date de référence se situe entre ce dernier anniversaire et le prochain sous forme de pourcentage — la progression annuelle",
+            "Dériver séparément le signe du zodiaque et l'année du zodiaque chinois à partir de la date de naissance, rechercher la génération nommée pour l'année de naissance, et convertir les deux dates au calendrier hégirien pour calculer un âge selon le calendrier hégirien"
+          ],
+          "caption": "Deux dates entrent, une durée tenant compte du calendrier plus un ensemble de faits dérivés sortent — le zodiaque, la génération et l'âge hégirien se ramifient tous à partir des deux mêmes dates de départ."
+        },
+        "anatomy": {
+          "intro": "Le pourcentage de progression annuelle mesure à quel point la date de référence a parcouru l'année de naissance actuelle — l'intervalle entre l'anniversaire le plus récent et le prochain.",
+          "labelSince": "Depuis le dernier anniversaire",
+          "labelUntil": "Jusqu'au prochain anniversaire",
+          "totalLabel": "Année de naissance de 365 jours",
+          "caption": "270 jours depuis le dernier anniversaire sur un intervalle de 365 jours équivaut à 74 % de progression annuelle — exactement ce que rapporte yearProgressPercent pour cet exemple."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "dateNaissance",
+            "meaning": "La date de naissance, au format AAAA-MM-JJ.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "dateRéférence",
+            "meaning": "La date à laquelle calculer l'âge. Par défaut aujourd'hui si omise.",
+            "unit": "Date"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Une date de référence exactement le jour de l'anniversaire réinitialise la progression annuelle à 0 %, pas 100 %",
+            "description": "Lorsque la date de référence tombe exactement le jour d'un anniversaire, daysUntilBirthday est 0, et le code traite ce cas spécialement en fixant yearProgressPercent à 0 % plutôt que de diviser par un intervalle de longueur nulle — un tour complet de l'année de naissance vient de se terminer, le suivant recommence donc à neuf."
+          },
+          {
+            "title": "Le zodiaque chinois n'est qu'une approximation basée sur l'année grégorienne seule",
+            "description": "Il est dérivé purement de l'année de naissance, pas de la date réelle du Nouvel An lunaire, qui tombe un jour grégorien différent chaque année (entre le 21 janvier et le 20 février) — quelqu'un né dans cette fenêtre peut techniquement appartenir à l'année animale précédente, ce que cette approximation ne peut pas détecter."
+          },
+          {
+            "title": "Les limites de génération mélangent deux sources à une seule jointure",
+            "description": "Tout jusqu'à la génération Z (se terminant en 2012) suit les limites publiées par Pew Research ; la génération Alpha et Beta prennent le relais à partir de là en utilisant la nomenclature de McCrindle Research, dont la propre année de début pour Alpha (2010) chevaucherait sinon la génération Z de Pew — l'écart d'environ 3 ans est résolu en faisant commencer Alpha au point final de Pew plutôt qu'en le devinant."
+          },
+          {
+            "title": "decimalAge utilise une année fixe de 365,25 jours, pas un comptage exact des années bissextiles",
+            "description": "L'âge décimal divise le temps total écoulé par 365,25 jours plutôt que de compter la longueur réelle de chaque année spécifique (365 ou 366 jours) — une simplification délibérée qui ne décale le résultat que de quelques millièmes, pas un bug."
+          },
+          {
+            "title": "L'âge hégirien est calculé indépendamment, pas dérivé de l'âge grégorien",
+            "description": "La date de naissance et la date de référence sont chacune converties séparément au calendrier hégirien, et l'âge hégirien provient de la différence entre ces deux dates hégiriennes — pas de la conversion de l'écart grégorien année/mois/jour — de sorte que les deux âges peuvent réellement diverger près d'une limite d'année hégirienne ou grégorienne."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le pourcentage de progression annuelle affiche-t-il 0 % au lieu de 100 % le jour exact d'un anniversaire ?",
+            "answer": "Le jour exact d'un anniversaire, les jours restants jusqu'au 'prochain' anniversaire sont zéro, ce qui ferait que le calcul de progression annuelle divise par un intervalle de longueur nulle. Le code traite ce cas spécialement en le fixant plutôt à 0 %, traitant l'anniversaire lui-même comme le début d'une toute nouvelle année plutôt que la fin de l'ancienne — la lecture la plus intuitive du 'jour zéro' d'une nouvelle année de naissance."
+          },
+          {
+            "question": "Comment exactement la date du 'prochain anniversaire' est-elle déterminée ?",
+            "answer": "Le mois et le jour de naissance sont placés sur l'année de la date de référence pour construire une date candidate. Si ce candidat tombait déjà avant la date de référence (l'anniversaire a déjà eu lieu cette année), il est avancé d'exactement un an. Le chiffre des jours restants est alors simplement l'écart en jours calendaires entre la date de référence et ce candidat."
+          },
+          {
+            "question": "Pourquoi decimalAge utilise-t-il une année fixe de 365,25 jours au lieu de compter exactement les années bissextiles ?",
+            "answer": "365,25 est la longueur moyenne d'une année grégorienne sur le cycle bissextile de 4 ans, et l'utiliser comme diviseur constant garde le calcul simple et cohérent, quelles que soient exactement les années vécues par quelqu'un. L'âge décimal résultant diffère d'un calcul exact tenant compte des années bissextiles d'au plus quelques millièmes — bien en dessous de ce qui est visible dans un affichage arrondi."
+          },
+          {
+            "question": "Pourquoi mon âge hégirien pourrait-il être différent de ce à quoi je m'attendrais en convertissant simplement mon âge grégorien ?",
+            "answer": "L'âge hégirien n'est pas dérivé en convertissant l'âge grégorien — il est calculé à partir de zéro en convertissant la date de naissance et la date de référence chacune en leurs propres dates du calendrier hégirien, puis en trouvant directement la différence entre ces deux dates hégiriennes. Comme la longueur de l'année du calendrier hégirien diffère de celle du grégorien, quelqu'un peut être, disons, une année hégirienne complète plus avancé que ce que suggérerait une simple conversion d'année grégorienne en hégirienne, surtout près de la limite d'année de l'un ou l'autre calendrier."
+          },
+          {
+            "question": "Pourquoi le signe du zodiaque chinois n'est-il qu'une approximation ?",
+            "answer": "La vraie année du zodiaque chinois change au Nouvel An lunaire, qui tombe une date grégorienne différente chaque année — quelque part entre le 21 janvier et le 20 février. Cette calculatrice dérive l'animal du zodiaque purement à partir de l'année grégorienne de naissance, de sorte que quelqu'un né dans cette fenêtre de début d'année avant le véritable Nouvel An lunaire peut techniquement appartenir à l'animal de l'année précédente, ce que cette approximation plus simple basée sur l'année n'a aucun moyen de détecter."
+          }
+        ]
+      },
+      "date-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de dates : comment l'écart entre deux dates est mesuré et comment une durée est ajoutée à ou soustraite d'une date, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Jours totaux répartis en semaines et un reste",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Mode différence : joursTotaux = |dateFin − dateDébut| (jours calendaires) → années, mois, jours | Mode addition/soustraction : dateRésultat = dateDébut ± quantité(unité)",
+          "note": "En mode différence, si la date de fin tombe avant la date de début, les deux sont échangées avant le calcul afin que joursTotaux soit toujours non négatif — un indicateur distinct signale si l'ordre original a été inversé. En mode addition/soustraction, ajouter des semaines convertit d'abord la quantité en jours (× 7) ; ajouter des mois ou des années utilise une arithmétique tenant compte du calendrier qui peut décaler le jour du mois aux limites de fin de mois."
+        },
+        "flowchart": {
+          "intro": "L'outil exécute l'un de deux calculs indépendants selon le mode sélectionné — trouver l'écart entre deux dates, ou décaler une seule date vers l'avant ou l'arrière.",
+          "steps": [
+            "Analyser la date de début (et, en mode différence, la date de fin) comme des dates de calendrier locales sans composante de fuseau horaire",
+            "En mode différence : si la date de fin tombe avant la date de début, échanger les deux en interne et se souvenir qu'elles ont été inversées, afin que le total rapporté soit toujours un intervalle positif",
+            "Calculer l'écart total en jours calendaires entre les deux dates, puis calculer séparément la décomposition en années/mois/jours tenant compte du calendrier, qui reporte exactement comme le font les vraies dates",
+            "En mode addition/soustraction plutôt : convertir l'unité choisie et la quantité signée (négative pour soustraire) en une seule étape d'arithmétique de date — les semaines deviennent des jours multipliés par 7, tandis que les mois et années utilisent une addition tenant compte du calendrier",
+            "Appliquer cette étape à la date de début pour produire la date résultat, ce qui peut décaler le jour du mois lorsque le mois cible est plus court que le mois de début"
+          ],
+          "caption": "Le mode différence mesure l'écart entre deux dates connues ; le mode addition/soustraction projette une nouvelle date à partir d'une date connue et d'une durée."
+        },
+        "anatomy": {
+          "intro": "Le décompte des jours totaux du mode différence peut être réparti en semaines complètes plus un reste, exactement comme totalWeeks = Math.floor(totalDays / 7) le calcule.",
+          "labelWeeks": "Semaines complètes (7 jours chacune)",
+          "labelRemainder": "Jours restants",
+          "totalLabel": "100 jours au total",
+          "caption": "100 jours totaux entre deux dates se répartissent en 14 semaines complètes (98 jours) plus un reste de 2 jours — exactement ce que représentent totalWeeks et le reste au niveau des jours."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "mode",
+            "meaning": "S'il faut calculer la différence entre deux dates, ou ajouter/soustraire une durée à une date.",
+            "unit": "—"
+          },
+          {
+            "symbol": "dateDébut",
+            "meaning": "La date de début, au format AAAA-MM-JJ. Utilisée dans les deux modes.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "dateFin",
+            "meaning": "La seconde date à comparer. Utilisée uniquement en mode différence.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "quantité",
+            "meaning": "Combien d'unités ajouter ou soustraire. Utilisée uniquement en mode addition/soustraction.",
+            "unit": "—"
+          },
+          {
+            "symbol": "unité",
+            "meaning": "Dans quelle unité la quantité est mesurée : jours, semaines, mois ou années. Utilisée uniquement en mode addition/soustraction.",
+            "unit": "—"
+          },
+          {
+            "symbol": "opération",
+            "meaning": "S'il faut ajouter ou soustraire la quantité. Utilisée uniquement en mode addition/soustraction.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Une date de fin antérieure à la date de début est échangée en interne, pas rejetée",
+            "description": "Plutôt que de renvoyer une erreur lorsque la date de fin précède la date de début, la calculatrice échange les deux dates en interne pour calculer un intervalle positif, et signale séparément isEndBeforeStart: true afin que l'appelant sache que l'ordre original a été inversé."
+          },
+          {
+            "title": "Une quantité négative d'addition/soustraction est rejetée d'emblée",
+            "description": "La quantité à ajouter ou soustraire doit être nulle ou positive ; une quantité négative renvoie une erreur de quantité invalide plutôt que d'être réinterprétée silencieusement comme l'opération opposée (par exemple, un 'ajout' négatif se comportant comme une 'soustraction')."
+          },
+          {
+            "title": "Ajouter un mois peut décaler le jour du mois aux limites des mois courts",
+            "description": "Ajouter un mois au 31 janvier aboutit à un résultat calculé pour un mois qui peut ne pas avoir 31 jours — l'arithmétique de date sous-jacente se limite au dernier jour valide du mois cible plutôt que de déborder sur le mois suivant."
+          },
+          {
+            "title": "La décomposition années/mois/jours et le décompte brut des jours totaux peuvent sembler incohérents à première vue",
+            "description": "La décomposition années/mois/jours tenant compte du calendrier tient compte du nombre réel de jours dans chaque mois et année spécifiques couverts, tandis que totalDays est un décompte plat de jours — pour des intervalles traversant des années bissextiles ou des mois de longueurs différentes, les deux ne seront pas liés par une seule multiplication fixe."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'échange d'une date de fin antérieure à la date de début se produit-il automatiquement au lieu d'afficher une erreur ?",
+            "answer": "Les utilisateurs ne savent souvent pas à l'avance laquelle de deux dates vient en premier, surtout lors de la comparaison de deux événements arbitraires — calculer automatiquement le bon intervalle positif tout en signalant séparément isEndBeforeStart garde le résultat utile de toute façon, plutôt que de forcer une nouvelle tentative avec les dates dans le 'bon' ordre."
+          },
+          {
+            "question": "Pourquoi ajouter '1 mois' peut-il aboutir à un jour du mois différent de celui attendu ?",
+            "answer": "Les mois calendaires n'ont pas tous le même nombre de jours, donc ajouter un mois à une date proche de la fin d'un mois plus long (comme le 31 janvier) ne peut pas toujours aboutir au même numéro de jour dans un mois cible plus court (le 31 février n'existe pas) — l'arithmétique de date sous-jacente se limite plutôt au dernier jour valide de ce mois cible."
+          },
+          {
+            "question": "Quelle est la différence entre totalDays et la décomposition années/mois/jours en mode différence ?",
+            "answer": "totalDays est un seul décompte plat de jours calendaires entre les deux dates, utile pour des choses comme 'combien de jours se sont écoulés'. La décomposition années/mois/jours tient plutôt compte des longueurs réellement variables des mois et années spécifiques couverts, donnant une réponse plus lisible par un humain comme '2 ans, 3 mois, 10 jours' plutôt qu'un seul grand décompte de jours."
+          },
+          {
+            "question": "Pourquoi une quantité négative est-elle rejetée en mode addition/soustraction plutôt que traitée comme l'opération opposée ?",
+            "answer": "Garder la quantité restreinte à des valeurs nulles ou positives, avec un choix explicite séparé d'addition ou de soustraction, évite l'ambiguïté d'une quantité négative combinée à une opération de soustraction — ce qui signifierait sinon effectivement 'ajouter' — et garde le sens de l'entrée sans ambiguïté."
+          }
+        ]
+      },
+      "time-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de temps : comment deux durées exprimées en heures, minutes et secondes sont additionnées ou soustraites, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Un résultat est en réalité une seule valeur en secondes totales",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Opérations",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "secondesTotales = (h₁×3600 + m₁×60 + s₁) ± (h₂×3600 + m₂×60 + s₂) | résultat = secondesTotales décomposées à nouveau en heures, minutes, secondes",
+          "note": "Les deux durées d'entrée sont d'abord converties en une seule unité commune, les secondes totales, additionnées ou soustraites là, puis le résultat est décomposé à nouveau en heures/minutes/secondes. Il s'agit d'une arithmétique de durée pure, pas d'une arithmétique d'heure d'horloge — soustraire une durée plus longue d'une plus courte produit correctement un résultat négatif plutôt que de faire le tour d'une horloge de 24 heures."
+        },
+        "flowchart": {
+          "intro": "Les deux durées sont validées, converties en une unité partagée, combinées, puis reconverties pour l'affichage.",
+          "steps": [
+            "Vérifier que les heures, minutes et secondes de chaque durée sont toutes des nombres non négatifs, et que les minutes et secondes sont chacune inférieures à 60",
+            "Convertir la première durée en une seule valeur de secondes totales : heures × 3600 plus minutes × 60 plus secondes",
+            "Convertir la seconde durée en secondes totales de la même manière",
+            "Additionner les deux totaux, ou soustraire le second du premier, selon l'opération choisie — cela peut produire un nombre négatif si une durée plus longue est soustraite d'une plus courte",
+            "Décomposer la valeur de secondes totales résultante à nouveau en heures, minutes et secondes pour l'affichage, en utilisant la valeur absolue afin que les composantes elles-mêmes soient toujours non négatives, avec un indicateur séparé notant si le résultat réel était négatif"
+          ],
+          "caption": "Deux durées deviennent deux valeurs de secondes totales, qui se combinent en un total signé qui est décomposé à nouveau en heures, minutes et secondes."
+        },
+        "anatomy": {
+          "intro": "Un résultat affiché en heures, minutes et secondes n'est en réalité qu'une seule valeur de secondes totales, redivisée en ses trois composantes par taille.",
+          "labelHours": "Heures (en secondes)",
+          "labelMinutes": "Minutes (en secondes)",
+          "labelSeconds": "Secondes",
+          "totalLabel": "8 130 secondes au total",
+          "caption": "Un résultat de 2 heures 15 minutes 30 secondes correspond à 8 130 secondes totales en dessous — 7 200 secondes provenant des heures, 900 des minutes, et 30 indépendantes."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "temps1",
+            "meaning": "La première durée, en heures, minutes et secondes.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "temps2",
+            "meaning": "La seconde durée, en heures, minutes et secondes.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "opération",
+            "meaning": "S'il faut additionner les deux durées ensemble, ou soustraire la seconde de la première.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Soustraire une durée plus longue d'une plus courte produit un véritable résultat négatif",
+            "description": "Il s'agit d'une arithmétique de durée, pas d'une arithmétique d'horloge de 24 heures — soustraire 3 heures de 1 heure donne correctement −2 heures (isNegative: true) plutôt que de faire le tour à 22 heures comme le ferait une horloge."
+          },
+          {
+            "title": "Des minutes ou secondes de 60 ou plus sont rejetées comme invalides, même si la durée totale est correcte",
+            "description": "Les champs minutes et secondes de chaque entrée doivent individuellement être inférieurs à 60 — saisir '90 minutes' directement est rejeté, même s'il s'agit d'une durée parfaitement valide ; elle doit être saisie comme 1 heure 30 minutes à la place."
+          },
+          {
+            "title": "Les composantes du résultat affiché sont toujours non négatives, même lorsque le résultat global est négatif",
+            "description": "fromSeconds() prend la valeur absolue du total avant de le décomposer en heures/minutes/secondes, donc un résultat négatif s'affiche sous forme de nombres d'apparence positive (par exemple, '2h 0m 0s') accompagnés d'un indicateur isNegative séparé — le signe n'est intégré dans aucune composante individuelle."
+          },
+          {
+            "title": "Les heures n'ont pas de limite supérieure, contrairement aux minutes et secondes",
+            "description": "Seules les minutes et secondes sont validées pour être inférieures à 60 ; les heures peuvent être n'importe quel nombre non négatif, car une durée de '40 heures' est parfaitement normale à ajouter ou soustraire, contrairement à '90 minutes' qui est censée être d'abord renormalisée en heures."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi soustraire une durée plus longue d'une plus courte donne-t-il un résultat négatif au lieu de faire le tour comme une horloge ?",
+            "answer": "Cet outil additionne et soustrait des durées — des intervalles de temps écoulé — pas des lectures d'horloge. Une durée comme '−2 heures' est une réponse parfaitement sensée à 'de combien 3 heures sont-elles plus longues qu'1 heure, exprimé comme une différence', alors que faire le tour d'une horloge de 24 heures n'aurait de sens que s'il s'agissait d'heures de la journée, ce qui n'est pas le cas."
+          },
+          {
+            "question": "Pourquoi '90 minutes' est-il rejeté comme saisie au lieu d'être automatiquement converti en 1 heure 30 minutes ?",
+            "answer": "Chaque champ (heures, minutes, secondes) est validé indépendamment, les minutes et secondes devant être inférieures à 60 — cela garde le format de saisie prévisible et correspond à la façon dont une durée est normalement écrite et lue, plutôt que de réinterpréter silencieusement une valeur non normalisée."
+          },
+          {
+            "question": "Pourquoi un résultat négatif affiche-t-il quand même des nombres d'heures/minutes/secondes d'apparence positive ?",
+            "answer": "L'ampleur d'un total négatif est décomposée en heures, minutes et secondes en utilisant sa valeur absolue, donc ces trois nombres décrivent l'ampleur du résultat négatif, pas son signe. Un indicateur isNegative séparé porte le signe, et il appartient à l'interface d'affichage de le montrer, par exemple, sous forme de signe moins ou de texte rouge."
+          },
+          {
+            "question": "Existe-t-il un nombre maximum d'heures que cet outil peut gérer ?",
+            "answer": "Aucune limite supérieure explicite n'est imposée au champ des heures — seules les minutes et secondes sont plafonnées en dessous de 60, car les heures elles-mêmes ne sont pas censées 'déborder' vers une unité plus grande ici de la façon dont 60 minutes débordent vers 1 heure."
+          }
+        ]
+      },
+      "world-time-converter": {
+        "version": "v1",
+        "description": "Référence technique du Convertisseur d'heure mondiale : comment les décalages de fuseau horaire sont lus en direct depuis la base de données de fuseaux horaires du moteur d'exécution et utilisés pour convertir une heure murale entre fuseaux, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Comparer les décalages UTC de deux fuseaux",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Voies de conversion",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Décalage UTC(fuseau, instant) = lecture d'horloge murale locale à cet instant, comparée à UTC | différenceMinutes = décalageDestination − décalageOrigine | différenceJours = date calendaire du fuseau(destination) − date calendaire du fuseau(origine)",
+          "note": "Chaque décalage est lu en direct depuis la propre base de données de fuseaux horaires IANA du moteur d'exécution JavaScript via Intl.DateTimeFormat, pas depuis une table de correspondance statique — cela rend la conversion correcte à travers les transitions d'heure d'été pour n'importe quelle date, passée ou future, sans avoir besoin d'une API externe ni d'un jeu de données mis à jour périodiquement."
+        },
+        "flowchart": {
+          "intro": "Une heure convertie est construite en s'ancrant à un instant partagé et non ambigu, puis en lisant les horloges locales de deux fuseaux à ce même instant.",
+          "steps": [
+            "Pour une conversion 'à l'instant présent', l'instant actuel est déjà connu absolument — les décalages des deux fuseaux sont simplement lus à cet instant précis",
+            "Pour convertir une heure murale spécifique saisie pour le fuseau 'origine' à la place, d'abord estimer l'instant UTC correspondant, puis relire le décalage de ce fuseau à l'instant estimé et corriger l'estimation — un second passage, car le décalage lui-même peut changer lors d'une transition d'heure d'été",
+            "Une fois l'instant UTC partagé connu, lire le décalage UTC de chaque fuseau à cet instant en utilisant la propre base de données de fuseaux horaires du moteur d'exécution",
+            "Calculer la différence entre les décalages des deux fuseaux en minutes — un résultat positif signifie que le fuseau de destination est en avance sur le fuseau d'origine",
+            "Calculer séparément la date calendaire propre de chaque fuseau à cet instant et les comparer, pour déterminer si le fuseau de destination est la veille, le même jour, ou le lendemain par rapport au fuseau d'origine"
+          ],
+          "caption": "Un seul instant UTC partagé, lu à travers les décalages locaux de deux fuseaux, produit à la fois la différence horaire et tout décalage de jour lié à la ligne de changement de date entre eux."
+        },
+        "anatomy": {
+          "intro": "Le décalage UTC d'un fuseau horaire peut être tracé sur une seule ligne numérique allant des fuseaux les plus en retard aux plus en avance.",
+          "labelFrom": "New York",
+          "labelTo": "Tokyo",
+          "caption": "New York à UTC−5 et Tokyo à UTC+9 sont à 14 heures d'écart sur la ligne de décalage — exactement le differenceMinutes que cet outil rapporterait entre eux (840 minutes)."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "année, mois, jour, heure, minute",
+            "meaning": "La date et l'heure murale à convertir, telles que lues sur une horloge dans le fuseau 'origine'.",
+            "unit": "—"
+          },
+          {
+            "symbol": "fuseauOrigine",
+            "meaning": "Le fuseau horaire IANA auquel appartient l'heure murale saisie (p. ex., America/New_York).",
+            "unit": "—"
+          },
+          {
+            "symbol": "fuseauDestination",
+            "meaning": "Le fuseau horaire IANA vers lequel convertir cette heure (p. ex., Asia/Tokyo).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Convertir une lecture d'horloge murale nécessite deux passages pour gérer correctement l'heure d'été",
+            "description": "Une heure murale est d'abord convertie en UTC en utilisant une estimation de décalage initiale, puis cette estimation est corrigée en relisant le décalage à l'instant nouvellement estimé — nécessaire car le décalage correct peut lui-même dépendre du côté de la transition d'heure d'été où tombe l'instant final, ce qui n'est pas connu avant la première estimation."
+          },
+          {
+            "title": "Convertir 'à l'instant présent' utilise délibérément un chemin de code différent de la conversion d'une heure saisie spécifique",
+            "description": "Lorsque l'instant est déjà connu absolument (le moment actuel), la lecture directe du décalage de chaque fuseau à cet instant est utilisée au lieu d'interpréter les accesseurs d'heure locale de cet instant comme une lecture d'horloge murale du 'fuseau origine' — cette dernière approche substituerait silencieusement le propre fuseau horaire système du visiteur au fuseau réellement visé."
+          },
+          {
+            "title": "La différence de jour peut être de −1, 0 ou +1 même lorsque la différence de décalage est faible",
+            "description": "Comme la différence de jour est calculée en comparant la date calendaire propre de chaque fuseau à l'instant partagé, un fuseau de destination avec un décalage juste au-delà de minuit par rapport à l'heure locale du fuseau d'origine peut afficher une différence d'un jour même si l'écart de décalage brut est faible — ce n'est pas nécessairement proportionnel au nombre d'heures séparant les fuseaux."
+          },
+          {
+            "title": "Le chevauchement des heures de bureau utilise le décalage de chaque fuseau à midi UTC à la date de référence comme substitut pour toute la journée",
+            "description": "Il s'agit d'une simplification délibérée : comme les transitions d'heure d'été se produisent entre 1h et 3h du matin heure locale plutôt qu'autour de midi, utiliser le décalage de midi UTC pour le calcul du chevauchement de toute la journée est précis à l'exception de deux heures, une fois par an, dans les fuseaux observant l'heure d'été."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil utilise-t-il la propre base de données de fuseaux horaires du moteur d'exécution plutôt qu'une table de décalage statique ?",
+            "answer": "Les décalages de fuseau horaire changent avec l'heure d'été, et différents pays modifient leurs règles d'heure d'été au fil des ans — une table statique nécessiterait des mises à jour manuelles constantes pour rester correcte. S'appuyer sur la base de données de fuseaux horaires IANA intégrée d'Intl.DateTimeFormat signifie que la conversion est automatiquement correcte pour n'importe quelle date, y compris des dates avant ou après l'entrée en vigueur des règles d'heure d'été actuelles, sans dépendances externes."
+          },
+          {
+            "question": "Pourquoi convertir une heure saisie spécifique nécessite-t-il deux passages, mais pas convertir 'à l'instant présent' ?",
+            "answer": "'À l'instant présent' est déjà un instant absolu non ambigu, donc le décalage de chaque fuseau peut être lu directement à cet instant en un seul passage. Une heure murale saisie, en revanche, doit d'abord être transformée en un instant absolu — et le décalage utilisé pour cette conversion peut lui-même être incorrect si l'estimation initiale est tombée du mauvais côté d'une transition d'heure d'été, d'où la nécessité d'un second passage correctif."
+          },
+          {
+            "question": "Pourquoi la différence de jour peut-elle être décalée d'un jour entier même lorsque les heures d'horloge des deux fuseaux semblent proches ?",
+            "answer": "La différence de jour compare la date calendaire propre de chaque fuseau, pas l'écart de décalage brut — un fuseau dont l'heure locale est juste après minuit et un autre dont l'heure locale est juste avant minuit peuvent avoir des décalages très proches en heures mais se trouver quand même sur deux dates calendaires différentes à cet instant, exactement le genre de situation que le calcul de différence de jour est censé révéler."
+          },
+          {
+            "question": "Quelle est la précision de la fenêtre d'heures de bureau chevauchantes suggérée ?",
+            "answer": "Elle est précise pour l'immense majorité des jours, car elle estime le décalage UTC de chaque fuseau une fois à midi UTC à la date de référence et suppose que ce décalage tient toute la journée — ce qui est vrai sauf pendant le jour ou les deux jours par an où la transition d'heure d'été d'un fuseau se produit réellement, et même alors la transition se produit très tôt le matin en heure locale, pas autour des heures de bureau que cette fonction est censée aider à planifier."
+          }
+        ]
+      },
+      "countdown-to-event-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de compte à rebours d'événement : comment le temps restant jusqu'à une date et une heure cibles est calculé et décomposé en jours, heures, minutes et secondes, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Un compte à rebours est une valeur en secondes totales, décomposée",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Unités de sortie",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "secondesTotales = |instantCible − instantActuel| ÷ 1000 (arrondi vers le bas) | secondesTotales → jours, heures, minutes, secondes",
+          "note": "Le compte à rebours est purement dérivé de deux instants dans le temps — la date et l'heure cibles et le moment actuel — le moment actuel étant fourni par l'appelant plutôt que lu en interne, ce qui garde le calcul sous-jacent pur et testable pendant que le composant d'affichage refournit un 'maintenant' frais chaque seconde."
+        },
+        "flowchart": {
+          "intro": "Un compte à rebours en direct est en réalité un calcul d'instantané pur, réexécuté une fois par seconde avec une valeur 'maintenant' fraîche.",
+          "steps": [
+            "Analyser la chaîne de date-heure cible en un instant absolu ; une chaîne non analysable renvoie immédiatement une erreur de date invalide",
+            "Soustraire l'instant actuel (fourni par l'appelant) de l'instant cible pour obtenir une différence en millisecondes signée",
+            "Déterminer si la cible est déjà passée : vrai dès que la différence est nulle ou négative, signifiant que le moment exact d'arrivée compte déjà comme passé",
+            "Convertir la valeur absolue de cette différence en un nombre entier de secondes totales, en écartant les millisecondes restantes",
+            "Décomposer la valeur des secondes totales en jours, heures, minutes et secondes par division entière répétée — d'abord les jours, puis les heures à partir de ce qui reste, puis les minutes, puis les secondes"
+          ],
+          "caption": "Un instant soustrait d'un autre produit une durée signée, qui est ensuite déballée dans les quatre unités familières du compte à rebours."
+        },
+        "anatomy": {
+          "intro": "Les quatre unités du compte à rebours sont en réalité une seule valeur en secondes totales, décomposée par taille — exactement comme fonctionne la décomposition jours/heures/minutes/secondes.",
+          "labelDays": "Jours (en secondes)",
+          "labelHours": "Heures (en secondes)",
+          "labelMinutes": "Minutes (en secondes)",
+          "labelSeconds": "Secondes",
+          "totalLabel": "192 615 secondes au total",
+          "caption": "Une lecture de compte à rebours de '2 jours, 5 heures, 30 minutes, 15 secondes' correspond à 192 615 secondes totales en dessous — 172 800 provenant des jours, 18 000 des heures, 1 800 des minutes, et 15 indépendantes."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "dateHeureCibleISO",
+            "meaning": "La date et l'heure de l'événement cible, sous forme de chaîne de date-heure ISO 8601.",
+            "unit": "—"
+          },
+          {
+            "symbol": "maintenantMs",
+            "meaning": "L'heure actuelle, en millisecondes depuis l'époque, fournie par l'appelant plutôt que lue en interne.",
+            "unit": "ms"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "L'instant exact d'arrivée de la cible compte comme déjà passé, pas comme un compte à rebours toujours en cours",
+            "description": "isPast devient vrai dès que la différence entre la cible et maintenant est nulle ou négative — le moment précis où le compte à rebours atteint zéro est traité comme l'événement étant arrivé, pas comme un dernier tick 'toujours en cours'."
+          },
+          {
+            "title": "'Maintenant' est fourni par l'appelant, pas lu en interne, pour garder le calcul pur",
+            "description": "Le moteur n'appelle jamais l'horloge système lui-même ; l'instant actuel est passé en argument. Cela garde le calcul sous-jacent comme une fonction pure et testable de ses entrées — le comportement de mise à jour en direct, une fois par seconde, visible sur la page provient entièrement de l'interface environnante qui réinvoque cette même fonction pure avec une valeur 'maintenant' fraîche à chaque tick."
+          },
+          {
+            "title": "Une chaîne de date-heure cible non analysable renvoie un résultat à zéro avec un indicateur d'erreur, pas un plantage",
+            "description": "Si la chaîne de date-heure cible ne peut pas être analysée en une date valide, chaque champ numérique (jours, heures, minutes, secondes, secondesTotales) est renvoyé à zéro, isPast est faux, et une erreur de date invalide distincte est définie — les appelants peuvent vérifier d'abord le champ d'erreur plutôt que de devoir se prémunir contre une exception levée."
+          },
+          {
+            "title": "Les millisecondes restantes en dessous d'une seconde sont écartées, pas arrondies",
+            "description": "La différence en millisecondes entre les deux instants est arrondie vers le bas à des secondes entières avant toute autre décomposition, donc une différence de, disons, 4 999 millisecondes est traitée comme 4 secondes entières restantes, pas arrondie à 5."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi 'maintenant' est-il passé en argument plutôt que la calculatrice de compte à rebours ne lise elle-même l'horloge ?",
+            "answer": "Garder l'heure actuelle comme entrée explicite plutôt qu'un appel interne à l'horloge fait du calcul sous-jacent une fonction pure — la même cible et le même maintenant produisent toujours le même résultat, ce qui est simple à tester et à raisonner. Le compte à rebours en direct, palpitant, visible sur la page est produit par l'interface environnante qui rappelle cette même fonction pure chaque seconde avec une valeur maintenant mise à jour, pas par une quelconque logique de minuterie au sein du calcul lui-même."
+          },
+          {
+            "question": "Que se passe-t-il à l'instant exact où le compte à rebours atteint zéro ?",
+            "answer": "Cet instant exact est traité comme si l'événement était déjà arrivé — isPast passe à vrai dès que la différence entre la cible et maintenant est nulle ou inférieure, plutôt que d'afficher un dernier état '0 jour, 0 heure, 0 minute, 0 seconde, toujours en cours' avant de basculer."
+          },
+          {
+            "question": "Pourquoi le compte à rebours écarte-t-il les fractions de seconde au lieu de les arrondir ?",
+            "answer": "La différence brute en millisecondes est arrondie vers le bas à des secondes entières, ce qui signifie que toute fraction de seconde restante est simplement écartée plutôt qu'arrondie à la seconde la plus proche. Cela empêche un compte à rebours en direct, se mettant à jour une fois par seconde, de jamais sembler devancer le temps réellement écoulé — arrondir vers le bas sous-compte toujours légèrement plutôt que de jamais surcompter."
+          },
+          {
+            "question": "Cette calculatrice peut-elle être utilisée pour compter à partir d'un événement passé plutôt que vers un événement futur ?",
+            "answer": "Oui — le calcul est symétrique autour de zéro. Si la date-heure cible est dans le passé, la différence est toujours calculée de la même manière et isPast est simplement vrai, les champs jours/heures/minutes/secondes montrant combien de temps s'est écoulé depuis ce moment passé plutôt que combien de temps il reste jusqu'à un moment futur."
+          }
+        ]
       }
     }
   }

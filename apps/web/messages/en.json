@@ -29733,6 +29733,516 @@
             "answer": "With case-sensitive matching (the default), \"Apple\" and \"apple\" are treated as two distinct lines and both survive deduplication; with case-insensitive matching enabled, they're treated as the same line, and only one survives — which specific casing survives then depends on the keep-first-or-last setting."
           }
         ]
+      },
+      "age-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Age Calculator: how a calendar-aware age, year progress, zodiac signs, generation, and Hijri age are computed from a birth date, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Reading the Year-Progress Percentage",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Calendars",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Age = referenceDate − birthDate → years, months, days (calendar-aware) | yearProgress% = (referenceDate − lastBirthday) ÷ (nextBirthday − lastBirthday) × 100",
+          "note": "The years/months/days breakdown rolls over the same way real birthdays do — for example 11 months 30 days becomes 1 year, 0 months, 0 days, not two separate large numbers. Every other duration (total days, weeks, hours, minutes, seconds) is a flat difference between the two dates, unaffected by calendar rollover."
+        },
+        "flowchart": {
+          "intro": "Every reported figure is derived from just two calendar dates — the birth date and the reference date (today, unless a custom one is supplied).",
+          "steps": [
+            "Parse the birth date and the reference date as local calendar dates, with no time zone or time-of-day component to consider",
+            "Compute the calendar-aware duration between them — years, months, and days that roll over exactly the way birthdays do, so 11 months 30 days becomes 1 year, not two separate large numbers",
+            "Find the next birthday by placing this year's birth month and day onto the reference year, then rolling it forward one year if that date has already passed; the days remaining is the calendar-day gap to it",
+            "Locate the most recent birthday the same way, then express how far the reference date falls between that last birthday and the next one as a percentage — the year progress",
+            "Separately derive the zodiac sign and Chinese zodiac year from the birth date, look up the named generation for the birth year, and convert both dates to the Hijri calendar to compute a Hijri-calendar age"
+          ],
+          "caption": "Two dates in, one calendar-aware duration plus a set of derived facts out — zodiac, generation, and Hijri age all branch off the same two starting dates."
+        },
+        "anatomy": {
+          "intro": "The year-progress percentage measures how far the reference date has traveled through the current birth year — the span between the most recent birthday and the next one.",
+          "labelSince": "Since Last Birthday",
+          "labelUntil": "Until Next Birthday",
+          "totalLabel": "365-Day Birth Year",
+          "caption": "270 days since the last birthday out of a 365-day span works out to 74% year progress — exactly what yearProgressPercent reports for this example."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "birthDate",
+            "meaning": "The birth date, in YYYY-MM-DD form.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "referenceDate",
+            "meaning": "The date to calculate age as of. Defaults to today when omitted.",
+            "unit": "Date"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A birthday-exact reference date resets year progress to 0%, not 100%",
+            "description": "When the reference date lands exactly on a birthday, daysUntilBirthday is 0 and the code special-cases yearProgressPercent to 0% rather than dividing by a zero-length span — a full trip around the birth year has just completed, so the next one is starting fresh."
+          },
+          {
+            "title": "The Chinese zodiac is approximated from the Gregorian year alone",
+            "description": "It's derived purely from the birth year, not the actual lunar New Year date, which falls on a different Gregorian day each year (between January 21 and February 20) — someone born in that window can technically belong to the previous animal year, which this approximation can't detect."
+          },
+          {
+            "title": "Generation boundaries blend two sources at a single seam",
+            "description": "Everything through Generation Z (ending 2012) follows Pew Research's published boundaries; Generation Alpha and Beta pick up from there using McCrindle Research's naming, whose own start year for Alpha (2010) would otherwise overlap Pew's Gen Z — the roughly 3-year discrepancy is resolved by starting Alpha at Pew's endpoint rather than guessed."
+          },
+          {
+            "title": "decimalAge uses a fixed 365.25-day year, not exact leap-year counting",
+            "description": "The decimal age divides total elapsed time by 365.25 days rather than counting each specific year's real length (365 or 366 days) — a deliberate simplification that only shifts the result by a few thousandths, not a bug."
+          },
+          {
+            "title": "Hijri age is computed independently, not derived from the Gregorian age",
+            "description": "Both the birth date and the reference date are separately converted to the Hijri calendar, and the Hijri age comes from the difference between those two Hijri dates — not from converting the Gregorian year/month/day gap — so the two ages can genuinely diverge near a Hijri or Gregorian year boundary."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the year-progress percentage show 0% instead of 100% on an exact birthday?",
+            "answer": "On the exact day of a birthday, the days remaining until the 'next' birthday is zero, which would make the year-progress calculation divide by a zero-length span. The code special-cases this to 0% instead, treating the birthday itself as the start of a brand-new year rather than the end of the old one — the most intuitive reading of 'day zero' of a new birth year."
+          },
+          {
+            "question": "How exactly is the 'next birthday' date determined?",
+            "answer": "The birth month and day are placed onto the reference date's year to build a candidate date. If that candidate already fell before the reference date (the birthday already happened this year), it's rolled forward by exactly one year. The days-remaining figure is then just the calendar-day gap between the reference date and that candidate."
+          },
+          {
+            "question": "Why does decimalAge use a fixed 365.25-day year instead of exactly counting leap years?",
+            "answer": "365.25 is the average length of a Gregorian year across the 4-year leap cycle, and using it as a constant divisor keeps the calculation simple and consistent regardless of exactly which years someone has lived through. The resulting decimal age differs from an exact leap-year-aware calculation by at most a few thousandths — far below what's visible in a rounded display."
+          },
+          {
+            "question": "Why might my Hijri age come out different from what I'd expect by just converting my Gregorian age?",
+            "answer": "The Hijri age isn't derived by converting the Gregorian age — it's computed from scratch by converting the birth date and the reference date each into their own Hijri calendar dates, then finding the difference between those two Hijri dates directly. Because the Hijri calendar's year length differs from the Gregorian one, someone can be, say, one Hijri year further along than a naive Gregorian-to-Hijri year conversion would suggest, especially close to either calendar's year boundary."
+          },
+          {
+            "question": "Why is the Chinese zodiac sign only an approximation?",
+            "answer": "The real Chinese zodiac year turns over on the lunar New Year, which falls on a different Gregorian date every year — somewhere between January 21 and February 20. This calculator derives the zodiac animal purely from the Gregorian birth year, so someone born in that early-year window before the actual lunar New Year can technically belong to the previous year's animal, which this simpler year-based approximation has no way to detect."
+          }
+        ]
+      },
+      "date-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Date Calculator: how the gap between two dates is measured and how a duration is added to or subtracted from a date, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Total Days Broken Into Weeks and a Remainder",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Difference mode: totalDays = |endDate − startDate| (calendar days) → years, months, days | Add/Subtract mode: resultDate = startDate ± amount(unit)",
+          "note": "In difference mode, if the end date falls before the start date, the two are swapped before computing so totalDays is always non-negative — a separate flag reports whether the original order was reversed. In add/subtract mode, adding weeks first converts the amount to days (× 7); adding months or years uses calendar-aware arithmetic that can shift the day-of-month at month-end boundaries."
+        },
+        "flowchart": {
+          "intro": "The tool runs one of two independent calculations depending on the selected mode — finding the gap between two dates, or shifting a single date forward or back.",
+          "steps": [
+            "Parse the start date (and, in difference mode, the end date) as local calendar dates with no time-zone component",
+            "In difference mode: if the end date falls before the start date, swap the two internally and remember that they were reversed, so the reported total is always a positive span",
+            "Compute the total calendar-day gap between the two dates, then separately compute the calendar-aware years/months/days breakdown, which rolls over the same way real dates do",
+            "In add/subtract mode instead: convert the chosen unit and signed amount (negative for subtract) into a single date-arithmetic step — weeks become days multiplied by 7, while months and years use calendar-aware addition",
+            "Apply that step to the start date to produce the result date, which can shift the day-of-month when the target month is shorter than the start month"
+          ],
+          "caption": "Difference mode measures the gap between two known dates; add/subtract mode projects a new date from one known date and a duration."
+        },
+        "anatomy": {
+          "intro": "The total-day count from difference mode can be broken into full weeks plus a remainder, exactly as totalWeeks = Math.floor(totalDays / 7) computes it.",
+          "labelWeeks": "Full Weeks (7 days each)",
+          "labelRemainder": "Remaining Days",
+          "totalLabel": "100 Total Days",
+          "caption": "100 total days between two dates breaks into 14 full weeks (98 days) plus a 2-day remainder — exactly what totalWeeks and the day-level remainder represent."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "mode",
+            "meaning": "Whether to calculate the difference between two dates, or add/subtract a duration from one date.",
+            "unit": "—"
+          },
+          {
+            "symbol": "startDate",
+            "meaning": "The starting date, in YYYY-MM-DD form. Used by both modes.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "endDate",
+            "meaning": "The second date to compare against. Used only in difference mode.",
+            "unit": "Date"
+          },
+          {
+            "symbol": "amount",
+            "meaning": "How many units to add or subtract. Used only in add/subtract mode.",
+            "unit": "—"
+          },
+          {
+            "symbol": "unit",
+            "meaning": "Which unit the amount is measured in: days, weeks, months, or years. Used only in add/subtract mode.",
+            "unit": "—"
+          },
+          {
+            "symbol": "operation",
+            "meaning": "Whether to add or subtract the amount. Used only in add/subtract mode.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An end date before the start date is swapped internally, not rejected",
+            "description": "Rather than returning an error when the end date precedes the start date, the calculator swaps the two dates internally to compute a positive span, and separately reports isEndBeforeStart: true so the caller knows the original order was reversed."
+          },
+          {
+            "title": "A negative add/subtract amount is rejected outright",
+            "description": "The amount to add or subtract must be zero or positive; a negative amount returns an invalid-amount error rather than being silently reinterpreted as the opposite operation (e.g., a negative 'add' behaving like 'subtract')."
+          },
+          {
+            "title": "Adding a month can shift the day of month at short-month boundaries",
+            "description": "Adding one month to January 31 lands on a computed result for a month that may not have 31 days — the underlying date arithmetic clamps to the last valid day of the target month rather than overflowing into the following month."
+          },
+          {
+            "title": "The years/months/days breakdown and the raw total-days count can look inconsistent at a glance",
+            "description": "The calendar-aware years/months/days breakdown accounts for how many days are actually in each specific month and year spanned, while totalDays is a flat day count — for spans crossing leap years or months of different lengths, the two won't relate to each other by a single fixed multiplication."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does swapping an end date before the start date happen automatically instead of showing an error?",
+            "answer": "Users often don't know in advance which of two dates comes first, especially when comparing two arbitrary events — automatically computing the correct positive span while still flagging isEndBeforeStart lets the result stay useful either way, rather than forcing a retry with the dates in the 'right' order."
+          },
+          {
+            "question": "Why can adding '1 month' land on a different day of the month than expected?",
+            "answer": "Calendar months don't all have the same number of days, so adding a month to a date near the end of a longer month (like January 31) can't always land on the same day number in a shorter target month (February 31 doesn't exist) — the underlying date arithmetic clamps to the last valid day of that target month instead."
+          },
+          {
+            "question": "What's the difference between totalDays and the years/months/days breakdown in difference mode?",
+            "answer": "totalDays is a single flat count of calendar days between the two dates, useful for things like 'how many days have passed.' The years/months/days breakdown instead accounts for the actual varying lengths of the specific months and years spanned, giving a more human-readable answer like '2 years, 3 months, 10 days' rather than a single large day count."
+          },
+          {
+            "question": "Why is a negative amount rejected in add/subtract mode instead of being treated as the opposite operation?",
+            "answer": "Keeping the amount restricted to zero or positive values, with a separate explicit add-or-subtract choice, avoids the ambiguity of a negative amount combined with a subtract operation — which would otherwise effectively mean 'add' — and keeps the input's meaning unambiguous."
+          }
+        ]
+      },
+      "time-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Time Calculator: how two durations expressed as hours, minutes, and seconds are added or subtracted, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "A Result Is Really One Total-Seconds Value",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operations",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "totalSeconds = (h₁×3600 + m₁×60 + s₁) ± (h₂×3600 + m₂×60 + s₂) | result = totalSeconds decomposed back into hours, minutes, seconds",
+          "note": "Both input durations are first converted to a single common unit, total seconds, added or subtracted there, and then the result is decomposed back into hours/minutes/seconds. This is pure duration arithmetic, not clock-time arithmetic — subtracting a longer duration from a shorter one correctly produces a negative result rather than wrapping around a 24-hour clock."
+        },
+        "flowchart": {
+          "intro": "Both durations are validated, converted to a shared unit, combined, and then converted back for display.",
+          "steps": [
+            "Validate that each duration's hours, minutes, and seconds are all non-negative numbers, and that minutes and seconds are each below 60",
+            "Convert the first duration into a single total-seconds value: hours × 3600 plus minutes × 60 plus seconds",
+            "Convert the second duration into total seconds the same way",
+            "Add the two totals together, or subtract the second from the first, depending on the chosen operation — this can produce a negative number if subtracting a longer duration from a shorter one",
+            "Decompose the resulting total-seconds value back into hours, minutes, and seconds for display, using the absolute value so the components themselves are always non-negative, alongside a separate flag noting whether the true result was negative"
+          ],
+          "caption": "Two durations become two total-seconds values, which combine into one signed total that's decomposed back into hours, minutes, and seconds."
+        },
+        "anatomy": {
+          "intro": "A displayed result of hours, minutes, and seconds is really just one total-seconds value, split back into its three components by size.",
+          "labelHours": "Hours (as seconds)",
+          "labelMinutes": "Minutes (as seconds)",
+          "labelSeconds": "Seconds",
+          "totalLabel": "8,130 Total Seconds",
+          "caption": "A result of 2 hours 15 minutes 30 seconds is 8,130 total seconds underneath — 7,200 seconds from the hours, 900 from the minutes, and 30 standalone."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "time1",
+            "meaning": "The first duration, as hours, minutes, and seconds.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "time2",
+            "meaning": "The second duration, as hours, minutes, and seconds.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "operation",
+            "meaning": "Whether to add the two durations together, or subtract the second from the first.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Subtracting a longer duration from a shorter one produces a genuine negative result",
+            "description": "This is duration arithmetic, not 24-hour clock arithmetic — subtracting 3 hours from 1 hour correctly yields −2 hours (isNegative: true) rather than wrapping around to 22 hours the way a clock would."
+          },
+          {
+            "title": "Minutes and seconds of 60 or more are rejected as invalid, even though the total duration is fine",
+            "description": "Each input's minutes and seconds fields must individually be below 60 — entering '90 minutes' directly is rejected, even though it's a perfectly valid duration; it must be entered as 1 hour 30 minutes instead."
+          },
+          {
+            "title": "The displayed result components are always non-negative, even when the overall result is negative",
+            "description": "fromSeconds() takes the absolute value of the total before decomposing it into hours/minutes/seconds, so a negative result displays as positive-looking numbers (e.g., '2h 0m 0s') alongside a separate isNegative flag — the sign isn't baked into any individual component."
+          },
+          {
+            "title": "Hours have no upper bound, unlike minutes and seconds",
+            "description": "Only minutes and seconds are validated to be below 60; hours can be any non-negative number, since a duration of '40 hours' is a perfectly normal thing to add or subtract, unlike '90 minutes' which is expected to be renormalized into hours first."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does subtracting a longer duration from a shorter one give a negative result instead of wrapping around like a clock?",
+            "answer": "This tool adds and subtracts durations — spans of elapsed time — not clock readings. A duration like '−2 hours' is a perfectly meaningful answer to 'how much longer is 3 hours than 1 hour, expressed as a difference,' whereas wrapping around a 24-hour clock would only make sense if these were times of day, which they aren't."
+          },
+          {
+            "question": "Why is '90 minutes' rejected as an input instead of being automatically converted to 1 hour 30 minutes?",
+            "answer": "Each field (hours, minutes, seconds) is validated independently, with minutes and seconds required to be below 60 — this keeps the input format predictable and matches how a duration is normally written and read, rather than silently reinterpreting an unnormalized value."
+          },
+          {
+            "question": "Why does a negative result still show positive-looking hour/minute/second numbers?",
+            "answer": "The magnitude of a negative total is decomposed into hours, minutes, and seconds using its absolute value, so those three numbers describe how large the negative result is, not its sign. A separate isNegative flag carries the sign, and it's up to the displaying interface to show that as, for example, a minus sign or red text."
+          },
+          {
+            "question": "Is there a maximum number of hours this tool can handle?",
+            "answer": "No explicit upper bound is enforced on the hours field — only minutes and seconds are capped below 60, since hours themselves aren't expected to 'roll over' into a larger unit here the way 60 minutes rolls into 1 hour."
+          }
+        ]
+      },
+      "world-time-converter": {
+        "version": "v1",
+        "description": "Technical reference for the World Time Converter: how time zone offsets are read live from the runtime's time zone database and used to convert a wall-clock time between zones, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Comparing Two Zones' UTC Offsets",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Conversion Paths",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "UTC offset(zone, instant) = local wall-clock reading at that instant, compared to UTC | differenceMinutes = toOffset − fromOffset | dayDifference = zoned calendar date(to) − zoned calendar date(from)",
+          "note": "Every offset is read live from the JavaScript runtime's own IANA time zone database via Intl.DateTimeFormat, not from a static lookup table — this makes the conversion correct across DST transitions for any date, past or future, without needing an external API or a periodically-updated dataset."
+        },
+        "flowchart": {
+          "intro": "A converted time is built by anchoring to one shared, unambiguous instant and then reading two zones' local clocks at that same instant.",
+          "steps": [
+            "If converting 'right now,' the current instant is already known absolutely — the two zones' offsets are simply read at that exact moment",
+            "If converting a specific wall-clock time entered for the 'from' zone instead, first estimate the corresponding UTC instant, then re-read that zone's offset at the estimated instant and correct the guess — a second pass, since the offset itself can change across a DST transition",
+            "Once the shared UTC instant is known, read each zone's UTC offset at that instant using the runtime's own time zone database",
+            "Compute the difference between the two zones' offsets in minutes — positive means the destination zone is ahead of the origin zone",
+            "Separately compute each zone's own calendar date at that instant and compare them, to determine whether the destination zone is on the previous day, the same day, or the next day relative to the origin zone"
+          ],
+          "caption": "One shared UTC instant, read through two zones' local offsets, yields both the time difference and any date-line day shift between them."
+        },
+        "anatomy": {
+          "intro": "A time zone's UTC offset can be plotted on a single number line running from the most-behind zones to the most-ahead ones.",
+          "labelFrom": "New York",
+          "labelTo": "Tokyo",
+          "caption": "New York at UTC−5 and Tokyo at UTC+9 sit 14 hours apart on the offset line — exactly the differenceMinutes this tool would report between them (840 minutes)."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "year, month, day, hour, minute",
+            "meaning": "The wall-clock date and time to convert, as read on a clock in the 'from' zone.",
+            "unit": "—"
+          },
+          {
+            "symbol": "fromZone",
+            "meaning": "The IANA time zone the entered wall-clock time belongs to (e.g., America/New_York).",
+            "unit": "—"
+          },
+          {
+            "symbol": "toZone",
+            "meaning": "The IANA time zone to convert that time into (e.g., Asia/Tokyo).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Converting a wall-clock reading takes two passes to handle DST correctly",
+            "description": "A wall-clock time is first converted to UTC using an initial offset guess, then that guess is corrected by re-reading the offset at the newly estimated instant — necessary because the correct offset can itself depend on which side of a DST transition the final instant falls on, which isn't known until after the first guess."
+          },
+          {
+            "title": "Converting 'right now' uses a different code path than converting a specific typed time, deliberately",
+            "description": "When the instant is already known absolutely (the current moment), reading each zone's offset directly at that instant is used instead of interpreting the instant's local time getters as a 'from zone' wall-clock reading — the latter would silently substitute the visitor's own system time zone for whichever zone was actually intended."
+          },
+          {
+            "title": "The day difference can be −1, 0, or +1 even when the offset difference is small",
+            "description": "Because the day difference is computed by comparing each zone's own calendar date at the shared instant, a destination zone with an offset just barely across midnight from the origin zone's local time can show a one-day difference even if the raw offset gap is small — this isn't necessarily proportional to how many hours apart the zones are."
+          },
+          {
+            "title": "Business-hours overlap uses each zone's offset at noon UTC on the reference date as a stand-in for the whole day",
+            "description": "This is a deliberate simplification: because DST transitions happen at 1-3 a.m. local time rather than around noon, using the noon-UTC offset for the entire day's overlap calculation is accurate for all but a couple of hours, once a year, in zones that observe DST."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool use the runtime's own time zone database instead of a static offset table?",
+            "answer": "Time zone offsets change with daylight saving time, and different countries change their DST rules over the years — a static table would need constant manual updates to stay correct. Relying on Intl.DateTimeFormat's built-in IANA time zone database means the conversion is automatically correct for any date, including dates before or after the current DST rules took effect, with zero external dependencies."
+          },
+          {
+            "question": "Why does converting a specific typed time require two passes, but converting 'right now' doesn't?",
+            "answer": "'Right now' is already an unambiguous absolute instant, so each zone's offset can be read directly at that instant in one pass. A typed wall-clock time, by contrast, first has to be turned into an absolute instant — and the offset used for that conversion can itself be wrong if the initial guess landed on the wrong side of a DST transition, which is why a second, corrective pass is needed."
+          },
+          {
+            "question": "Why can the day difference be a full day off even when the two zones' clock times look close?",
+            "answer": "The day difference compares each zone's own calendar date, not the raw offset gap — a zone whose local time is just past midnight and one whose local time is just before midnight can have very close offsets in hours but still be on two different calendar dates at that instant, which is exactly the kind of situation the day-difference calculation is meant to surface."
+          },
+          {
+            "question": "How accurate is the suggested overlapping business-hours window?",
+            "answer": "It's accurate for the overwhelming majority of days, since it estimates each zone's UTC offset once at noon UTC on the reference date and assumes that offset holds all day — which is true except during the one or two days a year a zone's DST transition actually happens, and even then the transition occurs in the very early morning local time, not around the business hours the feature is meant to help schedule."
+          }
+        ]
+      },
+      "countdown-to-event-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Countdown to Event Calculator: how the time remaining until a target date and time is computed and decomposed into days, hours, minutes, and seconds, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "A Countdown Is One Total-Seconds Value, Split Apart",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Output Units",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "totalSeconds = |targetInstant − nowInstant| ÷ 1000 (floored) | totalSeconds → days, hours, minutes, seconds",
+          "note": "The countdown is purely derived from two instants in time — the target date-time and the current moment — with the current moment supplied by the caller rather than read internally, keeping the underlying calculation pure and testable while the displaying component re-supplies a fresh 'now' every second."
+        },
+        "flowchart": {
+          "intro": "A live countdown is really a pure snapshot calculation, re-run once per second with a fresh 'now' value.",
+          "steps": [
+            "Parse the target date-time string into an absolute instant; an unparseable string returns an invalid-date error immediately",
+            "Subtract the current instant (supplied by the caller) from the target instant to get a signed millisecond difference",
+            "Determine whether the target has already passed: true once the difference is zero or negative, meaning the exact arrival moment itself already counts as past",
+            "Convert the absolute value of that difference into a whole number of total seconds, discarding any leftover milliseconds",
+            "Decompose the total-seconds value into days, hours, minutes, and seconds by repeated integer division — days first, then hours from what's left, then minutes, then seconds"
+          ],
+          "caption": "One instant subtracted from another produces a signed duration, which is then unpacked into the four familiar countdown units."
+        },
+        "anatomy": {
+          "intro": "The four countdown units are really one total-seconds value, split apart by size — exactly as the days/hours/minutes/seconds decomposition works.",
+          "labelDays": "Days (as seconds)",
+          "labelHours": "Hours (as seconds)",
+          "labelMinutes": "Minutes (as seconds)",
+          "labelSeconds": "Seconds",
+          "totalLabel": "192,615 Total Seconds",
+          "caption": "A countdown reading '2 days, 5 hours, 30 minutes, 15 seconds' is 192,615 total seconds underneath — 172,800 from the days, 18,000 from the hours, 1,800 from the minutes, and 15 standalone."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "targetDateTimeISO",
+            "meaning": "The target event's date and time, as an ISO 8601 date-time string.",
+            "unit": "—"
+          },
+          {
+            "symbol": "nowMs",
+            "meaning": "The current time, in epoch milliseconds, supplied by the caller rather than read internally.",
+            "unit": "ms"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "The target's exact arrival instant counts as already past, not still counting down",
+            "description": "isPast becomes true once the difference between target and now is zero or negative — the precise moment the countdown reaches zero is treated as the event having arrived, not as one final 'still counting' tick."
+          },
+          {
+            "title": "'Now' is supplied by the caller, not read internally, to keep the calculation pure",
+            "description": "The engine never calls the system clock itself; the current instant is passed in as an argument. This keeps the underlying calculation a pure, testable function of its inputs — the live-updating, once-per-second behavior visible on the page comes entirely from the surrounding UI re-invoking this same pure function with a fresh 'now' value each tick."
+          },
+          {
+            "title": "An unparseable target date-time string returns a zeroed-out result with an error flag, not a crash",
+            "description": "If the target date-time string can't be parsed into a valid date, every numeric field (days, hours, minutes, seconds, totalSeconds) is returned as zero, isPast is false, and a distinct invalid-date error is set — callers can check the error field first rather than needing to guard against a thrown exception."
+          },
+          {
+            "title": "Leftover milliseconds below one second are discarded, not rounded",
+            "description": "The millisecond difference between the two instants is floored down to whole seconds before any further breakdown happens, so a difference of, say, 4,999 milliseconds is treated as 4 whole seconds remaining, not rounded up to 5."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is 'now' passed in as an argument instead of the countdown calculator reading the clock itself?",
+            "answer": "Keeping the current time as an explicit input rather than an internal clock read makes the underlying calculation a pure function — the same target and now always produce the same result, which is straightforward to test and reason about. The live, ticking countdown visible on the page is produced by the surrounding interface calling this same pure function again every second with an updated now value, not by any timer logic inside the calculation itself."
+          },
+          {
+            "question": "What happens at the exact instant the countdown reaches zero?",
+            "answer": "That exact instant is treated as the event having already arrived — isPast switches to true as soon as the difference between the target and now is zero or less, rather than showing one final '0 days, 0 hours, 0 minutes, 0 seconds, still counting down' state before flipping over."
+          },
+          {
+            "question": "Why does the countdown discard fractions of a second instead of rounding them?",
+            "answer": "The raw millisecond difference is floored to whole seconds, meaning any leftover fraction of a second is simply dropped rather than rounded to the nearest second. This keeps a live, once-per-second-updating countdown from ever appearing to jump ahead of the actual elapsed time — flooring always undercounts slightly rather than ever overcounting."
+          },
+          {
+            "question": "Can this calculator be used to count up from a past event instead of down to a future one?",
+            "answer": "Yes — the calculation is symmetric around zero. If the target date-time is in the past, the difference is still computed the same way and isPast is simply true, with the days/hours/minutes/seconds fields showing how much time has elapsed since that past moment rather than how much remains until a future one."
+          }
+        ]
       }
     }
   }

@@ -29733,6 +29733,516 @@
             "answer": "Con la coincidencia que distingue mayúsculas/minúsculas (la configuración predeterminada), \"Apple\" y \"apple\" se tratan como dos líneas distintas y ambas sobreviven a la deduplicación; con la coincidencia insensible a mayúsculas/minúsculas activada, se tratan como la misma línea y solo una sobrevive: qué mayúsculas y minúsculas específicas sobreviven depende entonces de la configuración de conservar primera o última."
           }
         ]
+      },
+      "age-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Edad: cómo se calculan una edad consciente del calendario, el progreso del año, los signos zodiacales, la generación y la edad hijri a partir de una fecha de nacimiento, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Cómo leer el porcentaje de progreso del año",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Calendarios",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Edad = fechaReferencia − fechaNacimiento → años, meses, días (consciente del calendario) | progresoAño% = (fechaReferencia − últimoCumpleaños) ÷ (próximoCumpleaños − últimoCumpleaños) × 100",
+          "note": "El desglose en años/meses/días se acumula exactamente igual que los cumpleaños reales; por ejemplo, 11 meses y 30 días se convierten en 1 año, 0 meses, 0 días, no en dos números grandes separados. Cualquier otra duración (días totales, semanas, horas, minutos, segundos) es una diferencia plana entre las dos fechas, no afectada por el acumulado del calendario."
+        },
+        "flowchart": {
+          "intro": "Cada cifra mostrada se deriva de solo dos fechas de calendario: la fecha de nacimiento y la fecha de referencia (hoy, a menos que se proporcione una personalizada).",
+          "steps": [
+            "Analizar la fecha de nacimiento y la fecha de referencia como fechas de calendario locales, sin componente de zona horaria ni hora del día que considerar",
+            "Calcular la duración consciente del calendario entre ellas: años, meses y días que se acumulan exactamente como lo hacen los cumpleaños, de modo que 11 meses y 30 días se convierten en 1 año, no en dos números grandes separados",
+            "Encontrar el próximo cumpleaños colocando el mes y día de nacimiento de este año sobre el año de referencia, luego avanzándolo un año si esa fecha ya pasó; los días restantes son la brecha en días de calendario hasta ella",
+            "Ubicar el cumpleaños más reciente de la misma manera, luego expresar cuán lejos cae la fecha de referencia entre ese último cumpleaños y el próximo como un porcentaje: el progreso del año",
+            "Por separado, derivar el signo zodiacal y el año del zodiaco chino a partir de la fecha de nacimiento, buscar la generación nombrada para el año de nacimiento, y convertir ambas fechas al calendario hijri para calcular una edad en el calendario hijri"
+          ],
+          "caption": "Entran dos fechas, sale una duración consciente del calendario más un conjunto de datos derivados: el zodiaco, la generación y la edad hijri se ramifican todos de las mismas dos fechas iniciales."
+        },
+        "anatomy": {
+          "intro": "El porcentaje de progreso del año mide cuán lejos ha viajado la fecha de referencia a través del año de nacimiento actual: el lapso entre el cumpleaños más reciente y el próximo.",
+          "labelSince": "Desde el último cumpleaños",
+          "labelUntil": "Hasta el próximo cumpleaños",
+          "totalLabel": "Año de nacimiento de 365 días",
+          "caption": "270 días desde el último cumpleaños de un lapso de 365 días equivale a un 74% de progreso del año, exactamente lo que reporta yearProgressPercent para este ejemplo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "fechaNacimiento",
+            "meaning": "La fecha de nacimiento, en formato AAAA-MM-DD.",
+            "unit": "Fecha"
+          },
+          {
+            "symbol": "fechaReferencia",
+            "meaning": "La fecha respecto a la cual calcular la edad. Por defecto es hoy si se omite.",
+            "unit": "Fecha"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Una fecha de referencia exacta al cumpleaños reinicia el progreso del año a 0%, no a 100%",
+            "description": "Cuando la fecha de referencia cae exactamente en un cumpleaños, daysUntilBirthday es 0, y el código trata este caso especialmente estableciendo yearProgressPercent en 0% en lugar de dividir entre un lapso de longitud cero: un viaje completo alrededor del año de nacimiento acaba de completarse, así que el siguiente comienza de nuevo."
+          },
+          {
+            "title": "El zodiaco chino se aproxima solo a partir del año gregoriano",
+            "description": "Se deriva puramente del año de nacimiento, no de la fecha real del Año Nuevo lunar, que cae en un día gregoriano diferente cada año (entre el 21 de enero y el 20 de febrero); alguien nacido en esa ventana puede pertenecer técnicamente al año animal anterior, algo que esta aproximación no puede detectar."
+          },
+          {
+            "title": "Los límites de generación combinan dos fuentes en una sola costura",
+            "description": "Todo hasta la Generación Z (que termina en 2012) sigue los límites publicados por Pew Research; la Generación Alfa y Beta continúan desde ahí usando la nomenclatura de McCrindle Research, cuyo propio año de inicio para Alfa (2010) de otro modo se superpondría con la Gen Z de Pew; la discrepancia de aproximadamente 3 años se resuelve comenzando Alfa en el punto final de Pew en lugar de adivinarse."
+          },
+          {
+            "title": "decimalAge usa un año fijo de 365.25 días, no un conteo exacto de años bisiestos",
+            "description": "La edad decimal divide el tiempo total transcurrido entre 365.25 días en lugar de contar la duración real de cada año específico (365 o 366 días); una simplificación deliberada que solo desplaza el resultado en unas pocas milésimas, no un error."
+          },
+          {
+            "title": "La edad hijri se calcula de forma independiente, no derivada de la edad gregoriana",
+            "description": "Tanto la fecha de nacimiento como la fecha de referencia se convierten por separado al calendario hijri, y la edad hijri proviene de la diferencia entre esas dos fechas hijri, no de convertir la brecha gregoriana de año/mes/día, por lo que las dos edades pueden divergir genuinamente cerca de un límite de año hijri o gregoriano."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el porcentaje de progreso del año muestra 0% en lugar de 100% en un cumpleaños exacto?",
+            "answer": "En el día exacto de un cumpleaños, los días restantes hasta el 'próximo' cumpleaños son cero, lo que haría que el cálculo de progreso del año dividiera entre un lapso de longitud cero. El código trata este caso especialmente estableciéndolo en 0% en su lugar, tratando el cumpleaños mismo como el inicio de un año completamente nuevo en lugar del final del antiguo: la lectura más intuitiva del 'día cero' de un nuevo año de nacimiento."
+          },
+          {
+            "question": "¿Cómo se determina exactamente la fecha del 'próximo cumpleaños'?",
+            "answer": "El mes y día de nacimiento se colocan sobre el año de la fecha de referencia para construir una fecha candidata. Si ese candidato ya cayó antes de la fecha de referencia (el cumpleaños ya ocurrió este año), se avanza exactamente un año. La cifra de días restantes es entonces simplemente la brecha en días de calendario entre la fecha de referencia y ese candidato."
+          },
+          {
+            "question": "¿Por qué decimalAge usa un año fijo de 365.25 días en lugar de contar exactamente los años bisiestos?",
+            "answer": "365.25 es la duración promedio de un año gregoriano a lo largo del ciclo bisiesto de 4 años, y usarlo como divisor constante mantiene el cálculo simple y consistente sin importar exactamente qué años haya vivido alguien. La edad decimal resultante difiere de un cálculo exacto y consciente de años bisiestos en, como máximo, unas pocas milésimas, muy por debajo de lo visible en una pantalla redondeada."
+          },
+          {
+            "question": "¿Por qué mi edad hijri podría resultar diferente de lo que esperaría simplemente convirtiendo mi edad gregoriana?",
+            "answer": "La edad hijri no se deriva convirtiendo la edad gregoriana: se calcula desde cero convirtiendo la fecha de nacimiento y la fecha de referencia cada una a sus propias fechas del calendario hijri, y luego encontrando la diferencia entre esas dos fechas hijri directamente. Debido a que la duración del año del calendario hijri difiere del gregoriano, alguien puede estar, por ejemplo, un año hijri completo más avanzado de lo que sugeriría una conversión ingenua de año gregoriano a hijri, especialmente cerca del límite de año de cualquiera de los dos calendarios."
+          },
+          {
+            "question": "¿Por qué el signo del zodiaco chino es solo una aproximación?",
+            "answer": "El año real del zodiaco chino cambia en el Año Nuevo lunar, que cae en una fecha gregoriana diferente cada año, en algún punto entre el 21 de enero y el 20 de febrero. Esta calculadora deriva el animal del zodiaco puramente del año gregoriano de nacimiento, por lo que alguien nacido en esa ventana temprana del año antes del Año Nuevo lunar real puede pertenecer técnicamente al animal del año anterior, algo que esta aproximación más simple basada en el año no tiene forma de detectar."
+          }
+        ]
+      },
+      "date-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Fechas: cómo se mide la brecha entre dos fechas y cómo se suma o resta una duración a una fecha, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Días totales divididos en semanas y un resto",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Modo diferencia: díasTotales = |fechaFin − fechaInicio| (días de calendario) → años, meses, días | Modo sumar/restar: fechaResultado = fechaInicio ± cantidad(unidad)",
+          "note": "En el modo diferencia, si la fecha de fin cae antes que la fecha de inicio, ambas se intercambian antes de calcular para que díasTotales sea siempre no negativo; una bandera separada informa si el orden original se invirtió. En el modo sumar/restar, sumar semanas primero convierte la cantidad a días (× 7); sumar meses o años usa aritmética consciente del calendario que puede desplazar el día del mes en los límites de fin de mes."
+        },
+        "flowchart": {
+          "intro": "La herramienta ejecuta uno de dos cálculos independientes según el modo seleccionado: encontrar la brecha entre dos fechas, o desplazar una sola fecha hacia adelante o hacia atrás.",
+          "steps": [
+            "Analizar la fecha de inicio (y, en modo diferencia, la fecha de fin) como fechas de calendario locales sin componente de zona horaria",
+            "En modo diferencia: si la fecha de fin cae antes que la fecha de inicio, intercambiar ambas internamente y recordar que se invirtieron, de modo que el total reportado sea siempre un lapso positivo",
+            "Calcular la brecha total en días de calendario entre las dos fechas, luego calcular por separado el desglose consciente del calendario en años/meses/días, que se acumula exactamente como lo hacen las fechas reales",
+            "En modo sumar/restar en su lugar: convertir la unidad elegida y la cantidad con signo (negativa para restar) en un único paso de aritmética de fechas; las semanas se convierten en días multiplicados por 7, mientras que los meses y años usan suma consciente del calendario",
+            "Aplicar ese paso a la fecha de inicio para producir la fecha resultado, lo que puede desplazar el día del mes cuando el mes objetivo es más corto que el mes de inicio"
+          ],
+          "caption": "El modo diferencia mide la brecha entre dos fechas conocidas; el modo sumar/restar proyecta una nueva fecha a partir de una fecha conocida y una duración."
+        },
+        "anatomy": {
+          "intro": "El conteo de días totales del modo diferencia puede dividirse en semanas completas más un resto, exactamente como lo calcula totalWeeks = Math.floor(totalDays / 7).",
+          "labelWeeks": "Semanas completas (7 días cada una)",
+          "labelRemainder": "Días restantes",
+          "totalLabel": "100 días en total",
+          "caption": "100 días totales entre dos fechas se dividen en 14 semanas completas (98 días) más un resto de 2 días, exactamente lo que representan totalWeeks y el resto a nivel de días."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "modo",
+            "meaning": "Si calcular la diferencia entre dos fechas, o sumar/restar una duración a una fecha.",
+            "unit": "—"
+          },
+          {
+            "symbol": "fechaInicio",
+            "meaning": "La fecha de inicio, en formato AAAA-MM-DD. Usada en ambos modos.",
+            "unit": "Fecha"
+          },
+          {
+            "symbol": "fechaFin",
+            "meaning": "La segunda fecha con la que comparar. Usada solo en modo diferencia.",
+            "unit": "Fecha"
+          },
+          {
+            "symbol": "cantidad",
+            "meaning": "Cuántas unidades sumar o restar. Usada solo en modo sumar/restar.",
+            "unit": "—"
+          },
+          {
+            "symbol": "unidad",
+            "meaning": "En qué unidad se mide la cantidad: días, semanas, meses o años. Usada solo en modo sumar/restar.",
+            "unit": "—"
+          },
+          {
+            "symbol": "operación",
+            "meaning": "Si sumar o restar la cantidad. Usada solo en modo sumar/restar.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Una fecha de fin anterior a la fecha de inicio se intercambia internamente, no se rechaza",
+            "description": "En lugar de devolver un error cuando la fecha de fin precede a la fecha de inicio, la calculadora intercambia las dos fechas internamente para calcular un lapso positivo, e informa por separado isEndBeforeStart: true para que quien llama sepa que el orden original se invirtió."
+          },
+          {
+            "title": "Una cantidad negativa para sumar/restar se rechaza de plano",
+            "description": "La cantidad a sumar o restar debe ser cero o positiva; una cantidad negativa devuelve un error de cantidad inválida en lugar de reinterpretarse silenciosamente como la operación opuesta (por ejemplo, una 'suma' negativa comportándose como 'resta')."
+          },
+          {
+            "title": "Sumar un mes puede desplazar el día del mes en los límites de meses cortos",
+            "description": "Sumar un mes al 31 de enero cae en un resultado calculado para un mes que puede no tener 31 días; la aritmética de fechas subyacente limita al último día válido del mes objetivo en lugar de desbordarse al mes siguiente."
+          },
+          {
+            "title": "El desglose de años/meses/días y el conteo bruto de días totales pueden parecer inconsistentes a primera vista",
+            "description": "El desglose consciente del calendario en años/meses/días tiene en cuenta cuántos días hay realmente en cada mes y año específicos abarcados, mientras que totalDays es un conteo plano de días; para lapsos que cruzan años bisiestos o meses de diferente duración, los dos no se relacionarán entre sí mediante una única multiplicación fija."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el intercambio de una fecha de fin anterior a la fecha de inicio ocurre automáticamente en lugar de mostrar un error?",
+            "answer": "Los usuarios a menudo no saben de antemano cuál de dos fechas viene primero, especialmente al comparar dos eventos arbitrarios; calcular automáticamente el lapso positivo correcto mientras se marca por separado isEndBeforeStart mantiene el resultado útil de cualquier manera, en lugar de forzar un reintento con las fechas en el orden 'correcto'."
+          },
+          {
+            "question": "¿Por qué sumar '1 mes' puede caer en un día del mes diferente al esperado?",
+            "answer": "Los meses del calendario no tienen todos el mismo número de días, por lo que sumar un mes a una fecha cerca del final de un mes más largo (como el 31 de enero) no siempre puede caer en el mismo número de día en un mes objetivo más corto (el 31 de febrero no existe); la aritmética de fechas subyacente limita en su lugar al último día válido de ese mes objetivo."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre totalDays y el desglose de años/meses/días en modo diferencia?",
+            "answer": "totalDays es un único conteo plano de días de calendario entre las dos fechas, útil para cosas como 'cuántos días han pasado'. El desglose de años/meses/días en cambio tiene en cuenta las duraciones realmente variables de los meses y años específicos abarcados, dando una respuesta más legible para humanos como '2 años, 3 meses, 10 días' en lugar de un único gran conteo de días."
+          },
+          {
+            "question": "¿Por qué se rechaza una cantidad negativa en modo sumar/restar en lugar de tratarse como la operación opuesta?",
+            "answer": "Mantener la cantidad restringida a valores cero o positivos, con una elección explícita separada de sumar o restar, evita la ambigüedad de una cantidad negativa combinada con una operación de resta, lo que de otro modo significaría efectivamente 'sumar', y mantiene el significado de la entrada inequívoco."
+          }
+        ]
+      },
+      "time-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Tiempo: cómo se suman o restan dos duraciones expresadas como horas, minutos y segundos, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Un resultado es en realidad un valor de segundos totales",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Operaciones",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "segundosTotales = (h₁×3600 + m₁×60 + s₁) ± (h₂×3600 + m₂×60 + s₂) | resultado = segundosTotales descompuesto de vuelta en horas, minutos, segundos",
+          "note": "Ambas duraciones de entrada se convierten primero a una única unidad común, segundos totales, se suman o restan ahí, y luego el resultado se descompone de vuelta en horas/minutos/segundos. Esto es aritmética pura de duración, no aritmética de hora de reloj: restar una duración más larga de una más corta produce correctamente un resultado negativo en lugar de dar la vuelta a un reloj de 24 horas."
+        },
+        "flowchart": {
+          "intro": "Ambas duraciones se validan, se convierten a una unidad compartida, se combinan, y luego se convierten de vuelta para mostrarse.",
+          "steps": [
+            "Validar que las horas, minutos y segundos de cada duración sean todos números no negativos, y que los minutos y segundos estén cada uno por debajo de 60",
+            "Convertir la primera duración en un único valor de segundos totales: horas × 3600 más minutos × 60 más segundos",
+            "Convertir la segunda duración en segundos totales de la misma manera",
+            "Sumar los dos totales, o restar el segundo del primero, según la operación elegida; esto puede producir un número negativo si se resta una duración más larga de una más corta",
+            "Descomponer el valor de segundos totales resultante de vuelta en horas, minutos y segundos para mostrarlo, usando el valor absoluto para que los componentes mismos sean siempre no negativos, junto con una bandera separada que indica si el resultado real fue negativo"
+          ],
+          "caption": "Dos duraciones se convierten en dos valores de segundos totales, que se combinan en un total con signo que se descompone de vuelta en horas, minutos y segundos."
+        },
+        "anatomy": {
+          "intro": "Un resultado mostrado de horas, minutos y segundos es en realidad solo un único valor de segundos totales, dividido de vuelta en sus tres componentes por tamaño.",
+          "labelHours": "Horas (como segundos)",
+          "labelMinutes": "Minutos (como segundos)",
+          "labelSeconds": "Segundos",
+          "totalLabel": "8,130 segundos en total",
+          "caption": "Un resultado de 2 horas 15 minutos 30 segundos son 8,130 segundos totales en el fondo: 7,200 segundos de las horas, 900 de los minutos, y 30 independientes."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "tiempo1",
+            "meaning": "La primera duración, como horas, minutos y segundos.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "tiempo2",
+            "meaning": "La segunda duración, como horas, minutos y segundos.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "operación",
+            "meaning": "Si sumar las dos duraciones juntas, o restar la segunda de la primera.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Restar una duración más larga de una más corta produce un resultado negativo genuino",
+            "description": "Esto es aritmética de duración, no aritmética de reloj de 24 horas: restar 3 horas de 1 hora produce correctamente −2 horas (isNegative: true) en lugar de dar la vuelta a 22 horas como lo haría un reloj."
+          },
+          {
+            "title": "Minutos y segundos de 60 o más se rechazan como inválidos, aunque la duración total sea correcta",
+            "description": "Los campos de minutos y segundos de cada entrada deben estar individualmente por debajo de 60; ingresar '90 minutos' directamente se rechaza, aunque sea una duración perfectamente válida; debe ingresarse como 1 hora 30 minutos en su lugar."
+          },
+          {
+            "title": "Los componentes del resultado mostrado son siempre no negativos, incluso cuando el resultado general es negativo",
+            "description": "fromSeconds() toma el valor absoluto del total antes de descomponerlo en horas/minutos/segundos, por lo que un resultado negativo se muestra como números de apariencia positiva (por ejemplo, '2h 0m 0s') junto con una bandera isNegative separada; el signo no está incorporado en ningún componente individual."
+          },
+          {
+            "title": "Las horas no tienen límite superior, a diferencia de los minutos y segundos",
+            "description": "Solo los minutos y segundos se validan para estar por debajo de 60; las horas pueden ser cualquier número no negativo, ya que una duración de '40 horas' es perfectamente normal de sumar o restar, a diferencia de '90 minutos', que se espera que se renormalice primero en horas."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué restar una duración más larga de una más corta da un resultado negativo en lugar de dar la vuelta como un reloj?",
+            "answer": "Esta herramienta suma y resta duraciones, lapsos de tiempo transcurrido, no lecturas de reloj. Una duración como '−2 horas' es una respuesta perfectamente significativa a 'cuánto más largas son 3 horas que 1 hora, expresado como diferencia', mientras que dar la vuelta a un reloj de 24 horas solo tendría sentido si estas fueran horas del día, que no lo son."
+          },
+          {
+            "question": "¿Por qué se rechaza '90 minutos' como entrada en lugar de convertirse automáticamente en 1 hora 30 minutos?",
+            "answer": "Cada campo (horas, minutos, segundos) se valida de forma independiente, requiriendo que los minutos y segundos estén por debajo de 60; esto mantiene el formato de entrada predecible y coincide con la forma en que normalmente se escribe y lee una duración, en lugar de reinterpretar silenciosamente un valor no normalizado."
+          },
+          {
+            "question": "¿Por qué un resultado negativo sigue mostrando números de horas/minutos/segundos de apariencia positiva?",
+            "answer": "La magnitud de un total negativo se descompone en horas, minutos y segundos usando su valor absoluto, por lo que esos tres números describen cuán grande es el resultado negativo, no su signo. Una bandera isNegative separada lleva el signo, y depende de la interfaz que lo muestra representar eso, por ejemplo, como un signo menos o texto rojo."
+          },
+          {
+            "question": "¿Hay un número máximo de horas que esta herramienta puede manejar?",
+            "answer": "No se aplica ningún límite superior explícito al campo de horas; solo los minutos y segundos están limitados por debajo de 60, ya que no se espera que las horas mismas 'den la vuelta' a una unidad más grande aquí de la forma en que 60 minutos dan la vuelta a 1 hora."
+          }
+        ]
+      },
+      "world-time-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor Mundial de Horas: cómo se leen los desfases de zona horaria en vivo desde la base de datos de zonas horarias del entorno de ejecución y se usan para convertir una hora de reloj entre zonas, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Comparando los desfases UTC de dos zonas",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rutas de conversión",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Desfase UTC(zona, instante) = lectura de reloj local en ese instante, comparada con UTC | diferenciaMinutos = desfaseDestino − desfaseOrigen | diferenciaDías = fecha de calendario de la zona(destino) − fecha de calendario de la zona(origen)",
+          "note": "Cada desfase se lee en vivo desde la propia base de datos de zonas horarias IANA del entorno de ejecución de JavaScript mediante Intl.DateTimeFormat, no de una tabla de búsqueda estática; esto hace que la conversión sea correcta a través de las transiciones de horario de verano para cualquier fecha, pasada o futura, sin necesitar una API externa ni un conjunto de datos actualizado periódicamente."
+        },
+        "flowchart": {
+          "intro": "Una hora convertida se construye anclándose a un único instante compartido e inequívoco, y luego leyendo los relojes locales de dos zonas en ese mismo instante.",
+          "steps": [
+            "Si se convierte 'ahora mismo', el instante actual ya se conoce de forma absoluta; los desfases de las dos zonas simplemente se leen en ese momento exacto",
+            "Si se convierte una hora de reloj específica ingresada para la zona de 'origen' en su lugar, primero estimar el instante UTC correspondiente, luego volver a leer el desfase de esa zona en el instante estimado y corregir la estimación; una segunda pasada, ya que el propio desfase puede cambiar a través de una transición de horario de verano",
+            "Una vez que se conoce el instante UTC compartido, leer el desfase UTC de cada zona en ese instante usando la propia base de datos de zonas horarias del entorno de ejecución",
+            "Calcular la diferencia entre los desfases de las dos zonas en minutos; positivo significa que la zona de destino está adelantada respecto a la zona de origen",
+            "Calcular por separado la fecha de calendario propia de cada zona en ese instante y compararlas, para determinar si la zona de destino está en el día anterior, el mismo día, o el día siguiente respecto a la zona de origen"
+          ],
+          "caption": "Un único instante UTC compartido, leído a través de los desfases locales de dos zonas, produce tanto la diferencia horaria como cualquier desplazamiento de día por línea de fecha entre ellas."
+        },
+        "anatomy": {
+          "intro": "El desfase UTC de una zona horaria puede trazarse en una única línea numérica que va desde las zonas más atrasadas hasta las más adelantadas.",
+          "labelFrom": "Nueva York",
+          "labelTo": "Tokio",
+          "caption": "Nueva York a UTC−5 y Tokio a UTC+9 están a 14 horas de distancia en la línea de desfase, exactamente el differenceMinutes que esta herramienta reportaría entre ellas (840 minutos)."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "año, mes, día, hora, minuto",
+            "meaning": "La fecha y hora de reloj a convertir, tal como se lee en un reloj en la zona de 'origen'.",
+            "unit": "—"
+          },
+          {
+            "symbol": "zonaOrigen",
+            "meaning": "La zona horaria IANA a la que pertenece la hora de reloj ingresada (p. ej., America/New_York).",
+            "unit": "—"
+          },
+          {
+            "symbol": "zonaDestino",
+            "meaning": "La zona horaria IANA a la que convertir esa hora (p. ej., Asia/Tokyo).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Convertir una lectura de reloj requiere dos pasadas para manejar el horario de verano correctamente",
+            "description": "Una hora de reloj se convierte primero a UTC usando una estimación de desfase inicial, luego esa estimación se corrige volviendo a leer el desfase en el instante recién estimado; necesario porque el desfase correcto puede depender de en qué lado de una transición de horario de verano cae el instante final, algo que no se conoce hasta después de la primera estimación."
+          },
+          {
+            "title": "Convertir 'ahora mismo' usa una ruta de código diferente a convertir una hora escrita específica, deliberadamente",
+            "description": "Cuando el instante ya se conoce de forma absoluta (el momento actual), se usa la lectura directa del desfase de cada zona en ese instante en lugar de interpretar los getters de hora local de ese instante como una lectura de reloj de la 'zona de origen'; esto último sustituiría silenciosamente la propia zona horaria del sistema del visitante por la zona que realmente se pretendía."
+          },
+          {
+            "title": "La diferencia de días puede ser −1, 0 o +1 incluso cuando la diferencia de desfase es pequeña",
+            "description": "Debido a que la diferencia de días se calcula comparando la fecha de calendario propia de cada zona en el instante compartido, una zona de destino con un desfase apenas cruzando la medianoche respecto a la hora local de la zona de origen puede mostrar una diferencia de un día incluso si la brecha de desfase bruta es pequeña; esto no es necesariamente proporcional a cuántas horas de distancia están las zonas."
+          },
+          {
+            "title": "La superposición de horario laboral usa el desfase de cada zona al mediodía UTC en la fecha de referencia como sustituto de todo el día",
+            "description": "Esta es una simplificación deliberada: debido a que las transiciones de horario de verano ocurren entre la 1 y las 3 de la madrugada hora local, no alrededor del mediodía, usar el desfase de mediodía UTC para el cálculo de superposición de todo el día es preciso excepto por un par de horas, una vez al año, en zonas que observan horario de verano."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta usa la propia base de datos de zonas horarias del entorno de ejecución en lugar de una tabla de desfases estática?",
+            "answer": "Los desfases de zona horaria cambian con el horario de verano, y diferentes países cambian sus reglas de horario de verano a lo largo de los años; una tabla estática necesitaría actualizaciones manuales constantes para permanecer correcta. Confiar en la base de datos de zonas horarias IANA incorporada de Intl.DateTimeFormat significa que la conversión es automáticamente correcta para cualquier fecha, incluidas fechas anteriores o posteriores a que entraran en vigor las reglas de horario de verano actuales, sin dependencias externas."
+          },
+          {
+            "question": "¿Por qué convertir una hora escrita específica requiere dos pasadas, pero convertir 'ahora mismo' no?",
+            "answer": "'Ahora mismo' ya es un instante absoluto inequívoco, por lo que el desfase de cada zona se puede leer directamente en ese instante en una sola pasada. Una hora de reloj escrita, en cambio, primero tiene que convertirse en un instante absoluto, y el desfase usado para esa conversión puede ser incorrecto si la estimación inicial cayó en el lado equivocado de una transición de horario de verano, razón por la cual se necesita una segunda pasada correctiva."
+          },
+          {
+            "question": "¿Por qué puede la diferencia de días estar desviada por un día completo incluso cuando las horas de reloj de las dos zonas parecen cercanas?",
+            "answer": "La diferencia de días compara la fecha de calendario propia de cada zona, no la brecha de desfase bruta; una zona cuya hora local está justo después de la medianoche y otra cuya hora local está justo antes de la medianoche pueden tener desfases muy cercanos en horas pero aun así estar en dos fechas de calendario diferentes en ese instante, exactamente el tipo de situación que el cálculo de diferencia de días está pensado para revelar."
+          },
+          {
+            "question": "¿Qué tan precisa es la ventana sugerida de horario laboral superpuesto?",
+            "answer": "Es precisa para la abrumadora mayoría de los días, ya que estima el desfase UTC de cada zona una vez al mediodía UTC en la fecha de referencia y asume que ese desfase se mantiene todo el día; esto es cierto excepto durante el único día o los dos días al año en que realmente ocurre la transición de horario de verano de una zona, e incluso entonces la transición ocurre muy temprano en la mañana hora local, no alrededor del horario laboral que esta función está pensada para ayudar a programar."
+          }
+        ]
+      },
+      "countdown-to-event-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Cuenta Regresiva para Eventos: cómo se calcula el tiempo restante hasta una fecha y hora objetivo y se descompone en días, horas, minutos y segundos, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Una cuenta regresiva es un valor de segundos totales, dividido",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Unidades de salida",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "segundosTotales = |instanteObjetivo − instanteActual| ÷ 1000 (redondeado hacia abajo) | segundosTotales → días, horas, minutos, segundos",
+          "note": "La cuenta regresiva se deriva puramente de dos instantes en el tiempo: la fecha y hora objetivo y el momento actual, con el momento actual proporcionado por quien llama en lugar de leerse internamente, lo que mantiene el cálculo subyacente puro y comprobable mientras el componente que lo muestra vuelve a suministrar un 'ahora' fresco cada segundo."
+        },
+        "flowchart": {
+          "intro": "Una cuenta regresiva en vivo es en realidad un cálculo puro de instantánea, ejecutado de nuevo una vez por segundo con un valor 'ahora' fresco.",
+          "steps": [
+            "Analizar la cadena de fecha y hora objetivo en un instante absoluto; una cadena no analizable devuelve inmediatamente un error de fecha inválida",
+            "Restar el instante actual (proporcionado por quien llama) del instante objetivo para obtener una diferencia en milisegundos con signo",
+            "Determinar si el objetivo ya pasó: verdadero en cuanto la diferencia es cero o negativa, lo que significa que el momento exacto de llegada ya cuenta como pasado",
+            "Convertir el valor absoluto de esa diferencia en un número entero de segundos totales, descartando cualquier milisegundo sobrante",
+            "Descomponer el valor de segundos totales en días, horas, minutos y segundos mediante división entera repetida: primero los días, luego las horas de lo que queda, luego los minutos, luego los segundos"
+          ],
+          "caption": "Un instante restado de otro produce una duración con signo, que luego se desempaqueta en las cuatro unidades familiares de cuenta regresiva."
+        },
+        "anatomy": {
+          "intro": "Las cuatro unidades de cuenta regresiva son en realidad un único valor de segundos totales, dividido por tamaño, exactamente como funciona la descomposición en días/horas/minutos/segundos.",
+          "labelDays": "Días (como segundos)",
+          "labelHours": "Horas (como segundos)",
+          "labelMinutes": "Minutos (como segundos)",
+          "labelSeconds": "Segundos",
+          "totalLabel": "192,615 segundos en total",
+          "caption": "Una lectura de cuenta regresiva de '2 días, 5 horas, 30 minutos, 15 segundos' son 192,615 segundos totales en el fondo: 172,800 de los días, 18,000 de las horas, 1,800 de los minutos, y 15 independientes."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "fechaHoraObjetivoISO",
+            "meaning": "La fecha y hora del evento objetivo, como una cadena de fecha y hora ISO 8601.",
+            "unit": "—"
+          },
+          {
+            "symbol": "ahoraMs",
+            "meaning": "La hora actual, en milisegundos de época, proporcionada por quien llama en lugar de leerse internamente.",
+            "unit": "ms"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "El instante exacto de llegada del objetivo cuenta como ya pasado, no como cuenta regresiva aún en curso",
+            "description": "isPast se vuelve verdadero en cuanto la diferencia entre el objetivo y ahora es cero o negativa; el momento preciso en que la cuenta regresiva llega a cero se trata como que el evento ha llegado, no como un último tick de 'todavía contando'."
+          },
+          {
+            "title": "'Ahora' se proporciona desde quien llama, no se lee internamente, para mantener el cálculo puro",
+            "description": "El motor nunca llama al reloj del sistema por sí mismo; el instante actual se pasa como argumento. Esto mantiene el cálculo subyacente como una función pura y comprobable de sus entradas; el comportamiento de actualización en vivo, una vez por segundo, visible en la página proviene completamente de la interfaz circundante que vuelve a invocar esta misma función pura con un valor 'ahora' fresco en cada tick."
+          },
+          {
+            "title": "Una cadena de fecha y hora objetivo no analizable devuelve un resultado en cero con una bandera de error, no un fallo",
+            "description": "Si la cadena de fecha y hora objetivo no puede analizarse en una fecha válida, cada campo numérico (días, horas, minutos, segundos, segundosTotales) se devuelve como cero, isPast es falso, y se establece un error distinto de fecha inválida; quienes llaman pueden verificar primero el campo de error en lugar de necesitar protegerse contra una excepción lanzada."
+          },
+          {
+            "title": "Los milisegundos sobrantes por debajo de un segundo se descartan, no se redondean",
+            "description": "La diferencia en milisegundos entre los dos instantes se redondea hacia abajo a segundos completos antes de cualquier otra descomposición, por lo que una diferencia de, digamos, 4,999 milisegundos se trata como 4 segundos completos restantes, no se redondea hacia arriba a 5."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué se pasa 'ahora' como argumento en lugar de que la calculadora de cuenta regresiva lea el reloj por sí misma?",
+            "answer": "Mantener la hora actual como una entrada explícita en lugar de una lectura interna del reloj hace que el cálculo subyacente sea una función pura: el mismo objetivo y ahora siempre producen el mismo resultado, lo cual es sencillo de probar y razonar. La cuenta regresiva en vivo, palpitante, visible en la página se produce por la interfaz circundante que llama a esta misma función pura de nuevo cada segundo con un valor de ahora actualizado, no por ninguna lógica de temporizador dentro del cálculo mismo."
+          },
+          {
+            "question": "¿Qué sucede en el instante exacto en que la cuenta regresiva llega a cero?",
+            "answer": "Ese instante exacto se trata como si el evento ya hubiera llegado; isPast cambia a verdadero tan pronto como la diferencia entre el objetivo y ahora es cero o menos, en lugar de mostrar un último estado de '0 días, 0 horas, 0 minutos, 0 segundos, todavía contando' antes de cambiar."
+          },
+          {
+            "question": "¿Por qué la cuenta regresiva descarta fracciones de segundo en lugar de redondearlas?",
+            "answer": "La diferencia bruta en milisegundos se redondea hacia abajo a segundos completos, lo que significa que cualquier fracción de segundo sobrante simplemente se descarta en lugar de redondearse al segundo más cercano. Esto evita que una cuenta regresiva en vivo, que se actualiza una vez por segundo, parezca alguna vez adelantarse al tiempo realmente transcurrido; redondear hacia abajo siempre subcuenta ligeramente en lugar de sobrecontar alguna vez."
+          },
+          {
+            "question": "¿Se puede usar esta calculadora para contar hacia arriba desde un evento pasado en lugar de hacia abajo hasta uno futuro?",
+            "answer": "Sí, el cálculo es simétrico alrededor de cero. Si la fecha y hora objetivo están en el pasado, la diferencia se calcula de la misma manera e isPast simplemente es verdadero, con los campos de días/horas/minutos/segundos mostrando cuánto tiempo ha transcurrido desde ese momento pasado en lugar de cuánto queda hasta uno futuro."
+          }
+        ]
       }
     }
   }

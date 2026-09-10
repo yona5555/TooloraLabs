@@ -29733,6 +29733,516 @@
             "answer": "Bei groß-/kleinschreibungssensitivem Abgleich (der Standardeinstellung) werden \"Apple\" und \"apple\" als zwei unterschiedliche Zeilen behandelt und beide überleben die Deduplizierung; bei aktiviertem groß-/kleinschreibungsunabhängigem Abgleich werden sie als dieselbe Zeile behandelt, und nur eine überlebt — welche spezifische Groß-/Kleinschreibung überlebt, hängt dann von der Einstellung erstes-oder-letztes-behalten ab."
           }
         ]
+      },
+      "age-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Altersrechner: wie ein kalenderbewusstes Alter, Jahresfortschritt, Sternzeichen, Generation und Hijri-Alter aus einem Geburtsdatum berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Den Jahresfortschritt-Prozentsatz lesen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kalender",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Alter = Referenzdatum − Geburtsdatum → Jahre, Monate, Tage (kalenderbewusst) | Jahresfortschritt% = (Referenzdatum − letzter Geburtstag) ÷ (nächster Geburtstag − letzter Geburtstag) × 100",
+          "note": "Die Aufschlüsselung in Jahre/Monate/Tage rollt genauso über wie echte Geburtstage — zum Beispiel werden 11 Monate 30 Tage zu 1 Jahr, 0 Monaten, 0 Tagen, nicht zu zwei separaten großen Zahlen. Jede andere Dauer (Gesamttage, Wochen, Stunden, Minuten, Sekunden) ist eine flache Differenz zwischen den beiden Daten, unbeeinflusst vom Kalenderüberlauf."
+        },
+        "flowchart": {
+          "intro": "Jede angezeigte Zahl wird aus nur zwei Kalenderdaten abgeleitet — dem Geburtsdatum und dem Referenzdatum (heute, sofern kein benutzerdefiniertes angegeben wird).",
+          "steps": [
+            "Das Geburtsdatum und das Referenzdatum als lokale Kalenderdaten parsen, ohne Zeitzone oder Tageszeit zu berücksichtigen",
+            "Die kalenderbewusste Dauer zwischen ihnen berechnen — Jahre, Monate und Tage, die genau so überrollen wie Geburtstage, sodass 11 Monate 30 Tage zu 1 Jahr werden, nicht zu zwei separaten großen Zahlen",
+            "Den nächsten Geburtstag finden, indem der diesjährige Geburtsmonat und -tag auf das Referenzjahr gelegt wird, dann um ein Jahr nach vorne verschoben, falls dieses Datum bereits vergangen ist; die verbleibenden Tage sind die Kalendertag-Lücke dorthin",
+            "Den letzten Geburtstag auf dieselbe Weise finden, dann ausdrücken, wie weit das Referenzdatum zwischen diesem letzten und dem nächsten Geburtstag liegt, als Prozentsatz — der Jahresfortschritt",
+            "Separat das Sternzeichen und das chinesische Tierkreiszeichen aus dem Geburtsdatum ableiten, die benannte Generation für das Geburtsjahr nachschlagen, und beide Daten in den Hijri-Kalender umrechnen, um ein Hijri-Kalenderalter zu berechnen"
+          ],
+          "caption": "Zwei Daten hinein, eine kalenderbewusste Dauer plus eine Reihe abgeleiteter Fakten heraus — Sternzeichen, Generation und Hijri-Alter zweigen alle von denselben zwei Ausgangsdaten ab."
+        },
+        "anatomy": {
+          "intro": "Der Jahresfortschritt-Prozentsatz misst, wie weit das Referenzdatum durch das aktuelle Geburtsjahr gereist ist — die Spanne zwischen dem letzten und dem nächsten Geburtstag.",
+          "labelSince": "Seit letztem Geburtstag",
+          "labelUntil": "Bis nächstem Geburtstag",
+          "totalLabel": "365-Tage-Geburtsjahr",
+          "caption": "270 Tage seit dem letzten Geburtstag von einer 365-Tage-Spanne ergibt 74 % Jahresfortschritt — genau das, was yearProgressPercent für dieses Beispiel meldet."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Geburtsdatum",
+            "meaning": "Das Geburtsdatum, im Format JJJJ-MM-TT.",
+            "unit": "Datum"
+          },
+          {
+            "symbol": "Referenzdatum",
+            "meaning": "Das Datum, zu dem das Alter berechnet werden soll. Standardmäßig heute, wenn nicht angegeben.",
+            "unit": "Datum"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein geburtstagsgenaues Referenzdatum setzt den Jahresfortschritt auf 0 %, nicht 100 %",
+            "description": "Wenn das Referenzdatum genau auf einen Geburtstag fällt, ist daysUntilBirthday 0, und der Code behandelt yearProgressPercent als Sonderfall mit 0 %, statt durch eine Spanne der Länge null zu teilen — eine vollständige Reise um das Geburtsjahr wurde gerade abgeschlossen, sodass die nächste neu beginnt."
+          },
+          {
+            "title": "Das chinesische Tierkreiszeichen wird nur aus dem gregorianischen Jahr angenähert",
+            "description": "Es wird rein aus dem Geburtsjahr abgeleitet, nicht aus dem tatsächlichen Mondneujahrsdatum, das jedes Jahr auf einen anderen gregorianischen Tag fällt (zwischen dem 21. Januar und dem 20. Februar) — jemand, der in diesem Fenster geboren wurde, kann technisch zum vorherigen Tierjahr gehören, was diese Annäherung nicht erkennen kann."
+          },
+          {
+            "title": "Generationsgrenzen mischen zwei Quellen an einer einzigen Nahtstelle",
+            "description": "Alles bis zur Generation Z (endend 2012) folgt den veröffentlichten Grenzen von Pew Research; Generation Alpha und Beta setzen von dort mit der Benennung von McCrindle Research fort, deren eigenes Startjahr für Alpha (2010) sich sonst mit Pews Gen Z überschneiden würde — die etwa 3-jährige Diskrepanz wird gelöst, indem Alpha am Endpunkt von Pew beginnt, statt geraten zu werden."
+          },
+          {
+            "title": "decimalAge verwendet ein festes 365,25-Tage-Jahr, keine exakte Schaltjahrzählung",
+            "description": "Das Dezimalalter teilt die gesamte verstrichene Zeit durch 365,25 Tage, statt die tatsächliche Länge jedes spezifischen Jahres (365 oder 366 Tage) zu zählen — eine bewusste Vereinfachung, die das Ergebnis nur um wenige Tausendstel verschiebt, kein Fehler."
+          },
+          {
+            "title": "Das Hijri-Alter wird unabhängig berechnet, nicht aus dem gregorianischen Alter abgeleitet",
+            "description": "Sowohl das Geburtsdatum als auch das Referenzdatum werden separat in den Hijri-Kalender umgerechnet, und das Hijri-Alter ergibt sich aus der Differenz zwischen diesen beiden Hijri-Daten — nicht aus der Umrechnung der gregorianischen Jahr/Monat/Tag-Lücke —, sodass die beiden Alter nahe einer Hijri- oder gregorianischen Jahresgrenze tatsächlich auseinanderlaufen können."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum zeigt der Jahresfortschritt-Prozentsatz an einem exakten Geburtstag 0 % statt 100 %?",
+            "answer": "Am genauen Tag eines Geburtstags sind die verbleibenden Tage bis zum 'nächsten' Geburtstag null, was die Jahresfortschritt-Berechnung durch eine Spanne der Länge null teilen lassen würde. Der Code behandelt dies stattdessen als Sonderfall mit 0 % und betrachtet den Geburtstag selbst als Beginn eines brandneuen Jahres statt als Ende des alten — die intuitivste Lesart von 'Tag null' eines neuen Geburtsjahres."
+          },
+          {
+            "question": "Wie genau wird das 'nächste Geburtstag'-Datum bestimmt?",
+            "answer": "Der Geburtsmonat und -tag werden auf das Jahr des Referenzdatums gelegt, um ein Kandidatendatum zu bilden. Falls dieser Kandidat bereits vor dem Referenzdatum lag (der Geburtstag dieses Jahr also schon stattfand), wird er um genau ein Jahr nach vorne verschoben. Die verbleibenden Tage sind dann einfach die Kalendertag-Lücke zwischen dem Referenzdatum und diesem Kandidaten."
+          },
+          {
+            "question": "Warum verwendet decimalAge ein festes 365,25-Tage-Jahr statt Schaltjahre exakt zu zählen?",
+            "answer": "365,25 ist die durchschnittliche Länge eines gregorianischen Jahres über den 4-Jahres-Schaltzyklus hinweg, und die Verwendung als konstanter Divisor hält die Berechnung einfach und konsistent, unabhängig davon, genau welche Jahre jemand durchlebt hat. Das resultierende Dezimalalter unterscheidet sich von einer exakten, schaltjahrbewussten Berechnung um höchstens ein paar Tausendstel — weit unter dem, was in einer gerundeten Anzeige sichtbar ist."
+          },
+          {
+            "question": "Warum könnte mein Hijri-Alter anders ausfallen, als ich es durch bloße Umrechnung meines gregorianischen Alters erwarten würde?",
+            "answer": "Das Hijri-Alter wird nicht durch Umrechnung des gregorianischen Alters abgeleitet — es wird von Grund auf berechnet, indem das Geburtsdatum und das Referenzdatum jeweils in ihre eigenen Hijri-Kalenderdaten umgerechnet werden, und dann die Differenz zwischen diesen beiden Hijri-Daten direkt ermittelt wird. Da die Jahreslänge des Hijri-Kalenders sich von der gregorianischen unterscheidet, kann jemand beispielsweise ein volles Hijri-Jahr weiter sein, als eine naive gregorianisch-zu-Hijri-Jahresumrechnung nahelegen würde, besonders nahe der Jahresgrenze eines der beiden Kalender."
+          },
+          {
+            "question": "Warum ist das chinesische Tierkreiszeichen nur eine Annäherung?",
+            "answer": "Das echte chinesische Tierkreisjahr wechselt am Mondneujahr, das jedes Jahr auf ein anderes gregorianisches Datum fällt — irgendwo zwischen dem 21. Januar und dem 20. Februar. Dieser Rechner leitet das Tierkreiszeichen rein aus dem gregorianischen Geburtsjahr ab, sodass jemand, der in diesem frühen Jahresfenster vor dem tatsächlichen Mondneujahr geboren wurde, technisch zum Tier des Vorjahres gehören kann — etwas, das diese einfachere, jahresbasierte Annäherung nicht erkennen kann."
+          }
+        ]
+      },
+      "date-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Datumsrechner: wie die Lücke zwischen zwei Daten gemessen wird und wie eine Dauer zu einem Datum addiert oder davon subtrahiert wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Gesamttage aufgeteilt in Wochen und einen Rest",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Differenzmodus: Gesamttage = |Enddatum − Startdatum| (Kalendertage) → Jahre, Monate, Tage | Addieren/Subtrahieren-Modus: Ergebnisdatum = Startdatum ± Betrag(Einheit)",
+          "note": "Im Differenzmodus werden, falls das Enddatum vor dem Startdatum liegt, die beiden vor der Berechnung vertauscht, sodass Gesamttage immer nicht-negativ ist — ein separates Flag meldet, ob die ursprüngliche Reihenfolge umgekehrt wurde. Im Addieren/Subtrahieren-Modus wandelt das Hinzufügen von Wochen den Betrag zuerst in Tage um (×7); das Hinzufügen von Monaten oder Jahren verwendet kalenderbewusste Arithmetik, die den Tag des Monats an Monatsende-Grenzen verschieben kann."
+        },
+        "flowchart": {
+          "intro": "Das Tool führt je nach gewähltem Modus eine von zwei unabhängigen Berechnungen aus — die Lücke zwischen zwei Daten finden, oder ein einzelnes Datum vor- oder zurückverschieben.",
+          "steps": [
+            "Das Startdatum (und im Differenzmodus das Enddatum) als lokale Kalenderdaten ohne Zeitzonenkomponente parsen",
+            "Im Differenzmodus: falls das Enddatum vor dem Startdatum liegt, die beiden intern vertauschen und sich merken, dass sie umgekehrt wurden, sodass die gemeldete Summe immer eine positive Spanne ist",
+            "Die gesamte Kalendertag-Lücke zwischen den beiden Daten berechnen, dann separat die kalenderbewusste Jahre/Monate/Tage-Aufschlüsselung berechnen, die genauso überrollt wie echte Daten",
+            "Im Addieren/Subtrahieren-Modus stattdessen: die gewählte Einheit und den vorzeichenbehafteten Betrag (negativ zum Subtrahieren) in einen einzigen Datumsarithmetik-Schritt umwandeln — Wochen werden zu Tagen multipliziert mit 7, während Monate und Jahre kalenderbewusste Addition verwenden",
+            "Diesen Schritt auf das Startdatum anwenden, um das Ergebnisdatum zu erzeugen, was den Tag des Monats verschieben kann, wenn der Zielmonat kürzer ist als der Startmonat"
+          ],
+          "caption": "Der Differenzmodus misst die Lücke zwischen zwei bekannten Daten; der Addieren/Subtrahieren-Modus projiziert ein neues Datum aus einem bekannten Datum und einer Dauer."
+        },
+        "anatomy": {
+          "intro": "Die Gesamttageszahl aus dem Differenzmodus kann in volle Wochen plus einen Rest aufgeteilt werden, genau wie totalWeeks = Math.floor(totalDays / 7) es berechnet.",
+          "labelWeeks": "Volle Wochen (je 7 Tage)",
+          "labelRemainder": "Verbleibende Tage",
+          "totalLabel": "100 Tage insgesamt",
+          "caption": "100 Gesamttage zwischen zwei Daten teilen sich in 14 volle Wochen (98 Tage) plus einen 2-Tage-Rest auf — genau das, was totalWeeks und der Rest auf Tagesebene darstellen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Modus",
+            "meaning": "Ob die Differenz zwischen zwei Daten berechnet werden soll, oder eine Dauer zu einem Datum addiert/subtrahiert werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Startdatum",
+            "meaning": "Das Startdatum, im Format JJJJ-MM-TT. Wird in beiden Modi verwendet.",
+            "unit": "Datum"
+          },
+          {
+            "symbol": "Enddatum",
+            "meaning": "Das zweite Datum zum Vergleich. Nur im Differenzmodus verwendet.",
+            "unit": "Datum"
+          },
+          {
+            "symbol": "Betrag",
+            "meaning": "Wie viele Einheiten addiert oder subtrahiert werden sollen. Nur im Addieren/Subtrahieren-Modus verwendet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Einheit",
+            "meaning": "In welcher Einheit der Betrag gemessen wird: Tage, Wochen, Monate oder Jahre. Nur im Addieren/Subtrahieren-Modus verwendet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Ob der Betrag addiert oder subtrahiert werden soll. Nur im Addieren/Subtrahieren-Modus verwendet.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein Enddatum vor dem Startdatum wird intern vertauscht, nicht abgelehnt",
+            "description": "Statt einen Fehler zurückzugeben, wenn das Enddatum vor dem Startdatum liegt, vertauscht der Rechner die beiden Daten intern, um eine positive Spanne zu berechnen, und meldet separat isEndBeforeStart: true, damit der Aufrufer weiß, dass die ursprüngliche Reihenfolge umgekehrt wurde."
+          },
+          {
+            "title": "Ein negativer Addieren/Subtrahieren-Betrag wird rundweg abgelehnt",
+            "description": "Der zu addierende oder subtrahierende Betrag muss null oder positiv sein; ein negativer Betrag gibt einen Fehler für ungültigen Betrag zurück, statt stillschweigend als die entgegengesetzte Operation neu interpretiert zu werden (z. B. ein negatives 'Addieren', das sich wie 'Subtrahieren' verhält)."
+          },
+          {
+            "title": "Das Hinzufügen eines Monats kann den Tag des Monats an Kurzmonat-Grenzen verschieben",
+            "description": "Das Hinzufügen eines Monats zum 31. Januar landet auf einem berechneten Ergebnis für einen Monat, der möglicherweise nicht 31 Tage hat — die zugrunde liegende Datumsarithmetik begrenzt auf den letzten gültigen Tag des Zielmonats, statt in den folgenden Monat überzulaufen."
+          },
+          {
+            "title": "Die Jahre/Monate/Tage-Aufschlüsselung und die rohe Gesamttageszahl können auf den ersten Blick inkonsistent wirken",
+            "description": "Die kalenderbewusste Jahre/Monate/Tage-Aufschlüsselung berücksichtigt, wie viele Tage tatsächlich in jedem spezifischen überspannten Monat und Jahr liegen, während Gesamttage eine flache Tageszählung ist — bei Spannen, die Schaltjahre oder unterschiedlich lange Monate überspannen, stehen die beiden nicht durch eine einzige feste Multiplikation zueinander in Beziehung."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum geschieht das Vertauschen eines Enddatums vor dem Startdatum automatisch, statt einen Fehler anzuzeigen?",
+            "answer": "Nutzer wissen oft nicht im Voraus, welches von zwei Daten zuerst kommt, besonders beim Vergleich zweier beliebiger Ereignisse — die korrekte positive Spanne automatisch zu berechnen und dabei separat isEndBeforeStart zu kennzeichnen, hält das Ergebnis so oder so nutzbar, statt einen erneuten Versuch mit den Daten in der 'richtigen' Reihenfolge zu erzwingen."
+          },
+          {
+            "question": "Warum kann das Hinzufügen von '1 Monat' auf einem anderen Tag des Monats landen als erwartet?",
+            "answer": "Kalendermonate haben nicht alle die gleiche Anzahl an Tagen, sodass das Hinzufügen eines Monats zu einem Datum nahe dem Ende eines längeren Monats (wie dem 31. Januar) nicht immer auf derselben Tagesnummer in einem kürzeren Zielmonat landen kann (den 31. Februar gibt es nicht) — die zugrunde liegende Datumsarithmetik begrenzt stattdessen auf den letzten gültigen Tag jenes Zielmonats."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen totalDays und der Jahre/Monate/Tage-Aufschlüsselung im Differenzmodus?",
+            "answer": "totalDays ist eine einzige flache Zählung der Kalendertage zwischen den beiden Daten, nützlich für Dinge wie 'wie viele Tage sind vergangen'. Die Jahre/Monate/Tage-Aufschlüsselung berücksichtigt stattdessen die tatsächlich unterschiedlichen Längen der spezifischen überspannten Monate und Jahre und liefert eine menschenlesbarere Antwort wie '2 Jahre, 3 Monate, 10 Tage' statt einer einzigen großen Tageszahl."
+          },
+          {
+            "question": "Warum wird ein negativer Betrag im Addieren/Subtrahieren-Modus abgelehnt, statt als entgegengesetzte Operation behandelt zu werden?",
+            "answer": "Den Betrag auf null oder positive Werte zu beschränken, mit einer separaten expliziten Addieren-oder-Subtrahieren-Wahl, vermeidet die Mehrdeutigkeit eines negativen Betrags kombiniert mit einer Subtrahieren-Operation — was sonst effektiv 'addieren' bedeuten würde — und hält die Bedeutung der Eingabe eindeutig."
+          }
+        ]
+      },
+      "time-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Zeitrechner: wie zwei als Stunden, Minuten und Sekunden ausgedrückte Dauern addiert oder subtrahiert werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Ein Ergebnis ist eigentlich ein Gesamtsekunden-Wert",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Operationen",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Gesamtsekunden = (h₁×3600 + m₁×60 + s₁) ± (h₂×3600 + m₂×60 + s₂) | Ergebnis = Gesamtsekunden zurück in Stunden, Minuten, Sekunden zerlegt",
+          "note": "Beide eingegebenen Dauern werden zunächst in eine einzige gemeinsame Einheit umgerechnet, Gesamtsekunden, dort addiert oder subtrahiert, und dann wird das Ergebnis zurück in Stunden/Minuten/Sekunden zerlegt. Dies ist reine Dauerarithmetik, keine Uhrzeitarithmetik — das Subtrahieren einer längeren Dauer von einer kürzeren ergibt korrekt ein negatives Ergebnis, statt um eine 24-Stunden-Uhr herumzulaufen."
+        },
+        "flowchart": {
+          "intro": "Beide Dauern werden validiert, in eine gemeinsame Einheit umgerechnet, kombiniert, und dann zur Anzeige zurückgerechnet.",
+          "steps": [
+            "Prüfen, dass die Stunden, Minuten und Sekunden jeder Dauer allesamt nicht-negative Zahlen sind, und dass Minuten und Sekunden jeweils unter 60 liegen",
+            "Die erste Dauer in einen einzigen Gesamtsekunden-Wert umrechnen: Stunden × 3600 plus Minuten × 60 plus Sekunden",
+            "Die zweite Dauer auf dieselbe Weise in Gesamtsekunden umrechnen",
+            "Die beiden Summen addieren, oder die zweite von der ersten subtrahieren, je nach gewählter Operation — dies kann eine negative Zahl ergeben, wenn eine längere Dauer von einer kürzeren subtrahiert wird",
+            "Den resultierenden Gesamtsekunden-Wert zur Anzeige zurück in Stunden, Minuten und Sekunden zerlegen, unter Verwendung des Absolutwerts, sodass die Komponenten selbst immer nicht-negativ sind, zusammen mit einem separaten Flag, das vermerkt, ob das tatsächliche Ergebnis negativ war"
+          ],
+          "caption": "Zwei Dauern werden zu zwei Gesamtsekunden-Werten, die sich zu einer vorzeichenbehafteten Summe kombinieren, die zurück in Stunden, Minuten und Sekunden zerlegt wird."
+        },
+        "anatomy": {
+          "intro": "Ein angezeigtes Ergebnis aus Stunden, Minuten und Sekunden ist eigentlich nur ein einziger Gesamtsekunden-Wert, zurück in seine drei Komponenten nach Größe aufgeteilt.",
+          "labelHours": "Stunden (als Sekunden)",
+          "labelMinutes": "Minuten (als Sekunden)",
+          "labelSeconds": "Sekunden",
+          "totalLabel": "8.130 Sekunden insgesamt",
+          "caption": "Ein Ergebnis von 2 Stunden 15 Minuten 30 Sekunden sind im Kern 8.130 Gesamtsekunden — 7.200 Sekunden von den Stunden, 900 von den Minuten, und 30 eigenständig."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Zeit 1",
+            "meaning": "Die erste Dauer, als Stunden, Minuten und Sekunden.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "Zeit 2",
+            "meaning": "Die zweite Dauer, als Stunden, Minuten und Sekunden.",
+            "unit": "h:m:s"
+          },
+          {
+            "symbol": "Operation",
+            "meaning": "Ob die beiden Dauern addiert werden sollen, oder die zweite von der ersten subtrahiert werden soll.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Das Subtrahieren einer längeren Dauer von einer kürzeren ergibt ein echtes negatives Ergebnis",
+            "description": "Dies ist Dauerarithmetik, keine 24-Stunden-Uhr-Arithmetik — das Subtrahieren von 3 Stunden von 1 Stunde ergibt korrekt −2 Stunden (isNegative: true), statt auf 22 Stunden umzulaufen, wie es eine Uhr täte."
+          },
+          {
+            "title": "Minuten und Sekunden von 60 oder mehr werden als ungültig abgelehnt, selbst wenn die Gesamtdauer in Ordnung wäre",
+            "description": "Die Minuten- und Sekundenfelder jeder Eingabe müssen einzeln unter 60 liegen — die direkte Eingabe von '90 Minuten' wird abgelehnt, auch wenn es eine vollkommen gültige Dauer ist; sie muss stattdessen als 1 Stunde 30 Minuten eingegeben werden."
+          },
+          {
+            "title": "Die angezeigten Ergebniskomponenten sind immer nicht-negativ, selbst wenn das Gesamtergebnis negativ ist",
+            "description": "fromSeconds() nimmt den Absolutwert der Summe, bevor sie in Stunden/Minuten/Sekunden zerlegt wird, sodass ein negatives Ergebnis als positiv aussehende Zahlen angezeigt wird (z. B. '2h 0m 0s') zusammen mit einem separaten isNegative-Flag — das Vorzeichen ist in keine einzelne Komponente eingebacken."
+          },
+          {
+            "title": "Stunden haben keine Obergrenze, im Gegensatz zu Minuten und Sekunden",
+            "description": "Nur Minuten und Sekunden werden darauf validiert, unter 60 zu liegen; Stunden können jede nicht-negative Zahl sein, da eine Dauer von '40 Stunden' vollkommen normal zu addieren oder zu subtrahieren ist, anders als '90 Minuten', von denen erwartet wird, dass sie zuerst in Stunden umnormiert werden."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ergibt das Subtrahieren einer längeren Dauer von einer kürzeren ein negatives Ergebnis, statt wie eine Uhr umzulaufen?",
+            "answer": "Dieses Tool addiert und subtrahiert Dauern — Spannen verstrichener Zeit —, keine Uhrzeiten. Eine Dauer wie '−2 Stunden' ist eine vollkommen sinnvolle Antwort auf 'um wie viel länger sind 3 Stunden als 1 Stunde, als Differenz ausgedrückt', während das Umlaufen um eine 24-Stunden-Uhr nur Sinn ergäbe, wenn dies Tageszeiten wären, was sie nicht sind."
+          },
+          {
+            "question": "Warum wird '90 Minuten' als Eingabe abgelehnt, statt automatisch in 1 Stunde 30 Minuten umgewandelt zu werden?",
+            "answer": "Jedes Feld (Stunden, Minuten, Sekunden) wird unabhängig validiert, wobei Minuten und Sekunden unter 60 liegen müssen — dies hält das Eingabeformat vorhersehbar und entspricht der Art, wie eine Dauer normalerweise geschrieben und gelesen wird, statt einen nicht normalisierten Wert stillschweigend neu zu interpretieren."
+          },
+          {
+            "question": "Warum zeigt ein negatives Ergebnis immer noch positiv aussehende Stunden-/Minuten-/Sekundenzahlen?",
+            "answer": "Der Betrag einer negativen Summe wird unter Verwendung ihres Absolutwerts in Stunden, Minuten und Sekunden zerlegt, sodass diese drei Zahlen beschreiben, wie groß das negative Ergebnis ist, nicht sein Vorzeichen. Ein separates isNegative-Flag trägt das Vorzeichen, und es liegt an der anzeigenden Oberfläche, dies beispielsweise als Minuszeichen oder roten Text darzustellen."
+          },
+          {
+            "question": "Gibt es eine maximale Anzahl an Stunden, die dieses Tool verarbeiten kann?",
+            "answer": "Für das Stundenfeld ist keine explizite Obergrenze durchgesetzt — nur Minuten und Sekunden sind auf unter 60 begrenzt, da von Stunden selbst hier nicht erwartet wird, in eine größere Einheit 'überzurollen', so wie 60 Minuten in 1 Stunde überrollen."
+          }
+        ]
+      },
+      "world-time-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Weltzeit-Konverter: wie Zeitzonen-Offsets live aus der Zeitzonendatenbank der Laufzeitumgebung gelesen und zur Umrechnung einer Uhrzeit zwischen Zonen verwendet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Zwei Zonen-UTC-Offsets vergleichen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Umrechnungswege",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "UTC-Offset(Zone, Zeitpunkt) = lokale Uhrzeit-Ablesung zu diesem Zeitpunkt, verglichen mit UTC | Differenzminuten = Ziel-Offset − Quell-Offset | Tagesdifferenz = Kalenderdatum der Zone(Ziel) − Kalenderdatum der Zone(Quelle)",
+          "note": "Jeder Offset wird live aus der eigenen IANA-Zeitzonendatenbank der JavaScript-Laufzeitumgebung über Intl.DateTimeFormat gelesen, nicht aus einer statischen Nachschlagetabelle — dies macht die Umrechnung über Sommerzeit-Übergänge hinweg für jedes Datum, vergangen oder zukünftig, korrekt, ohne eine externe API oder einen periodisch aktualisierten Datensatz zu benötigen."
+        },
+        "flowchart": {
+          "intro": "Eine umgerechnete Zeit wird gebildet, indem an einem gemeinsamen, eindeutigen Zeitpunkt verankert wird und dann die lokalen Uhren zweier Zonen zu genau diesem Zeitpunkt gelesen werden.",
+          "steps": [
+            "Bei der Umrechnung von 'jetzt' ist der aktuelle Zeitpunkt bereits absolut bekannt — die Offsets der beiden Zonen werden einfach genau zu diesem Moment gelesen",
+            "Bei der Umrechnung einer für die 'Von'-Zone eingegebenen spezifischen Uhrzeit stattdessen: zuerst den entsprechenden UTC-Zeitpunkt schätzen, dann den Offset dieser Zone zum geschätzten Zeitpunkt erneut lesen und die Schätzung korrigieren — ein zweiter Durchgang, da sich der Offset selbst über einen Sommerzeit-Übergang hinweg ändern kann",
+            "Sobald der gemeinsame UTC-Zeitpunkt bekannt ist, den UTC-Offset jeder Zone zu diesem Zeitpunkt mithilfe der eigenen Zeitzonendatenbank der Laufzeitumgebung lesen",
+            "Die Differenz zwischen den Offsets der beiden Zonen in Minuten berechnen — positiv bedeutet, dass die Zielzone der Ursprungszone voraus ist",
+            "Separat das eigene Kalenderdatum jeder Zone zu diesem Zeitpunkt berechnen und vergleichen, um zu bestimmen, ob die Zielzone am Vortag, am selben Tag oder am nächsten Tag relativ zur Ursprungszone liegt"
+          ],
+          "caption": "Ein gemeinsamer UTC-Zeitpunkt, gelesen durch die lokalen Offsets zweier Zonen, ergibt sowohl die Zeitdifferenz als auch jede Datumsgrenzen-Tagesverschiebung zwischen ihnen."
+        },
+        "anatomy": {
+          "intro": "Der UTC-Offset einer Zeitzone kann auf einer einzigen Zahlenlinie aufgetragen werden, die von den am weitesten zurückliegenden zu den am weitesten vorauseilenden Zonen verläuft.",
+          "labelFrom": "New York",
+          "labelTo": "Tokio",
+          "caption": "New York bei UTC−5 und Tokio bei UTC+9 liegen 14 Stunden auseinander auf der Offset-Linie — genau die differenceMinutes, die dieses Tool zwischen ihnen melden würde (840 Minuten)."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Jahr, Monat, Tag, Stunde, Minute",
+            "meaning": "Das umzurechnende Datum und die Uhrzeit, wie auf einer Uhr in der 'Von'-Zone abgelesen.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Von-Zone",
+            "meaning": "Die IANA-Zeitzone, zu der die eingegebene Uhrzeit gehört (z. B. America/New_York).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Nach-Zone",
+            "meaning": "Die IANA-Zeitzone, in die diese Zeit umgerechnet werden soll (z. B. Asia/Tokyo).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Umrechnung einer Uhrzeit-Ablesung erfordert zwei Durchgänge, um die Sommerzeit korrekt zu behandeln",
+            "description": "Eine Uhrzeit wird zunächst mit einer anfänglichen Offset-Schätzung in UTC umgerechnet, dann wird diese Schätzung korrigiert, indem der Offset zum neu geschätzten Zeitpunkt erneut gelesen wird — notwendig, weil der korrekte Offset selbst davon abhängen kann, auf welcher Seite eines Sommerzeit-Übergangs der endgültige Zeitpunkt liegt, was erst nach der ersten Schätzung bekannt ist."
+          },
+          {
+            "title": "Die Umrechnung von 'jetzt' verwendet bewusst einen anderen Codepfad als die Umrechnung einer spezifisch eingegebenen Zeit",
+            "description": "Wenn der Zeitpunkt bereits absolut bekannt ist (der aktuelle Moment), wird das direkte Lesen des Offsets jeder Zone zu diesem Zeitpunkt verwendet, statt die lokalen Zeit-Getter dieses Zeitpunkts als Uhrzeit-Ablesung der 'Von-Zone' zu interpretieren — letzteres würde stillschweigend die eigene Systemzeitzone des Besuchers für die tatsächlich gemeinte Zone einsetzen."
+          },
+          {
+            "title": "Die Tagesdifferenz kann −1, 0 oder +1 sein, selbst wenn die Offset-Differenz klein ist",
+            "description": "Da die Tagesdifferenz durch den Vergleich des eigenen Kalenderdatums jeder Zone zum gemeinsamen Zeitpunkt berechnet wird, kann eine Zielzone mit einem Offset, der nur knapp über Mitternacht der lokalen Zeit der Ursprungszone liegt, eine Ein-Tages-Differenz zeigen, selbst wenn die rohe Offset-Lücke klein ist — dies ist nicht notwendigerweise proportional dazu, wie viele Stunden die Zonen auseinanderliegen."
+          },
+          {
+            "title": "Die Geschäftszeiten-Überlappung verwendet den Offset jeder Zone um 12 Uhr UTC am Referenzdatum als Stellvertreter für den ganzen Tag",
+            "description": "Dies ist eine bewusste Vereinfachung: Da Sommerzeit-Übergänge um 1-3 Uhr lokaler Zeit stattfinden, nicht um die Mittagszeit, ist die Verwendung des 12-Uhr-UTC-Offsets für die Überlappungsberechnung des gesamten Tages bis auf ein paar Stunden, einmal im Jahr, in Zonen mit Sommerzeit genau."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum verwendet das Tool die eigene Zeitzonendatenbank der Laufzeitumgebung statt einer statischen Offset-Tabelle?",
+            "answer": "Zeitzonen-Offsets ändern sich mit der Sommerzeit, und verschiedene Länder ändern ihre Sommerzeit-Regeln über die Jahre hinweg — eine statische Tabelle bräuchte ständige manuelle Aktualisierungen, um korrekt zu bleiben. Sich auf die eingebaute IANA-Zeitzonendatenbank von Intl.DateTimeFormat zu verlassen bedeutet, dass die Umrechnung für jedes Datum automatisch korrekt ist, einschließlich Daten vor oder nach dem Inkrafttreten der aktuellen Sommerzeit-Regeln, ohne externe Abhängigkeiten."
+          },
+          {
+            "question": "Warum erfordert die Umrechnung einer spezifisch eingegebenen Zeit zwei Durchgänge, die Umrechnung von 'jetzt' aber nicht?",
+            "answer": "'Jetzt' ist bereits ein eindeutiger absoluter Zeitpunkt, sodass der Offset jeder Zone in einem Durchgang direkt zu diesem Zeitpunkt gelesen werden kann. Eine eingegebene Uhrzeit hingegen muss zunächst in einen absoluten Zeitpunkt umgewandelt werden — und der für diese Umrechnung verwendete Offset kann selbst falsch sein, falls die anfängliche Schätzung auf der falschen Seite eines Sommerzeit-Übergangs landete, weshalb ein zweiter, korrigierender Durchgang nötig ist."
+          },
+          {
+            "question": "Warum kann die Tagesdifferenz um einen ganzen Tag daneben liegen, selbst wenn die Uhrzeiten der beiden Zonen nah beieinander wirken?",
+            "answer": "Die Tagesdifferenz vergleicht das eigene Kalenderdatum jeder Zone, nicht die rohe Offset-Lücke — eine Zone, deren lokale Zeit knapp nach Mitternacht liegt, und eine, deren lokale Zeit knapp vor Mitternacht liegt, können in Stunden sehr nahe beieinanderliegende Offsets haben, aber zu diesem Zeitpunkt dennoch auf zwei verschiedenen Kalenderdaten liegen — genau die Art von Situation, die die Tagesdifferenz-Berechnung aufzeigen soll."
+          },
+          {
+            "question": "Wie genau ist das vorgeschlagene überlappende Geschäftszeiten-Fenster?",
+            "answer": "Es ist für die überwiegende Mehrheit der Tage genau, da es den UTC-Offset jeder Zone einmal um 12 Uhr UTC am Referenzdatum schätzt und annimmt, dass dieser Offset den ganzen Tag über gilt — was zutrifft, außer an dem einen oder den zwei Tagen im Jahr, an denen der Sommerzeit-Übergang einer Zone tatsächlich stattfindet, und selbst dann geschieht der Übergang in den sehr frühen Morgenstunden der lokalen Zeit, nicht um die Geschäftszeiten, die diese Funktion planen helfen soll."
+          }
+        ]
+      },
+      "countdown-to-event-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Countdown-zu-Ereignis-Rechner: wie die verbleibende Zeit bis zu einem Zieldatum und einer Zieluhrzeit berechnet und in Tage, Stunden, Minuten und Sekunden zerlegt wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Ein Countdown ist ein aufgeteilter Gesamtsekunden-Wert",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ausgabeeinheiten",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Gesamtsekunden = |Zielzeitpunkt − Jetzt-Zeitpunkt| ÷ 1000 (abgerundet) | Gesamtsekunden → Tage, Stunden, Minuten, Sekunden",
+          "note": "Der Countdown wird rein aus zwei Zeitpunkten abgeleitet — der Zieldatumszeit und dem aktuellen Moment —, wobei der aktuelle Moment vom Aufrufer bereitgestellt wird statt intern gelesen zu werden, was die zugrunde liegende Berechnung rein und testbar hält, während die anzeigende Komponente jede Sekunde ein frisches 'Jetzt' erneut liefert."
+        },
+        "flowchart": {
+          "intro": "Ein Live-Countdown ist eigentlich eine reine Momentaufnahme-Berechnung, die einmal pro Sekunde mit einem frischen 'Jetzt'-Wert erneut ausgeführt wird.",
+          "steps": [
+            "Den Ziel-Datumszeit-String in einen absoluten Zeitpunkt parsen; ein nicht parsbarer String gibt sofort einen Fehler für ungültiges Datum zurück",
+            "Den aktuellen Zeitpunkt (vom Aufrufer bereitgestellt) vom Zielzeitpunkt subtrahieren, um eine vorzeichenbehaftete Millisekunden-Differenz zu erhalten",
+            "Bestimmen, ob das Ziel bereits vergangen ist: wahr, sobald die Differenz null oder negativ ist, was bedeutet, dass der exakte Ankunftsmoment selbst bereits als vergangen zählt",
+            "Den Absolutwert dieser Differenz in eine ganze Zahl von Gesamtsekunden umrechnen, wobei etwaige übrige Millisekunden verworfen werden",
+            "Den Gesamtsekunden-Wert durch wiederholte Ganzzahldivision in Tage, Stunden, Minuten und Sekunden zerlegen — zuerst Tage, dann Stunden aus dem Rest, dann Minuten, dann Sekunden"
+          ],
+          "caption": "Ein von einem anderen subtrahierter Zeitpunkt ergibt eine vorzeichenbehaftete Dauer, die dann in die vier vertrauten Countdown-Einheiten entpackt wird."
+        },
+        "anatomy": {
+          "intro": "Die vier Countdown-Einheiten sind eigentlich ein einziger Gesamtsekunden-Wert, nach Größe aufgeteilt — genau wie die Tage/Stunden/Minuten/Sekunden-Zerlegung funktioniert.",
+          "labelDays": "Tage (als Sekunden)",
+          "labelHours": "Stunden (als Sekunden)",
+          "labelMinutes": "Minuten (als Sekunden)",
+          "labelSeconds": "Sekunden",
+          "totalLabel": "192.615 Sekunden insgesamt",
+          "caption": "Eine Countdown-Anzeige von '2 Tage, 5 Stunden, 30 Minuten, 15 Sekunden' sind im Kern 192.615 Gesamtsekunden — 172.800 von den Tagen, 18.000 von den Stunden, 1.800 von den Minuten, und 15 eigenständig."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Ziel-Datumszeit",
+            "meaning": "Das Datum und die Uhrzeit des Zielereignisses, als ISO-8601-Datumszeit-String.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Jetzt in Millisekunden",
+            "meaning": "Die aktuelle Zeit, in Epoch-Millisekunden, vom Aufrufer bereitgestellt statt intern gelesen.",
+            "unit": "ms"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Der exakte Ankunftszeitpunkt des Ziels zählt als bereits vergangen, nicht als noch laufender Countdown",
+            "description": "isPast wird wahr, sobald die Differenz zwischen Ziel und Jetzt null oder negativ ist — der präzise Moment, in dem der Countdown null erreicht, wird als Ankunft des Ereignisses behandelt, nicht als ein letzter 'noch zählend'-Tick."
+          },
+          {
+            "title": "'Jetzt' wird vom Aufrufer bereitgestellt, nicht intern gelesen, um die Berechnung rein zu halten",
+            "description": "Die Engine ruft niemals selbst die Systemuhr auf; der aktuelle Zeitpunkt wird als Argument übergeben. Dies hält die zugrunde liegende Berechnung eine reine, testbare Funktion ihrer Eingaben — das live aktualisierende, einmal pro Sekunde Verhalten, das auf der Seite sichtbar ist, kommt vollständig von der umgebenden Benutzeroberfläche, die diese dieselbe reine Funktion jeden Tick mit einem frischen 'Jetzt'-Wert erneut aufruft."
+          },
+          {
+            "title": "Ein nicht parsbarer Ziel-Datumszeit-String gibt ein genulltes Ergebnis mit Fehler-Flag zurück, keinen Absturz",
+            "description": "Falls der Ziel-Datumszeit-String nicht in ein gültiges Datum geparst werden kann, wird jedes numerische Feld (Tage, Stunden, Minuten, Sekunden, Gesamtsekunden) als null zurückgegeben, isPast ist falsch, und ein eigener Fehler für ungültiges Datum wird gesetzt — Aufrufer können zuerst das Fehlerfeld prüfen, statt sich gegen eine ausgelöste Ausnahme absichern zu müssen."
+          },
+          {
+            "title": "Übrige Millisekunden unter einer Sekunde werden verworfen, nicht gerundet",
+            "description": "Die Millisekunden-Differenz zwischen den beiden Zeitpunkten wird vor jeder weiteren Zerlegung auf ganze Sekunden abgerundet, sodass eine Differenz von beispielsweise 4.999 Millisekunden als 4 volle verbleibende Sekunden behandelt wird, nicht auf 5 aufgerundet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird 'Jetzt' als Argument übergeben, statt dass der Countdown-Rechner selbst die Uhr liest?",
+            "answer": "Die aktuelle Zeit als explizite Eingabe statt als internen Uhr-Aufruf zu halten, macht die zugrunde liegende Berechnung zu einer reinen Funktion — dasselbe Ziel und Jetzt liefern immer dasselbe Ergebnis, was einfach zu testen und nachzuvollziehen ist. Der live, tickende Countdown, der auf der Seite sichtbar ist, wird dadurch erzeugt, dass die umgebende Oberfläche diese dieselbe reine Funktion jede Sekunde erneut mit einem aktualisierten Jetzt-Wert aufruft, nicht durch irgendeine Timer-Logik innerhalb der Berechnung selbst."
+          },
+          {
+            "question": "Was passiert genau in dem Moment, in dem der Countdown null erreicht?",
+            "answer": "Dieser exakte Moment wird behandelt, als sei das Ereignis bereits eingetroffen — isPast wechselt zu wahr, sobald die Differenz zwischen Ziel und Jetzt null oder weniger ist, statt einen letzten '0 Tage, 0 Stunden, 0 Minuten, 0 Sekunden, noch zählend'-Zustand zu zeigen, bevor umgeschaltet wird."
+          },
+          {
+            "question": "Warum verwirft der Countdown Sekundenbruchteile, statt sie zu runden?",
+            "answer": "Die rohe Millisekunden-Differenz wird auf ganze Sekunden abgerundet, was bedeutet, dass jeder übrige Sekundenbruchteil einfach verworfen wird, statt auf die nächste Sekunde gerundet zu werden. Dies verhindert, dass ein live, einmal pro Sekunde aktualisierender Countdown jemals der tatsächlich verstrichenen Zeit voraus zu sein scheint — das Abrunden unterzählt immer leicht, statt jemals zu überzählen."
+          },
+          {
+            "question": "Kann dieser Rechner verwendet werden, um von einem vergangenen Ereignis aufwärts zu zählen, statt zu einem zukünftigen herunter?",
+            "answer": "Ja — die Berechnung ist symmetrisch um null. Falls die Ziel-Datumszeit in der Vergangenheit liegt, wird die Differenz weiterhin auf dieselbe Weise berechnet, und isPast ist einfach wahr, wobei die Felder Tage/Stunden/Minuten/Sekunden zeigen, wie viel Zeit seit diesem vergangenen Moment verstrichen ist, statt wie viel bis zu einem zukünftigen verbleibt."
+          }
+        ]
       }
     }
   }

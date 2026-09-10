@@ -7,6 +7,7 @@ import { CountdownCalculator as CountdownTool, type CountdownOutput } from "@too
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CountdownInputPanel from "./CountdownInputPanel";
 import CountdownResult from "./CountdownResult";
 import CountdownQuickReference from "./CountdownQuickReference";
@@ -66,6 +67,7 @@ export default function CountdownToEventCalculator({ education }: { education: R
           sidebar={<RelatedToolsSidebar currentSlug="countdown-to-event-calculator" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="countdown-to-event-calculator" />
               <SectionNav items={navItems} />
               <CountdownQuickReference />
             </div>

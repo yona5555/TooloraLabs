@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DateInputPanel from "./DateInputPanel";
 import DateResult from "./DateResult";
 import DateQuickReference from "./DateQuickReference";
@@ -76,6 +77,7 @@ export default function DateCalculator({ education }: { education: ReactNode }) 
           sidebar={<RelatedToolsSidebar currentSlug="date-calculator" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="date-calculator" />
               <SectionNav items={navItems} />
               <DateQuickReference />
             </div>

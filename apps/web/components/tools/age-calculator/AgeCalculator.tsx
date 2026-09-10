@@ -14,6 +14,7 @@ import AgeMilestones from "./AgeMilestones";
 import AgeLifeExpectancyCard from "./AgeLifeExpectancyCard";
 import AgePlanetaryAge from "./AgePlanetaryAge";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import type { AgeExtendedResult, CalendarSystem } from "./types";
 
 const tool = new AgeCalculatorTool();
@@ -278,7 +279,12 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
           </div>
         }
         sidebar={<RelatedToolsSidebar currentSlug="age-calculator" category="date-time" />}
-        secondary={<AgeMilestones result={result} digitStyle={digitStyle} />}
+        secondary={
+          <div className="flex flex-col gap-6">
+            <ViewDocsLink slug="age-calculator" />
+            <AgeMilestones result={result} digitStyle={digitStyle} />
+          </div>
+        }
       />
 
       {education}

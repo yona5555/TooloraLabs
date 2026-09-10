@@ -7,6 +7,7 @@ import { convertBetweenZones, compareZonesAtInstant } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import WorldTimeInputPanel from "./WorldTimeInputPanel";
 import WorldTimeResult from "./WorldTimeResult";
 import WorldTimeDisclaimer from "./WorldTimeDisclaimer";
@@ -104,6 +105,7 @@ export default function WorldTimeCalculator({ education }: { education: ReactNod
           sidebar={<RelatedToolsSidebar currentSlug="world-time-converter" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="world-time-converter" />
               <SectionNav items={navItems} />
               <WorldTimeDisclaimer />
               <WorldClockList digitStyle={digitStyle} />
