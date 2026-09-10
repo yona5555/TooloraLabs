@@ -30243,6 +30243,424 @@
             "answer": "Ja — die Berechnung ist symmetrisch um null. Falls die Ziel-Datumszeit in der Vergangenheit liegt, wird die Differenz weiterhin auf dieselbe Weise berechnet, und isPast ist einfach wahr, wobei die Felder Tage/Stunden/Minuten/Sekunden zeigen, wie viel Zeit seit diesem vergangenen Moment verstrichen ist, statt wie viel bis zu einem zukünftigen verbleibt."
           }
         ]
+      },
+      "gpa-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den GPA-Rechner: wie ein nach Credit-Stunden gewichteter Notendurchschnitt berechnet wird, und wie der auf kommenden Credits benötigte GPA für ein Ziel ermittelt wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Qualitätspunkte werden nach Credit-Stunden gewichtet",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Berechnungsmodus: GPA = Σ(Notenpunkte × Credit-Stunden) ÷ Σ(Credit-Stunden) | Zielmodus: erforderlicherGPA = (Ziel-GPA × (aktuelleCredits+geplanteCredits) − aktuellerGPA × aktuelleCredits) ÷ geplanteCredits",
+          "note": "Die Qualitätspunkte eines Kurses sind seine Notenpunkte multipliziert mit seinen Credit-Stunden; der Gesamt-GPA ist die Summe der Qualitätspunkte aller Kurse geteilt durch die Summe der Credit-Stunden aller Kurse — ein nach Credits gewichteter Durchschnitt, kein einfacher Durchschnitt der Noten selbst. Der Zielmodus rechnet von derselben Gewichtung rückwärts, um den auf den noch kommenden Credits benötigten GPA zu ermitteln."
+        },
+        "flowchart": {
+          "intro": "Zwei unabhängige Modi teilen dieselbe zugrunde liegende Idee — dass Notenpunkte vor der Mittelung nach Credit-Stunden gewichtet werden.",
+          "steps": [
+            "Im Berechnungsmodus: jeden Kurs mit null oder weniger Credit-Stunden verwerfen, dann die verbleibenden Credit-Stunden über alle Kurse summieren",
+            "Die Notenpunkte jedes verbleibenden Kurses mit seinen eigenen Credit-Stunden multiplizieren, um die Qualitätspunkte dieses Kurses zu erhalten, dann alle diese zu Gesamt-Qualitätspunkten summieren",
+            "Gesamt-Qualitätspunkte durch Gesamt-Credit-Stunden teilen, um den GPA zu erhalten, gerundet auf drei Dezimalstellen",
+            "Im Zielmodus stattdessen: die bereits aus aktuellen Credits angesammelten Qualitätspunkte berechnen (aktueller GPA × aktuelle Credits), dann die Gesamt-Qualitätspunkte berechnen, die nötig wären, um den Ziel-GPA über alle Credits zu erreichen, aktuelle plus geplante",
+            "Die bereits angesammelten Qualitätspunkte von dieser benötigten Summe abziehen, dann durch die geplanten Credits teilen, um den auf genau diesen kommenden Credits benötigten GPA zu erhalten — und prüfen, ob diese Zahl tatsächlich innerhalb der 0-bis-4,0-Skala liegt"
+          ],
+          "caption": "Der Berechnungsmodus gewichtet und mittelt bekannte Noten; der Zielmodus rechnet die Gewichtung rückwärts, um einen unbekannten zukünftigen GPA zu ermitteln."
+        },
+        "anatomy": {
+          "intro": "Jeder Kurs trägt Qualitätspunkte proportional zu seinen eigenen Credit-Stunden bei — ein schwererer Kurs zieht den GPA stärker in Richtung seiner eigenen Note.",
+          "labelCourseA": "3 Credits mit 4,0",
+          "labelCourseB": "4 Credits mit 3,0",
+          "totalLabel": "24 Qualitätspunkte",
+          "caption": "Ein 3-Credit-Kurs mit einer 4,0-Note trägt 12 Qualitätspunkte bei, und ein 4-Credit-Kurs mit einer 3,0-Note trägt ebenfalls 12 bei — zusammen ergeben 24 Qualitätspunkte über 7 Credits einen GPA von 3,43."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Operation",
+            "meaning": "Ob ein GPA aus einer Kursliste berechnet werden soll, oder der auf kommenden Credits benötigte GPA ermittelt werden soll.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Kurse",
+            "meaning": "Die Liste der Kurse, jeweils mit Notenpunkten (auf einer 0-4,0-Skala) und Credit-Stunden. Im Berechnungsmodus verwendet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Aktueller GPA, aktuelle Credits",
+            "meaning": "Der bereits erreichte GPA und die gesamten abgeschlossenen Credit-Stunden. Im Zielmodus verwendet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Ziel-GPA, geplante Credits",
+            "meaning": "Der zu erreichende GPA, und wie viele Credits noch kommen. Im Zielmodus verwendet.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Kurse mit null oder negativen Credit-Stunden werden stillschweigend ausgeschlossen",
+            "description": "Ein Kurseintrag mit Credit-Stunden bei oder unter null trägt nicht einfach null bei — er wird vollständig aus der Liste gefiltert, bevor summiert wird, sodass eine verirrte 0-Credit-Zeile den Gesamt-GPA nicht versehentlich auf null setzen kann."
+          },
+          {
+            "title": "Eine leere oder komplett nullkredit-Kursliste ist ein eigener Fehler, kein GPA von 0,0",
+            "description": "Wenn alle Kurse herausgefiltert werden (oder überhaupt keine Kurse eingegeben wurden), gibt das Tool einen Fehler für keine Kurse zurück, statt einen GPA von 0,0 zu melden — ein tatsächlich erreichter GPA von 0,0 und 'nichts zu berechnen' bleiben unterschieden."
+          },
+          {
+            "title": "Ein erforderlicher GPA außerhalb von 0-4,0 wird trotzdem berechnet und zurückgegeben, nur als unerreichbar markiert",
+            "description": "Der Zielmodus begrenzt oder verwirft kein Ergebnis außerhalb des gültigen Bereichs — wenn die Arithmetik sagt, dass ein GPA von 4,7 auf den verbleibenden Credits nötig ist, wird diese Zahl trotzdem zurückgegeben, mit isAchievable: false, was markiert, dass sie die 4,0-Skala überschreitet, die ein typischer Kurs erzeugen kann."
+          },
+          {
+            "title": "Null oder negative geplante Credits werden abgelehnt, bevor irgendeine GPA-Arithmetik läuft",
+            "description": "Der Zielmodus erfordert, dass geplanteCredits eine positive Zahl ist, da die Division durch null oder negative geplante Credits 'den auf diesen Credits benötigten GPA' undefiniert oder bedeutungslos machen würde — dies wird geprüft, bevor der Rest der Berechnung fortfährt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist der GPA ein nach Credits gewichteter Durchschnitt statt eines einfachen Durchschnitts der Noten?",
+            "answer": "Ein 4-Credit-Kurs und ein 1-Credit-Kurs repräsentieren nicht dieselbe Menge akademischer Arbeit, daher würde die gleichwertige Behandlung ihrer Noten unterschätzen, wie stark ein schwererer Kurs den Gesamtstand eines Studierenden tatsächlich prägt. Jede Note mit ihren eigenen Credit-Stunden zu gewichten — die Standardmethode, die praktisch jede Institution verwendet — lässt ein 4-Credit-A den GPA viermal so stark beeinflussen wie ein 1-Credit-A."
+          },
+          {
+            "question": "Wie ermittelt der Zielmodus, welchen GPA ich auf meinen verbleibenden Credits brauche?",
+            "answer": "Er wandelt zunächst Ihren aktuellen GPA und Ihre Credits in 'bereits angesammelte Qualitätspunkte' um (GPA × Credits), dann berechnet er die Gesamt-Qualitätspunkte, die nötig wären, über alle Ihre Credits einschließlich der noch bevorstehenden, um exakt bei Ihrem Ziel-GPA zu landen. Das Abziehen des bereits Angesammelten von dieser Summe, dann die Division durch nur die geplanten Credits, isoliert den speziell auf diesen verbleibenden Credits benötigten GPA."
+          },
+          {
+            "question": "Was bedeutet es, wenn der erforderliche GPA über 4,0 zurückkommt?",
+            "answer": "Es bedeutet, dass der Ziel-GPA mit der geplanten Anzahl an Credits mathematisch nicht erreichbar ist, angesichts Ihres aktuellen Stands — selbst durchgehende 4,0er auf jedem verbleibenden Credit würden nicht ausreichen. Das Tool zeigt Ihnen trotzdem die genaue Zahl, die technisch benötigt würde, als unerreichbar markiert, sodass Sie sehen können, wie weit außer Reichweite sie liegt, statt nur ein einfaches Nein zu erhalten."
+          },
+          {
+            "question": "Warum werden Kurse mit null Credit-Stunden ausgeschlossen, statt einfach null Qualitätspunkte beizutragen?",
+            "answer": "Ein 0-Credit-Kurs (wie ein Bestanden/Nicht-bestanden-Seminar oder ein auditierter Kurs), der null Qualitätspunkte beiträgt, wäre mathematisch identisch damit, ihn aus dem Zähler auszuschließen, aber ihn im Nenner einzubeziehen wäre falsch — die Division durch Credit-Stunden, die nicht zählen sollten, würde den echten GPA unterschätzen. Diese Zeilen vollständig vor jeder Summierung herauszufiltern vermeidet diese Verzerrung."
+          }
+        ]
+      },
+      "citation-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Quellenangaben-Generator: wie Zitate im APA-, MLA- und Chicago-Stil aus denselben Quellendetails für Bücher, Fachzeitschriftenartikel und Webseiten formatiert werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Zitiermuster",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Der eigene 'et al.'-Schwellenwert jedes Stils",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Zitierstile",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Buch (APA): Autor, A. (Jahr). Titel. Verlag. | Zeitschriftenartikel (MLA): Autor, A. \"Titel.\" Zeitschrift, Bd. N, Nr. N, Jahr, S. N-N. | Website (Chicago): Autor, A. Jahr. \"Titel.\" Seitenname. Abgerufen am Datum. URL.",
+          "note": "Jeder der drei Stile (APA 7., MLA 9., Chicago Autor-Datum 17. Auflage) hat eigene Regeln für Zeichensetzung, Elementreihenfolge und — entscheidend — wie viele Autoren namentlich genannt werden, bevor auf eine abgekürzte 'et al.'-Form gewechselt wird; dieselben Quellendaten werden dreimal unabhängig formatiert, einmal nach den eigenen Konventionen jedes Stils."
+        },
+        "flowchart": {
+          "intro": "Dieselben strukturierten Quellendaten — Autoren, Titel, Jahr und quellentypspezifische Details — speisen drei unabhängige Formatierungsfunktionen, eine pro Zitierstil.",
+          "steps": [
+            "Die erforderlichen Felder für den gewählten Quellentyp validieren: jede Quelle braucht einen Titel, ein Zeitschriftenartikel zusätzlich einen Zeitschriftennamen, und eine Website zusätzlich eine URL",
+            "Die Autorenliste dreimal separat formatieren, einmal pro Stil, da jeder Stil eigene Regeln hat, wie viele Autoren vollständig genannt werden, bevor auf 'et al.' gewechselt wird, und seine eigene Konjunktion vor dem letzten Autor — APAs Et-Zeichen gegenüber MLA und Chicagos 'and'",
+            "Den APA-Eintrag zusammensetzen: Autoren und Jahr in Klammern, gefolgt vom Titel, gefolgt von quellentypspezifischen Details — Verlag für ein Buch, Zeitschrift/Band/Ausgabe/Seiten für einen Artikel, Seitenname und URL für eine Website",
+            "Den MLA-Eintrag mit seinen eigenen Zeichensetzungskonventionen zusammensetzen: der Artikeltitel in Anführungszeichen, Band und Ausgabe vorangestellt mit 'vol.' und 'no.', und ein Zugriffsdatum nur für eine Website angehängt",
+            "Den Chicago-Eintrag zusammensetzen, der das Jahr direkt nach den Autoren ohne Klammern platziert und ansonsten einer ähnlichen Struktur wie APA folgt"
+          ],
+          "caption": "Ein Satz Quellendetails, dreimal separat formatiert durch drei unabhängig kodierte Stilvorlagen."
+        },
+        "anatomy": {
+          "intro": "Jeder Zitierstil nennt Autoren nur bis zu seinem eigenen Schwellenwert vollständig, danach wechselt er zu einer abgekürzten 'et al.'-Form — ein Schwellenwert, der sich je nach Stil unterscheidet.",
+          "labelApa": "APA",
+          "labelMla": "MLA",
+          "labelChicago": "Chicago",
+          "caption": "Bei einer Quelle mit vielen Autoren listet APA bis zu 20 Autoren namentlich auf, bevor auf 'et al.' gewechselt wird, während MLA bereits nach nur 2 genannten Autoren wechselt und Chicago nach 3 — dieselbe Autorenliste kann je nach gewähltem Stil sehr unterschiedlich aussehen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Quellentyp",
+            "meaning": "Um welche Art von Quelle es sich handelt: Buch, Zeitschriftenartikel oder Website. Bestimmt, welche Felder erforderlich sind und wie jeder Stil den Eintrag formatiert.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Autoren",
+            "meaning": "Die Liste der Autoren, jeweils mit Vor- und Nachname.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Titel, Jahr",
+            "meaning": "Der Titel der Quelle und ihr Erscheinungsjahr.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Verlag",
+            "meaning": "Der Name des Verlags. Für ein Buch verwendet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Zeitschriftenname, Band, Ausgabe, Seiten",
+            "meaning": "Der Name der Zeitschrift, Band, Ausgabennummer und Seitenbereich. Für einen Zeitschriftenartikel verwendet.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Seitenname, URL, Zugriffsdatum",
+            "meaning": "Der Name der Website, ihre URL und das Datum des Zugriffs. Für eine Website verwendet.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine Quelle ohne genannten Autor beginnt stattdessen mit dem Titel, in allen drei Stilen",
+            "description": "Wenn die Autorenliste leer ist (oder jeder Eintrag einen leeren Nachnamen hat), fällt der Formatierer jedes Stils darauf zurück, das Zitat mit dem Titel statt einem Autorennamen zu beginnen — passend dazu, wie alle drei Stile anonyme oder nicht zugeschriebene Quellen behandeln."
+          },
+          {
+            "title": "Der 'et al.'-Schwellenwert jedes Stils ist unterschiedlich, und keiner stimmt überein",
+            "description": "APA nennt bis zu 20 Autoren namentlich, bevor auf eine abgekürzte Form gewechselt wird; MLA wechselt zu 'et al.' bei 3 oder mehr Autoren; Chicago wechselt bei 4 oder mehr — dieselbe Liste von sagen wir 3 Autoren wird unter APA und Chicago vollständig ausgeschrieben, aber unter MLA abgekürzt."
+          },
+          {
+            "title": "Ein Zeitschriftenartikel ohne Bandnummer formatiert sich anders als einer mit",
+            "description": "Wenn eine Bandnummer vorhanden ist, enthält das Zitat die vollständige Band/Ausgabe/Seiten-Sequenz; wenn sie fehlt, springt der Formatierer direkt vom Zeitschriftennamen zum Seitenbereich (falls angegeben), statt ein leeres, baumelndes Bandfeld in der Ausgabe zu hinterlassen."
+          },
+          {
+            "title": "Das Zugriffsdatum eines Website-Zitats erscheint nur in den MLA- und Chicago-Einträgen, nie in APA",
+            "description": "APAs 7. Auflage strich ausdrücklich die Abrufdatum-Anforderung für die meisten stabilen Webquellen, daher wird das Zugriffsdatum-Feld, selbst wenn ausgefüllt, nie in den APA-formatierten Eintrag aufgenommen — nur in die MLA- und Chicago-Einträge, die es weiterhin verlangen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum erzeugt dieselbe Quelle drei unterschiedlich aussehende Zitate?",
+            "answer": "APA, MLA und Chicago sind keine unterschiedlichen Formatierungen derselben Regeln — sie sind drei tatsächlich verschiedene Stilrichtlinien mit eigenen Konventionen für Zeichensetzung, Elementreihenfolge, Autorenlisten-Formatierung und welche Details (wie ein Zugriffsdatum) überhaupt erwartet werden. Das Tool führt dieselben Quellendaten durch drei unabhängige Formatierungsfunktionen, von denen jede die tatsächlichen Regeln eines Stils implementiert, statt einer einzigen gemeinsamen Vorlage mit kleinen Anpassungen."
+          },
+          {
+            "question": "Warum wechseln APA, MLA und Chicago bei unterschiedlichen Autorenzahlen zu 'et al.'?",
+            "answer": "Jede Stilrichtlinie legt ihren eigenen Schwellenwert als Teil ihrer offiziellen Regeln fest, unabhängig von den anderen: APAs 7. Auflage listet bis zu 20 Autoren namentlich auf, bevor abgekürzt wird, während die kompakteren Konventionen von MLA und Chicago viel früher wechseln, bei 3 bzw. 4 Autoren. Das Tool spiegelt den tatsächlich veröffentlichten Schwellenwert jedes Stils wider, statt eine Zahl für alle drei zu wählen."
+          },
+          {
+            "question": "Warum enthält das APA-Zitat kein Zugriffsdatum, selbst wenn ich eines für eine Website-Quelle eingebe?",
+            "answer": "APAs Richtlinie der 7. Auflage strich gezielt die Abrufdatum-Anforderung für die meisten Online-Quellen, von denen keine Änderung erwartet wird, mit der Begründung, dass eine URL allein ausreicht, damit ein Leser die aktuelle Version findet. Das Zugriffsdatum-Feld wird weiterhin erfasst, weil die eigenen Konventionen von MLA und Chicago es tatsächlich verlangen, aber es wird nur in diesen beiden Einträgen verwendet, nicht im APA-Eintrag."
+          },
+          {
+            "question": "Was passiert, wenn ich ein Zeitschriftenartikel-Zitat ohne Eingabe einer Bandnummer erstelle?",
+            "answer": "Das Zitat wird trotzdem erstellt, nur mit einem kürzeren Detailabschnitt — der Formatierer überspringt die Band/Ausgabe-Sequenz vollständig, wenn kein Band angegeben ist, statt einen leeren oder Platzhalterwert anzuzeigen, und fällt darauf zurück, den Zeitschriftennamen und Seitenbereich (falls angegeben) direkt einzubeziehen."
+          }
+        ]
+      },
+      "study-time-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Lernzeit-/Pomodoro-Rechner: wie eine Lernsitzung block für block simuliert wird, um abgeschlossene Fokusintervalle und Pausen zu zählen, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Eine Sitzung teilt sich in Arbeit, Pausen und Restzeit",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Pausentypen",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Solange verbleibende Zeit ≥ Arbeitsblock: eine Pomodoro-Einheit abschließen, den Arbeitsblock abziehen, dann eine Pause (kurz oder lang, nach dem konfigurierten Zyklus) nur nehmen, wenn sie vollständig in das Verbleibende passt",
+          "note": "Eine Pomodoro-Einheit zählt nur, sobald ihr gesamter Arbeitsblock in die verbleibende Zeit passt — keine teilweisen oder abgerundeten Pomodoro-Einheiten werden gezählt. Die darauffolgende Pause wird ebenso nur genommen (und nur gezählt), wenn sie ebenfalls vollständig passt; wenn die Zeit mitten in einer Pause ausgeht, zählt die vorangegangene Pomodoro-Einheit trotzdem, aber diese Pause nicht."
+        },
+        "flowchart": {
+          "intro": "Die Sitzung wird eine Pomodoro-Einheit nach der anderen simuliert, wobei bei jedem Schritt geprüft wird, ob genug Zeit für den nächsten Arbeitsblock und dann die nächste Pause übrig ist.",
+          "steps": [
+            "Solange die verbleibende Zeit mindestens einen vollen Arbeitsblock beträgt: den Arbeitsblock von der verbleibenden Zeit abziehen und eine abgeschlossene Pomodoro-Einheit zählen",
+            "Prüfen, ob diese gerade abgeschlossene Pomodoro-Einheit auf den Lange-Pause-Zyklus fällt (ihre Anzahl ist ein Vielfaches der konfigurierten Zykluslänge) oder stattdessen eine kurze Pause verlangt",
+            "Wenn diese Pausenlänge größer als null ist und vollständig in die verbleibende Zeit passt, sie abziehen und als genommen zählen; wenn eine Pause konfiguriert ist, aber nicht vollständig passt, die Simulation hier stoppen, wobei die gerade abgeschlossene Pomodoro-Einheit erhalten bleibt",
+            "Wenn für diesen Slot keine Pause konfiguriert ist (Länge null), direkt zur Prüfung des nächsten Arbeitsblocks übergehen, ohne die Schleife zu stoppen",
+            "Sobald die Schleife endet, ist die geplante Zeit die Summe aller tatsächlich genutzten Arbeits- und Pausenminuten, und die Restzeit ist das, was von den ursprünglichen Gesamtminuten nicht für einen weiteren vollen Arbeitsblock oder eine weitere Pause ausreichte"
+          ],
+          "caption": "Arbeitsblöcke und Pausen werden nacheinander von der Summe abgezogen, jeder nur gezählt, sobald bestätigt ist, dass er vollständig in das Verbleibende passt."
+        },
+        "anatomy": {
+          "intro": "Die Gesamtzeit einer Sitzung teilt sich in drei Teile: Minuten, die tatsächlich für Arbeit aufgewendet wurden, Minuten für Pausen, und jede Restzeit, die zu kurz für einen weiteren Block ist.",
+          "labelWork": "Arbeit",
+          "labelBreaks": "Pausen",
+          "labelLeftover": "Rest",
+          "totalLabel": "100-Minuten-Sitzung",
+          "caption": "Eine 100-minütige Sitzung mit 25-minütigen Arbeitsblöcken und 5-minütigen kurzen Pausen passt 3 abgeschlossene Pomodoro-Einheiten (75 Arbeitsminuten) plus 3 kurze Pausen (15 Minuten), wobei 10 Minuten übrig bleiben, die für einen vierten Arbeitsblock zu kurz sind."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Gesamtminuten",
+            "meaning": "Die für die Sitzung verfügbare Gesamtzeit.",
+            "unit": "Min."
+          },
+          {
+            "symbol": "Arbeitsminuten",
+            "meaning": "Die Länge eines Fokus-/Arbeitsblocks.",
+            "unit": "Min."
+          },
+          {
+            "symbol": "Kurzpause-Minuten",
+            "meaning": "Die Länge einer kurzen Pause, nach den meisten Pomodoro-Einheiten genommen.",
+            "unit": "Min."
+          },
+          {
+            "symbol": "Langpause-Minuten",
+            "meaning": "Die Länge einer langen Pause, nach einem vollen Zyklus von Pomodoro-Einheiten genommen.",
+            "unit": "Min."
+          },
+          {
+            "symbol": "Pomodoros vor Langpause",
+            "meaning": "Wie viele Pomodoro-Einheiten einen Zyklus bilden, bevor statt einer kurzen eine lange Pause fällig ist.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine Pomodoro-Einheit zählt nur, sobald ihr voller Arbeitsblock passt — keine Teilanrechnung",
+            "description": "Wenn weniger als ein voller Arbeitsblock an Zeit übrig ist, stoppt die Schleife einfach; es gibt kein Abrunden, um eine verkürzte oder teilweise Pomodoro-Einheit zu zählen, sodass die Restzeit immer tatsächlich unnutzbare Zeit widerspiegelt, keine unterzählte Sitzung."
+          },
+          {
+            "title": "Eine Pause, die nicht vollständig passt, stoppt die Sitzung, löscht aber nicht die vorangegangene Pomodoro-Einheit",
+            "description": "Wenn die verbleibende Zeit für einen weiteren Arbeitsblock reicht, aber nicht für die darauffolgende Pause, stoppt die Simulation sofort — die gerade abgeschlossene Pomodoro-Einheit zählt weiterhin in der Summe, aber diese unvollendete Pause wird nicht gezählt und ihre Minuten verbleiben stattdessen in der Restzeit."
+          },
+          {
+            "title": "Eine Pausenlänge von genau null wird als 'keine Pause konfiguriert' behandelt, nicht als sofort abgeschlossene Pause",
+            "description": "Wenn die Länge einer Pause 0 ist, überspringt der Code explizit den Zweig, der eine Pause abziehen und zählen würde, und geht direkt zur Prüfung des nächsten Arbeitsblocks über — dies verhindert, dass ein absichtlich pausenfreier Zeitplan (nur Arbeitsblöcke, keine Pausen) die Pausenanzahl aufbläht."
+          },
+          {
+            "title": "Der Lange-Pause-Zyklus basiert auf der Anzahl abgeschlossener Pomodoro-Einheiten, nicht auf verstrichener Zeit",
+            "description": "Ob eine bestimmte Pomodoro-Einheit eine lange Pause auslöst, wird dadurch bestimmt, ob ihre Position in der Sequenz (1., 2., 3. und so weiter) ein Vielfaches der konfigurierten Zykluslänge ist, völlig unabhängig davon, wie viel Gesamtzeit verstrichen ist — eine Sitzung mit ungewöhnlich kurzen Arbeitsblöcken nimmt ihre lange Pause trotzdem nach derselben Anzahl von Pomodoro-Einheiten, nicht nach derselben Zeitspanne."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum zählt der Rechner keine teilweise Pomodoro-Einheit, wenn die verbleibende Zeit fast, aber nicht ganz für einen vollen Arbeitsblock reicht?",
+            "answer": "Eine Pomodoro-Einheit soll einen vollständigen, ununterbrochenen Fokusblock darstellen — das Zählen einer verkürzten Version würde falsch darstellen, wie viel fokussierte Arbeit tatsächlich stattfand. Stattdessen stoppt die Simulation, sobald nicht mehr genug Zeit für einen vollständigen Arbeitsblock übrig ist, und diese verbleibende Zeit wird ehrlich als Rest gemeldet, statt in eine gebrochene Pomodoro-Anzahl eingerechnet zu werden."
+          },
+          {
+            "question": "Wenn mir mitten in einer Pause die Zeit ausgeht, bekomme ich trotzdem Anrechnung für die vorherige Pomodoro-Einheit?",
+            "answer": "Ja — der Arbeitsblock und die darauffolgende Pause werden als separate Ereignisse verfolgt. Die Pomodoro-Einheit wird gezählt, sobald ihr voller Arbeitsblock von der verbleibenden Zeit abgezogen ist, noch bevor der Rechner überhaupt prüft, ob Platz für die anschließende Pause ist, sodass eine nicht passende Pause nur die Pausenanzahl beeinflusst, nicht die Pomodoro-Anzahl."
+          },
+          {
+            "question": "Was passiert, wenn ich eine Pausenlänge auf 0 Minuten setze?",
+            "answer": "Eine Pausenlänge von genau 0 wird als 'für diesen Slot ist keine Pause geplant' behandelt, statt als sofortige Pause, die dennoch gezählt wird — die Simulation springt direkt zum nächsten Arbeitsblock, ohne einen der beiden Pausenzähler zu erhöhen, was es Ihnen erlaubt, einen Zeitplan mit Arbeitsblöcken, aber ganz ohne Pausen zu modellieren, wenn das gewünscht ist."
+          },
+          {
+            "question": "Erfolgt die lange Pause nach einer festen Zeitspanne oder nach einer festen Anzahl von Pomodoro-Einheiten?",
+            "answer": "Nach einer festen Anzahl von Pomodoro-Einheiten — genauer gesagt, immer wenn die Anzahl abgeschlossener Pomodoro-Einheiten ein Vielfaches der von Ihnen eingestellten Zykluslänge ist. Das bedeutet, dass sich der Zeitpunkt der langen Pause automatisch verschiebt, wenn Sie Ihre Arbeitsblocklänge ändern, da sie in abgeschlossenen Fokussitzungen gezählt wird, nicht in verstrichenen Minuten."
+          }
+        ]
+      },
+      "class-schedule-builder": {
+        "version": "v1",
+        "description": "Technische Referenz für den Stundenplan-Ersteller: wie Tag/Zeit-Überschneidungen zwischen wöchentlichen Kursen erkannt und wöchentliche geplante Stunden summiert werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Nur die tatsächlich überlappenden Minuten zählen als Konflikt",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Vergleiche",
+          "modesValue": "Paarweise",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Zwei Kurse kollidieren an einem gemeinsamen Tag nur, wenn max(StartA, StartB) < min(EndeA, EndeB) — ihre Zeitintervalle überlappen sich tatsächlich, berühren sich nicht nur",
+          "note": "Ein Konflikt wird unabhängig für jedes Kurspaar und jeden Tag geprüft, an dem beide stattfinden. Zwei Kurse, die nahtlos aneinander anschließen, bei denen die Endzeit des einen genau der Startzeit des anderen entspricht, zählen nicht als Konflikt — die Überlappungsprüfung verwendet ein strenges Kleiner-als, kein Kleiner-oder-gleich, gerade um diesen Fall zuzulassen."
+        },
+        "flowchart": {
+          "intro": "Jeder Kurs wird mit jedem anderen Kurs verglichen, einmal pro Tag, den sie sich möglicherweise teilen, wobei nach einer echten Zeitüberlappung gesucht wird, nicht nur einem gemeinsamen Tag.",
+          "steps": [
+            "Zunächst jeden Kurs validieren: jeder braucht eine Endzeit nach seiner Startzeit und mindestens einen Kurstag — ein ungültiger Kurs stoppt die gesamte Berechnung, bevor irgendeine Konfliktprüfung beginnt",
+            "Jedes Kurspaar genau einmal vergleichen (nicht zweimal, und nie einen Kurs gegen sich selbst), indem jeder Kurs nur mit den später in der Liste gepaart wird",
+            "Für jedes Paar die Tage finden, an denen beide tatsächlich stattfinden — die Schnittmenge ihrer beiden Tageslisten —, da ein Konflikt nur an einem Tag bestehen kann, an dem beide Kurse stattfinden",
+            "Für jeden gemeinsamen Tag das Überlappungsfenster als die spätere der beiden Startzeiten bis zur früheren der beiden Endzeiten berechnen",
+            "Einen Konflikt nur aufzeichnen, wenn dieses Überlappungsfenster echte Breite hat — sein berechneter Start liegt streng vor seinem berechneten Ende —, was korrekt zwei Kurse ausschließt, die nur nahtlos ohne Überlappung aneinander anschließen"
+          ],
+          "caption": "Jedes Kurspaar wird Tag für Tag auf ein echt überlappendes Zeitfenster geprüft, nicht nur einen gemeinsamen Kurstag."
+        },
+        "anatomy": {
+          "intro": "Wenn zwei Kurse einen Kurstag teilen, zählt nur die Zeit, in der sich ihre Fenster tatsächlich überschneiden, als Konflikt — die übrige Zeit jedes Kurses bleibt unberührt.",
+          "labelAOnly": "Nur Kurs A",
+          "labelOverlap": "Überlappung (Konflikt)",
+          "labelBOnly": "Nur Kurs B",
+          "totalLabel": "9:00 – 11:00 Uhr Spanne",
+          "caption": "Kurs A findet 9:00–10:30 statt und Kurs B 10:00–11:00 am selben Tag: sie überlappen sich für 30 Minuten (10:00–10:30), was das Tool als Konflikt meldet, während die umgebenden 60 und 30 Minuten jeweils nur einem Kurs gehören."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Kurse",
+            "meaning": "Die Liste der Kurse, jeweils mit einem Namen, seinen Kurstagen und einer Start- und Endzeit in Minuten.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Nahtlos aneinander anschließende Kurse sind ausdrücklich kein Konflikt",
+            "description": "Die Überlappungsprüfung erfordert, dass der berechnete Überlappungsstart streng vor dem berechneten Überlappungsende liegt — wenn ein Kurs genau in der Minute endet, in der ein anderer beginnt, hat das Überlappungsfenster die Breite null und wird korrekt nicht als Konflikt gemeldet, passend dazu, wie echte nahtlose Planung funktioniert."
+          },
+          {
+            "title": "Ein Konflikt wird pro gemeinsamem Tag geprüft, sodass zeitlich überlappende, aber nie einen Tag teilende Kurse nie kollidieren",
+            "description": "Zwei Kurse mit identischen oder überlappenden Zeitfenstern, aber ohne gemeinsamen Kurstag (zum Beispiel findet der eine nur montags und mittwochs statt, der andere nur dienstags und donnerstags), erzeugen null Konflikte, da der Tagesschnittmengen-Schritt keine gemeinsamen Tage findet, um überhaupt eine Zeitüberlappung zu prüfen."
+          },
+          {
+            "title": "Jeder Kurs wird validiert, bevor eine Konflikterkennung läuft, sodass ein fehlerhafter Eintrag den gesamten Stundenplan blockiert",
+            "description": "Ein Kurs, dessen Endzeit nicht nach seiner Startzeit liegt, oder der gar keine Kurstage hat, führt dazu, dass das Tool sofort einen Fehler zurückgibt, bevor irgendwelche Paare verglichen werden — ein Stundenplan wird nicht teilweise analysiert, während ein defekter Eintrag stillschweigend ignoriert wird."
+          },
+          {
+            "title": "Die wöchentlichen Gesamtminuten zählen jedes Kursvorkommen, einschließlich Zeit innerhalb eines Konflikts",
+            "description": "totalWeeklyMinutes summiert die Dauer jedes Kurses multipliziert mit der Anzahl der Tage, an denen er stattfindet, unabhängig für jeden Kurs — überlappende Zeit zwischen zwei Kursen wird einmal für jeden Kurs gezählt, zu dem sie gehört, sodass die Minuten eines gemeldeten Konflikts effektiv doppelt zur Wochensumme zählen, einmal pro beteiligtem Kurs."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum zählen zwei nahtlos aneinander anschließende Kurse nicht als Terminkonflikt?",
+            "answer": "Nahtloses Anschließen — ein Kurs endet um 10:00 und der nächste beginnt genau um 10:00 — ist völlig normale Planung, keine Überlappung; es gibt keinen Zeitpunkt, an dem beide Kurse gleichzeitig stattfinden sollen. Die Konfliktprüfung verwendet gezielt einen strengen Vergleich, damit ein gemeinsamer Grenzmoment nicht als echte Zeitkollision markiert wird."
+          },
+          {
+            "question": "Wenn zwei Kurse denselben Zeitslot haben, aber an unterschiedlichen Tagen stattfinden, markiert das Tool sie dann als kollidierend?",
+            "answer": "Nein — ein Konflikt kann nur an einem Tag gemeldet werden, an dem beide Kurse tatsächlich stattfinden, daher läuft der Tagesschnittmengen-Schritt vor jeder Zeitüberlappungsprüfung. Zwei Kurse, die sich nie einen Kurstag teilen, können hier strukturell keinen Konflikt erzeugen, egal wie ähnlich ihre Zeitslots sind."
+          },
+          {
+            "question": "Warum stoppt ein ungültiger Kurseintrag die Prüfung des gesamten Stundenplans, statt nur diesen einen Kurs zu überspringen?",
+            "answer": "Ein ungültiger Kurs — einer ohne Kurstage oder mit einer Endzeit, die nicht nach seiner Startzeit liegt — stellt eine tatsächlich mehrdeutige Eingabe dar; zu versuchen zu erraten, was gemeint war, und den Rest des Stundenplans darum herum zu prüfen, könnte einen Dateneingabefehler verbergen. Den Fehler sofort aufzuzeigen, bevor irgendeine Konflikterkennung läuft, stellt sicher, dass jeder Kurs im endgültigen Stundenplan tatsächlich validiert wurde."
+          },
+          {
+            "question": "Zieht die Gesamtzahl der wöchentlichen Minuten überlappende Zeit zwischen kollidierenden Kursen ab?",
+            "answer": "Nein — sie wird unabhängig für jeden Kurs berechnet (die eigene Dauer dieses Kurses multipliziert mit der Anzahl der Tage, an denen er stattfindet) und dann summiert, ohne auf doppelt gezählte Überlappung zwischen verschiedenen Kursen zu prüfen oder sie zu entfernen. Das bedeutet, die Summe stellt die Summe der eigenen geplanten Zeit jedes Kurses dar, nicht die tatsächliche Anzahl unterschiedlicher Stunden, die Sie beschäftigt wären, wenn die kollidierende Zeit zweier Kurse nur einmal erlebt wird."
+          }
+        ]
       }
     }
   }

@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import GpaInputPanel from "./GpaInputPanel";
 import GpaResult from "./GpaResult";
 import GpaQuickReference from "./GpaQuickReference";
@@ -94,6 +95,7 @@ export default function GpaCalculator({ education }: { education: ReactNode }) {
           sidebar={<RelatedToolsSidebar currentSlug="gpa-calculator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="gpa-calculator" />
               <SectionNav items={navItems} />
               <GpaQuickReference />
             </div>

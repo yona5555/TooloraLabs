@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ScheduleInputPanel from "./ScheduleInputPanel";
 import ScheduleResult from "./ScheduleResult";
 import ScheduleQuickReference from "./ScheduleQuickReference";
@@ -59,6 +60,7 @@ export default function ClassScheduleBuilder({ education }: { education: ReactNo
           sidebar={<RelatedToolsSidebar currentSlug="class-schedule-builder" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="class-schedule-builder" />
               <SectionNav items={navItems} />
               <ScheduleQuickReference />
             </div>

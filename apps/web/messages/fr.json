@@ -30243,6 +30243,424 @@
             "answer": "Oui — le calcul est symétrique autour de zéro. Si la date-heure cible est dans le passé, la différence est toujours calculée de la même manière et isPast est simplement vrai, les champs jours/heures/minutes/secondes montrant combien de temps s'est écoulé depuis ce moment passé plutôt que combien de temps il reste jusqu'à un moment futur."
           }
         ]
+      },
+      "gpa-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de moyenne (GPA) : comment une moyenne pondérée par les crédits est calculée, et comment le GPA nécessaire sur les crédits à venir pour atteindre un objectif est déterminé, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Les points de qualité sont pondérés par les heures de crédit",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Mode calcul : GPA = Σ(points de note × heures de crédit) ÷ Σ(heures de crédit) | Mode objectif : GPArequis = (GPAcible × (créditsactuels+créditsplanifiés) − GPAactuel × créditsactuels) ÷ créditsplanifiés",
+          "note": "Les points de qualité d'un cours sont ses points de note multipliés par ses heures de crédit ; le GPA global est la somme des points de qualité de tous les cours divisée par la somme des heures de crédit de tous les cours — une moyenne pondérée par les crédits, pas une simple moyenne des notes elles-mêmes. Le mode objectif fonctionne à rebours à partir de cette même pondération pour déterminer le GPA nécessaire sur les crédits encore à venir."
+        },
+        "flowchart": {
+          "intro": "Deux modes indépendants partagent la même idée sous-jacente — que les points de note sont pondérés par les heures de crédit avant d'être moyennés.",
+          "steps": [
+            "En mode calcul : écarter tout cours avec des heures de crédit nulles ou inférieures, puis additionner les heures de crédit restantes sur tous les cours",
+            "Multiplier les points de note de chaque cours restant par ses propres heures de crédit pour obtenir les points de qualité de ce cours, puis additionner tous ces points en points de qualité totaux",
+            "Diviser les points de qualité totaux par les heures de crédit totales pour obtenir le GPA, arrondi à trois décimales",
+            "En mode objectif plutôt : calculer les points de qualité déjà acquis à partir des crédits actuels (GPA actuel × crédits actuels), puis calculer les points de qualité totaux nécessaires pour atteindre le GPA cible sur tous les crédits, actuels plus planifiés",
+            "Soustraire les points de qualité déjà acquis de ce total requis, puis diviser par les crédits planifiés pour obtenir le GPA nécessaire sur ces seuls crédits à venir — et vérifier si ce chiffre se situe effectivement dans l'échelle de 0 à 4,0"
+          ],
+          "caption": "Le mode calcul pondère et moyenne des notes connues ; le mode objectif fait fonctionner la pondération à rebours pour déterminer un GPA futur inconnu."
+        },
+        "anatomy": {
+          "intro": "Chaque cours contribue des points de qualité proportionnellement à ses propres heures de crédit — un cours plus lourd tire le GPA davantage vers sa propre note.",
+          "labelCourseA": "3 crédits à 4,0",
+          "labelCourseB": "4 crédits à 3,0",
+          "totalLabel": "24 points de qualité",
+          "caption": "Un cours de 3 crédits avec une note de 4,0 contribue 12 points de qualité, et un cours de 4 crédits avec une note de 3,0 contribue également 12 — ensemble, 24 points de qualité sur 7 crédits donnent un GPA de 3,43."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "opération",
+            "meaning": "S'il faut calculer un GPA à partir d'une liste de cours, ou déterminer le GPA nécessaire sur les crédits à venir.",
+            "unit": "—"
+          },
+          {
+            "symbol": "cours",
+            "meaning": "La liste des cours, chacun avec des points de note (sur une échelle de 0 à 4,0) et des heures de crédit. Utilisé en mode calcul.",
+            "unit": "—"
+          },
+          {
+            "symbol": "GPA actuel, crédits actuels",
+            "meaning": "Le GPA et le total des heures de crédit déjà complétées. Utilisé en mode objectif.",
+            "unit": "—"
+          },
+          {
+            "symbol": "GPA cible, crédits planifiés",
+            "meaning": "Le GPA à atteindre, et combien de crédits restent à venir. Utilisé en mode objectif.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les cours avec des heures de crédit nulles ou négatives sont exclus silencieusement",
+            "description": "Une entrée de cours avec des heures de crédit à zéro ou moins ne contribue pas simplement zéro — elle est entièrement filtrée de la liste avant le total, de sorte qu'une ligne à 0 crédit égarée ne puisse pas annuler accidentellement le GPA global."
+          },
+          {
+            "title": "Une liste de cours vide ou entièrement à crédit zéro est une erreur distincte, pas un GPA de 0,0",
+            "description": "Si tous les cours sont filtrés (ou qu'aucun cours n'a été saisi du tout), l'outil renvoie une erreur d'absence de cours plutôt que de signaler un GPA de 0,0 — un GPA de 0,0 réellement obtenu et 'rien à calculer' restent distincts."
+          },
+          {
+            "title": "Un GPA requis hors de 0-4,0 est quand même calculé et renvoyé, simplement signalé comme inatteignable",
+            "description": "Le mode objectif ne limite ni ne rejette un résultat hors plage — si le calcul indique qu'un GPA de 4,7 est nécessaire sur les crédits restants, ce chiffre est quand même renvoyé, avec isAchievable: false signalant qu'il dépasse l'échelle de 4,0 qu'un cours typique peut produire."
+          },
+          {
+            "title": "Des crédits planifiés nuls ou négatifs sont rejetés avant tout calcul de GPA",
+            "description": "Le mode objectif exige que les crédits planifiés soient un nombre positif, car diviser par des crédits planifiés nuls ou négatifs rendrait 'le GPA nécessaire sur ces crédits' indéfini ou dénué de sens — ceci est vérifié avant que le reste du calcul ne se poursuive."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le GPA est-il une moyenne pondérée par les crédits plutôt qu'une simple moyenne des notes ?",
+            "answer": "Un cours de 4 crédits et un cours de 1 crédit ne représentent pas la même quantité de travail académique, donc traiter leurs notes comme également importantes sous-estimerait à quel point un cours plus lourd façonne réellement la position générale d'un étudiant. Pondérer chaque note par ses propres heures de crédit — la méthode standard que pratiquement chaque établissement utilise — fait qu'un A de 4 crédits affecte le GPA quatre fois plus qu'un A de 1 crédit."
+          },
+          {
+            "question": "Comment le mode objectif détermine-t-il quel GPA j'ai besoin sur mes crédits restants ?",
+            "answer": "Il convertit d'abord votre GPA et vos crédits actuels en 'points de qualité déjà acquis' (GPA × crédits), puis calcule les points de qualité totaux qui seraient nécessaires, sur tous vos crédits y compris ceux encore à venir, pour atteindre exactement votre GPA cible. Soustraire ce qui est déjà acquis de ce total, puis diviser par seulement les crédits planifiés, isole le GPA nécessaire spécifiquement sur ces crédits restants."
+          },
+          {
+            "question": "Que signifie-t-il si le GPA requis dépasse 4,0 ?",
+            "answer": "Cela signifie que le GPA cible n'est pas mathématiquement atteignable avec le nombre de crédits planifiés, compte tenu de votre position actuelle — même des 4,0 parfaits sur chaque crédit restant ne suffiraient pas. L'outil vous montre quand même le chiffre exact qui serait techniquement nécessaire, signalé comme inatteignable, afin que vous puissiez voir à quel point il est hors de portée plutôt que de simplement recevoir un non."
+          },
+          {
+            "question": "Pourquoi les cours avec des heures de crédit nulles sont-ils exclus plutôt que de simplement contribuer zéro point de qualité ?",
+            "answer": "Un cours à 0 crédit (comme un séminaire réussite/échec ou un cours audité) contribuant zéro point de qualité serait mathématiquement identique à l'exclure du numérateur, mais l'inclure dans le dénominateur serait incorrect — diviser par des heures de crédit qui ne devraient pas compter sous-estimerait le GPA réel. Filtrer entièrement ces lignes avant toute totalisation évite cette distorsion."
+          }
+        ]
+      },
+      "citation-generator": {
+        "version": "v1",
+        "description": "Référence technique du Générateur de citations : comment les citations aux styles APA, MLA et Chicago sont formatées à partir des mêmes détails de source pour les livres, articles de revue et sites web, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Modèles de citation",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Le seuil propre de « et al. » à chaque style",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Styles de citation",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Livre (APA) : Auteur, A. (Année). Titre. Éditeur. | Revue (MLA) : Auteur, A. « Titre. » Revue, vol. N, no. N, Année, pp. N-N. | Site web (Chicago) : Auteur, A. Année. « Titre. » Nom du site. Consulté le date. URL.",
+          "note": "Chacun des trois styles (APA 7e éd., MLA 9e éd., Chicago auteur-date 17e éd.) a ses propres règles de ponctuation, d'ordre des éléments et — de manière cruciale — combien d'auteurs nommer avant de passer à une forme abrégée « et al. » ; les mêmes données source sont formatées indépendamment trois fois, une fois selon les conventions propres à chaque style."
+        },
+        "flowchart": {
+          "intro": "Les mêmes données source structurées — auteurs, titre, année et détails spécifiques au type de source — alimentent trois fonctions de formatage indépendantes, une par style de citation.",
+          "steps": [
+            "Valider les champs requis pour le type de source choisi : chaque source a besoin d'un titre, un article de revue a besoin en plus d'un nom de revue, et un site web a besoin en plus d'une URL",
+            "Formater la liste des auteurs trois fois séparément, une fois par style, car chaque style a ses propres règles sur combien d'auteurs nommer intégralement avant de passer à « et al. » et sa propre conjonction avant le dernier auteur — l'esperluette de l'APA contre le « and » du MLA et de Chicago",
+            "Assembler l'entrée APA : auteurs et année entre parenthèses, suivis du titre, suivi de détails spécifiques au type de source — éditeur pour un livre, revue/volume/numéro/pages pour un article, nom du site et URL pour un site web",
+            "Assembler l'entrée MLA avec ses propres conventions de ponctuation : le titre de l'article entre guillemets, le volume et le numéro précédés de « vol. » et « no. », et une date d'accès ajoutée uniquement pour un site web",
+            "Assembler l'entrée Chicago, qui place l'année directement après les auteurs sans parenthèses, et suit par ailleurs une structure similaire à celle de l'APA"
+          ],
+          "caption": "Un ensemble de détails de source, formaté trois fois séparément à travers trois modèles de style codés indépendamment."
+        },
+        "anatomy": {
+          "intro": "Chaque style de citation nomme les auteurs intégralement seulement jusqu'à son propre seuil, après quoi il passe à une forme abrégée « et al. » — un seuil qui diffère selon le style.",
+          "labelApa": "APA",
+          "labelMla": "MLA",
+          "labelChicago": "Chicago",
+          "caption": "Pour une source avec de nombreux auteurs, l'APA liste jusqu'à 20 auteurs par nom avant de passer à « et al. », tandis que le MLA passe après seulement 2 auteurs nommés et Chicago après 3 — la même liste d'auteurs peut s'afficher très différemment selon le style sélectionné."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "typeDeSource",
+            "meaning": "De quel type de source il s'agit : livre, article de revue ou site web. Détermine quels champs sont requis et comment chaque style formate l'entrée.",
+            "unit": "—"
+          },
+          {
+            "symbol": "auteurs",
+            "meaning": "La liste des auteurs, chacun avec un prénom et un nom de famille.",
+            "unit": "—"
+          },
+          {
+            "symbol": "titre, année",
+            "meaning": "Le titre de la source, et son année de publication.",
+            "unit": "—"
+          },
+          {
+            "symbol": "éditeur",
+            "meaning": "Le nom de l'éditeur. Utilisé pour un livre.",
+            "unit": "—"
+          },
+          {
+            "symbol": "nomRevue, volume, numéro, pages",
+            "meaning": "Le nom de la revue, le volume, le numéro et la plage de pages. Utilisé pour un article de revue.",
+            "unit": "—"
+          },
+          {
+            "symbol": "nomSite, url, dateAccès",
+            "meaning": "Le nom du site web, son URL, et la date à laquelle il a été consulté. Utilisé pour un site web.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Une source sans auteur répertorié commence plutôt par le titre, dans les trois styles",
+            "description": "Lorsque la liste des auteurs est vide (ou que chaque entrée a un nom de famille vide), le formateur de chaque style se rabat sur le fait de commencer la citation par le titre plutôt qu'un nom d'auteur — correspondant à la façon dont les trois styles traitent les sources anonymes ou non créditées."
+          },
+          {
+            "title": "Le seuil « et al. » de chaque style est différent, et aucun ne correspond",
+            "description": "L'APA épelle jusqu'à 20 auteurs par nom avant de passer à une forme abrégée ; le MLA passe à « et al. » avec 3 auteurs ou plus ; Chicago passe avec 4 ou plus — la même liste de, disons, 3 auteurs est écrite intégralement sous l'APA et Chicago mais abrégée sous le MLA."
+          },
+          {
+            "title": "Un article de revue sans numéro de volume se formate différemment de celui qui en a un",
+            "description": "Lorsqu'un numéro de volume est présent, la citation inclut la séquence complète volume/numéro/pages ; lorsqu'il est absent, le formateur passe directement du nom de la revue à la plage de pages (si elle est fournie), plutôt que de laisser un champ de volume vide en suspens dans la sortie."
+          },
+          {
+            "title": "La date d'accès d'une citation de site web n'apparaît que dans les entrées MLA et Chicago, jamais dans l'APA",
+            "description": "Les directives de la 7e édition de l'APA ont spécifiquement supprimé l'exigence de date de récupération pour la plupart des sources web stables, donc le champ de date d'accès, même lorsqu'il est rempli, n'est jamais inclus dans l'entrée formatée en APA — seulement dans celles du MLA et de Chicago, qui l'exigent toujours."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la même source produit-elle trois citations d'apparence différente ?",
+            "answer": "L'APA, le MLA et Chicago ne sont pas des formatages différents des mêmes règles — ce sont trois guides de style véritablement distincts avec leurs propres conventions de ponctuation, d'ordre des éléments, de formatage de la liste des auteurs, et quels détails (comme une date d'accès) sont attendus du tout. L'outil fait passer les mêmes données source à travers trois fonctions de formatage indépendantes, chacune implémentant les règles réelles d'un style plutôt qu'un modèle unique partagé avec des ajustements mineurs."
+          },
+          {
+            "question": "Pourquoi l'APA, le MLA et Chicago passent-ils à « et al. » à des nombres d'auteurs différents ?",
+            "answer": "Chaque guide de style fixe son propre seuil dans le cadre de ses règles officielles, indépendamment des autres : la 7e édition de l'APA liste jusqu'à 20 auteurs par nom avant d'abréger, tandis que les conventions plus compactes du MLA et de Chicago passent bien plus tôt, à 3 et 4 auteurs respectivement. L'outil reflète le seuil réellement publié de chaque style plutôt que de choisir un nombre pour les trois."
+          },
+          {
+            "question": "Pourquoi la citation APA n'inclut-elle pas de date d'accès, même quand j'en saisis une pour une source de type site web ?",
+            "answer": "Les directives de la 7e édition de l'APA ont spécifiquement supprimé l'exigence de date de récupération pour la plupart des sources en ligne dont on ne s'attend pas à ce qu'elles changent, estimant qu'une URL seule suffit pour qu'un lecteur localise la version actuelle. Le champ de date d'accès est toujours collecté car les propres conventions du MLA et de Chicago l'exigent effectivement, mais il n'est utilisé que dans ces deux entrées, pas dans celle de l'APA."
+          },
+          {
+            "question": "Que se passe-t-il si je génère une citation d'article de revue sans saisir de numéro de volume ?",
+            "answer": "La citation est quand même générée, simplement avec une section de détails plus courte — le formateur saute entièrement la séquence volume/numéro lorsqu'aucun volume n'est donné, plutôt que d'afficher une valeur vide ou d'espace réservé, et passe directement à l'inclusion du nom de la revue et de la plage de pages (si fournie)."
+          }
+        ]
+      },
+      "study-time-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de temps d'étude/Pomodoro : comment une session d'étude est simulée bloc par bloc pour compter les intervalles de concentration terminés et les pauses, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Une session se divise en travail, pauses et temps restant",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Types de pause",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Tant que le temps restant ≥ bloc de travail : terminer un pomodoro, soustraire le bloc de travail, puis prendre une pause (courte ou longue, selon le cycle configuré) seulement si elle tient entièrement dans ce qui reste",
+          "note": "Un pomodoro ne compte qu'une fois que son bloc de travail entier tient dans le temps restant — aucun pomodoro partiel ou arrondi vers le bas n'est compté. La pause qui suit n'est de même prise (et comptée) que si elle tient aussi entièrement ; si le temps s'épuise en pleine pause, le pomodoro qui l'a précédée compte quand même, mais pas cette pause."
+        },
+        "flowchart": {
+          "intro": "La session est simulée un pomodoro à la fois, vérifiant à chaque étape s'il reste assez de temps pour le prochain bloc de travail puis la prochaine pause.",
+          "steps": [
+            "Tant que le temps restant est au moins un bloc de travail complet : soustraire le bloc de travail du temps restant et compter un pomodoro terminé",
+            "Vérifier si ce pomodoro tout juste terminé tombe sur le cycle de pause longue (son compte est un multiple de la longueur de cycle configurée) ou nécessite plutôt une pause courte",
+            "Si cette durée de pause est supérieure à zéro et tient entièrement dans le temps restant, la soustraire et la compter comme prise ; si une pause est configurée mais ne tient pas entièrement, arrêter la simulation ici, en conservant le pomodoro tout juste terminé",
+            "Si aucune pause n'est configurée pour ce créneau (durée nulle), passer directement à la vérification du prochain bloc de travail, sans arrêter la boucle",
+            "Une fois la boucle terminée, le temps programmé est la somme de toutes les minutes de travail et de pause réellement utilisées, et le reste est ce qui, du total de minutes d'origine, n'était pas suffisant pour un autre bloc de travail ou pause complet"
+          ],
+          "caption": "Les blocs de travail et les pauses sont soustraits un à un du total, chacun compté uniquement une fois confirmé qu'il tient entièrement dans ce qui reste."
+        },
+        "anatomy": {
+          "intro": "Le temps total d'une session se divise en trois parties : les minutes réellement consacrées au travail, les minutes consacrées aux pauses, et tout temps restant trop court pour programmer un autre bloc.",
+          "labelWork": "Travail",
+          "labelBreaks": "Pauses",
+          "labelLeftover": "Reste",
+          "totalLabel": "Session de 100 minutes",
+          "caption": "Une session de 100 minutes avec des blocs de travail de 25 minutes et des pauses courtes de 5 minutes contient 3 pomodoros terminés (75 minutes de travail) plus 3 pauses courtes (15 minutes), laissant 10 minutes trop courtes pour un quatrième bloc de travail."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "minutesTotales",
+            "meaning": "Le temps total disponible pour la session.",
+            "unit": "min"
+          },
+          {
+            "symbol": "minutesDeTravail",
+            "meaning": "La durée d'un bloc de concentration/travail.",
+            "unit": "min"
+          },
+          {
+            "symbol": "minutesDePauseCourte",
+            "meaning": "La durée d'une pause courte, prise après la plupart des pomodoros.",
+            "unit": "min"
+          },
+          {
+            "symbol": "minutesDePauseLongue",
+            "meaning": "La durée d'une pause longue, prise après un cycle complet de pomodoros.",
+            "unit": "min"
+          },
+          {
+            "symbol": "pomodorosAvantPauseLongue",
+            "meaning": "Combien de pomodoros composent un cycle avant qu'une pause longue soit due plutôt qu'une courte.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un pomodoro ne compte qu'une fois que son bloc de travail complet tient — aucun crédit partiel",
+            "description": "S'il reste moins qu'un bloc de travail complet en temps, la boucle s'arrête simplement ; il n'y a pas d'arrondi vers le bas pour compter un pomodoro raccourci ou partiel, de sorte que le temps restant reflète toujours un temps réellement inutilisable, pas une session sous-comptée."
+          },
+          {
+            "title": "Une pause qui ne tient pas entièrement arrête la session, mais n'efface pas le pomodoro qui la précède",
+            "description": "Lorsque le temps restant suffit pour un bloc de travail de plus mais pas pour la pause qui devrait suivre, la simulation s'arrête immédiatement — le pomodoro tout juste terminé compte toujours dans le total, mais cette pause inachevée n'est pas comptée et ses minutes restent dans le temps restant à la place."
+          },
+          {
+            "title": "Une durée de pause de exactement zéro est traitée comme « aucune pause configurée », pas comme une pause qui se termine instantanément",
+            "description": "Si la durée d'une pause est 0, le code saute explicitement la branche qui soustrairait et compterait une pause, passant directement à la vérification du prochain bloc de travail — cela empêche un horaire délibérément sans pause (que des blocs de travail, aucune pause) de gonfler le compte de pauses."
+          },
+          {
+            "title": "Le cycle de pause longue est basé sur le nombre de pomodoros terminés, pas sur le temps écoulé",
+            "description": "Le fait qu'un pomodoro donné déclenche une pause longue est déterminé par le fait que sa position dans la séquence (1er, 2e, 3e, et ainsi de suite) est un multiple de la longueur de cycle configurée, entièrement indépendamment du temps total écoulé — une session avec des blocs de travail inhabituellement courts prend quand même sa pause longue après le même nombre de pomodoros, pas après la même durée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la calculatrice ne compte-t-elle pas un pomodoro partiel si le temps restant est presque, mais pas tout à fait, suffisant pour un bloc de travail complet ?",
+            "answer": "Un pomodoro est censé représenter un bloc de concentration complet et ininterrompu — compter une version raccourcie fausserait la quantité de travail concentré réellement effectué. Au lieu de cela, la simulation s'arrête dès qu'il ne reste plus assez de temps pour un bloc de travail complet, et ce temps restant est honnêtement signalé comme reste plutôt qu'intégré dans un compte de pomodoro fractionnaire."
+          },
+          {
+            "question": "Si le temps s'épuise en pleine pause, ai-je quand même le crédit pour le pomodoro précédent ?",
+            "answer": "Oui — le bloc de travail et la pause qui le suit sont suivis comme des événements séparés. Le pomodoro est compté dès que son bloc de travail complet est soustrait du temps restant, avant même que la calculatrice ne vérifie s'il y a de la place pour la pause suivante, donc une pause qui ne tient pas n'affecte que le compte de pauses, pas le compte de pomodoros."
+          },
+          {
+            "question": "Que se passe-t-il si je fixe une durée de pause à 0 minute ?",
+            "answer": "Une durée de pause de exactement 0 est traitée comme « ce créneau n'a aucune pause programmée » plutôt que comme une pause instantanée qui est quand même comptée — la simulation saute directement au prochain bloc de travail sans incrémenter l'un ou l'autre compteur de pause, vous permettant de modéliser un horaire avec des blocs de travail mais sans aucune pause du tout si c'est ce que vous souhaitez."
+          },
+          {
+            "question": "La pause longue se produit-elle après une durée fixe, ou après un nombre fixe de pomodoros ?",
+            "answer": "Après un nombre fixe de pomodoros — plus précisément, chaque fois que le compte de pomodoros terminés est un multiple de la longueur de cycle que vous avez définie. Cela signifie que le moment de la pause longue se décale automatiquement si vous modifiez la durée de votre bloc de travail, puisqu'elle est comptée en sessions de concentration terminées, pas en minutes écoulées."
+          }
+        ]
+      },
+      "class-schedule-builder": {
+        "version": "v1",
+        "description": "Référence technique du Créateur d'emploi du temps : comment les chevauchements jour/heure entre les cours hebdomadaires sont détectés et les heures hebdomadaires programmées totalisées, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Seules les minutes véritablement chevauchantes comptent comme un conflit",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Comparaisons",
+          "modesValue": "Par paires",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Deux cours entrent en conflit un jour partagé seulement si max(débutA, débutB) < min(finA, finB) — leurs intervalles de temps se chevauchent véritablement, sans simplement se toucher",
+          "note": "Un conflit est vérifié indépendamment pour chaque paire de cours et chaque jour où les deux ont lieu. Deux cours se suivant immédiatement, où l'heure de fin de l'un correspond exactement à l'heure de début de l'autre, ne comptent pas comme un conflit — la vérification de chevauchement utilise un strict inférieur-à, pas inférieur-ou-égal-à, spécifiquement pour permettre ce cas."
+        },
+        "flowchart": {
+          "intro": "Chaque cours est comparé à tous les autres cours, une fois par jour qu'ils pourraient partager, vérifiant un véritable chevauchement horaire plutôt qu'un simple jour partagé.",
+          "steps": [
+            "Valider d'abord chaque cours : chacun a besoin d'une heure de fin postérieure à son heure de début, et d'au moins un jour de réunion — un cours invalide arrête tout le calcul avant que toute vérification de conflit ne commence",
+            "Comparer chaque paire de cours exactement une fois (pas deux fois, et jamais un cours contre lui-même), en n'associant chaque cours qu'à ceux plus loin dans la liste",
+            "Pour chaque paire, trouver les jours où les deux se réunissent réellement — l'intersection de leurs deux listes de jours — puisqu'un conflit ne peut exister qu'un jour où les deux cours sont en session",
+            "Pour chaque jour partagé, calculer la fenêtre de chevauchement comme la plus tardive des deux heures de début jusqu'à la plus précoce des deux heures de fin",
+            "N'enregistrer un conflit que si cette fenêtre de chevauchement a une largeur véritable — son début calculé est strictement antérieur à sa fin calculée — ce qui exclut correctement deux cours qui se suivent simplement immédiatement sans chevauchement"
+          ],
+          "caption": "Chaque paire de cours est vérifiée jour par jour pour une fenêtre horaire véritablement chevauchante, pas seulement un jour de réunion partagé."
+        },
+        "anatomy": {
+          "intro": "Lorsque deux cours partagent un jour de réunion, seul le temps où leurs fenêtres se croisent véritablement compte comme un conflit — le reste du temps propre à chaque cours n'est pas affecté.",
+          "labelAOnly": "Cours A seulement",
+          "labelOverlap": "Chevauchement (conflit)",
+          "labelBOnly": "Cours B seulement",
+          "totalLabel": "Plage de 9h00 à 11h00",
+          "caption": "Le cours A a lieu de 9h00 à 10h30 et le cours B de 10h00 à 11h00 le même jour : ils se chevauchent pendant 30 minutes (10h00–10h30), ce que l'outil signale comme un conflit, tandis que les 60 et 30 minutes environnantes appartiennent à chaque cours seul."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "cours",
+            "meaning": "La liste des cours, chacun avec un nom, ses jours de réunion, et une heure de début et de fin en minutes.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les cours se suivant immédiatement ne sont explicitement pas un conflit",
+            "description": "La vérification de chevauchement exige que le début de chevauchement calculé soit strictement antérieur à la fin de chevauchement calculée — lorsqu'un cours se termine exactement à la même minute où un autre commence, la fenêtre de chevauchement a une largeur nulle et n'est correctement pas signalée comme un conflit, correspondant à la façon dont fonctionne une planification réelle en dos à dos."
+          },
+          {
+            "title": "Un conflit est vérifié par jour partagé, donc des cours se chevauchant dans le temps mais ne partageant jamais un jour n'entrent jamais en conflit",
+            "description": "Deux cours avec des fenêtres horaires identiques ou chevauchantes mais sans jour de réunion commun (par exemple, l'un a lieu seulement le lundi et le mercredi, l'autre seulement le mardi et le jeudi) produisent zéro conflit, puisque l'étape d'intersection des jours ne trouve aucun jour partagé pour même vérifier un chevauchement horaire."
+          },
+          {
+            "title": "Chaque cours est validé avant que toute détection de conflit ne s'exécute, donc une entrée défectueuse bloque tout l'emploi du temps",
+            "description": "Un cours dont l'heure de fin n'est pas postérieure à son heure de début, ou qui n'a aucun jour de réunion du tout, entraîne le renvoi immédiat d'une erreur par l'outil, avant toute comparaison de paires — un emploi du temps n'est pas partiellement analysé avec une entrée défectueuse silencieusement ignorée."
+          },
+          {
+            "title": "Les minutes hebdomadaires totales comptent chaque occurrence de réunion, y compris le temps à l'intérieur d'un conflit",
+            "description": "totalWeeklyMinutes additionne la durée de chaque cours multipliée par le nombre de jours où il a lieu, indépendamment pour chaque cours — le temps chevauchant entre deux cours est compté une fois pour chaque cours auquel il appartient, donc les minutes d'un conflit signalé sont effectivement comptées deux fois dans le total hebdomadaire, une fois par cours impliqué."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi deux cours se suivant immédiatement ne comptent-ils pas comme un conflit d'horaire ?",
+            "answer": "Se suivre immédiatement — un cours se terminant à 10h00 et le suivant commençant exactement à 10h00 — est une planification tout à fait normale, pas un chevauchement ; il n'y a aucun moment dans le temps où les deux cours sont censés avoir lieu à la fois. La vérification de conflit utilise délibérément une comparaison stricte pour qu'un moment limite partagé ne soit pas signalé comme une véritable collision horaire."
+          },
+          {
+            "question": "Si deux cours ont le même créneau horaire mais ont lieu des jours différents, l'outil les signalera-t-il comme en conflit ?",
+            "answer": "Non — un conflit ne peut être signalé qu'un jour où les deux cours ont réellement lieu, donc l'étape d'intersection des jours s'exécute avant toute vérification de chevauchement horaire. Deux cours qui ne partagent jamais un jour de réunion sont structurellement incapables de produire un conflit ici, peu importe la similarité de leurs créneaux horaires."
+          },
+          {
+            "question": "Pourquoi une entrée de cours invalide arrête-t-elle la vérification de tout l'emploi du temps, au lieu de simplement ignorer ce cours ?",
+            "answer": "Un cours invalide — sans jour de réunion, ou avec une heure de fin qui n'est pas postérieure à son heure de début — représente une entrée véritablement ambiguë ; essayer de deviner ce qui était voulu et vérifier le reste de l'emploi du temps autour pourrait cacher une erreur de saisie de données. Signaler l'erreur immédiatement, avant d'exécuter toute détection de conflit, garantit que chaque cours dans l'emploi du temps final a réellement été validé."
+          },
+          {
+            "question": "Le chiffre des minutes hebdomadaires totales soustrait-il le temps chevauchant entre cours en conflit ?",
+            "answer": "Non — il est calculé indépendamment pour chaque cours (la durée propre de ce cours multipliée par le nombre de jours où il a lieu) puis additionné, sans vérifier ni supprimer aucun chevauchement compté deux fois entre différents cours. Cela signifie que le total représente la somme du temps programmé propre à chaque cours, pas le nombre réel d'heures distinctes pendant lesquelles vous seriez occupé si le temps en conflit de deux cours n'est vécu qu'une seule fois."
+          }
+        ]
       }
     }
   }

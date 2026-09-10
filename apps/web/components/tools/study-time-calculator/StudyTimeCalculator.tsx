@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import StudyTimeInputPanel from "./StudyTimeInputPanel";
 import StudyTimeResult from "./StudyTimeResult";
 import StudyTimeQuickReference from "./StudyTimeQuickReference";
@@ -73,6 +74,7 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
           sidebar={<RelatedToolsSidebar currentSlug="study-time-calculator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="study-time-calculator" />
               <SectionNav items={navItems} />
               <StudyTimeQuickReference />
             </div>

@@ -6,6 +6,7 @@ import { CitationGenerator as CitationGeneratorTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CitationInputPanel, { type CitationDraft } from "./CitationInputPanel";
 import CitationResult from "./CitationResult";
 import CitationQuickReference from "./CitationQuickReference";
@@ -69,6 +70,7 @@ export default function CitationGenerator({ education }: { education: ReactNode 
           sidebar={<RelatedToolsSidebar currentSlug="citation-generator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="citation-generator" />
               <SectionNav items={navItems} />
               <CitationQuickReference />
             </div>

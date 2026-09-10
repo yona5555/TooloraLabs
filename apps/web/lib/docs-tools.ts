@@ -84,6 +84,10 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "time-calculator",
   "world-time-converter",
   "countdown-to-event-calculator",
+  "gpa-calculator",
+  "citation-generator",
+  "study-time-calculator",
+  "class-schedule-builder",
 ];
 
 export function isToolDocumented(slug: string): boolean {

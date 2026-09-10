@@ -30243,6 +30243,424 @@
             "answer": "Yes — the calculation is symmetric around zero. If the target date-time is in the past, the difference is still computed the same way and isPast is simply true, with the days/hours/minutes/seconds fields showing how much time has elapsed since that past moment rather than how much remains until a future one."
           }
         ]
+      },
+      "gpa-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the GPA Calculator: how a credit-weighted grade point average is computed, and how the GPA needed on upcoming credits to reach a target is solved for, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Quality Points Are Weighted by Credit Hours",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Calculate mode: GPA = Σ(gradePoints × creditHours) ÷ Σ(creditHours) | Target mode: requiredGPA = (targetGPA × (currentCredits+plannedCredits) − currentGPA × currentCredits) ÷ plannedCredits",
+          "note": "Quality points for a course are its grade points multiplied by its credit hours; the overall GPA is the sum of every course's quality points divided by the sum of every course's credit hours — a credit-weighted average, not a simple average of the grades themselves. Target mode works backward from this same weighting to solve for the GPA needed on the credits still to come."
+        },
+        "flowchart": {
+          "intro": "Two independent modes share the same underlying idea — that grade points are weighted by credit hours before being averaged.",
+          "steps": [
+            "In calculate mode: discard any course with zero or fewer credit hours, then sum the remaining credit hours across all courses",
+            "Multiply each remaining course's grade points by its own credit hours to get that course's quality points, then sum all of these into total quality points",
+            "Divide total quality points by total credit hours to get the GPA, rounded to three decimal places",
+            "In target mode instead: compute the quality points already banked from current credits (current GPA × current credits), then compute the total quality points needed to reach the target GPA across all credits, current plus planned",
+            "Subtract the already-banked quality points from that required total, then divide by the planned credits to get the GPA needed on just those upcoming credits — and check whether that figure actually falls within the 0-to-4.0 scale"
+          ],
+          "caption": "Calculate mode weights and averages known grades; target mode works the weighting backward to solve for an unknown future GPA."
+        },
+        "anatomy": {
+          "intro": "Each course contributes quality points in proportion to its own credit hours — a heavier course pulls the GPA further toward its own grade.",
+          "labelCourseA": "3 Credits at 4.0",
+          "labelCourseB": "4 Credits at 3.0",
+          "totalLabel": "24 Quality Points",
+          "caption": "A 3-credit course with a 4.0 grade contributes 12 quality points, and a 4-credit course with a 3.0 grade also contributes 12 — together, 24 quality points over 7 credits works out to a 3.43 GPA."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "operation",
+            "meaning": "Whether to calculate a GPA from a list of courses, or solve for the GPA needed on upcoming credits.",
+            "unit": "—"
+          },
+          {
+            "symbol": "courses",
+            "meaning": "The list of courses, each with grade points (on a 0-4.0 scale) and credit hours. Used in calculate mode.",
+            "unit": "—"
+          },
+          {
+            "symbol": "currentGpa, currentCredits",
+            "meaning": "The GPA and total credit hours already completed. Used in target mode.",
+            "unit": "—"
+          },
+          {
+            "symbol": "targetGpa, plannedCredits",
+            "meaning": "The GPA to reach, and how many credits are still to come. Used in target mode.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Courses with zero or negative credit hours are silently excluded",
+            "description": "A course entry with creditHours at or below zero doesn't just contribute zero — it's filtered out of the list entirely before totaling, so it can't accidentally zero out the overall GPA through a stray 0-credit row."
+          },
+          {
+            "title": "An empty or all-zero-credit course list is a distinct error, not a 0.0 GPA",
+            "description": "If every course is filtered out (or no courses were entered at all), the tool returns a no-courses error rather than reporting a GPA of 0.0 — a genuinely earned 0.0 GPA and 'nothing to calculate' are kept distinct."
+          },
+          {
+            "title": "A required GPA outside 0-4.0 is still calculated and returned, just flagged as unachievable",
+            "description": "Target mode doesn't clamp or reject an out-of-range result — if the arithmetic says a 4.7 GPA is needed on the remaining credits, that number is still returned, with isAchievable: false marking that it exceeds the 4.0 scale a typical course can produce."
+          },
+          {
+            "title": "Zero or negative planned credits is rejected before any GPA arithmetic runs",
+            "description": "Target mode requires plannedCredits to be a positive number, since dividing by zero or negative planned credits would make 'the GPA needed on those credits' undefined or meaningless — this is checked before the rest of the calculation proceeds."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is GPA a credit-weighted average instead of a simple average of grades?",
+            "answer": "A 4-credit course and a 1-credit course don't represent the same amount of academic work, so treating their grades as equally important would understate how much a heavier course actually shapes a student's overall standing. Weighting each grade by its own credit hours — the standard method virtually every institution uses — makes a 4-credit A affect the GPA four times as much as a 1-credit A."
+          },
+          {
+            "question": "How does target mode figure out what GPA I need on my remaining credits?",
+            "answer": "It first converts your current GPA and credits into 'quality points already banked' (GPA × credits), then computes the total quality points that would be needed, across all your credits including the ones still ahead, to land exactly on your target GPA. Subtracting what's already banked from that total, then dividing by just the planned credits, isolates the GPA needed on those remaining credits specifically."
+          },
+          {
+            "question": "What does it mean if the required GPA comes back above 4.0?",
+            "answer": "It means the target GPA isn't mathematically reachable with the planned number of credits, given your current standing — even straight 4.0s on every remaining credit wouldn't be enough. The tool still shows you the exact number that would technically be required, flagged as unachievable, so you can see how far out of reach it is rather than just being told no."
+          },
+          {
+            "question": "Why are courses with zero credit hours excluded instead of just contributing zero quality points?",
+            "answer": "A 0-credit course (like a pass/fail seminar or an audited class) contributing zero quality points would be mathematically identical to excluding it from the numerator, but including it in the denominator would be wrong — dividing by credit hours that shouldn't count would understate the real GPA. Filtering these rows out entirely before any totaling avoids that distortion."
+          }
+        ]
+      },
+      "citation-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Citation Generator: how APA, MLA, and Chicago style citations are formatted from the same source details for books, journal articles, and websites, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Citation Patterns",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Each Style's Own 'et al.' Threshold",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Citation Styles",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Book (APA): Author, A. (Year). Title. Publisher. | Journal (MLA): Author, A. \"Title.\" Journal, vol. N, no. N, Year, pp. N-N. | Website (Chicago): Author, A. Year. \"Title.\" Site Name. Accessed Date. URL.",
+          "note": "Each of the three styles (APA 7th, MLA 9th, Chicago author-date 17th) has its own rules for punctuation, element order, and — critically — how many authors to name before switching to an abbreviated 'et al.' form; the same source data is independently formatted three times, once per style's own conventions."
+        },
+        "flowchart": {
+          "intro": "The same structured source data — authors, title, year, and source-type-specific details — feeds three independent formatting functions, one per citation style.",
+          "steps": [
+            "Validate the required fields for the chosen source type: every source needs a title, a journal article additionally needs a journal name, and a website additionally needs a URL",
+            "Format the author list three separate times, once per style, since each style has its own rules for how many authors to name in full before switching to 'et al.' and its own conjunction before the final author — APA's ampersand versus MLA and Chicago's 'and'",
+            "Assemble the APA entry: authors and year in a parenthetical, followed by the title, followed by source-type-specific details — publisher for a book, journal/volume/issue/pages for an article, site name and URL for a website",
+            "Assemble the MLA entry with its own punctuation conventions: the article title in quotation marks, volume and issue prefixed with 'vol.' and 'no.', and an access date appended only for a website",
+            "Assemble the Chicago entry, which places the year directly after the authors without parentheses, and otherwise follows a structure similar to APA's"
+          ],
+          "caption": "One set of source details, formatted three separate times through three independently coded style templates."
+        },
+        "anatomy": {
+          "intro": "Each citation style names authors in full only up to its own threshold, after which it switches to an abbreviated 'et al.' form — a threshold that differs by style.",
+          "labelApa": "APA",
+          "labelMla": "MLA",
+          "labelChicago": "Chicago",
+          "caption": "For a source with many authors, APA lists up to 20 authors by name before switching to 'et al.', while MLA switches after just 2 named authors and Chicago after 3 — the same author list can render very differently depending on which style is selected."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "sourceType",
+            "meaning": "Which kind of source this is: book, journal article, or website. Determines which fields are required and how each style formats the entry.",
+            "unit": "—"
+          },
+          {
+            "symbol": "authors",
+            "meaning": "The list of authors, each with a first and last name.",
+            "unit": "—"
+          },
+          {
+            "symbol": "title, year",
+            "meaning": "The source's title, and its publication year.",
+            "unit": "—"
+          },
+          {
+            "symbol": "publisher",
+            "meaning": "The publisher's name. Used for a book.",
+            "unit": "—"
+          },
+          {
+            "symbol": "journalName, volume, issue, pages",
+            "meaning": "The journal's name, volume, issue number, and page range. Used for a journal article.",
+            "unit": "—"
+          },
+          {
+            "symbol": "siteName, url, accessDate",
+            "meaning": "The website's name, its URL, and the date it was accessed. Used for a website.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A source with no listed author leads with the title instead, in all three styles",
+            "description": "When the author list is empty (or every entry has a blank last name), each style's formatter falls back to starting the citation with the title rather than an author name — matching how all three styles handle anonymous or uncredited sources."
+          },
+          {
+            "title": "Each style's 'et al.' threshold is different, and none of them match",
+            "description": "APA spells out up to 20 authors by name before switching to an abbreviated form; MLA switches to 'et al.' with 3 or more authors; Chicago switches with 4 or more — the same list of, say, 3 authors is written out in full under APA and Chicago but abbreviated under MLA."
+          },
+          {
+            "title": "A journal article without a volume number formats differently than one with one",
+            "description": "When a volume number is present, the citation includes the full volume/issue/pages sequence; when it's absent, the formatter skips straight from the journal name to the page range (if any is given), rather than leaving a dangling empty volume field in the output."
+          },
+          {
+            "title": "A website citation's access date only appears in the MLA and Chicago entries, never APA",
+            "description": "APA 7th edition's own guidance dropped the retrieval-date requirement for most stable web sources, so the access date field, even when filled in, is never included in the APA-formatted entry — only in the MLA and Chicago ones, which still call for it."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the same source produce three different-looking citations?",
+            "answer": "APA, MLA, and Chicago aren't different formattings of the same rules — they're three genuinely different style guides with their own conventions for punctuation, element order, author-list formatting, and which details (like an access date) are expected at all. The tool runs the same source data through three independent formatting functions, each implementing one style's actual rules rather than a single shared template with minor tweaks."
+          },
+          {
+            "question": "Why do APA, MLA, and Chicago switch to 'et al.' at different numbers of authors?",
+            "answer": "Each style guide sets its own threshold as part of its official rules, independent of the others: APA's 7th edition lists up to 20 authors by name before abbreviating, while MLA and Chicago's more compact conventions switch much sooner, at 3 and 4 authors respectively. The tool mirrors each style's actual published threshold rather than picking one number for all three."
+          },
+          {
+            "question": "Why doesn't the APA citation include an access date, even when I fill one in for a website source?",
+            "answer": "APA's 7th edition guidance specifically removed the retrieval-date requirement for most online sources that aren't expected to change, reasoning that a URL alone is enough for a reader to locate the current version. The access-date field is still collected because MLA and Chicago's own conventions do call for it, but it's only used in those two entries, not the APA one."
+          },
+          {
+            "question": "What happens if I generate a journal article citation without entering a volume number?",
+            "answer": "The citation is still generated, just with a shorter details section — the formatter skips the volume/issue sequence entirely when no volume is given, rather than showing an empty or placeholder value, and falls through to including the journal name and page range (if provided) directly."
+          }
+        ]
+      },
+      "study-time-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Study Time / Pomodoro Calculator: how a study session is simulated block by block to count completed focus intervals and breaks, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "A Session Splits Into Work, Breaks, and Leftover Time",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Break Types",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "While remaining time ≥ work block: complete a pomodoro, subtract the work block, then take a break (short or long, on the configured cycle) only if it fully fits in what's left",
+          "note": "A pomodoro only counts once its entire work block fits in the remaining time — no partial or rounded-down pomodoros are counted. The break that follows is likewise only taken (and only counted) if it also fully fits; if time runs out mid-break, the pomodoro that preceded it still counts, but that break does not."
+        },
+        "flowchart": {
+          "intro": "The session is simulated one pomodoro at a time, checking at each step whether there's enough time left for the next work block and then the next break.",
+          "steps": [
+            "While the remaining time is at least one full work block: subtract the work block from the remaining time and count one completed pomodoro",
+            "Check whether this just-completed pomodoro falls on the long-break cycle (its count is a multiple of the configured cycle length) or calls for a short break instead",
+            "If that break length is greater than zero and fully fits in the remaining time, subtract it and count it as taken; if a break is configured but doesn't fully fit, stop the simulation here, keeping the pomodoro just completed",
+            "If no break is configured for this slot (length zero), skip straight to checking for the next work block, without stopping the loop",
+            "Once the loop ends, the scheduled time is the sum of all work and break minutes actually used, and the leftover is whatever of the original total minutes wasn't enough to fit another full work block or break"
+          ],
+          "caption": "Work blocks and breaks are subtracted one at a time from the total, each only counted once it's confirmed to fully fit in what remains."
+        },
+        "anatomy": {
+          "intro": "A session's total time splits into three parts: minutes actually spent working, minutes spent on breaks, and any leftover time too short to schedule another block.",
+          "labelWork": "Work",
+          "labelBreaks": "Breaks",
+          "labelLeftover": "Leftover",
+          "totalLabel": "100-Minute Session",
+          "caption": "A 100-minute session with 25-minute work blocks and 5-minute short breaks fits 3 completed pomodoros (75 work minutes) plus 3 short breaks (15 minutes), leaving 10 minutes too short for a fourth work block."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "totalMinutes",
+            "meaning": "The total time available for the session.",
+            "unit": "min"
+          },
+          {
+            "symbol": "workMinutes",
+            "meaning": "The length of one focus/work block.",
+            "unit": "min"
+          },
+          {
+            "symbol": "shortBreakMinutes",
+            "meaning": "The length of a short break, taken after most pomodoros.",
+            "unit": "min"
+          },
+          {
+            "symbol": "longBreakMinutes",
+            "meaning": "The length of a long break, taken after a full cycle of pomodoros.",
+            "unit": "min"
+          },
+          {
+            "symbol": "pomodorosBeforeLongBreak",
+            "meaning": "How many pomodoros make up one cycle before a long break is due instead of a short one.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A pomodoro only counts once its full work block fits — no partial credit",
+            "description": "If less than a full work block's worth of time remains, the loop simply stops; there's no rounding down to count a shortened or partial pomodoro, so the leftover time always reflects genuinely unusable time, not an undercounted session."
+          },
+          {
+            "title": "A break that doesn't fully fit stops the session, but doesn't erase the pomodoro before it",
+            "description": "When remaining time is enough for one more work block but not for the break that should follow it, the simulation stops immediately — the pomodoro that was just completed still counts in the total, but that unfinished break is not counted and its minutes are left in the leftover time instead."
+          },
+          {
+            "title": "A break length of exactly zero is treated as 'no break configured,' not as a break that instantly completes",
+            "description": "If a break's length is 0, the code explicitly skips the branch that would subtract and count a break, moving straight to checking for the next work block — this keeps a deliberately break-free schedule (all work blocks, no breaks) from inflating the break count."
+          },
+          {
+            "title": "The long-break cycle is based on completed-pomodoro count, not elapsed time",
+            "description": "Whether a given pomodoro triggers a long break is determined by whether its position in the sequence (1st, 2nd, 3rd, and so on) is a multiple of the configured cycle length, entirely independent of how much total time has elapsed — a session with unusually short work blocks still takes its long break after the same number of pomodoros, not after the same amount of time."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why doesn't the calculator count a partial pomodoro if the remaining time is almost, but not quite, enough for a full work block?",
+            "answer": "A pomodoro is meant to represent one full, uninterrupted focus block — counting a shortened version would misrepresent how much focused work actually happened. Instead, the simulation stops as soon as there isn't enough time left for a complete work block, and that remaining time is reported honestly as leftover rather than folded into a fractional pomodoro count."
+          },
+          {
+            "question": "If I run out of time in the middle of a break, do I still get credit for the pomodoro before it?",
+            "answer": "Yes — the work block and the break that follows it are tracked as separate events. The pomodoro is counted as soon as its full work block is subtracted from the remaining time, before the calculator even checks whether there's room for the subsequent break, so a break that doesn't fit only affects the break count, not the pomodoro count."
+          },
+          {
+            "question": "What happens if I set a break length to 0 minutes?",
+            "answer": "A break length of exactly 0 is treated as 'this slot has no break scheduled' rather than as an instantaneous break that still gets counted — the simulation skips directly to the next work block without incrementing either break counter, letting you model a schedule with work blocks but no breaks at all if that's what you want."
+          },
+          {
+            "question": "Does the long break happen after a fixed amount of time, or after a fixed number of pomodoros?",
+            "answer": "After a fixed number of pomodoros — specifically, whenever the count of completed pomodoros is a multiple of the cycle length you set. This means the long break's timing shifts automatically if you change your work-block length, since it's counted in completed focus sessions, not in elapsed minutes."
+          }
+        ]
+      },
+      "class-schedule-builder": {
+        "version": "v1",
+        "description": "Technical reference for the Class Schedule Builder: how day/time overlaps between weekly classes are detected and weekly scheduled hours are totaled, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Only the Genuinely Overlapping Minutes Count as a Conflict",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Comparisons",
+          "modesValue": "Pairwise",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Two classes conflict on a shared day only if max(startA, startB) < min(endA, endB) — their time intervals genuinely overlap, not merely touch",
+          "note": "A conflict is checked independently for every pair of classes and every day they both meet on. Two classes meeting back-to-back, where one's end time exactly equals the other's start time, do not count as a conflict — the overlap check uses a strict less-than, not less-than-or-equal, specifically to allow that case."
+        },
+        "flowchart": {
+          "intro": "Every class is compared against every other class, once per day they might share, checking for a genuine time overlap rather than just a shared day.",
+          "steps": [
+            "Validate every class first: each one needs an end time after its start time, and at least one meeting day — an invalid class stops the whole calculation before any conflict checking begins",
+            "Compare every pair of classes exactly once (not twice, and never a class against itself), by pairing each class only with the ones later in the list",
+            "For each pair, find the days they both actually meet on — the intersection of their two day lists — since a conflict can only exist on a day both classes are in session",
+            "For each shared day, compute the overlap window as the later of the two start times to the earlier of the two end times",
+            "Record a conflict only if that overlap window has genuine width — its computed start is strictly before its computed end — which is what correctly excludes two classes that merely meet back-to-back with no overlap"
+          ],
+          "caption": "Every class pair is checked day by day for a genuinely overlapping time window, not just a shared meeting day."
+        },
+        "anatomy": {
+          "intro": "When two classes share a meeting day, only the time where their windows genuinely intersect counts as a conflict — the rest of each class's own time is unaffected.",
+          "labelAOnly": "Class A Only",
+          "labelOverlap": "Overlap (Conflict)",
+          "labelBOnly": "Class B Only",
+          "totalLabel": "9:00 AM – 11:00 AM Span",
+          "caption": "Class A meets 9:00–10:30 and Class B meets 10:00–11:00 on the same day: they overlap for 30 minutes (10:00–10:30), which the tool reports as a conflict, while the surrounding 60 and 30 minutes belong to each class alone."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "classes",
+            "meaning": "The list of classes, each with a name, its meeting days, and a start and end time in minutes.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Back-to-back classes are explicitly not a conflict",
+            "description": "The overlap check requires the computed overlap start to be strictly less than the computed overlap end — when one class ends at exactly the same minute another begins, the overlap window has zero width and is correctly not reported as a conflict, matching how real back-to-back scheduling works."
+          },
+          {
+            "title": "A conflict is checked per shared day, so classes overlapping in time but never sharing a day never conflict",
+            "description": "Two classes with identical or overlapping time windows but no common meeting day (for example, one meets only Monday and Wednesday, the other only Tuesday and Thursday) produce zero conflicts, since the day-intersection step finds no shared days to even check for a time overlap on."
+          },
+          {
+            "title": "Every class is validated before any conflict detection runs, so one bad entry blocks the whole schedule",
+            "description": "A class with its end time not after its start time, or with no meeting days at all, causes the tool to return an error immediately, before comparing any pairs — a schedule isn't partially analyzed with one broken entry silently ignored."
+          },
+          {
+            "title": "Total weekly minutes counts every meeting occurrence, including time inside a conflict",
+            "description": "totalWeeklyMinutes sums each class's duration multiplied by how many days it meets, independently for every class — overlapping time between two classes is counted once for each class it belongs to, so a reported conflict's minutes are effectively counted twice toward the weekly total, once per class involved."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why don't two classes that meet back-to-back count as a scheduling conflict?",
+            "answer": "Meeting back-to-back — one class ending at 10:00 and the next starting at exactly 10:00 — is completely normal scheduling, not an overlap; there's no moment in time where both classes are supposed to be happening at once. The conflict check uses a strict comparison specifically so a shared boundary moment doesn't get flagged as a real time collision."
+          },
+          {
+            "question": "If two classes have the same time slot but meet on different days, will the tool flag them as conflicting?",
+            "answer": "No — a conflict can only be reported on a day both classes actually meet, so the day-intersection step runs before any time-overlap check. Two classes that never share a meeting day are structurally incapable of producing a conflict here, regardless of how similar their time slots are."
+          },
+          {
+            "question": "Why does one invalid class entry stop the entire schedule from being checked, instead of just skipping that one class?",
+            "answer": "An invalid class — one with no meeting days, or an end time that isn't after its start time — represents a genuinely ambiguous input; trying to guess what was meant and check the rest of the schedule around it could hide a data-entry mistake. Surfacing the error immediately, before running any conflict detection, makes sure every class in the final schedule has actually been validated."
+          },
+          {
+            "question": "Does the total weekly minutes figure subtract out overlapping time between conflicting classes?",
+            "answer": "No — it's computed independently for each class (that class's own duration times how many days it meets) and then summed, without checking for or removing any double-counted overlap between different classes. This means the total represents the sum of each class's own scheduled time, not the actual number of distinct hours you'd be occupied if two classes' conflicting time is only experienced once."
+          }
+        ]
       }
     }
   }

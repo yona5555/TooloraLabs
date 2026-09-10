@@ -84,6 +84,10 @@ import DateCalculatorDocsPage, { getDateCalculatorTocItems } from "@/components/
 import TimeCalculatorDocsPage, { getTimeCalculatorTocItems } from "@/components/docs/time-calculator/TimeCalculatorDocsPage";
 import WorldTimeConverterDocsPage, { getWorldTimeConverterTocItems } from "@/components/docs/world-time-converter/WorldTimeConverterDocsPage";
 import CountdownToEventCalculatorDocsPage, { getCountdownToEventCalculatorTocItems } from "@/components/docs/countdown-to-event-calculator/CountdownToEventCalculatorDocsPage";
+import GpaCalculatorDocsPage, { getGpaCalculatorTocItems } from "@/components/docs/gpa-calculator/GpaCalculatorDocsPage";
+import CitationGeneratorDocsPage, { getCitationGeneratorTocItems } from "@/components/docs/citation-generator/CitationGeneratorDocsPage";
+import StudyTimeCalculatorDocsPage, { getStudyTimeCalculatorTocItems } from "@/components/docs/study-time-calculator/StudyTimeCalculatorDocsPage";
+import ClassScheduleBuilderDocsPage, { getClassScheduleBuilderTocItems } from "@/components/docs/class-schedule-builder/ClassScheduleBuilderDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -445,6 +449,22 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "countdown-to-event-calculator":
       content = <CountdownToEventCalculatorDocsPage />;
       tocItems = await getCountdownToEventCalculatorTocItems();
+      break;
+    case "gpa-calculator":
+      content = <GpaCalculatorDocsPage />;
+      tocItems = await getGpaCalculatorTocItems();
+      break;
+    case "citation-generator":
+      content = <CitationGeneratorDocsPage />;
+      tocItems = await getCitationGeneratorTocItems();
+      break;
+    case "study-time-calculator":
+      content = <StudyTimeCalculatorDocsPage />;
+      tocItems = await getStudyTimeCalculatorTocItems();
+      break;
+    case "class-schedule-builder":
+      content = <ClassScheduleBuilderDocsPage />;
+      tocItems = await getClassScheduleBuilderTocItems();
       break;
   }
 

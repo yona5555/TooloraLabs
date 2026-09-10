@@ -30243,6 +30243,424 @@
             "answer": "Sí, el cálculo es simétrico alrededor de cero. Si la fecha y hora objetivo están en el pasado, la diferencia se calcula de la misma manera e isPast simplemente es verdadero, con los campos de días/horas/minutos/segundos mostrando cuánto tiempo ha transcurrido desde ese momento pasado en lugar de cuánto queda hasta uno futuro."
           }
         ]
+      },
+      "gpa-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Promedio (GPA): cómo se calcula un promedio de calificaciones ponderado por créditos, y cómo se resuelve el GPA necesario en los créditos futuros para alcanzar una meta, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Los puntos de calidad se ponderan por horas crédito",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Modo cálculo: GPA = Σ(puntos de calificación × horas crédito) ÷ Σ(horas crédito) | Modo meta: GPArequerido = (GPAmeta × (créditosactuales+créditosplaneados) − GPAactual × créditosactuales) ÷ créditosplaneados",
+          "note": "Los puntos de calidad de un curso son sus puntos de calificación multiplicados por sus horas crédito; el GPA general es la suma de los puntos de calidad de todos los cursos dividida entre la suma de las horas crédito de todos los cursos: un promedio ponderado por créditos, no un promedio simple de las calificaciones mismas. El modo meta trabaja hacia atrás desde esta misma ponderación para resolver el GPA necesario en los créditos que aún faltan."
+        },
+        "flowchart": {
+          "intro": "Dos modos independientes comparten la misma idea subyacente: que los puntos de calificación se ponderan por horas crédito antes de promediarse.",
+          "steps": [
+            "En modo cálculo: descartar cualquier curso con horas crédito cero o menores, luego sumar las horas crédito restantes de todos los cursos",
+            "Multiplicar los puntos de calificación de cada curso restante por sus propias horas crédito para obtener los puntos de calidad de ese curso, luego sumar todos estos en puntos de calidad totales",
+            "Dividir los puntos de calidad totales entre las horas crédito totales para obtener el GPA, redondeado a tres decimales",
+            "En modo meta en su lugar: calcular los puntos de calidad ya acumulados de los créditos actuales (GPA actual × créditos actuales), luego calcular los puntos de calidad totales necesarios para alcanzar el GPA meta a través de todos los créditos, actuales más planeados",
+            "Restar los puntos de calidad ya acumulados de ese total requerido, luego dividir entre los créditos planeados para obtener el GPA necesario solo en esos créditos futuros, y verificar si esa cifra realmente cae dentro de la escala de 0 a 4.0"
+          ],
+          "caption": "El modo cálculo pondera y promedia calificaciones conocidas; el modo meta trabaja la ponderación hacia atrás para resolver un GPA futuro desconocido."
+        },
+        "anatomy": {
+          "intro": "Cada curso contribuye puntos de calidad en proporción a sus propias horas crédito: un curso más pesado atrae el GPA más hacia su propia calificación.",
+          "labelCourseA": "3 créditos con 4.0",
+          "labelCourseB": "4 créditos con 3.0",
+          "totalLabel": "24 puntos de calidad",
+          "caption": "Un curso de 3 créditos con calificación 4.0 contribuye 12 puntos de calidad, y un curso de 4 créditos con calificación 3.0 también contribuye 12; juntos, 24 puntos de calidad sobre 7 créditos equivalen a un GPA de 3.43."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "operación",
+            "meaning": "Si calcular un GPA a partir de una lista de cursos, o resolver el GPA necesario en créditos futuros.",
+            "unit": "—"
+          },
+          {
+            "symbol": "cursos",
+            "meaning": "La lista de cursos, cada uno con puntos de calificación (en una escala de 0 a 4.0) y horas crédito. Usado en modo cálculo.",
+            "unit": "—"
+          },
+          {
+            "symbol": "GPA actual, créditos actuales",
+            "meaning": "El GPA y las horas crédito totales ya completadas. Usado en modo meta.",
+            "unit": "—"
+          },
+          {
+            "symbol": "GPA meta, créditos planeados",
+            "meaning": "El GPA a alcanzar, y cuántos créditos faltan por cursar. Usado en modo meta.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los cursos con horas crédito cero o negativas se excluyen silenciosamente",
+            "description": "Una entrada de curso con horas crédito en cero o menos no solo contribuye cero: se filtra por completo de la lista antes de sumar, de modo que una fila perdida de 0 créditos no pueda anular accidentalmente el GPA general."
+          },
+          {
+            "title": "Una lista de cursos vacía o con todos los créditos en cero es un error distinto, no un GPA de 0.0",
+            "description": "Si todos los cursos se filtran (o no se ingresó ningún curso), la herramienta devuelve un error de sin cursos en lugar de reportar un GPA de 0.0: un GPA de 0.0 genuinamente obtenido y 'nada que calcular' se mantienen distintos."
+          },
+          {
+            "title": "Un GPA requerido fuera de 0-4.0 aún se calcula y devuelve, solo marcado como inalcanzable",
+            "description": "El modo meta no limita ni rechaza un resultado fuera de rango: si la aritmética indica que se necesita un GPA de 4.7 en los créditos restantes, ese número aún se devuelve, con isAchievable: false marcando que excede la escala de 4.0 que un curso típico puede producir."
+          },
+          {
+            "title": "Los créditos planeados en cero o negativos se rechazan antes de ejecutar cualquier aritmética de GPA",
+            "description": "El modo meta requiere que los créditos planeados sean un número positivo, ya que dividir entre créditos planeados cero o negativos haría que 'el GPA necesario en esos créditos' fuera indefinido o sin sentido; esto se verifica antes de que proceda el resto del cálculo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el GPA es un promedio ponderado por créditos en lugar de un promedio simple de calificaciones?",
+            "answer": "Un curso de 4 créditos y uno de 1 crédito no representan la misma cantidad de trabajo académico, por lo que tratar sus calificaciones como igualmente importantes subestimaría cuánto moldea realmente un curso más pesado la posición general de un estudiante. Ponderar cada calificación por sus propias horas crédito, el método estándar que prácticamente todas las instituciones usan, hace que una A de 4 créditos afecte el GPA cuatro veces más que una A de 1 crédito."
+          },
+          {
+            "question": "¿Cómo determina el modo meta qué GPA necesito en mis créditos restantes?",
+            "answer": "Primero convierte su GPA y créditos actuales en 'puntos de calidad ya acumulados' (GPA × créditos), luego calcula los puntos de calidad totales que se necesitarían, a través de todos sus créditos incluyendo los que faltan, para llegar exactamente a su GPA meta. Restar lo ya acumulado de ese total, y luego dividir solo entre los créditos planeados, aísla el GPA necesario específicamente en esos créditos restantes."
+          },
+          {
+            "question": "¿Qué significa si el GPA requerido resulta ser superior a 4.0?",
+            "answer": "Significa que el GPA meta no es matemáticamente alcanzable con la cantidad de créditos planeados, dado su nivel actual; ni siquiera calificaciones perfectas de 4.0 en cada crédito restante serían suficientes. La herramienta aún le muestra el número exacto que técnicamente se requeriría, marcado como inalcanzable, para que pueda ver qué tan fuera de alcance está en lugar de simplemente recibir un no."
+          },
+          {
+            "question": "¿Por qué se excluyen los cursos con horas crédito en cero en lugar de simplemente contribuir cero puntos de calidad?",
+            "answer": "Un curso de 0 créditos (como un seminario de aprobado/reprobado o una clase auditada) que contribuye cero puntos de calidad sería matemáticamente idéntico a excluirlo del numerador, pero incluirlo en el denominador sería incorrecto: dividir entre horas crédito que no deberían contar subestimaría el GPA real. Filtrar estas filas por completo antes de cualquier suma evita esa distorsión."
+          }
+        ]
+      },
+      "citation-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Citas: cómo se formatean citas en estilo APA, MLA y Chicago a partir de los mismos detalles de fuente para libros, artículos de revistas y sitios web, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Patrones de cita",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "El umbral propio de 'et al.' de cada estilo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Estilos de cita",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Libro (APA): Autor, A. (Año). Título. Editorial. | Revista (MLA): Autor, A. \"Título.\" Revista, vol. N, no. N, Año, pp. N-N. | Sitio web (Chicago): Autor, A. Año. \"Título.\" Nombre del sitio. Consultado el fecha. URL.",
+          "note": "Cada uno de los tres estilos (APA 7.ª ed., MLA 9.ª ed., Chicago autor-fecha 17.ª ed.) tiene sus propias reglas de puntuación, orden de elementos y, de manera crucial, cuántos autores nombrar antes de cambiar a una forma abreviada 'et al.'; los mismos datos de fuente se formatean de forma independiente tres veces, una por las convenciones propias de cada estilo."
+        },
+        "flowchart": {
+          "intro": "Los mismos datos de fuente estructurados (autores, título, año y detalles específicos del tipo de fuente) alimentan tres funciones de formateo independientes, una por estilo de cita.",
+          "steps": [
+            "Validar los campos requeridos para el tipo de fuente elegido: toda fuente necesita un título, un artículo de revista necesita además un nombre de revista, y un sitio web necesita además una URL",
+            "Formatear la lista de autores tres veces por separado, una por estilo, ya que cada estilo tiene sus propias reglas sobre cuántos autores nombrar por completo antes de cambiar a 'et al.' y su propia conjunción antes del último autor: el ampersand de APA frente al 'and' de MLA y Chicago",
+            "Ensamblar la entrada APA: autores y año entre paréntesis, seguidos del título, seguidos de detalles específicos del tipo de fuente: editorial para un libro, revista/volumen/número/páginas para un artículo, nombre del sitio y URL para un sitio web",
+            "Ensamblar la entrada MLA con sus propias convenciones de puntuación: el título del artículo entre comillas, el volumen y número precedidos por 'vol.' y 'no.', y una fecha de acceso agregada solo para un sitio web",
+            "Ensamblar la entrada Chicago, que coloca el año directamente después de los autores sin paréntesis, y por lo demás sigue una estructura similar a la de APA"
+          ],
+          "caption": "Un conjunto de detalles de fuente, formateado tres veces por separado a través de tres plantillas de estilo codificadas independientemente."
+        },
+        "anatomy": {
+          "intro": "Cada estilo de cita nombra autores por completo solo hasta su propio umbral, después del cual cambia a una forma abreviada 'et al.': un umbral que difiere según el estilo.",
+          "labelApa": "APA",
+          "labelMla": "MLA",
+          "labelChicago": "Chicago",
+          "caption": "Para una fuente con muchos autores, APA lista hasta 20 autores por nombre antes de cambiar a 'et al.', mientras que MLA cambia después de solo 2 autores nombrados y Chicago después de 3: la misma lista de autores puede verse muy diferente según el estilo seleccionado."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "tipoDeFuente",
+            "meaning": "Qué tipo de fuente es esta: libro, artículo de revista o sitio web. Determina qué campos se requieren y cómo cada estilo formatea la entrada.",
+            "unit": "—"
+          },
+          {
+            "symbol": "autores",
+            "meaning": "La lista de autores, cada uno con nombre y apellido.",
+            "unit": "—"
+          },
+          {
+            "symbol": "título, año",
+            "meaning": "El título de la fuente, y su año de publicación.",
+            "unit": "—"
+          },
+          {
+            "symbol": "editorial",
+            "meaning": "El nombre de la editorial. Usado para un libro.",
+            "unit": "—"
+          },
+          {
+            "symbol": "nombreRevista, volumen, número, páginas",
+            "meaning": "El nombre de la revista, volumen, número y rango de páginas. Usado para un artículo de revista.",
+            "unit": "—"
+          },
+          {
+            "symbol": "nombreSitio, url, fechaAcceso",
+            "meaning": "El nombre del sitio web, su URL, y la fecha en que fue consultado. Usado para un sitio web.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Una fuente sin autor listado comienza con el título en su lugar, en los tres estilos",
+            "description": "Cuando la lista de autores está vacía (o cada entrada tiene un apellido en blanco), el formateador de cada estilo recurre a comenzar la cita con el título en lugar de un nombre de autor, coincidiendo con cómo los tres estilos manejan fuentes anónimas o sin crédito."
+          },
+          {
+            "title": "El umbral de 'et al.' de cada estilo es diferente, y ninguno coincide",
+            "description": "APA escribe hasta 20 autores por nombre antes de cambiar a una forma abreviada; MLA cambia a 'et al.' con 3 o más autores; Chicago cambia con 4 o más: la misma lista de, digamos, 3 autores se escribe completa bajo APA y Chicago pero se abrevia bajo MLA."
+          },
+          {
+            "title": "Un artículo de revista sin número de volumen se formatea de manera diferente a uno que sí lo tiene",
+            "description": "Cuando hay un número de volumen presente, la cita incluye la secuencia completa de volumen/número/páginas; cuando está ausente, el formateador salta directamente del nombre de la revista al rango de páginas (si se proporciona alguno), en lugar de dejar un campo de volumen vacío colgando en la salida."
+          },
+          {
+            "title": "La fecha de acceso de una cita de sitio web solo aparece en las entradas MLA y Chicago, nunca en APA",
+            "description": "La guía de la 7.ª edición de APA eliminó específicamente el requisito de fecha de recuperación para la mayoría de las fuentes web estables, por lo que el campo de fecha de acceso, incluso cuando se completa, nunca se incluye en la entrada formateada en APA, solo en las de MLA y Chicago, que todavía lo requieren."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la misma fuente produce tres citas de apariencia diferente?",
+            "answer": "APA, MLA y Chicago no son formateos diferentes de las mismas reglas: son tres guías de estilo genuinamente distintas con sus propias convenciones de puntuación, orden de elementos, formateo de la lista de autores, y qué detalles (como una fecha de acceso) se esperan en absoluto. La herramienta pasa los mismos datos de fuente por tres funciones de formateo independientes, cada una implementando las reglas reales de un estilo en lugar de una sola plantilla compartida con pequeños ajustes."
+          },
+          {
+            "question": "¿Por qué APA, MLA y Chicago cambian a 'et al.' con diferentes cantidades de autores?",
+            "answer": "Cada guía de estilo establece su propio umbral como parte de sus reglas oficiales, independiente de las demás: la 7.ª edición de APA lista hasta 20 autores por nombre antes de abreviar, mientras que las convenciones más compactas de MLA y Chicago cambian mucho antes, con 3 y 4 autores respectivamente. La herramienta refleja el umbral realmente publicado de cada estilo en lugar de elegir un número para los tres."
+          },
+          {
+            "question": "¿Por qué la cita APA no incluye una fecha de acceso, incluso cuando ingreso una para una fuente de sitio web?",
+            "answer": "La guía de la 7.ª edición de APA eliminó específicamente el requisito de fecha de recuperación para la mayoría de las fuentes en línea que no se espera que cambien, razonando que una URL por sí sola es suficiente para que un lector localice la versión actual. El campo de fecha de acceso aún se recopila porque las propias convenciones de MLA y Chicago sí lo requieren, pero solo se usa en esas dos entradas, no en la de APA."
+          },
+          {
+            "question": "¿Qué sucede si genero una cita de artículo de revista sin ingresar un número de volumen?",
+            "answer": "La cita se genera de todos modos, solo con una sección de detalles más corta: el formateador omite por completo la secuencia de volumen/número cuando no se proporciona un volumen, en lugar de mostrar un valor vacío o de marcador de posición, y pasa directamente a incluir el nombre de la revista y el rango de páginas (si se proporciona)."
+          }
+        ]
+      },
+      "study-time-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Tiempo de Estudio/Pomodoro: cómo se simula una sesión de estudio bloque por bloque para contar intervalos de enfoque completados y descansos, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Una sesión se divide en trabajo, descansos y tiempo sobrante",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Tipos de descanso",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Mientras el tiempo restante ≥ bloque de trabajo: completar un pomodoro, restar el bloque de trabajo, luego tomar un descanso (corto o largo, según el ciclo configurado) solo si cabe completamente en lo que queda",
+          "note": "Un pomodoro solo cuenta una vez que todo su bloque de trabajo cabe en el tiempo restante; no se cuentan pomodoros parciales ni redondeados hacia abajo. El descanso que sigue también solo se toma (y solo se cuenta) si también cabe completamente; si el tiempo se agota a mitad de un descanso, el pomodoro que lo precedió aún cuenta, pero ese descanso no."
+        },
+        "flowchart": {
+          "intro": "La sesión se simula un pomodoro a la vez, verificando en cada paso si queda suficiente tiempo para el próximo bloque de trabajo y luego el próximo descanso.",
+          "steps": [
+            "Mientras el tiempo restante sea al menos un bloque de trabajo completo: restar el bloque de trabajo del tiempo restante y contar un pomodoro completado",
+            "Verificar si este pomodoro recién completado cae en el ciclo de descanso largo (su conteo es un múltiplo de la longitud de ciclo configurada) o requiere un descanso corto en su lugar",
+            "Si esa duración de descanso es mayor que cero y cabe completamente en el tiempo restante, restarla y contarla como tomada; si hay un descanso configurado pero no cabe completamente, detener la simulación aquí, conservando el pomodoro recién completado",
+            "Si no hay descanso configurado para este espacio (duración cero), pasar directamente a verificar el próximo bloque de trabajo, sin detener el ciclo",
+            "Una vez que el ciclo termina, el tiempo programado es la suma de todos los minutos de trabajo y descanso realmente usados, y el sobrante es lo que de los minutos totales originales no fue suficiente para caber otro bloque de trabajo o descanso completo"
+          ],
+          "caption": "Los bloques de trabajo y descansos se restan uno a la vez del total, cada uno contado solo una vez confirmado que cabe completamente en lo que queda."
+        },
+        "anatomy": {
+          "intro": "El tiempo total de una sesión se divide en tres partes: minutos realmente dedicados a trabajar, minutos dedicados a descansos, y cualquier tiempo sobrante demasiado corto para programar otro bloque.",
+          "labelWork": "Trabajo",
+          "labelBreaks": "Descansos",
+          "labelLeftover": "Sobrante",
+          "totalLabel": "Sesión de 100 minutos",
+          "caption": "Una sesión de 100 minutos con bloques de trabajo de 25 minutos y descansos cortos de 5 minutos cabe 3 pomodoros completados (75 minutos de trabajo) más 3 descansos cortos (15 minutos), dejando 10 minutos demasiado cortos para un cuarto bloque de trabajo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "minutosTotales",
+            "meaning": "El tiempo total disponible para la sesión.",
+            "unit": "min"
+          },
+          {
+            "symbol": "minutosDeTrabajo",
+            "meaning": "La duración de un bloque de enfoque/trabajo.",
+            "unit": "min"
+          },
+          {
+            "symbol": "minutosDeDescansoCorto",
+            "meaning": "La duración de un descanso corto, tomado después de la mayoría de los pomodoros.",
+            "unit": "min"
+          },
+          {
+            "symbol": "minutosDeDescansoLargo",
+            "meaning": "La duración de un descanso largo, tomado después de un ciclo completo de pomodoros.",
+            "unit": "min"
+          },
+          {
+            "symbol": "pomodorosAntesDeDescansoLargo",
+            "meaning": "Cuántos pomodoros forman un ciclo antes de que corresponda un descanso largo en lugar de uno corto.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un pomodoro solo cuenta una vez que cabe su bloque de trabajo completo, sin crédito parcial",
+            "description": "Si queda menos tiempo del equivalente a un bloque de trabajo completo, el ciclo simplemente se detiene; no hay redondeo hacia abajo para contar un pomodoro acortado o parcial, de modo que el tiempo sobrante siempre refleja tiempo genuinamente inutilizable, no una sesión subcontada."
+          },
+          {
+            "title": "Un descanso que no cabe completamente detiene la sesión, pero no borra el pomodoro anterior",
+            "description": "Cuando el tiempo restante alcanza para un bloque de trabajo más, pero no para el descanso que debería seguirlo, la simulación se detiene de inmediato: el pomodoro recién completado sigue contando en el total, pero ese descanso inconcluso no se cuenta y sus minutos quedan en el tiempo sobrante en su lugar."
+          },
+          {
+            "title": "Una duración de descanso de exactamente cero se trata como 'sin descanso configurado', no como un descanso que se completa instantáneamente",
+            "description": "Si la duración de un descanso es 0, el código omite explícitamente la rama que restaría y contaría un descanso, pasando directamente a verificar el próximo bloque de trabajo; esto evita que un horario deliberadamente sin descansos (solo bloques de trabajo, sin descansos) infle el conteo de descansos."
+          },
+          {
+            "title": "El ciclo de descanso largo se basa en el conteo de pomodoros completados, no en el tiempo transcurrido",
+            "description": "Si un pomodoro dado dispara un descanso largo se determina por si su posición en la secuencia (1.º, 2.º, 3.º, y así sucesivamente) es un múltiplo de la longitud de ciclo configurada, completamente independiente de cuánto tiempo total ha transcurrido: una sesión con bloques de trabajo inusualmente cortos aún toma su descanso largo después del mismo número de pomodoros, no después de la misma cantidad de tiempo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la calculadora no cuenta un pomodoro parcial si el tiempo restante es casi, pero no del todo, suficiente para un bloque de trabajo completo?",
+            "answer": "Un pomodoro está pensado para representar un bloque de enfoque completo e ininterrumpido; contar una versión acortada tergiversaría cuánto trabajo enfocado realmente ocurrió. En su lugar, la simulación se detiene tan pronto como no queda suficiente tiempo para un bloque de trabajo completo, y ese tiempo restante se reporta honestamente como sobrante en lugar de incorporarse a un conteo fraccionario de pomodoros."
+          },
+          {
+            "question": "Si se me acaba el tiempo a mitad de un descanso, ¿aún recibo crédito por el pomodoro anterior?",
+            "answer": "Sí: el bloque de trabajo y el descanso que le sigue se rastrean como eventos separados. El pomodoro se cuenta tan pronto como se resta su bloque de trabajo completo del tiempo restante, incluso antes de que la calculadora verifique si hay espacio para el descanso subsiguiente, por lo que un descanso que no cabe solo afecta el conteo de descansos, no el de pomodoros."
+          },
+          {
+            "question": "¿Qué sucede si establezco una duración de descanso en 0 minutos?",
+            "answer": "Una duración de descanso de exactamente 0 se trata como 'este espacio no tiene descanso programado' en lugar de un descanso instantáneo que aún se cuenta: la simulación salta directamente al próximo bloque de trabajo sin incrementar ningún contador de descansos, permitiéndole modelar un horario con bloques de trabajo pero sin descansos en absoluto si eso es lo que desea."
+          },
+          {
+            "question": "¿El descanso largo ocurre después de una cantidad fija de tiempo, o después de un número fijo de pomodoros?",
+            "answer": "Después de un número fijo de pomodoros, específicamente, cada vez que el conteo de pomodoros completados es un múltiplo de la longitud de ciclo que usted estableció. Esto significa que el momento del descanso largo se desplaza automáticamente si cambia la duración de su bloque de trabajo, ya que se cuenta en sesiones de enfoque completadas, no en minutos transcurridos."
+          }
+        ]
+      },
+      "class-schedule-builder": {
+        "version": "v1",
+        "description": "Referencia técnica del Constructor de Horarios de Clases: cómo se detectan las superposiciones de día/hora entre clases semanales y se totalizan las horas semanales programadas, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Solo los minutos genuinamente superpuestos cuentan como conflicto",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Comparaciones",
+          "modesValue": "Por pares",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Dos clases entran en conflicto en un día compartido solo si max(inicioA, inicioB) < min(finA, finB): sus intervalos de tiempo genuinamente se superponen, no simplemente se tocan",
+          "note": "Un conflicto se verifica de forma independiente para cada par de clases y cada día en que ambas se reúnen. Dos clases que se reúnen consecutivamente, donde la hora de fin de una coincide exactamente con la hora de inicio de la otra, no cuentan como conflicto: la verificación de superposición usa un menor-que estricto, no menor-o-igual-que, específicamente para permitir ese caso."
+        },
+        "flowchart": {
+          "intro": "Cada clase se compara con todas las demás, una vez por cada día que podrían compartir, verificando una superposición de tiempo genuina en lugar de solo un día compartido.",
+          "steps": [
+            "Validar primero cada clase: cada una necesita una hora de fin posterior a su hora de inicio, y al menos un día de reunión; una clase inválida detiene todo el cálculo antes de que comience cualquier verificación de conflictos",
+            "Comparar cada par de clases exactamente una vez (no dos veces, y nunca una clase contra sí misma), emparejando cada clase solo con las que aparecen después en la lista",
+            "Para cada par, encontrar los días en que ambas realmente se reúnen: la intersección de sus dos listas de días, ya que un conflicto solo puede existir en un día en que ambas clases estén en sesión",
+            "Para cada día compartido, calcular la ventana de superposición como la más tardía de las dos horas de inicio hasta la más temprana de las dos horas de fin",
+            "Registrar un conflicto solo si esa ventana de superposición tiene amplitud genuina, es decir, su inicio calculado es estrictamente anterior a su fin calculado, lo cual excluye correctamente a dos clases que simplemente se reúnen consecutivamente sin superposición"
+          ],
+          "caption": "Cada par de clases se verifica día por día en busca de una ventana de tiempo genuinamente superpuesta, no solo un día de reunión compartido."
+        },
+        "anatomy": {
+          "intro": "Cuando dos clases comparten un día de reunión, solo el tiempo donde sus ventanas realmente se cruzan cuenta como conflicto: el resto del tiempo propio de cada clase no se ve afectado.",
+          "labelAOnly": "Solo clase A",
+          "labelOverlap": "Superposición (conflicto)",
+          "labelBOnly": "Solo clase B",
+          "totalLabel": "Franja de 9:00 a. m. – 11:00 a. m.",
+          "caption": "La clase A se reúne de 9:00 a 10:30 y la clase B de 10:00 a 11:00 el mismo día: se superponen durante 30 minutos (10:00–10:30), lo que la herramienta reporta como conflicto, mientras que los 60 y 30 minutos circundantes pertenecen a cada clase por separado."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "clases",
+            "meaning": "La lista de clases, cada una con un nombre, sus días de reunión, y una hora de inicio y fin en minutos.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Las clases consecutivas explícitamente no son un conflicto",
+            "description": "La verificación de superposición requiere que el inicio de superposición calculado sea estrictamente anterior al fin de superposición calculado: cuando una clase termina exactamente en el mismo minuto en que comienza otra, la ventana de superposición tiene anchura cero y correctamente no se reporta como conflicto, coincidiendo con cómo funciona la programación consecutiva real."
+          },
+          {
+            "title": "Un conflicto se verifica por día compartido, por lo que las clases que se superponen en el tiempo pero nunca comparten un día nunca entran en conflicto",
+            "description": "Dos clases con ventanas de tiempo idénticas o superpuestas pero sin día de reunión en común (por ejemplo, una se reúne solo lunes y miércoles, la otra solo martes y jueves) producen cero conflictos, ya que el paso de intersección de días no encuentra días compartidos para siquiera verificar una superposición de tiempo."
+          },
+          {
+            "title": "Cada clase se valida antes de que se ejecute cualquier detección de conflictos, por lo que una entrada defectuosa bloquea todo el horario",
+            "description": "Una clase cuya hora de fin no es posterior a su hora de inicio, o que no tiene días de reunión en absoluto, hace que la herramienta devuelva un error de inmediato, antes de comparar cualquier par; un horario no se analiza parcialmente con una entrada defectuosa ignorada silenciosamente."
+          },
+          {
+            "title": "Los minutos semanales totales cuentan cada ocurrencia de reunión, incluido el tiempo dentro de un conflicto",
+            "description": "totalWeeklyMinutes suma la duración de cada clase multiplicada por cuántos días se reúne, de forma independiente para cada clase: el tiempo superpuesto entre dos clases se cuenta una vez por cada clase a la que pertenece, por lo que los minutos de un conflicto reportado efectivamente se cuentan dos veces hacia el total semanal, una vez por cada clase involucrada."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué dos clases que se reúnen consecutivamente no cuentan como conflicto de horario?",
+            "answer": "Reunirse consecutivamente (una clase terminando a las 10:00 y la siguiente comenzando exactamente a las 10:00) es una programación completamente normal, no una superposición; no hay ningún momento en el tiempo en que se supone que ambas clases estén ocurriendo a la vez. La verificación de conflicto usa una comparación estricta específicamente para que un momento límite compartido no se marque como una colisión de tiempo real."
+          },
+          {
+            "question": "Si dos clases tienen el mismo horario pero se reúnen en días diferentes, ¿la herramienta las marcará como en conflicto?",
+            "answer": "No: un conflicto solo puede reportarse en un día en que ambas clases realmente se reúnan, por lo que el paso de intersección de días se ejecuta antes de cualquier verificación de superposición de tiempo. Dos clases que nunca comparten un día de reunión son estructuralmente incapaces de producir un conflicto aquí, sin importar cuán similares sean sus horarios."
+          },
+          {
+            "question": "¿Por qué una entrada de clase inválida detiene la verificación de todo el horario, en lugar de simplemente omitir esa clase?",
+            "answer": "Una clase inválida, una sin días de reunión o con una hora de fin que no es posterior a su hora de inicio, representa una entrada genuinamente ambigua; intentar adivinar qué se quiso decir y verificar el resto del horario alrededor de ella podría ocultar un error de entrada de datos. Mostrar el error de inmediato, antes de ejecutar cualquier detección de conflictos, asegura que cada clase en el horario final realmente haya sido validada."
+          },
+          {
+            "question": "¿La cifra de minutos semanales totales resta el tiempo superpuesto entre clases en conflicto?",
+            "answer": "No: se calcula de forma independiente para cada clase (la duración propia de esa clase multiplicada por cuántos días se reúne) y luego se suma, sin verificar ni eliminar ninguna superposición contada dos veces entre diferentes clases. Esto significa que el total representa la suma del tiempo programado propio de cada clase, no el número real de horas distintas en que estaría ocupado si el tiempo en conflicto de dos clases solo se experimenta una vez."
+          }
+        ]
       }
     }
   }
