@@ -23,9 +23,25 @@ const RELATED_TOOLS = ["kinematics-calculator", "energy-work-power-calculator", 
 
 const DEFAULTS = { force: "10", mass: "2", acceleration: "5", mass1: "5.972e24", mass2: "1", distance: "6.371e6" };
 
-const EMPTY_RESULT: ForceCalculatorOutput = { error: null, force: 0, mass: 0, acceleration: 0, mass1: 0, mass2: 0, distance: 0 };
-
 type Inputs = typeof DEFAULTS;
+
+// Real, mode-specific everyday and astronomical scenarios, each internally
+// consistent with F = ma (secondLaw) or realistic mass/distance pairs
+// (gravitation).
+const SCENARIOS_BY_MODE: Record<ForceMode, Record<string, Partial<Inputs>>> = {
+  secondLaw: {
+    shoppingCart: { mass: "15", acceleration: "1", force: "15" },
+    carAccelerating: { mass: "1200", acceleration: "3", force: "3600" },
+    rocketLaunch: { mass: "500000", acceleration: "20", force: "1e7" },
+  },
+  gravitation: {
+    earthMoon: { mass1: "5.972e24", mass2: "7.342e22", distance: "3.844e8" },
+    earthSun: { mass1: "5.972e24", mass2: "1.989e30", distance: "1.496e11" },
+    twoPeople: { mass1: "70", mass2: "70", distance: "1" },
+  },
+};
+
+const EMPTY_RESULT: ForceCalculatorOutput = { error: null, force: 0, mass: 0, acceleration: 0, mass1: 0, mass2: 0, distance: 0 };
 
 function computeResult(mode: ForceMode, secondLawSolveFor: SecondLawSolveFor, gravitationSolveFor: GravitationSolveFor, i: Inputs): ForceCalculatorOutput {
   const output = tool.execute(
@@ -128,6 +144,21 @@ export default function ForceCalculator({ education }: { education: ReactNode })
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS_BY_MODE[mode][key];
+    if (!preset) return;
+    const next = { ...currentInputs(), ...preset };
+    if (preset.force !== undefined) setForce(preset.force);
+    if (preset.mass !== undefined) setMass(preset.mass);
+    if (preset.acceleration !== undefined) setAcceleration(preset.acceleration);
+    if (preset.mass1 !== undefined) setMass1(preset.mass1);
+    if (preset.mass2 !== undefined) setMass2(preset.mass2);
+    if (preset.distance !== undefined) setDistance(preset.distance);
+    setResult(computeResult(mode, secondLawSolveFor, gravitationSolveFor, next));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(...Object.values(next)));
+  }
+
   function handleClear() {
     setForce(DEFAULTS.force);
     setMass(DEFAULTS.mass);
@@ -171,6 +202,8 @@ export default function ForceCalculator({ education }: { education: ReactNode })
                 onMass2Change={setMass2}
                 distance={distance}
                 onDistanceChange={setDistance}
+                scenarioKeys={Object.keys(SCENARIOS_BY_MODE[mode])}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />

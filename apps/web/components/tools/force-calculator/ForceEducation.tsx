@@ -9,6 +9,7 @@ import ForceFreeBodyDiagram from "./ForceFreeBodyDiagram";
 import GravitationDiagram from "./GravitationDiagram";
 import ForceInverseSquareDiagram from "./ForceInverseSquareDiagram";
 import ForceVariablesDiagram from "./ForceVariablesDiagram";
+import ForceMagnitudeGauge from "./ForceMagnitudeGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function ForceEducation() {
 
   return (
     <EncyclopediaPaper>
+      <ForceMagnitudeGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <ForceBlockDiagram

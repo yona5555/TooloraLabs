@@ -27,6 +27,8 @@ type ForceInputPanelProps = {
   onMass2Change: (value: string) => void;
   distance: string;
   onDistanceChange: (value: string) => void;
+  scenarioKeys: string[];
+  onScenarioPreset: (key: string) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
@@ -49,10 +51,13 @@ export default function ForceInputPanel({
   onMass2Change,
   distance,
   onDistanceChange,
+  scenarioKeys,
+  onScenarioPreset,
   onCalculate,
   onClear,
 }: ForceInputPanelProps) {
   const t = useTranslations("tools.force-calculator.form");
+  const tScenarios = useTranslations("tools.force-calculator.form.scenarios");
 
   const solved = mode === "secondLaw" ? secondLawSolveFor : gravitationSolveFor;
   const variableOrder = mode === "secondLaw" ? ["force", "mass", "acceleration"] : ["force", "mass1", "mass2", "distance"];
@@ -60,6 +65,22 @@ export default function ForceInputPanel({
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {scenarioKeys.map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onScenarioPreset(key)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+            >
+              {tScenarios(key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
         {mode === "secondLaw" ? (
